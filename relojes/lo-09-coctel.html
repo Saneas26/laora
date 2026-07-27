@@ -22,7 +22,7 @@
     <a class="brand" href="/">la<span class="o"></span>ra<sup>®</sup></a>
     <div class="nav-links">
       <a href="/#coleccion">La colección</a>
-      <a href="/#filosofia">Filosofía</a>
+      <a href="/#porque">Por qué laOra</a>
       <a href="/manifiesto.html">El alma de un automático</a>
       <a href="/#madrid">El proceso de Madrid</a>
     </div>
@@ -35,7 +35,6 @@
   <div class="container hero-grid">
     <div class="stage reveal">
       <span class="stage-badge">laOra · LO-09</span>
-      <div class="hueco"><b>«Cóctel»</b>Foto en camino</div>
       <img src="/assets/img/relojes/lo-09.jpg" alt="Reloj laOra Cóctel, reloj de vestir" onerror="this.remove()">
     </div>
     <div>
@@ -100,7 +99,9 @@
       <h2>Tú eliges hasta dónde quieres llegar.</h2>
       <p>Cada reloj de laOra vive en varios acabados. No cambia el diseño: cambian los materiales y la mecánica. El de entrada nunca es «el barato»: pasa exactamente el mismo control de calidad que el más alto.</p>
     </div>
-    <div class="acabados-grid">
+    <div class="selector-chips reveal" id="selectorChips"></div>
+    <div class="panel-acabado reveal" id="panelAcabado"></div>
+    <div class="acabados-grid" style="margin-top:34px">
       <div class="acabado reveal">
         <div class="tier"><b>T1</b><h3>«Cuarzo»</h3></div>
         <p>Cuarzo suizo/japonés, cristal mineral endurecido abombado de máxima calidad, caja PVD oro rosa, piel marrón.</p>
@@ -191,6 +192,10 @@
   <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
 </footer>
 
+<script>
+window.LAORA_ACABADOS = [{"tier": "T1", "nombre": "Cuarzo", "texto": "Cuarzo suizo/japonés, cristal mineral endurecido abombado de máxima calidad, caja PVD oro rosa, piel marrón.", "precio": "Desde ~180 €"}, {"tier": "T2", "nombre": "Automático", "texto": "Seiko NH35, zafiro abombado con AR, PVD oro rosa, piel premium o brazalete.", "precio": "~270–370 €"}, {"tier": "T3", "nombre": "Signature", "texto": "NH35 o Miyota 9015, zafiro de domo alto, acabado superior, brazalete + piel.", "precio": "~380–500 €"}];
+window.LAORA_ACABADO_INICIAL = 1;
+</script>
 <script src="/assets/js/laora.js"></script>
 </body>
 </html>

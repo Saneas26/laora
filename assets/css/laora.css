@@ -204,9 +204,9 @@ section{scroll-margin-top:84px}
 .story p{font-size:18px;color:#c6ccd6;margin-top:18px;line-height:1.7}
 .story .lead{font-size:20px;color:#e9ecf1}
 .story b{color:#fff;font-weight:700}
-.claro .story p{color:var(--tinta-suave)}
-.claro .story .lead{color:var(--tinta)}
-.claro .story b{color:var(--tinta)}
+.claro .story p,.story.claro p{color:var(--tinta-suave)}
+.claro .story .lead,.story.claro .lead{color:var(--tinta)}
+.claro .story b,.story.claro b{color:var(--tinta)}
 
 /* ---------- corazones del manifiesto ---------- */
 .corazones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
@@ -295,8 +295,61 @@ footer{background:var(--gris);padding:56px 24px 36px;text-align:center;border-to
 .fg-card small{display:block;font-size:11.5px;color:var(--tinta-suave);margin-top:2px}
 footer .copy{font-size:12px;color:#9aa1ab;margin-top:30px}
 
+/* ---------- héroe v3 (brief del equipo): slate sereno, no lujo agresivo ---------- */
+.hero-v3{background:radial-gradient(120% 120% at 78% 18%,#1b2636 0%,#0f1620 62%);padding:64px 0 72px}
+.hero-v3 .eyebrow{color:var(--ambar)}
+.hero-v3 .eyebrow::before{background:var(--ambar)}
+.hero-v3 h1{color:#eef2f7}
+.hero-v3 h1 .hon{color:var(--ambar)}
+.hero-v3 .hero-sub{color:#aebccd}
+.hero-v3 .btn-borde{color:#eef2f7;border-color:rgba(255,255,255,.28)}
+.hero-v3 .btn-borde:hover{border-color:#eef2f7}
+.checks{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
+.checks li{display:flex;gap:9px;font-size:14px;color:#cdd8e4;line-height:1.35;font-weight:600}
+.checks svg{flex:none;margin-top:2px}
+@media(max-width:560px){.checks{grid-template-columns:1fr}}
+
+/* barrido de luz sobre el zafiro + flote suave (referencia hero-mockup) */
+.stage .sheen{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.15) 50%,transparent 58%);
+  background-size:260% 100%;animation:barrido-luz 5.5s linear infinite}
+@keyframes barrido-luz{0%{background-position:130% 0}100%{background-position:-130% 0}}
+.stage.flota{animation:flote 6s ease-in-out infinite}
+@keyframes flote{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* microinteracción: el lume se enciende al pasar por la tarjeta */
+.reloj-card .stage img{transition:transform .5s ease,filter .5s ease}
+.reloj-card:hover .stage img{transform:scale(1.04);filter:brightness(1.15) saturate(1.08)}
+
+/* ---------- selector de acabados (brief §6) ---------- */
+.selector-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:36px}
+.chip{font:inherit;font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;
+  border:1.5px solid var(--linea);background:#fff;color:var(--tinta);cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s,transform .2s}
+.chip:hover{transform:translateY(-1px);border-color:var(--tinta)}
+.chip.activo{background:var(--carbon);color:#fff;border-color:var(--carbon)}
+.chip.eclipse{background:#0b0b0b;color:#f5d34d;border-color:#0b0b0b}
+.chip.eclipse.activo{box-shadow:0 0 0 2px #f5d34d inset}
+.panel-acabado{max-width:860px;margin:24px auto 0;border:1px solid var(--linea);border-radius:18px;
+  background:#fff;padding:26px 28px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.panel-acabado .pa-tier{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dorado)}
+.panel-acabado h3{font-size:22px;font-weight:800}
+.panel-acabado p{font-size:15px;color:var(--tinta-suave);line-height:1.65}
+.panel-acabado .pa-precio{font-size:21px;font-weight:800;margin-top:4px}
+.panel-acabado .pa-hueco{font-size:13px;color:var(--tinta-mute);border-top:1px dashed var(--linea);padding-top:12px;margin-top:10px}
+.panel-acabado.panel-eclipse{background:#0b0b0b;border-color:#222;color:#d7d7d7}
+.panel-acabado.panel-eclipse .pa-tier{color:#f5d34d}
+.panel-acabado.panel-eclipse h3{color:#fff}
+.panel-acabado.panel-eclipse p{color:#b9b9b9}
+.panel-acabado.panel-eclipse .pa-precio{color:#f5d34d}
+.panel-acabado.panel-eclipse .pa-hueco{border-top-color:#2c2c2c;color:#8b8b8b}
+
 /* ---------- animación de aparición ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 :focus-visible{outline:3px solid var(--dorado);outline-offset:3px}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .stage .sheen{animation:none;opacity:0}
+  .stage.flota{animation:none}
+}
