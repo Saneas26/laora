@@ -77,6 +77,22 @@ var LAORA_WHATSAPP = '34689806987';
   pinta(window.LAORA_ACABADO_INICIAL || 0);
 })();
 
+/* «La versión larga» plegada bajo el cabreo: Leer más despliega y
+   el botón Ocultar del final vuelve a plegar. */
+(function () {
+  var btn = document.getElementById('largaBtn');
+  var resto = document.getElementById('largaResto');
+  var ocultar = document.getElementById('ocultarBtn');
+  if (!btn || !resto) return;
+  function pliega(estado) {
+    resto.hidden = estado;
+    btn.textContent = estado ? 'Leer más +' : 'Leer menos −';
+    if (estado) btn.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  btn.addEventListener('click', function () { pliega(!resto.hidden); });
+  if (ocultar) ocultar.addEventListener('click', function () { pliega(true); });
+})();
+
 /* Formulario de interesados */
 (function () {
   var form = document.getElementById('formInteresados');

@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Quicksand:wght@700&family=Archivo:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/laora.css?v=6">
+<link rel="stylesheet" href="/assets/css/laora.css?v=10">
 </head>
 <body>
 
@@ -23,6 +23,7 @@
     <div class="nav-links">
       <a href="#coleccion">La colección</a>
       <a href="#porque">Por qué laOra</a>
+      <a href="/materiales.html">Materiales</a>
       <a href="/manifiesto.html">El alma de un automático</a>
       <a href="#madrid">El proceso de Madrid</a>
       <a href="#interesados">Avísame</a>
@@ -41,25 +42,17 @@
       <span class="eyebrow">Montado y controlado en Madrid</span>
       <h1>El reloj que quieres.<br><span class="hon">Al precio honesto.</span></h1>
       <p class="hero-sub">Ahora puedes tener lujo, sin pagarlo como lujo, <b class="hon">y además evitar timos</b>.</p>
-      <ul class="checks">
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Cajas y brazaletes de acero 316L, 904L o titanio, o piel</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Cristales de Hardlex, zafiro o zafiro AR ×2 — sin mezclas y verificado</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Nada de triquiñuelas: eslabones macizos en todo el brazalete</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Movimientos originales, nunca falsos</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Proceso de calidad en Madrid: reajuste del mecanismo y estanqueidad</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Taller propio · 2 años de garantía</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Atención personal y directa, desde Madrid</li>
-        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fd0a0" stroke-width="3"><path d="M5 12l4 4L19 6"/></svg>Sin intermediarios ni sorpresas en aduana</li>
-      </ul>
-      <div class="hero-cta">
+      
+      <div class="hero-cta" style="margin-top:34px">
         <a href="#coleccion" class="btn btn-ambar">Ver la colección
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a href="#porque" class="btn btn-borde">Por qué laOra</a>
+        <a href="/materiales.html" class="btn btn-borde">Materiales que usamos</a>
       </div>
     </div>
     <div class="stage escena reveal">
-      <span class="stage-badge">laOra · Madrid</span>
+      <span class="stage-badge"><span class="laora">laOra</span> · Madrid</span>
       <div class="plano p1"><img src="/assets/img/relojes/portada.jpg" alt="Reloj laOra con el logo en la esfera"><div class="aguja" aria-hidden="true"></div></div>
       <div class="plano p2" aria-hidden="true"><img src="/assets/img/relojes/portada.jpg" alt=""><div class="aguja"></div></div>
       <div class="plano p3" aria-hidden="true"><img src="/assets/img/relojes/portada.jpg" alt=""><div class="aguja"></div></div>
@@ -72,10 +65,21 @@
 <!-- POR QUÉ EXISTE laOra — EL PROBLEMA (editorial en papel de periódico) -->
 <section class="periodico" id="porque">
   <div class="container cabecera reveal">
-    <span class="eyebrow-p">laOra · Por qué existe</span>
-    <h2>Quería un buen reloj. No había una forma <span class="hl">honesta</span> de comprarlo.</h2>
+    <span class="eyebrow-p"><span class="laora">laOra</span> · Por qué existe</span>
+    <h2>Quería un buen reloj.<br>No había una forma <span class="hl">honesta</span> de comprarlo.</h2>
     <p class="lead-p">laOra no nació en una reunión de marketing.
       <span class="cabreo">Nació de un <span class="hl">cabreo</span>.</span></p>
+    <p style="margin-top:22px"><button type="button" class="btn-mas" id="largaBtn">Leer más +</button></p>
+    <div id="largaResto" class="larga" hidden>
+      <span class="eyebrow-p">La versión larga</span>
+      <p>Quería un reloj bonito, de los de verdad, y me puse a buscar cómo comprarlo. Lo que encontré fue un laberinto en el que, mires por donde mires, pierdes.</p>
+      <p>Vas a la boutique oficial del modelo que te gusta y no hay. Hay lista de espera de años, y para «ganártelo» tienes que comprar antes otras piezas que no querías. El precio de tienda es un cuento.</p>
+      <p>Vas a las webs de reventa y el reloj cuesta más que nuevo, porque alguien especula con él. Vas a las subastas y, entre pujas y gastos, acabas pagando más que en tienda. Vas a la segunda mano entre particulares y entras en el terreno del reloj robado, el falso bien fotografiado y el «te pago y desapareces»: sin factura, sin recurso, sin nadie que responda.</p>
+      <p>Bajas de precio y llegas a los superclones: pagas por algo que imita a otro, sin garantía y sin nadie a quien reclamar el día que se para. Y en casi ninguna de esas puertas hay lo más básico: garantía de verdad y alguien que te coja el teléfono si algo falla.</p>
+      <p>Entonces lo entendí. En todos esos caminos estás pagando lo mismo: el logo, la escasez, el intermediario, el peaje. Nunca solo el reloj. Y a cambio, casi siempre, te llevas miedo.</p>
+      <p>Así que decidí hacer lo contrario. Un reloj con nombre propio, sin apellido que pagar. Con materiales de verdad que te enseñamos uno a uno. Montado y controlado en Madrid, con garantía de 2 años y servicio técnico de verdad, aquí, en España. Al precio de lo que cuesta hacerlo bien, ni un euro más.</p>
+      <p><button type="button" class="btn-mas" id="ocultarBtn">Ocultar −</button></p>
+    </div>
   </div>
 
   <div class="container">
@@ -88,35 +92,35 @@
         <span class="num-p">01</span>
         <h4>La boutique oficial</h4>
         <p>No hay unidades. Lista de espera de años, y para «ganártelo» tienes que comprar antes piezas que no querías.</p>
-        <p class="sello-p">Pasa en <b>la milla de oro</b></p>
+        <p class="sello-p">Pasa en <b>la milla de oro</b>, elegida solo para unos pocos</p>
         <span class="veredicto"><span class="x">✕</span> No hay</span>
       </article>
       <article class="puerta-p">
         <span class="num-p">02</span>
         <h4>La reventa</h4>
-        <p>El mismo reloj, más caro que nuevo. Alguien especula con él y ese alguien no eres tú.</p>
-        <p class="sello-p">Te sonará <b>CHRONO2·</b></p>
+        <p>El mismo reloj, que termina saliéndote más caro que nuevo. Alguien especula con él y ese alguien no eres tú.</p>
+        <p class="sello-p">Te sonará <b class="marino">CHRONO··24</b></p>
         <span class="veredicto"><span class="x">✕</span> Sobreprecio</span>
       </article>
       <article class="puerta-p">
         <span class="num-p">03</span>
         <h4>La subasta</h4>
-        <p>Entre pujas, comisiones y gastos acabas pagando más que en tienda. Por un reloj usado.</p>
-        <p class="sello-p">Te sonará <b>CATAWI··</b></p>
+        <p>Entre pujas, comisiones y gastos de envío + aduanas, acabas pagando más que en tienda. Por un reloj usado.</p>
+        <p class="sello-p">Te sonará <b>CATA·WIKI</b></p>
         <span class="veredicto"><span class="x">✕</span> Más caro</span>
       </article>
       <article class="puerta-p">
         <span class="num-p">04</span>
         <h4>La segunda mano</h4>
         <p>El robado, el falso bien fotografiado, el «te pago y desapareces». Sin factura y sin recurso.</p>
-        <p class="sello-p">Te sonará <b>WALLAP··</b> · <b>EB··</b></p>
+        <p class="sello-p">Te sonará <b>WALLAP··</b> · <b>E·BAY</b></p>
         <span class="veredicto"><span class="x">✕</span> Sin respaldo</span>
       </article>
       <article class="puerta-p">
         <span class="num-p">05</span>
-        <h4>El superclon</h4>
+        <h4>El superclón</h4>
         <p>Pagas por algo que imita a otro, o un «reacondicionado» con piezas que no son lo que dicen. El día que se para, no hay a quién llamar ni papel que enseñar.</p>
-        <p class="sello-p">Te sonará <b>ALIEXP····</b> · <b>DHG···</b> · <b>ET··</b></p>
+        <p class="sello-p">Te sonará <b>ALIEXPR··S</b> · <b>DHGA·E</b> · <b>ETS·Y</b> — el bazar online, de China a medio mundo</p>
         <span class="veredicto"><span class="x">✕</span> Sin garantía</span>
       </article>
     </div>
@@ -139,7 +143,7 @@
   <div class="respuesta">
     <div class="container reveal">
       <span class="eyebrow-p">Así que hicimos lo contrario</span>
-      <h3>Un reloj con nombre propio. Sin <em>apellido</em> que pagar.</h3>
+      <h3>Un reloj con nombre propio.<br>Sin <em>apellido</em> que pagar.</h3>
       <div class="specs">
         <div class="spec">
           <span class="k">Precio</span>
@@ -168,20 +172,11 @@
         <span class="chip-p">Sin «a ver si es auténtico»</span>
       </div>
       <p class="cierre-p">Solo un buen reloj, y la tranquilidad de saber exactamente qué llevas en la muñeca y quién responde por él.
-        <b>Eso es laOra.</b></p>
+        <b>Eso es <span class="laora">laOra</span>.</b></p>
     </div>
   </div>
 
-  <div class="container larga reveal">
-    <span class="eyebrow-p">La versión larga</span>
-    <p>Quería un reloj bonito, de los de verdad, y me puse a buscar cómo comprarlo. Lo que encontré fue un laberinto en el que, mires por donde mires, pierdes.</p>
-    <p>Vas a la boutique oficial del modelo que te gusta y no hay. Hay lista de espera de años, y para «ganártelo» tienes que comprar antes otras piezas que no querías. El precio de tienda es un cuento.</p>
-    <p>Vas a las webs de reventa y el reloj cuesta más que nuevo, porque alguien especula con él. Vas a las subastas y, entre pujas y gastos, acabas pagando más que en tienda. Vas a la segunda mano entre particulares y entras en el terreno del reloj robado, el falso bien fotografiado y el «te pago y desapareces»: sin factura, sin recurso, sin nadie que responda.</p>
-    <p>Bajas de precio y llegas a los superclones: pagas por algo que imita a otro, sin garantía y sin nadie a quien reclamar el día que se para. Y en casi ninguna de esas puertas hay lo más básico: garantía de verdad y alguien que te coja el teléfono si algo falla.</p>
-    <p>Entonces lo entendí. En todos esos caminos estás pagando lo mismo: el logo, la escasez, el intermediario, el peaje. Nunca solo el reloj. Y a cambio, casi siempre, te llevas miedo.</p>
-    <p>Así que decidí hacer lo contrario. Un reloj con nombre propio, sin apellido que pagar. Con materiales de verdad que te enseñamos uno a uno. Montado y controlado en Madrid, con garantía de 2 años y servicio técnico de verdad, aquí, en España. Al precio de lo que cuesta hacerlo bien, ni un euro más.</p>
-  </div>
-</section>
+  </section>
 
 <!-- LOS TRES PILARES -->
 <section class="block gris" id="filosofia">
@@ -396,6 +391,7 @@
   <div class="brand"><span style="color:var(--tinta)">la</span><span class="o"></span><span style="color:var(--tinta)">ra</span><sup>®</sup></div>
   <div class="footer-links">
     <a href="https://api.whatsapp.com/send?phone=34689806987">WhatsApp</a>
+    <a href="/materiales.html">Materiales</a>
     <a href="/manifiesto.html">El alma de un automático</a>
     <a href="/privacidad.html">Privacidad</a>
   </div>
@@ -425,6 +421,6 @@
   <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
 </footer>
 
-<script src="/assets/js/laora.js?v=6"></script>
+<script src="/assets/js/laora.js?v=10"></script>
 </body>
 </html>
