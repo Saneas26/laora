@@ -302,6 +302,7 @@ footer .copy{font-size:12px;color:#9aa1ab;margin-top:30px}
 .hero-v3 h1{color:#eef2f7}
 .hero-v3 h1 .hon{color:var(--ambar)}
 .hero-v3 .hero-sub{color:#aebccd}
+.hero-v3 .hero-sub .hon{color:var(--ambar);font-weight:800}
 .hero-v3 .btn-borde{color:#eef2f7;border-color:rgba(255,255,255,.28)}
 .hero-v3 .btn-borde:hover{border-color:#eef2f7}
 .checks{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px}
