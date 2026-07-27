@@ -77,6 +77,18 @@ var LAORA_WHATSAPP = '34689806987';
   pinta(window.LAORA_ACABADO_INICIAL || 0);
 })();
 
+/* «La versión larga» plegada tras Leer más (sección Por qué existe) */
+(function () {
+  var btn = document.getElementById('largaBtn');
+  var resto = document.getElementById('largaResto');
+  if (!btn || !resto) return;
+  btn.addEventListener('click', function () {
+    var abierto = !resto.hidden;
+    resto.hidden = abierto;
+    btn.textContent = abierto ? 'Leer más +' : 'Leer menos −';
+  });
+})();
+
 /* Formulario de interesados */
 (function () {
   var form = document.getElementById('formInteresados');
