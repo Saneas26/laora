@@ -70,7 +70,7 @@ var LAORA_WHATSAPP = '34689806987';
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'chip' + (a.eclipse ? ' eclipse' : '');
-    b.textContent = a.eclipse ? 'Edición Eclipse' : a.tier + ' · ' + a.nombre;
+    b.textContent = a.tier + ' · ' + a.nombre;
     b.addEventListener('click', function () { pinta(i); });
     chips.appendChild(b);
   });
