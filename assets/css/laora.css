@@ -219,20 +219,30 @@ section{scroll-margin-top:84px}
 .corazon p{font-size:15px;color:#aab0bd;margin-top:10px;line-height:1.65}
 @media(max-width:760px){.corazones{grid-template-columns:1fr}}
 
-/* ---------- acabados T1–T4 ---------- */
-.acabados-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:50px}
-.acabado{
-  border:1px solid var(--linea);border-radius:18px;padding:28px;background:#fff;
-  display:flex;flex-direction:column;gap:10px;
+/* ---------- las 4 terminaciones: listado completo, sin recomendación, sin precio ---------- */
+.lista-acabados{margin-top:50px;display:flex;flex-direction:column}
+.acabado-item{border-top:1px solid var(--linea);padding:38px 0;display:grid;grid-template-columns:220px 1fr;gap:36px}
+.acabado-item:last-child{border-bottom:1px solid var(--linea)}
+.ai-cab{display:flex;flex-direction:column;gap:7px}
+.ai-num{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--tinta-mute)}
+.ai-nombre{font-size:27px;font-weight:800;color:var(--tinta);line-height:1.1}
+.ai-desc{font-size:14.5px;color:var(--tinta-suave);line-height:1.6;margin-top:2px}
+.ai-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 28px;align-content:start}
+.ai-specs div{border-top:1px solid var(--linea);padding-top:10px}
+.ai-specs dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dorado)}
+.ai-specs dd{font-size:15px;color:var(--tinta);line-height:1.5;margin-top:4px;font-weight:600}
+.acabado-item.eclipse{background:#0b0b0b;color:#fff;margin:0 -28px;padding:38px 28px;border-radius:18px;border-top-color:#222}
+.acabado-item.eclipse .ai-num{color:#8b8b8b}
+.acabado-item.eclipse .ai-nombre{color:#fff}
+.acabado-item.eclipse .ai-desc{color:#b9b9b9}
+.acabado-item.eclipse .ai-specs div{border-top-color:#222}
+.acabado-item.eclipse .ai-specs dt{color:#f5d34d}
+.acabado-item.eclipse .ai-specs dd{color:#f0f0f0}
+@media(max-width:720px){
+  .acabado-item{grid-template-columns:1fr;gap:16px}
+  .ai-specs{grid-template-columns:1fr}
+  .acabado-item.eclipse{margin:0 -20px;padding:32px 20px}
 }
-.acabado .tier{display:flex;align-items:baseline;gap:10px}
-.acabado .tier b{font-size:13px;letter-spacing:.14em;color:var(--dorado);text-transform:uppercase}
-.acabado h3{font-size:21px;font-weight:800}
-.acabado p{font-size:15px;color:var(--tinta-suave);line-height:1.65}
-.acabado .precio{margin-top:auto;padding-top:12px;font-size:18px;font-weight:800}
-.acabado .precio small{font-weight:600;color:var(--tinta-mute);font-size:13px}
-.acabado.senal{border:1.5px solid var(--dorado-suave);box-shadow:0 18px 44px -22px rgba(184,132,63,.45)}
-@media(max-width:720px){.acabados-grid{grid-template-columns:1fr}}
 
 /* ---------- ficha de agua / estanqueidad ---------- */
 .agua{
@@ -360,29 +370,6 @@ footer .copy{font-size:12px;color:#9aa1ab;margin-top:30px}
 /* microinteracción: el lume se enciende al pasar por la tarjeta */
 .reloj-card .stage img{transition:transform .5s ease,filter .5s ease}
 .reloj-card:hover .stage img{transform:scale(1.04);filter:brightness(1.15) saturate(1.08)}
-
-/* ---------- selector de acabados (brief §6) ---------- */
-.selector-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:36px}
-.chip{font:inherit;font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;
-  border:1.5px solid var(--linea);background:#fff;color:var(--tinta);cursor:pointer;
-  transition:background .2s,color .2s,border-color .2s,transform .2s}
-.chip:hover{transform:translateY(-1px);border-color:var(--tinta)}
-.chip.activo{background:var(--carbon);color:#fff;border-color:var(--carbon)}
-.chip.eclipse{background:#0b0b0b;color:#f5d34d;border-color:#0b0b0b}
-.chip.eclipse.activo{box-shadow:0 0 0 2px #f5d34d inset}
-.panel-acabado{max-width:860px;margin:24px auto 0;border:1px solid var(--linea);border-radius:18px;
-  background:#fff;padding:26px 28px;display:flex;flex-direction:column;gap:8px;text-align:left}
-.panel-acabado .pa-tier{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dorado)}
-.panel-acabado h3{font-size:22px;font-weight:800}
-.panel-acabado p{font-size:15px;color:var(--tinta-suave);line-height:1.65}
-.panel-acabado .pa-precio{font-size:21px;font-weight:800;margin-top:4px}
-.panel-acabado .pa-hueco{font-size:13px;color:var(--tinta-mute);border-top:1px dashed var(--linea);padding-top:12px;margin-top:10px}
-.panel-acabado.panel-eclipse{background:#0b0b0b;border-color:#222;color:#d7d7d7}
-.panel-acabado.panel-eclipse .pa-tier{color:#f5d34d}
-.panel-acabado.panel-eclipse h3{color:#fff}
-.panel-acabado.panel-eclipse p{color:#b9b9b9}
-.panel-acabado.panel-eclipse .pa-precio{color:#f5d34d}
-.panel-acabado.panel-eclipse .pa-hueco{border-top-color:#2c2c2c;color:#8b8b8b}
 
 /* ---------- «Por qué existe laOra»: editorial en papel de periódico ----------
    Maqueta del equipo (cinco puertas). Tipografía propia de la sección,
