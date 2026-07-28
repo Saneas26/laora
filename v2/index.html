@@ -64,8 +64,12 @@ body{
   padding:64px 44px 0;max-inline-size:none}
 /* la tarjeta: un panel elevado y con corte propio, para que la caja de texto no
    lea como un vacío plano junto al metal texturado del reloj, sino como un
-   recorte deliberado — con su propio degradado, borde y sombra de elevación */
-.tarjeta{display:inline-flex;flex-direction:column;align-items:flex-start;
+   recorte deliberado — con su propio degradado, borde y sombra de elevación.
+   Se reutiliza en los cuatro actos: se encoge al ancho del contenido corto
+   (Acto I/II) y se topa con el ancho de su columna cuando el contenido es
+   más ancho, como la parrilla de specs de los Actos III y IV. */
+.tarjeta{display:flex;flex-direction:column;align-items:flex-start;
+  width:fit-content;max-width:100%;
   background:linear-gradient(160deg,#17181d 0%,#0c0d10 60%,#08080a 100%);
   border:1px solid rgba(255,255,255,.07);border-radius:22px;
   padding:52px 56px;
@@ -125,7 +129,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .hero .foto{transform-origin:54% 70%}
   .hero .foto img{object-position:center bottom}
   .texto{padding:0 22px;justify-content:flex-start;padding-top:17svh;align-items:flex-start}
-  .tarjeta{padding:32px 26px;border-radius:18px;max-width:none}
+  .tarjeta{padding:32px 26px;border-radius:18px}
   .eyebrow{font-size:11px;letter-spacing:.22em}
   h1{font-size:clamp(23px,6.8vw,28px);margin-top:16px;max-width:14ch}
   .sub{font-size:14.5px;margin-top:12px}
@@ -192,11 +196,11 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .puerta:nth-child(even){padding-left:16px}
 }
 @media(max-width:760px){
-  .a2-escena{align-items:flex-start;padding-top:9svh}
-  .a2-texto{padding:0 26px}
+  .a2-escena{align-items:flex-start;padding-top:15svh}
+  .a2-texto{padding:0 22px}
   .a2-eyebrow{max-width:24ch}
-  .a2-titular{font-size:clamp(27px,7.7vw,34px);margin-top:18px;max-width:11ch}
-  .a2-boton{margin-top:28px;padding:15px 24px;font-size:11.5px}
+  .a2-titular{font-size:clamp(24px,7vw,30px);margin-top:14px;max-width:11ch}
+  .a2-boton{margin-top:22px;padding:13px 20px;font-size:10.5px}
   .puertas{padding:46px 22px 16px}
   .puerta{padding-bottom:22px}
   .a2-cierre{font-size:21px;padding:26px 24px 70px}
@@ -206,7 +210,10 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .acto3{position:relative;background:var(--negro)}
 .a3-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 70px}
 .a3-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
-.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:right center}
+/* una pequeña inclinación, como en el Acto I: el reloj nunca queda perfectamente
+   plano. El scale cubre el sobrante de la rotación (el contenedor recorta). */
+.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
+  transform:scale(1.06) rotate(1.8deg);transform-origin:65% 45%}
 .a3-texto{position:relative;z-index:2;padding:0 44px;max-width:800px}
 .a3-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
   font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:11ch}
@@ -227,24 +234,25 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
      por espacio con el texto, sea cual sea su altura real */
   .a3-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
   .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
-  .a3-escena img{width:100%;height:auto;object-fit:initial}
+  .a3-escena img{width:100%;height:auto;object-fit:initial;transform:none}
   .a3-texto{order:1;max-width:none}
   .a3-specs{grid-template-columns:repeat(3,1fr);row-gap:34px}
 }
 @media(max-width:760px){
-  .a3-escena{padding:90px 0 0}
-  .a3-texto{padding:0 26px}
-  .a3-titular{font-size:clamp(28px,8vw,36px);margin-top:18px;max-width:10ch}
-  .a3-raya{margin:24px 0}
-  .a3-sub{font-size:16px;max-width:none}
-  .a3-specs{grid-template-columns:repeat(2,1fr);gap:28px 18px;margin-top:38px}
+  .a3-escena{padding:110px 0 0}
+  .a3-texto{padding:0 22px}
+  .a3-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
+  .a3-raya{margin:20px 0}
+  .a3-sub{font-size:15px;max-width:none}
+  .a3-specs{grid-template-columns:repeat(2,1fr);gap:24px 16px;margin-top:32px}
 }
 
 /* ACTO IV — CIERRE: lo único que no negociamos */
 .acto4{position:relative;background:var(--negro)}
 .a4-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 90px}
 .a4-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
-.a4-escena img{width:100%;height:100%;object-fit:cover;object-position:right center}
+.a4-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
+  transform:scale(1.06) rotate(-1.6deg);transform-origin:60% 45%}
 .a4-texto{position:relative;z-index:2;padding:0 44px;max-width:760px}
 .a4-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
   font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:12ch}
@@ -270,17 +278,17 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 @media(max-width:1180px){
   .a4-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
   .a4-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
-  .a4-escena img{width:100%;height:auto;object-fit:initial}
+  .a4-escena img{width:100%;height:auto;object-fit:initial;transform:none}
   .a4-texto{order:1;max-width:none}
 }
 @media(max-width:760px){
-  .a4-escena{padding:90px 0 0}
-  .a4-texto{padding:0 26px}
-  .a4-titular{font-size:clamp(28px,8vw,36px);margin-top:18px;max-width:10ch}
-  .a4-raya{margin:24px 0}
-  .a4-sub{font-size:16px;max-width:none}
-  .a4-specs{grid-template-columns:1fr;gap:24px;margin-top:38px;padding-top:28px}
-  .a4-boton{margin-top:34px;padding:15px 24px;font-size:11.5px}
+  .a4-escena{padding:112px 0 0}
+  .a4-texto{padding:0 22px}
+  .a4-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
+  .a4-raya{margin:20px 0}
+  .a4-sub{font-size:15px;max-width:none}
+  .a4-specs{grid-template-columns:1fr;gap:20px;margin-top:30px;padding-top:24px}
+  .a4-boton{margin-top:28px;padding:13px 20px;font-size:10.5px}
 }
 </style>
 </head>
@@ -325,11 +333,13 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       <img src="/assets/img/acto2-web.jpg" alt="Un hombre de pie ante un aro de luz dorada, frente a una decisión" loading="lazy">
     </picture>
     <div class="a2-texto">
-      <p class="eyebrow a2-eyebrow">El mismo acero, el mismo zafiro.<br>Sin el peaje de años de publicidad.</p>
-      <h2 class="a2-titular">No es solo un reloj.<br>Es tu forma de elegir lo que importa.</h2>
-      <button class="a2-boton" id="porqueBtn" type="button" aria-expanded="false" aria-controls="cincoPuertas">
-        <span class="txt">Por qué nace <span class="laora">laOra</span></span> <span class="chev">⌄</span>
-      </button>
+      <div class="tarjeta">
+        <p class="eyebrow a2-eyebrow">El mismo acero, el mismo zafiro.<br>Sin el peaje de años de publicidad.</p>
+        <h2 class="a2-titular">No es solo un reloj.<br>Es tu forma de elegir lo que importa.</h2>
+        <button class="a2-boton" id="porqueBtn" type="button" aria-expanded="false" aria-controls="cincoPuertas">
+          <span class="txt">Por qué nace <span class="laora">laOra</span></span> <span class="chev">⌄</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -385,6 +395,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Hora Cero, esfera negra con detalles naranjas" loading="lazy">
     </picture>
     <div class="a3-texto">
+     <div class="tarjeta">
       <p class="eyebrow">Así que hicimos lo contrario.</p>
       <h2 class="a3-titular">Eliminamos todos esos peajes.</h2>
       <span class="a3-raya"></span>
@@ -417,6 +428,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
           <p>Sin listas, sin favores. Solo un buen reloj.</p>
         </div>
       </div>
+     </div>
     </div>
   </div>
 </section>
@@ -429,6 +441,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       <img src="/assets/img/acto4-web.jpg" alt="Reloj laOra Lunar, cronógrafo de esfera negra" loading="lazy">
     </picture>
     <div class="a4-texto">
+     <div class="tarjeta">
       <p class="eyebrow">Lo único que no negociamos.</p>
       <h2 class="a4-titular">Lo único que no tocamos fue el reloj.</h2>
       <span class="a4-raya"></span>
@@ -453,6 +466,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       </div>
 
       <a class="a4-boton" href="/index.html#coleccion">Descubrir la colección <span class="fl">→</span></a>
+     </div>
     </div>
   </div>
 </section>
