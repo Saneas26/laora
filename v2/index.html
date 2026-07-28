@@ -83,8 +83,28 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .cta .fl{transition:transform .25s}
 .cta:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
 .cta:hover .fl{transform:translateX(5px)}
-.micro{margin-top:40px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gris);font-weight:600;animation-delay:1.9s}
+.disponible{display:flex;align-items:center;gap:9px;margin-top:36px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--gris);animation-delay:1.75s}
+.disponible .punto{width:6px;height:6px;border-radius:50%;background:var(--ambar);
+  box-shadow:0 0 6px rgba(245,211,77,.7);flex:none}
+.micro{margin-top:18px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gris);font-weight:600;animation-delay:2s}
+
+/* pestaña discreta y permanente hacia la colección real — no compite con
+   el Acto I (aparece a partir del Acto II) y nunca es un menú completo */
+.escape{position:fixed;right:22px;bottom:22px;z-index:6;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(5,5,5,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid rgba(245,211,77,.35);border-radius:999px;padding:12px 20px 12px 16px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--hueso);text-decoration:none;
+  opacity:0;pointer-events:none;transform:translateY(8px);
+  transition:opacity .4s ease,transform .4s ease,border-color .25s,background .25s}
+.escape.visible{opacity:1;pointer-events:auto;transform:none}
+.escape:hover{border-color:var(--ambar);background:rgba(5,5,5,.9)}
+.escape .fl{color:var(--ambar);transition:transform .25s;display:inline-block}
+.escape:hover .fl{transform:translateX(4px)}
 
 @media(max-width:760px){
   .marca{top:24px;left:24px}
@@ -96,8 +116,10 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   h1{font-size:clamp(27px,7.7vw,34px);margin-top:20px;max-width:14ch}
   .sub{font-size:16px;margin-top:14px}
   .cta{margin-top:26px;padding:14px 22px;font-size:11.5px}
+  .disponible{display:none}
   .micro{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom));left:26px;right:26px;
     margin:0;font-size:10.5px;letter-spacing:.1em}
+  .escape{right:16px;bottom:calc(16px + env(safe-area-inset-bottom));padding:11px 17px 11px 14px;font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){
   .hero .foto,.hero .sheen,.texto>*{animation:none;opacity:1}
@@ -219,6 +241,8 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   <a class="brand" href="/v2/">la<span class="o"></span>ra<sup>®</sup></a>
 </header>
 
+<a class="escape" id="escapeTab" href="/index.html#coleccion">Ver la colección <span class="fl">→</span></a>
+
 <main class="hero">
   <div class="foto">
     <picture class="capa capaA">
@@ -237,6 +261,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
     <h1>¿Por qué alguien paga 12.000&nbsp;€ por un reloj...</h1>
     <p class="sub">...si fabricar uno excelente cuesta una pequeña parte?</p>
     <a class="cta" href="#acto2">Descubrir <span class="laora">laOra</span> <span class="fl">→</span></a>
+    <p class="disponible"><span class="punto"></span>9 relojes disponibles ahora · desde 150&nbsp;€</p>
     <p class="micro">Diseñado en Canarias · Montado y ajustado en Madrid</p>
   </div>
 </main>
@@ -342,7 +367,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
         </div>
       </div>
 
-      <a class="a3-boton" href="#acto4">Descubrir la colección <span class="fl">→</span></a>
+      <a class="a3-boton" href="/index.html#coleccion">Descubrir la colección <span class="fl">→</span></a>
     </div>
   </div>
 </section>
@@ -369,6 +394,20 @@ document.querySelector('.cta').addEventListener('click', function (e) {
   a.volume = 0.45; a.currentTime = 0;
   a.play().catch(function () {});
 });
+
+// la pestaña «Ver la colección» solo aparece a partir del Acto II: en el
+// Acto I no compite con el único CTA de la escena, pero queda siempre a
+// mano para quien quiera saltar directo a comprar sin esperar la historia
+(function () {
+  var tab = document.getElementById('escapeTab');
+  var hero = document.querySelector('.hero');
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      tab.classList.toggle('visible', entry.intersectionRatio < 0.5);
+    });
+  }, { threshold: [0, 0.5, 1] });
+  obs.observe(hero);
+})();
 
 // el botón «Por qué nace laOra» despliega la infografía de las cinco puertas
 (function () {
