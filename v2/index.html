@@ -42,37 +42,22 @@ body{
 .hero{position:relative;height:100svh;min-height:600px}
 .hero .foto{position:absolute;inset:0;z-index:1;overflow:hidden;
   transform-origin:69% 46%;   /* pivote: el centro del reloj */
-  animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both}
+  animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both,
+            giro 13s cubic-bezier(.3,.4,.25,1) 2.8s forwards}
 .hero .foto .capa{position:absolute;inset:0}
 .hero .foto img{width:100%;height:100%;object-fit:cover;object-position:right center}
 /* el reloj gira sobre su eje: la vista frontal y la de 30° se funden muy despacio */
 .hero .foto .capaB{opacity:0;animation:fundido 24s ease-in-out 7s infinite}
 @keyframes fundido{0%,24%{opacity:0}38%,62%{opacity:1}76%,100%{opacity:0}}
-@keyframes llegar{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1.085)}}
+/* una pequeña inclinación de base: nunca queda perfectamente plano, ni siquiera al llegar */
+@keyframes llegar{from{opacity:0;transform:scale(1.12) rotate(.6deg)}to{opacity:1;transform:scale(1.085) rotate(1.4deg)}}
+@keyframes giro{from{transform:scale(1.085) rotate(1.4deg)}to{transform:scale(1.085) rotate(3deg)}}
 /* destello: una luz recorre el acero cada ~16 s; sobre el negro no se ve */
 .hero .sheen{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;
   background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.38) 50%,transparent 58%);
   background-size:260% 100%;background-position:130% 0;background-repeat:no-repeat;
   animation:destello 16s ease-in-out 5s infinite}
 @keyframes destello{0%{background-position:130% 0}14%{background-position:-60% 0}100%{background-position:-60% 0}}
-
-/* el reloj flotante: una foto recortada y encuadrada aparte (no el fondo a
-   sangre), más pequeña, girada sobre su propio eje y montada por encima del
-   borde de la tarjeta — así el encuadre no depende del recorte del fondo */
-.reloj-flotante{position:absolute;z-index:4;top:50%;left:38%;
-  width:clamp(280px,27vw,440px);aspect-ratio:1/1;
-  transform:translateY(-52%) rotate(-15deg);
-  border-radius:18px;overflow:hidden;
-  box-shadow:0 60px 110px -30px rgba(0,0,0,.85),0 24px 50px -20px rgba(0,0,0,.65)}
-.reloj-flotante img{width:100%;height:100%;object-fit:cover;display:block}
-.reloj-flotante{opacity:0;animation:flotanteIn 1s cubic-bezier(.2,.6,.2,1) .55s forwards}
-@keyframes flotanteIn{from{opacity:0;transform:translateY(-52%) rotate(-15deg) scale(.92)}
-  to{opacity:1;transform:translateY(-52%) rotate(-15deg) scale(1)}}
-/* fondo de la escena, de apoyo: se atenúa para que el protagonismo sea del
-   reloj flotante, ya bien encuadrado y centrado por su cuenta */
-/* en escritorio el protagonista es el reloj flotante: el fondo a sangre
-   se apaga del todo y deja solo un negro liso (con su destello) detrás */
-.hero .foto{display:none}
 
 .texto{position:relative;z-index:3;height:100%;max-width:1500px;margin:0 auto;
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
@@ -141,9 +126,8 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 @media(max-width:760px){
   .marca{top:24px;left:24px}
   .brand{font-size:22px}
-  .hero .foto{display:block;transform-origin:54% 70%}
+  .hero .foto{transform-origin:54% 70%}
   .hero .foto img{object-position:center bottom}
-  .reloj-flotante{display:none}
   .texto{padding:0 22px;justify-content:flex-start;padding-top:17svh;align-items:flex-start}
   .tarjeta{padding:32px 26px;border-radius:18px}
   .eyebrow{font-size:11px;letter-spacing:.22em}
@@ -156,7 +140,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .escape{right:16px;bottom:calc(16px + env(safe-area-inset-bottom));padding:11px 17px 11px 14px;font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero .foto,.hero .sheen,.texto>*,.tarjeta>*,.reloj-flotante{animation:none;opacity:1}
+  .hero .foto,.hero .sheen,.texto>*,.tarjeta>*{animation:none;opacity:1}
   .hero .foto .capaB{animation:none;opacity:0}
   .hero .sheen{display:none}
 }
@@ -336,7 +320,6 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
     </picture>
   </div>
   <div class="sheen" aria-hidden="true"></div>
-  <div class="reloj-flotante"><img src="/assets/img/hero-bitacora-flotante.jpg?v=2" alt="" loading="lazy"></div>
 
   <div class="texto">
     <div class="tarjeta">
