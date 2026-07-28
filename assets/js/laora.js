@@ -41,42 +41,6 @@ var LAORA_WHATSAPP = '34689806987';
   }
 })();
 
-/* Selector de acabados (brief §6): chips T1…T4 + Eclipse que pintan el panel.
-   Cada landing define window.LAORA_ACABADOS antes de cargar este módulo.
-   El desglose de coste por componente queda con su hueco preparado hasta
-   que Compras y el CFO lo cierren. */
-(function () {
-  var datos = window.LAORA_ACABADOS;
-  var chips = document.getElementById('selectorChips');
-  var panel = document.getElementById('panelAcabado');
-  if (!datos || !chips || !panel) return;
-
-  function pinta(i) {
-    var a = datos[i];
-    panel.className = 'panel-acabado' + (a.eclipse ? ' panel-eclipse' : '');
-    panel.innerHTML =
-      '<span class="pa-tier">' + a.tier + '</span>' +
-      '<h3>«' + a.nombre + '»</h3>' +
-      '<p>' + a.texto + '</p>' +
-      '<p class="pa-precio">' + a.precio + '</p>' +
-      '<p class="pa-hueco">Desglose de coste por componente: se publica aquí, pieza a pieza, ' +
-      'en cuanto Compras y el CFO lo cierren. La transparencia no es un adorno: es el producto.</p>';
-    Array.prototype.forEach.call(chips.children, function (c, j) {
-      c.classList.toggle('activo', j === i);
-    });
-  }
-
-  datos.forEach(function (a, i) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'chip' + (a.eclipse ? ' eclipse' : '');
-    b.textContent = a.eclipse ? 'Edición Eclipse' : a.tier + ' · ' + a.nombre;
-    b.addEventListener('click', function () { pinta(i); });
-    chips.appendChild(b);
-  });
-  pinta(window.LAORA_ACABADO_INICIAL || 0);
-})();
-
 /* «La versión larga» plegada bajo el cabreo: Leer más despliega y
    el botón Ocultar del final vuelve a plegar. */
 (function () {
