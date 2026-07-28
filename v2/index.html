@@ -215,16 +215,17 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 /* el suelo de 940px evita que la tarjeta centrada y la fila de specs
    anclada abajo se pisen en ventanas de escritorio bajas */
 .a3-escena{position:relative;min-height:max(100svh,940px);overflow:hidden;padding:110px 0 70px}
-/* inset:0 (no height:100svh fijo): la foto tiene que llenar el alto real
-   de la escena, que puede ser mayor a 100svh por el suelo de 940px de
-   abajo. Con una altura fija se quedaba corta y el reloj parecía pegado
-   arriba, sin centrar, cuando la escena crecía más que el viewport. */
-.a3-escena picture{position:absolute;inset:0;z-index:0}
-/* una pequeña inclinación, como en el Acto I: el reloj nunca queda perfectamente
-   plano. El scale cubre el sobrante de la rotación (el contenedor recorta).
-   El translateX lo desplaza a la izquierda: más margen en el lado derecho. */
-.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
-  transform:translateX(-80px) scale(1.06) rotate(1.8deg);transform-origin:65% 45%}
+/* la figura: ya no es una foto a sangre completa, sino una tarjeta de
+   foto más pequeña y con un giro en dos ejes de verdad (no solo el tilt
+   plano de los otros actos) — perspective en el contenedor, rotateY para
+   el giro «vertical» a la derecha y rotate para el giro «horizontal» a
+   la izquierda, en la propia imagen */
+.a3-figura{position:absolute;z-index:1;top:50%;right:9%;
+  width:clamp(230px,20vw,330px);aspect-ratio:1/1;
+  transform:translateY(-50%);perspective:1100px}
+.a3-figura img{width:100%;height:100%;object-fit:cover;display:block;
+  border-radius:16px;box-shadow:0 50px 100px -30px rgba(0,0,0,.85),0 20px 45px -20px rgba(0,0,0,.65);
+  transform:rotate(-15deg) rotateY(-45deg)}
 /* .a3-texto solo da contexto de posición: ocupa toda la escena para que
    sus dos hijos (tarjeta y specs) se puedan centrar/anclar cada uno por
    su cuenta, sin que el alto de uno empuje al otro */
@@ -261,10 +262,9 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   /* por debajo de este ancho, el texto (5 datos) puede crecer más alto que
      la pantalla — se pasa a flujo normal para que la imagen NUNCA compita
      por espacio con el texto, sea cual sea su altura real */
-  .a3-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
-  .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
-  .a3-escena img{width:100%;height:auto;object-fit:initial;transform:none}
-  .a3-texto{position:static;inset:auto;order:1;padding:0 44px}
+  .a3-escena{display:flex;flex-direction:column;align-items:center;padding:90px 0 60px;min-height:auto}
+  .a3-figura{position:static;order:2;transform:none;margin-top:44px;width:min(70vw,300px)}
+  .a3-texto{position:static;inset:auto;order:1;padding:0 44px;width:100%}
   .a3-centro{position:static;transform:none;max-width:none}
   .a3-specs{position:static;left:auto;right:auto;bottom:auto;max-width:none;
     margin-top:32px;grid-template-columns:repeat(3,1fr);row-gap:34px}
@@ -425,10 +425,9 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 <!-- ACTO III — APARECE laOra -->
 <section class="acto3" id="acto3">
   <div class="a3-escena">
-    <picture>
-      <source media="(max-width:1180px)" srcset="/assets/img/acto3-movil.jpg">
-      <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Hora Cero, esfera negra con detalles naranjas" loading="lazy">
-    </picture>
+    <div class="a3-figura">
+      <img src="/assets/img/acto3-figura.jpg?v=1" alt="Reloj laOra Hora Cero, esfera negra con detalles naranjas" loading="lazy">
+    </div>
     <div class="a3-texto">
      <div class="a3-centro">
       <div class="tarjeta">
