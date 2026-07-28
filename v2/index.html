@@ -206,13 +206,6 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .spec3 b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
   font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
 .spec3 p{font-size:12.5px;line-height:1.42;color:#a9a6a0;margin:0}
-.a3-boton{margin-top:48px;display:inline-flex;align-items:center;gap:10px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:17px 28px;
-  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
-.a3-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
-.a3-boton .fl{transition:transform .25s;display:inline-block}
-.a3-boton:hover .fl{transform:translateX(5px)}
 
 @media(max-width:1180px){
   /* por debajo de este ancho, el texto (5 datos) puede crecer más alto que
@@ -231,7 +224,49 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a3-raya{margin:24px 0}
   .a3-sub{font-size:16px;max-width:none}
   .a3-specs{grid-template-columns:repeat(2,1fr);gap:28px 18px;margin-top:38px}
-  .a3-boton{margin-top:34px;padding:15px 24px;font-size:11.5px}
+}
+
+/* ACTO IV — CIERRE: lo único que no negociamos */
+.acto4{position:relative;background:var(--negro)}
+.a4-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 90px}
+.a4-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
+.a4-escena img{width:100%;height:100%;object-fit:cover;object-position:right center}
+.a4-texto{position:relative;z-index:2;padding:0 44px;max-width:760px}
+.a4-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:12ch}
+.a4-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
+.a4-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
+  font-size:clamp(16px,1.4vw,19px);line-height:1.55;max-width:34ch}
+.a4-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px;
+  padding-top:38px;border-top:1px solid rgba(255,255,255,.14)}
+.spec4{min-width:0}
+.spec4 .ico{width:28px;height:28px;color:var(--ambar);display:block;margin-bottom:16px}
+.spec4 .ico svg{width:100%;height:100%}
+.spec4 b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+  font-size:15px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:8px}
+.spec4 p{font-size:13.5px;line-height:1.45;color:#a9a6a0;margin:0}
+.a4-boton{margin-top:52px;display:inline-flex;align-items:center;gap:10px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:17px 28px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
+.a4-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a4-boton .fl{transition:transform .25s;display:inline-block}
+.a4-boton:hover .fl{transform:translateX(5px)}
+
+@media(max-width:1180px){
+  .a4-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
+  .a4-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
+  .a4-escena img{width:100%;height:auto;object-fit:initial}
+  .a4-texto{order:1;max-width:none}
+}
+@media(max-width:760px){
+  .a4-escena{padding:90px 0 0}
+  .a4-texto{padding:0 26px}
+  .a4-titular{font-size:clamp(28px,8vw,36px);margin-top:18px;max-width:10ch}
+  .a4-raya{margin:24px 0}
+  .a4-sub{font-size:16px;max-width:none}
+  .a4-specs{grid-template-columns:1fr;gap:24px;margin-top:38px;padding-top:28px}
+  .a4-boton{margin-top:34px;padding:15px 24px;font-size:11.5px}
 }
 </style>
 </head>
@@ -366,8 +401,42 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
           <p>Sin listas, sin favores. Solo un buen reloj.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <a class="a3-boton" href="/index.html#coleccion">Descubrir la colección <span class="fl">→</span></a>
+<!-- ACTO IV — CIERRE: lo único que no negociamos -->
+<section class="acto4" id="acto4">
+  <div class="a4-escena">
+    <picture>
+      <source media="(max-width:1180px)" srcset="/assets/img/acto4-movil.jpg">
+      <img src="/assets/img/acto4-web.jpg" alt="Reloj laOra Lunar, cronógrafo de esfera negra" loading="lazy">
+    </picture>
+    <div class="a4-texto">
+      <p class="eyebrow">Lo único que no negociamos.</p>
+      <h2 class="a4-titular">Lo único que no tocamos fue el reloj.</h2>
+      <span class="a4-raya"></span>
+      <p class="a4-sub">Eliminamos el coste de la marca, los intermediarios y el marketing.<br>No el acero. No el cristal. No el movimiento.</p>
+
+      <div class="a4-specs">
+        <div class="spec4">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></span>
+          <b>316L</b>
+          <p>Acero inoxidable de alta calidad.</p>
+        </div>
+        <div class="spec4">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9.5 3 8 9l4 12 4-12-1.5-6"/></svg></span>
+          <b>Zafiro</b>
+          <p>Cristal resistente al rayado.</p>
+        </div>
+        <div class="spec4">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+          <b>Movimiento japonés</b>
+          <p>Fiabilidad diseñada para durar.</p>
+        </div>
+      </div>
+
+      <a class="a4-boton" href="/index.html#coleccion">Descubrir la colección <span class="fl">→</span></a>
     </div>
   </div>
 </section>
