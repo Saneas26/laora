@@ -215,12 +215,16 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 /* el suelo de 940px evita que la tarjeta centrada y la fila de specs
    anclada abajo se pisen en ventanas de escritorio bajas */
 .a3-escena{position:relative;min-height:max(100svh,940px);overflow:hidden;padding:110px 0 70px}
-.a3-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
+/* inset:0 (no height:100svh fijo): la foto tiene que llenar el alto real
+   de la escena, que puede ser mayor a 100svh por el suelo de 940px de
+   abajo. Con una altura fija se quedaba corta y el reloj parecía pegado
+   arriba, sin centrar, cuando la escena crecía más que el viewport. */
+.a3-escena picture{position:absolute;inset:0;z-index:0}
 /* una pequeña inclinación, como en el Acto I: el reloj nunca queda perfectamente
    plano. El scale cubre el sobrante de la rotación (el contenedor recorta).
    El translateX lo desplaza a la izquierda: más margen en el lado derecho. */
 .a3-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
-  transform:translateX(-16px) scale(1.06) rotate(1.8deg);transform-origin:65% 45%}
+  transform:translateX(-80px) scale(1.06) rotate(1.8deg);transform-origin:65% 45%}
 /* .a3-texto solo da contexto de posición: ocupa toda la escena para que
    sus dos hijos (tarjeta y specs) se puedan centrar/anclar cada uno por
    su cuenta, sin que el alto de uno empuje al otro */
