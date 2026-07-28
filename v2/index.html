@@ -39,7 +39,7 @@ body{
   border-top:.24em solid var(--ambar)}
 .brand sup{font-size:.42em;font-weight:600;margin-left:2px}
 
-.hero{position:relative;height:100svh;min-height:600px}
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden}
 .hero .foto{position:absolute;inset:0;z-index:1;overflow:hidden;
   transform-origin:69% 46%;   /* pivote: el centro del reloj */
   animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both,
@@ -281,7 +281,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 /* ACTO IV — CIERRE: lo único que no negociamos */
 .acto4{position:relative;background:var(--negro)}
 .a4-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 90px}
-.a4-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
+.a4-escena picture{position:absolute;inset:0;z-index:0}
 .a4-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
   transform:scale(1.06) rotate(-1.6deg);transform-origin:60% 45%}
 .a4-texto{position:relative;z-index:2;padding:0 44px;max-width:760px}
