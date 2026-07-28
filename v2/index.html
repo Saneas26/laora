@@ -104,6 +104,70 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .hero .foto .capaB{animation:none;opacity:0}
   .hero .sheen{display:none}
 }
+
+/* ACTO II — la revelación: el aro (la elección) y, si se pide, las cinco puertas */
+.acto2{position:relative;background:var(--negro)}
+.a2-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.a2-escena picture{position:absolute;inset:0;z-index:0}
+.a2-escena img{width:100%;height:100%;object-fit:cover;object-position:center}
+.a2-escena::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(5,5,5,.93) 0%,rgba(5,5,5,.80) 32%,rgba(5,5,5,.28) 56%,transparent 72%)}
+.a2-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
+.a2-eyebrow{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:700;
+  letter-spacing:.04em;color:var(--oro);line-height:1.7;max-width:32ch}
+.a2-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(32px,4vw,58px);line-height:1.16;margin-top:22px;max-width:12ch}
+.a2-boton{margin-top:40px;display:inline-flex;align-items:center;gap:10px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
+.a2-boton .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;letter-spacing:.02em}
+.a2-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a2-boton .chev{display:inline-block;transition:transform .4s;font-size:15px}
+.a2-boton[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+.a2-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s cubic-bezier(.2,.7,.2,1)}
+.a2-panel.abierta{grid-template-rows:1fr}
+.a2-panel-int{overflow:hidden}
+.puertas{max-width:1200px;margin:0 auto;padding:70px 44px 30px;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(255,255,255,.12)}
+.puerta{padding:32px 22px;border-right:1px solid rgba(255,255,255,.12);text-align:left;
+  opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.a2-panel.abierta .puerta{opacity:1;transform:none}
+.puerta:nth-child(1){transition-delay:.05s}.puerta:nth-child(2){transition-delay:.12s}
+.puerta:nth-child(3){transition-delay:.19s}.puerta:nth-child(4){transition-delay:.26s}
+.puerta:nth-child(5){transition-delay:.33s}
+.puerta:last-child{border-right:none}
+.puerta .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gris);letter-spacing:.1em}
+.puerta .ico{width:32px;height:32px;margin:14px 0;color:var(--ambar);display:block}
+.puerta .ico svg{width:100%;height:100%}
+.puerta h3{font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;font-size:14.5px;
+  text-transform:uppercase;letter-spacing:.02em;margin:0 0 9px}
+.puerta p{font-size:14px;color:#cfcbc3;line-height:1.4;margin:0 0 16px;min-height:38px}
+.puerta .veredicto{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8f96}
+.puerta .veredicto .x{width:15px;height:15px;border:1.3px solid #b23b3b;border-radius:50%;
+  display:grid;place-items:center;color:#e2716f;font-size:9px;line-height:1;flex:none}
+.a2-cierre{text-align:center;font-family:'Source Serif 4',Georgia,serif;color:#fff;
+  font-size:clamp(20px,2.6vw,30px);padding:44px 24px 90px;max-width:20ch;margin:0 auto;line-height:1.35}
+
+@media(max-width:900px){
+  .puertas{grid-template-columns:repeat(2,1fr);gap:0 20px}
+  .puerta{border-right:none;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .puerta:nth-child(odd){padding-right:16px}
+  .puerta:nth-child(even){padding-left:16px}
+}
+@media(max-width:760px){
+  .a2-escena{align-items:flex-start;padding-top:13svh}
+  .a2-escena::before{background:linear-gradient(178deg,rgba(5,5,5,.95) 0%,rgba(5,5,5,.8) 38%,transparent 66%)}
+  .a2-texto{padding:0 26px}
+  .a2-eyebrow{font-size:11.5px;max-width:24ch}
+  .a2-titular{font-size:clamp(26px,7.4vw,34px);margin-top:16px;max-width:11ch}
+  .a2-boton{margin-top:26px;padding:14px 22px;font-size:11px}
+  .puertas{padding:46px 22px 16px}
+  .puerta{padding-bottom:22px}
+  .a2-cierre{font-size:21px;padding:26px 24px 70px}
+}
 </style>
 </head>
 <body>
@@ -134,6 +198,66 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   </div>
 </main>
 
+<!-- ACTO II — LA REVELACIÓN -->
+<section class="acto2" id="acto2">
+  <div class="a2-escena">
+    <picture>
+      <source media="(max-width:760px)" srcset="/assets/img/acto2-movil.jpg">
+      <img src="/assets/img/acto2-web.jpg" alt="Un hombre de pie ante un aro de luz dorada, frente a una decisión" loading="lazy">
+    </picture>
+    <div class="a2-texto">
+      <p class="a2-eyebrow">El mismo acero, el mismo zafiro.<br>Sin el peaje de años de publicidad.</p>
+      <h2 class="a2-titular">No es solo un reloj.<br>Es tu forma de elegir lo que importa.</h2>
+      <button class="a2-boton" id="porqueBtn" type="button" aria-expanded="false" aria-controls="cincoPuertas">
+        <span class="txt">Por qué nace <span class="laora">laOra</span></span> <span class="chev">⌄</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="a2-panel" id="cincoPuertas">
+    <div class="a2-panel-int">
+      <div class="puertas">
+        <article class="puerta">
+          <span class="num">01</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <h3>La boutique</h3>
+          <p>Lista de espera. De años.</p>
+          <span class="veredicto"><span class="x">✕</span> Sin stock</span>
+        </article>
+        <article class="puerta">
+          <span class="num">02</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-6 4 4 6-7"/><path d="M20 7h-4"/><path d="M20 7v4"/></svg></span>
+          <h3>La reventa</h3>
+          <p>El mismo reloj. Más caro.</p>
+          <span class="veredicto"><span class="x">✕</span> Sobreprecio</span>
+        </article>
+        <article class="puerta">
+          <span class="num">03</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6"/><path d="M6 12l6 6"/><path d="M11 7l6 6"/><path d="M3 21l6-6"/></svg></span>
+          <h3>La subasta</h3>
+          <p>Puja y comisión. Pagas de más.</p>
+          <span class="veredicto"><span class="x">✕</span> Más caro aún</span>
+        </article>
+        <article class="puerta">
+          <span class="num">04</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M12 15v.01"/><path d="M10.2 9.5a1.8 1.8 0 1 1 2.8 1.5c-.6.4-1 .8-1 1.5"/></svg></span>
+          <h3>La segunda mano</h3>
+          <p>Sin factura. Sin garantía.</p>
+          <span class="veredicto"><span class="x">✕</span> Sin respaldo</span>
+        </article>
+        <article class="puerta">
+          <span class="num">05</span>
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="12" rx="2"/><path d="M9 16v2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/></svg></span>
+          <h3>El superclón</h3>
+          <p>Imita a otro. No es tuyo.</p>
+          <span class="veredicto"><span class="x">✕</span> Sin garantía</span>
+        </article>
+      </div>
+      <p class="a2-cierre">En las cinco pagas lo mismo.<br>Y nunca es el reloj.</p>
+    </div>
+  </div>
+</section>
+
 <audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
 <script>
 // el clic del brazalete: solo tras interacción del usuario (los navegadores
@@ -143,6 +267,19 @@ document.querySelector('.cta').addEventListener('click', function () {
   a.volume = 0.45; a.currentTime = 0;
   a.play().catch(function () {});
 });
+
+// el botón «Por qué nace laOra» despliega la infografía de las cinco puertas
+(function () {
+  var btn = document.getElementById('porqueBtn');
+  var panel = document.getElementById('cincoPuertas');
+  btn.addEventListener('click', function () {
+    var abierta = panel.classList.toggle('abierta');
+    btn.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+    btn.querySelector('.txt').innerHTML = abierta
+      ? 'Ocultar'
+      : 'Por qué nace <span class="laora">laOra</span>';
+  });
+})();
 </script>
 </body>
 </html>
