@@ -53,12 +53,19 @@ var LAORA_WHATSAPP = '34689806987';
 
   function pinta(i) {
     var a = datos[i];
+    var ficha = '';
+    if (a.ficha && a.ficha.length) {
+      ficha = '<dl class="pa-ficha">' + a.ficha.map(function (f) {
+        return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>';
+      }).join('') + '</dl>';
+    }
     panel.className = 'panel-acabado' + (a.eclipse ? ' panel-eclipse' : '');
     panel.innerHTML =
       '<span class="pa-tier">' + a.tier + '</span>' +
       '<h3>«' + a.nombre + '»</h3>' +
       '<p>' + a.texto + '</p>' +
       '<p class="pa-precio">' + a.precio + '</p>' +
+      ficha +
       '<p class="pa-hueco">Desglose de coste por componente: se publica aquí, pieza a pieza, ' +
       'en cuanto Compras y el CFO lo cierren. La transparencia no es un adorno: es el producto.</p>';
     Array.prototype.forEach.call(chips.children, function (c, j) {
