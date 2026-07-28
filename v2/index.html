@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>laOra — Hay otra forma de comprar un gran reloj</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ACTO I — La pregunta. Una pantalla, una idea, un solo elemento ámbar (el CTA). */
+:root{
+  --negro:#050505;
+  --ambar:#F5D34D;
+  --oro:#c7a04a;          /* oro suave del eyebrow */
+  --hueso:#f2efe9;        /* texto principal sobre negro */
+  --gris:#8a8f96;         /* microtexto */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--negro);color:var(--hueso);
+  font-family:'Nunito Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+}
+
+/* logotipo, solo — sin menú: aún no hay a dónde ir */
+.marca{position:fixed;top:34px;left:44px;z-index:3}
+.brand{font-weight:800;font-size:25px;letter-spacing:-.02em;
+  display:inline-flex;align-items:center;line-height:1;color:#fff;text-decoration:none}
+.brand .o{width:.74em;height:.74em;border:.12em solid currentColor;border-radius:50%;
+  display:inline-flex;align-items:flex-start;justify-content:center;
+  margin:0 .015em;box-sizing:border-box}
+.brand .o::before{content:"";width:0;height:0;margin-top:.06em;
+  border-left:.17em solid transparent;border-right:.17em solid transparent;
+  border-top:.24em solid var(--ambar)}
+.brand sup{font-size:.42em;font-weight:600;margin-left:2px}
+
+.hero{position:relative;height:100svh;min-height:600px}
+.hero .foto{position:absolute;inset:0;z-index:1}
+.hero .foto img{width:100%;height:100%;object-fit:cover;object-position:right center;
+  animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both, respirar 26s ease-in-out 2.8s infinite alternate}
+@keyframes llegar{from{opacity:0;transform:scale(1.045)}to{opacity:1;transform:scale(1)}}
+@keyframes respirar{from{transform:scale(1)}to{transform:scale(1.014)}}
+
+.texto{position:relative;z-index:2;height:100%;max-width:1500px;margin:0 auto;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:0 44px;max-inline-size:none}
+.texto>*{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
+@keyframes subir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--oro);line-height:2;
+  animation-delay:.5s}
+h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
+  font-size:clamp(40px,4.6vw,76px);line-height:1.12;letter-spacing:.01em;
+  margin-top:30px;max-width:12ch;color:#fff;animation-delay:.8s}
+.sub{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
+  font-size:clamp(19px,1.6vw,26px);line-height:1.45;color:#cfcbc3;
+  margin-top:22px;max-width:30ch;animation-delay:1.15s}
+.cta{display:inline-flex;align-items:center;gap:14px;margin-top:46px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--ambar);
+  border:1px solid rgba(245,211,77,.55);border-radius:2px;padding:17px 30px;
+  text-decoration:none;transition:background .25s,border-color .25s;
+  animation-delay:1.5s}
+.cta .fl{transition:transform .25s}
+.cta:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
+.cta:hover .fl{transform:translateX(5px)}
+.micro{margin-top:40px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gris);font-weight:600;animation-delay:1.9s}
+
+@media(max-width:760px){
+  .marca{top:24px;left:24px}
+  .brand{font-size:22px}
+  .hero .foto img{object-position:center bottom}
+  .texto{padding:0 26px;justify-content:flex-start;padding-top:11svh;align-items:flex-start}
+  .eyebrow{font-size:11px;letter-spacing:.26em}
+  h1{font-size:clamp(27px,7.7vw,34px);margin-top:20px;max-width:14ch}
+  .sub{font-size:16px;margin-top:14px}
+  .cta{margin-top:26px;padding:14px 22px;font-size:11.5px}
+  .micro{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom));left:26px;right:26px;
+    margin:0;font-size:10.5px;letter-spacing:.1em}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero .foto img,.texto>*{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="marca">
+  <a class="brand" href="/v2/">la<span class="o"></span>ra<sup>®</sup></a>
+</header>
+
+<main class="hero">
+  <picture class="foto">
+    <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-movil.jpg">
+    <img src="/assets/img/hero-bitacora-web.jpg" alt="Reloj laOra Bitácora de esfera turquesa sobre fondo negro" fetchpriority="high">
+  </picture>
+
+  <div class="texto">
+    <p class="eyebrow">Hay otra forma<br>de comprar un gran reloj.</p>
+    <h1>¿Por qué alguien paga 12.000&nbsp;€ por un reloj...</h1>
+    <p class="sub">...si fabricar uno excelente cuesta una pequeña parte?</p>
+    <a class="cta" href="#acto2">Descubrir laOra <span class="fl">→</span></a>
+    <p class="micro">Diseñado en Canarias · Montado y ajustado en Madrid</p>
+  </div>
+</main>
+
+</body>
+</html>
