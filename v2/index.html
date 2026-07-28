@@ -212,25 +212,46 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 
 /* ACTO III — APARECE laOra: «así que hicimos lo contrario» */
 .acto3{position:relative;background:var(--negro)}
-.a3-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 70px}
+/* el suelo de 940px evita que la tarjeta centrada y la fila de specs
+   anclada abajo se pisen en ventanas de escritorio bajas */
+.a3-escena{position:relative;min-height:max(100svh,940px);overflow:hidden;padding:110px 0 70px}
 .a3-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
 /* una pequeña inclinación, como en el Acto I: el reloj nunca queda perfectamente
-   plano. El scale cubre el sobrante de la rotación (el contenedor recorta). */
+   plano. El scale cubre el sobrante de la rotación (el contenedor recorta).
+   El translateX lo desplaza a la izquierda: más margen en el lado derecho. */
 .a3-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
-  transform:scale(1.06) rotate(1.8deg);transform-origin:65% 45%}
-.a3-texto{position:relative;z-index:2;padding:0 44px;max-width:800px}
+  transform:translateX(-16px) scale(1.06) rotate(1.8deg);transform-origin:65% 45%}
+/* .a3-texto solo da contexto de posición: ocupa toda la escena para que
+   sus dos hijos (tarjeta y specs) se puedan centrar/anclar cada uno por
+   su cuenta, sin que el alto de uno empuje al otro */
+.a3-texto{position:absolute;z-index:2;inset:0}
+/* la tarjeta se centra en altura exactamente respecto al reloj (que ocupa
+   el 100svh entero de la escena): mismo marco de referencia, sin depender
+   de cuánto mida la tarjeta ni la parrilla de specs de debajo. El centrado
+   vive en este envoltorio aparte porque la propia .tarjeta ya usa
+   `transform` para su animación de entrada y un transform estático aquí
+   se perdería en cuanto esa animación termine */
+.a3-centro{position:absolute;top:50%;left:44px;transform:translateY(-50%);
+  max-width:calc(800px - 44px)}
 .a3-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
   font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:11ch}
 .a3-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
 .a3-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
   font-size:clamp(16px,1.4vw,19px);line-height:1.5;max-width:26ch}
-.a3-specs{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:52px}
+/* fuera de la tarjeta a propósito: la tarjeta queda más pequeña y el reloj
+   respira mejor detrás, igual que en el Acto IV. Anclada cerca del borde
+   inferior, independiente de la altura de la tarjeta (que ya está centrada) */
+.a3-specs{position:absolute;left:44px;right:44px;bottom:64px;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:22px;max-width:800px}
 .spec3{min-width:0}
-.spec3 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px}
+.spec3 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
 .spec3 .ico svg{width:100%;height:100%}
 .spec3 b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
-  font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
-.spec3 p{font-size:12.5px;line-height:1.42;color:#a9a6a0;margin:0}
+  font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;
+  text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.spec3 p{font-size:12.5px;line-height:1.42;color:#c7c4bd;margin:0;
+  text-shadow:0 2px 10px rgba(0,0,0,.7)}
 
 @media(max-width:1180px){
   /* por debajo de este ancho, el texto (5 datos) puede crecer más alto que
@@ -239,8 +260,10 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a3-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
   .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
   .a3-escena img{width:100%;height:auto;object-fit:initial;transform:none}
-  .a3-texto{order:1;max-width:none}
-  .a3-specs{grid-template-columns:repeat(3,1fr);row-gap:34px}
+  .a3-texto{position:static;inset:auto;order:1;padding:0 44px}
+  .a3-centro{position:static;transform:none;max-width:none}
+  .a3-specs{position:static;left:auto;right:auto;bottom:auto;max-width:none;
+    margin-top:32px;grid-template-columns:repeat(3,1fr);row-gap:34px}
 }
 @media(max-width:760px){
   .a3-escena{padding:110px 0 0}
@@ -248,7 +271,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a3-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
   .a3-raya{margin:20px 0}
   .a3-sub{font-size:15px;max-width:none}
-  .a3-specs{grid-template-columns:repeat(2,1fr);gap:24px 16px;margin-top:32px}
+  .a3-specs{grid-template-columns:repeat(2,1fr);gap:24px 16px;margin-top:28px}
 }
 
 /* ACTO IV — CIERRE: lo único que no negociamos */
@@ -403,11 +426,14 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Hora Cero, esfera negra con detalles naranjas" loading="lazy">
     </picture>
     <div class="a3-texto">
-     <div class="tarjeta">
-      <p class="eyebrow">Así que hicimos lo contrario.</p>
-      <h2 class="a3-titular">Eliminamos todos esos peajes.</h2>
-      <span class="a3-raya"></span>
-      <p class="a3-sub">Un reloj con nombre propio.<br>Sin apellido que pagar.</p>
+     <div class="a3-centro">
+      <div class="tarjeta">
+       <p class="eyebrow">Así que hicimos lo contrario.</p>
+       <h2 class="a3-titular">Eliminamos todos esos peajes.</h2>
+       <span class="a3-raya"></span>
+       <p class="a3-sub">Un reloj con nombre propio.<br>Sin apellido que pagar.</p>
+      </div>
+     </div>
 
       <div class="a3-specs">
         <div class="spec3">
@@ -436,7 +462,6 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
           <p>Sin listas, sin favores. Solo un buen reloj.</p>
         </div>
       </div>
-     </div>
     </div>
   </div>
 </section>
