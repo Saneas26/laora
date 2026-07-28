@@ -264,5 +264,8 @@ function volcarCompras() {
    .setBorder(true, true, true, true, true, true, '#C6C3BB', SpreadsheetApp.BorderStyle.SOLID);
 
   libro.setActiveSheet(h);
-  SpreadsheetApp.getUi().alert('Listo: ' + filas.length + ' proveedores volcados en «' + HOJA + '».');
+  SpreadsheetApp.flush();
+  // Nada de getUi().alert(): si la hoja no está en primer plano, la ejecución se queda colgada
+  // esperando a que alguien cierre el diálogo. El resultado se lee en el registro de ejecución.
+  Logger.log('Listo: ' + filas.length + ' proveedores volcados en «' + HOJA + '».');
 }
