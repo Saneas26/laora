@@ -259,8 +259,9 @@ function volcarCompras() {
   var anchos = [150, 210, 120, 190, 300, 230, 150, 120, 90, 120, 120, 90, 120, 240];
   for (var c = 0; c < anchos.length; c++) h.setColumnWidth(c + 1, anchos[c]);
   h.getRange(4, 1, filas.length, CABECERA.length).setWrap(true).setVerticalAlignment('top');
+  // Solo filas: no se pueden inmovilizar columnas si las filas de título
+  // están combinadas a lo ancho (Sheets lo rechaza).
   h.setFrozenRows(3);
-  h.setFrozenColumns(2);
 
   // Validación de la columna Estado
   var estados = SpreadsheetApp.newDataValidation()
