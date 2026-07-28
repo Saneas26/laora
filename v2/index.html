@@ -169,8 +169,8 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 /* ACTO III — APARECE laOra: «así que hicimos lo contrario» */
 .acto3{position:relative;background:var(--negro)}
 .a3-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 70px}
-.a3-escena picture{position:absolute;inset:0;z-index:0}
-.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:center}
+.a3-escena picture{position:absolute;top:0;left:0;right:0;height:100svh;z-index:0}
+.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:right center}
 .a3-texto{position:relative;z-index:2;padding:0 44px;max-width:800px}
 .a3-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
   font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:11ch}
@@ -193,13 +193,18 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a3-boton:hover .fl{transform:translateX(5px)}
 
 @media(max-width:1180px){
+  /* por debajo de este ancho, el texto (5 datos) puede crecer más alto que
+     la pantalla — se pasa a flujo normal para que la imagen NUNCA compita
+     por espacio con el texto, sea cual sea su altura real */
+  .a3-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
+  .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
+  .a3-escena img{width:100%;height:auto;object-fit:initial}
+  .a3-texto{order:1;max-width:none}
   .a3-specs{grid-template-columns:repeat(3,1fr);row-gap:34px}
 }
 @media(max-width:760px){
-  .a3-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
-  .a3-escena picture{position:static;order:2;display:block;width:100%;margin-top:44px}
-  .a3-escena img{width:100%;height:auto;object-fit:initial}
-  .a3-texto{order:1;padding:0 26px;max-width:none}
+  .a3-escena{padding:90px 0 0}
+  .a3-texto{padding:0 26px}
   .a3-titular{font-size:clamp(28px,8vw,36px);margin-top:18px;max-width:10ch}
   .a3-raya{margin:24px 0}
   .a3-sub{font-size:16px;max-width:none}
@@ -300,7 +305,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 <section class="acto3" id="acto3">
   <div class="a3-escena">
     <picture>
-      <source media="(max-width:760px)" srcset="/assets/img/acto3-movil.jpg">
+      <source media="(max-width:1180px)" srcset="/assets/img/acto3-movil.jpg">
       <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Hora Cero, esfera negra con detalles naranjas" loading="lazy">
     </picture>
     <div class="a3-texto">
