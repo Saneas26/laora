@@ -141,10 +141,11 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .puerta h3{font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;font-size:14.5px;
   text-transform:uppercase;letter-spacing:.02em;margin:0 0 9px}
 .puerta p{font-size:15px;color:#d9d6cf;line-height:1.45;margin:0 0 16px;min-height:52px}
-.puerta .veredicto{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a8f96}
-.puerta .veredicto .x{width:15px;height:15px;border:1.3px solid #b23b3b;border-radius:50%;
-  display:grid;place-items:center;color:#e2716f;font-size:9px;line-height:1;flex:none}
+.puerta .veredicto{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;
+  font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#ff7a68}
+.puerta .veredicto .x{width:20px;height:20px;border:1.6px solid #ff7a68;border-radius:50%;
+  display:grid;place-items:center;color:#ff7a68;font-size:11px;line-height:1;flex:none;
+  box-shadow:0 0 10px rgba(255,122,104,.45)}
 .a2-cierre{text-align:center;font-family:'Source Serif 4',Georgia,serif;color:#fff;
   font-size:clamp(20px,2.6vw,30px);padding:44px 24px 90px;max-width:20ch;margin:0 auto;line-height:1.35}
 
@@ -163,6 +164,47 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .puertas{padding:46px 22px 16px}
   .puerta{padding-bottom:22px}
   .a2-cierre{font-size:21px;padding:26px 24px 70px}
+}
+
+/* ACTO III — APARECE laOra: «así que hicimos lo contrario» */
+.acto3{position:relative;background:var(--negro)}
+.a3-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 70px}
+.a3-escena picture{position:absolute;inset:0;z-index:0}
+.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:center}
+.a3-texto{position:relative;z-index:2;padding:0 44px;max-width:800px}
+.a3-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:11ch}
+.a3-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
+.a3-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
+  font-size:clamp(16px,1.4vw,19px);line-height:1.5;max-width:26ch}
+.a3-specs{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:52px}
+.spec3{min-width:0}
+.spec3 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px}
+.spec3 .ico svg{width:100%;height:100%}
+.spec3 b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+  font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.spec3 p{font-size:12.5px;line-height:1.42;color:#a9a6a0;margin:0}
+.a3-boton{margin-top:48px;display:inline-flex;align-items:center;gap:10px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:17px 28px;
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
+.a3-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a3-boton .fl{transition:transform .25s;display:inline-block}
+.a3-boton:hover .fl{transform:translateX(5px)}
+
+@media(max-width:1180px){
+  .a3-specs{grid-template-columns:repeat(3,1fr);row-gap:34px}
+}
+@media(max-width:760px){
+  .a3-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
+  .a3-escena picture{position:static;order:2;display:block;width:100%;margin-top:44px}
+  .a3-escena img{width:100%;height:auto;object-fit:initial}
+  .a3-texto{order:1;padding:0 26px;max-width:none}
+  .a3-titular{font-size:clamp(28px,8vw,36px);margin-top:18px;max-width:10ch}
+  .a3-raya{margin:24px 0}
+  .a3-sub{font-size:16px;max-width:none}
+  .a3-specs{grid-template-columns:repeat(2,1fr);gap:28px 18px;margin-top:38px}
+  .a3-boton{margin-top:34px;padding:15px 24px;font-size:11.5px}
 }
 </style>
 </head>
@@ -250,6 +292,52 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
         </article>
       </div>
       <p class="a2-cierre">En las cinco pagas lo mismo.<br>Y nunca es el reloj.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTO III — APARECE laOra -->
+<section class="acto3" id="acto3">
+  <div class="a3-escena">
+    <picture>
+      <source media="(max-width:760px)" srcset="/assets/img/acto3-movil.jpg">
+      <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Hora Cero, esfera negra con detalles naranjas" loading="lazy">
+    </picture>
+    <div class="a3-texto">
+      <p class="eyebrow">Así que hicimos lo contrario.</p>
+      <h2 class="a3-titular">Eliminamos todos esos peajes.</h2>
+      <span class="a3-raya"></span>
+      <p class="a3-sub">Un reloj con nombre propio.<br>Sin apellido que pagar.</p>
+
+      <div class="a3-specs">
+        <div class="spec3">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.7l8.7 8.7a2 2 0 0 1 0 2.8l-7.1 7.1a2 2 0 0 1-2.8 0L2.7 12.6V4a1.3 1.3 0 0 1 1.3-1.3h8.6z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span>
+          <b>Precio honesto</b>
+          <p>Lo que cuesta hacerlo bien. Ni un euro más.</p>
+        </div>
+        <div class="spec3">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg></span>
+          <b>Madrid</b>
+          <p>Montado y controlado en Madrid. Unidad a unidad.</p>
+        </div>
+        <div class="spec3">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></span>
+          <b>Garantía real</b>
+          <p>2 años de garantía con servicio técnico propio en España.</p>
+        </div>
+        <div class="spec3">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></span>
+          <b>Series pequeñas</b>
+          <p>Producción limitada. Cuando se acaban, se acaban.</p>
+        </div>
+        <div class="spec3">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.5v2.6M12 18.9v2.6M4.2 7.5l2.25 1.3M17.55 15.2l2.25 1.3M2.5 12h2.6M18.9 12h2.6M4.2 16.5l2.25-1.3M17.55 8.8l2.25-1.3M7.5 4.2l1.3 2.25M15.2 17.55l1.3 2.25"/></svg></span>
+          <b>Sin peajes</b>
+          <p>Sin listas, sin favores. Solo un buen reloj.</p>
+        </div>
+      </div>
+
+      <a class="a3-boton" href="#acto4">Descubrir la colección <span class="fl">→</span></a>
     </div>
   </div>
 </section>
