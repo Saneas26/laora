@@ -159,3 +159,80 @@ segundo lote no será el mismo reloj.
    acabado contra el que juzgar las muestras chinas.
 4. **Encargar la muestra maestra de esfera a The Dialmaker** (Andalucía, 1 ud).
 5. **Resolver el EUIPO** antes de comprometer un euro en molde.
+
+---
+
+## 7. Segunda ronda: DLC del Eclipse y el cuarzo del Alba
+
+### 7.1 El cuarzo del «Alba»: ningún calibre cae directo en la caja
+
+Dato duro comparado, y es el hallazgo del día:
+
+| Calibre | Ø de encaje | Altura | Fecha | Observación |
+|---|---|---|---|---|
+| **Seiko NH35A** (para el que están hechas las cajas) | **29,36 mm** | 5,32 mm | 3:00 | La referencia |
+| Ronda 715 | 25,60 mm | 2,50 mm | 3:00 o 6:00 | Pies a 2:30 y 8:30; altura sobre tija 1,00 mm |
+| Ronda 515 | 25,60 mm | 3,00 mm | 3:00 o 6:00 | Altura sobre tija 1,50 mm |
+| Miyota GM10-D3 | ~23,30 mm | 2,71 mm | 3:00 | Lo encasillan de serie las fábricas chinas |
+| Seiko VK64 | 29,00 mm | 5,10 mm | 6:00 | **Casi encaja, pero es cronógrafo**: pide dos pulsadores |
+
+**Conclusión: no hay atajo.** Todos los cuarzos de tres agujas son 2–6 mm más pequeños
+que el hueco del NH35, así que **siempre hace falta portamovimiento**. Existe un
+diseño comunitario libre (STL gratuito, Ronda 515 → caja NH3x) perfecto para
+prototipo, y fábricas dispuestas a hacerlo a medida en POM/nylon para serie.
+
+**El riesgo real no es el diámetro: es la altura de la tija.** El anillo centra el
+movimiento, pero el tubo de la corona está mecanizado en la caja a la altura del
+NH35. Si no coincide con la cota del Ronda, la tija no entra o entra forzada — y
+eso **no lo arregla un anillo**: es un cambio del plano de la caja. Es la primera
+pregunta a la fábrica, y la verificación pendiente más crítica del modelo.
+
+**Decisión propuesta:** mantener el **Ronda 715 Swiss Made** como objetivo del Alba
+y exigir a la fábrica la caja con el tubo a cota Ronda más su portamovimiento. Si
+se niegan, plan B: **Miyota GM10-D3**, que ya encasillan de serie — a cambio de
+perder el argumento *Swiss Made*.
+
+Ojo: con pies de esfera a 2:30 y 8:30, el Ronda **no admite esferas de catálogo
+NH35**. Otra razón para ir a esfera sin pies con *dial dots*, como ya se decidió.
+
+### 7.2 DLC del «Eclipse»
+
+**Precisión técnica útil en la negociación:** el DLC *se deposita* mediante PVD o
+PACVD. «DLC vs PVD» es una dicotomía comercial, no técnica; lo que se compara es
+el material de la capa.
+
+| | PVD negro decorativo | **DLC (a-C:H)** | DLC tetraédrico (ta-C) |
+|---|---|---|---|
+| Dureza | 500–1.200 HV | **1.000–2.000 HV** | hasta ~3.000 HV |
+| Espesor | 0,3–1 µm | **1–3 µm** | 1–3 µm |
+| Color | negro, oro, gunmetal… | **solo negro** | solo negro |
+
+*(Descartar el «9.000 HV» que circula en webs relojeras: es marketing — el
+diamante está en ~10.060 HV. Lo defendible es **≥2.000 HV y 1–3 µm**, certificado
+por escrito.)*
+
+**Proveedores en España** (ninguno publica tarifa; hay que pedir presupuesto):
+**Oerlikon Balzers Coating Spain** (Antzuola, Gipuzkoa — tiene división propia de
+relojería), **Flubetech** (Castellar del Vallès + Idiazabal), **Hirucoat**
+(Galdakao) y **Grup TTC**. La referencia relojera europea es **Blösch AG** (Suiza),
+que es a quien recurre la industria suiza. Como techo mental de coste unitario:
+**Black Dog Horology publica 750 CAD la caja + 250 CAD el brazalete** — pero es
+servicio pieza a pieza, no serie.
+
+**Los tres riesgos que hay que meter en el plano antes de recubrir:**
+1. **Las aristas vivas son el enemigo.** Concentran tensión y provocan
+   delaminación. Un brazalete integrado tiene decenas de aristas por eslabón: hay
+   que **especificar radio mínimo de arista y desbarbado** en el plano.
+2. **El DLC es conforme: copia el acabado, incluidos los defectos.** Preparación
+   exigida: **Ra 0,1–0,3 µm** (por debajo de 0,02 falta anclaje; por encima de
+   0,8 la capa agrieta) y limpieza total — un resto de aceite de corte arruina la
+   adherencia.
+3. **El brazalete hay que despiezarlo.** El proceso es de línea de visión: un
+   brazalete montado se autoensombrece y la capa que entre en los agujeros de
+   pasador provoca agarrotamiento. Y con 1–3 µm por cara se acumulan **2–6 µm de
+   interferencia** en cada ajuste: hay que **cotar para dimensión final tras
+   recubrir**, no antes.
+
+Además, el proceso va a **120–160 °C**: se recubre caja, bisel, fondo, corona,
+eslabones y cierre **desnudos**, y se monta después con juntas nuevas. Es un paso
+más en el flujo de montaje de Madrid.
