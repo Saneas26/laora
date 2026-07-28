@@ -183,14 +183,15 @@ var FILAS = [
 
 function volcarCompras() {
   var libro = SpreadsheetApp.getActiveSpreadsheet();
+  var N = CABECERA.length;
 
-  // Conserva lo que Óscar hubiera escrito en Estado / Notas
+  // Conserva lo que hubieras escrito en Estado / Notas
   var previas = {};
   var vieja = libro.getSheetByName(HOJA);
   if (vieja) {
     var datos = vieja.getDataRange().getValues();
     for (var i = 1; i < datos.length; i++) {
-      var clave = datos[i][1] + '|' + datos[i][3];   // Componente + Proveedor
+      var clave = datos[i][1] + '|' + datos[i][3];
       if (datos[i][12] || datos[i][13]) previas[clave] = [datos[i][12], datos[i][13]];
     }
     libro.deleteSheet(vieja);
@@ -198,45 +199,36 @@ function volcarCompras() {
 
   var h = libro.insertSheet(HOJA);
 
-  // Título
-  h.getRange(1, 1).setValue('laOra · LO-07 «Bitácora» — proveedores y enlaces de compra');
-  h.getRange(1, 1, 1, CABECERA.length).merge()
-   .setFontSize(14).setFontWeight('bold')
-   .setBackground('#14181B').setFontColor('#F5D34D')
-   .setVerticalAlignment('middle');
-  h.setRowHeight(1, 38);
+  // Títulos SIN combinar celdas: el merge impedía inmovilizar columnas.
+  h.getRange(1, 1, 1, N).setBackground('#14181B');
+  h.getRange(1, 1)
+   .setValue('laOra · LO-07 «Bitácora» — proveedores y enlaces de compra')
+   .setFontSize(14).setFontWeight('bold').setFontColor('#F5D34D');
+  h.setRowHeight(1, 34);
 
-  h.getRange(2, 1).setValue(
-    'Ningún precio es una cotización: son precios publicados al detalle o estimaciones, marcados en la columna «¿Precio?». ' +
-    'Los fabricantes serios no publican tarifa B2B — hay que pedirla. Rellena Estado y Notas; el resto se rehace al reejecutar el script.');
-  h.getRange(2, 1, 1, CABECERA.length).merge()
-   .setFontSize(10).setFontStyle('italic').setFontColor('#6E7679')
-   .setWrap(true).setVerticalAlignment('middle');
-  h.setRowHeight(2, 32);
+  h.getRange(2, 1)
+   .setValue('Ningún precio es una cotización: mira la columna «¿Precio?». Rellena solo Estado y Notas — el resto se rehace al reejecutar.')
+   .setFontSize(10).setFontStyle('italic').setFontColor('#6E7679');
+  h.setRowHeight(2, 22);
 
-  // Cabecera
-  h.getRange(3, 1, 1, CABECERA.length).setValues([CABECERA])
+  h.getRange(3, 1, 1, N).setValues([CABECERA])
    .setFontWeight('bold').setBackground('#14181B').setFontColor('#FFFFFF')
    .setVerticalAlignment('middle');
   h.setRowHeight(3, 26);
 
-  // Datos
   var filas = FILAS.map(function (f) {
     var clave = f[1] + '|' + f[3];
-    var guardado = previas[clave] || ['', ''];
-    return f.concat(guardado);
+    return f.concat(previas[clave] || ['', '']);
   });
-  h.getRange(4, 1, filas.length, CABECERA.length).setValues(filas);
+  h.getRange(4, 1, filas.length, N).setValues(filas);
 
-  // Enlaces clicables en la columna 12
-  for (var i = 0; i < filas.length; i++) {
-    var url = filas[i][11];
+  for (var k = 0; k < filas.length; k++) {
+    var url = filas[k][11];
     if (url && url.indexOf('http') === 0) {
-      h.getRange(4 + i, 12).setFormula('=HYPERLINK("' + url + '";"Abrir ↗")');
+      h.getRange(4 + k, 12).setFormula('=HYPERLINK("' + url + '";"Abrir ↗")');
     }
   }
 
-  // Colores por bloque
   var tonos = {
     '1 · Caja y brazalete': '#FFF6D6', '2 · Movimientos': '#EFEDE8',
     '3 · Esfera y agujas': '#FFF6D6', '4 · Cristales': '#EFEDE8',
@@ -247,35 +239,30 @@ function volcarCompras() {
   };
   for (var j = 0; j < filas.length; j++) {
     var tono = tonos[filas[j][0]];
-    if (tono) h.getRange(4 + j, 1, 1, CABECERA.length).setBackground(tono);
-    // Avisos en rojo suave
-    if (filas[j][1].indexOf('ATENCIÓN') === 0 || filas[j][1].indexOf('AVISO') === 0 ||
-        filas[j][1].indexOf('NO USAR') === 0 || filas[j][1].indexOf('RIESGO') === 0) {
-      h.getRange(4 + j, 1, 1, CABECERA.length).setBackground('#FBE3E0').setFontWeight('bold');
+    if (tono) h.getRange(4 + j, 1, 1, N).setBackground(tono);
+    var c = filas[j][1];
+    if (c.indexOf('ATENCIÓN') === 0 || c.indexOf('AVISO') === 0 ||
+        c.indexOf('NO USAR') === 0 || c.indexOf('RIESGO') === 0) {
+      h.getRange(4 + j, 1, 1, N).setBackground('#FBE3E0').setFontWeight('bold');
     }
   }
 
-  // Formato general
   var anchos = [150, 210, 120, 190, 300, 230, 150, 120, 90, 120, 120, 90, 120, 240];
-  for (var c = 0; c < anchos.length; c++) h.setColumnWidth(c + 1, anchos[c]);
-  h.getRange(4, 1, filas.length, CABECERA.length).setWrap(true).setVerticalAlignment('top');
-  // Solo filas: no se pueden inmovilizar columnas si las filas de título
-  // están combinadas a lo ancho (Sheets lo rechaza).
-  h.setFrozenRows(3);
+  for (var a = 0; a < anchos.length; a++) h.setColumnWidth(a + 1, anchos[a]);
+  h.getRange(4, 1, filas.length, N).setWrap(true).setVerticalAlignment('top');
 
-  // Validación de la columna Estado
+  h.setFrozenRows(3);
+  h.setFrozenColumns(2);
+
   var estados = SpreadsheetApp.newDataValidation()
     .requireValueInList(['', 'Pendiente', 'Correo enviado', 'Cotización recibida',
                          'Muestra pedida', 'Muestra recibida', 'Validado', 'Descartado'], true)
     .build();
   h.getRange(4, 13, filas.length, 1).setDataValidation(estados);
 
-  h.getRange(3, 1, filas.length + 1, CABECERA.length)
+  h.getRange(3, 1, filas.length + 1, N)
    .setBorder(true, true, true, true, true, true, '#C6C3BB', SpreadsheetApp.BorderStyle.SOLID);
 
   libro.setActiveSheet(h);
-  SpreadsheetApp.getUi().alert(
-    'Listo: ' + filas.length + ' proveedores volcados en «' + HOJA + '».\n\n' +
-    'Rellena las columnas Estado y Notas conforme vayas pidiendo cotizaciones. ' +
-    'Si vuelves a ejecutar el script, esas dos columnas se conservan.');
+  SpreadsheetApp.getUi().alert('Listo: ' + filas.length + ' proveedores volcados en «' + HOJA + '».');
 }
