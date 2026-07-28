@@ -349,9 +349,22 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 
 <audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
 <script>
+// la página siempre empieza en el Acto I: se anula la restauración de
+// scroll del navegador y cualquier «#acto2» que haya quedado en la URL
+// de una visita anterior (el CTA de abajo ya no lo escribe, pero una
+// pestaña vieja o un enlace compartido sí podrían traerlo)
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+window.scrollTo(0, 0);
+window.addEventListener('load', function () { window.scrollTo(0, 0); });
+
 // el clic del brazalete: solo tras interacción del usuario (los navegadores
-// bloquean el audio automático), como feedback al pulsar el CTA
-document.querySelector('.cta').addEventListener('click', function () {
+// bloquean el audio automático), como feedback al pulsar el CTA.
+// El scroll al Acto II es suave y no toca la URL (si escribiera #acto2,
+// recargar la página saltaría directa ahí en vez de empezar en el Acto I).
+document.querySelector('.cta').addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('acto2').scrollIntoView({ behavior: 'smooth' });
   var a = document.getElementById('clic');
   a.volume = 0.45; a.currentTime = 0;
   a.play().catch(function () {});
