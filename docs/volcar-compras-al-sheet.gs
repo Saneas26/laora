@@ -114,7 +114,71 @@ var FILAS = [
 ['7 · Taller Madrid','Prueba de estanqueidad en seco','Todos','Witschi ProofMaster CP','Presión + vacío con compresor integrado; mide deformación de caja','Seco — el recomendado','£4.695','Publicado','1','Suiza','Alta','https://www.witschi.com/en/products/proofmaster-2/'],
 ['7 · Taller Madrid','Prueba de estanqueidad económica','Todos','Elma Leak Controller 2000','Detector de fugas por vacío','Seco','£990','Publicado','1','—','Alta','https://www.hswalsh.com/horological-tools-equipment/waterproof-testing/waterproof-testing-machines'],
 ['7 · Taller Madrid','Confirmación por inmersión','Muestreo','Calypso / Calypso Plus','Solo por muestreo y SIEMPRE sobre caja vacía, nunca reloj montado','Húmedo, 10 bar','£439,95 / £495','Publicado','1','—','Alta','https://www.hswalsh.com/horological-tools-equipment/waterproof-testing/waterproof-testing-machines'],
-['7 · Taller Madrid','Prueba de presión de aficionado','Prototipo','DIY Watch Club','Cámara 7×14 cm, 2 relojes','6 bar','120 USD','Publicado','1','Hong Kong','Media','https://shop.diywatch.club/products/water-pressure-tester-6-bar-6-atm']
+['7 · Taller Madrid','Prueba de presión de aficionado','Prototipo','DIY Watch Club','Cámara 7×14 cm, 2 relojes','6 bar','120 USD','Publicado','1','Hong Kong','Media','https://shop.diywatch.club/products/water-pressure-tester-6-bar-6-atm'],
+// ───────────────────────────── PACKAGING ─────────────────────────────
+['8 · Packaging','Estuche de cartoncillo impreso','Caja de producto','Exaprint ES','Estuche cartoncillo 380 g troquelado y hendido, CMYK. 10 formatos','La partida principal de la propuesta','0,73 €/ud a 100 (sin IVA)','Publicado — CONFIRMAR IVA','25','España','Alta','https://www.exaprint.es/packagings/producto/estuche-carton/'],
+['8 · Packaging','Caja troquelada a medida','Caja de producto','Packly (IT, envía a ES)','Troqueladas de cartoncillo y ondulado, digital HD, FSC','«You never pay for the die»: TROQUEL GRATIS','Pedir presupuesto','No publicado','1','Italia','Alta','https://pack.ly/en/short-runs'],
+['8 · Packaging','Caja + cuna a medida','Caja y sujeción','ProPrintweb (Barcelona)','Cartoncillo a medida libre: tapa+base, funda deslizante, nidos interiores','Troquelado incluido, sin coste aparte','Pedir presupuesto','No publicado','15','España','Alta','https://proprintweb.com/impresion/cajas-personalizadas'],
+['8 · Packaging','Caja forrada con interior troquelado','Caja de producto','Cajas Arteca (Cádiz)','Cartonaje rígido forrado + interior de cartón con huecos. Producto de joyería','Puede sustituir a dos partidas','1,79 €/ud orientativo','Publicado','100','España','Alta','https://cajasarteca.es/cajas-interior-carton-troquelado.html'],
+['8 · Packaging','Caja rígida y mailer','Caja de producto','Packhelp','Product box y caja rígida con tapa, medida libre','Product box 150 ud 1,09 € · rígida 120 ud 5,33 €','Publicado','Publicado','30 plegable / 120 rígida','Polonia/ES','Alta','https://packhelp.es/embalaje/cajas/cajas-para-productos/cajas-rigidas/'],
+['8 · Packaging','Caja digital sin clichés','Prototipo','Cajadecarton.es','Impresión digital sobre troqueladas, sin planchas ni clichés','7-10 días','Pedir presupuesto','No publicado','10–25','España','Alta','https://www.cajadecarton.es/impresion-digital'],
+['8 · Packaging','Caja a medida (Madrid)','Caja de producto','Be Your Packer (Madrid)','Editor 3D, ondulado, cartoncillo y rígidas forradas','10-15 días','Pedir presupuesto','No publicado','1','España','Alta','https://beyourpacker.com/10-cajas-personalizadas'],
+['8 · Packaging','Cartonaje rígido artesanal','Caja de producto','Cartonajes Sánchez (Madrid)','Cartón rígido contracolado, telas, imanes','MOQ 500 si hay troquelado','Pedir presupuesto','No publicado','25 (500 con troquel)','España','Alta','https://cartonajessanchez.com/productos'],
+['8 · Packaging','Prototipo 1 unidad','Prototipo','Pixartprinting ES','Caja Deluxe de cartón rígido, soft touch, barniz 3D','Para iterar barato antes de la serie','Configurador','No publicado','1','España','Alta','https://www.pixartprinting.es/packaging/packaging-estandar/caja-deluxe/'],
+['8 · Packaging','Manga honeycomb de papel','Protección','Packhelp','Rollo de papel nido de abeja 40 cm × 100 m, sin máquina','≈0,08 €/reloj','40,41 €/rollo','Publicado','1 rollo','Polonia/ES','Alta','https://packhelp.com/p/honeycomb-paper/plain/'],
+['8 · Packaging','Papel de seda impreso','Presentación','Packhelp ES','Papel de seda personalizado 20/35 g','100 ud 0,90 € · 500 ud 0,30 € (sin IVA)','0,90 €/ud a 100','Publicado','30','Polonia/ES','Alta','https://packhelp.es/p/papel-de-seda/personalizable/'],
+['8 · Packaging','Etiqueta kraft EN BLANCO','Presentación','Etinova','Etiqueta kraft Ø50 mm en blanco, rollo de 500','Se estampa a mano con el sello: más barata y más artesana','0,061 €/ud','Publicado','500','España','Alta','https://www.etinova.com/'],
+['8 · Packaging','Sello de caucho + tampón','Presentación','sellosdecaucho.com','Sello cuadrado 50×50 mm de haya + tampón','Pago único; sirve para cajas, seda y tarjetas','15,95 € + 3,10 €','Publicado','1','España','Alta','https://www.sellosdecaucho.com/'],
+['8 · Packaging','Sello de lacre','Presentación (opcional)','stampa.es','Sello de lacre de latón Ø15-30 + barras (2,19 €/barra)','Pago único','38,50 €','Publicado','1','España','Alta','https://stampa.es/'],
+['8 · Packaging','Tarjeta de garantía 650 g','Presentación','Vistaprint ES','Tarjeta extragruesa 650 g/m²','100 ud 0,32 € · 500 ud 0,11 € (IVA incl.)','0,32 €/ud a 100','Publicado','100','España','Alta','https://www.vistaprint.es/tarjetas-de-visita/extragruesas'],
+['8 · Packaging','Tarjeta premium 600 g','Presentación','MOO','Luxe 600 g Mohawk, 4 capas, borde de color. Entrega al día siguiente','100 ud 0,74 € sin IVA','0,74 €/ud','Publicado','50','Reino Unido','Alta','https://www.moo.com/es/business-cards/luxe'],
+['8 · Packaging','Cinta de papel engomado','Cierre','Sticker Mule','Cinta kraft engomada 71 mm personalizada, envío gratis','≈0,29 €/caja (0,5 m)','0,57 €/m','Publicado','30 m','—','Alta','https://www.stickermule.com/es/products/cinta-de-embalaje'],
+['8 · Packaging','Caja de envío corrugado','Envío','Kartox','Cajas a medida de ondulado; catálogo desde 0,46 €','Canal B/C, 200 lb / 32 ECT — el grado que exige ISTA 3A','~0,60 €/ud','ESTIMADO','1','España','Media','https://www.kartox.com/cajas-a-medida'],
+['8 · Packaging','AVISO — pulpa moldeada a medida','—','—','INVIABLE a esta escala: molde desde 3.000 $ y arranque de 1.000-2.000 uds','Umbral de viabilidad: 5.000-10.000 uds','—','—','—','—','Dato verificado','https://www.innaturepack.com/'],
+['8 · Packaging','AVISO — protección mínima','Envío','Norma ISTA 3A / FedEx','5 cm de relleno en las SEIS caras entre caja de producto y caja de envío','Doble caja obligatoria. Objetivo: 760 mm de caída y ~17 impactos','—','—','—','—','Dato verificado','https://ista.org/'],
+['8 · Packaging','Ensayo de caída (validación)','Control','ITENE (Paterna, Valencia)','Laboratorio español de ensayo de embalaje. Tel. 961 820 000','Caída 760 mm en 10 orientaciones','No publican tarifa','No publicado','—','España','Alta','https://www.itene.com/'],
+
+// ───────────────────────────── ENVÍOS ─────────────────────────────
+['9 · Envíos','Envío nacional asegurado','Península','Correos Paq Premium + Valor Declarado','1-2 días. VD 1,5 %, mínimo 1,67 €, máximo 6.000 €','NO excluye relojes. Toda la cadena publicada','15,35 € + 7,50 € (para 500 €)','Publicado','1','España','Alta — RECOMENDADO','https://www.correos.es/'],
+['9 · Envíos','Envío nacional económico','Península','Correos Paq Estándar + VD','2-4 días','Misma cobertura','13,65 € + VD','Publicado','1','España','Alta','https://www.correos.es/'],
+['9 · Envíos','Seguro «Joyería o Valores»','Península','MRW','ÚNICO operador cuyo clausulado admite relojes POR ESCRITO (cl. 2.3)','0,80 % + 1 €/envío, mínimo 3,75 € + IVA, máx 50.000 €','~5 € para 500 €','Publicado','1','España','Alta — RECOMENDADO','https://www.mrw.es/uso_MRW_mensajeria/condiciones_venta/'],
+['9 · Envíos','Valor declarado','Península','SEUR','Zona gris: exige tasación oficial para asegurar objetos de valor','1,40 %, mínimo 4 €, máx 6.000 €','Pedir tarifa','No publicado','1','España','Media-alta','https://www.seur.com/es/condiciones-de-transporte/'],
+['9 · Envíos','NO USAR — excluye relojes','—','GLS Spain','Condiciones generales cl. 2: excluye joyas, RELOJES, perlas y obras de arte','Enviar por aquí = sin derecho a reclamación','—','—','—','España','Alta (literal)','https://gls-group.com/ES/downloads/glsspain_condicionesgenerales.pdf'],
+['9 · Envíos','NO USAR — excluye relojes','—','Correos Express','Excluye joyas y metales preciosos','—','—','—','—','España','Alta (literal)','https://www.correosexpress.com/'],
+['9 · Envíos','RIESGO — zona gris','—','UPS','Prohíbe «artículos de valor inusual» y advierte que la lista NO es exhaustiva','Además no cubre relojes de más de 500 USD','—','—','—','—','Alta','https://www.ups.com/assets/resources/webcontent/en_GB/service-guide-base-ES.pdf'],
+['9 · Envíos','Envío a la UE','UE','Correos Paq Standard Internacional','Seguro 1 %, mínimo 2,04 €, máximo 3.000 €','Confirmar en oficina que el país de destino admite seguro','33,07 € (EU1)','Publicado','1','España','Alta','https://www.correos.es/'],
+['9 · Envíos','Envío a Canarias','Canarias','Correos Paq Premium + DUA','Es EXPORTACIÓN: se factura sin IVA','25,45 € + DUA 14,42 € + VD','≈47,37 € para un reloj de 500 €','Publicado','1','España','Alta','https://www.correos.es/'],
+['9 · Envíos','AVISO — IGIC en Canarias','Canarias','Agencia Tributaria Canaria','El tipo incrementado se aplica a joyería: confirmar si un reloj tributa al 7 % o al 13,5-15 %','Diferencia de ~32 € por unidad. Avisar en el checkout','—','A CONFIRMAR','—','España','Media-alta','https://www3.gobiernodecanarias.org/tributos/atc/'],
+['9 · Envíos','AVISO — reglas de póliza','Todos','—','Siempre con FIRMA y tracking. Etiquetado NEUTRO: nada de marca ni la palabra «reloj» fuera','Varias pólizas rechazan el siniestro solo por esto','—','—','—','—','Dato verificado','https://www.mrw.es/uso_MRW_mensajeria/condiciones_venta/'],
+
+// ───────────────────── HERRAMIENTA DEL TALLER (MADRID) ─────────────────────
+['10 · Herramienta','Prensa de cristales y fondos','Montaje','Bergeon 5500 — Suministros Revuelto (Madrid)','La imprescindible. Versión completa 5500-A: 599,90 €','Tel. 915 216 149','252,00 € sin IVA','Publicado','1','España','Alta','https://suministrosrevuelto.com/839-prensas-bergeon'],
+['10 · Herramienta','Potencia de encajar agujas','Montaje','Horotec MSA 05.055 — Sum. Revuelto','Con 8 tases. Lo que de verdad quieres para serie','Alternativa: Bergeon 5378 a 72 €','120,00 € sin IVA','Publicado','1','España','Alta','https://suministrosrevuelto.com/863-utiles-poner-agujas-y-potencias'],
+['10 · Herramienta','Útil manual de agujas','Montaje','Bergeon 7404-S03 — Sum. Revuelto','Juego de 3','—','67,40 € sin IVA','Publicado','1','España','Alta','https://suministrosrevuelto.com/863-utiles-poner-agujas-y-potencias'],
+['10 · Herramienta','Extractor de agujas (Presto)','Montaje','Bergeon 4344-9 — Sum. Revuelto','Rebajado de 27 €','—','20,00 € sin IVA','Publicado','1','España','Alta','https://suministrosrevuelto.com/prestos-varios/1579-presto-sacar-agujar-tipo-n-1.html'],
+['10 · Herramienta','Vacuómetro de hermeticidad 3 atm','Control','Suministros Revuelto','Imprescindible si el reloj declara estanqueidad. Capacidad 2 relojes','Rebajado de 300 €','199,90 € sin IVA','Publicado','1','España','Alta','https://suministrosrevuelto.com/es/vacuometros/33034-vacuometro-agua-3-atmosferas.html'],
+['10 · Herramienta','Abrefondos roscados','Montaje','Bergeon 5700-Z — Sum. Revuelto','Por encargo. Pedir precio profesional a Kirman antes de comprar','—','890,00 € sin IVA','Publicado','1','España','Alta','https://suministrosrevuelto.com/potencias-de-volante/32596-util-abrir-fondos-rosca-bergeon-5700-z.html'],
+['10 · Herramienta','Timegrapher','Control','Weishi No.1000','Comprobador de marcha. El 1900 solo añade pantalla en color','~95-196 € según fuente','~150 €','ESTIMADO','1','—','Media','https://www.javiergutierrezchamorro.com/weishi-timegrapher-no-1000-mtg1000/'],
+['10 · Herramienta','Lupa frontal Optivisor','Montaje','Suministros Revuelto','1,75×. Rebajada de 44 €','—','29,90 €','Publicado','1','España','Alta','https://suministrosrevuelto.com/564-lupa-binocular'],
+['10 · Herramienta','Lupa estereoscópica','Control','Euromex NOVEX AP-4 — Amaina','20×','—','196,95 € con IVA','Publicado','1','España','Alta','https://www.amaina.com/18-microscopios-lupas-binoculares'],
+['10 · Herramienta','Mesa de relojero','Taller','ComraShop','Mesa Relojero Extra, 10 cajones','Web profesional, IVA no incluido','1.180,00 € sin IVA','Publicado','1','España','Alta','https://comrashop.es/84-mesas-de-trabajo'],
+['10 · Herramienta','Acceso profesional Bergeon','Todos','Kirman (Sevilla)','Distribuidor oficial de Bergeon, Witschi, Elma y Horotec. Precios tras registro','PEDIR ACCESO: probablemente mejore los 890 € del 5700-Z','Registro profesional','No publicado','—','España','Alta','https://tienda.kirman.com/bergeon2'],
+['10 · Herramienta','Formación — hermeticidad y peritaje','Taller','Escuela de Relojería Kirman','Masterclass de 8 h. Exactamente la formación de quien monta series con garantía propia','También cristales (8 h) y módulos de mecánico','No publicado','No publicado','—','España','Alta','https://www.kirman.com/escuela-de-relojeria-kirman/'],
+['10 · Herramienta','Formación reglada','Taller','Institut Mare de Déu de la Mercè (Barcelona)','ÚNICO centro de FP de relojería de España. ~2.000 h, vinculado a WOSTEP','Público','No publicado','No publicado','—','España','Alta','https://www.educaweb.com/curso/ciclo-formativo-grado-medio-mantenimiento-reparacion-relojeria-barcelona-44962/'],
+
+// ───────────────────────────── LUME ─────────────────────────────
+['11 · Lume','Pigmento Super-LumiNova','Esfera y agujas','RC Tritec AG (Teufen, Suiza)','EL fabricante con licencia. Asesoran grado, color y granulometría','Grados: Standard, A, X1, X2. Colores: C3, BGW9, C1, Old Radium','No publican precio','No publicado','No publicado','Suiza','Alta','https://www.rctritec.com/en/superluminova'],
+['11 · Lume','Pigmento al detalle','Prototipo','Dial Maker Shop','SLN C3 y BGW9, 1 g Standard Grade','—','40,00 USD/g','Publicado','1','—','Media-alta','https://www.dialmaker.shop/collections/swiss-super-luminova'],
+['11 · Lume','Kits de aplicación','Prototipo','DIY Watch Club','Kits de SLN suizo y de Nemoto. Distinguen ambos: señal de honestidad','—','20-145 USD','Publicado','1','Hong Kong','Media-alta','https://shop.diywatch.club/collections/lume-powder-and-kit'],
+['11 · Lume','AVISO — el lume va en el pedido de esfera','Esfera y agujas','—','El lume se aplica EN FÁBRICA, no después. Exigir que esfera y agujas se luman con el MISMO LOTE','Si no, salen dos tonos distintos en el mismo reloj','—','—','—','—','Dato verificado','https://www.rctritec.com/en/superluminova/qualities-1'],
+['11 · Lume','AVISO — cómo verificar que es suizo','Esfera y agujas','—','La química es la misma familia: un análisis básico NO distingue. Lo que distingue: ensayo DIN 67510-1','Exigir albarán de RC Tritec con nº de lote + muestra de retención precintada','—','—','—','—','Dato verificado','https://www.rctritec.com/en/superluminova'],
+
+// ─────────────────── CUMPLIMIENTO LEGAL (NO ES OPCIONAL) ───────────────────
+['12 · Legal','Garantía legal en España','Todos','RDL 7/2021','TRES años de garantía legal, no dos. Y repuestos obligatorios 10 años','Anunciar 2 años puede leerse como limitar un derecho: sancionable. YA CORREGIDO EN LA WEB','—','—','—','España','Verificado','https://portal-cec.consumo.gob.es/en/comunicacion/noticias/2022/espana-amplia-la-garantia-legal-minima-de-dos-tres-anos'],
+['12 · Legal','RAEE — solo si lleva CUARZO','T1 Alba','RD 993/2022','Si el reloj lleva cuarzo eres FABRICANTE DE AEE: alta en RII-AEE, marcado CE, RoHS, SCRAP y pilas','Si es puramente mecánico, NADA de esto aplica. Decisión de negocio antes que ninguna otra','—','—','—','España','Verificado','https://industria.gob.es/registros-industriales/RAEE/Documents/07.2024%20Guia%20alta%20de%20productores%20en%20el%20RII-AEE_rev%20MINTUR_def.pdf'],
+['12 · Legal','Níquel — REACH Anexo XVII','Todos','EN 1811:2023','Caja, fondo, corona, hebilla y brazalete van en contacto con la piel. Límite 0,5 µg/cm²/semana','PEDIR EL ENSAYO EN 1811 al fabricante de la caja y guardarlo','—','—','—','UE','Verificado','https://www.sgs.com/en-us/news/2024/01/safeguards-0224-eu-harmonizes-en-1811-2023-for-nickel-release-reach-annex-xvii-restriction'],
+['12 · Legal','Marcas registradas ajenas','Todos','—','«Hardlex» es de Seiko (usar mineral K1) y «Tiffany Blue» es de Tiffany & Co. (usar solo Pantone)','La BOM dice «esfera TIFFANY»: CAMBIARLO','—','—','—','—','Verificado','https://www.rctritec.com/'],
+['12 · Legal','Riesgo de diseño LO-06 y LO-07','Ocho Lados y Bitácora','EUIPO','Ser estéril protege de la marca, NO del diseño. Verificar ANTES de pagar utillaje','El propio Excel lo marca en rojo','—','—','—','UE','Verificado','https://www.euipo.europa.eu/es']
 ];
 
 function volcarCompras() {
@@ -177,13 +241,16 @@ function volcarCompras() {
     '1 · Caja y brazalete': '#FFF6D6', '2 · Movimientos': '#EFEDE8',
     '3 · Esfera y agujas': '#FFF6D6', '4 · Cristales': '#EFEDE8',
     '5 · Juntas y cierre': '#FFF6D6', '6 · DLC Eclipse': '#EFEDE8',
-    '7 · Taller Madrid': '#FFF6D6'
+    '7 · Taller Madrid': '#FFF6D6', '8 · Packaging': '#EFEDE8',
+    '9 · Envíos': '#FFF6D6', '10 · Herramienta': '#EFEDE8',
+    '11 · Lume': '#FFF6D6', '12 · Legal': '#FBE3E0'
   };
   for (var j = 0; j < filas.length; j++) {
     var tono = tonos[filas[j][0]];
     if (tono) h.getRange(4 + j, 1, 1, CABECERA.length).setBackground(tono);
     // Avisos en rojo suave
-    if (filas[j][1].indexOf('ATENCIÓN') === 0 || filas[j][1].indexOf('AVISO') === 0) {
+    if (filas[j][1].indexOf('ATENCIÓN') === 0 || filas[j][1].indexOf('AVISO') === 0 ||
+        filas[j][1].indexOf('NO USAR') === 0 || filas[j][1].indexOf('RIESGO') === 0) {
       h.getRange(4 + j, 1, 1, CABECERA.length).setBackground('#FBE3E0').setFontWeight('bold');
     }
   }
