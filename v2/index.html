@@ -49,8 +49,9 @@ body{
 /* el reloj gira sobre su eje: la vista frontal y la de 30° se funden muy despacio */
 .hero .foto .capaB{opacity:0;animation:fundido 24s ease-in-out 7s infinite}
 @keyframes fundido{0%,24%{opacity:0}38%,62%{opacity:1}76%,100%{opacity:0}}
-@keyframes llegar{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1.085)}}
-@keyframes giro{from{transform:scale(1.085) rotate(0deg)}to{transform:scale(1.085) rotate(2deg)}}
+/* una pequeña inclinación de base: nunca queda perfectamente plano, ni siquiera al llegar */
+@keyframes llegar{from{opacity:0;transform:scale(1.12) rotate(.6deg)}to{opacity:1;transform:scale(1.085) rotate(1.4deg)}}
+@keyframes giro{from{transform:scale(1.085) rotate(1.4deg)}to{transform:scale(1.085) rotate(3deg)}}
 /* destello: una luz recorre el acero cada ~16 s; sobre el negro no se ve */
 .hero .sheen{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;
   background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.38) 50%,transparent 58%);
@@ -60,35 +61,47 @@ body{
 
 .texto{position:relative;z-index:3;height:100%;max-width:1500px;margin:0 auto;
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-  padding:0 44px;max-inline-size:none}
-.texto>*{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
+  padding:64px 44px 0;max-inline-size:none}
+/* la tarjeta: un panel elevado y con corte propio, para que la caja de texto no
+   lea como un vacío plano junto al metal texturado del reloj, sino como un
+   recorte deliberado — con su propio degradado, borde y sombra de elevación */
+.tarjeta{display:inline-flex;flex-direction:column;align-items:flex-start;
+  background:linear-gradient(160deg,#17181d 0%,#0c0d10 60%,#08080a 100%);
+  border:1px solid rgba(255,255,255,.07);border-radius:22px;
+  padding:52px 56px;
+  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  opacity:0;animation:tarjetaIn .9s cubic-bezier(.2,.6,.2,1) .2s forwards}
+@keyframes tarjetaIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+.tarjeta>*{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
+.texto>.micro{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
 @keyframes subir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;
-  letter-spacing:.3em;text-transform:uppercase;color:var(--oro);line-height:1.85;
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--oro);line-height:1.85;
   animation-delay:.5s}
 h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
-  font-size:clamp(40px,4.6vw,76px);line-height:1.12;letter-spacing:.01em;
-  margin-top:30px;max-width:12ch;color:#fff;animation-delay:.8s}
+  font-size:clamp(32px,3.4vw,54px);line-height:1.14;letter-spacing:.01em;
+  margin-top:22px;max-width:13ch;color:#fff;animation-delay:.8s}
 .sub{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
-  font-size:clamp(19px,1.6vw,26px);line-height:1.45;color:#cfcbc3;
-  margin-top:22px;max-width:30ch;animation-delay:1.15s}
-.cta{display:inline-flex;align-items:center;gap:14px;margin-top:46px;
-  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--ambar);
-  border:1px solid rgba(245,211,77,.55);border-radius:2px;padding:17px 30px;
+  font-size:clamp(16px,1.3vw,21px);line-height:1.45;color:#cfcbc3;
+  margin-top:16px;max-width:30ch;animation-delay:1.15s}
+.cta{display:inline-flex;align-items:center;gap:14px;margin-top:32px;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ambar);
+  border:1px solid rgba(245,211,77,.55);border-radius:2px;padding:15px 27px;
   text-decoration:none;transition:background .25s,border-color .25s;
   animation-delay:1.5s}
 .cta .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;
-  font-size:15px;letter-spacing:.02em}
+  font-size:14px;letter-spacing:.02em}
 .cta .fl{transition:transform .25s}
 .cta:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
 .cta:hover .fl{transform:translateX(5px)}
-.disponible{display:flex;align-items:center;gap:9px;margin-top:36px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+.disponible{display:flex;align-items:center;gap:9px;margin-top:26px;
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;
   letter-spacing:.08em;text-transform:uppercase;color:var(--gris);animation-delay:1.75s}
 .disponible .punto{width:6px;height:6px;border-radius:50%;background:var(--ambar);
   box-shadow:0 0 6px rgba(245,211,77,.7);flex:none}
-.micro{margin-top:18px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+.micro{margin-top:26px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--gris);font-weight:600;animation-delay:2s}
 
 /* pestaña discreta y permanente hacia la colección real — no compite con
@@ -111,18 +124,19 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .brand{font-size:22px}
   .hero .foto{transform-origin:54% 70%}
   .hero .foto img{object-position:center bottom}
-  .texto{padding:0 26px;justify-content:flex-start;padding-top:11svh;align-items:flex-start}
-  .eyebrow{font-size:12.5px;letter-spacing:.24em}
-  h1{font-size:clamp(27px,7.7vw,34px);margin-top:20px;max-width:14ch}
-  .sub{font-size:16px;margin-top:14px}
-  .cta{margin-top:26px;padding:14px 22px;font-size:11.5px}
+  .texto{padding:0 22px;justify-content:flex-start;padding-top:17svh;align-items:flex-start}
+  .tarjeta{padding:32px 26px;border-radius:18px;max-width:none}
+  .eyebrow{font-size:11px;letter-spacing:.22em}
+  h1{font-size:clamp(23px,6.8vw,28px);margin-top:16px;max-width:14ch}
+  .sub{font-size:14.5px;margin-top:12px}
+  .cta{margin-top:20px;padding:13px 20px;font-size:10.5px}
   .disponible{display:none}
   .micro{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom));left:26px;right:26px;
     margin:0;font-size:10.5px;letter-spacing:.1em}
   .escape{right:16px;bottom:calc(16px + env(safe-area-inset-bottom));padding:11px 17px 11px 14px;font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero .foto,.hero .sheen,.texto>*{animation:none;opacity:1}
+  .hero .foto,.hero .sheen,.texto>*,.tarjeta>*{animation:none;opacity:1}
   .hero .foto .capaB{animation:none;opacity:0}
   .hero .sheen{display:none}
 }
@@ -292,11 +306,13 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   <div class="sheen" aria-hidden="true"></div>
 
   <div class="texto">
-    <p class="eyebrow">Hay otra forma<br>de comprar un gran reloj.</p>
-    <h1>¿Por qué alguien paga 12.000&nbsp;€ por un reloj...</h1>
-    <p class="sub">...si fabricar uno excelente cuesta una pequeña parte?</p>
-    <a class="cta" href="#acto2">Descubrir <span class="laora">laOra</span> <span class="fl">→</span></a>
-    <p class="disponible"><span class="punto"></span>9 relojes disponibles ahora · desde 150&nbsp;€</p>
+    <div class="tarjeta">
+      <p class="eyebrow">Hay otra forma<br>de comprar un gran reloj.</p>
+      <h1>¿Por qué alguien paga 12.000&nbsp;€ por un reloj...</h1>
+      <p class="sub">...si fabricar uno excelente cuesta una pequeña parte?</p>
+      <a class="cta" href="#acto2">Descubrir <span class="laora">laOra</span> <span class="fl">→</span></a>
+      <p class="disponible"><span class="punto"></span>9 relojes disponibles ahora · desde 150&nbsp;€</p>
+    </div>
     <p class="micro">Diseñado en Canarias · Montado y ajustado en Madrid</p>
   </div>
 </main>
