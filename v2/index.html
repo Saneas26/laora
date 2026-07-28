@@ -41,7 +41,7 @@ body{
 
 .hero{position:relative;height:100svh;min-height:600px}
 .hero .foto{position:absolute;inset:0;z-index:1;overflow:hidden;
-  transform-origin:72% 46%;   /* pivote: el centro del reloj */
+  transform-origin:69% 46%;   /* pivote: el centro del reloj */
   animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both,
             giro 13s cubic-bezier(.3,.4,.25,1) 2.8s forwards}
 .hero .foto .capa{position:absolute;inset:0}
@@ -89,7 +89,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 @media(max-width:760px){
   .marca{top:24px;left:24px}
   .brand{font-size:22px}
-  .hero .foto{transform-origin:58% 70%}
+  .hero .foto{transform-origin:54% 70%}
   .hero .foto img{object-position:center bottom}
   .texto{padding:0 26px;justify-content:flex-start;padding-top:11svh;align-items:flex-start}
   .eyebrow{font-size:11px;letter-spacing:.26em}
@@ -115,12 +115,12 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 <main class="hero">
   <div class="foto">
     <picture class="capa capaA">
-      <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-movil.jpg?v=2">
-      <img src="/assets/img/hero-bitacora-web.jpg?v=2" alt="Reloj laOra Bitácora de esfera turquesa sobre fondo negro" fetchpriority="high">
+      <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-movil.jpg?v=3">
+      <img src="/assets/img/hero-bitacora-web.jpg?v=3" alt="Reloj laOra Bitácora de esfera turquesa sobre fondo negro" fetchpriority="high">
     </picture>
     <picture class="capa capaB" aria-hidden="true">
-      <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-lateral-movil.jpg">
-      <img src="/assets/img/hero-bitacora-lateral-web.jpg" alt="" loading="lazy">
+      <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-lateral-movil.jpg?v=2">
+      <img src="/assets/img/hero-bitacora-lateral-web.jpg?v=2" alt="" loading="lazy">
     </picture>
   </div>
   <div class="sheen" aria-hidden="true"></div>
