@@ -40,13 +40,21 @@ body{
 .brand sup{font-size:.42em;font-weight:600;margin-left:2px}
 
 .hero{position:relative;height:100svh;min-height:600px}
-.hero .foto{position:absolute;inset:0;z-index:1}
+.hero .foto{position:absolute;inset:0;z-index:1;overflow:hidden}
 .hero .foto img{width:100%;height:100%;object-fit:cover;object-position:right center;
-  animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both, respirar 26s ease-in-out 2.8s infinite alternate}
-@keyframes llegar{from{opacity:0;transform:scale(1.045)}to{opacity:1;transform:scale(1)}}
-@keyframes respirar{from{transform:scale(1)}to{transform:scale(1.014)}}
+  transform-origin:72% 46%;   /* pivote: el centro del reloj */
+  animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both,
+            giro 13s cubic-bezier(.3,.4,.25,1) 2.8s forwards}
+@keyframes llegar{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1.085)}}
+@keyframes giro{from{transform:scale(1.085) rotate(0deg)}to{transform:scale(1.085) rotate(2deg)}}
+/* destello: una luz recorre el acero cada ~16 s; sobre el negro no se ve */
+.hero .sheen{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.38) 50%,transparent 58%);
+  background-size:260% 100%;background-position:130% 0;background-repeat:no-repeat;
+  animation:destello 16s ease-in-out 5s infinite}
+@keyframes destello{0%{background-position:130% 0}14%{background-position:-60% 0}100%{background-position:-60% 0}}
 
-.texto{position:relative;z-index:2;height:100%;max-width:1500px;margin:0 auto;
+.texto{position:relative;z-index:3;height:100%;max-width:1500px;margin:0 auto;
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
   padding:0 44px;max-inline-size:none}
 .texto>*{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
@@ -66,6 +74,8 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   border:1px solid rgba(245,211,77,.55);border-radius:2px;padding:17px 30px;
   text-decoration:none;transition:background .25s,border-color .25s;
   animation-delay:1.5s}
+.cta .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;
+  font-size:15px;letter-spacing:.02em}
 .cta .fl{transition:transform .25s}
 .cta:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
 .cta:hover .fl{transform:translateX(5px)}
@@ -75,7 +85,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 @media(max-width:760px){
   .marca{top:24px;left:24px}
   .brand{font-size:22px}
-  .hero .foto img{object-position:center bottom}
+  .hero .foto img{object-position:center bottom;transform-origin:58% 70%}
   .texto{padding:0 26px;justify-content:flex-start;padding-top:11svh;align-items:flex-start}
   .eyebrow{font-size:11px;letter-spacing:.26em}
   h1{font-size:clamp(27px,7.7vw,34px);margin-top:20px;max-width:14ch}
@@ -85,7 +95,8 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
     margin:0;font-size:10.5px;letter-spacing:.1em}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero .foto img,.texto>*{animation:none;opacity:1}
+  .hero .foto img,.hero .sheen,.texto>*{animation:none;opacity:1}
+  .hero .sheen{display:none}
 }
 </style>
 </head>
@@ -100,15 +111,26 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
     <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-movil.jpg">
     <img src="/assets/img/hero-bitacora-web.jpg" alt="Reloj laOra Bitácora de esfera turquesa sobre fondo negro" fetchpriority="high">
   </picture>
+  <div class="sheen" aria-hidden="true"></div>
 
   <div class="texto">
     <p class="eyebrow">Hay otra forma<br>de comprar un gran reloj.</p>
     <h1>¿Por qué alguien paga 12.000&nbsp;€ por un reloj...</h1>
     <p class="sub">...si fabricar uno excelente cuesta una pequeña parte?</p>
-    <a class="cta" href="#acto2">Descubrir laOra <span class="fl">→</span></a>
+    <a class="cta" href="#acto2">Descubrir <span class="laora">laOra</span> <span class="fl">→</span></a>
     <p class="micro">Diseñado en Canarias · Montado y ajustado en Madrid</p>
   </div>
 </main>
 
+<audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
+<script>
+// el clic del brazalete: solo tras interacción del usuario (los navegadores
+// bloquean el audio automático), como feedback al pulsar el CTA
+document.querySelector('.cta').addEventListener('click', function () {
+  var a = document.getElementById('clic');
+  a.volume = 0.45; a.currentTime = 0;
+  a.play().catch(function () {});
+});
+</script>
 </body>
 </html>
