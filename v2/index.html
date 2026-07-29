@@ -431,6 +431,40 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a6-club-foto{width:200px}
   .a6-club-sub{max-width:none}
 }
+
+/* ACTO VII — CIERRE: no compras un reloj */
+.acto7{position:relative;background:var(--negro)}
+.a7-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.a7-escena picture{position:absolute;inset:0;z-index:0}
+.a7-escena img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+/* velo: la foto no tiene una zona oscura propia bajo el texto (a diferencia
+   del resto de actos), así que se oscurece con un degradado en vez de
+   depender del contenido de la imagen */
+.a7-escena::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(105deg,rgba(5,5,5,.85) 0%,rgba(5,5,5,.55) 34%,rgba(5,5,5,.08) 62%,transparent 78%)}
+.a7-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
+.a7-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(36px,4.4vw,58px);line-height:1.15;margin-top:22px;max-width:14ch}
+.a7-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
+.a7-parrafo{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
+  font-size:clamp(16px,1.4vw,19px);line-height:1.65;max-width:32ch}
+.a7-parrafo strong{color:#fff;font-weight:800}
+.a7-boton{margin-top:32px;display:inline-flex;align-items:center;gap:14px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 27px;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;text-decoration:none;transition:background .25s,border-color .25s}
+.a7-boton:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
+.a7-boton .fl{transition:transform .25s;display:inline-block}
+.a7-boton:hover .fl{transform:translateX(5px)}
+
+@media(max-width:760px){
+  .a7-escena{align-items:flex-start;padding-top:15svh}
+  .a7-texto{padding:0 22px}
+  .a7-titular{font-size:clamp(24px,7vw,30px);margin-top:14px;max-width:11ch}
+  .a7-raya{margin:20px 0}
+  .a7-parrafo{font-size:15px;max-width:none}
+  .a7-boton{margin-top:22px;padding:13px 20px;font-size:10.5px}
+}
 </style>
 </head>
 <body>
@@ -703,6 +737,23 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       <p class="eyebrow">Más que un reloj.</p>
       <h2 class="a6-club-titular">Un club. Ventajas reales.<br>Atención prioritaria.</h2>
       <p class="a6-club-sub">Tu reloj viene con mucho más que la hora.<br>Viene con el respaldo de la comunidad laOra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTO VII — CIERRE: no compras un reloj -->
+<section class="acto7" id="acto7">
+  <div class="a7-escena">
+    <picture>
+      <source media="(max-width:760px)" srcset="/assets/img/acto7-movil.jpg">
+      <img src="/assets/img/acto7-web.jpg" alt="Reloj laOra en la muñeca de un hombre, sobre un escritorio de madera con una cámara vintage, café y un cuaderno de bocetos" loading="lazy">
+    </picture>
+    <div class="a7-texto">
+      <p class="eyebrow">No compras un reloj.</p>
+      <h2 class="a7-titular">Compras una forma<br>de entender las cosas.</h2>
+      <span class="a7-raya"></span>
+      <p class="a7-parrafo">Hay quien paga por un nombre.<br>Hay quien paga por la calidad.<br><strong>Y hay quien sabe distinguir la diferencia.</strong></p>
+      <a class="a7-boton" href="/index.html#coleccion">Descubre la colección <span class="fl">→</span></a>
     </div>
   </div>
 </section>
