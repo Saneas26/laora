@@ -504,3 +504,111 @@ footer .copy{font-size:12px;color:#9aa1ab;margin-top:30px}
   .stage .sheen{animation:none;opacity:0}
   .stage.flota{animation:none}
 }
+
+/* ============================================================
+   RESERVA · botón por acabado, checkout y páginas legales
+   ============================================================ */
+
+/* --- botón dentro de cada columna de la tabla de acabados --- */
+.ta-cta{padding:0 20px 24px;margin-top:auto}
+.btn-reserva{display:block;width:100%;text-align:center;text-decoration:none;
+  background:var(--carbon);color:#fff;font-weight:800;font-size:15.5px;
+  padding:15px 18px;border-radius:999px;transition:transform .18s ease,background .18s ease}
+.btn-reserva:hover{transform:translateY(-2px);background:#000}
+.btn-reserva-aviso{background:transparent;color:var(--tinta);border:1.5px solid var(--linea)}
+.btn-reserva-aviso:hover{background:var(--gris);transform:none}
+.ta-col.eclipse .btn-reserva{background:var(--ambar);color:var(--carbon)}
+.ta-col.eclipse .btn-reserva-aviso{background:transparent;color:#d7d7d7;border-color:#2c2c2c}
+.ta-cta-nota{font-size:12.5px;line-height:1.5;color:var(--tinta-mute);margin-top:10px;text-align:center}
+.ta-col.eclipse .ta-cta-nota{color:#9a9a9a}
+
+/* --- checkout --- */
+.rsv-main{padding:120px 0 90px}
+.rsv-volver{display:inline-block;font-size:14px;font-weight:800;color:var(--dorado);
+  text-decoration:none;margin-bottom:30px}
+.rsv-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start}
+.rsv-eyebrow{display:block;font-size:12px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dorado);margin-bottom:12px}
+.rsv-resumen{position:sticky;top:100px;background:var(--gris);border-radius:var(--radio);padding:32px}
+.rsv-resumen h1{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-1.2px;line-height:1.1}
+.rsv-acabado{font-size:16px;color:var(--tinta-suave);margin-top:8px}
+.rsv-cuentas{display:grid;grid-template-columns:1fr auto;gap:0;margin:26px 0 20px}
+.rsv-cuentas dt{font-size:15px;color:var(--tinta-suave);padding:10px 0;border-top:1px solid var(--linea)}
+.rsv-cuentas dd{font-size:15px;font-weight:700;text-align:right;padding:10px 0;
+  border-top:1px solid var(--linea);margin:0}
+.rsv-cuentas .rsv-menor{font-size:13px;color:var(--tinta-mute);font-weight:500;padding:5px 0;border-top:none}
+.rsv-cuentas .rsv-total{font-size:20px;font-weight:800;color:var(--tinta);padding-top:14px}
+.rsv-entrega{font-size:14.5px;background:#fff;border-radius:14px;padding:13px 16px;color:var(--tinta-suave)}
+.rsv-desist{font-size:13.5px;line-height:1.6;color:var(--tinta-mute);margin-top:14px}
+
+.rsv-form h2{font-size:17px;font-weight:800;letter-spacing:-.3px;margin:30px 0 14px}
+.rsv-form h2:first-child{margin-top:0}
+.rsv-form label{display:block;font-size:13px;font-weight:700;color:var(--tinta-suave);margin-bottom:14px}
+.rsv-form input[type=text],.rsv-form input:not([type]),.rsv-form input[type=email],.rsv-form input[type=tel]{
+  display:block;width:100%;margin-top:6px;padding:13px 15px;font:inherit;font-weight:500;
+  border:1.5px solid var(--linea);border-radius:13px;background:#fff;color:var(--tinta)}
+.rsv-form input:focus{outline:none;border-color:var(--dorado)}
+.rsv-fila{display:grid;grid-template-columns:1fr 1.6fr;gap:12px}
+
+.rsv-pagos{display:grid;gap:10px;margin-bottom:22px}
+.rsv-pago{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--linea);
+  border-radius:16px;padding:15px 17px;cursor:pointer;margin:0;font-weight:500}
+.rsv-pago:has(input:checked){border-color:var(--carbon);background:var(--gris)}
+.rsv-pago input{margin-top:3px;accent-color:var(--carbon);flex:0 0 auto}
+.rsv-pago b{display:block;font-size:15px;color:var(--tinta)}
+.rsv-pago small{display:block;font-size:13px;color:var(--tinta-mute);line-height:1.5;margin-top:3px}
+
+.rsv-check{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;font-weight:500;
+  color:var(--tinta-suave);line-height:1.55;margin-bottom:12px}
+.rsv-check input{margin-top:2px;accent-color:var(--carbon);flex:0 0 auto;width:17px;height:17px}
+.rsv-check a{color:var(--dorado);font-weight:700}
+.rsv-enviar{width:100%;margin-top:16px;border:none;cursor:pointer;font:inherit;font-weight:800}
+.rsv-enviar[disabled]{opacity:.55;cursor:progress}
+.rsv-error{margin-top:14px;font-size:14px;font-weight:700;color:#b3261e;
+  background:#fdeceb;border-radius:12px;padding:12px 15px}
+.rsv-aviso{max-width:620px;margin:0 auto;text-align:center;padding:40px 0}
+.rsv-aviso h1{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-1.2px;margin-bottom:14px}
+.rsv-aviso p{color:var(--tinta-suave);margin-bottom:26px}
+
+/* --- reserva recibida --- */
+.rsv-gracias{max-width:660px;margin:0 auto}
+.rsv-gracias h1{font-size:clamp(28px,4.4vw,42px);font-weight:800;letter-spacing:-1.4px;line-height:1.1}
+.rsv-lead{font-size:18px;color:var(--tinta-suave);margin:16px 0 20px;line-height:1.6}
+.rsv-gracias p{margin-bottom:14px;color:var(--tinta-suave)}
+.rsv-codigo{font-size:14px;color:var(--tinta-mute)}
+.rsv-datos{background:var(--gris);border-radius:var(--radio);padding:26px 28px;margin:24px 0}
+.rsv-datos h2{font-size:18px;font-weight:800;margin-bottom:16px}
+.rsv-dato{display:flex;justify-content:space-between;gap:16px;padding:9px 0;
+  border-top:1px solid var(--linea);font-size:15px;margin:0}
+.rsv-dato span{color:var(--tinta-mute)}
+.rsv-dato b{text-align:right;word-break:break-all}
+.rsv-ojo{font-size:13.5px;color:var(--tinta-mute);margin-top:14px}
+.rsv-gracias .btn{margin-top:14px}
+
+/* --- páginas legales --- */
+.legal-main{padding:120px 0 90px}
+.legal{max-width:760px}
+.legal h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-1.6px;margin-bottom:8px}
+.legal-fecha{font-size:13px;color:var(--tinta-mute);margin-bottom:28px}
+.legal-intro{font-size:17.5px;line-height:1.65;color:var(--tinta-suave);
+  border-left:3px solid var(--ambar);padding-left:18px;margin-bottom:16px}
+.legal h2{font-size:20px;font-weight:800;letter-spacing:-.5px;margin:34px 0 12px}
+.legal p,.legal li{font-size:15.5px;line-height:1.7;color:var(--tinta-suave)}
+.legal ul{padding-left:22px;margin:10px 0}
+.legal li{margin-bottom:7px}
+.legal-nota{font-size:14px;background:var(--gris);border-radius:14px;padding:15px 18px;margin-top:14px}
+.legal-aviso{background:var(--gris);border-radius:var(--radio);padding:20px 24px;
+  font-size:14.5px;color:var(--tinta-suave);margin-top:40px}
+.legal a{color:var(--dorado);font-weight:700}
+.pendiente{background:#fdf0c9;border-bottom:2px dotted var(--dorado);
+  font-weight:800;color:#7a5c00;padding:1px 5px;border-radius:4px}
+
+@media(max-width:900px){
+  .rsv-grid{grid-template-columns:1fr;gap:34px}
+  .rsv-resumen{position:static}
+}
+@media(max-width:560px){
+  .rsv-main,.legal-main{padding:96px 0 70px}
+  .rsv-resumen{padding:24px 20px}
+  .rsv-fila{grid-template-columns:1fr}
+}
