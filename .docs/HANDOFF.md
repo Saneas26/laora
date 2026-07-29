@@ -110,25 +110,33 @@ los exige a propósito, ver `.docs/SUPABASE_PASOS.md`):
 - **Falta la API key de Mollie** (`LAORA_MOLLIE_API_KEY`, secreto en la
   Edge Function) — la pone Óscar, es una credencial.
 
-**Urgente, esto sí es un cabo suelto real ahora que se fusionó a `main`**:
-- El secreto `LAORA_WEB_URL` de las Edge Functions de Supabase todavía
-  apunta a `https://claude-reservas.laora.pages.dev` (la preview de la rama
-  vieja). Con `main` ya fusionado, los enlaces que generen los correos de
-  confirmación de reserva van a esa preview, no a `laora.es`. **Hay que
-  cambiarlo en Supabase → Edge Functions → Secrets a `https://laora.es`.**
-  Necesito sesión de Supabase para esto.
+**~~Urgente: `LAORA_WEB_URL`~~ — RESUELTO (29/07/2026)**
+Cambiado en Supabase a `https://laora.es` y verificado: la Edge Function
+`laora-crear-reserva` lee ya `precios.js` de producción (devuelve 409
+«no está a la venta», que es lo correcto con los 36 precios en null).
 
-**Anclas muertas** (no rompen nada, simplemente no desplazan a ningún
-sitio — quedaron así al quitar secciones de la home a petición de Óscar):
-- `/?modelo=X#interesados` — usado por los botones "Avísame del estreno"
-  de los 36 acabados sin precio, y por varios `href` sueltos.
-- `/#coleccion`, `/#porque`, `/#madrid` — en los `nav` de `materiales.html`,
-  `manifiesto.html` y las 9 fichas de reloj.
-- Los CTA "Descubre/Ver la colección" del Acto I, IV y VII de la home
-  (`/index.html#coleccion`).
+**BLOQUEANTE DE NEGOCIO: la web no tiene salida** (comprobado contra
+producción el 29/07/2026; el apartado anterior lo llamaba «anclas muertas
+que no rompen nada» y se queda muy corto):
 
-Pendiente de decisión de Óscar: si esto se resuelve trayendo de vuelta una
-página de colección, o rehaciendo esos enlaces a otro destino.
+1. **Las 9 fichas de reloj son inalcanzables.** Ni la home, ni
+   `materiales.html`, ni `manifiesto.html` enlazan a `/relojes/*`. Cero
+   enlaces. Solo se llega escribiendo la URL a mano.
+2. **Todos los CTA de las fichas están rotos.** Los 36 botones «Avísame del
+   estreno» van a `/?modelo=X#interesados`, y ese ancla ya no existe.
+   Los `nav` apuntan a `/#coleccion`, `/#porque`, `/#madrid`: tampoco
+   existe ninguno. En la home, los CTA de los Actos I, IV y VII van a
+   `/index.html#coleccion`.
+3. **No queda NINGUNA vía de contacto en toda la web.** Cero formularios,
+   cero enlaces de WhatsApp, cero `mailto:` — comprobado en home,
+   materiales, manifiesto, privacidad, condiciones y fichas.
+
+Resultado: hoy un visitante de laora.es no puede ver un reloj, ni comprar,
+ni preguntar. Los precios, Mollie y el IBAN son irrelevantes mientras no
+haya un camino que lleve a la reserva.
+
+Pendiente de decisión de Óscar: recuperar una página/sección de colección,
+o rehacer esos enlaces a otro destino, y decidir qué vía de contacto vuelve.
 
 **Pendiente, mencionado por Óscar pero no entregado todavía**:
 - Vídeo real para el overlay del Acto V (`/assets/video/acto5-taller.mp4`
