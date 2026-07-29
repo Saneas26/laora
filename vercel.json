@@ -1,8 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/docs/:ruta*", "destination": "/" },
-    { "source": "/tools/:ruta*", "destination": "/" }
+  "redirects": [
+    { "source": "/docs", "destination": "/", "permanent": false },
+    { "source": "/docs/:ruta*", "destination": "/", "permanent": false },
+    { "source": "/tools", "destination": "/", "permanent": false },
+    { "source": "/tools/:ruta*", "destination": "/", "permanent": false }
   ]
 }
