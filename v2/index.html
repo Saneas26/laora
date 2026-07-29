@@ -216,6 +216,8 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
    flujo normal centrado con flex, sin suelos fijos ni posicionamiento
    absoluto — la sección nunca queda más alta de lo necesario */
 .a3-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.a3-escena picture{position:absolute;inset:0;z-index:0}
+.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:64% center}
 .a3-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
 .a3-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
   font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:18ch}
@@ -234,10 +236,14 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   text-shadow:0 2px 10px rgba(0,0,0,.7)}
 
 @media(max-width:1180px){
+  .a3-escena{flex-direction:column;align-items:stretch;padding:90px 0 60px;min-height:auto}
+  .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
+  .a3-escena img{width:100%;height:auto;object-fit:initial}
+  .a3-texto{order:1;max-width:none}
   .a3-specs{grid-template-columns:repeat(3,1fr);row-gap:34px}
 }
 @media(max-width:760px){
-  .a3-escena{align-items:flex-start;padding-top:15svh}
+  .a3-escena{padding:110px 0 0}
   .a3-texto{padding:0 22px}
   .a3-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
   .a3-raya{margin:20px 0}
@@ -392,6 +398,10 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 <!-- ACTO III — APARECE laOra -->
 <section class="acto3" id="acto3">
   <div class="a3-escena">
+    <picture>
+      <source media="(max-width:1180px)" srcset="/assets/img/acto3-movil.jpg">
+      <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Cero Cero sobre roca mojada, con una silueta al fondo evocando una escena de espía" loading="lazy">
+    </picture>
     <div class="a3-texto">
       <div class="tarjeta">
        <p class="eyebrow">Así que hicimos lo contrario.</p>
