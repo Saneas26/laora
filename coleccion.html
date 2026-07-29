@@ -70,18 +70,27 @@ a{color:inherit;text-decoration:none}
 .pilar p{font-size:14.5px;color:#4a4a4a;margin-top:10px;line-height:1.6}
 
 /* ---------- 3. elige tu laOra ---------- */
-.elige{padding:100px 4vw 96px;text-align:center;
-  background:radial-gradient(120% 80% at 50% 0%,#111 0%,var(--negro) 62%)}
+.elige{padding:100px 4vw 96px;text-align:center;background:#080808}
 .elige h2{font-size:clamp(28px,3.6vw,44px);margin-top:14px;color:#fff}
 .fila{display:grid;grid-template-columns:repeat(9,1fr);gap:14px;margin:58px auto 0;
   max-width:1500px;align-items:end}
 .uno{display:block;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.uno-nombre,.uno-ref,.uno-precio{transition:color .3s ease}
 .uno:hover{transform:translateY(-8px)}
 .uno:focus-visible{outline:2px solid var(--ambar);outline-offset:6px}
-.uno-foto{aspect-ratio:3/4;overflow:hidden;border-radius:10px;background:#0d0d0d}
-.uno-foto img{width:100%;height:100%;object-fit:cover}
-.uno-nombre{font-family:'Source Serif 4',Georgia,serif;font-size:17px;color:var(--ambar);
-  margin-top:16px;line-height:1.2}
+.uno-foto{aspect-ratio:3/4;overflow:hidden;background:transparent}
+/* Los renders traen su propio fondo casi negro, que no es exactamente el de
+   la sección y dibuja un rectángulo. La máscara funde los bordes para que el
+   reloj quede recortado sobre el negro, como en el boceto. */
+.uno-foto img{-webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 55%,transparent 100%);
+  mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 55%,transparent 100%)}
+.uno-foto img{width:100%;height:100%;object-fit:contain;
+  opacity:.72;filter:saturate(.9);
+  transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.3,1),filter .35s ease}
+.uno:hover .uno-foto img{opacity:1;filter:saturate(1);transform:scale(1.05)}
+.uno-nombre{font-family:'Source Serif 4',Georgia,serif;font-size:17px;color:var(--oro);
+  margin-top:14px;line-height:1.2}
+.uno:hover .uno-nombre{color:var(--ambar)}
 .uno-ref{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;
   color:var(--gris);margin-top:5px;display:block}
 .uno-precio{font-size:12.5px;color:#8f8a82;margin-top:6px}
@@ -188,55 +197,55 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
     <h2 class="c-serif">elige tu laOra</h2>
     <div class="fila">
         <a class="uno c-reveal" href="/relojes/lo-01-lunar.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-01.jpg" alt="Lunar de laOra, cronógrafo" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-01.jpg" alt="Lunar de laOra, cronógrafo" loading="lazy"></div>
           <span class="uno-nombre">lunar</span>
           <span class="uno-ref">LO-01</span>
           <span class="uno-precio">desde 190 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-02-hora-cero.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-02.jpg" alt="Hora Cero de laOra, buceador · 300 m" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-02.jpg" alt="Hora Cero de laOra, buceador · 300 m" loading="lazy"></div>
           <span class="uno-nombre">hora cero</span>
           <span class="uno-ref">LO-02</span>
           <span class="uno-precio">desde 190 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-03-bauhaus.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-03.jpg" alt="Bauhaus de laOra, reloj de vestir" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-03.jpg" alt="Bauhaus de laOra, reloj de vestir" loading="lazy"></div>
           <span class="uno-nombre">bauhaus</span>
           <span class="uno-ref">LO-03</span>
           <span class="uno-precio">desde 170 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-04-precisa.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-04.jpg" alt="Precisa de laOra, deportivo integrado" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-04.jpg" alt="Precisa de laOra, deportivo integrado" loading="lazy"></div>
           <span class="uno-nombre">precisa</span>
           <span class="uno-ref">LO-04</span>
           <span class="uno-precio">desde 190 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-05-trinchera.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-05.jpg" alt="Trinchera de laOra, militar de campo" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-05.jpg" alt="Trinchera de laOra, militar de campo" loading="lazy"></div>
           <span class="uno-nombre">trinchera</span>
           <span class="uno-ref">LO-05</span>
           <span class="uno-precio">desde 150 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-06-ocho-lados.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-06.jpg" alt="Ocho Lados de laOra, lujo deportivo de acero" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-06.jpg" alt="Ocho Lados de laOra, lujo deportivo de acero" loading="lazy"></div>
           <span class="uno-nombre">ocho lados</span>
           <span class="uno-ref">LO-06</span>
           <span class="uno-precio">desde 250 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-07-bitacora.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-07.jpg" alt="Bitácora de laOra, lujo deportivo de acero" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-07.jpg" alt="Bitácora de laOra, lujo deportivo de acero" loading="lazy"></div>
           <span class="uno-nombre">bitácora</span>
           <span class="uno-ref">LO-07</span>
           <span class="uno-precio">desde 250 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-08-tortuga.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-08.jpg" alt="Tortuga de laOra, buceador · 200 m" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-08.jpg" alt="Tortuga de laOra, buceador · 200 m" loading="lazy"></div>
           <span class="uno-nombre">tortuga</span>
           <span class="uno-ref">LO-08</span>
           <span class="uno-precio">desde 180 €</span>
         </a>
         <a class="uno c-reveal" href="/relojes/lo-09-coctel.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/lo-09.jpg" alt="Cóctel de laOra, reloj de vestir" loading="lazy"></div>
+          <div class="uno-foto"><img src="/assets/img/relojes/col-09.jpg" alt="Cóctel de laOra, reloj de vestir" loading="lazy"></div>
           <span class="uno-nombre">cóctel</span>
           <span class="uno-ref">LO-09</span>
           <span class="uno-precio">desde 180 €</span>
