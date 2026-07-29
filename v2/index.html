@@ -362,6 +362,75 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a5-pasos{grid-template-columns:repeat(2,1fr);row-gap:28px;padding:0 22px}
   .a5-cierre{padding:28px 22px 70px;font-size:13px}
 }
+
+/* ACTO VI — EMBALAJE Y CLUB laOra */
+.acto6{position:relative;background:var(--negro)}
+.a6-escena{position:relative;padding:110px 44px 0}
+.a6-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;align-items:flex-start;gap:80px}
+.a6-texto{flex:0 0 auto;max-width:420px}
+.a6-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,4vw,54px);line-height:1.14;margin-top:22px}
+.a6-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
+.a6-parrafo{font-family:'Nunito Sans',sans-serif;font-weight:400;color:#cfcbc3;
+  font-size:16px;line-height:1.6;max-width:34ch}
+.a6-parrafo.fuerte{font-weight:700;color:#fff}
+.a6-parrafo+.a6-parrafo{margin-top:16px}
+.a6-nota{margin-top:28px;border:1px solid rgba(245,211,77,.35);border-radius:10px;
+  padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+.a6-nota .ico{width:22px;height:22px;color:var(--ambar);flex:none;margin-top:2px}
+.a6-nota .ico svg{width:100%;height:100%}
+.a6-nota p{font-family:'Nunito Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#e9e6df}
+.a6-nota .destaca{display:block;margin-top:6px;color:var(--ambar);font-weight:700}
+.a6-boton{margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
+.a6-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a6-boton .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;font-size:13px}
+.a6-boton .fl{transition:transform .25s;display:inline-block}
+.a6-boton:hover .fl{transform:translateX(5px)}
+.a6-foto{flex:1;min-width:0}
+.a6-foto img{width:100%;height:auto;display:block;border-radius:20px;
+  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75)}
+
+.a6-ventajas{max-width:1500px;margin:70px auto 0;width:100%;padding:44px 44px 0;
+  border-top:1px solid rgba(255,255,255,.1);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.ventaja{min-width:0}
+.ventaja .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px}
+.ventaja .ico svg{width:100%;height:100%}
+.ventaja b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+  font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.ventaja p{font-size:13px;line-height:1.5;color:#c7c4bd;margin:0}
+
+.a6-club{max-width:1500px;margin:0 auto;width:100%;padding:90px 44px 110px;
+  display:flex;align-items:center;gap:80px}
+.a6-club-foto{flex:0 0 auto;width:260px}
+.a6-club-foto img{width:100%;height:auto;display:block}
+.a6-club-texto{flex:1;min-width:0;max-width:560px}
+.a6-club-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin-top:16px}
+.a6-club-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
+  font-size:16px;line-height:1.6;margin-top:20px;max-width:40ch}
+
+@media(max-width:1180px){
+  .a6-inner{flex-direction:column;align-items:flex-start;gap:44px}
+  .a6-texto{max-width:none}
+  .a6-foto{width:100%}
+  .a6-ventajas{grid-template-columns:repeat(2,1fr);row-gap:32px;margin-top:60px;padding-top:36px}
+  .a6-club{flex-direction:column;align-items:flex-start;gap:36px;padding:70px 44px 90px}
+  .a6-club-texto{max-width:none}
+}
+@media(max-width:760px){
+  .a6-escena{padding:110px 22px 0}
+  .a6-titular{font-size:clamp(28px,7.6vw,36px)}
+  .a6-parrafo{max-width:none}
+  .a6-boton{padding:13px 20px;font-size:10.5px}
+  .a6-ventajas{grid-template-columns:repeat(2,1fr);gap:24px 16px;padding:32px 22px 0;margin-top:50px}
+  .a6-club{padding:60px 22px 80px}
+  .a6-club-foto{width:200px}
+  .a6-club-sub{max-width:none}
+}
 </style>
 </head>
 <body>
@@ -580,6 +649,63 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
     </video>
   </div>
 </div>
+
+<!-- ACTO VI — EMBALAJE Y CLUB laOra -->
+<section class="acto6" id="acto6">
+  <div class="a6-escena">
+    <div class="a6-inner">
+      <div class="a6-texto">
+        <p class="eyebrow">No es una caja de lujo.<br>Es una decisión inteligente.</p>
+        <h2 class="a6-titular">Todo el valor<br>está aquí.</h2>
+        <span class="a6-raya"></span>
+        <p class="a6-parrafo">No invertimos cientos de euros en un embalaje que terminará en un armario.</p>
+        <p class="a6-parrafo fuerte">Preferimos invertir ese dinero en el reloj que llevarás durante años.</p>
+        <div class="a6-nota">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 4-7 8.8-7 12.5A6.5 6.5 0 0 0 12 22a6.5 6.5 0 0 0 7-6.5C19 11.8 16.4 7 12 3z"/><path d="M12 22V9"/></svg></span>
+          <p>Si esta caja costara 80&nbsp;€, el reloj costaría más.<span class="destaca">Preferimos que ocurra justo lo contrario.</span></p>
+        </div>
+        <button class="a6-boton" type="button">Descubre el Club <span class="laora">laOra</span> <span class="fl">→</span></button>
+      </div>
+      <div class="a6-foto">
+        <img src="/assets/img/acto6-cajas.jpg" alt="Caja de laOra abierta con el reloj dentro, junto a la caja cerrada y la tarjeta del Club laOra con código QR" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <div class="a6-ventajas">
+    <div class="ventaja">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+      <b>Compra segura</b>
+      <p>Pago protegido y seguimiento del pedido en todo momento.</p>
+    </div>
+    <div class="ventaja">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+      <b>Club laOra</b>
+      <p>Garantía, soporte técnico y seguimiento desde nuestra App.</p>
+    </div>
+    <div class="ventaja">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 4-7 8.8-7 12.5A6.5 6.5 0 0 0 12 22a6.5 6.5 0 0 0 7-6.5C19 11.8 16.4 7 12 3z"/><path d="M12 22V9"/></svg></span>
+      <b>Ecológicos</b>
+      <p>Materiales certificados FSC y embalaje 100% reciclable.</p>
+    </div>
+    <div class="ventaja">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v10H3z"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.8"/><circle cx="17.5" cy="19" r="1.8"/></svg></span>
+      <b>Somos puntuales</b>
+      <p>Producción y envío rápidos para que disfrutes antes de tu reloj.</p>
+    </div>
+  </div>
+
+  <div class="a6-club">
+    <div class="a6-club-foto">
+      <img src="/assets/img/acto6-app.jpg" alt="App laOra abierta en un iPhone, con accesos a Mi reloj, Garantía, Soporte técnico y Mis pedidos" loading="lazy">
+    </div>
+    <div class="a6-club-texto">
+      <p class="eyebrow">Más que un reloj.</p>
+      <h2 class="a6-club-titular">Un club. Ventajas reales.<br>Atención prioritaria.</h2>
+      <p class="a6-club-sub">Tu reloj viene con mucho más que la hora.<br>Viene con el respaldo de la comunidad laOra.</p>
+    </div>
+  </div>
+</section>
 
 <audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
 <script>
