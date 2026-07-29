@@ -110,6 +110,19 @@ grant insert on laora.interesados to anon;
 -- reserve un reloj de 700 € por un céntimo desde el navegador.
 revoke all on laora.reservas from anon, authenticated;
 
+-- OJO, esto se olvida y cuesta un rato encontrarlo: los grants que
+-- Supabase da por defecto a service_role son SOLO sobre `public`. En un
+-- esquema nuevo hay que dárselos a mano o las Edge Functions no pueden
+-- ni escribir (fallan con un 502 sin explicación).
+grant usage on schema activala, laora, acumula to service_role, postgres;
+grant all on all tables    in schema activala, laora, acumula to service_role, postgres;
+grant all on all sequences in schema activala, laora, acumula to service_role, postgres;
+grant all on all routines  in schema activala, laora, acumula to service_role, postgres;
+alter default privileges in schema activala, laora, acumula
+  grant all on tables to service_role, postgres;
+alter default privileges in schema activala, laora, acumula
+  grant all on sequences to service_role, postgres;
+
 -- ---------- 5. RLS en todo ----------
 alter table activala.interesados enable row level security;
 alter table laora.interesados    enable row level security;
@@ -126,7 +139,30 @@ create policy interesados_insert_anon
 -- laora.reservas: sin una sola política = denegado a todo el mundo
 -- salvo service_role. Es deliberado, no un olvido.
 
--- ---------- 6. Vista de trabajo ----------
+-- ---------- 6. Avisos por correo al mover una reserva ----------
+create extension if not exists pg_net;
+
+create or replace function laora.notificar_reserva()
+returns trigger language plpgsql security definer as $$
+begin
+  -- solo al crear y al cambiar de estado; no en cada updatecillo
+  if (tg_op = 'INSERT') or (tg_op = 'UPDATE' and new.estado is distinct from old.estado) then
+    perform net.http_post(
+      url  := 'https://uikanfvigunjhzibnhxf.supabase.co/functions/v1/laora-avisar-reserva',
+      body := jsonb_build_object('record', to_jsonb(new), 'evento', tg_op),
+      headers := '{"Content-Type":"application/json"}'::jsonb
+    );
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_notificar_reserva on laora.reservas;
+create trigger trg_notificar_reserva
+  after insert or update on laora.reservas
+  for each row execute function laora.notificar_reserva();
+
+-- ---------- 7. Vista de trabajo ----------
 create or replace view laora.reservas_pendientes as
   select codigo, creado_en, ref, acabado, nombre, telefono, email,
          senal, metodo, estado
@@ -136,7 +172,7 @@ create or replace view laora.reservas_pendientes as
 
 revoke all on laora.reservas_pendientes from anon, authenticated;
 
--- ---------- 7. Comprobación ----------
+-- ---------- 8. Comprobación ----------
 select table_schema, table_name
   from information_schema.tables
  where table_schema in ('public','activala','laora','acumula')

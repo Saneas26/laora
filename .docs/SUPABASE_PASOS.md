@@ -87,21 +87,27 @@ Al hablar con PostgREST hay que mandar **`Content-Profile: laora`** (o
 3. Developers → **API keys**: copia la `test_…` para probar y la `live_…` para
    cuando vaya en serio.
 
-## 3. Las tres Edge Functions
-Crear las tres con **«Enforce JWT verification» DESACTIVADO**:
+## 3. Las tres Edge Functions — YA DESPLEGADAS (29/07/2026)
+Van con prefijo `laora-` porque el proyecto es compartido, y las tres
+con **«Verify JWT» DESACTIVADO**:
 
 | Función | Fichero | Quién la llama |
 |---|---|---|
-| `crear-reserva` | `.supabase/crear-reserva.ts` | la web |
-| `mollie-webhook` | `.supabase/mollie-webhook.ts` | Mollie |
-| `avisar-reserva` | `.supabase/avisar-reserva.ts` | el trigger de la base |
+| `laora-crear-reserva` | `.supabase/crear-reserva.ts` | la web |
+| `laora-mollie-webhook` | `.supabase/mollie-webhook.ts` | Mollie |
+| `laora-avisar-reserva` | `.supabase/avisar-reserva.ts` | el trigger de la base |
+
+No tocar `avisar-interesado`: es de activala.
 
 Secretos (Edge Functions → Secrets):
-- `MOLLIE_API_KEY` = la clave de Mollie (empieza por `test_` o `live_`)
-- `WEB_URL` = `https://laora.es`
-- `RESEND_API_KEY` e `INTERESADOS_EMAIL` ya los tienes del formulario
+- `LAORA_WEB_URL` — puesto. **Ahora apunta a la preview de la rama**
+  (`https://claude-reservas.laora.pages.dev`) para poder probar. **Al
+  fusionar hay que cambiarlo a `https://laora.es`.**
+- `RESEND_API_KEY` e `INTERESADOS_EMAIL` — ya existían, compartidos con activala.
+- **`LAORA_MOLLIE_API_KEY` — FALTA.** La pone Óscar: es una credencial.
 
-`SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` los pone Supabase solo.
+Ojo con la clave de servicio: `SUPABASE_SERVICE_ROLE_KEY` está marcada
+DEPRECATED y la sustituye `SUPABASE_SECRET_KEYS`. El código acepta las dos.
 
 ## 4. Enchufar la web
 En `assets/js/laora.js`, arriba: `LAORA_SUPABASE_URL` y `LAORA_SUPABASE_KEY`
