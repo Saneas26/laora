@@ -69,7 +69,7 @@ Numeración final LO-01 a LO-09, sin huecos. En la rejilla y en la UI **los mode
 | Ref | Nombre | Categoría | Homenaje (solo en «La historia») | Esfera / color | Movimientos | Acabados | Desde | Riesgo legal |
 |---|---|---|---|---|---|---|---|---|
 | LO-01 | «Lunar» | Cronógrafo | Omega Speedmaster Moonwatch | Negra, 3 subesferas | VK63 mecacuarzo · ST1901 cuerda manual | 4 | 190 € | Medio |
-| LO-02 | «Hora Cero» | Buceador 300 m | Omega Seamaster Diver 300M (Bond) | Negra, acentos naranja, malla, sin fecha | VH31 mecacuarzo · NH35 automático | 4 | 190 € | Medio |
+| LO-02 | «Cero Cero» | Buceador 300 m | Omega Seamaster Diver 300M (Bond) | Negra, acentos naranja, malla, sin fecha | VH31 mecacuarzo · NH35 automático | 4 | 190 € | Medio |
 | LO-03 | «Bauhaus» | Vestir | Nomos Tangente | Blanca, agujas azules, segundero pequeño; correa arena | Ronda cuarzo subsegundos · Seagull ST17 cuerda manual | 3 | 170 € | Bajo |
 | LO-04 | «Precisa» | Deportivo integrado | Tissot PRX | Azul marino, relieve de cuadraditos | Ronda cuarzo · NH35 · PT5000/Miyota 9015 | 3 | 190 € | Bajo |
 | LO-05 | «Trinchera» | Militar de campo | Hamilton Khaki Field | Negra militar, cordura verde | Cuarzo · NH35 | 3 | 150 € | Bajo |

@@ -37,7 +37,7 @@ var LAORA_PRECIOS = {
     }
   },
   'LO-02': {
-    nombre: 'Hora Cero',
+    nombre: 'Cero Cero',
     acabados: {
       Alba:    { precio: null, horquilla: 'Desde 190 €' },
       Levante: { precio: null, horquilla: '280–380 €' },
