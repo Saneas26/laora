@@ -148,6 +148,7 @@ Deno.serve(async (req) => {
         apikey: SERVICE,
         Authorization: `Bearer ${SERVICE}`,
         'Content-Type': 'application/json',
+        'Content-Profile': 'laora',   // laOra vive en su propio esquema
         Prefer: 'return=representation',
       },
       body: JSON.stringify(reserva),
@@ -192,7 +193,10 @@ Deno.serve(async (req) => {
 
     await fetch(`${SB}/rest/v1/reservas?id=eq.${fila.id}`, {
       method: 'PATCH',
-      headers: { apikey: SERVICE, Authorization: `Bearer ${SERVICE}`, 'Content-Type': 'application/json' },
+      headers: {
+        apikey: SERVICE, Authorization: `Bearer ${SERVICE}`,
+        'Content-Type': 'application/json', 'Content-Profile': 'laora',
+      },
       body: JSON.stringify({ mollie_id: p.id }),
     });
 
