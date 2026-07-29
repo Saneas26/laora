@@ -7,8 +7,8 @@
 
 /* Rellenar al crear el proyecto Supabase de laOra (SUPABASE_PASOS.md).
    Mientras estén vacíos, el formulario deriva a WhatsApp. */
-var LAORA_SUPABASE_URL = '';
-var LAORA_SUPABASE_KEY = '';
+var LAORA_SUPABASE_URL = 'https://uikanfvigunjhzibnhxf.supabase.co';
+var LAORA_SUPABASE_KEY = 'sb_publishable_1eLOM22REKcIJyHe36W_4Q_1Z3eyRam';
 var LAORA_WHATSAPP = '34689806987';
 
 /* Borde de la barra al hacer scroll */
@@ -105,11 +105,47 @@ var LAORA_WHATSAPP = '34689806987';
         apikey: LAORA_SUPABASE_KEY,
         Authorization: 'Bearer ' + LAORA_SUPABASE_KEY,
         'Content-Type': 'application/json',
+        'Content-Profile': 'laora',
         Prefer: 'return=minimal'
       },
       body: JSON.stringify(datos)
     }).then(function (r) {
       if (r.status === 201) hecho(); else porWhatsApp();
     }).catch(porWhatsApp);
+  });
+})();
+
+/* ============================================================
+   Botón de reserva en cada acabado de la ficha de producto.
+   El precio NUNCA se escribe en el HTML: sale de precios.js.
+   Un acabado sin precio cerrado (o sin fecha de entrega) no
+   puede cobrar: enseña el aviso de estreno de siempre.
+   ============================================================ */
+(function () {
+  var huecos = document.querySelectorAll('.ta-cta');
+  if (!huecos.length || typeof LAORA_PRECIOS === 'undefined') return;
+
+  Array.prototype.forEach.call(huecos, function (hueco) {
+    var ref = hueco.getAttribute('data-ref');
+    var nombre = hueco.getAttribute('data-acabado');
+    var a = laoraAcabado(ref, nombre);
+    if (!a) return;
+
+    if (!laoraSePuedeReservar(ref, nombre)) {
+      hueco.innerHTML =
+        '<a class="btn-reserva btn-reserva-aviso" href="/?modelo=' + ref + '#interesados">' +
+        'Avísame del estreno</a>' +
+        '<p class="ta-cta-nota">Aún no está a la venta.</p>';
+      return;
+    }
+
+    var senal = laoraSenal(a.precio);
+    hueco.innerHTML =
+      '<a class="btn-reserva" href="/reservar.html?ref=' + encodeURIComponent(ref) +
+      '&acabado=' + encodeURIComponent(nombre) + '">' +
+      'Reservar por ' + laoraEuros(senal) + '</a>' +
+      '<p class="ta-cta-nota">Señal del ' + LAORA_SENAL_PORCENTAJE + ' %. ' +
+      'Los ' + laoraEuros(a.precio - senal) + ' restantes, al enviarte el reloj. ' +
+      'Se devuelve entera si cambias de idea en 14 días.</p>';
   });
 })();
