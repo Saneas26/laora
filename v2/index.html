@@ -317,8 +317,27 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a5-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
 .a5-boton svg{width:13px;height:13px;flex:none}
 .a5-video{flex:1;min-width:0;border-radius:20px;overflow:hidden;
-  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75)}
+  background:none;border:0;padding:0;display:block;cursor:pointer;
+  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75);
+  transition:box-shadow .25s}
+.a5-video:hover,.a5-video:focus-visible{box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 2px rgba(245,211,77,.55)}
 .a5-video img{width:100%;height:auto;display:block}
+
+/* modal de vídeo: se superpone temporalmente, se cierra solo al terminar */
+.a5-modal{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  padding:5vh 5vw;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.a5-modal.visible{opacity:1;pointer-events:auto}
+.a5-modal-fondo{position:absolute;inset:0;background:rgba(3,3,4,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.a5-modal-caja{position:relative;z-index:1;width:100%;max-width:1040px;aspect-ratio:16/9;
+  background:#000;border-radius:14px;overflow:hidden;
+  box-shadow:0 60px 140px -30px rgba(0,0,0,.9);
+  transform:scale(.96);transition:transform .3s ease}
+.a5-modal.visible .a5-modal-caja{transform:none}
+.a5-modal-video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+.a5-modal-cerrar{position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;
+  display:grid;place-items:center;background:rgba(5,5,5,.6);border:1px solid rgba(255,255,255,.25);
+  border-radius:50%;color:#fff;font-size:15px;cursor:pointer;transition:background .2s,border-color .2s}
+.a5-modal-cerrar:hover{background:rgba(5,5,5,.85);border-color:var(--ambar);color:var(--ambar)}
 .a5-pasos{max-width:1500px;margin:0 auto;width:100%;padding:0 44px;
   display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
 .paso .num{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;
@@ -529,18 +548,18 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
     <div class="a5-inner">
       <div class="a5-texto">
         <p class="eyebrow">Antes de llegar a tu muñeca</p>
-        <h2 class="a5-titular">Cada laOra<br>se ajusta,<br>se revisa<br>y se prepara<br>uno a uno.</h2>
+        <h2 class="a5-titular">Cada reloj de laOra<br>se ajusta,<br>se revisa<br>y se prepara<br>uno a uno en Madrid.</h2>
         <span class="a5-raya"></span>
         <p class="a5-parrafo">No enviamos relojes directamente desde una fábrica.</p>
         <p class="a5-parrafo">Antes de salir, cada unidad pasa por un proceso de revisión, ajuste y control para asegurarnos de que llega exactamente como debería.</p>
-        <button class="a5-boton" type="button">
+        <button class="a5-boton" type="button" data-abre-video>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           Ver cómo preparamos tu reloj
         </button>
       </div>
-      <div class="a5-video">
+      <button class="a5-video" type="button" data-abre-video aria-haspopup="dialog" aria-label="Reproducir vídeo: cómo preparamos tu reloj">
         <img src="/assets/img/acto5-taller.jpg" alt="Relojero laOra inspeccionando un cronógrafo con una lupa antes de enviarlo" loading="lazy">
-      </div>
+      </button>
     </div>
   </div>
   <div class="a5-pasos">
@@ -551,6 +570,16 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   </div>
   <p class="a5-cierre">Cada reloj se ajusta y verifica en España antes de enviarse.</p>
 </section>
+
+<div class="a5-modal" id="a5Modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vídeo: cómo preparamos tu reloj">
+  <div class="a5-modal-fondo" data-cierra-video></div>
+  <div class="a5-modal-caja">
+    <button class="a5-modal-cerrar" type="button" data-cierra-video aria-label="Cerrar vídeo">✕</button>
+    <video class="a5-modal-video" id="a5Video" playsinline preload="none" poster="/assets/img/acto5-taller.jpg">
+      <source src="/assets/video/acto5-taller.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
 
 <audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
 <script>
@@ -599,6 +628,38 @@ document.querySelector('.cta').addEventListener('click', function (e) {
     btn.querySelector('.txt').innerHTML = abierta
       ? 'Ocultar'
       : 'Por qué nace <span class="laora">laOra</span>';
+  });
+})();
+
+// Acto V: el vídeo del taller se abre en un overlay al pulsar la foto o el
+// botón, y se cierra solo al terminar la reproducción
+(function () {
+  var modal = document.getElementById('a5Modal');
+  if (!modal) return;
+  var video = document.getElementById('a5Video');
+  var abridores = document.querySelectorAll('[data-abre-video]');
+  var cerradores = modal.querySelectorAll('[data-cierra-video]');
+
+  function abrir() {
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    video.currentTime = 0;
+    video.play().catch(function () {});
+  }
+  function cerrar() {
+    modal.classList.remove('visible');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    video.pause();
+    video.currentTime = 0;
+  }
+
+  abridores.forEach(function (el) { el.addEventListener('click', abrir); });
+  cerradores.forEach(function (el) { el.addEventListener('click', cerrar); });
+  video.addEventListener('ended', cerrar);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('visible')) cerrar();
   });
 })();
 </script>
