@@ -53,6 +53,7 @@ Deno.serve(async (req) => {
         apikey: SERVICE,
         Authorization: `Bearer ${SERVICE}`,
         'Content-Type': 'application/json',
+        'Content-Profile': 'laora',
         Prefer: 'return=minimal',
       },
       body: JSON.stringify(cambios),

@@ -64,11 +64,22 @@ Sin estas tres cosas la web no cobra, y es a propósito — el propio código lo
 También hay que poner el Bizum y el IBAN en `LAORA_COBRO`, arriba de
 `assets/js/gracias.js`, o el cliente no sabe dónde pagar.
 
-## 1. Tabla de reservas
-SQL Editor → pegar `.supabase/reservas.sql` entero, sustituyendo `<PROYECTO>`
-por la referencia del proyecto. Ojo: a diferencia de `interesados`, aquí anon
-**no puede insertar**. Solo la Edge Function con la service_role. Es lo que
-impide que alguien reserve un reloj de 700 € por un céntimo.
+## 1. Estructura — YA HECHA (29/07/2026)
+Dos proyectos y no más:
+- **`saneas-app`** — aislado, solo Saneas.
+- **`activala`** (ref `uikanfvigunjhzibnhxf`) — compartido por el resto.
+
+Comparten instancia pero **no tablas**: cada marca en su esquema
+(`activala`, `laora`, `acumula`). `public` se queda vacío a propósito.
+El guion está en `.supabase/estructura-grupo.sql` y es reejecutable.
+
+Comprobado el 29/07/2026 contra la API real:
+- alta en `laora.interesados` → 201
+- leer `laora.interesados` o `activala.interesados` → `[]` (RLS corta las filas)
+- insertar en `laora.reservas` desde el navegador → `42501 permission denied`
+
+Al hablar con PostgREST hay que mandar **`Content-Profile: laora`** (o
+`Accept-Profile` al leer) o busca en `public`, que está vacío.
 
 ## 2. Cuenta de Mollie
 1. Alta en mollie.com y verificación de la cuenta (piden datos fiscales).

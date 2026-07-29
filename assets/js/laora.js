@@ -7,8 +7,8 @@
 
 /* Rellenar al crear el proyecto Supabase de laOra (SUPABASE_PASOS.md).
    Mientras estén vacíos, el formulario deriva a WhatsApp. */
-var LAORA_SUPABASE_URL = '';
-var LAORA_SUPABASE_KEY = '';
+var LAORA_SUPABASE_URL = 'https://uikanfvigunjhzibnhxf.supabase.co';
+var LAORA_SUPABASE_KEY = 'sb_publishable_1eLOM22REKcIJyHe36W_4Q_1Z3eyRam';
 var LAORA_WHATSAPP = '34689806987';
 
 /* Borde de la barra al hacer scroll */
@@ -105,6 +105,7 @@ var LAORA_WHATSAPP = '34689806987';
         apikey: LAORA_SUPABASE_KEY,
         Authorization: 'Bearer ' + LAORA_SUPABASE_KEY,
         'Content-Type': 'application/json',
+        'Content-Profile': 'laora',
         Prefer: 'return=minimal'
       },
       body: JSON.stringify(datos)
