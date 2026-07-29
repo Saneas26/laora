@@ -5,3 +5,4 @@
 /CLOUDFLARE_PAGES.md  /  302
 /.docs/*  /  302
 /.supabase/*  /  302
+/v2/*  /  301
