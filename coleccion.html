@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Los nueve relojes de laOra: cronógrafo, buceadores, vestir, militar de campo y lujo deportivo de acero. Cada uno en cuatro acabados, montados y controlados en Madrid.">
+<meta property="og:title" content="La colección de laOra® — nueve relojes, cuatro acabados cada uno">
+<meta property="og:description" content="Nueve relojes. Ni uno de relleno. Materiales de verdad y precio honesto.">
+<meta property="og:url" content="https://laora.es/coleccion.html">
+<meta property="og:image" content="https://laora.es/assets/img/relojes/portada.jpg">
+<title>La colección — laOra®</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/laora.css?v=15">
+<style>
+/* LA COLECCIÓN — mismo lenguaje que los Actos: negro, serif y filete de oro. */
+:root{ --negro:#050505; --ambar:#F5D34D; --oro:#c7a04a; --hueso:#f2efe9; --gris:#8a8f96; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--negro);color:var(--hueso);font-family:'Nunito Sans',sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.saneas{font-family:'Quicksand',sans-serif;font-weight:700}
+
+.col-cab{max-width:1180px;margin:0 auto;padding:120px 44px 20px}
+.col-volver{display:block;width:fit-content;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:52px;transition:color .2s}
+.col-volver:hover{color:var(--ambar)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--oro)}
+.col-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(38px,6.2vw,74px);line-height:1.04;letter-spacing:-.02em;margin-top:18px}
+.col-raya{display:block;width:52px;height:2px;background:var(--oro);margin:32px 0}
+.col-sub{font-size:clamp(16px,1.9vw,19px);color:#cfcbc3;max-width:640px;font-weight:400}
+
+.piezas{max-width:1180px;margin:0 auto;padding:64px 44px 40px;display:grid;gap:26px;
+  grid-template-columns:repeat(3,1fr)}
+.pieza{display:flex;flex-direction:column;border:1px solid #1c1c1c;border-radius:20px;
+  overflow:hidden;background:#0b0b0b;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),border-color .3s}
+.pieza:hover{transform:translateY(-6px);border-color:#3a3320}
+.pieza:focus-visible{outline:2px solid var(--ambar);outline-offset:3px}
+.pieza-foto{aspect-ratio:4/5;overflow:hidden;background:#111}
+.pieza-foto img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.pieza:hover .pieza-foto img{transform:scale(1.04)}
+.pieza-texto{padding:26px 26px 30px;display:flex;flex-direction:column;flex:1}
+.pieza-ref{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--gris)}
+.pieza-nombre{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:29px;line-height:1.1;margin-top:8px}
+.pieza-cat{font-size:13.5px;color:var(--oro);margin-top:6px;font-weight:600}
+.pieza-rasgo{font-size:14.5px;color:#a9a49b;margin-top:14px;line-height:1.55;flex:1}
+.pieza-acabados{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  color:#6f6a62;margin-top:18px;padding-top:16px;border-top:1px solid #1c1c1c;text-transform:uppercase}
+.pieza-precio{font-size:15px;color:#cfcbc3;margin-top:12px}
+.pieza-precio b{color:#fff;font-weight:800;font-size:19px}
+.pieza-flecha{display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+  font-size:13.5px;font-weight:800;color:var(--ambar)}
+.pieza-flecha .fl{transition:transform .25s;display:inline-block}
+.pieza:hover .pieza-flecha .fl{transform:translateX(5px)}
+
+.col-pie{max-width:1180px;margin:0 auto;padding:30px 44px 90px}
+.col-nota{border-top:1px solid #1c1c1c;padding-top:26px;font-size:14.5px;color:#8a8f96;max-width:720px}
+.col-nota b{color:var(--hueso)}
+
+.reveal{opacity:0;transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .pieza,.pieza-foto img{transition:none}
+}
+
+@media(max-width:980px){
+  .piezas{grid-template-columns:repeat(2,1fr);gap:20px;padding:48px 28px 32px}
+  .col-cab{padding:96px 28px 16px}
+  .col-pie{padding:24px 28px 70px}
+}
+@media(max-width:600px){
+  .piezas{grid-template-columns:1fr;padding:40px 20px 28px}
+  .col-cab{padding:88px 20px 12px}
+  .col-pie{padding:20px 20px 60px}
+  .pieza-foto{aspect-ratio:3/2}
+  .pieza-texto{padding:22px 22px 26px}
+}
+</style>
+</head>
+<body>
+
+<main>
+  <div class="col-cab">
+    <a class="col-volver" href="/">← Volver</a>
+    <p class="eyebrow">La colección</p>
+    <h1 class="col-titular">Nueve relojes.<br>Ni uno de relleno.</h1>
+    <span class="col-raya"></span>
+    <p class="col-sub">No hacemos catálogo para llenar una estantería. Cada uno existe porque
+    faltaba: una forma que merecía la pena y que nadie vendía a un precio honesto.
+    Cada modelo, en cuatro acabados.</p>
+  </div>
+
+  <div class="piezas">
+      <a class="pieza reveal" href="/relojes/lo-01-lunar.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-01.jpg" alt="Lunar de laOra, cronógrafo" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-01</span>
+          <h2 class="pieza-nombre">«Lunar»</h2>
+          <p class="pieza-cat">Cronógrafo</p>
+          <p class="pieza-rasgo">Tres subesferas y el gesto de cronometrar.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>190 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-02-hora-cero.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-02.jpg" alt="Hora Cero de laOra, buceador · 300 m" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-02</span>
+          <h2 class="pieza-nombre">«Hora Cero»</h2>
+          <p class="pieza-cat">Buceador · 300 m</p>
+          <p class="pieza-rasgo">Trescientos metros y bisel a una sola dirección.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>190 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-03-bauhaus.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-03.jpg" alt="Bauhaus de laOra, reloj de vestir" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-03</span>
+          <h2 class="pieza-nombre">«Bauhaus»</h2>
+          <p class="pieza-cat">Reloj de vestir</p>
+          <p class="pieza-rasgo">La forma sigue a la función. Nada sobra.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>170 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-04-precisa.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-04.jpg" alt="Precisa de laOra, deportivo integrado" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-04</span>
+          <h2 class="pieza-nombre">«Precisa»</h2>
+          <p class="pieza-cat">Deportivo integrado</p>
+          <p class="pieza-rasgo">Brazalete integrado: la caja y el acero, una sola pieza.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>190 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-05-trinchera.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-05.jpg" alt="Trinchera de laOra, militar de campo" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-05</span>
+          <h2 class="pieza-nombre">«Trinchera»</h2>
+          <p class="pieza-cat">Militar de campo</p>
+          <p class="pieza-rasgo">Legible a oscuras, en la muñeca de quien trabaja.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>150 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-06-ocho-lados.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-06.jpg" alt="Ocho Lados de laOra, lujo deportivo de acero" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-06</span>
+          <h2 class="pieza-nombre">«Ocho Lados»</h2>
+          <p class="pieza-cat">Lujo deportivo de acero</p>
+          <p class="pieza-rasgo">Ocho lados y tornillos a la vista.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>250 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-07-bitacora.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-07.jpg" alt="Bitácora de laOra, lujo deportivo de acero" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-07</span>
+          <h2 class="pieza-nombre">«Bitácora»</h2>
+          <p class="pieza-cat">Lujo deportivo de acero</p>
+          <p class="pieza-rasgo">Relieve horizontal y esfera turquesa.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>250 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-08-tortuga.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-08.jpg" alt="Tortuga de laOra, buceador · 200 m" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-08</span>
+          <h2 class="pieza-nombre">«Tortuga»</h2>
+          <p class="pieza-cat">Buceador · 200 m</p>
+          <p class="pieza-rasgo">El cojín que aguantó todo lo que le echaron.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>180 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+      <a class="pieza reveal" href="/relojes/lo-09-coctel.html">
+        <div class="pieza-foto">
+          <img src="/assets/img/relojes/lo-09.jpg" alt="Cóctel de laOra, reloj de vestir" loading="lazy">
+        </div>
+        <div class="pieza-texto">
+          <span class="pieza-ref">LO-09</span>
+          <h2 class="pieza-nombre">«Cóctel»</h2>
+          <p class="pieza-cat">Reloj de vestir</p>
+          <p class="pieza-rasgo">Esfera degradada, la del brindis.</p>
+          <p class="pieza-acabados">Alba · Levante · Cenit · Eclipse</p>
+          <p class="pieza-precio">desde <b>180 €</b></p>
+          <span class="pieza-flecha">Verlo <span class="fl">→</span></span>
+        </div>
+      </a>
+  </div>
+
+  <div class="col-pie">
+    <p class="col-nota"><b>Los precios son el punto de partida</b>, el del acabado de entrada.
+    Dentro de cada reloj tienes los cuatro, uno a uno, con lo que cambia en cada escalón:
+    el movimiento, el cristal, el acero y la correa. Sin letra pequeña.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var o = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); o.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal").forEach(function (e) { o.observe(e); });
+})();
+</script>
+
+<footer>
+  <div class="brand">la<span class="o"></span>ra<sup>®</sup></div>
+  <div class="footer-links">
+    <a href="/coleccion.html">La colección</a>
+    <a href="/materiales.html">Materiales</a>
+    <a href="/manifiesto.html">El alma de un automático</a>
+    <a href="/condiciones-de-venta.html">Condiciones de venta</a>
+    <a href="/privacidad.html">Privacidad</a>
+  </div>
+  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
+  <div class="gp-grid">
+    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas.png" alt="APP Saneas" loading="lazy"><b>APP Saneas</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
+      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
+    </a>
+    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
+    </a>
+    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
+    </a>
+    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
+    </a>
+  </div>
+  <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
+</footer>
+
+<script src="/assets/js/telemetria.js" defer></script>
+</body>
+</html>
