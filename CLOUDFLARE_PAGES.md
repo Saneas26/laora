@@ -13,6 +13,21 @@ Igual que saneas.es y activala.es: `main` = producción, cada rama = preview aut
    - **Build output directory**: `/`
 4. **Save and Deploy**. Primera URL: `laora.pages.dev`.
 
+## 1 bis. Por qué la carpeta interna se llama `.docs`
+
+El **build output directory es `/`**: todo lo que esté en el repo se publica tal
+cual en laora.es. El brief de desarrollo (con la tabla de qué reloj toma como
+referencia a cuál) y el informe de sourcing con proveedores y precios estuvieron
+descargables desde `laora.es/docs/...` hasta el 29/07/2026.
+
+Cloudflare Pages **no sube los ficheros ni las carpetas que empiezan por punto**
+(salvo `.well-known`). Por eso la carpeta interna es `.docs` y no `docs`: es la
+única forma segura de tenerla versionada sin publicarla. `_redirects` corta
+además las rutas viejas por si alguien tiene el enlace.
+
+No vale `.vercelignore` ni `vercel.json`: esto no es Vercel. Si algún día se
+añade otra carpeta interna, que empiece por punto.
+
 ## 2. Dominio propio (laora.es está en DonDominio)
 1. Si `laora.es` aún no está en Cloudflare: **Add a domain** → seguir el asistente
    → en DonDominio, cambia los **nameservers** del dominio al par que te dé
