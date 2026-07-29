@@ -132,10 +132,13 @@ var LAORA_WHATSAPP = '34689806987';
     if (!a) return;
 
     if (!laoraSePuedeReservar(ref, nombre)) {
+      /* Sin precio cerrado no hay nada que reservar. Antes esto era un botón
+         «Avísame del estreno» que apuntaba a /?modelo=X#interesados, y ese
+         formulario ya no existe: el enlace no llevaba a ningún sitio. Mejor
+         decir la verdad que dar un botón que no hace nada. Cuando Óscar
+         decida qué canal de contacto vuelve, aquí va su botón. */
       hueco.innerHTML =
-        '<a class="btn-reserva btn-reserva-aviso" href="/?modelo=' + ref + '#interesados">' +
-        'Avísame del estreno</a>' +
-        '<p class="ta-cta-nota">Aún no está a la venta.</p>';
+        '<p class="ta-cta-nota ta-cta-sola">Todavía no está a la venta.</p>';
       return;
     }
 
