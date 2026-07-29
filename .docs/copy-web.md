@@ -1,6 +1,6 @@
 # laOra — Copy completo de la web (v3)
 
-Cambios respecto a v1: colección renumerada del LO-01 al LO-09 sin huecos (solo se mueve Hora Cero, del 10 al 02), «Octógono» pasa a «Ocho» y «Puerto» a «Bitácora», encabezados sin marcas ajenas (la marca homenajeada vive solo dentro de «La historia»), ST1901 corregido a cuerda manual, manifiesto abierto a tres corazones, LO-10 renombrado «Hora Cero», estanqueidad en dos registros.
+Cambios respecto a v1: colección renumerada del LO-01 al LO-09 sin huecos (solo se mueve Cero Cero, del 10 al 02), «Octógono» pasa a «Ocho» y «Puerto» a «Bitácora», encabezados sin marcas ajenas (la marca homenajeada vive solo dentro de «La historia»), ST1901 corregido a cuerda manual, manifiesto abierto a tres corazones, LO-10 renombrado «Cero Cero», estanqueidad en dos registros.
 
 ---
 
@@ -152,7 +152,7 @@ Montaje, calibración y control uno a uno. Garantía de 2 años con servicio té
 
 ---
 
-## LO-02 «Hora Cero»
+## LO-02 «Cero Cero»
 **Buceador 300 m · desde 190 €**
 
 ### LA HISTORIA
@@ -164,7 +164,7 @@ Antes de cada operación, alguien dice una hora. Todos ponen su reloj en la mism
 Porque reúne dos mundos que casi nunca conviven: la herramienta y el traje. Es un instrumento de buceo profesional —300 metros de estanqueidad, bisel para cronometrar el aire que te queda, lume para la oscuridad del fondo— y sin embargo desaparece bajo el puño de una camisa. Esa doble vida, más la malla milanesa y el toque de naranja, lo convirtieron en una de las siluetas más reconocibles del mundo.
 
 ### NUESTRO TRIBUTO
-El favorito de mucha gente, y se entiende. El «Hora Cero» recoge lo que lo hace grande: esfera negra con acentos naranja, agujas espada, bisel cerámico y esa malla milanesa que es media personalidad del reloj.
+El favorito de mucha gente, y se entiende. El «Cero Cero» recoge lo que lo hace grande: esfera negra con acentos naranja, agujas espada, bisel cerámico y esa malla milanesa que es media personalidad del reloj.
 
 Y recoge también su idea. En este reloj el bisel no es un adorno: es el aro con el que marcas tu minuto cero y ves cuánto llevas. Por eso lo cuidamos donde se nota — clic firme, sin holgura, unidireccional como debe ser.
 
@@ -400,7 +400,7 @@ Montaje, calibración y control uno a uno. Garantía de 2 años con servicio té
 
 # EDICIÓN ECLIPSE — la línea negra
 
-*(Edición especial disponible en modelos seleccionados: Lunar, Hora Cero, Precisa, Ocho Lados, Bitácora y Tortuga. Se ofrece sobre los acabados medios y altos.)*
+*(Edición especial disponible en modelos seleccionados: Lunar, Cero Cero, Precisa, Ocho Lados, Bitácora y Tortuga. Se ofrece sobre los acabados medios y altos.)*
 
 ### Titular
 **Todo se apaga. Menos una cosa.**
@@ -415,7 +415,7 @@ El negro no es pintura. Es **DLC**, un revestimiento de carbono tan duro que se 
 No es un color más. Es el mismo reloj que ya conoces, llevado a su versión más rotunda. Para quien no quiere que su reloj hable por él, sino que calle con estilo.
 
 ### Nota (Dev)
-La Edición Eclipse funciona como un interruptor de acabado dentro de la ficha de los modelos elegibles: mismo diseño, revestimiento DLC negro, esfera negra y agujas plateadas con segundero amarillo. En los divers (Hora Cero, Tortuga) puede ofrecerse la variante de horaria amarilla para un look más marcado. Lleva su prima de precio por el DLC.
+La Edición Eclipse funciona como un interruptor de acabado dentro de la ficha de los modelos elegibles: mismo diseño, revestimiento DLC negro, esfera negra y agujas plateadas con segundero amarillo. En los divers (Cero Cero, Tortuga) puede ofrecerse la variante de horaria amarilla para un look más marcado. Lleva su prima de precio por el DLC.
 
 ---
 

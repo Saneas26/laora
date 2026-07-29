@@ -6,3 +6,8 @@
 /.docs/*  /  302
 /.supabase/*  /  302
 /v2/*  /  301
+
+# LO-02 pasó de «Hora Cero» a «Cero Cero» (29/07/2026): el nombre lo manda
+# la esfera del reloj. La URL vieja puede estar indexada o enlazada.
+/relojes/lo-02-hora-cero  /relojes/lo-02-cero-cero  301
+/relojes/lo-02-hora-cero.html  /relojes/lo-02-cero-cero.html  301
