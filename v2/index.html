@@ -412,6 +412,14 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin-top:16px}
 .a6-club-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
   font-size:16px;line-height:1.6;margin-top:20px;max-width:40ch}
+.a6-club-app{flex:0 0 auto}
+.a6-app-boton{display:inline-flex;align-items:center;gap:12px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .25s,border-color .25s}
+.a6-app-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a6-app-boton svg{width:16px;height:16px;flex:none}
+.a6-app-boton .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;font-size:13px}
 
 @media(max-width:1180px){
   .a6-inner{flex-direction:column;align-items:flex-start;gap:44px}
@@ -430,6 +438,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a6-club{padding:60px 22px 80px}
   .a6-club-foto{width:200px}
   .a6-club-sub{max-width:none}
+  .a6-app-boton{padding:13px 20px;font-size:10.5px;margin-top:8px}
 }
 
 /* ACTO VII — CIERRE: no compras un reloj */
@@ -737,6 +746,12 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       <p class="eyebrow">Más que un reloj.</p>
       <h2 class="a6-club-titular">Un club. Ventajas reales.<br>Atención prioritaria.</h2>
       <p class="a6-club-sub">Tu reloj viene con mucho más que la hora.<br>Viene con el respaldo de la comunidad laOra.</p>
+    </div>
+    <div class="a6-club-app">
+      <a class="a6-app-boton" href="#" data-app-store>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Descarga la app <span class="laora">laOra</span>
+      </a>
     </div>
   </div>
 </section>
