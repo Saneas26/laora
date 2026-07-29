@@ -298,6 +298,51 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
   .a4-specs{grid-template-columns:1fr;gap:20px;margin-top:28px}
   .a4-boton{margin-top:22px;padding:13px 20px;font-size:10.5px}
 }
+
+/* ACTO V — ANTES DE LLEGAR A TU MUÑECA */
+.acto5{position:relative;background:var(--negro)}
+.a5-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 44px 60px}
+.a5-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;align-items:center;gap:80px}
+.a5-texto{flex:0 0 auto;max-width:420px}
+.a5-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,4vw,54px);line-height:1.14;margin-top:22px}
+.a5-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
+.a5-parrafo{font-family:'Nunito Sans',sans-serif;font-weight:400;color:#cfcbc3;
+  font-size:16px;line-height:1.6;max-width:34ch}
+.a5-parrafo+.a5-parrafo{margin-top:16px}
+.a5-boton{margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:transparent;
+  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
+.a5-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a5-boton svg{width:13px;height:13px;flex:none}
+.a5-video{flex:1;min-width:0;border-radius:20px;overflow:hidden;
+  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75)}
+.a5-video img{width:100%;height:auto;display:block}
+.a5-pasos{max-width:1500px;margin:0 auto;width:100%;padding:0 44px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.paso .num{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;
+  color:var(--oro);letter-spacing:.08em;margin-bottom:10px}
+.paso .etiqueta{font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+  font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.a5-cierre{max-width:1500px;margin:40px auto 0;width:100%;padding:34px 44px 90px;
+  border-top:1px solid rgba(255,255,255,.1);text-align:center;
+  font-family:'Nunito Sans',sans-serif;color:var(--gris);font-size:14px}
+
+@media(max-width:1180px){
+  .a5-escena{min-height:auto;padding:90px 44px 60px}
+  .a5-inner{flex-direction:column;align-items:flex-start;gap:44px}
+  .a5-texto{max-width:none}
+  .a5-video{width:100%}
+}
+@media(max-width:760px){
+  .a5-escena{padding:110px 22px 50px}
+  .a5-titular{font-size:clamp(28px,7.6vw,36px)}
+  .a5-parrafo{max-width:none}
+  .a5-boton{padding:13px 20px;font-size:10.5px}
+  .a5-pasos{grid-template-columns:repeat(2,1fr);row-gap:28px;padding:0 22px}
+  .a5-cierre{padding:28px 22px 70px;font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -476,6 +521,35 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
       </div>
     </div>
   </div>
+</section>
+
+<!-- ACTO V — ANTES DE LLEGAR A TU MUÑECA -->
+<section class="acto5" id="acto5">
+  <div class="a5-escena">
+    <div class="a5-inner">
+      <div class="a5-texto">
+        <p class="eyebrow">Antes de llegar a tu muñeca</p>
+        <h2 class="a5-titular">Cada laOra<br>se ajusta,<br>se revisa<br>y se prepara<br>uno a uno.</h2>
+        <span class="a5-raya"></span>
+        <p class="a5-parrafo">No enviamos relojes directamente desde una fábrica.</p>
+        <p class="a5-parrafo">Antes de salir, cada unidad pasa por un proceso de revisión, ajuste y control para asegurarnos de que llega exactamente como debería.</p>
+        <button class="a5-boton" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Ver cómo preparamos tu reloj
+        </button>
+      </div>
+      <div class="a5-video">
+        <img src="/assets/img/acto5-taller.jpg" alt="Relojero laOra inspeccionando un cronógrafo con una lupa antes de enviarlo" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <div class="a5-pasos">
+    <div class="paso"><span class="num">01</span><span class="etiqueta">Montaje</span></div>
+    <div class="paso"><span class="num">02</span><span class="etiqueta">Regulación</span></div>
+    <div class="paso"><span class="num">03</span><span class="etiqueta">Inspección</span></div>
+    <div class="paso"><span class="num">04</span><span class="etiqueta">Embalaje</span></div>
+  </div>
+  <p class="a5-cierre">Cada reloj se ajusta y verifica en España antes de enviarse.</p>
 </section>
 
 <audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
