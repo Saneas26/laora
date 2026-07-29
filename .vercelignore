@@ -1,5 +1,10 @@
 # Nada de esto se publica en laora.es.
 #
+# OJO: este fichero SOLO lo respeta Vercel cuando se despliega con la CLI.
+# En los despliegues por Git (que es como va laora.es) se ignora por completo,
+# así que el bloqueo de verdad está en vercel.json con un rewrite. Esto queda
+# como segunda barrera por si algún día se despliega a mano.
+#
 # El repo se despliega entero como sitio estático, así que cualquier fichero
 # que esté aquí acaba siendo descargable desde la web. Estas dos carpetas son
 # de uso interno y NO deben salir:
