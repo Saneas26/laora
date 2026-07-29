@@ -43,3 +43,73 @@ esté conectado, el formulario de la web deriva a WhatsApp (no se pierde nadie).
 ## Ver los interesados
 Table Editor → tabla `interesados`. Desde el cliente nadie puede leer, editar
 ni borrar: solo insertar (RLS deny-all con política única de INSERT para anon).
+
+---
+
+# Reservas con señal del 25 % (Mollie + Bizum/transferencia)
+
+Esto va DESPUÉS de tener el proyecto Supabase del formulario funcionando.
+
+## 0. Antes de nada: lo que no es técnico
+Sin estas tres cosas la web no cobra, y es a propósito — el propio código lo impide:
+
+1. **Los 36 precios** en `assets/js/precios.js`. Precio final con IVA incluido.
+   Un acabado con `precio: null` enseña «Avísame del estreno» y no deja reservar.
+2. **La fecha de entrega** en `LAORA_ENTREGA`, en el mismo fichero. Vacía = no se cobra.
+   Sin fecha pactada la ley te da 30 días desde el cobro, y no hay reloj en 30 días.
+3. **Rellenar los tres huecos amarillos de `condiciones-de-venta.html`**: domicilio
+   fiscal, fecha de entrega, teléfono de Bizum e IBAN. Salen marcados en la web
+   para que no se olviden.
+
+También hay que poner el Bizum y el IBAN en `LAORA_COBRO`, arriba de
+`assets/js/gracias.js`, o el cliente no sabe dónde pagar.
+
+## 1. Tabla de reservas
+SQL Editor → pegar `.supabase/reservas.sql` entero, sustituyendo `<PROYECTO>`
+por la referencia del proyecto. Ojo: a diferencia de `interesados`, aquí anon
+**no puede insertar**. Solo la Edge Function con la service_role. Es lo que
+impide que alguien reserve un reloj de 700 € por un céntimo.
+
+## 2. Cuenta de Mollie
+1. Alta en mollie.com y verificación de la cuenta (piden datos fiscales).
+2. Activar los métodos que quieras: tarjeta y Bizum.
+3. Developers → **API keys**: copia la `test_…` para probar y la `live_…` para
+   cuando vaya en serio.
+
+## 3. Las tres Edge Functions
+Crear las tres con **«Enforce JWT verification» DESACTIVADO**:
+
+| Función | Fichero | Quién la llama |
+|---|---|---|
+| `crear-reserva` | `.supabase/crear-reserva.ts` | la web |
+| `mollie-webhook` | `.supabase/mollie-webhook.ts` | Mollie |
+| `avisar-reserva` | `.supabase/avisar-reserva.ts` | el trigger de la base |
+
+Secretos (Edge Functions → Secrets):
+- `MOLLIE_API_KEY` = la clave de Mollie (empieza por `test_` o `live_`)
+- `WEB_URL` = `https://laora.es`
+- `RESEND_API_KEY` e `INTERESADOS_EMAIL` ya los tienes del formulario
+
+`SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` los pone Supabase solo.
+
+## 4. Enchufar la web
+En `assets/js/laora.js`, arriba: `LAORA_SUPABASE_URL` y `LAORA_SUPABASE_KEY`
+(la clave **publishable/anon**, nunca la service_role). Son las mismas que usa
+el formulario de interesados.
+
+## 5. Probar antes de cobrar de verdad
+Con la clave `test_` de Mollie:
+1. Pon un precio y una fecha de entrega de prueba en `precios.js`.
+2. Reserva con tarjeta: Mollie te deja elegir el resultado (pagado, fallido…).
+3. Comprueba que la fila de `reservas` pasa a `pagada` sola. Si se queda en
+   `pendiente`, el webhook no llega: revisa que la función esté sin JWT.
+4. Reserva por Bizum: la fila debe quedar en `pendiente` y llegarte el correo
+   con el aviso de cobro manual.
+5. Cambia la clave a `live_` cuando todo lo anterior salga bien.
+
+## 6. El día a día
+- Las reservas pendientes de cobro manual: vista `reservas_pendientes` en el
+  Table Editor.
+- Cuando veas el Bizum o la transferencia, pon `estado` = `pagada`. El correo
+  de confirmación al cliente sale solo.
+- Al enviar el reloj, cobras el 75 % restante y pones `estado` = `entregada`.
