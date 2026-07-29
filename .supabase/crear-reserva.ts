@@ -14,13 +14,29 @@
 // la tabla `reservas` es deny-all para anon.
 //
 // Secretos necesarios:
-//   MOLLIE_API_KEY          live_… o test_…
+//   LAORA_MOLLIE_API_KEY    live_… o test_… (con prefijo: el proyecto es compartido)
 //   SUPABASE_URL            (lo pone Supabase solo)
 //   SUPABASE_SERVICE_ROLE_KEY (lo pone Supabase solo)
-//   WEB_URL                 https://laora.es
+//   LAORA_WEB_URL           https://laora.es
 // ============================================================
 
-const WEB = Deno.env.get('WEB_URL') ?? 'https://laora.es';
+const WEB = Deno.env.get('LAORA_WEB_URL') ?? 'https://laora.es';
+// La service_role ha cambiado de nombre: antes SUPABASE_SERVICE_ROLE_KEY,
+// ahora SUPABASE_SECRET_KEYS (un JSON con varias). Se aceptan las dos para
+// que esto no se rompa el día que Supabase retire la vieja.
+function claveSecreta(): string | null {
+  const vieja = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  if (vieja) return vieja;
+  try {
+    const json = Deno.env.get('SUPABASE_SECRET_KEYS');
+    if (!json) return null;
+    const d = JSON.parse(json);
+    if (typeof d === 'string') return d;
+    if (Array.isArray(d)) return d[0]?.api_key ?? d[0] ?? null;
+    return d.default ?? d.secret ?? Object.values(d)[0] as string ?? null;
+  } catch { return null; }
+}
+
 const SENAL_PORCENTAJE = 25;
 
 // ---------- precios: se leen de la web, no se duplican aquí ----------
@@ -119,7 +135,7 @@ Deno.serve(async (req) => {
 
     // ---------- se guarda ----------
     const SB = Deno.env.get('SUPABASE_URL');
-    const SERVICE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const SERVICE = claveSecreta();
     if (!SB || !SERVICE) return json({ error: 'configuración incompleta' }, 500);
 
     const reserva = {
@@ -168,7 +184,7 @@ Deno.serve(async (req) => {
     }
 
     // ---------- Mollie ----------
-    const MOLLIE = Deno.env.get('MOLLIE_API_KEY');
+    const MOLLIE = Deno.env.get('LAORA_MOLLIE_API_KEY');
     if (!MOLLIE) return json({ error: 'pasarela no configurada' }, 500);
 
     const pago = await fetch('https://api.mollie.com/v2/payments', {
@@ -179,7 +195,7 @@ Deno.serve(async (req) => {
         description: `laOra ${fila.ref} «${fila.modelo}» ${fila.acabado} · señal ${SENAL_PORCENTAJE}%`,
         redirectUrl: `${WEB}/reserva-recibida.html?estado=pagada&codigo=${encodeURIComponent(fila.codigo)}`,
         cancelUrl: `${WEB}/reservar.html?ref=${fila.ref}&acabado=${encodeURIComponent(fila.acabado)}`,
-        webhookUrl: `${SB}/functions/v1/mollie-webhook`,
+        webhookUrl: `${SB}/functions/v1/laora-mollie-webhook`,
         metadata: { reserva_id: fila.id, codigo: fila.codigo },
       }),
     });

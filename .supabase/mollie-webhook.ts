@@ -8,7 +8,23 @@
 // pagada mandándonos un POST.
 //
 // Desplegar con «Enforce JWT verification» DESACTIVADO.
-// Secretos: MOLLIE_API_KEY · SUPABASE_URL · SUPABASE_SERVICE_ROLE_KEY
+// Secretos: LAORA_MOLLIE_API_KEY (SUPABASE_URL y la clave secreta las pone Supabase)
+// La service_role ha cambiado de nombre: antes SUPABASE_SERVICE_ROLE_KEY,
+// ahora SUPABASE_SECRET_KEYS (un JSON con varias). Se aceptan las dos para
+// que esto no se rompa el día que Supabase retire la vieja.
+function claveSecreta(): string | null {
+  const vieja = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  if (vieja) return vieja;
+  try {
+    const json = Deno.env.get('SUPABASE_SECRET_KEYS');
+    if (!json) return null;
+    const d = JSON.parse(json);
+    if (typeof d === 'string') return d;
+    if (Array.isArray(d)) return d[0]?.api_key ?? d[0] ?? null;
+    return d.default ?? d.secret ?? Object.values(d)[0] as string ?? null;
+  } catch { return null; }
+}
+
 // ============================================================
 
 Deno.serve(async (req) => {
@@ -19,9 +35,9 @@ Deno.serve(async (req) => {
     const id = cuerpo.get('id');
     if (!id || !id.startsWith('tr_')) return new Response('sin id', { status: 400 });
 
-    const MOLLIE = Deno.env.get('MOLLIE_API_KEY');
+    const MOLLIE = Deno.env.get('LAORA_MOLLIE_API_KEY');
     const SB = Deno.env.get('SUPABASE_URL');
-    const SERVICE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const SERVICE = claveSecreta();
     if (!MOLLIE || !SB || !SERVICE) return new Response('faltan secretos', { status: 500 });
 
     // Se pregunta a Mollie. Su respuesta es la única que vale.

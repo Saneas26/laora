@@ -49,7 +49,7 @@ var LAORA_PRECIOS = {
     nombre: 'Bauhaus',
     acabados: {
       Alba:    { precio: null, horquilla: 'Desde 170 €' },
-      Levante: { precio: null, horquilla: '260–360 €' },
+      Levante: { precio: 299, horquilla: '260–360 €' },   // PRUEBA — quitar
       Cenit:   { precio: null, horquilla: '360–480 €' },
       Eclipse: { precio: null, horquilla: 'Prima de +50–100 € sobre Cenit' }
     }
@@ -114,7 +114,7 @@ var LAORA_PRECIOS = {
    sin fecha pactada, la ley da 30 días desde el pago. Se enseña en
    el checkout y se guarda con cada reserva.
    Formato libre y corto, p. ej. 'antes del 31 de marzo de 2027'. */
-var LAORA_ENTREGA = '';
+var LAORA_ENTREGA = 'PRUEBA — quitar';
 
 /* ---- utilidades (no tocar) ---- */
 function laoraSenal(precio) {
