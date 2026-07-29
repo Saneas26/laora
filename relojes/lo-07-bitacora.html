@@ -3,261 +3,398 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Lujo deportivo de acero en turquesa con relieve horizontal y brazalete integrado macizo. Desde 250 €.">
-<meta property="og:title" content="LO-07 «Bitácora» — Lujo deportivo de acero laOra">
-<meta property="og:description" content="Lujo deportivo de acero en turquesa con relieve horizontal y brazalete integrado macizo. Desde 250 €.">
+<meta name="description" content="LO-07 «Bitácora»: lujo deportivo de acero con brazalete integrado macizo, zafiro antirreflejo y acero 316L. Tres versiones desde 250 €, montado y controlado en Madrid.">
+<meta property="og:title" content="LO-07 «Bitácora» — laOra®">
+<meta property="og:description" content="Nunca soñé con tener un reloj de lujo. Soñé con tener un gran reloj.">
 <meta property="og:url" content="https://laora.es/relojes/lo-07-bitacora.html">
-<meta property="og:image" content="https://laora.es/assets/img/relojes/lo-07.jpg">
+<meta property="og:image" content="https://laora.es/assets/img/bitacora/hero.jpg">
 <title>LO-07 «Bitácora» — Lujo deportivo de acero laOra · desde 250 €</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=15">
+<style>
+/* ============================================================
+   LO-07 «Bitácora» — ficha de producto
+   Estructura del boceto bitacora_landing3.png:
+   1 hero · 2 el nombre / cuarzo o mecánico · 3 convénceme
+   4 las versiones · 5 lo que llevan todas · 6 configurador · 7 pie
+   Clases con prefijo b- para no chocar con laora.css.
+   ============================================================ */
+:root{ --negro:#050505; --ambar:#F5D34D; --oro:#c7a04a; --hueso:#f2efe9; --gris:#8a8f96; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--negro);color:var(--hueso);font-family:'Nunito Sans',sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.saneas{font-family:'Quicksand',sans-serif;font-weight:700}
+.b-serif{font-family:'Source Serif 4',Georgia,serif;font-weight:400}
+.b-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--oro)}
+.b-raya{display:block;width:52px;height:2px;background:var(--oro)}
+footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
+
+/* ---------- barra ---------- */
+.b-nav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:16px 4vw;background:rgba(5,5,5,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.07)}
+.b-marca{font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.5px;color:#fff}
+.b-marca .o{color:var(--ambar)}
+.b-menu{display:flex;gap:30px;font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:#c9c5bd}
+.b-menu a:hover{color:var(--ambar)}
+.b-bolsa{position:relative;display:inline-flex;padding:6px}
+.b-bolsa svg{stroke:#e9e6df}
+.b-bolsa:hover svg{stroke:var(--ambar)}
+.b-cuenta{position:absolute;top:-2px;right:-4px;min-width:17px;height:17px;border-radius:999px;
+  background:var(--ambar);color:#141414;font-size:10.5px;font-weight:800;line-height:17px;text-align:center}
+
+/* ---------- 1 · hero ---------- */
+.b-hero{display:grid;grid-template-columns:1.05fr 1fr;grid-template-rows:1fr;
+  min-height:calc(100svh - 58px);align-items:stretch}
+.b-hero-foto{position:relative;overflow:hidden;background:#0a0a0a;height:100%}
+.b-hero-foto picture{display:block;height:100%}
+/* El render es apaisado y la columna del hero es alta: con `cover` se
+   come el reloj. `contain` lo enseña entero sobre el negro, que es lo
+   que hace el boceto. */
+.b-hero-foto img{width:100%;height:100%;object-fit:contain;object-position:center;
+  transform:scale(1.18)}
+.b-hero-texto{display:flex;flex-direction:column;justify-content:center;padding:80px 5vw}
+.b-hero-titular{font-size:clamp(54px,7.4vw,104px);line-height:.98;color:#fff;letter-spacing:-.03em;margin-top:10px}
+.b-hero-cat{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(17px,2vw,22px);color:#d8d4cc;margin-top:8px}
+.b-hero .b-raya{margin:26px 0}
+.b-lema{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(20px,2.5vw,29px);
+  line-height:1.32;color:#fff}
+.b-hero p.b-p{font-size:15.5px;color:#a9a49b;max-width:430px;margin-top:20px}
+
+/* ---------- 2 · dos columnas claras ---------- */
+.b-dos{display:grid;grid-template-columns:1fr 1fr;background:var(--hueso);color:#1a1a1a}
+.b-col{padding:76px 4.5vw 84px}
+.b-col+.b-col{border-left:1px solid #e0dcd3}
+.b-col h2{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
+  font-size:clamp(27px,3.1vw,38px);line-height:1.12;color:#111}
+.b-col p{font-size:15.5px;color:#43413d;margin-top:16px;max-width:52ch}
+.b-col p b{color:#111}
+.b-nota-foto{margin-top:26px;border:1px dashed #cfc9bd;border-radius:12px;padding:14px 16px;
+  font-size:13px;color:#8d8578;background:#eeeae1}
+
+/* ---------- 3 · convénceme ---------- */
+.b-convence{background:#0a0a0a;padding:88px 4.5vw 96px}
+.b-convence-caja{max-width:900px}
+.b-convence h2{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
+  font-size:clamp(26px,3.4vw,42px);line-height:1.2;color:#fff;margin-top:16px}
+.b-convence p{font-size:15.5px;color:#a9a49b;margin-top:18px;max-width:60ch}
+.b-convence .b-remate{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(21px,2.6vw,31px);
+  color:#fff;margin-top:26px;line-height:1.3}
+
+/* ---------- 4 · las versiones ---------- */
+.b-versiones{background:var(--hueso);color:#1a1a1a;padding:80px 4.5vw 88px;text-align:center}
+.b-versiones h2{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.24em;
+  text-transform:uppercase;color:#111;font-weight:700}
+.b-versiones .b-raya{margin:18px auto 0;background:var(--oro)}
+.b-tres{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:52px auto 0;max-width:1180px}
+.b-v{padding:0 30px;text-align:center}
+.b-v+.b-v{border-left:1px solid #ddd8ce}
+.b-v-nombre{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.2em;
+  text-transform:uppercase;color:#111;font-weight:700}
+.b-v-mov{display:block;font-size:12px;letter-spacing:.06em;color:#7d776c;margin-top:5px;
+  font-family:'JetBrains Mono',monospace;text-transform:none}
+.b-v-precio{font-size:15px;color:#43413d;margin-top:8px}
+.b-v-precio b{font-size:19px;color:#111;font-weight:800}
+.b-v-foto{margin:22px auto 0;max-width:210px}
+.b-v-foto img{width:100%;filter:saturate(.96)}
+.b-v p{font-size:14px;color:#565248;margin-top:18px;line-height:1.6}
+.b-v p b{color:#111}
+
+/* ---------- 5 · lo que llevan todas ---------- */
+.b-todas{background:#eceadf;color:#1a1a1a;padding:34px 3vw 40px;text-align:center;
+  border-top:1px solid #ddd8ce;border-bottom:1px solid #ddd8ce}
+.b-todas h2{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:#9a8443;font-weight:700}
+.b-iconos{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:26px;
+  max-width:1320px;margin-left:auto;margin-right:auto}
+.b-ic{padding:0 14px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.b-ic+.b-ic{border-left:1px solid #dcd6ca}
+.b-ic svg{stroke:#6f6858;width:26px;height:26px}
+.b-ic span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:#4a4640;line-height:1.5}
+
+/* ---------- 6 · configurador ---------- */
+.b-config{display:grid;grid-template-columns:0.9fr 1fr 1.05fr;background:var(--hueso);color:#1a1a1a}
+.b-config-foto{background:#0d0d0d;overflow:hidden}
+.b-config-foto img{width:100%;height:100%;object-fit:cover;min-height:320px}
+.b-medidas{padding:44px 34px}
+.b-medidas h3,.b-configura h3{font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:#9a8443;font-weight:700}
+.b-medidas ul{list-style:none;margin-top:18px}
+.b-medidas li{font-size:14.5px;color:#43413d;padding:7px 0;border-bottom:1px solid #e3ded4;
+  display:flex;justify-content:space-between;gap:14px}
+.b-medidas li b{color:#111;font-weight:700;white-space:nowrap}
+.b-medidas .b-aviso{font-size:13px;color:#8d8578;margin-top:14px}
+.b-configura{padding:44px 34px;border-left:1px solid #e0dcd3;display:flex;flex-direction:column}
+.b-campo{margin-top:18px}
+.b-campo label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:#8d8578;margin-bottom:7px}
+.b-campo select{width:100%;padding:12px 14px;font:inherit;font-size:15px;color:#111;
+  background:#fff;border:1px solid #d6d0c4;border-radius:10px;appearance:none;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center}
+.b-campo select:focus{outline:none;border-color:var(--oro)}
+.b-precio-caja{background:#0b0b0b;color:#fff;border-radius:16px;padding:26px 24px;margin-top:26px;text-align:center}
+.b-precio{font-size:clamp(34px,4vw,46px);font-weight:800;color:var(--ambar);line-height:1}
+.b-precio-nota{font-size:12.5px;color:#a9a49b;margin-top:8px}
+.b-anadir{display:block;width:100%;margin-top:18px;padding:15px 20px;border:none;cursor:pointer;
+  background:var(--oro);color:#141414;font-family:'JetBrains Mono',monospace;font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700;border-radius:10px;
+  transition:background .2s,transform .15s}
+.b-anadir:hover{background:var(--ambar);transform:translateY(-1px)}
+.b-anadir[disabled]{background:#3a3a3a;color:#8a8f96;cursor:not-allowed;transform:none}
+.b-vermas{display:inline-block;margin-top:14px;font-size:13px;color:#c9c5bd}
+.b-vermas:hover{color:var(--ambar)}
+.b-hecho{margin-top:12px;font-size:13px;color:#8fd6a8;min-height:18px}
+
+/* ---------- 7 · remate ---------- */
+.b-remates{display:grid;grid-template-columns:repeat(4,1fr);background:var(--hueso);
+  color:#1a1a1a;border-top:1px solid #ddd8ce}
+.b-r{padding:26px 26px 30px;display:flex;gap:14px;align-items:flex-start}
+.b-r+.b-r{border-left:1px solid #e0dcd3}
+.b-r svg{stroke:#6f6858;width:24px;height:24px;flex:0 0 auto;margin-top:2px}
+.b-r b{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:#111}
+.b-r p{font-size:13.5px;color:#5b564e;margin-top:6px;line-height:1.5}
+
+@media(max-width:1100px){
+  .b-hero{grid-template-columns:1fr;min-height:auto}
+  .b-hero-foto{aspect-ratio:4/3}
+  .b-hero-texto{padding:54px 6vw 64px}
+  .b-dos{grid-template-columns:1fr}
+  .b-col+.b-col{border-left:none;border-top:1px solid #e0dcd3}
+  .b-iconos{grid-template-columns:repeat(4,1fr);gap:26px 0}
+  .b-ic:nth-child(4n+1){border-left:none}
+  .b-config{grid-template-columns:1fr}
+  .b-configura{border-left:none;border-top:1px solid #e0dcd3}
+  .b-remates{grid-template-columns:repeat(2,1fr)}
+  .b-r:nth-child(odd){border-left:none}
+}
+@media(max-width:760px){
+  .b-menu{display:none}
+  .b-tres{grid-template-columns:1fr;gap:44px}
+  .b-v+.b-v{border-left:none;border-top:1px solid #ddd8ce;padding-top:40px}
+  .b-iconos{grid-template-columns:repeat(2,1fr)}
+  .b-ic{border-left:none!important}
+  .b-remates{grid-template-columns:1fr}
+  .b-r+.b-r{border-left:none;border-top:1px solid #e0dcd3}
+  .b-medidas,.b-configura{padding:34px 22px}
+  .b-convence{padding:64px 22px 70px}
+  .b-versiones{padding:60px 22px 68px}
+}
+</style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="container nav-inner">
-    <a class="brand" href="/">la<span class="o"></span>ra<sup>®</sup></a>
-    <div class="nav-links">
-      <a href="/coleccion.html">La colección</a>
-      <a href="/manifiesto.html">El alma de un automático</a>
-      <a href="/materiales.html">Materiales</a>
-    </div>
+<nav class="b-nav">
+  <a class="b-marca" href="/">la<span class="o">O</span>ra</a>
+  <div class="b-menu">
+    <a href="/coleccion.html">Colección</a>
+    <a href="/manifiesto.html">El alma de un automático</a>
+    <a href="/materiales.html">Materiales</a>
   </div>
+  <a class="b-bolsa" href="/carrito.html" aria-label="Ver el carrito">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="b-cuenta" data-carrito-cuenta hidden>0</span>
+  </a>
 </nav>
 
-<!-- HÉROE -->
-<header class="hero">
-  <div class="container hero-grid">
-    <div class="stage reveal">
-      <span class="stage-badge"><span class="laora">laOra</span> · LO-07</span>
-      <img src="/assets/img/relojes/lo-07.jpg" alt="Reloj laOra Bitácora, lujo deportivo de acero" onerror="this.remove()">
-    </div>
-    <div>
-      <span class="eyebrow">LO-07 · Lujo deportivo de acero</span>
-      <h1>«Bitácora»</h1>
-      <p class="hero-sub" style="margin-top:14px">Lujo deportivo de acero · desde <b>250 €</b></p>
-      <div class="hero-cta">
-        <a href="/coleccion.html" class="btn btn-carbon">Avísame del estreno</a>
-      </div>
-      <div class="hero-mini">
-        <div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8843F" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> 4 acabados</div>
-        <div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8843F" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> Montado y controlado en Madrid</div>
-        <div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8843F" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg> Garantía de 3 años</div>
-      </div>
-    </div>
-  </div>
-</header>
+<main>
 
-<!-- LA HISTORIA -->
-<section class="block dark-sec">
-  <div class="container">
-    <div class="block-head reveal">
-      <span class="eyebrow">La historia</span>
-      <h2>La historia que llevas en la muñeca.</h2>
+  <!-- 1 · el reloj y la promesa -->
+  <section class="b-hero">
+    <div class="b-hero-foto">
+      <picture>
+        <source media="(max-width:1100px)" srcset="/assets/img/bitacora/hero-movil.jpg">
+        <img src="/assets/img/bitacora/hero.jpg" alt="LO-07 «Bitácora» de laOra, esfera turquesa con relieve horizontal y brazalete integrado de acero">
+      </picture>
     </div>
-    <div class="story reveal">
-      <p class="lead">El mismo diseñador que había revolucionado el sector, Gérald Genta, cuenta la leyenda que dibujó este reloj <b>en cinco minutos, durante una cena</b>, mirando a una mesa de directivos al otro lado del restaurante.</p>
-      <p class="">Se inspiró en la portilla de un transatlántico: esa ventana redondeada de los barcos con sus bisagras herméticas a los lados. Patek Philippe lo bautizó Nautilus, como el submarino de Julio Verne en 20.000 leguas de viaje submarino. Corría 1976.</p>
+    <div class="b-hero-texto">
+      <p class="b-eyebrow">LO-07</p>
+      <h1 class="b-hero-titular b-serif">Bitácora</h1>
+      <p class="b-hero-cat">Lujo deportivo de acero · desde <b>250 €</b></p>
+      <span class="b-raya"></span>
+      <p class="b-lema">Nunca soñé con tener un reloj de lujo.<br>Soñé con tener un gran reloj.</p>
+      <p class="b-p">Descubrí que una parte importante de lo que estaba pagando no era el reloj.
+      Era todo lo que había alrededor de él. Así que decidí hacer el mío.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- POR QUÉ ES UN ICONO -->
-<section class="block">
-  <div class="container block-head reveal">
-    <span class="eyebrow">Por qué es un icono</span>
-    <h2>Un diseño que no necesita firma.</h2>
-    <p>Porque llevó el lujo más serio del mundo a un reloj que podías mojar. Su forma —el octágono redondeado, las «orejas» laterales como bisagras, la esfera de líneas horizontales— es de las poquísimas siluetas que se reconocen en la oscuridad. Y una versión suya, en un turquesa concreto, se convirtió hace pocos años en el reloj más deseado y más imposible de conseguir del planeta.</p>
-  </div>
-</section>
+  <!-- 2 · el nombre · cuarzo o mecánico -->
+  <section class="b-dos">
+    <div class="b-col">
+      <h2>El nombre</h2>
+      <p>En un barco, la bitácora es el cuaderno donde se anota la hora de cada cosa que pasa
+      a bordo: el rumbo, el viento, la avería, la calma.</p>
+      <p>Nada existe hasta que alguien apunta a qué hora ocurrió.</p>
+      <p>No lo llamé «Náutico» ni «Marino» — eso solo dice «parece de barco».</p>
+      <p><b>La bitácora es otra cosa: es el registro del tiempo.</b></p>
+      <p>Y un reloj no es más que eso: <b>tu bitácora en la muñeca.</b></p>
+      <p class="b-nota-foto">Aquí va la foto del cuaderno de bitácora abierto con el compás,
+      la del boceto. Todavía no existe: cuando la tengas, entra en este hueco.</p>
+    </div>
+    <div class="b-col">
+      <h2>Cuarzo o mecánico:<br>para qué es cada uno</h2>
+      <p>Un <b>cuarzo</b> no es un mal reloj, que quede claro. Si lo que quieres es exactitud,
+      es la mejor opción: no se retrasa, siempre va a su hora. Y el Bitácora lo tienes también
+      así, para quien quiere el diseño y olvidarse.</p>
+      <p>Pero para mí un reloj tiene que tener <b>alma</b>. Cada vez que lo miro tiene que
+      suponer algo grande. Y eso, para mí, es un <b>mecanismo mecánico</b>: solo con muelles y
+      engranajes, es capaz de moverse y marcar el tiempo. Un reloj que late.</p>
+      <p>Si yo tuviera que quedarme con una sola versión, sería la del <b>Miyota 9015</b>,
+      por lo <b>suave</b> que es su <b>barrido</b>.</p>
+    </div>
+  </section>
 
-<!-- NUESTRO TRIBUTO -->
-<section class="block gris claro">
-  <div class="container">
-    <div class="block-head reveal">
-      <span class="eyebrow">Nuestro tributo</span>
-      <h2>Lo mismo que amas. Sin el peaje.</h2>
+  <!-- 3 · convénceme en 30 segundos -->
+  <section class="b-convence">
+    <div class="b-convence-caja">
+      <p class="b-eyebrow">Convénceme en 30 segundos</p>
+      <h2>Si lo único que quieres es un reloj que dé la hora, funcione bien y te dure toda
+      la vida — cómprate un Casio. En serio, es imbatible.</h2>
+      <p>Pero si quieres mirar tu muñeca y que ese reloj te transmita lo que has conseguido,
+      la recompensa a tu esfuerzo, lo que significa para ti llevarlo puesto…</p>
+      <p class="b-remate">entonces el Bitácora es un candidato perfecto.</p>
+      <p>Bonito, elegante, y a la altura de los grandes iconos de la relojería — esos por los
+      que tendrías que pagar de mil euros para arriba.</p>
     </div>
-    <div class="story reveal">
-      <p>Por eso la «Bitácora» va precisamente en ese turquesa. Es el color que puso a este diseño en boca de todo el mundo, y el que mejor cuenta lo que somos: el mismo deseo, sin la lista de espera imposible ni el peaje del apellido.</p>
-      <p>Esfera de relieve horizontal, brazalete integrado macizo, automático fino. La portilla de un transatlántico en tu muñeca.</p>
-      <p>Y el nombre: en un barco, la bitácora es el cuaderno donde se anota la hora de cada cosa que pasa a bordo. El rumbo, el viento, la avería, la calma. Nada existe hasta que alguien apunta a qué hora ocurrió.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- LOS ACABADOS -->
-<section class="block" id="acabados">
-  <div class="container">
-    <div class="block-head reveal">
-      <span class="eyebrow">Los acabados</span>
-      <h2>Tú eliges hasta dónde quieres llegar.</h2>
-      <p>Cada reloj de laOra vive en cuatro terminaciones. No cambia el diseño: cambian los materiales y la mecánica. La de entrada nunca es «la barata»: pasa exactamente el mismo control de calidad que la más alta.</p>
-    </div>
-    <div class="tabla-acabados">
-      <div class="ta-col reveal">
-        <div class="ta-head">
-          <span class="ta-num">01</span>
-          <h3 class="ta-nombre">Alba</h3>
-          <p class="ta-precio">Desde 250 €</p>
-        </div>
-        <div class="ta-specs">
-          <div class="ta-spec">
-            <div class="ta-label">Movimiento</div>
-            <div class="ta-valor">Cuarzo suizo</div>
-            <div class="ta-halago">Una pila que dura años y nunca se despista: exactitud sin esfuerzo, cada segundo del año.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Cristal</div>
-            <div class="ta-valor">Mineral K1 endurecido o zafiro</div>
-            <div class="ta-halago">El K1 es fuerte y flexible: si recibe un golpe seco no se hace añicos, solo se raya un poco. Menos quebradizo que el zafiro.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Brazalete</div>
-            <div class="ta-valor">Integrado, macizo</div>
-            <div class="ta-halago">Nace de la misma caja, sin uniones ni costuras: el metal fluye de la caja al brazo.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Esfera</div>
-            <div class="ta-valor">Relieve horizontal, turquesa</div>
-            <div class="ta-halago">La portilla de un transatlántico en tu muñeca, en el color que puso a este diseño en boca de todo el mundo.</div>
-          </div>
-        </div>
-              <div class="ta-cta" data-ref="LO-07" data-acabado="Alba"></div>
+  <!-- 4 · las tres versiones -->
+  <section class="b-versiones" id="versiones">
+    <h2>Las tres versiones</h2>
+    <span class="b-raya"></span>
+    <div class="b-tres">
+      <div class="b-v">
+        <p class="b-v-nombre">Alba<span class="b-v-mov">cuarzo · Ronda suizo</span></p>
+        <p class="b-v-precio">desde <b>250 €</b></p>
+        <div class="b-v-foto"><img src="/assets/img/bitacora/frontal.jpg" alt="Bitácora en acabado Alba, cuarzo suizo" loading="lazy"></div>
+        <p>Movimiento Ronda suizo. El más fino y ligero, preciso, «póntelo y olvídate».
+        Para quien quiere el diseño sin más.</p>
       </div>
-      <div class="ta-col reveal">
-        <div class="ta-head">
-          <span class="ta-num">02</span>
-          <h3 class="ta-nombre">Levante</h3>
-          <p class="ta-precio">350–480 €</p>
-        </div>
-        <div class="ta-specs">
-          <div class="ta-spec">
-            <div class="ta-label">Movimiento</div>
-            <div class="ta-valor">Automático Seiko NH35</div>
-            <div class="ta-halago">No lleva pila: se da cuerda solo, con el movimiento de tu muñeca. Vive de tu energía.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Cristal</div>
-            <div class="ta-valor">Zafiro con AR</div>
-            <div class="ta-halago">Casi tan duro como un diamante: apenas se raya. Y con un tratamiento invisible antirreflejos.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Brazalete</div>
-            <div class="ta-valor">Integrado, macizo</div>
-            <div class="ta-halago">El mismo brazalete que nace de la caja, sin uniones ni costuras: el metal fluye de la caja al brazo.</div>
-          </div>
-        </div>
-              <div class="ta-cta" data-ref="LO-07" data-acabado="Levante"></div>
+      <div class="b-v">
+        <p class="b-v-nombre">Levante<span class="b-v-mov">automático · Seiko NH35</span></p>
+        <p class="b-v-precio">desde <b>320 €</b></p>
+        <div class="b-v-foto"><img src="/assets/img/bitacora/frontal.jpg" alt="Bitácora en acabado Levante, automático Seiko NH35" loading="lazy"></div>
+        <p>Aquí empieza el corazón mecánico. Robusto, fiable, fondo visto para ver la
+        maquinaria. El equilibrio perfecto.</p>
       </div>
-      <div class="ta-col reveal">
-        <div class="ta-head">
-          <span class="ta-num">03</span>
-          <h3 class="ta-nombre">Cenit</h3>
-          <p class="ta-precio">500–700 €</p>
-        </div>
-        <div class="ta-specs">
-          <div class="ta-spec">
-            <div class="ta-label">Movimiento</div>
-            <div class="ta-valor">Automático Miyota 9015</div>
-            <div class="ta-halago">El mismo truco sin pila, en su versión más fina y suave, para respetar el perfil delgado del diseño original.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Caja</div>
-            <div class="ta-valor">Acero de alto pulido o titanio</div>
-            <div class="ta-halago">El titanio es tan fuerte como el acero pero mucho más ligero: casi no notas que lo llevas puesto.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Cristal</div>
-            <div class="ta-valor">Zafiro abombado</div>
-            <div class="ta-halago">Curvado como una burbuja de jabón en vez de plano: hace que la luz baile sobre la esfera.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Brazalete</div>
-            <div class="ta-valor">Integrado, mecanizado</div>
-            <div class="ta-halago">Cada eslabón tallado a máquina con precisión milimétrica: ahí es donde de verdad se ve el dinero.</div>
-          </div>
-        </div>
-              <div class="ta-cta" data-ref="LO-07" data-acabado="Cenit"></div>
-      </div>
-      <div class="ta-col eclipse reveal">
-        <div class="ta-head">
-          <span class="ta-num">04</span>
-          <h3 class="ta-nombre">Eclipse</h3>
-          <p class="ta-precio">Prima de +50–100 € sobre Cenit</p>
-        </div>
-        <div class="ta-specs">
-          <div class="ta-spec">
-            <div class="ta-label">Movimiento</div>
-            <div class="ta-valor">Automático Miyota 9015</div>
-            <div class="ta-halago">El mismo corazón fino y suave de Cenit, vestido ahora de negro riguroso.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Caja y brazalete</div>
-            <div class="ta-valor">Acero o titanio en DLC negro</div>
-            <div class="ta-halago">Un revestimiento de carbono casi tan duro como el diamante: no se raya, no se descascarilla, no envejece mal. Negro sobre negro sobre negro.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Cristal</div>
-            <div class="ta-valor">Zafiro abombado</div>
-            <div class="ta-halago">Curvado como una burbuja de jabón: hace que la luz baile sobre la esfera negra.</div>
-          </div>
-          <div class="ta-spec">
-            <div class="ta-label">Detalle</div>
-            <div class="ta-valor">Segundero en amarillo, único acento de color</div>
-            <div class="ta-halago">Un único destello, girando como el filo de luz que asoma cuando la luna tapa el sol.</div>
-          </div>
-        </div>
-              <div class="ta-cta" data-ref="LO-07" data-acabado="Eclipse"></div>
+      <div class="b-v">
+        <p class="b-v-nombre">Cenit<span class="b-v-mov">automático · Miyota 9015</span></p>
+        <p class="b-v-precio">desde <b>420 €</b></p>
+        <div class="b-v-foto"><img src="/assets/img/bitacora/frontal.jpg" alt="Bitácora en acabado Cenit, automático Miyota 9015" loading="lazy"></div>
+        <p>Mi favorito. Automático más fino y de barrido suavísimo, zafiro doble domo, mejor
+        pulido, fondo visto y correa extra. <b>El que me quedaría yo.</b></p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FICHA TÉCNICA · AGUA -->
-<section class="block gris">
-  <div class="container">
-    <div class="block-head reveal">
-      <span class="eyebrow">Ficha técnica — Agua</span>
-      <h2>Lo que puedes hacer con él. Y lo que no.</h2>
+  <!-- 5 · lo que llevan todas -->
+  <section class="b-todas">
+    <h2>Lo que llevan todas, sin excepción</h2>
+    <div class="b-iconos">
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg><span>Acero 316L</span></div>
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M7 9a6 6 0 0 1 5-2"/></svg><span>Cristal de zafiro antirreflejo</span></div>
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg><span>Super-LumiNova</span></div>
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 3s6 6.4 6 10a6 6 0 0 1-12 0c0-3.6 6-10 6-10z"/></svg><span>Estanqueidad 50 m</span></div>
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 3h6M9 21h6M3 9v6M21 9v6"/></svg><span>Brazalete integrado macizo</span></div>
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg><span>Montado y controlado en Madrid</span></div>
+      <div class="b-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 3l8 3v6c0 5-3.4 8.2-8 9-4.6-.8-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg><span>3 años de garantía y servicio técnico propio</span></div>
     </div>
-    <div class="agua reveal">
-      <div class="dato">Estanqueidad: <b>50 m (5 bar)</b>.</div>
-      <div class="llano">En cristiano: <b>lluvia, manos, un chapuzón corto.</b> No es un reloj para nadar a diario ni para el mar.</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- EL PROCESO DE MADRID -->
-<section class="block" id="madrid">
-  <div class="container block-head reveal">
-    <span class="eyebrow">El proceso de Madrid</span>
-    <h2>Uno a uno. O no sale.</h2>
-    <p>Montaje, calibración y control uno a uno. 3 años de garantía legal en España, con servicio técnico propio. Fabricamos en series pequeñas: pide el aviso y te escribimos cuando tu modelo esté disponible.</p>
-    <p style="margin-top:26px">¿Cuarzo, automático o cuerda manual? Léelo aquí: <a href="/manifiesto.html" style="color:var(--dorado);font-weight:700">«El alma de un automático»</a>.</p>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="block dark-sec" style="background:radial-gradient(120% 120% at 50% 0%,#1b1e24,#0b0d12)">
-  <div class="container block-head reveal">
-    <span class="eyebrow">El estreno</span>
-    <h2>Que te avisemos cuando salga la «Bitácora».</h2>
-    <p>Sin pago por adelantado. Te escribimos en cuanto se abra la reserva, por orden de llegada.</p>
-    <div class="hero-cta" style="justify-content:center;margin-top:30px">
-      <a href="/coleccion.html" class="btn btn-ambar">Avísame del estreno</a>
-      <a class="btn btn-claro" href="/coleccion.html">Ver los otros ocho</a>
+  <!-- 6 · configurador -->
+  <section class="b-config" id="configurar">
+    <div class="b-config-foto">
+      <img src="/assets/img/bitacora/ancha.jpg" alt="Detalle del brazalete integrado y la caja octogonal del Bitácora" loading="lazy">
     </div>
-  </div>
-</section>
+
+    <div class="b-medidas">
+      <h3>Medidas (aprox.)</h3>
+      <ul>
+        <li>Diámetro <b>~40 mm</b></li>
+        <li>Grosor <b>~9,5–11 mm</b></li>
+        <li>Distancia entre asas <b>~47 mm</b></li>
+        <li>Ancho de brazalete <b>~22 mm</b></li>
+      </ul>
+      <p class="b-aviso">Brazalete integrado: no admite correa estándar.</p>
+      <p class="b-aviso">El grosor cambia según la versión: el cuarzo es el más fino y el
+      automático con fondo visto, el más grueso.</p>
+    </div>
+
+    <div class="b-configura">
+      <h3>Configura el tuyo</h3>
+
+      <div class="b-campo">
+        <label for="bVersion">Versión</label>
+        <select id="bVersion">
+          <option value="Alba">Alba — cuarzo Ronda suizo</option>
+          <option value="Levante">Levante — automático Seiko NH35</option>
+          <option value="Cenit" selected>Cenit — automático Miyota 9015</option>
+        </select>
+      </div>
+
+      <div class="b-campo">
+        <label for="bEsfera">Esfera</label>
+        <select id="bEsfera">
+          <option value="Turquesa" selected>Turquesa</option>
+          <option value="Negra">Negra</option>
+          <option value="Azul noche">Azul noche</option>
+        </select>
+      </div>
+
+      <div class="b-campo">
+        <label for="bExtra">Extras</label>
+        <select id="bExtra">
+          <option value="" data-precio="0" selected>Sin extras</option>
+          <option value="Correa de piel adicional" data-precio="25">Correa de piel adicional (+25 €)</option>
+        </select>
+      </div>
+
+      <div class="b-precio-caja">
+        <div class="b-precio" id="bPrecio">—</div>
+        <p class="b-precio-nota">Envío gratis · 3 años de garantía</p>
+        <button class="b-anadir" id="bAnadir" type="button">Añadir al carrito</button>
+        <p class="b-hecho" id="bHecho"></p>
+        <a class="b-vermas" href="#versiones">Ver más detalles →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · remate -->
+  <section class="b-remates">
+    <div class="b-r">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg>
+      <div><b>Sin peajes de marca</b><p>Sin intermediarios. Sin sobrecostes.</p></div>
+    </div>
+    <div class="b-r">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <div><b>Calidad sin compromisos</b><p>Materiales premium. Mecanismos contrastados.</p></div>
+    </div>
+    <div class="b-r">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      <div><b>Revisado uno a uno</b><p>Cada reloj se revisa y prueba antes de llegar a ti.</p></div>
+    </div>
+    <div class="b-r">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/></svg>
+      <div><b>Club laOra</b><p>Comunidad, ventajas exclusivas y prioridad en lanzamientos.</p></div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <div class="brand"><span style="color:var(--tinta)">la</span><span class="o"></span><span style="color:var(--tinta)">ra</span><sup>®</sup></div>
+  <div class="brand">la<span class="o"></span>ra<sup>®</sup></div>
   <div class="footer-links">
     <a href="/materiales.html">Materiales</a>
     <a href="/manifiesto.html">El alma de un automático</a>
@@ -285,7 +422,69 @@
   <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
 </footer>
 
-<script src="/assets/js/precios.js?v=15"></script>
-<script src="/assets/js/laora.js?v=15"></script>
+<script src="/assets/js/precios.js?v=16"></script>
+<script src="/assets/js/carrito.js?v=16"></script>
+<script>
+/* Configurador de la Bitácora. El precio que se pinta sale de precios.js,
+   nunca escrito a mano aquí. Y lo que se pinte da igual para el cobro: el
+   servidor recalcula y rechaza si no cuadra. */
+(function () {
+  var REF = 'LO-07';
+  var version = document.getElementById('bVersion');
+  var esfera  = document.getElementById('bEsfera');
+  var extra   = document.getElementById('bExtra');
+  var salida  = document.getElementById('bPrecio');
+  var boton   = document.getElementById('bAnadir');
+  var hecho   = document.getElementById('bHecho');
+  if (!version || typeof laoraAcabado !== 'function') return;
+
+  function extraElegido() {
+    var o = extra.options[extra.selectedIndex];
+    return { nombre: o.value, precio: Number(o.getAttribute('data-precio') || 0) };
+  }
+
+  function total() {
+    var a = laoraAcabado(REF, version.value);
+    if (!a || !a.precio) return null;
+    return a.precio + extraElegido().precio;
+  }
+
+  function pintar() {
+    var t = total();
+    hecho.textContent = '';
+    if (t === null) {
+      salida.textContent = 'Aún no a la venta';
+      salida.style.fontSize = '20px';
+      boton.disabled = true;
+      boton.textContent = 'Todavía no está a la venta';
+      return;
+    }
+    salida.style.fontSize = '';
+    salida.textContent = laoraEuros(t);
+    boton.disabled = false;
+    boton.textContent = 'Añadir al carrito';
+  }
+
+  [version, esfera, extra].forEach(function (s) { s.addEventListener('change', pintar); });
+  pintar();
+
+  boton.addEventListener('click', function () {
+    var t = total();
+    if (t === null) return;
+    var e = extraElegido();
+    laoraCarritoAnadir({
+      ref: REF,
+      modelo: 'Bitácora',
+      acabado: version.value,
+      esfera: esfera.value,
+      extras: e.nombre ? [{ nombre: e.nombre, precio: e.precio }] : [],
+      precio: t
+    });
+    hecho.textContent = 'Añadido. Llevas ' + laoraCarritoUnidades() + ' en el carrito.';
+  });
+})();
+</script>
+
+<script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
