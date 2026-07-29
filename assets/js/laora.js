@@ -113,3 +113,38 @@ var LAORA_WHATSAPP = '34689806987';
     }).catch(porWhatsApp);
   });
 })();
+
+/* ============================================================
+   Botón de reserva en cada acabado de la ficha de producto.
+   El precio NUNCA se escribe en el HTML: sale de precios.js.
+   Un acabado sin precio cerrado (o sin fecha de entrega) no
+   puede cobrar: enseña el aviso de estreno de siempre.
+   ============================================================ */
+(function () {
+  var huecos = document.querySelectorAll('.ta-cta');
+  if (!huecos.length || typeof LAORA_PRECIOS === 'undefined') return;
+
+  Array.prototype.forEach.call(huecos, function (hueco) {
+    var ref = hueco.getAttribute('data-ref');
+    var nombre = hueco.getAttribute('data-acabado');
+    var a = laoraAcabado(ref, nombre);
+    if (!a) return;
+
+    if (!laoraSePuedeReservar(ref, nombre)) {
+      hueco.innerHTML =
+        '<a class="btn-reserva btn-reserva-aviso" href="/?modelo=' + ref + '#interesados">' +
+        'Avísame del estreno</a>' +
+        '<p class="ta-cta-nota">Aún no está a la venta.</p>';
+      return;
+    }
+
+    var senal = laoraSenal(a.precio);
+    hueco.innerHTML =
+      '<a class="btn-reserva" href="/reservar.html?ref=' + encodeURIComponent(ref) +
+      '&acabado=' + encodeURIComponent(nombre) + '">' +
+      'Reservar por ' + laoraEuros(senal) + '</a>' +
+      '<p class="ta-cta-nota">Señal del ' + LAORA_SENAL_PORCENTAJE + ' %. ' +
+      'Los ' + laoraEuros(a.precio - senal) + ' restantes, al enviarte el reloj. ' +
+      'Se devuelve entera si cambias de idea en 14 días.</p>';
+  });
+})();
