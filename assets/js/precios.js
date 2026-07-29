@@ -81,13 +81,14 @@ var LAORA_PRECIOS = {
       Eclipse: { precio: null, horquilla: 'Prima de +50–100 € sobre Cenit' }
     }
   },
+  /* LO-07 es el primero con precio cerrado (boceto de Óscar, 29/07/2026).
+     Tres versiones, no cuatro: la Bitácora no lleva Eclipse. */
   'LO-07': {
     nombre: 'Bitácora',
     acabados: {
-      Alba:    { precio: null, horquilla: 'Desde 250 €' },
-      Levante: { precio: null, horquilla: '350–480 €' },
-      Cenit:   { precio: null, horquilla: '500–700 €' },
-      Eclipse: { precio: null, horquilla: 'Prima de +50–100 € sobre Cenit' }
+      Alba:    { precio: 250, horquilla: '250 €' },
+      Levante: { precio: 320, horquilla: '320 €' },
+      Cenit:   { precio: 420, horquilla: '420 €' }
     }
   },
   'LO-08': {
