@@ -8,10 +8,11 @@
 //
 // Desplegar con «Enforce JWT verification» DESACTIVADO: la llama
 // el trigger de la base.
-// Secretos: RESEND_API_KEY · INTERESADOS_EMAIL · WEB_URL
+// Secretos: RESEND_API_KEY e INTERESADOS_EMAIL (ya existen, los comparte
+// con activala) · LAORA_WEB_URL
 // ============================================================
 
-const WEB = Deno.env.get('WEB_URL') ?? 'https://laora.es';
+const WEB = Deno.env.get('LAORA_WEB_URL') ?? 'https://laora.es';
 
 const esc = (s: unknown) =>
   String(s ?? '—').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
