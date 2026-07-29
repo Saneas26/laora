@@ -1,169 +1,362 @@
-# laOra — traspaso de contexto (29/07/2026)
+# laOra — traspaso completo
 
-Documento de traspaso para quien continúe: humano o la siguiente sesión de
-Claude. Resume qué existe, dónde vive cada pieza, qué falta y qué está roto.
+**Última actualización: 29/07/2026.** Todo lo de este documento está comprobado
+contra producción ese día, no escrito de memoria.
+
+---
 
 ## 0. Cómo se trabaja aquí
 
-- **Repo**: `Saneas26/laora` en GitHub. Rama de trabajo de esta sesión:
-  `main` directamente al final (cada cambio fue rama → PR → merge → verificado
-  con `git show origin/main:<archivo>` antes de darlo por hecho).
-- **Despliegue**: Cloudflare Pages, no Vercel. `main` = producción
-  (`laora.es`), cada rama = preview en `<rama-normalizada>.laora.pages.dev`.
-  Sin build: HTML/CSS/JS vanilla, build output = `/`.
-- **El trabajo del humano (Óscar) de aquí en adelante**: dar acceso de sesión
-  (Chrome logueado) a los paneles que hagan falta — Cloudflare, Supabase,
-  Mollie, GitHub si algo no se puede por API. El resto (código, commits,
-  PRs, verificación) lo hace el asistente. Antes de tocar un panel externo,
-  pregunta cuál hace falta para la tarea concreta; no todos a la vez.
+**Lo hace todo Claude Code.** Óscar no escribe código, no hace commits y no toca
+paneles salvo cuando se le pide expresamente. Su trabajo es: dar acceso de sesión
+en **Google Chrome** (deja la sesión abierta y logueada) y decidir. El resto
+—código, imágenes, commits, PRs, despliegues y verificación— lo hace el asistente.
 
-## 1. Accesos y rutas online
+**Nunca nos rendimos.** Si algo falla, se busca la causa hasta el fondo: el
+segundo intento no es repetir lo mismo, es entender por qué falló el primero.
+En esta ventana, tres problemas se resolvieron solo porque no se dio nada por
+imposible: el volcado que se colgaba (era un diálogo invisible), los documentos
+internos publicados (hicieron falta tres mecanismos hasta dar con el que
+funciona) y las Edge Functions con un 502 mudo (faltaba un grant que no
+documenta nadie).
 
-| Servicio | Ruta / identificador | Para qué |
+**Nunca se dice «hecho» sin haberlo visto.** Cada afirmación se comprueba: `curl`
+contra producción, captura del navegador o consulta a la base. Si no se ha
+podido comprobar, se dice.
+
+**No se inventa nada que pueda cobrar dinero, prometer un plazo o afirmar un
+dato legal.** Antes se pregunta. Un precio inventado o una garantía mal puesta no
+es un error de diseño: es un problema con un cliente real.
+
+**Se avisa de lo que se rompe por el camino**, aunque no lo haya pedido nadie y
+aunque quede feo. Un enlace muerto, un documento interno publicado o una foto que
+contradice al texto se cuentan, no se tapan.
+
+### El ciclo
+Rama → preview → «fusiona» de Óscar → `main` → verificación en producción.
+Cuando Óscar dice «encárgate tú», se trabaja directo sobre `main` y se verifica
+igual. **Hay otra ventana trabajando en el mismo repo**: antes de subir, siempre
+`git pull`; si el push se rechaza, mezclar y comprobar que no se pisa nada.
+
+---
+
+## 1. Plataformas: qué hay en cada una
+
+### GitHub — `github.com/Saneas26/laora`
+Todo el código y el historial. `main` es producción.
+
+**Ramas que ya no valen para nada** (se pueden borrar): `claude/acabados-solares`
+(obsoleta, main la adelantó por la izquierda), `claude/reservas` (ya fusionada),
+`claude/brief-v3`, `claude/copy-v31`, `claude/fotos`, `claude/leer-mas`,
+`claude/trinchera`, `claude/web-laora`, y una veintena de `feat-*` / `fix-*`
+ya fusionadas.
+
+**Ojo:** cada rama publica preview pública en `<rama>.laora.pages.dev` con su
+propio `_redirects`. Una rama vieja puede estar filtrando documentos internos.
+
+### Cloudflare Pages — **NO es Vercel**
+Proyecto `laora`, dominio `laora.es` (+ `www`). Panel: `dash.cloudflare.com`.
+
+- Sin build: HTML/CSS/JS vanilla. **Build output directory: `/`** — todo el repo
+  se publica tal cual.
+- `main` = producción. Cada rama = preview automática.
+- **`vercel.json` y `.vercelignore` no hacen absolutamente nada aquí.** Se
+  intentaron y se borraron. Lo único que funciona es `_redirects`.
+- La caché de borde tarda y es **inconsistente entre nodos**: justo después de
+  subir, unas peticiones dan lo nuevo y otras lo viejo. No es un fallo del
+  despliegue. Hay que sondear hasta varias lecturas seguidas correctas.
+
+### Supabase — proyecto **`activala`**, ref `uikanfvigunjhzibnhxf`
+`https://uikanfvigunjhzibnhxf.supabase.co` · organización **Saneas**, plan **Pro**.
+
+**Regla del grupo (decisión de Óscar, 29/07/2026): DOS proyectos y ni uno más.**
+- `saneas-app` → **aislado**, solo Saneas. No se toca desde aquí.
+- `activala` → **compartido** por el resto de marcas.
+
+Comparten instancia pero **no comparten tablas**: un esquema de Postgres por marca.
+
+| Esquema | Contenido |
+|---|---|
+| `activala` | `interesados` (venía de `public`, nunca llegó a conectarse) |
+| `laora` | `interesados`, `reservas`, vista `reservas_pendientes` |
+| `acumula` | reservado, vacío. Acumula sigue en su proyecto Free aparte |
+| `public` | **vacío a propósito** |
+
+Guion reejecutable: `.supabase/estructura-grupo.sql`.
+
+**Edge Functions desplegadas** (las de laOra con prefijo, todas con «Verify JWT»
+DESACTIVADO):
+
+| Función | Fichero | Quién la llama |
 |---|---|---|
-| **GitHub** | `github.com/Saneas26/laora` | Código fuente, todo el historial |
-| **Cloudflare Pages** | proyecto `laora`, dominio `laora.es` (+ `www`) | Hosting. Dashboard: `dash.cloudflare.com` |
-| **Supabase** | proyecto **`activala`** (compartido por el grupo), ref `uikanfvigunjhzibnhxf` → `https://uikanfvigunjhzibnhxf.supabase.co` | Base de datos e Edge Functions de laOra (y de otras marcas del grupo, en esquemas separados) |
-| **Supabase — esquema** | `laora` (dentro del proyecto `activala`; también existen `activala` y `acumula` como esquemas hermanos, y `public` se deja vacío a propósito) | Tablas `laora.interesados`, `laora.reservas`, vista `laora.reservas_pendientes` |
-| **Mollie** | cuenta en `mollie.com` (alta pendiente de verificar del todo) | Pasarela de pago con tarjeta/Bizum automático |
-| **Resend** | `resend.com`, dominio verificado `saneas.es` | Envío de los correos de aviso/confirmación |
-| **Google Sheet** | `laora-biblioteca-materiales` (hoja "Compras — enlaces") | Solo sourcing de proveedores/materiales — no toca la web en producción |
+| `avisar-interesado` | — | **es de activala, NO tocar** |
+| `laora-crear-reserva` | `.supabase/crear-reserva.ts` | la web |
+| `laora-mollie-webhook` | `.supabase/mollie-webhook.ts` | Mollie |
+| `laora-avisar-reserva` | `.supabase/avisar-reserva.ts` | trigger de la base |
 
-No hay Vercel propio de laOra: la única URL `.vercel.app` que aparece en el
-código es `pordondevoy-saneas.vercel.app`, la app hermana del grupo Saneas
-(aparece en el pie como enlace, y es el endpoint que usa `telemetria.js`
-para el ping anónimo de visitas).
+**Secretos:** `LAORA_WEB_URL` = `https://laora.es` ✅ · `RESEND_API_KEY` ✅ ·
+`INTERESADOS_EMAIL` ✅ (los dos últimos compartidos con activala) ·
+**`LAORA_MOLLIE_API_KEY` FALTA** — la pone Óscar, es una credencial.
 
-## 2. Rutas locales del repo (lo importante)
+Clave publicable (va en el navegador, es pública por diseño):
+`sb_publishable_1eLOM22REKcIJyHe36W_4Q_1Z3eyRam`.
+
+### Mollie — la pasarela elegida
+Cuenta pendiente de dar de alta y verificar. Se eligió por el pago partido.
+Junto a ella, **Bizum y transferencia a mano**, sin comisión.
+
+### Resend — correos
+Dominio verificado `saneas.es`. Se envía desde `laOra <laora@saneas.es>`.
+
+### Google Drive — material gráfico
+Carpeta **`laOra_Material`**, id `1L7BU1QS0pBC9qRhZGrrlXSsrRdJgFcU2`, en la cuenta
+**`oscar.laora@gmail.com`** (en Chrome, el perfil `/u/2/`).
+
+**El conector de Drive de Claude está en OTRA cuenta** (`oscarbelloso10@`): solo
+ve lo que esté dentro de esa carpeta compartida. Si un fichero no aparece, casi
+siempre es que está fuera de ella, no que no exista. Comprobarlo abriendo Drive
+en el Chrome de Óscar, que es la fuente fiable.
+
+Dentro hay mezclados **renders de producto** y **bocetos de web**. No se
+distinguen por el nombre: hay que abrirlos.
+- Renders buenos: `lunar`, `cero_cero`, `bauhaus`, `precisa`, `trinchera`,
+  `ocho_lados`, `Bitacora_Front`, `tortuga`, `pressage` (que es el **Cóctel**).
+- Bocetos de web: `coleccion.png`, `bitacora_landing1/2/3.png`,
+  `Bitacora_extra.png`, `bitacora_extra2/3.png`, `Bitacora_lateral_Derecho.png`.
+- Sin usar todavía: `hora_cero.png`, `coctel.png` (ambiente con copa),
+  `lunar_planeta.png`, `cero_cero_acto3.png`, `lunar_acto4.png`, `acto2/3/5/6/7.png`.
+
+---
+
+## 2. El repo, carpeta por carpeta
 
 ```
-/home/user/laora/
-├── index.html                 ← LA HOME. Narrativa de 7 Actos + pie. Es "v2" ya publicada como v1.
-├── manifiesto.html             "El alma de un automático"
-├── materiales.html             Los materiales que se usan
-├── privacidad.html             Política de privacidad (actualizada con el flujo de reserva)
-├── condiciones-de-venta.html   Términos de venta — TIENE 4 HUECOS SIN RELLENAR (ver §4)
-├── reservar.html               Checkout de una reserva (ref + acabado por query string)
-├── reserva-recibida.html       Pantalla final tras reservar
+~/Sites/laora/
+├── index.html                   LA HOME. Narrativa de 7 Actos, CSS inline
+├── coleccion.html               La colección: hero, filosofía, los nueve, cierre
+├── manifiesto.html              «El alma de un automático»
+├── materiales.html              Los materiales y lo que se rechaza
+├── privacidad.html              RGPD (CSS propio inline, no usa laora.css)
+├── condiciones-de-venta.html    Contrato de venta — 4 HUECOS SIN RELLENAR
+├── reservar.html                Checkout de reserva con señal del 25 %
+├── reserva-recibida.html        Pantalla final de la reserva
+├── carrito.html                 Carrito (nuevo, 29/07)
 ├── relojes/
-│   └── lo-0X-*.html            Una ficha por modelo (9). Cada una: 4 acabados + botón de reserva
+│   ├── lo-01-lunar.html         ┐
+│   ├── lo-02-cero-cero.html     │  ocho fichas con el formato viejo
+│   ├── lo-03-bauhaus.html       │  (tabla de cuatro acabados)
+│   ├── lo-04-precisa.html       │
+│   ├── lo-05-trinchera.html     │
+│   ├── lo-06-ocho-lados.html    │
+│   ├── lo-08-tortuga.html       │
+│   ├── lo-09-coctel.html        ┘
+│   └── lo-07-bitacora.html      ← FORMATO NUEVO, el del boceto. La plantilla.
 ├── assets/
-│   ├── css/laora.css           Hoja de estilos de TODO menos los 7 Actos (que van inline en index.html)
+│   ├── css/laora.css            Estilos de todo menos la home y las páginas nuevas
 │   ├── js/
-│   │   ├── laora.js            Nav, animaciones .reveal, formulario interesados, botón de reserva
-│   │   ├── precios.js          ÚNICA fuente de precios — ver §4, ahora mismo todo en null
-│   │   ├── reservar.js         Checkout completo
-│   │   ├── gracias.js          Pantalla final + instrucciones Bizum/transferencia — ver §4
-│   │   └── telemetria.js       Ping anónimo de visitas (ya activo, ver §5)
-│   └── img/, sonido/           Assets de los 7 Actos y del resto de la web
-├── .supabase/                  SQL y Edge Functions (no se sube a laora.es — empieza por punto)
-│   ├── estructura-grupo.sql    Esquemas + RLS + grants de todo el grupo (reejecutable)
-│   ├── crear-reserva.ts        Edge Function laora-crear-reserva — recalcula precio, guardarraíl
-│   ├── mollie-webhook.ts       Edge Function laora-mollie-webhook
-│   └── avisar-reserva.ts       Edge Function laora-avisar-reserva
-├── .docs/                      Documentación interna (tampoco se sube)
-│   ├── HANDOFF.md              ← este documento
-│   ├── SUPABASE_PASOS.md       Guía paso a paso de todo lo de Supabase/Mollie
-│   ├── CLOUDFLARE_PAGES.md     Guía de despliegue
-│   ├── brief-desarrollo.md     Brief de diseño original (a qué reloj homenajea cada modelo)
-│   └── sourcing-bitacora.md    Investigación de proveedores
-└── _redirects                  Reglas de Cloudflare Pages (bloquea /.docs, /.supabase, rutas viejas)
+│   │   ├── laora.js             Nav, .reveal, formulario, botón por acabado
+│   │   ├── precios.js           ÚNICA FUENTE DE PRECIOS. Manda sobre todo
+│   │   ├── carrito.js           Cesta en localStorage + contador
+│   │   ├── reservar.js          Checkout de la señal del 25 %
+│   │   ├── gracias.js           Pantalla final + datos de Bizum/IBAN
+│   │   └── telemetria.js        Ping anónimo de visitas (ya activo)
+│   ├── img/
+│   │   ├── relojes/lo-0X.jpg    Foto de cada ficha
+│   │   ├── relojes/col-0X.jpg   Los nueve renders nuevos, 3:4 sobre negro
+│   │   ├── bitacora/            hero, hero-movil, frontal, ancha
+│   │   ├── acto*.jpg            Fotos de los 7 Actos de la home
+│   │   └── taller-madrid.jpg    acto5 recortada, SIN el botón de reproducir
+│   └── sonido/clic-brazalete.wav
+├── .docs/                       INTERNO, no se publica
+│   ├── HANDOFF.md               ← este documento
+│   ├── SUPABASE_PASOS.md        Guía de Supabase y Mollie, paso a paso
+│   ├── CLOUDFLARE_PAGES.md      Guía de despliegue
+│   ├── README-interno.md        README ampliado
+│   ├── brief-desarrollo.md      Brief original — DICE QUÉ RELOJ IMITA A CUÁL
+│   ├── copy-web.md              Copy de la v1
+│   ├── sourcing-bitacora.md     125 proveedores con precio y enlace
+│   ├── volcar-compras-al-sheet.gs  Apps Script del volcado al Sheet
+│   └── hero-mockup.html
+├── .supabase/                   INTERNO, no se publica
+│   ├── estructura-grupo.sql     Esquemas, permisos y RLS de todo el grupo
+│   ├── crear-reserva.ts         Edge Function: el guardarraíl del precio
+│   ├── mollie-webhook.ts        Edge Function: confirmación de pago
+│   ├── avisar-reserva.ts        Edge Function: los dos correos
+│   ├── interesados.sql          SQL viejo del formulario
+│   └── avisar-interesado.ts     Función de activala, como referencia
+├── _redirects                   Reglas de Cloudflare Pages
+├── README.md                    Público, sin nada interno
+└── manifest.json, apple-touch-icon.png, .gitignore
 ```
 
-## 3. Qué se ha hecho en esta ventana de contexto (resumen cronológico)
+**Regla de oro del repo: todo lo que no sea la web pública empieza por punto.**
+No porque Pages lo oculte —no lo hace—, sino como convenio para saber de un
+vistazo qué NO debe salir, y para que `_redirects` lo corte de un plumazo.
 
-1. **Los 7 Actos** (`v2/index.html`, ahora fusionado en `index.html`): landing
-   narrativa completa — Acto I (hero), II (revelación), III (peajes, con foto
-   de fondo estilo espía), IV (cierre "lo que no negociamos"), V (proceso de
-   preparación + vídeo en overlay, **pendiente el archivo de vídeo real**,
-   ver §4), VI (embalaje + Club laOra + botón de descarga de app, **pendiente
-   el link real de la app**), VII (cierre "no compras un reloj").
-2. **Publicada como home real** (`feat-publica-v2-como-home`): quitado el
-   `noindex`, recuperado el SEO, fusionada con partes de la web anterior.
-3. **Recortada de nuevo** a petición de Óscar: se quitó la cuadrícula de
-   colección y el formulario "avísame", y **todo el WhatsApp de toda la
-   web** (nav, CTA de cabecera y pie en las 9 fichas + home + páginas legales;
-   se dejó el texto legal de privacidad/condiciones que lo cita como canal de
-   contacto).
-4. **Traído el flujo de reservas** desde la rama `claude/reservas` (existía
-   desde antes, no fusionada): botón "Reservar" por cada uno de los 4
-   acabados de cada modelo → checkout → Mollie o Bizum/transferencia manual
-   → Edge Functions en Supabase. Guardarraíl de precio verificado: el
-   servidor recalcula desde `precios.js` y devuelve 409 si no coincide;
-   `laora.reservas` no tiene ningún grant para `anon`.
+---
 
-## 4. Lo que falta / lo que está roto (con ubicación exacta)
+## 3. Por dónde vamos
 
-**Bloqueantes para poder cobrar de verdad** (ninguno es un bug — el código
-los exige a propósito, ver `.docs/SUPABASE_PASOS.md`):
-- `assets/js/precios.js` — los 36 precios (9 modelos × 4 acabados) están en
-  `precio: null`. Sin precio, el botón de cada acabado cae a "Avísame del
-  estreno" en vez de dejar reservar.
-- `assets/js/precios.js:117` — `LAORA_ENTREGA = ''`. Sin fecha de entrega
-  comprometida tampoco se puede cobrar (por ley, sin fecha pactada hay 30
-  días desde el cobro para entregar).
-- `condiciones-de-venta.html` — 4 huecos marcados en ámbar sin rellenar:
-  domicilio fiscal (línea 44), fecha de entrega (línea 75), teléfono Bizum
-  (línea 114), IBAN (línea 115).
-- `assets/js/gracias.js:14` — `LAORA_COBRO.bizum` e `.iban` vacíos: sin
-  esto el cliente que paga por Bizum/transferencia no ve dónde pagar.
-- **Falta la API key de Mollie** (`LAORA_MOLLIE_API_KEY`, secreto en la
-  Edge Function) — la pone Óscar, es una credencial.
+### Funcionando y verificado en producción
+- **La home** de 7 Actos.
+- **La colección** (`/coleccion.html`) con los nueve renders nuevos.
+- **La ficha de la Bitácora** (`/relojes/lo-07-bitacora.html`) con el formato
+  nuevo: siete bandas, configurador y botón de carrito.
+- **El carrito**: añade, cuenta, suma y resta cantidades, total.
+- **Estructura de Supabase** con un esquema por marca y RLS.
+- **Las tres Edge Functions** desplegadas y probadas.
+- **El guardarraíl del precio**: intentar pagar 1 € por un reloj de 299 → 409.
+  Escribir en `laora.reservas` desde el navegador → 401.
+- **`.docs` y `.supabase` cortados** en producción.
+- **Legal**: garantía de 3 años en toda la web, mineral K1 en vez de «Hardlex»,
+  turquesa en vez de «Tiffany».
 
-**~~Urgente: `LAORA_WEB_URL`~~ — RESUELTO (29/07/2026)**
-Cambiado en Supabase a `https://laora.es` y verificado: la Edge Function
-`laora-crear-reserva` lee ya `precios.js` de producción (devuelve 409
-«no está a la venta», que es lo correcto con los 36 precios en null).
+### A medias
+- **Ocho fichas con el formato viejo.** Solo la Bitácora tiene el nuevo.
+- **El pago del carrito no existe.** El checkout que hay (`reservar.html`) se hizo
+  para comprar un reloj suelto con señal del 25 %; ahora la compra es por cesta.
+  Hay que rehacer ese paso.
+- **Pie del grupo desalineado**: la otra ventana añadió la tarjeta de Saneas.es a
+  siete páginas; `privacidad.html` y ocho fichas siguen con el pie viejo.
 
-**BLOQUEANTE DE NEGOCIO: la web no tiene salida** (comprobado contra
-producción el 29/07/2026; el apartado anterior lo llamaba «anclas muertas
-que no rompen nada» y se queda muy corto):
+### Bloqueado, esperando a Óscar
+1. **`LAORA_ENTREGA` está vacía** en `precios.js`. Sin fecha de entrega
+   comprometida no se puede cobrar, y el código lo impide a propósito. Hoy
+   `laora-crear-reserva` responde literalmente *«no hay fecha de entrega
+   comprometida»*. **Es lo único que separa a la Bitácora de poder vender.**
+2. **33 de 36 precios siguen vacíos.** Solo LO-07: Alba 250, Levante 320, Cenit 420.
+3. **Cuatro huecos en `condiciones-de-venta.html`**: domicilio fiscal, fecha de
+   entrega, teléfono de Bizum e IBAN. Salen marcados en ámbar en la propia web.
+4. **`LAORA_COBRO` vacío** en `gracias.js`: sin Bizum ni IBAN, quien elija pago
+   manual no sabe dónde pagar.
+5. **Alta en Mollie y su clave.** Es una credencial: la pone Óscar.
+6. **Cuatro fotos que no existen** y que pide el boceto de la Bitácora: el
+   cuaderno con el compás, el fondo visto con la maquinaria, la toma del lume a
+   oscuras y el dibujo técnico de medidas.
 
-1. **Las 9 fichas de reloj son inalcanzables.** Ni la home, ni
-   `materiales.html`, ni `manifiesto.html` enlazan a `/relojes/*`. Cero
-   enlaces. Solo se llega escribiendo la URL a mano.
-2. **Todos los CTA de las fichas están rotos.** Los 36 botones «Avísame del
-   estreno» van a `/?modelo=X#interesados`, y ese ancla ya no existe.
-   Los `nav` apuntan a `/#coleccion`, `/#porque`, `/#madrid`: tampoco
-   existe ninguno. En la home, los CTA de los Actos I, IV y VII van a
-   `/index.html#coleccion`.
-3. **No queda NINGUNA vía de contacto en toda la web.** Cero formularios,
-   cero enlaces de WhatsApp, cero `mailto:` — comprobado en home,
-   materiales, manifiesto, privacidad, condiciones y fichas.
+### El siguiente paso
+**Llevar las ocho fichas restantes al formato de la Bitácora**, empezando por el
+modelo que vaya a estrenarse. La Bitácora es la plantilla: misma estructura de
+siete bandas, mismo configurador, mismos nombres de acabado.
 
-Resultado: hoy un visitante de laora.es no puede ver un reloj, ni comprar,
-ni preguntar. Los precios, Mollie y el IBAN son irrelevantes mientras no
-haya un camino que lleve a la reserva.
+En paralelo, y en cuanto Óscar dé los datos: rellenar fecha de entrega y los
+cuatro huecos legales. Con eso la Bitácora ya puede vender.
 
-Pendiente de decisión de Óscar: recuperar una página/sección de colección,
-o rehacer esos enlaces a otro destino, y decidir qué vía de contacto vuelve.
+Después: rehacer el paso de pago para que salga del carrito.
 
-**Pendiente, mencionado por Óscar pero no entregado todavía**:
-- Vídeo real para el overlay del Acto V (`/assets/video/acto5-taller.mp4`
-  no existe — el `<video>` usa la foto como poster mientras tanto).
-- Enlace real de la app laOra para el botón del Acto VI (ahora mismo
-  `href="#"`).
+---
 
-## 5. Analítica — decisión pendiente, no empezada
+## 4. Errores que NO hay que volver a cometer
 
-Óscar pidió trackear: tiempo en página, cuánto se hace scroll, qué reloj se
-ve, qué acabado se elige, quién reserva y quién compra. Ya existe algo
-mínimo (`telemetria.js`, ping anónimo diario de visitas — no toca esto),
-pero el sistema de eventos completo no se ha construido. Quedó en dos
-preguntas sin responder:
+Todos ocurrieron en esta ventana. Están aquí para que no se repitan.
 
-1. **Herramienta**: ¿Google Analytics 4 (gratis, paneles ya hechos, trae de
-   serie tiempo/scroll/esquema de ecommerce, pero cookies → aviso de
-   consentimiento en la UE) o ampliar el sistema propio con Supabase (más
-   privado, pero hay que construir también los paneles para consultarlo)?
-2. Con el carrito ya resuelto (era "compra directa", sin carrito, decisión
-   tomada aparte — ver rama `claude/reservas`), ya hay eventos reales que
-   trackear: ver acabado, reservar, pagar.
+### Despliegue y plataforma
+1. **Esto no es Vercel.** Se perdió tiempo con `.vercelignore` y `vercel.json`.
+   Es **Cloudflare Pages** y lo único que manda es `_redirects`.
+2. **En Cloudflare Pages, un `rewrite` pierde contra un fichero que existe; un
+   `redirect` gana.** Si hay que tapar una ruta que existe, redirect.
+3. **Pages SÍ publica los ficheros que empiezan por punto.** El prefijo `.` es un
+   convenio nuestro, no un mecanismo de seguridad.
+4. **El build output es `/`: todo el repo se publica.** El brief de desarrollo
+   —con la tabla de qué reloj imita a cuál— estuvo descargable en abierto.
+   Antes de añadir una carpeta, pensar si puede salir a internet.
+5. **La caché de borde de Cloudflare es inconsistente entre nodos.** No dar por
+   fallido un despliegue tras una sola lectura: sondear varias seguidas.
+6. **Cada rama publica preview pública.** Tapar una fuga en `main` no la tapa en
+   las ramas viejas.
 
-## 6. Cosas que YA no hay que volver a preguntar
+### Supabase
+7. **Los grants por defecto solo cubren `public`.** En un esquema nuevo hay que
+   dar permisos a `service_role` **a mano** o las Edge Functions fallan con un
+   502 sin explicación. Costó un buen rato encontrarlo.
+8. **Al hablar con PostgREST hay que mandar `Content-Profile: laora`** (o
+   `Accept-Profile` al leer) o busca en `public`, que está vacío.
+9. **`SUPABASE_SERVICE_ROLE_KEY` está marcada DEPRECATED**, la sustituye
+   `SUPABASE_SECRET_KEYS`. El código acepta las dos.
+10. **El límite del plan Free es por usuario, no por organización.**
+11. **Un 200 con `[]` no es una fuga:** RLS devuelve lista vacía, no error. Hay
+    que mirar el cuerpo, no solo el código de estado.
 
-- No hay carrito de la compra — es una decisión de diseño, no un olvido
-  (comprar un reloj, un acabado, ya está resuelto con la reserva directa).
-- No se usa Vercel para el hosting de laOra — es Cloudflare Pages.
-- El sitio no usa cookies de terceros ni analítica externa todavía (lo dice
-  la propia política de privacidad).
+### CSS y front
+12. **`laora.css` se carga en todas las páginas y pisa lo que no esperas.**
+    Ya define `.hero`, `.eyebrow`, `.serif`, `.reveal` y el fondo del `footer`.
+    Las páginas nuevas usan prefijo propio (`c-` en la colección, `b-` en la
+    ficha) y redeclaran `footer{background:var(--negro)}`.
+13. **Copiar el pie de `index.html` arrastra los guiones de los Actos** (audio,
+    overlay de vídeo) y la página peta. Copiar solo `<footer>…</footer>`.
+14. **`acto5-taller.jpg` lleva el botón de «reproducir» incrustado**: es el póster
+    del vídeo. Para usarla fuera del Acto V está `taller-madrid.jpg`, recortada.
+15. **Si el negro del render no es el de la sección, se ve el recuadro** de cada
+    foto. Se resuelve con una `mask-image` radial, no ajustando el color a ojo.
+
+### Datos, dinero y legal
+16. **Nunca inventar un precio.** Un acabado sin precio cerrado no enseña botón
+    de compra: enseña que todavía no está a la venta. El código lo impide.
+17. **El navegador nunca fija el importe.** El servidor recalcula desde
+    `precios.js` y rechaza si no cuadra.
+18. **La garantía en España son 3 años** (RDL 7/2021), no 2. Los bocetos siguen
+    poniendo 2: hay que corregirlo cada vez.
+19. **«Hardlex» es marca de Seiko y «Tiffany» de Tiffany & Co.** Se dice
+    «mineral K1» y «turquesa».
+20. **El reloj homenajeado se nombra UNA vez**, y solo dentro de «La historia» de
+    su ficha. Nunca en títulos, metas, alts, URLs ni en la colección.
+21. **El ® del logo:** las marcas no están registradas en la OEPM. Usarlo sin
+    registro es sancionable. Sigue puesto: es decisión de Óscar.
+
+### Herramientas y método
+22. **Un `getUi().alert()` en Apps Script cuelga la ejecución** si la hoja no está
+    en primer plano. Usar `Logger.log`.
+23. **El portapapeles es compartido con Óscar.** Si él copia algo, se pierde lo
+    que hubiera puesto el asistente. Para textos cortos, escribir directamente.
+24. **En el editor SQL de Supabase hay que clicar DENTRO del área de texto.** Si
+    el clic cae fuera, `cmd+A` selecciona la página y lo tecleado dispara atajos:
+    una vez acabé en Observability. Usar `find` para obtener el `ref` del editor.
+25. **`sips --cropOffset` no cuenta desde la esquina superior izquierda.** Para
+    partir una imagen en tramos, verificar el resultado.
+26. **Los bocetos traen nombres desfasados** (integra, campo, octógono, puerto,
+    cero cero). Comprobar contra los nombres actuales antes de copiar.
+27. **No fiarse de un documento de traspaso.** El anterior daba por «anclas
+    muertas que no rompen nada» lo que en realidad era que las nueve fichas
+    estaban inalcanzables y no quedaba ninguna vía de contacto en toda la web.
+    **Comprobar siempre contra producción.**
+
+---
+
+## 5. Marca, tono y decisiones cerradas
+
+- **laOra** siempre en Nunito Sans, minúsculas con la O mayúscula.
+- **Nada de anglicismos** en la web ni en los nombres de producto.
+- Paleta: negro `#050505`, ámbar `#F5D34D`, oro `#c7a04a`, hueso `#f2efe9`.
+  Serif **Source Serif 4** para titulares, **JetBrains Mono** para epígrafes.
+- **Gama:** `01 Alba · 02 Levante · 03 Cenit · 04 Eclipse`. Son las
+  denominaciones **para todos los modelos**; cuando un reloj tiene tres, se usan
+  las tres primeras. La Bitácora va con tres.
+- **LO-02 se llama «Cero Cero»** — lo manda la esfera del render.
+- **Compra: carrito**, decisión de Óscar del 29/07. Antes era compra directa con
+  señal del 25 %; ese código sigue ahí y funciona.
+- **Nunca prometer stock ni plazos** que no estén cerrados.
+- **Nunca vender nada a la audiencia de Saneas.**
+
+---
+
+## 6. Comprobaciones rápidas
+
+```bash
+# ¿queda algún enlace a un ancla que no existe?
+grep -rn '#coleccion\|#interesados\|#porque\|#madrid' --include="*.html" . | grep -v '^./.docs'
+
+# ¿se ha colado algo interno en producción? (debe decir «Redirecting»)
+for u in .docs/brief-desarrollo.md .supabase/estructura-grupo.sql; do
+  curl -s "https://laora.es/$u" | head -c 14; echo "  <- $u"; done
+
+# ¿aguanta el guardarraíl del precio?
+curl -s -X POST "https://uikanfvigunjhzibnhxf.supabase.co/functions/v1/laora-crear-reserva" \
+  -H "apikey: sb_publishable_1eLOM22REKcIJyHe36W_4Q_1Z3eyRam" \
+  -H 'Content-Type: application/json' \
+  -d '{"ref":"LO-07","modelo":"Bitacora","acabado":"Cenit","metodo":"bizum","precio_total":1,
+       "nombre":"x","email":"p@example.com","telefono":"1","direccion":"x","cp":"1",
+       "poblacion":"x","provincia":"x"}'
+
+# ¿todas las fichas se alcanzan desde algún sitio?
+grep -c '/relojes/' coleccion.html
+```
