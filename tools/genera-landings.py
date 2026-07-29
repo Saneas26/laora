@@ -23,7 +23,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cronógrafo mecacuarzo Seiko VK63: la sensación de un cronógrafo de verdad con la fiabilidad del cuarzo. Cristal mineral endurecido de máxima calidad, acero 316L cepillado.', 'Desde ~190 €', False),
-    ('T2', 'Meridiano', 'Mismo VK63, ahora con zafiro y brazalete de acero macizo. El equilibrio perfecto.', '~250–330 €', False),
+    ('T2', 'Levante', 'Mismo VK63, ahora con zafiro y brazalete de acero macizo. El equilibrio perfecto.', '~250–330 €', False),
     ('T3', 'Cenit', 'Cronógrafo de cuerda manual Seagull ST1901, de rueda de columnas, revisado y regulado en Madrid en su mejor versión. Le das cuerda tú cada mañana, igual que el que fue a la Luna. Cristal de zafiro tipo «box», acero superior, brazalete premium y estuche. Aquí empieza el alma.', '~400–750 €', True),
   ],
   nota='<b>Nota de honestidad (se cuenta, no se esconde):</b> la disposición y el número de subesferas no es idéntica a la del original en todos los acabados, porque cada calibre tiene la suya. En la ficha técnica de cada acabado te decimos exactamente qué calibre llevas, de dónde viene y qué hace cada subesfera. Preferimos que lo sepas antes de comprarlo y no al abrir la caja.',
@@ -45,7 +45,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Mecacuarzo Seiko VH31 de segundero de barrido suave. Cristal mineral endurecido de máxima calidad, acero 316L.', 'Desde ~190 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35, zafiro con AR, malla milanesa maciza. El corazón mecánico bajo el agua.', '~280–380 €', True),
+    ('T2', 'Levante', 'Seiko NH35, zafiro con AR, malla milanesa maciza. El corazón mecánico bajo el agua.', '~280–380 €', True),
     ('T3', 'Cenit', 'Automático superior con zafiro abombado y bisel cerámico, en titanio o acero 904L, malla milanesa mecanizada y correa de caucho. El buceador definitivo.', '~400–750 €', False),
   ],
   nota=None,
@@ -67,7 +67,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cuarzo de segundero pequeño (respeta el diseño original), cristal mineral endurecido de máxima calidad o zafiro, piel color arena.', 'Desde ~170 €', False),
-    ('T2', 'Meridiano', 'Calibre Seagull ST17 de cuerda con segundero pequeño: el ritual de darle cuerda cada día. Zafiro fino, piel premium.', '~260–360 €', True),
+    ('T2', 'Levante', 'Calibre Seagull ST17 de cuerda con segundero pequeño: el ritual de darle cuerda cada día. Zafiro fino, piel premium.', '~260–360 €', True),
     ('T3', 'Cenit', 'Acabado superior, zafiro abombado y fondo de cristal para ver la maquinaria, acero de alto pulido o 904L.', '~360–480 €', False),
   ],
   nota=None,
@@ -89,7 +89,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cuarzo suizo, cristal mineral endurecido de máxima calidad o zafiro, brazalete integrado macizo.', 'Desde ~190 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35, zafiro con AR, brazalete integrado macizo.', '~280–380 €', True),
+    ('T2', 'Levante', 'Seiko NH35, zafiro con AR, brazalete integrado macizo.', '~280–380 €', True),
     ('T3', 'Cenit', 'Aquí entra el PT5000, el primo del legendario calibre suizo ETA 2824. Cuando la patente de aquel movimiento expiró, su arquitectura pasó a ser patrimonio de la relojería: hoy el PT5000 se fabrica con fidelidad milimétrica —mismas medidas, piezas intercambiables, mismos estándares— y lo revisa y regula cualquier relojero del mundo. Pagas la ingeniería suiza, no la etiqueta suiza. Con zafiro abombado y acero de alto pulido o titanio.', '~400–560 €', False),
   ],
   nota=None,
@@ -111,7 +111,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cuarzo suizo/japonés, cristal mineral endurecido de máxima calidad, cordura verde o NATO.', 'Desde ~150 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35, zafiro con AR, cordura o piel premium.', '~230–320 €', True),
+    ('T2', 'Levante', 'Seiko NH35, zafiro con AR, cordura o piel premium.', '~230–320 €', True),
     ('T3', 'Cenit', 'NH35 o Miyota 9015, zafiro abombado, acero de alto pulido (opción bronce o titanio), piel + brazalete.', '~330–450 €', False),
   ],
   nota=None,
@@ -135,7 +135,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cuarzo suizo, cristal mineral endurecido de máxima calidad o zafiro, brazalete integrado macizo.', 'Desde ~250 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35, zafiro con AR, brazalete integrado macizo.', '~350–480 €', True),
+    ('T2', 'Levante', 'Seiko NH35, zafiro con AR, brazalete integrado macizo.', '~350–480 €', True),
     ('T3', 'Cenit', 'Miyota 9015 (fino y suave), zafiro abombado, acero de alto pulido o titanio, brazalete integrado mecanizado.', '~500–700 €', False),
   ],
   nota=None,
@@ -158,7 +158,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cuarzo suizo, cristal mineral endurecido de máxima calidad o zafiro, brazalete integrado macizo.', 'Desde ~250 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35, zafiro con AR, brazalete integrado macizo.', '~350–480 €', True),
+    ('T2', 'Levante', 'Seiko NH35, zafiro con AR, brazalete integrado macizo.', '~350–480 €', True),
     ('T3', 'Cenit', 'Miyota 9015 (fino), zafiro abombado, acero de alto pulido o titanio, brazalete integrado mecanizado.', '~500–700 €', False),
   ],
   nota=None,
@@ -180,7 +180,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Mecacuarzo de barrido o cuarzo suizo, cristal mineral endurecido de máxima calidad, caucho o NATO.', 'Desde ~180 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35/NH36 día-fecha, zafiro, brazalete macizo + caucho.', '~260–350 €', True),
+    ('T2', 'Levante', 'Seiko NH35/NH36 día-fecha, zafiro, brazalete macizo + caucho.', '~260–350 €', True),
     ('T3', 'Cenit', 'NH36 día-fecha con zafiro abombado y bisel cerámico, en titanio o acero 904L, brazalete mecanizado premium.', '~360–650 €', False),
   ],
   nota=None,
@@ -202,7 +202,7 @@ dict(
   ],
   acabados=[
     ('T1', 'Alba', 'Cuarzo suizo/japonés, cristal mineral endurecido abombado de máxima calidad, caja PVD oro rosa, piel marrón.', 'Desde ~180 €', False),
-    ('T2', 'Meridiano', 'Seiko NH35, zafiro abombado con AR, PVD oro rosa, piel premium o brazalete.', '~270–370 €', True),
+    ('T2', 'Levante', 'Seiko NH35, zafiro abombado con AR, PVD oro rosa, piel premium o brazalete.', '~270–370 €', True),
     ('T3', 'Cenit', 'NH35 o Miyota 9015, zafiro de domo alto, acabado superior, brazalete + piel.', '~380–500 €', False),
   ],
   nota=None,
@@ -304,8 +304,8 @@ FICHAS = {
  ('LO-07','T4'): [
    ('Acabado','Revestimiento DLC negro (carbono tipo diamante) en caja, bisel, brazalete y cierre. No es pintura ni un baño: es una capa de carbono que roza la dureza del diamante — no se raya, no se descascarilla, no envejece mal.'),
    ('Esfera y agujas','Esfera negra, agujas plateadas y segundero amarillo: el único punto de color, el filo de luz que asoma cuando la luna tapa el sol.'),
-   ('Base','Se monta sobre el Meridiano o sobre el Cenit: eliges el corazón y el Eclipse le pone el traje.'),
-   ('Cristal','El del acabado elegido: zafiro con AR interior en Meridiano, zafiro abombado con AR doble en Cenit.'),
+   ('Base','Se monta sobre el Levante o sobre el Cenit: eliges el corazón y el Eclipse le pone el traje.'),
+   ('Cristal','El del acabado elegido: zafiro con AR interior en Levante, zafiro abombado con AR doble en Cenit.'),
    ('Medidas','Ø 40 mm · grosor aprox. 11,5 mm · asa a asa integrada (~46 mm) · brazalete de 22 mm en la caja.'),
    ('Estanqueidad','50 m (5 bar), verificada unidad a unidad en Madrid con prueba de presión en seco.'),
    ('Garantía','3 años de garantía legal en España — la que manda la ley, no una promesa nuestra — con servicio técnico propio en Madrid. Y guardamos repuestos 10 años.'),
@@ -317,7 +317,7 @@ ECLIPSE = {'LO-01','LO-02','LO-04','LO-06','LO-07','LO-08'}
 def pagina(m):
     num = m['ref'].split('-')[1]
     art = 'la' if m['ref'] == 'LO-07' else 'el'
-    gama = 'Alba · Meridiano · Cenit' + (' · Eclipse' if m['ref'] in ECLIPSE else '')
+    gama = 'Alba · Levante · Cenit' + (' · Eclipse' if m['ref'] in ECLIPSE else '')
     import json
     datos = [{'tier': a[0], 'nombre': a[1], 'texto': a[2], 'precio': a[3],
               'ficha': FICHAS.get((m['ref'], a[0]), [])} for a in m['acabados']]

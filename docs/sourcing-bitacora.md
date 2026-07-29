@@ -5,7 +5,7 @@ cotización**: son precios publicados al detalle o estimaciones marcadas como
 tales. Los fabricantes serios (Ronda, TMI/Seiko, Miyota, esferas y cajas OEM)
 **no publican tarifa B2B**; hay que pedirla.
 
-Gama objetivo: **T1 Alba** (cuarzo) · **T2 Meridiano** (NH35) · **T3 Cenit**
+Gama objetivo: **T1 Alba** (cuarzo) · **T2 Levante** (NH35) · **T3 Cenit**
 (Miyota 9015, opción titanio) · **T4 Eclipse** (DLC negro, segundero amarillo).
 
 ---
@@ -41,7 +41,7 @@ y exclusividad del diseño.
 | Calibre | Para | Dónde | Precio visto |
 |---|---|---|---|
 | **Ronda 715** (11½''', fecha, 60 meses) | T1 Alba | **Kirman (Sevilla)** · Ronda AG · watch-tools.de · Selfor | 15,48–18,84 € al detalle |
-| **Seiko NH35A** | T2 Meridiano | **Kirman** · TMI (Hong Kong) · Cousins · namokiMODS | 30–80 € según canal |
+| **Seiko NH35A** | T2 Levante | **Kirman** · TMI (Hong Kong) · Cousins · namokiMODS | 30–80 € según canal |
 | **Miyota 9015** | T3 Cenit | **Kirman** · Miyota/Citizen (formulario oficial) · Perrin | 100–135 € al detalle |
 
 **Kirman (Bollullos de la Mitación, Sevilla, tel. 954 56 37 12)** es el hallazgo
