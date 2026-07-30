@@ -137,7 +137,7 @@ var LAORA_PRECIOS = {
 var LAORA_ENTREGA = '30 días desde el pago';
 
 var LAORA_ENTREGA_SIN_STOCK = LAORA_ENTREGA;
-var LAORA_ENTREGA_CON_STOCK = '';   // ← p. ej. 'sale de Madrid en 24-48 h'
+var LAORA_ENTREGA_CON_STOCK = '48 horas en días laborables';
 
 /* ---- utilidades (no tocar) ---- */
 function laoraSenal(precio) {
