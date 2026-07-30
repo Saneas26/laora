@@ -52,24 +52,24 @@
   margin-left:.06em;align-self:baseline;position:relative;top:-1.35em}
 .cb-marca .o::before{content:"";width:0;height:0;margin-top:.06em;
   border-left:.17em solid transparent;border-right:.17em solid transparent;
-  border-top:.24em solid var(--ambar,#F5D34D)}
+  border-top:.24em solid var(--ambar,#D4A94B)}
 
 /* ---------- menú ----------
    En minúsculas y sin el letter-spacing de tipo monoespaciado que
    llevaban las fichas: el boceto lo pide así. */
 .cb-menu{display:flex;align-items:center;gap:clamp(22px,2.6vw,44px);
-  font-family:'Nunito Sans',sans-serif;font-size:clamp(14px,1.15vw,16px);
-  font-weight:400;color:#e6e3dc}
+  font-family:'Inter',sans-serif;font-size:16px;
+  font-weight:400;color:#B8B8B8}
 .cb-menu a{text-decoration:none;color:inherit;transition:color .2s}
-.cb-menu a:hover{color:var(--ambar,#F5D34D)}
-.cb-menu a.activo{color:var(--ambar,#F5D34D)}
+.cb-menu a:hover{color:var(--ambar,#D4A94B)}
+.cb-menu a.activo{color:var(--ambar,#D4A94B)}
 
 /* ---------- bolsa ---------- */
 .cb-bolsa{position:relative;display:inline-flex;padding:4px;color:#fff}
 .cb-bolsa svg{stroke:currentColor}
-.cb-bolsa:hover{color:var(--ambar,#F5D34D)}
+.cb-bolsa:hover{color:var(--ambar,#D4A94B)}
 .cb-cuenta{position:absolute;top:-3px;right:-5px;min-width:17px;height:17px;border-radius:999px;
-  background:var(--ambar,#F5D34D);color:#141414;font-family:'Nunito Sans',sans-serif;
+  background:var(--ambar,#D4A94B);color:#141414;font-family:'Nunito Sans',sans-serif;
   font-size:10.5px;font-weight:800;line-height:17px;text-align:center}
 
 /* ---------- sobre fondo claro ---------- */
