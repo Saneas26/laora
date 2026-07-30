@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="laOra LO-01 Lunar. No todos podremos viajar a la Luna. Pero sí recordar cada día lo que el ser humano es capaz de conseguir. Desde 259 €.">
+<meta property="og:title" content="LO-01 Lunar — laOra®">
+<meta property="og:description" content="No todos podremos viajar a la Luna. Pero sí recordar cada día lo que el ser humano es capaz de conseguir.">
+<meta property="og:url" content="https://laora.es/lunar.html">
+<meta property="og:image" content="https://laora.es/assets/img/lunar/landing/hero.jpg">
+<title>LO-01 Lunar — laOra®</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/laora.css?v=15">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=3">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "laOra LO-01 Lunar",
+  "image": "https://laora.es/assets/img/lunar/landing/hero.jpg",
+  "description": "No todos podremos viajar a la Luna. Pero sí recordar cada día lo que el ser humano es capaz de conseguir.",
+  "brand": {"@type": "Brand", "name": "laOra"},
+  "offers": {"@type": "AggregateOffer", "lowPrice": "259", "highPrice": "424", "priceCurrency": "EUR"}
+}
+</script>
+<style>
+/* ============================================================
+   LO-01 LUNAR — landing de producto sobre FONDO OSCURO.
+   Réplica fiel del diseño aprobado (Imagen generada 1 (4)):
+   a diferencia de Bauhaus/Bitácora (fondo claro), este mockup es
+   negro y el hero es una sola foto a sangre con el texto encima,
+   no un reparto a dos columnas de color. Prefijo `ln-`.
+   Tipografía y reglas de marca: las mismas tres fuentes de
+   IDENTIDAD_VISUAL.md (Cormorant Garamond / Inter / Nunito Sans).
+   ============================================================ */
+:root{
+  --ln-negro:#090909;
+  --ln-panel:#111113;
+  --ln-blanco:#F7F7F5;
+  --ln-gris:#B8B8B8;
+  --ln-oro:#D4A94B;
+  --ln-linea:#2C2C2C;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body.ln{background:var(--ln-negro);color:var(--ln-blanco);
+  font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.ln img{display:block;max-width:100%}
+.ln a{color:inherit;text-decoration:none}
+
+.ln .cb-menu{color:var(--ln-gris)}
+.ln .cb-menu a:hover,
+.ln .cb-menu a.activo{color:var(--ln-oro)}
+.ln .cb-marca,.ln .cb-bolsa{color:var(--ln-blanco)}
+
+.ln-boton{display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  padding:16px 34px;border:0;transition:opacity .25s}
+.ln-boton:hover{opacity:.88}
+.ln .ln-boton-oro{background:var(--ln-oro);color:var(--ln-negro)}
+
+.ln-reveal{opacity:0;transform:translateY(22px);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+.ln-reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .ln-reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* ============================================================
+   1 · HERO — una sola foto a sangre, texto encima con velo
+   ============================================================ */
+.ln-hero{position:relative;min-height:100svh;display:flex;align-items:center;
+  background:var(--ln-negro);overflow:hidden}
+.ln-hero-foto{position:absolute;inset:0}
+.ln-hero-foto img{width:100%;height:100%;object-fit:cover;object-position:38% center}
+.ln-hero-foto::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(9,9,9,.94) 0%,rgba(9,9,9,.74) 32%,
+                                     rgba(9,9,9,.18) 56%,rgba(9,9,9,0) 74%)}
+.ln-hero-texto{position:relative;z-index:2;padding:120px 4vw 90px clamp(24px,6vw,96px);max-width:600px}
+.ln-hero-eyebrow{font-family:'Inter',sans-serif;font-size:20px;font-weight:600;
+  letter-spacing:.14em;color:var(--ln-oro)}
+.ln-hero-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(58px,7vw,84px);line-height:1.02;letter-spacing:-.01em;
+  color:var(--ln-blanco);margin:10px 0 26px}
+.ln-hero-titular .punto{color:var(--ln-oro)}
+.ln-hero-sub{font-family:'Inter',sans-serif;font-size:24px;font-weight:500;
+  line-height:1.45;color:var(--ln-blanco);max-width:430px}
+.ln-hero-raya{display:block;width:56px;height:2px;background:var(--ln-oro);margin:30px 0 34px}
+.ln-hero-nota{font-size:16px;color:var(--ln-gris);margin-top:14px}
+
+/* ============================================================
+   2 · TIRA DE 4 ICONOS
+   ============================================================ */
+.ln-pilares{background:var(--ln-panel);padding:clamp(40px,5vw,64px) 5vw;
+  border-bottom:1px solid var(--ln-linea)}
+.ln-pilares-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+  max-width:1180px;margin:0 auto}
+.ln-pilar{display:flex;flex-direction:column;align-items:center;gap:14px;
+  text-align:center;padding:0 10px;border-right:1px solid var(--ln-linea)}
+.ln-pilar:last-child{border-right:0}
+.ln-pilar svg{width:44px;height:44px;stroke:var(--ln-oro);fill:none;stroke-width:1.4}
+.ln-pilar b{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  line-height:1.5;color:var(--ln-blanco)}
+.ln-pilar span{display:block;font-weight:400;color:var(--ln-gris)}
+
+/* ============================================================
+   3 · HUBO UN RELOJ ALLÍ ARRIBA — macro + texto
+   ============================================================ */
+.ln-icono-seccion{display:grid;grid-template-columns:1fr minmax(340px,44%);
+  background:var(--ln-negro);align-items:center}
+.ln-icono-foto img{width:100%;height:100%;object-fit:cover}
+.ln-icono-texto{padding:clamp(48px,7vw,110px) clamp(28px,4.5vw,72px)}
+.ln-icono-texto h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(32px,3.6vw,44px);line-height:1.18;margin-bottom:26px;color:var(--ln-blanco)}
+.ln-icono-texto h2 .punto{color:var(--ln-oro)}
+.ln-icono-texto p{font-size:20px;color:var(--ln-gris);max-width:460px;margin-bottom:6px}
+.ln-icono-texto p.espacio{margin-bottom:22px}
+.ln-icono-texto p.fuerte{color:var(--ln-blanco);font-weight:600;margin-bottom:6px}
+
+/* ============================================================
+   4 · MOVIMIENTO · LO QUE SÍ PAGAS
+   ============================================================ */
+.ln-pagas{display:grid;grid-template-columns:1fr minmax(320px,40%);background:var(--ln-panel)}
+.ln-pagas-foto{min-height:420px}
+.ln-pagas-foto img{width:100%;height:100%;object-fit:cover}
+.ln-pagas-lista{padding:clamp(44px,5vw,72px) clamp(26px,3vw,48px);
+  display:flex;flex-direction:column;justify-content:center}
+.ln-pagas-lista h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(30px,3vw,40px);letter-spacing:.04em;margin-bottom:26px;color:var(--ln-blanco)}
+.ln-pagas-lista ul{list-style:none}
+.ln-pagas-lista li{display:flex;align-items:flex-start;gap:12px;
+  font-size:17px;color:var(--ln-blanco);padding:9px 0}
+.ln-pagas-lista li svg{width:20px;height:20px;flex:none;margin-top:3px;
+  stroke:var(--ln-oro);fill:none;stroke-width:2}
+
+/* ============================================================
+   5 · LAS VERSIONES
+   ============================================================ */
+.ln-versiones{background:var(--ln-negro);padding:clamp(64px,8vw,110px) 5vw;text-align:center}
+.ln-versiones-cab h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(32px,3.6vw,44px);letter-spacing:.18em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:26px;color:var(--ln-blanco)}
+.ln-versiones-cab h2::before,.ln-versiones-cab h2::after{content:"";
+  width:64px;height:1px;background:var(--ln-oro)}
+.ln-versiones-sub{font-size:20px;color:var(--ln-gris);margin:14px 0 54px}
+.ln-versiones-grid{display:grid;grid-template-columns:1fr 1fr 1fr;max-width:1240px;margin:0 auto}
+.ln-version{padding:0 clamp(18px,3vw,48px)}
+.ln-version + .ln-version{border-left:1px solid var(--ln-linea)}
+.ln-version-nombre{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ln-oro)}
+.ln-version-mov{font-size:17px;color:var(--ln-blanco);margin-top:8px}
+.ln-version-precio{font-size:16px;color:var(--ln-gris);margin-top:2px}
+.ln-version img{width:min(82%,300px);margin:26px auto 22px}
+.ln-version-desc{font-size:18px;color:var(--ln-gris);max-width:340px;margin:0 auto}
+.ln-version-desc b{color:var(--ln-blanco);font-weight:600}
+
+/* ============================================================
+   6 · LO QUE LLEVAN TODOS
+   ============================================================ */
+.ln-todos{background:var(--ln-negro);padding:0 5vw clamp(64px,8vw,100px);text-align:center}
+.ln-todos h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(26px,2.6vw,34px);letter-spacing:.16em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:26px;margin-bottom:48px;color:var(--ln-blanco)}
+.ln-todos h2::before,.ln-todos h2::after{content:"";width:64px;height:1px;background:var(--ln-oro)}
+.ln-todos-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;
+  max-width:1180px;margin:0 auto}
+.ln-icono{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.ln-icono svg{width:44px;height:44px;stroke:var(--ln-oro);fill:none;stroke-width:1.4}
+.ln-icono span{font-size:12px;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;line-height:1.4;color:var(--ln-blanco)}
+.ln-todos-grid .ln-icono{padding:0 8px;border-right:1px solid var(--ln-linea)}
+.ln-todos-grid .ln-icono:last-child{border-right:0}
+
+/* ============================================================
+   7 · CONFIGURADOR
+   ============================================================ */
+.ln-config{background:var(--ln-panel);padding:clamp(56px,7vw,96px) 5vw}
+.ln-config-caja{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(380px,2.1fr) minmax(300px,1fr);
+  gap:clamp(24px,3vw,48px);max-width:1320px;margin:0 auto;align-items:center}
+.ln-config-modelo h2{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ln-blanco)}
+.ln-config-precio-grande{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(48px,5vw,64px);line-height:1.1;margin:10px 0 18px;color:var(--ln-blanco)}
+.ln-config-notas{list-style:none;font-size:14.5px;color:var(--ln-gris)}
+.ln-config-notas li{display:flex;align-items:center;gap:8px;padding:3px 0}
+.ln-config-notas svg{width:15px;height:15px;stroke:var(--ln-oro);fill:none;stroke-width:2}
+.ln-config-plano img{width:100%}
+.ln-config-panel{background:var(--ln-negro);padding:30px 28px;border:1px solid var(--ln-linea)}
+.ln-config-panel h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;color:var(--ln-blanco)}
+.ln-campo{margin-bottom:14px}
+.ln-campo label{display:block;font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ln-gris);margin-bottom:5px}
+.ln-campo select{width:100%;appearance:none;-webkit-appearance:none;
+  font-family:'Inter',sans-serif;font-size:16px;color:var(--ln-blanco);
+  background:var(--ln-negro) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F7F7F5' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
+  border:1px solid var(--ln-linea);padding:11px 40px 11px 14px;cursor:pointer}
+.ln-campo select:focus{outline:none;border-color:var(--ln-oro)}
+.ln-config-precio{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(40px,3.6vw,56px);color:var(--ln-oro);text-align:center;margin:18px 0 14px}
+.ln-config-panel .ln-boton{width:100%}
+.ln-config-mas{display:block;text-align:center;font-size:15px;color:var(--ln-gris);
+  margin-top:16px;transition:color .2s}
+.ln-config-mas:hover{color:var(--ln-oro)}
+
+/* ============================================================
+   8 · SERVICIOS
+   ============================================================ */
+.ln-servicios{background:var(--ln-negro);border-top:1px solid var(--ln-linea);
+  padding:clamp(36px,4.5vw,56px) 5vw}
+.ln-servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+  max-width:1180px;margin:0 auto}
+.ln-servicio{display:flex;align-items:flex-start;gap:14px}
+.ln-servicio svg{width:34px;height:34px;flex:none;stroke:var(--ln-blanco);fill:none;stroke-width:1.4}
+.ln-servicio b{display:block;font-size:14px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ln-blanco)}
+.ln-servicio span{font-size:14.5px;color:var(--ln-gris)}
+
+.ln footer{background:#0d0d0d;border-top:0}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1100px){
+  .ln-pagas{grid-template-columns:1fr}
+  .ln-config-caja{grid-template-columns:1fr 1fr}
+  .ln-config-plano{order:3;grid-column:1/-1;max-width:820px;margin:0 auto}
+  .ln-todos-grid{grid-template-columns:repeat(3,1fr);gap:32px}
+  .ln-todos-grid .ln-icono:nth-child(3n){border-right:0}
+  .ln-versiones-grid{grid-template-columns:1fr;gap:56px;max-width:520px}
+  .ln-version + .ln-version{border-left:0;border-top:1px solid var(--ln-linea);padding-top:48px}
+}
+@media(max-width:820px){
+  .ln-hero{min-height:0;padding-top:8vh}
+  .ln-hero-foto img{object-position:32% center}
+  .ln-hero-foto::after{background:linear-gradient(180deg,rgba(9,9,9,.35) 0%,rgba(9,9,9,.88) 62%,rgba(9,9,9,.98) 100%)}
+  .ln-hero{align-items:flex-end}
+  .ln-hero-texto{padding:0 6vw 56px;max-width:none}
+  .ln-pilares-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .ln-pilar:nth-child(2n){border-right:0}
+  .ln-icono-seccion{grid-template-columns:1fr}
+  .ln-icono-foto{max-height:64vw;overflow:hidden}
+  .ln-config-caja{grid-template-columns:1fr}
+  .ln-servicios-grid{grid-template-columns:1fr 1fr;gap:22px}
+  .ln-versiones-cab h2::before,.ln-versiones-cab h2::after,
+  .ln-todos h2::before,.ln-todos h2::after{width:28px}
+}
+@media(max-width:560px){
+  .ln-pilares-grid{grid-template-columns:1fr 1fr}
+  .ln-todos-grid{grid-template-columns:repeat(2,1fr)}
+  .ln-todos-grid .ln-icono{border-right:0}
+  .ln-servicios-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="ln">
+
+<header class="cb">
+  <a class="cb-marca" href="/">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu">
+    <a href="/coleccion.html">colección</a>
+    <a href="/filosofia.html">filosofía</a>
+    <span class="cb-pendiente">Club laOra</span>
+    <span class="cb-pendiente">servicio</span>
+    <span class="cb-pendiente">contacto</span>
+  </nav>
+  <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cb-cuenta" data-carrito-cuenta hidden>0</span>
+  </a>
+</header>
+
+<main>
+
+  <!-- 1 · HERO — una sola foto, texto superpuesto -->
+  <section class="ln-hero">
+    <div class="ln-hero-foto">
+      <img src="/assets/img/lunar/landing/hero.jpg" alt="laOra LO-01 Lunar sobre superficie lunar, con la Tierra al fondo" fetchpriority="high">
+    </div>
+    <div class="ln-hero-texto">
+      <p class="ln-hero-eyebrow">LO-01</p>
+      <h1 class="ln-hero-titular">Lunar<span class="punto">.</span></h1>
+      <p class="ln-hero-sub">No todos podremos viajar a la Luna.<br>Pero sí recordar cada día<br>lo que el ser humano es capaz de conseguir.</p>
+      <span class="ln-hero-raya"></span>
+      <a class="ln-boton ln-boton-oro" href="/reservar.html">Reservar ahora</a>
+      <p class="ln-hero-nota">Unidades limitadas.</p>
+    </div>
+  </section>
+
+  <!-- 2 · LOS CUATRO PILARES -->
+  <section class="ln-pilares">
+    <div class="ln-pilares-grid ln-reveal">
+      <div class="ln-pilar">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="15"/><path d="M22 13v9l6 4"/></svg>
+        <b>El tiempo.<span>No solo lo mide. También lo recuerda.</span></b>
+      </div>
+      <div class="ln-pilar">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14"/><circle cx="16" cy="27" r="4.5"/><circle cx="28" cy="17" r="4.5"/><path d="M22 8v3M22 8l2 2M22 8l-2 2"/></svg>
+        <b>Cronógrafo.<span>Preparado para cualquier reto.</span></b>
+      </div>
+      <div class="ln-pilar">
+        <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/><path d="M15.5 22l4.5 4.5 8.5-9"/></svg>
+        <b>Acero 316L.<span>Hecho para durar décadas.</span></b>
+      </div>
+      <div class="ln-pilar">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="7"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M11 11l3.5 3.5M29.5 29.5L33 33M33 11l-3.5 3.5M14.5 29.5L11 33"/></svg>
+        <b>Movimiento japonés.<span>Precisión sin complicaciones.</span></b>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · HUBO UN RELOJ ALLÍ ARRIBA -->
+  <section class="ln-icono-seccion">
+    <div class="ln-icono-foto">
+      <img src="/assets/img/lunar/landing/macro-esfera.jpg" alt="Macro de la esfera del Lunar, con las subesferas del cronógrafo y la escala taquimétrica" loading="lazy">
+    </div>
+    <div class="ln-icono-texto ln-reveal">
+      <h2>Hubo un reloj allí arriba<span class="punto">.</span></h2>
+      <p>No porque fuera bonito.</p>
+      <p>No porque fuera caro.</p>
+      <p>Porque era fiable.</p>
+      <p>Porque funcionaba.</p>
+      <p class="espacio">Porque estaba preparado.</p>
+      <p>Eso es exactamente lo que representa Lunar.</p>
+      <p class="fuerte">No intenta parecerse a una leyenda.</p>
+      <p>Rinde homenaje a ella.</p>
+    </div>
+  </section>
+
+  <!-- 4 · MOVIMIENTO · LO QUE SÍ PAGAS -->
+  <section class="ln-pagas" id="pagas">
+    <div class="ln-pagas-foto">
+      <img src="/assets/img/lunar/landing/movimiento.jpg" alt="Movimiento de cuerda manual del Lunar, con rueda de columnas vista por el fondo de zafiro" loading="lazy">
+    </div>
+    <div class="ln-pagas-lista ln-reveal">
+      <h2>LO QUE SÍ PAGAS.</h2>
+      <ul>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L macizo</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Cristal de zafiro</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Super-LumiNova</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Movimiento japonés VK63</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Brazalete macizo</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Ajuste individual</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Garantía 2 años</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 · LAS VERSIONES -->
+  <section class="ln-versiones">
+    <div class="ln-versiones-cab ln-reveal"><h2>Las versiones</h2></div>
+    <p class="ln-versiones-sub ln-reveal">Mismo diseño. Tres formas de vivir el cronógrafo.</p>
+    <div class="ln-versiones-grid">
+      <article class="ln-version ln-reveal">
+        <h3 class="ln-version-nombre">Alba</h3>
+        <p class="ln-version-mov">VK63</p>
+        <p class="ln-version-precio">desde 259 €</p>
+        <img src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar Alba, mecacuarzo VK63" loading="lazy">
+        <p class="ln-version-desc">Para quien quiere toda la estética del cronógrafo más famoso de la historia con la comodidad del cuarzo.</p>
+      </article>
+      <article class="ln-version ln-reveal">
+        <h3 class="ln-version-nombre">Levante</h3>
+        <p class="ln-version-mov">Seiko NE88</p>
+        <p class="ln-version-precio">desde 329 €</p>
+        <img src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar Levante, automático Seiko NE88" loading="lazy">
+        <p class="ln-version-desc">El equilibrio perfecto entre tradición relojera y rendimiento mecánico.</p>
+      </article>
+      <article class="ln-version ln-reveal">
+        <h3 class="ln-version-nombre">Cenit</h3>
+        <p class="ln-version-mov">Miyota 6S20</p>
+        <p class="ln-version-precio">desde 399 €</p>
+        <img src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar Cenit, automático Miyota 6S20" loading="lazy">
+        <p class="ln-version-desc"><b>La versión definitiva. La que yo elegiría.</b><br>La más completa.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6 · LO QUE LLEVAN TODOS -->
+  <section class="ln-todos">
+    <h2 class="ln-reveal">Lo que llevan todos, sin excepción</h2>
+    <div class="ln-todos-grid ln-reveal">
+      <div class="ln-icono">
+        <svg viewBox="0 0 44 44"><path d="M8 28h12l3-6H11zM24 28h12l-3-6H23zM14 20h12l3-6H17z"/></svg>
+        <span>Acero 316L</span>
+      </div>
+      <div class="ln-icono">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14"/><path d="M10 17h24"/></svg>
+        <span>Cristal de zafiro antirreflejos</span>
+      </div>
+      <div class="ln-icono">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="8"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M10.7 10.7l3.5 3.5M29.8 29.8l3.5 3.5M33.3 10.7l-3.5 3.5M14.2 29.8l-3.5 3.5"/></svg>
+        <span>Super-Luminova</span>
+      </div>
+      <div class="ln-icono">
+        <svg viewBox="0 0 44 44"><rect x="14" y="6" width="16" height="32"/><path d="M14 14h16M14 22h16M14 30h16M22 6v32"/></svg>
+        <span>Brazalete acero macizo</span>
+      </div>
+      <div class="ln-icono">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="6"/><path d="M22 8v4M22 32v4M8 22h4M32 22h4M12.5 12.5l2.8 2.8M28.7 28.7l2.8 2.8M31.5 12.5l-2.8 2.8M15.3 28.7l-2.8 2.8"/><circle cx="22" cy="22" r="13" stroke-dasharray="3 4"/></svg>
+        <span>Montado y controlado en Madrid</span>
+      </div>
+      <div class="ln-icono">
+        <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/><path d="M15.5 22l4.5 4.5 8.5-9"/></svg>
+        <span>2 años de garantía y servicio técnico propio</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CONFIGURADOR -->
+  <section class="ln-config" id="configurador">
+    <div class="ln-config-caja">
+      <div class="ln-config-modelo ln-reveal">
+        <h2>LO-01 Lunar</h2>
+        <p class="ln-config-precio-grande" data-precio>259&nbsp;€</p>
+        <ul class="ln-config-notas">
+          <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>IVA incluido</li>
+          <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>Envío gratis</li>
+          <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>2 años de garantía</li>
+        </ul>
+      </div>
+      <div class="ln-config-plano ln-reveal">
+        <img src="/assets/img/lunar/landing/plano.jpg" alt="Plano técnico del LO-01 Lunar: 40 mm de caja, 48 mm asa a asa, 20 mm de correa, 14,3 mm de grosor" loading="lazy">
+      </div>
+      <div class="ln-config-panel ln-reveal">
+        <h3>Configura el tuyo</h3>
+        <div class="ln-campo">
+          <label for="cfg-movimiento">Movimiento</label>
+          <select id="cfg-movimiento">
+            <option value="alba" data-base="259">VK63 (Cuarzo)</option>
+            <option value="levante" data-base="329">Seiko NE88 (Automático)</option>
+            <option value="cenit" data-base="399">Miyota 6S20 (Automático)</option>
+          </select>
+        </div>
+        <div class="ln-campo">
+          <label for="cfg-esfera">Esfera</label>
+          <select id="cfg-esfera">
+            <option value="negra" data-extra="0">Negra</option>
+          </select>
+        </div>
+        <div class="ln-campo">
+          <label for="cfg-brazalete">Brazalete</label>
+          <select id="cfg-brazalete">
+            <option value="acero" data-extra="0">Acero macizo</option>
+          </select>
+        </div>
+        <div class="ln-campo">
+          <label for="cfg-trasera">Trasera</label>
+          <select id="cfg-trasera">
+            <option value="acero" data-extra="0">Acero</option>
+            <option value="zafiro" data-extra="0">Vista con zafiro</option>
+          </select>
+        </div>
+        <div class="ln-campo">
+          <label for="cfg-grabado">Grabado</label>
+          <select id="cfg-grabado">
+            <option value="sin" data-extra="0">Sin grabado</option>
+            <option value="personalizado" data-extra="25">Grabado personalizado (+25 €)</option>
+          </select>
+        </div>
+        <p class="ln-config-precio" data-precio>259&nbsp;€</p>
+        <a class="ln-boton ln-boton-oro" href="/reservar.html" data-reservar>Añadir al carrito</a>
+        <a class="ln-config-mas" href="#pagas">Ver más detalles →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · SERVICIOS -->
+  <section class="ln-servicios">
+    <div class="ln-servicios-grid ln-reveal">
+      <div class="ln-servicio">
+        <svg viewBox="0 0 44 44"><path d="M4 12h22v18H4zM26 18h8l6 6v6h-14z"/><circle cx="12" cy="33" r="3.5"/><circle cx="32" cy="33" r="3.5"/></svg>
+        <div><b>Envío gratis</b><span>A toda España<br>en 24/48 h</span></div>
+      </div>
+      <div class="ln-servicio">
+        <svg viewBox="0 0 44 44"><path d="M8 14l14-8 14 8v16l-14 8-14-8zM8 14l14 8 14-8M22 22v16"/></svg>
+        <div><b>Devolución 14 días</b><span>Sin preguntas.<br>Compra con tranquilidad.</span></div>
+      </div>
+      <div class="ln-servicio">
+        <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/></svg>
+        <div><b>2 años de garantía</b><span>Y servicio técnico<br>propio en Madrid</span></div>
+      </div>
+      <div class="ln-servicio">
+        <svg viewBox="0 0 44 44"><path d="M22 37s-14-8.6-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 10.4-14 19-14 19z"/></svg>
+        <div><b>Atención personal</b><span>Te ayudamos a elegir.<br>Siempre.</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="brand">la<span class="o"></span>ra<sup>®</sup></div>
+  <div class="footer-links">
+    <a href="/materiales.html">Materiales</a>
+    <a href="/manifiesto.html">El alma de un automático</a>
+    <a href="/condiciones-de-venta.html">Condiciones de venta</a>
+    <a href="/privacidad.html">Privacidad</a>
+  </div>
+  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
+  <div class="gp-grid">
+    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
+      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
+    </a>
+    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
+    </a>
+    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
+    </a>
+    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
+    </a>
+  </div>
+  <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
+</footer>
+
+<script>
+/* ============================================================
+   Configurador: base (movimiento) + extras (trasera, grabado).
+   El cobro real queda aparcado: los botones llevan a reservar.
+   ============================================================ */
+(() => {
+  const selects = ['cfg-movimiento','cfg-esfera','cfg-brazalete','cfg-trasera','cfg-grabado']
+    .map(id => document.getElementById(id));
+  const precios = document.querySelectorAll('[data-precio]');
+
+  function calcula(){
+    const opt = s => s.options[s.selectedIndex];
+    let total = Number(opt(selects[0]).dataset.base || 0);
+    for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
+    for (const p of precios) p.innerHTML = total + '&nbsp;€';
+  }
+  selects.forEach(s => s.addEventListener('change', calcula));
+  calcula();
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, {threshold:.18});
+    document.querySelectorAll('.ln-reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.ln-reveal').forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+<script src="/assets/js/carrito.js?v=17"></script>
+<script src="/assets/js/telemetria.js" defer></script>
+</body>
+</html>
