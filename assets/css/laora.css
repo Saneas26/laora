@@ -6,37 +6,37 @@
    ============================================================ */
 
 :root{
-  --carbon:#0b0d12;          /* fondo oscuro principal (esfera) */
-  --carbon-suave:#16181d;
-  --ambar:#F5D34D;           /* amarillo canario: EL color de la web */
-  --dorado:#C9A227;          /* canario oscuro para fondos claros */
-  --dorado-suave:#F1DD8A;
-  --tinta:#12161f;           /* texto sobre blanco */
-  --tinta-suave:#454b57;
-  --tinta-mute:#8a92a1;
-  --blanco:#ffffff;
-  --gris:#f6f7f9;            /* sección alterna clara */
-  --linea:#e7e9ee;
+  --carbon:#090909;
+  --carbon-suave:#111;
+  --ambar:#D4A94B;
+  --dorado:#D4A94B;
+  --dorado-suave:#D4A94B;
+  --tinta:#090909;
+  --tinta-suave:#555;
+  --tinta-mute:#888;
+  --blanco:#F7F7F5;
+  --gris:#F7F7F5;
+  --linea:#e0e0e0;
   --wa:#25D366;
-  --teal:#3890A4;            /* solo para la palabra Saneas del pie */
-  --radio:22px;
-  --sombra:0 30px 80px -30px rgba(11,13,18,.35);
+  --teal:#3890A4;
+  --radio:2px;
+  --sombra:0 30px 80px -30px rgba(0,0,0,.5);
   --maxw:1180px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:'Nunito Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--blanco);color:var(--tinta);
   -webkit-font-smoothing:antialiased;line-height:1.55;
 }
-h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.02em}
+h1,h2,h3{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.08;letter-spacing:-.01em}
 p{margin:0}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-.saneas{font-family:'Quicksand',sans-serif;font-weight:700}
+.saneas{font-family:'Inter',sans-serif;font-weight:600}
 
 .eyebrow{
   display:inline-flex;align-items:center;gap:9px;
@@ -46,7 +46,7 @@ img{max-width:100%}
 .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--dorado);display:inline-block}
 
 /* ---------- marca dibujada (la O con el triángulo ámbar) ---------- */
-.brand{font-weight:800;font-size:25px;letter-spacing:-.02em;
+.brand{font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:25px;letter-spacing:-.02em;
   display:inline-flex;align-items:center;line-height:1;color:var(--tinta)}
 .brand .o{
   width:.74em;height:.74em;border:.12em solid currentColor;border-radius:50%;
@@ -71,27 +71,29 @@ img{max-width:100%}
 }
 .nav.scrolled{border-color:var(--linea);background:rgba(255,255,255,.92)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
-.nav-links{display:flex;gap:30px;font-size:14.5px;font-weight:600;color:var(--tinta-suave)}
+.nav-links{display:flex;gap:30px;font-size:16px;font-weight:500;color:var(--tinta-suave)}
 .nav-links a:hover{color:var(--tinta)}
 @media(max-width:900px){.nav-links{display:none}}
 
 /* ---------- botones ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;
-  padding:16px 32px;border-radius:999px;border:none;
-  transition:transform .2s ease,box-shadow .2s ease,background .2s;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;cursor:pointer;
+  padding:14px 34px;border:1px solid var(--dorado);border-radius:0;
+  background:transparent;color:var(--dorado);letter-spacing:.06em;text-transform:uppercase;
+  transition:background .25s,border-color .25s;
 }
-.btn-carbon{background:var(--carbon);color:#fff;box-shadow:0 14px 30px -12px rgba(11,13,18,.6)}
-.btn-carbon:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(11,13,18,.7)}
-.btn-ambar{background:var(--ambar);color:var(--carbon);box-shadow:0 14px 30px -12px rgba(245,211,77,.55)}
-.btn-ambar:hover{transform:translateY(-2px)}
-.btn-borde{background:transparent;color:var(--tinta);border:1.5px solid var(--linea)}
-.btn-borde:hover{border-color:var(--tinta)}
-.btn-claro{background:#fff;color:var(--carbon)}
-.btn-claro:hover{transform:translateY(-2px)}
-.btn-wa{background:var(--wa);color:#0A2E1C}
-.btn-wa:hover{background:#1FBE5C;transform:translateY(-2px)}
+.btn:hover{background:rgba(212,169,75,.08)}
+.btn-carbon{background:transparent;color:var(--dorado);border-color:var(--dorado);box-shadow:none}
+.btn-carbon:hover{background:rgba(212,169,75,.08);transform:none;box-shadow:none}
+.btn-ambar{background:transparent;color:var(--dorado);border-color:var(--dorado);box-shadow:none}
+.btn-ambar:hover{background:rgba(212,169,75,.08);transform:none}
+.btn-borde{background:transparent;color:var(--dorado);border:1px solid var(--dorado)}
+.btn-borde:hover{background:rgba(212,169,75,.08);border-color:var(--dorado)}
+.btn-claro{background:transparent;color:var(--dorado);border-color:var(--dorado)}
+.btn-claro:hover{background:rgba(212,169,75,.08);transform:none}
+.btn-wa{background:var(--wa);color:#0A2E1C;border:none}
+.btn-wa:hover{background:#1FBE5C;transform:none}
 .wa-mini{display:inline-flex;align-items:center;gap:9px;background:var(--wa);color:#0A2E1C;
   font-weight:700;font-size:.95rem;padding:11px 18px;border-radius:999px}
 .wa-mini:hover{background:#1FBE5C}

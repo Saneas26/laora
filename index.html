@@ -14,23 +14,25 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=15">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=7">
 <style>
 /* ACTO I — La pregunta. Una pantalla, una idea, un solo elemento ámbar (el CTA). */
 :root{
-  --negro:#050505;
-  --ambar:#F5D34D;
-  --oro:#c7a04a;          /* oro suave del eyebrow */
-  --hueso:#f2efe9;        /* texto principal sobre negro */
-  --gris:#8a8f96;         /* microtexto */
+  --negro:#090909;
+  --ambar:#D4A94B;
+  --oro:#D4A94B;
+  --hueso:#F7F7F5;
+  --gris:#B8B8B8;
+  --linea-oscura:#2C2C2C;
 }
+.laora{font-family:'Nunito Sans',sans-serif !important}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{
   background:var(--negro);color:var(--hueso);
-  font-family:'Nunito Sans',system-ui,sans-serif;
+  font-family:'Inter',system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -89,31 +91,31 @@ body{
 .tarjeta>*{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
 .texto>.micro{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
 @keyframes subir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+.eyebrow{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
   letter-spacing:.28em;text-transform:uppercase;color:var(--oro);line-height:1.85;
   animation-delay:.5s}
-h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
-  font-size:clamp(32px,3.4vw,54px);line-height:1.14;letter-spacing:.01em;
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:clamp(48px,6vw,88px);line-height:1.06;letter-spacing:-.01em;
   margin-top:22px;max-width:13ch;color:#fff;animation-delay:.8s}
-.sub{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
-  font-size:clamp(16px,1.3vw,21px);line-height:1.45;color:#cfcbc3;
+.sub{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  font-size:24px;line-height:1.4;color:#B8B8B8;
   margin-top:16px;max-width:30ch;animation-delay:1.15s}
 .cta{display:inline-flex;align-items:center;gap:14px;margin-top:32px;
-  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--ambar);
-  border:1px solid rgba(245,211,77,.55);border-radius:2px;padding:15px 27px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);
+  border:1px solid var(--ambar);border-radius:0;padding:14px 34px;
   text-decoration:none;transition:background .25s,border-color .25s;
   animation-delay:1.5s}
-.cta .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;
+.cta .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;
   font-size:14px;letter-spacing:.02em}
 .cta .fl{transition:transform .25s}
-.cta:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
+.cta:hover{background:rgba(212,169,75,.07);border-color:var(--ambar)}
 .cta:hover .fl{transform:translateX(5px)}
 .disponible{display:flex;align-items:center;gap:9px;margin-top:26px;
-  font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;
+  font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;
   letter-spacing:.08em;text-transform:uppercase;color:var(--gris);animation-delay:1.75s}
 .disponible .punto{width:6px;height:6px;border-radius:50%;background:var(--ambar);
-  box-shadow:0 0 6px rgba(245,211,77,.7);flex:none}
+  box-shadow:0 0 6px rgba(212,169,75,.7);flex:none}
 .micro{margin-top:26px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--gris);font-weight:600;animation-delay:2s}
 
@@ -121,10 +123,10 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
    el Acto I (aparece a partir del Acto II) y nunca es un menú completo */
 .escape{position:fixed;right:22px;bottom:22px;z-index:6;
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(5,5,5,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  border:1px solid rgba(245,211,77,.35);border-radius:999px;padding:12px 20px 12px 16px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--hueso);text-decoration:none;
+  background:rgba(9,9,9,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid var(--ambar);border-radius:0;padding:12px 20px 12px 16px;
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--hueso);text-decoration:none;
   opacity:0;pointer-events:none;transform:translateY(8px);
   transition:opacity .4s ease,transform .4s ease,border-color .25s,background .25s}
 .escape.visible{opacity:1;pointer-events:auto;transform:none}
@@ -164,14 +166,14 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a2-texto .tarjeta{background:rgba(11,12,15,.6);
   backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%)}
 .a2-eyebrow{max-width:30ch}
-.a2-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,4.2vw,60px);line-height:1.16;margin-top:24px;max-width:12ch}
+.a2-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,3.4vw,44px);line-height:1.16;margin-top:24px;max-width:16ch}
 .a2-boton{margin-top:42px;display:inline-flex;align-items:center;gap:10px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:17px 28px;
-  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.18em;
+  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
-.a2-boton .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;letter-spacing:.02em}
-.a2-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a2-boton .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;letter-spacing:.02em}
+.a2-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
 .a2-boton .chev{display:inline-block;transition:transform .4s;font-size:15px}
 .a2-boton[aria-expanded="true"] .chev{transform:rotate(180deg)}
 
@@ -187,18 +189,18 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .puerta:nth-child(3){transition-delay:.19s}.puerta:nth-child(4){transition-delay:.26s}
 .puerta:nth-child(5){transition-delay:.33s}
 .puerta:last-child{border-right:none}
-.puerta .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gris);letter-spacing:.1em}
+.puerta .num{font-family:'Inter',sans-serif;font-size:12px;color:var(--gris);letter-spacing:.1em}
 .puerta .ico{width:32px;height:32px;margin:14px 0;color:var(--ambar);display:block}
 .puerta .ico svg{width:100%;height:100%}
-.puerta h3{font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;font-size:14.5px;
+.puerta h3{font-family:'Inter',sans-serif;font-weight:800;color:#fff;font-size:14.5px;
   text-transform:uppercase;letter-spacing:.02em;margin:0 0 9px}
-.puerta p{font-size:15px;color:#d9d6cf;line-height:1.45;margin:0 0 16px;min-height:52px}
-.puerta .veredicto{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;
+.puerta p{font-size:15px;color:#B8B8B8;line-height:1.45;margin:0 0 16px;min-height:52px}
+.puerta .veredicto{display:inline-flex;align-items:center;gap:9px;font-family:'Inter',sans-serif;
   font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#ff7a68}
 .puerta .veredicto .x{width:20px;height:20px;border:1.6px solid #ff7a68;border-radius:50%;
   display:grid;place-items:center;color:#ff7a68;font-size:11px;line-height:1;flex:none;
   box-shadow:0 0 10px rgba(255,122,104,.45)}
-.a2-cierre{text-align:center;font-family:'Source Serif 4',Georgia,serif;color:#fff;
+.a2-cierre{text-align:center;font-family:'Cormorant Garamond',Georgia,serif;color:#fff;
   font-size:clamp(20px,2.6vw,30px);padding:44px 24px 90px;max-width:20ch;margin:0 auto;line-height:1.35}
 
 @media(max-width:900px){
@@ -227,11 +229,11 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a3-escena picture{position:absolute;inset:0;z-index:0}
 .a3-escena img{width:100%;height:100%;object-fit:cover;object-position:64% center}
 .a3-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
-.a3-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:18ch}
+.a3-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,3.4vw,44px);line-height:1.15;margin-top:22px;max-width:18ch}
 .a3-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a3-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
-  font-size:clamp(16px,1.4vw,19px);line-height:1.5;max-width:26ch}
+.a3-sub{font-family:'Inter',sans-serif;font-weight:500;color:#B8B8B8;
+  font-size:20px;line-height:1.5;max-width:26ch}
 /* Máscara negra al 35 % detrás de los cinco detalles: sin ella el texto
    cae sobre la foto del acto y no se lee. Tarjeta con las esquinas
    redondeadas de la casa (22px, como `.tarjeta`), y el relleno se suma
@@ -243,7 +245,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .spec3 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
 .spec3 .ico svg{width:100%;height:100%}
-.spec3 b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+.spec3 b{display:block;font-family:'Inter',sans-serif;font-weight:800;color:#fff;
   font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;
   text-shadow:0 2px 10px rgba(0,0,0,.7)}
 .spec3 p{font-size:12.5px;line-height:1.42;color:#fff;margin:0;
@@ -272,11 +274,11 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a4-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
   transform:scale(1.06) rotate(-1.6deg);transform-origin:60% 45%}
 .a4-texto{position:relative;z-index:2;padding:0 44px;max-width:760px}
-.a4-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(36px,4.4vw,60px);line-height:1.15;margin-top:22px;max-width:12ch}
+.a4-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,3.4vw,44px);line-height:1.15;margin-top:22px;max-width:14ch}
 .a4-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a4-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
-  font-size:clamp(16px,1.4vw,19px);line-height:1.55;max-width:34ch}
+.a4-sub{font-family:'Inter',sans-serif;font-weight:500;color:#B8B8B8;
+  font-size:20px;line-height:1.55;max-width:34ch}
 /* fuera de la tarjeta a propósito: así la tarjeta queda más pequeña y
    estrecha, y el reloj de la foto respira y se ve mejor detrás */
 .a4-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px;max-width:640px}
@@ -284,16 +286,16 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .spec4 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
 .spec4 .ico svg{width:100%;height:100%}
-.spec4 b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+.spec4 b{display:block;font-family:'Inter',sans-serif;font-weight:800;color:#fff;
   font-size:14px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:7px;
   text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.spec4 p{font-size:13px;line-height:1.45;color:#c7c4bd;margin:0;
+.spec4 p{font-size:13px;line-height:1.45;color:#B8B8B8;margin:0;
   text-shadow:0 2px 10px rgba(0,0,0,.7)}
 .a4-boton{margin-top:28px;display:inline-flex;align-items:center;gap:10px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:17px 28px;
-  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.16em;
+  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
-.a4-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a4-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
 .a4-boton .fl{transition:transform .25s;display:inline-block}
 .a4-boton:hover .fl{transform:translateX(5px)}
 
@@ -318,23 +320,23 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a5-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 44px 60px}
 .a5-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;align-items:center;gap:80px}
 .a5-texto{flex:0 0 auto;max-width:420px}
-.a5-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,4vw,54px);line-height:1.14;margin-top:22px}
+.a5-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,3.4vw,44px);line-height:1.14;margin-top:22px}
 .a5-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a5-parrafo{font-family:'Nunito Sans',sans-serif;font-weight:400;color:#cfcbc3;
-  font-size:16px;line-height:1.6;max-width:34ch}
+.a5-parrafo{font-family:'Inter',sans-serif;font-weight:400;color:#B8B8B8;
+  font-size:20px;line-height:1.6;max-width:34ch}
 .a5-parrafo+.a5-parrafo{margin-top:16px}
 .a5-boton{margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;
+  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
-.a5-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a5-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
 .a5-boton svg{width:13px;height:13px;flex:none}
 .a5-video{flex:1;min-width:0;border-radius:20px;overflow:hidden;
   background:none;border:0;padding:0;display:block;cursor:pointer;
   box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75);
   transition:box-shadow .25s}
-.a5-video:hover,.a5-video:focus-visible{box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 2px rgba(245,211,77,.55)}
+.a5-video:hover,.a5-video:focus-visible{box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 2px rgba(212,169,75,.55)}
 .a5-video img{width:100%;height:auto;display:block}
 
 /* modal de vídeo: se superpone temporalmente, se cierra solo al terminar */
@@ -354,13 +356,13 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a5-modal-cerrar:hover{background:rgba(5,5,5,.85);border-color:var(--ambar);color:var(--ambar)}
 .a5-pasos{max-width:1500px;margin:0 auto;width:100%;padding:0 44px;
   display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-.paso .num{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;
+.paso .num{display:block;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;
   color:var(--oro);letter-spacing:.08em;margin-bottom:10px}
-.paso .etiqueta{font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+.paso .etiqueta{font-family:'Inter',sans-serif;font-weight:800;color:#fff;
   font-size:13px;text-transform:uppercase;letter-spacing:.05em}
 .a5-cierre{max-width:1500px;margin:40px auto 0;width:100%;padding:34px 44px 90px;
   border-top:1px solid rgba(255,255,255,.1);text-align:center;
-  font-family:'Nunito Sans',sans-serif;color:var(--gris);font-size:14px}
+  font-family:'Inter',sans-serif;color:var(--gris);font-size:14px}
 
 @media(max-width:1180px){
   .a5-escena{min-height:auto;padding:90px 44px 60px}
@@ -382,25 +384,25 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a6-escena{position:relative;padding:110px 44px 0}
 .a6-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;align-items:flex-start;gap:80px}
 .a6-texto{flex:0 0 auto;max-width:420px}
-.a6-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,4vw,54px);line-height:1.14;margin-top:22px}
+.a6-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,3.4vw,44px);line-height:1.14;margin-top:22px}
 .a6-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a6-parrafo{font-family:'Nunito Sans',sans-serif;font-weight:400;color:#cfcbc3;
-  font-size:16px;line-height:1.6;max-width:34ch}
+.a6-parrafo{font-family:'Inter',sans-serif;font-weight:400;color:#B8B8B8;
+  font-size:20px;line-height:1.6;max-width:34ch}
 .a6-parrafo.fuerte{font-weight:700;color:#fff}
 .a6-parrafo+.a6-parrafo{margin-top:16px}
-.a6-nota{margin-top:28px;border:1px solid rgba(245,211,77,.35);border-radius:10px;
+.a6-nota{margin-top:28px;border:1px solid rgba(212,169,75,.35);border-radius:10px;
   padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
 .a6-nota .ico{width:22px;height:22px;color:var(--ambar);flex:none;margin-top:2px}
 .a6-nota .ico svg{width:100%;height:100%}
-.a6-nota p{font-family:'Nunito Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#e9e6df}
+.a6-nota p{font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#F7F7F5}
 .a6-nota .destaca{display:block;margin-top:6px;color:var(--ambar);font-weight:700}
 .a6-boton{margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;
+  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
-.a6-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
-.a6-boton .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;font-size:13px}
+.a6-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
+.a6-boton .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;font-size:13px}
 .a6-boton .fl{transition:transform .25s;display:inline-block}
 .a6-boton:hover .fl{transform:translateX(5px)}
 .a6-foto{flex:1;min-width:0}
@@ -413,27 +415,27 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .ventaja{min-width:0}
 .ventaja .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px}
 .ventaja .ico svg{width:100%;height:100%}
-.ventaja b{display:block;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#fff;
+.ventaja b{display:block;font-family:'Inter',sans-serif;font-weight:800;color:#fff;
   font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
-.ventaja p{font-size:13px;line-height:1.5;color:#c7c4bd;margin:0}
+.ventaja p{font-size:13px;line-height:1.5;color:#B8B8B8;margin:0}
 
 .a6-club{max-width:1500px;margin:0 auto;width:100%;padding:90px 44px 110px;
   display:flex;align-items:center;gap:80px}
 .a6-club-foto{flex:0 0 auto;width:260px}
 .a6-club-foto img{width:100%;height:auto;display:block}
 .a6-club-texto{flex:1;min-width:0;max-width:560px}
-.a6-club-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
+.a6-club-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
   font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin-top:16px}
-.a6-club-sub{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
+.a6-club-sub{font-family:'Inter',sans-serif;font-weight:600;color:#F7F7F5;
   font-size:16px;line-height:1.6;margin-top:20px;max-width:40ch}
 .a6-club-app{flex:0 0 auto}
 .a6-app-boton{display:inline-flex;align-items:center;gap:12px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 26px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;
+  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .25s,border-color .25s}
-.a6-app-boton:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+.a6-app-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
 .a6-app-boton svg{width:16px;height:16px;flex:none}
-.a6-app-boton .laora{font-family:'Nunito Sans',sans-serif;text-transform:none;font-weight:800;font-size:13px}
+.a6-app-boton .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;font-size:13px}
 
 @media(max-width:1180px){
   .a6-inner{flex-direction:column;align-items:flex-start;gap:44px}
@@ -466,17 +468,17 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .a7-escena::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(105deg,rgba(5,5,5,.85) 0%,rgba(5,5,5,.55) 34%,rgba(5,5,5,.08) 62%,transparent 78%)}
 .a7-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
-.a7-titular{font-family:'Source Serif 4',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(36px,4.4vw,58px);line-height:1.15;margin-top:22px;max-width:14ch}
+.a7-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
+  font-size:clamp(34px,3.4vw,44px);line-height:1.15;margin-top:22px;max-width:14ch}
 .a7-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a7-parrafo{font-family:'Nunito Sans',sans-serif;font-weight:600;color:#e9e6df;
-  font-size:clamp(16px,1.4vw,19px);line-height:1.65;max-width:32ch}
+.a7-parrafo{font-family:'Inter',sans-serif;font-weight:500;color:#B8B8B8;
+  font-size:20px;line-height:1.65;max-width:32ch}
 .a7-parrafo strong{color:#fff;font-weight:800}
 .a7-boton{margin-top:32px;display:inline-flex;align-items:center;gap:14px;background:transparent;
-  border:1px solid rgba(245,211,77,.55);color:var(--ambar);border-radius:2px;padding:16px 27px;
-  font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;letter-spacing:.2em;
+  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
+  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;text-decoration:none;transition:background .25s,border-color .25s}
-.a7-boton:hover{background:rgba(245,211,77,.07);border-color:var(--ambar)}
+.a7-boton:hover{background:rgba(212,169,75,.07);border-color:var(--ambar)}
 .a7-boton .fl{transition:transform .25s;display:inline-block}
 .a7-boton:hover .fl{transform:translateX(5px)}
 
@@ -494,7 +496,7 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
    .eyebrow::before de esa hoja: no existe en el resto de la página y
    se colaba en todos los actos por el nombre de clase compartido */
 .eyebrow::before{content:none}
-footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
+footer{background:var(--negro);border-top:1px solid #2C2C2C}
 footer .footer-links a{color:#9aa1ab}
 footer .footer-links a:hover{color:#fff}
 footer .fg-title{color:#8a92a1}
