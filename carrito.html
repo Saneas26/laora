@@ -71,6 +71,12 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
   padding:15px 26px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ambar);background:transparent}
 .c-btn:hover{background:rgba(245,211,77,.08);border-color:var(--ambar)}
+/* El de pagar manda; «seguir mirando» queda como salida secundaria. */
+.c-btn[href="/pagar.html"]{background:var(--oro,#c7a04a);border-color:var(--oro,#c7a04a);
+  color:#141414;font-weight:700}
+.c-btn[href="/pagar.html"]:hover{background:var(--ambar);border-color:var(--ambar)}
+.c-btn-suave{margin-left:12px;color:#c9c5bd;border-color:#2a2a2a}
+.c-btn-suave:hover{color:var(--ambar)}
 @media(max-width:700px){
   .b-menu{display:none}
   .c-linea{grid-template-columns:64px 1fr;gap:14px}
@@ -175,12 +181,12 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
 
     cajaP.innerHTML =
       '<div class="c-total"><span>Total</span><b>' + laoraEuros(laoraCarritoTotal()) + '</b></div>' +
-      '<p class="c-nota">IVA del 21 % incluido · envío gratis · 3 años de garantía.</p>' +
-      '<div class="c-aviso"><b>El pago del carrito todavía no está conectado.</b> ' +
-      'Falta dar de alta la pasarela y rehacer el paso de pago, que hasta ahora estaba ' +
-      'hecho para comprar un reloj suelto con señal del 25 %. Tu selección se queda ' +
-      'guardada en este navegador mientras tanto.</div>' +
-      '<a class="c-btn" href="/coleccion.html">Seguir mirando →</a>';
+      /* «Impuestos incluidos» y no «IVA del 21 %»: laOra va a ser una S.L. y
+         está sin decidir si se registra en Madrid o en Canarias. Según cómo
+         quede puede repercutir IVA o IGIC, así que no se afirma cuál. */
+      '<p class="c-nota">Impuestos incluidos · envío gratis · 3 años de garantía.</p>' +
+      '<a class="c-btn" href="/pagar.html">Pagar →</a>' +
+      '<a class="c-btn c-btn-suave" href="/coleccion.html">Seguir mirando</a>';
   }
 
   document.addEventListener('click', function (e) {

@@ -27,9 +27,9 @@
       '<div class="rsv-aviso">' +
       '<h1>Este acabado todavía no está a la venta</h1>' +
       '<p>Aún no hemos cerrado precio y fecha de entrega, así que no podemos ' +
-      'cobrarte nada. Déjanos tu correo y eres el primero en saberlo.</p>' +
-      '<a class="btn btn-carbon" href="/' + (ref ? '?modelo=' + encodeURIComponent(ref) : '') +
-      '#interesados">Avísame del estreno</a>' +
+      'cobrarte nada. Se fabrica en series pequeñas: en cuanto esté, se podrá ' +
+      'comprar desde su ficha.</p>' +
+      '<a class="btn btn-carbon" href="/coleccion.html">Ver la colección</a>' +
       '</div>';
     return;
   }
@@ -146,11 +146,11 @@
     };
 
     if (!LAORA_SUPABASE_URL) {
-      fallo('El sistema de reservas todavía no está conectado. Escríbenos por WhatsApp y lo hacemos a mano.');
+      fallo('El sistema de reservas todavía no está conectado. Vuelve a intentarlo en un momento.');
       return;
     }
 
-    fetch(LAORA_SUPABASE_URL + '/functions/v1/crear-reserva', {
+    fetch(LAORA_SUPABASE_URL + '/functions/v1/laora-crear-reserva', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', apikey: LAORA_SUPABASE_KEY },
       body: JSON.stringify(reserva)
@@ -162,7 +162,7 @@
         location.href = res.j.url;
       })
       .catch(function () {
-        fallo('No hemos podido crear la reserva. No se te ha cobrado nada. Inténtalo otra vez o escríbenos por WhatsApp.');
+        fallo('No hemos podido crear la reserva. No se te ha cobrado nada. Inténtalo otra vez.');
       });
   });
 })();
