@@ -88,9 +88,10 @@ body{background:var(--negro);color:#fff;overflow-x:hidden}
 
 /* ---------- 6. LO QUE SÍ PAGAS / LO QUE NO PAGAS ---------- */
 .fl-pagas{max-width:1280px;margin:0 auto;padding:0 4vw 80px;
-  display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
-.fl-pagas-col{padding:48px 40px;position:relative}
-.fl-pagas-col h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.6vw,34px);font-weight:400;color:#fff;
+  display:grid;grid-template-columns:1fr 1fr;gap:0}
+.fl-pagas-col{padding:48px 40px;display:flex;align-items:center;gap:28px}
+.fl-pagas-contenido{flex:1;min-width:0}
+.fl-pagas-contenido h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.6vw,34px);font-weight:400;color:#fff;
   text-decoration:underline;text-decoration-color:var(--ambar);
   text-underline-offset:8px;text-decoration-thickness:2px;margin-bottom:28px}
 .fl-lista{list-style:none;padding:0;margin:0}
@@ -102,10 +103,7 @@ body{background:var(--negro);color:#fff;overflow-x:hidden}
 .fl-cross{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ambar);
   display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .fl-cross svg{width:10px;height:10px;stroke:var(--ambar);fill:none;stroke-width:2.5}
-.fl-pagas-img{position:absolute;top:50%;transform:translateY(-50%);
-  width:clamp(180px,18vw,280px);pointer-events:none;opacity:.85}
-.fl-pagas-img-izq{left:-2vw;border-radius:8px;overflow:hidden}
-.fl-pagas-img-der{right:-2vw;border-radius:8px;overflow:hidden}
+.fl-pagas-img{width:clamp(160px,16vw,240px);flex-shrink:0;border-radius:8px;overflow:hidden;opacity:.85}
 .fl-pagas-img img{width:100%;height:auto;display:block}
 
 /* ---------- 7. NUESTRA OBSESIÓN ---------- */
@@ -154,7 +152,8 @@ body{background:var(--negro);color:#fff;overflow-x:hidden}
   .fl-pensar{grid-template-columns:1fr}
   .fl-pensar-izq{border-right:none;border-bottom:1px solid #2a2a2a}
   .fl-pagas{grid-template-columns:1fr}
-  .fl-pagas-img{display:none}
+  .fl-pagas-col{flex-direction:column}
+  .fl-pagas-img{width:100%;max-width:320px}
   .fl-obsesion{grid-template-columns:1fr;text-align:center}
   .fl-obsesion-foto{max-width:480px;margin:0 auto}
 }
@@ -381,35 +380,39 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
 <section class="fl-pagas">
 
   <div class="fl-pagas-col">
-    <div class="fl-pagas-img fl-pagas-img-izq">
+    <div class="fl-pagas-contenido">
+      <h3>Lo que sí pagas.</h3>
+      <ul class="fl-lista">
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Acero 316L</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Cristal de zafiro</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Movimientos contrastados</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Super-LumiNova</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Brazaletes macizos</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Control uno a uno</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Servicio técnico propio</li>
+        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Garantía en España</li>
+      </ul>
+    </div>
+    <div class="fl-pagas-img">
       <img src="/assets/img/filosofia/loquesipagas.png" alt="Movimiento laOra" loading="lazy">
     </div>
-    <h3>Lo que sí pagas.</h3>
-    <ul class="fl-lista">
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Acero 316L</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Cristal de zafiro</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Movimientos contrastados</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Super-LumiNova</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Brazaletes macizos</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Control uno a uno</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Servicio técnico propio</li>
-      <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Garantía en España</li>
-    </ul>
   </div>
 
   <div class="fl-pagas-col">
-    <div class="fl-pagas-img fl-pagas-img-der">
+    <div class="fl-pagas-contenido">
+      <h3>Lo que no pagas.</h3>
+      <ul class="fl-lista">
+        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Publicidad.</li>
+        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Peaje de marca.</li>
+        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Intermediarios.</li>
+        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Packaging de lujo.</li>
+        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Tiendas.</li>
+        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Distribuidores.</li>
+      </ul>
+    </div>
+    <div class="fl-pagas-img">
       <img src="/assets/img/filosofia/embalaje.png" alt="Embalaje laOra" loading="lazy">
     </div>
-    <h3>Lo que no pagas.</h3>
-    <ul class="fl-lista">
-      <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Publicidad.</li>
-      <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Peaje de marca.</li>
-      <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Intermediarios.</li>
-      <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Packaging de lujo.</li>
-      <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Tiendas.</li>
-      <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Distribuidores.</li>
-    </ul>
   </div>
 
 </section>
