@@ -16,183 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=15">
-<style>
-/* ============================================================
-   LO-07 «Bitácora» — ficha de producto
-   Estructura del boceto bitacora_landing3.png:
-   1 hero · 2 el nombre / cuarzo o mecánico · 3 convénceme
-   4 las versiones · 5 lo que llevan todas · 6 configurador · 7 pie
-   Clases con prefijo b- para no chocar con laora.css.
-   ============================================================ */
-:root{ --negro:#050505; --ambar:#F5D34D; --oro:#c7a04a; --hueso:#f2efe9; --gris:#8a8f96; }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--negro);color:var(--hueso);font-family:'Nunito Sans',sans-serif;
-  -webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-.saneas{font-family:'Quicksand',sans-serif;font-weight:700}
-.b-serif{font-family:'Source Serif 4',Georgia,serif;font-weight:400}
-.b-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--oro)}
-.b-raya{display:block;width:52px;height:2px;background:var(--oro)}
-footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
-
-/* ---------- barra ---------- */
-.b-nav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;
-  gap:24px;padding:16px 4vw;background:rgba(5,5,5,.86);backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(255,255,255,.07)}
-.b-marca{font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.5px;color:#fff}
-.b-marca .o{color:var(--ambar)}
-.b-menu{display:flex;gap:30px;font-family:'JetBrains Mono',monospace;font-size:11px;
-  letter-spacing:.16em;text-transform:uppercase;color:#c9c5bd}
-.b-menu a:hover{color:var(--ambar)}
-.b-bolsa{position:relative;display:inline-flex;padding:6px}
-.b-bolsa svg{stroke:#e9e6df}
-.b-bolsa:hover svg{stroke:var(--ambar)}
-.b-cuenta{position:absolute;top:-2px;right:-4px;min-width:17px;height:17px;border-radius:999px;
-  background:var(--ambar);color:#141414;font-size:10.5px;font-weight:800;line-height:17px;text-align:center}
-
-/* ---------- 1 · hero ---------- */
-.b-hero{display:grid;grid-template-columns:1.05fr 1fr;grid-template-rows:1fr;
-  min-height:calc(100svh - 58px);align-items:stretch}
-.b-hero-foto{position:relative;overflow:hidden;background:#0a0a0a;height:100%}
-.b-hero-foto picture{display:block;height:100%}
-/* El render es apaisado y la columna del hero es alta: con `cover` se
-   come el reloj. `contain` lo enseña entero sobre el negro, que es lo
-   que hace el boceto. */
-.b-hero-foto img{width:100%;height:100%;object-fit:contain;object-position:center;
-  transform:scale(1.18)}
-.b-hero-texto{display:flex;flex-direction:column;justify-content:center;padding:80px 5vw}
-.b-hero-titular{font-size:clamp(54px,7.4vw,104px);line-height:.98;color:#fff;letter-spacing:-.03em;margin-top:10px}
-.b-hero-cat{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(17px,2vw,22px);color:#d8d4cc;margin-top:8px}
-.b-hero .b-raya{margin:26px 0}
-.b-lema{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(20px,2.5vw,29px);
-  line-height:1.32;color:#fff}
-.b-hero p.b-p{font-size:15.5px;color:#a9a49b;max-width:430px;margin-top:20px}
-
-/* ---------- 2 · dos columnas claras ---------- */
-.b-dos{display:grid;grid-template-columns:1fr 1fr;background:var(--hueso);color:#1a1a1a}
-.b-col{padding:76px 4.5vw 84px}
-.b-col+.b-col{border-left:1px solid #e0dcd3}
-.b-col h2{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
-  font-size:clamp(27px,3.1vw,38px);line-height:1.12;color:#111}
-.b-col p{font-size:15.5px;color:#43413d;margin-top:16px;max-width:52ch}
-.b-col p b{color:#111}
-.b-nota-foto{margin-top:26px;border:1px dashed #cfc9bd;border-radius:12px;padding:14px 16px;
-  font-size:13px;color:#8d8578;background:#eeeae1}
-
-/* ---------- 3 · convénceme ---------- */
-.b-convence{background:#0a0a0a;padding:88px 4.5vw 96px}
-.b-convence-caja{max-width:900px}
-.b-convence h2{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
-  font-size:clamp(26px,3.4vw,42px);line-height:1.2;color:#fff;margin-top:16px}
-.b-convence p{font-size:15.5px;color:#a9a49b;margin-top:18px;max-width:60ch}
-.b-convence .b-remate{font-family:'Source Serif 4',Georgia,serif;font-size:clamp(21px,2.6vw,31px);
-  color:#fff;margin-top:26px;line-height:1.3}
-
-/* ---------- 4 · las versiones ---------- */
-.b-versiones{background:var(--hueso);color:#1a1a1a;padding:80px 4.5vw 88px;text-align:center}
-.b-versiones h2{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.24em;
-  text-transform:uppercase;color:#111;font-weight:700}
-.b-versiones .b-raya{margin:18px auto 0;background:var(--oro)}
-.b-tres{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:52px auto 0;max-width:1180px}
-.b-v{padding:0 30px;text-align:center}
-.b-v+.b-v{border-left:1px solid #ddd8ce}
-.b-v-nombre{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.2em;
-  text-transform:uppercase;color:#111;font-weight:700}
-.b-v-mov{display:block;font-size:12px;letter-spacing:.06em;color:#7d776c;margin-top:5px;
-  font-family:'JetBrains Mono',monospace;text-transform:none}
-.b-v-precio{font-size:15px;color:#43413d;margin-top:8px}
-.b-v-precio b{font-size:19px;color:#111;font-weight:800}
-.b-v-foto{margin:22px auto 0;max-width:210px}
-.b-v-foto img{width:100%;filter:saturate(.96)}
-.b-v p{font-size:14px;color:#565248;margin-top:18px;line-height:1.6}
-.b-v p b{color:#111}
-
-/* ---------- 5 · lo que llevan todas ---------- */
-.b-todas{background:#eceadf;color:#1a1a1a;padding:34px 3vw 40px;text-align:center;
-  border-top:1px solid #ddd8ce;border-bottom:1px solid #ddd8ce}
-.b-todas h2{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.22em;
-  text-transform:uppercase;color:#9a8443;font-weight:700}
-.b-iconos{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:26px;
-  max-width:1320px;margin-left:auto;margin-right:auto}
-.b-ic{padding:0 14px;display:flex;flex-direction:column;align-items:center;gap:10px}
-.b-ic+.b-ic{border-left:1px solid #dcd6ca}
-.b-ic svg{stroke:#6f6858;width:26px;height:26px}
-.b-ic span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;
-  text-transform:uppercase;color:#4a4640;line-height:1.5}
-
-/* ---------- 6 · configurador ---------- */
-.b-config{display:grid;grid-template-columns:0.9fr 1fr 1.05fr;background:var(--hueso);color:#1a1a1a}
-.b-config-foto{background:#0d0d0d;overflow:hidden}
-.b-config-foto img{width:100%;height:100%;object-fit:cover;min-height:320px}
-.b-medidas{padding:44px 34px}
-.b-medidas h3,.b-configura h3{font-family:'JetBrains Mono',monospace;font-size:11px;
-  letter-spacing:.2em;text-transform:uppercase;color:#9a8443;font-weight:700}
-.b-medidas ul{list-style:none;margin-top:18px}
-.b-medidas li{font-size:14.5px;color:#43413d;padding:7px 0;border-bottom:1px solid #e3ded4;
-  display:flex;justify-content:space-between;gap:14px}
-.b-medidas li b{color:#111;font-weight:700;white-space:nowrap}
-.b-medidas .b-aviso{font-size:13px;color:#8d8578;margin-top:14px}
-.b-configura{padding:44px 34px;border-left:1px solid #e0dcd3;display:flex;flex-direction:column}
-.b-campo{margin-top:18px}
-.b-campo label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
-  letter-spacing:.16em;text-transform:uppercase;color:#8d8578;margin-bottom:7px}
-.b-campo select{width:100%;padding:12px 14px;font:inherit;font-size:15px;color:#111;
-  background:#fff;border:1px solid #d6d0c4;border-radius:10px;appearance:none;
-  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center}
-.b-campo select:focus{outline:none;border-color:var(--oro)}
-.b-precio-caja{background:#0b0b0b;color:#fff;border-radius:16px;padding:26px 24px;margin-top:26px;text-align:center}
-.b-precio{font-size:clamp(34px,4vw,46px);font-weight:800;color:var(--ambar);line-height:1}
-.b-precio-nota{font-size:12.5px;color:#a9a49b;margin-top:8px}
-.b-anadir{display:block;width:100%;margin-top:18px;padding:15px 20px;border:none;cursor:pointer;
-  background:var(--oro);color:#141414;font-family:'JetBrains Mono',monospace;font-size:12px;
-  letter-spacing:.18em;text-transform:uppercase;font-weight:700;border-radius:10px;
-  transition:background .2s,transform .15s}
-.b-anadir:hover{background:var(--ambar);transform:translateY(-1px)}
-.b-anadir[disabled]{background:#3a3a3a;color:#8a8f96;cursor:not-allowed;transform:none}
-.b-vermas{display:inline-block;margin-top:14px;font-size:13px;color:#c9c5bd}
-.b-vermas:hover{color:var(--ambar)}
-.b-hecho{margin-top:12px;font-size:13px;color:#8fd6a8;min-height:18px}
-
-/* ---------- 7 · remate ---------- */
-.b-remates{display:grid;grid-template-columns:repeat(4,1fr);background:var(--hueso);
-  color:#1a1a1a;border-top:1px solid #ddd8ce}
-.b-r{padding:26px 26px 30px;display:flex;gap:14px;align-items:flex-start}
-.b-r+.b-r{border-left:1px solid #e0dcd3}
-.b-r svg{stroke:#6f6858;width:24px;height:24px;flex:0 0 auto;margin-top:2px}
-.b-r b{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:#111}
-.b-r p{font-size:13.5px;color:#5b564e;margin-top:6px;line-height:1.5}
-
-@media(max-width:1100px){
-  .b-hero{grid-template-columns:1fr;min-height:auto}
-  .b-hero-foto{aspect-ratio:4/3}
-  .b-hero-texto{padding:54px 6vw 64px}
-  .b-dos{grid-template-columns:1fr}
-  .b-col+.b-col{border-left:none;border-top:1px solid #e0dcd3}
-  .b-iconos{grid-template-columns:repeat(4,1fr);gap:26px 0}
-  .b-ic:nth-child(4n+1){border-left:none}
-  .b-config{grid-template-columns:1fr}
-  .b-configura{border-left:none;border-top:1px solid #e0dcd3}
-  .b-remates{grid-template-columns:repeat(2,1fr)}
-  .b-r:nth-child(odd){border-left:none}
-}
-@media(max-width:760px){
-  .b-menu{display:none}
-  .b-tres{grid-template-columns:1fr;gap:44px}
-  .b-v+.b-v{border-left:none;border-top:1px solid #ddd8ce;padding-top:40px}
-  .b-iconos{grid-template-columns:repeat(2,1fr)}
-  .b-ic{border-left:none!important}
-  .b-remates{grid-template-columns:1fr}
-  .b-r+.b-r{border-left:none;border-top:1px solid #e0dcd3}
-  .b-medidas,.b-configura{padding:34px 22px}
-  .b-convence{padding:64px 22px 70px}
-  .b-versiones{padding:60px 22px 68px}
-}
-</style>
+<link rel="stylesheet" href="/assets/css/ficha.css?v=1">
 </head>
 <body>
 
@@ -257,7 +81,7 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
   </section>
 
   <!-- 3 · convénceme en 30 segundos -->
-  <section class="b-convence">
+  <section class="b-convence b-con-foto">
     <div class="b-convence-caja">
       <p class="b-eyebrow">Convénceme en 30 segundos</p>
       <h2>Si lo único que quieres es un reloj que dé la hora, funcione bien y te dure toda
@@ -268,34 +92,57 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
       <p>Bonito, elegante, y a la altura de los grandes iconos de la relojería — esos por los
       que tendrías que pagar de mil euros para arriba.</p>
     </div>
+    <!-- Fondo visto, recortado del boceto bitacora_landing3.png -->
+    <div class="b-convence-foto">
+      <img src="/assets/img/bitacora/fondo-visto.jpg" alt="Fondo visto del Bitácora: la maquinaria mecánica a través del cristal trasero" loading="lazy">
+    </div>
   </section>
 
   <!-- 4 · las tres versiones -->
   <section class="b-versiones" id="versiones">
     <h2>Las tres versiones</h2>
     <span class="b-raya"></span>
-    <div class="b-tres">
+
+    <div class="b-versiones-caja">
+     <div class="b-versiones-bloque">
+
+      <!-- Una sola foto para toda la banda: el diseño no cambia entre
+           versiones, cambian los materiales y la mecánica. -->
+      <figure class="b-versiones-foto">
+        <img src="/assets/img/bitacora/frontal.jpg" alt="LO-07 «Bitácora» de laOra, esfera turquesa y brazalete integrado de acero" loading="lazy">
+        <figcaption class="b-versiones-pie">Mismo diseño en las tres versiones</figcaption>
+      </figure>
+
+      <div class="b-tres">
       <div class="b-v">
         <p class="b-v-nombre">Alba<span class="b-v-mov">cuarzo · Ronda suizo</span></p>
         <p class="b-v-precio">desde <b>250 €</b></p>
-        <div class="b-v-foto"><img src="/assets/img/bitacora/frontal.jpg" alt="Bitácora en acabado Alba, cuarzo suizo" loading="lazy"></div>
         <p>Movimiento Ronda suizo. El más fino y ligero, preciso, «póntelo y olvídate».
         Para quien quiere el diseño sin más.</p>
       </div>
       <div class="b-v">
         <p class="b-v-nombre">Levante<span class="b-v-mov">automático · Seiko NH35</span></p>
         <p class="b-v-precio">desde <b>320 €</b></p>
-        <div class="b-v-foto"><img src="/assets/img/bitacora/frontal.jpg" alt="Bitácora en acabado Levante, automático Seiko NH35" loading="lazy"></div>
         <p>Aquí empieza el corazón mecánico. Robusto, fiable, fondo visto para ver la
         maquinaria. El equilibrio perfecto.</p>
       </div>
       <div class="b-v">
         <p class="b-v-nombre">Cenit<span class="b-v-mov">automático · Miyota 9015</span></p>
         <p class="b-v-precio">desde <b>420 €</b></p>
-        <div class="b-v-foto"><img src="/assets/img/bitacora/frontal.jpg" alt="Bitácora en acabado Cenit, automático Miyota 9015" loading="lazy"></div>
         <p>Mi favorito. Automático más fino y de barrido suavísimo, zafiro doble domo, mejor
-        pulido, fondo visto y correa extra. <b>El que me quedaría yo.</b></p>
+        pulido y fondo visto. <b>El que me quedaría yo.</b></p>
       </div>
+      </div>
+
+     </div>
+
+      <!-- Panel del lume, como en el boceto. La foto está recortada de
+           bitacora_landing3.png: es lo único que hay de la esfera a oscuras. -->
+      <aside class="b-lume">
+        <p class="b-lume-titulo">Super-LumiNova</p>
+        <img src="/assets/img/bitacora/lume.jpg" alt="La esfera del Bitácora encendida a oscuras, con los índices y las agujas en verde" loading="lazy">
+        <p class="b-lume-pie">Legibilidad clara y duradera,<br>también en la oscuridad.</p>
+      </aside>
     </div>
   </section>
 
@@ -344,12 +191,15 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
         </select>
       </div>
 
+      <!-- La Bitácora se hace en una sola esfera, y su brazalete va unido
+           a la caja: no admite correa, así que no hay extras. Los dos
+           desplegables se quedan puestos porque la estructura es la misma
+           en las nueve fichas. Lo único que se elige de verdad es la
+           versión. -->
       <div class="b-campo">
         <label for="bEsfera">Esfera</label>
         <select id="bEsfera">
           <option value="Turquesa" selected>Turquesa</option>
-          <option value="Negra">Negra</option>
-          <option value="Azul noche">Azul noche</option>
         </select>
       </div>
 
@@ -357,7 +207,6 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
         <label for="bExtra">Extras</label>
         <select id="bExtra">
           <option value="" data-precio="0" selected>Sin extras</option>
-          <option value="Correa de piel adicional" data-precio="25">Correa de piel adicional (+25 €)</option>
         </select>
       </div>
 

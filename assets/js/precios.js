@@ -29,11 +29,15 @@ var LAORA_IVA = 21;
 var LAORA_PRECIOS = {
   'LO-01': {
     nombre: 'Lunar',
+    /* Precios cerrados por Óscar el 30/07/2026, con el IVA del 21 % dentro.
+       El acabado Levante queda DESCARTADO en este modelo (no existe, no se
+       enseña). Eclipse todavía no está disponible: sin precio no se puede
+       comprar, y su horquilla es solo orientativa y está sin revisar desde
+       antes de cerrar estos dos precios. */
     acabados: {
-      Alba:    { precio: null, horquilla: 'Desde 190 €' },
-      Levante: { precio: null, horquilla: '250–330 €' },
-      Cenit:   { precio: null, horquilla: '400–550 €' },
-      Eclipse: { precio: null, horquilla: '550–750 €' }
+      Alba:    { precio: 239.90, horquilla: 'Desde 239,90 €' },
+      Cenit:   { precio: 379.90, horquilla: '379,90 €' },
+      Eclipse: { precio: null,   horquilla: '550–750 €' }
     }
   },
   'LO-02': {
