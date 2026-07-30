@@ -23,12 +23,20 @@
    La O es el isotipo: círculo con el triángulo ámbar dentro. Es el
    mismo dibujo que la home, hecho con bordes CSS y no con una imagen,
    así que escala sin pixelarse. */
-.cb-marca{font-family:'Nunito Sans',sans-serif;font-weight:800;
-  font-size:clamp(28px,2.4vw,36px);letter-spacing:-.02em;line-height:1;
-  color:#fff;text-decoration:none;display:inline-flex;align-items:center}
-.cb-marca .o{width:.74em;height:.74em;border:.11em solid currentColor;border-radius:50%;
+/* Peso NORMAL, no negrita: en el boceto los trazos son finos.
+   Y el círculo de la O baja de .11em a .07em para que su grosor
+   acompañe al de las letras; con la negrita anterior quedaba muy
+   gordo al lado de una letra fina. */
+.cb-marca{font-family:'Nunito Sans',sans-serif;font-weight:400;
+  font-size:clamp(28px,2.4vw,36px);letter-spacing:-.01em;line-height:1;
+  color:#fff;text-decoration:none;display:inline-flex;align-items:flex-start}
+.cb-marca .o{width:.74em;height:.74em;border:.07em solid currentColor;border-radius:50%;
   display:inline-flex;align-items:flex-start;justify-content:center;
   margin:0 .015em;box-sizing:border-box}
+/* La ® va MUY pequeña: en el boceto el logo no la lleva, así que
+   aquí es un detalle discreto, no parte del dibujo. */
+.cb-marca sup{font-size:.26em;font-weight:400;line-height:1;
+  margin-left:.15em;align-self:flex-start;top:0}
 .cb-marca .o::before{content:"";width:0;height:0;margin-top:.06em;
   border-left:.17em solid transparent;border-right:.17em solid transparent;
   border-top:.24em solid var(--ambar,#F5D34D)}
@@ -70,22 +78,45 @@
 .cb-pendiente{cursor:default;opacity:.55}
 
 /* ============================================================
-   VARIANTE DE LA HOME — cabecera dinámica
+   VARIANTE DE LA HOME — aparece al primer roce del scroll
    ------------------------------------------------------------
-   Acto 1: solo el logo, y POR ENCIMA de la tarjeta de texto (antes
-   quedaba debajo porque `.texto` tenía el mismo z-index y va después
-   en el HTML). Al pasar el Acto 1, entra la cabecera completa.
-   z-index 15: por encima del texto (3) y del botón de escape (6),
-   y por debajo del modal del vídeo del Acto 5 (20), que debe seguir
-   tapándolo todo cuando se abre.
+   Al abrir NO se ve nada: la página empieza limpia, solo la foto y
+   la tarjeta. En cuanto el scroll se mueve, la cabecera entra
+   entera. Si se vuelve arriba del todo, se retira otra vez.
+
+   z-index 15: por encima del texto del Acto 1 (3) y del botón de
+   escape (6), y por debajo del modal del vídeo del Acto 5 (20),
+   que debe seguir tapándolo todo cuando se abre.
    ============================================================ */
-.cb-home{position:fixed;z-index:15;transition:background .35s ease,padding .35s ease}
-.cb-home .cb-menu,
-.cb-home .cb-bolsa{opacity:0;pointer-events:none;transform:translateY(-6px);
-  transition:opacity .35s ease,transform .35s ease}
-.cb-home.cb-completa{background:rgba(5,5,5,.82);backdrop-filter:blur(10px);padding-bottom:20px}
-.cb-home.cb-completa .cb-menu,
-.cb-home.cb-completa .cb-bolsa{opacity:1;pointer-events:auto;transform:none}
+.cb-home{position:fixed;z-index:15;padding-bottom:20px;
+  opacity:0;visibility:hidden;transform:translateY(-14px);
+  transition:opacity .55s cubic-bezier(.22,.61,.36,1),
+             transform .55s cubic-bezier(.22,.61,.36,1),
+             visibility 0s linear .55s}
+.cb-home.cb-visible{opacity:1;visibility:visible;transform:none;
+  transition:opacity .55s cubic-bezier(.22,.61,.36,1),
+             transform .55s cubic-bezier(.22,.61,.36,1),
+             visibility 0s}
+
+/* El fondo NO es una barra maciza: es un velo que se desvanece hacia
+   abajo. El desenfoque lleva la misma máscara, así que se apaga con
+   él y no deja un corte recto a media pantalla. Es lo que hace que
+   se lea como algo delicado y no como un menú pegado encima. */
+.cb-home::before{content:"";position:absolute;inset:-1px 0 -26px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,4,4,.92) 0%,rgba(4,4,4,.80) 38%,
+                                    rgba(4,4,4,.45) 68%,rgba(4,4,4,0) 100%);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%)}
+/* Los hijos por encima del velo. */
+.cb-home > *{position:relative}
+
+/* En la home el menú entra escalonado detrás del logo: unas décimas
+   de diferencia bastan para que no aparezca todo de golpe. */
+.cb-home .cb-menu{transition:opacity .5s ease .12s}
+.cb-home .cb-bolsa{transition:opacity .5s ease .18s}
+.cb-home:not(.cb-visible) .cb-menu,
+.cb-home:not(.cb-visible) .cb-bolsa{opacity:0}
 
 @media(prefers-reduced-motion:reduce){
   .cb-home,.cb-home .cb-menu,.cb-home .cb-bolsa{transition:none}
