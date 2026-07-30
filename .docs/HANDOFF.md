@@ -214,6 +214,49 @@ vistazo qué NO debe salir, y para que `_redirects` lo corte de un plumazo.
 - **Legal**: garantía de 3 años en toda la web, mineral K1 en vez de «Hardlex»,
   turquesa en vez de «Tiffany».
 
+### Cobro: cómo está montado (30/07/2026)
+- **`pagar.html` + `assets/js/pagar.js`**: la pantalla de pago, sale del
+  carrito. Enseña la cesta, pide los datos de envío y deja elegir método.
+- **`assets/js/pagos.js` es la única fuente de las formas de pago.** Nada de
+  métodos escritos a mano en el HTML. Regla: **un método sin sus datos se
+  enseña APAGADO**, no roto — la misma idea que un acabado sin precio.
+  - Sin comisión (manuales): `transferencia` (necesita `iban`) y `bizum`
+    (necesita `telefono`). Crean el pedido en «pendiente».
+  - Con comisión: `tarjeta`, `bizum_automatico` y `paypal`, **los tres por
+    Mollie**. No hacen falta tres integraciones. Se encienden poniendo
+    `LAORA_MOLLIE_LISTO = true` cuando exista el secreto de la Edge Function.
+  - `sumup` está apagado: necesitaría integración propia.
+- **La pantalla no fija el importe.** Lo pinta; el que se cobra lo recalcula
+  la Edge Function leyendo `precios.js`. Y relee el precio de cada línea de
+  la cesta al entrar, por si cambió desde que se metió.
+- **La cesta solo se vacía cuando el servidor ha dicho que sí.**
+- **Límite real: la Edge Function solo sabe de UN reloj por pedido.** Con más
+  de uno la pantalla lo dice y no cobra. Falta escribir y desplegar
+  `laora-crear-pedido` (que acepte `lineas[]`): necesita sesión de Supabase.
+
+### Impuestos: sin decidir, y por eso sin afirmar
+laOra va a ser una **S.L.**, y a 30/07/2026 **no está decidido si se registra
+en Madrid o en Canarias**. Lo que sí está decidido: **el almacén está en
+Madrid**, allí se reciben los pedidos y desde allí se envían. Óscar vive en
+Gran Canaria, pero la S.L. puede tener otro domicilio.
+
+Mientras eso no se cierre, **la web no afirma qué impuesto repercute**: el
+carrito y la pantalla de pago dicen «impuestos incluidos», no «IVA del 21 %».
+El desglose de base imponible + impuesto está en `LAORA_MOSTRAR_IMPUESTOS`
+(`pagar.js`), apagado. **Ojo: `reservar.js` sí desglosa un 21 % de IVA** —
+es del checkout viejo de la señal y hay que revisarlo cuando se decida.
+
+Preguntas para la asesoría, que afectan al código y a los textos legales:
+1. ¿IVA o IGIC en el precio al público, y depende de a dónde se envíe?
+   Los 239,90 € y 379,90 € del Lunar están guardados como PVP **con el 21 %
+   dentro** (así lo dice la cabecera de `precios.js`).
+2. Con la mercancía saliendo de Madrid, ¿qué obligaciones de IVA peninsular
+   hay si la S.L. se domicilia en Canarias?
+3. ¿Qué pasa con los envíos a Canarias desde el almacén de Madrid?
+4. El **domicilio fiscal** de `condiciones-de-venta.html` tiene que ser el de
+   la S.L., no el de Óscar, y hasta que exista no se puede rellenar. Lo mismo
+   con el CIF y los datos de registro mercantil que pide la LSSI.
+
 ### A medias
 - **Siete fichas con el formato viejo.** Ya están en el nuevo la Bitácora y el
   Lunar. Lo que hay que saber para hacer las otras siete:
