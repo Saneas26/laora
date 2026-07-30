@@ -1,0 +1,92 @@
+/* ============================================================
+   laOra · CABECERA — la misma en todas las páginas
+   ------------------------------------------------------------
+   Copiada del boceto `coleccion.png`: logo grande a la izquierda,
+   menú en MINÚSCULAS a la derecha y la bolsa al final. Sin barra
+   sólida: va transparente sobre la foto.
+
+   Excepción: en la home no se enseña hasta el Acto 2.
+
+   Prefijo `cb-` para no chocar ni con `laora.css` ni con
+   `ficha.css`, que ya definen `.nav`, `.brand` y `.b-nav`.
+   ============================================================ */
+
+.cb{position:absolute;top:0;left:0;right:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;padding:26px 3.2vw 0}
+/* Cuando la cabecera va sobre fondo claro o tiene que acompañar al
+   scroll, se le añade `cb-fija`. */
+.cb.cb-fija{position:sticky;padding-bottom:22px;
+  background:rgba(5,5,5,.82);backdrop-filter:blur(10px)}
+
+/* ---------- logo ----------
+   La O es el isotipo: círculo con el triángulo ámbar dentro. Es el
+   mismo dibujo que la home, hecho con bordes CSS y no con una imagen,
+   así que escala sin pixelarse. */
+.cb-marca{font-family:'Nunito Sans',sans-serif;font-weight:800;
+  font-size:clamp(28px,2.4vw,36px);letter-spacing:-.02em;line-height:1;
+  color:#fff;text-decoration:none;display:inline-flex;align-items:center}
+.cb-marca .o{width:.74em;height:.74em;border:.11em solid currentColor;border-radius:50%;
+  display:inline-flex;align-items:flex-start;justify-content:center;
+  margin:0 .015em;box-sizing:border-box}
+.cb-marca .o::before{content:"";width:0;height:0;margin-top:.06em;
+  border-left:.17em solid transparent;border-right:.17em solid transparent;
+  border-top:.24em solid var(--ambar,#F5D34D)}
+
+/* ---------- menú ----------
+   En minúsculas y sin el letter-spacing de tipo monoespaciado que
+   llevaban las fichas: el boceto lo pide así. */
+.cb-menu{display:flex;align-items:center;gap:clamp(22px,2.6vw,44px);
+  font-family:'Nunito Sans',sans-serif;font-size:clamp(14px,1.15vw,16px);
+  font-weight:400;color:#e6e3dc}
+.cb-menu a{text-decoration:none;color:inherit;transition:color .2s}
+.cb-menu a:hover{color:var(--ambar,#F5D34D)}
+.cb-menu a.activo{color:var(--ambar,#F5D34D)}
+
+/* ---------- bolsa ---------- */
+.cb-bolsa{position:relative;display:inline-flex;padding:4px;color:#fff}
+.cb-bolsa svg{stroke:currentColor}
+.cb-bolsa:hover{color:var(--ambar,#F5D34D)}
+.cb-cuenta{position:absolute;top:-3px;right:-5px;min-width:17px;height:17px;border-radius:999px;
+  background:var(--ambar,#F5D34D);color:#141414;font-family:'Nunito Sans',sans-serif;
+  font-size:10.5px;font-weight:800;line-height:17px;text-align:center}
+
+/* ---------- sobre fondo claro ---------- */
+.cb.cb-claro .cb-marca{color:#12161f}
+.cb.cb-claro .cb-menu{color:#43413d}
+.cb.cb-claro .cb-bolsa{color:#12161f}
+
+@media(max-width:900px){
+  .cb{padding:18px 5vw 0}
+  /* El menú completo no cabe: se esconde y quedan logo y bolsa, que es
+     lo que hacía ya la web. Un desplegable es otra tarea. */
+  .cb-menu{display:none}
+}
+
+/* Entradas del menú que todavía no tienen página. Se ven igual que el
+   resto para poder juzgar el diseño, pero NO son enlaces: no llevan a
+   ningún sitio y no deben fingir que sí. En cuanto exista su destino,
+   se cambian a <a> y esta regla sobra. */
+.cb-pendiente{cursor:default;opacity:.55}
+
+/* ============================================================
+   VARIANTE DE LA HOME — cabecera dinámica
+   ------------------------------------------------------------
+   Acto 1: solo el logo, y POR ENCIMA de la tarjeta de texto (antes
+   quedaba debajo porque `.texto` tenía el mismo z-index y va después
+   en el HTML). Al pasar el Acto 1, entra la cabecera completa.
+   z-index 15: por encima del texto (3) y del botón de escape (6),
+   y por debajo del modal del vídeo del Acto 5 (20), que debe seguir
+   tapándolo todo cuando se abre.
+   ============================================================ */
+.cb-home{position:fixed;z-index:15;transition:background .35s ease,padding .35s ease}
+.cb-home .cb-menu,
+.cb-home .cb-bolsa{opacity:0;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .35s ease,transform .35s ease}
+.cb-home.cb-completa{background:rgba(5,5,5,.82);backdrop-filter:blur(10px);padding-bottom:20px}
+.cb-home.cb-completa .cb-menu,
+.cb-home.cb-completa .cb-bolsa{opacity:1;pointer-events:auto;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .cb-home,.cb-home .cb-menu,.cb-home .cb-bolsa{transition:none}
+}

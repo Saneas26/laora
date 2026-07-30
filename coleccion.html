@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=15">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=1">
 <style>
 /* ============================================================
    LA COLECCIÓN — estructura del boceto de Óscar (coleccion.png):
@@ -139,6 +140,31 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     CABECERA del boceto `coleccion.png`. Va igual en todas las
+     páginas (en la home, solo a partir del Acto 2).
+
+     OJO: el boceto pide cinco entradas y TRES NO TIENEN PÁGINA
+     todavía — «sobre laOra», «servicio» y «contacto». Se pintan
+     para que se vea el diseño, pero SIN enlace: un menú que no
+     lleva a ningún sitio es el error nº 27 del traspaso. En
+     cuanto Óscar diga a dónde van, se convierten en <a>.
+     ============================================================ -->
+<header class="cb">
+  <a class="cb-marca" href="/">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu">
+    <a class="activo" href="/coleccion.html">colección</a>
+    <a href="/manifiesto.html">filosofía</a>
+    <span class="cb-pendiente">sobre laOra</span>
+    <span class="cb-pendiente">servicio</span>
+    <span class="cb-pendiente">contacto</span>
+  </nav>
+  <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cb-cuenta" data-carrito-cuenta hidden>0</span>
+  </a>
+</header>
 
 <main>
 
@@ -308,6 +334,8 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
   <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
 </footer>
 
+<!-- carrito.js pinta el contador de la bolsa de la cabecera -->
+<script src="/assets/js/carrito.js?v=17"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

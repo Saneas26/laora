@@ -202,8 +202,10 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
    El boceto pone un panel oscuro a la derecha de las versiones con la
    esfera encendida a oscuras. Solo lo usa la ficha que tenga esa foto:
    no es una banda obligatoria. */
+/* El margen de arriba lo llevaba `.b-tres`; al meter la foto dentro de la
+   caja, la raya dorada del título quedaba pegada al borde de la foto. */
 .b-versiones-caja{display:grid;grid-template-columns:1fr 300px;
-  max-width:1320px;margin:0 auto;align-items:stretch;gap:0 34px}
+  max-width:1320px;margin:46px auto 0;align-items:stretch;gap:0 34px}
 /* La foto y las columnas van juntas en la celda izquierda, así la foto
    queda centrada sobre las versiones y el panel oscuro cubre el alto. */
 .b-versiones-caja .b-versiones-foto{margin-top:0}
@@ -279,10 +281,29 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
    la foto y el degradado se comería sus extremos. Lo que sí funciona es
    igualar el fondo de la banda al del propio render: la foto pasa a ser
    un panel con el borde limpio en el límite de la columna, que es el
-   lenguaje del boceto. Si se cambia el render, hay que remuestrear este
-   color: se mide con un canvas, no a ojo. */
-.b-hero-foto.b-cuadrada{background:#1d1d1f}
+   lenguaje del boceto.
+
+   CADA RENDER TIENE SU PROPIO NEGRO y no coinciden entre modelos: el
+   Lunar es rgb(29,29,31) y el Cero Cero rgb(17,17,17). Por eso el color
+   va en `--fondo-render`, que cada ficha declara en su `<section>` tras
+   MEDIRLO con un canvas. Si se deja el de otro modelo, se ve el marco. */
+.b-hero-foto.b-cuadrada{background:var(--fondo-render,#1d1d1f)}
 .b-hero-foto.b-cuadrada img{transform:none}
+
+/* ---------- banda de estanqueidad (buceadores) ----------
+   Lo que se puede hacer con el reloj y lo que no. En los modelos de
+   buceo NO es opcional: decir «300 m» sin decir que no está certificado
+   bajo la ISO 6425 es dejar que alguien lo descubra a doce metros. */
+.b-agua{background:#0a0a0a;padding:64px 4.5vw 70px}
+.b-agua-caja{max-width:900px}
+.b-agua h2{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
+  font-size:clamp(24px,3vw,36px);line-height:1.2;color:#fff;margin-top:14px}
+.b-agua-dato{margin-top:22px;padding:18px 20px;border:1px solid #23211c;border-radius:12px;
+  background:#0e0d0a;font-size:15px;color:#b5b0a7;line-height:1.6}
+.b-agua-dato b{color:var(--hueso)}
+.b-agua-llano{margin-top:14px;padding:18px 20px;border-left:3px solid var(--oro);
+  font-size:15.5px;color:#c9c5bd;line-height:1.6}
+.b-agua-llano b{color:#fff}
 
 /* «Lo que llevan todas» con seis casillas en vez de siete. */
 .b-iconos.b-seis{grid-template-columns:repeat(6,1fr)}
