@@ -142,17 +142,19 @@ distinguen por el nombre: hay que abrirlos.
 ├── reserva-recibida.html        Pantalla final de la reserva
 ├── carrito.html                 Carrito (nuevo, 29/07)
 ├── relojes/
-│   ├── lo-01-lunar.html         ┐
-│   ├── lo-02-cero-cero.html     │  ocho fichas con el formato viejo
-│   ├── lo-03-bauhaus.html       │  (tabla de cuatro acabados)
-│   ├── lo-04-precisa.html       │
+│   ├── lo-02-cero-cero.html     ┐
+│   ├── lo-03-bauhaus.html       │  siete fichas con el formato viejo
+│   ├── lo-04-precisa.html       │  (tabla de cuatro acabados)
 │   ├── lo-05-trinchera.html     │
 │   ├── lo-06-ocho-lados.html    │
 │   ├── lo-08-tortuga.html       │
 │   ├── lo-09-coctel.html        ┘
-│   └── lo-07-bitacora.html      ← FORMATO NUEVO, el del boceto. La plantilla.
+│   ├── lo-07-bitacora.html      ← FORMATO NUEVO, el del boceto. Tres versiones.
+│   └── lo-01-lunar.html         ← FORMATO NUEVO con los CUATRO acabados.
+│                                  Es la plantilla para las siete que faltan.
 ├── assets/
 │   ├── css/laora.css            Estilos de todo menos la home y las páginas nuevas
+│   ├── css/ficha.css            LAS SIETE BANDAS de las fichas nuevas, compartida
 │   ├── js/
 │   │   ├── laora.js             Nav, .reveal, formulario, botón por acabado
 │   │   ├── precios.js           ÚNICA FUENTE DE PRECIOS. Manda sobre todo
@@ -163,7 +165,8 @@ distinguen por el nombre: hay que abrirlos.
 │   ├── img/
 │   │   ├── relojes/lo-0X.jpg    Foto de cada ficha
 │   │   ├── relojes/col-0X.jpg   Los nueve renders nuevos, 3:4 sobre negro
-│   │   ├── bitacora/            hero, hero-movil, frontal, ancha
+│   │   ├── bitacora/            hero, hero-movil, frontal, ancha,
+│   │   │                        fondo-visto y lume (recortadas del boceto)
 │   │   ├── acto*.jpg            Fotos de los 7 Actos de la home
 │   │   └── taller-madrid.jpg    acto5 recortada, SIN el botón de reproducir
 │   └── sonido/clic-brazalete.wav
@@ -211,8 +214,75 @@ vistazo qué NO debe salir, y para que `_redirects` lo corte de un plumazo.
 - **Legal**: garantía de 3 años en toda la web, mineral K1 en vez de «Hardlex»,
   turquesa en vez de «Tiffany».
 
+### Cobro: cómo está montado (30/07/2026)
+- **`pagar.html` + `assets/js/pagar.js`**: la pantalla de pago, sale del
+  carrito. Enseña la cesta, pide los datos de envío y deja elegir método.
+- **`assets/js/pagos.js` es la única fuente de las formas de pago.** Nada de
+  métodos escritos a mano en el HTML. Regla: **un método sin sus datos se
+  enseña APAGADO**, no roto — la misma idea que un acabado sin precio.
+  - Sin comisión (manuales): `transferencia` (necesita `iban`) y `bizum`
+    (necesita `telefono`). Crean el pedido en «pendiente».
+  - Con comisión: `tarjeta`, `bizum_automatico` y `paypal`, **los tres por
+    Mollie**. No hacen falta tres integraciones. Se encienden poniendo
+    `LAORA_MOLLIE_LISTO = true` cuando exista el secreto de la Edge Function.
+  - `sumup` está apagado: necesitaría integración propia.
+- **La pantalla no fija el importe.** Lo pinta; el que se cobra lo recalcula
+  la Edge Function leyendo `precios.js`. Y relee el precio de cada línea de
+  la cesta al entrar, por si cambió desde que se metió.
+- **La cesta solo se vacía cuando el servidor ha dicho que sí.**
+- **Límite real: la Edge Function solo sabe de UN reloj por pedido.** Con más
+  de uno la pantalla lo dice y no cobra. Falta escribir y desplegar
+  `laora-crear-pedido` (que acepte `lineas[]`): necesita sesión de Supabase.
+
+### Impuestos: IVA del 21 %, y cerrado
+**Decisión de Óscar del 30/07/2026. No volver a preguntarlo.**
+
+- laOra es una **S.L. de Madrid**.
+- **El almacén está en Madrid** porque es la opción más interesante en costes:
+  se importa el material de China a Madrid y desde Madrid se envía a toda la
+  península.
+- Que Óscar viva en Gran Canaria **no pinta nada aquí**: su tributación
+  personal es otra cosa y no toca a la web.
+- Por tanto el PVP lleva el **IVA del 21 %** dentro, como ya decía la cabecera
+  de `precios.js`. El carrito dice «IVA del 21 % incluido» y la pantalla de
+  pago desglosa base imponible + IVA (`LAORA_MOSTRAR_IMPUESTOS = true`).
+
+**El CIF, el domicilio fiscal y los datos de registro mercantil van AL FINAL**,
+cuando estén cerrados el diseño, la aplicación y los escandallos. Son los
+huecos en ámbar de `condiciones-de-venta.html` y **no frenan nada** del trabajo
+de web: se rellenan de una pasada cuando la S.L. exista. No sacarlos como
+bloqueante en cada entrega.
+
 ### A medias
-- **Ocho fichas con el formato viejo.** Solo la Bitácora tiene el nuevo.
+- **Siete fichas con el formato viejo.** Ya están en el nuevo la Bitácora y el
+  Lunar. Lo que hay que saber para hacer las otras siete:
+  - Las siete bandas viven en **`assets/css/ficha.css`**, compartida. Se sacaron
+    del `<style>` en línea de la Bitácora, que ahora también la usa. **No volver
+    a meter CSS en línea en una ficha**: se arregla una vez y valen las nueve.
+  - El prefijo sigue siendo **`b-`** (nació en la Bitácora). No se renombró para
+    no tocar un marcado ya verificado en producción. Léase «b- = banda de ficha».
+  - Para cuatro acabados: `class="b-tres b-cuatro"` en la retícula, `b-cima` en
+    la columna de Eclipse, y `b-seis` en `.b-iconos` si son seis iconos.
+  - **Precios y horquillas los pinta el JS desde `precios.js`**, no van a mano en
+    el HTML como en la Bitácora. Cuando Óscar cierre un precio, la ficha se
+    actualiza sola. Probado: con precio, el botón vende y la línea entra bien en
+    el carrito; sin precio, el botón queda muerto y el carrito no recibe nada.
+  - **Una sola foto por banda de versiones**, no una por columna (decisión de
+    Óscar del 29/07). Solo hay un render por modelo: repetirlo no enseñaba nada.
+  - **El configurador solo elige el acabado.** Los desplegables de esfera y de
+    extras se quedan puestos, cada uno con una única posibilidad y sin
+    alternativas: cada modelo se hace en una sola esfera y no lleva extras.
+    Es decisión de Óscar del 30/07 y **pisa al boceto**, que enseñaba tres
+    esferas y una correa de piel de +25 €. En la Bitácora la correa era además
+    imposible: su brazalete va unido a la caja. Añadir una opción el día que
+    exista = añadir un `<option>` con su `data-precio`, nada más.
+  - En «lo que llevan todas» **solo va lo que es común a TODOS los acabados** del
+    modelo. En el Lunar el zafiro no lo es (Alba lleva mineral K1), así que no
+    está. Mirar la tabla de la ficha vieja antes de copiar los iconos.
+  - Los renders de `assets/img/relojes/` son **cuadrados y con fondo propio**
+    rgb(29,29,31): la banda del héroe lleva `b-cuadrada`, que iguala el fondo. La
+    máscara radial de la colección **no sirve** aquí (el brazalete ocupa el alto
+    entero y el degradado se come sus extremos).
 - **El pago del carrito no existe.** El checkout que hay (`reservar.html`) se hizo
   para comprar un reloj suelto con señal del 25 %; ahora la compra es por cesta.
   Hay que rehacer ese paso.
@@ -224,20 +294,50 @@ vistazo qué NO debe salir, y para que `_redirects` lo corte de un plumazo.
    comprometida no se puede cobrar, y el código lo impide a propósito. Hoy
    `laora-crear-reserva` responde literalmente *«no hay fecha de entrega
    comprometida»*. **Es lo único que separa a la Bitácora de poder vender.**
-2. **33 de 36 precios siguen vacíos.** Solo LO-07: Alba 250, Levante 320, Cenit 420.
-3. **Cuatro huecos en `condiciones-de-venta.html`**: domicilio fiscal, fecha de
-   entrega, teléfono de Bizum e IBAN. Salen marcados en ámbar en la propia web.
-4. **`LAORA_COBRO` vacío** en `gracias.js`: sin Bizum ni IBAN, quien elija pago
-   manual no sabe dónde pagar.
-5. **Alta en Mollie y su clave.** Es una credencial: la pone Óscar.
-6. **Cuatro fotos que no existen** y que pide el boceto de la Bitácora: el
-   cuaderno con el compás, el fondo visto con la maquinaria, la toma del lume a
-   oscuras y el dibujo técnico de medidas.
+2. **30 de 35 precios siguen vacíos.** Cerrados: LO-07 Alba 250 / Levante 320 /
+   Cenit 420, y LO-01 Alba 239,90 / Cenit 379,90. (Son 35 y no 36 porque el
+   acabado Levante quedó descartado en el LO-01.)
+3. **El IBAN y el teléfono de Bizum**, en `assets/js/pagos.js`. Sin ellos los
+   dos métodos sin comisión salen apagados. `LAORA_COBRO` de `gracias.js`
+   duplica esos mismos datos: unificar cuando se rellenen.
+4. **Alta en Mollie y su clave.** Es una credencial: la pone Óscar. Con ella,
+   poner `LAORA_MOLLIE_LISTO = true` en `pagos.js` y se encienden tarjeta,
+   Bizum inmediato y PayPal de una vez.
+
+**NO bloqueante, va al final** (decisión de Óscar del 30/07/2026): el CIF, el
+domicilio fiscal y los datos de registro mercantil de
+`condiciones-de-venta.html`. Se rellenan cuando estén cerrados el diseño, la
+aplicación y los escandallos. No presentarlos como freno en cada entrega.
+6. **Dos de las cuatro fotos que pedía el boceto siguen sin existir**: el
+   cuaderno con el compás y el dibujo técnico de medidas. El **fondo visto** y
+   la **toma del lume** ya están puestas, recortadas del propio boceto
+   (`.docs` no las guarda; están en `assets/img/bitacora/`).
+   **Ojo con la resolución**: `bitacora_landing3.png` mide 1024×1536 en origen,
+   así que lo que se recorta de él es pequeño — `fondo-visto.jpg` sale a 599×225
+   y `lume.jpg` a 285×190. Se ven bien al tamaño al que se enseñan, pero son 1×:
+   en pantalla retina no son nítidas. **Si existen los renders originales
+   sueltos, sustituirlas.** Las otras dos no se pueden recortar: el cuaderno se
+   funde con el texto con un degradado y del dibujo técnico solo quedarían
+   ~150×125 px de línea fina.
+7. **Las medidas del Lunar** (diámetro, grosor, asas, ancho de correa). Salen en
+   ámbar con `[POR CERRAR]` en su ficha, como los huecos de las condiciones de
+   venta. No se ponen a ojo: las confirma el fabricante de la caja.
+   **Las medidas del boceto son las de la Bitácora** (~40 mm, ~9,5–11 mm,
+   ~47 mm, ~22 mm) y ya estaban en su ficha: no sirven para el Lunar.
 
 ### El siguiente paso
-**Llevar las ocho fichas restantes al formato de la Bitácora**, empezando por el
-modelo que vaya a estrenarse. La Bitácora es la plantilla: misma estructura de
-siete bandas, mismo configurador, mismos nombres de acabado.
+**Llevar las siete fichas restantes al formato nuevo.** El Lunar es la plantilla
+para las de cuatro acabados: misma estructura de siete bandas, mismo
+configurador, mismos nombres de acabado, y el CSS ya está en `ficha.css`.
+
+**El formulario de aviso de estreno NO se pone en marcha** — decisión de Óscar
+del 30/07/2026, preguntado expresamente. En toda la web no queda ninguno:
+`laora.js` conserva el manejador y `laora.interesados` existe y acepta INSERT
+(comprobado con un POST a PostREST), pero el formulario se quitó de la home.
+Con 33 de 36 acabados sin precio, eso significa que hoy no hay forma de que un
+interesado deje su correo, y está aceptado. Las fichas nuevas dicen la verdad
+—«todavía no está a la venta»— en vez de dar un botón que no lleva a ningún
+sitio. **No volver a proponerlo salvo que él lo saque.**
 
 En paralelo, y en cuanto Óscar dé los datos: rellenar fecha de entrega y los
 cuatro huecos legales. Con eso la Bitácora ya puede vender.
@@ -336,6 +436,11 @@ Todos ocurrieron en esta ventana. Están aquí para que no se repitan.
   señal del 25 %; ese código sigue ahí y funciona.
 - **Nunca prometer stock ni plazos** que no estén cerrados.
 - **Nunca vender nada a la audiencia de Saneas.**
+- **La S.L. es de Madrid y todo sale de Madrid: el PVP lleva IVA del 21 %.**
+  Cerrado el 30/07/2026. Dónde vive Óscar no afecta a la web.
+- **El CIF y el domicilio fiscal se rellenan al final**, cuando estén el
+  diseño, la aplicación y los escandallos. No son un bloqueante: no volver a
+  presentarlos como tal.
 
 ---
 

@@ -6,15 +6,17 @@
      ?estado=pendiente       → eligió Bizum o transferencia
    Con ?metodo=bizum|transferencia se enseñan las instrucciones.
 
-   Los datos de cobro (teléfono de Bizum e IBAN) se rellenan en
-   LAORA_COBRO, más abajo. Van en claro porque son datos que hay
-   que dar al cliente igualmente; no son secretos.
+   Los datos de cobro salen de `pagos.js`, que es la única fuente.
+   Antes estaban escritos aquí también y era pedir un despiste: el
+   día que cambie el IBAN se cambia en un sitio, no en dos. Van en
+   claro porque hay que dárselos al cliente igualmente; no son
+   secretos. La clave de Mollie sí lo es y NO vive en el repo.
    ============================================================ */
 
 var LAORA_COBRO = {
-  bizum: '',   // p. ej. '+34 689 806 987'
-  iban: '',    // p. ej. 'ES00 0000 0000 0000 0000 0000'
-  titular: 'Óscar Belloso Jiménez'
+  bizum:   (typeof LAORA_PAGOS !== 'undefined' && LAORA_PAGOS.bizum.telefono) || '',
+  iban:    (typeof LAORA_PAGOS !== 'undefined' && LAORA_PAGOS.transferencia.iban) || '',
+  titular: (typeof LAORA_PAGOS !== 'undefined' && LAORA_PAGOS.transferencia.titular) || ''
 };
 
 (function () {
@@ -49,7 +51,7 @@ var LAORA_COBRO = {
     instrucciones = LAORA_COBRO.bizum
       ? '<div class="rsv-datos"><h2>Envíanos la señal por Bizum</h2>' +
         '<p class="rsv-dato"><span>Número</span><b>' + LAORA_COBRO.bizum + '</b></p>' +
-        (importe ? '<p class="rsv-dato"><span>Importe</span><b>' + importe + ' €</b></p>' : '') +
+        (importe ? '<p class="rsv-dato"><span>Importe</span><b>' + laoraEuros(Number(importe)) + '</b></p>' : '') +
         (codigo ? '<p class="rsv-dato"><span>Concepto</span><b>' + codigo + '</b></p>' : '') +
         '<p class="rsv-ojo">Pon la referencia en el concepto: es lo que nos permite ' +
         'reconocer tu pago sin tener que preguntarte.</p></div>'
@@ -59,7 +61,7 @@ var LAORA_COBRO = {
       ? '<div class="rsv-datos"><h2>Haz la transferencia</h2>' +
         '<p class="rsv-dato"><span>Titular</span><b>' + LAORA_COBRO.titular + '</b></p>' +
         '<p class="rsv-dato"><span>IBAN</span><b>' + LAORA_COBRO.iban + '</b></p>' +
-        (importe ? '<p class="rsv-dato"><span>Importe</span><b>' + importe + ' €</b></p>' : '') +
+        (importe ? '<p class="rsv-dato"><span>Importe</span><b>' + laoraEuros(Number(importe)) + '</b></p>' : '') +
         (codigo ? '<p class="rsv-dato"><span>Concepto</span><b>' + codigo + '</b></p>' : '') +
         '<p class="rsv-ojo">Pon la referencia en el concepto: es lo que nos permite ' +
         'reconocer tu pago sin tener que preguntarte.</p></div>'
@@ -77,6 +79,7 @@ var LAORA_COBRO = {
     'con transferencia, uno o dos días hábiles.</p>' +
     '<p>Si prefieres pagar con tarjeta y que quede confirmado al momento, vuelve atrás ' +
     'y elige esa opción.</p>' +
-    '<a class="btn btn-carbon" href="https://api.whatsapp.com/send?phone=' + LAORA_WHATSAPP + '">' +
-    'Escríbenos por WhatsApp</a>';
+    /* Aquí había un botón de WhatsApp. El canal se quitó de toda la web, así
+       que llevaba a un número que ya no se atiende desde aquí. */
+    '<a class="btn btn-carbon" href="/coleccion.html">Volver a la colección</a>';
 })();
