@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=15">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=2">
 <style>
 /* ACTO I — La pregunta. Una pantalla, una idea, un solo elemento ámbar (el CTA). */
 :root{
@@ -34,7 +35,7 @@ body{
 }
 
 /* logotipo, solo — sin menú: aún no hay a dónde ir */
-.marca{position:fixed;top:34px;left:44px;z-index:3}
+/* La cabecera vive ahora en assets/css/cabecera.css (.cb / .cb-home). */
 .brand{font-weight:800;font-size:25px;letter-spacing:-.02em;
   display:inline-flex;align-items:center;line-height:1;color:#fff;text-decoration:none}
 .brand .o{width:.74em;height:.74em;border:.12em solid currentColor;border-radius:50%;
@@ -65,9 +66,11 @@ body{
   animation:destello 16s ease-in-out 5s infinite}
 @keyframes destello{0%{background-position:130% 0}14%{background-position:-60% 0}100%{background-position:-60% 0}}
 
+/* El padding de arriba baja el Acto 1 para dejarle sitio al logo, que
+   ahora va por encima de la tarjeta y antes quedaba debajo. */
 .texto{position:relative;z-index:3;height:100%;max-width:1500px;margin:0 auto;
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-  padding:64px 44px 0;max-inline-size:none}
+  padding:132px 44px 0;max-inline-size:none}
 /* la tarjeta: un panel elevado y con corte propio, para que la caja de texto no
    lea como un vacío plano junto al metal texturado del reloj, sino como un
    recorte deliberado — con su propio degradado, borde y sombra de elevación.
@@ -130,7 +133,6 @@ h1{font-family:'Source Serif 4',Georgia,serif;font-weight:400;
 .escape:hover .fl{transform:translateX(4px)}
 
 @media(max-width:760px){
-  .marca{top:24px;left:24px}
   .brand{font-size:22px}
   .hero .foto{transform-origin:54% 70%}
   .hero .foto img{object-position:center bottom}
@@ -496,8 +498,28 @@ footer .brand{color:#fff}
 </head>
 <body>
 
-<header class="marca">
-  <a class="brand" href="/">la<span class="o"></span>ra<sup>®</sup></a>
+<!-- ============================================================
+     CABECERA DINÁMICA. En el Acto 1 solo se ve el logo, por encima
+     de la tarjeta. En cuanto el scroll pasa del Acto 1, entra el
+     menú completo. La misma cabecera que el resto de páginas, que
+     allí se ve entera desde el principio.
+
+     Tres entradas del boceto no tienen página todavía y van sin
+     enlace a propósito: «sobre laOra», «servicio» y «contacto».
+     ============================================================ -->
+<header class="cb cb-home" id="cabecera">
+  <a class="cb-marca" href="/">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu">
+    <a href="/coleccion.html">colección</a>
+    <a href="/manifiesto.html">filosofía</a>
+    <span class="cb-pendiente">sobre laOra</span>
+    <span class="cb-pendiente">servicio</span>
+    <span class="cb-pendiente">contacto</span>
+  </nav>
+  <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cb-cuenta" data-carrito-cuenta hidden>0</span>
+  </a>
 </header>
 
 <a class="escape" id="escapeTab" href="/coleccion.html">Ver la colección <span class="fl">→</span></a>
@@ -905,6 +927,30 @@ document.querySelector('.cta').addEventListener('click', function (e) {
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && modal.classList.contains('visible')) cerrar();
   });
+})();
+</script>
+<!-- carrito.js pinta el contador de la bolsa de la cabecera -->
+<script src="/assets/js/carrito.js?v=17"></script>
+<script>
+/* Cabecera dinámica: en el Acto 1 solo el logo; en cuanto el Acto 1
+   deja de verse —o sea, cuando el scroll ya va por el Acto 2— entra la
+   cabecera completa. Se observa el propio Acto 1 en vez de calcular
+   alturas: así funciona igual con la barra del navegador móvil, que
+   cambia el 100svh al hacer scroll. */
+(function () {
+  var cab = document.getElementById('cabecera');
+  var acto1 = document.querySelector('main.hero');
+  if (!cab || !acto1) return;
+
+  if (!('IntersectionObserver' in window)) {
+    /* Sin soporte, mejor la cabecera completa siempre que ninguna. */
+    cab.classList.add('cb-completa');
+    return;
+  }
+
+  new IntersectionObserver(function (entradas) {
+    cab.classList.toggle('cb-completa', !entradas[0].isIntersecting);
+  }, { threshold: 0 }).observe(acto1);
 })();
 </script>
 <script src="/assets/js/telemetria.js" defer></script>
