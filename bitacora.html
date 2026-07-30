@@ -125,6 +125,24 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
 .bh-icono-texto p{font-size:20px;color:var(--bh-tinta-2);max-width:460px;margin-bottom:16px}
 .bh-icono-texto p.fuerte{color:var(--bh-negro);font-weight:600}
 
+/* Las dos curiosidades: botones fantasma con borde oro y un panel
+   que se despliega debajo, uno cada vez. */
+.bh-curiosidades{margin-top:30px;max-width:460px}
+.bh-curio-botones{display:flex;gap:14px;flex-wrap:wrap}
+.bh-curio-boton{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  padding:12px 24px;background:transparent;color:var(--bh-negro);
+  border:1px solid var(--bh-oro);transition:background .25s}
+.bh-curio-boton:hover{background:rgba(212,169,75,.08)}
+.bh-curio-boton[aria-expanded="true"]{background:rgba(212,169,75,.16)}
+.bh-curio-panel{margin-top:20px;padding-left:18px;border-left:2px solid var(--bh-oro)}
+.bh-curio-panel p{font-size:17px;line-height:1.65;margin:0}
+.bh-curio-panel p b{color:var(--bh-negro)}
+@media(prefers-reduced-motion:no-preference){
+  .bh-curio-panel{animation:bh-curio-entra .45s cubic-bezier(.22,.61,.36,1)}
+  @keyframes bh-curio-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+
 /* ============================================================
    4 · MOVIMIENTO · LO QUE SÍ PAGAS · PACKAGING
    ============================================================ */
@@ -325,10 +343,32 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
     </div>
     <div class="bh-icono-texto bh-reveal">
       <h2>Icono del pasado<span class="punto">.</span><br>Hecho para el futuro<span class="punto">.</span></h2>
-      <p>Un homenaje al Patek Philippe Nautilus, reinterpretado con nuestra filosofía: máxima calidad, sin peaje de marca.</p>
       <p>El Bitácora está a la altura de los grandes.</p>
       <p>Mismo lenguaje de diseño. Mismos valores.</p>
       <p class="fuerte">Una inversión segura. Para toda la vida.</p>
+      <div class="bh-curiosidades">
+        <div class="bh-curio-botones">
+          <button type="button" class="bh-curio-boton" data-curio="curio-1" aria-expanded="false" aria-controls="curio-1">Curiosidad 1</button>
+          <button type="button" class="bh-curio-boton" data-curio="curio-2" aria-expanded="false" aria-controls="curio-2">Curiosidad 2</button>
+        </div>
+        <div class="bh-curio-panel" id="curio-1" hidden>
+          <p>En diciembre de 2021, Patek Philippe despidió su Nautilus 5711 con una serie
+          final de 170 unidades con la esfera azul Tiffany, celebrando los 170 años de
+          relación con Tiffany&nbsp;&amp;&nbsp;Co. La primera unidad se subastó en Nueva York por
+          <b>6,5 millones de dólares</b>; su precio de catálogo rondaba los 35.000.
+          Sigue siendo el reloj de acero más caro jamás vendido.
+          Esa esfera es la que da nombre a la nuestra.</p>
+        </div>
+        <div class="bh-curio-panel" id="curio-2" hidden>
+          <p>En 1974, durante la feria de Basilea, Gérald Genta dibujó en una servilleta
+          —en apenas cinco minutos— un reloj inspirado en el ojo de buey de un barco:
+          las «orejas» de la caja son las bisagras de la escotilla. Salió al mercado en
+          1976 y escandalizó al sector: un reloj <b>de acero</b> al precio de uno de oro.
+          Su eslogan: «Uno de los relojes más caros del mundo está hecho de acero».
+          La misma mano había dibujado, cuatro años antes, el otro gran icono del
+          lujo deportivo.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -539,6 +579,22 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
+
+  /* Curiosidades: cada botón despliega su panel; el otro se recoge.
+     Pulsar el mismo botón otra vez lo cierra. */
+  const curioBotones = document.querySelectorAll('.bh-curio-boton');
+  curioBotones.forEach(b => b.addEventListener('click', () => {
+    const panel = document.getElementById(b.dataset.curio);
+    const abrir = panel.hidden;
+    curioBotones.forEach(o => {
+      o.setAttribute('aria-expanded', 'false');
+      document.getElementById(o.dataset.curio).hidden = true;
+    });
+    if (abrir) {
+      panel.hidden = false;
+      b.setAttribute('aria-expanded', 'true');
+    }
+  }));
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
