@@ -1,17 +1,22 @@
 # Identidad visual laOra — norma canónica
 
 Sistema definitivo fijado por Óscar (31/07/2026) sobre las landings de producto
-(`bauhaus.html`, `bitacora.html`). Toda página nueva lo hereda sin discusión.
+(`bauhaus.html`, `bitacora.html`, `lunar.html`). Toda página nueva lo hereda sin
+discusión. La fuente de titulares/precio se corrigió el mismo día: primero se fijó
+Cormorant Garamond, pero comparando contra el mockup original Óscar señaló que los
+trazos son más contrastados y con curvas más orgánicas — se sustituyó por
+**Fraunces** en las tres landings (ver [[laora-identidad-visual]] para el porqué).
 
 ## Tipografías — solo estas tres
 
 | Fuente | Uso | Pesos |
 |---|---|---|
-| **Cormorant Garamond** | Nombre del modelo («Bauhaus»), **precios** (249 €…) y cualquier titular editorial o con carácter | 400 (500 puntual). **Nunca bold** |
+| **Fraunces** | Nombre del modelo («Bauhaus»), **precios** (249 €…) y cualquier titular editorial o con carácter | 400 (500 puntual). **Nunca bold**. Cargar con el eje óptico: `family=Fraunces:opsz,wght@9..144,400;9..144,500` |
 | **Inter** | Absolutamente todo lo demás: menú, referencia LO-xx, subtítulos, párrafos, listas, especificaciones, iconos, configurador, botones, etiquetas, footer, interfaz | 400 / 500 / 600 |
 | **Nunito Sans** | Exclusivamente el logotipo «laOra» (O personalizada con triángulo dorado invertido) | 400 (800 solo contadores) |
 
-Eliminadas para siempre: Source Serif 4, JetBrains Mono, Quicksand, Archivo.
+Eliminadas para siempre: Source Serif 4, JetBrains Mono, Quicksand, Archivo,
+Cormorant Garamond (probada y descartada el 31/07/2026).
 
 ## Paleta
 
@@ -32,12 +37,12 @@ borde de la imagen) para que texto y foto sean un solo plano sin costura.
 
 | Elemento | Fuente | Tamaño |
 |---|---|---|
-| Nombre modelo | Cormorant Garamond | 78–84 px |
-| Título sección | Cormorant Garamond | 44 px |
+| Nombre modelo | Fraunces | 78–84 px |
+| Título sección | Fraunces | 44 px |
 | Subtítulo hero | Inter Medium | 24 px |
 | Párrafos | Inter Regular | 20 px |
 | Texto técnico | Inter | 16–18 px |
-| Precio | Cormorant Garamond | 56–64 px |
+| Precio | Fraunces | 56–64 px |
 | Botones | Inter SemiBold | 18 px |
 | Menú | Inter Medium | 16 px |
 
