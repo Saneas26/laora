@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=JetBrains+Mono:wght@500;700&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=15">
-<link rel="stylesheet" href="/assets/css/ficha.css?v=1">
+<link rel="stylesheet" href="/assets/css/ficha.css?v=2">
 </head>
 <body>
 
@@ -218,7 +218,7 @@
 
       <div class="b-precio-caja">
         <div class="b-precio" id="lPrecio">—</div>
-        <p class="b-precio-nota">Envío gratis · 3 años de garantía</p>
+        <p class="b-precio-nota" id="lNota">Envío gratis · 3 años de garantía</p>
         <button class="b-anadir" id="lAnadir" type="button">Añadir al carrito</button>
         <p class="b-hecho" id="lHecho"></p>
         <p class="b-nosale" id="lNosale" hidden>Se fabrica en series pequeñas y este acabado
@@ -282,8 +282,8 @@
   <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
 </footer>
 
-<script src="/assets/js/precios.js?v=16"></script>
-<script src="/assets/js/carrito.js?v=16"></script>
+<script src="/assets/js/precios.js?v=17"></script>
+<script src="/assets/js/carrito.js?v=17"></script>
 <script>
 /* Configurador del Lunar. Ningún importe está escrito a mano aquí: todo
    sale de precios.js. Mientras un acabado no tenga precio cerrado se
@@ -294,14 +294,28 @@
   var REF = 'LO-01';
   if (typeof laoraAcabado !== 'function') return;
 
-  /* La horquilla de cada acabado y la del héroe, desde precios.js */
+  /* La horquilla y el stock de cada acabado, desde precios.js */
   Array.prototype.forEach.call(document.querySelectorAll('[data-acabado]'), function (col) {
-    var a = laoraAcabado(REF, col.getAttribute('data-acabado'));
+    var nombre = col.getAttribute('data-acabado');
+    var a = laoraAcabado(REF, nombre);
     var hueco = col.querySelector('[data-precio]');
     if (!a || !hueco) return;
+
     if (a.precio) hueco.innerHTML = '<b>' + laoraEuros(a.precio) + '</b>';
     else if (a.horquilla) hueco.innerHTML = a.horquilla +
       '<span class="b-orient">precio orientativo</span>';
+
+    /* El stock se dice siempre, también cuando es 0: el cliente tiene que
+       saber si se lo mandan del almacén o si se lo fabrican. Sin precio
+       cerrado no se dice nada, que ese acabado ni se vende. */
+    if (!a.precio) return;
+    var hay = a.stock > 0;
+    var s = document.createElement('span');
+    s.className = 'b-v-stock ' + (hay ? 'hay' : 'no');
+    s.textContent = hay
+      ? (a.stock === 1 ? '1 unidad lista para enviar' : a.stock + ' unidades listas para enviar')
+      : 'Se fabrica para ti · ' + LAORA_ENTREGA_SIN_STOCK;
+    hueco.parentNode.insertBefore(s, hueco.nextSibling);
   });
 
   var alba = laoraAcabado(REF, 'Alba');
@@ -350,6 +364,17 @@
     salida.textContent = laoraEuros(a.precio + extraElegido().precio);
     boton.disabled = false;
     boton.textContent = 'Añadir al carrito';
+
+    /* Lo que cambia con el stock: el plazo, y si se paga entero o con señal. */
+    var nota = document.getElementById('lNota');
+    if (nota) {
+      var hay = a.stock > 0;
+      nota.textContent = 'Envío gratis · 3 años de garantía · ' + (hay
+        ? 'en stock, ' + (LAORA_ENTREGA_CON_STOCK || 'sale del almacén de Madrid') +
+          (laoraPagoCompleto([{ ref: REF, acabado: version.value }]) ? ' · pago completo' : '')
+        : 'se fabrica para ti, ' + LAORA_ENTREGA_SIN_STOCK +
+          ' · señal del ' + LAORA_SENAL_PORCENTAJE + ' %');
+    }
     nosale.hidden = true;
   }
 

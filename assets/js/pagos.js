@@ -27,7 +27,13 @@
    Edge Function. Mientras esté en `false`, tarjeta, Bizum inmediato y PayPal
    salen visibles pero apagados. Es a propósito: el navegador no puede saber
    si el servidor tiene la clave, y es peor dejar que alguien rellene todo el
-   formulario para llevarse un error que decirle la verdad desde el principio. */
+   formulario para llevarse un error que decirle la verdad desde el principio.
+
+   LA CLAVE DE MOLLIE NO SE ESCRIBE AQUÍ NI EN NINGÚN FICHERO DEL REPO.
+   El build output de Cloudflare Pages es `/`: todo lo que hay en el repo se
+   publica en laora.es. Una clave `live_` aquí quedaría a la vista de
+   cualquiera. Su sitio es Supabase → Edge Functions → Secrets, con el nombre
+   `LAORA_MOLLIE_API_KEY`, que es donde la busca `crear-reserva.ts`. */
 var LAORA_MOLLIE_LISTO = false;
 
 var LAORA_PAGOS = {
@@ -39,9 +45,8 @@ var LAORA_PAGOS = {
     titulo: 'Transferencia',
     resumen: 'Te damos el IBAN y haces la transferencia tú. Sin comisión.',
     plazo: 'Confirmamos en cuanto llegue, de uno a dos días hábiles.',
-    /* RELLENAR: sin IBAN este método sale como no disponible. */
-    iban: '',
-    titular: ''
+    iban: 'ES22 1583 0001 1990 6408 6644',
+    titular: 'laOra'
   },
 
   bizum: {
@@ -50,8 +55,7 @@ var LAORA_PAGOS = {
     titulo: 'Bizum a mano',
     resumen: 'Te damos el número y nos envías el importe tú. Sin comisión.',
     plazo: 'Confirmamos en cuanto llegue, normalmente el mismo día.',
-    /* RELLENAR: sin teléfono este método sale como no disponible. */
-    telefono: ''
+    telefono: '+34 689 806 987'
   },
 
   /* ---------- pago inmediato, con comisión ---------- */
