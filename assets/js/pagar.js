@@ -10,7 +10,8 @@
      Si no cuadran, la Edge Function devuelve 409 y no se cobra.
    - No cobra los métodos manuales: crea el pedido en «pendiente»
      y enseña las instrucciones. Vale cuando se ve el dinero.
-   - No desglosa impuestos. Ver LAORA_MOSTRAR_IMPUESTOS abajo.
+   - No decide sola si se paga entero o con señal: eso sale del
+     stock, y lo calcula `laoraPagoCompleto()` en `precios.js`.
    ============================================================ */
 
 /* Desglose de base imponible + IVA. Encendido: la S.L. es de Madrid y los
@@ -80,8 +81,15 @@ var LAORA_MOSTRAR_IMPUESTOS = true;
   });
   total = Math.round(total * 100) / 100;
 
-  var senal = (typeof laoraSenal === 'function') ? laoraSenal(total) : total;
-  var resto = Math.round((total - senal) * 100) / 100;
+  /* Con stock se paga entero; si algo se fabrica, todo el pedido va con
+     señal. La entrega que se promete es la peor de las líneas. */
+  var completo = laoraPagoCompleto(detalle);
+  var aPagar = completo ? total : laoraSenal(total);
+  var resto = Math.round((total - aPagar) * 100) / 100;
+  var todoConStock = detalle.every(function (d) { return laoraHayStock(d.ref, d.acabado); });
+  var entrega = todoConStock
+    ? (LAORA_ENTREGA_CON_STOCK || LAORA_ENTREGA_SIN_STOCK)
+    : LAORA_ENTREGA_SIN_STOCK;
 
   /* ---------- 4 · métodos de pago ---------- */
   var disponibles = (typeof laoraPagosDisponibles === 'function') ? laoraPagosDisponibles() : [];
@@ -140,15 +148,19 @@ var LAORA_MOSTRAR_IMPUESTOS = true;
       '<dl class="rsv-cuentas">' +
         '<dt>Total del pedido</dt><dd>' + euros(total) + '</dd>' +
         (LAORA_MOSTRAR_IMPUESTOS ? impuestos(total) : '') +
-        '<dt class="rsv-total">Pagas ahora (' + LAORA_SENAL_PORCENTAJE + ' %)</dt>' +
-        '<dd class="rsv-total">' + euros(senal) + '</dd>' +
-        '<dt>Pagas al recibirlo</dt><dd>' + euros(resto) + '</dd>' +
+        '<dt class="rsv-total">Pagas ahora' +
+          (completo ? '' : ' (' + LAORA_SENAL_PORCENTAJE + ' %)') + '</dt>' +
+        '<dd class="rsv-total">' + euros(aPagar) + '</dd>' +
+        (completo ? '' : '<dt>Pagas al recibirlo</dt><dd>' + euros(resto) + '</dd>') +
       '</dl>' +
 
-      '<p class="rsv-entrega"><b>Entrega:</b> ' + LAORA_ENTREGA + '</p>' +
+      '<p class="rsv-entrega"><b>Entrega:</b> ' + entrega +
+        (todoConStock
+          ? ' · <b>en stock</b>, sale del almacén de Madrid'
+          : ' · se fabrica para ti') + '</p>' +
       '<p class="rsv-desist">Puedes echarte atrás en los 14 días siguientes sin dar ' +
-      'explicaciones y te devolvemos la señal <b>entera</b>. No es una promesa nuestra: ' +
-      'es tu derecho de desistimiento.</p>' +
+      'explicaciones y te devolvemos ' + (completo ? 'el importe' : 'la señal') +
+      ' <b>entero</b>. No es una promesa nuestra: es tu derecho de desistimiento.</p>' +
       '<a class="pg-volver" href="/carrito.html">← Cambiar la cesta</a>' +
     '</div>' +
 
@@ -179,10 +191,10 @@ var LAORA_MOSTRAR_IMPUESTOS = true;
         'política de privacidad</a>.</span></label>' +
       '<label class="rsv-check"><input type="checkbox" name="entrega" required>' +
         '<span>Entiendo que estoy comprando un reloj que todavía se está fabricando y que ' +
-        'la entrega está prevista ' + LAORA_ENTREGA + '.</span></label>' +
+        'el plazo de entrega es de ' + entrega + '.</span></label>' +
 
       '<button class="btn btn-carbon rsv-enviar" type="submit"' + (hayAlguno ? '' : ' disabled') + '>' +
-        'Pagar · ' + euros(senal) + '</button>' +
+        'Pagar · ' + euros(aPagar) + '</button>' +
       '<p class="rsv-error" id="pgError" hidden></p>' +
     '</form>' +
     '</div>';
@@ -237,7 +249,7 @@ var LAORA_MOSTRAR_IMPUESTOS = true;
       precio_total: total,
       metodo: laoraPagoMetodoServidor(elegido),
       metodo_elegido: elegido,
-      entrega_prometida: LAORA_ENTREGA,
+      entrega_prometida: entrega,
       nombre: d.get('nombre'), email: d.get('email'), telefono: d.get('telefono'),
       direccion: d.get('direccion'), cp: d.get('cp'),
       poblacion: d.get('poblacion'), provincia: d.get('provincia')
@@ -274,7 +286,7 @@ var LAORA_MOSTRAR_IMPUESTOS = true;
         return llama('laora-crear-reserva', {
           ref: uno.ref, modelo: uno.modelo, acabado: uno.acabado,
           precio_total: uno.subtotal, metodo: pedido.metodo,
-          entrega_prometida: LAORA_ENTREGA,
+          entrega_prometida: entrega,
           nombre: pedido.nombre, email: pedido.email, telefono: pedido.telefono,
           direccion: pedido.direccion, cp: pedido.cp,
           poblacion: pedido.poblacion, provincia: pedido.provincia

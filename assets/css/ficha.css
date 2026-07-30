@@ -298,3 +298,11 @@ footer{background:var(--negro);border-top:1px solid rgba(255,255,255,.08)}
 .b-v-aviso{margin-top:14px;padding-top:12px;border-top:1px solid #ddd8ce;
   font-size:13px;color:#8d8578;line-height:1.5}
 .b-v-aviso b{color:#8a6d1f}
+
+/* ---------- stock por acabado ----------
+   Se enseña siempre, también cuando es 0: el cliente tiene que saber si
+   se lo llevan de un almacén o si se lo fabrican. */
+.b-v-stock{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+.b-v-stock.hay{color:#2f7d4f}
+.b-v-stock.no{color:#8d8578}
