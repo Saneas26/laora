@@ -27,16 +27,29 @@
    Y el círculo de la O baja de .11em a .07em para que su grosor
    acompañe al de las letras; con la negrita anterior quedaba muy
    gordo al lado de una letra fina. */
+/* `align-items:baseline` y NO `flex-start`: con flex-start el círculo de
+   la O se colgaba del alto de la línea y quedaba más alto que el resto
+   de las letras. Con baseline, su borde inferior se apoya en la misma
+   línea de base que la «l», la «a» y la «r». */
 .cb-marca{font-family:'Nunito Sans',sans-serif;font-weight:400;
   font-size:clamp(28px,2.4vw,36px);letter-spacing:-.01em;line-height:1;
-  color:#fff;text-decoration:none;display:inline-flex;align-items:flex-start}
+  color:#fff;text-decoration:none;display:inline-flex;align-items:baseline}
+/* El círculo se coloca a mano y NO por línea de base: un inline-flex
+   vacío no tiene la línea de base que uno espera y quedaba 11 px por
+   debajo. Con `line-height:1` y las métricas de Nunito Sans (ascendente
+   31, descendente 11 sobre 30 px de cuerpo), la base cae a .829em del
+   techo de la línea; como el círculo mide .74em, su techo va a
+   .829 − .74 = .089em. Así se apoya en la misma base que la «l» y la «a». */
 .cb-marca .o{width:.74em;height:.74em;border:.07em solid currentColor;border-radius:50%;
   display:inline-flex;align-items:flex-start;justify-content:center;
-  margin:0 .015em;box-sizing:border-box}
+  align-self:flex-start;margin:.089em .015em 0;box-sizing:border-box}
 /* La ® va MUY pequeña: en el boceto el logo no la lleva, así que
-   aquí es un detalle discreto, no parte del dibujo. */
+   aquí es un detalle discreto, no parte del dibujo.
+   Va pegada a la «a» y a media altura, no colgada del techo: dentro
+   de un flex, `vertical-align:super` no hace nada, así que se sube a
+   mano desde la línea de base. */
 .cb-marca sup{font-size:.26em;font-weight:400;line-height:1;
-  margin-left:.15em;align-self:flex-start;top:0}
+  margin-left:.06em;align-self:baseline;position:relative;top:-1.35em}
 .cb-marca .o::before{content:"";width:0;height:0;margin-top:.06em;
   border-left:.17em solid transparent;border-right:.17em solid transparent;
   border-top:.24em solid var(--ambar,#F5D34D)}
