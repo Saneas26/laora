@@ -13,14 +13,11 @@
    - No desglosa impuestos. Ver LAORA_MOSTRAR_IMPUESTOS abajo.
    ============================================================ */
 
-/* El desglose de base imponible + impuesto está APAGADO a propósito.
-   laOra va a ser una S.L. y todavía no está decidido si se registra en
-   Madrid o en Canarias, y el almacén está en Madrid. Según cómo quede,
-   lo que se repercute puede ser IVA o IGIC, y puede depender de a dónde
-   se envíe. Enseñar «IVA 21 %» en una factura equivocada no es un
-   detalle de diseño: es un problema con Hacienda y con el cliente.
-   Se enciende cuando lo confirme la asesoría. */
-var LAORA_MOSTRAR_IMPUESTOS = false;
+/* Desglose de base imponible + IVA. Encendido: la S.L. es de Madrid y los
+   relojes salen de Madrid a toda la península, así que el precio al público
+   lleva el IVA del 21 % dentro, como dice la cabecera de `precios.js`.
+   Decisión cerrada el 30/07/2026: no volver a preguntarlo. */
+var LAORA_MOSTRAR_IMPUESTOS = true;
 
 (function () {
   var caja = document.getElementById('pago');
@@ -193,7 +190,7 @@ var LAORA_MOSTRAR_IMPUESTOS = false;
   function impuestos(t) {
     var base = Math.round((t / (1 + LAORA_IVA / 100)) * 100) / 100;
     return '<dt class="rsv-menor">Base imponible</dt><dd class="rsv-menor">' + euros(base) + '</dd>' +
-           '<dt class="rsv-menor">Impuesto (' + LAORA_IVA + ' %)</dt>' +
+           '<dt class="rsv-menor">IVA (' + LAORA_IVA + ' %)</dt>' +
            '<dd class="rsv-menor">' + euros(Math.round((t - base) * 100) / 100) + '</dd>';
   }
 

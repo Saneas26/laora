@@ -234,28 +234,24 @@ vistazo qué NO debe salir, y para que `_redirects` lo corte de un plumazo.
   de uno la pantalla lo dice y no cobra. Falta escribir y desplegar
   `laora-crear-pedido` (que acepte `lineas[]`): necesita sesión de Supabase.
 
-### Impuestos: sin decidir, y por eso sin afirmar
-laOra va a ser una **S.L.**, y a 30/07/2026 **no está decidido si se registra
-en Madrid o en Canarias**. Lo que sí está decidido: **el almacén está en
-Madrid**, allí se reciben los pedidos y desde allí se envían. Óscar vive en
-Gran Canaria, pero la S.L. puede tener otro domicilio.
+### Impuestos: IVA del 21 %, y cerrado
+**Decisión de Óscar del 30/07/2026. No volver a preguntarlo.**
 
-Mientras eso no se cierre, **la web no afirma qué impuesto repercute**: el
-carrito y la pantalla de pago dicen «impuestos incluidos», no «IVA del 21 %».
-El desglose de base imponible + impuesto está en `LAORA_MOSTRAR_IMPUESTOS`
-(`pagar.js`), apagado. **Ojo: `reservar.js` sí desglosa un 21 % de IVA** —
-es del checkout viejo de la señal y hay que revisarlo cuando se decida.
+- laOra es una **S.L. de Madrid**.
+- **El almacén está en Madrid** porque es la opción más interesante en costes:
+  se importa el material de China a Madrid y desde Madrid se envía a toda la
+  península.
+- Que Óscar viva en Gran Canaria **no pinta nada aquí**: su tributación
+  personal es otra cosa y no toca a la web.
+- Por tanto el PVP lleva el **IVA del 21 %** dentro, como ya decía la cabecera
+  de `precios.js`. El carrito dice «IVA del 21 % incluido» y la pantalla de
+  pago desglosa base imponible + IVA (`LAORA_MOSTRAR_IMPUESTOS = true`).
 
-Preguntas para la asesoría, que afectan al código y a los textos legales:
-1. ¿IVA o IGIC en el precio al público, y depende de a dónde se envíe?
-   Los 239,90 € y 379,90 € del Lunar están guardados como PVP **con el 21 %
-   dentro** (así lo dice la cabecera de `precios.js`).
-2. Con la mercancía saliendo de Madrid, ¿qué obligaciones de IVA peninsular
-   hay si la S.L. se domicilia en Canarias?
-3. ¿Qué pasa con los envíos a Canarias desde el almacén de Madrid?
-4. El **domicilio fiscal** de `condiciones-de-venta.html` tiene que ser el de
-   la S.L., no el de Óscar, y hasta que exista no se puede rellenar. Lo mismo
-   con el CIF y los datos de registro mercantil que pide la LSSI.
+**El CIF, el domicilio fiscal y los datos de registro mercantil van AL FINAL**,
+cuando estén cerrados el diseño, la aplicación y los escandallos. Son los
+huecos en ámbar de `condiciones-de-venta.html` y **no frenan nada** del trabajo
+de web: se rellenan de una pasada cuando la S.L. exista. No sacarlos como
+bloqueante en cada entrega.
 
 ### A medias
 - **Siete fichas con el formato viejo.** Ya están en el nuevo la Bitácora y el
@@ -298,12 +294,20 @@ Preguntas para la asesoría, que afectan al código y a los textos legales:
    comprometida no se puede cobrar, y el código lo impide a propósito. Hoy
    `laora-crear-reserva` responde literalmente *«no hay fecha de entrega
    comprometida»*. **Es lo único que separa a la Bitácora de poder vender.**
-2. **33 de 36 precios siguen vacíos.** Solo LO-07: Alba 250, Levante 320, Cenit 420.
-3. **Cuatro huecos en `condiciones-de-venta.html`**: domicilio fiscal, fecha de
-   entrega, teléfono de Bizum e IBAN. Salen marcados en ámbar en la propia web.
-4. **`LAORA_COBRO` vacío** en `gracias.js`: sin Bizum ni IBAN, quien elija pago
-   manual no sabe dónde pagar.
-5. **Alta en Mollie y su clave.** Es una credencial: la pone Óscar.
+2. **30 de 35 precios siguen vacíos.** Cerrados: LO-07 Alba 250 / Levante 320 /
+   Cenit 420, y LO-01 Alba 239,90 / Cenit 379,90. (Son 35 y no 36 porque el
+   acabado Levante quedó descartado en el LO-01.)
+3. **El IBAN y el teléfono de Bizum**, en `assets/js/pagos.js`. Sin ellos los
+   dos métodos sin comisión salen apagados. `LAORA_COBRO` de `gracias.js`
+   duplica esos mismos datos: unificar cuando se rellenen.
+4. **Alta en Mollie y su clave.** Es una credencial: la pone Óscar. Con ella,
+   poner `LAORA_MOLLIE_LISTO = true` en `pagos.js` y se encienden tarjeta,
+   Bizum inmediato y PayPal de una vez.
+
+**NO bloqueante, va al final** (decisión de Óscar del 30/07/2026): el CIF, el
+domicilio fiscal y los datos de registro mercantil de
+`condiciones-de-venta.html`. Se rellenan cuando estén cerrados el diseño, la
+aplicación y los escandallos. No presentarlos como freno en cada entrega.
 6. **Dos de las cuatro fotos que pedía el boceto siguen sin existir**: el
    cuaderno con el compás y el dibujo técnico de medidas. El **fondo visto** y
    la **toma del lume** ya están puestas, recortadas del propio boceto
@@ -432,6 +436,11 @@ Todos ocurrieron en esta ventana. Están aquí para que no se repitan.
   señal del 25 %; ese código sigue ahí y funciona.
 - **Nunca prometer stock ni plazos** que no estén cerrados.
 - **Nunca vender nada a la audiencia de Saneas.**
+- **La S.L. es de Madrid y todo sale de Madrid: el PVP lleva IVA del 21 %.**
+  Cerrado el 30/07/2026. Dónde vive Óscar no afecta a la web.
+- **El CIF y el domicilio fiscal se rellenan al final**, cuando estén el
+  diseño, la aplicación y los escandallos. No son un bloqueante: no volver a
+  presentarlos como tal.
 
 ---
 
