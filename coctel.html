@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra LO-09 Cóctel. Un homenaje a los clásicos que saben que la elegancia está en los detalles. Desde 249 €.">
+<meta name="description" content="laOra LO-09 Cóctel. Un homenaje a los clásicos que saben que la elegancia está en los detalles. Desde 299,90 €.">
 <meta property="og:title" content="LO-09 Cóctel — laOra®">
 <meta property="og:description" content="Un homenaje a los clásicos que saben que la elegancia está en los detalles.">
 <meta property="og:url" content="https://laora.es/coctel.html">
@@ -25,7 +25,7 @@
   "image": "https://laora.es/assets/img/coctel/landing/hero.jpg",
   "description": "Un homenaje a los clásicos que saben que la elegancia está en los detalles.",
   "brand": {"@type": "Brand", "name": "laOra"},
-  "offers": {"@type": "AggregateOffer", "lowPrice": "249", "highPrice": "449", "priceCurrency": "EUR"}
+  "offers": {"@type": "AggregateOffer", "lowPrice": "299.90", "highPrice": "659.90", "priceCurrency": "EUR"}
 }
 </script>
 <style>
@@ -414,7 +414,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
       <div class="ck-versiones-lista">
         <article class="ck-version ck-reveal">
           <h3 class="ck-version-nombre">Alba</h3>
-          <p class="ck-version-precio">desde 249 €</p>
+          <p class="ck-version-precio">desde 299,90 €</p>
           <p class="ck-version-desc">Precisión sin esfuerzo. Para quien quiere el diseño sin más.</p>
           <ul class="ck-version-specs">
             <li><b>Movimiento</b><span>Cuarzo suizo Ronda</span></li>
@@ -425,7 +425,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
         </article>
         <article class="ck-version ck-reveal">
           <h3 class="ck-version-nombre">Levante</h3>
-          <p class="ck-version-precio">desde 329 €</p>
+          <p class="ck-version-precio">desde 379,90 €</p>
           <p class="ck-version-desc">El corazón mecánico. El equilibrio perfecto.</p>
           <ul class="ck-version-specs">
             <li><b>Movimiento</b><span>Automático japonés Seiko NH35A</span></li>
@@ -436,7 +436,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
         </article>
         <article class="ck-version ck-reveal">
           <h3 class="ck-version-nombre">Cenit</h3>
-          <p class="ck-version-precio">desde 449 €</p>
+          <p class="ck-version-precio">desde 659,90 €</p>
           <p class="ck-version-desc">El movimiento premium. Para quienes buscan lo mejor.</p>
           <ul class="ck-version-specs">
             <li><b>Movimiento</b><span>Japonés Miyota 9015</span></li>
@@ -481,7 +481,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
     <div class="ck-config-caja">
       <div class="ck-config-modelo ck-reveal">
         <h2>LO-09 Cóctel</h2>
-        <p class="ck-config-precio-grande" data-precio>249&nbsp;€</p>
+        <p class="ck-config-precio-grande" data-precio>299,90&nbsp;€</p>
         <ul class="ck-config-notas">
           <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>IVA incluido</li>
           <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>Envío gratis</li>
@@ -496,9 +496,9 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
         <div class="ck-campo">
           <label for="cfg-movimiento">Movimiento</label>
           <select id="cfg-movimiento">
-            <option value="alba" data-base="249" data-cristal="Mineral K1 abombado" data-correa="Piel marrón">Alba (Cuarzo suizo Ronda)</option>
-            <option value="levante" data-base="329" data-cristal="Zafiro con domo alto y antirreflejos" data-correa="Piel premium">Levante (Automático japonés Seiko NH35A)</option>
-            <option value="cenit" data-base="449" data-cristal="Zafiro con domo alto y antirreflejos" data-correa="Piel premium">Cenit (Japonés Miyota 9015)</option>
+            <option value="alba" data-base="299.9" data-cristal="Mineral K1 abombado" data-correa="Piel marrón">Alba (Cuarzo suizo Ronda)</option>
+            <option value="levante" data-base="379.9" data-cristal="Zafiro con domo alto y antirreflejos" data-correa="Piel premium">Levante (Automático japonés Seiko NH35A)</option>
+            <option value="cenit" data-base="659.9" data-cristal="Zafiro con domo alto y antirreflejos" data-correa="Piel premium">Cenit (Japonés Miyota 9015)</option>
           </select>
         </div>
         <div class="ck-campo">
@@ -525,7 +525,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
             <option>Piel marrón</option>
           </select>
         </div>
-        <p class="ck-config-precio" data-precio>249&nbsp;€</p>
+        <p class="ck-config-precio" data-precio>299,90&nbsp;€</p>
         <a class="ck-boton ck-boton-oro" href="/reservar.html" data-reservar>Añadir al carrito</a>
         <a class="ck-config-mas" href="#pagas">Ver más detalles →</a>
       </div>
@@ -605,7 +605,8 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
     const opt = s => s.options[s.selectedIndex];
     let total = Number(opt(selects[0]).dataset.base || 0);
     for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
-    for (const p of precios) p.innerHTML = total + '&nbsp;€';
+    const texto = total.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
+    for (const p of precios) p.innerHTML = texto + '&nbsp;€';
     /* Cristal y correa no se eligen sueltos: vienen atados al
        movimiento (Alba lleva mineral y piel marrón; Levante y
        Cenit, zafiro con domo alto y piel premium). */
