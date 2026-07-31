@@ -95,7 +95,16 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
 .bh-hero-raya{display:block;width:56px;height:2px;background:var(--bh-oro);margin:30px 0 34px}
 .bh-hero-nota{font-size:16px;color:var(--bh-tinta-2);margin-top:14px}
 .bh-hero-foto{align-self:stretch;position:relative}
-.bh-hero-foto img{width:100%;height:100%;object-fit:cover;object-position:center}
+/* Aunque el color de fondo ya está muestreado de la propia foto, el
+   JPEG (compresión + perfil de color) nunca calza al 100% con un
+   color plano de CSS. Un desvanecido muy corto en el borde absorbe
+   esa diferencia mínima sin que se note ninguna costura. */
+.bh-hero-foto::before{content:"";position:absolute;inset:0;z-index:1;
+  pointer-events:none;background:linear-gradient(90deg,#E8DFD6 0%,rgba(232,223,214,0) 6%)}
+/* object-position desplazado a la derecha (no centro): con el recorte
+   centrado, la corona (a la derecha del origen 1402×1122) quedaba fuera
+   del encuadre. Así se ve el reloj entero, más a la izquierda del marco. */
+.bh-hero-foto img{width:100%;height:100%;object-fit:cover;object-position:75% center}
 
 /* ============================================================
    2 · TIRA DE 4 ICONOS
@@ -262,6 +271,9 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
   .bh-hero{grid-template-columns:1fr;min-height:0}
   .bh-hero-texto{order:2;padding:44px 6vw 64px}
   .bh-hero-foto{order:1;height:58vw;min-height:300px}
+  /* Apilado, la costura sería horizontal (foto arriba, texto abajo):
+     el desvanecido lateral no pinta nada aquí. */
+  .bh-hero-foto::before{display:none}
   .bh-pilares-grid{grid-template-columns:1fr 1fr;gap:30px}
   .bh-pilar:nth-child(2n){border-right:0}
   .bh-icono-seccion{grid-template-columns:1fr}
