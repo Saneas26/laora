@@ -159,16 +159,30 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
 .bh-versiones-cab h2::before,.bh-versiones-cab h2::after{content:"";
   width:64px;height:1px;background:var(--bh-oro)}
 .bh-versiones-sub{font-size:20px;color:var(--bh-tinta-2);margin:14px 0 54px}
-.bh-versiones-grid{display:grid;grid-template-columns:1fr 1fr;max-width:1060px;margin:0 auto}
-.bh-version{padding:0 clamp(20px,4vw,64px)}
-.bh-version + .bh-version{border-left:1px solid rgba(9,9,9,.14)}
+
+/* Una sola foto para las dos, fija a la izquierda: el mismo diseño
+   en los dos acabados, solo cambia el movimiento. A la derecha, la
+   lista de acabados con sus especificaciones concretas. */
+.bh-versiones-cuerpo{display:grid;grid-template-columns:minmax(240px,360px) 1fr;
+  gap:clamp(40px,6vw,90px);max-width:1180px;margin:0 auto;text-align:left;align-items:start}
+.bh-versiones-foto{width:100%;position:sticky;top:110px;margin:0}
+
+.bh-versiones-lista{display:flex;flex-direction:column}
+.bh-version{padding:38px 0}
+.bh-version:first-child{padding-top:0}
+.bh-version + .bh-version{border-top:1px solid rgba(9,9,9,.14)}
 .bh-version-nombre{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
   letter-spacing:.2em;text-transform:uppercase;color:var(--bh-oro)}
-.bh-version-mov{font-size:17px;color:var(--bh-negro);margin-top:8px}
-.bh-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:19px;color:var(--bh-tinta-2);margin-top:2px}
-.bh-version img{width:min(78%,340px);margin:26px auto 22px}
-.bh-version-desc{font-size:18px;color:var(--bh-tinta-2);max-width:360px;margin:0 auto}
+.bh-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
+  font-size:19px;color:var(--bh-tinta-2);margin-top:8px}
+.bh-version-desc{font-size:18px;color:var(--bh-tinta-2);max-width:420px;margin:18px 0}
 .bh-version-desc b{color:var(--bh-negro);font-weight:600}
+.bh-version-specs{list-style:none;text-align:left;max-width:460px;margin:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.bh-version-specs li{padding:12px 0;border-top:1px solid rgba(9,9,9,.14)}
+.bh-version-specs b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--bh-oro);margin-bottom:4px}
+.bh-version-specs span{display:block;font-size:15.5px;color:var(--bh-negro)}
 
 /* ============================================================
    5 · LO QUE LLEVAN TODOS
@@ -259,8 +273,8 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
   .bh-menos-foto{order:1;max-height:64vw;overflow:hidden}
   .bh-menos-texto{order:2}
   .bh-pagas{grid-template-columns:1fr}
-  .bh-versiones-grid{grid-template-columns:1fr;gap:56px}
-  .bh-version + .bh-version{border-left:0;border-top:1px solid rgba(9,9,9,.14);padding-top:48px}
+  .bh-versiones-cuerpo{grid-template-columns:1fr;max-width:520px;gap:48px}
+  .bh-versiones-foto{position:static;max-width:320px;margin:0 auto}
   .bh-config-caja{grid-template-columns:1fr}
   .bh-servicios-grid{grid-template-columns:1fr 1fr;gap:22px}
   .bh-versiones-cab h2::before,.bh-versiones-cab h2::after,
@@ -366,21 +380,32 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
   <section class="bh-versiones">
     <div class="bh-versiones-cab bh-reveal"><h2>Las dos versiones</h2></div>
     <p class="bh-versiones-sub bh-reveal">Mismo diseño. Dos formas de vivir el tiempo.</p>
-    <div class="bh-versiones-grid">
-      <article class="bh-version bh-reveal">
-        <h3 class="bh-version-nombre">Alba</h3>
-        <p class="bh-version-mov">Cuarzo Suizo</p>
-        <p class="bh-version-precio">desde 249 €</p>
-        <img src="/assets/img/bauhaus/frontal.jpg" alt="laOra Bauhaus Alba, cuarzo suizo" loading="lazy">
-        <p class="bh-version-desc"><b>Precisión suiza.</b><br>Sin mantenimiento.<br>Para quienes solo quieren<br>disfrutar de su reloj.</p>
-      </article>
-      <article class="bh-version bh-reveal">
-        <h3 class="bh-version-nombre">Cenit</h3>
-        <p class="bh-version-mov">Automático ST17</p>
-        <p class="bh-version-precio">desde 449 €</p>
-        <img src="/assets/img/bauhaus/frontal.jpg" alt="laOra Bauhaus Cenit, automático ST17" loading="lazy">
-        <p class="bh-version-desc"><b>Movimiento Premium con segundo pequeño.</b><br>Más fino. Más preciso.<br>Para quienes buscan<br>lo mejor de este diseño.</p>
-      </article>
+    <div class="bh-versiones-cuerpo">
+      <img class="bh-versiones-foto bh-reveal" src="/assets/img/bauhaus/frontal.jpg" alt="laOra Bauhaus, el mismo diseño en los dos acabados" loading="lazy">
+      <div class="bh-versiones-lista">
+        <article class="bh-version bh-reveal">
+          <h3 class="bh-version-nombre">Alba</h3>
+          <p class="bh-version-precio">desde 249 €</p>
+          <p class="bh-version-desc"><b>Precisión suiza.</b><br>Sin mantenimiento.<br>Para quienes solo quieren<br>disfrutar de su reloj.</p>
+          <ul class="bh-version-specs">
+            <li><b>Movimiento</b><span>Cuarzo Ronda, seg. pequeño</span></li>
+            <li><b>Caja</b><span>Acero 316L, perfil fino</span></li>
+            <li><b>Cristal</b><span>Zafiro con antirreflejos</span></li>
+            <li><b>Correa</b><span>Piel arena/beige</span></li>
+          </ul>
+        </article>
+        <article class="bh-version bh-reveal">
+          <h3 class="bh-version-nombre">Cenit</h3>
+          <p class="bh-version-precio">desde 449 €</p>
+          <p class="bh-version-desc"><b>Movimiento Premium con segundo pequeño.</b><br>Más fino. Más preciso.<br>Para quienes buscan<br>lo mejor de este diseño.</p>
+          <ul class="bh-version-specs">
+            <li><b>Movimiento</b><span>Seagull ST17, cuerda manual</span></li>
+            <li><b>Caja</b><span>Acero 316L, perfil fino</span></li>
+            <li><b>Cristal</b><span>Zafiro con antirreflejos</span></li>
+            <li><b>Correa</b><span>Piel arena/beige</span></li>
+          </ul>
+        </article>
+      </div>
     </div>
   </section>
 
