@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Nueve relojes, nueve formas de entender el tiempo. Cronógrafo, buceadores, vestir, militar de campo y lujo deportivo de acero, cada uno en cuatro acabados y montados en Madrid.">
-<meta property="og:title" content="La colección de laOra® — nueve relojes">
-<meta property="og:description" content="Nueve formas de entender el tiempo. Sin peajes de marca.">
+<meta name="description" content="Ocho relojes, ocho formas de entender el tiempo. Cronógrafo, buceadores, vestir, militar de campo y deportivo integrado, cada uno en varios acabados y montados en Madrid.">
+<meta property="og:title" content="La colección de laOra® — ocho relojes">
+<meta property="og:description" content="Ocho formas de entender el tiempo. Sin peajes de marca.">
 <meta property="og:url" content="https://laora.es/coleccion.html">
 <meta property="og:image" content="https://laora.es/assets/img/coleccion-hero.jpg">
 <title>La colección — laOra®</title>
@@ -21,7 +21,7 @@
 /* ============================================================
    LA COLECCIÓN — estructura del boceto de Óscar (coleccion.png):
    1. hero partido (foto | texto)   2. banda clara de filosofía
-   3. «elige tu laOra»: los nueve   4. cierre con el taller
+   3. «elige tu laOra»: los ocho   4. cierre con el taller
    ============================================================ */
 :root{ --negro:#090909; --ambar:#D4A94B; --oro:#D4A94B; --hueso:#F7F7F5; --gris:#B8B8B8; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -73,7 +73,7 @@ a{color:inherit;text-decoration:none}
 /* ---------- 3. elige tu laOra ---------- */
 .elige{padding:100px 4vw 96px;text-align:center;background:#080808}
 .elige h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,3.4vw,44px);margin-top:14px;color:#fff;font-weight:400}
-.fila{display:grid;grid-template-columns:repeat(9,1fr);gap:14px;margin:58px auto 0;
+.fila{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin:58px auto 0;
   max-width:1500px;align-items:end}
 .uno{display:block;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .uno-nombre,.uno-ref,.uno-precio{transition:color .3s ease}
@@ -86,9 +86,9 @@ a{color:inherit;text-decoration:none}
 .uno-foto img{-webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 55%,transparent 100%);
   mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 55%,transparent 100%)}
 .uno-foto img{width:100%;height:100%;object-fit:contain;
-  opacity:.72;filter:saturate(.9);
-  transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.3,1),filter .35s ease}
-.uno:hover .uno-foto img{opacity:1;filter:saturate(1);transform:scale(1.05)}
+  opacity:1;filter:saturate(1);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+.uno:hover .uno-foto img{transform:scale(1.05)}
 .uno-nombre{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:var(--oro);
   margin-top:14px;line-height:1.2}
 .uno:hover .uno-nombre{color:var(--ambar)}
@@ -125,7 +125,7 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
   .c-hero-foto{aspect-ratio:4/3}
   .c-hero-texto{padding:64px 7vw 74px;max-width:none}
   .pilares{grid-template-columns:repeat(2,1fr);gap:30px}
-  /* nueve en fila no caben: se convierte en carrusel horizontal */
+  /* ocho en fila no caben: se convierte en carrusel horizontal */
   .fila{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:18px;
     padding-bottom:14px;-webkit-overflow-scrolling:touch}
   .uno{flex:0 0 168px;scroll-snap-align:center}
@@ -179,7 +179,7 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
     <div class="c-hero-texto">
       <p class="c-eyebrow">Colección</p>
       <h1 class="c-hero-titular c-serif">la Colección</h1>
-      <p class="c-hero-lema c-serif">nueve relojes.<br>nueve formas de entender el tiempo.</p>
+      <p class="c-hero-lema c-serif">ocho relojes.<br>ocho formas de entender el tiempo.</p>
       <span class="raya"></span>
       <p class="parrafo">Diseñamos cada reloj con una sola obsesión: que sientas que llevas
       puesto lo que realmente importa.</p>
@@ -217,7 +217,7 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
     </div>
   </section>
 
-  <!-- 3 · los nueve -->
+  <!-- 3 · los ocho -->
   <section class="elige" id="elige">
     <p class="c-eyebrow">Colección</p>
     <h2 class="c-serif">elige tu laOra</h2>
@@ -251,12 +251,6 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
           <span class="uno-nombre">trinchera</span>
           <span class="uno-ref">LO-05</span>
           <span class="uno-precio">desde 289,90 €</span>
-        </a>
-        <a class="uno c-reveal" href="/relojes/lo-06-ocho-lados.html">
-          <div class="uno-foto"><img src="/assets/img/relojes/col-06.jpg" alt="Ocho Lados de laOra, lujo deportivo de acero" loading="lazy"></div>
-          <span class="uno-nombre">ocho lados</span>
-          <span class="uno-ref">LO-06</span>
-          <span class="uno-precio">desde 250 €</span>
         </a>
         <a class="uno c-reveal" href="/bitacora.html">
           <div class="uno-foto"><img src="/assets/img/relojes/col-07.jpg" alt="Bitácora de laOra, lujo deportivo de acero" loading="lazy"></div>
