@@ -25,7 +25,7 @@
   "image": "https://laora.es/assets/img/lunar/landing/hero.jpg",
   "description": "No todos podremos viajar a la Luna. Pero sí recordar cada día lo que el ser humano es capaz de conseguir.",
   "brand": {"@type": "Brand", "name": "laOra"},
-  "offers": {"@type": "AggregateOffer", "lowPrice": "259", "highPrice": "424", "priceCurrency": "EUR"}
+  "offers": {"@type": "AggregateOffer", "lowPrice": "259", "highPrice": "399", "priceCurrency": "EUR"}
 }
 </script>
 <style>
@@ -457,13 +457,6 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
             <option value="zafiro" data-extra="0">Vista con zafiro</option>
           </select>
         </div>
-        <div class="ln-campo">
-          <label for="cfg-grabado">Grabado</label>
-          <select id="cfg-grabado">
-            <option value="sin" data-extra="0">Sin grabado</option>
-            <option value="personalizado" data-extra="25">Grabado personalizado (+25 €)</option>
-          </select>
-        </div>
         <p class="ln-config-precio" data-precio>259&nbsp;€</p>
         <a class="ln-boton ln-boton-oro" href="/reservar.html" data-reservar>Añadir al carrito</a>
         <a class="ln-config-mas" href="#pagas">Ver más detalles →</a>
@@ -529,11 +522,11 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 
 <script>
 /* ============================================================
-   Configurador: base (movimiento) + extras (trasera, grabado).
+   Configurador: base (movimiento) + trasera (sin coste extra hoy).
    El cobro real queda aparcado: los botones llevan a reservar.
    ============================================================ */
 (() => {
-  const selects = ['cfg-movimiento','cfg-esfera','cfg-brazalete','cfg-trasera','cfg-grabado']
+  const selects = ['cfg-movimiento','cfg-esfera','cfg-brazalete','cfg-trasera']
     .map(id => document.getElementById(id));
   const precios = document.querySelectorAll('[data-precio]');
 

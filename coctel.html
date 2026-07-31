@@ -25,7 +25,7 @@
   "image": "https://laora.es/assets/img/coctel/landing/hero.jpg",
   "description": "Un homenaje a los clásicos que saben que la elegancia está en los detalles.",
   "brand": {"@type": "Brand", "name": "laOra"},
-  "offers": {"@type": "AggregateOffer", "lowPrice": "249", "highPrice": "474", "priceCurrency": "EUR"}
+  "offers": {"@type": "AggregateOffer", "lowPrice": "249", "highPrice": "449", "priceCurrency": "EUR"}
 }
 </script>
 <style>
@@ -122,6 +122,23 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
   font-size:clamp(32px,3.6vw,44px);line-height:1.18;margin-bottom:26px;color:var(--ck-blanco)}
 .ck-icono-texto p{font-size:20px;color:var(--ck-gris);max-width:460px;margin-bottom:6px}
 
+/* La curiosidad: un único botón fantasma con borde oro que despliega
+   la historia real debajo, igual que en Bitácora pero con uno solo. */
+.ck-curiosidad{margin-top:26px;max-width:460px}
+.ck-curio-boton{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  padding:12px 24px;background:transparent;color:var(--ck-blanco);
+  border:1px solid var(--ck-oro);transition:background .25s}
+.ck-curio-boton:hover{background:rgba(212,169,75,.1)}
+.ck-curio-boton[aria-expanded="true"]{background:rgba(212,169,75,.18)}
+.ck-curio-panel{margin-top:20px;padding-left:18px;border-left:2px solid var(--ck-oro)}
+.ck-curio-panel p{font-size:17px;line-height:1.65;margin:0;color:var(--ck-gris)}
+.ck-curio-panel p b{color:var(--ck-blanco)}
+@media(prefers-reduced-motion:no-preference){
+  .ck-curio-panel{animation:ck-curio-entra .45s cubic-bezier(.22,.61,.36,1)}
+  @keyframes ck-curio-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+
 /* ============================================================
    4 · LO QUE SÍ PAGAS
    ============================================================ */
@@ -156,7 +173,13 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
 .ck-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
   font-size:19px;color:var(--ck-gris);margin-top:8px}
 .ck-version img{width:min(78%,300px);margin:26px auto 22px}
-.ck-version-desc{font-size:18px;color:var(--ck-gris);max-width:340px;margin:0 auto}
+.ck-version-desc{font-size:18px;color:var(--ck-gris);max-width:340px;margin:0 auto 22px}
+.ck-version-specs{list-style:none;text-align:left;max-width:300px;margin:0 auto}
+.ck-version-specs li{padding:12px 0;border-top:1px solid var(--ck-linea)}
+.ck-version-specs li:last-child{padding-bottom:0}
+.ck-version-specs b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ck-oro);margin-bottom:4px}
+.ck-version-specs span{display:block;font-size:15.5px;color:var(--ck-blanco)}
 
 /* ============================================================
    6 · LO QUE LLEVAN TODOS
@@ -306,7 +329,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
       </div>
       <div class="ck-pilar">
         <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/><path d="M15.5 22l4.5 4.5 8.5-9"/></svg>
-        <b>Acero con PVD oro rosa.<span>Hecho para durar décadas.</span></b>
+        <b>Acero 316L.<span>Hecho para durar décadas.</span></b>
       </div>
       <div class="ck-pilar">
         <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="7"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M11 11l3.5 3.5M29.5 29.5L33 33M33 11l-3.5 3.5M14.5 29.5L11 33"/></svg>
@@ -323,8 +346,22 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
     <div class="ck-icono-texto ck-reveal">
       <h2>Detalles que brillan<span class="punto">.</span></h2>
       <p>La esfera sunburst captura la luz como en un cóctel al atardecer.</p>
-      <p>Índices pulidos a mano, agujas dauphine en oro rosa y cristal de zafiro con domo alto.</p>
+      <p>Índices pulidos a mano, agujas dauphine y cristal de zafiro con domo alto.</p>
       <p>Cada detalle, en su sitio. Sin excesos.</p>
+      <div class="ck-curiosidad">
+        <button type="button" class="ck-curio-boton" data-curio="curio-coctel" aria-expanded="false" aria-controls="curio-coctel">Curiosidad</button>
+        <div class="ck-curio-panel" id="curio-coctel" hidden>
+          <p>El nombre «Cocktail Time» no es un capricho de marketing. Detrás está
+          <b>Hisashi Kishi</b>, dueño del STAR BAR de Ginza (Tokio): primer japonés
+          campeón del mundo en la IBA World Cocktail Competition (1996) y primer
+          barman en recibir el título de «Maestro Artesano Contemporáneo» de Japón.
+          Seiko le pidió que inspirara una esfera capaz de capturar el brillo de un
+          cóctel bien servido — de ahí el degradado sunburst y el cristal en forma
+          de copa. Kishi sigue creando cócteles originales para las ediciones
+          especiales de la serie. El nuestro es un homenaje a ese oficio, no a
+          ninguna marca.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -348,7 +385,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
     <div class="ck-pagas-lista ck-reveal">
       <h2>LO QUE SÍ PAGAS.</h2>
       <ul>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L con PVD oro rosa</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Cristal de zafiro con domo alto y antirreflejos</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Movimiento automático Seiko NH35A</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Correa de piel marrón</li>
@@ -368,18 +405,36 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
         <p class="ck-version-precio">desde 249 €</p>
         <img src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel Alba, cuarzo" loading="lazy">
         <p class="ck-version-desc">Precisión sin esfuerzo. Para quien quiere el diseño sin más.</p>
+        <ul class="ck-version-specs">
+          <li><b>Movimiento</b><span>Cuarzo suizo/japonés (Ronda/Miyota)</span></li>
+          <li><b>Caja</b><span>Acero 316L</span></li>
+          <li><b>Cristal</b><span>Mineral K1 abombado</span></li>
+          <li><b>Correa</b><span>Piel marrón</span></li>
+        </ul>
       </article>
       <article class="ck-version ck-reveal">
         <h3 class="ck-version-nombre">Levante</h3>
         <p class="ck-version-precio">desde 329 €</p>
         <img src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel Levante, automático Seiko NH35A" loading="lazy">
         <p class="ck-version-desc">El corazón mecánico. El equilibrio perfecto.</p>
+        <ul class="ck-version-specs">
+          <li><b>Movimiento</b><span>Automático Seiko NH35A</span></li>
+          <li><b>Caja</b><span>Acero 316L</span></li>
+          <li><b>Cristal</b><span>Zafiro con domo alto y antirreflejos</span></li>
+          <li><b>Correa</b><span>Piel premium o brazalete</span></li>
+        </ul>
       </article>
       <article class="ck-version ck-reveal">
         <h3 class="ck-version-nombre">Cenit</h3>
         <p class="ck-version-precio">desde 449 €</p>
         <img src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel Cenit, acabado superior" loading="lazy">
         <p class="ck-version-desc">El movimiento premium. Para quienes buscan lo mejor.</p>
+        <ul class="ck-version-specs">
+          <li><b>Movimiento</b><span>Seiko NH35A o Miyota 9015</span></li>
+          <li><b>Caja</b><span>Acero 316L, acabado superior</span></li>
+          <li><b>Cristal</b><span>Zafiro con domo alto</span></li>
+          <li><b>Brazalete / correa</b><span>Brazalete + piel</span></li>
+        </ul>
       </article>
     </div>
   </section>
@@ -390,7 +445,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
     <div class="ck-todos-grid ck-reveal">
       <div class="ck-icono">
         <svg viewBox="0 0 44 44"><path d="M8 28h12l3-6H11zM24 28h12l-3-6H23zM14 20h12l3-6H17z"/></svg>
-        <span>Acero 316L con PVD oro rosa</span>
+        <span>Acero 316L</span>
       </div>
       <div class="ck-icono">
         <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14"/><path d="M10 17h24"/></svg>
@@ -452,14 +507,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
             <option value="marron" data-extra="0">Piel marrón</option>
           </select>
         </div>
-        <div class="ck-campo">
-          <label for="cfg-grabado">Grabado</label>
-          <select id="cfg-grabado">
-            <option value="sin" data-extra="0">Sin grabado</option>
-            <option value="personalizado" data-extra="25">Grabado personalizado (+25 €)</option>
-          </select>
-        </div>
-        <p class="ck-config-precio" data-precio>259&nbsp;€</p>
+        <p class="ck-config-precio" data-precio>249&nbsp;€</p>
         <a class="ck-boton ck-boton-oro" href="/reservar.html" data-reservar>Añadir al carrito</a>
         <a class="ck-config-mas" href="#pagas">Ver más detalles →</a>
       </div>
@@ -524,11 +572,11 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
 
 <script>
 /* ============================================================
-   Configurador: el movimiento fija el precio base; esfera, correa
-   y grabado suman extras. El cobro real queda aparcado.
+   Configurador: el movimiento fija el precio base; esfera y correa
+   suman extras (hoy ninguno). El cobro real queda aparcado.
    ============================================================ */
 (() => {
-  const selects = ['cfg-movimiento','cfg-esfera','cfg-correa','cfg-grabado'].map(id => document.getElementById(id));
+  const selects = ['cfg-movimiento','cfg-esfera','cfg-correa'].map(id => document.getElementById(id));
   const precios = document.querySelectorAll('[data-precio]');
 
   function calcula(){
@@ -539,6 +587,17 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
+
+  /* Curiosidad: un único botón que abre/cierra su panel. */
+  const curioBoton = document.querySelector('.ck-curio-boton');
+  if (curioBoton) {
+    curioBoton.addEventListener('click', () => {
+      const panel = document.getElementById(curioBoton.dataset.curio);
+      const abrir = panel.hidden;
+      panel.hidden = !abrir;
+      curioBoton.setAttribute('aria-expanded', String(abrir));
+    });
+  }
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
