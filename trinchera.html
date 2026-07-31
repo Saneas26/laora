@@ -75,9 +75,14 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
 /* ============================================================
    1 · HERO — dos columnas, foto con espacio negativo propio
    ============================================================ */
+/* El fondo es el de la foto (#F4EFEC, muestreado de su zona sin
+   reloj), no var(--tr-blanco): la tarjeta de texto es transparente y
+   todo el acto 1 tiene que leerse como un único plano de color, sin
+   costura entre la caja de texto y la foto (mismo problema que ya
+   se resolvió en Bauhaus y Bitácora). */
 .tr-hero{position:relative;min-height:100svh;display:grid;
   grid-template-columns:minmax(340px,44%) 1fr;align-items:center;
-  background:var(--tr-blanco);overflow:hidden}
+  background:#F4EFEC;overflow:hidden}
 .tr-hero-texto{padding:120px 4vw 80px clamp(24px,6vw,96px);position:relative;z-index:2}
 .tr-hero-titular{font-family:'Fraunces',Georgia,serif;font-weight:400;
   font-size:clamp(58px,7vw,84px);line-height:1.02;letter-spacing:-.01em;
@@ -88,7 +93,13 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
 .tr-hero-sub b{font-weight:600}
 .tr-hero-raya{display:block;width:56px;height:2px;background:var(--tr-oro);margin:30px 0 34px}
 .tr-hero-nota{font-size:16px;color:var(--tr-tinta-2);margin-top:14px}
-.tr-hero-foto{align-self:stretch;position:relative;background:var(--tr-blanco)}
+.tr-hero-foto{align-self:stretch;position:relative;background:#F4EFEC}
+/* Aunque el color de fondo ya está muestreado de la propia foto, el
+   JPEG (compresión + perfil de color) nunca calza al 100% con un
+   color plano de CSS. Un desvanecido muy corto en el borde absorbe
+   esa diferencia mínima sin que se note ninguna costura. */
+.tr-hero-foto::before{content:"";position:absolute;inset:0;z-index:1;
+  pointer-events:none;background:linear-gradient(90deg,#F4EFEC 0%,rgba(244,239,236,0) 6%)}
 .tr-hero-foto img{width:100%;height:100%;object-fit:cover;object-position:70% center}
 
 /* ============================================================
@@ -253,6 +264,9 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
   .tr-hero{grid-template-columns:1fr;min-height:0}
   .tr-hero-texto{order:2;padding:44px 6vw 64px}
   .tr-hero-foto{order:1;height:58vw;min-height:300px}
+  /* Apilado, la costura sería horizontal (foto arriba, texto abajo):
+     el desvanecido lateral no pinta nada aquí. */
+  .tr-hero-foto::before{display:none}
   .tr-menos{grid-template-columns:1fr}
   .tr-menos-foto{order:1;max-height:64vw;overflow:hidden}
   .tr-menos-texto{order:2}
