@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra LO-05 Trinchera. Homenaje a un clásico de campaña: diseño atemporal, hecho para durar. Desde 289,90 €.">
+<meta name="description" content="laOra LO-05 Trinchera. El reloj que demuestra que la resistencia no necesita adornos. Desde 289,90 €.">
 <meta property="og:title" content="LO-05 Trinchera — laOra®">
-<meta property="og:description" content="Homenaje a un clásico de campaña: diseño atemporal, hecho para durar.">
+<meta property="og:description" content="El reloj que demuestra que la resistencia no necesita adornos.">
 <meta property="og:url" content="https://laora.es/trinchera.html">
 <meta property="og:image" content="https://laora.es/assets/img/trinchera/landing/flatlay.jpg">
 <title>LO-05 Trinchera — laOra®</title>
@@ -23,7 +23,7 @@
   "@type": "Product",
   "name": "laOra LO-05 Trinchera",
   "image": "https://laora.es/assets/img/trinchera/landing/flatlay.jpg",
-  "description": "Homenaje a un clásico de campaña: diseño atemporal, hecho para durar.",
+  "description": "El reloj que demuestra que la resistencia no necesita adornos.",
   "brand": {"@type": "Brand", "name": "laOra"},
   "offers": {"@type": "AggregateOffer", "lowPrice": "289.90", "highPrice": "629.90", "priceCurrency": "EUR"}
 }
@@ -125,6 +125,24 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
 .tr-pagas-lista li svg{width:20px;height:20px;flex:none;margin-top:3px;
   stroke:var(--tr-oro);fill:none;stroke-width:2}
 
+/* Las dos curiosidades: botones fantasma con borde oro y un panel
+   que se despliega debajo, uno cada vez. */
+.tr-curiosidades{margin-top:30px}
+.tr-curio-botones{display:flex;gap:14px;flex-wrap:wrap}
+.tr-curio-boton{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  padding:12px 24px;background:transparent;color:var(--tr-negro);
+  border:1px solid var(--tr-oro);transition:background .25s}
+.tr-curio-boton:hover{background:rgba(212,169,75,.08)}
+.tr-curio-boton[aria-expanded="true"]{background:rgba(212,169,75,.16)}
+.tr-curio-panel{margin-top:20px;padding-left:18px;border-left:2px solid var(--tr-oro)}
+.tr-curio-panel p{font-size:16px;line-height:1.65;margin:0;color:var(--tr-tinta-2)}
+.tr-curio-panel p b{color:var(--tr-negro)}
+@media(prefers-reduced-motion:no-preference){
+  .tr-curio-panel{animation:tr-curio-entra .45s cubic-bezier(.22,.61,.36,1)}
+  @keyframes tr-curio-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+}
+
 /* ============================================================
    4 · LAS VERSIONES
    ============================================================ */
@@ -174,8 +192,9 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
    6 · CONFIGURADOR
    ============================================================ */
 .tr-config{background:var(--tr-arena);padding:clamp(56px,7vw,96px) 5vw}
-.tr-config-caja{display:grid;grid-template-columns:minmax(220px,1fr) minmax(320px,1fr);
-  gap:clamp(28px,4vw,64px);max-width:900px;margin:0 auto;align-items:center}
+.tr-config-caja{display:grid;grid-template-columns:minmax(200px,1fr) minmax(280px,1.3fr) minmax(300px,1fr);
+  gap:clamp(28px,4vw,64px);max-width:1240px;margin:0 auto;align-items:center}
+.tr-config-plano img{width:100%;mix-blend-mode:multiply}
 .tr-config-modelo h2{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:var(--tr-negro)}
 .tr-config-precio-grande{font-family:'Fraunces',Georgia,serif;font-weight:400;
@@ -183,7 +202,6 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
 .tr-config-notas{list-style:none;font-size:14.5px;color:var(--tr-tinta-2)}
 .tr-config-notas li{display:flex;align-items:center;gap:8px;padding:3px 0}
 .tr-config-notas svg{width:15px;height:15px;stroke:var(--tr-oro);fill:none;stroke-width:2}
-.tr-config-medidas{font-size:14px;color:var(--tr-tinta-2);margin-top:18px}
 .tr-config-panel{background:var(--tr-blanco);padding:30px 28px;
   box-shadow:0 18px 44px rgba(9,9,9,.08)}
 .tr-config-panel h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
@@ -224,7 +242,8 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
    ============================================================ */
 @media(max-width:1100px){
   .tr-pagas{grid-template-columns:1fr}
-  .tr-config-caja{grid-template-columns:1fr}
+  .tr-config-caja{grid-template-columns:1fr 1fr}
+  .tr-config-plano{order:3;grid-column:1/-1;max-width:560px;margin:0 auto}
   .tr-todos-grid{grid-template-columns:repeat(3,1fr);gap:32px}
   .tr-todos-grid .tr-icono:nth-child(3n){border-right:0}
   .tr-versiones-cuerpo{grid-template-columns:1fr;max-width:520px;gap:48px}
@@ -237,6 +256,7 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
   .tr-menos{grid-template-columns:1fr}
   .tr-menos-foto{order:1;max-height:64vw;overflow:hidden}
   .tr-menos-texto{order:2}
+  .tr-config-caja{grid-template-columns:1fr}
   .tr-servicios-grid{grid-template-columns:1fr 1fr;gap:22px}
   .tr-versiones-cab h2::before,.tr-versiones-cab h2::after,
   .tr-todos h2::before,.tr-todos h2::after{width:28px}
@@ -273,7 +293,7 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
     <div class="tr-hero-texto">
       <p class="tr-eyebrow">LO-05</p>
       <h1 class="tr-hero-titular">Trinchera<span class="punto">.</span></h1>
-      <p class="tr-hero-sub">Homenaje a un clásico de campaña. <b>Hecho para durar, día tras día.</b></p>
+      <p class="tr-hero-sub">El reloj que demuestra que <b>la resistencia no necesita adornos.</b></p>
       <span class="tr-hero-raya"></span>
       <a class="tr-boton tr-boton-negro" href="/reservar.html">Reservar ahora</a>
       <p class="tr-hero-nota">Unidades limitadas.</p>
@@ -287,8 +307,8 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
   <section class="tr-menos">
     <div class="tr-menos-texto tr-reveal">
       <h2>DISEÑO DE CAMPAÑA.</h2>
-      <p>Inspirado en el espíritu resistente de los relojes de campo, como el Hamilton Khaki Field.</p>
-      <p>El Trinchera rinde tributo a un icono militar que ha acompañado generaciones.</p>
+      <p>Inspirado en el espíritu de los relojes de campaña que acompañaron a generaciones enteras, en las peores condiciones.</p>
+      <p>El Trinchera rinde tributo a ese icono militar, sin copiarlo ni un milímetro.</p>
       <p class="fuerte">Diseñado para el día a día. Hecho para durar.</p>
       <p>Resistencia, legibilidad y esencia. Eso es el Trinchera.</p>
       <div class="tr-menos-iconos">
@@ -330,6 +350,34 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Montado y ajustado a mano</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Garantía hasta 5 años</li>
       </ul>
+      <div class="tr-curiosidades">
+        <div class="tr-curio-botones">
+          <button type="button" class="tr-curio-boton" data-curio="curio-1" aria-expanded="false" aria-controls="curio-1">Curiosidad 1</button>
+          <button type="button" class="tr-curio-boton" data-curio="curio-2" aria-expanded="false" aria-controls="curio-2">Curiosidad 2</button>
+        </div>
+        <div class="tr-curio-panel" id="curio-1" hidden>
+          <p>El nombre «reloj de trinchera» es literal. Antes de la Primera Guerra
+          Mundial, llevar reloj en la muñeca se consideraba cosa de mujeres: los
+          hombres usaban de bolsillo. La guerra de trincheras lo cambió todo — para
+          coordinar ataques y bombardeos sincronizados sin soltar el fusil, los
+          oficiales empezaron a soldarle asas de alambre a su reloj de bolsillo y
+          atárselo a la muñeca con una correa de cuero. En 1916, la casa británica
+          H. Williamson calculaba que <b>uno de cada cuatro soldados</b> ya llevaba
+          uno así. La necesidad, no la moda, inventó el reloj de pulsera tal y como
+          lo conocemos hoy.</p>
+        </div>
+        <div class="tr-curio-panel" id="curio-2" hidden>
+          <p>El Hamilton Khaki Field, uno de los herederos más directos de aquellos
+          relojes de campaña, tiene su propia historia de guerra. Durante la
+          Segunda Guerra Mundial, Hamilton paró toda su producción civil y entregó
+          <b>más de un millón de relojes</b> al ejército de EE. UU., ganando el
+          premio Army-Navy «E» a la excelencia industrial. Décadas después, su
+          silueta sencilla y legible volvió a la gran pantalla: el reloj «Murph»
+          que lleva el personaje de Jessica Chastain en Interstellar es un Khaki
+          Field, hecho a medida para el rodaje y llevado a producción en serie por
+          la demanda de los fans.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -419,7 +467,9 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
           <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>Envío gratis</li>
           <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>Hasta 5 años de garantía</li>
         </ul>
-        <p class="tr-config-medidas">Caja 38–40 mm · asa a asa ~46 mm · correa 20 mm</p>
+      </div>
+      <div class="tr-config-plano tr-reveal">
+        <img src="/assets/img/trinchera/landing/plano.jpg" alt="Plano técnico del LO-05 Trinchera: 40 mm de caja, 48 mm asa a asa, 12 mm de grosor" loading="lazy">
       </div>
       <div class="tr-config-panel tr-reveal">
         <h3>Configura el tuyo</h3>
@@ -546,6 +596,21 @@ body.tr{background:var(--tr-blanco);color:var(--tr-negro);
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
+
+  /* Curiosidades: dos botones, un panel abierto cada vez. */
+  const curioBotones = document.querySelectorAll('.tr-curio-boton');
+  curioBotones.forEach(b => b.addEventListener('click', () => {
+    const panel = document.getElementById(b.dataset.curio);
+    const abrir = panel.hidden;
+    curioBotones.forEach(o => {
+      o.setAttribute('aria-expanded', 'false');
+      document.getElementById(o.dataset.curio).hidden = true;
+    });
+    if (abrir) {
+      panel.hidden = false;
+      b.setAttribute('aria-expanded', 'true');
+    }
+  }));
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
