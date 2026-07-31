@@ -165,6 +165,12 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
 .ck-versiones-cab h2::before,.ck-versiones-cab h2::after{content:"";
   width:64px;height:1px;background:var(--ck-oro)}
 .ck-versiones-sub{font-size:20px;color:var(--ck-gris);margin:14px 0 54px}
+
+/* Una sola foto para las tres: el reloj de exposición, arriba del
+   todo, no repetido en cada tarjeta (es el mismo diseño en los
+   tres acabados, cambia el movimiento). */
+.ck-versiones-foto{width:min(100%,340px);margin:0 auto 60px}
+
 .ck-versiones-grid{display:grid;grid-template-columns:1fr 1fr 1fr;max-width:1240px;margin:0 auto}
 .ck-version{padding:0 clamp(18px,3vw,48px)}
 .ck-version + .ck-version{border-left:1px solid var(--ck-linea)}
@@ -172,8 +178,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
   letter-spacing:.2em;text-transform:uppercase;color:var(--ck-oro)}
 .ck-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
   font-size:19px;color:var(--ck-gris);margin-top:8px}
-.ck-version img{width:min(78%,300px);margin:26px auto 22px}
-.ck-version-desc{font-size:18px;color:var(--ck-gris);max-width:340px;margin:0 auto 22px}
+.ck-version-desc{font-size:18px;color:var(--ck-gris);max-width:340px;margin:22px auto}
 .ck-version-specs{list-style:none;text-align:left;max-width:300px;margin:0 auto}
 .ck-version-specs li{padding:12px 0;border-top:1px solid var(--ck-linea)}
 .ck-version-specs li:last-child{padding-bottom:0}
@@ -223,6 +228,7 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
   background:var(--ck-negro) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F7F7F5' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
   border:1px solid var(--ck-linea);padding:11px 40px 11px 14px;cursor:pointer}
 .ck-campo select:focus{outline:none;border-color:var(--ck-oro)}
+.ck-campo select:disabled{cursor:default;background-image:none;color:var(--ck-gris);opacity:.85}
 .ck-config-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
   font-size:clamp(40px,3.6vw,56px);color:var(--ck-oro);text-align:center;margin:18px 0 14px}
 .ck-config-panel .ck-boton{width:100%}
@@ -399,14 +405,14 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
   <section class="ck-versiones">
     <div class="ck-versiones-cab ck-reveal"><h2>Las versiones</h2></div>
     <p class="ck-versiones-sub ck-reveal">Mismo diseño. Tres formas de vivir el cóctel.</p>
+    <img class="ck-versiones-foto ck-reveal" src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel, el mismo diseño en los tres acabados" loading="lazy">
     <div class="ck-versiones-grid">
       <article class="ck-version ck-reveal">
         <h3 class="ck-version-nombre">Alba</h3>
         <p class="ck-version-precio">desde 249 €</p>
-        <img src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel Alba, cuarzo" loading="lazy">
         <p class="ck-version-desc">Precisión sin esfuerzo. Para quien quiere el diseño sin más.</p>
         <ul class="ck-version-specs">
-          <li><b>Movimiento</b><span>Cuarzo suizo/japonés (Ronda/Miyota)</span></li>
+          <li><b>Movimiento</b><span>Cuarzo suizo Ronda</span></li>
           <li><b>Caja</b><span>Acero 316L</span></li>
           <li><b>Cristal</b><span>Mineral K1 abombado</span></li>
           <li><b>Correa</b><span>Piel marrón</span></li>
@@ -415,25 +421,23 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
       <article class="ck-version ck-reveal">
         <h3 class="ck-version-nombre">Levante</h3>
         <p class="ck-version-precio">desde 329 €</p>
-        <img src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel Levante, automático Seiko NH35A" loading="lazy">
         <p class="ck-version-desc">El corazón mecánico. El equilibrio perfecto.</p>
         <ul class="ck-version-specs">
-          <li><b>Movimiento</b><span>Automático Seiko NH35A</span></li>
+          <li><b>Movimiento</b><span>Automático japonés Seiko NH35A</span></li>
           <li><b>Caja</b><span>Acero 316L</span></li>
           <li><b>Cristal</b><span>Zafiro con domo alto y antirreflejos</span></li>
-          <li><b>Correa</b><span>Piel premium o brazalete</span></li>
+          <li><b>Correa</b><span>Piel premium</span></li>
         </ul>
       </article>
       <article class="ck-version ck-reveal">
         <h3 class="ck-version-nombre">Cenit</h3>
         <p class="ck-version-precio">desde 449 €</p>
-        <img src="/assets/img/coctel/landing/frontal.jpg" alt="laOra Cóctel Cenit, acabado superior" loading="lazy">
         <p class="ck-version-desc">El movimiento premium. Para quienes buscan lo mejor.</p>
         <ul class="ck-version-specs">
-          <li><b>Movimiento</b><span>Seiko NH35A o Miyota 9015</span></li>
-          <li><b>Caja</b><span>Acero 316L, acabado superior</span></li>
-          <li><b>Cristal</b><span>Zafiro con domo alto</span></li>
-          <li><b>Brazalete / correa</b><span>Brazalete + piel</span></li>
+          <li><b>Movimiento</b><span>Japonés Miyota 9015</span></li>
+          <li><b>Caja</b><span>Acero 316L</span></li>
+          <li><b>Cristal</b><span>Zafiro con domo alto y antirreflejos</span></li>
+          <li><b>Brazalete / correa</b><span>Piel premium</span></li>
         </ul>
       </article>
     </div>
@@ -490,9 +494,9 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
         <div class="ck-campo">
           <label for="cfg-movimiento">Movimiento</label>
           <select id="cfg-movimiento">
-            <option value="alba" data-base="249">Alba (Cuarzo)</option>
-            <option value="levante" data-base="329">Levante (Automático NH35A)</option>
-            <option value="cenit" data-base="449">Cenit (acabado superior)</option>
+            <option value="alba" data-base="249" data-cristal="Mineral K1 abombado" data-correa="Piel marrón">Alba (Cuarzo suizo Ronda)</option>
+            <option value="levante" data-base="329" data-cristal="Zafiro con domo alto y antirreflejos" data-correa="Piel premium">Levante (Automático japonés Seiko NH35A)</option>
+            <option value="cenit" data-base="449" data-cristal="Zafiro con domo alto y antirreflejos" data-correa="Piel premium">Cenit (Japonés Miyota 9015)</option>
           </select>
         </div>
         <div class="ck-campo">
@@ -502,9 +506,21 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
           </select>
         </div>
         <div class="ck-campo">
-          <label for="cfg-correa">Correa</label>
-          <select id="cfg-correa">
-            <option value="marron" data-extra="0">Piel marrón</option>
+          <label>Caja</label>
+          <select disabled>
+            <option>Acero 316L</option>
+          </select>
+        </div>
+        <div class="ck-campo">
+          <label>Cristal</label>
+          <select disabled data-sigue-a="cristal">
+            <option>Mineral K1 abombado</option>
+          </select>
+        </div>
+        <div class="ck-campo">
+          <label>Correa</label>
+          <select disabled data-sigue-a="correa">
+            <option>Piel marrón</option>
           </select>
         </div>
         <p class="ck-config-precio" data-precio>249&nbsp;€</p>
@@ -576,14 +592,24 @@ body.ck{background:var(--ck-negro);color:var(--ck-blanco);
    suman extras (hoy ninguno). El cobro real queda aparcado.
    ============================================================ */
 (() => {
-  const selects = ['cfg-movimiento','cfg-esfera','cfg-correa'].map(id => document.getElementById(id));
+  const selects = ['cfg-movimiento','cfg-esfera'].map(id => document.getElementById(id));
   const precios = document.querySelectorAll('[data-precio]');
+
+  const movimiento = document.getElementById('cfg-movimiento');
+  const cristalMostrado = document.querySelector('[data-sigue-a="cristal"] option');
+  const correaMostrada = document.querySelector('[data-sigue-a="correa"] option');
 
   function calcula(){
     const opt = s => s.options[s.selectedIndex];
     let total = Number(opt(selects[0]).dataset.base || 0);
     for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
     for (const p of precios) p.innerHTML = total + '&nbsp;€';
+    /* Cristal y correa no se eligen sueltos: vienen atados al
+       movimiento (Alba lleva mineral y piel marrón; Levante y
+       Cenit, zafiro con domo alto y piel premium). */
+    const elegido = opt(movimiento);
+    cristalMostrado.textContent = elegido.dataset.cristal;
+    correaMostrada.textContent = elegido.dataset.correa;
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
