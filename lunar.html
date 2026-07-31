@@ -150,16 +150,30 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 .ln-versiones-cab h2::before,.ln-versiones-cab h2::after{content:"";
   width:64px;height:1px;background:var(--ln-oro)}
 .ln-versiones-sub{font-size:20px;color:var(--ln-gris);margin:14px 0 54px}
-.ln-versiones-grid{display:grid;grid-template-columns:1fr 1fr 1fr;max-width:1240px;margin:0 auto}
-.ln-version{padding:0 clamp(18px,3vw,48px)}
-.ln-version + .ln-version{border-left:1px solid var(--ln-linea)}
+
+/* Una sola foto para las dos, fija a la izquierda: el mismo diseño
+   en ambos acabados, solo cambia el movimiento. A la derecha, la
+   lista de acabados con sus especificaciones concretas. */
+.ln-versiones-cuerpo{display:grid;grid-template-columns:minmax(240px,360px) 1fr;
+  gap:clamp(40px,6vw,90px);max-width:1180px;margin:0 auto;text-align:left;align-items:start}
+.ln-versiones-foto{width:100%;position:sticky;top:110px;margin:0}
+
+.ln-versiones-lista{display:flex;flex-direction:column}
+.ln-version{padding:38px 0}
+.ln-version:first-child{padding-top:0}
+.ln-version + .ln-version{border-top:1px solid var(--ln-linea)}
 .ln-version-nombre{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
   letter-spacing:.2em;text-transform:uppercase;color:var(--ln-oro)}
-.ln-version-mov{font-size:17px;color:var(--ln-blanco);margin-top:8px}
-.ln-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:19px;color:var(--ln-gris);margin-top:2px}
-.ln-version img{width:min(82%,300px);margin:26px auto 22px}
-.ln-version-desc{font-size:18px;color:var(--ln-gris);max-width:340px;margin:0 auto}
+.ln-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
+  font-size:19px;color:var(--ln-gris);margin-top:8px}
+.ln-version-desc{font-size:18px;color:var(--ln-gris);max-width:420px;margin:18px 0}
 .ln-version-desc b{color:var(--ln-blanco);font-weight:600}
+.ln-version-specs{list-style:none;text-align:left;max-width:460px;margin:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.ln-version-specs li{padding:12px 0;border-top:1px solid var(--ln-linea)}
+.ln-version-specs b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ln-oro);margin-bottom:4px}
+.ln-version-specs span{display:block;font-size:15.5px;color:var(--ln-blanco)}
 
 /* ============================================================
    6 · LO QUE LLEVAN TODOS
@@ -234,8 +248,8 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   .ln-config-plano{order:3;grid-column:1/-1;max-width:820px;margin:0 auto}
   .ln-todos-grid{grid-template-columns:repeat(3,1fr);gap:32px}
   .ln-todos-grid .ln-icono:nth-child(3n){border-right:0}
-  .ln-versiones-grid{grid-template-columns:1fr;gap:56px;max-width:520px}
-  .ln-version + .ln-version{border-left:0;border-top:1px solid var(--ln-linea);padding-top:48px}
+  .ln-versiones-cuerpo{grid-template-columns:1fr;max-width:520px;gap:48px}
+  .ln-versiones-foto{position:static;max-width:320px;margin:0 auto}
 }
 @media(max-width:820px){
   .ln-hero{min-height:0;padding-top:8vh}
@@ -311,7 +325,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       </div>
       <div class="ln-pilar">
         <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="7"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M11 11l3.5 3.5M29.5 29.5L33 33M33 11l-3.5 3.5M14.5 29.5L11 33"/></svg>
-        <b>Movimiento japonés.<span>Precisión sin complicaciones.</span></b>
+        <b>Movimiento de precisión.<span>Sin complicaciones.</span></b>
       </div>
     </div>
   </section>
@@ -356,29 +370,33 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   <!-- 5 · LAS VERSIONES -->
   <section class="ln-versiones">
     <div class="ln-versiones-cab ln-reveal"><h2>Las versiones</h2></div>
-    <p class="ln-versiones-sub ln-reveal">Mismo diseño. Tres formas de vivir el cronógrafo.</p>
-    <div class="ln-versiones-grid">
-      <article class="ln-version ln-reveal">
-        <h3 class="ln-version-nombre">Alba</h3>
-        <p class="ln-version-mov">VK63</p>
-        <p class="ln-version-precio">desde 259 €</p>
-        <img src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar Alba, mecacuarzo VK63" loading="lazy">
-        <p class="ln-version-desc">Para quien quiere toda la estética del cronógrafo más famoso de la historia con la comodidad del cuarzo.</p>
-      </article>
-      <article class="ln-version ln-reveal">
-        <h3 class="ln-version-nombre">Levante</h3>
-        <p class="ln-version-mov">Seiko NE88</p>
-        <p class="ln-version-precio">desde 329 €</p>
-        <img src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar Levante, automático Seiko NE88" loading="lazy">
-        <p class="ln-version-desc">El equilibrio perfecto entre tradición relojera y rendimiento mecánico.</p>
-      </article>
-      <article class="ln-version ln-reveal">
-        <h3 class="ln-version-nombre">Cenit</h3>
-        <p class="ln-version-mov">Miyota 6S20</p>
-        <p class="ln-version-precio">desde 399 €</p>
-        <img src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar Cenit, automático Miyota 6S20" loading="lazy">
-        <p class="ln-version-desc"><b>La versión definitiva. La que yo elegiría.</b><br>La más completa.</p>
-      </article>
+    <p class="ln-versiones-sub ln-reveal">Mismo diseño. Dos formas de vivir el cronógrafo.</p>
+    <div class="ln-versiones-cuerpo">
+      <img class="ln-versiones-foto ln-reveal" src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar, el mismo diseño en los dos acabados" loading="lazy">
+      <div class="ln-versiones-lista">
+        <article class="ln-version ln-reveal">
+          <h3 class="ln-version-nombre">Alba</h3>
+          <p class="ln-version-precio">desde 259 €</p>
+          <p class="ln-version-desc">Para quien quiere toda la estética del cronógrafo más famoso de la historia con la comodidad del cuarzo.</p>
+          <ul class="ln-version-specs">
+            <li><b>Movimiento</b><span>Mecacuarzo japonés VK63</span></li>
+            <li><b>Caja</b><span>Acero 316L</span></li>
+            <li><b>Cristal</b><span>Zafiro</span></li>
+            <li><b>Brazalete</b><span>Acero macizo</span></li>
+          </ul>
+        </article>
+        <article class="ln-version ln-reveal">
+          <h3 class="ln-version-nombre">Cenit</h3>
+          <p class="ln-version-precio">desde 399 €</p>
+          <p class="ln-version-desc"><b>La versión definitiva. La que yo elegiría.</b><br>Cuerda manual, como el cronógrafo real que llegó a la Luna.</p>
+          <ul class="ln-version-specs">
+            <li><b>Movimiento</b><span>Seagull ST1901, cuerda manual</span></li>
+            <li><b>Caja</b><span>Acero 316L</span></li>
+            <li><b>Cristal</b><span>Zafiro</span></li>
+            <li><b>Brazalete</b><span>Acero macizo</span></li>
+          </ul>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -434,8 +452,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
           <label for="cfg-movimiento">Movimiento</label>
           <select id="cfg-movimiento">
             <option value="alba" data-base="259">VK63 (Cuarzo)</option>
-            <option value="levante" data-base="329">Seiko NE88 (Automático)</option>
-            <option value="cenit" data-base="399">Miyota 6S20 (Automático)</option>
+            <option value="cenit" data-base="399">Seagull ST1901 (Cuerda manual)</option>
           </select>
         </div>
         <div class="ln-campo">
