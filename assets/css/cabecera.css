@@ -134,3 +134,27 @@
 @media(prefers-reduced-motion:reduce){
   .cb-home,.cb-home .cb-menu,.cb-home .cb-bolsa{transition:none}
 }
+
+/* ============================================================
+   PEGADA — la cabecera se queda fija y visible el resto de la
+   página, en TODAS las páginas que no sean la home.
+   ------------------------------------------------------------
+   Sin esto, `.cb` es position:absolute: se ve en el primer
+   pantallazo (sobre la foto del acto 1) y desaparece para
+   siempre en cuanto se hace scroll — no hay forma de navegar
+   desde el resto de la página. `cabecera.js` añade esta clase
+   pasado un umbral de scroll y la quita al volver arriba; no
+   toca `.cb-home`, que ya tiene su propio mecanismo (empieza
+   oculta y entra al primer roce), más rico y pensado solo para
+   el Acto 1 de la home.
+   ============================================================ */
+.cb.cb-pegada{position:fixed;padding-bottom:18px;
+  transition:background-color .25s ease,backdrop-filter .25s ease}
+.cb.cb-pegada:not(.cb-claro){background:rgba(5,5,5,.82);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.cb.cb-claro.cb-pegada{background:rgba(247,247,245,.88);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+@media(prefers-reduced-motion:reduce){
+  .cb.cb-pegada{transition:none}
+}
