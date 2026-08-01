@@ -180,34 +180,37 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
 .a2-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s cubic-bezier(.2,.7,.2,1)}
 .a2-panel.abierta{grid-template-rows:1fr}
 .a2-panel-int{overflow:hidden}
-.puertas{max-width:1200px;margin:0 auto;padding:70px 44px 30px;
-  display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(255,255,255,.12)}
-.puerta{padding:32px 22px;border-right:1px solid rgba(255,255,255,.12);text-align:left;
+.a2-encuentras{max-width:1200px;margin:0 auto;padding:60px 44px 70px;
+  border-top:1px solid rgba(255,255,255,.12)}
+.a2-encuentras-tit{text-align:center;font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
+  color:#fff;font-size:clamp(24px,2.6vw,32px);margin:0 0 8px}
+.a2-encuentras-sub{text-align:center;font-family:'Inter',sans-serif;font-size:15px;
+  color:var(--gris);margin:0 0 44px}
+.a2-encuentras-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.a2-encuentras-item{padding:8px 22px;border-right:1px solid rgba(255,255,255,.12);text-align:center;
   opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
-.a2-panel.abierta .puerta{opacity:1;transform:none}
-.puerta:nth-child(1){transition-delay:.05s}.puerta:nth-child(2){transition-delay:.12s}
-.puerta:nth-child(3){transition-delay:.19s}.puerta:nth-child(4){transition-delay:.26s}
-.puerta:nth-child(5){transition-delay:.33s}
-.puerta:last-child{border-right:none}
-.puerta .num{font-family:'Inter',sans-serif;font-size:12px;color:var(--gris);letter-spacing:.1em}
-.puerta .ico{width:32px;height:32px;margin:14px 0;color:var(--ambar);display:block}
-.puerta .ico svg{width:100%;height:100%}
-.puerta h3{font-family:'Inter',sans-serif;font-weight:800;color:#fff;font-size:14.5px;
-  text-transform:uppercase;letter-spacing:.02em;margin:0 0 9px}
-.puerta p{font-size:15px;color:#B8B8B8;line-height:1.45;margin:0 0 16px;min-height:52px}
-.puerta .veredicto{display:inline-flex;align-items:center;gap:9px;font-family:'Inter',sans-serif;
-  font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#ff7a68}
-.puerta .veredicto .x{width:20px;height:20px;border:1.6px solid #ff7a68;border-radius:50%;
-  display:grid;place-items:center;color:#ff7a68;font-size:11px;line-height:1;flex:none;
-  box-shadow:0 0 10px rgba(255,122,104,.45)}
-.a2-cierre{text-align:center;font-family:'Cormorant Garamond',Georgia,serif;color:#fff;
-  font-size:clamp(20px,2.6vw,30px);padding:44px 24px 90px;max-width:20ch;margin:0 auto;line-height:1.35}
+.a2-panel.abierta .a2-encuentras-item{opacity:1;transform:none}
+.a2-encuentras-item:nth-child(1){transition-delay:.05s}.a2-encuentras-item:nth-child(2){transition-delay:.12s}
+.a2-encuentras-item:nth-child(3){transition-delay:.19s}.a2-encuentras-item:nth-child(4){transition-delay:.26s}
+.a2-encuentras-item:nth-child(5){transition-delay:.33s}
+.a2-encuentras-item:last-child{border-right:0}
+.a2-panel.abierta .a2-encuentras-item:hover{transform:translateY(-6px)}
+.a2-encuentras-item svg{display:block;width:38px;height:38px;margin:0 auto 16px;
+  stroke:var(--ambar);fill:none;stroke-width:1.3}
+.a2-encuentras-item b{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;color:#fff;margin:0 0 10px;line-height:1.3}
+.a2-encuentras-item p{font-size:13.5px;line-height:1.5;color:var(--gris);margin:0}
+.a2-encuentras-precio{background:rgba(255,255,255,.035)}
+.a2-encuentras-cifra{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+  font-size:clamp(32px,3vw,44px);color:var(--ambar);line-height:1;margin:0 0 10px}
+.a2-encuentras-precio b{color:var(--gris)}
+.a2-encuentras-reaccion{display:block;margin-top:8px;font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:400;font-size:15px;color:#fff;text-transform:none;letter-spacing:0}
 
 @media(max-width:900px){
-  .puertas{grid-template-columns:repeat(2,1fr);gap:0 20px}
-  .puerta{border-right:none;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.12)}
-  .puerta:nth-child(odd){padding-right:16px}
-  .puerta:nth-child(even){padding-left:16px}
+  .a2-encuentras-grid{grid-template-columns:repeat(3,1fr);row-gap:28px}
+  .a2-encuentras-item:nth-child(3n){border-right:0}
+  .a2-encuentras-precio{grid-column:1/-1}
 }
 @media(max-width:760px){
   .a2-escena{align-items:flex-start;padding-top:15svh}
@@ -215,9 +218,10 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
   .a2-eyebrow{max-width:24ch}
   .a2-titular{font-size:clamp(24px,7vw,30px);margin-top:14px;max-width:11ch}
   .a2-boton{margin-top:22px;padding:13px 20px;font-size:10.5px}
-  .puertas{padding:46px 22px 16px}
-  .puerta{padding-bottom:22px}
-  .a2-cierre{font-size:21px;padding:26px 24px 70px}
+  .a2-encuentras{padding:40px 22px 50px}
+  .a2-encuentras-grid{grid-template-columns:1fr;row-gap:26px}
+  .a2-encuentras-item{border-right:0;padding:0}
+  .a2-encuentras-precio{grid-column:auto}
 }
 
 /* ACTO III — APARECE laOra: «así que hicimos lo contrario» */
@@ -578,44 +582,37 @@ footer .brand{color:#fff}
 
   <div class="a2-panel" id="cincoPuertas">
     <div class="a2-panel-int">
-      <div class="puertas">
-        <article class="puerta">
-          <span class="num">01</span>
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-          <h3>La joyería</h3>
-          <p>Lista de espera. Precios infladísimos.</p>
-          <span class="veredicto"><span class="x">✕</span> Muchos intermediarios</span>
-        </article>
-        <article class="puerta">
-          <span class="num">02</span>
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l6-6 4 4 6-7"/><path d="M20 7h-4"/><path d="M20 7v4"/></svg></span>
-          <h3>La reventa</h3>
-          <p>Mismo reloj. Más caro aún.</p>
-          <span class="veredicto"><span class="x">✕</span> Sobreprecio</span>
-        </article>
-        <article class="puerta">
-          <span class="num">03</span>
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6"/><path d="M6 12l6 6"/><path d="M11 7l6 6"/><path d="M3 21l6-6"/></svg></span>
-          <h3>La subasta</h3>
-          <p>Puja y comisión. Pagas de más.</p>
-          <span class="veredicto"><span class="x">✕</span> Más caro aún</span>
-        </article>
-        <article class="puerta">
-          <span class="num">04</span>
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M12 15v.01"/><path d="M10.2 9.5a1.8 1.8 0 1 1 2.8 1.5c-.6.4-1 .8-1 1.5"/></svg></span>
-          <h3>La segunda mano</h3>
-          <p>Sin factura. Sin garantía.</p>
-          <span class="veredicto"><span class="x">✕</span> Sin respaldo</span>
-        </article>
-        <article class="puerta">
-          <span class="num">05</span>
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="12" rx="2"/><path d="M9 16v2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/></svg></span>
-          <h3>El superclón</h3>
-          <p>Pagas mucho por algo falso. Imita lo que no es.</p>
-          <span class="veredicto"><span class="x">✕</span> Sin garantía</span>
-        </article>
+      <div class="a2-encuentras">
+        <h3 class="a2-encuentras-tit">Lo que te encuentras</h3>
+        <p class="a2-encuentras-sub">Antes de decidirte, esto es lo que hay ahí fuera.</p>
+        <div class="a2-encuentras-grid">
+          <div class="a2-encuentras-item a2-encuentras-precio">
+            <span class="a2-encuentras-cifra">7.700 €</span>
+            <b>Omega Speedmaster real</b>
+            <span class="a2-encuentras-reaccion">No me lo puedo permitir.</span>
+          </div>
+          <div class="a2-encuentras-item">
+            <svg viewBox="0 0 44 44"><rect x="6" y="15" width="16" height="14" rx="7"/><path d="M22 22h6" stroke-dasharray="2 3"/><rect x="24" y="15" width="14" height="14" rx="7" stroke-dasharray="4 3"/></svg>
+            <b>Homenajes</b>
+            <p>Eslabones huecos, pulsadores que fallan, specs falsas.</p>
+          </div>
+          <div class="a2-encuentras-item">
+            <svg viewBox="0 0 44 44"><rect x="8" y="8" width="18" height="10" rx="1" transform="rotate(-35 17 13)"/><path d="M14 20l14 14M30 14l-6 6"/><path d="M8 36h16"/></svg>
+            <b>Subastas</b>
+            <p>Precio bajo… hasta que llega el envío.</p>
+          </div>
+          <div class="a2-encuentras-item">
+            <svg viewBox="0 0 44 44"><path d="M12 16V11a10 10 0 0 1 20 0v5"/><path d="M8 16h28l-2 22H10z"/><path d="M22 22v8"/><circle cx="22" cy="33" r="1"/></svg>
+            <b>Tiendas indias y chinas</b>
+            <p>Reacondicionados, sin control, sin garantía.</p>
+          </div>
+          <div class="a2-encuentras-item">
+            <svg viewBox="0 0 44 44"><path d="M8 16a14 14 0 0 1 24-8m4 8V8h-8"/><path d="M36 28a14 14 0 0 1-24 8m-4-8v8h8"/></svg>
+            <b>Segunda mano</b>
+            <p>A veces sí, a veces no 🤷🏻‍♂️</p>
+          </div>
+        </div>
       </div>
-      <p class="a2-cierre">En las cinco pagas lo mismo.<br>Y nunca es el reloj.</p>
     </div>
   </div>
 </section>
