@@ -168,6 +168,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   font-size:19px;color:var(--ln-gris);margin-top:8px}
 .ln-version-desc{font-size:18px;color:var(--ln-gris);max-width:420px;margin:18px 0}
 .ln-version-desc b{color:var(--ln-blanco);font-weight:600}
+.ln-subrayado{text-decoration:underline;text-decoration-color:var(--ln-oro);text-underline-offset:3px}
 .ln-version-specs{list-style:none;text-align:left;max-width:460px;margin:0;
   display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
 .ln-version-specs li{padding:12px 0;border-top:1px solid var(--ln-linea)}
@@ -183,8 +184,12 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   padding:0;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;letter-spacing:.06em;
   color:var(--ln-oro);cursor:pointer;transition:opacity .2s}
 .ln-saber-boton:hover{opacity:.8}
-.ln-saber-flecha{display:inline-flex;width:16px;height:16px;align-items:center;justify-content:center;
-  border:1px solid var(--ln-oro);border-radius:50%;font-size:12px;line-height:1;transition:transform .25s}
+.ln-saber-flecha{position:relative;display:inline-block;width:16px;height:16px;flex:none;
+  border:1px solid var(--ln-oro);border-radius:50%;transition:transform .25s}
+.ln-saber-flecha::before,.ln-saber-flecha::after{content:"";position:absolute;top:50%;left:50%;
+  background:var(--ln-oro);transform:translate(-50%,-50%)}
+.ln-saber-flecha::before{width:7px;height:1.4px}
+.ln-saber-flecha::after{width:1.4px;height:7px}
 .ln-saber-boton[aria-expanded="true"] .ln-saber-flecha{transform:rotate(45deg)}
 .ln-saber-panel{max-width:520px;font-size:15.5px;color:var(--ln-gris);
   padding-top:16px;line-height:1.65}
@@ -208,6 +213,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 .ln-eclipse-texto p{font-size:18px;line-height:1.6;color:var(--ln-gris);max-width:440px;margin-bottom:16px}
 .ln-eclipse-texto p b{color:var(--ln-blanco);font-weight:600}
 .ln-eclipse-texto p:last-child{margin-bottom:0}
+.ln-eclipse-texto p.ln-hero-eyebrow{color:var(--ln-oro);max-width:none;margin-bottom:0}
 
 .ln-eclipse-galeria{background:var(--ln-negro);padding:0 5vw clamp(64px,8vw,100px)}
 .ln-eclipse-galeria-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;
@@ -374,7 +380,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       </div>
       <div class="ln-pilar">
         <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="7"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M11 11l3.5 3.5M29.5 29.5L33 33M33 11l-3.5 3.5M14.5 29.5L11 33"/></svg>
-        <b>Movimiento de precisión.<span>Sin complicaciones.</span></b>
+        <b>Movimientos de precisión.<span>Siempre originales y contrastados por décadas de funcionamiento.</span></b>
       </div>
     </div>
   </section>
@@ -429,7 +435,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
           <ul class="ln-version-specs">
             <li class="ln-spec-full"><b>Movimiento</b><span>Mecacuarzo japonés VK63</span></li>
             <li class="ln-spec-full ln-saber-wrap">
-              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecacuarzo VK63<span class="ln-saber-flecha">+</span></button>
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecacuarzo VK63<span class="ln-saber-flecha"></span></button>
               <div class="ln-saber-panel" hidden>
                 <p>Un mecacuarzo es un movimiento híbrido: el cuarzo lleva la hora con precisión de segundos, y un módulo mecánico independiente activa el cronógrafo. Por eso la aguja de cronógrafo no da el salto seco de segundo en segundo típico del cuarzo, sino que se desliza, y al pulsar la puesta a cero vuelve de golpe con el mismo chasquido de un cronógrafo mecánico.</p>
                 <p>Esfera de 40&nbsp;mm. Pulsador superior: inicia y detiene el cronógrafo. Pulsador inferior: pone las agujas a cero. Contador de 60 minutos en la subesfera. Precisión de ±20 segundos al mes y sin darle cuerda: la pila dura unos 3 años de uso normal.</p>
@@ -437,17 +443,26 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
             </li>
             <li><b>Caja</b><span>Acero 316L</span></li>
             <li><b>Cristal</b><span>Mineral abombado</span></li>
-            <li><b>Brazalete</b><span>Acero macizo</span></li>
+            <li><b>Brazalete</b><span>Acero macizo, 20 mm de ancho</span></li>
+            <li class="ln-spec-full"><b>Resistencia al agua</b><span>5 ATM (50 m)</span></li>
+            <li class="ln-spec-full ln-saber-wrap">
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 5 ATM<span class="ln-saber-flecha"></span></button>
+              <div class="ln-saber-panel" hidden>
+                <p>Con toda sinceridad: 5 ATM (50 m) es la resistencia habitual de un reloj vestidor — vale para la lluvia, las salpicaduras y lavarte las manos con él puesto, pero no es una cifra pensada para nadar ni bucear.</p>
+                <p>El agua caliente, el jabón y el propio movimiento reducen la estanqueidad real muy por debajo de lo que promete la cifra, medida en frío y en reposo. Así que mejor no te duches con él, ni lo lleves a la piscina o al mar.</p>
+                <p>Un cuidado básico: no toques la corona ni los pulsadores si está mojado o húmedo. Y si vas a exponerlo al agua a menudo, revisa la estanqueidad en nuestro servicio técnico de vez en cuando.</p>
+              </div>
+            </li>
           </ul>
         </article>
         <article class="ln-version ln-reveal">
           <h3 class="ln-version-nombre">Cenit</h3>
           <p class="ln-version-precio">desde 489,90 €</p>
-          <p class="ln-version-desc">Aquí toca ser sinceros, como siempre: <b>si fuera nuestro dinero, elegiríamos el mecacuarzo.</b> Es más preciso y no hay nada que cuidar. Pero para quien ama lo mecánico ofrecemos esta versión, cuerda manual, como el cronógrafo real que subió a la Luna.</p>
+          <p class="ln-version-desc">Aquí toca ser sinceros, como siempre: <b>si fuera nuestro dinero, elegiríamos el mecacuarzo.</b> Es más preciso y no hay nada que cuidar. Pero <span class="ln-subrayado">para quien ama lo mecánico</span> ofrecemos esta versión, cuerda manual, como el cronógrafo real que subió a la Luna.</p>
           <ul class="ln-version-specs">
             <li class="ln-spec-full"><b>Movimiento</b><span>Seagull ST1901, cuerda manual</span></li>
             <li class="ln-spec-full ln-saber-wrap">
-              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecánico ST19<span class="ln-saber-flecha">+</span></button>
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecánico ST19<span class="ln-saber-flecha"></span></button>
               <div class="ln-saber-panel" hidden>
                 <p>El ST19 es un movimiento 100% mecánico de cuerda manual, con rueda de columnas —el mismo tipo de mecanismo que llevaba el cronógrafo original que llegó a la Luna— y 23 rubíes, latiendo a 21.600 alternancias/hora. Reserva de marcha de 50 horas (45 con el cronógrafo en marcha) y una precisión de -10/+40 segundos al día, propia de un mecánico de esta gama: no compite con el cuarzo, pero se siente distinto.</p>
                 <p>Esfera de 40&nbsp;mm. Pulsador superior: inicia y detiene el cronógrafo. Pulsador inferior: pone a cero el segundero y el contador de minutos. Segundero permanente y contador de 30 minutos en las subesferas.</p>
@@ -455,7 +470,16 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
             </li>
             <li><b>Caja</b><span>Acero 316L</span></li>
             <li><b>Cristal</b><span>Mineral abombado</span></li>
-            <li><b>Brazalete</b><span>Acero macizo</span></li>
+            <li><b>Brazalete</b><span>Acero macizo, 20 mm de ancho</span></li>
+            <li class="ln-spec-full"><b>Resistencia al agua</b><span>5 ATM (50 m)</span></li>
+            <li class="ln-spec-full ln-saber-wrap">
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 5 ATM<span class="ln-saber-flecha"></span></button>
+              <div class="ln-saber-panel" hidden>
+                <p>Con toda sinceridad: 5 ATM (50 m) es la resistencia habitual de un reloj vestidor — vale para la lluvia, las salpicaduras y lavarte las manos con él puesto, pero no es una cifra pensada para nadar ni bucear.</p>
+                <p>El agua caliente, el jabón y el propio movimiento reducen la estanqueidad real muy por debajo de lo que promete la cifra, medida en frío y en reposo. Así que mejor no te duches con él, ni lo lleves a la piscina o al mar.</p>
+                <p>Un cuidado básico: no toques la corona ni los pulsadores si está mojado o húmedo. Y si vas a exponerlo al agua a menudo, revisa la estanqueidad en nuestro servicio técnico de vez en cuando.</p>
+              </div>
+            </li>
           </ul>
         </article>
         <article class="ln-version ln-reveal">
@@ -464,17 +488,32 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
           <p class="ln-version-desc">La versión de sigilo: caja, bisel y brazalete en negro, esfera negra y agujas con lumen que se leen en la oscuridad. Cristal de zafiro antirreflejo con perfil abombado, como el original.</p>
           <ul class="ln-version-specs">
             <li class="ln-spec-full"><b>Movimiento</b><span>Mecacuarzo japonés VK63</span></li>
+            <li class="ln-spec-full ln-saber-wrap">
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecacuarzo VK63<span class="ln-saber-flecha"></span></button>
+              <div class="ln-saber-panel" hidden>
+                <p>Un mecacuarzo es un movimiento híbrido: el cuarzo lleva la hora con precisión de segundos, y un módulo mecánico independiente activa el cronógrafo. Por eso la aguja de cronógrafo no da el salto seco de segundo en segundo típico del cuarzo, sino que se desliza, y al pulsar la puesta a cero vuelve de golpe con el mismo chasquido de un cronógrafo mecánico.</p>
+                <p>Esfera de 40&nbsp;mm. Pulsador superior: inicia y detiene el cronógrafo. Pulsador inferior: pone las agujas a cero. Contador de 60 minutos en la subesfera. Precisión de ±20 segundos al mes y sin darle cuerda: la pila dura unos 3 años de uso normal.</p>
+              </div>
+            </li>
             <li class="ln-spec-full"><b>Caja</b><span>Acero 316L, caja y bisel en negro (PVD)</span></li>
             <li class="ln-spec-full ln-saber-wrap">
-              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el acabado PVD<span class="ln-saber-flecha">+</span></button>
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el acabado PVD<span class="ln-saber-flecha"></span></button>
               <div class="ln-saber-panel" hidden>
                 <p>Siendo transparentes: no existen cajas de Speedmaster/VK63 con DLC real verificable. Todo lo que se anuncia como "negro" en este rango de precio es PVD (a menudo etiquetado, erróneamente, como "DLC" en los anuncios). El DLC verdadero (Diamond-Like Carbon) necesita un proceso PACVD de alta temperatura que multiplica el coste, y no se ofrece a los precios que nos gusta darte.</p>
                 <p>¿Merece la pena ese sobrecoste en un reloj de 300-400&nbsp;€? Si usáramos DLC real, el precio de tu unidad subiría mucho más de lo que esa dureza extra te va a notar en el día a día. Y hay que ser honestos: quien se gasta ese dinero en un reloj suele cuidarlo como oro en paño, así que el riesgo real de rayar el PVD es bajo. Sí te recomendamos evitar deportes de riesgo con él puesto.</p>
-                <p>Tampoco pienses en él como sumergible: como el resto de la familia Lunar, es resistente al agua 5 ATM (50 m) — pensado para la lluvia y las salpicaduras, no para ducharte, nadar ni bucear con él (más abajo te contamos por qué).</p>
               </div>
             </li>
             <li><b>Cristal</b><span>Zafiro antirreflejo, abombado</span></li>
-            <li><b>Brazalete</b><span>Acero, PVD negro</span></li>
+            <li><b>Brazalete</b><span>Acero, PVD negro, 20 mm de ancho</span></li>
+            <li class="ln-spec-full"><b>Resistencia al agua</b><span>5 ATM (50 m)</span></li>
+            <li class="ln-spec-full ln-saber-wrap">
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 5 ATM<span class="ln-saber-flecha"></span></button>
+              <div class="ln-saber-panel" hidden>
+                <p>Con toda sinceridad: 5 ATM (50 m) es la resistencia habitual de un reloj vestidor — vale para la lluvia, las salpicaduras y lavarte las manos con él puesto, pero no es una cifra pensada para nadar ni bucear.</p>
+                <p>El agua caliente, el jabón y el propio movimiento reducen la estanqueidad real muy por debajo de lo que promete la cifra, medida en frío y en reposo. Así que mejor no te duches con él, ni lo lleves a la piscina o al mar.</p>
+                <p>Un cuidado básico: no toques la corona ni los pulsadores si está mojado o húmedo. Y si vas a exponerlo al agua a menudo, revisa la estanqueidad en nuestro servicio técnico de vez en cuando.</p>
+              </div>
+            </li>
           </ul>
         </article>
       </div>
@@ -538,7 +577,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       </div>
     </div>
     <div class="ln-todos-saber ln-reveal">
-      <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre la resistencia al agua<span class="ln-saber-flecha">+</span></button>
+      <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre la resistencia al agua<span class="ln-saber-flecha"></span></button>
       <div class="ln-saber-panel" hidden>
         <p>5 ATM (50 metros) es la resistencia habitual de un reloj vestidor/casual: aguanta lluvia, salpicaduras, sudor y lavarte las manos con él puesto. No es una cifra pensada para meterlo bajo el agua de forma prolongada ni en movimiento.</p>
         <p>Por eso no lo recomendamos para ducharte, nadar ni bucear: el agua caliente, el jabón y el propio movimiento de nadar reducen la estanqueidad real muy por debajo de lo que promete la cifra, medida en frío y en reposo.</p>
@@ -560,16 +599,16 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
         </ul>
       </div>
       <div class="ln-config-plano ln-reveal">
-        <img src="/assets/img/lunar/landing/plano.jpg" alt="Plano técnico del LO-01 Lunar: 40 mm de caja, 48 mm asa a asa, 20 mm de correa, 14,3 mm de grosor" loading="lazy">
+        <img id="cfg-plano-img" src="/assets/img/lunar/landing/plano.jpg" alt="Plano técnico del LO-01 Lunar: 40 mm de caja, 48 mm asa a asa, 20 mm de correa, 14,3 mm de grosor" loading="lazy">
       </div>
       <div class="ln-config-panel ln-reveal">
         <h3>Configura el tuyo</h3>
         <div class="ln-campo">
           <label for="cfg-movimiento">Movimiento</label>
           <select id="cfg-movimiento">
-            <option value="alba" data-base="269.9" data-caja="Acero 316L" data-cristal="Mineral abombado" data-brazalete="Acero macizo">VK63 (Cuarzo)</option>
-            <option value="cenit" data-base="489.9" data-caja="Acero 316L" data-cristal="Mineral abombado" data-brazalete="Acero macizo">Seagull ST1901 (Cuerda manual)</option>
-            <option value="eclipse" data-base="299.9" data-caja="Acero 316L, PVD negro" data-cristal="Zafiro antirreflejo, abombado" data-brazalete="Acero, PVD negro">VK63 (Eclipse, negro)</option>
+            <option value="alba" data-base="269.9" data-caja="Acero 316L" data-cristal="Mineral abombado" data-brazalete="Acero macizo" data-plano="/assets/img/lunar/landing/plano.jpg" data-plano-alt="Plano técnico del LO-01 Lunar: 40 mm de caja, 48 mm asa a asa, 20 mm de correa, 14,3 mm de grosor">VK63 (Cuarzo)</option>
+            <option value="cenit" data-base="489.9" data-caja="Acero 316L" data-cristal="Mineral abombado" data-brazalete="Acero macizo" data-trasera-fija="1" data-plano="/assets/img/lunar/landing/plano.jpg" data-plano-alt="Plano técnico del LO-01 Lunar: 40 mm de caja, 48 mm asa a asa, 20 mm de correa, 14,3 mm de grosor">Seagull ST1901 (Cuerda manual)</option>
+            <option value="eclipse" data-base="299.9" data-caja="Acero 316L, PVD negro" data-cristal="Zafiro antirreflejo, abombado" data-brazalete="Acero, PVD negro" data-plano="/assets/img/lunar/landing/eclipse-frontal.jpg" data-plano-alt="laOra LO-01 Lunar Eclipse, acabado completamente en negro">VK63 (Eclipse, negro)</option>
           </select>
         </div>
         <div class="ln-campo">
@@ -680,19 +719,37 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   const cajaMostrada = document.querySelector('[data-sigue-a="caja"] option');
   const cristalMostrado = document.querySelector('[data-sigue-a="cristal"] option');
   const brazaleteMostrado = document.querySelector('[data-sigue-a="brazalete"] option');
+  const planoImg = document.getElementById('cfg-plano-img');
+  const trasera = document.getElementById('cfg-trasera');
+  const traseraMineral = trasera.querySelector('option[value="mineral"]');
 
   function calcula(){
     const opt = s => s.options[s.selectedIndex];
-    let total = Number(opt(selects[0]).dataset.base || 0);
+    const elegido = opt(movimiento);
+
+    /* El Cenit (mecánico ST1901) no ofrece tapa vista: es maciza siempre. */
+    if (elegido.dataset.traseraFija === '1') {
+      trasera.value = 'acero';
+      trasera.disabled = true;
+      traseraMineral.disabled = true;
+    } else {
+      trasera.disabled = false;
+      traseraMineral.disabled = false;
+    }
+
+    let total = Number(elegido.dataset.base || 0);
     for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
     const texto = total.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
     for (const p of precios) p.innerHTML = texto + '&nbsp;€';
     /* Caja, cristal y brazalete no se eligen sueltos: vienen atados al
        movimiento (el Eclipse lleva acabado negro y zafiro, el resto mineral). */
-    const elegido = opt(movimiento);
     cajaMostrada.textContent = elegido.dataset.caja;
     cristalMostrado.textContent = elegido.dataset.cristal;
     brazaleteMostrado.textContent = elegido.dataset.brazalete;
+    /* El plano de dimensiones también sigue al acabado: en el Eclipse
+       enseñamos su propia foto en negro en vez del dibujo técnico genérico. */
+    planoImg.src = elegido.dataset.plano;
+    planoImg.alt = elegido.dataset.planoAlt;
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
@@ -705,6 +762,28 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       panel.hidden = abierto;
     });
   });
+
+  /* La foto fija de "Las versiones" sigue al acabado que se está leyendo:
+     Alba/Cenit comparten la foto en acero, el Eclipse enseña su propia foto
+     en negro en cuanto su ficha entra en pantalla. */
+  const versionesFoto = document.querySelector('.ln-versiones-foto');
+  const versionArts = document.querySelectorAll('.ln-version');
+  if (versionesFoto && versionArts.length && 'IntersectionObserver' in window) {
+    const fotoAcero = {src:'/assets/img/lunar/landing/frontal.jpg', alt:'laOra Lunar, el mismo diseño en los tres acabados'};
+    const fotoEclipse = {src:'/assets/img/lunar/landing/eclipse-frontal.jpg', alt:'laOra Lunar Eclipse, acabado completamente en negro'};
+    const ioFoto = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const esEclipse = e.target.querySelector('.ln-version-nombre')?.textContent.trim() === 'Eclipse';
+        const foto = esEclipse ? fotoEclipse : fotoAcero;
+        if (versionesFoto.getAttribute('src') !== foto.src) {
+          versionesFoto.src = foto.src;
+          versionesFoto.alt = foto.alt;
+        }
+      }
+    }, {rootMargin: '-40% 0px -45% 0px'});
+    versionArts.forEach(a => ioFoto.observe(a));
+  }
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
