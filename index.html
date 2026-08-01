@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/laora.css?v=15">
+<link rel="stylesheet" href="/assets/css/laora.css?v=16">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=8">
 <style>
 /* ACTO I — La pregunta. Una pantalla, una idea, un solo elemento ámbar (el CTA). */
@@ -36,17 +36,9 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* logotipo, solo — sin menú: aún no hay a dónde ir */
-/* La cabecera vive ahora en assets/css/cabecera.css (.cb / .cb-home). */
-.brand{font-weight:800;font-size:25px;letter-spacing:-.02em;
-  display:inline-flex;align-items:center;line-height:1;color:#fff;text-decoration:none}
-.brand .o{width:.74em;height:.74em;border:.12em solid currentColor;border-radius:50%;
-  display:inline-flex;align-items:flex-start;justify-content:center;
-  margin:0 .015em;box-sizing:border-box}
-.brand .o::before{content:"";width:0;height:0;margin-top:.06em;
-  border-left:.17em solid transparent;border-right:.17em solid transparent;
-  border-top:.24em solid var(--ambar)}
-.brand sup{font-size:.42em;font-weight:600;margin-left:2px}
+/* La cabecera vive en assets/css/cabecera.css (.cb / .cb-home). El logo
+   del pie usa el `.brand` de assets/css/laora.css (idéntico al de la
+   cabecera) + `.clara` porque el pie de esta página es oscuro. */
 
 .hero{position:relative;height:100svh;min-height:600px;overflow:hidden}
 .hero .foto{position:absolute;inset:0;z-index:1;overflow:hidden;
@@ -477,8 +469,6 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
 footer .footer-links a{color:#9aa1ab}
 footer .footer-links a:hover{color:#fff}
 footer .fg-title{color:#8a92a1}
-
-footer .brand{color:#fff}
 </style>
 </head>
 <body>
@@ -768,7 +758,7 @@ footer .brand{color:#fff}
 
 <!-- PIE DEL GRUPO -->
 <footer>
-  <div class="brand">la<span class="o"></span>ra<sup>®</sup></div>
+  <div class="brand clara">la<span class="o"></span>ra<sup>®</sup></div>
   <div class="footer-links">
     <a href="/coleccion.html">La colección</a>
     <a href="/materiales.html">Materiales</a>
