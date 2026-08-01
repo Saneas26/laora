@@ -83,6 +83,22 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 .ln-hero-foto::after{content:"";position:absolute;inset:0;
   background:linear-gradient(100deg,rgba(9,9,9,.94) 0%,rgba(9,9,9,.74) 32%,
                                      rgba(9,9,9,.18) 56%,rgba(9,9,9,0) 74%)}
+
+/* Sombra de eclipse: cruza el acto 1 una vez, de izquierda a derecha,
+   como la sombra de la Tierra pasando sobre la Luna. */
+.ln-hero-eclipse{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,
+    rgba(9,9,9,0) 0%,rgba(9,9,9,0) 32%,
+    rgba(5,4,10,.85) 47%,rgba(2,1,6,.96) 50%,rgba(5,4,10,.85) 53%,
+    rgba(9,9,9,0) 68%,rgba(9,9,9,0) 100%);
+  mix-blend-mode:multiply;
+  transform:translateX(-135%);
+  animation:ln-eclipse-cruce 3.4s cubic-bezier(.61,.02,.4,1) .5s 1 both}
+@keyframes ln-eclipse-cruce{
+  0%{transform:translateX(-135%)}
+  100%{transform:translateX(135%)}
+}
+@media(prefers-reduced-motion:reduce){.ln-hero-eclipse{display:none}}
 .ln-hero-texto{position:relative;z-index:2;padding:120px 4vw 90px clamp(24px,6vw,96px);max-width:600px}
 .ln-hero-eyebrow{font-family:'Inter',sans-serif;font-size:20px;font-weight:600;
   letter-spacing:.14em;color:var(--ln-oro)}
@@ -139,6 +155,28 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   font-size:17px;color:var(--ln-blanco);padding:9px 0}
 .ln-pagas-lista li svg{width:20px;height:20px;flex:none;margin-top:3px;
   stroke:var(--ln-oro);fill:none;stroke-width:2}
+
+/* ============================================================
+   4.5 · LO QUE TE ENCUENTRAS — infografía honesta de alternativas
+   ============================================================ */
+.ln-encuentras{background:var(--ln-negro);padding:clamp(56px,7vw,96px) 5vw;text-align:center}
+.ln-encuentras h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
+  font-size:clamp(30px,3vw,40px);letter-spacing:.04em;margin-bottom:10px;color:var(--ln-blanco)}
+.ln-encuentras-sub{font-size:18px;color:var(--ln-gris);margin-bottom:44px}
+.ln-encuentras-precio{display:inline-flex;flex-direction:column;align-items:center;gap:8px;
+  padding:28px 52px;border:1px solid var(--ln-linea);margin:0 auto 52px}
+.ln-encuentras-precio-label{font-size:12.5px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ln-gris)}
+.ln-encuentras-precio-cifra{font-family:'Fraunces',Georgia,serif;font-weight:400;
+  font-size:clamp(44px,5vw,64px);color:var(--ln-oro)}
+.ln-encuentras-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+  max-width:980px;margin:0 auto;text-align:left}
+.ln-encuentras-item{padding:30px 28px;border:1px solid var(--ln-linea);background:var(--ln-panel)}
+.ln-encuentras-item svg{display:block;width:36px;height:36px;stroke:var(--ln-oro);fill:none;
+  stroke-width:1.4;margin-bottom:16px}
+.ln-encuentras-item b{display:block;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ln-blanco);margin-bottom:10px}
+.ln-encuentras-item span{display:block;font-size:15.5px;line-height:1.6;color:var(--ln-gris)}
 
 /* ============================================================
    5 · LAS VERSIONES
@@ -320,6 +358,8 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   .ln-eclipse{align-items:flex-end}
   .ln-eclipse-texto{padding:0 6vw 48px;max-width:none}
   .ln-eclipse-galeria-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .ln-encuentras-grid{grid-template-columns:1fr;max-width:480px}
+  .ln-encuentras-precio{padding:24px 32px}
 }
 @media(max-width:560px){
   .ln-pilares-grid{grid-template-columns:1fr 1fr}
@@ -353,12 +393,13 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
     <div class="ln-hero-foto">
       <img src="/assets/img/lunar/landing/hero.jpg" alt="laOra LO-01 Lunar sobre superficie lunar, con la Tierra al fondo" fetchpriority="high">
     </div>
+    <div class="ln-hero-eclipse" aria-hidden="true"></div>
     <div class="ln-hero-texto">
       <p class="ln-hero-eyebrow">LO-01</p>
       <h1 class="ln-hero-titular">Lunar<span class="punto">.</span></h1>
       <p class="ln-hero-sub">No todos podremos viajar a la Luna.<br>Pero sí recordar cada día<br>lo que el ser humano es capaz de conseguir.</p>
       <span class="ln-hero-raya"></span>
-      <a class="ln-boton ln-boton-oro" href="/reservar.html">Reservar ahora</a>
+      <a class="ln-boton ln-boton-oro" href="#configurador">Reservar ahora</a>
       <p class="ln-hero-nota">Unidades limitadas.</p>
     </div>
   </section>
@@ -418,6 +459,38 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Ajuste individual</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Garantía hasta 5 años</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- 4.5 · LO QUE TE ENCUENTRAS -->
+  <section class="ln-encuentras">
+    <h2 class="ln-reveal">Lo que te encuentras</h2>
+    <p class="ln-encuentras-sub ln-reveal">Antes de decidirte, esto es lo que hay ahí fuera.</p>
+    <div class="ln-encuentras-precio ln-reveal">
+      <span class="ln-encuentras-precio-label">Precio real del Omega Speedmaster</span>
+      <span class="ln-encuentras-precio-cifra">7.700 €</span>
+    </div>
+    <div class="ln-encuentras-grid ln-reveal">
+      <div class="ln-encuentras-item">
+        <svg viewBox="0 0 44 44"><rect x="6" y="15" width="16" height="14" rx="7"/><path d="M22 22h6" stroke-dasharray="2 3"/><rect x="24" y="15" width="14" height="14" rx="7" stroke-dasharray="4 3"/></svg>
+        <b>Homenajes</b>
+        <span>Eslabones huecos, brazaletes de mala calidad que pellizcan, pulsadores que dejan de funcionar al segundo día, falsas especificaciones.</span>
+      </div>
+      <div class="ln-encuentras-item">
+        <svg viewBox="0 0 44 44"><rect x="8" y="8" width="18" height="10" rx="1" transform="rotate(-35 17 13)"/><path d="M14 20l14 14M30 14l-6 6"/><path d="M8 36h16"/></svg>
+        <b>Subastas</b>
+        <span>Prometen precios bajos de inicio, y con el envío a tu casa terminas pagando más que en la joyería de tu barrio.</span>
+      </div>
+      <div class="ln-encuentras-item">
+        <svg viewBox="0 0 44 44"><path d="M12 16V11a10 10 0 0 1 20 0v5"/><path d="M8 16h28l-2 22H10z"/><path d="M22 22v8"/><circle cx="22" cy="33" r="1"/></svg>
+        <b>Tiendas indias y chinas online</b>
+        <span>Reacondicionados con materiales falsos, rayados, sin control de calidad y sin garantía.</span>
+      </div>
+      <div class="ln-encuentras-item">
+        <svg viewBox="0 0 44 44"><path d="M8 16a14 14 0 0 1 24-8m4 8V8h-8"/><path d="M36 28a14 14 0 0 1-24 8m-4-8v8h8"/></svg>
+        <b>Tiendas de segunda mano</b>
+        <span>A veces sí, a veces no 🤷🏻‍♂️</span>
+      </div>
     </div>
   </section>
 
