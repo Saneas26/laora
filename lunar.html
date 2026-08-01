@@ -174,6 +174,22 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 .ln-version-specs b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ln-oro);margin-bottom:4px}
 .ln-version-specs span{display:block;font-size:15.5px;color:var(--ln-blanco)}
+.ln-version-specs li.ln-spec-full{grid-column:1/-1}
+
+/* Botón "Saber más" bajo el movimiento: explica el mecacuarzo o el
+   mecánico de cada versión sin sobrecargar la ficha por defecto. */
+.ln-saber-wrap{border-top:0;padding-top:0;padding-bottom:22px}
+.ln-saber-boton{display:inline-flex;align-items:center;gap:8px;background:none;border:0;
+  padding:0;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;letter-spacing:.06em;
+  color:var(--ln-oro);cursor:pointer;transition:opacity .2s}
+.ln-saber-boton:hover{opacity:.8}
+.ln-saber-flecha{display:inline-flex;width:16px;height:16px;align-items:center;justify-content:center;
+  border:1px solid var(--ln-oro);border-radius:50%;font-size:12px;line-height:1;transition:transform .25s}
+.ln-saber-boton[aria-expanded="true"] .ln-saber-flecha{transform:rotate(45deg)}
+.ln-saber-panel{max-width:520px;font-size:15.5px;color:var(--ln-gris);
+  padding-top:16px;line-height:1.65}
+.ln-saber-panel p{margin-bottom:12px}
+.ln-saber-panel p:last-child{margin-bottom:0}
 
 /* ============================================================
    6 · LO QUE LLEVAN TODOS
@@ -356,11 +372,11 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
     <div class="ln-pagas-lista ln-reveal">
       <h2>LO QUE SÍ PAGAS.</h2>
       <ul>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L macizo</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L macizo, caja y brazalete</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Cristal de zafiro</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Super-LumiNova</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Movimiento japonés VK63</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Brazalete macizo</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Movimiento japonés VK63 o ST19 mecánico, revisados y calibrados en Madrid</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Proceso de calidad propio</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Ajuste individual</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Garantía hasta 5 años</li>
       </ul>
@@ -379,7 +395,14 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
           <p class="ln-version-precio">desde 259 €</p>
           <p class="ln-version-desc">Para quien quiere toda la estética del cronógrafo más famoso de la historia con la comodidad del cuarzo.</p>
           <ul class="ln-version-specs">
-            <li><b>Movimiento</b><span>Mecacuarzo japonés VK63</span></li>
+            <li class="ln-spec-full"><b>Movimiento</b><span>Mecacuarzo japonés VK63</span></li>
+            <li class="ln-spec-full ln-saber-wrap">
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecacuarzo VK63<span class="ln-saber-flecha">+</span></button>
+              <div class="ln-saber-panel" hidden>
+                <p>Un mecacuarzo es un movimiento híbrido: el cuarzo lleva la hora con precisión de segundos, y un módulo mecánico independiente activa el cronógrafo. Por eso la aguja de cronógrafo no da el salto seco de segundo en segundo típico del cuarzo, sino que se desliza, y al pulsar la puesta a cero vuelve de golpe con el mismo chasquido de un cronógrafo mecánico.</p>
+                <p>Esfera de 40&nbsp;mm. Pulsador superior: inicia y detiene el cronógrafo. Pulsador inferior: pone las agujas a cero. Contador de 60 minutos en la subesfera. Precisión de ±20 segundos al mes y sin darle cuerda: la pila dura unos 3 años de uso normal.</p>
+              </div>
+            </li>
             <li><b>Caja</b><span>Acero 316L</span></li>
             <li><b>Cristal</b><span>Zafiro</span></li>
             <li><b>Brazalete</b><span>Acero macizo</span></li>
@@ -388,9 +411,16 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
         <article class="ln-version ln-reveal">
           <h3 class="ln-version-nombre">Cenit</h3>
           <p class="ln-version-precio">desde 399 €</p>
-          <p class="ln-version-desc"><b>La versión definitiva. La que yo elegiría.</b><br>Cuerda manual, como el cronógrafo real que llegó a la Luna.</p>
+          <p class="ln-version-desc">Aquí toca ser sinceros, como siempre: <b>si fuera nuestro dinero, elegiríamos el mecacuarzo.</b> Es más preciso y no hay nada que cuidar. Pero para quien ama lo mecánico ofrecemos esta versión, cuerda manual, como el cronógrafo real que subió a la Luna.</p>
           <ul class="ln-version-specs">
-            <li><b>Movimiento</b><span>Seagull ST1901, cuerda manual</span></li>
+            <li class="ln-spec-full"><b>Movimiento</b><span>Seagull ST1901, cuerda manual</span></li>
+            <li class="ln-spec-full ln-saber-wrap">
+              <button class="ln-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el mecánico ST19<span class="ln-saber-flecha">+</span></button>
+              <div class="ln-saber-panel" hidden>
+                <p>El ST19 es un movimiento 100% mecánico de cuerda manual, con rueda de columnas —el mismo tipo de mecanismo que llevaba el cronógrafo original que llegó a la Luna— y 23 rubíes, latiendo a 21.600 alternancias/hora. Reserva de marcha de 50 horas (45 con el cronógrafo en marcha) y una precisión de -10/+40 segundos al día, propia de un mecánico de esta gama: no compite con el cuarzo, pero se siente distinto.</p>
+                <p>Esfera de 40&nbsp;mm. Pulsador superior: inicia y detiene el cronógrafo. Pulsador inferior: pone a cero el segundero y el contador de minutos. Segundero permanente y contador de 30 minutos en las subesferas.</p>
+              </div>
+            </li>
             <li><b>Caja</b><span>Acero 316L</span></li>
             <li><b>Cristal</b><span>Zafiro</span></li>
             <li><b>Brazalete</b><span>Acero macizo</span></li>
@@ -555,6 +585,15 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
+
+  document.querySelectorAll('[data-saber-toggle]').forEach(btn => {
+    const panel = btn.nextElementSibling;
+    btn.addEventListener('click', () => {
+      const abierto = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!abierto));
+      panel.hidden = abierto;
+    });
+  });
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => {
