@@ -329,6 +329,11 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   text-transform:uppercase;color:var(--ln-blanco)}
 .ln-servicio span{font-size:14.5px;color:var(--ln-gris)}
 .ln-servicios-nota{max-width:1180px;margin:22px auto 0;font-size:13px;color:var(--ln-gris)}
+.ln-servicios-nota + .ln-servicios-nota{margin-top:10px}
+.ln-servicios-boton{display:inline-flex;margin-left:8px;padding:4px 12px;
+  border:1px solid var(--ln-oro);color:var(--ln-oro);font-size:12px;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;transition:background-color .2s,color .2s}
+.ln-servicios-boton:hover{background:var(--ln-oro);color:var(--ln-negro)}
 
 .ln footer{background:#0d0d0d;border-top:0}
 
@@ -731,7 +736,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       </div>
       <div class="ln-servicio">
         <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/></svg>
-        <div><b>Hasta 5 años de garantía</b><span>Y servicio técnico<br>propio en Madrid</span></div>
+        <div><b>Hasta 5 años de garantía†</b><span>Y servicio técnico<br>propio en Madrid</span></div>
       </div>
       <div class="ln-servicio">
         <svg viewBox="0 0 44 44"><path d="M22 37s-14-8.6-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 10.4-14 19-14 19z"/></svg>
@@ -739,6 +744,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       </div>
     </div>
     <p class="ln-servicios-nota">* Incluye Canarias — los plazos de envío son distintos, consúltanos.</p>
+    <p class="ln-servicios-nota">† Hasta 5 años de garantía perteneciendo al Club laOra. <a class="ln-servicios-boton" href="/#club-laora">Conocer el Club laOra →</a></p>
   </section>
 
 </main>
