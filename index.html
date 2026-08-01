@@ -242,27 +242,27 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
   font-size:20px;line-height:1.5;max-width:26ch}
 /* Misma máscara de cristal que la tarjeta del acto 2 (`.a2-texto .tarjeta`):
    sin ella el texto cae sobre la foto del acto y no se lee. */
-.a3-specs{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;
+.a3-pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
   max-width:800px;margin-top:34px;
   background:rgba(11,12,15,.5);backdrop-filter:blur(16px) saturate(120%);
   -webkit-backdrop-filter:blur(16px) saturate(120%);
   border-radius:22px;padding:26px 28px}
-.spec3{min-width:0}
-.spec3 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px;
-  filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
-.spec3 .ico svg{width:100%;height:100%}
-.spec3 b{display:block;font-family:'Inter',sans-serif;font-weight:800;color:#fff;
-  font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px;
+.a3-paso{min-width:0}
+.a3-paso .num{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+  color:var(--ambar);font-size:26px;line-height:1;margin-bottom:12px;
   text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.spec3 p{font-size:12.5px;line-height:1.42;color:#fff;margin:0;
+.a3-paso p{font-size:13.5px;line-height:1.48;color:#fff;margin:0;
   text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.a3-cierre{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-style:italic;
+  color:#fff;font-size:clamp(19px,2vw,23px);line-height:1.5;max-width:46ch;margin-top:26px;
+  text-shadow:0 2px 10px rgba(0,0,0,.6)}
 
 @media(max-width:1180px){
   .a3-escena{flex-direction:column;align-items:stretch;padding:90px 0 60px;min-height:auto}
   .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
   .a3-escena img{width:100%;height:auto;object-fit:initial}
   .a3-texto{order:1;max-width:none}
-  .a3-specs{grid-template-columns:repeat(3,1fr);row-gap:34px}
+  .a3-pasos{grid-template-columns:repeat(2,1fr);row-gap:34px}
 }
 @media(max-width:760px){
   .a3-escena{padding:110px 0 0}
@@ -270,7 +270,7 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
   .a3-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
   .a3-raya{margin:20px 0}
   .a3-sub{font-size:15px;max-width:none}
-  .a3-specs{grid-template-columns:repeat(2,1fr);gap:24px 16px;margin-top:28px}
+  .a3-pasos{grid-template-columns:1fr;gap:24px;margin-top:28px}
 }
 
 /* ACTO IV — CIERRE: lo único que no negociamos */
@@ -285,7 +285,7 @@ h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
 .a4-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
 .a4-sub{font-family:'Inter',sans-serif;font-weight:500;color:#B8B8B8;
   font-size:20px;line-height:1.55;max-width:22ch}
-/* Misma máscara de cristal que el resto (`.a2-texto .tarjeta`, `.a3-specs`):
+/* Misma máscara de cristal que el resto (`.a2-texto .tarjeta`, `.a3-pasos`):
    sin ella el texto caía sobre la foto del acto y no se leía bien. */
 .a4-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px;max-width:640px;
   background:rgba(11,12,15,.5);backdrop-filter:blur(16px) saturate(120%);
@@ -604,33 +604,25 @@ footer .brand{color:#fff}
        <p class="a3-sub">Un reloj con nombre propio.<br>Sin apellido que pagar.</p>
       </div>
 
-      <div class="a3-specs">
-        <div class="spec3">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.7l8.7 8.7a2 2 0 0 1 0 2.8l-7.1 7.1a2 2 0 0 1-2.8 0L2.7 12.6V4a1.3 1.3 0 0 1 1.3-1.3h8.6z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span>
-          <b>Precio honesto</b>
-          <p>Lo que cuesta hacerlo bien. Ni un euro más.</p>
+      <div class="a3-pasos">
+        <div class="a3-paso">
+          <span class="num">01</span>
+          <p>Reservas.</p>
         </div>
-        <div class="spec3">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg></span>
-          <b>Madrid</b>
-          <p>Montado pieza a pieza en Madrid. Control de calidad a escasos kilómetros de ti.</p>
+        <div class="a3-paso">
+          <span class="num">02</span>
+          <p>Recibimos tu pedido y montamos.</p>
         </div>
-        <div class="spec3">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4.5"/></svg></span>
-          <b>Garantía real</b>
-          <p>Hasta 5 años de garantía con servicio técnico propio en España.</p>
+        <div class="a3-paso">
+          <span class="num">03</span>
+          <p>A través de la aplicación laOra, verificas en todo momento dónde está el proceso de montaje.</p>
         </div>
-        <div class="spec3">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></span>
-          <b>Series pequeñas</b>
-          <p>Producción limitada. Cuando se acaban, se acaban.</p>
-        </div>
-        <div class="spec3">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.5v2.6M12 18.9v2.6M4.2 7.5l2.25 1.3M17.55 15.2l2.25 1.3M2.5 12h2.6M18.9 12h2.6M4.2 16.5l2.25-1.3M17.55 8.8l2.25-1.3M7.5 4.2l1.3 2.25M15.2 17.55l1.3 2.25"/></svg></span>
-          <b>Sin peajes</b>
-          <p>Sin listas, sin favores. Solo un buen reloj.</p>
+        <div class="a3-paso">
+          <span class="num">04</span>
+          <p>Recibes el reloj en tu casa.</p>
         </div>
       </div>
+      <p class="a3-cierre">No estamos a 10.000&nbsp;km, no estamos a tres semanas de distancia.<br>Estamos aquí al lado.</p>
     </div>
   </div>
 </section>
