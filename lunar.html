@@ -192,6 +192,32 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 .ln-saber-panel p:last-child{margin-bottom:0}
 
 /* ============================================================
+   5.5 · ECLIPSE — banner a pantalla completa de la edición negra
+   ============================================================ */
+.ln-eclipse{position:relative;min-height:72vh;display:flex;align-items:center;
+  background:var(--ln-negro);overflow:hidden}
+.ln-eclipse-foto{position:absolute;inset:0}
+.ln-eclipse-foto img{width:100%;height:100%;object-fit:cover;object-position:75% center}
+.ln-eclipse-foto::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(9,9,9,.92) 0%,rgba(9,9,9,.68) 30%,
+                                     rgba(9,9,9,.14) 54%,rgba(9,9,9,0) 72%)}
+.ln-eclipse-texto{position:relative;z-index:2;padding:70px 4vw 70px clamp(24px,6vw,96px);max-width:560px}
+.ln-eclipse-texto h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
+  font-size:clamp(40px,5vw,58px);line-height:1.05;margin:8px 0 22px;color:var(--ln-blanco)}
+.ln-eclipse-texto h2 .punto{color:var(--ln-oro)}
+.ln-eclipse-texto p{font-size:18px;line-height:1.6;color:var(--ln-gris);max-width:440px;margin-bottom:16px}
+.ln-eclipse-texto p b{color:var(--ln-blanco);font-weight:600}
+.ln-eclipse-texto p:last-child{margin-bottom:0}
+
+.ln-eclipse-galeria{background:var(--ln-negro);padding:0 5vw clamp(64px,8vw,100px)}
+.ln-eclipse-galeria-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;
+  max-width:1180px;margin:0 auto}
+.ln-eclipse-foto-item{margin:0}
+.ln-eclipse-foto-item img{width:100%;display:block}
+.ln-eclipse-foto-item span{display:block;margin-top:14px;font-size:13px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ln-gris)}
+
+/* ============================================================
    6 · LO QUE LLEVAN TODOS
    ============================================================ */
 .ln-todos{background:var(--ln-negro);padding:0 5vw clamp(64px,8vw,100px);text-align:center}
@@ -281,6 +307,12 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   .ln-servicios-grid{grid-template-columns:1fr 1fr;gap:22px}
   .ln-versiones-cab h2::before,.ln-versiones-cab h2::after,
   .ln-todos h2::before,.ln-todos h2::after{width:28px}
+  .ln-eclipse{min-height:0;padding-top:8vh}
+  .ln-eclipse-foto img{object-position:38% center}
+  .ln-eclipse-foto::after{background:linear-gradient(180deg,rgba(9,9,9,.3) 0%,rgba(9,9,9,.86) 60%,rgba(9,9,9,.98) 100%)}
+  .ln-eclipse{align-items:flex-end}
+  .ln-eclipse-texto{padding:0 6vw 48px;max-width:none}
+  .ln-eclipse-galeria-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
 }
 @media(max-width:560px){
   .ln-pilares-grid{grid-template-columns:1fr 1fr}
@@ -367,13 +399,13 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   <!-- 4 · MOVIMIENTO · LO QUE SÍ PAGAS -->
   <section class="ln-pagas" id="pagas">
     <div class="ln-pagas-foto">
-      <img src="/assets/img/lunar/landing/movimiento.jpg" alt="Movimiento de cuerda manual del Lunar, con rueda de columnas vista por el fondo de zafiro" loading="lazy">
+      <img src="/assets/img/lunar/landing/movimiento.jpg" alt="Movimiento de cuerda manual del Lunar, con rueda de columnas vista por el fondo transparente" loading="lazy">
     </div>
     <div class="ln-pagas-lista ln-reveal">
       <h2>LO QUE SÍ PAGAS.</h2>
       <ul>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L macizo, caja y brazalete</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Cristal de zafiro</li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Cristal mineral abombado</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Super-LumiNova</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Movimiento japonés VK63 o ST19 mecánico, revisados y calibrados en Madrid</li>
         <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Proceso de calidad propio</li>
@@ -386,9 +418,9 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   <!-- 5 · LAS VERSIONES -->
   <section class="ln-versiones">
     <div class="ln-versiones-cab ln-reveal"><h2>Las versiones</h2></div>
-    <p class="ln-versiones-sub ln-reveal">Mismo diseño. Dos formas de vivir el cronógrafo.</p>
+    <p class="ln-versiones-sub ln-reveal">Mismo diseño. Tres formas de vivir el cronógrafo.</p>
     <div class="ln-versiones-cuerpo">
-      <img class="ln-versiones-foto ln-reveal" src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar, el mismo diseño en los dos acabados" loading="lazy">
+      <img class="ln-versiones-foto ln-reveal" src="/assets/img/lunar/landing/frontal.jpg" alt="laOra Lunar, el mismo diseño en los tres acabados" loading="lazy">
       <div class="ln-versiones-lista">
         <article class="ln-version ln-reveal">
           <h3 class="ln-version-nombre">Alba</h3>
@@ -404,7 +436,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
               </div>
             </li>
             <li><b>Caja</b><span>Acero 316L</span></li>
-            <li><b>Cristal</b><span>Zafiro</span></li>
+            <li><b>Cristal</b><span>Mineral abombado</span></li>
             <li><b>Brazalete</b><span>Acero macizo</span></li>
           </ul>
         </article>
@@ -422,11 +454,49 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
               </div>
             </li>
             <li><b>Caja</b><span>Acero 316L</span></li>
-            <li><b>Cristal</b><span>Zafiro</span></li>
+            <li><b>Cristal</b><span>Mineral abombado</span></li>
             <li><b>Brazalete</b><span>Acero macizo</span></li>
           </ul>
         </article>
+        <article class="ln-version ln-reveal">
+          <h3 class="ln-version-nombre">Eclipse</h3>
+          <p class="ln-version-precio">desde 289 €</p>
+          <p class="ln-version-desc">La versión de sigilo: caja, bisel y brazalete en negro, esfera negra y agujas con lumen que se leen en la oscuridad. Cristal mineral con perfil abombado, que evoca el carácter vintage de los cronógrafos clásicos.</p>
+          <ul class="ln-version-specs">
+            <li><b>Movimiento</b><span>Mecacuarzo japonés VK63</span></li>
+            <li><b>Caja</b><span>Acero 316L, caja y bisel en negro</span></li>
+            <li><b>Cristal</b><span>Mineral abombado</span></li>
+            <li><b>Brazalete</b><span>Acero, acabado negro</span></li>
+          </ul>
+        </article>
       </div>
+    </div>
+  </section>
+
+  <!-- 5.5 · ECLIPSE — banner de la edición negra -->
+  <section class="ln-eclipse">
+    <div class="ln-eclipse-foto">
+      <img src="/assets/img/lunar/landing/eclipse-hero.jpg" alt="laOra LO-01 Lunar Eclipse, edición completamente en negro" loading="lazy">
+    </div>
+    <div class="ln-eclipse-texto ln-reveal">
+      <p class="ln-hero-eyebrow">ECLIPSE</p>
+      <h2>Todo en sombra<span class="punto">.</span></h2>
+      <p>Caja, bisel y brazalete en acero con acabado negro. Esfera negra, agujas con Super-LumiNova que se leen incluso a oscuras.</p>
+      <p>Y un guiño al pasado: <b>cristal mineral con perfil abombado</b>, la misma cúpula que llevaban los cronógrafos clásicos antes del zafiro plano.</p>
+    </div>
+  </section>
+
+  <!-- 5.6 · ECLIPSE — galería de detalle -->
+  <section class="ln-eclipse-galeria">
+    <div class="ln-eclipse-galeria-grid ln-reveal">
+      <figure class="ln-eclipse-foto-item">
+        <img src="/assets/img/lunar/landing/eclipse-frontal.jpg" alt="laOra Lunar Eclipse, vista frontal, todo en negro" loading="lazy">
+        <span>Vista frontal</span>
+      </figure>
+      <figure class="ln-eclipse-foto-item">
+        <img src="/assets/img/lunar/landing/eclipse-macro.jpg" alt="laOra Lunar Eclipse, detalle del bisel taquimétrico y el brazalete en negro" loading="lazy">
+        <span>Bisel y brazalete</span>
+      </figure>
     </div>
   </section>
 
@@ -440,7 +510,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       </div>
       <div class="ln-icono">
         <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14"/><path d="M10 17h24"/></svg>
-        <span>Cristal de zafiro antirreflejos</span>
+        <span>Cristal mineral abombado, carácter vintage</span>
       </div>
       <div class="ln-icono">
         <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="8"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M10.7 10.7l3.5 3.5M29.8 29.8l3.5 3.5M33.3 10.7l-3.5 3.5M14.2 29.8l-3.5 3.5"/></svg>
@@ -481,8 +551,9 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
         <div class="ln-campo">
           <label for="cfg-movimiento">Movimiento</label>
           <select id="cfg-movimiento">
-            <option value="alba" data-base="259">VK63 (Cuarzo)</option>
-            <option value="cenit" data-base="399">Seagull ST1901 (Cuerda manual)</option>
+            <option value="alba" data-base="259" data-caja="Acero 316L" data-brazalete="Acero macizo">VK63 (Cuarzo)</option>
+            <option value="cenit" data-base="399" data-caja="Acero 316L" data-brazalete="Acero macizo">Seagull ST1901 (Cuerda manual)</option>
+            <option value="eclipse" data-base="289" data-caja="Acero 316L, acabado negro" data-brazalete="Acero, acabado negro">VK63 (Eclipse, negro)</option>
           </select>
         </div>
         <div class="ln-campo">
@@ -492,16 +563,28 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
           </select>
         </div>
         <div class="ln-campo">
-          <label for="cfg-brazalete">Brazalete</label>
-          <select id="cfg-brazalete">
-            <option value="acero" data-extra="0">Acero macizo</option>
+          <label>Caja</label>
+          <select disabled data-sigue-a="caja">
+            <option>Acero 316L</option>
+          </select>
+        </div>
+        <div class="ln-campo">
+          <label>Cristal</label>
+          <select disabled>
+            <option>Mineral abombado</option>
+          </select>
+        </div>
+        <div class="ln-campo">
+          <label>Brazalete</label>
+          <select disabled data-sigue-a="brazalete">
+            <option>Acero macizo</option>
           </select>
         </div>
         <div class="ln-campo">
           <label for="cfg-trasera">Trasera</label>
           <select id="cfg-trasera">
             <option value="acero" data-extra="0">Acero</option>
-            <option value="zafiro" data-extra="0">Vista con zafiro</option>
+            <option value="mineral" data-extra="0">Vista con cristal mineral</option>
           </select>
         </div>
         <p class="ln-config-precio" data-precio>259&nbsp;€</p>
@@ -573,15 +656,24 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
    El cobro real queda aparcado: los botones llevan a reservar.
    ============================================================ */
 (() => {
-  const selects = ['cfg-movimiento','cfg-esfera','cfg-brazalete','cfg-trasera']
+  const selects = ['cfg-movimiento','cfg-esfera','cfg-trasera']
     .map(id => document.getElementById(id));
   const precios = document.querySelectorAll('[data-precio]');
+
+  const movimiento = document.getElementById('cfg-movimiento');
+  const cajaMostrada = document.querySelector('[data-sigue-a="caja"] option');
+  const brazaleteMostrado = document.querySelector('[data-sigue-a="brazalete"] option');
 
   function calcula(){
     const opt = s => s.options[s.selectedIndex];
     let total = Number(opt(selects[0]).dataset.base || 0);
     for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
     for (const p of precios) p.innerHTML = total + '&nbsp;€';
+    /* Caja y brazalete no se eligen sueltos: vienen atados al
+       movimiento (el Eclipse lleva acabado negro, el resto acero). */
+    const elegido = opt(movimiento);
+    cajaMostrada.textContent = elegido.dataset.caja;
+    brazaleteMostrado.textContent = elegido.dataset.brazalete;
   }
   selects.forEach(s => s.addEventListener('change', calcula));
   calcula();
