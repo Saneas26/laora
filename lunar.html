@@ -84,19 +84,20 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   background:linear-gradient(100deg,rgba(9,9,9,.94) 0%,rgba(9,9,9,.74) 32%,
                                      rgba(9,9,9,.18) 56%,rgba(9,9,9,0) 74%)}
 
-/* Sombra de eclipse: cruza el acto 1 una vez, de izquierda a derecha,
-   como la sombra de la Tierra pasando sobre la Luna. */
-.ln-hero-eclipse{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(100deg,
-    rgba(9,9,9,0) 0%,rgba(9,9,9,0) 32%,
-    rgba(5,4,10,.85) 47%,rgba(2,1,6,.96) 50%,rgba(5,4,10,.85) 53%,
-    rgba(9,9,9,0) 68%,rgba(9,9,9,0) 100%);
+/* Sombra de eclipse: un disco de sombra —con el borde curvo de una esfera,
+   no una banda recta— cruza el acto 1 una sola vez, muy despacio, de
+   izquierda a derecha, como la sombra de la Tierra pasando sobre la Luna. */
+.ln-hero-eclipse{position:absolute;top:50%;left:0;z-index:1;pointer-events:none;
+  width:88vh;height:88vh;margin-top:-44vh;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,
+    rgba(2,1,6,.96) 0%,rgba(2,1,6,.9) 48%,
+    rgba(4,3,9,.55) 68%,rgba(9,9,9,0) 86%);
   mix-blend-mode:multiply;
-  transform:translateX(-135%);
-  animation:ln-eclipse-cruce 3.4s cubic-bezier(.61,.02,.4,1) .5s 1 both}
+  transform:translateX(-72vw);
+  animation:ln-eclipse-cruce 34s linear .6s 1 both}
 @keyframes ln-eclipse-cruce{
-  0%{transform:translateX(-135%)}
-  100%{transform:translateX(135%)}
+  0%{transform:translateX(-72vw)}
+  100%{transform:translateX(160vw)}
 }
 @media(prefers-reduced-motion:reduce){.ln-hero-eclipse{display:none}}
 .ln-hero-texto{position:relative;z-index:2;padding:120px 4vw 90px clamp(24px,6vw,96px);max-width:600px}
@@ -293,22 +294,23 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
 .ln-config-notas li{display:flex;align-items:center;gap:8px;padding:3px 0}
 .ln-config-notas svg{width:15px;height:15px;stroke:var(--ln-oro);fill:none;stroke-width:2}
 .ln-config-plano img{width:100%}
-.ln-config-panel{background:var(--ln-negro);padding:30px 28px;border:1px solid var(--ln-linea)}
+.ln-config-panel{background:var(--ln-negro);padding:22px 28px;border:1px solid var(--ln-linea)}
 .ln-config-panel h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
-  letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;color:var(--ln-blanco)}
-.ln-campo{margin-bottom:14px}
+  letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;color:var(--ln-blanco);
+  scroll-margin-top:84px}
+.ln-campo{margin-bottom:9px}
 .ln-campo label{display:block;font-size:12px;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ln-gris);margin-bottom:5px}
+  text-transform:uppercase;color:var(--ln-gris);margin-bottom:4px}
 .ln-campo select{width:100%;appearance:none;-webkit-appearance:none;
   font-family:'Inter',sans-serif;font-size:16px;color:var(--ln-blanco);
   background:var(--ln-negro) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F7F7F5' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
-  border:1px solid var(--ln-linea);padding:11px 40px 11px 14px;cursor:pointer}
+  border:1px solid var(--ln-linea);padding:8px 40px 8px 14px;cursor:pointer}
 .ln-campo select:focus{outline:none;border-color:var(--ln-oro)}
 .ln-config-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(40px,3.6vw,56px);color:var(--ln-oro);text-align:center;margin:18px 0 14px}
-.ln-config-panel .ln-boton{width:100%}
-.ln-config-mas{display:block;text-align:center;font-size:15px;color:var(--ln-gris);
-  margin-top:16px;transition:color .2s}
+  font-size:clamp(32px,3vw,44px);color:var(--ln-oro);text-align:center;margin:12px 0 10px}
+.ln-config-panel .ln-boton{width:100%;padding:13px 34px}
+.ln-config-mas{display:block;text-align:center;font-size:14px;color:var(--ln-gris);
+  margin-top:10px;transition:color .2s}
 .ln-config-mas:hover{color:var(--ln-oro)}
 
 /* ============================================================
@@ -660,7 +662,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   </section>
 
   <!-- 7 · CONFIGURADOR -->
-  <section class="ln-config" id="configurador">
+  <section class="ln-config">
     <div class="ln-config-caja">
       <div class="ln-config-modelo ln-reveal">
         <h2>LO-01 Lunar</h2>
@@ -675,7 +677,7 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
         <img id="cfg-plano-img" src="/assets/img/lunar/landing/plano.jpg" alt="Plano técnico del LO-01 Lunar: 40 mm de caja, 48 mm asa a asa, 20 mm de correa, 14,3 mm de grosor" loading="lazy">
       </div>
       <div class="ln-config-panel ln-reveal">
-        <h3>Configura el tuyo</h3>
+        <h3 id="configurador">Configura el tuyo</h3>
         <div class="ln-campo">
           <label for="cfg-movimiento">Movimiento</label>
           <select id="cfg-movimiento">
@@ -700,12 +702,6 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
           <label>Cristal</label>
           <select disabled data-sigue-a="cristal">
             <option>Mineral abombado</option>
-          </select>
-        </div>
-        <div class="ln-campo">
-          <label>Brazalete</label>
-          <select disabled data-sigue-a="brazalete">
-            <option>Acero macizo</option>
           </select>
         </div>
         <div class="ln-campo">
@@ -791,7 +787,6 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
   const movimiento = document.getElementById('cfg-movimiento');
   const cajaMostrada = document.querySelector('[data-sigue-a="caja"] option');
   const cristalMostrado = document.querySelector('[data-sigue-a="cristal"] option');
-  const brazaleteMostrado = document.querySelector('[data-sigue-a="brazalete"] option');
   const planoImg = document.getElementById('cfg-plano-img');
   const trasera = document.getElementById('cfg-trasera');
   const traseraMineral = trasera.querySelector('option[value="mineral"]');
@@ -814,11 +809,10 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
     for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
     const texto = total.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
     for (const p of precios) p.innerHTML = texto + '&nbsp;€';
-    /* Caja, cristal y brazalete no se eligen sueltos: vienen atados al
-       movimiento (el Eclipse lleva acabado negro y zafiro, el resto mineral). */
+    /* Caja y cristal no se eligen sueltos: vienen atados al movimiento
+       (el Eclipse lleva acabado negro y zafiro, el resto mineral). */
     cajaMostrada.textContent = elegido.dataset.caja;
     cristalMostrado.textContent = elegido.dataset.cristal;
-    brazaleteMostrado.textContent = elegido.dataset.brazalete;
     /* El plano de dimensiones también sigue al acabado: en el Eclipse
        enseñamos su propia foto en negro en vez del dibujo técnico genérico. */
     planoImg.src = elegido.dataset.plano;
