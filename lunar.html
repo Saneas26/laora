@@ -85,19 +85,20 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
                                      rgba(9,9,9,.18) 56%,rgba(9,9,9,0) 74%)}
 
 /* Sombra de eclipse: un disco de sombra —con el borde curvo de una esfera,
-   no una banda recta— cruza el acto 1 una sola vez, muy despacio, de
-   izquierda a derecha, como la sombra de la Tierra pasando sobre la Luna. */
+   no una banda recta— cruza el acto 1 una sola vez, despacio, de derecha a
+   izquierda, como la sombra de la Tierra pasando sobre la Luna. Con retraso
+   NEGATIVO arranca ya avanzada 1/3 de su recorrido nada más cargar la página. */
 .ln-hero-eclipse{position:absolute;top:50%;left:0;z-index:1;pointer-events:none;
   width:88vh;height:88vh;margin-top:-44vh;border-radius:50%;
   background:radial-gradient(circle at 50% 50%,
     rgba(2,1,6,.96) 0%,rgba(2,1,6,.9) 48%,
     rgba(4,3,9,.55) 68%,rgba(9,9,9,0) 86%);
   mix-blend-mode:multiply;
-  transform:translateX(-72vw);
-  animation:ln-eclipse-cruce 34s linear .6s 1 both}
+  transform:translateX(160vw);
+  animation:ln-eclipse-cruce 24s linear -8s 1 both}
 @keyframes ln-eclipse-cruce{
-  0%{transform:translateX(-72vw)}
-  100%{transform:translateX(160vw)}
+  0%{transform:translateX(160vw)}
+  100%{transform:translateX(-72vw)}
 }
 @media(prefers-reduced-motion:reduce){.ln-hero-eclipse{display:none}}
 .ln-hero-texto{position:relative;z-index:2;padding:120px 4vw 90px clamp(24px,6vw,96px);max-width:600px}
@@ -827,6 +828,32 @@ body.ln{background:var(--ln-negro);color:var(--ln-blanco);
       const abierto = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!abierto));
       panel.hidden = abierto;
+    });
+  });
+
+  /* El salto a "Configura el tuyo" se descolocaba: las fotos con
+     loading="lazy" que hay por encima (icono, movimiento, versiones,
+     eclipse...) siguen cargando y creciendo DESPUÉS del salto, y ese
+     desplazamiento empuja al configurador hacia abajo, dejando la
+     pantalla parada en la sección anterior. Mientras eso pase, repetimos
+     el salto — y lo cancelamos en cuanto el usuario mueve la rueda, toca
+     la pantalla o pulsa una tecla, para no secuestrarle el scroll. */
+  document.querySelectorAll('a[href="#configurador"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const destino = document.getElementById('configurador');
+      if (!destino) return;
+      e.preventDefault();
+      let activo = true;
+      const ir = () => destino.scrollIntoView({behavior:'smooth', block:'start'});
+      const cancelar = () => { activo = false; if (ro) ro.disconnect(); };
+      ['wheel','touchstart','keydown'].forEach(ev => window.addEventListener(ev, cancelar, {once:true, passive:true}));
+      ir();
+      let ro = null;
+      if ('ResizeObserver' in window) {
+        ro = new ResizeObserver(() => { if (activo) ir(); });
+        ro.observe(document.body);
+      }
+      setTimeout(cancelar, 2500);
     });
   });
 
