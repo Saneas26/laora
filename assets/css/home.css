@@ -135,14 +135,27 @@ section{scroll-margin-top:92px}
 .market-question{margin:0;max-width:560px;color:#fff;font-family:var(--serif);
   border-top:4px double rgba(255,255,255,.55);
   border-bottom:1px solid rgba(255,255,255,.22);padding:14px 0 16px}
-.mq-antetitulo{display:block;font-family:var(--sans);font-size:13px;font-weight:700;
-  text-transform:uppercase;letter-spacing:2.4px;color:var(--gold-soft);margin-bottom:11px}
+.mq-antetitulo{display:block;font-family:var(--sans);font-size:clamp(17px,1.6vw,21px);font-weight:700;
+  text-transform:uppercase;letter-spacing:2px;color:var(--gold-brand);margin-bottom:13px}
 .mq-titular{margin:0;font-size:19px;font-weight:700;line-height:1.22;letter-spacing:-.015em}
 .mq-titular strong{font-size:1.15em;font-weight:700;color:#fff}
-.mq-entradilla{margin:11px 0 0;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);
-  font-size:16px;font-style:italic;line-height:1.4;color:#ddd9d1}
-.market-grid{display:grid;grid-template-columns:repeat(5,1fr);margin-top:26px;border-top:1px solid rgba(255,255,255,.16)}
-.market-card{min-height:164px;position:relative;padding:23px 20px 20px;border-right:1px solid rgba(255,255,255,.16)}
+.mq-entradilla{margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:19px;font-style:italic;line-height:1.4;color:#ddd9d1}
+
+/* ---------- rótulo de entrada a las tarjetas ----------
+   En móvil, donde la fila se desplaza a un lado, hace de aviso de que hay
+   más tarjetas: de ahí la flecha larga. Va sobre fondo oscuro, así que el
+   oro de marca no necesita contorno (da 8:1). */
+.market-opciones{display:flex;align-items:center;gap:16px;margin:32px 0 0;
+  color:var(--gold-brand);font-family:var(--serif);font-size:clamp(22px,2.3vw,30px)}
+.mo-flecha{flex:1 1 auto;max-width:230px;height:2px;background:currentColor;position:relative}
+.mo-flecha::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);
+  border-left:11px solid currentColor;border-top:7px solid transparent;border-bottom:7px solid transparent}
+/* tarjetas enmarcadas por los cuatro lados y separadas, en vez de la
+   retícula de filetes compartidos del boceto */
+.market-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.market-card{min-height:164px;position:relative;padding:23px 20px 20px;
+  border:1px solid rgba(255,255,255,.32)}
 .market-card:last-child{border-right:0}
 .market-card-featured{background:rgba(255,255,255,.045)}
 /* Los cuerpos de estas tarjetas van al mayor tamaño que cabe en la caja de
@@ -303,11 +316,14 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
      su proporción y en sus 164 px. */
   .market-section{padding:34px 0 40px}
   .market-heading{padding:0 4.5vw}
-  .market-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
-    padding:0 4.5vw 10px;scrollbar-width:none}
+  /* aquí la sección ya no lleva margen lateral: se lo ponen sus hijos */
+  .market-opciones{padding:0 4.5vw}
+  /* scroll-padding: sin él, el encaje lleva la tarjeta al borde y se come
+     el margen lateral */
+  .market-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:0 4.5vw 10px;scroll-padding-inline:4.5vw;scrollbar-width:none}
   .market-grid::-webkit-scrollbar{display:none}
-  .market-card{min-width:290px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
-  .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
+  .market-card{min-width:290px;scroll-snap-align:start}
   .hero-media{background-position:58% center}
   .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.32)),
                            linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
@@ -338,11 +354,16 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-heading{grid-template-columns:1fr;gap:20px;padding:0 22px}
   .market-heading h2{font-size:36px}
   .mq-titular{font-size:18px}
-  .mq-entradilla{font-size:15px}
-  .market-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 22px 10px;margin-top:28px;scrollbar-width:none}
+  .mq-entradilla{font-size:18px}
+  /* el rótulo y su flecha, algo más contenidos en pantalla estrecha */
+  .market-opciones{margin-top:26px;padding:0 22px}
+  .mo-flecha{max-width:none}
+  .market-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:0 22px 10px;scroll-padding-inline:22px;margin-top:20px;scrollbar-width:none}
   .market-grid::-webkit-scrollbar{display:none}
-  .market-card{min-width:74vw;min-height:170px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
-  .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
+  /* una tarjeta por pantalla: ocupa el ancho visible menos un asomo de la
+     siguiente, que es lo que deja ver que la fila continúa */
+  .market-card{min-width:calc(100vw - 56px);min-height:170px;scroll-snap-align:start}
   .worlds-section,.value-section,.quote-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
   .section-heading h2{font-size:49px}
   .world-selector{grid-template-columns:1fr 1fr;margin-top:50px}
