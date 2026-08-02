@@ -202,6 +202,14 @@ body.c-eclipse-modo .c-producto-specs span:not(:first-child){border-color:#3a393
 .c-garantia{padding:120px 8vw;background:var(--cream)}
 .c-garantia-grid{display:grid;grid-template-columns:1fr 1fr;gap:10vw}
 .c-garantia h2{font-size:clamp(50px,5vw,75px);line-height:1;margin:0 0 30px}
+/* «Queremos que te lo» es más larga que las demás primeras líneas de
+   titular de la página y, a su tamaño normal, el navegador la partía
+   sola en dos antes del <br> que ya la separaba de «quedes por
+   gusto.» (tres líneas en vez de dos). Se fuerza una sola línea y se
+   reduce el tamaño solo de este titular para que quepa en cualquier
+   ancho de pantalla. */
+.c-garantia .c-garantia-titular{font-size:clamp(30px,3.6vw,58px)}
+.c-nowrap{white-space:nowrap}
 .c-garantia-grid>div>p{font-family:Georgia,serif;color:#423e37;font-size:18px;line-height:1.6;max-width:540px}
 .c-garantia-cards{display:grid;grid-template-columns:repeat(2,1fr);
   border-top:1px solid #bbb6aa;border-left:1px solid #bbb6aa}
@@ -248,7 +256,8 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
   .c-confianza div:nth-child(2){border:0}
   .c-intro{padding:90px 24px;display:block}
   .c-intro-inner,.c-buscador-top{grid-template-columns:1fr;gap:30px}
-  .c-intro h2,.c-buscador h2,.c-materiales-copy h2,.c-garantia h2{font-size:45px}
+  .c-intro h2,.c-buscador h2,.c-materiales-copy h2{font-size:45px}
+  .c-garantia .c-garantia-titular{font-size:clamp(26px,7.4vw,45px)}
   .c-intro-inner p{font-size:17px}
   .c-buscador{padding:80px 24px 35px}
   .c-filtros{margin-top:40px}
@@ -513,7 +522,7 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
     <p class="c-eyebrow-mudo">03 — Compra sin riesgo</p>
     <div class="c-garantia-grid">
       <div>
-        <h2 class="c-titular">Queremos que te lo<br><em>quedes por gusto.</em></h2>
+        <h2 class="c-titular c-garantia-titular"><span class="c-nowrap">Queremos que te lo</span><br><em>quedes por gusto.</em></h2>
         <p>Recíbelo, póntelo y decide con calma. Si no encaja contigo, tienes 14 días para devolverlo.</p>
         <a class="c-boton c-boton-oscuro" href="#coleccion">Elegir mi laOra <span>→</span></a>
       </div>
