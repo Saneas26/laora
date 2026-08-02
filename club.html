@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Club laOra: una app donde viven tu reloj, su factura, su garantía y las personas que responden por él. Comprar online con la tranquilidad de saber quién está al otro lado.">
+<meta property="og:title" content="Club laOra — Tu reloj, siempre contigo">
+<meta property="og:description" content="Tu colección, tus documentos, tus ventajas y todo el equipo de laOra en un mismo sitio.">
+<meta property="og:url" content="https://laora.es/club.html">
+<meta property="og:image" content="https://laora.es/assets/img/relojes/portada.jpg">
+<title>Club laOra — Tu reloj, siempre contigo</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Nunito Sans e Inter solo alimentan la cabecera y el logotipo. El resto
+     va en Georgia y Arial, como el boceto de diseño. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- OJO: subir el ?v= en CADA cambio de club.css. Cloudflare la sirve con
+     cache-control max-age=14400. -->
+<link rel="stylesheet" href="/assets/css/club.css?v=2">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=8">
+</head>
+<body>
+
+<!-- CABECERA REAL — la misma del resto del sitio, sin tocar cabecera.css -->
+<header class="cb">
+  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu" aria-label="Navegación principal">
+    <a href="/coleccion.html">colección</a>
+    <a href="/filosofia.html">filosofía</a>
+    <a href="/club.html" class="activo" aria-current="page">club</a>
+  </nav>
+  <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cb-cuenta" data-carrito-cuenta hidden>0</span>
+  </a>
+</header>
+
+<main>
+
+  <!-- 1 · HÉROE -->
+  <section class="hero" id="inicio">
+    <div class="hero-image" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow light">Club laOra · Tu reloj, siempre contigo</p>
+      <h1>
+        Comprar un reloj online.<br>
+        <em>Con toda la seguridad del mundo.</em>
+      </h1>
+      <p class="hero-lead">
+        Club laOra es una nueva forma de comprar, cuidar y disfrutar tu reloj.
+        Una app donde tienes tus piezas, documentos, ventajas y a todo el equipo
+        de laOra al otro lado.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-gold" href="#club">Conocer el Club <span aria-hidden="true">↓</span></a>
+        <a class="text-link light-link" href="#compra">Ver cómo funciona</a>
+      </div>
+    </div>
+
+    <div class="hero-device" aria-hidden="true">
+      <div class="phone phone-main">
+        <div class="phone-top"><span>9:41</span><i></i></div>
+        <div class="app-head">
+          <div><p>Buenos días</p><strong>Tu Club laOra</strong></div>
+          <span class="avatar">OM</span>
+        </div>
+        <div class="member-row"><span>MIEMBRO Nº 0026</span><span>480 PUNTOS</span></div>
+        <div class="watch-card">
+          <img src="/assets/img/relojes/col-07.jpg" alt="" loading="lazy">
+          <div class="watch-card-shade"></div>
+          <div class="watch-card-copy">
+            <span>Mi reloj · LO—02</span>
+            <strong>Bitácora</strong>
+            <small>Garantía activa hasta 2031</small>
+          </div>
+        </div>
+        <div class="quick-actions">
+          <div><b>▤</b><span>Factura</span></div>
+          <div><b>◇</b><span>Garantía</span></div>
+          <div><b>↗</b><span>Contactar</span></div>
+        </div>
+        <div class="app-notice">
+          <span>PRIORIDAD CLUB</span>
+          <p>Nueva reserva disponible</p>
+          <b>Ver antes que nadie →</b>
+        </div>
+        <div class="app-nav"><span class="selected">⌂</span><span>◫</span><span>◎</span><span>○</span></div>
+      </div>
+    </div>
+
+    <p class="hero-note"><span>Una app.</span> Todo lo que viene con tu laOra.</p>
+  </section>
+
+  <!-- 2 · FRANJA DE CONFIANZA -->
+  <section class="trust-strip" aria-label="Ventajas principales del Club laOra">
+    <article><span>01</span><div><strong>Compra acompañada</strong><p>Antes, durante y después.</p></div></article>
+    <article><span>02</span><div><strong>Todo documentado</strong><p>Factura, garantía y reloj.</p></div></article>
+    <article><span>03</span><div><strong>Prioridad real</strong><p>Reservas y lanzamientos.</p></div></article>
+    <article><span>04</span><div><strong>Contacto directo</strong><p>Tienda, taller y posventa.</p></div></article>
+  </section>
+
+  <!-- 3 · UNA NUEVA RELACIÓN -->
+  <section class="belief" id="club">
+    <p class="section-number">01 — Una nueva relación</p>
+    <div>
+      <h2>
+        Tu reloj no termina<br>
+        cuando abres la caja.<br>
+        <em>Ahí empieza todo.</em>
+      </h2>
+    </div>
+    <div class="belief-copy">
+      <p>La compra debería ser el principio de una relación, no el final de una transacción.</p>
+      <p>
+        Por eso hemos reunido en un mismo lugar lo que normalmente acaba disperso:
+        la pieza, su historia, sus documentos, su cuidado y las personas que responden por ella.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4 · TU COLECCIÓN -->
+  <section class="app-story">
+    <div class="app-visual" aria-hidden="true">
+      <div class="visual-glow"></div>
+
+      <div class="phone phone-main">
+        <div class="phone-top"><span>9:41</span><i></i></div>
+        <div class="app-head">
+          <div><p>Buenos días</p><strong>Tu Club laOra</strong></div>
+          <span class="avatar">OM</span>
+        </div>
+        <div class="member-row"><span>MIEMBRO Nº 0026</span><span>480 PUNTOS</span></div>
+        <div class="watch-card">
+          <img src="/assets/img/relojes/col-07.jpg" alt="" loading="lazy">
+          <div class="watch-card-shade"></div>
+          <div class="watch-card-copy">
+            <span>Mi reloj · LO—02</span>
+            <strong>Bitácora</strong>
+            <small>Garantía activa hasta 2031</small>
+          </div>
+        </div>
+        <div class="quick-actions">
+          <div><b>▤</b><span>Factura</span></div>
+          <div><b>◇</b><span>Garantía</span></div>
+          <div><b>↗</b><span>Contactar</span></div>
+        </div>
+        <div class="app-notice">
+          <span>PRIORIDAD CLUB</span>
+          <p>Nueva reserva disponible</p>
+          <b>Ver antes que nadie →</b>
+        </div>
+        <div class="app-nav"><span class="selected">⌂</span><span>◫</span><span>◎</span><span>○</span></div>
+      </div>
+
+      <div class="phone phone-secondary">
+        <div class="phone-top"><span>9:41</span><i></i></div>
+        <div class="mini-app-head">
+          <span class="cb-marca">la<span class="o"></span>ra<sup>®</sup></span><span>×</span>
+        </div>
+        <p class="phone-kicker">Documento digital</p>
+        <div class="warranty-seal">
+          <span>LO—02</span>
+          <strong>5</strong>
+          <small>AÑOS</small>
+        </div>
+        <h3>Garantía activa</h3>
+        <p class="phone-muted">Bitácora · Automático</p>
+        <div class="doc-lines"><i></i><i></i><i></i></div>
+        <div class="phone-safe">✓ Verificada por laOra</div>
+      </div>
+
+      <div class="floating-card floating-points">
+        <span>+120</span><p>Puntos por recomendación</p>
+      </div>
+      <div class="floating-card floating-care">
+        <b>RESPUESTA DIRECTA</b><p>Tu taller ya sabe qué reloj tienes.</p>
+      </div>
+    </div>
+
+    <div class="app-copy">
+      <p class="eyebrow light">Todo en su sitio</p>
+      <h2>
+        Tu colección.<br>
+        <em>Tu espacio laOra.</em>
+      </h2>
+      <p class="app-intro">
+        Abres la app y sabes exactamente qué tienes, qué cubre tu garantía,
+        dónde está tu factura y con quién hablar si necesitas algo.
+      </p>
+      <ul class="app-list">
+        <li><span>01</span><div><strong>Menos papeles</strong><p>La documentación importante no vuelve a perderse.</p></div></li>
+        <li><span>02</span><div><strong>Más control</strong><p>Reservas, pedidos y ventajas con información clara.</p></div></li>
+        <li><span>03</span><div><strong>Más cercanía</strong><p>El equipo que conoce tu reloj sigue contigo.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 · VENTAJAS -->
+  <section class="benefits" id="ventajas">
+    <div class="benefits-heading">
+      <p class="section-number">02 — Todo lo que te pertenece</p>
+      <h2>
+        Un club que sirve<br>
+        <em>para algo.</em>
+      </h2>
+      <p>
+        Sin tarjetas para guardar en la cartera. Sin ventajas imposibles de usar.
+        Lo importante, bien organizado y accesible desde el móvil.
+      </p>
+    </div>
+    <div class="benefit-grid">
+      <article>
+        <div class="benefit-top"><span>01</span><i aria-hidden="true">+</i></div>
+        <h3>Mis relojes</h3>
+        <p>Tu colección laOra, con cada referencia, número de serie y fecha de compra.</p>
+        <small>Tu colección</small>
+      </article>
+      <article>
+        <div class="benefit-top"><span>02</span><i aria-hidden="true">+</i></div>
+        <h3>Documentación</h3>
+        <p>Facturas y garantías ordenadas, disponibles cuando de verdad las necesitas.</p>
+        <small>Siempre contigo</small>
+      </article>
+      <article>
+        <div class="benefit-top"><span>03</span><i aria-hidden="true">+</i></div>
+        <h3>Prioridad</h3>
+        <p>Acceso anticipado a reservas, lanzamientos y unidades especialmente limitadas.</p>
+        <small>Antes que nadie</small>
+      </article>
+      <article>
+        <div class="benefit-top"><span>04</span><i aria-hidden="true">+</i></div>
+        <h3>Catálogo vivo</h3>
+        <p>Modelos, disponibilidad y novedades de laOra reunidos en un único lugar.</p>
+        <small>Todo laOra</small>
+      </article>
+      <article>
+        <div class="benefit-top"><span>05</span><i aria-hidden="true">+</i></div>
+        <h3>Biblioteca</h3>
+        <p>Guías de uso, cuidados, historias y contenido para disfrutar más de cada reloj.</p>
+        <small>Saber también suma</small>
+      </article>
+      <article>
+        <div class="benefit-top"><span>06</span><i aria-hidden="true">+</i></div>
+        <h3>Contacto directo</h3>
+        <p>Tienda, taller y servicio posventa. Sin formularios eternos ni intermediarios.</p>
+        <small>Personas, no tickets</small>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6 · LA NUEVA COMPRA -->
+  <section class="purchase" id="compra">
+    <div class="purchase-image">
+      <img src="/assets/img/filosofia/embalaje.png" alt="Presentación de un reloj laOra preparado para su entrega" loading="lazy">
+      <div class="purchase-image-shade"></div>
+      <span>Del primer clic a muchos años contigo.</span>
+    </div>
+    <div class="purchase-copy">
+      <p class="eyebrow light">La nueva compra online</p>
+      <h2>
+        Cinco pasos.<br>
+        <em>Cero saltos de fe.</em>
+      </h2>
+      <p class="purchase-intro">
+        Comprar a distancia no debería significar comprar solo. En laOra cada paso
+        deja información, contexto y una persona cerca si la necesitas.
+      </p>
+      <ol>
+        <li><span>01</span><div><strong>Descubres</strong><p>Consulta la colección, compara y pregunta antes de decidir.</p></div></li>
+        <li><span>02</span><div><strong>Reservas</strong><p>Si una pieza es limitada, tu turno queda claro y registrado.</p></div></li>
+        <li><span>03</span><div><strong>Confirmamos</strong><p>Te acompañamos en la compra y verificamos cada detalle.</p></div></li>
+        <li><span>04</span><div><strong>Recibes</strong><p>Tu reloj llega revisado, preparado y con seguimiento.</p></div></li>
+        <li><span>05</span><div><strong>Seguimos</strong><p>Reloj, factura, garantía y posventa viven desde entonces en tu app.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 7 · SEGURIDAD -->
+  <section class="security">
+    <div class="security-heading">
+      <p class="section-number">03 — Compra sin incertidumbre</p>
+      <h2>
+        Seguridad no es un sello.<br>
+        <em>Es saber qué pasa en cada momento.</em>
+      </h2>
+    </div>
+    <div class="security-grid">
+      <article><span aria-hidden="true">✓</span><strong>La pieza, identificada</strong><p>Modelo, referencia y documentación vinculados a tu perfil.</p></article>
+      <article><span aria-hidden="true">✓</span><strong>Seguimiento claro</strong><p>Información de tu reserva, compra y entrega en un mismo lugar.</p></article>
+      <article><span aria-hidden="true">✓</span><strong>Garantía local</strong><p>Un equipo en España que sabe qué compraste y cuándo.</p></article>
+      <article><span aria-hidden="true">✓</span><strong>Posventa directa</strong><p>Tu consulta llega a tienda, taller o servicio según lo que necesites.</p></article>
+    </div>
+    <div class="security-statement">
+      <span>Compra online</span>
+      <strong>La comodidad de hacerlo desde casa.</strong>
+      <strong>La tranquilidad de saber quién responde.</strong>
+    </div>
+  </section>
+
+  <!-- 8 · EMBAJADORES -->
+  <section class="ambassador" id="embajador">
+    <div class="ambassador-copy">
+      <p class="eyebrow dark">Club de embajadores</p>
+      <h2>
+        Si hablas de laOra,<br>
+        <em>laOra habla de ti.</em>
+      </h2>
+      <p>
+        Cada recomendación que acaba en un nuevo miembro suma puntos a tu cuenta.
+        Esos puntos se convierten en descuentos para tus próximas compras.
+      </p>
+      <div class="ambassador-flow">
+        <div><span>01</span><strong>Compartes</strong><small>Tu invitación personal</small></div>
+        <i aria-hidden="true">→</i>
+        <div><span>02</span><strong>Se une</strong><small>Tu referido compra</small></div>
+        <i aria-hidden="true">→</i>
+        <div><span>03</span><strong>Ganas</strong><small>Puntos y descuentos</small></div>
+      </div>
+    </div>
+    <div class="points-card">
+      <div class="points-head">
+        <span class="cb-marca">la<span class="o"></span>ra<sup>®</sup></span><span>EMBAJADOR</span>
+      </div>
+      <p>Saldo disponible</p>
+      <strong>480</strong>
+      <small>PUNTOS LAORA</small>
+      <div class="points-progress"><i></i></div>
+      <div class="points-foot"><span>Próxima ventaja</span><b>500 puntos</b></div>
+      <p class="points-note">Tu confianza tiene valor.<br>Y queremos devolvértelo.</p>
+    </div>
+  </section>
+
+  <!-- 9 · MANIFIESTO -->
+  <section class="manifesto">
+    <p>El nuevo lujo</p>
+    <blockquote>
+      Tener toda la información.<br>
+      Y no tener que perseguir a nadie.
+    </blockquote>
+    <span>Eso también es comprar un buen reloj.</span>
+  </section>
+
+  <!-- 10 · CIERRE -->
+  <section class="final-cta">
+    <p class="eyebrow light">Club laOra · Próximamente</p>
+    <h2>
+      Tu reloj en la muñeca.<br>
+      <em>Todo lo demás, en tu app.</em>
+    </h2>
+    <div class="final-actions">
+      <a class="button button-gold" href="/">Entrar en el universo laOra <span aria-hidden="true">→</span></a>
+      <a class="text-link light-link" href="/coleccion.html">Descubrir la colección</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- 11 · PIE -->
+<footer>
+  <a class="footer-brand" href="#inicio" aria-label="laOra, volver arriba">
+    <span class="cb-marca">la<span class="o"></span>ra<sup>®</sup></span>
+  </a>
+  <p>Relojes con diseño propio.<br>Ahora, con una relación propia.</p>
+  <div class="footer-links">
+    <a href="#ventajas">Ventajas</a>
+    <a href="#compra">Compra segura</a>
+    <a href="#embajador">Embajadores</a>
+    <a href="/coleccion.html">Colección</a>
+  </div>
+  <small>© 2026 laOra® · Todos los derechos reservados</small>
+</footer>
+
+<!-- cabecera.js deja la cabecera fija al hacer scroll; carrito.js pinta
+     el contador de la bolsa -->
+<script src="/assets/js/cabecera.js"></script>
+<script src="/assets/js/carrito.js?v=17"></script>
+<script src="/assets/js/telemetria.js" defer></script>
+</body>
+</html>
