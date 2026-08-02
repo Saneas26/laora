@@ -231,13 +231,28 @@ section{scroll-margin-top:92px}
 .workshop li span{color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);
   paint-order:stroke fill;display:inline-block;width:54px}
 
-/* ---------- testimonio ---------- */
-.quote-section{text-align:center;padding:140px 12vw;background:var(--paper)}
+/* ---------- testimonios ----------
+   Eran una sola cita gigante a 63 px y ahora son cuatro. Enmarcadas por los
+   cuatro lados y separadas, igual que las tarjetas del acto 2, para que la
+   página no invente un lenguaje nuevo a mitad de camino. */
+.quote-section{padding:120px 4.5vw;background:var(--paper)}
+.quote-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+/* columna, y el autor empujado al fondo con `margin-top:auto`: las citas
+   tienen longitudes muy distintas (de 46 a 130 caracteres) y sin esto las
+   firmas quedaban a cuatro alturas diferentes. */
+.quote-card{display:flex;flex-direction:column;margin:0;padding:26px 24px 24px;
+  border:1px solid rgba(11,11,10,.28);background:rgba(255,255,255,.5)}
+/* 13 px es el suelo de la página para texto que hay que leer; en la columna
+   estrecha parte en dos líneas y no pasa nada: es un marbete, no una cita */
+.quote-card .eyebrow{margin:0 0 20px;font-size:13px;letter-spacing:1.4px}
 .stars{color:var(--gold-brand);-webkit-text-stroke:1px var(--gold-stroke);paint-order:stroke fill;
-  font-size:26px;letter-spacing:7px;line-height:1;margin:0 0 34px}
-.quote-section blockquote{max-width:980px;margin:0 auto;font-family:var(--serif);
-  font-size:clamp(34px,4.2vw,63px);line-height:1.14;letter-spacing:-.035em}
-.quote-author{margin-top:34px;text-transform:uppercase;letter-spacing:1.3px;font-size:13px;font-weight:700}
+  font-size:26px;letter-spacing:7px;line-height:1;margin:0 0 22px}
+/* 29 px es el tope: es el mayor cuerpo que NO le añade una línea a ninguna
+   de las cuatro citas (a 30 la de Javier M. se va a siete). Y escala con el
+   ancho, porque a 981 px la columna se queda en 213 px y ahí 29 desbordaría. */
+.quote-card blockquote{margin:0 0 26px;font-family:var(--serif);
+  font-size:clamp(21px,2.02vw,29px);line-height:1.24;letter-spacing:-.02em}
+.quote-author{margin:auto 0 0;text-transform:uppercase;letter-spacing:1.3px;font-size:14px;font-weight:700}
 
 /* ---------- compra sin riesgo ---------- */
 .assurance-section{display:grid;grid-template-columns:1fr 1fr;gap:8vw;padding:140px 7vw;background:#0e0e0d;color:#fff}
@@ -313,6 +328,14 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .workshop-image{min-height:580px}
 }
 
+/* Las reseñas se parten en dos filas antes que el resto de la página: por
+   debajo de 1180 px la columna baja de 260 y la cita larga se convierte en
+   una tira de nueve líneas. A dos por fila recuperan ancho, y con él cuerpo. */
+@media(max-width:1180px){
+  .quote-grid{grid-template-columns:1fr 1fr}
+  .quote-card blockquote{font-size:clamp(24px,2.6vw,31px)}
+}
+
 @media(max-width:660px){
   .hero{min-height:760px}
   /* En móvil el boceto apilaba tres capas de oscurecido (opacidad .76 sobre
@@ -350,7 +373,17 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-card p{font-size:24px;line-height:1.35}
   .market-number{font-size:16px}
   .market-price{font-size:40px}
-  .worlds-section,.quote-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
+  .worlds-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
+  /* una reseña por pantalla, con el mismo carrusel del acto 2: apiladas eran
+     cuatro pantallazos seguidos de lo mismo. El padding lateral se lo queda
+     la fila, no la sección, para que las tarjetas puedan salir por el borde. */
+  .quote-section{padding:86px 0}
+  .quote-grid{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;
+    scroll-snap-type:x mandatory;padding:0 22px 10px;scroll-padding-inline:22px;
+    scrollbar-width:none}
+  .quote-grid::-webkit-scrollbar{display:none}
+  .quote-card{min-width:calc(100vw - 56px);scroll-snap-align:start}
+  .quote-card blockquote{font-size:28px}
   .section-heading h2{font-size:49px}
   /* la flecha solo aquí: es donde el contenido va apilado y hace falta
      decir «sigue por abajo» */
@@ -365,7 +398,6 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .world-copy{padding:58px 24px}
   .workshop-copy{padding:80px 22px}
   .workshop-image{min-height:470px}
-  .quote-section blockquote{font-size:32px}
   .assurance-list{grid-template-columns:1fr;margin-top:30px}
   .assurance-list>div,.assurance-list>div:nth-child(even){border-right:0}
   .faq-section{gap:55px}
