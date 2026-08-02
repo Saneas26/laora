@@ -19,9 +19,9 @@
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=8">
 <style>
 /* ============================================================
-   LA COLECCIÓN — estructura del boceto de Óscar (coleccion.png):
-   1. hero partido (foto | texto)   2. banda clara de filosofía
-   3. «elige tu laOra»: los ocho   4. cierre con el taller
+   LA COLECCIÓN:
+   1. hero partido (foto | texto)   2. cierre con el taller
+   3. «elige tu laOra»: los ocho
    ============================================================ */
 :root{ --negro:#090909; --ambar:#D4A94B; --oro:#D4A94B; --hueso:#F7F7F5; --gris:#B8B8B8; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -65,30 +65,17 @@ a{color:inherit;text-decoration:none}
 .c-hero-rasgos li:nth-child(n+3){border-bottom:none}
 .c-hero .boton{margin-top:30px;align-self:flex-start}
 
-/* ---------- 2. filosofía (banda clara) ---------- */
-.filosofia{background:var(--hueso);color:#1a1a1a;padding:96px 6vw 104px;text-align:center}
-.filosofia .c-eyebrow{color:#D4A94B}
-.filosofia h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,3.4vw,44px);line-height:1.15;margin-top:14px;color:#111;font-weight:400}
-.pilares{display:grid;grid-template-columns:repeat(4,1fr);gap:34px;margin-top:56px;
-  max-width:1240px;margin-left:auto;margin-right:auto;text-align:left}
-.pilar-foto{aspect-ratio:16/11;overflow:hidden;border-radius:6px;background:#ddd}
-.pilar-foto img{width:100%;height:100%;object-fit:cover;
-  transition:transform .6s cubic-bezier(.2,.7,.3,1)}
-.pilar:hover .pilar-foto img{transform:scale(1.05)}
-.pilar h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-size:20px;
-  margin-top:20px;color:#111}
-.pilar p{font-size:14.5px;color:#4a4a4a;margin-top:10px;line-height:1.6}
-
 /* ---------- 3. elige tu laOra ---------- */
-.elige{padding:100px 4vw 96px;text-align:center;background:#080808}
-.elige h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,3.4vw,44px);margin-top:14px;color:#fff;font-weight:400}
+.elige{padding:100px 4vw 96px;text-align:center;background:var(--hueso)}
+.elige h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(34px,3.4vw,44px);margin-top:14px;color:#111;font-weight:400}
 .fila{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin:58px auto 0;
   max-width:1500px;align-items:end}
 .uno{display:block;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .uno-nombre,.uno-ref,.uno-precio{transition:color .3s ease}
 .uno:hover{transform:translateY(-8px)}
 .uno:focus-visible{outline:2px solid var(--ambar);outline-offset:6px}
-.uno-foto{aspect-ratio:3/4;overflow:hidden;background:transparent}
+.uno-foto{aspect-ratio:3/4;overflow:hidden;background:#fff;border-radius:12px;
+  box-shadow:0 1px 3px rgba(0,0,0,.07),0 10px 24px rgba(0,0,0,.07);padding:16px}
 /* Los renders traen su propio fondo casi negro, que no es exactamente el de
    la sección y dibuja un rectángulo. La máscara funde los bordes para que el
    reloj quede recortado sobre el negro, como en el boceto. */
@@ -102,8 +89,8 @@ a{color:inherit;text-decoration:none}
   margin-top:14px;line-height:1.2}
 .uno:hover .uno-nombre{color:var(--ambar)}
 .uno-ref{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.12em;
-  color:var(--gris);margin-top:5px;display:block}
-.uno-precio{font-size:12.5px;color:#8f8a82;margin-top:6px}
+  color:#767676;margin-top:5px;display:block}
+.uno-precio{font-size:12.5px;color:#6b6259;margin-top:6px}
 .elige .boton{margin-top:56px}
 
 /* ---------- 4. cierre ---------- */
@@ -126,22 +113,19 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
 .c-reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .c-reveal{opacity:1;transform:none;transition:none}
-  .uno,.pilar-foto img{transition:none}
+  .uno{transition:none}
 }
 
 @media(max-width:1100px){
   .c-hero{grid-template-columns:1fr;min-height:auto}
   .c-hero-foto{aspect-ratio:4/3}
   .c-hero-texto{padding:64px 7vw 74px;max-width:none}
-  .pilares{grid-template-columns:repeat(2,1fr);gap:30px}
   /* ocho en fila no caben: se convierte en carrusel horizontal */
   .fila{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:18px;
     padding-bottom:14px;-webkit-overflow-scrolling:touch}
   .uno{flex:0 0 168px;scroll-snap-align:center}
 }
 @media(max-width:620px){
-  .filosofia{padding:72px 22px 78px}
-  .pilares{grid-template-columns:1fr;gap:34px;margin-top:42px}
   .elige{padding:76px 22px 76px}
   .cierre-texto{padding:70px 22px}
   .uno{flex-basis:146px}
@@ -202,31 +186,13 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
     </div>
   </section>
 
-  <!-- 2 · por qué cuesta lo que cuesta -->
-  <section class="filosofia" id="filosofia">
-    <p class="c-eyebrow">Nuestra filosofía</p>
-    <h2 class="c-serif">todo lo que importa, dentro del reloj.</h2>
-    <div class="pilares">
-        <div class="pilar c-reveal">
-          <div class="pilar-foto"><img src="/assets/img/acto3-web.jpg" alt="Peajes de marca que laOra no cobra" loading="lazy"></div>
-          <h3>sin peajes de marca</h3>
-          <p>No pagas campañas millonarias, ni embajadores, ni boutiques. Eliminamos lo que no aporta valor al reloj.</p>
-        </div>
-        <div class="pilar c-reveal">
-          <div class="pilar-foto"><img src="/assets/img/acto4-web.jpg" alt="Acero 316L y cristal de zafiro de un reloj laOra" loading="lazy"></div>
-          <h3>materiales reales</h3>
-          <p>Acero 316L, cristal de zafiro, lumen de larga duración y movimientos contrastados. Solo componentes que garantizan calidad y duración.</p>
-        </div>
-        <div class="pilar c-reveal">
-          <div class="pilar-foto"><img src="/assets/img/taller-madrid.jpg" alt="Montaje y control de un reloj laOra en el taller de Madrid" loading="lazy"></div>
-          <h3>montado en madrid</h3>
-          <p>Cada pieza se ensambla y revisa una a una en nuestro taller. Controlamos cada detalle antes de que llegue a ti.</p>
-        </div>
-        <div class="pilar c-reveal">
-          <div class="pilar-foto"><img src="/assets/img/compra-directa.jpg" alt="Reloj laOra recién abierto en su caja kraft" loading="lazy"></div>
-          <h3>compra directa</h3>
-          <p>Del taller a tu muñeca. Sin intermediarios, para ofrecerte el mejor reloj al mejor precio.</p>
-        </div>
+  <!-- 2 · cierre -->
+  <section class="cierre">
+    <picture><img src="/assets/img/taller-madrid.jpg" alt="Relojero de laOra trabajando en el taller de Madrid" loading="lazy"></picture>
+    <div class="cierre-texto c-reveal">
+      <h2 class="c-serif">no fabricamos relojes para impresionar.<br>
+      los fabricamos para que disfrutes llevándolos.
+      <span class="bien">bienvenido a laOra.</span></h2>
     </div>
   </section>
 
@@ -283,16 +249,6 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
           <span class="uno-ref">LO-08</span>
           <span class="uno-precio">desde 399,90 €</span>
         </a>
-    </div>
-  </section>
-
-  <!-- 4 · cierre -->
-  <section class="cierre">
-    <picture><img src="/assets/img/taller-madrid.jpg" alt="Relojero de laOra trabajando en el taller de Madrid" loading="lazy"></picture>
-    <div class="cierre-texto c-reveal">
-      <h2 class="c-serif">no fabricamos relojes para impresionar.<br>
-      los fabricamos para que disfrutes llevándolos.
-      <span class="bien">bienvenido a laOra.</span></h2>
     </div>
   </section>
 
