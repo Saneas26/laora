@@ -114,7 +114,6 @@ section{scroll-margin-top:92px}
 .button:hover{transform:translateY(-2px)}
 .button-gold{background:var(--gold);color:var(--ink)}
 .button-gold:hover{background:#e0bc61}
-.button-dark{background:var(--ink);color:#fff}
 .text-link{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;width:fit-content;
   padding-bottom:8px;border-bottom:1px solid currentColor;text-transform:uppercase;letter-spacing:1.1px;
   font-size:14px;font-weight:700}
@@ -220,35 +219,15 @@ section{scroll-margin-top:92px}
 .world-copy>strong{margin:24px 0 38px;font-family:var(--serif);font-size:20px;font-weight:400}
 
 /* ---------- modelo destacado ---------- */
-.flagship{display:grid;grid-template-columns:.85fr 1.15fr;min-height:760px;background:var(--paper)}
-.flagship-copy{padding:10vw 7vw;display:flex;flex-direction:column;justify-content:center}
-.model-code{margin:0;text-transform:uppercase;letter-spacing:1.3px;color:var(--muted);font-size:13px;font-weight:700}
-.flagship h2{font-size:clamp(70px,7vw,112px);line-height:.9;margin:18px 0 28px}
-.flagship-claim{max-width:520px;font-family:var(--serif);font-size:25px;line-height:1.25;margin:0 0 24px}
-.flagship-body{max-width:510px;font-family:var(--serif);font-size:17px;line-height:1.65;color:var(--muted)}
-.spec-row{display:flex;margin-top:34px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  text-transform:uppercase;font-size:13px;font-weight:700;letter-spacing:1px}
-.spec-row span{padding:0 22px;border-right:1px solid var(--line)}
-.spec-row span:first-child{padding-left:0}
-.spec-row span:last-child{border:0}
-/* wrap: si el precio y el botón no caben juntos en la columna, el botón baja
-   entero en vez de estrujarse */
-.price-row{display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:26px 24px;margin-top:35px}
-.price-row small,.price-row strong{display:block}
-.price-row strong{white-space:nowrap}
-.price-row small{text-transform:uppercase;letter-spacing:1px;font-size:13px;font-weight:700;color:var(--muted)}
-.price-row strong{margin-top:4px;font-family:var(--serif);font-size:30px;font-weight:400}
-.flagship-image{position:relative;overflow:hidden;min-height:650px}
-.flagship-image img{height:100%;object-fit:cover}
-.flagship-image>span{position:absolute;right:30px;top:28px;color:#fff;font-family:var(--serif);font-size:22px;
-  text-shadow:0 1px 5px rgba(0,0,0,.95),0 0 14px rgba(0,0,0,.7)}
 
 /* ---------- la diferencia ocurre antes del envío ---------- */
 .value-section{background:var(--ink);color:#fff;padding:140px 7vw}
 .value-intro{display:grid;grid-template-columns:1fr 2.25fr 1fr;gap:5vw;align-items:end}
 .value-intro .eyebrow{align-self:start}
 .value-intro h2{font-size:clamp(50px,5.3vw,82px);line-height:.98;margin:0}
-.value-intro>p:last-child{font-family:var(--serif);color:#aaa79e;line-height:1.65;font-size:16px}
+/* blanco puro, no el gris del boceto, y con cuerpo: es texto para leer,
+   no un pie de foto */
+.value-intro>p:last-child{font-family:var(--serif);color:#fff;line-height:1.6;font-size:20px}
 .value-grid{margin-top:100px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.18)}
 .value-grid article{padding:30px 25px 0 0;border-right:1px solid rgba(255,255,255,.18);min-height:230px}
 .value-grid article:not(:first-child){padding-left:25px}
@@ -347,9 +326,8 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.32)),
                            linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
   .section-heading,.value-intro,.faq-section{grid-template-columns:1fr;gap:38px}
-  .world-result,.flagship,.workshop,.assurance-section{grid-template-columns:1fr}
+  .world-result,.workshop,.assurance-section{grid-template-columns:1fr}
   .world-image-wrap{min-height:570px}
-  .flagship-image{order:-1}
   .value-intro .eyebrow{margin-bottom:0}
   .value-grid{grid-template-columns:1fr 1fr}
   .value-grid article:nth-child(2){border-right:0}
@@ -407,11 +385,8 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .world-result{min-height:auto}
   .world-image-wrap{min-height:390px}
   .world-copy{padding:58px 24px}
-  .flagship-copy,.workshop-copy{padding:80px 22px}
-  .flagship-image,.workshop-image{min-height:470px}
-  .flagship h2{font-size:70px}
-  .price-row{align-items:stretch;flex-direction:column}
-  .spec-row{flex-wrap:wrap;gap:12px 0}
+  .workshop-copy{padding:80px 22px}
+  .workshop-image{min-height:470px}
   .value-grid{grid-template-columns:1fr;margin-top:60px}
   .value-grid article,.value-grid article:nth-child(2){border-right:0;padding:25px 0;min-height:180px}
   .value-grid article:not(:first-child){padding-left:0}
