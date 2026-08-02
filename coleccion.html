@@ -105,6 +105,11 @@ button{font:inherit}
 .c-filtros button{border:1px solid #cbc5b9;background:transparent;padding:11px 20px;
   border-radius:30px;text-transform:uppercase;font-size:10px;letter-spacing:1px;cursor:pointer}
 .c-filtros button.activo{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* Colección Eclipse: distinto de los demás filtros a propósito (fondo
+   negro, letras doradas) siempre, esté o no activo — es una colección,
+   no una categoría más. */
+.c-filtros button.eclipse{background:var(--ink);color:var(--gold);border-color:var(--ink)}
+.c-filtros button.eclipse.activo{box-shadow:0 0 0 2px var(--gold) inset}
 
 /* ---------- 5. los ocho ---------- */
 .c-grid{padding:0 8vw 140px;background:var(--cream);display:grid;grid-template-columns:repeat(2,1fr);gap:76px 28px}
@@ -115,7 +120,8 @@ button{font:inherit}
 .c-producto-badge{position:absolute;top:20px;left:20px;background:var(--gold);
   font-size:9px;font-weight:bold;letter-spacing:1.3px;padding:10px 12px}
 .c-producto-num{position:absolute;right:20px;top:20px;font-family:Georgia,serif;color:#fff;font-size:13px}
-.c-producto-cab{display:flex;justify-content:space-between;align-items:end;margin-top:24px}
+.c-producto-info{margin-top:24px;transition:background .25s ease}
+.c-producto-cab{display:flex;justify-content:space-between;align-items:end}
 .c-producto-cab p{margin:0 0 8px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#777}
 .c-producto-cab h3{font-family:Georgia,serif;font-size:38px;font-weight:400;margin:0}
 .c-producto-precio{text-align:right}
@@ -124,24 +130,48 @@ button{font:inherit}
 .c-producto-specs{display:flex;border-top:1px solid #cbc7bd;border-bottom:1px solid #cbc7bd;
   padding:13px 0;gap:22px;font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-wrap:wrap}
 .c-producto-specs span+span::before{content:'·';padding-right:22px;color:#aaa}
+.c-producto-acabados{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#5c5344;
+  margin-top:14px;line-height:1.7}
+.c-producto-acabados b{text-transform:uppercase;letter-spacing:1px;font-weight:bold;
+  color:#847f74;margin-right:6px}
+.c-eclipse-tag{color:var(--gold);font-weight:bold}
 .c-producto-cta{border:0;background:none;padding:18px 0 8px;width:100%;display:flex;
   justify-content:space-between;text-transform:uppercase;font-size:10px;font-weight:bold;
   letter-spacing:1.4px;cursor:pointer;color:inherit}
 .c-producto-cta span{font-size:17px}
 
+/* Tarjetas de la Colección Eclipse: fondo negro, el dorado se queda
+   igual, y lo que era negro (nombre, precio, specs, texto, botón)
+   pasa a blanco puro. Solo se aplica mientras el filtro Eclipse está
+   activo — ver el JS del filtro. */
+.c-producto.invertido .c-producto-info{background:#0a0a0a;padding:22px;border-radius:2px}
+.c-producto.invertido .c-producto-cab p{color:#a8a29a}
+.c-producto.invertido .c-producto-cab h3{color:#fff}
+.c-producto.invertido .c-producto-precio b{color:#fff}
+.c-producto.invertido .c-producto-desc{color:#f1efe8}
+.c-producto.invertido .c-producto-specs{color:#e5e1d8;border-color:#3a3936}
+.c-producto.invertido .c-producto-specs span+span::before{color:#666}
+.c-producto.invertido .c-producto-acabados{color:#cdc8bc}
+.c-producto.invertido .c-producto-acabados b{color:var(--gold)}
+.c-producto.invertido .c-producto-cta{color:#fff}
+
 /* ---------- 6. materiales ---------- */
-.c-materiales{display:grid;grid-template-columns:1.05fr .95fr;background:#131311;color:#fff}
+.c-materiales{display:grid;grid-template-columns:1.05fr .95fr;background:#08080a;color:#fff}
 .c-materiales-foto{min-height:850px}
 .c-materiales-foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
 .c-materiales-copy{padding:110px 9vw 80px 7vw}
+/* El eyebrow de esta sección va en negro tostado (c-eyebrow-mudo) en
+   el resto de la página porque ahí el fondo es claro; aquí el fondo
+   es oscuro, así que usa la variante dorada para que se lea bien. */
+.c-materiales-copy .c-eyebrow-mudo{color:var(--gold)}
 .c-materiales-copy h2{font-size:clamp(50px,5vw,76px);line-height:1.05;margin:0 0 35px}
-.c-materiales-copy>p:not(.c-eyebrow-mudo){font-family:Georgia,serif;color:#c4bfb2;line-height:1.7;font-size:17px}
+.c-materiales-copy>p:not(.c-eyebrow-mudo){font-family:Georgia,serif;color:#f1efe8;line-height:1.7;font-size:17px}
 .c-materiales-copy ul{list-style:none;padding:20px 0;margin:25px 0}
 .c-materiales-copy li{display:flex;gap:25px;padding:22px 0;border-top:1px solid #3a3936}
 .c-materiales-copy li>span{color:var(--gold);font-size:10px}
 .c-materiales-copy b,.c-materiales-copy small{display:block}
 .c-materiales-copy b{font-family:Georgia,serif;font-size:17px;font-weight:400}
-.c-materiales-copy small{color:#a39d8f;margin-top:6px}
+.c-materiales-copy small{color:#cdc8bc;margin-top:6px}
 
 /* ---------- 7. reseña ---------- */
 .c-resena{text-align:center;padding:140px 18vw;background:var(--gold)}
@@ -170,11 +200,12 @@ button{font:inherit}
 /* Pie del propio diseño (logo + eslogan + enlaces + copyright), pedido
    expresamente en vez del pie con la rejilla Grupo Saneas. Logo real
    (.brand, no el símbolo provisional del prototipo). */
-footer.c-pie{background:#0d0d0c;color:#fff;padding:75px 8vw 35px;text-align:left;
+footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left;
   display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;border-top:0}
-.c-pie p{font-family:Georgia,serif;color:#999;line-height:1.5}
+.c-pie p{font-family:Georgia,serif;color:#d8d5cd;line-height:1.5}
 .c-pie div{display:grid;gap:14px;font-size:11px;text-transform:uppercase;letter-spacing:1px}
-.c-pie small{grid-column:1/-1;border-top:1px solid #333;padding-top:25px;color:#666;
+.c-pie div a{color:#fff}
+.c-pie small{grid-column:1/-1;border-top:1px solid #333;padding-top:25px;color:#948f83;
   font-size:9px;letter-spacing:1px;display:block}
 
 .c-reveal{opacity:0;transform:translateY(22px);
@@ -299,89 +330,114 @@ footer.c-pie{background:#0d0d0c;color:#fff;padding:75px 8vw 35px;text-align:left
       <button type="button" data-filtro="cuarzo">Cuarzo</button>
       <button type="button" data-filtro="buceador">Buceador</button>
       <button type="button" data-filtro="vestir">Vestir</button>
+      <button type="button" class="eclipse" data-filtro="eclipse">Colección Eclipse</button>
     </div>
   </section>
 
   <!-- 5 · los ocho -->
   <section class="c-grid" id="coleccion">
-    <article class="c-producto c-reveal" data-mov="cuarzo" data-tipo="cronografo">
+    <article class="c-producto c-reveal" data-mov="cuarzo" data-tipo="cronografo" data-eclipse="1">
       <a href="/lunar.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-01.jpg" alt="Lunar de laOra, cronógrafo" loading="lazy"><span class="c-producto-num">01</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-01 · Cronógrafo</p><h3>Lunar</h3></div><p class="c-producto-precio">desde <b>269,90 €</b></p></div>
-      <p class="c-producto-desc">Para quien mide el tiempo sin perderlo de vista.</p>
-      <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63</span><span>5 ATM (50 m)</span></div>
-      <a class="c-producto-cta" href="/lunar.html">Ver Lunar <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-01 · Cronógrafo</p><h3>Lunar</h3></div><p class="c-producto-precio">desde <b>269,90 €</b></p></div>
+        <p class="c-producto-desc">Para quien mide el tiempo sin perderlo de vista.</p>
+        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63</span><span>5 ATM (50 m)</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 269,90 € · Cenit 489,90 € · <span class="c-eclipse-tag">Eclipse 299,90 €</span></div>
+        <a class="c-producto-cta" href="/lunar.html">Ver Lunar <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="deportivo">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="deportivo" data-eclipse="1">
       <a href="/bitacora.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-07.jpg" alt="Bitácora de laOra, deportivo integrado" loading="lazy"><span class="c-producto-badge">El más elegido</span><span class="c-producto-num">02</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-02 · Deportivo integrado</p><h3>Bitácora</h3></div><p class="c-producto-precio">desde <b>259 €</b></p></div>
-      <p class="c-producto-desc">El equilibrio entre carácter, precisión y uso diario.</p>
-      <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda 515</span><span>10 ATM (100 m)</span></div>
-      <a class="c-producto-cta" href="/bitacora.html">Ver Bitácora <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-02 · Deportivo integrado</p><h3>Bitácora</h3></div><p class="c-producto-precio">desde <b>259 €</b></p></div>
+        <p class="c-producto-desc">El equilibrio entre carácter, precisión y uso diario.</p>
+        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda 515</span><span>10 ATM (100 m)</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 259 € · Levante 329 € · Cenit 459 € · <span class="c-eclipse-tag">Eclipse 389,90 €</span></div>
+        <a class="c-producto-cta" href="/bitacora.html">Ver Bitácora <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="militar">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="militar" data-eclipse="1">
       <a href="/trinchera.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-05.jpg" alt="Trinchera de laOra, militar de campo" loading="lazy"><span class="c-producto-num">03</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-03 · Militar de campo</p><h3>Trinchera</h3></div><p class="c-producto-precio">desde <b>289,90 €</b></p></div>
-      <p class="c-producto-desc">Legible, robusto y preparado para acompañarte.</p>
-      <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo Ronda/Miyota</span><span>10 ATM</span></div>
-      <a class="c-producto-cta" href="/trinchera.html">Ver Trinchera <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-03 · Militar de campo</p><h3>Trinchera</h3></div><p class="c-producto-precio">desde <b>289,90 €</b></p></div>
+        <p class="c-producto-desc">Legible, robusto y preparado para acompañarte.</p>
+        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo Ronda/Miyota</span><span>10 ATM</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 289,90 € · Levante 359,90 € · <span class="c-eclipse-tag">Eclipse 629,90 €</span></div>
+        <a class="c-producto-cta" href="/trinchera.html">Ver Trinchera <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="deportivo">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="deportivo" data-eclipse="1">
       <a href="/precisa.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-04.jpg" alt="Precisa de laOra, deportivo integrado" loading="lazy"><span class="c-producto-num">04</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-04 · Deportivo integrado</p><h3>Precisa</h3></div><p class="c-producto-precio">desde <b>329,90 €</b></p></div>
-      <p class="c-producto-desc">Geometría limpia y presencia sin estridencias.</p>
-      <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span><span>100 m</span></div>
-      <a class="c-producto-cta" href="/precisa.html">Ver Precisa <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-04 · Deportivo integrado</p><h3>Precisa</h3></div><p class="c-producto-precio">desde <b>329,90 €</b></p></div>
+        <p class="c-producto-desc">Geometría limpia y presencia sin estridencias.</p>
+        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span><span>100 m</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 329,90 € · Levante 409,90 € · Cenit Signature 579,90 € · <span class="c-eclipse-tag">Eclipse 719,90 €</span></div>
+        <a class="c-producto-cta" href="/precisa.html">Ver Precisa <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="vestir">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="vestir" data-eclipse="0">
       <a href="/bauhaus.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-03.jpg" alt="Bauhaus de laOra, reloj de vestir" loading="lazy"><span class="c-producto-num">05</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-05 · Vestir</p><h3>Bauhaus</h3></div><p class="c-producto-precio">desde <b>249 €</b></p></div>
-      <p class="c-producto-desc">Menos elementos. Más intención.</p>
-      <div class="c-producto-specs"><span>38 mm</span><span>Cuarzo Ronda</span><span>10 ATM</span></div>
-      <a class="c-producto-cta" href="/bauhaus.html">Ver Bauhaus <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-05 · Vestir</p><h3>Bauhaus</h3></div><p class="c-producto-precio">desde <b>249 €</b></p></div>
+        <p class="c-producto-desc">Menos elementos. Más intención.</p>
+        <div class="c-producto-specs"><span>38 mm</span><span>Cuarzo Ronda</span><span>10 ATM</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 249 € · Cenit 449 €</div>
+        <a class="c-producto-cta" href="/bauhaus.html">Ver Bauhaus <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="buceador">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="buceador" data-eclipse="1">
       <a href="/relojes/lo-02-cero-cero.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-02.jpg" alt="Cero Cero de laOra, buceador · 300 m" loading="lazy"><span class="c-producto-num">06</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-06 · Buceador</p><h3>Cero Cero</h3></div><p class="c-producto-precio">desde <b>190 €</b></p></div>
-      <p class="c-producto-desc">Herramienta de buceo, compañero de superficie.</p>
-      <div class="c-producto-specs"><span>Cuarzo Seiko VH31</span><span>300 m</span></div>
-      <a class="c-producto-cta" href="/relojes/lo-02-cero-cero.html">Ver Cero Cero <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-06 · Buceador</p><h3>Cero Cero</h3></div><p class="c-producto-precio">desde <b>190 €</b></p></div>
+        <p class="c-producto-desc">Herramienta de buceo, compañero de superficie.</p>
+        <div class="c-producto-specs"><span>Cuarzo Seiko VH31</span><span>300 m</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 190 € · Levante 280–380 € · Cenit 400–560 € · <span class="c-eclipse-tag">Eclipse 560–750 €</span></div>
+        <a class="c-producto-cta" href="/relojes/lo-02-cero-cero.html">Ver Cero Cero <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="vestir">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="vestir" data-eclipse="0">
       <a href="/coctel.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-09.jpg" alt="Cóctel de laOra, reloj de vestir" loading="lazy"><span class="c-producto-num">07</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-07 · Vestir</p><h3>Cóctel</h3></div><p class="c-producto-precio">desde <b>299,90 €</b></p></div>
-      <p class="c-producto-desc">La hora elegante, sin esperar una ocasión.</p>
-      <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span></div>
-      <a class="c-producto-cta" href="/coctel.html">Ver Cóctel <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-07 · Vestir</p><h3>Cóctel</h3></div><p class="c-producto-precio">desde <b>299,90 €</b></p></div>
+        <p class="c-producto-desc">La hora elegante, sin esperar una ocasión.</p>
+        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 299,90 € · Levante 379,90 € · Cenit 659,90 €</div>
+        <a class="c-producto-cta" href="/coctel.html">Ver Cóctel <span>→</span></a>
+      </div>
     </article>
 
-    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="buceador">
+    <article class="c-producto c-reveal" data-mov="cuarzo automatico" data-tipo="buceador" data-eclipse="1">
       <a href="/tortuga.html">
         <div class="c-producto-foto"><img src="/assets/img/relojes/col-08.jpg" alt="Tortuga de laOra, buceador · 200 m" loading="lazy"><span class="c-producto-num">08</span></div>
       </a>
-      <div class="c-producto-cab"><div><p>LO-08 · Buceador</p><h3>Tortuga</h3></div><p class="c-producto-precio">desde <b>399,90 €</b></p></div>
-      <p class="c-producto-desc">Un diver automático con identidad propia.</p>
-      <div class="c-producto-specs"><span>44 mm</span><span>Cuarzo VH31</span><span>20 ATM</span></div>
-      <a class="c-producto-cta" href="/tortuga.html">Ver Tortuga <span>→</span></a>
+      <div class="c-producto-info">
+        <div class="c-producto-cab"><div><p>LO-08 · Buceador</p><h3>Tortuga</h3></div><p class="c-producto-precio">desde <b>399,90 €</b></p></div>
+        <p class="c-producto-desc">Un diver automático con identidad propia.</p>
+        <div class="c-producto-specs"><span>44 mm</span><span>Cuarzo VH31</span><span>20 ATM</span></div>
+        <div class="c-producto-acabados"><b>Acabados</b> Alba 399,90 € · Levante 479,90 € · <span class="c-eclipse-tag">Eclipse 799,90 €</span></div>
+        <a class="c-producto-cta" href="/tortuga.html">Ver Tortuga <span>→</span></a>
+      </div>
     </article>
   </section>
 
@@ -456,10 +512,13 @@ footer.c-pie{background:#0d0d0c;color:#fff;padding:75px 8vw 35px;text-align:left
       boton.classList.add("activo");
       var filtro = boton.dataset.filtro;
       productos.forEach(function (p) {
+        var esEclipse = filtro === "eclipse";
         var coincide = filtro === "todos"
+          || (esEclipse ? p.dataset.eclipse === "1" : false)
           || (p.dataset.mov || "").split(" ").indexOf(filtro) !== -1
           || (p.dataset.tipo || "") === filtro;
         p.hidden = !coincide;
+        p.classList.toggle("invertido", esEclipse && coincide);
       });
     });
   });
