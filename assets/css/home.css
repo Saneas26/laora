@@ -101,6 +101,10 @@ section{scroll-margin-top:92px}
 .hero h1{font-size:clamp(54px,5.65vw,88px);line-height:.92;margin:0;
   text-shadow:0 2px 16px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
 .hero .eyebrow,.scroll-cue{text-shadow:0 1px 6px rgba(0,0,0,.9)}
+/* el antetítulo del héroe va más grande que los del resto de la página, y
+   «en España» lo remata debajo del titular con ese mismo tratamiento */
+.hero .eyebrow{font-size:clamp(16px,1.45vw,20px);letter-spacing:2.6px}
+.hero-pais{margin:22px 0 0}
 .hero h1 em,h2 em{color:var(--gold-soft);font-weight:400;font-style:italic}
 /* gap 24 y no 42 como el boceto: aquello estaba calculado para un texto de
    10 px; con 14 px el botón se iba de ancho y partía el rótulo en dos líneas */
