@@ -186,6 +186,15 @@ section{scroll-margin-top:92px}
 .section-heading h2 em{color:var(--gold-brand);-webkit-text-stroke:1.7px var(--gold-stroke);
   paint-order:stroke fill;text-shadow:0 2px 4px rgba(0,0,0,.2)}
 .section-heading>p{font-family:var(--serif);line-height:1.65;font-size:18px;color:var(--muted);margin:0 0 10px}
+
+/* ---------- flecha hacia el selector ----------
+   Solo en móvil (se enciende en el bloque de ≤660): en escritorio el
+   selector ya se ve entero y la flecha sobraría. Va en el oro de la marca,
+   el mismo de «tu carácter.», con un trazo oscuro debajo que la recorta
+   del crema — el equivalente al contorno que lleva ese texto. */
+.mundos-flecha{display:none;width:88px;height:auto;margin:6px 0 0}
+.mundos-flecha .mf-borde{stroke:var(--gold-stroke);stroke-width:11}
+.mundos-flecha .mf-trazo{stroke:var(--gold-brand);stroke-width:6.5}
 .world-selector{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px;
   border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .world-selector button{border:0;border-right:1px solid var(--line);background:transparent;padding:22px 20px;
@@ -387,6 +396,11 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-price{font-size:40px}
   .worlds-section,.value-section,.quote-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
   .section-heading h2{font-size:49px}
+  /* la flecha solo aquí: es donde el contenido va apilado y hace falta
+     decir «sigue por abajo» */
+  .mundos-flecha{display:block}
+  /* el selector sube: la flecha ya hace de separación */
+  .world-selector{margin-top:26px}
   .world-selector{grid-template-columns:1fr 1fr;margin-top:50px}
   .world-selector button:nth-child(2){border-right:0}
   .world-selector button{border-bottom:1px solid var(--line);padding:18px 14px}

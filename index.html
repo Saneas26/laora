@@ -21,7 +21,7 @@
 <!-- OJO: subir el ?v= en CADA cambio de home.css. Cloudflare la sirve con
      cache-control max-age=14400, así que sin subirlo el navegador se queda
      hasta 4 horas con la hoja antigua. -->
-<link rel="stylesheet" href="/assets/css/home.css?v=18">
+<link rel="stylesheet" href="/assets/css/home.css?v=20">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=11">
 </head>
 <body>
@@ -127,6 +127,18 @@
         Ocho modelos, cuatro maneras de entender el tiempo. Selecciona la que mejor encaja contigo
         y descubre por dónde empezar.
       </p>
+      <!-- Flecha que arranca en horizontal y gira hasta apuntar abajo, al
+           selector. Solo se ve en móvil: es donde el contenido va apilado y
+           hace falta decir «sigue por aquí». Doble trazo, como el oro de la
+           marca sobre fondo claro: contorno oscuro debajo y oro encima. -->
+      <svg class="mundos-flecha" viewBox="0 0 116 100" fill="none" aria-hidden="true">
+        <g stroke-linecap="round" stroke-linejoin="round">
+          <path class="mf-borde" d="M8 16H58a32 32 0 0 1 32 32v38"/>
+          <path class="mf-borde" d="M76 74 90 90l14-16"/>
+          <path class="mf-trazo" d="M8 16H58a32 32 0 0 1 32 32v38"/>
+          <path class="mf-trazo" d="M76 74 90 90l14-16"/>
+        </g>
+      </svg>
     </div>
 
     <div class="world-selector" role="tablist" aria-label="Estilos de reloj">
