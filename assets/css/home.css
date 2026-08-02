@@ -96,7 +96,11 @@ section{scroll-margin-top:92px}
     text-shadow:0 0 2px var(--gold-stroke),0 1px 2px rgba(0,0,0,.55)}
 }
 .hero h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.045em}
-.hero h1{font-size:clamp(54px,5.65vw,88px);line-height:.92;margin:0}
+/* la sombra es lo que sostiene el titular sobre la foto: gracias a ella el
+   velo puede ser mucho más claro y el reloj se ve */
+.hero h1{font-size:clamp(54px,5.65vw,88px);line-height:.92;margin:0;
+  text-shadow:0 2px 16px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
+.hero .eyebrow,.scroll-cue{text-shadow:0 1px 6px rgba(0,0,0,.9)}
 .hero h1 em,h2 em{color:var(--gold-soft);font-weight:400;font-style:italic}
 /* gap 24 y no 42 como el boceto: aquello estaba calculado para un texto de
    10 px; con 14 px el botón se iba de ancho y partía el rótulo en dos líneas */
@@ -320,9 +324,14 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
 
 @media(max-width:660px){
   .hero{min-height:760px}
-  .hero-media{background-image:url("/assets/img/acto4-movil.jpg");background-position:63% center;opacity:.76}
-  .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94) 0,rgba(0,0,0,.67) 72%,rgba(0,0,0,.3)),
-                           linear-gradient(0deg,rgba(0,0,0,.84),transparent 60%)}
+  /* En móvil el boceto apilaba tres capas de oscurecido (opacidad .76 sobre
+     la foto + dos degradados) y el reloj desaparecía. Se quita la opacidad
+     y queda un solo velo, claro en la franja central —donde está la
+     esfera— y más cerrado arriba y abajo. Lo que mantiene legible el
+     titular ya no es apagar la foto, sino su sombra. */
+  .hero-media{background-image:url("/assets/img/acto4-movil.jpg");background-position:63% center}
+  .hero-overlay{background:linear-gradient(0deg,rgba(0,0,0,.66) 0%,rgba(0,0,0,.3) 34%,
+                                               rgba(0,0,0,.3) 62%,rgba(0,0,0,.62) 100%)}
   .hero-copy{left:22px;right:22px;top:48%}
   .hero h1{font-size:47px}
   .market-section{padding:52px 0 40px}

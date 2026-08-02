@@ -343,9 +343,12 @@ footer small{grid-column:1/-1;align-self:end;margin-top:auto;padding-top:25px;
 
 @media(max-width:720px){
   .hero{min-height:790px}
-  .hero-media{background-position:72% center;opacity:.92}
-  .hero-shade{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.67) 68%,rgba(0,0,0,.24)),
-                         linear-gradient(0deg,rgba(0,0,0,.78),transparent 56%)}
+  /* mismo criterio que en la home y el Club: un solo velo y claro en la
+     franja central, para que el Trinchera se vea. El titular y la entradilla
+     ya llevan sombra propia. */
+  .hero-media{background-position:72% center}
+  .hero-shade{background:linear-gradient(0deg,rgba(0,0,0,.76) 0%,rgba(0,0,0,.36) 30%,
+                                             rgba(0,0,0,.36) 58%,rgba(0,0,0,.64) 100%)}
   .hero-copy{left:22px;right:22px;top:48%;width:auto}
   .hero h1{font-size:46px;line-height:.96}
   .hero-lead{max-width:94%;font-size:16px}

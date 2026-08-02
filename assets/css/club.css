@@ -85,9 +85,14 @@ section{scroll-margin-top:92px}
   letter-spacing:2.2px;text-transform:uppercase}
 .eyebrow.light{color:var(--gold-soft)}
 .eyebrow.dark{color:var(--gold-brand)}
-.hero h1{margin:0;font-size:clamp(56px,5.7vw,88px);line-height:.94}
+/* la sombra es lo que sostiene el titular sobre la foto: gracias a ella el
+   velo puede ser mucho más claro y el reloj se ve */
+.hero h1{margin:0;font-size:clamp(56px,5.7vw,88px);line-height:.94;
+  text-shadow:0 2px 16px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.65)}
 .hero h1 em,h2 em{color:var(--gold-soft);font-style:normal}
-.hero-lead{max-width:690px;margin:29px 0 0;color:#d6d3cc;font-family:var(--serif);font-size:18px;line-height:1.58}
+.hero .eyebrow{text-shadow:0 1px 6px rgba(0,0,0,.9)}
+.hero-lead{max-width:690px;margin:29px 0 0;color:#d6d3cc;font-family:var(--serif);font-size:18px;line-height:1.58;
+  text-shadow:0 1px 6px rgba(0,0,0,.85)}
 .button{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 26px;
   font-size:14px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;white-space:nowrap;
   transition:transform .2s,background .2s}
@@ -343,9 +348,12 @@ footer small{grid-column:1/-1;padding-top:26px;border-top:1px solid rgba(255,255
 
 @media(max-width:820px){
   .hero{min-height:790px;height:100svh}
-  .hero-image{background-position:62% center;opacity:.62}
-  .hero-shade{background:linear-gradient(90deg,rgba(0,0,0,.96),rgba(0,0,0,.42)),
-                         linear-gradient(0deg,#050504 0,transparent 55%)}
+  /* el boceto bajaba la foto al 62 % y le sumaba dos degradados: el reloj
+     se perdía. Se quita la opacidad y queda un solo velo, claro en la
+     franja central. Al titular lo sostiene su sombra, no el apagado. */
+  .hero-image{background-position:62% center}
+  .hero-shade{background:linear-gradient(0deg,rgba(0,0,0,.74) 0%,rgba(0,0,0,.34) 32%,
+                                             rgba(0,0,0,.34) 60%,rgba(0,0,0,.66) 100%)}
   .hero-copy{left:23px;right:23px;top:49%;width:auto;transform:translateY(-48%)}
   .hero h1{font-size:clamp(49px,13vw,62px)}
   .hero-lead{font-size:16px}
