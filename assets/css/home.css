@@ -111,12 +111,16 @@ section{scroll-margin-top:92px}
   padding-bottom:8px;border-bottom:1px solid currentColor;text-transform:uppercase;letter-spacing:1.1px;
   font-size:14px;font-weight:700}
 .light-link{color:#fff}
-.scroll-cue{position:absolute;z-index:3;left:7.5vw;bottom:38px;display:flex;align-items:center;gap:14px;
+/* va dentro de `.hero-copy`, no anclado al fondo del héroe: así queda pegado
+   al titular en cualquier alto de pantalla */
+.scroll-cue{display:inline-flex;align-items:center;gap:14px;margin-top:38px;width:fit-content;
   font-size:13px;text-transform:uppercase;letter-spacing:1.2px}
 .scroll-cue span{display:block;height:1px;width:54px;background:var(--gold)}
 
 /* ---------- lo que te encuentras ahí fuera ---------- */
-.market-section{background:var(--ink-soft);color:#fff;padding:34px 4.5vw 0}
+/* el 0 de abajo era para que la barra de respuesta fuese a sangre; sin ella
+   las tarjetas necesitan su propio aire al final */
+.market-section{background:var(--ink-soft);color:#fff;padding:34px 4.5vw 46px}
 .market-heading{display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:6vw}
 .market-kicker{margin:0 0 8px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:700}
 .market-heading h2{margin:0;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-.035em}
@@ -152,20 +156,6 @@ section{scroll-margin-top:92px}
 /* mismo tamaño, color y peso en las cinco tarjetas: en el boceto la destacada
    iba en negrita y parecía de otro cuerpo */
 .market-card p{max-width:205px;margin:0;color:#fff;font-family:var(--serif);font-size:16px;line-height:1.4}
-/* Los tres elementos SIEMPRE en una sola fila: `nowrap` lo impone y la frase
-   del centro es la única que cede (flex:1 1 auto + min-width:0), así que
-   nunca empuja al remate a una segunda línea. El cuerpo escala con el ancho
-   para que además quepa en un solo renglón en pantallas de escritorio.
-   Por debajo de 900 px ya no hay sitio y pasa a columna (más abajo). */
-.market-answer{margin:0 -4.5vw;padding:18px 4.5vw;display:flex;align-items:center;flex-wrap:nowrap;
-  gap:14px 24px;background:var(--gold);color:var(--ink)}
-.market-answer span{flex:0 0 auto;text-transform:uppercase;letter-spacing:1.4px;font-size:13px;font-weight:700}
-.market-answer strong{flex:1 1 auto;min-width:0;font-family:var(--serif);
-  font-size:clamp(16px,1.55vw,22px);line-height:1.3;font-weight:400}
-/* el remate, a la derecha: chapa oscura sobre el dorado, en mayúsculas */
-.market-punch{margin-left:auto;flex:0 0 auto;background:var(--ink);color:#fff;
-  padding:12px 18px;text-transform:uppercase;font-family:var(--sans);
-  font-size:clamp(13px,1.1vw,15px);font-weight:700;letter-spacing:1.2px;white-space:nowrap}
 
 /* ---------- encuentra tu laOra (los cuatro mundos) ---------- */
 .worlds-section{background:var(--cream);padding:130px 7vw 150px}
@@ -307,17 +297,13 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
      legible las estira a 246 px de alto: la caja deja de ser la caja. Se pasa
      al carrusel horizontal que el diseño ya usa en móvil, que las mantiene en
      su proporción y en sus 164 px. */
-  .market-section{padding:34px 0 0}
+  .market-section{padding:34px 0 40px}
   .market-heading{padding:0 4.5vw}
   .market-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
     padding:0 4.5vw 10px;scrollbar-width:none}
   .market-grid::-webkit-scrollbar{display:none}
   .market-card{min-width:290px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
   .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
-  .market-answer{margin:0;padding:18px 4.5vw}
-  /* aquí ya no caben los tres en una fila con texto legible: a columna */
-  .market-answer{flex-direction:column;align-items:flex-start;gap:14px}
-  .market-punch{margin-left:0}
   .hero-media{background-position:58% center}
   .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.32)),
                            linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
@@ -339,8 +325,7 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
                            linear-gradient(0deg,rgba(0,0,0,.84),transparent 60%)}
   .hero-copy{left:22px;right:22px;top:48%}
   .hero h1{font-size:47px}
-  .scroll-cue{left:22px;bottom:24px}
-  .market-section{padding:52px 0 0}
+  .market-section{padding:52px 0 40px}
   .market-heading{grid-template-columns:1fr;gap:20px;padding:0 22px}
   .market-heading h2{font-size:36px}
   .mq-titular{font-size:18px}
@@ -349,10 +334,6 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-grid::-webkit-scrollbar{display:none}
   .market-card{min-width:74vw;min-height:170px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
   .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
-  .market-answer{margin:0;padding:18px 22px;align-items:flex-start;flex-direction:column;gap:14px}
-  .market-answer strong{line-height:1.35}
-  /* en columna, el margin-left:auto lo dejaba descolgado a la derecha */
-  .market-punch{margin-left:0}
   .worlds-section,.value-section,.quote-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
   .section-heading h2{font-size:49px}
   .world-selector{grid-template-columns:1fr 1fr;margin-top:50px}
