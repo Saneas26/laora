@@ -103,16 +103,20 @@ button{font:inherit}
 .c-buscador-top>p{font-family:Georgia,serif;font-size:18px;line-height:1.6;color:#45413a}
 .c-filtros{display:flex;gap:8px;margin-top:65px;flex-wrap:wrap}
 .c-filtros button{border:1px solid #cbc5b9;background:transparent;padding:11px 20px;
-  border-radius:30px;text-transform:uppercase;font-size:10px;letter-spacing:1px;cursor:pointer}
+  border-radius:30px;text-transform:uppercase;font-size:10px;letter-spacing:1px;cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease}
 .c-filtros button.activo{background:var(--ink);color:#fff;border-color:var(--ink)}
 /* Colección Eclipse: distinto de los demás filtros a propósito (fondo
-   negro, letras doradas) siempre, esté o no activo — es una colección,
-   no una categoría más. */
-.c-filtros button.eclipse{background:var(--ink);color:var(--gold);border-color:var(--ink)}
-.c-filtros button.eclipse.activo{box-shadow:0 0 0 2px var(--gold) inset}
+   negro, letras doradas más vivas que el --gold normal) siempre, esté
+   o no activo — es una colección, no una categoría más. Activo: se
+   rellena de dorado para que destaque también sobre el fondo negro
+   que se pone el resto del bloque (ver más abajo). */
+.c-filtros button.eclipse{background:var(--ink);color:#f6c94c;border-color:var(--ink)}
+.c-filtros button.eclipse.activo{background:#f6c94c;color:#141005;border-color:#f6c94c}
 
 /* ---------- 5. los ocho ---------- */
-.c-grid{padding:0 8vw 140px;background:var(--cream);display:grid;grid-template-columns:repeat(2,1fr);gap:76px 28px}
+.c-grid{padding:0 8vw 140px;background:var(--cream);display:grid;grid-template-columns:repeat(2,1fr);gap:76px 28px;
+  transition:background .3s ease}
 .c-producto[hidden]{display:none}
 .c-producto-foto{height:590px;position:relative;overflow:hidden;background:#ddd8ce}
 .c-producto-foto img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
@@ -120,40 +124,47 @@ button{font:inherit}
 .c-producto-badge{position:absolute;top:20px;left:20px;background:var(--gold);
   font-size:9px;font-weight:bold;letter-spacing:1.3px;padding:10px 12px}
 .c-producto-num{position:absolute;right:20px;top:20px;font-family:Georgia,serif;color:#fff;font-size:13px}
-.c-producto-info{margin-top:24px;transition:background .25s ease}
+.c-producto-info{margin-top:24px}
 .c-producto-cab{display:flex;justify-content:space-between;align-items:end}
 .c-producto-cab p{margin:0 0 8px;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#777}
 .c-producto-cab h3{font-family:Georgia,serif;font-size:38px;font-weight:400;margin:0}
 .c-producto-precio{text-align:right}
 .c-producto-precio b{display:block;font-size:19px;color:var(--ink);margin-top:5px}
 .c-producto-desc{font-family:Georgia,serif;color:#423f39;margin:16px 0 20px}
-.c-producto-specs{display:flex;border-top:1px solid #cbc7bd;border-bottom:1px solid #cbc7bd;
+/* Una fila .c-producto-specs por cada acabado disponible del modelo
+   (mismo formato "MM · MOVIMIENTO · RESISTENCIA" que antes había una
+   sola vez); el borde superior lo pone la lista, cada fila solo pone
+   el inferior, para no duplicar líneas entre filas. */
+.c-producto-specs-lista{border-top:1px solid #cbc7bd;margin-top:2px}
+.c-producto-specs{display:flex;border-bottom:1px solid #cbc7bd;
   padding:13px 0;gap:22px;font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-wrap:wrap}
 .c-producto-specs span+span::before{content:'·';padding-right:22px;color:#aaa}
-.c-producto-acabados{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#5c5344;
-  margin-top:14px;line-height:1.7}
-.c-producto-acabados b{text-transform:uppercase;letter-spacing:1px;font-weight:bold;
-  color:#847f74;margin-right:6px}
-.c-eclipse-tag{color:var(--gold);font-weight:bold}
 .c-producto-cta{border:0;background:none;padding:18px 0 8px;width:100%;display:flex;
   justify-content:space-between;text-transform:uppercase;font-size:10px;font-weight:bold;
   letter-spacing:1.4px;cursor:pointer;color:inherit}
 .c-producto-cta span{font-size:17px}
 
-/* Tarjetas de la Colección Eclipse: fondo negro, el dorado se queda
-   igual, y lo que era negro (nombre, precio, specs, texto, botón)
-   pasa a blanco puro. Solo se aplica mientras el filtro Eclipse está
-   activo — ver el JS del filtro. */
-.c-producto.invertido .c-producto-info{background:#0a0a0a;padding:22px;border-radius:2px}
-.c-producto.invertido .c-producto-cab p{color:#a8a29a}
-.c-producto.invertido .c-producto-cab h3{color:#fff}
-.c-producto.invertido .c-producto-precio b{color:#fff}
-.c-producto.invertido .c-producto-desc{color:#f1efe8}
-.c-producto.invertido .c-producto-specs{color:#e5e1d8;border-color:#3a3936}
-.c-producto.invertido .c-producto-specs span+span::before{color:#666}
-.c-producto.invertido .c-producto-acabados{color:#cdc8bc}
-.c-producto.invertido .c-producto-acabados b{color:var(--gold)}
-.c-producto.invertido .c-producto-cta{color:#fff}
+/* ---------- modo Colección Eclipse ---------- */
+/* Se activa con la clase .c-eclipse-modo en <body> desde el JS del
+   filtro (no una clase por tarjeta): TODO el bloque de buscador+grid
+   pasa a negro, el dorado se mantiene, y lo que era negro (títulos,
+   precios, specs, texto, botones) pasa a blanco puro. */
+body.c-eclipse-modo .c-buscador,
+body.c-eclipse-modo .c-grid{background:#08080a}
+body.c-eclipse-modo .c-buscador h2{color:#fff}
+body.c-eclipse-modo .c-buscador-top>p{color:#d8d3c5}
+body.c-eclipse-modo .c-buscador .c-eyebrow-mudo{color:var(--gold)}
+body.c-eclipse-modo .c-filtros button:not(.eclipse){border-color:#444;color:#fff}
+body.c-eclipse-modo .c-filtros button.activo:not(.eclipse){background:#fff;color:#111;border-color:#fff}
+body.c-eclipse-modo .c-producto-foto{background:#000}
+body.c-eclipse-modo .c-producto-cab p{color:#a8a29a}
+body.c-eclipse-modo .c-producto-cab h3{color:#fff}
+body.c-eclipse-modo .c-producto-precio b{color:#fff}
+body.c-eclipse-modo .c-producto-desc{color:#f1efe8}
+body.c-eclipse-modo .c-producto-specs-lista{border-color:#3a3936}
+body.c-eclipse-modo .c-producto-specs{color:#e5e1d8;border-color:#3a3936}
+body.c-eclipse-modo .c-producto-specs span+span::before{color:#666}
+body.c-eclipse-modo .c-producto-cta{color:#fff}
 
 /* ---------- 6. materiales ---------- */
 .c-materiales{display:grid;grid-template-columns:1.05fr .95fr;background:#08080a;color:#fff}
@@ -343,8 +354,11 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-01 · Cronógrafo</p><h3>Lunar</h3></div><p class="c-producto-precio">desde <b>269,90 €</b></p></div>
         <p class="c-producto-desc">Para quien mide el tiempo sin perderlo de vista.</p>
-        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63</span><span>5 ATM (50 m)</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 269,90 € · Cenit 489,90 € · <span class="c-eclipse-tag">Eclipse 299,90 €</span></div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63</span><span>5 ATM (50 m)</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuerda manual Seagull ST1901</span><span>5 ATM (50 m)</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63 (Eclipse, negro)</span><span>5 ATM (50 m)</span></div>
+        </div>
         <a class="c-producto-cta" href="/lunar.html">Ver Lunar <span>→</span></a>
       </div>
     </article>
@@ -356,8 +370,12 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-02 · Deportivo integrado</p><h3>Bitácora</h3></div><p class="c-producto-precio">desde <b>259 €</b></p></div>
         <p class="c-producto-desc">El equilibrio entre carácter, precisión y uso diario.</p>
-        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda 515</span><span>10 ATM (100 m)</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 259 € · Levante 329 € · Cenit 459 € · <span class="c-eclipse-tag">Eclipse 389,90 €</span></div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda 515</span><span>10 ATM (100 m)</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático NH35</span><span>10 ATM (100 m)</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015</span><span>10 ATM (100 m)</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Miyota 9015 (Eclipse, negro)</span><span>10 ATM (100 m)</span></div>
+        </div>
         <a class="c-producto-cta" href="/bitacora.html">Ver Bitácora <span>→</span></a>
       </div>
     </article>
@@ -369,8 +387,11 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-03 · Militar de campo</p><h3>Trinchera</h3></div><p class="c-producto-precio">desde <b>289,90 €</b></p></div>
         <p class="c-producto-desc">Legible, robusto y preparado para acompañarte.</p>
-        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo Ronda/Miyota</span><span>10 ATM</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 289,90 € · Levante 359,90 € · <span class="c-eclipse-tag">Eclipse 629,90 €</span></div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo Ronda/Miyota</span><span>10 ATM</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático Seiko NH35</span><span>10 ATM</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015 (Eclipse)</span><span>10 ATM</span></div>
+        </div>
         <a class="c-producto-cta" href="/trinchera.html">Ver Trinchera <span>→</span></a>
       </div>
     </article>
@@ -382,8 +403,12 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-04 · Deportivo integrado</p><h3>Precisa</h3></div><p class="c-producto-precio">desde <b>329,90 €</b></p></div>
         <p class="c-producto-desc">Geometría limpia y presencia sin estridencias.</p>
-        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span><span>100 m</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 329,90 € · Levante 409,90 € · Cenit Signature 579,90 € · <span class="c-eclipse-tag">Eclipse 719,90 €</span></div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span><span>100 m</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático NH35</span><span>100 m</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático PT5000 (Cenit Signature)</span><span>100 m</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015 (Eclipse)</span><span>100 m</span></div>
+        </div>
         <a class="c-producto-cta" href="/precisa.html">Ver Precisa <span>→</span></a>
       </div>
     </article>
@@ -395,8 +420,10 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-05 · Vestir</p><h3>Bauhaus</h3></div><p class="c-producto-precio">desde <b>249 €</b></p></div>
         <p class="c-producto-desc">Menos elementos. Más intención.</p>
-        <div class="c-producto-specs"><span>38 mm</span><span>Cuarzo Ronda</span><span>10 ATM</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 249 € · Cenit 449 €</div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>38 mm</span><span>Cuarzo Ronda</span><span>10 ATM</span></div>
+          <div class="c-producto-specs"><span>38 mm</span><span>Automático ST17</span><span>10 ATM</span></div>
+        </div>
         <a class="c-producto-cta" href="/bauhaus.html">Ver Bauhaus <span>→</span></a>
       </div>
     </article>
@@ -408,8 +435,12 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-06 · Buceador</p><h3>Cero Cero</h3></div><p class="c-producto-precio">desde <b>190 €</b></p></div>
         <p class="c-producto-desc">Herramienta de buceo, compañero de superficie.</p>
-        <div class="c-producto-specs"><span>Cuarzo Seiko VH31</span><span>300 m</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 190 € · Levante 280–380 € · Cenit 400–560 € · <span class="c-eclipse-tag">Eclipse 560–750 €</span></div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>Mecacuarzo Seiko VH31</span><span>300 m</span></div>
+          <div class="c-producto-specs"><span>Automático Seiko NH35</span><span>300 m</span></div>
+          <div class="c-producto-specs"><span>Automático superior</span><span>300 m</span></div>
+          <div class="c-producto-specs"><span>Automático superior (Eclipse, DLC negro)</span><span>300 m</span></div>
+        </div>
         <a class="c-producto-cta" href="/relojes/lo-02-cero-cero.html">Ver Cero Cero <span>→</span></a>
       </div>
     </article>
@@ -421,8 +452,11 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-07 · Vestir</p><h3>Cóctel</h3></div><p class="c-producto-precio">desde <b>299,90 €</b></p></div>
         <p class="c-producto-desc">La hora elegante, sin esperar una ocasión.</p>
-        <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 299,90 € · Levante 379,90 € · Cenit 659,90 €</div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático NH35A</span></div>
+          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015</span></div>
+        </div>
         <a class="c-producto-cta" href="/coctel.html">Ver Cóctel <span>→</span></a>
       </div>
     </article>
@@ -434,8 +468,11 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-08 · Buceador</p><h3>Tortuga</h3></div><p class="c-producto-precio">desde <b>399,90 €</b></p></div>
         <p class="c-producto-desc">Un diver automático con identidad propia.</p>
-        <div class="c-producto-specs"><span>44 mm</span><span>Cuarzo VH31</span><span>20 ATM</span></div>
-        <div class="c-producto-acabados"><b>Acabados</b> Alba 399,90 € · Levante 479,90 € · <span class="c-eclipse-tag">Eclipse 799,90 €</span></div>
+        <div class="c-producto-specs-lista">
+          <div class="c-producto-specs"><span>44 mm</span><span>Cuarzo VH31</span><span>20 ATM</span></div>
+          <div class="c-producto-specs"><span>44 mm</span><span>Automático Seiko NH35</span><span>20 ATM</span></div>
+          <div class="c-producto-specs"><span>44 mm</span><span>Automático NH36, día-fecha (Eclipse)</span><span>20 ATM</span></div>
+        </div>
         <a class="c-producto-cta" href="/tortuga.html">Ver Tortuga <span>→</span></a>
       </div>
     </article>
@@ -511,14 +548,14 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       botones.forEach(function (b) { b.classList.remove("activo"); });
       boton.classList.add("activo");
       var filtro = boton.dataset.filtro;
+      var esEclipse = filtro === "eclipse";
+      document.body.classList.toggle("c-eclipse-modo", esEclipse);
       productos.forEach(function (p) {
-        var esEclipse = filtro === "eclipse";
         var coincide = filtro === "todos"
           || (esEclipse ? p.dataset.eclipse === "1" : false)
           || (p.dataset.mov || "").split(" ").indexOf(filtro) !== -1
           || (p.dataset.tipo || "") === filtro;
         p.hidden = !coincide;
-        p.classList.toggle("invertido", esEclipse && coincide);
       });
     });
   });
