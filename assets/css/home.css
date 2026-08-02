@@ -66,9 +66,11 @@ section{scroll-margin-top:92px}
 .hero h1{font-size:clamp(54px,5.65vw,88px);line-height:.92;margin:0}
 .hero h1 em,h2 em{color:var(--gold-soft);font-weight:400;font-style:italic}
 .hero-lead{max-width:700px;font-family:var(--serif);font-size:17px;line-height:1.55;color:#c9c5bd;margin:28px 0 0}
-/* blanco puro y cuerpo grande: en el boceto iba en gris 11px y no se leía */
-.hero-nearby{max-width:700px;border-left:2px solid var(--gold);padding-left:16px;margin:18px 0 0;
-  color:#fff;font-size:15px;line-height:1.55;letter-spacing:.2px}
+/* blanco puro, con cuerpo y peso: va sobre la foto, así que además lleva
+   sombra para que el blanco se vea rotundo y no lavado */
+.hero-nearby{max-width:700px;border-left:3px solid var(--gold);padding-left:18px;margin:20px 0 0;
+  color:#fff;font-size:17px;font-weight:600;line-height:1.55;letter-spacing:.2px;
+  text-shadow:0 1px 3px rgba(0,0,0,.85),0 0 16px rgba(0,0,0,.6)}
 .hero-actions{display:flex;align-items:center;gap:34px;margin-top:32px}
 /* gap 24 y no 42 como el boceto: aquello estaba calculado para un texto de
    10 px; con 14 px el botón se iba de ancho y partía el rótulo en dos líneas */
@@ -95,9 +97,15 @@ section{scroll-margin-top:92px}
 .market-heading{display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:6vw}
 .market-kicker{margin:0 0 8px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:700}
 .market-heading h2{margin:0;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-.035em}
-.market-question{margin:0;max-width:560px;font-family:var(--serif);font-size:17px;line-height:1.35;color:#b8b5ae}
-.market-question strong{color:var(--gold-soft);font-weight:400}
-.market-question span{display:block}
+/* la pregunta pasaba desapercibida: va sobre tarjeta amarilla al 50 % y en
+   grande. Blanco sobre esa mezcla da 6:1, que cumple de sobra al ser texto
+   grande y en negrita. */
+.market-question{margin:0;max-width:560px;background:rgba(211,169,67,.5);
+  border-left:4px solid var(--gold);padding:20px 24px;
+  font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.35;color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.market-question strong{color:#fff;font-weight:700;font-size:1.2em}
+.market-question span{display:block;margin-top:4px}
 .market-grid{display:grid;grid-template-columns:repeat(5,1fr);margin-top:26px;border-top:1px solid rgba(255,255,255,.16)}
 .market-card{min-height:164px;position:relative;padding:23px 20px 20px;border-right:1px solid rgba(255,255,255,.16)}
 .market-card:last-child{border-right:0}
@@ -114,11 +122,15 @@ section{scroll-margin-top:92px}
 .market-card-featured h3{margin-top:0}
 /* mismo tamaño, color y peso en las cinco tarjetas: en el boceto la destacada
    iba en negrita y parecía de otro cuerpo */
-.market-card p{max-width:205px;margin:0;color:#eae7e1;font-family:var(--serif);font-size:16px;line-height:1.4}
-.market-answer{margin:0 -4.5vw;padding:18px 4.5vw;display:flex;align-items:center;gap:38px;
+.market-card p{max-width:205px;margin:0;color:#fff;font-family:var(--serif);font-size:16px;line-height:1.4}
+.market-answer{margin:0 -4.5vw;padding:18px 4.5vw;display:flex;align-items:center;flex-wrap:wrap;gap:18px 34px;
   background:var(--gold);color:var(--ink)}
 .market-answer span{flex:0 0 auto;text-transform:uppercase;letter-spacing:1.4px;font-size:13px;font-weight:700}
 .market-answer strong{font-family:var(--serif);font-size:22px;line-height:1.3;font-weight:400}
+/* el remate, a la derecha: chapa oscura sobre el dorado, en mayúsculas */
+.market-punch{margin-left:auto;flex:0 0 auto;background:var(--ink);color:#fff;
+  padding:13px 22px;text-transform:uppercase;font-family:var(--sans);font-size:15px;
+  font-weight:700;letter-spacing:1.3px;white-space:nowrap}
 
 /* ---------- encuentra tu laOra (los cuatro mundos) ---------- */
 .worlds-section{background:var(--cream);padding:130px 7vw 150px}
@@ -220,20 +232,6 @@ section{scroll-margin-top:92px}
 .assurance-list strong{display:block;margin-top:30px;font-family:var(--serif);font-size:28px;font-weight:400}
 .assurance-list p{margin:7px 0 0;color:var(--muted-dark);text-transform:uppercase;letter-spacing:1.1px;font-size:13px}
 
-/* ---------- Club laOra ---------- */
-.club-section{background:var(--cream);padding:120px 7vw}
-.club-card{min-height:440px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.3fr .7fr;
-  align-items:end;padding:70px;
-  background:radial-gradient(circle at 68% 45%,#3d321d 0,#15130f 28%,#090909 65%);color:#fff}
-.club-card h2{font-size:clamp(64px,7vw,104px);margin:0 0 12px}
-.club-card p:not(.eyebrow){font-family:var(--serif);color:#aaa79f;font-size:18px}
-.club-benefits{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.2)}
-.club-benefits span{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.2);text-transform:uppercase;
-  font-size:13px;font-weight:700;letter-spacing:1.1px}
-.club-orbit{position:absolute;width:330px;aspect-ratio:1;border:1px solid rgba(211,169,67,.55);border-radius:50%;
-  right:19%;top:0;transform:translateY(-18%);
-  box-shadow:0 0 60px rgba(211,169,67,.11),inset 0 0 50px rgba(211,169,67,.08)}
-
 /* ---------- preguntas ---------- */
 .faq-section{padding:130px 7vw;display:grid;grid-template-columns:.8fr 1.2fr;gap:10vw;background:var(--paper)}
 .faq-section h2{font-size:clamp(52px,5vw,76px);line-height:.98;margin:0}
@@ -313,9 +311,11 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-grid::-webkit-scrollbar{display:none}
   .market-card{min-width:74vw;min-height:170px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
   .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
-  .market-answer{margin:0;padding:16px 22px;align-items:flex-start;flex-direction:column;gap:5px}
+  .market-answer{margin:0;padding:18px 22px;align-items:flex-start;flex-direction:column;gap:14px}
   .market-answer strong{line-height:1.35}
-  .worlds-section,.value-section,.quote-section,.assurance-section,.club-section,.faq-section,.final-cta{padding:86px 22px}
+  /* en columna, el margin-left:auto lo dejaba descolgado a la derecha */
+  .market-punch{margin-left:0}
+  .worlds-section,.value-section,.quote-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
   .section-heading h2{font-size:49px}
   .world-selector{grid-template-columns:1fr 1fr;margin-top:50px}
   .world-selector button:nth-child(2){border-right:0}
@@ -335,8 +335,6 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .quote-section blockquote{font-size:32px}
   .assurance-list{grid-template-columns:1fr;margin-top:30px}
   .assurance-list>div,.assurance-list>div:nth-child(even){border-right:0}
-  .club-card{grid-template-columns:1fr;gap:40px;padding:44px 24px;min-height:560px}
-  .club-orbit{right:-35%;top:15%}
   .faq-section{gap:55px}
   .final-cta h2{font-size:62px}
   footer{grid-template-columns:1fr;padding:50px 22px 28px}
