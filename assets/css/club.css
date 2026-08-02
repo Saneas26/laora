@@ -34,11 +34,10 @@ img{width:100%;max-width:100%}
   --cream:#f8f4ec;
   --gold:#d3a943;
   --gold-soft:#e0c579;
-  /* Sobre fondo claro el dorado brillante da 2:1. Dos tonos que se siguen
-     leyendo como oro: display para titulares grandes (4,6:1, AAA para
-     cuerpos grandes) y dark para texto pequeño (5,5-6,7:1). */
-  --gold-display:#8a6a12;
-  --gold-dark:#6b5210;
+  /* el ámbar del triángulo del logo: es EL oro de la marca */
+  --gold-brand:#D4A94B;
+  /* contorno oscuro con el que ese oro se lee sobre fondo claro */
+  --gold-stroke:#3f3108;
   /* gris de párrafo sobre claro (7,3:1) y sobre oscuro (9:1) */
   --muted:#4e4943;
   --muted-dark:#b5b3ab;
@@ -69,10 +68,11 @@ section{scroll-margin-top:92px}
   background:linear-gradient(90deg,rgba(0,0,0,.98) 0%,rgba(0,0,0,.9) 47%,rgba(0,0,0,.48) 72%,rgba(0,0,0,.42)),
              linear-gradient(0deg,rgba(0,0,0,.76),transparent 42%)}
 .hero-copy{position:absolute;z-index:3;left:7vw;top:51%;width:min(830px,57vw);transform:translateY(-43%)}
-.eyebrow,.section-number{margin:0 0 26px;color:var(--gold-dark);font-size:13px;font-weight:700;
+.eyebrow,.section-number{margin:0 0 26px;color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 1px 1.5px rgba(0,0,0,.22);font-size:13px;font-weight:700;
   letter-spacing:2.2px;text-transform:uppercase}
 .eyebrow.light{color:var(--gold-soft)}
-.eyebrow.dark{color:var(--gold-dark)}
+.eyebrow.dark{color:var(--gold-brand)}
 .hero h1{margin:0;font-size:clamp(56px,5.7vw,88px);line-height:.94}
 .hero h1 em,h2 em{color:var(--gold-soft);font-style:normal}
 .hero-lead{max-width:690px;margin:29px 0 0;color:#d6d3cc;font-family:var(--serif);font-size:18px;line-height:1.58}
@@ -125,7 +125,8 @@ section{scroll-margin-top:92px}
 .quick-actions{display:grid;grid-template-columns:repeat(3,1fr);margin:13px 0;border:1px solid #d5cec2}
 .quick-actions div{padding:11px 4px;display:grid;place-items:center;gap:5px;border-right:1px solid #d5cec2}
 .quick-actions div:last-child{border-right:0}
-.quick-actions b{color:var(--gold-dark);font-family:var(--serif);font-size:18px;font-weight:400}
+.quick-actions b{color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 1px 1.5px rgba(0,0,0,.22);font-family:var(--serif);font-size:18px;font-weight:400}
 .quick-actions span{color:#5f5b53;font-size:11px;letter-spacing:.4px;text-transform:uppercase;font-weight:700}
 .app-notice{padding:13px 15px;background:var(--ink);color:#fff}
 .app-notice span{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.9px}
@@ -134,7 +135,8 @@ section{scroll-margin-top:92px}
 .app-nav{position:absolute;left:0;right:0;bottom:0;height:51px;padding:0 31px;display:flex;
   justify-content:space-between;align-items:center;border-top:1px solid #d6d0c5;background:#f1ede5;
   color:#6d685f;font-size:15px}
-.app-nav .selected{color:var(--gold-dark)}
+.app-nav .selected{color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 1px 1.5px rgba(0,0,0,.22)}
 
 /* ---------- franja de confianza ---------- */
 .trust-strip{display:grid;grid-template-columns:repeat(4,1fr);padding:0 5vw;background:var(--ink-soft);color:#fff}
@@ -150,7 +152,8 @@ section{scroll-margin-top:92px}
 .belief{padding:135px 7vw 145px;display:grid;grid-template-columns:.48fr 2fr .8fr;gap:5vw;
   align-items:start;background:var(--cream)}
 .belief h2{margin:0;font-size:clamp(54px,5.8vw,88px);line-height:.95}
-.belief h2 em{color:var(--gold-display)}
+.belief h2 em{color:var(--gold-brand);-webkit-text-stroke:1.7px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 2px 4px rgba(0,0,0,.2)}
 .belief-copy{padding-top:10px}
 .belief-copy p{margin:0 0 24px;color:var(--muted);font-family:var(--serif);font-size:17px;line-height:1.65}
 .belief-copy p:first-child{color:var(--ink);font-size:21px;line-height:1.45}
@@ -202,7 +205,8 @@ section{scroll-margin-top:92px}
 .benefits{padding:125px 7vw 145px;background:var(--cream)}
 .benefits-heading{display:grid;grid-template-columns:.48fr 1.5fr .72fr;gap:5vw;align-items:end;margin-bottom:75px}
 .benefits-heading h2{margin:0;font-size:clamp(55px,5.8vw,88px);line-height:.94}
-.benefits-heading h2 em{color:var(--gold-display)}
+.benefits-heading h2 em{color:var(--gold-brand);-webkit-text-stroke:1.7px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 2px 4px rgba(0,0,0,.2)}
 .benefits-heading>p:last-child{margin:0 0 8px;color:var(--muted);font-family:var(--serif);font-size:17px;line-height:1.65}
 .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);
   border-left:1px solid var(--line)}
@@ -211,7 +215,8 @@ section{scroll-margin-top:92px}
   transition:background .25s,color .25s}
 .benefit-grid article:hover{background:var(--ink);color:#fff}
 .benefit-top{display:flex;justify-content:space-between;align-items:center}
-.benefit-top span{color:var(--gold-dark);font-size:13px;font-weight:700;letter-spacing:1px}
+.benefit-top span{color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 1px 1.5px rgba(0,0,0,.22);font-size:13px;font-weight:700;letter-spacing:1px}
 .benefit-top i{color:var(--muted);font-family:var(--serif);font-size:24px;font-style:normal}
 .benefit-grid article:hover .benefit-top span{color:var(--gold)}
 .benefit-grid article:hover .benefit-top i{color:var(--muted-dark)}
@@ -243,13 +248,15 @@ section{scroll-margin-top:92px}
 .security{padding:125px 7vw 0;background:var(--paper)}
 .security-heading{display:grid;grid-template-columns:.52fr 2fr;gap:5vw;align-items:start;margin-bottom:75px}
 .security-heading h2{margin:0;font-size:clamp(51px,5.3vw,81px);line-height:.97}
-.security-heading h2 em{color:var(--gold-display)}
+.security-heading h2 em{color:var(--gold-brand);-webkit-text-stroke:1.7px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 2px 4px rgba(0,0,0,.2)}
 .security-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
   border-left:1px solid var(--line)}
 .security-grid article{min-height:290px;padding:31px 27px;border-right:1px solid var(--line);
   border-bottom:1px solid var(--line)}
 .security-grid article>span{width:34px;height:34px;display:grid;place-items:center;
-  border:1px solid var(--gold-dark);border-radius:50%;color:var(--gold-dark);font-size:15px;font-weight:700}
+  border:1px solid var(--gold-brand);border-radius:50%;color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 1px 1.5px rgba(0,0,0,.22);font-size:15px;font-weight:700}
 .security-grid strong{display:block;margin:54px 0 15px;font-family:var(--serif);font-size:22px;font-weight:400}
 .security-grid p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
 .security-statement{margin:110px -7vw 0;padding:78px 7vw;display:grid;grid-template-columns:.5fr 1fr 1fr;
@@ -261,13 +268,15 @@ section{scroll-margin-top:92px}
 .ambassador{min-height:760px;padding:125px 8vw;display:grid;grid-template-columns:1.25fr .75fr;gap:10vw;
   align-items:center;background:var(--cream)}
 .ambassador-copy h2{margin:0;font-size:clamp(55px,5.8vw,88px);line-height:.94}
-.ambassador-copy h2 em{color:var(--gold-display)}
+.ambassador-copy h2 em{color:var(--gold-brand);-webkit-text-stroke:1.7px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 2px 4px rgba(0,0,0,.2)}
 .ambassador-copy>p:not(.eyebrow){max-width:690px;margin:31px 0 48px;color:var(--muted);
   font-family:var(--serif);font-size:17px;line-height:1.65}
 .ambassador-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:22px;align-items:center;
   padding-top:28px;border-top:1px solid var(--line)}
 .ambassador-flow div{display:grid;gap:7px}
-.ambassador-flow div>span{color:var(--gold-dark);font-size:13px;font-weight:700}
+.ambassador-flow div>span{color:var(--gold-brand);-webkit-text-stroke:.62px var(--gold-stroke);paint-order:stroke fill;
+  text-shadow:0 1px 1.5px rgba(0,0,0,.22);font-size:13px;font-weight:700}
 .ambassador-flow strong{font-family:var(--serif);font-size:20px;font-weight:400}
 .ambassador-flow small{color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
 .ambassador-flow>i{color:var(--muted);font-style:normal;font-size:20px}
@@ -406,4 +415,14 @@ footer small{grid-column:1/-1;padding-top:26px;border-top:1px solid rgba(255,255
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *{transition:none!important}
+}
+
+/* los navegadores sin -webkit-text-stroke se quedarían con el oro pelado a
+   2:1 sobre fondo claro: ahí se cae a un halo oscuro, que sí entienden todos */
+@supports not (-webkit-text-stroke:1px #000){
+  .eyebrow:not(.light),.section-number,.quick-actions b,.app-nav .selected,
+  .belief h2 em,.benefits-heading h2 em,.security-heading h2 em,
+  .ambassador-copy h2 em,.benefit-top span,.ambassador-flow div>span,
+  .security-grid article>span{
+    text-shadow:0 0 2px var(--gold-stroke),0 1px 2px rgba(0,0,0,.55)}
 }
