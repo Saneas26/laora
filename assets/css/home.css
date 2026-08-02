@@ -363,8 +363,13 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-section{padding:52px 0 40px}
   .market-heading{grid-template-columns:1fr;gap:20px;padding:0 22px}
   .market-heading h2{font-size:36px}
-  .mq-titular{font-size:18px}
-  .mq-entradilla{font-size:18px}
+  /* en móvil el bloque de la pregunta se quedaba pequeño. Sube entero,
+     manteniendo titular y entradilla al mismo cuerpo, que es la relación
+     que tiene en escritorio. La entradilla lleva saltos forzados, así que
+     el tope es el cuerpo al que sus dos líneas siguen cabiendo enteras. */
+  .mq-antetitulo{font-size:19px}
+  .mq-titular{font-size:24px}
+  .mq-entradilla{font-size:24px}
   /* el rótulo y su flecha, algo más contenidos en pantalla estrecha */
   .market-opciones{margin-top:26px;padding:0 22px}
   .mo-flecha{max-width:none}
