@@ -77,11 +77,48 @@
 .cb.cb-claro .cb-menu{color:#43413d}
 .cb.cb-claro .cb-bolsa{color:#12161f}
 
+/* ---------- botón del desplegable ----------
+   Solo existe en móvil. Lo inyecta `cabecera.js` en todas las páginas,
+   así que no hay que tocar ni un HTML para que aparezca. */
+.cb-hamburguesa{display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;color:#fff}
+.cb-hamburguesa span{display:block;width:24px;height:2px;background:currentColor;
+  margin:0 auto;transition:transform .25s ease,opacity .2s ease}
+.cb.cb-claro .cb-hamburguesa{color:#12161f}
+/* abierto: las dos barras de fuera se cruzan y la del medio se apaga */
+.cb[data-menu="abierto"] .cb-hamburguesa span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.cb[data-menu="abierto"] .cb-hamburguesa span:nth-child(2){opacity:0}
+.cb[data-menu="abierto"] .cb-hamburguesa span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
 @media(max-width:900px){
-  .cb{padding:18px 5vw 0}
-  /* El menú completo no cabe: se esconde y quedan logo y bolsa, que es
-     lo que hacía ya la web. Un desplegable es otra tarea. */
-  .cb-menu{display:none}
+  /* El menú completo no cabe en una fila, así que baja a un panel
+     desplegable a todo el ancho. Antes simplemente se escondía y en
+     móvil no había forma de navegar. */
+  .cb{padding:18px 5vw 0;flex-wrap:wrap;gap:14px}
+  .cb-marca{margin-right:auto}
+  .cb-hamburguesa{display:flex}
+  /* Cerrado = `display:none`, a secas. Se probó a plegarlo con
+     `max-height` para animarlo, pero el valor abierto no llegaba a
+     aplicarse de forma fiable y el panel se quedaba a cero: no merece
+     la pena arriesgar la navegación entera del móvil por una animación.
+     El `flex-basis` mayor del 100 % más el margen negativo son los que
+     lo llevan a sangre de lado a lado. */
+  .cb-menu{display:none;order:3;flex-basis:calc(100% + 10vw);gap:0;
+    margin:14px -5vw 0;padding:0 5vw;max-height:70vh;overflow-y:auto;
+    /* fondo propio: el panel puede abrirse con la cabecera aún
+       transparente sobre la foto, y ahí el texto no se leería */
+    background:rgba(5,5,5,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    color:#fff}
+  .cb.cb-claro .cb-menu{background:rgba(247,247,245,.97);color:#43413d}
+  .cb[data-menu="abierto"] .cb-menu{display:grid}
+  .cb-menu a,.cb-menu .cb-pendiente{padding:17px 0;font-size:19px;
+    border-bottom:1px solid rgba(255,255,255,.14)}
+  .cb.cb-claro .cb-menu a,.cb.cb-claro .cb-menu .cb-pendiente{border-bottom-color:rgba(19,19,17,.14)}
+  .cb-menu > :last-child{border-bottom:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .cb-menu,.cb-hamburguesa span{transition:none}
 }
 
 /* Entradas del menú que todavía no tienen página. Se ven igual que el
