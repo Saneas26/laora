@@ -59,8 +59,9 @@ section{scroll-margin-top:92px}
 .hero h1{font-size:clamp(54px,5.65vw,88px);line-height:.92;margin:0}
 .hero h1 em,h2 em{color:var(--gold-soft);font-weight:400;font-style:italic}
 .hero-lead{max-width:700px;font-family:var(--serif);font-size:17px;line-height:1.55;color:#c9c5bd;margin:28px 0 0}
-.hero-nearby{max-width:700px;border-left:2px solid var(--gold);padding-left:14px;margin:16px 0 0;
-  color:#99968f;font-size:11px;line-height:1.5;letter-spacing:.2px}
+/* blanco puro y cuerpo grande: en el boceto iba en gris 11px y no se leía */
+.hero-nearby{max-width:700px;border-left:2px solid var(--gold);padding-left:16px;margin:18px 0 0;
+  color:#fff;font-size:15px;line-height:1.55;letter-spacing:.2px}
 .hero-actions{display:flex;align-items:center;gap:34px;margin-top:32px}
 .button{display:inline-flex;align-items:center;justify-content:space-between;gap:42px;padding:18px 22px;
   text-transform:uppercase;letter-spacing:1.25px;font-size:10px;font-weight:700;
@@ -92,17 +93,23 @@ section{scroll-margin-top:92px}
 .market-card{min-height:164px;position:relative;padding:23px 20px 20px;border-right:1px solid rgba(255,255,255,.16)}
 .market-card:last-child{border-right:0}
 .market-card-featured{background:rgba(255,255,255,.045)}
-.market-number{position:absolute;top:15px;right:15px;color:#6d695f;font-size:8px;letter-spacing:1px}
-.market-price{display:block;margin:0 0 13px;color:var(--gold);font-family:var(--serif);font-size:31px;line-height:1;font-weight:400}
-.market-card h3{max-width:190px;margin:29px 0 12px;font-family:var(--sans);font-size:10px;line-height:1.2;
-  letter-spacing:1px;text-transform:uppercase;font-weight:700}
+/* Los cuerpos de estas tarjetas van al mayor tamaño que cabe en la caja de
+   164 px sin tocarla, y en claro: el boceto los dejaba en 8–13 px y en grises
+   (#6d695f, #96948e) que sobre este fondo no se leen. */
+.market-number{position:absolute;top:14px;right:15px;color:var(--gold-soft);font-size:12px;
+  font-weight:700;letter-spacing:1px}
+.market-price{display:block;margin:0 0 10px;color:var(--gold);font-family:var(--serif);font-size:34px;
+  line-height:1;font-weight:400}
+.market-card h3{max-width:190px;margin:24px 0 9px;font-family:var(--sans);font-size:13px;line-height:1.25;
+  letter-spacing:.6px;text-transform:uppercase;font-weight:700;color:#fff}
 .market-card-featured h3{margin-top:0}
-.market-card p{max-width:205px;margin:0;color:#96948e;font-family:var(--serif);font-size:13px;line-height:1.35}
-.market-card-featured p{color:#d2cfc8;font-weight:700}
-.market-answer{margin:0 -4.5vw;padding:15px 4.5vw;display:flex;align-items:center;gap:38px;
+/* mismo tamaño, color y peso en las cinco tarjetas: en el boceto la destacada
+   iba en negrita y parecía de otro cuerpo */
+.market-card p{max-width:205px;margin:0;color:#eae7e1;font-family:var(--serif);font-size:16px;line-height:1.4}
+.market-answer{margin:0 -4.5vw;padding:18px 4.5vw;display:flex;align-items:center;gap:38px;
   background:var(--gold);color:var(--ink)}
-.market-answer span{flex:0 0 auto;text-transform:uppercase;letter-spacing:1.4px;font-size:8px;font-weight:700}
-.market-answer strong{font-family:var(--serif);font-size:15px;font-weight:400}
+.market-answer span{flex:0 0 auto;text-transform:uppercase;letter-spacing:1.4px;font-size:12px;font-weight:700}
+.market-answer strong{font-family:var(--serif);font-size:22px;line-height:1.3;font-weight:400}
 
 /* ---------- encuentra tu laOra (los cuatro mundos) ---------- */
 .worlds-section{background:var(--cream);padding:130px 7vw 150px}
@@ -237,6 +244,18 @@ footer .cb-marca{width:fit-content}
 footer p{grid-column:1/-1;margin:auto 0 0;color:#666;font-size:9px;letter-spacing:1px}
 
 @media(max-width:980px){
+  /* Con cinco columnas aquí las tarjetas se quedan en 110–175 px y el texto
+     legible las estira a 246 px de alto: la caja deja de ser la caja. Se pasa
+     al carrusel horizontal que el diseño ya usa en móvil, que las mantiene en
+     su proporción y en sus 164 px. */
+  .market-section{padding:34px 0 0}
+  .market-heading{padding:0 4.5vw}
+  .market-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:0 4.5vw 10px;scrollbar-width:none}
+  .market-grid::-webkit-scrollbar{display:none}
+  .market-card{min-width:290px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
+  .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
+  .market-answer{margin:0;padding:18px 4.5vw}
   .hero-media{background-position:58% center}
   .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.32)),
                            linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
@@ -259,7 +278,8 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#666;font-size:9px;letter-spacin
   .hero-copy{left:22px;right:22px;top:48%}
   .hero h1{font-size:47px}
   .hero-lead{font-size:16px;max-width:90%}
-  .hero-nearby{max-width:92%;font-size:10px}
+  /* el boceto lo bajaba a 10 px en móvil: justo donde más hay que leerlo */
+  .hero-nearby{max-width:100%;font-size:14px}
   .hero-actions{align-items:flex-start;flex-direction:column;gap:24px}
   .hero-model{display:none}
   .scroll-cue{left:22px;bottom:24px}
