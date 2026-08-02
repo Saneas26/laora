@@ -31,16 +31,20 @@
    en cada ficha de producto, no los del prototipo. Ver memoria del
    proyecto para el detalle de cada ajuste de datos.
    ============================================================ */
-:root{ --ink:#11110f; --paper:#eeeae1; --cream:#f7f4ed; --gold:#d5a93e; --muted:#8d8a82;
+:root{ --ink:#0c0c0a; --paper:#f5f2ea; --cream:#faf8f2; --gold:#d5a93e; --muted:#8d8a82;
   --ambar:#D4A94B; --oro:#D4A94B; }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden}
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit}
 .saneas{font-family:'Inter',sans-serif;font-weight:600}
+/* El nav real del site va en minúsculas (cabecera.css); el diseño lo
+   pide en mayúsculas — se sobreescribe solo en esta página. */
+.cb-menu a,.cb-menu .cb-pendiente{text-transform:uppercase;font-size:13px;letter-spacing:1.5px}
 .cb-vercta{border:1px solid rgba(255,255,255,.5);padding:12px 20px;text-transform:uppercase;
   font-family:'Inter',sans-serif;font-size:11px;letter-spacing:1.5px;color:#fff;
   transition:border-color .2s,color .2s}
@@ -48,8 +52,8 @@ button{font:inherit}
 @media(max-width:900px){ .cb-vercta{display:none} }
 
 .c-eyebrow-oro,.c-eyebrow-mudo{font-size:11px;letter-spacing:2.5px;font-weight:bold;
-  color:var(--gold);margin:0 0 28px;display:block}
-.c-eyebrow-mudo{color:#746e61}
+  color:var(--gold);margin:0 0 28px;display:block;text-transform:uppercase}
+.c-eyebrow-mudo{color:#5c5344}
 .c-titular{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-2.8px}
 .c-titular em{font-style:italic;font-weight:400;color:var(--gold)}
 .c-boton{padding:18px 24px;text-transform:uppercase;font-size:11px;font-weight:bold;
@@ -90,13 +94,13 @@ button{font:inherit}
 .c-intro{padding:130px 8vw 140px;display:grid;grid-template-columns:1fr 3fr;gap:40px;background:var(--paper)}
 .c-intro-inner{display:grid;grid-template-columns:1.5fr 1fr;gap:80px}
 .c-intro h2{font-size:clamp(48px,5vw,75px);line-height:1.02;margin:0}
-.c-intro-inner p{font-family:Georgia,serif;font-size:19px;line-height:1.65;color:#5f5d57;align-self:end}
+.c-intro-inner p{font-family:Georgia,serif;font-size:19px;line-height:1.65;color:#3f3d38;align-self:end}
 
 /* ---------- 4. buscador + filtros ---------- */
 .c-buscador{padding:100px 8vw 46px;background:var(--cream)}
 .c-buscador-top{display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:end}
 .c-buscador h2{font-size:clamp(50px,5vw,76px);line-height:1;margin:0}
-.c-buscador-top>p{font-family:Georgia,serif;font-size:18px;line-height:1.6;color:#66625a}
+.c-buscador-top>p{font-family:Georgia,serif;font-size:18px;line-height:1.6;color:#45413a}
 .c-filtros{display:flex;gap:8px;margin-top:65px;flex-wrap:wrap}
 .c-filtros button{border:1px solid #cbc5b9;background:transparent;padding:11px 20px;
   border-radius:30px;text-transform:uppercase;font-size:10px;letter-spacing:1px;cursor:pointer}
@@ -116,7 +120,7 @@ button{font:inherit}
 .c-producto-cab h3{font-family:Georgia,serif;font-size:38px;font-weight:400;margin:0}
 .c-producto-precio{text-align:right}
 .c-producto-precio b{display:block;font-size:19px;color:var(--ink);margin-top:5px}
-.c-producto-desc{font-family:Georgia,serif;color:#625f58;margin:16px 0 20px}
+.c-producto-desc{font-family:Georgia,serif;color:#423f39;margin:16px 0 20px}
 .c-producto-specs{display:flex;border-top:1px solid #cbc7bd;border-bottom:1px solid #cbc7bd;
   padding:13px 0;gap:22px;font-size:9px;text-transform:uppercase;letter-spacing:1px;flex-wrap:wrap}
 .c-producto-specs span+span::before{content:'·';padding-right:22px;color:#aaa}
@@ -131,13 +135,13 @@ button{font:inherit}
 .c-materiales-foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
 .c-materiales-copy{padding:110px 9vw 80px 7vw}
 .c-materiales-copy h2{font-size:clamp(50px,5vw,76px);line-height:1.05;margin:0 0 35px}
-.c-materiales-copy>p:not(.c-eyebrow-mudo){font-family:Georgia,serif;color:#aaa79e;line-height:1.7;font-size:17px}
+.c-materiales-copy>p:not(.c-eyebrow-mudo){font-family:Georgia,serif;color:#c4bfb2;line-height:1.7;font-size:17px}
 .c-materiales-copy ul{list-style:none;padding:20px 0;margin:25px 0}
 .c-materiales-copy li{display:flex;gap:25px;padding:22px 0;border-top:1px solid #3a3936}
 .c-materiales-copy li>span{color:var(--gold);font-size:10px}
 .c-materiales-copy b,.c-materiales-copy small{display:block}
 .c-materiales-copy b{font-family:Georgia,serif;font-size:17px;font-weight:400}
-.c-materiales-copy small{color:#8a8881;margin-top:6px}
+.c-materiales-copy small{color:#a39d8f;margin-top:6px}
 
 /* ---------- 7. reseña ---------- */
 .c-resena{text-align:center;padding:140px 18vw;background:var(--gold)}
@@ -150,7 +154,7 @@ button{font:inherit}
 .c-garantia{padding:120px 8vw;background:var(--cream)}
 .c-garantia-grid{display:grid;grid-template-columns:1fr 1fr;gap:10vw}
 .c-garantia h2{font-size:clamp(50px,5vw,75px);line-height:1;margin:0 0 30px}
-.c-garantia-grid>div>p{font-family:Georgia,serif;color:#656158;font-size:18px;line-height:1.6;max-width:540px}
+.c-garantia-grid>div>p{font-family:Georgia,serif;color:#423e37;font-size:18px;line-height:1.6;max-width:540px}
 .c-garantia-cards{display:grid;grid-template-columns:repeat(2,1fr);
   border-top:1px solid #bbb6aa;border-left:1px solid #bbb6aa}
 .c-garantia-cards>div{padding:35px;border-right:1px solid #bbb6aa;border-bottom:1px solid #bbb6aa;
@@ -162,10 +166,16 @@ button{font:inherit}
 .c-final{text-align:center;background:#161614;color:#fff;padding:130px 20px}
 .c-final h2{font-size:clamp(60px,7vw,100px);line-height:.92;margin:0 0 50px}
 
-/* laora.css pinta el pie con --gris; aquí hay que corregirlo o sale
-   claro sobre un pie oscuro. La rejilla Grupo Saneas es obligatoria
-   en todas las páginas del site — no forma parte del handoff. */
-footer{background:#0d0d0c;border-top:1px solid #2C2C2C}
+/* ---------- pie ---------- */
+/* Pie del propio diseño (logo + eslogan + enlaces + copyright), pedido
+   expresamente en vez del pie con la rejilla Grupo Saneas. Logo real
+   (.brand, no el símbolo provisional del prototipo). */
+footer.c-pie{background:#0d0d0c;color:#fff;padding:75px 8vw 35px;text-align:left;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;border-top:0}
+.c-pie p{font-family:Georgia,serif;color:#999;line-height:1.5}
+.c-pie div{display:grid;gap:14px;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.c-pie small{grid-column:1/-1;border-top:1px solid #333;padding-top:25px;color:#666;
+  font-size:9px;letter-spacing:1px;display:block}
 
 .c-reveal{opacity:0;transform:translateY(22px);
   transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
@@ -205,6 +215,7 @@ footer{background:#0d0d0c;border-top:1px solid #2C2C2C}
   .c-garantia-cards b{font-size:35px}
   .c-final{padding:100px 24px}
   .c-final h2{font-size:55px}
+  footer.c-pie{grid-template-columns:1fr;padding:60px 24px 30px;gap:26px}
 }
 </style>
 </head>
@@ -241,7 +252,7 @@ footer{background:#0d0d0c;border-top:1px solid #2C2C2C}
 <main>
 
   <!-- 1 · hero -->
-  <section class="c-hero">
+  <section class="c-hero" id="top">
     <div class="c-hero-img" role="img" aria-label="LO-02 «Bitácora» de laOra, esfera turquesa y brazalete integrado de acero"></div>
     <div class="c-hero-shade"></div>
     <div class="c-hero-copy">
@@ -455,36 +466,16 @@ footer{background:#0d0d0c;border-top:1px solid #2C2C2C}
 })();
 </script>
 
-<footer>
-  <div class="brand clara">la<span class="o"></span>ra<sup>®</sup></div>
-  <div class="footer-links">
-    <a href="/materiales.html">Materiales</a>
-    <a href="/manifiesto.html">El alma de un automático</a>
-    <a href="/condiciones-de-venta.html">Condiciones de venta</a>
-    <a href="/privacidad.html">Privacidad</a>
+<footer class="c-pie">
+  <a class="brand clara" href="/">la<span class="o"></span>ra<sup>®</sup></a>
+  <p>Relojes con diseño propio.<br>Pensados en España.</p>
+  <div>
+    <a href="#top">Colección</a>
+    <a href="/filosofia.html">Filosofía</a>
+    <a href="#garantia">Garantía</a>
+    <span class="cb-pendiente">Contacto</span>
   </div>
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-  <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
+  <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 
 <script src="/assets/js/cabecera.js" defer></script>
