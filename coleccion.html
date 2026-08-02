@@ -136,28 +136,32 @@ button{font:inherit}
 .c-producto-precio{text-align:right}
 .c-producto-precio b{display:block;font-size:19px;color:var(--ink);margin-top:5px}
 .c-producto-desc{font-family:Georgia,serif;color:#423f39;margin:16px 0 20px}
-/* Una fila .c-producto-specs por cada acabado disponible del modelo,
-   en columnas FIJAS (no flex): así un nombre de movimiento más largo
-   o más corto no desplaza las demás columnas de fila a fila. Los
-   valores que un modelo no tiene (mm de Cero Cero, resistencia de
-   Cóctel) se marcan con «—», nunca se inventan. */
-.c-producto-specs-lista{border-top:1px solid #cbc7bd;margin-top:2px}
-.c-producto-specs{display:grid;grid-template-columns:58px 1fr 118px;column-gap:16px;align-items:baseline;
-  border-bottom:1px solid #cbc7bd;padding:13px 0;font-size:9px;text-transform:uppercase;letter-spacing:1px}
-.c-producto-specs span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.c-producto-specs span:nth-child(2){white-space:normal;line-height:1.4}
-.c-producto-specs span:not(:first-child){border-left:1px solid #cbc7bd;padding-left:16px}
-.c-producto-cta{border:0;background:none;padding:18px 0 8px;width:100%;display:flex;
-  justify-content:space-between;text-transform:uppercase;font-size:10px;font-weight:bold;
-  letter-spacing:1.4px;cursor:pointer;color:var(--gold-vivo)}
-.c-producto-cta span{font-size:17px}
+/* La ficha ya no lleva la tabla de acabados: el listado enseña modelo,
+   precio y promesa, y el detalle vive en la página del reloj. Las specs
+   por acabado se quitaron entera con su CSS.
+
+   El acceso deja de ser un rótulo suelto y pasa a ser un rectángulo negro
+   macizo al 60 % del ancho de la tarjeta, con el nombre a la izquierda y la
+   flecha empujada al extremo derecho.
+
+   El `min-width` es el suelo: el rótulo más largo («Ver Cero Cero») necesita
+   127 px, más relleno, hueco y flecha son 197. Por debajo de eso el 60 % se
+   queda corto y los ocho botones parten en dos líneas — pasa en pantallas de
+   menos de 360 px. El `min()` evita que ese suelo se salga de una tarjeta
+   aún más estrecha. */
+.c-producto-cta{width:60%;min-width:min(200px,100%);margin-top:22px;border:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:17px 20px;background:var(--ink);color:#fff;white-space:nowrap;
+  text-transform:uppercase;font-size:13px;font-weight:bold;letter-spacing:1.4px;
+  transition:background .2s ease,transform .2s ease}
+.c-producto-cta:hover{background:#2a2823;transform:translateY(-2px)}
+.c-producto-cta span{font-size:17px;line-height:1}
 
 /* ---------- modo Colección Eclipse ---------- */
 /* Se activa con la clase .c-eclipse-modo en <body> desde el JS del
    filtro (no una clase por tarjeta): TODO el bloque de buscador+grid
-   pasa a negro, el dorado se mantiene (nombre del modelo y CTA ya son
-   dorados por defecto, así que no se tocan aquí), y lo que era negro
-   (eyebrow, precio, specs, descripción) pasa a blanco puro. */
+   pasa a negro, el dorado del nombre del modelo se mantiene, y lo que
+   era negro (eyebrow, precio, descripción) pasa a blanco puro. */
 body.c-eclipse-modo .c-buscador,
 body.c-eclipse-modo .c-grid{background:#08080a}
 body.c-eclipse-modo .c-buscador h2{color:#fff}
@@ -169,9 +173,10 @@ body.c-eclipse-modo .c-producto-foto{background:#000}
 body.c-eclipse-modo .c-producto-cab p{color:#a8a29a}
 body.c-eclipse-modo .c-producto-precio b{color:#fff}
 body.c-eclipse-modo .c-producto-desc{color:#f1efe8}
-body.c-eclipse-modo .c-producto-specs-lista{border-color:#3a3936}
-body.c-eclipse-modo .c-producto-specs{color:#e5e1d8;border-color:#3a3936}
-body.c-eclipse-modo .c-producto-specs span:not(:first-child){border-color:#3a3936}
+/* el botón se invierte: negro sobre el fondo #08080a de Eclipse sería
+   un rectángulo invisible */
+body.c-eclipse-modo .c-producto-cta{background:#fff;color:var(--ink)}
+body.c-eclipse-modo .c-producto-cta:hover{background:#e6e2d8}
 
 /* ---------- 6. materiales ---------- */
 .c-materiales{display:grid;grid-template-columns:1.05fr .95fr;background:#08080a;color:#fff}
@@ -364,11 +369,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-01 · Cronógrafo</p><h3>Lunar<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>269,90 €</b></p></div>
         <p class="c-producto-desc">Para quien mide el tiempo sin perderlo de vista.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63</span><span>5 ATM (50 m)</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuerda manual Seagull ST1901</span><span>5 ATM (50 m)</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo VK63 (Eclipse, negro)</span><span>5 ATM (50 m)</span></div>
-        </div>
         <a class="c-producto-cta" href="/lunar.html">Ver Lunar <span>→</span></a>
       </div>
     </article>
@@ -380,12 +380,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-02 · Deportivo integrado</p><h3>Bitácora<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>259 €</b></p></div>
         <p class="c-producto-desc">El equilibrio entre carácter, precisión y uso diario.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda 515</span><span>10 ATM (100 m)</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático NH35</span><span>10 ATM (100 m)</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015</span><span>10 ATM (100 m)</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Miyota 9015 (Eclipse, negro)</span><span>10 ATM (100 m)</span></div>
-        </div>
         <a class="c-producto-cta" href="/bitacora.html">Ver Bitácora <span>→</span></a>
       </div>
     </article>
@@ -397,11 +391,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-03 · Militar de campo</p><h3>Trinchera<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>289,90 €</b></p></div>
         <p class="c-producto-desc">Legible, robusto y preparado para acompañarte.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo Ronda/Miyota</span><span>10 ATM</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático Seiko NH35</span><span>10 ATM</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015 (Eclipse)</span><span>10 ATM</span></div>
-        </div>
         <a class="c-producto-cta" href="/trinchera.html">Ver Trinchera <span>→</span></a>
       </div>
     </article>
@@ -413,12 +402,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-04 · Deportivo integrado</p><h3>Precisa<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>329,90 €</b></p></div>
         <p class="c-producto-desc">Geometría limpia y presencia sin estridencias.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span><span>100 m</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático NH35</span><span>100 m</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático PT5000 (Cenit Signature)</span><span>100 m</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015 (Eclipse)</span><span>100 m</span></div>
-        </div>
         <a class="c-producto-cta" href="/precisa.html">Ver Precisa <span>→</span></a>
       </div>
     </article>
@@ -430,10 +413,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-05 · Vestir</p><h3>Bauhaus<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>249 €</b></p></div>
         <p class="c-producto-desc">Menos elementos. Más intención.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>38 mm</span><span>Cuarzo Ronda</span><span>10 ATM</span></div>
-          <div class="c-producto-specs"><span>38 mm</span><span>Automático ST17</span><span>10 ATM</span></div>
-        </div>
         <a class="c-producto-cta" href="/bauhaus.html">Ver Bauhaus <span>→</span></a>
       </div>
     </article>
@@ -445,12 +424,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-06 · Buceador</p><h3>Cero Cero<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>190 €</b></p></div>
         <p class="c-producto-desc">Herramienta de buceo, compañero de superficie.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>—</span><span>Mecacuarzo Seiko VH31</span><span>300 m</span></div>
-          <div class="c-producto-specs"><span>—</span><span>Automático Seiko NH35</span><span>300 m</span></div>
-          <div class="c-producto-specs"><span>—</span><span>Automático superior</span><span>300 m</span></div>
-          <div class="c-producto-specs"><span>—</span><span>Automático superior (Eclipse, DLC negro)</span><span>300 m</span></div>
-        </div>
         <a class="c-producto-cta" href="/relojes/lo-02-cero-cero.html">Ver Cero Cero <span>→</span></a>
       </div>
     </article>
@@ -462,11 +435,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-07 · Vestir</p><h3>Cóctel<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>299,90 €</b></p></div>
         <p class="c-producto-desc">La hora elegante, sin esperar una ocasión.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>40 mm</span><span>Cuarzo suizo Ronda</span><span>—</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático NH35A</span><span>—</span></div>
-          <div class="c-producto-specs"><span>40 mm</span><span>Automático Miyota 9015</span><span>—</span></div>
-        </div>
         <a class="c-producto-cta" href="/coctel.html">Ver Cóctel <span>→</span></a>
       </div>
     </article>
@@ -478,11 +446,6 @@ footer.c-pie{background:#08080a;color:#fff;padding:75px 8vw 35px;text-align:left
       <div class="c-producto-info">
         <div class="c-producto-cab"><div><p>LO-08 · Buceador</p><h3>Tortuga<span class="punto">.</span></h3></div><p class="c-producto-precio">desde <b>399,90 €</b></p></div>
         <p class="c-producto-desc">Un diver automático con identidad propia.</p>
-        <div class="c-producto-specs-lista">
-          <div class="c-producto-specs"><span>44 mm</span><span>Cuarzo VH31</span><span>20 ATM</span></div>
-          <div class="c-producto-specs"><span>44 mm</span><span>Automático Seiko NH35</span><span>20 ATM</span></div>
-          <div class="c-producto-specs"><span>44 mm</span><span>Automático NH36, día-fecha (Eclipse)</span><span>20 ATM</span></div>
-        </div>
         <a class="c-producto-cta" href="/tortuga.html">Ver Tortuga <span>→</span></a>
       </div>
     </article>
