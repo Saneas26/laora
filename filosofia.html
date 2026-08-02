@@ -3,184 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="No nacimos para vender relojes. Nacimos porque comprar uno nos parecía absurdo. Descubre por qué existe laOra y qué pagas de verdad cuando compras un reloj.">
+<meta name="description" content="Seleccionamos los componentes, montamos reloj a reloj en Madrid, comprobamos, regulamos y probamos. El precio va a la pieza, no al ruido que la rodea.">
+<meta property="og:title" content="Filosofía laOra® — Nacimos para darte más reloj">
+<meta property="og:description" content="El problema no es pagar por calidad. Es pagar por lo que no la mejora.">
+<meta property="og:url" content="https://laora.es/filosofia.html">
+<meta property="og:image" content="https://laora.es/assets/img/filosofia/hero-trinchera.jpg">
 <title>Filosofía — laOra®</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/laora.css?v=16">
+<!-- Nunito Sans e Inter solo alimentan la cabecera y el logotipo. El resto
+     va en Georgia y Arial, como el boceto de diseño. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- OJO: subir el ?v= en CADA cambio de filosofia.css. Cloudflare la sirve
+     con cache-control max-age=14400. -->
+<link rel="stylesheet" href="/assets/css/filosofia.css?v=1">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=8">
-<style>
-/* ============================================================
-   FILOSOFÍA — landing de por qué existe laOra
-   Prefijo `fl-` para no chocar con laora.css ni cabecera.css.
-   Estructura sacada del boceto filosofia_landing.png de Óscar.
-   ============================================================ */
-:root{--negro:#090909;--ambar:#D4A94B;--oro:#D4A94B}
-body{background:var(--negro);color:#fff;overflow-x:hidden}
-
-/* ---------- 1. HERO ---------- */
-.fl-hero{max-width:1280px;margin:0 auto;padding:100px 4vw 0;
-  display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;min-height:80vh}
-.fl-hero-texto{max-width:560px}
-.fl-hero-titulo{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,5.6vw,72px);font-weight:400;line-height:1.06;
-  color:#fff;letter-spacing:-.01em}
-.fl-hero-titulo em{font-style:normal;color:var(--ambar);display:block;margin-top:4px}
-.fl-hero-sub{font-family:'Inter',sans-serif;font-size:20px;color:#B8B8B8;
-  margin-top:28px;line-height:1.5;max-width:420px}
-.fl-hero-foto{display:flex;justify-content:center}
-.fl-hero-foto img{max-height:70vh;width:auto;max-width:100%}
-
-/* ---------- 2. LAS CINCO FORMAS ---------- */
-.fl-cinco{max-width:1280px;margin:0 auto;padding:80px 4vw 0}
-.fl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;
-  border:1px solid #2a2a2a;border-radius:4px;overflow:hidden}
-.fl-forma{text-align:center;padding:32px 16px 36px;
-  border-right:1px solid #2a2a2a;display:flex;flex-direction:column;align-items:center}
-.fl-forma:last-child{border-right:none}
-.fl-num{font-family:'Inter',sans-serif;font-size:13px;letter-spacing:.1em;
-  color:#B8B8B8}
-.fl-forma h3{font-family:'Inter',sans-serif;font-size:clamp(13px,1.1vw,16px);font-weight:600;letter-spacing:.06em;
-  text-transform:uppercase;color:#fff;margin-top:6px}
-.fl-forma p{font-family:'Inter',sans-serif;font-size:clamp(12px,1vw,14px);color:#B8B8B8;margin-top:6px;
-  line-height:1.4}
-.fl-forma-foto{width:100%;aspect-ratio:1;overflow:hidden;margin-top:16px;
-  background:#111;border-radius:4px}
-.fl-forma-foto img{width:100%;height:100%;object-fit:cover}
-.fl-equis{color:var(--ambar);font-size:28px;font-weight:300;margin-top:16px;line-height:1}
-.fl-veredicto{font-size:clamp(10px,.9vw,12px);font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px}
-
-/* ---------- 3 y 5. FRASES CENTRADAS ---------- */
-.fl-frase{text-align:center;padding:64px 4vw;max-width:800px;margin:0 auto}
-.fl-frase p{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,2.6vw,30px);color:#fff;line-height:1.3;font-weight:400}
-.fl-frase .fl-gold{color:var(--ambar);font-weight:500;display:block;margin-top:4px;
-  font-size:clamp(24px,3vw,34px)}
-
-/* ---------- 4. ENTONCES PENSÉ / QUITAMOS ---------- */
-.fl-pensar{max-width:1280px;margin:0 auto;padding:0 4vw 64px;
-  display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative;
-  border:1px solid #2a2a2a;border-radius:4px;overflow:visible}
-.fl-pensar-izq{padding:32px 40px;display:flex;flex-direction:column;justify-content:center;
-  border-right:1px solid #2a2a2a}
-.fl-pensar-izq h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3vw,40px);font-weight:400;color:#fff}
-.fl-pensar-izq .fl-texto-mute{font-family:'Inter',sans-serif;font-size:20px;color:#B8B8B8;
-  margin-top:20px;line-height:1.55}
-.fl-pensar-izq .fl-texto-gold{font-family:'Inter',sans-serif;font-size:20px;color:var(--ambar);
-  margin-top:16px;line-height:1.55}
-.fl-play{width:120px;height:120px;color:var(--ambar);
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2}
-.fl-play svg{width:100%;height:100%}
-
-.fl-pensar-der{padding:32px 40px}
-.fl-pensar-der h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.6vw,36px);font-weight:400;color:#fff;
-  text-align:center;margin-bottom:24px}
-.fl-iconos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 16px}
-.fl-icono{text-align:center}
-.fl-icono svg{width:52px;height:52px;margin:0 auto 10px;display:block}
-.fl-icono span{font-family:'Inter',sans-serif;font-size:clamp(11px,1vw,13px);color:#B8B8B8;line-height:1.35;
-  display:block}
-.fl-iconos-dos{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 16px;
-  margin-top:24px;max-width:340px;margin-left:auto;margin-right:auto}
-
-/* ---------- 6. LO QUE SÍ PAGAS / LO QUE NO PAGAS ---------- */
-.fl-pagas{max-width:1280px;margin:0 auto;padding:0 4vw 80px;
-  display:grid;grid-template-columns:1fr 1fr;gap:0}
-.fl-pagas-col{padding:48px 40px;display:flex;align-items:center;gap:28px}
-.fl-pagas-contenido{flex:1;min-width:0}
-.fl-pagas-contenido h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.6vw,34px);font-weight:400;color:#fff;
-  text-decoration:underline;text-decoration-color:var(--ambar);
-  text-underline-offset:8px;text-decoration-thickness:2px;margin-bottom:28px}
-.fl-lista{list-style:none;padding:0;margin:0}
-.fl-lista li{display:flex;align-items:center;gap:14px;padding:10px 0;
-  font-family:'Inter',sans-serif;font-size:clamp(14px,1.2vw,18px);color:#F7F7F5}
-.fl-check{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ambar);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.fl-check svg{width:12px;height:12px;stroke:var(--ambar);fill:none;stroke-width:2.5}
-.fl-cross{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ambar);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.fl-cross svg{width:10px;height:10px;stroke:var(--ambar);fill:none;stroke-width:2.5}
-.fl-pagas-img{width:clamp(160px,16vw,240px);flex-shrink:0;border-radius:8px;overflow:hidden;opacity:.85}
-.fl-pagas-img img{width:100%;height:auto;display:block}
-
-/* ---------- 7. NUESTRA OBSESIÓN ---------- */
-.fl-obsesion{max-width:1280px;margin:0 auto;padding:64px 4vw 0;
-  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.fl-obsesion-foto{border-radius:8px;overflow:hidden}
-.fl-obsesion-foto img{width:100%;height:auto;display:block}
-.fl-obsesion-texto h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,2.8vw,38px);font-weight:400;color:#fff;margin-bottom:16px}
-.fl-obsesion-texto p{font-family:'Inter',sans-serif;font-size:20px;color:#B8B8B8;line-height:1.55}
-.fl-obsesion-texto .fl-cita{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
-  font-size:clamp(22px,2.2vw,28px);color:var(--ambar);margin-top:16px;line-height:1.35}
-.fl-obsesion-texto .fl-y-no{color:#B8B8B8;margin-top:12px;font-size:20px}
-
-/* ---------- 8. ESA ES LA DIFERENCIA ---------- */
-.fl-diferencia{text-align:center;padding:64px 4vw 32px;max-width:900px;margin:0 auto}
-.fl-diferencia h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(30px,3.2vw,42px);font-weight:400;color:#fff;margin-bottom:12px}
-.fl-diferencia p{font-family:'Inter',sans-serif;font-size:20px;color:#B8B8B8;line-height:1.5}
-.fl-diferencia .fl-valor{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,2.6vw,34px);color:var(--ambar);font-weight:500;
-  margin-top:8px;line-height:1.25}
-
-/* ---------- 9. CTA ---------- */
-.fl-cta{text-align:center;padding:24px 4vw 48px}
-.fl-cta a{display:inline-block;padding:14px 34px;background:transparent;color:var(--ambar);
-  font-family:'Inter',sans-serif;font-weight:500;font-size:18px;
-  letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:0;
-  border:1px solid var(--ambar);transition:background .25s}
-.fl-cta a:hover{background:rgba(212,169,75,.08)}
-
-/* ---------- 10. TAGLINE FINAL ---------- */
-.fl-tagline{display:flex;justify-content:center;align-items:center;gap:24px;
-  padding:0 4vw 64px;font-family:'Inter',sans-serif;font-size:clamp(12px,1vw,14px);color:#B8B8B8}
-.fl-tagline span{display:flex;align-items:center;gap:8px}
-.fl-tagline svg{width:16px;height:16px;stroke:#B8B8B8;fill:none;stroke-width:1.5}
-
-/* ---------- responsive ---------- */
-@media(max-width:900px){
-  .fl-hero{grid-template-columns:1fr;text-align:center;padding-top:80px;min-height:auto;gap:40px}
-  .fl-hero-texto{max-width:100%;margin:0 auto}
-  .fl-hero-sub{margin-left:auto;margin-right:auto}
-  .fl-hero-foto img{max-height:50vh}
-  .fl-grid{grid-template-columns:repeat(2,1fr)}
-  .fl-forma:nth-child(5){border-right:none}
-  .fl-forma:nth-child(2){border-right:none}
-  .fl-forma:nth-child(4){border-right:none}
-  .fl-forma{border-bottom:1px solid #2a2a2a}
-  .fl-pensar{grid-template-columns:1fr}
-  .fl-pensar-izq{border-right:none;border-bottom:1px solid #2a2a2a}
-  .fl-pagas{grid-template-columns:1fr}
-  .fl-pagas-col{flex-direction:column}
-  .fl-pagas-img{width:100%;max-width:320px}
-  .fl-obsesion{grid-template-columns:1fr;text-align:center}
-  .fl-obsesion-foto{max-width:480px;margin:0 auto}
-}
-@media(max-width:600px){
-  .fl-grid{grid-template-columns:1fr}
-  .fl-forma{border-right:none;border-bottom:1px solid #2a2a2a}
-  .fl-forma:last-child{border-bottom:none}
-  .fl-tagline{flex-direction:column;gap:12px}
-}
-
-/* ---------- footer override ---------- */
-footer{background:var(--negro);border-top:1px solid #2C2C2C}
-</style>
 </head>
 <body>
 
-<!-- ============================================================
-     CABECERA
-     ============================================================ -->
+<!-- CABECERA REAL — la misma del resto del sitio, sin tocar cabecera.css -->
 <header class="cb">
-  <a class="cb-marca" href="/">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu">
+  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu" aria-label="Navegación principal">
     <a href="/coleccion.html">colección</a>
-    <a class="activo" href="/filosofia.html">filosofía</a>
-    <span class="cb-pendiente">sobre laOra</span>
-    <span class="cb-pendiente">servicio</span>
-    <span class="cb-pendiente">contacto</span>
+    <a href="/filosofia.html" class="activo" aria-current="page">filosofía</a>
+    <a href="#proceso">proceso</a>
+    <a href="#promesa">garantía</a>
+    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico (.cb-marca) -->
+    <a class="cb-club" href="https://laora.es/club.html">club <span class="cb-marca">la<span class="o"></span>ra</span></a>
   </nav>
   <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -190,314 +43,273 @@ footer{background:var(--negro);border-top:1px solid #2C2C2C}
 
 <main>
 
-<!-- ============================================================
-     1 · HERO
-     ============================================================ -->
-<section class="fl-hero">
-  <div class="fl-hero-texto">
-    <h1 class="fl-hero-titulo">
-      No nacimos<br>para vender relojes.
-      <em>Nacimos porque comprar<br>uno nos parecía absurdo.</em>
-    </h1>
-    <p class="fl-hero-sub">Hay cinco formas de conseguir un gran reloj hoy.<br>Y ninguna nos convenía.</p>
-  </div>
-  <div class="fl-hero-foto">
-    <img src="/assets/img/filosofia/nonacimosparavenderrelojes.png" alt="Reloj laOra" width="540" height="720" loading="eager">
-  </div>
-</section>
-
-<!-- ============================================================
-     2 · LAS CINCO FORMAS
-     ============================================================ -->
-<section class="fl-cinco">
-  <div class="fl-grid">
-
-    <div class="fl-forma">
-      <span class="fl-num">01</span>
-      <h3>La joyería</h3>
-      <p>Lista de espera.<br>Precios infladísimos.</p>
-      <div class="fl-forma-foto">
-        <img src="/assets/img/filosofia/lajoyeria.png" alt="Joyería de lujo" loading="lazy" width="400" height="400">
+  <!-- 1 · PORTADA -->
+  <section class="hero" id="inicio">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow light">Filosofía laOra · No es dropshipping</p>
+      <h1>
+        No nacimos para<br>
+        venderte un apellido.<br>
+        <em>Nacimos para darte más reloj.</em>
+      </h1>
+      <p class="hero-lead">
+        Seleccionamos los componentes, montamos reloj a reloj en Madrid,
+        comprobamos, regulamos y probamos. El precio va a la pieza, no al ruido
+        que la rodea.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-gold" href="#proceso">Ver cómo lo hacemos <span aria-hidden="true">↓</span></a>
+        <a class="text-link light-link" href="/coleccion.html">Descubrir la colección</a>
       </div>
-      <span class="fl-equis">✕</span>
-      <span class="fl-veredicto">Muchos intermediarios</span>
+    </div>
+    <div class="hero-note">
+      <span>Trinchera · LO—03</span>
+      <strong>Field watch automático.</strong>
+    </div>
+  </section>
+
+  <!-- 2 · LOS CINCO PILARES -->
+  <section class="pillar-strip" aria-label="Los cinco pilares de laOra">
+    <article><span>01</span><div><strong>Selección</strong><p>Componentes y proveedores contrastados.</p></div></article>
+    <article><span>02</span><div><strong>Montaje</strong><p>Reloj a reloj en Madrid.</p></div></article>
+    <article><span>03</span><div><strong>Precisión</strong><p>Movimiento comprobado y regulado cuando procede.</p></div></article>
+    <article><span>04</span><div><strong>Hermeticidad</strong><p>Verificada según las especificaciones de cada modelo.</p></div></article>
+    <article><span>05</span><div><strong>Cercanía</strong><p>Garantía y servicio técnico aquí.</p></div></article>
+  </section>
+
+  <!-- 3 · LA PREGUNTA -->
+  <section class="belief" id="por-que">
+    <p class="section-number">01 — La pregunta</p>
+    <div class="belief-title">
+      <h2>
+        El problema no es<br>
+        pagar por calidad.<br>
+        <em>Es pagar por lo que no la mejora.</em>
+      </h2>
+    </div>
+    <div class="belief-copy">
+      <p>
+        Un gran reloj debería justificar su precio al abrir la caja, no al mirar
+        el apellido de la esfera.
+      </p>
+      <p>
+        Por eso quitamos intermediarios, tiendas y costes de representación para
+        concentrar el presupuesto donde sí se siente: materiales, movimiento,
+        montaje y control.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4 · LO QUE SÍ PAGAS / LO QUE DEJAMOS FUERA -->
+  <section class="value-contrast">
+    <div class="value-panel value-panel-paid">
+      <p class="eyebrow light">Lo que sí pagas</p>
+      <h2>Todo lo que mejora el reloj.</h2>
+      <ol>
+        <li><span>01</span>Acero 316L</li>
+        <li><span>02</span>Cristal de zafiro cuando corresponde</li>
+        <li><span>03</span>Movimientos japoneses y suizos identificados</li>
+        <li><span>04</span>Brazaletes y cierres bien resueltos</li>
+        <li><span>05</span>Control final unidad a unidad</li>
+      </ol>
+    </div>
+    <div class="value-image" aria-hidden="true">
+      <span><small>Tortuga · LO—08</small>La pieza antes que el símbolo.</span>
+    </div>
+    <div class="value-panel value-panel-removed">
+      <p class="eyebrow">Lo que dejamos fuera</p>
+      <h2>Todo lo que infla el precio.</h2>
+      <ol>
+        <li><span>01</span>Peaje de marca</li>
+        <li><span>02</span>Boutiques y distribuidores</li>
+        <li><span>03</span>Campañas millonarias</li>
+        <li><span>04</span>Embajadores</li>
+        <li><span>05</span>Packaging que termina en un cajón</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5 · LA CURVA DEL VALOR -->
+  <section class="price-logic" aria-labelledby="price-logic-title">
+    <div class="price-logic-orbit orbit-one" aria-hidden="true"></div>
+    <div class="price-logic-orbit orbit-two" aria-hidden="true"></div>
+    <div class="price-logic-head">
+      <p class="eyebrow">La curva del valor</p>
+      <h2 id="price-logic-title">
+        ¿Más precio significa<br>
+        <em>siempre más reloj?</em>
+      </h2>
+      <p>
+        Al principio, cada euro suele notarse. Después, la mejora se frena y el
+        precio sigue corriendo solo.
+      </p>
     </div>
 
-    <div class="fl-forma">
-      <span class="fl-num">02</span>
-      <h3>La reventa</h3>
-      <p>Mismo reloj.<br>Más caro aún.</p>
-      <div class="fl-forma-foto">
-        <img src="/assets/img/filosofia/lareventa.png" alt="Reventa de relojes" loading="lazy" width="400" height="400">
+    <div class="price-steps">
+      <article class="price-card">
+        <div class="price-card-top"><span>01</span><i aria-hidden="true">✦</i></div>
+        <p>¿Un reloj de</p>
+        <strong class="price-high">100€</strong>
+        <p class="price-relation">es mejor que uno de</p>
+        <strong class="price-low">50€?</strong>
+        <div class="price-answer"><span aria-hidden="true">↗</span><strong>Seguro</strong></div>
+      </article>
+      <article class="price-card">
+        <div class="price-card-top"><span>02</span><i aria-hidden="true">✦</i></div>
+        <p>¿Un reloj de</p>
+        <strong class="price-high">200€</strong>
+        <p class="price-relation">es mejor que uno de</p>
+        <strong class="price-low">100€?</strong>
+        <div class="price-answer"><span aria-hidden="true">↗</span><strong>Sí</strong></div>
+      </article>
+      <article class="price-card">
+        <div class="price-card-top"><span>03</span><i aria-hidden="true">✦</i></div>
+        <p>¿Un reloj de</p>
+        <strong class="price-high">700€</strong>
+        <p class="price-relation">es mejor que uno de</p>
+        <strong class="price-low">300€?</strong>
+        <div class="price-answer"><span aria-hidden="true">↗</span><strong>Probablemente</strong></div>
+      </article>
+      <article class="price-card">
+        <div class="price-card-top"><span>04</span><i aria-hidden="true">✦</i></div>
+        <p>¿Un reloj de</p>
+        <strong class="price-high">8.000€</strong>
+        <p class="price-relation">es 10 veces mejor que uno de</p>
+        <strong class="price-low">800€?</strong>
+        <div class="price-answer"><span aria-hidden="true">↗</span><strong>Pues no</strong></div>
+      </article>
+    </div>
+
+    <div class="price-logic-verdict">
+      <span>La conclusión</span>
+      <strong>El precio sube en línea recta.</strong>
+      <strong>La calidad, no.</strong>
+    </div>
+  </section>
+
+  <!-- 6 · EL PROCESO EN MADRID -->
+  <section class="process" id="proceso">
+    <div class="process-image">
+      <img src="/assets/img/taller-madrid.jpg" alt="Trabajo relojero en el taller de Madrid" loading="lazy">
+      <span>Madrid · Antes de llegar a tu muñeca</span>
+    </div>
+    <div class="process-copy">
+      <p class="eyebrow">Nuestro proceso</p>
+      <h2>
+        No prometemos magia.<br>
+        <em>Prometemos método.</em>
+      </h2>
+      <p class="process-intro">
+        No compramos un reloj terminado para mandarlo directo desde una fábrica a
+        tu casa. Cada unidad pasa por nuestras manos antes de pasar a las tuyas.
+      </p>
+      <ol class="process-list">
+        <li><span>01</span><div><strong>Buscamos</strong><p>Comparamos proveedores, materiales y tolerancias antes de elegir una sola pieza.</p></div></li>
+        <li><span>02</span><div><strong>Montamos</strong><p>Los componentes llegan a Madrid. Aquí empieza el reloj: uno a uno, sin atajos.</p></div></li>
+        <li><span>03</span><div><strong>Afinamos</strong><p>Comprobamos la marcha y regulamos el movimiento cuando el modelo lo permite.</p></div></li>
+        <li><span>04</span><div><strong>Probamos</strong><p>Revisamos acabados, funcionamiento y hermeticidad según cada especificación.</p></div></li>
+        <li><span>05</span><div><strong>Respondemos</strong><p>Preparamos el envío y seguimos aquí si algún día necesitas garantía o servicio.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 7 · BANDA DE PRUEBAS -->
+  <section class="proof-band" aria-label="Materiales y preparación">
+    <div><span>Material</span><strong>316L</strong><p>Acero para el uso real.</p></div>
+    <div><span>Cristal</span><strong>Zafiro</strong><p>Cuando corresponde al modelo.</p></div>
+    <div><span>Movimientos</span><strong>JP / CH</strong><p>Siempre identificados.</p></div>
+    <div><span>Preparación</span><strong>Madrid</strong><p>Antes de cada envío.</p></div>
+  </section>
+
+  <!-- 8 · TRANSPARENCIA -->
+  <section class="transparency">
+    <div class="transparency-copy">
+      <p class="section-number">02 — Transparencia</p>
+      <h2>
+        Cada ficha dice<br>
+        <em>qué lleva.</em>
+      </h2>
+      <p>
+        Sin movimientos «premium» sin nombre. Sin especificaciones ambiguas. Sin
+        convertir el origen de una pieza en un secreto. Te contamos qué compras,
+        qué comprobamos y quién responde.
+      </p>
+      <div class="truth-row">
+        <span>Sin humo</span>
+        <span>Sin letra pequeña</span>
+        <span>Sin 10.000 km de distancia</span>
       </div>
-      <span class="fl-equis">✕</span>
-      <span class="fl-veredicto">Sobreprecio</span>
     </div>
-
-    <div class="fl-forma">
-      <span class="fl-num">03</span>
-      <h3>La subasta</h3>
-      <p>Puja y comisión.<br>Pagas de más.</p>
-      <div class="fl-forma-foto">
-        <img src="/assets/img/filosofia/subasta.png" alt="Subasta de relojes" loading="lazy" width="400" height="400">
-      </div>
-      <span class="fl-equis">✕</span>
-      <span class="fl-veredicto">Más caro aún</span>
+    <div class="transparency-image">
+      <img src="/assets/img/filosofia/bauhaus.jpg" alt="Reloj Bauhaus de la colección laOra" loading="lazy">
     </div>
+  </section>
 
-    <div class="fl-forma">
-      <span class="fl-num">04</span>
-      <h3>La segunda mano</h3>
-      <p>Sin factura.<br>Sin garantía.</p>
-      <div class="fl-forma-foto">
-        <img src="/assets/img/filosofia/segundamano.png" alt="Reloj de segunda mano" loading="lazy" width="400" height="400">
-      </div>
-      <span class="fl-equis">✕</span>
-      <span class="fl-veredicto">Sin respaldo</span>
+  <!-- 9 · MANIFIESTO -->
+  <section class="manifesto">
+    <div class="manifesto-image">
+      <img src="/assets/img/filosofia/cero-cero.jpg" alt="Reloj Cero Cero de la colección laOra" loading="lazy">
     </div>
-
-    <div class="fl-forma">
-      <span class="fl-num">05</span>
-      <h3>El superclón</h3>
-      <p>Pagas mucho<br>por algo falso.</p>
-      <div class="fl-forma-foto">
-        <img src="/assets/img/filosofia/superclones.png" alt="Superclones de relojes" loading="lazy" width="400" height="400">
-      </div>
-      <span class="fl-equis">✕</span>
-      <span class="fl-veredicto">Sin garantía</span>
+    <div class="manifesto-copy">
+      <p class="eyebrow light">Nuestra obsesión</p>
+      <h2>Que al tenerlo en la mano pienses…</h2>
+      <blockquote>«No entiendo cómo este reloj cuesta esto.»</blockquote>
+      <p class="not-this">Y no: «Entiendo por qué cuesta tanto.»</p>
+      <p class="manifesto-close">
+        No intentamos fabricar el reloj más caro.
+        <strong>Intentamos ofrecer más reloj por cada euro que pagas.</strong>
+      </p>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- ============================================================
-     3 · FRASE
-     ============================================================ -->
-<div class="fl-frase">
-  <p>En las cinco pagas lo mismo.<span class="fl-gold">Y nunca es el reloj.</span></p>
-</div>
-
-<!-- ============================================================
-     4 · ENTONCES PENSÉ / QUITAMOS
-     ============================================================ -->
-<section class="fl-pensar">
-
-  <div class="fl-pensar-izq">
-    <h3>Entonces pensé…</h3>
-    <p class="fl-texto-mute">Si todo ese dinero desapareciera…<br>¿cuánto reloj podría comprar<br>con el mismo presupuesto?</p>
-    <p class="fl-texto-gold">Y esa pregunta terminó<br>convirtiéndose en laOra.</p>
-  </div>
-
-  <div class="fl-play">
-    <svg viewBox="0 0 40 40" fill="var(--ambar)" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="12,8 34,20 12,32"/>
-    </svg>
-  </div>
-
-  <div class="fl-pensar-der">
-    <h3>Quitamos todo lo que<br>no mejora el reloj.</h3>
-    <div class="fl-iconos">
-
-      <!-- No hacemos campañas millonarias -->
-      <div class="fl-icono">
-        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 28l-4 10h6l2-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M18 18l14-6v24l-14-6z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect x="10" y="18" width="8" height="12" rx="1" stroke="#fff" stroke-width="1.5"/>
-          <path d="M32 22c3 0 5 2 5 4s-2 4-5 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="8" y1="8" x2="44" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="8" x2="8" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span>No hacemos<br>campañas millonarias</span>
-      </div>
-
-      <!-- No pagamos embajadores -->
-      <div class="fl-icono">
-        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="26" cy="18" r="7" stroke="#fff" stroke-width="1.5"/>
-          <path d="M14 42c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="8" y1="8" x2="44" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="8" x2="8" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span>No pagamos<br>embajadores</span>
-      </div>
-
-      <!-- No mantenemos boutiques -->
-      <div class="fl-icono">
-        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 22v18h32V22" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M6 22l20-12 20 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="20" y="30" width="12" height="10" stroke="#fff" stroke-width="1.5"/>
-          <line x1="8" y1="8" x2="44" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="8" x2="8" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span>No mantenemos<br>boutiques</span>
-      </div>
-
+  <!-- 10 · GARANTÍA Y CERCANÍA -->
+  <section class="assurance" id="promesa">
+    <div>
+      <p class="eyebrow">Después del reloj</p>
+      <h2>
+        La cercanía también<br>
+        <em>forma parte de la calidad.</em>
+      </h2>
     </div>
-    <div class="fl-iconos-dos">
+    <p>
+      Garantía en España y servicio técnico en Madrid. Si algún día necesitas
+      ayuda, no tendrás que perseguir una tienda al otro lado del mundo.
+    </p>
+  </section>
 
-      <!-- No fabricamos cajas de lujo -->
-      <div class="fl-icono">
-        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 18h36v22H8z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M8 18l6-8h24l6 8" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
-          <path d="M20 10v8M32 10v8" stroke="#fff" stroke-width="1.5"/>
-          <path d="M26 18v10M22 28h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="8" y1="8" x2="44" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="8" x2="8" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span>No fabricamos<br>cajas de lujo</span>
-      </div>
-
-      <!-- No invertimos en marketing -->
-      <div class="fl-icono">
-        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="10" y="10" width="32" height="28" rx="2" stroke="#fff" stroke-width="1.5"/>
-          <polyline points="16,34 22,24 28,28 36,16" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="36" cy="16" r="2" fill="#F7F7F5"/>
-          <line x1="8" y1="8" x2="44" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="8" x2="8" y2="44" stroke="var(--ambar)" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span>No invertimos en<br>marketing para que<br>luego lo pagues tú</span>
-      </div>
-
-    </div>
-  </div>
-
-</section>
-
-<!-- ============================================================
-     5 · FRASE
-     ============================================================ -->
-<div class="fl-frase">
-  <p>Todo ese dinero tiene un único destino.<span class="fl-gold">El reloj.</span></p>
-</div>
-
-<!-- ============================================================
-     6 · LO QUE SÍ PAGAS / LO QUE NO PAGAS
-     ============================================================ -->
-<section class="fl-pagas">
-
-  <div class="fl-pagas-col">
-    <div class="fl-pagas-contenido">
-      <h3>Lo que sí pagas.</h3>
-      <ul class="fl-lista">
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Acero 316L</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Cristal de zafiro</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Movimientos contrastados</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Super-LumiNova</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Brazaletes macizos</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Control uno a uno</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Servicio técnico propio</li>
-        <li><span class="fl-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Garantía en España</li>
-      </ul>
-    </div>
-    <div class="fl-pagas-img">
-      <img src="/assets/img/filosofia/loquesipagas.png" alt="Movimiento laOra" loading="lazy">
-    </div>
-  </div>
-
-  <div class="fl-pagas-col">
-    <div class="fl-pagas-contenido">
-      <h3>Lo que no pagas.</h3>
-      <ul class="fl-lista">
-        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Publicidad.</li>
-        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Peaje de marca.</li>
-        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Intermediarios.</li>
-        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Packaging de lujo.</li>
-        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Tiendas.</li>
-        <li><span class="fl-cross"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>Distribuidores.</li>
-      </ul>
-    </div>
-    <div class="fl-pagas-img">
-      <img src="/assets/img/filosofia/embalaje.png" alt="Embalaje laOra" loading="lazy">
-    </div>
-  </div>
-
-</section>
-
-<!-- ============================================================
-     7 · NUESTRA OBSESIÓN
-     ============================================================ -->
-<section class="fl-obsesion">
-  <div class="fl-obsesion-foto">
-    <img src="/assets/img/filosofia/nuestra_obsesion.png" alt="Reloj laOra sobre superficie mojada" loading="lazy" width="800" height="534">
-  </div>
-  <div class="fl-obsesion-texto">
-    <h3>Nuestra obsesión es muy sencilla.</h3>
-    <p>Que cuando alguien tenga un laOra en la mano piense…</p>
-    <p class="fl-cita">«No entiendo cómo este reloj cuesta esto.»</p>
-    <p class="fl-y-no">Y no…</p>
-    <p class="fl-cita">«Entiendo por qué cuesta tanto.»</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     8 · ESA ES LA DIFERENCIA
-     ============================================================ -->
-<div class="fl-diferencia">
-  <h3>Esa es la diferencia.</h3>
-  <p>No intentamos fabricar el reloj más caro.<br>Intentamos fabricar</p>
-  <p class="fl-valor">el reloj con más valor por cada euro que pagas.</p>
-</div>
-
-<!-- ============================================================
-     9 · CTA
-     ============================================================ -->
-<div class="fl-cta">
-  <a href="/coleccion.html">Descubre la colección</a>
-</div>
-
-<!-- ============================================================
-     10 · TAGLINE FINAL
-     ============================================================ -->
-<div class="fl-tagline">
-  <span><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nueve relojes.</span>
-  <span><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Nueve historias.</span>
-  <span><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>Una única filosofía.</span>
-</div>
+  <!-- 11 · CIERRE -->
+  <section class="final-cta">
+    <p class="eyebrow light">Ocho relojes · Una única filosofía</p>
+    <h2>
+      Ahora elige dónde<br>
+      quieres llevarla.
+    </h2>
+    <a class="button button-gold" href="/coleccion.html">Descubrir la colección <span aria-hidden="true">→</span></a>
+  </section>
 
 </main>
 
-<!-- ============================================================
-     PIE DEL GRUPO
-     ============================================================ -->
+<!-- 12 · PIE -->
 <footer>
-  <div class="brand clara">la<span class="o"></span>ra<sup>®</sup></div>
+  <a class="footer-brand" href="#inicio" aria-label="laOra, volver arriba">
+    <span class="cb-marca">la<span class="o"></span>ra<sup>®</sup></span>
+  </a>
+  <p>Reloj · Calidad · Precio honesto</p>
   <div class="footer-links">
-    <a href="/coleccion.html">La colección</a>
-    <a href="/manifiesto.html">El alma de un automático</a>
-    <a href="/condiciones-de-venta.html">Condiciones de venta</a>
+    <a href="/coleccion.html">Colección</a>
+    <a href="#proceso">Proceso</a>
+    <a href="/condiciones-de-venta.html">Condiciones</a>
     <a href="/privacidad.html">Privacidad</a>
   </div>
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-  <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
+  <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 
-<script src="/assets/js/cabecera.js" defer></script>
-<script src="/assets/js/carrito.js?v=3"></script>
-<script src="/assets/js/laora.js?v=15"></script>
+<!-- cabecera.js deja la cabecera fija al hacer scroll; carrito.js pinta
+     el contador de la bolsa -->
+<script src="/assets/js/cabecera.js"></script>
+<script src="/assets/js/carrito.js?v=17"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
