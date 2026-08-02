@@ -97,15 +97,19 @@ section{scroll-margin-top:92px}
 .market-heading{display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:6vw}
 .market-kicker{margin:0 0 8px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:700}
 .market-heading h2{margin:0;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-.035em}
-/* la pregunta pasaba desapercibida: va sobre tarjeta amarilla al 50 % y en
-   grande. Blanco sobre esa mezcla da 6:1, que cumple de sobra al ser texto
-   grande y en negrita. */
-.market-question{margin:0;max-width:560px;background:rgba(211,169,67,.5);
-  border-left:4px solid var(--gold);padding:20px 24px;
-  font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.35;color:#fff;
-  text-shadow:0 1px 2px rgba(0,0,0,.45)}
-.market-question strong{color:#fff;font-weight:700;font-size:1.2em}
-.market-question span{display:block;margin-top:4px}
+/* la pregunta, compuesta como un titular de periódico: filete doble arriba,
+   antetítulo en versales, titular en negrita con interlineado corto y
+   entradilla en cursiva bajo un filete fino. Todo en blanco sobre el fondo
+   oscuro de la sección, sin tarjeta. */
+.market-question{margin:0;max-width:560px;color:#fff;font-family:var(--serif);
+  border-top:4px double rgba(255,255,255,.55);
+  border-bottom:1px solid rgba(255,255,255,.22);padding:14px 0 16px}
+.mq-antetitulo{display:block;font-family:var(--sans);font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:2.4px;color:var(--gold-soft);margin-bottom:11px}
+.mq-titular{margin:0;font-size:19px;font-weight:700;line-height:1.22;letter-spacing:-.015em}
+.mq-titular strong{font-size:1.15em;font-weight:700;color:#fff}
+.mq-entradilla{margin:11px 0 0;padding-top:11px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:16px;font-style:italic;line-height:1.4;color:#ddd9d1}
 .market-grid{display:grid;grid-template-columns:repeat(5,1fr);margin-top:26px;border-top:1px solid rgba(255,255,255,.16)}
 .market-card{min-height:164px;position:relative;padding:23px 20px 20px;border-right:1px solid rgba(255,255,255,.16)}
 .market-card:last-child{border-right:0}
@@ -306,7 +310,8 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
   .market-section{padding:52px 0 0}
   .market-heading{grid-template-columns:1fr;gap:20px;padding:0 22px}
   .market-heading h2{font-size:36px}
-  .market-question{font-size:16px}
+  .mq-titular{font-size:18px}
+  .mq-entradilla{font-size:15px}
   .market-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 22px 10px;margin-top:28px;scrollbar-width:none}
   .market-grid::-webkit-scrollbar{display:none}
   .market-card{min-width:74vw;min-height:170px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
