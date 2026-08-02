@@ -47,11 +47,22 @@ img{width:100%;max-width:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 
-/* El acceso al Club: mismo cuerpo y tipo que el resto del menú (los pone
-   cabecera.css), solo cambia el color a dorado. La especificidad (0,2,1)
-   gana a `.cb-menu a` de cabecera.css, que va en color:inherit. */
-.cb-menu a.cb-club{color:var(--gold)}
+/* ---------- «club laOra» en el menú ----------
+   La palabra «laOra» NO se escribe: se dibuja con el logotipo canónico
+   (`.cb-marca` de cabecera.css — Nunito Sans, la O con su triángulo). Lo
+   único que se le toca es el CUERPO, para que case con el menú; todas sus
+   medidas son en em, así que el dibujo se conserva intacto.
+
+   Aquí va todo en amarillo, también el triángulo: por eso se le pasa a
+   `currentColor` en vez de dejarlo en el ámbar fijo de cabecera.css, y así
+   además acompaña al hover.
+
+   Las reglas llevan `.cb-menu a.cb-club` delante porque cabecera.css se
+   carga DESPUÉS que esta hoja: hace falta más especificidad para ganarle. */
+.cb-menu a.cb-club{color:var(--gold-brand);display:inline-flex;align-items:baseline;gap:.36em}
 .cb-menu a.cb-club:hover{color:var(--gold-soft)}
+.cb-menu a.cb-club .cb-marca{font-size:17px;color:inherit}
+.cb-menu a.cb-club .cb-marca .o::before{border-top-color:currentColor}
 
 /* La cabecera real es `position:fixed` en cuanto se hace scroll
    (`cabecera.js` le pone `.cb-pegada`), así que los saltos por anclaje

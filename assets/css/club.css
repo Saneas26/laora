@@ -50,6 +50,18 @@ img{width:100%;max-width:100%}
 body{margin:0;overflow-x:hidden;background:var(--paper);color:var(--ink);font-family:var(--sans)}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,blockquote{font-family:var(--serif);font-weight:400;letter-spacing:-.045em}
+/* ---------- «club laOra» en el menú ----------
+   Igual que en la home: «laOra» no se escribe, se dibuja con el logotipo
+   canónico (`.cb-marca`). Solo se le cambia el cuerpo; sus medidas van en em,
+   así que el dibujo queda intacto. Todo en amarillo, triángulo incluido
+   (`currentColor` en vez del ámbar fijo de cabecera.css).
+   El prefijo `.cb-menu a.cb-club` es para ganarle en especificidad a
+   cabecera.css, que se carga después de esta hoja. */
+.cb-menu a.cb-club{color:var(--gold-brand);display:inline-flex;align-items:baseline;gap:.36em}
+.cb-menu a.cb-club:hover{color:var(--gold-soft)}
+.cb-menu a.cb-club .cb-marca{font-size:17px;color:inherit}
+.cb-menu a.cb-club .cb-marca .o::before{border-top-color:currentColor}
+
 /* la cabecera real se queda fija al hacer scroll */
 section{scroll-margin-top:92px}
 
