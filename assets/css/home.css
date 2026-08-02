@@ -328,6 +328,12 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
     padding:0 4.5vw 10px;scroll-padding-inline:4.5vw;scrollbar-width:none}
   .market-grid::-webkit-scrollbar{display:none}
   .market-card{min-width:290px;scroll-snap-align:start}
+  /* en el carrusel la tarjeta es mucho más ancha que las columnas del
+     escritorio, así que se sueltan los `max-width` del boceto —pensados
+     para 190 px— y el texto sube de cuerpo con el sitio que gana */
+  .market-card h3{max-width:none;font-size:15px}
+  .market-card p{max-width:none;font-size:18px}
+  .market-number{font-size:14px}
   .hero-media{background-position:58% center}
   .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.32)),
                            linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
@@ -366,8 +372,14 @@ footer p{grid-column:1/-1;margin:auto 0 0;color:#adaaa3;font-size:13px;letter-sp
     padding:0 22px 10px;scroll-padding-inline:22px;margin-top:20px;scrollbar-width:none}
   .market-grid::-webkit-scrollbar{display:none}
   /* una tarjeta por pantalla: ocupa el ancho visible menos un asomo de la
-     siguiente, que es lo que deja ver que la fila continúa */
+     siguiente, que es lo que deja ver que la fila continúa. Con 292 px de
+     texto útil (frente a los 205 que permitía el boceto) el cuerpo puede
+     subir mucho: es la pantalla donde más grande se lee todo. */
   .market-card{min-width:calc(100vw - 56px);min-height:170px;scroll-snap-align:start}
+  .market-card h3{font-size:20px;letter-spacing:.4px;margin:22px 0 11px}
+  .market-card p{font-size:24px;line-height:1.35}
+  .market-number{font-size:16px}
+  .market-price{font-size:40px}
   .worlds-section,.value-section,.quote-section,.assurance-section,.faq-section,.final-cta{padding:86px 22px}
   .section-heading h2{font-size:49px}
   .world-selector{grid-template-columns:1fr 1fr;margin-top:50px}
