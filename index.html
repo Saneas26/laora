@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra — relojería de la que se hereda, montada y controlada en Madrid, al precio honesto. Sin tiendas, sin intermediarios, sin peajes de marca.">
-<meta property="og:title" content="laOra® — El reloj que quieres. Al precio honesto.">
-<meta property="og:description" content="Ahora puedes tener lujo, sin pagarlo como lujo. Materiales de verdad, montaje y control en Madrid, garantía real.">
+<meta name="description" content="laOra — elegimos cada pieza y montamos cada reloj en Madrid. Acero 316L, zafiro y movimientos japoneses y suizos, siempre identificados. Ocho modelos desde 249,90 €.">
+<meta property="og:title" content="laOra® — Hay otra forma de comprar un gran reloj">
+<meta property="og:description" content="Elegimos cada pieza. Montamos cada reloj. Respondemos aquí. Ocho modelos montados, regulados y verificados en nuestro taller de Madrid.">
 <meta property="og:url" content="https://laora.es">
 <meta property="og:image" content="https://laora.es/assets/img/relojes/portada.jpg">
 <title>laOra® — Hay otra forma de comprar un gran reloj</title>
@@ -14,482 +14,27 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/laora.css?v=16">
+<!-- Nunito Sans e Inter solo alimentan la cabecera y el logo del pie
+     (cabecera.css). El resto de la página va en Georgia y Arial, como
+     el boceto de diseño. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/home.css?v=1">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=8">
-<style>
-/* ACTO I — La pregunta. Una pantalla, una idea, un solo elemento ámbar (el CTA). */
-:root{
-  --negro:#090909;
-  --ambar:#D4A94B;
-  --oro:#D4A94B;
-  --hueso:#F7F7F5;
-  --gris:#B8B8B8;
-  --linea-oscura:#2C2C2C;
-}
-.laora{font-family:'Nunito Sans',sans-serif !important}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
-body{
-  background:var(--negro);color:var(--hueso);
-  font-family:'Inter',system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* La cabecera vive en assets/css/cabecera.css (.cb / .cb-home). El logo
-   del pie usa el `.brand` de assets/css/laora.css (idéntico al de la
-   cabecera) + `.clara` porque el pie de esta página es oscuro. */
-
-.hero{position:relative;height:100svh;min-height:600px;overflow:hidden}
-.hero .foto{position:absolute;inset:0;z-index:1;overflow:hidden;
-  transform-origin:69% 46%;   /* pivote: el centro del reloj */
-  animation:llegar 2.8s cubic-bezier(.2,.6,.2,1) both,
-            giro 13s cubic-bezier(.3,.4,.25,1) 2.8s forwards}
-.hero .foto .capa{position:absolute;inset:0}
-.hero .foto img{width:100%;height:100%;object-fit:cover;object-position:right center}
-/* el reloj gira sobre su eje: la vista frontal y la de 30° se funden muy despacio */
-.hero .foto .capaB{opacity:0;animation:fundido 24s ease-in-out 7s infinite}
-@keyframes fundido{0%,24%{opacity:0}38%,62%{opacity:1}76%,100%{opacity:0}}
-/* una pequeña inclinación de base: nunca queda perfectamente plano, ni siquiera al llegar */
-@keyframes llegar{from{opacity:0;transform:scale(1.12) rotate(.6deg)}to{opacity:1;transform:scale(1.085) rotate(1.4deg)}}
-@keyframes giro{from{transform:scale(1.085) rotate(1.4deg)}to{transform:scale(1.085) rotate(3deg)}}
-/* destello: una luz recorre el acero cada ~16 s; sobre el negro no se ve */
-.hero .sheen{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;
-  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.38) 50%,transparent 58%);
-  background-size:260% 100%;background-position:130% 0;background-repeat:no-repeat;
-  animation:destello 16s ease-in-out 5s infinite}
-@keyframes destello{0%{background-position:130% 0}14%{background-position:-60% 0}100%{background-position:-60% 0}}
-
-/* Vuelve a su padding original: se había bajado el Acto 1 para dejarle
-   sitio al logo, y ahora al abrir no hay cabecera que le estorbe. */
-.texto{position:relative;z-index:3;height:100%;max-width:1500px;margin:0 auto;
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-  padding:64px 44px 0;max-inline-size:none}
-/* la tarjeta: un panel elevado y con corte propio, para que la caja de texto no
-   lea como un vacío plano junto al metal texturado del reloj, sino como un
-   recorte deliberado — con su propio degradado, borde y sombra de elevación.
-   Se reutiliza en los cuatro actos: se encoge al ancho del contenido corto
-   (Acto I/II) y se topa con el ancho de su columna cuando el contenido es
-   más ancho, como la parrilla de specs de los Actos III y IV. */
-.tarjeta{display:flex;flex-direction:column;align-items:flex-start;
-  width:fit-content;max-width:100%;
-  background:linear-gradient(160deg,#17181d 0%,#0c0d10 60%,#08080a 100%);
-  border:1px solid rgba(255,255,255,.07);border-radius:22px;
-  padding:42px 46px;
-  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75),
-    inset 0 1px 0 rgba(255,255,255,.06);
-  opacity:0;animation:tarjetaIn .9s cubic-bezier(.2,.6,.2,1) .2s forwards}
-@keyframes tarjetaIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
-.tarjeta>*{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
-.texto>.micro{opacity:0;animation:subir 1s cubic-bezier(.2,.6,.2,1) forwards}
-@keyframes subir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.eyebrow{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:.28em;text-transform:uppercase;color:var(--oro);line-height:1.85;
-  animation-delay:.5s}
-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
-  font-size:clamp(48px,6vw,88px);line-height:1.06;letter-spacing:-.01em;
-  margin-top:22px;max-width:13ch;color:#fff;animation-delay:.8s}
-.sub{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
-  font-size:24px;line-height:1.4;color:#B8B8B8;
-  margin-top:16px;max-width:30ch;animation-delay:1.15s}
-.cta{display:inline-flex;align-items:center;gap:14px;margin-top:32px;
-  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);
-  border:1px solid var(--ambar);border-radius:0;padding:14px 34px;
-  text-decoration:none;transition:background .25s,border-color .25s;
-  animation-delay:1.5s}
-.cta .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;
-  font-size:14px;letter-spacing:.02em}
-.cta .fl{transition:transform .25s}
-.cta:hover{background:rgba(212,169,75,.07);border-color:var(--ambar)}
-.cta:hover .fl{transform:translateX(5px)}
-.disponible{display:flex;align-items:center;gap:9px;margin-top:26px;
-  font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--gris);animation-delay:1.75s}
-.disponible .punto{width:6px;height:6px;border-radius:50%;background:var(--ambar);
-  box-shadow:0 0 6px rgba(212,169,75,.7);flex:none}
-.micro{margin-top:26px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gris);font-weight:600;animation-delay:2s}
-
-/* pestaña discreta y permanente hacia la colección real — no compite con
-   el Acto I (aparece a partir del Acto II) y nunca es un menú completo */
-.escape{position:fixed;right:22px;bottom:22px;z-index:6;
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(9,9,9,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  border:1px solid var(--ambar);border-radius:0;padding:12px 20px 12px 16px;
-  font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
-  letter-spacing:.06em;text-transform:uppercase;color:var(--hueso);text-decoration:none;
-  opacity:0;pointer-events:none;transform:translateY(8px);
-  transition:opacity .4s ease,transform .4s ease,border-color .25s,background .25s}
-.escape.visible{opacity:1;pointer-events:auto;transform:none}
-.escape:hover{border-color:var(--ambar);background:rgba(5,5,5,.9)}
-.escape .fl{color:var(--ambar);transition:transform .25s;display:inline-block}
-.escape:hover .fl{transform:translateX(4px)}
-
-@media(max-width:760px){
-  .brand{font-size:22px}
-  .hero .foto{transform-origin:54% 70%}
-  .hero .foto img{object-position:center bottom}
-  .texto{padding:0 22px;justify-content:flex-start;padding-top:17svh;align-items:flex-start}
-  .tarjeta{padding:32px 26px;border-radius:18px}
-  .eyebrow{font-size:11px;letter-spacing:.22em}
-  h1{font-size:clamp(23px,6.8vw,28px);margin-top:16px;max-width:14ch}
-  .sub{font-size:14.5px;margin-top:12px}
-  .cta{margin-top:20px;padding:13px 20px;font-size:10.5px}
-  .disponible{display:none}
-  .micro{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom));left:26px;right:26px;
-    margin:0;font-size:10.5px;letter-spacing:.1em}
-  .escape{right:16px;bottom:calc(16px + env(safe-area-inset-bottom));padding:11px 17px 11px 14px;font-size:10px}
-}
-@media(prefers-reduced-motion:reduce){
-  .hero .foto,.hero .sheen,.texto>*,.tarjeta>*{animation:none;opacity:1}
-  .hero .foto .capaB{animation:none;opacity:0}
-  .hero .sheen{display:none}
-}
-
-/* ACTO II — la revelación: el aro (la elección) y, si se pide, las cinco puertas */
-.acto2{position:relative;background:var(--negro)}
-.a2-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-.a2-escena picture{position:absolute;inset:0;z-index:0}
-.a2-escena img{width:100%;height:100%;object-fit:cover;object-position:center}
-.a2-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
-/* aquí la tarjeta va al 60% de opacidad: dejamos ver la escena detrás,
-   con un desenfoque para que el texto se siga leyendo bien */
-.a2-texto .tarjeta{background:rgba(11,12,15,.6);
-  backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%)}
-.a2-eyebrow{max-width:30ch}
-.a2-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,3.4vw,44px);line-height:1.16;margin-top:24px;max-width:16ch}
-.a2-parrafo{font-family:'Inter',sans-serif;font-weight:400;color:#B8B8B8;
-  font-size:16px;line-height:1.55;max-width:38ch;margin-top:18px}
-.a2-boton{margin-top:32px;display:inline-flex;align-items:center;gap:10px;background:transparent;
-  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
-  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
-  text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
-.a2-boton .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;letter-spacing:.02em}
-.a2-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
-.a2-boton .chev{display:inline-block;transition:transform .4s;font-size:15px}
-.a2-boton[aria-expanded="true"] .chev{transform:rotate(180deg)}
-
-.a2-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s cubic-bezier(.2,.7,.2,1)}
-.a2-panel.abierta{grid-template-rows:1fr}
-.a2-panel-int{overflow:hidden}
-.a2-encuentras{max-width:1200px;margin:0 auto;padding:60px 44px 70px;
-  border-top:1px solid rgba(255,255,255,.12)}
-.a2-encuentras-tit{text-align:center;font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;
-  color:#fff;font-size:clamp(24px,2.6vw,32px);margin:0 0 8px}
-.a2-encuentras-sub{text-align:center;font-family:'Inter',sans-serif;font-size:15px;
-  color:var(--gris);margin:0 0 44px}
-.a2-encuentras-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
-.a2-encuentras-item{padding:8px 22px;border-right:1px solid rgba(255,255,255,.12);text-align:center;
-  opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
-.a2-panel.abierta .a2-encuentras-item{opacity:1;transform:none}
-.a2-encuentras-item:nth-child(1){transition-delay:.05s}.a2-encuentras-item:nth-child(2){transition-delay:.12s}
-.a2-encuentras-item:nth-child(3){transition-delay:.19s}.a2-encuentras-item:nth-child(4){transition-delay:.26s}
-.a2-encuentras-item:nth-child(5){transition-delay:.33s}
-.a2-encuentras-item:last-child{border-right:0}
-.a2-panel.abierta .a2-encuentras-item:hover{transform:translateY(-6px)}
-.a2-encuentras-item svg{display:block;width:38px;height:38px;margin:0 auto 16px;
-  stroke:var(--ambar);fill:none;stroke-width:1.3}
-.a2-encuentras-item b{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:.04em;text-transform:uppercase;color:#fff;margin:0 0 10px;line-height:1.3}
-.a2-encuentras-item p{font-size:13.5px;line-height:1.5;color:var(--gris);margin:0}
-.a2-encuentras-precio{background:rgba(255,255,255,.035)}
-.a2-encuentras-cifra{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
-  font-size:clamp(32px,3vw,44px);color:var(--ambar);line-height:1;margin:0 0 10px}
-.a2-encuentras-precio b{color:var(--gris)}
-.a2-encuentras-reaccion{display:block;margin-top:8px;font-family:'Inter',system-ui,sans-serif;
-  font-weight:700;font-size:13.5px;color:#fff;text-transform:none;letter-spacing:0}
-
-@media(max-width:900px){
-  .a2-encuentras-grid{grid-template-columns:repeat(3,1fr);row-gap:28px}
-  .a2-encuentras-item:nth-child(3n){border-right:0}
-  .a2-encuentras-precio{grid-column:1/-1}
-}
-@media(max-width:760px){
-  .a2-escena{align-items:flex-start;padding-top:15svh}
-  .a2-texto{padding:0 22px}
-  .a2-eyebrow{max-width:24ch}
-  .a2-titular{font-size:clamp(24px,7vw,30px);margin-top:14px;max-width:11ch}
-  .a2-boton{margin-top:22px;padding:13px 20px;font-size:10.5px}
-  .a2-encuentras{padding:40px 22px 50px}
-  .a2-encuentras-grid{grid-template-columns:1fr;row-gap:26px}
-  .a2-encuentras-item{border-right:0;padding:0}
-  .a2-encuentras-precio{grid-column:auto}
-}
-
-/* ACTO III — APARECE laOra: «así que hicimos lo contrario» */
-.acto3{position:relative;background:var(--negro)}
-/* mismo mecanismo de altura que el resto de actos: min-height:100svh y
-   flujo normal centrado con flex, sin suelos fijos ni posicionamiento
-   absoluto — la sección nunca queda más alta de lo necesario */
-.a3-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-.a3-escena picture{position:absolute;inset:0;z-index:0}
-.a3-escena img{width:100%;height:100%;object-fit:cover;object-position:64% center}
-.a3-texto{position:relative;z-index:2;max-width:1500px;margin:0 auto;width:100%;padding:0 44px}
-.a3-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,3.4vw,44px);line-height:1.15;margin-top:22px;max-width:18ch}
-.a3-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a3-sub{font-family:'Inter',sans-serif;font-weight:500;color:#B8B8B8;
-  font-size:20px;line-height:1.5;max-width:26ch}
-/* Misma máscara de cristal que la tarjeta del acto 2 (`.a2-texto .tarjeta`):
-   sin ella el texto cae sobre la foto del acto y no se lee. */
-.a3-pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
-  max-width:520px;margin-top:34px;
-  background:rgba(11,12,15,.5);backdrop-filter:blur(16px) saturate(120%);
-  -webkit-backdrop-filter:blur(16px) saturate(120%);
-  border-radius:22px;padding:26px 28px}
-.a3-paso{min-width:0}
-.a3-paso .num{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
-  color:var(--ambar);font-size:26px;line-height:1;margin-bottom:12px;
-  text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.a3-paso p{font-size:13.5px;line-height:1.48;color:#fff;margin:0;
-  text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.a3-cierre{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;font-style:italic;
-  color:#fff;font-size:clamp(19px,2vw,23px);line-height:1.5;max-width:46ch;margin-top:26px;
-  text-shadow:0 2px 10px rgba(0,0,0,.6)}
-
-@media(max-width:1180px){
-  .a3-escena{flex-direction:column;align-items:stretch;padding:90px 0 60px;min-height:auto}
-  .a3-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
-  .a3-escena img{width:100%;height:auto;object-fit:initial}
-  .a3-texto{order:1;max-width:none}
-  .a3-pasos{grid-template-columns:repeat(2,1fr);row-gap:34px}
-}
-@media(max-width:760px){
-  .a3-escena{padding:110px 0 0}
-  .a3-texto{padding:0 22px}
-  .a3-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
-  .a3-raya{margin:20px 0}
-  .a3-sub{font-size:15px;max-width:none}
-  .a3-pasos{grid-template-columns:1fr;gap:24px;margin-top:28px}
-}
-
-/* ACTO IV — CIERRE: lo único que no negociamos */
-.acto4{position:relative;background:var(--negro)}
-.a4-escena{position:relative;min-height:100svh;overflow:hidden;padding:110px 0 90px}
-.a4-escena picture{position:absolute;inset:0;z-index:0}
-.a4-escena img{width:100%;height:100%;object-fit:cover;object-position:right center;
-  transform:scale(1.06) rotate(-1.6deg);transform-origin:60% 45%}
-.a4-texto{position:relative;z-index:2;padding:0 44px;max-width:760px}
-.a4-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,3.4vw,44px);line-height:1.15;margin-top:22px;max-width:10ch}
-.a4-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a4-sub{font-family:'Inter',sans-serif;font-weight:500;color:#B8B8B8;
-  font-size:20px;line-height:1.55;max-width:22ch}
-/* Misma máscara de cristal que el resto (`.a2-texto .tarjeta`, `.a3-pasos`):
-   sin ella el texto caía sobre la foto del acto y no se leía bien. */
-.a4-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px;max-width:640px;
-  background:rgba(11,12,15,.5);backdrop-filter:blur(16px) saturate(120%);
-  -webkit-backdrop-filter:blur(16px) saturate(120%);
-  border-radius:22px;padding:24px 26px}
-.spec4{min-width:0}
-.spec4 .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px;
-  filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
-.spec4 .ico svg{width:100%;height:100%}
-.spec4 b{display:block;font-family:'Inter',sans-serif;font-weight:800;color:#fff;
-  font-size:14px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:7px;
-  text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.spec4 p{font-size:13px;line-height:1.45;color:#B8B8B8;margin:0;
-  text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.a4-boton{margin-top:28px;display:inline-flex;align-items:center;gap:8px;background:transparent;
-  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:13px 22px;
-  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;letter-spacing:.04em;
-  text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .25s,border-color .25s}
-.acto4 .eyebrow{letter-spacing:.16em}
-.a4-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
-.a4-boton .fl{transition:transform .25s;display:inline-block}
-.a4-boton:hover .fl{transform:translateX(5px)}
-
-@media(max-width:1180px){
-  .a4-escena{display:flex;flex-direction:column;padding:90px 0 0;min-height:auto}
-  .a4-escena picture{position:static;order:2;display:block;width:100%;height:auto;margin-top:44px}
-  .a4-escena img{width:100%;height:auto;object-fit:initial;transform:none}
-  .a4-texto{order:1;max-width:none}
-}
-@media(max-width:760px){
-  .a4-escena{padding:112px 0 0}
-  .a4-texto{padding:0 22px}
-  .a4-titular{font-size:clamp(25px,7.3vw,32px);margin-top:16px;max-width:10ch}
-  .a4-raya{margin:20px 0}
-  .a4-sub{font-size:15px;max-width:none}
-  .a4-specs{grid-template-columns:1fr;gap:20px;margin-top:28px}
-  .a4-boton{margin-top:22px;padding:13px 20px;font-size:10.5px}
-}
-
-/* ACTO V — ANTES DE LLEGAR A TU MUÑECA */
-.acto5{position:relative;background:var(--negro)}
-.a5-escena{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 44px 60px}
-.a5-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;align-items:center;gap:80px}
-.a5-texto{flex:0 0 auto;max-width:420px}
-.a5-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,3.4vw,44px);line-height:1.14;margin-top:22px}
-.a5-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a5-parrafo{font-family:'Inter',sans-serif;font-weight:400;color:#B8B8B8;
-  font-size:20px;line-height:1.6;max-width:34ch}
-.a5-parrafo+.a5-parrafo{margin-top:16px}
-.a5-boton{margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:transparent;
-  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
-  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
-  text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
-.a5-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
-.a5-boton svg{width:13px;height:13px;flex:none}
-.a5-video{flex:1;min-width:0;border-radius:20px;overflow:hidden;
-  background:none;border:0;padding:0;display:block;cursor:pointer;
-  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75);
-  transition:box-shadow .25s}
-.a5-video:hover,.a5-video:focus-visible{box-shadow:0 70px 140px -50px rgba(0,0,0,.95),0 0 0 2px rgba(212,169,75,.55)}
-.a5-video img{width:100%;height:auto;display:block}
-
-/* modal de vídeo: se superpone temporalmente, se cierra solo al terminar */
-.a5-modal{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
-  padding:5vh 5vw;opacity:0;pointer-events:none;transition:opacity .3s ease}
-.a5-modal.visible{opacity:1;pointer-events:auto}
-.a5-modal-fondo{position:absolute;inset:0;background:rgba(3,3,4,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.a5-modal-caja{position:relative;z-index:1;width:100%;max-width:1040px;aspect-ratio:16/9;
-  background:#000;border-radius:14px;overflow:hidden;
-  box-shadow:0 60px 140px -30px rgba(0,0,0,.9);
-  transform:scale(.96);transition:transform .3s ease}
-.a5-modal.visible .a5-modal-caja{transform:none}
-.a5-modal-video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
-.a5-modal-cerrar{position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;
-  display:grid;place-items:center;background:rgba(5,5,5,.6);border:1px solid rgba(255,255,255,.25);
-  border-radius:50%;color:#fff;font-size:15px;cursor:pointer;transition:background .2s,border-color .2s}
-.a5-modal-cerrar:hover{background:rgba(5,5,5,.85);border-color:var(--ambar);color:var(--ambar)}
-.a5-pasos{max-width:1500px;margin:0 auto;width:100%;padding:0 44px;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-.paso .num{display:block;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;
-  color:var(--oro);letter-spacing:.08em;margin-bottom:10px}
-.paso .etiqueta{font-family:'Inter',sans-serif;font-weight:800;color:#fff;
-  font-size:13px;text-transform:uppercase;letter-spacing:.05em}
-.a5-cierre{max-width:1500px;margin:40px auto 0;width:100%;padding:34px 44px 90px;
-  border-top:1px solid rgba(255,255,255,.1);text-align:center;
-  font-family:'Inter',sans-serif;color:var(--gris);font-size:14px}
-
-@media(max-width:1180px){
-  .a5-escena{min-height:auto;padding:90px 44px 60px}
-  .a5-inner{flex-direction:column;align-items:flex-start;gap:44px}
-  .a5-texto{max-width:none}
-  .a5-video{width:100%}
-}
-@media(max-width:760px){
-  .a5-escena{padding:110px 22px 50px}
-  .a5-titular{font-size:clamp(28px,7.6vw,36px)}
-  .a5-parrafo{max-width:none}
-  .a5-boton{padding:13px 20px;font-size:10.5px}
-  .a5-pasos{grid-template-columns:repeat(2,1fr);row-gap:28px;padding:0 22px}
-  .a5-cierre{padding:28px 22px 70px;font-size:13px}
-}
-
-/* ACTO VI — EMBALAJE Y CLUB laOra */
-.acto6{position:relative;background:var(--negro)}
-.a6-escena{position:relative;padding:110px 44px 0}
-.a6-inner{max-width:1500px;margin:0 auto;width:100%;display:flex;align-items:flex-start;gap:80px}
-.a6-texto{flex:0 0 auto;max-width:420px}
-.a6-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(34px,3.4vw,44px);line-height:1.14;margin-top:22px}
-.a6-raya{display:block;width:52px;height:2px;background:var(--oro);margin:30px 0}
-.a6-parrafo{font-family:'Inter',sans-serif;font-weight:400;color:#B8B8B8;
-  font-size:20px;line-height:1.6;max-width:34ch}
-.a6-parrafo.fuerte{font-weight:700;color:#fff}
-.a6-parrafo+.a6-parrafo{margin-top:16px}
-.a6-nota{margin-top:28px;border:1px solid rgba(212,169,75,.35);border-radius:10px;
-  padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
-.a6-nota .ico{width:22px;height:22px;color:var(--ambar);flex:none;margin-top:2px}
-.a6-nota .ico svg{width:100%;height:100%}
-.a6-nota p{font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.5;color:#F7F7F5}
-.a6-nota .destaca{display:block;margin-top:6px;color:var(--ambar);font-weight:700}
-.a6-boton{margin-top:32px;display:inline-flex;align-items:center;gap:12px;background:transparent;
-  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
-  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
-  text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
-.a6-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
-.a6-boton .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;font-size:13px}
-.a6-boton .fl{transition:transform .25s;display:inline-block}
-.a6-boton:hover .fl{transform:translateX(5px)}
-.a6-foto{flex:1;min-width:0}
-.a6-foto img{width:100%;height:auto;display:block;border-radius:20px;
-  box-shadow:0 70px 140px -50px rgba(0,0,0,.9),0 26px 60px -28px rgba(0,0,0,.75)}
-
-.a6-ventajas{max-width:1500px;margin:70px auto 0;width:100%;padding:44px 44px 0;
-  border-top:1px solid rgba(255,255,255,.1);
-  display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-.ventaja{min-width:0}
-#club-laora{scroll-margin-top:84px}
-.ventaja .ico{width:26px;height:26px;color:var(--ambar);display:block;margin-bottom:14px}
-.ventaja .ico svg{width:100%;height:100%}
-.ventaja b{display:block;font-family:'Inter',sans-serif;font-weight:800;color:#fff;
-  font-size:13px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
-.ventaja p{font-size:13px;line-height:1.5;color:#B8B8B8;margin:0}
-
-.a6-club{max-width:1500px;margin:0 auto;width:100%;padding:90px 44px 110px;
-  display:flex;align-items:center;gap:80px}
-.a6-club-foto{flex:0 0 auto;width:260px}
-.a6-club-foto img{width:100%;height:auto;display:block}
-.a6-club-texto{flex:1;min-width:0;max-width:560px}
-.a6-club-titular{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#fff;
-  font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin-top:16px}
-.a6-club-sub{font-family:'Inter',sans-serif;font-weight:600;color:#F7F7F5;
-  font-size:16px;line-height:1.6;margin-top:20px;max-width:40ch}
-.a6-club-app{flex:0 0 auto}
-.a6-app-boton{display:inline-flex;align-items:center;gap:12px;background:transparent;
-  border:1px solid var(--ambar);color:var(--ambar);border-radius:0;padding:14px 34px;
-  font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:.06em;
-  text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .25s,border-color .25s}
-.a6-app-boton:hover{background:rgba(212,169,75,.08);border-color:var(--ambar)}
-.a6-app-boton svg{width:16px;height:16px;flex:none}
-.a6-app-boton .laora{font-family:'Inter',sans-serif;text-transform:none;font-weight:800;font-size:13px}
-
-@media(max-width:1180px){
-  .a6-inner{flex-direction:column;align-items:flex-start;gap:44px}
-  .a6-texto{max-width:none}
-  .a6-foto{width:100%}
-  .a6-ventajas{grid-template-columns:repeat(2,1fr);row-gap:32px;margin-top:60px;padding-top:36px}
-  .a6-club{flex-direction:column;align-items:flex-start;gap:36px;padding:70px 44px 90px}
-  .a6-club-texto{max-width:none}
-}
-@media(max-width:760px){
-  .a6-escena{padding:110px 22px 0}
-  .a6-titular{font-size:clamp(28px,7.6vw,36px)}
-  .a6-parrafo{max-width:none}
-  .a6-boton{padding:13px 20px;font-size:10.5px}
-  .a6-ventajas{grid-template-columns:repeat(2,1fr);gap:24px 16px;padding:32px 22px 0;margin-top:50px}
-  .a6-club{padding:60px 22px 80px}
-  .a6-club-foto{width:200px}
-  .a6-club-sub{max-width:none}
-  .a6-app-boton{padding:13px 20px;font-size:10.5px;margin-top:8px}
-}
-
-/* PIE — reutilizado de la web anterior (assets/css/laora.css),
-   adaptado al fondo oscuro de esta página. Se anula la rayita de
-   .eyebrow::before de esa hoja: no existe en el resto de la página y
-   se colaba en todos los actos por el nombre de clase compartido */
-.eyebrow::before{content:none}
-footer{background:var(--negro);border-top:1px solid #2C2C2C}
-footer .footer-links a{color:#9aa1ab}
-footer .footer-links a:hover{color:#fff}
-footer .fg-title{color:#8a92a1}
-</style>
 </head>
 <body>
 
 <!-- ============================================================
-     CABECERA DINÁMICA. En el Acto 1 solo se ve el logo, por encima
-     de la tarjeta. En cuanto el scroll pasa del Acto 1, entra el
-     menú completo. La misma cabecera que el resto de páginas, que
-     allí se ve entera desde el principio.
-
-     Tres entradas del boceto no tienen página todavía y van sin
-     enlace a propósito: «sobre laOra», «servicio» y «contacto».
+     CABECERA REAL — la misma que el resto del sitio, sin tocar
+     `cabecera.css`. Va transparente sobre el héroe y `cabecera.js`
+     la deja fija en cuanto se hace scroll.
      ============================================================ -->
-<header class="cb cb-home" id="cabecera">
-  <a class="cb-marca" href="/">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu">
+<header class="cb">
+  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu" aria-label="Navegación principal">
     <a href="/coleccion.html">colección</a>
     <a href="/filosofia.html">filosofía</a>
-    <span class="cb-pendiente">sobre laOra</span>
-    <span class="cb-pendiente">servicio</span>
-    <span class="cb-pendiente">contacto</span>
+    <a href="#taller">taller</a>
+    <a href="#club">club</a>
   </nav>
   <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -497,416 +42,431 @@ footer .fg-title{color:#8a92a1}
   </a>
 </header>
 
-<a class="escape" id="escapeTab" href="/coleccion.html">Ver la colección <span class="fl">→</span></a>
+<main>
 
-<main class="hero">
-  <div class="foto">
-    <picture class="capa capaA">
-      <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-movil.jpg?v=3">
-      <img src="/assets/img/hero-bitacora-web.jpg?v=3" alt="Reloj laOra Bitácora de esfera turquesa sobre fondo negro" fetchpriority="high">
-    </picture>
-    <picture class="capa capaB" aria-hidden="true">
-      <source media="(max-width:760px)" srcset="/assets/img/hero-bitacora-lateral-movil.jpg?v=2">
-      <img src="/assets/img/hero-bitacora-lateral-web.jpg?v=2" alt="" loading="lazy">
-    </picture>
-  </div>
-  <div class="sheen" aria-hidden="true"></div>
-
-  <div class="texto">
-    <div class="tarjeta">
-      <p class="eyebrow">Hay otra forma<br>de comprar un gran reloj.</p>
-      <h1>¿Por qué alguien paga 12.000&nbsp;€ por un reloj...</h1>
-      <p class="sub">...si fabricar uno excelente cuesta una pequeña parte?</p>
-      <a class="cta" href="#acto2">Descubrir <span class="laora">laOra</span> <span class="fl">→</span></a>
-      <p class="disponible"><span class="punto"></span>9 relojes disponibles ahora · desde 150&nbsp;€</p>
-    </div>
-  </div>
-</main>
-
-<!-- ACTO II — LA REVELACIÓN -->
-<section class="acto2" id="acto2">
-  <div class="a2-escena">
-    <picture>
-      <source media="(max-width:760px)" srcset="/assets/img/acto2-movil.jpg">
-      <img src="/assets/img/acto2-web.jpg" alt="Un hombre de pie ante un aro de luz dorada, frente a una decisión" loading="lazy">
-    </picture>
-    <div class="a2-texto">
-      <div class="tarjeta">
-        <p class="eyebrow a2-eyebrow">El mismo acero,<br>el mismo zafiro.<br>El mismo movimiento.<br>Pero sin todo lo demás.</p>
-        <h2 class="a2-titular">No es solo un reloj.<br>Es tu forma de elegir lo que importa.</h2>
-        <p class="a2-parrafo">Intermediarios, comerciales, publicidades millonarias, joyerías, peajes de marca, y sobrecostes que rodean la industria sin necesidad.</p>
-        <button class="a2-boton" id="porqueBtn" type="button" aria-expanded="false" aria-controls="cincoPuertas">
-          <span class="txt">Por qué nace <span class="laora">laOra</span></span> <span class="chev">⌄</span>
-        </button>
+  <!-- 1 · HÉROE -->
+  <section class="hero" id="inicio">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow light">laOra · No es dropshipping</p>
+      <h1>
+        Elegimos cada pieza.<br>
+        Montamos cada reloj.<br>
+        <em>Respondemos aquí.</em>
+      </h1>
+      <p class="hero-lead">
+        Seleccionamos acero, cristal y movimientos de proveedores contrastados. Montamos con
+        cuidado, comprobamos la marcha, regulamos cuando procede y verificamos la hermeticidad
+        en nuestro taller de Madrid.
+      </p>
+      <p class="hero-nearby">
+        Antes de llegar a ti, cada reloj ha pasado por nuestras manos. No sale de una fábrica a
+        10.000 km directo a tu casa.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-gold" href="/coleccion.html">Ver los 8 modelos <span aria-hidden="true">→</span></a>
+        <a class="text-link light-link" href="#elige">Encuentra mi laOra</a>
       </div>
     </div>
-  </div>
-
-  <div class="a2-panel" id="cincoPuertas">
-    <div class="a2-panel-int">
-      <div class="a2-encuentras">
-        <h3 class="a2-encuentras-tit">Lo que te encuentras</h3>
-        <p class="a2-encuentras-sub">Antes de decidirte, esto es lo que hay ahí fuera.</p>
-        <div class="a2-encuentras-grid">
-          <div class="a2-encuentras-item a2-encuentras-precio">
-            <span class="a2-encuentras-cifra">7.700 €</span>
-            <b>Omega Speedmaster real</b>
-            <span class="a2-encuentras-reaccion">No me lo puedo permitir.</span>
-          </div>
-          <div class="a2-encuentras-item">
-            <svg viewBox="0 0 44 44"><rect x="6" y="15" width="16" height="14" rx="7"/><path d="M22 22h6" stroke-dasharray="2 3"/><rect x="24" y="15" width="14" height="14" rx="7" stroke-dasharray="4 3"/></svg>
-            <b>Homenajes</b>
-            <p>Eslabones huecos, pulsadores que fallan, specs falsas.</p>
-          </div>
-          <div class="a2-encuentras-item">
-            <svg viewBox="0 0 44 44"><rect x="8" y="8" width="18" height="10" rx="1" transform="rotate(-35 17 13)"/><path d="M14 20l14 14M30 14l-6 6"/><path d="M8 36h16"/></svg>
-            <b>Subastas</b>
-            <p>Precio bajo… hasta que llega el envío.</p>
-          </div>
-          <div class="a2-encuentras-item">
-            <svg viewBox="0 0 44 44"><path d="M12 16V11a10 10 0 0 1 20 0v5"/><path d="M8 16h28l-2 22H10z"/><path d="M22 22v8"/><circle cx="22" cy="33" r="1"/></svg>
-            <b>Tiendas indias y chinas</b>
-            <p>Reacondicionados, sin control, sin garantía.</p>
-          </div>
-          <div class="a2-encuentras-item">
-            <svg viewBox="0 0 44 44"><path d="M8 16a14 14 0 0 1 24-8m4 8V8h-8"/><path d="M36 28a14 14 0 0 1-24 8m-4-8v8h8"/></svg>
-            <b>Segunda mano</b>
-            <p>A veces sí, a veces no 🤷🏻‍♂️</p>
-          </div>
-        </div>
-      </div>
+    <div class="hero-model">
+      <span>Cronógrafo de la portada</span>
+      <strong>Lunar</strong>
+      <span>Desde 269,90 €</span>
     </div>
-  </div>
-</section>
+    <a class="scroll-cue" href="#confianza" aria-label="Bajar a la siguiente sección">
+      <span aria-hidden="true"></span> Explorar
+    </a>
+  </section>
 
-<!-- ACTO III — APARECE laOra -->
-<section class="acto3" id="acto3">
-  <div class="a3-escena">
-    <picture>
-      <source media="(max-width:1180px)" srcset="/assets/img/acto3-movil.jpg">
-      <img src="/assets/img/acto3-web.jpg" alt="Reloj laOra Cero Cero sobre roca mojada, con una silueta al fondo evocando una escena de espía" loading="lazy">
-    </picture>
-    <div class="a3-texto">
-      <div class="tarjeta">
-       <p class="eyebrow">Así que hicimos lo contrario.</p>
-       <h2 class="a3-titular">Eliminamos todos esos peajes.</h2>
-       <span class="a3-raya"></span>
-       <p class="a3-sub">Un reloj con nombre propio.<br>Sin apellido que pagar.</p>
+  <!-- 2 · LO QUE TE ENCUENTRAS AHÍ FUERA -->
+  <section class="market-section" id="confianza" aria-labelledby="market-title">
+    <div class="market-heading">
+      <div>
+        <p class="market-kicker">Lo que te encuentras ahí fuera</p>
+        <h2 id="market-title">Hay otra forma de comprar un gran reloj.</h2>
       </div>
-
-      <div class="a3-pasos">
-        <div class="a3-paso">
-          <span class="num">01</span>
-          <p>Reservas.</p>
-        </div>
-        <div class="a3-paso">
-          <span class="num">02</span>
-          <p>Recibimos tu pedido y montamos.</p>
-        </div>
-        <div class="a3-paso">
-          <span class="num">03</span>
-          <p>A través de la aplicación laOra, verificas en todo momento dónde está el proceso de montaje.</p>
-        </div>
-        <div class="a3-paso">
-          <span class="num">04</span>
-          <p>Recibes el reloj en tu casa.</p>
-        </div>
-      </div>
-      <p class="a3-cierre">No estamos a 10.000&nbsp;km, no estamos a tres semanas de distancia.<br>Estamos aquí al lado.</p>
+      <p class="market-question">
+        ¿Por qué alguien paga <strong>12.000 €</strong> por un reloj…
+        <span>…si fabricar uno excelente cuesta una pequeña parte?</span>
+      </p>
     </div>
-  </div>
-</section>
-
-<!-- ACTO IV — CIERRE: lo único que no negociamos -->
-<section class="acto4" id="acto4">
-  <div class="a4-escena">
-    <picture>
-      <source media="(max-width:1180px)" srcset="/assets/img/acto4-movil.jpg">
-      <img src="/assets/img/acto4-web.jpg" alt="Reloj laOra Lunar, cronógrafo de esfera negra" loading="lazy">
-    </picture>
-    <div class="a4-texto">
-     <div class="tarjeta">
-      <p class="eyebrow">Lo único que no negociamos.</p>
-      <h2 class="a4-titular">Lo único que no tocamos fue el reloj.</h2>
-      <span class="a4-raya"></span>
-      <p class="a4-sub">Eliminamos el coste de la marca, los intermediarios y el marketing.<br>No el acero. No el cristal. No el movimiento.</p>
-      <a class="a4-boton" href="/coleccion.html">Descubrir la colección <span class="fl">→</span></a>
-     </div>
-
-      <div class="a4-specs">
-        <div class="spec4">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5L19.5 7V17L12 21.5L4.5 17V7Z"/><circle cx="12" cy="12" r="3.2"/></svg></span>
-          <b>316L</b>
-          <p>Acero inoxidable de alta calidad.</p>
-        </div>
-        <div class="spec4">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9.5 3 8 9l4 12 4-12-1.5-6"/></svg></span>
-          <b>Zafiro</b>
-          <p>Cristal resistente al rayado.</p>
-        </div>
-        <div class="spec4">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-          <b>Movimiento japonés</b>
-          <p>Fiabilidad diseñada para durar.</p>
-        </div>
-      </div>
+    <div class="market-grid">
+      <article class="market-card market-card-featured">
+        <span class="market-number">01</span>
+        <strong class="market-price">7.700 €</strong>
+        <h3>Omega Speedmaster real</h3>
+        <p>No me lo puedo permitir.</p>
+      </article>
+      <article class="market-card">
+        <span class="market-number">02</span>
+        <h3>Homenajes</h3>
+        <p>Eslabones huecos, pulsadores que fallan, especificaciones falsas.</p>
+      </article>
+      <article class="market-card">
+        <span class="market-number">03</span>
+        <h3>Subastas</h3>
+        <p>Precio bajo… hasta que llega el envío.</p>
+      </article>
+      <article class="market-card">
+        <span class="market-number">04</span>
+        <h3>Tiendas indias y chinas</h3>
+        <p>Reacondicionados, sin control, sin garantía.</p>
+      </article>
+      <article class="market-card">
+        <span class="market-number">05</span>
+        <h3>Segunda mano</h3>
+        <p>A veces sí. A veces no.</p>
+      </article>
     </div>
-  </div>
-</section>
+    <div class="market-answer">
+      <span>La respuesta laOra</span>
+      <strong>Seleccionamos componentes. Montamos, regulamos y probamos en Madrid. Respondemos aquí.</strong>
+    </div>
+  </section>
 
-<!-- ACTO V — ANTES DE LLEGAR A TU MUÑECA -->
-<section class="acto5" id="acto5">
-  <div class="a5-escena">
-    <div class="a5-inner">
-      <div class="a5-texto">
-        <p class="eyebrow">Antes de llegar a tu muñeca</p>
-        <h2 class="a5-titular">Cada reloj de laOra<br>se ajusta,<br>se revisa<br>y se prepara<br>uno a uno en Madrid.</h2>
-        <span class="a5-raya"></span>
-        <p class="a5-parrafo">No enviamos relojes directamente desde una fábrica.</p>
-        <p class="a5-parrafo">Compramos los componentes, pero no los más baratos: buscamos los mejores materiales posibles. Comprobamos en nuestro taller que lo son, y después montamos tu reloj, equilibramos su movimiento y verificamos su hermeticidad. Lo que ves y lo que lees es 100% de confianza.</p>
-        <button class="a5-boton" type="button" data-abre-video>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          Ver cómo preparamos tu reloj
-        </button>
+  <!-- 3 · ENCUENTRA TU laOra (los cuatro mundos) -->
+  <section class="worlds-section" id="elige">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Encuentra tu laOra</p>
+        <h2>
+          No elijas un reloj.<br>
+          Elige <em>tu carácter.</em>
+        </h2>
       </div>
-      <button class="a5-video" type="button" data-abre-video aria-haspopup="dialog" aria-label="Reproducir vídeo: cómo preparamos tu reloj">
-        <img src="/assets/img/acto5-taller.jpg" alt="Relojero laOra inspeccionando un cronógrafo con una lupa antes de enviarlo" loading="lazy">
+      <p>
+        Ocho modelos, cuatro maneras de entender el tiempo. Selecciona la que mejor encaja contigo
+        y descubre por dónde empezar.
+      </p>
+    </div>
+
+    <div class="world-selector" role="tablist" aria-label="Estilos de reloj">
+      <button type="button" class="active" role="tab" id="tab-diario" aria-selected="true" aria-controls="world-result" data-world="diario">
+        <span aria-hidden="true">01</span>Acero para cada día
+      </button>
+      <button type="button" role="tab" id="tab-instrumento" aria-selected="false" tabindex="-1" aria-controls="world-result" data-world="instrumento">
+        <span aria-hidden="true">02</span>Instrumentos con carácter
+      </button>
+      <button type="button" role="tab" id="tab-elegancia" aria-selected="false" tabindex="-1" aria-controls="world-result" data-world="elegancia">
+        <span aria-hidden="true">03</span>Elegancia sin ceremonia
+      </button>
+      <button type="button" role="tab" id="tab-agua" aria-selected="false" tabindex="-1" aria-controls="world-result" data-world="agua">
+        <span aria-hidden="true">04</span>Hechos para el agua
       </button>
     </div>
-  </div>
-  <div class="a5-pasos">
-    <div class="paso"><span class="num">01</span><span class="etiqueta">Montaje</span></div>
-    <div class="paso"><span class="num">02</span><span class="etiqueta">Regulación</span></div>
-    <div class="paso"><span class="num">03</span><span class="etiqueta">Inspección</span></div>
-    <div class="paso"><span class="num">04</span><span class="etiqueta">Embalaje</span></div>
-  </div>
-  <p class="a5-cierre">Cada reloj se ajusta y verifica en España antes de enviarse.</p>
-</section>
 
-<div class="a5-modal" id="a5Modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vídeo: cómo preparamos tu reloj">
-  <div class="a5-modal-fondo" data-cierra-video></div>
-  <div class="a5-modal-caja">
-    <button class="a5-modal-cerrar" type="button" data-cierra-video aria-label="Cerrar vídeo">✕</button>
-    <video class="a5-modal-video" id="a5Video" playsinline preload="none" poster="/assets/img/acto5-taller.jpg">
-      <source src="/assets/video/acto5-taller.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
+    <div class="world-result" id="world-result" role="tabpanel" aria-labelledby="tab-diario">
+      <div class="world-image-wrap">
+        <img id="world-image" src="/assets/img/relojes/col-07.jpg" alt="Relojes Bitácora · Precisa de laOra">
+        <span class="image-index" id="world-index">01 / 04</span>
+      </div>
+      <div class="world-copy">
+        <p class="eyebrow" id="world-kicker">Acero para cada día</p>
+        <h3 id="world-title">Carácter que encaja con todo.</h3>
+        <p id="world-description">Dos deportivos integrados para quienes buscan presencia, precisión y versatilidad.</p>
+        <strong id="world-models">Bitácora · Precisa</strong>
+        <a class="text-link" href="/coleccion.html">Ver estos modelos <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
 
-<!-- ACTO VI — EMBALAJE Y CLUB laOra -->
-<section class="acto6" id="acto6">
-  <div class="a6-escena">
-    <div class="a6-inner">
-      <div class="a6-texto">
-        <p class="eyebrow">No es una caja de lujo.<br>Es una decisión inteligente.</p>
-        <h2 class="a6-titular">Todo el valor<br>está aquí.</h2>
-        <span class="a6-raya"></span>
-        <p class="a6-parrafo">No invertimos cientos de euros en un embalaje que terminará en un armario.</p>
-        <p class="a6-parrafo fuerte">Preferimos invertir ese dinero en el reloj que llevarás durante años.</p>
-        <div class="a6-nota">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 4-7 8.8-7 12.5A6.5 6.5 0 0 0 12 22a6.5 6.5 0 0 0 7-6.5C19 11.8 16.4 7 12 3z"/><path d="M12 22V9"/></svg></span>
-          <p>Si esta caja costara 80&nbsp;€, el reloj costaría más.<span class="destaca">Preferimos que ocurra justo lo contrario.</span></p>
+  <!-- 4 · MODELO DESTACADO -->
+  <section class="flagship">
+    <div class="flagship-copy">
+      <p class="eyebrow">Geometría con intención</p>
+      <p class="model-code">LO–04 · Deportivo integrado</p>
+      <h2>Precisa</h2>
+      <p class="flagship-claim">La precisión también puede sentirse a primera vista.</p>
+      <p class="flagship-body">
+        Acero de líneas tensas, brazalete integrado y una esfera limpia. Presencia sin estridencias,
+        construida para acompañarte cada día.
+      </p>
+      <div class="spec-row">
+        <span>40 mm</span>
+        <span>Ronda suizo</span>
+        <span>100 m</span>
+      </div>
+      <div class="price-row">
+        <div>
+          <small>Desde</small>
+          <strong>329,90 €</strong>
         </div>
-        <button class="a6-boton" type="button">Descubre el Club <span class="laora">laOra</span> <span class="fl">→</span></button>
-      </div>
-      <div class="a6-foto">
-        <img src="/assets/img/acto6-cajas.jpg?v=2" alt="Caja de laOra abierta con el reloj dentro, junto a la caja cerrada con la marca laOra" loading="lazy">
+        <a class="button button-dark" href="/precisa.html">Descubrir Precisa <span aria-hidden="true">→</span></a>
       </div>
     </div>
-  </div>
+    <div class="flagship-image">
+      <img src="/assets/img/relojes/col-04.jpg" alt="laOra Precisa, deportivo integrado" loading="lazy">
+      <span aria-hidden="true">01</span>
+    </div>
+  </section>
 
-  <div class="a6-ventajas">
-    <div class="ventaja">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-      <b>Compra segura</b>
-      <p>Pago protegido y seguimiento del pedido en todo momento.</p>
+  <!-- 5 · LA DIFERENCIA OCURRE ANTES DEL ENVÍO -->
+  <section class="value-section" id="por-que">
+    <div class="value-intro">
+      <p class="eyebrow light">Compramos componentes. Entregamos relojes.</p>
+      <h2>
+        La diferencia ocurre<br>
+        <em>antes del envío.</em>
+      </h2>
+      <p>
+        Buscamos proveedores, comparamos calidades y seleccionamos componentes. Cuando llegan al
+        taller empieza nuestro trabajo: comprobar, montar, ajustar, probar y responder.
+      </p>
     </div>
-    <div class="ventaja" id="club-laora">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
-      <b>Club laOra</b>
-      <p>Garantía, soporte técnico y seguimiento desde nuestra App.</p>
+    <div class="value-grid">
+      <article>
+        <span>01</span>
+        <strong>316L</strong>
+        <p>Acero inoxidable elegido para resistir el uso real.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <strong>Zafiro</strong>
+        <p>Cristal resistente al rayado cuando corresponde al modelo.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <strong>JP / CH</strong>
+        <p>Movimientos japoneses y suizos, siempre identificados.</p>
+      </article>
+      <article>
+        <span>04</span>
+        <strong>Madrid</strong>
+        <p>Revisión, ajuste y preparación antes de cada envío.</p>
+      </article>
     </div>
-    <div class="ventaja">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.4 4-7 8.8-7 12.5A6.5 6.5 0 0 0 12 22a6.5 6.5 0 0 0 7-6.5C19 11.8 16.4 7 12 3z"/><path d="M12 22V9"/></svg></span>
-      <b>Ecológicos</b>
-      <p>Materiales certificados FSC y embalaje 100% reciclable.</p>
-    </div>
-    <div class="ventaja">
-      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v10H3z"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.8"/><circle cx="17.5" cy="19" r="1.8"/></svg></span>
-      <b>Somos puntuales</b>
-      <p>Producción y envío rápidos para que disfrutes antes de tu reloj.</p>
-    </div>
-  </div>
+  </section>
 
-  <div class="a6-club">
-    <div class="a6-club-foto">
-      <img src="/assets/img/acto6-app.jpg" alt="App laOra abierta en un iPhone, con accesos a Mi reloj, Garantía, Soporte técnico y Mis pedidos" loading="lazy">
+  <!-- 6 · EL TALLER -->
+  <section class="workshop" id="taller">
+    <div class="workshop-image">
+      <img src="/assets/img/taller-madrid.jpg" alt="Relojero de laOra revisando una pieza en Madrid" loading="lazy">
     </div>
-    <div class="a6-club-texto">
-      <p class="eyebrow">Más que un reloj.</p>
-      <h2 class="a6-club-titular">Un club. Ventajas reales.<br>Atención prioritaria.</h2>
-      <p class="a6-club-sub">Tu reloj viene con mucho más que la hora.<br>Viene con el respaldo de la comunidad laOra.</p>
+    <div class="workshop-copy">
+      <p class="eyebrow">Antes de llegar a tu muñeca</p>
+      <h2>
+        Uno a uno.<br>
+        Aquí al lado.
+      </h2>
+      <p>
+        No enviamos una caja directamente desde una fábrica. Cada reloj pasa por nuestras manos
+        antes de pasar a las tuyas.
+      </p>
+      <ol>
+        <li><span>01</span> Montaje y comprobación</li>
+        <li><span>02</span> Regulación del movimiento</li>
+        <li><span>03</span> Control de calidad y hermeticidad</li>
+        <li><span>04</span> Embalaje y seguimiento</li>
+      </ol>
+      <a class="text-link" href="#garantias">Cómo preparamos tu reloj <span aria-hidden="true">→</span></a>
     </div>
-    <div class="a6-club-app">
-      <a class="a6-app-boton" href="#" data-app-store>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
-        Descarga la app <span class="laora">laOra</span>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- PIE DEL GRUPO -->
+  <!-- 7 · TESTIMONIO -->
+  <section class="quote-section">
+    <p class="eyebrow">Compra verificada · Bitácora LO–02</p>
+    <div class="stars" role="img" aria-label="Cinco de cinco estrellas">★★★★★</div>
+    <blockquote>
+      «Tiene la presencia y los acabados de relojes que cuestan el doble. Y, por fin, una marca que
+      explica las cosas como son.»
+    </blockquote>
+    <p class="quote-author">Javier M.</p>
+  </section>
+
+  <!-- 8 · COMPRA SIN RIESGO -->
+  <section class="assurance-section" id="garantias">
+    <div>
+      <p class="eyebrow light">Compra sin riesgo</p>
+      <h2>
+        Queremos que te lo<br>
+        quedes <em>por gusto.</em>
+      </h2>
+      <p>
+        Recíbelo, póntelo y decide con calma. Y si necesitas ayuda, no tienes que escribir a la otra
+        punta del mundo.
+      </p>
+      <a class="button button-gold" href="/coleccion.html">Elegir mi laOra <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="assurance-list">
+      <div>
+        <span>01</span>
+        <strong>0 €</strong>
+        <p>Envío estándar</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>14 días</strong>
+        <p>Para decidir</p>
+      </div>
+      <div>
+        <span>03</span>
+        <strong>Hasta 5 años</strong>
+        <p>Garantía oficial</p>
+      </div>
+      <div>
+        <span>04</span>
+        <strong>Madrid</strong>
+        <p>Servicio técnico</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · CLUB laOra -->
+  <section class="club-section" id="club">
+    <div class="club-card">
+      <span class="club-orbit" aria-hidden="true"></span>
+      <div>
+        <p class="eyebrow light">Próximamente</p>
+        <h2>Club laOra</h2>
+        <p>Tu reloj, su garantía y todo su recorrido, siempre contigo.</p>
+      </div>
+      <div class="club-benefits">
+        <span>Seguimiento</span>
+        <span>Soporte técnico</span>
+        <span>Ventajas para miembros</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · PREGUNTAS -->
+  <section class="faq-section">
+    <div>
+      <p class="eyebrow">Antes de elegir</p>
+      <h2>Preguntas honestas. Respuestas claras.</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>¿Dónde se fabrican los relojes laOra?<span aria-hidden="true">+</span></summary>
+        <p>No compramos un reloj terminado para enviarlo directamente. Seleccionamos componentes internacionales por separado y cada pieza se monta, ajusta y verifica en Madrid antes del envío.</p>
+      </details>
+      <details>
+        <summary>¿Qué movimiento lleva cada modelo?<span aria-hidden="true">+</span></summary>
+        <p>Cada ficha identifica claramente su movimiento japonés o suizo, sin nombres genéricos ni especificaciones ocultas.</p>
+      </details>
+      <details>
+        <summary>¿Qué ocurre si no me queda bien?<span aria-hidden="true">+</span></summary>
+        <p>Dispones de 14 días para probarlo y decidir con calma, según las condiciones de devolución.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 11 · CIERRE -->
+  <section class="final-cta">
+    <p class="eyebrow light">Tu tiempo. Tu elección.</p>
+    <h2>
+      Hay un laOra<br>
+      esperándote.
+    </h2>
+    <a class="button button-gold" href="/coleccion.html">Ver los ocho modelos <span aria-hidden="true">→</span></a>
+  </section>
+
+</main>
+
+<!-- 12 · PIE -->
 <footer>
-  <div class="brand clara">la<span class="o"></span>ra<sup>®</sup></div>
+  <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
   <div class="footer-links">
-    <a href="/coleccion.html">La colección</a>
+    <a href="/coleccion.html">Colección</a>
     <a href="/materiales.html">Materiales</a>
-    <a href="/manifiesto.html">El alma de un automático</a>
-    <a href="/condiciones-de-venta.html">Condiciones de venta</a>
+    <a href="#taller">Nuestro proceso</a>
+    <a href="/condiciones-de-venta.html">Condiciones</a>
     <a href="/privacidad.html">Privacidad</a>
   </div>
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-  <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
+  <p>© 2026 laOra® · Reloj · Calidad · Precio honesto</p>
 </footer>
 
-<audio id="clic" preload="auto" src="/assets/sonido/clic-brazalete.wav"></audio>
 <script>
-// la página siempre empieza en el Acto I: se anula la restauración de
-// scroll del navegador y cualquier «#acto2» que haya quedado en la URL
-// de una visita anterior (el CTA de abajo ya no lo escribe, pero una
-// pestaña vieja o un enlace compartido sí podrían traerlo)
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-window.scrollTo(0, 0);
-window.addEventListener('load', function () { window.scrollTo(0, 0); });
-
-// el clic del brazalete: solo tras interacción del usuario (los navegadores
-// bloquean el audio automático), como feedback al pulsar el CTA.
-// El scroll al Acto II es suave y no toca la URL (si escribiera #acto2,
-// recargar la página saltaría directa ahí en vez de empezar en el Acto I).
-document.querySelector('.cta').addEventListener('click', function (e) {
-  e.preventDefault();
-  document.getElementById('acto2').scrollIntoView({ behavior: 'smooth' });
-  var a = document.getElementById('clic');
-  a.volume = 0.45; a.currentTime = 0;
-  a.play().catch(function () {});
-});
-
-// la pestaña «Ver la colección» solo aparece a partir del Acto II: en el
-// Acto I no compite con el único CTA de la escena, pero queda siempre a
-// mano para quien quiera saltar directo a comprar sin esperar la historia
+/* Selector de mundos: cuatro pestañas que reescriben el panel. Mismo
+   contenido que el boceto; las imágenes son las reales de la colección. */
 (function () {
-  var tab = document.getElementById('escapeTab');
-  var hero = document.querySelector('.hero');
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      tab.classList.toggle('visible', entry.intersectionRatio < 0.5);
+  var mundos = {
+    diario: {
+      numero: '01',
+      kicker: 'Acero para cada día',
+      titulo: 'Carácter que encaja con todo.',
+      modelos: 'Bitácora · Precisa',
+      descripcion: 'Dos deportivos integrados para quienes buscan presencia, precisión y versatilidad.',
+      imagen: '/assets/img/relojes/col-07.jpg'
+    },
+    instrumento: {
+      numero: '02',
+      kicker: 'Instrumentos con carácter',
+      titulo: 'El tiempo, como herramienta.',
+      modelos: 'Lunar · Trinchera',
+      descripcion: 'Cronógrafo y reloj de campo: dos maneras de medir el tiempo con intención.',
+      imagen: '/assets/img/relojes/col-01.jpg'
+    },
+    elegancia: {
+      numero: '03',
+      kicker: 'Elegancia sin ceremonia',
+      titulo: 'Menos ruido. Más intención.',
+      modelos: 'Bauhaus · Cóctel',
+      descripcion: 'Esferas con profundidad, proporciones limpias y una elegancia que no necesita ocasión.',
+      imagen: '/assets/img/relojes/col-09.jpg'
+    },
+    agua: {
+      numero: '04',
+      kicker: 'Hechos para el agua',
+      titulo: 'Robustos por naturaleza.',
+      modelos: 'Cero Cero · Tortuga',
+      descripcion: 'Dos buceadores preparados para bajar más profundo y acompañarte en superficie.',
+      imagen: '/assets/img/relojes/col-08.jpg'
+    }
+  };
+
+  var botones = Array.prototype.slice.call(document.querySelectorAll('.world-selector button'));
+  var panel = document.getElementById('world-result');
+  var imagen = document.getElementById('world-image');
+  var indice = document.getElementById('world-index');
+  var kicker = document.getElementById('world-kicker');
+  var titulo = document.getElementById('world-title');
+  var descripcion = document.getElementById('world-description');
+  var modelos = document.getElementById('world-models');
+
+  function pinta(boton) {
+    var mundo = mundos[boton.dataset.world];
+    if (!mundo) return;
+
+    botones.forEach(function (b) {
+      var activo = b === boton;
+      b.classList.toggle('active', activo);
+      b.setAttribute('aria-selected', activo ? 'true' : 'false');
+      b.tabIndex = activo ? 0 : -1;
     });
-  }, { threshold: [0, 0.5, 1] });
-  obs.observe(hero);
-})();
 
-// el botón «Por qué nace laOra» despliega la infografía de las cinco puertas
-(function () {
-  var btn = document.getElementById('porqueBtn');
-  var panel = document.getElementById('cincoPuertas');
-  btn.addEventListener('click', function () {
-    var abierta = panel.classList.toggle('abierta');
-    btn.setAttribute('aria-expanded', abierta ? 'true' : 'false');
-    btn.querySelector('.txt').innerHTML = abierta
-      ? 'Ocultar'
-      : 'Por qué nace <span class="laora">laOra</span>';
-  });
-})();
+    imagen.src = mundo.imagen;
+    imagen.alt = 'Relojes ' + mundo.modelos + ' de laOra';
+    indice.textContent = mundo.numero + ' / 04';
+    kicker.textContent = mundo.kicker;
+    titulo.textContent = mundo.titulo;
+    descripcion.textContent = mundo.descripcion;
+    modelos.textContent = mundo.modelos;
+    panel.setAttribute('aria-labelledby', boton.id);
 
-// Acto V: el vídeo del taller se abre en un overlay al pulsar la foto o el
-// botón, y se cierra solo al terminar la reproducción
-(function () {
-  var modal = document.getElementById('a5Modal');
-  if (!modal) return;
-  var video = document.getElementById('a5Video');
-  var abridores = document.querySelectorAll('[data-abre-video]');
-  var cerradores = modal.querySelectorAll('[data-cierra-video]');
-
-  function abrir() {
-    modal.classList.add('visible');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    video.currentTime = 0;
-    video.play().catch(function () {});
-  }
-  function cerrar() {
-    modal.classList.remove('visible');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    video.pause();
-    video.currentTime = 0;
+    /* la animación de entrada solo se dispara si se reinicia */
+    imagen.style.animation = 'none';
+    void imagen.offsetWidth;
+    imagen.style.animation = '';
   }
 
-  abridores.forEach(function (el) { el.addEventListener('click', abrir); });
-  cerradores.forEach(function (el) { el.addEventListener('click', cerrar); });
-  video.addEventListener('ended', cerrar);
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal.classList.contains('visible')) cerrar();
+  botones.forEach(function (boton, i) {
+    boton.addEventListener('click', function () { pinta(boton); });
+    boton.addEventListener('keydown', function (e) {
+      var salto = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!salto) return;
+      e.preventDefault();
+      var siguiente = botones[(i + salto + botones.length) % botones.length];
+      siguiente.focus();
+      pinta(siguiente);
+    });
   });
 })();
 </script>
-<!-- carrito.js pinta el contador de la bolsa de la cabecera -->
+<!-- cabecera.js deja la cabecera fija al hacer scroll; carrito.js pinta
+     el contador de la bolsa -->
+<script src="/assets/js/cabecera.js"></script>
 <script src="/assets/js/carrito.js?v=17"></script>
-<script>
-/* Cabecera de la home: al abrir no se ve nada. Al primer roce del
-   scroll entra entera, y si se vuelve arriba del todo se retira.
-
-   Un simple oyente de scroll en vez de IntersectionObserver: aquí
-   solo hace falta saber si la página se ha movido, y así funciona
-   igual en cualquier navegador y se puede comprobar de verdad.
-   El umbral de 6 px evita que un temblor del trackpad la dispare. */
-(function () {
-  var cab = document.getElementById('cabecera');
-  if (!cab) return;
-
-  var UMBRAL = 6;
-  var visible = null;
-  var pedido = false;
-
-  function revisa() {
-    pedido = false;
-    var debe = (window.scrollY || document.documentElement.scrollTop) > UMBRAL;
-    if (debe === visible) return;
-    visible = debe;
-    cab.classList.toggle('cb-visible', debe);
-  }
-
-  addEventListener('scroll', function () {
-    if (pedido) return;
-    pedido = true;
-    requestAnimationFrame(revisa);
-  }, { passive: true });
-
-  revisa();
-})();
-</script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

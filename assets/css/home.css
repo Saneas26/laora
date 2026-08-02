@@ -1,0 +1,308 @@
+/* ============================================================
+   laOra · HOME — hoja propia
+   ------------------------------------------------------------
+   Traspaso 1:1 del boceto de diseño de la home. Es una hoja
+   AUTÓNOMA: la home NO carga `laora.css`, porque aquella define
+   `.eyebrow`, `.brand`, `.button`, `footer` y `.footer-links` con
+   otro diseño y pisaría esta maqueta clase por clase.
+
+   Lo único que se comparte con el resto del sitio es
+   `cabecera.css`, que va sin tocar.
+
+   El boceto venía sobre Tailwind, así que el bloque de abajo
+   replica su «preflight» (margen/relleno a cero y line-height 1.5).
+   Sin él, decenas de medidas del boceto se descuadran.
+   ============================================================ */
+
+*,::before,::after{box-sizing:border-box;margin:0;padding:0;border:0 solid}
+html{line-height:1.5;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}
+button{font:inherit;color:inherit;background:transparent;cursor:pointer}
+img,svg,video{display:block}
+img{width:100%;max-width:100%}
+
+:root{
+  --ink:#0b0b0a;
+  --ink-soft:#171714;
+  --paper:#eee9df;
+  --cream:#f7f4ed;
+  --gold:#d3a943;
+  --gold-soft:#e0c579;
+  --line:rgba(16,16,14,.18);
+  --muted:#77736b;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:Arial,Helvetica,sans-serif;
+  /* la cabecera usa su propio ámbar; se le da el del boceto para que
+     el logo y el menú vayan a juego con la página */
+  --ambar:#d3a943;
+}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* La cabecera real es `position:fixed` en cuanto se hace scroll
+   (`cabecera.js` le pone `.cb-pegada`), así que los saltos por anclaje
+   tienen que dejarle sitio o tapa el principio de la sección. */
+section{scroll-margin-top:92px}
+
+/* ---------- héroe ---------- */
+.hero{min-height:790px;height:100svh;position:relative;color:#fff;background:#050505;overflow:hidden}
+.hero-media{position:absolute;inset:0;background-image:url("/assets/img/acto4-web.jpg");
+  background-size:cover;background-position:center;transform:scale(1.01)}
+.hero-overlay{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.97) 0%,rgba(0,0,0,.86) 40%,rgba(0,0,0,.28) 72%,rgba(0,0,0,.16)),
+             linear-gradient(0deg,rgba(0,0,0,.7),transparent 44%)}
+.hero-copy{position:absolute;z-index:2;left:7.5vw;top:51%;transform:translateY(-45%);max-width:820px}
+.eyebrow{margin:0 0 26px;text-transform:uppercase;letter-spacing:2.5px;font-size:10px;font-weight:700;color:#766f61}
+.eyebrow.light{color:var(--gold-soft)}
+.hero h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.045em}
+.hero h1{font-size:clamp(54px,5.65vw,88px);line-height:.92;margin:0}
+.hero h1 em,h2 em{color:var(--gold-soft);font-weight:400;font-style:italic}
+.hero-lead{max-width:700px;font-family:var(--serif);font-size:17px;line-height:1.55;color:#c9c5bd;margin:28px 0 0}
+.hero-nearby{max-width:700px;border-left:2px solid var(--gold);padding-left:14px;margin:16px 0 0;
+  color:#99968f;font-size:11px;line-height:1.5;letter-spacing:.2px}
+.hero-actions{display:flex;align-items:center;gap:34px;margin-top:32px}
+.button{display:inline-flex;align-items:center;justify-content:space-between;gap:42px;padding:18px 22px;
+  text-transform:uppercase;letter-spacing:1.25px;font-size:10px;font-weight:700;
+  transition:transform .2s,background .2s}
+.button:hover{transform:translateY(-2px)}
+.button-gold{background:var(--gold);color:var(--ink)}
+.button-gold:hover{background:#e0bc61}
+.button-dark{background:var(--ink);color:#fff}
+.text-link{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;width:fit-content;
+  padding-bottom:8px;border-bottom:1px solid currentColor;text-transform:uppercase;letter-spacing:1.2px;
+  font-size:10px;font-weight:700}
+.light-link{color:#fff}
+.hero-model{position:absolute;z-index:2;right:5vw;bottom:54px;display:grid;gap:5px;text-align:right;
+  text-transform:uppercase;font-size:9px;letter-spacing:1.5px;color:#c7c3ba}
+.hero-model strong{font-family:var(--serif);text-transform:none;letter-spacing:0;color:#fff;font-size:24px;font-weight:400}
+.scroll-cue{position:absolute;z-index:3;left:7.5vw;bottom:38px;display:flex;align-items:center;gap:14px;
+  font-size:9px;text-transform:uppercase;letter-spacing:1.5px}
+.scroll-cue span{display:block;height:1px;width:54px;background:var(--gold)}
+
+/* ---------- lo que te encuentras ahí fuera ---------- */
+.market-section{background:var(--ink-soft);color:#fff;padding:34px 4.5vw 0}
+.market-heading{display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:6vw}
+.market-kicker{margin:0 0 8px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:9px;font-weight:700}
+.market-heading h2{margin:0;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-.035em}
+.market-question{margin:0;max-width:560px;font-family:var(--serif);font-size:17px;line-height:1.35;color:#b8b5ae}
+.market-question strong{color:var(--gold-soft);font-weight:400}
+.market-question span{display:block}
+.market-grid{display:grid;grid-template-columns:repeat(5,1fr);margin-top:26px;border-top:1px solid rgba(255,255,255,.16)}
+.market-card{min-height:164px;position:relative;padding:23px 20px 20px;border-right:1px solid rgba(255,255,255,.16)}
+.market-card:last-child{border-right:0}
+.market-card-featured{background:rgba(255,255,255,.045)}
+.market-number{position:absolute;top:15px;right:15px;color:#6d695f;font-size:8px;letter-spacing:1px}
+.market-price{display:block;margin:0 0 13px;color:var(--gold);font-family:var(--serif);font-size:31px;line-height:1;font-weight:400}
+.market-card h3{max-width:190px;margin:29px 0 12px;font-family:var(--sans);font-size:10px;line-height:1.2;
+  letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.market-card-featured h3{margin-top:0}
+.market-card p{max-width:205px;margin:0;color:#96948e;font-family:var(--serif);font-size:13px;line-height:1.35}
+.market-card-featured p{color:#d2cfc8;font-weight:700}
+.market-answer{margin:0 -4.5vw;padding:15px 4.5vw;display:flex;align-items:center;gap:38px;
+  background:var(--gold);color:var(--ink)}
+.market-answer span{flex:0 0 auto;text-transform:uppercase;letter-spacing:1.4px;font-size:8px;font-weight:700}
+.market-answer strong{font-family:var(--serif);font-size:15px;font-weight:400}
+
+/* ---------- encuentra tu laOra (los cuatro mundos) ---------- */
+.worlds-section{background:var(--cream);padding:130px 7vw 150px}
+.section-heading{display:grid;grid-template-columns:1.55fr .65fr;gap:9vw;align-items:end}
+.section-heading h2{font-size:clamp(52px,6vw,88px);line-height:.95;margin:0}
+.section-heading>p{font-family:var(--serif);line-height:1.65;font-size:18px;color:#666158;margin:0 0 10px}
+.world-selector{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.world-selector button{border:0;border-right:1px solid var(--line);background:transparent;padding:24px 22px;
+  text-align:left;text-transform:uppercase;font-size:9px;letter-spacing:1.1px;color:#77736c;cursor:pointer;
+  transition:background .25s,color .25s}
+.world-selector button:last-child{border-right:0}
+.world-selector button span{display:block;color:var(--gold);margin-bottom:12px;font-family:var(--serif);font-size:14px}
+.world-selector button.active{background:var(--ink);color:#fff}
+.world-result{display:grid;grid-template-columns:1.65fr .75fr;min-height:630px;background:#e4ded2}
+.world-image-wrap{position:relative;overflow:hidden}
+.world-image-wrap img{width:100%;height:100%;object-fit:cover;animation:imageIn .45s ease both}
+@keyframes imageIn{from{opacity:.4;transform:scale(1.02)}to{opacity:1;transform:scale(1)}}
+.image-index{position:absolute;left:24px;bottom:22px;color:#fff;font-size:10px;letter-spacing:1.4px}
+.world-copy{display:flex;flex-direction:column;justify-content:center;padding:7vw 5vw}
+.world-copy h3{font-size:clamp(42px,4vw,66px);line-height:1;margin:0 0 26px}
+.world-copy>p:not(.eyebrow){font-family:var(--serif);font-size:17px;line-height:1.6;color:#69645b}
+.world-copy>strong{margin:24px 0 38px;font-family:var(--serif);font-size:20px;font-weight:400}
+
+/* ---------- modelo destacado ---------- */
+.flagship{display:grid;grid-template-columns:.85fr 1.15fr;min-height:760px;background:var(--paper)}
+.flagship-copy{padding:10vw 7vw;display:flex;flex-direction:column;justify-content:center}
+.model-code{margin:0;text-transform:uppercase;letter-spacing:1.5px;color:#817b70;font-size:9px}
+.flagship h2{font-size:clamp(70px,7vw,112px);line-height:.9;margin:18px 0 28px}
+.flagship-claim{max-width:520px;font-family:var(--serif);font-size:25px;line-height:1.25;margin:0 0 24px}
+.flagship-body{max-width:510px;font-family:var(--serif);font-size:17px;line-height:1.65;color:#666158}
+.spec-row{display:flex;margin-top:34px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  text-transform:uppercase;font-size:9px;letter-spacing:1.2px}
+.spec-row span{padding:0 26px;border-right:1px solid var(--line)}
+.spec-row span:first-child{padding-left:0}
+.spec-row span:last-child{border:0}
+.price-row{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-top:35px}
+.price-row small,.price-row strong{display:block}
+.price-row small{text-transform:uppercase;letter-spacing:1px;font-size:9px;color:var(--muted)}
+.price-row strong{margin-top:4px;font-family:var(--serif);font-size:27px;font-weight:400}
+.flagship-image{position:relative;overflow:hidden;min-height:650px}
+.flagship-image img{height:100%;object-fit:cover}
+.flagship-image>span{position:absolute;right:30px;top:28px;color:#fff;font-family:var(--serif);font-size:20px}
+
+/* ---------- la diferencia ocurre antes del envío ---------- */
+.value-section{background:var(--ink);color:#fff;padding:140px 7vw}
+.value-intro{display:grid;grid-template-columns:1fr 2.25fr 1fr;gap:5vw;align-items:end}
+.value-intro .eyebrow{align-self:start}
+.value-intro h2{font-size:clamp(50px,5.3vw,82px);line-height:.98;margin:0}
+.value-intro>p:last-child{font-family:var(--serif);color:#aaa79e;line-height:1.65;font-size:16px}
+.value-grid{margin-top:100px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.18)}
+.value-grid article{padding:30px 25px 0 0;border-right:1px solid rgba(255,255,255,.18);min-height:230px}
+.value-grid article:not(:first-child){padding-left:25px}
+.value-grid article:last-child{border-right:0}
+.value-grid article>span{display:block;color:var(--gold);font-size:10px;margin-bottom:56px}
+.value-grid strong{font-family:var(--serif);font-size:38px;font-weight:400}
+.value-grid p{color:#8f8e87;line-height:1.55;font-size:13px;max-width:220px}
+
+/* ---------- el taller ---------- */
+.workshop{display:grid;grid-template-columns:1.2fr .8fr;background:var(--cream)}
+.workshop-image{min-height:760px}
+.workshop-image img{height:100%;object-fit:cover;filter:saturate(.75)}
+.workshop-copy{padding:9vw 7vw}
+.workshop-copy h2{font-size:clamp(62px,6vw,92px);line-height:.9;margin:0 0 35px}
+.workshop-copy>p:not(.eyebrow){font-family:var(--serif);color:#666158;font-size:17px;line-height:1.65}
+.workshop ol{list-style:none;padding:0;margin:46px 0;border-top:1px solid var(--line)}
+.workshop li{padding:16px 0;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:1.1px;font-size:9px}
+.workshop li span{color:var(--gold);display:inline-block;width:54px}
+
+/* ---------- testimonio ---------- */
+.quote-section{text-align:center;padding:140px 12vw;background:var(--paper)}
+.stars{color:var(--gold);letter-spacing:7px;margin:0 0 34px}
+.quote-section blockquote{max-width:980px;margin:0 auto;font-family:var(--serif);
+  font-size:clamp(34px,4.2vw,63px);line-height:1.14;letter-spacing:-.035em}
+.quote-author{margin-top:34px;text-transform:uppercase;letter-spacing:1.4px;font-size:10px}
+
+/* ---------- compra sin riesgo ---------- */
+.assurance-section{display:grid;grid-template-columns:1fr 1fr;gap:8vw;padding:140px 7vw;background:#0e0e0d;color:#fff}
+.assurance-section h2{font-size:clamp(54px,5.7vw,86px);line-height:.95;margin:0 0 32px}
+.assurance-section>div:first-child>p:not(.eyebrow){max-width:530px;font-family:var(--serif);color:#a5a29a;
+  font-size:17px;line-height:1.65;margin-bottom:38px}
+.assurance-list{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.18)}
+.assurance-list>div{padding:26px 22px;border-right:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.assurance-list>div:nth-child(even){border-right:0}
+.assurance-list span{color:var(--gold);font-size:9px}
+.assurance-list strong{display:block;margin-top:34px;font-family:var(--serif);font-size:26px;font-weight:400}
+.assurance-list p{margin:5px 0 0;color:#8d8b85;text-transform:uppercase;letter-spacing:1.2px;font-size:8px}
+
+/* ---------- Club laOra ---------- */
+.club-section{background:var(--cream);padding:120px 7vw}
+.club-card{min-height:440px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.3fr .7fr;
+  align-items:end;padding:70px;
+  background:radial-gradient(circle at 68% 45%,#3d321d 0,#15130f 28%,#090909 65%);color:#fff}
+.club-card h2{font-size:clamp(64px,7vw,104px);margin:0 0 12px}
+.club-card p:not(.eyebrow){font-family:var(--serif);color:#aaa79f;font-size:18px}
+.club-benefits{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.2)}
+.club-benefits span{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.2);text-transform:uppercase;
+  font-size:9px;letter-spacing:1.2px}
+.club-orbit{position:absolute;width:330px;aspect-ratio:1;border:1px solid rgba(211,169,67,.55);border-radius:50%;
+  right:19%;top:0;transform:translateY(-18%);
+  box-shadow:0 0 60px rgba(211,169,67,.11),inset 0 0 50px rgba(211,169,67,.08)}
+
+/* ---------- preguntas ---------- */
+.faq-section{padding:130px 7vw;display:grid;grid-template-columns:.8fr 1.2fr;gap:10vw;background:var(--paper)}
+.faq-section h2{font-size:clamp(52px,5vw,76px);line-height:.98;margin:0}
+.faq-list{border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line);padding:0}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:30px;
+  padding:25px 0;font-family:var(--serif);font-size:19px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary span{color:var(--gold);font-family:var(--sans)}
+.faq-list details[open] summary span{transform:rotate(45deg)}
+.faq-list summary span{display:inline-block;transition:transform .2s ease}
+.faq-list details p{margin:-4px 45px 26px 0;color:#6b665e;font-family:var(--serif);line-height:1.6}
+
+/* ---------- cierre ---------- */
+.final-cta{background:var(--ink);color:#fff;text-align:center;padding:145px 7vw}
+.final-cta h2{font-size:clamp(68px,8vw,124px);line-height:.84;margin:0 0 48px}
+.final-cta .button{justify-content:center}
+
+/* ---------- pie ----------
+   El logo del pie NO es el triángulo del boceto: es la marca real de
+   laOra (`.cb-marca`, de cabecera.css), que ya va en blanco. */
+footer{min-height:220px;padding:55px 6vw 34px;background:#080808;color:#fff;display:grid;
+  grid-template-columns:1fr auto;align-items:start;gap:60px;border-top:1px solid rgba(255,255,255,.14)}
+/* sin esto el logo se estira a toda la columna y su zona pulsable ocupa
+   media anchura del pie */
+footer .cb-marca{width:fit-content}
+.footer-links{display:flex;gap:32px;text-transform:uppercase;letter-spacing:1.2px;font-size:9px}
+.footer-links a{transition:color .2s ease}
+.footer-links a:hover{color:var(--gold-soft)}
+footer p{grid-column:1/-1;margin:auto 0 0;color:#666;font-size:9px;letter-spacing:1px}
+
+@media(max-width:980px){
+  .hero-media{background-position:58% center}
+  .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.32)),
+                           linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
+  .section-heading,.value-intro,.faq-section{grid-template-columns:1fr;gap:38px}
+  .world-result,.flagship,.workshop,.assurance-section{grid-template-columns:1fr}
+  .world-image-wrap{min-height:570px}
+  .flagship-image{order:-1}
+  .value-intro .eyebrow{margin-bottom:0}
+  .value-grid{grid-template-columns:1fr 1fr}
+  .value-grid article:nth-child(2){border-right:0}
+  .value-grid article{border-bottom:1px solid rgba(255,255,255,.18)}
+  .workshop-image{min-height:580px}
+}
+
+@media(max-width:660px){
+  .hero{min-height:760px}
+  .hero-media{background-image:url("/assets/img/acto4-movil.jpg");background-position:63% center;opacity:.76}
+  .hero-overlay{background:linear-gradient(90deg,rgba(0,0,0,.94) 0,rgba(0,0,0,.67) 72%,rgba(0,0,0,.3)),
+                           linear-gradient(0deg,rgba(0,0,0,.84),transparent 60%)}
+  .hero-copy{left:22px;right:22px;top:48%}
+  .hero h1{font-size:47px}
+  .hero-lead{font-size:16px;max-width:90%}
+  .hero-nearby{max-width:92%;font-size:10px}
+  .hero-actions{align-items:flex-start;flex-direction:column;gap:24px}
+  .hero-model{display:none}
+  .scroll-cue{left:22px;bottom:24px}
+  .market-section{padding:52px 0 0}
+  .market-heading{grid-template-columns:1fr;gap:20px;padding:0 22px}
+  .market-heading h2{font-size:36px}
+  .market-question{font-size:16px}
+  .market-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 22px 10px;margin-top:28px;scrollbar-width:none}
+  .market-grid::-webkit-scrollbar{display:none}
+  .market-card{min-width:74vw;min-height:170px;scroll-snap-align:start;border-left:1px solid rgba(255,255,255,.16)}
+  .market-card:last-child{border-right:1px solid rgba(255,255,255,.16)}
+  .market-answer{margin:0;padding:16px 22px;align-items:flex-start;flex-direction:column;gap:5px}
+  .market-answer strong{line-height:1.35}
+  .worlds-section,.value-section,.quote-section,.assurance-section,.club-section,.faq-section,.final-cta{padding:86px 22px}
+  .section-heading h2{font-size:49px}
+  .world-selector{grid-template-columns:1fr 1fr;margin-top:50px}
+  .world-selector button:nth-child(2){border-right:0}
+  .world-selector button{border-bottom:1px solid var(--line);padding:18px 14px}
+  .world-result{min-height:auto}
+  .world-image-wrap{min-height:390px}
+  .world-copy{padding:58px 24px}
+  .flagship-copy,.workshop-copy{padding:80px 22px}
+  .flagship-image,.workshop-image{min-height:470px}
+  .flagship h2{font-size:70px}
+  .price-row{align-items:stretch;flex-direction:column}
+  .spec-row{flex-wrap:wrap;gap:12px 0}
+  .value-grid{grid-template-columns:1fr;margin-top:60px}
+  .value-grid article,.value-grid article:nth-child(2){border-right:0;padding:25px 0;min-height:180px}
+  .value-grid article:not(:first-child){padding-left:0}
+  .value-grid article>span{margin-bottom:32px}
+  .quote-section blockquote{font-size:32px}
+  .assurance-list{grid-template-columns:1fr;margin-top:30px}
+  .assurance-list>div,.assurance-list>div:nth-child(even){border-right:0}
+  .club-card{grid-template-columns:1fr;gap:40px;padding:44px 24px;min-height:560px}
+  .club-orbit{right:-35%;top:15%}
+  .faq-section{gap:55px}
+  .final-cta h2{font-size:62px}
+  footer{grid-template-columns:1fr;padding:50px 22px 28px}
+  .footer-links{display:grid;grid-template-columns:1fr 1fr;gap:14px 32px}
+  footer p{grid-column:1}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
