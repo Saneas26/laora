@@ -86,10 +86,15 @@
       var j = Math.max(0, correas.indexOf(correa));
       var letra = acabado.refLetra || acabado.nombre.charAt(0).toUpperCase();
       var codigo = d.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
+      /* La hoja escribe los modelos sin tildes y sin espacios: «Bitacora»,
+         «CeroCero». El nombre bonito lleva las dos cosas, así que hay que
+         desnudarlo o la referencia no casaría con la del almacén. */
+      var modelo = d.modelo.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                           .replace(/\s/g, '');
       var num = acabado.refNum;
       if (Array.isArray(num)) num = num[j];
       if (!num) num = ('0' + (j + 1)).slice(-2);
-      return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra +
+      return codigo + '_' + modelo + '_' + letra +
              num + (acabado.refSufijo || '');
     }
 

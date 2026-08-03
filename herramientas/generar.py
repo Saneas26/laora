@@ -33,10 +33,10 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
 # max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
 # versión antigua. Vale igual para el CSS que para el JS.
-V_CSS = 25
+V_CSS = 26
 V_CAB = 13
 V_JS_HOME = 8
-V_JS_FICHA = 9
+V_JS_FICHA = 10
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -808,13 +808,17 @@ for i, r in enumerate(RELOJES):
     # sigue como estaba, sin precio ni selector, hasta que se vuelquen.
     cfg = r.get('configurador')
     if cfg:
-        def opcion(attr, ident, nombre, detalle, primera):
+        def opcion(attr, ident, nombre, detalle, primera, clase=''):
             sel = ' aria-selected="true"' if primera else ' aria-selected="false" tabindex="-1"'
-            return (f'          <button type="button" role="tab" data-{attr}="{ident}"{sel}>'
+            cls = f' class="{clase}"' if clase else ''
+            return (f'          <button type="button" role="tab" data-{attr}="{ident}"{cls}{sel}>'
                     f'<span>{nombre}</span><small>{detalle}</small></button>')
 
+        # El Eclipse es la gama en negro y su tarjeta va en grafito con la
+        # letra en blanco puro, en los ocho modelos. Óscar, 03/08/2026.
         acabados = '\n'.join(
-            opcion('acabado', a['id'], a['nombre'], a['descriptor'], n == 0)
+            opcion('acabado', a['id'], a['nombre'], a['descriptor'], n == 0,
+                   'op-eclipse' if a['nombre'].startswith('Eclipse') else '')
             for n, a in enumerate(cfg['acabados']))
         # El grupo de correa solo existe si hay algo que elegir. El Bauhaus
         # va siempre con el mismo brazalete, así que ahí no se pinta: un

@@ -1062,10 +1062,10 @@
       "frase": "Equilibrio, precisión y uso diario.",
       "descripcion": "Geometría de acero, perfil contenido y una esfera que cambia con la luz.",
       "historia": "Bitácora toma como punto de partida el reloj deportivo integrado de los setenta y lo traduce a una propuesta directa, legible y con marca propia.",
-      "precio": null,
+      "precio": 199.9,
       "movimiento": null,
       "diametro": "40 mm",
-      "hermeticidad": null,
+      "hermeticidad": "100 m (10 ATM)",
       "foto": "/assets/img/relojes-2026/bitacora.webp",
       "galeria": [
         "/assets/img/relojes-2026/bitacora.webp",
@@ -1075,20 +1075,205 @@
       "fichaTecnica": [
         [
           "Caja",
-          "Acero 316L"
+          "Acero inoxidable 316L"
         ],
         [
-          "Arquitectura",
-          "Brazalete integrado"
+          "Brazalete",
+          "Integrado, de acero 316L"
         ],
         [
           "Esfera",
-          "Texturizada"
+          "Con textura horizontal"
         ],
         [
-          "Control",
-          "Revisión individual en Madrid"
+          "Cristal",
+          "Zafiro"
         ]
+      ],
+      "configurador": {
+        "_": "Catálogo final de la hoja de materiales (04/08/2026). Seis acabados = tres calibres en acero y los mismos tres en PVD negro. La hoja tiene siete filas porque L01 y C02-NH35 son el mismo reloj con dos nombres; se publica una vez, con L01. Las frecuencias NO salen de estas filas: ahí la columna está corrupta, se usan las de los otros seis modelos. Sin grupo de correa: el brazalete es integrado.",
+        "acabados": [
+          {
+            "id": "alba",
+            "nombre": "Alba",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y cepillado",
+            "esfera": "Con textura horizontal, en azul o en gris",
+            "resumen": "El más fino de los seis: sin rotor que alojar, la caja baja a unos 9 mm.",
+            "refSufijo": "",
+            "descriptor": "Movimiento de cuarzo suizo",
+            "movimiento": "Ronda 515, cuarzo suizo",
+            "movimientoTipo": "Cuarzo con fecha",
+            "frecuencia": "32.768 Hz",
+            "autonomia": "Pila de varios años",
+            "caja": "unos 9 a 10 mm de grosor",
+            "peso": "entre 120 y 140 g"
+          },
+          {
+            "id": "levante",
+            "nombre": "Levante",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y cepillado",
+            "esfera": "Con textura horizontal, en azul o en gris",
+            "resumen": "El automático japonés de referencia: para el segundero al ponerlo en hora y admite cuerda a mano.",
+            "refSufijo": "",
+            "descriptor": "Movimiento japonés automático (Seiko)",
+            "movimiento": "Seiko NH35A, automático japonés",
+            "movimientoTipo": "Automático con fecha",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 41 horas de reserva de marcha",
+            "caja": "unos 11 mm de grosor",
+            "peso": "entre 130 y 150 g"
+          },
+          {
+            "id": "cenit",
+            "nombre": "Cenit",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y cepillado",
+            "esfera": "Con textura horizontal, en azul o en gris",
+            "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824.",
+            "refSufijo": "-ST2130",
+            "descriptor": "Automático arquitectura suiza",
+            "movimiento": "ST2130, automático de arquitectura suiza",
+            "movimientoTipo": "Automático con fecha, arquitectura ETA 2824",
+            "frecuencia": "28.800 alternancias/hora (4 Hz)",
+            "autonomia": "Unas 38 horas de reserva de marcha",
+            "caja": "unos 11 mm de grosor",
+            "peso": "entre 130 y 150 g"
+          },
+          {
+            "id": "eclipse",
+            "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L con PVD negro, pulido y cepillado",
+            "esfera": "Negra, con textura horizontal",
+            "resumen": "Todo en negro y el más fino de los seis, con la esfera a juego con la caja.",
+            "refSufijo": "-Ronda515",
+            "descriptor": "Movimiento de cuarzo suizo",
+            "movimiento": "Ronda 515, cuarzo suizo",
+            "movimientoTipo": "Cuarzo con fecha",
+            "frecuencia": "32.768 Hz",
+            "autonomia": "Pila de varios años",
+            "caja": "unos 9 a 10 mm de grosor",
+            "peso": "entre 120 y 140 g"
+          },
+          {
+            "id": "eclipse-suizo",
+            "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L con PVD negro, pulido y cepillado",
+            "esfera": "Negra, con textura horizontal",
+            "resumen": "La arquitectura suiza del ETA 2824, aquí sobre la caja en PVD negro.",
+            "refSufijo": "-ST2130",
+            "refNum": "03",
+            "descriptor": "Automático arquitectura suiza",
+            "movimiento": "ST2130, automático de arquitectura suiza",
+            "movimientoTipo": "Automático con fecha, arquitectura ETA 2824",
+            "frecuencia": "28.800 alternancias/hora (4 Hz)",
+            "autonomia": "Unas 38 horas de reserva de marcha",
+            "caja": "unos 11 mm de grosor",
+            "peso": "entre 130 y 150 g"
+          },
+          {
+            "id": "eclipse-seiko",
+            "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L con PVD negro, pulido y cepillado",
+            "esfera": "Negra, con textura horizontal",
+            "resumen": "El automático japonés de Seiko, aquí sobre la caja en PVD negro.",
+            "refSufijo": "-NH35",
+            "refNum": "02",
+            "descriptor": "Movimiento japonés automático (Seiko)",
+            "movimiento": "Seiko NH35A, automático japonés",
+            "movimientoTipo": "Automático con fecha",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 41 horas de reserva de marcha",
+            "caja": "unos 11 mm de grosor",
+            "peso": "entre 130 y 150 g"
+          }
+        ],
+        "correas": [],
+        "precios": {
+          "alba": [
+            199.9
+          ],
+          "levante": [
+            259.9
+          ],
+          "cenit": [
+            239.9
+          ],
+          "eclipse": [
+            199.9
+          ],
+          "eclipse-suizo": [
+            239.9
+          ],
+          "eclipse-seiko": [
+            259.9
+          ]
+        },
+        "comunes": {
+          "Diámetro": "40 mm",
+          "Estanqueidad": "100 m (10 ATM)",
+          "Bisel": "Fijo, integrado en la caja",
+          "Cristal": "Zafiro plano",
+          "Índices": "Aplicados, con ventanilla de fecha a las 3",
+          "Luminiscencia": "En agujas e índices",
+          "Brazalete": "Integrado, con cierre desplegable oculto",
+          "Ajuste": "Por eslabones",
+          "Fondo": "Cerrado macizo",
+          "Corona": "Roscada"
+        }
+      },
+      "historiaOriginal": {
+        "_": "Historia del original. Nombra marca y modelo con todas sus letras y lleva su propio aviso legal.",
+        "original": "Patek Philippe Nautilus",
+        "antetitulo": "La historia del original",
+        "titular": "El reloj que se dibujó en una servilleta<br><em>y escandalizó a media Suiza.</em>",
+        "entradilla": "En 1976 Patek Philippe presentó un reloj de acero que costaba como uno de oro. El anuncio lo decía sin disimular, y esa frase cambió lo que se entendía por un reloj caro.",
+        "cuerpo": [
+          "Lo firmó Gérald Genta, que cuatro años antes había hecho lo mismo para otra casa. Él contaba que lo bosquejó en unos minutos, durante una comida en la feria de Basilea, mirando a unos directivos de Patek sentados en otra mesa.",
+          "La forma no salió de la relojería. Salió de un barco: es un ojo de buey, la ventana redonda del casco, con sus dos bisagras a los lados. Por eso el perfil tiene esas dos orejas que no son asas y no sujetan nada. El nombre completa la idea: Nautilus, el submarino de Julio Verne.",
+          "El escándalo fue el material. Hasta entonces un reloj de lujo era de oro y punto; vender acero al precio del oro parecía una broma. Tardó años en venderse bien.",
+          "Hoy aquella silueta —caja fina, brazalete que nace de la caja y esfera con surcos horizontales— es un idioma que hablan decenas de marcas, y las listas de espera del original se cuentan en años."
+        ],
+        "datos": [
+          [
+            "1976",
+            "Patek Philippe presenta el Nautilus, diseñado por Gérald Genta."
+          ],
+          [
+            "El anuncio",
+            "Presume de que uno de los relojes más caros del mundo es de acero."
+          ],
+          [
+            "La forma",
+            "Un ojo de buey de barco, con sus dos bisagras a los lados."
+          ],
+          [
+            "Hoy",
+            "Aquella silueta es un lenguaje que usa media industria."
+          ]
+        ],
+        "cierre": "El nuestro no es aquel reloj. Toma su idea —caja fina, brazalete que nace de ella y una esfera con surcos— y la firma con nuestro nombre.",
+        "aviso": "Patek Philippe y Nautilus son marcas registradas de sus titulares. laOra no está afiliada a Patek Philippe SA: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Bitácora ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno."
+      },
+      "curiosidades": [
+        {
+          "id": "orejas",
+          "titulo": "Las dos orejas de los lados no son asas",
+          "gancho": "De dónde sale la silueta de este reloj",
+          "cuerpo": [
+            "A izquierda y derecha de la caja hay dos salientes que parecen asas pero no lo son: no sujetan la correa ni llevan barra ninguna. Están ahí porque la caja imita un ojo de buey, la ventana redonda del casco de un barco.",
+            "Un ojo de buey se abre, y para abrirse necesita una bisagra a un lado y un cierre al otro. Esas son las dos orejas. Toda la forma del reloj es esa ventana vista de frente, con su marco y sus herrajes.",
+            "Tiene un efecto práctico que se nota en la muñeca: al ensanchar la caja por los costados, el reloj se apoya en una base más amplia y se mueve menos, aunque el diámetro de la esfera sea el de siempre."
+          ]
+        },
+        {
+          "id": "cien-metros",
+          "titulo": "Los 100 metros no son 100 metros",
+          "gancho": "Qué puedes hacer de verdad con 10 ATM",
+          "cuerpo": [
+            "La cifra sale de una prueba de laboratorio: se mete el reloj en una cámara y se le aplica la presión que habría a esa profundidad, con el reloj quieto. En el agua nada está quieto, y mover el brazo de una brazada dispara la presión muy por encima de esa cuenta.",
+            "Traducido a lo que se hace un día normal: con 100 metros te duchas, te bañas, nadas y te tiras a la piscina sin pensarlo. Lo que no se debe hacer es bucear con botella, y conviene no darle vapor —una sauna o el agua muy caliente castigan las juntas mucho más que la profundidad—.",
+            "Y una regla que vale para cualquier reloj: la corona tiene que estar enroscada antes de tocar el agua. Con la corona fuera, la estanqueidad que pone en la caja no existe."
+          ]
+        }
       ]
     },
     {
