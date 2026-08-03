@@ -7,7 +7,68 @@
 /.supabase/*  /  302
 /v2/*  /  301
 
-# LO-02 pasó de «Hora Cero» a «Cero Cero» (29/07/2026): el nombre lo manda
-# la esfera del reloj. La URL vieja puede estar indexada o enlazada.
-/relojes/lo-02-hora-cero  /relojes/lo-02-cero-cero  301
-/relojes/lo-02-hora-cero.html  /relojes/lo-02-cero-cero.html  301
+# ============================================================
+# REDISEÑO DEL 03/08/2026
+# ------------------------------------------------------------
+# La web se rehízo entera y diecisiete URLs dejaron de existir. Estaban
+# indexadas y podían estar enlazadas o guardadas en marcadores, así que
+# ninguna se queda en 404: todas van con 301 a su equivalente.
+#
+# Cloudflare redirige por su cuenta las .html a la versión sin extensión,
+# de ahí que cada regla vaya por duplicado.
+# ============================================================
+
+# Las nueve fichas antiguas de /relojes/ pasan a la raíz.
+# LO-02 pasó además de «Hora Cero» a «Cero Cero» el 29/07/2026: el nombre
+# lo manda la esfera del reloj, y esa URL también podía estar indexada.
+/relojes/lo-01-lunar           /lunar.html      301
+/relojes/lo-01-lunar.html      /lunar.html      301
+/relojes/lo-02-hora-cero       /cero-cero.html  301
+/relojes/lo-02-hora-cero.html  /cero-cero.html  301
+/relojes/lo-02-cero-cero       /cero-cero.html  301
+/relojes/lo-02-cero-cero.html  /cero-cero.html  301
+/relojes/lo-03-bauhaus         /bauhaus.html    301
+/relojes/lo-03-bauhaus.html    /bauhaus.html    301
+/relojes/lo-04-precisa         /precisa.html    301
+/relojes/lo-04-precisa.html    /precisa.html    301
+/relojes/lo-05-trinchera       /trinchera.html  301
+/relojes/lo-05-trinchera.html  /trinchera.html  301
+/relojes/lo-07-bitacora        /bitacora.html   301
+/relojes/lo-07-bitacora.html   /bitacora.html   301
+/relojes/lo-08-tortuga         /tortuga.html    301
+/relojes/lo-08-tortuga.html    /tortuga.html    301
+/relojes/lo-09-coctel          /coctel.html     301
+/relojes/lo-09-coctel.html     /coctel.html     301
+
+# «Ocho Lados» (LO-06) no está en la colección nueva: tenía ficha y precios
+# pero nunca llegó al listado. Su URL va al listado, no a un modelo que no
+# le corresponde.
+/relojes/lo-06-ocho-lados      /coleccion.html  301
+/relojes/lo-06-ocho-lados.html /coleccion.html  301
+
+# Cualquier otra cosa que colgara de /relojes/, al listado.
+/relojes/*  /coleccion.html  301
+
+# El sistema de venta se retiró: no hay carrito, ni reserva, ni pago.
+# Estas cuatro van a la colección, que es lo más cerca de lo que el
+# visitante venía buscando.
+/carrito                /coleccion.html  301
+/carrito.html           /coleccion.html  301
+/reservar               /coleccion.html  301
+/reservar.html          /coleccion.html  301
+/pagar                  /coleccion.html  301
+/pagar.html             /coleccion.html  301
+/reserva-recibida       /coleccion.html  301
+/reserva-recibida.html  /coleccion.html  301
+
+# Sin venta no hay condiciones de venta que aplicar.
+/condiciones-de-venta       /  301
+/condiciones-de-venta.html  /  301
+
+# El manifiesto y los materiales viven ahora dentro de «Nuestra forma de
+# hacer»: el manifiesto es su primera mitad y los materiales, la sección
+# de origen.
+/manifiesto       /filosofia.html  301
+/manifiesto.html  /filosofia.html  301
+/materiales       /filosofia.html  301
+/materiales.html  /filosofia.html  301
