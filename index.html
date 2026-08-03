@@ -22,7 +22,7 @@
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=6">
+<link rel="stylesheet" href="/assets/css/laora.css?v=8">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="home-hero-copy">
-      <p class="kicker">laOra · Madrid · Colección 2026</p>
+      <p class="kicker"><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · Madrid · Colección 2026</p>
       <h1>Iconos que conoces.<br><em>Honestamente nuestros.</em></h1>
       <p>Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos. Componentes seleccionados y cada unidad montada, ajustada y probada en Madrid.</p>
       <div class="button-row">
@@ -120,11 +120,14 @@
         <article class="laora-value">
           <img src="/assets/img/relojes-2026/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
           <div class="laora-value-price">
-            <span>laOra · <b data-mapa-modelo>Lunar</b></span>
+            <!-- «laOra» NO se escribe: es el logotipo canónico, en minúsculas
+                 salvo la O, que lleva el triángulo invertido a las 12. Aquí
+                 solo cambia de color para leerse sobre el oro. -->
+            <span><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · <b data-mapa-modelo>Lunar</b></span>
             <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el precio del
                  modelo, en <strong>. -->
           </div>
-          <p data-mapa-valor>Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.<b> Todo el valor, en tu muñeca.</b></p>
+          <p data-mapa-valor>Mismo acero, mismo cristal, mismos movimientos desde 209,90 €</p>
           <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> →</a>
         </article>
       </div>
@@ -223,7 +226,7 @@
   <section class="madrid-section" id="taller">
     <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra" loading="lazy">
     <div class="madrid-overlay">
-      <p class="kicker light">Taller laOra · Madrid</p>
+      <p class="kicker light">Taller <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · Madrid</p>
       <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
       <ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol>
       <a class="button light-button" href="/taller.html">Conocer el proceso</a>
@@ -232,7 +235,7 @@
 
   <section class="club-preview">
     <div class="club-copy">
-      <p class="section-number">03 — CLUB LAORA</p>
+      <p class="section-number">03 — Club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span></p>
       <h2>Tu reloj continúa<br><em>dentro de la app.</em></h2>
       <p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p>
       <a class="button primary" href="/club.html">Conocer Club laOra →</a>
@@ -304,7 +307,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/home.js?v=3"></script>
+<script src="/assets/js/home.js?v=4"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

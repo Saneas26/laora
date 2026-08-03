@@ -33,7 +33,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 6
+V_CSS = 8
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -41,6 +41,24 @@ with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as
 
 RELOJ = {r['slug']: r for r in RELOJES}
 IMG = '/assets/img/relojes-2026'
+
+# ============================================================
+# EL LOGOTIPO NUNCA SE ESCRIBE
+# ------------------------------------------------------------
+# «laOra» no es una palabra: es el logotipo canónico, en Nunito Sans,
+# todo en minúsculas salvo la O, que es el isotipo — el círculo con el
+# triángulo invertido apuntando a las 12. Puede cambiar de COLOR según
+# el fondo, pero nunca de fuente, de caja ni de forma.
+#
+# Por eso en cualquier rótulo en versales («COLECCIÓN laOra · 2026»,
+# «Taller laOra · Madrid») va este trozo y no la palabra escrita: el
+# `text-transform:uppercase` del rótulo lo habría convertido en «LAORA».
+#
+# El círculo es un span vacío, así que un lector de pantalla leería
+# «lara»: al lado va la palabra, invisible pero audible.
+# ============================================================
+MARCA = ('<span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span>'
+         '<span class="solo-lectores">laOra</span>')
 
 
 # ============================================================
@@ -256,7 +274,7 @@ escribir('index.html', cabeza(
     </div>
 
     <div class="home-hero-copy">
-      <p class="kicker">laOra · Madrid · Colección 2026</p>
+      <p class="kicker">{MARCA} · Madrid · Colección 2026</p>
       <h1>Iconos que conoces.<br><em>Honestamente nuestros.</em></h1>
       <p>Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos. Componentes seleccionados y cada unidad montada, ajustada y probada en Madrid.</p>
       <div class="button-row">
@@ -314,11 +332,14 @@ escribir('index.html', cabeza(
         <article class="laora-value">
           <img src="{IMG}/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
           <div class="laora-value-price">
-            <span>laOra · <b data-mapa-modelo>Lunar</b></span>
+            <!-- «laOra» NO se escribe: es el logotipo canónico, en minúsculas
+                 salvo la O, que lleva el triángulo invertido a las 12. Aquí
+                 solo cambia de color para leerse sobre el oro. -->
+            <span><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · <b data-mapa-modelo>Lunar</b></span>
             <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el precio del
                  modelo, en <strong>. -->
           </div>
-          <p data-mapa-valor>Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.<b> Todo el valor, en tu muñeca.</b></p>
+          <p data-mapa-valor>Mismo acero, mismo cristal, mismos movimientos desde 209,90 €</p>
           <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> →</a>
         </article>
       </div>
@@ -370,7 +391,7 @@ escribir('index.html', cabeza(
   <section class="madrid-section" id="taller">
     <img src="{IMG}/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra" loading="lazy">
     <div class="madrid-overlay">
-      <p class="kicker light">Taller laOra · Madrid</p>
+      <p class="kicker light">Taller {MARCA} · Madrid</p>
       <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
       <ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol>
       <a class="button light-button" href="/taller.html">Conocer el proceso</a>
@@ -379,7 +400,7 @@ escribir('index.html', cabeza(
 
   <section class="club-preview">
     <div class="club-copy">
-      <p class="section-number">03 — CLUB LAORA</p>
+      <p class="section-number">03 — Club {MARCA}</p>
       <h2>Tu reloj continúa<br><em>dentro de la app.</em></h2>
       <p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p>
       <a class="button primary" href="/club.html">Conocer Club laOra →</a>
@@ -395,7 +416,7 @@ escribir('index.html', cabeza(
                 '/club.html', 'Conocer Club laOra') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/home.js?v=3"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/home.js?v=4"></script>'))
 
 
 # ============================================================
@@ -410,7 +431,7 @@ escribir('coleccion.html', cabeza(
 <main id="inicio">
 
   <section class="page-hero collection-hero">
-    <p class="kicker">Colección laOra · 2026</p>
+    <p class="kicker">Colección {MARCA} · 2026</p>
     <h1>Un icono para cada forma<br><em>de vivir el tiempo.</em></h1>
     <p>Elige por carácter, familia o uso. Cada ficha explica la referencia del homenaje, los componentes y el trabajo que hacemos en Madrid.</p>
   </section>
@@ -465,7 +486,7 @@ escribir('filosofia.html', cabeza(
   <section class="philosophy-hero">
     <img src="{IMG}/workshop-hero.webp" alt="Reloj laOra Trinchera durante su revisión">
     <div>
-      <p class="kicker light">Filosofía laOra</p>
+      <p class="kicker light">Filosofía {MARCA}</p>
       <h1>No inventamos los iconos.<br><em>Elegimos cómo honrarlos.</em></h1>
       <p>Sin herencias ficticias. Sin hacer pasar un reloj por lo que no es. La inspiración se cuenta; la calidad se demuestra.</p>
     </div>
@@ -626,7 +647,7 @@ escribir('club.html', cabeza(
 
   <section class="club-hero">
     <div>
-      <p class="kicker light">Club laOra · Incluido con tu reloj</p>
+      <p class="kicker light">Club {MARCA} · Incluido con tu reloj</p>
       <h1>La relación no termina<br><em>cuando recibes el reloj.</em></h1>
       <p>Tu colección, documentación, garantía, servicio y ventajas en un único lugar. Una app útil, no otro programa publicitario.</p>
       <div class="button-row"><a class="text-link light" href="#funciones">Ver cómo funciona</a></div>
@@ -685,7 +706,7 @@ escribir('club.html', cabeza(
       </ul>
     </div>
   </section>
-""" + final_cta('Club laOra',
+""" + final_cta(f'Club {MARCA}',
                 'Todo lo importante.<br><em>Siempre en su sitio.</em>',
                 '/coleccion.html', 'Descubrir la colección',
                 '/taller.html', 'Conocer el taller') + """
@@ -805,7 +826,7 @@ for i, r in enumerate(RELOJES):
 
   <section class="pdp-service">
     <div>
-      <p class="kicker light">Taller laOra · Madrid</p>
+      <p class="kicker light">Taller {MARCA} · Madrid</p>
       <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
     </div>
     <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>

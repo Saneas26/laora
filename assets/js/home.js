@@ -91,8 +91,7 @@
                 ['Tissot PR516 Chronograph', '545–625 €']],
         modelo: 'Lunar',
         enlace: '/lunar.html',
-        foto: '/assets/img/relojes-2026/lunar-front.webp',
-        valor: 'Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.'
+        foto: '/assets/img/relojes-2026/lunar-front.webp'
       },
       bitacora: {
         titulo: 'El deportivo integrado',
@@ -108,8 +107,7 @@
                 ['Citizen Tsuyosa', '299–429 €']],
         modelo: 'Bitácora',
         enlace: '/bitacora.html',
-        foto: '/assets/img/relojes-2026/bitacora-hero-full.webp',
-        valor: 'Acero 316L, cristal y movimiento identificados según configuración, con control individual en Madrid. El precio se concentra en el reloj y en el servicio.'
+        foto: '/assets/img/relojes-2026/bitacora-hero-full.webp'
       }
     };
 
@@ -117,7 +115,6 @@
     var elIntro = document.querySelector('[data-mapa-intro]');
     var elOtras = document.querySelector('[data-mapa-otras]');
     var elFoto = document.querySelector('[data-mapa-foto]');
-    var elValor = document.querySelector('[data-mapa-valor]');
     var elEnlace = document.querySelector('[data-mapa-enlace]');
 
     function pintar(clave) {
@@ -149,11 +146,9 @@
       });
 
       elFoto.src = d.foto;
-      /* el remate en negrita del original va después del texto variable */
-      elValor.textContent = d.valor;
-      var remate = document.createElement('b');
-      remate.textContent = ' Todo el valor, en tu muñeca.';
-      elValor.appendChild(remate);
+      /* El texto del cuadro ya NO cambia con la pestaña: desde el 03/08/2026
+         es la misma frase para los dos modelos, escrita en el HTML. Es una
+         afirmación de colección («desde…»), no del modelo de la pestaña. */
 
       elEnlace.setAttribute('href', d.enlace);
       var nombres = document.querySelectorAll('[data-mapa-modelo]');
