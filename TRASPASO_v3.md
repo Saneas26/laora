@@ -38,6 +38,7 @@ cosas que ya han roto algo una vez.
 │   └── img/relojes-2026/        ← 28 fotos .webp, 3 MB (las del material nuevo)
 ├── PRECIOS-ANTERIORES.md        ← copia de los precios de la web vieja
 ├── TRASPASO_v3.md               ← este documento
+├── PROMPT_SIGUIENTE.md          ← qué pegarle a quien coja el trabajo
 ├── _redirects                   ← 48 reglas: las 17 URLs retiradas no dan 404,
 │                                  y la documentación interna no se sirve
 └── privacidad.html              ← LA ÚNICA página que se edita a mano
