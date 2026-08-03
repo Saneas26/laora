@@ -73,9 +73,13 @@
        En el Precisa no hay correa que elegir y aun así los dos Cenit son
        C01-ST2130 y C02-NH35: el número lo puso Óscar a mano en la hoja,
        así que aquí se copia, no se calcula. */
+    /* `refLetra` es para cuando el acabado se renombra y la hoja no.
+       El segundo Cenit del Precisa pasó a llamarse Eclipse, pero en la
+       hoja sigue siendo LO-04_Precisa_C02-NH35: manda la hoja, porque esa
+       cadena es la que Óscar busca cuando prepara el pedido. */
     function referencia() {
       var j = Math.max(0, correas.indexOf(correa));
-      var letra = acabado.nombre.charAt(0).toUpperCase();
+      var letra = acabado.refLetra || acabado.nombre.charAt(0).toUpperCase();
       var codigo = d.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
       var num = acabado.refNum || ('0' + (j + 1)).slice(-2);
       return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra +

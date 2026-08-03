@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 V_CSS = 25
 V_CAB = 13
 V_JS_HOME = 8
-V_JS_FICHA = 7
+V_JS_FICHA = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
