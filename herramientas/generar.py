@@ -3,16 +3,17 @@
 """
 laOra · GENERADOR DE PÁGINAS
 ============================================================
-La web sigue siendo HTML estático y sin proceso de compilación: lo que se
-sube a Cloudflare son los .html que este fichero escribe. Lo que se evita
-con él es la duplicación.
+La web es HTML estático y sin proceso de compilación: lo que se sube a
+Cloudflare son los .html que este fichero escribe. Lo que se evita con él
+es la duplicación — la cabecera y el pie viven una sola vez.
 
-En la web anterior la cabecera y el pie del Grupo Saneas estaban copiados a
-mano en once páginas: cualquier cambio había que hacerlo once veces y siempre
-se olvidaba alguna. Aquí viven una sola vez y todas las páginas los heredan.
+MARCADO PORTADO TAL CUAL del material de Codex 2026-08-03 (`so/app`), que
+venía en Next.js. Mismas clases, misma estructura y mismo orden de
+secciones, para que el diseño salga idéntico con `assets/css/laora.css`,
+que es su globals.css verbatim.
 
-Las tarjetas de reloj se escriben en el HTML, no las pinta JavaScript: así
-Google las lee y la página funciona aunque el JS no llegue a cargar.
+Lo único que no viene de ahí son la cabecera y el pie del Grupo Saneas,
+que Óscar pidió conservar.
 
 USO
     python3 herramientas/generar.py
@@ -26,26 +27,27 @@ Los datos de los relojes salen de assets/datos/catalogo.json, que es la
 
 import json
 import os
-import html as _html
 from urllib.parse import quote
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Versión de las hojas. SUBIRLAS EN CADA CAMBIO del CSS: Cloudflare lo sirve
-# con max-age=14400 y sin esto el navegador se queda hasta cuatro horas con
-# la hoja antigua.
-V_CSS = 4
-V_CAB = 12
+# SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
+# esto el navegador se queda hasta cuatro horas con la hoja antigua.
+V_CSS = 6
+V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
+
+RELOJ = {r['slug']: r for r in RELOJES}
+IMG = '/assets/img/relojes-2026'
 
 
 # ============================================================
 # PARTES COMUNES
 # ============================================================
 
-def cabeza(titulo, descripcion, url, foto='/assets/img/relojes-2026/bitacora-hero-full.webp'):
+def cabeza(titulo, descripcion, url, foto=f'{IMG}/bitacora-hero-full.webp'):
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -56,15 +58,17 @@ def cabeza(titulo, descripcion, url, foto='/assets/img/relojes-2026/bitacora-her
 <meta property="og:description" content="{descripcion}">
 <meta property="og:url" content="https://laora.es{url}">
 <meta property="og:image" content="https://laora.es{foto}">
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="website">
 <title>{titulo}</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Nunito Sans e Inter solo alimentan el logotipo y el pie del Grupo
-     Saneas. El resto de la web va en Georgia y Arial. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
+     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
@@ -75,8 +79,8 @@ def cabeza(titulo, descripcion, url, foto='/assets/img/relojes-2026/bitacora-her
 
 
 def cabecera(activa=''):
-    """La cabecera de siempre. `cabecera.js` le inyecta el desplegable del
-    móvil y la deja fija al hacer scroll, así que aquí no hay nada de eso."""
+    """La cabecera que Óscar pidió conservar. `cabecera.js` le inyecta el
+    desplegable del móvil y la deja fija al hacer scroll."""
     def enlace(href, texto, clave):
         cls = ' class="activo"' if activa == clave else ''
         return f'    <a href="{href}"{cls}>{texto}</a>'
@@ -96,7 +100,8 @@ def cabecera(activa=''):
 
 
 # El aviso legal del pie es lo que separa «homenaje» de «falsificación» a
-# ojos de quien lea la web. No se quita de ninguna página.
+# ojos de quien lea la web. No se quita de ninguna página. Es el mismo texto
+# que llevaba el pie del material original.
 PIE = """
 <footer>
   <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
@@ -106,6 +111,7 @@ PIE = """
     <a href="/taller.html">Taller</a>
     <a href="/club.html">Club laOra</a>
     <a href="/privacidad.html">Privacidad</a>
+    <a href="mailto:hola@laora.es">hola@laora.es</a>
   </div>
   <p class="pie-aviso">
     laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
@@ -140,14 +146,14 @@ PIE = """
 </footer>"""
 
 
-def cierre(rotulo, titular, href, boton, href2, enlace2):
+def final_cta(kicker, titular, href, boton, href2, enlace2):
     return f"""
-  <section class="cierre">
-    <p class="rotulo oro">{rotulo}</p>
+  <section class="final-cta">
+    <p class="kicker">{kicker}</p>
     <h2>{titular}</h2>
-    <div class="fila-botones">
-      <a class="boton boton-oscuro" href="{href}">{boton} <span aria-hidden="true">→</span></a>
-      <a class="enlace" href="{href2}">{enlace2}</a>
+    <div class="button-row">
+      <a class="button primary" href="{href}">{boton}</a>
+      <a class="text-link" href="{href2}">{enlace2}</a>
     </div>
   </section>"""
 
@@ -170,30 +176,35 @@ def precio_es(valor):
     return f'{valor:,.2f}'.replace(',', '@').replace('.', ',').replace('@', '.') + ' €'
 
 
+# El original enseñaba «desde X €» en `.product-meta`. Mientras no haya
+# precio cerrado en catalogo.json ese hueco lleva el diámetro, que es el
+# otro dato que el visitante compara de un vistazo. Nunca una cifra
+# inventada ni un «—».
 def tarjeta(r):
-    """Tarjeta de producto. La misma en la home y en el listado: es el
-    desajuste entre ficha y listado que hubo en la web anterior y que no
-    se puede repetir si sale de un solo sitio.
+    dato = 'desde ' + precio_es(r['precio']) if r['precio'] is not None else r['diametro']
+    return f"""          <article class="product-card">
+            <a class="product-visual" href="/{r['slug']}.html">
+              <img src="{r['foto']}" alt="Reloj {r['nombre']} de laOra" loading="lazy">
+              <span class="product-code">{r['codigo']}</span>
+              <span class="product-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="product-meta"><p>{r['familia']}</p><p>{dato}</p></div>
+            <h3><a href="/{r['slug']}.html">{r['nombre']}</a></h3>
+            <p class="product-line">{r['frase']}</p>
+            <p class="homage-label">{r['homenaje']}</p>
+          </article>"""
 
-    Si el modelo no tiene precio cerrado, la línea del precio no se pinta:
-    no queda un hueco ni un «—», sencillamente no está."""
-    precio = ''
-    if r['precio'] is not None:
-        precio = f'      <span class="p-precio">Desde {precio_es(r["precio"])}</span>\n'
-    return f"""      <article class="p-tarjeta">
-        <a class="p-foto" href="/{r['slug']}.html" aria-label="Ver {r['nombre']}">
-          <img src="{r['foto']}" alt="{r['nombre']} de laOra, {r['familia'].lower()}" loading="lazy">
-          <span class="p-codigo">{r['codigo']}</span>
-          <span class="p-flecha" aria-hidden="true">↗</span>
-        </a>
-        <div class="p-meta"><p>{r['familia']}</p><p>{r['diametro']}</p></div>
-        <h3>{r['nombre']}</h3>
-        <p class="p-frase">{r['frase']}</p>
-        <p class="p-homenaje">{r['homenaje']}</p>
-        <div class="p-acciones">
-{precio}          <a href="/{r['slug']}.html">Ver {r['nombre']} <span aria-hidden="true">→</span></a>
-        </div>
-      </article>"""
+
+# El «móvil» de Club laOra, calcado del componente ClubPhone del material.
+TELEFONO = f"""        <div class="phone" role="img" aria-label="Vista previa de la aplicación Club laOra">
+          <div class="phone-bar"><span>9:41</span><i></i></div>
+          <div class="phone-greeting"><div><small>Buenos días</small><b>Tu Club laOra</b></div><span>OM</span></div>
+          <div class="phone-member"><span>MIEMBRO Nº 0026</span><span>480 PUNTOS</span></div>
+          <div class="phone-watch"><img src="{IMG}/tortuga-detail.webp" alt=""><div><small>MI RELOJ · LO—08</small><b>Tortuga</b><span>Garantía activa</span></div></div>
+          <div class="phone-actions"><span><b>▤</b>Factura</span><span><b>◇</b>Garantía</span><span><b>↗</b>Taller</span></div>
+          <div class="phone-notice"><small>SERVICIO</small><b>Tu revisión está al día</b><span>Ver pasaporte digital →</span></div>
+          <div class="phone-nav"><span>⌂</span><span>◫</span><span>◎</span><span>○</span></div>
+        </div>"""
 
 
 def escribir(nombre, contenido):
@@ -206,49 +217,59 @@ def escribir(nombre, contenido):
 # HOME
 # ============================================================
 
-destacados = '\n'.join(tarjeta(r) for r in RELOJES[:4])
+# Los cuatro destacados son los mismos que elegía el material.
+DESTACADOS = ['tortuga', 'precisa', 'bauhaus', 'lunar']
+
+CAPAS = [
+    ('01', 'Cristal', 'Zafiro cuando la configuración lo incluye.'),
+    ('02', 'Caja', 'Acero 316L o titanio según acabado.'),
+    ('03', 'Esfera', 'Nombre y emblema laOra. Ninguna marca ajena.'),
+    ('04', 'Movimiento', 'Siempre identificado; nunca descrito con vaguedades.'),
+    ('05', 'Cierre', 'Construcción y ajuste explicados en cada ficha.'),
+]
 
 escribir('index.html', cabeza(
-    'laOra® — Iconos que conoces, honestamente nuestros',
-    'laOra — homenajes honestos a los grandes iconos de la relojería. Sin falsificaciones ni logotipos ajenos: marca propia, componentes identificados y montaje, control y servicio en Madrid.',
+    'laOra · Homenajes honestos a los iconos de la relojería',
+    'Relojes homenaje con marca propia, componentes identificados y montaje, ajuste, control y servicio en Madrid.',
     '/') + cabecera() + f"""
 
-<main class="sobre-claro">
+<main>
 
-  <!-- ============ 1 · HÉROE ============ -->
-  <section class="h-hero" id="inicio">
-    <div class="h-hero-fotos" aria-hidden="true">
-      <img class="h-hero-foto activa" src="/assets/img/relojes-2026/bitacora-hero-full.webp" alt="" fetchpriority="high">
-      <img class="h-hero-foto" src="/assets/img/relojes-2026/bitacora-hero-dial.webp" alt="" loading="lazy">
-      <img class="h-hero-foto" src="/assets/img/relojes-2026/bitacora-hero-movement.webp" alt="" loading="lazy">
-    </div>
-    <div class="h-hero-velo" aria-hidden="true"></div>
+  <section class="home-hero" id="inicio">
+    <div class="hero-slideshow" role="img" aria-label="Reloj laOra Bitácora: vista completa, detalle de la esfera y movimiento automático">
+      <img class="hero-slide hero-slide-full is-active" src="{IMG}/bitacora-hero-full.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+      <img class="hero-slide hero-slide-dial" src="{IMG}/bitacora-hero-dial.webp" alt="" aria-hidden="true" decoding="async">
+      <img class="hero-slide hero-slide-movement" src="{IMG}/bitacora-hero-movement.webp" alt="" aria-hidden="true" decoding="async">
+      <div class="hero-veil" aria-hidden="true"></div>
 
-    <div class="h-hero-copy">
-      <p class="rotulo oro">laOra · Madrid · Colección 2026</p>
-      <h1>Iconos que conoces.<br><em>Honestamente nuestros.</em></h1>
-      <p class="entradilla">
-        Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos.
-        Componentes seleccionados y cada unidad montada, ajustada y probada en Madrid.
-      </p>
-      <div class="fila-botones">
-        <a class="boton boton-oscuro" href="/coleccion.html">Descubrir la colección <span aria-hidden="true">↘</span></a>
-        <a class="enlace" href="/filosofia.html">Por qué hacemos homenajes</a>
+      <div class="hero-caption">
+        <span>LO—02</span>
+        <strong>Bitácora</strong>
+        <small>Homenaje al deportivo integrado</small>
+        <div class="hero-controls" aria-label="Control de imágenes">
+          <button type="button" class="is-active" data-slide="0" aria-label="Mostrar imagen 1 de 3" aria-pressed="true"><span></span></button>
+          <button type="button" data-slide="1" aria-label="Mostrar imagen 2 de 3" aria-pressed="false"><span></span></button>
+          <button type="button" data-slide="2" aria-label="Mostrar imagen 3 de 3" aria-pressed="false"><span></span></button>
+          <button type="button" class="hero-pause" aria-label="Pausar movimiento" aria-pressed="false">Ⅱ</button>
+        </div>
       </div>
-      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí va el «desde X €».
-           Hasta que estén los precios reales no se enseña ninguno. -->
     </div>
 
-    <div class="h-hero-mandos" role="group" aria-label="Elegir imagen del reloj">
-      <button type="button" class="activa" data-foto="0" aria-label="Reloj completo"><span></span></button>
-      <button type="button" data-foto="1" aria-label="Detalle de la esfera"><span></span></button>
-      <button type="button" data-foto="2" aria-label="Detalle del movimiento"><span></span></button>
-      <button type="button" class="h-hero-pausa" aria-label="Pausar el pase de imágenes">II</button>
+    <div class="home-hero-copy">
+      <p class="kicker">laOra · Madrid · Colección 2026</p>
+      <h1>Iconos que conoces.<br><em>Honestamente nuestros.</em></h1>
+      <p>Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos. Componentes seleccionados y cada unidad montada, ajustada y probada en Madrid.</p>
+      <div class="button-row">
+        <a class="button primary" href="/coleccion.html">Descubrir la colección <span aria-hidden="true">↘</span></a>
+        <a class="text-link" href="/filosofia.html">Por qué hacemos homenajes</a>
+      </div>
+      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el «Desde X € ·
+           impuestos incluidos» del original, en <span class="hero-price">.
+           Hasta que estén los precios reales no se enseña ninguno. -->
     </div>
   </section>
 
-  <!-- ============ 2 · TIRA DE CONFIANZA ============ -->
-  <section class="h-confianza" aria-label="Razones para confiar en laOra">
+  <section class="trust-strip" aria-label="Razones para confiar en laOra">
     <article><span>01</span><div><b>Marca propia</b><p>Sin emblemas ni logotipos ajenos.</p></div></article>
     <article><span>02</span><div><b>Montaje en Madrid</b><p>Ajuste y control unidad a unidad.</p></div></article>
     <article><span>03</span><div><b>Componentes identificados</b><p>Origen y movimiento, sin rodeos.</p></div></article>
@@ -256,208 +277,166 @@ escribir('index.html', cabeza(
     <article><span>05</span><div><b>Servicio cercano</b><p>Taller y posventa en España.</p></div></article>
   </section>
 
-  <!-- ============ 3 · EL MAPA DEL PRECIO ============
-       Las cifras de mercado son ORIENTATIVAS, viven todas en
+  <!-- Las cifras de mercado son ORIENTATIVAS, viven todas en
        assets/js/home.js y llevan su nota legal al pie de la sección.
        Si se actualizan, hay que actualizar también la fecha de la nota. -->
-  <section class="h-mapa" id="mapa">
-    <div class="h-mapa-cab">
+  <section class="market-map" id="mapa">
+    <div class="market-map-head">
       <div>
-        <p class="rotulo oro">01 — El mapa del precio</p>
+        <p class="section-number">01 — EL MAPA DEL PRECIO</p>
         <h2>Lo que cuesta un icono.<br><em>Y lo que pagas realmente.</em></h2>
       </div>
-      <div class="h-mapa-intro">
+      <div class="market-map-intro">
         <p>Una comparación de canales, riesgos y alternativas. Sin confundir homenaje con falsificación.</p>
-        <div class="h-mapa-pestanas" role="group" aria-label="Elegir comparación">
-          <button type="button" data-mapa="lunar" aria-pressed="true">Speedmaster → Lunar</button>
+        <div class="market-tabs" role="group" aria-label="Elegir comparación">
+          <button type="button" class="active" data-mapa="lunar" aria-pressed="true">Speedmaster → Lunar</button>
           <button type="button" data-mapa="bitacora" aria-pressed="false">Nautilus → Bitácora</button>
         </div>
       </div>
     </div>
 
-    <div class="h-mapa-cuerpo" aria-live="polite">
-      <div class="h-mapa-contexto">
+    <div class="market-map-body" aria-live="polite">
+      <div class="market-context">
         <strong data-mapa-titulo>El cronógrafo lunar</strong>
         <span data-mapa-intro>Del canal oficial al mercado irregular: cinco rutas que pueden parecer similares en una foto, pero no ofrecen lo mismo.</span>
       </div>
-
-      <div class="h-mapa-zonas" aria-hidden="true">
+      <div class="market-zones" aria-hidden="true">
         <span>Mercado original y trazable</span>
         <span>Mercado irregular / clones</span>
       </div>
+      <div class="market-cards" data-mapa-tarjetas></div>
 
-      <div class="h-mapa-tarjetas" data-mapa-tarjetas></div>
-
-      <div class="h-mapa-pie">
-        <div class="h-mapa-otras">
-          <p class="rotulo apagado">Alternativas de otras marcas</p>
+      <div class="market-bottom">
+        <div class="market-alternatives">
+          <p class="kicker">Alternativas de otras marcas</p>
           <div data-mapa-otras></div>
         </div>
-        <article class="h-mapa-laora">
-          <img src="/assets/img/relojes-2026/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
-          <div class="h-mapa-laora-precio">
+        <article class="laora-value">
+          <img src="{IMG}/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
+          <div class="laora-value-price">
             <span>laOra · <b data-mapa-modelo>Lunar</b></span>
-            <!-- PENDIENTE DE LA HOJA DE MATERIALES: el precio del modelo. -->
+            <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el precio del
+                 modelo, en <strong>. -->
           </div>
-          <p data-mapa-valor>Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.</p>
-          <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> <span aria-hidden="true">→</span></a>
+          <p data-mapa-valor>Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.<b> Todo el valor, en tu muñeca.</b></p>
+          <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> →</a>
         </article>
       </div>
 
-      <p class="h-mapa-nota">
-        Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado,
-        impuestos, comisiones y envío. La presencia de una oferta no acredita su autenticidad.
-        laOra no está afiliada a las marcas o plataformas citadas.
-      </p>
+      <p class="market-footnote">Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado, impuestos, comisiones y envío. La presencia de una oferta no acredita su autenticidad. laOra no está afiliada a las marcas o plataformas citadas.</p>
     </div>
   </section>
 
-  <!-- ============ 4 · CUATRO MODELOS ============ -->
-  <section class="h-destacados">
-    <div class="p-rejilla compacta">
-{destacados}
+  <section class="featured-products">
+    <div class="product-grid compact">
+{chr(10).join(tarjeta(RELOJ[s]) for s in DESTACADOS)}
     </div>
-    <a class="boton boton-linea" href="/coleccion.html">Ver los ocho modelos <span aria-hidden="true">→</span></a>
+    <a class="button outline" href="/coleccion.html">Ver los ocho modelos →</a>
   </section>
 
-  <!-- ============ 5 · HOMENAJE NO ES FALSIFICACIÓN ============ -->
-  <section class="h-manifiesto">
-    <div class="h-manifiesto-foto">
-      <img src="/assets/img/relojes-2026/precisa-hero.webp" alt="Reloj laOra Precisa, de acero y esfera azul" loading="lazy">
-    </div>
-    <div class="h-manifiesto-copy">
-      <p class="rotulo oro-claro">Homenaje no es falsificación</p>
+  <section class="homage-manifesto">
+    <div class="manifesto-media"><img src="{IMG}/precisa-hero.webp" alt="Reloj laOra Precisa de acero y esfera azul" loading="lazy"></div>
+    <div class="manifesto-copy">
+      <p class="kicker light">Homenaje no es falsificación</p>
       <h2>La inspiración se reconoce.<br><em>La identidad no se suplanta.</em></h2>
-      <p class="entradilla">
-        Un homenaje toma una arquitectura conocida como punto de partida. Una falsificación intenta
-        hacerse pasar por otra marca. En laOra no ocultamos la referencia y nunca ponemos en la
-        esfera un nombre que no sea el nuestro.
-      </p>
+      <p>Un homenaje toma una arquitectura conocida como punto de partida. Una falsificación intenta hacerse pasar por otra marca. En laOra no ocultamos la referencia y nunca ponemos en la esfera un nombre que no sea el nuestro.</p>
       <ul>
         <li><span aria-hidden="true">✓</span> Marca, modelo y documentación laOra</li>
         <li><span aria-hidden="true">✓</span> Sin logotipos, coronas ni escudos de terceros</li>
         <li><span aria-hidden="true">✓</span> Sin historias de origen inventadas</li>
         <li><span aria-hidden="true">✓</span> Sin sugerir afiliaciones que no existen</li>
       </ul>
-      <a class="enlace claro" href="/filosofia.html">Nuestra forma de hacer <span aria-hidden="true">→</span></a>
+      <a class="text-link light" href="/filosofia.html">Nuestra forma de hacer →</a>
     </div>
   </section>
 
-  <!-- ============ 6 · CALIDAD DEMOSTRABLE ============ -->
-  <section class="h-calidad">
-    <div class="cabecera-seccion">
-      <p class="rotulo oro">02 — Calidad demostrable</p>
+  <section class="quality-section">
+    <div class="section-head">
+      <p class="section-number">02 — CALIDAD DEMOSTRABLE</p>
       <h2>El misterio está en el reloj.<br><em>La confianza, en mostrarlo todo.</em></h2>
     </div>
-    <div class="h-calidad-rejilla">
-      <div class="h-calidad-foto">
-        <img src="/assets/img/relojes-2026/lunar-detail.webp" alt="Detalle del reloj laOra Lunar" loading="lazy">
-        <span class="orbita orbita-a" aria-hidden="true"></span>
-        <span class="orbita orbita-b" aria-hidden="true"></span>
+    <div class="quality-grid">
+      <div class="quality-watch">
+        <img src="{IMG}/lunar-detail.webp" alt="Detalle del reloj laOra Lunar" loading="lazy">
+        <span class="orbit orbit-a" aria-hidden="true"></span>
+        <span class="orbit orbit-b" aria-hidden="true"></span>
       </div>
-      <ol class="lista-numerada">
-        <li><span>01</span><div><b>Cristal</b><p>Zafiro cuando la configuración lo incluye.</p></div></li>
-        <li><span>02</span><div><b>Caja</b><p>Acero 316L o titanio según acabado.</p></div></li>
-        <li><span>03</span><div><b>Esfera</b><p>Nombre y emblema laOra. Ninguna marca ajena.</p></div></li>
-        <li><span>04</span><div><b>Movimiento</b><p>Siempre identificado; nunca descrito con vaguedades.</p></div></li>
-        <li><span>05</span><div><b>Cierre</b><p>Construcción y ajuste explicados en cada ficha.</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ 7 · MADRID ============ -->
-  <section class="h-madrid" id="taller">
-    <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Revisión de un reloj laOra en el taller" loading="lazy">
-    <div class="h-madrid-copy">
-      <p class="rotulo oro-claro">Taller laOra · Madrid</p>
-      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
       <ol>
-        <li>Inspección</li><li>Montaje</li><li>Ajuste</li>
-        <li>Pruebas</li><li>Control visual</li><li>Envío</li>
+{chr(10).join(f'        <li><span>{n}</span><div><b>{t}</b><p>{d}</p></div></li>' for n, t, d in CAPAS)}
       </ol>
-      <a class="boton boton-claro" href="/taller.html">Conocer el proceso <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <!-- ============ 8 · CLUB ============ -->
-  <section class="h-club">
-    <div class="h-club-copy">
-      <p class="rotulo oro">03 — Club laOra</p>
-      <h2>Tu reloj continúa<br><em>dentro de la app.</em></h2>
-      <p class="entradilla">
-        Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por
-        recomendación. Todo en un único lugar, privado por defecto.
-      </p>
-      <a class="boton boton-oscuro" href="/club.html">Conocer Club laOra <span aria-hidden="true">→</span></a>
-    </div>
-    <div class="h-club-movil">
-      <!-- El móvil va dibujado en CSS y no como foto: así no hay una
-           captura de pantalla que se quede vieja cada vez que cambie la app. -->
-      <div class="movil" role="img" aria-label="Pantalla de Club laOra con el pasaporte digital de un reloj">
-        <div class="movil-pantalla">
-          <p class="rotulo oro-claro">Club laOra</p>
-          <h4>Mi colección</h4>
-          <div class="movil-ficha"><b>Tortuga · LO—08</b><span>Pasaporte digital · Verificado</span></div>
-          <div class="movil-ficha"><b>Garantía</b><span>Activa · hasta 08/2028</span></div>
-          <div class="movil-ficha"><b>Taller</b><span>Sin intervenciones abiertas</span></div>
-        </div>
-      </div>
-      <div class="h-club-flotante"><b>Pasaporte digital</b><span>LO—08 · Verificado</span></div>
+  <section class="madrid-section" id="taller">
+    <img src="{IMG}/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra" loading="lazy">
+    <div class="madrid-overlay">
+      <p class="kicker light">Taller laOra · Madrid</p>
+      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
+      <ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol>
+      <a class="button light-button" href="/taller.html">Conocer el proceso</a>
     </div>
   </section>
-""" + cierre('Tu tiempo. Tu elección.',
-             'Elige el icono.<br><em>Nosotros respondemos por el reloj.</em>',
-             '/coleccion.html', 'Ver la colección',
-             '/club.html', 'Conocer Club laOra') + """
+
+  <section class="club-preview">
+    <div class="club-copy">
+      <p class="section-number">03 — CLUB LAORA</p>
+      <h2>Tu reloj continúa<br><em>dentro de la app.</em></h2>
+      <p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p>
+      <a class="button primary" href="/club.html">Conocer Club laOra →</a>
+    </div>
+    <div class="club-phone-wrap">
+{TELEFONO}
+      <div class="float-card"><b>Pasaporte digital</b><span>LO—08 · Verificado</span></div>
+    </div>
+  </section>
+""" + final_cta('Tu tiempo. Tu elección.',
+                'Elige el icono.<br><em>Nosotros respondemos por el reloj.</em>',
+                '/coleccion.html', 'Ver la colección',
+                '/club.html', 'Conocer Club laOra') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/home.js?v=2"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/home.js?v=3"></script>'))
 
 
 # ============================================================
 # COLECCIÓN
 # ============================================================
 
-listado = '\n'.join(tarjeta(r) for r in RELOJES)
-
 escribir('coleccion.html', cabeza(
-    'La colección — laOra®',
-    'Ocho relojes laOra inspirados en grandes arquetipos de la relojería mundial. Marca propia, componentes identificados y montaje en Madrid.',
-    '/coleccion.html', '/assets/img/relojes-2026/precisa-front.webp') + cabecera('coleccion') + f"""
+    'Colección · laOra',
+    'Ocho relojes laOra inspirados en grandes arquetipos de la relojería mundial.',
+    '/coleccion.html', f'{IMG}/precisa-front.webp') + cabecera('coleccion') + f"""
 
-<main class="sobre-claro" id="inicio">
+<main id="inicio">
 
-  <section class="pagina-hero">
-    <p class="rotulo oro">Colección laOra · 2026</p>
+  <section class="page-hero collection-hero">
+    <p class="kicker">Colección laOra · 2026</p>
     <h1>Un icono para cada forma<br><em>de vivir el tiempo.</em></h1>
-    <p class="entradilla">
-      Elige por carácter, familia o uso. Cada ficha explica la referencia del homenaje,
-      los componentes y el trabajo que hacemos en Madrid.
-    </p>
+    <p>Elige por carácter, familia o uso. Cada ficha explica la referencia del homenaje, los componentes y el trabajo que hacemos en Madrid.</p>
   </section>
 
-  <section class="c-listado">
-    <div class="p-rejilla">
-{listado}
+  <section class="collection-page">
+    <div class="product-grid">
+{chr(10).join(tarjeta(r) for r in RELOJES)}
     </div>
   </section>
 
-  <section class="c-acabados">
-    <div class="c-acabados-cab">
-      <p class="rotulo oro">02 — Cuatro expresiones</p>
+  <section class="finish-system">
+    <div>
+      <p class="section-number">02 — CUATRO EXPRESIONES</p>
       <h2>El mismo homenaje.<br><em>Tu forma de llevarlo.</em></h2>
     </div>
-    <div class="c-acabados-tarjetas">
+    <div class="finish-cards">
       <article><span>01</span><h3>Alba</h3><b>Esencial</b><p>Precisión de cuarzo, diseño limpio y comodidad diaria.</p></article>
       <article><span>02</span><h3>Levante</h3><b>Refinado</b><p>Cuarzo con materiales y acabados superiores identificados.</p></article>
       <article><span>03</span><h3>Cenit</h3><b>Máxima expresión</b><p>La mejor ejecución disponible para cada familia.</p></article>
-      <article class="oscura"><span>04</span><h3>Eclipse</h3><b>Carácter técnico</b><p>Negro integral o titanio, cuando la configuración lo permite.</p></article>
+      <article class="dark"><span>04</span><h3>Eclipse</h3><b>Carácter técnico</b><p>Negro integral o titanio, cuando la configuración lo permite.</p></article>
     </div>
   </section>
-""" + cierre('Tu tiempo. Tu elección.',
-             'Elige el icono.<br><em>Nosotros respondemos por el reloj.</em>',
-             '/filosofia.html', 'Por qué hacemos homenajes',
-             '/taller.html', 'Conocer el taller') + """
+""" + final_cta('Tu tiempo. Tu elección.',
+                'Elige el icono.<br><em>Nosotros respondemos por el reloj.</em>',
+                '/filosofia.html', 'Por qué hacemos homenajes',
+                '/taller.html', 'Conocer el taller') + """
 
 </main>
 """ + PIE + scripts())
@@ -476,30 +455,24 @@ PROCESO = [
     ('06', 'Respondemos', 'Garantía, repuestos y servicio siguen aquí después de la compra.'),
 ]
 
-fichas_proceso = '\n'.join(
-    f'    <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in PROCESO)
-
 escribir('filosofia.html', cabeza(
-    'Nuestra forma de hacer — laOra®',
-    'Por qué laOra crea homenajes honestos y cómo selecciona, monta y controla cada reloj en Madrid. Sin réplicas ni logotipos ajenos.',
-    '/filosofia.html', '/assets/img/relojes-2026/workshop-hero.webp') + cabecera('filosofia') + f"""
+    'Nuestra forma de hacer · laOra',
+    'Por qué laOra crea homenajes honestos y cómo selecciona, monta y controla cada reloj en Madrid.',
+    '/filosofia.html', f'{IMG}/workshop-hero.webp') + cabecera('filosofia') + f"""
 
 <main id="inicio">
 
-  <section class="pagina-hero-foto">
-    <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Reloj laOra durante su revisión en el taller">
+  <section class="philosophy-hero">
+    <img src="{IMG}/workshop-hero.webp" alt="Reloj laOra Trinchera durante su revisión">
     <div>
-      <p class="rotulo oro-claro">Filosofía laOra</p>
+      <p class="kicker light">Filosofía laOra</p>
       <h1>No inventamos los iconos.<br><em>Elegimos cómo honrarlos.</em></h1>
-      <p class="entradilla claro">
-        Sin herencias ficticias. Sin hacer pasar un reloj por lo que no es.
-        La inspiración se cuenta; la calidad se demuestra.
-      </p>
+      <p>Sin herencias ficticias. Sin hacer pasar un reloj por lo que no es. La inspiración se cuenta; la calidad se demuestra.</p>
     </div>
   </section>
 
-  <section class="bloque-dos sobre-claro">
-    <p class="rotulo oro">01 — El punto de partida</p>
+  <section class="belief">
+    <p class="section-number">01 — EL PUNTO DE PARTIDA</p>
     <div><h2>La relojería también es<br><em>memoria compartida.</em></h2></div>
     <div>
       <p>Hay diseños que trascienden una referencia concreta y se convierten en lenguajes: el reloj de buceo de caja cojín, el cronógrafo lunar, el reloj de campaña, el deportivo integrado o la esfera de cóctel.</p>
@@ -507,12 +480,12 @@ escribir('filosofia.html', cabeza(
     </div>
   </section>
 
-  <section class="fi-honestidad">
+  <section class="honesty-block">
     <div>
-      <p class="rotulo oro-claro">Homenaje, con todas las letras</p>
+      <p class="kicker light">Homenaje, con todas las letras</p>
       <h2>Reconocer el origen<br><em>también es diseñar confianza.</em></h2>
     </div>
-    <div class="fi-columnas">
+    <div class="honesty-columns">
       <article>
         <span>SÍ</span>
         <h3>Lo que hacemos</h3>
@@ -536,26 +509,28 @@ escribir('filosofia.html', cabeza(
     </div>
   </section>
 
-  <section class="rejilla-fichas sobre-claro">
-    <div class="rejilla-fichas-cab">
-      <p class="rotulo oro">02 — El proceso</p>
+  <section class="process-section">
+    <div class="section-head">
+      <p class="section-number">02 — EL PROCESO</p>
       <h2>De una referencia universal<br><em>a un reloj laOra.</em></h2>
     </div>
-{fichas_proceso}
+    <div class="process-grid">
+{chr(10).join(f'      <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in PROCESO)}
+    </div>
   </section>
 
-  <section class="fi-origen sobre-claro">
+  <section class="origin-section">
     <div>
-      <p class="rotulo oro">03 — Origen sin eufemismos</p>
+      <p class="section-number">03 — ORIGEN SIN EUFEMISMOS</p>
       <h2>Componentes internacionales.<br><em>Responsabilidad cercana.</em></h2>
       <p>Buscamos cada componente donde puede fabricarse con la calidad y el coste adecuados. En Madrid concentramos el montaje, el ajuste, el control y el servicio que determinan la experiencia final.</p>
     </div>
-    <img src="/assets/img/relojes-2026/box.webp" alt="Presentación del reloj laOra Tortuga en su caja" loading="lazy">
+    <img src="{IMG}/box.webp" alt="Presentación del reloj laOra Tortuga en su caja" loading="lazy">
   </section>
-""" + cierre('Sin apellido prestado',
-             'La calidad no necesita<br><em>una historia inventada.</em>',
-             '/coleccion.html', 'Ver los relojes',
-             '/taller.html', 'Conocer el taller') + """
+""" + final_cta('Sin apellido prestado',
+                'La calidad no necesita<br><em>una historia inventada.</em>',
+                '/coleccion.html', 'Ver los relojes',
+                '/taller.html', 'Conocer el taller') + """
 
 </main>
 """ + PIE + scripts())
@@ -582,49 +557,48 @@ SERVICIOS = [
 ]
 
 escribir('taller.html', cabeza(
-    'Taller y servicio — laOra®',
-    'Montaje, ajuste, pruebas y servicio técnico de los relojes laOra en Madrid. Seis pasos, una unidad cada vez.',
-    '/taller.html', '/assets/img/relojes-2026/workshop-hero.webp') + cabecera('taller') + f"""
+    'Taller y servicio · laOra',
+    'Montaje, ajuste, pruebas y servicio técnico de los relojes laOra en Madrid.',
+    '/taller.html', f'{IMG}/workshop-hero.webp') + cabecera('taller') + f"""
 
 <main id="inicio">
 
-  <section class="pagina-hero-foto">
-    <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Reloj laOra durante el control final">
+  <section class="workshop-hero">
+    <img src="{IMG}/workshop-hero.webp" alt="Reloj laOra durante el control final">
     <div>
-      <p class="rotulo oro-claro">Taller y servicio · Madrid</p>
+      <p class="kicker light">Taller y servicio · Madrid</p>
       <h1>Aquí empieza<br><em>la responsabilidad.</em></h1>
-      <p class="entradilla claro">
-        Los componentes pueden venir de distintos especialistas. El montaje, el control
-        y la persona que responde están cerca.
-      </p>
+      <p>Los componentes pueden venir de distintos especialistas. El montaje, el control y la persona que responde están cerca.</p>
     </div>
   </section>
 
-  <section class="bloque-dos sobre-claro">
-    <p class="rotulo oro">01 — Antes del envío</p>
-    <div><h2>Seis pasos.<br><em>Una unidad cada vez.</em></h2></div>
-    <div><p>No publicamos pruebas que no estén confirmadas para una referencia concreta. La ficha de cada reloj indica exactamente qué se comprueba.</p></div>
+  <section class="workshop-intro">
+    <p class="section-number">01 — ANTES DEL ENVÍO</p>
+    <div>
+      <h2>Seis pasos.<br><em>Una unidad cada vez.</em></h2>
+      <p>No publicamos pruebas que no estén confirmadas para una referencia concreta. La ficha de cada reloj indica exactamente qué se comprueba.</p>
+    </div>
   </section>
 
-  <section class="t-pasos sobre-claro" style="padding-top:90px">
+  <section class="workshop-steps">
 {chr(10).join(f'    <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in PASOS)}
   </section>
 
-  <section class="t-servicio">
+  <section class="service-panel">
     <div>
-      <p class="rotulo oro-claro">Después de la compra</p>
+      <p class="kicker light">Después de la compra</p>
       <h2>Servicio sin<br><em>intermediarios.</em></h2>
-      <p class="entradilla claro">Desde Club laOra puedes identificar tu reloj, abrir una consulta, adjuntar imágenes, solicitar recogida y seguir el estado de la intervención.</p>
-      <a class="boton boton-oro" href="/club.html">Ver Club laOra <span aria-hidden="true">→</span></a>
+      <p>Desde Club laOra puedes identificar tu reloj, abrir una consulta, adjuntar imágenes, solicitar recogida y seguir el estado de la intervención.</p>
+      <a class="button gold" href="/club.html">Ver Club laOra</a>
     </div>
-    <div class="t-servicio-lista">
+    <div class="service-list">
 {chr(10).join(f'      <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in SERVICIOS)}
     </div>
   </section>
-""" + cierre('Seguimos aquí',
-             'Elige el reloj.<br><em>Nos ocupamos del resto.</em>',
-             '/coleccion.html', 'Ver la colección',
-             'mailto:taller@laora.es', 'Escribir al taller') + """
+""" + final_cta('Seguimos aquí',
+                'Elige el reloj.<br><em>Nos ocupamos del resto.</em>',
+                '/coleccion.html', 'Ver la colección',
+                'mailto:taller@laora.es', 'Contactar con el taller') + """
 
 </main>
 """ + PIE + scripts())
@@ -643,42 +617,28 @@ VENTAJAS = [
     ('06', 'Acceso reservado', 'Nuevos acabados, correas y lanzamientos cuando estén realmente disponibles.'),
 ]
 
-MOVIL = """
-      <div class="movil" role="img" aria-label="Pantalla de Club laOra con el pasaporte digital de un reloj">
-        <div class="movil-pantalla">
-          <p class="rotulo oro-claro">Club laOra</p>
-          <h4>Mi colección</h4>
-          <div class="movil-ficha"><b>Tortuga · LO—08</b><span>Pasaporte digital · Verificado</span></div>
-          <div class="movil-ficha"><b>Garantía</b><span>Activa · hasta 08/2028</span></div>
-          <div class="movil-ficha"><b>Taller</b><span>Sin intervenciones abiertas</span></div>
-        </div>
-      </div>"""
-
 escribir('club.html', cabeza(
-    'Club laOra — laOra®',
-    'Colección, documentación, garantía y contacto con el taller en una sola aplicación. Privado por defecto.',
+    'Club laOra · laOra',
+    'Colección, documentación, garantía y contacto con el taller en una sola aplicación.',
     '/club.html') + cabecera('club') + f"""
 
 <main id="inicio">
 
-  <section class="cl-hero">
+  <section class="club-hero">
     <div>
-      <p class="rotulo oro-claro">Club laOra · Incluido con tu reloj</p>
+      <p class="kicker light">Club laOra · Incluido con tu reloj</p>
       <h1>La relación no termina<br><em>cuando recibes el reloj.</em></h1>
-      <p class="entradilla claro">
-        Tu colección, documentación, garantía, servicio y ventajas en un único lugar.
-        Una app útil, no otro programa publicitario.
-      </p>
-      <div class="fila-botones">
-        <a class="enlace claro" href="#funciones">Ver cómo funciona</a>
-      </div>
+      <p>Tu colección, documentación, garantía, servicio y ventajas en un único lugar. Una app útil, no otro programa publicitario.</p>
+      <div class="button-row"><a class="text-link light" href="#funciones">Ver cómo funciona</a></div>
     </div>
-    <div class="cl-hero-movil">{MOVIL}
+    <div class="club-hero-device">
+{TELEFONO}
+      <span class="device-glow" aria-hidden="true"></span>
     </div>
   </section>
 
-  <section class="bloque-dos sobre-claro">
-    <p class="rotulo oro">01 — Una relación útil</p>
+  <section class="club-promise">
+    <p class="section-number">01 — UNA RELACIÓN ÚTIL</p>
     <div><h2>Tu reloj, su historia<br><em>y nuestro taller.</em></h2></div>
     <div>
       <p>Cuando abres Club laOra sabes exactamente qué tienes, qué cubre tu garantía, dónde está tu factura y con quién hablar si necesitas algo.</p>
@@ -686,17 +646,19 @@ escribir('club.html', cabeza(
     </div>
   </section>
 
-  <section class="rejilla-fichas sobre-claro" id="funciones">
-    <div class="rejilla-fichas-cab">
-      <p class="rotulo oro">02 — Todo en su sitio</p>
+  <section class="benefits-section" id="funciones">
+    <div class="section-head">
+      <p class="section-number">02 — TODO EN SU SITIO</p>
       <h2>Un club que sirve<br><em>para algo.</em></h2>
     </div>
-{chr(10).join(f'    <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in VENTAJAS)}
+    <div class="benefits-grid">
+{chr(10).join(f'      <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in VENTAJAS)}
+    </div>
   </section>
 
-  <section class="cl-camino sobre-claro">
+  <section class="club-journey">
     <div>
-      <p class="rotulo oro">Cómo funciona</p>
+      <p class="kicker light">Cómo funciona</p>
       <h2>Desde la compra<br><em>hasta el próximo servicio.</em></h2>
     </div>
     <ol>
@@ -708,13 +670,13 @@ escribir('club.html', cabeza(
     </ol>
   </section>
 
-  <section class="cl-privacidad sobre-claro">
+  <section class="privacy-section">
     <div>
-      <p class="rotulo oro">03 — Privacidad clara</p>
+      <p class="section-number">03 — PRIVACIDAD CLARA</p>
       <h2>Tu colección es tuya.<br><em>También sus datos.</em></h2>
     </div>
     <div>
-      <p class="entradilla">Guardamos únicamente la información necesaria para documentar el reloj, prestar el servicio y mantener tu cuenta.</p>
+      <p>Guardamos únicamente la información necesaria para documentar el reloj, prestar el servicio y mantener tu cuenta.</p>
       <ul>
         <li>Escaparate privado por defecto.</li>
         <li>Control sobre qué compartes.</li>
@@ -723,10 +685,10 @@ escribir('club.html', cabeza(
       </ul>
     </div>
   </section>
-""" + cierre('Club laOra',
-             'Todo lo importante.<br><em>Siempre en su sitio.</em>',
-             '/coleccion.html', 'Descubrir la colección',
-             '/taller.html', 'Conocer el taller') + """
+""" + final_cta('Club laOra',
+                'Todo lo importante.<br><em>Siempre en su sitio.</em>',
+                '/coleccion.html', 'Descubrir la colección',
+                '/taller.html', 'Conocer el taller') + """
 
 </main>
 """ + PIE + scripts())
@@ -745,20 +707,20 @@ escribir('club.html', cabeza(
 # ============================================================
 
 for i, r in enumerate(RELOJES):
-    anterior = RELOJES[(i - 1) % len(RELOJES)]
     siguiente = RELOJES[(i + 1) % len(RELOJES)]
+    anterior = RELOJES[(i - 1) % len(RELOJES)]
 
     specs = [(k, v) for k, v in [
         ('Familia', r['familia']),
-        ('Diámetro', r['diametro']),
+        ('Tamaño', r['diametro']),
         ('Movimiento', r['movimiento']),
         ('Hermeticidad', r['hermeticidad']),
         ('Referencia', r['codigo']),
     ] if v]
 
-    # Datos estructurados para Google. SIN precio: `offers` solo se escribe
-    # cuando haya precio cerrado, porque un Product con un precio inventado
-    # es justo lo que penaliza el buscador.
+    # Datos estructurados para Google. SIN `offers`: solo se escribe cuando
+    # haya precio cerrado, porque un Product con un precio inventado es
+    # justo lo que penaliza el buscador.
     datos = {
         '@context': 'https://schema.org',
         '@type': 'Product',
@@ -770,10 +732,13 @@ for i, r in enumerate(RELOJES):
     }
     ld = json.dumps(datos, ensure_ascii=False).replace('<', '\\u003c')
 
-    minis = '\n'.join(
-        f'        <button type="button" data-mini="{g}" aria-current="{str(n == 0).lower()}"'
-        f' aria-label="Ver imagen {n + 1} de {r["nombre"]}"><img src="{g}" alt="" loading="lazy"></button>'
-        for n, g in enumerate(r['galeria']))
+    def mini(n, g):
+        activa = ' class="active"' if n == 0 else ''
+        return (f'          <button type="button" data-mini="{g}"{activa}'
+                f' aria-label="Ver imagen {n + 1} de {r["nombre"]}">'
+                f'<img src="{g}" alt=""></button>')
+
+    minis = '\n'.join(mini(n, g) for n, g in enumerate(r['galeria']))
 
     filas = '\n'.join(f'        <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in specs)
 
@@ -784,42 +749,41 @@ for i, r in enumerate(RELOJES):
     asunto = quote(f'Consulta sobre el {r["nombre"]} {r["codigo"]}')
 
     escribir(r['slug'] + '.html', cabeza(
-        f'{r["nombre"]} {r["codigo"]} — laOra®',
-        r['descripcion'], f'/{r["slug"]}.html', r['foto']) + cabecera('coleccion') + f"""
+        f'{r["nombre"]} · laOra', r['descripcion'],
+        f'/{r["slug"]}.html', r['foto']) + cabecera('coleccion') + f"""
 
-<main class="sobre-claro" id="inicio">
+<main id="inicio">
 <script type="application/ld+json">{ld}</script>
 
-  <section class="f-hero">
-    <div class="f-galeria">
-      <div class="f-galeria-grande">
-        <img src="{r['galeria'][0]}" alt="{r['nombre']} de laOra, vista seleccionada" data-foto-grande fetchpriority="high">
+  <section class="pdp-hero">
+    <div class="pdp-gallery">
+      <div class="pdp-main-image">
+        <img src="{r['galeria'][0]}" alt="{r['nombre']}, vista seleccionada" data-foto-grande fetchpriority="high">
       </div>
-      <div class="f-miniaturas" role="group" aria-label="Vistas de {r['nombre']}">
+      <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
 {minis}
       </div>
     </div>
-    <div class="f-datos">
-      <p class="rotulo apagado">{r['codigo']} · {r['familia']}</p>
+    <div class="pdp-buy">
+      <p class="kicker">{r['codigo']} · {r['familia']}</p>
       <h1>{r['nombre']}</h1>
-      <p class="f-homenaje">{r['homenaje']}</p>
-      <p class="f-descripcion">{r['descripcion']}</p>
-      <dl class="f-especificaciones">
+      <p class="pdp-homage">{r['homenaje']}</p>
+      <p class="pdp-description">{r['descripcion']}</p>
+      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iban el precio
+           (.pdp-price) y el selector de acabados (.finish-selector) del
+           original. Mientras estén a null en catalogo.json no se pinta
+           ninguna cifra ni ninguna línea sin dato. -->
+      <dl class="live-specs">
 {filas}
       </dl>
-      <!-- PENDIENTE DE LA HOJA DE MATERIALES: precio, movimiento y
-           hermeticidad. Mientras estén a null en catalogo.json aquí no se
-           pinta ninguna cifra ni ninguna línea sin dato. -->
-      <div class="fila-botones">
-        <a class="boton boton-oscuro" href="mailto:hola@laora.es?subject={asunto}">Preguntar por el {r['nombre']} <span aria-hidden="true">→</span></a>
-      </div>
-      <p class="f-nota">Montado, ajustado y probado en Madrid antes de cada envío.</p>
+      <a class="button primary full" href="mailto:hola@laora.es?subject={asunto}">Preguntar por el {r['nombre']}</a>
+      <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
   </section>
 
-  <section class="f-historia">
+  <section class="pdp-story">
     <div>
-      <p class="rotulo oro">01 — El homenaje</p>
+      <p class="section-number">01 — EL HOMENAJE</p>
       <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
     </div>
     <div>
@@ -828,35 +792,32 @@ for i, r in enumerate(RELOJES):
     </div>
   </section>
 
-  <section class="f-detalle">
-    <div class="f-detalle-foto">
-      <img src="{r['galeria'][1] if len(r['galeria']) > 1 else r['foto']}" alt="Detalle constructivo de {r['nombre']}" loading="lazy">
-    </div>
-    <div class="f-detalle-copy">
-      <p class="rotulo oro">02 — Lo que recibes</p>
+  <section class="exploded-section">
+    <div class="exploded-media"><img src="{r['galeria'][1] if len(r['galeria']) > 1 else r['foto']}" alt="Detalle constructivo de {r['nombre']}" loading="lazy"></div>
+    <div class="exploded-copy">
+      <p class="section-number">02 — LO QUE RECIBES</p>
       <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
-      <ol class="lista-numerada">
+      <ol>
 {tecnica}
       </ol>
     </div>
   </section>
 
-  <section class="f-servicio">
-    <p class="rotulo oro-claro">Taller laOra · Madrid</p>
-    <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-    <ol>
-      <li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li>
-      <li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li>
-    </ol>
-    <a class="enlace claro" href="/taller.html">Conocer el taller <span aria-hidden="true">→</span></a>
+  <section class="pdp-service">
+    <div>
+      <p class="kicker light">Taller laOra · Madrid</p>
+      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
+    </div>
+    <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>
+    <a class="text-link light" href="/taller.html">Conocer el taller →</a>
   </section>
-""" + cierre('Sigue por la colección',
-             f'Antes: {anterior["nombre"]}.<br><em>Después: {siguiente["nombre"]}.</em>',
-             f'/{siguiente["slug"]}.html', f'Ver {siguiente["nombre"]}',
-             '/coleccion.html', 'Volver a la colección') + """
+""" + final_cta('Sigue por la colección',
+                f'Antes: {anterior["nombre"]}.<br><em>Después: {siguiente["nombre"]}.</em>',
+                f'/{siguiente["slug"]}.html', f'Ver {siguiente["nombre"]}',
+                '/coleccion.html', 'Volver a la colección') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=1"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=2"></script>'))
 
 
 print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')

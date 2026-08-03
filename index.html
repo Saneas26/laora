@@ -3,25 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra — homenajes honestos a los grandes iconos de la relojería. Sin falsificaciones ni logotipos ajenos: marca propia, componentes identificados y montaje, control y servicio en Madrid.">
-<meta property="og:title" content="laOra® — Iconos que conoces, honestamente nuestros">
-<meta property="og:description" content="laOra — homenajes honestos a los grandes iconos de la relojería. Sin falsificaciones ni logotipos ajenos: marca propia, componentes identificados y montaje, control y servicio en Madrid.">
+<meta name="description" content="Relojes homenaje con marca propia, componentes identificados y montaje, ajuste, control y servicio en Madrid.">
+<meta property="og:title" content="laOra · Homenajes honestos a los iconos de la relojería">
+<meta property="og:description" content="Relojes homenaje con marca propia, componentes identificados y montaje, ajuste, control y servicio en Madrid.">
 <meta property="og:url" content="https://laora.es/">
 <meta property="og:image" content="https://laora.es/assets/img/relojes-2026/bitacora-hero-full.webp">
-<title>laOra® — Iconos que conoces, honestamente nuestros</title>
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="website">
+<title>laOra · Homenajes honestos a los iconos de la relojería</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Nunito Sans e Inter solo alimentan el logotipo y el pie del Grupo
-     Saneas. El resto de la web va en Georgia y Arial. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
+     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=4">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=12">
+<link rel="stylesheet" href="/assets/css/laora.css?v=6">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
 <header class="cb cb-claro">
@@ -37,42 +39,43 @@
   </nav>
 </header>
 
-<main class="sobre-claro">
+<main>
 
-  <!-- ============ 1 · HÉROE ============ -->
-  <section class="h-hero" id="inicio">
-    <div class="h-hero-fotos" aria-hidden="true">
-      <img class="h-hero-foto activa" src="/assets/img/relojes-2026/bitacora-hero-full.webp" alt="" fetchpriority="high">
-      <img class="h-hero-foto" src="/assets/img/relojes-2026/bitacora-hero-dial.webp" alt="" loading="lazy">
-      <img class="h-hero-foto" src="/assets/img/relojes-2026/bitacora-hero-movement.webp" alt="" loading="lazy">
-    </div>
-    <div class="h-hero-velo" aria-hidden="true"></div>
+  <section class="home-hero" id="inicio">
+    <div class="hero-slideshow" role="img" aria-label="Reloj laOra Bitácora: vista completa, detalle de la esfera y movimiento automático">
+      <img class="hero-slide hero-slide-full is-active" src="/assets/img/relojes-2026/bitacora-hero-full.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+      <img class="hero-slide hero-slide-dial" src="/assets/img/relojes-2026/bitacora-hero-dial.webp" alt="" aria-hidden="true" decoding="async">
+      <img class="hero-slide hero-slide-movement" src="/assets/img/relojes-2026/bitacora-hero-movement.webp" alt="" aria-hidden="true" decoding="async">
+      <div class="hero-veil" aria-hidden="true"></div>
 
-    <div class="h-hero-copy">
-      <p class="rotulo oro">laOra · Madrid · Colección 2026</p>
-      <h1>Iconos que conoces.<br><em>Honestamente nuestros.</em></h1>
-      <p class="entradilla">
-        Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos.
-        Componentes seleccionados y cada unidad montada, ajustada y probada en Madrid.
-      </p>
-      <div class="fila-botones">
-        <a class="boton boton-oscuro" href="/coleccion.html">Descubrir la colección <span aria-hidden="true">↘</span></a>
-        <a class="enlace" href="/filosofia.html">Por qué hacemos homenajes</a>
+      <div class="hero-caption">
+        <span>LO—02</span>
+        <strong>Bitácora</strong>
+        <small>Homenaje al deportivo integrado</small>
+        <div class="hero-controls" aria-label="Control de imágenes">
+          <button type="button" class="is-active" data-slide="0" aria-label="Mostrar imagen 1 de 3" aria-pressed="true"><span></span></button>
+          <button type="button" data-slide="1" aria-label="Mostrar imagen 2 de 3" aria-pressed="false"><span></span></button>
+          <button type="button" data-slide="2" aria-label="Mostrar imagen 3 de 3" aria-pressed="false"><span></span></button>
+          <button type="button" class="hero-pause" aria-label="Pausar movimiento" aria-pressed="false">Ⅱ</button>
+        </div>
       </div>
-      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí va el «desde X €».
-           Hasta que estén los precios reales no se enseña ninguno. -->
     </div>
 
-    <div class="h-hero-mandos" role="group" aria-label="Elegir imagen del reloj">
-      <button type="button" class="activa" data-foto="0" aria-label="Reloj completo"><span></span></button>
-      <button type="button" data-foto="1" aria-label="Detalle de la esfera"><span></span></button>
-      <button type="button" data-foto="2" aria-label="Detalle del movimiento"><span></span></button>
-      <button type="button" class="h-hero-pausa" aria-label="Pausar el pase de imágenes">II</button>
+    <div class="home-hero-copy">
+      <p class="kicker">laOra · Madrid · Colección 2026</p>
+      <h1>Iconos que conoces.<br><em>Honestamente nuestros.</em></h1>
+      <p>Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos. Componentes seleccionados y cada unidad montada, ajustada y probada en Madrid.</p>
+      <div class="button-row">
+        <a class="button primary" href="/coleccion.html">Descubrir la colección <span aria-hidden="true">↘</span></a>
+        <a class="text-link" href="/filosofia.html">Por qué hacemos homenajes</a>
+      </div>
+      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el «Desde X € ·
+           impuestos incluidos» del original, en <span class="hero-price">.
+           Hasta que estén los precios reales no se enseña ninguno. -->
     </div>
   </section>
 
-  <!-- ============ 2 · TIRA DE CONFIANZA ============ -->
-  <section class="h-confianza" aria-label="Razones para confiar en laOra">
+  <section class="trust-strip" aria-label="Razones para confiar en laOra">
     <article><span>01</span><div><b>Marca propia</b><p>Sin emblemas ni logotipos ajenos.</p></div></article>
     <article><span>02</span><div><b>Montaje en Madrid</b><p>Ajuste y control unidad a unidad.</p></div></article>
     <article><span>03</span><div><b>Componentes identificados</b><p>Origen y movimiento, sin rodeos.</p></div></article>
@@ -80,161 +83,134 @@
     <article><span>05</span><div><b>Servicio cercano</b><p>Taller y posventa en España.</p></div></article>
   </section>
 
-  <!-- ============ 3 · EL MAPA DEL PRECIO ============
-       Las cifras de mercado son ORIENTATIVAS, viven todas en
+  <!-- Las cifras de mercado son ORIENTATIVAS, viven todas en
        assets/js/home.js y llevan su nota legal al pie de la sección.
        Si se actualizan, hay que actualizar también la fecha de la nota. -->
-  <section class="h-mapa" id="mapa">
-    <div class="h-mapa-cab">
+  <section class="market-map" id="mapa">
+    <div class="market-map-head">
       <div>
-        <p class="rotulo oro">01 — El mapa del precio</p>
+        <p class="section-number">01 — EL MAPA DEL PRECIO</p>
         <h2>Lo que cuesta un icono.<br><em>Y lo que pagas realmente.</em></h2>
       </div>
-      <div class="h-mapa-intro">
+      <div class="market-map-intro">
         <p>Una comparación de canales, riesgos y alternativas. Sin confundir homenaje con falsificación.</p>
-        <div class="h-mapa-pestanas" role="group" aria-label="Elegir comparación">
-          <button type="button" data-mapa="lunar" aria-pressed="true">Speedmaster → Lunar</button>
+        <div class="market-tabs" role="group" aria-label="Elegir comparación">
+          <button type="button" class="active" data-mapa="lunar" aria-pressed="true">Speedmaster → Lunar</button>
           <button type="button" data-mapa="bitacora" aria-pressed="false">Nautilus → Bitácora</button>
         </div>
       </div>
     </div>
 
-    <div class="h-mapa-cuerpo" aria-live="polite">
-      <div class="h-mapa-contexto">
+    <div class="market-map-body" aria-live="polite">
+      <div class="market-context">
         <strong data-mapa-titulo>El cronógrafo lunar</strong>
         <span data-mapa-intro>Del canal oficial al mercado irregular: cinco rutas que pueden parecer similares en una foto, pero no ofrecen lo mismo.</span>
       </div>
-
-      <div class="h-mapa-zonas" aria-hidden="true">
+      <div class="market-zones" aria-hidden="true">
         <span>Mercado original y trazable</span>
         <span>Mercado irregular / clones</span>
       </div>
+      <div class="market-cards" data-mapa-tarjetas></div>
 
-      <div class="h-mapa-tarjetas" data-mapa-tarjetas></div>
-
-      <div class="h-mapa-pie">
-        <div class="h-mapa-otras">
-          <p class="rotulo apagado">Alternativas de otras marcas</p>
+      <div class="market-bottom">
+        <div class="market-alternatives">
+          <p class="kicker">Alternativas de otras marcas</p>
           <div data-mapa-otras></div>
         </div>
-        <article class="h-mapa-laora">
+        <article class="laora-value">
           <img src="/assets/img/relojes-2026/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
-          <div class="h-mapa-laora-precio">
+          <div class="laora-value-price">
             <span>laOra · <b data-mapa-modelo>Lunar</b></span>
-            <!-- PENDIENTE DE LA HOJA DE MATERIALES: el precio del modelo. -->
+            <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el precio del
+                 modelo, en <strong>. -->
           </div>
-          <p data-mapa-valor>Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.</p>
-          <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> <span aria-hidden="true">→</span></a>
+          <p data-mapa-valor>Acero y cristal según configuración, movimiento identificado antes de la venta y control individual en Madrid. Sin licencias de marca ajena ni capas comerciales innecesarias.<b> Todo el valor, en tu muñeca.</b></p>
+          <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> →</a>
         </article>
       </div>
 
-      <p class="h-mapa-nota">
-        Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado,
-        impuestos, comisiones y envío. La presencia de una oferta no acredita su autenticidad.
-        laOra no está afiliada a las marcas o plataformas citadas.
-      </p>
+      <p class="market-footnote">Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado, impuestos, comisiones y envío. La presencia de una oferta no acredita su autenticidad. laOra no está afiliada a las marcas o plataformas citadas.</p>
     </div>
   </section>
 
-  <!-- ============ 4 · CUATRO MODELOS ============ -->
-  <section class="h-destacados">
-    <div class="p-rejilla compacta">
-      <article class="p-tarjeta">
-        <a class="p-foto" href="/lunar.html" aria-label="Ver Lunar">
-          <img src="/assets/img/relojes-2026/lunar-front.webp" alt="Lunar de laOra, cronógrafo" loading="lazy">
-          <span class="p-codigo">LO—01</span>
-          <span class="p-flecha" aria-hidden="true">↗</span>
-        </a>
-        <div class="p-meta"><p>Cronógrafo</p><p>42 mm</p></div>
-        <h3>Lunar</h3>
-        <p class="p-frase">El cronógrafo que mira más allá.</p>
-        <p class="p-homenaje">Homenaje al gran cronógrafo lunar</p>
-        <div class="p-acciones">
-          <a href="/lunar.html">Ver Lunar <span aria-hidden="true">→</span></a>
-        </div>
-      </article>
-      <article class="p-tarjeta">
-        <a class="p-foto" href="/bitacora.html" aria-label="Ver Bitácora">
-          <img src="/assets/img/relojes-2026/bitacora.webp" alt="Bitácora de laOra, deportivo integrado" loading="lazy">
-          <span class="p-codigo">LO—02</span>
-          <span class="p-flecha" aria-hidden="true">↗</span>
-        </a>
-        <div class="p-meta"><p>Deportivo integrado</p><p>40 mm</p></div>
-        <h3>Bitácora</h3>
-        <p class="p-frase">Equilibrio, precisión y uso diario.</p>
-        <p class="p-homenaje">Homenaje a la arquitectura deportiva integrada</p>
-        <div class="p-acciones">
-          <a href="/bitacora.html">Ver Bitácora <span aria-hidden="true">→</span></a>
-        </div>
-      </article>
-      <article class="p-tarjeta">
-        <a class="p-foto" href="/trinchera.html" aria-label="Ver Trinchera">
-          <img src="/assets/img/relojes-2026/trinchera-hero.webp" alt="Trinchera de laOra, reloj de campo" loading="lazy">
-          <span class="p-codigo">LO—03</span>
-          <span class="p-flecha" aria-hidden="true">↗</span>
-        </a>
-        <div class="p-meta"><p>Reloj de campo</p><p>39 mm</p></div>
-        <h3>Trinchera</h3>
-        <p class="p-frase">Legible por instinto.</p>
-        <p class="p-homenaje">Homenaje al reloj de campaña clásico</p>
-        <div class="p-acciones">
-          <a href="/trinchera.html">Ver Trinchera <span aria-hidden="true">→</span></a>
-        </div>
-      </article>
-      <article class="p-tarjeta">
-        <a class="p-foto" href="/precisa.html" aria-label="Ver Precisa">
-          <img src="/assets/img/relojes-2026/precisa-front.webp" alt="Precisa de laOra, deportivo integrado" loading="lazy">
-          <span class="p-codigo">LO—04</span>
-          <span class="p-flecha" aria-hidden="true">↗</span>
-        </a>
-        <div class="p-meta"><p>Deportivo integrado</p><p>40 mm</p></div>
-        <h3>Precisa</h3>
-        <p class="p-frase">La forma exacta del tiempo.</p>
-        <p class="p-homenaje">Homenaje al deportivo integrado de los setenta</p>
-        <div class="p-acciones">
-          <a href="/precisa.html">Ver Precisa <span aria-hidden="true">→</span></a>
-        </div>
-      </article>
+  <section class="featured-products">
+    <div class="product-grid compact">
+          <article class="product-card">
+            <a class="product-visual" href="/tortuga.html">
+              <img src="/assets/img/relojes-2026/tortuga-detail.webp" alt="Reloj Tortuga de laOra" loading="lazy">
+              <span class="product-code">LO—08</span>
+              <span class="product-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="product-meta"><p>Buceo</p><p>42 mm</p></div>
+            <h3><a href="/tortuga.html">Tortuga</a></h3>
+            <p class="product-line">Un icono de aventura, a nuestra manera.</p>
+            <p class="homage-label">Homenaje al buceador de caja cojín</p>
+          </article>
+          <article class="product-card">
+            <a class="product-visual" href="/precisa.html">
+              <img src="/assets/img/relojes-2026/precisa-front.webp" alt="Reloj Precisa de laOra" loading="lazy">
+              <span class="product-code">LO—04</span>
+              <span class="product-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="product-meta"><p>Deportivo integrado</p><p>40 mm</p></div>
+            <h3><a href="/precisa.html">Precisa</a></h3>
+            <p class="product-line">La forma exacta del tiempo.</p>
+            <p class="homage-label">Homenaje al deportivo integrado de los setenta</p>
+          </article>
+          <article class="product-card">
+            <a class="product-visual" href="/bauhaus.html">
+              <img src="/assets/img/relojes-2026/bauhaus-profile.webp" alt="Reloj Bauhaus de laOra" loading="lazy">
+              <span class="product-code">LO—05</span>
+              <span class="product-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="product-meta"><p>Reloj de vestir</p><p>38 mm</p></div>
+            <h3><a href="/bauhaus.html">Bauhaus</a></h3>
+            <p class="product-line">Menos elementos. Más intención.</p>
+            <p class="homage-label">Homenaje al racionalismo alemán</p>
+          </article>
+          <article class="product-card">
+            <a class="product-visual" href="/lunar.html">
+              <img src="/assets/img/relojes-2026/lunar-front.webp" alt="Reloj Lunar de laOra" loading="lazy">
+              <span class="product-code">LO—01</span>
+              <span class="product-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="product-meta"><p>Cronógrafo</p><p>42 mm</p></div>
+            <h3><a href="/lunar.html">Lunar</a></h3>
+            <p class="product-line">El cronógrafo que mira más allá.</p>
+            <p class="homage-label">Homenaje al gran cronógrafo lunar</p>
+          </article>
     </div>
-    <a class="boton boton-linea" href="/coleccion.html">Ver los ocho modelos <span aria-hidden="true">→</span></a>
+    <a class="button outline" href="/coleccion.html">Ver los ocho modelos →</a>
   </section>
 
-  <!-- ============ 5 · HOMENAJE NO ES FALSIFICACIÓN ============ -->
-  <section class="h-manifiesto">
-    <div class="h-manifiesto-foto">
-      <img src="/assets/img/relojes-2026/precisa-hero.webp" alt="Reloj laOra Precisa, de acero y esfera azul" loading="lazy">
-    </div>
-    <div class="h-manifiesto-copy">
-      <p class="rotulo oro-claro">Homenaje no es falsificación</p>
+  <section class="homage-manifesto">
+    <div class="manifesto-media"><img src="/assets/img/relojes-2026/precisa-hero.webp" alt="Reloj laOra Precisa de acero y esfera azul" loading="lazy"></div>
+    <div class="manifesto-copy">
+      <p class="kicker light">Homenaje no es falsificación</p>
       <h2>La inspiración se reconoce.<br><em>La identidad no se suplanta.</em></h2>
-      <p class="entradilla">
-        Un homenaje toma una arquitectura conocida como punto de partida. Una falsificación intenta
-        hacerse pasar por otra marca. En laOra no ocultamos la referencia y nunca ponemos en la
-        esfera un nombre que no sea el nuestro.
-      </p>
+      <p>Un homenaje toma una arquitectura conocida como punto de partida. Una falsificación intenta hacerse pasar por otra marca. En laOra no ocultamos la referencia y nunca ponemos en la esfera un nombre que no sea el nuestro.</p>
       <ul>
         <li><span aria-hidden="true">✓</span> Marca, modelo y documentación laOra</li>
         <li><span aria-hidden="true">✓</span> Sin logotipos, coronas ni escudos de terceros</li>
         <li><span aria-hidden="true">✓</span> Sin historias de origen inventadas</li>
         <li><span aria-hidden="true">✓</span> Sin sugerir afiliaciones que no existen</li>
       </ul>
-      <a class="enlace claro" href="/filosofia.html">Nuestra forma de hacer <span aria-hidden="true">→</span></a>
+      <a class="text-link light" href="/filosofia.html">Nuestra forma de hacer →</a>
     </div>
   </section>
 
-  <!-- ============ 6 · CALIDAD DEMOSTRABLE ============ -->
-  <section class="h-calidad">
-    <div class="cabecera-seccion">
-      <p class="rotulo oro">02 — Calidad demostrable</p>
+  <section class="quality-section">
+    <div class="section-head">
+      <p class="section-number">02 — CALIDAD DEMOSTRABLE</p>
       <h2>El misterio está en el reloj.<br><em>La confianza, en mostrarlo todo.</em></h2>
     </div>
-    <div class="h-calidad-rejilla">
-      <div class="h-calidad-foto">
+    <div class="quality-grid">
+      <div class="quality-watch">
         <img src="/assets/img/relojes-2026/lunar-detail.webp" alt="Detalle del reloj laOra Lunar" loading="lazy">
-        <span class="orbita orbita-a" aria-hidden="true"></span>
-        <span class="orbita orbita-b" aria-hidden="true"></span>
+        <span class="orbit orbit-a" aria-hidden="true"></span>
+        <span class="orbit orbit-b" aria-hidden="true"></span>
       </div>
-      <ol class="lista-numerada">
+      <ol>
         <li><span>01</span><div><b>Cristal</b><p>Zafiro cuando la configuración lo incluye.</p></div></li>
         <li><span>02</span><div><b>Caja</b><p>Acero 316L o titanio según acabado.</p></div></li>
         <li><span>03</span><div><b>Esfera</b><p>Nombre y emblema laOra. Ninguna marca ajena.</p></div></li>
@@ -244,53 +220,43 @@
     </div>
   </section>
 
-  <!-- ============ 7 · MADRID ============ -->
-  <section class="h-madrid" id="taller">
-    <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Revisión de un reloj laOra en el taller" loading="lazy">
-    <div class="h-madrid-copy">
-      <p class="rotulo oro-claro">Taller laOra · Madrid</p>
+  <section class="madrid-section" id="taller">
+    <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra" loading="lazy">
+    <div class="madrid-overlay">
+      <p class="kicker light">Taller laOra · Madrid</p>
       <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-      <ol>
-        <li>Inspección</li><li>Montaje</li><li>Ajuste</li>
-        <li>Pruebas</li><li>Control visual</li><li>Envío</li>
-      </ol>
-      <a class="boton boton-claro" href="/taller.html">Conocer el proceso <span aria-hidden="true">→</span></a>
+      <ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol>
+      <a class="button light-button" href="/taller.html">Conocer el proceso</a>
     </div>
   </section>
 
-  <!-- ============ 8 · CLUB ============ -->
-  <section class="h-club">
-    <div class="h-club-copy">
-      <p class="rotulo oro">03 — Club laOra</p>
+  <section class="club-preview">
+    <div class="club-copy">
+      <p class="section-number">03 — CLUB LAORA</p>
       <h2>Tu reloj continúa<br><em>dentro de la app.</em></h2>
-      <p class="entradilla">
-        Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por
-        recomendación. Todo en un único lugar, privado por defecto.
-      </p>
-      <a class="boton boton-oscuro" href="/club.html">Conocer Club laOra <span aria-hidden="true">→</span></a>
+      <p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p>
+      <a class="button primary" href="/club.html">Conocer Club laOra →</a>
     </div>
-    <div class="h-club-movil">
-      <!-- El móvil va dibujado en CSS y no como foto: así no hay una
-           captura de pantalla que se quede vieja cada vez que cambie la app. -->
-      <div class="movil" role="img" aria-label="Pantalla de Club laOra con el pasaporte digital de un reloj">
-        <div class="movil-pantalla">
-          <p class="rotulo oro-claro">Club laOra</p>
-          <h4>Mi colección</h4>
-          <div class="movil-ficha"><b>Tortuga · LO—08</b><span>Pasaporte digital · Verificado</span></div>
-          <div class="movil-ficha"><b>Garantía</b><span>Activa · hasta 08/2028</span></div>
-          <div class="movil-ficha"><b>Taller</b><span>Sin intervenciones abiertas</span></div>
+    <div class="club-phone-wrap">
+        <div class="phone" role="img" aria-label="Vista previa de la aplicación Club laOra">
+          <div class="phone-bar"><span>9:41</span><i></i></div>
+          <div class="phone-greeting"><div><small>Buenos días</small><b>Tu Club laOra</b></div><span>OM</span></div>
+          <div class="phone-member"><span>MIEMBRO Nº 0026</span><span>480 PUNTOS</span></div>
+          <div class="phone-watch"><img src="/assets/img/relojes-2026/tortuga-detail.webp" alt=""><div><small>MI RELOJ · LO—08</small><b>Tortuga</b><span>Garantía activa</span></div></div>
+          <div class="phone-actions"><span><b>▤</b>Factura</span><span><b>◇</b>Garantía</span><span><b>↗</b>Taller</span></div>
+          <div class="phone-notice"><small>SERVICIO</small><b>Tu revisión está al día</b><span>Ver pasaporte digital →</span></div>
+          <div class="phone-nav"><span>⌂</span><span>◫</span><span>◎</span><span>○</span></div>
         </div>
-      </div>
-      <div class="h-club-flotante"><b>Pasaporte digital</b><span>LO—08 · Verificado</span></div>
+      <div class="float-card"><b>Pasaporte digital</b><span>LO—08 · Verificado</span></div>
     </div>
   </section>
 
-  <section class="cierre">
-    <p class="rotulo oro">Tu tiempo. Tu elección.</p>
+  <section class="final-cta">
+    <p class="kicker">Tu tiempo. Tu elección.</p>
     <h2>Elige el icono.<br><em>Nosotros respondemos por el reloj.</em></h2>
-    <div class="fila-botones">
-      <a class="boton boton-oscuro" href="/coleccion.html">Ver la colección <span aria-hidden="true">→</span></a>
-      <a class="enlace" href="/club.html">Conocer Club laOra</a>
+    <div class="button-row">
+      <a class="button primary" href="/coleccion.html">Ver la colección</a>
+      <a class="text-link" href="/club.html">Conocer Club laOra</a>
     </div>
   </section>
 
@@ -304,6 +270,7 @@
     <a href="/taller.html">Taller</a>
     <a href="/club.html">Club laOra</a>
     <a href="/privacidad.html">Privacidad</a>
+    <a href="mailto:hola@laora.es">hola@laora.es</a>
   </div>
   <p class="pie-aviso">
     laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
@@ -337,7 +304,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/home.js?v=2"></script>
+<script src="/assets/js/home.js?v=3"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

@@ -52,7 +52,7 @@
   margin-left:.06em;align-self:baseline;position:relative;top:-1.35em}
 .cb-marca .o::before{content:"";width:0;height:0;margin-top:.06em;
   border-left:.17em solid transparent;border-right:.17em solid transparent;
-  border-top:.24em solid var(--ambar,#D4A94B)}
+  border-top:.24em solid var(--ambar,#b48744)}
 
 /* ---------- menú ----------
    En minúsculas y sin el letter-spacing de tipo monoespaciado que
@@ -61,21 +61,21 @@
   font-family:'Inter',sans-serif;font-size:16px;
   font-weight:400;color:#B8B8B8}
 .cb-menu a{text-decoration:none;color:inherit;transition:color .2s}
-.cb-menu a:hover{color:var(--ambar,#D4A94B)}
-.cb-menu a.activo{color:var(--ambar,#D4A94B)}
+.cb-menu a:hover{color:var(--ambar,#b48744)}
+.cb-menu a.activo{color:var(--ambar,#b48744)}
 
 /* ---------- bolsa ---------- */
 .cb-bolsa{position:relative;display:inline-flex;padding:4px;color:#fff}
 .cb-bolsa svg{stroke:currentColor}
-.cb-bolsa:hover{color:var(--ambar,#D4A94B)}
+.cb-bolsa:hover{color:var(--ambar,#b48744)}
 .cb-cuenta{position:absolute;top:-3px;right:-5px;min-width:17px;height:17px;border-radius:999px;
-  background:var(--ambar,#D4A94B);color:#141414;font-family:'Nunito Sans',sans-serif;
+  background:var(--ambar,#b48744);color:#141414;font-family:'Nunito Sans',sans-serif;
   font-size:10.5px;font-weight:800;line-height:17px;text-align:center}
 
 /* ---------- sobre fondo claro ---------- */
-.cb.cb-claro .cb-marca{color:#12161f}
-.cb.cb-claro .cb-menu{color:#43413d}
-.cb.cb-claro .cb-bolsa{color:#12161f}
+.cb.cb-claro .cb-marca{color:#1c1d1b}
+.cb.cb-claro .cb-menu{color:#1c1d1b}
+.cb.cb-claro .cb-bolsa{color:#1c1d1b}
 
 /* ---------- botón del desplegable ----------
    Solo existe en móvil. Lo inyecta `cabecera.js` en todas las páginas,
@@ -84,7 +84,7 @@
   width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;color:#fff}
 .cb-hamburguesa span{display:block;width:24px;height:2px;background:currentColor;
   margin:0 auto;transition:transform .25s ease,opacity .2s ease}
-.cb.cb-claro .cb-hamburguesa{color:#12161f}
+.cb.cb-claro .cb-hamburguesa{color:#1c1d1b}
 /* abierto: las dos barras de fuera se cruzan y la del medio se apaga */
 .cb[data-menu="abierto"] .cb-hamburguesa span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .cb[data-menu="abierto"] .cb-hamburguesa span:nth-child(2){opacity:0}
@@ -109,7 +109,7 @@
        transparente sobre la foto, y ahí el texto no se leería */
     background:rgba(5,5,5,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
     color:#fff}
-  .cb.cb-claro .cb-menu{background:rgba(247,247,245,.97);color:#43413d}
+  .cb.cb-claro .cb-menu{background:rgba(244,240,232,.97);color:#43413d}
   .cb[data-menu="abierto"] .cb-menu{display:grid}
   .cb-menu a,.cb-menu .cb-pendiente{padding:17px 0;font-size:19px;
     border-bottom:1px solid rgba(255,255,255,.14)}
@@ -189,7 +189,7 @@
   transition:background-color .25s ease,backdrop-filter .25s ease}
 .cb.cb-pegada:not(.cb-claro){background:rgba(5,5,5,.82);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.cb.cb-claro.cb-pegada{background:rgba(247,247,245,.88);
+.cb.cb-claro.cb-pegada{background:rgba(244,240,232,.94);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 
 @media(prefers-reduced-motion:reduce){

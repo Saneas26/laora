@@ -4,24 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Una esfera marrón trabajada por la luz, índices facetados y piel oscura.">
-<meta property="og:title" content="Cóctel LO—07 — laOra®">
+<meta property="og:title" content="Cóctel · laOra">
 <meta property="og:description" content="Una esfera marrón trabajada por la luz, índices facetados y piel oscura.">
 <meta property="og:url" content="https://laora.es/coctel.html">
 <meta property="og:image" content="https://laora.es/assets/img/relojes-2026/coctel-profile.webp">
-<title>Cóctel LO—07 — laOra®</title>
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="website">
+<title>Cóctel · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Nunito Sans e Inter solo alimentan el logotipo y el pie del Grupo
-     Saneas. El resto de la web va en Georgia y Arial. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
+     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=4">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=12">
+<link rel="stylesheet" href="/assets/css/laora.css?v=6">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
 <header class="cb cb-claro">
@@ -37,43 +39,42 @@
   </nav>
 </header>
 
-<main class="sobre-claro" id="inicio">
+<main id="inicio">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "laOra Cóctel", "sku": "LO—07", "brand": {"@type": "Brand", "name": "laOra"}, "description": "Una esfera marrón trabajada por la luz, índices facetados y piel oscura.", "image": ["https://laora.es/assets/img/relojes-2026/coctel-profile.webp", "https://laora.es/assets/img/relojes-2026/coctel-hero.webp", "https://laora.es/assets/img/relojes-2026/coctel-back.webp"]}</script>
 
-  <section class="f-hero">
-    <div class="f-galeria">
-      <div class="f-galeria-grande">
-        <img src="/assets/img/relojes-2026/coctel-profile.webp" alt="Cóctel de laOra, vista seleccionada" data-foto-grande fetchpriority="high">
+  <section class="pdp-hero">
+    <div class="pdp-gallery">
+      <div class="pdp-main-image">
+        <img src="/assets/img/relojes-2026/coctel-profile.webp" alt="Cóctel, vista seleccionada" data-foto-grande fetchpriority="high">
       </div>
-      <div class="f-miniaturas" role="group" aria-label="Vistas de Cóctel">
-        <button type="button" data-mini="/assets/img/relojes-2026/coctel-profile.webp" aria-current="true" aria-label="Ver imagen 1 de Cóctel"><img src="/assets/img/relojes-2026/coctel-profile.webp" alt="" loading="lazy"></button>
-        <button type="button" data-mini="/assets/img/relojes-2026/coctel-hero.webp" aria-current="false" aria-label="Ver imagen 2 de Cóctel"><img src="/assets/img/relojes-2026/coctel-hero.webp" alt="" loading="lazy"></button>
-        <button type="button" data-mini="/assets/img/relojes-2026/coctel-back.webp" aria-current="false" aria-label="Ver imagen 3 de Cóctel"><img src="/assets/img/relojes-2026/coctel-back.webp" alt="" loading="lazy"></button>
+      <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
+          <button type="button" data-mini="/assets/img/relojes-2026/coctel-profile.webp" class="active" aria-label="Ver imagen 1 de Cóctel"><img src="/assets/img/relojes-2026/coctel-profile.webp" alt=""></button>
+          <button type="button" data-mini="/assets/img/relojes-2026/coctel-hero.webp" aria-label="Ver imagen 2 de Cóctel"><img src="/assets/img/relojes-2026/coctel-hero.webp" alt=""></button>
+          <button type="button" data-mini="/assets/img/relojes-2026/coctel-back.webp" aria-label="Ver imagen 3 de Cóctel"><img src="/assets/img/relojes-2026/coctel-back.webp" alt=""></button>
       </div>
     </div>
-    <div class="f-datos">
-      <p class="rotulo apagado">LO—07 · Reloj de vestir</p>
+    <div class="pdp-buy">
+      <p class="kicker">LO—07 · Reloj de vestir</p>
       <h1>Cóctel</h1>
-      <p class="f-homenaje">Homenaje a las esferas de cóctel japonesas</p>
-      <p class="f-descripcion">Una esfera marrón trabajada por la luz, índices facetados y piel oscura.</p>
-      <dl class="f-especificaciones">
+      <p class="pdp-homage">Homenaje a las esferas de cóctel japonesas</p>
+      <p class="pdp-description">Una esfera marrón trabajada por la luz, índices facetados y piel oscura.</p>
+      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iban el precio
+           (.pdp-price) y el selector de acabados (.finish-selector) del
+           original. Mientras estén a null en catalogo.json no se pinta
+           ninguna cifra ni ninguna línea sin dato. -->
+      <dl class="live-specs">
         <div><dt>Familia</dt><dd>Reloj de vestir</dd></div>
-        <div><dt>Diámetro</dt><dd>38 mm</dd></div>
+        <div><dt>Tamaño</dt><dd>38 mm</dd></div>
         <div><dt>Referencia</dt><dd>LO—07</dd></div>
       </dl>
-      <!-- PENDIENTE DE LA HOJA DE MATERIALES: precio, movimiento y
-           hermeticidad. Mientras estén a null en catalogo.json aquí no se
-           pinta ninguna cifra ni ninguna línea sin dato. -->
-      <div class="fila-botones">
-        <a class="boton boton-oscuro" href="mailto:hola@laora.es?subject=Consulta%20sobre%20el%20C%C3%B3ctel%20LO%E2%80%9407">Preguntar por el Cóctel <span aria-hidden="true">→</span></a>
-      </div>
-      <p class="f-nota">Montado, ajustado y probado en Madrid antes de cada envío.</p>
+      <a class="button primary full" href="mailto:hola@laora.es?subject=Consulta%20sobre%20el%20C%C3%B3ctel%20LO%E2%80%9407">Preguntar por el Cóctel</a>
+      <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
   </section>
 
-  <section class="f-historia">
+  <section class="pdp-story">
     <div>
-      <p class="rotulo oro">01 — El homenaje</p>
+      <p class="section-number">01 — EL HOMENAJE</p>
       <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
     </div>
     <div>
@@ -82,14 +83,12 @@
     </div>
   </section>
 
-  <section class="f-detalle">
-    <div class="f-detalle-foto">
-      <img src="/assets/img/relojes-2026/coctel-hero.webp" alt="Detalle constructivo de Cóctel" loading="lazy">
-    </div>
-    <div class="f-detalle-copy">
-      <p class="rotulo oro">02 — Lo que recibes</p>
+  <section class="exploded-section">
+    <div class="exploded-media"><img src="/assets/img/relojes-2026/coctel-hero.webp" alt="Detalle constructivo de Cóctel" loading="lazy"></div>
+    <div class="exploded-copy">
+      <p class="section-number">02 — LO QUE RECIBES</p>
       <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
-      <ol class="lista-numerada">
+      <ol>
         <li><span>01</span><div><b>Caja</b><p>Acero pulido</p></div></li>
         <li><span>02</span><div><b>Esfera</b><p>Marrón con textura radial</p></div></li>
         <li><span>03</span><div><b>Índices</b><p>Aplicados y facetados</p></div></li>
@@ -98,22 +97,21 @@
     </div>
   </section>
 
-  <section class="f-servicio">
-    <p class="rotulo oro-claro">Taller laOra · Madrid</p>
-    <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-    <ol>
-      <li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li>
-      <li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li>
-    </ol>
-    <a class="enlace claro" href="/taller.html">Conocer el taller <span aria-hidden="true">→</span></a>
+  <section class="pdp-service">
+    <div>
+      <p class="kicker light">Taller laOra · Madrid</p>
+      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
+    </div>
+    <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>
+    <a class="text-link light" href="/taller.html">Conocer el taller →</a>
   </section>
 
-  <section class="cierre">
-    <p class="rotulo oro">Sigue por la colección</p>
+  <section class="final-cta">
+    <p class="kicker">Sigue por la colección</p>
     <h2>Antes: Cero Cero.<br><em>Después: Tortuga.</em></h2>
-    <div class="fila-botones">
-      <a class="boton boton-oscuro" href="/tortuga.html">Ver Tortuga <span aria-hidden="true">→</span></a>
-      <a class="enlace" href="/coleccion.html">Volver a la colección</a>
+    <div class="button-row">
+      <a class="button primary" href="/tortuga.html">Ver Tortuga</a>
+      <a class="text-link" href="/coleccion.html">Volver a la colección</a>
     </div>
   </section>
 
@@ -127,6 +125,7 @@
     <a href="/taller.html">Taller</a>
     <a href="/club.html">Club laOra</a>
     <a href="/privacidad.html">Privacidad</a>
+    <a href="mailto:hola@laora.es">hola@laora.es</a>
   </div>
   <p class="pie-aviso">
     laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
@@ -160,7 +159,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=1"></script>
+<script src="/assets/js/ficha.js?v=2"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
