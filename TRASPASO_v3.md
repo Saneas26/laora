@@ -275,10 +275,15 @@ Datos en `catalogo.json` → `configurador`:
   cierta en ese reloj. Ver la trampa 8.
 - La **referencia** se compone igual que en la hoja
   (`LO-01_Lunar_A01`): código + inicial del acabado + número de correa.
-  Si dos acabados comparten inicial —el Cero Cero tiene **dos Cenit**, uno
-  por calibre—, se les pone `refSufijo` (`-ST2130`, `-NH38`) y la
-  referencia queda igual que en la hoja. Sin eso, los dos apuntarían al
-  mismo cajón.
+  Si dos acabados comparten inicial —el Cero Cero y el Precisa tienen
+  **dos Cenit**, uno por calibre—, se les pone `refSufijo` (`-ST2130`,
+  `-NH38`) y la referencia queda igual que en la hoja. Sin eso, los dos
+  apuntarían al mismo cajón.
+- **`refNum` fuerza el número** cuando la hoja no lo saca de la correa.
+  El Precisa no tiene correa que elegir y aun así sus dos Cenit son C01 y
+  C02: ese número lo puso Óscar a mano. Se copia, no se calcula. Regla
+  general: **la referencia que ve el cliente tiene que ser exactamente la
+  cadena que Óscar busca en la hoja**; si no coincide, manda la hoja.
 - Las líneas de ficha técnica que pueden variar por acabado son
   `movimiento`, `movimientoTipo`, `frecuencia`, `autonomia`, `cristal`,
   `caja`, `estanqueidad`, `bisel`, `esfera`, `fondo` y `peso`. Lo que un
@@ -380,21 +385,36 @@ titulares, que laOra no está afiliada, y que aquello es divulgación. Va a
 
 **Crear las fichas de los cinco modelos que faltan**, con el mismo modelo
 del apartado 5: configurador + dos curiosidades + la historia del original.
-Hechos: **Lunar**, **Bauhaus** y **Cero Cero** (03/08/2026).
+Hechos: **Lunar**, **Bauhaus**, **Cero Cero** y **Precisa** (03/08/2026).
 
 ### Estado real de los datos
 
 | Modelo | En «Catalogo final» | Se puede hacer |
 |---|---|---|
-| ~~Cero Cero LO—02~~ | 30 filas, 5 acabados | **Hecho el 03/08/2026** |
-| Precisa LO—04 | — | No, falta volcarlo |
-| Trinchera LO—05 | — | No |
+| ~~Cero Cero LO—02~~ | 36 filas, 5 acabados | **Hecho el 03/08/2026** |
+| ~~Precisa LO—04~~ | 4 filas, 4 acabados | **Hecho el 03/08/2026** |
+| Trinchera LO—05 | — | No, falta volcarlo |
 | Bitácora LO—07 | — | No |
 | Tortuga LO—08 | — | No |
 | Cóctel LO—09 | — | No |
 
-**Ninguno de los cinco tiene datos.** No hay ni una fila: hay que pedirle a
+**Los cuatro que quedan no tienen datos.** Ni una fila: hay que pedirle a
 Óscar que los vuelque antes.
+
+### Dos avisos abiertos sobre la hoja (03/08/2026)
+
+1. **El Cenit ST2130 del Precisa** viene descrito en la hoja como
+   «Automático suizo (base ETA 2824)». El ST2130 es de Seagull, con la
+   arquitectura del ETA 2824 pero fabricado en China. En la web se publica
+   como «Automático ST2130, arquitectura ETA 2824». **Sigue mal en la
+   hoja**; conviene corregirlo ahí también.
+2. **El Bauhaus (LO—03) tiene sus cuatro filas duplicadas**: A01 y C01
+   aparecen dos veces con datos que se contradicen —grosor (~13 mm contra
+   ~11/12 mm), corona (de empuje contra roscada), fondo (cerrado macizo
+   contra exhibición de cristal), bisel, esfera, cierre y peso—. Lo
+   publicado hoy sale del **segundo** bloque, con la corrección que Óscar
+   pidió de quitar el fondo de cristal. Antes de volver a tocar el Bauhaus
+   hay que preguntarle **cuál de los dos bloques manda**.
 
 ### Cómo quedó el Cero Cero, y lo que sigue abierto de él
 
@@ -433,7 +453,7 @@ Lo que queda abierto, avisado a Óscar y sin resolver:
 | Modelo | Original que se nombra |
 |---|---|
 | ~~Cero Cero~~ | ~~Omega Seamaster Diver 300M~~ · hecho |
-| Precisa | Tissot PRX |
+| ~~Precisa~~ | ~~Tissot PRX~~ · hecho |
 | Trinchera | Hamilton Khaki Field |
 | Bitácora | Patek Philippe Nautilus |
 | Tortuga | Seiko Prospex «Turtle» |
