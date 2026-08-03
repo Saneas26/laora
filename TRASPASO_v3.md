@@ -279,6 +279,9 @@ Datos en `catalogo.json` → `configurador`:
   **dos Cenit**, uno por calibre—, se les pone `refSufijo` (`-ST2130`,
   `-NH38`) y la referencia queda igual que en la hoja. Sin eso, los dos
   apuntarían al mismo cajón.
+- **`refLetra` fuerza la inicial** cuando el acabado se renombra y la hoja
+  no. El segundo Cenit del Precisa pasó a llamarse **Eclipse**, pero en la
+  hoja sigue siendo `LO-04_Precisa_C02-NH35`.
 - **`refNum` fuerza el número** cuando la hoja no lo saca de la correa.
   El Precisa no tiene correa que elegir y aun así sus dos Cenit son C01 y
   C02: ese número lo puso Óscar a mano. Se copia, no se calcula. Regla
@@ -404,16 +407,35 @@ El Bauhaus se rehízo ese mismo día con el bloque bueno de la hoja.
 
 ### Dos avisos abiertos sobre la hoja (03/08/2026)
 
-1. **El rótulo del acabado lleva el apellido de origen del calibre.**
-   Óscar lo quiere visible: «Movimiento suizo Ronda 515», «Movimiento
-   japonés Miyota 8215», «Movimiento japonés Seiko NH35A».
-   El Cenit ST2130 del Precisa viene en la hoja como «Automático suizo
-   (base ETA 2824)», pero el ST2130 lo hace Seagull en China: lo suizo es
-   la arquitectura del ETA 2824, no el movimiento. Se publica como
-   **«Automático ST2130, arquitectura suiza ETA 2824»**, que dice «suiza»
-   con claridad y es cierto. Lo que **no** se escribe nunca de ese calibre
-   es «movimiento suizo» ni «Swiss Made»: eso lo regula la ordenanza suiza
-   y son sancionables. **En la hoja sigue mal**; conviene corregirlo ahí.
+1. **El rótulo de la tarjeta de acabado lo manda el movimiento**, no la
+   mejor característica del acabado. Norma de Óscar del 03/08/2026, para
+   los ocho modelos. La forma es *tipo + origen*, con el fabricante entre
+   paréntesis cuando es japonés:
+
+   | Calibre | Rótulo |
+   |---|---|
+   | Ronda 515 / 1069 | Movimiento de cuarzo suizo |
+   | Miyota 8215 | Movimiento japonés automático (Citizen) |
+   | Seiko NH35 / NH38 | Movimiento japonés automático (Seiko) |
+   | Seiko/TMI VH31 | Movimiento japonés de cuarzo (Seiko) |
+   | Seiko/TMI VK63 | Movimiento japonés mecacuarzo (Seiko) |
+   | Seagull ST2130 | Automático arquitectura suiza |
+   | Seagull ST19 | Cuerda manual arquitectura suiza |
+   | Seagull ST1701 | Movimiento automático — sin apellido, ver abajo |
+
+   Dos acabados con el mismo calibre llevan el mismo rótulo: es lo que la
+   norma dice. Pasa en el Lunar (Alba y Eclipse, los dos VK63) y en el
+   Cero Cero (Cenit sin fecha y Eclipse, los dos NH38).
+
+   **El límite es no apellidar lo que no se puede.** El ST2130 lo hace
+   Seagull en China: lo suizo es la arquitectura del ETA 2824, no el
+   movimiento, y por eso el rótulo dice «arquitectura suiza» y no
+   «movimiento suizo». De ese calibre **nunca** se escribe «movimiento
+   suizo» ni «Swiss Made»: lo regula la ordenanza suiza y es sancionable.
+   Del ST1701 del Bauhaus no consta una base suiza, así que se queda sin
+   apellido hasta que Óscar diga otra cosa.
+   La hoja da el ST2130 como «automático suizo (base ETA 2824)»: **sigue
+   mal ahí**, conviene corregirlo.
 2. **El Bauhaus (LO—03) tiene sus cuatro filas duplicadas**: A01 y C01
    aparecen dos veces con datos que se contradicen. Óscar zanjó el
    03/08/2026 que **manda el bloque de arriba**, y así está publicado:
