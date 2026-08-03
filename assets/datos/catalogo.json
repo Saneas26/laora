@@ -522,7 +522,7 @@
         ]
       ],
       "configurador": {
-        "_": "Catálogo final de la hoja de materiales (03/08/2026). Sin grupo de correa: este modelo va siempre con el mismo brazalete.",
+        "_": "Catálogo final de la hoja de materiales, BLOQUE DE ARRIBA de las cuatro filas de LO-03 (Óscar, 03/08/2026): la hoja las tiene duplicadas y ese es el juego bueno. Sin grupo de correa: va siempre con el mismo brazalete.",
         "acabados": [
           {
             "id": "alba",
@@ -532,11 +532,8 @@
             "movimiento": "Ronda 1069, cuarzo suizo",
             "movimientoTipo": "Cuarzo con segundero pequeño",
             "frecuencia": "32.768 Hz",
-            "autonomia": "Pila de unos 3 años",
-            "cristal": "Zafiro",
-            "caja": "Acero inoxidable 316L, pulido y satinado · unos 11 mm",
-            "bisel": "Fijo liso, acero pulido",
-            "peso": "unos 130 g con brazalete"
+            "autonomia": "Pila de 2 a 3 años",
+            "peso": "unos 120 g con brazalete"
           },
           {
             "id": "cenit",
@@ -547,10 +544,7 @@
             "movimientoTipo": "Automático con segundero pequeño, sin fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 40 horas de reserva de marcha",
-            "cristal": "Zafiro",
-            "caja": "Acero inoxidable 316L, pulido y satinado · unos 12 mm",
-            "bisel": "Fijo liso, acero pulido",
-            "peso": "unos 135 g con brazalete"
+            "peso": "unos 125 g con brazalete"
           }
         ],
         "correas": [],
@@ -564,13 +558,19 @@
         },
         "comunes": {
           "Diámetro": "39 mm",
+          "Grosor": "unos 13 mm",
           "Estanqueidad": "50 m (5 ATM)",
-          "Fondo": "Macizo, atornillado",
-          "Esfera": "Blanca minimalista, índices impresos finos y números",
-          "Agujas": "Dauphine, con segundero pequeño",
-          "Brazalete": "Acero 316L pulido, broche plegable oculto",
+          "Caja": "Acero inoxidable 316L, pulido y satinado",
+          "Bisel": "Fijo",
+          "Cristal": "Zafiro plano, sin tratamiento antirreflejos",
+          "Esfera": "Blanca, con números arábigos, minutera de ferrocarril y segundero pequeño",
+          "Agujas": "Dauphine pulidas",
+          "Luminiscencia": "No lleva: es una esfera de vestir",
+          "Brazalete": "Acero 316L pulido y satinado, broche plegable con seguridad",
           "Ancho de asa": "20 mm",
-          "Corona": "Roscada"
+          "Ajuste": "Eslabones extraíbles con pasadores",
+          "Fondo": "Cerrado macizo de acero",
+          "Corona": "De empuje"
         }
       },
       "historiaOriginal": {
@@ -683,9 +683,9 @@
           {
             "id": "levante",
             "nombre": "Levante",
-            "descriptor": "Automático Miyota 8215",
+            "descriptor": "Movimiento japonés Miyota 8215",
             "resumen": "El primer automático de la gama: se le da cuerda solo con el movimiento de la muñeca.",
-            "movimiento": "Miyota 8215, automático",
+            "movimiento": "Miyota 8215, automático japonés",
             "movimientoTipo": "Automático con fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 40 horas de reserva de marcha",
@@ -707,9 +707,9 @@
             "id": "cenit-nh35",
             "nombre": "Cenit",
             "refSufijo": "-NH35",
-            "descriptor": "Automático Seiko NH35A",
+            "descriptor": "Movimiento japonés Seiko NH35A",
             "resumen": "El automático japonés de referencia: para el segundero al ponerlo en hora y admite cuerda a mano.",
-            "movimiento": "Seiko NH35A, automático",
+            "movimiento": "Seiko NH35A, automático japonés",
             "movimientoTipo": "Automático con fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 41 horas de reserva de marcha",
