@@ -147,7 +147,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .market-alternatives b { font-size: 11px; line-height: 1.3; }
 .market-alternatives small { color: var(--muted); font-size: 11px; }
 .laora-value { min-height: 138px; padding: 22px 22px 20px 150px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px 24px; align-items: center; background: #c89b51; position: relative; overflow: hidden; }
-.laora-value > img { position: absolute; inset: 0 auto 0 0; width: 128px; height: 100%; object-fit: cover; mix-blend-mode: multiply; opacity: .82; }
+/* La foto va LIMPIA. El original la teñía con `mix-blend-mode:multiply` y
+   `opacity:.82`, y sobre el oro del cuadro el reloj se quedaba en una
+   silueta marrón: es una foto nuestra y se tiene que ver el reloj. */
+.laora-value > img { position: absolute; inset: 0 auto 0 0; width: 128px; height: 100%; object-fit: cover; }
 .laora-value-price { display: grid; gap: 3px; }
 .laora-value-price span { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .laora-value-price strong { font: 32px var(--serif); white-space: nowrap; }
@@ -494,7 +497,17 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    caja y nunca de forma. Por eso lleva `text-transform:none` allí donde
    vive dentro de un texto en versales: el menú y el cuadro de la
    respuesta laOra lo habrían convertido en «LAORA», que no es la marca. */
-.cb-marca { text-transform: none !important; }
+/* EL LOGOTIPO VA BLINDADO. Es un dibujo hecho con tres `span` y medidas en
+   `em`, así que cualquier regla de la página que alcance a esos span lo
+   deforma. Ya pasó dos veces en el cuadro del mapa: `.laora-value-price
+   span` le metía `font-size:9px` (el círculo salía a 6,6 px con un borde
+   de medio píxel mientras las letras iban a 22) y luego `display:flex` con
+   `gap`, que separaba «la», la O y «ra».
+   Estas cuatro líneas son las que garantizan que solo se le pueda cambiar
+   el COLOR y el CUERPO, que es lo que Óscar permite. */
+.cb-marca { text-transform: none !important; display: inline-flex !important;
+  gap: 0 !important; white-space: nowrap; }
+.cb-marca .o { font-size: inherit !important; }
 
 /* El logotipo se dibuja: la O es un span vacío y un lector de pantalla
    leería «lara». Al lado va la palabra escrita, invisible pero audible. */
@@ -509,7 +522,12 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   font-size: 14px; color: inherit; letter-spacing: -.01em; }
 .kicker .cb-marca .o::before, .section-number .cb-marca .o::before,
 .laora-value-price .cb-marca .o::before { border-top-color: currentColor; }
-.laora-value-price .cb-marca { font-size: 15px; }
+/* En el cuadro del mapa el logotipo es la firma de la marca, no una nota
+   al pie: a 15 px el círculo de la O se quedaba en un aro fino y el
+   triángulo desaparecía. A 22 se lee el isotipo entero. */
+.laora-value-price .cb-marca { font-size: 22px; }
+/* `>` a propósito: sin él la regla alcanzaba también al logotipo */
+.laora-value-price > span { display: flex; align-items: baseline; gap: 7px; }
 
 /* «club laOra» del menú. Va delante `.cb-menu a` para ganarle a
    cabecera.css, que se carga después. */

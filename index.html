@@ -22,7 +22,7 @@
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=8">
+<link rel="stylesheet" href="/assets/css/laora.css?v=11">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
@@ -118,17 +118,19 @@
           <div data-mapa-otras></div>
         </div>
         <article class="laora-value">
-          <img src="/assets/img/relojes-2026/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
+          <img src="/assets/img/relojes-2026/lunar-front.webp" alt="Reloj laOra Lunar" data-mapa-foto>
           <div class="laora-value-price">
             <!-- «laOra» NO se escribe: es el logotipo canónico, en minúsculas
                  salvo la O, que lleva el triángulo invertido a las 12. Aquí
                  solo cambia de color para leerse sobre el oro. -->
             <span><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · <b data-mapa-modelo>Lunar</b></span>
-            <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el precio del
-                 modelo, en <strong>. -->
+            <strong>209,90 €</strong>
           </div>
           <p data-mapa-valor>Mismo acero, mismo cristal, mismos movimientos desde 209,90 €</p>
-          <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> →</a>
+          <!-- El rótulo lo escribe entero home.js. Con un <b> dentro, el
+               `display:inline-flex` del enlace se comía los espacios de los
+               nodos de texto y salía «VERLUNAR→». -->
+          <a href="/lunar.html" data-mapa-enlace>Ver Lunar →</a>
         </article>
       </div>
 
@@ -307,7 +309,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/home.js?v=4"></script>
+<script src="/assets/js/home.js?v=5"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

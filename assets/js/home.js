@@ -151,7 +151,11 @@
          afirmación de colección («desde…»), no del modelo de la pestaña. */
 
       elEnlace.setAttribute('href', d.enlace);
-      var nombres = document.querySelectorAll('[data-mapa-modelo]');
+      /* El rótulo del enlace se escribe de una pieza: el enlace es un
+         inline-flex y con el nombre en su propio <b> se perdían los
+         espacios de alrededor («VERLUNAR→»). */
+      elEnlace.textContent = 'Ver ' + d.modelo + ' →';
+      var nombres = document.querySelectorAll('.laora-value-price [data-mapa-modelo]');
       for (var i = 0; i < nombres.length; i++) nombres[i].textContent = d.modelo;
 
       for (var p2 = 0; p2 < pestanas.length; p2++) {
