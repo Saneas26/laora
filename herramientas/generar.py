@@ -890,11 +890,15 @@ for i, r in enumerate(RELOJES):
         # con el acabado (lo reescribe ficha.js) y lo que es igual siempre.
         variables = [('Movimiento', 'movimiento'), ('Tipo', 'movimientoTipo'),
                      ('Frecuencia', 'frecuencia'), ('Autonomía', 'autonomia'),
-                     ('Cristal', 'cristal'), ('Caja', 'caja'), ('Bisel', 'bisel'),
-                     ('Fondo', 'fondo')]
+                     ('Cristal', 'cristal'), ('Caja', 'caja'),
+                     ('Estanqueidad', 'estanqueidad'), ('Bisel', 'bisel'),
+                     ('Esfera', 'esfera'), ('Fondo', 'fondo')]
         primera = cfg['acabados'][0]
         # solo se escriben las líneas que ese modelo tiene: el Lunar no
-        # distingue el fondo por acabado, el Bauhaus sí (macizo o de cristal)
+        # distingue el fondo por acabado, el Bauhaus sí (macizo o de cristal),
+        # y el Cero Cero cambia de estanqueidad (100 o 200 m) y de esfera
+        # (con ventana de fecha o sin ella) según el acabado. Lo que un modelo
+        # no distinga se queda en `comunes` y se pinta una sola vez.
         filas = '\n'.join(
             f'        <div><dt>{et}</dt><dd data-spec="{cl}">{primera[cl]}</dd></div>'
             for et, cl in variables if primera.get(cl))
@@ -982,7 +986,7 @@ for i, r in enumerate(RELOJES):
                 '/coleccion.html', 'Volver a la colección') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=5"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=6"></script>'))
 
 
 print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')
