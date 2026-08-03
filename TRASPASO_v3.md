@@ -386,6 +386,7 @@ titulares, que laOra no está afiliada, y que aquello es divulgación. Va a
 **Crear las fichas de los cinco modelos que faltan**, con el mismo modelo
 del apartado 5: configurador + dos curiosidades + la historia del original.
 Hechos: **Lunar**, **Bauhaus**, **Cero Cero** y **Precisa** (03/08/2026).
+El Bauhaus se rehízo ese mismo día con el bloque bueno de la hoja.
 
 ### Estado real de los datos
 
@@ -403,18 +404,27 @@ Hechos: **Lunar**, **Bauhaus**, **Cero Cero** y **Precisa** (03/08/2026).
 
 ### Dos avisos abiertos sobre la hoja (03/08/2026)
 
-1. **El Cenit ST2130 del Precisa** viene descrito en la hoja como
-   «Automático suizo (base ETA 2824)». El ST2130 es de Seagull, con la
-   arquitectura del ETA 2824 pero fabricado en China. En la web se publica
-   como «Automático ST2130, arquitectura ETA 2824». **Sigue mal en la
-   hoja**; conviene corregirlo ahí también.
+1. **El rótulo del acabado lleva el apellido de origen del calibre.**
+   Óscar lo quiere visible: «Movimiento suizo Ronda 515», «Movimiento
+   japonés Miyota 8215», «Movimiento japonés Seiko NH35A».
+   El Cenit ST2130 del Precisa viene en la hoja como «Automático suizo
+   (base ETA 2824)», pero el ST2130 lo hace Seagull en China: lo suizo es
+   la arquitectura del ETA 2824, no el movimiento. Se publica como
+   **«Automático ST2130, arquitectura suiza ETA 2824»**, que dice «suiza»
+   con claridad y es cierto. Lo que **no** se escribe nunca de ese calibre
+   es «movimiento suizo» ni «Swiss Made»: eso lo regula la ordenanza suiza
+   y son sancionables. **En la hoja sigue mal**; conviene corregirlo ahí.
 2. **El Bauhaus (LO—03) tiene sus cuatro filas duplicadas**: A01 y C01
-   aparecen dos veces con datos que se contradicen —grosor (~13 mm contra
-   ~11/12 mm), corona (de empuje contra roscada), fondo (cerrado macizo
-   contra exhibición de cristal), bisel, esfera, cierre y peso—. Lo
-   publicado hoy sale del **segundo** bloque, con la corrección que Óscar
-   pidió de quitar el fondo de cristal. Antes de volver a tocar el Bauhaus
-   hay que preguntarle **cuál de los dos bloques manda**.
+   aparecen dos veces con datos que se contradicen. Óscar zanjó el
+   03/08/2026 que **manda el bloque de arriba**, y así está publicado:
+   ~13 mm, corona de empuje, fondo cerrado macizo, broche con seguridad,
+   minutera de ferrocarril, 120/125 g. Las dos filas de abajo siguen en la
+   hoja y hay que ignorarlas.
+   Única línea del bloque de arriba que **no** se publica: «Bisel —
+   Material/inserto: Inserto aluminio». No cuadra con un bisel fijo de
+   reloj de vestir, no aparece en la foto y en la fila del Alba trae un
+   guion suelto detrás, así que parece arrastrada del Cero Cero. El bisel
+   va como «Fijo», que es lo que dice la columna «Bisel — Tipo».
 
 ### Cómo quedó el Cero Cero, y lo que sigue abierto de él
 
