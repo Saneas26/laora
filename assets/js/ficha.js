@@ -62,12 +62,18 @@
     /* La referencia se compone igual que en la hoja de materiales:
        LO-01_Lunar_A01 → modelo + inicial del acabado + número de correa.
        Así lo que el cliente ve en la web y lo que Óscar busca en la hoja
-       es la misma cadena. */
+       es la misma cadena.
+
+       `refSufijo` es para cuando dos acabados comparten inicial y la hoja
+       los separa por el calibre: el Cero Cero tiene dos Cenit y en la hoja
+       son LO-02_CeroCero_C01-ST2130 y LO-02_CeroCero_C01-NH38. Sin esto,
+       los dos darían la misma referencia y llevarían al cajón equivocado. */
     function referencia() {
       var j = Math.max(0, correas.indexOf(correa));
       var letra = acabado.nombre.charAt(0).toUpperCase();
       var codigo = d.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
-      return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra + ('0' + (j + 1)).slice(-2);
+      return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra +
+             ('0' + (j + 1)).slice(-2) + (acabado.refSufijo || '');
     }
 
     function euros(v) {
