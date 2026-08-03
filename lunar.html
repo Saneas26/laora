@@ -22,7 +22,7 @@
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=16">
+<link rel="stylesheet" href="/assets/css/laora.css?v=19">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
@@ -58,19 +58,63 @@
       <h1>Lunar</h1>
       <p class="pdp-homage">Homenaje al gran cronógrafo lunar</p>
       <p class="pdp-description">Una lectura contemporánea del cronógrafo más reconocible de la exploración espacial, firmada únicamente por laOra.</p>
-      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iban el precio
-           (.pdp-price) y el selector de acabados (.finish-selector) del
-           original. Mientras estén a null en catalogo.json no se pinta
-           ninguna cifra ni ninguna línea sin dato. -->
+      <div class="pdp-price">
+        <strong data-precio>209,90 €</strong>
+        <span>Impuestos incluidos</span>
+      </div>
+
+      <div class="config">
+        <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
+        <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
+          <button type="button" role="tab" data-acabado="alba" aria-selected="true"><span>Alba</span><small>Esencial</small></button>
+          <button type="button" role="tab" data-acabado="cenit" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Máxima expresión</small></button>
+          <button type="button" role="tab" data-acabado="eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Carácter técnico</small></button>
+        </div>
+        <p class="config-nota" data-resumen-acabado>Cronógrafo mecacuarzo, la puesta a cero con tacto mecánico.</p>
+
+        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
+        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
+          <button type="button" role="tab" data-correa="brazalete-plano" aria-selected="true"><span>Brazalete de acero</span><small>316L, eslabones planos, pulido y satinado</small></button>
+          <button type="button" role="tab" data-correa="brazalete-arroz" aria-selected="false" tabindex="-1"><span>Brazalete cuentas de arroz</span><small>316L, eslabones tipo grano de arroz</small></button>
+          <button type="button" role="tab" data-correa="piel-marron" aria-selected="false" tabindex="-1"><span>Piel marrón</span><small>Con costura a la vista</small></button>
+          <button type="button" role="tab" data-correa="piel-negra" aria-selected="false" tabindex="-1"><span>Piel negra</span><small>Con costura a la vista</small></button>
+          <button type="button" role="tab" data-correa="caucho" aria-selected="false" tabindex="-1"><span>Caucho negro</span><small>Flexible, para uso diario</small></button>
+          <button type="button" role="tab" data-correa="nato" aria-selected="false" tabindex="-1"><span>NATO negro</span><small>Tejido, de una pieza</small></button>
+        </div>
+      </div>
+
+      <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
+           Óscar eligió recuperar el sistema de reserva con señal (03/08/2026),
+           pero `reservar.html` todavía no está rehecha con el diseño nuevo:
+           las de la web anterior usaban hojas que ya no existen. Hasta
+           entonces NO se pinta, para no dejar un botón que lleve a un 404.
+
+           Cuando exista, se descomenta esto y ya funciona: `ficha.js` le
+           escribe la referencia, el acabado y la correa elegidos en la URL.
+      <a class="button primary full" href="/reservar.html" data-reservar>Reservar este Lunar</a>
+           -->
+      <p class="config-ref">Referencia <b data-ref>—</b></p>
+      <script type="application/json" data-configurador>{"acabados": [{"id": "alba", "nombre": "Alba", "descriptor": "Esencial", "resumen": "Cronógrafo mecacuarzo, la puesta a cero con tacto mecánico.", "movimiento": "Mecacuarzo Seiko/TMI VK63", "movimientoTipo": "Cronógrafo mecacuarzo", "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica", "autonomia": "Pila SR927SW, unos 3 años", "cristal": "Mineral endurecido de alto grado", "caja": "Acero inoxidable 316L, pulido y satinado", "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro", "peso": "unos 120 g con brazalete"}, {"id": "cenit", "nombre": "Cenit", "descriptor": "Máxima expresión", "resumen": "Cronógrafo mecánico de cuerda manual con rueda de columnas.", "movimiento": "Seagull ST19 de rueda de columnas", "movimientoTipo": "Cronógrafo mecánico de cuerda manual", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 45 horas de reserva de marcha", "cristal": "Zafiro con tratamiento antirreflejo", "caja": "Acero inoxidable 316L, pulido y satinado", "bisel": "Fijo con escala taquimétrica, inserto de cerámica", "peso": "unos 135 g con brazalete"}, {"id": "eclipse", "nombre": "Eclipse", "descriptor": "Carácter técnico", "resumen": "El mismo cronógrafo mecacuarzo, en negro integral y con zafiro.", "movimiento": "Mecacuarzo Seiko/TMI VK63", "movimientoTipo": "Cronógrafo mecacuarzo", "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica", "autonomia": "Pila SR927SW, unos 3 años", "cristal": "Zafiro", "caja": "Acero inoxidable 316L con PVD negro satinado", "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro", "peso": "unos 120 g con brazalete"}], "correas": [{"id": "brazalete-plano", "nombre": "Brazalete de acero", "detalle": "316L, eslabones planos, pulido y satinado"}, {"id": "brazalete-arroz", "nombre": "Brazalete cuentas de arroz", "detalle": "316L, eslabones tipo grano de arroz"}, {"id": "piel-marron", "nombre": "Piel marrón", "detalle": "Con costura a la vista"}, {"id": "piel-negra", "nombre": "Piel negra", "detalle": "Con costura a la vista"}, {"id": "caucho", "nombre": "Caucho negro", "detalle": "Flexible, para uso diario"}, {"id": "nato", "nombre": "NATO negro", "detalle": "Tejido, de una pieza"}], "precios": {"alba": [229.9, 229.9, 219.9, 219.9, 209.9, 209.9], "cenit": [499.9, 509.9, 499.9, 489.9, 489.9, 489.9], "eclipse": [259.9, 259.9, 249.9, 249.9, 249.9, 239.9]}, "codigo": "LO—01", "modelo": "Lunar"}</script>
       <dl class="live-specs">
-        <div><dt>Familia</dt><dd>Cronógrafo</dd></div>
-        <div><dt>Tamaño</dt><dd>42 mm</dd></div>
+        <div><dt>Movimiento</dt><dd data-spec="movimiento">Mecacuarzo Seiko/TMI VK63</dd></div>
+        <div><dt>Tipo</dt><dd data-spec="movimientoTipo">Cronógrafo mecacuarzo</dd></div>
+        <div><dt>Frecuencia</dt><dd data-spec="frecuencia">Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica</dd></div>
+        <div><dt>Autonomía</dt><dd data-spec="autonomia">Pila SR927SW, unos 3 años</dd></div>
+        <div><dt>Cristal</dt><dd data-spec="cristal">Mineral endurecido de alto grado</dd></div>
+        <div><dt>Caja</dt><dd data-spec="caja">Acero inoxidable 316L, pulido y satinado</dd></div>
+        <div><dt>Bisel</dt><dd data-spec="bisel">Fijo con escala taquimétrica, inserto de aluminio anodizado negro</dd></div>
+        <div><dt>Diámetro</dt><dd>40 mm</dd></div>
+        <div><dt>Grosor</dt><dd>unos 13 mm</dd></div>
+        <div><dt>Estanqueidad</dt><dd>100 m (10 ATM)</dd></div>
+        <div><dt>Esfera</dt><dd>Negra con tres subesferas, índices con detalles naranja</dd></div>
+        <div><dt>Luminiscencia</dt><dd>Super-LumiNova</dd></div>
+        <div><dt>Ancho de asa</dt><dd>20 mm</dd></div>
+        <div><dt>Cierre</dt><dd>Desplegable con pulsadores y extensión</dd></div>
+        <div><dt>Fondo</dt><dd>Atornillado, acero macizo</dd></div>
+        <div><dt>Corona</dt><dd>Roscada</dd></div>
+        <div><dt>Peso</dt><dd data-spec="peso">unos 120 g con brazalete</dd></div>
         <div><dt>Referencia</dt><dd>LO—01</dd></div>
       </dl>
-      <!-- Aquí iba «Preguntar por el Lunar», que abría un correo.
-           Óscar pidió retirar esa dirección de toda la web (03/08/2026), así
-           que el botón se va con ella: la ficha se queda SIN llamada a la
-           acción hasta que se decida qué va en su lugar. -->
       <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
   </section>
@@ -161,7 +205,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=2"></script>
+<script src="/assets/js/ficha.js?v=3"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

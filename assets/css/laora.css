@@ -302,8 +302,48 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .pdp-buy h1 { margin: 20px 0 12px; }
 .pdp-homage { text-transform: uppercase; font-size: 10px; letter-spacing: .14em; color: var(--gold); }
 .pdp-description { font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 560px; }
+/* El precio. Es del material original, y se quedó fuera al portar la hoja
+   porque entonces no había ninguna cifra que enseñar. El «Impuestos
+   incluidos» sube de los 10 px del original a 12, que es el suelo. */
+.pdp-price { display: flex; align-items: baseline; gap: 14px; margin: 26px 0;
+  padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.pdp-price strong { font: 34px var(--serif); }
+.pdp-price span { font-size: 12px; color: var(--muted); }
+/* ---------- CONFIGURADOR DE LA FICHA ----------
+   Ocupa el hueco donde el material original tenía `.finish-selector`, y
+   mantiene su lenguaje: rejilla de botones con borde, el elegido con borde
+   doble y fondo papel. Dos grupos —acabado y correa—, porque es lo único
+   que el catálogo final permite elegir: el movimiento viene con el acabado.
+
+   Los cuerpos NO bajan de 12 px, que es el suelo que fijó Óscar para el
+   texto que hay que leer. El original usaba 10 y 11 aquí. */
+.config { margin: 26px 0 24px; }
+.config-titulo { margin: 0 0 12px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em; }
+.config-opciones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  margin-bottom: 20px; }
+.config-opciones button { min-height: 72px; padding: 13px; display: grid;
+  align-content: center; gap: 4px; text-align: left; border: 1px solid var(--line);
+  background: transparent; transition: border-color .18s ease, background .18s ease; }
+.config-opciones button:hover { border-color: var(--ink); }
+/* el elegido: borde doble y papel. El padding baja 1 px para que el borde
+   más grueso no mueva la caja ni un píxel. */
+.config-opciones button[aria-selected="true"] { border: 2px solid var(--ink);
+  padding: 12px; background: var(--paper); }
+.config-opciones button span { font-size: 14px; font-weight: 700; }
+.config-opciones button small { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.config-nota { margin: -12px 0 22px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+/* la referencia exacta de la combinación: es la misma cadena que usa la
+   hoja de materiales, para que web y almacén hablen igual */
+.config-ref { margin: 12px 0 0; text-align: center; font-size: 12px; color: var(--muted); }
+.config-ref b { font-weight: 700; letter-spacing: .06em; }
+
 .live-specs { margin: 26px 0 25px; border-top: 1px solid var(--line); }
-.live-specs div { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 11px; }
+/* 12 px, no los 11 del original: con el configurador esto ha pasado de
+   cuatro líneas a dieciocho de ficha técnica real, y es el mismo tipo de
+   texto para el que Óscar fijó el suelo de 12. La columna de etiquetas
+   sube a 130 px para que «Luminiscencia» siga cabiendo en una línea. */
+.live-specs div { display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
 .live-specs dt { text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .live-specs dd { margin: 0; }
 .buy-note { text-align: center; font-size: 10px; color: var(--muted); margin: 13px 0 0; }

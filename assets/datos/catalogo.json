@@ -24,10 +24,10 @@
       "frase": "El cronógrafo que mira más allá.",
       "descripcion": "Una lectura contemporánea del cronógrafo más reconocible de la exploración espacial, firmada únicamente por laOra.",
       "historia": "Lunar conserva la claridad instrumental, la escala taquimétrica y el equilibrio de tres contadores que hicieron universal este arquetipo. No pretende pasar por el original: es nuestro homenaje, con identidad laOra y una construcción pensada para usarse cada día.",
-      "precio": null,
+      "precio": 209.9,
       "movimiento": null,
-      "diametro": "42 mm",
-      "hermeticidad": null,
+      "diametro": "40 mm",
+      "hermeticidad": "100 m (10 ATM)",
       "_foto": "La principal es la de ACERO, que es el Lunar normal. Las otras tres (front, detail, hero) son todas del acabado Eclipse, negro integral, y van detrás en la galería.",
       "foto": "/assets/img/relojes-2026/lunar-acero.webp",
       "galeria": [
@@ -36,11 +36,139 @@
         "/assets/img/relojes-2026/lunar-detail.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero 316L"],
-        ["Bisel", "Escala taquimétrica"],
-        ["Brazalete", "Acero"],
-        ["Control", "Revisión individual en Madrid"]
-      ]
+        [
+          "Caja",
+          "Acero 316L"
+        ],
+        [
+          "Bisel",
+          "Escala taquimétrica"
+        ],
+        [
+          "Brazalete",
+          "Acero"
+        ],
+        [
+          "Control",
+          "Revisión individual en Madrid"
+        ]
+      ],
+      "configurador": {
+        "_": "Datos del catálogo final de la hoja de materiales (03/08/2026). Solo lo que ve el cliente: NUNCA proveedores, enlaces de compra, coste ni margen.",
+        "acabados": [
+          {
+            "id": "alba",
+            "nombre": "Alba",
+            "descriptor": "Esencial",
+            "resumen": "Cronógrafo mecacuarzo, la puesta a cero con tacto mecánico.",
+            "movimiento": "Mecacuarzo Seiko/TMI VK63",
+            "movimientoTipo": "Cronógrafo mecacuarzo",
+            "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
+            "autonomia": "Pila SR927SW, unos 3 años",
+            "cristal": "Mineral endurecido de alto grado",
+            "caja": "Acero inoxidable 316L, pulido y satinado",
+            "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
+            "peso": "unos 120 g con brazalete"
+          },
+          {
+            "id": "cenit",
+            "nombre": "Cenit",
+            "descriptor": "Máxima expresión",
+            "resumen": "Cronógrafo mecánico de cuerda manual con rueda de columnas.",
+            "movimiento": "Seagull ST19 de rueda de columnas",
+            "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 45 horas de reserva de marcha",
+            "cristal": "Zafiro con tratamiento antirreflejo",
+            "caja": "Acero inoxidable 316L, pulido y satinado",
+            "bisel": "Fijo con escala taquimétrica, inserto de cerámica",
+            "peso": "unos 135 g con brazalete"
+          },
+          {
+            "id": "eclipse",
+            "nombre": "Eclipse",
+            "descriptor": "Carácter técnico",
+            "resumen": "El mismo cronógrafo mecacuarzo, en negro integral y con zafiro.",
+            "movimiento": "Mecacuarzo Seiko/TMI VK63",
+            "movimientoTipo": "Cronógrafo mecacuarzo",
+            "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
+            "autonomia": "Pila SR927SW, unos 3 años",
+            "cristal": "Zafiro",
+            "caja": "Acero inoxidable 316L con PVD negro satinado",
+            "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
+            "peso": "unos 120 g con brazalete"
+          }
+        ],
+        "correas": [
+          {
+            "id": "brazalete-plano",
+            "nombre": "Brazalete de acero",
+            "detalle": "316L, eslabones planos, pulido y satinado"
+          },
+          {
+            "id": "brazalete-arroz",
+            "nombre": "Brazalete cuentas de arroz",
+            "detalle": "316L, eslabones tipo grano de arroz"
+          },
+          {
+            "id": "piel-marron",
+            "nombre": "Piel marrón",
+            "detalle": "Con costura a la vista"
+          },
+          {
+            "id": "piel-negra",
+            "nombre": "Piel negra",
+            "detalle": "Con costura a la vista"
+          },
+          {
+            "id": "caucho",
+            "nombre": "Caucho negro",
+            "detalle": "Flexible, para uso diario"
+          },
+          {
+            "id": "nato",
+            "nombre": "NATO negro",
+            "detalle": "Tejido, de una pieza"
+          }
+        ],
+        "precios": {
+          "alba": [
+            229.9,
+            229.9,
+            219.9,
+            219.9,
+            209.9,
+            209.9
+          ],
+          "cenit": [
+            499.9,
+            509.9,
+            499.9,
+            489.9,
+            489.9,
+            489.9
+          ],
+          "eclipse": [
+            259.9,
+            259.9,
+            249.9,
+            249.9,
+            249.9,
+            239.9
+          ]
+        },
+        "comunes": {
+          "Diámetro": "40 mm",
+          "Grosor": "unos 13 mm",
+          "Estanqueidad": "100 m (10 ATM)",
+          "Esfera": "Negra con tres subesferas, índices con detalles naranja",
+          "Luminiscencia": "Super-LumiNova",
+          "Ancho de asa": "20 mm",
+          "Cierre": "Desplegable con pulsadores y extensión",
+          "Fondo": "Atornillado, acero macizo",
+          "Corona": "Roscada"
+        }
+      }
     },
     {
       "slug": "bitacora",
@@ -62,10 +190,22 @@
         "/assets/img/relojes-2026/bitacora-hero-movement.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero 316L"],
-        ["Arquitectura", "Brazalete integrado"],
-        ["Esfera", "Texturizada"],
-        ["Control", "Revisión individual en Madrid"]
+        [
+          "Caja",
+          "Acero 316L"
+        ],
+        [
+          "Arquitectura",
+          "Brazalete integrado"
+        ],
+        [
+          "Esfera",
+          "Texturizada"
+        ],
+        [
+          "Control",
+          "Revisión individual en Madrid"
+        ]
       ]
     },
     {
@@ -88,10 +228,22 @@
         "/assets/img/relojes-2026/trinchera-eclipse.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero 316L cepillado"],
-        ["Esfera", "Negro mate de alta lectura"],
-        ["Correa", "Tejido verde oliva"],
-        ["Trasera", "Acero macizo"]
+        [
+          "Caja",
+          "Acero 316L cepillado"
+        ],
+        [
+          "Esfera",
+          "Negro mate de alta lectura"
+        ],
+        [
+          "Correa",
+          "Tejido verde oliva"
+        ],
+        [
+          "Trasera",
+          "Acero macizo"
+        ]
       ]
     },
     {
@@ -114,10 +266,22 @@
         "/assets/img/relojes-2026/precisa-bracelet.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero 316L cepillado y pulido"],
-        ["Esfera", "Azul con textura cuadriculada"],
-        ["Brazalete", "Acero integrado"],
-        ["Calendario", "Fecha a las 3"]
+        [
+          "Caja",
+          "Acero 316L cepillado y pulido"
+        ],
+        [
+          "Esfera",
+          "Azul con textura cuadriculada"
+        ],
+        [
+          "Brazalete",
+          "Acero integrado"
+        ],
+        [
+          "Calendario",
+          "Fecha a las 3"
+        ]
       ]
     },
     {
@@ -140,10 +304,22 @@
         "/assets/img/relojes-2026/bauhaus-back.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero pulido"],
-        ["Esfera", "Marfil mate"],
-        ["Agujas", "Azules"],
-        ["Correa", "Piel arena"]
+        [
+          "Caja",
+          "Acero pulido"
+        ],
+        [
+          "Esfera",
+          "Marfil mate"
+        ],
+        [
+          "Agujas",
+          "Azules"
+        ],
+        [
+          "Correa",
+          "Piel arena"
+        ]
       ]
     },
     {
@@ -166,10 +342,22 @@
         "/assets/img/relojes-2026/cero-cero-back.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero 316L"],
-        ["Bisel", "Giratorio de buceo"],
-        ["Esfera", "Negro mate · acento naranja"],
-        ["Brazalete", "Malla de acero"]
+        [
+          "Caja",
+          "Acero 316L"
+        ],
+        [
+          "Bisel",
+          "Giratorio de buceo"
+        ],
+        [
+          "Esfera",
+          "Negro mate · acento naranja"
+        ],
+        [
+          "Brazalete",
+          "Malla de acero"
+        ]
       ]
     },
     {
@@ -192,10 +380,22 @@
         "/assets/img/relojes-2026/coctel-back.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero pulido"],
-        ["Esfera", "Marrón con textura radial"],
-        ["Índices", "Aplicados y facetados"],
-        ["Correa", "Piel marrón"]
+        [
+          "Caja",
+          "Acero pulido"
+        ],
+        [
+          "Esfera",
+          "Marrón con textura radial"
+        ],
+        [
+          "Índices",
+          "Aplicados y facetados"
+        ],
+        [
+          "Correa",
+          "Piel marrón"
+        ]
       ]
     },
     {
@@ -218,10 +418,22 @@
         "/assets/img/relojes-2026/box.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero 316L tipo cojín"],
-        ["Corona", "A las 4"],
-        ["Esfera", "Verde profundo"],
-        ["Correa", "Caucho negro waffle"]
+        [
+          "Caja",
+          "Acero 316L tipo cojín"
+        ],
+        [
+          "Corona",
+          "A las 4"
+        ],
+        [
+          "Esfera",
+          "Verde profundo"
+        ],
+        [
+          "Correa",
+          "Caucho negro waffle"
+        ]
       ]
     }
   ]
