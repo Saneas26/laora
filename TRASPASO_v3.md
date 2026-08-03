@@ -3,7 +3,7 @@
 **Fecha:** 03/08/2026 · **Estado:** en producción · **Propietario:** Óscar Belloso
 
 Este documento es para quien coja el trabajo después. Lee entero el
-apartado 6 («Las quince trampas») antes de tocar nada: casi todas son
+apartado 6 («Las dieciséis trampas») antes de tocar nada: casi todas son
 cosas que ya han roto algo una vez.
 
 ---
@@ -93,7 +93,7 @@ Reescribe `index.html`, las cuatro de sección y las ocho fichas.
 `cache-control: max-age=14400`: sin subirlo, el navegador se queda **hasta
 cuatro horas** con la hoja antigua. Esto ya costó una tarde entera.
 
-Ahora mismo: `V_CSS = 25`, `V_CAB = 13`, `home.js?v=8`, `ficha.js?v=5`,
+Ahora mismo: `V_CSS = 25`, `V_CAB = 13`, `home.js?v=8`, `ficha.js?v=6`,
 `cabecera.js?v=3`.
 
 ### Verificar en producción
@@ -275,6 +275,16 @@ Datos en `catalogo.json` → `configurador`:
   cierta en ese reloj. Ver la trampa 8.
 - La **referencia** se compone igual que en la hoja
   (`LO-01_Lunar_A01`): código + inicial del acabado + número de correa.
+  Si dos acabados comparten inicial —el Cero Cero tiene **dos Cenit**, uno
+  por calibre—, se les pone `refSufijo` (`-ST2130`, `-NH38`) y la
+  referencia queda igual que en la hoja. Sin eso, los dos apuntarían al
+  mismo cajón.
+- Las líneas de ficha técnica que pueden variar por acabado son
+  `movimiento`, `movimientoTipo`, `frecuencia`, `autonomia`, `cristal`,
+  `caja`, `estanqueidad`, `bisel`, `esfera`, `fondo` y `peso`. Lo que un
+  modelo **no** distinga se deja en `comunes` y se pinta una sola vez: el
+  Lunar tiene la estanqueidad ahí, el Cero Cero no puede (100 m en Alba y
+  Levante, 200 m en Cenit y Eclipse).
 
 ### 5.2 · Las curiosidades
 
@@ -312,7 +322,7 @@ titulares, que laOra no está afiliada, y que aquello es divulgación. Va a
 
 ---
 
-## 6 · LAS QUINCE TRAMPAS
+## 6 · LAS DIECISÉIS TRAMPAS
 
 1. **No edites los `.html`.** Son salida del generador.
 2. **Sube `V_CSS`** en cada cambio de CSS, o el navegador se queda 4 h con
@@ -354,7 +364,13 @@ titulares, que laOra no está afiliada, y que aquello es divulgación. Va a
 14. **Las transiciones no avanzan con el panel oculto**, así que
     `getComputedStyle` devuelve el valor de partida. Para leer el valor
     real, desactiva las transiciones antes de medir.
-15. **Cloudflare ofusca los `mailto:`** automáticamente. Si buscas una
+15. **La hoja tiene bloques duplicados y la lectura normal se corta.**
+    `read_file_content` devuelve la hoja **truncada**: se come las últimas
+    filas. Y «Catalogo final» tiene un bloque suelto **setenta filas más
+    abajo** (fila 122) que repite el Eclipse del Cero Cero y el Bauhaus con
+    otros precios. Para leerla entera, descárgala como `.xlsx` y ábrela con
+    `zipfile` desde Python. La pestaña «Catalogo final» es la hoja 11.
+16. **Cloudflare ofusca los `mailto:`** automáticamente. Si buscas una
     dirección en el HTML servido y no aparece, mira si hay un
     `/cdn-cgi/l/email-protection`.
 
@@ -362,36 +378,61 @@ titulares, que laOra no está afiliada, y que aquello es divulgación. Va a
 
 ## 7 · POR DÓNDE SE SIGUE
 
-**Crear las fichas de los seis modelos que faltan**, con el mismo modelo del
-apartado 5: configurador + dos curiosidades + la historia del original.
+**Crear las fichas de los cinco modelos que faltan**, con el mismo modelo
+del apartado 5: configurador + dos curiosidades + la historia del original.
+Hechos: **Lunar**, **Bauhaus** y **Cero Cero** (03/08/2026).
 
 ### Estado real de los datos
 
 | Modelo | En «Catalogo final» | Se puede hacer |
 |---|---|---|
-| **Cero Cero** LO—02 | **24 combinaciones**, los 4 acabados | **Sí, es el siguiente** |
+| ~~Cero Cero LO—02~~ | 30 filas, 5 acabados | **Hecho el 03/08/2026** |
 | Precisa LO—04 | — | No, falta volcarlo |
 | Trinchera LO—05 | — | No |
 | Bitácora LO—07 | — | No |
 | Tortuga LO—08 | — | No |
 | Cóctel LO—09 | — | No |
 
-**Solo el Cero Cero tiene datos.** Los otros cinco no tienen ni una fila:
-hay que pedirle a Óscar que los vuelque antes.
+**Ninguno de los cinco tiene datos.** No hay ni una fila: hay que pedirle a
+Óscar que los vuelque antes.
 
-### Antes de hacer el Cero Cero, dos cosas que mirar con Óscar
+### Cómo quedó el Cero Cero, y lo que sigue abierto de él
 
-- Sus **correas 03 y 06 son la misma** —«NATO nailon negro/naranja», mismo
-  precio— en los cuatro acabados. Saldrían dos botones idénticos.
-- **Alba y Levante son idénticos**: mismo movimiento (VH31) y exactamente
-  los mismos seis precios. Hoy el cliente no vería diferencia entre pagar
-  uno u otro.
+La hoja tenía tres cosas a medias. Óscar las resolvió el 03/08/2026:
+
+- **Dos Cenit** con el mismo nombre y distinto calibre (Seagull ST2130 con
+  fecha, 229,90–249,90 €; Seiko NH38 sin fecha, 299,90–319,90 €). Van como
+  **acabados separados**. Los nombres —«Cenit» y «Cenit sin fecha»— los
+  puse yo: si quiere nombres de gama, es una línea del JSON.
+- **Dos Eclipse** con dos precios. Manda el bloque de abajo de la hoja
+  (fila 122): **219,90–239,90 €**.
+- **Dos correas NATO idénticas** (posiciones 03 y 06). Se quita la 06 y
+  quedan cinco; los números 01–05 siguen siendo los de la hoja.
+
+Lo que queda abierto, avisado a Óscar y sin resolver:
+
+- **El mismo NH38 está costeado a dos precios en la hoja**: 97,69 € en las
+  filas del Cenit y 35,79 € en las del Eclipse. De ahí sale que el Cenit
+  sin fecha cueste 70 € más que el Eclipse llevando el mismo movimiento y
+  menos acabado. La web publica lo que dice la hoja.
+- **«Alba y Levante son idénticos» ya no es cierto** —el aviso del traspaso
+  anterior estaba caducado—: hoy Alba es cuarzo VH31 con cristal mineral y
+  bisel de aluminio, y Levante es automático Miyota 8215 con fecha, zafiro
+  y bisel de cerámica.
+- **La pestaña «Línea Eclipse» contradice al «Catalogo final»**: dice DLC
+  (no PVD) y segundero **amarillo** en vez del acento naranja. La web sigue
+  al «Catalogo final», que es el que manda.
+- **Las fotos no enseñan el patrón de ondas** de la esfera y todas llevan
+  malla milanesa. La ficha describe lo que dice la hoja.
+- **Dos specs que la hoja no da por verificadas** y que ya se publican en
+  el Lunar y en el Cero Cero: el zafiro («según ficha del proveedor de
+  caja») y la luminiscencia («Super-LumiNova (tipo)»).
 
 ### Los originales de cada modelo, para escribir su historia
 
 | Modelo | Original que se nombra |
 |---|---|
-| Cero Cero | Omega Seamaster Diver 300M |
+| ~~Cero Cero~~ | ~~Omega Seamaster Diver 300M~~ · hecho |
 | Precisa | Tissot PRX |
 | Trinchera | Hamilton Khaki Field |
 | Bitácora | Patek Philippe Nautilus |
@@ -405,8 +446,8 @@ hay que pedirle a Óscar que los vuelque antes.
 | Asunto | Estado |
 |---|---|
 | **Botón de reserva** | Óscar eligió recuperar la reserva con señal. `reservar.html`, `pagar.html` y `reserva-recibida.html` están en la etiqueta pero **con el diseño viejo**: hay que rehacerlas. El botón está escrito y **comentado** en la ficha, listo para descomentar; `ficha.js` ya le pasa referencia, acabado y correa por la URL. La lógica que se salva: `precios.js`, `pagos.js`, `crear-reserva.ts` y las condiciones de venta. Transferencia y Bizum **ya funcionaban** con el IBAN puesto; solo tarjeta y PayPal esperaban la clave de Mollie |
-| **Fichas sin llamada a la acción** | Las seis sin configurador no tienen nada que pulsar |
-| **Precios de la home** | El «desde 209,90 €» del mapa del precio es del Lunar. Cuando entren más modelos, comprobar que sigue siendo el mínimo de la colección |
+| **Fichas sin llamada a la acción** | Las cinco sin configurador no tienen nada que pulsar |
+| **Precio del mapa de la home** | El «209,90 €» del cuadro es del Lunar y está escrito a mano en el HTML, pero el nombre de al lado **sí cambia** con la pestaña: en la del Bitácora se lee «laOra · Bitácora — 209,90 €», y el Bitácora no tiene precio. Comprobado el 03/08/2026 |
 | **Cifras del mapa del precio** | Orientativas y fechadas en agosto de 2026. Si se actualizan en `home.js`, **actualizar también la fecha de la nota legal** |
 | **Detalle en negro de la home** | La sección «Calidad demostrable» usa `lunar-detail.webp`, que es el acabado Eclipse. Haría falta una foto de detalle del de acero |
 | **Sin Node** | Si algún día hace falta, hoy no está instalado |

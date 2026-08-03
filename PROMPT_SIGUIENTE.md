@@ -75,21 +75,19 @@ Al terminar algo: **commit y push, sin esperar a que lo pidan.**
 
 ## Por dónde vas a seguir
 
-**Crear las fichas de los seis modelos que faltan**, con el modelo del
+**Crear las fichas de los cinco modelos que faltan**, con el modelo del
 apartado 5 del traspaso: configurador + dos curiosidades en ventana
 emergente + la historia del original como pieza de periódico. Ya están hechos
-el **Lunar** y el **Bauhaus**: míralos antes de empezar.
+el **Lunar**, el **Bauhaus** y el **Cero Cero**: míralos antes de empezar.
 
-**Solo el Cero Cero (LO—02) tiene datos** en la hoja. Los otros cinco no
-tienen ni una fila: hay que pedírselos a Óscar.
+**Ninguno de los cinco tiene datos** en la hoja: Precisa, Trinchera,
+Bitácora, Tortuga y Cóctel no tienen ni una fila en «Catalogo final». Hay
+que pedirle a Óscar que los vuelque antes de empezar.
 
-Y antes de hacer el Cero Cero, dos cosas que hablar con él:
-
-- Sus **correas 03 y 06 son la misma** —«NATO nailon negro/naranja», mismo
-  precio— en los cuatro acabados. Saldrían dos botones idénticos.
-- **Alba y Levante son idénticos**: mismo movimiento (VH31) y exactamente los
-  mismos seis precios. Hoy el cliente no vería diferencia entre pagar uno u
-  otro.
+Para leer la hoja entera **no vale la lectura normal**: se corta a la mitad
+y te deja sin ver las filas del final, que es justo donde hay bloques
+sueltos. Descárgala como `.xlsx` y ábrela con `zipfile` desde Python.
+El Cero Cero tenía ocho filas escondidas ahí abajo.
 
 ## Cómo tratar con Óscar
 
