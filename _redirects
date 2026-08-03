@@ -72,3 +72,20 @@
 /manifiesto.html  /filosofia.html  301
 /materiales       /filosofia.html  301
 /materiales.html  /filosofia.html  301
+
+# ============================================================
+# DOCUMENTACIÓN INTERNA — FUERA DEL ALCANCE PÚBLICO
+# ------------------------------------------------------------
+# El «build output» de Cloudflare Pages es `/`: TODO lo que hay en el
+# repositorio se publica en laora.es. Estos .md son notas de trabajo
+# —precios anteriores, traspaso, normas de marca— y estaban saliendo con
+# un 200 para cualquiera que probase la URL.
+#
+# No es un secreto grave, pero tampoco es contenido para el cliente. Se
+# mandan a la home. Siguen en el repositorio, que es donde se leen.
+# ============================================================
+/README.md                 /  302
+/PRECIOS-ANTERIORES.md     /  302
+/IDENTIDAD_VISUAL.md       /  302
+/TRASPASO_v3.md            /  302
+/herramientas/*            /  302
