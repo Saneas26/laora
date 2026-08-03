@@ -1,33 +1,40 @@
 /* ============================================================
    laOra · HOME
    ------------------------------------------------------------
-   Tres piezas independientes: el pase de fotos del héroe, el mapa
-   del precio y los cuatro modelos destacados. Cada una comprueba
-   que su HTML existe antes de arrancar, así que si un día se quita
-   una sección de la home el resto sigue funcionando.
+   Reproduce los dos componentes con estado del material original
+   (BitacoraHero y MarketMap), que allí eran React. Mismas clases y
+   mismo comportamiento: 6.200 ms entre imágenes, `is-active` en la
+   diapositiva y en su mando, `active` en la pestaña del mapa.
+
+   Los cuatro modelos destacados NO se pintan aquí: van escritos en
+   el HTML por el generador, para que Google los lea y la página
+   funcione aunque este fichero no llegue a cargar.
    ============================================================ */
 (function () {
   'use strict';
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- 1 · pase de fotos del héroe ---------- */
+  /* ---------- 1 · el pase de fotos del héroe ---------- */
   (function heroe() {
-    var fotos = document.querySelectorAll('.h-hero-foto');
-    var mandos = document.querySelectorAll('.h-hero-mandos [data-foto]');
-    var pausa = document.querySelector('.h-hero-pausa');
-    if (fotos.length < 2 || !mandos.length) return;
+    var slides = document.querySelectorAll('.hero-slide');
+    var mandos = document.querySelectorAll('.hero-controls [data-slide]');
+    var pausa = document.querySelector('.hero-pause');
+    if (slides.length < 2 || !mandos.length) return;
 
     var actual = 0, reloj = null, parado = reduce;
 
     function mostrar(i) {
-      actual = (i + fotos.length) % fotos.length;
-      for (var f = 0; f < fotos.length; f++) fotos[f].classList.toggle('activa', f === actual);
-      for (var m = 0; m < mandos.length; m++) mandos[m].classList.toggle('activa', m === actual);
+      actual = (i + slides.length) % slides.length;
+      for (var s = 0; s < slides.length; s++) slides[s].classList.toggle('is-active', s === actual);
+      for (var m = 0; m < mandos.length; m++) {
+        mandos[m].classList.toggle('is-active', m === actual);
+        mandos[m].setAttribute('aria-pressed', String(m === actual));
+      }
     }
     function arrancar() {
-      if (parado) return;
       detener();
+      if (parado) return;
       reloj = window.setInterval(function () { mostrar(actual + 1); }, 6200);
     }
     function detener() { if (reloj) { window.clearInterval(reloj); reloj = null; } }
@@ -39,15 +46,18 @@
     }
 
     if (pausa) {
-      pausa.addEventListener('click', function () {
+      /* con movimiento reducido el original ni siquiera pintaba el botón */
+      if (reduce) { pausa.remove(); pausa = null; }
+      else pausa.addEventListener('click', function () {
         parado = !parado;
-        if (parado) { detener(); pausa.textContent = '▶'; pausa.setAttribute('aria-label', 'Reanudar el pase de imágenes'); }
-        else { arrancar(); pausa.textContent = 'II'; pausa.setAttribute('aria-label', 'Pausar el pase de imágenes'); }
+        pausa.textContent = parado ? '▶' : 'Ⅱ';
+        pausa.setAttribute('aria-pressed', String(parado));
+        pausa.setAttribute('aria-label', parado ? 'Reanudar movimiento' : 'Pausar movimiento');
+        arrancar();
       });
-      if (reduce) { pausa.textContent = '▶'; pausa.setAttribute('aria-label', 'Reanudar el pase de imágenes'); }
     }
 
-    /* Con la pestaña de fondo no tiene sentido seguir cambiando fotos. */
+    /* con la pestaña de fondo no tiene sentido seguir cambiando fotos */
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) detener(); else arrancar();
     });
@@ -57,9 +67,9 @@
 
 
   /* ---------- 2 · el mapa del precio ----------
-     Las cifras de mercado son ORIENTATIVAS y están fechadas en la
-     nota legal de la sección. Si se actualizan, hay que actualizar
-     también la fecha de esa nota en index.html. */
+     Las cifras son ORIENTATIVAS y están fechadas en la nota legal de la
+     sección (`.market-footnote`, en el HTML). Si se actualizan aquí, hay
+     que actualizar también esa fecha. */
   (function mapa() {
     var contenedor = document.querySelector('[data-mapa-tarjetas]');
     var pestanas = document.querySelectorAll('[data-mapa]');
@@ -71,7 +81,7 @@
         intro: 'Del canal oficial al mercado irregular: cinco rutas que pueden parecer similares en una foto, pero no ofrecen lo mismo.',
         tarjetas: [
           { canal: '01 · Boutique oficial', nombre: 'Omega Speedmaster Moonwatch', precio: '7.700 €', nota: 'Nuevo, documentado y con garantía oficial.', irregular: false },
-          { canal: '02 · Subasta', nombre: 'Catawiki y similares', precio: '≈ 5.800 € + gastos', nota: 'Ejemplo orientativo: usado; caja, papeles y estado dependen del lote.', irregular: false },
+          { canal: '02 · Subasta', nombre: 'Catawiki / similares', precio: '≈ 5.800 € + gastos', nota: 'Ejemplo orientativo: usado; caja, papeles y estado dependen del lote.', irregular: false },
           { canal: '03 · Gris / usado', nombre: 'Chrono24', precio: '4.400–6.300 €', nota: 'Rango observado en referencias habituales. Autenticidad y set cambian el valor.', irregular: false },
           { canal: '04 · Piezas no originales', nombre: 'Marketplaces generalistas', precio: '650–1.250 €', nota: 'Relojes rehechos o con componentes de procedencia no acreditada.', irregular: true },
           { canal: '05 · Falsificación', nombre: '«Superclones»', precio: '600–1.650 €', nota: 'Marca suplantada, origen incierto y sin garantía legítima.', irregular: true }
@@ -120,7 +130,7 @@
       contenedor.innerHTML = '';
       d.tarjetas.forEach(function (t) {
         var art = document.createElement('article');
-        art.className = 'h-mapa-tarjeta' + (t.irregular ? ' irregular' : '');
+        art.className = 'market-card' + (t.irregular ? ' irregular' : '');
         var p = document.createElement('p'); p.textContent = t.canal;
         var h = document.createElement('h3'); h.textContent = t.nombre;
         var s = document.createElement('strong'); s.textContent = t.precio;
@@ -139,13 +149,20 @@
       });
 
       elFoto.src = d.foto;
+      /* el remate en negrita del original va después del texto variable */
       elValor.textContent = d.valor;
+      var remate = document.createElement('b');
+      remate.textContent = ' Todo el valor, en tu muñeca.';
+      elValor.appendChild(remate);
+
       elEnlace.setAttribute('href', d.enlace);
       var nombres = document.querySelectorAll('[data-mapa-modelo]');
       for (var i = 0; i < nombres.length; i++) nombres[i].textContent = d.modelo;
 
       for (var p2 = 0; p2 < pestanas.length; p2++) {
-        pestanas[p2].setAttribute('aria-pressed', String(pestanas[p2].dataset.mapa === clave));
+        var esta = pestanas[p2].dataset.mapa === clave;
+        pestanas[p2].classList.toggle('active', esta);
+        pestanas[p2].setAttribute('aria-pressed', String(esta));
       }
     }
 
@@ -156,17 +173,5 @@
     }
 
     pintar('lunar');
-  })();
-
-
-  /* ---------- 3 · los cuatro destacados ---------- */
-  (function destacados() {
-    var caja = document.querySelector('[data-destacados]');
-    if (!caja || !window.LAORA_CATALOGO) return;
-    var cuatro = window.LAORA_CATALOGO.slice(0, 4);
-    caja.innerHTML = '';
-    cuatro.forEach(function (r) {
-      caja.appendChild(window.LAORA_TARJETA(r));
-    });
   })();
 })();
