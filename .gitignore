@@ -1,1 +1,4 @@
 .DS_Store
+
+# Configuración local del servidor de pruebas, no se publica
+.claude/
