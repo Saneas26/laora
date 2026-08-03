@@ -72,7 +72,12 @@
        `refNum` fuerza el número cuando la hoja no lo saca de la correa.
        En el Precisa no hay correa que elegir y aun así los dos Cenit son
        C01-ST2130 y C02-NH35: el número lo puso Óscar a mano en la hoja,
-       así que aquí se copia, no se calcula. */
+       así que aquí se copia, no se calcula.
+
+       Puede ser una cadena —vale para todas las correas— o una lista
+       paralela a `correas`. El Trinchera la necesita en lista: numera
+       correlativo dentro del acabado, no por correa, así que su segundo
+       Cenit es C03 con la NATO verde y C04 con la negra. */
     /* `refLetra` es para cuando el acabado se renombra y la hoja no.
        El segundo Cenit del Precisa pasó a llamarse Eclipse, pero en la
        hoja sigue siendo LO-04_Precisa_C02-NH35: manda la hoja, porque esa
@@ -81,7 +86,9 @@
       var j = Math.max(0, correas.indexOf(correa));
       var letra = acabado.refLetra || acabado.nombre.charAt(0).toUpperCase();
       var codigo = d.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
-      var num = acabado.refNum || ('0' + (j + 1)).slice(-2);
+      var num = acabado.refNum;
+      if (Array.isArray(num)) num = num[j];
+      if (!num) num = ('0' + (j + 1)).slice(-2);
       return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra +
              num + (acabado.refSufijo || '');
     }
