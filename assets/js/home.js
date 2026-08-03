@@ -83,7 +83,7 @@
           { canal: '01 · Boutique oficial', nombre: 'Omega Speedmaster Moonwatch', precio: '7.700 €', nota: 'Nuevo, documentado y con garantía oficial.', irregular: false },
           { canal: '02 · Subasta', nombre: 'Catawiki / similares', precio: '≈ 5.800 € + gastos', nota: 'Ejemplo orientativo: usado; caja, papeles y estado dependen del lote.', irregular: false },
           { canal: '03 · Gris / usado', nombre: 'Chrono24', precio: '4.400–6.300 €', nota: 'Rango observado en referencias habituales. Autenticidad y set cambian el valor.', irregular: false },
-          { canal: '04 · Piezas no originales', nombre: 'Marketplaces generalistas', precio: '650–1.250 €', nota: 'Relojes rehechos o con componentes de procedencia no acreditada.', irregular: true },
+          { canal: '04 · Piezas no originales', nombre: 'Marketplaces generalistas', precio: '650–1.250 €', nota: 'Relojes reacondicionados o con componentes de procedencia no acreditada.', irregular: true },
           { canal: '05 · Falsificación', nombre: '«Superclones»', precio: '600–1.650 €', nota: 'Marca suplantada, origen incierto y sin garantía legítima.', irregular: true }
         ],
         otras: [['Bulova Lunar Pilot', '549–659 €'],
@@ -91,7 +91,10 @@
                 ['Tissot PR516 Chronograph', '545–625 €']],
         modelo: 'Lunar',
         enlace: '/lunar.html',
-        foto: '/assets/img/relojes-2026/lunar-front.webp'
+        foto: '/assets/img/relojes-2026/lunar-front.webp',
+        /* la foto del Lunar ya es cuadrada y con el reloj centrado: en la
+           franja cuadrada del cuadro entra entera sin recortar nada */
+        posicion: 'center', posicionMovil: 'center 45%'
       },
       bitacora: {
         titulo: 'El deportivo integrado',
@@ -107,7 +110,12 @@
                 ['Citizen Tsuyosa', '299–429 €']],
         modelo: 'Bitácora',
         enlace: '/bitacora.html',
-        foto: '/assets/img/relojes-2026/bitacora-hero-full.webp'
+        foto: '/assets/img/relojes-2026/bitacora-hero-full.webp',
+        /* el Bitácora tiene el reloj en la mitad derecha del encuadre
+           (va de un 45 % a un 92 % del ancho). Con el recorte centrado la
+           corona se quedaba fuera; pegando el recorte a la derecha entra
+           el reloj entero. */
+        posicion: 'right center', posicionMovil: 'right 45%'
       }
     };
 
@@ -146,6 +154,8 @@
       });
 
       elFoto.src = d.foto;
+      elFoto.style.setProperty('--foto-pos', d.posicion || 'center');
+      elFoto.style.setProperty('--foto-pos-movil', d.posicionMovil || 'center 45%');
       /* El texto del cuadro ya NO cambia con la pestaña: desde el 03/08/2026
          es la misma frase para los dos modelos, escrita en el HTML. Es una
          afirmación de colección («desde…»), no del modelo de la pestaña. */

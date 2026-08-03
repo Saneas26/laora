@@ -146,11 +146,20 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .market-alternatives span { min-height: 74px; padding: 13px; background: #e8e4db; display: flex; flex-direction: column; justify-content: space-between; }
 .market-alternatives b { font-size: 11px; line-height: 1.3; }
 .market-alternatives small { color: var(--muted); font-size: 11px; }
-.laora-value { min-height: 138px; padding: 22px 22px 20px 150px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px 24px; align-items: center; background: #c89b51; position: relative; overflow: hidden; }
+/* 155 px de alto y 155 de foto: la franja de la izquierda es CUADRADA. Con
+   los 128×155 del original el recorte se comía los laterales del reloj —
+   se veía cortado por la corona. */
+.laora-value { min-height: 155px; padding: 22px 22px 20px 177px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px 24px; align-items: center; background: #c89b51; position: relative; overflow: hidden; }
 /* La foto va LIMPIA. El original la teñía con `mix-blend-mode:multiply` y
    `opacity:.82`, y sobre el oro del cuadro el reloj se quedaba en una
-   silueta marrón: es una foto nuestra y se tiene que ver el reloj. */
-.laora-value > img { position: absolute; inset: 0 auto 0 0; width: 128px; height: 100%; object-fit: cover; }
+   silueta marrón: es una foto nuestra y se tiene que ver el reloj.
+
+   El encuadre lo pone cada modelo con `--foto-pos` (lo escribe home.js):
+   el Lunar viene cuadrado y centrado y no necesita nada, pero el Bitácora
+   tiene el reloj a la derecha del encuadre y con el recorte centrado se
+   quedaba fuera. */
+.laora-value > img { position: absolute; inset: 0 auto 0 0; width: 155px; height: 100%;
+  object-fit: cover; object-position: var(--foto-pos, center); }
 .laora-value-price { display: grid; gap: 3px; }
 .laora-value-price span { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .laora-value-price strong { font: 32px var(--serif); white-space: nowrap; }
@@ -405,7 +414,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .market-alternatives > div { grid-template-columns: 1fr; }
   .market-alternatives span { min-height: 62px; }
   .laora-value { padding: 190px 22px 24px; grid-template-columns: 1fr; gap: 14px; }
-  .laora-value > img { width: 100%; height: 170px; object-position: center 45%; }
+  /* aquí la foto es una banda ancha, así que el encuadre es otro: lo pone
+     `--foto-pos-movil`, también desde home.js */
+  .laora-value > img { width: 100%; height: 170px;
+    object-position: var(--foto-pos-movil, center 45%); }
   .laora-value > a { justify-self: start; }
   .product-grid, .product-grid.compact { grid-template-columns: 1fr; }
   .featured-products, .collection-page { padding: 0 24px 100px; }
