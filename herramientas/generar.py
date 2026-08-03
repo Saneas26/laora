@@ -32,7 +32,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 16
+V_CSS = 19
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -732,6 +732,55 @@ for i, r in enumerate(RELOJES):
     siguiente = RELOJES[(i + 1) % len(RELOJES)]
     anterior = RELOJES[(i - 1) % len(RELOJES)]
 
+    # ---- CONFIGURADOR ----
+    # Solo los modelos que ya tienen su fila en el catálogo final. El resto
+    # sigue como estaba, sin precio ni selector, hasta que se vuelquen.
+    cfg = r.get('configurador')
+    if cfg:
+        def opcion(attr, ident, nombre, detalle, primera):
+            sel = ' aria-selected="true"' if primera else ' aria-selected="false" tabindex="-1"'
+            return (f'          <button type="button" role="tab" data-{attr}="{ident}"{sel}>'
+                    f'<span>{nombre}</span><small>{detalle}</small></button>')
+
+        acabados = '\n'.join(
+            opcion('acabado', a['id'], a['nombre'], a['descriptor'], n == 0)
+            for n, a in enumerate(cfg['acabados']))
+        correas = '\n'.join(
+            opcion('correa', c['id'], c['nombre'], c['detalle'], n == 0)
+            for n, c in enumerate(cfg['correas']))
+        configurador = f"""      <div class="pdp-price">
+        <strong data-precio>{precio_es(min(min(v) for v in cfg['precios'].values()))}</strong>
+        <span>Impuestos incluidos</span>
+      </div>
+
+      <div class="config">
+        <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
+        <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
+{acabados}
+        </div>
+        <p class="config-nota" data-resumen-acabado>{cfg['acabados'][0]['resumen']}</p>
+
+        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
+        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
+{correas}
+        </div>
+      </div>
+
+      <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
+           Óscar eligió recuperar el sistema de reserva con señal (03/08/2026),
+           pero `reservar.html` todavía no está rehecha con el diseño nuevo:
+           las de la web anterior usaban hojas que ya no existen. Hasta
+           entonces NO se pinta, para no dejar un botón que lleve a un 404.
+
+           Cuando exista, se descomenta esto y ya funciona: `ficha.js` le
+           escribe la referencia, el acabado y la correa elegidos en la URL.
+      <a class="button primary full" href="/reservar.html" data-reservar>Reservar este {r['nombre']}</a>
+           -->
+      <p class="config-ref">Referencia <b data-ref>—</b></p>"""
+    else:
+        configurador = ('      <!-- Sin configurador: este modelo todavía no está volcado\n'
+                        '           del catálogo final de la hoja de materiales. -->')
+
     specs = [(k, v) for k, v in [
         ('Familia', r['familia']),
         ('Tamaño', r['diametro']),
@@ -762,7 +811,28 @@ for i, r in enumerate(RELOJES):
 
     minis = '\n'.join(mini(n, g) for n, g in enumerate(r['galeria']))
 
-    filas = '\n'.join(f'        <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in specs)
+    if cfg:
+        # con configurador, la ficha técnica se parte en dos: lo que cambia
+        # con el acabado (lo reescribe ficha.js) y lo que es igual siempre.
+        variables = [('Movimiento', 'movimiento'), ('Tipo', 'movimientoTipo'),
+                     ('Frecuencia', 'frecuencia'), ('Autonomía', 'autonomia'),
+                     ('Cristal', 'cristal'), ('Caja', 'caja'), ('Bisel', 'bisel')]
+        primera = cfg['acabados'][0]
+        filas = '\n'.join(
+            f'        <div><dt>{et}</dt><dd data-spec="{cl}">{primera[cl]}</dd></div>'
+            for et, cl in variables)
+        filas += '\n' + '\n'.join(
+            f'        <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in cfg['comunes'].items())
+        filas += f'\n        <div><dt>Peso</dt><dd data-spec="peso">{primera["peso"]}</dd></div>'
+        filas += f'\n        <div><dt>Referencia</dt><dd>{r["codigo"]}</dd></div>'
+        # los datos que necesita ficha.js, ya limpios de todo lo interno
+        datos_cfg = json.dumps({'acabados': cfg['acabados'], 'correas': cfg['correas'],
+                                'precios': cfg['precios'], 'codigo': r['codigo'],
+                                'modelo': r['nombre']}, ensure_ascii=False)
+        configurador += ('\n      <script type="application/json" data-configurador>'
+                         + datos_cfg.replace('<', '\\u003c') + '</script>')
+    else:
+        filas = '\n'.join(f'        <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in specs)
 
     tecnica = '\n'.join(
         f'        <li><span>{str(n + 1).zfill(2)}</span><div><b>{k}</b><p>{v}</p></div></li>'
@@ -789,17 +859,10 @@ for i, r in enumerate(RELOJES):
       <h1>{r['nombre']}</h1>
       <p class="pdp-homage">{r['homenaje']}</p>
       <p class="pdp-description">{r['descripcion']}</p>
-      <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iban el precio
-           (.pdp-price) y el selector de acabados (.finish-selector) del
-           original. Mientras estén a null en catalogo.json no se pinta
-           ninguna cifra ni ninguna línea sin dato. -->
+{configurador}
       <dl class="live-specs">
 {filas}
       </dl>
-      <!-- Aquí iba «Preguntar por el {r['nombre']}», que abría un correo.
-           Óscar pidió retirar esa dirección de toda la web (03/08/2026), así
-           que el botón se va con ella: la ficha se queda SIN llamada a la
-           acción hasta que se decida qué va en su lugar. -->
       <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
   </section>
@@ -840,7 +903,7 @@ for i, r in enumerate(RELOJES):
                 '/coleccion.html', 'Volver a la colección') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=2"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=3"></script>'))
 
 
 print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')
