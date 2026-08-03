@@ -338,7 +338,8 @@ escribir('index.html', cabeza(
             <span><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · <b data-mapa-modelo>Lunar</b></span>
             <strong>209,90 €</strong>
           </div>
-          <p data-mapa-valor>Mismo acero, mismo cristal, mismos movimientos desde 209,90 €</p>
+          <!-- Sin precio: el cuadro ya lo dice en grande, arriba. -->
+          <p data-mapa-valor>Mismo acero, mismo cristal, mismos movimientos</p>
           <!-- El rótulo lo escribe entero home.js. Con un <b> dentro, el
                `display:inline-flex` del enlace se comía los espacios de los
                nodos de texto y salía «VERLUNAR→». -->
