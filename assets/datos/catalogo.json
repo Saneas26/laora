@@ -168,6 +168,39 @@
           "Fondo": "Atornillado, acero macizo",
           "Corona": "Roscada"
         }
+      },
+      "historiaOriginal": {
+        "_": "La historia del reloj ORIGINAL en el que se inspira el homenaje, contada como una pieza de periódico. Se nombra la marca y el modelo con todas sus letras, por decisión de Óscar (03/08/2026). Por eso este bloque lleva SIEMPRE su propio aviso legal: aquí es donde hace falta, no solo en el pie.",
+        "original": "Omega Speedmaster Professional",
+        "antetitulo": "La historia del original",
+        "titular": "El cronógrafo que llegó a la Luna<br><em>en la muñeca de un ingeniero.</em>",
+        "entradilla": "El Omega Speedmaster no nació para el espacio: nació para los circuitos. Que acabara en el mar de la Tranquilidad fue cosa de una prueba de resistencia y de un despacho de la NASA.",
+        "cuerpo": [
+          "Cuando Omega lo presentó en 1957, el Speedmaster era un cronógrafo de automovilismo. Su novedad no era la esfera sino el bisel: fue de los primeros en sacar de la esfera la escala taquimétrica y grabarla fuera, dejando la lectura limpia. Nadie hablaba entonces de cohetes.",
+          "En 1965 la NASA compró varios cronógrafos en una relojería de Houston, sin decir para qué, y los sometió a una tanda de ensayos brutales: calor, frío, vacío, vibración, choques y aceleración. Solo uno salió andando. A partir de ahí quedó homologado para todas las misiones tripuladas.",
+          "El 20 de julio de 1969 Neil Armstrong dejó el suyo dentro del módulo lunar, porque el temporizador electrónico de a bordo había fallado y alguien tenía que quedarse con la hora. Así que el primer reloj que pisó la Luna fue el de Buzz Aldrin.",
+          "Su momento verdaderamente serio llegó un año después. En el accidente del Apolo 13, con la nave a oscuras y sin ordenador de a bordo, la tripulación cronometró a mano un encendido de motor de catorce segundos que corrigió la trayectoria de vuelta a la Tierra. La NASA le dio a Omega el Silver Snoopy Award."
+        ],
+        "datos": [
+          [
+            "1957",
+            "Sale al mercado como cronógrafo de automovilismo, con la escala taquimétrica en el bisel."
+          ],
+          [
+            "1965",
+            "Supera los ensayos de la NASA y queda homologado para vuelo tripulado."
+          ],
+          [
+            "1969",
+            "Llega a la superficie lunar en la muñeca de Buzz Aldrin, en el Apolo 11."
+          ],
+          [
+            "1970",
+            "Cronometra a mano el encendido de catorce segundos que salvó al Apolo 13."
+          ]
+        ],
+        "cierre": "El nuestro no es aquel reloj, ni lo pretende. Toma su arquitectura —tres contadores, bisel taquimétrico, lectura instrumental— y la firma con nuestro nombre.",
+        "aviso": "Omega y Speedmaster son marcas registradas de sus titulares. laOra no está afiliada a Omega SA ni a la NASA: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Lunar ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno."
       }
     },
     {
