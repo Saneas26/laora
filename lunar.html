@@ -22,7 +22,7 @@
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=22">
+<link rel="stylesheet" href="/assets/css/laora.css?v=25">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
@@ -52,6 +52,40 @@
           <button type="button" data-mini="/assets/img/relojes-2026/lunar-front.webp" aria-label="Ver imagen 2 de Lunar"><img src="/assets/img/relojes-2026/lunar-front.webp" alt=""></button>
           <button type="button" data-mini="/assets/img/relojes-2026/lunar-detail.webp" aria-label="Ver imagen 3 de Lunar"><img src="/assets/img/relojes-2026/lunar-detail.webp" alt=""></button>
       </div>
+
+      <section class="curiosidades" aria-labelledby="rot-lunar">
+        <p class="cur-rotulo" id="rot-lunar">2 curiosidades</p>
+        <div class="cur-botones">
+          <button type="button" data-abre="cur-lunar-hesalita">
+            <span class="cur-num">01</span>
+            <span class="cur-titulo">El cristal era de plástico, y a propósito</span>
+            <span class="cur-gancho">Por qué la NASA prefirió un cristal que se raya</span>
+            <span class="cur-mas" aria-hidden="true">Leer</span>
+          </button>
+          <button type="button" data-abre="cur-lunar-taquimetro">
+            <span class="cur-num">02</span>
+            <span class="cur-titulo">El bisel no es un adorno: es una regla de cálculo</span>
+            <span class="cur-gancho">Cómo se mide una velocidad sin saber matemáticas</span>
+            <span class="cur-mas" aria-hidden="true">Leer</span>
+          </button>
+        </div>
+      <dialog class="cur-ventana" id="cur-lunar-hesalita" aria-labelledby="t-cur-lunar-hesalita">
+        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
+        <p class="cur-orden">Curiosidad 01 de 2</p>
+        <h2 id="t-cur-lunar-hesalita">El cristal era de plástico, y a propósito</h2>
+        <p>El Speedmaster que voló llevaba hesalita: un acrílico, no zafiro. Suena a recorte, y es justo lo contrario.</p>
+        <p>En una cápsula presurizada, un cristal mineral que se rompe se convierte en esquirlas que flotan y que alguien puede acabar respirando. El acrílico no estalla: se abolla, se agrieta y se queda en su sitio.</p>
+        <p>Que se raye resulta ser un detalle menor, porque las rayas se pulen con un paño y un poco de pasta. Décadas después Omega sigue vendiendo la versión de hesalita junto a la de zafiro, y hay quien insiste en la primera precisamente por esto.</p>
+      </dialog>
+      <dialog class="cur-ventana" id="cur-lunar-taquimetro" aria-labelledby="t-cur-lunar-taquimetro">
+        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
+        <p class="cur-orden">Curiosidad 02 de 2</p>
+        <h2 id="t-cur-lunar-taquimetro">El bisel no es un adorno: es una regla de cálculo</h2>
+        <p>Esos números que bajan de 500 a 60 alrededor de la esfera son una escala taquimétrica, y sirven para algo muy concreto.</p>
+        <p>Pones el cronógrafo en marcha al empezar un kilómetro y lo paras al terminarlo. Donde se quede la aguja grande, ahí está tu velocidad media en kilómetros por hora. Sin dividir nada: la escala ya lleva la división puesta.</p>
+        <p>Por eso empieza en 60 y no llega más abajo: a partir de un minuto por kilómetro la aguja daría la vuelta entera y la lectura dejaría de tener sentido. Nació para cronometrar coches, mucho antes de que a nadie se le ocurriera mandarlo al espacio.</p>
+      </dialog>
+      </section>
 
       <article class="pdp-historia">
         <p class="ph-antetitulo">La historia del original · Omega Speedmaster Professional</p>
@@ -224,7 +258,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=4"></script>
+<script src="/assets/js/ficha.js?v=5"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

@@ -127,4 +127,53 @@
 
     pintar();
   })();
+
+  /* ---------- 3 · las curiosidades ----------
+     Ventana emergente de verdad, con <dialog> y showModal(). El fondo
+     oscurecido, cerrar con Escape, atrapar el foco dentro y devolverlo al
+     boton al salir lo hace el navegador solo: aqui unicamente se abre, se
+     cierra y se anade el clic en el fondo, que eso si no viene de serie.
+
+     `showModal` esta en todos los navegadores desde 2022. En uno mas viejo
+     el boton no haria nada; por eso el texto va escrito en la pagina y no
+     se pierde para quien lo lea con un buscador. */
+  (function curiosidades() {
+    var abridores = document.querySelectorAll('[data-abre]');
+    if (!abridores.length) return;
+
+    function abrir(v) {
+      if (typeof v.showModal === 'function') v.showModal();
+      else v.setAttribute('open', '');       /* reserva para navegadores viejos */
+    }
+
+    for (var i = 0; i < abridores.length; i++) {
+      (function (boton) {
+        boton.addEventListener('click', function () {
+          var v = document.getElementById(boton.dataset.abre);
+          if (v) abrir(v);
+        });
+      })(abridores[i]);
+    }
+
+    var ventanas = document.querySelectorAll('.cur-ventana');
+    for (var j = 0; j < ventanas.length; j++) {
+      (function (v) {
+        var equis = v.querySelector('[data-cierra]');
+        if (equis) equis.addEventListener('click', function () { v.close(); });
+
+        /* clic en el fondo oscurecido. El backdrop no es un elemento al que
+           se le pueda escuchar, asi que se mira si el clic cayo fuera de la
+           caja: si el <dialog> ocupa toda la pantalla, lo de fuera del
+           rectangulo del contenido es el fondo. */
+        v.addEventListener('click', function (e) {
+          if (e.target !== v) return;
+          var c = v.getBoundingClientRect();
+          var dentro = e.clientX >= c.left && e.clientX <= c.right &&
+                       e.clientY >= c.top && e.clientY <= c.bottom;
+          if (!dentro) v.close();
+        });
+      })(ventanas[j]);
+    }
+  })();
+
 })();

@@ -32,7 +32,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 22
+V_CSS = 25
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -732,6 +732,47 @@ for i, r in enumerate(RELOJES):
     siguiente = RELOJES[(i + 1) % len(RELOJES)]
     anterior = RELOJES[(i - 1) % len(RELOJES)]
 
+    # ---- LAS CURIOSIDADES ----
+    # Van entre la foto y la noticia. Cada una abre una VENTANA EMERGENTE de
+    # verdad, con <dialog>: fondo oscurecido, Escape la cierra, el foco se
+    # queda dentro y no se puede tabular por detras. Todo eso lo da el
+    # navegador; no hay libreria ni truco de posicionamiento.
+    #
+    # El texto va escrito en la pagina aunque el dialogo este cerrado, asi
+    # que Google lo lee. Si el JavaScript no llegara a cargar, los botones
+    # no abririan: es el unico punto de la ficha que depende de el.
+    cur = r.get('curiosidades')
+    if cur:
+        def boton(n, c):
+            ide = 'cur-' + r['slug'] + '-' + c['id']
+            return ('          <button type="button" data-abre="' + ide + '">\n'
+                    '            <span class="cur-num">' + str(n + 1).zfill(2) + '</span>\n'
+                    '            <span class="cur-titulo">' + c['titulo'] + '</span>\n'
+                    '            <span class="cur-gancho">' + c['gancho'] + '</span>\n'
+                    '            <span class="cur-mas" aria-hidden="true">Leer</span>\n'
+                    '          </button>')
+
+        def ventana(n, c):
+            ide = 'cur-' + r['slug'] + '-' + c['id']
+            parrafos = '\n'.join('        <p>' + t + '</p>' for t in c['cuerpo'])
+            return ('      <dialog class="cur-ventana" id="' + ide + '" aria-labelledby="t-' + ide + '">\n'
+                    '        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>\n'
+                    '        <p class="cur-orden">Curiosidad ' + str(n + 1).zfill(2) + ' de ' + str(len(cur)) + '</p>\n'
+                    '        <h2 id="t-' + ide + '">' + c['titulo'] + '</h2>\n'
+                    + parrafos + '\n'
+                    '      </dialog>')
+
+        curiosidades = ('\n      <section class="curiosidades" aria-labelledby="rot-' + r['slug'] + '">\n'
+                        '        <p class="cur-rotulo" id="rot-' + r['slug'] + '">'
+                        + str(len(cur)) + ' curiosidades</p>\n'
+                        '        <div class="cur-botones">\n'
+                        + '\n'.join(boton(n, c) for n, c in enumerate(cur)) + '\n'
+                        '        </div>\n'
+                        + '\n'.join(ventana(n, c) for n, c in enumerate(cur)) + '\n'
+                        '      </section>')
+    else:
+        curiosidades = ''
+
     # ---- LA HISTORIA DEL ORIGINAL ----
     # Va DEBAJO DE LA FOTO, en la columna izquierda, que es donde sobraba
     # espacio en blanco desde que el configurador estiró la columna derecha.
@@ -889,6 +930,7 @@ for i, r in enumerate(RELOJES):
       <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
 {minis}
       </div>
+{curiosidades}
 {historia}
     </div>
     <div class="pdp-buy">
@@ -940,7 +982,7 @@ for i, r in enumerate(RELOJES):
                 '/coleccion.html', 'Volver a la colección') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=4"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=5"></script>'))
 
 
 print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')
