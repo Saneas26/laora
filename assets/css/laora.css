@@ -485,8 +485,33 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    desde el principio, así que no debe cambiar de sitio ni de fondo. */
 .cb.cb-claro.cb-pegada{position:sticky;padding:0 3.5vw}
 
-/* «club laOra» del menú: la palabra no se escribe, se dibuja con el
-   logotipo canónico. Va delante `.cb-menu a` para ganarle a
+/* ---------- EL LOGOTIPO NUNCA SE ESCRIBE ----------
+   «laOra» no es una palabra: es el logotipo canónico (.cb-marca), en
+   Nunito Sans, todo en minúsculas salvo la O, que es el isotipo — el
+   círculo con el triángulo invertido apuntando a las 12.
+
+   Puede cambiar de COLOR según el fondo, pero nunca de fuente, nunca de
+   caja y nunca de forma. Por eso lleva `text-transform:none` allí donde
+   vive dentro de un texto en versales: el menú y el cuadro de la
+   respuesta laOra lo habrían convertido en «LAORA», que no es la marca. */
+.cb-marca { text-transform: none !important; }
+
+/* El logotipo se dibuja: la O es un span vacío y un lector de pantalla
+   leería «lara». Al lado va la palabra escrita, invisible pero audible. */
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+/* El logotipo dentro de un rótulo en versales. Va un punto por encima del
+   cuerpo del rótulo (11 px) porque el dibujo de la O necesita sitio: a 11
+   el círculo se convierte en un borrón. Hereda el color del rótulo, así
+   que funciona igual sobre claro que sobre oscuro. */
+.kicker .cb-marca, .section-number .cb-marca, .laora-value-price .cb-marca {
+  font-size: 14px; color: inherit; letter-spacing: -.01em; }
+.kicker .cb-marca .o::before, .section-number .cb-marca .o::before,
+.laora-value-price .cb-marca .o::before { border-top-color: currentColor; }
+.laora-value-price .cb-marca { font-size: 15px; }
+
+/* «club laOra» del menú. Va delante `.cb-menu a` para ganarle a
    cabecera.css, que se carga después. */
 .cb-menu a.cb-club { color: var(--gold); display: inline-flex; align-items: baseline; gap: .36em; }
 .cb-menu a.cb-club:hover { color: #d1a355; }
