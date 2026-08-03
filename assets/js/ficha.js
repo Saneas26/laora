@@ -67,13 +67,19 @@
        `refSufijo` es para cuando dos acabados comparten inicial y la hoja
        los separa por el calibre: el Cero Cero tiene dos Cenit y en la hoja
        son LO-02_CeroCero_C01-ST2130 y LO-02_CeroCero_C01-NH38. Sin esto,
-       los dos darían la misma referencia y llevarían al cajón equivocado. */
+       los dos darían la misma referencia y llevarían al cajón equivocado.
+
+       `refNum` fuerza el número cuando la hoja no lo saca de la correa.
+       En el Precisa no hay correa que elegir y aun así los dos Cenit son
+       C01-ST2130 y C02-NH35: el número lo puso Óscar a mano en la hoja,
+       así que aquí se copia, no se calcula. */
     function referencia() {
       var j = Math.max(0, correas.indexOf(correa));
       var letra = acabado.nombre.charAt(0).toUpperCase();
       var codigo = d.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
+      var num = acabado.refNum || ('0' + (j + 1)).slice(-2);
       return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra +
-             ('0' + (j + 1)).slice(-2) + (acabado.refSufijo || '');
+             num + (acabado.refSufijo || '');
     }
 
     function euros(v) {

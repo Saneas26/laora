@@ -30,10 +30,13 @@ import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
-# esto el navegador se queda hasta cuatro horas con la hoja antigua.
+# SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
+# max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
+# versión antigua. Vale igual para el CSS que para el JS.
 V_CSS = 25
 V_CAB = 13
+V_JS_HOME = 8
+V_JS_FICHA = 7
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -417,7 +420,7 @@ escribir('index.html', cabeza(
                 '/club.html', f'<span class="etiqueta">Conocer Club {MARCA}</span>') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/home.js?v=8"></script>'))
+""" + PIE + scripts(f'\n<script src="/assets/js/home.js?v={V_JS_HOME}"></script>'))
 
 
 # ============================================================
@@ -986,7 +989,7 @@ for i, r in enumerate(RELOJES):
                 '/coleccion.html', 'Volver a la colección') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=6"></script>'))
+""" + PIE + scripts(f'\n<script src="/assets/js/ficha.js?v={V_JS_FICHA}"></script>'))
 
 
 print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')

@@ -638,10 +638,10 @@
       "frase": "La forma exacta del tiempo.",
       "descripcion": "Acero, geometría y azul profundo en una silueta reconocible al instante.",
       "historia": "Precisa parte de uno de los códigos más influyentes de la relojería deportiva: caja y brazalete como una sola línea. Lo presentamos abiertamente como homenaje y lo firmamos solo con laOra.",
-      "precio": null,
+      "precio": 169.9,
       "movimiento": null,
       "diametro": "40 mm",
-      "hermeticidad": null,
+      "hermeticidad": "50 m (5 ATM)",
       "foto": "/assets/img/relojes-2026/precisa-front.webp",
       "galeria": [
         "/assets/img/relojes-2026/precisa-front.webp",
@@ -651,20 +651,155 @@
       "fichaTecnica": [
         [
           "Caja",
-          "Acero 316L cepillado y pulido"
-        ],
-        [
-          "Esfera",
-          "Azul con textura cuadriculada"
+          "Acero inoxidable 316L"
         ],
         [
           "Brazalete",
-          "Acero integrado"
+          "Integrado, de acero 316L"
         ],
         [
-          "Calendario",
-          "Fecha a las 3"
+          "Esfera",
+          "Textura clou de Paris"
+        ],
+        [
+          "Cristal",
+          "Zafiro"
         ]
+      ],
+      "configurador": {
+        "_": "Catálogo final de la hoja de materiales (03/08/2026). Sin grupo de correa: el brazalete es INTEGRADO, va soldado a la caja y no se puede cambiar. Dos Cenit, separados por calibre igual que en el Cero Cero.",
+        "acabados": [
+          {
+            "id": "alba",
+            "nombre": "Alba",
+            "descriptor": "Movimiento suizo Ronda 515",
+            "resumen": "Cuarzo suizo con fecha. El escalón de entrada, con la misma caja y el mismo zafiro que los demás.",
+            "movimiento": "Ronda 515, cuarzo suizo",
+            "movimientoTipo": "Cuarzo con fecha",
+            "frecuencia": "32.768 Hz",
+            "autonomia": "Pila de varios años",
+            "peso": "unos 130 g con brazalete"
+          },
+          {
+            "id": "levante",
+            "nombre": "Levante",
+            "descriptor": "Automático Miyota 8215",
+            "resumen": "El primer automático de la gama: se le da cuerda solo con el movimiento de la muñeca.",
+            "movimiento": "Miyota 8215, automático",
+            "movimientoTipo": "Automático con fecha",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 40 horas de reserva de marcha",
+            "peso": "unos 135 g con brazalete"
+          },
+          {
+            "id": "cenit-st2130",
+            "nombre": "Cenit",
+            "refSufijo": "-ST2130",
+            "descriptor": "Automático ST2130, arquitectura ETA 2824",
+            "resumen": "Automático de alta frecuencia con la arquitectura del calibre más extendido de la relojería suiza.",
+            "movimiento": "Seagull ST2130, automático",
+            "movimientoTipo": "Automático con fecha, arquitectura ETA 2824",
+            "frecuencia": "28.800 alternancias/hora (4 Hz)",
+            "autonomia": "Unas 38 horas de reserva de marcha",
+            "peso": "unos 135 g con brazalete"
+          },
+          {
+            "id": "cenit-nh35",
+            "nombre": "Cenit",
+            "refSufijo": "-NH35",
+            "descriptor": "Automático Seiko NH35A",
+            "resumen": "El automático japonés de referencia: para el segundero al ponerlo en hora y admite cuerda a mano.",
+            "movimiento": "Seiko NH35A, automático",
+            "movimientoTipo": "Automático con fecha",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 41 horas de reserva de marcha",
+            "peso": "unos 135 g con brazalete",
+            "refNum": "02"
+          }
+        ],
+        "correas": [],
+        "precios": {
+          "alba": [
+            169.9
+          ],
+          "levante": [
+            219.9
+          ],
+          "cenit-st2130": [
+            219.9
+          ],
+          "cenit-nh35": [
+            239.9
+          ]
+        },
+        "comunes": {
+          "Diámetro": "40 mm",
+          "Grosor": "unos 11 mm",
+          "Estanqueidad": "50 m (5 ATM)",
+          "Cristal": "Zafiro plano",
+          "Caja": "Acero inoxidable 316L, pulido y satinado",
+          "Bisel": "Fijo estriado, integrado en la caja",
+          "Esfera": "Textura clou de Paris, índices aplicados y fecha a las 3",
+          "Luminiscencia": "En agujas e índices",
+          "Brazalete": "Acero 316L integrado, broche plegable con seguridad",
+          "Fondo": "Macizo de acero",
+          "Corona": "Roscada"
+        }
+      },
+      "historiaOriginal": {
+        "_": "Historia del original. Nombra marca y modelo con todas sus letras y lleva su propio aviso legal.",
+        "original": "Tissot PRX",
+        "antetitulo": "La historia del original",
+        "titular": "El reloj que se salvó dos veces<br><em>del cajón del olvido.</em>",
+        "entradilla": "El Tissot PRX nació en 1978, en el peor momento posible para un reloj suizo, y volvió cuarenta y tres años después convertido en un éxito que nadie esperaba.",
+        "cuerpo": [
+          "Su nombre no es un capricho de marketing: Tissot lo explica como «preciso y robusto», y la X es el diez romano, por las diez atmósferas de estanqueidad. Un reloj bautizado por su ficha técnica.",
+          "Llegó tarde a una fiesta que ya se acababa. La caja fina de acero con el brazalete integrado —sin asas, la pulsera es la caja— la habían puesto de moda unos años antes los deportivos de lujo de los setenta. Cuando el PRX salió, en 1978, la relojería suiza se desangraba frente al cuarzo japonés.",
+          "Así que desapareció, y estuvo décadas siendo un reloj de segunda mano al que nadie hacía mucho caso.",
+          "En 2021 Tissot lo rescató casi calcado del original, y pasó algo que en la industria no estaba previsto: se agotó. Resultó que había un público entero esperando ese perfil delgado y esa textura de esfera a un precio que no exigiera hipotecarse."
+        ],
+        "datos": [
+          [
+            "1978",
+            "Sale el PRX original, en plena crisis del cuarzo. Casi nadie se fija en él."
+          ],
+          [
+            "1980s",
+            "Desaparece del catálogo y queda como una rareza de segunda mano."
+          ],
+          [
+            "2021",
+            "Tissot lo reedita casi idéntico y se agota."
+          ],
+          [
+            "Hoy",
+            "El brazalete integrado y la esfera de relieve son otra vez un lenguaje propio."
+          ]
+        ],
+        "cierre": "El nuestro no es aquel reloj. Toma su idea —caja fina, brazalete que nace de ella y una esfera con textura— y la firma con nuestro nombre.",
+        "aviso": "Tissot y PRX son marcas registradas de sus titulares. laOra no está afiliada a Tissot SA: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Precisa ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno."
+      },
+      "curiosidades": [
+        {
+          "id": "integrado",
+          "titulo": "No le puedes cambiar la correa, y ese es el punto",
+          "gancho": "Por qué un brazalete integrado no tiene asas",
+          "cuerpo": [
+            "En un reloj normal la caja termina en dos asas y entre ellas va una barra: de ahí cuelga la correa, y por eso puedes cambiarla en un minuto.",
+            "En un integrado no hay asas. El primer eslabón está cortado para encajar en la curva exacta de esa caja y de ninguna otra, así que la pulsera y el reloj son una sola pieza continua. Esa línea sin interrupción es todo el diseño.",
+            "El precio que se paga es no poder ponerle una correa de piel un domingo. Por eso nuestro Precisa se ofrece con un solo brazalete y sin opciones: no es que hayamos recortado la carta, es que este reloj no admite otra cosa."
+          ]
+        },
+        {
+          "id": "clou",
+          "titulo": "La esfera se llama «clavo de París»",
+          "gancho": "Un relieve que viene del empedrado, no de la relojería",
+          "cuerpo": [
+            "Ese relieve de cuadraditos en relieve tiene nombre propio: clou de Paris, «clavo de París». Son pirámides diminutas talladas en fila, un motivo de guilloché con siglos de historia.",
+            "El nombre viene de los clavos de cabeza piramidal que se usaban en el empedrado y en las puertas de París. La relojería lo tomó prestado de la ebanistería y de la orfebrería, no al revés.",
+            "Su gracia es que no es un dibujo impreso: al ser relieve de verdad, cada pirámide devuelve la luz en un ángulo distinto. Por eso una esfera así cambia de color según cómo muevas la muñeca, y en una foto nunca se ve igual que en la mano."
+          ]
+        }
       ]
     },
     {
