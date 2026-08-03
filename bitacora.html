@@ -3,762 +3,138 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra LO-02 Bitácora. Un icono reinterpretado. Construido para toda la vida. Desde 259 €.">
-<meta property="og:title" content="LO-02 Bitácora — laOra®">
-<meta property="og:description" content="Un icono reinterpretado. Construido para toda la vida. Desde 259 €.">
+<meta name="description" content="Geometría de acero, perfil contenido y una esfera que cambia con la luz.">
+<meta property="og:title" content="Bitácora LO—02 — laOra®">
+<meta property="og:description" content="Geometría de acero, perfil contenido y una esfera que cambia con la luz.">
 <meta property="og:url" content="https://laora.es/bitacora.html">
-<meta property="og:image" content="https://laora.es/assets/img/bitacora/landing/hero.jpg">
-<title>LO-02 Bitácora — laOra®</title>
+<meta property="og:image" content="https://laora.es/assets/img/relojes-2026/bitacora.webp">
+<title>Bitácora LO—02 — laOra®</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/laora.css?v=16">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=11">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "laOra LO-02 Bitácora",
-  "image": "https://laora.es/assets/img/bitacora/landing/hero.jpg",
-  "description": "Un icono reinterpretado. Construido para toda la vida.",
-  "brand": {"@type": "Brand", "name": "laOra"},
-  "offers": {"@type": "AggregateOffer", "lowPrice": "259", "highPrice": "459", "priceCurrency": "EUR"}
-}
-</script>
-<style>
-/* ============================================================
-   LO-02 BITÁCORA — landing de producto sobre fondo claro.
-   Réplica fiel del diseño aprobado (Imagen generada 1 (7)),
-   clonando la plantilla de bauhaus.html. Prefijo `bh-`.
-   Diferencias con el Bauhaus: hero en arena, tira de 4 iconos
-   bajo el hero, sección «Icono del pasado», tres acabados y
-   configurador sin correas (brazalete integrado).
-   ============================================================ */
-:root{
-  --bh-blanco:#F7F7F5;
-  --bh-arena:#EFE7DA;
-  --bh-negro:#090909;
-  --bh-gris:#B8B8B8;
-  --bh-oro:#D4A94B;
-  --bh-linea:#2C2C2C;
-  --bh-tinta-2:rgba(9,9,9,.62);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body.bh{background:var(--bh-blanco);color:var(--bh-negro);
-  font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.bh img{display:block;max-width:100%}
-.bh a{color:inherit;text-decoration:none}
-
-.bh .cb.cb-claro .cb-menu{color:rgba(9,9,9,.6)}
-.bh .cb.cb-claro .cb-menu a:hover,
-.bh .cb.cb-claro .cb-menu a.activo{color:var(--bh-oro)}
-
-/* ---------- tipos del sistema ---------- */
-.bh-boton{display:inline-flex;align-items:center;justify-content:center;
-  font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
-  padding:16px 34px;border:0;transition:opacity .25s}
-.bh-boton:hover{opacity:.88}
-.bh .bh-boton-negro{background:var(--bh-negro);color:#fff}
-.bh .bh-boton-oro{background:var(--bh-oro);color:var(--bh-negro)}
-
-/* ---------- animaciones discretas ---------- */
-.bh-reveal{opacity:0;transform:translateY(22px);
-  transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
-.bh-reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  .bh-reveal{opacity:1;transform:none;transition:none}
-  html{scroll-behavior:auto}
-}
-
-/* ============================================================
-   1 · HERO — sobre arena, como el diseño
-   ============================================================ */
-/* El fondo es EXACTAMENTE el de la foto del reloj (#E8DFD6, muestreado
-   de su borde izquierdo): un solo color en todo el acto, sin costura. */
-.bh-hero{position:relative;min-height:100svh;display:grid;
-  grid-template-columns:minmax(340px,44%) 1fr;align-items:center;
-  background:#E8DFD6;overflow:hidden}
-.bh-hero-texto{padding:120px 4vw 80px clamp(24px,6vw,96px);position:relative;z-index:2}
-.bh-hero-eyebrow{font-family:'Inter',sans-serif;font-size:20px;font-weight:600;
-  letter-spacing:.14em;color:var(--bh-oro)}
-.bh-hero-titular{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(58px,7vw,84px);line-height:1.02;letter-spacing:-.01em;
-  color:var(--bh-negro);margin:10px 0 26px}
-.bh-hero-titular .punto{color:var(--bh-oro)}
-.bh-hero-sub{font-family:'Inter',sans-serif;font-size:24px;font-weight:500;
-  line-height:1.45;color:var(--bh-negro);max-width:430px}
-.bh-hero-raya{display:block;width:56px;height:2px;background:var(--bh-oro);margin:30px 0 34px}
-.bh-hero-nota{font-size:16px;color:var(--bh-tinta-2);margin-top:14px}
-.bh-hero-foto{align-self:stretch;position:relative}
-/* Aunque el color de fondo ya está muestreado de la propia foto, el
-   JPEG (compresión + perfil de color) nunca calza al 100% con un
-   color plano de CSS. Un desvanecido muy corto en el borde absorbe
-   esa diferencia mínima sin que se note ninguna costura. */
-.bh-hero-foto::before{content:"";position:absolute;inset:0;z-index:1;
-  pointer-events:none;background:linear-gradient(90deg,#E8DFD6 0%,rgba(232,223,214,0) 6%)}
-/* object-position desplazado a la derecha (no centro): con el recorte
-   centrado, la corona (a la derecha del origen 1402×1122) quedaba fuera
-   del encuadre. Así se ve el reloj entero, más a la izquierda del marco. */
-.bh-hero-foto img{width:100%;height:100%;object-fit:cover;object-position:75% center}
-
-/* ============================================================
-   2 · TIRA DE 4 ICONOS
-   ============================================================ */
-.bh-pilares{background:var(--bh-blanco);padding:clamp(40px,5vw,64px) 5vw;
-  border-bottom:1px solid rgba(9,9,9,.08)}
-.bh-pilares-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
-  max-width:1180px;margin:0 auto}
-.bh-pilar{display:flex;flex-direction:column;align-items:center;gap:14px;
-  text-align:center;padding:0 10px;border-right:1px solid rgba(9,9,9,.1)}
-.bh-pilar:last-child{border-right:0}
-.bh-pilar svg{width:44px;height:44px;stroke:var(--bh-negro);fill:none;stroke-width:1.4}
-.bh-pilar b{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  line-height:1.5}
-.bh-pilar span{display:block;font-weight:400;color:var(--bh-tinta-2)}
-
-/* ============================================================
-   3 · ICONO DEL PASADO — macro + texto
-   ============================================================ */
-.bh-icono-seccion{display:grid;grid-template-columns:1fr minmax(340px,44%);
-  background:var(--bh-blanco);align-items:center}
-.bh-icono-foto img{width:100%;height:100%;object-fit:cover}
-.bh-icono-texto{padding:clamp(48px,7vw,110px) clamp(28px,4.5vw,72px)}
-.bh-icono-texto h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(32px,3.6vw,44px);line-height:1.18;margin-bottom:26px}
-.bh-icono-texto h2 .punto{color:var(--bh-oro)}
-.bh-icono-texto p{font-size:20px;color:var(--bh-tinta-2);max-width:460px;margin-bottom:16px}
-.bh-icono-texto p.fuerte{color:var(--bh-negro);font-weight:600}
-
-/* Las dos curiosidades: botones fantasma con borde oro y un panel
-   que se despliega debajo, uno cada vez. */
-.bh-curiosidades{margin-top:30px;max-width:460px}
-.bh-curio-botones{display:flex;gap:14px;flex-wrap:wrap}
-.bh-curio-boton{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
-  padding:12px 24px;background:transparent;color:var(--bh-negro);
-  border:1px solid var(--bh-oro);transition:background .25s}
-.bh-curio-boton:hover{background:rgba(212,169,75,.08)}
-.bh-curio-boton[aria-expanded="true"]{background:rgba(212,169,75,.16)}
-.bh-curio-panel{margin-top:20px;padding-left:18px;border-left:2px solid var(--bh-oro)}
-.bh-curio-panel p{font-size:17px;line-height:1.65;margin:0}
-.bh-curio-panel p b{color:var(--bh-negro)}
-@media(prefers-reduced-motion:no-preference){
-  .bh-curio-panel{animation:bh-curio-entra .45s cubic-bezier(.22,.61,.36,1)}
-  @keyframes bh-curio-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-}
-
-/* ============================================================
-   4 · MOVIMIENTO · LO QUE SÍ PAGAS · PACKAGING
-   ============================================================ */
-.bh-pagas{display:grid;grid-template-columns:1fr minmax(320px,34%) 1fr;background:var(--bh-blanco)}
-.bh-pagas-foto{min-height:420px}
-.bh-pagas-foto img{width:100%;height:100%;object-fit:cover}
-.bh-pagas-lista{padding:clamp(44px,5vw,72px) clamp(26px,3vw,48px);
-  display:flex;flex-direction:column;justify-content:center}
-.bh-pagas-lista h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(30px,3vw,40px);letter-spacing:.04em;margin-bottom:26px}
-.bh-pagas-lista ul{list-style:none}
-.bh-pagas-lista li{display:flex;align-items:flex-start;gap:12px;
-  font-size:17px;color:var(--bh-negro);padding:9px 0}
-.bh-pagas-lista li svg{width:20px;height:20px;flex:none;margin-top:3px;
-  stroke:var(--bh-oro);fill:none;stroke-width:2}
-
-/* ============================================================
-   4.5 · LO QUE TE ENCUENTRAS — infografía honesta de alternativas
-   ============================================================ */
-.bh-encuentras{background:var(--bh-blanco);padding:clamp(56px,7vw,96px) 5vw;
-  border-top:1px solid rgba(9,9,9,.08);text-align:center}
-.bh-encuentras h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(30px,3vw,40px);letter-spacing:.04em;margin-bottom:10px}
-.bh-encuentras-sub{font-size:18px;color:var(--bh-tinta-2);margin-bottom:52px}
-.bh-encuentras-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;
-  max-width:1280px;margin:0 auto}
-.bh-encuentras-item{padding:8px 22px;border-right:1px solid rgba(9,9,9,.12);
-  transition:transform .3s cubic-bezier(.22,.61,.36,1)}
-.bh-encuentras-item:last-child{border-right:0}
-.bh-encuentras-item:hover{transform:translateY(-6px)}
-.bh-encuentras-item svg{display:block;width:40px;height:40px;margin:0 auto 18px;
-  stroke:var(--bh-oro);fill:none;stroke-width:1.3}
-.bh-encuentras-item b{display:block;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;
-  letter-spacing:.05em;text-transform:uppercase;color:var(--bh-negro);margin-bottom:12px;line-height:1.3}
-.bh-encuentras-item span{display:block;font-size:14px;line-height:1.55;color:var(--bh-tinta-2)}
-.bh-encuentras-precio{background:var(--bh-arena);padding-top:22px;padding-bottom:14px;
-  margin:-14px 0;border-radius:2px}
-.bh-encuentras-precio .bh-encuentras-cifra{display:block;font-family:'Fraunces',Georgia,serif;
-  font-weight:400;font-size:clamp(38px,3.4vw,50px);color:var(--bh-oro);line-height:1;margin-bottom:12px}
-.bh-encuentras-precio b{color:var(--bh-tinta-2);letter-spacing:.04em}
-.bh-encuentras-reaccion{display:block;margin-top:10px;font-family:'Inter',sans-serif;
-  font-weight:600;font-size:14px;color:var(--bh-negro);text-transform:none;letter-spacing:0}
-
-/* ============================================================
-   5 · LAS CUATRO VERSIONES
-   ============================================================ */
-.bh-versiones{background:var(--bh-blanco);padding:clamp(64px,8vw,110px) 5vw;text-align:center}
-.bh-versiones-cab h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(32px,3.6vw,44px);letter-spacing:.18em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:26px}
-.bh-versiones-cab h2::before,.bh-versiones-cab h2::after{content:"";
-  width:64px;height:1px;background:var(--bh-oro)}
-.bh-versiones-sub{font-size:20px;color:var(--bh-tinta-2);margin:14px 0 54px}
-
-/* Una sola foto para las tres, fija a la izquierda: el mismo diseño
-   en los tres acabados, solo cambia el movimiento. A la derecha, la
-   lista de acabados con sus especificaciones concretas. */
-.bh-versiones-cuerpo{display:grid;grid-template-columns:minmax(240px,360px) 1fr;
-  gap:clamp(40px,6vw,90px);max-width:1180px;margin:0 auto;text-align:left;align-items:start}
-.bh-versiones-foto{width:100%;position:sticky;top:110px;margin:0}
-
-.bh-versiones-lista{display:flex;flex-direction:column}
-.bh-version{padding:38px 0}
-.bh-version:first-child{padding-top:0}
-.bh-version + .bh-version{border-top:1px solid rgba(9,9,9,.14)}
-.bh-version-nombre{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--bh-oro)}
-.bh-version-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:19px;color:var(--bh-tinta-2);margin-top:8px}
-.bh-version-desc{font-size:18px;color:var(--bh-tinta-2);max-width:420px;margin:18px 0}
-.bh-version-desc b{color:var(--bh-negro);font-weight:600}
-.bh-version-specs{list-style:none;text-align:left;max-width:460px;margin:0;
-  display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
-.bh-version-specs li{padding:12px 0;border-top:1px solid rgba(9,9,9,.14)}
-.bh-version-specs b{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--bh-oro);margin-bottom:4px}
-.bh-version-specs span{display:block;font-size:15.5px;color:var(--bh-negro)}
-.bh-version-specs li.bh-spec-full{grid-column:1/-1}
-
-/* Botón "Saber más": explica el movimiento, el acabado o la resistencia
-   al agua de cada versión sin sobrecargar la ficha por defecto. */
-.bh-saber-wrap{border-top:0;padding-top:0;padding-bottom:22px}
-.bh-saber-boton{display:inline-flex;align-items:center;gap:8px;background:none;border:0;
-  padding:0;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;letter-spacing:.06em;
-  color:var(--bh-oro);cursor:pointer;transition:opacity .2s}
-.bh-saber-boton:hover{opacity:.75}
-.bh-saber-flecha{position:relative;display:inline-block;width:16px;height:16px;flex:none;
-  border:1px solid var(--bh-oro);border-radius:50%;transition:transform .25s}
-.bh-saber-flecha::before,.bh-saber-flecha::after{content:"";position:absolute;top:50%;left:50%;
-  background:var(--bh-oro);transform:translate(-50%,-50%)}
-.bh-saber-flecha::before{width:7px;height:1.4px}
-.bh-saber-flecha::after{width:1.4px;height:7px}
-.bh-saber-boton[aria-expanded="true"] .bh-saber-flecha{transform:rotate(45deg)}
-.bh-saber-panel{max-width:520px;font-size:15.5px;color:var(--bh-tinta-2);
-  padding-top:16px;line-height:1.65}
-.bh-saber-panel p{margin-bottom:12px}
-.bh-saber-panel p:last-child{margin-bottom:0}
-.bh-saber-panel b{color:var(--bh-negro)}
-
-/* ============================================================
-   6 · LO QUE LLEVAN TODOS
-   ============================================================ */
-.bh-todos{background:var(--bh-blanco);padding:0 5vw clamp(64px,8vw,100px);text-align:center}
-.bh-todos h2{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(26px,2.6vw,34px);letter-spacing:.16em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:26px;margin-bottom:48px}
-.bh-todos h2::before,.bh-todos h2::after{content:"";width:64px;height:1px;background:var(--bh-oro)}
-.bh-todos-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:22px;
-  max-width:1180px;margin:0 auto}
-.bh-icono{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
-.bh-icono svg{width:44px;height:44px;stroke:var(--bh-oro);fill:none;stroke-width:1.4}
-.bh-icono span{font-size:12px;font-weight:500;letter-spacing:.08em;
-  text-transform:uppercase;line-height:1.4;color:var(--bh-negro)}
-.bh-todos-grid .bh-icono{padding:0 8px;border-right:1px solid rgba(9,9,9,.1)}
-.bh-todos-grid .bh-icono:last-child{border-right:0}
-
-/* ============================================================
-   7 · CONFIGURADOR
-   ============================================================ */
-.bh-config{background:var(--bh-arena);padding:clamp(56px,7vw,96px) 5vw}
-.bh-config-caja{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(380px,2.1fr) minmax(300px,1fr);
-  gap:clamp(24px,3vw,48px);max-width:1320px;margin:0 auto;align-items:center}
-.bh-config-modelo h2{font-family:'Inter',sans-serif;font-size:18px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--bh-negro)}
-.bh-config-precio-grande{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(48px,5vw,64px);line-height:1.1;margin:10px 0 18px}
-.bh-config-notas{list-style:none;font-size:14.5px;color:var(--bh-tinta-2)}
-.bh-config-notas li{display:flex;align-items:center;gap:8px;padding:3px 0}
-.bh-config-notas svg{width:15px;height:15px;stroke:var(--bh-oro);fill:none;stroke-width:2}
-.bh-config-plano img{width:100%;mix-blend-mode:multiply}
-.bh-config-panel{background:var(--bh-blanco);padding:30px 28px;
-  box-shadow:0 18px 44px rgba(9,9,9,.08)}
-.bh-config-panel h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;
-  letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;
-  scroll-margin-top:84px}
-.bh-campo{margin-bottom:14px}
-.bh-campo label{display:block;font-size:12px;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--bh-tinta-2);margin-bottom:5px}
-.bh-campo select{width:100%;appearance:none;-webkit-appearance:none;
-  font-family:'Inter',sans-serif;font-size:16px;color:var(--bh-negro);
-  background:var(--bh-blanco) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23090909' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 14px center;
-  border:1px solid rgba(9,9,9,.28);padding:11px 40px 11px 14px;cursor:pointer}
-.bh-campo select:focus{outline:none;border-color:var(--bh-oro)}
-.bh-config-precio{font-family:'Fraunces',Georgia,serif;font-weight:400;
-  font-size:clamp(40px,3.6vw,56px);color:var(--bh-oro);text-align:center;margin:18px 0 14px}
-.bh-config-panel .bh-boton{width:100%}
-.bh-config-mas{display:block;text-align:center;font-size:15px;color:var(--bh-tinta-2);
-  margin-top:16px;transition:color .2s}
-.bh-config-mas:hover{color:var(--bh-oro)}
-
-/* ============================================================
-   8 · SERVICIOS
-   ============================================================ */
-.bh-servicios{background:var(--bh-blanco);border-top:1px solid rgba(9,9,9,.1);
-  padding:clamp(36px,4.5vw,56px) 5vw}
-.bh-servicios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
-  max-width:1180px;margin:0 auto}
-.bh-servicio{display:flex;align-items:flex-start;gap:14px}
-.bh-servicio svg{width:34px;height:34px;flex:none;stroke:var(--bh-negro);fill:none;stroke-width:1.4}
-.bh-servicio b{display:block;font-size:14px;font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase}
-.bh-servicio span{font-size:14.5px;color:var(--bh-tinta-2)}
-
-.bh footer{background:#0d0d0d;border-top:0}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media(max-width:1100px){
-  .bh-pagas{grid-template-columns:1fr 1fr}
-  .bh-pagas-foto.caja{grid-column:1/-1;max-height:420px;overflow:hidden}
-  .bh-config-caja{grid-template-columns:1fr 1fr}
-  .bh-config-plano{order:3;grid-column:1/-1;max-width:820px;margin:0 auto}
-  .bh-todos-grid{grid-template-columns:repeat(3,1fr);gap:32px}
-  .bh-todos-grid .bh-icono:nth-child(3n){border-right:0}
-  .bh-versiones-cuerpo{grid-template-columns:1fr;max-width:520px;gap:48px}
-  .bh-versiones-foto{position:static;max-width:320px;margin:0 auto}
-  .bh-encuentras-grid{grid-template-columns:repeat(3,1fr);max-width:640px;row-gap:36px}
-  .bh-encuentras-item:nth-child(3n){border-right:0}
-  .bh-encuentras-precio{grid-column:1/-1;margin:0 0 10px;padding:18px}
-}
-@media(max-width:820px){
-  .bh-hero{grid-template-columns:1fr;min-height:0}
-  .bh-hero-texto{order:2;padding:44px 6vw 64px}
-  .bh-hero-foto{order:1;height:58vw;min-height:300px}
-  /* Apilado, la costura sería horizontal (foto arriba, texto abajo):
-     el desvanecido lateral no pinta nada aquí. */
-  .bh-hero-foto::before{display:none}
-  .bh-pilares-grid{grid-template-columns:1fr 1fr;gap:30px}
-  .bh-pilar:nth-child(2n){border-right:0}
-  .bh-icono-seccion{grid-template-columns:1fr}
-  .bh-icono-foto{max-height:64vw;overflow:hidden}
-  .bh-pagas{grid-template-columns:1fr}
-  .bh-config-caja{grid-template-columns:1fr}
-  .bh-servicios-grid{grid-template-columns:1fr 1fr;gap:22px}
-  .bh-versiones-cab h2::before,.bh-versiones-cab h2::after,
-  .bh-todos h2::before,.bh-todos h2::after{width:28px}
-  .bh-encuentras-grid{grid-template-columns:1fr;max-width:420px;row-gap:30px}
-  .bh-encuentras-item{border-right:0;padding:0}
-  .bh-encuentras-precio{grid-column:auto;margin:0 0 4px;padding:20px}
-}
-@media(max-width:560px){
-  .bh-pilares-grid{grid-template-columns:1fr 1fr}
-  .bh-todos-grid{grid-template-columns:repeat(2,1fr)}
-  .bh-todos-grid .bh-icono{border-right:0}
-  .bh-servicios-grid{grid-template-columns:1fr}
-}
-</style>
+<!-- Nunito Sans e Inter solo alimentan el logotipo y el pie del Grupo
+     Saneas. El resto de la web va en Georgia y Arial. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar.py — no editar a mano.
+     Los textos se cambian ahí; los datos de relojes, en
+     assets/datos/catalogo.json. -->
+<link rel="stylesheet" href="/assets/css/laora.css?v=4">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=12">
 </head>
-<body class="bh">
-
+<body>
 <header class="cb cb-claro">
-  <a class="cb-marca" href="/">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu">
-    <a href="/coleccion.html">colección</a>
-    <a href="/filosofia.html">filosofía</a>
-    <span class="cb-pendiente">Club laOra</span>
-    <span class="cb-pendiente">servicio</span>
-    <span class="cb-pendiente">contacto</span>
+  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
+  <nav class="cb-menu" aria-label="Navegación principal">
+    <a href="/coleccion.html" class="activo">relojes</a>
+    <a href="/filosofia.html">nuestra forma de hacer</a>
+    <a href="/taller.html">taller y servicio</a>
+    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
+         un span sin texto, así que un lector de pantalla leería «club lara»:
+         de ahí el aria-label. -->
+    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
   </nav>
-  <a class="cb-bolsa" href="/carrito.html" aria-label="Ver el carrito">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-    <span class="cb-cuenta" data-carrito-cuenta hidden>0</span>
-  </a>
 </header>
 
-<main>
+<main class="sobre-claro" id="inicio">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "laOra Bitácora", "sku": "LO—02", "brand": {"@type": "Brand", "name": "laOra"}, "description": "Geometría de acero, perfil contenido y una esfera que cambia con la luz.", "image": ["https://laora.es/assets/img/relojes-2026/bitacora.webp", "https://laora.es/assets/img/relojes-2026/bitacora-hero-dial.webp", "https://laora.es/assets/img/relojes-2026/bitacora-hero-movement.webp"]}</script>
 
-  <!-- 1 · HERO -->
-  <section class="bh-hero">
-    <div class="bh-hero-texto">
-      <p class="bh-hero-eyebrow">LO-02</p>
-      <h1 class="bh-hero-titular">Bitácora<span class="punto">.</span></h1>
-      <p class="bh-hero-sub">Un icono reinterpretado.<br>Construido para toda la vida.</p>
-      <span class="bh-hero-raya"></span>
-      <a class="bh-boton bh-boton-negro" href="#configurador">Reservar ahora</a>
-      <p class="bh-hero-nota">Unidades limitadas.</p>
+  <section class="f-hero">
+    <div class="f-galeria">
+      <div class="f-galeria-grande">
+        <img src="/assets/img/relojes-2026/bitacora.webp" alt="Bitácora de laOra, vista seleccionada" data-foto-grande fetchpriority="high">
+      </div>
+      <div class="f-miniaturas" role="group" aria-label="Vistas de Bitácora">
+        <button type="button" data-mini="/assets/img/relojes-2026/bitacora.webp" aria-current="true" aria-label="Ver imagen 1 de Bitácora"><img src="/assets/img/relojes-2026/bitacora.webp" alt="" loading="lazy"></button>
+        <button type="button" data-mini="/assets/img/relojes-2026/bitacora-hero-dial.webp" aria-current="false" aria-label="Ver imagen 2 de Bitácora"><img src="/assets/img/relojes-2026/bitacora-hero-dial.webp" alt="" loading="lazy"></button>
+        <button type="button" data-mini="/assets/img/relojes-2026/bitacora-hero-movement.webp" aria-current="false" aria-label="Ver imagen 3 de Bitácora"><img src="/assets/img/relojes-2026/bitacora-hero-movement.webp" alt="" loading="lazy"></button>
+      </div>
     </div>
-    <div class="bh-hero-foto">
-      <img src="/assets/img/bitacora/landing/hero.jpg" alt="laOra LO-02 Bitácora, esfera Tiffany y brazalete integrado de acero" fetchpriority="high">
+    <div class="f-datos">
+      <p class="rotulo apagado">LO—02 · Deportivo integrado</p>
+      <h1>Bitácora</h1>
+      <p class="f-homenaje">Homenaje a la arquitectura deportiva integrada</p>
+      <p class="f-descripcion">Geometría de acero, perfil contenido y una esfera que cambia con la luz.</p>
+      <dl class="f-especificaciones">
+        <div><dt>Familia</dt><dd>Deportivo integrado</dd></div>
+        <div><dt>Diámetro</dt><dd>40 mm</dd></div>
+        <div><dt>Referencia</dt><dd>LO—02</dd></div>
+      </dl>
+      <!-- PENDIENTE DE LA HOJA DE MATERIALES: precio, movimiento y
+           hermeticidad. Mientras estén a null en catalogo.json aquí no se
+           pinta ninguna cifra ni ninguna línea sin dato. -->
+      <div class="fila-botones">
+        <a class="boton boton-oscuro" href="mailto:hola@laora.es?subject=Consulta%20sobre%20el%20Bit%C3%A1cora%20LO%E2%80%9402">Preguntar por el Bitácora <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="f-nota">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
   </section>
 
-  <!-- 2 · LOS CUATRO PILARES -->
-  <section class="bh-pilares">
-    <div class="bh-pilares-grid bh-reveal">
-      <div class="bh-pilar">
-        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="15"/><path d="M22 7c8 4 8 26 0 30M22 7c-8 4-8 26 0 30M8.5 15h27M8.5 29h27"/></svg>
-        <b>Homenaje a un icono.<span>A la altura.</span></b>
-      </div>
-      <div class="bh-pilar">
-        <svg viewBox="0 0 44 44"><path d="M13 8h18l6 10-15 18L7 18z"/><path d="M7 18h30M22 36L16 18l6-10 6 10z"/></svg>
-        <b>Diseño atemporal.<span>Para siempre.</span></b>
-      </div>
-      <div class="bh-pilar">
-        <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/><path d="M15.5 22l4.5 4.5 8.5-9"/></svg>
-        <b>Acero 316L.<span>Sin compromisos.</span></b>
-      </div>
-      <div class="bh-pilar">
-        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="7"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M11 11l3.5 3.5M29.5 29.5L33 33M33 11l-3.5 3.5M14.5 29.5L11 33"/></svg>
-        <b>Movimiento automático.<span>Precisión japonesa.</span></b>
-      </div>
+  <section class="f-historia">
+    <div>
+      <p class="rotulo oro">01 — El homenaje</p>
+      <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
+    </div>
+    <div>
+      <p>Bitácora toma como punto de partida el reloj deportivo integrado de los setenta y lo traduce a una propuesta directa, legible y con marca propia.</p>
+      <p>La esfera lleva únicamente el nombre laOra y el del modelo. No utilizamos marcas, coronas, escudos ni emblemas de terceros.</p>
     </div>
   </section>
 
-  <!-- 3 · ICONO DEL PASADO -->
-  <section class="bh-icono-seccion">
-    <div class="bh-icono-foto">
-      <img src="/assets/img/bitacora/landing/macro.jpg" alt="Macro de la esfera Tiffany del Bitácora con la caja octogonal" loading="lazy">
+  <section class="f-detalle">
+    <div class="f-detalle-foto">
+      <img src="/assets/img/relojes-2026/bitacora-hero-dial.webp" alt="Detalle constructivo de Bitácora" loading="lazy">
     </div>
-    <div class="bh-icono-texto bh-reveal">
-      <h2>Icono del pasado<span class="punto">.</span><br>Hecho para el futuro<span class="punto">.</span></h2>
-      <p>El Bitácora está a la altura de los grandes.</p>
-      <p>Mismo lenguaje de diseño. Mismos valores.</p>
-      <p class="fuerte">Una inversión segura. Para toda la vida.</p>
-      <div class="bh-curiosidades">
-        <div class="bh-curio-botones">
-          <button type="button" class="bh-curio-boton" data-curio="curio-1" aria-expanded="false" aria-controls="curio-1">Curiosidad 1</button>
-          <button type="button" class="bh-curio-boton" data-curio="curio-2" aria-expanded="false" aria-controls="curio-2">Curiosidad 2</button>
-        </div>
-        <div class="bh-curio-panel" id="curio-1" hidden>
-          <p>En diciembre de 2021, Patek Philippe despidió su Nautilus 5711 con una serie
-          final de 170 unidades con la esfera azul Tiffany, celebrando los 170 años de
-          relación con Tiffany&nbsp;&amp;&nbsp;Co. La primera unidad se subastó en Nueva York por
-          <b>6,5 millones de dólares</b>; su precio de catálogo rondaba los 35.000.
-          Sigue siendo el reloj de acero más caro jamás vendido.
-          Esa esfera es la que da nombre a la nuestra.</p>
-        </div>
-        <div class="bh-curio-panel" id="curio-2" hidden>
-          <p>En 1974, durante la feria de Basilea, Gérald Genta dibujó en una servilleta
-          —en apenas cinco minutos— un reloj inspirado en el ojo de buey de un barco:
-          las «orejas» de la caja son las bisagras de la escotilla. Salió al mercado en
-          1976 y escandalizó al sector: un reloj <b>de acero</b> al precio de uno de oro.
-          Su eslogan: «Uno de los relojes más caros del mundo está hecho de acero».
-          La misma mano había dibujado, cuatro años antes, el otro gran icono del
-          lujo deportivo.</p>
-        </div>
-      </div>
+    <div class="f-detalle-copy">
+      <p class="rotulo oro">02 — Lo que recibes</p>
+      <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
+      <ol class="lista-numerada">
+        <li><span>01</span><div><b>Caja</b><p>Acero 316L</p></div></li>
+        <li><span>02</span><div><b>Arquitectura</b><p>Brazalete integrado</p></div></li>
+        <li><span>03</span><div><b>Esfera</b><p>Texturizada</p></div></li>
+        <li><span>04</span><div><b>Control</b><p>Revisión individual en Madrid</p></div></li>
+      </ol>
     </div>
   </section>
 
-  <!-- 4 · MOVIMIENTO · LO QUE SÍ PAGAS · PACKAGING -->
-  <section class="bh-pagas" id="pagas">
-    <div class="bh-pagas-foto">
-      <img src="/assets/img/bitacora/landing/movimiento.jpg" alt="Movimiento automático del Bitácora visto por el fondo de zafiro" loading="lazy">
-    </div>
-    <div class="bh-pagas-lista bh-reveal">
-      <h2>LO QUE SÍ PAGAS.</h2>
-      <ul>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Acero 316L macizo</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Cristal de zafiro con antirreflejos</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Movimiento automático japonés</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Super-LumiNova suiza</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>10 ATM de resistencia al agua</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Montado y ajustado con precisión</li>
-        <li><svg viewBox="0 0 20 20"><path d="M3 10l5 5 9-10"/></svg>Garantía hasta 5 años</li>
-      </ul>
-    </div>
-    <div class="bh-pagas-foto caja">
-      <img src="/assets/img/bitacora/landing/caja.jpg" alt="Caja kraft del laOra Bitácora" loading="lazy">
-    </div>
+  <section class="f-servicio">
+    <p class="rotulo oro-claro">Taller laOra · Madrid</p>
+    <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
+    <ol>
+      <li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li>
+      <li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li>
+    </ol>
+    <a class="enlace claro" href="/taller.html">Conocer el taller <span aria-hidden="true">→</span></a>
   </section>
 
-  <!-- 4.5 · LO QUE TE ENCUENTRAS -->
-  <section class="bh-encuentras">
-    <h2 class="bh-reveal">Lo que te encuentras</h2>
-    <p class="bh-encuentras-sub bh-reveal">Antes de decidirte, esto es lo que hay ahí fuera.</p>
-    <div class="bh-encuentras-grid bh-reveal">
-      <div class="bh-encuentras-item bh-encuentras-precio">
-        <span class="bh-encuentras-cifra">34.900 €</span>
-        <b>Patek Philippe Nautilus real</b>
-        <span class="bh-encuentras-reaccion">No me lo puedo permitir.</span>
-      </div>
-      <div class="bh-encuentras-item">
-        <svg viewBox="0 0 44 44"><rect x="6" y="15" width="16" height="14" rx="7"/><path d="M22 22h6" stroke-dasharray="2 3"/><rect x="24" y="15" width="14" height="14" rx="7" stroke-dasharray="4 3"/></svg>
-        <b>Homenajes</b>
-        <span>Eslabones huecos, acero y pulido mediocre.</span>
-      </div>
-      <div class="bh-encuentras-item">
-        <svg viewBox="0 0 44 44"><rect x="8" y="8" width="18" height="10" rx="1" transform="rotate(-35 17 13)"/><path d="M14 20l14 14M30 14l-6 6"/><path d="M8 36h16"/></svg>
-        <b>Subastas</b>
-        <span>Precio bajo… hasta que llega el envío.</span>
-      </div>
-      <div class="bh-encuentras-item">
-        <svg viewBox="0 0 44 44"><path d="M12 16V11a10 10 0 0 1 20 0v5"/><path d="M8 16h28l-2 22H10z"/><path d="M22 22v8"/><circle cx="22" cy="33" r="1"/></svg>
-        <b>Tiendas indias y chinas</b>
-        <span>Reacondicionados, sin control, sin garantía.</span>
-      </div>
-      <div class="bh-encuentras-item">
-        <svg viewBox="0 0 44 44"><path d="M8 16a14 14 0 0 1 24-8m4 8V8h-8"/><path d="M36 28a14 14 0 0 1-24 8m-4-8v8h8"/></svg>
-        <b>Segunda mano</b>
-        <span>A veces sí, a veces no 🤷🏻‍♂️</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 · LAS CUATRO VERSIONES -->
-  <section class="bh-versiones">
-    <div class="bh-versiones-cab bh-reveal"><h2>Las cuatro versiones</h2></div>
-    <p class="bh-versiones-sub bh-reveal">Mismo diseño. Cuatro formas de vivir el tiempo.</p>
-    <div class="bh-versiones-cuerpo">
-      <img class="bh-versiones-foto bh-reveal" src="/assets/img/bitacora/landing/frontal.jpg" alt="laOra Bitácora, el mismo diseño en los cuatro acabados" loading="lazy">
-      <div class="bh-versiones-lista">
-        <article class="bh-version bh-reveal">
-          <h3 class="bh-version-nombre">Alba</h3>
-          <p class="bh-version-precio">desde 259 €</p>
-          <p class="bh-version-desc"><b>Preciso. Fiable. Esencial.</b><br>Todo lo que necesitas.<br>Para quienes valoran lo importante.</p>
-          <ul class="bh-version-specs">
-            <li class="bh-spec-full"><b>Movimiento</b><span>Cuarzo suizo Ronda 515</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el Ronda 515<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>El Ronda 515 es un cuarzo suizo sencillo y extremadamente fiable: parada de segundero (hacking) para ajustar la hora al segundo exacto, y una precisión de ±20 segundos al mes.</p>
-                <p>Su pila dura unos 45 meses —casi 4 años— de uso normal, sin darle cuerda ni pensar en él.</p>
-              </div>
-            </li>
-            <li><b>Caja</b><span>Acero 316L</span></li>
-            <li><b>Cristal</b><span>Zafiro con antirreflejos</span></li>
-            <li><b>Brazalete</b><span>Acero integrado</span></li>
-            <li class="bh-spec-full"><b>Resistencia al agua</b><span>10 ATM (100 m)</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 10 ATM<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>Con toda sinceridad: 10 ATM (100 m) sí es una resistencia real para nadar y ducharte con él puesto — a diferencia de un reloj vestidor de 3-5 ATM, aquí el agua del día a día no es un problema.</p>
-                <p>Lo que no cubre es el buceo: para eso hace falta una certificación de buceador (ISO 6425) que este reloj no tiene, con corona roscada y pruebas a la profundidad real de uso. No lo lleves a bucear con botellas ni a saltar al agua desde altura.</p>
-                <p>Un cuidado básico: evita el agua muy caliente (sauna, jacuzzi), que dilata las juntas, y no gires la corona con el reloj mojado.</p>
-              </div>
-            </li>
-          </ul>
-        </article>
-        <article class="bh-version bh-reveal">
-          <h3 class="bh-version-nombre">Levante</h3>
-          <p class="bh-version-precio">desde 329 €</p>
-          <p class="bh-version-desc"><b>El corazón mecánico.</b><br>Robusto, fiable y con fondo visto<br>para disfrutar del movimiento.<br>El equilibrio perfecto.</p>
-          <ul class="bh-version-specs">
-            <li class="bh-spec-full"><b>Movimiento</b><span>Automático NH35</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el NH35<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>El NH35 es un automático japonés de 24 rubíes, con cuerda manual y parada de segundero. Late a 21.600 alternancias/hora, con una reserva de marcha de 41 horas y una precisión de -20/+40 segundos al día.</p>
-                <p>Es el estándar de fiabilidad más probado del sector: el mismo calibre que llevan miles de relojes automáticos fiables en todo el mundo.</p>
-              </div>
-            </li>
-            <li><b>Caja</b><span>Acero 316L</span></li>
-            <li><b>Cristal</b><span>Zafiro con antirreflejos</span></li>
-            <li><b>Brazalete</b><span>Acero integrado</span></li>
-            <li class="bh-spec-full"><b>Resistencia al agua</b><span>10 ATM (100 m)</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 10 ATM<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>Con toda sinceridad: 10 ATM (100 m) sí es una resistencia real para nadar y ducharte con él puesto — a diferencia de un reloj vestidor de 3-5 ATM, aquí el agua del día a día no es un problema.</p>
-                <p>Lo que no cubre es el buceo: para eso hace falta una certificación de buceador (ISO 6425) que este reloj no tiene, con corona roscada y pruebas a la profundidad real de uso. No lo lleves a bucear con botellas ni a saltar al agua desde altura.</p>
-                <p>Un cuidado básico: evita el agua muy caliente (sauna, jacuzzi), que dilata las juntas, y no gires la corona con el reloj mojado.</p>
-              </div>
-            </li>
-          </ul>
-        </article>
-        <article class="bh-version bh-reveal">
-          <h3 class="bh-version-nombre">Cenit</h3>
-          <p class="bh-version-precio">desde 459 €</p>
-          <p class="bh-version-desc"><b>El movimiento premium.</b><br>Más fino. Más preciso. Más exclusivo.<br>Para quienes buscan lo mejor.</p>
-          <ul class="bh-version-specs">
-            <li class="bh-spec-full"><b>Movimiento</b><span>Automático fino Miyota 9015</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el Miyota 9015<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>El Miyota 9015 es un automático japonés más fino (solo 3,9&nbsp;mm de grosor) y más rápido: 28.800 alternancias/hora frente a las 21.600 de un automático estándar, lo que se nota en un segundero más suave y fluido.</p>
-                <p>24 rubíes, reserva de marcha de 42 horas, precisión de -10/+30 segundos al día, con cuerda manual y parada de segundero.</p>
-              </div>
-            </li>
-            <li><b>Caja</b><span>Acero 316L</span></li>
-            <li><b>Cristal</b><span>Zafiro con antirreflejos</span></li>
-            <li><b>Brazalete</b><span>Acero integrado</span></li>
-            <li class="bh-spec-full"><b>Resistencia al agua</b><span>10 ATM (100 m)</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 10 ATM<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>Con toda sinceridad: 10 ATM (100 m) sí es una resistencia real para nadar y ducharte con él puesto — a diferencia de un reloj vestidor de 3-5 ATM, aquí el agua del día a día no es un problema.</p>
-                <p>Lo que no cubre es el buceo: para eso hace falta una certificación de buceador (ISO 6425) que este reloj no tiene, con corona roscada y pruebas a la profundidad real de uso. No lo lleves a bucear con botellas ni a saltar al agua desde altura.</p>
-                <p>Un cuidado básico: evita el agua muy caliente (sauna, jacuzzi), que dilata las juntas, y no gires la corona con el reloj mojado.</p>
-              </div>
-            </li>
-          </ul>
-        </article>
-        <article class="bh-version bh-reveal">
-          <h3 class="bh-version-nombre">Eclipse</h3>
-          <p class="bh-version-precio">desde 389,90 €</p>
-          <p class="bh-version-desc"><b>La versión de sigilo.</b><br>PVD negro en caja, brazalete y esfera.<br>Mismo Miyota 9015 fino del Cenit.</p>
-          <ul class="bh-version-specs">
-            <li class="bh-spec-full"><b>Movimiento</b><span>Automático fino Miyota 9015</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el Miyota 9015<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>El Miyota 9015 es un automático japonés más fino (solo 3,9&nbsp;mm de grosor) y más rápido: 28.800 alternancias/hora frente a las 21.600 de un automático estándar, lo que se nota en un segundero más suave y fluido.</p>
-                <p>24 rubíes, reserva de marcha de 42 horas, precisión de -10/+30 segundos al día, con cuerda manual y parada de segundero.</p>
-              </div>
-            </li>
-            <li class="bh-spec-full"><b>Caja</b><span>Acero 316L, PVD negro</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre el acabado PVD<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>Siendo transparentes: no existe, a este precio, un conjunto caja+brazalete integrado con DLC real verificable. Todo lo que se anuncia como "negro" en este rango es PVD (a menudo etiquetado, erróneamente, como "DLC" en los anuncios). El DLC verdadero necesita un proceso PACVD de alta temperatura que multiplica el coste, y no se ofrece a los precios que nos gusta darte.</p>
-                <p>¿Merece la pena ese sobrecoste? Si usáramos DLC real, el precio de tu unidad subiría mucho más de lo que esa dureza extra se va a notar en el día a día. Y quien se gasta este dinero en un reloj suele cuidarlo bien, así que el riesgo real de rayar el PVD es bajo. Sí te recomendamos evitar golpes fuertes y deportes de contacto con él puesto.</p>
-              </div>
-            </li>
-            <li><b>Cristal</b><span>Zafiro con antirreflejos</span></li>
-            <li><b>Brazalete</b><span>Acero integrado, PVD negro</span></li>
-            <li class="bh-spec-full"><b>Resistencia al agua</b><span>10 ATM (100 m)</span></li>
-            <li class="bh-spec-full bh-saber-wrap">
-              <button class="bh-saber-boton" type="button" data-saber-toggle aria-expanded="false">Saber más sobre las 10 ATM<span class="bh-saber-flecha"></span></button>
-              <div class="bh-saber-panel" hidden>
-                <p>Con toda sinceridad: 10 ATM (100 m) sí es una resistencia real para nadar y ducharte con él puesto — a diferencia de un reloj vestidor de 3-5 ATM, aquí el agua del día a día no es un problema.</p>
-                <p>Lo que no cubre es el buceo: para eso hace falta una certificación de buceador (ISO 6425) que este reloj no tiene, con corona roscada y pruebas a la profundidad real de uso. No lo lleves a bucear con botellas ni a saltar al agua desde altura.</p>
-                <p>Un cuidado básico: evita el agua muy caliente (sauna, jacuzzi), que dilata las juntas, y no gires la corona con el reloj mojado.</p>
-              </div>
-            </li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · LO QUE LLEVAN TODOS -->
-  <section class="bh-todos">
-    <h2 class="bh-reveal">Lo que llevan todos, sin excepción</h2>
-    <div class="bh-todos-grid bh-reveal">
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><path d="M8 28h12l3-6H11zM24 28h12l-3-6H23zM14 20h12l3-6H17z"/></svg>
-        <span>Acero 316L</span>
-      </div>
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="14"/><path d="M10 17h24"/></svg>
-        <span>Cristal de zafiro antirreflejos</span>
-      </div>
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="8"/><path d="M22 6v5M22 33v5M6 22h5M33 22h5M10.7 10.7l3.5 3.5M29.8 29.8l3.5 3.5M33.3 10.7l-3.5 3.5M14.2 29.8l-3.5 3.5"/></svg>
-        <span>Super-Luminova</span>
-      </div>
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><rect x="14" y="6" width="16" height="32"/><path d="M14 14h16M14 22h16M14 30h16M22 6v32"/></svg>
-        <span>Brazalete acero integrado</span>
-      </div>
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="6"/><path d="M22 8v4M22 32v4M8 22h4M32 22h4M12.5 12.5l2.8 2.8M28.7 28.7l2.8 2.8M31.5 12.5l-2.8 2.8M15.3 28.7l-2.8 2.8"/><circle cx="22" cy="22" r="13" stroke-dasharray="3 4"/></svg>
-        <span>Montado y controlado en Madrid</span>
-      </div>
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/><path d="M15.5 22l4.5 4.5 8.5-9"/></svg>
-        <span>Hasta 5 años de garantía y servicio técnico propio</span>
-      </div>
-      <div class="bh-icono">
-        <svg viewBox="0 0 44 44"><path d="M22 6c6 8 11 14.5 11 20.5a11 11 0 1 1-22 0C11 20.5 16 14 22 6z"/></svg>
-        <span>Resistencia al agua 10 ATM (100 m)</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7 · CONFIGURADOR -->
-  <section class="bh-config">
-    <div class="bh-config-caja">
-      <div class="bh-config-modelo bh-reveal">
-        <h2>LO-02 Bitácora</h2>
-        <p class="bh-config-precio-grande" data-precio>259&nbsp;€</p>
-        <ul class="bh-config-notas">
-          <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>IVA incluido</li>
-          <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>Envío gratis</li>
-          <li><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="6"/></svg>Hasta 5 años de garantía</li>
-        </ul>
-      </div>
-      <div class="bh-config-plano bh-reveal">
-        <img src="/assets/img/bitacora/landing/plano.jpg" alt="Plano técnico del LO-02 Bitácora: 40 mm de caja, 48 mm asa a asa, 8,9 mm de grosor" loading="lazy">
-      </div>
-      <div class="bh-config-panel bh-reveal">
-        <h3 id="configurador">Configura el tuyo</h3>
-        <div class="bh-campo">
-          <label for="cfg-movimiento">Movimiento</label>
-          <select id="cfg-movimiento">
-            <option value="alba" data-base="259" data-esfera="Tiffany (Bitácora)" data-caja="Acero 316L" data-brazalete="Acero integrado">Alba (Cuarzo Suizo)</option>
-            <option value="levante" data-base="329" data-esfera="Tiffany (Bitácora)" data-caja="Acero 316L" data-brazalete="Acero integrado">Levante (Automático NH35)</option>
-            <option value="cenit" data-base="459" data-esfera="Tiffany (Bitácora)" data-caja="Acero 316L" data-brazalete="Acero integrado">Cenit (Miyota 9015)</option>
-            <option value="eclipse" data-base="389.9" data-esfera="Negra" data-caja="Acero 316L, PVD negro" data-brazalete="Acero integrado, PVD negro">Eclipse (Miyota 9015, negro)</option>
-          </select>
-        </div>
-        <div class="bh-campo">
-          <label>Esfera</label>
-          <select disabled data-sigue-a="esfera">
-            <option>Tiffany (Bitácora)</option>
-          </select>
-        </div>
-        <div class="bh-campo">
-          <label>Caja</label>
-          <select disabled data-sigue-a="caja">
-            <option>Acero 316L</option>
-          </select>
-        </div>
-        <div class="bh-campo">
-          <label>Brazalete</label>
-          <select disabled data-sigue-a="brazalete">
-            <option>Acero integrado</option>
-          </select>
-        </div>
-        <div class="bh-campo">
-          <label for="cfg-trasera">Trasera</label>
-          <select id="cfg-trasera">
-            <option value="zafiro" data-extra="0">Vista con zafiro</option>
-            <option value="ciega" data-extra="0">Ciega</option>
-          </select>
-        </div>
-        <p class="bh-config-precio" data-precio>259&nbsp;€</p>
-        <a class="bh-boton bh-boton-oro" href="/reservar.html" data-reservar>Añadir al carrito</a>
-        <a class="bh-config-mas" href="#pagas">Ver más detalles →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8 · SERVICIOS -->
-  <section class="bh-servicios">
-    <div class="bh-servicios-grid bh-reveal">
-      <div class="bh-servicio">
-        <svg viewBox="0 0 44 44"><path d="M4 12h22v18H4zM26 18h8l6 6v6h-14z"/><circle cx="12" cy="33" r="3.5"/><circle cx="32" cy="33" r="3.5"/></svg>
-        <div><b>Envío gratis</b><span>A toda España<br>en 24/48 h</span></div>
-      </div>
-      <div class="bh-servicio">
-        <svg viewBox="0 0 44 44"><path d="M8 14l14-8 14 8v16l-14 8-14-8zM8 14l14 8 14-8M22 22v16"/></svg>
-        <div><b>Devolución 14 días</b><span>Sin preguntas.<br>Compra con tranquilidad.</span></div>
-      </div>
-      <div class="bh-servicio">
-        <svg viewBox="0 0 44 44"><path d="M22 5l13 5v11c0 8-5.5 14.5-13 18-7.5-3.5-13-10-13-18V10z"/></svg>
-        <div><b>Hasta 5 años de garantía</b><span>Y servicio técnico<br>propio en Madrid</span></div>
-      </div>
-      <div class="bh-servicio">
-        <svg viewBox="0 0 44 44"><path d="M22 37s-14-8.6-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 10.4-14 19-14 19z"/></svg>
-        <div><b>Atención personal</b><span>Te ayudamos a elegir.<br>Siempre.</span></div>
-      </div>
+  <section class="cierre">
+    <p class="rotulo oro">Sigue por la colección</p>
+    <h2>Antes: Lunar.<br><em>Después: Trinchera.</em></h2>
+    <div class="fila-botones">
+      <a class="boton boton-oscuro" href="/trinchera.html">Ver Trinchera <span aria-hidden="true">→</span></a>
+      <a class="enlace" href="/coleccion.html">Volver a la colección</a>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <div class="brand clara">la<span class="o"></span>ra<sup>®</sup></div>
-  <div class="footer-links">
-    <a href="/materiales.html">Materiales</a>
-    <a href="/manifiesto.html">El alma de un automático</a>
-    <a href="/condiciones-de-venta.html">Condiciones de venta</a>
+  <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
+  <div class="pie-links">
+    <a href="/coleccion.html">Relojes</a>
+    <a href="/filosofia.html">Nuestra forma de hacer</a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club laOra</a>
     <a href="/privacidad.html">Privacidad</a>
   </div>
+  <p class="pie-aviso">
+    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
+    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
+    no implican afiliación con sus fabricantes.
+  </p>
+
+  <!-- Rejilla del Grupo Saneas, la misma que el resto del sitio -->
   <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
   <div class="gp-grid">
     <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
@@ -780,101 +156,11 @@ body.bh{background:var(--bh-blanco);color:var(--bh-negro);
       <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
     </a>
   </div>
-  <p class="copy">© 2026 laOra® · Reloj · Calidad · Precio honesto · Todos los derechos reservados</p>
+
+  <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
-
-<script>
-/* ============================================================
-   Configurador: base (movimiento) + trasera (sin coste extra hoy).
-   El cobro real queda aparcado: los botones llevan a reservar.
-   ============================================================ */
-(() => {
-  const selects = ['cfg-movimiento','cfg-trasera']
-    .map(id => document.getElementById(id));
-  const precios = document.querySelectorAll('[data-precio]');
-
-  const movimiento = document.getElementById('cfg-movimiento');
-  const esferaMostrada = document.querySelector('[data-sigue-a="esfera"] option');
-  const cajaMostrada = document.querySelector('[data-sigue-a="caja"] option');
-  const brazaleteMostrado = document.querySelector('[data-sigue-a="brazalete"] option');
-
-  function calcula(){
-    const opt = s => s.options[s.selectedIndex];
-    const elegido = opt(movimiento);
-    let total = Number(elegido.dataset.base || 0);
-    for (const s of selects.slice(1)) total += Number(opt(s).dataset.extra || 0);
-    const decimales = total % 1 !== 0 ? 2 : 0;
-    const texto = total.toLocaleString('es-ES', {minimumFractionDigits:decimales, maximumFractionDigits:2});
-    for (const p of precios) p.innerHTML = texto + '&nbsp;€';
-    /* Esfera, caja y brazalete no se eligen sueltos: vienen atados al
-       acabado (el Eclipse lleva esfera y conjunto en PVD negro). */
-    esferaMostrada.textContent = elegido.dataset.esfera;
-    cajaMostrada.textContent = elegido.dataset.caja;
-    brazaleteMostrado.textContent = elegido.dataset.brazalete;
-  }
-  selects.forEach(s => s.addEventListener('change', calcula));
-  calcula();
-
-  /* Curiosidades: cada botón despliega su panel; el otro se recoge.
-     Pulsar el mismo botón otra vez lo cierra. */
-  const curioBotones = document.querySelectorAll('.bh-curio-boton');
-  curioBotones.forEach(b => b.addEventListener('click', () => {
-    const panel = document.getElementById(b.dataset.curio);
-    const abrir = panel.hidden;
-    curioBotones.forEach(o => {
-      o.setAttribute('aria-expanded', 'false');
-      document.getElementById(o.dataset.curio).hidden = true;
-    });
-    if (abrir) {
-      panel.hidden = false;
-      b.setAttribute('aria-expanded', 'true');
-    }
-  }));
-
-  document.querySelectorAll('[data-saber-toggle]').forEach(btn => {
-    const panel = btn.nextElementSibling;
-    btn.addEventListener('click', () => {
-      const abierto = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!abierto));
-      panel.hidden = abierto;
-    });
-  });
-
-  /* El salto a "Configura el tuyo" se descoloca si las fotos con
-     loading="lazy" de encima siguen cargando después del salto (empujan
-     el configurador hacia abajo). Repetimos el scroll mientras el alto
-     del body cambie, y lo cancelamos en cuanto el usuario interactúa. */
-  document.querySelectorAll('a[href="#configurador"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const destino = document.getElementById('configurador');
-      if (!destino) return;
-      e.preventDefault();
-      let activo = true;
-      const ir = () => destino.scrollIntoView({behavior:'smooth', block:'start'});
-      const cancelar = () => { activo = false; if (ro) ro.disconnect(); };
-      ['wheel','touchstart','keydown'].forEach(ev => window.addEventListener(ev, cancelar, {once:true, passive:true}));
-      ir();
-      let ro = null;
-      if ('ResizeObserver' in window) {
-        ro = new ResizeObserver(() => { if (activo) ir(); });
-        ro.observe(document.body);
-      }
-      setTimeout(cancelar, 2500);
-    });
-  });
-
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => {
-      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }, {threshold:.18});
-    document.querySelectorAll('.bh-reveal').forEach(el => io.observe(el));
-  } else {
-    document.querySelectorAll('.bh-reveal').forEach(el => el.classList.add('in'));
-  }
-})();
-</script>
-<script src="/assets/js/cabecera.js?v=2" defer></script>
-<script src="/assets/js/carrito.js?v=17"></script>
+<script src="/assets/js/cabecera.js?v=3"></script>
+<script src="/assets/js/ficha.js?v=1"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
