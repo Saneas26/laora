@@ -32,7 +32,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 19
+V_CSS = 21
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -732,6 +732,33 @@ for i, r in enumerate(RELOJES):
     siguiente = RELOJES[(i + 1) % len(RELOJES)]
     anterior = RELOJES[(i - 1) % len(RELOJES)]
 
+    # ---- LA HISTORIA DEL ORIGINAL ----
+    # Va DEBAJO DE LA FOTO, en la columna izquierda, que es donde sobraba
+    # espacio en blanco desde que el configurador estiró la columna derecha.
+    # Nombra la marca y el modelo con todas sus letras, así que lleva su
+    # propio aviso legal pegado: aquí es donde hace falta, no solo en el pie.
+    h = r.get('historiaOriginal')
+    if h:
+        parrafos = '\n'.join(f'          <p>{t}</p>' for t in h['cuerpo'])
+        hitos = '\n'.join(
+            f'          <li><b>{a}</b><span>{t}</span></li>' for a, t in h['datos'])
+        historia = f"""
+      <article class="pdp-historia">
+        <p class="ph-antetitulo">{h['antetitulo']} · {h['original']}</p>
+        <h2>{h['titular']}</h2>
+        <p class="ph-entradilla">{h['entradilla']}</p>
+        <div class="ph-cuerpo">
+{parrafos}
+        </div>
+        <ol class="ph-hitos">
+{hitos}
+        </ol>
+        <p class="ph-cierre">{h['cierre']}</p>
+        <p class="ph-aviso">{h['aviso']}</p>
+      </article>"""
+    else:
+        historia = ''
+
     # ---- CONFIGURADOR ----
     # Solo los modelos que ya tienen su fila en el catálogo final. El resto
     # sigue como estaba, sin precio ni selector, hasta que se vuelquen.
@@ -853,6 +880,7 @@ for i, r in enumerate(RELOJES):
       <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
 {minis}
       </div>
+{historia}
     </div>
     <div class="pdp-buy">
       <p class="kicker">{r['codigo']} · {r['familia']}</p>

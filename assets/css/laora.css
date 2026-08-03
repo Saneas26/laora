@@ -298,6 +298,56 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .pdp-thumbs button { width: 76px; height: 90px; border: 1px solid transparent; padding: 0; background: #ddd8cf; cursor: pointer; }
 .pdp-thumbs button.active { border-color: var(--ink); }
 .pdp-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+/* La noticia va sobre el gris de la galería (#e9e5dc), más oscuro que la
+   página, y ahí los colores de la hoja NO llegan: el gris de párrafo se
+   queda en 4,2:1 y el oro de marca en 2,6:1, que no pasa ni el umbral del
+   texto grande. Estos dos son los mismos tonos oscurecidos hasta cumplir
+   sobre ESE fondo: 7,1:1 el gris y 4,6:1 el oro.
+   No es el oro de la marca en otro sitio de la web — es este fondo el que
+   obliga. */
+:root { --gris-galeria: #4e4943; --oro-galeria: #836026; }
+
+/* ---------- LA HISTORIA DEL ORIGINAL, EN FORMA DE NOTICIA ----------
+   Va debajo de la foto, ocupando las dos columnas de la galería: ahí es
+   donde sobraba blanco desde que el configurador estiró la columna de la
+   derecha.
+
+   Compuesta como una pieza de periódico: filete doble arriba, antetítulo
+   en versales, titular a dos líneas, entradilla en cursiva y el cuerpo a
+   dos columnas de texto, que es lo que hace que se lea como una noticia
+   y no como otro párrafo más de la ficha. */
+.pdp-historia { grid-column: 1 / -1; margin-top: 40px; padding-top: 26px;
+  border-top: 4px double var(--ink); }
+.ph-antetitulo { margin: 0 0 16px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .2em; color: var(--oro-galeria); }
+.pdp-historia h2 { font-size: clamp(30px, 3.1vw, 46px); line-height: 1.02;
+  letter-spacing: -.04em; margin: 0 0 18px; }
+.ph-entradilla { margin: 0 0 26px; padding-bottom: 22px;
+  border-bottom: 1px solid var(--line); font-family: var(--serif);
+  font-style: italic; font-size: 19px; line-height: 1.5; }
+/* dos columnas, como un periódico. `column-gap` amplio y `text-align:justify`
+   con guionado: sin guionar, el justificado en columna estrecha abre calles
+   blancas horribles. */
+.ph-cuerpo { columns: 2; column-gap: 38px; text-align: justify;
+  hyphens: auto; -webkit-hyphens: auto; }
+.ph-cuerpo p { margin: 0 0 14px; font-size: 15px; line-height: 1.62;
+  color: var(--gris-galeria); break-inside: avoid-column; }
+.ph-cuerpo p:first-child::first-letter { float: left; font-family: var(--serif);
+  font-size: 52px; line-height: .82; padding: 4px 9px 0 0; color: var(--ink); }
+/* los cuatro hitos, como el pie de una infografía */
+.ph-hitos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  margin: 30px 0 0; border-top: 1px solid var(--line); }
+.ph-hitos li { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--line); }
+.ph-hitos b { display: block; font-family: var(--serif); font-size: 26px;
+  color: var(--oro-galeria); margin-bottom: 6px; }
+.ph-hitos span { font-size: 12px; line-height: 1.45; color: var(--gris-galeria); }
+.ph-cierre { margin: 26px 0 0; font-family: var(--serif); font-size: 18px;
+  line-height: 1.55; }
+/* El aviso NO es letra pequeña escondida: es lo que separa divulgar de
+   arrimarse a una marca ajena. 12 px, como el resto del suelo. */
+.ph-aviso { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line);
+  font-size: 12px; line-height: 1.55; color: var(--gris-galeria); }
+
 .pdp-buy { padding: 7vh 6vw; align-self: center; }
 .pdp-buy h1 { margin: 20px 0 12px; }
 .pdp-homage { text-transform: uppercase; font-size: 10px; letter-spacing: .14em; color: var(--gold); }
@@ -435,6 +485,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .pdp-hero { grid-template-columns: 1fr; }
   .pdp-main-image img { height: 75svh; }
   .pdp-buy { padding: 65px 7vw; }
+  .pdp-historia { padding-inline: 25px 25px; }
   .pdp-service ol { grid-template-columns: repeat(3,1fr); }
   .belief, .club-promise { grid-template-columns: 1fr 1.2fr; }
   .belief > .section-number, .club-promise > .section-number { grid-column: 1 / -1; }
@@ -499,6 +550,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .pdp-main-image img { height: 68svh; min-height: 500px; }
   .pdp-thumbs { grid-row: 2; grid-column: 1; display: flex; padding: 10px 20px; overflow-x: auto; }
   .pdp-buy { padding: 60px 24px 90px; }
+  /* en móvil el texto a dos columnas de 150 px no se lee: pasa a una */
+  .ph-cuerpo { columns: 1; text-align: left; }
+  .ph-hitos { grid-template-columns: 1fr 1fr; }
+  .pdp-historia { margin: 30px 24px 0; padding-inline: 0; }
   .pdp-buy h1 { font-size: 64px; }
   .pdp-story { gap: 20px; }
   .pdp-story > div:last-child { padding-top: 15px; font-size: 16px; }
