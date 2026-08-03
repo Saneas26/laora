@@ -59,7 +59,7 @@
           {
             "id": "alba",
             "nombre": "Alba",
-            "descriptor": "Esencial",
+            "descriptor": "Mecacuarzo Seiko/TMI VK63",
             "resumen": "Cronógrafo mecacuarzo, la puesta a cero con tacto mecánico.",
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",
@@ -73,7 +73,7 @@
           {
             "id": "cenit",
             "nombre": "Cenit",
-            "descriptor": "Máxima expresión",
+            "descriptor": "Movimiento mecánico-cronógrafo, como el original",
             "resumen": "Cronógrafo mecánico de cuerda manual con rueda de columnas.",
             "movimiento": "Seagull ST19 de rueda de columnas",
             "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
@@ -87,7 +87,7 @@
           {
             "id": "eclipse",
             "nombre": "Eclipse",
-            "descriptor": "Carácter técnico",
+            "descriptor": "Acero inoxidable 316L con PVD negro satinado",
             "resumen": "El mismo cronógrafo mecacuarzo, en negro integral y con zafiro.",
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",

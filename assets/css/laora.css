@@ -552,6 +552,11 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .pdp-buy { padding: 60px 24px 90px; }
   /* en móvil el texto a dos columnas de 150 px no se lee: pasa a una */
   .ph-cuerpo { columns: 1; text-align: left; }
+  /* los acabados, a una columna: desde que su descripción es la mejor
+     característica del modelo y no una etiqueta de dos palabras, en 167 px
+     se parten en tres o cuatro líneas. Las correas se quedan a dos, que
+     sus textos siguen siendo cortos. */
+  .config-opciones[data-grupo="acabado"] { grid-template-columns: 1fr; }
   .ph-hitos { grid-template-columns: 1fr 1fr; }
   .pdp-historia { margin: 30px 24px 0; padding-inline: 0; }
   .pdp-buy h1 { font-size: 64px; }

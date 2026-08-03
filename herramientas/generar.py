@@ -32,7 +32,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 21
+V_CSS = 22
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
