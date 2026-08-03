@@ -91,9 +91,13 @@
                 ['Tissot PR516 Chronograph', '545–625 €']],
         modelo: 'Lunar',
         enlace: '/lunar.html',
-        foto: '/assets/img/relojes-2026/lunar-front.webp',
-        /* la foto del Lunar ya es cuadrada y con el reloj centrado: en la
-           franja cuadrada del cuadro entra entera sin recortar nada */
+        /* Foto propia del cuadro (Óscar, 03/08/2026). NO es la misma que la
+           ficha del Lunar: aquella es el acabado negro integral y esta es
+           el de acero, que sobre el oro del cuadro se lee mucho mejor.
+           Por eso vive en su propio fichero y no pisa a `lunar-front`. */
+        foto: '/assets/img/relojes-2026/lunar-mapa.webp',
+        /* cuadrada y con el reloj centrado: en la franja cuadrada del
+           cuadro entra entera sin recortar nada */
         posicion: 'center', posicionMovil: 'center 45%'
       },
       bitacora: {
