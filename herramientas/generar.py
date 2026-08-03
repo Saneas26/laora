@@ -33,7 +33,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 8
+V_CSS = 11
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -330,17 +330,19 @@ escribir('index.html', cabeza(
           <div data-mapa-otras></div>
         </div>
         <article class="laora-value">
-          <img src="{IMG}/lunar-front.webp" alt="" aria-hidden="true" data-mapa-foto>
+          <img src="{IMG}/lunar-front.webp" alt="Reloj laOra Lunar" data-mapa-foto>
           <div class="laora-value-price">
             <!-- «laOra» NO se escribe: es el logotipo canónico, en minúsculas
                  salvo la O, que lleva el triángulo invertido a las 12. Aquí
                  solo cambia de color para leerse sobre el oro. -->
             <span><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · <b data-mapa-modelo>Lunar</b></span>
-            <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí iba el precio del
-                 modelo, en <strong>. -->
+            <strong>209,90 €</strong>
           </div>
           <p data-mapa-valor>Mismo acero, mismo cristal, mismos movimientos desde 209,90 €</p>
-          <a href="/lunar.html" data-mapa-enlace>Ver <b data-mapa-modelo>Lunar</b> →</a>
+          <!-- El rótulo lo escribe entero home.js. Con un <b> dentro, el
+               `display:inline-flex` del enlace se comía los espacios de los
+               nodos de texto y salía «VERLUNAR→». -->
+          <a href="/lunar.html" data-mapa-enlace>Ver Lunar →</a>
         </article>
       </div>
 
@@ -416,7 +418,7 @@ escribir('index.html', cabeza(
                 '/club.html', 'Conocer Club laOra') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/home.js?v=4"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/home.js?v=5"></script>'))
 
 
 # ============================================================
