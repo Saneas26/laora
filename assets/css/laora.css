@@ -307,6 +307,61 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    obliga. */
 :root { --gris-galeria: #4e4943; --oro-galeria: #836026; }
 
+/* ---------- LAS CURIOSIDADES ----------
+   Entre la foto y la noticia. Dos botones grandes, sin caja de color: el
+   filete y el numerito hacen todo el trabajo, y al pasar por encima el
+   fondo se aclara y la flecha avanza. Muy poco, muy visible.
+
+   Cada uno abre un <dialog> de verdad. El fondo oscurecido, el cierre con
+   Escape y el foco atrapado dentro los pone el navegador; aqui solo va el
+   aspecto. */
+.curiosidades { grid-column: 1 / -1; margin-top: 40px; }
+.cur-rotulo { margin: 0 0 14px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .2em; color: var(--oro-galeria); }
+.cur-botones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cur-botones button { position: relative; display: grid; gap: 6px; padding: 22px 22px 20px;
+  text-align: left; background: transparent; border: 1px solid rgba(28,29,27,.22);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.cur-botones button:hover { background: rgba(255,255,255,.5);
+  border-color: var(--ink); transform: translateY(-2px); }
+.cur-botones .cur-num { font-family: var(--serif); font-size: 30px; line-height: 1;
+  color: var(--oro-galeria); }
+.cur-botones .cur-titulo { font-family: var(--serif); font-size: 20px; line-height: 1.2;
+  letter-spacing: -.02em; }
+.cur-botones .cur-gancho { font-size: 13px; line-height: 1.45; color: var(--gris-galeria); }
+.cur-botones .cur-mas { margin-top: 8px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em; }
+.cur-botones .cur-mas::after { content: " \2192"; display: inline-block;
+  transition: transform .2s ease; }
+.cur-botones button:hover .cur-mas::after { transform: translateX(5px); }
+
+/* ---------- la ventana ---------- */
+/* `margin:auto` es lo que centra un <dialog> modal. Lo trae el navegador
+   de serie, pero el preflight de Tailwind pone `margin:0` a TODO y se lo
+   lleva por delante: sin esta linea la ventana sale pegada arriba a la
+   izquierda. `position:fixed` mantiene el centrado aunque la pagina este
+   desplazada. */
+.cur-ventana { width: min(620px, calc(100vw - 40px)); max-height: 86svh;
+  margin: auto; position: fixed; inset: 0; padding: 0;
+  border: 0; background: var(--paper); color: var(--ink); overflow: auto; }
+.cur-ventana::backdrop { background: rgba(21,23,21,.72); backdrop-filter: blur(3px); }
+.cur-ventana[open] { padding: 46px clamp(24px, 5vw, 54px) clamp(30px, 5vw, 48px); }
+/* el mismo oro oscurecido que la noticia: el de marca a 12 px sobre el
+   papel de la ventana se queda en 3,1:1 */
+.cur-orden { margin: 0 0 12px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .2em; color: var(--oro-galeria); }
+.cur-ventana h2 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.04;
+  letter-spacing: -.04em; margin: 0 0 22px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--line); }
+.cur-ventana p:not(.cur-orden) { margin: 0 0 15px; font-size: 16px; line-height: 1.66;
+  color: var(--muted); }
+.cur-ventana p:last-child { margin-bottom: 0; }
+/* la equis, arriba a la derecha y con area de toque de 44 px */
+.cur-cerrar { position: absolute; top: 10px; right: 12px; width: 44px; height: 44px;
+  border: 0; background: transparent; font-size: 28px; line-height: 1; color: var(--muted);
+  transition: color .15s ease; }
+.cur-cerrar:hover { color: var(--ink); }
+
 /* ---------- LA HISTORIA DEL ORIGINAL, EN FORMA DE NOTICIA ----------
    Va debajo de la foto, ocupando las dos columnas de la galería: ahí es
    donde sobraba blanco desde que el configurador estiró la columna de la
@@ -550,6 +605,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .pdp-main-image img { height: 68svh; min-height: 500px; }
   .pdp-thumbs { grid-row: 2; grid-column: 1; display: flex; padding: 10px 20px; overflow-x: auto; }
   .pdp-buy { padding: 60px 24px 90px; }
+  /* los dos botones de curiosidades, uno por fila: sus titulares son
+     frases y en media pantalla se parten en cuatro lineas */
+  .cur-botones { grid-template-columns: 1fr; }
+  .curiosidades { margin: 30px 24px 0; }
   /* en móvil el texto a dos columnas de 150 px no se lee: pasa a una */
   .ph-cuerpo { columns: 1; text-align: left; }
   /* los acabados, a una columna: desde que su descripción es la mejor

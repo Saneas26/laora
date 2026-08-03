@@ -22,7 +22,7 @@
 <!-- GENERADO por herramientas/generar.py — no editar a mano.
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=22">
+<link rel="stylesheet" href="/assets/css/laora.css?v=25">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
 <body>
@@ -52,6 +52,40 @@
           <button type="button" data-mini="/assets/img/relojes-2026/bauhaus-hero.webp" aria-label="Ver imagen 2 de Bauhaus"><img src="/assets/img/relojes-2026/bauhaus-hero.webp" alt=""></button>
           <button type="button" data-mini="/assets/img/relojes-2026/bauhaus-back.webp" aria-label="Ver imagen 3 de Bauhaus"><img src="/assets/img/relojes-2026/bauhaus-back.webp" alt=""></button>
       </div>
+
+      <section class="curiosidades" aria-labelledby="rot-bauhaus">
+        <p class="cur-rotulo" id="rot-bauhaus">2 curiosidades</p>
+        <div class="cur-botones">
+          <button type="button" data-abre="cur-bauhaus-agujas">
+            <span class="cur-num">01</span>
+            <span class="cur-titulo">Las agujas azules no están pintadas</span>
+            <span class="cur-gancho">El color sale del fuego, no de un bote</span>
+            <span class="cur-mas" aria-hidden="true">Leer</span>
+          </button>
+          <button type="button" data-abre="cur-bauhaus-glashutte">
+            <span class="cur-num">02</span>
+            <span class="cur-titulo">«Glashütte» está protegido como el champán</span>
+            <span class="cur-gancho">Un nombre de pueblo que no se puede usar a la ligera</span>
+            <span class="cur-mas" aria-hidden="true">Leer</span>
+          </button>
+        </div>
+      <dialog class="cur-ventana" id="cur-bauhaus-agujas" aria-labelledby="t-cur-bauhaus-agujas">
+        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
+        <p class="cur-orden">Curiosidad 01 de 2</p>
+        <h2 id="t-cur-bauhaus-agujas">Las agujas azules no están pintadas</h2>
+        <p>El azul de unas agujas bien hechas no es pintura: es acero calentado hasta que cambia de color solo.</p>
+        <p>Se sube la temperatura despacio y el metal va pasando por el pajizo, el marrón y el púrpura hasta llegar a un azul intenso, cerca de los 290 grados. Ahí se retira. Un grado de más y se pasa de largo, y hay que empezar otra vez.</p>
+        <p>Al principio no era estética: esa capa de óxido protege el acero de la corrosión. Que además quedara bonito sobre una esfera blanca fue la suerte que hizo que se quedara.</p>
+      </dialog>
+      <dialog class="cur-ventana" id="cur-bauhaus-glashutte" aria-labelledby="t-cur-bauhaus-glashutte">
+        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
+        <p class="cur-orden">Curiosidad 02 de 2</p>
+        <h2 id="t-cur-bauhaus-glashutte">«Glashütte» está protegido como el champán</h2>
+        <p>Glashütte no es solo dónde se hace un reloj: es una denominación de origen, igual que Champagne o Rioja.</p>
+        <p>Un reloj solo puede llevar ese nombre en la esfera si buena parte de su valor se ha creado allí de verdad. No basta con montarlo en el pueblo ni con encargar el diseño desde allí.</p>
+        <p>Por eso nuestro Bauhaus no dice Glashütte en ninguna parte, ni lo dirá. Toma prestada una manera de entender el diseño, que eso no lo protege nadie; el nombre del pueblo se queda donde tiene que quedarse.</p>
+      </dialog>
+      </section>
 
       <article class="pdp-historia">
         <p class="ph-antetitulo">La historia del original · Nomos Glashütte Tangente</p>
@@ -213,7 +247,7 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=4"></script>
+<script src="/assets/js/ficha.js?v=5"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

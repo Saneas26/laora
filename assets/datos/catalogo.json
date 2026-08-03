@@ -201,7 +201,29 @@
         ],
         "cierre": "El nuestro no es aquel reloj, ni lo pretende. Toma su arquitectura —tres contadores, bisel taquimétrico, lectura instrumental— y la firma con nuestro nombre.",
         "aviso": "Omega y Speedmaster son marcas registradas de sus titulares. laOra no está afiliada a Omega SA ni a la NASA: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Lunar ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno."
-      }
+      },
+      "curiosidades": [
+        {
+          "id": "hesalita",
+          "titulo": "El cristal era de plástico, y a propósito",
+          "gancho": "Por qué la NASA prefirió un cristal que se raya",
+          "cuerpo": [
+            "El Speedmaster que voló llevaba hesalita: un acrílico, no zafiro. Suena a recorte, y es justo lo contrario.",
+            "En una cápsula presurizada, un cristal mineral que se rompe se convierte en esquirlas que flotan y que alguien puede acabar respirando. El acrílico no estalla: se abolla, se agrieta y se queda en su sitio.",
+            "Que se raye resulta ser un detalle menor, porque las rayas se pulen con un paño y un poco de pasta. Décadas después Omega sigue vendiendo la versión de hesalita junto a la de zafiro, y hay quien insiste en la primera precisamente por esto."
+          ]
+        },
+        {
+          "id": "taquimetro",
+          "titulo": "El bisel no es un adorno: es una regla de cálculo",
+          "gancho": "Cómo se mide una velocidad sin saber matemáticas",
+          "cuerpo": [
+            "Esos números que bajan de 500 a 60 alrededor de la esfera son una escala taquimétrica, y sirven para algo muy concreto.",
+            "Pones el cronógrafo en marcha al empezar un kilómetro y lo paras al terminarlo. Donde se quede la aguja grande, ahí está tu velocidad media en kilómetros por hora. Sin dividir nada: la escala ya lleva la división puesta.",
+            "Por eso empieza en 60 y no llega más abajo: a partir de un minuto por kilómetro la aguja daría la vuelta entera y la lectura dejaría de tener sentido. Nació para cronometrar coches, mucho antes de que a nadie se le ocurriera mandarlo al espacio."
+          ]
+        }
+      ]
     },
     {
       "slug": "cero-cero",
@@ -362,7 +384,29 @@
         ],
         "cierre": "El nuestro no es aquel reloj. Toma su gramática —números finos, segundero pequeño, caja delgada, nada de más— y la firma con nuestro nombre.",
         "aviso": "Nomos, Glashütte y Tangente son marcas registradas de sus titulares. laOra no está afiliada a Nomos Glashütte: esta sección es divulgación sobre el reloj y la escuela que inspiran el homenaje, y ni el Bauhaus ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno."
-      }
+      },
+      "curiosidades": [
+        {
+          "id": "agujas",
+          "titulo": "Las agujas azules no están pintadas",
+          "gancho": "El color sale del fuego, no de un bote",
+          "cuerpo": [
+            "El azul de unas agujas bien hechas no es pintura: es acero calentado hasta que cambia de color solo.",
+            "Se sube la temperatura despacio y el metal va pasando por el pajizo, el marrón y el púrpura hasta llegar a un azul intenso, cerca de los 290 grados. Ahí se retira. Un grado de más y se pasa de largo, y hay que empezar otra vez.",
+            "Al principio no era estética: esa capa de óxido protege el acero de la corrosión. Que además quedara bonito sobre una esfera blanca fue la suerte que hizo que se quedara."
+          ]
+        },
+        {
+          "id": "glashutte",
+          "titulo": "«Glashütte» está protegido como el champán",
+          "gancho": "Un nombre de pueblo que no se puede usar a la ligera",
+          "cuerpo": [
+            "Glashütte no es solo dónde se hace un reloj: es una denominación de origen, igual que Champagne o Rioja.",
+            "Un reloj solo puede llevar ese nombre en la esfera si buena parte de su valor se ha creado allí de verdad. No basta con montarlo en el pueblo ni con encargar el diseño desde allí.",
+            "Por eso nuestro Bauhaus no dice Glashütte en ninguna parte, ni lo dirá. Toma prestada una manera de entender el diseño, que eso no lo protege nadie; el nombre del pueblo se queda donde tiene que quedarse."
+          ]
+        }
+      ]
     },
     {
       "slug": "precisa",
