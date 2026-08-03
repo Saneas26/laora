@@ -27,7 +27,6 @@ Los datos de los relojes salen de assets/datos/catalogo.json, que es la
 
 import json
 import os
-from urllib.parse import quote
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -129,7 +128,6 @@ PIE = """
     <a href="/taller.html">Taller</a>
     <a href="/club.html">Club laOra</a>
     <a href="/privacidad.html">Privacidad</a>
-    <a href="mailto:hola@laora.es">hola@laora.es</a>
   </div>
   <p class="pie-aviso">
     laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
@@ -770,8 +768,6 @@ for i, r in enumerate(RELOJES):
         f'        <li><span>{str(n + 1).zfill(2)}</span><div><b>{k}</b><p>{v}</p></div></li>'
         for n, (k, v) in enumerate(r['fichaTecnica']))
 
-    asunto = quote(f'Consulta sobre el {r["nombre"]} {r["codigo"]}')
-
     escribir(r['slug'] + '.html', cabeza(
         f'{r["nombre"]} · laOra', r['descripcion'],
         f'/{r["slug"]}.html', r['foto']) + cabecera('coleccion') + f"""
@@ -800,7 +796,10 @@ for i, r in enumerate(RELOJES):
       <dl class="live-specs">
 {filas}
       </dl>
-      <a class="button primary full" href="mailto:hola@laora.es?subject={asunto}">Preguntar por el {r['nombre']}</a>
+      <!-- Aquí iba «Preguntar por el {r['nombre']}», que abría un correo.
+           Óscar pidió retirar esa dirección de toda la web (03/08/2026), así
+           que el botón se va con ella: la ficha se queda SIN llamada a la
+           acción hasta que se decida qué va en su lugar. -->
       <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
   </section>
