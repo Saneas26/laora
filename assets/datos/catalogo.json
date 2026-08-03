@@ -293,14 +293,13 @@
             "cristal": "Zafiro",
             "caja": "Acero inoxidable 316L, pulido y satinado · unos 11 mm",
             "bisel": "Fijo liso, acero pulido",
-            "fondo": "Macizo, atornillado",
             "peso": "unos 130 g con brazalete"
           },
           {
             "id": "cenit",
             "nombre": "Cenit",
-            "descriptor": "Automático Seagull ST1701 y fondo de cristal",
-            "resumen": "Automático de segundero pequeño y sin fecha, con el fondo abierto para ver el movimiento.",
+            "descriptor": "Automático Seagull ST1701 de segundero pequeño",
+            "resumen": "Automático de segundero pequeño y sin fecha, con la cuerda que se da sola al llevarlo.",
             "movimiento": "Seagull ST1701, automático",
             "movimientoTipo": "Automático con segundero pequeño, sin fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
@@ -308,7 +307,6 @@
             "cristal": "Zafiro",
             "caja": "Acero inoxidable 316L, pulido y satinado · unos 12 mm",
             "bisel": "Fijo liso, acero pulido",
-            "fondo": "De cristal, con el movimiento a la vista",
             "peso": "unos 135 g con brazalete"
           }
         ],
@@ -324,6 +322,7 @@
         "comunes": {
           "Diámetro": "39 mm",
           "Estanqueidad": "50 m (5 ATM)",
+          "Fondo": "Macizo, atornillado",
           "Esfera": "Blanca minimalista, índices impresos finos y números",
           "Agujas": "Dauphine, con segundero pequeño",
           "Brazalete": "Acero 316L pulido, broche plegable oculto",
