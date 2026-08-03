@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="laOra — homenajes honestos a los grandes iconos de la relojería. Sin falsificaciones ni logotipos ajenos: marca propia, componentes identificados y montaje, control y servicio en Madrid.">
 <meta property="og:title" content="laOra® — Iconos que conoces, honestamente nuestros">
-<meta property="og:description" content="Homenajes a los grandes relojes del mundo, sin falsificaciones ni logotipos ajenos. Cada unidad montada, ajustada y probada en Madrid.">
-<meta property="og:url" content="https://laora.es">
+<meta property="og:description" content="laOra — homenajes honestos a los grandes iconos de la relojería. Sin falsificaciones ni logotipos ajenos: marca propia, componentes identificados y montaje, control y servicio en Madrid.">
+<meta property="og:url" content="https://laora.es/">
 <meta property="og:image" content="https://laora.es/assets/img/relojes-2026/bitacora-hero-full.webp">
 <title>laOra® — Iconos que conoces, honestamente nuestros</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
@@ -17,26 +17,23 @@
 <!-- Nunito Sans e Inter solo alimentan el logotipo y el pie del Grupo
      Saneas. El resto de la web va en Georgia y Arial. -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- OJO: subir el ?v= en CADA cambio de laora.css. Cloudflare la sirve con
-     cache-control max-age=14400, así que sin subirlo el navegador se queda
-     hasta 4 horas con la hoja antigua. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=1">
+<!-- GENERADO por herramientas/generar.py — no editar a mano.
+     Los textos se cambian ahí; los datos de relojes, en
+     assets/datos/catalogo.json. -->
+<link rel="stylesheet" href="/assets/css/laora.css?v=4">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=12">
 </head>
 <body>
-
-<!-- ============================================================
-     CABECERA — la de siempre, sin tocar. `cabecera.js` inyecta el
-     desplegable del móvil y la deja fija al hacer scroll.
-     ============================================================ -->
 <header class="cb cb-claro">
   <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
   <nav class="cb-menu" aria-label="Navegación principal">
     <a href="/coleccion.html">relojes</a>
     <a href="/filosofia.html">nuestra forma de hacer</a>
     <a href="/taller.html">taller y servicio</a>
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico -->
-    <a class="cb-club" href="/club.html">club <span class="cb-marca">la<span class="o"></span>ra</span></a>
+    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
+         un span sin texto, así que un lector de pantalla leería «club lara»:
+         de ahí el aria-label. -->
+    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
   </nav>
 </header>
 
@@ -63,8 +60,7 @@
         <a class="enlace" href="/filosofia.html">Por qué hacemos homenajes</a>
       </div>
       <!-- PENDIENTE DE LA HOJA DE MATERIALES: aquí va el «desde X €».
-           Hasta que Óscar pase los precios reales no se enseña ninguno:
-           el material de Codex traía 209,90 €, que era inventado. -->
+           Hasta que estén los precios reales no se enseña ninguno. -->
     </div>
 
     <div class="h-hero-mandos" role="group" aria-label="Elegir imagen del reloj">
@@ -85,8 +81,9 @@
   </section>
 
   <!-- ============ 3 · EL MAPA DEL PRECIO ============
-       Las cifras de mercado son orientativas y llevan su nota legal
-       al pie de la sección. No se tocan sin revisarlas. -->
+       Las cifras de mercado son ORIENTATIVAS, viven todas en
+       assets/js/home.js y llevan su nota legal al pie de la sección.
+       Si se actualizan, hay que actualizar también la fecha de la nota. -->
   <section class="h-mapa" id="mapa">
     <div class="h-mapa-cab">
       <div>
@@ -140,9 +137,66 @@
   </section>
 
   <!-- ============ 4 · CUATRO MODELOS ============ -->
-  <section class="h-destacados" style="padding:110px 6vw 140px;text-align:center">
-    <div class="p-rejilla compacta" data-destacados></div>
-    <a class="boton boton-linea" href="/coleccion.html" style="margin-top:52px">Ver los ocho modelos <span aria-hidden="true">→</span></a>
+  <section class="h-destacados">
+    <div class="p-rejilla compacta">
+      <article class="p-tarjeta">
+        <a class="p-foto" href="/lunar.html" aria-label="Ver Lunar">
+          <img src="/assets/img/relojes-2026/lunar-front.webp" alt="Lunar de laOra, cronógrafo" loading="lazy">
+          <span class="p-codigo">LO—01</span>
+          <span class="p-flecha" aria-hidden="true">↗</span>
+        </a>
+        <div class="p-meta"><p>Cronógrafo</p><p>42 mm</p></div>
+        <h3>Lunar</h3>
+        <p class="p-frase">El cronógrafo que mira más allá.</p>
+        <p class="p-homenaje">Homenaje al gran cronógrafo lunar</p>
+        <div class="p-acciones">
+          <a href="/lunar.html">Ver Lunar <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="p-tarjeta">
+        <a class="p-foto" href="/bitacora.html" aria-label="Ver Bitácora">
+          <img src="/assets/img/relojes-2026/bitacora.webp" alt="Bitácora de laOra, deportivo integrado" loading="lazy">
+          <span class="p-codigo">LO—02</span>
+          <span class="p-flecha" aria-hidden="true">↗</span>
+        </a>
+        <div class="p-meta"><p>Deportivo integrado</p><p>40 mm</p></div>
+        <h3>Bitácora</h3>
+        <p class="p-frase">Equilibrio, precisión y uso diario.</p>
+        <p class="p-homenaje">Homenaje a la arquitectura deportiva integrada</p>
+        <div class="p-acciones">
+          <a href="/bitacora.html">Ver Bitácora <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="p-tarjeta">
+        <a class="p-foto" href="/trinchera.html" aria-label="Ver Trinchera">
+          <img src="/assets/img/relojes-2026/trinchera-hero.webp" alt="Trinchera de laOra, reloj de campo" loading="lazy">
+          <span class="p-codigo">LO—03</span>
+          <span class="p-flecha" aria-hidden="true">↗</span>
+        </a>
+        <div class="p-meta"><p>Reloj de campo</p><p>39 mm</p></div>
+        <h3>Trinchera</h3>
+        <p class="p-frase">Legible por instinto.</p>
+        <p class="p-homenaje">Homenaje al reloj de campaña clásico</p>
+        <div class="p-acciones">
+          <a href="/trinchera.html">Ver Trinchera <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="p-tarjeta">
+        <a class="p-foto" href="/precisa.html" aria-label="Ver Precisa">
+          <img src="/assets/img/relojes-2026/precisa-front.webp" alt="Precisa de laOra, deportivo integrado" loading="lazy">
+          <span class="p-codigo">LO—04</span>
+          <span class="p-flecha" aria-hidden="true">↗</span>
+        </a>
+        <div class="p-meta"><p>Deportivo integrado</p><p>40 mm</p></div>
+        <h3>Precisa</h3>
+        <p class="p-frase">La forma exacta del tiempo.</p>
+        <p class="p-homenaje">Homenaje al deportivo integrado de los setenta</p>
+        <div class="p-acciones">
+          <a href="/precisa.html">Ver Precisa <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+    </div>
+    <a class="boton boton-linea" href="/coleccion.html">Ver los ocho modelos <span aria-hidden="true">→</span></a>
   </section>
 
   <!-- ============ 5 · HOMENAJE NO ES FALSIFICACIÓN ============ -->
@@ -231,7 +285,6 @@
     </div>
   </section>
 
-  <!-- ============ 9 · CIERRE ============ -->
   <section class="cierre">
     <p class="rotulo oro">Tu tiempo. Tu elección.</p>
     <h2>Elige el icono.<br><em>Nosotros respondemos por el reloj.</em></h2>
@@ -243,7 +296,6 @@
 
 </main>
 
-<!-- ============ PIE ============ -->
 <footer>
   <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
   <div class="pie-links">
@@ -284,10 +336,8 @@
 
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
-
 <script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/catalogo.js?v=1"></script>
-<script src="/assets/js/home.js?v=1"></script>
+<script src="/assets/js/home.js?v=2"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
