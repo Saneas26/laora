@@ -33,7 +33,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO del CSS: Cloudflare lo sirve con max-age=14400 y sin
 # esto el navegador se queda hasta cuatro horas con la hoja antigua.
-V_CSS = 13
+V_CSS = 16
 V_CAB = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -406,7 +406,7 @@ escribir('index.html', cabeza(
       <p class="section-number">03 — Club {MARCA}</p>
       <h2>Tu reloj continúa<br><em>dentro de la app.</em></h2>
       <p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p>
-      <a class="button primary" href="/club.html">Conocer Club laOra →</a>
+      <a class="button primary" href="/club.html"><span class="etiqueta">Conocer Club {MARCA} →</span></a>
     </div>
     <div class="club-phone-wrap">
 {TELEFONO}
@@ -416,7 +416,7 @@ escribir('index.html', cabeza(
 """ + final_cta('Tu tiempo. Tu elección.',
                 'Elige el icono.<br><em>Nosotros respondemos por el reloj.</em>',
                 '/coleccion.html', 'Ver la colección',
-                '/club.html', 'Conocer Club laOra') + """
+                '/club.html', f'<span class="etiqueta">Conocer Club {MARCA}</span>') + """
 
 </main>
 """ + PIE + scripts('\n<script src="/assets/js/home.js?v=8"></script>'))
@@ -613,7 +613,7 @@ escribir('taller.html', cabeza(
       <p class="kicker light">Después de la compra</p>
       <h2>Servicio sin<br><em>intermediarios.</em></h2>
       <p>Desde Club laOra puedes identificar tu reloj, abrir una consulta, adjuntar imágenes, solicitar recogida y seguir el estado de la intervención.</p>
-      <a class="button gold" href="/club.html">Ver Club laOra</a>
+      <a class="button gold" href="/club.html"><span class="etiqueta">Ver Club {MARCA}</span></a>
     </div>
     <div class="service-list">
 {chr(10).join(f'      <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in SERVICIOS)}
@@ -651,7 +651,7 @@ escribir('club.html', cabeza(
   <section class="club-hero">
     <div>
       <p class="kicker light">Club {MARCA} · Incluido con tu reloj</p>
-      <h1>La relación no termina<br><em>cuando recibes el reloj.</em></h1>
+      <h1>La relación no <span class="aire">termina</span><br><em>cuando recibes el reloj.</em></h1>
       <p>Tu colección, documentación, garantía, servicio y ventajas en un único lugar. Una app útil, no otro programa publicitario.</p>
       <div class="button-row"><a class="text-link light" href="#funciones">Ver cómo funciona</a></div>
     </div>

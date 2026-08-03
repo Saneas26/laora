@@ -77,6 +77,14 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .text-link.light { color: var(--white); }
 .button-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
 
+/* ---------- AIRE ENTRE LETRAS QUE SE PEGAN ----------
+   Los titulares van en Arial a `letter-spacing:-.065em`, que es del
+   diseño original. A ese cuerpo y con ese apretón la `r` se pega a la
+   `m` y a la `n`: «termina» se lee «temmina». Esta clase le devuelve
+   el aire justo a la palabra afectada, sin tocar el resto del titular
+   ni el tracking general del diseño. */
+.aire { letter-spacing: -.012em; }
+
 .home-hero { min-height: calc(100svh - 76px); position: relative; display: flex; align-items: center; background: #f5f2ec; }
 .hero-slideshow { position: absolute; inset: 0; overflow: hidden; }
 .hero-slide { position: absolute; inset: -2%; width: 104%; height: 104%; object-fit: cover; opacity: 0; transform: scale(1.035); transition: opacity 2.2s cubic-bezier(.4,0,.2,1); will-change: opacity, transform; }
@@ -537,10 +545,20 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    cuerpo del rótulo (11 px) porque el dibujo de la O necesita sitio: a 11
    el círculo se convierte en un borrón. Hereda el color del rótulo, así
    que funciona igual sobre claro que sobre oscuro. */
-.kicker .cb-marca, .section-number .cb-marca, .laora-value-price .cb-marca {
+/* Los botones son `inline-flex` con `gap:22px`, pensado para separar el
+   rótulo de la flecha. Al meter dentro el logotipo, este pasa a ser otro
+   elemento del flex y se le aplicaba el mismo hueco: salía «VER CLUB
+   ⟨22 px⟩ laOra». Envolviendo rótulo y logotipo en `.etiqueta` el botón
+   vuelve a tener un solo hijo y el hueco queda donde tiene que estar. */
+.etiqueta { display: inline-flex; align-items: baseline; gap: .34em;
+  white-space: nowrap; }
+
+.kicker .cb-marca, .section-number .cb-marca, .laora-value-price .cb-marca,
+.button .cb-marca, .text-link .cb-marca {
   font-size: 14px; color: inherit; letter-spacing: -.01em; }
 .kicker .cb-marca .o::before, .section-number .cb-marca .o::before,
-.laora-value-price .cb-marca .o::before { border-top-color: currentColor; }
+.laora-value-price .cb-marca .o::before, .button .cb-marca .o::before,
+.text-link .cb-marca .o::before { border-top-color: currentColor; }
 /* En el cuadro del mapa el logotipo es la firma de la marca, no una nota
    al pie: a 15 px el círculo de la O se quedaba en un aro fino y el
    triángulo desaparecía. A 22 se lee el isotipo entero. */
