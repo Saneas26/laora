@@ -204,23 +204,23 @@
       }
     },
     {
-      "slug": "bitacora",
+      "slug": "cero-cero",
       "codigo": "LO—02",
-      "nombre": "Bitácora",
-      "familia": "Deportivo integrado",
-      "homenaje": "Homenaje a la arquitectura deportiva integrada",
-      "frase": "Equilibrio, precisión y uso diario.",
-      "descripcion": "Geometría de acero, perfil contenido y una esfera que cambia con la luz.",
-      "historia": "Bitácora toma como punto de partida el reloj deportivo integrado de los setenta y lo traduce a una propuesta directa, legible y con marca propia.",
+      "nombre": "Cero Cero",
+      "familia": "Buceo",
+      "homenaje": "Homenaje al buceador profesional contemporáneo",
+      "frase": "Herramienta bajo el agua. Carácter fuera de ella.",
+      "descripcion": "Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.",
+      "historia": "Cero Cero recoge el lenguaje del reloj de buceo profesional sin copiar una identidad ajena. Sus proporciones, su esfera y su firma laOra convierten la referencia en una pieza independiente.",
       "precio": null,
       "movimiento": null,
-      "diametro": "40 mm",
+      "diametro": "41 mm",
       "hermeticidad": null,
-      "foto": "/assets/img/relojes-2026/bitacora.webp",
+      "foto": "/assets/img/relojes-2026/cero-cero-hero.webp",
       "galeria": [
-        "/assets/img/relojes-2026/bitacora.webp",
-        "/assets/img/relojes-2026/bitacora-hero-dial.webp",
-        "/assets/img/relojes-2026/bitacora-hero-movement.webp"
+        "/assets/img/relojes-2026/cero-cero-hero.webp",
+        "/assets/img/relojes-2026/cero-cero-profile.webp",
+        "/assets/img/relojes-2026/cero-cero-back.webp"
       ],
       "fichaTecnica": [
         [
@@ -228,56 +228,142 @@
           "Acero 316L"
         ],
         [
-          "Arquitectura",
-          "Brazalete integrado"
+          "Bisel",
+          "Giratorio de buceo"
         ],
         [
           "Esfera",
-          "Texturizada"
+          "Negro mate · acento naranja"
         ],
         [
-          "Control",
-          "Revisión individual en Madrid"
+          "Brazalete",
+          "Malla de acero"
         ]
       ]
     },
     {
-      "slug": "trinchera",
+      "slug": "bauhaus",
       "codigo": "LO—03",
-      "nombre": "Trinchera",
-      "familia": "Reloj de campo",
-      "homenaje": "Homenaje al reloj de campaña clásico",
-      "frase": "Legible por instinto.",
-      "descripcion": "Un reloj de campaña honesto: números limpios, contraste absoluto y acero sin artificios.",
-      "historia": "Trinchera rinde homenaje al reloj que nació como herramienta. Conserva su lectura inmediata y su austeridad funcional, sin insignias militares ni logotipos ajenos.",
-      "precio": null,
+      "nombre": "Bauhaus",
+      "familia": "Reloj de vestir",
+      "homenaje": "Homenaje al racionalismo alemán",
+      "frase": "Menos elementos. Más intención.",
+      "descripcion": "Proporción, espacio y agujas azules para una elegancia que no necesita levantar la voz.",
+      "historia": "Bauhaus celebra la tradición del diseño funcional centroeuropeo: cada línea tiene un motivo y nada ocupa más espacio del necesario. La esfera y la firma son inequívocamente laOra.",
+      "precio": 169.9,
       "movimiento": null,
       "diametro": "39 mm",
-      "hermeticidad": null,
-      "foto": "/assets/img/relojes-2026/trinchera-hero.webp",
+      "hermeticidad": "50 m (5 ATM)",
+      "foto": "/assets/img/relojes-2026/bauhaus-profile.webp",
       "galeria": [
-        "/assets/img/relojes-2026/trinchera-hero.webp",
-        "/assets/img/relojes-2026/trinchera-profile.webp",
-        "/assets/img/relojes-2026/trinchera-eclipse.webp"
+        "/assets/img/relojes-2026/bauhaus-profile.webp",
+        "/assets/img/relojes-2026/bauhaus-hero.webp",
+        "/assets/img/relojes-2026/bauhaus-back.webp"
       ],
       "fichaTecnica": [
         [
           "Caja",
-          "Acero 316L cepillado"
+          "Acero inoxidable 316L"
+        ],
+        [
+          "Bisel",
+          "Fijo liso, pulido"
         ],
         [
           "Esfera",
-          "Negro mate de alta lectura"
+          "Blanca minimalista"
         ],
         [
-          "Correa",
-          "Tejido verde oliva"
-        ],
-        [
-          "Trasera",
-          "Acero macizo"
+          "Agujas",
+          "Dauphine, azuladas"
         ]
-      ]
+      ],
+      "configurador": {
+        "_": "Catálogo final de la hoja de materiales (03/08/2026). Sin grupo de correa: este modelo va siempre con el mismo brazalete.",
+        "acabados": [
+          {
+            "id": "alba",
+            "nombre": "Alba",
+            "descriptor": "Cuarzo Ronda 1069 de segundero pequeño",
+            "resumen": "El segundero pequeño a las seis, que es la firma de esta esfera, con la precisión del cuarzo suizo.",
+            "movimiento": "Ronda 1069, cuarzo suizo",
+            "movimientoTipo": "Cuarzo con segundero pequeño",
+            "frecuencia": "32.768 Hz",
+            "autonomia": "Pila de unos 3 años",
+            "cristal": "Zafiro",
+            "caja": "Acero inoxidable 316L, pulido y satinado · unos 11 mm",
+            "bisel": "Fijo liso, acero pulido",
+            "fondo": "Macizo, atornillado",
+            "peso": "unos 130 g con brazalete"
+          },
+          {
+            "id": "cenit",
+            "nombre": "Cenit",
+            "descriptor": "Automático Seagull ST1701 y fondo de cristal",
+            "resumen": "Automático de segundero pequeño y sin fecha, con el fondo abierto para ver el movimiento.",
+            "movimiento": "Seagull ST1701, automático",
+            "movimientoTipo": "Automático con segundero pequeño, sin fecha",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 40 horas de reserva de marcha",
+            "cristal": "Zafiro",
+            "caja": "Acero inoxidable 316L, pulido y satinado · unos 12 mm",
+            "bisel": "Fijo liso, acero pulido",
+            "fondo": "De cristal, con el movimiento a la vista",
+            "peso": "unos 135 g con brazalete"
+          }
+        ],
+        "correas": [],
+        "precios": {
+          "alba": [
+            169.9
+          ],
+          "cenit": [
+            199.9
+          ]
+        },
+        "comunes": {
+          "Diámetro": "39 mm",
+          "Estanqueidad": "50 m (5 ATM)",
+          "Esfera": "Blanca minimalista, índices impresos finos y números",
+          "Agujas": "Dauphine, con segundero pequeño",
+          "Brazalete": "Acero 316L pulido, broche plegable oculto",
+          "Ancho de asa": "20 mm",
+          "Corona": "Roscada"
+        }
+      },
+      "historiaOriginal": {
+        "_": "Historia del reloj original. Nombra marca y modelo con todas sus letras y lleva su propio aviso legal.",
+        "original": "Nomos Glashütte Tangente",
+        "antetitulo": "La historia del original",
+        "titular": "Una escuela de diseño que duró catorce años<br><em>y sigue dictando esferas.</em>",
+        "entradilla": "La Bauhaus cerró en 1933 sin haber hecho un solo reloj. Sesenta años después, en un pueblo de Sajonia, alguien puso su idea en una esfera y le salió el Tangente.",
+        "cuerpo": [
+          "Walter Gropius fundó la Bauhaus en Weimar en 1919 con una regla que parecía obvia y no lo era: que nada de lo que se dibuje esté ahí solo para adornar. La escuela duró catorce años y la cerraron en 1933, pero para entonces su manera de mirar los objetos ya se había escapado de las aulas.",
+          "El otro ingrediente es un pueblo. En Glashütte, en Sajonia, se hacen relojes desde 1845. Con la partición de Alemania la industria quedó del lado oriental y se apagó durante décadas; cuando cayó el Muro, en 1990, se fundó allí Nomos Glashütte.",
+          "El Tangente es lo que sale de juntar las dos cosas. Números impresos y finos en vez de índices aplicados, segundero pequeño a las seis, agujas azuladas, caja delgada y ni un adorno que no cumpla una función. No hay nada que quitar, que era exactamente el punto.",
+          "Que un reloj de vestir lleve el segundero pequeño abajo no es capricho: viene de los calibres antiguos, donde la rueda de segundos estaba descentrada. La Bauhaus no lo inventó, lo dejó a la vista en lugar de disimularlo."
+        ],
+        "datos": [
+          [
+            "1845",
+            "Empieza la relojería en Glashütte, el pueblo sajón del que sale toda esta escuela."
+          ],
+          [
+            "1919",
+            "Walter Gropius funda la Bauhaus en Weimar."
+          ],
+          [
+            "1933",
+            "La escuela cierra, pero su manera de diseñar ya está fuera."
+          ],
+          [
+            "1990",
+            "Caído el Muro, se funda Nomos Glashütte y el Tangente lleva la idea a una esfera."
+          ]
+        ],
+        "cierre": "El nuestro no es aquel reloj. Toma su gramática —números finos, segundero pequeño, caja delgada, nada de más— y la firma con nuestro nombre.",
+        "aviso": "Nomos, Glashütte y Tangente son marcas registradas de sus titulares. laOra no está afiliada a Nomos Glashütte: esta sección es divulgación sobre el reloj y la escuela que inspiran el homenaje, y ni el Bauhaus ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno."
+      }
     },
     {
       "slug": "precisa",
@@ -318,61 +404,61 @@
       ]
     },
     {
-      "slug": "bauhaus",
+      "slug": "trinchera",
       "codigo": "LO—05",
-      "nombre": "Bauhaus",
-      "familia": "Reloj de vestir",
-      "homenaje": "Homenaje al racionalismo alemán",
-      "frase": "Menos elementos. Más intención.",
-      "descripcion": "Proporción, espacio y agujas azules para una elegancia que no necesita levantar la voz.",
-      "historia": "Bauhaus celebra la tradición del diseño funcional centroeuropeo: cada línea tiene un motivo y nada ocupa más espacio del necesario. La esfera y la firma son inequívocamente laOra.",
+      "nombre": "Trinchera",
+      "familia": "Reloj de campo",
+      "homenaje": "Homenaje al reloj de campaña clásico",
+      "frase": "Legible por instinto.",
+      "descripcion": "Un reloj de campaña honesto: números limpios, contraste absoluto y acero sin artificios.",
+      "historia": "Trinchera rinde homenaje al reloj que nació como herramienta. Conserva su lectura inmediata y su austeridad funcional, sin insignias militares ni logotipos ajenos.",
       "precio": null,
       "movimiento": null,
-      "diametro": "38 mm",
+      "diametro": "39 mm",
       "hermeticidad": null,
-      "foto": "/assets/img/relojes-2026/bauhaus-profile.webp",
+      "foto": "/assets/img/relojes-2026/trinchera-hero.webp",
       "galeria": [
-        "/assets/img/relojes-2026/bauhaus-profile.webp",
-        "/assets/img/relojes-2026/bauhaus-hero.webp",
-        "/assets/img/relojes-2026/bauhaus-back.webp"
+        "/assets/img/relojes-2026/trinchera-hero.webp",
+        "/assets/img/relojes-2026/trinchera-profile.webp",
+        "/assets/img/relojes-2026/trinchera-eclipse.webp"
       ],
       "fichaTecnica": [
         [
           "Caja",
-          "Acero pulido"
+          "Acero 316L cepillado"
         ],
         [
           "Esfera",
-          "Marfil mate"
-        ],
-        [
-          "Agujas",
-          "Azules"
+          "Negro mate de alta lectura"
         ],
         [
           "Correa",
-          "Piel arena"
+          "Tejido verde oliva"
+        ],
+        [
+          "Trasera",
+          "Acero macizo"
         ]
       ]
     },
     {
-      "slug": "cero-cero",
-      "codigo": "LO—06",
-      "nombre": "Cero Cero",
-      "familia": "Buceo",
-      "homenaje": "Homenaje al buceador profesional contemporáneo",
-      "frase": "Herramienta bajo el agua. Carácter fuera de ella.",
-      "descripcion": "Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.",
-      "historia": "Cero Cero recoge el lenguaje del reloj de buceo profesional sin copiar una identidad ajena. Sus proporciones, su esfera y su firma laOra convierten la referencia en una pieza independiente.",
+      "slug": "bitacora",
+      "codigo": "LO—07",
+      "nombre": "Bitácora",
+      "familia": "Deportivo integrado",
+      "homenaje": "Homenaje a la arquitectura deportiva integrada",
+      "frase": "Equilibrio, precisión y uso diario.",
+      "descripcion": "Geometría de acero, perfil contenido y una esfera que cambia con la luz.",
+      "historia": "Bitácora toma como punto de partida el reloj deportivo integrado de los setenta y lo traduce a una propuesta directa, legible y con marca propia.",
       "precio": null,
       "movimiento": null,
-      "diametro": "41 mm",
+      "diametro": "40 mm",
       "hermeticidad": null,
-      "foto": "/assets/img/relojes-2026/cero-cero-hero.webp",
+      "foto": "/assets/img/relojes-2026/bitacora.webp",
       "galeria": [
-        "/assets/img/relojes-2026/cero-cero-hero.webp",
-        "/assets/img/relojes-2026/cero-cero-profile.webp",
-        "/assets/img/relojes-2026/cero-cero-back.webp"
+        "/assets/img/relojes-2026/bitacora.webp",
+        "/assets/img/relojes-2026/bitacora-hero-dial.webp",
+        "/assets/img/relojes-2026/bitacora-hero-movement.webp"
       ],
       "fichaTecnica": [
         [
@@ -380,54 +466,16 @@
           "Acero 316L"
         ],
         [
-          "Bisel",
-          "Giratorio de buceo"
+          "Arquitectura",
+          "Brazalete integrado"
         ],
         [
           "Esfera",
-          "Negro mate · acento naranja"
+          "Texturizada"
         ],
         [
-          "Brazalete",
-          "Malla de acero"
-        ]
-      ]
-    },
-    {
-      "slug": "coctel",
-      "codigo": "LO—07",
-      "nombre": "Cóctel",
-      "familia": "Reloj de vestir",
-      "homenaje": "Homenaje a las esferas de cóctel japonesas",
-      "frase": "La hora elegante, sin esperar una ocasión.",
-      "descripcion": "Una esfera marrón trabajada por la luz, índices facetados y piel oscura.",
-      "historia": "Cóctel toma la esfera expresiva del reloj de vestir japonés como punto de partida. La referencia se reconoce; la marca, la selección y el servicio son laOra.",
-      "precio": null,
-      "movimiento": null,
-      "diametro": "38 mm",
-      "hermeticidad": null,
-      "foto": "/assets/img/relojes-2026/coctel-profile.webp",
-      "galeria": [
-        "/assets/img/relojes-2026/coctel-profile.webp",
-        "/assets/img/relojes-2026/coctel-hero.webp",
-        "/assets/img/relojes-2026/coctel-back.webp"
-      ],
-      "fichaTecnica": [
-        [
-          "Caja",
-          "Acero pulido"
-        ],
-        [
-          "Esfera",
-          "Marrón con textura radial"
-        ],
-        [
-          "Índices",
-          "Aplicados y facetados"
-        ],
-        [
-          "Correa",
-          "Piel marrón"
+          "Control",
+          "Revisión individual en Madrid"
         ]
       ]
     },
@@ -466,6 +514,44 @@
         [
           "Correa",
           "Caucho negro waffle"
+        ]
+      ]
+    },
+    {
+      "slug": "coctel",
+      "codigo": "LO—09",
+      "nombre": "Cóctel",
+      "familia": "Reloj de vestir",
+      "homenaje": "Homenaje a las esferas de cóctel japonesas",
+      "frase": "La hora elegante, sin esperar una ocasión.",
+      "descripcion": "Una esfera marrón trabajada por la luz, índices facetados y piel oscura.",
+      "historia": "Cóctel toma la esfera expresiva del reloj de vestir japonés como punto de partida. La referencia se reconoce; la marca, la selección y el servicio son laOra.",
+      "precio": null,
+      "movimiento": null,
+      "diametro": "38 mm",
+      "hermeticidad": null,
+      "foto": "/assets/img/relojes-2026/coctel-profile.webp",
+      "galeria": [
+        "/assets/img/relojes-2026/coctel-profile.webp",
+        "/assets/img/relojes-2026/coctel-hero.webp",
+        "/assets/img/relojes-2026/coctel-back.webp"
+      ],
+      "fichaTecnica": [
+        [
+          "Caja",
+          "Acero pulido"
+        ],
+        [
+          "Esfera",
+          "Marrón con textura radial"
+        ],
+        [
+          "Índices",
+          "Aplicados y facetados"
+        ],
+        [
+          "Correa",
+          "Piel marrón"
         ]
       ]
     }

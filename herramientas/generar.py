@@ -772,9 +772,20 @@ for i, r in enumerate(RELOJES):
         acabados = '\n'.join(
             opcion('acabado', a['id'], a['nombre'], a['descriptor'], n == 0)
             for n, a in enumerate(cfg['acabados']))
-        correas = '\n'.join(
-            opcion('correa', c['id'], c['nombre'], c['detalle'], n == 0)
-            for n, c in enumerate(cfg['correas']))
+        # El grupo de correa solo existe si hay algo que elegir. El Bauhaus
+        # va siempre con el mismo brazalete, así que ahí no se pinta: un
+        # desplegable de una sola opción no es una elección, es un estorbo.
+        if len(cfg['correas']) > 1:
+            correas = '\n'.join(
+                opcion('correa', c['id'], c['nombre'], c['detalle'], n == 0)
+                for n, c in enumerate(cfg['correas']))
+            grupoCorrea = f'''
+        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
+        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
+{correas}
+        </div>'''
+        else:
+            grupoCorrea = ''
         configurador = f"""      <div class="pdp-price">
         <strong data-precio>{precio_es(min(min(v) for v in cfg['precios'].values()))}</strong>
         <span>Impuestos incluidos</span>
@@ -785,12 +796,7 @@ for i, r in enumerate(RELOJES):
         <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
 {acabados}
         </div>
-        <p class="config-nota" data-resumen-acabado>{cfg['acabados'][0]['resumen']}</p>
-
-        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
-{correas}
-        </div>
+        <p class="config-nota" data-resumen-acabado>{cfg['acabados'][0]['resumen']}</p>{grupoCorrea}
       </div>
 
       <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
@@ -843,11 +849,14 @@ for i, r in enumerate(RELOJES):
         # con el acabado (lo reescribe ficha.js) y lo que es igual siempre.
         variables = [('Movimiento', 'movimiento'), ('Tipo', 'movimientoTipo'),
                      ('Frecuencia', 'frecuencia'), ('Autonomía', 'autonomia'),
-                     ('Cristal', 'cristal'), ('Caja', 'caja'), ('Bisel', 'bisel')]
+                     ('Cristal', 'cristal'), ('Caja', 'caja'), ('Bisel', 'bisel'),
+                     ('Fondo', 'fondo')]
         primera = cfg['acabados'][0]
+        # solo se escriben las líneas que ese modelo tiene: el Lunar no
+        # distingue el fondo por acabado, el Bauhaus sí (macizo o de cristal)
         filas = '\n'.join(
             f'        <div><dt>{et}</dt><dd data-spec="{cl}">{primera[cl]}</dd></div>'
-            for et, cl in variables)
+            for et, cl in variables if primera.get(cl))
         filas += '\n' + '\n'.join(
             f'        <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in cfg['comunes'].items())
         filas += f'\n        <div><dt>Peso</dt><dd data-spec="peso">{primera["peso"]}</dd></div>'
@@ -931,7 +940,7 @@ for i, r in enumerate(RELOJES):
                 '/coleccion.html', 'Volver a la colección') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=3"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/ficha.js?v=4"></script>'))
 
 
 print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')

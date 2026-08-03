@@ -52,15 +52,19 @@
     var elReservar = document.querySelector('[data-reservar]');
 
     var acabado = d.acabados[0];
-    var correa = d.correas[0];
+    /* Hay modelos con una sola opción de brazalete y sin grupo que elegir
+       (el Bauhaus). Ahí `correas` viene vacío y el índice de correa es
+       siempre 0: sin esto, `indexOf` devolvía -1 y se quedaban sin precio
+       y con la referencia acabada en 00. */
+    var correas = (d.correas && d.correas.length) ? d.correas : [{ nombre: '' }];
+    var correa = correas[0];
 
     /* La referencia se compone igual que en la hoja de materiales:
        LO-01_Lunar_A01 → modelo + inicial del acabado + número de correa.
        Así lo que el cliente ve en la web y lo que Óscar busca en la hoja
        es la misma cadena. */
     function referencia() {
-      var i = d.acabados.indexOf(acabado);
-      var j = d.correas.indexOf(correa);
+      var j = Math.max(0, correas.indexOf(correa));
       var letra = acabado.nombre.charAt(0).toUpperCase();
       var codigo = d.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
       return codigo + '_' + d.modelo.replace(/\s/g, '') + '_' + letra + ('0' + (j + 1)).slice(-2);
@@ -74,7 +78,7 @@
     }
 
     function pintar() {
-      var j = d.correas.indexOf(correa);
+      var j = Math.max(0, correas.indexOf(correa));
       var lista = d.precios[acabado.id] || [];
       var precio = lista[j];
 
@@ -94,7 +98,7 @@
         elReservar.setAttribute('href',
           '/reservar.html?ref=' + encodeURIComponent(referencia()) +
           '&acabado=' + encodeURIComponent(acabado.nombre) +
-          '&correa=' + encodeURIComponent(correa.nombre));
+          (correa.nombre ? '&correa=' + encodeURIComponent(correa.nombre) : ''));
       }
     }
 
@@ -119,7 +123,7 @@
     }
 
     grupo('acabado', d.acabados, function (v) { acabado = v; });
-    grupo('correa', d.correas, function (v) { correa = v; });
+    grupo('correa', correas, function (v) { correa = v; });
 
     pintar();
   })();
