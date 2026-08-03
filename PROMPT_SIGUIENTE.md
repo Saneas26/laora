@@ -10,7 +10,7 @@ Web en producción: **https://laora.es**
 ## Antes de tocar nada
 
 Lee `/Users/oscar/Sites/laora/TRASPASO_v3.md`. Está completo: rutas,
-generador, estructura, estilo, el modelo de ficha y quince trampas que ya
+generador, estructura, estilo, el modelo de ficha y dieciséis trampas que ya
 han roto algo alguna vez. **Con leerlo una vez basta.**
 
 Presta atención especial al apartado 6. No son consejos: son cosas que ya
