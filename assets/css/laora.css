@@ -305,7 +305,9 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    sobre ESE fondo: 7,1:1 el gris y 4,6:1 el oro.
    No es el oro de la marca en otro sitio de la web — es este fondo el que
    obliga. */
-:root { --gris-galeria: #4e4943; --oro-galeria: #836026; }
+:root { --gris-galeria: #4e4943; --oro-galeria: #836026;
+        /* grafito de la tarjeta del Eclipse; con blanco puro da 10,9:1 */
+        --grafito: #3a3d3f; }
 
 /* ---------- LAS CURIOSIDADES ----------
    Entre la foto y la noticia. Dos botones grandes, sin caja de color: el
@@ -437,6 +439,16 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   padding: 12px; background: var(--paper); }
 .config-opciones button span { font-size: 14px; font-weight: 700; }
 .config-opciones button small { font-size: 12px; color: var(--muted); line-height: 1.35; }
+/* El Eclipse es la gama en negro y su tarjeta lo dice sola: grafito con la
+   letra en blanco puro. 10,9:1 de contraste, muy por encima del 4,5 que
+   pide la norma. El borde del elegido pasa a blanco, porque sobre el
+   grafito el --ink no se veía. */
+.config-opciones button.op-eclipse { background: var(--grafito); border-color: var(--grafito); }
+.config-opciones button.op-eclipse span,
+.config-opciones button.op-eclipse small { color: #fff; }
+.config-opciones button.op-eclipse:hover { border-color: #fff; }
+.config-opciones button.op-eclipse[aria-selected="true"] { background: var(--grafito);
+  border: 2px solid #fff; box-shadow: 0 0 0 1px var(--grafito); }
 .config-nota { margin: -12px 0 22px; font-size: 13px; line-height: 1.5; color: var(--muted); }
 /* la referencia exacta de la combinación: es la misma cadena que usa la
    hoja de materiales, para que web y almacén hablen igual */
