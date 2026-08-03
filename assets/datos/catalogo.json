@@ -28,16 +28,17 @@
       "movimiento": null,
       "diametro": "42 mm",
       "hermeticidad": null,
-      "foto": "/assets/img/relojes-2026/lunar-front.webp",
+      "_foto": "La principal es la de ACERO, que es el Lunar normal. Las otras tres (front, detail, hero) son todas del acabado Eclipse, negro integral, y van detrás en la galería.",
+      "foto": "/assets/img/relojes-2026/lunar-acero.webp",
       "galeria": [
+        "/assets/img/relojes-2026/lunar-acero.webp",
         "/assets/img/relojes-2026/lunar-front.webp",
-        "/assets/img/relojes-2026/lunar-detail.webp",
-        "/assets/img/relojes-2026/lunar-hero.webp"
+        "/assets/img/relojes-2026/lunar-detail.webp"
       ],
       "fichaTecnica": [
-        ["Caja", "Acero con acabado negro"],
+        ["Caja", "Acero 316L"],
         ["Bisel", "Escala taquimétrica"],
-        ["Brazalete", "Acero con acabado negro"],
+        ["Brazalete", "Acero"],
         ["Control", "Revisión individual en Madrid"]
       ]
     },

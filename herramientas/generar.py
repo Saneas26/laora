@@ -330,7 +330,7 @@ escribir('index.html', cabeza(
           <div data-mapa-otras></div>
         </div>
         <article class="laora-value">
-          <img src="{IMG}/lunar-mapa.webp" alt="Reloj laOra Lunar" data-mapa-foto>
+          <img src="{IMG}/lunar-acero.webp" alt="Reloj laOra Lunar" data-mapa-foto>
           <div class="laora-value-price">
             <!-- «laOra» NO se escribe: es el logotipo canónico, en minúsculas
                  salvo la O, que lleva el triángulo invertido a las 12. Aquí
@@ -419,7 +419,7 @@ escribir('index.html', cabeza(
                 '/club.html', 'Conocer Club laOra') + """
 
 </main>
-""" + PIE + scripts('\n<script src="/assets/js/home.js?v=7"></script>'))
+""" + PIE + scripts('\n<script src="/assets/js/home.js?v=8"></script>'))
 
 
 # ============================================================

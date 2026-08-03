@@ -95,7 +95,7 @@
            ficha del Lunar: aquella es el acabado negro integral y esta es
            el de acero, que sobre el oro del cuadro se lee mucho mejor.
            Por eso vive en su propio fichero y no pisa a `lunar-front`. */
-        foto: '/assets/img/relojes-2026/lunar-mapa.webp',
+        foto: '/assets/img/relojes-2026/lunar-acero.webp',
         /* cuadrada y con el reloj centrado: en la franja cuadrada del
            cuadro entra entera sin recortar nada */
         posicion: 'center', posicionMovil: 'center 45%'
