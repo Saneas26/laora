@@ -33,10 +33,10 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
 # max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
 # versión antigua. Vale igual para el CSS que para el JS.
-V_CSS = 26
+V_CSS = 27
 V_CAB = 13
 V_JS_HOME = 8
-V_JS_FICHA = 12
+V_JS_FICHA = 13
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -834,17 +834,20 @@ for i, r in enumerate(RELOJES):
         </div>'''
         else:
             grupoCorrea = ''
-        configurador = f"""      <div class="pdp-price">
-        <strong data-precio>{precio_es(min(x for v in cfg['precios'].values() for x in v if x is not None))}</strong>
-        <span>Impuestos incluidos</span>
-      </div>
-
-      <div class="config">
+        # El precio va EN MEDIO de los dos grupos, no arriba del todo: así
+        # queda a la vista mientras se elige y se ve cambiar. Arriba se
+        # quedaba fuera de pantalla en cuanto bajabas a los acabados.
+        configurador = f"""      <div class="config">
         <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
         <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
 {acabados}
         </div>
-        <p class="config-nota" data-resumen-acabado>{cfg['acabados'][0]['resumen']}</p>{grupoCorrea}
+        <p class="config-nota" data-resumen-acabado>{cfg['acabados'][0]['resumen']}</p>
+
+        <div class="pdp-price">
+          <strong data-precio>{precio_es(min(x for v in cfg['precios'].values() for x in v if x is not None))}</strong>
+          <span>Impuestos incluidos</span>
+        </div>{grupoCorrea}
       </div>
 
       <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.

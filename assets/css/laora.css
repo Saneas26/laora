@@ -433,6 +433,15 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   align-content: center; gap: 4px; text-align: left; border: 1px solid var(--line);
   background: transparent; transition: border-color .18s ease, background .18s ease; }
 .config-opciones button:hover { border-color: var(--ink); }
+/* Correa que ese acabado no lleva. Se queda a la vista para que se vea que
+   existe, pero no se puede pulsar: esa combinación no está en la hoja y no
+   tiene precio. Nada de `opacity`, que hundiría el contraste del texto por
+   debajo del mínimo; se marca con el borde discontinuo y el nombre en gris,
+   que sobre el papel sigue dando 5:1. */
+.config-opciones button[disabled] { cursor: not-allowed; border-style: dashed;
+  background: transparent; }
+.config-opciones button[disabled] span { color: var(--muted); font-weight: 400; }
+.config-opciones button[disabled]:hover { border-color: var(--line); }
 /* el elegido: borde doble y papel. El padding baja 1 px para que el borde
    más grueso no mueva la caja ni un píxel. */
 .config-opciones button[aria-selected="true"] { border: 2px solid var(--ink);

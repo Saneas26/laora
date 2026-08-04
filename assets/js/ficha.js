@@ -163,28 +163,35 @@
 
        El acabado que no declare `correas` las admite todas, que es como se
        comportaban las fichas hasta ahora. */
-    var tituloCorrea = document.getElementById('cfg-correa');
+    var NO_DISPONIBLE = 'No disponible con este acabado';
 
     function ajustarCorreas() {
       var cont = document.querySelector('[data-grupo="correa"]');
-      if (!cont || !acabado.correas) {
-        if (cont) {
-          cont.hidden = false;
-          var todos = cont.querySelectorAll('[data-correa]');
-          for (var t = 0; t < todos.length; t++) todos[t].hidden = false;
-          if (tituloCorrea) tituloCorrea.hidden = false;
-        }
-        return;
-      }
-      var vivos = [];
+      if (!cont) return;
       var botones = cont.querySelectorAll('[data-correa]');
+      var vivos = [];
+
       for (var i = 0; i < botones.length; i++) {
-        var vale = acabado.correas.indexOf(botones[i].dataset.correa) !== -1;
-        botones[i].hidden = !vale;
-        if (vale) vivos.push(botones[i]);
+        var b = botones[i];
+        var vale = !acabado.correas ||
+                   acabado.correas.indexOf(b.dataset.correa) !== -1;
+        if (vale) vivos.push(b);
+
+        /* Se quedan A LA VISTA y apagados, no escondidos: así se ve de un
+           vistazo con qué acabado sí las tendrías. Lo que no puede pasar es
+           que se pulsen, porque esa combinación no existe en la hoja, no
+           tiene precio, y dejaría un pedido sin importe. */
+        b.disabled = !vale;
+        var pie = b.querySelector('small');
+        if (pie) {
+          if (!pie.dataset.detalle) pie.dataset.detalle = pie.textContent;
+          pie.textContent = vale ? pie.dataset.detalle : NO_DISPONIBLE;
+        }
       }
-      /* si la elegida ya no está disponible, se cae a la primera que sí */
-      if (vivos.length && acabado.correas.indexOf(correa.id) === -1) {
+
+      /* si la que estaba elegida ya no vale, se cae a la primera que sí */
+      if (vivos.length && vivos.indexOf(
+            cont.querySelector('[aria-selected="true"]')) === -1) {
         for (var k = 0; k < correas.length; k++) {
           if (correas[k].id === vivos[0].dataset.correa) correa = correas[k];
         }
@@ -195,9 +202,6 @@
           else botones[m].setAttribute('tabindex', '-1');
         }
       }
-      var uno = vivos.length < 2;
-      cont.hidden = uno;
-      if (tituloCorrea) tituloCorrea.hidden = uno;
     }
 
     grupo('acabado', d.acabados, function (v) { acabado = v; ajustarCorreas(); });
