@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 V_CSS = 26
 V_CAB = 13
 V_JS_HOME = 8
-V_JS_FICHA = 10
+V_JS_FICHA = 11
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -835,7 +835,7 @@ for i, r in enumerate(RELOJES):
         else:
             grupoCorrea = ''
         configurador = f"""      <div class="pdp-price">
-        <strong data-precio>{precio_es(min(min(v) for v in cfg['precios'].values()))}</strong>
+        <strong data-precio>{precio_es(min(x for v in cfg['precios'].values() for x in v if x is not None))}</strong>
         <span>Impuestos incluidos</span>
       </div>
 
