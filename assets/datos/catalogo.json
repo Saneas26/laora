@@ -271,7 +271,7 @@
             "id": "alba",
             "nombre": "Alba",
             "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
-            "resumen": "El segundero de barrido del cuarzo, sin el tictac, y el bisel de buceo de 120 clics.",
+            "resumen": "El escalón de entrada, y sin renuncias donde importa: cuarzo japonés de segundero de barrido, caja de acero 316L y el mismo bisel de buceo de 120 clics.",
             "refSufijo": "",
             "peso": "unos 150 g con brazalete",
             "correas": [
@@ -291,7 +291,7 @@
             "id": "levante",
             "nombre": "Levante",
             "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
-            "resumen": "Automático japonés de Citizen, con fecha, y el único que se puede llevar de tres maneras.",
+            "resumen": "Un peldaño por encima: automático japonés de Citizen, con fecha, y cristal de zafiro. El único que se puede llevar de tres maneras.",
             "refSufijo": "",
             "peso": "de unos 75 g con la NATO a unos 150 g con brazalete",
             "descriptor": "Movimiento japonés automático (Citizen)",
@@ -308,7 +308,7 @@
             "id": "cenit",
             "nombre": "Cenit",
             "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
-            "resumen": "Sube a 200 m, zafiro con antirreflejos y la arquitectura suiza del ETA 2824.",
+            "resumen": "El techo de este reloj: 200 metros, zafiro con antirreflejos y el automático de alta frecuencia sobre la arquitectura suiza del ETA 2824.",
             "refSufijo": "-ST2130",
             "peso": "unos 160 g con brazalete",
             "correas": [
@@ -328,7 +328,7 @@
             "id": "cenit-nh38",
             "nombre": "Cenit",
             "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
-            "resumen": "Doscientos metros y la esfera limpia, sin ventanilla de fecha.",
+            "resumen": "Los mismos 200 metros y el mismo zafiro, con el automático japonés de Seiko y la esfera limpia, sin ventanilla de fecha.",
             "refSufijo": "-NH38",
             "peso": "unos 160 g con brazalete",
             "correas": [
@@ -348,7 +348,7 @@
             "id": "eclipse",
             "nombre": "Eclipse",
             "cajaMaterial": "Acero inoxidable 316L en negro",
-            "resumen": "El cuarzo de barrido, aquí sobre la caja en negro.",
+            "resumen": "Todo en negro, con el cuarzo japonés de segundero de barrido.",
             "refSufijo": "-VH31",
             "peso": "unos 150 g con brazalete",
             "correas": [
@@ -368,7 +368,7 @@
             "id": "eclipse-citizen",
             "nombre": "Eclipse",
             "cajaMaterial": "Acero inoxidable 316L en negro",
-            "resumen": "El automático de Citizen, aquí sobre la caja en negro.",
+            "resumen": "Todo en negro, con el automático de Citizen y fecha.",
             "refSufijo": "-8215",
             "peso": "unos 150 g con brazalete",
             "correas": [
@@ -388,7 +388,7 @@
             "id": "eclipse-suizo",
             "nombre": "Eclipse",
             "cajaMaterial": "Acero inoxidable 316L en negro",
-            "resumen": "La arquitectura suiza del ETA 2824 y los 200 m, sobre la caja en negro.",
+            "resumen": "Todo en negro, con los 200 metros y la arquitectura suiza del ETA 2824.",
             "refSufijo": "-ST2130",
             "peso": "unos 160 g con brazalete",
             "correas": [
@@ -408,7 +408,7 @@
             "id": "eclipse-seiko",
             "nombre": "Eclipse",
             "cajaMaterial": "Acero inoxidable 316L en negro",
-            "resumen": "Doscientos metros, esfera sin fecha y la caja en negro.",
+            "resumen": "Todo en negro, con los 200 metros y el automático de Seiko, sin fecha.",
             "refSufijo": "-NH38",
             "peso": "unos 160 g con brazalete",
             "correas": [
