@@ -51,13 +51,36 @@
     var elRef = document.querySelector('[data-ref]');
     var elReservar = document.querySelector('[data-reservar]');
 
-    var acabado = d.acabados[0];
     /* Hay modelos con una sola opción de brazalete y sin grupo que elegir
        (el Bauhaus). Ahí `correas` viene vacío y el índice de correa es
        siempre 0: sin esto, `indexOf` devolvía -1 y se quedaban sin precio
        y con la referencia acabada en 00. */
     var correas = (d.correas && d.correas.length) ? d.correas : [{ nombre: '' }];
-    var correa = correas[0];
+
+    /* La ficha abre por la combinación MÁS BARATA que se pueda pedir, no por
+       la primera de la lista: es la cifra con la que Óscar quiere que empiece
+       a mirar quien llega. Se recorre la tabla de precios entera y se busca el
+       mínimo; si hay empate gana el primero, que es el orden de la hoja.
+       El generador escribe en el HTML esa misma combinación, así que la página
+       ya carga bien antes de que este fichero llegue a ejecutarse. */
+    function masBarata() {
+      var mejor = null;
+      for (var i = 0; i < d.acabados.length; i++) {
+        var lista = d.precios[d.acabados[i].id] || [];
+        for (var j = 0; j < lista.length; j++) {
+          if (lista[j] == null) continue;
+          if (!mejor || lista[j] < mejor.precio) {
+            mejor = { acabado: d.acabados[i], correa: correas[j] || correas[0],
+                      precio: lista[j] };
+          }
+        }
+      }
+      return mejor || { acabado: d.acabados[0], correa: correas[0] };
+    }
+
+    var arranque = masBarata();
+    var acabado = arranque.acabado;
+    var correa = arranque.correa;
 
     /* La referencia se compone igual que en la hoja de materiales:
        LO-01_Lunar_A01 → modelo + inicial del acabado + número de correa.
@@ -124,6 +147,14 @@
         var valor = acabado[clave];
         campos[i].textContent = valor || '';
         if (campos[i].parentElement) campos[i].parentElement.hidden = !valor;
+      }
+
+      /* La foto grande sigue al acabado: el Eclipse tiene la suya, en negro,
+         y no la del acero. Se hace pulsando su miniatura, que ya cambia la
+         imagen y marca cuál está activa. */
+      if (acabado.foto) {
+        var mini = document.querySelector('[data-mini="' + acabado.foto + '"]');
+        if (mini && !mini.classList.contains('active')) mini.click();
       }
 
       /* el botón se lleva la combinación elegida a la reserva */
@@ -204,9 +235,26 @@
       }
     }
 
+    /* Deja marcado el botón que toca. Lo normal es que el generador ya lo
+       haya escrito así, pero si algún día los datos y el HTML se desalinean
+       manda el dato, no el marcado. */
+    function marcar(nombre, id) {
+      var cont = document.querySelector('[data-grupo="' + nombre + '"]');
+      if (!cont) return;
+      var botones = cont.querySelectorAll('[data-' + nombre + ']');
+      for (var i = 0; i < botones.length; i++) {
+        var esta = botones[i].dataset[nombre] === id;
+        botones[i].setAttribute('aria-selected', String(esta));
+        if (esta) botones[i].removeAttribute('tabindex');
+        else botones[i].setAttribute('tabindex', '-1');
+      }
+    }
+
     grupo('acabado', d.acabados, function (v) { acabado = v; ajustarCorreas(); });
     grupo('correa', correas, function (v) { correa = v; });
 
+    marcar('acabado', acabado.id);
+    if (correa.id) marcar('correa', correa.id);
     ajustarCorreas();
     pintar();
   })();

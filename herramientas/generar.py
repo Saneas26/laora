@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 V_CSS = 27
 V_CAB = 13
 V_JS_HOME = 8
-V_JS_FICHA = 13
+V_JS_FICHA = 14
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -814,18 +814,29 @@ for i, r in enumerate(RELOJES):
             return (f'          <button type="button" role="tab" data-{attr}="{ident}"{cls}{sel}>'
                     f'<span>{nombre}</span><small>{detalle}</small></button>')
 
+        # LA FICHA ABRE POR LA COMBINACIÓN MÁS BARATA que se pueda pedir, no
+        # por la primera de la lista (Óscar, 04/08/2026). Se busca aquí y se
+        # escribe ya marcada, para que la página cargue bien aunque el JS
+        # tarde o no llegue. `ficha.js` calcula lo mismo y coincide.
+        barata = min(
+            ((a, j, p)
+             for a in cfg['acabados']
+             for j, p in enumerate(cfg['precios'][a['id']]) if p is not None),
+            key=lambda t: t[2])
+        acEleg, correaEleg, precioEleg = barata
+
         # El Eclipse es la gama en negro y su tarjeta va en grafito con la
         # letra en blanco puro, en los ocho modelos. Óscar, 03/08/2026.
         acabados = '\n'.join(
-            opcion('acabado', a['id'], a['nombre'], a['descriptor'], n == 0,
+            opcion('acabado', a['id'], a['nombre'], a['descriptor'], a is acEleg,
                    'op-eclipse' if a['nombre'].startswith('Eclipse') else '')
-            for n, a in enumerate(cfg['acabados']))
+            for a in cfg['acabados'])
         # El grupo de correa solo existe si hay algo que elegir. El Bauhaus
         # va siempre con el mismo brazalete, así que ahí no se pinta: un
         # desplegable de una sola opción no es una elección, es un estorbo.
         if len(cfg['correas']) > 1:
             correas = '\n'.join(
-                opcion('correa', c['id'], c['nombre'], c['detalle'], n == 0)
+                opcion('correa', c['id'], c['nombre'], c['detalle'], n == correaEleg)
                 for n, c in enumerate(cfg['correas']))
             grupoCorrea = f'''
         <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
@@ -842,10 +853,10 @@ for i, r in enumerate(RELOJES):
         <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
 {acabados}
         </div>
-        <p class="config-nota" data-resumen-acabado>{cfg['acabados'][0]['resumen']}</p>
+        <p class="config-nota" data-resumen-acabado>{acEleg['resumen']}</p>
 
         <div class="pdp-price">
-          <strong data-precio>{precio_es(min(x for v in cfg['precios'].values() for x in v if x is not None))}</strong>
+          <strong data-precio>{precio_es(precioEleg)}</strong>
           <span>Impuestos incluidos</span>
         </div>{grupoCorrea}
       </div>
@@ -887,8 +898,12 @@ for i, r in enumerate(RELOJES):
     }
     ld = json.dumps(datos, ensure_ascii=False).replace('<', '\\u003c')
 
+    # Con qué foto abre la ficha: la del acabado elegido si la tiene —el
+    # Eclipse enseña la suya, en negro— y si no, la primera de la galería.
+    foto_ini = (acEleg.get('foto') if cfg else None) or r['galeria'][0]
+
     def mini(n, g):
-        activa = ' class="active"' if n == 0 else ''
+        activa = ' class="active"' if g == foto_ini else ''
         return (f'          <button type="button" data-mini="{g}"{activa}'
                 f' aria-label="Ver imagen {n + 1} de {r["nombre"]}">'
                 f'<img src="{g}" alt=""></button>')
@@ -903,7 +918,7 @@ for i, r in enumerate(RELOJES):
                      ('Cristal', 'cristal'), ('Caja', 'caja'),
                      ('Diámetro', 'diametro'), ('Estanqueidad', 'estanqueidad'),
                      ('Bisel', 'bisel'), ('Esfera', 'esfera'), ('Fondo', 'fondo')]
-        primera = cfg['acabados'][0]
+        primera = acEleg
         # solo se escriben las líneas que ese modelo tiene: el Lunar no
         # distingue el fondo por acabado, el Bauhaus sí (macizo o de cristal),
         # y el Cero Cero cambia de estanqueidad (100 o 200 m) y de esfera
@@ -948,7 +963,7 @@ for i, r in enumerate(RELOJES):
   <section class="pdp-hero">
     <div class="pdp-gallery">
       <div class="pdp-main-image">
-        <img src="{r['galeria'][0]}" alt="{r['nombre']}, vista seleccionada" data-foto-grande fetchpriority="high">
+        <img src="{foto_ini}" alt="{r['nombre']}, vista seleccionada" data-foto-grande fetchpriority="high">
       </div>
       <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
 {minis}

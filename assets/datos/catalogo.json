@@ -87,7 +87,8 @@
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
-            "autonomia": "Pila SR927SW, unos 3 años"
+            "autonomia": "Pila SR927SW, unos 3 años",
+            "foto": "/assets/img/relojes-2026/lunar-acero.webp"
           },
           {
             "id": "cenit",
@@ -120,7 +121,8 @@
             "movimiento": "Seagull ST19 de rueda de columnas",
             "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
-            "autonomia": "Unas 45 horas de reserva de marcha"
+            "autonomia": "Unas 45 horas de reserva de marcha",
+            "foto": "/assets/img/relojes-2026/lunar-acero.webp"
           },
           {
             "id": "eclipse",
@@ -148,7 +150,8 @@
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
-            "autonomia": "Pila SR927SW, unos 3 años"
+            "autonomia": "Pila SR927SW, unos 3 años",
+            "foto": "/assets/img/relojes-2026/lunar-front.webp"
           }
         ],
         "correas": [
