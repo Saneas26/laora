@@ -290,7 +290,21 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .finish-cards p { color: var(--muted); line-height: 1.55; font-size: 13px; margin: 20px 0 0; }
 .finish-cards .dark p { color: #afb2aa; }
 
-.pdp-hero { min-height: calc(100svh - 76px); display: grid; grid-template-columns: 1.1fr .9fr; }
+/* Las curiosidades y la historia eran hijas de `.pdp-gallery` para rellenar
+   el hueco blanco de debajo de la foto. En el escritorio funcionaba, pero al
+   apilarse en el móvil se metían entre la foto y el precio: había que bajar
+   3.100 px para ver cuánto cuesta el reloj. Ahora son hermanas y se colocan
+   con la rejilla, así que en el móvil —una sola columna— caen solas donde
+   toca: foto, elección y precio, y después lo que se lee con calma.
+   Se llevan puesto el fondo de la galería, que es sobre el que se midió su
+   contraste. */
+.pdp-hero { min-height: calc(100svh - 76px); display: grid; grid-template-columns: 1.1fr .9fr;
+  align-items: start; }
+.pdp-hero > .curiosidades, .pdp-hero > .pdp-historia { grid-column: 1;
+  background: #e9e5dc; padding-inline: 25px; }
+.pdp-hero > .pdp-gallery { grid-column: 1; grid-row: 1; }
+.pdp-hero > .pdp-buy { grid-column: 2; grid-row: 1 / -1; }
+.pdp-hero > .pdp-historia { padding-bottom: 25px; }
 .pdp-gallery { padding: 25px; background: #e9e5dc; display: grid; grid-template-columns: 76px 1fr; gap: 18px; min-width: 0; }
 .pdp-main-image { grid-column: 2; min-width: 0; }
 .pdp-main-image img { width: 100%; height: calc(100svh - 126px); object-fit: cover; }
@@ -559,6 +573,9 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .club-preview, .club-hero { grid-template-columns: 1fr 1fr; gap: 4vw; }
   .club-phone-wrap::before, .device-glow { width: 390px; height: 390px; }
   .pdp-hero { grid-template-columns: 1fr; }
+  /* una sola columna: manda el orden del documento y no hace falta colocar nada */
+  .pdp-hero > .pdp-gallery, .pdp-hero > .pdp-buy,
+  .pdp-hero > .curiosidades, .pdp-hero > .pdp-historia { grid-column: 1; grid-row: auto; }
   .pdp-main-image img { height: 75svh; }
   .pdp-buy { padding: 65px 7vw; }
   .pdp-historia { padding-inline: 25px 25px; }
@@ -857,3 +874,65 @@ footer small { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid rgb
   .cmp-tabla tr.nuestra th, .cmp-tabla tr.nuestra td { background: transparent; }
   .cmp-tabla tr.nuestra td:first-child { box-shadow: none; }
 }
+
+/* ============================================================
+   MÍNIMOS DE TAMAÑO
+   ------------------------------------------------------------
+   La web venía del material de Codex con una escala editorial de
+   mucha versalita pequeña: había información a 9 px —el precio del
+   listado, sin ir más lejos— y la ficha técnica entera a 12.
+   Óscar (04/08/2026) pide unos mínimos. Regla: nada que haya que
+   leer baja de 12 px, y las versales espaciadas tampoco, que se
+   leen peor que la caja baja al mismo cuerpo.
+
+   Los TITULARES NO SE TOCAN: ya se ven bien y Óscar los quiere
+   como están. Aquí solo sube lo pequeño.
+
+   Se queda fuera lo decorativo: el ® del logotipo y la maqueta de
+   teléfono de la portada, que no son texto de lectura.
+   ============================================================ */
+
+/* 9-10 px → 12/13. Lo peor de todo: la familia y el precio del listado */
+.product-meta { font-size: 13px; }
+.product-code { font-size: 12px; }
+.homage-label, .pdp-homage, .hero-caption span, .market-zones span,
+.buy-note { font-size: 12px; }
+.buy-note { line-height: 1.6; }
+
+/* 11 px → 12. Rótulos de sección */
+.section-number, .kicker, .cmp-tabla thead th { font-size: 12px; }
+
+/* 12 px → 13-15. Aquí está el grueso de la información de la ficha */
+.live-specs dt, .live-specs dd { font-size: 15px; line-height: 1.5; }
+.config-opciones button small { font-size: 14px; line-height: 1.4; }
+.config-opciones button span { font-size: 15px; }
+.config-titulo, .config-ref, .pdp-price span { font-size: 13px; }
+.pie-aviso, .ph-aviso, .cmp-aviso, .market-footnote { font-size: 13px; line-height: 1.6; }
+.pie-links a { font-size: 14px; }
+
+/* 13 px → 15. Textos de apoyo que acompañan a una decisión */
+.config-nota, .cur-gancho { font-size: 15px; line-height: 1.5; }
+
+/* Segunda pasada: lo que seguía por debajo de 12 y sí se lee. Los selectores
+   van con el peso de los originales, que fijaban 10 y 11 px desde dos clases;
+   con uno solo no ganaban. Los numeritos de orden («01», «02») suben también,
+   que sale gratis y homogeneiza. */
+.hero-slideshow .hero-caption small { font-size: 12px; }
+.finish-system .finish-cards b, .finish-cards .dark b { font-size: 12px; }
+.honesty-block .honesty-columns span { font-size: 12px; }
+.service-panel .service-list span,
+.trust-strip article > span,
+.quality-section .quality-grid span,
+.benefits-section .benefits-grid span,
+.exploded-section .exploded-copy span,
+.process-section .process-grid span,
+.finish-system .finish-cards span,
+.club-journey li span,
+.workshop-steps span,
+footer small { font-size: 12px; }
+.market-tabs button, .laora-value a, .laora-value-price span,
+.club-preview .float-card span { font-size: 12px; }
+
+/* Queda fuera a propósito: el ® del logotipo, el icono de pausa del carrusel
+   y la maqueta de teléfono de la portada y del club. No son texto de lectura,
+   son dibujo. */

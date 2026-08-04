@@ -33,7 +33,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
 # max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
 # versión antigua. Vale igual para el CSS que para el JS.
-V_CSS = 29
+V_CSS = 34
 V_CAB = 13
 V_JS_HOME = 8
 V_JS_FICHA = 14
@@ -1043,8 +1043,6 @@ for i, r in enumerate(RELOJES):
       <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
 {minis}
       </div>
-{curiosidades}
-{historia}
     </div>
     <div class="pdp-buy">
       <p class="kicker">{r['codigo']} · {r['familia']}</p>
@@ -1057,6 +1055,8 @@ for i, r in enumerate(RELOJES):
       </dl>
       <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
     </div>
+{curiosidades}
+{historia}
   </section>
 
 {historia_o_comparativa(r)}
