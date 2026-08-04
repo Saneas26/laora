@@ -291,7 +291,75 @@
             "Por eso empieza en 60 y no llega más abajo: a partir de un minuto por kilómetro la aguja daría la vuelta entera y la lectura dejaría de tener sentido. Nació para cronometrar coches, mucho antes de que a nadie se le ocurriera mandarlo al espacio."
           ]
         }
-      ]
+      ],
+      "comparativa": {
+        "_": "Comparativa de precios contra referencias del mismo tipo. Los PVP y las valoraciones los da Óscar. `nuestra: true` marca la fila propia.",
+        "antetitulo": "01 — POR QUÉ ESTE MOVIMIENTO",
+        "titular": "Dónde hemos puesto<br><em>el presupuesto.</em>",
+        "cuerpo": [
+          "Hemos elegido el Seiko VK63 porque ofrece la precisión del cuarzo, el tacto de un cronógrafo mecánico y un mantenimiento mínimo. Preferimos invertir el presupuesto en una caja de acero macizo, cristal de zafiro y acabados de calidad antes que en un movimiento que multiplicaría el precio del reloj."
+        ],
+        "destacado": "Precisión: ±20 segundos al mes aproximadamente, muy superior a cualquier cronógrafo mecánico convencional.",
+        "columnas": [
+          "Modelo",
+          "PVP",
+          "Calidad mecánica",
+          "Precisión",
+          "Mantenimiento"
+        ],
+        "filas": [
+          {
+            "estrellas": 5,
+            "modelo": "Rolex Cosmograph Daytona",
+            "pvp": "16.550 €",
+            "mecanica": "Excelente",
+            "precision": "Muy buena",
+            "mantenimiento": "Alto"
+          },
+          {
+            "estrellas": 5,
+            "modelo": "Grand Seiko Tentagraph",
+            "pvp": "15.000 €",
+            "mecanica": "Excelente",
+            "precision": "Muy buena",
+            "mantenimiento": "Alto"
+          },
+          {
+            "estrellas": 5,
+            "modelo": "Omega Speedmaster Racing Master Chronometer",
+            "pvp": "11.000 €",
+            "mecanica": "Excelente",
+            "precision": "Muy buena",
+            "mantenimiento": "Alto"
+          },
+          {
+            "estrellas": 4,
+            "nuestra": true,
+            "modelo": "Lunar · Seiko VK63",
+            "pvp": "219,90 €",
+            "mecanica": "Muy alta",
+            "precision": "Excelente",
+            "mantenimiento": "Muy bajo"
+          },
+          {
+            "estrellas": 3,
+            "modelo": "Seagull",
+            "pvp": "300 €",
+            "mecanica": "Buena",
+            "precision": "Buena",
+            "mantenimiento": "Medio"
+          },
+          {
+            "estrellas": 2,
+            "modelo": "Miyota básicos — Citizen, Timex",
+            "pvp": "300 €",
+            "mecanica": "Correcta",
+            "precision": "Excelente",
+            "mantenimiento": "Muy bajo"
+          }
+        ],
+        "aviso": "Precios de venta al público consultados en agosto de 2026, a título orientativo. Las marcas citadas pertenecen a sus titulares y no están afiliadas a laOra."
+      }
     },
     {
       "slug": "cero-cero",

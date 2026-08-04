@@ -787,3 +787,73 @@ footer small { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid rgb
   .gp-item img, .gp-item .gp-ico { width: 72px; height: 72px; border-radius: 18px; }
   .gp-item .gp-ico svg { width: 32px; height: 32px; }
 }
+
+/* ============================================================
+   COMPARATIVA DE PRECIOS
+   ------------------------------------------------------------
+   Sustituye al bloque «01 — el homenaje» en el reloj que la traiga.
+   Pone nuestro precio en la misma tabla que el de las referencias de
+   su clase. Es el único sitio de la ficha donde se nombra a otras
+   marcas fuera de la sección de historia, y lleva su propio aviso.
+   ============================================================ */
+.pdp-comparativa > .cmp-tabla { grid-column: 1 / -1; padding-top: 0; margin-top: 30px;
+  color: inherit; font-size: inherit; }
+.cmp-destacado { margin-top: 22px !important; padding-left: 16px;
+  border-left: 2px solid var(--oro-galeria); color: var(--ink); }
+
+.cmp-tabla table { width: 100%; border-collapse: collapse; }
+.cmp-tabla thead th { padding: 0 14px 12px; text-align: left; font-size: 11px;
+  font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink); border-bottom: 1px solid var(--ink); white-space: nowrap; }
+.cmp-tabla tbody th, .cmp-tabla tbody td { padding: 16px 14px; text-align: left;
+  font-size: 15px; line-height: 1.4; color: var(--muted);
+  border-bottom: 1px solid var(--line); vertical-align: middle; }
+.cmp-tabla tbody th { font-weight: 700; color: var(--ink); }
+.cmp-tabla td[data-col="PVP"] { font-family: var(--serif); font-size: 19px;
+  color: var(--ink); white-space: nowrap; }
+/* las estrellas en el oro oscuro, que sobre el marfil sí llega al contraste
+   que pide la norma; el --gold claro se queda en 3,4:1 y no vale para esto */
+.cmp-estrellas { color: var(--oro-galeria) !important; font-size: 15px;
+  letter-spacing: .09em; white-space: nowrap; }
+
+/* la fila propia: papel, filo de oro y todo el texto a plena tinta */
+.cmp-tabla tr.nuestra th, .cmp-tabla tr.nuestra td { background: var(--paper);
+  color: var(--ink); font-weight: 700; }
+.cmp-tabla tr.nuestra td:first-child { box-shadow: inset 3px 0 0 var(--oro-galeria); }
+.cmp-tabla tr.nuestra .cb-marca { font-size: 15px; }
+
+.cmp-aviso { margin: 18px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+/* El texto de esta sección lo daba `.pdp-story > div:last-child`, y aquí el
+   último hijo ya no es el texto sino la tabla: se le pone a mano. */
+.pdp-comparativa > div:nth-child(2) { padding-top: 70px; font-size: 18px;
+  color: var(--muted); line-height: 1.75; }
+
+/* `.pdp-story` se queda en dos columnas a cualquier ancho, y con una tabla
+   dentro eso desbordaba 38 px por la derecha en el móvil. Aquí baja a una. */
+@media (max-width: 1050px) {
+  .pdp-comparativa { grid-template-columns: 1fr; gap: 34px; }
+  .pdp-comparativa > div { min-width: 0; }
+  .pdp-comparativa > div:nth-child(2) { padding-top: 0; }
+  .pdp-comparativa > .cmp-tabla { margin-top: 6px; }
+}
+/* En el móvil no caben seis columnas, y una tabla que se arrastra de lado
+   se lee fatal. Cada reloj pasa a ser su propia tarjeta, con la etiqueta
+   de la columna delante de cada dato. */
+@media (max-width: 720px) {
+  .cmp-tabla thead { position: absolute; width: 1px; height: 1px;
+    overflow: hidden; clip: rect(0 0 0 0); }
+  .cmp-tabla tr { display: block; padding: 18px; margin-bottom: 12px;
+    border: 1px solid var(--line); }
+  .cmp-tabla tbody th, .cmp-tabla tbody td { display: flex; gap: 18px;
+    justify-content: space-between; align-items: baseline;
+    padding: 7px 0; border: 0; }
+  .cmp-tabla tbody th { font-size: 17px; padding-bottom: 12px; }
+  .cmp-tabla td[data-col]::before { content: attr(data-col); flex: none;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); }
+  .cmp-tabla .cmp-estrellas { display: block; padding-bottom: 4px; }
+  .cmp-tabla tr.nuestra { border-color: var(--oro-galeria); border-width: 2px; }
+  .cmp-tabla tr.nuestra th, .cmp-tabla tr.nuestra td { background: transparent; }
+  .cmp-tabla tr.nuestra td:first-child { box-shadow: none; }
+}

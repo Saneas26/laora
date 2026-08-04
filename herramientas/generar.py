@@ -33,7 +33,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
 # max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
 # versión antigua. Vale igual para el CSS que para el JS.
-V_CSS = 27
+V_CSS = 29
 V_CAB = 13
 V_JS_HOME = 8
 V_JS_FICHA = 14
@@ -61,6 +61,81 @@ IMG = '/assets/img/relojes-2026'
 # ============================================================
 MARCA = ('<span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span>'
          '<span class="solo-lectores">laOra</span>')
+
+
+# ============================================================
+# EL BLOQUE «01» DE LA FICHA
+# ------------------------------------------------------------
+# Por defecto explica el homenaje. El reloj que traiga `comparativa`
+# lo cambia por una tabla que pone su precio al lado del de las
+# referencias de su misma clase — Óscar quiere que esa comparación
+# se vea, y que se vea en todos los modelos según se vayan cerrando.
+# ============================================================
+
+def historia_o_comparativa(r):
+    c = r.get('comparativa')
+    if not c:
+        return f"""  <section class="pdp-story">
+    <div>
+      <p class="section-number">01 — EL HOMENAJE</p>
+      <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
+    </div>
+    <div>
+      <p>{r['historia']}</p>
+      <p>La esfera lleva únicamente el nombre {MARCA} y el del modelo. No utilizamos marcas, coronas, escudos ni emblemas de terceros.</p>
+    </div>
+  </section>"""
+
+    def celda(f, clave, etiqueta):
+        return '<td data-col="' + etiqueta + '">' + f[clave] + '</td>'
+
+    NL = chr(10)
+    filas = []
+    for f in c['filas']:
+        n = f['estrellas']
+        # el nombre propio se dibuja con el logotipo, nunca escrito
+        nombre = (MARCA + ' ' + f['modelo']) if f.get('nuestra') else f['modelo']
+        clase = ' class="nuestra"' if f.get('nuestra') else ''
+        filas.append(
+            '          <tr' + clase + '>' + NL
+            + '            <td class="cmp-estrellas">'
+            + '<span aria-hidden="true">' + '★' * n + '☆' * (5 - n) + '</span>'
+            + '<span class="solo-lectores">' + str(n) + ' de 5</span></td>' + NL
+            + '            <th scope="row" data-col="Modelo">' + nombre + '</th>' + NL
+            + '            ' + celda(f, 'pvp', 'PVP')
+            + celda(f, 'mecanica', 'Calidad mecánica')
+            + celda(f, 'precision', 'Precisión')
+            + celda(f, 'mantenimiento', 'Mantenimiento') + NL
+            + '          </tr>')
+
+    cuerpo = '\n      '.join(f'<p>{t}</p>' for t in c['cuerpo'])
+    cabeceras = '\n            '.join(
+        f'<th scope="col">{t}</th>' for t in c['columnas'])
+
+    return f"""  <section class="pdp-story pdp-comparativa">
+    <div>
+      <p class="section-number">{c['antetitulo']}</p>
+      <h2>{c['titular']}</h2>
+    </div>
+    <div>
+      {cuerpo}
+      <p class="cmp-destacado">{c['destacado']}</p>
+    </div>
+
+    <div class="cmp-tabla">
+      <table>
+        <thead>
+          <tr><th scope="col"><span class="solo-lectores">Valoración</span></th>
+            {cabeceras}
+          </tr>
+        </thead>
+        <tbody>
+{NL.join(filas)}
+        </tbody>
+      </table>
+      <p class="cmp-aviso">{c['aviso']}</p>
+    </div>
+  </section>"""
 
 
 # ============================================================
@@ -984,16 +1059,7 @@ for i, r in enumerate(RELOJES):
     </div>
   </section>
 
-  <section class="pdp-story">
-    <div>
-      <p class="section-number">01 — EL HOMENAJE</p>
-      <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
-    </div>
-    <div>
-      <p>{r['historia']}</p>
-      <p>La esfera lleva únicamente el nombre laOra y el del modelo. No utilizamos marcas, coronas, escudos ni emblemas de terceros.</p>
-    </div>
-  </section>
+{historia_o_comparativa(r)}
 
   <section class="exploded-section">
     <div class="exploded-media"><img src="{r['galeria'][1] if len(r['galeria']) > 1 else r['foto']}" alt="Detalle constructivo de {r['nombre']}" loading="lazy"></div>
