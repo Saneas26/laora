@@ -38,23 +38,23 @@
       "fichaTecnica": [
         [
           "Caja",
-          "Acero 316L"
+          "Acero inoxidable 316L"
         ],
         [
           "Bisel",
           "Escala taquimétrica"
         ],
         [
-          "Brazalete",
-          "Acero"
+          "Cristal",
+          "Zafiro"
         ],
         [
-          "Control",
-          "Revisión individual en Madrid"
+          "Correas",
+          "Seis a elegir"
         ]
       ],
       "configurador": {
-        "_": "Datos del catálogo final de la hoja de materiales (03/08/2026). Solo lo que ve el cliente: NUNCA proveedores, enlaces de compra, coste ni margen.",
+        "_": "Catálogo final de la hoja de materiales (LO-01, 18 filas = 3 acabados x 6 correas). Auditado el 04/08/2026: el cristal es zafiro en las 18, las dos primeras correas son el mismo brazalete con distinto cierre, y el cierre no va en «comunes» porque cambia con la correa.",
         "acabados": [
           {
             "id": "alba",
@@ -65,7 +65,7 @@
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
             "autonomia": "Pila SR927SW, unos 3 años",
-            "cristal": "Mineral endurecido de alto grado",
+            "cristal": "Zafiro plano",
             "caja": "Acero inoxidable 316L, pulido y satinado",
             "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
             "peso": "unos 120 g con brazalete"
@@ -79,10 +79,10 @@
             "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 45 horas de reserva de marcha",
-            "cristal": "Zafiro con tratamiento antirreflejo",
+            "cristal": "Zafiro plano con tratamiento antirreflejos",
             "caja": "Acero inoxidable 316L, pulido y satinado",
             "bisel": "Fijo con escala taquimétrica, inserto de cerámica",
-            "peso": "unos 135 g con brazalete"
+            "peso": "de unos 100 g con la NATO a unos 135 g con brazalete"
           },
           {
             "id": "eclipse",
@@ -93,7 +93,7 @@
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
             "autonomia": "Pila SR927SW, unos 3 años",
-            "cristal": "Zafiro",
+            "cristal": "Zafiro plano",
             "caja": "Acero inoxidable 316L con PVD negro satinado",
             "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
             "peso": "unos 120 g con brazalete"
@@ -101,34 +101,34 @@
         ],
         "correas": [
           {
-            "id": "brazalete-plano",
+            "id": "brazalete-pulsadores",
             "nombre": "Brazalete de acero",
-            "detalle": "316L, eslabones planos, pulido y satinado"
+            "detalle": "316L · cierre desplegable con pulsadores y extensión"
           },
           {
-            "id": "brazalete-arroz",
-            "nombre": "Brazalete cuentas de arroz",
-            "detalle": "316L, eslabones tipo grano de arroz"
+            "id": "brazalete-seguro",
+            "nombre": "Brazalete de acero",
+            "detalle": "316L · cierre desplegable con seguro"
           },
           {
             "id": "piel-marron",
             "nombre": "Piel marrón",
-            "detalle": "Con costura a la vista"
+            "detalle": "Piel genuina · hebilla de acero"
           },
           {
             "id": "piel-negra",
             "nombre": "Piel negra",
-            "detalle": "Con costura a la vista"
+            "detalle": "Piel genuina · hebilla de acero"
           },
           {
             "id": "caucho",
             "nombre": "Caucho negro",
-            "detalle": "Flexible, para uso diario"
+            "detalle": "Caucho FKM · hebilla de acero"
           },
           {
             "id": "nato",
             "nombre": "NATO negro",
-            "detalle": "Tejido, de una pieza"
+            "detalle": "Nailon tejido · hebilla y pasadores de acero"
           }
         ],
         "precios": {
@@ -164,9 +164,9 @@
           "Esfera": "Negra con tres subesferas, índices con detalles naranja",
           "Luminiscencia": "Super-LumiNova",
           "Ancho de asa": "20 mm",
-          "Cierre": "Desplegable con pulsadores y extensión",
           "Fondo": "Atornillado, acero macizo",
-          "Corona": "Roscada"
+          "Corona": "Roscada",
+          "Bisel": "Fijo, con escala taquimétrica"
         }
       },
       "historiaOriginal": {
