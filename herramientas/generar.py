@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 V_CSS = 26
 V_CAB = 13
 V_JS_HOME = 8
-V_JS_FICHA = 11
+V_JS_FICHA = 12
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -898,17 +898,26 @@ for i, r in enumerate(RELOJES):
         variables = [('Movimiento', 'movimiento'), ('Tipo', 'movimientoTipo'),
                      ('Frecuencia', 'frecuencia'), ('Autonomía', 'autonomia'),
                      ('Cristal', 'cristal'), ('Caja', 'caja'),
-                     ('Estanqueidad', 'estanqueidad'), ('Bisel', 'bisel'),
-                     ('Esfera', 'esfera'), ('Fondo', 'fondo')]
+                     ('Diámetro', 'diametro'), ('Estanqueidad', 'estanqueidad'),
+                     ('Bisel', 'bisel'), ('Esfera', 'esfera'), ('Fondo', 'fondo')]
         primera = cfg['acabados'][0]
         # solo se escriben las líneas que ese modelo tiene: el Lunar no
         # distingue el fondo por acabado, el Bauhaus sí (macizo o de cristal),
         # y el Cero Cero cambia de estanqueidad (100 o 200 m) y de esfera
         # (con ventana de fecha o sin ella) según el acabado. Lo que un modelo
         # no distinga se queda en `comunes` y se pinta una sola vez.
+        #
+        # La línea se crea si la tiene CUALQUIER acabado, no solo el primero:
+        # en el Lunar la estanqueidad la declara la hoja únicamente para el
+        # Cenit, y mirando solo al Alba esa fila no llegaba a existir. Cuando
+        # el acabado elegido no la tiene, `ficha.js` la esconde.
+        def alguno(cl):
+            return next((a[cl] for a in cfg['acabados'] if a.get(cl)), None)
+
         filas = '\n'.join(
-            f'        <div><dt>{et}</dt><dd data-spec="{cl}">{primera[cl]}</dd></div>'
-            for et, cl in variables if primera.get(cl))
+            f'        <div{"" if primera.get(cl) else " hidden"}><dt>{et}</dt>'
+            f'<dd data-spec="{cl}">{primera.get(cl, "")}</dd></div>'
+            for et, cl in variables if alguno(cl))
         filas += '\n' + '\n'.join(
             f'        <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in cfg['comunes'].items())
         filas += f'\n        <div><dt>Peso</dt><dd data-spec="peso">{primera["peso"]}</dd></div>'

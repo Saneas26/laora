@@ -23,11 +23,11 @@
       "homenaje": "Homenaje al gran cronógrafo lunar",
       "frase": "El cronógrafo que mira más allá.",
       "descripcion": "El cronógrafo de tres contadores y escala taquimétrica, en acero de 40 mm y cristal de zafiro, con mecacuarzo japonés o cuerda manual de rueda de columnas.",
-      "historia": "Cuarenta milímetros de acero, cristal de zafiro y la esfera negra de tres contadores con la escala taquimétrica grabada en el bisel, como en el arquetipo que homenajea. Lo que cambia es qué llevas dentro: un mecacuarzo japonés, que devuelve a la puesta a cero el golpe seco de un cronógrafo mecánico, o un cronógrafo de cuerda manual con rueda de columnas, que es la forma cara y bonita de construir esta complicación. Y seis maneras de llevarlo, del brazalete de acero a la NATO. No pretende pasar por el original: en la esfera solo va nuestro nombre.",
-      "precio": 209.9,
+      "historia": "Cuarenta milímetros de acero, cristal de zafiro y la esfera negra de tres contadores con la escala taquimétrica grabada en el bisel, como en el arquetipo que homenajea. Lo que cambia es qué llevas dentro: un mecacuarzo japonés, que devuelve a la puesta a cero el golpe seco de un cronógrafo mecánico, o un cronógrafo de cuerda manual con rueda de columnas, que es la forma cara y bonita de construir esta complicación. Y hasta seis maneras de llevarlo, del brazalete de acero al caucho. No pretende pasar por el original: en la esfera solo va nuestro nombre.",
+      "precio": 219.9,
       "movimiento": null,
       "diametro": "40 mm",
-      "hermeticidad": "100 m (10 ATM)",
+      "hermeticidad": null,
       "_foto": "La principal es la de ACERO, que es el Lunar normal. Las otras tres (front, detail, hero) son todas del acabado Eclipse, negro integral, y van detrás en la galería.",
       "foto": "/assets/img/relojes-2026/lunar-acero.webp",
       "galeria": [
@@ -50,123 +50,188 @@
         ],
         [
           "Correas",
-          "Seis a elegir"
+          "Hasta seis a elegir"
         ]
       ],
       "configurador": {
-        "_": "Catálogo final de la hoja de materiales (LO-01, 18 filas = 3 acabados x 6 correas). Auditado el 04/08/2026: el cristal es zafiro en las 18, las dos primeras correas son el mismo brazalete con distinto cierre, y el cierre no va en «comunes» porque cambia con la correa.",
+        "_": "Pestaña «Catálogo laOra» (12 filas, 04/08/2026), que manda desde esa fecha por encima de «Catalogo final». Alba con seis correas, Cenit con cinco y Eclipse con una sola: los brazaletes no se comparten entre acabados, por eso cada uno declara los suyos. La estanqueidad del Alba y del Eclipse la hoja la da como no declarada por el vendedor, así que no se publica; solo el Cenit lleva cifra.",
         "acabados": [
           {
             "id": "alba",
             "nombre": "Alba",
+            "resumen": "El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.",
+            "correas": [
+              "brazalete-904l",
+              "brazalete-arroz",
+              "piel-marron",
+              "piel-negra",
+              "caucho",
+              "caucho-desplegable"
+            ],
+            "refNum": [
+              "01",
+              "02",
+              null,
+              null,
+              "03",
+              "04",
+              "05",
+              "06"
+            ],
+            "diametro": "40 mm",
+            "caja": "Acero inoxidable 316L, pulido y satinado",
+            "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
+            "cristal": "Zafiro plano",
+            "peso": "de unos 100 g con caucho a unos 120 g con brazalete",
             "descriptor": "Movimiento japonés mecacuarzo (Seiko)",
-            "resumen": "Cronógrafo mecacuarzo, la puesta a cero con tacto mecánico.",
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
-            "autonomia": "Pila SR927SW, unos 3 años",
-            "cristal": "Zafiro plano",
-            "caja": "Acero inoxidable 316L, pulido y satinado",
-            "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
-            "peso": "unos 120 g con brazalete"
+            "autonomia": "Pila SR927SW, unos 3 años"
           },
           {
             "id": "cenit",
             "nombre": "Cenit",
+            "resumen": "El techo de este reloj: cronógrafo mecánico de cuerda manual con rueda de columnas, bisel de cerámica y zafiro con antirreflejos.",
+            "correas": [
+              "brazalete-acero",
+              "piel-marron",
+              "piel-negra",
+              "caucho",
+              "caucho-desplegable"
+            ],
+            "refNum": [
+              null,
+              null,
+              "01",
+              null,
+              "02",
+              "03",
+              "04",
+              "05"
+            ],
+            "diametro": "40 mm",
+            "estanqueidad": "50 m (5 ATM)",
+            "caja": "Acero inoxidable 316L, pulido y satinado",
+            "bisel": "Fijo con escala taquimétrica, inserto de cerámica",
+            "cristal": "Zafiro plano con tratamiento antirreflejos",
+            "peso": "de unos 105 g con caucho a unos 135 g con brazalete",
             "descriptor": "Cuerda manual arquitectura suiza",
-            "resumen": "Cronógrafo mecánico de cuerda manual con rueda de columnas.",
             "movimiento": "Seagull ST19 de rueda de columnas",
             "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
-            "autonomia": "Unas 45 horas de reserva de marcha",
-            "cristal": "Zafiro plano con tratamiento antirreflejos",
-            "caja": "Acero inoxidable 316L, pulido y satinado",
-            "bisel": "Fijo con escala taquimétrica, inserto de cerámica",
-            "peso": "de unos 100 g con la NATO a unos 135 g con brazalete"
+            "autonomia": "Unas 45 horas de reserva de marcha"
           },
           {
             "id": "eclipse",
             "nombre": "Eclipse",
+            "resumen": "Todo en negro, con el mismo cronógrafo mecacuarzo y zafiro con antirreflejos.",
+            "correas": [
+              "brazalete-negro"
+            ],
+            "refNum": [
+              null,
+              null,
+              null,
+              "01",
+              null,
+              null,
+              null,
+              null
+            ],
+            "diametro": "39,7 mm",
+            "caja": "Acero inoxidable 316L con PVD negro satinado",
+            "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
+            "cristal": "Zafiro plano con tratamiento antirreflejos",
+            "peso": "unos 120 g con brazalete",
             "descriptor": "Movimiento japonés mecacuarzo (Seiko)",
-            "resumen": "El mismo cronógrafo mecacuarzo, en negro integral y con zafiro.",
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
-            "autonomia": "Pila SR927SW, unos 3 años",
-            "cristal": "Zafiro plano",
-            "caja": "Acero inoxidable 316L con PVD negro satinado",
-            "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
-            "peso": "unos 120 g con brazalete"
+            "autonomia": "Pila SR927SW, unos 3 años"
           }
         ],
         "correas": [
           {
-            "id": "brazalete-pulsadores",
-            "nombre": "Brazalete de acero",
-            "detalle": "316L · cierre desplegable con pulsadores y extensión"
+            "id": "brazalete-904l",
+            "nombre": "Brazalete de acero 904L",
+            "detalle": "Pulido y satinado · cierre desplegable con pulsadores y extensión"
           },
           {
-            "id": "brazalete-seguro",
+            "id": "brazalete-arroz",
+            "nombre": "Brazalete cuentas de arroz",
+            "detalle": "316L pulido · cierre desplegable con seguro"
+          },
+          {
+            "id": "brazalete-acero",
             "nombre": "Brazalete de acero",
-            "detalle": "316L · cierre desplegable con seguro"
+            "detalle": "316L pulido y satinado · cierre desplegable con pulsadores y extensión"
+          },
+          {
+            "id": "brazalete-negro",
+            "nombre": "Brazalete negro",
+            "detalle": "316L con PVD negro satinado · cierre desplegable con pulsadores y extensión"
           },
           {
             "id": "piel-marron",
             "nombre": "Piel marrón",
-            "detalle": "Piel genuina · hebilla de acero"
+            "detalle": "Piel genuina, costura a contraste · hebilla de acero"
           },
           {
             "id": "piel-negra",
             "nombre": "Piel negra",
-            "detalle": "Piel genuina · hebilla de acero"
+            "detalle": "Piel genuina, costura a tono · hebilla de acero"
           },
           {
             "id": "caucho",
             "nombre": "Caucho negro",
-            "detalle": "Caucho FKM · hebilla de acero"
+            "detalle": "FKM mate texturizado · hebilla de acero"
           },
           {
-            "id": "nato",
-            "nombre": "NATO negro",
-            "detalle": "Nailon tejido · hebilla y pasadores de acero"
+            "id": "caucho-desplegable",
+            "nombre": "Caucho negro con cierre desplegable",
+            "detalle": "FKM mate · cierre desplegable automático, recortable a medida"
           }
         ],
         "precios": {
           "alba": [
-            229.9,
+            249.9,
+            239.9,
+            null,
+            null,
             229.9,
             219.9,
             219.9,
-            209.9,
-            209.9
+            229.9
           ],
           "cenit": [
-            499.9,
-            509.9,
-            499.9,
-            489.9,
-            489.9,
-            489.9
+            null,
+            null,
+            459.9,
+            null,
+            449.9,
+            439.9,
+            439.9,
+            459.9
           ],
           "eclipse": [
-            259.9,
-            259.9,
-            249.9,
-            249.9,
-            249.9,
-            239.9
+            null,
+            null,
+            null,
+            239.9,
+            null,
+            null,
+            null,
+            null
           ]
         },
         "comunes": {
-          "Diámetro": "40 mm",
           "Grosor": "unos 13 mm",
-          "Estanqueidad": "100 m (10 ATM)",
           "Esfera": "Negra con tres subesferas, índices con detalles naranja",
           "Luminiscencia": "Super-LumiNova",
           "Ancho de asa": "20 mm",
           "Fondo": "Atornillado, acero macizo",
-          "Corona": "Roscada",
-          "Bisel": "Fijo, con escala taquimétrica"
+          "Corona": "Roscada"
         }
       },
       "historiaOriginal": {
