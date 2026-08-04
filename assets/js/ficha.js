@@ -114,11 +114,16 @@
       if (elResumen) elResumen.textContent = acabado.resumen || '';
       if (elRef) elRef.textContent = referencia();
 
-      /* la ficha técnica que depende del acabado */
+      /* La ficha técnica que depende del acabado. Una línea que este acabado
+         no tenga se esconde entera —etiqueta incluida—: la hoja declara la
+         estanqueidad del Lunar solo para el Cenit, y dejar ahí un «Estanqueidad»
+         en blanco es peor que no ponerlo. */
       var campos = document.querySelectorAll('[data-spec]');
       for (var i = 0; i < campos.length; i++) {
         var clave = campos[i].dataset.spec;
-        if (acabado[clave]) campos[i].textContent = acabado[clave];
+        var valor = acabado[clave];
+        campos[i].textContent = valor || '';
+        if (campos[i].parentElement) campos[i].parentElement.hidden = !valor;
       }
 
       /* el botón se lleva la combinación elegida a la reserva */
