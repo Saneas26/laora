@@ -235,10 +235,10 @@
       "descripcion": "Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.",
       "historia": "Cero Cero recoge el lenguaje del reloj de buceo profesional sin copiar una identidad ajena. Sus proporciones, su esfera y su firma laOra convierten la referencia en una pieza independiente.",
       "_precio": "El mínimo del configurador (Alba con NATO o con caucho). Si cambia ahí, cambia aquí: si no, el listado y la ficha dicen cosas distintas.",
-      "precio": 159.9,
+      "precio": 199.9,
       "movimiento": null,
       "diametro": "41 mm",
-      "hermeticidad": null,
+      "hermeticidad": "100 m (10 ATM) · 200 m (20 ATM) según acabado",
       "_foto": "Las tres fotos son del acabado de ACERO con esfera negra y acento naranja. No hay foto del Eclipse (negro integral) todavía.",
       "foto": "/assets/img/relojes-2026/cero-cero-hero.webp",
       "galeria": [
@@ -249,182 +249,248 @@
       "fichaTecnica": [
         [
           "Caja",
-          "Acero 316L de 41 mm"
+          "Acero inoxidable 316L"
         ],
         [
           "Bisel",
-          "Giratorio unidireccional, 120 clics"
+          "Giratorio de 120 clics"
         ],
         [
           "Esfera",
-          "Negra con patrón de ondas · acento naranja"
+          "Negra con patrón de ondas"
         ],
         [
-          "Control",
-          "Revisión individual en Madrid"
+          "Estanqueidad",
+          "Hasta 200 m"
         ]
       ],
       "configurador": {
-        "_": "Catálogo final de la hoja de materiales (03/08/2026). Solo lo que ve el cliente: NUNCA proveedores, enlaces de compra, coste ni margen.",
-        "_decisiones": [
-          "Cenit: la hoja tiene DOS con el mismo nombre y distinto calibre. Óscar (03/08/2026) los quiere como acabados separados, así que van con nombres distintos y su sufijo de referencia, igual que en la hoja: -ST2130 y -NH38.",
-          "Eclipse: la hoja lo tiene dos veces con dos precios. Manda el bloque de abajo (fila 122), 219,90–239,90 €, por decisión de Óscar.",
-          "Correas: la hoja repite la NATO negro/naranja en las posiciones 03 y 06. Se quita la 06, así que quedan cinco y los números 01–05 siguen siendo los de la hoja."
-        ],
+        "_": "Catálogo final de la hoja rehecha (LO-02, 10 filas, 04/08/2026). Ocho acabados = cuatro calibres en acero y los mismos cuatro en negro. Solo el Levante tiene correa que elegir (L01 Oyster, L02 milanesa, L03 NATO); en los demás la hoja solo da el brazalete y ahí el grupo ni se pinta. Las specs del Eclipse NO salen de sus cuatro filas: ahí están copiadas las del VH31. El Eclipse va en negro por decisión de Óscar; la hoja da acero pulido en las diez filas.",
         "acabados": [
           {
             "id": "alba",
             "nombre": "Alba",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
+            "resumen": "El segundero de barrido del cuarzo, sin el tictac, y el bisel de buceo de 120 clics.",
+            "refSufijo": "",
+            "peso": "unos 150 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
             "descriptor": "Movimiento japonés de cuarzo (Seiko)",
-            "resumen": "El escalón de entrada: cuarzo que no da saltos, con bisel de aluminio y cristal mineral endurecido.",
-            "movimiento": "Seiko/TMI VH31",
-            "movimientoTipo": "Cuarzo con segundero de barrido",
-            "frecuencia": "Cuarzo de 32.768 Hz",
+            "movimiento": "Seiko/TMI VH31, cuarzo de barrido",
+            "movimientoTipo": "Cuarzo de barrido, sin fecha",
+            "frecuencia": "32.768 Hz",
             "autonomia": "Pila de unos 3 años",
-            "cristal": "Mineral endurecido de alto grado",
-            "caja": "Acero inoxidable 316L, pulido y satinado",
             "estanqueidad": "100 m (10 ATM)",
             "bisel": "Giratorio unidireccional de 120 clics, inserto de aluminio",
-            "esfera": "Negra con patrón de ondas, índices aplicados y acentos naranja",
-            "peso": "unos 150 g con brazalete de acero, unos 75 g con NATO"
+            "cristal": "Mineral endurecido (Hardlex)",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"
           },
           {
             "id": "levante",
             "nombre": "Levante",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
+            "resumen": "Automático japonés de Citizen, con fecha, y el único que se puede llevar de tres maneras.",
+            "refSufijo": "",
+            "peso": "de unos 75 g con la NATO a unos 150 g con brazalete",
             "descriptor": "Movimiento japonés automático (Citizen)",
-            "resumen": "El salto a automático, a zafiro y a bisel de cerámica, con la fecha a las tres.",
-            "movimiento": "Miyota 8215",
+            "movimiento": "Miyota 8215, automático japonés de Citizen",
             "movimientoTipo": "Automático con fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 40 horas de reserva de marcha",
-            "cristal": "Zafiro",
-            "caja": "Acero inoxidable 316L, pulido y satinado",
             "estanqueidad": "100 m (10 ATM)",
             "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica",
-            "esfera": "Negra con patrón de ondas, índices aplicados, acentos naranja y ventana de fecha a las 3",
-            "peso": "unos 150 g con brazalete de acero, unos 75 g con NATO"
+            "cristal": "Zafiro plano",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"
           },
           {
             "id": "cenit",
             "nombre": "Cenit",
-            "descriptor": "Automático arquitectura suiza",
-            "resumen": "El automático más rápido de la gama, con antirreflejo y el doble de estanqueidad.",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
+            "resumen": "Sube a 200 m, zafiro con antirreflejos y la arquitectura suiza del ETA 2824.",
             "refSufijo": "-ST2130",
-            "movimiento": "Seagull ST2130",
-            "movimientoTipo": "Automático con fecha",
+            "peso": "unos 160 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
+            "descriptor": "Automático arquitectura suiza",
+            "movimiento": "ST2130, automático de arquitectura suiza",
+            "movimientoTipo": "Automático con fecha, arquitectura ETA 2824",
             "frecuencia": "28.800 alternancias/hora (4 Hz)",
             "autonomia": "Unas 38 horas de reserva de marcha",
-            "cristal": "Zafiro con tratamiento antirreflejo interior",
-            "caja": "Acero inoxidable 316L, pulido y satinado",
             "estanqueidad": "200 m (20 ATM)",
             "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica",
-            "esfera": "Negra con patrón de ondas, índices aplicados, acentos naranja y ventana de fecha a las 3",
-            "peso": "unos 160 g con brazalete de acero"
+            "cristal": "Zafiro plano con tratamiento antirreflejos interior",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"
           },
           {
-            "id": "cenit-sin-fecha",
-            "nombre": "Cenit sin fecha",
-            "descriptor": "Movimiento japonés automático (Seiko)",
-            "resumen": "La misma caja de 200 metros con un automático sin fecha y la esfera entera, sin recorte.",
+            "id": "cenit-nh38",
+            "nombre": "Cenit",
+            "cajaMaterial": "Acero inoxidable 316L, pulido y satinado",
+            "resumen": "Doscientos metros y la esfera limpia, sin ventanilla de fecha.",
             "refSufijo": "-NH38",
-            "movimiento": "Seiko NH38",
+            "peso": "unos 160 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
+            "descriptor": "Movimiento japonés automático (Seiko)",
+            "movimiento": "Seiko NH38, automático japonés",
             "movimientoTipo": "Automático sin fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 41 horas de reserva de marcha",
-            "cristal": "Zafiro con tratamiento antirreflejo interior",
-            "caja": "Acero inoxidable 316L, pulido y satinado",
             "estanqueidad": "200 m (20 ATM)",
             "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica",
-            "esfera": "Negra con patrón de ondas, índices aplicados y acentos naranja",
-            "peso": "unos 160 g con brazalete de acero, unos 85 g con NATO"
+            "cristal": "Zafiro plano con tratamiento antirreflejos interior",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"
           },
           {
             "id": "eclipse",
             "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L en negro",
+            "resumen": "El cuarzo de barrido, aquí sobre la caja en negro.",
+            "refSufijo": "-VH31",
+            "peso": "unos 150 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
+            "descriptor": "Movimiento japonés de cuarzo (Seiko)",
+            "movimiento": "Seiko/TMI VH31, cuarzo de barrido",
+            "movimientoTipo": "Cuarzo de barrido, sin fecha",
+            "frecuencia": "32.768 Hz",
+            "autonomia": "Pila de unos 3 años",
+            "estanqueidad": "100 m (10 ATM)",
+            "bisel": "Giratorio unidireccional de 120 clics, inserto de aluminio",
+            "cristal": "Mineral endurecido (Hardlex)",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"
+          },
+          {
+            "id": "eclipse-citizen",
+            "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L en negro",
+            "resumen": "El automático de Citizen, aquí sobre la caja en negro.",
+            "refSufijo": "-8215",
+            "peso": "unos 150 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
+            "descriptor": "Movimiento japonés automático (Citizen)",
+            "movimiento": "Miyota 8215, automático japonés de Citizen",
+            "movimientoTipo": "Automático con fecha",
+            "frecuencia": "21.600 alternancias/hora (3 Hz)",
+            "autonomia": "Unas 40 horas de reserva de marcha",
+            "estanqueidad": "100 m (10 ATM)",
+            "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica",
+            "cristal": "Zafiro plano",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"
+          },
+          {
+            "id": "eclipse-suizo",
+            "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L en negro",
+            "resumen": "La arquitectura suiza del ETA 2824 y los 200 m, sobre la caja en negro.",
+            "refSufijo": "-ST2130",
+            "peso": "unos 160 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
+            "descriptor": "Automático arquitectura suiza",
+            "movimiento": "ST2130, automático de arquitectura suiza",
+            "movimientoTipo": "Automático con fecha, arquitectura ETA 2824",
+            "frecuencia": "28.800 alternancias/hora (4 Hz)",
+            "autonomia": "Unas 38 horas de reserva de marcha",
+            "estanqueidad": "200 m (20 ATM)",
+            "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica",
+            "cristal": "Zafiro plano con tratamiento antirreflejos interior",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"
+          },
+          {
+            "id": "eclipse-seiko",
+            "nombre": "Eclipse",
+            "cajaMaterial": "Acero inoxidable 316L en negro",
+            "resumen": "Doscientos metros, esfera sin fecha y la caja en negro.",
+            "refSufijo": "-NH38",
+            "peso": "unos 160 g con brazalete",
+            "correas": [
+              "oyster"
+            ],
             "descriptor": "Movimiento japonés automático (Seiko)",
-            "resumen": "El mismo buceador en negro integral, con el automático sin fecha y el bisel de cerámica negra.",
-            "movimiento": "Seiko NH38",
+            "movimiento": "Seiko NH38, automático japonés",
             "movimientoTipo": "Automático sin fecha",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 41 horas de reserva de marcha",
-            "cristal": "Zafiro con tratamiento antirreflejo interior",
-            "caja": "Acero inoxidable 316L con PVD negro satinado",
             "estanqueidad": "200 m (20 ATM)",
-            "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica negra",
-            "esfera": "Negra con patrón de ondas, índices aplicados y acentos naranja",
-            "peso": "unos 160 g con brazalete de acero, unos 85 g con NATO"
+            "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica",
+            "cristal": "Zafiro plano con tratamiento antirreflejos interior",
+            "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"
           }
         ],
         "correas": [
           {
-            "id": "brazalete",
+            "id": "oyster",
             "nombre": "Brazalete de acero",
-            "detalle": "316L pulido y satinado, broche plegable con seguridad"
+            "detalle": "316L · eslabones Oyster · broche plegable con seguridad"
           },
           {
-            "id": "malla",
+            "id": "milanesa",
             "nombre": "Malla milanesa",
-            "detalle": "316L satinada, de ajuste continuo"
+            "detalle": "Acero satinado · broche de ajuste continuo"
           },
           {
             "id": "nato",
-            "nombre": "NATO negro y naranja",
-            "detalle": "Nailon tejido de una pieza, hebilla de acero"
-          },
-          {
-            "id": "caucho-naranja",
-            "nombre": "Caucho naranja",
-            "detalle": "Flexible, hebilla de acero"
-          },
-          {
-            "id": "caucho-negro",
-            "nombre": "Caucho negro",
-            "detalle": "Flexible, hebilla de acero"
+            "nombre": "NATO negra y naranja",
+            "detalle": "Nailon tejido · hebilla de acero"
           }
         ],
         "precios": {
           "alba": [
-            179.9,
-            169.9,
-            159.9,
-            159.9,
-            159.9
+            209.9,
+            null,
+            null
           ],
           "levante": [
-            219.9,
-            209.9,
-            199.9,
-            199.9,
-            199.9
+            239.9,
+            239.9,
+            239.9
           ],
           "cenit": [
             249.9,
-            249.9,
-            229.9,
-            229.9,
-            239.9
+            null,
+            null
           ],
-          "cenit-sin-fecha": [
+          "cenit-nh38": [
             319.9,
-            309.9,
-            299.9,
-            299.9,
-            299.9
+            null,
+            null
           ],
           "eclipse": [
+            199.9,
+            null,
+            null
+          ],
+          "eclipse-citizen": [
             239.9,
-            229.9,
-            219.9,
-            219.9,
-            219.9
+            null,
+            null
+          ],
+          "eclipse-suizo": [
+            249.9,
+            null,
+            null
+          ],
+          "eclipse-seiko": [
+            299.9,
+            null,
+            null
           ]
         },
         "comunes": {
           "Diámetro": "41 mm",
           "Grosor": "unos 13 mm",
-          "Luminiscencia": "Super-LumiNova",
+          "Caja": "Acero inoxidable 316L",
+          "Luminiscencia": "Super-LumiNova en agujas e índices",
           "Ancho de asa": "20 mm",
-          "Fondo": "Roscado, acero macizo",
+          "Fondo": "Roscado macizo",
           "Corona": "Roscada, con protector"
         }
       },

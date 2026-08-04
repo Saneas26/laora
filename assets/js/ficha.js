@@ -150,9 +150,55 @@
       }
     }
 
-    grupo('acabado', d.acabados, function (v) { acabado = v; });
+    /* No todos los acabados admiten las mismas correas. En el Cero Cero la
+       hoja solo da malla milanesa y NATO para el Levante; los demás van con
+       el brazalete Oyster y nada más. Con `acabado.correas` —una lista de
+       ids— se ocultan las que ese acabado no tiene, y si se queda con una
+       sola desaparece el grupo entero: un botón que no elige nada estorba.
+
+       El acabado que no declare `correas` las admite todas, que es como se
+       comportaban las fichas hasta ahora. */
+    var tituloCorrea = document.getElementById('cfg-correa');
+
+    function ajustarCorreas() {
+      var cont = document.querySelector('[data-grupo="correa"]');
+      if (!cont || !acabado.correas) {
+        if (cont) {
+          cont.hidden = false;
+          var todos = cont.querySelectorAll('[data-correa]');
+          for (var t = 0; t < todos.length; t++) todos[t].hidden = false;
+          if (tituloCorrea) tituloCorrea.hidden = false;
+        }
+        return;
+      }
+      var vivos = [];
+      var botones = cont.querySelectorAll('[data-correa]');
+      for (var i = 0; i < botones.length; i++) {
+        var vale = acabado.correas.indexOf(botones[i].dataset.correa) !== -1;
+        botones[i].hidden = !vale;
+        if (vale) vivos.push(botones[i]);
+      }
+      /* si la elegida ya no está disponible, se cae a la primera que sí */
+      if (vivos.length && acabado.correas.indexOf(correa.id) === -1) {
+        for (var k = 0; k < correas.length; k++) {
+          if (correas[k].id === vivos[0].dataset.correa) correa = correas[k];
+        }
+        for (var m = 0; m < botones.length; m++) {
+          var esta = botones[m] === vivos[0];
+          botones[m].setAttribute('aria-selected', String(esta));
+          if (esta) botones[m].removeAttribute('tabindex');
+          else botones[m].setAttribute('tabindex', '-1');
+        }
+      }
+      var uno = vivos.length < 2;
+      cont.hidden = uno;
+      if (tituloCorrea) tituloCorrea.hidden = uno;
+    }
+
+    grupo('acabado', d.acabados, function (v) { acabado = v; ajustarCorreas(); });
     grupo('correa', correas, function (v) { correa = v; });
 
+    ajustarCorreas();
     pintar();
   })();
 
