@@ -149,9 +149,9 @@
         : D.correas[idx].nombre + ' — no se monta con el acabado ' + a.nombre;
     }
 
-    if (elReservar) {
-      elReservar.setAttribute('href', '/lunar.html?ref=' + encodeURIComponent(referencia()));
-    }
+    /* el botón ya no es un enlace: añade la combinación a la cesta y
+       lleva a la pantalla del carrito, que es lo único que hay ahí */
+    if (elReservar) elReservar.disabled = (p === null);
   }
 
   /* ---------- la ficha técnica completa ----------
@@ -263,6 +263,22 @@
         pintar();
       });
     })(botonesCorrea[j]);
+  }
+
+  if (elReservar) {
+    elReservar.addEventListener('click', function () {
+      var a = D.acabados[acabado], c = D.correas[correa], p = precio(acabado, correa);
+      if (p === null) return;
+      laoraCarritoAnadir({
+        ref: referencia(),
+        nombre: D.modelo,
+        acabado: a.nombre,
+        correa: c.nombre,
+        precio: p,
+        foto: foto()
+      });
+      window.location.href = '/carrito.html';
+    });
   }
 
   pintar();

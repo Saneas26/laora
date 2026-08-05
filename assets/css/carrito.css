@@ -1,0 +1,76 @@
+/* ============================================================
+   laOra · LA PANTALLA DEL CARRITO
+   ------------------------------------------------------------
+   «Donde solo hay eso: el carrito con los artículos elegidos para
+   pagar» (Óscar, 05/08/2026). Hoja propia, corta y sin nada más.
+   Misma paleta y mismo suelo de legibilidad que el resto: 13 px.
+   ============================================================ */
+*,::before,::after{box-sizing:border-box;border:0 solid;margin:0;padding:0}
+img{display:block;max-width:100%;height:auto}
+button{cursor:pointer;font:inherit;color:inherit;background:transparent}
+a{color:inherit;text-decoration:none}
+ol,ul{list-style:none}
+
+:root{--ivory:#f4f0e8;--paper:#fbfaf6;--ink:#1c1d1b;--muted:#6c6c64;
+      --line:rgba(28,29,27,.16);--gold:#9c7233;--dark:#151715;
+      --sans:Arial,Helvetica,sans-serif}
+
+body{margin:0;background:var(--ivory);color:var(--ink);
+     font-family:var(--sans);font-size:16px;line-height:1.45;min-height:100svh;
+     display:flex;flex-direction:column}
+
+.ca-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;
+        height:64px;padding:0 clamp(16px,4vw,40px);
+        background:var(--paper);border-bottom:1px solid var(--line)}
+.ca-marca img{height:19px;width:auto}
+.ca-titulo{font-size:16px;font-weight:700}
+.ca-seguir{font-size:14px;color:var(--muted)}
+.ca-seguir:hover{color:var(--ink)}
+
+.ca-cuerpo{flex:1;width:100%;max-width:860px;margin:0 auto;
+           padding:clamp(20px,4vh,44px) clamp(16px,4vw,28px)}
+
+.ca-lineas{display:flex;flex-direction:column;gap:14px}
+.ca-linea{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:clamp(12px,2vw,22px);
+          align-items:center;padding:14px;background:var(--paper);
+          border:1px solid var(--line);border-radius:14px}
+.ca-linea img{width:96px;height:96px;object-fit:contain;background:#101110;border-radius:10px}
+.ca-linea h2{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.ca-linea .ca-detalle{font-size:14px;color:var(--muted);margin-top:2px}
+.ca-linea .ca-ref{font-size:13px;color:var(--muted);letter-spacing:.05em;margin-top:4px}
+.ca-lado{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.ca-precio{font-size:20px;font-weight:700;white-space:nowrap}
+.ca-cantidad{display:flex;align-items:center;gap:4px}
+.ca-cantidad button{width:32px;height:32px;border:1px solid var(--line);border-radius:8px;
+                    font-size:17px;line-height:1;background:#fff}
+.ca-cantidad button:hover{border-color:var(--ink)}
+.ca-cantidad span{min-width:26px;text-align:center;font-size:15px;font-weight:700}
+.ca-quitar{font-size:13px;color:var(--muted);text-decoration:underline}
+.ca-quitar:hover{color:var(--ink)}
+
+.ca-vacio{padding:60px 0;text-align:center;font-size:17px;color:var(--muted)}
+.ca-vacio a{display:inline-block;margin-top:10px;color:var(--gold);font-weight:700}
+
+.ca-resumen{margin-top:26px;padding:22px;background:var(--paper);
+            border:1px solid var(--line);border-radius:14px}
+.ca-suma{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.ca-suma span{font-size:15px;color:var(--muted)}
+.ca-suma strong{font-size:clamp(26px,3.4vw,34px);font-weight:700;letter-spacing:-.02em}
+.ca-impuestos{margin-top:4px;font-size:13px;color:var(--muted)}
+.ca-pagar{width:100%;margin-top:18px;padding:16px;border-radius:999px;
+          background:var(--dark);color:#fffdf8;font-size:16px;font-weight:700}
+.ca-pagar:hover:not([disabled]){background:#262925}
+.ca-pagar[disabled]{background:#c9c5bb;color:#6f6c64;cursor:not-allowed}
+.ca-pendiente{margin-top:10px;font-size:13px;color:var(--muted);text-align:center}
+
+.ca-aviso{padding:26px clamp(18px,5vw,64px) 34px}
+.ca-aviso p{max-width:1100px;margin:0 auto;font-size:9px;line-height:1.55;
+            color:#7b7a72;text-align:center}
+
+@media (max-width:640px){
+  .ca-linea{grid-template-columns:72px minmax(0,1fr);gap:12px}
+  .ca-linea img{width:72px;height:72px}
+  .ca-lado{grid-column:1/-1;flex-direction:row;align-items:center;
+           justify-content:space-between;width:100%}
+  .ca-linea h2{font-size:17px}
+}

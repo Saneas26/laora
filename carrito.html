@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Tu carrito en laOra.">
+<meta name="robots" content="noindex, nofollow">
+<title>Tu carrito · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar_carrito.py — no editar a mano. -->
+<link rel="stylesheet" href="/assets/css/carrito.css?v=1">
+</head>
+<body>
+
+<header class="ca-cab">
+  <a class="ca-marca" href="/" aria-label="laOra, inicio"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></a>
+  <p class="ca-titulo">Tu carrito</p>
+  <a class="ca-seguir" href="/">Seguir mirando</a>
+</header>
+
+<main class="ca-cuerpo">
+  <!-- Las líneas las pinta `carrito.js` con lo que haya en la cesta.
+       Sin JavaScript no hay cesta que enseñar, así que el aviso de
+       abajo es lo que se ve, y es cierto. -->
+  <ol class="ca-lineas" data-lineas></ol>
+
+  <p class="ca-vacio" data-vacio hidden>
+    Todavía no has elegido nada.
+    <a href="/lunarv2c">Configura tu Lunar →</a>
+  </p>
+
+  <aside class="ca-resumen" data-resumen hidden>
+    <div class="ca-suma">
+      <span>Total</span>
+      <strong data-total>—</strong>
+    </div>
+    <p class="ca-impuestos">Impuestos incluidos. El envío se calcula en el siguiente paso.</p>
+    <button class="ca-pagar" type="button" data-pagar disabled>Pagar</button>
+    <p class="ca-pendiente">El pago todavía no está abierto. Guarda tu configuración: la cesta se queda en este navegador.</p>
+  </aside>
+</main>
+
+<footer class="ca-aviso">
+  <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
+</footer>
+
+<script src="/assets/js/carrito.js?v=1"></script>
+<script src="/assets/js/carrito-pantalla.js?v=1"></script>
+</body>
+</html>
