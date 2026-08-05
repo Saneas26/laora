@@ -78,21 +78,21 @@ a { color: inherit; }
   border-top: 1px solid var(--linea); }
 
 /* ---------- 1 · hero ----------
-   EN EL MÓVIL la foto se ve ENTERA y centrada: `contain`, nunca `cover`.
-   Recortándola se le van las asas y el bisel, y el reloj tiene que salir
-   completo. Su fondo es negro y el de la página también, así que flota
-   sin que se note dónde acaba la imagen.
-
-   El texto va DEBAJO, sobre negro liso. Se probó encima y no valía: la
-   foto es un frontal centrado y el titular caía sobre la esfera, así que
-   no se leía ni una cosa ni la otra.
-
-   EN EL ESCRITORIO la foto pasa a ocupar la pantalla entera y el texto se
-   le pone encima, abajo, sobre un degradado. Ahí sí hay sitio de sobra. */
-.hero { padding: 72px 0 0; justify-content: space-between; overflow: hidden; }
+   La foto es el FONDO de la pantalla, a sangre, y todo lo demás va encima.
+   Vale para el móvil y para el escritorio: la única diferencia es por dónde
+   se encuadra, porque en vertical hay que recortar mucho a los lados y el
+   reloj tiene que quedar en el centro de lo que se ve. */
+.hero { padding: 0; justify-content: flex-end; overflow: hidden; }
 .hero picture { display: contents; }
-.hero-foto { width: 100%; height: 46svh; object-fit: contain; object-position: 50% 50%; }
-.hero-texto { position: relative; z-index: 2; padding: 0 26px 76px; text-align: center; }
+.hero-foto { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 62% 42%; }
+/* El velo. En el móvil tiene que ser generoso: la pantalla es tan alta que
+   `cover` amplía mucho la foto y el texto acaba cayendo sobre la esfera,
+   que está llena de marcas blancas. De la mitad para abajo va casi negro. */
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,10,10,.4) 0%, rgba(10,10,10,.1) 22%,
+              rgba(10,10,10,.6) 44%, rgba(10,10,10,.93) 62%, rgba(10,10,10,.99) 100%); }
+.hero-texto { position: relative; z-index: 2; padding: 0 26px 92px; text-align: center; }
 .hero h1 { font-size: 15vw; line-height: .95; letter-spacing: -.04em; }
 .hero-linea { margin-top: 12px; font-size: 17px; color: var(--gris-claro); }
 .hero-precio { margin-top: 22px; font-size: 16px; color: var(--gris-claro); }
@@ -232,33 +232,22 @@ a { color: inherit; }
 @media (min-width: 900px) {
   body { font-size: 18px; }
   .pantalla { padding: 120px 8vw; }
-  /* la portada, a pantalla completa: la foto llena el hueco y el texto va
-     encima, abajo del todo, sobre un degradado que lo despega del fondo */
-  .hero { padding: 0; justify-content: flex-end; }
-  .hero-foto { position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: 50% 50%; }
-  /* El degradado tiene que ser generoso: si la foto lleva el reloj centrado,
-     el texto cae justo sobre la esfera y sus marcas blancas se comen el
-     titular. Así el texto se apoya siempre en negro casi sólido, salga la
-     foto que salga. */
-  /* Dos velos: uno de abajo arriba para asentar el bloque de texto, y otro
-     de izquierda a derecha que oscurece el lado donde va escrito. Así el
-     titular se lee aunque la foto que se ponga lleve el reloj centrado. */
-  .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background:
-      linear-gradient(180deg, rgba(10,10,10,0) 40%, rgba(10,10,10,.82) 78%,
-                      rgba(10,10,10,.95) 100%),
-      linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.55) 42%,
-                      rgba(10,10,10,0) 68%); }
-  /* El texto se va a la izquierda, que es donde la foto deja el aire; en el
-     centro estaba pisando la esfera teniendo media pantalla vacía al lado. */
-  .hero-texto { position: relative; z-index: 2; padding: 0 8vw 84px;
-    text-align: left; max-width: 640px; }
-  .hero h1 { font-size: 96px; }
-  .hero-precio strong { display: inline-block; margin: 0 0 0 12px; }
-  .hero .boton { min-width: 320px; }
-  .hero-precio strong { font-size: 44px; }
-  .boton { display: inline-block; min-width: 300px; }
+  .hero-foto { object-position: 50% 46%; }
+  /* La mitad de arriba se deja limpia —ahí están la Luna y la esfera— y a
+     partir del 52 % el velo sube deprisa: el texto va centrado y cae justo
+     sobre las marcas blancas del cuadrante. */
+  .hero::after { background: linear-gradient(180deg, rgba(10,10,10,.28) 0%,
+                 rgba(10,10,10,0) 30%, rgba(10,10,10,.35) 48%,
+                 rgba(10,10,10,.85) 64%, rgba(10,10,10,.97) 100%); }
+  /* El bloque baja y se compacta para caer en la franja que ya está
+     oscura, en vez de subir más el velo y comerse media foto. */
+  .hero-texto { padding-bottom: 54px; }
+  .hero h1 { font-size: 82px; }
+  .hero-linea { margin-top: 8px; }
+  .hero-precio { margin-top: 14px; }
+  .hero-precio strong { font-size: 34px; }
+  .hero .boton { margin-top: 18px; }
+  .hero .boton { display: inline-block; min-width: 320px; }
   .enorme { font-size: 62px; max-width: 16em; }
   .razon h2 { font-size: 72px; }
   .razon-dato { font-size: 36px; }
