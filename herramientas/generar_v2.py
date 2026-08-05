@@ -23,7 +23,7 @@ import json
 import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-V_CSS = 7
+V_CSS = 9
 V_JS = 1
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -49,11 +49,18 @@ HASTA = max(x for l in CFG['precios'].values() for x in l if x is not None)
 # ============================================================
 # 1 · HERO
 # ============================================================
+# Dos fotos, no una: la apaisada llena la pantalla del escritorio y deja
+# aire a la izquierda para el texto; la cuadrada es la que se ve ENTERA y
+# centrada en el móvil. Sirviéndolas con <picture> cada pantalla se lleva
+# solo la suya, así que el móvil no se descarga la grande para nada.
 HERO = f"""
   <section class="pantalla hero" id="arriba">
-    <img class="hero-foto" src="{IMG}/lunar-acero.webp"
-         alt="Reloj Lunar de laOra, cronógrafo de esfera negra y caja de acero"
-         fetchpriority="high">
+    <picture>
+      <source media="(min-width: 900px)" srcset="{IMG}/lunar-portada-ancha.webp">
+      <img class="hero-foto" src="{IMG}/lunar-portada-movil.webp"
+           alt="Reloj Lunar de laOra en su acabado Eclipse, cronógrafo negro integral"
+           fetchpriority="high">
+    </picture>
     <div class="hero-texto">
       <h1>Lunar</h1>
       <p class="hero-linea">Cronógrafo inspirado en una leyenda.</p>
@@ -352,7 +359,7 @@ PAGINA = f"""<!DOCTYPE html>
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Lunar · laOra">
 <meta property="og:description" content="{R['descripcion']}">
-<meta property="og:image" content="https://laora.es{IMG}/lunar-acero.webp">
+<meta property="og:image" content="https://laora.es{IMG}/lunar-portada-ancha.webp">
 <meta property="og:locale" content="es_ES">
 <meta name="theme-color" content="#0a0a0a">
 <title>Lunar · laOra</title>
