@@ -140,50 +140,134 @@
   })();
 
 
-  /* ---------- 4 · el mapa del precio ---------- */
+  /* ---------- 4 · el mapa del precio ----------
+     Rehecho el 05/08/2026: una barra por canal contra la misma escala,
+     en vez de cinco tarjetas de media pantalla. Al cambiar de pestaña se
+     vuelve a dibujar el mapa entero con los datos del otro icono.
+
+     La geometría es la misma que calcula el generador para la primera
+     pestaña: barra desde cero hasta el precio más bajo del canal y una
+     prolongación con trama hasta el más alto. El múltiplo se saca del
+     precio más bajo, para no exagerar nunca. */
   (function decision() {
     var caja = document.querySelector('[data-comparaciones]');
-    var rutas = document.querySelector('[data-rutas]');
-    if (!caja || !rutas) return;
+    var regular = document.querySelector('[data-mp-regular]');
+    if (!caja || !regular) return;
 
     var datos;
     try { datos = JSON.parse(caja.textContent); } catch (e) { return; }
 
-    var intro = document.querySelector('[data-intro]');
+    var irregular = document.querySelector('[data-mp-irregular]');
+    var nuestro = document.querySelector('[data-mp-nuestro]');
+    var intro = document.querySelector('[data-mp-intro]');
     var alternativas = document.querySelector('[data-alternativas]');
     var pestanas = document.querySelectorAll('[data-comparacion]');
+    var logo = (document.querySelector('.mp-logo img') || {}).src || '';
 
-    function texto(etiqueta, contenido) {
-      var el = document.createElement(etiqueta);
-      el.textContent = contenido;
-      return el;
+    function el(etiqueta, clase, texto) {
+      var e = document.createElement(etiqueta);
+      if (clase) e.className = clase;
+      if (texto !== undefined) e.textContent = texto;
+      return e;
+    }
+
+    function euros(v) {
+      return new Intl.NumberFormat('es-ES', {
+        style: 'currency', currency: 'EUR',
+        minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2
+      }).format(v);
+    }
+
+    function fila(f, tope, desde, nombreNuestro) {
+      var canal = f[0], nombre = f[1], precio = f[2], minimo = f[3], maximo = f[4], nota = f[5], tono = f[6];
+      var li = el('li', 'mp-fila ' + tono);
+
+      var quien = el('div', 'mp-quien');
+      quien.appendChild(el('p', 'mp-canal', canal));
+      quien.appendChild(el('h3', '', nombre));
+      quien.appendChild(el('p', 'mp-nota', nota));
+
+      var pista = el('div', 'mp-pista');
+      var cifras = el('div', 'mp-cifras');
+      cifras.appendChild(el('p', 'mp-precio', precio));
+
+      if (minimo) {
+        var solido = Math.max(minimo / tope * 100, 0.5);
+        var s = el('span', 'mp-solido');
+        s.style.width = solido.toFixed(2) + '%';
+        pista.appendChild(s);
+        var extra = maximo ? (maximo - minimo) / tope * 100 : 0;
+        if (extra > 0.2) {
+          var r = el('span', 'mp-rango');
+          r.style.left = solido.toFixed(2) + '%';
+          r.style.width = extra.toFixed(2) + '%';
+          pista.appendChild(r);
+        }
+        var m = el('p', 'mp-multiplo', '×' + Math.round(minimo / desde));
+        m.appendChild(el('span', '', 'el ' + nombreNuestro));
+        cifras.appendChild(m);
+      } else {
+        var i = el('span', 'mp-solido mp-indefinido');
+        i.style.width = '100%';
+        pista.appendChild(i);
+        var sc = el('p', 'mp-multiplo mp-sincifra', 'sin cifra');
+        sc.appendChild(el('span', '', 'de referencia'));
+        cifras.appendChild(sc);
+      }
+
+      li.appendChild(quien); li.appendChild(pista); li.appendChild(cifras);
+      return li;
     }
 
     function pintar(clave) {
       var d = datos[clave];
       if (!d) return;
 
-      intro.innerHTML = '';
-      intro.appendChild(texto('strong', d.titulo));
-      intro.appendChild(texto('span', d.intro));
+      var topes = d.filas.map(function (f) { return f[4]; }).filter(Boolean);
+      var tope = topes.length ? Math.max.apply(null, topes) : 1;
 
-      rutas.innerHTML = '';
-      d.filas.forEach(function (fila) {
-        var art = document.createElement('article');
-        art.className = fila[4];
-        art.appendChild(texto('span', fila[0]));
-        art.appendChild(texto('b', fila[1]));
-        art.appendChild(texto('strong', fila[2]));
-        art.appendChild(texto('small', fila[3]));
-        rutas.appendChild(art);
+      if (intro) intro.textContent = d.intro;
+
+      regular.innerHTML = '';
+      irregular.innerHTML = '';
+      d.filas.forEach(function (f) {
+        (f[6] === 'irregular' ? irregular : regular).appendChild(fila(f, tope, d.desde, d.nuestro));
       });
 
+      /* la nuestra, que es la única fila con color */
+      nuestro.innerHTML = '';
+      var li = el('li', 'mp-fila nuestro');
+      var quien = el('div', 'mp-quien');
+      quien.appendChild(el('p', 'mp-canal', 'Aquí estamos'));
+      var h3 = el('h3');
+      if (logo) {
+        var marca = el('span', 'mp-logo');
+        var img = document.createElement('img');
+        img.src = logo; img.alt = 'laOra';
+        marca.appendChild(img);
+        h3.appendChild(marca);
+      }
+      h3.appendChild(document.createTextNode(' ' + d.nuestro));
+      quien.appendChild(h3);
+      quien.appendChild(el('p', 'mp-nota', 'Marca propia, componentes identificados y montaje en Madrid.'));
+      var pista = el('div', 'mp-pista');
+      var s = el('span', 'mp-solido');
+      s.style.width = Math.max(d.desde / tope * 100, 0.8).toFixed(2) + '%';
+      pista.appendChild(s);
+      var cifras = el('div', 'mp-cifras');
+      cifras.appendChild(el('p', 'mp-precio', 'desde ' + euros(d.desde)));
+      var uno = el('p', 'mp-multiplo mp-base', '×1');
+      uno.appendChild(el('span', '', 'el punto de partida'));
+      cifras.appendChild(uno);
+      li.appendChild(quien); li.appendChild(pista); li.appendChild(cifras);
+      nuestro.appendChild(li);
+
       alternativas.innerHTML = '';
-      alternativas.appendChild(texto('span', 'ALTERNATIVAS DE OTRAS MARCAS'));
+      alternativas.appendChild(el('span', '', 'Alternativas de otras marcas'));
       d.alternativas.forEach(function (par) {
         var div = document.createElement('div');
-        div.appendChild(texto('b', par[0]));
-        div.appendChild(texto('small', par[1]));
+        div.appendChild(el('b', '', par[0]));
+        div.appendChild(el('small', '', par[1]));
         alternativas.appendChild(div);
       });
 
@@ -194,32 +278,10 @@
       }
     }
 
-    for (var i = 0; i < pestanas.length; i++) {
+    for (var k = 0; k < pestanas.length; k++) {
       (function (boton) {
         boton.addEventListener('click', function () { pintar(boton.dataset.comparacion); });
-      })(pestanas[i]);
-    }
-
-    /* el conmutador que solo se ve en el móvil */
-    var conmutador = document.querySelectorAll('[data-panel]');
-    var paneles = {
-      price: document.querySelector('[data-panel-price]'),
-      movement: document.querySelector('[data-panel-movement]')
-    };
-    for (var k = 0; k < conmutador.length; k++) {
-      (function (boton) {
-        boton.addEventListener('click', function () {
-          var elegido = boton.dataset.panel;
-          for (var m = 0; m < conmutador.length; m++) {
-            var esta = conmutador[m] === boton;
-            conmutador[m].classList.toggle('active', esta);
-            conmutador[m].setAttribute('aria-pressed', String(esta));
-          }
-          Object.keys(paneles).forEach(function (nombre) {
-            if (paneles[nombre]) paneles[nombre].classList.toggle('mobile-active', nombre === elegido);
-          });
-        });
-      })(conmutador[k]);
+      })(pestanas[k]);
     }
   })();
 
