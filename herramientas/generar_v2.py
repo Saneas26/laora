@@ -58,7 +58,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 19
+V_CSS = 20
 V_JS = 5
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -649,7 +649,10 @@ _TRES_GUARDADAS = f"""
 CIERRE = f"""
   <section class="madrid-section">
     <img src="{IMG}/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra">
-    <div class="madrid-overlay"><p class="kicker light">Taller laOra · Madrid</p><h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2><ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol><a class="button light-button" href="/taller.html">Conocer el proceso</a></div>
+    <div class="madrid-overlay"><p class="kicker light">Taller laOra · Madrid</p><h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2><ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol>
+      <!-- Óscar (05/08/2026): el botón que llevaba al taller se retira y
+           en su sitio queda la garantía, como titular. -->
+      <p class="madrid-garantia">Garantía de fabricación<br><em>hasta 5 años.</em></p></div>
   </section>
 
   <section class="club-preview">
