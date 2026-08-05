@@ -245,7 +245,7 @@ CONFIANZA = [
     # se lee; esta tiene 30, como la que sustituye. Y los marrones de la
     # esfera y de la correa mantienen los tonos del carrusel.
     ('01', 'Marca propia', 'Sin emblemas ni logotipos ajenos.',
-     'coctel-barra.jpg', 'Reloj laOra Cóctel sobre la barra de un bar, con una copa al fondo'),
+     'coctel-bar-logo-alto.jpg', 'Reloj laOra Cóctel sobre la barra de un bar, con una copa al fondo'),
     ('02', 'Montaje en Madrid', 'Ajuste y control unidad a unidad.',
      'trust-montaje-madrid-v2.jpg', 'Manos de relojero ajustando el mecanismo visible de un cronógrafo boca abajo'),
     ('03', 'Componentes identificados', 'Origen y movimiento, sin rodeos.',
