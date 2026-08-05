@@ -64,7 +64,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
 V_CSS = 9
-V_JS = 2
+V_JS = 3
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -316,7 +316,7 @@ PAGINA = f"""<!DOCTYPE html>
     <strong data-precio>{euros(P_INICIAL)}</strong>
     <span>Impuestos incluidos</span>
   </span>
-  <a class="cfg-reservar" data-reservar href="/lunar.html">Reservar</a>
+  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
 <!-- LA FICHA TÉCNICA COMPLETA
@@ -351,6 +351,7 @@ PAGINA = f"""<!DOCTYPE html>
 </template>
 
 <script type="application/json" data-cfg>{json.dumps(DATOS, ensure_ascii=False).replace('<', chr(92) + 'u003c')}</script>
+<script src="/assets/js/carrito.js?v=1"></script>
 <script src="/assets/js/lunarv2c.js?v={V_JS}"></script>
 </body>
 </html>
