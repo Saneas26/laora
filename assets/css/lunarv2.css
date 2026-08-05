@@ -1072,3 +1072,8 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 @media (max-width:899px){
   .madrid-garantia{ font-size: 25px; margin-top: 16px; }
 }
+
+/* Lo destacado del diálogo (Óscar, 05/08/2026): los mecanismos. Va en
+   negrita y en la tinta plena, sobre el gris del párrafo, para que sea
+   lo que se lee primero de la frase. */
+.lunar-dialogue-copy b{ font-weight: 700; color: #171513; }
