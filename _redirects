@@ -99,3 +99,11 @@
 # esa URL daba un 404. Se manda a la buena en vez de renombrar nada.
 # ============================================================
 /lunarv2C   /lunarv2c   301
+
+# ============================================================
+# LA PORTADA NUEVA
+# El 05/08/2026 la portada pasa a ser la del material aprobado, que ya
+# vive en `index.html`. `/lunarv2` era su dirección de pruebas y Óscar
+# la tiene guardada, así que salta a la portada en vez de dar un 404.
+# ============================================================
+/lunarv2    /    301

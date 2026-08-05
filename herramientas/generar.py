@@ -322,10 +322,17 @@ CAPAS = [
     ('05', 'Cierre', 'Construcción y ajuste explicados en cada ficha.'),
 ]
 
-escribir('index.html', cabeza(
+# ESTA YA NO ES LA PORTADA. El 05/08/2026 Óscar puso de portada la del
+# material aprobado, que la escribe `herramientas/generar_v2.py` en
+# `index.html`. Esta se sigue generando para no perderla y para poder
+# comparar, pero vive en `home-anterior.html` y no está enlazada desde
+# ninguna parte. Si algún día se vuelve a ella, se cambia este nombre
+# por `index.html` y se quita el suyo del otro generador: son los dos
+# únicos sitios donde se decide quién es la portada.
+escribir('home-anterior.html', cabeza(
     'laOra · Homenajes honestos a los iconos de la relojería',
     'Relojes homenaje con marca propia, componentes identificados y montaje, ajuste, control y servicio en Madrid.',
-    '/') + cabecera() + f"""
+    '/home-anterior.html') + cabecera() + f"""
 
 <main>
 
