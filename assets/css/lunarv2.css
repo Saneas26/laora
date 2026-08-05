@@ -1080,37 +1080,34 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 
 /* LA PRIMERA TARJETA, la del Cóctel  (Óscar, 05/08/2026)
    ------------------------------------------------------------
-   La foto del bar es VERTICAL y la tarjeta es apaisada. Rellenándola
-   con `cover` el reloj se corta —solo cabría un tercio de la foto—, y
-   con `contain` se queda diminuta en medio de la tarjeta.
+   La foto buena es la apaisada del bar, la que trae el logotipo y el
+   nombre del modelo POR ENCIMA del eje de las agujas. Al ser apaisada
+   —casi la proporción de la tarjeta— llena la tarjeta entera sin
+   recortar el reloj, así que no hacen falta las dos mitades.
 
-   Así que esta tarjeta va a dos mitades: el rótulo a la izquierda y la
-   foto a la derecha, ocupando su mitad entera. La foto se ve grande, el
-   texto va sobre el fondo de la tarjeta y no encima del reloj, y las
-   otras cuatro tarjetas no se enteran. */
+   El rótulo se queda a la izquierda, sobre la copa desenfocada y el
+   fondo oscuro, que es la mitad donde no hay reloj. Así no tapa nada. */
 .trust-carousel-track .trust-card:first-child{ background: #0b0c0a; }
 .trust-carousel-track .trust-card:first-child > img{
-  left: auto; right: 0; width: 50%; height: 100%;
-  object-fit: cover; object-position: center 42%;
+  inset: 0; left: 0; right: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
 }
 .trust-carousel-track .trust-card:first-child .trust-card-veil{
-  background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.5) 42%, rgba(0,0,0,0) 62%);
+  background: linear-gradient(90deg, rgba(0,0,0,.80) 0%, rgba(0,0,0,.55) 34%, rgba(0,0,0,.05) 58%, rgba(0,0,0,0) 100%);
 }
 .trust-carousel-track .trust-card:first-child .trust-card-copy{
-  top: 50%; left: 4%; width: 44%; transform: translateY(-50%);
+  top: 50%; left: 4.5%; width: 42%; transform: translateY(-50%);
   text-align: left;
 }
 @media (max-width:899px){
-  /* en el móvil la tarjeta es estrecha: la foto arriba y el texto abajo */
-  .trust-carousel-track .trust-card:first-child > img{
-    left: 0; right: auto; width: 100%; height: 62%; top: 0;
-    object-position: center 38%;
-  }
+  /* la tarjeta se estrecha y el encuadre se corre hacia el reloj, que
+     en esta foto está a la derecha; el texto baja al pie */
+  .trust-carousel-track .trust-card:first-child > img{ object-position: 64% center; }
   .trust-carousel-track .trust-card:first-child .trust-card-veil{
-    background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.1) 30%, rgba(0,0,0,.75) 62%, rgba(0,0,0,.85) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,.05) 34%, rgba(0,0,0,.72) 70%, rgba(0,0,0,.88) 100%);
   }
   .trust-carousel-track .trust-card:first-child .trust-card-copy{
-    top: auto; bottom: 6%; left: 50%; width: 88%;
+    top: auto; bottom: 7%; left: 50%; width: 88%;
     transform: translateX(-50%); text-align: center;
   }
 }
