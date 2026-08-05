@@ -68,9 +68,26 @@ em { font-family: var(--serif); font-weight: 400; }
    canónico ya se sirve en su color: el filtro lo dejaba TODO negro y se
    comía el ámbar del triángulo. Es la única desviación, la del logo. */
 .main-nav { display: flex; align-items: center; gap: clamp(20px, 2.3vw, 42px); }
-.main-nav a, .account-link { min-height: 44px; display: inline-flex; align-items: center; gap: 4px; font-size: 14px; line-height: 1; font-weight: 500; letter-spacing: 0; position: relative; white-space: nowrap; }
-.brand-word { height: 14px; display: inline-flex; align-items: center; gap: 0; line-height: 14px; vertical-align: middle; }
-.brand-word img { width: auto; height: 12px; display: block; flex: 0 0 auto; transform: translateY(-1px); }
+/* `align-items: baseline` en vez de `center`: es la otra mitad del ajuste
+   del logotipo. Dentro de un flex centrado no hay línea base que
+   compartir, y el logotipo quedaba 4,5 px por debajo del texto de al
+   lado. El documento de entrega pide expresamente que el logotipo y la
+   palabra pegada —«Por qué», «Club», «teca»— compartan línea base.
+   Original: ... display: inline-flex; align-items: center; ... */
+.main-nav a, .account-link { min-height: 44px; display: inline-flex; align-items: baseline; gap: 4px; font-size: 14px; line-height: 1; font-weight: 500; letter-spacing: 0; position: relative; white-space: nowrap; }
+/* AJUSTE DEL LOGOTIPO — la excepción que autorizó Óscar (05/08/2026).
+   El material centraba el logotipo con un inline-flex y lo subía 1 px a
+   mano, porque su wordmark traía aire por debajo del dibujo. El nuestro
+   está recortado a hueso: su borde inferior ES la línea base. Medido en
+   el navegador, aquello lo dejaba 5 px POR DEBAJO de la línea del texto.
+   Con `inline` y la imagen en `baseline`, el logotipo y la palabra de al
+   lado —«Por qué», «Club», «teca»— se apoyan en la misma línea, que es
+   justo lo que pide el documento de entrega.
+   Original:
+   .brand-word { height: 14px; display: inline-flex; align-items: center; gap: 0; line-height: 14px; vertical-align: middle; }
+   .brand-word img { width: auto; height: 12px; display: block; flex: 0 0 auto; transform: translateY(-1px); } */
+.brand-word { display: inline; }
+.brand-word img { width: auto; height: 11px; display: inline; vertical-align: baseline; }
 .main-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -9px; height: 1px; background: var(--ink); transition: right .25s ease; }
 .main-nav a:hover::after, .main-nav a.active::after { right: 0; }
 .header-actions { display: flex; align-items: center; gap: 20px; min-width: 150px; justify-content: flex-end; }
@@ -138,7 +155,17 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-dialogue-copy { position: absolute; z-index: 3; top: 35px; left: 50%; width: min(1080px, 92vw); transform: translateX(-50%); text-align: center; text-shadow: none; }
 .lunar-dialogue-copy h2 { margin: 0 0 16px; font: 500 clamp(38px, 4vw, 60px)/1 var(--sans); letter-spacing: -.05em; }
 .lunar-dialogue-copy p { max-width: 1030px; margin: 0 auto; font-size: clamp(18px, 1.7vw, 26px); line-height: 1.28; letter-spacing: -.025em; }
-.dialogue-brand { display: inline-block; width: 3.2em; margin: 0 .04em; vertical-align: -.18em; }
+/* AJUSTE DEL LOGOTIPO — la excepción que autorizó Óscar (05/08/2026).
+   Medido contra la captura aprobada `lunar-pantalla-2-desktop.png`: allí
+   el logotipo mide 19 px de alto contra los 17 px de la «E» de «Es», o
+   sea 1,12 veces la mayúscula, y las dos líneas base coinciden. Con
+   3.2em y −.18em el nuestro salía a 1,46 veces la mayúscula y 4,4 px
+   hundido, porque esas medidas estaban calibradas para un wordmark con
+   aire alrededor. 2.45em deja el logotipo en esas 1,12 veces, y
+   `baseline` lo apoya en la línea del texto sin corregir nada a mano.
+   Original:
+   .dialogue-brand { display: inline-block; width: 3.2em; margin: 0 .04em; vertical-align: -.18em; } */
+.dialogue-brand { display: inline-block; width: 2.45em; margin: 0 .04em; vertical-align: baseline; }
 .dialogue-brand img { width: 100%; height: auto; }
 .lunar-dialogue-number { position: absolute; z-index: 3; right: 3vw; bottom: 22px; font-size: 11px; letter-spacing: .15em; }
 
