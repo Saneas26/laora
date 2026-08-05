@@ -78,15 +78,19 @@ a { color: inherit; }
   border-top: 1px solid var(--linea); }
 
 /* ---------- 1 · hero ----------
-   El reloj arriba y el texto DEBAJO, sobre negro liso. Se probó con el
-   texto encima de la foto y no valía: esta foto es un frontal centrado
-   y el titular caía justo sobre la esfera, así que ni se leía el uno ni
-   se veía el otro. */
+   EN EL MÓVIL la foto se ve ENTERA y centrada: `contain`, nunca `cover`.
+   Recortándola se le van las asas y el bisel, y el reloj tiene que salir
+   completo. Su fondo es negro y el de la página también, así que flota
+   sin que se note dónde acaba la imagen.
+
+   El texto va DEBAJO, sobre negro liso. Se probó encima y no valía: la
+   foto es un frontal centrado y el titular caía sobre la esfera, así que
+   no se leía ni una cosa ni la otra.
+
+   EN EL ESCRITORIO la foto pasa a ocupar la pantalla entera y el texto se
+   le pone encima, abajo, sobre un degradado. Ahí sí hay sitio de sobra. */
 .hero { padding: 72px 0 0; justify-content: space-between; overflow: hidden; }
-/* `contain` y no `cover`: la foto es cuadrada y recortándola se le iban las
-   asas y el bisel. Su fondo es negro y el de la página también, así que el
-   reloj flota sin que se note dónde acaba la imagen. */
-.hero-foto { width: 100%; height: 46svh; object-fit: contain; }
+.hero-foto { width: 100%; height: 46svh; object-fit: contain; object-position: 50% 50%; }
 .hero-texto { position: relative; z-index: 2; padding: 0 26px 76px; text-align: center; }
 .hero h1 { font-size: 15vw; line-height: .95; letter-spacing: -.04em; }
 .hero-linea { margin-top: 12px; font-size: 17px; color: var(--gris-claro); }
@@ -227,10 +231,21 @@ a { color: inherit; }
 @media (min-width: 900px) {
   body { font-size: 18px; }
   .pantalla { padding: 120px 8vw; }
-  .hero { padding-top: 90px; }
-  .hero-foto { height: 44svh; }
-  .hero h1 { font-size: 88px; }
-  .hero-texto { padding-bottom: 70px; }
+  /* la portada, a pantalla completa: la foto llena el hueco y el texto va
+     encima, abajo del todo, sobre un degradado que lo despega del fondo */
+  .hero { padding: 0; justify-content: flex-end; }
+  .hero-foto { position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 50%; }
+  /* El degradado tiene que ser generoso: si la foto lleva el reloj centrado,
+     el texto cae justo sobre la esfera y sus marcas blancas se comen el
+     titular. Así el texto se apoya siempre en negro casi sólido, salga la
+     foto que salga. */
+  .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 66%;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,.55) 26%,
+                rgba(10,10,10,.9) 52%, rgba(10,10,10,.97) 100%); }
+  .hero-texto { position: relative; z-index: 2; padding-bottom: 76px; }
+  .hero h1 { font-size: 92px; }
   .hero-precio strong { font-size: 44px; }
   .boton { display: inline-block; min-width: 300px; }
   .enorme { font-size: 62px; max-width: 16em; }
