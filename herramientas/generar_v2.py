@@ -584,9 +584,7 @@ PAGINA = f"""<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="{DESCRIPCION}">
-<!-- PÁGINA DE PRUEBAS: invisible a propósito. No está enlazada desde
-     ninguna otra página y aquí se le pide al buscador que no la indexe. -->
-<meta name="robots" content="noindex, nofollow">
+<meta property="og:image" content="https://laora.es/assets/img/lunar-v2/lunar-hero-steel.webp">
 <meta property="og:title" content="laOra · Homenajes honestos a los iconos de la relojería">
 <meta property="og:description" content="{DESCRIPCION}">
 <meta property="og:locale" content="es_ES">
@@ -595,8 +593,9 @@ PAGINA = f"""<!DOCTYPE html>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <!-- GENERADO por herramientas/generar_v2.py — no editar a mano.
-     Porte del material aprobado el 05/08/2026. Mismas clases, mismo
-     orden y mismos textos que los componentes de React del zip. -->
+     PORTADA de laora.es desde el 05/08/2026. Porte del material
+     aprobado: mismas clases, mismo orden y mismos textos que los
+     componentes de React del zip. -->
 <link rel="stylesheet" href="/assets/css/lunarv2.css?v={V_CSS}">
 </head>
 <body>
@@ -619,7 +618,11 @@ PAGINA = f"""<!DOCTYPE html>
 </html>
 """
 
-destino = os.path.join(RAIZ, 'lunarv2.html')
+# ESTA ES LA PORTADA desde el 05/08/2026, por decisión de Óscar: la que
+# ve cualquiera que entre en laora.es. Ya no es una página de pruebas,
+# así que se escribe en `index.html` y sin `noindex`. La anterior sigue
+# generándose, en `home-anterior.html`, y `/lunarv2` salta aquí.
+destino = os.path.join(RAIZ, 'index.html')
 with open(destino, 'w', encoding='utf-8') as f:
     f.write(PAGINA)
 
