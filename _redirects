@@ -52,8 +52,9 @@
 # El sistema de venta se retiró: no hay carrito, ni reserva, ni pago.
 # Estas cuatro van a la colección, que es lo más cerca de lo que el
 # visitante venía buscando.
-/carrito                /coleccion.html  301
-/carrito.html           /coleccion.html  301
+# El carrito vuelve el 05/08/2026 y ya tiene pantalla propia, así que
+# estas dos reglas —de cuando se retiró la venta— se van: mandaban
+# /carrito y /carrito.html a la colección.
 /reservar               /coleccion.html  301
 /reservar.html          /coleccion.html  301
 /pagar                  /coleccion.html  301
