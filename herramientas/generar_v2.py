@@ -110,7 +110,7 @@ CABECERA = f"""
     <a href="/filosofia.html#laorateca">{marca('brand-word', LOGO_OSCURO, 'teca')}</a>
   </nav>
   <div class="header-actions">
-    <a class="header-icon support-icon" href="/taller.html" aria-label="Servicio y ayuda"><span aria-hidden="true"></span></a>
+    <!-- El icono de ayuda (los auriculares) lo quitó Óscar el 05/08/2026. -->
     <!-- El carrito y la cuenta se quedan A LA VISTA pero SIN FUNCIÓN hasta
          que existan, por encargo de Óscar (05/08/2026). Van como botones
          desactivados y no como enlaces: antes apuntaban a /carrito y
@@ -163,9 +163,15 @@ EXPOSICIONES = [
          specs=['Cuarzo de barrido', 'Titanio', '200 m']),
 ]
 
+# Adónde lleva «Reservar» en cada exposición. El Lunar ya tiene su
+# pantalla de configuración —`/lunarv2c`, la que Óscar dio por buena el
+# 05/08/2026—, así que va ahí. Los otros dos siguen a su ficha hasta que
+# tengan la suya: el generador del configurador está hoy fijado al Lunar.
+PANTALLA_PROPIA = {'lunar': '/lunarv2c'}
+
 for e in EXPOSICIONES:
     e['precio'] = euros(desde_de(e['slug'])).replace(' €', '€')
-    e['enlace'] = '/' + e['slug'] + '.html'
+    e['enlace'] = PANTALLA_PROPIA.get(e['slug'], '/' + e['slug'] + '.html')
 
 PRIMERA_EXPO = EXPOSICIONES[0]
 
