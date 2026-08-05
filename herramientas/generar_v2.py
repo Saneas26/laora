@@ -609,7 +609,19 @@ CAPAS = [
     ('05', 'Cierre', 'Construcción y ajuste explicados en cada ficha.'),
 ]
 
-CIERRE = f"""
+# ============================================================
+# LAS TRES SECCIONES RETIRADAS · GUARDADAS
+# ------------------------------------------------------------
+# Óscar las quitó el 05/08/2026: las tres que iban justo detrás del acto
+# de las especificaciones. Eran, por orden, las cuatro tarjetas de
+# relojes, el manifiesto de «homenaje no es falsificación» y el bloque
+# de calidad demostrable.
+#
+# Quedan aquí enteras, como el pie, para volver a ponerlas cuando lo
+# pida: se le quita el `_` al nombre y se vuelve a poner `{_TRES_GUARDADAS}`
+# delante de `{CIERRE}` en la página.
+# ============================================================
+_TRES_GUARDADAS = f"""
   <section class="featured-products">
     <div class="product-grid compact">
 {''.join(tarjeta(*t) for t in TARJETAS)}    </div>
@@ -630,6 +642,11 @@ CIERRE = f"""
     </div>
   </section>
 
+"""
+
+
+# lo que sigue en pie detrás del acto 6
+CIERRE = f"""
   <section class="madrid-section">
     <img src="{IMG}/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra">
     <div class="madrid-overlay"><p class="kicker light">Taller laOra · Madrid</p><h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2><ol><li>Inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Envío</li></ol><a class="button light-button" href="/taller.html">Conocer el proceso</a></div>
