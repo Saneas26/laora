@@ -999,3 +999,63 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .mp-multiplo{ font-size: 15px; }
   .mp-grupo{ font-size: 13px; margin: 20px 0 8px; }
 }
+
+/* ============================================================
+   EL MAPA DEL PRECIO, A DOS PANTALLAS  (05/08/2026)
+   ------------------------------------------------------------
+   Óscar: «hay que hacer esa tarjeta mucho más alta para que quepa
+   todo; con esa misma estructura, el doble de alta, dos pantallas. Y
+   las cajas de los botones más altas también».
+
+   Aquí estaba la raíz del problema: el acto venía con
+   `height: calc(100svh - 76px)` y `overflow:hidden`, o sea, obligado a
+   caber en UNA pantalla. De ahí salía todo lo demás —tarjetas
+   apelotonadas, nombre a 11 px, nota a 9— porque no había sitio. Con
+   dos pantallas, el contenido respira y los cuerpos se sostienen solos.
+   ============================================================ */
+.decision-act{
+  height: auto;
+  min-height: calc(200svh - 76px);
+  overflow: visible;
+  padding: clamp(30px,5vh,64px) 4vw clamp(26px,4vh,48px);
+  grid-template-rows: auto auto auto auto auto;
+  gap: clamp(16px,2.4vh,34px);
+  align-content: center;
+}
+/* la entradilla, al mínimo legible del documento de entrega */
+.decision-head > p{ font-size: 15px; line-height: 1.5; max-width: 560px; }
+
+/* LAS PESTAÑAS · cajas altas, no una banda de 9 px */
+.decision-model-tabs{ border-radius: 3px; overflow: hidden; }
+.decision-model-tabs button{
+  min-height: 66px; padding: 16px 18px;
+  font-size: clamp(14px,1.15vw,17px); letter-spacing: .1em; line-height: 1.2;
+}
+
+/* LAS FILAS · con sitio de verdad */
+.mp{ margin-top: 6px; }
+.mp-fila{ padding: clamp(20px,2.4vh,30px) clamp(16px,1.8vw,26px); }
+.mp-pista{ height: 20px; }
+.mp-grupo{ margin: clamp(20px,3vh,34px) 0 12px; font-size: 15px; }
+.mp-nota{ font-size: 15px; }
+.mp-canal{ font-size: 15px; }
+.mp-fila h3{ font-size: clamp(19px,1.7vw,24px); }
+.mp-precio{ font-size: clamp(22px,2.2vw,30px); }
+.mp-multiplo{ font-size: 17px; }
+.mp-multiplo span{ font-size: 14px; }
+
+@media (max-width:899px){
+  .decision-act{
+    min-height: calc(200svh - 68px);
+    padding: 26px 18px 30px;
+    gap: 14px;
+  }
+  .decision-model-tabs button{ min-height: 58px; font-size: 13px; padding: 12px 10px; }
+  .decision-head > p{ font-size: 14px; }
+  .mp-fila{ padding: 16px 15px; }
+  .mp-fila h3{ font-size: 18px; }
+  .mp-precio{ font-size: 21px; }
+  .mp-nota, .mp-canal{ font-size: 14px; }
+  .mp-multiplo{ font-size: 16px; }
+  .mp-pista{ height: 16px; }
+}
