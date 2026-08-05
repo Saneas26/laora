@@ -63,13 +63,19 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 8
-V_JS = 1
+V_CSS = 9
+V_JS = 2
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
 
-LUNAR = {x['slug']: x for x in RELOJES}['lunar']
+# Óscar dio la pantalla por buena el 05/08/2026 y dijo que las fichas
+# individuales del resto de relojes van a ser como esta. Por eso el
+# modelo es una constante y no está escrito por todo el fichero: para
+# el siguiente basta con cambiar el slug y la tabla de fotos de abajo.
+SLUG = 'lunar'
+
+LUNAR = {x['slug']: x for x in RELOJES}[SLUG]
 CFG = LUNAR['configurador']
 
 IMG = '/assets/img/relojes-2026'
@@ -165,6 +171,40 @@ def ficha_corta(a):
     return [[k, v] for k, v in filas if v]
 
 
+def ficha_completa(a):
+    """La ficha técnica entera del acabado, en los tres grupos del
+    material aprobado. Solo se escribe la línea que tenga dato: lo que
+    no esté confirmado en la hoja no se pinta, aquí tampoco."""
+    c = CFG['comunes']
+    grupos = [
+        ('01', 'Movimiento', [
+            ('MOVIMIENTO', a.get('movimiento')),
+            ('TIPO', a.get('movimientoTipo')),
+            ('FRECUENCIA', a.get('frecuencia')),
+            ('AUTONOMÍA', a.get('autonomia')),
+        ]),
+        ('02', 'Caja y cristal', [
+            ('CRISTAL', a.get('cristal')),
+            ('CAJA', a.get('caja')),
+            ('DIÁMETRO', c.get('Diámetro') or LUNAR.get('diametro')),
+            ('ESTANQUEIDAD', a.get('estanqueidad') or c.get('Estanqueidad')),
+            ('BISEL', a.get('bisel')),
+            ('GROSOR', c.get('Grosor')),
+        ]),
+        ('03', 'Esfera y ajuste', [
+            ('ESFERA', a.get('esfera') or c.get('Esfera')),
+            ('LUMINISCENCIA', c.get('Luminiscencia')),
+            ('ANCHO DE ASA', c.get('Ancho de asa')),
+            ('CIERRE', c.get('Cierre')),
+            ('FONDO', a.get('fondo') or c.get('Fondo')),
+            ('CORONA', c.get('Corona')),
+            ('PESO', a.get('peso')),
+        ]),
+    ]
+    return [{'n': n, 'titulo': t, 'filas': [[k, v] for k, v in filas if v]}
+            for n, t, filas in grupos]
+
+
 DATOS = {
     'codigo': LUNAR['codigo'],
     'modelo': LUNAR['nombre'],
@@ -176,7 +216,8 @@ DATOS = {
                            'resumen': a.get('resumen', ''),
                            'refSufijo': a.get('refSufijo', ''),
                            'foto': FOTO_ACABADO.get(a['id'], LUNAR['foto']),
-                           'ficha': ficha_corta(a)} for a in ACABADOS},
+                           'ficha': ficha_corta(a),
+                           'grupos': ficha_completa(a)} for a in ACABADOS},
     'correas': [{'id': c['id'], 'nombre': c['nombre'], 'detalle': c['detalle'],
                  'muestra': MUESTRAS.get(c['id'], '#d8d8d4')} for c in CORREAS],
 }
@@ -221,7 +262,7 @@ PAGINA = f"""<!DOCTYPE html>
        cuatro palabras al lado del logotipo sin montarse encima de la
        referencia, y recortar con puntos suspensivos deja un enlace que
        no se entiende. -->
-  <a class="volver" href="/lunar.html"><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span> →</a>
+  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
 </header>
 
 <div class="cfg-cuerpo">
@@ -277,6 +318,37 @@ PAGINA = f"""<!DOCTYPE html>
   </span>
   <a class="cfg-reservar" data-reservar href="/lunar.html">Reservar</a>
 </footer>
+
+<!-- LA FICHA TÉCNICA COMPLETA
+     Se monta al pulsar y se tira al cerrar, como el overlay del
+     material aprobado: mientras no está abierta, no existe en la
+     página. No cambia la dirección ni mueve la pantalla de debajo.
+
+     Los tres grupos —Movimiento, Caja y cristal, Esfera y ajuste— y el
+     titular son los del material del 05/08/2026. Lo que cambia es de
+     dónde salen los datos: NO van escritos, los rellena `lunarv2c.js`
+     con la combinación que haya elegida en ese momento. Si el material
+     los trajera escritos, quien configurase el Cenit —cuerda manual—
+     leería la ficha del mecacuarzo del Alba. -->
+<template data-plantilla-ficha>
+  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
+    <div class="cfg-overlay-caja">
+      <header class="cfg-overlay-cab">
+        <div>
+          <p>{LUNAR['codigo']} · FICHA TÉCNICA COMPLETA</p>
+          <h2 id="cfg-ficha-titulo">Todo el {LUNAR['nombre']}.<br><em>Dato a dato.</em></h2>
+        </div>
+        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
+        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
+      </header>
+      <div class="cfg-overlay-grupos" data-grupos></div>
+      <footer class="cfg-overlay-pie">
+        <p data-overlay-resumen></p>
+        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
+      </footer>
+    </div>
+  </div>
+</template>
 
 <script type="application/json" data-cfg>{json.dumps(DATOS, ensure_ascii=False).replace('<', chr(92) + 'u003c')}</script>
 <script src="/assets/js/lunarv2c.js?v={V_JS}"></script>
