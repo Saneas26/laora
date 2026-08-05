@@ -54,7 +54,7 @@
         ]
       ],
       "configurador": {
-        "_": "Pestaña «Catálogo laOra» (12 filas, 04/08/2026), que manda desde esa fecha por encima de «Catalogo final». Alba con seis correas, Cenit con cinco y Eclipse con una sola: los brazaletes no se comparten entre acabados, por eso cada uno declara los suyos. La estanqueidad del Alba y del Eclipse la hoja la da como no declarada por el vendedor, así que no se publica; solo el Cenit lleva cifra.",
+        "_": "Pestaña «Catálogo laOra» (8 filas del Lunar, 04/08/2026). El Cenit y el Eclipse quedan con UNA sola opción cada uno por decisión de Óscar; el Alba conserva sus seis. La estanqueidad ya viene declarada en las ocho filas: 100 m en Alba y Eclipse, 50 m en el Cenit. El antirreflejos solo lo confirma la hoja en el Cenit.",
         "acabados": [
           {
             "id": "alba",
@@ -88,35 +88,32 @@
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
             "autonomia": "Pila SR927SW, unos 3 años",
-            "foto": "/assets/img/relojes-2026/lunar-acero.webp"
+            "foto": "/assets/img/relojes-2026/lunar-acero.webp",
+            "estanqueidad": "100 m (10 ATM)"
           },
           {
             "id": "cenit",
             "nombre": "Cenit",
             "resumen": "El techo de este reloj: cronógrafo mecánico de cuerda manual con rueda de columnas, bisel de cerámica y zafiro con antirreflejos.",
             "correas": [
-              "brazalete-acero",
-              "piel-marron",
-              "piel-negra",
-              "caucho",
-              "caucho-desplegable"
+              "brazalete-acero"
             ],
             "refNum": [
               null,
               null,
               "01",
               null,
-              "02",
-              "03",
-              "04",
-              "05"
+              null,
+              null,
+              null,
+              null
             ],
             "diametro": "40 mm",
             "estanqueidad": "50 m (5 ATM)",
             "caja": "Acero inoxidable 316L, pulido y satinado",
             "bisel": "Fijo con escala taquimétrica, inserto de cerámica",
             "cristal": "Zafiro plano con tratamiento antirreflejos",
-            "peso": "de unos 105 g con caucho a unos 135 g con brazalete",
+            "peso": "unos 135 g con brazalete",
             "descriptor": "Cuerda manual arquitectura suiza",
             "movimiento": "Seagull ST19 de rueda de columnas",
             "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
@@ -144,14 +141,15 @@
             "diametro": "39,7 mm",
             "caja": "Acero inoxidable 316L con PVD negro satinado",
             "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro",
-            "cristal": "Zafiro plano con tratamiento antirreflejos",
+            "cristal": "Zafiro plano",
             "peso": "unos 120 g con brazalete",
             "descriptor": "Movimiento japonés mecacuarzo (Seiko)",
             "movimiento": "Mecacuarzo Seiko/TMI VK63",
             "movimientoTipo": "Cronógrafo mecacuarzo",
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
             "autonomia": "Pila SR927SW, unos 3 años",
-            "foto": "/assets/img/relojes-2026/lunar-front.webp"
+            "foto": "/assets/img/relojes-2026/lunar-front.webp",
+            "estanqueidad": "100 m (10 ATM)"
           }
         ],
         "correas": [
@@ -210,12 +208,12 @@
           "cenit": [
             null,
             null,
-            459.9,
+            429.9,
             null,
-            449.9,
-            439.9,
-            439.9,
-            459.9
+            null,
+            null,
+            null,
+            null
           ],
           "eclipse": [
             null,
