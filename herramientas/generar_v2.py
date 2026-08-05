@@ -23,7 +23,7 @@ import json
 import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-V_CSS = 5
+V_CSS = 7
 V_JS = 1
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
