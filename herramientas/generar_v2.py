@@ -237,16 +237,23 @@ ACTO_3 = f"""
 # ACTO 4 · CARRUSEL DE CONFIANZA  ·  TrustCarousel.tsx
 # ============================================================
 CONFIANZA = [
+    # La primera es el CÓCTEL y no otra vez el cronógrafo: en la portada
+    # el Lunar ya sale en el hero, y verlo aquí de nuevo cansaba (Óscar,
+    # 05/08/2026). Se eligió esta y no `coctel-hero`, que es la del
+    # catálogo, porque el rótulo de la tarjeta va en blanco: medido, la
+    # del catálogo tiene un fondo crema de brillo 207 y ahí el texto no
+    # se lee; esta tiene 30, como la que sustituye. Y los marrones de la
+    # esfera y de la correa mantienen los tonos del carrusel.
     ('01', 'Marca propia', 'Sin emblemas ni logotipos ajenos.',
-     'trust-marca-propia.jpg', 'Cronógrafo laOra de acero presentado en un estudio oscuro'),
+     '../relojes-2026/coctel-profile.webp', 'Reloj laOra Cóctel de esfera marrón y correa de piel, en un estudio oscuro'),
     ('02', 'Montaje en Madrid', 'Ajuste y control unidad a unidad.',
-     'trust-montaje-madrid-v2.png', 'Manos de relojero ajustando el mecanismo visible de un cronógrafo boca abajo'),
+     'trust-montaje-madrid-v2.jpg', 'Manos de relojero ajustando el mecanismo visible de un cronógrafo boca abajo'),
     ('03', 'Componentes identificados', 'Origen y movimiento, sin rodeos.',
      'trust-componentes.jpg', 'Componentes de un reloj dispuestos en un despiece técnico'),
     ('04', 'Stock real', 'Envío en 48 h cuando se indica.',
-     'trust-stock-real-v2.png', 'Cajas cerradas laOra con sello negro preparadas para el envío'),
+     'trust-stock-real-v2.jpg', 'Cajas cerradas laOra con sello negro preparadas para el envío'),
     ('05', 'Servicio cercano', 'Taller y posventa en España.',
-     'trust-servicio-cercano-v2.png', 'Mensajero profesional entregando un paquete a domicilio en Madrid'),
+     'trust-servicio-cercano-v2.jpg', 'Mensajero profesional entregando un paquete a domicilio en Madrid'),
 ]
 
 
