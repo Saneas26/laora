@@ -149,7 +149,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-hero-dots button.active { background: white; }
 
 .lunar-dialogue { min-height: calc(100svh - 76px); position: relative; overflow: hidden; isolation: isolate; background: #eee7e0; color: #171513; }
-.lunar-dialogue::before { content: ""; position: absolute; z-index: 0; inset: -40px; background: url("/assets/img/lunar-v2/lunar-wrist.png") center top / cover no-repeat; filter: blur(32px); opacity: .18; transform: scale(1.06); }
+.lunar-dialogue::before { content: ""; position: absolute; z-index: 0; inset: -40px; background: url("/assets/img/lunar-v2/lunar-wrist.jpg") center top / cover no-repeat; filter: blur(32px); opacity: .18; transform: scale(1.06); }
 .lunar-dialogue-image { position: absolute; z-index: 1; top: 105px; left: 50%; width: min(850px, 100vw); height: auto; max-width: none; transform: translateX(-50%); }
 .lunar-dialogue-veil { position: absolute; z-index: 2; inset: 0; background: linear-gradient(180deg, rgba(244,239,234,.97) 0%, rgba(244,239,234,.78) 25%, rgba(244,239,234,.08) 49%, rgba(244,239,234,0) 100%); }
 .lunar-dialogue-copy { position: absolute; z-index: 3; top: 35px; left: 50%; width: min(1080px, 92vw); transform: translateX(-50%); text-align: center; text-shadow: none; }
@@ -872,4 +872,130 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .hero-slide { transform: none; }
+}
+
+/* ============================================================
+   EL MAPA DEL PRECIO, REHECHO  (05/08/2026)
+   ------------------------------------------------------------
+   Óscar: «las tarjetas son muy grandes y los textos deberían ser mucho
+   más grandes; ahora mismo eso no es nada atractivo de ver».
+
+   Lo que había: cinco tarjetas de media pantalla de alto, con el nombre
+   a 11 px, la nota a 9 px y el precio suelto dentro de la caja. Para
+   comparar cinco precios había que leer cinco cajas y acordarse.
+
+   Lo que hay: una fila por canal, todas contra la misma escala. La
+   comparación se ve; no hay que reconstruirla leyendo. Y los cuerpos
+   suben al mínimo que pide el propio documento de entrega —14 px en el
+   ordenador—, que es lo que el diseño anterior incumplía.
+
+   EL COLOR es «emphasis»: una sola marca en oro, la nuestra, y el resto
+   en gris. Se probó con tres colores —legítimo, irregular y laOra— y el
+   validador de paletas lo tumbó: los dos grises de color no llegaban a
+   distinguirse ni con visión normal. Así que el mercado irregular se
+   separa con su rótulo y con la trama diagonal, no con otro color.
+   ============================================================ */
+.mp{ margin-top: 26px; }
+
+.mp-grupo{
+  margin: 26px 0 10px;
+  font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+}
+.mp-grupo-irregular::before{
+  content: ""; display: inline-block; vertical-align: -1px;
+  width: 13px; height: 13px; margin-right: 8px; border-radius: 3px;
+  border: 1px solid rgba(28,29,27,.28);
+  /* la trama, que es lo que distingue al mercado irregular sin recurrir
+     a un segundo color que nadie sabría separar del primero */
+  background: repeating-linear-gradient(135deg,#d9d5cb 0 4px,#b9b4a8 4px 8px);
+}
+.mp-grupo-nuestro{ color: #7c5d2a; }
+
+.mp-lista{ display: flex; flex-direction: column; gap: 2px; }
+
+.mp-fila{
+  display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1.25fr) auto;
+  gap: clamp(14px,2.2vw,32px); align-items: center;
+  padding: 15px clamp(12px,1.6vw,20px);
+  background: var(--paper); border: 1px solid rgba(28,29,27,.08);
+}
+.mp-fila + .mp-fila{ border-top: 0; }
+
+.mp-canal{ font-size: 14px; letter-spacing: .04em; color: var(--muted); margin-bottom: 2px; }
+.mp-fila h3{ font-size: clamp(17px,1.5vw,21px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.mp-nota{ margin-top: 5px; font-size: 14px; line-height: 1.35; color: var(--muted); }
+
+/* la pista y la barra */
+.mp-pista{
+  position: relative; height: 16px; border-radius: 999px;
+  background: rgba(28,29,27,.07);
+}
+.mp-solido, .mp-rango{ position: absolute; top: 0; height: 100%; }
+.mp-solido{ left: 0; border-radius: 999px; background: #8e8b82; }
+/* el tramo hasta el precio más alto del canal: se ve que sigue, sin
+   afirmar que ese sea el precio */
+.mp-rango{ border-radius: 999px; background: repeating-linear-gradient(135deg,#b3afa5 0 5px,#c8c4ba 5px 10px); }
+.mp-irregular .mp-solido{ background: repeating-linear-gradient(135deg,#8e8b82 0 5px,#6f6c64 5px 10px); }
+.mp-indefinido{ background: repeating-linear-gradient(135deg,#cfcbc1 0 6px,#e0ddd4 6px 12px); }
+
+/* las cifras, que es lo que se venía a leer */
+.mp-cifras{ text-align: right; min-width: clamp(120px,13vw,190px); }
+.mp-precio{ font-size: clamp(20px,2vw,26px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.mp-multiplo{
+  margin-top: 3px; font-size: 16px; font-weight: 700; color: var(--muted);
+  display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15;
+}
+.mp-multiplo span{ font-size: 13px; font-weight: 400; }
+.mp-sincifra{ font-size: 14px; font-weight: 400; }
+
+/* NUESTRA FILA · la única con color, que es de lo que va «emphasis» */
+.mp-fila.nuestro{
+  background: #fff9ec; border-color: rgba(156,114,51,.42);
+  padding-top: 19px; padding-bottom: 19px;
+}
+.mp-fila.nuestro .mp-canal{ color: #7c5d2a; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.mp-fila.nuestro .mp-solido{ background: #9c7233; }
+.mp-fila.nuestro .mp-pista{ background: rgba(156,114,51,.14); }
+.mp-fila.nuestro .mp-precio{ color: #7c5d2a; }
+.mp-fila.nuestro .mp-multiplo{ color: #7c5d2a; }
+.mp-fila.nuestro h3{ display: flex; align-items: baseline; gap: 8px; }
+.mp-logo img{ height: 17px; width: auto; display: inline; vertical-align: baseline; }
+
+/* alternativas */
+.mp-alternativas{
+  margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px;
+  padding-top: 18px; border-top: 1px solid rgba(28,29,27,.14);
+}
+.mp-alternativas > span{
+  font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+.mp-alternativas div{ display: flex; align-items: baseline; gap: 9px; }
+.mp-alternativas b{ font-size: 15px; font-weight: 700; }
+.mp-alternativas small{ font-size: 14px; color: var(--muted); }
+
+/* la tabla del movimiento: se queda como estaba, pero legible. El
+   material la traía a 7 y 9 px, por debajo del mínimo de su propio
+   documento de entrega. */
+.decision-movement-panel{ margin-top: 34px; }
+.movement-row span, .movement-row b, .movement-row strong{ font-size: 14px !important; }
+.movement-header span{ font-size: 13px !important; letter-spacing: .1em; }
+.movement-intro p{ font-size: 14px !important; }
+.movement-intro span{ font-size: 15px !important; line-height: 1.4; }
+.decision-footnote{ font-size: 14px !important; line-height: 1.45; }
+
+@media (max-width:899px){
+  .mp-fila{
+    grid-template-columns: minmax(0,1fr) auto;
+    grid-template-areas: "quien cifras" "pista pista";
+    gap: 10px 14px; padding: 14px;
+  }
+  .mp-quien{ grid-area: quien; }
+  .mp-cifras{ grid-area: cifras; min-width: 0; }
+  .mp-pista{ grid-area: pista; height: 14px; }
+  .mp-fila h3{ font-size: 17px; }
+  .mp-precio{ font-size: 20px; }
+  .mp-canal, .mp-nota{ font-size: 13px; }
+  .mp-multiplo{ font-size: 15px; }
+  .mp-grupo{ font-size: 13px; margin: 20px 0 8px; }
 }

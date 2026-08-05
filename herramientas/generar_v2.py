@@ -58,8 +58,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 16
-V_JS = 4
+V_CSS = 18
+V_JS = 5
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -111,8 +111,13 @@ CABECERA = f"""
   </nav>
   <div class="header-actions">
     <a class="header-icon support-icon" href="/taller.html" aria-label="Servicio y ayuda"><span aria-hidden="true"></span></a>
-    <a class="header-icon profile-icon" href="/cuenta" aria-label="Mi cuenta"><span aria-hidden="true"></span></a>
-    <a class="header-icon bag-icon" href="/carrito" aria-label="Carrito, 0 unidades"><span aria-hidden="true"></span><b>0</b></a>
+    <!-- El carrito y la cuenta se quedan A LA VISTA pero SIN FUNCIÓN hasta
+         que existan, por encargo de Óscar (05/08/2026). Van como botones
+         desactivados y no como enlaces: antes apuntaban a /carrito y
+         /cuenta, que no existen, y daban un 404. Un botón apagado se
+         entiende; un 404 parece que la web está rota. -->
+    <button class="header-icon profile-icon" type="button" disabled aria-label="Mi cuenta, todavía no disponible" title="Muy pronto"><span aria-hidden="true"></span></button>
+    <button class="header-icon bag-icon" type="button" disabled aria-label="Carrito, todavía no disponible" title="Muy pronto"><span aria-hidden="true"></span><b>0</b></button>
   </div>
 </header>"""
 
@@ -202,7 +207,7 @@ ACTO_1 = f"""
 # ============================================================
 ACTO_2 = f"""
   <section class="lunar-dialogue" aria-labelledby="lunar-dialogue-question">
-    <img class="lunar-dialogue-image" src="{V2}/lunar-wrist.png" alt="Reloj Lunar en una muñeca con correa de piel marrón">
+    <img class="lunar-dialogue-image" src="{V2}/lunar-wrist.jpg" alt="Reloj Lunar en una muñeca con correa de piel marrón">
     <div class="lunar-dialogue-veil" aria-hidden="true"></div>
     <div class="lunar-dialogue-copy">
       <h2 id="lunar-dialogue-question">Qué chulo. ¿Cuál es?</h2>
@@ -217,7 +222,7 @@ ACTO_2 = f"""
 # ============================================================
 ACTO_3 = f"""
   <section class="lunar-pride" aria-labelledby="lunar-pride-title">
-    <img class="lunar-pride-image" src="{V2}/lunar-pride-reflection-v2.png" alt="Reflejo de un hombre contemplando orgulloso su cronógrafo en un escaparate urbano">
+    <img class="lunar-pride-image" src="{V2}/lunar-pride-reflection-v2.jpg" alt="Reflejo de un hombre contemplando orgulloso su cronógrafo en un escaparate urbano">
     <div class="lunar-pride-veil" aria-hidden="true"></div>
     <div class="lunar-pride-copy">
       <p>el gesto</p>
@@ -233,11 +238,11 @@ ACTO_3 = f"""
 # ============================================================
 CONFIANZA = [
     ('01', 'Marca propia', 'Sin emblemas ni logotipos ajenos.',
-     'trust-marca-propia.png', 'Cronógrafo laOra de acero presentado en un estudio oscuro'),
+     'trust-marca-propia.jpg', 'Cronógrafo laOra de acero presentado en un estudio oscuro'),
     ('02', 'Montaje en Madrid', 'Ajuste y control unidad a unidad.',
      'trust-montaje-madrid-v2.png', 'Manos de relojero ajustando el mecanismo visible de un cronógrafo boca abajo'),
     ('03', 'Componentes identificados', 'Origen y movimiento, sin rodeos.',
-     'trust-componentes.png', 'Componentes de un reloj dispuestos en un despiece técnico'),
+     'trust-componentes.jpg', 'Componentes de un reloj dispuestos en un despiece técnico'),
     ('04', 'Stock real', 'Envío en 48 h cuando se indica.',
      'trust-stock-real-v2.png', 'Cajas cerradas laOra con sello negro preparadas para el envío'),
     ('05', 'Servicio cercano', 'Taller y posventa en España.',
@@ -267,21 +272,53 @@ ACTO_4 = ("""
 
 
 # ============================================================
-# ACTO 5 · DECISIÓN DE COMPRA  ·  MarketMap.tsx
-# Las dos comparaciones y la tabla de movimientos van en el HTML y las
-# cambia `lunarv2.js`, igual que el estado de React.
+# ACTO 5 · EL MAPA DEL PRECIO  ·  MarketMap.tsx, rehecho
+# ------------------------------------------------------------
+# Óscar el 05/08/2026: «las tarjetas son muy grandes y los textos
+# deberían ser mucho más grandes; ahora mismo eso no es nada atractivo
+# de ver». Le doy la vuelta entera.
+#
+# QUÉ HABÍA: cinco tarjetas en columnas de la altura de media pantalla,
+# con el nombre a 11 px, la nota a 9 px y el precio suelto dentro. Para
+# comparar cinco precios había que leer cinco cajas y acordarse.
+#
+# QUÉ HAY AHORA: una barra por canal, todas contra la misma escala, de
+# más caro a más barato, y el laOra al final. La comparación se ve, no
+# se lee. Los cuerpos suben al mínimo que pide el propio documento de
+# entrega —14 px en el ordenador— y el precio va a 22.
+#
+# LA ESCALA es lineal y honesta: el laOra sale como un hilo al lado de
+# un icono de 7.700 €, y ese hilo ES el mensaje. Como una barra de un
+# 0,1 % no se puede ver —el Nautilus llega a 180.000 €—, al lado de
+# cada canal va cuántos laOra caben dentro, calculado sobre el precio
+# MÁS BAJO de ese canal para no exagerar nunca.
+#
+# EL COLOR: una sola marca en oro, la nuestra, y el resto en gris. Es
+# lo que la guía de visualización llama «emphasis», y es lo correcto
+# cuando una serie es el asunto y las demás son el contexto. Se probó
+# antes con tres colores —legítimo, irregular y laOra— y el validador
+# lo tumbó: los dos grises de color no se distinguen ni con visión
+# normal. Así que el mercado irregular se separa con su rótulo y con
+# la trama diagonal, no con otro color.
 # ============================================================
 COMPARACIONES = {
     'lunar': dict(
         pestana='SPEEDMASTER → LUNAR',
         titulo='El cronógrafo lunar',
-        intro='Del canal oficial al mercado irregular: cinco rutas que pueden parecer similares en una foto, pero no ofrecen lo mismo.',
+        intro='Del canal oficial al mercado irregular: cinco rutas que pueden parecer la misma en una foto y no ofrecen lo mismo.',
+        nuestro='Lunar',
         filas=[
-            ('01 · BOUTIQUE OFICIAL', 'Omega Speedmaster Moonwatch', '7.700 €', 'Nuevo, documentado y con garantía oficial.', 'regular'),
-            ('02 · SUBASTA', 'Catawiki / similares', '≈ 5.800 € + gastos', 'Ejemplo orientativo: usado; caja, papeles y estado dependen del lote.', 'regular'),
-            ('03 · GRIS / USADO', 'Chrono24', '4.400–6.300 €', 'Rango observado en referencias habituales. Autenticidad y set cambian el valor.', 'regular'),
-            ('04 · PIEZAS NO ORIGINALES', 'Marketplaces generalistas', '650–1.250 €', 'Relojes reacondicionados o con componentes de procedencia no acreditada.', 'irregular'),
-            ('05 · FALSIFICACIÓN', '«Superclones»', '600–1.650 €', 'Marca suplantada, origen incierto y sin garantía legítima.', 'irregular'),
+            # canal, nombre, precio escrito, mínimo, máximo, nota, tono
+            ('01 · Boutique oficial', 'Omega Speedmaster Moonwatch', '7.700 €', 7700, 7700,
+             'Nuevo, documentado y con garantía oficial.', 'regular'),
+            ('02 · Subasta', 'Catawiki y similares', '≈ 5.800 € + gastos', 5800, 5800,
+             'Usado. La caja, los papeles y el estado dependen del lote.', 'regular'),
+            ('03 · Gris o usado', 'Chrono24', '4.400–6.300 €', 4400, 6300,
+             'Rango habitual. La autenticidad y el conjunto cambian el valor.', 'regular'),
+            ('04 · Piezas no originales', 'Marketplaces generalistas', '650–1.250 €', 650, 1250,
+             'Reacondicionados o con componentes de procedencia no acreditada.', 'irregular'),
+            ('05 · Falsificación', '«Superclones»', '600–1.650 €', 600, 1650,
+             'Marca suplantada, origen incierto y sin garantía legítima.', 'irregular'),
         ],
         alternativas=[('Bulova Lunar Pilot', '549–659 €'),
                       ('Seiko Prospex Speedtimer', '646–680 €'),
@@ -290,16 +327,26 @@ COMPARACIONES = {
         pestana='NAUTILUS → BITÁCORA',
         titulo='El deportivo integrado',
         intro='Del canal oficial a la falsificación: cinco rutas con precios, riesgos y garantías completamente distintos.',
+        nuestro='Bitácora',
         filas=[
-            ('01 · BOUTIQUE OFICIAL', 'Patek Philippe Nautilus', '≈ 70.000 €', 'Precio de referencia y listas de espera interminables.', 'regular'),
-            ('02 · SUBASTA', 'Casas especializadas', 'Muy variable', 'Referencia, material, estado y documentación mandan.', 'regular'),
-            ('03 · GRIS / USADO', 'Chrono24', '105.000–180.000 €', 'El mercado secundario puede superar ampliamente el precio oficial.', 'regular'),
-            ('04 · PIEZAS NO ORIGINALES', 'Marketplaces generalistas', '650–1.500 €', 'Montajes con componentes de procedencia no acreditada.', 'irregular'),
-            ('05 · FALSIFICACIÓN', '«Superclones»', '600–1.650 €', 'Marca suplantada, origen incierto y sin garantía legítima.', 'irregular'),
+            ('01 · Boutique oficial', 'Patek Philippe Nautilus', '≈ 70.000 €', 70000, 70000,
+             'Precio de referencia y listas de espera interminables.', 'regular'),
+            ('02 · Subasta', 'Casas especializadas', 'Muy variable', None, None,
+             'Mandan la referencia, el material, el estado y la documentación.', 'regular'),
+            ('03 · Gris o usado', 'Chrono24', '105.000–180.000 €', 105000, 180000,
+             'El mercado secundario puede superar ampliamente el precio oficial.', 'regular'),
+            ('04 · Piezas no originales', 'Marketplaces generalistas', '650–1.500 €', 650, 1500,
+             'Montajes con componentes de procedencia no acreditada.', 'irregular'),
+            ('05 · Falsificación', '«Superclones»', '600–1.650 €', 600, 1650,
+             'Marca suplantada, origen incierto y sin garantía legítima.', 'irregular'),
         ],
         alternativas=[('Tissot PRX Powermatic 80', '≈ 750 €'),
                       ('Citizen Tsuyosa', '≈ 350 €')]),
 }
+
+# el precio de partida de cada uno de los nuestros, de `catalogo.json`
+COMPARACIONES['lunar']['desde'] = desde_de('lunar')
+COMPARACIONES['bitacora']['desde'] = desde_de('bitacora')
 
 MOVIMIENTOS = [
     ('★★★★★', 'Rolex Cosmograph Daytona', '16.550 €', 'Excelente', 'Muy buena', 'Alto', ''),
@@ -311,11 +358,6 @@ MOVIMIENTOS = [
 ]
 
 
-def ruta(canal, nombre, precio, nota, tono):
-    return (f'            <article class="{tono}"><span>{canal}</span><b>{nombre}</b>'
-            f'<strong>{precio}</strong><small>{nota}</small></article>\n')
-
-
 def fila_movimiento(estrellas, modelo, precio, calidad, precision, mant, extra):
     return (f'            <div class="movement-row{extra}" role="row"><span>{estrellas}</span>'
             f'<b>{modelo}</b><strong>{precio}</strong><span>{calidad}</span>'
@@ -323,6 +365,59 @@ def fila_movimiento(estrellas, modelo, precio, calidad, precision, mant, extra):
 
 
 PRIMERA = COMPARACIONES['lunar']
+
+
+def barra(fila, tope, desde):
+    """Una fila del mapa.
+
+    La barra va desde CERO hasta el precio, que es como se lee una
+    magnitud de un vistazo. Cuando el canal es un rango, el tramo sólido
+    llega al precio más bajo y una prolongación más clara marca hasta
+    dónde sube: así se ve a la vez lo que cuesta como poco y lo que
+    puede llegar a costar.
+
+    El múltiplo se calcula sobre el precio MÁS BAJO del canal, de modo
+    que la cifra que se enseña es siempre la más conservadora.
+    """
+    canal, nombre, precio, minimo, maximo, nota, tono = fila
+    if minimo:
+        solido = max(minimo / tope * 100, 0.5)
+        extra = max((maximo - minimo) / tope * 100, 0) if maximo else 0
+        marca_html = (f'<span class="mp-solido" style="width:{solido:.2f}%"></span>'
+                      + (f'<span class="mp-rango" style="left:{solido:.2f}%;width:{extra:.2f}%"></span>'
+                         if extra > 0.2 else ''))
+        multiplo = f'<p class="mp-multiplo">×{round(minimo / desde)}<span>el {PRIMERA["nuestro"]}</span></p>'
+    else:
+        marca_html = '<span class="mp-solido mp-indefinido" style="width:100%"></span>'
+        multiplo = '<p class="mp-multiplo mp-sincifra">sin cifra<span>de referencia</span></p>'
+    return f"""          <li class="mp-fila {tono}">
+            <div class="mp-quien"><p class="mp-canal">{canal}</p><h3>{nombre}</h3><p class="mp-nota">{nota}</p></div>
+            <div class="mp-pista">{marca_html}</div>
+            <div class="mp-cifras"><p class="mp-precio">{precio}</p>{multiplo}</div>
+          </li>
+"""
+
+
+# el logotipo, que en la fila nuestra va sobre fondo claro
+MARCA_TXT = marca('mp-logo', LOGO_OSCURO)
+
+
+def mapa(c):
+    tope = max([f[4] for f in c['filas'] if f[4]] or [1])
+    regular = ''.join(barra(f, tope, c['desde']) for f in c['filas'] if f[6] == 'regular')
+    irregular = ''.join(barra(f, tope, c['desde']) for f in c['filas'] if f[6] == 'irregular')
+    nuestra = f"""          <li class="mp-fila nuestro">
+            <div class="mp-quien"><p class="mp-canal">Aquí estamos</p><h3>{MARCA_TXT} {c['nuestro']}</h3><p class="mp-nota">Marca propia, componentes identificados y montaje en Madrid.</p></div>
+            <div class="mp-pista"><span class="mp-solido" style="width:{max(c['desde'] / tope * 100, 0.8):.2f}%"></span></div>
+            <div class="mp-cifras"><p class="mp-precio">desde {euros(c['desde'])}</p><p class="mp-multiplo mp-base">×1<span>el punto de partida</span></p></div>
+          </li>
+"""
+    return regular, irregular, nuestra
+
+
+FILAS_HTML_REGULAR, FILAS_HTML_IRREGULAR, NUESTRA_HTML = mapa(PRIMERA)
+ALTERNATIVAS_HTML = ''.join(
+    f'        <div><b>{n}</b><small>{p}</small></div>\n' for n, p in PRIMERA['alternativas'])
 
 ACTO_5 = f"""
   <div id="lunar-detalle">
@@ -332,52 +427,50 @@ ACTO_5 = f"""
           <p class="decision-kicker">01 — EL MAPA DEL PRECIO</p>
           <h2 id="decision-title">Lo que cuesta un icono.<br><em>Y lo que pagas realmente.</em></h2>
         </div>
-        <p>Una comparación de canales, riesgos y alternativas. Sin confundir homenaje con falsificación.</p>
+        <p data-mp-intro>{PRIMERA['intro']}</p>
       </header>
 
-      <div class="decision-mobile-switch" role="group" aria-label="Elegir información">
-        <button type="button" class="active" aria-pressed="true" data-panel="price">El precio</button>
-        <button type="button" aria-pressed="false" data-panel="movement">El movimiento</button>
+      <div class="decision-model-tabs" role="group" aria-label="Elegir comparación">
+        <button type="button" class="active" aria-pressed="true" data-comparacion="lunar">{COMPARACIONES['lunar']['pestana']}</button>
+        <button type="button" aria-pressed="false" data-comparacion="bitacora">{COMPARACIONES['bitacora']['pestana']}</button>
       </div>
 
-      <div class="decision-main">
-        <section class="decision-price-panel mobile-active" aria-label="Mapa del precio" data-panel-price>
-          <div class="decision-model-tabs" role="group" aria-label="Elegir comparación">
-            <button type="button" class="active" aria-pressed="true" data-comparacion="lunar">{COMPARACIONES['lunar']['pestana']}</button>
-            <button type="button" aria-pressed="false" data-comparacion="bitacora">{COMPARACIONES['bitacora']['pestana']}</button>
-          </div>
-          <div class="decision-panel-intro" data-intro><strong>{PRIMERA['titulo']}</strong><span>{PRIMERA['intro']}</span></div>
-          <div class="decision-market-labels" aria-hidden="true"><span>MERCADO ORIGINAL Y TRAZABLE</span><span>MERCADO IRREGULAR / CLONES</span></div>
-          <div class="decision-routes" data-rutas>
-{''.join(ruta(*f) for f in PRIMERA['filas'])}          </div>
-          <div class="decision-alternatives" data-alternativas>
-            <span>ALTERNATIVAS DE OTRAS MARCAS</span>
-{''.join(f'            <div><b>{n}</b><small>{p}</small></div>' + chr(10) for n, p in PRIMERA['alternativas'])}          </div>
-        </section>
+      <!-- EL MAPA · una barra por canal, todas contra la misma escala.
+           Las cifras van FUERA de la barra, siempre legibles, y el
+           múltiplo cuenta lo que una barra tan corta no puede enseñar. -->
+      <div class="mp">
+        <p class="mp-grupo">Mercado original y trazable</p>
+        <ol class="mp-lista" data-mp-regular>
+{FILAS_HTML_REGULAR}        </ol>
 
-        <section class="decision-movement-panel" aria-label="Comparación del movimiento" data-panel-movement>
-          <div class="movement-intro">
-            <p>01 — POR QUÉ ESTE MOVIMIENTO</p>
-            <h3>Dónde hemos puesto <em>el presupuesto.</em></h3>
-            <span>Seiko VK63: precisión del cuarzo, tacto de cronógrafo mecánico y mantenimiento mínimo. <b>±20 segundos al mes aproximadamente.</b></span>
-          </div>
-          <div class="movement-table" role="table" aria-label="Comparación de movimientos">
-            <div class="movement-row movement-header" role="row"><span>VALORACIÓN</span><span>MODELO</span><span>PVP</span><span>CALIDAD</span><span>PRECISIÓN</span><span>MANT.</span></div>
-{''.join(fila_movimiento(*m) for m in MOVIMIENTOS)}          </div>
-        </section>
+        <p class="mp-grupo mp-grupo-irregular">Mercado irregular y clones</p>
+        <ol class="mp-lista mp-irregular" data-mp-irregular>
+{FILAS_HTML_IRREGULAR}        </ol>
+
+        <p class="mp-grupo mp-grupo-nuestro">Nuestra propuesta</p>
+        <ol class="mp-lista mp-nuestra" data-mp-nuestro>
+{NUESTRA_HTML}        </ol>
       </div>
 
-      <article class="decision-answer">
-        <img src="{IMG}/lunar-front.webp" alt="Reloj laOra Lunar">
-        <div class="decision-product"><span>Reloj</span><div><img src="{LOGO_CLARO}" alt="laOra"><b>· LUNAR</b></div></div>
-        <strong class="decision-price">{euros(DESDE)}</strong>
-        <p>Mismo acero, mismo cristal, mismos movimientos</p>
-        <a href="/lunar.html">VER LUNAR →</a>
-      </article>
+      <div class="mp-alternativas" data-alternativas>
+        <span>Alternativas de otras marcas</span>
+{ALTERNATIVAS_HTML}      </div>
+
+      <section class="decision-movement-panel" aria-label="Comparación del movimiento">
+        <div class="movement-intro">
+          <p>02 — POR QUÉ ESTE MOVIMIENTO</p>
+          <h3>Dónde hemos puesto <em>el presupuesto.</em></h3>
+          <span>Seiko VK63: precisión del cuarzo, tacto de cronógrafo mecánico y mantenimiento mínimo. <b>±20 segundos al mes aproximadamente.</b></span>
+        </div>
+        <div class="movement-table" role="table" aria-label="Comparación de movimientos">
+          <div class="movement-row movement-header" role="row"><span>Valoración</span><span>Modelo</span><span>PVP</span><span>Calidad</span><span>Precisión</span><span>Mant.</span></div>
+{''.join(fila_movimiento(*m) for m in MOVIMIENTOS)}        </div>
+      </section>
 
       <p class="decision-footnote">Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado, impuestos, comisiones y envío. La presencia de una oferta no acredita su autenticidad. Las marcas citadas pertenecen a sus titulares y no están afiliadas a laOra.</p>
     </section>
   </div>"""
+
 
 # Los datos de la otra pestaña viajan en un JSON que lee `lunarv2.js`,
 # igual que el objeto `comparisons` del componente.
@@ -561,7 +654,23 @@ CIERRE = f"""
   <section class="final-cta"><p class="kicker">Tu tiempo. Tu elección.</p><h2>Elige el icono.<br><em>Nosotros respondemos por el reloj.</em></h2><div class="button-row"><a class="button primary" href="/coleccion.html">Ver la colección</a><a class="text-link" href="/club.html">Conocer Club laOra</a></div></section>"""
 
 
-PIE = f"""
+# ============================================================
+# EL PIE · GUARDADO Y RETIRADO
+# ------------------------------------------------------------
+# Óscar lo quitó de la portada el 05/08/2026: «el pie final de página
+# de momento lo quitamos, déjalo almacenado». Aquí está entero, tal cual
+# estaba, para volver a ponerlo cuando lo pida: se le quita el `_` al
+# nombre y se vuelve a poner `{PIE}` en la página, al final.
+#
+# También se va con él el `hola@laora.es`, que es lo que pidió: ningún
+# correo electrónico en la web.
+#
+# LO ÚNICO QUE NO SE VA es el aviso de marcas, que queda abajo en una
+# línea. No es decoración: la portada nombra Omega, Patek Philippe,
+# Rolex y Seiko en el acto del precio, y ese aviso es lo que separa el
+# homenaje de la falsificación. Es de las cosas que Óscar no negocia.
+# ============================================================
+_PIE_GUARDADO = f"""
 <footer class="site-footer">
   <div class="footer-top">
     <div>{marca('brand-logo', LOGO_CLARO)}<p>Homenajes honestos a los iconos mundiales de la relojería. Marca propia, montaje y servicio en Madrid.</p></div>
@@ -572,6 +681,14 @@ PIE = f"""
     <span>© 2026 laOra®</span>
     <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
   </div>
+</footer>"""
+
+
+
+# El aviso de marcas, que se queda aunque el pie se vaya.
+PIE = """
+<footer class="aviso-marcas">
+  <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>"""
 
 
