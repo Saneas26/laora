@@ -154,6 +154,90 @@
     }
   }
 
+  /* ---------- la ficha técnica completa ----------
+     Pantalla nueva por encima de la página: se monta al pulsar y se
+     tira al cerrar. NO cambia la dirección, no navega a ningún sitio y
+     no mueve ni un píxel de lo que hay debajo: al cerrar, la pantalla
+     está exactamente como estaba.
+
+     Se rellena con la combinación que esté elegida en ese momento, no
+     con una ficha escrita: quien configure el Cenit lee la ficha del
+     Cenit. */
+  (function ficha() {
+    var plantilla = document.querySelector('[data-plantilla-ficha]');
+    var abridor = document.querySelector('[data-abre-ficha]');
+    if (!plantilla || !abridor) return;
+
+    var overlay = null;
+
+    function conEscape(e) { if (e.key === 'Escape') cerrar(); }
+
+    function cerrar() {
+      if (!overlay) return;
+      overlay.parentNode.removeChild(overlay);
+      overlay = null;
+      document.removeEventListener('keydown', conEscape);
+      abridor.focus();
+    }
+
+    function linea(clave, valor) {
+      var div = document.createElement('div');
+      var dt = document.createElement('dt'); dt.textContent = clave;
+      var dd = document.createElement('dd'); dd.textContent = valor;
+      div.appendChild(dt); div.appendChild(dd);
+      return div;
+    }
+
+    function rellenar(caja) {
+      var a = D.acabados[acabado];
+      var c = D.correas[correa];
+      var destino = caja.querySelector('[data-grupos]');
+      destino.innerHTML = '';
+
+      (a.grupos || []).forEach(function (g, indice) {
+        var sec = document.createElement('section');
+        sec.className = 'cfg-overlay-grupo';
+        var cab = document.createElement('header');
+        var num = document.createElement('span'); num.textContent = g.n;
+        var tit = document.createElement('h3'); tit.textContent = g.titulo;
+        cab.appendChild(num); cab.appendChild(tit);
+        var dl = document.createElement('dl');
+        g.filas.forEach(function (par) { dl.appendChild(linea(par[0], par[1])); });
+
+        /* la correa elegida y la referencia cierran el último grupo:
+           son lo único que depende de la elección de correa */
+        if (indice === (a.grupos.length - 1)) {
+          dl.appendChild(linea('BRAZALETE O CORREA', c.nombre + ' · ' + c.detalle));
+          dl.appendChild(linea('REFERENCIA', referencia()));
+        }
+        sec.appendChild(cab); sec.appendChild(dl);
+        destino.appendChild(sec);
+      });
+
+      var refs = caja.querySelectorAll('[data-ref]');
+      for (var i = 0; i < refs.length; i++) refs[i].textContent = referencia();
+
+      var resumen = caja.querySelector('[data-overlay-resumen]');
+      if (resumen) resumen.textContent = a.nombre + ' · ' + c.nombre + ' · ' + euros(precio(acabado, correa));
+    }
+
+    abridor.addEventListener('click', function () {
+      if (overlay) return;
+      overlay = plantilla.content.firstElementChild.cloneNode(true);
+      rellenar(overlay);
+      document.body.appendChild(overlay);
+
+      var cierres = overlay.querySelectorAll('[data-cierra-ficha]');
+      for (var i = 0; i < cierres.length; i++) cierres[i].addEventListener('click', cerrar);
+      /* clic en el fondo oscurecido, fuera de la caja */
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) cerrar(); });
+      if (cierres.length) cierres[0].focus();
+
+      document.addEventListener('keydown', conEscape);
+    });
+  })();
+
+
   for (var i = 0; i < botonesAcabado.length; i++) {
     (function (boton) {
       boton.addEventListener('click', function () {

@@ -325,3 +325,114 @@ body{
 @media (prefers-reduced-motion:reduce){
   .cfg-foto{transition:none}
 }
+
+/* ============================================================
+   EL BOTÓN DE LA FICHA
+   Grafito, esquinas de píldora, letra blanca y en negrita: Óscar lo
+   pidió así el 05/08/2026 para que se destaque. Antes era un enlace de
+   texto en gris y se perdía en la cabecera.
+   ============================================================ */
+.cfg-ficha-boton{
+  padding:10px 20px;border-radius:999px;
+  background:#353836;color:#fff;
+  font-size:14px;font-weight:700;line-height:1.1;
+  white-space:nowrap;
+  transition:background .15s ease,transform .1s ease;
+}
+.cfg-ficha-boton:hover{background:#434744}
+.cfg-ficha-boton:active{transform:translateY(1px)}
+.cfg-ficha-boton .corto{display:none}
+.cfg-ficha-boton:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ============================================================
+   LA FICHA TÉCNICA · pantalla nueva por encima de la página
+   ------------------------------------------------------------
+   No es una página: no cambia la dirección ni descarga nada. Se pone
+   encima, tapa lo de debajo y al cerrarla todo sigue igual que estaba.
+
+   Esta SÍ puede desplazarse por dentro cuando no cabe, que es lo que
+   admite el documento de entrega para los overlays técnicos. Lo que no
+   se desplaza nunca es la pantalla de elegir, que es la de debajo.
+   ============================================================ */
+.cfg-overlay{
+  position:fixed;inset:0;z-index:200;
+  display:grid;place-items:center;
+  padding:clamp(12px,3vh,40px);
+  background:rgba(8,9,8,.74);
+  backdrop-filter:blur(3px);
+}
+.cfg-overlay-caja{
+  width:min(1000px,100%);max-height:100%;
+  display:flex;flex-direction:column;
+  background:#1d201e;color:#f2f1ec;
+  border:1px solid rgba(255,255,255,.10);border-radius:22px;
+  box-shadow:0 24px 70px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+.cfg-overlay-cab{
+  display:grid;grid-template-columns:1fr auto auto;
+  gap:clamp(12px,2vw,28px);align-items:start;
+  padding:clamp(18px,3vh,30px) clamp(18px,3vw,34px);
+  border-bottom:1px solid rgba(255,255,255,.10);
+}
+.cfg-overlay-cab > div > p{
+  font-size:12px;letter-spacing:.16em;color:var(--gold);margin-bottom:8px;
+}
+.cfg-overlay-cab h2{
+  font-size:clamp(24px,3.4vw,38px);font-weight:700;line-height:1.05;letter-spacing:-.03em;
+}
+.cfg-overlay-cab h2 em{font-style:normal;color:rgba(242,241,236,.62)}
+.cfg-overlay-ref{display:flex;flex-direction:column;gap:3px;text-align:right;white-space:nowrap}
+.cfg-overlay-ref span{font-size:12px;letter-spacing:.1em;color:rgba(242,241,236,.55)}
+.cfg-overlay-ref strong{font-size:14px;font-weight:700}
+.cfg-overlay-x{
+  width:44px;height:44px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;font-size:24px;line-height:1;
+  display:grid;place-items:center;
+}
+.cfg-overlay-x:hover{background:rgba(255,255,255,.10)}
+.cfg-overlay-x:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.cfg-overlay-grupos{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(16px,2.4vw,32px);
+  padding:clamp(18px,3vh,30px) clamp(18px,3vw,34px);
+  overflow-y:auto;                 /* si no cabe, se desplaza AQUÍ dentro */
+  -webkit-overflow-scrolling:touch;
+}
+.cfg-overlay-grupo header{
+  display:flex;align-items:baseline;gap:9px;
+  padding-bottom:9px;margin-bottom:11px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.cfg-overlay-grupo header span{font-size:12px;color:var(--gold);letter-spacing:.1em}
+.cfg-overlay-grupo header h3{font-size:17px;font-weight:700}
+.cfg-overlay-grupo dl{display:flex;flex-direction:column;gap:11px}
+.cfg-overlay-grupo dt{font-size:12px;letter-spacing:.1em;color:rgba(242,241,236,.55);margin-bottom:2px}
+.cfg-overlay-grupo dd{font-size:14px;line-height:1.35}
+
+.cfg-overlay-pie{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:clamp(14px,2vh,20px) clamp(18px,3vw,34px);
+  border-top:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.22);
+}
+.cfg-overlay-pie p{font-size:13px;color:rgba(242,241,236,.66)}
+.cfg-overlay-pie .cfg-ficha-boton{background:#f2f1ec;color:#1d201e}
+.cfg-overlay-pie .cfg-ficha-boton:hover{background:#fff}
+
+@media (max-width:899px){
+  .cfg-ficha-boton{padding:9px 16px;font-size:14px}
+  .cfg-ficha-boton .largo{display:none}
+  .cfg-ficha-boton .corto{display:inline}
+  .cfg-overlay{padding:0}
+  .cfg-overlay-caja{width:100%;height:100%;max-height:100%;border-radius:0;border:0}
+  .cfg-overlay-cab{grid-template-columns:1fr auto;padding:16px 16px 14px}
+  .cfg-overlay-ref{grid-column:1;grid-row:2;text-align:left}
+  .cfg-overlay-x{grid-column:2;grid-row:1}
+  .cfg-overlay-grupos{grid-template-columns:minmax(0,1fr);gap:22px;padding:16px}
+  .cfg-overlay-pie{padding:12px 16px}
+  .cfg-overlay-pie p{display:none}
+  .cfg-overlay-pie .cfg-ficha-boton{width:100%;text-align:center}
+}
