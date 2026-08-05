@@ -91,3 +91,11 @@
 /PROMPT_SIGUIENTE.md       /  302
 /herramientas/*            /  302
 /.claude/*  /  301
+
+# ============================================================
+# LA C MAYÚSCULA DEL CONFIGURADOR
+# Óscar escribe la dirección como `laora.es/lunarv2C`, y Cloudflare
+# Pages distingue mayúsculas: el archivo es `lunarv2c.html`, así que
+# esa URL daba un 404. Se manda a la buena en vez de renombrar nada.
+# ============================================================
+/lunarv2C   /lunarv2c   301

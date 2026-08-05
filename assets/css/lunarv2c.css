@@ -1,0 +1,327 @@
+/* ============================================================
+   laOra · CONFIGURADOR DEL LUNAR  (lunarv2c)
+   ------------------------------------------------------------
+   Página de pruebas invisible. Hoja INDEPENDIENTE: no comparte nada
+   con `laora.css` ni con `lunarv2.css`, así que esto se puede romper
+   entero sin que se entere lo publicado.
+
+   EL PATRÓN, que es lo que pidió Óscar (05/08/2026): el de la página
+   de configuración de un coche. Tres reglas y de ellas sale todo:
+
+     1. El reloj SIEMPRE visible. Elijas lo que elijas, no se mueve ni
+        hace falta desplazar nada para volver a verlo.
+     2. El precio SIEMPRE visible, en una barra pegada abajo que no se
+        va nunca, como si fuera una segunda cabecera.
+     3. TODO cabe en una pantalla, en el ordenador y en el teléfono.
+        La página no tiene scroll: `height: 100svh` y reparto interno.
+
+   `svh` y no `vh` a propósito: en el móvil `vh` cuenta con la barra
+   del navegador retraída, así que con `vh` la barra del precio se
+   queda por debajo del borde hasta que haces scroll. Justo lo que no
+   puede pasar aquí.
+
+   LEGIBILIDAD: el suelo son 13 px. En una pantalla que no se puede
+   ampliar con scroll, la tentación de encoger la letra es grande y
+   aquí no se hace.
+   ============================================================ */
+
+/* ---------- preflight, el mismo que el resto del sitio ---------- */
+*,::before,::after{box-sizing:border-box;border:0 solid;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}
+a{color:inherit;text-decoration:inherit}
+ol,ul,menu{list-style:none}
+img,svg{display:block;vertical-align:middle}
+img{max-width:100%;height:auto}
+button,input,select,textarea{font:inherit;color:inherit;background-color:transparent}
+button{cursor:pointer}
+
+:root{
+  --ivory:#f4f0e8;
+  --paper:#fbfaf6;
+  --ink:#1c1d1b;
+  --muted:#6c6c64;
+  --line:rgba(28,29,27,.16);
+  --gold:#b48744;
+  --dark:#151715;
+  --sans:Arial,Helvetica,sans-serif;
+  --cabecera:56px;
+  --barra:84px;
+}
+
+html,body{height:100%}
+body{
+  margin:0;background:var(--ivory);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.4;
+  /* la página NO hace scroll: todo cabe */
+  height:100svh;overflow:hidden;
+  display:grid;grid-template-rows:var(--cabecera) 1fr var(--barra);
+  /* La columna, explícita y con mínimo cero. Una columna `auto` mide al
+     menos su contenido, y ese mínimo lo va heredando cada rejilla de
+     dentro hasta que el nombre de correa más largo decide el ancho de
+     la página: medido en un móvil de 390, el cuerpo salía a 538 px. */
+  grid-template-columns:minmax(0,1fr);
+}
+
+/* ============================================================
+   CABECERA
+   Fina a propósito: cada píxel que se lleva la cabecera se lo quita
+   al reloj. Solo el logotipo, el modelo y la salida.
+   ============================================================ */
+.cfg-cab{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding:0 clamp(14px,3vw,32px);
+  background:var(--paper);border-bottom:1px solid var(--line);
+}
+.cfg-cab a.volver{font-size:13px;color:var(--muted);white-space:nowrap}
+.cfg-cab a.volver:hover{color:var(--ink)}
+.cfg-marca{display:flex;align-items:baseline;gap:9px;min-width:0}
+/* El logotipo va en su PNG canónico y manda su proporción: alto fijo,
+   ancho automático. Nunca se estira ni se recorta. */
+.cfg-marca img{height:19px;width:auto;display:inline;vertical-align:baseline}
+.cfg-marca b{font-size:17px;font-weight:400;letter-spacing:-.02em}
+.cfg-cab .ref{font-size:12px;color:var(--muted);letter-spacing:.06em;white-space:nowrap}
+.cfg-cab .volver .corto{display:none}
+/* la referencia dentro del visor: solo se enseña en el teléfono */
+.cfg-ref-visor{display:none}
+
+/* ============================================================
+   EL CUERPO · visor + opciones
+   En el ordenador, dos columnas: el reloj a la izquierda ocupando
+   todo el alto disponible y las opciones a la derecha. Ninguna de las
+   dos hace scroll.
+   ============================================================ */
+.cfg-cuerpo{
+  min-height:0;min-width:0;     /* sin esto, el grid se desborda */
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,38%);
+}
+
+/* ---------- el visor ---------- */
+/* El visor va OSCURO, y no por estética: las fotos del Lunar traen el
+   fondo negro incrustado. Sobre un visor claro se veía el recuadro de
+   la foto recortado dentro de la página; sobre este, el reloj se funde
+   con el fondo y no se ve dónde acaba la fotografía. */
+.cfg-visor{
+  position:relative;min-height:0;min-width:0;
+  padding:clamp(10px,2vh,26px);
+  background:radial-gradient(120% 90% at 50% 42%, #22231f 0%, #131412 58%, #0b0c0a 100%);
+  color:#fffdf8;
+  overflow:hidden;
+}
+/* La foto se adapta al hueco que quede, nunca al revés: así el reloj se
+   ve entero en cualquier pantalla sin recortarlo.
+
+   Va en posición absoluta y centrada con `margin:auto` a propósito. Con
+   la foto en el flujo, la fila del visor crecía con ella y el
+   `max-height:100%` se resolvía contra esa fila ya crecida: no limitaba
+   nada. Medido, la foto salía a 856 px dentro de un visor de 760 y el
+   reloj se veía cortado por arriba y por abajo. Fuera del flujo, el
+   visor manda y la foto se ajusta. */
+.cfg-foto{
+  position:absolute;inset:0;margin:auto;
+  max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;
+  transition:opacity .18s ease;
+}
+.cfg-foto.cambiando{opacity:0}
+
+/* el rótulo de lo que se está viendo, sobre la foto */
+/* Arriba a la izquierda, que es la única esquina del visor donde nunca
+   hay reloj. Abajo y centrado se leía sobre el brazalete. */
+.cfg-viendo{
+  position:absolute;top:clamp(10px,2vh,20px);left:clamp(12px,2vw,24px);
+  max-width:min(46%,320px);font-size:13px;color:rgba(255,253,248,.66);
+  pointer-events:none;
+}
+.cfg-viendo b{color:#fffdf8;font-weight:700}
+
+/* La muestra de la correa elegida. Mientras no haya una foto por cada
+   combinación —hoy solo hay del acero y del negro—, esto es lo que
+   enseña de verdad la correa que se está eligiendo. Cuando lleguen las
+   fotos, el mapa de `generar_v2c.py` las sirve y esto sobra. */
+.cfg-muestra{
+  position:absolute;top:clamp(10px,2vh,20px);right:clamp(10px,2vw,22px);
+  width:clamp(56px,7vw,86px);
+  display:grid;gap:6px;justify-items:center;
+}
+.cfg-muestra .tira{
+  width:100%;aspect-ratio:1/1;border-radius:11px;
+  border:1px solid rgba(255,253,248,.22);
+  box-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+.cfg-muestra span{font-size:12px;color:rgba(255,253,248,.72);text-align:center;line-height:1.25}
+
+/* ---------- el panel de opciones ---------- */
+.cfg-panel{
+  min-height:0;min-width:0;
+  background:var(--paper);border-left:1px solid var(--line);
+  padding:clamp(14px,2.4vh,26px) clamp(16px,2vw,30px);
+  display:flex;flex-direction:column;gap:clamp(12px,2.2vh,22px);
+  overflow:hidden;
+}
+.cfg-grupo{display:flex;flex-direction:column;gap:9px;min-height:0}
+.cfg-rotulo{
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+.cfg-rotulo b{font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:700;text-align:right}
+
+/* botones de acabado
+   `minmax(0,1fr)` y no `1fr`: el mínimo de una columna de rejilla es su
+   contenido, así que con nombres largos la rejilla se ensancha por
+   debajo y empuja la página. Medido en el móvil: 538 px de contenido
+   para 375 de pantalla. Con el mínimo a 0, manda la pantalla. */
+.cfg-acabados{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cfg-acabados button{
+  display:flex;flex-direction:column;gap:2px;
+  padding:9px 8px;border:1px solid var(--line);border-radius:12px;
+  background:#fff;text-align:left;transition:border-color .15s ease,box-shadow .15s ease;
+}
+.cfg-acabados button b{font-size:15px;font-weight:700}
+.cfg-acabados button small{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.cfg-acabados button[aria-pressed="true"]{
+  border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);
+}
+
+/* muestras de correa · mismo motivo para el `minmax(0,1fr)` */
+.cfg-correas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cfg-correas button{
+  display:grid;gap:5px;justify-items:center;
+  padding:7px 4px 8px;border:1px solid var(--line);border-radius:12px;background:#fff;
+  transition:border-color .15s ease,box-shadow .15s ease,opacity .15s ease;
+}
+.cfg-correas .tira{
+  width:100%;aspect-ratio:1/1;border-radius:9px;border:1px solid var(--line);
+}
+.cfg-correas button span{font-size:12px;line-height:1.2;text-align:center;color:var(--muted);overflow-wrap:anywhere}
+.cfg-correas button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.cfg-correas button[aria-pressed="true"] span{color:var(--ink);font-weight:700}
+/* Una combinación que no existe no se esconde: se enseña apagada y se
+   dice por qué. Esconderla haría creer que la opción no existe.
+   Apagada, pero no borrada: con `opacity:.32` sobre el panel claro la
+   piel marrón se quedaba en un beige que no era ni piel ni marrón. Se
+   desatura la muestra y se baja el texto solo hasta donde se sigue
+   leyendo. */
+.cfg-correas button[disabled]{cursor:not-allowed;background:#f4f2ee}
+.cfg-correas button[disabled] .tira{filter:grayscale(1);opacity:.45}
+.cfg-correas button[disabled] span{color:#9a978f}
+
+/* la nota del acabado */
+.cfg-nota{
+  font-size:13px;color:var(--muted);line-height:1.4;
+  padding-top:2px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:6px;
+}
+.cfg-nota p{margin-top:8px}
+.cfg-nota dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:13px}
+.cfg-nota dt{color:var(--muted)}
+.cfg-nota dd{color:var(--ink);text-align:right}
+
+/* ============================================================
+   LA BARRA DEL PRECIO
+   Pegada abajo y siempre visible. No es `position: fixed`: es la
+   tercera fila del grid del body, que en una página sin scroll es más
+   sólido —no depende de dónde esté el scroll ni pelea con el teclado
+   del móvil.
+   ============================================================ */
+.cfg-barra{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:clamp(10px,2vw,26px);padding:0 clamp(14px,3vw,32px);
+  background:var(--dark);color:#fffdf8;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+.cfg-barra .lado{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cfg-barra .eleccion{
+  font-size:13px;color:rgba(255,253,248,.72);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.cfg-barra .ref{font-size:12px;letter-spacing:.08em;color:rgba(255,253,248,.52)}
+.cfg-precio{display:flex;align-items:baseline;gap:9px;white-space:nowrap}
+.cfg-precio strong{font-size:clamp(24px,3.2vw,34px);font-weight:700;letter-spacing:-.02em}
+.cfg-precio span{font-size:12px;color:rgba(255,253,248,.62)}
+.cfg-reservar{
+  padding:13px clamp(18px,2.6vw,34px);border-radius:999px;
+  background:#fffdf8;color:var(--ink);font-size:15px;font-weight:700;
+  white-space:nowrap;
+}
+.cfg-reservar:hover{background:#fff}
+
+/* el foco se ve, aquí y en todo lo que se pulsa */
+.cfg-panel button:focus-visible,.cfg-reservar:focus-visible,.cfg-cab a:focus-visible{
+  outline:2px solid var(--gold);outline-offset:2px;
+}
+
+/* ============================================================
+   TELÉFONO
+   El reloj arriba, las opciones debajo y la barra pegada al borde.
+   Sigue sin haber scroll: lo que cambia es el reparto.
+   ============================================================ */
+@media (max-width:899px){
+  :root{--cabecera:52px;--barra:74px}
+  .cfg-cuerpo{
+    grid-template-columns:minmax(0,1fr);
+    /* El reloj se queda con lo que sobre, pero nunca con menos de un
+       tercio de la pantalla: por debajo de ahí deja de verse un reloj y
+       pasa a ser una miniatura, y el reloj es el protagonista. */
+    grid-template-rows:minmax(34svh,1fr) auto;
+  }
+  .cfg-visor{padding:8px}
+  .cfg-panel{
+    border-left:0;border-top:1px solid var(--line);
+    padding:12px 14px 14px;gap:12px;
+  }
+  .cfg-muestra{width:52px;top:8px;right:8px}
+  .cfg-viendo{font-size:13px;top:8px;left:10px}
+  /* La referencia baja al visor: en 390 px no cabe en la cabecera sin
+     montarse encima del nombre del modelo. */
+  .cfg-cab .ref{display:none}
+  .cfg-cab .volver .largo{display:none}
+  .cfg-cab .volver .corto{display:inline}
+  .cfg-ref-visor{
+    display:block;position:absolute;top:28px;left:10px;
+    font-size:12px;color:rgba(255,253,248,.5);letter-spacing:.06em;
+  }
+  .cfg-acabados button{padding:8px 7px}
+  .cfg-acabados button b{font-size:14px}
+  /* La muestra pasa a ser una tira apaisada: cuadrada, ocho muestras se
+     comían la mitad de la pantalla y el reloj se quedaba en nada. */
+  .cfg-correas{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .cfg-correas button{padding:5px 3px 6px;gap:4px}
+  .cfg-correas .tira{aspect-ratio:3/2;border-radius:7px}
+  .cfg-correas button span{font-size:12px;line-height:1.15}
+  /* en el móvil la ficha del acabado se resume: no hay sitio para la
+     lista entera y es preferible quitarla que encoger la letra */
+  .cfg-nota dl{display:none}
+  /* En la barra solo quedan el precio y el botón: la combinación
+     elegida se lee arriba, sobre el reloj, y repetirla aquí obligaba a
+     encoger el precio, que es lo único que no puede encogerse. */
+  .cfg-barra{padding:0 14px}
+  .cfg-barra .lado{display:none}
+  .cfg-precio{flex-direction:column;align-items:flex-start;gap:0}
+  .cfg-precio strong{font-size:27px;line-height:1.05}
+  .cfg-precio span{font-size:12px}
+  .cfg-reservar{padding:13px 22px;font-size:15px}
+}
+
+/* Teléfonos bajos (un iPhone SE son 667 px de alto). Medido ahí, al
+   panel le faltaban 64 px y las últimas correas se quedaban cortadas.
+   Se recorta lo prescindible —la frase del acabado— y se achatan las
+   muestras. Lo que NO se toca es el cuerpo de la letra: el suelo de
+   13 px se respeta también aquí. */
+@media (max-width:899px) and (max-height:700px){
+  :root{--cabecera:48px;--barra:68px}
+  .cfg-panel{gap:9px;padding:10px 12px 12px}
+  .cfg-panel .cfg-nota[data-nota]{display:none}
+  .cfg-correas .tira{aspect-ratio:2/1}
+  .cfg-acabados button{padding:6px}
+  .cfg-cuerpo{grid-template-rows:minmax(30svh,1fr) auto}
+}
+
+/* pantallas muy bajas (un portátil de 13" con la barra de marcadores) */
+@media (max-height:640px) and (min-width:900px){
+  .cfg-nota dl{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cfg-foto{transition:none}
+}
