@@ -1077,3 +1077,22 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    negrita y en la tinta plena, sobre el gris del párrafo, para que sea
    lo que se lee primero de la frase. */
 .lunar-dialogue-copy b{ font-weight: 700; color: #171513; }
+
+/* La primera tarjeta del carrusel, la del Cóctel: el encuadre baja para
+   dejar aire arriba, que es donde va el rótulo. Con el recorte centrado
+   el nombre caía sobre la caja de acero y se perdía. (Óscar, 05/08/2026) */
+.trust-carousel-track .trust-card:first-child img{ object-position: center 78%; }
+
+/* EL AVISO DE MARCAS · Óscar lo quiere a 9 px, en gris y con margen
+   (05/08/2026). Iba pegado a los bordes de la ventana. */
+.aviso-marcas{
+  margin: 0; padding: 26px clamp(18px,5vw,64px) 34px;
+  background: var(--ivory);
+}
+.aviso-marcas p{
+  max-width: 1100px; margin: 0 auto;
+  font-size: 9px; line-height: 1.55; color: #7b7a72; text-align: center;
+}
+@media (max-width:899px){
+  .aviso-marcas{ padding: 20px 20px 28px; }
+}

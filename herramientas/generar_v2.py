@@ -58,7 +58,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 21
+V_CSS = 22
 V_JS = 5
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -663,7 +663,7 @@ CIERRE = f"""
   </section>
 
   <section class="club-preview">
-    <div class="club-copy"><p class="section-number">03 — CLUB LAORA</p><h2>Tu reloj continúa<br><em>dentro de la app.</em></h2><p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p><a class="button primary" href="/club.html">Conocer Club laOra →</a></div>
+    <div class="club-copy"><p class="section-number">CLUB LAORA</p><h2>Tu reloj continúa<br><em>dentro de la app.</em></h2><p>Certificado, factura, garantía, historial, contacto directo con el taller y ventajas por recomendación. Todo en un único lugar, privado por defecto.</p><a class="button primary" href="/club.html">Conocer Club laOra →</a></div>
     <div class="club-phone-wrap">
       <div class="phone" aria-label="Vista previa de la aplicación Club laOra">
         <div class="phone-bar"><span>9:41</span><i></i></div>
