@@ -33,19 +33,64 @@
 
 
   /* ---------- 2 · la portada ----------
-     Dos vistas sobre la misma foto: la segunda es el acercamiento, y en
-     la hoja se llama `.is-close`. Igual que en el componente, el índice
-     da la vuelta con el resto de 2. */
+     TRES EXPOSICIONES, una por reloj. Antes eran dos encuadres de la
+     misma foto del Lunar; desde el 05/08/2026 son el Lunar —con el
+     acercamiento, que es el encuadre que eligió Óscar—, el Bitácora y
+     el Trinchera.
+
+     Al pasar de una a otra cambian la foto, el nombre, la línea de
+     características, el precio y adónde lleva el botón. Todo sale del
+     <script data-exposiciones> que escribe el generador: aquí no hay ni
+     un precio ni un nombre escritos. */
   (function portada() {
     var media = document.querySelector('[data-hero]');
-    if (!media) return;
+    var caja = document.querySelector('[data-exposiciones]');
+    if (!media || !caja) return;
+
+    var lista;
+    try { lista = JSON.parse(caja.textContent); } catch (e) { return; }
+    if (!lista || !lista.length) return;
 
     var puntos = media.querySelectorAll('[data-hero-vista]');
     var flechas = media.querySelectorAll('[data-hero-paso]');
+    var foto = media.querySelector('.lunar-hero-image');
+    var elNombre = document.querySelector('[data-hero-nombre]');
+    var elSpecs = document.querySelector('[data-hero-specs]');
+    var elPrecio = document.querySelector('[data-hero-precio]');
+    var elReservar = document.querySelector('[data-hero-reservar]');
     var vista = 0;
 
     function pintar() {
-      media.classList.toggle('is-close', vista === 1);
+      var e = lista[vista];
+
+      /* La foto se precarga antes de ponerla, para que el cambio no
+         enseñe el hueco vacío a medio cargar. Y se apunta CUÁL se pidió:
+         pasando rápido de una a otra, la que tardaba menos en cargar
+         llegaba la última y se quedaba puesta la foto de un reloj con el
+         nombre y el precio de otro. Si al cargar ya no es la que toca,
+         se descarta. */
+      if (foto && foto.getAttribute('src') !== e.foto) {
+        var pedida = vista;
+        var siguiente = new Image();
+        siguiente.onload = function () {
+          if (pedida === vista) foto.src = e.foto;
+        };
+        siguiente.src = e.foto;
+      }
+      media.classList.toggle('is-close', e.encuadre === 'cerca');
+      media.setAttribute('aria-label', e.alt);
+
+      if (elNombre) elNombre.textContent = e.nombre;
+      if (elPrecio) elPrecio.textContent = 'desde ' + e.precio;
+      if (elReservar) elReservar.setAttribute('href', e.enlace);
+      if (elSpecs) {
+        elSpecs.innerHTML = '';
+        e.specs.forEach(function (dato, n) {
+          if (n) { var sep = document.createElement('i'); sep.textContent = '|'; elSpecs.appendChild(sep); }
+          elSpecs.appendChild(document.createTextNode(dato));
+        });
+      }
+
       for (var i = 0; i < puntos.length; i++) {
         var esta = Number(puntos[i].dataset.heroVista) === vista;
         puntos[i].classList.toggle('active', esta);
@@ -56,7 +101,10 @@
     for (var i = 0; i < flechas.length; i++) {
       (function (boton) {
         boton.addEventListener('click', function () {
-          vista = (vista + Number(boton.dataset.heroPaso) + 2) % 2;
+          /* con el número de exposiciones, no con un 2 fijo: antes eran
+             dos encuadres y ahora son tres relojes */
+          var n = lista.length;
+          vista = (vista + Number(boton.dataset.heroPaso) + n) % n;
           pintar();
         });
       })(flechas[i]);

@@ -59,7 +59,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
 V_CSS = 16
-V_JS = 2
+V_JS = 4
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -119,27 +119,81 @@ CABECERA = f"""
 
 # ============================================================
 # ACTO 1 · PORTADA  ·  LunarHero.tsx + page.tsx
+# ------------------------------------------------------------
+# TRES EXPOSICIONES, por encargo de Óscar (05/08/2026). Antes eran dos
+# vistas de la MISMA foto del Lunar —la entera y un acercamiento—; se
+# queda el acercamiento, que es la que eligió, y detrás entran el
+# Bitácora y el Trinchera. Tres modelos, tres exposiciones.
+#
+# Al cambiar de exposición cambian la foto, el nombre, la línea de
+# características, el precio y adónde llevan los dos botones. El precio
+# es el mínimo del configurador de ESE reloj, sacado de `catalogo.json`.
+#
+# La línea de características del Lunar es la del material aprobado.
+# Las otras dos se componen con datos de la hoja, no con la plantilla
+# del Lunar: el Trinchera es de titanio y no de acero, y ni el Bitácora
+# ni el Trinchera tienen el cristal confirmado en su acabado de entrada,
+# así que ahí va el dato que sí está —el diámetro y la estanqueidad—.
 # ============================================================
+def desde_de(slug):
+    cfg = R[slug]['configurador']
+    return min(p for l in cfg['precios'].values() for p in l if p is not None)
+
+
+EXPOSICIONES = [
+    dict(slug='lunar', nombre='Lunar',
+         foto=f'{V2}/lunar-hero-steel.webp',
+         encuadre='cerca',          # el acercamiento, que es el que eligió Óscar
+         alt='Reloj laOra Lunar de acero 316L pulido ante un cohete lunar difuminado',
+         specs=['Movimiento Japonés', 'Zafiro', 'Acero 316L']),
+    dict(slug='bitacora', nombre='Bitácora',
+         foto=f'{IMG}/bitacora-hero-full.webp',
+         encuadre='',
+         alt='Reloj laOra Bitácora, deportivo integrado de acero',
+         specs=['Cuarzo con fecha', '40 mm', '100 m']),
+    dict(slug='trinchera', nombre='Trinchera',
+         foto=f'{IMG}/trinchera-hero.webp',
+         encuadre='',
+         alt='Reloj laOra Trinchera, reloj de campo de titanio',
+         specs=['Cuarzo de barrido', 'Titanio', '200 m']),
+]
+
+for e in EXPOSICIONES:
+    e['precio'] = euros(desde_de(e['slug'])).replace(' €', '€')
+    e['enlace'] = '/' + e['slug'] + '.html'
+
+PRIMERA_EXPO = EXPOSICIONES[0]
+
+
+def punto(i, e):
+    activo = ' class="active"' if i == 0 else ''
+    return (f'        <button type="button"{activo} aria-label="Ver el {e["nombre"]}" '
+            f'aria-pressed="{"true" if i == 0 else "false"}" data-hero-vista="{i}"></button>\n')
+
+
 ACTO_1 = f"""
   <section class="home-hero">
-    <div class="lunar-hero-media" role="img" aria-label="Reloj laOra Lunar de acero 316L pulido ante un cohete lunar difuminado" data-hero>
-      <img class="lunar-hero-image" src="{V2}/lunar-hero-steel.webp" alt="" aria-hidden="true" loading="eager" fetchpriority="high">
+    <div class="lunar-hero-media{' is-close' if PRIMERA_EXPO['encuadre'] == 'cerca' else ''}" role="img" aria-label="{PRIMERA_EXPO['alt']}" data-hero>
+      <img class="lunar-hero-image" src="{PRIMERA_EXPO['foto']}" alt="" aria-hidden="true" loading="eager" fetchpriority="high">
       <div class="lunar-hero-veil" aria-hidden="true"></div>
-      <button class="lunar-hero-arrow previous" type="button" aria-label="Vista anterior" data-hero-paso="-1">‹</button>
-      <button class="lunar-hero-arrow next" type="button" aria-label="Vista siguiente" data-hero-paso="1">›</button>
-      <div class="lunar-hero-dots" role="group" aria-label="Elegir vista del Lunar">
-        <button type="button" class="active" aria-label="Vista completa" aria-pressed="true" data-hero-vista="0"></button>
-        <button type="button" aria-label="Vista cercana" aria-pressed="false" data-hero-vista="1"></button>
-      </div>
+      <button class="lunar-hero-arrow previous" type="button" aria-label="Reloj anterior" data-hero-paso="-1">‹</button>
+      <button class="lunar-hero-arrow next" type="button" aria-label="Reloj siguiente" data-hero-paso="1">›</button>
+      <div class="lunar-hero-dots" role="group" aria-label="Elegir reloj">
+{''.join(punto(i, e) for i, e in enumerate(EXPOSICIONES))}      </div>
     </div>
     <div class="home-hero-copy lunar-home-copy">
       <p class="lunar-eyebrow">Llego el momento de</p>
-      <h1 class="lunar-title"><img src="{LOGO_CLARO}" alt="laOra"><span>Lunar</span></h1>
-      <p class="lunar-specs">Movimiento Japonés <i>|</i> Zafiro <i>|</i> Acero 316L</p>
-      <p class="lunar-price">desde {euros(DESDE).replace(' €', '€')}</p>
-      <div class="lunar-actions"><a class="lunar-action reserve" href="/lunar.html">Reservar</a><a class="lunar-action more" href="#lunar-detalle">Saber mas</a></div>
+      <h1 class="lunar-title"><img src="{LOGO_CLARO}" alt="laOra"><span data-hero-nombre>{PRIMERA_EXPO['nombre']}</span></h1>
+      <!-- sin espacios alrededor de la barra: la separación la da el
+           `padding` del <i> en la hoja, y con espacios además del padding
+           la primera exposición salía algo más suelta que las otras dos -->
+      <p class="lunar-specs" data-hero-specs>{'<i>|</i>'.join(PRIMERA_EXPO['specs'])}</p>
+      <p class="lunar-price" data-hero-precio>desde {PRIMERA_EXPO['precio']}</p>
+      <div class="lunar-actions"><a class="lunar-action reserve" href="{PRIMERA_EXPO['enlace']}" data-hero-reservar>Reservar</a><a class="lunar-action more" href="#lunar-detalle">Saber mas</a></div>
     </div>
-  </section>"""
+  </section>
+
+  <script type="application/json" data-exposiciones>{json.dumps(EXPOSICIONES, ensure_ascii=False).replace('<', chr(92) + 'u003c')}</script>"""
 
 
 # ============================================================
