@@ -58,7 +58,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 20
+V_CSS = 21
 V_JS = 5
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -211,7 +211,7 @@ ACTO_2 = f"""
     <div class="lunar-dialogue-veil" aria-hidden="true"></div>
     <div class="lunar-dialogue-copy">
       <h2 id="lunar-dialogue-question">Qué chulo. ¿Cuál es?</h2>
-      <p>Es un {marca('dialogue-brand', LOGO_OSCURO)}. Marca española, los montan en Madrid a mano. Zafiro, mecanismo Seiko. Doscientos noventa y nueve.</p>
+      <p>Es un {marca('dialogue-brand', LOGO_OSCURO)}. Marca española, los montan en Madrid a mano. Zafiro, <b>mecanismos suizos y japoneses</b>. Doscientos diecinueve.</p>
     </div>
     <span class="lunar-dialogue-number" aria-hidden="true">02</span>
   </section>"""
