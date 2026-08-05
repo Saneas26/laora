@@ -1080,35 +1080,50 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 
 /* LA PRIMERA TARJETA, la del Cóctel  (Óscar, 05/08/2026)
    ------------------------------------------------------------
-   El problema no era el encuadre: era `object-fit: cover`, que amplía
-   la foto hasta llenar la tarjeta y recorta lo que sobra. Con una foto
-   apaisada dentro de una tarjeta alta, eso deja un primer plano enorme,
-   el reloj cortado por los cuatro lados y el rótulo encima de la esfera.
+   La foto del bar es VERTICAL y la tarjeta es apaisada. Rellenándola
+   con `cover` el reloj se corta —solo cabría un tercio de la foto—, y
+   con `contain` se queda diminuta en medio de la tarjeta.
 
-   Aquí la foto se ve ENTERA —`contain`— y apoyada abajo, y el rótulo se
-   queda en la franja de arriba, sobre el fondo de la tarjeta. Así se lee
-   el texto y se ve el reloj completo, con su logotipo y sus detalles,
-   que es lo que pidió. */
+   Así que esta tarjeta va a dos mitades: el rótulo a la izquierda y la
+   foto a la derecha, ocupando su mitad entera. La foto se ve grande, el
+   texto va sobre el fondo de la tarjeta y no encima del reloj, y las
+   otras cuatro tarjetas no se enteran. */
 .trust-carousel-track .trust-card:first-child{ background: #0b0c0a; }
 .trust-carousel-track .trust-card:first-child > img{
-  object-fit: contain;
-  object-position: center bottom;
-  /* La caja de la foto empieza por debajo del rótulo, así no hay
-     superposición posible ni con el título más largo. La altura va en
-     porcentaje y NO en `auto`: con `width:100%` y `height:auto` manda la
-     proporción de la foto y no el `bottom`, y la imagen se salía de la
-     tarjeta por abajo. */
-  top: 31%; height: 69%; bottom: auto;
+  left: auto; right: 0; width: 50%; height: 100%;
+  object-fit: cover; object-position: center 42%;
 }
-/* sin el velo oscuro encima: la foto ya trae su fondo negro y el rótulo
-   no cae sobre ella */
 .trust-carousel-track .trust-card:first-child .trust-card-veil{
-  background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 26%, rgba(0,0,0,0) 40%);
+  background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.5) 42%, rgba(0,0,0,0) 62%);
 }
-.trust-carousel-track .trust-card:first-child .trust-card-copy{ top: 6%; }
+.trust-carousel-track .trust-card:first-child .trust-card-copy{
+  top: 50%; left: 4%; width: 44%; transform: translateY(-50%);
+  text-align: left;
+}
 @media (max-width:899px){
-  .trust-carousel-track .trust-card:first-child > img{ top: 34%; height: 66%; }
+  /* en el móvil la tarjeta es estrecha: la foto arriba y el texto abajo */
+  .trust-carousel-track .trust-card:first-child > img{
+    left: 0; right: auto; width: 100%; height: 62%; top: 0;
+    object-position: center 38%;
+  }
+  .trust-carousel-track .trust-card:first-child .trust-card-veil{
+    background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.1) 30%, rgba(0,0,0,.75) 62%, rgba(0,0,0,.85) 100%);
+  }
+  .trust-carousel-track .trust-card:first-child .trust-card-copy{
+    top: auto; bottom: 6%; left: 50%; width: 88%;
+    transform: translateX(-50%); text-align: center;
+  }
 }
+
+/* EL MENÚ · centrado en la altura de la cabecera (Óscar, 05/08/2026).
+   Al alinear el logotipo con la palabra puse `align-items: baseline` en
+   el enlace, y con eso el texto se pegaba a la parte de arriba de los
+   44 px del enlace en vez de quedarse en medio. El enlace deja de ser
+   flex: con una línea de texto normal, el logotipo y la palabra
+   comparten línea base por sí solos —que era lo que se buscaba— y el
+   `line-height` centra el conjunto. */
+.main-nav a, .account-link{ display: block; line-height: 44px; }
+
 
 /* EL AVISO DE MARCAS · Óscar lo quiere a 9 px, en gris y con margen
    (05/08/2026). Iba pegado a los bordes de la ventana. */

@@ -58,7 +58,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 25
+V_CSS = 26
 V_JS = 5
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -245,7 +245,7 @@ CONFIANZA = [
     # se lee; esta tiene 30, como la que sustituye. Y los marrones de la
     # esfera y de la correa mantienen los tonos del carrusel.
     ('01', 'Marca propia', 'Sin emblemas ni logotipos ajenos.',
-     '../relojes-2026/coctel-profile.webp', 'Reloj laOra Cóctel de esfera marrón y correa de piel, en un estudio oscuro'),
+     'coctel-barra.jpg', 'Reloj laOra Cóctel sobre la barra de un bar, con una copa al fondo'),
     ('02', 'Montaje en Madrid', 'Ajuste y control unidad a unidad.',
      'trust-montaje-madrid-v2.jpg', 'Manos de relojero ajustando el mecanismo visible de un cronógrafo boca abajo'),
     ('03', 'Componentes identificados', 'Origen y movimiento, sin rodeos.',
