@@ -94,5 +94,43 @@
     if (typeof laoraCarritoPintarContador === 'function') laoraCarritoPintarContador();
   }
 
+  /* ---------- PAGAR ----------
+     PayPal se puede abrir hoy sin clave ni servidor: un enlace de
+     paypal.me con el importe, a la cuenta @saneascom del Grupo Saneas.
+
+     LO QUE ESTE CAMINO NO HACE, y hay que saberlo: PayPal cobra, pero
+     no le dice a nadie QUÉ se ha comprado ni A DÓNDE se envía. El
+     importe llega suelto. Por eso, antes de abrir el pago, la
+     referencia de lo elegido se copia al concepto y se le pide a quien
+     compra que la deje puesta; y aun así hace falta que alguien cruce
+     el ingreso con el pedido a mano.
+
+     Lo que resuelve eso de verdad es la pasarela con Mollie, que sí
+     devuelve el pedido pagado. Está pendiente de su clave. */
+  var botonPagar = document.querySelector('[data-pagar]');
+  if (botonPagar) {
+    var lineas = laoraCarritoLeer();
+    if (lineas.length) {
+      botonPagar.disabled = false;
+      botonPagar.textContent = 'Pagar con PayPal';
+      botonPagar.addEventListener('click', function () {
+        var total = laoraCarritoTotal();
+        var refs = laoraCarritoLeer().map(function (l) {
+          return l.ref + (l.cantidad > 1 ? ' x' + l.cantidad : '');
+        }).join(', ');
+        /* el importe con punto decimal, que es como lo espera paypal.me */
+        var url = 'https://www.paypal.me/saneascom/' + total.toFixed(2) + 'EUR';
+        try { navigator.clipboard.writeText(refs); } catch (e) {}
+        window.open(url, '_blank', 'noopener');
+      });
+      var nota = document.querySelector('.ca-pendiente');
+      if (nota) {
+        nota.textContent = 'Se abre PayPal con el importe. Pon en el concepto tu referencia: ' + 
+          lineas.map(function (l) { return l.ref; }).join(', ') +
+          ' — la copiamos al portapapeles al pulsar.';
+      }
+    }
+  }
+
   pintar();
 })();
