@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Configurador del Lunar de laOra: acabado, brazalete o correa y precio, en una sola pantalla.">
+<!-- PÁGINA DE PRUEBAS: invisible a propósito, sin enlazar desde ningún sitio. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#151715">
+<title>Configura tu Lunar · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar_v2c.py — no editar a mano. -->
+<link rel="stylesheet" href="/assets/css/lunarv2c.css?v=8">
+</head>
+<body>
+
+<header class="cfg-cab">
+  <span class="cfg-marca"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Lunar</b></span>
+  <span class="ref">Ref. <span data-ref>—</span></span>
+  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
+       cuatro palabras al lado del logotipo sin montarse encima de la
+       referencia, y recortar con puntos suspensivos deja un enlace que
+       no se entiende. -->
+  <a class="volver" href="/lunar.html"><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span> →</a>
+</header>
+
+<div class="cfg-cuerpo">
+
+  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
+  <section class="cfg-visor" aria-label="El reloj que estás configurando">
+    <img class="cfg-foto" data-foto
+         src="/assets/img/relojes-2026/lunar-acero.webp"
+         alt="Reloj laOra Lunar, acabado Alba, con brazalete de acero 904l"
+         fetchpriority="high">
+    <div class="cfg-muestra" aria-hidden="true">
+      <span class="tira" data-muestra-tira style="background:linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"></span>
+      <span data-muestra-nombre>Brazalete de acero 904L</span>
+    </div>
+    <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Brazalete de acero 904L</p>
+    <!-- La referencia también aquí: en el teléfono no cabe en la
+         cabecera, y es el dato con el que Óscar busca en la hoja. -->
+    <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+  </section>
+
+  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
+  <section class="cfg-panel" aria-label="Opciones del Lunar">
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Acabado <b>3 opciones</b></p>
+      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
+        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 219,90 €</small></button>
+        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><small>desde 429,90 €</small></button>
+        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><small>desde 239,90 €</small></button>
+      </div>
+      <p class="cfg-nota" data-nota>El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.</p>
+    </div>
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa>—</b></p>
+      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa">
+        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"></span><span>Brazalete de acero 904L</span></button>
+        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(135deg,#e9ebed 0 3px,#b7babe 3px 6px),linear-gradient(150deg,#eceef0,#9da1a6)"></span><span>Brazalete de acero 316L</span></button>
+        <button type="button" data-correa="2" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span>Brazalete de acero</span></button>
+        <button type="button" data-correa="3" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#4a4c4e 0%,#232526 30%,#3d3f41 52%,#171819 78%,#303233 100%)"></span><span>Brazalete negro</span></button>
+        <button type="button" data-correa="4" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),linear-gradient(155deg,#8b5a33 0%,#6b4222 55%,#54331a 100%)"></span><span>Piel marrón</span></button>
+        <button type="button" data-correa="5" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"></span><span>Piel negra</span></button>
+        <button type="button" data-correa="6" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span><span>Caucho negro</span></button>
+        <button type="button" data-correa="7" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#343536 0%,#1a1b1b 60%,#4a4c4d 100%)"></span><span>Caucho negro con cierre desplegable</span></button>
+      </div>
+    </div>
+
+    <div class="cfg-nota">
+      <dl data-ficha></dl>
+    </div>
+
+  </section>
+</div>
+
+<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
+<footer class="cfg-barra">
+  <span class="lado">
+    <span class="eleccion" data-eleccion>Alba · Brazalete de acero 904L</span>
+    <span class="ref">Ref. <span data-ref>—</span></span>
+  </span>
+  <span class="cfg-precio">
+    <strong data-precio>249,90 €</strong>
+    <span>Impuestos incluidos</span>
+  </span>
+  <a class="cfg-reservar" data-reservar href="/lunar.html">Reservar</a>
+</footer>
+
+<script type="application/json" data-cfg>{"codigo": "LO—01", "modelo": "Lunar", "inicial": {"acabado": "alba", "correa": 0}, "precios": {"alba": [249.9, 239.9, null, null, 229.9, 219.9, 219.9, 229.9], "cenit": [null, null, 429.9, null, null, null, null, null], "eclipse": [null, null, null, 239.9, null, null, null, null]}, "fotos": {}, "acabados": {"alba": {"nombre": "Alba", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "resumen": "El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.", "refSufijo": "", "foto": "/assets/img/relojes-2026/lunar-acero.webp", "ficha": [["Movimiento", "Mecacuarzo Seiko/TMI VK63"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "100 m (10 ATM)"]]}, "cenit": {"nombre": "Cenit", "descriptor": "Cuerda manual arquitectura suiza", "resumen": "El techo de este reloj: cronógrafo mecánico de cuerda manual con rueda de columnas, bisel de cerámica y zafiro con antirreflejos.", "refSufijo": "", "foto": "/assets/img/relojes-2026/lunar-acero.webp", "ficha": [["Movimiento", "Seagull ST19 de rueda de columnas"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]]}, "eclipse": {"nombre": "Eclipse", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "resumen": "Todo en negro, con el mismo cronógrafo mecacuarzo y zafiro con antirreflejos.", "refSufijo": "", "foto": "/assets/img/relojes-2026/lunar-front.webp", "ficha": [["Movimiento", "Mecacuarzo Seiko/TMI VK63"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L con PVD negro satinado"], ["Estanqueidad", "100 m (10 ATM)"]]}}, "correas": [{"id": "brazalete-904l", "nombre": "Brazalete de acero 904L", "detalle": "Pulido y satinado · cierre desplegable con pulsadores y extensión", "muestra": "linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"}, {"id": "brazalete-arroz", "nombre": "Brazalete de acero 316L", "detalle": "Pulido vintage de Grano de Arroz con cierre desplegable con seguro", "muestra": "repeating-linear-gradient(135deg,#e9ebed 0 3px,#b7babe 3px 6px),linear-gradient(150deg,#eceef0,#9da1a6)"}, {"id": "brazalete-acero", "nombre": "Brazalete de acero", "detalle": "316L pulido y satinado · cierre desplegable con pulsadores y extensión", "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}, {"id": "brazalete-negro", "nombre": "Brazalete negro", "detalle": "316L con PVD negro satinado · cierre desplegable con pulsadores y extensión", "muestra": "linear-gradient(150deg,#4a4c4e 0%,#232526 30%,#3d3f41 52%,#171819 78%,#303233 100%)"}, {"id": "piel-marron", "nombre": "Piel marrón", "detalle": "Piel genuina, costura a contraste · hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),linear-gradient(155deg,#8b5a33 0%,#6b4222 55%,#54331a 100%)"}, {"id": "piel-negra", "nombre": "Piel negra", "detalle": "Piel genuina, costura a tono · hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"}, {"id": "caucho", "nombre": "Caucho negro", "detalle": "FKM mate texturizado · hebilla de acero", "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"}, {"id": "caucho-desplegable", "nombre": "Caucho negro con cierre desplegable", "detalle": "FKM mate · cierre desplegable automático, recortable a medida", "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#343536 0%,#1a1b1b 60%,#4a4c4d 100%)"}]}</script>
+<script src="/assets/js/lunarv2c.js?v=1"></script>
+</body>
+</html>
