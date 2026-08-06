@@ -408,6 +408,17 @@ body{
   .cfg-correas .tira{aspect-ratio:2/1}
   .cfg-muchos .cfg-acabados{gap:6px}
   .cfg-muchos .cfg-panel{gap:12px}
+  .cfg-muchos .cfg-correas{gap:6px}
+  .cfg-muchos .cfg-correas button{padding:5px 3px 6px;gap:4px}
+  .cfg-muchos .cfg-correas button span{line-height:1.15}
+
+  /* TRES FILAS DE OPCIONES: el Trinchera tiene NUEVE cajas. Ahí la
+     muestra ya no distingue nada —cuatro de ellas llevan la misma NATO
+     verde y lo que cambia es la caja, que es lo que dice el rótulo—,
+     así que se queda en una tira fina. Se recuperan casi treinta
+     píxeles por fila y las tres caben encima de la barra del precio. */
+  .cfg-apretado .cfg-correas .tira{aspect-ratio:auto;height:11px;border-radius:5px}
+  .cfg-apretado .cfg-correas button{padding:6px 4px 7px}
 
   /* Y aun así faltaban 55 px. Lo último que se retira es la frase del
      acabado —«Todo en negro, con el cuarzo japonés…»—, que es lo único

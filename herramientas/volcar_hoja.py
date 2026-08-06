@@ -79,13 +79,31 @@ INTACTOS = {
 # publicarlas sería enseñar un reloj que no es el que se manda. En
 # cuanto se arregle la celda, se quita de aquí y entra sola.
 # ============================================================
-EXCLUIDAS = {
-    'LO-05_Trinchera_A01':
-        'es un Alba y su «Caja — Material» dice PVD negro, cuando su '
-        '«Caja/conjunto» dice «39mm plata solido» y su foto es plateada',
-    'LO-05_Trinchera_L01':
-        'su «Caja/conjunto» es «G30», un código y no una descripción; las '
-        'otras tres Levante describen la caja entera',
+EXCLUIDAS = {}
+
+# ============================================================
+# CELDAS QUE SE CORRIGEN AL VUELO
+# ------------------------------------------------------------
+# Solo cuando Óscar ha dicho cuál es el dato bueno y la hoja todavía no
+# está actualizada. Cada una lleva su fecha y su motivo, y se borra de
+# aquí en cuanto la hoja lo diga por sí sola. No es un sitio para
+# arreglar lo que no se sabe: si no hay decisión, la fila se queda fuera.
+#
+# 06/08/2026, Óscar: «el Trinchera en Alba puede tener la caja en color
+# plata o en color bronce, el PVD negro solo es para el acabado
+# eclipse». A01 y L01 dicen «39mm plata solido» en su «Caja/conjunto» y
+# «PVD negro» en las dos columnas de caja: se quedan en plata, con las
+# mismas palabras que usan A03 y L03, que son las otras dos de plata.
+# ============================================================
+CORRECCIONES = {
+    'LO-05_Trinchera_A01': {
+        'cajaMat': 'Acero inoxidable 316L, plata',
+        'cajaAcab': 'Acero pulido/cepillado (plata)',
+    },
+    'LO-05_Trinchera_L01': {
+        'cajaMat': 'Acero inoxidable 316L, plata',
+        'cajaAcab': 'Acero pulido/cepillado (plata)',
+    },
 }
 
 # El Bauhaus no está en la hoja: se le quita el configurador para que no
@@ -150,9 +168,12 @@ COPIA = re.compile(
 # cosa nuestra, no del cliente.
 PROCEDENCIA = re.compile(r'\s*\([^)]*\b(especificación laOra|según lote)[^)]*\)', re.I)
 
-# Filas que la hoja marca como no cerradas. No se publican: un reloj
-# cuyo movimiento está «por confirmar» no se puede poner a la venta.
-PENDIENTE = re.compile(r'por confirmar|pendiente', re.I)
+# «— por confirmar/proveedor pendiente». Son notas de compras dentro de
+# la celda del dato. Se borran del texto —no se publican nunca— pero la
+# fila SÍ sale: el 06/08/2026 Óscar dio por bueno el Cenit del Tortuga,
+# que era la única que las llevaba. Al final del volcado se listan las
+# celdas que aún las traen, para que se limpien en la hoja.
+PENDIENTE = re.compile(r'\s*[—–-]?\s*\b(por confirmar|proveedor pendiente|pendiente)\b[^,;)]*', re.I)
 
 VACIO = re.compile(
     r'^\s*(no declarad[oa][^.]*'
@@ -176,6 +197,7 @@ def limpiar(v):
     if not s or VACIO.match(s):
         return None
     s = PARENTESIS_INTERNO.sub('', s)
+    s = PENDIENTE.sub('', s)
     s = COPIA.sub('', s)
     s = PROCEDENCIA.sub('', s)
     s = MARCA_AJENA.sub('', s)
@@ -206,8 +228,23 @@ def ident(s):
 # filas coinciden en todo esto, para el cliente son el mismo reloj por
 # fuera y no se le enseñan dos veces.
 # ============================================================
+CODIGO = re.compile(r'^[A-Z]{1,3}\s?\d{1,4}$')
+
+
+def cierre(fila):
+    """El cierre del brazalete. La hoja mete ahí a veces el código del
+    proveedor —«BK25»—, que no describe nada."""
+    v = limpiar(fila.get('brazCierre'))
+    return None if v and CODIGO.match(v.strip()) else v
+
+
+# El CIERRE no entra: es un detalle de la misma correa, no otro reloj, y
+# la hoja lo tiene desigual —el A01 del Trinchera lleva ahí «BK25», el
+# código del proveedor, donde las demás dicen «Hebilla de acero»—. Con
+# el cierre dentro, esa celda partía en dos una caja que es la misma y
+# salían dos botones «39 mm, plata».
 CLAVE_EXTERIOR = ('correa', 'cajaMat', 'diametro', 'cajaAcab',
-                  'brazMat', 'brazAcab', 'brazCierre')
+                  'brazMat', 'brazAcab')
 
 
 def clave_exterior(f):
@@ -218,7 +255,13 @@ def clave_exterior(f):
     proveedor y con qué anillo se monta—, y dos filas idénticas para el
     cliente traen ahí textos distintos. Comparándola salían opciones
     duplicadas: el Precisa daba tres cuando solo tiene una."""
-    return tuple(limpiar(f.get(c)) or '' for c in CLAVE_EXTERIOR)
+    def igualable(v):
+        # sin tildes, sin mayúsculas y sin espacios de más: en la hoja
+        # conviven «balístico» y «balistico» para la misma correa, y
+        # comparando el texto tal cual salían dos opciones donde hay una
+        return re.sub(r'\s+', ' ', sin_tildes(v or '').lower()).strip()
+
+    return tuple(igualable(limpiar(f.get(c))) for c in CLAVE_EXTERIOR)
 
 
 # «Acero inoxidable 316L, PVD bronce» dice tres veces lo mismo cuando
@@ -272,16 +315,6 @@ def titulo_exterior(fila):
     base = re.sub(r'\s*,?\s*\d+\s*mm\b', '', base)
     base = re.sub(r'\s*de\s+\d+\s*mm\s+y\s+\d+\s*mm', '', base)
     return re.sub(r'\s{2,}', ' ', base).strip(' ,;·')
-
-
-CODIGO = re.compile(r'^[A-Z]{1,3}\s?\d{1,4}$')
-
-
-def cierre(fila):
-    """El cierre del brazalete. La hoja mete ahí a veces el código del
-    proveedor —«BK25»—, que no describe nada."""
-    v = limpiar(fila.get('brazCierre'))
-    return None if v and CODIGO.match(v.strip()) else v
 
 
 def detalle_exterior(fila):
@@ -468,7 +501,7 @@ def main(ruta):
     with open(CATALOGO, encoding='utf-8') as f:
         cat = json.load(f)
 
-    porSlug, pendientes, fuera = {}, [], []
+    porSlug, pendientes, fuera, corregidas = {}, [], [], []
     for f in hoja:
         slug = CODIGO_SLUG.get(f['ref'].split('_')[0])
         if not slug:
@@ -479,9 +512,13 @@ def main(ruta):
         if f['ref'] in EXCLUIDAS:
             fuera.append((f['ref'], EXCLUIDAS[f['ref']]))
             continue
-        if PENDIENTE.search(str(f.get('calibre', '')) + str(f.get('mov', ''))):
-            pendientes.append((f['ref'], limpiar(f.get('mov')) or f.get('mov')))
-            continue
+        for campo, valor in CORRECCIONES.get(f['ref'], {}).items():
+            if f.get(campo) != valor:
+                corregidas.append((f['ref'], campo, f.get(campo), valor))
+                f[campo] = valor
+        for campo, valor in f.items():
+            if isinstance(valor, str) and PENDIENTE.search(valor):
+                pendientes.append((f['ref'], campo, valor))
         porSlug.setdefault(slug, []).append(f)
 
     relojes = {r['slug']: r for r in cat['relojes']}
@@ -518,10 +555,17 @@ def main(ruta):
     with open(CATALOGO, 'w', encoding='utf-8') as f:
         json.dump(cat, f, ensure_ascii=False, indent=2)
         f.write('\n')
+    if corregidas:
+        print('\nCORREGIDO AL VUELO (hay que arreglarlo en la hoja):')
+        for ref, campo, antes, ahora in corregidas:
+            print(f'  {ref} · {campo}')
+            print(f'      hoja: {antes}')
+            print(f'      web:  {ahora}')
     if pendientes:
-        print('\nFUERA por estar sin cerrar en la hoja:')
-        for ref, mov in pendientes:
-            print(f'  {ref:30} {mov}')
+        print('\nCELDAS CON NOTAS DE COMPRAS DENTRO DEL DATO')
+        print('(se borran del texto publicado; conviene limpiarlas en la hoja):')
+        for ref, campo, valor in pendientes:
+            print(f'  {ref} · {campo}: {valor}')
     if fuera:
         print('\nFUERA porque la hoja se contradice:')
         for ref, motivo in fuera:
