@@ -217,13 +217,26 @@ def _movimiento(reloj, acabado):
     return tipo[:1].upper() + tipo[1:]
 
 
+# El nombre del fichero de cada foto. Cuando Óscar sustituye una, NO se
+# reutiliza el nombre: Cloudflare sirve la vieja desde su caché durante
+# horas y parece que el cambio no ha entrado. Costó dos vueltas con la
+# del Cóctel. Así que la foto nueva entra con nombre nuevo y la vieja se
+# borra.
+#
+# 06/08/2026: la del Bitácora se cambió porque en la primera no se leían
+# ni el logotipo ni el nombre del modelo en la esfera.
+FOTO_ACTO = {
+    'bitacora': 'bitacora-acto1-b',
+}
+
+
 def _exposicion(slug):
     reloj = R[slug]
     acabado = reloj['configurador']['acabados'][0]
     return dict(
         slug=slug,
         nombre=reloj['nombre'],
-        foto=f'/assets/img/heroes-2026/{slug}-acto1.webp',
+        foto=f'/assets/img/heroes-2026/{FOTO_ACTO.get(slug, slug + "-acto1")}.webp',
         encuadre='',
         alt=f'Reloj laOra {reloj["nombre"]} sobre {ESCENAS[slug]}',
         specs=[
