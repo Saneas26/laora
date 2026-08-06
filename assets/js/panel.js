@@ -66,6 +66,16 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   };
 
+  /* PostgREST devuelve lo enlazado como lista cuando pueden ser varios
+     y como objeto suelto cuando solo puede haber uno. La garantía es de
+     las segundas —una por reloj—, así que llega como objeto. Esto se
+     traga las dos formas y evita el fallo tonto de pedir `[0]` a algo
+     que no es una lista. */
+  function elPrimero(x) {
+    if (!x) return null;
+    return Array.isArray(x) ? (x[0] || null) : x;
+  }
+
   function nombreDe(s) {
     if (!s) return '(sin nombre)';
     var n = [s.nombre, s.apellidos].filter(Boolean).join(' ');
@@ -226,7 +236,7 @@
       html += '<h4>Lo comprado</h4>';
       (p.pedido_lineas || []).forEach(function (l) {
         var r = porLinea[l.id];
-        var g = r && r.garantias && r.garantias[0];
+        var g = r && elPrimero(r.garantias);
         html += '<div class="pa-bloque" data-linea="' + l.id + '">' +
           '<h5>' + esc(l.modelo) + ' · ' + esc(l.acabado) + '</h5>' +
           '<p>' + esc(l.correa || '') + ' — Ref. ' + esc(l.ref) +
@@ -355,7 +365,7 @@
 
       html += '<h4>Sus relojes</h4>';
       html += d.relojes.length ? d.relojes.map(function (r) {
-        var g = r.garantias && r.garantias[0];
+        var g = elPrimero(r.garantias);
         return '<div class="pa-bloque"><h5>' + esc(r.numero_serie) + '</h5>' +
           '<p>' + esc(r.modelo) + ' · ' + esc(r.acabado) + ' · ' + esc(r.correa || '') + '</p>' +
           '<p>' + (g ? 'Garantía hasta el ' + fecha(g.hasta) + ' (' + esc(g.estado) + ')' : 'sin garantía abierta') + '</p></div>';
