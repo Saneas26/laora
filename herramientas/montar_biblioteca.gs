@@ -27,42 +27,36 @@
  * que ya no hay que filtrar nada: lo interno no puede escaparse porque
  * no está en la hoja que lee el generador.
  *
+ * VA EN UN LIBRO NUEVO
+ * ------------------------------------------------------------
+ * NO en «laora-biblioteca-materiales». Aquel tiene trece pestañas, y dos
+ * se llaman «Modelos» y «Movimientos» —igual que dos de estas—, así que
+ * ejecutarlo allí se cargaría datos de verdad. Por eso lo primero que
+ * hace `montarBiblioteca` es comprobar que el libro está vacío, y si no
+ * lo está se para y dice qué pestañas le estorban.
+ *
+ * El libro viejo se queda como está: es de donde vamos a migrar.
+ *
  * CÓMO SE USA
  * ------------------------------------------------------------
- *   1. Abre el libro «Catalogo laOra».
+ *   1. Crea un libro nuevo (sheets.new) y ponle nombre.
  *   2. Extensiones → Apps Script.
  *   3. Pega esto, guarda y pulsa ▶ sobre `montarBiblioteca`.
  *   4. Mira el registro (Ver → Registro de ejecución).
  *
- * LAS TRECE QUE YA HAY
- * ------------------------------------------------------------
- * El libro no estaba vacío: tiene Inicio, Modelos, Gama y acabados,
- * Línea Eclipse, Biblioteca BOM, Movimientos, Estándar calidad,
- * Escandallo, Opus compras, Catalogo final, Escandallo Claude,
- * Catalogo laOra y PVP_Claude.
- *
- * Dos de ellas —«Modelos» y «Movimientos»— se llamaban igual que dos de
- * las nuestras. Por eso las nuevas llevan el prefijo `BIB_`: no pueden
- * pisar nada, y de un vistazo se ve cuáles son del sistema nuevo.
- *
- * `rehacer()` se niega en redondo a borrar una pestaña que no empiece
- * por `BIB_`. NO TOCA ninguna de las trece.
- *
- * OJO: al rehacer una pestaña BIB_ se pierde lo que hubiera escrito en
- * ella. Mientras estemos migrando, ejecuta con la cabeza.
+ * OJO: al volver a ejecutarlo se rehacen las ocho pestañas y se pierde
+ * lo que hubiera escrito en ellas. Mientras migramos, con la cabeza.
  */
 
-// El libro YA TIENE 13 pestañas, y dos se llaman «Modelos» y «Movimientos».
-// Por eso las nuevas van con prefijo: así no pueden pisar nada de lo que hay.
-// Sin espacios ni acentos en el nombre, para que las fórmulas no necesiten
-// comillas al referirse a ellas.
-const PREFIJO = 'BIB_';
+// Esto va en un LIBRO NUEVO, vacío. Por eso los nombres van limpios, sin
+// prefijo. Sin espacios ni acentos, para que las fórmulas no necesiten
+// comillas al referirse a ellos.
+const PREFIJO = '';
 const CLAVES = ['PARAMETROS', 'COMPONENTES', 'MOVIMIENTOS', 'MODELOS',
                 'REFERENCIAS', 'PRECIOS', 'COMPRAS', 'WEB'];
 
 function hoja(clave) { return PREFIJO + clave; }
 
-// Estas ocho y ninguna más. Las otras trece son intocables.
 const HOJAS = CLAVES.map(hoja);
 
 const AZUL = '#1a1a1a';       // cabecera de las que escribes tú
@@ -285,13 +279,30 @@ function letra(n) {
   return s;
 }
 
-function rehacer(ss, nombre) {
-  // Cinturón: aquí no se borra nada que no lleve nuestro prefijo. Si alguna
-  // vez alguien cambia un nombre a mano, el guion se para en vez de tragarse
-  // una pestaña con datos.
-  if (nombre.indexOf(PREFIJO) !== 0) {
-    throw new Error('Me niego a tocar «' + nombre + '»: no es una pestaña de la biblioteca.');
+/**
+ * El cinturón: esto SOLO se ejecuta en un libro nuevo.
+ *
+ * El libro viejo —«laora-biblioteca-materiales»— tiene trece pestañas, y
+ * dos se llaman «Modelos» y «Movimientos», igual que dos de estas. Si
+ * alguien pega este guion allí por error, se cargaría datos de verdad.
+ * Así que antes de tocar nada se comprueba que no haya ninguna pestaña
+ * ajena CON DATOS. La vacía que trae todo libro nuevo sí se admite.
+ */
+function comprobarLibroVacio(ss) {
+  const ocupadas = ss.getSheets().filter(function (h) {
+    return HOJAS.indexOf(h.getName()) < 0 && h.getLastRow() > 0;
+  }).map(function (h) { return h.getName(); });
+
+  if (ocupadas.length) {
+    throw new Error(
+      'Este libro tiene pestañas con datos que no son de la biblioteca: ' +
+      ocupadas.join(', ') + '. Este guion es para un LIBRO NUEVO y vacío. ' +
+      'Si lo ejecutas aquí, te cargas esos datos.');
   }
+}
+
+
+function rehacer(ss, nombre) {
   const vieja = ss.getSheetByName(nombre);
   if (vieja) ss.deleteSheet(vieja);
   return ss.insertSheet(nombre);
@@ -305,11 +316,7 @@ function rehacer(ss, nombre) {
 function montarBiblioteca() {
   const ss = SpreadsheetApp.getActive();
 
-  const ajenas = ss.getSheets()
-    .map(function (h) { return h.getName(); })
-    .filter(function (n) { return HOJAS.indexOf(n) < 0; });
-  Logger.log('Pestañas que NO se tocan: ' + (ajenas.join(', ') || '—'));
-  Logger.log('');
+  comprobarLibroVacio(ss);
 
   montarParametros(ss);
   ['COMPONENTES', 'MOVIMIENTOS', 'MODELOS', 'REFERENCIAS',
@@ -318,6 +325,14 @@ function montarBiblioteca() {
   formulasPrecios(ss);
   formulasCompras(ss);
   formulasWeb(ss);
+
+  // fuera la pestaña vacía que trae todo libro nuevo
+  ss.getSheets().forEach(function (h) {
+    if (HOJAS.indexOf(h.getName()) < 0 && h.getLastRow() === 0) {
+      Logger.log('  (quitada la pestaña vacía «' + h.getName() + '»)');
+      ss.deleteSheet(h);
+    }
+  });
 
   ss.setActiveSheet(ss.getSheetByName(hoja('PARAMETROS')));
 
