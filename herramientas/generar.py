@@ -38,8 +38,17 @@ V_CAB = 13
 V_JS_HOME = 8
 V_JS_FICHA = 14
 
+# RELOJES QUE NO SE ENSEÑAN
+# ------------------------------------------------------------
+# 06/08/2026, Óscar: «hay que quitar el bauhaus». No está en el catálogo
+# activo —no tiene configurador, ni precio, ni referencias en la hoja—,
+# así que en la colección salía como una tarjeta que no lleva a ninguna
+# venta. Se queda su ficha en `catalogo.json` por si algún día vuelve;
+# lo que desaparece es su sitio en la web.
+FUERA = {'bauhaus'}
+
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
-    RELOJES = json.load(f)['relojes']
+    RELOJES = [r for r in json.load(f)['relojes'] if r['slug'] not in FUERA]
 
 RELOJ = {r['slug']: r for r in RELOJES}
 IMG = '/assets/img/relojes-2026'
@@ -334,7 +343,9 @@ def escribir(nombre, contenido):
 # ============================================================
 
 # Los cuatro destacados son los mismos que elegía el material.
-DESTACADOS = ['tortuga', 'precisa', 'bauhaus', 'lunar']
+# El Bauhaus salía aquí y se fue con el resto (06/08/2026). En su sitio
+# entra el Diver, que sí está a la venta.
+DESTACADOS = ['tortuga', 'precisa', 'diver', 'lunar']
 
 CAPAS = [
     ('01', 'Cristal', 'Zafiro cuando la configuración lo incluye.'),
