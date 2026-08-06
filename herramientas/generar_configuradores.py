@@ -87,7 +87,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 26
-V_JS = 6
+V_JS = 7
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = {r['slug']: r for r in json.load(f)['relojes']}
@@ -318,6 +318,7 @@ def ficha_completa(reloj, cfg, a):
         ('02', 'Caja y cristal', [
             ('CRISTAL', a.get('cristal') or c.get('Cristal')),
             ('CAJA', a.get('caja') or a.get('cajaMaterial') or c.get('Caja')),
+            # El de la opción manda si lo trae: ver `configurador.js`.
             ('DIÁMETRO', a.get('diametro') or c.get('Diámetro') or reloj.get('diametro')),
             ('ESTANQUEIDAD', a.get('estanqueidad') or c.get('Estanqueidad')),
             ('BISEL', a.get('bisel') or c.get('Bisel')),
@@ -420,8 +421,12 @@ def pantalla(slug):
         'inicial': {'acabado': aInicial['id'], 'correa': cInicial},
         'precios': precios,
         'acabados': datosAcabados,
+        # `diametro` solo cuando la opción lo trae: el Trinchera monta
+        # el mismo acabado en 39 y en 36 mm, y la ficha técnica tiene
+        # que decir el de la caja elegida, no el del acabado.
         'correas': [{'id': c['id'], 'nombre': c['nombre'],
                      'detalle': c.get('detalle', ''),
+                     'diametro': c.get('diametro'),
                      'muestra': muestra_de(c)} for c in correas],
     }
 

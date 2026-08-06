@@ -473,7 +473,13 @@ def configurador(filas, previo):
         det = detalle_exterior(f)
         if t != titulos[i]:
             det = juntar([titulos[i], det])
-        correas.append({'id': ide, 'nombre': t, 'detalle': det})
+        # El DIÁMETRO viaja con la opción, no solo con el acabado.
+        # El Trinchera monta el mismo Alba en caja de 39 y de 36 mm: si
+        # la medida se queda a nivel de acabado, la ficha técnica dice
+        # 39 mm aunque estés eligiendo el de 36. Un dato que cambia con
+        # lo que se elige tiene que ir donde se elige.
+        correas.append({'id': ide, 'nombre': t, 'detalle': det,
+                        'diametro': limpiar(f.get('diametro'))})
 
     # 3. los precios y las referencias, casilla a casilla
     previoAcabados = {a['id']: a for a in (previo or {}).get('acabados', [])}
