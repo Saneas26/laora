@@ -60,6 +60,7 @@ const MARCAS = [
 type Marca = {
   id: string; nombre: string; remitente: string; web: string;
   tinta: string; papel: string; acento: string; dominios: string[];
+  logo?: string; logoAncho?: number; logoAlto?: number;
 };
 
 const MARCAS_CORREO: Marca[] = [
@@ -72,6 +73,12 @@ const MARCAS_CORREO: Marca[] = [
     // se lee: 5,3:1. El de arriba se queda para las pantallas grandes.
     tinta: '#090909', papel: '#F7F7F5', acento: '#8a6428',
     dominios: ['laora.es'],
+    // El logotipo de la casa, el de verdad: la O es la esfera con el
+    // triángulo del mediodía. Va como imagen porque en un correo no se
+    // puede componer, y con `alt` para cuando el lector no baje las
+    // imágenes: entonces se lee «laOra», que es lo importante.
+    logo: 'https://laora.es/assets/img/lunar-v2/laora-wordmark-dark.png',
+    logoAncho: 132, logoAlto: 43,
   },
   {
     id: 'activala', nombre: 'Activala',
@@ -196,17 +203,24 @@ function textoDe(tipo: string, marca: Marca): Texto {
    todos los correos las bloquean hasta que el lector las pide. La
    marca que manda el correo no se repite: ya sabe dónde está. */
 function pieGrupo(marca: Marca) {
+  const S = '-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+
+  /* Una por línea, no todas seguidas separadas por puntos: en un pie a
+     13 px, seis casas en corrido no se leen, se saltan. */
   const filas = MARCAS
     .filter((m) => m.id !== marca.id && !(marca.id === 'saneas' && m.id === 'saneas-app'))
-    .map((m) => `<a href="${m.url}" style="color:#4a4a4a;text-decoration:none;white-space:nowrap">` +
-                `<b style="color:#2b2b2b">${esc(m.nombre)}</b> <span style="color:#5f5f5f">${esc(m.que)}</span></a>`)
-    .join('<span style="color:#c9c9c9"> · </span>\n      ');
+    .map((m) => `<tr><td style="padding:4px 0">` +
+                `<a href="${m.url}" style="text-decoration:none;font:400 14px/1.4 ${S}">` +
+                `<b style="color:#2b2b2b">${esc(m.nombre)}</b>` +
+                `<span style="color:#5f5f5f"> · ${esc(m.que)}</span></a></td></tr>`)
+    .join('\n      ');
 
   return `
-    <p style="margin:0 0 10px;font:700 13px/1.5 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#2b2b2b">
-      ${esc(marca.nombre)} es del Grupo Saneas, que también hace:</p>
-    <p style="margin:0;font:400 13px/2 -apple-system,Segoe UI,Helvetica,Arial,sans-serif">
-      ${filas}</p>`;
+    <p style="margin:0 0 10px;font:700 14px/1.5 ${S};color:#2b2b2b">
+      ${esc(marca.nombre)} pertenece al Grupo Saneas, que también lo conforman:</p>
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+      ${filas}
+    </table>`;
 }
 
 function montarHtml(marca: Marca, t: Texto, enlace: string, codigo: string) {
@@ -220,7 +234,10 @@ function montarHtml(marca: Marca, t: Texto, enlace: string, codigo: string) {
 <tr><td align="center" style="padding:32px 16px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:14px;border:1px solid #e6e4df">
     <tr><td style="padding:34px 30px 8px">
-      <p style="margin:0;font:700 20px/1.2 Georgia,'Times New Roman',serif;letter-spacing:.02em;color:${marca.tinta}">${esc(marca.nombre)}</p>
+      ${marca.logo
+        ? `<img src="${marca.logo}" width="${marca.logoAncho}" height="${marca.logoAlto}" alt="${esc(marca.nombre)}"
+             style="display:block;border:0;outline:none;text-decoration:none;width:${marca.logoAncho}px;height:${marca.logoAlto}px;font:700 20px/1.2 Georgia,serif;color:${marca.tinta}">`
+        : `<p style="margin:0;font:700 20px/1.2 Georgia,'Times New Roman',serif;letter-spacing:.02em;color:${marca.tinta}">${esc(marca.nombre)}</p>`}
       <div style="height:3px;width:44px;margin:12px 0 0;background:${marca.acento}"></div>
     </td></tr>
 
@@ -276,7 +293,7 @@ ${t.aviso}
 Si no lo has pedido tú, no hagas nada: sin pulsar, no ocurre nada.
 
 —
-${marca.nombre} es del Grupo Saneas, que también hace:
+${marca.nombre} pertenece al Grupo Saneas, que también lo conforman:
 ${otras}
 
 Este correo te llega porque alguien ha pedido entrar en ${marca.nombre} con esta

@@ -554,40 +554,40 @@
         ],
         "precios": {
           "alba": [
-            189.9,
+            209.9,
             null,
             null,
             null
           ],
           "levante": [
             null,
-            249.9,
+            279.9,
             null,
             null
           ],
           "cenit": [
             null,
             null,
-            339.9,
+            359.9,
             null
           ],
           "eclipse": [
             null,
             null,
             null,
-            189.9
+            209.9
           ],
           "eclipse-nh35a": [
             null,
             null,
             null,
-            249.9
+            269.9
           ],
           "eclipse-9015": [
             null,
             null,
             null,
-            309.9
+            329.9
           ]
         },
         "comunes": {
@@ -865,10 +865,10 @@
         ],
         "precios": {
           "alba": [
-            199.9
+            229.9
           ],
           "levante": [
-            229.9
+            249.9
           ],
           "cenit": [
             379.9
@@ -977,160 +977,253 @@
         ]
       ],
       "configurador": {
-        "_": "Catálogo final de la hoja de materiales (03/08/2026). Seis acabados = tres calibres por dos acabados de caja. El Eclipse es el negro: lo decidió Óscar, la hoja todavía da titanio cepillado en las doce filas y hay que rellenárselo. `refNum` va en lista porque la hoja numera correlativo dentro del acabado, no por correa.",
         "acabados": [
           {
             "id": "alba",
             "nombre": "Alba",
-            "caja": "Titanio cepillado, en mate",
-            "resumen": "El segundero de barrido del cuarzo, sin el tictac. Titanio en mate, que no da reflejos.",
-            "refSufijo": "",
-            "refNum": [
-              "01",
-              "02"
-            ],
-            "descriptor": "Movimiento japonés de cuarzo (Seiko)",
-            "movimiento": "Seiko/TMI VH31, cuarzo de barrido",
-            "movimientoTipo": "Cuarzo de barrido, sin fecha",
-            "frecuencia": "32.768 Hz",
-            "autonomia": "Pila de unos 3 años",
-            "peso": "unos 55 g con la correa"
+            "movimiento": "VH31 (TMI Vh31b, cuarzo japonés)",
+            "movimientoTipo": "Cuarzo, 3 agujas con segundero barrido",
+            "frecuencia": "N/A (cuarzo)",
+            "autonomia": "N/A (cuarzo)",
+            "cajaMaterial": "Acero inoxidable 316L, PVD bronce",
+            "diametro": "39 mm",
+            "estanqueidad": "Corona atornillada",
+            "bisel": "Fijo liso, integrado en la caja (no giratorio)",
+            "cristal": "Zafiro",
+            "fondo": "Fondo atornillado de acero",
+            "refs": [
+              "LO-05_Trinchera_A02",
+              "LO-05_Trinchera_A03",
+              "LO-05_Trinchera_A04",
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          {
+            "id": "levante",
+            "nombre": "Levante",
+            "movimiento": "Seagull ST2130",
+            "movimientoTipo": "Automático (mecánico), con fecha",
+            "frecuencia": "28.800 alt/h (4 Hz)",
+            "autonomia": "~40 h",
+            "cajaMaterial": "Acero inoxidable 316L, PVD bronce",
+            "diametro": "39 mm",
+            "estanqueidad": "Corona atornillada",
+            "bisel": "Fijo liso, integrado en la caja (no giratorio)",
+            "cristal": "Zafiro",
+            "fondo": "Fondo atornillado de acero",
+            "refs": [
+              "LO-05_Trinchera_L02",
+              "LO-05_Trinchera_L03",
+              "LO-05_Trinchera_L04",
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
           },
           {
             "id": "cenit",
             "nombre": "Cenit",
-            "caja": "Titanio cepillado, en mate",
-            "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824, en titanio mate.",
-            "refSufijo": "-ST2130",
-            "refNum": [
-              "01",
-              "02"
-            ],
-            "descriptor": "Automático arquitectura suiza",
-            "movimiento": "ST2130, automático de arquitectura suiza",
-            "movimientoTipo": "Automático sin fecha, arquitectura ETA 2824",
-            "frecuencia": "28.800 alternancias/hora (4 Hz)",
-            "autonomia": "Unas 38 horas de reserva de marcha",
-            "peso": "unos 58 g con la correa"
-          },
-          {
-            "id": "cenit-nh38",
-            "nombre": "Cenit",
-            "caja": "Titanio cepillado, en mate",
-            "resumen": "El automático japonés de referencia, sin ventanilla de fecha: la esfera se queda limpia.",
-            "refSufijo": "-NH38",
-            "refNum": [
-              "03",
-              "04"
-            ],
-            "descriptor": "Movimiento japonés automático (Seiko)",
-            "movimiento": "Seiko NH38A, automático japonés",
-            "movimientoTipo": "Automático sin fecha",
-            "frecuencia": "21.600 alternancias/hora (3 Hz)",
-            "autonomia": "Unas 41 horas de reserva de marcha",
-            "peso": "unos 58 g con la correa"
+            "movimiento": "PT5000",
+            "movimientoTipo": "Automático (mecánico)",
+            "frecuencia": "28.800 vph (4 Hz)",
+            "autonomia": "~41 h",
+            "cajaMaterial": "Titanio T2 (grado 2)",
+            "diametro": "39 mm",
+            "estanqueidad": "20 ATM (200 m)",
+            "bisel": "Fijo pulido",
+            "cristal": "Zafiro",
+            "fondo": "Fondo atornillado",
+            "peso": "~65 g (titanio, sin correa)",
+            "refs": [
+              null,
+              null,
+              null,
+              "LO-05_Trinchera_C01",
+              "LO-05_Trinchera_C02",
+              "LO-05_Trinchera_C03",
+              "LO-05_Trinchera_C04",
+              null
+            ]
           },
           {
             "id": "eclipse",
             "nombre": "Eclipse",
-            "caja": "Titanio con revestimiento negro",
-            "resumen": "El segundero de barrido del cuarzo, sin el tictac. Aquí sobre el titanio en negro.",
-            "refSufijo": "-VH31",
-            "refNum": [
-              "01",
-              "02"
-            ],
-            "descriptor": "Movimiento japonés de cuarzo (Seiko)",
-            "movimiento": "Seiko/TMI VH31, cuarzo de barrido",
-            "movimientoTipo": "Cuarzo de barrido, sin fecha",
+            "movimiento": "VH31 (TMI Vh31b, Japón)",
+            "movimientoTipo": "Cuarzo, 3 agujas con segundero de barrido",
             "frecuencia": "32.768 Hz",
-            "autonomia": "Pila de unos 3 años",
-            "peso": "unos 55 g con la correa"
+            "autonomia": "N/A (cuarzo, pila ~3 años)",
+            "cajaMaterial": "Acero inoxidable 316L con PVD negro",
+            "diametro": "39 mm",
+            "bisel": "Fijo",
+            "cristal": "Zafiro",
+            "refs": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              "LO-05_Trinchera_E01"
+            ]
           },
           {
-            "id": "eclipse-suizo",
+            "id": "eclipse-st2130",
             "nombre": "Eclipse",
-            "caja": "Titanio con revestimiento negro",
-            "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824, en titanio negro.",
-            "refSufijo": "-ST2130",
-            "refNum": [
-              "03",
-              "04"
-            ],
-            "descriptor": "Automático arquitectura suiza",
-            "movimiento": "ST2130, automático de arquitectura suiza",
-            "movimientoTipo": "Automático sin fecha, arquitectura ETA 2824",
-            "frecuencia": "28.800 alternancias/hora (4 Hz)",
-            "autonomia": "Unas 38 horas de reserva de marcha",
-            "peso": "unos 58 g con la correa"
+            "movimiento": "Seagull ST2130",
+            "movimientoTipo": "Automático con fecha",
+            "frecuencia": "28.800 alt/h (4 Hz)",
+            "autonomia": "~40 h",
+            "cajaMaterial": "Acero inoxidable 316L con PVD negro",
+            "diametro": "39 mm",
+            "bisel": "Fijo",
+            "cristal": "Zafiro",
+            "refs": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              "LO-05_Trinchera_E02"
+            ]
           },
           {
-            "id": "eclipse-nh38",
+            "id": "eclipse-9015",
             "nombre": "Eclipse",
-            "caja": "Titanio con revestimiento negro",
-            "resumen": "El automático japonés de referencia, sin ventanilla de fecha: la esfera se queda limpia.",
-            "refSufijo": "-NH38",
-            "refNum": [
-              "05",
-              "06"
-            ],
-            "descriptor": "Movimiento japonés automático (Seiko)",
-            "movimiento": "Seiko NH38A, automático japonés",
-            "movimientoTipo": "Automático sin fecha",
-            "frecuencia": "21.600 alternancias/hora (3 Hz)",
-            "autonomia": "Unas 41 horas de reserva de marcha",
-            "peso": "unos 58 g con la correa"
+            "movimiento": "Miyota 9015 (Japón, automático)",
+            "movimientoTipo": "Automático (cuerda automática, 24 rubíes)",
+            "frecuencia": "28.800 alt/h (4 Hz)",
+            "autonomia": "42 h",
+            "cajaMaterial": "Acero inoxidable 316L con PVD negro",
+            "diametro": "39 mm",
+            "bisel": "Fijo",
+            "cristal": "Zafiro",
+            "refs": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              "LO-05_Trinchera_E03"
+            ]
           }
         ],
         "correas": [
           {
-            "id": "verde",
-            "nombre": "NATO verde militar",
-            "detalle": "Nailon tejido, 20 mm, hebilla de acero"
+            "id": "correa-nato-de-nailon-balistico-ve",
+            "nombre": "Correa NATO de nailon balístico verde militar · 39 mm, PVD bronce",
+            "detalle": "Tejido verde militar; hebilla de acero · Hebilla de acero"
           },
           {
-            "id": "negra",
-            "nombre": "NATO negra",
-            "detalle": "Nailon tejido, 20 mm, hebilla de acero"
+            "id": "correa-nato-de-nailon-balistico-ve-2",
+            "nombre": "Correa NATO de nailon balístico verde militar · 36 mm, plata",
+            "detalle": "Tejido verde militar; hebilla de acero · Hebilla de acero"
+          },
+          {
+            "id": "correa-nato-de-nailon-balistico-ve-2-2",
+            "nombre": "Correa NATO de nailon balístico verde militar · 36 mm, PVD bronce",
+            "detalle": "Tejido verde militar; hebilla de acero · Hebilla de acero"
+          },
+          {
+            "id": "correa-de-piel-genuina-pilot-negra",
+            "nombre": "Correa de piel genuina Pilot, negra · 39 mm, Titanio T2 (grado 2)",
+            "detalle": "Negra, liso · Hebilla de acero inox."
+          },
+          {
+            "id": "correa-de-piel-genuina-pilot-azul-",
+            "nombre": "Correa de piel genuina Pilot, azul · 39 mm, Titanio T2 (grado 2)",
+            "detalle": "Azul, liso · Hebilla de acero inox."
+          },
+          {
+            "id": "correa-de-piel-genuina-pilot-negra-2",
+            "nombre": "Correa de piel genuina Pilot, negra · 36 mm, Titanio T2 (grado 2)",
+            "detalle": "Negra, liso · Hebilla de acero inox."
+          },
+          {
+            "id": "correa-de-piel-genuina-pilot-azul--2",
+            "nombre": "Correa de piel genuina Pilot, azul · 36 mm, Titanio T2 (grado 2)",
+            "detalle": "Azul, liso · Hebilla de acero inox."
+          },
+          {
+            "id": "correa-nato-nailon-balistico-verde",
+            "nombre": "Correa NATO nailon balístico verde con hebillas PVD",
+            "detalle": "Tejido balístico verde, hebillas PVD · Hebilla"
           }
         ],
         "precios": {
           "alba": [
-            169.9,
-            169.9
+            189.9,
+            189.9,
+            189.9,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "levante": [
+            249.9,
+            249.9,
+            249.9,
+            null,
+            null,
+            null,
+            null,
+            null
           ],
           "cenit": [
-            209.9,
-            209.9
-          ],
-          "cenit-nh38": [
-            269.9,
-            269.9
+            null,
+            null,
+            null,
+            289.9,
+            289.9,
+            289.9,
+            289.9,
+            null
           ],
           "eclipse": [
-            169.9,
-            169.9
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            189.9
           ],
-          "eclipse-suizo": [
-            209.9,
-            209.9
+          "eclipse-st2130": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            249.9
           ],
-          "eclipse-nh38": [
-            269.9,
-            269.9
+          "eclipse-9015": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            349.9
           ]
         },
         "comunes": {
-          "Diámetro": "39 mm",
-          "Grosor": "unos 12 mm",
-          "Estanqueidad": "200 m (20 ATM)",
-          "Bisel": "No lleva: la caja es lisa, como la de un reloj de campaña",
-          "Cristal": "Zafiro plano con tratamiento antirreflejos",
-          "Esfera": "De campaña: números del 1 al 12 y escala de 24 horas por dentro",
-          "Luminiscencia": "En agujas e índices",
-          "Correa": "NATO de nailon tejido, 20 mm, con hebilla de acero",
-          "Fondo": "Cerrado macizo de titanio",
-          "Corona": "Roscada"
+          "Ancho de asa": "20 mm"
         }
       },
       "historiaOriginal": {
@@ -1360,13 +1453,13 @@
             "detalle": "Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable"
           },
           {
-            "id": "correa-goma-negra-caja-pvd-negro",
-            "nombre": "Correa Goma negra · caja PVD negro",
+            "id": "correa-goma-negra-40-mm-caja-cuadr",
+            "nombre": "Correa Goma negra · 40 mm (caja cuadrada), con PVD negro",
             "detalle": "Hebilla de acero"
           },
           {
-            "id": "correa-goma-negra-caja-pvd-oro-ros",
-            "nombre": "Correa Goma negra · caja PVD oro rosa",
+            "id": "correa-goma-negra-40-mm-caja-cuadr-2",
+            "nombre": "Correa Goma negra · 40 mm (caja cuadrada), con PVD oro rosa",
             "detalle": "Hebilla de acero"
           },
           {
@@ -1377,40 +1470,40 @@
         ],
         "precios": {
           "alba": [
-            189.9,
+            219.9,
             null,
             null,
             null
           ],
           "levante": [
-            259.9,
+            279.9,
             null,
             null,
             null
           ],
           "cenit": [
-            319.9,
+            349.9,
             null,
             null,
             null
           ],
           "eclipse": [
             null,
-            189.9,
-            189.9,
+            219.9,
+            219.9,
             null
           ],
           "eclipse-nh35a": [
             null,
             null,
             null,
-            279.9
+            309.9
           ],
           "eclipse-9015": [
             null,
             null,
             null,
-            339.9
+            369.9
           ]
         },
         "comunes": {
@@ -1730,10 +1823,10 @@
         ],
         "precios": {
           "alba": [
-            189.9
+            209.9
           ],
           "levante": [
-            249.9
+            269.9
           ],
           "cenit": [
             349.9
