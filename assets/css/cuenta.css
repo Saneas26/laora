@@ -1,0 +1,44 @@
+/* laOra · CUENTA Y CLUB · hoja propia, corta y sin nada más. */
+*,::before,::after{box-sizing:border-box;border:0 solid;margin:0;padding:0}
+img{display:block;max-width:100%;height:auto}
+button,input{font:inherit;color:inherit;background:transparent}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+:root{--ivory:#f4f0e8;--paper:#fbfaf6;--ink:#1c1d1b;--muted:#6c6c64;
+      --line:rgba(28,29,27,.16);--gold:#9c7233;--dark:#151715;
+      --sans:Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);
+     font-size:16px;line-height:1.5;min-height:100svh;display:flex;flex-direction:column}
+.cu-cab{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px;
+        padding:0 clamp(16px,4vw,40px);background:var(--paper);border-bottom:1px solid var(--line)}
+.cu-cab img{height:19px;width:auto}
+.cu-cab a.volver{font-size:14px;color:var(--muted)}
+.cu-cuerpo{flex:1;display:flex;align-items:center;justify-content:center;
+           padding:clamp(24px,6vh,64px) clamp(16px,4vw,28px)}
+.cu-caja{width:100%;max-width:460px}
+.cu-caja h1{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.cu-caja h1 em{font-style:normal;color:var(--muted)}
+.cu-entrada{margin-top:12px;font-size:16px;color:var(--muted)}
+.cu-form{margin-top:26px;display:flex;flex-direction:column;gap:12px}
+.cu-form label{font-size:14px;font-weight:700}
+.cu-form input{padding:15px 16px;border:1px solid var(--line);border-radius:12px;
+               background:#fff;font-size:16px}
+.cu-form input:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--ink)}
+.cu-enviar{padding:16px;border-radius:999px;background:var(--dark);color:#fffdf8;
+           font-size:16px;font-weight:700}
+.cu-enviar:hover:not([disabled]){background:#262925}
+.cu-enviar[disabled]{background:#c9c5bb;color:#6f6c64;cursor:not-allowed}
+.cu-aviso{font-size:14px;color:var(--muted)}
+.cu-aviso.cu-error{color:#8a3a2e}
+.cu-hecho{margin-top:26px;padding:20px;background:var(--paper);border:1px solid var(--line);
+          border-radius:14px;font-size:16px}
+.cu-ventajas{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+.cu-ventajas p{font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+               color:var(--muted);margin-bottom:10px}
+.cu-ventajas li{font-size:15px;color:var(--muted);padding-left:18px;position:relative;margin-bottom:6px;list-style:none}
+.cu-ventajas li::before{content:"·";position:absolute;left:6px;color:var(--gold);font-weight:700}
+.cu-legal{margin-top:24px;font-size:13px;line-height:1.5;color:var(--muted)}
+.cu-legal a{text-decoration:underline}
+.cu-aviso-marcas{padding:26px clamp(18px,5vw,64px) 34px}
+.cu-aviso-marcas p{max-width:1100px;margin:0 auto;font-size:9px;line-height:1.55;
+                   color:#7b7a72;text-align:center}
