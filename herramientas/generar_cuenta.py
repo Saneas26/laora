@@ -40,7 +40,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 V_CSS = 1
-V_JS = 2
+V_JS = 3
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
 VENTAJAS = [

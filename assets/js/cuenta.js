@@ -87,7 +87,7 @@
       form.hidden = true;
       hecho.hidden = false;
       hecho.querySelector('[data-hecho-texto]').textContent =
-        'Te hemos enviado un enlace a ' + correo + '. Ábrelo desde este mismo aparato y entrarás sin contraseña.';
+        'Te hemos enviado un enlace a ' + correo + '. Ábrelo desde este mismo dispositivo y entrarás sin contraseña.';
     }).catch(function () {
       boton.disabled = false;
       decir('No hemos podido enviar el enlace. Inténtalo dentro de un momento.', true);
