@@ -266,6 +266,16 @@ TEXTOS = {
         'linea1': 'Cuarzo japonés · 41 mm · 100 m',
         'linea2': 'Cristal de zafiro · Doble corona · Desde {precio_levante}',
     },
+    # 06/08/2026. Mismo caso que el Cero Cero y misma decisión de Óscar:
+    # a 219,90 € el Bitácora es de CUARZO suizo; el automático empieza en
+    # el Levante. Se mantiene «Automático» y el «desde» sube a ese
+    # acabado. Comprobado que a 279,90 € siguen siendo ciertos el zafiro,
+    # el acero 316L y los 40 mm.
+    'bitacora': {
+        'frase': 'El azul que no pasa desapercibido.',
+        'linea1': 'Deportivo · Automático · 40 mm',
+        'linea2': 'Acero 316L · Cristal de zafiro · Desde {precio_levante}',
+    },
 }
 
 
