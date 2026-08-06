@@ -72,7 +72,7 @@ PAGINA = f"""<!DOCTYPE html>
 
   <p class="ca-vacio" data-vacio hidden>
     Todavía no has elegido nada.
-    <a href="/lunarv2c">Configura tu Lunar →</a>
+    <a href="/coleccion.html">Ver la colección →</a>
   </p>
 
   <aside class="ca-resumen" data-resumen hidden>

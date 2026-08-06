@@ -2,256 +2,135 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Acero, geometría y azul profundo en una silueta reconocible al instante.">
-<meta property="og:title" content="Precisa · laOra">
-<meta property="og:description" content="Acero, geometría y azul profundo en una silueta reconocible al instante.">
-<meta property="og:url" content="https://laora.es/precisa.html">
-<meta property="og:image" content="https://laora.es/assets/img/relojes-2026/precisa-front.webp">
-<meta property="og:locale" content="es_ES">
-<meta property="og:type" content="website">
-<title>Precisa · laOra</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Configura tu Precisa de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 169,90 €.">
+<meta name="theme-color" content="#151715">
+<title>Configura tu Precisa · laOra</title>
+<link rel="canonical" href="https://laora.es/precisa">
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
-<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
-     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar.py — no editar a mano.
-     Los textos se cambian ahí; los datos de relojes, en
-     assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=34">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
+<link rel="stylesheet" href="/assets/css/configurador.css?v=21">
 </head>
-<body>
-<header class="cb cb-claro">
-  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu" aria-label="Navegación principal">
-    <a href="/coleccion.html" class="activo">relojes</a>
-    <a href="/filosofia.html">nuestra forma de hacer</a>
-    <a href="/taller.html">taller y servicio</a>
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
-         un span sin texto, así que un lector de pantalla leería «club lara»:
-         de ahí el aria-label. -->
-    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
-  </nav>
+<body class="cfg-muchos">
+
+<header class="cfg-cab">
+  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
+       sin él sería un callejón sin salida. No se le añade un menú porque
+       aquí solo se hace una cosa, que es elegir el reloj. -->
+  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Precisa</b></a>
+  <span class="ref">Ref. <span data-ref>—</span></span>
+  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
+       cuatro palabras al lado del logotipo sin montarse encima de la
+       referencia, y recortar con puntos suspensivos deja un enlace que
+       no se entiende. -->
+  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
 </header>
 
-<main id="inicio">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "laOra Precisa", "sku": "LO—04", "brand": {"@type": "Brand", "name": "laOra"}, "description": "Acero, geometría y azul profundo en una silueta reconocible al instante.", "image": ["https://laora.es/assets/img/relojes-2026/precisa-front.webp", "https://laora.es/assets/img/relojes-2026/precisa-hero.webp", "https://laora.es/assets/img/relojes-2026/precisa-bracelet.webp"]}</script>
+<div class="cfg-cuerpo">
 
-  <section class="pdp-hero">
-    <div class="pdp-gallery">
-      <div class="pdp-main-image">
-        <img src="/assets/img/relojes-2026/precisa-front.webp" alt="Precisa, vista seleccionada" data-foto-grande fetchpriority="high">
+  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
+  <section class="cfg-visor" aria-label="El reloj que estás configurando">
+    <img class="cfg-foto" data-foto
+         src="/assets/img/catalogo/LO-04_Precisa_A01.webp"
+         alt="Reloj laOra Precisa, acabado Alba, con brazalete incluido"
+         fetchpriority="high">
+    <div class="cfg-muestra" aria-hidden="true">
+      <span class="tira" data-muestra-tira style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span>
+      <span data-muestra-nombre>Brazalete incluido</span>
+    </div>
+    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
+         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
+         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
+         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
+         segunda caía encima de la referencia: dos textos superpuestos,
+         ilegibles los dos. Así el segundo siempre baja. -->
+    <div class="cfg-rotulos">
+      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Brazalete incluido</p>
+      <!-- La referencia también aquí: en el teléfono no cabe en la
+           cabecera, y es el dato con el que Óscar busca en la hoja. -->
+      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+    </div>
+  </section>
+
+  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
+  <section class="cfg-panel" aria-label="Opciones del Precisa">
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Acabado <b>7 opciones</b></p>
+      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
+        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 169,90 €</small></button>
+        <button type="button" data-acabado="levante" aria-pressed="false"><b>Levante</b><small>desde 219,90 €</small></button>
+        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><i>ST2130</i><small>desde 219,90 €</small></button>
+        <button type="button" data-acabado="cenit-seiko" aria-pressed="false"><b>Cenit</b><i>Seiko NH35A</i><small>desde 239,90 €</small></button>
+        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><i>Ronda 515</i><small>desde 169,90 €</small></button>
+        <button type="button" data-acabado="eclipse-suizo" aria-pressed="false"><b>Eclipse</b><i>ST2130</i><small>desde 219,90 €</small></button>
+        <button type="button" data-acabado="eclipse-seiko" aria-pressed="false"><b>Eclipse</b><i>Seiko NH35A</i><small>desde 239,90 €</small></button>
       </div>
-      <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
-          <button type="button" data-mini="/assets/img/relojes-2026/precisa-front.webp" class="active" aria-label="Ver imagen 1 de Precisa"><img src="/assets/img/relojes-2026/precisa-front.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/precisa-hero.webp" aria-label="Ver imagen 2 de Precisa"><img src="/assets/img/relojes-2026/precisa-hero.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/precisa-bracelet.webp" aria-label="Ver imagen 3 de Precisa"><img src="/assets/img/relojes-2026/precisa-bracelet.webp" alt=""></button>
-      </div>
-    </div>
-    <div class="pdp-buy">
-      <p class="kicker">LO—04 · Deportivo integrado</p>
-      <h1>Precisa</h1>
-      <p class="pdp-homage">Homenaje al deportivo integrado de los setenta</p>
-      <p class="pdp-description">Acero, geometría y azul profundo en una silueta reconocible al instante.</p>
-      <div class="config">
-        <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
-          <button type="button" role="tab" data-acabado="alba" aria-selected="true"><span>Alba</span><small>Movimiento de cuarzo suizo</small></button>
-          <button type="button" role="tab" data-acabado="levante" aria-selected="false" tabindex="-1"><span>Levante</span><small>Movimiento japonés automático (Citizen)</small></button>
-          <button type="button" role="tab" data-acabado="cenit" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Automático arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="cenit-seiko" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Movimiento japonés automático (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="eclipse" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento de cuarzo suizo</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-suizo" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Automático arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-seiko" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento japonés automático (Seiko)</small></button>
-        </div>
-        <p class="config-nota" data-resumen-acabado>Cuarzo suizo con fecha, con la misma caja y el mismo zafiro que los demás.</p>
-
-        <div class="pdp-price">
-          <strong data-precio>169,90 €</strong>
-          <span>Impuestos incluidos</span>
-        </div>
-      </div>
-
-      <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
-           Óscar eligió recuperar el sistema de reserva con señal (03/08/2026),
-           pero `reservar.html` todavía no está rehecha con el diseño nuevo:
-           las de la web anterior usaban hojas que ya no existen. Hasta
-           entonces NO se pinta, para no dejar un botón que lleve a un 404.
-
-           Cuando exista, se descomenta esto y ya funciona: `ficha.js` le
-           escribe la referencia, el acabado y la correa elegidos en la URL.
-      <a class="button primary full" href="/reservar.html" data-reservar>Reservar este Precisa</a>
-           -->
-      <p class="config-ref">Referencia <b data-ref>—</b></p>
-      <script type="application/json" data-configurador>{"acabados": [{"id": "alba", "nombre": "Alba", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "Cuarzo suizo con fecha, con la misma caja y el mismo zafiro que los demás.", "refSufijo": "", "descriptor": "Movimiento de cuarzo suizo", "movimiento": "Ronda 515, cuarzo suizo", "movimientoTipo": "Cuarzo con fecha", "frecuencia": "32.768 Hz", "autonomia": "Pila de varios años", "peso": "unos 130 g con brazalete"}, {"id": "levante", "nombre": "Levante", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "Automático japonés de Citizen: se le da cuerda solo con el movimiento de la muñeca.", "refSufijo": "", "descriptor": "Movimiento japonés automático (Citizen)", "movimiento": "Miyota 8215, automático japonés de Citizen", "movimientoTipo": "Automático con fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 40 horas de reserva de marcha", "peso": "unos 135 g con brazalete"}, {"id": "cenit", "nombre": "Cenit", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824.", "refSufijo": "-ST2130", "descriptor": "Automático arquitectura suiza", "movimiento": "ST2130, automático de arquitectura suiza", "movimientoTipo": "Automático con fecha, arquitectura ETA 2824", "frecuencia": "28.800 alternancias/hora (4 Hz)", "autonomia": "Unas 38 horas de reserva de marcha", "peso": "unos 135 g con brazalete"}, {"id": "cenit-seiko", "nombre": "Cenit", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "El automático japonés de referencia: para el segundero al ponerlo en hora y admite cuerda a mano.", "refSufijo": "-NH35", "refNum": "02", "descriptor": "Movimiento japonés automático (Seiko)", "movimiento": "Seiko NH35A, automático japonés", "movimientoTipo": "Automático con fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 41 horas de reserva de marcha", "peso": "unos 135 g con brazalete"}, {"id": "eclipse", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "El cuarzo suizo, aquí sobre la caja en negro.", "refSufijo": "-Ronda515", "refNum": "03", "descriptor": "Movimiento de cuarzo suizo", "movimiento": "Ronda 515, cuarzo suizo", "movimientoTipo": "Cuarzo con fecha", "frecuencia": "32.768 Hz", "autonomia": "Pila de varios años", "peso": "unos 130 g con brazalete"}, {"id": "eclipse-suizo", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "La arquitectura suiza del ETA 2824, aquí sobre la caja en negro.", "refSufijo": "-ST2130", "refNum": "01", "descriptor": "Automático arquitectura suiza", "movimiento": "ST2130, automático de arquitectura suiza", "movimientoTipo": "Automático con fecha, arquitectura ETA 2824", "frecuencia": "28.800 alternancias/hora (4 Hz)", "autonomia": "Unas 38 horas de reserva de marcha", "peso": "unos 135 g con brazalete"}, {"id": "eclipse-seiko", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "El automático japonés de Seiko, aquí sobre la caja en negro.", "refSufijo": "-NH35", "refNum": "02", "descriptor": "Movimiento japonés automático (Seiko)", "movimiento": "Seiko NH35A, automático japonés", "movimientoTipo": "Automático con fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 41 horas de reserva de marcha", "peso": "unos 135 g con brazalete"}], "correas": [], "precios": {"alba": [169.9], "levante": [219.9], "cenit": [219.9], "cenit-seiko": [239.9], "eclipse": [169.9], "eclipse-suizo": [219.9], "eclipse-seiko": [239.9]}, "codigo": "LO—04", "modelo": "Precisa"}</script>
-      <dl class="live-specs">
-        <div><dt>Movimiento</dt><dd data-spec="movimiento">Ronda 515, cuarzo suizo</dd></div>
-        <div><dt>Tipo</dt><dd data-spec="movimientoTipo">Cuarzo con fecha</dd></div>
-        <div><dt>Frecuencia</dt><dd data-spec="frecuencia">32.768 Hz</dd></div>
-        <div><dt>Autonomía</dt><dd data-spec="autonomia">Pila de varios años</dd></div>
-        <div><dt>Diámetro</dt><dd>40 mm</dd></div>
-        <div><dt>Grosor</dt><dd>unos 11 mm</dd></div>
-        <div><dt>Estanqueidad</dt><dd>50 m (5 ATM)</dd></div>
-        <div><dt>Cristal</dt><dd>Zafiro plano</dd></div>
-        <div><dt>Bisel</dt><dd>Fijo estriado, integrado en la caja</dd></div>
-        <div><dt>Esfera</dt><dd>Textura clou de Paris, índices aplicados y fecha a las 3</dd></div>
-        <div><dt>Luminiscencia</dt><dd>En agujas e índices</dd></div>
-        <div><dt>Brazalete</dt><dd>Acero 316L integrado, broche plegable con seguridad</dd></div>
-        <div><dt>Fondo</dt><dd>Macizo de acero</dd></div>
-        <div><dt>Corona</dt><dd>Roscada</dd></div>
-        <div><dt>Peso</dt><dd data-spec="peso">unos 130 g con brazalete</dd></div>
-        <div><dt>Referencia</dt><dd>LO—04</dd></div>
-      </dl>
-      <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
+      <p class="cfg-nota" data-nota>Cuarzo suizo con fecha, con la misma caja y el mismo zafiro que los demás.</p>
     </div>
 
-      <section class="curiosidades" aria-labelledby="rot-precisa">
-        <p class="cur-rotulo" id="rot-precisa">2 curiosidades</p>
-        <div class="cur-botones">
-          <button type="button" data-abre="cur-precisa-integrado">
-            <span class="cur-num">01</span>
-            <span class="cur-titulo">No le puedes cambiar la correa, y ese es el punto</span>
-            <span class="cur-gancho">Por qué un brazalete integrado no tiene asas</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-          <button type="button" data-abre="cur-precisa-clou">
-            <span class="cur-num">02</span>
-            <span class="cur-titulo">La esfera se llama «clavo de París»</span>
-            <span class="cur-gancho">Un relieve que viene del empedrado, no de la relojería</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-        </div>
-      <dialog class="cur-ventana" id="cur-precisa-integrado" aria-labelledby="t-cur-precisa-integrado">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 01 de 2</p>
-        <h2 id="t-cur-precisa-integrado">No le puedes cambiar la correa, y ese es el punto</h2>
-        <p>En un reloj normal la caja termina en dos asas y entre ellas va una barra: de ahí cuelga la correa, y por eso puedes cambiarla en un minuto.</p>
-        <p>En un integrado no hay asas. El primer eslabón está cortado para encajar en la curva exacta de esa caja y de ninguna otra, así que la pulsera y el reloj son una sola pieza continua. Esa línea sin interrupción es todo el diseño.</p>
-        <p>El precio que se paga es no poder ponerle una correa de piel un domingo. Por eso nuestro Precisa se ofrece con un solo brazalete y sin opciones: no es que hayamos recortado la carta, es que este reloj no admite otra cosa.</p>
-      </dialog>
-      <dialog class="cur-ventana" id="cur-precisa-clou" aria-labelledby="t-cur-precisa-clou">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 02 de 2</p>
-        <h2 id="t-cur-precisa-clou">La esfera se llama «clavo de París»</h2>
-        <p>Ese relieve de cuadraditos en relieve tiene nombre propio: clou de Paris, «clavo de París». Son pirámides diminutas talladas en fila, un motivo de guilloché con siglos de historia.</p>
-        <p>El nombre viene de los clavos de cabeza piramidal que se usaban en el empedrado y en las puertas de París. La relojería lo tomó prestado de la ebanistería y de la orfebrería, no al revés.</p>
-        <p>Su gracia es que no es un dibujo impreso: al ser relieve de verdad, cada pirámide devuelve la luz en un ángulo distinto. Por eso una esfera así cambia de color según cómo muevas la muñeca, y en una foto nunca se ve igual que en la mano.</p>
-      </dialog>
-      </section>
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>Incluido</b></b></p>
+      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
+           era siempre de cuatro, así que con tres correas quedaba una
+           columna vacía y los tres nombres partidos en dos líneas por
+           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
+      <p class="cfg-correa-unica"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span><b>Brazalete incluido</b><small>Acero 316L integrado, broche plegable con seguridad</small></span></p>
+    </div>
 
-      <article class="pdp-historia">
-        <p class="ph-antetitulo">La historia del original · Tissot PRX</p>
-        <h2>El reloj que se salvó dos veces<br><em>del cajón del olvido.</em></h2>
-        <p class="ph-entradilla">El Tissot PRX nació en 1978, en el peor momento posible para un reloj suizo, y volvió cuarenta y tres años después convertido en un éxito que nadie esperaba.</p>
-        <div class="ph-cuerpo">
-          <p>Su nombre no es un capricho de marketing: Tissot lo explica como «preciso y robusto», y la X es el diez romano, por las diez atmósferas de estanqueidad. Un reloj bautizado por su ficha técnica.</p>
-          <p>Llegó tarde a una fiesta que ya se acababa. La caja fina de acero con el brazalete integrado —sin asas, la pulsera es la caja— la habían puesto de moda unos años antes los deportivos de lujo de los setenta. Cuando el PRX salió, en 1978, la relojería suiza se desangraba frente al cuarzo japonés.</p>
-          <p>Así que desapareció, y estuvo décadas siendo un reloj de segunda mano al que nadie hacía mucho caso.</p>
-          <p>En 2021 Tissot lo rescató casi calcado del original, y pasó algo que en la industria no estaba previsto: se agotó. Resultó que había un público entero esperando ese perfil delgado y esa textura de esfera a un precio que no exigiera hipotecarse.</p>
-        </div>
-        <ol class="ph-hitos">
-          <li><b>1978</b><span>Sale el PRX original, en plena crisis del cuarzo. Casi nadie se fija en él.</span></li>
-          <li><b>1980s</b><span>Desaparece del catálogo y queda como una rareza de segunda mano.</span></li>
-          <li><b>2021</b><span>Tissot lo reedita casi idéntico y se agota.</span></li>
-          <li><b>Hoy</b><span>El brazalete integrado y la esfera de relieve son otra vez un lenguaje propio.</span></li>
-        </ol>
-        <p class="ph-cierre">El nuestro no es aquel reloj. Toma su idea —caja fina, brazalete que nace de ella y una esfera con textura— y la firma con nuestro nombre.</p>
-        <p class="ph-aviso">Tissot y PRX son marcas registradas de sus titulares. laOra no está afiliada a Tissot SA: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Precisa ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno.</p>
-      </article>
+    <div class="cfg-nota">
+      <dl data-ficha></dl>
+    </div>
+
   </section>
+</div>
 
-  <section class="pdp-story">
-    <div>
-      <p class="section-number">01 — EL HOMENAJE</p>
-      <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
-    </div>
-    <div>
-      <p>Precisa parte de uno de los códigos más influyentes de la relojería deportiva: caja y brazalete como una sola línea. Lo presentamos abiertamente como homenaje y lo firmamos solo con laOra.</p>
-      <p>La esfera lleva únicamente el nombre <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> y el del modelo. No utilizamos marcas, coronas, escudos ni emblemas de terceros.</p>
-    </div>
-  </section>
-
-  <section class="exploded-section">
-    <div class="exploded-media"><img src="/assets/img/relojes-2026/precisa-hero.webp" alt="Detalle constructivo de Precisa" loading="lazy"></div>
-    <div class="exploded-copy">
-      <p class="section-number">02 — LO QUE RECIBES</p>
-      <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
-      <ol>
-        <li><span>01</span><div><b>Caja</b><p>Acero inoxidable 316L</p></div></li>
-        <li><span>02</span><div><b>Brazalete</b><p>Integrado, de acero 316L</p></div></li>
-        <li><span>03</span><div><b>Esfera</b><p>Textura clou de Paris</p></div></li>
-        <li><span>04</span><div><b>Cristal</b><p>Zafiro</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="pdp-service">
-    <div>
-      <p class="kicker light">Taller <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · Madrid</p>
-      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-    </div>
-    <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>
-    <a class="text-link light" href="/taller.html">Conocer el taller →</a>
-  </section>
-
-  <section class="final-cta">
-    <p class="kicker">Sigue por la colección</p>
-    <h2>Antes: Bauhaus.<br><em>Después: Trinchera.</em></h2>
-    <div class="button-row">
-      <a class="button primary" href="/trinchera.html">Ver Trinchera</a>
-      <a class="text-link" href="/coleccion.html">Volver a la colección</a>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
-  <div class="pie-links">
-    <a href="/coleccion.html">Relojes</a>
-    <a href="/filosofia.html">Nuestra forma de hacer</a>
-    <a href="/taller.html">Taller</a>
-    <a href="/club.html">Club laOra</a>
-    <a href="/privacidad.html">Privacidad</a>
-  </div>
-  <p class="pie-aviso">
-    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
-    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
-    no implican afiliación con sus fabricantes.
-  </p>
-
-  <!-- Rejilla del Grupo Saneas, la misma que el resto del sitio -->
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-
-  <small>© 2026 laOra® · Todos los derechos reservados</small>
+<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
+<footer class="cfg-barra">
+  <span class="lado">
+    <span class="eleccion" data-eleccion>Alba · Brazalete incluido</span>
+    <span class="ref">Ref. <span data-ref>—</span></span>
+  </span>
+  <span class="cfg-precio">
+    <strong data-precio>169,90 €</strong>
+    <span>Impuestos incluidos</span>
+  </span>
+  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
 </footer>
-<script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=14"></script>
-<script src="/assets/js/telemetria.js" defer></script>
+
+<!-- LA FICHA TÉCNICA COMPLETA
+     Se monta al pulsar y se tira al cerrar, como el overlay del
+     material aprobado: mientras no está abierta, no existe en la
+     página. No cambia la dirección ni mueve la pantalla de debajo.
+
+     Los datos NO van escritos: los rellena `configurador.js` con la
+     combinación que haya elegida en ese momento. Si fueran fijos, quien
+     configurase el Cenit leería la ficha del acabado de partida. -->
+<template data-plantilla-ficha>
+  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
+    <div class="cfg-overlay-caja">
+      <header class="cfg-overlay-cab">
+        <div>
+          <p>LO—04 · FICHA TÉCNICA COMPLETA</p>
+          <h2 id="cfg-ficha-titulo">Todo el Precisa.<br><em>Dato a dato.</em></h2>
+        </div>
+        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
+        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
+      </header>
+      <div class="cfg-overlay-grupos" data-grupos></div>
+      <footer class="cfg-overlay-pie">
+        <p data-overlay-resumen></p>
+        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
+      </footer>
+    </div>
+  </div>
+</template>
+
+<script type="application/json" data-cfg>{"modelo": "Precisa", "inicial": {"acabado": "alba", "correa": 0}, "precios": {"alba": [169.9], "levante": [219.9], "cenit": [219.9], "cenit-seiko": [239.9], "eclipse": [169.9], "eclipse-suizo": [219.9], "eclipse-seiko": [239.9]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "Movimiento de cuarzo suizo", "resumen": "Cuarzo suizo con fecha, con la misma caja y el mismo zafiro que los demás.", "refs": ["LO-04_Precisa_A01"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_A01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_A01.webp", "ficha": [["Movimiento", "Ronda 515, cuarzo suizo"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Ronda 515, cuarzo suizo"], ["TIPO", "Cuarzo con fecha"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "Pila de varios años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 130 g con brazalete"]]}]}, "levante": {"nombre": "Levante", "etiqueta": "Levante", "descriptor": "Movimiento japonés automático (Citizen)", "resumen": "Automático japonés de Citizen: se le da cuerda solo con el movimiento de la muñeca.", "refs": ["LO-04_Precisa_L01"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_L01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_L01.webp", "ficha": [["Movimiento", "Miyota 8215, automático japonés de Citizen"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 8215, automático japonés de Citizen"], ["TIPO", "Automático con fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 40 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit ST2130", "descriptor": "Automático arquitectura suiza", "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824.", "refs": ["LO-04_Precisa_C01-ST2130"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_C01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_C01.webp", "ficha": [["Movimiento", "ST2130, automático de arquitectura suiza"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "ST2130, automático de arquitectura suiza"], ["TIPO", "Automático con fecha, arquitectura ETA 2824"], ["FRECUENCIA", "28.800 alternancias/hora (4 Hz)"], ["AUTONOMÍA", "Unas 38 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}, "cenit-seiko": {"nombre": "Cenit", "etiqueta": "Cenit Seiko NH35A", "descriptor": "Movimiento japonés automático (Seiko)", "resumen": "El automático japonés de referencia: para el segundero al ponerlo en hora y admite cuerda a mano.", "refs": ["LO-04_Precisa_C02-NH35"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_C01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_C01.webp", "ficha": [["Movimiento", "Seiko NH35A, automático japonés"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko NH35A, automático japonés"], ["TIPO", "Automático con fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 41 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse Ronda 515", "descriptor": "Movimiento de cuarzo suizo", "resumen": "El cuarzo suizo, aquí sobre la caja en negro.", "refs": ["LO-04_Precisa_E03-Ronda515"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_E01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_E01.webp", "ficha": [["Movimiento", "Ronda 515, cuarzo suizo"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Ronda 515, cuarzo suizo"], ["TIPO", "Cuarzo con fecha"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "Pila de varios años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 130 g con brazalete"]]}]}, "eclipse-suizo": {"nombre": "Eclipse", "etiqueta": "Eclipse ST2130", "descriptor": "Automático arquitectura suiza", "resumen": "La arquitectura suiza del ETA 2824, aquí sobre la caja en negro.", "refs": ["LO-04_Precisa_E01-ST2130"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_E01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_E01.webp", "ficha": [["Movimiento", "ST2130, automático de arquitectura suiza"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "ST2130, automático de arquitectura suiza"], ["TIPO", "Automático con fecha, arquitectura ETA 2824"], ["FRECUENCIA", "28.800 alternancias/hora (4 Hz)"], ["AUTONOMÍA", "Unas 38 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}, "eclipse-seiko": {"nombre": "Eclipse", "etiqueta": "Eclipse Seiko NH35A", "descriptor": "Movimiento japonés automático (Seiko)", "resumen": "El automático japonés de Seiko, aquí sobre la caja en negro.", "refs": ["LO-04_Precisa_E02-NH35"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_E01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_E01.webp", "ficha": [["Movimiento", "Seiko NH35A, automático japonés"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko NH35A, automático japonés"], ["TIPO", "Automático con fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 41 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo estriado, integrado en la caja"], ["GROSOR", "unos 11 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Textura clou de Paris, índices aplicados y fecha a las 3"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Macizo de acero"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}}, "correas": [{"id": "incluido", "nombre": "Brazalete incluido", "detalle": "Acero 316L integrado, broche plegable con seguridad", "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}]}</script>
+<script src="/assets/js/carrito.js?v=1"></script>
+<script src="/assets/js/configurador.js?v=6"></script>
 </body>
 </html>

@@ -94,12 +94,18 @@
 /.claude/*  /  301
 
 # ============================================================
-# LA C MAYÚSCULA DEL CONFIGURADOR
-# Óscar escribe la dirección como `laora.es/lunarv2C`, y Cloudflare
-# Pages distingue mayúsculas: el archivo es `lunarv2c.html`, así que
-# esa URL daba un 404. Se manda a la buena en vez de renombrar nada.
+# EL CONFIGURADOR SE MUDA A LA DIRECCIÓN DEL MODELO
+# ------------------------------------------------------------
+# `/lunarv2c` era la pantalla de pruebas del configurador del Lunar. El
+# 06/08/2026 esa pantalla pasa a ser la de cada modelo en su propia
+# dirección —`/lunar`, `/cero-cero`, `/precisa`, `/trinchera` y
+# `/bitacora`—, así que la de pruebas ya no existe.
+#
+# Óscar la tiene guardada y la escribe también con la C mayúscula, que
+# en Cloudflare Pages es otra URL distinta: las dos van al Lunar.
 # ============================================================
-/lunarv2C   /lunarv2c   301
+/lunarv2c   /lunar   301
+/lunarv2C   /lunar   301
 
 # ============================================================
 # LA PORTADA NUEVA

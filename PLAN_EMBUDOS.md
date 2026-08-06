@@ -1,92 +1,99 @@
-# Embudos por modelo — plan de trabajo
+# La pantalla de comprar, una por modelo
 
-Escrito el 06/08/2026, antes de empezar. Sirve para retomar el trabajo sin
-depender de la conversación.
+Escrito el 06/08/2026. Hecho el 06/08/2026.
 
-## La arquitectura que quiere Óscar
+## Lo que pidió Óscar
+
+> «yo solo quiero montar laora.es/lunar, laora.es/bitacora,
+> laora.es/precisa… y que sean exactamente igual que el laora.es/lunarv2c,
+> no quiero montar una landing para cada uno. Solo hay una, es la
+> principal y no es solo del lunar, se habla de la empresa y las
+> emociones de comprar un reloj nuestro»
+
+O sea:
 
 ```
-laora.es              pantalla principal, nada más
+laora.es              LA landing. Una sola. La empresa y lo que se
+                      siente al comprar un reloj nuestro.
    ↓
-/coleccion            se elige modelo   (Óscar trabaja en ella el 06/08)
+/coleccion            se elige modelo
    ↓
-/<modelo>             EMBUDO INDIVIDUAL — el ejemplo es `lunarv2c.html`
+/<modelo>             LA PANTALLA DE COMPRAR. Igual para todos.
 ```
 
-`lunarv2c.html` es el patrón a replicar. Lleva:
+## Lo que hay publicado
 
-- visor de la foto
-- selector de **acabado** (con el «desde» de cada uno)
-- selector de **brazalete o correa**
-- resumen: acabado · correa · referencia · precio
-- botón **Reservar**
-- overlay de **ficha técnica completa**
+`herramientas/generar_configuradores.py` escribe cinco páginas, todas
+iguales, todas con los datos de `assets/datos/catalogo.json`:
 
-## Material recibido
+| Página | Acabados | Correas | Combinaciones |
+|---|---:|---:|---:|
+| `/lunar` | 3 | 8 | 8 |
+| `/cero-cero` | 8 | 3 | 10 |
+| `/precisa` | 7 | integrado | 7 |
+| `/trinchera` | 6 | 2 | 12 |
+| `/bitacora` | 6 | integrado | 6 |
 
-`laOra-fotos-aprobadas-para-Claude-2026-08-06.zip` (93 MB), descomprimido en
-el escritorio de trabajo. Cuatro carpetas:
+`lunarv2c.html` ya no existe: `/lunarv2c` y `/lunarv2C` van con un 301
+a `/lunar`. La hoja y el script se llaman ya `configurador.css` y
+`configurador.js`, no `lunarv2c.*`.
 
-| Carpeta | Qué trae |
-|---|---|
-| `01-catalogo-final/` | **una foto por REFERENCIA exacta** del catálogo |
-| `02-landing-lunar/` | las 8 fotos de los actos del Lunar (hero, muñeca, reflejo y las 5 de confianza) |
-| `03-capturas-aprobadas/` | 14 capturas del diseño aprobado, a 1440×900 y 390×844 |
-| `04-marca/` | logotipo y wordmarks |
+`generar.py` —el generador de las fichas anteriores— SALTA esos cinco
+slugs. Si no lo hiciera, ejecutarlo devolvería `/lunar` a la ficha vieja
+sin que nadie se enterara.
 
-Fotos de catálogo por modelo:
+## Lo que se decidió por el camino
 
-| Modelo | Fotos | Modelo | Fotos |
-|---|---|---|---|
-| Trinchera | 17 | Cero Cero | 6 |
-| Lunar | 8 | Tortuga | 5 |
-| Bitácora | 7 | Precisa | 4 |
-| Cóctel | 3 | DIVER (LO-06) | 1 |
+**La referencia se compone en Python, no en el navegador.** Había dos
+copias de las reglas de la hoja de materiales y se habían desviado: el
+segundo Cenit del Precisa salía `C01` donde la hoja dice `C02`. Ahora
+viaja ya hecha dentro del JSON de cada página.
 
-**El Buzo se llama DIVER y es LO-06**, confirmado por el nombre de sus
-archivos. Del Bauhaus no hay ninguna: está aparcado.
+**El calibre se escribe cuando el nombre se repite.** El Bitácora tiene
+tres Eclipse y el Cero Cero, cuatro: salían botones idénticos, dos al
+mismo precio. Ahora ponen «Eclipse / ST2130». Solo donde hace falta: el
+Lunar, con tres acabados distintos, se queda como Óscar lo aprobó.
 
-Cada carpeta trae un `README.md` que empareja archivo ↔ referencia ↔ correa
-↔ URL del proveedor.
+**Cuando no hay nada que elegir, no se pinta un botón.** El Precisa y el
+Bitácora llevan brazalete integrado. Como botón, esa única muestra se
+estiraba a todo el ancho y salía un azulejo de 690 px que echaba el
+precio fuera de la pantalla. Ahora es una línea que dice lo que lleva.
 
-## Lo que esto permite y hoy no se hace
+**El visor pasó de negro a marfil.** Las fotos del paquete traen fondo
+marfil incrustado (#f6f0eb, medido en el archivo). Sobre el visor negro
+se veía el recuadro de la foto recortado y, peor, el rótulo blanco caía
+encima del marfil: ilegible.
 
-El configurador enseña **siempre la misma foto**. Con este material puede
-enseñar **la foto real de la combinación elegida**: al cambiar de correa,
-cambia la foto. Es el salto más visible de todo el trabajo y sale gratis,
-porque las fotos ya están hechas y nombradas por referencia.
+## Las fotos
 
-## Orden de trabajo
+`assets/img/catalogo/` — 51 fotos, una por referencia, del paquete
+aprobado del 06/08/2026. Las 43 combinaciones que se pueden pedir tienen
+foto de catálogo.
 
-1. **Meter las fotos en el repo**, convertidas a webp, con el nombre de su
-   referencia: `assets/img/catalogo/LO-01_Lunar_A01.webp`.
-2. **Generalizar `generar_v2c.py`** para que escriba un embudo por modelo en
-   vez de solo el del Lunar. Un fichero, ocho páginas.
-3. **Enganchar la foto por referencia** al configurador.
-4. **Volcar los modelos que faltan** en `catalogo.json` desde la hoja
-   «Catalogo laOra»: Tortuga, Cóctel y DIVER no tienen configurador.
-5. Rutas y redirecciones: decidir si `/lunar` pasa a ser el embudo y la ficha
-   vieja desaparece.
+- **Lunar: foto por COMBINACIÓN.** Su README empareja una a una las ocho
+  referencias con las ocho correas y coincide con el catálogo.
+- **El resto: foto por ACABADO.** Sus paquetes numeran por caja o por
+  movimiento, no por correa: el `A02` del Trinchera es la caja de
+  bronce, no la NATO negra. Emparejar por número pondría una foto que no
+  es la que se está eligiendo.
 
-## Reglas del material aprobado que hay que respetar
+Cuando el paquete de un modelo confirme la correspondencia por correa,
+se añade su slug a `FOTO_POR_COMBINACION` y esa pantalla pasa sola a
+enseñar la foto exacta.
 
-Del `CLAUDE_HANDOFF.md` que venía en el zip:
+## Lo que falta
 
-- El texto lo decide Óscar. No reinterpretarlo sin preguntar.
-- Nunca las palabras «réplica» ni «clon».
-- `laOra` va siempre con el logotipo, nunca reconstruido con tipografía.
-  El logotipo y la palabra de al lado comparten línea base y altura.
-- **Precio mínimo del Lunar: 219,90 €.** No volver a enseñar 209,90 ni 189.
-- Las variantes **Eclipse** van completamente negras, esfera incluida.
-- Tipografía mínima: 14 px en ordenador, 12 px en móvil.
-- Cada acto ocupa una pantalla. Los overlays técnicos sí pueden desplazarse.
-
-## Los tres huecos
-
-1. **Las fotos de los actos 2 y 3 solo existen del Lunar** (muñeca y reflejo).
-   Los otros embudos no pueden tener esos dos actos hasta que las haya. Las
-   cinco del carrusel de confianza sí son genéricas y sirven para todos.
-2. **Tortuga, Cóctel y DIVER no tienen datos** en el catálogo: sus embudos no
-   podrían enseñar precio hasta volcarlos de la hoja.
-3. **Falta decidir qué pasa con las fichas viejas** (`/lunar`, `/cero-cero`…),
-   que conviven con el diseño anterior.
+1. **Tortuga, Cóctel y DIVER (LO-06) no tienen configurador** en el
+   catálogo: sin acabados ni matriz de precios no hay nada que elegir.
+   Conservan su ficha anterior. Tienen fotos (5, 3 y 1).
+2. **El Bauhaus sigue aparcado.** No se le abre pantalla de comprar a un
+   reloj que hoy no se puede montar. Tampoco tiene fotos.
+3. **Solo el Lunar está auditado contra la hoja definitiva.** En los
+   demás, `catalogo.json` y el paquete de fotos no coinciden en los
+   movimientos: el catálogo da el Cenit del Bitácora como ST2130 y el
+   README de las fotos, como Miyota 9015. Manda la hoja «Catalogo laOra»
+   y hay que volcarla modelo a modelo.
+4. **Lo que se perdió de las fichas anteriores**: las curiosidades, la
+   historia del original y la comparativa de precios. Están en el
+   historial y `generar.py` sabe rehacerlas, pero hoy no se ven en
+   ninguna parte. Decidir dónde van.

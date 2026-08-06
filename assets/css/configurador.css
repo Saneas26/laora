@@ -1,9 +1,11 @@
 /* ============================================================
-   laOra · CONFIGURADOR DEL LUNAR  (lunarv2c)
+   laOra · EL CONFIGURADOR, EL MISMO PARA TODOS LOS MODELOS
    ------------------------------------------------------------
-   Página de pruebas invisible. Hoja INDEPENDIENTE: no comparte nada
-   con `laora.css` ni con `lunarv2.css`, así que esto se puede romper
-   entero sin que se entere lo publicado.
+   Viste `/lunar`, `/cero-cero`, `/precisa`, `/trinchera` y
+   `/bitacora`. Nació el 05/08/2026 como la pantalla de pruebas del
+   Lunar —`lunarv2c`— y el 06/08/2026 pasó a ser la de cada modelo en
+   su propia dirección. Hoja INDEPENDIENTE: no comparte nada con
+   `laora.css` ni con `lunarv2.css`, la de la portada.
 
    EL PATRÓN, que es lo que pidió Óscar (05/08/2026): el de la página
    de configuración de un coche. Tres reglas y de ellas sale todo:
@@ -97,15 +99,21 @@ body{
 }
 
 /* ---------- el visor ---------- */
-/* El visor va OSCURO, y no por estética: las fotos del Lunar traen el
-   fondo negro incrustado. Sobre un visor claro se veía el recuadro de
-   la foto recortado dentro de la página; sobre este, el reloj se funde
-   con el fondo y no se ve dónde acaba la fotografía. */
+/* EL VISOR VA DEL COLOR DEL FONDO DE LAS FOTOS, y no por estética: las
+   fotos traen el fondo incrustado, así que si no coinciden se ve el
+   recuadro de la fotografía recortado dentro de la página.
+
+   Era negro mientras las fotos del Lunar venían con fondo negro. El
+   06/08/2026 entró el paquete de catálogo, con las 51 referencias
+   sobre marfil cálido —medido en el propio archivo: #f6f0eb—, y el
+   negro dejó un marco a los lados y, peor, dejó el rótulo blanco
+   encima del marfil: ilegible. Ahora el visor ES ese marfil y todo lo
+   que va encima está en tinta. */
 .cfg-visor{
   position:relative;min-height:0;min-width:0;
   padding:clamp(10px,2vh,26px);
-  background:radial-gradient(120% 90% at 50% 42%, #22231f 0%, #131412 58%, #0b0c0a 100%);
-  color:#fffdf8;
+  background:radial-gradient(120% 90% at 50% 42%, #faf6f2 0%, #f6f0eb 58%, #efe8e1 100%);
+  color:var(--ink);
   overflow:hidden;
 }
 /* La foto se adapta al hueco que quede, nunca al revés: así el reloj se
@@ -128,17 +136,19 @@ body{
 /* el rótulo de lo que se está viendo, sobre la foto */
 /* Arriba a la izquierda, que es la única esquina del visor donde nunca
    hay reloj. Abajo y centrado se leía sobre el brazalete. */
-.cfg-viendo{
+.cfg-rotulos{
   position:absolute;top:clamp(10px,2vh,20px);left:clamp(12px,2vw,24px);
-  max-width:min(46%,320px);font-size:13px;color:rgba(255,253,248,.66);
+  max-width:min(52%,340px);
+  display:grid;gap:2px;
   pointer-events:none;
 }
-.cfg-viendo b{color:#fffdf8;font-weight:700}
+.cfg-viendo{font-size:13px;color:#5c5a53}
+.cfg-viendo b{color:var(--ink);font-weight:700}
 
-/* La muestra de la correa elegida. Mientras no haya una foto por cada
-   combinación —hoy solo hay del acero y del negro—, esto es lo que
-   enseña de verdad la correa que se está eligiendo. Cuando lleguen las
-   fotos, el mapa de `generar_v2c.py` las sirve y esto sobra. */
+/* La muestra de la correa elegida. Es el dibujo del material, no una
+   foto: sirve mientras la foto no sea la de la combinación exacta. En
+   el Lunar ya lo es —sus ocho referencias tienen foto propia—; en los
+   demás la foto es fiel al acabado y esto es lo que enseña la correa. */
 .cfg-muestra{
   position:absolute;top:clamp(10px,2vh,20px);right:clamp(10px,2vw,22px);
   width:clamp(56px,7vw,86px);
@@ -146,10 +156,10 @@ body{
 }
 .cfg-muestra .tira{
   width:100%;aspect-ratio:1/1;border-radius:11px;
-  border:1px solid rgba(255,253,248,.22);
-  box-shadow:0 2px 8px rgba(0,0,0,.35);
+  border:1px solid rgba(28,29,27,.18);
+  box-shadow:0 2px 8px rgba(28,29,27,.16);
 }
-.cfg-muestra span{font-size:12px;color:rgba(255,253,248,.72);text-align:center;line-height:1.25}
+.cfg-muestra span{font-size:12px;color:#5c5a53;text-align:center;line-height:1.25}
 
 /* ---------- el panel de opciones ---------- */
 .cfg-panel{
@@ -157,9 +167,19 @@ body{
   background:var(--paper);border-left:1px solid var(--line);
   padding:clamp(14px,2.4vh,26px) clamp(16px,2vw,30px);
   display:flex;flex-direction:column;gap:clamp(12px,2.2vh,22px);
-  overflow:hidden;
+  /* VÁLVULA DE SEGURIDAD, no una invitación a hacer scroll. La regla
+     sigue siendo que todo quepa en una pantalla, y en las medidas
+     normales cabe. Pero el Cero Cero tiene OCHO acabados, y en una
+     ventana baja —medido a 1280 × 450— los grupos se encogían y su
+     contenido se salía por debajo: el resumen del acabado caía encima
+     del rótulo «Brazalete o correa» y no se leía ninguno de los dos.
+     Con `hidden` eso no se ve venir; así, en el caso raro en que no
+     quepa, se desplaza en vez de superponerse. */
+  overflow-y:auto;overflow-x:hidden;
 }
-.cfg-grupo{display:flex;flex-direction:column;gap:9px;min-height:0}
+/* Los grupos NO se encogen: si no caben, que desborde el panel —que sabe
+   desplazarse— y no el contenido de cada grupo, que no sabe. */
+.cfg-grupo{display:flex;flex-direction:column;gap:9px;flex-shrink:0}
 .cfg-rotulo{
   display:flex;align-items:baseline;justify-content:space-between;gap:10px;
   font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
@@ -178,15 +198,30 @@ body{
   background:#fff;text-align:left;transition:border-color .15s ease,box-shadow .15s ease;
 }
 .cfg-acabados button b{font-size:15px;font-weight:700}
+/* EL CALIBRE, cuando el nombre del acabado se repite. El Bitácora tiene
+   tres Eclipse y el Cero Cero, cuatro: sin esta línea salían tres
+   botones idénticos, dos de ellos al mismo precio, y no había forma de
+   saber cuál se estaba pulsando. Solo aparece donde hace falta; en el
+   Lunar, con tres acabados distintos, no se escribe. */
+.cfg-acabados button i{
+  font-style:normal;font-size:12px;line-height:1.2;
+  color:var(--ink);opacity:.78;overflow-wrap:anywhere;
+}
 .cfg-acabados button small{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
 .cfg-acabados button[aria-pressed="true"]{
   border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);
 }
 
 /* muestras de correa · mismo motivo para el `minmax(0,1fr)` */
-.cfg-correas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.cfg-correas{display:grid;grid-template-columns:repeat(var(--correas,4),minmax(0,1fr));gap:8px}
 .cfg-correas button{
-  display:grid;gap:5px;justify-items:center;
+  /* `auto 1fr` y no filas automáticas: la muestra manda su alto a
+     partir de su ancho —lleva `aspect-ratio`—, y si la fila la
+     estirase, el navegador resolvería el aspecto AL REVÉS y le daría
+     el ancho a partir del alto estirado. Medido en el Lunar: botones
+     de 82 px con muestras de 116, montándose unas encima de otras en
+     la fila cuyo nombre ocupa tres líneas. */
+  display:grid;grid-template-rows:auto 1fr;gap:5px;justify-items:center;
   padding:7px 4px 8px;border:1px solid var(--line);border-radius:12px;background:#fff;
   transition:border-color .15s ease,box-shadow .15s ease,opacity .15s ease;
 }
@@ -194,6 +229,16 @@ body{
   width:100%;aspect-ratio:1/1;border-radius:9px;border:1px solid var(--line);
 }
 .cfg-correas button span{font-size:12px;line-height:1.2;text-align:center;color:var(--muted);overflow-wrap:anywhere}
+/* LO QUE VA PUESTO CUANDO NO HAY NADA QUE ELEGIR.
+   El Precisa y el Bitácora llevan brazalete integrado. No es un botón
+   porque no es una decisión: es una línea que dice qué lleva. */
+.cfg-correa-unica{display:flex;align-items:center;gap:11px}
+.cfg-correa-unica .tira{
+  width:72px;height:40px;flex:none;border-radius:9px;border:1px solid var(--line);
+}
+.cfg-correa-unica b{display:block;font-size:14px;font-weight:700}
+.cfg-correa-unica small{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+
 .cfg-correas button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
 .cfg-correas button[aria-pressed="true"] span{color:var(--ink);font-weight:700}
 /* Una combinación que no existe no se esconde: se enseña apagada y se
@@ -278,14 +323,15 @@ body{
   .cfg-cab .volver .largo{display:none}
   .cfg-cab .volver .corto{display:inline}
   .cfg-ref-visor{
-    display:block;position:absolute;top:28px;left:10px;
-    font-size:12px;color:rgba(255,253,248,.5);letter-spacing:.06em;
+    display:block;
+    font-size:12px;color:#6c6a63;letter-spacing:.06em;
+    overflow-wrap:anywhere;
   }
   .cfg-acabados button{padding:8px 7px}
   .cfg-acabados button b{font-size:14px}
   /* La muestra pasa a ser una tira apaisada: cuadrada, ocho muestras se
      comían la mitad de la pantalla y el reloj se quedaba en nada. */
-  .cfg-correas{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .cfg-correas{grid-template-columns:repeat(var(--correas,4),minmax(0,1fr));gap:6px}
   .cfg-correas button{padding:5px 3px 6px;gap:4px}
   .cfg-correas .tira{aspect-ratio:3/2;border-radius:7px}
   .cfg-correas button span{font-size:12px;line-height:1.15}
@@ -320,6 +366,56 @@ body{
 /* pantallas muy bajas (un portátil de 13" con la barra de marcadores) */
 @media (max-height:640px) and (min-width:900px){
   .cfg-nota dl{display:none}
+}
+
+/* ============================================================
+   LOS MODELOS DE MUCHOS ACABADOS, EN EL TELÉFONO
+   ------------------------------------------------------------
+   El Cero Cero tiene OCHO acabados: tres filas de botones de tres
+   líneas cada uno. Medido en un teléfono de 375 × 812, eso son 93 px
+   más de los que hay, y el selector de brazalete se quedaba debajo de
+   la barra del precio. La regla de Óscar es que todo quepa en una
+   pantalla, así que se recupera el sitio en vez de dejarlo desplazar.
+
+   Se aprieta el interlineado y el relleno de los botones que llevan
+   calibre —`:has(i)`—, o sea solo los de los modelos cuyo nombre de
+   acabado se repite. El Lunar, con tres acabados distintos, se queda
+   exactamente como Óscar lo aprobó. Y ninguna letra baja de 12 px:
+   lo que se recorta es el aire, no el cuerpo de la letra.
+
+   Lo que NO se hace es poner el calibre y el precio en la misma línea:
+   probado, y con `1fr auto` el precio se lleva el ancho y el calibre
+   cae a una letra por renglón —«S T 2 1 3 0» en vertical—.
+   ============================================================ */
+@media (max-width:899px){
+  .cfg-acabados button:has(i){padding:7px 8px;gap:0}
+  .cfg-acabados button:has(i) b{line-height:1.2}
+  .cfg-acabados button:has(i) i{line-height:1.15}
+  .cfg-acabados button:has(i) small{line-height:1.15}
+
+  /* Y en los de MÁS DE SEIS acabados —hoy solo el Cero Cero, que el
+     generador marca con `cfg-muchos` en el <body>— hace falta un
+     recorte más: las muestras de correa pasan a tiras apaisadas, como
+     ya hacían en las pantallas bajas. Una muestra es el dibujo de un
+     material; apaisada se reconoce igual y ocupa la mitad. Con esto
+     entran los tres selectores en la pantalla del teléfono. */
+  /* LAS MUESTRAS, APAISADAS EN EL TELÉFONO. Ya lo hacían en las
+     pantallas bajas; ahora en todas. Una muestra es el dibujo de un
+     material: apaisada se reconoce igual y ocupa la mitad. Cuadradas,
+     el Lunar —ocho correas en dos filas— dejaba los nombres de la
+     última fila cortados por la barra del precio: 14 px por debajo del
+     borde, medido. Y el Trinchera, 4 px. */
+  .cfg-correas .tira{aspect-ratio:2/1}
+  .cfg-muchos .cfg-acabados{gap:6px}
+  .cfg-muchos .cfg-panel{gap:12px}
+
+  /* Y aun así faltaban 55 px. Lo último que se retira es la frase del
+     acabado —«Todo en negro, con el cuarzo japonés…»—, que es lo único
+     de esta pantalla que no es un dato ni una decisión: acompaña. Los
+     tres selectores y el precio se quedan; el adorno, no. En el
+     ordenador sigue estando, y el dato técnico completo está a un
+     botón, en la ficha. */
+  .cfg-muchos .cfg-panel .cfg-nota[data-nota]{display:none}
 }
 
 @media (prefers-reduced-motion:reduce){

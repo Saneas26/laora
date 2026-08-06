@@ -811,9 +811,19 @@ escribir('club.html', cabeza(
 #
 # Lo que no está confirmado NO se pinta: si `hermeticidad` es null,
 # esa línea no existe en el HTML. Nada de «por confirmar» a la vista.
+#
+# YA NO SON OCHO. Desde el 06/08/2026, cinco modelos tienen pantalla de
+# comprar —el patrón de `lunarv2c`— y la escribe
+# `herramientas/generar_configuradores.py`. Este fichero las salta: si
+# no lo hiciera, ejecutar el generador antiguo devolvería `/lunar` a la
+# ficha anterior sin que nadie se diera cuenta.
 # ============================================================
 
+DEL_CONFIGURADOR = {'lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora'}
+
 for i, r in enumerate(RELOJES):
+    if r['slug'] in DEL_CONFIGURADOR:
+        continue
     siguiente = RELOJES[(i + 1) % len(RELOJES)]
     anterior = RELOJES[(i - 1) % len(RELOJES)]
 
@@ -1096,4 +1106,7 @@ for i, r in enumerate(RELOJES):
 """ + PIE + scripts(f'\n<script src="/assets/js/ficha.js?v={V_JS_FICHA}"></script>'))
 
 
-print(f'\nListo: {4 + len(RELOJES)} páginas generadas.')
+print(f'\nListo: {5 + len(RELOJES) - len(DEL_CONFIGURADOR)} páginas generadas.')
+print(f'{len(DEL_CONFIGURADOR)} fichas las escribe ahora '
+      'herramientas/generar_configuradores.py: '
+      + ', '.join(sorted(DEL_CONFIGURADOR)))

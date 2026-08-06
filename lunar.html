@@ -2,311 +2,140 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="El cronógrafo de tres contadores y escala taquimétrica, en acero de 40 mm y cristal de zafiro, con mecacuarzo japonés o cuerda manual de rueda de columnas.">
-<meta property="og:title" content="Lunar · laOra">
-<meta property="og:description" content="El cronógrafo de tres contadores y escala taquimétrica, en acero de 40 mm y cristal de zafiro, con mecacuarzo japonés o cuerda manual de rueda de columnas.">
-<meta property="og:url" content="https://laora.es/lunar.html">
-<meta property="og:image" content="https://laora.es/assets/img/relojes-2026/lunar-acero.webp">
-<meta property="og:locale" content="es_ES">
-<meta property="og:type" content="website">
-<title>Lunar · laOra</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Configura tu Lunar de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 219,90 €.">
+<meta name="theme-color" content="#151715">
+<title>Configura tu Lunar · laOra</title>
+<link rel="canonical" href="https://laora.es/lunar">
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
-<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
-     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar.py — no editar a mano.
-     Los textos se cambian ahí; los datos de relojes, en
-     assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=34">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
+<link rel="stylesheet" href="/assets/css/configurador.css?v=21">
 </head>
 <body>
-<header class="cb cb-claro">
-  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu" aria-label="Navegación principal">
-    <a href="/coleccion.html" class="activo">relojes</a>
-    <a href="/filosofia.html">nuestra forma de hacer</a>
-    <a href="/taller.html">taller y servicio</a>
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
-         un span sin texto, así que un lector de pantalla leería «club lara»:
-         de ahí el aria-label. -->
-    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
-  </nav>
+
+<header class="cfg-cab">
+  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
+       sin él sería un callejón sin salida. No se le añade un menú porque
+       aquí solo se hace una cosa, que es elegir el reloj. -->
+  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Lunar</b></a>
+  <span class="ref">Ref. <span data-ref>—</span></span>
+  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
+       cuatro palabras al lado del logotipo sin montarse encima de la
+       referencia, y recortar con puntos suspensivos deja un enlace que
+       no se entiende. -->
+  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
 </header>
 
-<main id="inicio">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "laOra Lunar", "sku": "LO—01", "brand": {"@type": "Brand", "name": "laOra"}, "description": "El cronógrafo de tres contadores y escala taquimétrica, en acero de 40 mm y cristal de zafiro, con mecacuarzo japonés o cuerda manual de rueda de columnas.", "image": ["https://laora.es/assets/img/relojes-2026/lunar-acero.webp", "https://laora.es/assets/img/relojes-2026/lunar-front.webp", "https://laora.es/assets/img/relojes-2026/lunar-detail.webp"]}</script>
+<div class="cfg-cuerpo">
 
-  <section class="pdp-hero">
-    <div class="pdp-gallery">
-      <div class="pdp-main-image">
-        <img src="/assets/img/relojes-2026/lunar-acero.webp" alt="Lunar, vista seleccionada" data-foto-grande fetchpriority="high">
+  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
+  <section class="cfg-visor" aria-label="El reloj que estás configurando">
+    <img class="cfg-foto" data-foto
+         src="/assets/img/catalogo/LO-01_Lunar_A04.webp"
+         alt="Reloj laOra Lunar, acabado Alba, con piel negra"
+         fetchpriority="high">
+    <div class="cfg-muestra" aria-hidden="true">
+      <span class="tira" data-muestra-tira style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"></span>
+      <span data-muestra-nombre>Piel negra</span>
+    </div>
+    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
+         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
+         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
+         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
+         segunda caía encima de la referencia: dos textos superpuestos,
+         ilegibles los dos. Así el segundo siempre baja. -->
+    <div class="cfg-rotulos">
+      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Piel negra</p>
+      <!-- La referencia también aquí: en el teléfono no cabe en la
+           cabecera, y es el dato con el que Óscar busca en la hoja. -->
+      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+    </div>
+  </section>
+
+  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
+  <section class="cfg-panel" aria-label="Opciones del Lunar">
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Acabado <b>3 opciones</b></p>
+      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
+        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 219,90 €</small></button>
+        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><small>desde 429,90 €</small></button>
+        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><small>desde 239,90 €</small></button>
       </div>
-      <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
-          <button type="button" data-mini="/assets/img/relojes-2026/lunar-acero.webp" class="active" aria-label="Ver imagen 1 de Lunar"><img src="/assets/img/relojes-2026/lunar-acero.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/lunar-front.webp" aria-label="Ver imagen 2 de Lunar"><img src="/assets/img/relojes-2026/lunar-front.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/lunar-detail.webp" aria-label="Ver imagen 3 de Lunar"><img src="/assets/img/relojes-2026/lunar-detail.webp" alt=""></button>
+      <p class="cfg-nota" data-nota>El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.</p>
+    </div>
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>8 opciones</b></b></p>
+      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
+           era siempre de cuatro, así que con tres correas quedaba una
+           columna vacía y los tres nombres partidos en dos líneas por
+           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
+      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa" style="--correas:4">
+        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"></span><span>Brazalete de acero 904L</span></button>
+        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(135deg,#e9ebed 0 3px,#b7babe 3px 6px),linear-gradient(150deg,#eceef0,#9da1a6)"></span><span>Brazalete de acero 316L</span></button>
+        <button type="button" data-correa="2" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span>Brazalete de acero</span></button>
+        <button type="button" data-correa="3" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#4a4c4e 0%,#232526 30%,#3d3f41 52%,#171819 78%,#303233 100%)"></span><span>Brazalete negro</span></button>
+        <button type="button" data-correa="4" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),linear-gradient(155deg,#8b5a33 0%,#6b4222 55%,#54331a 100%)"></span><span>Piel marrón</span></button>
+        <button type="button" data-correa="5" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"></span><span>Piel negra</span></button>
+        <button type="button" data-correa="6" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span><span>Caucho negro</span></button>
+        <button type="button" data-correa="7" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#343536 0%,#1a1b1b 60%,#4a4c4d 100%)"></span><span>Caucho negro con cierre desplegable</span></button>
       </div>
     </div>
-    <div class="pdp-buy">
-      <p class="kicker">LO—01 · Cronógrafo</p>
-      <h1>Lunar</h1>
-      <p class="pdp-homage">Homenaje al gran cronógrafo lunar</p>
-      <p class="pdp-description">El cronógrafo de tres contadores y escala taquimétrica, en acero de 40 mm y cristal de zafiro, con mecacuarzo japonés o cuerda manual de rueda de columnas.</p>
-      <div class="config">
-        <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
-          <button type="button" role="tab" data-acabado="alba" aria-selected="true"><span>Alba</span><small>Movimiento japonés mecacuarzo (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="cenit" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Cuerda manual arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="eclipse" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento japonés mecacuarzo (Seiko)</small></button>
-        </div>
-        <p class="config-nota" data-resumen-acabado>El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.</p>
 
-        <div class="pdp-price">
-          <strong data-precio>219,90 €</strong>
-          <span>Impuestos incluidos</span>
-        </div>
-        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
-          <button type="button" role="tab" data-correa="brazalete-904l" aria-selected="false" tabindex="-1"><span>Brazalete de acero 904L</span><small>Pulido y satinado · cierre desplegable con pulsadores y extensión</small></button>
-          <button type="button" role="tab" data-correa="brazalete-arroz" aria-selected="false" tabindex="-1"><span>Brazalete de acero 316L</span><small>Pulido vintage de Grano de Arroz con cierre desplegable con seguro</small></button>
-          <button type="button" role="tab" data-correa="brazalete-acero" aria-selected="false" tabindex="-1"><span>Brazalete de acero</span><small>316L pulido y satinado · cierre desplegable con pulsadores y extensión</small></button>
-          <button type="button" role="tab" data-correa="brazalete-negro" aria-selected="false" tabindex="-1"><span>Brazalete negro</span><small>316L con PVD negro satinado · cierre desplegable con pulsadores y extensión</small></button>
-          <button type="button" role="tab" data-correa="piel-marron" aria-selected="false" tabindex="-1"><span>Piel marrón</span><small>Piel genuina, costura a contraste · hebilla de acero</small></button>
-          <button type="button" role="tab" data-correa="piel-negra" aria-selected="true"><span>Piel negra</span><small>Piel genuina, costura a tono · hebilla de acero</small></button>
-          <button type="button" role="tab" data-correa="caucho" aria-selected="false" tabindex="-1"><span>Caucho negro</span><small>FKM mate texturizado · hebilla de acero</small></button>
-          <button type="button" role="tab" data-correa="caucho-desplegable" aria-selected="false" tabindex="-1"><span>Caucho negro con cierre desplegable</span><small>FKM mate · cierre desplegable automático, recortable a medida</small></button>
-        </div>
-      </div>
-
-      <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
-           Óscar eligió recuperar el sistema de reserva con señal (03/08/2026),
-           pero `reservar.html` todavía no está rehecha con el diseño nuevo:
-           las de la web anterior usaban hojas que ya no existen. Hasta
-           entonces NO se pinta, para no dejar un botón que lleve a un 404.
-
-           Cuando exista, se descomenta esto y ya funciona: `ficha.js` le
-           escribe la referencia, el acabado y la correa elegidos en la URL.
-      <a class="button primary full" href="/reservar.html" data-reservar>Reservar este Lunar</a>
-           -->
-      <p class="config-ref">Referencia <b data-ref>—</b></p>
-      <script type="application/json" data-configurador>{"acabados": [{"id": "alba", "nombre": "Alba", "resumen": "El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.", "correas": ["brazalete-904l", "brazalete-arroz", "piel-marron", "piel-negra", "caucho", "caucho-desplegable"], "refNum": ["01", "02", null, null, "03", "04", "05", "06"], "diametro": "40 mm", "caja": "Acero inoxidable 316L, pulido y satinado", "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro", "cristal": "Zafiro plano", "peso": "de unos 100 g con caucho a unos 120 g con brazalete", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "movimiento": "Mecacuarzo Seiko/TMI VK63", "movimientoTipo": "Cronógrafo mecacuarzo", "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica", "autonomia": "Pila SR927SW, unos 3 años", "foto": "/assets/img/relojes-2026/lunar-acero.webp", "estanqueidad": "100 m (10 ATM)"}, {"id": "cenit", "nombre": "Cenit", "resumen": "El techo de este reloj: cronógrafo mecánico de cuerda manual con rueda de columnas, bisel de cerámica y zafiro con antirreflejos.", "correas": ["brazalete-acero"], "refNum": [null, null, "01", null, null, null, null, null], "diametro": "40 mm", "estanqueidad": "50 m (5 ATM)", "caja": "Acero inoxidable 316L, pulido y satinado", "bisel": "Fijo con escala taquimétrica, inserto de cerámica", "cristal": "Zafiro plano con tratamiento antirreflejos", "peso": "unos 135 g con brazalete", "descriptor": "Cuerda manual arquitectura suiza", "movimiento": "Seagull ST19 de rueda de columnas", "movimientoTipo": "Cronógrafo mecánico de cuerda manual", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 45 horas de reserva de marcha", "foto": "/assets/img/relojes-2026/lunar-acero.webp"}, {"id": "eclipse", "nombre": "Eclipse", "resumen": "Todo en negro, con el mismo cronógrafo mecacuarzo y zafiro con antirreflejos.", "correas": ["brazalete-negro"], "refNum": [null, null, null, "01", null, null, null, null], "diametro": "39,7 mm", "caja": "Acero inoxidable 316L con PVD negro satinado", "bisel": "Fijo con escala taquimétrica, inserto de aluminio anodizado negro", "cristal": "Zafiro plano", "peso": "unos 120 g con brazalete", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "movimiento": "Mecacuarzo Seiko/TMI VK63", "movimientoTipo": "Cronógrafo mecacuarzo", "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica", "autonomia": "Pila SR927SW, unos 3 años", "foto": "/assets/img/relojes-2026/lunar-front.webp", "estanqueidad": "100 m (10 ATM)"}], "correas": [{"id": "brazalete-904l", "nombre": "Brazalete de acero 904L", "detalle": "Pulido y satinado · cierre desplegable con pulsadores y extensión"}, {"id": "brazalete-arroz", "nombre": "Brazalete de acero 316L", "detalle": "Pulido vintage de Grano de Arroz con cierre desplegable con seguro"}, {"id": "brazalete-acero", "nombre": "Brazalete de acero", "detalle": "316L pulido y satinado · cierre desplegable con pulsadores y extensión"}, {"id": "brazalete-negro", "nombre": "Brazalete negro", "detalle": "316L con PVD negro satinado · cierre desplegable con pulsadores y extensión"}, {"id": "piel-marron", "nombre": "Piel marrón", "detalle": "Piel genuina, costura a contraste · hebilla de acero"}, {"id": "piel-negra", "nombre": "Piel negra", "detalle": "Piel genuina, costura a tono · hebilla de acero"}, {"id": "caucho", "nombre": "Caucho negro", "detalle": "FKM mate texturizado · hebilla de acero"}, {"id": "caucho-desplegable", "nombre": "Caucho negro con cierre desplegable", "detalle": "FKM mate · cierre desplegable automático, recortable a medida"}], "precios": {"alba": [249.9, 239.9, null, null, 229.9, 219.9, 219.9, 229.9], "cenit": [null, null, 429.9, null, null, null, null, null], "eclipse": [null, null, null, 239.9, null, null, null, null]}, "codigo": "LO—01", "modelo": "Lunar"}</script>
-      <dl class="live-specs">
-        <div><dt>Movimiento</dt><dd data-spec="movimiento">Mecacuarzo Seiko/TMI VK63</dd></div>
-        <div><dt>Tipo</dt><dd data-spec="movimientoTipo">Cronógrafo mecacuarzo</dd></div>
-        <div><dt>Frecuencia</dt><dd data-spec="frecuencia">Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica</dd></div>
-        <div><dt>Autonomía</dt><dd data-spec="autonomia">Pila SR927SW, unos 3 años</dd></div>
-        <div><dt>Cristal</dt><dd data-spec="cristal">Zafiro plano</dd></div>
-        <div><dt>Caja</dt><dd data-spec="caja">Acero inoxidable 316L, pulido y satinado</dd></div>
-        <div><dt>Diámetro</dt><dd data-spec="diametro">40 mm</dd></div>
-        <div><dt>Estanqueidad</dt><dd data-spec="estanqueidad">100 m (10 ATM)</dd></div>
-        <div><dt>Bisel</dt><dd data-spec="bisel">Fijo con escala taquimétrica, inserto de aluminio anodizado negro</dd></div>
-        <div><dt>Grosor</dt><dd>unos 13 mm</dd></div>
-        <div><dt>Esfera</dt><dd>Negra con tres subesferas, índices con detalles naranja</dd></div>
-        <div><dt>Luminiscencia</dt><dd>Super-LumiNova</dd></div>
-        <div><dt>Ancho de asa</dt><dd>20 mm</dd></div>
-        <div><dt>Fondo</dt><dd>Atornillado, acero macizo</dd></div>
-        <div><dt>Corona</dt><dd>Roscada</dd></div>
-        <div><dt>Peso</dt><dd data-spec="peso">de unos 100 g con caucho a unos 120 g con brazalete</dd></div>
-        <div><dt>Referencia</dt><dd>LO—01</dd></div>
-      </dl>
-      <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
+    <div class="cfg-nota">
+      <dl data-ficha></dl>
     </div>
 
-      <section class="curiosidades" aria-labelledby="rot-lunar">
-        <p class="cur-rotulo" id="rot-lunar">2 curiosidades</p>
-        <div class="cur-botones">
-          <button type="button" data-abre="cur-lunar-hesalita">
-            <span class="cur-num">01</span>
-            <span class="cur-titulo">El cristal era de plástico, y a propósito</span>
-            <span class="cur-gancho">Por qué la NASA prefirió un cristal que se raya</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-          <button type="button" data-abre="cur-lunar-taquimetro">
-            <span class="cur-num">02</span>
-            <span class="cur-titulo">El bisel no es un adorno: es una regla de cálculo</span>
-            <span class="cur-gancho">Cómo se mide una velocidad sin saber matemáticas</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-        </div>
-      <dialog class="cur-ventana" id="cur-lunar-hesalita" aria-labelledby="t-cur-lunar-hesalita">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 01 de 2</p>
-        <h2 id="t-cur-lunar-hesalita">El cristal era de plástico, y a propósito</h2>
-        <p>El Speedmaster que voló llevaba hesalita: un acrílico, no zafiro. Suena a recorte, y es justo lo contrario.</p>
-        <p>En una cápsula presurizada, un cristal mineral que se rompe se convierte en esquirlas que flotan y que alguien puede acabar respirando. El acrílico no estalla: se abolla, se agrieta y se queda en su sitio.</p>
-        <p>Que se raye resulta ser un detalle menor, porque las rayas se pulen con un paño y un poco de pasta. Décadas después Omega sigue vendiendo la versión de hesalita junto a la de zafiro, y hay quien insiste en la primera precisamente por esto.</p>
-      </dialog>
-      <dialog class="cur-ventana" id="cur-lunar-taquimetro" aria-labelledby="t-cur-lunar-taquimetro">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 02 de 2</p>
-        <h2 id="t-cur-lunar-taquimetro">El bisel no es un adorno: es una regla de cálculo</h2>
-        <p>Esos números que bajan de 500 a 60 alrededor de la esfera son una escala taquimétrica, y sirven para algo muy concreto.</p>
-        <p>Pones el cronógrafo en marcha al empezar un kilómetro y lo paras al terminarlo. Donde se quede la aguja grande, ahí está tu velocidad media en kilómetros por hora. Sin dividir nada: la escala ya lleva la división puesta.</p>
-        <p>Por eso empieza en 60 y no llega más abajo: a partir de un minuto por kilómetro la aguja daría la vuelta entera y la lectura dejaría de tener sentido. Nació para cronometrar coches, mucho antes de que a nadie se le ocurriera mandarlo al espacio.</p>
-      </dialog>
-      </section>
-
-      <article class="pdp-historia">
-        <p class="ph-antetitulo">La historia del original · Omega Speedmaster Professional</p>
-        <h2>El cronógrafo que llegó a la Luna<br><em>en la muñeca de un ingeniero.</em></h2>
-        <p class="ph-entradilla">El Omega Speedmaster no nació para el espacio: nació para los circuitos. Que acabara en el mar de la Tranquilidad fue cosa de una prueba de resistencia y de un despacho de la NASA.</p>
-        <div class="ph-cuerpo">
-          <p>Cuando Omega lo presentó en 1957, el Speedmaster era un cronógrafo de automovilismo. Su novedad no era la esfera sino el bisel: fue de los primeros en sacar de la esfera la escala taquimétrica y grabarla fuera, dejando la lectura limpia. Nadie hablaba entonces de cohetes.</p>
-          <p>En 1965 la NASA compró varios cronógrafos en una relojería de Houston, sin decir para qué, y los sometió a una tanda de ensayos brutales: calor, frío, vacío, vibración, choques y aceleración. Solo uno salió andando. A partir de ahí quedó homologado para todas las misiones tripuladas.</p>
-          <p>El 20 de julio de 1969 Neil Armstrong dejó el suyo dentro del módulo lunar, porque el temporizador electrónico de a bordo había fallado y alguien tenía que quedarse con la hora. Así que el primer reloj que pisó la Luna fue el de Buzz Aldrin.</p>
-          <p>Su momento verdaderamente serio llegó un año después. En el accidente del Apolo 13, con la nave a oscuras y sin ordenador de a bordo, la tripulación cronometró a mano un encendido de motor de catorce segundos que corrigió la trayectoria de vuelta a la Tierra. La NASA le dio a Omega el Silver Snoopy Award.</p>
-        </div>
-        <ol class="ph-hitos">
-          <li><b>1957</b><span>Sale al mercado como cronógrafo de automovilismo, con la escala taquimétrica en el bisel.</span></li>
-          <li><b>1965</b><span>Supera los ensayos de la NASA y queda homologado para vuelo tripulado.</span></li>
-          <li><b>1969</b><span>Llega a la superficie lunar en la muñeca de Buzz Aldrin, en el Apolo 11.</span></li>
-          <li><b>1970</b><span>Cronometra a mano el encendido de catorce segundos que salvó al Apolo 13.</span></li>
-        </ol>
-        <p class="ph-cierre">El nuestro no es aquel reloj, ni lo pretende. Toma su arquitectura —tres contadores, bisel taquimétrico, lectura instrumental— y la firma con nuestro nombre.</p>
-        <p class="ph-aviso">Omega y Speedmaster son marcas registradas de sus titulares. laOra no está afiliada a Omega SA ni a la NASA: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Lunar ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno.</p>
-      </article>
   </section>
+</div>
 
-  <section class="pdp-story pdp-comparativa">
-    <div>
-      <p class="section-number">01 — POR QUÉ ESTE MOVIMIENTO</p>
-      <h2>Dónde hemos puesto<br><em>el presupuesto.</em></h2>
-    </div>
-    <div>
-      <p>Hemos elegido el Seiko VK63 porque ofrece la precisión del cuarzo, el tacto de un cronógrafo mecánico y un mantenimiento mínimo. Preferimos invertir el presupuesto en una caja de acero macizo, cristal de zafiro y acabados de calidad antes que en un movimiento que multiplicaría el precio del reloj.</p>
-      <p class="cmp-destacado">Precisión: ±20 segundos al mes aproximadamente, muy superior a cualquier cronógrafo mecánico convencional.</p>
-    </div>
-
-    <div class="cmp-tabla">
-      <table>
-        <thead>
-          <tr><th scope="col"><span class="solo-lectores">Valoración</span></th>
-            <th scope="col">Modelo</th>
-            <th scope="col">PVP</th>
-            <th scope="col">Calidad mecánica</th>
-            <th scope="col">Precisión</th>
-            <th scope="col">Mantenimiento</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="cmp-estrellas"><span aria-hidden="true">★★★★★</span><span class="solo-lectores">5 de 5</span></td>
-            <th scope="row" data-col="Modelo">Rolex Cosmograph Daytona</th>
-            <td data-col="PVP">16.550 €</td><td data-col="Calidad mecánica">Excelente</td><td data-col="Precisión">Muy buena</td><td data-col="Mantenimiento">Alto</td>
-          </tr>
-          <tr>
-            <td class="cmp-estrellas"><span aria-hidden="true">★★★★★</span><span class="solo-lectores">5 de 5</span></td>
-            <th scope="row" data-col="Modelo">Grand Seiko Tentagraph</th>
-            <td data-col="PVP">15.000 €</td><td data-col="Calidad mecánica">Excelente</td><td data-col="Precisión">Muy buena</td><td data-col="Mantenimiento">Alto</td>
-          </tr>
-          <tr>
-            <td class="cmp-estrellas"><span aria-hidden="true">★★★★★</span><span class="solo-lectores">5 de 5</span></td>
-            <th scope="row" data-col="Modelo">Omega Speedmaster Racing Master Chronometer</th>
-            <td data-col="PVP">11.000 €</td><td data-col="Calidad mecánica">Excelente</td><td data-col="Precisión">Muy buena</td><td data-col="Mantenimiento">Alto</td>
-          </tr>
-          <tr class="nuestra">
-            <td class="cmp-estrellas"><span aria-hidden="true">★★★★☆</span><span class="solo-lectores">4 de 5</span></td>
-            <th scope="row" data-col="Modelo"><span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> Lunar · Seiko VK63</th>
-            <td data-col="PVP">219,90 €</td><td data-col="Calidad mecánica">Muy alta</td><td data-col="Precisión">Excelente</td><td data-col="Mantenimiento">Muy bajo</td>
-          </tr>
-          <tr>
-            <td class="cmp-estrellas"><span aria-hidden="true">★★★☆☆</span><span class="solo-lectores">3 de 5</span></td>
-            <th scope="row" data-col="Modelo">Seagull</th>
-            <td data-col="PVP">300 €</td><td data-col="Calidad mecánica">Buena</td><td data-col="Precisión">Buena</td><td data-col="Mantenimiento">Medio</td>
-          </tr>
-          <tr>
-            <td class="cmp-estrellas"><span aria-hidden="true">★★☆☆☆</span><span class="solo-lectores">2 de 5</span></td>
-            <th scope="row" data-col="Modelo">Miyota básicos — Citizen, Timex</th>
-            <td data-col="PVP">300 €</td><td data-col="Calidad mecánica">Correcta</td><td data-col="Precisión">Excelente</td><td data-col="Mantenimiento">Muy bajo</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="cmp-aviso">Precios de venta al público consultados en agosto de 2026, a título orientativo. Las marcas citadas pertenecen a sus titulares y no están afiliadas a laOra.</p>
-    </div>
-  </section>
-
-  <section class="exploded-section">
-    <div class="exploded-media"><img src="/assets/img/relojes-2026/lunar-front.webp" alt="Detalle constructivo de Lunar" loading="lazy"></div>
-    <div class="exploded-copy">
-      <p class="section-number">02 — LO QUE RECIBES</p>
-      <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
-      <ol>
-        <li><span>01</span><div><b>Caja</b><p>Acero inoxidable 316L</p></div></li>
-        <li><span>02</span><div><b>Bisel</b><p>Escala taquimétrica</p></div></li>
-        <li><span>03</span><div><b>Cristal</b><p>Zafiro</p></div></li>
-        <li><span>04</span><div><b>Correas</b><p>Hasta seis a elegir</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="pdp-service">
-    <div>
-      <p class="kicker light">Taller <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · Madrid</p>
-      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-    </div>
-    <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>
-    <a class="text-link light" href="/taller.html">Conocer el taller →</a>
-  </section>
-
-  <section class="final-cta">
-    <p class="kicker">Sigue por la colección</p>
-    <h2>Antes: Cóctel.<br><em>Después: Cero Cero.</em></h2>
-    <div class="button-row">
-      <a class="button primary" href="/cero-cero.html">Ver Cero Cero</a>
-      <a class="text-link" href="/coleccion.html">Volver a la colección</a>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
-  <div class="pie-links">
-    <a href="/coleccion.html">Relojes</a>
-    <a href="/filosofia.html">Nuestra forma de hacer</a>
-    <a href="/taller.html">Taller</a>
-    <a href="/club.html">Club laOra</a>
-    <a href="/privacidad.html">Privacidad</a>
-  </div>
-  <p class="pie-aviso">
-    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
-    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
-    no implican afiliación con sus fabricantes.
-  </p>
-
-  <!-- Rejilla del Grupo Saneas, la misma que el resto del sitio -->
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-
-  <small>© 2026 laOra® · Todos los derechos reservados</small>
+<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
+<footer class="cfg-barra">
+  <span class="lado">
+    <span class="eleccion" data-eleccion>Alba · Piel negra</span>
+    <span class="ref">Ref. <span data-ref>—</span></span>
+  </span>
+  <span class="cfg-precio">
+    <strong data-precio>219,90 €</strong>
+    <span>Impuestos incluidos</span>
+  </span>
+  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
 </footer>
-<script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=14"></script>
-<script src="/assets/js/telemetria.js" defer></script>
+
+<!-- LA FICHA TÉCNICA COMPLETA
+     Se monta al pulsar y se tira al cerrar, como el overlay del
+     material aprobado: mientras no está abierta, no existe en la
+     página. No cambia la dirección ni mueve la pantalla de debajo.
+
+     Los datos NO van escritos: los rellena `configurador.js` con la
+     combinación que haya elegida en ese momento. Si fueran fijos, quien
+     configurase el Cenit leería la ficha del acabado de partida. -->
+<template data-plantilla-ficha>
+  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
+    <div class="cfg-overlay-caja">
+      <header class="cfg-overlay-cab">
+        <div>
+          <p>LO—01 · FICHA TÉCNICA COMPLETA</p>
+          <h2 id="cfg-ficha-titulo">Todo el Lunar.<br><em>Dato a dato.</em></h2>
+        </div>
+        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
+        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
+      </header>
+      <div class="cfg-overlay-grupos" data-grupos></div>
+      <footer class="cfg-overlay-pie">
+        <p data-overlay-resumen></p>
+        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
+      </footer>
+    </div>
+  </div>
+</template>
+
+<script type="application/json" data-cfg>{"modelo": "Lunar", "inicial": {"acabado": "alba", "correa": 5}, "precios": {"alba": [249.9, 239.9, null, null, 229.9, 219.9, 219.9, 229.9], "cenit": [null, null, 429.9, null, null, null, null, null], "eclipse": [null, null, null, 239.9, null, null, null, null]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "resumen": "El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.", "refs": ["LO-01_Lunar_A01", "LO-01_Lunar_A02", "LO-01_Lunar_A03", "LO-01_Lunar_A04", "LO-01_Lunar_A03", "LO-01_Lunar_A04", "LO-01_Lunar_A05", "LO-01_Lunar_A06"], "fotos": ["/assets/img/catalogo/LO-01_Lunar_A01.webp", "/assets/img/catalogo/LO-01_Lunar_A02.webp", "/assets/img/catalogo/LO-01_Lunar_A03.webp", "/assets/img/catalogo/LO-01_Lunar_A04.webp", "/assets/img/catalogo/LO-01_Lunar_A03.webp", "/assets/img/catalogo/LO-01_Lunar_A04.webp", "/assets/img/catalogo/LO-01_Lunar_A05.webp", "/assets/img/catalogo/LO-01_Lunar_A06.webp"], "foto": "/assets/img/catalogo/LO-01_Lunar_A01.webp", "ficha": [["Movimiento", "Mecacuarzo Seiko/TMI VK63"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Mecacuarzo Seiko/TMI VK63"], ["TIPO", "Cronógrafo mecacuarzo"], ["FRECUENCIA", "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica"], ["AUTONOMÍA", "Pila SR927SW, unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Fijo con escala taquimétrica, inserto de aluminio anodizado negro"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con tres subesferas, índices con detalles naranja"], ["LUMINISCENCIA", "Super-LumiNova"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Atornillado, acero macizo"], ["CORONA", "Roscada"], ["PESO", "de unos 100 g con caucho a unos 120 g con brazalete"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit", "descriptor": "Cuerda manual arquitectura suiza", "resumen": "El techo de este reloj: cronógrafo mecánico de cuerda manual con rueda de columnas, bisel de cerámica y zafiro con antirreflejos.", "refs": ["LO-01_Lunar_C01", "LO-01_Lunar_C02", "LO-01_Lunar_C01", "LO-01_Lunar_C04", "LO-01_Lunar_C05", "LO-01_Lunar_C06", "LO-01_Lunar_C07", "LO-01_Lunar_C08"], "fotos": ["/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp"], "foto": "/assets/img/catalogo/LO-01_Lunar_C01.webp", "ficha": [["Movimiento", "Seagull ST19 de rueda de columnas"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seagull ST19 de rueda de columnas"], ["TIPO", "Cronógrafo mecánico de cuerda manual"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 45 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo con escala taquimétrica, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con tres subesferas, índices con detalles naranja"], ["LUMINISCENCIA", "Super-LumiNova"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Atornillado, acero macizo"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "resumen": "Todo en negro, con el mismo cronógrafo mecacuarzo y zafiro con antirreflejos.", "refs": ["LO-01_Lunar_E01", "LO-01_Lunar_E02", "LO-01_Lunar_E03", "LO-01_Lunar_E01", "LO-01_Lunar_E05", "LO-01_Lunar_E06", "LO-01_Lunar_E07", "LO-01_Lunar_E08"], "fotos": ["/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp"], "foto": "/assets/img/catalogo/LO-01_Lunar_E01.webp", "ficha": [["Movimiento", "Mecacuarzo Seiko/TMI VK63"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L con PVD negro satinado"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Mecacuarzo Seiko/TMI VK63"], ["TIPO", "Cronógrafo mecacuarzo"], ["FRECUENCIA", "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica"], ["AUTONOMÍA", "Pila SR927SW, unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L con PVD negro satinado"], ["DIÁMETRO", "39,7 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Fijo con escala taquimétrica, inserto de aluminio anodizado negro"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con tres subesferas, índices con detalles naranja"], ["LUMINISCENCIA", "Super-LumiNova"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Atornillado, acero macizo"], ["CORONA", "Roscada"], ["PESO", "unos 120 g con brazalete"]]}]}}, "correas": [{"id": "brazalete-904l", "nombre": "Brazalete de acero 904L", "detalle": "Pulido y satinado · cierre desplegable con pulsadores y extensión", "muestra": "linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"}, {"id": "brazalete-arroz", "nombre": "Brazalete de acero 316L", "detalle": "Pulido vintage de Grano de Arroz con cierre desplegable con seguro", "muestra": "repeating-linear-gradient(135deg,#e9ebed 0 3px,#b7babe 3px 6px),linear-gradient(150deg,#eceef0,#9da1a6)"}, {"id": "brazalete-acero", "nombre": "Brazalete de acero", "detalle": "316L pulido y satinado · cierre desplegable con pulsadores y extensión", "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}, {"id": "brazalete-negro", "nombre": "Brazalete negro", "detalle": "316L con PVD negro satinado · cierre desplegable con pulsadores y extensión", "muestra": "linear-gradient(150deg,#4a4c4e 0%,#232526 30%,#3d3f41 52%,#171819 78%,#303233 100%)"}, {"id": "piel-marron", "nombre": "Piel marrón", "detalle": "Piel genuina, costura a contraste · hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),linear-gradient(155deg,#8b5a33 0%,#6b4222 55%,#54331a 100%)"}, {"id": "piel-negra", "nombre": "Piel negra", "detalle": "Piel genuina, costura a tono · hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"}, {"id": "caucho", "nombre": "Caucho negro", "detalle": "FKM mate texturizado · hebilla de acero", "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"}, {"id": "caucho-desplegable", "nombre": "Caucho negro con cierre desplegable", "detalle": "FKM mate · cierre desplegable automático, recortable a medida", "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#343536 0%,#1a1b1b 60%,#4a4c4d 100%)"}]}</script>
+<script src="/assets/js/carrito.js?v=1"></script>
+<script src="/assets/js/configurador.js?v=6"></script>
 </body>
 </html>
