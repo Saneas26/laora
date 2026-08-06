@@ -108,3 +108,4 @@
 # la tiene guardada, así que salta a la portada en vez de dar un 404.
 # ============================================================
 /lunarv2    /    301
+/PLAN_EMBUDOS.md          /  302
