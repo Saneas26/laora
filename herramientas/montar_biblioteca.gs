@@ -77,6 +77,19 @@ const FECHA = 'dd/mm/yyyy';
 const FILAS = 300;            // hasta dónde llegan las fórmulas
 const FILAS_COMP = 500;       // componentes: caben más
 
+/**
+ * El separador de argumentos de las fórmulas.
+ *
+ * OJO, que esto costó un rato: Apps Script escribe las fórmulas con
+ * COMA, y en un libro en español la hoja NO las traduce — las da por
+ * malas con «Error de análisis de fórmula». Así que se mira el idioma
+ * del libro y se escribe con el separador que toque.
+ *
+ * Por lo mismo, en las fórmulas NO se escriben decimales con punto:
+ * 9,9 se pone como 99/10, que se entiende en cualquier idioma.
+ */
+var SEP = ';';
+
 
 /* ============================================================
    1 · PARAMETROS
@@ -599,6 +612,11 @@ function montarBiblioteca() {
   const ss = SpreadsheetApp.getActive();
   comprobarLibroVacio(ss);
 
+  const idioma = ss.getSpreadsheetLocale();
+  SEP = /^en/i.test(idioma) ? ',' : ';';
+  Logger.log('Libro en «' + idioma + '» → las fórmulas se escriben con «' + SEP + '»');
+  Logger.log('');
+
   montarParametros(ss);
   ['COMPONENTES', 'MOVIMIENTOS', 'CAJAS', 'ESFERAS', 'CORREAS', 'MODELOS',
    'REFERENCIAS', 'PRECIOS', 'COMPRAS', 'WEB'].forEach(function (c) { montarTabla(ss, c); });
@@ -743,7 +761,8 @@ function formulasPrecios(ss) {
     'costes_directos':'=IF($A2="","",envio+montaje_y_control+provision_garantia)',
 
     // a cuánto se vende. Redondeado al x9,90 siguiente; se puede pisar a mano.
-    'pvp_propuesto':  '=IF($A2="","",CEILING(multiplicador*($E2+$F2)-9.9,10)+9.9)',
+    // 99/10 en vez de 9,9: los decimales con punto tampoco valen en un libro en español
+    'pvp_propuesto':  '=IF($A2="","",CEILING(multiplicador*($E2+$F2)-99/10,10)+99/10)',
     'techo_mercado':  '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$I$100,9,FALSE),""))',
 
     // qué queda de esa venta
@@ -765,7 +784,7 @@ function formulasPrecios(ss) {
                       'TRIM(REGEXREPLACE(' +
                       'IF($O2<=0,"⚠ PIERDES DINERO · ",IF($O2<limpio_minimo,"no llega al limpio mínimo · ",""))&' +
                       'IF(AND($H2<>"",$G2>$H2),"por encima del mercado · ","")&' +
-                      'IF(AND($Q2<>"",$Q2<2.5),"multiplicador por debajo de x2,5 · ",""),' +
+                      'IF(AND($Q2<>"",$Q2<25/10),"multiplicador por debajo del mínimo · ",""),' +
                       '"\\s*·\\s*$",""))))',
   };
   aplicar(h, 'PRECIOS', f, FILAS);
@@ -861,11 +880,15 @@ function formulasWeb(ss) {
 function aplicar(destino, clave, formulas, filas) {
   Object.keys(formulas).forEach(function (titulo) {
     const c = col(clave, titulo);
+    // Las fórmulas se escriben aquí con coma, que es como se leen bien, y
+    // se traducen al separador del libro justo antes de escribirlas.
+    // Ninguna cadena de texto de las fórmulas lleva comas dentro, así que
+    // cambiarlas todas es seguro.
+    const texto = formulas[titulo].replace(/,/g, SEP);
     // Se escribe en la fila 2 y se copia hacia abajo: copiando, Sheets ajusta
-    // las referencias fila a fila. (Va en notación con coma; la hoja la
-    // traduce sola al «;» de España.)
+    // las referencias fila a fila.
     const primera = destino.getRange(2, c);
-    primera.setFormula(formulas[titulo]);
+    primera.setFormula(texto);
     if (filas > 1) primera.copyTo(destino.getRange(3, c, filas - 1, 1));
   });
 }
