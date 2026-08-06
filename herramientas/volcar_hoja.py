@@ -70,7 +70,22 @@ CATALOGO = os.path.join(RAIZ, 'assets/datos/catalogo.json')
 # Modelos que este volcado NO toca, y por qué.
 INTACTOS = {
     'lunar': 'ya coincide con la hoja; las correas las nombró Óscar',
-    'trinchera': 'la hoja se contradice en A01 y L01 (ver AUDITORIA_CATALOGO.md)',
+}
+
+# ============================================================
+# FILAS QUE SE QUEDAN FUERA UNA A UNA
+# ------------------------------------------------------------
+# No por el precio, sino porque la hoja se contradice consigo misma y
+# publicarlas sería enseñar un reloj que no es el que se manda. En
+# cuanto se arregle la celda, se quita de aquí y entra sola.
+# ============================================================
+EXCLUIDAS = {
+    'LO-05_Trinchera_A01':
+        'es un Alba y su «Caja — Material» dice PVD negro, cuando su '
+        '«Caja/conjunto» dice «39mm plata solido» y su foto es plateada',
+    'LO-05_Trinchera_L01':
+        'su «Caja/conjunto» es «G30», un código y no una descripción; las '
+        'otras tres Levante describen la caja entera',
 }
 
 # El Bauhaus no está en la hoja: se le quita el configurador para que no
@@ -121,6 +136,16 @@ MARCA_AJENA = re.compile(
     r'|,?\s*(estilo|tipo)\s+(' + AJENAS + r')\b[^,;)]*'
     r'|\b(' + AJENAS + r')\b)', re.I)
 
+# LAS PALABRAS QUE NO SE ESCRIBEN. La hoja anota de qué calibre es
+# copia cada movimiento —«Seagull ST2130 (Tianjin, clon ETA 2824-2)»—
+# porque al comprarlo eso es lo que hay que saber. En la web no: ni la
+# palabra «clon» ni «réplica», ni a qué calibre ajeno se parece. laOra
+# hace homenajes y lo dice con sus propias palabras.
+COPIA = re.compile(
+    r'\s*(\([^)]*\b(clon|réplica|replica|copia|ETA\s*\d{4})\b[^)]*\)'
+    r'|,?\s*\b(clon|réplica|replica|copia)\s+(de\s+)?[^,;)]*'
+    r'|,?\s*\b(Tianjin\s+)?ETA\s*\d{4}(-\d)?)', re.I)
+
 # «(especificación laOra)», «(según lote)»: de dónde sale el dato es
 # cosa nuestra, no del cliente.
 PROCEDENCIA = re.compile(r'\s*\([^)]*\b(especificación laOra|según lote)[^)]*\)', re.I)
@@ -151,13 +176,12 @@ def limpiar(v):
     if not s or VACIO.match(s):
         return None
     s = PARENTESIS_INTERNO.sub('', s)
+    s = COPIA.sub('', s)
     s = PROCEDENCIA.sub('', s)
     s = MARCA_AJENA.sub('', s)
     s = BASURA.sub('', s)
     s = re.sub(r'\s*\([^)]*$', '', s)          # paréntesis que se quedó sin cerrar
     s = re.sub(r'\s*\(\s*\)', '', s)
-    if re.fullmatch(r'[A-Z]{1,3}\s?\d{1,4}', s.strip()):
-        return None                            # «BK25», «G30»: código de proveedor
     s = re.sub(r'\s{2,}', ' ', s).strip(' ;,·-')
     if not s or VACIO.match(s):
         return None
@@ -197,6 +221,25 @@ def clave_exterior(f):
     return tuple(limpiar(f.get(c)) or '' for c in CLAVE_EXTERIOR)
 
 
+# «Acero inoxidable 316L, PVD bronce» dice tres veces lo mismo cuando
+# todas las cajas del modelo son de acero 316L. Para el rótulo se deja
+# lo que cambia; el material completo va en la ficha técnica.
+SOBRA_CAJA = re.compile(
+    r'^(acero inoxidable|acero inox\.?|acero)\s*(316L|904L)?\s*[,·]?\s*', re.I)
+
+
+def caja_corta(fila):
+    """Las señas de la caja para el rótulo: diámetro y de qué es.
+
+    Se usa solo cuando dos opciones llevan la misma correa y hay que
+    decir en qué se diferencian de verdad."""
+    d = limpiar(fila.get('diametro'))
+    mat = limpiar(fila.get('cajaMat')) or limpiar(fila.get('cajaAcab')) or ''
+    resto = SOBRA_CAJA.sub('', mat).strip(' ,·')
+    partes = [x for x in (d, resto or mat) if x]
+    return ', '.join(partes)
+
+
 def titulo_exterior(fila):
     """El rótulo del botón: lo que lleva puesto, en cristiano.
 
@@ -220,8 +263,18 @@ def titulo_exterior(fila):
     return re.sub(r'\s{2,}', ' ', base).strip(' ,;·')
 
 
+CODIGO = re.compile(r'^[A-Z]{1,3}\s?\d{1,4}$')
+
+
+def cierre(fila):
+    """El cierre del brazalete. La hoja mete ahí a veces el código del
+    proveedor —«BK25»—, que no describe nada."""
+    v = limpiar(fila.get('brazCierre'))
+    return None if v and CODIGO.match(v.strip()) else v
+
+
 def detalle_exterior(fila):
-    partes = [limpiar(fila.get('brazAcab')), limpiar(fila.get('brazCierre'))]
+    partes = [limpiar(fila.get('brazAcab')), cierre(fila)]
     partes = [p for p in partes if p]
     return ' · '.join(partes)
 
@@ -301,10 +354,11 @@ def configurador(filas, previo):
         muestra.setdefault(indice(f), f)
 
     # Dos exteriores pueden llevar la MISMA correa y ser relojes
-    # distintos: los dos Eclipse de Ronda 515 del Bitácora comparten la
-    # goma negra y cambian de caja —negra y oro rosa—. Si el rótulo solo
-    # dijera la correa, saldrían dos botones idénticos. Cuando eso pasa,
-    # manda la caja.
+    # distintos: el Trinchera monta la misma NATO verde en cuatro cajas
+    # —39 y 36 mm, plata y bronce— y los dos Eclipse de Ronda 515 del
+    # Bitácora comparten la goma negra y cambian de caja. Si el rótulo
+    # solo dijera la correa, saldrían botones idénticos. Cuando eso
+    # pasa, se le añade lo que de verdad los separa: la caja.
     titulos = [titulo_exterior(muestra[i]) for i in range(len(exteriores))]
     repes = {t for t in titulos if titulos.count(t) > 1}
     usados = set()
@@ -313,13 +367,9 @@ def configurador(filas, previo):
         f = muestra[i]
         t = titulos[i]
         if t in repes:
-            caja = limpiar(f.get('cajaAcab')) or limpiar(f.get('cajaMat'))
-            if caja:
-                # minúscula solo si la palabra no es una sigla: si no,
-                # «PVD negro» salía «pVD negro»
-                if len(caja) > 1 and caja[1].islower():
-                    caja = caja[0].lower() + caja[1:]
-                t = f'{t} · caja {caja}'
+            seña = caja_corta(f)
+            if seña:
+                t = f'{t} · {seña}'
         ide = ident(t)[:34] or f'opcion-{i + 1}'
         while ide in usados:
             ide += '-2'
@@ -373,7 +423,7 @@ def main(ruta):
     with open(CATALOGO, encoding='utf-8') as f:
         cat = json.load(f)
 
-    porSlug, pendientes = {}, []
+    porSlug, pendientes, fuera = {}, [], []
     for f in hoja:
         slug = CODIGO_SLUG.get(f['ref'].split('_')[0])
         if not slug:
@@ -381,6 +431,9 @@ def main(ruta):
         # La hoja marca así lo que todavía no está cerrado. No se
         # publica: un reloj cuyo movimiento está «por confirmar» no se
         # puede poner a la venta.
+        if f['ref'] in EXCLUIDAS:
+            fuera.append((f['ref'], EXCLUIDAS[f['ref']]))
+            continue
         if PENDIENTE.search(str(f.get('calibre', '')) + str(f.get('mov', ''))):
             pendientes.append((f['ref'], limpiar(f.get('mov')) or f.get('mov')))
             continue
@@ -407,14 +460,14 @@ def main(ruta):
         r = relojes.get(slug)
         if not r:
             continue
-        fuera = r.pop('configurador', None) is not None
+        quitado = r.pop('configurador', None) is not None
         # y también el «desde» del listado: era un precio escrito a mano
         # que no sale de la hoja. Sin dato, la tarjeta enseña el diámetro,
         # que es lo que hace desde siempre cuando no hay precio cerrado.
         if r.get('precio') is not None:
             r['precio'] = None
-            fuera = True
-        if fuera:
+            quitado = True
+        if quitado:
             print(f'  {slug:11} sin precio ni configurador: no está en la hoja')
 
     with open(CATALOGO, 'w', encoding='utf-8') as f:
@@ -424,6 +477,10 @@ def main(ruta):
         print('\nFUERA por estar sin cerrar en la hoja:')
         for ref, mov in pendientes:
             print(f'  {ref:30} {mov}')
+    if fuera:
+        print('\nFUERA porque la hoja se contradice:')
+        for ref, motivo in fuera:
+            print(f'  {ref:30} {motivo}')
 
     print('\ncatalogo.json reescrito')
 
