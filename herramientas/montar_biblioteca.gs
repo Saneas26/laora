@@ -85,29 +85,44 @@ const FILAS_COMP = 500;       // componentes: caben más
    Así en PRECIOS se lee `margen_objetivo` y no `$B$9`.
 */
 const PARAMETROS = [
+  ['multiplicador',      2.80,  'veces',
+   '★ EL NÚMERO QUE MANDA. El PVP sale de multiplicar por esto lo que cuesta el reloj. A x2,0 no se gana; x2,5 es el mínimo; x3,0 es lo sano. Se sube o se baja aquí y se recalcula el catálogo entero.'],
+
   ['impuesto_venta',     0.21,  'tanto por uno',
-   'El impuesto que va DENTRO del PVP. ⚠ REVISAR: Canarias es IGIC, no IVA, y desde el 01/07/2026 entra el REPEP. Vender a Península tampoco es un 21 % sin más. Este número multiplica todo el catálogo a la vez.'],
+   'El impuesto que va DENTRO del PVP. Ojo: no es tuyo ni te cuesta, lo cobras y lo ingresas. ⚠ REVISAR: en Canarias es IGIC, no IVA, y el 01/07/2026 entra el REPEP.'],
+  ['irpf',               0.20,  'tanto por uno',
+   'Se aplica SOBRE EL BENEFICIO, nunca sobre la venta. Aplicarlo al PVP da un número mucho peor que la realidad.'],
+  ['ss_modo',            'cuota', 'porcentaje | cuota',
+   'Cómo contar la Seguridad Social. «porcentaje» usa ss_pct sobre el beneficio. «cuota» reparte la cuota mensual entre los relojes que vendes al mes, que es lo que pasa de verdad.'],
+  ['ss_pct',             0.05,  'tanto por uno',
+   'Solo se usa si ss_modo = «porcentaje».'],
+  ['cuota_ss_mes',     300.00,  '€/mes',
+   'Lo que pagas de autónomo al mes. Es fijo: lo pagas vendas uno o vendas treinta.'],
+  ['unidades_mes',         10,  'uds/mes',
+   'Cuántos relojes esperas vender al mes. ⚠ Este número cambia el resultado más que casi ningún otro: con cuota de 300 € y 5 relojes, la SS son 60 € POR RELOJ; con 30, son 10 €.'],
+
   ['comision_pago_pct',  0.034, 'tanto por uno',
-   'La parte variable que se lleva la pasarela de cobro.'],
+   'La parte variable que se lleva la pasarela de cobro. Va sobre el PVP entero, impuesto incluido.'],
   ['comision_pago_fija', 0.35,  '€',
    'La parte fija que se lleva la pasarela por cada cobro.'],
-  ['envio_medio',        6.00,  '€',
-   'Lo que cuesta de media mandar un reloj, embalaje aparte.'],
+  ['packaging',          2.00,  '€',
+   'La caja, el estuche y lo que va dentro.'],
+  ['envio',              7.00,  '€',
+   'Mandar el reloj al cliente.'],
+  ['montaje_y_control',  8.00,  '€',
+   'Montarlo, regularlo y comprobarlo antes de enviarlo. Es lo que te permite prometer cinco años con un movimiento chino: no lo da la fábrica, lo das tú.'],
+  ['provision_garantia', 4.00,  '€',
+   'Lo que se aparta por reloj para la garantía. Con un 5 % de averías y unos 100 € por avería atendida, salen unos 5 €.'],
   ['devoluciones_pct',   0.02,  'tanto por uno',
    'Provisión por devoluciones. Sube este número si empiezan a volver.'],
-  ['montaje_y_control',  8.00,  '€',
-   'Montar el reloj, regularlo y comprobarlo antes de enviarlo. Es lo que te permite prometer cinco años con un movimiento chino: no lo da la fábrica, lo das tú.'],
-  ['provision_garantia', 4.00,  '€',
-   'Lo que se aparta por reloj para la garantía. Con un 5 % de fallo y unos 100 € por avería atendida, salen unos 5 €. Por debajo del 5 % la garantía es casi gratis; por encima del 10 % se come el negocio.'],
+
   ['colchon_inflacion',  0.20,  'tanto por uno',
-   'Cuánto pueden subir los materiales sin que el precio deje de valer. El coste se calcula ya con esta subida encima, para no tener que revisar precios cada pedido.'],
-  ['margen_objetivo',    50.00, '€',
-   'Lo que tiene que dejar cada reloj limpio. Es la regla de Óscar y no se negocia.'],
-  ['margen_minimo_pct',  0.22,  'tanto por uno',
-   'Margen mínimo sobre PVP. Un reloj puede dejar 50 € y aun así ser mal negocio si es carísimo.'],
-  ['moq_esferas',        10,    'uds',
+   'Cuánto pueden subir los materiales sin que el precio deje de valer. El coste se calcula ya con esta subida encima, para no revisar precios en cada pedido.'],
+  ['limpio_minimo',     40.00,  '€',
+   'Por debajo de esto, el aviso salta. No es un objetivo: es el suelo por debajo del cual el reloj no compensa.'],
+  ['moq_esferas',          10,  'uds',
    'Pedido mínimo de esferas. Es la única pieza que obliga a tener stock, y por eso decide cuántos acabados te puedes permitir.'],
-  ['garantia_anios',     5,     'años',
+  ['garantia_anios',        5,  'años',
    'Los años de garantía que se prometen. No se dice «para toda la vida»: eso no se puede cumplir y no hace falta.'],
 ];
 
@@ -254,20 +269,26 @@ const COLUMNAS = {
     ['notas',           260, null, null],
   ],
 
+  // La cascada entera, de lo que cuesta a lo que queda limpio en el bolsillo.
   'PRECIOS': [
     ['ref',             180, null, null],
     ['modelo',          130, null, null],
     ['acabado',         110, null, null],
     ['coste_piezas',    110, EUR, 'La suma de las diez piezas, mirando el coste en COMPONENTES.'],
-    ['coste_ajustado',  120, EUR, 'El coste ya con el colchón de inflación encima. Se calcula con este, no con el de hoy.'],
-    ['factor_neto',     100, '0.0000', 'De cada euro de PVP, lo que queda tras el impuesto, la comisión variable y las devoluciones.'],
-    ['cargos_fijos',    110, EUR, 'Comisión fija + envío + montaje y control + provisión de garantía.'],
-    ['suelo_tecnico',   120, EUR, 'El PVP mínimo para que queden los 50 €. Por debajo de aquí se trabaja gratis.'],
+    ['coste_ajustado',  120, EUR, 'El coste con el colchón de inflación encima. Se calcula con este, no con el de hoy.'],
+    ['costes_directos', 120, EUR, 'Packaging + envío + montaje y control + provisión de garantía. Lo que cuesta cada reloj además de sus piezas.'],
+    ['pvp_propuesto',   120, EUR, 'El multiplicador aplicado al coste total, redondeado al x9,90 siguiente. Se puede escribir encima a mano.'],
     ['techo_mercado',   120, EUR, 'Lo que cobra la competencia por el equivalente.'],
-    ['pvp_propuesto',   120, EUR, 'Sale redondeado al x9,90 siguiente. Se puede escribir encima a mano: es una propuesta, no una orden.'],
-    ['margen_eur',      110, EUR, null],
-    ['margen_pct',       95, PCT, null],
-    ['revision',        300, null, 'Dice OK, o dice qué falla.'],
+    ['base_sin_iva',    120, EUR, 'Lo que queda del PVP al quitarle el impuesto. El impuesto no es tuyo: lo cobras y lo ingresas.'],
+    ['comision',        110, EUR, 'Lo que se lleva la pasarela de cobro.'],
+    ['devoluciones',    110, EUR, null],
+    ['beneficio',       120, EUR, 'El rendimiento antes de impuestos. SOBRE ESTO se calcula el IRPF, no sobre la venta.'],
+    ['irpf',            100, EUR, null],
+    ['seg_social',      110, EUR, 'Según ss_modo. En modo «cuota» es la parte de tu cuota de autónomo que le toca a este reloj: cuota_ss_mes ÷ unidades_mes.'],
+    ['limpio',          120, EUR, '★ LO QUE TE QUEDA. Después de piezas, gastos, impuesto, comisión, IRPF y Seguridad Social.'],
+    ['limpio_pct',      100, PCT, 'Lo limpio como parte del PVP.'],
+    ['multiplicador',   110, '0.00', 'A cuánto estás vendiendo sobre lo que cuestan las piezas.'],
+    ['revision',        320, null, 'Dice OK, o dice qué falla.'],
   ],
 
   'COMPRAS': [
@@ -502,9 +523,18 @@ function montarParametros(ss) {
 
   PARAMETROS.forEach(function (p, i) {
     const c = h.getRange(i + 2, 2);
-    if (p[2] === '€') c.setNumberFormat(EUR);
-    else if (p[2] === 'tanto por uno') c.setNumberFormat('0.00%');
-    else c.setNumberFormat('#,##0');
+    if (typeof p[1] === 'string')        c.setNumberFormat('@');
+    else if (p[2] === '€' || p[2] === '€/mes') c.setNumberFormat(EUR);
+    else if (p[2] === 'tanto por uno')   c.setNumberFormat('0.00%');
+    else if (p[2] === 'veces')           c.setNumberFormat('0.00');
+    else                                 c.setNumberFormat('#,##0');
+
+    // ss_modo es una de dos palabras, no cualquier cosa
+    if (p[0] === 'ss_modo') {
+      c.setDataValidation(SpreadsheetApp.newDataValidation()
+        .requireValueInList(['porcentaje', 'cuota'], true)
+        .setAllowInvalid(false).build());
+    }
   });
 
   h.getRange(2, 2, PARAMETROS.length, 1).setBackground(AMARILLO);
@@ -578,24 +608,40 @@ function formulasPrecios(ss) {
     'ref':            '=IF(REFERENCIAS!A2="","",REFERENCIAS!A2)',
     'modelo':         '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$B$100,2,FALSE),""))',
     'acabado':        '=IF($A2="","",REFERENCIAS!C2)',
+
+    // lo que cuesta
     'coste_piezas':   '=IF($A2="","",' + sumas.join('+') + ')',
     'coste_ajustado': '=IF($A2="","",$D2*(1+colchon_inflacion))',
-    'factor_neto':    '=IF($A2="","",1/(1+impuesto_venta)-comision_pago_pct-devoluciones_pct)',
-    'cargos_fijos':   '=IF($A2="","",comision_pago_fija+envio_medio+montaje_y_control+provision_garantia)',
-    'suelo_tecnico':  '=IF($A2="","",($E2+$G2+margen_objetivo)/$F2)',
+    'costes_directos':'=IF($A2="","",packaging+envio+montaje_y_control+provision_garantia)',
+
+    // a cuánto se vende. Redondeado al x9,90 siguiente; se puede pisar a mano.
+    'pvp_propuesto':  '=IF($A2="","",CEILING(multiplicador*($E2+$F2)-9.9,10)+9.9)',
     'techo_mercado':  '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$I$100,9,FALSE),""))',
-    'pvp_propuesto':  '=IF($A2="","",CEILING($H2-9.9,10)+9.9)',
-    'margen_eur':     '=IF(OR($A2="",$J2=""),"",$J2*$F2-$G2-$E2)',
-    'margen_pct':     '=IF(OR($J2="",$J2=0),"",$K2/$J2)',
-    'revision':       '=IF(OR($A2="",$J2=""),"",IF(AND($K2>=margen_objetivo,$L2>=margen_minimo_pct,' +
-                      'OR($I2="",$J2<=$I2)),"OK",TRIM(REGEXREPLACE(' +
-                      'IF($K2<margen_objetivo,"no llega al margen objetivo · ","")&' +
-                      'IF($L2<margen_minimo_pct,"margen % bajo · ","")&' +
-                      'IF(AND($I2<>"",$J2>$I2),"por encima del mercado · ",""),' +
+
+    // qué queda de esa venta
+    'base_sin_iva':   '=IF($A2="","",$G2/(1+impuesto_venta))',
+    'comision':       '=IF($A2="","",comision_pago_pct*$G2+comision_pago_fija)',
+    'devoluciones':   '=IF($A2="","",devoluciones_pct*$G2)',
+    'beneficio':      '=IF($A2="","",$I2-$J2-$K2-$E2-$F2)',
+
+    // y qué se lleva Hacienda. El IRPF va sobre el beneficio, no sobre la venta.
+    'irpf':           '=IF($A2="","",IF($L2>0,irpf*$L2,0))',
+    // la Seguridad Social no es un porcentaje: es una cuota mensual repartida
+    'seg_social':     '=IF($A2="","",IF(ss_modo="cuota",IFERROR(cuota_ss_mes/MAX(1,unidades_mes),0),IF($L2>0,ss_pct*$L2,0)))',
+
+    'limpio':         '=IF($A2="","",$L2-$M2-$N2)',
+    'limpio_pct':     '=IF(OR($A2="",$G2=0),"",$O2/$G2)',
+    'multiplicador':  '=IF(OR($A2="",$D2=0),"",$G2/$D2)',
+
+    'revision':       '=IF($A2="","",IF(AND($O2>=limpio_minimo,OR($H2="",$G2<=$H2)),"OK",' +
+                      'TRIM(REGEXREPLACE(' +
+                      'IF($O2<=0,"⚠ PIERDES DINERO · ",IF($O2<limpio_minimo,"no llega al limpio mínimo · ",""))&' +
+                      'IF(AND($H2<>"",$G2>$H2),"por encima del mercado · ","")&' +
+                      'IF(AND($Q2<>"",$Q2<2.5),"multiplicador por debajo de x2,5 · ",""),' +
                       '"\\s*·\\s*$",""))))',
   };
   aplicar(h, 'PRECIOS', f, FILAS);
-  Logger.log('✔ PRECIOS · coste → colchón → suelo → techo → PVP → margen');
+  Logger.log('✔ PRECIOS · coste → PVP → impuesto → comisión → IRPF → SS → LIMPIO');
 }
 
 
@@ -647,7 +693,7 @@ function formulasWeb(ss) {
     'slug_modelo':    '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$C$100,3,FALSE),""))',
     'modelo':         '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$B$100,2,FALSE),""))',
     'acabado':        '=IF($A2="","",REFERENCIAS!C2)',
-    'pvp':            '=IF($A2="","",PRECIOS!J2)',
+    'pvp':            '=IF($A2="","",PRECIOS!' + letra(col('PRECIOS', 'pvp_propuesto')) + '2)',
 
     'movimiento':     pieza('id_movimiento'),
     'calibre':        spec('MOVIMIENTOS', 'id_movimiento', 'calibre'),
