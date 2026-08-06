@@ -85,8 +85,8 @@ import unicodedata
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 10
-V_JS = 4
+V_CSS = 21
+V_JS = 6
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = {r['slug']: r for r in json.load(f)['relojes']}
@@ -299,12 +299,28 @@ def pantalla(slug):
 
     todos = [p for _, _, p in combinaciones]
 
+    # NOMBRES QUE SE REPITEN. El Bitácora tiene tres Eclipse y el Cero
+    # Cero, cuatro: lo que los distingue es el movimiento, no el nombre.
+    # Sin decirlo, salían botones idénticos —dos al mismo precio— y no
+    # había manera de saber cuál se estaba pulsando. Se añade el calibre,
+    # que es lo primero de `movimiento`, tal cual está en el catálogo.
+    repetidos = {a['nombre'] for a in acabados
+                 if sum(1 for b in acabados if b['nombre'] == a['nombre']) > 1}
+
+    def calibre(a):
+        if a['nombre'] not in repetidos:
+            return ''
+        return (a.get('movimiento') or '').split(',')[0].strip()
+
     # Referencias y fotos, ya resueltas: el navegador no compone nada.
     datosAcabados = {}
     for a in acabados:
         refs = [referencia(reloj, a, i) for i in range(len(correas))]
         datosAcabados[a['id']] = {
             'nombre': a['nombre'],
+            # lo que se lee en el visor, en la barra y en la ficha: con
+            # el calibre cuando el nombre no basta para distinguirlo
+            'etiqueta': a['nombre'] + (f' {calibre(a)}' if calibre(a) else ''),
             'descriptor': a.get('descriptor', ''),
             'resumen': a.get('resumen', ''),
             'refs': refs,
@@ -330,19 +346,43 @@ def pantalla(slug):
 
     def botonAcabado(a):
         desde = min([p for p in precios.get(a['id'], []) if p is not None] or [0])
+        cal = calibre(a)
         return (f'        <button type="button" data-acabado="{a["id"]}" aria-pressed="false">'
-                f'<b>{a["nombre"]}</b><small>desde {euros(desde)}</small></button>\n')
+                f'<b>{a["nombre"]}</b>{f"<i>{cal}</i>" if cal else ""}'
+                f'<small>desde {euros(desde)}</small></button>\n')
 
     def botonCorrea(i, c):
         return (f'        <button type="button" data-correa="{i}" aria-pressed="false">'
                 f'<span class="tira" style="background:{MUESTRAS.get(c["id"], "#d8d8d4")}"></span>'
                 f'<span>{c["nombre"]}</span></button>\n')
 
-    # El rótulo del grupo de correas: cuando no hay nada que elegir, se
-    # dice, en vez de enseñar un «1 opción» que parece un error.
-    rotuloCorreas = ('Brazalete o correa' if len(correas) > 1
-                     else correas[0]['nombre'])
+    # El rótulo del grupo de correas: cuando no hay nada que elegir se
+    # dice «Incluido», en vez de un «1 opción» que parece un error. El
+    # rótulo de la izquierda es siempre el mismo —repetir ahí el nombre
+    # del brazalete lo dejaba dicho dos veces seguidas.
+    rotuloCorreas = 'Brazalete o correa'
     tituloCorreas = f'<b>{len(correas)} opciones</b>' if len(correas) > 1 else '<b>Incluido</b>'
+
+    # CUANDO NO HAY NADA QUE ELEGIR, NO SE PINTA UN BOTÓN.
+    # El Precisa y el Bitácora llevan brazalete integrado: una sola
+    # opción. Como botón dentro de la rejilla, esa única muestra se
+    # estiraba a todo el ancho del panel y —al ser cuadrada— salía un
+    # azulejo de 690 px de alto que echaba el precio fuera de la
+    # pantalla. Y además mentía: parecía que había algo que decidir.
+    # Aquí se dice lo que lleva puesto, en una línea, y ya está.
+    if len(correas) > 1:
+        bloqueCorreas = (
+            f'      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa"'
+            f' style="--correas:{min(4, len(correas))}">\n'
+            + ''.join(botonCorrea(i, c) for i, c in enumerate(correas))
+            + '      </div>')
+    else:
+        u = correas[0]
+        detalle = f'<small>{u["detalle"]}</small>' if u.get('detalle') else ''
+        bloqueCorreas = (
+            f'      <p class="cfg-correa-unica">'
+            f'<span class="tira" style="background:{MUESTRAS.get(u["id"], "#d8d8d4")}"></span>'
+            f'<span><b>{u["nombre"]}</b>{detalle}</span></p>')
 
     return f"""<!DOCTYPE html>
 <html lang="es">
@@ -360,7 +400,7 @@ def pantalla(slug):
 <!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
 <link rel="stylesheet" href="/assets/css/configurador.css?v={V_CSS}">
 </head>
-<body>
+<body{' class="cfg-muchos"' if len(acabados) > 6 else ''}>
 
 <header class="cfg-cab">
   <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
@@ -387,10 +427,18 @@ def pantalla(slug):
       <span class="tira" data-muestra-tira style="background:{muestraInicial}"></span>
       <span data-muestra-nombre>{correaInicial['nombre']}</span>
     </div>
-    <p class="cfg-viendo" data-viendo aria-live="polite"><b>{aInicial['nombre']}</b> · {correaInicial['nombre']}</p>
-    <!-- La referencia también aquí: en el teléfono no cabe en la
-         cabecera, y es el dato con el que Óscar busca en la hoja. -->
-    <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
+         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
+         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
+         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
+         segunda caía encima de la referencia: dos textos superpuestos,
+         ilegibles los dos. Así el segundo siempre baja. -->
+    <div class="cfg-rotulos">
+      <p class="cfg-viendo" data-viendo aria-live="polite"><b>{aInicial['nombre']}</b> · {correaInicial['nombre']}</p>
+      <!-- La referencia también aquí: en el teléfono no cabe en la
+           cabecera, y es el dato con el que Óscar busca en la hoja. -->
+      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+    </div>
   </section>
 
   <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
@@ -405,8 +453,11 @@ def pantalla(slug):
 
     <div class="cfg-grupo">
       <p class="cfg-rotulo">{rotuloCorreas} <b data-rotulo-correa>{tituloCorreas}</b></p>
-      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa">
-{''.join(botonCorrea(i, c) for i, c in enumerate(correas))}      </div>
+      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
+           era siempre de cuatro, así que con tres correas quedaba una
+           columna vacía y los tres nombres partidos en dos líneas por
+           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
+{bloqueCorreas}
     </div>
 
     <div class="cfg-nota">

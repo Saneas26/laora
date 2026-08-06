@@ -163,15 +163,13 @@ EXPOSICIONES = [
          specs=['Cuarzo de barrido', 'Titanio', '200 m']),
 ]
 
-# Adónde lleva «Reservar» en cada exposición. El Lunar ya tiene su
-# pantalla de configuración —`/lunarv2c`, la que Óscar dio por buena el
-# 05/08/2026—, así que va ahí. Los otros dos siguen a su ficha hasta que
-# tengan la suya: el generador del configurador está hoy fijado al Lunar.
-PANTALLA_PROPIA = {'lunar': '/lunarv2c'}
-
+# Adónde lleva «Reservar» en cada exposición. Desde el 06/08/2026 los
+# tres tienen pantalla de comprar en su propia dirección —el patrón que
+# Óscar dio por bueno el 05/08/2026, ya no solo para el Lunar—, así que
+# se va a `/<modelo>` y no hay excepciones que mantener.
 for e in EXPOSICIONES:
     e['precio'] = euros(desde_de(e['slug'])).replace(' €', '€')
-    e['enlace'] = PANTALLA_PROPIA.get(e['slug'], '/' + e['slug'] + '.html')
+    e['enlace'] = '/' + e['slug'] + '.html'
 
 PRIMERA_EXPO = EXPOSICIONES[0]
 

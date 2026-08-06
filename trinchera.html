@@ -2,261 +2,137 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Un reloj de campaña honesto: números limpios, contraste absoluto y acero sin artificios.">
-<meta property="og:title" content="Trinchera · laOra">
-<meta property="og:description" content="Un reloj de campaña honesto: números limpios, contraste absoluto y acero sin artificios.">
-<meta property="og:url" content="https://laora.es/trinchera.html">
-<meta property="og:image" content="https://laora.es/assets/img/relojes-2026/trinchera-hero.webp">
-<meta property="og:locale" content="es_ES">
-<meta property="og:type" content="website">
-<title>Trinchera · laOra</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Configura tu Trinchera de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 169,90 €.">
+<meta name="theme-color" content="#151715">
+<title>Configura tu Trinchera · laOra</title>
+<link rel="canonical" href="https://laora.es/trinchera">
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
-<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
-     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar.py — no editar a mano.
-     Los textos se cambian ahí; los datos de relojes, en
-     assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=34">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
+<link rel="stylesheet" href="/assets/css/configurador.css?v=21">
 </head>
 <body>
-<header class="cb cb-claro">
-  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu" aria-label="Navegación principal">
-    <a href="/coleccion.html" class="activo">relojes</a>
-    <a href="/filosofia.html">nuestra forma de hacer</a>
-    <a href="/taller.html">taller y servicio</a>
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
-         un span sin texto, así que un lector de pantalla leería «club lara»:
-         de ahí el aria-label. -->
-    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
-  </nav>
+
+<header class="cfg-cab">
+  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
+       sin él sería un callejón sin salida. No se le añade un menú porque
+       aquí solo se hace una cosa, que es elegir el reloj. -->
+  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Trinchera</b></a>
+  <span class="ref">Ref. <span data-ref>—</span></span>
+  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
+       cuatro palabras al lado del logotipo sin montarse encima de la
+       referencia, y recortar con puntos suspensivos deja un enlace que
+       no se entiende. -->
+  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
 </header>
 
-<main id="inicio">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "laOra Trinchera", "sku": "LO—05", "brand": {"@type": "Brand", "name": "laOra"}, "description": "Un reloj de campaña honesto: números limpios, contraste absoluto y acero sin artificios.", "image": ["https://laora.es/assets/img/relojes-2026/trinchera-hero.webp", "https://laora.es/assets/img/relojes-2026/trinchera-profile.webp", "https://laora.es/assets/img/relojes-2026/trinchera-eclipse.webp"]}</script>
+<div class="cfg-cuerpo">
 
-  <section class="pdp-hero">
-    <div class="pdp-gallery">
-      <div class="pdp-main-image">
-        <img src="/assets/img/relojes-2026/trinchera-hero.webp" alt="Trinchera, vista seleccionada" data-foto-grande fetchpriority="high">
+  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
+  <section class="cfg-visor" aria-label="El reloj que estás configurando">
+    <img class="cfg-foto" data-foto
+         src="/assets/img/catalogo/LO-05_Trinchera_A01.webp"
+         alt="Reloj laOra Trinchera, acabado Alba, con nato verde militar"
+         fetchpriority="high">
+    <div class="cfg-muestra" aria-hidden="true">
+      <span class="tira" data-muestra-tira style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#5a6340 0%,#3f4630 55%,#2e331f 100%)"></span>
+      <span data-muestra-nombre>NATO verde militar</span>
+    </div>
+    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
+         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
+         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
+         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
+         segunda caía encima de la referencia: dos textos superpuestos,
+         ilegibles los dos. Así el segundo siempre baja. -->
+    <div class="cfg-rotulos">
+      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · NATO verde militar</p>
+      <!-- La referencia también aquí: en el teléfono no cabe en la
+           cabecera, y es el dato con el que Óscar busca en la hoja. -->
+      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+    </div>
+  </section>
+
+  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
+  <section class="cfg-panel" aria-label="Opciones del Trinchera">
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Acabado <b>6 opciones</b></p>
+      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
+        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 169,90 €</small></button>
+        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><i>ST2130</i><small>desde 209,90 €</small></button>
+        <button type="button" data-acabado="cenit-nh38" aria-pressed="false"><b>Cenit</b><i>Seiko NH38A</i><small>desde 269,90 €</small></button>
+        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><i>Seiko/TMI VH31</i><small>desde 169,90 €</small></button>
+        <button type="button" data-acabado="eclipse-suizo" aria-pressed="false"><b>Eclipse</b><i>ST2130</i><small>desde 209,90 €</small></button>
+        <button type="button" data-acabado="eclipse-nh38" aria-pressed="false"><b>Eclipse</b><i>Seiko NH38A</i><small>desde 269,90 €</small></button>
       </div>
-      <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
-          <button type="button" data-mini="/assets/img/relojes-2026/trinchera-hero.webp" class="active" aria-label="Ver imagen 1 de Trinchera"><img src="/assets/img/relojes-2026/trinchera-hero.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/trinchera-profile.webp" aria-label="Ver imagen 2 de Trinchera"><img src="/assets/img/relojes-2026/trinchera-profile.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/trinchera-eclipse.webp" aria-label="Ver imagen 3 de Trinchera"><img src="/assets/img/relojes-2026/trinchera-eclipse.webp" alt=""></button>
+      <p class="cfg-nota" data-nota>El segundero de barrido del cuarzo, sin el tictac. Titanio en mate, que no da reflejos.</p>
+    </div>
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>2 opciones</b></b></p>
+      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
+           era siempre de cuatro, así que con tres correas quedaba una
+           columna vacía y los tres nombres partidos en dos líneas por
+           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
+      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa" style="--correas:2">
+        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#5a6340 0%,#3f4630 55%,#2e331f 100%)"></span><span>NATO verde militar</span></button>
+        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#2c2d2e 0%,#1a1b1c 55%,#0f1010 100%)"></span><span>NATO negra</span></button>
       </div>
     </div>
-    <div class="pdp-buy">
-      <p class="kicker">LO—05 · Reloj de campo</p>
-      <h1>Trinchera</h1>
-      <p class="pdp-homage">Homenaje al reloj de campaña clásico</p>
-      <p class="pdp-description">Un reloj de campaña honesto: números limpios, contraste absoluto y acero sin artificios.</p>
-      <div class="config">
-        <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
-          <button type="button" role="tab" data-acabado="alba" aria-selected="true"><span>Alba</span><small>Movimiento japonés de cuarzo (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="cenit" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Automático arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="cenit-nh38" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Movimiento japonés automático (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="eclipse" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento japonés de cuarzo (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-suizo" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Automático arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-nh38" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento japonés automático (Seiko)</small></button>
-        </div>
-        <p class="config-nota" data-resumen-acabado>El segundero de barrido del cuarzo, sin el tictac. Titanio en mate, que no da reflejos.</p>
 
-        <div class="pdp-price">
-          <strong data-precio>169,90 €</strong>
-          <span>Impuestos incluidos</span>
-        </div>
-        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
-          <button type="button" role="tab" data-correa="verde" aria-selected="true"><span>NATO verde militar</span><small>Nailon tejido, 20 mm, hebilla de acero</small></button>
-          <button type="button" role="tab" data-correa="negra" aria-selected="false" tabindex="-1"><span>NATO negra</span><small>Nailon tejido, 20 mm, hebilla de acero</small></button>
-        </div>
-      </div>
-
-      <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
-           Óscar eligió recuperar el sistema de reserva con señal (03/08/2026),
-           pero `reservar.html` todavía no está rehecha con el diseño nuevo:
-           las de la web anterior usaban hojas que ya no existen. Hasta
-           entonces NO se pinta, para no dejar un botón que lleve a un 404.
-
-           Cuando exista, se descomenta esto y ya funciona: `ficha.js` le
-           escribe la referencia, el acabado y la correa elegidos en la URL.
-      <a class="button primary full" href="/reservar.html" data-reservar>Reservar este Trinchera</a>
-           -->
-      <p class="config-ref">Referencia <b data-ref>—</b></p>
-      <script type="application/json" data-configurador>{"acabados": [{"id": "alba", "nombre": "Alba", "caja": "Titanio cepillado, en mate", "resumen": "El segundero de barrido del cuarzo, sin el tictac. Titanio en mate, que no da reflejos.", "refSufijo": "", "refNum": ["01", "02"], "descriptor": "Movimiento japonés de cuarzo (Seiko)", "movimiento": "Seiko/TMI VH31, cuarzo de barrido", "movimientoTipo": "Cuarzo de barrido, sin fecha", "frecuencia": "32.768 Hz", "autonomia": "Pila de unos 3 años", "peso": "unos 55 g con la correa"}, {"id": "cenit", "nombre": "Cenit", "caja": "Titanio cepillado, en mate", "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824, en titanio mate.", "refSufijo": "-ST2130", "refNum": ["01", "02"], "descriptor": "Automático arquitectura suiza", "movimiento": "ST2130, automático de arquitectura suiza", "movimientoTipo": "Automático sin fecha, arquitectura ETA 2824", "frecuencia": "28.800 alternancias/hora (4 Hz)", "autonomia": "Unas 38 horas de reserva de marcha", "peso": "unos 58 g con la correa"}, {"id": "cenit-nh38", "nombre": "Cenit", "caja": "Titanio cepillado, en mate", "resumen": "El automático japonés de referencia, sin ventanilla de fecha: la esfera se queda limpia.", "refSufijo": "-NH38", "refNum": ["03", "04"], "descriptor": "Movimiento japonés automático (Seiko)", "movimiento": "Seiko NH38A, automático japonés", "movimientoTipo": "Automático sin fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 41 horas de reserva de marcha", "peso": "unos 58 g con la correa"}, {"id": "eclipse", "nombre": "Eclipse", "caja": "Titanio con revestimiento negro", "resumen": "El segundero de barrido del cuarzo, sin el tictac. Aquí sobre el titanio en negro.", "refSufijo": "-VH31", "refNum": ["01", "02"], "descriptor": "Movimiento japonés de cuarzo (Seiko)", "movimiento": "Seiko/TMI VH31, cuarzo de barrido", "movimientoTipo": "Cuarzo de barrido, sin fecha", "frecuencia": "32.768 Hz", "autonomia": "Pila de unos 3 años", "peso": "unos 55 g con la correa"}, {"id": "eclipse-suizo", "nombre": "Eclipse", "caja": "Titanio con revestimiento negro", "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824, en titanio negro.", "refSufijo": "-ST2130", "refNum": ["03", "04"], "descriptor": "Automático arquitectura suiza", "movimiento": "ST2130, automático de arquitectura suiza", "movimientoTipo": "Automático sin fecha, arquitectura ETA 2824", "frecuencia": "28.800 alternancias/hora (4 Hz)", "autonomia": "Unas 38 horas de reserva de marcha", "peso": "unos 58 g con la correa"}, {"id": "eclipse-nh38", "nombre": "Eclipse", "caja": "Titanio con revestimiento negro", "resumen": "El automático japonés de referencia, sin ventanilla de fecha: la esfera se queda limpia.", "refSufijo": "-NH38", "refNum": ["05", "06"], "descriptor": "Movimiento japonés automático (Seiko)", "movimiento": "Seiko NH38A, automático japonés", "movimientoTipo": "Automático sin fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 41 horas de reserva de marcha", "peso": "unos 58 g con la correa"}], "correas": [{"id": "verde", "nombre": "NATO verde militar", "detalle": "Nailon tejido, 20 mm, hebilla de acero"}, {"id": "negra", "nombre": "NATO negra", "detalle": "Nailon tejido, 20 mm, hebilla de acero"}], "precios": {"alba": [169.9, 169.9], "cenit": [209.9, 209.9], "cenit-nh38": [269.9, 269.9], "eclipse": [169.9, 169.9], "eclipse-suizo": [209.9, 209.9], "eclipse-nh38": [269.9, 269.9]}, "codigo": "LO—05", "modelo": "Trinchera"}</script>
-      <dl class="live-specs">
-        <div><dt>Movimiento</dt><dd data-spec="movimiento">Seiko/TMI VH31, cuarzo de barrido</dd></div>
-        <div><dt>Tipo</dt><dd data-spec="movimientoTipo">Cuarzo de barrido, sin fecha</dd></div>
-        <div><dt>Frecuencia</dt><dd data-spec="frecuencia">32.768 Hz</dd></div>
-        <div><dt>Autonomía</dt><dd data-spec="autonomia">Pila de unos 3 años</dd></div>
-        <div><dt>Caja</dt><dd data-spec="caja">Titanio cepillado, en mate</dd></div>
-        <div><dt>Diámetro</dt><dd>39 mm</dd></div>
-        <div><dt>Grosor</dt><dd>unos 12 mm</dd></div>
-        <div><dt>Estanqueidad</dt><dd>200 m (20 ATM)</dd></div>
-        <div><dt>Bisel</dt><dd>No lleva: la caja es lisa, como la de un reloj de campaña</dd></div>
-        <div><dt>Cristal</dt><dd>Zafiro plano con tratamiento antirreflejos</dd></div>
-        <div><dt>Esfera</dt><dd>De campaña: números del 1 al 12 y escala de 24 horas por dentro</dd></div>
-        <div><dt>Luminiscencia</dt><dd>En agujas e índices</dd></div>
-        <div><dt>Correa</dt><dd>NATO de nailon tejido, 20 mm, con hebilla de acero</dd></div>
-        <div><dt>Fondo</dt><dd>Cerrado macizo de titanio</dd></div>
-        <div><dt>Corona</dt><dd>Roscada</dd></div>
-        <div><dt>Peso</dt><dd data-spec="peso">unos 55 g con la correa</dd></div>
-        <div><dt>Referencia</dt><dd>LO—05</dd></div>
-      </dl>
-      <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
+    <div class="cfg-nota">
+      <dl data-ficha></dl>
     </div>
 
-      <section class="curiosidades" aria-labelledby="rot-trinchera">
-        <p class="cur-rotulo" id="rot-trinchera">2 curiosidades</p>
-        <div class="cur-botones">
-          <button type="button" data-abre="cur-trinchera-nato">
-            <span class="cur-num">01</span>
-            <span class="cur-titulo">La correa lleva una tira de más, y es a propósito</span>
-            <span class="cur-gancho">Para qué sirve el trozo de nailon que sobra por debajo</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-          <button type="button" data-abre="cur-trinchera-veinticuatro">
-            <span class="cur-num">02</span>
-            <span class="cur-titulo">El anillo pequeño de dentro no es decoración</span>
-            <span class="cur-gancho">Por qué un reloj de campaña lleva dos juegos de números</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-        </div>
-      <dialog class="cur-ventana" id="cur-trinchera-nato" aria-labelledby="t-cur-trinchera-nato">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 01 de 2</p>
-        <h2 id="t-cur-trinchera-nato">La correa lleva una tira de más, y es a propósito</h2>
-        <p>Una correa normal son dos trozos: uno a cada lado del reloj, cada uno sujeto a su barra. Si una de las dos barras cede, el reloj se cae al suelo.</p>
-        <p>La NATO es una sola tira que pasa por debajo de la caja y se ensarta en las dos barras. Si una se rompe, la tira sigue atravesando la otra y el reloj se queda colgando de la muñeca. Ese es todo el invento, y por eso nació en un contexto militar: se perdía el reloj en el peor momento.</p>
-        <p>Trae dos efectos secundarios. El primero, que se cambia en segundos y sin herramientas, porque no hay que desmontar nada. El segundo, que la caja se apoya sobre una capa de nailon y el reloj se sube un par de milímetros en la muñeca.</p>
-      </dialog>
-      <dialog class="cur-ventana" id="cur-trinchera-veinticuatro" aria-labelledby="t-cur-trinchera-veinticuatro">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 02 de 2</p>
-        <h2 id="t-cur-trinchera-veinticuatro">El anillo pequeño de dentro no es decoración</h2>
-        <p>Los números grandes son las horas de siempre. El anillo interior, con cifras del 13 al 24, es el horario militar: donde la aguja marca las 8 pone también 20.</p>
-        <p>La razón es que en una orden escrita «a las ocho» es ambiguo y en una operación nocturna esa ambigüedad se paga. Por eso los ejércitos hablan de las 20:00, y el reloj lo lleva impreso para no tener que hacer la cuenta.</p>
-        <p>Fuera del cuartel sigue siendo útil para cualquiera que lea horarios de trenes, vuelos o turnos: son las mismas 24 horas, y aquí la conversión se hace sola.</p>
-      </dialog>
-      </section>
-
-      <article class="pdp-historia">
-        <p class="ph-antetitulo">La historia del original · Hamilton Khaki Field</p>
-        <h2>La fábrica que dejó de vender relojes<br><em>para poder fabricarlos.</em></h2>
-        <p class="ph-entradilla">En 1942 Hamilton cerró el grifo al público y dedicó toda su producción al ejército. De aquella decisión sale el reloj de campaña tal y como lo conocemos.</p>
-        <div class="ph-cuerpo">
-          <p>Hamilton llevaba desde 1892 haciendo relojes en Lancaster, Pensilvania, sobre todo para los ferrocarriles, donde un minuto de más costaba vidas. Cuando Estados Unidos entró en la Segunda Guerra Mundial, la compañía retiró sus relojes del mercado civil y puso las máquinas a producir para el ejército y la marina.</p>
-          <p>Aquellos relojes no se diseñaron para gustar. Se diseñaron para leerse: esfera negra mate que no devolviera un reflejo a un francotirador, números grandes del 1 al 12, un anillo interior con las horas del 13 al 24 y agujas con material luminiscente.</p>
-          <p>Años después el ejército puso por escrito lo que quería en una especificación, la MIL-W-46374, de 1964. Decía cosas como que el reloj tenía que ser barato y que, si se rompía, se tiraba. No había que repararlo. Aquella lista de mínimos acabó definiendo una categoría entera.</p>
-          <p>Hamilton es hoy una marca suiza y su Khaki Field desciende en línea directa de esos relojes de dotación. La forma no se ha movido porque el problema que resolvía tampoco.</p>
-        </div>
-        <ol class="ph-hitos">
-          <li><b>1892</b><span>Hamilton empieza en Lancaster, Pensilvania, haciendo relojes de ferrocarril.</span></li>
-          <li><b>1942</b><span>Retira sus relojes del mercado civil y produce solo para el ejército.</span></li>
-          <li><b>1964</b><span>La especificación MIL-W-46374 pone por escrito el reloj de campaña.</span></li>
-          <li><b>Hoy</b><span>El Khaki Field sigue con la misma esfera y la misma lógica.</span></li>
-        </ol>
-        <p class="ph-cierre">El nuestro no es aquel reloj. Toma su forma de leerse —números grandes, escala de 24 horas y nada que sobre— y la lleva a una caja de titanio.</p>
-        <p class="ph-aviso">Hamilton y Khaki Field son marcas registradas de sus titulares. laOra no está afiliada a Hamilton Watch Company: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Trinchera ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno.</p>
-      </article>
   </section>
+</div>
 
-  <section class="pdp-story">
-    <div>
-      <p class="section-number">01 — EL HOMENAJE</p>
-      <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
-    </div>
-    <div>
-      <p>Trinchera rinde homenaje al reloj que nació como herramienta. Conserva su lectura inmediata y su austeridad funcional, sin insignias militares ni logotipos ajenos.</p>
-      <p>La esfera lleva únicamente el nombre <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> y el del modelo. No utilizamos marcas, coronas, escudos ni emblemas de terceros.</p>
-    </div>
-  </section>
-
-  <section class="exploded-section">
-    <div class="exploded-media"><img src="/assets/img/relojes-2026/trinchera-profile.webp" alt="Detalle constructivo de Trinchera" loading="lazy"></div>
-    <div class="exploded-copy">
-      <p class="section-number">02 — LO QUE RECIBES</p>
-      <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
-      <ol>
-        <li><span>01</span><div><b>Caja</b><p>Titanio</p></div></li>
-        <li><span>02</span><div><b>Correa</b><p>NATO de nailon</p></div></li>
-        <li><span>03</span><div><b>Cristal</b><p>Zafiro con antirreflejos</p></div></li>
-        <li><span>04</span><div><b>Estanqueidad</b><p>200 m</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="pdp-service">
-    <div>
-      <p class="kicker light">Taller <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · Madrid</p>
-      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-    </div>
-    <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>
-    <a class="text-link light" href="/taller.html">Conocer el taller →</a>
-  </section>
-
-  <section class="final-cta">
-    <p class="kicker">Sigue por la colección</p>
-    <h2>Antes: Precisa.<br><em>Después: Bitácora.</em></h2>
-    <div class="button-row">
-      <a class="button primary" href="/bitacora.html">Ver Bitácora</a>
-      <a class="text-link" href="/coleccion.html">Volver a la colección</a>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
-  <div class="pie-links">
-    <a href="/coleccion.html">Relojes</a>
-    <a href="/filosofia.html">Nuestra forma de hacer</a>
-    <a href="/taller.html">Taller</a>
-    <a href="/club.html">Club laOra</a>
-    <a href="/privacidad.html">Privacidad</a>
-  </div>
-  <p class="pie-aviso">
-    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
-    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
-    no implican afiliación con sus fabricantes.
-  </p>
-
-  <!-- Rejilla del Grupo Saneas, la misma que el resto del sitio -->
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-
-  <small>© 2026 laOra® · Todos los derechos reservados</small>
+<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
+<footer class="cfg-barra">
+  <span class="lado">
+    <span class="eleccion" data-eleccion>Alba · NATO verde militar</span>
+    <span class="ref">Ref. <span data-ref>—</span></span>
+  </span>
+  <span class="cfg-precio">
+    <strong data-precio>169,90 €</strong>
+    <span>Impuestos incluidos</span>
+  </span>
+  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
 </footer>
-<script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=14"></script>
-<script src="/assets/js/telemetria.js" defer></script>
+
+<!-- LA FICHA TÉCNICA COMPLETA
+     Se monta al pulsar y se tira al cerrar, como el overlay del
+     material aprobado: mientras no está abierta, no existe en la
+     página. No cambia la dirección ni mueve la pantalla de debajo.
+
+     Los datos NO van escritos: los rellena `configurador.js` con la
+     combinación que haya elegida en ese momento. Si fueran fijos, quien
+     configurase el Cenit leería la ficha del acabado de partida. -->
+<template data-plantilla-ficha>
+  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
+    <div class="cfg-overlay-caja">
+      <header class="cfg-overlay-cab">
+        <div>
+          <p>LO—05 · FICHA TÉCNICA COMPLETA</p>
+          <h2 id="cfg-ficha-titulo">Todo el Trinchera.<br><em>Dato a dato.</em></h2>
+        </div>
+        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
+        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
+      </header>
+      <div class="cfg-overlay-grupos" data-grupos></div>
+      <footer class="cfg-overlay-pie">
+        <p data-overlay-resumen></p>
+        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
+      </footer>
+    </div>
+  </div>
+</template>
+
+<script type="application/json" data-cfg>{"modelo": "Trinchera", "inicial": {"acabado": "alba", "correa": 0}, "precios": {"alba": [169.9, 169.9], "cenit": [209.9, 209.9], "cenit-nh38": [269.9, 269.9], "eclipse": [169.9, 169.9], "eclipse-suizo": [209.9, 209.9], "eclipse-nh38": [269.9, 269.9]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "Movimiento japonés de cuarzo (Seiko)", "resumen": "El segundero de barrido del cuarzo, sin el tictac. Titanio en mate, que no da reflejos.", "refs": ["LO-05_Trinchera_A01", "LO-05_Trinchera_A02"], "fotos": ["/assets/img/catalogo/LO-05_Trinchera_A01.webp", "/assets/img/catalogo/LO-05_Trinchera_A01.webp"], "foto": "/assets/img/catalogo/LO-05_Trinchera_A01.webp", "ficha": [["Movimiento", "Seiko/TMI VH31, cuarzo de barrido"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Titanio cepillado, en mate"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko/TMI VH31, cuarzo de barrido"], ["TIPO", "Cuarzo de barrido, sin fecha"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "Pila de unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Titanio cepillado, en mate"], ["DIÁMETRO", "39 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "No lleva: la caja es lisa, como la de un reloj de campaña"], ["GROSOR", "unos 12 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "De campaña: números del 1 al 12 y escala de 24 horas por dentro"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Cerrado macizo de titanio"], ["CORONA", "Roscada"], ["PESO", "unos 55 g con la correa"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit ST2130", "descriptor": "Automático arquitectura suiza", "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824, en titanio mate.", "refs": ["LO-05_Trinchera_C01-ST2130", "LO-05_Trinchera_C02-ST2130"], "fotos": ["/assets/img/catalogo/LO-05_Trinchera_C01.webp", "/assets/img/catalogo/LO-05_Trinchera_C01.webp"], "foto": "/assets/img/catalogo/LO-05_Trinchera_C01.webp", "ficha": [["Movimiento", "ST2130, automático de arquitectura suiza"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Titanio cepillado, en mate"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "ST2130, automático de arquitectura suiza"], ["TIPO", "Automático sin fecha, arquitectura ETA 2824"], ["FRECUENCIA", "28.800 alternancias/hora (4 Hz)"], ["AUTONOMÍA", "Unas 38 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Titanio cepillado, en mate"], ["DIÁMETRO", "39 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "No lleva: la caja es lisa, como la de un reloj de campaña"], ["GROSOR", "unos 12 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "De campaña: números del 1 al 12 y escala de 24 horas por dentro"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Cerrado macizo de titanio"], ["CORONA", "Roscada"], ["PESO", "unos 58 g con la correa"]]}]}, "cenit-nh38": {"nombre": "Cenit", "etiqueta": "Cenit Seiko NH38A", "descriptor": "Movimiento japonés automático (Seiko)", "resumen": "El automático japonés de referencia, sin ventanilla de fecha: la esfera se queda limpia.", "refs": ["LO-05_Trinchera_C03-NH38", "LO-05_Trinchera_C04-NH38"], "fotos": ["/assets/img/catalogo/LO-05_Trinchera_C01.webp", "/assets/img/catalogo/LO-05_Trinchera_C01.webp"], "foto": "/assets/img/catalogo/LO-05_Trinchera_C01.webp", "ficha": [["Movimiento", "Seiko NH38A, automático japonés"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Titanio cepillado, en mate"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko NH38A, automático japonés"], ["TIPO", "Automático sin fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 41 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Titanio cepillado, en mate"], ["DIÁMETRO", "39 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "No lleva: la caja es lisa, como la de un reloj de campaña"], ["GROSOR", "unos 12 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "De campaña: números del 1 al 12 y escala de 24 horas por dentro"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Cerrado macizo de titanio"], ["CORONA", "Roscada"], ["PESO", "unos 58 g con la correa"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse Seiko/TMI VH31", "descriptor": "Movimiento japonés de cuarzo (Seiko)", "resumen": "El segundero de barrido del cuarzo, sin el tictac. Aquí sobre el titanio en negro.", "refs": ["LO-05_Trinchera_E01-VH31", "LO-05_Trinchera_E02-VH31"], "fotos": ["/assets/img/catalogo/LO-05_Trinchera_E01.webp", "/assets/img/catalogo/LO-05_Trinchera_E01.webp"], "foto": "/assets/img/catalogo/LO-05_Trinchera_E01.webp", "ficha": [["Movimiento", "Seiko/TMI VH31, cuarzo de barrido"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Titanio con revestimiento negro"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko/TMI VH31, cuarzo de barrido"], ["TIPO", "Cuarzo de barrido, sin fecha"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "Pila de unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Titanio con revestimiento negro"], ["DIÁMETRO", "39 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "No lleva: la caja es lisa, como la de un reloj de campaña"], ["GROSOR", "unos 12 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "De campaña: números del 1 al 12 y escala de 24 horas por dentro"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Cerrado macizo de titanio"], ["CORONA", "Roscada"], ["PESO", "unos 55 g con la correa"]]}]}, "eclipse-suizo": {"nombre": "Eclipse", "etiqueta": "Eclipse ST2130", "descriptor": "Automático arquitectura suiza", "resumen": "Automático de alta frecuencia sobre la arquitectura suiza del ETA 2824, en titanio negro.", "refs": ["LO-05_Trinchera_E03-ST2130", "LO-05_Trinchera_E04-ST2130"], "fotos": ["/assets/img/catalogo/LO-05_Trinchera_E01.webp", "/assets/img/catalogo/LO-05_Trinchera_E01.webp"], "foto": "/assets/img/catalogo/LO-05_Trinchera_E01.webp", "ficha": [["Movimiento", "ST2130, automático de arquitectura suiza"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Titanio con revestimiento negro"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "ST2130, automático de arquitectura suiza"], ["TIPO", "Automático sin fecha, arquitectura ETA 2824"], ["FRECUENCIA", "28.800 alternancias/hora (4 Hz)"], ["AUTONOMÍA", "Unas 38 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Titanio con revestimiento negro"], ["DIÁMETRO", "39 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "No lleva: la caja es lisa, como la de un reloj de campaña"], ["GROSOR", "unos 12 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "De campaña: números del 1 al 12 y escala de 24 horas por dentro"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Cerrado macizo de titanio"], ["CORONA", "Roscada"], ["PESO", "unos 58 g con la correa"]]}]}, "eclipse-nh38": {"nombre": "Eclipse", "etiqueta": "Eclipse Seiko NH38A", "descriptor": "Movimiento japonés automático (Seiko)", "resumen": "El automático japonés de referencia, sin ventanilla de fecha: la esfera se queda limpia.", "refs": ["LO-05_Trinchera_E05-NH38", "LO-05_Trinchera_E06-NH38"], "fotos": ["/assets/img/catalogo/LO-05_Trinchera_E01.webp", "/assets/img/catalogo/LO-05_Trinchera_E01.webp"], "foto": "/assets/img/catalogo/LO-05_Trinchera_E01.webp", "ficha": [["Movimiento", "Seiko NH38A, automático japonés"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Titanio con revestimiento negro"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko NH38A, automático japonés"], ["TIPO", "Automático sin fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 41 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Titanio con revestimiento negro"], ["DIÁMETRO", "39 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "No lleva: la caja es lisa, como la de un reloj de campaña"], ["GROSOR", "unos 12 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "De campaña: números del 1 al 12 y escala de 24 horas por dentro"], ["LUMINISCENCIA", "En agujas e índices"], ["FONDO", "Cerrado macizo de titanio"], ["CORONA", "Roscada"], ["PESO", "unos 58 g con la correa"]]}]}}, "correas": [{"id": "verde", "nombre": "NATO verde militar", "detalle": "Nailon tejido, 20 mm, hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#5a6340 0%,#3f4630 55%,#2e331f 100%)"}, {"id": "negra", "nombre": "NATO negra", "detalle": "Nailon tejido, 20 mm, hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#2c2d2e 0%,#1a1b1c 55%,#0f1010 100%)"}]}</script>
+<script src="/assets/js/carrito.js?v=1"></script>
+<script src="/assets/js/configurador.js?v=6"></script>
 </body>
 </html>

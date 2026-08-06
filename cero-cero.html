@@ -2,264 +2,140 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.">
-<meta property="og:title" content="Cero Cero · laOra">
-<meta property="og:description" content="Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.">
-<meta property="og:url" content="https://laora.es/cero-cero.html">
-<meta property="og:image" content="https://laora.es/assets/img/relojes-2026/cero-cero-hero.webp">
-<meta property="og:locale" content="es_ES">
-<meta property="og:type" content="website">
-<title>Cero Cero · laOra</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Configura tu Cero Cero de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 199,90 €.">
+<meta name="theme-color" content="#151715">
+<title>Configura tu Cero Cero · laOra</title>
+<link rel="canonical" href="https://laora.es/cero-cero">
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
-<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
-     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar.py — no editar a mano.
-     Los textos se cambian ahí; los datos de relojes, en
-     assets/datos/catalogo.json. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=34">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
+<link rel="stylesheet" href="/assets/css/configurador.css?v=21">
 </head>
-<body>
-<header class="cb cb-claro">
-  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu" aria-label="Navegación principal">
-    <a href="/coleccion.html" class="activo">relojes</a>
-    <a href="/filosofia.html">nuestra forma de hacer</a>
-    <a href="/taller.html">taller y servicio</a>
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
-         un span sin texto, así que un lector de pantalla leería «club lara»:
-         de ahí el aria-label. -->
-    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
-  </nav>
+<body class="cfg-muchos">
+
+<header class="cfg-cab">
+  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
+       sin él sería un callejón sin salida. No se le añade un menú porque
+       aquí solo se hace una cosa, que es elegir el reloj. -->
+  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Cero Cero</b></a>
+  <span class="ref">Ref. <span data-ref>—</span></span>
+  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
+       cuatro palabras al lado del logotipo sin montarse encima de la
+       referencia, y recortar con puntos suspensivos deja un enlace que
+       no se entiende. -->
+  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
 </header>
 
-<main id="inicio">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "laOra Cero Cero", "sku": "LO—02", "brand": {"@type": "Brand", "name": "laOra"}, "description": "Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.", "image": ["https://laora.es/assets/img/relojes-2026/cero-cero-hero.webp", "https://laora.es/assets/img/relojes-2026/cero-cero-profile.webp", "https://laora.es/assets/img/relojes-2026/cero-cero-back.webp"]}</script>
+<div class="cfg-cuerpo">
 
-  <section class="pdp-hero">
-    <div class="pdp-gallery">
-      <div class="pdp-main-image">
-        <img src="/assets/img/relojes-2026/cero-cero-hero.webp" alt="Cero Cero, vista seleccionada" data-foto-grande fetchpriority="high">
+  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
+  <section class="cfg-visor" aria-label="El reloj que estás configurando">
+    <img class="cfg-foto" data-foto
+         src="/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp"
+         alt="Reloj laOra Cero Cero, acabado Eclipse, con brazalete de acero"
+         fetchpriority="high">
+    <div class="cfg-muestra" aria-hidden="true">
+      <span class="tira" data-muestra-tira style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span>
+      <span data-muestra-nombre>Brazalete de acero</span>
+    </div>
+    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
+         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
+         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
+         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
+         segunda caía encima de la referencia: dos textos superpuestos,
+         ilegibles los dos. Así el segundo siempre baja. -->
+    <div class="cfg-rotulos">
+      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Eclipse</b> · Brazalete de acero</p>
+      <!-- La referencia también aquí: en el teléfono no cabe en la
+           cabecera, y es el dato con el que Óscar busca en la hoja. -->
+      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
+    </div>
+  </section>
+
+  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
+  <section class="cfg-panel" aria-label="Opciones del Cero Cero">
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Acabado <b>8 opciones</b></p>
+      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
+        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 209,90 €</small></button>
+        <button type="button" data-acabado="levante" aria-pressed="false"><b>Levante</b><small>desde 239,90 €</small></button>
+        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><i>ST2130</i><small>desde 249,90 €</small></button>
+        <button type="button" data-acabado="cenit-nh38" aria-pressed="false"><b>Cenit</b><i>Seiko NH38</i><small>desde 319,90 €</small></button>
+        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><i>Seiko/TMI VH31</i><small>desde 199,90 €</small></button>
+        <button type="button" data-acabado="eclipse-citizen" aria-pressed="false"><b>Eclipse</b><i>Miyota 8215</i><small>desde 239,90 €</small></button>
+        <button type="button" data-acabado="eclipse-suizo" aria-pressed="false"><b>Eclipse</b><i>ST2130</i><small>desde 249,90 €</small></button>
+        <button type="button" data-acabado="eclipse-seiko" aria-pressed="false"><b>Eclipse</b><i>Seiko NH38</i><small>desde 299,90 €</small></button>
       </div>
-      <div class="pdp-thumbs" role="group" aria-label="Vistas del producto">
-          <button type="button" data-mini="/assets/img/relojes-2026/cero-cero-hero.webp" class="active" aria-label="Ver imagen 1 de Cero Cero"><img src="/assets/img/relojes-2026/cero-cero-hero.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/cero-cero-profile.webp" aria-label="Ver imagen 2 de Cero Cero"><img src="/assets/img/relojes-2026/cero-cero-profile.webp" alt=""></button>
-          <button type="button" data-mini="/assets/img/relojes-2026/cero-cero-back.webp" aria-label="Ver imagen 3 de Cero Cero"><img src="/assets/img/relojes-2026/cero-cero-back.webp" alt=""></button>
+      <p class="cfg-nota" data-nota>Todo en negro, con el cuarzo japonés de segundero de barrido.</p>
+    </div>
+
+    <div class="cfg-grupo">
+      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>3 opciones</b></b></p>
+      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
+           era siempre de cuatro, así que con tres correas quedaba una
+           columna vacía y los tres nombres partidos en dos líneas por
+           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
+      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa" style="--correas:3">
+        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span>Brazalete de acero</span></button>
+        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"></span><span>Malla milanesa</span></button>
+        <button type="button" data-correa="2" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#1d1e1f 0%,#1d1e1f 34%,#c2611d 34%,#c2611d 50%,#1d1e1f 50%,#1d1e1f 100%)"></span><span>NATO negra y naranja</span></button>
       </div>
     </div>
-    <div class="pdp-buy">
-      <p class="kicker">LO—02 · Buceo</p>
-      <h1>Cero Cero</h1>
-      <p class="pdp-homage">Homenaje al buceador profesional contemporáneo</p>
-      <p class="pdp-description">Un buceador rotundo con lectura de alto contraste y un acento naranja que lo hace suyo.</p>
-      <div class="config">
-        <p class="config-titulo" id="cfg-acabado">Elige acabado</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-acabado" data-grupo="acabado">
-          <button type="button" role="tab" data-acabado="alba" aria-selected="false" tabindex="-1"><span>Alba</span><small>Movimiento japonés de cuarzo (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="levante" aria-selected="false" tabindex="-1"><span>Levante</span><small>Movimiento japonés automático (Citizen)</small></button>
-          <button type="button" role="tab" data-acabado="cenit" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Automático arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="cenit-nh38" aria-selected="false" tabindex="-1"><span>Cenit</span><small>Movimiento japonés automático (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="eclipse" class="op-eclipse" aria-selected="true"><span>Eclipse</span><small>Movimiento japonés de cuarzo (Seiko)</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-citizen" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento japonés automático (Citizen)</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-suizo" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Automático arquitectura suiza</small></button>
-          <button type="button" role="tab" data-acabado="eclipse-seiko" class="op-eclipse" aria-selected="false" tabindex="-1"><span>Eclipse</span><small>Movimiento japonés automático (Seiko)</small></button>
-        </div>
-        <p class="config-nota" data-resumen-acabado>Todo en negro, con el cuarzo japonés de segundero de barrido.</p>
 
-        <div class="pdp-price">
-          <strong data-precio>199,90 €</strong>
-          <span>Impuestos incluidos</span>
-        </div>
-        <p class="config-titulo" id="cfg-correa">Elige brazalete o correa</p>
-        <div class="config-opciones" role="tablist" aria-labelledby="cfg-correa" data-grupo="correa">
-          <button type="button" role="tab" data-correa="oyster" aria-selected="true"><span>Brazalete de acero</span><small>316L · eslabones Oyster · broche plegable con seguridad</small></button>
-          <button type="button" role="tab" data-correa="milanesa" aria-selected="false" tabindex="-1"><span>Malla milanesa</span><small>Acero satinado · broche de ajuste continuo</small></button>
-          <button type="button" role="tab" data-correa="nato" aria-selected="false" tabindex="-1"><span>NATO negra y naranja</span><small>Nailon tejido · hebilla de acero</small></button>
-        </div>
-      </div>
-
-      <!-- EL BOTÓN DE RESERVA ESTÁ ESPERANDO A SU PÁGINA.
-           Óscar eligió recuperar el sistema de reserva con señal (03/08/2026),
-           pero `reservar.html` todavía no está rehecha con el diseño nuevo:
-           las de la web anterior usaban hojas que ya no existen. Hasta
-           entonces NO se pinta, para no dejar un botón que lleve a un 404.
-
-           Cuando exista, se descomenta esto y ya funciona: `ficha.js` le
-           escribe la referencia, el acabado y la correa elegidos en la URL.
-      <a class="button primary full" href="/reservar.html" data-reservar>Reservar este Cero Cero</a>
-           -->
-      <p class="config-ref">Referencia <b data-ref>—</b></p>
-      <script type="application/json" data-configurador>{"acabados": [{"id": "alba", "nombre": "Alba", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "El escalón de entrada, y sin renuncias donde importa: cuarzo japonés de segundero de barrido, caja de acero 316L y el mismo bisel de buceo de 120 clics.", "refSufijo": "", "peso": "unos 150 g con brazalete", "correas": ["oyster"], "descriptor": "Movimiento japonés de cuarzo (Seiko)", "movimiento": "Seiko/TMI VH31, cuarzo de barrido", "movimientoTipo": "Cuarzo de barrido, sin fecha", "frecuencia": "32.768 Hz", "autonomia": "Pila de unos 3 años", "estanqueidad": "100 m (10 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de aluminio", "cristal": "Mineral endurecido (Hardlex)", "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"}, {"id": "levante", "nombre": "Levante", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "Un peldaño por encima: automático japonés de Citizen, con fecha, y cristal de zafiro. El único que se puede llevar de tres maneras.", "refSufijo": "", "peso": "de unos 75 g con la NATO a unos 150 g con brazalete", "descriptor": "Movimiento japonés automático (Citizen)", "movimiento": "Miyota 8215, automático japonés de Citizen", "movimientoTipo": "Automático con fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 40 horas de reserva de marcha", "estanqueidad": "100 m (10 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica", "cristal": "Zafiro plano", "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"}, {"id": "cenit", "nombre": "Cenit", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "El techo de este reloj: 200 metros, zafiro con antirreflejos y el automático de alta frecuencia sobre la arquitectura suiza del ETA 2824.", "refSufijo": "-ST2130", "peso": "unos 160 g con brazalete", "correas": ["oyster"], "descriptor": "Automático arquitectura suiza", "movimiento": "ST2130, automático de arquitectura suiza", "movimientoTipo": "Automático con fecha, arquitectura ETA 2824", "frecuencia": "28.800 alternancias/hora (4 Hz)", "autonomia": "Unas 38 horas de reserva de marcha", "estanqueidad": "200 m (20 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica", "cristal": "Zafiro plano con tratamiento antirreflejos interior", "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"}, {"id": "cenit-nh38", "nombre": "Cenit", "cajaMaterial": "Acero inoxidable 316L, pulido y satinado", "resumen": "Los mismos 200 metros y el mismo zafiro, con el automático japonés de Seiko y la esfera limpia, sin ventanilla de fecha.", "refSufijo": "-NH38", "peso": "unos 160 g con brazalete", "correas": ["oyster"], "descriptor": "Movimiento japonés automático (Seiko)", "movimiento": "Seiko NH38, automático japonés", "movimientoTipo": "Automático sin fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 41 horas de reserva de marcha", "estanqueidad": "200 m (20 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica", "cristal": "Zafiro plano con tratamiento antirreflejos interior", "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"}, {"id": "eclipse", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "Todo en negro, con el cuarzo japonés de segundero de barrido.", "refSufijo": "-VH31", "peso": "unos 150 g con brazalete", "correas": ["oyster"], "descriptor": "Movimiento japonés de cuarzo (Seiko)", "movimiento": "Seiko/TMI VH31, cuarzo de barrido", "movimientoTipo": "Cuarzo de barrido, sin fecha", "frecuencia": "32.768 Hz", "autonomia": "Pila de unos 3 años", "estanqueidad": "100 m (10 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de aluminio", "cristal": "Mineral endurecido (Hardlex)", "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"}, {"id": "eclipse-citizen", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "Todo en negro, con el automático de Citizen y fecha.", "refSufijo": "-8215", "peso": "unos 150 g con brazalete", "correas": ["oyster"], "descriptor": "Movimiento japonés automático (Citizen)", "movimiento": "Miyota 8215, automático japonés de Citizen", "movimientoTipo": "Automático con fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 40 horas de reserva de marcha", "estanqueidad": "100 m (10 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica", "cristal": "Zafiro plano", "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"}, {"id": "eclipse-suizo", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "Todo en negro, con los 200 metros y la arquitectura suiza del ETA 2824.", "refSufijo": "-ST2130", "peso": "unos 160 g con brazalete", "correas": ["oyster"], "descriptor": "Automático arquitectura suiza", "movimiento": "ST2130, automático de arquitectura suiza", "movimientoTipo": "Automático con fecha, arquitectura ETA 2824", "frecuencia": "28.800 alternancias/hora (4 Hz)", "autonomia": "Unas 38 horas de reserva de marcha", "estanqueidad": "200 m (20 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica", "cristal": "Zafiro plano con tratamiento antirreflejos interior", "esfera": "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"}, {"id": "eclipse-seiko", "nombre": "Eclipse", "cajaMaterial": "Acero inoxidable 316L en negro", "resumen": "Todo en negro, con los 200 metros y el automático de Seiko, sin fecha.", "refSufijo": "-NH38", "peso": "unos 160 g con brazalete", "correas": ["oyster"], "descriptor": "Movimiento japonés automático (Seiko)", "movimiento": "Seiko NH38, automático japonés", "movimientoTipo": "Automático sin fecha", "frecuencia": "21.600 alternancias/hora (3 Hz)", "autonomia": "Unas 41 horas de reserva de marcha", "estanqueidad": "200 m (20 ATM)", "bisel": "Giratorio unidireccional de 120 clics, inserto de cerámica", "cristal": "Zafiro plano con tratamiento antirreflejos interior", "esfera": "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"}], "correas": [{"id": "oyster", "nombre": "Brazalete de acero", "detalle": "316L · eslabones Oyster · broche plegable con seguridad"}, {"id": "milanesa", "nombre": "Malla milanesa", "detalle": "Acero satinado · broche de ajuste continuo"}, {"id": "nato", "nombre": "NATO negra y naranja", "detalle": "Nailon tejido · hebilla de acero"}], "precios": {"alba": [209.9, null, null], "levante": [239.9, 239.9, 239.9], "cenit": [249.9, null, null], "cenit-nh38": [319.9, null, null], "eclipse": [199.9, null, null], "eclipse-citizen": [239.9, null, null], "eclipse-suizo": [249.9, null, null], "eclipse-seiko": [299.9, null, null]}, "codigo": "LO—02", "modelo": "Cero Cero"}</script>
-      <dl class="live-specs">
-        <div><dt>Movimiento</dt><dd data-spec="movimiento">Seiko/TMI VH31, cuarzo de barrido</dd></div>
-        <div><dt>Tipo</dt><dd data-spec="movimientoTipo">Cuarzo de barrido, sin fecha</dd></div>
-        <div><dt>Frecuencia</dt><dd data-spec="frecuencia">32.768 Hz</dd></div>
-        <div><dt>Autonomía</dt><dd data-spec="autonomia">Pila de unos 3 años</dd></div>
-        <div><dt>Cristal</dt><dd data-spec="cristal">Mineral endurecido (Hardlex)</dd></div>
-        <div><dt>Estanqueidad</dt><dd data-spec="estanqueidad">100 m (10 ATM)</dd></div>
-        <div><dt>Bisel</dt><dd data-spec="bisel">Giratorio unidireccional de 120 clics, inserto de aluminio</dd></div>
-        <div><dt>Esfera</dt><dd data-spec="esfera">Negra con patrón de ondas, índices redondos aplicados y acentos naranja</dd></div>
-        <div><dt>Diámetro</dt><dd>41 mm</dd></div>
-        <div><dt>Grosor</dt><dd>unos 13 mm</dd></div>
-        <div><dt>Caja</dt><dd>Acero inoxidable 316L</dd></div>
-        <div><dt>Luminiscencia</dt><dd>Super-LumiNova en agujas e índices</dd></div>
-        <div><dt>Ancho de asa</dt><dd>20 mm</dd></div>
-        <div><dt>Fondo</dt><dd>Roscado macizo</dd></div>
-        <div><dt>Corona</dt><dd>Roscada, con protector</dd></div>
-        <div><dt>Peso</dt><dd data-spec="peso">unos 150 g con brazalete</dd></div>
-        <div><dt>Referencia</dt><dd>LO—02</dd></div>
-      </dl>
-      <p class="buy-note">Montado, ajustado y probado en Madrid antes de cada envío.</p>
+    <div class="cfg-nota">
+      <dl data-ficha></dl>
     </div>
 
-      <section class="curiosidades" aria-labelledby="rot-cero-cero">
-        <p class="cur-rotulo" id="rot-cero-cero">2 curiosidades</p>
-        <div class="cur-botones">
-          <button type="button" data-abre="cur-cero-cero-bisel">
-            <span class="cur-num">01</span>
-            <span class="cur-titulo">El bisel solo gira hacia un lado, y es por seguridad</span>
-            <span class="cur-gancho">Por qué no puede girar en los dos sentidos</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-          <button type="button" data-abre="cur-cero-cero-metros">
-            <span class="cur-num">02</span>
-            <span class="cur-titulo">Los metros de un reloj no son metros de buceo</span>
-            <span class="cur-gancho">Qué mide de verdad un «200 m»</span>
-            <span class="cur-mas" aria-hidden="true">Leer</span>
-          </button>
-        </div>
-      <dialog class="cur-ventana" id="cur-cero-cero-bisel" aria-labelledby="t-cur-cero-cero-bisel">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 01 de 2</p>
-        <h2 id="t-cur-cero-cero-bisel">El bisel solo gira hacia un lado, y es por seguridad</h2>
-        <p>Al entrar en el agua pones el triángulo del bisel frente al minutero, y a partir de ahí el minutero te va diciendo solo cuánto tiempo llevas dentro. Es la cuenta atrás más sencilla que existe: no hay nada que arrancar ni que parar.</p>
-        <p>La gracia está en que gira en un sentido y en el otro no. Si el bisel se mueve por un roce con el traje o con la escalera, la lectura siempre dirá que llevas más tiempo del real, nunca menos. El error solo puede jugar a favor: te saca antes de tiempo, no después.</p>
-        <p>Por eso la norma internacional de relojes de buceo lo exige así, y por eso va por clics en vez de girar libre. El nuestro tiene 120: medio minuto por clic.</p>
-      </dialog>
-      <dialog class="cur-ventana" id="cur-cero-cero-metros" aria-labelledby="t-cur-cero-cero-metros">
-        <button type="button" class="cur-cerrar" data-cierra aria-label="Cerrar">&times;</button>
-        <p class="cur-orden">Curiosidad 02 de 2</p>
-        <h2 id="t-cur-cero-cero-metros">Los metros de un reloj no son metros de buceo</h2>
-        <p>La cifra sale de una prueba de presión hecha en agua quieta, en un laboratorio, no de una inmersión. De ahí que un reloj de 30 metros no sea un reloj para nadar, aunque el número diga treinta.</p>
-        <p>La norma de relojes de buceo, la ISO 6425, aprieta bastante más: obliga a probar cada unidad —no una muestra del lote— a un 25 % por encima de la cifra que lleva escrita. Un 200 metros se comprueba a 250.</p>
-        <p>Y hay un tercer factor que no aparece en ninguna esfera: al nadar, el agua golpea contra la caja y la presión sube por encima de la que corresponde a esa profundidad. El número grande no es un permiso para bajar hasta ahí; es el margen que separa el reloj de una filtración.</p>
-      </dialog>
-      </section>
-
-      <article class="pdp-historia">
-        <p class="ph-antetitulo">La historia del original · Omega Seamaster Diver 300M</p>
-        <h2>Una junta de submarino, una válvula<br><em>y un botón que nunca detonó nada.</em></h2>
-        <p class="ph-entradilla">El Seamaster no empezó siendo un reloj de buceo, sino un reloj de diario que aguantaba el agua. Lo demás —los 300 metros, la válvula, el cine— vino después.</p>
-        <div class="ph-cuerpo">
-          <p>En 1948 Omega presentó el primer Seamaster, hecho a partir de los relojes que había fabricado para la Marina británica al final de la Segunda Guerra Mundial. Lo importante no se veía desde fuera: una junta tórica de goma, tomada de los submarinos, que sellaba la caja mucho mejor que lo que se usaba entonces y aguantaba los cambios de presión y de temperatura.</p>
-          <p>El reloj que hoy reconoce todo el mundo llegó en 1993: el Seamaster Professional Diver 300M, con la esfera de olas y el bisel giratorio. A las diez lleva lo que parece una segunda corona y no lo es. Es una válvula de escape de helio, y solo sirve para una cosa muy concreta que casi nadie hace.</p>
-          <p>Dos años después, en 1995, la diseñadora de vestuario Lindy Hemming lo eligió para el Bond de Pierce Brosnan en GoldenEye. Su razonamiento fue que un comandante de la Marina, buceador y discreto, llevaría exactamente ese reloj y no otro. En la película Bond usa un botón del reloj como detonador a distancia; en el reloj de verdad, ese botón es la válvula de helio.</p>
-          <p>En 2018, veinticinco años después del primero, Omega rehízo la colección entera. Las olas de la esfera dejaron de estar impresas y pasaron a ir grabadas con láser sobre cerámica.</p>
-        </div>
-        <ol class="ph-hitos">
-          <li><b>1948</b><span>Nace el Seamaster, a partir de los relojes que Omega hizo para la Marina británica.</span></li>
-          <li><b>1993</b><span>Llega el Diver 300M, con la esfera de olas y la válvula de helio a las diez.</span></li>
-          <li><b>1995</b><span>Bond lo lleva en GoldenEye y el reloj se hace conocido muy lejos del agua.</span></li>
-          <li><b>2018</b><span>La colección se rehace y las olas pasan a ir grabadas con láser sobre cerámica.</span></li>
-        </ol>
-        <p class="ph-cierre">El nuestro no es aquel reloj, ni lo pretende. Toma su gramática —bisel unidireccional, lectura de alto contraste, un solo acento de color— y la firma con nuestro nombre.</p>
-        <p class="ph-aviso">Omega, Seamaster y Diver 300M son marcas registradas de sus titulares, y James Bond y GoldenEye lo son de los suyos. laOra no está afiliada a Omega SA ni a los titulares de la saga: esta sección es divulgación sobre el reloj que inspira el homenaje, y ni el Cero Cero ni ninguna pieza de laOra lleva marca, emblema o logotipo ajeno.</p>
-      </article>
   </section>
+</div>
 
-  <section class="pdp-story">
-    <div>
-      <p class="section-number">01 — EL HOMENAJE</p>
-      <h2>Una referencia reconocible.<br><em>Una marca honesta.</em></h2>
-    </div>
-    <div>
-      <p>Cero Cero recoge el lenguaje del reloj de buceo profesional sin copiar una identidad ajena. Sus proporciones, su esfera y su firma laOra convierten la referencia en una pieza independiente.</p>
-      <p>La esfera lleva únicamente el nombre <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> y el del modelo. No utilizamos marcas, coronas, escudos ni emblemas de terceros.</p>
-    </div>
-  </section>
-
-  <section class="exploded-section">
-    <div class="exploded-media"><img src="/assets/img/relojes-2026/cero-cero-profile.webp" alt="Detalle constructivo de Cero Cero" loading="lazy"></div>
-    <div class="exploded-copy">
-      <p class="section-number">02 — LO QUE RECIBES</p>
-      <h2>Todo identificado.<br><em>Nada escondido.</em></h2>
-      <ol>
-        <li><span>01</span><div><b>Caja</b><p>Acero inoxidable 316L</p></div></li>
-        <li><span>02</span><div><b>Bisel</b><p>Giratorio de 120 clics</p></div></li>
-        <li><span>03</span><div><b>Esfera</b><p>Negra con patrón de ondas</p></div></li>
-        <li><span>04</span><div><b>Estanqueidad</b><p>Hasta 200 m</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="pdp-service">
-    <div>
-      <p class="kicker light">Taller <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · Madrid</p>
-      <h2>Antes de llegar a tu muñeca,<br><em>pasa por nuestras manos.</em></h2>
-    </div>
-    <ol><li>Recepción e inspección</li><li>Montaje</li><li>Ajuste</li><li>Pruebas</li><li>Control visual</li><li>Preparación y envío</li></ol>
-    <a class="text-link light" href="/taller.html">Conocer el taller →</a>
-  </section>
-
-  <section class="final-cta">
-    <p class="kicker">Sigue por la colección</p>
-    <h2>Antes: Lunar.<br><em>Después: Bauhaus.</em></h2>
-    <div class="button-row">
-      <a class="button primary" href="/bauhaus.html">Ver Bauhaus</a>
-      <a class="text-link" href="/coleccion.html">Volver a la colección</a>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <a class="cb-marca" href="#inicio" aria-label="laOra, volver arriba">la<span class="o"></span>ra<sup>®</sup></a>
-  <div class="pie-links">
-    <a href="/coleccion.html">Relojes</a>
-    <a href="/filosofia.html">Nuestra forma de hacer</a>
-    <a href="/taller.html">Taller</a>
-    <a href="/club.html">Club laOra</a>
-    <a href="/privacidad.html">Privacidad</a>
-  </div>
-  <p class="pie-aviso">
-    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
-    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
-    no implican afiliación con sus fabricantes.
-  </p>
-
-  <!-- Rejilla del Grupo Saneas, la misma que el resto del sitio -->
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-  </div>
-
-  <small>© 2026 laOra® · Todos los derechos reservados</small>
+<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
+<footer class="cfg-barra">
+  <span class="lado">
+    <span class="eleccion" data-eleccion>Eclipse · Brazalete de acero</span>
+    <span class="ref">Ref. <span data-ref>—</span></span>
+  </span>
+  <span class="cfg-precio">
+    <strong data-precio>199,90 €</strong>
+    <span>Impuestos incluidos</span>
+  </span>
+  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
 </footer>
-<script src="/assets/js/cabecera.js?v=3"></script>
-<script src="/assets/js/ficha.js?v=14"></script>
-<script src="/assets/js/telemetria.js" defer></script>
+
+<!-- LA FICHA TÉCNICA COMPLETA
+     Se monta al pulsar y se tira al cerrar, como el overlay del
+     material aprobado: mientras no está abierta, no existe en la
+     página. No cambia la dirección ni mueve la pantalla de debajo.
+
+     Los datos NO van escritos: los rellena `configurador.js` con la
+     combinación que haya elegida en ese momento. Si fueran fijos, quien
+     configurase el Cenit leería la ficha del acabado de partida. -->
+<template data-plantilla-ficha>
+  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
+    <div class="cfg-overlay-caja">
+      <header class="cfg-overlay-cab">
+        <div>
+          <p>LO—02 · FICHA TÉCNICA COMPLETA</p>
+          <h2 id="cfg-ficha-titulo">Todo el Cero Cero.<br><em>Dato a dato.</em></h2>
+        </div>
+        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
+        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
+      </header>
+      <div class="cfg-overlay-grupos" data-grupos></div>
+      <footer class="cfg-overlay-pie">
+        <p data-overlay-resumen></p>
+        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
+      </footer>
+    </div>
+  </div>
+</template>
+
+<script type="application/json" data-cfg>{"modelo": "Cero Cero", "inicial": {"acabado": "eclipse", "correa": 0}, "precios": {"alba": [209.9, null, null], "levante": [239.9, 239.9, 239.9], "cenit": [249.9, null, null], "cenit-nh38": [319.9, null, null], "eclipse": [199.9, null, null], "eclipse-citizen": [239.9, null, null], "eclipse-suizo": [249.9, null, null], "eclipse-seiko": [299.9, null, null]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "Movimiento japonés de cuarzo (Seiko)", "resumen": "El escalón de entrada, y sin renuncias donde importa: cuarzo japonés de segundero de barrido, caja de acero 316L y el mismo bisel de buceo de 120 clics.", "refs": ["LO-02_CeroCero_A01", "LO-02_CeroCero_A02", "LO-02_CeroCero_A03"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_A01.webp", "/assets/img/catalogo/LO-02_CeroCero_A01.webp", "/assets/img/catalogo/LO-02_CeroCero_A01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_A01.webp", "ficha": [["Movimiento", "Seiko/TMI VH31, cuarzo de barrido"], ["Cristal", "Mineral endurecido (Hardlex)"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko/TMI VH31, cuarzo de barrido"], ["TIPO", "Cuarzo de barrido, sin fecha"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "Pila de unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Mineral endurecido (Hardlex)"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de aluminio"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 150 g con brazalete"]]}]}, "levante": {"nombre": "Levante", "etiqueta": "Levante", "descriptor": "Movimiento japonés automático (Citizen)", "resumen": "Un peldaño por encima: automático japonés de Citizen, con fecha, y cristal de zafiro. El único que se puede llevar de tres maneras.", "refs": ["LO-02_CeroCero_L01", "LO-02_CeroCero_L02", "LO-02_CeroCero_L03"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_L01.webp", "/assets/img/catalogo/LO-02_CeroCero_L01.webp", "/assets/img/catalogo/LO-02_CeroCero_L01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_L01.webp", "ficha": [["Movimiento", "Miyota 8215, automático japonés de Citizen"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 8215, automático japonés de Citizen"], ["TIPO", "Automático con fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 40 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "de unos 75 g con la NATO a unos 150 g con brazalete"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit ST2130", "descriptor": "Automático arquitectura suiza", "resumen": "El techo de este reloj: 200 metros, zafiro con antirreflejos y el automático de alta frecuencia sobre la arquitectura suiza del ETA 2824.", "refs": ["LO-02_CeroCero_C01-ST2130", "LO-02_CeroCero_C02-ST2130", "LO-02_CeroCero_C03-ST2130"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "ficha": [["Movimiento", "ST2130, automático de arquitectura suiza"], ["Cristal", "Zafiro plano con tratamiento antirreflejos interior"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "ST2130, automático de arquitectura suiza"], ["TIPO", "Automático con fecha, arquitectura ETA 2824"], ["FRECUENCIA", "28.800 alternancias/hora (4 Hz)"], ["AUTONOMÍA", "Unas 38 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos interior"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 160 g con brazalete"]]}]}, "cenit-nh38": {"nombre": "Cenit", "etiqueta": "Cenit Seiko NH38", "descriptor": "Movimiento japonés automático (Seiko)", "resumen": "Los mismos 200 metros y el mismo zafiro, con el automático japonés de Seiko y la esfera limpia, sin ventanilla de fecha.", "refs": ["LO-02_CeroCero_C01-NH38", "LO-02_CeroCero_C02-NH38", "LO-02_CeroCero_C03-NH38"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "ficha": [["Movimiento", "Seiko NH38, automático japonés"], ["Cristal", "Zafiro plano con tratamiento antirreflejos interior"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko NH38, automático japonés"], ["TIPO", "Automático sin fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 41 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos interior"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 160 g con brazalete"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse Seiko/TMI VH31", "descriptor": "Movimiento japonés de cuarzo (Seiko)", "resumen": "Todo en negro, con el cuarzo japonés de segundero de barrido.", "refs": ["LO-02_CeroCero_E01-VH31", "LO-02_CeroCero_E02-VH31", "LO-02_CeroCero_E03-VH31"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "Seiko/TMI VH31, cuarzo de barrido"], ["Cristal", "Mineral endurecido (Hardlex)"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko/TMI VH31, cuarzo de barrido"], ["TIPO", "Cuarzo de barrido, sin fecha"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "Pila de unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Mineral endurecido (Hardlex)"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de aluminio"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 150 g con brazalete"]]}]}, "eclipse-citizen": {"nombre": "Eclipse", "etiqueta": "Eclipse Miyota 8215", "descriptor": "Movimiento japonés automático (Citizen)", "resumen": "Todo en negro, con el automático de Citizen y fecha.", "refs": ["LO-02_CeroCero_E01-8215", "LO-02_CeroCero_E02-8215", "LO-02_CeroCero_E03-8215"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "Miyota 8215, automático japonés de Citizen"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 8215, automático japonés de Citizen"], ["TIPO", "Automático con fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 40 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 150 g con brazalete"]]}]}, "eclipse-suizo": {"nombre": "Eclipse", "etiqueta": "Eclipse ST2130", "descriptor": "Automático arquitectura suiza", "resumen": "Todo en negro, con los 200 metros y la arquitectura suiza del ETA 2824.", "refs": ["LO-02_CeroCero_E01-ST2130", "LO-02_CeroCero_E02-ST2130", "LO-02_CeroCero_E03-ST2130"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "ST2130, automático de arquitectura suiza"], ["Cristal", "Zafiro plano con tratamiento antirreflejos interior"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "ST2130, automático de arquitectura suiza"], ["TIPO", "Automático con fecha, arquitectura ETA 2824"], ["FRECUENCIA", "28.800 alternancias/hora (4 Hz)"], ["AUTONOMÍA", "Unas 38 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos interior"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados, acentos naranja y fecha a las 3"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 160 g con brazalete"]]}]}, "eclipse-seiko": {"nombre": "Eclipse", "etiqueta": "Eclipse Seiko NH38", "descriptor": "Movimiento japonés automático (Seiko)", "resumen": "Todo en negro, con los 200 metros y el automático de Seiko, sin fecha.", "refs": ["LO-02_CeroCero_E01-NH38", "LO-02_CeroCero_E02-NH38", "LO-02_CeroCero_E03-NH38"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "Seiko NH38, automático japonés"], ["Cristal", "Zafiro plano con tratamiento antirreflejos interior"], ["Caja", "Acero inoxidable 316L en negro"], ["Estanqueidad", "200 m (20 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko NH38, automático japonés"], ["TIPO", "Automático sin fecha"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 41 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos interior"], ["CAJA", "Acero inoxidable 316L en negro"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "200 m (20 ATM)"], ["BISEL", "Giratorio unidireccional de 120 clics, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con patrón de ondas, índices redondos aplicados y acentos naranja"], ["LUMINISCENCIA", "Super-LumiNova en agujas e índices"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["CORONA", "Roscada, con protector"], ["PESO", "unos 160 g con brazalete"]]}]}}, "correas": [{"id": "oyster", "nombre": "Brazalete de acero", "detalle": "316L · eslabones Oyster · broche plegable con seguridad", "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}, {"id": "milanesa", "nombre": "Malla milanesa", "detalle": "Acero satinado · broche de ajuste continuo", "muestra": "repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"}, {"id": "nato", "nombre": "NATO negra y naranja", "detalle": "Nailon tejido · hebilla de acero", "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 3px,rgba(0,0,0,.07) 3px 6px),linear-gradient(150deg,#1d1e1f 0%,#1d1e1f 34%,#c2611d 34%,#c2611d 50%,#1d1e1f 50%,#1d1e1f 100%)"}]}</script>
+<script src="/assets/js/carrito.js?v=1"></script>
+<script src="/assets/js/configurador.js?v=6"></script>
 </body>
 </html>

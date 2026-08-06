@@ -104,14 +104,14 @@
       siguiente.onerror = function () { elFoto.classList.remove('cambiando'); };
       siguiente.src = nueva;
     }
-    if (elFoto) elFoto.alt = 'Reloj laOra ' + D.modelo + ', acabado ' + a.nombre + ', con ' + c.nombre.toLowerCase();
+    if (elFoto) elFoto.alt = 'Reloj laOra ' + D.modelo + ', acabado ' + a.etiqueta + ', con ' + c.nombre.toLowerCase();
 
-    if (elViendo) elViendo.innerHTML = '<b>' + a.nombre + '</b> · ' + c.nombre;
+    if (elViendo) elViendo.innerHTML = '<b>' + a.etiqueta + '</b> · ' + c.nombre;
     if (elTira) elTira.setAttribute('style', 'background:' + c.muestra);
     if (elTiraNombre) elTiraNombre.textContent = c.nombre;
 
     if (elPrecio) elPrecio.textContent = p === null ? '—' : euros(p);
-    if (elEleccion) elEleccion.textContent = a.nombre + ' · ' + c.nombre;
+    if (elEleccion) elEleccion.textContent = a.etiqueta + ' · ' + c.nombre;
     for (var i = 0; i < elRefs.length; i++) elRefs[i].textContent = referencia();
     if (elNota) elNota.textContent = a.resumen || '';
 
@@ -148,7 +148,7 @@
       botonesCorrea[k].setAttribute('aria-pressed', String(idx === correa));
       botonesCorrea[k].title = disponible
         ? D.correas[idx].nombre + ' · ' + euros(precio(acabado, idx))
-        : D.correas[idx].nombre + ' — no se monta con el acabado ' + a.nombre;
+        : D.correas[idx].nombre + ' — no se monta con el acabado ' + a.etiqueta;
     }
 
     /* el botón ya no es un enlace: añade la combinación a la cesta y
@@ -220,7 +220,7 @@
       for (var i = 0; i < refs.length; i++) refs[i].textContent = referencia();
 
       var resumen = caja.querySelector('[data-overlay-resumen]');
-      if (resumen) resumen.textContent = a.nombre + ' · ' + c.nombre + ' · ' + euros(precio(acabado, correa));
+      if (resumen) resumen.textContent = a.etiqueta + ' · ' + c.nombre + ' · ' + euros(precio(acabado, correa));
     }
 
     abridor.addEventListener('click', function () {
@@ -274,7 +274,9 @@
       laoraCarritoAnadir({
         ref: referencia(),
         nombre: D.modelo,
-        acabado: a.nombre,
+        /* con el calibre cuando el nombre se repite: en la cesta, tres
+           líneas «Eclipse» a precios distintos no se distinguen */
+        acabado: a.etiqueta,
         correa: c.nombre,
         precio: p,
         foto: foto()
