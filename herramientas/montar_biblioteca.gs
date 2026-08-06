@@ -146,6 +146,8 @@ const COLUMNAS = {
     ['ref_proveedor',   130, null, 'El código del vendedor. Interno.'],
     ['enlace',          220, null, 'El enlace de compra. Interno: no sale a la web.'],
     ['coste_ud',        100, EUR, 'Lo que pagas por UNA. Esto se escribe AQUÍ y en ningún otro sitio del libro.'],
+    ['portes_compra',   110, EUR, 'Lo que cuesta traerla, POR UNIDAD. AliExpress cobra el envío por pedido: si en ese pedido vienen 10, divide. No confundir con `envio` de PARAMETROS, que es mandarle el reloj al cliente.'],
+    ['coste_puesto',    110, EUR, 'coste_ud + portes. Es el número que usa PRECIOS. Se calcula solo, no se escribe.'],
     ['moq',              70, '0', 'Pedido mínimo. Las esferas van de 10 en 10.'],
     ['plazo_dias',       90, '0', null],
     ['fecha_precio',    110, FECHA, 'Cuándo comprobaste ese precio. En AliExpress un precio de hace seis meses no es un precio.'],
@@ -406,7 +408,7 @@ const MOV_COMPONENTE = [
   ['MOV-NH34',   'Seiko NH34 GMT',   'Seiko NH34 GMT movement',                       'Seiko NH34 GMT',     55.00, 'estimado', 'Rango 45-70 €. GMT de oficina: se ajusta la aguja de 24 h, no la hora local.'],
   ['MOV-PT5000', 'Peacock PT5000',   'PT5000 automatic movement 25 jewels',           'Peacock PT5000',     56.15, 'sí',       'Cuesta lo mismo que un NH35 y late más fino. El cambio sale gratis.'],
   ['MOV-ST2130', 'Seagull ST2130',   'Seagull ST2130 automatic movement',             'Seagull ST2130',     47.39, 'sí',       'El más barato de los buenos, y ya lo compras.'],
-  ['MOV-ST36',   'Seagull ST36',     'Seagull ST3600 6497 hand winding movement',     'Seagull ST36',       30.59, 'sí',       '31 € y NADIE lo monta: Pagani no vende cuerda manual. 36,6 mm: NO entra en caja de NH35, necesita caja propia.'],
+  ['MOV-ST36',   'Seagull ST3600',   'Seagull ST3600 ETA 6497 17 jewels movement',    'Seagull ST3600',     33.79, 'sí',       'Ficha del 06/08/2026: 33,79 € + 3,86 € de portes = 37,65 € puesto aquí. 4,8 con 492 vendidos, 161 en stock. ⚠ EL ANUNCIO MIENTE: dice «movimiento automático» y es DE CUERDA MANUAL, que es justo su gracia. Nadie más lo monta: Pagani no vende cuerda manual. 36,6 mm: no entra en caja de NH35. https://es.aliexpress.com/item/1005006660347894.html'],
   ['MOV-ST1901', 'Seagull ST1901',   'Seagull ST1901 column wheel chronograph',       'Seagull ST1901',    115.00, 'estimado', 'Rango 90-140 €. Cronógrafo de rueda de columnas: el movimiento más noble que se puede comprar por ese dinero.'],
   ['MOV-9015',   'Miyota 9015',      'Miyota 9015 automatic movement',                'Miyota 9015',       107.00, 'estimado', 'Rango 104-110 €. ⚠ Es el doble que un PT5000 y NO diferencia de nada: lo usa medio mercado. Revisar si compensa.'],
   ['MOV-9039',   'Miyota 9039',      'Miyota 9039 no date automatic movement',        'Miyota 9039',       126.99, 'sí',       '⚠ Caro y ESCASO: 15-20 unidades vendidas en AliExpress. Buscar proveedor especializado o descartar.'],
@@ -438,6 +440,81 @@ const MOV_SPECS = [
   ['MOV-R5030', '5030.D', 'Ronda', 'Suiza', 'cuarzo', '', '', '', '', '', '', 'cronógrafo', '', '3 registros', '', '', '', 'Ronda 5030', '', '', 'Ronda 5030.D'],
   ['MOV-OS20', 'OS20', 'Miyota (Citizen)', 'Japón', 'cuarzo', '', '', '', '', '', '', 'cronógrafo', '', '', '', '', '', 'Miyota OS', '', '', 'Miyota OS20'],
   ['MOV-2035', '2035', 'Miyota (Citizen)', 'Japón', 'cuarzo', '', '', '', '', '', '', 'sin fecha', '', '', '', '', '', 'Miyota 20', 'abundantes', 'Un año de pila y segundero a saltos. Es lo que monta la gama de 60 €.', 'Miyota 2035'],
+];
+
+
+/* Portes de compra por unidad, donde el vendedor los cobra aparte. */
+const PORTES = { 'MOV-ST36': 3.86 };
+
+/* ============================================================
+   LAS PIEZAS DEL RELOJ DE CUERDA MANUAL
+   ============================================================
+   Fichas leídas en AliExpress el 06/08/2026. Una celda vacía es un
+   dato que el anuncio NO dice: se le pregunta al vendedor, no se
+   rellena a ojo.
+*/
+const PIEZAS = [
+  { id: 'CAJA-6497-44', tipo: 'caja',
+    nombre: 'Caja NEITON 44 mm para ST3600',
+    compra: 'NEITON 44mm case for Sea Gull ST3600 ETA 6498 6497 stainless steel',
+    web:    'Caja de acero inoxidable de 44 mm',
+    material: 'Acero inoxidable', acabado: 'Pulido y satinado', color: 'ocho acabados',
+    coste: 15.39, portes: 0, moq: 1, plazo: 16,
+    verificado: 'sí', estado: 'candidato',
+    enlace: 'https://es.aliexpress.com/item/1005008842814035.html',
+    notas: '⚠ 15,39 € es OFERTA: su precio normal es 57,00 €. NO calcular el PVP sobre el precio de oferta. ' +
+           'OCHO colores en el mismo anuncio y al mismo precio, así que ofrecerlos todos no cuesta nada. ' +
+           '4,8 con 431 vendidos y 958 en stock, envío gratis. ' +
+           'POR CONFIRMAR con el vendedor: si trae cristal y corona, el ancho entre asas, el grosor y el lug-to-lug.' },
+
+  { id: 'CORREA-PIEL-20', tipo: 'correa',
+    nombre: 'Correa de piel de becerro, liberación rápida',
+    compra: 'Genuine calfskin leather watch strap 18/20/22mm quick release vintage',
+    web:    'Correa de piel de becerro con liberación rápida',
+    material: 'Piel de becerro', acabado: '', color: 'varios',
+    coste: 4.39, portes: 0, moq: 1, plazo: 13,
+    verificado: 'sí', estado: 'candidato',
+    enlace: 'https://es.aliexpress.com/item/1005007011576761.html',
+    notas: '⚠ OFERTA que termina el 07/08/2026; su precio normal es 9,14 €. ' +
+           'Liberación rápida: el cliente se la cambia sin herramientas, así que la segunda correa se le VENDE. ' +
+           'Trae pasadores y herramienta. Ojo: es anuncio agrupado, el 4,9 con 1.230 valoraciones es de varios ' +
+           'vendedores; este lleva 397 ventas.' },
+
+  { id: 'AGUJAS-6497', tipo: 'agujas',
+    nombre: 'Agujas con segundero pequeño, luminosas',
+    compra: '6497 hands small seconds luminous watch hands set',
+    web:    'Agujas luminosas con segundero pequeño',
+    material: '', acabado: '', color: 'varios',
+    coste: 4.59, portes: 0, moq: 1, plazo: 14,
+    verificado: 'estimado', estado: 'buscando',
+    enlace: '',
+    notas: '4,59 € con 1.000+ vendidos y 4,9, envío gratis a partir de 10 €. ' +
+           'POR CONFIRMAR: que los diámetros de los agujeros sean los del 6497 y que el segundero pequeño ' +
+           'caiga a las 9, donde lo pone el ST3600. Sin eso no vale.' },
+
+  { id: 'PACK-ESTUCHE', tipo: 'packaging',
+    nombre: 'Estuche y embalaje laOra',
+    compra: '', web: '',
+    material: '', acabado: '', color: '',
+    coste: 2.00, portes: 0, moq: 1, plazo: 0,
+    verificado: 'estimado', estado: 'buscando',
+    enlace: '',
+    notas: 'El precio que dio Óscar el 06/08/2026. Pendiente de proveedor.' },
+];
+
+// CAJAS · [id, forma, Ø, l2l, grosor, asa, material, acabado, bisel, bisel_mat,
+//          fondo, corona, WR, cristal_incl, aloja, integrado, desc_web]
+const CAJAS_SPECS = [
+  ['CAJA-6497-44', 'Redonda', 44, '', '', '', 'Acero inoxidable 316L', 'Pulido y satinado',
+   'Fijo', 'Acero', '', '', '', '', 'ST3600 · ETA 6497 · ETA 6498', 'no',
+   'Caja de acero inoxidable de 44 mm'],
+];
+
+// CORREAS · [id, tipo, estilo, material, acabado, color, asa, cierre_mm, eslab, endlinks,
+//            tipo_cierre, micro, longitud, integrado, desc_web]
+const CORREAS_SPECS = [
+  ['CORREA-PIEL-20', 'correa', 'Piel', 'Piel de becerro', '', 'varios', 20, '', '', '',
+   'Hebilla', 'no', 200, 'no', 'Correa de piel de becerro con liberación rápida'],
 ];
 
 
@@ -492,7 +569,8 @@ function montarBiblioteca() {
   formulasPrecios(ss);
   formulasCompras(ss);
   formulasWeb(ss);
-  sembrarMovimientos(ss);
+  sembrar(ss);
+  formulasComponentes(ss);   // después de sembrar, para no pisar la fórmula
 
   // fuera la pestaña vacía que trae todo libro nuevo
   ss.getSheets().forEach(function (h) {
@@ -592,9 +670,21 @@ function montarTabla(ss, clave) {
    Las fórmulas
    ============================================================ */
 
+/** COMPONENTES solo tiene una fórmula: el coste puesto aquí. */
+function formulasComponentes(ss) {
+  const h = ss.getSheetByName('COMPONENTES');
+  const ud = letra(col('COMPONENTES', 'coste_ud'));
+  const po = letra(col('COMPONENTES', 'portes_compra'));
+  aplicar(h, 'COMPONENTES',
+    { 'coste_puesto': '=IF($A2="","",N($' + ud + '2)+N($' + po + '2))' }, FILAS_COMP);
+  h.getRange(2, col('COMPONENTES', 'coste_puesto'), FILAS_COMP, 1).setBackground(CALCULADA);
+  Logger.log('✔ COMPONENTES · coste_puesto = coste + portes');
+}
+
+
 function formulasPrecios(ss) {
   const h = ss.getSheetByName('PRECIOS');
-  const COSTE = letra(col('COMPONENTES', 'coste_ud'));
+  const COSTE = letra(col('COMPONENTES', 'coste_puesto'));
 
   const desde = col('REFERENCIAS', 'id_movimiento');
   const hasta = col('REFERENCIAS', 'id_packaging');
@@ -655,7 +745,7 @@ function formulasCompras(ss) {
     'id_componente':   '=IF(COMPONENTES!A2="","",COMPONENTES!A2)',
     'desc_compra':     '=IF($A2="","",' + comp('desc_compra') + ')',
     'tipo':            '=IF($A2="","",' + comp('tipo') + ')',
-    'coste_ud':        '=IF($A2="","",' + comp('coste_ud') + ')',
+    'coste_ud':        '=IF($A2="","",' + comp('coste_puesto') + ')',
     'usado_en_refs':   '=IF($A2="","",COUNTIF(REFERENCIAS!$' + d + '$2:$' + m + '$' + FILAS + ',$A2))',
     // stock_actual se escribe a mano: no lleva fórmula
     'moq':             '=IF($A2="","",' + comp('moq') + ')',
@@ -747,35 +837,50 @@ function aplicar(destino, clave, formulas, filas) {
    La siembra
    ============================================================ */
 
-function sembrarMovimientos(ss) {
+function sembrar(ss) {
   const comp = ss.getSheetByName('COMPONENTES');
-  const movs = ss.getSheetByName('MOVIMIENTOS');
   const n = COLUMNAS['COMPONENTES'].length;
 
+  function fila(datos) {
+    const f = new Array(n).fill('');
+    Object.keys(datos).forEach(function (k) { f[col('COMPONENTES', k) - 1] = datos[k]; });
+    return f;
+  }
+
   const filas = MOV_COMPONENTE.map(function (m) {
-    const fila = new Array(n).fill('');
-    fila[col('COMPONENTES', 'id') - 1]             = m[0];
-    fila[col('COMPONENTES', 'tipo') - 1]           = 'movimiento';
-    fila[col('COMPONENTES', 'nombre_interno') - 1] = m[1];
-    fila[col('COMPONENTES', 'desc_compra') - 1]    = m[2];
-    fila[col('COMPONENTES', 'desc_web') - 1]       = m[3];
-    fila[col('COMPONENTES', 'coste_ud') - 1]       = m[4];
-    fila[col('COMPONENTES', 'moq') - 1]            = 1;
-    fila[col('COMPONENTES', 'proveedor') - 1]      = 'AliExpress';
-    fila[col('COMPONENTES', 'fecha_precio') - 1]   = HOY;
-    fila[col('COMPONENTES', 'verificado') - 1]     = m[5];
-    fila[col('COMPONENTES', 'estado') - 1]         = m[5] === 'sí' ? 'candidato' : 'buscando';
-    fila[col('COMPONENTES', 'activo') - 1]         = 'sí';
-    fila[col('COMPONENTES', 'notas_internas') - 1] = m[6];
-    return fila;
-  });
+    return fila({
+      id: m[0], tipo: 'movimiento', nombre_interno: m[1],
+      desc_compra: m[2], desc_web: m[3],
+      coste_ud: m[4], portes_compra: PORTES[m[0]] || 0,
+      moq: 1, proveedor: 'AliExpress', fecha_precio: HOY,
+      verificado: m[5], estado: m[5] === 'sí' ? 'candidato' : 'buscando',
+      activo: 'sí', notas_internas: m[6],
+    });
+  }).concat(PIEZAS.map(function (p) {
+    return fila({
+      id: p.id, tipo: p.tipo, nombre_interno: p.nombre,
+      desc_compra: p.compra, desc_web: p.web,
+      material: p.material, acabado: p.acabado, color: p.color,
+      coste_ud: p.coste, portes_compra: p.portes,
+      moq: p.moq, plazo_dias: p.plazo,
+      proveedor: p.enlace ? 'AliExpress' : '', enlace: p.enlace,
+      fecha_precio: HOY, verificado: p.verificado, estado: p.estado,
+      activo: 'sí', notas_internas: p.notas,
+    });
+  }));
+
   comp.getRange(2, 1, filas.length, n).setValues(filas);
 
-  movs.getRange(2, 1, MOV_SPECS.length, COLUMNAS['MOVIMIENTOS'].length)
-      .setValues(MOV_SPECS);
+  ss.getSheetByName('MOVIMIENTOS')
+    .getRange(2, 1, MOV_SPECS.length, COLUMNAS['MOVIMIENTOS'].length).setValues(MOV_SPECS);
+  ss.getSheetByName('CAJAS')
+    .getRange(2, 1, CAJAS_SPECS.length, COLUMNAS['CAJAS'].length).setValues(CAJAS_SPECS);
+  ss.getSheetByName('CORREAS')
+    .getRange(2, 1, CORREAS_SPECS.length, COLUMNAS['CORREAS'].length).setValues(CORREAS_SPECS);
 
-  Logger.log('✔ Sembrados ' + MOV_COMPONENTE.length + ' movimientos con sus specs.');
-  Logger.log('  Precios comprobados el ' + HOY + '. Los marcados «estimado» son rango,');
-  Logger.log('  no precio: hay que confirmarlos antes de fiarse del margen.');
+  Logger.log('✔ Sembradas ' + filas.length + ' piezas: ' + MOV_COMPONENTE.length +
+             ' movimientos y ' + PIEZAS.length + ' del reloj de cuerda manual.');
+  Logger.log('  Precios leídos el ' + HOY + '. «estimado» es rango, no precio.');
+  Logger.log('  ⚠ La caja está de OFERTA a 15,39 €; su precio normal es 57,00 €.');
   Logger.log('  Una celda vacía es un dato que NO sabemos. No se rellena a ojo.');
 }
