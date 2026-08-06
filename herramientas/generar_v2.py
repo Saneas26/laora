@@ -175,15 +175,21 @@ def _corta(v):
     return re.split(r'[(,]', str(v or ''))[0].strip()
 
 
-def _agua(*candidatos):
-    """De `10 ATM (100 m)` o `200 m (20 ATM)` saca los METROS, que es lo
-    que entiende cualquiera. Si no hay metros, no se inventa: se cae al
-    siguiente candidato."""
-    for v in candidatos:
-        m = re.search(r'(\d+)\s*m\b', str(v or ''))
-        if m:
-            return m.group(1) + ' m'
-    return ''
+def _agua(acabado):
+    """Los METROS de agua de ESTE acabado, y de ninguno más.
+
+    OJO, esto es importante y costó un susto: la primera versión, si el
+    acabado no traía dato, se caía al del modelo. Y el del modelo es el
+    del MEJOR acabado. En el Trinchera eso hacía que la portada
+    anunciara «200 m» —que son del Cenit, de 449 €— en la exposición del
+    reloj de entrada, cuyo fabricante NO declara estanqueidad ninguna.
+    Anunciar una resistencia al agua que nadie ha declarado no es un
+    fallo de maquetación: es una promesa que el reloj puede no cumplir.
+
+    Así que aquí no hay herencia. Si este acabado no lo dice, no se
+    dice."""
+    m = re.search(r'(\d+)\s*m\b', str(acabado.get('estanqueidad') or ''))
+    return m.group(1) + ' m' if m else ''
 
 
 def _movimiento(reloj, acabado):
@@ -200,6 +206,14 @@ def _movimiento(reloj, acabado):
         if dentro:
             tipo = dentro.group(1).split(',')[-1]
     tipo = re.split(r'[(,]| con ', tipo)[0].strip()
+    # «Cuarzo» a secas se queda corto al lado de los demás, que dicen de
+    # dónde es. Si el calibre lo dice, se completa; si no, se queda así.
+    if tipo.lower() == 'cuarzo':
+        calibre = str(acabado.get('movimiento') or '')
+        if re.search(r'japon|jap\u00f3n', calibre, re.I):
+            tipo = 'Cuarzo japonés'
+        elif re.search(r'suiz', calibre, re.I):
+            tipo = 'Cuarzo suizo'
     return tipo[:1].upper() + tipo[1:]
 
 
@@ -215,7 +229,10 @@ def _exposicion(slug):
         specs=[
             _movimiento(reloj, acabado),
             _corta(acabado.get('diametro') or reloj.get('diametro')),
-            _agua(acabado.get('estanqueidad'), reloj.get('hermeticidad')),
+            # Cuando no hay metros declarados, la tercera casilla la ocupa
+            # el cristal, que sí es un dato firme. Antes que callar un
+            # hueco o rellenarlo con el dato de otro acabado.
+            _agua(acabado) or _corta(acabado.get('cristal')),
         ],
     )
 
