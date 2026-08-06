@@ -435,7 +435,14 @@ ACTO_1 = f"""
 {''.join(punto(i, e) for i, e in enumerate(EXPOSICIONES))}      </div>
     </div>
     <div class="home-hero-copy lunar-home-copy">
-      <p class="lunar-eyebrow" data-hero-frase>{PRIMERA_EXPO['frase']}</p>
+      <!-- LA FRASE DE ENCIMA SE QUITÓ el 06/08/2026, por encargo de
+           Óscar: «vamos a quitar el comentario de los 8 relojes que está
+           por encima de laOra nombre modelo».
+
+           El texto NO se borra: sigue en `TEXTOS`, en el campo `frase`,
+           y viaja en el JSON de las exposiciones. Volver a enseñarlo es
+           devolver esta línea, nada más. Las ocho frases están escritas
+           por Óscar y costaron su tiempo; no se tiran. -->
       <h1 class="lunar-title"><img src="{LOGO_CLARO}" alt="laOra"><span data-hero-nombre>{PRIMERA_EXPO['nombre']}</span></h1>
       <!-- sin espacios alrededor de la barra: la separación la da el
            `padding` del <i> en la hoja, y con espacios además del padding
