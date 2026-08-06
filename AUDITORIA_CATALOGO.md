@@ -7,14 +7,14 @@
 
 Fuente: hoja «Catalogo laOra» del libro
 `1hOEjyzjzHewt-CThFyJWeIREw6J56Rj5gEmc2w5z0cc`, leída entera.
-**51 referencias · 8 modelos.**
+**50 referencias · 8 modelos.**
 
 El volcado lo hace `herramientas/volcar_hoja.py` y es repetible: cuando
 la hoja cambie, se vuelve a pasar y se regenera.
 
-## Estado: las 51 referencias publicadas
+## Estado: las 50 referencias publicadas
 
-**Las 51 coinciden con su fila de la hoja en referencia Y precio**, una
+**Las 50 coinciden con su fila de la hoja en referencia Y precio**, una
 a una, y cada una enseña su foto de catálogo. No queda ninguna fila de
 la hoja fuera de la web.
 
@@ -24,7 +24,7 @@ la hoja fuera de la web.
 | LO-02 Cero Cero | 6 | 4 | 6 | 209,90 € |
 | LO-04 Precisa | 4 | 1 | 4 | 229,90 € |
 | LO-05 Trinchera | 6 | 9 | 15 | 189,90 € |
-| LO-06 Diver | 3 | 1 | 3 | 229,90 € |
+| LO-06 Diver | 2 | 1 | 2 | 229,90 € |
 | LO-07 Bitácora | 6 | 4 | 7 | 219,90 € |
 | LO-08 Tortuga | 5 | 2 | 5 | 219,90 € |
 | LO-09 Cóctel | 3 | 1 | 3 | 209,90 € |
@@ -53,29 +53,33 @@ lo demás en negro, la caja en oro rosa. `LO-07_Bitacora_E01-OR`,
 **El DIVER ya no tiene la escalera al revés.** La hoja quitó el
 `LO-06_Diver_L01`. Su `C01` sigue siendo el Cenit.
 
-## El Diver, publicado
+## Los cambios de Óscar del 06/08/2026 por la tarde
 
-06/08/2026, Óscar: «la misma foto sirve para los tres». Publicado en
-`/diver` y en la colección, con las tres referencias de la hoja.
+Hechos por él en la hoja mientras se montaba la ingeniería de precios, y
+ya volcados a la web:
 
-| Referencia | Acabado | Movimiento | PVP |
-|---|---|---|---:|
-| LO-06_Diver_A01 | Alba | VH31 cuarzo de barrido | 229,90 € |
-| LO-06_Diver_C01 | Cenit | Seiko NH35A | 289,90 € |
-| LO-06_Diver_E01 | Eclipse | PT5000 | 279,90 € |
+- **El Cenit del Diver monta el PT5000**, no el NH35A. Era la
+  recomendación: mejor movimiento, más barato de comprar y menos visto.
+  Baja de 289,90 a 279,90 €.
+- **El Eclipse del Diver desaparece.** El modelo se queda en Alba y
+  Cenit.
+- **El Cenit del Tortuga es un Seiko NH36A**, no un NE15. Resuelta la
+  contradicción entre las dos columnas de movimiento, y fuera el «por
+  confirmar» de la celda.
 
-Entra sin frase, sin homenaje y sin historia: esos textos los escribe
-Óscar y hasta entonces no se pintan. En la tarjeta del listado salen el
-código, la familia, la foto y el «desde», que es lo que hay.
+## La hoja PVP_Claude
 
-### Y una cosa que hay que mirar
+Montada el 06/08/2026 en el libro, con la propuesta de precios de todo
+el catálogo. Tiene tres tablas editables arriba —parámetros, base por
+modelo y escalón por movimiento— y las 50 referencias abajo con
+fórmulas vivas contra «Catalogo laOra»: si allí cambia un coste, el
+margen se recalcula solo.
 
-**El Cenit del Diver monta un movimiento peor que su Eclipse.** El
-Cenit lleva un Seiko NH35A y el Eclipse, un PT5000 —que es más
-movimiento— por diez euros menos. Y el PT5000 ya está comprado para esa
-misma caja, así que se puede montar un Cenit mejor sin buscar nada
-nuevo. Es la tarea que Óscar dejó puesta: «si se puede montar un modelo
-mejor, dímelo».
+`herramientas/montar_pvp.gs` la rehace entera cuando cambie el catálogo.
+
+**Es una propuesta, no está publicada.** La web sigue con los precios de
+«Catalogo laOra». Cuando Óscar dé el visto bueno, se pasan los PVP
+propuestos a esa hoja y el volcado los publica.
 
 ## Lo que la hoja todavía dice mal
 
@@ -92,19 +96,7 @@ al día.
 | `LO-05_Trinchera_A01` | Brazalete — Tipo de cierre | **BK25** | Hebilla de acero |
 | `LO-05_Trinchera_A01` | Y (correa) | …bal**í**stico… | igual que las otras: sin tilde partía la opción en dos |
 | `LO-05_Trinchera_L01` | Caja — Material y Acabado | **PVD negro** | plata |
-| `LO-08_Tortuga_C01` | Movimiento — Calibre | Seiko NE15 — **por confirmar/proveedor pendiente** | Seiko NE15 (equiv. 6R15) |
 
-### Y una que no puedo decidir yo
-
-`LO-08_Tortuga_C01` **nombra dos movimientos distintos**:
-
-- columna «Movimiento»: Seiko **NH36A** automático (con fecha larga)
-- columna «Movimiento — Calibre»: Seiko **NE15** (equiv. 6R15)
-
-Los demás datos de esa fila —23 rubíes, 21.600 vph, ~50 h de reserva—
-son los del NE15, no los del NH36A, así que la web publica **NE15**. Es
-también lo coherente con que sea el reloj más caro de la casa. Pero hay
-que decidirlo y dejar las dos columnas iguales.
 
 ## Textos que hay que volver a escribir
 

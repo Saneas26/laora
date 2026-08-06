@@ -2,7 +2,8 @@
  * laOra · PVP_Claude — ingeniería de precios de todo el catálogo
  * ============================================================
  * Reconstruye la hoja «PVP_Claude» entera: la borra y la escribe de
- * nuevo. No toca «Catalogo laOra», que sigue siendo la que manda; esta
+ * nuevo. La hoja se montó a mano el 06/08/2026 con estos mismos
+ * números; esto es para rehacerla cuando cambie el catálogo. No toca «Catalogo laOra», que sigue siendo la que manda; esta
  * la lee con fórmulas, así que si allí cambia un coste, aquí cambia el
  * margen solo.
  *
@@ -36,7 +37,7 @@ const BASES = [
   ['Cóctel', 229.9],
   ['Lunar', 249.9],
   ['Precisa', 249.9],
-  ['Diver', 249.9]
+  ['Diver', 259.9]
 ];
 
 // movimiento, lo que cuesta, escalón de gama
@@ -48,7 +49,7 @@ const PASOS = [
   ['Seagull ST2130', 47.39, 80],
   ['Seiko NH35A', 61.99, 120],
   ['PT5000', 56.31, 140],
-  ['Seiko NE15', 65.23, 180],
+  ['Seiko NH36A', 65.23, 180],
   ['Miyota 9015', 106.69, 220],
   ['Seagull ST19', 219.69, 280]
 ];
@@ -91,8 +92,7 @@ const REFS = [
   ['LO-05_Trinchera_E02', 'Trinchera', 'Eclipse', 'Seagull ST2130'],
   ['LO-05_Trinchera_E03', 'Trinchera', 'Eclipse', 'Miyota 9015'],
   ['LO-06_Diver_A01', 'Diver', 'Alba', 'Seiko/TMI VH31'],
-  ['LO-06_Diver_C01', 'Diver', 'Cenit', 'Seiko NH35A'],
-  ['LO-06_Diver_E01', 'Diver', 'Eclipse', 'PT5000'],
+  ['LO-06_Diver_C01', 'Diver', 'Cenit', 'PT5000'],
   ['LO-07_Bitacora_A01', 'Bitácora', 'Alba', 'Ronda 515-3'],
   ['LO-07_Bitacora_L01', 'Bitácora', 'Levante', 'Seiko NH35A'],
   ['LO-07_Bitacora_C01', 'Bitácora', 'Cenit', 'Miyota 9015'],
@@ -102,7 +102,7 @@ const REFS = [
   ['LO-07_Bitacora_E03', 'Bitácora', 'Eclipse', 'Miyota 9015'],
   ['LO-08_Tortuga_A01', 'Tortuga', 'Alba', 'Seiko/TMI VH31'],
   ['LO-08_Tortuga_L01', 'Tortuga', 'Levante', 'Seiko NH35A'],
-  ['LO-08_Tortuga_C01', 'Tortuga', 'Cenit', 'Seiko NE15'],
+  ['LO-08_Tortuga_C01', 'Tortuga', 'Cenit', 'Seiko NH36A'],
   ['LO-08_Tortuga_E01', 'Tortuga', 'Eclipse', 'Seiko/TMI VH31'],
   ['LO-08_Tortuga_E02', 'Tortuga', 'Eclipse', 'Seiko NH35A'],
   ['LO-09_Coctel_A01', 'Cóctel', 'Alba', 'Seiko/TMI VH31'],
