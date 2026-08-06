@@ -89,7 +89,7 @@ const PARAMETROS = [
    '★ EL NÚMERO QUE MANDA. El PVP sale de multiplicar por esto lo que cuesta el reloj. A x2,0 no se gana; x2,5 es el mínimo; x3,0 es lo sano. Se sube o se baja aquí y se recalcula el catálogo entero.'],
 
   ['impuesto_venta',     0.21,  'tanto por uno',
-   'El impuesto que va DENTRO del PVP. Ojo: no es tuyo ni te cuesta, lo cobras y lo ingresas. ⚠ REVISAR: en Canarias es IGIC, no IVA, y el 01/07/2026 entra el REPEP.'],
+   'El IVA que va DENTRO del PVP. No es tuyo ni te cuesta: lo cobras al cliente y lo ingresas. Es IVA y no IGIC porque laOra recibe la mercancía y vende DESDE MADRID, aunque Óscar viva en Canarias. Decidido el 06/08/2026.'],
   ['irpf',               0.20,  'tanto por uno',
    'Se aplica SOBRE EL BENEFICIO, nunca sobre la venta. Aplicarlo al PVP da un número mucho peor que la realidad.'],
   ['ss_modo',            'cuota', 'porcentaje | cuota',
