@@ -11,21 +11,24 @@ Así que aquí no hay portada, ni actos, ni recomendaciones, ni «también
 te puede interesar». Solo lo que has elegido, lo que suma y el botón de
 seguir.
 
-LO QUE SE RECUPERA
+LOS TRES PASOS (06/08/2026)
 ------------------------------------------------------------
-`assets/js/carrito.js` es el de la web anterior, tal cual, sacado de la
-etiqueta `web-v1-antes-del-rediseno`. Guarda la cesta en el propio
-navegador —`localStorage`—, así que no hace falta cuenta ni servidor
-para que funcione, y ya trae el contador de la bolsa. Lo único que hay
-que darle es una línea con `ref`, `nombre`, `acabado`, `precio` y la
-foto.
+La cesta ya no manda a PayPal a pelo. Antes de cobrar hay que saber
+QUIÉN compra y A DÓNDE va el reloj, así que la pantalla tiene tres
+pasos, uno debajo de otro y sin cambiar de página:
 
-LO QUE NO EXISTE TODAVÍA
-------------------------------------------------------------
-El cobro. El botón de abajo lleva a `/pagar.html`, que está en la
-etiqueta pero con el diseño viejo y con la clave de Mollie sin poner.
-Mientras no exista, el botón se pinta desactivado y lo dice: es
-preferible a mandar a nadie a un 404 desde el paso de pagar.
+  1. lo elegido, y su total
+  2. entrar —con el enlace del correo, sin contraseña—
+  3. los datos del envío, y entonces sí, pagar
+
+El pedido se escribe en la base ANTES de abrir PayPal, con la Edge
+Function `crear-pedido`, que recalcula el precio desde el catálogo y no
+se fía del navegador. Solo después se abre el cobro, ya con un número
+de pedido que poner en el concepto.
+
+Quien no haya entrado no pierde nada: la cesta vive en su navegador y
+sigue ahí cuando vuelve del enlace del correo, porque el enlace le
+devuelve a esta misma pantalla.
 
 USO
     python3 herramientas/generar_carrito.py
@@ -35,11 +38,40 @@ import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 1
-V_JS = 2
+V_CSS = 2
+V_JS = 3
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
+
+
+def campo(nombre, etiqueta, tipo='text', ancho='', extra=''):
+    """Un campo del formulario. `ancho` = clase de rejilla."""
+    return (f'<label class="ca-campo {ancho}">'
+            f'<span>{etiqueta}</span>'
+            f'<input type="{tipo}" name="{nombre}" data-c="{nombre}" {extra}>'
+            f'</label>')
+
+
+ENVIO = ''.join([
+    campo('nombre', 'Nombre', extra='required autocomplete="given-name"'),
+    campo('apellidos', 'Apellidos', extra='autocomplete="family-name"'),
+    campo('telefono', 'Teléfono', 'tel', extra='autocomplete="tel"'),
+    campo('direccion', 'Dirección', ancho='ca-ancho', extra='required autocomplete="street-address"'),
+    campo('cp', 'Código postal', extra='required autocomplete="postal-code" inputmode="numeric"'),
+    campo('poblacion', 'Población', extra='required autocomplete="address-level2"'),
+    campo('provincia', 'Provincia', extra='required autocomplete="address-level1"'),
+    campo('pais', 'País', extra='autocomplete="country-name" value="España"'),
+])
+
+FACTURA = ''.join([
+    campo('fac_nombre', 'Nombre o razón social', ancho='ca-ancho'),
+    campo('fac_nif', 'NIF o CIF'),
+    campo('fac_direccion', 'Dirección fiscal', ancho='ca-ancho'),
+    campo('fac_cp', 'Código postal'),
+    campo('fac_poblacion', 'Población'),
+    campo('fac_provincia', 'Provincia'),
+])
 
 PAGINA = f"""<!DOCTYPE html>
 <html lang="es">
@@ -80,16 +112,62 @@ PAGINA = f"""<!DOCTYPE html>
       <span>Total</span>
       <strong data-total>—</strong>
     </div>
-    <p class="ca-impuestos">Impuestos incluidos. El envío se calcula en el siguiente paso.</p>
-    <button class="ca-pagar" type="button" data-pagar disabled>Pagar</button>
-    <p class="ca-pendiente">El pago todavía no está abierto. Guarda tu configuración: la cesta se queda en este navegador.</p>
+    <p class="ca-impuestos">Impuestos y envío incluidos.</p>
+    <button class="ca-pagar" type="button" data-continuar>Continuar</button>
   </aside>
+
+  <!-- ---------- paso 2: entrar ---------- -->
+  <section class="ca-paso" data-paso-entrar hidden>
+    <h2>Antes de nada, entra</h2>
+    <p class="ca-explica">Sin contraseña: pones tu correo, te llega un enlace y vuelves aquí
+      con todo lo que has elegido. Hace falta para saber de quién es el pedido y para que
+      luego puedas ver tu compra, tu factura y tu garantía.</p>
+    <form class="ca-form" data-form-entrar>
+      <label class="ca-campo ca-ancho">
+        <span>Tu correo</span>
+        <input type="email" data-correo required autocomplete="email" placeholder="tucorreo@ejemplo.com">
+      </label>
+      <button class="ca-pagar" type="submit" data-enviar-enlace>Enviarme el enlace</button>
+    </form>
+    <p class="ca-aviso-paso" data-aviso-entrar hidden></p>
+  </section>
+
+  <!-- ---------- paso 3: a dónde va ---------- -->
+  <section class="ca-paso" data-paso-datos hidden>
+    <h2>¿A dónde te lo enviamos?</h2>
+    <p class="ca-explica" data-quien></p>
+    <form class="ca-form" data-form-datos>
+      {ENVIO}
+      <label class="ca-check ca-ancho">
+        <input type="checkbox" data-quiere-factura>
+        <span>Necesito factura a otros datos</span>
+      </label>
+      <div class="ca-factura ca-ancho" data-bloque-factura hidden>
+        {FACTURA}
+      </div>
+      <button class="ca-pagar ca-ancho" type="submit" data-hacer-pedido>Hacer el pedido</button>
+    </form>
+    <p class="ca-aviso-paso" data-aviso-datos hidden></p>
+  </section>
+
+  <!-- ---------- paso 4: pagar ---------- -->
+  <section class="ca-paso ca-hecho" data-paso-pagar hidden>
+    <h2>Tu pedido <b data-numero></b></h2>
+    <p class="ca-explica">Ya está guardado y lo tenemos apuntado. Solo queda el pago:
+      se abre PayPal con el importe exacto. <b>Pon el número del pedido en el concepto</b>
+      —lo copiamos al portapapeles al pulsar— para que sepamos que ese ingreso es el tuyo.</p>
+    <p class="ca-total-final">A pagar: <b data-total-final></b></p>
+    <button class="ca-pagar" type="button" data-pagar>Pagar con PayPal</button>
+    <p class="ca-explica">Cuando lo confirmemos te avisamos por correo. Puedes ver el pedido
+      en <a href="/cuenta">tu cuenta</a> cuando quieras.</p>
+  </section>
 </main>
 
 <footer class="ca-aviso">
   <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
+<script src="/assets/js/sesion.js?v={V_JS}"></script>
 <script src="/assets/js/carrito.js?v={V_JS}"></script>
 <script src="/assets/js/carrito-pantalla.js?v={V_JS}"></script>
 </body>

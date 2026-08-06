@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- GENERADO por herramientas/generar_carrito.py — no editar a mano. -->
-<link rel="stylesheet" href="/assets/css/carrito.css?v=1">
+<link rel="stylesheet" href="/assets/css/carrito.css?v=2">
 </head>
 <body>
 
@@ -37,17 +37,63 @@
       <span>Total</span>
       <strong data-total>—</strong>
     </div>
-    <p class="ca-impuestos">Impuestos incluidos. El envío se calcula en el siguiente paso.</p>
-    <button class="ca-pagar" type="button" data-pagar disabled>Pagar</button>
-    <p class="ca-pendiente">El pago todavía no está abierto. Guarda tu configuración: la cesta se queda en este navegador.</p>
+    <p class="ca-impuestos">Impuestos y envío incluidos.</p>
+    <button class="ca-pagar" type="button" data-continuar>Continuar</button>
   </aside>
+
+  <!-- ---------- paso 2: entrar ---------- -->
+  <section class="ca-paso" data-paso-entrar hidden>
+    <h2>Antes de nada, entra</h2>
+    <p class="ca-explica">Sin contraseña: pones tu correo, te llega un enlace y vuelves aquí
+      con todo lo que has elegido. Hace falta para saber de quién es el pedido y para que
+      luego puedas ver tu compra, tu factura y tu garantía.</p>
+    <form class="ca-form" data-form-entrar>
+      <label class="ca-campo ca-ancho">
+        <span>Tu correo</span>
+        <input type="email" data-correo required autocomplete="email" placeholder="tucorreo@ejemplo.com">
+      </label>
+      <button class="ca-pagar" type="submit" data-enviar-enlace>Enviarme el enlace</button>
+    </form>
+    <p class="ca-aviso-paso" data-aviso-entrar hidden></p>
+  </section>
+
+  <!-- ---------- paso 3: a dónde va ---------- -->
+  <section class="ca-paso" data-paso-datos hidden>
+    <h2>¿A dónde te lo enviamos?</h2>
+    <p class="ca-explica" data-quien></p>
+    <form class="ca-form" data-form-datos>
+      <label class="ca-campo "><span>Nombre</span><input type="text" name="nombre" data-c="nombre" required autocomplete="given-name"></label><label class="ca-campo "><span>Apellidos</span><input type="text" name="apellidos" data-c="apellidos" autocomplete="family-name"></label><label class="ca-campo "><span>Teléfono</span><input type="tel" name="telefono" data-c="telefono" autocomplete="tel"></label><label class="ca-campo ca-ancho"><span>Dirección</span><input type="text" name="direccion" data-c="direccion" required autocomplete="street-address"></label><label class="ca-campo "><span>Código postal</span><input type="text" name="cp" data-c="cp" required autocomplete="postal-code" inputmode="numeric"></label><label class="ca-campo "><span>Población</span><input type="text" name="poblacion" data-c="poblacion" required autocomplete="address-level2"></label><label class="ca-campo "><span>Provincia</span><input type="text" name="provincia" data-c="provincia" required autocomplete="address-level1"></label><label class="ca-campo "><span>País</span><input type="text" name="pais" data-c="pais" autocomplete="country-name" value="España"></label>
+      <label class="ca-check ca-ancho">
+        <input type="checkbox" data-quiere-factura>
+        <span>Necesito factura a otros datos</span>
+      </label>
+      <div class="ca-factura ca-ancho" data-bloque-factura hidden>
+        <label class="ca-campo ca-ancho"><span>Nombre o razón social</span><input type="text" name="fac_nombre" data-c="fac_nombre" ></label><label class="ca-campo "><span>NIF o CIF</span><input type="text" name="fac_nif" data-c="fac_nif" ></label><label class="ca-campo ca-ancho"><span>Dirección fiscal</span><input type="text" name="fac_direccion" data-c="fac_direccion" ></label><label class="ca-campo "><span>Código postal</span><input type="text" name="fac_cp" data-c="fac_cp" ></label><label class="ca-campo "><span>Población</span><input type="text" name="fac_poblacion" data-c="fac_poblacion" ></label><label class="ca-campo "><span>Provincia</span><input type="text" name="fac_provincia" data-c="fac_provincia" ></label>
+      </div>
+      <button class="ca-pagar ca-ancho" type="submit" data-hacer-pedido>Hacer el pedido</button>
+    </form>
+    <p class="ca-aviso-paso" data-aviso-datos hidden></p>
+  </section>
+
+  <!-- ---------- paso 4: pagar ---------- -->
+  <section class="ca-paso ca-hecho" data-paso-pagar hidden>
+    <h2>Tu pedido <b data-numero></b></h2>
+    <p class="ca-explica">Ya está guardado y lo tenemos apuntado. Solo queda el pago:
+      se abre PayPal con el importe exacto. <b>Pon el número del pedido en el concepto</b>
+      —lo copiamos al portapapeles al pulsar— para que sepamos que ese ingreso es el tuyo.</p>
+    <p class="ca-total-final">A pagar: <b data-total-final></b></p>
+    <button class="ca-pagar" type="button" data-pagar>Pagar con PayPal</button>
+    <p class="ca-explica">Cuando lo confirmemos te avisamos por correo. Puedes ver el pedido
+      en <a href="/cuenta">tu cuenta</a> cuando quieras.</p>
+  </section>
 </main>
 
 <footer class="ca-aviso">
   <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
-<script src="/assets/js/carrito.js?v=2"></script>
-<script src="/assets/js/carrito-pantalla.js?v=2"></script>
+<script src="/assets/js/sesion.js?v=3"></script>
+<script src="/assets/js/carrito.js?v=3"></script>
+<script src="/assets/js/carrito-pantalla.js?v=3"></script>
 </body>
 </html>

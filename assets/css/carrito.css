@@ -74,3 +74,48 @@ body{margin:0;background:var(--ivory);color:var(--ink);
            justify-content:space-between;width:100%}
   .ca-linea h2{font-size:17px}
 }
+
+/* ============================================================
+   LOS PASOS DE LA COMPRA (06/08/2026)
+   ------------------------------------------------------------
+   Entrar, decir a dónde va y pagar. Van uno debajo de otro en la
+   misma página: cada salto a otra pantalla es gente que se cae por
+   el camino.
+
+   Los campos son grandes a propósito —16 px y 48 px de alto—: por
+   debajo de 16 px el iPhone hace zoom solo al tocarlos, y quien
+   compra un reloj no tiene por qué tener veinte años.
+   ============================================================ */
+.ca-paso{margin-top:22px;padding:clamp(18px,3vw,26px);
+         background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.ca-paso h2{font-size:21px;font-weight:700;letter-spacing:-.02em}
+.ca-explica{margin-top:8px;font-size:15px;line-height:1.55;color:var(--muted)}
+.ca-explica a{color:var(--gold);text-decoration:underline}
+
+.ca-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.ca-ancho{grid-column:1/-1}
+.ca-campo{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ca-campo span{font-size:13px;font-weight:700;color:var(--muted)}
+.ca-campo input{width:100%;height:48px;padding:0 13px;font:inherit;font-size:16px;
+                color:var(--ink);background:#fff;
+                border:1px solid var(--line);border-radius:10px}
+.ca-campo input:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+
+.ca-check{display:flex;align-items:center;gap:10px;margin-top:4px;
+          font-size:15px;cursor:pointer}
+.ca-check input{width:22px;height:22px;accent-color:var(--gold);cursor:pointer}
+
+.ca-factura{display:grid;grid-template-columns:1fr 1fr;gap:12px;
+            padding:16px;background:var(--ivory);border-radius:12px}
+
+.ca-aviso-paso{margin-top:12px;font-size:15px;color:var(--muted)}
+.ca-aviso-paso.ca-mal{color:#a3341f;font-weight:700}
+
+.ca-hecho{border-color:var(--gold);border-width:2px}
+.ca-hecho h2 b{color:var(--gold);letter-spacing:.04em}
+.ca-total-final{margin-top:14px;font-size:19px}
+.ca-total-final b{font-size:25px;font-weight:700}
+
+@media (max-width:640px){
+  .ca-form,.ca-factura{grid-template-columns:1fr}
+}
