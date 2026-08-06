@@ -60,7 +60,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
 V_CSS = 28
-V_JS = 6
+V_JS = 7
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -276,6 +276,24 @@ TEXTOS = {
         'linea1': 'Deportivo · Automático · 40 mm',
         'linea2': 'Acero 316L · Cristal de zafiro · Desde {precio_levante}',
     },
+    # 06/08/2026, Óscar: «no me cambies nada de lo que yo te ponga, lo
+    # tengo supervisado, aunque tú no lo puedas comprobar». Así que este
+    # texto va literal.
+    #
+    # Lo que NO está en la hoja, por si algún día hay que defenderlo: la
+    # casilla de luminiscencia del Diver dice «Según esfera laOra», que
+    # es una nota de trabajo. El lumen lo pone Óscar, que es quien
+    # decide la esfera.
+    #
+    # Aquí el precio va en su propia línea y sin «desde», como lo
+    # escribió. 279,90 € es el Cenit, que es el único automático y tiene
+    # precio único.
+    'diver': {
+        'frase': 'Serio bajo el agua. Divertido en todas partes.',
+        'linea1': 'Automático Arquitectura suiza · 40 mm',
+        'linea2': 'Resistencia al agua 300 m · Lumen de alto rendimiento',
+        'precio': '{precio_cenit}',
+    },
 }
 
 
@@ -324,9 +342,24 @@ for e in EXPOSICIONES:
         # vuelve el precio suelto de siempre.
         e['linea2'] = [x.strip().format(**precios)
                        for x in t['linea2'].split('·') if x.strip()]
+        # Un reloj puede querer el precio en su PROPIA línea y sin la
+        # palabra «desde» —así lo escribió Óscar para el Diver—. Entonces
+        # el renglón del precio deja de ser el de siempre y dice esto.
+        if t.get('precio'):
+            e['precioTexto'] = t['precio'].format(**precios)
     else:
         e['frase'] = 'Llego el momento de'
         e['linea2'] = []
+
+def precioVisible(e):
+    """El renglón del precio se ve cuando el precio NO va dentro del
+    segundo renglón. Si va dentro, sale dos veces."""
+    return bool(e.get('precioTexto')) or not e['linea2']
+
+
+def precioTexto(e):
+    return e.get('precioTexto') or ('desde ' + e['precio'])
+
 
 PRIMERA_EXPO = EXPOSICIONES[0]
 
@@ -355,7 +388,7 @@ ACTO_1 = f"""
            la primera exposición salía algo más suelta que las otras dos -->
       <p class="lunar-specs" data-hero-specs>{'<i>|</i>'.join(PRIMERA_EXPO['specs'])}</p>
       <p class="lunar-specs lunar-specs-2" data-hero-specs2{' hidden' if not PRIMERA_EXPO['linea2'] else ''}>{'<i>|</i>'.join(PRIMERA_EXPO['linea2'])}</p>
-      <p class="lunar-price" data-hero-precio{' hidden' if PRIMERA_EXPO['linea2'] else ''}>desde {PRIMERA_EXPO['precio']}</p>
+      <p class="lunar-price" data-hero-precio{'' if precioVisible(PRIMERA_EXPO) else ' hidden'}>{precioTexto(PRIMERA_EXPO)}</p>
       <div class="lunar-actions"><a class="lunar-action reserve" href="{PRIMERA_EXPO['enlace']}" data-hero-reservar>Reservar</a><a class="lunar-action more" href="#lunar-detalle">Saber mas</a></div>
     </div>
   </section>
