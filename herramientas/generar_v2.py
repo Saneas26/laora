@@ -116,7 +116,7 @@ CABECERA = f"""
          desactivados y no como enlaces: antes apuntaban a /carrito y
          /cuenta, que no existen, y daban un 404. Un botón apagado se
          entiende; un 404 parece que la web está rota. -->
-    <button class="header-icon profile-icon" type="button" disabled aria-label="Mi cuenta, todavía no disponible" title="Muy pronto"><span aria-hidden="true"></span></button>
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
     <button class="header-icon bag-icon" type="button" disabled aria-label="Carrito, todavía no disponible" title="Muy pronto"><span aria-hidden="true"></span><b>0</b></button>
   </div>
 </header>"""
