@@ -312,6 +312,14 @@ TEXTOS = {
         'linea1': 'Cuarzo japonés · 36 o 39 mm · Cristal de zafiro',
         'linea2': 'Plata · Cobre · Negro PVD · Desde {precio}',
     },
+    # 06/08/2026. Texto de Óscar, literal. Los 44 mm son los que él
+    # confirmó esta tarde, cuando el catálogo se contradecía consigo
+    # mismo y decía 42 a nivel de modelo.
+    'tortuga': {
+        'frase': 'Nacido para ir despacio. Hecho para llegar hondo.',
+        'linea1': 'Cuarzo japonés · 44 mm · 200 m',
+        'linea2': 'Acero 316L · Desde {precio}',
+    },
 }
 
 
