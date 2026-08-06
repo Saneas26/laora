@@ -984,16 +984,18 @@
             "id": "alba",
             "nombre": "Alba",
             "movimiento": "VH31 (TMI Vh31b, cuarzo japonés)",
-            "movimientoTipo": "Cuarzo, 3 agujas con segundero barrido",
-            "frecuencia": "N/A (cuarzo)",
+            "movimientoTipo": "AR25",
+            "frecuencia": "32.768 Hz (segundero barrido)",
             "autonomia": "N/A (cuarzo)",
-            "cajaMaterial": "Acero inoxidable 316L, PVD bronce",
+            "cajaMaterial": "Acero inoxidable 316L, plata",
             "diametro": "39 mm",
-            "estanqueidad": "Corona atornillada",
+            "estanqueidad": "AX25",
             "bisel": "Fijo liso, integrado en la caja (no giratorio)",
             "cristal": "Zafiro",
+            "esfera": "Negra militar",
             "fondo": "Fondo atornillado de acero",
             "refs": [
+              "LO-05_Trinchera_A01",
               "LO-05_Trinchera_A02",
               "LO-05_Trinchera_A03",
               "LO-05_Trinchera_A04",
@@ -1008,16 +1010,18 @@
             "id": "levante",
             "nombre": "Levante",
             "movimiento": "Seagull ST2130",
-            "movimientoTipo": "Automático (mecánico), con fecha",
+            "movimientoTipo": "Automatico con fecha, 3 agujas + segundero central",
             "frecuencia": "28.800 alt/h (4 Hz)",
             "autonomia": "~40 h",
-            "cajaMaterial": "Acero inoxidable 316L, PVD bronce",
+            "cajaMaterial": "Acero inoxidable 316L, plata",
             "diametro": "39 mm",
             "estanqueidad": "Corona atornillada",
             "bisel": "Fijo liso, integrado en la caja (no giratorio)",
             "cristal": "Zafiro",
+            "esfera": "Negra militar (acabado Levante)",
             "fondo": "Fondo atornillado de acero",
             "refs": [
+              "LO-05_Trinchera_L01",
               "LO-05_Trinchera_L02",
               "LO-05_Trinchera_L03",
               "LO-05_Trinchera_L04",
@@ -1043,6 +1047,7 @@
             "fondo": "Fondo atornillado",
             "peso": "~65 g (titanio, sin correa)",
             "refs": [
+              null,
               null,
               null,
               null,
@@ -1072,6 +1077,7 @@
               null,
               null,
               null,
+              null,
               "LO-05_Trinchera_E01"
             ]
           },
@@ -1087,6 +1093,7 @@
             "bisel": "Fijo",
             "cristal": "Zafiro",
             "refs": [
+              null,
               null,
               null,
               null,
@@ -1116,11 +1123,17 @@
               null,
               null,
               null,
+              null,
               "LO-05_Trinchera_E03"
             ]
           }
         ],
         "correas": [
+          {
+            "id": "39-mm-plata",
+            "nombre": "39 mm, plata",
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
+          },
           {
             "id": "39-mm-pvd-bronce",
             "nombre": "39 mm, PVD bronce",
@@ -1167,6 +1180,7 @@
             189.9,
             189.9,
             189.9,
+            189.9,
             null,
             null,
             null,
@@ -1177,6 +1191,7 @@
             249.9,
             249.9,
             249.9,
+            249.9,
             null,
             null,
             null,
@@ -1184,6 +1199,7 @@
             null
           ],
           "cenit": [
+            null,
             null,
             null,
             null,
@@ -1201,6 +1217,7 @@
             null,
             null,
             null,
+            null,
             189.9
           ],
           "eclipse-st2130": [
@@ -1211,9 +1228,11 @@
             null,
             null,
             null,
+            null,
             249.9
           ],
           "eclipse-9015": [
+            null,
             null,
             null,
             null,
@@ -1648,6 +1667,25 @@
             ]
           },
           {
+            "id": "cenit",
+            "nombre": "Cenit",
+            "movimiento": "Seiko NE15 (equiv. 6R15)",
+            "movimientoTipo": "Automático mecánico (23 rubíes, con fecha, hackeo y cuerda manual)",
+            "frecuencia": "21.600 vph (3 Hz)",
+            "autonomia": "~50 h",
+            "cajaMaterial": "Acero inoxidable 316L",
+            "diametro": "44 mm (buceo, estilo cojín/tortuga)",
+            "estanqueidad": "20 ATM (200 m)",
+            "bisel": "Giratorio unidireccional (120 clics)",
+            "cristal": "Zafiro",
+            "fondo": "Atornillado",
+            "peso": "175 g aprox. (con brazalete)",
+            "refs": [
+              null,
+              "LO-08_Tortuga_C01"
+            ]
+          },
+          {
             "id": "eclipse",
             "nombre": "Eclipse",
             "movimiento": "TMI VH31 (Vh31b)",
@@ -1706,6 +1744,10 @@
           "levante": [
             null,
             289.9
+          ],
+          "cenit": [
+            null,
+            449.9
           ],
           "eclipse": [
             null,

@@ -86,7 +86,7 @@ import unicodedata
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 24
+V_CSS = 26
 V_JS = 6
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -480,7 +480,9 @@ def pantalla(slug):
 <!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
 <link rel="stylesheet" href="/assets/css/configurador.css?v={V_CSS}">
 </head>
-<body{' class="cfg-muchos"' if len(acabados) > 6 or len(correas) > 4 else ''}>
+<body class="{' '.join(c for c in (
+    'cfg-muchos' if len(acabados) > 6 or len(correas) > 4 else '',
+    'cfg-apretado' if len(correas) > 8 else '') if c) or 'cfg-normal'}">
 
 <header class="cfg-cab">
   <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
