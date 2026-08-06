@@ -989,7 +989,7 @@
             "autonomia": "N/A (cuarzo)",
             "cajaMaterial": "Acero inoxidable 316L, plata",
             "diametro": "39 mm",
-            "estanqueidad": null,
+            "estanqueidad": "Corona atornillada",
             "bisel": "Fijo liso, integrado en la caja (no giratorio)",
             "cristal": "Zafiro",
             "esfera": "Negra militar",
@@ -1132,47 +1132,56 @@
           {
             "id": "39-mm-plata",
             "nombre": "39 mm, plata",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero",
+            "diametro": "39 mm"
           },
           {
             "id": "39-mm-pvd-bronce",
             "nombre": "39 mm, PVD bronce",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero",
+            "diametro": "39 mm"
           },
           {
             "id": "36-mm-plata",
             "nombre": "36 mm, plata",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero",
+            "diametro": "36 mm"
           },
           {
             "id": "36-mm-pvd-bronce",
             "nombre": "36 mm, PVD bronce",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero",
+            "diametro": "36 mm"
           },
           {
             "id": "39-mm-titanio-t2-negra",
             "nombre": "39 mm, Titanio T2 · negra",
-            "detalle": "Correa de piel genuina Pilot, negra · Negra, liso · Hebilla de acero inox."
+            "detalle": "Correa de piel genuina Pilot, negra · Negra, liso · Hebilla de acero inox.",
+            "diametro": "39 mm"
           },
           {
             "id": "39-mm-titanio-t2-azul",
             "nombre": "39 mm, Titanio T2 · azul",
-            "detalle": "Correa de piel genuina Pilot, azul · Azul, liso · Hebilla de acero inox."
+            "detalle": "Correa de piel genuina Pilot, azul · Azul, liso · Hebilla de acero inox.",
+            "diametro": "39 mm"
           },
           {
             "id": "36-mm-titanio-t2-negra",
             "nombre": "36 mm, Titanio T2 · negra",
-            "detalle": "Correa de piel genuina Pilot, negra · Negra, liso · Hebilla de acero inox."
+            "detalle": "Correa de piel genuina Pilot, negra · Negra, liso · Hebilla de acero inox.",
+            "diametro": "36 mm"
           },
           {
             "id": "36-mm-titanio-t2-azul",
             "nombre": "36 mm, Titanio T2 · azul",
-            "detalle": "Correa de piel genuina Pilot, azul · Azul, liso · Hebilla de acero inox."
+            "detalle": "Correa de piel genuina Pilot, azul · Azul, liso · Hebilla de acero inox.",
+            "diametro": "36 mm"
           },
           {
             "id": "39-mm-con-pvd-negro",
             "nombre": "39 mm, con PVD negro",
-            "detalle": "Correa NATO nailon balístico verde con hebillas PVD · Tejido balístico verde, hebillas PVD"
+            "detalle": "Correa NATO nailon balístico verde con hebillas PVD · Tejido balístico verde, hebillas PVD",
+            "diametro": "39 mm"
           }
         ],
         "precios": {
@@ -1244,9 +1253,7 @@
           ]
         },
         "rotuloOpciones": "Caja y correa",
-        "comunes": {
-          "Ancho de asa": "20 mm"
-        }
+        "comunes": {}
       },
       "historiaOriginal": {
         "_": "Historia del original. Nombra marca y modelo con todas sus letras y lleva su propio aviso legal.",

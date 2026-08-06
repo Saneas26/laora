@@ -204,7 +204,14 @@
         var tit = document.createElement('h3'); tit.textContent = g.titulo;
         cab.appendChild(num); cab.appendChild(tit);
         var dl = document.createElement('dl');
-        g.filas.forEach(function (par) { dl.appendChild(linea(par[0], par[1])); });
+        g.filas.forEach(function (par) {
+          /* El diámetro puede cambiar con la opción elegida —el
+             Trinchera monta el mismo Alba en 39 y en 36 mm—, así que
+             si la opción trae el suyo, manda ese. La ficha tiene que
+             describir el reloj que se está pidiendo, no otro. */
+          var valor = (par[0] === 'DIÁMETRO' && c.diametro) ? c.diametro : par[1];
+          dl.appendChild(linea(par[0], valor));
+        });
 
         /* la correa elegida y la referencia cierran el último grupo:
            son lo único que depende de la elección de correa */
