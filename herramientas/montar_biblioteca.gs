@@ -34,17 +34,36 @@
  *   3. Pega esto, guarda y pulsa ▶ sobre `montarBiblioteca`.
  *   4. Mira el registro (Ver → Registro de ejecución).
  *
- * NO TOCA «Catalogo laOra» NI NINGUNA OTRA PESTAÑA. Solo crea o rehace
- * las ocho de abajo. Se puede volver a ejecutar las veces que haga
- * falta: rehace el esqueleto y respeta lo demás.
+ * LAS TRECE QUE YA HAY
+ * ------------------------------------------------------------
+ * El libro no estaba vacío: tiene Inicio, Modelos, Gama y acabados,
+ * Línea Eclipse, Biblioteca BOM, Movimientos, Estándar calidad,
+ * Escandallo, Opus compras, Catalogo final, Escandallo Claude,
+ * Catalogo laOra y PVP_Claude.
  *
- * OJO: al rehacer una pestaña se pierde lo que hubiera escrito en ella.
- * Mientras estemos migrando, ejecuta con la cabeza.
+ * Dos de ellas —«Modelos» y «Movimientos»— se llamaban igual que dos de
+ * las nuestras. Por eso las nuevas llevan el prefijo `BIB_`: no pueden
+ * pisar nada, y de un vistazo se ve cuáles son del sistema nuevo.
+ *
+ * `rehacer()` se niega en redondo a borrar una pestaña que no empiece
+ * por `BIB_`. NO TOCA ninguna de las trece.
+ *
+ * OJO: al rehacer una pestaña BIB_ se pierde lo que hubiera escrito en
+ * ella. Mientras estemos migrando, ejecuta con la cabeza.
  */
 
-// Estas ocho y ninguna más. Cualquier otra pestaña del libro es intocable.
-const HOJAS = ['PARÁMETROS', 'COMPONENTES', 'MOVIMIENTOS', 'MODELOS',
-               'REFERENCIAS', 'PRECIOS', 'COMPRAS', 'WEB'];
+// El libro YA TIENE 13 pestañas, y dos se llaman «Modelos» y «Movimientos».
+// Por eso las nuevas van con prefijo: así no pueden pisar nada de lo que hay.
+// Sin espacios ni acentos en el nombre, para que las fórmulas no necesiten
+// comillas al referirse a ellas.
+const PREFIJO = 'BIB_';
+const CLAVES = ['PARAMETROS', 'COMPONENTES', 'MOVIMIENTOS', 'MODELOS',
+                'REFERENCIAS', 'PRECIOS', 'COMPRAS', 'WEB'];
+
+function hoja(clave) { return PREFIJO + clave; }
+
+// Estas ocho y ninguna más. Las otras trece son intocables.
+const HOJAS = CLAVES.map(hoja);
 
 const AZUL = '#1a1a1a';       // cabecera de las que escribes tú
 const GRIS = '#4a4a4a';       // cabecera de las que se calculan solas
@@ -267,6 +286,12 @@ function letra(n) {
 }
 
 function rehacer(ss, nombre) {
+  // Cinturón: aquí no se borra nada que no lleve nuestro prefijo. Si alguna
+  // vez alguien cambia un nombre a mano, el guion se para en vez de tragarse
+  // una pestaña con datos.
+  if (nombre.indexOf(PREFIJO) !== 0) {
+    throw new Error('Me niego a tocar «' + nombre + '»: no es una pestaña de la biblioteca.');
+  }
   const vieja = ss.getSheetByName(nombre);
   if (vieja) ss.deleteSheet(vieja);
   return ss.insertSheet(nombre);
@@ -288,13 +313,13 @@ function montarBiblioteca() {
 
   montarParametros(ss);
   ['COMPONENTES', 'MOVIMIENTOS', 'MODELOS', 'REFERENCIAS',
-   'PRECIOS', 'COMPRAS', 'WEB'].forEach(function (n) { montarTabla(ss, n); });
+   'PRECIOS', 'COMPRAS', 'WEB'].forEach(function (c) { montarTabla(ss, c); });
 
   formulasPrecios(ss);
   formulasCompras(ss);
   formulasWeb(ss);
 
-  ss.setActiveSheet(ss.getSheetByName('PARÁMETROS'));
+  ss.setActiveSheet(ss.getSheetByName(hoja('PARAMETROS')));
 
   Logger.log('');
   Logger.log('✔ Biblioteca montada: ' + HOJAS.join(' · '));
@@ -303,7 +328,7 @@ function montarBiblioteca() {
 
 
 function montarParametros(ss) {
-  const h = rehacer(ss, 'PARÁMETROS');
+  const h = rehacer(ss, hoja('PARAMETROS'));
   const cab = ['Parámetro', 'Valor', 'Unidad', 'Qué es', 'Nombre en fórmulas'];
 
   h.getRange(1, 1, 1, cab.length).setValues([cab])
@@ -341,8 +366,9 @@ function montarParametros(ss) {
 }
 
 
-function montarTabla(ss, nombre) {
-  const h = rehacer(ss, nombre);
+function montarTabla(ss, clave) {
+  const h = rehacer(ss, hoja(clave));
+  const nombre = clave;                       // la clave interna de COLUMNAS
   const defs = COLUMNAS[nombre];
   const calculada = ['PRECIOS', 'COMPRAS', 'WEB'].indexOf(nombre) >= 0;
   const filas = nombre === 'COMPONENTES' || nombre === 'COMPRAS' ? FILAS_COMP : FILAS;
@@ -371,7 +397,7 @@ function montarTabla(ss, nombre) {
 
   h.setFrozenRows(1);
   h.setFrozenColumns(1);
-  Logger.log('✔ ' + nombre + ' · ' + defs.length + ' columnas');
+  Logger.log('✔ ' + hoja(nombre) + ' · ' + defs.length + ' columnas');
 }
 
 
@@ -380,28 +406,31 @@ function montarTabla(ss, nombre) {
    ============================================================ */
 
 function formulasPrecios(ss) {
-  const h = ss.getSheetByName('PRECIOS');
+  const h = ss.getSheetByName(hoja('PRECIOS'));
+  const CO = hoja('COMPONENTES');
+  const RE = hoja('REFERENCIAS');
+  const MO = hoja('MODELOS');
 
   // las diez ranuras de piezas de REFERENCIAS, de id_movimiento a id_packaging
   const desde = col('REFERENCIAS', 'id_movimiento');
   const hasta = col('REFERENCIAS', 'id_packaging');
   const sumas = [];
   for (let c = desde; c <= hasta; c++) {
-    sumas.push('SUMIF(COMPONENTES!$A$2:$A$' + FILAS_COMP + ',REFERENCIAS!' +
-               letra(c) + '2,COMPONENTES!$O$2:$O$' + FILAS_COMP + ')');
+    sumas.push('SUMIF(' + CO + '!$A$2:$A$' + FILAS_COMP + ',' + RE + '!' +
+               letra(c) + '2,' + CO + '!$O$2:$O$' + FILAS_COMP + ')');
   }
 
   const f = {
-    'ref':            '=IF(REFERENCIAS!A2="","",REFERENCIAS!A2)',
-    'modelo':         '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$B$100,2,FALSE),""))',
-    'acabado':        '=IF($A2="","",REFERENCIAS!C2)',
+    'ref':            '=IF(' + RE + '!A2="","",' + RE + '!A2)',
+    'modelo':         '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!B2,' + MO + '!$A$2:$B$100,2,FALSE),""))',
+    'acabado':        '=IF($A2="","",' + RE + '!C2)',
     'coste_piezas':   '=IF($A2="","",' + sumas.join('+') + ')',
     'coste_ajustado': '=IF($A2="","",$D2*(1+colchon_inflacion))',
     'factor_neto':    '=IF($A2="","",1/(1+impuesto_venta)-comision_pago_pct-devoluciones_pct)',
     'cargos_fijos':   '=IF($A2="","",comision_pago_fija+envio_medio+provision_garantia)',
     // el PVP que deja exactamente el margen objetivo
     'suelo_tecnico':  '=IF($A2="","",($E2+$G2+margen_objetivo)/$F2)',
-    'techo_mercado':  '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$I$100,9,FALSE),""))',
+    'techo_mercado':  '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!B2,' + MO + '!$A$2:$I$100,9,FALSE),""))',
     // redondeado al x9,90 siguiente. Se puede pisar a mano.
     'pvp_propuesto':  '=IF($A2="","",CEILING($H2-9.9,10)+9.9)',
     'margen_eur':     '=IF(OR($A2="",$J2=""),"",$J2*$F2-$G2-$E2)',
@@ -414,77 +443,84 @@ function formulasPrecios(ss) {
                       '"\\s*·\\s*$",""))))',
   };
   aplicar(h, 'PRECIOS', f, FILAS);
-  Logger.log('✔ PRECIOS · motor montado (coste → suelo → techo → PVP → margen)');
+  Logger.log('✔ ' + hoja('PRECIOS') + ' · motor montado (coste → suelo → techo → PVP → margen)');
 }
 
 
 function formulasCompras(ss) {
-  const h = ss.getSheetByName('COMPRAS');
+  const h = ss.getSheetByName(hoja('COMPRAS'));
+  const CO = hoja('COMPONENTES');
+  const RE = hoja('REFERENCIAS');
   const d = col('REFERENCIAS', 'id_movimiento');
   const m = col('REFERENCIAS', 'id_packaging');
 
   const f = {
-    'id_componente':   '=IF(COMPONENTES!A2="","",COMPONENTES!A2)',
-    'desc_compra':     '=IF($A2="","",COMPONENTES!D2)',
-    'tipo':            '=IF($A2="","",COMPONENTES!B2)',
-    'coste_ud':        '=IF($A2="","",COMPONENTES!O2)',
-    'usado_en_refs':   '=IF($A2="","",COUNTIF(REFERENCIAS!$' + letra(d) + '$2:$' +
+    'id_componente':   '=IF(' + CO + '!A2="","",' + CO + '!A2)',
+    'desc_compra':     '=IF($A2="","",' + CO + '!D2)',
+    'tipo':            '=IF($A2="","",' + CO + '!B2)',
+    'coste_ud':        '=IF($A2="","",' + CO + '!O2)',
+    'usado_en_refs':   '=IF($A2="","",COUNTIF(' + RE + '!$' + letra(d) + '$2:$' +
                        letra(m) + '$' + FILAS + ',$A2))',
     // stock_actual se escribe a mano: no lleva fórmula
-    'moq':             '=IF($A2="","",COMPONENTES!P2)',
+    'moq':             '=IF($A2="","",' + CO + '!P2)',
     'coste_pedido_min':'=IF($A2="","",$D2*$G2)',
-    'plazo_dias':      '=IF($A2="","",COMPONENTES!Q2)',
+    'plazo_dias':      '=IF($A2="","",' + CO + '!Q2)',
     'inmovilizado':    '=IF($A2="","",$D2*N($F2))',
   };
   aplicar(h, 'COMPRAS', f, FILAS_COMP);
 
   // la columna que sí se escribe, marcada
-  const c = col('COMPRAS', 'stock_actual');
-  h.getRange(2, c, FILAS_COMP, 1).setBackground('#fff8e1');
+  h.getRange(2, col('COMPRAS', 'stock_actual'), FILAS_COMP, 1).setBackground('#fff8e1');
 
-  Logger.log('✔ COMPRAS · stock_actual se escribe a mano; lo demás sale solo');
+  Logger.log('✔ ' + hoja('COMPRAS') + ' · stock_actual se escribe a mano; lo demás sale solo');
 }
 
 
 function formulasWeb(ss) {
-  const h = ss.getSheetByName('WEB');
-  const C = 'COMPONENTES!$A$2:$E$' + FILAS_COMP;   // id → desc_web (columna 5)
+  const h = ss.getSheetByName(hoja('WEB'));
+  const CO = hoja('COMPONENTES');
+  const RE = hoja('REFERENCIAS');
+  const MO = hoja('MODELOS');
+  const PR = hoja('PRECIOS');
+  const RANGO = CO + '!$A$2:$E$' + FILAS_COMP;   // id → desc_web (columna 5)
 
   function pieza(titulo) {
-    return '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!' +
-           letra(col('REFERENCIAS', titulo)) + '2,' + C + ',5,FALSE),""))';
+    return '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!' +
+           letra(col('REFERENCIAS', titulo)) + '2,' + RANGO + ',5,FALSE),""))';
   }
 
   const f = {
-    'ref':          '=IF(REFERENCIAS!A2="","",REFERENCIAS!A2)',
-    'slug_modelo':  '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$C$100,3,FALSE),""))',
-    'modelo':       '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$B$100,2,FALSE),""))',
-    'acabado':      '=IF($A2="","",REFERENCIAS!C2)',
-    'pvp':          '=IF($A2="","",PRECIOS!J2)',
+    'ref':          '=IF(' + RE + '!A2="","",' + RE + '!A2)',
+    'slug_modelo':  '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!B2,' + MO + '!$A$2:$C$100,3,FALSE),""))',
+    'modelo':       '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!B2,' + MO + '!$A$2:$B$100,2,FALSE),""))',
+    'acabado':      '=IF($A2="","",' + RE + '!C2)',
+    'pvp':          '=IF($A2="","",' + PR + '!J2)',
     'movimiento':   pieza('id_movimiento'),
     'caja':         pieza('id_caja'),
     'esfera':       pieza('id_esfera'),
     'agujas':       pieza('id_agujas'),
     'cristal':      pieza('id_cristal'),
     'correa':       pieza('id_correa'),
-    'diametro_mm':  '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$J$100,10,FALSE),""))',
-    'estanqueidad': '=IF($A2="","",IFERROR(VLOOKUP(REFERENCIAS!B2,MODELOS!$A$2:$K$100,11,FALSE),""))',
-    'foto':         '=IF($A2="","",REFERENCIAS!' + letra(col('REFERENCIAS', 'foto')) + '2)',
-    'publicar':     '=IF($A2="","",REFERENCIAS!' + letra(col('REFERENCIAS', 'estado')) + '2="activa")',
+    'diametro_mm':  '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!B2,' + MO + '!$A$2:$J$100,10,FALSE),""))',
+    'estanqueidad': '=IF($A2="","",IFERROR(VLOOKUP(' + RE + '!B2,' + MO + '!$A$2:$K$100,11,FALSE),""))',
+    'foto':         '=IF($A2="","",' + RE + '!' + letra(col('REFERENCIAS', 'foto')) + '2)',
+    'publicar':     '=IF($A2="","",' + RE + '!' + letra(col('REFERENCIAS', 'estado')) + '2="activa")',
   };
   aplicar(h, 'WEB', f, FILAS);
-  Logger.log('✔ WEB · solo desc_web y PVP. Ni una columna de coste.');
+  Logger.log('✔ ' + hoja('WEB') + ' · solo desc_web y PVP. Ni una columna de coste.');
 }
 
 
-function aplicar(hoja, nombre, formulas, filas) {
+/* `destino` es la pestaña. Ojo: NO se llama `hoja`, que es el nombre de
+   la función que compone los nombres con prefijo. */
+function aplicar(destino, clave, formulas, filas) {
   Object.keys(formulas).forEach(function (titulo) {
-    const c = col(nombre, titulo);
+    const c = col(clave, titulo);
     // Se escribe en la fila 2 y se copia hacia abajo: copiando, Sheets
     // ajusta las referencias fila a fila, que es justo lo que hace falta.
     // (Se escribe en notación con coma; la hoja la traduce al «;» de España.)
-    const primera = hoja.getRange(2, c);
+    const primera = destino.getRange(2, c);
     primera.setFormula(formulas[titulo]);
-    if (filas > 1) primera.copyTo(hoja.getRange(3, c, filas - 1, 1));
+    if (filas > 1) primera.copyTo(destino.getRange(3, c, filas - 1, 1));
   });
 }
