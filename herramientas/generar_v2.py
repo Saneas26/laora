@@ -261,9 +261,14 @@ TEXTOS = {
     # Levante lleva «2 coronas roscadas». Óscar eligió mantener las dos
     # cosas y subir el «desde» al acabado que sí las tiene, así que aquí
     # el precio NO es el mínimo del reloj sino el de ese acabado.
+    # 06/08/2026, más tarde: lo cazó Óscar. Al subir el precio al Levante
+    # se quedó «Cuarzo japonés» en el primer renglón, que es el
+    # movimiento del ALBA. Las dos líneas hablaban de relojes distintos:
+    # arriba el de 209,90 y abajo el de 279,90. Ahora las dos describen
+    # el Levante, que es automático, de 41 mm y 100 m.
     'cero-cero': {
         'frase': 'Diseñado para misiones cotidianas.',
-        'linea1': 'Cuarzo japonés · 41 mm · 100 m',
+        'linea1': 'Automático · 41 mm · 100 m',
         'linea2': 'Cristal de zafiro · Doble corona · Desde {precio_levante}',
     },
     # 06/08/2026. Mismo caso que el Cero Cero y misma decisión de Óscar:
