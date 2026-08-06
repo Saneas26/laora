@@ -1345,24 +1345,6 @@
           {
             "id": "cenit",
             "nombre": "Cenit",
-            "movimiento": "Seiko NH35A",
-            "movimientoTipo": "Automático mecánico (24 rubíes, con fecha, hackeo y cuerda manual)",
-            "frecuencia": "21.600 vph (3 Hz)",
-            "autonomia": "~41 h",
-            "cajaMaterial": "Acero inoxidable 316L",
-            "diametro": "40 mm (buceo)",
-            "estanqueidad": "30 ATM (300 m)",
-            "bisel": "Giratorio unidireccional (120 clics)",
-            "cristal": "Zafiro",
-            "fondo": "Atornillado",
-            "peso": "165 g aprox. (con brazalete)",
-            "refs": [
-              "LO-06_Diver_C01"
-            ]
-          },
-          {
-            "id": "eclipse",
-            "nombre": "Eclipse",
             "movimiento": "PT5000",
             "movimientoTipo": "Automático mecánico (25 rubíes, con fecha, hackeo y cuerda manual)",
             "frecuencia": "28.800 vph (4 Hz)",
@@ -1375,7 +1357,7 @@
             "fondo": "Atornillado",
             "peso": "165 g aprox. (con brazalete)",
             "refs": [
-              "LO-06_Diver_E01"
+              "LO-06_Diver_C01"
             ]
           }
         ],
@@ -1391,9 +1373,6 @@
             229.9
           ],
           "cenit": [
-            289.9
-          ],
-          "eclipse": [
             279.9
           ]
         },
@@ -1771,10 +1750,10 @@
           {
             "id": "cenit",
             "nombre": "Cenit",
-            "movimiento": "Seiko NE15 (equiv. 6R15)",
-            "movimientoTipo": "Automático mecánico (23 rubíes, con fecha, hackeo y cuerda manual)",
+            "movimiento": "Seiko NH36A (automático, day-date)",
+            "movimientoTipo": "Automático mecánico (24 rubíes, day-date, hackeo y cuerda manual)",
             "frecuencia": "21.600 vph (3 Hz)",
-            "autonomia": "~50 h",
+            "autonomia": "~41 h",
             "cajaMaterial": "Acero inoxidable 316L",
             "diametro": "44 mm (buceo, estilo cojín/tortuga)",
             "estanqueidad": "20 ATM (200 m)",
