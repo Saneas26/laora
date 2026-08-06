@@ -320,6 +320,14 @@ TEXTOS = {
         'linea1': 'Cuarzo japonés · 44 mm · 200 m',
         'linea2': 'Acero 316L · Desde {precio}',
     },
+    # 06/08/2026. Texto de Óscar, literal, y con él quedan los ocho.
+    # Segundo renglón de dos grupos, como el Precisa.
+    'coctel': {
+        'frase': 'Brilla cuando el día baja el ritmo.',
+        'linea1': '40 mm · Correa de piel',
+        'linea2': 'Cuarzo · 209,90 € | Automático Serie 9 · 349,90 €',
+        'precio': ' ',      # los dos precios ya van en el renglón de arriba
+    },
 }
 
 
