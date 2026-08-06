@@ -27,8 +27,17 @@
 /relojes/lo-02-hora-cero.html  /cero-cero.html  301
 /relojes/lo-02-cero-cero       /cero-cero.html  301
 /relojes/lo-02-cero-cero.html  /cero-cero.html  301
-/relojes/lo-03-bauhaus         /bauhaus.html    301
-/relojes/lo-03-bauhaus.html    /bauhaus.html    301
+# ============================================================
+# EL BAUHAUS SALE DE LA WEB (06/08/2026)
+# Óscar: «hay que quitar el bauhaus». No está en el catálogo activo —sin
+# configurador, sin precio y sin referencias en la hoja—, así que su
+# ficha era un callejón sin salida: un reloj que no se puede pedir.
+# Su dirección y las viejas van a la colección en vez de dar un 404.
+# ============================================================
+/relojes/lo-03-bauhaus         /coleccion.html  301
+/relojes/lo-03-bauhaus.html    /coleccion.html  301
+/bauhaus                       /coleccion.html  301
+/bauhaus.html                  /coleccion.html  301
 /relojes/lo-04-precisa         /precisa.html    301
 /relojes/lo-04-precisa.html    /precisa.html    301
 /relojes/lo-05-trinchera       /trinchera.html  301
