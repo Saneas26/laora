@@ -141,9 +141,15 @@ CABECERA = f"""
 # ni el Trinchera tienen el cristal confirmado en su acabado de entrada,
 # así que ahí va el dato que sí está —el diámetro y la estanqueidad—.
 # ============================================================
-def desde_de(slug):
+def desde_de(slug, acabado=None):
+    """El precio más bajo del reloj, o el de UN acabado concreto.
+
+    Hace falta lo segundo porque no todos los acabados llevan lo mismo:
+    el Cero Cero solo tiene zafiro y doble corona en el Levante, y
+    anunciar eso con el precio del Alba sería mentir."""
     cfg = R[slug]['configurador']
-    return min(p for l in cfg['precios'].values() for p in l if p is not None)
+    listas = [cfg['precios'][acabado]] if acabado else list(cfg['precios'].values())
+    return min(p for l in listas for p in l if p is not None)
 
 
 # Los OCHO relojes del catálogo, uno por exposición (Óscar, 06/08/2026).
@@ -250,17 +256,15 @@ TEXTOS = {
         'linea1': 'Cronógrafo mecacuarzo · 40 mm · 100 m',
         'linea2': 'Corona roscada · Acero 316L · Desde {precio}',
     },
-    # 06/08/2026. El segundo renglón que mandó Óscar era «Cristal de
-    # zafiro · Doble corona · Desde 209,90 €», y se queda fuera hasta que
-    # él decida: las dos cosas son del LEVANTE (279,90 €), no del Alba,
-    # que es el de 209,90. La hoja lo dice sin rodeos —«Mineral Hardlex
-    # (no es zafiro)»— y solo el Levante lleva «2 coronas roscadas».
-    # Mientras tanto entra lo que sí es cierto: la frase y el primer
-    # renglón, que salen tal cual del catálogo.
+    # 06/08/2026. Zafiro y doble corona son del LEVANTE, no del Alba: la
+    # hoja dice «Mineral Hardlex (no es zafiro)» en el Alba y solo el
+    # Levante lleva «2 coronas roscadas». Óscar eligió mantener las dos
+    # cosas y subir el «desde» al acabado que sí las tiene, así que aquí
+    # el precio NO es el mínimo del reloj sino el de ese acabado.
     'cero-cero': {
         'frase': 'Diseñado para misiones cotidianas.',
         'linea1': 'Cuarzo japonés · 41 mm · 100 m',
-        'linea2': '',
+        'linea2': 'Cristal de zafiro · Doble corona · Desde {precio_levante}',
     },
 }
 
@@ -297,13 +301,18 @@ for e in EXPOSICIONES:
         # El «·» con el que Óscar escribe los renglones separa los datos;
         # en pantalla los separa la barra fina de la hoja de estilos, que
         # es la del material aprobado. Mismo contenido, misma tipografía.
-        conPrecio = euros(desde_de(e['slug']))
+        # `{precio}` es el mínimo del reloj; `{precio_levante}` —o el de
+        # cualquier acabado— el de ESE acabado. Así ningún número va
+        # escrito a mano y ninguno se queda viejo cuando cambie la hoja.
+        precios = {'precio': euros(desde_de(e['slug']))}
+        for a in R[e['slug']]['configurador']['acabados']:
+            precios['precio_' + a['id'].replace('-', '_')] = euros(desde_de(e['slug'], a['id']))
         e['frase'] = t['frase']
         e['specs'] = [x.strip() for x in t['linea1'].split('·') if x.strip()]
         # Un `linea2` vacío es una decisión, no un olvido: significa que
         # el segundo renglón todavía no se puede publicar. Entonces
         # vuelve el precio suelto de siempre.
-        e['linea2'] = [x.strip().format(precio=conPrecio)
+        e['linea2'] = [x.strip().format(**precios)
                        for x in t['linea2'].split('·') if x.strip()]
     else:
         e['frase'] = 'Llego el momento de'
