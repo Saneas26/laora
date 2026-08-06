@@ -59,7 +59,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 28
+V_CSS = 30
 V_JS = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -996,6 +996,14 @@ PAGINA = f"""<!DOCTYPE html>
      PORTADA de laora.es desde el 05/08/2026. Porte del material
      aprobado: mismas clases, mismo orden y mismos textos que los
      componentes de React del zip. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- La portada no cargaba NINGUNA tipografía: se pintaba con la Arial
+     del sistema, y por eso el texto sobre foto se veía peor que el de
+     cualquier web cuidada a la misma medida. Inter está dibujada para
+     pantalla. `display=swap` para que el texto se lea desde el primer
+     instante aunque la fuente tarde. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/lunarv2.css?v={V_CSS}">
 </head>
 <body>
