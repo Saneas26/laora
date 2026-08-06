@@ -149,7 +149,10 @@ Deno.serve(async (req) => {
 
   const URL_SB = Deno.env.get('SUPABASE_URL');
   const ANON = Deno.env.get('SUPABASE_ANON_KEY');
-  const SERVICIO = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  /* En este proyecto `SUPABASE_SERVICE_ROLE_KEY` existe pero la API
+     REST la rechaza —está en el sistema nuevo de claves—, así que la
+     buena se guarda en el secreto `LAORA_SERVICIO`. */
+  const SERVICIO = Deno.env.get('LAORA_SERVICIO') || Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
   if (!URL_SB || !ANON || !SERVICIO) return json({ error: 'configuración incompleta' }, 500);
 
   const cabecera = req.headers.get('Authorization') || '';
