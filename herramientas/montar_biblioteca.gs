@@ -105,8 +105,9 @@ const PARAMETROS = [
    'La parte variable que se lleva la pasarela de cobro. Va sobre el PVP entero, impuesto incluido.'],
   ['comision_pago_fija', 0.35,  '€',
    'La parte fija que se lleva la pasarela por cada cobro.'],
-  ['packaging',          2.00,  '€',
-   'La caja, el estuche y lo que va dentro.'],
+  // El packaging NO va aquí: es una pieza como las demás y vive en
+  // COMPONENTES, con su proveedor y su pedido mínimo. Si estuviera en los
+  // dos sitios se contaría dos veces en cada reloj.
   ['envio',              7.00,  '€',
    'Mandar el reloj al cliente.'],
   ['montaje_y_control',  8.00,  '€',
@@ -492,6 +493,18 @@ const PIEZAS = [
            'POR CONFIRMAR: que los diámetros de los agujeros sean los del 6497 y que el segundero pequeño ' +
            'caiga a las 9, donde lo pone el ST3600. Sin eso no vale.' },
 
+  { id: 'ESF-CUERDA', tipo: 'esfera',
+    nombre: 'Esfera laOra con logo en relieve 3D',
+    compra: '', web: 'Esfera con el logo en relieve metálico',
+    material: '', acabado: '', color: '',
+    coste: 18.49, portes: 0, moq: 10, plazo: 0,
+    verificado: 'estimado', estado: 'buscando',
+    enlace: '',
+    notas: 'Precio real de la esfera del Bitácora en Tiffany con logo y nombre en relieve 3D metálico, ' +
+           'que es lo que Óscar paga hoy comprando 10. Sirve de referencia hasta tener la de este reloj. ' +
+           '⚠ Pedido mínimo 10 = 184,90 € COMPROMETIDOS: es la única pieza que obliga a tener stock y ' +
+           'la que decide cuántos acabados se pueden ofrecer. Diseño por definir.' },
+
   { id: 'PACK-ESTUCHE', tipo: 'packaging',
     nombre: 'Estuche y embalaje laOra',
     compra: '', web: '',
@@ -515,6 +528,30 @@ const CAJAS_SPECS = [
 const CORREAS_SPECS = [
   ['CORREA-PIEL-20', 'correa', 'Piel', 'Piel de becerro', '', 'varios', 20, '', '', '',
    'Hebilla', 'no', 200, 'no', 'Correa de piel de becerro con liberación rápida'],
+];
+
+// ESFERAS · [id, color, acabado, indices, numeracion, lume, tipo_lume, ventanilla,
+//            pos_fecha, subesferas, Ø, logo_3d, texto, esteril, compat, desc_web]
+const ESFERAS_SPECS = [
+  ['ESF-CUERDA', '', '', '', '', '', '', 'no', '', 'segundero pequeño a las 9', '',
+   'sí', 'laOra', 'no', 'ST3600 · ETA 6497', 'Esfera con el logo en relieve metálico'],
+];
+
+/* El reloj de cuerda manual, montado de punta a punta.
+   En borrador: el nombre lo pone Óscar y falta confirmar piezas. */
+const MODELOS_SEED = [
+  ['LO-10', '', 'cuerda', 'entrada',
+   'Un mecánico de cuerda manual: se le da cuerda cada mañana y se ve el volante latir por el fondo.',
+   'Quien quiere su primer reloj mecánico de verdad', '', '', '', 'borrador',
+   'El nombre lo pone Óscar. Su gracia es que la competencia china NO vende cuerda manual: no hay con qué compararlo. ' +
+   'Falta el techo de mercado, y por eso no salta el aviso de precio.'],
+];
+
+const REFERENCIAS_SEED = [
+  ['LO-10_Cuerda_A01', 'LO-10', 'Alba', 'MOV-ST36', 'CAJA-6497-44', 'ESF-CUERDA',
+   'AGUJAS-6497', '', '', '', 'CORREA-PIEL-20', '', 'PACK-ESTUCHE', 'borrador', '',
+   'POR CONFIRMAR si el cristal, la corona y el fondo vienen con la caja. Si no vienen, hay que sumarlos ' +
+   'y el precio sube. La esfera va al precio de la del Bitácora mientras no haya diseño propio.'],
 ];
 
 
@@ -702,7 +739,8 @@ function formulasPrecios(ss) {
     // lo que cuesta
     'coste_piezas':   '=IF($A2="","",' + sumas.join('+') + ')',
     'coste_ajustado': '=IF($A2="","",$D2*(1+colchon_inflacion))',
-    'costes_directos':'=IF($A2="","",packaging+envio+montaje_y_control+provision_garantia)',
+    // el packaging no está aquí: es una pieza y va en el coste de piezas
+    'costes_directos':'=IF($A2="","",envio+montaje_y_control+provision_garantia)',
 
     // a cuánto se vende. Redondeado al x9,90 siguiente; se puede pisar a mano.
     'pvp_propuesto':  '=IF($A2="","",CEILING(multiplicador*($E2+$F2)-9.9,10)+9.9)',
@@ -877,9 +915,16 @@ function sembrar(ss) {
     .getRange(2, 1, CAJAS_SPECS.length, COLUMNAS['CAJAS'].length).setValues(CAJAS_SPECS);
   ss.getSheetByName('CORREAS')
     .getRange(2, 1, CORREAS_SPECS.length, COLUMNAS['CORREAS'].length).setValues(CORREAS_SPECS);
+  ss.getSheetByName('ESFERAS')
+    .getRange(2, 1, ESFERAS_SPECS.length, COLUMNAS['ESFERAS'].length).setValues(ESFERAS_SPECS);
+  ss.getSheetByName('MODELOS')
+    .getRange(2, 1, MODELOS_SEED.length, COLUMNAS['MODELOS'].length).setValues(MODELOS_SEED);
+  ss.getSheetByName('REFERENCIAS')
+    .getRange(2, 1, REFERENCIAS_SEED.length, COLUMNAS['REFERENCIAS'].length).setValues(REFERENCIAS_SEED);
 
   Logger.log('✔ Sembradas ' + filas.length + ' piezas: ' + MOV_COMPONENTE.length +
              ' movimientos y ' + PIEZAS.length + ' del reloj de cuerda manual.');
+  Logger.log('✔ Y su referencia montada: LO-10_Cuerda_A01. Mira PRECIOS.');
   Logger.log('  Precios leídos el ' + HOY + '. «estimado» es rango, no precio.');
   Logger.log('  ⚠ La caja está de OFERTA a 15,39 €; su precio normal es 57,00 €.');
   Logger.log('  Una celda vacía es un dato que NO sabemos. No se rellena a ojo.');
