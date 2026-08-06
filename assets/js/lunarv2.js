@@ -55,7 +55,9 @@
     var flechas = media.querySelectorAll('[data-hero-paso]');
     var foto = media.querySelector('.lunar-hero-image');
     var elNombre = document.querySelector('[data-hero-nombre]');
+    var elFrase = document.querySelector('[data-hero-frase]');
     var elSpecs = document.querySelector('[data-hero-specs]');
+    var elSpecs2 = document.querySelector('[data-hero-specs2]');
     var elPrecio = document.querySelector('[data-hero-precio]');
     var elReservar = document.querySelector('[data-hero-reservar]');
     var vista = 0;
@@ -81,14 +83,28 @@
       media.setAttribute('aria-label', e.alt);
 
       if (elNombre) elNombre.textContent = e.nombre;
-      if (elPrecio) elPrecio.textContent = 'desde ' + e.precio;
+      if (elFrase) elFrase.textContent = e.frase || 'Llego el momento de';
       if (elReservar) elReservar.setAttribute('href', e.enlace);
-      if (elSpecs) {
-        elSpecs.innerHTML = '';
-        e.specs.forEach(function (dato, n) {
-          if (n) { var sep = document.createElement('i'); sep.textContent = '|'; elSpecs.appendChild(sep); }
-          elSpecs.appendChild(document.createTextNode(dato));
+
+      /* Los renglones de datos: uno o dos según el reloj. Los separa la
+         barra fina de la hoja, no el punto con el que se escriben. */
+      function renglon(caja, datos) {
+        if (!caja) return;
+        caja.innerHTML = '';
+        (datos || []).forEach(function (dato, n) {
+          if (n) { var sep = document.createElement('i'); sep.textContent = '|'; caja.appendChild(sep); }
+          caja.appendChild(document.createTextNode(dato));
         });
+        caja.hidden = !(datos && datos.length);
+      }
+      renglon(elSpecs, e.specs);
+      renglon(elSpecs2, e.linea2);
+
+      /* El precio suelto solo cuando NO va dentro del segundo renglón:
+         si no, saldría dos veces. */
+      if (elPrecio) {
+        elPrecio.textContent = 'desde ' + e.precio;
+        elPrecio.hidden = !!(e.linea2 && e.linea2.length);
       }
 
       for (var i = 0; i < puntos.length; i++) {
