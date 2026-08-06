@@ -231,13 +231,24 @@ SOBRA_CAJA = re.compile(
 def caja_corta(fila):
     """Las señas de la caja para el rótulo: diámetro y de qué es.
 
-    Se usa solo cuando dos opciones llevan la misma correa y hay que
-    decir en qué se diferencian de verdad."""
-    d = limpiar(fila.get('diametro'))
+    Se usa cuando dos opciones llevan la misma correa: entonces lo que
+    las separa es la caja, y es la caja la que va en el botón."""
+    d = limpiar(fila.get('diametro')) or ''
     mat = limpiar(fila.get('cajaMat')) or limpiar(fila.get('cajaAcab')) or ''
     resto = SOBRA_CAJA.sub('', mat).strip(' ,·')
-    partes = [x for x in (d, resto or mat) if x]
-    return ', '.join(partes)
+    # al material sí se le quitan los paréntesis —«Titanio T2 (grado 2)»
+    # → «Titanio T2»—, pero al DIÁMETRO no: «40 mm (caja cuadrada)» es
+    # justo lo que separa los dos Eclipse del Bitácora
+    mat2 = re.sub(r'\s*\([^)]*\)', '', resto or mat).strip()
+    return ', '.join(p for p in (d, mat2 or resto or mat) if p)
+
+
+def color_correa(fila):
+    """Lo último de la correa, que suele ser su color: «…Pilot, negra»
+    → «negra». Solo hace falta cuando dos opciones comparten caja Y
+    correa y lo único que cambia es de qué color es."""
+    t = titulo_exterior(fila)
+    return t.rsplit(',', 1)[-1].strip() if ',' in t else t
 
 
 def titulo_exterior(fila):
@@ -274,7 +285,9 @@ def cierre(fila):
 
 
 def detalle_exterior(fila):
-    partes = [limpiar(fila.get('brazAcab')), cierre(fila)]
+    # la correa entera va aquí: en el botón puede no caber, pero en la
+    # ficha técnica y en el resumen del pedido tiene que estar completa
+    partes = [titulo_exterior(fila), limpiar(fila.get('brazAcab')), cierre(fila)]
     partes = [p for p in partes if p]
     return ' · '.join(partes)
 
@@ -359,17 +372,48 @@ def configurador(filas, previo):
     # Bitácora comparten la goma negra y cambian de caja. Si el rótulo
     # solo dijera la correa, saldrían botones idénticos. Cuando eso
     # pasa, se le añade lo que de verdad los separa: la caja.
+    # EL RÓTULO DICE LO QUE DIFERENCIA, no todo lo que hay.
+    #
+    # Lo normal es que lo que cambia sea la correa, y entonces el botón
+    # dice la correa. Pero el Trinchera monta la MISMA NATO verde en
+    # cuatro cajas —39 y 36 mm, plata y bronce—: ahí la correa no dice
+    # nada y lo que va en el botón es la caja. Y sus cuatro Cenit
+    # comparten caja de titanio de dos en dos y solo cambia el color de
+    # la piel: ahí hacen falta las dos cosas.
+    #
+    # Se resuelve en tres pasos y se para en cuanto son distintos: la
+    # correa; si se repite, la caja; si también se repite, la caja más
+    # el color de la correa. Meterlo todo siempre daba rótulos de tres
+    # líneas —«Correa NATO de nailon balístico verde militar · 39 mm,
+    # PVD bronce»— que no cabían en el botón.
+    # EL RÓTULO DICE LO QUE DIFERENCIA, no todo lo que hay.
+    #
+    # Lo normal es que lo que cambia sea la correa, y entonces el botón
+    # dice la correa. Pero el Trinchera monta la MISMA NATO verde en
+    # cuatro cajas —39 y 36 mm, plata y bronce—: ahí la correa no dice
+    # nada, y lo que va en el botón es la caja. Y sus cuatro Cenit
+    # comparten caja de titanio de dos en dos y solo cambia el color de
+    # la piel: ahí hacen falta las dos cosas.
+    #
+    # En cuanto UNA correa se repite, TODAS las opciones pasan a decir la
+    # caja. Mezclar las dos formas —unos botones con la correa y otros
+    # con la caja— deja al cliente comparando cosas distintas. Y con
+    # ellas cambia el rótulo del grupo, que ya no puede decir «brazalete
+    # o correa» si lo que se está eligiendo es la caja.
     titulos = [titulo_exterior(muestra[i]) for i in range(len(exteriores))]
     repes = {t for t in titulos if titulos.count(t) > 1}
+    porCaja = [caja_corta(muestra[i]) or titulos[i] for i in range(len(exteriores))]
+    repesCaja = {t for t in porCaja if porCaja.count(t) > 1}
+    mandaLaCaja = bool(repes)
     usados = set()
     correas = []
     for i in range(len(exteriores)):
         f = muestra[i]
         t = titulos[i]
-        if t in repes:
-            seña = caja_corta(f)
-            if seña:
-                t = f'{t} · {seña}'
+        if mandaLaCaja:
+            t = porCaja[i]
+            if t in repesCaja:
+                t = f'{t} · {color_correa(f)}'
         ide = ident(t)[:34] or f'opcion-{i + 1}'
         while ide in usados:
             ide += '-2'
@@ -414,6 +458,7 @@ def configurador(filas, previo):
         precios[ide] = fila
 
     return {'acabados': acabados, 'correas': correas, 'precios': precios,
+            'rotuloOpciones': 'Caja y correa' if mandaLaCaja else 'Brazalete o correa',
             'comunes': comunes_de(filas)}
 
 

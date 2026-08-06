@@ -534,22 +534,22 @@
           {
             "id": "brazalete-malla-milanesa-acero",
             "nombre": "Brazalete malla milanesa acero",
-            "detalle": "Malla milanesa 1,0 mm plateada · Cierre desplegable de malla con seguridad"
+            "detalle": "Brazalete malla milanesa acero · Malla milanesa 1,0 mm plateada · Cierre desplegable de malla con seguridad"
           },
           {
             "id": "brazalete-acero-316l-malla-cepilla",
             "nombre": "Brazalete acero 316L malla cepillada",
-            "detalle": "Malla cepillada · Cierre de mariposa"
+            "detalle": "Brazalete acero 316L malla cepillada · Malla cepillada · Cierre de mariposa"
           },
           {
             "id": "brazalete-acero-904l",
             "nombre": "Brazalete acero 904L",
-            "detalle": ""
+            "detalle": "Brazalete acero 904L"
           },
           {
             "id": "brazalete-malla-milanesa-pvd-negro",
             "nombre": "Brazalete malla milanesa PVD negro",
-            "detalle": "Malla milanesa 1,0 mm PVD negro · Cierre desplegable de malla con seguridad"
+            "detalle": "Brazalete malla milanesa PVD negro · Malla milanesa 1,0 mm PVD negro · Cierre desplegable de malla con seguridad"
           }
         ],
         "precios": {
@@ -590,6 +590,7 @@
             329.9
           ]
         },
+        "rotuloOpciones": "Brazalete o correa",
         "comunes": {
           "Luminiscencia": "C3 verde",
           "Ancho de asa": "20 mm"
@@ -860,7 +861,7 @@
           {
             "id": "brazalete-de-acero-integrado",
             "nombre": "Brazalete de acero integrado",
-            "detalle": "Pulido y satinado · Cierre desplegable con pulsadores"
+            "detalle": "Brazalete de acero integrado · Pulido y satinado · Cierre desplegable con pulsadores"
           }
         ],
         "precios": {
@@ -877,6 +878,7 @@
             379.9
           ]
         },
+        "rotuloOpciones": "Brazalete o correa",
         "comunes": {
           "Ancho de asa": "Integrado (asa propia de la caja)",
           "Ajuste": "Eslabones extraíbles",
@@ -1120,44 +1122,44 @@
         ],
         "correas": [
           {
-            "id": "correa-nato-de-nailon-balistico-ve",
-            "nombre": "Correa NATO de nailon balístico verde militar · 39 mm, PVD bronce",
-            "detalle": "Tejido verde militar; hebilla de acero · Hebilla de acero"
+            "id": "39-mm-pvd-bronce",
+            "nombre": "39 mm, PVD bronce",
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero · Hebilla de acero"
           },
           {
-            "id": "correa-nato-de-nailon-balistico-ve-2",
-            "nombre": "Correa NATO de nailon balístico verde militar · 36 mm, plata",
-            "detalle": "Tejido verde militar; hebilla de acero · Hebilla de acero"
+            "id": "36-mm-plata",
+            "nombre": "36 mm, plata",
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero · Hebilla de acero"
           },
           {
-            "id": "correa-nato-de-nailon-balistico-ve-2-2",
-            "nombre": "Correa NATO de nailon balístico verde militar · 36 mm, PVD bronce",
-            "detalle": "Tejido verde militar; hebilla de acero · Hebilla de acero"
+            "id": "36-mm-pvd-bronce",
+            "nombre": "36 mm, PVD bronce",
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero · Hebilla de acero"
           },
           {
-            "id": "correa-de-piel-genuina-pilot-negra",
-            "nombre": "Correa de piel genuina Pilot, negra · 39 mm, Titanio T2 (grado 2)",
-            "detalle": "Negra, liso · Hebilla de acero inox."
+            "id": "39-mm-titanio-t2-negra",
+            "nombre": "39 mm, Titanio T2 · negra",
+            "detalle": "Correa de piel genuina Pilot, negra · Negra, liso · Hebilla de acero inox."
           },
           {
-            "id": "correa-de-piel-genuina-pilot-azul-",
-            "nombre": "Correa de piel genuina Pilot, azul · 39 mm, Titanio T2 (grado 2)",
-            "detalle": "Azul, liso · Hebilla de acero inox."
+            "id": "39-mm-titanio-t2-azul",
+            "nombre": "39 mm, Titanio T2 · azul",
+            "detalle": "Correa de piel genuina Pilot, azul · Azul, liso · Hebilla de acero inox."
           },
           {
-            "id": "correa-de-piel-genuina-pilot-negra-2",
-            "nombre": "Correa de piel genuina Pilot, negra · 36 mm, Titanio T2 (grado 2)",
-            "detalle": "Negra, liso · Hebilla de acero inox."
+            "id": "36-mm-titanio-t2-negra",
+            "nombre": "36 mm, Titanio T2 · negra",
+            "detalle": "Correa de piel genuina Pilot, negra · Negra, liso · Hebilla de acero inox."
           },
           {
-            "id": "correa-de-piel-genuina-pilot-azul--2",
-            "nombre": "Correa de piel genuina Pilot, azul · 36 mm, Titanio T2 (grado 2)",
-            "detalle": "Azul, liso · Hebilla de acero inox."
+            "id": "36-mm-titanio-t2-azul",
+            "nombre": "36 mm, Titanio T2 · azul",
+            "detalle": "Correa de piel genuina Pilot, azul · Azul, liso · Hebilla de acero inox."
           },
           {
-            "id": "correa-nato-nailon-balistico-verde",
-            "nombre": "Correa NATO nailon balístico verde con hebillas PVD",
-            "detalle": "Tejido balístico verde, hebillas PVD · Hebilla"
+            "id": "39-mm-con-pvd-negro",
+            "nombre": "39 mm, con PVD negro",
+            "detalle": "Correa NATO nailon balístico verde con hebillas PVD · Tejido balístico verde, hebillas PVD · Hebilla"
           }
         ],
         "precios": {
@@ -1222,6 +1224,7 @@
             349.9
           ]
         },
+        "rotuloOpciones": "Caja y correa",
         "comunes": {
           "Ancho de asa": "20 mm"
         }
@@ -1448,24 +1451,24 @@
         ],
         "correas": [
           {
-            "id": "brazalete-integrado-de-acero-316l",
-            "nombre": "Brazalete integrado de acero 316L",
-            "detalle": "Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable"
+            "id": "40-mm-acero-inoxidable-316l",
+            "nombre": "40 mm, Acero inoxidable 316L",
+            "detalle": "Brazalete integrado de acero 316L · Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable"
           },
           {
-            "id": "correa-goma-negra-40-mm-caja-cuadr",
-            "nombre": "Correa Goma negra · 40 mm (caja cuadrada), con PVD negro",
-            "detalle": "Hebilla de acero"
+            "id": "40-mm-caja-cuadrada-con-pvd-negro",
+            "nombre": "40 mm (caja cuadrada), con PVD negro",
+            "detalle": "Correa Goma negra · Hebilla de acero"
           },
           {
-            "id": "correa-goma-negra-40-mm-caja-cuadr-2",
-            "nombre": "Correa Goma negra · 40 mm (caja cuadrada), con PVD oro rosa",
-            "detalle": "Hebilla de acero"
+            "id": "40-mm-caja-cuadrada-con-pvd-oro-ro",
+            "nombre": "40 mm (caja cuadrada), con PVD oro rosa",
+            "detalle": "Correa Goma negra · Hebilla de acero"
           },
           {
-            "id": "brazalete-integrado-de-acero-con-p",
-            "nombre": "Brazalete integrado de acero con PVD negro",
-            "detalle": "Eslabones con PVD negro (brazalete integrado) · Cierre desplegable"
+            "id": "40-mm-con-pvd-negro",
+            "nombre": "40 mm, con PVD negro",
+            "detalle": "Brazalete integrado de acero con PVD negro · Eslabones con PVD negro (brazalete integrado) · Cierre desplegable"
           }
         ],
         "precios": {
@@ -1506,6 +1509,7 @@
             369.9
           ]
         },
+        "rotuloOpciones": "Caja y correa",
         "comunes": {
           "Luminiscencia": "Agujas con lumen C3 verde"
         }
@@ -1686,12 +1690,12 @@
           {
             "id": "correa-de-silicona",
             "nombre": "Correa de silicona",
-            "detalle": "Cepillado · Cierre desplegable con extensión de buceo"
+            "detalle": "Correa de silicona · Cepillado · Cierre desplegable con extensión de buceo"
           },
           {
             "id": "brazalete-de-acero-316l",
             "nombre": "Brazalete de acero 316L",
-            "detalle": "Cepillado · Cierre desplegable con extensión de buceo"
+            "detalle": "Brazalete de acero 316L · Cepillado · Cierre desplegable con extensión de buceo"
           }
         ],
         "precios": {
@@ -1712,6 +1716,7 @@
             279.9
           ]
         },
+        "rotuloOpciones": "Brazalete o correa",
         "comunes": {
           "Grosor": "14 mm",
           "Ancho de asa": "20 mm",
@@ -1818,7 +1823,7 @@
           {
             "id": "correa-de-piel-genuina-liberacion-",
             "nombre": "Correa de piel genuina liberación rápida",
-            "detalle": "Liso mate · Hebilla de espiga de acero"
+            "detalle": "Correa de piel genuina liberación rápida · Liso mate · Hebilla de espiga de acero"
           }
         ],
         "precios": {
@@ -1832,6 +1837,7 @@
             349.9
           ]
         },
+        "rotuloOpciones": "Brazalete o correa",
         "comunes": {
           "Ancho de asa": "20 mm",
           "Ajuste": "Liberación rápida (spring bar)",
