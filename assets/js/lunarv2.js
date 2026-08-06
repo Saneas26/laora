@@ -108,7 +108,8 @@
            el precio ya va dentro del segundo renglón, este se esconde
            para que no salga dos veces. */
         elPrecio.textContent = e.precioTexto || ('desde ' + e.precio);
-        elPrecio.hidden = !e.precioTexto && !!(e.linea2 && e.linea2.length);
+        elPrecio.hidden = !!e.sinPrecio ||
+                          (!e.precioTexto && !!(e.linea2 && e.linea2.length));
       }
 
       for (var i = 0; i < puntos.length; i++) {

@@ -60,7 +60,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
 V_CSS = 28
-V_JS = 7
+V_JS = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -294,6 +294,15 @@ TEXTOS = {
         'linea2': 'Resistencia al agua 300 m · Lumen de alto rendimiento',
         'precio': '{precio_cenit}',
     },
+    # 06/08/2026. Texto de Óscar, literal. El segundo renglón lleva DOS
+    # grupos separados por la barra —cuarzo a un precio, automático a
+    # otro—, así que el punto se queda dentro de cada uno.
+    'precisa': {
+        'frase': 'La precisión también tiene estilo.',
+        'linea1': 'Acero 316L · Cristal de zafiro · 40 mm',
+        'linea2': 'Cuarzo · 229,90 € | Automático · 379,90 €',
+        'precio': ' ',      # sin renglón de precio: ya va en el de arriba
+    },
 }
 
 
@@ -340,20 +349,35 @@ for e in EXPOSICIONES:
         # Un `linea2` vacío es una decisión, no un olvido: significa que
         # el segundo renglón todavía no se puede publicar. Entonces
         # vuelve el precio suelto de siempre.
+        # Dos formas de escribir un renglón, y las dos son de Óscar:
+        #   «a · b · c»            → tres datos, separados por la barra
+        #   «a · b | c · d»        → DOS grupos, y el punto se queda
+        #                            dentro de cada uno como texto
+        # Manda la barra si la hay: es el separador de más peso. Así el
+        # Precisa puede decir «Cuarzo · 229,90 € | Automático · 379,90 €»
+        # y sale exactamente como lo escribió.
+        corte = '|' if '|' in t['linea2'] else '·'
         e['linea2'] = [x.strip().format(**precios)
-                       for x in t['linea2'].split('·') if x.strip()]
+                       for x in t['linea2'].split(corte) if x.strip()]
         # Un reloj puede querer el precio en su PROPIA línea y sin la
         # palabra «desde» —así lo escribió Óscar para el Diver—. Entonces
         # el renglón del precio deja de ser el de siempre y dice esto.
-        if t.get('precio'):
+        # Un `precio` en blanco quiere decir «no pongas renglón de
+        # precio»: el Precisa ya lleva los dos suyos en el renglón de
+        # arriba, y repetirlos debajo sobraría.
+        if t.get('precio') and t['precio'].strip():
             e['precioTexto'] = t['precio'].format(**precios)
+        elif t.get('precio') is not None and not t['precio'].strip():
+            e['sinPrecio'] = True
     else:
         e['frase'] = 'Llego el momento de'
         e['linea2'] = []
 
 def precioVisible(e):
-    """El renglón del precio se ve cuando el precio NO va dentro del
-    segundo renglón. Si va dentro, sale dos veces."""
+    """El renglón del precio se ve cuando el precio NO va ya dentro del
+    segundo renglón. Si va dentro, saldría dos veces."""
+    if e.get('sinPrecio'):
+        return False
     return bool(e.get('precioTexto')) or not e['linea2']
 
 
