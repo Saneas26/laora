@@ -569,6 +569,45 @@ const REFERENCIAS_SEED = [
 
 
 /* ============================================================
+   El montaje
+   ============================================================ */
+
+function montarBiblioteca() {
+  const ss = SpreadsheetApp.getActive();
+  comprobarLibroVacio(ss);
+
+  SEP = averiguarSeparador(ss);
+  Logger.log('Este libro escribe las fórmulas con «' + SEP + '»');
+  Logger.log('');
+
+  montarParametros(ss);
+  ['COMPONENTES', 'MOVIMIENTOS', 'CAJAS', 'ESFERAS', 'CORREAS', 'MODELOS',
+   'REFERENCIAS', 'PRECIOS', 'COMPRAS', 'WEB'].forEach(function (c) { montarTabla(ss, c); });
+
+  formulasPrecios(ss);
+  formulasCompras(ss);
+  formulasWeb(ss);
+  sembrar(ss);
+  formulasComponentes(ss);   // después de sembrar, para no pisar la fórmula
+
+  // fuera la pestaña vacía que trae todo libro nuevo
+  ss.getSheets().forEach(function (h) {
+    if (HOJAS.indexOf(h.getName()) < 0 && h.getLastRow() === 0) {
+      Logger.log('  (quitada la pestaña vacía «' + h.getName() + '»)');
+      ss.deleteSheet(h);
+    }
+  });
+
+  ss.setActiveSheet(ss.getSheetByName('PARAMETROS'));
+
+  Logger.log('');
+  Logger.log('✔ Biblioteca montada: ' + HOJAS.join(' · '));
+  Logger.log('  Los movimientos ya están dentro. Lo siguiente son las CAJAS:');
+  Logger.log('  sin caja no hay reloj, y es la segunda pieza más cara.');
+}
+
+
+/* ============================================================
    Utilidades
    ============================================================ */
 
@@ -626,45 +665,6 @@ function rehacer(ss, nombre) {
   const vieja = ss.getSheetByName(nombre);
   if (vieja) ss.deleteSheet(vieja);
   return ss.insertSheet(nombre);
-}
-
-
-/* ============================================================
-   El montaje
-   ============================================================ */
-
-function montarBiblioteca() {
-  const ss = SpreadsheetApp.getActive();
-  comprobarLibroVacio(ss);
-
-  SEP = averiguarSeparador(ss);
-  Logger.log('Este libro escribe las fórmulas con «' + SEP + '»');
-  Logger.log('');
-
-  montarParametros(ss);
-  ['COMPONENTES', 'MOVIMIENTOS', 'CAJAS', 'ESFERAS', 'CORREAS', 'MODELOS',
-   'REFERENCIAS', 'PRECIOS', 'COMPRAS', 'WEB'].forEach(function (c) { montarTabla(ss, c); });
-
-  formulasPrecios(ss);
-  formulasCompras(ss);
-  formulasWeb(ss);
-  sembrar(ss);
-  formulasComponentes(ss);   // después de sembrar, para no pisar la fórmula
-
-  // fuera la pestaña vacía que trae todo libro nuevo
-  ss.getSheets().forEach(function (h) {
-    if (HOJAS.indexOf(h.getName()) < 0 && h.getLastRow() === 0) {
-      Logger.log('  (quitada la pestaña vacía «' + h.getName() + '»)');
-      ss.deleteSheet(h);
-    }
-  });
-
-  ss.setActiveSheet(ss.getSheetByName('PARAMETROS'));
-
-  Logger.log('');
-  Logger.log('✔ Biblioteca montada: ' + HOJAS.join(' · '));
-  Logger.log('  Los movimientos ya están dentro. Lo siguiente son las CAJAS:');
-  Logger.log('  sin caja no hay reloj, y es la segunda pieza más cara.');
 }
 
 
