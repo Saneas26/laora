@@ -138,3 +138,17 @@ body{margin:0;background:var(--ivory);color:var(--ink);
   .pa-derecha{text-align:left}
   .pa-tarjeta b{font-size:27px}
 }
+
+/* ============================================================
+   `hidden` MANDA SIEMPRE
+   ------------------------------------------------------------
+   06/08/2026. El atributo `hidden` solo vale `display:none` por la
+   hoja del navegador, que es la más débil de todas: cualquier regla
+   nuestra con `display:` lo pisa. Pasó con `.pa-manto`, que es
+   `display:flex`: la ficha se quedaba abierta y vacía tapando el
+   panel entero, y parecía una máscara del navegador.
+
+   Esta línea lo zanja para toda la hoja. Si algo lleva `hidden`, no
+   se ve, y da igual lo que diga su clase.
+   ============================================================ */
+[hidden]{display:none !important}

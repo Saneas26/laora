@@ -119,3 +119,14 @@ body{margin:0;background:var(--ivory);color:var(--ink);
 @media (max-width:640px){
   .ca-form,.ca-factura{grid-template-columns:1fr}
 }
+
+/* ============================================================
+   `hidden` MANDA SIEMPRE
+   ------------------------------------------------------------
+   El atributo `hidden` solo vale `display:none` por la hoja del
+   navegador, la más débil: cualquier regla nuestra con `display:`
+   lo pisa. Aquí afectaba a `.ca-factura` (que salía abierta sin
+   pedirla) y a los formularios, que no se cerraban al terminar su
+   paso porque son `display:grid`.
+   ============================================================ */
+[hidden]{display:none !important}
