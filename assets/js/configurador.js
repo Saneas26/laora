@@ -1,10 +1,11 @@
 /* ============================================================
-   laOra · CONFIGURADOR DEL LUNAR  (lunarv2c)
+   laOra · EL CONFIGURADOR, EL MISMO PARA TODOS LOS MODELOS
    ------------------------------------------------------------
+   Sirve a /lunar, /cero-cero, /precisa, /trinchera y /bitacora.
    Todo lo que pinta sale del <script type="application/json"
-   data-cfg> que escribe `herramientas/generar_v2c.py` desde
-   `assets/datos/catalogo.json`. Aquí no hay ni un precio, ni un
-   nombre, ni una foto escritos a mano.
+   data-cfg> que escribe `herramientas/generar_configuradores.py`
+   desde `assets/datos/catalogo.json`. Aquí no hay ni un precio, ni
+   un nombre, ni una foto, ni una referencia escritos a mano.
 
    LAS DOS REGLAS DE LA PÁGINA, que son las que pidió Óscar:
      · elijas lo que elijas, la pantalla NO se mueve;
@@ -70,22 +71,20 @@
     }).format(v);
   }
 
-  /* La referencia se compone igual que en la hoja de materiales:
-     LO-01_Lunar_A01 → código + inicial del acabado + número de correa. */
+  /* La referencia y la foto vienen YA RESUELTAS del generador, una por
+     cada pareja de acabado y correa. Antes se componían aquí, con una
+     segunda copia de las reglas de la hoja de materiales, y las dos
+     copias se desviaron: el segundo Cenit del Precisa salía `C01`
+     donde la hoja dice `C02`, porque el número se sacaba de la correa.
+     Ahora la regla vive en un solo sitio, en Python. */
   function referencia() {
     var a = D.acabados[acabado];
-    var letra = a.nombre.charAt(0).toUpperCase();
-    var codigo = D.codigo.replace(/[—–-]/g, '-').replace(/\s/g, '');
-    return codigo + '_' + D.modelo.replace(/\s/g, '') + '_' +
-           letra + ('0' + (correa + 1)).slice(-2) + (a.refSufijo || '');
+    return (a.refs && a.refs[correa]) || '—';
   }
 
-  /* La foto de la combinación. Mientras no exista una por cada pareja
-     de acabado y correa, se sirve la del acabado: el color de la caja
-     sí es fiel. La correa la enseña la muestra de al lado. */
   function foto() {
     var a = D.acabados[acabado];
-    return (D.fotos[acabado + '|' + D.correas[correa].id]) || a.foto;
+    return (a.fotos && a.fotos[correa]) || a.foto;
   }
 
   function pintar() {
@@ -105,7 +104,7 @@
       siguiente.onerror = function () { elFoto.classList.remove('cambiando'); };
       siguiente.src = nueva;
     }
-    if (elFoto) elFoto.alt = 'Reloj laOra Lunar, acabado ' + a.nombre + ', con ' + c.nombre.toLowerCase();
+    if (elFoto) elFoto.alt = 'Reloj laOra ' + D.modelo + ', acabado ' + a.nombre + ', con ' + c.nombre.toLowerCase();
 
     if (elViendo) elViendo.innerHTML = '<b>' + a.nombre + '</b> · ' + c.nombre;
     if (elTira) elTira.setAttribute('style', 'background:' + c.muestra);
@@ -127,12 +126,15 @@
     }
 
     /* cuántas correas tiene este acabado: si solo tiene una, se dice,
-       para que no parezca que las demás se han roto */
+       para que no parezca que las demás se han roto. Y si el modelo
+       entero lleva brazalete integrado, no hay nada que elegir: no se
+       cuentan opciones, se dice que va incluido. */
     if (elRotuloCorrea) {
       var n = cuantas(acabado);
-      elRotuloCorrea.textContent = n === 1
-        ? 'Este acabado se monta solo con esta'
-        : n + ' opciones para este acabado';
+      elRotuloCorrea.textContent = D.correas.length === 1
+        ? 'Incluido'
+        : (n === 1 ? 'Este acabado se monta solo con esta'
+                   : n + ' opciones para este acabado');
     }
 
     for (var j = 0; j < botonesAcabado.length; j++) {
