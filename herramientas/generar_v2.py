@@ -250,6 +250,18 @@ TEXTOS = {
         'linea1': 'Cronógrafo mecacuarzo · 40 mm · 100 m',
         'linea2': 'Corona roscada · Acero 316L · Desde {precio}',
     },
+    # 06/08/2026. El segundo renglón que mandó Óscar era «Cristal de
+    # zafiro · Doble corona · Desde 209,90 €», y se queda fuera hasta que
+    # él decida: las dos cosas son del LEVANTE (279,90 €), no del Alba,
+    # que es el de 209,90. La hoja lo dice sin rodeos —«Mineral Hardlex
+    # (no es zafiro)»— y solo el Levante lleva «2 coronas roscadas».
+    # Mientras tanto entra lo que sí es cierto: la frase y el primer
+    # renglón, que salen tal cual del catálogo.
+    'cero-cero': {
+        'frase': 'Diseñado para misiones cotidianas.',
+        'linea1': 'Cuarzo japonés · 41 mm · 100 m',
+        'linea2': '',
+    },
 }
 
 
@@ -288,6 +300,9 @@ for e in EXPOSICIONES:
         conPrecio = euros(desde_de(e['slug']))
         e['frase'] = t['frase']
         e['specs'] = [x.strip() for x in t['linea1'].split('·') if x.strip()]
+        # Un `linea2` vacío es una decisión, no un olvido: significa que
+        # el segundo renglón todavía no se puede publicar. Entonces
+        # vuelve el precio suelto de siempre.
         e['linea2'] = [x.strip().format(precio=conPrecio)
                        for x in t['linea2'].split('·') if x.strip()]
     else:
