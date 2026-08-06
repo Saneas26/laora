@@ -103,8 +103,12 @@
       /* El precio suelto solo cuando NO va dentro del segundo renglón:
          si no, saldría dos veces. */
       if (elPrecio) {
-        elPrecio.textContent = 'desde ' + e.precio;
-        elPrecio.hidden = !!(e.linea2 && e.linea2.length);
+        /* `precioTexto` lo trae el reloj que quiere el precio en su
+           propia línea y sin «desde». Si no lo trae, el de siempre; y si
+           el precio ya va dentro del segundo renglón, este se esconde
+           para que no salga dos veces. */
+        elPrecio.textContent = e.precioTexto || ('desde ' + e.precio);
+        elPrecio.hidden = !e.precioTexto && !!(e.linea2 && e.linea2.length);
       }
 
       for (var i = 0; i < puntos.length; i++) {
