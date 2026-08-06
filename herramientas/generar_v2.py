@@ -303,6 +303,15 @@ TEXTOS = {
         'linea2': 'Cuarzo · 229,90 € | Automático · 379,90 €',
         'precio': ' ',      # sin renglón de precio: ya va en el de arriba
     },
+    # 06/08/2026. Texto de Óscar, literal. Los dos tamaños que anuncia
+    # son los que se desbloquearon esta misma tarde al arreglar las dos
+    # celdas rotas de la hoja: hasta hoy las cuatro cajas de 36 mm no se
+    # podían ni pedir.
+    'trinchera': {
+        'frase': 'Dos tamaños. Tres acabados. Una actitud.',
+        'linea1': 'Cuarzo japonés · 36 o 39 mm · Cristal de zafiro',
+        'linea2': 'Plata · Cobre · Negro PVD · Desde {precio}',
+    },
 }
 
 
