@@ -80,12 +80,13 @@ USO
 import glob
 import json
 import os
+import re
 import unicodedata
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 22
+V_CSS = 24
 V_JS = 6
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -173,15 +174,30 @@ MUESTRAS = {
 # muestra se elige por el MATERIAL que dice su nombre. Es un dibujo del
 # material, no una foto, así que con acertar el material basta; lo que
 # no puede pasar es que salga un cuadrado gris sin significado.
+PIEL_AZUL = ('repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),'
+             'linear-gradient(155deg,#2f4a6b 0%,#1f3550 55%,#152539 100%)')
+NAILON_VERDE = MUESTRAS['verde']
+
+# Se busca por MATERIAL y por COLOR, y en este orden: la primera pareja
+# que encaje manda. Sin el color, la NATO verde militar del Trinchera
+# salía negra —la muestra decía «nailon» y nada más— y en el botón se
+# veía una correa que no era la del reloj.
 POR_MATERIAL = [
-    ('milanesa', MUESTRAS['milanesa']), ('malla', MUESTRAS['milanesa']),
-    ('nato', MUESTRAS['negra']), ('nailon', MUESTRAS['negra']),
-    ('piel', MUESTRAS['piel-negra']), ('cuero', MUESTRAS['piel-negra']),
-    ('caucho', MUESTRAS['caucho']), ('goma', MUESTRAS['caucho']),
-    ('silicona', MUESTRAS['caucho']),
-    ('pvd', MUESTRAS['brazalete-negro']), ('negr', MUESTRAS['brazalete-negro']),
-    ('904', MUESTRAS['brazalete-904l']),
-    ('acero', ACERO), ('brazalete', ACERO),
+    (('nailon', 'verde'), NAILON_VERDE), (('nato', 'verde'), NAILON_VERDE),
+    (('piel', 'azul'), PIEL_AZUL), (('cuero', 'azul'), PIEL_AZUL),
+    (('piel', 'marron'), MUESTRAS['piel-marron']),
+    (('piel',), MUESTRAS['piel-negra']), (('cuero',), MUESTRAS['piel-negra']),
+    (('milanesa',), MUESTRAS['milanesa']), (('malla',), MUESTRAS['milanesa']),
+    (('nailon',), MUESTRAS['negra']), (('nato',), MUESTRAS['negra']),
+    (('caucho',), MUESTRAS['caucho']), (('goma',), MUESTRAS['caucho']),
+    (('silicona',), MUESTRAS['caucho']),
+    (('904',), MUESTRAS['brazalete-904l']),
+    (('pvd',), MUESTRAS['brazalete-negro']), (('negr',), MUESTRAS['brazalete-negro']),
+    (('bronce',), 'linear-gradient(150deg,#c9a06a 0%,#9a7444 32%,#d8b784 54%,'
+                  '#7e5c33 78%,#b58e5c 100%)'),
+    (('titanio',), 'linear-gradient(150deg,#dcdcd8 0%,#a9a9a4 30%,#cfcfca 52%,'
+                   '#8d8d88 76%,#c2c2bd 100%)'),
+    (('acero',), ACERO), (('brazalete',), ACERO),
 ]
 
 
@@ -190,8 +206,8 @@ def muestra_de(correa):
     if correa['id'] in MUESTRAS:
         return MUESTRAS[correa['id']]
     texto = sin_tildes(f'{correa["nombre"]} {correa.get("detalle", "")}').lower()
-    for pista, fondo in POR_MATERIAL:
-        if pista in texto:
+    for pistas, fondo in POR_MATERIAL:
+        if all(p in texto for p in pistas):
             return fondo
     return '#d8d8d4'
 
@@ -358,14 +374,26 @@ def pantalla(slug):
                  if sum(1 for b in acabados if b['nombre'] == a['nombre']) > 1}
 
     def calibre(a):
+        """El calibre a secas: «Seiko/TMI NH35A, 11½ líneas, 24 rubíes»
+        → «Seiko/TMI NH35A».
+
+        Se corta por la primera coma Y se quitan los paréntesis: cortando
+        solo por la coma, «VH31 (TMI Vh31b, cuarzo japonés)» dejaba
+        «VH31 (TMI Vh31b», con el paréntesis abierto, en el botón."""
         if a['nombre'] not in repetidos:
             return ''
-        return (a.get('movimiento') or '').split(',')[0].strip()
+        m = re.sub(r'\s*\([^)]*\)?', '', a.get('movimiento') or '')
+        return m.split(',')[0].strip()
 
     # Referencias y fotos, ya resueltas: el navegador no compone nada.
     datosAcabados = {}
     for a in acabados:
-        refs = [referencia(reloj, a, i) for i in range(len(correas))]
+        # La casilla que no se puede pedir no lleva referencia. En los
+        # modelos que aún se componen a mano —el Lunar— se componía
+        # igualmente y la página se llevaba códigos que no existen,
+        # `LO-01_Lunar_C08`, en las combinaciones apagadas.
+        refs = [referencia(reloj, a, i) if precio(a['id'], i) is not None else ''
+                for i in range(len(correas))]
         datosAcabados[a['id']] = {
             'nombre': a['nombre'],
             # lo que se lee en el visor, en la barra y en la ficha: con
@@ -410,7 +438,9 @@ def pantalla(slug):
     # dice «Incluido», en vez de un «1 opción» que parece un error. El
     # rótulo de la izquierda es siempre el mismo —repetir ahí el nombre
     # del brazalete lo dejaba dicho dos veces seguidas.
-    rotuloCorreas = 'Brazalete o correa'
+    # Cuando lo que se elige es la caja y no la correa, el rótulo lo
+    # dice: lo pone el volcado en `rotuloOpciones`.
+    rotuloCorreas = cfg.get('rotuloOpciones') or 'Brazalete o correa'
     tituloCorreas = f'<b>{len(correas)} opciones</b>' if len(correas) > 1 else '<b>Incluido</b>'
 
     # CUANDO NO HAY NADA QUE ELEGIR, NO SE PINTA UN BOTÓN.
@@ -450,7 +480,7 @@ def pantalla(slug):
 <!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
 <link rel="stylesheet" href="/assets/css/configurador.css?v={V_CSS}">
 </head>
-<body{' class="cfg-muchos"' if len(acabados) > 6 else ''}>
+<body{' class="cfg-muchos"' if len(acabados) > 6 or len(correas) > 4 else ''}>
 
 <header class="cfg-cab">
   <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
