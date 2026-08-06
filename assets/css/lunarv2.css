@@ -47,7 +47,15 @@ fieldset,legend{padding:0}
   --dark: #151715;
   --white: #fffdf8;
   --serif: Arial, Helvetica, sans-serif;
-  --sans: Arial, Helvetica, sans-serif;
+  /* 06/08/2026. Antes decía `Arial, Helvetica`, y como la portada no
+     descargaba ninguna fuente, TODA la web se pintaba con la Arial del
+     sistema. Comparada con tesla.com a la misma medida, el texto sobre
+     foto se veía frágil y sucio: Arial tiene la «x» baja y el trazo
+     desigual, y a 14 px en blanco sobre una imagen se desmiga.
+     Inter está dibujada para pantalla, tiene la «x» alta y aguanta el
+     tracking cerrado que pide esta maqueta. Arial se queda detrás por si
+     la fuente no llega a cargar. */
+  --sans: "Inter", Arial, Helvetica, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -128,12 +136,29 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center top; transition: transform .9s cubic-bezier(.2,.8,.2,1), object-position .9s ease; }
 .lunar-hero-media.is-close .lunar-hero-image { transform: scale(1.2); object-position: center 64%; }
 .lunar-hero-veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.59) 0%, rgba(0,0,0,.19) 34%, rgba(0,0,0,.04) 64%, rgba(0,0,0,.36) 100%); pointer-events: none; }
-.home-hero-copy.lunar-home-copy { position: absolute; z-index: 3; top: 5.5%; left: 50%; width: min(720px, 92%); margin: 0; padding: 0; transform: translateX(-50%); text-align: center; text-shadow: 0 2px 20px rgba(0,0,0,.75); }
+.home-hero-copy.lunar-home-copy { position: absolute; z-index: 3; top: 5.5%; left: 50%; width: min(720px, 92%); margin: 0; padding: 0; transform: translateX(-50%); text-align: center; text-shadow: 0 1px 3px rgba(0,0,0,.55); }
+/* La sombra era `0 2px 20px` al 75%: un halo de 20 px de desenfoque
+   alrededor de cada letra. Despegaba el texto de la foto, sí, pero a
+   14 px emborronaba el contorno y se leía como falta de nitidez. Ahora
+   es corta y pegada, que es lo que hace un contorno legible sin
+   ensuciarlo. Las fotos del acto ya vienen con el tercio de arriba
+   limpio, así que no hace falta más. */
 .lunar-eyebrow { margin: 0 0 2px; font-size: 13px; line-height: 1.1; font-weight: 400; }
 .lunar-title { margin: 0 0 2px; display: flex; align-items: baseline; justify-content: center; gap: 12px; line-height: 1; }
 .lunar-title img { width: clamp(140px, 14.6vw, 210px); height: auto; }
-.lunar-title span { font-size: clamp(58px, 6.25vw, 90px); line-height: 1; font-weight: 400; letter-spacing: -.055em; }
-.lunar-specs { margin: 0; color: white; font-size: 14px; line-height: 1.25; font-weight: 400; }
+/* El tracking era -.055em: a 90 px son casi 5 px de apretón y las letras
+   llegaban a tocarse. Ese cierre tan fuerte se dibujó para una
+   tipografía que no era esta —la maqueta se pintaba con Arial— y con
+   Inter sobra. -.03em conserva el aire moderno del titular y devuelve
+   el hueco entre letras, que es lo que hace que un nombre se lea de un
+   golpe y no letra a letra. */
+.lunar-title span { font-size: clamp(58px, 6.25vw, 90px); line-height: 1; font-weight: 400; letter-spacing: -.03em; }
+/* Peso 500 y no 400: sobre fondo oscuro el texto claro se come parte de
+   su propio trazo —irradiación óptica— y el 400 se ve más frágil de lo
+   que es. Tesla usa 500 en todo lo que va encima de una imagen.
+   Interlínea 1,4 en vez de 1,25: con dos renglones seguidos, el 1,25 los
+   apelmazaba. */
+.lunar-specs { margin: 0; color: white; font-size: 14px; line-height: 1.4; font-weight: 500; }
 .lunar-specs i { padding: 0 6px; font-style: normal; color: rgba(255,255,255,.68); }
 .lunar-price { margin: 5px 0 0; color: white; font-size: 15px; line-height: 1.2; font-weight: 500; }
 .lunar-actions { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 11px; }
