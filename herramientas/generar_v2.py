@@ -60,7 +60,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
 V_CSS = 28
-V_JS = 5
+V_JS = 6
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -230,6 +230,29 @@ FOTO_ACTO = {
 }
 
 
+# LOS TEXTOS DEL ACTO, UNO POR RELOJ
+# ------------------------------------------------------------
+# Óscar, 06/08/2026: «no siguen una estructura, sino te diré lo que hay
+# que poner en cada uno». Así que aquí no se compone nada solo: lo que
+# no esté escrito abajo se queda como estaba, con la frase de siempre y
+# el renglón sacado del catálogo.
+#
+# El PRECIO no se escribe a mano: se pone {precio} y lo rellena el
+# mínimo del configurador de ESE reloj. Si mañana cambia la hoja, el
+# texto cambia solo y no se queda un precio viejo pintado en la portada.
+#
+# Los datos de la segunda línea del Lunar están comprobados contra la
+# hoja: corona «Roscada (tipo Speedmaster)» y caja «Acero inoxidable
+# 316L» en sus seis referencias Alba.
+TEXTOS = {
+    'lunar': {
+        'frase': 'Un cronógrafo para los que no siguen el mismo camino.',
+        'linea1': 'Cronógrafo mecacuarzo · 40 mm · 100 m',
+        'linea2': 'Corona roscada · Acero 316L · Desde {precio}',
+    },
+}
+
+
 def _exposicion(slug):
     reloj = R[slug]
     acabado = reloj['configurador']['acabados'][0]
@@ -257,6 +280,20 @@ for e in EXPOSICIONES:
     e['precio'] = euros(desde_de(e['slug'])).replace(' €', '€')
     e['enlace'] = '/' + e['slug'] + '.html'
 
+    t = TEXTOS.get(e['slug'])
+    if t:
+        # El «·» con el que Óscar escribe los renglones separa los datos;
+        # en pantalla los separa la barra fina de la hoja de estilos, que
+        # es la del material aprobado. Mismo contenido, misma tipografía.
+        conPrecio = euros(desde_de(e['slug']))
+        e['frase'] = t['frase']
+        e['specs'] = [x.strip() for x in t['linea1'].split('·') if x.strip()]
+        e['linea2'] = [x.strip().format(precio=conPrecio)
+                       for x in t['linea2'].split('·') if x.strip()]
+    else:
+        e['frase'] = 'Llego el momento de'
+        e['linea2'] = []
+
 PRIMERA_EXPO = EXPOSICIONES[0]
 
 
@@ -277,13 +314,14 @@ ACTO_1 = f"""
 {''.join(punto(i, e) for i, e in enumerate(EXPOSICIONES))}      </div>
     </div>
     <div class="home-hero-copy lunar-home-copy">
-      <p class="lunar-eyebrow">Llego el momento de</p>
+      <p class="lunar-eyebrow" data-hero-frase>{PRIMERA_EXPO['frase']}</p>
       <h1 class="lunar-title"><img src="{LOGO_CLARO}" alt="laOra"><span data-hero-nombre>{PRIMERA_EXPO['nombre']}</span></h1>
       <!-- sin espacios alrededor de la barra: la separación la da el
            `padding` del <i> en la hoja, y con espacios además del padding
            la primera exposición salía algo más suelta que las otras dos -->
       <p class="lunar-specs" data-hero-specs>{'<i>|</i>'.join(PRIMERA_EXPO['specs'])}</p>
-      <p class="lunar-price" data-hero-precio>desde {PRIMERA_EXPO['precio']}</p>
+      <p class="lunar-specs lunar-specs-2" data-hero-specs2{' hidden' if not PRIMERA_EXPO['linea2'] else ''}>{'<i>|</i>'.join(PRIMERA_EXPO['linea2'])}</p>
+      <p class="lunar-price" data-hero-precio{' hidden' if PRIMERA_EXPO['linea2'] else ''}>desde {PRIMERA_EXPO['precio']}</p>
       <div class="lunar-actions"><a class="lunar-action reserve" href="{PRIMERA_EXPO['enlace']}" data-hero-reservar>Reservar</a><a class="lunar-action more" href="#lunar-detalle">Saber mas</a></div>
     </div>
   </section>
