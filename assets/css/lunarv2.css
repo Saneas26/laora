@@ -145,7 +145,11 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-hero-arrow.previous { left: 3vw; }
 .lunar-hero-arrow.next { right: 3vw; }
 .lunar-hero-dots { position: absolute; z-index: 4; left: 50%; bottom: 18px; display: flex; gap: 9px; transform: translateX(-50%); }
-.lunar-hero-dots button { width: 10px; height: 10px; padding: 0; border: 1px solid white; border-radius: 50%; background: transparent; cursor: pointer; }
+.lunar-hero-dots button { position: relative; width: 10px; height: 10px; padding: 0; border: 1px solid white; border-radius: 50%; background: transparent; cursor: pointer; }
+/* Con ocho relojes se pulsan mucho más, y un punto de 10 px es un blanco
+   diminuto para un dedo. Esta zona invisible de 32 px lo hace pulsable sin
+   mover ni un píxel de lo que se ve. */
+.lunar-hero-dots button::after { content: ""; position: absolute; inset: -11px; }
 .lunar-hero-dots button.active { background: white; }
 
 .lunar-dialogue { min-height: calc(100svh - 76px); position: relative; overflow: hidden; isolation: isolate; background: #eee7e0; color: #171513; }

@@ -53,12 +53,13 @@ USO
 """
 
 import json
+import re
 import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 27
+V_CSS = 28
 V_JS = 5
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -145,29 +146,84 @@ def desde_de(slug):
     return min(p for l in cfg['precios'].values() for p in l if p is not None)
 
 
-EXPOSICIONES = [
-    dict(slug='lunar', nombre='Lunar',
-         foto=f'{V2}/lunar-hero-steel.webp',
-         encuadre='cerca',          # el acercamiento, que es el que eligió Óscar
-         alt='Reloj laOra Lunar de acero 316L pulido ante un cohete lunar difuminado',
-         specs=['Movimiento Japonés', 'Zafiro', 'Acero 316L']),
-    dict(slug='bitacora', nombre='Bitácora',
-         foto=f'{IMG}/bitacora-hero-full.webp',
-         encuadre='',
-         alt='Reloj laOra Bitácora, deportivo integrado de acero',
-         specs=['Cuarzo con fecha', '40 mm', '100 m']),
-    dict(slug='trinchera', nombre='Trinchera',
-         foto=f'{IMG}/trinchera-hero.webp',
-         encuadre='',
-         alt='Reloj laOra Trinchera, reloj de campo de titanio',
-         specs=['Cuarzo de barrido', 'Titanio', '200 m']),
-]
+# Los OCHO relojes del catálogo, uno por exposición (Óscar, 06/08/2026).
+# Antes eran tres. Las fotos son las del paquete `laora-heroes-acto-01`:
+# todas 16:9, a sangre, con el reloj centrado abajo y el tercio superior
+# limpio para el titular. Por eso ya no hay encuadre `cerca`: el recorte
+# del Lunar existía para salvar una foto que no estaba pensada para esto.
+#
+# Bauhaus no entra: no está en el catálogo activo y no tiene configurador
+# ni precio, así que no habría ni «desde» ni adónde llevar el botón.
+ESCENAS = {
+    'lunar':     'un paisaje lunar con un cohete difuminado al fondo',
+    'cero-cero': 'un horizonte marino con una baliza',
+    'bitacora':  'arquitectura madrileña',
+    'trinchera': 'un mapa de campo sobre lona verde oliva',
+    'precisa':   'un estudio geométrico en azul',
+    'diver':     'una costa de basalto y agua profunda',
+    'tortuga':   'una costa húmeda de verde oscuro',
+    'coctel':    'la barra de un bar de noche, en ámbar',
+}
 
-# Adónde lleva «Reservar» en cada exposición. Desde el 06/08/2026 los
-# tres tienen pantalla de comprar en su propia dirección —el patrón que
-# Óscar dio por bueno el 05/08/2026, ya no solo para el Lunar—, así que
-# se va a `/<modelo>` y no hay excepciones que mantener.
+# El orden en que se pasan. Delante el Lunar, que es el que Óscar puso de
+# cara; detrás, los demás.
+ORDEN = ['lunar', 'cero-cero', 'bitacora', 'diver', 'precisa', 'trinchera', 'tortuga', 'coctel']
+
+
+def _corta(v):
+    """`44 mm (buceo, estilo cojín)` → `44 mm`."""
+    return re.split(r'[(,]', str(v or ''))[0].strip()
+
+
+def _agua(*candidatos):
+    """De `10 ATM (100 m)` o `200 m (20 ATM)` saca los METROS, que es lo
+    que entiende cualquiera. Si no hay metros, no se inventa: se cae al
+    siguiente candidato."""
+    for v in candidatos:
+        m = re.search(r'(\d+)\s*m\b', str(v or ''))
+        if m:
+            return m.group(1) + ' m'
+    return ''
+
+
+def _movimiento(reloj, acabado):
+    """El movimiento en dos palabras.
+
+    OJO: la hoja trae ruido. El Trinchera tiene `AR25` como tipo de
+    movimiento y `AX25` como estanqueidad —restos de una columna corrida
+    al volcar—, así que cuando el tipo no parece una frase se tira del
+    campo `movimiento`, que sí está bien."""
+    tipo = str(acabado.get('movimientoTipo') or '')
+    if ' ' not in tipo:                       # `AR25` y compañía: no es una frase
+        tipo = str(acabado.get('movimiento') or reloj.get('movimiento') or '')
+        dentro = re.search(r'\(([^)]*)\)', tipo)   # `VH31 (TMI Vh31b, cuarzo japonés)`
+        if dentro:
+            tipo = dentro.group(1).split(',')[-1]
+    tipo = re.split(r'[(,]| con ', tipo)[0].strip()
+    return tipo[:1].upper() + tipo[1:]
+
+
+def _exposicion(slug):
+    reloj = R[slug]
+    acabado = reloj['configurador']['acabados'][0]
+    return dict(
+        slug=slug,
+        nombre=reloj['nombre'],
+        foto=f'/assets/img/heroes-2026/{slug}-acto1.webp',
+        encuadre='',
+        alt=f'Reloj laOra {reloj["nombre"]} sobre {ESCENAS[slug]}',
+        specs=[
+            _movimiento(reloj, acabado),
+            _corta(acabado.get('diametro') or reloj.get('diametro')),
+            _agua(acabado.get('estanqueidad'), reloj.get('hermeticidad')),
+        ],
+    )
+
+
+EXPOSICIONES = [_exposicion(s) for s in ORDEN]
+
 for e in EXPOSICIONES:
+    e['specs'] = [x for x in e['specs'] if x]          # nada vacío en el renglón
     e['precio'] = euros(desde_de(e['slug'])).replace(' €', '€')
     e['enlace'] = '/' + e['slug'] + '.html'
 
