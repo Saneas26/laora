@@ -14,12 +14,19 @@
   'use strict';
 
   /* ---------- lo único que hay que rellenar ----------
-     Se sacan del panel de Supabase, en Project Settings → API:
-       URL      → «Project URL»
-       ANONIMA  → «anon public»
-     Mientras estén vacías, la pantalla lo dice en vez de fallar. */
-  var URL = '';
-  var ANONIMA = '';
+     Puestas el 05/08/2026. Son las del proyecto COMPARTIDO con
+     Activala —`uikanfvigunjhzibnhxf`—, por decisión de Óscar: laOra no
+     tiene proyecto propio y los usuarios de los dos negocios van a
+     acabar en la misma lista. Queda dicho aquí porque el día que haya
+     que separarlos, este es el sitio donde se ve por qué estaban
+     juntos.
+
+     La segunda es la clave PUBLISHABLE del formato nuevo de Supabase.
+     Va en la cabecera `apikey` y el endpoint `/auth/v1/otp` la acepta,
+     así que no hace falta la «anon» antigua. Es pública por diseño: va
+     en el navegador de cualquiera y no da acceso a nada por sí sola. */
+  var URL = 'https://uikanfvigunjhzibnhxf.supabase.co';
+  var ANONIMA = 'sb_publishable_1eLOM22REKcIJyHe36W_4Q_1Z3eyRam';
 
   var form = document.querySelector('[data-form]');
   var campo = document.querySelector('[data-correo]');
