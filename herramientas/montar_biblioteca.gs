@@ -584,10 +584,35 @@ function letra(n) {
   return s;
 }
 
+/**
+ * ¿Coma o punto y coma?
+ *
+ * No se pregunta por el idioma del libro: se PRUEBA. Se escribe una
+ * fórmula de tanteo con coma en una pestaña de usar y tirar; si la hoja
+ * la entiende, se usan comas, y si da error, punto y coma.
+ *
+ * Se hace así porque preguntar por el idioma no acertó: el libro decía
+ * estar en inglés y sin embargo solo tragaba «;».
+ */
+function averiguarSeparador(ss) {
+  const h = ss.insertSheet('__tanteo__');
+  try {
+    h.getRange('A1').setFormula('=IF(1=1,"ok","no")');
+    SpreadsheetApp.flush();
+    return h.getRange('A1').getDisplayValue() === 'ok' ? ',' : ';';
+  } finally {
+    ss.deleteSheet(h);
+  }
+}
+
+
 /** El cinturón: esto SOLO se ejecuta en un libro nuevo. */
 function comprobarLibroVacio(ss) {
   const ocupadas = ss.getSheets().filter(function (h) {
-    return HOJAS.indexOf(h.getName()) < 0 && h.getLastRow() > 0;
+    // «__tanteo__» es la pestaña de usar y tirar de averiguarSeparador:
+    // si una ejecución se cortó a medias puede haber quedado ahí.
+    return HOJAS.indexOf(h.getName()) < 0 && h.getName() !== '__tanteo__' &&
+           h.getLastRow() > 0;
   }).map(function (h) { return h.getName(); });
 
   if (ocupadas.length) {
@@ -612,9 +637,8 @@ function montarBiblioteca() {
   const ss = SpreadsheetApp.getActive();
   comprobarLibroVacio(ss);
 
-  const idioma = ss.getSpreadsheetLocale();
-  SEP = /^en/i.test(idioma) ? ',' : ';';
-  Logger.log('Libro en «' + idioma + '» → las fórmulas se escriben con «' + SEP + '»');
+  SEP = averiguarSeparador(ss);
+  Logger.log('Este libro escribe las fórmulas con «' + SEP + '»');
   Logger.log('');
 
   montarParametros(ss);
