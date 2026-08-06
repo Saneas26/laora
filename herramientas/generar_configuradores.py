@@ -85,19 +85,23 @@ import unicodedata
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 21
+V_CSS = 22
 V_JS = 6
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = {r['slug']: r for r in json.load(f)['relojes']}
 
-# Los que se publican, en el orden de la colección. El Bauhaus está
-# aparcado y el Tortuga, el Cóctel y el DIVER todavía no tienen
-# configurador en el catálogo: sin acabados ni matriz de precios no hay
-# nada que elegir, así que conservan su ficha anterior.
-MODELOS = ['lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora']
+# Los que se publican, en el orden de la colección. El Bauhaus no está
+# en la hoja «Catalogo laOra» y se queda fuera: no se le abre pantalla
+# de comprar a un reloj cuyo precio no sale de ninguna parte. El DIVER
+# (LO-06) sí está en la hoja, con cuatro referencias, pero todavía no
+# tiene entrada en `catalogo.json` ni sitio en la colección.
+MODELOS = ['lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora',
+           'tortuga', 'coctel']
 
-# Modelos cuyo paquete de fotos confirma la foto por combinación.
+# Modelos verificados a mano cuya referencia compuesta coincide con el
+# nombre de su foto. Los volcados de la hoja no hacen falta aquí: su
+# referencia YA es la de la hoja, que es como se llaman las fotos.
 FOTO_POR_COMBINACION = {'lunar'}
 
 CATALOGO = '/assets/img/catalogo'
@@ -165,6 +169,32 @@ MUESTRAS = {
     'incluido': ACERO,
 }
 
+# Y para las que llegan de la hoja, que traen el nombre que traigan: la
+# muestra se elige por el MATERIAL que dice su nombre. Es un dibujo del
+# material, no una foto, así que con acertar el material basta; lo que
+# no puede pasar es que salga un cuadrado gris sin significado.
+POR_MATERIAL = [
+    ('milanesa', MUESTRAS['milanesa']), ('malla', MUESTRAS['milanesa']),
+    ('nato', MUESTRAS['negra']), ('nailon', MUESTRAS['negra']),
+    ('piel', MUESTRAS['piel-negra']), ('cuero', MUESTRAS['piel-negra']),
+    ('caucho', MUESTRAS['caucho']), ('goma', MUESTRAS['caucho']),
+    ('silicona', MUESTRAS['caucho']),
+    ('pvd', MUESTRAS['brazalete-negro']), ('negr', MUESTRAS['brazalete-negro']),
+    ('904', MUESTRAS['brazalete-904l']),
+    ('acero', ACERO), ('brazalete', ACERO),
+]
+
+
+def muestra_de(correa):
+    """El dibujo del material de esta correa."""
+    if correa['id'] in MUESTRAS:
+        return MUESTRAS[correa['id']]
+    texto = sin_tildes(f'{correa["nombre"]} {correa.get("detalle", "")}').lower()
+    for pista, fondo in POR_MATERIAL:
+        if pista in texto:
+            return fondo
+    return '#d8d8d4'
+
 
 def correas_de(cfg):
     """Las correas que se pueden elegir. Si el modelo lleva brazalete
@@ -184,13 +214,26 @@ def correas_de(cfg):
 
 
 def referencia(reloj, acabado, indice):
-    """La referencia de la hoja de materiales: código + modelo sin
-    tildes + inicial del acabado + número + sufijo del movimiento.
+    """La referencia de la hoja.
+
+    Si el acabado trae `refs`, son las de la hoja tal cual, casilla por
+    casilla: es lo que deja `herramientas/volcar_hoja.py` y no hay nada
+    que componer. Solo se compone en los modelos que aún no se han
+    volcado, y entonces la regla es la de la hoja de materiales: código
+    + modelo sin tildes + inicial del acabado + número + sufijo del
+    movimiento.
 
     El número NO es siempre el de la correa: cuando un modelo tiene dos
     Cenit distintos, la hoja los numera `C01` y `C02` aunque los dos se
     monten con la misma correa. Por eso manda `refNum` del catálogo, que
     puede ser un número suelto o uno por correa."""
+    refs = acabado.get('refs')
+    if refs is not None:
+        # Volcado de la hoja: la casilla vacía se queda vacía. Antes se
+        # componía una referencia igualmente y la página se llevaba
+        # códigos que no existen —`LO-07_Bitacora_E04`— en las casillas
+        # de las combinaciones que no se pueden pedir.
+        return refs[indice] if indice < len(refs) and refs[indice] else ''
     codigo = reloj['codigo'].replace('—', '-').replace('–', '-').replace(' ', '')
     modelo = sin_tildes(reloj['nombre']).replace(' ', '')
     letra = acabado.get('refLetra') or acabado['nombre'][0].upper()
@@ -209,7 +252,14 @@ def foto_de(reloj, acabado, ref):
     resto, la primera del acabado. Si no hubiera ninguna del acabado, la
     del modelo: nunca se deja el visor sin foto."""
     slug = reloj['slug']
-    if slug in FOTO_POR_COMBINACION and ref in FOTOS_EN_DISCO:
+    # La foto exacta solo cuando la REFERENCIA es de fiar: o la trae la
+    # hoja (`refs`, que deja `volcar_hoja.py`) o el modelo está en la
+    # lista de los verificados. En el Trinchera, que aún se compone la
+    # referencia a mano, `A02` es la NATO negra para la web y la caja de
+    # bronce para el paquete de fotos: coincidiría el nombre del archivo
+    # y saldría un reloj que no es el que se está eligiendo.
+    fiable = bool(acabado.get('refs')) or slug in FOTO_POR_COMBINACION
+    if fiable and ref in FOTOS_EN_DISCO:
         return f'{CATALOGO}/{ref}.webp'
     codigo = reloj['codigo'].replace('—', '-').replace('–', '-').replace(' ', '')
     inicio = f'{codigo}_{sin_tildes(reloj["nombre"]).replace(" ", "")}_' \
@@ -337,12 +387,12 @@ def pantalla(slug):
         'acabados': datosAcabados,
         'correas': [{'id': c['id'], 'nombre': c['nombre'],
                      'detalle': c.get('detalle', ''),
-                     'muestra': MUESTRAS.get(c['id'], '#d8d8d4')} for c in correas],
+                     'muestra': muestra_de(c)} for c in correas],
     }
 
     fotoInicial = datosAcabados[aInicial['id']]['fotos'][cInicial]
     correaInicial = correas[cInicial]
-    muestraInicial = MUESTRAS.get(correaInicial['id'], '#d8d8d4')
+    muestraInicial = muestra_de(correaInicial)
 
     def botonAcabado(a):
         desde = min([p for p in precios.get(a['id'], []) if p is not None] or [0])
@@ -353,7 +403,7 @@ def pantalla(slug):
 
     def botonCorrea(i, c):
         return (f'        <button type="button" data-correa="{i}" aria-pressed="false">'
-                f'<span class="tira" style="background:{MUESTRAS.get(c["id"], "#d8d8d4")}"></span>'
+                f'<span class="tira" style="background:{muestra_de(c)}"></span>'
                 f'<span>{c["nombre"]}</span></button>\n')
 
     # El rótulo del grupo de correas: cuando no hay nada que elegir se
@@ -381,7 +431,7 @@ def pantalla(slug):
         detalle = f'<small>{u["detalle"]}</small>' if u.get('detalle') else ''
         bloqueCorreas = (
             f'      <p class="cfg-correa-unica">'
-            f'<span class="tira" style="background:{MUESTRAS.get(u["id"], "#d8d8d4")}"></span>'
+            f'<span class="tira" style="background:{muestra_de(u)}"></span>'
             f'<span><b>{u["nombre"]}</b>{detalle}</span></p>')
 
     return f"""<!DOCTYPE html>

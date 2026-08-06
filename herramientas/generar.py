@@ -274,8 +274,24 @@ def precio_es(valor):
 # precio cerrado en catalogo.json ese hueco lleva el diámetro, que es el
 # otro dato que el visitante compara de un vistazo. Nunca una cifra
 # inventada ni un «—».
+def desde(r):
+    """El precio más bajo que se puede pedir de verdad.
+
+    Sale del CONFIGURADOR, que es lo que se volcó de la hoja, y no del
+    campo `precio` del reloj: ese estaba escrito a mano y se quedó viejo
+    en cuanto la hoja cambió. El listado enseñaba 169,90 € del Precisa
+    cuando su Alba ya valía 199,90."""
+    cfg = r.get('configurador')
+    if cfg:
+        vivos = [p for l in cfg['precios'].values() for p in l if p is not None]
+        if vivos:
+            return min(vivos)
+    return r.get('precio')
+
+
 def tarjeta(r):
-    dato = 'desde ' + precio_es(r['precio']) if r['precio'] is not None else r['diametro']
+    p = desde(r)
+    dato = 'desde ' + precio_es(p) if p is not None else r['diametro']
     return f"""          <article class="product-card">
             <a class="product-visual" href="/{r['slug']}.html">
               <img src="{r['foto']}" alt="Reloj {r['nombre']} de laOra" loading="lazy">
@@ -819,7 +835,8 @@ escribir('club.html', cabeza(
 # ficha anterior sin que nadie se diera cuenta.
 # ============================================================
 
-DEL_CONFIGURADOR = {'lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora'}
+DEL_CONFIGURADOR = {'lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora',
+                    'tortuga', 'coctel'}
 
 for i, r in enumerate(RELOJES):
     if r['slug'] in DEL_CONFIGURADOR:
