@@ -51,7 +51,7 @@ lo demás en negro, la caja en oro rosa. `LO-07_Bitacora_E01-OR`,
 219,90 €.
 
 **El DIVER ya no tiene la escalera al revés.** La hoja quitó el
-`LO-06_Diver_L01` y pasó el `C01` a Levante.
+`LO-06_Diver_L01`. Su `C01` sigue siendo el Cenit.
 
 ## El Diver, publicado
 
