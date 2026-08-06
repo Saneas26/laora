@@ -534,22 +534,22 @@
           {
             "id": "brazalete-malla-milanesa-acero",
             "nombre": "Brazalete malla milanesa acero",
-            "detalle": "Brazalete malla milanesa acero · Malla milanesa 1,0 mm plateada · Cierre desplegable de malla con seguridad"
+            "detalle": "Malla milanesa 1,0 mm plateada · Cierre desplegable de malla con seguridad"
           },
           {
             "id": "brazalete-acero-316l-malla-cepilla",
             "nombre": "Brazalete acero 316L malla cepillada",
-            "detalle": "Brazalete acero 316L malla cepillada · Malla cepillada · Cierre de mariposa"
+            "detalle": "Malla cepillada · Cierre de mariposa"
           },
           {
             "id": "brazalete-acero-904l",
             "nombre": "Brazalete acero 904L",
-            "detalle": "Brazalete acero 904L"
+            "detalle": ""
           },
           {
             "id": "brazalete-malla-milanesa-pvd-negro",
             "nombre": "Brazalete malla milanesa PVD negro",
-            "detalle": "Brazalete malla milanesa PVD negro · Malla milanesa 1,0 mm PVD negro · Cierre desplegable de malla con seguridad"
+            "detalle": "Malla milanesa 1,0 mm PVD negro · Cierre desplegable de malla con seguridad"
           }
         ],
         "precios": {
@@ -861,7 +861,7 @@
           {
             "id": "brazalete-de-acero-integrado",
             "nombre": "Brazalete de acero integrado",
-            "detalle": "Brazalete de acero integrado · Pulido y satinado · Cierre desplegable con pulsadores"
+            "detalle": "Pulido y satinado · Cierre desplegable con pulsadores"
           }
         ],
         "precios": {
@@ -1137,17 +1137,17 @@
           {
             "id": "39-mm-pvd-bronce",
             "nombre": "39 mm, PVD bronce",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero · Hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
           },
           {
             "id": "36-mm-plata",
             "nombre": "36 mm, plata",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero · Hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
           },
           {
             "id": "36-mm-pvd-bronce",
             "nombre": "36 mm, PVD bronce",
-            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero · Hebilla de acero"
+            "detalle": "Correa NATO de nailon balístico verde militar · Tejido verde militar; hebilla de acero"
           },
           {
             "id": "39-mm-titanio-t2-negra",
@@ -1172,7 +1172,7 @@
           {
             "id": "39-mm-con-pvd-negro",
             "nombre": "39 mm, con PVD negro",
-            "detalle": "Correa NATO nailon balístico verde con hebillas PVD · Tejido balístico verde, hebillas PVD · Hebilla"
+            "detalle": "Correa NATO nailon balístico verde con hebillas PVD · Tejido balístico verde, hebillas PVD"
           }
         ],
         "precios": {
@@ -1303,6 +1303,108 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "diver",
+      "codigo": "LO—06",
+      "nombre": "Diver",
+      "familia": "Buceo",
+      "homenaje": null,
+      "frase": null,
+      "descripcion": null,
+      "historia": null,
+      "precio": null,
+      "movimiento": null,
+      "diametro": "40 mm",
+      "hermeticidad": "300 m (30 ATM)",
+      "foto": "/assets/img/catalogo/LO-06_DIVER_A01.webp",
+      "galeria": [
+        "/assets/img/catalogo/LO-06_DIVER_A01.webp"
+      ],
+      "fichaTecnica": [],
+      "configurador": {
+        "acabados": [
+          {
+            "id": "alba",
+            "nombre": "Alba",
+            "movimiento": "TMI VH31 (Vh31b)",
+            "movimientoTipo": "Cuarzo japonés (segundero de barrido)",
+            "frecuencia": "32.768 Hz",
+            "autonomia": "N/A (pila, autonomía ~3 años)",
+            "cajaMaterial": "Acero inoxidable 316L",
+            "diametro": "40 mm (buceo)",
+            "estanqueidad": "30 ATM (300 m)",
+            "bisel": "Giratorio unidireccional (120 clics)",
+            "cristal": "Zafiro",
+            "fondo": "Atornillado",
+            "peso": "150 g aprox. (con brazalete)",
+            "refs": [
+              "LO-06_Diver_A01"
+            ]
+          },
+          {
+            "id": "cenit",
+            "nombre": "Cenit",
+            "movimiento": "Seiko NH35A",
+            "movimientoTipo": "Automático mecánico (24 rubíes, con fecha, hackeo y cuerda manual)",
+            "frecuencia": "21.600 vph (3 Hz)",
+            "autonomia": "~41 h",
+            "cajaMaterial": "Acero inoxidable 316L",
+            "diametro": "40 mm (buceo)",
+            "estanqueidad": "30 ATM (300 m)",
+            "bisel": "Giratorio unidireccional (120 clics)",
+            "cristal": "Zafiro",
+            "fondo": "Atornillado",
+            "peso": "165 g aprox. (con brazalete)",
+            "refs": [
+              "LO-06_Diver_C01"
+            ]
+          },
+          {
+            "id": "eclipse",
+            "nombre": "Eclipse",
+            "movimiento": "PT5000",
+            "movimientoTipo": "Automático mecánico (25 rubíes, con fecha, hackeo y cuerda manual)",
+            "frecuencia": "28.800 vph (4 Hz)",
+            "autonomia": "~40 h",
+            "cajaMaterial": "Acero inoxidable 316L",
+            "diametro": "40 mm (buceo)",
+            "estanqueidad": "30 ATM (300 m)",
+            "bisel": "Giratorio unidireccional (120 clics)",
+            "cristal": "Zafiro",
+            "fondo": "Atornillado",
+            "peso": "165 g aprox. (con brazalete)",
+            "refs": [
+              "LO-06_Diver_E01"
+            ]
+          }
+        ],
+        "correas": [
+          {
+            "id": "correa-de-goma-de-buceo",
+            "nombre": "Correa de goma de buceo",
+            "detalle": "Textura de buceo (waffle) · Hebilla de acero inox."
+          }
+        ],
+        "precios": {
+          "alba": [
+            229.9
+          ],
+          "cenit": [
+            289.9
+          ],
+          "eclipse": [
+            279.9
+          ]
+        },
+        "rotuloOpciones": "Brazalete o correa",
+        "comunes": {
+          "Grosor": "13 mm aprox.",
+          "Ancho de asa": "20 mm",
+          "Ajuste": "Correa con pasadores",
+          "Corona": "Corona atornillada de acero"
+        }
+      }
     },
     {
       "slug": "bitacora",
@@ -1728,12 +1830,12 @@
           {
             "id": "correa-de-silicona",
             "nombre": "Correa de silicona",
-            "detalle": "Correa de silicona · Cepillado · Cierre desplegable con extensión de buceo"
+            "detalle": "Cepillado · Cierre desplegable con extensión de buceo"
           },
           {
             "id": "brazalete-de-acero-316l",
             "nombre": "Brazalete de acero 316L",
-            "detalle": "Brazalete de acero 316L · Cepillado · Cierre desplegable con extensión de buceo"
+            "detalle": "Cepillado · Cierre desplegable con extensión de buceo"
           }
         ],
         "precios": {
@@ -1865,7 +1967,7 @@
           {
             "id": "correa-de-piel-genuina-liberacion-",
             "nombre": "Correa de piel genuina liberación rápida",
-            "detalle": "Correa de piel genuina liberación rápida · Liso mate · Hebilla de espiga de acero"
+            "detalle": "Liso mate · Hebilla de espiga de acero"
           }
         ],
         "precios": {
