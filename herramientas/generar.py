@@ -289,6 +289,14 @@ def desde(r):
     return r.get('precio')
 
 
+def linea(clase, texto):
+    """Un párrafo, o nada. Lo que no está escrito no se pinta: el Diver
+    entró el 06/08/2026 con sus datos de la hoja y sin frase ni
+    homenaje, que los escribe Óscar, y un <p> vacío deja un hueco raro
+    en la tarjeta."""
+    return f'            <p class="{clase}">{texto}</p>\n' if texto else ''
+
+
 def tarjeta(r):
     p = desde(r)
     dato = 'desde ' + precio_es(p) if p is not None else r['diametro']
@@ -300,9 +308,7 @@ def tarjeta(r):
             </a>
             <div class="product-meta"><p>{r['familia']}</p><p>{dato}</p></div>
             <h3><a href="/{r['slug']}.html">{r['nombre']}</a></h3>
-            <p class="product-line">{r['frase']}</p>
-            <p class="homage-label">{r['homenaje']}</p>
-          </article>"""
+{linea('product-line', r.get('frase'))}{linea('homage-label', r.get('homenaje'))}          </article>"""
 
 
 # El «móvil» de Club laOra, calcado del componente ClubPhone del material.
@@ -836,7 +842,7 @@ escribir('club.html', cabeza(
 # ============================================================
 
 DEL_CONFIGURADOR = {'lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora',
-                    'tortuga', 'coctel'}
+                    'tortuga', 'coctel', 'diver'}
 
 for i, r in enumerate(RELOJES):
     if r['slug'] in DEL_CONFIGURADOR:

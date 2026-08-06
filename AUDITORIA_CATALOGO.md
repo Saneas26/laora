@@ -12,10 +12,11 @@ Fuente: hoja «Catalogo laOra» del libro
 El volcado lo hace `herramientas/volcar_hoja.py` y es repetible: cuando
 la hoja cambie, se vuelve a pasar y se regenera.
 
-## Estado: 48 de 51 referencias publicadas
+## Estado: las 51 referencias publicadas
 
-**Las 48 coinciden con su fila de la hoja en referencia Y precio**, una
-a una, y cada una enseña su propia foto de catálogo.
+**Las 51 coinciden con su fila de la hoja en referencia Y precio**, una
+a una, y cada una enseña su foto de catálogo. No queda ninguna fila de
+la hoja fuera de la web.
 
 | Modelo | Acabados | Opciones | Refs | Desde |
 |---|---:|---:|---:|---:|
@@ -23,14 +24,15 @@ a una, y cada una enseña su propia foto de catálogo.
 | LO-02 Cero Cero | 6 | 4 | 6 | 209,90 € |
 | LO-04 Precisa | 4 | 1 | 4 | 229,90 € |
 | LO-05 Trinchera | 6 | 9 | 15 | 189,90 € |
+| LO-06 Diver | 3 | 1 | 3 | 229,90 € |
 | LO-07 Bitácora | 6 | 4 | 7 | 219,90 € |
 | LO-08 Tortuga | 5 | 2 | 5 | 219,90 € |
 | LO-09 Cóctel | 3 | 1 | 3 | 209,90 € |
 
-Comprobado además en las siete pantallas: cero marcas ajenas, cero
+Comprobado además en las ocho pantallas: cero marcas ajenas, cero
 «clon», cero «⚠», cero «no declarado», cero notas de taller, cero
 códigos de proveedor, cero textos rotos, cero fotos que falten. Y las
-siete caben en una pantalla de teléfono de 375 × 812.
+ocho caben en una pantalla de teléfono de 375 × 812.
 
 ## Las decisiones de Óscar del 06/08/2026, aplicadas
 
@@ -51,24 +53,29 @@ lo demás en negro, la caja en oro rosa. `LO-07_Bitacora_E01-OR`,
 **El DIVER ya no tiene la escalera al revés.** La hoja quitó el
 `LO-06_Diver_L01` y pasó el `C01` a Levante.
 
-## Lo que sigue fuera
+## El Diver, publicado
 
-Solo el **DIVER (LO-06)**: tres referencias que no existen en
-`catalogo.json` ni en la colección.
+06/08/2026, Óscar: «la misma foto sirve para los tres». Publicado en
+`/diver` y en la colección, con las tres referencias de la hoja.
 
 | Referencia | Acabado | Movimiento | PVP |
 |---|---|---|---:|
 | LO-06_Diver_A01 | Alba | VH31 cuarzo de barrido | 229,90 € |
-| LO-06_Diver_C01 | **Levante** | Seiko NH35A | 289,90 € |
+| LO-06_Diver_C01 | Cenit | Seiko NH35A | 289,90 € |
 | LO-06_Diver_E01 | Eclipse | PT5000 | 279,90 € |
 
-Dos cosas antes de darlo de alta:
+Entra sin frase, sin homenaje y sin historia: esos textos los escribe
+Óscar y hasta entonces no se pintan. En la tarjeta del listado salen el
+código, la familia, la foto y el «desde», que es lo que hay.
 
-1. **Solo hay una foto de catálogo del DIVER**, la del Alba. Su Eclipse
-   saldría con un reloj plateado, y un Eclipse es negro entero.
-2. **La referencia del Levante empieza por C**, de Cenit:
-   `LO-06_Diver_C01`. Conviene renombrarla a `L01` antes de publicarla,
-   porque la referencia es lo que va en el pedido.
+### Y una cosa que hay que mirar
+
+**El Cenit del Diver monta un movimiento peor que su Eclipse.** El
+Cenit lleva un Seiko NH35A y el Eclipse, un PT5000 —que es más
+movimiento— por diez euros menos. Y el PT5000 ya está comprado para esa
+misma caja, así que se puede montar un Cenit mejor sin buscar nada
+nuevo. Es la tarea que Óscar dejó puesta: «si se puede montar un modelo
+mejor, dímelo».
 
 ## Lo que la hoja todavía dice mal
 

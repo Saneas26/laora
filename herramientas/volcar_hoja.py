@@ -318,11 +318,25 @@ def titulo_exterior(fila):
 
 
 def detalle_exterior(fila):
-    # la correa entera va aquí: en el botón puede no caber, pero en la
-    # ficha técnica y en el resumen del pedido tiene que estar completa
-    partes = [titulo_exterior(fila), limpiar(fila.get('brazAcab')), cierre(fila)]
-    partes = [p for p in partes if p]
-    return ' · '.join(partes)
+    """El acabado de la correa y su cierre, sin decir dos veces lo mismo.
+
+    La hoja repite: el Trinchera pone «Tejido verde militar; hebilla de
+    acero» en el acabado y «Hebilla de acero» en el cierre, y salía
+    «…hebilla de acero · Hebilla de acero»."""
+    return juntar([limpiar(fila.get('brazAcab')), cierre(fila)])
+
+
+def juntar(partes):
+    fuera, vistas = [], ''
+    for p in partes:
+        if not p:
+            continue
+        llano = sin_tildes(p).lower()
+        if llano in vistas:
+            continue
+        vistas += ' ' + llano
+        fuera.append(p)
+    return ' · '.join(fuera)
 
 
 # ============================================================
@@ -451,7 +465,15 @@ def configurador(filas, previo):
         while ide in usados:
             ide += '-2'
         usados.add(ide)
-        correas.append({'id': ide, 'nombre': t, 'detalle': detalle_exterior(f)})
+        # Si el rótulo dice la CAJA, la correa se pierde del botón y
+        # tiene que aparecer en el detalle, que es lo que se lee en la
+        # ficha y en el resumen del pedido. Si el rótulo ya es la correa,
+        # no se repite: el Diver salía «Correa de goma de buceo · Correa
+        # de goma de buceo · Textura de buceo».
+        det = detalle_exterior(f)
+        if t != titulos[i]:
+            det = juntar([titulos[i], det])
+        correas.append({'id': ide, 'nombre': t, 'detalle': det})
 
     # 3. los precios y las referencias, casilla a casilla
     previoAcabados = {a['id']: a for a in (previo or {}).get('acabados', [])}

@@ -97,7 +97,7 @@ with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as
 # de comprar a un reloj cuyo precio no sale de ninguna parte. El DIVER
 # (LO-06) sí está en la hoja, con cuatro referencias, pero todavía no
 # tiene entrada en `catalogo.json` ni sitio en la colección.
-MODELOS = ['lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora',
+MODELOS = ['lunar', 'cero-cero', 'precisa', 'trinchera', 'diver', 'bitacora',
            'tortuga', 'coctel']
 
 # Modelos verificados a mano cuya referencia compuesta coincide con el
@@ -111,6 +111,12 @@ LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'   # cabecera clara → log
 FOTOS_EN_DISCO = sorted(
     os.path.basename(p)[:-5]
     for p in glob.glob(os.path.join(RAIZ, 'assets/img/catalogo/*.webp')))
+
+# El paquete de fotos no escribe el modelo siempre igual: la referencia
+# del Diver es `LO-06_Diver_A01` y su foto, `LO-06_DIVER_A01`. Se busca
+# sin distinguir mayúsculas para que una diferencia de teclado no deje
+# un reloj sin su foto.
+FOTOS_POR_CLAVE = {n.lower(): n for n in FOTOS_EN_DISCO}
 
 
 def euros(v):
@@ -275,13 +281,14 @@ def foto_de(reloj, acabado, ref):
     # bronce para el paquete de fotos: coincidiría el nombre del archivo
     # y saldría un reloj que no es el que se está eligiendo.
     fiable = bool(acabado.get('refs')) or slug in FOTO_POR_COMBINACION
-    if fiable and ref in FOTOS_EN_DISCO:
-        return f'{CATALOGO}/{ref}.webp'
+    exacta = FOTOS_POR_CLAVE.get((ref or '').lower())
+    if fiable and exacta:
+        return f'{CATALOGO}/{exacta}.webp'
     codigo = reloj['codigo'].replace('—', '-').replace('–', '-').replace(' ', '')
     inicio = f'{codigo}_{sin_tildes(reloj["nombre"]).replace(" ", "")}_' \
              f'{acabado.get("refLetra") or acabado["nombre"][0].upper()}'
     for nombre in FOTOS_EN_DISCO:
-        if nombre.startswith(inicio):
+        if nombre.lower().startswith(inicio.lower()):
             return f'{CATALOGO}/{nombre}.webp'
     return reloj['foto']
 
