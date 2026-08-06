@@ -1,0 +1,140 @@
+/* ============================================================
+   laOra · EL PANEL
+   ------------------------------------------------------------
+   Herramienta de trabajo, no escaparate: aquí manda leerlo rápido.
+   Texto grande, contraste alto y nada por debajo de 14 px, que es
+   la norma de la casa. Fondo claro a propósito: se usa de día y
+   con el sol de Canarias en la pantalla.
+   ============================================================ */
+*,::before,::after{box-sizing:border-box;border:0 solid;margin:0;padding:0}
+img{display:block;max-width:100%;height:auto}
+button{cursor:pointer;font:inherit;color:inherit;background:transparent}
+a{color:inherit}
+ul,ol{list-style:none}
+
+:root{--ivory:#f4f0e8;--paper:#fff;--ink:#16170f;--muted:#5f5f57;
+      --line:rgba(22,23,15,.15);--gold:#8a6428;--dark:#151715;
+      --bien:#1d6b2f;--ojo:#8a5a12;--mal:#a3341f;
+      --sans:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+
+body{margin:0;background:var(--ivory);color:var(--ink);
+     font-family:var(--sans);font-size:16px;line-height:1.45}
+
+/* ---------- la puerta ---------- */
+.pa-puerta{min-height:100svh;display:flex;flex-direction:column;
+           align-items:center;justify-content:center;gap:14px;padding:24px}
+.pa-logo{width:150px}
+.pa-puerta h1{font-size:22px;font-weight:700;color:var(--muted)}
+.pa-puerta form{display:flex;flex-direction:column;gap:12px;width:min(340px,100%)}
+.pa-puerta label{display:flex;flex-direction:column;gap:6px}
+.pa-puerta span{font-size:14px;font-weight:700;color:var(--muted)}
+.pa-puerta input{height:52px;padding:0 14px;font:inherit;font-size:17px;
+                 background:var(--paper);border:1px solid var(--line);border-radius:11px}
+.pa-puerta input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.pa-puerta button{height:52px;border-radius:999px;background:var(--dark);
+                  color:#fffdf8;font-size:17px;font-weight:700}
+.pa-mal{color:var(--mal);font-weight:700;font-size:15px}
+
+/* ---------- la cabecera ---------- */
+.pa-cab{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:16px;
+        padding:10px clamp(12px,3vw,26px);background:var(--paper);
+        border-bottom:1px solid var(--line);flex-wrap:wrap}
+.pa-logo-cab{height:22px;width:auto}
+.pa-nav{display:flex;gap:6px;flex:1;flex-wrap:wrap}
+.pa-tab{position:relative;padding:9px 15px;border-radius:999px;font-size:15px;
+        font-weight:700;color:var(--muted)}
+.pa-tab:hover{background:var(--ivory)}
+.pa-tab.pa-activo{background:var(--dark);color:#fffdf8}
+.pa-tab b{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:999px;
+          background:var(--mal);color:#fff;font-size:12px}
+.pa-salir{font-size:14px;color:var(--muted);text-decoration:underline}
+
+.pa-cuerpo{max-width:1080px;margin:0 auto;padding:clamp(16px,3vw,28px)}
+.pa-titulo2{margin:26px 0 12px;font-size:19px;font-weight:700}
+.pa-titulo2:first-child{margin-top:0}
+
+/* ---------- el panorama ---------- */
+.pa-tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.pa-tarjeta{padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.pa-tarjeta span{display:block;font-size:14px;font-weight:700;color:var(--muted)}
+.pa-tarjeta b{display:block;margin-top:5px;font-size:32px;font-weight:700;letter-spacing:-.02em}
+.pa-tarjeta.pa-ojo b{color:var(--ojo)}
+.pa-tarjeta.pa-urge b{color:var(--mal)}
+
+/* ---------- filtros ---------- */
+.pa-filtros{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.pa-filtro{padding:8px 14px;border:1px solid var(--line);border-radius:999px;
+           font-size:14px;font-weight:700;color:var(--muted);background:var(--paper)}
+.pa-filtro.pa-activo{background:var(--dark);color:#fffdf8;border-color:var(--dark)}
+
+/* ---------- listas ---------- */
+.pa-fila{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;
+         width:100%;text-align:left;padding:15px;margin-bottom:10px;
+         background:var(--paper);border:1px solid var(--line);border-radius:13px}
+.pa-fila:hover{border-color:var(--gold)}
+.pa-fila h3{font-size:17px;font-weight:700}
+.pa-fila p{font-size:14px;color:var(--muted);margin-top:3px}
+.pa-derecha{text-align:right;white-space:nowrap}
+.pa-importe{font-size:19px;font-weight:700}
+
+.pa-estado{display:inline-block;padding:3px 11px;border-radius:999px;
+           font-size:13px;font-weight:700;background:var(--ivory);color:var(--muted)}
+.pa-estado.e-solicitado{background:#fbe6c8;color:#7a4a06}
+.pa-estado.e-pagado{background:#cfe9d2;color:#14562a}
+.pa-estado.e-preparando{background:#d9e4f5;color:#1c3f78}
+.pa-estado.e-enviado{background:#e0dcf5;color:#3c2f7a}
+.pa-estado.e-entregado{background:#d7d5ce;color:#3a382f}
+.pa-estado.e-cancelado,.pa-estado.e-devuelto{background:#f6d5cd;color:#8a2c14}
+
+.pa-nada{padding:26px;text-align:center;color:var(--muted);font-size:15px}
+
+/* ---------- la ficha ---------- */
+.pa-manto{position:fixed;inset:0;z-index:20;background:rgba(20,20,16,.55);
+          display:flex;align-items:flex-start;justify-content:center;
+          padding:clamp(10px,3vh,40px) 12px;overflow:auto}
+.pa-ficha{position:relative;width:min(760px,100%);padding:clamp(18px,3vw,28px);
+          background:var(--paper);border-radius:16px}
+.pa-cerrar{position:absolute;top:10px;right:12px;width:40px;height:40px;
+           border-radius:50%;font-size:19px;color:var(--muted)}
+.pa-cerrar:hover{background:var(--ivory)}
+.pa-ficha h2{font-size:23px;font-weight:700;padding-right:44px}
+.pa-ficha h4{margin:20px 0 8px;font-size:15px;font-weight:700;color:var(--muted);
+             letter-spacing:.06em;text-transform:uppercase}
+.pa-datos{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 14px;font-size:15px}
+.pa-datos dt{font-weight:700;color:var(--muted)}
+.pa-datos dd{overflow-wrap:anywhere}
+
+.pa-bloque{padding:14px;margin-bottom:10px;background:var(--ivory);border-radius:12px}
+.pa-bloque h5{font-size:16px;font-weight:700}
+.pa-bloque p{font-size:14px;color:var(--muted);margin-top:2px}
+
+.pa-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.pa-boton{padding:12px 18px;border-radius:999px;background:var(--dark);color:#fffdf8;
+          font-size:15px;font-weight:700}
+.pa-boton:hover{background:#2a2d28}
+.pa-boton.pa-suave{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.pa-boton.pa-suave:hover{background:var(--ivory)}
+.pa-boton[disabled]{background:#c9c5bb;color:#6f6c64;cursor:not-allowed}
+
+.pa-campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:10px}
+.pa-campo{display:flex;flex-direction:column;gap:5px;min-width:0}
+.pa-campo span{font-size:13px;font-weight:700;color:var(--muted)}
+.pa-campo input,.pa-campo select,.pa-campo textarea{
+  width:100%;min-height:46px;padding:10px 12px;font:inherit;font-size:16px;
+  color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.pa-campo textarea{min-height:92px;resize:vertical}
+.pa-campo input:focus,.pa-campo select:focus,.pa-campo textarea:focus{
+  outline:2px solid var(--gold);outline-offset:1px}
+
+/* ---------- el aviso de abajo ---------- */
+.pa-aviso{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:40;
+          max-width:min(520px,92vw);padding:14px 20px;border-radius:12px;
+          background:var(--dark);color:#fffdf8;font-size:15px;font-weight:700;
+          box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.pa-aviso.pa-aviso-mal{background:var(--mal)}
+
+@media (max-width:640px){
+  .pa-fila{grid-template-columns:minmax(0,1fr)}
+  .pa-derecha{text-align:left}
+  .pa-tarjeta b{font-size:27px}
+}
