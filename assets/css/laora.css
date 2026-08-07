@@ -972,12 +972,21 @@ footer small { font-size: 12px; }
    marfil no se ve; y con su cuerpo fijo de 36 px, que al lado de un
    titular de 52 se queda enano. Es la misma regla que ya tienen los
    rótulos y los botones, aplicada aquí. */
-.historia h2 .cb-marca, .historia-cierre .cb-marca {
+/* EL ACTO 1 DE FILOSOFÍA (07/08/2026)
+   Su titular son CUATRO frases, no dos. Con el cuerpo de h1 del resto
+   del sitio —hasta 90 px— cada frase partía en dos líneas y el bloque
+   se comía la foto: se perdía el ritmo de cuatro golpes, que es lo que
+   hace que la historia se lea de un tirón. Aquí manda el ritmo. */
+.philosophy-hero h1 { font-size: clamp(30px, 3.6vw, 52px); line-height: 1.12; }
+.philosophy-hero > div { max-width: 1240px; }
+
+.philosophy-hero h1 .cb-marca, .historia h2 .cb-marca, .historia-cierre .cb-marca {
   font-size: .92em; color: inherit; letter-spacing: -.01em;
   /* El titular va en cursiva y el logotipo la heredaba: salía inclinado.
      La norma de la marca permite cambiarle el color y el cuerpo, nada
      más — ni la fuente, ni la caja, ni la forma. Aquí se endereza. */
   font-style: normal; }
+.philosophy-hero h1 .cb-marca .o::before,
 .historia h2 .cb-marca .o::before, .historia-cierre .cb-marca .o::before {
   border-top-color: currentColor; }
 
