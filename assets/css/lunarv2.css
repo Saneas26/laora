@@ -68,21 +68,15 @@ img { display: block; max-width: 100%; }
 main { overflow: hidden; }
 em { font-family: var(--serif); font-weight: 400; }
 
-.site-header { height: 76px; padding: 0 3.5vw; display: flex; align-items: center; justify-content: space-between; gap: 28px; background: rgba(255,255,255,.98); border-bottom: 1px solid rgba(0,0,0,.08); position: sticky; inset: 0 0 auto; z-index: 50; backdrop-filter: blur(14px); }
-.brand { min-width: 150px; }
-.brand-logo { width: 118px; display: inline-flex; align-items: center; }
-.brand-logo img { width: 100%; height: auto; }
 /* .site-header .brand-logo img { filter: brightness(0); }  ← el logotipo
    canónico ya se sirve en su color: el filtro lo dejaba TODO negro y se
    comía el ámbar del triángulo. Es la única desviación, la del logo. */
-.main-nav { display: flex; align-items: center; gap: clamp(20px, 2.3vw, 42px); }
 /* `align-items: baseline` en vez de `center`: es la otra mitad del ajuste
    del logotipo. Dentro de un flex centrado no hay línea base que
    compartir, y el logotipo quedaba 4,5 px por debajo del texto de al
    lado. El documento de entrega pide expresamente que el logotipo y la
    palabra pegada —«Por qué», «Club», «teca»— compartan línea base.
    Original: ... display: inline-flex; align-items: center; ... */
-.main-nav a, .account-link { min-height: 44px; display: inline-flex; align-items: baseline; gap: 4px; font-size: 14px; line-height: 1; font-weight: 500; letter-spacing: 0; position: relative; white-space: nowrap; }
 /* AJUSTE DEL LOGOTIPO — la excepción que autorizó Óscar (05/08/2026).
    El material centraba el logotipo con un inline-flex y lo subía 1 px a
    mano, porque su wordmark traía aire por debajo del dibujo. El nuestro
@@ -94,26 +88,10 @@ em { font-family: var(--serif); font-weight: 400; }
    Original:
    .brand-word { height: 14px; display: inline-flex; align-items: center; gap: 0; line-height: 14px; vertical-align: middle; }
    .brand-word img { width: auto; height: 12px; display: block; flex: 0 0 auto; transform: translateY(-1px); } */
-.brand-word { display: inline; }
-.brand-word img { width: auto; height: 11px; display: inline; vertical-align: baseline; }
-.main-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -9px; height: 1px; background: var(--ink); transition: right .25s ease; }
-.main-nav a:hover::after, .main-nav a.active::after { right: 0; }
-.header-actions { display: flex; align-items: center; gap: 20px; min-width: 150px; justify-content: flex-end; }
-.header-icon { width: 31px; height: 38px; display: grid; place-items: center; position: relative; }
-.header-icon > span { display: block; position: relative; color: var(--ink); }
 .support-icon > span { width: 21px; height: 17px; border: 1.8px solid currentColor; border-bottom-color: transparent; border-radius: 14px 14px 4px 4px; }
 .support-icon > span::before, .support-icon > span::after { content: ""; position: absolute; top: 9px; width: 4px; height: 8px; border: 1.8px solid currentColor; background: white; }
 .support-icon > span::before { left: -4px; border-radius: 4px 1px 1px 4px; }
 .support-icon > span::after { right: -4px; border-radius: 1px 4px 4px 1px; }
-.profile-icon > span { width: 23px; height: 23px; border: 1.8px solid currentColor; border-radius: 50%; }
-.profile-icon > span::before { content: ""; position: absolute; width: 6px; height: 6px; left: 6.5px; top: 4px; border: 1.6px solid currentColor; border-radius: 50%; }
-.profile-icon > span::after { content: ""; position: absolute; width: 11px; height: 6px; left: 4px; bottom: 3px; border: 1.6px solid currentColor; border-bottom: 0; border-radius: 10px 10px 0 0; }
-.bag-icon > span { width: 20px; height: 19px; border: 1.8px solid currentColor; border-radius: 2px; margin-top: 4px; }
-.bag-icon > span::before { content: ""; position: absolute; width: 8px; height: 6px; left: 4px; top: -7px; border: 1.8px solid currentColor; border-bottom: 0; border-radius: 6px 6px 0 0; }
-.bag-icon b { position: absolute; right: -4px; top: 1px; min-width: 15px; height: 15px; padding: 0 3px; display: grid; place-items: center; border-radius: 9px; background: var(--ink); color: white; font-size: 8px; line-height: 1; }
-.menu-toggle { display: none; width: 44px; height: 44px; border: 0; background: transparent; position: relative; }
-.menu-toggle span { width: 22px; height: 1px; background: var(--ink); position: absolute; left: 11px; top: 18px; }
-.menu-toggle span:last-child { top: 25px; }
 
 .kicker, .section-number { margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: .2em; font-weight: 700; }
 .kicker.light, .light { color: var(--white); }
@@ -652,14 +630,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .success-mark { width: 70px; height: 70px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: white; font-size: 28px; margin-bottom: 28px; }
 
 @media (max-width: 1050px) {
-  .site-header { padding: 0 22px; }
-  .menu-toggle { display: block; order: 3; }
-  .brand { min-width: auto; }
-  .header-actions { min-width: auto; margin-left: auto; }
-  .account-link { display: none; }
-  .main-nav { position: fixed; top: 76px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--line); padding: 20px 24px 30px; display: none; flex-direction: column; align-items: flex-start; gap: 0; }
-  .main-nav.open { display: flex; }
-  .main-nav a { width: 100%; min-height: 52px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
   .trust-card { flex-basis: 78vw; }
   .product-grid, .product-grid.compact { grid-template-columns: repeat(2,1fr); }
   .product-visual, .compact .product-visual { height: 54vw; }
@@ -679,11 +649,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 @media (max-width: 720px) {
   h1 { font-size: clamp(46px, 14vw, 66px); }
   h2 { font-size: clamp(38px, 11.5vw, 54px); }
-  .site-header { height: 68px; }
-  .site-header .brand-logo { width: 104px; }
-  .header-actions { gap: 13px; }
   .support-icon { display: none; }
-  .main-nav { top: 68px; }
   .cart-link span { display: none; }
   .home-hero { min-height: calc(100svh - 68px); }
   .lunar-hero-image { object-position: center center; }
@@ -1148,7 +1114,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    flex: con una línea de texto normal, el logotipo y la palabra
    comparten línea base por sí solos —que era lo que se buscaba— y el
    `line-height` centra el conjunto. */
-.main-nav a, .account-link{ display: block; line-height: 44px; }
 
 
 /* EL AVISO DE MARCAS · Óscar lo quiere a 9 px, en gris y con margen
