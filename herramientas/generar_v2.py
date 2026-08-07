@@ -453,7 +453,7 @@ ACTO_2 = f"""
     <div class="lunar-dialogue-veil" aria-hidden="true"></div>
     <div class="lunar-dialogue-copy">
       <h2 id="lunar-dialogue-question">Qué chulo. ¿Cuál es?</h2>
-      <p>Es un {marca('dialogue-brand', LOGO_OSCURO)}. Marca española, los montan en Madrid a mano. Zafiro, <b>mecanismos suizos y japoneses</b>. Doscientos diecinueve.</p>
+      <p>Es un {marca('dialogue-brand', LOGO_OSCURO)}. Marca española, los montan en Madrid a mano. Zafiro, <b>mecanismos suizos y japoneses</b>. <b>Hasta 5 años de Garantía.</b> Doscientos diecinueve.</p>
     </div>
     <span class="lunar-dialogue-number" aria-hidden="true">02</span>
   </section>"""
