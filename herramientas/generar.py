@@ -27,6 +27,14 @@ Los datos de los relojes salen de assets/datos/catalogo.json, que es la
 
 import json
 import os
+import sys
+
+# La cabecera es la MISMA en todas las páginas desde el 06/08/2026 y vive
+# en un solo sitio. Ver `herramientas/cabecera_laora.py`.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cabecera_laora import (RECURSOS as CABECERA_RECURSOS,
+                            SCRIPT as CABECERA_SCRIPT,
+                            marcado as cabecera_comun)
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -177,30 +185,28 @@ def cabeza(titulo, descripcion, url, foto=f'{IMG}/bitacora-hero-full.webp'):
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
 <link rel="stylesheet" href="/assets/css/laora.css?v={V_CSS}">
+{CABECERA_RECURSOS}
+<!-- `cabecera.css` ya NO dibuja la cabecera —eso lo hace la común desde
+     el 06/08/2026—, pero sigue haciendo falta: dentro está `.cb-marca`,
+     el logotipo dibujado con la O como círculo, que estas páginas usan
+     en los rótulos y en los textos de las fichas. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v={V_CAB}">
 </head>
 <body>"""
 
 
 def cabecera(activa=''):
-    """La cabecera que Óscar pidió conservar. `cabecera.js` le inyecta el
-    desplegable del móvil y la deja fija al hacer scroll."""
-    def enlace(href, texto, clave):
-        cls = ' class="activo"' if activa == clave else ''
-        return f'    <a href="{href}"{cls}>{texto}</a>'
-    return f"""
-<header class="cb cb-claro">
-  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu" aria-label="Navegación principal">
-{enlace('/coleccion.html', 'relojes', 'coleccion')}
-{enlace('/filosofia.html', 'nuestra forma de hacer', 'filosofia')}
-{enlace('/taller.html', 'taller y servicio', 'taller')}
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
-         un span sin texto, así que un lector de pantalla leería «club lara»:
-         de ahí el aria-label. -->
-    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
-  </nav>
-</header>"""
+    """LA MISMA EN TODAS LAS PÁGINAS desde el 06/08/2026, por encargo de
+    Óscar: «coloca la misma head en todas las páginas».
+
+    Hasta hoy había cuatro cabeceras distintas —esta, la de la portada,
+    la de las pantallas de comprar y la del carrito— y navegar por el
+    sitio parecía saltar entre cuatro webs. Ahora la dibuja una sola,
+    `herramientas/cabecera_laora.py`.
+
+    Aquí solo se traduce el nombre de la sección: esta parte del sitio
+    la llamaba `coleccion` y la cabecera común la llama `relojes`."""
+    return cabecera_comun({'coleccion': 'relojes'}.get(activa, activa))
 
 
 # El aviso legal del pie es lo que separa «homenaje» de «falsificación» a
@@ -263,7 +269,7 @@ def final_cta(kicker, titular, href, boton, href2, enlace2):
 
 def scripts(extra=''):
     return f"""
-<script src="/assets/js/cabecera.js?v=3"></script>{extra}
+{CABECERA_SCRIPT}{extra}
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

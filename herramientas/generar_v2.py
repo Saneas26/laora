@@ -55,11 +55,20 @@ USO
 import json
 import re
 import os
+import sys
+
+# La cabecera es la MISMA en todas las páginas desde el 06/08/2026 y vive
+# en `herramientas/cabecera_laora.py`. La portada era la que la tenía
+# escrita dentro; ahora la comparte con el resto del sitio.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cabecera_laora import (RECURSOS as CABECERA_RECURSOS,
+                            SCRIPT as CABECERA_SCRIPT,
+                            marcado as cabecera_comun)
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 30
+V_CSS = 31
 V_JS = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -97,30 +106,7 @@ def marca(clase, fuente, sufijo=''):
     return f'<span class="{clase}"><img src="{fuente}" alt="laOra">{sufijo}</span>'
 
 
-CABECERA = f"""
-<header class="site-header">
-  <a class="brand" href="/" aria-label="laOra, inicio">{marca('brand-logo', LOGO_OSCURO)}</a>
-  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
-    <span></span><span></span>
-  </button>
-  <nav class="main-nav" aria-label="Navegación principal" data-nav>
-    <a href="/coleccion.html">Relojes</a>
-    <a href="/filosofia.html">Por qué {marca('brand-word', LOGO_OSCURO)}</a>
-    <a href="/taller.html">Taller</a>
-    <a href="/club.html">Club {marca('brand-word', LOGO_OSCURO)}</a>
-    <a href="/filosofia.html#laorateca">{marca('brand-word', LOGO_OSCURO, 'teca')}</a>
-  </nav>
-  <div class="header-actions">
-    <!-- El icono de ayuda (los auriculares) lo quitó Óscar el 05/08/2026. -->
-    <!-- El carrito y la cuenta se quedan A LA VISTA pero SIN FUNCIÓN hasta
-         que existan, por encargo de Óscar (05/08/2026). Van como botones
-         desactivados y no como enlaces: antes apuntaban a /carrito y
-         /cuenta, que no existen, y daban un 404. Un botón apagado se
-         entiende; un 404 parece que la web está rota. -->
-    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
-    <button class="header-icon bag-icon" type="button" disabled aria-label="Carrito, todavía no disponible" title="Muy pronto"><span aria-hidden="true"></span><b>0</b></button>
-  </div>
-</header>"""
+CABECERA = cabecera_comun()
 
 
 # ============================================================
@@ -1004,6 +990,7 @@ PAGINA = f"""<!DOCTYPE html>
      pantalla. `display=swap` para que el texto se lea desde el primer
      instante aunque la fuente tarde. -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+{CABECERA_RECURSOS}
 <link rel="stylesheet" href="/assets/css/lunarv2.css?v={V_CSS}">
 </head>
 <body>
@@ -1021,6 +1008,7 @@ PAGINA = f"""<!DOCTYPE html>
 {PIE}
 
 <script type="application/json" data-comparaciones>{DATOS_COMPARACIONES}</script>
+{CABECERA_SCRIPT}
 <script src="/assets/js/lunarv2.js?v={V_JS}"></script>
 </body>
 </html>

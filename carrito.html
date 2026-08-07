@@ -11,15 +11,39 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- GENERADO por herramientas/generar_carrito.py — no editar a mano. -->
-<link rel="stylesheet" href="/assets/css/carrito.css?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=1">
+<link rel="stylesheet" href="/assets/css/carrito.css?v=5">
 </head>
 <body>
 
-<header class="ca-cab">
-  <a class="ca-marca" href="/" aria-label="laOra, inicio"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></a>
-  <p class="ca-titulo">Tu carrito</p>
-  <a class="ca-seguir" href="/">Seguir mirando</a>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
+    <span></span><span></span>
+  </button>
+  <nav class="main-nav" aria-label="Navegación principal" data-nav>
+    <a href="/coleccion.html">Relojes</a>
+    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
+    <a href="/filosofia.html#laorateca"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra">teca</span></a>
+  </nav>
+  <div class="header-actions">
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
+         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
+         un cero permanente al lado del carrito parece una web rota. -->
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
+  </div>
 </header>
+
+<!-- El título de la pantalla, debajo de la cabecera común. Antes la
+     cabecera de esta página era distinta a la del resto del sitio;
+     ahora es la misma y aquí solo queda lo que es de aquí. -->
+<p class="ca-titulo">Tu carrito</p>
 
 <main class="ca-cuerpo">
   <!-- Las líneas las pinta `carrito.js` con lo que haya en la cesta.
@@ -92,6 +116,7 @@
   <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/sesion.js?v=4"></script>
 <script src="/assets/js/carrito.js?v=4"></script>
 <script src="/assets/js/carrito-pantalla.js?v=4"></script>

@@ -1,0 +1,111 @@
+/* ============================================================
+   laOra · LA CABECERA, LA MISMA EN TODAS LAS PÁGINAS
+   ------------------------------------------------------------
+   Óscar, 06/08/2026: «por el momento coloca la misma head en todas
+   las páginas».
+
+   Hasta hoy había CUATRO cabeceras distintas —una en la portada, otra
+   en la colección, otra en las pantallas de comprar y otra en el
+   carrito y la cuenta—, cada una en su propia hoja. Navegar por el
+   sitio parecía saltar entre cuatro webs.
+
+   Esta hoja es la única que la dibuja, y es AUTOSUFICIENTE a propósito:
+   define sus propios colores y su propia tipografía en vez de heredar
+   los de la página, porque se carga sobre hojas muy distintas
+   —`laora.css`, `configurador.css`, `carrito.css`, `cuenta.css`— y no
+   puede depender de que ninguna de ellas exista.
+
+   El panel NO la lleva: es el cuarto de atrás, no la tienda.
+
+   Los valores son los de la portada aprobada, copiados sin tocar.
+   ============================================================ */
+.site-header {
+  --cab-tinta: #1c1d1b;
+  --cab-linea: rgba(28,29,27,.16);
+  --cab-sans: "Inter", Arial, Helvetica, sans-serif;
+
+  height: 76px; padding: 0 3.5vw;
+  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+  background: rgba(255,255,255,.98);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  position: sticky; inset: 0 0 auto; z-index: 50;
+  backdrop-filter: blur(14px);
+  font-family: var(--cab-sans);
+  color: var(--cab-tinta);
+}
+.site-header a { color: inherit; text-decoration: none; }
+.site-header *, .site-header *::before, .site-header *::after { box-sizing: border-box; }
+
+.site-header .brand { min-width: 150px; }
+.site-header .brand-logo { width: 118px; display: inline-flex; align-items: center; }
+.site-header .brand-logo img { width: 100%; height: auto; display: block; }
+
+/* El logotipo dentro de una palabra del menú —«Por qué laOra»— va en
+   línea y a la altura de la equis, no como bloque. */
+.site-header .brand-word { display: inline; }
+.site-header .brand-word img { width: auto; height: 11px; display: inline; vertical-align: baseline; }
+
+.site-header .main-nav { display: flex; align-items: center; gap: clamp(20px, 2.3vw, 42px); }
+/* `display:block` y no flex: con flex y `align-items:baseline` el texto
+   se pegaba arriba en vez de centrarse en los 44 px del enlace. Con una
+   sola línea, el logotipo y la palabra comparten línea base solos. */
+.site-header .main-nav a {
+  min-height: 44px; display: block; line-height: 44px;
+  font-size: 14px; font-weight: 500; letter-spacing: 0;
+  position: relative; white-space: nowrap;
+}
+.site-header .main-nav a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 6px;
+  height: 1px; background: var(--cab-tinta); transition: right .25s ease;
+}
+.site-header .main-nav a:hover::after,
+.site-header .main-nav a.active::after { right: 0; }
+
+.site-header .header-actions {
+  display: flex; align-items: center; gap: 20px;
+  min-width: 150px; justify-content: flex-end;
+}
+.site-header .header-icon { width: 31px; height: 38px; display: grid; place-items: center; position: relative; border: 0; background: transparent; cursor: pointer; }
+.site-header .header-icon > span { display: block; position: relative; color: var(--cab-tinta); }
+
+.site-header .profile-icon > span { width: 23px; height: 23px; border: 1.8px solid currentColor; border-radius: 50%; }
+.site-header .profile-icon > span::before { content: ""; position: absolute; width: 6px; height: 6px; left: 6.5px; top: 4px; border: 1.6px solid currentColor; border-radius: 50%; }
+.site-header .profile-icon > span::after { content: ""; position: absolute; width: 11px; height: 6px; left: 4px; bottom: 3px; border: 1.6px solid currentColor; border-bottom: 0; border-radius: 10px 10px 0 0; }
+
+.site-header .bag-icon > span { width: 20px; height: 19px; border: 1.8px solid currentColor; border-radius: 2px; margin-top: 4px; }
+.site-header .bag-icon > span::before { content: ""; position: absolute; width: 8px; height: 6px; left: 4px; top: -7px; border: 1.8px solid currentColor; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.site-header .bag-icon b {
+  position: absolute; right: -4px; top: 1px; min-width: 15px; height: 15px; padding: 0 3px;
+  display: grid; place-items: center; border-radius: 9px;
+  background: var(--cab-tinta); color: white; font-size: 8px; line-height: 1; font-weight: 700;
+}
+
+.site-header .menu-toggle { display: none; width: 44px; height: 44px; border: 0; background: transparent; position: relative; cursor: pointer; }
+.site-header .menu-toggle span { width: 22px; height: 1px; background: var(--cab-tinta); position: absolute; left: 11px; top: 18px; }
+.site-header .menu-toggle span:last-child { top: 25px; }
+
+@media (max-width: 1050px) {
+  .site-header { padding: 0 22px; }
+  .site-header .menu-toggle { display: block; order: 3; }
+  .site-header .brand { min-width: auto; }
+  .site-header .header-actions { min-width: auto; margin-left: auto; }
+  .site-header .main-nav {
+    position: fixed; top: 76px; left: 0; right: 0;
+    background: white; border-bottom: 1px solid var(--cab-linea);
+    padding: 20px 24px 30px;
+    display: none; flex-direction: column; align-items: flex-start; gap: 0;
+  }
+  .site-header .main-nav.open { display: flex; }
+  .site-header .main-nav a { width: 100%; min-height: 52px; line-height: 52px; border-bottom: 1px solid var(--cab-linea); }
+  .site-header .main-nav a::after { display: none; }
+}
+
+@media (max-width: 720px) {
+  .site-header { height: 68px; }
+  .site-header .brand-logo { width: 104px; }
+  .site-header .header-actions { gap: 13px; }
+  .site-header .main-nav { top: 68px; }
+}
+
+/* El atributo `hidden` lo pisa cualquier regla con `display:`. */
+.site-header [hidden] { display: none !important; }

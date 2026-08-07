@@ -24,10 +24,13 @@
      pantalla. `display=swap` para que el texto se lea desde el primer
      instante aunque la fuente tarde. -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/lunarv2.css?v=30">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=1">
+<link rel="stylesheet" href="/assets/css/lunarv2.css?v=31">
 </head>
 <body>
-
 <header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
   <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
@@ -41,14 +44,11 @@
     <a href="/filosofia.html#laorateca"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra">teca</span></a>
   </nav>
   <div class="header-actions">
-    <!-- El icono de ayuda (los auriculares) lo quitó Óscar el 05/08/2026. -->
-    <!-- El carrito y la cuenta se quedan A LA VISTA pero SIN FUNCIÓN hasta
-         que existan, por encargo de Óscar (05/08/2026). Van como botones
-         desactivados y no como enlaces: antes apuntaban a /carrito y
-         /cuenta, que no existen, y daban un 404. Un botón apagado se
-         entiende; un 404 parece que la web está rota. -->
     <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
-    <button class="header-icon bag-icon" type="button" disabled aria-label="Carrito, todavía no disponible" title="Muy pronto"><span aria-hidden="true"></span><b>0</b></button>
+    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
+         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
+         un cero permanente al lado del carrito parece una web rota. -->
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
   </div>
 </header>
 
@@ -348,6 +348,7 @@
 </footer>
 
 <script type="application/json" data-comparaciones>{"lunar": {"pestana": "SPEEDMASTER → LUNAR", "titulo": "El cronógrafo lunar", "intro": "Del canal oficial al mercado irregular: cinco rutas que pueden parecer la misma en una foto y no ofrecen lo mismo.", "nuestro": "Lunar", "filas": [["01 · Boutique oficial", "Omega Speedmaster Moonwatch", "7.700 €", 7700, 7700, "Nuevo, documentado y con garantía oficial.", "regular"], ["02 · Subasta", "Catawiki y similares", "≈ 5.800 € + gastos", 5800, 5800, "Usado. La caja, los papeles y el estado dependen del lote.", "regular"], ["03 · Gris o usado", "Chrono24", "4.400–6.300 €", 4400, 6300, "Rango habitual. La autenticidad y el conjunto cambian el valor.", "regular"], ["04 · Piezas no originales", "Marketplaces generalistas", "650–1.250 €", 650, 1250, "Reacondicionados o con componentes de procedencia no acreditada.", "irregular"], ["05 · Falsificación", "«Superclones»", "600–1.650 €", 600, 1650, "Marca suplantada, origen incierto y sin garantía legítima.", "irregular"]], "alternativas": [["Bulova Lunar Pilot", "549–659 €"], ["Seiko Prospex Speedtimer", "646–680 €"], ["Tissot PR516 Chronograph", "545–625 €"]], "desde": 219.9}, "bitacora": {"pestana": "NAUTILUS → BITÁCORA", "titulo": "El deportivo integrado", "intro": "Del canal oficial a la falsificación: cinco rutas con precios, riesgos y garantías completamente distintos.", "nuestro": "Bitácora", "filas": [["01 · Boutique oficial", "Patek Philippe Nautilus", "≈ 70.000 €", 70000, 70000, "Precio de referencia y listas de espera interminables.", "regular"], ["02 · Subasta", "Casas especializadas", "Muy variable", null, null, "Mandan la referencia, el material, el estado y la documentación.", "regular"], ["03 · Gris o usado", "Chrono24", "105.000–180.000 €", 105000, 180000, "El mercado secundario puede superar ampliamente el precio oficial.", "regular"], ["04 · Piezas no originales", "Marketplaces generalistas", "650–1.500 €", 650, 1500, "Montajes con componentes de procedencia no acreditada.", "irregular"], ["05 · Falsificación", "«Superclones»", "600–1.650 €", 600, 1650, "Marca suplantada, origen incierto y sin garantía legítima.", "irregular"]], "alternativas": [["Tissot PRX Powermatic 80", "≈ 750 €"], ["Citizen Tsuyosa", "≈ 350 €"]], "desde": 219.9}}</script>
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/lunarv2.js?v=8"></script>
 </body>
 </html>

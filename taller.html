@@ -23,20 +23,35 @@
      Los textos se cambian ahí; los datos de relojes, en
      assets/datos/catalogo.json. -->
 <link rel="stylesheet" href="/assets/css/laora.css?v=34">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=1">
+<!-- `cabecera.css` ya NO dibuja la cabecera —eso lo hace la común desde
+     el 06/08/2026—, pero sigue haciendo falta: dentro está `.cb-marca`,
+     el logotipo dibujado con la O como círculo, que estas páginas usan
+     en los rótulos y en los textos de las fichas. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=13">
 </head>
-<body>
-<header class="cb cb-claro">
-  <a class="cb-marca" href="/" aria-label="laOra, inicio">la<span class="o"></span>ra<sup>®</sup></a>
-  <nav class="cb-menu" aria-label="Navegación principal">
-    <a href="/coleccion.html">relojes</a>
-    <a href="/filosofia.html">nuestra forma de hacer</a>
-    <a href="/taller.html" class="activo">taller y servicio</a>
-    <!-- «laOra» no se escribe, se dibuja: es el logotipo canónico. La O es
-         un span sin texto, así que un lector de pantalla leería «club lara»:
-         de ahí el aria-label. -->
-    <a class="cb-club" href="/club.html" aria-label="Club laOra">club <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span></a>
+<body><header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
+    <span></span><span></span>
+  </button>
+  <nav class="main-nav" aria-label="Navegación principal" data-nav>
+    <a href="/coleccion.html">Relojes</a>
+    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
+    <a href="/taller.html" class="active">Taller</a>
+    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"></span></a>
+    <a href="/filosofia.html#laorateca"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra">teca</span></a>
   </nav>
+  <div class="header-actions">
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
+         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
+         un cero permanente al lado del carrito parece una web rota. -->
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
+  </div>
 </header>
 
 <main id="inicio">
@@ -133,7 +148,7 @@
 
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
-<script src="/assets/js/cabecera.js?v=3"></script>
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

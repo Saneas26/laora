@@ -36,10 +36,15 @@ USO
 """
 
 import os
+import sys
+
+# La cabecera es la MISMA en todas las páginas desde el 06/08/2026.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marcado as cabecera
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 1
+V_CSS = 2
 V_JS = 3
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
@@ -60,14 +65,12 @@ PAGINA = f"""<!DOCTYPE html>
 <title>Tu cuenta · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <!-- GENERADO por herramientas/generar_cuenta.py — no editar a mano. -->
+{CAB_RECURSOS}
 <link rel="stylesheet" href="/assets/css/cuenta.css?v={V_CSS}">
 </head>
 <body>
 
-<header class="cu-cab">
-  <a href="/" aria-label="laOra, inicio"><img src="{LOGO}" alt="laOra"></a>
-  <a class="volver" href="/">Volver</a>
-</header>
+{cabecera()}
 
 <main class="cu-cuerpo">
   <div class="cu-caja">
@@ -103,6 +106,7 @@ PAGINA = f"""<!DOCTYPE html>
   <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
+{CAB_SCRIPT}
 <script src="/assets/js/cuenta.js?v={V_JS}"></script>
 </body>
 </html>

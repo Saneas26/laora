@@ -23,7 +23,12 @@ body{margin:0;background:var(--ivory);color:var(--ink);
         height:64px;padding:0 clamp(16px,4vw,40px);
         background:var(--paper);border-bottom:1px solid var(--line)}
 .ca-marca img{height:19px;width:auto}
-.ca-titulo{font-size:16px;font-weight:700}
+/* «Tu carrito» ya no vive dentro de una cabecera propia —desde el
+   06/08/2026 la cabecera es la misma que la del resto del sitio—, así
+   que ahora es el título de la página y se comporta como tal. */
+.ca-titulo{max-width:860px;margin:clamp(20px,4vh,40px) auto 0;
+           padding:0 clamp(16px,4vw,28px);
+           font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-.02em}
 .ca-seguir{font-size:14px;color:var(--muted)}
 .ca-seguir:hover{color:var(--ink)}
 

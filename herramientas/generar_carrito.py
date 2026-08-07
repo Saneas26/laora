@@ -35,10 +35,15 @@ USO
 """
 
 import os
+import sys
+
+# La cabecera es la MISMA en todas las páginas desde el 06/08/2026.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marcado as cabecera
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 3
+V_CSS = 5
 V_JS = 4
 
 V2 = '/assets/img/lunar-v2'
@@ -86,15 +91,17 @@ PAGINA = f"""<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- GENERADO por herramientas/generar_carrito.py — no editar a mano. -->
+{CAB_RECURSOS}
 <link rel="stylesheet" href="/assets/css/carrito.css?v={V_CSS}">
 </head>
 <body>
 
-<header class="ca-cab">
-  <a class="ca-marca" href="/" aria-label="laOra, inicio"><img src="{LOGO}" alt="laOra"></a>
-  <p class="ca-titulo">Tu carrito</p>
-  <a class="ca-seguir" href="/">Seguir mirando</a>
-</header>
+{cabecera()}
+
+<!-- El título de la pantalla, debajo de la cabecera común. Antes la
+     cabecera de esta página era distinta a la del resto del sitio;
+     ahora es la misma y aquí solo queda lo que es de aquí. -->
+<p class="ca-titulo">Tu carrito</p>
 
 <main class="ca-cuerpo">
   <!-- Las líneas las pinta `carrito.js` con lo que haya en la cesta.
@@ -167,6 +174,7 @@ PAGINA = f"""<!DOCTYPE html>
   <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
+{CAB_SCRIPT}
 <script src="/assets/js/sesion.js?v={V_JS}"></script>
 <script src="/assets/js/carrito.js?v={V_JS}"></script>
 <script src="/assets/js/carrito-pantalla.js?v={V_JS}"></script>
