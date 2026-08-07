@@ -639,11 +639,8 @@ def acto(n, etiqueta, titular, voz):
 
 
 HISTORIA = f"""  <section class="historia">
-    <div class="historia-cabeza">
-      <p class="section-number">La historia</p>
-      <h2>Quería un gran reloj.<br><em>No podía pagar una gran marca.</em><br>Tampoco quería comprar a ciegas.<br><em>Por eso elegí {MARCA}.</em></h2>
-    </div>
-
+    <!-- La frase de arriba se fue al acto 1 el 07/08/2026, así que aquí
+         ya no se repite: se entra directo por los cuatro actos. -->
     <ol class="historia-actos">
 {chr(10).join(acto(*a) for a in ACTOS)}
     </ol>
@@ -674,10 +671,14 @@ escribir('filosofia.html', cabeza(
 
   <section class="philosophy-hero">
     <img src="{IMG}/workshop-hero.webp" alt="Reloj laOra Trinchera durante su revisión">
+    <!-- 07/08/2026, Óscar: «borra todo del acto 1 y coloca esto». Antes
+         abría con la marca hablando de sí misma; ahora abre la historia
+         del que compra, que es de quien va la página. La foto y el fondo
+         se quedan: lo que cambia es lo que se dice encima. El texto
+         anterior está en el historial de git, no aquí. -->
     <div>
-      <p class="kicker light">Filosofía {MARCA}</p>
-      <h1>No inventamos los iconos.<br><em>Elegimos cómo honrarlos.</em></h1>
-      <p>Sin herencias ficticias. Sin hacer pasar un reloj por lo que no es. La inspiración se cuenta; la calidad se demuestra.</p>
+      <p class="kicker light">La historia</p>
+      <h1>Quería un gran reloj.<br><em>No podía pagar una gran marca.</em><br>Tampoco quería comprar a ciegas.<br><em>Por eso elegí {MARCA}.</em></h1>
     </div>
   </section>
 
