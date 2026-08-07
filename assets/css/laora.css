@@ -936,3 +936,56 @@ footer small { font-size: 12px; }
 /* Queda fuera a propósito: el ® del logotipo, el icono de pausa del carrusel
    y la maqueta de teléfono de la portada y del club. No son texto de lectura,
    son dibujo. */
+
+/* ============================================================
+   LA HISTORIA, EN CUATRO ACTOS · filosofía (07/08/2026)
+   ------------------------------------------------------------
+   Sustituye a los tres actos que contaban la marca desde dentro.
+   Óscar: «poca letra, letras grandes… muy visual y atractivo».
+
+   Así que manda el titular de cada acto, que se lee de pie desde
+   lejos, y la voz va debajo. Se conservan las tarjetas y los fondos
+   del resto de la página: mismo borde, mismo oro para el número y
+   misma retícula que el bloque del proceso al que sustituye.
+   ============================================================ */
+.historia { padding: 130px 6vw; border-bottom: 1px solid var(--line); }
+.historia-cabeza { max-width: 1100px; }
+.historia-cabeza h2 { margin: 22px 0 0; }
+
+.historia-actos { display: grid; grid-template-columns: repeat(2, 1fr); margin: 70px 0 0; padding: 0; list-style: none; }
+.historia-actos article { min-height: 340px; padding: 40px; border: 1px solid var(--line);
+                          margin: -1px 0 0 -1px; display: flex; flex-direction: column; }
+.historia-actos article > span { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .2em; }
+.acto-etiqueta { margin: 6px 0 0; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+                 font-weight: 700; color: var(--muted); }
+/* El titular es lo único que hay que leer si solo se lee una cosa. */
+.historia-actos h3 { margin: 26px 0 20px; font: clamp(27px, 2.6vw, 38px)/1.15 var(--serif); letter-spacing: -.01em; }
+.historia-actos blockquote { margin: auto 0 0; padding-left: 18px; border-left: 2px solid var(--gold);
+                             color: var(--muted); font-size: 16px; line-height: 1.65; }
+.historia-actos blockquote::before { content: "—"; margin-right: 4px; }
+
+.historia-cierre { margin: 70px 0 0; font: clamp(30px, 3.6vw, 52px)/1.12 var(--serif); letter-spacing: -.02em; }
+.historia-cierre em { color: var(--muted); }
+
+/* El logotipo dentro de estos titulares hereda color y cuerpo. Sin esto
+   sale con su color de origen —blanco, el de la cabecera oscura— y sobre
+   marfil no se ve; y con su cuerpo fijo de 36 px, que al lado de un
+   titular de 52 se queda enano. Es la misma regla que ya tienen los
+   rótulos y los botones, aplicada aquí. */
+.historia h2 .cb-marca, .historia-cierre .cb-marca {
+  font-size: .92em; color: inherit; letter-spacing: -.01em;
+  /* El titular va en cursiva y el logotipo la heredaba: salía inclinado.
+     La norma de la marca permite cambiarle el color y el cuerpo, nada
+     más — ni la fuente, ni la caja, ni la forma. Aquí se endereza. */
+  font-style: normal; }
+.historia h2 .cb-marca .o::before, .historia-cierre .cb-marca .o::before {
+  border-top-color: currentColor; }
+
+@media (max-width: 900px) {
+  .historia { padding: 90px 24px; }
+  .historia-actos { grid-template-columns: 1fr; margin-top: 46px; }
+  .historia-actos article { min-height: 0; padding: 30px 24px; }
+  .historia-actos h3 { margin: 18px 0 16px; }
+  .historia-actos blockquote { margin-top: 0; font-size: 15px; }
+  .historia-cierre { margin-top: 46px; }
+}

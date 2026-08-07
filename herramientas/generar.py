@@ -41,7 +41,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
 # max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
 # versión antigua. Vale igual para el CSS que para el JS.
-V_CSS = 34
+V_CSS = 37
 V_CAB = 13
 V_JS_HOME = 8
 V_JS_FICHA = 14
@@ -589,6 +589,70 @@ escribir('coleccion.html', cabeza(
 
 
 # ============================================================
+# LA HISTORIA, EN CUATRO ACTOS
+# ------------------------------------------------------------
+# Óscar, 07/08/2026. Sustituye a los tres actos que había —«el punto de
+# partida», «el proceso» y «origen sin eufemismos»—, que contaban la
+# marca desde dentro: qué hacemos y cómo. Esto la cuenta desde fuera,
+# desde el que compra, y en su idioma.
+#
+# LOS TEXTOS SON DE ÓSCAR, PALABRA POR PALABRA. El titular de cada acto
+# es su propio resumen —«quiero un reloj que me haga sentir algo»— y el
+# cuerpo, su voz en primera persona. Aquí no se reescribe nada.
+#
+# Poca letra y grande, que es como lo pidió: el titular manda y la voz
+# va debajo, en un tamaño que se lee sin acercarse.
+# ============================================================
+ACTOS = [
+    ('01', 'El deseo',
+     'Quiero un reloj que me haga sentir algo.',
+     'Mira, a mí siempre me han gustado los relojes buenos. De esos que te los pones '
+     'y notas que están bien hechos. Pero no tengo 8.000 € para un reloj… y aunque los '
+     'tuviera, tampoco sé si me los gastaría.'),
+    ('02', 'El problema',
+     'Lo bueno es inaccesible y lo barato genera dudas.',
+     'Entonces te pones a mirar. Los de las grandes marcas cuestan una barbaridad. Los '
+     'baratos de internet prometen mucho, pero no sabes qué te va a llegar. En segunda '
+     'mano igual aciertas… o igual te comes el problema de otro. Y si lo compras fuera, '
+     'como falle, búscate la vida.'),
+    ('03', 'La respuesta',
+     'Seleccionamos, montamos, comprobamos y respondemos aquí.',
+     'Y entonces encontré laOra. Ellos buscan buenas piezas, descartan las que no les '
+     'convencen y las traen a Madrid. Aquí montan cada reloj, comprueban que funcione '
+     'bien, lo ajustan si hace falta y miran que aguante el agua que promete. No te llega '
+     'una caja directa de una fábrica que está a 10.000 kilómetros.'),
+    ('04', 'La recompensa',
+     'Tengo el reloj que quería, puedo pagarlo y estoy tranquilo.',
+     'Al final me llevé un reloj que tiene la presencia y la calidad que estaba buscando, '
+     'pero a un precio que puedo pagar. Sé qué lleva, sé quién lo ha montado y, si algún '
+     'día pasa algo, tengo a alguien aquí que responde.'),
+]
+
+
+def acto(n, etiqueta, titular, voz):
+    return f'''      <article>
+        <span>{n}</span>
+        <p class="acto-etiqueta">{etiqueta}</p>
+        <h3>{titular}</h3>
+        <blockquote>{voz}</blockquote>
+      </article>'''
+
+
+HISTORIA = f"""  <section class="historia">
+    <div class="historia-cabeza">
+      <p class="section-number">La historia</p>
+      <h2>Quería un gran reloj.<br><em>No podía pagar una gran marca.</em><br>Tampoco quería comprar a ciegas.<br><em>Por eso elegí {MARCA}.</em></h2>
+    </div>
+
+    <ol class="historia-actos">
+{chr(10).join(acto(*a) for a in ACTOS)}
+    </ol>
+
+    <p class="historia-cierre">Eso es {MARCA}: un gran reloj,<br><em>sin pagar una fortuna y sin jugártela.</em></p>
+  </section>"""
+
+
+# ============================================================
 # NUESTRA FORMA DE HACER
 # ============================================================
 
@@ -617,14 +681,7 @@ escribir('filosofia.html', cabeza(
     </div>
   </section>
 
-  <section class="belief">
-    <p class="section-number">01 — EL PUNTO DE PARTIDA</p>
-    <div><h2>La relojería también es<br><em>memoria compartida.</em></h2></div>
-    <div>
-      <p>Hay diseños que trascienden una referencia concreta y se convierten en lenguajes: el reloj de buceo de caja cojín, el cronógrafo lunar, el reloj de campaña, el deportivo integrado o la esfera de cóctel.</p>
-      <p>laOra nace para acercar esos lenguajes a más personas con una propuesta independiente, transparente y atendida en España.</p>
-    </div>
-  </section>
+{HISTORIA}
 
   <section class="honesty-block">
     <div>
@@ -655,24 +712,6 @@ escribir('filosofia.html', cabeza(
     </div>
   </section>
 
-  <section class="process-section">
-    <div class="section-head">
-      <p class="section-number">02 — EL PROCESO</p>
-      <h2>De una referencia universal<br><em>a un reloj laOra.</em></h2>
-    </div>
-    <div class="process-grid">
-{chr(10).join(f'      <article><span>{n}</span><h3>{t}</h3><p>{d}</p></article>' for n, t, d in PROCESO)}
-    </div>
-  </section>
-
-  <section class="origin-section">
-    <div>
-      <p class="section-number">03 — ORIGEN SIN EUFEMISMOS</p>
-      <h2>Componentes internacionales.<br><em>Responsabilidad cercana.</em></h2>
-      <p>Buscamos cada componente donde puede fabricarse con la calidad y el coste adecuados. En Madrid concentramos el montaje, el ajuste, el control y el servicio que determinan la experiencia final.</p>
-    </div>
-    <img src="{IMG}/box.webp" alt="Presentación del reloj laOra Tortuga en su caja" loading="lazy">
-  </section>
 """ + final_cta('Sin apellido prestado',
                 'La calidad no necesita<br><em>una historia inventada.</em>',
                 '/coleccion.html', 'Ver los relojes',
