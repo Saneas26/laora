@@ -123,7 +123,9 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    limpio, así que no hace falta más. */
 .lunar-eyebrow { margin: 0 0 2px; font-size: 13px; line-height: 1.1; font-weight: 400; }
 .lunar-title { margin: 0 0 2px; display: flex; align-items: baseline; justify-content: center; gap: 12px; line-height: 1; }
-.lunar-title img { width: clamp(140px, 14.6vw, 210px); height: auto; }
+/* El titular ya no lleva logotipo (Óscar, 08/08/2026): solo el nombre
+   del modelo. La regla del logotipo se queda escrita por si vuelve.
+   .lunar-title img { width: clamp(140px, 14.6vw, 210px); height: auto; } */
 /* El tracking era -.055em: a 90 px son casi 5 px de apretón y las letras
    llegaban a tocarse. Ese cierre tan fuerte se dibujó para una
    tipografía que no era esta —la maqueta se pintaba con Arial— y con
@@ -657,7 +659,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .home-hero-copy.lunar-home-copy { top: 5%; width: 94%; }
   .lunar-eyebrow { margin-bottom: 1px; font-size: 12px; }
   .lunar-title { gap: 8px; margin-bottom: 1px; }
-  .lunar-title img { width: 120px; }
+  /* .lunar-title img { width: 120px; }  — sin logotipo desde el 08/08/2026 */
   .lunar-title span { font-size: 56px; }
   .lunar-specs { font-size: 11px; }
   .lunar-specs i { padding: 0 3px; }

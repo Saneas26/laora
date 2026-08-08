@@ -68,7 +68,7 @@ from cabecera_laora import (RECURSOS as CABECERA_RECURSOS,
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 32
+V_CSS = 33
 V_JS = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -429,7 +429,12 @@ ACTO_1 = f"""
            y viaja en el JSON de las exposiciones. Volver a enseñarlo es
            devolver esta línea, nada más. Las ocho frases están escritas
            por Óscar y costaron su tiempo; no se tiran. -->
-      <h1 class="lunar-title"><img src="{LOGO_CLARO}" alt="laOra"><span data-hero-nombre>{PRIMERA_EXPO['nombre']}</span></h1>
+      <!-- EL LOGOTIPO SALE DEL TITULAR el 08/08/2026, por encargo de
+           Óscar: «en las 8 fotos vamos a quitar el logo de laOra, en el
+           Lunar por ejemplo solo vamos a poner Lunar». Queda el nombre
+           del modelo, a solas. El logotipo sigue en la cabecera fija de
+           arriba, así que la marca no desaparece de la pantalla. -->
+      <h1 class="lunar-title"><span data-hero-nombre>{PRIMERA_EXPO['nombre']}</span></h1>
       <!-- sin espacios alrededor de la barra: la separación la da el
            `padding` del <i> en la hoja, y con espacios además del padding
            la primera exposición salía algo más suelta que las otras dos -->
