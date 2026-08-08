@@ -1072,6 +1072,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    negrita y en la tinta plena, sobre el gris del párrafo, para que sea
    lo que se lee primero de la frase. */
 .lunar-dialogue-copy b{ font-weight: 700; color: #171513; }
+/* Los tres renglones del diálogo (Óscar, 08/08/2026). Van en párrafos
+   sueltos, así que necesitan un respiro entre ellos: `p { margin: 0 auto }`
+   los dejaba pegados y se leían como un bloque corrido. */
+.lunar-dialogue-copy p + p{ margin-top: .34em; }
 
 /* LA PRIMERA TARJETA, la del Cóctel  (Óscar, 05/08/2026)
    ------------------------------------------------------------

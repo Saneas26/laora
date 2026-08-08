@@ -68,7 +68,7 @@ from cabecera_laora import (RECURSOS as CABECERA_RECURSOS,
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 31
+V_CSS = 32
 V_JS = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -453,7 +453,9 @@ ACTO_2 = f"""
     <div class="lunar-dialogue-veil" aria-hidden="true"></div>
     <div class="lunar-dialogue-copy">
       <h2 id="lunar-dialogue-question">Qué chulo. ¿Cuál es?</h2>
-      <p>Es un {marca('dialogue-brand', LOGO_OSCURO)}. Marca española, los montan en Madrid a mano. Zafiro, <b>mecanismos suizos y japoneses</b>. <b>Hasta 5 años de Garantía.</b> Doscientos diecinueve.</p>
+      <p>Es un {marca('dialogue-brand', LOGO_OSCURO)}. Marca española, los montan en Madrid a mano.</p>
+      <p>Zafiro, <b>mecanismos suizos y japoneses</b>. <b>Hasta 5 años de Garantía.</b></p>
+      <p>Doscientos diecinueve. Y <b>servicio técnico aquí</b>, no en China.</p>
     </div>
     <span class="lunar-dialogue-number" aria-hidden="true">02</span>
   </section>"""
