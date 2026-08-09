@@ -249,23 +249,25 @@
     }).join('');
   }
 
+  /* El acabado que no va con la caja NO SE PINTA. Aquí sí se esconde, al
+     revés que la esfera: «es frustrante ver algo que no puedes elegir»
+     (Óscar, 10/08/2026). El índice del botón sigue siendo el de la lista
+     entera, que es lo que lee el estado. */
   function pintaVariantes() {
     var p = piezas(), cont = $('[data-variantes]'), caja = D.caj[e.caja];
     var vale = libres(p.fam, caja);
     cont.innerHTML = p.fam.v.map(function (v, i) {
+      if (!varVale(v, caja)) return '';
       var t = tonos(v.nom);
       var fondo = t.length > 1
         ? 'linear-gradient(135deg,' + t[0] + ' 0 50%,' + t[1] + ' 50% 100%)' : t[0];
-      var ok = varVale(v, caja);
       return '<button class="cf-color" type="button" data-var="' + i + '"' +
-        (ok ? '' : ' disabled') +
-        ' aria-pressed="' + (i === e.v) + '" title="' + v.nom +
-        (ok ? '' : ' · no va con la caja ' + caja.nombre) + '"' +
+        ' aria-pressed="' + (i === e.v) + '" title="' + v.nom + '"' +
         ' aria-label="' + v.nom + '" style="background:' + fondo + '"></button>';
     }).join('') + '<span class="cf-color-nombre" data-var-nombre></span>';
     $('[data-var-nombre]').textContent = p.v.nom;
     $('[data-cuenta-var]').textContent = vale.length + ' opciones';
-    $('[data-grupo-var]').hidden = p.fam.v.length < 2;
+    $('[data-grupo-var]').hidden = vale.length < 2;
     $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + vale.length +
       (vale.length === 1 ? ' acabado' : ' acabados') + ' · desde ' +
       euros(Math.min.apply(null, vale.map(function (x) { return x.c; })));

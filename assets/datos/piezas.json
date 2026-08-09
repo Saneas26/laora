@@ -968,34 +968,34 @@
   "caj": [
    {
     "ref": "C1",
-    "nombre": "Plata cristal",
+    "nombre": "Plata",
     "coste": 29.57
    },
    {
     "ref": "C2",
-    "nombre": "Oro Cristal",
+    "nombre": "Oro",
     "coste": 34.97
    },
    {
     "ref": "C3",
-    "nombre": "Oro Rosa Cristal",
+    "nombre": "Oro Rosa",
     "coste": 34.97
    },
    {
     "ref": "C4",
-    "nombre": "Negro Cristal",
+    "nombre": "Negro",
     "coste": 34.97
    },
    {
     "ref": "C5",
-    "nombre": "Bronce Cristal",
+    "nombre": "Bronce",
     "coste": 38.17
    }
   ],
   "esf": [
    {
     "ref": "E1",
-    "nombre": "Tiffany",
+    "nombre": "Turquesa",
     "coste": 21.39,
     "cajas": "Todas"
    },
