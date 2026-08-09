@@ -1,54 +1,54 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-laOra · CONFIGURADOR DE TRES EJES  ·  MAQUETA DEL LUNAR
+laOra · CONFIGURADOR DE CUATRO EJES  ·  MAQUETA
 ============================================================
-Escribe `lunar-nuevo.html`, una página SUELTA que no enlaza nadie.
-`/lunar` sigue como está, con su pantalla de dos ejes y su hoja
-`configurador.css` sin tocar. Esto es para mirarlo y decidir.
+Escribe una página por modelo —`lunar-nuevo.html`, `trinchera-nuevo.html`—
+SUELTAS, que no enlaza nadie. `/lunar` y `/trinchera` siguen como están,
+con su pantalla vieja y su hoja `configurador.css` sin tocar.
 
-DE DÓNDE SALE (Óscar, 08/08/2026)
+EL ORDEN LO FIJÓ ÓSCAR (08/08/2026)
 ------------------------------------------------------------
-    «desde el ordenador cuando llego a la ficha única de un reloj,
-     ahora tengo tres opciones que elegir, movimiento, solo aquellos
-     que tengan disponibles más de uno... caja si hay más de una
-     igualmente, y correa brazalete donde sí habrá muchas opciones.
-     Pero para que quepa en la misma pantalla, las opciones del
-     brazalete, las cuadrículas tienen que ser más pequeñas. Y las
-     características tienen que estar por encima de brazalete correa.»
+    «para el trinchera primero damos a elegir mecanismo, luego caja,
+     luego esfera y luego brazalete»
 
-De ahí, punto por punto:
+Y antes, el mismo día:
 
-  · Un eje con UNA sola opción no se pinta como elección. El Lunar
-    tiene un solo movimiento —el VK63, desde que se retiró el
-    ST1901— así que ahí no hay nada que elegir: se enseña el dato.
-  · Las características suben por encima del brazalete.
-  · Los cuadros del brazalete miden 96 px, no 150.
-  · Debajo del brazalete, la paleta de color de esa familia.
+    «las características tienen que estar por encima de brazalete»
 
-LOS DATOS SON PROVISIONALES
+Las dos cosas a la vez dan este orden, que vale para los ocho modelos:
+
+    MOVIMIENTO → CAJA → ESFERA → características → BRAZALETE → variante
+
+Las características van justo después de la esfera porque dependen de
+las tres primeras elecciones: en cuanto están, ya se pueden escribir.
+
+UN EJE CON UNA SOLA OPCIÓN NO SE PINTA
 ------------------------------------------------------------
-Salen de `assets/datos/piezas-lunar.json`, un volcado a mano de las
-pestañas Movimientos, Cajas y Brazeletes del libro de materiales tal
-como estaban el 08/08/2026. En cuanto se decida cómo quedan las tres
-bibliotecas, esto se genera solo y ese fichero desaparece.
+No se le pide a nadie que elija entre una cosa. El Lunar tiene un solo
+movimiento y el Precisa una sola caja: ahí va el dato, no un botón. El
+Cóctel y el Diver no eligen esfera —viene dentro de la caja— y su eje
+desaparece entero.
 
-LOS NOMBRES PÚBLICOS ESTÁN SIN APROBAR
+POR QUÉ LA CAJA VA EN FICHAS Y NO EN CUADROS
 ------------------------------------------------------------
-En la hoja, cinco brazaletes se llaman «tipo Rolex», «tipo Omega»,
-«tipo Daytona», «tipo Breitling» y «Ostra». En una página de venta no
-puede salir ni uno. Los nombres que se leen aquí me los he inventado
-yo para poder maquetar; hay que repasarlos uno a uno.
+El Trinchera tiene CATORCE cajas. Con los cuadros del brazalete —96 px
+y su muestra dibujada— serían tres filas de 230 px y el panel se saldría
+de la pantalla. Las fichas de texto miden 34 px de alto y las catorce
+caben en tres renglones. Se encoge el envase, no la letra: el suelo
+siguen siendo 12,5 px.
 
-LA FOTO ES UN MONTAJE, NO UNA FOTO
+EL PRECIO
 ------------------------------------------------------------
-Óscar eligió el 08/08/2026 el montaje de dos capas: la cabeza del
-reloj recortada de su foto, y detrás la banda del brazalete. Aquí la
-banda todavía se DIBUJA con un degradado; cuando lleguen las fotos de
-brazalete se cambia el degradado por un `<img>` y no se toca nada más.
+Coste de las cuatro piezas × 2,7235, redondeado al 9,90 más cercano. Ni
+una cifra escrita a mano. El multiplicador es el que reproduce exacta-
+mente los 219,90 € que el Lunar tiene publicados hoy.
 
-El Lunar de bisel azul no tiene foto todavía: enseña la del negro con
-un aviso encima, para que no se confunda con una foto real.
+LOS DATOS
+------------------------------------------------------------
+`assets/datos/piezas.json`, volcado del libro `laora-biblioteca-materiales`
+—pestañas Movimientos, Cajas, Esferas, Brazeletes y Compatibilidad— con
+la numeración de piezas del 08/08/2026.
 
 USO
     python3 herramientas/generar_configurador_v2.py
@@ -60,13 +60,20 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 6
-V_JS = 7
+V_CSS = 7
+V_JS = 8
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
+MULT = 2.7235
 
-with open(os.path.join(RAIZ, 'assets/datos/piezas-lunar.json'), encoding='utf-8') as f:
-    D = json.load(f)
+with open(os.path.join(RAIZ, 'assets/datos/piezas.json'), encoding='utf-8') as f:
+    PIEZAS = json.load(f)
+
+# La foto de la cabeza del reloj, por caja. Solo el Lunar tiene fotos
+# aprobadas; los demás enseñan una con el aviso de «pendiente» encima.
+FOTOS = {'lunar': {'C1': '/assets/img/catalogo/LO-01_Lunar_A01.webp',
+                   'C2': '/assets/img/catalogo/LO-01_Lunar_A01.webp'}}
+FOTO_POR_DEFECTO = '/assets/img/catalogo/LO-01_Lunar_A01.webp'
 
 
 def euros(v):
@@ -75,98 +82,90 @@ def euros(v):
 
 def redondea(p):
     """Al 9,90 más cercano. El 9,90 de abajo se saca restando ANTES de
-    truncar; ver el porqué —y el fallo que provocó— en
-    `configurador-v2.js`."""
+    truncar; ver el porqué —y el fallo que provocó— en el JavaScript."""
     bajo = int((p - 9.90) // 10) * 10 + 9.90
-    alto = bajo + 10
-    return bajo if (p - bajo) <= (alto - p) else alto
-
-
-def pvp(mov, caja, color):
-    return redondea((mov['coste'] + caja['coste'] + color['coste']) * D['multiplicador'])
-
-
-MOV = D['movimientos']
-CAJAS = D['cajas']
-BRZ = D['brazaletes']
-
-# El precio de arranque y el más barato posible, que es el que va en el
-# rótulo del grupo: «desde X» tiene que ser verdad.
-BARATO = min(pvp(MOV[0], c, col) for c in CAJAS for b in BRZ for col in b['colores'])
+    return bajo if (p - bajo) <= (bajo + 10 - p) else bajo + 10
 
 
 # ============================================================
-# EL EJE DEL MOVIMIENTO
-# ------------------------------------------------------------
-# Con una sola opción no se pinta un grupo de botones: se pinta el
-# dato. Pedirle a alguien que elija entre una cosa es hacerle perder
-# un segundo y ensuciar la pantalla. Con dos o más, botones.
+# LOS EJES
 # ============================================================
-def eje_movimiento():
-    if len(MOV) == 1:
-        m = MOV[0]
-        return f'''    <div class="cf-grupo">
-      <p class="cf-rotulo">Movimiento <b>uno solo</b></p>
-      <div class="cf-fijo"><b>{m['nombre']}</b><span>{m['tipo']}</span></div>
-    </div>'''
-    botones = '\n'.join(
-        f'        <button class="cf-caja" type="button" data-mov="{i}" '
-        f'aria-pressed="{"true" if i == 0 else "false"}">'
-        f'<b>{m["nombre"]}</b><span>{m["tipo"]}</span></button>'
-        for i, m in enumerate(MOV))
+def fijo(rotulo, titulo, apunte):
     return f'''    <div class="cf-grupo">
-      <p class="cf-rotulo">Movimiento <b>{len(MOV)} opciones</b></p>
-      <div class="cf-cajas" role="group" aria-label="Elegir movimiento">
+      <p class="cf-rotulo">{rotulo} <b>uno solo</b></p>
+      <div class="cf-fijo"><b>{titulo}</b><span>{apunte}</span></div>
+    </div>'''
+
+
+def eje_fichas(clave, rotulo, opciones, etiqueta):
+    botones = '\n'.join(
+        f'        <button class="cf-ficha" type="button" data-{clave}="{i}" '
+        f'aria-pressed="{"true" if i == 0 else "false"}">{etiqueta(o)}</button>'
+        for i, o in enumerate(opciones))
+    return f'''    <div class="cf-grupo">
+      <p class="cf-rotulo">{rotulo} <b>{len(opciones)} opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir {rotulo.lower()}">
 {botones}
       </div>
     </div>'''
 
 
-def eje_caja():
-    if len(CAJAS) == 1:
-        c = CAJAS[0]
-        return f'''    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b>una sola</b></p>
-      <div class="cf-fijo"><b>{c['nombre']}</b><span>{c['specs'][1][1]}</span></div>
-    </div>'''
-    botones = '\n'.join(
-        f'        <button class="cf-caja" type="button" data-caja="{i}" '
-        f'aria-pressed="{"true" if i == 0 else "false"}">'
-        f'<b>{c["nombre"]}</b><span>{c["specs"][3][1]}</span></button>'
-        for i, c in enumerate(CAJAS))
-    return f'''    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b>{len(CAJAS)} opciones</b></p>
-      <div class="cf-cajas" role="group" aria-label="Elegir caja">
-{botones}
-      </div>
-    </div>'''
-
-
-def eje_brazalete():
+def eje_brazalete(familias):
     botones = '\n'.join(
         f'        <button class="cf-brazalete" type="button" data-brz="{i}" '
         f'aria-pressed="{"true" if i == 0 else "false"}">'
-        f'<i style="background:{b["colores"][0]["muestra"]}"></i>'
-        f'<span>{b["nombre"]}</span></button>'
-        for i, b in enumerate(BRZ))
+        f'<i></i><span>{f["nombre"]}</span></button>'
+        for i, f in enumerate(familias))
     return f'''    <div class="cf-grupo">
-      <p class="cf-rotulo">Brazalete <b>{len(BRZ)} familias</b></p>
+      <p class="cf-rotulo">Brazalete <b>{len(familias)} familias</b></p>
       <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
 {botones}
       </div>
       <p class="cf-detalle" data-detalle></p>
     </div>
 
-    <div class="cf-grupo" data-grupo-color>
-      <p class="cf-rotulo"><span data-rotulo-variante>Color</span></p>
-      <div class="cf-colores" data-colores role="group" aria-label="Elegir color"></div>
+    <div class="cf-grupo" data-grupo-var>
+      <p class="cf-rotulo"><span data-rotulo-var>Acabado</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir acabado"></div>
     </div>'''
 
 
-PAGINA = f'''<meta charset="utf-8">
+def pantalla(slug):
+    d = PIEZAS[slug]
+    mov, caj, esf, brz = d['mov'], d['caj'], d['esf'], d['brz']
+
+    # El más barato posible: es lo único que puede decir un «desde».
+    # Si el brazalete es un EXTRA sobre lo que ya trae la caja —el Diver—,
+    # no cuenta para el mínimo.
+    suelo_brz = 0 if (d['incluido'] and d['extra']) else min(v['c'] for f in brz for v in f['v'])
+    suelo_esf = min(e['coste'] for e in esf) if esf else 0
+    barato = min(m['coste'] for m in mov) + min(c['coste'] for c in caj) + suelo_esf + suelo_brz
+
+    ejes = []
+    ejes.append(fijo('Movimiento', mov[0]['rot'], mov[0]['cal']) if len(mov) == 1 else
+                eje_fichas('mov', 'Movimiento', mov,
+                           lambda o: f'<b>{o["acabado"]}</b><span>{o["rot"]}</span>'))
+    ejes.append(fijo('Caja', caj[0]['nombre'], euros(caj[0]['coste'])) if len(caj) == 1 else
+                eje_fichas('caja', 'Caja', caj, lambda o: o['nombre']))
+    if len(esf) > 1:
+        ejes.append(eje_fichas('esf', 'Esfera', esf, lambda o: o['nombre']))
+    elif len(esf) == 1:
+        ejes.append(fijo('Esfera', esf[0]['nombre'], 'con sus agujas'))
+
+    ejes.append('''    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>''')
+    ejes.append(eje_brazalete(brz))
+
+    datos = json.dumps({**d, 'mult': MULT, 'fotos': FOTOS.get(slug, {}),
+                        'fotoDefecto': FOTO_POR_DEFECTO},
+                       ensure_ascii=False).replace('<', chr(92) + 'u003c')
+
+    html = f'''<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Configura tu {D['nombre']} · laOra</title>
+<title>Configura tu {d['nombre']} · laOra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
@@ -174,7 +173,7 @@ PAGINA = f'''<meta charset="utf-8">
 
 <header class="cf-cab">
   <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
-    <img src="{LOGO}" alt="laOra"><b>{D['nombre']}</b>
+    <img src="{LOGO}" alt="laOra"><b>{d['nombre']}</b>
   </a>
   <p class="cf-ref">Ref. <b data-ref>—</b></p>
   <button class="cf-ficha-boton" type="button">Ver la ficha completa</button>
@@ -188,8 +187,8 @@ PAGINA = f'''<meta charset="utf-8">
     <div class="cf-montaje">
       <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
       <div class="cf-cabeza">
-        <img data-foto src="{CAJAS[0]['foto']}" alt="{D['nombre']} de laOra">
-        <p class="cf-pendiente" data-pendiente hidden>Foto del bisel azul pendiente</p>
+        <img data-foto src="{FOTOS.get(slug, {}).get('C1', FOTO_POR_DEFECTO)}" alt="{d['nombre']} de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
       </div>
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
@@ -199,35 +198,29 @@ PAGINA = f'''<meta charset="utf-8">
       y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>
 
-  <section class="cf-panel" aria-label="Opciones del {D['nombre']}">
-{eje_movimiento()}
-
-{eje_caja()}
-
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Características</p>
-      <dl class="cf-specs" data-specs></dl>
-    </div>
-
-{eje_brazalete()}
+  <section class="cf-panel" aria-label="Opciones del {d['nombre']}">
+{chr(10).join(ejes)}
   </section>
 </div>
 
 <footer class="cf-barra">
-  <div class="cf-barra-izq">
-    <b data-barra-nombre></b><span data-barra-color></span>
-  </div>
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
   <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
   <button class="cf-reservar" type="button">Reservar</button>
 </footer>
 
-<script type="application/json" data-piezas>{json.dumps(D, ensure_ascii=False).replace('<', chr(92) + 'u003c')}</script>
+<script type="application/json" data-piezas>{datos}</script>
 <script src="/assets/js/configurador-v2.js?v={V_JS}"></script>
 '''
+    return html, barato
 
-destino = os.path.join(RAIZ, 'lunar-nuevo.html')
-with open(destino, 'w', encoding='utf-8') as f:
-    f.write(PAGINA)
 
-print(f'lunar-nuevo.html escrito · {len(MOV)} movimiento(s) · {len(CAJAS)} cajas · '
-      f'{len(BRZ)} familias de brazalete · desde {euros(BARATO)}')
+for slug in PIEZAS:
+    html, barato = pantalla(slug)
+    with open(os.path.join(RAIZ, f'{slug}-nuevo.html'), 'w', encoding='utf-8') as f:
+        f.write(html)
+    d = PIEZAS[slug]
+    nv = sum(len(x['v']) for x in d['brz'])
+    combis = len(d['mov']) * len(d['caj']) * max(1, len(d['esf'])) * nv
+    print(f'{slug}-nuevo.html · {len(d["mov"])}×{len(d["caj"])}×{max(1, len(d["esf"]))}×{nv}'
+          f' = {combis} configuraciones · desde {euros(redondea(barato * MULT))}')
