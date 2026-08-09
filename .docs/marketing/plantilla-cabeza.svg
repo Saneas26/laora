@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <title>laOra · plantilla de CABEZA · 1000×1000</title>
+  <desc>Guías para fotografiar caja + esfera. El fondo del PNG final va TRANSPARENTE: este cuadriculado es solo la guía.</desc>
+  <defs>
+    <pattern id="t" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#fff"/><rect width="10" height="10" fill="#f0f0f0"/>
+      <rect x="10" y="10" width="10" height="10" fill="#f0f0f0"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="1000" fill="url(#t)"/>
+  <!-- eje -->
+  <line x1="500" y1="0" x2="500" y2="1000" stroke="#e0245e" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="0" y1="500" x2="1000" y2="500" stroke="#e0245e" stroke-width="2" stroke-dasharray="8 6"/>
+  <!-- puntas de las asas -->
+  <line x1="0" y1="200" x2="1000" y2="200" stroke="#0b6bcb" stroke-width="3"/>
+  <line x1="0" y1="800" x2="1000" y2="800" stroke="#0b6bcb" stroke-width="3"/>
+  <!-- ancho máximo -->
+  <line x1="180" y1="0" x2="180" y2="1000" stroke="#0b6bcb" stroke-width="2" stroke-dasharray="4 6"/>
+  <line x1="820" y1="0" x2="820" y2="1000" stroke="#0b6bcb" stroke-width="2" stroke-dasharray="4 6"/>
+  <!-- caja de referencia -->
+  <rect x="180" y="200" width="640" height="600" fill="none" stroke="#0b6bcb" stroke-width="2"/>
+  <circle cx="500" cy="500" r="290" fill="none" stroke="#0b6bcb" stroke-width="2" stroke-dasharray="6 8"/>
+  <!-- ancho del brazalete en el asa -->
+  <line x1="360" y1="150" x2="360" y2="850" stroke="#12a150" stroke-width="2" stroke-dasharray="3 7"/>
+  <line x1="640" y1="150" x2="640" y2="850" stroke="#12a150" stroke-width="2" stroke-dasharray="3 7"/>
+  <g font-family="Helvetica,Arial" font-size="19" fill="#0b6bcb">
+    <text x="20" y="190">punta de asa · y = 200</text>
+    <text x="20" y="835">punta de asa · y = 800</text>
+    <text x="20" y="960" fill="#12a150">verde = por donde entra el brazalete (280 px)</text>
+    <text x="20" y="40" fill="#e0245e">centro · x = 500 · y = 500</text>
+    <text x="20" y="68" fill="#111" font-size="24" font-weight="bold">CABEZA · 1000 × 1000 · fondo TRANSPARENTE</text>
+  </g>
+</svg>

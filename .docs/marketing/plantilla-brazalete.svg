@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="2400" viewBox="0 0 1000 2400">
+  <title>laOra · plantilla de BRAZALETE · 1000×2400</title>
+  <desc>Guías para fotografiar el brazalete extendido con el hueco de la caja vacío. Fondo TRANSPARENTE en el PNG final.</desc>
+  <defs>
+    <pattern id="t" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#fff"/><rect width="10" height="10" fill="#f0f0f0"/>
+      <rect x="10" y="10" width="10" height="10" fill="#f0f0f0"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="2400" fill="url(#t)"/>
+  <line x1="500" y1="0" x2="500" y2="2400" stroke="#e0245e" stroke-width="2" stroke-dasharray="8 6"/>
+  <line x1="0" y1="1200" x2="1000" y2="1200" stroke="#e0245e" stroke-width="2" stroke-dasharray="8 6"/>
+  <!-- el hueco de la caja: AQUÍ NO VA NADA -->
+  <rect x="0" y="900" width="1000" height="600" fill="#e0245e" fill-opacity=".07"/>
+  <line x1="0" y1="900" x2="1000" y2="900" stroke="#0b6bcb" stroke-width="3"/>
+  <line x1="0" y1="1500" x2="1000" y2="1500" stroke="#0b6bcb" stroke-width="3"/>
+  <!-- ancho del brazalete -->
+  <line x1="360" y1="0" x2="360" y2="2400" stroke="#12a150" stroke-width="2" stroke-dasharray="3 7"/>
+  <line x1="640" y1="0" x2="640" y2="2400" stroke="#12a150" stroke-width="2" stroke-dasharray="3 7"/>
+  <g font-family="Helvetica,Arial" font-size="19" fill="#0b6bcb">
+    <text x="20" y="880">borde del hueco · y = 900</text>
+    <text x="20" y="1535">borde del hueco · y = 1500</text>
+    <text x="360" y="1215" fill="#e0245e" font-size="26" font-weight="bold">HUECO DE LA CAJA · vacío</text>
+    <text x="20" y="2370" fill="#12a150">verde = ancho en el asa, unos 280 px</text>
+    <text x="20" y="40" fill="#111" font-size="24" font-weight="bold">BRAZALETE · 1000 × 2400 · fondo TRANSPARENTE</text>
+    <text x="20" y="68" fill="#e0245e">centro del hueco · x = 500 · y = 1200</text>
+  </g>
+</svg>
