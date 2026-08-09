@@ -61,15 +61,15 @@
   font-family:'Inter',sans-serif;font-size:16px;
   font-weight:400;color:#B8B8B8}
 .cb-menu a{text-decoration:none;color:inherit;transition:color .2s}
-.cb-menu a:hover{color:var(--ambar,#b48744)}
-.cb-menu a.activo{color:var(--ambar,#b48744)}
+.cb-menu a:hover{color:var(--ambar,#b38a19)}
+.cb-menu a.activo{color:var(--ambar,#b38a19)}
 
 /* ---------- bolsa ---------- */
 .cb-bolsa{position:relative;display:inline-flex;padding:4px;color:#fff}
 .cb-bolsa svg{stroke:currentColor}
-.cb-bolsa:hover{color:var(--ambar,#b48744)}
+.cb-bolsa:hover{color:var(--ambar,#b38a19)}
 .cb-cuenta{position:absolute;top:-3px;right:-5px;min-width:17px;height:17px;border-radius:999px;
-  background:var(--ambar,#b48744);color:#141414;font-family:'Nunito Sans',sans-serif;
+  background:var(--ambar,#b38a19);color:#141414;font-family:'Nunito Sans',sans-serif;
   font-size:10.5px;font-weight:800;line-height:17px;text-align:center}
 
 /* ---------- sobre fondo claro ---------- */
