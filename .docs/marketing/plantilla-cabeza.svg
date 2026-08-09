@@ -21,13 +21,17 @@
   <rect x="180" y="200" width="640" height="600" fill="none" stroke="#0b6bcb" stroke-width="2"/>
   <circle cx="500" cy="500" r="290" fill="none" stroke="#0b6bcb" stroke-width="2" stroke-dasharray="6 8"/>
   <!-- ancho del brazalete en el asa -->
-  <line x1="360" y1="150" x2="360" y2="850" stroke="#12a150" stroke-width="2" stroke-dasharray="3 7"/>
-  <line x1="640" y1="150" x2="640" y2="850" stroke="#12a150" stroke-width="2" stroke-dasharray="3 7"/>
+  <line x1="367" y1="120" x2="367" y2="880" stroke="#12a150" stroke-width="3"/>
+  <line x1="633" y1="120" x2="633" y2="880" stroke="#12a150" stroke-width="3"/>
+  <rect x="367" y="120" width="266" height="80" fill="#12a150" fill-opacity=".12"/>
+  <rect x="367" y="800" width="266" height="80" fill="#12a150" fill-opacity=".12"/>
   <g font-family="Helvetica,Arial" font-size="19" fill="#0b6bcb">
     <text x="20" y="190">punta de asa · y = 200</text>
     <text x="20" y="835">punta de asa · y = 800</text>
-    <text x="20" y="960" fill="#12a150">verde = por donde entra el brazalete (280 px)</text>
-    <text x="20" y="40" fill="#e0245e">centro · x = 500 · y = 500</text>
+    <text x="20" y="930" fill="#12a150" font-weight="bold">HUECO ENTRE ASAS = 266 px exactos (x 367 a 633)</text>
+    <text x="20" y="958" fill="#12a150">el brazalete tiene que medir eso mismo</text>
+    <text x="20" y="40" fill="#e0245e" font-weight="bold">CENTRAR POR EL EJE DE LAS ASAS, no por el contorno</text>
+    <text x="20" y="990" fill="#e0245e">la corona y los pulsadores NO cuentan para centrar</text>
     <text x="20" y="68" fill="#111" font-size="24" font-weight="bold">CABEZA · 1000 × 1000 · fondo TRANSPARENTE</text>
   </g>
 </svg>
