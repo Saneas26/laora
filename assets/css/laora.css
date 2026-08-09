@@ -1083,3 +1083,14 @@ footer small { font-size: 12px; }
   .teca-historia-item .curiosidades { padding: 0 20px 26px; }
   .teca-proximamente .kicker { min-width: 0; }
 }
+
+/* ---------- 08, el glosario ---------- */
+.teca-glosario { columns: 2; column-gap: 60px; max-width: 940px; margin: 0; padding: 0; }
+.teca-glosario div { break-inside: avoid; margin: 0 0 24px; }
+.teca-glosario dt { font-family: var(--serif); font-size: 17px; letter-spacing: -.005em; margin: 0 0 4px; }
+.teca-glosario dd { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); }
+.teca-glosario dd a { color: var(--oro-galeria); border-bottom: 1px solid rgba(131,96,38,.35); }
+
+@media (max-width: 720px) {
+  .teca-glosario { columns: 1; }
+}
