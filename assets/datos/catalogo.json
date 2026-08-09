@@ -1433,8 +1433,8 @@
       "configurador": {
         "acabados": [
           {
-            "id": "alba",
-            "nombre": "Alba",
+            "id": "estandar",
+            "nombre": "",
             "movimiento": "ETA 2430 (suizo), 11½ líneas",
             "movimientoTipo": "Automático, 3 agujas",
             "frecuencia": "21.600 alt/h (3 Hz)",
@@ -1447,113 +1447,7 @@
             "fondo": "macizo",
             "peso": "~140 g",
             "refs": [
-              "LO-07_Bitacora_A01",
-              null,
-              null,
-              null
-            ]
-          },
-          {
-            "id": "levante",
-            "nombre": "Levante",
-            "movimiento": "ETA 2430 (suizo), 11½ líneas",
-            "movimientoTipo": "Automático, 3 agujas",
-            "frecuencia": "21.600 alt/h (3 Hz)",
-            "autonomia": "~42 h de reserva de marcha",
-            "cajaMaterial": "Acero inoxidable 316L",
-            "diametro": "40 mm",
-            "estanqueidad": "10 ATM (100 m)",
-            "bisel": "Fijo, integrado en la caja (no giratorio)",
-            "cristal": "Zafiro",
-            "fondo": "Cristal",
-            "peso": "~140 g",
-            "refs": [
-              "LO-07_Bitacora_L01",
-              null,
-              null,
-              null
-            ]
-          },
-          {
-            "id": "cenit",
-            "nombre": "Cenit",
-            "movimiento": "ETA 2430 (suizo), 11½ líneas",
-            "movimientoTipo": "Automático, 3 agujas",
-            "frecuencia": "21.600 alt/h (3 Hz)",
-            "autonomia": "~42 h de reserva de marcha",
-            "cajaMaterial": "Acero inoxidable 316L",
-            "diametro": "40 mm",
-            "estanqueidad": "10 ATM (100 m)",
-            "bisel": "Fijo, integrado en la caja (no giratorio)",
-            "cristal": "Zafiro",
-            "fondo": "Cristal",
-            "peso": "~140 g",
-            "refs": [
-              "LO-07_Bitacora_C01",
-              null,
-              null,
-              null
-            ]
-          },
-          {
-            "id": "eclipse",
-            "nombre": "Eclipse",
-            "movimiento": "ETA 2430 (suizo), 11½ líneas",
-            "movimientoTipo": "Automático, 3 agujas",
-            "frecuencia": "21.600 alt/h (3 Hz)",
-            "autonomia": "~42 h de reserva de marcha",
-            "cajaMaterial": "Acero inoxidable con PVD negro",
-            "diametro": "40 mm (caja cuadrada)",
-            "estanqueidad": "100 m",
-            "bisel": "Fijo, integrado en la caja cuadrada (no giratorio)",
-            "cristal": "Zafiro",
-            "fondo": "macizo",
-            "peso": "~85 g",
-            "refs": [
-              null,
-              "LO-07_Bitacora_E01",
-              "LO-07_Bitacora_E01-OR",
-              null
-            ]
-          },
-          {
-            "id": "eclipse-nh35a",
-            "nombre": "Eclipse",
-            "movimiento": "ETA 2430 (suizo), 11½ líneas",
-            "movimientoTipo": "Automático, 3 agujas",
-            "frecuencia": "21.600 alt/h (3 Hz)",
-            "autonomia": "~42 h de reserva de marcha",
-            "cajaMaterial": "Acero inoxidable con PVD negro",
-            "diametro": "40 mm",
-            "estanqueidad": "100 m",
-            "bisel": "Fijo, integrado en la caja (no giratorio)",
-            "cristal": "Zafiro",
-            "peso": "~140 g",
-            "refs": [
-              null,
-              null,
-              null,
-              "LO-07_Bitacora_E02"
-            ]
-          },
-          {
-            "id": "eclipse-9015",
-            "nombre": "Eclipse",
-            "movimiento": "ETA 2430 (suizo), 11½ líneas",
-            "movimientoTipo": "Automático, 3 agujas",
-            "frecuencia": "21.600 alt/h (3 Hz)",
-            "autonomia": "~42 h de reserva de marcha",
-            "cajaMaterial": "Acero inoxidable con PVD negro",
-            "diametro": "40 mm",
-            "estanqueidad": "100 m",
-            "bisel": "Fijo, integrado en la caja (no giratorio)",
-            "cristal": "Zafiro",
-            "peso": "~140 g",
-            "refs": [
-              null,
-              null,
-              null,
-              "LO-07_Bitacora_E03"
+              "LO-07_Bitacora_A01"
             ]
           }
         ],
@@ -1562,59 +1456,11 @@
             "id": "40-mm-acero-inoxidable-316l",
             "nombre": "40 mm, Acero inoxidable 316L",
             "detalle": "Brazalete integrado de acero 316L · Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable"
-          },
-          {
-            "id": "40-mm-caja-cuadrada-con-pvd-negro",
-            "nombre": "40 mm (caja cuadrada), con PVD negro",
-            "detalle": "Correa Goma negra · Hebilla de acero"
-          },
-          {
-            "id": "40-mm-caja-cuadrada-con-pvd-oro-ro",
-            "nombre": "40 mm (caja cuadrada), con PVD oro rosa",
-            "detalle": "Correa Goma negra · Hebilla de acero"
-          },
-          {
-            "id": "40-mm-con-pvd-negro",
-            "nombre": "40 mm, con PVD negro",
-            "detalle": "Brazalete integrado de acero con PVD negro · Eslabones con PVD negro (brazalete integrado) · Cierre desplegable"
           }
         ],
         "precios": {
-          "alba": [
-            219.9,
-            null,
-            null,
-            null
-          ],
-          "levante": [
-            279.9,
-            null,
-            null,
-            null
-          ],
-          "cenit": [
-            349.9,
-            null,
-            null,
-            null
-          ],
-          "eclipse": [
-            null,
-            219.9,
-            219.9,
-            null
-          ],
-          "eclipse-nh35a": [
-            null,
-            null,
-            null,
-            309.9
-          ],
-          "eclipse-9015": [
-            null,
-            null,
-            null,
-            369.9
+          "estandar": [
+            219.9
           ]
         },
         "rotuloOpciones": "Caja y correa",

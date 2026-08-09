@@ -87,7 +87,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 27
-V_JS = 7
+V_JS = 8
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = {r['slug']: r for r in json.load(f)['relojes']}
@@ -476,6 +476,34 @@ def pantalla(slug):
             f'<span class="tira" style="background:{muestra_de(u)}"></span>'
             f'<span><b>{u["nombre"]}</b>{detalle}</span></p>')
 
+    # LO MISMO PARA EL ACABADO. El Bitácora (09/08/2026, Óscar: «no hay
+    # acabados ni nombres de ningún acabado») deja de tener niveles: es
+    # un solo modelo con una sola configuración de movimiento, caja,
+    # esfera y brazalete. Con un único acabado no se pinta ni el grupo
+    # ni el rótulo «Acabado» — igual que arriba con la correa, decir
+    # «1 opción» sería mentir: aquí no hay nada que elegir.
+    if len(acabados) > 1:
+        bloqueAcabados = (
+            '    <div class="cfg-grupo">\n'
+            f'      <p class="cfg-rotulo">Acabado <b>{len(acabados)} opciones</b></p>\n'
+            '      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">\n'
+            + ''.join(botonAcabado(a) for a in acabados)
+            + '      </div>\n'
+            f'      <p class="cfg-nota" data-nota>{aInicial.get("resumen", "")}</p>\n'
+            '    </div>')
+    else:
+        bloqueAcabados = ''
+
+    # Las dos etiquetas que normalmente empiezan por el nombre del
+    # acabado —«Alba · 40 mm...»— se quedan solo con la correa cuando
+    # no hay acabado que nombrar, en vez de arrastrar un « · » suelto.
+    tieneAcabado = bool(aInicial['nombre'])
+    altAcabado = f", acabado {aInicial['nombre']}" if tieneAcabado else ''
+    viendoHTML = ((f"<b>{aInicial['nombre']}</b> · " if tieneAcabado else '')
+                  + correaInicial['nombre'])
+    eleccionTexto = ((f"{aInicial['nombre']} · " if tieneAcabado else '')
+                     + correaInicial['nombre'])
+
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -515,7 +543,7 @@ def pantalla(slug):
   <section class="cfg-visor" aria-label="El reloj que estás configurando">
     <img class="cfg-foto" data-foto
          src="{fotoInicial}"
-         alt="Reloj laOra {nombre}, acabado {aInicial['nombre']}, con {correaInicial['nombre'].lower()}"
+         alt="Reloj laOra {nombre}{altAcabado}, con {correaInicial['nombre'].lower()}"
          fetchpriority="high">
     <div class="cfg-muestra" aria-hidden="true">
       <span class="tira" data-muestra-tira style="background:{muestraInicial}"></span>
@@ -528,7 +556,7 @@ def pantalla(slug):
          segunda caía encima de la referencia: dos textos superpuestos,
          ilegibles los dos. Así el segundo siempre baja. -->
     <div class="cfg-rotulos">
-      <p class="cfg-viendo" data-viendo aria-live="polite"><b>{aInicial['nombre']}</b> · {correaInicial['nombre']}</p>
+      <p class="cfg-viendo" data-viendo aria-live="polite">{viendoHTML}</p>
       <!-- La referencia también aquí: en el teléfono no cabe en la
            cabecera, y es el dato con el que Óscar busca en la hoja. -->
       <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
@@ -538,12 +566,7 @@ def pantalla(slug):
   <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
   <section class="cfg-panel" aria-label="Opciones del {nombre}">
 
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Acabado <b>{len(acabados)} opciones</b></p>
-      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
-{''.join(botonAcabado(a) for a in acabados)}      </div>
-      <p class="cfg-nota" data-nota>{aInicial.get('resumen', '')}</p>
-    </div>
+{bloqueAcabados}
 
     <div class="cfg-grupo">
       <p class="cfg-rotulo">{rotuloCorreas} <b data-rotulo-correa>{tituloCorreas}</b></p>
@@ -564,7 +587,7 @@ def pantalla(slug):
 <!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
 <footer class="cfg-barra">
   <span class="lado">
-    <span class="eleccion" data-eleccion>{aInicial['nombre']} · {correaInicial['nombre']}</span>
+    <span class="eleccion" data-eleccion>{eleccionTexto}</span>
     <span class="ref">Ref. <span data-ref>—</span></span>
   </span>
   <span class="cfg-precio">

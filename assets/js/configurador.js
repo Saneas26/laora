@@ -87,6 +87,14 @@
     return (a.fotos && a.fotos[correa]) || a.foto;
   }
 
+  /* Cuando el modelo no tiene niveles de acabado —el Bitácora desde el
+     09/08/2026— `a.etiqueta` llega vacío desde el generador. Sin este
+     filtro quedaba un « · » suelto delante de la correa, o «acabado ,»
+     en el alt de la foto. */
+  function conEtiqueta(a, sufijo) {
+    return a.etiqueta ? a.etiqueta + sufijo : '';
+  }
+
   function pintar() {
     var a = D.acabados[acabado];
     var c = D.correas[correa];
@@ -104,14 +112,14 @@
       siguiente.onerror = function () { elFoto.classList.remove('cambiando'); };
       siguiente.src = nueva;
     }
-    if (elFoto) elFoto.alt = 'Reloj laOra ' + D.modelo + ', acabado ' + a.etiqueta + ', con ' + c.nombre.toLowerCase();
+    if (elFoto) elFoto.alt = 'Reloj laOra ' + D.modelo + (a.etiqueta ? ', acabado ' + a.etiqueta : '') + ', con ' + c.nombre.toLowerCase();
 
-    if (elViendo) elViendo.innerHTML = '<b>' + a.etiqueta + '</b> · ' + c.nombre;
+    if (elViendo) elViendo.innerHTML = (a.etiqueta ? '<b>' + a.etiqueta + '</b> · ' : '') + c.nombre;
     if (elTira) elTira.setAttribute('style', 'background:' + c.muestra);
     if (elTiraNombre) elTiraNombre.textContent = c.nombre;
 
     if (elPrecio) elPrecio.textContent = p === null ? '—' : euros(p);
-    if (elEleccion) elEleccion.textContent = a.etiqueta + ' · ' + c.nombre;
+    if (elEleccion) elEleccion.textContent = conEtiqueta(a, ' · ') + c.nombre;
     for (var i = 0; i < elRefs.length; i++) elRefs[i].textContent = referencia();
     if (elNota) elNota.textContent = a.resumen || '';
 
