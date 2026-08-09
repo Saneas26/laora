@@ -146,6 +146,34 @@ body{
   min-width:0;background:#f6efed;
   border-right:1px solid var(--linea-suave);
 }
+/* ---------- EL MONTAJE CON FOTOS DE PIEZA ----------
+   Cuando hay foto de cabeza, el montaje deja de ser «banda dibujada +
+   recorte» y pasa a ser lo que siempre quiso ser: dos PNG con
+   transparencia, uno encima del otro.
+
+   Las dos fotos comparten lienzo: la cabeza es 1000×1000 y el
+   brazalete 1000×2400, así que a la misma anchura el brazalete mide
+   2,4 veces el alto de la cabeza y sus centros coinciden.
+
+   El brazalete se pinta DOS veces, recortado por la mitad, para poder
+   meter cada mitad `--solape` dentro del hueco de la caja. La cabeza va
+   encima y tapa el solape. Sin eso queda una rendija de luz entre el
+   último eslabón y la punta del asa.
+
+   El hueco va de 900 a 1500 de 2400: la mitad de arriba es el 37,5 %
+   del alto y la de abajo empieza en el 62,5 %.  */
+.cf-montaje.con-foto{width:min(515px,58%);height:100%;display:block}
+.cf-montaje.con-foto .cf-cabeza{
+  position:absolute;left:0;top:50%;width:100%;height:auto;
+  transform:translateY(-50%);overflow:visible;z-index:2;
+}
+.cf-montaje.con-foto .cf-cabeza img{position:static;width:100%;left:auto;top:auto}
+.cf-brz{
+  position:absolute;left:0;width:100%;height:auto;top:50%;z-index:1;
+}
+.cf-brz.arriba{clip-path:inset(0 0 62.5% 0);transform:translateY(calc(-50% + var(--solape,0px)))}
+.cf-brz.abajo {clip-path:inset(62.5% 0 0 0);transform:translateY(calc(-50% + var(--solape,0px)))}
+
 .cf-montaje{
   position:relative;display:flex;flex-direction:column;align-items:center;
   height:min(620px,86%);
@@ -352,7 +380,35 @@ body{
   body{grid-template-rows:var(--cabecera) 1fr var(--barra)}
   .cf-cuerpo{grid-template-columns:1fr;grid-template-rows:minmax(180px,38%) 1fr}
   .cf-visor{border-right:0;border-bottom:1px solid var(--linea-suave)}
-  .cf-montaje{height:92%}
+  /* ---------- EL MONTAJE CON FOTOS DE PIEZA ----------
+   Cuando hay foto de cabeza, el montaje deja de ser «banda dibujada +
+   recorte» y pasa a ser lo que siempre quiso ser: dos PNG con
+   transparencia, uno encima del otro.
+
+   Las dos fotos comparten lienzo: la cabeza es 1000×1000 y el
+   brazalete 1000×2400, así que a la misma anchura el brazalete mide
+   2,4 veces el alto de la cabeza y sus centros coinciden.
+
+   El brazalete se pinta DOS veces, recortado por la mitad, para poder
+   meter cada mitad `--solape` dentro del hueco de la caja. La cabeza va
+   encima y tapa el solape. Sin eso queda una rendija de luz entre el
+   último eslabón y la punta del asa.
+
+   El hueco va de 900 a 1500 de 2400: la mitad de arriba es el 37,5 %
+   del alto y la de abajo empieza en el 62,5 %.  */
+.cf-montaje.con-foto{width:min(515px,58%);height:100%;display:block}
+.cf-montaje.con-foto .cf-cabeza{
+  position:absolute;left:0;top:50%;width:100%;height:auto;
+  transform:translateY(-50%);overflow:visible;z-index:2;
+}
+.cf-montaje.con-foto .cf-cabeza img{position:static;width:100%;left:auto;top:auto}
+.cf-brz{
+  position:absolute;left:0;width:100%;height:auto;top:50%;z-index:1;
+}
+.cf-brz.arriba{clip-path:inset(0 0 62.5% 0);transform:translateY(calc(-50% + var(--solape,0px)))}
+.cf-brz.abajo {clip-path:inset(62.5% 0 0 0);transform:translateY(calc(-50% + var(--solape,0px)))}
+
+.cf-montaje{height:92%}
   .cf-desglose,.cf-aviso-maqueta{display:none}
   .cf-panel{padding:16px 18px}
   .cf-barra{grid-template-columns:1fr auto;gap:12px}

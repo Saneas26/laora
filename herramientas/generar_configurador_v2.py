@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 9
-V_JS = 9
+V_CSS = 10
+V_JS = 11
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -69,11 +69,22 @@ MULT = 2.7235
 with open(os.path.join(RAIZ, 'assets/datos/piezas.json'), encoding='utf-8') as f:
     PIEZAS = json.load(f)
 
-# La foto de la cabeza del reloj, por caja. Solo el Lunar tiene fotos
-# aprobadas; los demás enseñan una con el aviso de «pendiente» encima.
-FOTOS = {'lunar': {'C1': '/assets/img/catalogo/LO-01_Lunar_A01.webp',
-                   'C2': '/assets/img/catalogo/LO-01_Lunar_A01.webp'}}
-FOTO_POR_DEFECTO = '/assets/img/catalogo/LO-01_Lunar_A01.webp'
+# LAS FOTOS DE PIEZA
+# ------------------------------------------------------------
+# El nombre del archivo ES la referencia: no hay lista que mantener. La
+# cabeza se busca en `cabezas/MODELO-CAJA-ESFERA.webp` y el brazalete en
+# `brazaletes/REFERENCIA.webp`. Lo que no existe todavía sale con el
+# aviso de «pendiente» y el brazalete dibujado de siempre.
+#
+# Las dos capas se montan con un SOLAPE: las mitades del brazalete se
+# meten 45 px (de los 2400 del lienzo) dentro del hueco de la caja. La
+# cabeza va encima y lo tapa, y así desaparece la rendija de luz que
+# quedaba entre el último eslabón y la punta de las asas.
+PIEZAS_IMG = '/assets/img/piezas'
+SOLAPE = 45 / 2400          # en tanto por uno del alto del brazalete
+
+def hay(rel):
+    return os.path.exists(os.path.join(RAIZ, rel.lstrip('/')))
 
 
 def euros(v):
@@ -224,8 +235,25 @@ def pantalla(slug):
     </div>''')
     ejes.append(eje_brazalete(brz, (ej.get('brz') or {}).get('nombres', {})))
 
-    datos = json.dumps({**d, 'mult': MULT, 'fotos': FOTOS.get(slug, {}),
-                        'fotoDefecto': FOTO_POR_DEFECTO},
+    # Se comprueba EN DISCO qué fotos existen ya. Así el día que el
+    # diseñador entregue una tanda, basta con copiarla y regenerar.
+    cabezas = {}
+    for c in caj:
+        for e in (esf or [None]):
+            ref = d['codigo'] + '-' + c['ref'] + ('-' + e['ref'] if e else '')
+            rel = f'{PIEZAS_IMG}/cabezas/{ref}.webp'
+            if hay(rel):
+                cabezas[ref] = rel
+    brazaletes = {}
+    for f_ in brz:
+        for v in f_['v']:
+            rel = f'{PIEZAS_IMG}/brazaletes/{v["ref"]}.webp'
+            if hay(rel):
+                brazaletes[v['ref']] = rel
+
+    datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
+                        'brazaletes': brazaletes, 'solape': SOLAPE,
+                        'fotoDefecto': '/assets/img/catalogo/LO-01_Lunar_A01.webp'},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 
     html = f'''<meta charset="utf-8">
@@ -248,17 +276,19 @@ def pantalla(slug):
 <div class="cf-cuerpo">
 
   <section class="cf-visor" aria-label="El reloj que estás configurando">
-    <div class="cf-montaje">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
       <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
-      <div class="cf-cabeza">
-        <img data-foto src="{FOTOS.get(slug, {}).get('C1', FOTO_POR_DEFECTO)}" alt="{d['nombre']} de laOra">
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="{d['nombre']} de laOra">
         <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
       </div>
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
 
-    <p class="cf-aviso-maqueta">La foto es un montaje de dos capas: la cabeza del reloj
-      y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>
 
   <section class="cf-panel" aria-label="Opciones del {d['nombre']}">

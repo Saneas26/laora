@@ -158,13 +158,43 @@
 
   /* ---------- pintar ---------- */
 
+  /* ---------- EL MONTAJE DE DOS CAPAS ----------
+     Detrás el brazalete, delante la cabeza. Las dos fotos comparten
+     lienzo y escala: la cabeza es 1000×1000 y el brazalete 1000×2400,
+     con el hueco de la caja justo en el centro.
+
+     Las dos mitades del brazalete se meten `solape` dentro del hueco y
+     la cabeza las tapa: sin eso queda una rendija de luz entre el
+     último eslabón y la punta del asa, y se ve.
+
+     Mientras falten fotos, cada capa cae por separado a lo de antes:
+     la cabeza a la foto vieja con el aviso de «pendiente», y el
+     brazalete a la banda dibujada. */
   function pintaVisor() {
     var p = piezas();
-    var foto = D.fotos[p.caja.ref];
-    $('[data-foto]').src = foto || D.fotoDefecto;
-    $('[data-pendiente]').hidden = !!foto;
-    var fondo = dibujo(p.fam.nombre, p.v.nom);
-    todos('[data-correa]').forEach(function (el) { el.style.background = fondo; });
+    var refCab = D.codigo + '-' + p.caja.ref + (p.esf ? '-' + p.esf.ref : '');
+    var cab = (D.cabezas || {})[refCab];
+    $('[data-foto]').src = cab || D.fotoDefecto;
+    $('[data-pendiente]').hidden = !!cab;
+    document.querySelector('[data-montaje]').classList.toggle('con-foto', !!cab);
+
+    var img = (D.brazaletes || {})[p.v.ref];
+    var mitades = todos('[data-brz-img]');
+    var bandas = todos('[data-correa]');
+    if (img) {
+      mitades.forEach(function (el, i) {
+        el.src = img; el.hidden = false;
+        el.style.setProperty('--solape', (i === 0 ? 1 : -1) * (D.solape || 0) * 240 + 'px');
+      });
+      bandas.forEach(function (el) { el.hidden = true; });
+    } else {
+      mitades.forEach(function (el) { el.hidden = true; });
+      var fondo = dibujo(p.fam.nombre, p.v.nom);
+      bandas.forEach(function (el) { el.hidden = false; el.style.background = fondo; });
+    }
+    /* El aviso de «va dibujado» solo cuando lo está de verdad. */
+    var av = $('[data-aviso]');
+    if (av) av.hidden = !!img;
   }
 
   function nombreEsf(o) {
