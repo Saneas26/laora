@@ -998,3 +998,88 @@ footer small { font-size: 12px; }
   .historia-actos blockquote { margin-top: 0; font-size: 15px; }
   .historia-cierre { margin-top: 46px; }
 }
+
+/* ============================================================
+   laOrateca
+   ------------------------------------------------------------
+   Página nueva, primer borrador (09/08/2026). Índice de temas +
+   secciones. La sección 01 (historias y curiosidades) reutiliza
+   TAL CUAL el sistema `.pdp-historia`/`.curiosidades`/`.cur-ventana`
+   que ya existía en la hoja para las fichas de producto pero que
+   nunca se llegó a enganchar en ninguna página — aquí es donde vive
+   por primera vez. Va dentro de un `<details>` propio por reloj para
+   no apilar seis noticias de periódico una debajo de otra.
+   ============================================================ */
+.teca-index { padding: 50px 6vw 34px; display: flex; flex-wrap: wrap;
+  gap: 10px 28px; border-bottom: 1px solid var(--line); }
+.teca-index a { font-size: 13px; color: var(--muted); padding-bottom: 2px;
+  border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
+.teca-index a:hover { color: var(--ink); border-color: var(--ink); }
+
+.teca-seccion, .teca-proximamente { padding: 90px 6vw; max-width: 1100px;
+  margin: 0 auto; border-bottom: 1px solid var(--line); }
+.teca-seccion > .kicker, .teca-proximamente > .kicker { color: var(--oro-galeria); margin-bottom: 18px; }
+.teca-seccion h2 { font: 500 clamp(28px,3vw,44px)/1.1 var(--serif);
+  letter-spacing: -.01em; margin: 0 0 26px; max-width: 800px; }
+.teca-lead { font-family: var(--serif); font-style: italic; font-size: 19px;
+  line-height: 1.5; max-width: 720px; margin: 0 0 28px; color: var(--ink); }
+.teca-seccion p { font-size: 16px; line-height: 1.7; color: var(--muted);
+  max-width: 720px; margin: 0 0 18px; }
+.teca-seccion strong { color: var(--ink); font-weight: 600; }
+.teca-comparativa { margin: 30px 0 0; max-width: 720px; border-top: 1px solid var(--line); }
+.teca-comparativa li { padding: 16px 0; border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 160px 1fr; gap: 18px; }
+.teca-comparativa b { font-family: var(--serif); font-size: 17px; }
+.teca-comparativa span { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.teca-comparativa em { font-style: normal; color: var(--ink); font-weight: 600; }
+
+/* las secciones sin escribir todavía: mismo suelo, mucho más ligeras */
+.teca-proximamente { display: flex; align-items: baseline; gap: 10px 28px; flex-wrap: wrap; }
+.teca-proximamente .kicker { flex: none; min-width: 260px; margin-bottom: 0; }
+.teca-proximamente .tag { margin-left: 10px; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
+  border: 1px solid var(--line); padding: 3px 8px; vertical-align: 2px; }
+.teca-proximamente p { margin: 0; flex: 1; min-width: 260px; font-size: 15px;
+  line-height: 1.6; color: var(--muted); max-width: 620px; }
+
+/* ---------- 01, historias y curiosidades ---------- */
+.teca-historias { padding: 90px 6vw; background: #e9e5dc; }
+.teca-historias > .kicker { color: var(--oro-galeria); }
+.teca-historias > h2 { font: 500 clamp(28px,3vw,44px)/1.1 var(--serif);
+  letter-spacing: -.01em; margin: 18px 0 44px; max-width: 800px; }
+.teca-historia-item { max-width: 900px; margin: 0 auto; background: var(--paper);
+  border: 1px solid rgba(28,29,27,.16); }
+.teca-historia-item + .teca-historia-item,
+.teca-historia-item + dialog + .teca-historia-item { margin-top: 14px; }
+.teca-historia-item summary { display: flex; align-items: center; gap: 18px;
+  padding: 24px 28px; cursor: pointer; list-style: none; }
+.teca-historia-item summary::-webkit-details-marker { display: none; }
+.teca-historia-num { font-family: var(--serif); font-size: 20px; color: var(--oro-galeria); flex: none; }
+.teca-historia-nombre { flex: 1; font-family: var(--serif); font-size: 22px;
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; min-width: 0; }
+.teca-historia-nombre i { font-style: normal; font-family: var(--sans); font-size: 12.5px;
+  color: var(--gris-galeria); letter-spacing: .01em; }
+.teca-historia-toggle { width: 26px; height: 26px; border: 1px solid rgba(28,29,27,.3);
+  border-radius: 50%; position: relative; flex: none; }
+.teca-historia-toggle::before, .teca-historia-toggle::after { content: "";
+  position: absolute; background: var(--ink); top: 50%; left: 50%; }
+.teca-historia-toggle::before { width: 10px; height: 1px; transform: translate(-50%,-50%); }
+.teca-historia-toggle::after { width: 1px; height: 10px; transform: translate(-50%,-50%);
+  transition: opacity .15s; }
+.teca-historia-item[open] .teca-historia-toggle::after { opacity: 0; }
+.teca-historia-item .pdp-historia { margin-top: 0; border-top: 1px solid var(--line);
+  padding: 26px 28px 32px; }
+.teca-historia-item .curiosidades { margin-top: 0; padding: 0 28px 32px; }
+
+@media (max-width: 900px) {
+  .teca-seccion, .teca-proximamente, .teca-historias { padding-inline: 24px; }
+  .teca-index { padding: 40px 24px 28px; }
+  .teca-comparativa li { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 720px) {
+  .teca-historia-item summary { padding: 18px 20px; gap: 12px; }
+  .teca-historia-nombre { font-size: 19px; gap: 4px 10px; }
+  .teca-historia-item .pdp-historia { padding: 20px 20px 26px; }
+  .teca-historia-item .curiosidades { padding: 0 20px 26px; }
+  .teca-proximamente .kicker { min-width: 0; }
+}
