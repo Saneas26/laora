@@ -86,7 +86,7 @@ import unicodedata
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 26
+V_CSS = 27
 V_JS = 7
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
@@ -106,7 +106,7 @@ MODELOS = ['lunar', 'cero-cero', 'precisa', 'trinchera', 'diver', 'bitacora',
 FOTO_POR_COMBINACION = {'lunar'}
 
 CATALOGO = '/assets/img/catalogo'
-LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'   # cabecera clara → logotipo en tinta
+LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png?v=2'   # cabecera clara → logotipo en tinta
 
 FOTOS_EN_DISCO = sorted(
     os.path.basename(p)[:-5]
