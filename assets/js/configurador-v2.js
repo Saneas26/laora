@@ -156,6 +156,39 @@
     return esf.cajas.split(',').map(function (s) { return s.trim(); }).indexOf(caja.ref) >= 0;
   }
 
+  /* ---------- EL METAL DEL BRAZALETE SIGUE AL DE LA CAJA ----------
+     Regla de Óscar (09/08/2026) para el Bitácora: una caja de oro con un
+     brazalete de plata no se vende, así que no se ofrece. `compat` dice,
+     por cada caja, qué variantes de brazalete la acompañan. El modelo que
+     no la traiga lo admite todo, como hasta ahora. */
+  function varVale(v, caja) {
+    var c = ((D.ejes || {}).brz || {}).compat;
+    if (!c || !c[caja.ref]) return true;
+    return c[caja.ref].indexOf(v.ref) >= 0;
+  }
+  function libres(fam, caja) {
+    return fam.v.filter(function (v) { return varVale(v, caja); });
+  }
+  function famVale(fam, caja) { return libres(fam, caja).length > 0; }
+
+  /* Al cambiar de caja puede caducar el brazalete que estaba puesto: se
+     cae a la primera variante que sí valga, y si la familia entera se
+     queda sin opciones, a la primera familia que las tenga. */
+  function ajustaBrz() {
+    var caja = D.caj[e.caja], i, k;
+    if (!famVale(D.brz[e.brz], caja)) {
+      for (i = 0; i < D.brz.length; i++) {
+        if (famVale(D.brz[i], caja)) { e.brz = i; e.v = 0; break; }
+      }
+    }
+    var f = D.brz[e.brz];
+    if (e.v >= f.v.length || !varVale(f.v[e.v], caja)) {
+      for (k = 0; k < f.v.length; k++) {
+        if (varVale(f.v[k], caja)) { e.v = k; break; }
+      }
+    }
+  }
+
   /* ---------- pintar ---------- */
 
   /* ---------- EL MONTAJE DE DOS CAPAS ----------
@@ -217,21 +250,25 @@
   }
 
   function pintaVariantes() {
-    var p = piezas(), caja = $('[data-variantes]');
-    caja.innerHTML = p.fam.v.map(function (v, i) {
+    var p = piezas(), cont = $('[data-variantes]'), caja = D.caj[e.caja];
+    var vale = libres(p.fam, caja);
+    cont.innerHTML = p.fam.v.map(function (v, i) {
       var t = tonos(v.nom);
       var fondo = t.length > 1
         ? 'linear-gradient(135deg,' + t[0] + ' 0 50%,' + t[1] + ' 50% 100%)' : t[0];
+      var ok = varVale(v, caja);
       return '<button class="cf-color" type="button" data-var="' + i + '"' +
-        ' aria-pressed="' + (i === e.v) + '" title="' + v.nom + '" aria-label="' + v.nom + '"' +
-        ' style="background:' + fondo + '"></button>';
+        (ok ? '' : ' disabled') +
+        ' aria-pressed="' + (i === e.v) + '" title="' + v.nom +
+        (ok ? '' : ' · no va con la caja ' + caja.nombre) + '"' +
+        ' aria-label="' + v.nom + '" style="background:' + fondo + '"></button>';
     }).join('') + '<span class="cf-color-nombre" data-var-nombre></span>';
     $('[data-var-nombre]').textContent = p.v.nom;
-    $('[data-cuenta-var]').textContent = p.fam.v.length + ' opciones';
+    $('[data-cuenta-var]').textContent = vale.length + ' opciones';
     $('[data-grupo-var]').hidden = p.fam.v.length < 2;
-    $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + p.fam.v.length +
-      (p.fam.v.length === 1 ? ' acabado' : ' acabados') + ' · desde ' +
-      euros(Math.min.apply(null, p.fam.v.map(function (x) { return x.c; })));
+    $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + vale.length +
+      (vale.length === 1 ? ' acabado' : ' acabados') + ' · desde ' +
+      euros(Math.min.apply(null, vale.map(function (x) { return x.c; })));
   }
 
   function pintaPrecio() {
@@ -277,8 +314,12 @@
       todos('[data-caja]').forEach(function (el) {
         el.setAttribute('aria-pressed', String(Number(el.dataset.caja) === e.caja)); });
     }
+    ajustaBrz();
     todos('[data-brz]').forEach(function (el) {
-      el.setAttribute('aria-pressed', String(Number(el.dataset.brz) === e.brz)); });
+      var i = Number(el.dataset.brz);
+      el.disabled = !famVale(D.brz[i], D.caj[e.caja]);
+      el.setAttribute('aria-pressed', String(i === e.brz));
+    });
     pintaVariantes();
     pintaVisor();
     pintaSpecs();

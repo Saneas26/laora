@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 10
-V_JS = 11
+V_CSS = 11
+V_JS = 12
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -313,7 +313,18 @@ for slug in PIEZAS:
     with open(os.path.join(RAIZ, f'{slug}-nuevo.html'), 'w', encoding='utf-8') as f:
         f.write(html)
     d = PIEZAS[slug]
-    nv = sum(len(x['v']) for x in d['brz'])
-    combis = len(d['mov']) * len(d['caj']) * max(1, len(d['esf'])) * nv
-    print(f'{slug}-nuevo.html · {len(d["mov"])}×{len(d["caj"])}×{max(1, len(d["esf"]))}×{nv}'
-          f' = {combis} configuraciones · desde {euros(redondea(barato * MULT))}')
+    # Se cuentan las que EXISTEN, no las del producto de los cuatro ejes:
+    # una esfera puede no entrar en una caja, y desde el 09/08/2026 el
+    # brazalete tampoco (el metal del brazalete sigue al de la caja).
+    compat = (d.get('ejes', {}).get('brz') or {}).get('compat') or {}
+    esferas = d['esf'] or [None]
+    combis = 0
+    for c in d['caj']:
+        ok = compat.get(c['ref'])
+        nv = sum(1 for f in d['brz'] for v in f['v'] if ok is None or v['ref'] in ok)
+        ne = sum(1 for e_ in esferas if e_ is None or not e_.get('cajas')
+                 or e_['cajas'].lower().startswith('todas')
+                 or c['ref'] in [s.strip() for s in e_['cajas'].split(',')])
+        combis += len(d['mov']) * ne * nv
+    print(f'{slug}-nuevo.html · {combis} configuraciones'
+          f' · desde {euros(redondea(barato * MULT))}')
