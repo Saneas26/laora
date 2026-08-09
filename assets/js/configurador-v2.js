@@ -1,56 +1,42 @@
 /* ============================================================
-   laOra · CONFIGURADOR DE TRES EJES  ·  MAQUETA
+   laOra · CONFIGURADOR DE CUATRO EJES  ·  MAQUETA
    ------------------------------------------------------------
-   Todo el estado son tres índices —movimiento, caja, brazalete— más
-   el color elegido dentro del brazalete. De ahí sale TODO lo demás:
-   la foto, las características, la referencia y el precio.
+   El estado son cuatro índices —movimiento, caja, esfera, brazalete—
+   más la variante elegida dentro del brazalete. De ahí sale TODO lo
+   demás: la foto, las características, la referencia y el precio.
 
-   EL PRECIO NO ESTÁ ESCRITO EN NINGUNA PARTE. Se suma el coste de las
-   tres piezas, se multiplica y se redondea al 9,90 más cercano. Por
-   eso un brazalete nuevo no obliga a decidir un precio: entra con el
-   suyo puesto.
-
-   El redondeo va al 9,90 MÁS CERCANO, no al de arriba: 219,89 € tiene
-   que caer en 219,90 y no en 229,90. Diez euros de diferencia por un
-   céntimo de cálculo.
+   EL PRECIO NO ESTÁ ESCRITO EN NINGUNA PARTE. Se suman las cuatro
+   piezas, se multiplica y se redondea al 9,90 más cercano. Por eso una
+   esfera nueva no obliga a decidir un precio: entra con el suyo puesto.
    ============================================================ */
 (function () {
   'use strict';
 
-  var datos = JSON.parse(document.querySelector('[data-piezas]').textContent);
+  var D = JSON.parse(document.querySelector('[data-piezas]').textContent);
   var $ = function (s) { return document.querySelector(s); };
+  var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
 
-  var estado = { mov: 0, caja: 0, brz: 0, color: 0 };
+  var e = { mov: 0, caja: 0, esf: 0, brz: 0, v: 0 };
 
-  function euros(v) {
-    return v.toFixed(2).replace('.', ',') + ' €';
-  }
+  function euros(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
 
-  /* Al 9,90 más cercano: se buscan el 9,90 de abajo y el de arriba, y
-     gana el que esté más cerca.
-
-     OJO CON EL DE ABAJO. La cuenta evidente —`floor(p/10)*10 + 9,90`—
-     está mal, y calla: para 264,56 € devuelve 269,90, que está POR
-     ENCIMA. Solo acierta cuando los decimales ya pasan de 9,90. Hay que
-     restar el 9,90 ANTES de truncar. Con la versión mala, cinco de las
-     siete configuraciones del Lunar salían diez euros caras. */
+  /* Al 9,90 más cercano. OJO con el de abajo: la cuenta evidente
+     —floor(p/10)*10 + 9,90— está mal y calla. Para 264,56 devuelve
+     269,90, que está POR ENCIMA. Hay que restar el 9,90 ANTES de
+     truncar. Con la versión mala, cinco de las siete configuraciones
+     del Lunar salían diez euros caras. */
   function redondea(p) {
     var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
-    var alto = bajo + 10;
-    return (p - bajo) <= (alto - p) ? bajo : alto;
+    return (p - bajo) <= (bajo + 10 - p) ? bajo : bajo + 10;
   }
 
   /* ---------- el DIBUJO del brazalete ----------
-     La muestra que trae cada color es un color plano —o dos, si el
-     brazalete es bicolor—. Un rectángulo de color plano no parece un
-     brazalete: parece una cinta. Aquí se le da el relieve del metal
-     (una luz que cruza en diagonal) y la sombra entre eslabones.
-
-     Cuando lleguen las fotos de brazalete, esta función desaparece y
-     la banda pasa a ser un <img>. Nada más cambia. */
+     Un rectángulo de color plano no parece un brazalete: parece una
+     cinta. Aquí se le da el relieve del metal y la sombra entre
+     eslabones. Cuando lleguen las fotos, esta función desaparece y la
+     banda pasa a ser un <img>. */
   function mezcla(hex, con, cuanto) {
-    var a = parseInt(hex.slice(1), 16), b = parseInt(con.slice(1), 16);
-    var out = 0, i;
+    var a = parseInt(hex.slice(1), 16), b = parseInt(con.slice(1), 16), out = 0, i;
     for (i = 16; i >= 0; i -= 8) {
       var v = Math.round((((a >> i) & 255) * (1 - cuanto)) + (((b >> i) & 255) * cuanto));
       out |= v << i;
@@ -58,161 +44,186 @@
     return '#' + ('000000' + out.toString(16)).slice(-6);
   }
 
-  var ESLABONES = 'repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1.5px,rgba(255,255,255,.10) 1.5px 3px,rgba(0,0,0,0) 3px 15px)';
+  var ESLABONES = 'repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1.5px,' +
+                  'rgba(255,255,255,.10) 1.5px 3px,rgba(0,0,0,0) 3px 15px)';
+  var TEJIDO = 'repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 3px,rgba(0,0,0,.07) 3px 6px)';
+  var COSTURA = 'repeating-linear-gradient(0deg,rgba(255,255,255,.30) 0 5px,rgba(0,0,0,0) 5px 11px)';
+
+  /* El tono sale del NOMBRE de la variante, que es lo único que hay:
+     la hoja no guarda el color en hexadecimal. Si no se reconoce, gris
+     acero, que es lo que más abunda. */
+  var TONOS = [
+    [/negro|negra|black/i, '#26282a'], [/blanc/i, '#e9e7e2'],
+    [/marr[óo]n oscuro|dark ?brown/i, '#4a2f1d'], [/marr[óo]n claro|light ?brown/i, '#a5744a'],
+    [/marr[óo]n|brown/i, '#6b4222'], [/azul marino|navy/i, '#22334d'], [/azul|blue/i, '#2f4a6b'],
+    [/verde militar/i, '#4a5238'], [/verde|green/i, '#3a5a40'], [/caqui|khaki/i, '#7a7351'],
+    [/gris|grey|gray/i, '#7d8286'], [/rojo|red/i, '#7c2b26'], [/naranja|orange/i, '#b5622a'],
+    [/beige/i, '#c8b89a'], [/oro rosa|rose ?gold/i, '#c9a08a'], [/oro|gold/i, '#cbae6d'],
+    [/plata|silver|acero/i, '#c7cbcf']
+  ];
+
+  function tonos(nombre) {
+    var t = [];
+    TONOS.forEach(function (par) { if (par[0].test(nombre) && t.indexOf(par[1]) < 0) t.push(par[1]); });
+    return t.length ? t.slice(0, 2) : ['#c7cbcf'];
+  }
 
   function metal(c) {
-    return mezcla(c, '#ffffff', .58) + ' 0%,' +
-      mezcla(c, '#000000', .20) + ' 28%,' +
-      mezcla(c, '#ffffff', .46) + ' 50%,' +
-      mezcla(c, '#000000', .30) + ' 74%,' +
-      mezcla(c, '#ffffff', .22) + ' 100%';
+    return mezcla(c, '#ffffff', .58) + ' 0%,' + mezcla(c, '#000000', .20) + ' 28%,' +
+           mezcla(c, '#ffffff', .46) + ' 50%,' + mezcla(c, '#000000', .30) + ' 74%,' +
+           mezcla(c, '#ffffff', .22) + ' 100%';
   }
 
-  /* Un brazalete bicolor NO es medio plateado y medio dorado en
-     diagonal: es plateado por fuera y dorado por el centro, que es por
-     donde corren los eslabones del medio. Con dos tonos se dibujan
-     tres franjas verticales; con uno, el metal a secas. */
-  function dibujo(tonos) {
-    if (tonos.length > 1) {
-      return ESLABONES +
-        ',linear-gradient(90deg,' +
-        mezcla(tonos[0], '#ffffff', .40) + ' 0 30%,' +
-        mezcla(tonos[1], '#ffffff', .34) + ' 30% 42%,' +
-        mezcla(tonos[1], '#000000', .12) + ' 42% 58%,' +
-        mezcla(tonos[1], '#ffffff', .34) + ' 58% 70%,' +
-        mezcla(tonos[0], '#000000', .18) + ' 70% 100%)';
+  /* Un brazalete bicolor no es medio y medio en diagonal: es claro por
+     fuera y el otro tono por el centro, que es por donde corren los
+     eslabones del medio. */
+  function dibujo(familia, nombreVar) {
+    var t = tonos(nombreVar), textura = ESLABONES;
+    if (/piel|ante|cuero/i.test(familia)) textura = COSTURA;
+    else if (/lona|nailon|tela|caucho|goma/i.test(familia)) textura = TEJIDO;
+    if (t.length > 1) {
+      return textura + ',linear-gradient(90deg,' +
+        mezcla(t[0], '#ffffff', .40) + ' 0 30%,' + mezcla(t[1], '#ffffff', .34) + ' 30% 42%,' +
+        mezcla(t[1], '#000000', .12) + ' 42% 58%,' + mezcla(t[1], '#ffffff', .34) + ' 58% 70%,' +
+        mezcla(t[0], '#000000', .18) + ' 70% 100%)';
     }
-    return ESLABONES + ',linear-gradient(100deg,' + metal(tonos[0]) + ')';
+    return textura + ',linear-gradient(100deg,' + metal(t[0]) + ')';
   }
+
+  /* ---------- estado ---------- */
 
   function piezas() {
-    var brz = datos.brazaletes[estado.brz];
+    var f = D.brz[e.brz];
     return {
-      mov: datos.movimientos[estado.mov],
-      caja: datos.cajas[estado.caja],
-      brz: brz,
-      color: brz.colores[Math.min(estado.color, brz.colores.length - 1)]
+      mov: D.mov[e.mov], caja: D.caj[e.caja],
+      esf: D.esf.length ? D.esf[e.esf] : null,
+      fam: f, v: f.v[Math.min(e.v, f.v.length - 1)]
     };
   }
 
+  /* El brazalete del Diver es un EXTRA: se suma a lo que ya trae la
+     caja, no la sustituye. En los demás va dentro del precio. */
   function coste() {
     var p = piezas();
-    return p.mov.coste + p.caja.coste + p.color.coste;
+    return p.mov.coste + p.caja.coste + (p.esf ? p.esf.coste : 0) + p.v.c;
   }
 
-  /* ---------- LA REFERENCIA ----------
-     Cuatro segmentos de largo fijo, uno por biblioteca:
-
-         LO-03 - M1 - C1 - B09.2
-           │     │    │     │ └─ variante 2 de esa familia
-           │     │    │     └─── brazalete 09 del catálogo ENTERO
-           │     │    └───────── caja 1 de este modelo
-           │     └────────────── movimiento 1 de este modelo
-           └──────────────────── modelo, columna A de Movimientos
-
-     El brazalete se numera en el catálogo entero y no dentro del
-     modelo, porque la misma pieza la montan varios relojes: si fuera
-     «B1» en el Lunar y «B3» en el Cero Cero, un día se compraría la
-     que no es.
-
-     Y no lleva ni una palabra dentro. El día que un brazalete cambie
-     de nombre, los pedidos viejos tienen que seguir cuadrando. */
   function referencia() {
     var p = piezas();
-    return [datos.codigo, p.mov.ref, p.caja.ref, p.color.ref].join('-');
+    var seg = [D.codigo, p.mov.ref, p.caja.ref];
+    if (p.esf) seg.push(p.esf.ref);
+    seg.push(p.v.ref);
+    return seg.join('-');
+  }
+
+  /* Una esfera puede no entrar en todas las cajas: en el Lunar la negra
+     solo va con el bisel negro. La hoja lo dice en `cajas`. */
+  function esferaVale(esf, caja) {
+    if (!esf.cajas || /todas/i.test(esf.cajas)) return true;
+    return esf.cajas.split(',').map(function (s) { return s.trim(); }).indexOf(caja.ref) >= 0;
   }
 
   /* ---------- pintar ---------- */
 
   function pintaVisor() {
     var p = piezas();
-    $('[data-foto]').src = p.caja.foto;
-    $('[data-pendiente]').hidden = !p.caja.fotoPendiente;
-    var fondo = dibujo(p.color.tonos);
-    Array.prototype.forEach.call(document.querySelectorAll('[data-correa]'), function (el) {
-      el.style.background = fondo;
-    });
+    var foto = D.fotos[p.caja.ref];
+    $('[data-foto]').src = foto || D.fotoDefecto;
+    $('[data-pendiente]').hidden = !!foto;
+    var fondo = dibujo(p.fam.nombre, p.v.nom);
+    todos('[data-correa]').forEach(function (el) { el.style.background = fondo; });
     $('[data-viendo]').innerHTML = '<b>' + p.caja.nombre + '</b> <span>· ' +
-      p.brz.nombre + ' · ' + p.color.nombre + '</span>';
+      (p.esf ? p.esf.nombre + ' · ' : '') + p.fam.nombre + '</span>';
   }
 
   function pintaSpecs() {
     var p = piezas();
-    var filas = p.mov.specs.concat(p.caja.specs);
+    var filas = [['Movimiento', p.mov.cal], ['Acabado', p.mov.acabado], ['Caja', p.caja.nombre]];
+    if (p.esf) filas.push(['Esfera', p.esf.nombre]);
+    filas.push(['Brazalete', p.fam.nombre]);
     $('[data-specs]').innerHTML = filas.map(function (f) {
       return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>';
     }).join('');
   }
 
-  function pintaColores() {
-    var p = piezas();
-    var caja = $('[data-colores]');
-    caja.innerHTML = p.brz.colores.map(function (c, i) {
-      return '<button class="cf-color" type="button" data-color="' + i + '"' +
-        ' aria-pressed="' + (i === estado.color) + '"' +
-        ' aria-label="' + c.nombre + '" title="' + c.nombre + '"' +
-        ' style="background:' + c.muestra + '"></button>';
-    }).join('') + '<span class="cf-color-nombre" data-color-nombre></span>';
-    $('[data-color-nombre]').textContent = p.color.nombre;
-    /* Con una sola variante no se pinta el grupo: la misma regla que
-       con el movimiento. Y el rótulo lo pone la familia, porque no
-       todas varían en COLOR —la de acero macizo varía en eslabonado—. */
-    $('[data-grupo-color]').hidden = p.brz.colores.length < 2;
-    $('[data-rotulo-variante]').textContent = p.brz.variante;
-    $('[data-detalle]').textContent = p.brz.material + ' · ' + p.brz.detalle;
-  }
-
-  /* Los cuadraditos del brazalete los pinta el generador con el color
-     plano del primer color de cada familia; aquí se les da el mismo
-     dibujo que la banda para que el cuadro y el reloj coincidan. */
-  function pintaMuestras() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-brz] i'), function (el, i) {
-      el.style.background = dibujo(datos.brazaletes[i].colores[0].tonos);
-    });
+  function pintaVariantes() {
+    var p = piezas(), caja = $('[data-variantes]');
+    caja.innerHTML = p.fam.v.map(function (v, i) {
+      var t = tonos(v.nom);
+      var fondo = t.length > 1
+        ? 'linear-gradient(135deg,' + t[0] + ' 0 50%,' + t[1] + ' 50% 100%)' : t[0];
+      return '<button class="cf-color" type="button" data-var="' + i + '"' +
+        ' aria-pressed="' + (i === e.v) + '" title="' + v.nom + '" aria-label="' + v.nom + '"' +
+        ' style="background:' + fondo + '"></button>';
+    }).join('') + '<span class="cf-color-nombre" data-var-nombre></span>';
+    $('[data-var-nombre]').textContent = p.v.nom;
+    $('[data-cuenta-var]').textContent = p.fam.v.length + ' opciones';
+    $('[data-grupo-var]').hidden = p.fam.v.length < 2;
+    $('[data-detalle]').textContent = p.fam.nombre + ' · ' + p.fam.v.length +
+      (p.fam.v.length === 1 ? ' acabado' : ' acabados') + ' · desde ' +
+      euros(Math.min.apply(null, p.fam.v.map(function (x) { return x.c; })));
   }
 
   function pintaPrecio() {
-    var p = piezas();
-    var c = coste();
-    var pvp = redondea(c * datos.multiplicador);
+    var p = piezas(), c = coste(), pvp = redondea(c * D.mult);
     $('[data-precio]').textContent = euros(pvp);
-    $('[data-barra-nombre]').textContent = p.caja.nombre + ' · ' + p.brz.nombre;
-    $('[data-barra-color]').textContent = p.color.nombre;
-
-    /* La referencia NUNCA se enseña sola: al lado van siempre las
-       palabras. Corta para la máquina, completa para la persona. */
     $('[data-ref]').textContent = referencia();
-
+    $('[data-barra-nombre]').textContent = p.caja.nombre + ' · ' + p.fam.nombre;
+    $('[data-barra-var]').textContent = p.v.nom;
     $('[data-desglose]').innerHTML =
       '<b>Lo que hay que comprar</b><br>' +
       'Movimiento <i>' + p.mov.ref + '</i> ' + euros(p.mov.coste) + '<br>' +
-      'Caja y esfera <i>' + p.caja.ref + '</i> ' + euros(p.caja.coste) + '<br>' +
-      'Brazalete <i>' + p.color.ref + '</i> ' + euros(p.color.coste) + '<br>' +
+      'Caja <i>' + p.caja.ref + '</i> ' + euros(p.caja.coste) + '<br>' +
+      (p.esf ? 'Esfera <i>' + p.esf.ref + '</i> ' + euros(p.esf.coste) + '<br>' : '') +
+      'Brazalete <i>' + p.v.ref + '</i> ' + euros(p.v.c) + '<br>' +
       'Suma <i>' + euros(c) + '</i><br>' +
-      '× ' + String(datos.multiplicador).replace('.', ',') + ' → <b>' + euros(pvp) + '</b>';
+      '× ' + String(D.mult).replace('.', ',') + ' → <b>' + euros(pvp) + '</b>';
   }
 
   function pinta() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-caja]'), function (el) {
-      el.setAttribute('aria-pressed', String(Number(el.dataset.caja) === estado.caja));
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-brz]'), function (el) {
-      el.setAttribute('aria-pressed', String(Number(el.dataset.brz) === estado.brz));
-    });
-    pintaColores();
+    /* Las esferas que no entran en la caja elegida se apagan, no se
+       esconden: si desaparecieran, parecería que no existen. */
+    if (D.esf.length) {
+      var caja = D.caj[e.caja];
+      if (!esferaVale(D.esf[e.esf], caja)) {
+        for (var i = 0; i < D.esf.length; i++) {
+          if (esferaVale(D.esf[i], caja)) { e.esf = i; break; }
+        }
+      }
+      todos('[data-esf]').forEach(function (el) {
+        var i = Number(el.dataset.esf);
+        el.disabled = !esferaVale(D.esf[i], caja);
+        el.setAttribute('aria-pressed', String(i === e.esf));
+      });
+    }
+    todos('[data-mov]').forEach(function (el) {
+      el.setAttribute('aria-pressed', String(Number(el.dataset.mov) === e.mov)); });
+    todos('[data-caja]').forEach(function (el) {
+      el.setAttribute('aria-pressed', String(Number(el.dataset.caja) === e.caja)); });
+    todos('[data-brz]').forEach(function (el) {
+      el.setAttribute('aria-pressed', String(Number(el.dataset.brz) === e.brz)); });
+    pintaVariantes();
     pintaVisor();
     pintaSpecs();
     pintaPrecio();
   }
 
-  /* ---------- escuchar ---------- */
+  function pintaMuestras() {
+    todos('[data-brz] i').forEach(function (el, i) {
+      var f = D.brz[i];
+      el.style.background = dibujo(f.nombre, f.v[0].nom);
+    });
+  }
 
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-caja],[data-brz],[data-color]');
-    if (!b) return;
-    if (b.dataset.caja !== undefined) estado.caja = Number(b.dataset.caja);
-    else if (b.dataset.brz !== undefined) { estado.brz = Number(b.dataset.brz); estado.color = 0; }
-    else estado.color = Number(b.dataset.color);
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var]');
+    if (!b || b.disabled) return;
+    var d = b.dataset;
+    if (d.mov !== undefined) e.mov = Number(d.mov);
+    else if (d.caja !== undefined) e.caja = Number(d.caja);
+    else if (d.esf !== undefined) e.esf = Number(d.esf);
+    else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; }
+    else e.v = Number(d.var);
     pinta();
   });
 
