@@ -133,6 +133,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    el hueco entre letras, que es lo que hace que un nombre se lea de un
    golpe y no letra a letra. */
 .lunar-title span { font-size: clamp(58px, 6.25vw, 90px); line-height: 1; font-weight: 400; letter-spacing: -.03em; }
+.lunar-frase { margin: 2px 0 14px; font-size: clamp(18px, 2vw, 25px); line-height: 1.3; font-weight: 500; letter-spacing: -.015em; color: #fdcc42; }
 /* Peso 500 y no 400: sobre fondo oscuro el texto claro se come parte de
    su propio trazo —irradiación óptica— y el 400 se ve más frágil de lo
    que es. Tesla usa 500 en todo lo que va encima de una imagen.
@@ -176,7 +177,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    .dialogue-brand { display: inline-block; width: 3.2em; margin: 0 .04em; vertical-align: -.18em; } */
 .dialogue-brand { display: inline-block; width: 2.45em; margin: 0 .04em; vertical-align: baseline; }
 .dialogue-brand img { width: 100%; height: auto; }
-.lunar-dialogue-number { position: absolute; z-index: 3; right: 3vw; bottom: 22px; font-size: 11px; letter-spacing: .15em; }
 
 .value-sequence { height: 500svh; position: relative; background: #090909; color: #fff; }
 .value-sequence-sticky { height: calc(100svh - 76px); position: sticky; top: 76px; overflow: hidden; }
@@ -184,13 +184,13 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .value-sequence-image { max-width: none; object-fit: cover; object-position: center center; }
 .value-sequence-veil { background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.03) 46%, rgba(0,0,0,.35)); pointer-events: none; }
 .value-sequence-copy { position: absolute; z-index: 2; top: clamp(24px, 5.8vh, 64px); left: 50%; width: min(1000px, 92vw); transform: translateX(-50%); text-align: center; text-shadow: 0 2px 22px rgba(0,0,0,.52); }
-.value-sequence-kicker { margin: 0 0 8px; font-size: clamp(10px, .78vw, 13px); font-weight: 600; letter-spacing: .16em; color: rgba(255,255,255,.62); }
-.value-sequence-copy h2 { margin: 0; font: 500 clamp(39px, 4.5vw, 68px)/.98 var(--sans); letter-spacing: -.052em; }
-.value-sequence-lead { display: block; margin-bottom: .1em; font-size: .52em; font-weight: 400; letter-spacing: -.015em; color: rgba(255,255,255,.86); }
-.value-sequence-copy h2 em { font-style: normal; font-weight: 700; color: #d4a94b; }
+.value-sequence-kicker { margin: 0 0 3px; font-size: clamp(10px, .78vw, 13px); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.62); }
+.value-sequence-copy h2 { margin: 0; font: 500 clamp(39px, 4.5vw, 68px)/.88 var(--sans); letter-spacing: -.052em; }
+.value-sequence-lead { display: block; margin-bottom: 0; font-size: .52em; font-weight: 400; letter-spacing: -.015em; color: rgba(255,255,255,.86); }
+.value-sequence-copy h2 em { display: block; margin-top: -.5em; font-style: normal; font-weight: 700; color: #fdcc42; }
 .value-sequence-costs { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
 .value-cost { position: absolute; margin: 0; padding: 9px 13px; border: 1px solid rgba(255,255,255,.52); background: rgba(9,9,9,.74); color: white; font-size: clamp(13px, 1.15vw, 18px); font-weight: 500; letter-spacing: -.025em; opacity: 0; transition: opacity .42s ease, transform .72s cubic-bezier(.2,.75,.2,1); }
-.value-cost span { color: #d4a94b; font-size: 1.15em; }
+.value-cost span { color: #fdcc42; font-size: 1.15em; }
 .value-cost.left { transform: translateX(29vw); }
 .value-cost.right { transform: translateX(-29vw); }
 .value-cost.one { left: 7.5%; top: 50%; }
@@ -206,7 +206,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .value-sequence-result { position: absolute; z-index: 2; top: 34%; left: 50%; width: min(760px, 90vw); margin: 0; transform: translateX(-50%) translateY(8px); text-align: center; font-size: clamp(16px, 1.35vw, 23px); }
 .value-sequence-essential { position: absolute; z-index: 2; left: 50%; bottom: clamp(56px, 10vh, 112px); width: min(680px, 88vw); margin: 0; transform: translateX(-50%) translateY(8px); text-align: center; font: 500 clamp(23px, 2.3vw, 38px)/1.08 var(--sans); letter-spacing: -.045em; text-shadow: 0 2px 22px #000; }
 .value-sequence-price { position: absolute; z-index: 2; left: 50%; bottom: clamp(24px, 4vh, 45px); width: 92vw; margin: 0; transform: translateX(-50%) translateY(8px); text-align: center; font-size: clamp(14px, 1.25vw, 20px); }
-.value-sequence-number { position: absolute; z-index: 2; right: 3vw; bottom: 22px; font-size: 11px; letter-spacing: .15em; }
 
 .trust-carousel { position: relative; padding: 22px 0 26px; overflow: hidden; background: #111; }
 .trust-carousel-track { display: flex; gap: 18px; padding: 0 max(5vw, 28px); overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; scroll-padding-inline: max(5vw, 28px); scrollbar-width: none; }
@@ -333,11 +332,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-spec-stage::after { content: ""; position: absolute; left: 50%; bottom: 4%; width: 46vw; max-width: 560px; aspect-ratio: 1; transform: translateX(-50%); border: 1px solid rgba(28,29,27,.07); border-radius: 50%; box-shadow: 0 0 0 6vw rgba(28,29,27,.014), 0 0 0 12vw rgba(28,29,27,.009); }
 .lunar-spec-stage img { width: min(30vw, 340px); height: auto; object-fit: contain; filter: drop-shadow(0 30px 40px rgba(28,29,27,.16)); }
 .lunar-spec-intro { position: absolute; z-index: 2; top: clamp(32px, 6.4vh, 64px); left: 50%; width: min(940px, 86vw); transform: translateX(-50%); text-align: center; }
-.lunar-spec-intro > p { margin: 0 0 10px; color: var(--gold); font-size: 15px; font-weight: 700; letter-spacing: .14em; }
-.lunar-spec-intro h2 { margin: 0; font: 500 clamp(30px, 3vw, 46px)/1.12 var(--sans); letter-spacing: -.04em; text-wrap: balance; }
-.lunar-spec-lead { display: block; margin-bottom: .18em; font-size: .58em; font-weight: 400; letter-spacing: -.005em; color: rgba(28,29,27,.72); }
-.lunar-spec-intro h2 em { font-size: 1em; color: #9c6d2e; font-style: normal; font-weight: 700; }
-.lunar-spec-number { position: absolute; z-index: 3; right: 3vw; top: clamp(24px, 4.2vh, 42px); font-size: 11px; letter-spacing: .15em; color: rgba(28,29,27,.45); }
+.lunar-spec-kicker { margin: 0 0 3px; font-size: clamp(10px, .78vw, 13px); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(28,29,27,.55); }
+.lunar-spec-intro h2 { margin: 0; font: 500 clamp(30px, 3vw, 46px)/1.05 var(--sans); letter-spacing: -.04em; text-wrap: balance; }
+.lunar-spec-lead { display: block; margin-bottom: 0; font-size: .58em; font-weight: 400; letter-spacing: -.005em; color: rgba(28,29,27,.72); }
+.lunar-spec-intro h2 em { display: block; margin-top: -.5em; font-size: 1em; color: #9b7508; font-style: normal; font-weight: 700; }
 .lunar-spec-highlights { margin: 0; padding: 0; list-style: none; }
 .lunar-spec-highlights li { width: clamp(170px, 15vw, 220px); position: absolute; z-index: 2; display: grid; grid-template-columns: 22px 1fr; gap: 9px; align-items: start; color: var(--ink); }
 .lunar-spec-highlights li::after { content: ""; position: absolute; top: 26px; width: clamp(40px, 4.4vw, 76px); border-top: 1px solid rgba(28,29,27,.18); }
@@ -684,6 +682,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .lunar-title { gap: 8px; margin-bottom: 1px; }
   /* .lunar-title img { width: 120px; }  — sin logotipo desde el 08/08/2026 */
   .lunar-title span { font-size: 56px; }
+  .lunar-frase { margin: 0 0 8px; font-size: 15px; line-height: 1.3; }
   .lunar-specs { font-size: 11px; }
   .lunar-specs i { padding: 0 3px; }
   .lunar-price { margin-top: 4px; font-size: 13px; }
@@ -700,7 +699,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .lunar-dialogue-copy { top: 24px; left: 50%; right: auto; width: calc(100% - 36px); transform: translateX(-50%); }
   .lunar-dialogue-copy h2 { margin-bottom: 13px; font-size: clamp(31px, 8.6vw, 36px); line-height: 1; }
   .lunar-dialogue-copy p { max-width: 360px; font-size: 17px; line-height: 1.26; }
-  .lunar-dialogue-number { right: 16px; bottom: 16px; }
   .value-sequence { height: 500svh; }
   .value-sequence-sticky { height: calc(100svh - 68px); top: 68px; }
   .value-sequence-image { object-position: center bottom; }
@@ -715,7 +713,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .value-cost.two { right: 3%; top: 50%; }
   .value-cost.three { left: 4%; top: 74%; }
   .value-cost.four { right: 4%; top: 74%; }
-  .value-sequence-number { right: 16px; bottom: 16px; }
   .trust-carousel { padding: 14px 0 18px; }
   .trust-carousel-track { gap: 10px; padding-inline: 16px; scroll-padding-inline: 16px; }
   .trust-card { flex-basis: calc(100vw - 48px); height: clamp(350px, 46svh, 420px); }
@@ -776,16 +773,15 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .decision-answer > a { grid-column: 1 / 3; min-height: 29px; font-size: 8px; }
   .decision-footnote { font-size: 5.5px; line-height: 1.18; }
   .lunar-spec-act { height: auto; min-height: 720px; padding-bottom: 16px; }
-  .lunar-spec-stage { align-items: start; padding-top: 168px; padding-bottom: 0; }
-  .lunar-spec-stage::after { width: 62vw; bottom: auto; top: 168px; }
+  .lunar-spec-stage { align-items: start; padding-top: 186px; padding-bottom: 0; }
+  .lunar-spec-stage::after { width: 62vw; bottom: auto; top: 186px; }
   .lunar-spec-stage img { width: 46vw; max-width: 200px; }
   .lunar-spec-intro { top: 18px; width: calc(100% - 28px); }
-  .lunar-spec-intro > p { margin-bottom: 5px; font-size: 12px; letter-spacing: .1em; }
+  .lunar-spec-kicker { margin-bottom: 6px; font-size: 9px; letter-spacing: .13em; }
   .lunar-spec-intro h2 { max-width: 350px; margin-inline: auto; font-size: clamp(24px, 6.6vw, 29px); line-height: 1.14; }
-  .lunar-spec-intro h2 em { display: block; }
+  .lunar-spec-intro h2 em { display: block; margin-top: -.35em; }
   .lunar-spec-lead { font-size: .6em; }
-  .lunar-spec-number { right: 16px; top: 16px; }
-  .lunar-spec-highlights { position: static; margin: 0 14px; padding-top: calc(168px + min(46vw, 200px) + 20px); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(28,29,27,.14); border-left: 1px solid rgba(28,29,27,.14); }
+  .lunar-spec-highlights { position: static; margin: 0 14px; padding-top: calc(186px + min(46vw, 200px) + 20px); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(28,29,27,.14); border-left: 1px solid rgba(28,29,27,.14); }
   .lunar-spec-highlights li, .lunar-spec-highlights li:nth-child(odd), .lunar-spec-highlights li:nth-child(even) { width: auto; min-width: 0; min-height: 78px; position: static; padding: 10px 8px; display: grid; grid-template-columns: 22px 1fr; gap: 8px; text-align: left; border-right: 1px solid rgba(28,29,27,.14); border-bottom: 1px solid rgba(28,29,27,.14); }
   .lunar-spec-highlights li::after { display: none; }
   .lunar-spec-highlights li:nth-child(odd) > span, .lunar-spec-highlights li:nth-child(odd) > div { grid-column: auto; grid-row: auto; }
@@ -1106,6 +1102,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    negrita y en la tinta plena, sobre el gris del párrafo, para que sea
    lo que se lee primero de la frase. */
 .lunar-dialogue-copy b{ font-weight: 700; color: #171513; }
+.lunar-dialogue-copy b.dialogue-gold{ color: #9b7508; }
 /* Los tres renglones del diálogo (Óscar, 08/08/2026). Van en párrafos
    sueltos, así que necesitan un respiro entre ellos: `p { margin: 0 auto }`
    los dejaba pegados y se leían como un bloque corrido. */
