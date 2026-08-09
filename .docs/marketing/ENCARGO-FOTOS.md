@@ -34,9 +34,10 @@ La esfera no se puede montar por capas: va bajo el cristal, con las agujas encim
 |---|---|
 | Lienzo | **1000 × 1000 px**, cuadrado |
 | Fondo | **Transparente**. Nunca blanco |
-| Centro de la caja | Exactamente en **x = 500, y = 500** |
+| Centro | El **eje de las asas** en **x = 500**. La corona y los pulsadores NO cuentan |
 | Puntas de las asas | Arriba en **y = 200**, abajo en **y = 800** |
 | Ancho máximo | 640 px, corona y pulsadores incluidos |
+| **Hueco entre asas** | **266 px exactos**, de x = 367 a x = 633 |
 | Plantilla | `plantilla-cabeza.svg` |
 
 ### 2 · BRAZALETE — 125 fotos
@@ -48,7 +49,7 @@ El brazalete **entero, extendido en vertical, con el hueco de la caja vacío** e
 | Fondo | **Transparente** |
 | Centro del hueco | **x = 500, y = 1200** |
 | Bordes del hueco | Arriba **y = 900**, abajo **y = 1500** |
-| Ancho en el asa | unos 280 px |
+| **Ancho en el asa** | **266 px exactos**, de x = 367 a x = 633 |
 | Plantilla | `plantilla-brazalete.svg` |
 
 Los dos lienzos comparten el mismo eje vertical y la misma escala. Con los centros alineados, **las asas de la cabeza caen justo en los bordes del hueco**. Ahí está todo el truco.
@@ -57,11 +58,13 @@ Los dos lienzos comparten el mismo eje vertical y la misma escala. Con los centr
 
 ## Las cinco reglas que no se pueden saltar
 
+0. **Las dos capas comparten escala.** El hueco entre las asas de la cabeza y el ancho del brazalete son **el mismo número: 266 px**. Si no coinciden, la correa se ve estrecha dentro de las asas y el montaje canta.
 1. **Trípode fijo.** Misma altura, misma distancia y misma óptica en las 262 tomas. Si se mueve la cámara, hay que rehacer el bloque entero.
 2. **Misma luz.** No se cambia nada entre tomas: ni potencia, ni difusor, ni posición. Dos brazaletes con luces distintas no se pueden mezclar con la misma cabeza.
 3. **Fondo recortado de verdad.** PNG con transparencia. Un fondo blanco recortado a mano deja un halo que se ve en cuanto la capa va encima de otra.
-4. **Las asas siempre en el mismo punto.** Es la única coordenada que importa. Cargar la plantilla como capa y cuadrar cada toma encima.
-5. **El nombre del archivo es la referencia.** Viene en el CSV, columna `Referencia`. Sin inventar, sin espacios, sin acentos, sin mayúsculas distintas.
+4. **Centrar por el eje de las asas.** No por el contorno de la foto: la corona sobresale por la derecha y desplaza el centro más de 20 px. Se centra por donde entra la correa.
+5. **Las asas siempre en el mismo punto.** Es la única coordenada que importa. Cargar la plantilla como capa y cuadrar cada toma encima.
+6. **El nombre del archivo es la referencia.** Viene en el CSV, columna `Referencia`. Sin inventar, sin espacios, sin acentos, sin mayúsculas distintas.
 
 ---
 
@@ -117,6 +120,17 @@ El CSV trae, por cada foto: **Tipo · Referencia · Modelo · Nombre · Detalle 
 Las cabezas llevan **dos URL**: la de la caja y la de la esfera, porque hay que montarlas antes de fotografiar.
 
 ---
+
+## Resultado de la primera prueba (09/08/2026)
+
+Se probaron `LO-03-C1-E1.png` y `Brz-316-A01.png`. **Los lienzos, la transparencia, los nombres y el encaje vertical: perfectos.** Dos cosas a corregir:
+
+| | Debería | Estaba |
+|---|---|---|
+| Ancho del brazalete | 266 px | **222 px** — 16 % estrecho |
+| Eje de la cabeza | Asas en x = 500 | Contorno en x = 500 → asas en **x = 478** |
+
+Las dos están ya reflejadas en las plantillas.
 
 ## Antes de empezar
 
