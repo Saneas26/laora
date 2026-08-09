@@ -1435,7 +1435,7 @@
           {
             "id": "estandar",
             "nombre": "",
-            "movimiento": "ETA 2430 (suizo), 11½ líneas",
+            "movimiento": "Arquitectura ETA 2824-2, 11½ líneas",
             "movimientoTipo": "Automático, 3 agujas",
             "frecuencia": "21.600 alt/h (3 Hz)",
             "autonomia": "~42 h de reserva de marcha",
