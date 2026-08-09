@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 7
-V_JS = 8
+V_CSS = 9
+V_JS = 9
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -97,6 +97,56 @@ def fijo(rotulo, titulo, apunte):
     </div>'''
 
 
+def eje_tarjetas(clave, rotulo, pregunta, opciones, etiqueta):
+    """Tarjetas de ancho REPARTIDO: dos se llevan media pantalla cada una,
+    tres un tercio. Óscar, 08/08/2026. Por eso la rejilla se declara con
+    tantas columnas como opciones y no con `auto-fit`."""
+    botones = '\n'.join(
+        f'        <button class="cf-tarjeta" type="button" data-{clave}="{i}" '
+        f'aria-pressed="{"true" if i == 0 else "false"}">{etiqueta(o)}</button>'
+        for i, o in enumerate(opciones))
+    p = f'\n      <p class="cf-pregunta">{pregunta}</p>' if pregunta else ''
+    return f'''    <div class="cf-grupo">
+      <p class="cf-rotulo">{rotulo} <b>{len(opciones)} opciones</b></p>{p}
+      <div class="cf-tarjetas" style="grid-template-columns:repeat({len(opciones)},1fr)" role="group" aria-label="Elegir {rotulo.lower()}">
+{botones}
+      </div>
+    </div>'''
+
+
+def eje_sub(clave, rotulo, valores, etiquetas):
+    """Un sub-eje de la caja: tamaño o color. Las opciones que no existen
+    con lo ya elegido se apagan, no se esconden."""
+    botones = '\n'.join(
+        f'        <button class="cf-ficha" type="button" data-sub="{clave}" data-valor="{v}" '
+        f'aria-pressed="{"true" if i == 0 else "false"}">{etiquetas.get(v, v)}</button>'
+        for i, v in enumerate(valores))
+    return f'''    <div class="cf-grupo">
+      <p class="cf-rotulo">{rotulo}</p>
+      <div class="cf-fichas" role="group" aria-label="Elegir {rotulo.lower()}">
+{botones}
+      </div>
+    </div>'''
+
+
+def eje_grupos(clave, rotulo, grupos, opciones, nombres):
+    """La esfera del Trinchera va agrupada por familia: Murph y Khaki."""
+    bloques = []
+    for g in grupos:
+        bs = '\n'.join(
+            f'          <button class="cf-ficha" type="button" data-{clave}="{i}" '
+            f'aria-pressed="{"true" if i == 0 else "false"}">{nombres.get(o["ref"], o["nombre"])}</button>'
+            for i, o in enumerate(opciones) if o['ref'] in g['refs'])
+        bloques.append(f'''      <p class="cf-subrotulo">{g['nombre']}</p>
+        <div class="cf-fichas" role="group" aria-label="Elegir esfera {g['nombre']}">
+{bs}
+        </div>''')
+    return f'''    <div class="cf-grupo">
+      <p class="cf-rotulo">{rotulo} <b>{len(opciones)} opciones</b></p>
+{chr(10).join(bloques)}
+    </div>'''
+
+
 def eje_fichas(clave, rotulo, opciones, etiqueta):
     botones = '\n'.join(
         f'        <button class="cf-ficha" type="button" data-{clave}="{i}" '
@@ -110,11 +160,11 @@ def eje_fichas(clave, rotulo, opciones, etiqueta):
     </div>'''
 
 
-def eje_brazalete(familias):
+def eje_brazalete(familias, nombres):
     botones = '\n'.join(
         f'        <button class="cf-brazalete" type="button" data-brz="{i}" '
         f'aria-pressed="{"true" if i == 0 else "false"}">'
-        f'<i></i><span>{f["nombre"]}</span></button>'
+        f'<i></i><span>{nombres.get(f["id"], f["nombre"])}</span></button>'
         for i, f in enumerate(familias))
     return f'''    <div class="cf-grupo">
       <p class="cf-rotulo">Brazalete <b>{len(familias)} familias</b></p>
@@ -141,13 +191,29 @@ def pantalla(slug):
     suelo_esf = min(e['coste'] for e in esf) if esf else 0
     barato = min(m['coste'] for m in mov) + min(c['coste'] for c in caj) + suelo_esf + suelo_brz
 
+    ej = d.get('ejes', {})
     ejes = []
-    ejes.append(fijo('Movimiento', mov[0]['rot'], mov[0]['cal']) if len(mov) == 1 else
-                eje_fichas('mov', 'Movimiento', mov,
-                           lambda o: f'<b>{o["acabado"]}</b><span>{o["rot"]}</span>'))
-    ejes.append(fijo('Caja', caj[0]['nombre'], euros(caj[0]['coste'])) if len(caj) == 1 else
-                eje_fichas('caja', 'Caja', caj, lambda o: o['nombre']))
-    if len(esf) > 1:
+
+    tm = (ej.get('mov') or {}).get('tarjetas', {})
+    if len(mov) == 1:
+        ejes.append(fijo('Movimiento', mov[0]['rot'], mov[0]['cal']))
+    else:
+        ejes.append(eje_tarjetas('mov', 'Movimiento', (ej.get('mov') or {}).get('pregunta'), mov,
+                                 lambda o: tm.get(o['ref'], o['rot'])))
+
+    sub = (ej.get('caja') or {}).get('sub')
+    if sub:
+        for s_ in sub:
+            ejes.append(eje_sub(s_['clave'], s_['rotulo'], s_['valores'], s_.get('etiqueta', {})))
+    elif len(caj) == 1:
+        ejes.append(fijo('Caja', caj[0]['nombre'], euros(caj[0]['coste'])))
+    else:
+        ejes.append(eje_fichas('caja', 'Caja', caj, lambda o: o['nombre']))
+
+    ge = (ej.get('esf') or {})
+    if len(esf) > 1 and ge.get('grupos'):
+        ejes.append(eje_grupos('esf', 'Esfera', ge['grupos'], esf, ge.get('nombres', {})))
+    elif len(esf) > 1:
         ejes.append(eje_fichas('esf', 'Esfera', esf, lambda o: o['nombre']))
     elif len(esf) == 1:
         ejes.append(fijo('Esfera', esf[0]['nombre'], 'con sus agujas'))
@@ -156,7 +222,7 @@ def pantalla(slug):
       <p class="cf-rotulo">Características</p>
       <dl class="cf-specs" data-specs></dl>
     </div>''')
-    ejes.append(eje_brazalete(brz))
+    ejes.append(eje_brazalete(brz, (ej.get('brz') or {}).get('nombres', {})))
 
     datos = json.dumps({**d, 'mult': MULT, 'fotos': FOTOS.get(slug, {}),
                         'fotoDefecto': FOTO_POR_DEFECTO},
@@ -182,8 +248,6 @@ def pantalla(slug):
 <div class="cf-cuerpo">
 
   <section class="cf-visor" aria-label="El reloj que estás configurando">
-    <div class="cf-rotulos"><p class="cf-viendo" data-viendo aria-live="polite"></p></div>
-
     <div class="cf-montaje">
       <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
       <div class="cf-cabeza">
@@ -193,7 +257,6 @@ def pantalla(slug):
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
 
-    <p class="cf-desglose" data-desglose></p>
     <p class="cf-aviso-maqueta">La foto es un montaje de dos capas: la cabeza del reloj
       y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>

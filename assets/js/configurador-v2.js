@@ -16,7 +16,40 @@
   var $ = function (s) { return document.querySelector(s); };
   var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
 
-  var e = { mov: 0, caja: 0, esf: 0, brz: 0, v: 0 };
+  var SUB = ((D.ejes || {}).caja || {}).sub || null;
+  var e = { mov: 0, caja: 0, esf: 0, brz: 0, v: 0, diam: null, color: null };
+  if (SUB) { e.diam = SUB[0].valores[0]; e.color = SUB[1].valores[0]; }
+
+  /* El FONDO no se elige: lo decide el movimiento. Sólida con el cuarzo,
+     cristal con el automático, porque un automático se enseña por detrás
+     y un cuarzo no hay nada que enseñar (Óscar, 08/08/2026). */
+  function fondo() {
+    var f = ((D.ejes || {}).mov || {}).fondo;
+    return f ? f[D.mov[e.mov].ref] : null;
+  }
+  function cajaDe(diam, color) {
+    var fo = fondo();
+    for (var i = 0; i < D.caj.length; i++) {
+      var c = D.caj[i];
+      if (c.diam === diam && c.color === color && c.fondo === fo) return i;
+    }
+    return -1;
+  }
+  /* Al cambiar de movimiento o de tamaño puede desaparecer el color que
+     estaba puesto —el titanio solo existe con fondo sólido—: se cae al
+     primero que sí exista, no se deja una caja imposible. */
+  function ajustaCaja() {
+    if (!SUB) return;
+    var i = cajaDe(e.diam, e.color);
+    if (i < 0) {
+      var colores = SUB[1].valores;
+      for (var k = 0; k < colores.length; k++) {
+        var j = cajaDe(e.diam, colores[k]);
+        if (j >= 0) { e.color = colores[k]; i = j; break; }
+      }
+    }
+    if (i >= 0) e.caja = i;
+  }
 
   function euros(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
 
@@ -132,15 +165,22 @@
     $('[data-pendiente]').hidden = !!foto;
     var fondo = dibujo(p.fam.nombre, p.v.nom);
     todos('[data-correa]').forEach(function (el) { el.style.background = fondo; });
-    $('[data-viendo]').innerHTML = '<b>' + p.caja.nombre + '</b> <span>· ' +
-      (p.esf ? p.esf.nombre + ' · ' : '') + p.fam.nombre + '</span>';
+  }
+
+  function nombreEsf(o) {
+    var n = ((D.ejes || {}).esf || {}).nombres || {};
+    return n[o.ref] || o.nombre;
+  }
+  function nombreFam(f) {
+    var n = ((D.ejes || {}).brz || {}).nombres || {};
+    return n[f.id] || f.nombre;
   }
 
   function pintaSpecs() {
     var p = piezas();
     var filas = [['Movimiento', p.mov.cal], ['Acabado', p.mov.acabado], ['Caja', p.caja.nombre]];
-    if (p.esf) filas.push(['Esfera', p.esf.nombre]);
-    filas.push(['Brazalete', p.fam.nombre]);
+    if (p.esf) filas.push(['Esfera', nombreEsf(p.esf)]);
+    filas.push(['Brazalete', nombreFam(p.fam)]);
     $('[data-specs]').innerHTML = filas.map(function (f) {
       return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>';
     }).join('');
@@ -159,7 +199,7 @@
     $('[data-var-nombre]').textContent = p.v.nom;
     $('[data-cuenta-var]').textContent = p.fam.v.length + ' opciones';
     $('[data-grupo-var]').hidden = p.fam.v.length < 2;
-    $('[data-detalle]').textContent = p.fam.nombre + ' · ' + p.fam.v.length +
+    $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + p.fam.v.length +
       (p.fam.v.length === 1 ? ' acabado' : ' acabados') + ' · desde ' +
       euros(Math.min.apply(null, p.fam.v.map(function (x) { return x.c; })));
   }
@@ -168,16 +208,12 @@
     var p = piezas(), c = coste(), pvp = redondea(c * D.mult);
     $('[data-precio]').textContent = euros(pvp);
     $('[data-ref]').textContent = referencia();
-    $('[data-barra-nombre]').textContent = p.caja.nombre + ' · ' + p.fam.nombre;
+    $('[data-barra-nombre]').textContent = p.caja.nombre +
+      (p.esf ? ' · ' + nombreEsf(p.esf) : '') + ' · ' + nombreFam(p.fam);
     $('[data-barra-var]').textContent = p.v.nom;
-    $('[data-desglose]').innerHTML =
-      '<b>Lo que hay que comprar</b><br>' +
-      'Movimiento <i>' + p.mov.ref + '</i> ' + euros(p.mov.coste) + '<br>' +
-      'Caja <i>' + p.caja.ref + '</i> ' + euros(p.caja.coste) + '<br>' +
-      (p.esf ? 'Esfera <i>' + p.esf.ref + '</i> ' + euros(p.esf.coste) + '<br>' : '') +
-      'Brazalete <i>' + p.v.ref + '</i> ' + euros(p.v.c) + '<br>' +
-      'Suma <i>' + euros(c) + '</i><br>' +
-      '× ' + String(D.mult).replace('.', ',') + ' → <b>' + euros(pvp) + '</b>';
+    /* El desglose de coste NO se pinta: es información interna y el
+       cliente no tiene por qué ver lo que nos cuesta cada pieza
+       (Óscar, 08/08/2026). Vive en el panel de pedidos. */
   }
 
   function pinta() {
@@ -198,8 +234,19 @@
     }
     todos('[data-mov]').forEach(function (el) {
       el.setAttribute('aria-pressed', String(Number(el.dataset.mov) === e.mov)); });
-    todos('[data-caja]').forEach(function (el) {
-      el.setAttribute('aria-pressed', String(Number(el.dataset.caja) === e.caja)); });
+    if (SUB) {
+      ajustaCaja();
+      todos('[data-sub]').forEach(function (el) {
+        var cl = el.dataset.sub, v = el.dataset.valor;
+        var vale = cl === 'diam' ? cajaDe(v, e.color) >= 0 || SUB[1].valores.some(function (c) { return cajaDe(v, c) >= 0; })
+                                 : cajaDe(e.diam, v) >= 0;
+        el.disabled = !vale;
+        el.setAttribute('aria-pressed', String(v === (cl === 'diam' ? e.diam : e.color)));
+      });
+    } else {
+      todos('[data-caja]').forEach(function (el) {
+        el.setAttribute('aria-pressed', String(Number(el.dataset.caja) === e.caja)); });
+    }
     todos('[data-brz]').forEach(function (el) {
       el.setAttribute('aria-pressed', String(Number(el.dataset.brz) === e.brz)); });
     pintaVariantes();
@@ -211,15 +258,16 @@
   function pintaMuestras() {
     todos('[data-brz] i').forEach(function (el, i) {
       var f = D.brz[i];
-      el.style.background = dibujo(f.nombre, f.v[0].nom);
+      el.style.background = dibujo(f.nombre + ' ' + nombreFam(f), f.v[0].nom);
     });
   }
 
   document.addEventListener('click', function (ev) {
-    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var]');
+    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub]');
     if (!b || b.disabled) return;
     var d = b.dataset;
-    if (d.mov !== undefined) e.mov = Number(d.mov);
+    if (d.sub !== undefined) { if (d.sub === 'diam') e.diam = d.valor; else e.color = d.valor; }
+    else if (d.mov !== undefined) e.mov = Number(d.mov);
     else if (d.caja !== undefined) e.caja = Number(d.caja);
     else if (d.esf !== undefined) e.esf = Number(d.esf);
     else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; }

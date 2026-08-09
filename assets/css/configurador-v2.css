@@ -84,9 +84,13 @@ body{
   padding:0 22px;background:var(--paper);
   border-bottom:1px solid var(--linea-suave);
 }
-.cf-marca{display:flex;align-items:center;gap:10px}
-.cf-marca img{width:74px;height:auto}
-.cf-marca b{font-size:17px;font-weight:500;letter-spacing:-.02em}
+/* `align-items:center` no bastaba: el logotipo es una imagen y el
+   nombre una caja de texto con su interlineado, así que la base del
+   texto caía por encima del centro óptico del logo. Con `line-height:1`
+   la caja del texto mide lo que la letra y las dos se centran de verdad. */
+.cf-marca{display:flex;align-items:center;gap:10px;line-height:1}
+.cf-marca img{width:74px;height:auto;display:block}
+.cf-marca b{font-size:17px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block}
 /* La referencia vive en la cabecera, siempre visible y siempre con las
    palabras al lado (el rótulo del visor). Tabular para que los cuatro
    segmentos no bailen de ancho al cambiar de opción. */
@@ -180,10 +184,10 @@ body{
    la barra de desplazamiento. Con 11 px cabe la peor combinación —la
    familia de más colores— y siguen leyéndose como bloques separados. */
 .cf-panel{
-  display:flex;flex-direction:column;gap:11px;
-  padding:18px 26px;min-height:0;overflow:auto;background:var(--paper);
+  display:flex;flex-direction:column;gap:9px;
+  padding:14px 26px;min-height:0;overflow:auto;background:var(--paper);
 }
-.cf-grupo{display:flex;flex-direction:column;gap:7px}
+.cf-grupo{display:flex;flex-direction:column;gap:6px}
 .cf-rotulo{
   display:flex;align-items:baseline;justify-content:space-between;gap:12px;
   font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
@@ -219,9 +223,27 @@ body{
    panel se saldría de la pantalla. Una ficha de texto mide 34 px y las
    catorce caben en tres renglones. Se encoge el envase, no la letra.
    ------------------------------------------------------------ */
-.cf-fichas{display:flex;flex-wrap:wrap;gap:6px}
+/* ---------- TARJETAS: el eje del movimiento ----------
+   Se REPARTEN el ancho: dos se llevan media pantalla cada una, tres un
+   tercio (Óscar, 08/08/2026). Por eso el número de columnas lo escribe
+   el generador en el propio elemento y no hay `auto-fit` que valga:
+   `auto-fit` deja la última fila coja cuando el número no es redondo. */
+.cf-tarjetas{display:grid;gap:10px}
+.cf-tarjeta{
+  display:flex;align-items:center;justify-content:center;min-height:46px;
+  padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--paper);
+  font-size:15px;font-weight:500;line-height:1.2;letter-spacing:-.01em;text-align:center;
+  transition:border-color .15s,box-shadow .15s;
+}
+.cf-tarjeta:hover{border-color:rgba(28,29,27,.42)}
+.cf-tarjeta[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink) inset;font-weight:600}
+/* La pregunta que se le hace al cliente antes de las tarjetas. */
+.cf-pregunta{margin:-2px 0 2px;font-size:13.5px;color:var(--muted)}
+.cf-subrotulo{margin:4px 0 -2px;font-size:12px;font-weight:600;letter-spacing:-.01em}
+
+.cf-fichas{display:flex;flex-wrap:wrap;gap:5px}
 .cf-ficha{
-  padding:7px 12px;border:1px solid var(--line);border-radius:8px;
+  padding:6px 11px;border:1px solid var(--line);border-radius:8px;
   background:var(--paper);font-size:12.5px;line-height:1.2;letter-spacing:-.01em;
   transition:border-color .15s,box-shadow .15s;
 }
@@ -242,7 +264,7 @@ body{
 .cf-specs{
   display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);
   gap:3px 12px;align-items:baseline;
-  padding:10px 14px;border-radius:11px;background:var(--ivory);
+  padding:8px 14px;border-radius:11px;background:var(--ivory);
   font-size:12.5px;
 }
 .cf-specs dt{color:var(--muted);white-space:nowrap}
@@ -259,7 +281,7 @@ body{
   border:1px solid var(--line);border-radius:10px;background:var(--paper);
   text-align:center;transition:border-color .15s,box-shadow .15s;
 }
-.cf-brazalete i{display:block;height:28px;border-radius:6px;background:var(--acero)}
+.cf-brazalete i{display:block;height:24px;border-radius:6px;background:var(--acero)}
 .cf-brazalete span{
   font-size:12.5px;line-height:1.2;letter-spacing:-.01em;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
