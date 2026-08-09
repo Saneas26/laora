@@ -26,10 +26,16 @@
     return v.toFixed(2).replace('.', ',') + ' €';
   }
 
-  /* Al 9,90 más cercano. Math.floor(p/10)*10+9,90 da el 9,90 justo por
-     debajo; el de arriba es ese más diez. Gana el que esté más cerca. */
+  /* Al 9,90 más cercano: se buscan el 9,90 de abajo y el de arriba, y
+     gana el que esté más cerca.
+
+     OJO CON EL DE ABAJO. La cuenta evidente —`floor(p/10)*10 + 9,90`—
+     está mal, y calla: para 264,56 € devuelve 269,90, que está POR
+     ENCIMA. Solo acierta cuando los decimales ya pasan de 9,90. Hay que
+     restar el 9,90 ANTES de truncar. Con la versión mala, cinco de las
+     siete configuraciones del Lunar salían diez euros caras. */
   function redondea(p) {
-    var bajo = Math.floor(p / 10) * 10 + 9.90;
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
     var alto = bajo + 10;
     return (p - bajo) <= (alto - p) ? bajo : alto;
   }

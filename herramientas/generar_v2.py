@@ -68,8 +68,8 @@ from cabecera_laora import (RECURSOS as CABECERA_RECURSOS,
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS con max-age=14400.
-V_CSS = 33
-V_JS = 8
+V_CSS = 34
+V_JS = 9
 
 with open(os.path.join(RAIZ, 'assets/datos/catalogo.json'), encoding='utf-8') as f:
     RELOJES = json.load(f)['relojes']
@@ -467,18 +467,32 @@ ACTO_2 = f"""
 
 
 # ============================================================
-# ACTO 3 · ORGULLO  ·  LunarPride.tsx
+# ACTO 3 · QUITAR LO QUE NO MEJORA EL RELOJ
+# ------------------------------------------------------------
+# El relojero aparta cuatro costes de forma literal. La fotografía sostiene
+# el gesto; los cuatro nombres y sus flechas viven en HTML para que se lean
+# con nitidez y se adapten a cualquier pantalla.
 # ============================================================
 ACTO_3 = f"""
-  <section class="lunar-pride" aria-labelledby="lunar-pride-title">
-    <img class="lunar-pride-image" src="{V2}/lunar-pride-reflection-v2.jpg" alt="Reflejo de un hombre contemplando orgulloso su cronógrafo en un escaparate urbano">
-    <div class="lunar-pride-veil" aria-hidden="true"></div>
-    <div class="lunar-pride-copy">
-      <p>el gesto</p>
-      <h2 id="lunar-pride-title">No es mirar la hora</h2>
-      <p>es enseñarlo, sin enseñarlo</p>
+  <section class="value-sequence" aria-labelledby="value-sequence-title" data-value-sequence>
+    <div class="value-sequence-sticky">
+      <img class="value-sequence-image" src="{V2}/acto3-relojero-esencial.png" alt="Relojero apartando del Cero Cero los costes que no mejoran el reloj">
+      <div class="value-sequence-veil" aria-hidden="true"></div>
+      <div class="value-sequence-copy">
+        <p class="value-sequence-kicker">POR QUÉ PODEMOS HACER BUENOS RELOJES</p>
+        <h2 id="value-sequence-title">Quitando todo lo que<br><em>no los mejora.</em></h2>
+      </div>
+      <div class="value-sequence-costs" aria-label="Costes que laOra elimina">
+        <p class="value-cost left one" data-value-cost="1"><span>←</span> Intermediarios</p>
+        <p class="value-cost right two" data-value-cost="2">Comerciales <span>→</span></p>
+        <p class="value-cost left three" data-value-cost="3"><span>←</span> Campañas millonarias</p>
+        <p class="value-cost right four" data-value-cost="4">Embalajes caros <span>→</span></p>
+      </div>
+      <p class="value-sequence-result" data-value-result>Y quedándonos con lo importante:</p>
+      <p class="value-sequence-essential" data-value-essential>Mismo acero. Mismo zafiro.<br>Calibres a la misma altura.</p>
+      <p class="value-sequence-price" data-value-price>Relojes de calidad a precios honestos.</p>
+      <span class="value-sequence-number" aria-hidden="true">03</span>
     </div>
-    <span class="lunar-pride-number" aria-hidden="true">03</span>
   </section>"""
 
 
