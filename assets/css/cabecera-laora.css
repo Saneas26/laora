@@ -37,7 +37,7 @@
 .site-header *, .site-header *::before, .site-header *::after { box-sizing: border-box; }
 
 .site-header .brand { min-width: 150px; }
-.site-header .brand-logo { width: 118px; display: inline-flex; align-items: center; }
+.site-header .brand-logo { width: 114px; display: inline-flex; align-items: center; }
 .site-header .brand-logo img { width: 100%; height: auto; display: block; }
 
 /* El logotipo dentro de una palabra del menú —«Por qué laOra»— va en
@@ -102,7 +102,7 @@
 
 @media (max-width: 720px) {
   .site-header { height: 68px; }
-  .site-header .brand-logo { width: 104px; }
+  .site-header .brand-logo { width: 100px; }
   .site-header .header-actions { gap: 13px; }
   .site-header .main-nav { top: 68px; }
 }
