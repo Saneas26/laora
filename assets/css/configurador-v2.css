@@ -314,7 +314,9 @@ body{
   font-size:12.5px;line-height:1.2;letter-spacing:-.01em;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.cf-brazalete:hover{border-color:rgba(28,29,27,.42)}
+.cf-brazalete:hover:not(:disabled){border-color:rgba(28,29,27,.42)}
+.cf-brazalete:disabled{opacity:.32;cursor:not-allowed}
+.cf-brazalete:disabled span{text-decoration:line-through}
 .cf-brazalete[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink) inset}
 .cf-brazalete[aria-pressed="true"] span{font-weight:600}
 
@@ -327,9 +329,18 @@ body{
   border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.08);
   transition:transform .12s,box-shadow .12s;
 }
-.cf-color:hover{transform:scale(1.08)}
+.cf-color:hover:not(:disabled){transform:scale(1.08)}
 .cf-color[aria-pressed="true"]{
   box-shadow:0 0 0 2px var(--paper) inset,0 0 0 3px var(--ink);
+}
+/* El color que no va con la caja elegida se tacha, no se esconde: así se
+   ve que existe y que es la caja la que manda. */
+.cf-color:disabled{
+  position:relative;opacity:.3;cursor:not-allowed;box-shadow:none;
+}
+.cf-color:disabled::after{
+  content:"";position:absolute;inset:-1px;border-radius:999px;
+  background:linear-gradient(45deg,transparent 45%,rgba(28,29,27,.6) 45% 55%,transparent 55%);
 }
 .cf-color-nombre{font-size:12.5px;color:var(--muted);margin-left:2px}
 

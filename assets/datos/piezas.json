@@ -1092,7 +1092,48 @@
    "mov": {},
    "caja": {},
    "esf": {},
-   "brz": {}
+   "brz": {
+    "compat": {
+     "C1": [
+      "Brz-Goma-Bit-01",
+      "Brz-Goma-Bit-02",
+      "Brz-Goma-Bit-03",
+      "Brz-Acero-Bit-01",
+      "Brz-Acero-Bit-05",
+      "Brz-Acero-Bit-07"
+     ],
+     "C2": [
+      "Brz-Goma-Bit-01",
+      "Brz-Goma-Bit-02",
+      "Brz-Goma-Bit-03",
+      "Brz-Acero-Bit-04",
+      "Brz-Acero-Bit-05"
+     ],
+     "C3": [
+      "Brz-Goma-Bit-01",
+      "Brz-Goma-Bit-02",
+      "Brz-Goma-Bit-03",
+      "Brz-Acero-Bit-01",
+      "Brz-Acero-Bit-02",
+      "Brz-Acero-Bit-03",
+      "Brz-Acero-Bit-05",
+      "Brz-Acero-Bit-06",
+      "Brz-Acero-Bit-07"
+     ],
+     "C4": [
+      "Brz-Goma-Bit-01",
+      "Brz-Goma-Bit-02",
+      "Brz-Goma-Bit-03",
+      "Brz-Acero-Bit-02"
+     ],
+     "C5": [
+      "Brz-Goma-Bit-01",
+      "Brz-Goma-Bit-02",
+      "Brz-Goma-Bit-03",
+      "Brz-Acero-Bit-02"
+     ]
+    }
+   }
   }
  }
 }
