@@ -1,5 +1,5 @@
 {
-  "_": "PROVISIONAL · Maqueta del configurador de tres ejes (Óscar, 08/08/2026). Volcado a mano de las pestañas Movimientos, Cajas y Brazeletes del libro `laora-biblioteca-materiales` (1hOEjyzjzHewt...) tal como estaban el 08/08/2026. NO es la fuente de verdad: en cuanto se decida cómo quedan las tres bibliotecas, esto se genera solo y este fichero desaparece.",
+  "_": "PROVISIONAL · Maqueta del configurador de tres ejes. Volcado de las pestañas Movimientos, Cajas y Brazeletes del libro `laora-biblioteca-materiales` con la numeración de piezas del 08/08/2026 (columna Ref_Pieza). El código de modelo es el de la columna A de Movimientos, que es la que mandó Óscar: el Lunar es LO-03, no LO-01.",
   "_nombres": "Los `nombre` públicos los he escrito yo y ESTÁN SIN APROBAR. En la hoja estas piezas se llaman «tipo Rolex», «tipo Omega», «tipo Daytona» y «Ostra»: nombres de marcas ajenas que no pueden salir en una página de venta. `interno` conserva el nombre de la hoja para poder comprar; `nombre` es lo único que ve el cliente.",
   "_precio": "PVP = coste de las tres piezas × 2,7235, redondeado al 9,90 más cercano. El 2,7235 no es un número inventado: es el multiplicador que reproduce exactamente los 219,90 € que el Lunar tiene publicados hoy con su configuración más barata.",
   "modelo": "lunar",
@@ -29,7 +29,8 @@
           "Autonomía",
           "Pila SR927SW, unos 3 años"
         ]
-      ]
+      ],
+      "ref": "M1"
     }
   ],
   "cajas": [
@@ -69,7 +70,8 @@
           "Ancho de asa",
           "20 mm"
         ]
-      ]
+      ],
+      "ref": "C1"
     },
     {
       "id": "bisel-azul",
@@ -107,7 +109,8 @@
           "Ancho de asa",
           "20 mm"
         ]
-      ]
+      ],
+      "ref": "C2"
     }
   ],
   "brazaletes": [
@@ -126,7 +129,8 @@
           "coste": 7.39,
           "tonos": [
             "#c7cbcf"
-          ]
+          ],
+          "ref": "B01.1"
         }
       ],
       "variante": "Color"
@@ -146,30 +150,12 @@
           "coste": 30.79,
           "tonos": [
             "#c7cbcf"
-          ]
-        },
-        {
-          "id": "plata-oro-rosa",
-          "nombre": "Plata y oro rosa",
-          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#c9a08a 50% 100%)",
-          "coste": 30.79,
-          "tonos": [
-            "#c7cbcf",
-            "#c9a08a"
-          ]
-        },
-        {
-          "id": "plata-oro",
-          "nombre": "Plata y oro",
-          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#cbae6d 50% 100%)",
-          "coste": 30.79,
-          "tonos": [
-            "#c7cbcf",
-            "#cbae6d"
-          ]
+          ],
+          "ref": "B02.1"
         }
       ],
-      "variante": "Color"
+      "variante": "Color",
+      "_aviso": "La hoja tiene los seis colores en una celda; hace falta una fila por color."
     },
     {
       "id": "acero-macizo-316",
@@ -186,7 +172,8 @@
           "coste": 21.79,
           "tonos": [
             "#c7cbcf"
-          ]
+          ],
+          "ref": "B03.1"
         },
         {
           "id": "5a",
@@ -195,7 +182,8 @@
           "coste": 21.79,
           "tonos": [
             "#c7cbcf"
-          ]
+          ],
+          "ref": "B03.2"
         },
         {
           "id": "9a",
@@ -204,7 +192,8 @@
           "coste": 21.79,
           "tonos": [
             "#c7cbcf"
-          ]
+          ],
+          "ref": "B03.3"
         }
       ],
       "variante": "Eslabonado"
@@ -224,7 +213,8 @@
           "coste": 59.69,
           "tonos": [
             "#c7cbcf"
-          ]
+          ],
+          "ref": "B06.1"
         }
       ],
       "variante": "Color"
@@ -244,7 +234,8 @@
           "coste": 78.39,
           "tonos": [
             "#c7cbcf"
-          ]
+          ],
+          "ref": "B07.1"
         }
       ],
       "variante": "Color"
@@ -264,7 +255,8 @@
           "coste": 55.39,
           "tonos": [
             "#b9bdc1"
-          ]
+          ],
+          "ref": "B08.1"
         },
         {
           "id": "pulido",
@@ -273,7 +265,8 @@
           "coste": 55.39,
           "tonos": [
             "#dfe3e6"
-          ]
+          ],
+          "ref": "B08.2"
         }
       ],
       "variante": "Acabado"
@@ -293,7 +286,8 @@
           "tonos": [
             "#c7cbcf"
           ],
-          "muestra": "#c7cbcf"
+          "muestra": "#c7cbcf",
+          "ref": "B09.1"
         },
         {
           "id": "b4",
@@ -303,7 +297,8 @@
             "#c7cbcf",
             "#c9a08a"
           ],
-          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#c9a08a 50% 100%)"
+          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#c9a08a 50% 100%)",
+          "ref": "B09.2"
         },
         {
           "id": "c1",
@@ -312,7 +307,8 @@
           "tonos": [
             "#b9bdc1"
           ],
-          "muestra": "#b9bdc1"
+          "muestra": "#b9bdc1",
+          "ref": "B09.4"
         },
         {
           "id": "d1",
@@ -321,7 +317,8 @@
           "tonos": [
             "#dfe3e6"
           ],
-          "muestra": "#dfe3e6"
+          "muestra": "#dfe3e6",
+          "ref": "B09.5"
         },
         {
           "id": "d3",
@@ -331,11 +328,14 @@
             "#dfe3e6",
             "#c9a08a"
           ],
-          "muestra": "linear-gradient(135deg,#dfe3e6 0 50%,#c9a08a 50% 100%)"
+          "muestra": "linear-gradient(135deg,#dfe3e6 0 50%,#c9a08a 50% 100%)",
+          "ref": "B09.7"
         }
       ],
       "variante": "Acabado"
     }
   ],
-  "_ostra": "Los siete acabados de eslabones planos los describió Óscar en la hoja el 08/08/2026, sustituyendo los códigos A1/B1/C1/D1 del proveedor. Al Lunar solo llegan los cinco de plata: los dos negros los descarta su regla."
+  "_ostra": "Los siete acabados de eslabones planos los describió Óscar en la hoja el 08/08/2026, sustituyendo los códigos A1/B1/C1/D1 del proveedor. Al Lunar solo llegan los cinco de plata: los dos negros los descarta su regla.",
+  "_referencia": "La referencia de una configuración son cuatro segmentos de largo fijo: MODELO-MOVIMIENTO-CAJA-BRAZALETE.VARIANTE. Cada segmento apunta a una fila de una biblioteca y no contiene ni un nombre: los nombres cambian, las filas no.",
+  "codigo": "LO-03"
 }

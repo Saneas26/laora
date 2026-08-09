@@ -100,6 +100,28 @@
     return p.mov.coste + p.caja.coste + p.color.coste;
   }
 
+  /* ---------- LA REFERENCIA ----------
+     Cuatro segmentos de largo fijo, uno por biblioteca:
+
+         LO-03 - M1 - C1 - B09.2
+           │     │    │     │ └─ variante 2 de esa familia
+           │     │    │     └─── brazalete 09 del catálogo ENTERO
+           │     │    └───────── caja 1 de este modelo
+           │     └────────────── movimiento 1 de este modelo
+           └──────────────────── modelo, columna A de Movimientos
+
+     El brazalete se numera en el catálogo entero y no dentro del
+     modelo, porque la misma pieza la montan varios relojes: si fuera
+     «B1» en el Lunar y «B3» en el Cero Cero, un día se compraría la
+     que no es.
+
+     Y no lleva ni una palabra dentro. El día que un brazalete cambie
+     de nombre, los pedidos viejos tienen que seguir cuadrando. */
+  function referencia() {
+    var p = piezas();
+    return [datos.codigo, p.mov.ref, p.caja.ref, p.color.ref].join('-');
+  }
+
   /* ---------- pintar ---------- */
 
   function pintaVisor() {
@@ -156,11 +178,16 @@
     $('[data-precio]').textContent = euros(pvp);
     $('[data-barra-nombre]').textContent = p.caja.nombre + ' · ' + p.brz.nombre;
     $('[data-barra-color]').textContent = p.color.nombre;
+
+    /* La referencia NUNCA se enseña sola: al lado van siempre las
+       palabras. Corta para la máquina, completa para la persona. */
+    $('[data-ref]').textContent = referencia();
+
     $('[data-desglose]').innerHTML =
-      '<b>Coste de las tres piezas</b><br>' +
-      'Movimiento <i>' + euros(p.mov.coste) + '</i><br>' +
-      'Caja y esfera <i>' + euros(p.caja.coste) + '</i><br>' +
-      'Brazalete <i>' + euros(p.color.coste) + '</i><br>' +
+      '<b>Lo que hay que comprar</b><br>' +
+      'Movimiento <i>' + p.mov.ref + '</i> ' + euros(p.mov.coste) + '<br>' +
+      'Caja y esfera <i>' + p.caja.ref + '</i> ' + euros(p.caja.coste) + '<br>' +
+      'Brazalete <i>' + p.color.ref + '</i> ' + euros(p.color.coste) + '<br>' +
       'Suma <i>' + euros(c) + '</i><br>' +
       '× ' + String(datos.multiplicador).replace('.', ',') + ' → <b>' + euros(pvp) + '</b>';
   }

@@ -87,7 +87,14 @@ body{
 .cf-marca{display:flex;align-items:center;gap:10px}
 .cf-marca img{width:74px;height:auto}
 .cf-marca b{font-size:17px;font-weight:500;letter-spacing:-.02em}
+/* La referencia vive en la cabecera, siempre visible y siempre con las
+   palabras al lado (el rótulo del visor). Tabular para que los cuatro
+   segmentos no bailen de ancho al cambiar de opción. */
 .cf-ref{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.cf-ref b{
+  font-weight:600;color:var(--ink);letter-spacing:.01em;
+  font-variant-numeric:tabular-nums;
+}
 .cf-ficha-boton{
   padding:9px 18px;border-radius:999px;background:var(--dark);color:#fff;
   font-size:13px;font-weight:500;letter-spacing:-.01em;
@@ -157,7 +164,7 @@ body{
   padding:5px 12px;border-radius:999px;background:rgba(28,29,27,.82);
   color:#fff;font-size:11px;letter-spacing:.04em;white-space:nowrap;
 }
-.cf-rotulos{position:absolute;top:20px;left:24px}
+.cf-rotulos{position:absolute;top:20px;left:24px;right:24px}
 .cf-viendo{font-size:14px;font-weight:500}
 .cf-viendo span{color:var(--muted);font-weight:400}
 .cf-aviso-maqueta{
@@ -274,7 +281,7 @@ body{
 
 /* ---------- el desglose del coste, solo para Óscar ---------- */
 .cf-desglose{
-  position:absolute;right:20px;top:18px;padding:11px 14px;border-radius:10px;
+  position:absolute;right:20px;top:54px;padding:11px 14px;border-radius:10px;
   background:rgba(28,29,27,.9);color:#fff;font-size:11.5px;line-height:1.55;
 }
 .cf-desglose b{font-weight:600}
