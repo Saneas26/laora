@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 4
-V_JS = 3
+V_JS = 5
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
@@ -74,8 +74,10 @@ def euros(v):
 
 
 def redondea(p):
-    """Al 9,90 más cercano. Ver el porqué en `configurador-v2.js`."""
-    bajo = (int(p // 10)) * 10 + 9.90
+    """Al 9,90 más cercano. El 9,90 de abajo se saca restando ANTES de
+    truncar; ver el porqué —y el fallo que provocó— en
+    `configurador-v2.js`."""
+    bajo = int((p - 9.90) // 10) * 10 + 9.90
     alto = bajo + 10
     return bajo if (p - bajo) <= (alto - p) else alto
 

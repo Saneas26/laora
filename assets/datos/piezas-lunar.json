@@ -287,83 +287,55 @@
       "muestra": "acero-plano",
       "colores": [
         {
-          "id": "a1",
-          "nombre": "Plata",
-          "muestra": "#c7cbcf",
-          "coste": 16.49,
+          "id": "b1",
+          "nombre": "Plata, cinco eslabones",
+          "coste": 23.79,
           "tonos": [
             "#c7cbcf"
-          ]
-        },
-        {
-          "id": "b1",
-          "nombre": "Plata, eslabón ancho",
-          "muestra": "#cfd3d7",
-          "coste": 23.79,
-          "tonos": [
-            "#cfd3d7"
-          ]
-        },
-        {
-          "id": "c1",
-          "nombre": "Plata, eslabón plano",
-          "muestra": "#c2c6ca",
-          "coste": 23.79,
-          "tonos": [
-            "#c2c6ca"
-          ]
-        },
-        {
-          "id": "d1",
-          "nombre": "Plata, eslabón fino",
-          "muestra": "#cbcfd3",
-          "coste": 23.79,
-          "tonos": [
-            "#cbcfd3"
-          ]
-        },
-        {
-          "id": "a2",
-          "nombre": "Plata y oro rosa",
-          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#c9a08a 50% 100%)",
-          "coste": 21.59,
-          "tonos": [
-            "#c7cbcf",
-            "#c9a08a"
-          ]
+          ],
+          "muestra": "#c7cbcf"
         },
         {
           "id": "b4",
-          "nombre": "Plata y oro rosa, eslabón ancho",
-          "muestra": "linear-gradient(135deg,#cfd3d7 0 50%,#c9a08a 50% 100%)",
+          "nombre": "Plata y oro rosa, cinco eslabones",
           "coste": 28.19,
           "tonos": [
-            "#cfd3d7",
-            "#c9a08a"
-          ]
-        },
-        {
-          "id": "a5",
-          "nombre": "Plata y oro",
-          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#cbae6d 50% 100%)",
-          "coste": 21.39,
-          "tonos": [
             "#c7cbcf",
-            "#cbae6d"
-          ]
+            "#c9a08a"
+          ],
+          "muestra": "linear-gradient(135deg,#c7cbcf 0 50%,#c9a08a 50% 100%)"
         },
         {
-          "id": "b5",
-          "nombre": "Plata y oro, eslabón ancho",
-          "muestra": "linear-gradient(135deg,#cfd3d7 0 50%,#cbae6d 50% 100%)",
-          "coste": 27.99,
+          "id": "c1",
+          "nombre": "Plata, tres eslabones, cepillado mate",
+          "coste": 23.79,
           "tonos": [
-            "#cfd3d7",
-            "#cbae6d"
-          ]
+            "#b9bdc1"
+          ],
+          "muestra": "#b9bdc1"
+        },
+        {
+          "id": "d1",
+          "nombre": "Plata, tres eslabones, pulido",
+          "coste": 23.79,
+          "tonos": [
+            "#dfe3e6"
+          ],
+          "muestra": "#dfe3e6"
+        },
+        {
+          "id": "d3",
+          "nombre": "Plata y oro rosa, tres eslabones, pulido",
+          "coste": 28.19,
+          "tonos": [
+            "#dfe3e6",
+            "#c9a08a"
+          ],
+          "muestra": "linear-gradient(135deg,#dfe3e6 0 50%,#c9a08a 50% 100%)"
         }
       ],
-      "variante": "Color"
+      "variante": "Acabado"
     }
-  ]
+  ],
+  "_ostra": "Los siete acabados de eslabones planos los describió Óscar en la hoja el 08/08/2026, sustituyendo los códigos A1/B1/C1/D1 del proveedor. Al Lunar solo llegan los cinco de plata: los dos negros los descarta su regla."
 }

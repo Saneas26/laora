@@ -160,8 +160,38 @@
     }
   })();
 
+  /* ---------- 4 · lo que no mejora el reloj ----------
+     El relojero aparta cuatro costes gráficos al bajar. El último tramo
+     deja solo los materiales y el precio honesto junto al Cero Cero. */
+  (function valor() {
+    var sec = document.querySelector('[data-value-sequence]');
+    if (!sec) return;
 
-  /* ---------- 4 · el mapa del precio ----------
+    var resultado = sec.querySelector('[data-value-result]');
+    var esencial = sec.querySelector('[data-value-essential]');
+    var precio = sec.querySelector('[data-value-price]');
+    var actual = -1;
+
+    function pintar() {
+      var alto = sec.offsetHeight - window.innerHeight;
+      var recorrido = alto > 0 ? Math.max(0, Math.min(1, -sec.getBoundingClientRect().top / alto)) : 0;
+      var paso = Math.min(4, Math.floor(recorrido * 5));
+      if (paso === actual) return;
+      actual = paso;
+
+      for (var i = 0; i < 5; i++) sec.classList.toggle('stage-' + i, i === paso);
+      if (resultado) resultado.classList.toggle('visible', paso === 4);
+      if (esencial) esencial.classList.toggle('visible', paso === 4);
+      if (precio) precio.classList.toggle('visible', paso === 4);
+    }
+
+    window.addEventListener('scroll', pintar, { passive: true });
+    window.addEventListener('resize', pintar);
+    pintar();
+  })();
+
+
+  /* ---------- 5 · el mapa del precio ----------
      Rehecho el 05/08/2026: una barra por canal contra la misma escala,
      en vez de cinco tarjetas de media pantalla. Al cambiar de pestaña se
      vuelve a dibujar el mapa entero con los datos del otro icono.
