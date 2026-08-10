@@ -716,9 +716,13 @@
      {
       "ref": "Brz-316-A01",
       "nom": "Única",
-      "c": 7.39
+      "c": 7.39,
+      "cier": "Cinco eslabones, liberación rápida",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      }
-    ]
+    ],
+    "mat": "Acero 316L"
    },
    {
     "id": "B02",
@@ -727,19 +731,30 @@
      {
       "ref": "Brz-316-A02",
       "nom": "Plata",
-      "c": 28.39
+      "c": 28.39,
+      "cier": "Cierre desplegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      },
      {
       "ref": "Brz-316-A03",
       "nom": "Plata y oro rosa",
-      "c": 30.79
+      "c": 30.79,
+      "cier": "Cierre desplegable",
+      "eti": "Plata y oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#c98d6b"
      },
      {
       "ref": "Brz-316-A04",
       "nom": "Negro",
-      "c": 30.79
+      "c": 30.79,
+      "cier": "Cierre desplegable",
+      "eti": "Negro",
+      "hex": "#1e1f22"
      }
-    ]
+    ],
+    "mat": "Acero 316L"
    },
    {
     "id": "B03",
@@ -748,19 +763,29 @@
      {
       "ref": "Brz-316-A05",
       "nom": "Tres eslabones",
-      "c": 21.79
+      "c": 21.79,
+      "cier": "Tres eslabones",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      },
      {
       "ref": "Brz-316-A06",
       "nom": "Cinco eslabones",
-      "c": 21.79
+      "c": 21.79,
+      "cier": "Cinco eslabones",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      },
      {
       "ref": "Brz-316-A07",
       "nom": "Nueve eslabones",
-      "c": 21.79
+      "c": 21.79,
+      "cier": "Nueve eslabones",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      }
-    ]
+    ],
+    "mat": "Acero 316L macizo"
    },
    {
     "id": "B06",
@@ -769,9 +794,13 @@
      {
       "ref": "Brz-316-A10",
       "nom": "Tres eslabones",
-      "c": 59.69
+      "c": 59.69,
+      "cier": "Eslabón ancho, tres eslabones",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      }
-    ]
+    ],
+    "mat": "Acero 316L macizo"
    },
    {
     "id": "B07",
@@ -780,9 +809,13 @@
      {
       "ref": "Brz-316-A11",
       "nom": "Cinco eslabones",
-      "c": 78.39
+      "c": 78.39,
+      "cier": "Eslabón fino, cinco eslabones",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      }
-    ]
+    ],
+    "mat": "Acero 316L macizo"
    },
    {
     "id": "B08",
@@ -791,14 +824,21 @@
      {
       "ref": "Brz-904-A12",
       "nom": "Mate cepillado",
-      "c": 55.39
+      "c": 55.39,
+      "cier": "Macizo",
+      "eti": "Mate cepillado",
+      "hex": "#aeb2b7"
      },
      {
       "ref": "Brz-904-A13",
       "nom": "Brillante pulido",
-      "c": 55.39
+      "c": 55.39,
+      "cier": "Macizo",
+      "eti": "Brillante pulido",
+      "hex": "#e4e7ea"
      }
-    ]
+    ],
+    "mat": "Acero 904L"
    },
    {
     "id": "B09",
@@ -807,39 +847,63 @@
      {
       "ref": "Brz-904-A14",
       "nom": "Plata 5 eslabones",
-      "c": 23.79
+      "c": 23.79,
+      "cier": "Eslabones planos, cinco",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      },
      {
       "ref": "Brz-904-A15",
       "nom": "Plata / Oro rosa 5 eslabones",
-      "c": 28.19
+      "c": 28.19,
+      "cier": "Eslabones planos, cinco",
+      "eti": "Plata y oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#c98d6b"
      },
      {
       "ref": "Brz-904-A16",
       "nom": "Negro 5 eslabones",
-      "c": 28.19
+      "c": 28.19,
+      "cier": "Eslabones planos, cinco",
+      "eti": "Negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-904-A17",
       "nom": "Plata 3 eslabones cepillado/mate",
-      "c": 23.79
+      "c": 23.79,
+      "cier": "Eslabones planos, tres",
+      "eti": "Plata cepillada mate",
+      "hex": "#aeb2b7"
      },
      {
       "ref": "Brz-904-A18",
       "nom": "Plata 3 eslabones pulido",
-      "c": 23.79
+      "c": 23.79,
+      "cier": "Eslabones planos, tres",
+      "eti": "Plata pulida",
+      "hex": "#e4e7ea"
      },
      {
       "ref": "Brz-904-A19",
       "nom": "Negro 3 eslabones pulido",
-      "c": 28.19
+      "c": 28.19,
+      "cier": "Eslabones planos, tres",
+      "eti": "Negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-904-A20",
       "nom": "Plata / Oro Rosa 3 eslabones pulido",
-      "c": 28.19
+      "c": 28.19,
+      "cier": "Eslabones planos, tres",
+      "eti": "Plata y oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#c98d6b"
      }
-    ]
+    ],
+    "mat": "Acero 904L"
    },
    {
     "id": "B10",
@@ -848,84 +912,141 @@
      {
       "ref": "Brz-Piel-P01",
       "nom": "Negro, pespunte blanco, hebilla mariposa plateada",
-      "c": 30.99
+      "c": 30.99,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P02",
       "nom": "Negro, pespunte blanco, hebilla clásica plateada",
-      "c": 30.79
+      "c": 30.79,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P03",
       "nom": "Negro, pespunte blanco, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P04",
       "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 30.39
+      "c": 30.39,
+      "cier": "Hebilla clásica de oro rosa",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P05",
       "nom": "Negro, pespunte negro, hebilla mariposa plateada",
-      "c": 30.99
+      "c": 30.99,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Piel-P06",
       "nom": "Negro, pespunte negro, hebilla clásica plateada",
-      "c": 31.59
+      "c": 31.59,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Piel-P07",
       "nom": "Negro, pespunte negro, hebilla clásica negra",
-      "c": 31.79
+      "c": 31.79,
+      "cier": "Hebilla clásica negra",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Piel-P08",
       "nom": "Negro, pespunte negro, hebilla clásica de oro rosa",
-      "c": 29.99
+      "c": 29.99,
+      "cier": "Hebilla clásica de oro rosa",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Piel-P17",
       "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
-      "c": 29.39
+      "c": 29.39,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Azul, pespunte blanco",
+      "hex": "#274472",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P18",
       "nom": "Azul, pespunte blanco, hebilla clásica plateada",
-      "c": 29.79
+      "c": 29.79,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Azul, pespunte blanco",
+      "hex": "#274472",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P19",
       "nom": "Azul, pespunte blanco, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Azul, pespunte blanco",
+      "hex": "#274472",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P20",
       "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 32.39
+      "c": 32.39,
+      "cier": "Hebilla clásica de oro rosa",
+      "eti": "Azul, pespunte blanco",
+      "hex": "#274472",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Piel-P21",
       "nom": "Azul, pespunte negro, hebilla mariposa plateada",
-      "c": 31.19
+      "c": 31.19,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Azul, pespunte negro",
+      "hex": "#274472"
      },
      {
       "ref": "Brz-Piel-P22",
       "nom": "Azul, pespunte negro, hebilla clásica plateada",
-      "c": 31.99
+      "c": 31.99,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Azul, pespunte negro",
+      "hex": "#274472"
      },
      {
       "ref": "Brz-Piel-P23",
       "nom": "Azul, pespunte negro, hebilla clásica negra",
-      "c": 31.79
+      "c": 31.79,
+      "cier": "Hebilla clásica negra",
+      "eti": "Azul, pespunte negro",
+      "hex": "#274472"
      },
      {
       "ref": "Brz-Piel-P24",
       "nom": "Azul, pespunte negro, hebilla clásica de oro rosa",
-      "c": 31.99
+      "c": 31.99,
+      "cier": "Hebilla clásica de oro rosa",
+      "eti": "Azul, pespunte negro",
+      "hex": "#274472"
      }
-    ]
+    ],
+    "mat": "Piel"
    },
    {
     "id": "B11",
@@ -934,14 +1055,22 @@
      {
       "ref": "Brz-Sintetica-P52",
       "nom": "Negro",
-      "c": 3.69
+      "c": 3.69,
+      "cier": "Hebilla mariposa",
+      "eti": "Negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Sintetica-P53",
       "nom": "Negro con pespunte blanco",
-      "c": 4.19
+      "c": 4.19,
+      "cier": "Hebilla mariposa",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      }
-    ]
+    ],
+    "mat": "Piel sintética"
    },
    {
     "id": "B13",
@@ -950,39 +1079,61 @@
      {
       "ref": "Brz-Goma-G01",
       "nom": "Negro",
-      "c": 5.69
+      "c": 5.69,
+      "cier": "Hebilla de acero",
+      "eti": "Negro",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Goma-G02",
       "nom": "Blanco",
-      "c": 5.89
+      "c": 5.89,
+      "cier": "Hebilla de acero",
+      "eti": "Blanco",
+      "hex": "#eceae4"
      },
      {
       "ref": "Brz-Goma-G03",
       "nom": "Rojo",
-      "c": 6.29
+      "c": 6.29,
+      "cier": "Hebilla de acero",
+      "eti": "Rojo",
+      "hex": "#b3271e"
      },
      {
       "ref": "Brz-Goma-G04",
       "nom": "Naranja",
-      "c": 6.39
+      "c": 6.39,
+      "cier": "Hebilla de acero",
+      "eti": "Naranja",
+      "hex": "#e2711d"
      },
      {
       "ref": "Brz-Goma-G05",
       "nom": "Azul",
-      "c": 6.39
+      "c": 6.39,
+      "cier": "Hebilla de acero",
+      "eti": "Azul",
+      "hex": "#2456a4"
      },
      {
       "ref": "Brz-Goma-G06",
       "nom": "Marrón",
-      "c": 6.39
+      "c": 6.39,
+      "cier": "Hebilla de acero",
+      "eti": "Marrón",
+      "hex": "#6b4226"
      },
      {
       "ref": "Brz-Goma-G07",
       "nom": "Gris",
-      "c": 5.79
+      "c": 5.79,
+      "cier": "Hebilla de acero",
+      "eti": "Gris",
+      "hex": "#8a8d91"
      }
-    ]
+    ],
+    "mat": "Goma"
    },
    {
     "id": "B14",
@@ -991,94 +1142,166 @@
      {
       "ref": "Brz-Caucho-C10",
       "nom": "Negro blanco 01",
-      "c": 17.39
+      "c": 17.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Negro, banda blanca",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C11",
       "nom": "Negro negro 01",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Negro, banda negra",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Caucho-C12",
       "nom": "Verde militar blanco 01",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Verde militar, banda blanca",
+      "hex": "#4b5320",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C13",
       "nom": "Rojo blanco 01",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Rojo, banda blanca",
+      "hex": "#b3271e",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C14",
       "nom": "Naranja blanco 01",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Naranja, banda blanca",
+      "hex": "#e2711d",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C15",
       "nom": "Gris blanco 01",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Gris, banda blanca",
+      "hex": "#8a8d91",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C16",
       "nom": "Beige blanco 01",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Beige, banda blanca",
+      "hex": "#cbb694",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C17",
       "nom": "Negro blanco 02",
-      "c": 18.39
+      "c": 18.39,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Negro, banda blanca",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C18",
       "nom": "Negro negro 02",
-      "c": 19.29
+      "c": 19.29,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Negro, banda negra",
+      "hex": "#1e1f22"
      },
      {
       "ref": "Brz-Caucho-C19",
       "nom": "Verde militar blanco 02",
-      "c": 19.29
+      "c": 19.29,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Verde militar, banda blanca",
+      "hex": "#4b5320",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C22",
       "nom": "Gris blanco 02",
-      "c": 19.19
+      "c": 19.19,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Gris, banda blanca",
+      "hex": "#8a8d91",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C23",
       "nom": "Blanco blanco 01",
-      "c": 19.59
+      "c": 19.59,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Blanco, banda blanca",
+      "hex": "#eceae4",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C24",
       "nom": "Blanco blanco 02",
-      "c": 20.59
+      "c": 20.59,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Blanco, banda blanca",
+      "hex": "#eceae4",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C25",
       "nom": "Marrón blanco 01",
-      "c": 19.59
+      "c": 19.59,
+      "cier": "Cierre desplegable, estilo 01",
+      "eti": "Marrón, banda blanca",
+      "hex": "#6b4226",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C26",
       "nom": "Azul real blanco 02",
-      "c": 19.59
+      "c": 19.59,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Azul real, banda blanca",
+      "hex": "#2456a4",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C27",
       "nom": "Marrón blanco 02",
-      "c": 20.59
+      "c": 20.59,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Marrón, banda blanca",
+      "hex": "#6b4226",
+      "bor": "#f2f0ea"
      },
      {
       "ref": "Brz-Caucho-C30",
       "nom": "Beige blanco 02",
-      "c": 14.19
+      "c": 14.19,
+      "cier": "Cierre desplegable, estilo 02",
+      "eti": "Beige, banda blanca",
+      "hex": "#cbb694",
+      "bor": "#f2f0ea"
      }
-    ]
+    ],
+    "mat": "Caucho"
    }
   ],
   "ejes": {
    "mov": {},
-   "caja": {},
+   "caja": {
+    "esfPar": {
+     "C1": "E1",
+     "C2": "E2"
+    }
+   },
    "esf": {},
    "brz": {}
   },

@@ -93,7 +93,7 @@ body{
    se descuadran con cada fuente o tamaño. */
 .cf-marca{display:flex;align-items:baseline;gap:10px;line-height:1}
 .cf-marca img{width:74px;height:auto;display:block}
-.cf-marca b{font-size:17px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block}
+.cf-marca b{font-size:20px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block;color:var(--gold)}
 /* La referencia vive en la cabecera, siempre visible y siempre con las
    palabras al lado (el rótulo del visor). Tabular para que los cuatro
    segmentos no bailen de ancho al cambiar de opción. */
@@ -282,7 +282,11 @@ body{
 .cf-rotulo{
   display:flex;align-items:baseline;justify-content:space-between;gap:12px;
   font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--muted);
+  /* Los enunciados, en el amarillo de la casa (Óscar, 10/08/2026). Es el
+     oro --gold y no el amarillo puro del triángulo del logotipo
+     (#f8c840): ese sobre fondo claro da un contraste de 1,6 y no se lee.
+     El contador de al lado sigue en gris, que es dato y no enunciado. */
+  color:var(--gold);
 }
 .cf-rotulo b{font-size:12px;font-weight:500;letter-spacing:-.01em;text-transform:none;color:var(--ink)}
 
@@ -352,6 +356,25 @@ body{
 /* Dos columnas de pares, no una. Con once características en una sola
    columna el bloque medía 260 px y empujaba el brazalete fuera de la
    pantalla —la regla 3—. En dos columnas mide 130 y cabe todo. */
+/* LA PANTALLA PARTIDA (Óscar, 10/08/2026): caja y esfera a la izquierda,
+   características a la derecha a su misma altura, con una línea vertical
+   gris medio entre las dos. En el teléfono vuelven a apilarse: a 375 px
+   dos columnas dejarían 160 px por mitad y nada cabría. */
+.cf-mitades{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.cf-mitad-izq{display:flex;flex-direction:column;gap:18px;min-width:0}
+.cf-mitad-der{
+  border-left:1px solid rgba(28,29,27,.34);
+  padding-left:16px;min-width:0;
+}
+.cf-mitad-der .cf-rotulo{justify-content:flex-end}
+.cf-mitad-der .cf-specs{
+  display:flex;flex-direction:column;gap:2px;text-align:right;
+  background:none;padding:0;
+}
+.cf-mitad-der .cf-specs dt{margin-top:7px}
+.cf-mitad-der .cf-specs dt:first-child{margin-top:0}
+.cf-mitad-der .cf-specs dd{font-weight:600}
+
 .cf-specs{
   display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);
   gap:3px 12px;align-items:baseline;
@@ -388,7 +411,7 @@ body{
 /* ---------- LA PALETA DE COLOR ---------- */
 .cf-colores{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
 .cf-color{
-  width:30px;height:30px;border-radius:999px;
+  width:36px;height:36px;border-radius:999px;
   border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.08);
   transition:transform .12s,box-shadow .12s;
 }
@@ -456,6 +479,8 @@ body{
      Sigue estando dentro de la ficha técnica. */
   .cf-ref{display:none}
   .cf-cab{padding:0 14px;gap:10px}
+  .cf-mitades{grid-template-columns:1fr;gap:18px}
+  .cf-mitad-der{border-left:0;padding-left:0;border-top:1px solid rgba(28,29,27,.34);padding-top:14px}
   .cf-desglose,.cf-aviso-maqueta{display:none}
   .cf-panel{padding:16px 18px}
   .cf-barra{grid-template-columns:1fr auto;gap:12px}
