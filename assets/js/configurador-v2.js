@@ -377,10 +377,14 @@
   function varActual() { var f = D.brz[e.brz]; return f.v[Math.min(e.v, f.v.length - 1)]; }
   function matActual() { return D.brz[e.brz].mat; }
   function candidatas(mat, esl, eti, cier) {
+    /* La caja también corta aquí (Óscar, 11/08/2026): con la Negra PVD
+       solo van los brazaletes negros de acero. `compat` decide. */
+    var caja = D.caj[e.caja];
     var out = [];
     D.brz.forEach(function (f, fi) {
       if (f.mat !== mat) return;
       f.v.forEach(function (v, vi) {
+        if (!varVale(v, caja)) return;
         if (esl !== null && (v.esl || '') !== esl) return;
         if (eti !== null && v.eti !== eti) return;
         if (cier !== null && v.cier !== cier) return;
@@ -446,8 +450,11 @@
 
   function pintaMat() {
     var v0 = varActual();
+    var caja = D.caj[e.caja];
     var mats = [];
-    D.brz.forEach(function (f) { if (mats.indexOf(f.mat) < 0) mats.push(f.mat); });
+    D.brz.forEach(function (f) {
+      if (famVale(f, caja) && mats.indexOf(f.mat) < 0) mats.push(f.mat);
+    });
     fichas($('[data-mats]'), mats, 'mat', matActual());
     $('[data-cuenta-mat]').textContent = mats.length > 1 ? mats.length + ' materiales' : 'uno solo';
 

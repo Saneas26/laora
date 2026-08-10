@@ -1381,7 +1381,14 @@
    "esf": {
     "auto": true
    },
-   "brz": {}
+   "brz": {
+    "compat": {
+     "C3": [
+      "Brz-316-A04",
+      "Brz-316-A07"
+     ]
+    }
+   }
   },
   "inicio": {
    "brz": "B03",
