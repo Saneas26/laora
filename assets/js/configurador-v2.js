@@ -308,7 +308,7 @@
   }
 
   function pintaPrecio() {
-    var p = piezas(), c = coste(), pvp = redondea(c * D.mult);
+    var p = piezas(), pvp = precio();
     $('[data-precio]').textContent = euros(pvp);
     $('[data-ref]').textContent = referencia();
     $('[data-barra-nombre]').textContent = p.caja.nombre +
@@ -400,11 +400,12 @@
      navegador; se apaga con ?cuentas=0. Así Óscar la ve siempre y un
      cliente no se la encuentra jamás.
 
-     Todas las cifras de aquí abajo son BASE IMPONIBLE, igual que los
-     costes de la hoja: el IVA se suma después, en un sitio solo.
+     Los costes de la hoja son BASE IMPONIBLE: el IVA se les suma. El
+     embalaje y el envío NO: esos 9 € son lo que se paga en el mostrador,
+     con el IVA ya dentro (Óscar, 10/08/2026).
      ============================================================ */
-  var EMBALAJE = 2.00;       // Óscar, 10/08/2026
-  var ENVIO = 7.00;
+  var EMBALAJE = 2.00;       // con IVA dentro
+  var ENVIO = 7.00;          // con IVA dentro
 
   /* EL FONDO DE GARANTÍA
      ------------------------------------------------------------
@@ -443,6 +444,43 @@
   function eu(v) { return (Math.round(v * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
   function sinIva(v) { return v / (1 + IVA); }
   function conIvaDe(v) { return v * (1 + IVA); }
+
+  /* ------------------------------------------------------------
+     EL PRECIO, Y SU SUELO
+
+     El multiplicador manda casi siempre. Pero hay configuraciones
+     —las más baratas del Trinchera y del Cóctel— en las que el
+     ×2,7235 no llega a dejar los 50 € limpios que Óscar exige. En
+     esas, y SOLO en esas, el precio sube al 9,90 siguiente que sí
+     los deja. Son 296 de 10.948; las otras 10.652 no se enteran.
+
+     Se despeja de las dos condiciones a la vez:
+       50 € netos  →  PVP ≥ (50 / 0,75 + coste neto) × 1,21
+       15 % del PVP →  PVP × (0,75/1,21 − 0,15) ≥ 0,75 × coste neto
+     y se redondea HACIA ARRIBA, nunca hacia abajo: redondear al más
+     cercano podría dejarlo otra vez por debajo del suelo.
+     ------------------------------------------------------------ */
+  function costeNeto(c, mov) {
+    return c + sinIva(EMBALAJE) + sinIva(ENVIO) + fondoGarantia(mov);
+  }
+
+  function sube990(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return bajo >= p - 1e-9 ? bajo : bajo + 10;
+  }
+
+  function sueloPvp(cn) {
+    var queda = 1 - IRPF - SS;                       // 0,75 de cada euro bruto
+    var porEuros = (MIN_EUROS / queda + cn) * (1 + IVA);
+    var margen = queda / (1 + IVA) - MIN_PORCENTAJE; // lo que gana el PVP por euro
+    var porciento = margen > 0 ? queda * cn / margen : 0;
+    return sube990(Math.max(porEuros, porciento));
+  }
+
+  function precio() {
+    var c = coste();
+    return Math.max(redondea(c * D.mult), sueloPvp(costeNeto(c, piezas().mov)));
+  }
 
   function fila(etiqueta, valor, clase) {
     return '<tr' + (clase ? ' class="' + clase + '"' : '') + '><td>' + etiqueta +
@@ -486,16 +524,18 @@
        queda fuera del cálculo del soportado. */
     var piezasCoste = coste();
     var garantia = fondoGarantia(p.mov);
-    var facturable = piezasCoste + EMBALAJE + ENVIO;
-    var costeNeto = facturable + garantia;
-    var ivaSop = conIvaDe(facturable) - facturable;
-    var conIva = costeNeto + ivaSop;
+    var embNeto = sinIva(EMBALAJE), envNeto = sinIva(ENVIO);
+    var cn = costeNeto(piezasCoste, p.mov);
+    var ivaSop = (conIvaDe(piezasCoste) - piezasCoste) +
+                 (EMBALAJE - embNeto) + (ENVIO - envNeto);
+    var conIva = cn + ivaSop;
 
-    var pvp = redondea(piezasCoste * D.mult);
+    var porMult = redondea(piezasCoste * D.mult);
+    var pvp = precio();
     var ivaRep = pvp - sinIva(pvp);
     var base = pvp - ivaRep;
 
-    var bruto = base - costeNeto;
+    var bruto = base - cn;
     var irpf = bruto * IRPF, ss = bruto * SS;
     var neto = bruto - irpf - ss;
 
@@ -508,14 +548,18 @@
       '<table><tbody>' +
       '<tr class="s"><td colspan="2">Costes</td></tr>' +
       lineas.map(function (x) { return fila(x[0], x[1]); }).join('') +
-      fila('Embalaje', EMBALAJE) +
-      fila('Envío', ENVIO) +
+      fila('Embalaje · sin IVA', embNeto) +
+      fila('Envío · sin IVA', envNeto) +
       fila('Fondo de garantía', garantia) +
-      fila('Coste neto', costeNeto, 'sub') +
+      fila('Coste neto', cn, 'sub') +
       fila('+ IVA soportado 21 % · se recupera', ivaSop) +
       fila('Se desembolsa', conIva, 'sub') +
 
       '<tr class="s"><td colspan="2">Venta · ×' + String(D.mult).replace('.', ',') + '</td></tr>' +
+      (pvp > porMult
+        ? fila('Por multiplicador', porMult) +
+          fila('Suelo · para llegar a ' + eu(MIN_EUROS) + ' limpios', pvp)
+        : '') +
       fila('PVP', pvp, 'sub') +
       fila('IVA repercutido', -ivaRep) +
       fila('Base imponible', base, 'sub') +
@@ -599,7 +643,7 @@
       nombre: D.nombre,
       detalle: p.caja.nombre + (p.esf ? ' · ' + nombreEsf(p.esf) : ''),
       correa: nombreFam(p.fam) + (p.v.nom ? ' · ' + p.v.nom : ''),
-      precio: redondea(coste() * D.mult),
+      precio: precio(),
       foto: $('[data-foto]').src
     });
     window.location.href = '/carrito.html';
