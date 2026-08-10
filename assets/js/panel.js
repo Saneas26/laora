@@ -687,19 +687,35 @@
      se puede volver a imprimir idéntica cuantas veces haga falta.
      Un PDF guardado sería una segunda verdad que se puede perder.
 
-     LOS DATOS DEL EMISOR NO ESTÁN EN EL REPO Y NO ME LOS INVENTO:
-     una factura sin el NIF de quien la emite no vale para nada. Hasta
-     que Óscar los rellene aquí, la factura sale con el hueco a la
-     vista, en rojo, para que no se mande por error.
+     EL EMISOR ES ÓSCAR COMO AUTÓNOMO, no una sociedad (10/08/2026).
+     La SL está en camino; hasta que exista, quien factura es él, y una
+     venta que caiga mañana tiene que poder facturarse hoy.
+
+     EL DÍA QUE HAYA SL hay que cambiar estos datos Y ABRIR SERIE NUEVA
+     de facturas: son dos emisores distintos y sus numeraciones no se
+     mezclan. La serie de aquí es F{AA}-NNNN; la de la sociedad tendrá
+     que llevar otra letra.
+
+     Si algún campo se queda vacío, la factura sale con el hueco a la
+     vista, en rojo, para que no se mande por error: una factura sin el
+     NIF de quien la emite no vale para nada.
      ============================================================ */
   var EMISOR = {
-    nombre: '',            // razón social o nombre y apellidos
-    nif: '',               // NIF/DNI
-    direccion: '',         // calle y número
-    cp: '', poblacion: '', provincia: '',
+    nombre: 'Óscar Belloso Jiménez',
+    nif: '46922078P',
+    direccion: 'San Juan, 9',
+    cp: '28320', poblacion: 'Pinto', provincia: 'Madrid',
     email: 'hola@laora.es',
     web: 'laora.es'
   };
+
+  /* «28013 Madrid Madrid» no lo escribe nadie: cuando la población y la
+     provincia son la misma, se dice una vez. */
+  function lugar(cp, poblacion, provincia) {
+    var p = (poblacion || '').trim(), v = (provincia || '').trim();
+    var cola = (v && v.toLowerCase() !== p.toLowerCase()) ? p + ' (' + v + ')' : p;
+    return ((cp || '') + ' ' + cola).trim();
+  }
 
   function imprimirFactura(id) {
     api('factura', { id: id }).then(function (d) {
@@ -748,13 +764,13 @@
         '<b>' + esc(EMISOR.nombre || '(falta el nombre fiscal)') + '</b><br>' +
         'NIF ' + esc(EMISOR.nif || '(falta)') + '<br>' +
         esc(EMISOR.direccion || '(falta la dirección)') + '<br>' +
-        esc(EMISOR.cp) + ' ' + esc(EMISOR.poblacion) + ' ' + esc(EMISOR.provincia) + '<br>' +
+        esc(lugar(EMISOR.cp, EMISOR.poblacion, EMISOR.provincia)) + '<br>' +
         esc(EMISOR.email) + ' · ' + esc(EMISOR.web) +
         '</div><div><h2>Cliente</h2>' +
         '<b>' + esc(cli.nombre) + '</b><br>' +
         (cli.nif ? 'NIF ' + esc(cli.nif) + '<br>' : '') +
         esc(cli.direccion) + '<br>' +
-        esc(cli.cp) + ' ' + esc(cli.poblacion) + ' ' + esc(cli.provincia) +
+        esc(lugar(cli.cp, cli.poblacion, cli.provincia)) +
         '</div></div>' +
         '<table><thead><tr><th>Concepto</th><th class="n">Uds</th>' +
         '<th class="n">Precio</th><th class="n">Importe</th></tr></thead>' +
