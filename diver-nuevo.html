@@ -1,0 +1,85 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Configura tu Diver · laOra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=14">
+
+<header class="cf-cab">
+  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
+    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Diver</b>
+  </a>
+  <p class="cf-ref">Ref. <b data-ref>—</b></p>
+  <button class="cf-ficha-boton" type="button">Ver la ficha completa</button>
+</header>
+
+<div class="cf-cuerpo">
+
+  <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
+      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="Diver de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      </div>
+      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
+    </div>
+
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
+  </section>
+
+  <section class="cf-panel" aria-label="Opciones del Diver">
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
+      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
+        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo japonés</button>
+        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
+      </div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>uno solo</b></p>
+      <div class="cf-fijo"><b>Acero con zafiro, 300 m</b><span>con su esfera, sus agujas y su correa de caucho negra</span></div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>12 familias</b></p>
+      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
+        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Caucho negro</span></button>
+        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L, cinco eslabones</span></button>
+        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Acero 316L, cierre desplegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón ancho</span></button>
+        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón fino</span></button>
+        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Acero 904L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Acero 904L, eslabones planos</span></button>
+        <button class="cf-brazalete" type="button" data-brz="8" aria-pressed="false"><i></i><span>Caucho con hebilla de acero</span></button>
+        <button class="cf-brazalete" type="button" data-brz="9" aria-pressed="false"><i></i><span>Caucho fluorado, cierre desplegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="10" aria-pressed="false"><i></i><span>Tela de vela, hebilla mariposa</span></button>
+        <button class="cf-brazalete" type="button" data-brz="11" aria-pressed="false"><i></i><span>Lona de nailon, liberación rápida</span></button>
+      </div>
+      <p class="cf-detalle" data-detalle></p>
+    </div>
+
+    <div class="cf-grupo" data-grupo-var>
+      <p class="cf-rotulo"><span data-rotulo-var>Acabado</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir acabado"></div>
+    </div>
+  </section>
+</div>
+
+<footer class="cf-barra">
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
+  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
+  <button class="cf-reservar" type="button">Reservar</button>
+</footer>
+
+<script type="application/json" data-piezas>{"nombre": "Diver", "codigo": "LO-08", "incluido": "Correa de caucho negra", "extra": false, "mov": [{"ref": "M1", "acabado": "Alba", "cal": "VH31 cuarzo (segundero barrido)", "coste": 11.89, "rot": "Movimiento japonés de cuarzo", "specs": "Cuarzo japonés Seiko/TMI VH31 de segundero barrido: da cuatro pasos por segundo en lugar de uno, así que de lejos barre como un mecánico. Precisión de ±15 s/mes. Tres agujas sin fecha, con parada de segundero. Pila 371 / SR920SW de unos dos años. Diámetro 23,70 mm y altura 3,45 mm."}, {"ref": "M2", "acabado": "Cenit", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Acero con zafiro, 300 m", "coste": 69.57}], "esf": [], "brz": [{"id": "B00", "nombre": "La que viene con la caja", "v": [{"ref": "", "nom": "Caucho negro", "c": 0, "foto": "Brz-Diver-Pack"}]}, {"id": "B01", "nombre": "Acero 316L, cinco eslabones", "v": [{"ref": "Brz-316-A01", "nom": "Única", "c": 7.39}]}, {"id": "B02", "nombre": "Acero 316L, cierre desplegable", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39}]}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79}, {"ref": "Brz-316-A07", "nom": "Nueve eslabones", "c": 21.79}]}, {"id": "B06", "nombre": "Acero 316L macizo, eslabón ancho", "v": [{"ref": "Brz-316-A10", "nom": "Tres eslabones", "c": 59.69}]}, {"id": "B07", "nombre": "Acero 316L macizo, eslabón fino", "v": [{"ref": "Brz-316-A11", "nom": "Cinco eslabones", "c": 78.39}]}, {"id": "B08", "nombre": "Acero 904L macizo", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 55.39}, {"ref": "Brz-904-A13", "nom": "Brillante pulido", "c": 55.39}]}, {"id": "B09", "nombre": "Acero 904L, eslabones planos", "v": [{"ref": "Brz-904-A14", "nom": "Plata 5 eslabones", "c": 23.79}, {"ref": "Brz-904-A17", "nom": "Plata 3 eslabones cepillado/mate", "c": 23.79}, {"ref": "Brz-904-A18", "nom": "Plata 3 eslabones pulido", "c": 23.79}]}, {"id": "B13", "nombre": "Caucho con hebilla de acero", "v": [{"ref": "Brz-Goma-G04", "nom": "Naranja", "c": 6.39}, {"ref": "Brz-Goma-G05", "nom": "Azul", "c": 6.39}]}, {"id": "B14", "nombre": "Caucho fluorado, cierre desplegable", "v": [{"ref": "Brz-Caucho-C01", "nom": "Azul real blanco 01", "c": 18.29}, {"ref": "Brz-Caucho-C05", "nom": "Azul real blanco", "c": 13.19}, {"ref": "Brz-Caucho-C07", "nom": "Naranja blanco", "c": 13.19}, {"ref": "Brz-Caucho-C14", "nom": "Naranja blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C21", "nom": "Naranja blanco 02", "c": 19.19}, {"ref": "Brz-Caucho-C26", "nom": "Azul real blanco 02", "c": 19.59}]}, {"id": "B15", "nombre": "Tela de vela, hebilla mariposa", "v": [{"ref": "Brz-Nailon-N01", "nom": "Rojo", "c": 6.49}, {"ref": "Brz-Nailon-N02", "nom": "Naranja", "c": 6.49}, {"ref": "Brz-Nailon-N03", "nom": "Gris", "c": 6.39}, {"ref": "Brz-Nailon-N04", "nom": "Negro", "c": 6.49}, {"ref": "Brz-Nailon-N05", "nom": "Azul", "c": 6.49}, {"ref": "Brz-Nailon-N06", "nom": "Verde", "c": 6.49}, {"ref": "Brz-Nailon-N07", "nom": "Caqui", "c": 6.49}]}, {"id": "B16", "nombre": "Lona de nailon, liberación rápida", "v": [{"ref": "Brz-Lona-L01", "nom": "Negro", "c": 5.39}, {"ref": "Brz-Lona-L02", "nom": "Negro hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L03", "nom": "Gris", "c": 6.09}, {"ref": "Brz-Lona-L04", "nom": "Gris hebilla negra", "c": 5.39}, {"ref": "Brz-Lona-L05", "nom": "Verde militar", "c": 5.49}, {"ref": "Brz-Lona-L06", "nom": "Verde militar hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L07", "nom": "Azul marino", "c": 5.39}, {"ref": "Brz-Lona-L08", "nom": "Caqui hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L09", "nom": "Caqui", "c": 5.99}, {"ref": "Brz-Lona-L10", "nom": "Azul marino hebilla negra", "c": 6.09}]}], "ejes": {"mov": {"tarjetas": {"M1": "Cuarzo japonés", "M2": "Automático suizo"}}, "caja": {"apunte": "con su esfera, sus agujas y su correa de caucho negra"}, "esf": {}, "brz": {"nombres": {"B00": "Caucho negro"}}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {"Brz-316-A01": "/assets/img/piezas/brazaletes/Brz-316-A01.webp"}, "solape": 0.01875, "fotoDefecto": "/assets/img/catalogo/LO-01_Lunar_A01.webp"}</script>
+<script src="/assets/js/configurador-v2.js?v=17"></script>
