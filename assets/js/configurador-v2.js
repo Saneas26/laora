@@ -400,10 +400,8 @@
      navegador; se apaga con ?cuentas=0. Así Óscar la ve siempre y un
      cliente no se la encuentra jamás.
 
-     TRES NÚMEROS ESTÁN A CERO porque no los tengo: embalaje, envío y
-     fondo de garantías. Salen marcados «por fijar» en pantalla. No me
-     los invento: con cifras inventadas, la comprobación de que el
-     beneficio llega a 50 € no valdría nada.
+     Todas las cifras de aquí abajo son BASE IMPONIBLE, igual que los
+     costes de la hoja: el IVA se suma después, en un sitio solo.
      ============================================================ */
   var EMBALAJE = 2.00;       // Óscar, 10/08/2026
   var ENVIO = 7.00;
@@ -444,6 +442,7 @@
 
   function eu(v) { return (Math.round(v * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
   function sinIva(v) { return v / (1 + IVA); }
+  function conIvaDe(v) { return v * (1 + IVA); }
 
   function fila(etiqueta, valor, clase) {
     return '<tr' + (clase ? ' class="' + clase + '"' : '') + '><td>' + etiqueta +
@@ -457,9 +456,11 @@
         se le entrega el repercutido MENOS el soportado. Meterlo en el
         coste y además descontar el de la venta lo cuenta dos veces.
 
-     2. LAS PIEZAS YA LLEVAN EL IVA DENTRO. Los anuncios dicen «el
-        precio incluye el IVA», así que multiplicar por 1,21 lo suma
-        por segunda vez. El neto se saca dividiendo.
+     2. LOS PRECIOS DE LA HOJA SON BASE IMPONIBLE. No llevan el IVA
+        dentro: se les SUMA (Óscar, 10/08/2026). Por tanto el coste
+        neto —el que de verdad pesa— es el de la hoja tal cual, y el
+        desembolso real es ese × 1,21. Antes lo hacía al revés,
+        dividiendo, y eso rebajaba el coste un 21 % que no existía.
 
      3. EL IRPF Y LA SS VAN SOBRE EL BENEFICIO, NO SOBRE LA VENTA. El
         modelo 130 es el 20 % del rendimiento NETO —ingresos menos
@@ -480,12 +481,15 @@
       ['Brazalete', p.v.c]
     ].filter(Boolean);
 
+    /* El fondo de garantía es una provisión nuestra, no una factura de
+       nadie: no lleva IVA ni lo recupera. Entra en el coste neto y se
+       queda fuera del cálculo del soportado. */
     var piezasCoste = coste();
     var garantia = fondoGarantia(p.mov);
-    var conIva = piezasCoste + EMBALAJE + ENVIO + garantia;
-    var ivaSop = (piezasCoste - sinIva(piezasCoste)) +
-                 (EMBALAJE - sinIva(EMBALAJE)) + (ENVIO - sinIva(ENVIO));
-    var costeNeto = conIva - ivaSop;
+    var facturable = piezasCoste + EMBALAJE + ENVIO;
+    var costeNeto = facturable + garantia;
+    var ivaSop = conIvaDe(facturable) - facturable;
+    var conIva = costeNeto + ivaSop;
 
     var pvp = redondea(piezasCoste * D.mult);
     var ivaRep = pvp - sinIva(pvp);
@@ -507,9 +511,9 @@
       fila('Embalaje', EMBALAJE) +
       fila('Envío', ENVIO) +
       fila('Fondo de garantía', garantia) +
-      fila('Coste con IVA', conIva, 'sub') +
-      fila('IVA soportado · se recupera', -ivaSop) +
       fila('Coste neto', costeNeto, 'sub') +
+      fila('+ IVA soportado 21 % · se recupera', ivaSop) +
+      fila('Se desembolsa', conIva, 'sub') +
 
       '<tr class="s"><td colspan="2">Venta · ×' + String(D.mult).replace('.', ',') + '</td></tr>' +
       fila('PVP', pvp, 'sub') +
