@@ -407,7 +407,27 @@
      ============================================================ */
   var EMBALAJE = 2.00;       // Óscar, 10/08/2026
   var ENVIO = 7.00;
-  var GARANTIAS = 0;         // por fijar · provisión por reloj
+
+  /* EL FONDO DE GARANTÍA
+     ------------------------------------------------------------
+     No es un porcentaje plano del coste, y a propósito: lo que se
+     rompe en un reloj es EL MOVIMIENTO, y los portes de ida y vuelta
+     valen lo mismo tanto si el reloj cuesta 150 € como 560. Un tanto
+     por ciento del total cobraría de más al caro y de menos al barato,
+     que es justo al revés de lo que pasa.
+
+     Una incidencia cuesta: el movimiento + 14 € de portes —ida y
+     vuelta— + 5 € de piezas menores (junta, correa, pila).
+     Se provisiona el 5 %: uno de cada veinte relojes vuelve.
+
+     El 5 % es la parte que habrá que corregir con datos reales; las
+     otras dos cifras son las de la casa. Con los movimientos de hoy
+     sale entre 1,18 € el Cóctel de cuarzo y 4,32 € el Tortuga
+     automático. */
+  var GARANTIA_TASA = 0.05, GARANTIA_PORTES = 14.00, GARANTIA_PIEZAS = 5.00;
+  function fondoGarantia(mov) {
+    return (mov.coste + GARANTIA_PORTES + GARANTIA_PIEZAS) * GARANTIA_TASA;
+  }
   var IVA = 0.21, IRPF = 0.20, SS = 0.05;
   var MIN_EUROS = 50, MIN_PORCENTAJE = 0.15;
 
@@ -461,7 +481,8 @@
     ].filter(Boolean);
 
     var piezasCoste = coste();
-    var conIva = piezasCoste + EMBALAJE + ENVIO + GARANTIAS;
+    var garantia = fondoGarantia(p.mov);
+    var conIva = piezasCoste + EMBALAJE + ENVIO + garantia;
     var ivaSop = (piezasCoste - sinIva(piezasCoste)) +
                  (EMBALAJE - sinIva(EMBALAJE)) + (ENVIO - sinIva(ENVIO));
     var costeNeto = conIva - ivaSop;
@@ -485,7 +506,7 @@
       lineas.map(function (x) { return fila(x[0], x[1]); }).join('') +
       fila('Embalaje', EMBALAJE) +
       fila('Envío', ENVIO) +
-      fila('Fondo de garantía', GARANTIAS ? GARANTIAS : 'por fijar') +
+      fila('Fondo de garantía', garantia) +
       fila('Coste con IVA', conIva, 'sub') +
       fila('IVA soportado · se recupera', -ivaSop) +
       fila('Coste neto', costeNeto, 'sub') +
