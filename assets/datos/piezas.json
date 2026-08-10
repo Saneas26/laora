@@ -686,6 +686,11 @@
     "ref": "C2",
     "nombre": "Bisel Azul",
     "coste": 31.57
+   },
+   {
+    "ref": "C3",
+    "nombre": "Caja Negra PVD",
+    "coste": 32.57
    }
   ],
   "esf": [
@@ -693,7 +698,7 @@
     "ref": "E1",
     "nombre": "Negra",
     "coste": 14.19,
-    "cajas": "C1"
+    "cajas": "C1, C3"
    },
    {
     "ref": "E2",
@@ -705,7 +710,7 @@
   "brz": [
    {
     "id": "B02",
-    "nombre": "Acero 316L, cierre desplegable",
+    "nombre": "Acero 316L, cierre solapa",
     "v": [
      {
       "ref": "Brz-316-A02",
@@ -759,6 +764,15 @@
       "eti": "Plata",
       "hex": "#c9cdd2",
       "esl": "Cinco eslabones"
+     },
+     {
+      "ref": "Brz-316-A07",
+      "nom": "Tres eslabones negro",
+      "c": 25.19,
+      "cier": "Cierre solapa",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": "Tres eslabones"
      }
     ],
     "mat": "Acero 316L"
@@ -1360,7 +1374,8 @@
    "caja": {
     "esfPar": {
      "C1": "E1",
-     "C2": "E2"
+     "C2": "E2",
+     "C3": "E1"
     }
    },
    "esf": {
