@@ -228,7 +228,10 @@
     $('[data-pendiente]').hidden = !!cab;
     document.querySelector('[data-montaje]').classList.toggle('con-foto', !!cab);
 
-    var img = (D.brazaletes || {})[p.v.ref];
+    /* El nombre del archivo no siempre es la referencia de pedido: el
+       brazalete del Precisa viene con la caja y no tiene referencia, pero
+       hay que fotografiarlo igual. Para esos, `foto`. */
+    var img = (D.brazaletes || {})[p.v.foto || p.v.ref];
     var mitades = todos('[data-brz-img]');
     var bandas = todos('[data-correa]');
     if (img) {

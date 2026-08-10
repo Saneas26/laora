@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 13
-V_JS = 14
+V_JS = 15
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -311,12 +311,16 @@ def pantalla(slug):
             rel = f'{PIEZAS_IMG}/cabezas/{ref}.webp'
             if hay(rel):
                 cabezas[ref] = rel
+    # El archivo se llama como la referencia de pedido, salvo cuando no
+    # hay referencia: el brazalete del Precisa viene con la caja y no se
+    # pide aparte, pero hay que fotografiarlo. Para esos, `foto`.
     brazaletes = {}
     for f_ in brz:
         for v in f_['v']:
-            rel = f'{PIEZAS_IMG}/brazaletes/{v["ref"]}.webp'
-            if hay(rel):
-                brazaletes[v['ref']] = rel
+            nom = v.get('foto') or v['ref']
+            rel = f'{PIEZAS_IMG}/brazaletes/{nom}.webp'
+            if nom and hay(rel):
+                brazaletes[nom] = rel
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
                         'brazaletes': brazaletes, 'solape': SOLAPE,
