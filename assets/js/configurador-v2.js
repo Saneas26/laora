@@ -237,7 +237,14 @@
     if (img) {
       mitades.forEach(function (el, i) {
         el.src = img; el.hidden = false;
-        el.style.setProperty('--solape', (i === 0 ? 1 : -1) * (D.solape || 0) * 240 + 'px');
+        /* El solape viene en píxeles de la FOTO (lienzo de 1000 de
+           ancho), así que hay que pasarlo a píxeles de pantalla con la
+           escala a la que se está viendo. Antes se multiplicaba por un
+           240 fijo y el brazalete se movía cuatro píxeles: se quedaba
+           colgado de la punta del asa, sin llegar a la caja. */
+        var escala = (document.querySelector('[data-montaje]').clientWidth || 1000) / 1000;
+        el.style.setProperty('--solape',
+          (i === 0 ? 1 : -1) * (D.solape || 0) * escala + 'px');
       });
       bandas.forEach(function (el) { el.hidden = true; });
     } else {
