@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 25
-V_JS = 43
+V_CSS = 26
+V_JS = 44
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -433,6 +433,17 @@ def pantalla(slug):
             if nom and hay(rel):
                 brazaletes[nom] = rel
 
+    # EL DETALLE DEL CIERRE
+    # ------------------------------------------------------------
+    # Una foto por familia de brazalete, en cierres/FAMILIA.webp. Al
+    # elegir el cierre, la web la ensena como tarjeta sobre el visor
+    # (Oscar, 10/08/2026). Solo viaja la que existe en disco.
+    cierres = {}
+    for f_ in brz:
+        rel = f'{PIEZAS_IMG}/cierres/{f_["id"]}.webp'
+        if hay(rel):
+            cierres[f_['id']] = rel
+
     # LA FOTO ENTERA, UNA POR CONFIGURACION
     # ------------------------------------------------------------
     # Oscar, 10/08/2026: se acabo el montaje de dos capas. Cuando existe
@@ -461,7 +472,7 @@ def pantalla(slug):
     d = {k: v for k, v in d.items() if not k.startswith('_')}
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
-                        'brazaletes': brazaletes, 'completas': completas,
+                        'brazaletes': brazaletes, 'completas': completas, 'cierres': cierres,
                         'solape': SOLAPE},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 
@@ -495,6 +506,10 @@ def pantalla(slug):
       <div class="cf-cabeza" data-cabeza>
         <img data-foto alt="{d['nombre']} de laOra" hidden>
         <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
+        <img data-cierre-img alt="Detalle del cierre">
+        <figcaption data-cierre-pie></figcaption>
+      </figure>
       </div>
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>

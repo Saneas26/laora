@@ -365,6 +365,11 @@
      ============================================================ */
   var MAT = D.brz.length > 1 && D.brz.every(function (f) { return f.mat; });
 
+  /* EL DETALLE DEL CIERRE (Óscar, 10/08/2026): al elegir el cierre,
+     aparece su foto como tarjeta sobre el visor. Se va sola en cuanto
+     se toca cualquier otra cosa, y también al pulsarla. */
+  var VER_CIERRE = false;
+
   /* CUATRO PASOS (Óscar, 10/08/2026): material → eslabones → color →
      cierre. Cada paso filtra al siguiente y un paso con una sola opción
      no se pinta. El estado real sigue siendo (familia, variante): estos
@@ -427,6 +432,16 @@
         String(t).replace(/"/g, '&quot;') + '"' +
         ' aria-pressed="' + (t === puesta) + '">' + t + '</button>';
     }).join('');
+  }
+
+  function pintaCierreDetalle() {
+    var caja = $('[data-cierre-detalle]');
+    if (!caja) return;
+    var foto = (D.cierres || {})[D.brz[e.brz].id];
+    caja.hidden = !(VER_CIERRE && foto);
+    if (caja.hidden) return;
+    $('[data-cierre-img]').src = foto;
+    $('[data-cierre-pie]').textContent = 'El cierre · ' + (varActual().cier || '');
   }
 
   function pintaMat() {
@@ -580,6 +595,7 @@
     pintaSpecs();
     pintaPrecio();
     pintaCuentas();
+    pintaCierreDetalle();
   }
 
   function pintaMuestras() {
@@ -850,6 +866,7 @@
   }
 
   document.addEventListener('click', function (ev) {
+    if (ev.target.closest('[data-cierre-detalle]')) { VER_CIERRE = false; pinta(); return; }
     if (ev.target.closest('[data-abre-ficha]')) { abreTecnica(); return; }
     if (ev.target.closest('[data-reservar]')) { reservar(); return; }
     var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub],[data-mat],[data-esl],[data-eti],[data-cier]');
@@ -869,11 +886,13 @@
     }
     else if (d.esf !== undefined) e.esf = Number(d.esf);
     else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; }
-    else if (d.mat !== undefined) eligeMat(d.mat);
-    else if (d.esl !== undefined) eligeEsl(d.esl);
-    else if (d.eti !== undefined) eligeEti(d.eti);
-    else if (d.cier !== undefined) eligeCier(d.cier);
+    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = false; }
+    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = false; }
+    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = false; }
+    else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; }
     else e.v = Number(d.var);
+    if (d.mov !== undefined || d.caja !== undefined || d.esf !== undefined ||
+        d.brz !== undefined || d.var !== undefined || d.sub !== undefined) VER_CIERRE = false;
     pinta();
   });
 
