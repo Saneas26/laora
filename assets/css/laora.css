@@ -1026,6 +1026,11 @@ footer small { font-size: 12px; }
 .teca-seccion p { font-size: 16px; line-height: 1.7; color: var(--muted);
   max-width: 720px; margin: 0 0 18px; }
 .teca-seccion strong { color: var(--ink); font-weight: 600; }
+/* `.teca-seccion p` (16px) le gana en especificidad a `.ph-aviso` (13px):
+   sin esto, el aviso legal se leía como un párrafo más en vez de letra
+   pequeña. En `.teca-historias` no hace falta, porque ahí no hay ningún
+   `p` de sección compitiendo. */
+.teca-seccion .ph-aviso { font-size: 13px; max-width: 720px; }
 .teca-comparativa { margin: 30px 0 0; max-width: 720px; border-top: 1px solid var(--line); }
 .teca-comparativa li { padding: 16px 0; border-bottom: 1px solid var(--line);
   display: grid; grid-template-columns: 160px 1fr; gap: 18px; }
