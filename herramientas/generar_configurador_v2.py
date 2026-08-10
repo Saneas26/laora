@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 20
-V_JS = 38
+V_CSS = 22
+V_JS = 40
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -386,14 +386,36 @@ def pantalla(slug):
             if nom and hay(rel):
                 brazaletes[nom] = rel
 
+    # LA FOTO ENTERA, UNA POR CONFIGURACION
+    # ------------------------------------------------------------
+    # Oscar, 10/08/2026: se acabo el montaje de dos capas. Cuando existe
+    # la foto del reloj YA MONTADO se usa esa y no se compone nada, que
+    # es lo que quita la junta. El nombre encadena caja, esfera y
+    # brazalete: LO-03-C1-E1-Brz-316-A05.webp
+    #
+    # Conviven las dos cosas a proposito: mientras no esten las 240, la
+    # configuracion que tenga su foto entera la usa y el resto sigue con
+    # lo que haya. Asi cada tanda que llega se ve el mismo dia.
+    completas = {}
+    for c in caj:
+        for e_ in (esf or [None]):
+            base = f'{d["codigo"]}-{c["ref"]}' + (f'-{e_["ref"]}' if e_ else '')
+            for f_ in brz:
+                for v in f_['v']:
+                    nom = v.get('foto') or v['ref']
+                    clave = f'{base}-{nom}'
+                    rel = f'{PIEZAS_IMG}/completas/{clave}.webp'
+                    if hay(rel):
+                        completas[clave] = rel
+
     # Las claves que empiezan por _ son notas de casa —por qué una pieza
     # está fuera, qué hay que revisar—: se quedan en el JSON y NO viajan
     # a la página, que la lee cualquiera con el botón derecho.
     d = {k: v for k, v in d.items() if not k.startswith('_')}
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
-                        'brazaletes': brazaletes, 'solape': SOLAPE,
-                        'fotoDefecto': '/assets/img/catalogo/LO-01_Lunar_A01.webp'},
+                        'brazaletes': brazaletes, 'completas': completas,
+                        'solape': SOLAPE},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 
     html = f'''<!DOCTYPE html>
@@ -425,7 +447,7 @@ def pantalla(slug):
       <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
       <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
       <div class="cf-cabeza" data-cabeza>
-        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="{d['nombre']} de laOra">
+        <img data-foto alt="{d['nombre']} de laOra" hidden>
         <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
       </div>
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
