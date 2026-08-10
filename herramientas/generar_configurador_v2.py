@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 19
-V_JS = 27
+V_JS = 28
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -114,6 +114,45 @@ def redondea(p):
     truncar; ver el porqué —y el fallo que provocó— en el JavaScript."""
     bajo = int((p - 9.90) // 10) * 10 + 9.90
     return bajo if (p - bajo) <= (bajo + 10 - p) else bajo + 10
+
+
+# ------------------------------------------------------------
+# EL SUELO DEL PRECIO
+#
+# Copia exacta de lo que hace el configurador —está explicado allí, en
+# assets/js/configurador-v2.js—. Tiene que estar aquí porque el «desde»
+# de la colección sale de esta cuenta, y si las dos no coincidieran la
+# colección anunciaría un precio que la ficha no da.
+#
+# Óscar, 10/08/2026: los costes de la hoja son BASE IMPONIBLE; el
+# embalaje y el envío, los 9 €, llevan el IVA dentro.
+# ------------------------------------------------------------
+EMBALAJE, ENVIO = 2.00, 7.00          # con IVA dentro
+G_TASA, G_PORTES, G_PIEZAS = 0.05, 14.00, 5.00
+IVA, IRPF, SS = 0.21, 0.20, 0.05
+MIN_EUROS, MIN_PORCENTAJE = 50, 0.15
+
+
+def coste_neto(c, mov):
+    garantia = (mov['coste'] + G_PORTES + G_PIEZAS) * G_TASA
+    return c + (EMBALAJE + ENVIO) / (1 + IVA) + garantia
+
+
+def sube990(p):
+    bajo = int((p - 9.90) // 10) * 10 + 9.90
+    return bajo if bajo >= p - 1e-9 else bajo + 10
+
+
+def suelo_pvp(cn):
+    queda = 1 - IRPF - SS
+    por_euros = (MIN_EUROS / queda + cn) * (1 + IVA)
+    margen = queda / (1 + IVA) - MIN_PORCENTAJE
+    por_ciento = queda * cn / margen if margen > 0 else 0
+    return sube990(max(por_euros, por_ciento))
+
+
+def pvp_de(mov, c):
+    return max(redondea(c * MULT), suelo_pvp(coste_neto(c, mov)))
 
 
 # ============================================================
@@ -267,16 +306,19 @@ def validas(d):
                     if ok is None or v['ref'] in ok] or [{'c': 0}]
             for x in esfs:
                 for v in brzs:
-                    yield (m['coste'] + c['coste'] + (x['coste'] if x else 0)
-                           + (0 if extra else v['c']))
+                    yield m, (m['coste'] + c['coste'] + (x['coste'] if x else 0)
+                              + (0 if extra else v['c']))
 
 
 def pantalla(slug):
     d = PIEZAS[slug]
     mov, caj, esf, brz = d['mov'], d['caj'], d['esf'], d['brz']
 
-    costes = list(validas(d))
-    barato, combis = min(costes), len(costes)
+    # El «desde» es el PRECIO más bajo que se puede pagar, no el coste
+    # más bajo: desde que hay suelo, la configuración más barata de
+    # fabricar no siempre es la más barata de comprar.
+    precios = [pvp_de(m, c) for m, c in validas(d)]
+    barato, combis = min(precios), len(precios)
 
     ej = d.get('ejes', {})
     ejes = []
@@ -447,7 +489,7 @@ for slug in PIEZAS:
     nombre = ARCHIVO.get(slug, slug) + '.html'
     with open(os.path.join(RAIZ, nombre), 'w', encoding='utf-8') as f:
         f.write(html)
-    desde[nombre[:-5]] = redondea(barato * MULT)
+    desde[nombre[:-5]] = barato
     print(f'{nombre} · {combis} configuraciones'
           f' · desde {euros(desde[nombre[:-5]])}')
 
