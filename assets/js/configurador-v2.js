@@ -445,13 +445,22 @@
 
     var sub1 = coste();
     var ivaSop = sub1 * IVA;
+    /* EL SUBTOTAL 2 ES EL PVP, con los impuestos DENTRO (Óscar,
+       10/08/2026: «el IVA repercutido no se suma al subtotal 2, se
+       resta»). Por eso el IVA se saca DIVIDIENDO entre 1,21, no
+       multiplicando por 0,21: sobre 219,90 la diferencia son 8,02 € de
+       más, que es el error clásico de aplicar el tipo al bruto. */
     var sub2 = sub1 * D.mult;                 // el multiplicador de la web
-    var ivaRep = sub2 * IVA;
-    var total1 = sub2 + ivaRep;
+    var ivaRep = sub2 - sub2 / (1 + IVA);
+    var total1 = sub2 - ivaRep;               // la base imponible
     var total2 = total1 - ivaSop;
 
     var ivaAPagar = ivaRep - ivaSop;
-    var base = total1 - ivaAPagar;            // «pvp menos el IVA resultante»
+    /* «(pvp − el iva resultante)». El PVP es el Subtotal 2, NO el Total 1:
+       el Total 1 ya lleva descontado el IVA repercutido, así que restarle
+       otra vez el IVA a pagar lo contaría dos veces. Ese error daba 39,65 €
+       de beneficio en el Lunar más barato cuando son 68,29. */
+    var base = sub2 - ivaAPagar;
     var irpf = base * IRPF;
     var cinco = base * RETEN;
     var otros = EMBALAJE + ENVIO + GARANTIAS;
@@ -473,10 +482,10 @@
       fila('Total compra', sub1 + ivaSop, 'sub') +
 
       '<tr class="s"><td colspan="2">Venta · ×' + String(D.mult).replace('.', ',') + '</td></tr>' +
-      fila('Subtotal 2', sub2, 'sub') +
-      fila('IVA repercutido', ivaRep) +
-      fila('Total 1', total1, 'sub') +
-      fila('Total 2', total2) +
+      fila('Subtotal 2 · el PVP', sub2, 'sub') +
+      fila('IVA repercutido · dentro', -ivaRep) +
+      fila('Total 1 · base', total1, 'sub') +
+      fila('Total 2 · menos IVA sop.', total2) +
 
       '<tr class="s"><td colspan="2">Beneficio</td></tr>' +
       fila('IVA a pagar', ivaAPagar) +
@@ -491,10 +500,13 @@
       (bien ? '✓' : '✗') + ' mínimo 50 € y 15 % del coste (' + eu(sub1 * MIN_PORCENTAJE) + ')' +
       '</td></tr>' +
       '</tbody></table>' +
-      /* El choque que hay que decidir: la barra cobra el Subtotal 2 con
-         los impuestos DENTRO; esta cuenta le suma el 21 % por encima. */
-      '<p class="cf-cuentas-ojo">La barra cobra <b>' + eu(pvpBarra) + '</b> «impuestos incluidos».' +
-      ' Esta cuenta da <b>' + eu(total1) + '</b>. Hay que decidir cuál manda.</p>';
+      /* Lo que queda por decidir está ahora en la COMPRA: los anuncios
+         de AliExpress dicen «el precio incluye el IVA», así que el
+         Subtotal 1 ya lo lleva dentro y sumarle otro 21 % lo cuenta dos
+         veces. Se avisa, no se corrige solo: es decisión de Óscar. */
+      '<p class="cf-cuentas-ojo">La barra cobra <b>' + eu(pvpBarra) + '</b> y el Subtotal 2 da <b>' +
+      eu(sub2) + '</b>: cuadra.<br>Ojo: si el coste de las piezas ya lleva el IVA dentro,' +
+      ' sumarle otro 21 % lo cuenta dos veces.</p>';
   }
 
   /* ============================================================
