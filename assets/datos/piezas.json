@@ -1081,6 +1081,10 @@
    "caja": {},
    "esf": {},
    "brz": {}
+  },
+  "inicio": {
+   "brz": "B03",
+   "v": 0
   }
  },
  "bitacora": {

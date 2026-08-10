@@ -21,6 +21,17 @@
      sólida, automático → caja de cristal. */
   var PORMOV = ((D.ejes || {}).caja || {}).porMov || null;
   var e = { mov: 0, caja: 0, esf: 0, brz: 0, v: 0, diam: null, color: null };
+  /* CON QUE OPCION DESPIERTA LA PAGINA
+     Por defecto, la primera de cada eje. Pero un modelo puede decir otra
+     cosa: el Lunar arranca con el acero macizo de tres eslabones porque
+     asi lo quiso Oscar el 10/08/2026, y no con el mas barato, que era la
+     regla anterior. Se declara en `inicio` dentro de piezas.json. */
+  if (D.inicio && D.inicio.brz) {
+    for (var q0 = 0; q0 < D.brz.length; q0++) {
+      if (D.brz[q0].id === D.inicio.brz) { e.brz = q0; break; }
+    }
+    e.v = D.inicio.v || 0;
+  }
   if (SUB) { e.diam = SUB[0].valores[0]; e.color = SUB[1].valores[0]; }
 
   /* El FONDO no se elige: lo decide el movimiento. Sólida con el cuarzo,
@@ -257,10 +268,35 @@
   function pintaVisor() {
     var p = piezas();
     var refCab = D.codigo + '-' + p.caja.ref + (p.esf ? '-' + p.esf.ref : '');
-    var cab = (D.cabezas || {})[refCab];
-    $('[data-foto]').src = cab || D.fotoDefecto;
+    /* SIN FOTO NO SE ENSEÑA OTRO RELOJ.
+       Antes, cuando faltaba la cabeza, se caía a una foto de reserva que
+       era el Lunar. En la página del Lunar colaba; en la de cualquier
+       otro reloj se estaba enseñando un modelo que no era el que se
+       vende, con su nombre en la esfera y todo. Ahora la foto se
+       esconde y queda el hueco con el aviso, que no engaña a nadie. */
+    /* LA FOTO ENTERA MANDA SOBRE TODO
+       Si existe la foto de ESTA configuración ya montada, se pone esa y
+       no se compone nada: ni mitades de brazalete ni bandas dibujadas.
+       Es lo que quita la junta, que era el motivo del cambio. */
+    var entera = (D.completas || {})[refCab + '-' + (p.v.foto || p.v.ref)];
+
+    var cab = entera || (D.cabezas || {})[refCab];
+    var foto = $('[data-foto]');
+    if (cab) { foto.src = cab; foto.hidden = false; }
+    else { foto.removeAttribute('src'); foto.hidden = true; }
     $('[data-pendiente]').hidden = !!cab;
-    document.querySelector('[data-montaje]').classList.toggle('con-foto', !!cab);
+    var montaje = document.querySelector('[data-montaje]');
+    montaje.classList.toggle('con-foto', !!cab);
+    montaje.classList.toggle('sin-cabeza', !cab);
+    montaje.classList.toggle('entera', !!entera);
+
+    if (entera) {
+      todos('[data-brz-img]').forEach(function (el) { el.hidden = true; });
+      todos('[data-correa]').forEach(function (el) { el.hidden = true; });
+      var av0 = $('[data-aviso]');
+      if (av0) av0.hidden = true;
+      return;
+    }
 
     /* El nombre del archivo no siempre es la referencia de pedido: el
        brazalete del Precisa viene con la caja y no tiene referencia, pero

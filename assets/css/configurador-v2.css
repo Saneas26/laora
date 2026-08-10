@@ -90,7 +90,15 @@ body{
    la caja del texto mide lo que la letra y las dos se centran de verdad. */
 .cf-marca{display:flex;align-items:center;gap:10px;line-height:1}
 .cf-marca img{width:74px;height:auto;display:block}
-.cf-marca b{font-size:17px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block}
+.cf-marca b{
+  font-size:17px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block;
+  /* Baja 2 px. Con `line-height:1` la caja del texto reserva el hueco de
+     las letras con cola —la g, la p— y ningún nombre de modelo tiene
+     ninguna, así que la tinta se queda en la mitad de arriba y el nombre
+     parece flotar por encima del logotipo. El logotipo, medido, está
+     centrado en su imagen: el que iba alto era el texto. */
+  position:relative;top:2px;
+}
 /* La referencia vive en la cabecera, siempre visible y siempre con las
    palabras al lado (el rótulo del visor). Tabular para que los cuatro
    segmentos no bailen de ancho al cambiar de opción. */
@@ -143,7 +151,10 @@ body{
    Si algún día cambia el fondo de las fotos, este color cambia. */
 .cf-visor{
   position:relative;display:flex;align-items:center;justify-content:center;
-  min-width:0;background:#f6efed;
+  /* El gris de las fotos del reloj. Van recortadas y sin fondo, así que
+     el fondo lo pone aquí la web: un solo sitio, y no baila de una foto
+     a otra como bailaría si cada archivo trajera el suyo. */
+  min-width:0;background:#eae8e8;
   border-right:1px solid var(--linea-suave);
   /* RECORTA. El brazalete mide 2,4 veces la cabeza y siempre sobresale:
      esa es la gracia. En el escritorio lo cortaba el `overflow` del
@@ -202,6 +213,15 @@ body{
 .cf-montaje.con-foto .cf-correa.arriba{top:0;bottom:50%;border-radius:5px 5px 0 0}
 .cf-montaje.con-foto .cf-correa.abajo {top:50%;bottom:0;border-radius:0 0 11px 11px}
 
+/* UNA SOLA FOTO, LA DEL RELOJ YA MONTADO
+   No hay capas que colocar: la imagen es cuadrada y llena el visor. */
+.cf-montaje.entera{width:min(86%,calc(96svh - 128px));height:100%;display:block}
+.cf-montaje.entera .cf-cabeza{
+  position:absolute;left:0;top:50%;width:100%;height:auto;
+  transform:translateY(-50%);overflow:visible;border:0;background:none;
+}
+.cf-montaje.entera .cf-cabeza img{position:static;width:100%;left:auto;top:auto}
+
 .cf-brz{
   position:absolute;left:0;width:100%;height:auto;top:50%;z-index:1;
 }
@@ -218,6 +238,20 @@ body{
 }
 .cf-correa.arriba{flex:1;border-radius:5px 5px 1px 1px}
 .cf-correa.abajo{flex:1.3;border-radius:1px 1px 11px 11px}
+/* EL HUECO DE LA CABEZA CUANDO NO HAY FOTO
+   Un contorno tenue del tamaño que tendrá el reloj. Ni foto de otro
+   modelo ni imagen rota: se ve que falta, y se ve dónde va. */
+/* MIENTRAS NO HAY FOTO
+   El montaje se quedaba mas bajo que la propia cabeza y las bandas
+   dibujadas salian con altura cero: no se veia brazalete y el circulo se
+   salia de su caja. Se le da altura explicita al montaje. */
+.cf-montaje.sin-cabeza{height:min(620px,86%);min-height:420px}
+.cf-montaje.sin-cabeza .cf-cabeza{
+  border:1px dashed rgba(28,29,27,.20);border-radius:50%;
+  background:rgba(28,29,27,.05);
+}
+.cf-montaje.sin-cabeza .cf-correa{min-height:60px}
+
 .cf-cabeza{
   position:relative;width:300px;height:273px;overflow:hidden;flex:none;
 }
