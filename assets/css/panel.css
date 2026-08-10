@@ -133,10 +133,37 @@ body{margin:0;background:var(--ivory);color:var(--ink);
           box-shadow:0 10px 30px rgba(0,0,0,.25)}
 .pa-aviso.pa-aviso-mal{background:var(--mal)}
 
+/* ============================================================
+   LAS CUENTAS
+   ------------------------------------------------------------
+   Números en tabla, y el dinero SIEMPRE alineado a la derecha con
+   cifras de ancho fijo: una columna de importes solo se lee de un
+   vistazo si las unidades caen unas debajo de otras.
+   ============================================================ */
+.pa-tabla-caja{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.pa-tabla{width:100%;border-collapse:collapse;font-size:15px}
+.pa-tabla th,.pa-tabla td{padding:11px 14px;text-align:left;white-space:nowrap}
+.pa-tabla thead th{font-size:13px;font-weight:700;color:var(--muted);
+  border-bottom:1px solid var(--line);background:var(--ivory)}
+.pa-tabla tbody tr+tr td{border-top:1px solid var(--line)}
+.pa-tabla .n{text-align:right;font-variant-numeric:tabular-nums}
+.pa-tabla tfoot td{border-top:2px solid var(--ink);font-weight:700;
+  font-variant-numeric:tabular-nums}
+.pa-tabla .pa-menos{color:var(--mal)}
+.pa-tabla a{text-decoration:underline}
+
+/* Los desplegables del panel, con la misma pinta que los campos. */
+.pa-select{height:44px;padding:0 12px;font:inherit;font-size:15px;
+  border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+
+/* Un renglón de apunte bajo un título, para lo que no cabe en la cifra. */
+.pa-mini{font-size:13.5px;color:var(--muted);margin:6px 0 14px}
+
 @media (max-width:640px){
   .pa-fila{grid-template-columns:minmax(0,1fr)}
   .pa-derecha{text-align:left}
   .pa-tarjeta b{font-size:27px}
+  .pa-tabla th,.pa-tabla td{padding:9px 11px;font-size:14px}
 }
 
 /* ============================================================
