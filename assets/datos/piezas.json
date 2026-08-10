@@ -717,7 +717,7 @@
       "esl": "Cinco eslabones"
      }
     ],
-    "mat": "Acero 316L"
+    "mat": "Acero"
    },
    {
     "id": "B02",
@@ -777,7 +777,7 @@
       "esl": "Cinco eslabones"
      }
     ],
-    "mat": "Acero 316L macizo"
+    "mat": "Acero 316L"
    },
    {
     "id": "B06",
@@ -812,6 +812,38 @@
     "mat": "Acero 316L macizo"
    },
    {
+    "id": "B04",
+    "nombre": "Malla milanesa, hebilla plegable",
+    "mat": "Malla milanesa",
+    "v": [
+     {
+      "ref": "Brz-316-A08",
+      "nom": "Plata",
+      "c": 33.39,
+      "esl": "",
+      "eti": "Plata",
+      "cier": "Hebilla plegable",
+      "hex": "#c9cdd2"
+     }
+    ]
+   },
+   {
+    "id": "B05",
+    "nombre": "Malla milanesa de eslabón fino",
+    "mat": "Malla milanesa",
+    "v": [
+     {
+      "ref": "Brz-316-A09",
+      "nom": "Plata",
+      "c": 40.36,
+      "esl": "",
+      "eti": "Plata",
+      "cier": "Eslabón fino",
+      "hex": "#c9cdd2"
+     }
+    ]
+   },
+   {
     "id": "B08",
     "nombre": "Acero 904L macizo",
     "v": [
@@ -834,7 +866,7 @@
       "esl": "Macizo"
      }
     ],
-    "mat": "Acero 904L"
+    "mat": "Acero 904L macizo"
    },
    {
     "id": "B09",
@@ -906,7 +938,7 @@
       "esl": "Tres eslabones"
      }
     ],
-    "mat": "Acero 904L"
+    "mat": "Acero 904L macizo"
    },
    {
     "id": "B10",
