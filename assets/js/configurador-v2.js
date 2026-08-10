@@ -379,6 +379,7 @@
     pintaVisor();
     pintaSpecs();
     pintaPrecio();
+    pintaCuentas();
   }
 
   function pintaMuestras() {
@@ -386,6 +387,114 @@
       var f = D.brz[i];
       el.style.background = dibujo(f.nombre + ' ' + nombreFam(f), f.v[0].nom);
     });
+  }
+
+  /* ============================================================
+     LA CUENTA DE EXPLOTACIÓN  ·  SOLO PARA ÓSCAR
+     ------------------------------------------------------------
+     Encargo del 10/08/2026, mientras se prueba el configurador. Es
+     información INTERNA: enseña lo que nos cuesta cada pieza. Por eso
+     NO sale por defecto.
+
+     Se enciende una vez con  ?cuentas=1  y se queda encendida en ESE
+     navegador; se apaga con ?cuentas=0. Así Óscar la ve siempre y un
+     cliente no se la encuentra jamás.
+
+     TRES NÚMEROS ESTÁN A CERO porque no los tengo: embalaje, envío y
+     fondo de garantías. Salen marcados «por fijar» en pantalla. No me
+     los invento: con cifras inventadas, la comprobación de que el
+     beneficio llega a 50 € no valdría nada.
+     ============================================================ */
+  var EMBALAJE = 0;          // por fijar
+  var ENVIO = 0;             // por fijar
+  var GARANTIAS = 0;         // por fijar · fondo por reloj
+  var IVA = 0.21, IRPF = 0.20, RETEN = 0.05;
+  var MIN_EUROS = 50, MIN_PORCENTAJE = 0.15;
+
+  var VER_CUENTAS = (function () {
+    var m = /[?&]cuentas=([01])/.exec(location.search);
+    try {
+      if (m) {
+        if (m[1] === '1') localStorage.setItem('laora.cuentas', '1');
+        else localStorage.removeItem('laora.cuentas');
+      }
+      return localStorage.getItem('laora.cuentas') === '1';
+    } catch (err) { return !!m && m[1] === '1'; }
+  })();
+
+  function eu(v) { return (Math.round(v * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
+
+  function fila(etiqueta, valor, clase) {
+    return '<tr' + (clase ? ' class="' + clase + '"' : '') + '><td>' + etiqueta +
+           '</td><td>' + (typeof valor === 'string' ? valor : eu(valor)) + '</td></tr>';
+  }
+
+  function pintaCuentas() {
+    var caja = $('[data-cuentas]');
+    if (!caja) return;
+    caja.hidden = !VER_CUENTAS;
+    if (!VER_CUENTAS) return;
+
+    var p = piezas();
+    var piezasCoste = [
+      ['Movimiento', p.mov.coste],
+      ['Caja', p.caja.coste],
+      p.esf ? ['Esfera', p.esf.coste] : null,
+      ['Brazalete', p.v.c]
+    ].filter(Boolean);
+
+    var sub1 = coste();
+    var ivaSop = sub1 * IVA;
+    var sub2 = sub1 * D.mult;                 // el multiplicador de la web
+    var ivaRep = sub2 * IVA;
+    var total1 = sub2 + ivaRep;
+    var total2 = total1 - ivaSop;
+
+    var ivaAPagar = ivaRep - ivaSop;
+    var base = total1 - ivaAPagar;            // «pvp menos el IVA resultante»
+    var irpf = base * IRPF;
+    var cinco = base * RETEN;
+    var otros = EMBALAJE + ENVIO + GARANTIAS;
+    var beneficio = base - irpf - cinco - sub1 - otros;
+
+    var bienEuros = beneficio >= MIN_EUROS;
+    var bienPorc = sub1 > 0 && beneficio >= sub1 * MIN_PORCENTAJE;
+    var bien = bienEuros && bienPorc;
+
+    var pvpBarra = redondea(sub2);            // lo que cobra la barra de abajo
+
+    caja.innerHTML =
+      '<p class="cf-cuentas-t">Cuenta de explotación <i>solo tú · ?cuentas=0 para apagar</i></p>' +
+      '<table><tbody>' +
+      '<tr class="s"><td colspan="2">Compra</td></tr>' +
+      piezasCoste.map(function (x) { return fila(x[0], x[1]); }).join('') +
+      fila('Subtotal 1', sub1, 'sub') +
+      fila('IVA soportado', ivaSop) +
+      fila('Total compra', sub1 + ivaSop, 'sub') +
+
+      '<tr class="s"><td colspan="2">Venta · ×' + String(D.mult).replace('.', ',') + '</td></tr>' +
+      fila('Subtotal 2', sub2, 'sub') +
+      fila('IVA repercutido', ivaRep) +
+      fila('Total 1', total1, 'sub') +
+      fila('Total 2', total2) +
+
+      '<tr class="s"><td colspan="2">Beneficio</td></tr>' +
+      fila('IVA a pagar', ivaAPagar) +
+      fila('PVP sin ese IVA', base, 'sub') +
+      fila('− IRPF 20 %', -irpf) +
+      fila('− 5 %', -cinco) +
+      fila('− piezas', -sub1) +
+      fila('− embalaje y envío', EMBALAJE + ENVIO ? -(EMBALAJE + ENVIO) : 'por fijar') +
+      fila('− garantías', GARANTIAS ? -GARANTIAS : 'por fijar') +
+      fila('BENEFICIO', beneficio, 'tot' + (bien ? '' : ' mal')) +
+      '<tr class="' + (bien ? 'ok' : 'mal') + '"><td colspan="2">' +
+      (bien ? '✓' : '✗') + ' mínimo 50 € y 15 % del coste (' + eu(sub1 * MIN_PORCENTAJE) + ')' +
+      '</td></tr>' +
+      '</tbody></table>' +
+      /* El choque que hay que decidir: la barra cobra el Subtotal 2 con
+         los impuestos DENTRO; esta cuenta le suma el 21 % por encima. */
+      '<p class="cf-cuentas-ojo">La barra cobra <b>' + eu(pvpBarra) + '</b> «impuestos incluidos».' +
+      ' Esta cuenta da <b>' + eu(total1) + '</b>. Hay que decidir cuál manda.</p>';
   }
 
   /* ============================================================
