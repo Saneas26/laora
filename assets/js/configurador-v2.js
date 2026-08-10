@@ -405,10 +405,10 @@
      los invento: con cifras inventadas, la comprobación de que el
      beneficio llega a 50 € no valdría nada.
      ============================================================ */
-  var EMBALAJE = 0;          // por fijar
-  var ENVIO = 0;             // por fijar
-  var GARANTIAS = 0;         // por fijar · fondo por reloj
-  var IVA = 0.21, IRPF = 0.20, RETEN = 0.05;
+  var EMBALAJE = 2.00;       // Óscar, 10/08/2026
+  var ENVIO = 7.00;
+  var GARANTIAS = 0;         // por fijar · provisión por reloj
+  var IVA = 0.21, IRPF = 0.20, SS = 0.05;
   var MIN_EUROS = 50, MIN_PORCENTAJE = 0.15;
 
   var VER_CUENTAS = (function () {
@@ -423,12 +423,29 @@
   })();
 
   function eu(v) { return (Math.round(v * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
+  function sinIva(v) { return v / (1 + IVA); }
 
   function fila(etiqueta, valor, clase) {
     return '<tr' + (clase ? ' class="' + clase + '"' : '') + '><td>' + etiqueta +
            '</td><td>' + (typeof valor === 'string' ? valor : eu(valor)) + '</td></tr>';
   }
 
+  /* ------------------------------------------------------------
+     LAS TRES REGLAS QUE HACEN QUE ESTO CUADRE
+
+     1. EL IVA DE LAS COMPRAS NO ES UN COSTE: se recupera. A Hacienda
+        se le entrega el repercutido MENOS el soportado. Meterlo en el
+        coste y además descontar el de la venta lo cuenta dos veces.
+
+     2. LAS PIEZAS YA LLEVAN EL IVA DENTRO. Los anuncios dicen «el
+        precio incluye el IVA», así que multiplicar por 1,21 lo suma
+        por segunda vez. El neto se saca dividiendo.
+
+     3. EL IRPF Y LA SS VAN SOBRE EL BENEFICIO, NO SOBRE LA VENTA. El
+        modelo 130 es el 20 % del rendimiento NETO —ingresos menos
+        gastos—, no de lo facturado. Aplicarlo a la venta se lleva 60 €
+        donde debe llevarse 27.
+     ------------------------------------------------------------ */
   function pintaCuentas() {
     var caja = $('[data-cuentas]');
     if (!caja) return;
@@ -436,77 +453,60 @@
     if (!VER_CUENTAS) return;
 
     var p = piezas();
-    var piezasCoste = [
+    var lineas = [
       ['Movimiento', p.mov.coste],
       ['Caja', p.caja.coste],
       p.esf ? ['Esfera', p.esf.coste] : null,
       ['Brazalete', p.v.c]
     ].filter(Boolean);
 
-    var sub1 = coste();
-    var ivaSop = sub1 * IVA;
-    /* EL SUBTOTAL 2 ES EL PVP, con los impuestos DENTRO (Óscar,
-       10/08/2026: «el IVA repercutido no se suma al subtotal 2, se
-       resta»). Por eso el IVA se saca DIVIDIENDO entre 1,21, no
-       multiplicando por 0,21: sobre 219,90 la diferencia son 8,02 € de
-       más, que es el error clásico de aplicar el tipo al bruto. */
-    var sub2 = sub1 * D.mult;                 // el multiplicador de la web
-    var ivaRep = sub2 - sub2 / (1 + IVA);
-    var total1 = sub2 - ivaRep;               // la base imponible
-    var total2 = total1 - ivaSop;
+    var piezasCoste = coste();
+    var conIva = piezasCoste + EMBALAJE + ENVIO + GARANTIAS;
+    var ivaSop = (piezasCoste - sinIva(piezasCoste)) +
+                 (EMBALAJE - sinIva(EMBALAJE)) + (ENVIO - sinIva(ENVIO));
+    var costeNeto = conIva - ivaSop;
 
-    var ivaAPagar = ivaRep - ivaSop;
-    /* «(pvp − el iva resultante)». El PVP es el Subtotal 2, NO el Total 1:
-       el Total 1 ya lleva descontado el IVA repercutido, así que restarle
-       otra vez el IVA a pagar lo contaría dos veces. Ese error daba 39,65 €
-       de beneficio en el Lunar más barato cuando son 68,29. */
-    var base = sub2 - ivaAPagar;
-    var irpf = base * IRPF;
-    var cinco = base * RETEN;
-    var otros = EMBALAJE + ENVIO + GARANTIAS;
-    var beneficio = base - irpf - cinco - sub1 - otros;
+    var pvp = redondea(piezasCoste * D.mult);
+    var ivaRep = pvp - sinIva(pvp);
+    var base = pvp - ivaRep;
 
-    var bienEuros = beneficio >= MIN_EUROS;
-    var bienPorc = sub1 > 0 && beneficio >= sub1 * MIN_PORCENTAJE;
+    var bruto = base - costeNeto;
+    var irpf = bruto * IRPF, ss = bruto * SS;
+    var neto = bruto - irpf - ss;
+
+    var bienEuros = neto >= MIN_EUROS;
+    var bienPorc = pvp > 0 && neto >= pvp * MIN_PORCENTAJE;
     var bien = bienEuros && bienPorc;
-
-    var pvpBarra = redondea(sub2);            // lo que cobra la barra de abajo
 
     caja.innerHTML =
       '<p class="cf-cuentas-t">Cuenta de explotación <i>solo tú · ?cuentas=0 para apagar</i></p>' +
       '<table><tbody>' +
-      '<tr class="s"><td colspan="2">Compra</td></tr>' +
-      piezasCoste.map(function (x) { return fila(x[0], x[1]); }).join('') +
-      fila('Subtotal 1', sub1, 'sub') +
-      fila('IVA soportado', ivaSop) +
-      fila('Total compra', sub1 + ivaSop, 'sub') +
+      '<tr class="s"><td colspan="2">Costes</td></tr>' +
+      lineas.map(function (x) { return fila(x[0], x[1]); }).join('') +
+      fila('Embalaje', EMBALAJE) +
+      fila('Envío', ENVIO) +
+      fila('Fondo de garantía', GARANTIAS ? GARANTIAS : 'por fijar') +
+      fila('Coste con IVA', conIva, 'sub') +
+      fila('IVA soportado · se recupera', -ivaSop) +
+      fila('Coste neto', costeNeto, 'sub') +
 
       '<tr class="s"><td colspan="2">Venta · ×' + String(D.mult).replace('.', ',') + '</td></tr>' +
-      fila('Subtotal 2 · el PVP', sub2, 'sub') +
-      fila('IVA repercutido · dentro', -ivaRep) +
-      fila('Total 1 · base', total1, 'sub') +
-      fila('Total 2 · menos IVA sop.', total2) +
+      fila('PVP', pvp, 'sub') +
+      fila('IVA repercutido', -ivaRep) +
+      fila('Base imponible', base, 'sub') +
 
       '<tr class="s"><td colspan="2">Beneficio</td></tr>' +
-      fila('IVA a pagar', ivaAPagar) +
-      fila('PVP sin ese IVA', base, 'sub') +
+      fila('Base menos coste neto', bruto, 'sub') +
       fila('− IRPF 20 %', -irpf) +
-      fila('− 5 %', -cinco) +
-      fila('− piezas', -sub1) +
-      fila('− embalaje y envío', EMBALAJE + ENVIO ? -(EMBALAJE + ENVIO) : 'por fijar') +
-      fila('− garantías', GARANTIAS ? -GARANTIAS : 'por fijar') +
-      fila('BENEFICIO', beneficio, 'tot' + (bien ? '' : ' mal')) +
+      fila('− SS y otros 5 %', -ss) +
+      fila('BENEFICIO NETO', neto, 'tot' + (bien ? '' : ' mal')) +
+      fila('sobre el PVP', (Math.round(neto / pvp * 1000) / 10).toString().replace('.', ',') + ' %') +
       '<tr class="' + (bien ? 'ok' : 'mal') + '"><td colspan="2">' +
-      (bien ? '✓' : '✗') + ' mínimo 50 € y 15 % del coste (' + eu(sub1 * MIN_PORCENTAJE) + ')' +
+      (bien ? '✓' : '✗') + ' mínimo 50 € y 15 % del PVP (' + eu(pvp * MIN_PORCENTAJE) + ')' +
       '</td></tr>' +
       '</tbody></table>' +
-      /* Lo que queda por decidir está ahora en la COMPRA: los anuncios
-         de AliExpress dicen «el precio incluye el IVA», así que el
-         Subtotal 1 ya lo lleva dentro y sumarle otro 21 % lo cuenta dos
-         veces. Se avisa, no se corrige solo: es decisión de Óscar. */
-      '<p class="cf-cuentas-ojo">La barra cobra <b>' + eu(pvpBarra) + '</b> y el Subtotal 2 da <b>' +
-      eu(sub2) + '</b>: cuadra.<br>Ojo: si el coste de las piezas ya lleva el IVA dentro,' +
-      ' sumarle otro 21 % lo cuenta dos veces.</p>';
+      '<p class="cf-cuentas-ojo">A Hacienda, de IVA: <b>' + eu(ivaRep - ivaSop) + '</b>' +
+      ' (repercutido menos soportado).<br>Sin mano de obra, por decisión tuya.</p>';
   }
 
   /* ============================================================
