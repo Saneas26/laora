@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 14
-V_JS = 17
+V_CSS = 15
+V_JS = 19
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -193,8 +193,8 @@ def brazalete_fijo(nombre, apunte):
     </div>
 
     <div class="cf-grupo" data-grupo-var hidden>
-      <p class="cf-rotulo"><span data-rotulo-var>Acabado</span> <b data-cuenta-var></b></p>
-      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir acabado"></div>
+      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
     </div>'''
 
 
@@ -213,8 +213,8 @@ def eje_brazalete(familias, nombres):
     </div>
 
     <div class="cf-grupo" data-grupo-var>
-      <p class="cf-rotulo"><span data-rotulo-var>Acabado</span> <b data-cuenta-var></b></p>
-      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir acabado"></div>
+      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
     </div>'''
 
 
@@ -333,7 +333,6 @@ def pantalla(slug):
 
     html = f'''<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
 <title>Configura tu {d['nombre']} · laOra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -345,7 +344,7 @@ def pantalla(slug):
     <img src="{LOGO}" alt="laOra"><b>{d['nombre']}</b>
   </a>
   <p class="cf-ref">Ref. <b data-ref>—</b></p>
-  <button class="cf-ficha-boton" type="button">Ver la ficha completa</button>
+  <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
 </header>
 
 <div class="cf-cuerpo">
@@ -374,18 +373,57 @@ def pantalla(slug):
 <footer class="cf-barra">
   <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
   <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
-  <button class="cf-reservar" type="button">Reservar</button>
+  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
+<div class="cf-manto" data-manto hidden>
+  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
+    <header class="cf-tec-cab">
+      <div>
+        <p class="cf-tec-eyebrow">{d['codigo']} · FICHA TÉCNICA</p>
+        <h2 id="cf-tec-t">Todo el {d['nombre']}.<br><em>Dato a dato.</em></h2>
+      </div>
+      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
+      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
+    </header>
+    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
+    <footer class="cf-tec-pie">
+      <p data-tec-pie></p>
+      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
+    </footer>
+  </div>
+</div>
+
 <script type="application/json" data-piezas>{datos}</script>
+<script src="/assets/js/carrito.js?v=1"></script>
 <script src="/assets/js/configurador-v2.js?v={V_JS}"></script>
 '''
     return html, barato, combis
 
 
+# El nombre del archivo publicado. Solo el Cero Cero difiere del slug,
+# porque su página lleva guion desde el principio y hay enlaces puestos.
+ARCHIVO = {'cerocero': 'cero-cero'}
+
+# EL «DESDE» LO CALCULA QUIEN COBRA
+# ------------------------------------------------------------
+# El listado de la colección anunciaba su propio mínimo, sacado del
+# catálogo viejo, y los dos números se separaron: prometía el Precisa
+# «desde 229,90 €» cuando su página más barata vale 269,90. Un precio
+# anunciado que no se puede conseguir no es una errata, es publicidad
+# engañosa. Desde el 10/08/2026 el mínimo se escribe aquí, donde se
+# calcula, y la colección lo lee.
+desde = {}
+
 for slug in PIEZAS:
     html, barato, combis = pantalla(slug)
-    with open(os.path.join(RAIZ, f'{slug}-nuevo.html'), 'w', encoding='utf-8') as f:
+    nombre = ARCHIVO.get(slug, slug) + '.html'
+    with open(os.path.join(RAIZ, nombre), 'w', encoding='utf-8') as f:
         f.write(html)
-    print(f'{slug}-nuevo.html · {combis} configuraciones'
-          f' · desde {euros(redondea(barato * MULT))}')
+    desde[nombre[:-5]] = redondea(barato * MULT)
+    print(f'{nombre} · {combis} configuraciones'
+          f' · desde {euros(desde[nombre[:-5]])}')
+
+with open(os.path.join(RAIZ, 'assets/datos/desde.json'), 'w', encoding='utf-8') as f:
+    json.dump(desde, f, ensure_ascii=False, indent=1, sort_keys=True)
+print('assets/datos/desde.json escrito')

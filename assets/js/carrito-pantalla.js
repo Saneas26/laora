@@ -74,7 +74,7 @@
 
       var medio = el('div');
       medio.appendChild(el('h2', '', l.nombre || 'Reloj laOra'));
-      var detalle = [l.acabado, l.correa].filter(Boolean).join(' · ');
+      var detalle = [l.detalle, l.correa].filter(Boolean).join(' · ');
       if (detalle) medio.appendChild(el('p', 'ca-detalle', detalle));
       if (l.ref) medio.appendChild(el('p', 'ca-ref', 'Ref. ' + l.ref));
       li.appendChild(medio);

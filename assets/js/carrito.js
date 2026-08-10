@@ -5,7 +5,7 @@
    usuario ni servidor de por medio: si vacías el navegador, se
    vacía el carrito. Es lo correcto para una web sin login.
 
-   OJO con el dinero: aquí se guardan `ref` y `acabado`, y el
+   OJO con el dinero: aquí se guardan `ref` y `detalle`, y el
    precio SOLO para pintarlo. Quien decide lo que se cobra sigue
    siendo el servidor (Edge Function `laora-crear-reserva`, que
    recalcula desde precios.js). Si alguien manipula el carrito,
@@ -34,7 +34,7 @@ function laoraCarritoUnidades() {
 function laoraCarritoAnadir(linea) {
   var lineas = laoraCarritoLeer();
   var igual = lineas.filter(function (l) {
-    return l.ref === linea.ref && l.acabado === linea.acabado &&
+    return l.ref === linea.ref && l.detalle === linea.detalle &&
            (l.esfera || '') === (linea.esfera || '') &&
            JSON.stringify(l.extras || []) === JSON.stringify(linea.extras || []);
   })[0];

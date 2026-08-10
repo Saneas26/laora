@@ -1,81 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-laOra · LA PANTALLA DE COMPRAR, UNA POR MODELO
+JUBILADO · 10/08/2026 · NO EJECUTAR
 ============================================================
-Escribe `/lunar`, `/cero-cero`, `/precisa`, `/trinchera` y `/bitacora`.
-Las cinco son la MISMA pantalla: la que Óscar dio por buena el
-05/08/2026 como `lunarv2c`. Lo único que cambia de una a otra son los
-datos, y todos salen de `assets/datos/catalogo.json`.
+Este era el generador de los configuradores POR ACABADO: Alba,
+Levante, Cenit y Eclipse. Esa estructura ya no existe.
 
-QUÉ ES ESTA PANTALLA
-------------------------------------------------------------
-No es una landing. La landing es una sola —la portada— y habla de la
-empresa y de lo que se siente al comprar un reloj nuestro. Esto es lo
-que viene después: elegir acabado y correa, ver el precio y reservar.
-Óscar lo pidió así el 06/08/2026:
+    «no vamos a trabajar con acabados, y tienen que desaparecer de
+     toda la web. Un modelo configurable, eso es todo.»
+                                        Óscar, 10/08/2026
 
-    «yo solo quiero montar laora.es/lunar, laora.es/bitacora,
-     laora.es/precisa... y que sean exactamente igual que el
-     laora.es/lunarv2c, no quiero montar una landing para cada uno.»
+Las ocho páginas de modelo las escribe ahora
+`herramientas/generar_configurador_v2.py` desde la biblioteca de
+piezas. Si ejecutas esto, PISAS las ocho con la estructura vieja.
 
-De ahí las tres reglas que hereda de `lunarv2c`:
-
-  1. El reloj no se mueve nunca. Cambiar de opción solo cambia la foto
-     y las cifras; no se abre nada, no se despliega nada, no hay scroll.
-  2. El precio vive en una barra pegada abajo, siempre visible.
-  3. La página entera mide una pantalla: `height: 100svh` sin scroll.
-
-NI UN DATO ESCRITO A MANO
-------------------------------------------------------------
-Precios, acabados, correas, fichas técnicas y REFERENCIAS salen del
-catálogo. La referencia se compone aquí, en Python, y viaja ya hecha
-dentro del JSON de la página: antes la componía también el JavaScript,
-con su propia copia de las reglas, y las dos copias se desviaban (el
-segundo Cenit del Precisa salía `C01` donde la hoja dice `C02`).
-
-LAS COMBINACIONES QUE NO EXISTEN
-------------------------------------------------------------
-La matriz `precios[acabado][correa]` tiene huecos a `null`, y son la
-información más importante de la pantalla: el Cenit del Lunar solo se
-monta con el brazalete de acero. Esas correas se enseñan APAGADAS, no
-escondidas: si desaparecieran, parecería que la opción no existe. Y
-apagadas de verdad —`disabled`—, porque con `hidden` el navegador las
-seguía dejando pulsar y el precio se quedaba en blanco.
-
-LOS MODELOS SIN CORREA A ELEGIR
-------------------------------------------------------------
-El Precisa y el Bitácora llevan brazalete integrado: no hay nada que
-elegir. En vez de dejar el grupo vacío, se fabrica una única opción con
-el texto del brazalete que ya está en `comunes`, y sale marcada. La
-pantalla es la misma; lo que cambia es que ahí no hay decisión.
-
-LAS FOTOS
-------------------------------------------------------------
-`assets/img/catalogo/` tiene una foto por referencia, del paquete
-aprobado del 06/08/2026. Se usan así:
-
-  · LUNAR: foto por COMBINACIÓN. Su `README` empareja una a una las
-    ocho referencias con las ocho correas, y coincide con el catálogo.
-  · EL RESTO: foto por ACABADO. Sus paquetes numeran por caja o por
-    movimiento, no por correa —el `A02` del Trinchera es la caja de
-    bronce, no la NATO negra—, así que emparejar por número pondría
-    una foto que no es la que se está eligiendo. Se sirve la primera
-    del acabado, que sí es fiel en color y en caja.
-
-Cuando el paquete de un modelo confirme la correspondencia por correa,
-se añade su slug a `FOTO_POR_COMBINACION` y esa pantalla pasa sola a
-enseñar la foto exacta.
-
-EL BAUHAUS NO SE PUBLICA
-------------------------------------------------------------
-Sigue en el catálogo, pero está aparcado desde el 05/08/2026: no se
-encuentran ni las cajas ni los movimientos. No se le abre una pantalla
-de comprar a un reloj que hoy no se puede montar.
-
-USO
-    python3 herramientas/generar_configuradores.py
+Se deja el código debajo, sin tocar, por si hiciera falta consultar
+cómo se resolvía algo. Pero no se ejecuta: el guardia de abajo lo
+impide.
+============================================================
 """
+import sys
+sys.exit('JUBILADO: las páginas de modelo las hace generar_configurador_v2.py')
 
 import glob
 import json

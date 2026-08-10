@@ -1,141 +1,108 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Configura tu Lunar de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 219,90 €.">
-<meta name="theme-color" content="#151715">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configura tu Lunar · laOra</title>
-<link rel="canonical" href="https://laora.es/lunar">
-<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
-<link rel="stylesheet" href="/assets/css/configurador.css?v=27">
-</head>
-<body class="cfg-muchos">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=15">
 
-<header class="cfg-cab">
-  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
-       sin él sería un callejón sin salida. No se le añade un menú porque
-       aquí solo se hace una cosa, que es elegir el reloj. -->
-  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"><b>Lunar</b></a>
-  <span class="ref">Ref. <span data-ref>—</span></span>
-  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
-       cuatro palabras al lado del logotipo sin montarse encima de la
-       referencia, y recortar con puntos suspensivos deja un enlace que
-       no se entiende. -->
-  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
+<header class="cf-cab">
+  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
+    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Lunar</b>
+  </a>
+  <p class="cf-ref">Ref. <b data-ref>—</b></p>
+  <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
 </header>
 
-<div class="cfg-cuerpo">
+<div class="cf-cuerpo">
 
-  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
-  <section class="cfg-visor" aria-label="El reloj que estás configurando">
-    <img class="cfg-foto" data-foto
-         src="/assets/img/catalogo/LO-01_Lunar_A04.webp"
-         alt="Reloj laOra Lunar, acabado Alba, con piel negra"
-         fetchpriority="high">
-    <div class="cfg-muestra" aria-hidden="true">
-      <span class="tira" data-muestra-tira style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"></span>
-      <span data-muestra-nombre>Piel negra</span>
+  <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
+      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="Lunar de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      </div>
+      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
-    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
-         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
-         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
-         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
-         segunda caía encima de la referencia: dos textos superpuestos,
-         ilegibles los dos. Así el segundo siempre baja. -->
-    <div class="cfg-rotulos">
-      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Piel negra</p>
-      <!-- La referencia también aquí: en el teléfono no cabe en la
-           cabecera, y es el dato con el que Óscar busca en la hoja. -->
-      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
-    </div>
+
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>
 
-  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
-  <section class="cfg-panel" aria-label="Opciones del Lunar">
-
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Acabado <b>3 opciones</b></p>
-      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
-        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 219,90 €</small></button>
-        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><small>desde 429,90 €</small></button>
-        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><small>desde 239,90 €</small></button>
-      </div>
-      <p class="cfg-nota" data-nota>El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.</p>
+  <section class="cf-panel" aria-label="Opciones del Lunar">
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Movimiento <b>uno solo</b></p>
+      <div class="cf-fijo"><b>Cuarzo Japones</b><span>Seiko/TMI VK63</span></div>
     </div>
-
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>8 opciones</b></b></p>
-      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
-           era siempre de cuatro, así que con tres correas quedaba una
-           columna vacía y los tres nombres partidos en dos líneas por
-           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
-      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa" style="--correas:4">
-        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"></span><span>Brazalete de acero 904L</span></button>
-        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(135deg,#e9ebed 0 3px,#b7babe 3px 6px),linear-gradient(150deg,#eceef0,#9da1a6)"></span><span>Brazalete de acero 316L</span></button>
-        <button type="button" data-correa="2" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span>Brazalete de acero</span></button>
-        <button type="button" data-correa="3" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#4a4c4e 0%,#232526 30%,#3d3f41 52%,#171819 78%,#303233 100%)"></span><span>Brazalete negro</span></button>
-        <button type="button" data-correa="4" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),linear-gradient(155deg,#8b5a33 0%,#6b4222 55%,#54331a 100%)"></span><span>Piel marrón</span></button>
-        <button type="button" data-correa="5" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"></span><span>Piel negra</span></button>
-        <button type="button" data-correa="6" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span><span>Caucho negro</span></button>
-        <button type="button" data-correa="7" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#343536 0%,#1a1b1b 60%,#4a4c4d 100%)"></span><span>Caucho negro con cierre desplegable</span></button>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>2 opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir caja">
+        <button class="cf-ficha" type="button" data-caja="0" aria-pressed="true">Bisel Negro</button>
+        <button class="cf-ficha" type="button" data-caja="1" aria-pressed="false">Bisel Azul</button>
       </div>
     </div>
-
-    <div class="cfg-nota">
-      <dl data-ficha></dl>
+    <div class="cf-grupo" data-grupo-esf>
+      <p class="cf-rotulo">Esfera <b>3 opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir esfera">
+        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Negra</button>
+        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Blanca</button>
+        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Azul</button>
+      </div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>9 familias</b></p>
+      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
+        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Acero 316L, cinco eslabones</span></button>
+        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L, cierre desplegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón ancho</span></button>
+        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón fino</span></button>
+        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Acero 904L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Acero 904L, eslabones planos</span></button>
+        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Caucho con hebilla de acero</span></button>
+        <button class="cf-brazalete" type="button" data-brz="8" aria-pressed="false"><i></i><span>Caucho fluorado, cierre desplegable</span></button>
+      </div>
+      <p class="cf-detalle" data-detalle></p>
     </div>
 
+    <div class="cf-grupo" data-grupo-var>
+      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
+    </div>
   </section>
 </div>
 
-<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
-<footer class="cfg-barra">
-  <span class="lado">
-    <span class="eleccion" data-eleccion>Alba · Piel negra</span>
-    <span class="ref">Ref. <span data-ref>—</span></span>
-  </span>
-  <span class="cfg-precio">
-    <strong data-precio>219,90 €</strong>
-    <span>Impuestos incluidos</span>
-  </span>
-  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
+<footer class="cf-barra">
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
+  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
+  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
-<!-- LA FICHA TÉCNICA COMPLETA
-     Se monta al pulsar y se tira al cerrar, como el overlay del
-     material aprobado: mientras no está abierta, no existe en la
-     página. No cambia la dirección ni mueve la pantalla de debajo.
-
-     Los datos NO van escritos: los rellena `configurador.js` con la
-     combinación que haya elegida en ese momento. Si fueran fijos, quien
-     configurase el Cenit leería la ficha del acabado de partida. -->
-<template data-plantilla-ficha>
-  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
-    <div class="cfg-overlay-caja">
-      <header class="cfg-overlay-cab">
-        <div>
-          <p>LO—01 · FICHA TÉCNICA COMPLETA</p>
-          <h2 id="cfg-ficha-titulo">Todo el Lunar.<br><em>Dato a dato.</em></h2>
-        </div>
-        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
-        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
-      </header>
-      <div class="cfg-overlay-grupos" data-grupos></div>
-      <footer class="cfg-overlay-pie">
-        <p data-overlay-resumen></p>
-        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
-      </footer>
-    </div>
+<div class="cf-manto" data-manto hidden>
+  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
+    <header class="cf-tec-cab">
+      <div>
+        <p class="cf-tec-eyebrow">LO-03 · FICHA TÉCNICA</p>
+        <h2 id="cf-tec-t">Todo el Lunar.<br><em>Dato a dato.</em></h2>
+      </div>
+      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
+      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
+    </header>
+    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
+    <footer class="cf-tec-pie">
+      <p data-tec-pie></p>
+      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
+    </footer>
   </div>
-</template>
+</div>
 
-<script type="application/json" data-cfg>{"modelo": "Lunar", "inicial": {"acabado": "alba", "correa": 5}, "precios": {"alba": [249.9, 239.9, null, null, 229.9, 219.9, 219.9, 229.9], "cenit": [null, null, 429.9, null, null, null, null, null], "eclipse": [null, null, null, 239.9, null, null, null, null]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "resumen": "El escalón de entrada: cronógrafo mecacuarzo, con la puesta a cero de tacto mecánico, y seis formas de llevarlo.", "refs": ["LO-01_Lunar_A01", "LO-01_Lunar_A02", "", "", "LO-01_Lunar_A03", "LO-01_Lunar_A04", "LO-01_Lunar_A05", "LO-01_Lunar_A06"], "fotos": ["/assets/img/catalogo/LO-01_Lunar_A01.webp", "/assets/img/catalogo/LO-01_Lunar_A02.webp", "/assets/img/catalogo/LO-01_Lunar_A01.webp", "/assets/img/catalogo/LO-01_Lunar_A01.webp", "/assets/img/catalogo/LO-01_Lunar_A03.webp", "/assets/img/catalogo/LO-01_Lunar_A04.webp", "/assets/img/catalogo/LO-01_Lunar_A05.webp", "/assets/img/catalogo/LO-01_Lunar_A06.webp"], "foto": "/assets/img/catalogo/LO-01_Lunar_A01.webp", "ficha": [["Movimiento", "Mecacuarzo Seiko/TMI VK63"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Mecacuarzo Seiko/TMI VK63"], ["TIPO", "Cronógrafo mecacuarzo"], ["FRECUENCIA", "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica"], ["AUTONOMÍA", "Pila SR927SW, unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Fijo con escala taquimétrica, inserto de aluminio anodizado negro"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con tres subesferas, índices con detalles naranja"], ["LUMINISCENCIA", "Super-LumiNova"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Atornillado, acero macizo"], ["CORONA", "Roscada"], ["PESO", "de unos 100 g con caucho a unos 120 g con brazalete"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit", "descriptor": "Cuerda manual arquitectura suiza", "resumen": "El techo de este reloj: cronógrafo mecánico de cuerda manual con rueda de columnas, bisel de cerámica y zafiro con antirreflejos.", "refs": ["", "", "LO-01_Lunar_C01", "", "", "", "", ""], "fotos": ["/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp", "/assets/img/catalogo/LO-01_Lunar_C01.webp"], "foto": "/assets/img/catalogo/LO-01_Lunar_C01.webp", "ficha": [["Movimiento", "Seagull ST19 de rueda de columnas"], ["Cristal", "Zafiro plano con tratamiento antirreflejos"], ["Caja", "Acero inoxidable 316L, pulido y satinado"], ["Estanqueidad", "50 m (5 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seagull ST19 de rueda de columnas"], ["TIPO", "Cronógrafo mecánico de cuerda manual"], ["FRECUENCIA", "21.600 alternancias/hora (3 Hz)"], ["AUTONOMÍA", "Unas 45 horas de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano con tratamiento antirreflejos"], ["CAJA", "Acero inoxidable 316L, pulido y satinado"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "50 m (5 ATM)"], ["BISEL", "Fijo con escala taquimétrica, inserto de cerámica"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con tres subesferas, índices con detalles naranja"], ["LUMINISCENCIA", "Super-LumiNova"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Atornillado, acero macizo"], ["CORONA", "Roscada"], ["PESO", "unos 135 g con brazalete"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse", "descriptor": "Movimiento japonés mecacuarzo (Seiko)", "resumen": "Todo en negro, con el mismo cronógrafo mecacuarzo y zafiro con antirreflejos.", "refs": ["", "", "", "LO-01_Lunar_E01", "", "", "", ""], "fotos": ["/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp", "/assets/img/catalogo/LO-01_Lunar_E01.webp"], "foto": "/assets/img/catalogo/LO-01_Lunar_E01.webp", "ficha": [["Movimiento", "Mecacuarzo Seiko/TMI VK63"], ["Cristal", "Zafiro plano"], ["Caja", "Acero inoxidable 316L con PVD negro satinado"], ["Estanqueidad", "100 m (10 ATM)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Mecacuarzo Seiko/TMI VK63"], ["TIPO", "Cronógrafo mecacuarzo"], ["FRECUENCIA", "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica"], ["AUTONOMÍA", "Pila SR927SW, unos 3 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro plano"], ["CAJA", "Acero inoxidable 316L con PVD negro satinado"], ["DIÁMETRO", "39,7 mm"], ["ESTANQUEIDAD", "100 m (10 ATM)"], ["BISEL", "Fijo con escala taquimétrica, inserto de aluminio anodizado negro"], ["GROSOR", "unos 13 mm"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra con tres subesferas, índices con detalles naranja"], ["LUMINISCENCIA", "Super-LumiNova"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Atornillado, acero macizo"], ["CORONA", "Roscada"], ["PESO", "unos 120 g con brazalete"]]}]}}, "correas": [{"id": "brazalete-904l", "nombre": "Brazalete de acero 904L", "detalle": "Pulido y satinado · cierre desplegable con pulsadores y extensión", "diametro": null, "muestra": "linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"}, {"id": "brazalete-arroz", "nombre": "Brazalete de acero 316L", "detalle": "Pulido vintage de Grano de Arroz con cierre desplegable con seguro", "diametro": null, "muestra": "repeating-linear-gradient(135deg,#e9ebed 0 3px,#b7babe 3px 6px),linear-gradient(150deg,#eceef0,#9da1a6)"}, {"id": "brazalete-acero", "nombre": "Brazalete de acero", "detalle": "316L pulido y satinado · cierre desplegable con pulsadores y extensión", "diametro": null, "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}, {"id": "brazalete-negro", "nombre": "Brazalete negro", "detalle": "316L con PVD negro satinado · cierre desplegable con pulsadores y extensión", "diametro": null, "muestra": "linear-gradient(150deg,#4a4c4e 0%,#232526 30%,#3d3f41 52%,#171819 78%,#303233 100%)"}, {"id": "piel-marron", "nombre": "Piel marrón", "detalle": "Piel genuina, costura a contraste · hebilla de acero", "diametro": null, "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 6px,rgba(0,0,0,.05) 6px 12px),linear-gradient(155deg,#8b5a33 0%,#6b4222 55%,#54331a 100%)"}, {"id": "piel-negra", "nombre": "Piel negra", "detalle": "Piel genuina, costura a tono · hebilla de acero", "diametro": null, "muestra": "repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 6px,rgba(0,0,0,.06) 6px 12px),linear-gradient(155deg,#33322f 0%,#1e1d1c 55%,#131211 100%)"}, {"id": "caucho", "nombre": "Caucho negro", "detalle": "FKM mate texturizado · hebilla de acero", "diametro": null, "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"}, {"id": "caucho-desplegable", "nombre": "Caucho negro con cierre desplegable", "detalle": "FKM mate · cierre desplegable automático, recortable a medida", "diametro": null, "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#343536 0%,#1a1b1b 60%,#4a4c4d 100%)"}]}</script>
+<script type="application/json" data-piezas>{"nombre": "Lunar", "codigo": "LO-03", "incluido": "", "extra": false, "mov": [{"ref": "M1", "cal": "Seiko/TMI VK63", "coste": 27.59, "rot": "Cuarzo Japones", "specs": "Meca-cuarzo: cuarzo de precisión con módulo de cronógrafo mecánico. El segundero del cronógrafo arranca y regresa de forma instantánea con tacto mecánico, calendario a las 3 y segundero pequeño continuo."}], "caj": [{"ref": "C1", "nombre": "Bisel Negro", "coste": 31.57}, {"ref": "C2", "nombre": "Bisel Azul", "coste": 31.57}], "esf": [{"ref": "E1", "nombre": "Negra", "coste": 14.19, "cajas": "C1"}, {"ref": "E2", "nombre": "Blanca", "coste": 14.19, "cajas": "C1, C2"}, {"ref": "E3", "nombre": "Azul", "coste": 14.19, "cajas": "C2"}], "brz": [{"id": "B01", "nombre": "Acero 316L, cinco eslabones", "v": [{"ref": "Brz-316-A01", "nom": "Única", "c": 7.39}]}, {"id": "B02", "nombre": "Acero 316L, cierre desplegable", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39}, {"ref": "Brz-316-A03", "nom": "Plata y oro rosa", "c": 30.79}, {"ref": "Brz-316-A04", "nom": "Negro", "c": 30.79}]}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79}, {"ref": "Brz-316-A07", "nom": "Nueve eslabones", "c": 21.79}]}, {"id": "B06", "nombre": "Acero 316L macizo, eslabón ancho", "v": [{"ref": "Brz-316-A10", "nom": "Tres eslabones", "c": 59.69}]}, {"id": "B07", "nombre": "Acero 316L macizo, eslabón fino", "v": [{"ref": "Brz-316-A11", "nom": "Cinco eslabones", "c": 78.39}]}, {"id": "B08", "nombre": "Acero 904L macizo", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 55.39}, {"ref": "Brz-904-A13", "nom": "Brillante pulido", "c": 55.39}]}, {"id": "B09", "nombre": "Acero 904L, eslabones planos", "v": [{"ref": "Brz-904-A14", "nom": "Plata 5 eslabones", "c": 23.79}, {"ref": "Brz-904-A15", "nom": "Plata / Oro rosa 5 eslabones", "c": 28.19}, {"ref": "Brz-904-A16", "nom": "Negro 5 eslabones", "c": 28.19}, {"ref": "Brz-904-A17", "nom": "Plata 3 eslabones cepillado/mate", "c": 23.79}, {"ref": "Brz-904-A18", "nom": "Plata 3 eslabones pulido", "c": 23.79}, {"ref": "Brz-904-A19", "nom": "Negro 3 eslabones pulido", "c": 28.19}, {"ref": "Brz-904-A20", "nom": "Plata / Oro Rosa 3 eslabones pulido", "c": 28.19}]}, {"id": "B13", "nombre": "Caucho con hebilla de acero", "v": [{"ref": "Brz-Goma-G01", "nom": "Negro", "c": 5.69}, {"ref": "Brz-Goma-G02", "nom": "Blanco", "c": 5.89}, {"ref": "Brz-Goma-G03", "nom": "Rojo", "c": 6.29}, {"ref": "Brz-Goma-G04", "nom": "Naranja", "c": 6.39}, {"ref": "Brz-Goma-G05", "nom": "Azul", "c": 6.39}, {"ref": "Brz-Goma-G06", "nom": "Marrón", "c": 6.39}, {"ref": "Brz-Goma-G07", "nom": "Gris", "c": 5.79}]}, {"id": "B14", "nombre": "Caucho fluorado, cierre desplegable", "v": [{"ref": "Brz-Caucho-C01", "nom": "Azul real blanco 01", "c": 18.29}, {"ref": "Brz-Caucho-C02", "nom": "Negro blanco", "c": 12.49}, {"ref": "Brz-Caucho-C03", "nom": "Negro negro", "c": 13.19}, {"ref": "Brz-Caucho-C04", "nom": "Verde militar blanco", "c": 13.19}, {"ref": "Brz-Caucho-C05", "nom": "Azul real blanco", "c": 13.19}, {"ref": "Brz-Caucho-C06", "nom": "Rojo blanco", "c": 13.19}, {"ref": "Brz-Caucho-C07", "nom": "Naranja blanco", "c": 13.19}, {"ref": "Brz-Caucho-C08", "nom": "Gris blanco", "c": 13.19}, {"ref": "Brz-Caucho-C09", "nom": "Beige blanco", "c": 13.19}, {"ref": "Brz-Caucho-C10", "nom": "Negro blanco 01", "c": 17.39}, {"ref": "Brz-Caucho-C11", "nom": "Negro negro 01", "c": 18.39}, {"ref": "Brz-Caucho-C12", "nom": "Verde militar blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C13", "nom": "Rojo blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C14", "nom": "Naranja blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C15", "nom": "Gris blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C16", "nom": "Beige blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C17", "nom": "Negro blanco 02", "c": 18.39}, {"ref": "Brz-Caucho-C18", "nom": "Negro negro 02", "c": 19.29}, {"ref": "Brz-Caucho-C19", "nom": "Verde militar blanco 02", "c": 19.29}, {"ref": "Brz-Caucho-C20", "nom": "Rojo blanco 02", "c": 19.29}, {"ref": "Brz-Caucho-C21", "nom": "Naranja blanco 02", "c": 19.19}, {"ref": "Brz-Caucho-C22", "nom": "Gris blanco 02", "c": 19.19}, {"ref": "Brz-Caucho-C23", "nom": "Blanco blanco 01", "c": 19.59}, {"ref": "Brz-Caucho-C24", "nom": "Blanco blanco 02", "c": 20.59}, {"ref": "Brz-Caucho-C25", "nom": "Marrón blanco 01", "c": 19.59}, {"ref": "Brz-Caucho-C26", "nom": "Azul real blanco 02", "c": 19.59}, {"ref": "Brz-Caucho-C27", "nom": "Marrón blanco 02", "c": 20.59}, {"ref": "Brz-Caucho-C28", "nom": "Blanco blanco", "c": 20.59}, {"ref": "Brz-Caucho-C29", "nom": "Marrón blanco", "c": 14.19}, {"ref": "Brz-Caucho-C30", "nom": "Beige blanco 02", "c": 14.19}]}], "ejes": {"mov": {}, "caja": {}, "esf": {}, "brz": {}}, "mult": 2.7235, "cabezas": {"LO-03-C1-E1": "/assets/img/piezas/cabezas/LO-03-C1-E1.webp"}, "brazaletes": {"Brz-316-A01": "/assets/img/piezas/brazaletes/Brz-316-A01.webp"}, "solape": 0.01875, "fotoDefecto": "/assets/img/catalogo/LO-01_Lunar_A01.webp"}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
-<script src="/assets/js/configurador.js?v=8"></script>
-</body>
-</html>
+<script src="/assets/js/configurador-v2.js?v=19"></script>
