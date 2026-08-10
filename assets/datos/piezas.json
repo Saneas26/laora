@@ -711,7 +711,7 @@
       "ref": "Brz-316-A02",
       "nom": "Plata",
       "c": 28.39,
-      "cier": "Cierre desplegable",
+      "cier": "Cierre solapa",
       "eti": "Plata",
       "hex": "#c9cdd2",
       "esl": "Cinco eslabones"
@@ -720,7 +720,7 @@
       "ref": "Brz-316-A03",
       "nom": "Plata y oro rosa",
       "c": 30.79,
-      "cier": "Cierre desplegable",
+      "cier": "Cierre solapa",
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
@@ -730,7 +730,7 @@
       "ref": "Brz-316-A04",
       "nom": "Negro",
       "c": 30.79,
-      "cier": "Cierre desplegable",
+      "cier": "Cierre solapa",
       "eti": "Negro",
       "hex": "#1e1f22",
       "esl": "Cinco eslabones"
@@ -746,7 +746,7 @@
       "ref": "Brz-316-A05",
       "nom": "Tres eslabones",
       "c": 21.79,
-      "cier": "Clásico",
+      "cier": "Cierre desplegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
       "esl": "Tres eslabones"
@@ -755,7 +755,7 @@
       "ref": "Brz-316-A06",
       "nom": "Cinco eslabones",
       "c": 21.79,
-      "cier": "Clásico",
+      "cier": "Cierre desplegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
       "esl": "Cinco eslabones"
