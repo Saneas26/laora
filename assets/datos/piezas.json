@@ -887,51 +887,6 @@
     "nombre": "Caucho fluorado, cierre desplegable",
     "v": [
      {
-      "ref": "Brz-Caucho-C01",
-      "nom": "Azul real blanco 01",
-      "c": 18.29
-     },
-     {
-      "ref": "Brz-Caucho-C02",
-      "nom": "Negro blanco",
-      "c": 12.49
-     },
-     {
-      "ref": "Brz-Caucho-C03",
-      "nom": "Negro negro",
-      "c": 13.19
-     },
-     {
-      "ref": "Brz-Caucho-C04",
-      "nom": "Verde militar blanco",
-      "c": 13.19
-     },
-     {
-      "ref": "Brz-Caucho-C05",
-      "nom": "Azul real blanco",
-      "c": 13.19
-     },
-     {
-      "ref": "Brz-Caucho-C06",
-      "nom": "Rojo blanco",
-      "c": 13.19
-     },
-     {
-      "ref": "Brz-Caucho-C07",
-      "nom": "Naranja blanco",
-      "c": 13.19
-     },
-     {
-      "ref": "Brz-Caucho-C08",
-      "nom": "Gris blanco",
-      "c": 13.19
-     },
-     {
-      "ref": "Brz-Caucho-C09",
-      "nom": "Beige blanco",
-      "c": 13.19
-     },
-     {
       "ref": "Brz-Caucho-C10",
       "nom": "Negro blanco 01",
       "c": 17.39
@@ -982,16 +937,6 @@
       "c": 19.29
      },
      {
-      "ref": "Brz-Caucho-C20",
-      "nom": "Rojo blanco 02",
-      "c": 19.29
-     },
-     {
-      "ref": "Brz-Caucho-C21",
-      "nom": "Naranja blanco 02",
-      "c": 19.19
-     },
-     {
       "ref": "Brz-Caucho-C22",
       "nom": "Gris blanco 02",
       "c": 19.19
@@ -1020,16 +965,6 @@
       "ref": "Brz-Caucho-C27",
       "nom": "Marrón blanco 02",
       "c": 20.59
-     },
-     {
-      "ref": "Brz-Caucho-C28",
-      "nom": "Blanco blanco",
-      "c": 20.59
-     },
-     {
-      "ref": "Brz-Caucho-C29",
-      "nom": "Marrón blanco",
-      "c": 14.19
      },
      {
       "ref": "Brz-Caucho-C30",
