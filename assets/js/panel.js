@@ -123,6 +123,8 @@
     });
     if (cual === 'resumen') cargarResumen();
     if (cual === 'pedidos') cargarPedidos();
+    if (cual === 'compras') cargarCompras();
+    if (cual === 'cuentas') cargarCuentas();
     if (cual === 'socios') cargarSocios();
     if (cual === 'comentarios') { cargarMensajes(); cargarValoraciones(); }
   }
@@ -254,13 +256,29 @@
           '</div></div>';
       });
 
+      /* La factura, antes de los botones: es lo primero que se mira
+         cuando el cliente la reclama. */
+      html += '<h4>Factura</h4>' + (p.factura_numero
+        ? '<p><b>' + esc(p.factura_numero) + '</b> · ' + fecha(p.factura_fecha) +
+          ' · <button type="button" class="pa-filtro" data-ver-factura>Ver e imprimir</button></p>'
+        : '<p class="pa-mini">Sin emitir. El número lo pone la base, correlativo y sin saltos.</p>');
+
       html += '<h4>Qué hacer</h4><div class="pa-campos">' +
+        /* Por dónde entró el dinero. Sin esto todo caía en «paypal» por
+           defecto y el cuadre del banco era imposible. */
+        '<label class="pa-campo"><span>Cobrado por</span><select class="pa-select" data-f="metodo">' +
+        METODOS.map(function (m) {
+          return '<option value="' + m[0] + '"' +
+            (p.metodo === m[0] ? ' selected' : '') + '>' + esc(m[1]) + '</option>';
+        }).join('') + '</select></label>' +
         campo('referencia', 'Referencia del cobro', p.referencia_pago) +
         campo('transportista', 'Transportista', p.transportista) +
         campo('seguimiento', 'Nº de seguimiento', p.seguimiento) +
         '</div><div class="pa-acciones">' +
         (p.estado === 'solicitado'
           ? '<button type="button" class="pa-boton" data-cobrado>Marcar cobrado</button>' : '') +
+        (p.estado !== 'solicitado' && p.estado !== 'cancelado' && !p.factura_numero
+          ? '<button type="button" class="pa-boton" data-facturar>Emitir factura</button>' : '') +
         '<button type="button" class="pa-boton pa-suave" data-mover="preparando">Preparando</button>' +
         '<button type="button" class="pa-boton pa-suave" data-mover="enviado">Enviado</button>' +
         '<button type="button" class="pa-boton pa-suave" data-mover="entregado">Entregado</button>' +
@@ -277,10 +295,20 @@
 
       var bCobrado = fichaCaja.querySelector('[data-cobrado]');
       if (bCobrado) bCobrado.addEventListener('click', function () {
-        api('cobrado', { id: p.id, metodo: p.metodo || 'paypal', referencia: val('referencia') })
-          .then(function () { avisar('Cobrado. ' + p.numero + ' pasa a preparar.'); verPedido(p.id); cargarPedidos(); })
+        api('cobrado', { id: p.id, metodo: val('metodo'), referencia: val('referencia') })
+          .then(function () { avisar('Cobrado por ' + nombreMetodo(val('metodo')) + '. ' + p.numero + ' pasa a preparar.'); verPedido(p.id); cargarPedidos(); })
           .catch(function (e) { avisar(e.message, true); });
       });
+
+      var bFactura = fichaCaja.querySelector('[data-facturar]');
+      if (bFactura) bFactura.addEventListener('click', function () {
+        api('facturar', { id: p.id })
+          .then(function (d) { avisar('Factura ' + d.numero + ' emitida.'); verPedido(p.id); })
+          .catch(function (e) { avisar(e.message, true); });
+      });
+
+      var bVer = fichaCaja.querySelector('[data-ver-factura]');
+      if (bVer) bVer.addEventListener('click', function () { imprimirFactura(p.id); });
 
       fichaCaja.querySelectorAll('[data-mover]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -485,6 +513,289 @@
             .catch(function (e) { avisar(e.message, true); });
         });
       });
+    }).catch(function (e) { caja.innerHTML = '<p class="pa-nada">' + esc(e.message) + '</p>'; });
+  }
+
+  /* ============================================================
+     LAS CUENTAS
+     ------------------------------------------------------------
+     Aquí NO se suma nada: los números llegan calculados por las
+     vistas de la base. Si el cálculo viviera también en este
+     archivo, un día dirían cosas distintas y no sabríamos a cuál
+     hacer caso.
+     ============================================================ */
+
+  /* Los métodos, con su nombre de verdad. Los dos Bizum van
+     separados porque con un solo «bizum» no se cuadra el banco:
+     no se sabe cuál de los dos números recibió el dinero. */
+  var METODOS = [
+    ['bizum1', 'Bizum 1'], ['bizum2', 'Bizum 2'], ['tarjeta', 'Tarjeta'],
+    ['paypal', 'PayPal'], ['transferencia', 'Transferencia'], ['efectivo', 'Efectivo']
+  ];
+  function nombreMetodo(m) {
+    for (var i = 0; i < METODOS.length; i++) if (METODOS[i][0] === m) return METODOS[i][1];
+    return m || 'sin indicar';
+  }
+
+  var CATEGORIAS = [
+    ['envio', 'Envío'], ['embalaje', 'Embalaje'], ['comision', 'Comisión'],
+    ['herramienta', 'Herramienta'], ['web', 'Web'], ['publicidad', 'Publicidad'],
+    ['impuesto', 'Impuesto'], ['piezas', 'Piezas'], ['otro', 'Otro']
+  ];
+
+  function tabla(cabeceras, filas, pie) {
+    if (!filas.length) return '<p class="pa-nada">Todavía no hay nada que contar.</p>';
+    var th = cabeceras.map(function (c) {
+      return '<th' + (c[1] ? ' class="n"' : '') + '>' + esc(c[0]) + '</th>';
+    }).join('');
+    return '<div class="pa-tabla-caja"><table class="pa-tabla"><thead><tr>' + th +
+      '</tr></thead><tbody>' + filas.join('') + '</tbody>' +
+      (pie ? '<tfoot><tr>' + pie + '</tr></tfoot>' : '') + '</table></div>';
+  }
+
+  /* El margen en rojo cuando es negativo: un número negativo entre
+     otros positivos se pasa por alto si va del mismo color. */
+  function dinero(v) {
+    var n = Number(v) || 0;
+    return '<td class="n' + (n < 0 ? ' pa-menos' : '') + '">' + euros(n) + '</td>';
+  }
+
+  function cargarCuentas() {
+    var cajaAnio = document.querySelector('[data-cuentas-anio]');
+    cajaAnio.innerHTML = '<p class="pa-nada">Cargando…</p>';
+    /* El formulario de gasto se pinta SIEMPRE, aunque las cuentas
+       fallen: si dependiera de ellas, un error de red dejaría a Óscar
+       sin poder apuntar un gasto, que es justo cuando más rabia da. */
+    pintarFormGasto();
+
+    api('cuentas').then(function (d) {
+      var y = d.ytd;
+      cajaAnio.innerHTML =
+        tarjeta('Ingresos ' + d.anio, euros(y.ingresos)) +
+        tarjeta('Coste de piezas', euros(y.piezas)) +
+        tarjeta('Gastos', euros(y.gastos)) +
+        tarjeta('Margen', euros(y.margen), y.margen < 0 ? 'pa-urge' : '') +
+        tarjeta('IVA a pagar', euros(y.iva_a_pagar), 'pa-ojo') +
+        tarjeta('Pedidos cobrados', y.pedidos);
+
+      document.querySelector('[data-tabla-trimestres]').innerHTML = tabla(
+        [['Periodo'], ['Pedidos', 1], ['Ingresos', 1], ['Base', 1], ['IVA', 1],
+         ['Piezas', 1], ['Gastos', 1], ['Margen', 1], ['IVA a pagar', 1]],
+        d.trimestres.map(function (t) {
+          return '<tr><td><b>' + t.anio + ' · ' + t.trimestre + 'T</b></td>' +
+            '<td class="n">' + t.pedidos + '</td>' +
+            dinero(t.ingresos) + dinero(t.base) + dinero(t.iva_repercutido) +
+            dinero(t.piezas) + dinero(t.gastos) + dinero(t.margen) + dinero(t.iva_a_pagar) +
+            '</tr>';
+        }));
+
+      document.querySelector('[data-tabla-anios]').innerHTML = tabla(
+        [['Año'], ['Pedidos', 1], ['Ingresos', 1], ['Base', 1],
+         ['Piezas', 1], ['Gastos', 1], ['Margen', 1]],
+        d.anios.map(function (a) {
+          return '<tr><td><b>' + a.anio + '</b></td>' +
+            '<td class="n">' + a.pedidos + '</td>' +
+            dinero(a.ingresos) + dinero(a.base) +
+            dinero(a.piezas) + dinero(a.gastos) + dinero(a.margen) + '</tr>';
+        }));
+
+      document.querySelector('[data-tabla-metodos]').innerHTML = tabla(
+        [['Periodo'], ['Dónde'], ['Pedidos', 1], ['Importe', 1]],
+        d.metodos.map(function (m) {
+          return '<tr><td>' + m.anio + ' · ' + m.trimestre + 'T</td>' +
+            '<td><b>' + esc(nombreMetodo(m.metodo)) + '</b></td>' +
+            '<td class="n">' + m.pedidos + '</td>' + dinero(m.importe) + '</tr>';
+        }));
+
+      cargarGastos();
+    }).catch(function (e) {
+      cajaAnio.innerHTML = '<p class="pa-nada">' + esc(e.message) + '</p>';
+    });
+  }
+
+  function pintarFormGasto() {
+    var f = document.querySelector('[data-form-gasto]');
+    if (f.dataset.listo) return;
+    f.dataset.listo = '1';
+    f.innerHTML =
+      campo('g_fecha', 'Fecha', new Date().toISOString().slice(0, 10), 'date') +
+      campo('g_concepto', 'Concepto', '') +
+      '<label class="pa-campo"><span>Categoría</span><select class="pa-select" data-f="g_categoria">' +
+      CATEGORIAS.map(function (c) {
+        return '<option value="' + c[0] + '">' + esc(c[1]) + '</option>';
+      }).join('') + '</select></label>' +
+      campo('g_importe', 'Importe con IVA', '') +
+      campo('g_iva', 'De eso, IVA', '') +
+      campo('g_proveedor', 'Proveedor', '') +
+      campo('g_enlace', 'Enlace o justificante', '') +
+      '<div class="pa-acciones"><button type="submit" class="pa-boton">Apuntar el gasto</button></div>';
+
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = function (k) {
+        var i = f.querySelector('[data-f="' + k + '"]');
+        return i ? i.value.trim() : '';
+      };
+      if (!v('g_concepto')) { avisar('Ponle un concepto al gasto.', true); return; }
+      api('gasto_nuevo', {
+        fecha: v('g_fecha'), concepto: v('g_concepto'), categoria: v('g_categoria'),
+        importe: Number(String(v('g_importe')).replace(',', '.')),
+        iva: Number(String(v('g_iva')).replace(',', '.')) || 0,
+        proveedor: v('g_proveedor'), enlace: v('g_enlace')
+      }).then(function () {
+        avisar('Apuntado.');
+        f.querySelector('[data-f="g_concepto"]').value = '';
+        f.querySelector('[data-f="g_importe"]').value = '';
+        f.querySelector('[data-f="g_iva"]').value = '';
+        cargarCuentas();
+      }).catch(function (e) { avisar(e.message, true); });
+    });
+  }
+
+  function cargarGastos() {
+    var caja = document.querySelector('[data-lista-gastos]');
+    api('gastos').then(function (d) {
+      caja.innerHTML = tabla(
+        [['Fecha'], ['Concepto'], ['Categoría'], ['Importe', 1], ['IVA', 1], ['']],
+        d.gastos.map(function (g) {
+          var cat = CATEGORIAS.filter(function (c) { return c[0] === g.categoria; })[0];
+          return '<tr><td>' + fecha(g.fecha) + '</td>' +
+            '<td><b>' + esc(g.concepto) + '</b>' +
+            (g.proveedor ? ' <span class="pa-mini">' + esc(g.proveedor) + '</span>' : '') +
+            (g.enlace ? ' <a href="' + esc(g.enlace) + '" target="_blank" rel="noopener">ver</a>' : '') +
+            '</td><td>' + esc(cat ? cat[1] : g.categoria) + '</td>' +
+            dinero(g.importe) + dinero(g.iva) +
+            '<td><button type="button" class="pa-filtro" data-borrar-gasto="' + g.id + '">Borrar</button></td></tr>';
+        }));
+      caja.querySelectorAll('[data-borrar-gasto]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (!confirm('¿Borrar este gasto? No se puede deshacer.')) return;
+          api('gasto_borrar', { id: b.dataset.borrarGasto })
+            .then(function () { avisar('Borrado.'); cargarCuentas(); })
+            .catch(function (e) { avisar(e.message, true); });
+        });
+      });
+    }).catch(function (e) { caja.innerHTML = '<p class="pa-nada">' + esc(e.message) + '</p>'; });
+  }
+
+  /* ============================================================
+     LA FACTURA IMPRESA
+     ------------------------------------------------------------
+     Se abre en una ventana aparte y se imprime a PDF con el diálogo
+     del navegador. No se guarda un archivo en ningún sitio: lo que
+     manda es la FILA del pedido, con su número y su fecha, y de ahí
+     se puede volver a imprimir idéntica cuantas veces haga falta.
+     Un PDF guardado sería una segunda verdad que se puede perder.
+
+     LOS DATOS DEL EMISOR NO ESTÁN EN EL REPO Y NO ME LOS INVENTO:
+     una factura sin el NIF de quien la emite no vale para nada. Hasta
+     que Óscar los rellene aquí, la factura sale con el hueco a la
+     vista, en rojo, para que no se mande por error.
+     ============================================================ */
+  var EMISOR = {
+    nombre: '',            // razón social o nombre y apellidos
+    nif: '',               // NIF/DNI
+    direccion: '',         // calle y número
+    cp: '', poblacion: '', provincia: '',
+    email: 'hola@laora.es',
+    web: 'laora.es'
+  };
+
+  function imprimirFactura(id) {
+    api('factura', { id: id }).then(function (d) {
+      var p = d.pedido;
+      if (!p.factura_numero) { avisar('Ese pedido todavía no tiene factura.', true); return; }
+
+      var falta = !EMISOR.nombre || !EMISOR.nif || !EMISOR.direccion;
+      var lineas = (p.pedido_lineas || []).map(function (l) {
+        return '<tr><td>' + esc(l.modelo) + ' · ' + esc(l.acabado) +
+          (l.correa ? ' · ' + esc(l.correa) : '') +
+          '<br><small>' + esc(l.ref) + '</small></td>' +
+          '<td class="n">' + l.cantidad + '</td>' +
+          '<td class="n">' + euros(l.precio) + '</td>' +
+          '<td class="n">' + euros(Number(l.precio) * Number(l.cantidad)) + '</td></tr>';
+      }).join('');
+
+      var cli = p.fac_nombre ? {
+        nombre: p.fac_nombre, nif: p.fac_nif, direccion: p.fac_direccion,
+        cp: p.fac_cp, poblacion: p.fac_poblacion, provincia: p.fac_provincia
+      } : {
+        nombre: p.env_nombre, nif: '', direccion: p.env_direccion,
+        cp: p.env_cp, poblacion: p.env_poblacion, provincia: p.env_provincia
+      };
+
+      var html =
+        '<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">' +
+        '<title>' + esc(p.factura_numero) + ' · laOra</title><style>' +
+        'body{font:15px/1.5 -apple-system,system-ui,sans-serif;color:#1c1d1b;max-width:760px;' +
+        'margin:0 auto;padding:40px 28px}h1{font-size:26px;margin:0 0 4px}' +
+        '.gris{color:#6b6b64}.aviso{background:#f6d5cd;color:#8a2c14;padding:12px 14px;' +
+        'border-radius:10px;font-weight:700;margin-bottom:22px}' +
+        '.dos{display:flex;gap:40px;flex-wrap:wrap;margin:26px 0}.dos>div{flex:1;min-width:220px}' +
+        'h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#6b6b64;margin:0 0 6px}' +
+        'table{width:100%;border-collapse:collapse;margin-top:14px}' +
+        'th,td{padding:9px 8px;text-align:left;border-bottom:1px solid #e3e0d8;vertical-align:top}' +
+        'th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#6b6b64}' +
+        '.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}' +
+        'tfoot td{border:0;padding-top:6px}tfoot .tot td{border-top:2px solid #1c1d1b;font-weight:700;font-size:17px}' +
+        'small{color:#6b6b64}@media print{body{padding:0}.noimp{display:none}}' +
+        '</style></head><body>' +
+        (falta ? '<p class="aviso">FALTAN LOS DATOS FISCALES DEL EMISOR. ' +
+                 'Rellénalos en EMISOR, dentro de assets/js/panel.js, antes de mandar esta factura.</p>' : '') +
+        '<h1>Factura ' + esc(p.factura_numero) + '</h1>' +
+        '<p class="gris">Fecha: ' + fecha(p.factura_fecha) + ' · Pedido ' + esc(p.numero) + '</p>' +
+        '<div class="dos"><div><h2>Emisor</h2>' +
+        '<b>' + esc(EMISOR.nombre || '(falta el nombre fiscal)') + '</b><br>' +
+        'NIF ' + esc(EMISOR.nif || '(falta)') + '<br>' +
+        esc(EMISOR.direccion || '(falta la dirección)') + '<br>' +
+        esc(EMISOR.cp) + ' ' + esc(EMISOR.poblacion) + ' ' + esc(EMISOR.provincia) + '<br>' +
+        esc(EMISOR.email) + ' · ' + esc(EMISOR.web) +
+        '</div><div><h2>Cliente</h2>' +
+        '<b>' + esc(cli.nombre) + '</b><br>' +
+        (cli.nif ? 'NIF ' + esc(cli.nif) + '<br>' : '') +
+        esc(cli.direccion) + '<br>' +
+        esc(cli.cp) + ' ' + esc(cli.poblacion) + ' ' + esc(cli.provincia) +
+        '</div></div>' +
+        '<table><thead><tr><th>Concepto</th><th class="n">Uds</th>' +
+        '<th class="n">Precio</th><th class="n">Importe</th></tr></thead>' +
+        '<tbody>' + lineas + '</tbody><tfoot>' +
+        (Number(p.envio) ? '<tr><td colspan="3" class="n">Envío</td><td class="n">' + euros(p.envio) + '</td></tr>' : '') +
+        '<tr><td colspan="3" class="n">Base imponible</td><td class="n">' + euros(d.base) + '</td></tr>' +
+        '<tr><td colspan="3" class="n">IVA ' + d.tipo_iva + ' %</td><td class="n">' + euros(d.iva) + '</td></tr>' +
+        '<tr class="tot"><td colspan="3" class="n">Total</td><td class="n">' + euros(p.total) + '</td></tr>' +
+        '</tfoot></table>' +
+        '<p class="gris">Cobrado por ' + esc(nombreMetodo(p.metodo)) +
+        (p.pagado_en ? ' el ' + fecha(p.pagado_en) : '') + '.</p>' +
+        '<p class="noimp"><button onclick="print()">Imprimir o guardar en PDF</button></p>' +
+        '</body></html>';
+
+      var v = window.open('', '_blank');
+      if (!v) { avisar('El navegador ha bloqueado la ventana de la factura.', true); return; }
+      v.document.write(html);
+      v.document.close();
+    }).catch(function (e) { avisar(e.message, true); });
+  }
+
+  /* ---------- la lista de la compra ---------- */
+  function cargarCompras() {
+    var caja = document.querySelector('[data-lista-compras]');
+    caja.innerHTML = '<p class="pa-nada">Cargando…</p>';
+    api('compras').then(function (d) {
+      var chip = document.querySelector('[data-chip-compras]');
+      var piezas = d.compras.reduce(function (a, c) { return a + Number(c.unidades); }, 0);
+      chip.textContent = piezas;
+      chip.hidden = !piezas;
+
+      caja.innerHTML = tabla(
+        [['Qué'], ['Ref'], ['Pieza'], ['Uds', 1], ['Coste', 1], ['Para']],
+        d.compras.map(function (c) {
+          return '<tr><td><b>' + esc(c.tipo) + '</b></td>' +
+            '<td>' + esc(c.ref) + '</td>' +
+            '<td>' + esc(c.interno || '—') + (c.talla ? ' · ' + esc(c.talla) : '') +
+            (c.link ? ' <a href="' + esc(c.link) + '" target="_blank" rel="noopener">comprar</a>' : '') +
+            '</td><td class="n">' + c.unidades + '</td>' + dinero(c.coste_total) +
+            '<td>' + esc((c.pedidos || []).join(', ')) + '</td></tr>';
+        }));
     }).catch(function (e) { caja.innerHTML = '<p class="pa-nada">' + esc(e.message) + '</p>'; });
   }
 

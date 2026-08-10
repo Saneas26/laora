@@ -22,6 +22,8 @@
 //   entrar · resumen · pedidos · pedido · cobrado · estado
 //   serie  · socios  · socio   · mensajes · responder · leido
 //   valoraciones · moderar
+//   cuentas · compras · gastos · gasto_nuevo · gasto_borrar
+//   facturar · factura
 // ============================================================
 
 const cors = {
@@ -361,6 +363,120 @@ Deno.serve(async (req) => {
           }),
         });
         return json({ ok: true, valoracion: filas[0] });
+      }
+
+      // ============================================================
+      // LAS CUENTAS
+      // ------------------------------------------------------------
+      // Todo esto sale de las vistas de `panel-cuentas.sql`. Aquí no se
+      // suma nada: si el cálculo viviera en dos sitios, un día dirían
+      // cosas distintas y no sabríamos cuál creer.
+      // ============================================================
+      case 'cuentas': {
+        const [trimestres, anios, metodos] = await Promise.all([
+          db('cuentas_trimestre?select=*&limit=40'),
+          db('cuentas_anio?select=*&limit=20'),
+          db('cobros_metodo?select=*&limit=200'),
+        ]);
+        /* El año en curso, que es lo que se mira noventa veces al día.
+           Se saca de los trimestres ya cerrados, no aparte. */
+        const anio = new Date().getFullYear();
+        const ytd = trimestres
+          .filter((t: any) => Number(t.anio) === anio)
+          .reduce((a: any, t: any) => ({
+            pedidos: a.pedidos + Number(t.pedidos),
+            ingresos: a.ingresos + Number(t.ingresos),
+            piezas: a.piezas + Number(t.piezas),
+            gastos: a.gastos + Number(t.gastos),
+            margen: a.margen + Number(t.margen),
+            iva_a_pagar: a.iva_a_pagar + Number(t.iva_a_pagar),
+          }), { pedidos: 0, ingresos: 0, piezas: 0, gastos: 0, margen: 0, iva_a_pagar: 0 });
+        for (const k of Object.keys(ytd)) {
+          (ytd as any)[k] = Math.round((ytd as any)[k] * 100) / 100;
+        }
+        return json({ ok: true, anio, ytd, trimestres, anios, metodos });
+      }
+
+      // ---------- la lista de la compra ----------
+      // Un pedido al proveedor en vez de cinco: la vista junta las
+      // piezas de todos los pedidos cobrados y sin enviar.
+      case 'compras': {
+        const filas = await db('compra_pendiente?select=*');
+        return json({ ok: true, compras: filas });
+      }
+
+      // ---------- los gastos que no son piezas ----------
+      case 'gastos': {
+        const desde = p.desde ? `&fecha=gte.${p.desde}` : '';
+        const hasta = p.hasta ? `&fecha=lte.${p.hasta}` : '';
+        const filas = await db(
+          `gastos?select=*,pedidos(numero)&order=fecha.desc&limit=400${desde}${hasta}`);
+        return json({ ok: true, gastos: filas });
+      }
+
+      case 'gasto_nuevo': {
+        const concepto = String(p.concepto || '').trim();
+        const importe = Number(p.importe);
+        if (!concepto) return json({ error: 'hace falta el concepto' }, 400);
+        if (!(importe >= 0)) return json({ error: 'el importe no es un número' }, 400);
+        const filas = await db('gastos', {
+          method: 'POST',
+          body: JSON.stringify({
+            fecha: p.fecha || hoy(),
+            concepto,
+            categoria: p.categoria || 'otro',
+            importe,
+            iva: Number(p.iva) || 0,
+            proveedor: p.proveedor || null,
+            factura: p.factura || null,
+            enlace: p.enlace || null,
+            pedido_id: p.pedido_id || null,
+            notas: p.notas || null,
+          }),
+        });
+        return json({ ok: true, gasto: filas[0] });
+      }
+
+      case 'gasto_borrar': {
+        await db(`gastos?id=eq.${p.id}`, { method: 'DELETE' });
+        return json({ ok: true });
+      }
+
+      // ---------- la factura ----------
+      // El número lo pone la base con un candado, no esta función: dos
+      // clics seguidos no pueden sacar dos números.
+      case 'facturar': {
+        const r = await fetch(`${URL_SB}/rest/v1/rpc/emitir_factura`, {
+          method: 'POST',
+          headers: {
+            apikey: SERVICIO,
+            Authorization: `Bearer ${SERVICIO}`,
+            'Content-Type': 'application/json',
+            'Content-Profile': 'laora',
+          },
+          body: JSON.stringify({ p_pedido: p.id }),
+        });
+        const texto = await r.text();
+        if (!r.ok) return json({ error: texto }, 400);
+        return json({ ok: true, numero: JSON.parse(texto) });
+      }
+
+      // Todo lo que hace falta para imprimir una factura, junto.
+      case 'factura': {
+        const filas = await db(
+          `pedidos?select=*,pedido_lineas(*),socios(nombre,apellidos,email,telefono)&id=eq.${p.id}&limit=1`);
+        if (!filas.length) return json({ error: 'ese pedido no existe' }, 404);
+        const ped = filas[0];
+        const total = Number(ped.total);
+        return json({
+          ok: true,
+          pedido: ped,
+          /* La base se saca DIVIDIENDO: los precios de la web ya llevan
+             el IVA dentro. Multiplicar por 0,21 daría de menos. */
+          base: Math.round((total / 1.21) * 100) / 100,
+          iva: Math.round((total - total / 1.21) * 100) / 100,
+          tipo_iva: 21,
+        });
       }
 
       default:

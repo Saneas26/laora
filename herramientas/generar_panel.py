@@ -14,10 +14,15 @@ eso es justo lo que las políticas de filas impiden. Quien lo salta es
 el service role, y esa llave no puede estar en un navegador. Así que
 vive en la función y aquí no hay nada que robar.
 
-CUATRO PANTALLAS
+SEIS PANTALLAS
   · Resumen — cuánto hay de todo, de un vistazo
-  · Pedidos — los que entran, cobrarlos, enviarlos, y el número de
-    serie de cada reloj con su garantía
+  · Pedidos — los que entran, cobrarlos, facturarlos, enviarlos, y el
+    número de serie de cada reloj con su garantía
+  · Compras — qué piezas hay que pedirle al proveedor AHORA, juntando
+    todos los pedidos cobrados y sin enviar, con sus enlaces
+  · Cuentas — ingresos, coste de piezas, gastos y margen; por
+    trimestre, por año y lo que va del actual; y por dónde entró cada
+    euro, con los dos Bizum separados
   · Socios  — quién es quién, sus compras, sus relojes y sus notas
   · Comentarios — la conversación privada y las valoraciones que
     esperan tu visto bueno
@@ -30,8 +35,8 @@ import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 3   # la 2 quedó envenenada en la caché de Cloudflare: ver README de abajo
-V_JS = 2
+V_CSS = 4   # la 2 quedó envenenada en la caché de Cloudflare: ver README de abajo
+V_JS = 3
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
@@ -71,6 +76,8 @@ PAGINA = f"""<!DOCTYPE html>
     <nav class="pa-nav">
       <button type="button" class="pa-tab" data-ir="resumen">Resumen</button>
       <button type="button" class="pa-tab" data-ir="pedidos">Pedidos<b data-chip-pedidos hidden></b></button>
+      <button type="button" class="pa-tab" data-ir="compras">Compras<b data-chip-compras hidden></b></button>
+      <button type="button" class="pa-tab" data-ir="cuentas">Cuentas</button>
       <button type="button" class="pa-tab" data-ir="socios">Socios</button>
       <button type="button" class="pa-tab" data-ir="comentarios">Comentarios<b data-chip-comentarios hidden></b></button>
     </nav>
@@ -93,6 +100,34 @@ PAGINA = f"""<!DOCTYPE html>
         <button type="button" class="pa-filtro" data-estado="entregado">Entregados</button>
       </div>
       <div data-lista-pedidos></div>
+    </section>
+
+    <section class="pa-pantalla" data-pantalla="compras" hidden>
+      <h2 class="pa-titulo2">Lo que hay que pedir</h2>
+      <p class="pa-mini">Las piezas de todos los pedidos cobrados y sin enviar, juntas.
+        Un pedido al proveedor en vez de cinco.</p>
+      <div data-lista-compras></div>
+    </section>
+
+    <section class="pa-pantalla" data-pantalla="cuentas" hidden>
+      <div class="pa-tarjetas" data-cuentas-anio></div>
+
+      <h2 class="pa-titulo2">Por trimestre</h2>
+      <p class="pa-mini">Por fecha de COBRO, no de pedido: uno de marzo cobrado en abril
+        es del segundo trimestre.</p>
+      <div data-tabla-trimestres></div>
+
+      <h2 class="pa-titulo2">Por año</h2>
+      <div data-tabla-anios></div>
+
+      <h2 class="pa-titulo2">Por dónde entró el dinero</h2>
+      <div data-tabla-metodos></div>
+
+      <h2 class="pa-titulo2">Gastos</h2>
+      <p class="pa-mini">Lo que no es pieza vendida: portes, embalaje, comisiones, web.
+        Sin esto el margen miente.</p>
+      <form class="pa-campos" data-form-gasto></form>
+      <div data-lista-gastos></div>
     </section>
 
     <section class="pa-pantalla" data-pantalla="socios" hidden>
