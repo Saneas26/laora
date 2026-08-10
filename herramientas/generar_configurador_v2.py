@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 22
-V_JS = 40
+V_CSS = 23
+V_JS = 41
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -435,7 +435,6 @@ def pantalla(slug):
   <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
     <img src="{LOGO}" alt="laOra"><b>{d['nombre']}</b>
   </a>
-  <p class="cf-ref">Ref. <b data-ref>—</b></p>
   <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
 </header>
 
