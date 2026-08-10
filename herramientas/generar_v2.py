@@ -257,15 +257,15 @@ TEXTOS = {
         'linea1': 'Automático · 41 mm · 100 m',
         'linea2': 'Cristal de zafiro · Doble corona · Desde {precio_levante}',
     },
-    # 06/08/2026. Mismo caso que el Cero Cero y misma decisión de Óscar:
-    # a 219,90 € el Bitácora es de CUARZO suizo; el automático empieza en
-    # el Levante. Se mantiene «Automático» y el «desde» sube a ese
-    # acabado. Comprobado que a 279,90 € siguen siendo ciertos el zafiro,
-    # el acero 316L y los 40 mm.
+    # 10/08/2026. El Bitácora ya no tiene acabados —Óscar los quitó el
+    # 09/08/2026, un solo modelo con el ETA 2824-2 automático— así que el
+    # «desde» vuelve a ser el mínimo del reloj, sin apuntar a un acabado
+    # que ya no existe. Lo que cambia el precio ahora es el brazalete
+    # (caucho o acero integrado), no un nivel.
     'bitacora': {
         'frase': 'El azul que no pasa desapercibido.',
         'linea1': 'Deportivo · Automático · 40 mm',
-        'linea2': 'Acero 316L · Cristal de zafiro · Desde {precio_levante}',
+        'linea2': 'Acero 316L · Cristal de zafiro · Desde {precio}',
     },
     # 06/08/2026, Óscar: «no me cambies nada de lo que yo te ponga, lo
     # tengo supervisado, aunque tú no lo puedas comprobar». Así que este

@@ -1316,8 +1316,8 @@
       "codigo": "LO—06",
       "nombre": "Diver",
       "familia": "Buceo",
-      "homenaje": null,
-      "frase": null,
+      "homenaje": "El único sin homenaje. Creación propia de laOra",
+      "frase": "Un buceador de verdad: 300 m de resistencia, movimiento suizo.",
       "descripcion": null,
       "historia": null,
       "precio": null,
@@ -1402,7 +1402,7 @@
       "frase": "Equilibrio, precisión y uso diario.",
       "descripcion": "Geometría de acero, perfil contenido y una esfera que cambia con la luz.",
       "historia": "Bitácora toma como punto de partida el reloj deportivo integrado de los setenta y lo traduce a una propuesta directa, legible y con marca propia.",
-      "precio": 199.9,
+      "precio": 319.9,
       "movimiento": null,
       "diametro": "40 mm",
       "hermeticidad": "100 m (10 ATM)",
@@ -1447,20 +1447,27 @@
             "fondo": "macizo",
             "peso": "~140 g",
             "refs": [
-              "LO-07_Bitacora_A01"
+              "LO-07_Bitacora_A01",
+              "LO-07_Bitacora_A02"
             ]
           }
         ],
         "correas": [
           {
-            "id": "40-mm-acero-inoxidable-316l",
-            "nombre": "40 mm, Acero inoxidable 316L",
-            "detalle": "Brazalete integrado de acero 316L · Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable"
+            "id": "caucho-integrado",
+            "nombre": "Caucho integrado, hebilla mariposa",
+            "detalle": "Caucho integrado a la caja · Hebilla mariposa de acero"
+          },
+          {
+            "id": "acero-integrado",
+            "nombre": "Acero integrado, cierre plegable",
+            "detalle": "Brazalete integrado de acero 316L · Eslabones pulidos y satinados · Cierre plegable"
           }
         ],
         "precios": {
           "estandar": [
-            219.9
+            319.9,
+            379.9
           ]
         },
         "rotuloOpciones": "Caja y correa",

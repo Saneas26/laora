@@ -1,0 +1,82 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Configura tu Precisa · laOra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=13">
+
+<header class="cf-cab">
+  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
+    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Precisa</b>
+  </a>
+  <p class="cf-ref">Ref. <b data-ref>—</b></p>
+  <button class="cf-ficha-boton" type="button">Ver la ficha completa</button>
+</header>
+
+<div class="cf-cuerpo">
+
+  <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
+      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="Precisa de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      </div>
+      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
+    </div>
+
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
+  </section>
+
+  <section class="cf-panel" aria-label="Opciones del Precisa">
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
+      <p class="cf-pregunta">Si es suizo, nuestros relojes también</p>
+      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
+        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo suizo</button>
+        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
+      </div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>la que pide el movimiento</b></p>
+      <div class="cf-fijo"><b data-caja-fijo></b><span data-caja-apunte></span></div>
+    </div>
+    <div class="cf-grupo" data-grupo-esf>
+      <p class="cf-rotulo">Esfera <b>4 opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir esfera">
+        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Azul claro</button>
+        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Azul oscuro</button>
+        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Blanca</button>
+        <button class="cf-ficha" type="button" data-esf="3" aria-pressed="false">Negra</button>
+      </div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>uno solo</b></p>
+      <div class="cf-fijo"><b>Acero 316, color plata</b><span>viene con la caja, no se pide aparte</span></div>
+      <p class="cf-detalle" data-detalle hidden></p>
+    </div>
+
+    <div class="cf-grupo" data-grupo-var hidden>
+      <p class="cf-rotulo"><span data-rotulo-var>Acabado</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir acabado"></div>
+    </div>
+  </section>
+</div>
+
+<footer class="cf-barra">
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
+  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
+  <button class="cf-reservar" type="button">Reservar</button>
+</footer>
+
+<script type="application/json" data-piezas>{"nombre": "Precisa", "codigo": "LO-01", "incluido": "Acero 316, color plata", "extra": false, "mov": [{"ref": "M1", "acabado": "Alba", "cal": "Ronda 715", "coste": 15.05, "rot": "Movimiento de cuarzo suizo", "specs": "Movimiento de cuarzo suizo Ronda 715, de la línea normtech. Precisión de -10/+20 s/mes y fecha a las 3. Formato 11 1/2 líneas: 25,60 mm de diámetro (26,00 mm en total) y 2,50 mm de altura. Al tirar de la corona se para el segundero y el consumo baja un 70 %. Pila 371 con unos 60 meses de autonomía, o pila 395 con 78 meses. Temperatura de trabajo de 0 a 50 °C. Movimiento metálico reparable."}, {"ref": "M2", "acabado": "Cenit", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Solida plata", "coste": 70.7}, {"ref": "C2", "nombre": "Cristal plata", "coste": 68.36}], "esf": [{"ref": "E1", "nombre": "Azul claro", "coste": 13.79, "cajas": "Todas"}, {"ref": "E2", "nombre": "Azul oscuro", "coste": 13.79, "cajas": "Todas"}, {"ref": "E3", "nombre": "Blanca", "coste": 13.79, "cajas": "Todas"}, {"ref": "E4", "nombre": "Negra", "coste": 13.79, "cajas": "Todas"}], "brz": [{"id": "B00", "nombre": "Acero 316, color plata", "v": [{"ref": "", "nom": "Plata", "c": 0}]}], "ejes": {"mov": {"pregunta": "Si es suizo, nuestros relojes también", "tarjetas": {"M1": "Cuarzo suizo", "M2": "Automático suizo"}}, "caja": {"porMov": {"M1": {"ref": "C1", "apunte": "fondo sólido: en un cuarzo no hay nada que enseñar"}, "M2": {"ref": "C2", "apunte": "fondo de cristal para ver el automático"}}}, "esf": {}, "brz": {"apunte": "viene con la caja, no se pide aparte"}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "solape": 0.01875, "fotoDefecto": "/assets/img/catalogo/LO-01_Lunar_A01.webp"}</script>
+<script src="/assets/js/configurador-v2.js?v=14"></script>

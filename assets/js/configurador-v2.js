@@ -17,6 +17,9 @@
   var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
 
   var SUB = ((D.ejes || {}).caja || {}).sub || null;
+  /* El Precisa no elige caja: se la impone el movimiento. Cuarzo → caja
+     sólida, automático → caja de cristal. */
+  var PORMOV = ((D.ejes || {}).caja || {}).porMov || null;
   var e = { mov: 0, caja: 0, esf: 0, brz: 0, v: 0, diam: null, color: null };
   if (SUB) { e.diam = SUB[0].valores[0]; e.color = SUB[1].valores[0]; }
 
@@ -125,11 +128,23 @@
 
   /* ---------- estado ---------- */
 
+  /* La esfera elegida, o NINGUNA. Las cuatro del Precisa son del cuarzo:
+     con el automático la esfera viene dentro del pack de la caja, así que
+     no hay nada que elegir ni nada que cobrar. Si la que estaba puesta no
+     entra en la caja nueva, se cae a la primera que sí. */
+  function esfDe(caja) {
+    if (!D.esf.length) return null;
+    if (esferaVale(D.esf[e.esf], caja)) return D.esf[e.esf];
+    for (var i = 0; i < D.esf.length; i++) {
+      if (esferaVale(D.esf[i], caja)) { e.esf = i; return D.esf[i]; }
+    }
+    return null;
+  }
+
   function piezas() {
-    var f = D.brz[e.brz];
+    var f = D.brz[e.brz], caja = D.caj[e.caja];
     return {
-      mov: D.mov[e.mov], caja: D.caj[e.caja],
-      esf: D.esf.length ? D.esf[e.esf] : null,
+      mov: D.mov[e.mov], caja: caja, esf: esfDe(caja),
       fam: f, v: f.v[Math.min(e.v, f.v.length - 1)]
     };
   }
@@ -145,7 +160,9 @@
     var p = piezas();
     var seg = [D.codigo, p.mov.ref, p.caja.ref];
     if (p.esf) seg.push(p.esf.ref);
-    seg.push(p.v.ref);
+    /* El brazalete solo entra en la referencia si se compra aparte. El
+       del Precisa viene en el pack de la caja: no hay nada que pedir. */
+    if (p.v.ref) seg.push(p.v.ref);
     return seg.join('-');
   }
 
@@ -242,7 +259,9 @@
   function pintaSpecs() {
     var p = piezas();
     var filas = [['Movimiento', p.mov.cal], ['Acabado', p.mov.acabado], ['Caja', p.caja.nombre]];
+    var pack = ((D.ejes || {}).esf || {}).enPack;
     if (p.esf) filas.push(['Esfera', nombreEsf(p.esf)]);
+    else if (D.esf.length && pack) filas.push(['Esfera', pack]);
     filas.push(['Brazalete', nombreFam(p.fam)]);
     $('[data-specs]').innerHTML = filas.map(function (f) {
       return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>';
@@ -286,19 +305,30 @@
   }
 
   function pinta() {
+    /* La caja va PRIMERO porque de ella cuelgan la esfera y el brazalete.
+       Si la manda el movimiento, aquí es donde se pone. */
+    if (PORMOV) {
+      var pm = PORMOV[D.mov[e.mov].ref];
+      if (pm) {
+        for (var q = 0; q < D.caj.length; q++) if (D.caj[q].ref === pm.ref) e.caja = q;
+        var bn = $('[data-caja-fijo]'), ba = $('[data-caja-apunte]');
+        if (bn) bn.textContent = D.caj[e.caja].nombre;
+        if (ba) ba.textContent = pm.apunte || '';
+      }
+    }
     /* Las esferas que no entran en la caja elegida se apagan, no se
-       esconden: si desaparecieran, parecería que no existen. */
+       esconden: si desaparecieran, parecería que no existen. Pero si NO
+       ENTRA NINGUNA es que la esfera viene en el pack, y entonces sí se
+       va el eje entero: no hay elección que ofrecer. */
     if (D.esf.length) {
       var caja = D.caj[e.caja];
-      if (!esferaVale(D.esf[e.esf], caja)) {
-        for (var i = 0; i < D.esf.length; i++) {
-          if (esferaVale(D.esf[i], caja)) { e.esf = i; break; }
-        }
-      }
+      var hay = esfDe(caja) !== null;
+      var ge = $('[data-grupo-esf]');
+      if (ge) ge.hidden = !hay;
       todos('[data-esf]').forEach(function (el) {
         var i = Number(el.dataset.esf);
         el.disabled = !esferaVale(D.esf[i], caja);
-        el.setAttribute('aria-pressed', String(i === e.esf));
+        el.setAttribute('aria-pressed', String(hay && i === e.esf));
       });
     }
     todos('[data-mov]').forEach(function (el) {
