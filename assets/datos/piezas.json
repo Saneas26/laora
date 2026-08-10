@@ -775,15 +775,6 @@
       "eti": "Plata",
       "hex": "#c9cdd2",
       "esl": "Cinco eslabones"
-     },
-     {
-      "ref": "Brz-316-A07",
-      "nom": "Nueve eslabones",
-      "c": 21.79,
-      "cier": "Clásico",
-      "eti": "Plata",
-      "hex": "#c9cdd2",
-      "esl": "Nueve eslabones"
      }
     ],
     "mat": "Acero 316L macizo"
@@ -1644,11 +1635,6 @@
       "ref": "Brz-316-A06",
       "nom": "Cinco eslabones",
       "c": 21.79
-     },
-     {
-      "ref": "Brz-316-A07",
-      "nom": "Nueve eslabones",
-      "c": 21.79
      }
     ]
    },
@@ -2163,11 +2149,6 @@
       "ref": "Brz-316-A06",
       "nom": "Cinco eslabones",
       "c": 21.79
-     },
-     {
-      "ref": "Brz-316-A07",
-      "nom": "Nueve eslabones",
-      "c": 21.79
      }
     ]
    },
@@ -2536,11 +2517,6 @@
      {
       "ref": "Brz-316-A06",
       "nom": "Cinco eslabones",
-      "c": 21.79
-     },
-     {
-      "ref": "Brz-316-A07",
-      "nom": "Nueve eslabones",
       "c": 21.79
      }
     ]
