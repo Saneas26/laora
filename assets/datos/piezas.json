@@ -1238,13 +1238,6 @@
   "extra": false,
   "mov": [
    {
-    "ref": "M1",
-    "cal": "Ronda 715",
-    "coste": 15.05,
-    "rot": "Movimiento de cuarzo suizo",
-    "specs": "Movimiento de cuarzo suizo Ronda 715, de la línea normtech. Precisión de -10/+20 s/mes y fecha a las 3. Formato 11 1/2 líneas: 25,60 mm de diámetro (26,00 mm en total) y 2,50 mm de altura. Al tirar de la corona se para el segundero y el consumo baja un 70 %. Pila 371 con unos 60 meses de autonomía, o pila 395 con 78 meses. Temperatura de trabajo de 0 a 50 °C. Movimiento metálico reparable."
-   },
-   {
     "ref": "M2",
     "cal": "PT5000 automático (con fecha)",
     "coste": 59.01,
@@ -1444,14 +1437,14 @@
    "mov": {
     "pregunta": "Si es suizo, nuestros relojes también",
     "tarjetas": {
-     "M1": "Cuarzo suizo",
      "M2": "Automático suizo"
     }
    },
    "caja": {},
    "esf": {},
    "brz": {}
-  }
+  },
+  "_nota": "EL CERO CERO NO MONTA CUARZO. Óscar, 10/08/2026: «no hemos encontrado caja de tapa sólida y por tanto por el momento no montamos cuarzo en el cero cero». El Ronda 715 (M1, 15,05 €) estaba aquí y se ha sacado. Si aparece la caja de tapa sólida, vuelve a entrar. Las claves que empiezan por _ no salen a la página."
  },
  "coctel": {
   "nombre": "Cóctel",
