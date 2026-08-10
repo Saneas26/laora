@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 15
-V_JS = 19
+V_JS = 20
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -81,7 +81,25 @@ with open(os.path.join(RAIZ, 'assets/datos/piezas.json'), encoding='utf-8') as f
 # cabeza va encima y lo tapa, y así desaparece la rendija de luz que
 # quedaba entre el último eslabón y la punta de las asas.
 PIEZAS_IMG = '/assets/img/piezas'
-SOLAPE = 45 / 2400          # en tanto por uno del alto del brazalete
+
+# CUÁNTO SE METE EL BRAZALETE DETRÁS DE LA CAJA
+# ------------------------------------------------------------
+# En PÍXELES DE LA FOTO, sobre el lienzo de 1000 de ancho. Antes esto
+# era una fracción que el JavaScript multiplicaba por un 240 que no
+# correspondía a nada: no convertía a la escala a la que se ve la foto,
+# así que el desplazamiento real era de cuatro píxeles y medio.
+#
+# MEDIDO en `LO-03-C1-E1.webp`, barriendo fila a fila y contando los
+# tramos opacos de cada una:
+#     y = 200  puntas de las asas, hueco de 268 px entre ellas
+#     y = 272  el hueco se cierra: ahí empieza la caja maciza
+# O sea, 72 px de asa. Con los 45 de antes el último eslabón se
+# quedaba a 27 px de la caja, y ese aire es el que se veía.
+#
+# Con 80 el eslabón llega a la caja y se mete 8 px por detrás, que es
+# lo justo para que no asome ninguna costura. El hueco entre asas mide
+# 265 px y el brazalete 266: entra clavado.
+SOLAPE = 80
 
 def hay(rel):
     return os.path.exists(os.path.join(RAIZ, rel.lstrip('/')))
