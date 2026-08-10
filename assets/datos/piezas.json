@@ -714,7 +714,7 @@
       "cier": "Cierre desplegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Tres eslabones"
+      "esl": "Cinco eslabones"
      },
      {
       "ref": "Brz-316-A03",
@@ -724,7 +724,7 @@
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
-      "esl": "Tres eslabones"
+      "esl": "Cinco eslabones"
      },
      {
       "ref": "Brz-316-A04",
@@ -733,7 +733,7 @@
       "cier": "Cierre desplegable",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": "Tres eslabones"
+      "esl": "Cinco eslabones"
      }
     ],
     "mat": "Acero 316L"
