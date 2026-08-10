@@ -261,7 +261,9 @@
 
   function pintaSpecs() {
     var p = piezas();
-    var filas = [['Movimiento', p.mov.cal], ['Acabado', p.mov.acabado], ['Caja', p.caja.nombre]];
+    /* Ya NO hay acabados. Un modelo, y el cliente lo monta entero
+       (Óscar, 10/08/2026): Alba, Levante, Cenit y Eclipse no existen. */
+    var filas = [['Movimiento', p.mov.cal], ['Caja', p.caja.nombre]];
     var pack = ((D.ejes || {}).esf || {}).enPack;
     if (p.esf) filas.push(['Esfera', nombreEsf(p.esf)]);
     else if (D.esf.length && pack) filas.push(['Esfera', pack]);
@@ -271,7 +273,7 @@
     }).join('');
   }
 
-  /* El acabado que no va con la caja NO SE PINTA. Aquí sí se esconde, al
+  /* La versión que no va con la caja NO SE PINTA. Aquí sí se esconde, al
      revés que la esfera: «es frustrante ver algo que no puedes elegir»
      (Óscar, 10/08/2026). El índice del botón sigue siendo el de la lista
      entera, que es lo que lee el estado. */
@@ -294,7 +296,7 @@
        viene con el reloj —la correa del Diver—, y eso se dice así. */
     var suelo = Math.min.apply(null, vale.map(function (x) { return x.c; }));
     $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + vale.length +
-      (vale.length === 1 ? ' acabado' : ' acabados') +
+      (vale.length === 1 ? ' versión' : ' versiones') +
       (suelo > 0 ? ' · desde ' + euros(suelo) : ' · ya viene con el reloj');
   }
 
@@ -322,20 +324,28 @@
         if (ba) ba.textContent = pm.apunte || '';
       }
     }
-    /* Las esferas que no entran en la caja elegida se apagan, no se
-       esconden: si desaparecieran, parecería que no existen. Pero si NO
-       ENTRA NINGUNA es que la esfera viene en el pack, y entonces sí se
-       va el eje entero: no hay elección que ofrecer. */
+    /* La esfera que no entra en la caja elegida NO SE PINTA. Antes salía
+       tachada, y Óscar lo zanjó el 10/08/2026: «es frustrante no poder
+       elegir algo que ves». Y si no entra NINGUNA es que la esfera viene
+       en el pack: se va el eje entero.
+
+       Al esconder botones hay que rehacer la cuenta del rótulo, o diría
+       «3 opciones» enseñando dos. */
     if (D.esf.length) {
       var caja = D.caj[e.caja];
       var hay = esfDe(caja) !== null;
       var ge = $('[data-grupo-esf]');
       if (ge) ge.hidden = !hay;
+      var vivas = 0;
       todos('[data-esf]').forEach(function (el) {
         var i = Number(el.dataset.esf);
-        el.disabled = !esferaVale(D.esf[i], caja);
+        var vale = esferaVale(D.esf[i], caja);
+        el.hidden = !vale;
+        if (vale) vivas++;
         el.setAttribute('aria-pressed', String(hay && i === e.esf));
       });
+      var cuenta = ge && ge.querySelector('.cf-rotulo b');
+      if (cuenta) cuenta.textContent = vivas + (vivas === 1 ? ' opción' : ' opciones');
     }
     todos('[data-mov]').forEach(function (el) {
       el.setAttribute('aria-pressed', String(Number(el.dataset.mov) === e.mov)); });
@@ -371,7 +381,80 @@
     });
   }
 
+  /* ============================================================
+     LA FICHA TÉCNICA
+     ------------------------------------------------------------
+     Se rellena con la configuración que haya puesta en ese momento,
+     no con datos escritos: si fueran fijos, quien montase el
+     automático leería la ficha del cuarzo.
+
+     Solo dice lo que la biblioteca de piezas SABE. El movimiento
+     tiene su párrafo entero —viene de la pestaña Calibres—; de la
+     caja y la esfera hoy solo hay el nombre, y no me invento ni el
+     diámetro ni la estanqueidad.
+     ============================================================ */
+  function bloque(titulo, filas) {
+    var f = filas.filter(function (x) { return x[1]; }).map(function (x) {
+      return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>';
+    }).join('');
+    return f ? '<section><h3>' + titulo + '</h3><dl>' + f + '</dl></section>' : '';
+  }
+
+  function pintaTecnica() {
+    var p = piezas();
+    var cuerpo = '';
+    cuerpo += '<section><h3>Movimiento</h3><p class="cf-tec-prosa">' +
+      (p.mov.specs || p.mov.cal) + '</p></section>';
+    cuerpo += bloque('Caja y esfera', [
+      ['Caja', p.caja.nombre],
+      ['Esfera', p.esf ? nombreEsf(p.esf) : ((D.ejes || {}).esf || {}).enPack],
+      ['Modelo', D.nombre]
+    ]);
+    cuerpo += bloque('Brazalete o correa', [
+      ['Familia', nombreFam(p.fam)],
+      ['Versión', p.v.nom],
+      ['Incluido', D.incluido || null]
+    ]);
+    $('[data-tec-cuerpo]').innerHTML = cuerpo;
+    $('[data-tec-ref]').textContent = referencia();
+    $('[data-tec-pie]').textContent =
+      p.caja.nombre + (p.esf ? ' · ' + nombreEsf(p.esf) : '') + ' · ' + nombreFam(p.fam) +
+      ' — ' + $('[data-precio]').textContent;
+  }
+
+  var manto = $('[data-manto]');
+  function abreTecnica() { pintaTecnica(); manto.hidden = false; }
+  function cierraTecnica() { manto.hidden = true; }
+  if (manto) {
+    manto.addEventListener('click', function (ev) {
+      if (ev.target === manto || ev.target.closest('[data-cierra-tec]')) cierraTecnica();
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape') cierraTecnica();
+    });
+  }
+
+  /* ---------- reservar ----------
+     La cesta vive en el navegador (`carrito.js`). Aquí solo se le
+     entrega la línea, con la MISMA referencia que verá Óscar en el
+     panel: si en la cesta pusiera otra cosa, no se sabría qué montar. */
+  function reservar() {
+    if (typeof laoraCarritoAnadir !== 'function') return;
+    var p = piezas();
+    laoraCarritoAnadir({
+      ref: referencia(),
+      nombre: D.nombre,
+      detalle: p.caja.nombre + (p.esf ? ' · ' + nombreEsf(p.esf) : ''),
+      correa: nombreFam(p.fam) + (p.v.nom ? ' · ' + p.v.nom : ''),
+      precio: redondea(coste() * D.mult),
+      foto: $('[data-foto]').src
+    });
+    window.location.href = '/carrito.html';
+  }
+
   document.addEventListener('click', function (ev) {
+    if (ev.target.closest('[data-abre-ficha]')) { abreTecnica(); return; }
+    if (ev.target.closest('[data-reservar]')) { reservar(); return; }
     var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub]');
     if (!b || b.disabled) return;
     var d = b.dataset;

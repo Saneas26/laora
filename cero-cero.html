@@ -1,140 +1,112 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Configura tu Cero Cero de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 209,90 €.">
-<meta name="theme-color" content="#151715">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configura tu Cero Cero · laOra</title>
-<link rel="canonical" href="https://laora.es/cero-cero">
-<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
-<link rel="stylesheet" href="/assets/css/configurador.css?v=27">
-</head>
-<body class="cfg-normal">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=15">
 
-<header class="cfg-cab">
-  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
-       sin él sería un callejón sin salida. No se le añade un menú porque
-       aquí solo se hace una cosa, que es elegir el reloj. -->
-  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"><b>Cero Cero</b></a>
-  <span class="ref">Ref. <span data-ref>—</span></span>
-  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
-       cuatro palabras al lado del logotipo sin montarse encima de la
-       referencia, y recortar con puntos suspensivos deja un enlace que
-       no se entiende. -->
-  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
+<header class="cf-cab">
+  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
+    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Cero Cero</b>
+  </a>
+  <p class="cf-ref">Ref. <b data-ref>—</b></p>
+  <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
 </header>
 
-<div class="cfg-cuerpo">
+<div class="cf-cuerpo">
 
-  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
-  <section class="cfg-visor" aria-label="El reloj que estás configurando">
-    <img class="cfg-foto" data-foto
-         src="/assets/img/catalogo/LO-02_CeroCero_A01.webp"
-         alt="Reloj laOra Cero Cero, acabado Alba, con brazalete malla milanesa acero"
-         fetchpriority="high">
-    <div class="cfg-muestra" aria-hidden="true">
-      <span class="tira" data-muestra-tira style="background:repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"></span>
-      <span data-muestra-nombre>Brazalete malla milanesa acero</span>
+  <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
+      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="Cero Cero de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      </div>
+      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
-    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
-         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
-         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
-         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
-         segunda caía encima de la referencia: dos textos superpuestos,
-         ilegibles los dos. Así el segundo siempre baja. -->
-    <div class="cfg-rotulos">
-      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Brazalete malla milanesa acero</p>
-      <!-- La referencia también aquí: en el teléfono no cabe en la
-           cabecera, y es el dato con el que Óscar busca en la hoja. -->
-      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
-    </div>
+
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>
 
-  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
-  <section class="cfg-panel" aria-label="Opciones del Cero Cero">
-
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Acabado <b>6 opciones</b></p>
-      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
-        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 209,90 €</small></button>
-        <button type="button" data-acabado="levante" aria-pressed="false"><b>Levante</b><small>desde 279,90 €</small></button>
-        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><small>desde 359,90 €</small></button>
-        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><i>TMI VH31B</i><small>desde 209,90 €</small></button>
-        <button type="button" data-acabado="eclipse-nh35a" aria-pressed="false"><b>Eclipse</b><i>Seiko/TMI NH35A</i><small>desde 269,90 €</small></button>
-        <button type="button" data-acabado="eclipse-9015" aria-pressed="false"><b>Eclipse</b><i>Miyota 9015</i><small>desde 329,90 €</small></button>
-      </div>
-      <p class="cfg-nota" data-nota></p>
-    </div>
-
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>4 opciones</b></b></p>
-      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
-           era siempre de cuatro, así que con tres correas quedaba una
-           columna vacía y los tres nombres partidos en dos líneas por
-           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
-      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa" style="--correas:4">
-        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"></span><span>Brazalete malla milanesa acero</span></button>
-        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"></span><span>Brazalete acero 316L malla cepillada</span></button>
-        <button type="button" data-correa="2" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"></span><span>Brazalete acero 904L</span></button>
-        <button type="button" data-correa="3" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"></span><span>Brazalete malla milanesa PVD negro</span></button>
+  <section class="cf-panel" aria-label="Opciones del Cero Cero">
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
+      <p class="cf-pregunta">Si es suizo, nuestros relojes también</p>
+      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
+        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo suizo</button>
+        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
       </div>
     </div>
-
-    <div class="cfg-nota">
-      <dl data-ficha></dl>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>2 opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir caja">
+        <button class="cf-ficha" type="button" data-caja="0" aria-pressed="true">Clásica 41 mm</button>
+        <button class="cf-ficha" type="button" data-caja="1" aria-pressed="false">Dos coronas 41 mm</button>
+      </div>
+    </div>
+    <div class="cf-grupo" data-grupo-esf>
+      <p class="cf-rotulo">Esfera <b>3 opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir esfera">
+        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Negra y oro</button>
+        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Azul y negra</button>
+        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Negra y oro rosa</button>
+      </div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>9 familias</b></p>
+      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
+        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Acero 316L, cinco eslabones</span></button>
+        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L, cierre desplegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Malla milanesa, hebilla plegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Malla milanesa de eslabón fino</span></button>
+        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón ancho</span></button>
+        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón fino</span></button>
+        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Acero 904L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="8" aria-pressed="false"><i></i><span>Acero 904L, eslabones planos</span></button>
+      </div>
+      <p class="cf-detalle" data-detalle></p>
     </div>
 
+    <div class="cf-grupo" data-grupo-var>
+      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
+    </div>
   </section>
 </div>
 
-<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
-<footer class="cfg-barra">
-  <span class="lado">
-    <span class="eleccion" data-eleccion>Alba · Brazalete malla milanesa acero</span>
-    <span class="ref">Ref. <span data-ref>—</span></span>
-  </span>
-  <span class="cfg-precio">
-    <strong data-precio>209,90 €</strong>
-    <span>Impuestos incluidos</span>
-  </span>
-  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
+<footer class="cf-barra">
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
+  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
+  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
-<!-- LA FICHA TÉCNICA COMPLETA
-     Se monta al pulsar y se tira al cerrar, como el overlay del
-     material aprobado: mientras no está abierta, no existe en la
-     página. No cambia la dirección ni mueve la pantalla de debajo.
-
-     Los datos NO van escritos: los rellena `configurador.js` con la
-     combinación que haya elegida en ese momento. Si fueran fijos, quien
-     configurase el Cenit leería la ficha del acabado de partida. -->
-<template data-plantilla-ficha>
-  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
-    <div class="cfg-overlay-caja">
-      <header class="cfg-overlay-cab">
-        <div>
-          <p>LO—02 · FICHA TÉCNICA COMPLETA</p>
-          <h2 id="cfg-ficha-titulo">Todo el Cero Cero.<br><em>Dato a dato.</em></h2>
-        </div>
-        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
-        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
-      </header>
-      <div class="cfg-overlay-grupos" data-grupos></div>
-      <footer class="cfg-overlay-pie">
-        <p data-overlay-resumen></p>
-        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
-      </footer>
-    </div>
+<div class="cf-manto" data-manto hidden>
+  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
+    <header class="cf-tec-cab">
+      <div>
+        <p class="cf-tec-eyebrow">LO-05 · FICHA TÉCNICA</p>
+        <h2 id="cf-tec-t">Todo el Cero Cero.<br><em>Dato a dato.</em></h2>
+      </div>
+      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
+      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
+    </header>
+    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
+    <footer class="cf-tec-pie">
+      <p data-tec-pie></p>
+      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
+    </footer>
   </div>
-</template>
+</div>
 
-<script type="application/json" data-cfg>{"modelo": "Cero Cero", "inicial": {"acabado": "alba", "correa": 0}, "precios": {"alba": [209.9, null, null, null], "levante": [null, 279.9, null, null], "cenit": [null, null, 359.9, null], "eclipse": [null, null, null, 209.9], "eclipse-nh35a": [null, null, null, 269.9], "eclipse-9015": [null, null, null, 329.9]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "", "resumen": "", "refs": ["LO-02_CeroCero_A01", "", "", ""], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_A01.webp", "/assets/img/catalogo/LO-02_CeroCero_A01.webp", "/assets/img/catalogo/LO-02_CeroCero_A01.webp", "/assets/img/catalogo/LO-02_CeroCero_A01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_A01.webp", "ficha": [["Movimiento", "TMI VH31B, 11½ líneas, 3,45 mm de alto"], ["Cristal", "Mineral Hardlex (no es zafiro)"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "TMI VH31B, 11½ líneas, 3,45 mm de alto"], ["TIPO", "Cuarzo japonés con segundero de barrido (4 pasos/s), 3 agujas, sin fecha"], ["FRECUENCIA", "Cuarzo 32.768 Hz"], ["AUTONOMÍA", "Pila SR626SW, hasta 2 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Mineral Hardlex (no es zafiro)"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Giratorio unidireccional, escala de 60 minutos"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra mate con acentos naranja"], ["LUMINISCENCIA", "C3 verde"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado macizo"], ["PESO", "~140 g"]]}]}, "levante": {"nombre": "Levante", "etiqueta": "Levante", "descriptor": "", "resumen": "", "refs": ["", "LO-02_CeroCero_L01", "", ""], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_L01.webp", "/assets/img/catalogo/LO-02_CeroCero_L01.webp", "/assets/img/catalogo/LO-02_CeroCero_L01.webp", "/assets/img/catalogo/LO-02_CeroCero_L01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_L01.webp", "ficha": [["Movimiento", "Seiko/TMI NH35A, 11½ líneas, 24 rubíes"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko/TMI NH35A, 11½ líneas, 24 rubíes"], ["TIPO", "Automático con cuerda manual y segundero detenible (hacking), fecha a las 3"], ["FRECUENCIA", "21.600 alt/h (3 Hz)"], ["AUTONOMÍA", "~41 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Giratorio unidireccional, escala de 60 minutos"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra mate con acentos naranja"], ["LUMINISCENCIA", "C3 verde"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado"], ["PESO", "~150 g"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit", "descriptor": "", "resumen": "", "refs": ["", "", "LO-02_CeroCero_C01", ""], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "/assets/img/catalogo/LO-02_CeroCero_C01.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_C01.webp", "ficha": [["Movimiento", "Miyota 9015, 11½ líneas, 24 rubíes, 3,90 mm de alto"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 9015, 11½ líneas, 24 rubíes, 3,90 mm de alto"], ["TIPO", "Automático ultrafino con cuerda manual y segundero detenible (hacking), fecha a las 3"], ["FRECUENCIA", "28.800 alt/h (4 Hz)"], ["AUTONOMÍA", "~42 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "42 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Giratorio unidireccional, escala de 60 minutos"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra mate con acentos naranja"], ["LUMINISCENCIA", "C3 verde"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado con visor de cristal"], ["PESO", "~165 g"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse TMI VH31B", "descriptor": "", "resumen": "", "refs": ["", "", "", "LO-02_CeroCero_E01-VH31"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-VH31.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "TMI VH31B, 11½ líneas, 3,45 mm de alto"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "TMI VH31B, 11½ líneas, 3,45 mm de alto"], ["TIPO", "Cuarzo japonés con segundero de barrido (4 pasos/s), 3 agujas, sin fecha"], ["FRECUENCIA", "Cuarzo 32.768 Hz"], ["AUTONOMÍA", "Pila SR626SW, hasta 2 años"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Giratorio unidireccional, escala de 60 minutos"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra mate con acentos naranja"], ["LUMINISCENCIA", "C3 verde"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado con visor transparente, PVD negro"], ["PESO", "~145 g"]]}]}, "eclipse-nh35a": {"nombre": "Eclipse", "etiqueta": "Eclipse Seiko/TMI NH35A", "descriptor": "", "resumen": "", "refs": ["", "", "", "LO-02_CeroCero_E01-NH35"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-NH35.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "Seiko/TMI NH35A, 11½ líneas, 24 rubíes"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Seiko/TMI NH35A, 11½ líneas, 24 rubíes"], ["TIPO", "Automático con cuerda manual y segundero detenible (hacking), fecha a las 3"], ["FRECUENCIA", "21.600 alt/h (3 Hz)"], ["AUTONOMÍA", "~41 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Giratorio unidireccional, escala de 60 minutos"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra mate con acentos naranja"], ["LUMINISCENCIA", "C3 verde"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado con visor transparente, PVD negro"], ["PESO", "~145 g"]]}]}, "eclipse-9015": {"nombre": "Eclipse", "etiqueta": "Eclipse Miyota 9015", "descriptor": "", "resumen": "", "refs": ["", "", "", "LO-02_CeroCero_E01-9015"], "fotos": ["/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp"], "foto": "/assets/img/catalogo/LO-02_CeroCero_E01-9015.webp", "ficha": [["Movimiento", "Miyota 9015, 11½ líneas, 24 rubíes, 3,90 mm de alto"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 9015, 11½ líneas, 24 rubíes, 3,90 mm de alto"], ["TIPO", "Automático ultrafino con cuerda manual y segundero detenible (hacking), fecha a las 3"], ["FRECUENCIA", "28.800 alt/h (4 Hz)"], ["AUTONOMÍA", "~42 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "41 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Giratorio unidireccional, escala de 60 minutos"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ESFERA", "Negra mate con acentos naranja"], ["LUMINISCENCIA", "C3 verde"], ["ANCHO DE ASA", "20 mm"], ["FONDO", "Roscado con visor transparente, PVD negro"], ["PESO", "~145 g"]]}]}}, "correas": [{"id": "brazalete-malla-milanesa-acero", "nombre": "Brazalete malla milanesa acero", "detalle": "Malla milanesa 1,0 mm plateada · Cierre desplegable de malla con seguridad", "diametro": null, "muestra": "repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"}, {"id": "brazalete-acero-316l-malla-cepilla", "nombre": "Brazalete acero 316L malla cepillada", "detalle": "Malla cepillada · Cierre de mariposa", "diametro": null, "muestra": "repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"}, {"id": "brazalete-acero-904l", "nombre": "Brazalete acero 904L", "detalle": "", "diametro": null, "muestra": "linear-gradient(150deg,#f2f3f4 0%,#b9bcc0 26%,#eef0f2 46%,#8f9398 70%,#d6d9dc 100%)"}, {"id": "brazalete-malla-milanesa-pvd-negro", "nombre": "Brazalete malla milanesa PVD negro", "detalle": "Malla milanesa 1,0 mm PVD negro · Cierre desplegable de malla con seguridad", "diametro": null, "muestra": "repeating-linear-gradient(60deg,#e4e6e8 0 2px,#adb1b5 2px 4px),linear-gradient(150deg,#eceef0,#a2a6ab)"}]}</script>
+<script type="application/json" data-piezas>{"nombre": "Cero Cero", "codigo": "LO-05", "incluido": "", "extra": false, "mov": [{"ref": "M1", "cal": "Ronda 715", "coste": 15.05, "rot": "Movimiento de cuarzo suizo", "specs": "Movimiento de cuarzo suizo Ronda 715, de la línea normtech. Precisión de -10/+20 s/mes y fecha a las 3. Formato 11 1/2 líneas: 25,60 mm de diámetro (26,00 mm en total) y 2,50 mm de altura. Al tirar de la corona se para el segundero y el consumo baja un 70 %. Pila 371 con unos 60 meses de autonomía, o pila 395 con 78 meses. Temperatura de trabajo de 0 a 50 °C. Movimiento metálico reparable."}, {"ref": "M2", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Clásica 41 mm", "coste": 38.97}, {"ref": "C3", "nombre": "Dos coronas 41 mm", "coste": 60.77}], "esf": [{"ref": "E1", "nombre": "Negra y oro", "coste": 12.79, "cajas": "Todas"}, {"ref": "E2", "nombre": "Azul y negra", "coste": 12.79, "cajas": "Todas"}, {"ref": "E3", "nombre": "Negra y oro rosa", "coste": 12.79, "cajas": "Todas"}], "brz": [{"id": "B01", "nombre": "Acero 316L, cinco eslabones", "v": [{"ref": "Brz-316-A01", "nom": "Única", "c": 7.39}]}, {"id": "B02", "nombre": "Acero 316L, cierre desplegable", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39}, {"ref": "Brz-316-A03", "nom": "Plata y oro rosa", "c": 30.79}, {"ref": "Brz-316-A04", "nom": "Negro", "c": 30.79}]}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79}, {"ref": "Brz-316-A07", "nom": "Nueve eslabones", "c": 21.79}]}, {"id": "B04", "nombre": "Malla milanesa, hebilla plegable", "v": [{"ref": "Brz-316-A08", "nom": "Plata", "c": 33.39}]}, {"id": "B05", "nombre": "Malla milanesa de eslabón fino", "v": [{"ref": "Brz-316-A09", "nom": "Plata", "c": 40.36}]}, {"id": "B06", "nombre": "Acero 316L macizo, eslabón ancho", "v": [{"ref": "Brz-316-A10", "nom": "Tres eslabones", "c": 59.69}]}, {"id": "B07", "nombre": "Acero 316L macizo, eslabón fino", "v": [{"ref": "Brz-316-A11", "nom": "Cinco eslabones", "c": 78.39}]}, {"id": "B08", "nombre": "Acero 904L macizo", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 55.39}, {"ref": "Brz-904-A13", "nom": "Brillante pulido", "c": 55.39}]}, {"id": "B09", "nombre": "Acero 904L, eslabones planos", "v": [{"ref": "Brz-904-A14", "nom": "Plata 5 eslabones", "c": 23.79}, {"ref": "Brz-904-A15", "nom": "Plata / Oro rosa 5 eslabones", "c": 28.19}, {"ref": "Brz-904-A16", "nom": "Negro 5 eslabones", "c": 28.19}, {"ref": "Brz-904-A17", "nom": "Plata 3 eslabones cepillado/mate", "c": 23.79}, {"ref": "Brz-904-A18", "nom": "Plata 3 eslabones pulido", "c": 23.79}, {"ref": "Brz-904-A19", "nom": "Negro 3 eslabones pulido", "c": 28.19}, {"ref": "Brz-904-A20", "nom": "Plata / Oro Rosa 3 eslabones pulido", "c": 28.19}]}], "ejes": {"mov": {"pregunta": "Si es suizo, nuestros relojes también", "tarjetas": {"M1": "Cuarzo suizo", "M2": "Automático suizo"}}, "caja": {}, "esf": {}, "brz": {}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {"Brz-316-A01": "/assets/img/piezas/brazaletes/Brz-316-A01.webp"}, "solape": 0.01875, "fotoDefecto": "/assets/img/catalogo/LO-01_Lunar_A01.webp"}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
-<script src="/assets/js/configurador.js?v=8"></script>
-</body>
-</html>
+<script src="/assets/js/configurador-v2.js?v=19"></script>

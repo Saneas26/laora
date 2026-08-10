@@ -1,131 +1,103 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Configura tu Diver de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 229,90 €.">
-<meta name="theme-color" content="#151715">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configura tu Diver · laOra</title>
-<link rel="canonical" href="https://laora.es/diver">
-<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
-<link rel="stylesheet" href="/assets/css/configurador.css?v=27">
-</head>
-<body class="cfg-normal">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=15">
 
-<header class="cfg-cab">
-  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
-       sin él sería un callejón sin salida. No se le añade un menú porque
-       aquí solo se hace una cosa, que es elegir el reloj. -->
-  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"><b>Diver</b></a>
-  <span class="ref">Ref. <span data-ref>—</span></span>
-  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
-       cuatro palabras al lado del logotipo sin montarse encima de la
-       referencia, y recortar con puntos suspensivos deja un enlace que
-       no se entiende. -->
-  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
+<header class="cf-cab">
+  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
+    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Diver</b>
+  </a>
+  <p class="cf-ref">Ref. <b data-ref>—</b></p>
+  <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
 </header>
 
-<div class="cfg-cuerpo">
+<div class="cf-cuerpo">
 
-  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
-  <section class="cfg-visor" aria-label="El reloj que estás configurando">
-    <img class="cfg-foto" data-foto
-         src="/assets/img/catalogo/LO-06_DIVER_A01.webp"
-         alt="Reloj laOra Diver, acabado Alba, con correa de goma de buceo"
-         fetchpriority="high">
-    <div class="cfg-muestra" aria-hidden="true">
-      <span class="tira" data-muestra-tira style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span>
-      <span data-muestra-nombre>Correa de goma de buceo</span>
+  <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
+      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="Diver de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      </div>
+      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
-    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
-         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
-         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
-         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
-         segunda caía encima de la referencia: dos textos superpuestos,
-         ilegibles los dos. Así el segundo siempre baja. -->
-    <div class="cfg-rotulos">
-      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Correa de goma de buceo</p>
-      <!-- La referencia también aquí: en el teléfono no cabe en la
-           cabecera, y es el dato con el que Óscar busca en la hoja. -->
-      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
-    </div>
+
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>
 
-  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
-  <section class="cfg-panel" aria-label="Opciones del Diver">
-
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Acabado <b>2 opciones</b></p>
-      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
-        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 229,90 €</small></button>
-        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><small>desde 279,90 €</small></button>
+  <section class="cf-panel" aria-label="Opciones del Diver">
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
+      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
+        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo japonés</button>
+        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
       </div>
-      <p class="cfg-nota" data-nota></p>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>uno solo</b></p>
+      <div class="cf-fijo"><b>Acero con zafiro, 300 m</b><span>con su esfera, sus agujas y su correa de caucho negra</span></div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>12 familias</b></p>
+      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
+        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Caucho negro</span></button>
+        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L, cinco eslabones</span></button>
+        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Acero 316L, cierre desplegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón ancho</span></button>
+        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón fino</span></button>
+        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Acero 904L macizo</span></button>
+        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Acero 904L, eslabones planos</span></button>
+        <button class="cf-brazalete" type="button" data-brz="8" aria-pressed="false"><i></i><span>Caucho con hebilla de acero</span></button>
+        <button class="cf-brazalete" type="button" data-brz="9" aria-pressed="false"><i></i><span>Caucho fluorado, cierre desplegable</span></button>
+        <button class="cf-brazalete" type="button" data-brz="10" aria-pressed="false"><i></i><span>Tela de vela, hebilla mariposa</span></button>
+        <button class="cf-brazalete" type="button" data-brz="11" aria-pressed="false"><i></i><span>Lona de nailon, liberación rápida</span></button>
+      </div>
+      <p class="cf-detalle" data-detalle></p>
     </div>
 
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>Incluido</b></b></p>
-      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
-           era siempre de cuatro, así que con tres correas quedaba una
-           columna vacía y los tres nombres partidos en dos líneas por
-           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
-      <p class="cfg-correa-unica"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span><span><b>Correa de goma de buceo</b><small>Textura de buceo (waffle) · Hebilla de acero inox.</small></span></p>
+    <div class="cf-grupo" data-grupo-var>
+      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
     </div>
-
-    <div class="cfg-nota">
-      <dl data-ficha></dl>
-    </div>
-
   </section>
 </div>
 
-<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
-<footer class="cfg-barra">
-  <span class="lado">
-    <span class="eleccion" data-eleccion>Alba · Correa de goma de buceo</span>
-    <span class="ref">Ref. <span data-ref>—</span></span>
-  </span>
-  <span class="cfg-precio">
-    <strong data-precio>229,90 €</strong>
-    <span>Impuestos incluidos</span>
-  </span>
-  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
+<footer class="cf-barra">
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
+  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
+  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
-<!-- LA FICHA TÉCNICA COMPLETA
-     Se monta al pulsar y se tira al cerrar, como el overlay del
-     material aprobado: mientras no está abierta, no existe en la
-     página. No cambia la dirección ni mueve la pantalla de debajo.
-
-     Los datos NO van escritos: los rellena `configurador.js` con la
-     combinación que haya elegida en ese momento. Si fueran fijos, quien
-     configurase el Cenit leería la ficha del acabado de partida. -->
-<template data-plantilla-ficha>
-  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
-    <div class="cfg-overlay-caja">
-      <header class="cfg-overlay-cab">
-        <div>
-          <p>LO—06 · FICHA TÉCNICA COMPLETA</p>
-          <h2 id="cfg-ficha-titulo">Todo el Diver.<br><em>Dato a dato.</em></h2>
-        </div>
-        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
-        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
-      </header>
-      <div class="cfg-overlay-grupos" data-grupos></div>
-      <footer class="cfg-overlay-pie">
-        <p data-overlay-resumen></p>
-        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
-      </footer>
-    </div>
+<div class="cf-manto" data-manto hidden>
+  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
+    <header class="cf-tec-cab">
+      <div>
+        <p class="cf-tec-eyebrow">LO-08 · FICHA TÉCNICA</p>
+        <h2 id="cf-tec-t">Todo el Diver.<br><em>Dato a dato.</em></h2>
+      </div>
+      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
+      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
+    </header>
+    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
+    <footer class="cf-tec-pie">
+      <p data-tec-pie></p>
+      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
+    </footer>
   </div>
-</template>
+</div>
 
-<script type="application/json" data-cfg>{"modelo": "Diver", "inicial": {"acabado": "alba", "correa": 0}, "precios": {"alba": [229.9], "cenit": [279.9]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "", "resumen": "", "refs": ["LO-06_Diver_A01"], "fotos": ["/assets/img/catalogo/LO-06_DIVER_A01.webp"], "foto": "/assets/img/catalogo/LO-06_DIVER_A01.webp", "ficha": [["Movimiento", "TMI VH31 (Vh31b)"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "30 ATM (300 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "TMI VH31 (Vh31b)"], ["TIPO", "Cuarzo japonés (segundero de barrido)"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "N/A (pila, autonomía ~3 años)"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm (buceo)"], ["ESTANQUEIDAD", "30 ATM (300 m)"], ["BISEL", "Giratorio unidireccional (120 clics)"], ["GROSOR", "13 mm aprox."]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ANCHO DE ASA", "20 mm"], ["AJUSTE", "Correa con pasadores"], ["FONDO", "Atornillado"], ["CORONA", "Corona atornillada de acero"], ["PESO", "150 g aprox. (con brazalete)"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit", "descriptor": "", "resumen": "", "refs": ["LO-06_Diver_C01"], "fotos": ["/assets/img/relojes-2026/diver-agua.webp"], "foto": "/assets/img/relojes-2026/diver-agua.webp", "ficha": [["Movimiento", "PT5000"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "30 ATM (300 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "PT5000"], ["TIPO", "Automático mecánico (25 rubíes, con fecha, hackeo y cuerda manual)"], ["FRECUENCIA", "28.800 vph (4 Hz)"], ["AUTONOMÍA", "~40 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm (buceo)"], ["ESTANQUEIDAD", "30 ATM (300 m)"], ["BISEL", "Giratorio unidireccional (120 clics)"], ["GROSOR", "13 mm aprox."]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ANCHO DE ASA", "20 mm"], ["AJUSTE", "Correa con pasadores"], ["FONDO", "Atornillado"], ["CORONA", "Corona atornillada de acero"], ["PESO", "165 g aprox. (con brazalete)"]]}]}}, "correas": [{"id": "correa-de-goma-de-buceo", "nombre": "Correa de goma de buceo", "detalle": "Textura de buceo (waffle) · Hebilla de acero inox.", "diametro": null, "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"}]}</script>
+<script type="application/json" data-piezas>{"nombre": "Diver", "codigo": "LO-08", "incluido": "Correa de caucho negra", "extra": false, "mov": [{"ref": "M1", "cal": "VH31 cuarzo (segundero barrido)", "coste": 11.89, "rot": "Movimiento japonés de cuarzo", "specs": "Cuarzo japonés Seiko/TMI VH31 de segundero barrido: da cuatro pasos por segundo en lugar de uno, así que de lejos barre como un mecánico. Precisión de ±15 s/mes. Tres agujas sin fecha, con parada de segundero. Pila 371 / SR920SW de unos dos años. Diámetro 23,70 mm y altura 3,45 mm."}, {"ref": "M2", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Acero con zafiro, 300 m", "coste": 69.57}], "esf": [], "brz": [{"id": "B00", "nombre": "La que viene con la caja", "v": [{"ref": "", "nom": "Caucho negro", "c": 0, "foto": "Brz-Diver-Pack"}]}, {"id": "B01", "nombre": "Acero 316L, cinco eslabones", "v": [{"ref": "Brz-316-A01", "nom": "Única", "c": 7.39}]}, {"id": "B02", "nombre": "Acero 316L, cierre desplegable", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39}]}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79}, {"ref": "Brz-316-A07", "nom": "Nueve eslabones", "c": 21.79}]}, {"id": "B06", "nombre": "Acero 316L macizo, eslabón ancho", "v": [{"ref": "Brz-316-A10", "nom": "Tres eslabones", "c": 59.69}]}, {"id": "B07", "nombre": "Acero 316L macizo, eslabón fino", "v": [{"ref": "Brz-316-A11", "nom": "Cinco eslabones", "c": 78.39}]}, {"id": "B08", "nombre": "Acero 904L macizo", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 55.39}, {"ref": "Brz-904-A13", "nom": "Brillante pulido", "c": 55.39}]}, {"id": "B09", "nombre": "Acero 904L, eslabones planos", "v": [{"ref": "Brz-904-A14", "nom": "Plata 5 eslabones", "c": 23.79}, {"ref": "Brz-904-A17", "nom": "Plata 3 eslabones cepillado/mate", "c": 23.79}, {"ref": "Brz-904-A18", "nom": "Plata 3 eslabones pulido", "c": 23.79}]}, {"id": "B13", "nombre": "Caucho con hebilla de acero", "v": [{"ref": "Brz-Goma-G04", "nom": "Naranja", "c": 6.39}, {"ref": "Brz-Goma-G05", "nom": "Azul", "c": 6.39}]}, {"id": "B14", "nombre": "Caucho fluorado, cierre desplegable", "v": [{"ref": "Brz-Caucho-C01", "nom": "Azul real blanco 01", "c": 18.29}, {"ref": "Brz-Caucho-C05", "nom": "Azul real blanco", "c": 13.19}, {"ref": "Brz-Caucho-C07", "nom": "Naranja blanco", "c": 13.19}, {"ref": "Brz-Caucho-C14", "nom": "Naranja blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C21", "nom": "Naranja blanco 02", "c": 19.19}, {"ref": "Brz-Caucho-C26", "nom": "Azul real blanco 02", "c": 19.59}]}, {"id": "B15", "nombre": "Tela de vela, hebilla mariposa", "v": [{"ref": "Brz-Nailon-N01", "nom": "Rojo", "c": 6.49}, {"ref": "Brz-Nailon-N02", "nom": "Naranja", "c": 6.49}, {"ref": "Brz-Nailon-N03", "nom": "Gris", "c": 6.39}, {"ref": "Brz-Nailon-N04", "nom": "Negro", "c": 6.49}, {"ref": "Brz-Nailon-N05", "nom": "Azul", "c": 6.49}, {"ref": "Brz-Nailon-N06", "nom": "Verde", "c": 6.49}, {"ref": "Brz-Nailon-N07", "nom": "Caqui", "c": 6.49}]}, {"id": "B16", "nombre": "Lona de nailon, liberación rápida", "v": [{"ref": "Brz-Lona-L01", "nom": "Negro", "c": 5.39}, {"ref": "Brz-Lona-L02", "nom": "Negro hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L03", "nom": "Gris", "c": 6.09}, {"ref": "Brz-Lona-L04", "nom": "Gris hebilla negra", "c": 5.39}, {"ref": "Brz-Lona-L05", "nom": "Verde militar", "c": 5.49}, {"ref": "Brz-Lona-L06", "nom": "Verde militar hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L07", "nom": "Azul marino", "c": 5.39}, {"ref": "Brz-Lona-L08", "nom": "Caqui hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L09", "nom": "Caqui", "c": 5.99}, {"ref": "Brz-Lona-L10", "nom": "Azul marino hebilla negra", "c": 6.09}]}], "ejes": {"mov": {"tarjetas": {"M1": "Cuarzo japonés", "M2": "Automático suizo"}}, "caja": {"apunte": "con su esfera, sus agujas y su correa de caucho negra"}, "esf": {}, "brz": {"nombres": {"B00": "Caucho negro"}}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {"Brz-316-A01": "/assets/img/piezas/brazaletes/Brz-316-A01.webp"}, "solape": 0.01875, "fotoDefecto": "/assets/img/catalogo/LO-01_Lunar_A01.webp"}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
-<script src="/assets/js/configurador.js?v=8"></script>
-</body>
-</html>
+<script src="/assets/js/configurador-v2.js?v=19"></script>

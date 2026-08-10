@@ -1,133 +1,100 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Configura tu Precisa de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 229,90 €.">
-<meta name="theme-color" content="#151715">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configura tu Precisa · laOra</title>
-<link rel="canonical" href="https://laora.es/precisa">
-<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- GENERADO por herramientas/generar_configuradores.py — no editar a mano. -->
-<link rel="stylesheet" href="/assets/css/configurador.css?v=27">
-</head>
-<body class="cfg-normal">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=15">
 
-<header class="cfg-cab">
-  <!-- El logotipo es el único camino de vuelta que tiene esta pantalla:
-       sin él sería un callejón sin salida. No se le añade un menú porque
-       aquí solo se hace una cosa, que es elegir el reloj. -->
-  <a class="cfg-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"><b>Precisa</b></a>
-  <span class="ref">Ref. <span data-ref>—</span></span>
-  <!-- El rótulo del enlace va en dos piezas: en el teléfono no caben
-       cuatro palabras al lado del logotipo sin montarse encima de la
-       referencia, y recortar con puntos suspensivos deja un enlace que
-       no se entiende. -->
-  <button class="cfg-ficha-boton" type="button" data-abre-ficha><span class="largo">Ver la ficha completa</span><span class="corto">Ficha</span></button>
+<header class="cf-cab">
+  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
+    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Precisa</b>
+  </a>
+  <p class="cf-ref">Ref. <b data-ref>—</b></p>
+  <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
 </header>
 
-<div class="cfg-cuerpo">
+<div class="cf-cuerpo">
 
-  <!-- EL VISOR · lo único que cambia al elegir, y sin moverse de sitio -->
-  <section class="cfg-visor" aria-label="El reloj que estás configurando">
-    <img class="cfg-foto" data-foto
-         src="/assets/img/catalogo/LO-04_Precisa_A01.webp"
-         alt="Reloj laOra Precisa, acabado Alba, con brazalete de acero integrado"
-         fetchpriority="high">
-    <div class="cfg-muestra" aria-hidden="true">
-      <span class="tira" data-muestra-tira style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span>
-      <span data-muestra-nombre>Brazalete de acero integrado</span>
+  <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <div class="cf-montaje" data-montaje>
+      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
+      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
+      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
+      <div class="cf-cabeza" data-cabeza>
+        <img data-foto src="/assets/img/catalogo/LO-01_Lunar_A01.webp" alt="Precisa de laOra">
+        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+      </div>
+      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
-    <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
-         bloque, no sueltos y colocados cada uno por su cuenta. Cuando
-         eran hermanos absolutos, un acabado de nombre largo —«Eclipse
-         Seiko NH35A · Brazalete incluido»— pasaba a dos líneas y la
-         segunda caía encima de la referencia: dos textos superpuestos,
-         ilegibles los dos. Así el segundo siempre baja. -->
-    <div class="cfg-rotulos">
-      <p class="cfg-viendo" data-viendo aria-live="polite"><b>Alba</b> · Brazalete de acero integrado</p>
-      <!-- La referencia también aquí: en el teléfono no cabe en la
-           cabecera, y es el dato con el que Óscar busca en la hoja. -->
-      <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
-    </div>
+
+    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
+      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
   </section>
 
-  <!-- LAS OPCIONES · todas a la vista, sin desplegar nada -->
-  <section class="cfg-panel" aria-label="Opciones del Precisa">
-
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Acabado <b>4 opciones</b></p>
-      <div class="cfg-acabados" role="group" aria-label="Elegir acabado">
-        <button type="button" data-acabado="alba" aria-pressed="false"><b>Alba</b><small>desde 229,90 €</small></button>
-        <button type="button" data-acabado="levante" aria-pressed="false"><b>Levante</b><small>desde 249,90 €</small></button>
-        <button type="button" data-acabado="cenit" aria-pressed="false"><b>Cenit</b><small>desde 379,90 €</small></button>
-        <button type="button" data-acabado="eclipse" aria-pressed="false"><b>Eclipse</b><small>desde 379,90 €</small></button>
+  <section class="cf-panel" aria-label="Opciones del Precisa">
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
+      <p class="cf-pregunta">Si es suizo, nuestros relojes también</p>
+      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
+        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo suizo</button>
+        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
       </div>
-      <p class="cfg-nota" data-nota></p>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>la que pide el movimiento</b></p>
+      <div class="cf-fijo"><b data-caja-fijo></b><span data-caja-apunte></span></div>
+    </div>
+    <div class="cf-grupo" data-grupo-esf>
+      <p class="cf-rotulo">Esfera <b>4 opciones</b></p>
+      <div class="cf-fichas" role="group" aria-label="Elegir esfera">
+        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Azul claro</button>
+        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Azul oscuro</button>
+        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Blanca</button>
+        <button class="cf-ficha" type="button" data-esf="3" aria-pressed="false">Negra</button>
+      </div>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Características</p>
+      <dl class="cf-specs" data-specs></dl>
+    </div>
+    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>uno solo</b></p>
+      <div class="cf-fijo"><b>Acero 316, color plata</b><span>viene con la caja, no se pide aparte</span></div>
+      <p class="cf-detalle" data-detalle hidden></p>
     </div>
 
-    <div class="cfg-grupo">
-      <p class="cfg-rotulo">Brazalete o correa <b data-rotulo-correa><b>Incluido</b></b></p>
-      <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
-           era siempre de cuatro, así que con tres correas quedaba una
-           columna vacía y los tres nombres partidos en dos líneas por
-           falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
-      <p class="cfg-correa-unica"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span><b>Brazalete de acero integrado</b><small>Pulido y satinado · Cierre desplegable con pulsadores</small></span></p>
+    <div class="cf-grupo" data-grupo-var hidden>
+      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
     </div>
-
-    <div class="cfg-nota">
-      <dl data-ficha></dl>
-    </div>
-
   </section>
 </div>
 
-<!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
-<footer class="cfg-barra">
-  <span class="lado">
-    <span class="eleccion" data-eleccion>Alba · Brazalete de acero integrado</span>
-    <span class="ref">Ref. <span data-ref>—</span></span>
-  </span>
-  <span class="cfg-precio">
-    <strong data-precio>229,90 €</strong>
-    <span>Impuestos incluidos</span>
-  </span>
-  <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
+<footer class="cf-barra">
+  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
+  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
+  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
-<!-- LA FICHA TÉCNICA COMPLETA
-     Se monta al pulsar y se tira al cerrar, como el overlay del
-     material aprobado: mientras no está abierta, no existe en la
-     página. No cambia la dirección ni mueve la pantalla de debajo.
-
-     Los datos NO van escritos: los rellena `configurador.js` con la
-     combinación que haya elegida en ese momento. Si fueran fijos, quien
-     configurase el Cenit leería la ficha del acabado de partida. -->
-<template data-plantilla-ficha>
-  <div class="cfg-overlay" role="dialog" aria-modal="true" aria-labelledby="cfg-ficha-titulo">
-    <div class="cfg-overlay-caja">
-      <header class="cfg-overlay-cab">
-        <div>
-          <p>LO—04 · FICHA TÉCNICA COMPLETA</p>
-          <h2 id="cfg-ficha-titulo">Todo el Precisa.<br><em>Dato a dato.</em></h2>
-        </div>
-        <p class="cfg-overlay-ref"><span>Referencia</span><strong data-ref>—</strong></p>
-        <button class="cfg-overlay-x" type="button" aria-label="Cerrar la ficha técnica" data-cierra-ficha>×</button>
-      </header>
-      <div class="cfg-overlay-grupos" data-grupos></div>
-      <footer class="cfg-overlay-pie">
-        <p data-overlay-resumen></p>
-        <button class="cfg-ficha-boton" type="button" data-cierra-ficha>Cerrar ficha</button>
-      </footer>
-    </div>
+<div class="cf-manto" data-manto hidden>
+  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
+    <header class="cf-tec-cab">
+      <div>
+        <p class="cf-tec-eyebrow">LO-01 · FICHA TÉCNICA</p>
+        <h2 id="cf-tec-t">Todo el Precisa.<br><em>Dato a dato.</em></h2>
+      </div>
+      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
+      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
+    </header>
+    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
+    <footer class="cf-tec-pie">
+      <p data-tec-pie></p>
+      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
+    </footer>
   </div>
-</template>
+</div>
 
-<script type="application/json" data-cfg>{"modelo": "Precisa", "inicial": {"acabado": "alba", "correa": 0}, "precios": {"alba": [229.9], "levante": [249.9], "cenit": [379.9], "eclipse": [379.9]}, "acabados": {"alba": {"nombre": "Alba", "etiqueta": "Alba", "descriptor": "", "resumen": "", "refs": ["LO-04_Precisa_A01"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_A01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_A01.webp", "ficha": [["Movimiento", "TMI VH31 (Vh31b)"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "TMI VH31 (Vh31b)"], ["TIPO", "Cuarzo japonés (segundero de barrido)"], ["FRECUENCIA", "32.768 Hz"], ["AUTONOMÍA", "N/A (pila, autonomía ~3 años)"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Fijo integrado pulido"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ANCHO DE ASA", "Integrado (asa propia de la caja)"], ["AJUSTE", "Eslabones extraíbles"], ["FONDO", "Atornillado con cristal expositor"], ["CORONA", "Corona atornillada de acero"], ["PESO", "130 g aprox. (con brazalete)"]]}]}, "levante": {"nombre": "Levante", "etiqueta": "Levante", "descriptor": "", "resumen": "", "refs": ["LO-04_Precisa_L01"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_L01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_L01.webp", "ficha": [["Movimiento", "Miyota 8215"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 8215"], ["TIPO", "Automático mecánico (21 rubíes, con fecha)"], ["FRECUENCIA", "21.600 vph (3 Hz)"], ["AUTONOMÍA", "~42 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Fijo integrado pulido"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ANCHO DE ASA", "Integrado (asa propia de la caja)"], ["AJUSTE", "Eslabones extraíbles"], ["FONDO", "Atornillado con cristal expositor"], ["CORONA", "Corona atornillada de acero"], ["PESO", "140 g aprox. (con brazalete)"]]}]}, "cenit": {"nombre": "Cenit", "etiqueta": "Cenit", "descriptor": "", "resumen": "", "refs": ["LO-04_Precisa_C01"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_C01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_C01.webp", "ficha": [["Movimiento", "Miyota 9015"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 9015"], ["TIPO", "Automático mecánico (24 rubíes, con fecha)"], ["FRECUENCIA", "28.800 vph (4 Hz)"], ["AUTONOMÍA", "~42 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Fijo integrado pulido"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ANCHO DE ASA", "Integrado (asa propia de la caja)"], ["AJUSTE", "Eslabones extraíbles"], ["FONDO", "Atornillado con cristal expositor"], ["CORONA", "Corona atornillada de acero"], ["PESO", "145 g aprox. (con brazalete)"]]}]}, "eclipse": {"nombre": "Eclipse", "etiqueta": "Eclipse", "descriptor": "", "resumen": "", "refs": ["LO-04_Precisa_E01"], "fotos": ["/assets/img/catalogo/LO-04_Precisa_E01.webp"], "foto": "/assets/img/catalogo/LO-04_Precisa_E01.webp", "ficha": [["Movimiento", "Miyota 9015"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Miyota 9015"], ["TIPO", "Automático mecánico (24 rubíes, con fecha)"], ["FRECUENCIA", "28.800 vph (4 Hz)"], ["AUTONOMÍA", "~42 h"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Fijo integrado pulido"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["ANCHO DE ASA", "Integrado (asa propia de la caja)"], ["AJUSTE", "Eslabones extraíbles"], ["FONDO", "Atornillado con cristal expositor"], ["CORONA", "Corona atornillada de acero"], ["PESO", "145 g aprox. (con brazalete)"]]}]}}, "correas": [{"id": "brazalete-de-acero-integrado", "nombre": "Brazalete de acero integrado", "detalle": "Pulido y satinado · Cierre desplegable con pulsadores", "diametro": null, "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}]}</script>
+<script type="application/json" data-piezas>{"nombre": "Precisa", "codigo": "LO-01", "incluido": "Acero 316, color plata", "extra": false, "mov": [{"ref": "M1", "cal": "Ronda 715", "coste": 15.05, "rot": "Movimiento de cuarzo suizo", "specs": "Movimiento de cuarzo suizo Ronda 715, de la línea normtech. Precisión de -10/+20 s/mes y fecha a las 3. Formato 11 1/2 líneas: 25,60 mm de diámetro (26,00 mm en total) y 2,50 mm de altura. Al tirar de la corona se para el segundero y el consumo baja un 70 %. Pila 371 con unos 60 meses de autonomía, o pila 395 con 78 meses. Temperatura de trabajo de 0 a 50 °C. Movimiento metálico reparable."}, {"ref": "M2", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Solida plata", "coste": 70.7}, {"ref": "C2", "nombre": "Cristal plata", "coste": 68.36}], "esf": [{"ref": "E1", "nombre": "Azul claro", "coste": 13.79, "cajas": "Todas"}, {"ref": "E2", "nombre": "Azul oscuro", "coste": 13.79, "cajas": "Todas"}, {"ref": "E3", "nombre": "Blanca", "coste": 13.79, "cajas": "Todas"}, {"ref": "E4", "nombre": "Negra", "coste": 13.79, "cajas": "Todas"}], "brz": [{"id": "B00", "nombre": "Acero 316, color plata", "v": [{"ref": "", "nom": "Plata", "c": 0, "foto": "Brz-Precisa-316"}]}], "ejes": {"mov": {"pregunta": "Si es suizo, nuestros relojes también", "tarjetas": {"M1": "Cuarzo suizo", "M2": "Automático suizo"}}, "caja": {"porMov": {"M1": {"ref": "C1", "apunte": "fondo sólido: en un cuarzo no hay nada que enseñar"}, "M2": {"ref": "C2", "apunte": "fondo de cristal para ver el automático"}}}, "esf": {}, "brz": {"apunte": "viene con la caja, no se pide aparte"}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "solape": 0.01875, "fotoDefecto": "/assets/img/catalogo/LO-01_Lunar_A01.webp"}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
-<script src="/assets/js/configurador.js?v=8"></script>
-</body>
-</html>
+<script src="/assets/js/configurador-v2.js?v=19"></script>

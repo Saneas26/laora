@@ -289,18 +289,25 @@ def precio_es(valor):
 # precio cerrado en catalogo.json ese hueco lleva el diámetro, que es el
 # otro dato que el visitante compara de un vistazo. Nunca una cifra
 # inventada ni un «—».
+# El mínimo REAL de cada modelo, escrito por el generador del
+# configurador, que es el único que sabe cuánto cuesta lo más barato que
+# se puede montar. Ver el porqué allí.
+try:
+    with open(os.path.join(RAIZ, 'assets/datos/desde.json'), encoding='utf-8') as f:
+        DESDE = json.load(f)
+except FileNotFoundError:
+    DESDE = {}
+
+
 def desde(r):
     """El precio más bajo que se puede pedir de verdad.
 
-    Sale del CONFIGURADOR, que es lo que se volcó de la hoja, y no del
-    campo `precio` del reloj: ese estaba escrito a mano y se quedó viejo
-    en cuanto la hoja cambió. El listado enseñaba 169,90 € del Precisa
-    cuando su Alba ya valía 199,90."""
-    cfg = r.get('configurador')
-    if cfg:
-        vivos = [p for l in cfg['precios'].values() for p in l if p is not None]
-        if vivos:
-            return min(vivos)
+    Lo dice el CONFIGURADOR, que es quien cobra. Ni el campo `precio`
+    del catálogo ni los precios por acabado: los dos se quedaron viejos
+    y el listado llegó a prometer el Precisa «desde 229,90 €» cuando su
+    página más barata valía 269,90."""
+    if r['slug'] in DESDE:
+        return DESDE[r['slug']]
     return r.get('precio')
 
 
@@ -569,14 +576,14 @@ escribir('coleccion.html', cabeza(
 
   <section class="finish-system">
     <div>
-      <p class="section-number">02 — CUATRO EXPRESIONES</p>
-      <h2>El mismo homenaje.<br><em>Tu forma de llevarlo.</em></h2>
+      <p class="section-number">02 — LO MONTAS TÚ</p>
+      <h2>Aquí no hay versiones.<br><em>Hay el tuyo.</em></h2>
     </div>
     <div class="finish-cards">
-      <article><span>01</span><h3>Alba</h3><b>Esencial</b><p>Precisión de cuarzo, diseño limpio y comodidad diaria.</p></article>
-      <article><span>02</span><h3>Levante</h3><b>Refinado</b><p>Cuarzo con materiales y acabados superiores identificados.</p></article>
-      <article><span>03</span><h3>Cenit</h3><b>Máxima expresión</b><p>La mejor ejecución disponible para cada familia.</p></article>
-      <article class="dark"><span>04</span><h3>Eclipse</h3><b>Carácter técnico</b><p>Negro integral o titanio, cuando la configuración lo permite.</p></article>
+      <article><span>01</span><h3>Eliges el modelo</h3><b>Ocho</b><p>Cada uno con su carácter. Ahí acaba lo que decidimos nosotros.</p></article>
+      <article><span>02</span><h3>Lo configuras</h3><b>Pieza a pieza</b><p>Movimiento, caja, esfera, bisel y brazalete. Ves el precio cambiar mientras eliges.</p></article>
+      <article><span>03</span><h3>Lo encargas</h3><b>Y se monta</b><p>Compramos tus piezas, se monta a mano en Madrid y sale con su número de serie.</p></article>
+      <article class="dark"><span>04</span><h3>Nadie tiene el tuyo</h3><b>Salvo tú</b><p>Miles de combinaciones por modelo. La tuya lleva tu referencia.</p></article>
     </div>
   </section>
 """ + final_cta('Tu tiempo. Tu elección.',
@@ -891,11 +898,15 @@ escribir('club.html', cabeza(
 # Lo que no está confirmado NO se pinta: si `hermeticidad` es null,
 # esa línea no existe en el HTML. Nada de «por confirmar» a la vista.
 #
-# YA NO SON OCHO. Desde el 06/08/2026, cinco modelos tienen pantalla de
-# comprar —el patrón de `lunarv2c`— y la escribe
-# `herramientas/generar_configuradores.py`. Este fichero las salta: si
-# no lo hiciera, ejecutar el generador antiguo devolvería `/lunar` a la
-# ficha anterior sin que nadie se diera cuenta.
+# YA NO SON OCHO: SON CERO. Desde el 10/08/2026 las ocho páginas de
+# modelo las escribe `herramientas/generar_configurador_v2.py` desde la
+# biblioteca de piezas, y ya no hay acabados en ninguna.
+#
+#     «no vamos a trabajar con acabados, y tienen que desaparecer de
+#      toda la web. Un modelo configurable, eso es todo.»  Óscar
+#
+# Este fichero las salta todas: si no lo hiciera, ejecutarlo devolvería
+# `/lunar` a los acabados sin que nadie se diera cuenta.
 # ============================================================
 
 DEL_CONFIGURADOR = {'lunar', 'cero-cero', 'precisa', 'trinchera', 'bitacora',

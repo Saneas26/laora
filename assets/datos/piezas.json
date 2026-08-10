@@ -7,7 +7,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "Ronda 715",
     "coste": 15.05,
     "rot": "Movimiento de cuarzo suizo",
@@ -15,7 +14,6 @@
    },
    {
     "ref": "M2",
-    "acabado": "Cenit",
     "cal": "PT5000 automático (con fecha)",
     "coste": 59.01,
     "rot": "Arquitectura ETA 2824-2",
@@ -108,7 +106,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "Ronda 715",
     "coste": 15.05,
     "rot": "Movimiento de cuarzo suizo",
@@ -116,7 +113,6 @@
    },
    {
     "ref": "M2",
-    "acabado": "Levante",
     "cal": "ST2130",
     "coste": 50.09,
     "rot": "Arquitectura Suiza",
@@ -674,7 +670,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "Seiko/TMI VK63",
     "coste": 27.59,
     "rot": "Cuarzo Japones",
@@ -1059,7 +1054,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Cenit",
     "cal": "PT5000 automático (con fecha)",
     "coste": 59.01,
     "rot": "Arquitectura ETA 2824-2",
@@ -1245,7 +1239,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "Ronda 715",
     "coste": 15.05,
     "rot": "Movimiento de cuarzo suizo",
@@ -1253,7 +1246,6 @@
    },
    {
     "ref": "M2",
-    "acabado": "Cenit",
     "cal": "PT5000 automático (con fecha)",
     "coste": 59.01,
     "rot": "Arquitectura ETA 2824-2",
@@ -1469,7 +1461,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "Miyota 2115 cuarzo (con fecha)",
     "coste": 4.63,
     "rot": "Movimiento japonés de cuarzo",
@@ -1477,7 +1468,6 @@
    },
    {
     "ref": "M2",
-    "acabado": "Levante",
     "cal": "Seiko NH35A automático (con fecha)",
     "coste": 61.99,
     "rot": "Automático japonés",
@@ -1748,7 +1738,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "Miyota 2105 cuarzo (día y fecha)",
     "coste": 8.99,
     "rot": "Movimiento japonés de cuarzo",
@@ -1756,7 +1745,6 @@
    },
    {
     "ref": "M2",
-    "acabado": "Levante",
     "cal": "Seiko NH36A automático (día y fecha)",
     "coste": 67.36,
     "rot": "Automático japonés",
@@ -2166,7 +2154,6 @@
   "mov": [
    {
     "ref": "M1",
-    "acabado": "Alba",
     "cal": "VH31 cuarzo (segundero barrido)",
     "coste": 11.89,
     "rot": "Movimiento japonés de cuarzo",
@@ -2174,7 +2161,6 @@
    },
    {
     "ref": "M2",
-    "acabado": "Cenit",
     "cal": "PT5000 automático (con fecha)",
     "coste": 59.01,
     "rot": "Arquitectura ETA 2824-2",
