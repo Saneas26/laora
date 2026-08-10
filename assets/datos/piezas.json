@@ -842,6 +842,108 @@
     ]
    },
    {
+    "id": "B10",
+    "nombre": "Piel con liberación rápida",
+    "v": [
+     {
+      "ref": "Brz-Piel-P01",
+      "nom": "Negro, pespunte blanco, hebilla mariposa plateada",
+      "c": 30.99
+     },
+     {
+      "ref": "Brz-Piel-P02",
+      "nom": "Negro, pespunte blanco, hebilla clásica plateada",
+      "c": 30.79
+     },
+     {
+      "ref": "Brz-Piel-P03",
+      "nom": "Negro, pespunte blanco, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P04",
+      "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa",
+      "c": 30.39
+     },
+     {
+      "ref": "Brz-Piel-P05",
+      "nom": "Negro, pespunte negro, hebilla mariposa plateada",
+      "c": 30.99
+     },
+     {
+      "ref": "Brz-Piel-P06",
+      "nom": "Negro, pespunte negro, hebilla clásica plateada",
+      "c": 31.59
+     },
+     {
+      "ref": "Brz-Piel-P07",
+      "nom": "Negro, pespunte negro, hebilla clásica negra",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P08",
+      "nom": "Negro, pespunte negro, hebilla clásica de oro rosa",
+      "c": 29.99
+     },
+     {
+      "ref": "Brz-Piel-P17",
+      "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
+      "c": 29.39
+     },
+     {
+      "ref": "Brz-Piel-P18",
+      "nom": "Azul, pespunte blanco, hebilla clásica plateada",
+      "c": 29.79
+     },
+     {
+      "ref": "Brz-Piel-P19",
+      "nom": "Azul, pespunte blanco, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P20",
+      "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa",
+      "c": 32.39
+     },
+     {
+      "ref": "Brz-Piel-P21",
+      "nom": "Azul, pespunte negro, hebilla mariposa plateada",
+      "c": 31.19
+     },
+     {
+      "ref": "Brz-Piel-P22",
+      "nom": "Azul, pespunte negro, hebilla clásica plateada",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P23",
+      "nom": "Azul, pespunte negro, hebilla clásica negra",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P24",
+      "nom": "Azul, pespunte negro, hebilla clásica de oro rosa",
+      "c": 31.99
+     }
+    ]
+   },
+   {
+    "id": "B11",
+    "nombre": "Piel sintética, hebilla mariposa",
+    "v": [
+     {
+      "ref": "Brz-Sintetica-P52",
+      "nom": "Negro",
+      "c": 3.69
+     },
+     {
+      "ref": "Brz-Sintetica-P53",
+      "nom": "Negro con pespunte blanco",
+      "c": 4.19
+     }
+    ]
+   },
+   {
     "id": "B13",
     "nombre": "Caucho con hebilla de acero",
     "v": [
