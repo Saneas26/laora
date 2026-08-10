@@ -354,8 +354,85 @@
      revés que la esfera: «es frustrante ver algo que no puedes elegir»
      (Óscar, 10/08/2026). El índice del botón sigue siendo el de la lista
      entera, que es lo que lee el estado. */
+  /* ============================================================
+     EL BRAZALETE EN TRES PASOS: MATERIAL, CIERRE, COLOR
+     ------------------------------------------------------------
+     Óscar, 10/08/2026: fuera las cuadrículas con imagen. Se elige el
+     material a palo seco, luego el cierre y por último el color, y
+     solo aparece lo que existe para ESTE reloj: los botones salen de
+     las anotaciones de piezas.json, no de una lista fija. Un paso con
+     una sola opción no se pinta: no se pregunta lo que no se elige.
+     ============================================================ */
+  var MAT = D.brz.length > 1 && D.brz.every(function (f) { return f.mat; });
+
+  function matActual() { return D.brz[e.brz].mat; }
+  function cierActual() { return D.brz[e.brz].v[Math.min(e.v, D.brz[e.brz].v.length - 1)].cier; }
+  function variantesDe(mat, cier) {
+    var out = [];
+    D.brz.forEach(function (f, fi) {
+      if (f.mat !== mat) return;
+      f.v.forEach(function (v, vi) {
+        if (!cier || v.cier === cier) out.push({ fi: fi, vi: vi, v: v });
+      });
+    });
+    return out;
+  }
+  function eligeMat(mat) {
+    var x = variantesDe(mat, null)[0];
+    e.brz = x.fi; e.v = x.vi;
+  }
+  function eligeCier(cier) {
+    var x = variantesDe(matActual(), cier)[0];
+    e.brz = x.fi; e.v = x.vi;
+  }
+
+  function pintaMat() {
+    if (!MAT) return;
+    var mats = [];
+    D.brz.forEach(function (f) { if (mats.indexOf(f.mat) < 0) mats.push(f.mat); });
+    $('[data-mats]').innerHTML = mats.map(function (m) {
+      return '<button class="cf-ficha" type="button" data-mat="' + m + '"' +
+        ' aria-pressed="' + (m === matActual()) + '">' + m + '</button>';
+    }).join('');
+    $('[data-cuenta-mat]').textContent = mats.length > 1 ? mats.length + ' materiales' : 'uno solo';
+
+    var ciers = [];
+    variantesDe(matActual(), null).forEach(function (x) {
+      if (ciers.indexOf(x.v.cier) < 0) ciers.push(x.v.cier);
+    });
+    var gc = $('[data-grupo-cier]');
+    gc.hidden = ciers.length < 2;
+    if (!gc.hidden) {
+      $('[data-ciers]').innerHTML = ciers.map(function (c) {
+        return '<button class="cf-ficha" type="button" data-cier="' + c + '"' +
+          ' aria-pressed="' + (c === cierActual()) + '">' + c + '</button>';
+      }).join('');
+      $('[data-cuenta-cier]').textContent = ciers.length + ' opciones';
+    }
+
+    var cols = variantesDe(matActual(), cierActual());
+    var gv = $('[data-grupo-var]');
+    gv.hidden = cols.length < 2;
+    if (!gv.hidden) {
+      $('[data-variantes]').innerHTML = cols.map(function (x) {
+        var estilo = 'background:' + (x.v.hex2
+          ? 'linear-gradient(135deg,' + x.v.hex + ' 0 50%,' + x.v.hex2 + ' 50% 100%)'
+          : (x.v.hex || '#c9cdd2'));
+        if (x.v.bor) estilo += ';border:2px dashed ' + x.v.bor;
+        var puesto = (x.fi === e.brz && x.vi === e.v);
+        return '<button class="cf-color" type="button" data-col="' + x.fi + ':' + x.vi + '"' +
+          ' aria-pressed="' + puesto + '" title="' + x.v.eti + '"' +
+          ' aria-label="' + x.v.eti + '" style="' + estilo + '"></button>';
+      }).join('') + '<span class="cf-color-nombre">' +
+        (cols.filter(function (x) { return x.fi === e.brz && x.vi === e.v; })[0] || cols[0]).v.eti + '</span>';
+      $('[data-cuenta-var]').textContent = cols.length + ' colores';
+    }
+  }
+
   function pintaVariantes() {
+    if (MAT) { pintaMat(); return; }
     var p = piezas(), cont = $('[data-variantes]'), caja = D.caj[e.caja];
+    if (!cont) return;
     var vale = libres(p.fam, caja);
     cont.innerHTML = p.fam.v.map(function (v, i) {
       if (!varVale(v, caja)) return '';
@@ -375,8 +452,10 @@
     $('[data-grupo-var]').hidden = vale.length < 2;
     /* «desde 0,00 €» no se le dice a nadie: si no cuesta nada es porque ya
        viene con el reloj —la correa del Diver—, y eso se dice así. */
+    var det = $('[data-detalle]');
+    if (!det) return;
     var suelo = Math.min.apply(null, vale.map(function (x) { return x.c; }));
-    $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + vale.length +
+    det.textContent = nombreFam(p.fam) + ' · ' + vale.length +
       (vale.length === 1 ? ' versión' : ' versiones') +
       (suelo > 0 ? ' · desde ' + euros(suelo) : ' · ya viene con el reloj');
   }
@@ -730,14 +809,26 @@
   document.addEventListener('click', function (ev) {
     if (ev.target.closest('[data-abre-ficha]')) { abreTecnica(); return; }
     if (ev.target.closest('[data-reservar]')) { reservar(); return; }
-    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub]');
+    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub],[data-mat],[data-cier],[data-col]');
     if (!b || b.disabled) return;
     var d = b.dataset;
     if (d.sub !== undefined) { if (d.sub === 'diam') e.diam = d.valor; else e.color = d.valor; }
     else if (d.mov !== undefined) e.mov = Number(d.mov);
-    else if (d.caja !== undefined) e.caja = Number(d.caja);
+    else if (d.caja !== undefined) {
+      e.caja = Number(d.caja);
+      /* El bisel arrastra su esfera (Óscar, 10/08/2026): negro despierta
+         con la negra y azul con la blanca. Después se puede cambiar
+         entre las compatibles, esto solo decide con cuál se llega. */
+      var par = (((D.ejes || {}).caja || {}).esfPar || {})[D.caj[e.caja].ref];
+      if (par) for (var pi = 0; pi < D.esf.length; pi++) {
+        if (D.esf[pi].ref === par) { e.esf = pi; break; }
+      }
+    }
     else if (d.esf !== undefined) e.esf = Number(d.esf);
     else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; }
+    else if (d.mat !== undefined) eligeMat(d.mat);
+    else if (d.cier !== undefined) eligeCier(d.cier);
+    else if (d.col !== undefined) { e.brz = Number(d.col.split(':')[0]); e.v = Number(d.col.split(':')[1]); }
     else e.v = Number(d.var);
     pinta();
   });

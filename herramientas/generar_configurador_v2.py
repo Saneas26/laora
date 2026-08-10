@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 23
-V_JS = 41
+V_CSS = 24
+V_JS = 42
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -275,6 +275,29 @@ def eje_brazalete(familias, nombres):
     </div>'''
 
 
+def eje_brazalete_mat():
+    """El brazalete en tres pasos y SIN cuadrículas de imagen: material,
+    cierre y color (Óscar, 10/08/2026). Solo se enseña lo que existe para
+    este modelo: los botones los escribe el JavaScript a partir de las
+    anotaciones `mat`/`cier`/`eti` de piezas.json, así que una opción que
+    no está en los datos no puede aparecer. Cierre y color desaparecen
+    enteros cuando solo hay uno: no se pregunta lo que no se elige."""
+    return '''    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b data-cuenta-mat></b></p>
+      <div class="cf-fichas" data-mats role="group" aria-label="Elegir material del brazalete"></div>
+    </div>
+
+    <div class="cf-grupo" data-grupo-cier>
+      <p class="cf-rotulo">Cierre <b data-cuenta-cier></b></p>
+      <div class="cf-fichas" data-ciers role="group" aria-label="Elegir cierre"></div>
+    </div>
+
+    <div class="cf-grupo" data-grupo-var>
+      <p class="cf-rotulo">Color <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir color"></div>
+    </div>'''
+
+
 def vale_esf(e_, c):
     cj = (e_.get('cajas') or '').strip()
     return (not cj) or cj.lower().startswith('todas') or \
@@ -356,13 +379,28 @@ def pantalla(slug):
     elif len(esf) == 1:
         ejes.append(fijo('Esfera', esf[0]['nombre'], 'con sus agujas'))
 
-    ejes.append('''    <div class="cf-grupo">
-      <p class="cf-rotulo">Características</p>
-      <dl class="cf-specs" data-specs></dl>
+    # LA PANTALLA SE PARTE EN DOS (Óscar, 10/08/2026): a la izquierda la
+    # caja y la esfera, a la derecha las características a su misma
+    # altura, separadas por una línea vertical. Todo lo acumulado desde
+    # el movimiento va a la mitad izquierda.
+    centro = ejes[1:]
+    del ejes[1:]
+    ejes.append('''    <div class="cf-mitades">
+      <div class="cf-mitad-izq">
+''' + '\n'.join(centro) + '''
+      </div>
+      <div class="cf-mitad-der">
+        <div class="cf-grupo">
+          <p class="cf-rotulo">Características</p>
+          <dl class="cf-specs" data-specs></dl>
+        </div>
+      </div>
     </div>''')
     if len(brz) == 1 and len(brz[0]['v']) == 1:
         ejes.append(brazalete_fijo((ej.get('brz') or {}).get('nombres', {}).get(brz[0]['id'], brz[0]['nombre']),
                                    (ej.get('brz') or {}).get('apunte', 'en el pack de la caja')))
+    elif all(f.get('mat') for f in brz):
+        ejes.append(eje_brazalete_mat())
     else:
         ejes.append(eje_brazalete(brz, (ej.get('brz') or {}).get('nombres', {})))
 
