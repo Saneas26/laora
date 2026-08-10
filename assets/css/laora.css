@@ -1010,11 +1010,34 @@ footer small { font-size: 12px; }
    por primera vez. Va dentro de un `<details>` propio por reloj para
    no apilar seis noticias de periódico una debajo de otra.
    ============================================================ */
-.teca-index { padding: 50px 6vw 34px; display: flex; flex-wrap: wrap;
-  gap: 10px 28px; border-bottom: 1px solid var(--line); }
-.teca-index a { font-size: 13px; color: var(--muted); padding-bottom: 2px;
-  border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
-.teca-index a:hover { color: var(--ink); border-color: var(--ink); }
+/* El índice de entrada: antes era una lista de enlaces sueltos, sin
+   agrupar ni jerarquía — «un menú», pero sin nada de menú. Ahora son
+   cuatro bloques temáticos con su propio rótulo en dorado, y cada
+   entrada lleva el número de la sección, un título corto y el gancho
+   real que ya usa esa sección (su `.teca-lead` o su `h2`, no un texto
+   nuevo inventado para el menú). */
+.teca-index { padding: 56px 6vw 60px; background: var(--paper);
+  border-bottom: 1px solid var(--line); }
+.teca-index-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 44px 36px; max-width: 1240px; margin: 0 auto; }
+.teca-index-titulo { margin: 0 0 6px; color: var(--oro-galeria); font-size: 11px;
+  font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.teca-index-enlaces { display: flex; flex-direction: column; }
+.teca-index-enlaces a { display: flex; align-items: baseline; gap: 14px;
+  padding: 13px 12px; margin: 0 -12px; border-radius: 3px;
+  transition: background .15s ease; position: relative; }
+.teca-index-enlaces a:hover { background: var(--white); }
+.teca-index-enlaces a::after { content: "→"; position: absolute; right: 12px; top: 50%;
+  transform: translate(-6px,-50%); opacity: 0; color: var(--oro-galeria);
+  font-size: 14px; transition: opacity .15s ease, transform .15s ease; }
+.teca-index-enlaces a:hover::after { opacity: 1; transform: translate(0,-50%); }
+.ti-num { flex: none; padding-top: 1px; font-family: var(--serif); font-size: 13px;
+  color: var(--muted); opacity: .7; font-variant-numeric: tabular-nums; }
+.ti-texto { padding-right: 20px; }
+.ti-texto b { display: block; font: 600 15px/1.3 var(--sans); color: var(--ink); }
+.teca-index-enlaces a:hover .ti-texto b { color: var(--oro-galeria); }
+.ti-texto small { display: block; margin-top: 3px; font-size: 12.5px;
+  line-height: 1.45; color: var(--muted); }
 
 .teca-seccion, .teca-proximamente { padding: 90px 6vw; max-width: 1100px;
   margin: 0 auto; border-bottom: 1px solid var(--line); }
@@ -1078,7 +1101,8 @@ footer small { font-size: 12px; }
 
 @media (max-width: 900px) {
   .teca-seccion, .teca-proximamente, .teca-historias { padding-inline: 24px; }
-  .teca-index { padding: 40px 24px 28px; }
+  .teca-index { padding: 40px 24px 44px; }
+  .teca-index-grupos { gap: 34px 28px; }
   .teca-comparativa li { grid-template-columns: 1fr; gap: 4px; }
 }
 @media (max-width: 720px) {
