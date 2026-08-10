@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 17
-V_JS = 20
+V_CSS = 19
+V_JS = 22
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -349,13 +349,18 @@ def pantalla(slug):
                         'fotoDefecto': '/assets/img/catalogo/LO-01_Lunar_A01.webp'},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 
-    html = f'''<meta charset="utf-8">
+    html = f'''<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Configura tu {d['nombre']} · laOra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/css/configurador-v2.css?v={V_CSS}">
+</head>
+<body>
 
 <header class="cf-cab">
   <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
@@ -378,6 +383,8 @@ def pantalla(slug):
       </div>
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
+
+    <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
 
     <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
       del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
@@ -415,6 +422,8 @@ def pantalla(slug):
 <script type="application/json" data-piezas>{datos}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
 <script src="/assets/js/configurador-v2.js?v={V_JS}"></script>
+</body>
+</html>
 '''
     return html, barato, combis
 
