@@ -384,7 +384,11 @@
   function pintaPrecio() {
     var p = piezas(), pvp = precio();
     $('[data-precio]').textContent = euros(pvp);
-    $('[data-ref]').textContent = referencia();
+    /* La referencia ya no se enseña en la cabecera: es un código interno
+       y el cliente no tiene por qué verlo (Óscar, 10/08/2026). Sigue
+       viajando al carrito y a la ficha técnica, que es donde trabaja. */
+    var ref_ = $('[data-ref]');
+    if (ref_) ref_.textContent = referencia();
     $('[data-barra-nombre]').textContent = p.caja.nombre +
       (p.esf ? ' · ' + nombreEsf(p.esf) : '') + ' · ' + nombreFam(p.fam);
     $('[data-barra-var]').textContent = p.v.nom;

@@ -84,21 +84,16 @@ body{
   padding:0 22px;background:var(--paper);
   border-bottom:1px solid var(--linea-suave);
 }
-/* `align-items:center` no bastaba: el logotipo es una imagen y el
-   nombre una caja de texto con su interlineado, así que la base del
-   texto caía por encima del centro óptico del logo. Con `line-height:1`
-   la caja del texto mide lo que la letra y las dos se centran de verdad. */
-.cf-marca{display:flex;align-items:center;gap:10px;line-height:1}
+/* LOGOTIPO Y NOMBRE, POR LA LÍNEA BASE
+   Centrarlos verticalmente nunca queda bien y ya se intentó dos veces:
+   el ojo no compara centros, compara el SUELO de las letras. «laOra»
+   apoya las suyas al pie de la imagen y el nombre debe apoyar las suyas
+   en esa misma línea. `align-items:baseline` lo hace solo —la base de
+   una imagen ES su borde de abajo— y sin píxeles ajustados a mano que
+   se descuadran con cada fuente o tamaño. */
+.cf-marca{display:flex;align-items:baseline;gap:10px;line-height:1}
 .cf-marca img{width:74px;height:auto;display:block}
-.cf-marca b{
-  font-size:17px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block;
-  /* Baja 2 px. Con `line-height:1` la caja del texto reserva el hueco de
-     las letras con cola —la g, la p— y ningún nombre de modelo tiene
-     ninguna, así que la tinta se queda en la mitad de arriba y el nombre
-     parece flotar por encima del logotipo. El logotipo, medido, está
-     centrado en su imagen: el que iba alto era el texto. */
-  position:relative;top:2px;
-}
+.cf-marca b{font-size:17px;font-weight:500;letter-spacing:-.02em;line-height:1;display:block}
 /* La referencia vive en la cabecera, siempre visible y siempre con las
    palabras al lado (el rótulo del visor). Tabular para que los cuatro
    segmentos no bailen de ancho al cambiar de opción. */
