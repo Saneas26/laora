@@ -1470,10 +1470,10 @@
    {
     "ref": "M1",
     "acabado": "Alba",
-    "cal": "VH31 cuarzo (segundero barrido)",
-    "coste": 11.89,
+    "cal": "Miyota 2115 cuarzo (con fecha)",
+    "coste": 4.63,
     "rot": "Movimiento japonés de cuarzo",
-    "specs": "Movimiento japonés de cuarzo Seiko/TMI VH31, de segundero barrido: el segundero no da un salto por segundo, da cuatro, así que de lejos barre como un mecánico. Cristal a 32.768 Hz y precisión de ±15 s/mes. Tres agujas, SIN FECHA, con parada de segundero. Pila 371 / SR920SW de unos dos años. Diámetro 23,70 mm y altura 3,45 mm."
+    "specs": "Cuarzo japonés Miyota 2115, de Citizen, con fecha a las 3. Precisión de ±20 s/mes y pila 377 de unos tres años. Tres agujas con parada de segundero. Diámetro 23,70 mm y altura 4,15 mm. Monta sus propias agujas: los agujeros del cuarzo (1,20/0,70/0,17 mm) no son los del automático."
    },
    {
     "ref": "M2",
