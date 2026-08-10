@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 19
-V_JS = 28
+V_JS = 29
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -385,6 +385,11 @@ def pantalla(slug):
             rel = f'{PIEZAS_IMG}/brazaletes/{nom}.webp'
             if nom and hay(rel):
                 brazaletes[nom] = rel
+
+    # Las claves que empiezan por _ son notas de casa —por qué una pieza
+    # está fuera, qué hay que revisar—: se quedan en el JSON y NO viajan
+    # a la página, que la lee cualquiera con el botón derecho.
+    d = {k: v for k, v in d.items() if not k.startswith('_')}
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
                         'brazaletes': brazaletes, 'solape': SOLAPE,
