@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 24
-V_JS = 42
+V_CSS = 25
+V_JS = 43
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -287,14 +287,19 @@ def eje_brazalete_mat():
       <div class="cf-fichas" data-mats role="group" aria-label="Elegir material del brazalete"></div>
     </div>
 
-    <div class="cf-grupo" data-grupo-cier>
-      <p class="cf-rotulo">Cierre <b data-cuenta-cier></b></p>
-      <div class="cf-fichas" data-ciers role="group" aria-label="Elegir cierre"></div>
+    <div class="cf-grupo" data-grupo-esl>
+      <p class="cf-rotulo">Eslabones <b data-cuenta-esl></b></p>
+      <div class="cf-fichas" data-esls role="group" aria-label="Elegir eslabones"></div>
     </div>
 
     <div class="cf-grupo" data-grupo-var>
       <p class="cf-rotulo">Color <b data-cuenta-var></b></p>
       <div class="cf-variantes" data-variantes role="group" aria-label="Elegir color"></div>
+    </div>
+
+    <div class="cf-grupo" data-grupo-cier>
+      <p class="cf-rotulo">Cierre <b data-cuenta-cier></b></p>
+      <div class="cf-fichas" data-ciers role="group" aria-label="Elegir cierre"></div>
     </div>'''
 
 
@@ -369,7 +374,11 @@ def pantalla(slug):
         ejes.append(eje_fichas('caja', 'Caja', caj, lambda o: o['nombre']))
 
     ge = (ej.get('esf') or {})
-    if len(esf) > 1 and ge.get('grupos'):
+    if ge.get('auto'):
+        # La esfera no se elige: la manda el bisel (Óscar, 10/08/2026).
+        # Ni botón ni dato suelto: ya sale en las características.
+        pass
+    elif len(esf) > 1 and ge.get('grupos'):
         ejes.append(eje_grupos('esf', 'Esfera', ge['grupos'], esf, ge.get('nombres', {})))
     elif len(esf) > 1:
         # `data-grupo-esf` porque puede desaparecer entero: en el Precisa
