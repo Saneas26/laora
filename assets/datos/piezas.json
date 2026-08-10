@@ -704,22 +704,6 @@
   ],
   "brz": [
    {
-    "id": "B01",
-    "nombre": "Acero 316L, cinco eslabones",
-    "v": [
-     {
-      "ref": "Brz-316-A01",
-      "nom": "Única",
-      "c": 7.39,
-      "cier": "Liberación rápida",
-      "eti": "Plata",
-      "hex": "#c9cdd2",
-      "esl": "Cinco eslabones"
-     }
-    ],
-    "mat": "Acero"
-   },
-   {
     "id": "B02",
     "nombre": "Acero 316L, cierre desplegable",
     "v": [
@@ -1623,17 +1607,6 @@
   ],
   "brz": [
    {
-    "id": "B01",
-    "nombre": "Acero 316L, cinco eslabones",
-    "v": [
-     {
-      "ref": "Brz-316-A01",
-      "nom": "Única",
-      "c": 7.39
-     }
-    ]
-   },
-   {
     "id": "B02",
     "nombre": "Acero 316L, cierre desplegable",
     "v": [
@@ -2137,17 +2110,6 @@
   ],
   "brz": [
    {
-    "id": "B01",
-    "nombre": "Acero 316L, cinco eslabones",
-    "v": [
-     {
-      "ref": "Brz-316-A01",
-      "nom": "Única",
-      "c": 7.39
-     }
-    ]
-   },
-   {
     "id": "B02",
     "nombre": "Acero 316L, cierre desplegable",
     "v": [
@@ -2512,17 +2474,6 @@
       "nom": "Caucho negro",
       "c": 0,
       "foto": "Brz-Diver-Pack"
-     }
-    ]
-   },
-   {
-    "id": "B01",
-    "nombre": "Acero 316L, cinco eslabones",
-    "v": [
-     {
-      "ref": "Brz-316-A01",
-      "nom": "Única",
-      "c": 7.39
      }
     ]
    },
