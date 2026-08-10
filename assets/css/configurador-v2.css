@@ -182,6 +182,26 @@ body{
   transform:translateY(-50%);overflow:visible;z-index:2;
 }
 .cf-montaje.con-foto .cf-cabeza img{position:static;width:100%;left:auto;top:auto}
+/* CABEZA CON FOTO Y BRAZALETE SIN ELLA
+   ------------------------------------------------------------
+   Este caso no existía hasta el 10/08/2026: o había foto de las dos
+   cosas, o de ninguna. El día que se retiró la foto de un brazalete
+   suelto —el Brz-316-A01, que era el que no tocaba— la banda dibujada
+   se quedó con altura CERO y el reloj salió flotando sin correa.
+
+   Pasaba porque `con-foto` convierte el montaje en `display:block` y
+   ahí el `flex:1` de la banda no reparte nada. Se coloca a mano: media
+   altura cada mitad, centradas, y la cabeza —que va encima y en el
+   centro— tapa la junta. Así no puede quedar rendija, mida lo que mida
+   el visor. */
+.cf-montaje.con-foto .cf-correa{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:26.7%;   /* los 267 px del brazalete sobre el lienzo de 1000 */
+  margin:0;flex:none;z-index:1;
+}
+.cf-montaje.con-foto .cf-correa.arriba{top:0;bottom:50%;border-radius:5px 5px 0 0}
+.cf-montaje.con-foto .cf-correa.abajo {top:50%;bottom:0;border-radius:0 0 11px 11px}
+
 .cf-brz{
   position:absolute;left:0;width:100%;height:auto;top:50%;z-index:1;
 }
