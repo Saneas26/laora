@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 12
-V_JS = 13
+V_CSS = 13
+V_JS = 14
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -158,16 +158,43 @@ def eje_grupos(clave, rotulo, grupos, opciones, nombres):
     </div>'''
 
 
-def eje_fichas(clave, rotulo, opciones, etiqueta):
+def eje_fichas(clave, rotulo, opciones, etiqueta, hook=''):
     botones = '\n'.join(
         f'        <button class="cf-ficha" type="button" data-{clave}="{i}" '
         f'aria-pressed="{"true" if i == 0 else "false"}">{etiqueta(o)}</button>'
         for i, o in enumerate(opciones))
-    return f'''    <div class="cf-grupo">
+    return f'''    <div class="cf-grupo"{hook}>
       <p class="cf-rotulo">{rotulo} <b>{len(opciones)} opciones</b></p>
       <div class="cf-fichas" role="group" aria-label="Elegir {rotulo.lower()}">
 {botones}
       </div>
+    </div>'''
+
+
+def caja_por_mov():
+    """El Precisa no elige caja: la trae el movimiento. El cuarzo va en
+    caja sólida y el automático en caja de cristal, porque un automático
+    se enseña por detrás. Se pinta el dato, y lo rellena el JavaScript
+    porque cambia al cambiar de mecanismo."""
+    return '''    <div class="cf-grupo">
+      <p class="cf-rotulo">Caja <b>la que pide el movimiento</b></p>
+      <div class="cf-fijo"><b data-caja-fijo></b><span data-caja-apunte></span></div>
+    </div>'''
+
+
+def brazalete_fijo(nombre, apunte):
+    """Un solo brazalete y un solo acabado: el del pack. No se pregunta,
+    pero los ganchos del acabado tienen que existir igual —el JavaScript
+    los escribe siempre— así que van en un grupo escondido."""
+    return f'''    <div class="cf-grupo">
+      <p class="cf-rotulo">Brazalete <b>uno solo</b></p>
+      <div class="cf-fijo"><b>{nombre}</b><span>{apunte}</span></div>
+      <p class="cf-detalle" data-detalle hidden></p>
+    </div>
+
+    <div class="cf-grupo" data-grupo-var hidden>
+      <p class="cf-rotulo"><span data-rotulo-var>Acabado</span> <b data-cuenta-var></b></p>
+      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir acabado"></div>
     </div>'''
 
 
@@ -191,16 +218,47 @@ def eje_brazalete(familias, nombres):
     </div>'''
 
 
+def vale_esf(e_, c):
+    cj = (e_.get('cajas') or '').strip()
+    return (not cj) or cj.lower().startswith('todas') or \
+        c['ref'] in [s.strip() for s in cj.split(',')]
+
+
+def validas(d):
+    """El coste de cada configuración que EXISTE DE VERDAD. No es el
+    producto de los cuatro ejes: al movimiento puede venirle impuesta la
+    caja —el Precisa—, una esfera puede no entrar en una caja, puede no
+    haber esfera que elegir porque viene en el pack, y el brazalete tiene
+    que hacer juego con la caja —el Bitácora—.
+
+    Contar a ciegas daba números inflados: el Lunar decía 330 y son 220.
+    Y el «desde» salía de sumar los mínimos de cada eje por separado, que
+    a veces no se pueden dar a la vez."""
+    ej = d.get('ejes', {})
+    por_mov = (ej.get('caja') or {}).get('porMov') or {}
+    compat = (ej.get('brz') or {}).get('compat') or {}
+    # El brazalete del Diver es un EXTRA sobre lo que ya trae la caja.
+    extra = bool(d['incluido']) and d['extra']
+    for m in d['mov']:
+        cajas = ([c for c in d['caj'] if c['ref'] == por_mov[m['ref']]['ref']]
+                 if m['ref'] in por_mov else d['caj'])
+        for c in cajas:
+            esfs = [x for x in d['esf'] if vale_esf(x, c)] or [None]
+            ok = compat.get(c['ref'])
+            brzs = [v for f in d['brz'] for v in f['v']
+                    if ok is None or v['ref'] in ok] or [{'c': 0}]
+            for x in esfs:
+                for v in brzs:
+                    yield (m['coste'] + c['coste'] + (x['coste'] if x else 0)
+                           + (0 if extra else v['c']))
+
+
 def pantalla(slug):
     d = PIEZAS[slug]
     mov, caj, esf, brz = d['mov'], d['caj'], d['esf'], d['brz']
 
-    # El más barato posible: es lo único que puede decir un «desde».
-    # Si el brazalete es un EXTRA sobre lo que ya trae la caja —el Diver—,
-    # no cuenta para el mínimo.
-    suelo_brz = 0 if (d['incluido'] and d['extra']) else min(v['c'] for f in brz for v in f['v'])
-    suelo_esf = min(e['coste'] for e in esf) if esf else 0
-    barato = min(m['coste'] for m in mov) + min(c['coste'] for c in caj) + suelo_esf + suelo_brz
+    costes = list(validas(d))
+    barato, combis = min(costes), len(costes)
 
     ej = d.get('ejes', {})
     ejes = []
@@ -216,6 +274,8 @@ def pantalla(slug):
     if sub:
         for s_ in sub:
             ejes.append(eje_sub(s_['clave'], s_['rotulo'], s_['valores'], s_.get('etiqueta', {})))
+    elif (ej.get('caja') or {}).get('porMov'):
+        ejes.append(caja_por_mov())
     elif len(caj) == 1:
         ejes.append(fijo('Caja', caj[0]['nombre'], euros(caj[0]['coste'])))
     else:
@@ -225,7 +285,10 @@ def pantalla(slug):
     if len(esf) > 1 and ge.get('grupos'):
         ejes.append(eje_grupos('esf', 'Esfera', ge['grupos'], esf, ge.get('nombres', {})))
     elif len(esf) > 1:
-        ejes.append(eje_fichas('esf', 'Esfera', esf, lambda o: o['nombre']))
+        # `data-grupo-esf` porque puede desaparecer entero: en el Precisa
+        # automático la esfera viene en el pack y no hay nada que elegir.
+        ejes.append(eje_fichas('esf', 'Esfera', esf, lambda o: o['nombre'],
+                               hook=' data-grupo-esf'))
     elif len(esf) == 1:
         ejes.append(fijo('Esfera', esf[0]['nombre'], 'con sus agujas'))
 
@@ -233,7 +296,11 @@ def pantalla(slug):
       <p class="cf-rotulo">Características</p>
       <dl class="cf-specs" data-specs></dl>
     </div>''')
-    ejes.append(eje_brazalete(brz, (ej.get('brz') or {}).get('nombres', {})))
+    if len(brz) == 1 and len(brz[0]['v']) == 1:
+        ejes.append(brazalete_fijo((ej.get('brz') or {}).get('nombres', {}).get(brz[0]['id'], brz[0]['nombre']),
+                                   (ej.get('brz') or {}).get('apunte', 'en el pack de la caja')))
+    else:
+        ejes.append(eje_brazalete(brz, (ej.get('brz') or {}).get('nombres', {})))
 
     # Se comprueba EN DISCO qué fotos existen ya. Así el día que el
     # diseñador entregue una tanda, basta con copiarla y regenerar.
@@ -305,26 +372,12 @@ def pantalla(slug):
 <script type="application/json" data-piezas>{datos}</script>
 <script src="/assets/js/configurador-v2.js?v={V_JS}"></script>
 '''
-    return html, barato
+    return html, barato, combis
 
 
 for slug in PIEZAS:
-    html, barato = pantalla(slug)
+    html, barato, combis = pantalla(slug)
     with open(os.path.join(RAIZ, f'{slug}-nuevo.html'), 'w', encoding='utf-8') as f:
         f.write(html)
-    d = PIEZAS[slug]
-    # Se cuentan las que EXISTEN, no las del producto de los cuatro ejes:
-    # una esfera puede no entrar en una caja, y desde el 09/08/2026 el
-    # brazalete tampoco (el metal del brazalete sigue al de la caja).
-    compat = (d.get('ejes', {}).get('brz') or {}).get('compat') or {}
-    esferas = d['esf'] or [None]
-    combis = 0
-    for c in d['caj']:
-        ok = compat.get(c['ref'])
-        nv = sum(1 for f in d['brz'] for v in f['v'] if ok is None or v['ref'] in ok)
-        ne = sum(1 for e_ in esferas if e_ is None or not e_.get('cajas')
-                 or e_['cajas'].lower().startswith('todas')
-                 or c['ref'] in [s.strip() for s in e_['cajas'].split(',')])
-        combis += len(d['mov']) * ne * nv
     print(f'{slug}-nuevo.html · {combis} configuraciones'
           f' · desde {euros(redondea(barato * MULT))}')

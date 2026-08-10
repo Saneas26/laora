@@ -41,8 +41,8 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SUBIR EN CADA CAMBIO del fichero correspondiente: Cloudflare los sirve con
 # max-age=14400 y sin esto el navegador se queda hasta cuatro horas con la
 # versión antigua. Vale igual para el CSS que para el JS.
-V_CSS = 38
-V_CAB = 13
+V_CSS = 41
+V_CAB = 15
 V_JS_HOME = 8
 V_JS_FICHA = 14
 

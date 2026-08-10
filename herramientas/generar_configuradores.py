@@ -285,8 +285,10 @@ def foto_de(reloj, acabado, ref):
     if fiable and exacta:
         return f'{CATALOGO}/{exacta}.webp'
     codigo = reloj['codigo'].replace('—', '-').replace('–', '-').replace(' ', '')
-    inicio = f'{codigo}_{sin_tildes(reloj["nombre"]).replace(" ", "")}_' \
-             f'{acabado.get("refLetra") or acabado["nombre"][0].upper()}'
+    # Sin niveles de acabado —el Bitácora desde el 09/08/2026— el nombre
+    # llega vacío: no hay letra que sacarle, y la referencia usa 'A' fija.
+    letra = acabado.get('refLetra') or (acabado['nombre'][0].upper() if acabado.get('nombre') else 'A')
+    inicio = f'{codigo}_{sin_tildes(reloj["nombre"]).replace(" ", "")}_{letra}'
     for nombre in FOTOS_EN_DISCO:
         if nombre.lower().startswith(inicio.lower()):
             return f'{CATALOGO}/{nombre}.webp'

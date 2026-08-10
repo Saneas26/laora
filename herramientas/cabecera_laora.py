@@ -31,10 +31,10 @@ argumento, ninguna.
 # SUBIR EN CADA CAMBIO de la hoja o del script: Cloudflare los sirve
 # con max-age=14400 y sin esto el navegador se queda con la versión
 # vieja hasta cuatro horas.
-V_CAB_CSS = 1
+V_CAB_CSS = 2
 V_CAB_JS = 1
 
-_LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'   # tinta, sobre fondo claro
+_LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png?v=2'   # tinta, sobre fondo claro
 
 RECURSOS = (
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
@@ -58,7 +58,7 @@ _SECCIONES = [
     ('filosofia', '/filosofia.html',            None),          # «Por qué laOra»
     ('taller',    '/taller.html',               'Taller'),
     ('club',      '/club.html',                 None),          # «Club laOra»
-    ('laorateca', '/filosofia.html#laorateca',  None),          # «laOrateca»
+    ('laorateca', '/laorateca.html',            None),          # «laOrateca»
 ]
 
 

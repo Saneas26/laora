@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Configura tu Bitácora de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 219,90 €.">
+<meta name="description" content="Configura tu Bitácora de laOra: acabado, brazalete o correa y precio, en una sola pantalla. Desde 319,90 €.">
 <meta name="theme-color" content="#151715">
 <title>Configura tu Bitácora · laOra</title>
 <link rel="canonical" href="https://laora.es/bitacora">
@@ -35,11 +35,11 @@
   <section class="cfg-visor" aria-label="El reloj que estás configurando">
     <img class="cfg-foto" data-foto
          src="/assets/img/catalogo/LO-07_Bitacora_A01.webp"
-         alt="Reloj laOra Bitácora, con 40 mm, acero inoxidable 316l"
+         alt="Reloj laOra Bitácora, con caucho integrado, hebilla mariposa"
          fetchpriority="high">
     <div class="cfg-muestra" aria-hidden="true">
-      <span class="tira" data-muestra-tira style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span>
-      <span data-muestra-nombre>40 mm, Acero inoxidable 316L</span>
+      <span class="tira" data-muestra-tira style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span>
+      <span data-muestra-nombre>Caucho integrado, hebilla mariposa</span>
     </div>
     <!-- Los dos rótulos van JUNTOS y en flujo normal dentro de este
          bloque, no sueltos y colocados cada uno por su cuenta. Cuando
@@ -48,7 +48,7 @@
          segunda caía encima de la referencia: dos textos superpuestos,
          ilegibles los dos. Así el segundo siempre baja. -->
     <div class="cfg-rotulos">
-      <p class="cfg-viendo" data-viendo aria-live="polite">40 mm, Acero inoxidable 316L</p>
+      <p class="cfg-viendo" data-viendo aria-live="polite">Caucho integrado, hebilla mariposa</p>
       <!-- La referencia también aquí: en el teléfono no cabe en la
            cabecera, y es el dato con el que Óscar busca en la hoja. -->
       <p class="cfg-ref-visor">Ref. <span data-ref>—</span></p>
@@ -61,12 +61,15 @@
 
 
     <div class="cfg-grupo">
-      <p class="cfg-rotulo">Caja y correa <b data-rotulo-correa><b>Incluido</b></b></p>
+      <p class="cfg-rotulo">Caja y correa <b data-rotulo-correa><b>2 opciones</b></b></p>
       <!-- `--correas` es cuántas columnas caben de verdad. La rejilla
            era siempre de cuatro, así que con tres correas quedaba una
            columna vacía y los tres nombres partidos en dos líneas por
            falta de ancho. Ahora la rejilla tiene el ancho de lo que hay. -->
-      <p class="cfg-correa-unica"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span><b>40 mm, Acero inoxidable 316L</b><small>Brazalete integrado de acero 316L · Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable</small></span></p>
+      <div class="cfg-correas" role="group" aria-label="Elegir brazalete o correa" style="--correas:2">
+        <button type="button" data-correa="0" aria-pressed="false"><span class="tira" style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"></span><span>Caucho integrado, hebilla mariposa</span></button>
+        <button type="button" data-correa="1" aria-pressed="false"><span class="tira" style="background:linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"></span><span>Acero integrado, cierre plegable</span></button>
+      </div>
     </div>
 
     <div class="cfg-nota">
@@ -79,11 +82,11 @@
 <!-- LA BARRA · pegada abajo, con el precio de lo elegido -->
 <footer class="cfg-barra">
   <span class="lado">
-    <span class="eleccion" data-eleccion>40 mm, Acero inoxidable 316L</span>
+    <span class="eleccion" data-eleccion>Caucho integrado, hebilla mariposa</span>
     <span class="ref">Ref. <span data-ref>—</span></span>
   </span>
   <span class="cfg-precio">
-    <strong data-precio>219,90 €</strong>
+    <strong data-precio>319,90 €</strong>
     <span>Impuestos incluidos</span>
   </span>
   <button class="cfg-reservar" type="button" data-reservar>Reservar</button>
@@ -117,7 +120,7 @@
   </div>
 </template>
 
-<script type="application/json" data-cfg>{"modelo": "Bitácora", "inicial": {"acabado": "estandar", "correa": 0}, "precios": {"estandar": [219.9]}, "acabados": {"estandar": {"nombre": "", "etiqueta": "", "descriptor": "", "resumen": "", "refs": ["LO-07_Bitacora_A01"], "fotos": ["/assets/img/catalogo/LO-07_Bitacora_A01.webp"], "foto": "/assets/img/catalogo/LO-07_Bitacora_A01.webp", "ficha": [["Movimiento", "Arquitectura ETA 2824-2, 11½ líneas"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Arquitectura ETA 2824-2, 11½ líneas"], ["TIPO", "Automático, 3 agujas"], ["FRECUENCIA", "21.600 alt/h (3 Hz)"], ["AUTONOMÍA", "~42 h de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Fijo, integrado en la caja (no giratorio)"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["LUMINISCENCIA", "Agujas con lumen C3 verde"], ["FONDO", "macizo"], ["PESO", "~140 g"]]}]}}, "correas": [{"id": "40-mm-acero-inoxidable-316l", "nombre": "40 mm, Acero inoxidable 316L", "detalle": "Brazalete integrado de acero 316L · Eslabones pulidos y satinados (brazalete integrado) · Cierre desplegable", "diametro": null, "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}]}</script>
+<script type="application/json" data-cfg>{"modelo": "Bitácora", "inicial": {"acabado": "estandar", "correa": 0}, "precios": {"estandar": [319.9, 379.9]}, "acabados": {"estandar": {"nombre": "", "etiqueta": "", "descriptor": "", "resumen": "", "refs": ["LO-07_Bitacora_A01", "LO-07_Bitacora_A02"], "fotos": ["/assets/img/catalogo/LO-07_Bitacora_A01.webp", "/assets/img/catalogo/LO-07_Bitacora_A01.webp"], "foto": "/assets/img/catalogo/LO-07_Bitacora_A01.webp", "ficha": [["Movimiento", "Arquitectura ETA 2824-2, 11½ líneas"], ["Cristal", "Zafiro"], ["Caja", "Acero inoxidable 316L"], ["Estanqueidad", "10 ATM (100 m)"]], "grupos": [{"n": "01", "titulo": "Movimiento", "filas": [["MOVIMIENTO", "Arquitectura ETA 2824-2, 11½ líneas"], ["TIPO", "Automático, 3 agujas"], ["FRECUENCIA", "21.600 alt/h (3 Hz)"], ["AUTONOMÍA", "~42 h de reserva de marcha"]]}, {"n": "02", "titulo": "Caja y cristal", "filas": [["CRISTAL", "Zafiro"], ["CAJA", "Acero inoxidable 316L"], ["DIÁMETRO", "40 mm"], ["ESTANQUEIDAD", "10 ATM (100 m)"], ["BISEL", "Fijo, integrado en la caja (no giratorio)"]]}, {"n": "03", "titulo": "Esfera y ajuste", "filas": [["LUMINISCENCIA", "Agujas con lumen C3 verde"], ["FONDO", "macizo"], ["PESO", "~140 g"]]}]}}, "correas": [{"id": "caucho-integrado", "nombre": "Caucho integrado, hebilla mariposa", "detalle": "Caucho integrado a la caja · Hebilla mariposa de acero", "diametro": null, "muestra": "repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 4px,rgba(0,0,0,.05) 4px 8px),linear-gradient(150deg,#2b2c2d,#151616)"}, {"id": "acero-integrado", "nombre": "Acero integrado, cierre plegable", "detalle": "Brazalete integrado de acero 316L · Eslabones pulidos y satinados · Cierre plegable", "diametro": null, "muestra": "linear-gradient(150deg,#eef0f1 0%,#b4b8bc 30%,#e6e8ea 52%,#93979c 76%,#cfd2d5 100%)"}]}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
 <script src="/assets/js/configurador.js?v=8"></script>
 </body>
