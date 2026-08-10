@@ -1275,19 +1275,19 @@
   "esf": [
    {
     "ref": "E1",
-    "nombre": "Esfera N/O",
+    "nombre": "Negra y oro",
     "coste": 12.79,
     "cajas": "Todas"
    },
    {
     "ref": "E2",
-    "nombre": "Esfera A/N",
+    "nombre": "Azul y negra",
     "coste": 12.79,
     "cajas": "Todas"
    },
    {
     "ref": "E3",
-    "nombre": "Esfera N/Or",
+    "nombre": "Negra y oro rosa",
     "coste": 12.79,
     "cajas": "Todas"
    }
