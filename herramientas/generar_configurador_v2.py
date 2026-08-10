@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 13
-V_JS = 15
+V_CSS = 14
+V_JS = 17
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -277,7 +277,11 @@ def pantalla(slug):
     elif (ej.get('caja') or {}).get('porMov'):
         ejes.append(caja_por_mov())
     elif len(caj) == 1:
-        ejes.append(fijo('Caja', caj[0]['nombre'], euros(caj[0]['coste'])))
+        # NUNCA el coste: es lo que nos cuesta a nosotros, no lo que paga
+        # el cliente (Óscar, 08/08/2026). El Diver es el primero que llega
+        # aquí, con una sola caja, y estuvo a punto de publicar los 69,57.
+        ejes.append(fijo('Caja', caj[0]['nombre'],
+                         (ej.get('caja') or {}).get('apunte', 'con su esfera y sus agujas')))
     else:
         ejes.append(eje_fichas('caja', 'Caja', caj, lambda o: o['nombre']))
 

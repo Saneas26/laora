@@ -290,9 +290,12 @@
     $('[data-var-nombre]').textContent = p.v.nom;
     $('[data-cuenta-var]').textContent = vale.length + ' opciones';
     $('[data-grupo-var]').hidden = vale.length < 2;
+    /* «desde 0,00 €» no se le dice a nadie: si no cuesta nada es porque ya
+       viene con el reloj —la correa del Diver—, y eso se dice así. */
+    var suelo = Math.min.apply(null, vale.map(function (x) { return x.c; }));
     $('[data-detalle]').textContent = nombreFam(p.fam) + ' · ' + vale.length +
-      (vale.length === 1 ? ' acabado' : ' acabados') + ' · desde ' +
-      euros(Math.min.apply(null, vale.map(function (x) { return x.c; })));
+      (vale.length === 1 ? ' acabado' : ' acabados') +
+      (suelo > 0 ? ' · desde ' + euros(suelo) : ' · ya viene con el reloj');
   }
 
   function pintaPrecio() {
