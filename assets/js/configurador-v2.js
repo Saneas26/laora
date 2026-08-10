@@ -126,6 +126,40 @@
     return textura + ',linear-gradient(100deg,' + metal(t[0]) + ')';
   }
 
+  /* ---------- la MUESTRA del brazalete ----------
+     Mientras no hay foto, el cuadrito va dibujado. En cuanto la hay, se
+     RECORTA DE LA FOTO DE VERDAD, que para eso está: no hace falta
+     fotografiar los cuadritos aparte.
+
+     Se recorta la franja de `y=380` a `y=470`, en mitad de la mitad de
+     arriba. NO la de junto a la caja, que era lo primero que probé: ahí
+     el Bitácora tiene el eslabón de unión, que es una plancha lisa, y
+     el cuadrito salía como un rectángulo de color plano sin nada que
+     dijera «brazalete». A esta altura se ven los eslabones.
+
+     En horizontal, de `x=430` a `x=570`: bien por dentro del borde. El
+     brazalete se estrecha por el medio y los últimos píxeles del canto
+     son transparentes; recortando al ras, el cuadrito saldría mordido.
+     Con estos 140 px las cuatro fotos que hay hoy son opacas del todo.
+
+     Los porcentajes no dependen del tamaño en pantalla, y por eso el
+     mismo recorte vale para la banda de 92x24 y para el círculo de
+     30x30. El 50 % horizontal sale solo: el recorte está centrado en
+     x=500 sobre un lienzo de 1000, y cualquier recorte centrado cae
+     en la mitad. */
+  function fotoVar(v) {
+    return (D.brazaletes || {})[v.foto || v.ref] || null;
+  }
+  function muestraBanda(v, familia) {
+    var u = fotoVar(v);
+    return u ? 'url(' + u + ') 50% 16.45%/714.29% 2666.67% no-repeat'
+             : dibujo(familia, v.nom);
+  }
+  function muestraChip(v) {
+    var u = fotoVar(v);
+    return u ? 'url(' + u + ') 50% 14.6%/714.29% 1714.29% no-repeat' : null;
+  }
+
   /* ---------- estado ---------- */
 
   /* La esfera elegida, o NINGUNA. Las cuatro del Precisa son del cuarzo:
@@ -289,9 +323,13 @@
     var vale = libres(p.fam, caja);
     cont.innerHTML = p.fam.v.map(function (v, i) {
       if (!varVale(v, caja)) return '';
-      var t = tonos(v.nom);
-      var fondo = t.length > 1
-        ? 'linear-gradient(135deg,' + t[0] + ' 0 50%,' + t[1] + ' 50% 100%)' : t[0];
+      /* El chip de la foto manda; el color inventado es el suplente. */
+      var fondo = muestraChip(v);
+      if (!fondo) {
+        var t = tonos(v.nom);
+        fondo = t.length > 1
+          ? 'linear-gradient(135deg,' + t[0] + ' 0 50%,' + t[1] + ' 50% 100%)' : t[0];
+      }
       return '<button class="cf-color" type="button" data-var="' + i + '"' +
         ' aria-pressed="' + (i === e.v) + '" title="' + v.nom + '"' +
         ' aria-label="' + v.nom + '" style="background:' + fondo + '"></button>';
@@ -385,7 +423,7 @@
   function pintaMuestras() {
     todos('[data-brz] i').forEach(function (el, i) {
       var f = D.brz[i];
-      el.style.background = dibujo(f.nombre + ' ' + nombreFam(f), f.v[0].nom);
+      el.style.background = muestraBanda(f.v[0], f.nombre + ' ' + nombreFam(f));
     });
   }
 
