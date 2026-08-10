@@ -365,67 +365,110 @@
      ============================================================ */
   var MAT = D.brz.length > 1 && D.brz.every(function (f) { return f.mat; });
 
+  /* CUATRO PASOS (Óscar, 10/08/2026): material → eslabones → color →
+     cierre. Cada paso filtra al siguiente y un paso con una sola opción
+     no se pinta. El estado real sigue siendo (familia, variante): estos
+     ejes solo deciden cuál queda puesta. */
+  function varActual() { var f = D.brz[e.brz]; return f.v[Math.min(e.v, f.v.length - 1)]; }
   function matActual() { return D.brz[e.brz].mat; }
-  function cierActual() { return D.brz[e.brz].v[Math.min(e.v, D.brz[e.brz].v.length - 1)].cier; }
-  function variantesDe(mat, cier) {
+  function candidatas(mat, esl, eti, cier) {
     var out = [];
     D.brz.forEach(function (f, fi) {
       if (f.mat !== mat) return;
       f.v.forEach(function (v, vi) {
-        if (!cier || v.cier === cier) out.push({ fi: fi, vi: vi, v: v });
+        if (esl !== null && (v.esl || '') !== esl) return;
+        if (eti !== null && v.eti !== eti) return;
+        if (cier !== null && v.cier !== cier) return;
+        out.push({ fi: fi, vi: vi, v: v });
       });
     });
     return out;
   }
-  function eligeMat(mat) {
-    var x = variantesDe(mat, null)[0];
-    e.brz = x.fi; e.v = x.vi;
+  function pon(x) { e.brz = x.fi; e.v = x.vi; }
+  function unicos(lista, campo) {
+    var u = [];
+    lista.forEach(function (x) {
+      var val = campo === 'esl' ? (x.v.esl || '') : x.v[campo];
+      if (u.indexOf(val) < 0) u.push(val);
+    });
+    return u;
+  }
+  /* Al cambiar un paso se conserva lo elegido en los de abajo si sigue
+     existiendo: quien tenía «Negro» y cambia de eslabones no debe perder
+     su color porque sí. */
+  function eligeMat(m) {
+    var v0 = varActual();
+    var c = candidatas(m, v0.esl || '', v0.eti, null);
+    if (!c.length) c = candidatas(m, null, v0.eti, null);
+    if (!c.length) c = candidatas(m, null, null, null);
+    pon(c[0]);
+  }
+  function eligeEsl(esl) {
+    var v0 = varActual();
+    var c = candidatas(matActual(), esl, v0.eti, v0.cier);
+    if (!c.length) c = candidatas(matActual(), esl, v0.eti, null);
+    if (!c.length) c = candidatas(matActual(), esl, null, null);
+    pon(c[0]);
+  }
+  function eligeEti(eti) {
+    var v0 = varActual();
+    var c = candidatas(matActual(), v0.esl || '', eti, v0.cier);
+    if (!c.length) c = candidatas(matActual(), v0.esl || '', eti, null);
+    pon(c[0]);
   }
   function eligeCier(cier) {
-    var x = variantesDe(matActual(), cier)[0];
-    e.brz = x.fi; e.v = x.vi;
+    var v0 = varActual();
+    pon(candidatas(matActual(), v0.esl || '', v0.eti, cier)[0]);
+  }
+
+  function fichas(cont, lista, clave, puesta) {
+    cont.innerHTML = lista.map(function (t) {
+      return '<button class="cf-ficha" type="button" data-' + clave + '="' +
+        String(t).replace(/"/g, '&quot;') + '"' +
+        ' aria-pressed="' + (t === puesta) + '">' + t + '</button>';
+    }).join('');
   }
 
   function pintaMat() {
-    if (!MAT) return;
+    var v0 = varActual();
     var mats = [];
     D.brz.forEach(function (f) { if (mats.indexOf(f.mat) < 0) mats.push(f.mat); });
-    $('[data-mats]').innerHTML = mats.map(function (m) {
-      return '<button class="cf-ficha" type="button" data-mat="' + m + '"' +
-        ' aria-pressed="' + (m === matActual()) + '">' + m + '</button>';
-    }).join('');
+    fichas($('[data-mats]'), mats, 'mat', matActual());
     $('[data-cuenta-mat]').textContent = mats.length > 1 ? mats.length + ' materiales' : 'uno solo';
 
-    var ciers = [];
-    variantesDe(matActual(), null).forEach(function (x) {
-      if (ciers.indexOf(x.v.cier) < 0) ciers.push(x.v.cier);
-    });
+    var esls = unicos(candidatas(matActual(), null, null, null), 'esl');
+    var ge = $('[data-grupo-esl]');
+    ge.hidden = esls.length < 2;
+    if (!ge.hidden) {
+      fichas($('[data-esls]'), esls, 'esl', v0.esl || '');
+      $('[data-cuenta-esl]').textContent = esls.length + ' opciones';
+    }
+
+    var pool = candidatas(matActual(), v0.esl || '', null, null);
+    var etis = unicos(pool, 'eti');
+    var gv = $('[data-grupo-var]');
+    gv.hidden = etis.length < 2;
+    if (!gv.hidden) {
+      $('[data-variantes]').innerHTML = etis.map(function (eti) {
+        var x = pool.filter(function (q) { return q.v.eti === eti; })[0].v;
+        var estilo = 'background:' + (x.hex2
+          ? 'linear-gradient(135deg,' + x.hex + ' 0 50%,' + x.hex2 + ' 50% 100%)'
+          : (x.hex || '#c9cdd2'));
+        if (x.bor) estilo += ';border:2px dashed ' + x.bor;
+        return '<button class="cf-color" type="button" data-eti="' +
+          eti.replace(/"/g, '&quot;') + '"' +
+          ' aria-pressed="' + (eti === v0.eti) + '" title="' + eti + '"' +
+          ' aria-label="' + eti + '" style="' + estilo + '"></button>';
+      }).join('') + '<span class="cf-color-nombre">' + v0.eti + '</span>';
+      $('[data-cuenta-var]').textContent = etis.length + ' colores';
+    }
+
+    var ciers = unicos(candidatas(matActual(), v0.esl || '', v0.eti, null), 'cier');
     var gc = $('[data-grupo-cier]');
     gc.hidden = ciers.length < 2;
     if (!gc.hidden) {
-      $('[data-ciers]').innerHTML = ciers.map(function (c) {
-        return '<button class="cf-ficha" type="button" data-cier="' + c + '"' +
-          ' aria-pressed="' + (c === cierActual()) + '">' + c + '</button>';
-      }).join('');
+      fichas($('[data-ciers]'), ciers, 'cier', v0.cier);
       $('[data-cuenta-cier]').textContent = ciers.length + ' opciones';
-    }
-
-    var cols = variantesDe(matActual(), cierActual());
-    var gv = $('[data-grupo-var]');
-    gv.hidden = cols.length < 2;
-    if (!gv.hidden) {
-      $('[data-variantes]').innerHTML = cols.map(function (x) {
-        var estilo = 'background:' + (x.v.hex2
-          ? 'linear-gradient(135deg,' + x.v.hex + ' 0 50%,' + x.v.hex2 + ' 50% 100%)'
-          : (x.v.hex || '#c9cdd2'));
-        if (x.v.bor) estilo += ';border:2px dashed ' + x.v.bor;
-        var puesto = (x.fi === e.brz && x.vi === e.v);
-        return '<button class="cf-color" type="button" data-col="' + x.fi + ':' + x.vi + '"' +
-          ' aria-pressed="' + puesto + '" title="' + x.v.eti + '"' +
-          ' aria-label="' + x.v.eti + '" style="' + estilo + '"></button>';
-      }).join('') + '<span class="cf-color-nombre">' +
-        (cols.filter(function (x) { return x.fi === e.brz && x.vi === e.v; })[0] || cols[0]).v.eti + '</span>';
-      $('[data-cuenta-var]').textContent = cols.length + ' colores';
     }
   }
 
@@ -809,7 +852,7 @@
   document.addEventListener('click', function (ev) {
     if (ev.target.closest('[data-abre-ficha]')) { abreTecnica(); return; }
     if (ev.target.closest('[data-reservar]')) { reservar(); return; }
-    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub],[data-mat],[data-cier],[data-col]');
+    var b = ev.target.closest('[data-mov],[data-caja],[data-esf],[data-brz],[data-var],[data-sub],[data-mat],[data-esl],[data-eti],[data-cier]');
     if (!b || b.disabled) return;
     var d = b.dataset;
     if (d.sub !== undefined) { if (d.sub === 'diam') e.diam = d.valor; else e.color = d.valor; }
@@ -827,8 +870,9 @@
     else if (d.esf !== undefined) e.esf = Number(d.esf);
     else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; }
     else if (d.mat !== undefined) eligeMat(d.mat);
+    else if (d.esl !== undefined) eligeEsl(d.esl);
+    else if (d.eti !== undefined) eligeEti(d.eti);
     else if (d.cier !== undefined) eligeCier(d.cier);
-    else if (d.col !== undefined) { e.brz = Number(d.col.split(':')[0]); e.v = Number(d.col.split(':')[1]); }
     else e.v = Number(d.var);
     pinta();
   });
