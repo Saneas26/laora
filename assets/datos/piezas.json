@@ -1055,6 +1055,15 @@
     "nombre": "Piel sintética, hebilla mariposa",
     "v": [
      {
+      "ref": "Brz-Sintetica-P51",
+      "nom": "Marrón, pespunte a tono",
+      "c": 3.49,
+      "cier": "Hebilla mariposa",
+      "eti": "Marrón",
+      "hex": "#7b4a2a",
+      "esl": ""
+     },
+     {
       "ref": "Brz-Sintetica-P52",
       "nom": "Negro",
       "c": 3.69,
