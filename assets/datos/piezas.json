@@ -809,13 +809,13 @@
   "brz": [
    {
     "id": "B02",
-    "nombre": "Acero 316L, cierre solapa",
+    "nombre": "Acero 316L, cierre Ostra",
     "v": [
      {
       "ref": "Brz-316-A02",
       "nom": "Plata",
       "c": 28.39,
-      "cier": "Cierre solapa",
+      "cier": "Cierre Ostra",
       "eti": "Plata",
       "hex": "#c9cdd2",
       "esl": "5 eslabones"
@@ -824,7 +824,7 @@
       "ref": "Brz-316-A03",
       "nom": "Plata y oro rosa",
       "c": 30.79,
-      "cier": "Cierre solapa",
+      "cier": "Cierre Ostra",
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
@@ -834,7 +834,7 @@
       "ref": "Brz-316-A04",
       "nom": "Negro",
       "c": 30.79,
-      "cier": "Cierre solapa",
+      "cier": "Cierre Ostra",
       "eti": "Negro",
       "hex": "#1e1f22",
       "esl": "5 eslabones"
