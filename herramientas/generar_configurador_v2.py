@@ -60,7 +60,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 27
+V_CSS = 28
 V_JS = 56
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
