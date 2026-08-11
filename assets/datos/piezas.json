@@ -790,11 +790,6 @@
     "ref": "C3",
     "nombre": "Caja Negra PVD",
     "coste": 32.57
-   },
-   {
-    "ref": "C4",
-    "nombre": "Caja Negra PVD, bisel azul",
-    "coste": 32.57
    }
   ],
   "esf": [
@@ -808,7 +803,7 @@
     "ref": "E2",
     "nombre": "Blanca",
     "coste": 14.19,
-    "cajas": "C2, C4"
+    "cajas": "C2"
    }
   ],
   "brz": [
@@ -1193,15 +1188,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Goma-G03",
-      "nom": "Rojo",
-      "c": 6.29,
-      "cier": "Hebilla de acero",
-      "eti": "Rojo",
-      "hex": "#b3271e",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Goma-G04",
       "nom": "Naranja",
       "c": 6.39,
@@ -1264,26 +1250,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Caucho-C12",
-      "nom": "Verde militar blanco 01",
-      "c": 18.39,
-      "cier": "Estilo 01",
-      "eti": "Verde militar, banda blanca",
-      "hex": "#4b5320",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Caucho-C13",
-      "nom": "Rojo blanco 01",
-      "c": 18.39,
-      "cier": "Estilo 01",
-      "eti": "Rojo, banda blanca",
-      "hex": "#b3271e",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Caucho-C14",
       "nom": "Naranja blanco 01",
       "c": 18.39,
@@ -1330,16 +1296,6 @@
       "cier": "Estilo 02",
       "eti": "Negro, banda negra",
       "hex": "#1e1f22",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Caucho-C19",
-      "nom": "Verde militar blanco 02",
-      "c": 19.29,
-      "cier": "Estilo 02",
-      "eti": "Verde militar, banda blanca",
-      "hex": "#4b5320",
-      "bor": "#f2f0ea",
       "esl": ""
      },
      {
@@ -1431,8 +1387,7 @@
     "esfPar": {
      "C1": "E1",
      "C2": "E2",
-     "C3": "E1",
-     "C4": "E2"
+     "C3": "E1"
     }
    },
    "esf": {
@@ -1441,25 +1396,6 @@
    "brz": {
     "compat": {
      "C3": [
-      "Brz-316-A04",
-      "Brz-316-A07",
-      "Brz-904-A19",
-      "Brz-904-A16",
-      "Brz-Piel-P01",
-      "Brz-Piel-P02",
-      "Brz-Piel-P03",
-      "Brz-Piel-P05",
-      "Brz-Piel-P06",
-      "Brz-Piel-P07",
-      "Brz-Sintetica-P52",
-      "Brz-Sintetica-P53",
-      "Brz-Goma-G01",
-      "Brz-Caucho-C11",
-      "Brz-Caucho-C18",
-      "Brz-Goma-G04",
-      "Brz-Goma-G06"
-     ],
-     "C4": [
       "Brz-316-A04",
       "Brz-316-A07",
       "Brz-904-A19",
