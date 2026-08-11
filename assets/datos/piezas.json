@@ -1188,30 +1188,12 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Goma-G04",
-      "nom": "Naranja",
-      "c": 6.39,
-      "cier": "Hebilla de acero",
-      "eti": "Naranja",
-      "hex": "#e2711d",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Goma-G05",
       "nom": "Azul",
       "c": 6.39,
       "cier": "Hebilla de acero",
       "eti": "Azul",
       "hex": "#2456a4",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Goma-G06",
-      "nom": "Marrón",
-      "c": 6.39,
-      "cier": "Hebilla de acero",
-      "eti": "Marrón",
-      "hex": "#6b4226",
       "esl": ""
      },
      {
@@ -1286,7 +1268,8 @@
       "cier": "Hebilla mariposa oro rosa",
       "eti": "Negro, banda negra",
       "hex": "#1e1f22",
-      "esl": ""
+      "esl": "",
+      "foto": "Brz-Caucho-C11"
      }
     ],
     "mat": "Caucho"
@@ -1320,9 +1303,7 @@
       "Brz-Sintetica-P52",
       "Brz-Sintetica-P53",
       "Brz-Goma-G01",
-      "Brz-Caucho-C11",
-      "Brz-Goma-G04",
-      "Brz-Goma-G06"
+      "Brz-Caucho-C11"
      ]
     },
     "compatNo": {
