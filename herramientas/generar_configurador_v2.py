@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 27
-V_JS = 55
+V_JS = 56
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -484,11 +484,13 @@ def pantalla(slug):
             base = f'{d["codigo"]}-{c["ref"]}' + (f'-{e_["ref"]}' if e_ else '')
             for f_ in brz:
                 for v in f_['v']:
-                    nom = v.get('foto') or v['ref']
-                    clave = f'{base}-{nom}'
-                    rel = f'{PIEZAS_IMG}/completas/{clave}.webp'
-                    if hay(rel):
-                        completas[clave] = rel
+                    # La propia Y la prestada: si la de verdad ya esta en
+                    # disco, el visor la prefiere y el prestamo descansa.
+                    for nom in {v['ref'], v.get('foto') or v['ref']}:
+                        clave = f'{base}-{nom}'
+                        rel = f'{PIEZAS_IMG}/completas/{clave}.webp'
+                        if hay(rel):
+                            completas[clave] = rel
 
     # Las claves que empiezan por _ son notas de casa —por qué una pieza
     # está fuera, qué hay que revisar—: se quedan en el JSON y NO viajan

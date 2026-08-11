@@ -305,7 +305,11 @@
        Si existe la foto de ESTA configuración ya montada, se pone esa y
        no se compone nada: ni mitades de brazalete ni bandas dibujadas.
        Es lo que quita la junta, que era el motivo del cambio. */
-    var entera = (D.completas || {})[refCab + '-' + (p.v.foto || p.v.ref)];
+    /* La foto PROPIA manda; `foto` es el préstamo de un gemelo para
+       mientras tanto (Óscar, 11/08/2026): en cuanto llega la de verdad,
+       entra sola sin tocar datos. */
+    var entera = (D.completas || {})[refCab + '-' + p.v.ref] ||
+      (D.completas || {})[refCab + '-' + (p.v.foto || p.v.ref)];
 
     var cab = entera || (D.cabezas || {})[refCab];
     var foto = $('[data-foto]');
@@ -410,7 +414,8 @@
   function tieneFoto(v) {
     var p = piezas();
     var refCab = D.codigo + '-' + p.caja.ref + (p.esf ? '-' + p.esf.ref : '');
-    return !!(D.completas || {})[refCab + '-' + (v.foto || v.ref)];
+    return !!((D.completas || {})[refCab + '-' + v.ref] ||
+      (D.completas || {})[refCab + '-' + (v.foto || v.ref)]);
   }
   function candidatas(mat, esl, eti, cier) {
     /* La caja también corta aquí (Óscar, 11/08/2026): con la Negra PVD
