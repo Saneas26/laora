@@ -910,100 +910,72 @@
    },
    {
     "id": "B08",
-    "nombre": "Acero 904L macizo",
+    "nombre": "Acero 904L, Ostra tres eslabones",
+    "mat": "Acero 904L",
+    "v": [
+     {
+      "ref": "Brz-904-A13",
+      "nom": "Mate cepillado",
+      "c": 21.19,
+      "esl": "3 eslabones",
+      "eti": "Plata mate",
+      "hex": "#aeb2b8",
+      "cier": ""
+     },
+     {
+      "ref": "Brz-904-A14",
+      "nom": "Cepillado pulido",
+      "c": 20.99,
+      "esl": "3 eslabones",
+      "eti": "Plata pulida",
+      "hex": "#d6d9dd",
+      "cier": ""
+     },
+     {
+      "ref": "Brz-904-A19",
+      "nom": "Negro",
+      "c": 20.99,
+      "esl": "3 eslabones",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "cier": ""
+     }
+    ]
+   },
+   {
+    "id": "B09",
+    "nombre": "Acero 904L, Jubilee cinco eslabones",
+    "mat": "Acero 904L",
     "v": [
      {
       "ref": "Brz-904-A12",
       "nom": "Mate cepillado",
-      "c": 55.39,
-      "cier": "Clásico",
-      "eti": "Mate cepillado",
-      "hex": "#aeb2b7",
-      "esl": "Macizo"
-     },
-     {
-      "ref": "Brz-904-A13",
-      "nom": "Brillante pulido",
-      "c": 55.39,
-      "cier": "Clásico",
-      "eti": "Brillante pulido",
-      "hex": "#e4e7ea",
-      "esl": "Macizo"
-     }
-    ],
-    "mat": "Acero 904L"
-   },
-   {
-    "id": "B09",
-    "nombre": "Acero 904L, eslabones planos",
-    "v": [
-     {
-      "ref": "Brz-904-A14",
-      "nom": "Plata 5 eslabones",
-      "c": 23.79,
-      "cier": "Clásico",
-      "eti": "Plata",
-      "hex": "#c9cdd2",
-      "esl": "5 eslabones"
+      "c": 20.99,
+      "esl": "5 eslabones",
+      "eti": "Plata mate",
+      "hex": "#aeb2b8",
+      "cier": ""
      },
      {
       "ref": "Brz-904-A15",
-      "nom": "Plata / Oro rosa 5 eslabones",
-      "c": 28.19,
-      "cier": "Clásico",
+      "nom": "Plata y oro rosa",
+      "c": 25.19,
+      "esl": "5 eslabones",
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
-      "esl": "5 eslabones"
+      "cier": ""
      },
      {
       "ref": "Brz-904-A16",
-      "nom": "Negro 5 eslabones",
-      "c": 28.19,
-      "cier": "Clásico",
+      "nom": "Negro",
+      "c": 24.99,
+      "esl": "5 eslabones",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": "5 eslabones"
-     },
-     {
-      "ref": "Brz-904-A17",
-      "nom": "Plata 3 eslabones cepillado/mate",
-      "c": 23.79,
-      "cier": "Clásico",
-      "eti": "Plata mate",
-      "hex": "#aeb2b7",
-      "esl": "3 eslabones"
-     },
-     {
-      "ref": "Brz-904-A18",
-      "nom": "Plata 3 eslabones pulido",
-      "c": 23.79,
-      "cier": "Clásico",
-      "eti": "Plata pulida",
-      "hex": "#e4e7ea",
-      "esl": "3 eslabones"
-     },
-     {
-      "ref": "Brz-904-A19",
-      "nom": "Negro 3 eslabones pulido",
-      "c": 28.19,
-      "cier": "Clásico",
-      "eti": "Negro",
-      "hex": "#1e1f22",
-      "esl": "3 eslabones"
-     },
-     {
-      "ref": "Brz-904-A20",
-      "nom": "Plata / Oro Rosa 3 eslabones pulido",
-      "c": 28.19,
-      "cier": "Clásico",
-      "eti": "Oro rosa",
-      "hex": "#c9cdd2",
-      "hex2": "#c98d6b",
-      "esl": "3 eslabones"
+      "cier": ""
      }
-    ],
-    "mat": "Acero 904L"
+    ]
    },
    {
     "id": "B10",
@@ -1452,17 +1424,23 @@
     "compat": {
      "C3": [
       "Brz-316-A04",
-      "Brz-316-A07"
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16"
      ]
     },
     "compatNo": {
      "C1": [
       "Brz-316-A04",
-      "Brz-316-A07"
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16"
      ],
      "C2": [
       "Brz-316-A04",
-      "Brz-316-A07"
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16"
      ]
     }
    }
