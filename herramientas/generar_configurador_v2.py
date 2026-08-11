@@ -105,6 +105,21 @@ def hay(rel):
     return os.path.exists(os.path.join(RAIZ, rel.lstrip('/')))
 
 
+def con_version(rel):
+    """La foto viaja con la HUELLA de su contenido detrás: …webp?v=a1b2c3d4.
+
+    Óscar, 11/08/2026: rehice cuatro fotos de piel y él seguía viendo las
+    viejas. El CSS y el JS ya llevaban `?v=`, pero las imágenes no, y
+    Cloudflare las guarda cuatro horas con el mismo nombre. Ahora, si la
+    foto cambia, cambia su dirección y el navegador la pide de nuevo;
+    si no cambia, la dirección es la misma y sigue en caché."""
+    import hashlib
+    ruta = os.path.join(RAIZ, rel.lstrip('/'))
+    with open(ruta, 'rb') as f_:
+        huella = hashlib.md5(f_.read()).hexdigest()[:8]
+    return f'{rel}?v={huella}'
+
+
 def euros(v):
     return f'{v:,.2f}'.replace(',', '·').replace('.', ',').replace('·', '.') + ' €'
 
@@ -445,7 +460,7 @@ def pantalla(slug):
     for f_ in brz:
         rel = f'{PIEZAS_IMG}/cierres/{f_["id"]}.webp'
         if hay(rel):
-            cierres[f_['id']] = rel
+            cierres[f_['id']] = con_version(rel)
 
     # Y una foto por NOMBRE de hebilla (Oscar, 11/08/2026): las pieles
     # comparten hebillas entre correas, asi que la foto se busca por el
@@ -466,7 +481,7 @@ def pantalla(slug):
                 continue
             rel = f'{PIEZAS_IMG}/cierres/{slug_cierre(nom)}.webp'
             if hay(rel):
-                cierres_nom[nom] = rel
+                cierres_nom[nom] = con_version(rel)
 
     # LA FOTO ENTERA, UNA POR CONFIGURACION
     # ------------------------------------------------------------
@@ -490,7 +505,7 @@ def pantalla(slug):
                         clave = f'{base}-{nom}'
                         rel = f'{PIEZAS_IMG}/completas/{clave}.webp'
                         if hay(rel):
-                            completas[clave] = rel
+                            completas[clave] = con_version(rel)
 
     # Las claves que empiezan por _ son notas de casa —por qué una pieza
     # está fuera, qué hay que revisar—: se quedan en el JSON y NO viajan
