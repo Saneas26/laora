@@ -225,7 +225,8 @@ def linea(etiqueta, valor, faltantes):
     return '* %s: %s' % (etiqueta, valor)
 
 
-def construir(r, acabado, correa, indice, vista, maestra, cambiar, mantener):
+def construir(r, acabado, correa, indice, vista, maestra, cambiar, mantener,
+              urls=(), locales=()):
     cfg = r['configurador']
     com = cfg.get('comunes') or {}
     faltan = []
@@ -279,7 +280,17 @@ def construir(r, acabado, correa, indice, vista, maestra, cambiar, mantener):
               '* Vista principal: frontal, centrada, simétrica y con el reloj completo.',
               '* No improvises componentes que no aparezcan en las referencias.',
               '', 'ESPECIFICACIÓN DEL RELOJ', '', especificacion,
-              '', 'IMAGEN QUE HAY QUE GENERAR', '',
+              ]
+
+    if locales or urls:
+        partes += ['', 'REFERENCIAS DEL COMPONENTE QUE CAMBIA', '']
+        partes += ['* Local: %s' % x for x in locales]
+        partes += ['* URL: %s' % x for x in urls]
+        partes += ['* De estas referencias toma ÚNICAMENTE el componente indicado. '
+                   'Elimina la marca del vendedor, cualquier rótulo, watermark o texto '
+                   'comercial que aparezca en ellas.']
+
+    partes += ['', 'IMAGEN QUE HAY QUE GENERAR', '',
               '* %s' % titulo_vista, '* %s' % desc_vista,
               '* Fondo: %s' % FONDO,
               '', 'DATOS PARA ESTA VARIANTE', '',
@@ -307,6 +318,10 @@ def principal():
     ap.add_argument('--mantener', default='caja, bisel, esfera, subesferas, índices, agujas, '
                                           'corona, pulsadores, encuadre, iluminación y fondo')
     ap.add_argument('--lista', action='store_true', help='Enseña acabados y correas del modelo.')
+    ap.add_argument('--url', action='append', default=[],
+                    help='Referencia externa del componente. Se puede repetir.')
+    ap.add_argument('--ref-local', action='append', default=[],
+                    help='Referencia local del componente. Se puede repetir.')
     args = ap.parse_args()
 
     relojes = cargar()
@@ -333,7 +348,8 @@ def principal():
         maestra = candidata if candidata and os.path.exists(os.path.join(RAIZ, candidata)) else FALTA
 
     texto, faltan, ref, pvp = construir(r, acabado, correa, indice, args.vista,
-                                        maestra, args.cambiar, args.mantener)
+                                        maestra, args.cambiar, args.mantener,
+                                        args.url, args.ref_local)
     print(texto)
 
     if faltan or pvp or ref:
