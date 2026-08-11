@@ -1100,6 +1100,16 @@
       "eti": "Azul, pespunte negro",
       "hex": "#274472",
       "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P32",
+      "nom": "Azul, pespunte azul, hebilla clásica plateada",
+      "c": 31.99,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Azul, pespunte azul",
+      "hex": "#274472",
+      "bor": "#4a6da3",
+      "esl": ""
      }
     ],
     "mat": "Piel"
