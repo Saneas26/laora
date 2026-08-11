@@ -1017,6 +1017,63 @@
       "foto": "Brz-Piel-P06"
      },
      {
+      "ref": "Brz-Piel-P09",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada",
+      "c": 29.19,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Marrón oscuro, pespunte blanco",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "bor": "#f2f0ea"
+     },
+     {
+      "ref": "Brz-Piel-P10",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada",
+      "c": 31.79,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Marrón oscuro, pespunte blanco",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "bor": "#f2f0ea"
+     },
+     {
+      "ref": "Brz-Piel-P11",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra",
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Marrón oscuro, pespunte blanco",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "bor": "#f2f0ea"
+     },
+     {
+      "ref": "Brz-Piel-P13",
+      "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada",
+      "c": 31.79,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Marrón oscuro, pespunte negro",
+      "hex": "#4a2e1c",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P14",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada",
+      "c": 31.59,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Marrón oscuro, pespunte negro",
+      "hex": "#4a2e1c",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P15",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra",
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Marrón oscuro, pespunte negro",
+      "hex": "#4a2e1c",
+      "esl": ""
+     },
+     {
       "ref": "Brz-Piel-P17",
       "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
       "c": 29.39,
@@ -1402,7 +1459,13 @@
       "Brz-Piel-P01",
       "Brz-Piel-P02",
       "Brz-Piel-P05",
-      "Brz-Piel-P06"
+      "Brz-Piel-P06",
+      "Brz-Piel-P09",
+      "Brz-Piel-P10",
+      "Brz-Piel-P11",
+      "Brz-Piel-P13",
+      "Brz-Piel-P14",
+      "Brz-Piel-P15"
      ]
     }
    }
