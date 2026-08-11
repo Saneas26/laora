@@ -877,38 +877,6 @@
     "mat": "Acero 316L"
    },
    {
-    "id": "B06",
-    "nombre": "Acero 316L macizo, eslabón ancho",
-    "v": [
-     {
-      "ref": "Brz-316-A10",
-      "nom": "Tres eslabones",
-      "c": 59.69,
-      "cier": "Eslabón ancho",
-      "eti": "Plata",
-      "hex": "#c9cdd2",
-      "esl": "3 eslabones"
-     }
-    ],
-    "mat": "Acero 316L macizo"
-   },
-   {
-    "id": "B07",
-    "nombre": "Acero 316L macizo, eslabón fino",
-    "v": [
-     {
-      "ref": "Brz-316-A11",
-      "nom": "Cinco eslabones",
-      "c": 78.39,
-      "cier": "Eslabón fino",
-      "eti": "Plata",
-      "hex": "#c9cdd2",
-      "esl": "5 eslabones"
-     }
-    ],
-    "mat": "Acero 316L macizo"
-   },
-   {
     "id": "B08",
     "nombre": "Acero 904L, Ostra tres eslabones",
     "mat": "Acero 904L",
@@ -1458,7 +1426,7 @@
     },
     {
      "h": "Lo que hay que saber de esta gama",
-     "p": "Para dejar el precio donde está, en esta gama algunos brazaletes combinan eslabones macizos con eslabones huecos. En la práctica pesan menos en la muñeca —hay quien lo prefiere así para todo el día— y suenan un poco más vivos que un enterizo. Quien busque el peso y el silencio de un brazalete macizo tiene un paso más arriba el 316L macizo, y en lo más alto el 904L."
+     "p": "Para dejar el precio donde está, en esta gama algunos brazaletes combinan eslabones macizos con eslabones huecos. En la práctica pesan menos en la muñeca —hay quien lo prefiere así para todo el día— y suenan un poco más vivos que un enterizo. Quien busque el peso y el silencio de un brazalete macizo tiene en lo más alto el 904L."
     }
    ],
    "Acero 316L macizo": [
