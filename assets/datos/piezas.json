@@ -1024,7 +1024,8 @@
       "eti": "Marrón oscuro, pespunte blanco",
       "hex": "#4a2e1c",
       "esl": "",
-      "bor": "#f2f0ea"
+      "bor": "#f2f0ea",
+      "foto": "Brz-Piel-P10"
      },
      {
       "ref": "Brz-Piel-P10",
@@ -1044,7 +1045,8 @@
       "eti": "Marrón oscuro, pespunte blanco",
       "hex": "#4a2e1c",
       "esl": "",
-      "bor": "#f2f0ea"
+      "bor": "#f2f0ea",
+      "foto": "Brz-Piel-P10"
      },
      {
       "ref": "Brz-Piel-P13",
@@ -1053,7 +1055,8 @@
       "cier": "Hebilla mariposa plateada",
       "eti": "Marrón oscuro, pespunte negro",
       "hex": "#4a2e1c",
-      "esl": ""
+      "esl": "",
+      "foto": "Brz-Piel-P14"
      },
      {
       "ref": "Brz-Piel-P14",
@@ -1071,7 +1074,8 @@
       "cier": "Hebilla clásica negra",
       "eti": "Marrón oscuro, pespunte negro",
       "hex": "#4a2e1c",
-      "esl": ""
+      "esl": "",
+      "foto": "Brz-Piel-P14"
      },
      {
       "ref": "Brz-Piel-P17",
