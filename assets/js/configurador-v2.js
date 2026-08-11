@@ -496,7 +496,10 @@
   function pintaCierreDetalle() {
     var caja = $('[data-cierre-detalle]');
     if (!caja) return;
-    var foto = (D.cierres || {})[D.brz[e.brz].id];
+    /* Primero la foto de la familia; si no la hay, la del NOMBRE de la
+       hebilla (Óscar, 11/08/2026): las pieles comparten hebillas. */
+    var foto = (D.cierres || {})[D.brz[e.brz].id] ||
+      (D.cierresNom || {})[varActual().cier];
     caja.hidden = !(VER_CIERRE && foto);
     if (caja.hidden) return;
     $('[data-cierre-img]').src = foto;
