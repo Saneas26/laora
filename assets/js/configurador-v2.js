@@ -825,6 +825,16 @@
     var cuerpo = '';
     cuerpo += '<section><h3>Movimiento</h3><p class="cf-tec-prosa">' +
       (p.mov.specs || p.mov.cal) + '</p></section>';
+    /* La ficha larga (Óscar, 11/08/2026): cada pieza puede traer en
+       `ficha` sus secciones de prosa y tablas, y aquí se pintan todas.
+       El VK63 fue la primera; caja y brazalete vendrán detrás. */
+    (p.mov.ficha || []).forEach(function (s) {
+      cuerpo += '<section><h3>' + s.h + '</h3>' +
+        (s.p ? '<p class="cf-tec-prosa">' + s.p + '</p>' : '') +
+        (s.t ? '<dl>' + s.t.map(function (r) {
+          return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>';
+        }).join('') + '</dl>' : '') + '</section>';
+    });
     cuerpo += bloque('Caja y esfera', [
       ['Caja', p.caja.nombre],
       ['Esfera', p.esf ? nombreEsf(p.esf) : ((D.ejes || {}).esf || {}).enPack],
