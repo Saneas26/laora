@@ -1402,6 +1402,15 @@
       "hex": "#cbb694",
       "bor": "#f2f0ea",
       "esl": ""
+     },
+     {
+      "ref": "Brz-Caucho-C31",
+      "nom": "Negro, cierre oro rosa",
+      "c": 12.69,
+      "cier": "Estilo oro rosa",
+      "eti": "Negro, banda negra",
+      "hex": "#1e1f22",
+      "esl": ""
      }
     ],
     "mat": "Caucho"
