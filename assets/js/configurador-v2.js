@@ -235,20 +235,31 @@
 
   /* Al cambiar de caja puede caducar el brazalete que estaba puesto: se
      cae a la primera variante que sí valga, y si la familia entera se
-     queda sin opciones, a la primera familia que las tenga. */
+     queda sin opciones, a la primera familia que las tenga.
+
+     Y el viaje de vuelta (Óscar, 11/08/2026): si una caja te echó el
+     brazalete —la Negra PVD solo admite los negros— y vuelves a una
+     caja donde el tuyo sí vale, se te devuelve el que tenías. Elegir
+     un brazalete a mano borra ese recuerdo: entonces mandas tú. */
+  var brzAntes = null;
   function ajustaBrz() {
     var caja = D.caj[e.caja], i, k;
+    if (brzAntes && varVale(D.brz[brzAntes.brz].v[brzAntes.v], caja)) {
+      e.brz = brzAntes.brz; e.v = brzAntes.v; brzAntes = null;
+    }
+    var antes = { brz: e.brz, v: e.v }, cambio = false;
     if (!famVale(D.brz[e.brz], caja)) {
       for (i = 0; i < D.brz.length; i++) {
-        if (famVale(D.brz[i], caja)) { e.brz = i; e.v = 0; break; }
+        if (famVale(D.brz[i], caja)) { e.brz = i; e.v = 0; cambio = true; break; }
       }
     }
     var f = D.brz[e.brz];
     if (e.v >= f.v.length || !varVale(f.v[e.v], caja)) {
       for (k = 0; k < f.v.length; k++) {
-        if (varVale(f.v[k], caja)) { e.v = k; break; }
+        if (varVale(f.v[k], caja)) { e.v = k; cambio = true; break; }
       }
     }
+    if (cambio && !brzAntes) brzAntes = antes;
   }
 
   /* ---------- pintar ---------- */
@@ -916,12 +927,12 @@
       }
     }
     else if (d.esf !== undefined) e.esf = Number(d.esf);
-    else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; }
-    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = false; }
-    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = false; }
-    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = false; }
-    else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; }
-    else e.v = Number(d.var);
+    else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; brzAntes = null; }
+    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = false; brzAntes = null; }
+    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = false; brzAntes = null; }
+    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = false; brzAntes = null; }
+    else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; brzAntes = null; }
+    else { e.v = Number(d.var); brzAntes = null; }
     if (d.mov !== undefined || d.caja !== undefined || d.esf !== undefined ||
         d.brz !== undefined || d.var !== undefined || d.sub !== undefined) VER_CIERRE = false;
     pinta();
