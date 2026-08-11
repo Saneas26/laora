@@ -387,6 +387,15 @@
      ejes solo deciden cuál queda puesta. */
   function varActual() { var f = D.brz[e.brz]; return f.v[Math.min(e.v, f.v.length - 1)]; }
   function matActual() { return D.brz[e.brz].mat; }
+  /* Cada material recuerda lo último que tuvo puesto (Óscar, 11/08/2026):
+     quien pasea por piel y goma y vuelve al acero recupera SU acero, con
+     su foto, y no la primera variante de la lista. */
+  var ultimoDelMat = {};
+  function tieneFoto(v) {
+    var p = piezas();
+    var refCab = D.codigo + '-' + p.caja.ref + (p.esf ? '-' + p.esf.ref : '');
+    return !!(D.completas || {})[refCab + '-' + (v.foto || v.ref)];
+  }
   function candidatas(mat, esl, eti, cier) {
     /* La caja también corta aquí (Óscar, 11/08/2026): con la Negra PVD
        solo van los brazaletes negros de acero. `compat` decide. */
@@ -417,11 +426,19 @@
      existiendo: quien tenía «Negro» y cambia de eslabones no debe perder
      su color porque sí. */
   function eligeMat(m) {
+    var rec = ultimoDelMat[m];
+    if (rec && D.brz[rec.brz] && D.brz[rec.brz].mat === m &&
+        rec.v < D.brz[rec.brz].v.length &&
+        varVale(D.brz[rec.brz].v[rec.v], D.caj[e.caja])) {
+      e.brz = rec.brz; e.v = rec.v; return;
+    }
     var v0 = varActual();
     var c = candidatas(m, v0.esl || '', v0.eti, null);
     if (!c.length) c = candidatas(m, null, v0.eti, null);
     if (!c.length) c = candidatas(m, null, null, null);
-    pon(c[0]);
+    /* A igualdad de todo, mejor la variante que ya tiene su foto hecha. */
+    var cFoto = c.filter(function (x) { return tieneFoto(x.v); });
+    pon(cFoto[0] || c[0]);
   }
   function eligeEsl(esl) {
     var v0 = varActual();
@@ -462,6 +479,7 @@
   function pintaMat() {
     var v0 = varActual();
     var caja = D.caj[e.caja];
+    ultimoDelMat[matActual()] = { brz: e.brz, v: e.v };
     var mats = [];
     D.brz.forEach(function (f) {
       if (famVale(f, caja) && mats.indexOf(f.mat) < 0) mats.push(f.mat);
