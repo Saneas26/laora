@@ -407,6 +407,12 @@
      ejes solo deciden cuál queda puesta. */
   function varActual() { var f = D.brz[e.brz]; return f.v[Math.min(e.v, f.v.length - 1)]; }
   function matActual() { return D.brz[e.brz].mat; }
+  /* ¿La tarjeta del cierre salta sola al tocar el brazalete? En los
+     materiales de `cierreSoloAlPulsar` no: hay que pulsar el cierre. */
+  function autoCierre() {
+    var no = ((D.ejes || {}).brz || {}).cierreSoloAlPulsar || [];
+    return no.indexOf(matActual()) < 0;
+  }
   /* Cada material recuerda lo último que tuvo puesto (Óscar, 11/08/2026):
      quien pasea por piel y goma y vuelve al acero recupera SU acero, con
      su foto, y no la primera variante de la lista. */
@@ -992,9 +998,13 @@
        (Óscar, 11/08/2026): el paso del cierre casi nunca se pinta —al
        ser único se esconde— y la tarjeta no tenía por dónde salir. Solo
        aparece si la familia tiene su foto de cierre; si no, nada. */
-    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = true; sueltaBrz(); }
-    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = true; sueltaBrz(); }
-    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = true; sueltaBrz(); }
+    /* En piel y sintética la hebilla se ELIGE, y la tarjeta saltando a
+       cada color era ruido (Óscar, 11/08/2026): ahí solo aparece si se
+       pulsa el cierre. En los demás materiales el cierre es único y
+       enseñarlo informa. La lista vive en los datos, no aquí. */
+    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = autoCierre(); sueltaBrz(); }
+    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = autoCierre(); sueltaBrz(); }
+    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = autoCierre(); sueltaBrz(); }
     else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; sueltaBrz(); }
     else { e.v = Number(d.var); sueltaBrz(); }
     if (d.mov !== undefined || d.caja !== undefined || d.esf !== undefined ||

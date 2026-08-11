@@ -1476,7 +1476,11 @@
       "Brz-Piel-P14",
       "Brz-Piel-P15"
      ]
-    }
+    },
+    "cierreSoloAlPulsar": [
+     "Piel",
+     "Piel sintética"
+    ]
    }
   },
   "inicio": {
