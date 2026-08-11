@@ -224,7 +224,13 @@
      por cada caja, qué variantes de brazalete la acompañan. El modelo que
      no la traiga lo admite todo, como hasta ahora. */
   function varVale(v, caja) {
-    var c = ((D.ejes || {}).brz || {}).compat;
+    var ej = (D.ejes || {}).brz || {};
+    /* `compatNo` es la lista negra por caja (Óscar, 11/08/2026): el
+       acero negro es exclusivo de la caja Negra PVD, así que los
+       biseles normales lo vetan aquí. */
+    var no = (ej.compatNo || {})[caja.ref];
+    if (no && no.indexOf(v.ref) >= 0) return false;
+    var c = ej.compat;
     if (!c || !c[caja.ref]) return true;
     return c[caja.ref].indexOf(v.ref) >= 0;
   }
