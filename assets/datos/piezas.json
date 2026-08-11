@@ -1032,24 +1032,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Piel-P21",
-      "nom": "Azul, pespunte negro, hebilla mariposa plateada",
-      "c": 31.19,
-      "cier": "Hebilla mariposa plateada",
-      "eti": "Azul, pespunte negro",
-      "hex": "#274472",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P22",
-      "nom": "Azul, pespunte negro, hebilla clásica plateada",
-      "c": 31.99,
-      "cier": "Hebilla clásica plateada",
-      "eti": "Azul, pespunte negro",
-      "hex": "#274472",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Piel-P32",
       "nom": "Azul, pespunte azul, hebilla clásica plateada",
       "c": 31.99,
@@ -1373,7 +1355,11 @@
       "Brz-904-A19",
       "Brz-904-A16",
       "Brz-Piel-P03",
-      "Brz-Piel-P07"
+      "Brz-Piel-P07",
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06"
      ]
     }
    }
