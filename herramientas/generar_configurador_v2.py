@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 27
-V_JS = 54
+V_JS = 55
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -447,6 +447,27 @@ def pantalla(slug):
         if hay(rel):
             cierres[f_['id']] = rel
 
+    # Y una foto por NOMBRE de hebilla (Oscar, 11/08/2026): las pieles
+    # comparten hebillas entre correas, asi que la foto se busca por el
+    # nombre del cierre —«Hebilla clasica plateada» → cierres/hebilla-
+    # clasica-plateada.webp— y vale para todas las que la lleven. La de
+    # familia, si existe, manda.
+    def slug_cierre(nombre):
+        import unicodedata
+        s = unicodedata.normalize('NFD', nombre)
+        s = ''.join(c for c in s if unicodedata.category(c) != 'Mn')
+        return s.lower().replace(' ', '-')
+
+    cierres_nom = {}
+    for f_ in brz:
+        for v_ in f_['v']:
+            nom = v_.get('cier') or ''
+            if not nom or nom in cierres_nom:
+                continue
+            rel = f'{PIEZAS_IMG}/cierres/{slug_cierre(nom)}.webp'
+            if hay(rel):
+                cierres_nom[nom] = rel
+
     # LA FOTO ENTERA, UNA POR CONFIGURACION
     # ------------------------------------------------------------
     # Oscar, 10/08/2026: se acabo el montaje de dos capas. Cuando existe
@@ -476,6 +497,7 @@ def pantalla(slug):
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
                         'brazaletes': brazaletes, 'completas': completas, 'cierres': cierres,
+                        'cierresNom': cierres_nom,
                         'solape': SOLAPE},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 
