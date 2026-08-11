@@ -1231,16 +1231,6 @@
     "nombre": "Caucho fluorado, cierre desplegable",
     "v": [
      {
-      "ref": "Brz-Caucho-C10",
-      "nom": "Negro blanco 01",
-      "c": 17.39,
-      "cier": "Hebilla mariposa",
-      "eti": "Negro, banda blanca",
-      "hex": "#1e1f22",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Caucho-C11",
       "nom": "Negro negro 01",
       "c": 18.39,
@@ -1270,32 +1260,12 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Caucho-C16",
-      "nom": "Beige blanco 01",
-      "c": 18.39,
-      "cier": "Hebilla mariposa",
-      "eti": "Beige, banda blanca",
-      "hex": "#cbb694",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Caucho-C23",
       "nom": "Blanco blanco 01",
       "c": 19.59,
       "cier": "Hebilla mariposa",
       "eti": "Blanco, banda blanca",
       "hex": "#eceae4",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Caucho-C25",
-      "nom": "Marrón blanco 01",
-      "c": 19.59,
-      "cier": "Hebilla mariposa",
-      "eti": "Marrón, banda blanca",
-      "hex": "#6b4226",
       "bor": "#f2f0ea",
       "esl": ""
      },
