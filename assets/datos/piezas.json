@@ -931,7 +931,7 @@
       "esl": "Macizo"
      }
     ],
-    "mat": "Acero 904L macizo"
+    "mat": "Acero 904L"
    },
    {
     "id": "B09",
@@ -1003,7 +1003,7 @@
       "esl": "Tres eslabones"
      }
     ],
-    "mat": "Acero 904L macizo"
+    "mat": "Acero 904L"
    },
    {
     "id": "B10",
@@ -1461,7 +1461,39 @@
    "brz": "B03",
    "v": 0
   },
-  "_nota_esferas": "La esfera no se elige: la manda el bisel (Oscar, 10/08/2026). Negro lleva la negra E1 y azul la blanca E2. La esfera azul E3 quedo fuera del catalogo del Lunar ese dia; si vuelve, quitar ejes.esf.auto y restaurar la fila."
+  "_nota_esferas": "La esfera no se elige: la manda el bisel (Oscar, 10/08/2026). Negro lleva la negra E1 y azul la blanca E2. La esfera azul E3 quedo fuera del catalogo del Lunar ese dia; si vuelve, quitar ejes.esf.auto y restaurar la fila.",
+  "fichaMat": {
+   "Acero 316L": [
+    {
+     "h": "Acero 316L, el estándar de la buena relojería",
+     "p": "El 316L es el acero quirúrgico de baja emisión de carbono: el mismo que monta la inmensa mayoría de la relojería suiza de calidad, desde las marcas de entrada hasta casas de varios miles de euros. Resiste la corrosión, el sudor y el agua de mar, es el acero hipoalergénico de referencia y se pule y mantiene con facilidad. Es, sencillamente, el material con el que se mide todo lo demás."
+    },
+    {
+     "h": "Lo que hay que saber de esta gama",
+     "p": "Para dejar el precio donde está, en esta gama algunos brazaletes combinan eslabones macizos con eslabones huecos. En la práctica pesan menos en la muñeca —hay quien lo prefiere así para todo el día— y suenan un poco más vivos que un enterizo. Quien busque el peso y el silencio de un brazalete macizo tiene un paso más arriba el 316L macizo, y en lo más alto el 904L."
+    }
+   ],
+   "Acero 316L macizo": [
+    {
+     "h": "Acero 316L macizo, eslabón a eslabón",
+     "p": "El mismo acero quirúrgico 316L, pero con cada eslabón mecanizado en una pieza maciza: más peso, más solidez y ese silencio en la muñeca que distingue a un brazalete enterizo de uno hueco. La nobleza del macizo sin el sobrecoste del 904L."
+    },
+    {
+     "h": "Y frente al 904L",
+     "p": "El 904L añade a la receta más cromo, níquel, cobre y molibdeno: gana un brillo más profundo y aún más resistencia a la corrosión. La diferencia existe y se paga, pero es sutil: el 316L macizo da prácticamente la misma sensación de solidez, y sigue siendo la referencia hipoalergénica para pieles sensibles."
+    }
+   ],
+   "Acero 904L": [
+    {
+     "h": "Acero 904L, el acero de los grandes",
+     "p": "El 904L es una aleación superior al 316L: lleva más cromo, níquel, cobre y molibdeno. Dos consecuencias: una resistencia a la corrosión excepcional —ácidos, sudor, agua de mar— y, sobre todo, un pulido más profundo y brillante, con ese tono plateado húmedo que caracteriza a los brazaletes de las casas más exclusivas de Suiza, que lo reservan para relojes de decenas de miles de euros. Casi nadie lo monta porque es difícil y caro de mecanizar: por eso distingue a quien lo lleva."
+    },
+    {
+     "h": "Para ser justos",
+     "p": "Frente al 316L pesa un poco más y, al llevar más níquel, en pieles extremadamente sensibles el 316L sigue siendo la referencia hipoalergénica. Y como todo acero se puede rayar con el uso; la ventaja es que su pulido se recupera de maravilla. Por lo demás, es el mejor acero que se puede poner en una muñeca."
+    }
+   ]
+  }
  },
  "bitacora": {
   "nombre": "Bitácora",
