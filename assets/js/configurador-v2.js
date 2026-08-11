@@ -261,6 +261,16 @@
     }
     if (cambio && !brzAntes) brzAntes = antes;
   }
+  /* Elegir brazalete a mano solo borra el recuerdo si el recordado
+     estaba disponible: entonces fue una decisión de verdad. Si la caja
+     lo tenía escondido —en la Negra PVD todo es negro a la fuerza—,
+     el paseo por eslabones no cuenta como cambio de opinión (Óscar,
+     11/08/2026: «bisel negro conlleva a que el color es plata»). */
+  function sueltaBrz() {
+    if (brzAntes && varVale(D.brz[brzAntes.brz].v[brzAntes.v], D.caj[e.caja])) {
+      brzAntes = null;
+    }
+  }
 
   /* ---------- pintar ---------- */
 
@@ -440,18 +450,29 @@
     var cFoto = c.filter(function (x) { return tieneFoto(x.v); });
     pon(cFoto[0] || c[0]);
   }
+  /* Entre las candidatas que quedan, manda este orden: cierre heredado
+     CON foto hecha, cualquiera con foto, cierre heredado, la primera.
+     La foto real pesa más que un cierre que el cliente no eligió. */
+  function laMejor(c, cier) {
+    var f;
+    f = c.filter(function (x) { return x.v.cier === cier && tieneFoto(x.v); });
+    if (f.length) return f[0];
+    f = c.filter(function (x) { return tieneFoto(x.v); });
+    if (f.length) return f[0];
+    f = c.filter(function (x) { return x.v.cier === cier; });
+    return f[0] || c[0];
+  }
   function eligeEsl(esl) {
     var v0 = varActual();
-    var c = candidatas(matActual(), esl, v0.eti, v0.cier);
-    if (!c.length) c = candidatas(matActual(), esl, v0.eti, null);
+    var c = candidatas(matActual(), esl, v0.eti, null);
     if (!c.length) c = candidatas(matActual(), esl, null, null);
-    pon(c[0]);
+    pon(laMejor(c, v0.cier));
   }
   function eligeEti(eti) {
     var v0 = varActual();
-    var c = candidatas(matActual(), v0.esl || '', eti, v0.cier);
-    if (!c.length) c = candidatas(matActual(), v0.esl || '', eti, null);
-    pon(c[0]);
+    var c = candidatas(matActual(), v0.esl || '', eti, null);
+    if (!c.length) c = candidatas(matActual(), null, eti, null);
+    pon(laMejor(c, v0.cier));
   }
   function eligeCier(cier) {
     var v0 = varActual();
@@ -945,12 +966,12 @@
       }
     }
     else if (d.esf !== undefined) e.esf = Number(d.esf);
-    else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; brzAntes = null; }
-    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = false; brzAntes = null; }
-    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = false; brzAntes = null; }
-    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = false; brzAntes = null; }
-    else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; brzAntes = null; }
-    else { e.v = Number(d.var); brzAntes = null; }
+    else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; sueltaBrz(); }
+    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = false; sueltaBrz(); }
+    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = false; sueltaBrz(); }
+    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = false; sueltaBrz(); }
+    else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; sueltaBrz(); }
+    else { e.v = Number(d.var); sueltaBrz(); }
     if (d.mov !== undefined || d.caja !== undefined || d.esf !== undefined ||
         d.brz !== undefined || d.var !== undefined || d.sub !== undefined) VER_CIERRE = false;
     pinta();
