@@ -530,10 +530,14 @@
       $('[data-cuenta-esl]').textContent = esls.length + ' opciones';
     }
 
+    /* El color y el cierre se enseñan aunque solo quede uno (Óscar,
+       11/08/2026): al irse el acero negro a la caja PVD, la página
+       despertaba sin color ni cierre a la vista y parecía que faltaban.
+       Con uno solo se pintan como dato, igual que el movimiento. */
     var pool = candidatas(matActual(), v0.esl || '', null, null);
     var etis = unicos(pool, 'eti');
     var gv = $('[data-grupo-var]');
-    gv.hidden = etis.length < 2;
+    gv.hidden = etis.filter(Boolean).length < 1;
     if (!gv.hidden) {
       $('[data-variantes]').innerHTML = etis.map(function (eti) {
         var x = pool.filter(function (q) { return q.v.eti === eti; })[0].v;
@@ -546,15 +550,17 @@
           ' aria-pressed="' + (eti === v0.eti) + '" title="' + eti + '"' +
           ' aria-label="' + eti + '" style="' + estilo + '"></button>';
       }).join('') + '<span class="cf-color-nombre">' + v0.eti + '</span>';
-      $('[data-cuenta-var]').textContent = etis.length + ' colores';
+      $('[data-cuenta-var]').textContent =
+        etis.length > 1 ? etis.length + ' colores' : 'uno solo';
     }
 
     var ciers = unicos(candidatas(matActual(), v0.esl || '', v0.eti, null), 'cier');
     var gc = $('[data-grupo-cier]');
-    gc.hidden = ciers.length < 2;
+    gc.hidden = ciers.filter(Boolean).length < 1;
     if (!gc.hidden) {
       fichas($('[data-ciers]'), ciers, 'cier', v0.cier);
-      $('[data-cuenta-cier]').textContent = ciers.length + ' opciones';
+      $('[data-cuenta-cier]').textContent =
+        ciers.length > 1 ? ciers.length + ' opciones' : 'uno solo';
     }
   }
 
