@@ -828,13 +828,16 @@
     /* La ficha larga (Óscar, 11/08/2026): cada pieza puede traer en
        `ficha` sus secciones de prosa y tablas, y aquí se pintan todas.
        El VK63 fue la primera; caja y brazalete vendrán detrás. */
-    (p.mov.ficha || []).forEach(function (s) {
-      cuerpo += '<section><h3>' + s.h + '</h3>' +
-        (s.p ? '<p class="cf-tec-prosa">' + s.p + '</p>' : '') +
-        (s.t ? '<dl>' + s.t.map(function (r) {
-          return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>';
-        }).join('') + '</dl>' : '') + '</section>';
-    });
+    function secciones(lista) {
+      (lista || []).forEach(function (s) {
+        cuerpo += '<section><h3>' + s.h + '</h3>' +
+          (s.p ? '<p class="cf-tec-prosa">' + s.p + '</p>' : '') +
+          (s.t ? '<dl>' + s.t.map(function (r) {
+            return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>';
+          }).join('') + '</dl>' : '') + '</section>';
+      });
+    }
+    secciones(p.mov.ficha);
     cuerpo += bloque('Caja y esfera', [
       ['Caja', p.caja.nombre],
       ['Esfera', p.esf ? nombreEsf(p.esf) : ((D.ejes || {}).esf || {}).enPack],
@@ -845,6 +848,10 @@
       ['Versión', p.v.nom],
       ['Incluido', D.incluido || null]
     ]);
+    /* El acero se explica según el que esté puesto (Óscar, 11/08/2026):
+       quien elige 904L lee sus ventajas sobre el 316 y sus pegas
+       suavizadas, y quien elige 316 lee lo contrario. */
+    secciones((D.fichaMat || {})[p.fam.mat]);
     $('[data-tec-cuerpo]').innerHTML = cuerpo;
     $('[data-tec-ref]').textContent = referencia();
     $('[data-tec-pie]').textContent =
