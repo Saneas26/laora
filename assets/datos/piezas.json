@@ -790,6 +790,11 @@
     "ref": "C3",
     "nombre": "Caja Negra PVD",
     "coste": 32.57
+   },
+   {
+    "ref": "C4",
+    "nombre": "Caja Negra PVD, bisel azul",
+    "coste": 32.57
    }
   ],
   "esf": [
@@ -803,7 +808,7 @@
     "ref": "E2",
     "nombre": "Blanca",
     "coste": 14.19,
-    "cajas": "C2"
+    "cajas": "C2, C4"
    }
   ],
   "brz": [
@@ -1426,7 +1431,8 @@
     "esfPar": {
      "C1": "E1",
      "C2": "E2",
-     "C3": "E1"
+     "C3": "E1",
+     "C4": "E2"
     }
    },
    "esf": {
@@ -1449,7 +1455,28 @@
       "Brz-Sintetica-P53",
       "Brz-Goma-G01",
       "Brz-Caucho-C11",
-      "Brz-Caucho-C18"
+      "Brz-Caucho-C18",
+      "Brz-Goma-G04",
+      "Brz-Goma-G06"
+     ],
+     "C4": [
+      "Brz-316-A04",
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16",
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P03",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P07",
+      "Brz-Sintetica-P52",
+      "Brz-Sintetica-P53",
+      "Brz-Goma-G01",
+      "Brz-Caucho-C11",
+      "Brz-Caucho-C18",
+      "Brz-Goma-G04",
+      "Brz-Goma-G06"
      ]
     },
     "compatNo": {
