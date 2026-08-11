@@ -818,7 +818,7 @@
       "cier": "Cierre solapa",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      },
      {
       "ref": "Brz-316-A03",
@@ -828,7 +828,7 @@
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      },
      {
       "ref": "Brz-316-A04",
@@ -837,7 +837,7 @@
       "cier": "Cierre solapa",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      }
     ],
     "mat": "Acero 316L"
@@ -853,7 +853,7 @@
       "cier": "Cierre desplegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      },
      {
       "ref": "Brz-316-A06",
@@ -862,7 +862,7 @@
       "cier": "Cierre desplegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      },
      {
       "ref": "Brz-316-A07",
@@ -871,7 +871,7 @@
       "cier": "Cierre desplegable",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      }
     ],
     "mat": "Acero 316L"
@@ -887,7 +887,7 @@
       "cier": "Eslabón ancho",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      }
     ],
     "mat": "Acero 316L macizo"
@@ -903,7 +903,7 @@
       "cier": "Eslabón fino",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      }
     ],
     "mat": "Acero 316L macizo"
@@ -944,7 +944,7 @@
       "cier": "Clásico",
       "eti": "Plata",
       "hex": "#c9cdd2",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      },
      {
       "ref": "Brz-904-A15",
@@ -954,7 +954,7 @@
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      },
      {
       "ref": "Brz-904-A16",
@@ -963,7 +963,7 @@
       "cier": "Clásico",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": "Cinco eslabones"
+      "esl": "5 eslabones"
      },
      {
       "ref": "Brz-904-A17",
@@ -972,7 +972,7 @@
       "cier": "Clásico",
       "eti": "Plata mate",
       "hex": "#aeb2b7",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      },
      {
       "ref": "Brz-904-A18",
@@ -981,7 +981,7 @@
       "cier": "Clásico",
       "eti": "Plata pulida",
       "hex": "#e4e7ea",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      },
      {
       "ref": "Brz-904-A19",
@@ -990,7 +990,7 @@
       "cier": "Clásico",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      },
      {
       "ref": "Brz-904-A20",
@@ -1000,7 +1000,7 @@
       "eti": "Oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#c98d6b",
-      "esl": "Tres eslabones"
+      "esl": "3 eslabones"
      }
     ],
     "mat": "Acero 904L"

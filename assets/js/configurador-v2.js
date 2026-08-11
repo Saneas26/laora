@@ -459,6 +459,13 @@
     $('[data-cuenta-mat]').textContent = mats.length > 1 ? mats.length + ' materiales' : 'uno solo';
 
     var esls = unicos(candidatas(matActual(), null, null, null), 'esl');
+    /* De menos a más eslabones (Óscar, 11/08/2026): el 3 antes que el 5.
+       Solo se reordenan entre sí los términos que empiezan por número;
+       los de texto («Macizo») se quedan donde estaban. */
+    var eslNums = esls.filter(function (t) { return /^\d/.test(t); })
+      .sort(function (a, b) { return parseInt(a, 10) - parseInt(b, 10); });
+    var eslK = 0;
+    esls = esls.map(function (t) { return /^\d/.test(t) ? eslNums[eslK++] : t; });
     var ge = $('[data-grupo-esl]');
     ge.hidden = esls.length < 2;
     if (!ge.hidden) {
