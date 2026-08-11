@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 27
-V_JS = 51
+V_JS = 52
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -322,6 +322,7 @@ def validas(d):
     ej = d.get('ejes', {})
     por_mov = (ej.get('caja') or {}).get('porMov') or {}
     compat = (ej.get('brz') or {}).get('compat') or {}
+    compat_no = (ej.get('brz') or {}).get('compatNo') or {}
     # El brazalete del Diver es un EXTRA sobre lo que ya trae la caja.
     extra = bool(d['incluido']) and d['extra']
     for m in d['mov']:
@@ -330,8 +331,10 @@ def validas(d):
         for c in cajas:
             esfs = [x for x in d['esf'] if vale_esf(x, c)] or [None]
             ok = compat.get(c['ref'])
+            no = compat_no.get(c['ref']) or []
             brzs = [v for f in d['brz'] for v in f['v']
-                    if ok is None or v['ref'] in ok] or [{'c': 0}]
+                    if (ok is None or v['ref'] in ok) and v['ref'] not in no] \
+                or [{'c': 0}]
             for x in esfs:
                 for v in brzs:
                     yield m, (m['coste'] + c['coste'] + (x['coste'] if x else 0)
