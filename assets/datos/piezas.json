@@ -673,7 +673,106 @@
     "cal": "Seiko/TMI VK63",
     "coste": 27.59,
     "rot": "Cuarzo Japones",
-    "specs": "Meca-cuarzo: cuarzo de precisión con módulo de cronógrafo mecánico. El segundero del cronógrafo arranca y regresa de forma instantánea con tacto mecánico, calendario a las 3 y segundero pequeño continuo."
+    "specs": "Meca-cuarzo: la hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos. El segundero del cronógrafo arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador.",
+    "ficha": [
+     {
+      "h": "El original, sin cuento",
+      "p": "Montamos el calibre VK63A original de Time Module Inc. (TMI), la casa de movimientos del grupo Seiko, heredera directa de la relojería Hattori y ensamblado en Japón. No es una copia ni un módulo genérico «tipo VK»: es el mismo calibre, comprado como tal, que montan relojes muy respetados del sector. Lo decimos así de claro porque en este rango de precio es donde más se recorta por dentro, donde no se ve."
+     },
+     {
+      "h": "Dos relojes en uno",
+      "p": "El mecacuarzo es un híbrido honesto: la hora la gobierna un oscilador de cuarzo a 32.768 Hz, con una desviación máxima de ±20 segundos AL MES (un mecánico decente se desvía eso mismo cada día o dos). Y el cronógrafo es un módulo mecánico independiente, con levas, embrague, muelles y martillos de puesta a cero, igual que en los cronógrafos de miles de euros."
+     },
+     {
+      "h": "Lo que notas al usarlo",
+      "p": "Al pulsar el botón de arranque, la aguja central salta al instante, sin el retardo electrónico de los cuarzos corrientes, y avanza barriendo la esfera a cinco pasos por segundo (1/5 de segundo de resolución). Al parar, para en seco. Y al poner a cero, el martillo devuelve la aguja de un golpe limpio e instantáneo, con ese chasquido que solo dan los cronógrafos mecánicos. Los tres contadores funcionan de verdad: nada de subesferas de adorno."
+     },
+     {
+      "h": "Especificaciones del calibre",
+      "t": [
+       [
+        "Calibre",
+        "Seiko/TMI VK63A"
+       ],
+       [
+        "Fabricante",
+        "Time Module Inc., grupo Seiko"
+       ],
+       [
+        "Origen",
+        "Japón (ensamblado)"
+       ],
+       [
+        "Tipo",
+        "Mecacuarzo: cuarzo + módulo cronógrafo mecánico"
+       ],
+       [
+        "Frecuencia",
+        "32.768 Hz"
+       ],
+       [
+        "Precisión",
+        "±20 segundos al mes"
+       ],
+       [
+        "Cronógrafo",
+        "60 minutos, resolución 1/5 de segundo"
+       ],
+       [
+        "Contador 60 min",
+        "a las 9"
+       ],
+       [
+        "Indicador 24 horas",
+        "a las 3"
+       ],
+       [
+        "Segundero pequeño",
+        "a las 6, continuo"
+       ],
+       [
+        "Calendario",
+        "fecha con ajuste rápido por corona"
+       ],
+       [
+        "Parada de segundero",
+        "sí (hacking al poner en hora)"
+       ],
+       [
+        "Agujas",
+        "6"
+       ],
+       [
+        "Diámetro",
+        "30,8 × 29,1 mm (13½ líneas)"
+       ],
+       [
+        "Altura",
+        "5,10 mm"
+       ],
+       [
+        "Pila",
+        "394 (SR936SW)"
+       ],
+       [
+        "Autonomía",
+        "unos 3 años, usando el cronógrafo a diario"
+       ]
+      ]
+     },
+     {
+      "h": "Mantenimiento: casi ninguno",
+      "p": "Ni cuerda, ni rotor, ni engrases, ni regulación. El único mantenimiento real es cambiar la pila cada tres años, aprovechando para revisar las juntas. Y si tras muchos años el módulo se agotara, se sustituye entero por menos de lo que cuesta una revisión corriente de un cronógrafo mecánico: hay repuesto original de TMI en todo el mundo."
+     },
+     {
+      "h": "En buena compañía",
+      "p": "Este mismo calibre late dentro de relojes tan respetados como el Dan Henry 1963, varios Undone, los AVI-8 de aviación o los Vostok-Europe. No lo elegimos por barato: lo elegimos porque es el estándar del mecacuarzo, y lo demás son imitaciones."
+     },
+     {
+      "h": "Ojo con los cronos que no son TMI",
+      "p": "En este precio abundan los cronógrafos con módulos genéricos de bajo coste, y conviene saber qué se compra. Lo típico: la aguja del cronógrafo avanza a saltos de un segundo, sin barrido; la puesta a cero es perezosa, la aguja vuelve girando despacio o se queda torcida, y con el uso los contadores pierden el cero y hay que recalibrarlos; hay subesferas pintadas que no funcionan; tijas y pulsadores que se desacoplan; y cuando fallan no hay repuestos ni servicio técnico: el reloj entero, al cajón. Por eso el módulo de este reloj es el original del grupo Seiko, con nombre y apellidos."
+     }
+    ]
    }
   ],
   "caj": [
