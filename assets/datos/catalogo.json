@@ -89,7 +89,11 @@
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
             "autonomia": "Pila SR927SW, unos 3 años",
             "foto": "/assets/img/relojes-2026/lunar-acero.webp",
-            "estanqueidad": "100 m (10 ATM)"
+            "estanqueidad": "100 m (10 ATM)",
+            "inscripcionesBisel": "TACHYMÈTRE en la parte alta y escala taquimétrica descendente de 500 a 60, impresa en blanco sobre el inserto negro",
+            "subesferas": "Tres, negras a juego con la esfera y con aro fino: segundero pequeño a las 9, contador de 30 minutos a las 3 y contador de 12 horas a las 6, con numeración blanca",
+            "indices": "Barras aplicadas en blanco, con luminiscencia Super-LumiNova y detalles en naranja",
+            "agujas": "De bastón, blancas con luminiscencia; segundero del cronógrafo central, fino y blanco; aguja del segundero pequeño en naranja"
           },
           {
             "id": "cenit",
@@ -119,7 +123,11 @@
             "movimientoTipo": "Cronógrafo mecánico de cuerda manual",
             "frecuencia": "21.600 alternancias/hora (3 Hz)",
             "autonomia": "Unas 45 horas de reserva de marcha",
-            "foto": "/assets/img/relojes-2026/lunar-acero.webp"
+            "foto": "/assets/img/relojes-2026/lunar-acero.webp",
+            "inscripcionesBisel": "TACHYMÈTRE en la parte alta y escala taquimétrica descendente de 500 a 60, impresa en blanco sobre el inserto negro",
+            "subesferas": "Tres, negras a juego con la esfera y con aro fino: segundero pequeño a las 9, contador de 30 minutos a las 3 y contador de 12 horas a las 6, con numeración blanca",
+            "indices": "Barras aplicadas en blanco, con luminiscencia Super-LumiNova y detalles en naranja",
+            "agujas": "De bastón, blancas con luminiscencia; segundero del cronógrafo central, fino y blanco; aguja del segundero pequeño en naranja"
           },
           {
             "id": "eclipse",
@@ -149,7 +157,11 @@
             "frecuencia": "Cuarzo de 32.768 Hz; cronógrafo a 1/1 s con vuelta a cero mecánica",
             "autonomia": "Pila SR927SW, unos 3 años",
             "foto": "/assets/img/relojes-2026/lunar-front.webp",
-            "estanqueidad": "100 m (10 ATM)"
+            "estanqueidad": "100 m (10 ATM)",
+            "inscripcionesBisel": "TACHYMÈTRE en la parte alta y escala taquimétrica descendente de 500 a 60, impresa en blanco sobre el inserto negro",
+            "subesferas": "Tres, negras a juego con la esfera y con aro fino: segundero pequeño a las 9, contador de 30 minutos a las 3 y contador de 12 horas a las 6, con numeración blanca",
+            "indices": "Barras aplicadas en blanco, con luminiscencia Super-LumiNova y detalles en naranja",
+            "agujas": "De bastón, blancas con luminiscencia; segundero del cronógrafo central, fino y blanco; aguja del segundero pequeño en naranja"
           }
         ],
         "correas": [
