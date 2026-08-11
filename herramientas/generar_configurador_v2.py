@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 27
-V_JS = 52
+V_JS = 53
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -509,13 +509,18 @@ def pantalla(slug):
       <div class="cf-cabeza" data-cabeza>
         <img data-foto alt="{d['nombre']} de laOra" hidden>
         <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
-      <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
-        <img data-cierre-img alt="Detalle del cierre">
-        <figcaption data-cierre-pie></figcaption>
-      </figure>
       </div>
       <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
+
+    <!-- La tarjeta del cierre cuelga del VISOR, no de la cabeza ni del
+         montaje: la cabeza mide cero en modo «foto pendiente» y el
+         montaje es un pasillo estrecho; el visor siempre tiene cuerpo
+         y la esquina es suya. -->
+    <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
+      <img data-cierre-img alt="Detalle del cierre">
+      <figcaption data-cierre-pie></figcaption>
+    </figure>
 
     <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
 

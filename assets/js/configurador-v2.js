@@ -500,7 +500,8 @@
     caja.hidden = !(VER_CIERRE && foto);
     if (caja.hidden) return;
     $('[data-cierre-img]').src = foto;
-    $('[data-cierre-pie]').textContent = 'El cierre · ' + (varActual().cier || '');
+    var nombreCier = varActual().cier;
+    $('[data-cierre-pie]').textContent = nombreCier ? 'El cierre · ' + nombreCier : 'El cierre';
   }
 
   function pintaMat() {
@@ -973,9 +974,13 @@
     }
     else if (d.esf !== undefined) e.esf = Number(d.esf);
     else if (d.brz !== undefined) { e.brz = Number(d.brz); e.v = 0; sueltaBrz(); }
-    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = false; sueltaBrz(); }
-    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = false; sueltaBrz(); }
-    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = false; sueltaBrz(); }
+    /* La tarjeta del cierre salta al tocar CUALQUIER paso del brazalete
+       (Óscar, 11/08/2026): el paso del cierre casi nunca se pinta —al
+       ser único se esconde— y la tarjeta no tenía por dónde salir. Solo
+       aparece si la familia tiene su foto de cierre; si no, nada. */
+    else if (d.mat !== undefined) { eligeMat(d.mat); VER_CIERRE = true; sueltaBrz(); }
+    else if (d.esl !== undefined) { eligeEsl(d.esl); VER_CIERRE = true; sueltaBrz(); }
+    else if (d.eti !== undefined) { eligeEti(d.eti); VER_CIERRE = true; sueltaBrz(); }
     else if (d.cier !== undefined) { eligeCier(d.cier); VER_CIERRE = true; sueltaBrz(); }
     else { e.v = Number(d.var); sueltaBrz(); }
     if (d.mov !== undefined || d.caja !== undefined || d.esf !== undefined ||
