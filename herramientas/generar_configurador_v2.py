@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 29
-V_JS = 58
+V_JS = 59
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -460,11 +460,18 @@ def pantalla(slug):
     # Una foto por familia de brazalete, en cierres/FAMILIA.webp. Al
     # elegir el cierre, la web la ensena como tarjeta sobre el visor
     # (Oscar, 10/08/2026). Solo viaja la que existe en disco.
+    # La tarjeta no siempre enseña un cierre: en la malla gruesa del Cero
+    # Cero enseña el GROSOR, porque las dos mallas llevan la misma hebilla
+    # y lo que cambia son los 2,8 mm (Óscar, 12/08/2026). Por eso la
+    # familia puede traer su propio pie y decir lo que de verdad se ve.
     cierres = {}
+    detalle_pies = {}
     for f_ in brz:
         rel = f'{PIEZAS_IMG}/cierres/{f_["id"]}.webp'
         if hay(rel):
             cierres[f_['id']] = con_version(rel)
+            if f_.get('detallePie'):
+                detalle_pies[f_['id']] = f_['detallePie']
 
     # Y una foto por NOMBRE de hebilla (Oscar, 11/08/2026): las pieles
     # comparten hebillas entre correas, asi que la foto se busca por el
@@ -518,7 +525,7 @@ def pantalla(slug):
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
                         'brazaletes': brazaletes, 'completas': completas, 'cierres': cierres,
-                        'cierresNom': cierres_nom,
+                        'cierresNom': cierres_nom, 'detallePies': detalle_pies,
                         'solape': SOLAPE},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 

@@ -1656,6 +1656,23 @@
       "hex": "#c9cdd2"
      }
     ]
+   },
+   {
+    "id": "B20",
+    "nombre": "Malla milanesa de 2,8 mm",
+    "mat": "Malla milanesa 2,8 mm",
+    "detallePie": "La malla · 2,8 mm de grosor, acero 316L macizo",
+    "v": [
+     {
+      "ref": "Brz-316-A09",
+      "nom": "Plata",
+      "c": 40.36,
+      "cier": "Hebilla plegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "foto": "Brz-316-A08"
+     }
+    ]
    }
   ],
   "ejes": {
