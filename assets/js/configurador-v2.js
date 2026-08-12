@@ -514,8 +514,13 @@
     caja.hidden = !(VER_CIERRE && foto);
     if (caja.hidden) return;
     $('[data-cierre-img]').src = foto;
+    /* El pie dice lo que de verdad se ve. Las dos mallas del Cero Cero
+       llevan la MISMA hebilla y lo que las separa es el grosor, así que
+       esa familia trae su propio pie y la tarjeta no miente. */
+    var pieFam = (D.detallePies || {})[D.brz[e.brz].id];
     var nombreCier = varActual().cier;
-    $('[data-cierre-pie]').textContent = nombreCier ? 'El cierre · ' + nombreCier : 'El cierre';
+    $('[data-cierre-pie]').textContent = pieFam ||
+      (nombreCier ? 'El cierre · ' + nombreCier : 'El cierre');
   }
 
   function pintaMat() {
