@@ -504,19 +504,26 @@ def pantalla(slug):
     # Conviven las dos cosas a proposito: mientras no esten las 240, la
     # configuracion que tenga su foto entera la usa y el resto sigue con
     # lo que haya. Asi cada tanda que llega se ve el mismo dia.
+    # Tambien la CAJA puede tomar prestada la foto de otra: en el Precisa
+    # el cuarzo y el automatico se ven exactamente igual por delante —solo
+    # cambia el fondo, que no sale en la foto— y seria absurdo guardar dos
+    # veces el mismo archivo (Oscar, 12/08/2026). La suya manda; la
+    # prestada solo entra si la suya no esta.
     completas = {}
     for c in caj:
         for e_ in (esf or [None]):
-            base = f'{d["codigo"]}-{c["ref"]}' + (f'-{e_["ref"]}' if e_ else '')
+            suf = f'-{e_["ref"]}' if e_ else ''
             for f_ in brz:
                 for v in f_['v']:
                     # La propia Y la prestada: si la de verdad ya esta en
                     # disco, el visor la prefiere y el prestamo descansa.
                     for nom in {v['ref'], v.get('foto') or v['ref']}:
-                        clave = f'{base}-{nom}'
-                        rel = f'{PIEZAS_IMG}/completas/{clave}.webp'
-                        if hay(rel):
-                            completas[clave] = con_version(rel)
+                        clave = f'{d["codigo"]}-{c["ref"]}{suf}-{nom}'
+                        for refc in (c['ref'], c.get('foto') or c['ref']):
+                            rel = f'{PIEZAS_IMG}/completas/{d["codigo"]}-{refc}{suf}-{nom}.webp'
+                            if hay(rel):
+                                completas[clave] = con_version(rel)
+                                break
 
     # Las claves que empiezan por _ son notas de casa —por qué una pieza
     # está fuera, qué hay que revisar—: se quedan en el JSON y NO viajan
