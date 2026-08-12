@@ -1584,31 +1584,36 @@
   "caj": [
    {
     "ref": "C1",
-    "nombre": "Bisel cerámico",
-    "coste": 38.97
+    "nombre": "Bisel negro y blanco",
+    "coste": 60.77
    },
    {
     "ref": "C2",
-    "nombre": "Bisel mate",
-    "coste": 38.97
+    "nombre": "Bisel azul y blanco",
+    "coste": 60.77
+   },
+   {
+    "ref": "C3",
+    "nombre": "Bisel negro y oro rosa",
+    "coste": 60.77
    }
   ],
   "esf": [
    {
     "ref": "E1",
-    "nombre": "Negra y oro rosa",
+    "nombre": "Azul con oro rosa",
     "coste": 12.79,
     "cajas": "Todas"
    },
    {
     "ref": "E2",
-    "nombre": "Azul y oro rosa",
+    "nombre": "Negra y dorado",
     "coste": 12.79,
     "cajas": "Todas"
    },
    {
     "ref": "E3",
-    "nombre": "Negra y dorado",
+    "nombre": "Negra con oro rosa",
     "coste": 12.79,
     "cajas": "Todas"
    }
