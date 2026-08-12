@@ -1585,17 +1585,22 @@
    {
     "ref": "C1",
     "nombre": "Bisel negro y blanco",
-    "coste": 60.77
+    "coste": 38.97
    },
    {
     "ref": "C2",
     "nombre": "Bisel azul y blanco",
-    "coste": 60.77
+    "coste": 38.97
    },
    {
     "ref": "C3",
     "nombre": "Bisel negro y oro rosa",
-    "coste": 60.77
+    "coste": 38.97
+   },
+   {
+    "ref": "C4",
+    "nombre": "Bisel negro mate",
+    "coste": 38.97
    }
   ],
   "esf": [
@@ -1621,13 +1626,13 @@
   "brz": [
    {
     "id": "B09",
-    "nombre": "Acero 904L, cinco eslabones",
+    "nombre": "Acero 904L, Jubilee cinco eslabones",
     "mat": "Acero 904L",
     "v": [
      {
-      "ref": "Brz-904-A14",
+      "ref": "Brz-904-A12",
       "nom": "Plata",
-      "c": 23.79,
+      "c": 20.99,
       "cier": "Cierre desplegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
