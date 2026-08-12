@@ -737,7 +737,13 @@
   var IVA = 0.21, IRPF = 0.20, SS = 0.05;
   var MIN_EUROS = 50, MIN_PORCENTAJE = 0.15;
 
-  var VER_CUENTAS = (function () {
+  /* APAGADA DEL TODO, 12/08/2026, a petición de Óscar: «quítamela de
+     momento, solo hazla invisible». No se ha borrado nada —la cuenta se
+     sigue calculando igual—: basta con volver a poner este interruptor
+     en true para que reaparezca con ?cuentas=1 como hasta ahora. */
+  var CUENTAS_ENCENDIDAS = false;
+
+  var VER_CUENTAS = CUENTAS_ENCENDIDAS && (function () {
     var m = /[?&]cuentas=([01])/.exec(location.search);
     try {
       if (m) {
