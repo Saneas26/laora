@@ -1639,6 +1639,21 @@
       "esl": "5 eslabones"
      }
     ]
+   },
+   {
+    "id": "B19",
+    "nombre": "Malla milanesa, hebilla plegable",
+    "mat": "Malla milanesa",
+    "v": [
+     {
+      "ref": "Brz-316-A08",
+      "nom": "Plata",
+      "c": 33.39,
+      "cier": "Hebilla plegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
+     }
+    ]
    }
   ],
   "ejes": {
