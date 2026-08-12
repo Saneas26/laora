@@ -60,7 +60,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 28
+V_CSS = 29
 V_JS = 58
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
@@ -569,6 +569,11 @@ def pantalla(slug):
 
     <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
       del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
+
+    <!-- Óscar, 12/08/2026: que nadie compre creyendo que la imagen es una
+         fotografía del reloj terminado. Va en todas, siempre, chiquita y
+         en la esquina, sin tapar el reloj. -->
+    <p class="cf-aviso-imagen">La imagen puede contener errores de diseño*</p>
   </section>
 
   <section class="cf-panel" aria-label="Opciones del {d['nombre']}">

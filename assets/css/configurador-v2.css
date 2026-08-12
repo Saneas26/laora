@@ -280,9 +280,21 @@ body{
 .cf-rotulos{position:absolute;top:20px;left:24px;right:24px}
 .cf-viendo{font-size:14px;font-weight:500}
 .cf-viendo span{color:var(--muted);font-weight:400}
+/* Sube a 26 px para dejar la primera línea de la esquina al aviso de
+   imagen, que va siempre puesto. */
 .cf-aviso-maqueta{
-  position:absolute;right:20px;bottom:16px;max-width:250px;
+  position:absolute;right:20px;bottom:26px;max-width:250px;
   font-size:11px;line-height:1.35;color:var(--muted);text-align:right;
+}
+
+/* El aviso de que la imagen no es una fotografía del reloj terminado.
+   Chiquito y en la esquina, pero NO desvaído: 10 px sobre el gris del
+   visor pide un color con cuerpo para que se lea de verdad. Cuando
+   asoma el aviso de maqueta, éste le deja el sitio y baja. */
+.cf-aviso-imagen{
+  position:absolute;right:20px;bottom:6px;
+  font-size:10px;line-height:1.3;color:#6b6664;text-align:right;
+  letter-spacing:.01em;pointer-events:none;
 }
 
 /* ============================================================
