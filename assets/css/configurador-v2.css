@@ -329,6 +329,10 @@ body{
 .cf-fijo b{font-size:15px;font-weight:500}
 .cf-fijo span{font-size:13px;color:var(--muted)}
 
+/* El porqué de la caja, debajo: vale igual cuando la caja es una sola y
+   cuando hay dos a elegir (Óscar, 12/08/2026). */
+.cf-caja-apunte{margin:6px 2px 0;font-size:13px;color:var(--muted)}
+
 /* ---------- CAJA: cuadros medianos ---------- */
 .cf-cajas{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:10px}
 .cf-caja{

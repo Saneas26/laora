@@ -31,6 +31,12 @@
     "nombre": "Acero 316L y zafiro, fondo de cristal",
     "coste": 51.46,
     "foto": "C1"
+   },
+   {
+    "ref": "C3",
+    "nombre": "Acero 316L y zafiro antirreflejante",
+    "coste": 95.26,
+    "foto": "C1"
    }
   ],
   "esf": [
@@ -95,18 +101,23 @@
    "caja": {
     "porMov": {
      "M1": {
-      "ref": "C1",
+      "refs": [
+       "C1"
+      ],
       "apunte": "fondo sólido: en un cuarzo no hay nada que enseñar"
      },
      "M2": {
-      "ref": "C2",
-      "apunte": "fondo de cristal para ver el automático"
+      "refs": [
+       "C2",
+       "C3"
+      ],
+      "apunte": "fondo de cristal para ver el movimiento"
      }
     }
    },
    "esf": {},
    "brz": {
-    "apunte": "viene con la caja, no se pide aparte"
+    "apunte": ""
    }
   }
  },
