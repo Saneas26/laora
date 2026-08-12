@@ -105,6 +105,25 @@ def hay(rel):
     return os.path.exists(os.path.join(RAIZ, rel.lstrip('/')))
 
 
+def ancho_webp(rel):
+    """El ancho de la foto, leído de su cabecera. Lo necesita el `srcset`:
+    si el navegador no sabe cuántos píxeles trae cada archivo, no puede
+    elegir bien —y los lienzos no miden todos lo mismo desde que las fotos
+    no se amplían (Óscar, 12/08/2026)."""
+    import struct
+    with open(os.path.join(RAIZ, rel.lstrip('/')), 'rb') as f_:
+        d = f_.read(32)
+    if d[:4] != b'RIFF' or d[8:12] != b'WEBP':
+        return 0
+    if d[12:16] == b'VP8X':
+        return 1 + int.from_bytes(d[24:27], 'little')
+    if d[12:16] == b'VP8 ':
+        return struct.unpack('<H', d[26:28])[0] & 0x3fff
+    if d[12:16] == b'VP8L':
+        return 1 + (int.from_bytes(d[21:25], 'little') & 0x3fff)
+    return 0
+
+
 def con_version(rel):
     """La foto viaja con la HUELLA de su contenido detrás: …webp?v=a1b2c3d4.
 
@@ -535,7 +554,7 @@ def pantalla(slug):
                                 # La copia ligera para el móvil, si existe
                                 chico = f'{PIEZAS_IMG}/completas/1200/{arch}'
                                 if hay(chico):
-                                    peques[clave] = con_version(chico)
+                                    peques[clave] = [con_version(chico), ancho_webp(rel)]
                                 break
 
     # Las claves que empiezan por _ son notas de casa —por qué una pieza

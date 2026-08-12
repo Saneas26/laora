@@ -323,7 +323,10 @@
       var chica = entera ? (D.peques || {})[refCab + '-' + p.v.ref] ||
         (D.peques || {})[refCab + '-' + (p.v.foto || p.v.ref)] : null;
       if (chica) {
-        foto.srcset = chica + ' 1200w, ' + cab + ' 2000w';
+        /* Cada foto declara su ancho de verdad: los lienzos ya no miden
+           todos lo mismo, y con un número inventado el navegador elegiría
+           mal. `chica` viene como [dirección, ancho de la grande]. */
+        foto.srcset = chica[0] + ' 1200w, ' + cab + ' ' + chica[1] + 'w';
         foto.sizes = '(max-width: 900px) 100vw, 50vw';
       } else {
         foto.removeAttribute('srcset');
