@@ -1575,9 +1575,9 @@
   "mov": [
    {
     "ref": "M2",
-    "cal": "PT5000 automático (con fecha)",
+    "cal": "Automático Arq Suiza ETA 2824-2 PT5000",
     "coste": 59.01,
-    "rot": "Arquitectura ETA 2824-2",
+    "rot": "Automático Arq Suiza ETA 2824-2 PT5000",
     "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."
    }
   ],

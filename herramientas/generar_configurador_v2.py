@@ -371,7 +371,10 @@ def pantalla(slug):
 
     tm = (ej.get('mov') or {}).get('tarjetas', {})
     if len(mov) == 1:
-        ejes.append(fijo('Movimiento', mov[0]['rot'], mov[0]['cal']))
+        # Cuando el rótulo y el calibre dicen ya lo mismo, no se repite:
+        # la casilla enseña una sola frase (Óscar, 12/08/2026).
+        ejes.append(fijo('Movimiento', mov[0]['rot'],
+                         '' if mov[0]['rot'] == mov[0]['cal'] else mov[0]['cal']))
     else:
         ejes.append(eje_tarjetas('mov', 'Movimiento', (ej.get('mov') or {}).get('pregunta'), mov,
                                  lambda o: tm.get(o['ref'], o['rot'])))
