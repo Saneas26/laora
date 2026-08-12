@@ -60,8 +60,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 29
-V_JS = 59
+V_CSS = 30
+V_JS = 60
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -244,13 +244,18 @@ def eje_fichas(clave, rotulo, opciones, etiqueta, hook=''):
 
 
 def caja_por_mov():
-    """El Precisa no elige caja: la trae el movimiento. El cuarzo va en
-    caja sólida y el automático en caja de cristal, porque un automático
-    se enseña por detrás. Se pinta el dato, y lo rellena el JavaScript
-    porque cambia al cambiar de mecanismo."""
+    """La caja depende del movimiento. En el Precisa el cuarzo va en caja
+    sólida —en un cuarzo no hay nada que enseñar por detrás— y el
+    automático puede elegir entre dos.
+
+    Van los dos envases en la página y el JavaScript enseña el que toca,
+    porque esto cambia al cambiar de mecanismo: si el movimiento trae una
+    sola caja se pinta el dato, y si trae varias, sus fichas."""
     return '''    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b>la que pide el movimiento</b></p>
-      <div class="cf-fijo"><b data-caja-fijo></b><span data-caja-apunte></span></div>
+      <p class="cf-rotulo">Caja <b data-caja-cuenta>la que pide el movimiento</b></p>
+      <div class="cf-fijo" data-caja-uno><b data-caja-fijo></b></div>
+      <div class="cf-fichas" data-cajas role="group" aria-label="Elegir caja" hidden></div>
+      <p class="cf-caja-apunte" data-caja-apunte hidden></p>
     </div>'''
 
 
@@ -341,8 +346,10 @@ def validas(d):
     # El brazalete del Diver es un EXTRA sobre lo que ya trae la caja.
     extra = bool(d['incluido']) and d['extra']
     for m in d['mov']:
-        cajas = ([c for c in d['caj'] if c['ref'] == por_mov[m['ref']]['ref']]
-                 if m['ref'] in por_mov else d['caj'])
+        pm = por_mov.get(m['ref'])
+        refs_mov = (pm.get('refs') or [pm['ref']]) if pm else None
+        cajas = ([c for c in d['caj'] if c['ref'] in refs_mov]
+                 if refs_mov else d['caj'])
         for c in cajas:
             esfs = [x for x in d['esf'] if vale_esf(x, c)] or [None]
             ok = compat.get(c['ref'])

@@ -636,10 +636,36 @@
     if (PORMOV) {
       var pm = PORMOV[D.mov[e.mov].ref];
       if (pm) {
-        for (var q = 0; q < D.caj.length; q++) if (D.caj[q].ref === pm.ref) e.caja = q;
-        var bn = $('[data-caja-fijo]'), ba = $('[data-caja-apunte]');
-        if (bn) bn.textContent = D.caj[e.caja].nombre;
-        if (ba) ba.textContent = pm.apunte || '';
+        /* Un movimiento puede traer UNA caja o varias a elegir (Óscar,
+           12/08/2026: el automático del Precisa ofrece dos). Si la que
+           está puesta no es de este movimiento, se va a la primera suya. */
+        var refs = pm.refs || [pm.ref];
+        var idx = [];
+        for (var q = 0; q < D.caj.length; q++) {
+          if (refs.indexOf(D.caj[q].ref) >= 0) idx.push(q);
+        }
+        if (idx.length && idx.indexOf(e.caja) < 0) e.caja = idx[0];
+        var uno = $('[data-caja-uno]'), cont = $('[data-cajas]'),
+            cuenta = $('[data-caja-cuenta]'), ba = $('[data-caja-apunte]');
+        if (uno && cont) {
+          uno.hidden = idx.length > 1;
+          cont.hidden = idx.length < 2;
+          if (idx.length > 1) {
+            cont.innerHTML = idx.map(function (i) {
+              return '<button class="cf-ficha" type="button" data-caja="' + i +
+                '" aria-pressed="' + (i === e.caja) + '">' + D.caj[i].nombre + '</button>';
+            }).join('');
+            if (cuenta) cuenta.textContent = idx.length + ' opciones';
+          } else {
+            var bn = $('[data-caja-fijo]');
+            if (bn) bn.textContent = D.caj[e.caja].nombre;
+            if (cuenta) cuenta.textContent = 'la que pide el movimiento';
+          }
+          /* El porqué de la caja se lee tanto si hay una como si hay
+             varias: es lo que explica por qué el automático va con
+             cristal detrás. */
+          if (ba) { ba.textContent = pm.apunte || ''; ba.hidden = !pm.apunte; }
+        }
       }
     }
     /* La esfera que no entra en la caja elegida NO SE PINTA. Antes salía
