@@ -57,16 +57,16 @@
     <div class="cf-grupo">
       <p class="cf-rotulo">Caja <b>2 opciones</b></p>
       <div class="cf-fichas" role="group" aria-label="Elegir caja">
-        <button class="cf-ficha" type="button" data-caja="0" aria-pressed="true">Clásica 41 mm</button>
-        <button class="cf-ficha" type="button" data-caja="1" aria-pressed="false">Dos coronas 41 mm</button>
+        <button class="cf-ficha" type="button" data-caja="0" aria-pressed="true">Bisel cerámico</button>
+        <button class="cf-ficha" type="button" data-caja="1" aria-pressed="false">Bisel mate</button>
       </div>
     </div>
     <div class="cf-grupo" data-grupo-esf>
       <p class="cf-rotulo">Esfera <b>3 opciones</b></p>
       <div class="cf-fichas" role="group" aria-label="Elegir esfera">
-        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Negra y oro</button>
-        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Azul y negra</button>
-        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Negra y oro rosa</button>
+        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Negra y oro rosa</button>
+        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Azul y oro rosa</button>
+        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Negra y dorado</button>
       </div>
     </div>
       </div>
@@ -78,21 +78,12 @@
       </div>
     </div>
     <div class="cf-grupo">
-      <p class="cf-rotulo">Brazalete <b>8 familias</b></p>
-      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
-        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Acero 316L, cierre desplegable</span></button>
-        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
-        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Malla milanesa, hebilla plegable</span></button>
-        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Malla milanesa de eslabón fino</span></button>
-        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón ancho</span></button>
-        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón fino</span></button>
-        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Acero 904L macizo</span></button>
-        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Acero 904L, eslabones planos</span></button>
-      </div>
-      <p class="cf-detalle" data-detalle></p>
+      <p class="cf-rotulo">Brazalete <b>uno solo</b></p>
+      <div class="cf-fijo"><b>Acero 904L, cinco eslabones</b><span>incluido en el precio</span></div>
+      <p class="cf-detalle" data-detalle hidden></p>
     </div>
 
-    <div class="cf-grupo" data-grupo-var>
+    <div class="cf-grupo" data-grupo-var hidden>
       <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
       <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
     </div>
@@ -123,7 +114,7 @@
   </div>
 </div>
 
-<script type="application/json" data-piezas>{"nombre": "Cero Cero", "codigo": "LO-05", "incluido": "", "extra": false, "mov": [{"ref": "M2", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Clásica 41 mm", "coste": 38.97}, {"ref": "C3", "nombre": "Dos coronas 41 mm", "coste": 60.77}], "esf": [{"ref": "E1", "nombre": "Negra y oro", "coste": 12.79, "cajas": "Todas"}, {"ref": "E2", "nombre": "Azul y negra", "coste": 12.79, "cajas": "Todas"}, {"ref": "E3", "nombre": "Negra y oro rosa", "coste": 12.79, "cajas": "Todas"}], "brz": [{"id": "B02", "nombre": "Acero 316L, cierre desplegable", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39}, {"ref": "Brz-316-A03", "nom": "Plata y oro rosa", "c": 30.79}, {"ref": "Brz-316-A04", "nom": "Negro", "c": 30.79}]}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79}]}, {"id": "B04", "nombre": "Malla milanesa, hebilla plegable", "v": [{"ref": "Brz-316-A08", "nom": "Plata", "c": 33.39}]}, {"id": "B05", "nombre": "Malla milanesa de eslabón fino", "v": [{"ref": "Brz-316-A09", "nom": "Plata", "c": 40.36}]}, {"id": "B06", "nombre": "Acero 316L macizo, eslabón ancho", "v": [{"ref": "Brz-316-A10", "nom": "Tres eslabones", "c": 59.69}]}, {"id": "B07", "nombre": "Acero 316L macizo, eslabón fino", "v": [{"ref": "Brz-316-A11", "nom": "Cinco eslabones", "c": 78.39}]}, {"id": "B08", "nombre": "Acero 904L macizo", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 55.39}, {"ref": "Brz-904-A13", "nom": "Brillante pulido", "c": 55.39}]}, {"id": "B09", "nombre": "Acero 904L, eslabones planos", "v": [{"ref": "Brz-904-A14", "nom": "Plata 5 eslabones", "c": 23.79}, {"ref": "Brz-904-A15", "nom": "Plata / Oro rosa 5 eslabones", "c": 28.19}, {"ref": "Brz-904-A16", "nom": "Negro 5 eslabones", "c": 28.19}, {"ref": "Brz-904-A17", "nom": "Plata 3 eslabones cepillado/mate", "c": 23.79}, {"ref": "Brz-904-A18", "nom": "Plata 3 eslabones pulido", "c": 23.79}, {"ref": "Brz-904-A19", "nom": "Negro 3 eslabones pulido", "c": 28.19}, {"ref": "Brz-904-A20", "nom": "Plata / Oro Rosa 3 eslabones pulido", "c": 28.19}]}], "ejes": {"mov": {"pregunta": "Si es suizo, nuestros relojes también", "tarjetas": {"M2": "Automático suizo"}}, "caja": {}, "esf": {}, "brz": {}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "completas": {}, "cierres": {"B02": "/assets/img/piezas/cierres/B02.webp?v=c6dc066d", "B03": "/assets/img/piezas/cierres/B03.webp?v=28f80629", "B08": "/assets/img/piezas/cierres/B08.webp?v=c6dc066d"}, "cierresNom": {}, "solape": 80}</script>
+<script type="application/json" data-piezas>{"nombre": "Cero Cero", "codigo": "LO-05", "incluido": "", "extra": false, "mov": [{"ref": "M2", "cal": "PT5000 automático (con fecha)", "coste": 59.01, "rot": "Arquitectura ETA 2824-2", "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."}], "caj": [{"ref": "C1", "nombre": "Bisel cerámico", "coste": 38.97}, {"ref": "C2", "nombre": "Bisel mate", "coste": 38.97}], "esf": [{"ref": "E1", "nombre": "Negra y oro rosa", "coste": 12.79, "cajas": "Todas"}, {"ref": "E2", "nombre": "Azul y oro rosa", "coste": 12.79, "cajas": "Todas"}, {"ref": "E3", "nombre": "Negra y dorado", "coste": 12.79, "cajas": "Todas"}], "brz": [{"id": "B09", "nombre": "Acero 904L, cinco eslabones", "mat": "Acero 904L", "v": [{"ref": "Brz-904-A14", "nom": "Plata", "c": 23.79, "cier": "Cierre desplegable", "eti": "Plata", "hex": "#c9cdd2", "esl": "5 eslabones"}]}], "ejes": {"mov": {"pregunta": "Si es suizo, nuestros relojes también", "tarjetas": {"M2": "Automático suizo"}}, "caja": {}, "esf": {}, "brz": {"apunte": "incluido en el precio"}}, "inicio": {"brz": 0, "v": 0}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "completas": {"LO-05-C1-E1-Brz-904-A14": "/assets/img/piezas/completas/LO-05-C1-E1-Brz-904-A14.webp?v=1904fcb4", "LO-05-C1-E2-Brz-904-A14": "/assets/img/piezas/completas/LO-05-C1-E2-Brz-904-A14.webp?v=cacd1f0e", "LO-05-C1-E3-Brz-904-A14": "/assets/img/piezas/completas/LO-05-C1-E3-Brz-904-A14.webp?v=74b881df", "LO-05-C2-E1-Brz-904-A14": "/assets/img/piezas/completas/LO-05-C2-E1-Brz-904-A14.webp?v=a3176f73", "LO-05-C2-E2-Brz-904-A14": "/assets/img/piezas/completas/LO-05-C2-E2-Brz-904-A14.webp?v=5598957c", "LO-05-C2-E3-Brz-904-A14": "/assets/img/piezas/completas/LO-05-C2-E3-Brz-904-A14.webp?v=04bf65d2"}, "cierres": {}, "cierresNom": {}, "solape": 80}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
 <script src="/assets/js/configurador-v2.js?v=57"></script>
 </body>

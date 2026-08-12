@@ -1584,171 +1584,49 @@
   "caj": [
    {
     "ref": "C1",
-    "nombre": "Clásica 41 mm",
+    "nombre": "Bisel cerámico",
     "coste": 38.97
    },
    {
-    "ref": "C3",
-    "nombre": "Dos coronas 41 mm",
-    "coste": 60.77
+    "ref": "C2",
+    "nombre": "Bisel mate",
+    "coste": 38.97
    }
   ],
   "esf": [
    {
     "ref": "E1",
-    "nombre": "Negra y oro",
+    "nombre": "Negra y oro rosa",
     "coste": 12.79,
     "cajas": "Todas"
    },
    {
     "ref": "E2",
-    "nombre": "Azul y negra",
+    "nombre": "Azul y oro rosa",
     "coste": 12.79,
     "cajas": "Todas"
    },
    {
     "ref": "E3",
-    "nombre": "Negra y oro rosa",
+    "nombre": "Negra y dorado",
     "coste": 12.79,
     "cajas": "Todas"
    }
   ],
   "brz": [
    {
-    "id": "B02",
-    "nombre": "Acero 316L, cierre desplegable",
-    "v": [
-     {
-      "ref": "Brz-316-A02",
-      "nom": "Plata",
-      "c": 28.39
-     },
-     {
-      "ref": "Brz-316-A03",
-      "nom": "Plata y oro rosa",
-      "c": 30.79
-     },
-     {
-      "ref": "Brz-316-A04",
-      "nom": "Negro",
-      "c": 30.79
-     }
-    ]
-   },
-   {
-    "id": "B03",
-    "nombre": "Acero 316L macizo",
-    "v": [
-     {
-      "ref": "Brz-316-A05",
-      "nom": "Tres eslabones",
-      "c": 21.79
-     },
-     {
-      "ref": "Brz-316-A06",
-      "nom": "Cinco eslabones",
-      "c": 21.79
-     }
-    ]
-   },
-   {
-    "id": "B04",
-    "nombre": "Malla milanesa, hebilla plegable",
-    "v": [
-     {
-      "ref": "Brz-316-A08",
-      "nom": "Plata",
-      "c": 33.39
-     }
-    ]
-   },
-   {
-    "id": "B05",
-    "nombre": "Malla milanesa de eslabón fino",
-    "v": [
-     {
-      "ref": "Brz-316-A09",
-      "nom": "Plata",
-      "c": 40.36
-     }
-    ]
-   },
-   {
-    "id": "B06",
-    "nombre": "Acero 316L macizo, eslabón ancho",
-    "v": [
-     {
-      "ref": "Brz-316-A10",
-      "nom": "Tres eslabones",
-      "c": 59.69
-     }
-    ]
-   },
-   {
-    "id": "B07",
-    "nombre": "Acero 316L macizo, eslabón fino",
-    "v": [
-     {
-      "ref": "Brz-316-A11",
-      "nom": "Cinco eslabones",
-      "c": 78.39
-     }
-    ]
-   },
-   {
-    "id": "B08",
-    "nombre": "Acero 904L macizo",
-    "v": [
-     {
-      "ref": "Brz-904-A12",
-      "nom": "Mate cepillado",
-      "c": 55.39
-     },
-     {
-      "ref": "Brz-904-A13",
-      "nom": "Brillante pulido",
-      "c": 55.39
-     }
-    ]
-   },
-   {
     "id": "B09",
-    "nombre": "Acero 904L, eslabones planos",
+    "nombre": "Acero 904L, cinco eslabones",
+    "mat": "Acero 904L",
     "v": [
      {
       "ref": "Brz-904-A14",
-      "nom": "Plata 5 eslabones",
-      "c": 23.79
-     },
-     {
-      "ref": "Brz-904-A15",
-      "nom": "Plata / Oro rosa 5 eslabones",
-      "c": 28.19
-     },
-     {
-      "ref": "Brz-904-A16",
-      "nom": "Negro 5 eslabones",
-      "c": 28.19
-     },
-     {
-      "ref": "Brz-904-A17",
-      "nom": "Plata 3 eslabones cepillado/mate",
-      "c": 23.79
-     },
-     {
-      "ref": "Brz-904-A18",
-      "nom": "Plata 3 eslabones pulido",
-      "c": 23.79
-     },
-     {
-      "ref": "Brz-904-A19",
-      "nom": "Negro 3 eslabones pulido",
-      "c": 28.19
-     },
-     {
-      "ref": "Brz-904-A20",
-      "nom": "Plata / Oro Rosa 3 eslabones pulido",
-      "c": 28.19
+      "nom": "Plata",
+      "c": 23.79,
+      "cier": "Cierre desplegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "esl": "5 eslabones"
      }
     ]
    }
@@ -1762,9 +1640,15 @@
    },
    "caja": {},
    "esf": {},
-   "brz": {}
+   "brz": {
+    "apunte": "incluido en el precio"
+   }
   },
-  "_nota": "EL CERO CERO NO MONTA CUARZO. Óscar, 10/08/2026: «no hemos encontrado caja de tapa sólida y por tanto por el momento no montamos cuarzo en el cero cero». El Ronda 715 (M1, 15,05 €) estaba aquí y se ha sacado. Si aparece la caja de tapa sólida, vuelve a entrar. Las claves que empiezan por _ no salen a la página."
+  "_nota": "EL CERO CERO NO MONTA CUARZO. Óscar, 10/08/2026: «no hemos encontrado caja de tapa sólida y por tanto por el momento no montamos cuarzo en el cero cero». El Ronda 715 (M1, 15,05 €) estaba aquí y se ha sacado. Si aparece la caja de tapa sólida, vuelve a entrar. Las claves que empiezan por _ no salen a la página.",
+  "inicio": {
+   "brz": 0,
+   "v": 0
+  }
  },
  "coctel": {
   "nombre": "Cóctel",
