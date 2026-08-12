@@ -672,7 +672,7 @@
     "ref": "M1",
     "cal": "Seiko/TMI VK63",
     "coste": 27.59,
-    "rot": "Cuarzo Japones",
+    "rot": "Meca cuarzo japonés",
     "specs": "Meca-cuarzo: la hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos. El segundero del cronógrafo arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador.",
     "ficha": [
      {
@@ -772,7 +772,8 @@
       "h": "Ojo con los cronos que no son TMI",
       "p": "En este precio abundan los cronógrafos con módulos genéricos de bajo coste, y conviene saber qué se compra. Lo típico: la aguja del cronógrafo avanza a saltos de un segundo, sin barrido; la puesta a cero es perezosa, la aguja vuelve girando despacio o se queda torcida, y con el uso los contadores pierden el cero y hay que recalibrarlos; hay subesferas pintadas que no funcionan; tijas y pulsadores que se desacoplan; y cuando fallan no hay repuestos ni servicio técnico: el reloj entero, al cajón. Por eso el módulo de este reloj es el original del grupo Seiko, con nombre y apellidos."
      }
-    ]
+    ],
+    "apunte": ""
    }
   ],
   "caj": [
