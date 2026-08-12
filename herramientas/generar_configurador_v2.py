@@ -371,10 +371,11 @@ def pantalla(slug):
 
     tm = (ej.get('mov') or {}).get('tarjetas', {})
     if len(mov) == 1:
-        # Cuando el rótulo y el calibre dicen ya lo mismo, no se repite:
-        # la casilla enseña una sola frase (Óscar, 12/08/2026).
+        # La casilla y la ficha de características no tienen por qué decir lo
+        # mismo (Óscar, 12/08/2026): si el movimiento trae un `apunte` propio,
+        # manda ese —y si viene vacío, la casilla enseña solo su título—.
         ejes.append(fijo('Movimiento', mov[0]['rot'],
-                         '' if mov[0]['rot'] == mov[0]['cal'] else mov[0]['cal']))
+                         mov[0].get('apunte', mov[0]['cal'])))
     else:
         ejes.append(eje_tarjetas('mov', 'Movimiento', (ej.get('mov') or {}).get('pregunta'), mov,
                                  lambda o: tm.get(o['ref'], o['rot'])))
