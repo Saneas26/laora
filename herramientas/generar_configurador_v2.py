@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 30
-V_JS = 60
+V_JS = 61
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -517,6 +517,7 @@ def pantalla(slug):
     # veces el mismo archivo (Oscar, 12/08/2026). La suya manda; la
     # prestada solo entra si la suya no esta.
     completas = {}
+    peques = {}          # la copia de 1200 px, para el móvil
     for c in caj:
         for e_ in (esf or [None]):
             suf = f'-{e_["ref"]}' if e_ else ''
@@ -527,9 +528,14 @@ def pantalla(slug):
                     for nom in {v['ref'], v.get('foto') or v['ref']}:
                         clave = f'{d["codigo"]}-{c["ref"]}{suf}-{nom}'
                         for refc in (c['ref'], c.get('foto') or c['ref']):
-                            rel = f'{PIEZAS_IMG}/completas/{d["codigo"]}-{refc}{suf}-{nom}.webp'
+                            arch = f'{d["codigo"]}-{refc}{suf}-{nom}.webp'
+                            rel = f'{PIEZAS_IMG}/completas/{arch}'
                             if hay(rel):
                                 completas[clave] = con_version(rel)
+                                # La copia ligera para el móvil, si existe
+                                chico = f'{PIEZAS_IMG}/completas/1200/{arch}'
+                                if hay(chico):
+                                    peques[clave] = con_version(chico)
                                 break
 
     # Las claves que empiezan por _ son notas de casa —por qué una pieza
@@ -538,7 +544,7 @@ def pantalla(slug):
     d = {k: v for k, v in d.items() if not k.startswith('_')}
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
-                        'brazaletes': brazaletes, 'completas': completas, 'cierres': cierres,
+                        'brazaletes': brazaletes, 'completas': completas, 'peques': peques, 'cierres': cierres,
                         'cierresNom': cierres_nom, 'detallePies': detalle_pies,
                         'solape': SOLAPE},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')

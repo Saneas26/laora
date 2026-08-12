@@ -313,8 +313,26 @@
 
     var cab = entera || (D.cabezas || {})[refCab];
     var foto = $('[data-foto]');
-    if (cab) { foto.src = cab; foto.hidden = false; }
-    else { foto.removeAttribute('src'); foto.hidden = true; }
+    if (cab) {
+      /* DOS TAMAÑOS Y QUE ELIJA EL APARATO (Óscar, 12/08/2026: «la web
+         pesa demasiado para verlo en el móvil con 4g»). De las fotos
+         anchas hay una copia de 1200 px; el teléfono se lleva esa —unos
+         136 KB en vez de 300— y el escritorio la grande. El navegador
+         decide solo con `sizes`: en móvil la foto ocupa el ancho de la
+         pantalla y en escritorio, la mitad. */
+      var chica = entera ? (D.peques || {})[refCab + '-' + p.v.ref] ||
+        (D.peques || {})[refCab + '-' + (p.v.foto || p.v.ref)] : null;
+      if (chica) {
+        foto.srcset = chica + ' 1200w, ' + cab + ' 2000w';
+        foto.sizes = '(max-width: 900px) 100vw, 50vw';
+      } else {
+        foto.removeAttribute('srcset');
+        foto.removeAttribute('sizes');
+      }
+      foto.src = cab; foto.hidden = false;
+    } else {
+      foto.removeAttribute('src'); foto.removeAttribute('srcset'); foto.hidden = true;
+    }
     $('[data-pendiente]').hidden = !!cab;
     var montaje = document.querySelector('[data-montaje]');
     montaje.classList.toggle('con-foto', !!cab);
