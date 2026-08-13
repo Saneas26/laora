@@ -152,14 +152,6 @@
     "diam": "36"
    },
    {
-    "ref": "C2",
-    "nombre": "Bronce, 36 mm",
-    "coste": 26.97,
-    "color": "Bronce",
-    "fondo": "solida",
-    "diam": "36"
-   },
-   {
     "ref": "C3",
     "nombre": "Negra, 36 mm",
     "coste": 26.97,
@@ -185,15 +177,6 @@
     "foto": "C1"
    },
    {
-    "ref": "C6",
-    "nombre": "Bronce, 36 mm",
-    "coste": 26.97,
-    "color": "Bronce",
-    "fondo": "cristal",
-    "diam": "36",
-    "foto": "C2"
-   },
-   {
     "ref": "C7",
     "nombre": "Negra, 36 mm",
     "coste": 26.97,
@@ -212,17 +195,6 @@
     "foto": "C1",
     "recargo": 10,
     "sobre": "C1"
-   },
-   {
-    "ref": "C9",
-    "nombre": "Bronce, 39 mm",
-    "coste": 26.77,
-    "color": "Bronce",
-    "fondo": "solida",
-    "diam": "39",
-    "foto": "C2",
-    "recargo": 10,
-    "sobre": "C2"
    },
    {
     "ref": "C10",
@@ -258,17 +230,6 @@
     "sobre": "C5"
    },
    {
-    "ref": "C13",
-    "nombre": "Bronce, 39 mm",
-    "coste": 27.17,
-    "color": "Bronce",
-    "fondo": "cristal",
-    "diam": "39",
-    "foto": "C2",
-    "recargo": 10,
-    "sobre": "C6"
-   },
-   {
     "ref": "C14",
     "nombre": "Negra, 39 mm",
     "coste": 26.97,
@@ -297,7 +258,7 @@
     "ref": "E3",
     "nombre": "Murph A/P",
     "coste": 21.19,
-    "cajas": "C1, C2, C4, C5, C6, C8, C9, C11, C12, C13"
+    "cajas": "C1, C4, C5, C8, C11, C12"
    },
    {
     "ref": "E4",
@@ -593,33 +554,6 @@
     "nombre": "Tela de vela, hebilla mariposa",
     "v": [
      {
-      "ref": "Brz-Nailon-N01",
-      "nom": "Rojo",
-      "c": 6.49,
-      "cier": "Hebilla mariposa",
-      "eti": "Rojo",
-      "hex": "#a8322c",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Nailon-N02",
-      "nom": "Naranja",
-      "c": 6.49,
-      "cier": "Hebilla mariposa",
-      "eti": "Naranja",
-      "hex": "#c9662a",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Nailon-N03",
-      "nom": "Gris",
-      "c": 6.39,
-      "cier": "Hebilla mariposa",
-      "eti": "Gris",
-      "hex": "#6f7276",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Nailon-N04",
       "nom": "Negro",
       "c": 6.49,
@@ -773,7 +707,6 @@
       "rotulo": "Color de la caja",
       "valores": [
        "Plata",
-       "Bronce",
        "Negra",
        "Titanio"
       ]
@@ -879,6 +812,50 @@
     "E3-Brz-Piel-P31",
     "E4-Brz-Nailon-N05",
     "E5-Brz-Nailon-N05"
+   ]
+  },
+  "_cajaFuera": {
+   "porQue": "Óscar, 13/08/2026: «bronce por el momento fuera». No hay ninguna foto de bronce; vuelve pegando estas cajas en «caj» y devolviendo Bronce a ejes.caja.sub.",
+   "cajas": [
+    {
+     "ref": "C2",
+     "nombre": "Bronce, 36 mm",
+     "coste": 26.97,
+     "color": "Bronce",
+     "fondo": "solida",
+     "diam": "36"
+    },
+    {
+     "ref": "C6",
+     "nombre": "Bronce, 36 mm",
+     "coste": 26.97,
+     "color": "Bronce",
+     "fondo": "cristal",
+     "diam": "36",
+     "foto": "C2"
+    },
+    {
+     "ref": "C9",
+     "nombre": "Bronce, 39 mm",
+     "coste": 26.77,
+     "color": "Bronce",
+     "fondo": "solida",
+     "diam": "39",
+     "foto": "C2",
+     "recargo": 10,
+     "sobre": "C2"
+    },
+    {
+     "ref": "C13",
+     "nombre": "Bronce, 39 mm",
+     "coste": 27.17,
+     "color": "Bronce",
+     "fondo": "cristal",
+     "diam": "39",
+     "foto": "C2",
+     "recargo": 10,
+     "sobre": "C6"
+    }
    ]
   }
  },
