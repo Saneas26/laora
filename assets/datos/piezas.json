@@ -209,7 +209,8 @@
     "color": "Plata",
     "fondo": "solida",
     "diam": "39",
-    "foto": "C1"
+    "foto": "C1",
+    "recargo": 10
    },
    {
     "ref": "C9",
@@ -218,7 +219,8 @@
     "color": "Bronce",
     "fondo": "solida",
     "diam": "39",
-    "foto": "C2"
+    "foto": "C2",
+    "recargo": 10
    },
    {
     "ref": "C10",
@@ -227,7 +229,8 @@
     "color": "Negra",
     "fondo": "solida",
     "diam": "39",
-    "foto": "C3"
+    "foto": "C3",
+    "recargo": 10
    },
    {
     "ref": "C11",
@@ -236,7 +239,8 @@
     "color": "Titanio",
     "fondo": "solida",
     "diam": "39",
-    "foto": "C4"
+    "foto": "C4",
+    "recargo": 10
    },
    {
     "ref": "C12",
@@ -245,7 +249,8 @@
     "color": "Plata",
     "fondo": "cristal",
     "diam": "39",
-    "foto": "C1"
+    "foto": "C1",
+    "recargo": 10
    },
    {
     "ref": "C13",
@@ -254,7 +259,8 @@
     "color": "Bronce",
     "fondo": "cristal",
     "diam": "39",
-    "foto": "C2"
+    "foto": "C2",
+    "recargo": 10
    },
    {
     "ref": "C14",
@@ -263,7 +269,8 @@
     "color": "Negra",
     "fondo": "cristal",
     "diam": "39",
-    "foto": "C3"
+    "foto": "C3",
+    "recargo": 10
    }
   ],
   "esf": [

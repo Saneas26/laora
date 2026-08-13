@@ -869,9 +869,17 @@
     return sube990(Math.max(porEuros, porciento));
   }
 
+  /* EL RECARGO DE LA CAJA (Óscar, 13/08/2026)
+     La de 39 mm del Trinchera cuesta a fábrica lo mismo que la de 36
+     —diez céntimos menos, de hecho—, así que el multiplicador dejaba las
+     dos al mismo precio. Óscar quiere diez euros de diferencia como
+     mínimo, y como todos los precios acaban en 9,90, sumar 10 los
+     mantiene ahí: 249,90 → 259,90. Va en los datos de la caja, no aquí,
+     para que cualquier modelo pueda usarlo. */
   function precio() {
     var c = coste();
-    return Math.max(redondea(c * D.mult), sueloPvp(costeNeto(c, piezas().mov)));
+    var base = Math.max(redondea(c * D.mult), sueloPvp(costeNeto(c, piezas().mov)));
+    return base + (piezas().caja.recargo || 0);
   }
 
   function fila(etiqueta, valor, clase) {
