@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 30
-V_JS = 63
+V_JS = 64
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -379,8 +379,11 @@ def validas(d):
                 or [{'c': 0}]
             for x in esfs:
                 for v in brzs:
-                    # El veto fino: los tres a la vez (ver el JavaScript)
-                    if x and vetos and f"{c['ref']}-{x['ref']}-{v.get('ref','')}" in vetos:
+                    # El veto fino: los tres a la vez, o esfera y brazalete
+                    # para todas las cajas (ver el JavaScript)
+                    if x and vetos and (
+                            f"{c['ref']}-{x['ref']}-{v.get('ref','')}" in vetos
+                            or f"{x['ref']}-{v.get('ref','')}" in vetos):
                         continue
                     yield m, (m['coste'] + c['coste'] + (x['coste'] if x else 0)
                               + (0 if extra else v['c']))

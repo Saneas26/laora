@@ -791,7 +791,22 @@
      "B15": "Nato",
      "B16": "Cordura"
     }
-   }
+   },
+   "veto": [
+    "E3-Brz-Piel-P01",
+    "E3-Brz-Piel-P02",
+    "E3-Brz-Piel-P03",
+    "E3-Brz-Piel-P05",
+    "E3-Brz-Piel-P06",
+    "E3-Brz-Piel-P07",
+    "E3-Brz-Piel-P25",
+    "E3-Brz-Piel-P26",
+    "E3-Brz-Piel-P27",
+    "E3-Brz-Piel-P29",
+    "E3-Brz-Piel-P30",
+    "E3-Brz-Piel-P31",
+    "E3-Brz-Nailon-N06"
+   ]
   }
  },
  "lunar": {
