@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 30
-V_JS = 65
+V_JS = 66
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -185,12 +185,19 @@ def suelo_pvp(cn):
     return sube990(max(por_euros, por_ciento))
 
 
-def pvp_de(mov, c, recargo=0):
-    """El recargo es margen puro que se suma al final: la caja de 39 mm
-    del Trinchera cuesta lo mismo de fabricar que la de 36, y Óscar la
-    quiere diez euros por encima (13/08/2026). Sumar 10 a un precio que
-    acaba en 9,90 lo deja acabando en 9,90."""
-    return max(redondea(c * MULT), suelo_pvp(coste_neto(c, mov))) + recargo
+def base_de(mov, c):
+    return max(redondea(c * MULT), suelo_pvp(coste_neto(c, mov)))
+
+
+def pvp_de(mov, c, recargo=0, c_gemela=None):
+    """El recargo NO es una suma a secas sino una diferencia mínima con la
+    caja gemela: Óscar quiere la de 39 mm diez euros por encima de la de
+    36 (13/08/2026), y como el titanio de 39 cuesta menos de fabricar,
+    sumar diez a su precio lo dejaba empatado. Ver el JavaScript."""
+    base = base_de(mov, c)
+    if not recargo:
+        return base
+    return max(base, (base_de(mov, c_gemela) if c_gemela is not None else base) + recargo)
 
 
 # ============================================================
@@ -367,6 +374,7 @@ def validas(d):
     compat = (ej.get('brz') or {}).get('compat') or {}
     compat_no = (ej.get('brz') or {}).get('compatNo') or {}
     vetos = set(ej.get('veto') or [])
+    por_ref = {c['ref']: c for c in d['caj']}
     # El brazalete del Diver es un EXTRA sobre lo que ya trae la caja.
     extra = bool(d['incluido']) and d['extra']
     for m in d['mov']:
@@ -389,8 +397,11 @@ def validas(d):
                             f"{c['ref']}-{x['ref']}-{v.get('ref','')}" in vetos
                             or f"{x['ref']}-{v.get('ref','')}" in vetos):
                         continue
-                    yield m, (m['coste'] + c['coste'] + (x['coste'] if x else 0)
-                              + (0 if extra else v['c'])), c.get('recargo', 0)
+                    resto = (m['coste'] + (x['coste'] if x else 0)
+                             + (0 if extra else v['c']))
+                    gem = por_ref.get(c.get('sobre'))
+                    yield (m, resto + c['coste'], c.get('recargo', 0),
+                           resto + gem['coste'] if gem else None)
 
 
 def pantalla(slug):
@@ -400,7 +411,7 @@ def pantalla(slug):
     # El «desde» es el PRECIO más bajo que se puede pagar, no el coste
     # más bajo: desde que hay suelo, la configuración más barata de
     # fabricar no siempre es la más barata de comprar.
-    precios = [pvp_de(m, c, r) for m, c, r in validas(d)]
+    precios = [pvp_de(m, c, r, g) for m, c, r, g in validas(d)]
     barato, combis = min(precios), len(precios)
 
     ej = d.get('ejes', {})

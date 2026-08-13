@@ -210,7 +210,8 @@
     "fondo": "solida",
     "diam": "39",
     "foto": "C1",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C1"
    },
    {
     "ref": "C9",
@@ -220,7 +221,8 @@
     "fondo": "solida",
     "diam": "39",
     "foto": "C2",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C2"
    },
    {
     "ref": "C10",
@@ -230,7 +232,8 @@
     "fondo": "solida",
     "diam": "39",
     "foto": "C3",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C3"
    },
    {
     "ref": "C11",
@@ -240,7 +243,8 @@
     "fondo": "solida",
     "diam": "39",
     "foto": "C4",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C4"
    },
    {
     "ref": "C12",
@@ -250,7 +254,8 @@
     "fondo": "cristal",
     "diam": "39",
     "foto": "C1",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C5"
    },
    {
     "ref": "C13",
@@ -260,7 +265,8 @@
     "fondo": "cristal",
     "diam": "39",
     "foto": "C2",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C6"
    },
    {
     "ref": "C14",
@@ -270,7 +276,8 @@
     "fondo": "cristal",
     "diam": "39",
     "foto": "C3",
-    "recargo": 10
+    "recargo": 10,
+    "sobre": "C7"
    }
   ],
   "esf": [

@@ -870,16 +870,30 @@
   }
 
   /* EL RECARGO DE LA CAJA (Óscar, 13/08/2026)
-     La de 39 mm del Trinchera cuesta a fábrica lo mismo que la de 36
-     —diez céntimos menos, de hecho—, así que el multiplicador dejaba las
-     dos al mismo precio. Óscar quiere diez euros de diferencia como
-     mínimo, y como todos los precios acaban en 9,90, sumar 10 los
-     mantiene ahí: 249,90 → 259,90. Va en los datos de la caja, no aquí,
-     para que cualquier modelo pueda usarlo. */
+     «los precios entre la caja de 36 mm y 39 mm los vamos a subir 10 €
+     mínimo en las cajas de 39 mm». Y es una diferencia entre las DOS, no
+     una suma a secas: de fábrica la de 39 cuesta casi lo mismo que la de
+     36 —y en titanio hasta 3,78 € menos—, así que sumar diez sin más
+     dejaba el titanio de 39 al mismo precio que el de 36. La caja lleva
+     entonces dos datos: `sobre`, la de 36 con la que se compara, y
+     `recargo`. El precio es el suyo o el de su gemela más el recargo, el
+     que salga mayor. */
+  function baseDe(costeCaja) {
+    var p = piezas();
+    var c = p.mov.coste + costeCaja + (p.esf ? p.esf.coste : 0) + p.v.c;
+    return Math.max(redondea(c * D.mult), sueloPvp(costeNeto(c, p.mov)));
+  }
+
   function precio() {
-    var c = coste();
-    var base = Math.max(redondea(c * D.mult), sueloPvp(costeNeto(c, piezas().mov)));
-    return base + (piezas().caja.recargo || 0);
+    var caja = piezas().caja;
+    var base = baseDe(caja.coste);
+    var rec = caja.recargo || 0;
+    if (!rec) return base;
+    var gem = null;
+    for (var i = 0; i < D.caj.length; i++) {
+      if (D.caj[i].ref === caja.sobre) { gem = D.caj[i]; break; }
+    }
+    return Math.max(base, (gem ? baseDe(gem.coste) : base) + rec);
   }
 
   function fila(etiqueta, valor, clase) {
