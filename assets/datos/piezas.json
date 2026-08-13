@@ -1572,7 +1572,10 @@
       "Brz-Acero-Bit-02"
      ]
     }
-   }
+   },
+   "veto": [
+    "C3-E3-Brz-Goma-Bit-04"
+   ]
   },
   "inicio": {
    "brz": "B18",
