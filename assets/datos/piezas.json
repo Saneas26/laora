@@ -181,7 +181,8 @@
     "coste": 23.17,
     "color": "Plata",
     "fondo": "cristal",
-    "diam": "36"
+    "diam": "36",
+    "foto": "C1"
    },
    {
     "ref": "C6",
@@ -189,7 +190,8 @@
     "coste": 26.97,
     "color": "Bronce",
     "fondo": "cristal",
-    "diam": "36"
+    "diam": "36",
+    "foto": "C2"
    },
    {
     "ref": "C7",
@@ -197,7 +199,8 @@
     "coste": 26.97,
     "color": "Negra",
     "fondo": "cristal",
-    "diam": "36"
+    "diam": "36",
+    "foto": "C3"
    },
    {
     "ref": "C8",
@@ -237,7 +240,8 @@
     "coste": 23.07,
     "color": "Plata",
     "fondo": "cristal",
-    "diam": "39"
+    "diam": "39",
+    "foto": "C8"
    },
    {
     "ref": "C13",
@@ -245,7 +249,8 @@
     "coste": 27.17,
     "color": "Bronce",
     "fondo": "cristal",
-    "diam": "39"
+    "diam": "39",
+    "foto": "C9"
    },
    {
     "ref": "C14",
@@ -253,7 +258,8 @@
     "coste": 26.97,
     "color": "Negra",
     "fondo": "cristal",
-    "diam": "39"
+    "diam": "39",
+    "foto": "C10"
    }
   ],
   "esf": [
