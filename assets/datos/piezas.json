@@ -332,17 +332,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Piel-P04",
-      "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 30.39,
-      "foto": "Brz-Piel-P01",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Negro, pespunte blanco",
-      "hex": "#1e1f22",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Piel-P05",
       "nom": "Negro, pespunte negro, hebilla mariposa plateada",
       "c": 30.99,
@@ -368,16 +357,6 @@
       "foto": "Brz-Piel-P05",
       "eti": "Negro, pespunte negro",
       "cier": "Hebilla clásica negra",
-      "hex": "#1e1f22",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P08",
-      "nom": "Negro, pespunte negro, hebilla clásica de oro rosa",
-      "c": 29.99,
-      "foto": "Brz-Piel-P05",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Negro, pespunte negro",
       "hex": "#1e1f22",
       "esl": ""
      },
@@ -414,17 +393,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Piel-P12",
-      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 31.19,
-      "foto": "Brz-Piel-P09",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Marrón oscuro, pespunte blanco",
-      "hex": "#4a3226",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Piel-P13",
       "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada",
       "c": 31.79,
@@ -451,98 +419,6 @@
       "eti": "Marrón oscuro, pespunte negro",
       "cier": "Hebilla clásica negra",
       "hex": "#4a2e1c",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P16",
-      "nom": "Marrón oscuro, pespunte negro, hebilla clásica de oro rosa",
-      "c": 31.99,
-      "foto": "Brz-Piel-P13",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Marrón oscuro, pespunte negro",
-      "hex": "#4a3226",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P17",
-      "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
-      "c": 29.39,
-      "eti": "Azul, pespunte blanco",
-      "cier": "Hebilla mariposa plateada",
-      "hex": "#274472",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P18",
-      "nom": "Azul, pespunte blanco, hebilla clásica plateada",
-      "c": 29.79,
-      "foto": "Brz-Piel-P17",
-      "eti": "Azul, pespunte blanco",
-      "cier": "Hebilla clásica plateada",
-      "hex": "#274472",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P19",
-      "nom": "Azul, pespunte blanco, hebilla clásica negra",
-      "c": 31.99,
-      "foto": "Brz-Piel-P17",
-      "cier": "Hebilla clásica negra",
-      "eti": "Azul, pespunte blanco",
-      "hex": "#23405e",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P20",
-      "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 32.39,
-      "foto": "Brz-Piel-P17",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Azul, pespunte blanco",
-      "hex": "#23405e",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P21",
-      "nom": "Azul, pespunte negro, hebilla mariposa plateada",
-      "c": 31.19,
-      "cier": "Hebilla mariposa plateada",
-      "eti": "Azul, pespunte negro",
-      "hex": "#23405e",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P22",
-      "nom": "Azul, pespunte negro, hebilla clásica plateada",
-      "c": 31.99,
-      "foto": "Brz-Piel-P21",
-      "cier": "Hebilla clásica plateada",
-      "eti": "Azul, pespunte negro",
-      "hex": "#23405e",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P23",
-      "nom": "Azul, pespunte negro, hebilla clásica negra",
-      "c": 31.79,
-      "foto": "Brz-Piel-P21",
-      "cier": "Hebilla clásica negra",
-      "eti": "Azul, pespunte negro",
-      "hex": "#23405e",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Piel-P24",
-      "nom": "Azul, pespunte negro, hebilla clásica de oro rosa",
-      "c": 31.99,
-      "foto": "Brz-Piel-P21",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Azul, pespunte negro",
-      "hex": "#23405e",
       "esl": ""
      },
      {
@@ -578,17 +454,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Piel-P28",
-      "nom": "Verde, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 32.39,
-      "foto": "Brz-Piel-P25",
-      "cier": "Hebilla clásica de oro rosa",
-      "eti": "Verde, pespunte blanco",
-      "hex": "#2f4632",
-      "bor": "#f2f0ea",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Piel-P29",
       "nom": "Verde, pespunte a tono, hebilla mariposa plateada",
       "c": 31.99,
@@ -613,16 +478,6 @@
       "c": 31.99,
       "foto": "Brz-Piel-P29",
       "cier": "Hebilla clásica negra",
-      "eti": "Verde, pespunte a tono",
-      "hex": "#2f4632",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Sintetica-P50",
-      "nom": "Verde, pespunte a tono, hebilla clásica de oro rosa",
-      "c": 31.99,
-      "foto": "Brz-Piel-P29",
-      "cier": "Hebilla clásica de oro rosa",
       "eti": "Verde, pespunte a tono",
       "hex": "#2f4632",
       "esl": ""
