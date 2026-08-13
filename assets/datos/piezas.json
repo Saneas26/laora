@@ -566,14 +566,6 @@
       "eti": "Negro",
       "hex": "#1e1f22",
       "esl": ""
-     },
-     {
-      "ref": "Brz-Ante-P73",
-      "nom": "Azul",
-      "c": 4.49,
-      "eti": "Azul",
-      "hex": "#23405e",
-      "esl": ""
      }
     ],
     "mat": "Ante"
@@ -616,15 +608,6 @@
       "cier": "Hebilla mariposa",
       "eti": "Negro",
       "hex": "#1e1f22",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Nailon-N05",
-      "nom": "Azul",
-      "c": 6.49,
-      "cier": "Hebilla mariposa",
-      "eti": "Azul",
-      "hex": "#23405e",
       "esl": ""
      },
      {
@@ -710,15 +693,6 @@
       "esl": ""
      },
      {
-      "ref": "Brz-Lona-L07",
-      "nom": "Azul marino",
-      "c": 5.39,
-      "cier": "Hebilla plateada",
-      "eti": "Azul marino",
-      "hex": "#26364f",
-      "esl": ""
-     },
-     {
       "ref": "Brz-Lona-L08",
       "nom": "Caqui hebilla negra",
       "c": 6.09,
@@ -735,16 +709,6 @@
       "cier": "Hebilla plateada",
       "eti": "Caqui",
       "hex": "#8a7a55",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L10",
-      "nom": "Azul marino hebilla negra",
-      "c": 6.09,
-      "foto": "Brz-Lona-L07",
-      "cier": "Hebilla negra",
-      "eti": "Azul marino",
-      "hex": "#26364f",
       "esl": ""
      }
     ],
