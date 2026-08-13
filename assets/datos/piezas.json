@@ -1520,23 +1520,15 @@
    },
    {
     "id": "B17",
-    "nombre": "Caucho integrado, hebilla mariposa",
+    "nombre": "Correa de silicona, hebilla mariposa",
     "v": [
      {
       "ref": "Brz-Goma-Bit-01",
-      "nom": "Negro",
+      "nom": "Negra",
       "c": 6.39,
       "cier": "Hebilla mariposa",
-      "eti": "Negro",
+      "eti": "Negra",
       "hex": "#1a1a1a"
-     },
-     {
-      "ref": "Brz-Goma-Bit-02",
-      "nom": "Gris",
-      "c": 6.39,
-      "cier": "Hebilla mariposa",
-      "eti": "Gris",
-      "hex": "#8a8d90"
      },
      {
       "ref": "Brz-Goma-Bit-03",
@@ -1545,9 +1537,17 @@
       "cier": "Hebilla mariposa",
       "eti": "Azul",
       "hex": "#26426b"
+     },
+     {
+      "ref": "Brz-Goma-Bit-04",
+      "nom": "Marrón",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Marrón",
+      "hex": "#5c4033"
      }
     ],
-    "mat": "Caucho"
+    "mat": "Silicona"
    }
   ],
   "ejes": {
@@ -1558,22 +1558,17 @@
     "compat": {
      "C1": [
       "Brz-Goma-Bit-01",
-      "Brz-Goma-Bit-02",
       "Brz-Goma-Bit-03",
       "Brz-Acero-Bit-01",
       "Brz-Acero-Bit-07"
      ],
      "C3": [
-      "Brz-Goma-Bit-01",
-      "Brz-Goma-Bit-02",
-      "Brz-Goma-Bit-03",
+      "Brz-Goma-Bit-04",
       "Brz-Acero-Bit-06",
       "Brz-Acero-Bit-07"
      ],
      "C4": [
       "Brz-Goma-Bit-01",
-      "Brz-Goma-Bit-02",
-      "Brz-Goma-Bit-03",
       "Brz-Acero-Bit-02"
      ]
     }
