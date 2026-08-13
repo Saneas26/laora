@@ -546,10 +546,16 @@ def pantalla(slug):
             suf = f'-{e_["ref"]}' if e_ else ''
             for f_ in brz:
                 for v in f_['v']:
-                    # La propia Y la prestada: si la de verdad ya esta en
-                    # disco, el visor la prefiere y el prestamo descansa.
-                    for nom in {v['ref'], v.get('foto') or v['ref']}:
-                        clave = f'{d["codigo"]}-{c["ref"]}{suf}-{nom}'
+                    # La configuracion SIEMPRE se guarda con su propia
+                    # referencia —es como la busca el visor—; lo que se
+                    # presta es el archivo. Primero la foto propia y solo
+                    # si no esta, la de la gemela: la malla de 2,8 mm del
+                    # Cero Cero se ve igual que la de 2,3 (Oscar,
+                    # 12/08/2026), y las pieles que solo cambian de
+                    # hebilla comparten foto porque la hebilla no sale.
+                    clave = f'{d["codigo"]}-{c["ref"]}{suf}-{v["ref"]}'
+                    puesta = False
+                    for nom in (v['ref'], v.get('foto') or v['ref']):
                         for refc in (c['ref'], c.get('foto') or c['ref']):
                             arch = f'{d["codigo"]}-{refc}{suf}-{nom}.webp'
                             rel = f'{PIEZAS_IMG}/completas/{arch}'
@@ -559,7 +565,10 @@ def pantalla(slug):
                                 chico = f'{PIEZAS_IMG}/completas/1200/{arch}'
                                 if hay(chico):
                                     peques[clave] = [con_version(chico), ancho_webp(rel)]
+                                puesta = True
                                 break
+                        if puesta:
+                            break
 
     # Las claves que empiezan por _ son notas de casa —por qué una pieza
     # está fuera, qué hay que revisar—: se quedan en el JSON y NO viajan
