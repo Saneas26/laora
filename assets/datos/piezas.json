@@ -297,7 +297,7 @@
     "ref": "E3",
     "nombre": "Murph A/P",
     "coste": 21.19,
-    "cajas": "Todas"
+    "cajas": "C1, C2, C4, C5, C6, C8, C9, C11, C12, C13"
    },
    {
     "ref": "E4",
@@ -813,6 +813,52 @@
      "B12": "Ante",
      "B15": "Nato",
      "B16": "Cordura"
+    },
+    "compat": {
+     "C3": [
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P03",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P07",
+      "Brz-Nailon-N04",
+      "Brz-Nailon-N06",
+      "Brz-Nailon-N07"
+     ],
+     "C7": [
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P03",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P07",
+      "Brz-Nailon-N04",
+      "Brz-Nailon-N06",
+      "Brz-Nailon-N07"
+     ],
+     "C10": [
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P03",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P07",
+      "Brz-Nailon-N04",
+      "Brz-Nailon-N06",
+      "Brz-Nailon-N07"
+     ],
+     "C14": [
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P03",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P07",
+      "Brz-Nailon-N04",
+      "Brz-Nailon-N06",
+      "Brz-Nailon-N07"
+     ]
     }
    },
    "veto": [
