@@ -145,7 +145,7 @@
   "caj": [
    {
     "ref": "C1",
-    "nombre": "Plata solida 36",
+    "nombre": "Plata, 36 mm",
     "coste": 23.17,
     "color": "Plata",
     "fondo": "solida",
@@ -153,7 +153,7 @@
    },
    {
     "ref": "C2",
-    "nombre": "Bronce solida 36",
+    "nombre": "Bronce, 36 mm",
     "coste": 26.97,
     "color": "Bronce",
     "fondo": "solida",
@@ -161,7 +161,7 @@
    },
    {
     "ref": "C3",
-    "nombre": "Negra solida 36",
+    "nombre": "Negra, 36 mm",
     "coste": 26.97,
     "color": "Negra",
     "fondo": "solida",
@@ -169,7 +169,7 @@
    },
    {
     "ref": "C4",
-    "nombre": "Titanio solida 36",
+    "nombre": "Titanio, 36 mm",
     "coste": 58.47,
     "color": "Titanio",
     "fondo": "solida",
@@ -177,7 +177,7 @@
    },
    {
     "ref": "C5",
-    "nombre": "Plata cristal 36",
+    "nombre": "Plata, 36 mm",
     "coste": 23.17,
     "color": "Plata",
     "fondo": "cristal",
@@ -186,7 +186,7 @@
    },
    {
     "ref": "C6",
-    "nombre": "Bronce cristal 36",
+    "nombre": "Bronce, 36 mm",
     "coste": 26.97,
     "color": "Bronce",
     "fondo": "cristal",
@@ -195,7 +195,7 @@
    },
    {
     "ref": "C7",
-    "nombre": "Negra cristal 36",
+    "nombre": "Negra, 36 mm",
     "coste": 26.97,
     "color": "Negra",
     "fondo": "cristal",
@@ -204,7 +204,7 @@
    },
    {
     "ref": "C8",
-    "nombre": "Plata solida 39",
+    "nombre": "Plata, 39 mm",
     "coste": 23.07,
     "color": "Plata",
     "fondo": "solida",
@@ -212,7 +212,7 @@
    },
    {
     "ref": "C9",
-    "nombre": "Bronce solida 39",
+    "nombre": "Bronce, 39 mm",
     "coste": 26.77,
     "color": "Bronce",
     "fondo": "solida",
@@ -220,7 +220,7 @@
    },
    {
     "ref": "C10",
-    "nombre": "Negra solida 39",
+    "nombre": "Negra, 39 mm",
     "coste": 27.17,
     "color": "Negra",
     "fondo": "solida",
@@ -228,7 +228,7 @@
    },
    {
     "ref": "C11",
-    "nombre": "Titanio solida 39",
+    "nombre": "Titanio, 39 mm",
     "coste": 54.69,
     "color": "Titanio",
     "fondo": "solida",
@@ -236,7 +236,7 @@
    },
    {
     "ref": "C12",
-    "nombre": "Plata cristal 39",
+    "nombre": "Plata, 39 mm",
     "coste": 23.07,
     "color": "Plata",
     "fondo": "cristal",
@@ -245,7 +245,7 @@
    },
    {
     "ref": "C13",
-    "nombre": "Bronce cristal 39",
+    "nombre": "Bronce, 39 mm",
     "coste": 27.17,
     "color": "Bronce",
     "fondo": "cristal",
@@ -254,7 +254,7 @@
    },
    {
     "ref": "C14",
-    "nombre": "Negra cristal 39",
+    "nombre": "Negra, 39 mm",
     "coste": 26.97,
     "color": "Negra",
     "fondo": "cristal",
