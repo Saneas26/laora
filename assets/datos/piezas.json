@@ -1588,7 +1588,10 @@
     "C1-E6-Brz-Goma-Bit-01",
     "C1-E6-Brz-Goma-Bit-03",
     "C3-E6-Brz-Acero-Bit-06",
-    "C3-E6-Brz-Acero-Bit-07"
+    "C3-E2-Brz-Acero-Bit-07",
+    "C3-E3-Brz-Acero-Bit-07",
+    "C3-E4-Brz-Acero-Bit-07",
+    "C3-E5-Brz-Acero-Bit-07"
    ]
   },
   "inicio": {
