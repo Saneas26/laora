@@ -1414,10 +1414,11 @@
   "mov": [
    {
     "ref": "M1",
-    "cal": "PT5000 automático (con fecha)",
+    "cal": "Automático Arq Suiza ETA 2824-2 PT5000",
     "coste": 59.01,
-    "rot": "Arquitectura ETA 2824-2",
-    "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm."
+    "rot": "Suizo Automático",
+    "specs": "Movimiento automático PT5000 de H.K. Precision Technology (Shenzhen), con la arquitectura del ETA 2824-2 y 25 rubíes. Late a 28.800 alt/h (4 Hz) para un segundero de barrido fino, con unas 38 h de reserva de marcha. Fecha a las 3, cuerda manual y parada de segundero. Rotor bidireccional sobre rodamientos. Precisión declarada por el fabricante de ±12 s/día. Diámetro 25,60 mm (11 1/2 líneas) y altura 4,60 mm.",
+    "apunte": ""
    }
   ],
   "caj": [
@@ -1471,46 +1472,73 @@
   ],
   "brz": [
    {
-    "id": "B17",
-    "nombre": "Caucho integrado, hebilla mariposa",
-    "v": [
-     {
-      "ref": "Brz-Goma-Bit-01",
-      "nom": "Negro",
-      "c": 6.39
-     },
-     {
-      "ref": "Brz-Goma-Bit-02",
-      "nom": "Gris",
-      "c": 6.39
-     },
-     {
-      "ref": "Brz-Goma-Bit-03",
-      "nom": "Azul",
-      "c": 6.39
-     }
-    ]
-   },
-   {
     "id": "B18",
     "nombre": "Acero integrado, cierre plegable",
     "v": [
      {
       "ref": "Brz-Acero-Bit-01",
       "nom": "Plata",
-      "c": 21.19
-     },
-     {
-      "ref": "Brz-Acero-Bit-02",
-      "nom": "Negro",
-      "c": 21.19
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
      },
      {
       "ref": "Brz-Acero-Bit-06",
       "nom": "Oro rosa",
-      "c": 21.19
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Oro rosa",
+      "hex": "#d9a48a"
+     }
+    ],
+    "mat": "Acero"
+   },
+   {
+    "id": "B21",
+    "nombre": "Acero con PVD negro, cierre plegable",
+    "mat": "Negro PVD",
+    "v": [
+     {
+      "ref": "Brz-Acero-Bit-02",
+      "nom": "Negro",
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Negro",
+      "hex": "#1a1a1a"
      }
     ]
+   },
+   {
+    "id": "B17",
+    "nombre": "Caucho integrado, hebilla mariposa",
+    "v": [
+     {
+      "ref": "Brz-Goma-Bit-01",
+      "nom": "Negro",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Negro",
+      "hex": "#1a1a1a"
+     },
+     {
+      "ref": "Brz-Goma-Bit-02",
+      "nom": "Gris",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Gris",
+      "hex": "#8a8d90"
+     },
+     {
+      "ref": "Brz-Goma-Bit-03",
+      "nom": "Azul",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Azul",
+      "hex": "#26426b"
+     }
+    ],
+    "mat": "Caucho"
    }
   ],
   "ejes": {
