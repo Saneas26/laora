@@ -228,12 +228,16 @@
     /* Y el veto FINO, por los tres a la vez (Óscar, 13/08/2026): la caja
        de oro rosa con la esfera negra no lleva silicona, aunque cada cosa
        por separado sí exista. Se escribe «C3-E3-Brz-Goma-Bit-04» y lo que
-       desaparece es el brazalete, que es el último que se elige. */
+       desaparece es el brazalete, que es el último que se elige.
+       En dos piezas —«E3-Brz-Piel-P01»— vale para TODAS las cajas: en el
+       Trinchera la esfera azul no se ofrece con la piel negra ni con la
+       verde, y da igual el color y el tamaño de la caja. */
     var vetos = (D.ejes || {}).veto || [];
     if (vetos.length && D.esf.length) {
       var esfAhora = D.esf[e.esf];
       if (esfAhora &&
-          vetos.indexOf(caja.ref + '-' + esfAhora.ref + '-' + v.ref) >= 0) return false;
+          (vetos.indexOf(caja.ref + '-' + esfAhora.ref + '-' + v.ref) >= 0 ||
+           vetos.indexOf(esfAhora.ref + '-' + v.ref) >= 0)) return false;
     }
     /* `compatNo` es la lista negra por caja (Óscar, 11/08/2026): el
        acero negro es exclusivo de la caja Negra PVD, así que los
@@ -722,7 +726,9 @@
         var vetos = (D.ejes || {}).veto || [];
         if (vale && vetos.length) {
           var vAhora = varActual();
-          if (vAhora && vetos.indexOf(caja.ref + '-' + D.esf[i].ref + '-' + vAhora.ref) >= 0) {
+          if (vAhora &&
+              (vetos.indexOf(caja.ref + '-' + D.esf[i].ref + '-' + vAhora.ref) >= 0 ||
+               vetos.indexOf(D.esf[i].ref + '-' + vAhora.ref) >= 0)) {
             vale = false;
           }
         }
