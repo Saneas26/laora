@@ -63,6 +63,15 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 V_CSS = 32
 V_JS = 69
 
+# LA FICHA TÉCNICA, APAGADA (Óscar, 13/08/2026)
+# ------------------------------------------------------------
+# «vamos a quitar ver ficha técnica del configurador, no la elimines
+# porque la mandaremos a laorateca». Así que no se borra nada: el botón
+# de la cabecera y el diálogo entero dejan de escribirse en la página,
+# y el JavaScript que los maneja ya comprueba que existan. Para
+# devolverlos, poner esto en True.
+FICHA_TECNICA = False
+
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
 
@@ -404,9 +413,45 @@ def validas(d):
                            resto + gem['coste'] if gem else None)
 
 
+BOTON_FICHA_HTML = ('<button class="cf-ficha-boton" type="button" data-abre-ficha>'
+                    'Ver la ficha completa</button>')
+
+
+def manto_html(d):
+    """El diálogo de la ficha técnica. Sigue aquí entero, sin usar, para
+    el día que se monte en laOrateca."""
+    return f"""<div class="cf-manto" data-manto hidden>
+  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
+    <header class="cf-tec-cab">
+      <div>
+        <p class="cf-tec-eyebrow">{d['codigo']} · FICHA TÉCNICA</p>
+        <h2 id="cf-tec-t">Todo el {d['nombre']}.<br><em>Dato a dato.</em></h2>
+      </div>
+      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
+      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
+    </header>
+    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
+    <footer class="cf-tec-pie">
+      <p data-tec-pie></p>
+      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
+    </footer>
+  </div>
+</div>"""
+
+
+def piezas_ficha(d):
+    """El botón y el diálogo de la ficha técnica, o nada si está apagada."""
+    if not FICHA_TECNICA:
+        return ('<!-- La ficha técnica se fue a laOrateca (Óscar, 13/08/2026): '
+                'el botón y el diálogo no se escriben. FICHA_TECNICA = True los devuelve. -->',
+                '')
+    return BOTON_FICHA_HTML, manto_html(d)
+
+
 def pantalla(slug):
     d = PIEZAS[slug]
     mov, caj, esf, brz = d['mov'], d['caj'], d['esf'], d['brz']
+    BOTON_FICHA, MANTO_FICHA = piezas_ficha(d)
 
     # El «desde» es el PRECIO más bajo que se puede pagar, no el coste
     # más bajo: desde que hay suelo, la configuración más barata de
@@ -624,7 +669,7 @@ def pantalla(slug):
   <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
     <img src="{LOGO}" alt="laOra"><b>{d['nombre']}</b>
   </a>
-  <button class="cf-ficha-boton" type="button" data-abre-ficha>Ver la ficha completa</button>
+  {BOTON_FICHA}
 </header>
 
 <div class="cf-cuerpo">
@@ -681,23 +726,7 @@ def pantalla(slug):
   <button class="cf-reservar" type="button" data-reservar>Reservar</button>
 </footer>
 
-<div class="cf-manto" data-manto hidden>
-  <div class="cf-tec" role="dialog" aria-modal="true" aria-labelledby="cf-tec-t">
-    <header class="cf-tec-cab">
-      <div>
-        <p class="cf-tec-eyebrow">{d['codigo']} · FICHA TÉCNICA</p>
-        <h2 id="cf-tec-t">Todo el {d['nombre']}.<br><em>Dato a dato.</em></h2>
-      </div>
-      <p class="cf-tec-ref"><span>Referencia</span><strong data-tec-ref>—</strong></p>
-      <button class="cf-tec-x" type="button" data-cierra-tec aria-label="Cerrar la ficha">×</button>
-    </header>
-    <div class="cf-tec-cuerpo" data-tec-cuerpo></div>
-    <footer class="cf-tec-pie">
-      <p data-tec-pie></p>
-      <button class="cf-ficha-boton" type="button" data-cierra-tec>Cerrar</button>
-    </footer>
-  </div>
-</div>
+{MANTO_FICHA}
 
 <script type="application/json" data-piezas>{datos}</script>
 <script src="/assets/js/carrito.js?v=1"></script>
