@@ -615,6 +615,15 @@
       "esl": ""
      },
      {
+      "ref": "Brz-Nailon-N05",
+      "nom": "Azul",
+      "c": 6.49,
+      "eti": "Azul",
+      "cier": "Hebilla mariposa",
+      "hex": "#23405e",
+      "esl": ""
+     },
+     {
       "ref": "Brz-Nailon-N06",
       "nom": "Verde",
       "c": 6.49,
@@ -793,6 +802,9 @@
     }
    },
    "veto": [
+    "E1-Brz-Nailon-N05",
+    "E2-Brz-Nailon-N05",
+    "E3-Brz-Nailon-N06",
     "E3-Brz-Piel-P01",
     "E3-Brz-Piel-P02",
     "E3-Brz-Piel-P03",
@@ -805,7 +817,8 @@
     "E3-Brz-Piel-P29",
     "E3-Brz-Piel-P30",
     "E3-Brz-Piel-P31",
-    "E3-Brz-Nailon-N06"
+    "E4-Brz-Nailon-N05",
+    "E5-Brz-Nailon-N05"
    ]
   }
  },
