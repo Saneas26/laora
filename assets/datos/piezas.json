@@ -569,6 +569,14 @@
       "eti": "Negro",
       "hex": "#1e1f22",
       "esl": ""
+     },
+     {
+      "ref": "Brz-Ante-P73",
+      "nom": "Azul",
+      "c": 4.49,
+      "eti": "Azul",
+      "hex": "#23405e",
+      "esl": ""
      }
     ],
     "mat": "Ante"
@@ -840,12 +848,16 @@
     }
    },
    "veto": [
+    "E1-Brz-Ante-P73",
     "E1-Brz-Nailon-N05",
     "E1-Brz-Nailon-N05-CA",
     "E1-Brz-Nailon-N05-HN",
+    "E2-Brz-Ante-P73",
     "E2-Brz-Nailon-N05",
     "E2-Brz-Nailon-N05-CA",
     "E2-Brz-Nailon-N05-HN",
+    "E3-Brz-Ante-P70",
+    "E3-Brz-Ante-P72",
     "E3-Brz-Nailon-N06",
     "E3-Brz-Nailon-N06-CA",
     "E3-Brz-Nailon-N06-HN",
@@ -861,9 +873,11 @@
     "E3-Brz-Piel-P29",
     "E3-Brz-Piel-P30",
     "E3-Brz-Piel-P31",
+    "E4-Brz-Ante-P73",
     "E4-Brz-Nailon-N05",
     "E4-Brz-Nailon-N05-CA",
     "E4-Brz-Nailon-N05-HN",
+    "E5-Brz-Ante-P73",
     "E5-Brz-Nailon-N05",
     "E5-Brz-Nailon-N05-CA",
     "E5-Brz-Nailon-N05-HN"
