@@ -162,7 +162,7 @@
    {
     "ref": "C4",
     "nombre": "Titanio, 36 mm",
-    "coste": 54.69,
+    "coste": 58.47,
     "color": "Titanio",
     "fondo": "solida",
     "diam": "36"
@@ -210,7 +210,7 @@
    {
     "ref": "C11",
     "nombre": "Titanio, 39 mm",
-    "coste": 54.69,
+    "coste": 58.47,
     "color": "Titanio",
     "fondo": "solida",
     "diam": "39",
