@@ -1468,6 +1468,12 @@
     "nombre": "Gris",
     "coste": 21.39,
     "cajas": "Todas"
+   },
+   {
+    "ref": "E6",
+    "nombre": "Marrón",
+    "coste": 25.99,
+    "cajas": "C1, C3"
    }
   ],
   "brz": [
@@ -1574,7 +1580,15 @@
     }
    },
    "veto": [
-    "C3-E3-Brz-Goma-Bit-04"
+    "C3-E4-Brz-Goma-Bit-04",
+    "C3-E2-Brz-Goma-Bit-04",
+    "C3-E3-Brz-Goma-Bit-04",
+    "C3-E5-Brz-Goma-Bit-04",
+    "C1-E6-Brz-Acero-Bit-07",
+    "C1-E6-Brz-Goma-Bit-01",
+    "C1-E6-Brz-Goma-Bit-03",
+    "C3-E6-Brz-Acero-Bit-06",
+    "C3-E6-Brz-Acero-Bit-07"
    ]
   },
   "inicio": {
