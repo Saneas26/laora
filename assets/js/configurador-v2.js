@@ -225,6 +225,16 @@
      no la traiga lo admite todo, como hasta ahora. */
   function varVale(v, caja) {
     var ej = (D.ejes || {}).brz || {};
+    /* Y el veto FINO, por los tres a la vez (Óscar, 13/08/2026): la caja
+       de oro rosa con la esfera negra no lleva silicona, aunque cada cosa
+       por separado sí exista. Se escribe «C3-E3-Brz-Goma-Bit-04» y lo que
+       desaparece es el brazalete, que es el último que se elige. */
+    var vetos = (D.ejes || {}).veto || [];
+    if (vetos.length && D.esf.length) {
+      var esfAhora = D.esf[e.esf];
+      if (esfAhora &&
+          vetos.indexOf(caja.ref + '-' + esfAhora.ref + '-' + v.ref) >= 0) return false;
+    }
     /* `compatNo` es la lista negra por caja (Óscar, 11/08/2026): el
        acero negro es exclusivo de la caja Negra PVD, así que los
        biseles normales lo vetan aquí. */
