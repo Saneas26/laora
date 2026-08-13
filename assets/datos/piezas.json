@@ -1496,7 +1496,9 @@
       "nom": "Plata y oro rosa",
       "c": 21.19,
       "cier": "Cierre plegable",
-      "eti": "Plata y oro rosa"
+      "eti": "Plata y oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#d9a48a"
      }
     ],
     "mat": "Acero"
