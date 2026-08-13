@@ -1427,11 +1427,6 @@
     "coste": 29.57
    },
    {
-    "ref": "C2",
-    "nombre": "Oro",
-    "coste": 34.97
-   },
-   {
     "ref": "C3",
     "nombre": "Oro Rosa",
     "coste": 34.97
@@ -1440,11 +1435,6 @@
     "ref": "C4",
     "nombre": "Negro",
     "coste": 34.97
-   },
-   {
-    "ref": "C5",
-    "nombre": "Bronce",
-    "coste": 38.17
    }
   ],
   "esf": [
@@ -1470,7 +1460,7 @@
     "ref": "E4",
     "nombre": "Azul",
     "coste": 21.39,
-    "cajas": "Todas"
+    "cajas": "C1, C3"
    },
    {
     "ref": "E5",
@@ -1516,28 +1506,8 @@
       "c": 21.19
      },
      {
-      "ref": "Brz-Acero-Bit-03",
-      "nom": "Azul",
-      "c": 21.19
-     },
-     {
-      "ref": "Brz-Acero-Bit-04",
-      "nom": "Oro",
-      "c": 21.19
-     },
-     {
-      "ref": "Brz-Acero-Bit-05",
-      "nom": "Plata y oro",
-      "c": 21.19
-     },
-     {
       "ref": "Brz-Acero-Bit-06",
       "nom": "Oro rosa",
-      "c": 21.19
-     },
-     {
-      "ref": "Brz-Acero-Bit-07",
-      "nom": "Plata y oro rosa",
       "c": 21.19
      }
     ]
@@ -1553,16 +1523,7 @@
       "Brz-Goma-Bit-01",
       "Brz-Goma-Bit-02",
       "Brz-Goma-Bit-03",
-      "Brz-Acero-Bit-01",
-      "Brz-Acero-Bit-05",
-      "Brz-Acero-Bit-07"
-     ],
-     "C2": [
-      "Brz-Goma-Bit-01",
-      "Brz-Goma-Bit-02",
-      "Brz-Goma-Bit-03",
-      "Brz-Acero-Bit-04",
-      "Brz-Acero-Bit-05"
+      "Brz-Acero-Bit-01"
      ],
      "C3": [
       "Brz-Goma-Bit-01",
@@ -1570,18 +1531,9 @@
       "Brz-Goma-Bit-03",
       "Brz-Acero-Bit-01",
       "Brz-Acero-Bit-02",
-      "Brz-Acero-Bit-03",
-      "Brz-Acero-Bit-05",
-      "Brz-Acero-Bit-06",
-      "Brz-Acero-Bit-07"
+      "Brz-Acero-Bit-06"
      ],
      "C4": [
-      "Brz-Goma-Bit-01",
-      "Brz-Goma-Bit-02",
-      "Brz-Goma-Bit-03",
-      "Brz-Acero-Bit-02"
-     ],
-     "C5": [
       "Brz-Goma-Bit-01",
       "Brz-Goma-Bit-02",
       "Brz-Goma-Bit-03",
