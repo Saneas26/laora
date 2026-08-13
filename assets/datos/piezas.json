@@ -554,126 +554,83 @@
     "nombre": "Tela de vela, hebilla mariposa",
     "v": [
      {
-      "ref": "Brz-Nailon-N04",
-      "nom": "Negro",
+      "ref": "Brz-Nailon-N05-HN",
+      "nom": "Azul, hebilla negra",
       "c": 6.49,
-      "cier": "Hebilla mariposa",
-      "eti": "Negro",
-      "hex": "#1e1f22",
-      "esl": ""
+      "eti": "Azul",
+      "cier": "Hebilla clásica negra",
+      "hex": "#23405e",
+      "esl": "",
+      "foto": "Brz-Nailon-N05"
      },
      {
       "ref": "Brz-Nailon-N05",
       "nom": "Azul",
       "c": 6.49,
       "eti": "Azul",
-      "cier": "Hebilla mariposa",
+      "cier": "Hebilla clásica plateada",
       "hex": "#23405e",
       "esl": ""
      },
      {
-      "ref": "Brz-Nailon-N06",
-      "nom": "Verde",
+      "ref": "Brz-Nailon-N07-HN",
+      "nom": "Caqui, hebilla negra",
       "c": 6.49,
-      "cier": "Hebilla mariposa",
-      "eti": "Verde",
-      "hex": "#2f4632",
-      "esl": ""
+      "cier": "Hebilla clásica negra",
+      "eti": "Caqui",
+      "hex": "#8a7a55",
+      "esl": "",
+      "foto": "Brz-Nailon-N07"
      },
      {
       "ref": "Brz-Nailon-N07",
       "nom": "Caqui",
       "c": 6.49,
-      "cier": "Hebilla mariposa",
+      "cier": "Hebilla clásica plateada",
       "eti": "Caqui",
       "hex": "#8a7a55",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Nailon-N04-HN",
+      "nom": "Negro, hebilla negra",
+      "c": 6.49,
+      "cier": "Hebilla clásica negra",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-Nailon-N04",
+      "nom": "Negro",
+      "c": 6.49,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Nailon-N06-HN",
+      "nom": "Verde, hebilla negra",
+      "c": 6.49,
+      "cier": "Hebilla clásica negra",
+      "eti": "Verde",
+      "hex": "#2f4632",
+      "esl": "",
+      "foto": "Brz-Nailon-N06"
+     },
+     {
+      "ref": "Brz-Nailon-N06",
+      "nom": "Verde",
+      "c": 6.49,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Verde",
+      "hex": "#2f4632",
       "esl": ""
      }
     ],
     "mat": "Nato"
-   },
-   {
-    "id": "B16",
-    "nombre": "Lona de nailon, liberación rápida",
-    "v": [
-     {
-      "ref": "Brz-Lona-L01",
-      "nom": "Negro",
-      "c": 5.39,
-      "cier": "Hebilla plateada",
-      "eti": "Negro",
-      "hex": "#1e1f22",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L02",
-      "nom": "Negro hebilla negra",
-      "c": 6.09,
-      "foto": "Brz-Lona-L01",
-      "cier": "Hebilla negra",
-      "eti": "Negro",
-      "hex": "#1e1f22",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L03",
-      "nom": "Gris",
-      "c": 6.09,
-      "cier": "Hebilla plateada",
-      "eti": "Gris",
-      "hex": "#6f7276",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L04",
-      "nom": "Gris hebilla negra",
-      "c": 5.39,
-      "foto": "Brz-Lona-L03",
-      "cier": "Hebilla negra",
-      "eti": "Gris",
-      "hex": "#6f7276",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L05",
-      "nom": "Verde militar",
-      "c": 5.49,
-      "cier": "Hebilla plateada",
-      "eti": "Verde militar",
-      "hex": "#4a5a3a",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L06",
-      "nom": "Verde militar hebilla negra",
-      "c": 6.09,
-      "foto": "Brz-Lona-L05",
-      "cier": "Hebilla negra",
-      "eti": "Verde militar",
-      "hex": "#4a5a3a",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L08",
-      "nom": "Caqui hebilla negra",
-      "c": 6.09,
-      "cier": "Hebilla negra",
-      "eti": "Caqui",
-      "hex": "#8a7a55",
-      "esl": ""
-     },
-     {
-      "ref": "Brz-Lona-L09",
-      "nom": "Caqui",
-      "c": 5.99,
-      "foto": "Brz-Lona-L08",
-      "cier": "Hebilla plateada",
-      "eti": "Caqui",
-      "hex": "#8a7a55",
-      "esl": ""
-     }
-    ],
-    "mat": "Cordura"
    }
   ],
   "ejes": {
@@ -757,7 +714,10 @@
       "Brz-Piel-P07",
       "Brz-Nailon-N04",
       "Brz-Nailon-N06",
-      "Brz-Nailon-N07"
+      "Brz-Nailon-N07",
+      "Brz-Nailon-N04-HN",
+      "Brz-Nailon-N06-HN",
+      "Brz-Nailon-N07-HN"
      ],
      "C7": [
       "Brz-Piel-P01",
@@ -768,7 +728,10 @@
       "Brz-Piel-P07",
       "Brz-Nailon-N04",
       "Brz-Nailon-N06",
-      "Brz-Nailon-N07"
+      "Brz-Nailon-N07",
+      "Brz-Nailon-N04-HN",
+      "Brz-Nailon-N06-HN",
+      "Brz-Nailon-N07-HN"
      ],
      "C10": [
       "Brz-Piel-P01",
@@ -779,7 +742,10 @@
       "Brz-Piel-P07",
       "Brz-Nailon-N04",
       "Brz-Nailon-N06",
-      "Brz-Nailon-N07"
+      "Brz-Nailon-N07",
+      "Brz-Nailon-N04-HN",
+      "Brz-Nailon-N06-HN",
+      "Brz-Nailon-N07-HN"
      ],
      "C14": [
       "Brz-Piel-P01",
@@ -790,14 +756,20 @@
       "Brz-Piel-P07",
       "Brz-Nailon-N04",
       "Brz-Nailon-N06",
-      "Brz-Nailon-N07"
+      "Brz-Nailon-N07",
+      "Brz-Nailon-N04-HN",
+      "Brz-Nailon-N06-HN",
+      "Brz-Nailon-N07-HN"
      ]
     }
    },
    "veto": [
     "E1-Brz-Nailon-N05",
+    "E1-Brz-Nailon-N05-HN",
     "E2-Brz-Nailon-N05",
+    "E2-Brz-Nailon-N05-HN",
     "E3-Brz-Nailon-N06",
+    "E3-Brz-Nailon-N06-HN",
     "E3-Brz-Piel-P01",
     "E3-Brz-Piel-P02",
     "E3-Brz-Piel-P03",
@@ -811,7 +783,9 @@
     "E3-Brz-Piel-P30",
     "E3-Brz-Piel-P31",
     "E4-Brz-Nailon-N05",
-    "E5-Brz-Nailon-N05"
+    "E4-Brz-Nailon-N05-HN",
+    "E5-Brz-Nailon-N05",
+    "E5-Brz-Nailon-N05-HN"
    ]
   },
   "_cajaFuera": {
@@ -855,6 +829,94 @@
      "foto": "C2",
      "recargo": 10,
      "sobre": "C6"
+    }
+   ]
+  },
+  "_brzFuera": {
+   "porQue": "Óscar, 13/08/2026: «vamos a eliminar la selección cordura». No tenía ninguna foto. Vuelve pegándola en «brz».",
+   "familias": [
+    {
+     "id": "B16",
+     "nombre": "Lona de nailon, liberación rápida",
+     "v": [
+      {
+       "ref": "Brz-Lona-L01",
+       "nom": "Negro",
+       "c": 5.39,
+       "cier": "Hebilla plateada",
+       "eti": "Negro",
+       "hex": "#1e1f22",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L02",
+       "nom": "Negro hebilla negra",
+       "c": 6.09,
+       "foto": "Brz-Lona-L01",
+       "cier": "Hebilla negra",
+       "eti": "Negro",
+       "hex": "#1e1f22",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L03",
+       "nom": "Gris",
+       "c": 6.09,
+       "cier": "Hebilla plateada",
+       "eti": "Gris",
+       "hex": "#6f7276",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L04",
+       "nom": "Gris hebilla negra",
+       "c": 5.39,
+       "foto": "Brz-Lona-L03",
+       "cier": "Hebilla negra",
+       "eti": "Gris",
+       "hex": "#6f7276",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L05",
+       "nom": "Verde militar",
+       "c": 5.49,
+       "cier": "Hebilla plateada",
+       "eti": "Verde militar",
+       "hex": "#4a5a3a",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L06",
+       "nom": "Verde militar hebilla negra",
+       "c": 6.09,
+       "foto": "Brz-Lona-L05",
+       "cier": "Hebilla negra",
+       "eti": "Verde militar",
+       "hex": "#4a5a3a",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L08",
+       "nom": "Caqui hebilla negra",
+       "c": 6.09,
+       "cier": "Hebilla negra",
+       "eti": "Caqui",
+       "hex": "#8a7a55",
+       "esl": ""
+      },
+      {
+       "ref": "Brz-Lona-L09",
+       "nom": "Caqui",
+       "c": 5.99,
+       "foto": "Brz-Lona-L08",
+       "cier": "Hebilla plateada",
+       "eti": "Caqui",
+       "hex": "#8a7a55",
+       "esl": ""
+      }
+     ],
+     "mat": "Cordura"
     }
    ]
   }
