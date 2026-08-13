@@ -558,6 +558,16 @@
     "nombre": "Tela de vela, hebilla mariposa",
     "v": [
      {
+      "ref": "Brz-Nailon-N05-CA",
+      "nom": "Azul, cierre automático",
+      "c": 6.49,
+      "eti": "Azul",
+      "cier": "Cierre automático",
+      "hex": "#23405e",
+      "esl": "",
+      "foto": "Brz-Nailon-N05"
+     },
+     {
       "ref": "Brz-Nailon-N05-HN",
       "nom": "Azul, hebilla negra",
       "c": 6.49,
@@ -575,6 +585,16 @@
       "cier": "Hebilla clásica plateada",
       "hex": "#23405e",
       "esl": ""
+     },
+     {
+      "ref": "Brz-Nailon-N07-CA",
+      "nom": "Caqui, cierre automático",
+      "c": 6.49,
+      "cier": "Cierre automático",
+      "eti": "Caqui",
+      "hex": "#8a7a55",
+      "esl": "",
+      "foto": "Brz-Nailon-N07"
      },
      {
       "ref": "Brz-Nailon-N07-HN",
@@ -596,6 +616,16 @@
       "esl": ""
      },
      {
+      "ref": "Brz-Nailon-N04-CA",
+      "nom": "Negro, cierre automático",
+      "c": 6.49,
+      "cier": "Cierre automático",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
       "ref": "Brz-Nailon-N04-HN",
       "nom": "Negro, hebilla negra",
       "c": 6.49,
@@ -613,6 +643,16 @@
       "eti": "Negro",
       "hex": "#1e1f22",
       "esl": ""
+     },
+     {
+      "ref": "Brz-Nailon-N06-CA",
+      "nom": "Verde, cierre automático",
+      "c": 6.49,
+      "cier": "Cierre automático",
+      "eti": "Verde",
+      "hex": "#2f4632",
+      "esl": "",
+      "foto": "Brz-Nailon-N06"
      },
      {
       "ref": "Brz-Nailon-N06-HN",
@@ -721,7 +761,10 @@
       "Brz-Nailon-N07",
       "Brz-Nailon-N04-HN",
       "Brz-Nailon-N06-HN",
-      "Brz-Nailon-N07-HN"
+      "Brz-Nailon-N07-HN",
+      "Brz-Nailon-N07-CA",
+      "Brz-Nailon-N04-CA",
+      "Brz-Nailon-N06-CA"
      ],
      "C7": [
       "Brz-Piel-P01",
@@ -735,7 +778,10 @@
       "Brz-Nailon-N07",
       "Brz-Nailon-N04-HN",
       "Brz-Nailon-N06-HN",
-      "Brz-Nailon-N07-HN"
+      "Brz-Nailon-N07-HN",
+      "Brz-Nailon-N07-CA",
+      "Brz-Nailon-N04-CA",
+      "Brz-Nailon-N06-CA"
      ],
      "C10": [
       "Brz-Piel-P01",
@@ -749,7 +795,10 @@
       "Brz-Nailon-N07",
       "Brz-Nailon-N04-HN",
       "Brz-Nailon-N06-HN",
-      "Brz-Nailon-N07-HN"
+      "Brz-Nailon-N07-HN",
+      "Brz-Nailon-N07-CA",
+      "Brz-Nailon-N04-CA",
+      "Brz-Nailon-N06-CA"
      ],
      "C14": [
       "Brz-Piel-P01",
@@ -763,16 +812,22 @@
       "Brz-Nailon-N07",
       "Brz-Nailon-N04-HN",
       "Brz-Nailon-N06-HN",
-      "Brz-Nailon-N07-HN"
+      "Brz-Nailon-N07-HN",
+      "Brz-Nailon-N07-CA",
+      "Brz-Nailon-N04-CA",
+      "Brz-Nailon-N06-CA"
      ]
     }
    },
    "veto": [
     "E1-Brz-Nailon-N05",
+    "E1-Brz-Nailon-N05-CA",
     "E1-Brz-Nailon-N05-HN",
     "E2-Brz-Nailon-N05",
+    "E2-Brz-Nailon-N05-CA",
     "E2-Brz-Nailon-N05-HN",
     "E3-Brz-Nailon-N06",
+    "E3-Brz-Nailon-N06-CA",
     "E3-Brz-Nailon-N06-HN",
     "E3-Brz-Piel-P01",
     "E3-Brz-Piel-P02",
@@ -787,8 +842,10 @@
     "E3-Brz-Piel-P30",
     "E3-Brz-Piel-P31",
     "E4-Brz-Nailon-N05",
+    "E4-Brz-Nailon-N05-CA",
     "E4-Brz-Nailon-N05-HN",
     "E5-Brz-Nailon-N05",
+    "E5-Brz-Nailon-N05-CA",
     "E5-Brz-Nailon-N05-HN"
    ]
   },
