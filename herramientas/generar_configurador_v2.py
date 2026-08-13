@@ -61,7 +61,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
 V_CSS = 32
-V_JS = 66
+V_JS = 67
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
@@ -524,6 +524,21 @@ def pantalla(slug):
         s = ''.join(c for c in s if unicodedata.category(c) != 'Mn')
         return s.lower().replace(' ', '-')
 
+    # Y la más fina de todas: FAMILIA + CIERRE, en cierres/B15-hebilla-
+    # clasica-plateada.webp (Óscar, 13/08/2026). El nato lleva las mismas
+    # hebillas que la piel pero la foto enseña la correa entera, así que
+    # no puede ser la misma tarjeta. Esta manda sobre las otras dos.
+    cierres_fam = {}
+    for f_ in brz:
+        for v_ in f_['v']:
+            nom = v_.get('cier') or ''
+            clave = f'{f_["id"]}|{nom}'
+            if not nom or clave in cierres_fam:
+                continue
+            rel = f'{PIEZAS_IMG}/cierres/{f_["id"]}-{slug_cierre(nom)}.webp'
+            if hay(rel):
+                cierres_fam[clave] = con_version(rel)
+
     cierres_nom = {}
     for f_ in brz:
         for v_ in f_['v']:
@@ -587,7 +602,8 @@ def pantalla(slug):
 
     datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
                         'brazaletes': brazaletes, 'completas': completas, 'peques': peques, 'cierres': cierres,
-                        'cierresNom': cierres_nom, 'detallePies': detalle_pies,
+                        'cierresNom': cierres_nom, 'cierresFam': cierres_fam,
+                        'detallePies': detalle_pies,
                         'solape': SOLAPE},
                        ensure_ascii=False).replace('<', chr(92) + 'u003c')
 

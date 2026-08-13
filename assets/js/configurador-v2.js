@@ -544,8 +544,13 @@
     if (!caja) return;
     /* Primero la foto de la familia; si no la hay, la del NOMBRE de la
        hebilla (Óscar, 11/08/2026): las pieles comparten hebillas. */
-    var foto = (D.cierres || {})[D.brz[e.brz].id] ||
-      (D.cierresNom || {})[varActual().cier];
+    /* De lo más fino a lo más general: la tarjeta de esta familia CON
+       este cierre —el nato y la piel llevan la misma hebilla pero la foto
+       enseña la correa entera—, la de la familia, y la del nombre suelto. */
+    var famAhora = D.brz[e.brz], cierAhora = varActual().cier;
+    var foto = (D.cierresFam || {})[famAhora.id + '|' + cierAhora] ||
+      (D.cierres || {})[famAhora.id] ||
+      (D.cierresNom || {})[cierAhora];
     caja.hidden = !(VER_CIERRE && foto);
     if (caja.hidden) return;
     $('[data-cierre-img]').src = foto;
