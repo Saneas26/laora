@@ -509,9 +509,14 @@ body{
      Sigue estando dentro de la ficha técnica. */
   .cf-ref{display:none}
   .cf-cab{padding:0 14px;gap:10px}
-  /* En el teléfono el visor es una franja: las características se
-     arriman a la esquina y encogen un punto, sin bajar del suelo. */
-  .cf-specs{top:10px;left:12px;gap:3px 10px;max-width:calc(100% - 24px)}
+  /* En el teléfono el visor es una franja de 375 px y el reloj, centrado,
+     se comía las palabras de la derecha —«Negra y amarilla» caía encima de
+     la caja—. Aquí el reloj se arrima a la derecha y las características se
+     quedan con la columna de la izquierda: sin solaparse y sin encoger la
+     letra, que el suelo son 12,5 px. */
+  .cf-visor{justify-content:flex-end;padding-right:12px}
+  .cf-specs{top:10px;left:12px;gap:3px 8px;max-width:46%}
+  .cf-specs dd{overflow-wrap:anywhere}
   .cf-desglose,.cf-aviso-maqueta{display:none}
   .cf-panel{padding:16px 18px}
   .cf-barra{grid-template-columns:1fr auto;gap:12px}
