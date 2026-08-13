@@ -1484,14 +1484,6 @@
       "hex": "#c9cdd2"
      },
      {
-      "ref": "Brz-Acero-Bit-06",
-      "nom": "Oro rosa",
-      "c": 21.19,
-      "cier": "Cierre plegable",
-      "eti": "Oro rosa",
-      "hex": "#d9a48a"
-     },
-     {
       "ref": "Brz-Acero-Bit-07",
       "nom": "Plata y oro rosa",
       "c": 21.19,
@@ -1499,6 +1491,14 @@
       "eti": "Plata y oro rosa",
       "hex": "#c9cdd2",
       "hex2": "#d9a48a"
+     },
+     {
+      "ref": "Brz-Acero-Bit-06",
+      "nom": "Oro rosa",
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Oro rosa",
+      "hex": "#d9a48a"
      }
     ],
     "mat": "Acero"
