@@ -415,6 +415,12 @@
     /* Ya NO hay acabados. Un modelo, y el cliente lo monta entero
        (Óscar, 10/08/2026): Alba, Levante, Cenit y Eclipse no existen. */
     var filas = [['Movimiento', p.mov.cal], ['Caja', p.caja.nombre]];
+    /* El fondo y el agua salen de la caja, no del movimiento: el titanio
+       lleva tapa roscada y aguanta 200 m, y el mismo acero baja de 100 a
+       50 m cuando la tapa es de cristal (Óscar, 13/08/2026). Se dicen
+       solo si la caja los trae escritos. */
+    if (p.caja.tapa) filas.push(['Fondo', p.caja.tapa]);
+    if (p.caja.agua) filas.push(['Hermeticidad', p.caja.agua]);
     var pack = ((D.ejes || {}).esf || {}).enPack;
     if (p.esf) filas.push(['Esfera', nombreEsf(p.esf)]);
     else if (D.esf.length && pack) filas.push(['Esfera', pack]);
