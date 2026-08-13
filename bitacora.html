@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=30">
+<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=31">
 </head>
 <body>
 
@@ -21,6 +21,11 @@
 <div class="cf-cuerpo">
 
   <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <!-- Lo que llevas elegido, dentro de la foto y a la izquierda del
+         todo (Óscar, 13/08/2026). Sin rótulo: cada línea se explica
+         sola, y un «Características» encima solo quitaría sitio. -->
+    <dl class="cf-specs" data-specs aria-label="Lo que llevas elegido"></dl>
+
     <div class="cf-montaje" data-montaje>
       <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
       <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
@@ -61,8 +66,6 @@
       <p class="cf-rotulo">Movimiento <b>uno solo</b></p>
       <div class="cf-fijo"><b>Suizo Automático</b><span></span></div>
     </div>
-    <div class="cf-mitades">
-      <div class="cf-mitad-izq">
     <div class="cf-grupo">
       <p class="cf-rotulo">Caja <b>3 opciones</b></p>
       <div class="cf-fichas" role="group" aria-label="Elegir caja">
@@ -80,14 +83,6 @@
         <button class="cf-ficha" type="button" data-esf="3" aria-pressed="false">Azul</button>
         <button class="cf-ficha" type="button" data-esf="4" aria-pressed="false">Gris</button>
         <button class="cf-ficha" type="button" data-esf="5" aria-pressed="false">Marrón</button>
-      </div>
-    </div>
-      </div>
-      <div class="cf-mitad-der">
-        <div class="cf-grupo">
-          <p class="cf-rotulo">Características</p>
-          <dl class="cf-specs" data-specs></dl>
-        </div>
       </div>
     </div>
     <div class="cf-grupo">

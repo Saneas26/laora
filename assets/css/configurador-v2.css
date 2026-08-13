@@ -386,37 +386,34 @@ body{
 
 .cf-variantes{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
 
-/* ---------- LAS CARACTERÍSTICAS, encima del brazalete ---------- */
-/* Dos columnas de pares, no una. Con once características en una sola
-   columna el bloque medía 260 px y empujaba el brazalete fuera de la
-   pantalla —la regla 3—. En dos columnas mide 130 y cabe todo. */
-/* LA PANTALLA PARTIDA (Óscar, 10/08/2026): caja y esfera a la izquierda,
-   características a la derecha a su misma altura, con una línea vertical
-   gris medio entre las dos. En el teléfono vuelven a apilarse: a 375 px
-   dos columnas dejarían 160 px por mitad y nada cabría. */
-.cf-mitades{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
-.cf-mitad-izq{display:flex;flex-direction:column;gap:18px;min-width:0}
-.cf-mitad-der{
-  border-left:1px solid rgba(28,29,27,.34);
-  padding-left:16px;min-width:0;
-}
-.cf-mitad-der .cf-rotulo{justify-content:flex-end}
-.cf-mitad-der .cf-specs{
-  display:flex;flex-direction:column;gap:2px;text-align:right;
-  background:none;padding:0;
-}
-.cf-mitad-der .cf-specs dt{margin-top:7px}
-.cf-mitad-der .cf-specs dt:first-child{margin-top:0}
-.cf-mitad-der .cf-specs dd{font-weight:600}
+/* ---------- LAS CARACTERÍSTICAS, DENTRO DE LA FOTO ----------
+   Óscar, 13/08/2026: «quitar las características de esa zona, así hay
+   más espacio para las elecciones, y colocarlas dentro de la pantalla
+   foto del reloj a la izquierda del todo».
 
+   Van en la esquina de arriba a la izquierda del visor, en dos columnas:
+   la característica en gris oscuro y negrita, y su descripción a la
+   derecha, en gris más claro, regular y un punto más pequeña.
+
+   No se hunden más de 12,5 px —el suelo de esta pantalla— ni siquiera
+   siendo «la letra pequeña»: 13 px la etiqueta y 12,5 px el valor.
+
+   `pointer-events:none` porque son un dato, no un control: el ratón
+   pasa de largo y no roba el clic a nada. */
 .cf-specs{
-  display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);
-  gap:3px 12px;align-items:baseline;
-  padding:8px 14px;border-radius:11px;background:var(--ivory);
-  font-size:12.5px;
+  position:absolute;top:16px;left:16px;z-index:3;pointer-events:none;
+  display:grid;grid-template-columns:auto auto;
+  gap:5px 12px;align-items:baseline;
+  max-width:calc(100% - 32px);
 }
-.cf-specs dt{color:var(--muted);white-space:nowrap}
-.cf-specs dd{text-align:right;font-weight:500}
+.cf-specs dt{
+  color:#2e2b29;font-weight:700;font-size:13px;
+  white-space:nowrap;letter-spacing:.01em;
+}
+.cf-specs dd{
+  color:#6f6b68;font-weight:400;font-size:12.5px;
+  text-align:left;min-width:0;
+}
 
 /* ---------- BRAZALETE: cuadros pequeños, siete en dos filas ----------
    96 px de ancho es la medida que hace que quepan cuatro por fila en
@@ -496,7 +493,6 @@ body{
 @media (max-width:1080px){
   .cf-cuerpo{grid-template-columns:minmax(0,1fr) 480px}
   .cf-brazaletes{grid-template-columns:repeat(3,1fr)}
-  .cf-specs{grid-template-columns:auto minmax(0,1fr)}
   .cf-cabeza{width:240px;height:218px}
   .cf-cabeza img{width:822px;left:-302px;top:-287px}   /* escala 0,7477 */
   .cf-correa{width:105px;margin-right:14px}
@@ -513,8 +509,9 @@ body{
      Sigue estando dentro de la ficha técnica. */
   .cf-ref{display:none}
   .cf-cab{padding:0 14px;gap:10px}
-  .cf-mitades{grid-template-columns:1fr;gap:18px}
-  .cf-mitad-der{border-left:0;padding-left:0;border-top:1px solid rgba(28,29,27,.34);padding-top:14px}
+  /* En el teléfono el visor es una franja: las características se
+     arriman a la esquina y encogen un punto, sin bajar del suelo. */
+  .cf-specs{top:10px;left:12px;gap:3px 10px;max-width:calc(100% - 24px)}
   .cf-desglose,.cf-aviso-maqueta{display:none}
   .cf-panel{padding:16px 18px}
   .cf-barra{grid-template-columns:1fr auto;gap:12px}

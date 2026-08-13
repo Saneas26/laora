@@ -60,7 +60,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
-V_CSS = 30
+V_CSS = 31
 V_JS = 66
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
@@ -458,23 +458,15 @@ def pantalla(slug):
     elif len(esf) == 1:
         ejes.append(fijo('Esfera', esf[0]['nombre'], 'con sus agujas'))
 
-    # LA PANTALLA SE PARTE EN DOS (Óscar, 10/08/2026): a la izquierda la
-    # caja y la esfera, a la derecha las características a su misma
-    # altura, separadas por una línea vertical. Todo lo acumulado desde
-    # el movimiento va a la mitad izquierda.
-    centro = ejes[1:]
-    del ejes[1:]
-    ejes.append('''    <div class="cf-mitades">
-      <div class="cf-mitad-izq">
-''' + '\n'.join(centro) + '''
-      </div>
-      <div class="cf-mitad-der">
-        <div class="cf-grupo">
-          <p class="cf-rotulo">Características</p>
-          <dl class="cf-specs" data-specs></dl>
-        </div>
-      </div>
-    </div>''')
+    # LAS CARACTERÍSTICAS SE VAN AL VISOR (Óscar, 13/08/2026)
+    # ------------------------------------------------------------
+    # Estuvieron en una segunda columna del panel desde el 10/08, y esa
+    # columna le comía la mitad del ancho a las elecciones —el Trinchera
+    # tiene catorce cajas y cincuenta y cinco correas—. Ahora el panel es
+    # de una sola columna y las características van dentro de la foto,
+    # arriba a la izquierda, donde hay sitio de sobra y no estorban.
+    # El `<dl data-specs>` que las rellena está ahora en la sección del
+    # visor; aquí solo queda no partir la pantalla en dos.
     if len(brz) == 1 and len(brz[0]['v']) == 1:
         ejes.append(brazalete_fijo((ej.get('brz') or {}).get('nombres', {}).get(brz[0]['id'], brz[0]['nombre']),
                                    (ej.get('brz') or {}).get('apunte', 'en el pack de la caja')))
@@ -622,6 +614,11 @@ def pantalla(slug):
 <div class="cf-cuerpo">
 
   <section class="cf-visor" aria-label="El reloj que estás configurando">
+    <!-- Lo que llevas elegido, dentro de la foto y a la izquierda del
+         todo (Óscar, 13/08/2026). Sin rótulo: cada línea se explica
+         sola, y un «Características» encima solo quitaría sitio. -->
+    <dl class="cf-specs" data-specs aria-label="Lo que llevas elegido"></dl>
+
     <div class="cf-montaje" data-montaje>
       <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
       <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
