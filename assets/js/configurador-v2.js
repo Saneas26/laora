@@ -715,6 +715,17 @@
       todos('[data-esf]').forEach(function (el) {
         var i = Number(el.dataset.esf);
         var vale = esferaVale(D.esf[i], caja);
+        /* El veto de tres piezas corta por los dos lados: si estás en la
+           correa marrón de la caja de oro rosa, las esferas que no van
+           con ella tampoco se pintan (Óscar, 13/08/2026). Si no, se
+           colaban por aquí y al pulsarlas te cambiaban el brazalete. */
+        var vetos = (D.ejes || {}).veto || [];
+        if (vale && vetos.length) {
+          var vAhora = varActual();
+          if (vAhora && vetos.indexOf(caja.ref + '-' + D.esf[i].ref + '-' + vAhora.ref) >= 0) {
+            vale = false;
+          }
+        }
         el.hidden = !vale;
         if (vale) vivas++;
         el.setAttribute('aria-pressed', String(hay && i === e.esf));
