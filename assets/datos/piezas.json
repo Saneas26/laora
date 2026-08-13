@@ -307,17 +307,20 @@
      {
       "ref": "Brz-Piel-P02",
       "nom": "Negro, pespunte blanco, hebilla clásica plateada",
-      "c": 30.79
+      "c": 30.79,
+      "foto": "Brz-Piel-P01"
      },
      {
       "ref": "Brz-Piel-P03",
       "nom": "Negro, pespunte blanco, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P01"
      },
      {
       "ref": "Brz-Piel-P04",
       "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 30.39
+      "c": 30.39,
+      "foto": "Brz-Piel-P01"
      },
      {
       "ref": "Brz-Piel-P05",
@@ -327,17 +330,20 @@
      {
       "ref": "Brz-Piel-P06",
       "nom": "Negro, pespunte negro, hebilla clásica plateada",
-      "c": 31.59
+      "c": 31.59,
+      "foto": "Brz-Piel-P05"
      },
      {
       "ref": "Brz-Piel-P07",
       "nom": "Negro, pespunte negro, hebilla clásica negra",
-      "c": 31.79
+      "c": 31.79,
+      "foto": "Brz-Piel-P05"
      },
      {
       "ref": "Brz-Piel-P08",
       "nom": "Negro, pespunte negro, hebilla clásica de oro rosa",
-      "c": 29.99
+      "c": 29.99,
+      "foto": "Brz-Piel-P05"
      },
      {
       "ref": "Brz-Piel-P09",
@@ -347,17 +353,20 @@
      {
       "ref": "Brz-Piel-P10",
       "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada",
-      "c": 31.79
+      "c": 31.79,
+      "foto": "Brz-Piel-P09"
      },
      {
       "ref": "Brz-Piel-P11",
       "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P09"
      },
      {
       "ref": "Brz-Piel-P12",
       "nom": "Marrón oscuro, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 31.19
+      "c": 31.19,
+      "foto": "Brz-Piel-P09"
      },
      {
       "ref": "Brz-Piel-P13",
@@ -367,17 +376,20 @@
      {
       "ref": "Brz-Piel-P14",
       "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada",
-      "c": 31.59
+      "c": 31.59,
+      "foto": "Brz-Piel-P13"
      },
      {
       "ref": "Brz-Piel-P15",
       "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P13"
      },
      {
       "ref": "Brz-Piel-P16",
       "nom": "Marrón oscuro, pespunte negro, hebilla clásica de oro rosa",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P13"
      },
      {
       "ref": "Brz-Piel-P17",
@@ -387,17 +399,20 @@
      {
       "ref": "Brz-Piel-P18",
       "nom": "Azul, pespunte blanco, hebilla clásica plateada",
-      "c": 29.79
+      "c": 29.79,
+      "foto": "Brz-Piel-P17"
      },
      {
       "ref": "Brz-Piel-P19",
       "nom": "Azul, pespunte blanco, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P17"
      },
      {
       "ref": "Brz-Piel-P20",
       "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 32.39
+      "c": 32.39,
+      "foto": "Brz-Piel-P17"
      },
      {
       "ref": "Brz-Piel-P21",
@@ -407,17 +422,20 @@
      {
       "ref": "Brz-Piel-P22",
       "nom": "Azul, pespunte negro, hebilla clásica plateada",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P21"
      },
      {
       "ref": "Brz-Piel-P23",
       "nom": "Azul, pespunte negro, hebilla clásica negra",
-      "c": 31.79
+      "c": 31.79,
+      "foto": "Brz-Piel-P21"
      },
      {
       "ref": "Brz-Piel-P24",
       "nom": "Azul, pespunte negro, hebilla clásica de oro rosa",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P21"
      },
      {
       "ref": "Brz-Piel-P25",
@@ -427,17 +445,20 @@
      {
       "ref": "Brz-Piel-P26",
       "nom": "Verde, pespunte blanco, hebilla clásica plateada",
-      "c": 31.79
+      "c": 31.79,
+      "foto": "Brz-Piel-P25"
      },
      {
       "ref": "Brz-Piel-P27",
       "nom": "Verde, pespunte blanco, hebilla clásica negra",
-      "c": 32.39
+      "c": 32.39,
+      "foto": "Brz-Piel-P25"
      },
      {
       "ref": "Brz-Piel-P28",
       "nom": "Verde, pespunte blanco, hebilla clásica de oro rosa",
-      "c": 32.39
+      "c": 32.39,
+      "foto": "Brz-Piel-P25"
      },
      {
       "ref": "Brz-Piel-P29",
@@ -447,17 +468,20 @@
      {
       "ref": "Brz-Piel-P30",
       "nom": "Verde, pespunte a tono, hebilla clásica plateada",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P29"
      },
      {
       "ref": "Brz-Piel-P31",
       "nom": "Verde, pespunte a tono, hebilla clásica negra",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P29"
      },
      {
       "ref": "Brz-Sintetica-P50",
       "nom": "Verde, pespunte a tono, hebilla clásica de oro rosa",
-      "c": 31.99
+      "c": 31.99,
+      "foto": "Brz-Piel-P29"
      }
     ]
    },
@@ -571,7 +595,8 @@
      {
       "ref": "Brz-Lona-L02",
       "nom": "Negro hebilla negra",
-      "c": 6.09
+      "c": 6.09,
+      "foto": "Brz-Lona-L01"
      },
      {
       "ref": "Brz-Lona-L03",
@@ -581,7 +606,8 @@
      {
       "ref": "Brz-Lona-L04",
       "nom": "Gris hebilla negra",
-      "c": 5.39
+      "c": 5.39,
+      "foto": "Brz-Lona-L03"
      },
      {
       "ref": "Brz-Lona-L05",
@@ -591,7 +617,8 @@
      {
       "ref": "Brz-Lona-L06",
       "nom": "Verde militar hebilla negra",
-      "c": 6.09
+      "c": 6.09,
+      "foto": "Brz-Lona-L05"
      },
      {
       "ref": "Brz-Lona-L07",
@@ -606,12 +633,14 @@
      {
       "ref": "Brz-Lona-L09",
       "nom": "Caqui",
-      "c": 5.99
+      "c": 5.99,
+      "foto": "Brz-Lona-L08"
      },
      {
       "ref": "Brz-Lona-L10",
       "nom": "Azul marino hebilla negra",
-      "c": 6.09
+      "c": 6.09,
+      "foto": "Brz-Lona-L07"
      }
     ]
    }
