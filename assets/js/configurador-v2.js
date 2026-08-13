@@ -41,13 +41,21 @@
     var f = ((D.ejes || {}).mov || {}).fondo;
     return f ? f[D.mov[e.mov].ref] : null;
   }
+  /* El fondo que pide el movimiento manda... salvo que ese color no se
+     fabrique con ese fondo. El titanio solo existe en fondo sólido y el
+     automático se tachaba entero: «cuando en el trinchera elijo el
+     automático suizo, se tacha la opción caja de titanio cuando sí es
+     posible» (Óscar, 13/08/2026). Se busca primero la que cuadra con el
+     movimiento y, si no la hay, la de ese color y tamaño que exista. */
   function cajaDe(diam, color) {
-    var fo = fondo();
-    for (var i = 0; i < D.caj.length; i++) {
-      var c = D.caj[i];
-      if (c.diam === diam && c.color === color && c.fondo === fo) return i;
+    var fo = fondo(), suelta = -1, i, c;
+    for (i = 0; i < D.caj.length; i++) {
+      c = D.caj[i];
+      if (c.diam !== diam || c.color !== color) continue;
+      if (c.fondo === fo) return i;
+      if (suelta < 0) suelta = i;
     }
-    return -1;
+    return suelta;
   }
   /* Al cambiar de movimiento o de tamaño puede desaparecer el color que
      estaba puesto —el titanio solo existe con fondo sólido—: se cae al
