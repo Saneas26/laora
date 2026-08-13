@@ -613,8 +613,12 @@ def pantalla(slug):
 
     <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
 
-    <p class="cf-aviso-maqueta" data-aviso hidden>La foto es un montaje de dos capas: la cabeza
-      del reloj y, detrás, el brazalete. Aquí el brazalete todavía va dibujado.</p>
+    <!-- El aviso de «el brazalete va dibujado» se retira de la pantalla
+         (Óscar, 13/08/2026: «comentarios solo a mí, no en pantalla»). Era
+         una nota de taller: el cliente no tiene por qué enterarse de cómo
+         montamos la foto. El JavaScript que lo encendía sigue ahí y no
+         estorba —comprueba que exista—, así que para recuperarlo basta
+         con devolver este párrafo. -->
 
     <!-- Óscar, 12/08/2026: que nadie compre creyendo que la imagen es una
          fotografía del reloj terminado. Va en todas, siempre, chiquita y
