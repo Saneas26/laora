@@ -1959,22 +1959,22 @@
    {
     "ref": "C1",
     "nombre": "Bisel negro y blanco",
-    "coste": 38.97
+    "coste": 35.57
    },
    {
     "ref": "C2",
     "nombre": "Bisel azul y blanco",
-    "coste": 38.97
+    "coste": 35.57
    },
    {
     "ref": "C3",
     "nombre": "Bisel negro y oro rosa",
-    "coste": 38.97
+    "coste": 35.57
    },
    {
     "ref": "C4",
     "nombre": "Bisel negro mate",
-    "coste": 38.97
+    "coste": 35.57
    }
   ],
   "esf": [
@@ -2022,7 +2022,7 @@
      {
       "ref": "Brz-316-A08",
       "nom": "Plata",
-      "c": 33.39,
+      "c": 45.79,
       "cier": "Hebilla plegable",
       "eti": "Plata",
       "hex": "#c9cdd2"
@@ -2038,7 +2038,7 @@
      {
       "ref": "Brz-316-A09",
       "nom": "Plata",
-      "c": 40.36,
+      "c": 52.76,
       "cier": "Hebilla plegable",
       "eti": "Plata",
       "hex": "#c9cdd2",
@@ -2064,7 +2064,8 @@
   "inicio": {
    "brz": 0,
    "v": 0
-  }
+  },
+  "_notaCajas": "14/08/2026: la caja base es la de 31,79 € (cristal mineral, 100 m). La malla milanesa monta OTRA caja, la de 44,19 € (zafiro, 50 m): sus brazaletes llevan sumada la diferencia de 12,40 €. La hoja aún dice 35,19/56,99; los 44,19 y 31,79 son de Óscar, de hoy."
  },
  "coctel": {
   "nombre": "Cóctel",
