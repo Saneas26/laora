@@ -311,6 +311,9 @@
   position:fixed;inset:0;z-index:80;background:rgba(18,20,20,.46);
   display:flex;align-items:center;justify-content:center;padding:20px;
 }
+/* el display:flex de arriba le ganaba al atributo hidden del navegador
+   y el velo salía desde el primer segundo: aquí se le devuelve el mando */
+.cv2-velo[hidden]{display:none}
 .cv2-aviso{
   position:relative;background:#fff;border:1px solid var(--cv2-linea);
   max-width:760px;width:100%;display:grid;grid-template-columns:1fr 1fr;
