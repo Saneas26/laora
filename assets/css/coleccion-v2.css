@@ -20,6 +20,9 @@
   --cv2-negro:#121414;
   --cv2-gris:#4A4A4A;
   --cv2-crema:#FDFDFB;
+  /* el crema DEL PRIMER ACTO: el #FDFDFB de las tarjetas es casi blanco
+     y sobre el fondo no se veía; este sí se ve y sigue siendo cálido */
+  --cv2-crema-hero:#F8F5EE;
   --cv2-oro:#D4AF37;
   --cv2-linea:rgba(74,74,74,.14);
   --cv2-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -33,7 +36,7 @@
 /* El primer acto entero —kicker, titular y barra de modelos— va sobre
    crema (Óscar, 14/08/2026), el mismo de las tarjetas. */
 .cv2-hero{
-  background:var(--cv2-crema);
+  background:var(--cv2-crema-hero);
 }
 .cv2-hero>div{
   max-width:1440px;margin:0 auto;
@@ -65,7 +68,7 @@
 /* Anclas a cada modelo dentro de esta misma hoja. En pantalla
    estrecha la fila se desliza de lado; `sticky` para que acompañe. */
 .cv2-modelos{
-  position:sticky;top:0;z-index:40;background:var(--cv2-crema);
+  position:sticky;top:0;z-index:40;background:var(--cv2-crema-hero);
   border-top:1px solid var(--cv2-linea);
   border-bottom:1px solid var(--cv2-linea);
 }
