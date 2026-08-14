@@ -152,46 +152,29 @@
   font-family:var(--cv2-mono);font-size:19px;font-weight:700;
   letter-spacing:-.01em;margin:0;
 }
-.cv2-desc{
-  font-size:14px;line-height:1.5;color:var(--cv2-gris);margin:0;flex:1;
-}
-.cv2-precio-fila{
-  display:flex;justify-content:space-between;align-items:baseline;
-  border-top:1px solid var(--cv2-linea);padding-top:12px;
-}
-.cv2-precio{
+/* El precio, solo, bajo el nombre (Óscar, 14/08/2026) */
+.cv2-precio-solo{
   font-family:var(--cv2-mono);font-size:19px;font-weight:700;
-}
-.cv2-cal{
-  font-family:var(--cv2-mono);font-size:12.5px;font-weight:500;
-  color:var(--cv2-gris);letter-spacing:.04em;
+  margin:0;border-bottom:1px solid var(--cv2-linea);padding-bottom:10px;
 }
 
-/* ---------- LA FICHA TÉCNICA DESPLEGABLE ---------- */
-/* Cuatro grupos por tarjeta, como la maqueta: cerrada es una línea
-   discreta; abierta, texto de 14px —el mínimo que fijó Óscar—. */
-.cv2-ficha{border-top:1px solid var(--cv2-linea)}
-.cv2-ficha details{border-bottom:1px solid var(--cv2-linea)}
-.cv2-ficha details:last-child{border-bottom:0}
-.cv2-ficha summary{
-  font-family:var(--cv2-mono);font-size:12.5px;font-weight:700;
-  letter-spacing:.09em;text-transform:uppercase;color:var(--cv2-negro);
-  padding:11px 2px;cursor:pointer;list-style:none;
-  display:flex;justify-content:space-between;align-items:center;
+/* ---------- LA LISTA DE LA TARJETA ---------- */
+/* El formato que fijó Óscar (14/08/2026): nombres cortos, mínimas
+   palabras y sin explicar más. Una línea por dato, a 14px, con
+   filos de 1px como las tablas de especificación de la maqueta.
+   La primera línea es el movimiento y va en mono, destacada. */
+.cv2-lista{
+  list-style:none;margin:0;padding:0;flex:1;
 }
-.cv2-ficha summary::-webkit-details-marker{display:none}
-.cv2-ficha summary::after{
-  content:'';width:7px;height:7px;flex:0 0 auto;margin-left:10px;
-  border-right:1.5px solid var(--cv2-gris);
-  border-bottom:1.5px solid var(--cv2-gris);
-  transform:rotate(45deg);transition:transform .18s;
+.cv2-lista li{
+  font-size:14px;line-height:1.45;color:var(--cv2-gris);
+  padding:6px 0;border-bottom:1px solid var(--cv2-linea);
 }
-.cv2-ficha details[open] summary::after{transform:rotate(225deg)}
-.cv2-ficha details[open] summary{color:var(--cv2-negro)}
-.cv2-ficha p{
-  font-size:14px;line-height:1.55;color:var(--cv2-gris);
-  margin:0;padding:0 2px 12px;
+.cv2-lista li:first-child{
+  font-family:var(--cv2-mono);font-weight:700;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--cv2-negro);
 }
+.cv2-lista li:last-child{border-bottom:0}
 
 /* ---------- EL BOTÓN ---------- */
 .cv2-comprar{
