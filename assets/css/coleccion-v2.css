@@ -30,7 +30,12 @@
 .cv2 *{box-sizing:border-box}
 
 /* ---------- EL HERO ---------- */
+/* El primer acto entero —kicker, titular y barra de modelos— va sobre
+   crema (Óscar, 14/08/2026), el mismo de las tarjetas. */
 .cv2-hero{
+  background:var(--cv2-crema);
+}
+.cv2-hero>div{
   max-width:1440px;margin:0 auto;
   padding:72px 64px 40px;
 }
@@ -60,7 +65,7 @@
 /* Anclas a cada modelo dentro de esta misma hoja. En pantalla
    estrecha la fila se desliza de lado; `sticky` para que acompañe. */
 .cv2-modelos{
-  position:sticky;top:0;z-index:40;background:#fff;
+  position:sticky;top:0;z-index:40;background:var(--cv2-crema);
   border-top:1px solid var(--cv2-linea);
   border-bottom:1px solid var(--cv2-linea);
 }
@@ -249,7 +254,7 @@
   .cv2-tarjetas{grid-template-columns:1fr 1fr}
 }
 @media (max-width:820px){
-  .cv2-hero{padding:44px 20px 28px}
+  .cv2-hero>div{padding:44px 20px 28px}
   .cv2-modelos div{padding:0 20px;gap:20px}
   .cv2-modelo{padding:48px 20px 40px}
   .cv2-pendiente{padding:0 20px}
