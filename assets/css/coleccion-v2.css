@@ -115,6 +115,13 @@
   margin:56px 0 6px;
 }
 .cv2-sub b{color:var(--cv2-negro)}
+/* El titular de la fila de tarjetas (Óscar, 14/08/2026): «Movimientos
+   Suizos», más grande y en mayúsculas; debajo, los materiales en una
+   línea con separadores. */
+.cv2-sub-grande{
+  font-size:clamp(19px,2.2vw,26px);letter-spacing:.06em;
+  color:var(--cv2-negro);margin-bottom:8px;
+}
 .cv2-sub-linea{
   font-size:14px;color:var(--cv2-gris);margin:0 0 26px;
 }
