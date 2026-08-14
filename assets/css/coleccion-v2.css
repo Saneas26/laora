@@ -277,3 +277,79 @@
   .cv2-tarjetas::-webkit-scrollbar{display:none}
   .cv2-tarjeta{flex:0 0 min(78vw,320px);scroll-snap-align:start}
 }
+
+/* ---------- LAS MINIATURAS DE OTROS ACABADOS (patrón Hamilton) ----------
+   Óscar, 14/08/2026: al pasar el cursor por la tarjeta aparecen tres
+   miniaturas del mismo modelo y un «+N» que lleva al configurador.
+   Pulsar una miniatura cambia la foto grande de la tarjeta. En el
+   teléfono no hay cursor: no se pintan. */
+.cv2-minis{
+  position:absolute;left:10px;right:10px;bottom:10px;z-index:2;
+  display:flex;align-items:center;gap:8px;
+  opacity:0;transform:translateY(6px);pointer-events:none;
+  transition:opacity .18s,transform .18s;
+}
+.cv2-tarjeta:hover .cv2-minis,
+.cv2-tarjeta:focus-within .cv2-minis{
+  opacity:1;transform:none;pointer-events:auto;
+}
+.cv2-minis button{
+  width:52px;height:52px;padding:3px;border-radius:0;cursor:pointer;
+  background:#fff;border:1px solid var(--cv2-linea);
+}
+.cv2-minis button:hover{border-color:var(--cv2-negro)}
+.cv2-minis img{width:100%;height:100%;object-fit:contain;display:block}
+.cv2-minis a{
+  margin-left:auto;font-family:var(--cv2-mono);font-size:13px;font-weight:700;
+  color:var(--cv2-negro);text-decoration:none;background:#fff;
+  border:1px solid var(--cv2-linea);padding:6px 9px;
+}
+.cv2-minis a:hover{border-color:var(--cv2-oro);color:var(--cv2-oro)}
+
+/* ---------- EL AVISO DE LOS 15 SEGUNDOS ---------- */
+.cv2-velo{
+  position:fixed;inset:0;z-index:80;background:rgba(18,20,20,.46);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.cv2-aviso{
+  position:relative;background:#fff;border:1px solid var(--cv2-linea);
+  max-width:760px;width:100%;display:grid;grid-template-columns:1fr 1fr;
+}
+.cv2-aviso-x{
+  position:absolute;top:8px;right:12px;z-index:2;
+  font-size:26px;line-height:1;color:var(--cv2-gris);
+  background:none;border:0;cursor:pointer;
+}
+.cv2-aviso-x:hover{color:var(--cv2-negro)}
+.cv2-aviso-foto{
+  background:#eae8e8;display:flex;align-items:center;justify-content:center;
+  min-height:340px;
+}
+.cv2-aviso-foto img{width:82%;height:92%;object-fit:contain}
+.cv2-aviso-cuerpo{
+  padding:28px 26px;display:flex;flex-direction:column;gap:12px;
+  background:var(--cv2-crema);
+}
+.cv2-aviso-cuerpo h3{
+  font-family:var(--cv2-mono);font-size:24px;font-weight:700;margin:0;
+}
+.cv2-aviso-desde{
+  font-family:var(--cv2-mono);font-size:17px;font-weight:700;margin:0;
+}
+.cv2-aviso-boton{display:block;text-align:center;text-decoration:none;margin-top:4px}
+.cv2-aviso-cajas{display:grid;gap:10px;margin-top:6px}
+.cv2-aviso-cajas>div{
+  display:flex;align-items:center;gap:12px;
+  background:#fff;border:1px solid var(--cv2-linea);padding:12px 14px;
+}
+.cv2-aviso-cajas svg{width:24px;height:24px;flex:0 0 auto;stroke:var(--cv2-oro)}
+.cv2-aviso-cajas b{
+  font-family:var(--cv2-mono);font-size:13px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;display:block;
+}
+.cv2-aviso-cajas p{font-size:13px;color:var(--cv2-gris);margin:1px 0 0}
+@media (max-width:820px){
+  .cv2-minis{display:none}
+  .cv2-aviso{grid-template-columns:1fr;max-width:420px}
+  .cv2-aviso-foto{min-height:230px}
+}
