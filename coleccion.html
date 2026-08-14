@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Ocho relojes laOra inspirados en grandes arquetipos de la relojería mundial.">
+<meta name="description" content="Ocho relojes laOra inspirados en grandes arquetipos de la relojería mundial, al precio honesto.">
 <meta property="og:title" content="Colección · laOra">
-<meta property="og:description" content="Ocho relojes laOra inspirados en grandes arquetipos de la relojería mundial.">
+<meta property="og:description" content="Ocho relojes laOra inspirados en grandes arquetipos de la relojería mundial, al precio honesto.">
 <meta property="og:url" content="https://laora.es/coleccion.html">
 <meta property="og:image" content="https://laora.es/assets/img/relojes-2026/precisa-front.webp">
 <meta property="og:locale" content="es_ES">
@@ -16,21 +16,17 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- El diseño va en Georgia y Arial, como el original. Inter solo lo usa
-     la palabra «Saneas» del pie, y Nunito Sans el logotipo. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
-<!-- Página estática: su generador (generar.py) y el catálogo de acabados
-     se retiraron el 11/08/2026. Se edita a mano hasta el rediseño. -->
+<!-- REDISEÑO 2026 (Óscar, 14/08/2026), sobre el modelo «Precisión
+     Refinada» de Stitch: JetBrains Mono para títulos y etiquetas,
+     Inter para el cuerpo, modo claro y bordes rectos. La cabecera y
+     el pie siguen siendo los comunes del sitio. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=43">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
-<!-- `cabecera.css` ya NO dibuja la cabecera —eso lo hace la común desde
-     el 06/08/2026—, pero sigue haciendo falta: dentro está `.cb-marca`,
-     el logotipo dibujado con la O como círculo, que estas páginas usan
-     en los rótulos y en los textos de las fichas. Sin él se lee «lara». -->
+<!-- `cabecera.css`: dentro está `.cb-marca`, el logotipo dibujado con
+     la O como círculo. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=1">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
@@ -46,136 +42,155 @@
   </nav>
   <div class="header-actions">
     <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
-    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
-         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
-         un cero permanente al lado del carrito parece una web rota. -->
     <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
   </div>
 </header>
 
-<main id="inicio">
+<main id="inicio" class="cv2">
 
-  <section class="page-hero collection-hero">
-    <p class="kicker">Colección <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · 2026</p>
-    <h1>Un icono para cada forma<br><em>de vivir el tiempo.</em></h1>
-    <p>Elige por carácter, familia o uso. Cada ficha explica la referencia del homenaje, los componentes y el trabajo que hacemos en Madrid.</p>
+  <section class="cv2-hero">
+    <p class="cv2-kicker">Colección <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · 2026</p>
+    <h1>Te suena, te gusta, lo deseas...<br><em>Pero ahora al precio honesto.</em></h1>
   </section>
 
-  <section class="collection-page">
-    <h2 class="solo-lectores">Todos los relojes</h2>
-    <div class="product-grid">
-          <article class="product-card">
-            <a class="product-visual" href="/lunar.html">
-              <img src="/assets/img/relojes-2026/lunar-acero.webp" alt="Reloj Lunar de laOra" loading="lazy">
-              <span class="product-code">LO—01</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Cronógrafo</p><p>desde 209,90 €</p></div>
-            <h3><a href="/lunar.html">Lunar</a></h3>
-            <p class="product-line">El cronógrafo que mira más allá.</p>
-            <p class="homage-label">Homenaje al gran cronógrafo lunar</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/cero-cero.html">
-              <img src="/assets/img/piezas/completas/LO-05-C1-E3-Brz-316-A08.webp" alt="Reloj Cero Cero de laOra" loading="lazy">
-              <span class="product-code">LO—02</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Buceo</p><p>desde 359,90 €</p></div>
-            <h3><a href="/cero-cero.html">Cero Cero</a></h3>
-            <p class="product-line">Herramienta bajo el agua. Carácter fuera de ella.</p>
-            <p class="homage-label">Homenaje al buceador profesional contemporáneo</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/precisa.html">
-              <img src="/assets/img/relojes-2026/precisa-front.webp" alt="Reloj Precisa de laOra" loading="lazy">
-              <span class="product-code">LO—04</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Deportivo integrado</p><p>desde 269,90 €</p></div>
-            <h3><a href="/precisa.html">Precisa</a></h3>
-            <p class="product-line">La forma exacta del tiempo.</p>
-            <p class="homage-label">Homenaje al deportivo integrado de los setenta</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/trinchera.html">
-              <img src="/assets/img/relojes-2026/trinchera-hero.webp" alt="Reloj Trinchera de laOra" loading="lazy">
-              <span class="product-code">LO—05</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Reloj de campo</p><p>desde 169,90 €</p></div>
-            <h3><a href="/trinchera.html">Trinchera</a></h3>
-            <p class="product-line">Legible por instinto.</p>
-            <p class="homage-label">Homenaje al reloj de campaña clásico</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/diver.html">
-              <img src="/assets/img/relojes-2026/diver-agua.webp" alt="Reloj Diver de laOra" loading="lazy">
-              <span class="product-code">LO—06</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Buceo</p><p>desde 219,90 €</p></div>
-            <h3><a href="/diver.html">Diver</a></h3>
-            <p class="product-line">Un buceador de verdad: 300 m de resistencia, movimiento suizo.</p>
-            <p class="homage-label">El único sin homenaje. Creación propia de laOra</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/bitacora.html">
-              <img src="/assets/img/relojes-2026/bitacora.webp" alt="Reloj Bitácora de laOra" loading="lazy">
-              <span class="product-code">LO—07</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Deportivo integrado</p><p>desde 319,90 €</p></div>
-            <h3><a href="/bitacora.html">Bitácora</a></h3>
-            <p class="product-line">Equilibrio, precisión y uso diario.</p>
-            <p class="homage-label">Homenaje a la arquitectura deportiva integrada</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/tortuga.html">
-              <img src="/assets/img/relojes-2026/tortuga-detail.webp" alt="Reloj Tortuga de laOra" loading="lazy">
-              <span class="product-code">LO—08</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Buceo</p><p>desde 189,90 €</p></div>
-            <h3><a href="/tortuga.html">Tortuga</a></h3>
-            <p class="product-line">Un icono de aventura, a nuestra manera.</p>
-            <p class="homage-label">Homenaje al buceador de caja cojín</p>
-          </article>
-          <article class="product-card">
-            <a class="product-visual" href="/coctel.html">
-              <img src="/assets/img/relojes-2026/coctel-profile.webp" alt="Reloj Cóctel de laOra" loading="lazy">
-              <span class="product-code">LO—09</span>
-              <span class="product-arrow" aria-hidden="true">↗</span>
-            </a>
-            <div class="product-meta"><p>Reloj de vestir</p><p>desde 159,90 €</p></div>
-            <h3><a href="/coctel.html">Cóctel</a></h3>
-            <p class="product-line">La hora elegante, sin esperar una ocasión.</p>
-            <p class="homage-label">Homenaje a las esferas de cóctel japonesas</p>
-          </article>
-    </div>
-  </section>
-
-  <section class="finish-system">
+  <nav class="cv2-modelos" aria-label="Elegir modelo">
     <div>
-      <p class="section-number">02 — LO MONTAS TÚ</p>
-      <h2>Aquí no hay versiones.<br><em>Hay el tuyo.</em></h2>
+      <a href="#trinchera" class="activo">Trinchera</a>
+      <a href="#lunar">Lunar</a>
+      <a href="#cero-cero">Cero Cero</a>
+      <a href="#precisa">Precisa</a>
+      <a href="#diver">Diver</a>
+      <a href="#bitacora">Bitácora</a>
+      <a href="#tortuga">Tortuga</a>
+      <a href="#coctel">Cóctel</a>
     </div>
-    <div class="finish-cards">
-      <article><span>01</span><h3>Eliges el modelo</h3><b>Ocho</b><p>Cada uno con su carácter. Ahí acaba lo que decidimos nosotros.</p></article>
-      <article><span>02</span><h3>Lo configuras</h3><b>Pieza a pieza</b><p>Movimiento, caja, esfera, bisel y brazalete. Ves el precio cambiar mientras eliges.</p></article>
-      <article><span>03</span><h3>Lo encargas</h3><b>Y se monta</b><p>Compramos tus piezas, se monta a mano en Madrid y sale con su número de serie.</p></article>
-      <article class="dark"><span>04</span><h3>Nadie tiene el tuyo</h3><b>Salvo tú</b><p>Miles de combinaciones por modelo. La tuya lleva tu referencia.</p></article>
+  </nav>
+
+  <!-- ============ MODELO 1 · TRINCHERA ============ -->
+  <section class="cv2-modelo" id="trinchera">
+    <header>
+      <p class="cv2-chip">LO-02 · Reloj de campo</p>
+      <h2>laOra Trinchera</h2>
+      <p class="cv2-homenaje">Nuestro homenaje al <b>Hamilton Khaki Field</b> y al <b>Hamilton Murph</b>.</p>
+      <p class="cv2-intro">Precisión técnica y diseño histórico para el día a día. Una colección que
+        reinterpreta la estética militar clásica con los estándares de la relojería mecánica moderna.</p>
+    </header>
+
+    <p class="cv2-sub"><b>Combinaciones firmadas</b></p>
+    <p class="cv2-sub-linea">Nuestra selección curada, lista para encargar.</p>
+
+    <div class="cv2-tarjetas">
+
+      <article class="cv2-tarjeta">
+        <div class="cv2-foto">
+          <span class="cv2-chip">Acero/Piel</span>
+          <img src="/assets/img/piezas/completas/LO-02-C1-E1-Brz-Piel-P01.webp" alt="Trinchera A1: acero con piel negra" loading="lazy">
+        </div>
+        <div class="cv2-cuerpo">
+          <h3>Trinchera A1</h3>
+          <p class="cv2-desc">Caja de acero, esfera negra mate con numerales crema y piel negra con pespunte blanco.</p>
+          <div class="cv2-precio-fila"><span class="cv2-precio">249,90 €</span><span class="cv2-cal">Cal. Ronda 715</span></div>
+          <div class="cv2-ficha">
+            <details><summary>Caja y materiales</summary><p>Caja de acero de 36 mm con tapa roscada y doble corona. Piel negra con pespunte blanco y hebilla mariposa plateada.</p></details>
+            <details><summary>Movimiento</summary><p>Cuarzo suizo Ronda 715 con fecha. Precisión de −10/+20 segundos al mes y hasta 60 meses de pila.</p></details>
+            <details><summary>Esfera y agujas</summary><p>Esfera negra mate con numerales crema a doble altura y minutería perimetral. Agujas tipo catedral.</p></details>
+            <details><summary>Resistencia al agua</summary><p>100 metros · 10 atm. Apta para nadar con ella.</p></details>
+          </div>
+          <button class="cv2-comprar" type="button"
+            data-anadir='{"ref":"LO-02-M1-C1-E1-Brz-Piel-P01","nombre":"Trinchera A1","detalle":"Plata, 36 mm · Negra y amarilla","correa":"Piel · Negro, pespunte blanco, hebilla mariposa plateada","precio":249.90,"foto":"/assets/img/piezas/completas/LO-02-C1-E1-Brz-Piel-P01.webp"}'>Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="cv2-tarjeta">
+        <div class="cv2-foto">
+          <span class="cv2-chip">Negro/Nato</span>
+          <img src="/assets/img/piezas/completas/LO-02-C3-E4-Brz-Nailon-N04.webp" alt="Trinchera Táctico: caja negra con nato negro" loading="lazy">
+        </div>
+        <div class="cv2-cuerpo">
+          <h3>Trinchera Táctico</h3>
+          <p class="cv2-desc">Caja negra, esfera de doble escala de alta legibilidad con segundero rojo y nato negro.</p>
+          <div class="cv2-precio-fila"><span class="cv2-precio">179,90 €</span><span class="cv2-cal">Cal. Ronda 715</span></div>
+          <div class="cv2-ficha">
+            <details><summary>Caja y materiales</summary><p>Caja negra de 36 mm con tapa roscada y doble corona. Correa nato negra con hebilla clásica plateada.</p></details>
+            <details><summary>Movimiento</summary><p>Cuarzo suizo Ronda 715 con fecha. Precisión de −10/+20 segundos al mes y hasta 60 meses de pila.</p></details>
+            <details><summary>Esfera y agujas</summary><p>Esfera negra de doble escala 12/24 con numerales blancos y segundero rojo.</p></details>
+            <details><summary>Resistencia al agua</summary><p>100 metros · 10 atm. Apta para nadar con ella.</p></details>
+          </div>
+          <button class="cv2-comprar" type="button"
+            data-anadir='{"ref":"LO-02-M1-C3-E4-Brz-Nailon-N04","nombre":"Trinchera Táctico","detalle":"Negra, 36 mm · Negra, segundero rojo","correa":"Nato · Negro, hebilla clásica plateada","precio":179.90,"foto":"/assets/img/piezas/completas/LO-02-C3-E4-Brz-Nailon-N04.webp"}'>Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="cv2-tarjeta">
+        <div class="cv2-foto">
+          <span class="cv2-chip">Titanio/Nato</span>
+          <img src="/assets/img/piezas/completas/LO-02-C4-E5-Brz-Nailon-N07.webp" alt="Trinchera Ti: caja de titanio con nato caqui" loading="lazy">
+        </div>
+        <div class="cv2-cuerpo">
+          <h3>Trinchera Ti</h3>
+          <p class="cv2-desc">Caja de titanio con 200 metros de hermeticidad. Ligera, dura, con nato caqui.</p>
+          <div class="cv2-precio-fila"><span class="cv2-precio">269,90 €</span><span class="cv2-cal">Cal. Ronda 715</span></div>
+          <div class="cv2-ficha">
+            <details><summary>Caja y materiales</summary><p>Caja de titanio de 36 mm con tapa roscada y doble corona. Correa nato caqui con hebilla clásica plateada.</p></details>
+            <details><summary>Movimiento</summary><p>Cuarzo suizo Ronda 715 con fecha. Precisión de −10/+20 segundos al mes y hasta 60 meses de pila.</p></details>
+            <details><summary>Esfera y agujas</summary><p>Esfera negra de doble escala 12/24 con numerales blancos y segundero plata.</p></details>
+            <details><summary>Resistencia al agua</summary><p>200 metros · 20 atm. La más hermética de la familia.</p></details>
+          </div>
+          <button class="cv2-comprar" type="button"
+            data-anadir='{"ref":"LO-02-M1-C4-E5-Brz-Nailon-N07","nombre":"Trinchera Ti","detalle":"Titanio, 36 mm · Negra, segundero plata","correa":"Nato · Caqui, hebilla clásica plateada","precio":269.90,"foto":"/assets/img/piezas/completas/LO-02-C4-E5-Brz-Nailon-N07.webp"}'>Añadir al carrito</button>
+        </div>
+      </article>
+
+      <article class="cv2-tarjeta">
+        <div class="cv2-foto">
+          <span class="cv2-chip">Auto/Piel</span>
+          <img src="/assets/img/piezas/completas/LO-02-C1-E2-Brz-Piel-P09.webp" alt="Trinchera Automático: acero con piel marrón" loading="lazy">
+        </div>
+        <div class="cv2-cuerpo">
+          <h3>Trinchera Automático</h3>
+          <p class="cv2-desc">Automático suizo con tapa de cristal para ver latir el movimiento, y piel marrón.</p>
+          <div class="cv2-precio-fila"><span class="cv2-precio">339,90 €</span><span class="cv2-cal">Cal. ST2130</span></div>
+          <div class="cv2-ficha">
+            <details><summary>Caja y materiales</summary><p>Caja de acero de 36 mm con tapa de cristal para ver el movimiento. Piel marrón oscuro con pespunte blanco y hebilla mariposa plateada.</p></details>
+            <details><summary>Movimiento</summary><p>Automático Seagull ST2130, arquitectura ETA 2824-2. 25 rubíes, 28.800 alternancias por hora, 40 horas de reserva de marcha, cuerda manual y parada de segundero.</p></details>
+            <details><summary>Esfera y agujas</summary><p>Esfera negra mate con numerales blancos a doble altura y minutería perimetral. Agujas tipo catedral.</p></details>
+            <details><summary>Resistencia al agua</summary><p>50 metros · 5 atm. Para el día a día, mejor fuera del agua.</p></details>
+          </div>
+          <button class="cv2-comprar" type="button"
+            data-anadir='{"ref":"LO-02-M2-C5-E2-Brz-Piel-P09","nombre":"Trinchera Automático","detalle":"Plata, 36 mm · Negra y blanca","correa":"Piel · Marrón oscuro, pespunte blanco, hebilla mariposa plateada","precio":339.90,"foto":"/assets/img/piezas/completas/LO-02-C1-E2-Brz-Piel-P09.webp"}'>Añadir al carrito</button>
+        </div>
+      </article>
+
     </div>
+
+    <div class="cv2-confianza">
+      <article>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div><b>Envío gratuito</b><p>A toda España, con seguimiento.</p></div>
+      </article>
+      <article>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><b>Garantía 5 años</b><p>Con fondo propio de garantía por cada reloj.</p></div>
+      </article>
+    </div>
+
+    <p class="cv2-configura">¿Ninguna es la tuya?
+      <a href="/trinchera.html">Configúralo pieza a pieza — 2.488 combinaciones</a>
+    </p>
   </section>
 
-  <section class="final-cta">
-    <p class="kicker">Tu tiempo. Tu elección.</p>
-    <h2>Elige el icono.<br><em>Nosotros respondemos por el reloj.</em></h2>
-    <div class="button-row">
-      <a class="button primary" href="/filosofia.html">Por qué hacemos homenajes</a>
-      <a class="text-link" href="/taller.html">Conocer el taller</a>
-    </div>
-  </section>
+  <!-- ============ LOS DEMÁS MODELOS ============
+       Cada uno recibirá su sección completa como la del Trinchera.
+       Mientras tanto, una fila sobria con su ancla y su configurador. -->
+  <div class="cv2-pendiente">
+    <article id="lunar"><h2>laOra Lunar</h2><p>El cronógrafo que mira más allá.</p><span class="cv2-desde">desde 209,90 €</span><a href="/lunar.html">Configurar</a></article>
+    <article id="cero-cero"><h2>laOra Cero Cero</h2><p>Herramienta bajo el agua. Carácter fuera de ella.</p><span class="cv2-desde">desde 359,90 €</span><a href="/cero-cero.html">Configurar</a></article>
+    <article id="precisa"><h2>laOra Precisa</h2><p>La forma exacta del tiempo.</p><span class="cv2-desde">desde 259,90 €</span><a href="/precisa.html">Configurar</a></article>
+    <article id="diver"><h2>laOra Diver</h2><p>Un buceador de verdad: 300 m de resistencia, movimiento suizo.</p><span class="cv2-desde">desde 219,90 €</span><a href="/diver.html">Configurar</a></article>
+    <article id="bitacora"><h2>laOra Bitácora</h2><p>Equilibrio, precisión y uso diario.</p><span class="cv2-desde">desde 319,90 €</span><a href="/bitacora.html">Configurar</a></article>
+    <article id="tortuga"><h2>laOra Tortuga</h2><p>Un icono de aventura, a nuestra manera.</p><span class="cv2-desde">desde 189,90 €</span><a href="/tortuga.html">Configurar</a></article>
+    <article id="coctel"><h2>laOra Cóctel</h2><p>La hora elegante, sin esperar una ocasión.</p><span class="cv2-desde">desde 159,90 €</span><a href="/coctel.html">Configurar</a></article>
+  </div>
 
 </main>
 
@@ -223,6 +238,18 @@
   <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
+<script src="/assets/js/carrito.js?v=1"></script>
+<script>
+/* «Añadir al carrito» de las combinaciones firmadas: la línea viaja en
+   el data-anadir del botón, con la MISMA forma que entrega el
+   configurador, para que el carrito y el panel las traten igual. */
+document.addEventListener('click', function (ev) {
+  var b = ev.target.closest('[data-anadir]');
+  if (!b || typeof laoraCarritoAnadir !== 'function') return;
+  laoraCarritoAnadir(JSON.parse(b.dataset.anadir));
+  window.location.href = '/carrito.html';
+});
+</script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
