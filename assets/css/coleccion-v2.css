@@ -39,9 +39,12 @@
   letter-spacing:.1em;text-transform:uppercase;color:var(--cv2-gris);
   display:flex;align-items:baseline;gap:8px;margin:0 0 20px;
 }
-/* El logotipo dibujado necesita su tamaño de siempre: dentro de un
-   texto mono de 13px la O-círculo se quedaba en nada. */
-.cv2-kicker .cb-marca{font-size:17px;text-transform:none;letter-spacing:0}
+/* El logotipo dibujado viene pensado para fondo oscuro —color #fff—
+   y aquí el hero es blanco: sin este color era invisible. */
+.cv2-kicker .cb-marca{
+  font-size:17px;text-transform:none;letter-spacing:0;
+  color:var(--cv2-negro);
+}
 .cv2-hero h1{
   font-family:var(--cv2-mono);font-weight:700;
   font-size:clamp(28px,4.6vw,48px);line-height:1.16;
