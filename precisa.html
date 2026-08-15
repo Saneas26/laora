@@ -3,113 +3,305 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Configura tu Precisa · laOra</title>
+<meta name="description" content="laOra Precisa: el deportivo de brazalete integrado con movimientos suizos, esfera waffle y zafiro, al precio honesto.">
+<meta property="og:title" content="Precisa · laOra">
+<meta property="og:description" content="laOra Precisa: el deportivo de brazalete integrado con movimientos suizos, esfera waffle y zafiro, al precio honesto.">
+<meta property="og:url" content="https://laora.es/precisa.html">
+<meta property="og:image" content="https://laora.es/assets/img/precisa-2026/1200/azul-degradado.webp">
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="website">
+<title>Precisa · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=32">
+<!-- FICHA DE PRODUCTO 2026 (Óscar, 15/08/2026), patrón Hamilton.
+     PÁGINA ESCRITA A MANO: el generador ya no la toca (NO_GENERAR).
+     El catálogo es el de la pestaña DetallePrecisa del sheet:
+     12 referencias (6 esferas × cuarzo/automático), y esta página
+     calcula el precio con el MISMO motor (×2,7235 al 9,90 con suelo).
+     Las fotos van TAL CUAL, a marco completo, con su fondo de estudio. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/laora.css?v=43">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=4">
 </head>
-<body>
-
-<header class="cf-cab">
-  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
-    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Precisa</b>
-  </a>
-  <!-- La ficha técnica se fue a laOrateca (Óscar, 13/08/2026): el botón y el diálogo no se escriben. FICHA_TECNICA = True los devuelve. -->
+<body><header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
+    <span></span><span></span>
+  </button>
+  <nav class="main-nav" aria-label="Navegación principal" data-nav>
+    <a href="/coleccion.html" class="active">Relojes</a>
+    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/laorateca.html"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra">teca</span></a>
+  </nav>
+  <div class="header-actions">
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
+  </div>
 </header>
 
-<div class="cf-cuerpo">
+<main class="cv2">
 
-  <section class="cf-visor" aria-label="El reloj que estás configurando">
-    <!-- Lo que llevas elegido, dentro de la foto y a la izquierda del
-         todo (Óscar, 13/08/2026). Sin rótulo: cada línea se explica
-         sola, y un «Características» encima solo quitaría sitio. -->
-    <dl class="cf-specs" data-specs aria-label="Lo que llevas elegido"></dl>
+  <div class="pv-cuerpo">
 
-    <div class="cf-montaje" data-montaje>
-      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
-      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
-      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
-      <div class="cf-cabeza" data-cabeza>
-        <img data-foto alt="Precisa de laOra" hidden>
-        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+    <!-- ============ LA GALERÍA ============ -->
+    <div class="pv-galeria">
+      <div class="pv-hero pv-hero-llena">
+        <img data-pv-foto
+          src="/assets/img/precisa-2026/1200/azul-marino.webp"
+          srcset="/assets/img/precisa-2026/1200/azul-marino.webp 1200w, /assets/img/precisa-2026/azul-marino.webp 4096w"
+          sizes="(max-width:900px) 100vw, 46vw"
+          alt="laOra Precisa">
+        <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
-      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
 
-    <!-- La tarjeta del cierre cuelga del VISOR, no de la cabeza ni del
-         montaje: la cabeza mide cero en modo «foto pendiente» y el
-         montaje es un pasillo estrecho; el visor siempre tiene cuerpo
-         y la esquina es suya. -->
-    <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
-      <img data-cierre-img alt="Detalle del cierre">
-      <figcaption data-cierre-pie></figcaption>
-    </figure>
+    <!-- ============ LA COMPRA ============ -->
+    <aside class="pv-info">
+      <div>
+        <div class="pv-chips">
+          <span class="cv2-chip pv-chip-oro">Nuevo</span>
+          <span class="cv2-chip">LO-01 · Deportivo integrado</span>
+        </div>
+        <h1>Precisa</h1>
+        <p class="pv-precio" data-pv-precio>249,90 €</p>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <p class="pv-desc">Nuestro homenaje al <b>Tissot PRX</b>. La forma exacta del tiempo:
+          caja y brazalete integrados en una sola línea de acero, esfera waffle y
+          cristal de zafiro, al precio honesto.</p>
 
-    <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Movimiento <b data-pv-cal>Cal. LO_Q6026</b></p>
+          <div class="pv-opciones" data-pv="mov">
+            <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
+            <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
+          </div>
+        </div>
 
-    <!-- El aviso de «el brazalete va dibujado» se retira de la pantalla
-         (Óscar, 13/08/2026: «comentarios solo a mí, no en pantalla»). Era
-         una nota de taller: el cliente no tiene por qué enterarse de cómo
-         montamos la foto. El JavaScript que lo encendía sigue ahí y no
-         estorba —comprueba que exista—, así que para recuperarlo basta
-         con devolver este párrafo. -->
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Caja</p>
+          <p class="pv-fijo">40 mm de acero 316L con brazalete integrado · 11,5 mm de grosor</p>
+        </div>
 
-    <!-- Óscar, 12/08/2026: que nadie compre creyendo que la imagen es una
-         fotografía del reloj terminado. Va en todas, siempre, chiquita y
-         en la esquina, sin tapar el reloj. -->
-    <p class="cf-aviso-imagen">La imagen puede contener errores de diseño*</p>
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Tapa trasera</p>
+          <div class="pv-opciones" data-pv="tapa">
+            <button type="button" data-v="S" aria-pressed="true">Roscada Sólida</button>
+            <button type="button" data-v="C" aria-pressed="false">Cristal, Ve el Movimiento</button>
+          </div>
+        </div>
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Esfera</p>
+          <div class="pv-opciones" data-pv="esf"></div>
+        </div>
+
+        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+
+        <div class="pv-confianza">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============ LA FICHA TÉCNICA ============ -->
+  <section class="pv-tecnica">
+    <h2>Ficha Técnica</h2>
+    <details><summary>Caja y brazalete</summary><p data-pv-tec="caja"></p></details>
+    <details><summary>Movimiento</summary><p data-pv-tec="mov"></p></details>
+    <details><summary>Esfera y agujas</summary><p data-pv-tec="esf"></p></details>
+    <details><summary>Resistencia al agua</summary><p data-pv-tec="agua"></p></details>
   </section>
 
-  <section class="cf-panel" aria-label="Opciones del Precisa">
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
-      <p class="cf-pregunta">Si es suizo, nuestros relojes también</p>
-      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
-        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo suizo</button>
-        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
-      </div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b data-caja-cuenta>la que pide el movimiento</b></p>
-      <div class="cf-fijo" data-caja-uno><b data-caja-fijo></b></div>
-      <div class="cf-fichas" data-cajas role="group" aria-label="Elegir caja" hidden></div>
-      <p class="cf-caja-apunte" data-caja-apunte hidden></p>
-    </div>
-    <div class="cf-grupo" data-grupo-esf>
-      <p class="cf-rotulo">Esfera <b>6 opciones</b></p>
-      <div class="cf-fichas" role="group" aria-label="Elegir esfera">
-        <button class="cf-ficha" type="button" data-esf="0" aria-pressed="true">Azul claro</button>
-        <button class="cf-ficha" type="button" data-esf="1" aria-pressed="false">Azul</button>
-        <button class="cf-ficha" type="button" data-esf="2" aria-pressed="false">Blanca</button>
-        <button class="cf-ficha" type="button" data-esf="3" aria-pressed="false">Negra</button>
-        <button class="cf-ficha" type="button" data-esf="4" aria-pressed="false">Naranja</button>
-        <button class="cf-ficha" type="button" data-esf="5" aria-pressed="false">Tiffany</button>
-      </div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Brazalete <b>uno solo</b></p>
-      <div class="cf-fijo"><b>Acero 316, color plata</b><span></span></div>
-      <p class="cf-detalle" data-detalle hidden></p>
-    </div>
+</main>
 
-    <div class="cf-grupo" data-grupo-var hidden>
-      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
-      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
-    </div>
-  </section>
-</div>
-
-<footer class="cf-barra">
-  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
-  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
-  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
+<footer>
+  <a class="cb-marca" href="/coleccion.html" aria-label="laOra, a la colección">la<span class="o"></span>ra<sup>®</sup></a>
+  <div class="pie-links">
+    <a href="/coleccion.html">Relojes</a>
+    <a href="/filosofia.html">Nuestra forma de hacer</a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club laOra</a>
+    <a href="/privacidad.html">Privacidad</a>
+  </div>
+  <p class="pie-aviso">
+    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
+    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
+    no implican afiliación con sus fabricantes.
+  </p>
+  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
+  <div class="gp-grid">
+    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
+      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
+    </a>
+    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
+    </a>
+    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
+    </a>
+    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
+    </a>
+    <a class="gp-item" href="https://quemedices.vercel.app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-quemedices.png" alt="APP ¿Qué me dices?" loading="lazy"><b>¿Qué me dices?</b>
+    </a>
+  </div>
+  <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 
-
-
-<script type="application/json" data-piezas>{"nombre": "Precisa", "codigo": "LO-01", "incluido": "Acero 316, color plata", "extra": false, "mov": [{"ref": "M1", "cal": "Calibre laOra LO_Q6026", "coste": 15.05, "rot": "Cuarzo Suizo", "specs": "Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y fecha a las 3. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %. Pila de hasta 60 meses de autonomía."}, {"ref": "M2", "cal": "Calibre laOra LO_A3826", "coste": 59.01, "rot": "Automático Suizo", "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."}], "caj": [{"ref": "C1", "nombre": "Acero 316L, fondo sólido", "coste": 69.86}, {"ref": "C2", "nombre": "Acero 316L y zafiro, fondo de cristal", "coste": 51.46, "foto": "C1"}, {"ref": "C3", "nombre": "Acero 316L y zafiro antirreflejante", "coste": 95.26, "foto": "C1"}], "esf": [{"ref": "E1", "nombre": "Azul claro", "coste": 10.39, "cajas": "Todas"}, {"ref": "E2", "nombre": "Azul", "coste": 10.39, "cajas": "Todas"}, {"ref": "E3", "nombre": "Blanca", "coste": 10.39, "cajas": "Todas"}, {"ref": "E4", "nombre": "Negra", "coste": 10.39, "cajas": "Todas"}, {"ref": "E5", "nombre": "Naranja", "coste": 10.39, "cajas": "Todas"}, {"ref": "E6", "nombre": "Tiffany", "coste": 10.39, "cajas": "Todas"}], "brz": [{"id": "B00", "nombre": "Acero 316, color plata", "v": [{"ref": "Brz-Precisa-316", "nom": "Plata", "c": 0}]}], "ejes": {"mov": {"pregunta": "Si es suizo, nuestros relojes también", "tarjetas": {"M1": "Cuarzo suizo", "M2": "Automático suizo"}}, "caja": {"porMov": {"M1": {"refs": ["C1"], "apunte": "fondo sólido: en un cuarzo no hay nada que enseñar"}, "M2": {"refs": ["C2", "C3"], "apunte": "fondo de cristal para ver el movimiento"}}}, "esf": {}, "brz": {"apunte": ""}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "completas": {"LO-01-C1-E1-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E1-Brz-Precisa-316.webp?v=377ed7fe", "LO-01-C1-E2-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E2-Brz-Precisa-316.webp?v=a9e4afa2", "LO-01-C1-E3-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E3-Brz-Precisa-316.webp?v=a84d65b9", "LO-01-C1-E4-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E4-Brz-Precisa-316.webp?v=9a720b03", "LO-01-C1-E5-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E5-Brz-Precisa-316.webp?v=3be6be0b", "LO-01-C1-E6-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E6-Brz-Precisa-316.webp?v=a5af1079", "LO-01-C2-E1-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E1-Brz-Precisa-316.webp?v=377ed7fe", "LO-01-C2-E2-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E2-Brz-Precisa-316.webp?v=a9e4afa2", "LO-01-C2-E3-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E3-Brz-Precisa-316.webp?v=a84d65b9", "LO-01-C2-E4-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E4-Brz-Precisa-316.webp?v=9a720b03", "LO-01-C2-E5-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E5-Brz-Precisa-316.webp?v=3be6be0b", "LO-01-C2-E6-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E6-Brz-Precisa-316.webp?v=a5af1079", "LO-01-C3-E1-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E1-Brz-Precisa-316.webp?v=377ed7fe", "LO-01-C3-E2-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E2-Brz-Precisa-316.webp?v=a9e4afa2", "LO-01-C3-E3-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E3-Brz-Precisa-316.webp?v=a84d65b9", "LO-01-C3-E4-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E4-Brz-Precisa-316.webp?v=9a720b03", "LO-01-C3-E5-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E5-Brz-Precisa-316.webp?v=3be6be0b", "LO-01-C3-E6-Brz-Precisa-316": "/assets/img/piezas/completas/LO-01-C1-E6-Brz-Precisa-316.webp?v=a5af1079"}, "peques": {"LO-01-C1-E1-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E1-Brz-Precisa-316.webp?v=d29e8a7f", 2444], "LO-01-C1-E2-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E2-Brz-Precisa-316.webp?v=57d09ed1", 2443], "LO-01-C1-E3-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E3-Brz-Precisa-316.webp?v=a044133b", 2445], "LO-01-C1-E4-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E4-Brz-Precisa-316.webp?v=132c7b7a", 2444], "LO-01-C1-E5-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E5-Brz-Precisa-316.webp?v=4234499f", 2443], "LO-01-C1-E6-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E6-Brz-Precisa-316.webp?v=b6463c8c", 2445], "LO-01-C2-E1-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E1-Brz-Precisa-316.webp?v=d29e8a7f", 2444], "LO-01-C2-E2-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E2-Brz-Precisa-316.webp?v=57d09ed1", 2443], "LO-01-C2-E3-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E3-Brz-Precisa-316.webp?v=a044133b", 2445], "LO-01-C2-E4-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E4-Brz-Precisa-316.webp?v=132c7b7a", 2444], "LO-01-C2-E5-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E5-Brz-Precisa-316.webp?v=4234499f", 2443], "LO-01-C2-E6-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E6-Brz-Precisa-316.webp?v=b6463c8c", 2445], "LO-01-C3-E1-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E1-Brz-Precisa-316.webp?v=d29e8a7f", 2444], "LO-01-C3-E2-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E2-Brz-Precisa-316.webp?v=57d09ed1", 2443], "LO-01-C3-E3-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E3-Brz-Precisa-316.webp?v=a044133b", 2445], "LO-01-C3-E4-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E4-Brz-Precisa-316.webp?v=132c7b7a", 2444], "LO-01-C3-E5-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E5-Brz-Precisa-316.webp?v=4234499f", 2443], "LO-01-C3-E6-Brz-Precisa-316": ["/assets/img/piezas/completas/1200/LO-01-C1-E6-Brz-Precisa-316.webp?v=b6463c8c", 2445]}, "cierres": {}, "cierresNom": {}, "cierresFam": {}, "detallePies": {}, "solape": 80}</script>
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=1"></script>
-<script src="/assets/js/configurador-v2.js?v=69"></script>
+<script>
+/* ============================================================
+   EL CONFIGURADOR DEL PRECISA 2026
+   El estado son dos letras: movimiento y esfera. De ahí sale la
+   referencia EXACTA de la pestaña DetallePrecisa, el precio con
+   el motor de siempre, la foto y la ficha. Ni un precio a mano.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var IMG = '/assets/img/precisa-2026/';
+
+  /* Los costes son los de DetallePrecisa (Óscar, 15/08/2026):
+     caja cuarzo 62,99 (tapa sólida, 10 ATM) · caja automático 59,40
+     (tapa de cristal, 20 ATM) · esfera 10,39 · agujas del PT5000
+     4,89 · logo 3,78. El brazalete integrado va incluido en la caja. */
+  var MOVS = {
+    Q: { nombre: 'Cuarzo Suizo', cal: 'LO_Q6026', coste: 15.05, caja: 62.99, agujas: 0,
+         tapa: 'S', agua: '10 ATM / 100 metros',
+         tec: 'Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y fecha a las 3. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %. Pila de hasta 60 meses de autonomía.' },
+    A: { nombre: 'Automático Suizo', cal: 'LO_A3826', coste: 61.69, caja: 59.40, agujas: 4.89,
+         tapa: 'C', agua: '20 ATM / 200 metros',
+         tec: 'Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2 con 25 rubíes. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional visible por la tapa de cristal.' }
+  };
+  var ESFERAS = {
+    AZM: { nombre: 'Azul Marino',    foto: 'azul-marino',    tec: 'Waffle azul marino con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' },
+    AZD: { nombre: 'Azul Degradado', foto: 'azul-degradado', tec: 'Waffle azul degradado, del celeste al azul noche, con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' },
+    BLA: { nombre: 'Blanca',         foto: 'blanca',         tec: 'Waffle blanca con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' },
+    NEG: { nombre: 'Negra',          foto: 'negra',          tec: 'Waffle negra con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' },
+    TIF: { nombre: 'Tiffany',        foto: 'tiffany',        tec: 'Waffle azul tiffany con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' },
+    VER: { nombre: 'Verde',          foto: 'verde',          tec: 'Waffle verde con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' }
+  };
+  var ESF_COSTE = 10.39, LOGO = 3.78;
+
+  var e = { mov: 'Q', esf: 'AZM' };
+
+  /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
+  var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
+  function redondea(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return (p - bajo) <= (bajo + 10 - p) ? bajo : bajo + 10;
+  }
+  function sube990(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return bajo >= p - 1e-9 ? bajo : bajo + 10;
+  }
+  function sueloPvp(cn) {
+    var queda = 1 - IRPF - SS;
+    var porEuros = (50 / queda + cn) * (1 + IVA);
+    var margen = queda / (1 + IVA) - 0.15;
+    var porciento = margen > 0 ? queda * cn / margen : 0;
+    return sube990(Math.max(porEuros, porciento));
+  }
+  function costes() {
+    var m = MOVS[e.mov];
+    return m.coste + m.caja + ESF_COSTE + m.agujas + LOGO;
+  }
+  function precio() {
+    var c = costes();
+    var neto = c + 9 / 1.21 + (MOVS[e.mov].coste + 19) * 0.05;
+    return Math.max(redondea(c * MULT), sueloPvp(neto));
+  }
+  function referencia() {
+    var m = MOVS[e.mov];
+    return 'LO-01-' + e.mov + '-40' + m.tapa + '-' + e.esf;
+  }
+
+  var $ = function (s) { return document.querySelector(s); };
+  var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  function eu(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
+
+  function pinta() {
+    var m = MOVS[e.mov];
+    $('[data-pv-precio]').textContent = eu(precio());
+    $('[data-pv-cal]').textContent = 'Cal. ' + m.cal;
+
+    todos('[data-pv="mov"] button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.v === e.mov));
+    });
+
+    /* la tapa la decide el movimiento: la otra opción queda tachada */
+    todos('[data-pv="tapa"] button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.v === m.tapa));
+      b.disabled = b.dataset.v !== m.tapa;
+    });
+
+    $('[data-pv="esf"]').innerHTML = Object.keys(ESFERAS).map(function (k) {
+      return '<button type="button" data-v="' + k + '" aria-pressed="' +
+             (k === e.esf) + '">' + ESFERAS[k].nombre + '</button>';
+    }).join('');
+
+    var f = ESFERAS[e.esf].foto;
+    var img = $('[data-pv-foto]');
+    img.src = IMG + '1200/' + f + '.webp';
+    img.srcset = IMG + '1200/' + f + '.webp 1200w, ' + IMG + f + '.webp 4096w';
+
+    $('[data-pv-tec="caja"]').textContent =
+      'Caja de 40 mm en acero inoxidable 316L con brazalete integrado de eslabones cepillados y cierre desplegable. ' +
+      '11,5 mm de grosor y cristal de zafiro. Tapa trasera ' +
+      (m.tapa === 'C' ? 'de cristal que deja ver el movimiento.' : 'roscada sólida.');
+    $('[data-pv-tec="mov"]').textContent = m.tec;
+    $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
+    $('[data-pv-tec="agua"]').textContent = m.agua +
+      (e.mov === 'A' ? '. Apta para nadar y bucear en apnea, con la tapa de cristal sellada a presión.'
+                     : '. Apta para nadar; la tapa roscada sólida sella la caja.');
+  }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-pv] button');
+    if (b && !b.disabled) {
+      var g = b.closest('[data-pv]').dataset.pv;
+      if (g !== 'tapa') { e[g] = b.dataset.v; pinta(); }
+      return;
+    }
+    if (ev.target.closest('[data-pv-comprar]')) {
+      if (typeof laoraCarritoAnadir !== 'function') return;
+      var m = MOVS[e.mov];
+      laoraCarritoAnadir({
+        ref: referencia(),
+        nombre: 'Precisa ' + ESFERAS[e.esf].nombre,
+        detalle: 'Acero 316L 40 mm, brazalete integrado, tapa ' +
+                 (m.tapa === 'C' ? 'de cristal' : 'sólida') + ' · Esfera ' +
+                 ESFERAS[e.esf].nombre + ' · ' + m.nombre,
+        correa: 'Brazalete integrado de acero 316L',
+        precio: precio(),
+        foto: $('[data-pv-foto]').src
+      });
+      window.location.href = '/carrito.html';
+    }
+  });
+
+  pinta();
+})();
+</script>
+<script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
