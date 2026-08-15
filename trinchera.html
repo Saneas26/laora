@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=1">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=2">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
@@ -106,7 +106,6 @@
           <div class="pv-opciones" data-pv="caja">
             <button type="button" data-v="PL" aria-pressed="true">Acero Plata</button>
             <button type="button" data-v="NG" aria-pressed="false">Negra PVD</button>
-            <button type="button" data-v="TI" aria-pressed="false">Titanio</button>
             <button type="button" data-v="BR" aria-pressed="false">Bronce</button>
           </div>
         </div>
@@ -218,7 +217,6 @@
   var CAJAS = {
     PL: { nombre: 'Acero Plata', mat: 'acero inoxidable 316 en acabado plata', coste: 23.00 },
     NG: { nombre: 'Negra PVD',   mat: 'acero inoxidable 316 con recubrimiento PVD negro', coste: 23.00 },
-    TI: { nombre: 'Titanio',     mat: 'titanio', coste: 55.00 },
     BR: { nombre: 'Bronce',      mat: 'bronce, que desarrollará su pátina propia', coste: 23.00 }
   };
   var ESFERAS = {
@@ -230,6 +228,7 @@
   };
   var CORREAS = {
     NATO:  { nombre: 'Nato Verde Militar', coste: 5.69,  tec: 'nato verde militar de 20 mm con hebilla clásica plateada' },
+    NATON: { nombre: 'Nato Negro', coste: 5.69,  tec: 'nato negro de 20 mm con hebilla clásica plateada' },
     PIELN: { nombre: 'Piel Negra',   coste: 13.69, tec: 'piel genuina negra de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     PIELM: { nombre: 'Piel Marrón',  coste: 13.69, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     ACERO: { nombre: 'Brazalete Acero', coste: 21.99, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
@@ -242,6 +241,7 @@
     'KR-PIELM': ['krojo-pielm', 3968],'KB-PIELM': ['kblanco-pielm', 3946],
     'KR-ACERO': ['krojo-acero', 3977],'KB-ACERO': ['kblanco-acero', 3978],
     'MA-PACK': ['pack-murph-amarillo', 3973], 'MB-PACK': ['pack-murph-blanco', 3973],
+    'NG-NATON': ['negra-nato', 4096], 'NG-PIELN': ['negra-pieln', 4096],
     'BRONCE': ['bronce-ante', 4152]
   };
   var LOGO = 3.78;
@@ -277,15 +277,21 @@
 
   /* ---------- las REGLAS del catálogo ---------- */
   function normaliza() {
+    /* El catálogo cerrado (Óscar, 15/08/2026): solo las combinaciones
+       fotografiadas. La caja negra va con la khaki de segundero blanco
+       y elige entre nato negro y piel negra; el bronce, todo fijo. */
     if (e.caja === 'BR') { e.correa = 'ANTE'; e.esf = 'BRZ'; }
-    else {
-      if (e.correa === 'ANTE') e.correa = 'NATO';
+    else if (e.caja === 'NG') {
+      e.esf = 'KB';
+      if (e.correa !== 'NATON' && e.correa !== 'PIELN') e.correa = 'NATON';
+    } else {
+      if (e.correa === 'ANTE' || e.correa === 'NATON') e.correa = 'NATO';
       if (e.correa === 'PACK') { if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA'; }
       else if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
     }
-    if (e.mov === 'Q' || e.caja === 'TI') e.tapa = 'S';
+    if (e.mov === 'Q') e.tapa = 'S';
   }
-  function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
+  function agua() { return '5 ATM / 50 metros'; }
   function referencia() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
     if (e.caja === 'BR') return seg + 'ANTE';
@@ -315,16 +321,20 @@
         b.setAttribute('aria-pressed', String(b.dataset.v === e[g]));
       });
 
-    /* la tapa: elegible solo en automático de acero o bronce */
-    var tapaLibre = e.mov === 'A' && e.caja !== 'TI';
+    /* la tapa: elegible solo en automático */
+    var tapaLibre = e.mov === 'A';
     $('[data-pv-tapa-botones]').hidden = !tapaLibre;
     $('[data-pv-tapa-fija]').hidden = tapaLibre;
 
     /* la esfera: khaki, murph del pack, o la fija del bronce */
     var esBronce = e.caja === 'BR';
-    $('[data-pv="esf"]').hidden = esBronce;
-    $('[data-pv-esf-fija]').hidden = !esBronce;
-    if (!esBronce) {
+    var esNegra = e.caja === 'NG';
+    $('[data-pv="esf"]').hidden = esBronce || esNegra;
+    $('[data-pv-esf-fija]').hidden = !(esBronce || esNegra);
+    $('[data-pv-esf-fija]').textContent = esNegra
+      ? 'Khaki negra mate, segundero blanco'
+      : 'Khaki negra mate, agujas blancas y plata';
+    if (!esBronce && !esNegra) {
       var juego = e.correa === 'PACK'
         ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
         : [['KR', 'Khaki, Segundero Rojo'], ['KB', 'Khaki, Segundero Blanco']];
@@ -335,17 +345,19 @@
     $('[data-pv="correa"]').hidden = esBronce;
     $('[data-pv-correa-fija]').hidden = !esBronce;
     if (!esBronce) {
-      botones('correa', [['NATO', 'Nato Verde'], ['PIELN', 'Piel Negra'],
-        ['PIELM', 'Piel Marrón'], ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']], e.correa);
+      botones('correa', esNegra
+        ? [['NATON', 'Nato Negro'], ['PIELN', 'Piel Negra']]
+        : [['NATO', 'Nato Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
+           ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']], e.correa);
     }
 
     /* la foto: la del bronce es suya; el resto se fotografió en plata */
-    var clave = esBronce ? 'BRONCE' : (e.esf + '-' + e.correa);
+    var clave = esBronce ? 'BRONCE' : (esNegra ? 'NG-' + e.correa : (e.esf + '-' + e.correa));
     var f = FOTOS[clave];
     var img = $('[data-pv-foto]');
     img.src = IMG + '1200/' + f[0] + '.webp';
     img.srcset = IMG + '1200/' + f[0] + '.webp 1200w, ' + IMG + f[0] + '.webp ' + f[1] + 'w';
-    $('[data-pv-nota]').hidden = esBronce || e.caja === 'PL';
+    $('[data-pv-nota]').hidden = true;   // todas las cajas tienen ya su foto
 
     /* la ficha técnica */
     $('[data-pv-tec="caja"]').textContent =
