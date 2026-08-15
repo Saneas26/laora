@@ -2348,17 +2348,17 @@
     "mov": [
       {
         "ref": "M1",
-        "cal": "Calibre laOra LO_Q3626",
+        "cal": "Calibre laOra LO_Q3626D",
         "coste": 8.99,
         "rot": "Cuarzo japonés",
-        "specs": "Calibre laOra LO_Q3626, cuarzo de fabricación japonesa con día y fecha a las 3 y el disco del día en español. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."
+        "specs": "Calibre laOra LO_Q3626D, cuarzo de fabricación japonesa con día y fecha a las 3 y el disco del día en español. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."
       },
       {
         "ref": "M2",
-        "cal": "Calibre laOra LO_A4126",
+        "cal": "Calibre laOra LO_A4126D",
         "coste": 67.36,
         "rot": "Automático japonés",
-        "specs": "Calibre laOra LO_A4126, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, día y fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."
+        "specs": "Calibre laOra LO_A4126D, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, día y fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."
       }
     ],
     "caj": [
