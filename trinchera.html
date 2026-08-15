@@ -315,7 +315,9 @@
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
       }
     }
-    if (e.mov === 'Q' || e.caja === 'TI') e.tapa = 'S';
+    /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
+       sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
+    e.tapa = (e.mov === 'Q' || e.caja === 'TI') ? 'S' : 'C';
   }
   function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
   function referencia() {
@@ -352,10 +354,13 @@
       b.disabled = (e.estilo === 'M' && b.dataset.v !== 'PL');
     });
 
-    /* la tapa: elegible solo en automático; el titanio siempre opaca */
-    var tapaLibre = e.mov === 'A' && e.caja !== 'TI';
-    $('[data-pv-tapa-botones]').hidden = !tapaLibre;
-    $('[data-pv-tapa-fija]').hidden = tapaLibre;
+    /* la tapa la manda el movimiento: la opción imposible queda tachada */
+    $('[data-pv-tapa-botones]').hidden = false;
+    $('[data-pv-tapa-fija]').hidden = true;
+    var tapaSolida = e.mov === 'Q' || e.caja === 'TI';
+    todos('[data-pv="tapa"] button').forEach(function (b) {
+      b.disabled = tapaSolida ? b.dataset.v === 'C' : b.dataset.v === 'S';
+    });
 
     /* la esfera: khaki, murph del pack, o la fija del bronce */
     var esBronce = e.caja === 'BR';
