@@ -678,13 +678,15 @@ document.addEventListener('click', function (ev) {
     if (visto) return;
     var s = armar();
     if (!s) return;
-    var precios = Array.prototype.slice.call(s.querySelectorAll('.cv2-precio-solo'))
-      .map(function (p) { return parseFloat(p.textContent.replace('.', '').replace(',', '.')); });
+    var precios = Array.prototype.slice.call(s.querySelectorAll('.cv2-precio-lista, .cv2-precio-solo'))
+      .map(function (p) { return parseFloat(p.textContent.replace('.', '').replace(',', '.')); })
+      .filter(function (n) { return !isNaN(n); });
     velo.querySelector('[data-velo-foto]').src = s.querySelector('.cv2-foto img').src;
     velo.querySelector('[data-velo-chip]').textContent = s.querySelector('.cv2-chip').textContent;
     velo.querySelector('[data-velo-nombre]').textContent = s.querySelector('h2').textContent;
-    velo.querySelector('[data-velo-desde]').textContent =
-      'desde ' + Math.min.apply(null, precios).toFixed(2).replace('.', ',') + ' €';
+    velo.querySelector('[data-velo-desde]').textContent = precios.length
+      ? 'desde ' + Math.min.apply(null, precios).toFixed(2).replace('.', ',') + ' €'
+      : '';
     velo.querySelector('[data-velo-link]').href = s.querySelector('.cv2-configura a').getAttribute('href');
     velo.hidden = false;
     visto = true;
