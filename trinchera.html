@@ -244,6 +244,8 @@
     'KR-PIELM': ['krojo-pielm', 3968],'KB-PIELM': ['kblanco-pielm', 3946],
     'KR-ACERO': ['krojo-acero', 3977],'KB-ACERO': ['kblanco-acero', 3978],
     'MA-PACK': ['pack-murph-amarillo', 3973], 'MB-PACK': ['pack-murph-blanco', 3973],
+    'MA-PIELN': ['pack-murph-amarillo', 3973], 'MB-PIELN': ['pack-murph-blanco', 3973],
+    'MA-ACERO': ['pack-murph-amarillo', 3973], 'MB-ACERO': ['pack-murph-blanco', 3973],
     'NG-NATON': ['negra-nato', 4096], 'NG-PIELN': ['negra-pieln', 4096],
     'BRONCE': ['bronce-ante', 4152],
     'TI-ANTE': ['titanio-ante', 4151], 'TI-PIELO': ['titanio-pielo', 4154]
@@ -295,9 +297,15 @@
       e.esf = 'KB';
       if (e.correa !== 'NATON' && e.correa !== 'PIELN') e.correa = 'NATON';
     } else {
+      /* Acero plata: la esfera manda (Óscar, 15/08): las Murph van con
+         piel negra, brazalete o el pack; las khaki con todo menos el pack. */
       if (e.correa === 'ANTE' || e.correa === 'NATON' || e.correa === 'PIELO') e.correa = 'NATO';
-      if (e.correa === 'PACK') { if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA'; }
-      else if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
+      if (e.correa === 'PACK' && e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
+      if (e.esf === 'MA' || e.esf === 'MB') {
+        if (e.correa !== 'PIELN' && e.correa !== 'ACERO' && e.correa !== 'PACK') e.correa = 'PIELN';
+      } else {
+        if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
+      }
     }
     if (e.mov === 'Q' || e.caja === 'TI') e.tapa = 'S';
   }
@@ -347,22 +355,25 @@
       ? 'Khaki negra mate, segundero blanco'
       : 'Khaki negra mate, agujas blancas y plata';
     if (!esfFija) {
-      var juego = e.correa === 'PACK'
-        ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
-        : [['KR', 'Khaki, Segundero Rojo'], ['KB', 'Khaki, Segundero Blanco']];
-      botones('esf', juego, e.esf);
+      botones('esf', [
+        ['KR', 'Khaki, Segundero Rojo'], ['KB', 'Khaki, Segundero Blanco'],
+        ['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']
+      ], e.esf);
     }
 
     /* la correa: todas salvo el ante, que es del bronce */
     $('[data-pv="correa"]').hidden = esBronce;
     $('[data-pv-correa-fija]').hidden = !esBronce;
     if (!esBronce) {
+      var esMurph = e.esf === 'MA' || e.esf === 'MB';
       botones('correa', esNegra
         ? [['NATON', 'Nato Negro'], ['PIELN', 'Piel Negra']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro']]
+        : esMurph
+        ? [['PIELN', 'Piel Negra'], ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']]
         : [['NATO', 'Nato Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
-           ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']], e.correa);
+           ['ACERO', 'Brazalete Acero']], e.correa);
     }
 
     /* la foto: la del bronce es suya; el resto se fotografió en plata */
@@ -398,7 +409,9 @@
       var esBronce = e.caja === 'BR';
       laoraCarritoAnadir({
         ref: referencia(),
-        nombre: 'Trinchera ' + (esBronce ? 'Bronce' : (e.caja === 'TI' ? 'Titanio' : (e.correa === 'PACK' ? 'Murph Pack' : 'Militar'))),
+        nombre: 'Trinchera ' + (esBronce ? 'Bronce' : (e.caja === 'TI' ? 'Titanio' :
+                (e.correa === 'PACK' ? 'Murph Pack' :
+                 (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
         correa: CORREAS[e.correa].nombre,
