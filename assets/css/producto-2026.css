@@ -1,0 +1,142 @@
+/* ============================================================
+   laOra · FICHA DE PRODUCTO 2026 (patrón Hamilton)
+   ------------------------------------------------------------
+   Encargo de Óscar (15/08/2026): calcar la estructura de la ficha
+   de hamiltonwatch.com — galería a la izquierda, columna pegajosa
+   de compra a la derecha, ficha técnica desplegable debajo—.
+   Comparte lenguaje con coleccion-v2.css: se carga DESPUÉS y da
+   por hechos sus tokens (.cv2). Todo lo nuevo va con prefijo pv-.
+   Suelo de legibilidad: 13px; la ficha desplegada, 14px.
+   ============================================================ */
+
+.pv-cuerpo{
+  max-width:1440px;margin:0 auto;padding:40px 64px 24px;
+  display:grid;grid-template-columns:7fr 5fr;gap:48px;
+}
+
+/* ---------- LA GALERÍA ---------- */
+.pv-galeria{display:flex;flex-direction:column;gap:24px;min-width:0}
+.pv-hero{
+  position:relative;background:#eae8e8;border:1px solid var(--cv2-linea);
+  aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
+}
+.pv-hero img{width:82%;height:92%;object-fit:contain;display:block}
+.pv-aviso{
+  position:absolute;right:10px;bottom:8px;margin:0;
+  font-size:10px;color:#6b6664;
+}
+.pv-nota{
+  position:absolute;left:12px;top:12px;margin:0;
+  font-family:var(--cv2-mono);font-size:12px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--cv2-gris);
+  background:#fff;border:1px solid var(--cv2-linea);padding:4px 8px;
+}
+.pv-extras{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pv-extras figure{
+  margin:0;background:var(--cv2-crema);border:1px solid var(--cv2-linea);
+  aspect-ratio:1/1;overflow:hidden;
+}
+.pv-extras img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:opacity .2s;opacity:.92;
+}
+.pv-extras figure:hover img{opacity:1}
+
+/* ---------- LA COLUMNA DE COMPRA ---------- */
+.pv-info{position:relative;min-width:0}
+.pv-info>div{
+  position:sticky;top:76px;display:flex;flex-direction:column;gap:18px;
+}
+.pv-chips{display:flex;gap:8px}
+.pv-chips .cv2-chip{margin:0}
+.pv-chip-oro{background:var(--cv2-oro);color:var(--cv2-negro)}
+.pv-info h1{
+  font-family:var(--cv2-mono);font-weight:700;
+  font-size:clamp(28px,3.4vw,42px);letter-spacing:-.01em;
+  margin:0;text-transform:uppercase;
+}
+.pv-precio{
+  font-family:var(--cv2-mono);font-size:26px;font-weight:700;margin:0;
+}
+.pv-imp{font-size:13px;color:var(--cv2-gris);margin:-12px 0 0}
+.pv-desc{
+  font-size:15px;line-height:1.55;color:rgba(18,20,20,.8);margin:0;
+  border-top:1px solid var(--cv2-linea);padding-top:14px;
+}
+.pv-desc b{color:var(--cv2-oro)}
+
+/* ---------- LOS SELECTORES ---------- */
+.pv-grupo{display:flex;flex-direction:column;gap:8px}
+.pv-rotulo{
+  font-family:var(--cv2-mono);font-size:13px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--cv2-gris);
+  margin:0;display:flex;justify-content:space-between;
+}
+.pv-rotulo b{color:var(--cv2-negro);font-weight:700}
+.pv-opciones{display:flex;flex-wrap:wrap;gap:8px}
+.pv-opciones button{
+  font-family:var(--cv2-mono);font-size:13px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  border:1px solid rgba(74,74,74,.3);background:transparent;
+  color:var(--cv2-gris);padding:11px 14px;cursor:pointer;
+  position:relative;border-radius:0;
+}
+.pv-opciones button:hover{border-color:var(--cv2-negro);color:var(--cv2-negro)}
+.pv-opciones button[aria-pressed="true"]{
+  border-color:var(--cv2-negro);background:var(--cv2-crema);
+  color:var(--cv2-negro);
+}
+.pv-opciones button[aria-pressed="true"]::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--cv2-oro);
+}
+.pv-fijo{
+  font-size:13px;color:var(--cv2-gris);margin:0;
+  border:1px dashed rgba(74,74,74,.3);padding:10px 14px;
+}
+
+/* ---------- COMPRA Y CONFIANZA ---------- */
+.pv-comprar{margin-top:4px}
+.pv-confianza{
+  display:flex;justify-content:space-between;gap:12px;
+  font-size:13px;color:var(--cv2-gris);
+}
+.pv-confianza span{display:flex;align-items:center;gap:8px}
+.pv-confianza svg{width:20px;height:20px;stroke:var(--cv2-oro);flex:0 0 auto}
+
+/* ---------- LA FICHA TÉCNICA ---------- */
+.pv-tecnica{
+  max-width:1440px;margin:0 auto;padding:40px 64px 80px;
+}
+.pv-tecnica h2{
+  font-family:var(--cv2-mono);font-weight:700;text-transform:uppercase;
+  font-size:clamp(22px,2.6vw,30px);letter-spacing:-.01em;margin:0 0 18px;
+}
+.pv-tecnica details{border-top:1px solid var(--cv2-linea)}
+.pv-tecnica details:last-of-type{border-bottom:1px solid var(--cv2-linea)}
+.pv-tecnica summary{
+  font-family:var(--cv2-mono);font-size:14px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--cv2-negro);
+  padding:18px 2px;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.pv-tecnica summary::-webkit-details-marker{display:none}
+.pv-tecnica summary::after{
+  content:'';width:8px;height:8px;flex:0 0 auto;margin-left:12px;
+  border-right:1.5px solid var(--cv2-gris);
+  border-bottom:1.5px solid var(--cv2-gris);
+  transform:rotate(45deg);transition:transform .18s;
+}
+.pv-tecnica details[open] summary::after{transform:rotate(225deg)}
+.pv-tecnica details p{
+  font-size:14px;line-height:1.6;color:var(--cv2-gris);
+  margin:0;padding:0 2px 18px;max-width:820px;
+}
+
+/* ---------- TELÉFONO ---------- */
+@media (max-width:900px){
+  .pv-cuerpo{grid-template-columns:1fr;padding:24px 20px;gap:24px}
+  .pv-info>div{position:static}
+  .pv-tecnica{padding:24px 20px 56px}
+  .pv-extras{gap:12px}
+}

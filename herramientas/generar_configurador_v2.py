@@ -751,7 +751,14 @@ ARCHIVO = {'cerocero': 'cero-cero'}
 # calcula, y la colección lo lee.
 desde = {}
 
+# EL TRINCHERA YA NO SE GENERA (Óscar, 15/08/2026): su página es la ficha
+# de producto nueva, escrita A MANO sobre el catálogo DetalleTrinchera del
+# sheet (166 referencias). Si este bucle la escribiera, la pisaría.
+NO_GENERAR = {'trinchera'}
+
 for slug in PIEZAS:
+    if slug in NO_GENERAR:
+        continue
     html, barato, combis = pantalla(slug)
     nombre = ARCHIVO.get(slug, slug) + '.html'
     with open(os.path.join(RAIZ, nombre), 'w', encoding='utf-8') as f:
@@ -759,6 +766,10 @@ for slug in PIEZAS:
     desde[nombre[:-5]] = barato
     print(f'{nombre} · {combis} configuraciones'
           f' · desde {euros(desde[nombre[:-5]])}')
+
+# El Trinchera no pasa por el bucle pero su «desde» sigue siendo real:
+# cuarzo + caja de acero + esfera khaki + nato + logo, por el motor.
+desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 5.69 + 3.78) * MULT)
 
 with open(os.path.join(RAIZ, 'assets/datos/desde.json'), 'w', encoding='utf-8') as f:
     json.dump(desde, f, ensure_ascii=False, indent=1, sort_keys=True)
