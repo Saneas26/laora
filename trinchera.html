@@ -107,6 +107,7 @@
             <button type="button" data-v="PL" aria-pressed="true">Acero Plata</button>
             <button type="button" data-v="NG" aria-pressed="false">Negra PVD</button>
             <button type="button" data-v="BR" aria-pressed="false">Bronce</button>
+            <button type="button" data-v="TI" aria-pressed="false">Titanio</button>
           </div>
         </div>
 
@@ -217,14 +218,15 @@
   var CAJAS = {
     PL: { nombre: 'Acero Plata', mat: 'acero inoxidable 316 en acabado plata', coste: 23.00 },
     NG: { nombre: 'Negra PVD',   mat: 'acero inoxidable 316 con recubrimiento PVD negro', coste: 23.00 },
-    BR: { nombre: 'Bronce',      mat: 'bronce, que desarrollará su pátina propia', coste: 23.00 }
+    BR: { nombre: 'Bronce',      mat: 'bronce, que desarrollará su pátina propia', coste: 23.00 },
+    TI: { nombre: 'Titanio',     mat: 'titanio, más ligero que el acero e hipoalergénico', coste: 54.69 }
   };
   var ESFERAS = {
     KR: { nombre: 'Khaki, Segundero Rojo',   coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero rojo y agujas plateadas con lumen verde. Diámetro 29 mm.' },
     KB: { nombre: 'Khaki, Segundero Blanco', coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero blanco y agujas plateadas con lumen verde. Diámetro 29 mm.' },
     MA: { nombre: 'Murph, Numerales Crema',  coste: 21.19, tec: 'Murph negra mate con numerales crema y agujas catedral con lumen.' },
     MB: { nombre: 'Murph, Numerales Blancos',coste: 21.19, tec: 'Murph negra mate con numerales blancos y agujas catedral con lumen.' },
-    BRZ:{ nombre: 'Khaki, Agujas Blancas y Plata', coste: 17.29, tec: 'Khaki negra mate con agujas blancas y plata, reservada para la caja de bronce.' }
+    BRZ:{ nombre: 'Khaki, Agujas Blancas y Plata', coste: 17.29, tec: 'Khaki negra mate con agujas blancas y plata, para las cajas de bronce y titanio.' }
   };
   var CORREAS = {
     NATO:  { nombre: 'Nato Verde Militar', coste: 5.69,  tec: 'nato verde militar de 20 mm con hebilla clásica plateada' },
@@ -233,7 +235,8 @@
     PIELM: { nombre: 'Piel Marrón',  coste: 13.69, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     ACERO: { nombre: 'Brazalete Acero', coste: 21.99, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
     PACK:  { nombre: 'Pack Piel + Brazalete', coste: 35.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
-    ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' }
+    ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
+    PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' }
   };
   var FOTOS = {
     'KR-NATO': ['krojo-nato', 3983],  'KB-NATO': ['kblanco-nato', 3922],
@@ -242,7 +245,8 @@
     'KR-ACERO': ['krojo-acero', 3977],'KB-ACERO': ['kblanco-acero', 3978],
     'MA-PACK': ['pack-murph-amarillo', 3973], 'MB-PACK': ['pack-murph-blanco', 3973],
     'NG-NATON': ['negra-nato', 4096], 'NG-PIELN': ['negra-pieln', 4096],
-    'BRONCE': ['bronce-ante', 4152]
+    'BRONCE': ['bronce-ante', 4152],
+    'TI-ANTE': ['titanio-ante', 4151], 'TI-PIELO': ['titanio-pielo', 4154]
   };
   var LOGO = 3.78;
 
@@ -279,19 +283,25 @@
   function normaliza() {
     /* El catálogo cerrado (Óscar, 15/08/2026): solo las combinaciones
        fotografiadas. La caja negra va con la khaki de segundero blanco
-       y elige entre nato negro y piel negra; el bronce, todo fijo. */
+       y elige entre nato negro y piel negra; el bronce, todo fijo; el
+       titanio lleva la esfera de agujas blancas y elige ante o piel
+       marrón oscuro, siempre con tapa roscada opaca y 20 ATM. */
     if (e.caja === 'BR') { e.correa = 'ANTE'; e.esf = 'BRZ'; }
+    else if (e.caja === 'TI') {
+      e.esf = 'BRZ';
+      if (e.correa !== 'ANTE' && e.correa !== 'PIELO') e.correa = 'ANTE';
+    }
     else if (e.caja === 'NG') {
       e.esf = 'KB';
       if (e.correa !== 'NATON' && e.correa !== 'PIELN') e.correa = 'NATON';
     } else {
-      if (e.correa === 'ANTE' || e.correa === 'NATON') e.correa = 'NATO';
+      if (e.correa === 'ANTE' || e.correa === 'NATON' || e.correa === 'PIELO') e.correa = 'NATO';
       if (e.correa === 'PACK') { if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA'; }
       else if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
     }
-    if (e.mov === 'Q') e.tapa = 'S';
+    if (e.mov === 'Q' || e.caja === 'TI') e.tapa = 'S';
   }
-  function agua() { return '5 ATM / 50 metros'; }
+  function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
   function referencia() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
     if (e.caja === 'BR') return seg + 'ANTE';
@@ -321,20 +331,22 @@
         b.setAttribute('aria-pressed', String(b.dataset.v === e[g]));
       });
 
-    /* la tapa: elegible solo en automático */
-    var tapaLibre = e.mov === 'A';
+    /* la tapa: elegible solo en automático; el titanio siempre opaca */
+    var tapaLibre = e.mov === 'A' && e.caja !== 'TI';
     $('[data-pv-tapa-botones]').hidden = !tapaLibre;
     $('[data-pv-tapa-fija]').hidden = tapaLibre;
 
     /* la esfera: khaki, murph del pack, o la fija del bronce */
     var esBronce = e.caja === 'BR';
     var esNegra = e.caja === 'NG';
-    $('[data-pv="esf"]').hidden = esBronce || esNegra;
-    $('[data-pv-esf-fija]').hidden = !(esBronce || esNegra);
+    var esTitanio = e.caja === 'TI';
+    var esfFija = esBronce || esNegra || esTitanio;
+    $('[data-pv="esf"]').hidden = esfFija;
+    $('[data-pv-esf-fija]').hidden = !esfFija;
     $('[data-pv-esf-fija]').textContent = esNegra
       ? 'Khaki negra mate, segundero blanco'
       : 'Khaki negra mate, agujas blancas y plata';
-    if (!esBronce && !esNegra) {
+    if (!esfFija) {
       var juego = e.correa === 'PACK'
         ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
         : [['KR', 'Khaki, Segundero Rojo'], ['KB', 'Khaki, Segundero Blanco']];
@@ -347,12 +359,14 @@
     if (!esBronce) {
       botones('correa', esNegra
         ? [['NATON', 'Nato Negro'], ['PIELN', 'Piel Negra']]
+        : esTitanio
+        ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro']]
         : [['NATO', 'Nato Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
            ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']], e.correa);
     }
 
     /* la foto: la del bronce es suya; el resto se fotografió en plata */
-    var clave = esBronce ? 'BRONCE' : (esNegra ? 'NG-' + e.correa : (e.esf + '-' + e.correa));
+    var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa : (esNegra ? 'NG-' + e.correa : (e.esf + '-' + e.correa)));
     var f = FOTOS[clave];
     var img = $('[data-pv-foto]');
     img.src = IMG + '1200/' + f[0] + '.webp';
@@ -384,7 +398,7 @@
       var esBronce = e.caja === 'BR';
       laoraCarritoAnadir({
         ref: referencia(),
-        nombre: 'Trinchera ' + (esBronce ? 'Bronce' : (e.correa === 'PACK' ? 'Murph Pack' : 'Militar')),
+        nombre: 'Trinchera ' + (esBronce ? 'Bronce' : (e.caja === 'TI' ? 'Titanio' : (e.correa === 'PACK' ? 'Murph Pack' : 'Militar'))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
         correa: CORREAS[e.correa].nombre,
