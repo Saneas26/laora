@@ -90,6 +90,12 @@
   content:'';position:absolute;left:0;right:0;bottom:0;height:2px;
   background:var(--cv2-oro);
 }
+.pv-opciones button[disabled]{
+  opacity:.35;cursor:not-allowed;text-decoration:line-through;
+}
+.pv-opciones button[disabled]:hover{
+  border-color:rgba(74,74,74,.3);color:var(--cv2-gris);
+}
 .pv-fijo{
   font-size:13px;color:var(--cv2-gris);margin:0;
   border:1px dashed rgba(74,74,74,.3);padding:10px 14px;
