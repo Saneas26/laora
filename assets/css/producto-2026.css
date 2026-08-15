@@ -21,6 +21,10 @@
   aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
 }
 .pv-hero img{width:82%;height:92%;object-fit:contain;display:block}
+/* Fotos «tal cual» (régimen del 15/08): la foto llena el marco y su
+   propio fondo de estudio hace de fondo, con la sombra natural. */
+.pv-hero-llena{background:none}
+.pv-hero-llena img{width:100%;height:100%;object-fit:cover}
 .pv-aviso{
   position:absolute;right:10px;bottom:8px;margin:0;
   font-size:10px;color:#6b6664;
