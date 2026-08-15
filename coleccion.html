@@ -649,8 +649,10 @@ document.addEventListener('click', function (ev) {
 document.addEventListener('click', function (ev) {
   var m = ev.target.closest('[data-mini]');
   if (!m) return;
-  var foto = m.closest('.cv2-foto').querySelector('img');
-  foto.src = m.dataset.mini;
+  var tarjeta = m.closest('.cv2-tarjeta');
+  if (!tarjeta) return;
+  var foto = tarjeta.querySelector('.cv2-foto img');
+  if (foto) foto.src = m.dataset.mini;
 });
 
 /* El aviso de los 15 segundos: se arma con el modelo más cercano al centro
