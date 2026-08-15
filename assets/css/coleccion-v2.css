@@ -363,7 +363,9 @@
    especificaciones se cambian por las tres miniaturas con su «+N» y el
    botón de añadir. En el teléfono no hay cursor: se ve todo, sin trueque. */
 .cv2-t2 .cv2-cuerpo{position:relative}
-.cv2-precio-lista{
+/* con .cv2-lista li delante para ganarle la especificidad a la regla
+   general de la lista, que lo dejaba gris y a 12px */
+.cv2-lista li.cv2-precio-lista{
   font-family:var(--cv2-mono);font-weight:700;font-size:17px;
   color:var(--cv2-oro);border-bottom:0;
 }
