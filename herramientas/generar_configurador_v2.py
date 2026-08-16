@@ -768,10 +768,9 @@ for slug in PIEZAS:
           f' · desde {euros(desde[nombre[:-5]])}')
 
 # El Trinchera no pasa por el bucle pero su «desde» sigue siendo real:
-# cuarzo + caja de acero + esfera khaki + nato + logo, por el motor.
-# (El nato+piel cuesta menos pero SE VENDE a nato+10 —Óscar, 16/08—,
-# así que el mínimo del catálogo vuelve a ser el nato normal.)
-desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 5.69 + 3.78) * MULT)
+# el mínimo del catálogo es el BRONCE en cuarzo (ante 4,30), no el
+# nato — lo destapó el libro laOra 2026 el 16/08.
+desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 4.30 + 3.78) * MULT)
 
 # El Precisa tampoco: cuarzo + caja sólida integrada + esfera + logo.
 desde['precisa'] = redondea((15.05 + 62.99 + 10.39 + 3.78) * MULT)
