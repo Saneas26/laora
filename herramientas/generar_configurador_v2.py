@@ -754,7 +754,7 @@ desde = {}
 # EL TRINCHERA YA NO SE GENERA (Óscar, 15/08/2026): su página es la ficha
 # de producto nueva, escrita A MANO sobre el catálogo DetalleTrinchera del
 # sheet (196 referencias). Si este bucle la escribiera, la pisaría.
-NO_GENERAR = {'trinchera', 'precisa'}
+NO_GENERAR = {'trinchera', 'precisa', 'bitacora'}
 
 for slug in PIEZAS:
     if slug in NO_GENERAR:
@@ -775,6 +775,10 @@ desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 5.69 + 3.78) * MULT)
 
 # El Precisa tampoco: cuarzo + caja sólida integrada + esfera + logo.
 desde['precisa'] = redondea((15.05 + 62.99 + 10.39 + 3.78) * MULT)
+
+# Ni el Bitácora (ficha a mano del 16/08): automático + caja plata +
+# esfera + silicona, con el coste SIN logo de su configurador de siempre.
+desde['bitacora'] = redondea((59.01 + 29.57 + 21.39 + 6.39) * MULT)
 
 with open(os.path.join(RAIZ, 'assets/datos/desde.json'), 'w', encoding='utf-8') as f:
     json.dump(desde, f, ensure_ascii=False, indent=1, sort_keys=True)
