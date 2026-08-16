@@ -322,8 +322,8 @@
         if (e.correa !== 'ANTE' && e.correa !== 'PIELO') e.correa = 'ANTE';
       }
       else if (e.caja === 'NG') {
-        e.esf = 'KB';
-        if (e.correa !== 'NATON' && e.correa !== 'PIELN') e.correa = 'NATON';
+        if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
+        if (e.correa !== 'NATON' && e.correa !== 'PIELN' && e.correa !== 'NATOP') e.correa = 'NATON';
       } else {
         if (e.correa === 'ANTE' || e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
@@ -382,12 +382,9 @@
     var esBronce = e.caja === 'BR';
     var esNegra = e.caja === 'NG';
     var esTitanio = e.caja === 'TI';
-    var esfFija = esBronce || esNegra || esTitanio;
+    var esfFija = esBronce || esTitanio;
     $('[data-pv="esf"]').hidden = esfFija;
     $('[data-pv-esf-fija]').hidden = !esfFija;
-    $('[data-pv-esf-fija]').textContent = esNegra
-      ? 'Khaki negra mate, segundero blanco'
-      : 'Khaki negra mate, agujas blancas y plata';
     if (!esfFija) {
       botones('esf', e.estilo === 'M'
         ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
@@ -400,7 +397,7 @@
     if (!esBronce) {
       var esMurph = e.estilo === 'M';
       botones('correa', esNegra
-        ? [['NATON', 'Nato Negro'], ['PIELN', 'Piel Negra']]
+        ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'], ['PIELN', 'Piel Negra']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro']]
         : [['NATO', 'Nato Verde', esMurph], ['NATOP', 'Nato + Piel', esMurph],
@@ -421,13 +418,17 @@
     $('[data-pv-forro]').hidden = !conColor;
 
     /* la foto: la del bronce es suya; el resto se fotografió en plata */
-    var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa : (esNegra ? 'NG-' + e.correa :
+    var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa :
+                (esNegra ? 'NG-' + (e.correa === 'NATOP' ? 'NATON' : e.correa) :
                 (e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa))));
     var f = FOTOS[clave];
     var img = $('[data-pv-foto]');
     img.src = IMG + '1200/' + f[0] + '.webp';
     img.srcset = IMG + '1200/' + f[0] + '.webp 1200w, ' + IMG + f[0] + '.webp ' + f[1] + 'w';
-    $('[data-pv-nota]').hidden = true;   // todas las cajas tienen ya su foto
+    /* la caja negra aún no está fotografiada con el segundero rojo */
+    var sinFoto = esNegra && e.esf === 'KR';
+    $('[data-pv-nota]').textContent = 'Fotografiado con segundero blanco';
+    $('[data-pv-nota]').hidden = !sinFoto;
 
     /* la ficha técnica */
     $('[data-pv-tec="caja"]').textContent =
@@ -446,6 +447,9 @@
     if (b) {
       var g = b.closest('[data-pv]').dataset.pv;
       e[g] = b.dataset.v;
+      /* al entrar en la caja negra, la esfera por defecto es la de
+         segundero blanco (Óscar, 16/08/2026) */
+      if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
       pinta();
       return;
     }
