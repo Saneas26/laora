@@ -758,8 +758,13 @@ function construirModelos(ss) {
   const sh = ss.insertSheet('Modelos');
   cabecera(sh, ['ID', 'Nombre', 'Homenaje', 'Con logo', 'Supl. Ø39 €', 'Estado', 'Desde €']);
   sh.getRange(2, 1, MODELOS.length, 6).setValues(MODELOS.map(function (m) { return m.slice(0, 6); }));
-  sh.getRange(2, 7, MODELOS.length, 1).setFormulaR1C1(
-    '=IF(RC1="",,MINIFS(Referencias!C13, Referencias!C2, RC1, Referencias!C11, "Activa"))');
+  // MINIFS se atraganta con la columna del derrame («el argumento debe
+  // ser un intervalo»): FILTER+MIN por fila, que sí funciona.
+  for (var i = 0; i < MODELOS.length; i++) {
+    var fila = i + 2;
+    sh.getRange(fila, 7).setFormula(
+      '=IF(A' + fila + '="",,MIN(FILTER(Referencias!$M$2:$M, (Referencias!$B$2:$B=A' + fila + ')*(Referencias!$K$2:$K="Activa"))))');
+  }
   sh.getRange(2, 7, MODELOS.length, 1).setNumberFormat('#,##0.00 €');
   sh.setColumnWidths(3, 1, 320);
   protegeAviso(sh.getRange('G2:G20'), 'Columna calculada');
