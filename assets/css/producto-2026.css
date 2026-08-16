@@ -112,12 +112,16 @@
   font-family:var(--cv2-mono);font-size:11px;font-weight:700;
   letter-spacing:.04em;text-transform:uppercase;
 }
-/* La miniatura del forro de piel, abajo a la derecha de la foto */
-.pv-forro{
-  display:block;position:absolute;right:10px;bottom:30px;width:24%;
+/* La miniatura del forro de piel, abajo a la derecha de la foto.
+   OJO: va con «.pv-hero img.» delante porque tiene que GANARLE a
+   «.pv-hero img{width:82%;height:92%}» — sin eso hereda el tamaño
+   de la foto principal y sale a pantalla completa (bug del 16/08). */
+.pv-hero img.pv-forro{
+  display:block;position:absolute;right:10px;bottom:30px;
+  width:24%;height:auto;
   border:1px solid var(--cv2-linea);box-shadow:0 2px 10px rgba(0,0,0,.12);
 }
-.pv-forro[hidden]{display:none}
+.pv-hero img.pv-forro[hidden]{display:none}
 .pv-fijo{
   font-size:13px;color:var(--cv2-gris);margin:0;
   border:1px dashed rgba(74,74,74,.3);padding:10px 14px;
