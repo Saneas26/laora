@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=3">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=5">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
@@ -59,6 +59,8 @@
           srcset="/assets/img/trinchera-2026/1200/krojo-nato.webp 1200w, /assets/img/trinchera-2026/krojo-nato.webp 3983w"
           sizes="(max-width:900px) 100vw, 46vw"
           alt="laOra Trinchera">
+        <img class="pv-forro" data-pv-forro src="/assets/img/trinchera-2026/forro-piel.webp"
+             alt="Forro interior de piel genuina del nato" hidden>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
       <div class="pv-extras">
@@ -138,6 +140,11 @@
           <p class="pv-rotulo">Correa <b data-pv-cierre>Hebilla clásica plateada</b></p>
           <div class="pv-opciones" data-pv="correa"></div>
           <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
+        </div>
+
+        <div class="pv-grupo" data-pv-grupo-color hidden>
+          <p class="pv-rotulo">Color del nato</p>
+          <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
         <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
@@ -244,7 +251,14 @@
     ACERO: { nombre: 'Brazalete Acero', coste: 21.99, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
     PACK:  { nombre: 'Pack Piel + Brazalete', coste: 35.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
-    PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' }
+    PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' },
+    NATOP: { nombre: 'Nato + Piel', coste: 4.99, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
+  };
+  /* Los siete colores del nato con forro de piel (Óscar, 16/08/2026) */
+  var COLORES = {
+    NEG: ['Negro', '#1e1f22'],  AZU: ['Azul', '#27476b'],   ROJ: ['Rojo', '#8a1f1f'],
+    CAQ: ['Caqui', '#8a7a55'],  VER: ['Verde', '#4a5a3a'],  GRI: ['Gris', '#6f7276'],
+    NAR: ['Naranja', '#c9661e']
   };
   var FOTOS = {
     'KR-NATO': ['krojo-nato', 3983],  'KB-NATO': ['kblanco-nato', 3922],
@@ -260,7 +274,7 @@
   };
   var LOGO = 3.78;
 
-  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO' };
+  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -314,6 +328,7 @@
         if (e.correa === 'ANTE' || e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
       }
+      if (e.correa !== 'NATOP') e.color = 'NEG';
     }
     /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
        sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
@@ -323,7 +338,8 @@
   function referencia() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
     if (e.caja === 'BR') return seg + 'ANTE';
-    return seg + e.esf + '-' + e.correa;
+    var cola = seg + e.esf + '-' + e.correa;
+    return e.correa === 'NATOP' ? cola + '-' + e.color : cola;
   }
 
   var $ = function (s) { return document.querySelector(s); };
@@ -387,13 +403,26 @@
         ? [['NATON', 'Nato Negro'], ['PIELN', 'Piel Negra']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro']]
-        : [['NATO', 'Nato Verde', esMurph], ['PIELN', 'Piel Negra', false],
-           ['PIELM', 'Piel Marrón', esMurph], ['ACERO', 'Brazalete Acero', false],
+        : [['NATO', 'Nato Verde', esMurph], ['NATOP', 'Nato + Piel', esMurph],
+           ['PIELN', 'Piel Negra', false], ['PIELM', 'Piel Marrón', esMurph],
+           ['ACERO', 'Brazalete Acero', false],
            ['PACK', 'Pack Piel + Brazalete', !esMurph]], e.correa);
     }
 
+    /* el color: solo cuando la correa es el nato con forro de piel */
+    var conColor = e.correa === 'NATOP';
+    $('[data-pv-grupo-color]').hidden = !conColor;
+    if (conColor) {
+      $('[data-pv="color"]').innerHTML = Object.keys(COLORES).map(function (k) {
+        return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === e.color) + '">' +
+               '<i style="background:' + COLORES[k][1] + '"></i><small>' + COLORES[k][0] + '</small></button>';
+      }).join('');
+    }
+    $('[data-pv-forro]').hidden = !conColor;
+
     /* la foto: la del bronce es suya; el resto se fotografió en plata */
-    var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa : (esNegra ? 'NG-' + e.correa : (e.esf + '-' + e.correa)));
+    var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa : (esNegra ? 'NG-' + e.correa :
+                (e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa))));
     var f = FOTOS[clave];
     var img = $('[data-pv-foto]');
     img.src = IMG + '1200/' + f[0] + '.webp';
@@ -430,7 +459,9 @@
                  (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
-        correa: CORREAS[e.correa].nombre,
+        correa: e.correa === 'NATOP'
+          ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
+          : CORREAS[e.correa].nombre,
         precio: precio(),
         foto: $('[data-pv-foto]').src
       });

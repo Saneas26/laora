@@ -729,6 +729,82 @@
           }
         ],
         "mat": "Caucho"
+      },
+      {
+        "id": "B20",
+        "nombre": "Nato con forro de piel genuina",
+        "v": [
+          {
+            "ref": "Brz-NatoPiel-NP01",
+            "nom": "Negro",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Negro",
+            "hex": "#1e1f22",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          },
+          {
+            "ref": "Brz-NatoPiel-NP02",
+            "nom": "Azul",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Azul",
+            "hex": "#27476b",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          },
+          {
+            "ref": "Brz-NatoPiel-NP03",
+            "nom": "Rojo",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Rojo",
+            "hex": "#8a1f1f",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          },
+          {
+            "ref": "Brz-NatoPiel-NP04",
+            "nom": "Caqui",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Caqui",
+            "hex": "#8a7a55",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          },
+          {
+            "ref": "Brz-NatoPiel-NP05",
+            "nom": "Verde",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Verde",
+            "hex": "#4a5a3a",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          },
+          {
+            "ref": "Brz-NatoPiel-NP06",
+            "nom": "Gris",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Gris",
+            "hex": "#6f7276",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          },
+          {
+            "ref": "Brz-NatoPiel-NP07",
+            "nom": "Naranja",
+            "c": 4.99,
+            "cier": "Hebilla clásica",
+            "eti": "Naranja",
+            "hex": "#c9661e",
+            "esl": "",
+            "foto": "Brz-Nailon-N04"
+          }
+        ]
       }
     ],
     "ejes": {
