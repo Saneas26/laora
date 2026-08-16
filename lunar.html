@@ -81,7 +81,7 @@
           <span class="cv2-chip">LO-03 · Cronógrafo</span>
         </div>
         <h1>Lunar</h1>
-        <p class="pv-precio" data-pv-precio>219,90 €</p>
+        <p class="pv-precio" data-pv-precio>189,90 €</p>
         <p class="pv-imp">Impuestos incluidos.</p>
         <p class="pv-desc">Nuestro homenaje al <b>Moonwatch</b>. La arquitectura del reloj que fue a la
           Luna con un cronógrafo mecacuarzo de tacto mecánico de verdad: arranque al instante, aguja de
@@ -175,8 +175,9 @@
     cal: 'LO_MQ326', coste: 27.59, nombre: 'Mecacuarzo Japonés',
     tec: "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años."
   };
-  var CAJA = 31.57;    /* bisel negro y bisel azul cuestan lo mismo */
-  var ESFERA = 14.19;  /* las tres esferas, al coste del material viejo */
+  /* Proveedor nuevo (Óscar, 16/08/2026, anuncio 1005007892634303):
+     caja + esfera + agujas EN PACK, para las tres versiones. */
+  var PACK = 34.59;
   var VERSIONES = {
     NEG: { nombre: 'Negra',          slug: 'negro',       bisel: 'negro',
            esf: 'Esfera negra con subesferas negras y bisel taquimétrico negro: el cronógrafo clásico.' },
@@ -194,7 +195,7 @@
              tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla clásica' },
     NATOP: { nombre: 'Nato + Piel Beige',      coste: 4.99,  slug: 'nato-piel-beige',
              tec: 'nato de lona beige con forro interior de piel genuina que evita molestias en la muñeca, hebilla clásica' },
-    ACERO: { nombre: 'Brazalete Acero',        coste: 22.39, slug: 'acero',
+    ACERO: { nombre: 'Brazalete Acero',        coste: 19.69, slug: 'acero',
              tec: 'brazalete de acero 316L de cinco eslabones con cierre desplegable' },
     PIELB: { nombre: 'Piel Pespunte Blanco',   coste: 30.79, slug: 'piel-negra-pespunte-blanco',
              tec: 'piel genuina negra con pespunte blanco y hebilla clásica plateada, con liberación rápida' },
@@ -306,7 +307,7 @@
     return Math.max(redondea(c * MULT), sueloPvp(neto));
   }
   function precio() {
-    var c = MOV.coste + CAJA + ESFERA + CORREAS[e.correa].coste;
+    var c = MOV.coste + PACK + CORREAS[e.correa].coste;
     /* El nato+piel se vende 10 € POR ENCIMA del caucho (Óscar, 16/08):
        se tarifa con el coste del caucho y se le suman 10. */
     if (e.correa === 'NATOP') {
