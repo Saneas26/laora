@@ -753,7 +753,7 @@ desde = {}
 
 # EL TRINCHERA YA NO SE GENERA (Óscar, 15/08/2026): su página es la ficha
 # de producto nueva, escrita A MANO sobre el catálogo DetalleTrinchera del
-# sheet (166 referencias). Si este bucle la escribiera, la pisaría.
+# sheet (196 referencias). Si este bucle la escribiera, la pisaría.
 NO_GENERAR = {'trinchera', 'precisa'}
 
 for slug in PIEZAS:
@@ -769,7 +769,9 @@ for slug in PIEZAS:
 
 # El Trinchera no pasa por el bucle pero su «desde» sigue siendo real:
 # cuarzo + caja de acero + esfera khaki + nato + logo, por el motor.
-desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 4.99 + 3.78) * MULT)
+# (El nato+piel cuesta menos pero SE VENDE a nato+10 —Óscar, 16/08—,
+# así que el mínimo del catálogo vuelve a ser el nato normal.)
+desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 5.69 + 3.78) * MULT)
 
 # El Precisa tampoco: cuarzo + caja sólida integrada + esfera + logo.
 desde['precisa'] = redondea((15.05 + 62.99 + 10.39 + 3.78) * MULT)
