@@ -769,7 +769,7 @@ for slug in PIEZAS:
 
 # El Trinchera no pasa por el bucle pero su «desde» sigue siendo real:
 # cuarzo + caja de acero + esfera khaki + nato + logo, por el motor.
-desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 5.69 + 3.78) * MULT)
+desde['trinchera'] = redondea((15.05 + 23 + 17.29 + 4.99 + 3.78) * MULT)
 
 # El Precisa tampoco: cuarzo + caja sólida integrada + esfera + logo.
 desde['precisa'] = redondea((15.05 + 62.99 + 10.39 + 3.78) * MULT)
