@@ -297,10 +297,18 @@
     return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
            CORREAS[e.correa].coste + LOGO;
   }
-  function precio() {
-    var c = costes();
+  function pvpBase(c) {
     var neto = c + 9 / 1.21 + (MOVS[e.mov].coste + 19) * 0.05;
-    return Math.max(redondea(c * MULT), sueloPvp(neto)) + (e.diam === '39' ? 10 : 0);
+    return Math.max(redondea(c * MULT), sueloPvp(neto));
+  }
+  function precio() {
+    var extra = e.diam === '39' ? 10 : 0;
+    /* El nato+piel se vende 10 € POR ENCIMA del nato de su caja (Óscar,
+       16/08/2026): se tarifa con el coste del nato y se le suman 10. */
+    if (e.correa === 'NATOP') {
+      return pvpBase(costes() - CORREAS.NATOP.coste + CORREAS.NATO.coste) + 10 + extra;
+    }
+    return pvpBase(costes()) + extra;
   }
 
   /* ---------- las REGLAS del catálogo ---------- */
