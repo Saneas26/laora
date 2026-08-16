@@ -24,7 +24,7 @@ function ALTA_2026_08_16() {
   var LINK = 'https://es.aliexpress.com/item/1005007892634303.html';
   var FECHA = new Date(2026, 7, 16);
   // Aviso que comparten las 18 piezas (del anuncio, no de cada SKU)
-  var COMUN = 'Ø39,7 mm · asas 20 mm · compat. VK63 (mov. NO incluido) · acero sin grado declarado · cristal y estanqueidad SIN declarar · precio con -50% del 16/08, reverificar antes de comprar · envío pedido 4,52 €, devol. 90 días';
+  var COMUN = 'Ø39,7 mm · asas 20 mm · compat. VK63 (mov. NO incluido) · acero sin grado declarado · cristal y estanqueidad SIN declarar · tapa trasera opaca roscada a elegir sin cambio de precio: lisa / grabado Lunar / grabado Footprint (va en la columna Tapa de Referencias) · precio con -50% del 16/08, reverificar antes de comprar · envío pedido 4,52 €, devol. 90 días';
 
   var filas = [
     // ID, Tipo, Modelos, Nombre interno, Nombre web, Variante(SKU), Coste, Link, TarifaComo, Recargo, Notas

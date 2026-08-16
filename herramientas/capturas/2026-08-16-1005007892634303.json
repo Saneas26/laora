@@ -29,9 +29,14 @@
     "propiedades_sku": {
       "Color": "44 valores (NO.1 a NO.44). ATENCION: 'Color' NO significa color, mezcla tipos de pieza distintos: cajas vacias, cajas montadas, brazaletes, esferas sueltas y juegos de agujas.",
       "Diametro del dial": {
+        "que_es_en_realidad": "TAPA TRASERA opaca roscada de la caja (aclarado por Oscar el 16/08/2026). El vendedor la etiqueta como 'diametro' y la extraccion inicial la interpreto como textura de esfera: ambas cosas eran erroneas.",
         "valor_seleccionado_durante_la_extraccion": "Lunar pattern",
-        "valores_posibles": ["No pattern", "Lunar pattern", "Footprint pattern"],
-        "nota": "El vendedor la etiqueta como 'diametro' pero los valores son patrones de textura de esfera. No afecta al precio observado."
+        "valores_posibles": [
+          { "opcion": "No pattern", "descripcion": "tapa lisa, sin grabado", "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S7e6120f96bc04ac89d1d09d5daa9bd306.png_220x220.png_.avif" },
+          { "opcion": "Lunar pattern", "descripcion": "tapa con grabado lunar", "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S66e8d2f3ec224ceaa104774b2d7cfe57O.png_220x220.png_.avif" },
+          { "opcion": "Footprint pattern", "descripcion": "tapa con grabado de huella", "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/Se35662b1f1a54ef2a8084e7aba42e185k.png_220x220.png_.avif" }
+        ],
+        "nota": "No afecta al precio observado. Es variante de las cajas (montadas y vacias): en el libro va en la columna Tapa de Referencias, no como pieza propia."
       }
     },
     "descuentos": {
