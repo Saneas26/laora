@@ -3,110 +3,386 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Configura tu Lunar · laOra</title>
+<meta name="description" content="laOra Lunar: nuestro homenaje al Moonwatch con cronógrafo mecacuarzo de tacto mecánico, zafiro y venta al precio honesto.">
+<meta property="og:title" content="Lunar · laOra">
+<meta property="og:description" content="laOra Lunar: nuestro homenaje al Moonwatch con cronógrafo mecacuarzo de tacto mecánico, zafiro y venta al precio honesto.">
+<meta property="og:url" content="https://laora.es/lunar.html">
+<meta property="og:image" content="https://laora.es/assets/img/lunar-2026/1200/negro-acero.webp">
+<meta property="og:locale" content="es_ES">
+<meta property="og:type" content="website">
+<title>Lunar · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=32">
+<!-- FICHA DE PRODUCTO 2026 (Óscar, 16/08/2026), patrón Hamilton.
+     PÁGINA ESCRITA A MANO: el generador ya no la toca (NO_GENERAR).
+     El catálogo son las 14 FOTOS APROBADAS del 16/08: tres versiones
+     (negra, blanca y blanca-azul, todas en acero plata) por sus correas.
+     La foto ES la lista de validez, como en el Bitácora. Precio con el
+     motor de la casa SIN logo (como siempre se publicó el Lunar), y el
+     nato+piel se vende 10 € por encima del caucho, la regla del 16/08. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/laora.css?v=43">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
+<link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=7">
+<style>
+  /* Las fotos del Lunar traen su propio fondo de estudio (#EAE8E8):
+     la foto llena el marco, régimen «tal cual» del 15/08. */
+</style>
 </head>
-<body>
-
-<header class="cf-cab">
-  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
-    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Lunar</b>
-  </a>
-  <!-- La ficha técnica se fue a laOrateca (Óscar, 13/08/2026): el botón y el diálogo no se escriben. FICHA_TECNICA = True los devuelve. -->
+<body><header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
+    <span></span><span></span>
+  </button>
+  <nav class="main-nav" aria-label="Navegación principal" data-nav>
+    <a href="/coleccion.html" class="active">Relojes</a>
+    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/laorateca.html"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra">teca</span></a>
+  </nav>
+  <div class="header-actions">
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
+  </div>
 </header>
 
-<div class="cf-cuerpo">
+<main class="cv2">
 
-  <section class="cf-visor" aria-label="El reloj que estás configurando">
-    <!-- Lo que llevas elegido, dentro de la foto y a la izquierda del
-         todo (Óscar, 13/08/2026). Sin rótulo: cada línea se explica
-         sola, y un «Características» encima solo quitaría sitio. -->
-    <dl class="cf-specs" data-specs aria-label="Lo que llevas elegido"></dl>
+  <div class="pv-cuerpo">
 
-    <div class="cf-montaje" data-montaje>
-      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
-      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
-      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
-      <div class="cf-cabeza" data-cabeza>
-        <img data-foto alt="Lunar de laOra" hidden>
-        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+    <!-- ============ LA GALERÍA ============ -->
+    <div class="pv-galeria">
+      <div class="pv-hero pv-hero-llena">
+        <img data-pv-foto
+          src="/assets/img/lunar-2026/1200/negro-caucho-fkm-negro-pespunte-blanco.webp"
+          sizes="(max-width:900px) 100vw, 46vw"
+          alt="laOra Lunar">
+        <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
-      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
+      <div class="pv-extras">
+        <figure><img src="/assets/img/heroes-2026/lunar-detail.webp" alt="Macro de las subesferas del cronógrafo" loading="lazy"></figure>
+        <figure><img src="/assets/img/heroes-2026/lunar-tresacuartos.webp" alt="El Lunar a tres cuartos en el estudio" loading="lazy"></figure>
+        <figure><img src="/assets/img/heroes-2026/lunar-luna.webp" alt="El Lunar sobre un paisaje lunar" loading="lazy"></figure>
+        <figure><img src="/assets/img/heroes-2026/lunar-acero.webp" alt="El brazalete de acero, de cerca" loading="lazy"></figure>
+      </div>
     </div>
 
-    <!-- La tarjeta del cierre cuelga del VISOR, no de la cabeza ni del
-         montaje: la cabeza mide cero en modo «foto pendiente» y el
-         montaje es un pasillo estrecho; el visor siempre tiene cuerpo
-         y la esquina es suya. -->
-    <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
-      <img data-cierre-img alt="Detalle del cierre">
-      <figcaption data-cierre-pie></figcaption>
-    </figure>
+    <!-- ============ LA COMPRA ============ -->
+    <aside class="pv-info">
+      <div>
+        <div class="pv-chips">
+          <span class="cv2-chip pv-chip-oro">Icono</span>
+          <span class="cv2-chip">LO-03 · Cronógrafo</span>
+        </div>
+        <h1>Lunar</h1>
+        <p class="pv-precio" data-pv-precio>219,90 €</p>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <p class="pv-desc">Nuestro homenaje al <b>Moonwatch</b>. La arquitectura del reloj que fue a la
+          Luna con un cronógrafo mecacuarzo de tacto mecánico de verdad: arranque al instante, aguja de
+          barrido y vuelta a cero de golpe, al precio honesto.</p>
 
-    <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Movimiento <b data-pv-cal>Cal. LO_MQ326</b></p>
+          <p class="pv-fijo">Mecacuarzo japonés · cronógrafo de tacto mecánico · pila de unos 3 años</p>
+        </div>
 
-    <!-- El aviso de «el brazalete va dibujado» se retira de la pantalla
-         (Óscar, 13/08/2026: «comentarios solo a mí, no en pantalla»). Era
-         una nota de taller: el cliente no tiene por qué enterarse de cómo
-         montamos la foto. El JavaScript que lo encendía sigue ahí y no
-         estorba —comprueba que exista—, así que para recuperarlo basta
-         con devolver este párrafo. -->
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Versión</p>
+          <div class="pv-opciones" data-pv="ver"></div>
+        </div>
 
-    <!-- Óscar, 12/08/2026: que nadie compre creyendo que la imagen es una
-         fotografía del reloj terminado. Va en todas, siempre, chiquita y
-         en la esquina, sin tapar el reloj. -->
-    <p class="cf-aviso-imagen">La imagen puede contener errores de diseño*</p>
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Correa</p>
+          <div class="pv-opciones" data-pv="correa"></div>
+        </div>
+
+        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+
+        <div class="pv-confianza">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ============ LA FICHA TÉCNICA ============ -->
+  <section class="pv-tecnica">
+    <h2>Ficha Técnica</h2>
+    <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
+    <details><summary>Movimiento</summary><p data-pv-tec="mov"></p></details>
+    <details><summary>Esfera y cronógrafo</summary><p data-pv-tec="esf"></p></details>
   </section>
 
-  <section class="cf-panel" aria-label="Opciones del Lunar">
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Movimiento <b>uno solo</b></p>
-      <div class="cf-fijo"><b>Mecacuarzo japonés</b><span></span></div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b>3 opciones</b></p>
-      <div class="cf-fichas" role="group" aria-label="Elegir caja">
-        <button class="cf-ficha" type="button" data-caja="0" aria-pressed="true">Bisel Negro</button>
-        <button class="cf-ficha" type="button" data-caja="1" aria-pressed="false">Bisel Azul</button>
-        <button class="cf-ficha" type="button" data-caja="2" aria-pressed="false">Caja Negra PVD</button>
-      </div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Brazalete <b>9 familias</b></p>
-      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
-        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Acero 316L, cierre Ostra</span></button>
-        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
-        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Acero 904L, Ostra tres eslabones</span></button>
-        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Acero 904L, Jubilee cinco eslabones</span></button>
-        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Piel con liberación rápida</span></button>
-        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Piel sintética, hebilla mariposa</span></button>
-        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Caucho con hebilla de acero</span></button>
-        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Caucho fluorado, cierre desplegable</span></button>
-        <button class="cf-brazalete" type="button" data-brz="8" aria-pressed="false"><i></i><span>Nato con forro de piel genuina</span></button>
-      </div>
-      <p class="cf-detalle" data-detalle></p>
-    </div>
+</main>
 
-    <div class="cf-grupo" data-grupo-var>
-      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
-      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
-    </div>
-  </section>
-</div>
-
-<footer class="cf-barra">
-  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
-  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
-  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
+<footer>
+  <a class="cb-marca" href="/coleccion.html" aria-label="laOra, a la colección">la<span class="o"></span>ra<sup>®</sup></a>
+  <div class="pie-links">
+    <a href="/coleccion.html">Relojes</a>
+    <a href="/filosofia.html">Nuestra forma de hacer</a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club laOra</a>
+    <a href="/privacidad.html">Privacidad</a>
+  </div>
+  <p class="pie-aviso">
+    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
+    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
+    no implican afiliación con sus fabricantes.
+  </p>
+  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
+  <div class="gp-grid">
+    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
+    </a>
+    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
+      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
+    </a>
+    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
+    </a>
+    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
+    </a>
+    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
+      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
+    </a>
+    <a class="gp-item" href="https://quemedices.vercel.app" target="_blank" rel="noopener">
+      <img src="/assets/img/app-quemedices.png" alt="APP ¿Qué me dices?" loading="lazy"><b>¿Qué me dices?</b>
+    </a>
+  </div>
+  <small>© 2026 laOra® · Todos los derechos reservados</small>
 </footer>
 
-
-
-<script type="application/json" data-piezas>{"nombre": "Lunar", "codigo": "LO-03", "incluido": "", "extra": false, "mov": [{"ref": "M1", "cal": "Calibre laOra LO_MQ326", "coste": 27.59, "rot": "Mecacuarzo japonés", "specs": "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años.", "ficha": [{"h": "El original, sin cuento", "p": "Montamos un calibre mecacuarzo original de fabricación japonesa, ensamblado en Japón. No es una copia ni un módulo genérico: es el mismo calibre, comprado como tal, que montan relojes muy respetados del sector. Lo decimos así de claro porque en este rango de precio es donde más se recorta por dentro, donde no se ve."}, {"h": "Dos relojes en uno", "p": "El mecacuarzo es un híbrido honesto: la hora la gobierna un oscilador de cuarzo a 32.768 Hz, con una desviación máxima de ±20 segundos AL MES (un mecánico decente se desvía eso mismo cada día o dos). Y el cronógrafo es un módulo mecánico independiente, con levas, embrague, muelles y martillos de puesta a cero, igual que en los cronógrafos de miles de euros."}, {"h": "Lo que notas al usarlo", "p": "Al pulsar el botón de arranque, la aguja central salta al instante, sin el retardo electrónico de los cuarzos corrientes, y avanza barriendo la esfera a cinco pasos por segundo (1/5 de segundo de resolución). Al parar, para en seco. Y al poner a cero, el martillo devuelve la aguja de un golpe limpio e instantáneo, con ese chasquido que solo dan los cronógrafos mecánicos. Los tres contadores funcionan de verdad: nada de subesferas de adorno."}, {"h": "Especificaciones del calibre", "t": [["Calibre", "laOra LO_MQ326"], ["Origen", "Fabricación japonesa"], ["Tipo", "Mecacuarzo: cuarzo + módulo cronógrafo mecánico"], ["Frecuencia", "32.768 Hz"], ["Precisión", "±20 segundos al mes"], ["Cronógrafo", "60 minutos, resolución 1/5 de segundo"], ["Contador 60 min", "a las 9"], ["Indicador 24 horas", "a las 3"], ["Segundero pequeño", "a las 6, continuo"], ["Calendario", "fecha con ajuste rápido por corona"], ["Parada de segundero", "sí (hacking al poner en hora)"], ["Agujas", "6"], ["Diámetro", "30,8 × 29,1 mm (13½ líneas)"], ["Altura", "5,10 mm"], ["Pila", "394 (SR936SW)"], ["Autonomía", "unos 3 años, usando el cronógrafo a diario"]]}, {"h": "Mantenimiento: casi ninguno", "p": "Ni cuerda, ni rotor, ni engrases, ni regulación. El único mantenimiento real es cambiar la pila cada tres años, aprovechando para revisar las juntas. Y si tras muchos años el módulo se agotara, se sustituye entero por menos de lo que cuesta una revisión corriente de un cronógrafo mecánico: hay repuesto original del fabricante en todo el mundo."}, {"h": "En buena compañía", "p": "Este mismo calibre late dentro de relojes tan respetados como el Dan Henry 1963, varios Undone, los AVI-8 de aviación o los Vostok-Europe. No lo elegimos por barato: lo elegimos porque es el estándar del mecacuarzo, y lo demás son imitaciones."}, {"h": "Ojo con los cronos de módulo genérico", "p": "En este precio abundan los cronógrafos con módulos genéricos de bajo coste, y conviene saber qué se compra. Lo típico: la aguja del cronógrafo avanza a saltos de un segundo, sin barrido; la puesta a cero es perezosa, la aguja vuelve girando despacio o se queda torcida, y con el uso los contadores pierden el cero y hay que recalibrarlos; hay subesferas pintadas que no funcionan; tijas y pulsadores que se desacoplan; y cuando fallan no hay repuestos ni servicio técnico: el reloj entero, al cajón. Por eso el módulo de este reloj es un original japonés con repuesto en todo el mundo, no un genérico sin nombre."}], "apunte": ""}], "caj": [{"ref": "C1", "nombre": "Bisel Negro", "coste": 31.57}, {"ref": "C2", "nombre": "Bisel Azul", "coste": 31.57}, {"ref": "C3", "nombre": "Caja Negra PVD", "coste": 32.57}], "esf": [{"ref": "E1", "nombre": "Negra", "coste": 14.19, "cajas": "C1, C3"}, {"ref": "E2", "nombre": "Blanca", "coste": 14.19, "cajas": "C2"}], "brz": [{"id": "B02", "nombre": "Acero 316L, cierre Ostra", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39, "cier": "Cierre Ostra", "eti": "Plata", "hex": "#c9cdd2", "esl": "5 eslabones"}, {"ref": "Brz-316-A03", "nom": "Plata y oro rosa", "c": 30.79, "cier": "Cierre Ostra", "eti": "Oro rosa", "hex": "#c9cdd2", "hex2": "#c98d6b", "esl": "5 eslabones"}, {"ref": "Brz-316-A04", "nom": "Negro", "c": 30.79, "cier": "Cierre Ostra", "eti": "Negro", "hex": "#1e1f22", "esl": "5 eslabones"}], "mat": "Acero 316L"}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79, "cier": "Cierre desplegable", "eti": "Plata", "hex": "#c9cdd2", "esl": "3 eslabones"}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79, "cier": "Cierre desplegable", "eti": "Plata", "hex": "#c9cdd2", "esl": "5 eslabones"}, {"ref": "Brz-316-A07", "nom": "Tres eslabones negro", "c": 25.19, "cier": "Cierre desplegable", "eti": "Negro", "hex": "#1e1f22", "esl": "3 eslabones"}], "mat": "Acero 316L"}, {"id": "B08", "nombre": "Acero 904L, Ostra tres eslabones", "mat": "Acero 904L", "v": [{"ref": "Brz-904-A13", "nom": "Mate cepillado", "c": 21.19, "esl": "3 eslabones", "eti": "Plata mate", "hex": "#aeb2b8", "cier": "Cierre Ostra", "foto": "Brz-316-A05"}, {"ref": "Brz-904-A14", "nom": "Cepillado pulido", "c": 20.99, "esl": "3 eslabones", "eti": "Plata pulida", "hex": "#d6d9dd", "cier": "Cierre Ostra", "foto": "Brz-316-A05"}, {"ref": "Brz-904-A19", "nom": "Negro", "c": 20.99, "esl": "3 eslabones", "eti": "Negro", "hex": "#1e1f22", "cier": "Cierre Ostra", "foto": "Brz-316-A07"}]}, {"id": "B09", "nombre": "Acero 904L, Jubilee cinco eslabones", "mat": "Acero 904L", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 20.99, "esl": "5 eslabones", "eti": "Plata mate", "hex": "#aeb2b8", "cier": "Cierre Ostra", "foto": "Brz-316-A02"}, {"ref": "Brz-904-A15", "nom": "Plata y oro rosa", "c": 25.19, "esl": "5 eslabones", "eti": "Oro rosa", "hex": "#c9cdd2", "hex2": "#c98d6b", "cier": "Cierre Ostra", "foto": "Brz-316-A03"}, {"ref": "Brz-904-A16", "nom": "Negro", "c": 24.99, "esl": "5 eslabones", "eti": "Negro", "hex": "#1e1f22", "cier": "Cierre Ostra", "foto": "Brz-316-A04"}]}, {"id": "B10", "nombre": "Piel con liberación rápida", "v": [{"ref": "Brz-Piel-P01", "nom": "Negro, pespunte blanco, hebilla mariposa plateada", "c": 30.99, "cier": "Hebilla mariposa plateada", "eti": "Negro, pespunte blanco", "hex": "#1e1f22", "bor": "#f2f0ea", "esl": "", "foto": "Brz-Piel-P02"}, {"ref": "Brz-Piel-P02", "nom": "Negro, pespunte blanco, hebilla clásica plateada", "c": 30.79, "cier": "Hebilla clásica plateada", "eti": "Negro, pespunte blanco", "hex": "#1e1f22", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Piel-P03", "nom": "Negro, pespunte blanco, hebilla clásica negra", "c": 31.99, "cier": "Hebilla clásica negra", "eti": "Negro, pespunte blanco", "hex": "#1e1f22", "bor": "#f2f0ea", "esl": "", "foto": "Brz-Piel-P02"}, {"ref": "Brz-Piel-P05", "nom": "Negro, pespunte negro, hebilla mariposa plateada", "c": 30.99, "cier": "Hebilla mariposa plateada", "eti": "Negro, pespunte negro", "hex": "#1e1f22", "esl": "", "foto": "Brz-Piel-P06"}, {"ref": "Brz-Piel-P06", "nom": "Negro, pespunte negro, hebilla clásica plateada", "c": 31.59, "cier": "Hebilla clásica plateada", "eti": "Negro, pespunte negro", "hex": "#1e1f22", "esl": ""}, {"ref": "Brz-Piel-P07", "nom": "Negro, pespunte negro, hebilla clásica negra", "c": 31.79, "cier": "Hebilla clásica negra", "eti": "Negro, pespunte negro", "hex": "#1e1f22", "esl": "", "foto": "Brz-Piel-P06"}, {"ref": "Brz-Piel-P09", "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada", "c": 29.19, "cier": "Hebilla mariposa plateada", "eti": "Marrón oscuro, pespunte blanco", "hex": "#4a2e1c", "esl": "", "bor": "#f2f0ea", "foto": "Brz-Piel-P10"}, {"ref": "Brz-Piel-P10", "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada", "c": 31.79, "cier": "Hebilla clásica plateada", "eti": "Marrón oscuro, pespunte blanco", "hex": "#4a2e1c", "esl": "", "bor": "#f2f0ea"}, {"ref": "Brz-Piel-P11", "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra", "c": 31.99, "cier": "Hebilla clásica negra", "eti": "Marrón oscuro, pespunte blanco", "hex": "#4a2e1c", "esl": "", "bor": "#f2f0ea", "foto": "Brz-Piel-P10"}, {"ref": "Brz-Piel-P13", "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada", "c": 31.79, "cier": "Hebilla mariposa plateada", "eti": "Marrón oscuro, pespunte negro", "hex": "#4a2e1c", "esl": "", "foto": "Brz-Piel-P14"}, {"ref": "Brz-Piel-P14", "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada", "c": 31.59, "cier": "Hebilla clásica plateada", "eti": "Marrón oscuro, pespunte negro", "hex": "#4a2e1c", "esl": ""}, {"ref": "Brz-Piel-P15", "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra", "c": 31.99, "cier": "Hebilla clásica negra", "eti": "Marrón oscuro, pespunte negro", "hex": "#4a2e1c", "esl": "", "foto": "Brz-Piel-P14"}, {"ref": "Brz-Piel-P17", "nom": "Azul, pespunte blanco, hebilla mariposa plateada", "c": 29.39, "cier": "Hebilla mariposa plateada", "eti": "Azul, pespunte blanco", "hex": "#274472", "bor": "#f2f0ea", "esl": "", "foto": "Brz-Piel-P18"}, {"ref": "Brz-Piel-P18", "nom": "Azul, pespunte blanco, hebilla clásica plateada", "c": 29.79, "cier": "Hebilla clásica plateada", "eti": "Azul, pespunte blanco", "hex": "#274472", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Piel-P32", "nom": "Azul, pespunte azul, hebilla clásica plateada", "c": 31.99, "cier": "Hebilla clásica plateada", "eti": "Azul, pespunte azul", "hex": "#274472", "bor": "#4a6da3", "esl": ""}], "mat": "Piel"}, {"id": "B11", "nombre": "Piel sintética, hebilla mariposa", "v": [{"ref": "Brz-Sintetica-P51", "nom": "Marrón, pespunte a tono", "c": 3.49, "cier": "Hebilla mariposa", "eti": "Marrón", "hex": "#7b4a2a", "esl": ""}, {"ref": "Brz-Sintetica-P54", "nom": "Marrón, pespunte blanco", "c": 4.19, "cier": "Hebilla mariposa", "eti": "Marrón, pespunte blanco", "hex": "#7b4a2a", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Sintetica-P55", "nom": "Marrón claro", "c": 4.19, "cier": "Hebilla mariposa", "eti": "Marrón claro", "hex": "#b5763f", "esl": ""}, {"ref": "Brz-Sintetica-P52", "nom": "Negro", "c": 3.69, "cier": "Hebilla mariposa", "eti": "Negro", "hex": "#1e1f22", "esl": ""}, {"ref": "Brz-Sintetica-P53", "nom": "Negro con pespunte blanco", "c": 4.19, "cier": "Hebilla mariposa", "eti": "Negro, pespunte blanco", "hex": "#1e1f22", "bor": "#f2f0ea", "esl": ""}], "mat": "Piel sintética"}, {"id": "B13", "nombre": "Caucho con hebilla de acero", "v": [{"ref": "Brz-Goma-G01", "nom": "Negro", "c": 5.69, "cier": "Hebilla de acero", "eti": "Negro", "hex": "#1e1f22", "esl": ""}, {"ref": "Brz-Goma-G02", "nom": "Blanco", "c": 5.89, "cier": "Hebilla de acero", "eti": "Blanco", "hex": "#eceae4", "esl": ""}, {"ref": "Brz-Goma-G05", "nom": "Azul", "c": 6.39, "cier": "Hebilla de acero", "eti": "Azul", "hex": "#2456a4", "esl": ""}, {"ref": "Brz-Goma-G07", "nom": "Gris", "c": 5.79, "cier": "Hebilla de acero", "eti": "Gris", "hex": "#8a8d91", "esl": ""}], "mat": "Goma"}, {"id": "B14", "nombre": "Caucho fluorado, cierre desplegable", "v": [{"ref": "Brz-Caucho-C11", "nom": "Negro negro 01", "c": 18.39, "cier": "Hebilla mariposa", "eti": "Negro, banda negra", "hex": "#1e1f22", "esl": ""}, {"ref": "Brz-Caucho-C14", "nom": "Naranja blanco 01", "c": 18.39, "cier": "Hebilla mariposa", "eti": "Naranja, banda blanca", "hex": "#e2711d", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Caucho-C15", "nom": "Gris blanco 01", "c": 18.39, "cier": "Hebilla mariposa", "eti": "Gris, banda blanca", "hex": "#8a8d91", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Caucho-C23", "nom": "Blanco blanco 01", "c": 19.59, "cier": "Hebilla mariposa", "eti": "Blanco, banda blanca", "hex": "#eceae4", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Caucho-C26", "nom": "Azul real blanco 02", "c": 19.59, "cier": "Hebilla mariposa", "eti": "Azul real, banda blanca", "hex": "#2456a4", "bor": "#f2f0ea", "esl": ""}, {"ref": "Brz-Caucho-C31", "nom": "Negro, cierre oro rosa", "c": 12.69, "cier": "Hebilla mariposa oro rosa", "eti": "Negro, banda negra", "hex": "#1e1f22", "esl": "", "foto": "Brz-Caucho-C11"}], "mat": "Caucho"}, {"id": "B20", "nombre": "Nato con forro de piel genuina", "v": [{"ref": "Brz-NatoPiel-NP01", "nom": "Negro", "c": 4.99, "cier": "Hebilla clásica", "eti": "Negro", "hex": "#1e1f22", "esl": "", "foto": "Brz-Nailon-N04"}, {"ref": "Brz-NatoPiel-NP02", "nom": "Azul", "c": 4.99, "cier": "Hebilla clásica", "eti": "Azul", "hex": "#27476b", "esl": "", "foto": "Brz-Nailon-N04"}, {"ref": "Brz-NatoPiel-NP03", "nom": "Rojo", "c": 4.99, "cier": "Hebilla clásica", "eti": "Rojo", "hex": "#8a1f1f", "esl": "", "foto": "Brz-Nailon-N04"}, {"ref": "Brz-NatoPiel-NP04", "nom": "Caqui", "c": 4.99, "cier": "Hebilla clásica", "eti": "Caqui", "hex": "#8a7a55", "esl": "", "foto": "Brz-Nailon-N04"}, {"ref": "Brz-NatoPiel-NP05", "nom": "Verde", "c": 4.99, "cier": "Hebilla clásica", "eti": "Verde", "hex": "#4a5a3a", "esl": "", "foto": "Brz-Nailon-N04"}, {"ref": "Brz-NatoPiel-NP06", "nom": "Gris", "c": 4.99, "cier": "Hebilla clásica", "eti": "Gris", "hex": "#6f7276", "esl": "", "foto": "Brz-Nailon-N04"}, {"ref": "Brz-NatoPiel-NP07", "nom": "Naranja", "c": 4.99, "cier": "Hebilla clásica", "eti": "Naranja", "hex": "#c9661e", "esl": "", "foto": "Brz-Nailon-N04"}]}], "ejes": {"mov": {}, "caja": {"esfPar": {"C1": "E1", "C2": "E2", "C3": "E1"}}, "esf": {"auto": true}, "brz": {"compat": {"C3": ["Brz-316-A04", "Brz-316-A07", "Brz-904-A19", "Brz-904-A16", "Brz-Piel-P01", "Brz-Piel-P02", "Brz-Piel-P03", "Brz-Piel-P05", "Brz-Piel-P06", "Brz-Piel-P07", "Brz-Sintetica-P52", "Brz-Sintetica-P53", "Brz-Goma-G01", "Brz-Caucho-C11"]}, "compatNo": {"C1": ["Brz-316-A04", "Brz-316-A07", "Brz-904-A19", "Brz-904-A16", "Brz-Piel-P17", "Brz-Piel-P18", "Brz-Piel-P32"], "C2": ["Brz-316-A04", "Brz-316-A07", "Brz-904-A19", "Brz-904-A16", "Brz-Piel-P03", "Brz-Piel-P07", "Brz-Piel-P01", "Brz-Piel-P02", "Brz-Piel-P05", "Brz-Piel-P06", "Brz-Piel-P09", "Brz-Piel-P10", "Brz-Piel-P11", "Brz-Piel-P13", "Brz-Piel-P14", "Brz-Piel-P15", "Brz-Sintetica-P51", "Brz-Sintetica-P52", "Brz-Sintetica-P53"]}, "cierreSoloAlPulsar": ["Piel", "Piel sintética"]}}, "inicio": {"brz": "B03", "v": 0}, "fichaMat": {"Acero 316L": [{"h": "Acero 316L, el estándar de la buena relojería", "p": "El 316L es el acero quirúrgico de baja emisión de carbono: el mismo que monta la inmensa mayoría de la relojería suiza de calidad, desde las marcas de entrada hasta casas de varios miles de euros. Resiste la corrosión, el sudor y el agua de mar, es el acero hipoalergénico de referencia y se pule y mantiene con facilidad. Es, sencillamente, el material con el que se mide todo lo demás."}, {"h": "Lo que hay que saber de esta gama", "p": "Para dejar el precio donde está, en esta gama algunos brazaletes combinan eslabones macizos con eslabones huecos. En la práctica pesan menos en la muñeca —hay quien lo prefiere así para todo el día— y suenan un poco más vivos que un enterizo. Quien busque el peso y el silencio de un brazalete macizo tiene en lo más alto el 904L."}], "Acero 316L macizo": [{"h": "Acero 316L macizo, eslabón a eslabón", "p": "El mismo acero quirúrgico 316L, pero con cada eslabón mecanizado en una pieza maciza: más peso, más solidez y ese silencio en la muñeca que distingue a un brazalete enterizo de uno hueco. La nobleza del macizo sin el sobrecoste del 904L."}, {"h": "Y frente al 904L", "p": "El 904L añade a la receta más cromo, níquel, cobre y molibdeno: gana un brillo más profundo y aún más resistencia a la corrosión. La diferencia existe y se paga, pero es sutil: el 316L macizo da prácticamente la misma sensación de solidez, y sigue siendo la referencia hipoalergénica para pieles sensibles."}], "Acero 904L": [{"h": "Acero 904L, el acero de los grandes", "p": "El 904L es una aleación superior al 316L: lleva más cromo, níquel, cobre y molibdeno. Dos consecuencias: una resistencia a la corrosión excepcional —ácidos, sudor, agua de mar— y, sobre todo, un pulido más profundo y brillante, con ese tono plateado húmedo que caracteriza a los brazaletes de las casas más exclusivas de Suiza, que lo reservan para relojes de decenas de miles de euros. Casi nadie lo monta porque es difícil y caro de mecanizar: por eso distingue a quien lo lleva."}, {"h": "Para ser justos", "p": "Frente al 316L pesa un poco más y, al llevar más níquel, en pieles extremadamente sensibles el 316L sigue siendo la referencia hipoalergénica. Y como todo acero se puede rayar con el uso; la ventaja es que su pulido se recupera de maravilla. Por lo demás, es el mejor acero que se puede poner en una muñeca."}]}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "completas": {"LO-03-C1-E1-Brz-316-A02": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A02.webp?v=ed59d8e7", "LO-03-C1-E1-Brz-316-A03": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A03.webp?v=1776028a", "LO-03-C1-E1-Brz-316-A05": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A05.webp?v=f2295b53", "LO-03-C1-E1-Brz-316-A06": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A06.webp?v=3ea9f700", "LO-03-C1-E1-Brz-904-A13": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A05.webp?v=f2295b53", "LO-03-C1-E1-Brz-904-A14": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-904-A14.webp?v=1e0c2e22", "LO-03-C1-E1-Brz-904-A12": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A02.webp?v=ed59d8e7", "LO-03-C1-E1-Brz-904-A15": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A03.webp?v=1776028a", "LO-03-C1-E1-Brz-Piel-P01": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P02.webp?v=d911a572", "LO-03-C1-E1-Brz-Piel-P02": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P02.webp?v=d911a572", "LO-03-C1-E1-Brz-Piel-P03": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P02.webp?v=d911a572", "LO-03-C1-E1-Brz-Piel-P05": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P06.webp?v=f22218ec", "LO-03-C1-E1-Brz-Piel-P06": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P06.webp?v=f22218ec", "LO-03-C1-E1-Brz-Piel-P07": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P06.webp?v=f22218ec", "LO-03-C1-E1-Brz-Piel-P09": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P10.webp?v=24d9229c", "LO-03-C1-E1-Brz-Piel-P10": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P10.webp?v=24d9229c", "LO-03-C1-E1-Brz-Piel-P11": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P10.webp?v=24d9229c", "LO-03-C1-E1-Brz-Piel-P13": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P14.webp?v=b53196e8", "LO-03-C1-E1-Brz-Piel-P14": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P14.webp?v=b53196e8", "LO-03-C1-E1-Brz-Piel-P15": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P14.webp?v=b53196e8", "LO-03-C1-E1-Brz-Sintetica-P51": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Sintetica-P51.webp?v=c53c7e58", "LO-03-C1-E1-Brz-Sintetica-P54": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Sintetica-P54.webp?v=f2a0486d", "LO-03-C1-E1-Brz-Sintetica-P55": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Sintetica-P55.webp?v=c5e5a644", "LO-03-C1-E1-Brz-Sintetica-P52": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Sintetica-P52.webp?v=cd38dde9", "LO-03-C1-E1-Brz-Sintetica-P53": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Sintetica-P53.webp?v=f927ca24", "LO-03-C1-E1-Brz-Goma-G01": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Goma-G01.webp?v=4d5b8c82", "LO-03-C1-E1-Brz-Goma-G02": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Goma-G02.webp?v=279d7143", "LO-03-C1-E1-Brz-Goma-G05": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Goma-G05.webp?v=1eadd364", "LO-03-C1-E1-Brz-Goma-G07": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Goma-G07.webp?v=cc5c038b", "LO-03-C1-E1-Brz-Caucho-C11": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Caucho-C11.webp?v=54c55b4d", "LO-03-C1-E1-Brz-Caucho-C14": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Caucho-C14.webp?v=ffbf0384", "LO-03-C1-E1-Brz-Caucho-C15": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Caucho-C15.webp?v=d33fece4", "LO-03-C1-E1-Brz-Caucho-C23": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Caucho-C23.webp?v=b54a58f1", "LO-03-C1-E1-Brz-Caucho-C26": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Caucho-C26.webp?v=bf25ac28", "LO-03-C1-E1-Brz-Caucho-C31": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Caucho-C11.webp?v=54c55b4d", "LO-03-C2-E2-Brz-316-A02": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A02.webp?v=1fc85457", "LO-03-C2-E2-Brz-316-A03": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A03.webp?v=90cf37f1", "LO-03-C2-E2-Brz-316-A05": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A05.webp?v=6c8bcc69", "LO-03-C2-E2-Brz-316-A06": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A06.webp?v=73e54b23", "LO-03-C2-E2-Brz-904-A13": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A05.webp?v=6c8bcc69", "LO-03-C2-E2-Brz-904-A14": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-904-A14.webp?v=40b23c9c", "LO-03-C2-E2-Brz-904-A12": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A02.webp?v=1fc85457", "LO-03-C2-E2-Brz-904-A15": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-316-A03.webp?v=90cf37f1", "LO-03-C2-E2-Brz-Piel-P17": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Piel-P18.webp?v=88dc9f56", "LO-03-C2-E2-Brz-Piel-P18": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Piel-P18.webp?v=88dc9f56", "LO-03-C2-E2-Brz-Piel-P32": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Piel-P32.webp?v=a54a7bcf", "LO-03-C2-E2-Brz-Sintetica-P51": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Sintetica-P51.webp?v=42cb599b", "LO-03-C2-E2-Brz-Sintetica-P54": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Sintetica-P54.webp?v=03a16e1f", "LO-03-C2-E2-Brz-Sintetica-P55": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Sintetica-P55.webp?v=0fe58faf", "LO-03-C2-E2-Brz-Sintetica-P52": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Sintetica-P52.webp?v=7bfc719f", "LO-03-C2-E2-Brz-Sintetica-P53": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Sintetica-P53.webp?v=8afcd65a", "LO-03-C2-E2-Brz-Goma-G01": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Goma-G01.webp?v=12d0a0ee", "LO-03-C2-E2-Brz-Goma-G02": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Goma-G02.webp?v=41402c05", "LO-03-C2-E2-Brz-Goma-G05": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Goma-G05.webp?v=8c68c4d6", "LO-03-C2-E2-Brz-Goma-G07": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Goma-G07.webp?v=44351566", "LO-03-C2-E2-Brz-Caucho-C11": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C11.webp?v=950b5c8d", "LO-03-C2-E2-Brz-Caucho-C14": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C14.webp?v=1c473596", "LO-03-C2-E2-Brz-Caucho-C15": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C15.webp?v=eab03637", "LO-03-C2-E2-Brz-Caucho-C23": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C23.webp?v=3c38e26a", "LO-03-C2-E2-Brz-Caucho-C26": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C26.webp?v=4a9763ea", "LO-03-C2-E2-Brz-Caucho-C31": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C11.webp?v=950b5c8d", "LO-03-C3-E1-Brz-316-A04": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-316-A04.webp?v=12b1c258", "LO-03-C3-E1-Brz-316-A07": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-316-A07.webp?v=535ae180", "LO-03-C3-E1-Brz-904-A19": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-316-A07.webp?v=535ae180", "LO-03-C3-E1-Brz-904-A16": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-316-A04.webp?v=12b1c258", "LO-03-C3-E1-Brz-Piel-P01": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Piel-P02.webp?v=35aa04f1", "LO-03-C3-E1-Brz-Piel-P02": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Piel-P02.webp?v=35aa04f1", "LO-03-C3-E1-Brz-Piel-P03": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Piel-P02.webp?v=35aa04f1", "LO-03-C3-E1-Brz-Piel-P05": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Piel-P06.webp?v=bd4322db", "LO-03-C3-E1-Brz-Piel-P06": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Piel-P06.webp?v=bd4322db", "LO-03-C3-E1-Brz-Piel-P07": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Piel-P06.webp?v=bd4322db", "LO-03-C3-E1-Brz-Sintetica-P52": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Sintetica-P52.webp?v=b24bee50", "LO-03-C3-E1-Brz-Sintetica-P53": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Sintetica-P53.webp?v=376ccbfe", "LO-03-C3-E1-Brz-Goma-G01": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Goma-G01.webp?v=ca618146", "LO-03-C3-E1-Brz-Caucho-C11": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Caucho-C11.webp?v=e0df372c", "LO-03-C3-E1-Brz-Caucho-C31": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Caucho-C11.webp?v=e0df372c"}, "peques": {"LO-03-C1-E1-Brz-316-A02": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A02.webp?v=27f8fa78", 2000], "LO-03-C1-E1-Brz-316-A03": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A03.webp?v=e49a2a2a", 2000], "LO-03-C1-E1-Brz-316-A05": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A05.webp?v=c1360dbd", 2000], "LO-03-C1-E1-Brz-316-A06": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A06.webp?v=5176b230", 2000], "LO-03-C1-E1-Brz-904-A13": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A05.webp?v=c1360dbd", 2000], "LO-03-C1-E1-Brz-904-A14": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-904-A14.webp?v=7456ccd0", 2000], "LO-03-C1-E1-Brz-904-A12": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A02.webp?v=27f8fa78", 2000], "LO-03-C1-E1-Brz-904-A15": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-316-A03.webp?v=e49a2a2a", 2000], "LO-03-C1-E1-Brz-Piel-P01": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P02.webp?v=4d8b7673", 2000], "LO-03-C1-E1-Brz-Piel-P02": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P02.webp?v=4d8b7673", 2000], "LO-03-C1-E1-Brz-Piel-P03": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P02.webp?v=4d8b7673", 2000], "LO-03-C1-E1-Brz-Piel-P05": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P06.webp?v=d6136bee", 2000], "LO-03-C1-E1-Brz-Piel-P06": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P06.webp?v=d6136bee", 2000], "LO-03-C1-E1-Brz-Piel-P07": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P06.webp?v=d6136bee", 2000], "LO-03-C1-E1-Brz-Piel-P09": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P10.webp?v=ffaa95fc", 2000], "LO-03-C1-E1-Brz-Piel-P10": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P10.webp?v=ffaa95fc", 2000], "LO-03-C1-E1-Brz-Piel-P11": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P10.webp?v=ffaa95fc", 2000], "LO-03-C1-E1-Brz-Piel-P13": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P14.webp?v=676ce1c5", 2000], "LO-03-C1-E1-Brz-Piel-P14": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P14.webp?v=676ce1c5", 2000], "LO-03-C1-E1-Brz-Piel-P15": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Piel-P14.webp?v=676ce1c5", 2000], "LO-03-C1-E1-Brz-Sintetica-P51": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Sintetica-P51.webp?v=d8be9d3e", 2000], "LO-03-C1-E1-Brz-Sintetica-P54": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Sintetica-P54.webp?v=4b1bfd39", 2000], "LO-03-C1-E1-Brz-Sintetica-P55": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Sintetica-P55.webp?v=f654f132", 2000], "LO-03-C1-E1-Brz-Sintetica-P52": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Sintetica-P52.webp?v=8ecf3e5e", 2000], "LO-03-C1-E1-Brz-Sintetica-P53": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Sintetica-P53.webp?v=ff211198", 2000], "LO-03-C1-E1-Brz-Goma-G01": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Goma-G01.webp?v=681678eb", 2000], "LO-03-C1-E1-Brz-Goma-G02": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Goma-G02.webp?v=c1a9f8cc", 2000], "LO-03-C1-E1-Brz-Goma-G05": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Goma-G05.webp?v=d45bd4c2", 2000], "LO-03-C1-E1-Brz-Goma-G07": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Goma-G07.webp?v=eca1f7d3", 2000], "LO-03-C1-E1-Brz-Caucho-C11": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Caucho-C11.webp?v=abd58f95", 2000], "LO-03-C1-E1-Brz-Caucho-C14": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Caucho-C14.webp?v=d379506e", 2000], "LO-03-C1-E1-Brz-Caucho-C15": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Caucho-C15.webp?v=66cd85f0", 2000], "LO-03-C1-E1-Brz-Caucho-C23": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Caucho-C23.webp?v=4c679a6e", 2000], "LO-03-C1-E1-Brz-Caucho-C26": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Caucho-C26.webp?v=a305d6ae", 2000], "LO-03-C1-E1-Brz-Caucho-C31": ["/assets/img/piezas/completas/1200/LO-03-C1-E1-Brz-Caucho-C11.webp?v=abd58f95", 2000], "LO-03-C2-E2-Brz-316-A02": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A02.webp?v=783b4653", 2000], "LO-03-C2-E2-Brz-316-A03": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A03.webp?v=0d4ee9b8", 2000], "LO-03-C2-E2-Brz-316-A05": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A05.webp?v=cc0e090c", 2000], "LO-03-C2-E2-Brz-316-A06": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A06.webp?v=b6602fdb", 2000], "LO-03-C2-E2-Brz-904-A13": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A05.webp?v=cc0e090c", 2000], "LO-03-C2-E2-Brz-904-A14": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-904-A14.webp?v=e389a517", 2000], "LO-03-C2-E2-Brz-904-A12": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A02.webp?v=783b4653", 2000], "LO-03-C2-E2-Brz-904-A15": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-316-A03.webp?v=0d4ee9b8", 2000], "LO-03-C2-E2-Brz-Piel-P17": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Piel-P18.webp?v=458d9480", 2000], "LO-03-C2-E2-Brz-Piel-P18": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Piel-P18.webp?v=458d9480", 2000], "LO-03-C2-E2-Brz-Piel-P32": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Piel-P32.webp?v=1754a153", 2000], "LO-03-C2-E2-Brz-Sintetica-P51": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Sintetica-P51.webp?v=4a495b0f", 2000], "LO-03-C2-E2-Brz-Sintetica-P54": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Sintetica-P54.webp?v=6ff43cf5", 2000], "LO-03-C2-E2-Brz-Sintetica-P55": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Sintetica-P55.webp?v=0514be44", 2000], "LO-03-C2-E2-Brz-Sintetica-P52": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Sintetica-P52.webp?v=c4976805", 2000], "LO-03-C2-E2-Brz-Sintetica-P53": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Sintetica-P53.webp?v=c5811bc4", 2000], "LO-03-C2-E2-Brz-Goma-G01": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Goma-G01.webp?v=d4c81477", 2000], "LO-03-C2-E2-Brz-Goma-G02": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Goma-G02.webp?v=a81f3979", 2000], "LO-03-C2-E2-Brz-Goma-G05": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Goma-G05.webp?v=c139c8be", 2000], "LO-03-C2-E2-Brz-Goma-G07": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Goma-G07.webp?v=c2b9693e", 2000], "LO-03-C2-E2-Brz-Caucho-C11": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Caucho-C11.webp?v=628a77b6", 2000], "LO-03-C2-E2-Brz-Caucho-C14": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Caucho-C14.webp?v=e784d126", 2000], "LO-03-C2-E2-Brz-Caucho-C15": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Caucho-C15.webp?v=ed9c7621", 2000], "LO-03-C2-E2-Brz-Caucho-C23": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Caucho-C23.webp?v=dea083a4", 2000], "LO-03-C2-E2-Brz-Caucho-C26": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Caucho-C26.webp?v=666bfc22", 2000], "LO-03-C2-E2-Brz-Caucho-C31": ["/assets/img/piezas/completas/1200/LO-03-C2-E2-Brz-Caucho-C11.webp?v=628a77b6", 2000], "LO-03-C3-E1-Brz-316-A04": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-316-A04.webp?v=9a9e6af6", 2000], "LO-03-C3-E1-Brz-316-A07": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-316-A07.webp?v=6e2f58c3", 2000], "LO-03-C3-E1-Brz-904-A19": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-316-A07.webp?v=6e2f58c3", 2000], "LO-03-C3-E1-Brz-904-A16": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-316-A04.webp?v=9a9e6af6", 2000], "LO-03-C3-E1-Brz-Piel-P01": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Piel-P02.webp?v=69db47f8", 2000], "LO-03-C3-E1-Brz-Piel-P02": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Piel-P02.webp?v=69db47f8", 2000], "LO-03-C3-E1-Brz-Piel-P03": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Piel-P02.webp?v=69db47f8", 2000], "LO-03-C3-E1-Brz-Piel-P05": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Piel-P06.webp?v=5e530ff5", 2000], "LO-03-C3-E1-Brz-Piel-P06": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Piel-P06.webp?v=5e530ff5", 2000], "LO-03-C3-E1-Brz-Piel-P07": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Piel-P06.webp?v=5e530ff5", 2000], "LO-03-C3-E1-Brz-Sintetica-P52": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Sintetica-P52.webp?v=39977dd2", 2000], "LO-03-C3-E1-Brz-Sintetica-P53": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Sintetica-P53.webp?v=063cb049", 2000], "LO-03-C3-E1-Brz-Goma-G01": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Goma-G01.webp?v=53080894", 2000], "LO-03-C3-E1-Brz-Caucho-C11": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Caucho-C11.webp?v=3246fde7", 2000], "LO-03-C3-E1-Brz-Caucho-C31": ["/assets/img/piezas/completas/1200/LO-03-C3-E1-Brz-Caucho-C11.webp?v=3246fde7", 2000]}, "cierres": {"B02": "/assets/img/piezas/cierres/B02.webp?v=c6dc066d", "B03": "/assets/img/piezas/cierres/B03.webp?v=28f80629", "B08": "/assets/img/piezas/cierres/B08.webp?v=c6dc066d", "B20": "/assets/img/piezas/cierres/B20.webp?v=419819fd"}, "cierresNom": {"Cierre Ostra": "/assets/img/piezas/cierres/cierre-ostra.webp?v=c6dc066d", "Hebilla mariposa plateada": "/assets/img/piezas/cierres/hebilla-mariposa-plateada.webp?v=459c1098", "Hebilla clásica plateada": "/assets/img/piezas/cierres/hebilla-clasica-plateada.webp?v=33315e56", "Hebilla clásica negra": "/assets/img/piezas/cierres/hebilla-clasica-negra.webp?v=302c1924", "Hebilla mariposa": "/assets/img/piezas/cierres/hebilla-mariposa.webp?v=cb2bb1b0", "Hebilla de acero": "/assets/img/piezas/cierres/hebilla-de-acero.webp?v=29c30055", "Hebilla mariposa oro rosa": "/assets/img/piezas/cierres/hebilla-mariposa-oro-rosa.webp?v=ce8d5fa8"}, "cierresFam": {}, "detallePies": {}, "solape": 80}</script>
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=1"></script>
-<script src="/assets/js/configurador-v2.js?v=69"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- EL MATERIAL: las 14 fotos aprobadas del 16/08 ---------- */
+  var MOV = {
+    cal: 'LO_MQ326', coste: 27.59, nombre: 'Mecacuarzo Japonés',
+    tec: "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años."
+  };
+  var CAJA = 31.57;    /* bisel negro y bisel azul cuestan lo mismo */
+  var ESFERA = 14.19;  /* las tres esferas, al coste del material viejo */
+  var VERSIONES = {
+    NEG: { nombre: 'Negra',          slug: 'negro',       bisel: 'negro',
+           esf: 'Esfera negra con subesferas negras y bisel taquimétrico negro: el cronógrafo clásico.' },
+    BLA: { nombre: 'Blanca',         slug: 'blanco',      bisel: 'negro',
+           esf: 'Esfera blanca con subesferas blancas y bisel taquimétrico negro, en alto contraste.' },
+    AZU: { nombre: 'Blanca y Azul',  slug: 'blanco-azul', bisel: 'azul',
+           esf: 'Esfera blanca con subesferas azules y bisel taquimétrico azul a juego.' }
+  };
+  var CORREAS = {
+    FKM:   { nombre: 'Caucho Pespunte Blanco', coste: 6.39,  slug: 'caucho-fkm-negro-pespunte-blanco',
+             tec: 'caucho negro de extremo curvado con pespunte blanco y hebilla clásica de acero' },
+    TEX:   { nombre: 'Caucho Texturizado',     coste: 6.39,  slug: 'caucho-negro-texturizado',
+             tec: 'caucho negro texturizado de extremo curvado con hebilla clásica de acero' },
+    PERF:  { nombre: 'Piel Perforada',         coste: 6.79,  slug: 'piel-negra-perforada-grande-pespunte-blanco',
+             tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla clásica' },
+    NATOP: { nombre: 'Nato + Piel Beige',      coste: 4.99,  slug: 'nato-piel-beige',
+             tec: 'nato de lona beige con forro interior de piel genuina que evita molestias en la muñeca, hebilla clásica' },
+    ACERO: { nombre: 'Brazalete Acero',        coste: 22.39, slug: 'acero',
+             tec: 'brazalete de acero 316L de cinco eslabones con cierre desplegable' },
+    PIELB: { nombre: 'Piel Pespunte Blanco',   coste: 30.79, slug: 'piel-negra-pespunte-blanco',
+             tec: 'piel genuina negra con pespunte blanco y hebilla clásica plateada, con liberación rápida' },
+    PIELN: { nombre: 'Piel Pespunte Negro',    coste: 31.59, slug: 'piel-negra-pespunte-negro',
+             tec: 'piel genuina negra con pespunte negro y hebilla clásica plateada, con liberación rápida' }
+  };
+  var ORDEN_VER = ['NEG', 'BLA', 'AZU'];
+  var ORDEN_COR = ['FKM', 'TEX', 'PERF', 'NATOP', 'ACERO', 'PIELB', 'PIELN'];
+
+  /* LA FOTO ES LA LISTA DE VALIDEZ: slug de versión + slug de correa. */
+  var FOTOS = {
+    "blanco-acero": [
+    "/assets/img/lunar-2026/1200/blanco-acero.webp?v=bb38d95e",
+    "/assets/img/lunar-2026/blanco-acero.webp?v=6f83076f",
+    4096
+    ],
+    "blanco-azul-acero": [
+    "/assets/img/lunar-2026/1200/blanco-azul-acero.webp?v=c9dbcd4f",
+    "/assets/img/lunar-2026/blanco-azul-acero.webp?v=fa66ae3c",
+    4096
+    ],
+    "blanco-azul-nato-piel-beige": [
+    "/assets/img/lunar-2026/1200/blanco-azul-nato-piel-beige.webp?v=94a3330e",
+    "/assets/img/lunar-2026/blanco-azul-nato-piel-beige.webp?v=e3a72c60",
+    4096
+    ],
+    "blanco-caucho-fkm-negro-pespunte-blanco": [
+    "/assets/img/lunar-2026/1200/blanco-caucho-fkm-negro-pespunte-blanco.webp?v=1957c078",
+    "/assets/img/lunar-2026/blanco-caucho-fkm-negro-pespunte-blanco.webp?v=983c92f0",
+    4096
+    ],
+    "blanco-caucho-negro-texturizado": [
+    "/assets/img/lunar-2026/1200/blanco-caucho-negro-texturizado.webp?v=d7caed6e",
+    "/assets/img/lunar-2026/blanco-caucho-negro-texturizado.webp?v=b3414a62",
+    4096
+    ],
+    "blanco-piel-negra-perforada-grande-pespunte-blanco": [
+    "/assets/img/lunar-2026/1200/blanco-piel-negra-perforada-grande-pespunte-blanco.webp?v=d4c0254b",
+    "/assets/img/lunar-2026/blanco-piel-negra-perforada-grande-pespunte-blanco.webp?v=4679411c",
+    4096
+    ],
+    "blanco-piel-negra-pespunte-blanco": [
+    "/assets/img/lunar-2026/1200/blanco-piel-negra-pespunte-blanco.webp?v=8425f9c0",
+    "/assets/img/lunar-2026/blanco-piel-negra-pespunte-blanco.webp?v=55fca3a9",
+    4096
+    ],
+    "blanco-piel-negra-pespunte-negro": [
+    "/assets/img/lunar-2026/1200/blanco-piel-negra-pespunte-negro.webp?v=c9cbc632",
+    "/assets/img/lunar-2026/blanco-piel-negra-pespunte-negro.webp?v=a0431b6a",
+    4096
+    ],
+    "negro-acero": [
+    "/assets/img/lunar-2026/1200/negro-acero.webp?v=34e2cbe5",
+    "/assets/img/lunar-2026/negro-acero.webp?v=655ad157",
+    4096
+    ],
+    "negro-caucho-fkm-negro-pespunte-blanco": [
+    "/assets/img/lunar-2026/1200/negro-caucho-fkm-negro-pespunte-blanco.webp?v=7f13efc5",
+    "/assets/img/lunar-2026/negro-caucho-fkm-negro-pespunte-blanco.webp?v=765afbe9",
+    4096
+    ],
+    "negro-caucho-negro-texturizado": [
+    "/assets/img/lunar-2026/1200/negro-caucho-negro-texturizado.webp?v=a817106f",
+    "/assets/img/lunar-2026/negro-caucho-negro-texturizado.webp?v=5b375e0b",
+    4096
+    ],
+    "negro-piel-negra-perforada-grande-pespunte-blanco": [
+    "/assets/img/lunar-2026/1200/negro-piel-negra-perforada-grande-pespunte-blanco.webp?v=6a372682",
+    "/assets/img/lunar-2026/negro-piel-negra-perforada-grande-pespunte-blanco.webp?v=0fe0cade",
+    4096
+    ],
+    "negro-piel-negra-pespunte-blanco": [
+    "/assets/img/lunar-2026/1200/negro-piel-negra-pespunte-blanco.webp?v=df553382",
+    "/assets/img/lunar-2026/negro-piel-negra-pespunte-blanco.webp?v=0378cec0",
+    4096
+    ],
+    "negro-piel-negra-pespunte-negro": [
+    "/assets/img/lunar-2026/1200/negro-piel-negra-pespunte-negro.webp?v=bf4fcec1",
+    "/assets/img/lunar-2026/negro-piel-negra-pespunte-negro.webp?v=5778c831",
+    4096
+    ]
+    };
+
+  var e = { ver: 'NEG', correa: 'FKM' };
+
+  function clave(v, c) { return VERSIONES[v].slug + '-' + CORREAS[c].slug; }
+  function existe(v, c) { return !!FOTOS[clave(v, c)]; }
+  function referencia() { return 'LO-03-' + e.ver + '-' + e.correa; }
+
+  /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
+  var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
+  function redondea(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return (p - bajo) <= (bajo + 10 - p) ? bajo : bajo + 10;
+  }
+  function sube990(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return bajo >= p - 1e-9 ? bajo : bajo + 10;
+  }
+  function sueloPvp(cn) {
+    var queda = 1 - IRPF - SS;
+    var porEuros = (50 / queda + cn) * (1 + IVA);
+    var margen = queda / (1 + IVA) - 0.15;
+    var porciento = margen > 0 ? queda * cn / margen : 0;
+    return sube990(Math.max(porEuros, porciento));
+  }
+  function pvpBase(c) {
+    var neto = c + 9 / 1.21 + (MOV.coste + 19) * 0.05;
+    return Math.max(redondea(c * MULT), sueloPvp(neto));
+  }
+  function precio() {
+    var c = MOV.coste + CAJA + ESFERA + CORREAS[e.correa].coste;
+    /* El nato+piel se vende 10 € POR ENCIMA del caucho (Óscar, 16/08):
+       se tarifa con el coste del caucho y se le suman 10. */
+    if (e.correa === 'NATOP') {
+      return pvpBase(c - CORREAS.NATOP.coste + CORREAS.FKM.coste) + 10;
+    }
+    return pvpBase(c);
+  }
+
+  function normaliza() {
+    if (!existe(e.ver, e.correa)) {
+      e.correa = ORDEN_COR.filter(function (c) { return existe(e.ver, c); })[0];
+    }
+  }
+
+  var $ = function (s) { return document.querySelector(s); };
+  function eu(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
+
+  function botones(grupo, opciones, activo) {
+    $('[data-pv="' + grupo + '"]').innerHTML = opciones.map(function (o) {
+      return '<button type="button" data-v="' + o[0] + '"' + (o[2] ? ' disabled' : '') +
+             ' aria-pressed="' + (o[0] === activo) + '">' + o[1] + '</button>';
+    }).join('');
+  }
+
+  function pinta() {
+    normaliza();
+    $('[data-pv-precio]').textContent = eu(precio());
+
+    botones('ver', ORDEN_VER.map(function (v) {
+      return [v, VERSIONES[v].nombre, false];
+    }), e.ver);
+
+    /* la correa que no existe con esa versión se tacha, no se esconde */
+    botones('correa', ORDEN_COR.map(function (c) {
+      return [c, CORREAS[c].nombre, !existe(e.ver, c)];
+    }), e.correa);
+
+    var f = FOTOS[clave(e.ver, e.correa)];
+    var img = $('[data-pv-foto]');
+    img.src = f[0];
+    img.srcset = f[0] + ' 1200w, ' + f[1] + ' ' + f[2] + 'w';
+
+    $('[data-pv-tec="caja"]').textContent =
+      'Caja de 40 mm en acero 316L macizo con bisel taquimétrico ' + VERSIONES[e.ver].bisel +
+      ', pulsadores del cronógrafo a las 2 y a las 4 y cristal de zafiro. ' +
+      'Correa: ' + CORREAS[e.correa].tec + '.';
+    $('[data-pv-tec="mov"]').textContent = MOV.tec;
+    $('[data-pv-tec="esf"]').textContent = VERSIONES[e.ver].esf +
+      ' Tres contadores: minutos del cronómetro, indicador de 24 horas y segundero pequeño.';
+  }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-pv] button');
+    if (b) {
+      e[b.closest('[data-pv]').dataset.pv] = b.dataset.v;
+      pinta();
+      return;
+    }
+    if (ev.target.closest('[data-pv-comprar]')) {
+      if (typeof laoraCarritoAnadir !== 'function') return;
+      laoraCarritoAnadir({
+        ref: referencia(),
+        nombre: 'Lunar ' + VERSIONES[e.ver].nombre,
+        detalle: 'Acero 316L 40 mm, bisel ' + VERSIONES[e.ver].bisel + ' · Versión ' +
+                 VERSIONES[e.ver].nombre + ' · ' + MOV.nombre,
+        correa: CORREAS[e.correa].nombre,
+        precio: precio(),
+        foto: $('[data-pv-foto]').src
+      });
+      window.location.href = '/carrito.html';
+    }
+  });
+
+  pinta();
+})();
+</script>
+<script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
