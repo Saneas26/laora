@@ -781,8 +781,9 @@ desde['precisa'] = redondea((15.05 + 62.99 + 10.39 + 3.78) * MULT)
 desde['bitacora'] = redondea((59.01 + 29.57 + 21.39 + 6.39) * MULT)
 
 # Ni el Lunar (ficha a mano del 16/08, 14 fotos aprobadas): mecacuarzo +
-# bisel + esfera + caucho, sin logo. El nato+piel se vende caucho+10.
-desde['lunar'] = redondea((27.59 + 31.57 + 14.19 + 6.39) * MULT)
+# pack caja/esfera/agujas del proveedor nuevo (16/08) + caucho, sin
+# logo. El nato+piel se vende caucho+10.
+desde['lunar'] = redondea((27.59 + 34.59 + 6.39) * MULT)
 
 with open(os.path.join(RAIZ, 'assets/datos/desde.json'), 'w', encoding='utf-8') as f:
     json.dump(desde, f, ensure_ascii=False, indent=1, sort_keys=True)
