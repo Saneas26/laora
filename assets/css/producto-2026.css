@@ -114,9 +114,10 @@
 }
 /* La miniatura del forro de piel, abajo a la derecha de la foto */
 .pv-forro{
-  position:absolute;right:10px;bottom:30px;width:24%;
+  display:block;position:absolute;right:10px;bottom:30px;width:24%;
   border:1px solid var(--cv2-linea);box-shadow:0 2px 10px rgba(0,0,0,.12);
 }
+.pv-forro[hidden]{display:none}
 .pv-fijo{
   font-size:13px;color:var(--cv2-gris);margin:0;
   border:1px dashed rgba(74,74,74,.3);padding:10px 14px;
