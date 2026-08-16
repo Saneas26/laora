@@ -1,0 +1,111 @@
+{
+  "_meta": {
+    "descripcion": "Componentes de reloj seleccionados en un anuncio de AliExpress para el catalogo de laOra. Datos extraidos leyendo la pagina del producto el 2026-08-16 (zona horaria Atlantic/Canary).",
+    "fecha_extraccion": "2026-08-16",
+    "moneda": "EUR",
+    "convencion_datos_faltantes": "null = el dato NO aparece en la pagina del vendedor. NO inferir ni inventar. Si un campo es null y se necesita, hay que preguntar al vendedor por escrito.",
+    "campos_inferidos": "Todo campo cuyo nombre acaba en '_observado' proviene de la interpretacion visual de la foto del SKU, no de texto declarado por el vendedor. Tratar como indicio, no como dato.",
+    "destino": "Piezas P-001 a P-018 del libro laOra 2026 (alta ALTA_2026_08_16 en altas-2026.gs)"
+  },
+
+  "anuncio": {
+    "url_limpia": "https://es.aliexpress.com/item/1005007892634303.html",
+    "item_id": "1005007892634303",
+    "titulo": "Caja de Metal para Reloj de 39.7mm, Compatible con Movimiento VK63, Accesorios para Reloj, Apta para Correa de 20mm, Esfera y Manecillas VK63",
+    "vendedor": {
+      "nombre": "FJ wrist watch store Store",
+      "valoraciones_positivas_pct": 96.7,
+      "seguidores": 780
+    },
+    "valoracion_articulo": 4.8,
+    "num_valoraciones": 63,
+    "unidades_vendidas": 278,
+    "unidades_disponibles": 100,
+    "pedido_minimo": 1,
+    "envio_eur": 4.52,
+    "entrega_estimada": "2026-08-24 a 2026-09-01",
+    "devoluciones": "Gratis, 90 dias",
+    "origen": "CN",
+    "propiedades_sku": {
+      "Color": "44 valores (NO.1 a NO.44). ATENCION: 'Color' NO significa color, mezcla tipos de pieza distintos: cajas vacias, cajas montadas, brazaletes, esferas sueltas y juegos de agujas.",
+      "Diametro del dial": {
+        "valor_seleccionado_durante_la_extraccion": "Lunar pattern",
+        "valores_posibles": ["No pattern", "Lunar pattern", "Footprint pattern"],
+        "nota": "El vendedor la etiqueta como 'diametro' pero los valores son patrones de textura de esfera. No afecta al precio observado."
+      }
+    },
+    "descuentos": {
+      "promocion_activa": "-50% sobre el precio tachado, aplicada a todas las variantes",
+      "descuento_volumen": "-5% adicional a partir de 5 unidades",
+      "cupon_plataforma": "-95,00 EUR en compras de 699,00 EUR (no alcanzado con este pedido)",
+      "aviso": "La URL de entrada al anuncio arrastraba un tag promocional de nuevo usuario (m03_new_user). Verificar el precio en sesion limpia antes de fijar coste real."
+    }
+  },
+
+  "especificaciones_comunes": {
+    "fuente": "Ficha 'Detalles' del anuncio + titulo. Aplican al conjunto del anuncio, no a cada variante por separado.",
+    "diametro_caja_mm": 39.7,
+    "entre_asas_mm": 20,
+    "material_caja_declarado": "Acero inoxidable",
+    "grado_acero": null,
+    "material_cristal": null,
+    "estanqueidad": null,
+    "grosor_caja_mm": null,
+    "largo_asa_a_asa_mm": null,
+    "diametro_esfera_mm": null,
+    "movimiento_compatible_declarado": "VK63",
+    "movimiento_incluido": false,
+    "compatibilidad_otros_calibres": null,
+    "tipo_articulo_declarado": "Cajas para Relojes",
+    "producto_quimico_alta_preocupacion": "Ninguno",
+    "nota_descripcion": "La descripcion del anuncio son unicamente fotos: no hay tabla de medidas, ni de materiales, ni de contenido del paquete.",
+    "preguntas_sin_responder": [
+      "Este estuche se ajusta al movimiento 7750?",
+      "Esta caja es impermeable? Cuantos ATM?",
+      "Este estuche es compatible con diales de 31.5 y VK63?",
+      "Encaja el movimiento PE50?",
+      "Es posible usarlo para un movimiento manual ETA?"
+    ]
+  },
+
+  "componentes": [
+    { "pieza": "P-001", "sku": "NO.44", "posicion_en_parrilla": 1, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero pulido con bisel taquimetrico plateado, esfera negra de cronografo con tres contadores y juego de agujas naranjas y blancas. Foto rotulada 'Diameter 39.7mm suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sa769e0cef6644bbfb531c00f3ee9ad51q.jpg" },
+    { "pieza": "P-008", "sku": "NO.1", "posicion_en_parrilla": 2, "tipo_componente": "caja vacia", "descripcion_observada": "Caja de acero pulido con bisel taquimetrico negro. Sin esfera ni agujas.", "incluye_observado": ["caja", "bisel", "cristal", "corona", "pulsadores"], "no_incluye": ["movimiento", "esfera", "agujas", "correa o brazalete"], "precio_oferta_eur": 23.79, "precio_normal_eur": 47.58, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S59d9e5ee62d24c9fa0a109a07da54a35D.jpg" },
+    { "pieza": "P-009", "sku": "NO.8", "posicion_en_parrilla": 9, "tipo_componente": "caja vacia", "descripcion_observada": "Caja de acero pulido con bisel taquimetrico azul. Sin esfera ni agujas.", "incluye_observado": ["caja", "bisel", "cristal", "corona", "pulsadores"], "no_incluye": ["movimiento", "esfera", "agujas", "correa o brazalete"], "precio_oferta_eur": 26.39, "precio_normal_eur": 52.78, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sfcb2edce1b994a3888c28c97895c8105L.jpg" },
+    { "pieza": "P-011", "sku": "NO.10", "posicion_en_parrilla": 11, "tipo_componente": "brazalete", "descripcion_observada": "Brazalete de acero plateado tipo oyster de tres eslabones, cierre desplegable con pulsador y endlinks curvos.", "ancho_asa_mm": 20, "largo_mm": null, "tipo_cierre_observado": "desplegable", "precio_oferta_eur": 19.69, "precio_normal_eur": 39.38, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S14d4fe1742fd4a3cae6bb82802afc2a9y.jpg" },
+    { "pieza": "P-010", "sku": "NO.13", "posicion_en_parrilla": 14, "tipo_componente": "caja vacia", "descripcion_observada": "Caja negra (recubrimiento tipo PVD) con bisel taquimetrico negro y numeracion clara. Sin esfera ni agujas.", "incluye_observado": ["caja", "bisel", "cristal", "corona", "pulsadores"], "no_incluye": ["movimiento", "esfera", "agujas", "correa o brazalete"], "precio_oferta_eur": 29.59, "precio_normal_eur": 59.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S939a02f878f7419b9eb47a19e9cad2bau.jpg" },
+    { "pieza": "P-012", "sku": "NO.20", "posicion_en_parrilla": 21, "tipo_componente": "brazalete", "descripcion_observada": "Brazalete negro (recubrimiento tipo PVD) de tres eslabones, cierre desplegable y endlinks curvos.", "ancho_asa_mm": 20, "largo_mm": null, "tipo_cierre_observado": "desplegable", "precio_oferta_eur": 26.39, "precio_normal_eur": 52.78, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S418f7b332b8941b795e59e08c8b17a7bD.jpg" },
+    { "pieza": "P-013", "sku": "NO.30", "posicion_en_parrilla": 22, "tipo_componente": "esfera suelta", "descripcion_observada": "Esfera blanca tipo panda con tres contadores negros, indices aplicados y ventana de fecha aproximadamente a las 4:30. Fotografiada junto a una regla, pero la medida no es legible.", "diametro_mm": null, "tiene_fecha_observado": true, "alerta": "El VK63 no tiene funcion de fecha; el calibre con fecha es el VK64. Esta esfera podria no ser compatible con un VK63. Confirmar con el vendedor antes de comprar.", "precio_oferta_eur": 7.69, "precio_normal_eur": 15.38, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/Sf5bbca7a85dc435f982eafbe8d64550er.jpg" },
+    { "pieza": "P-014", "sku": "NO.38", "posicion_en_parrilla": 23, "tipo_componente": "juego de agujas", "descripcion_observada": "Juego de agujas plateadas / blancas con lume verde (la foto incluye toma nocturna). Incluye aguja de horas, minutos, segundero central de cronografo y tres subagujas.", "color": "plateado / blanco", "alerta": "Aparentemente identico al SKU NO.41 y al mismo precio. Confirmar con el vendedor si son distintos antes de pedir ambos.", "precio_oferta_eur": 4.09, "precio_normal_eur": 8.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S11c52745620c4d7b96e66d3487c4479eX.jpg" },
+    { "pieza": "P-002", "sku": "NO.23", "posicion_en_parrilla": 33, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero con bisel azul, esfera blanca con tres contadores azules y agujas plateadas. Foto rotulada 'Diameter 39.7mm Suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/Se2767927f53f4f70bb590d8cc513099ff.jpg" },
+    { "pieza": "P-003", "sku": "NO.25", "posicion_en_parrilla": 35, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero con bisel taquimetrico negro, esfera negra con tres contadores y agujas plateadas. Foto rotulada 'Diameter 39.7mm Suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S7dcd261df7d84180a6fbcd2a5323dac7n.jpg" },
+    { "pieza": "P-004", "sku": "NO.26", "posicion_en_parrilla": 36, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero, esfera negra con indices y agujas doradas, bisel taquimetrico. Foto rotulada 'Diameter 39.7mm Suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S080d046264b244cab5b67b0493cf46e9W.jpg" },
+    { "pieza": "P-005", "sku": "NO.27", "posicion_en_parrilla": 37, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero, esfera verde con tres contadores y agujas plateadas, bisel taquimetrico. Foto rotulada 'Diameter 39.7mm Suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S3165042858e240a6bd54ebb2b4fff6adT.jpg" },
+    { "pieza": "P-006", "sku": "NO.29", "posicion_en_parrilla": 39, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero con bisel azul, esfera azul con tres contadores plateados y agujas plateadas. Foto rotulada 'Diameter 39.7mm Suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S3cbf5783ad8649a2961e2f6cd20ddb57I.jpg" },
+    { "pieza": "P-007", "sku": "NO.43", "posicion_en_parrilla": 44, "tipo_componente": "caja montada", "descripcion_observada": "Caja de acero con bisel taquimetrico plateado, esfera blanca tipo panda con tres contadores negros y agujas plateadas. Foto rotulada 'Diameter 39.7mm Suitable for VK63 movement'.", "incluye_observado": ["caja", "bisel", "cristal", "esfera", "agujas", "corona", "pulsadores"], "no_incluye": ["movimiento", "correa o brazalete"], "precio_oferta_eur": 34.59, "precio_normal_eur": 69.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S450132c9df7d4ed782d618f45bb732c1r.jpg" },
+    { "pieza": "P-016", "sku": "NO.40", "posicion_en_parrilla": 40, "tipo_componente": "juego de agujas", "descripcion_observada": "Juego de agujas naranjas con lume (aguja de minutos naranja, segundero central blanco con punta naranja) y tres subagujas naranjas. La foto incluye toma nocturna con lume verde.", "color": "naranja", "precio_oferta_eur": 4.09, "precio_normal_eur": 8.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S54e9864a42594301bb28b12eef15e9c0N.jpg" },
+    { "pieza": "P-018", "sku": "NO.42", "posicion_en_parrilla": 41, "tipo_componente": "juego de agujas", "descripcion_observada": "Juego de agujas doradas con lume, mas tres subagujas doradas. La foto incluye toma nocturna con lume verde.", "color": "dorado", "precio_oferta_eur": 4.09, "precio_normal_eur": 8.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S4b866b31dd954547b35279ea6db07e36T.jpg" },
+    { "pieza": "P-017", "sku": "NO.41", "posicion_en_parrilla": 42, "tipo_componente": "juego de agujas", "descripcion_observada": "Juego de agujas plateadas / blancas con lume, mas tres subagujas plateadas. La foto incluye toma nocturna con lume verde.", "color": "plateado / blanco", "alerta": "Aparentemente identico al SKU NO.38 y al mismo precio. Confirmar con el vendedor si son distintos antes de pedir ambos.", "precio_oferta_eur": 4.09, "precio_normal_eur": 8.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S20b78f6466da4bd6bee7774ed0aef752D.jpg" },
+    { "pieza": "P-015", "sku": "NO.39", "posicion_en_parrilla": 43, "tipo_componente": "juego de agujas", "descripcion_observada": "Juego de agujas azules con lume, mas tres subagujas blancas. La foto incluye toma nocturna con lume verde.", "color": "azul", "precio_oferta_eur": 4.09, "precio_normal_eur": 8.18, "descuento_pct": 50, "imagen_url": "https://ae-pic-a1.aliexpress-media.com/kf/S49798badf9d24c8f8c6958a7025b949ej.jpg" }
+  ],
+
+  "totales": {
+    "unidades": 18,
+    "suma_precio_oferta_eur": 396.12,
+    "suma_precio_normal_eur": 792.24,
+    "con_descuento_volumen_5pct_eur": 376.31,
+    "envio_eur": 4.52,
+    "total_estimado_con_envio_eur": 380.83
+  },
+
+  "alertas": [
+    "El SKU NO.38 y el SKU NO.41 parecen el mismo juego de agujas plateadas al mismo precio (4,09 EUR). Posible duplicacion del vendedor: preguntar antes de pedir los dos.",
+    "El SKU NO.30 (esfera panda blanca) tiene ventana de fecha aproximadamente a las 4:30. El VK63 no tiene fecha (el calibre con fecha es el VK64). Verificar compatibilidad antes de comprar.",
+    "Comprar caja vacia + esfera + agujas por separado (23,79 + 7,69 + 4,09 = 35,57 EUR) sale practicamente igual que una caja ya montada (34,59 EUR). Comprar suelto solo compensa si se quiere combinar colores no ofrecidos.",
+    "Ninguna variante declara material de cristal ni estanqueidad. Segun la regla de catalogo de laOra, cristal no declarado = mineral y estanqueidad no declarada = 50 m. Estos componentes NO se pueden publicar como zafiro ni con ATM sin confirmacion escrita del vendedor.",
+    "El acero se declara solo como 'acero inoxidable', sin grado. No se puede publicar como 316L sin confirmacion escrita del vendedor.",
+    "El resumen de producto del anuncio esta generado por IA (la propia pagina lo advierte) y la traduccion es automatica. No usarlo como fuente de datos tecnicos.",
+    "Los precios se capturaron el 2026-08-16 con una promocion de -50% activa. AliExpress lanzo un control anti-bot durante la extraccion, por lo que conviene reverificar los precios en la propia pagina antes de comprar.",
+    "Falta asignar cada componente a un modelo de laOra (asignados provisionalmente a Lunar: Oscar declaro este anuncio como 'el proveedor de la caja del lunar, brazalete de acero, esferas y agujas' el 16/08/2026)."
+  ]
+}
