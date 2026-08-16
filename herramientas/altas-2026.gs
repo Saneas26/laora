@@ -21,12 +21,39 @@ var LIBRO_2026 = '1PqPDhpxj2RVbFXYo1u4iZjKA398TKJmCr6YbYBR8zOY';
  * capturas/2026-08-16-1005007892634303.json
  */
 function ALTA_2026_08_16() {
-  var LINK = 'https://es.aliexpress.com/item/1005007892634303.html';
-  var FECHA = new Date(2026, 7, 16);
-  // Aviso que comparten las 18 piezas (del anuncio, no de cada SKU)
-  var COMUN = 'Ø39,7 mm · asas 20 mm · compat. VK63 (mov. NO incluido) · acero sin grado declarado · cristal y estanqueidad SIN declarar · tapa trasera opaca roscada a elegir sin cambio de precio: lisa / grabado Lunar / grabado Footprint (va en la columna Tapa de Referencias) · precio con -50% del 16/08, reverificar antes de comprar · envío pedido 4,52 €, devol. 90 días';
+  altaPiezas_('ALTA_2026_08_16', filasTanda1_(), new Date(2026, 7, 16));
+}
 
-  var filas = [
+/**
+ * Si el alta ya se había ejecutado ANTES de las correcciones del
+ * 16/08 (VK63 sí tiene fecha; 316L y 10 ATM confirmados), esta
+ * función reescribe solo la columna Notas de las 18 piezas con el
+ * texto al día. Inofensiva si se ejecuta de más.
+ */
+function RENOTA_2026_08_16() {
+  var ss = SpreadsheetApp.openById(LIBRO_2026);
+  var sh = ss.getSheetByName('Piezas');
+  if (!sh) throw new Error('No existe la pestaña Piezas en el libro.');
+  var rango = sh.getRange('A2:F400').getValues();
+  var n = 0;
+  filasTanda1_().forEach(function (f) {
+    for (var i = 0; i < rango.length; i++) {
+      if (String(rango[i][0]) === String(f[0]) && String(rango[i][5]) === String(f[5])) {
+        sh.getRange(i + 2, 13).setValue(f[10]);
+        n++;
+        break;
+      }
+    }
+  });
+  Logger.log('RENOTA_2026_08_16: ' + n + ' notas actualizadas.');
+}
+
+function filasTanda1_() {
+  var LINK = 'https://es.aliexpress.com/item/1005007892634303.html';
+  // Aviso que comparten las 18 piezas (del anuncio, no de cada SKU)
+  var COMUN = 'Ø39,7 mm · asas 20 mm · compat. VK63 (mov. NO incluido) · acero 316L y estanqueidad 10 ATM confirmados (Óscar, 16/08) · cristal SIN declarar · tapa trasera opaca roscada a elegir sin cambio de precio: lisa / grabado Lunar / grabado Footprint (va en la columna Tapa de Referencias) · precio con -50% del 16/08, reverificar antes de comprar · envío pedido 4,52 €, devol. 90 días';
+
+  return [
     // ID, Tipo, Modelos, Nombre interno, Nombre web, Variante(SKU), Coste, Link, TarifaComo, Recargo, Notas
     ['P-001', 'Caja montada', 'Lunar', 'Caja montada acero bisel plata, esfera negra crono, agujas naranja/blanco', 'Caja acero, esfera negra, detalles naranjas', 'NO.44', 34.59, LINK, '', '', 'Incluye caja+bisel+cristal+esfera+agujas+corona+pulsadores. ' + COMUN],
     ['P-002', 'Caja montada', 'Lunar', 'Caja montada acero bisel azul, esfera blanca contadores azules, agujas plata', 'Caja acero, esfera blanca, contadores azules', 'NO.23', 34.59, LINK, '', '', 'Incluye caja+bisel+cristal+esfera+agujas+corona+pulsadores. ' + COMUN],
@@ -40,15 +67,13 @@ function ALTA_2026_08_16() {
     ['P-010', 'Caja vacía', 'Lunar', 'Caja vacía negra PVD bisel taquimétrico negro', 'Caja negra, bisel negro', 'NO.13', 29.59, LINK, '', '', 'SIN esfera ni agujas; recubrimiento tipo PVD (observado en foto). ' + COMUN],
     ['P-011', 'Brazalete', 'Lunar', 'Brazalete acero plateado 3 eslabones tipo oyster, endlinks curvos, cierre desplegable', 'Brazalete de acero', 'NO.10', 19.69, LINK, '', '', 'Ancho 20 mm; largo sin declarar; cierre desplegable con pulsador (observado). ' + COMUN],
     ['P-012', 'Brazalete', 'Lunar', 'Brazalete negro PVD 3 eslabones, endlinks curvos, cierre desplegable', 'Brazalete de acero negro', 'NO.20', 26.39, LINK, '', '', 'Ancho 20 mm; largo sin declarar; recubrimiento tipo PVD (observado). ' + COMUN],
-    ['P-013', 'Esfera', 'Lunar', 'Esfera panda blanca contadores negros, índices aplicados, fecha ~4:30', 'Esfera panda', 'NO.30', 7.69, LINK, '', '', 'ALERTA: ventana de fecha ~4:30 y el VK63 NO tiene fecha (el de fecha es el VK64) — confirmar con vendedor ANTES de comprar. Ø sin declarar. ' + COMUN],
+    ['P-013', 'Esfera', 'Lunar', 'Esfera panda blanca contadores negros, índices aplicados, fecha ~4:30', 'Esfera panda', 'NO.30', 7.69, LINK, '', '', 'Ventana de fecha ~4:30, compatible: el VK63 SÍ tiene fecha (confirmado por Óscar 16/08). Ø sin declarar. ' + COMUN],
     ['P-014', 'Agujas', 'Lunar', 'Juego agujas plateadas/blancas con lume (h+m+seg crono+3 subagujas)', 'Agujas plateadas', 'NO.38', 4.09, LINK, '', '', 'ALERTA: aparentemente idéntico a NO.41 (P-017) al mismo precio — preguntar al vendedor antes de pedir ambos. Lume verde. ' + COMUN],
     ['P-015', 'Agujas', 'Lunar', 'Juego agujas azules con lume + 3 subagujas blancas', 'Agujas azules', 'NO.39', 4.09, LINK, '', '', 'Lume verde. ' + COMUN],
     ['P-016', 'Agujas', 'Lunar', 'Juego agujas naranjas con lume (minutero naranja, seg central blanco punta naranja) + 3 subagujas naranjas', 'Agujas naranjas', 'NO.40', 4.09, LINK, '', '', 'Lume verde. ' + COMUN],
     ['P-017', 'Agujas', 'Lunar', 'Juego agujas plateadas/blancas con lume + 3 subagujas plateadas', 'Agujas plateadas (2)', 'NO.41', 4.09, LINK, '', '', 'ALERTA: aparentemente idéntico a NO.38 (P-014) al mismo precio — preguntar al vendedor antes de pedir ambos. Lume verde. ' + COMUN],
     ['P-018', 'Agujas', 'Lunar', 'Juego agujas doradas con lume + 3 subagujas doradas', 'Agujas doradas', 'NO.42', 4.09, LINK, '', '', 'Lume verde. ' + COMUN]
   ];
-
-  altaPiezas_('ALTA_2026_08_16', filas, FECHA);
 }
 
 /**
