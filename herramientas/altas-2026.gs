@@ -89,7 +89,9 @@ function ALTA_2026_08_17() {
   var COMUN = 'Caucho negro trama textil (cesta), final curvo que abraza la caja, ancho 20 mm, trae herramientas · precio 5,59 € capturado el 17/08 · pespuntes de contraste; en la web los colores de pespunte se derivan por máscara de la tira base';
   var filas = [
     ['P-019', 'Correa', 'Lunar', 'Correa caucho negra trama textil, pespunte VERDE, hebilla acero plateado', 'Caucho negro pespunte verde', 'pespunte verde + hebilla plata', 5.59, LINK, '', '', COMUN],
-    ['P-020', 'Correa', 'Lunar', 'Correa caucho negra trama textil, pespunte NARANJA, hebilla acero PVD negro', 'Caucho negro pespunte naranja', 'pespunte naranja + hebilla PVD', 5.59, LINK, '', '', COMUN + ' · ALERTA: pespunte blanco por confirmar si existe en el anuncio']
+    ['P-020', 'Correa', 'Lunar', 'Correa caucho negra trama textil, pespunte NARANJA, hebilla acero PVD negro', 'Caucho negro pespunte naranja', 'pespunte naranja + hebilla PVD', 5.59, LINK, '', '', COMUN],
+    ['P-025', 'Correa', 'Lunar', 'Correa caucho negra trama textil, línea blanca-plata, hebilla acero plateado', 'Caucho negro pespunte blanco', 'línea blanca-plata + hebilla plata', 5.59, LINK, '', '', COMUN + ' · IDs P-025/P-026 asignados por Óscar (17/08)'],
+    ['P-026', 'Correa', 'Lunar', 'Correa caucho negra trama textil, línea blanca-plata, hebilla acero PVD negro', 'Caucho negro pespunte blanco (hebilla negra)', 'línea blanca-plata + hebilla negra', 5.59, LINK, '', '', COMUN + ' · IDs P-025/P-026 asignados por Óscar (17/08)']
   ];
   altaPiezas_('ALTA_2026_08_17', filas, new Date(2026, 7, 17));
 }
