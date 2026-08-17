@@ -160,6 +160,73 @@
     }
   })();
 
+  /* ---------- 3b · el empujoncito del carrusel ----------
+     Óscar, 17/08/2026: en el teléfono la tarjeta ocupa casi toda la
+     pantalla y no hay flechas, así que nadie adivina que eso se mueve de
+     lado. Cuando el carrusel entra en pantalla se le da un empujón corto
+     y vuelve solo: la tarjeta de al lado asoma y se entiende el gesto.
+
+     Reglas de la casa:
+     · solo en el teléfono —de 721 px para arriba están las flechas—,
+     · una sola vez y solo si el cliente no lo ha tocado ya,
+     · nunca con «reducir movimiento» activado en el sistema,
+     · el `scroll-snap` se apaga durante el empujón: con `mandatory` el
+       navegador pelea contra la animación y sale a tirones.
+
+     El recorrido es un seno: sale y vuelve al mismo sitio sin que haya
+     que encadenar dos animaciones ni dejar el carrusel a medias. */
+  (function empujoncito() {
+    var pista = document.querySelector('[data-carrusel]');
+    if (!pista || !window.IntersectionObserver || !window.requestAnimationFrame) return;
+    if (!window.matchMedia) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(max-width: 720px)').matches) return;
+
+    var animando = false, hecho = false;
+
+    pista.addEventListener('scroll', function () {
+      if (!animando) hecho = true;          // lo ha movido el cliente: sobra el aviso
+    }, { passive: true });
+
+    function empuja() {
+      var tarjeta = pista.querySelector('.trust-card');
+      var ancho = tarjeta ? tarjeta.offsetWidth : pista.clientWidth;
+      var distancia = Math.max(38, Math.min(64, ancho * 0.18));
+      var duracion = 900, inicio = null;
+      var snapPrevio = pista.style.scrollSnapType;
+
+      animando = true;
+      pista.style.scrollSnapType = 'none';
+
+      function paso(ahora) {
+        if (inicio === null) inicio = ahora;
+        var p = (ahora - inicio) / duracion;
+        if (p >= 1) {
+          pista.scrollLeft = 0;
+          pista.style.scrollSnapType = snapPrevio;
+          animando = false;
+          return;
+        }
+        pista.scrollLeft = distancia * Math.sin(Math.PI * p);
+        window.requestAnimationFrame(paso);
+      }
+      window.requestAnimationFrame(paso);
+    }
+
+    var vigia = new IntersectionObserver(function (entradas) {
+      for (var i = 0; i < entradas.length; i++) {
+        if (!entradas[i].isIntersecting) continue;
+        vigia.disconnect();
+        if (hecho) return;
+        if (pista.scrollLeft > 4) return;
+        if (pista.scrollWidth <= pista.clientWidth + 8) return;
+        window.setTimeout(function () { if (!hecho) empuja(); }, 420);
+      }
+    }, { threshold: 0.45 });
+
+    vigia.observe(pista);
+  })();
+
   /* ---------- 4 · lo que no mejora el reloj ----------
      RETIRADO el 11/08/2026. Era un tramo de cinco pantallas que se
      quedaba pegado y sacaba los cuatro costes de uno en uno según
