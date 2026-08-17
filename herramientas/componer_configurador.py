@@ -1,31 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Configurador por capas de laOra 2026: monta CUALQUIER cabeza-máster
-sobre UNA foto base de reloj completo (la del brazalete), sin generar
-ni una imagen nueva con IA.
+Configurador por capas de laOra 2026 — método Omega, SIN dibujar nada.
 
-Idea (la de Omega): la foto de la correa/brazalete se hace UNA vez; la
-cabeza se sustituye por encima. Aquí todo el registro es automático:
+La foto del brazalete se hace UNA vez. De ella se recortan los dos
+tramos de brazalete (arriba y abajo), y se colocan DETRÁS de la cabeza:
+el corte del tramo queda escondido bajo la caja, así que no hay unión
+que pintar ni retocar. Ningún píxel es inventado: o es de la foto del
+brazalete, o es de la foto de la cabeza.
 
-1. Mide la base: centro (por el eje del brazalete), tamaño de caja y
-   ancho del brazalete.
-2. Mide la cabeza: centro real = punto medio del hueco entre asas,
-   tamaño de caja y ancho entre asas.
-3. Escala la cabeza para que su caja mida lo mismo que la de la base.
-4. Ensancha el brazalete al ancho de asas de esa cabeza.
-5. Borra la cabeza vieja, pega la nueva y estira el metal hasta el
-   borde de la caja para que la unión no deje aire.
+Registro automático y a prueba de manchas:
+  · el centro de la cabeza = punto medio del hueco entre asas, medido
+    en muchas filas y con mediana (un píxel suelto ya no descoloca);
+  · el brazalete se escala UNIFORME (sin deformar los eslabones) hasta
+    que su ancho coincide con ese hueco.
 
 Uso:
   python3 componer_configurador.py <base.png> <cabeza.png> <salida> [px]
 """
 from PIL import Image
-import sys, math
+import sys, statistics
 
 
+# ---------------------------------------------------------------- base
 def mide_base(im):
-    """centro x por el eje del brazalete, centro y y tamaño de caja."""
     W, H = im.size
     px = im.load()
     bg = px[10, 10]
@@ -37,129 +35,127 @@ def mide_base(im):
         xs = [x for x in range(W) if objeto(px[x, y])]
         return (xs[0], xs[-1]) if xs else None
 
-    f = franja(150)                       # brazalete limpio, arriba
-    cx = (f[0] + f[1]) // 2
-    ancho_correa = f[1] - f[0]
+    f = franja(150)
+    cx, correa_w = (f[0]+f[1])//2, f[1]-f[0]
     anchos = {}
-    for y in range(400, H-400, 8):
+    for y in range(300, H-300, 6):
         g = franja(y)
         if g:
-            anchos[y] = g[1] - g[0]
+            anchos[y] = g[1]-g[0]
     caja_w = max(anchos.values())
     filas = [y for y, a in anchos.items() if a > caja_w*0.9]
-    cy = (min(filas) + max(filas)) // 2
-    return dict(bg=bg, cx=cx, cy=cy, caja_w=caja_w, correa_w=ancho_correa)
+    # el borde REAL de la caja: donde deja de ser solo brazalete
+    caja = [y for y, a in anchos.items() if a > correa_w*1.12]
+    return dict(bg=bg, cx=cx, cy=(min(filas)+max(filas))//2, caja_w=caja_w,
+                correa_w=correa_w, caja_y0=min(caja), caja_y1=max(caja))
 
 
+def tramos_brazalete(im, B, margen=110):
+    """Los dos trozos de brazalete, ya recortados y con transparencia."""
+    W, H = im.size
+    px = im.load()
+    bg = B['bg']
+
+    def objeto(p):
+        return abs(p[0]-bg[0]) + abs(p[1]-bg[1]) + abs(p[2]-bg[2]) > 40
+
+    piezas = []
+    for y0, y1 in ((0, B['caja_y0']-margen), (B['caja_y1']+margen, H)):
+        x0, x1 = B['cx']-B['correa_w']//2-6, B['cx']+B['correa_w']//2+6
+        trozo = im.crop((x0, y0, x1, y1)).convert('RGBA')
+        tp = trozo.load()
+        for y in range(trozo.height):
+            for x in range(trozo.width):
+                if not objeto(tp[x, y][:3]):
+                    tp[x, y] = (0, 0, 0, 0)
+        piezas.append(trozo)
+    return piezas          # [arriba, abajo]
+
+
+# -------------------------------------------------------------- cabeza
 def mide_cabeza(im):
-    """centro x = mitad del hueco entre asas; centro y y caja."""
+    """centro = mitad del hueco entre asas (mediana de muchas filas)."""
     w, h = im.size
     px = im.load()
 
     def tramos(y):
         rs, ini = [], None
         for x in range(w):
-            if px[x, y][3] > 0:
+            if px[x, y][3] > 100:
                 if ini is None:
                     ini = x
             elif ini is not None:
                 rs.append((ini, x-1)); ini = None
         if ini is not None:
             rs.append((ini, w-1))
-        return rs
+        return [r for r in rs if r[1]-r[0] > 8]      # fuera motas
 
-    hueco = None
-    for y in range(40, h//3):                    # entre las asas de arriba
-        rs = tramos(y)
-        if len(rs) >= 2:
-            hueco = (rs[0][1], rs[1][0])
-            break
     anchos = {}
-    for y in range(100, h-100, 4):
+    for y in range(60, h-60, 4):
         rs = tramos(y)
         if rs:
-            anchos[y] = rs[-1][1] - rs[0][0]
+            anchos[y] = rs[-1][1]-rs[0][0]
     caja_w = max(anchos.values())
-    filas = [y for y, a in anchos.items() if a > caja_w*0.9]
-    cy = (min(filas) + max(filas)) // 2
-    cx = (hueco[0] + hueco[1]) / 2 if hueco else w/2
-    gap = (hueco[1] - hueco[0]) if hueco else caja_w*0.45
-    return dict(cx=cx, cy=cy, caja_w=caja_w, gap=gap)
+    filas_caja = [y for y, a in anchos.items() if a > caja_w*0.9]
+    cy = (min(filas_caja)+max(filas_caja))//2
+
+    centros, huecos = [], []
+    for y in range(40, min(filas_caja)-30, 3):        # zona de asas de arriba
+        rs = tramos(y)
+        if len(rs) < 2:
+            continue
+        hueco = max(((rs[i][1], rs[i+1][0]) for i in range(len(rs)-1)),
+                    key=lambda p: p[1]-p[0])
+        ancho = hueco[1]-hueco[0]
+        if ancho > caja_w*0.25:                       # un hueco creíble
+            centros.append((hueco[0]+hueco[1])/2)
+            huecos.append(ancho)
+    if not centros:                                   # sin asas visibles
+        rs = tramos(filas_caja[len(filas_caja)//2])
+        centros = [(rs[0][0]+rs[-1][1])/2]
+        huecos = [caja_w*0.47]
+    return dict(cx=statistics.median(centros), cy=cy,
+                caja_w=caja_w, gap=statistics.median(huecos))
 
 
-def compone(ruta_base, ruta_cabeza, salida, px_salida=1600):
-    base = Image.open(ruta_base).convert('RGB')
+# ------------------------------------------------------------- compone
+def compone(ruta_base, ruta_cabeza, salida, px_salida=1600, _cache={}):
+    if ruta_base not in _cache:
+        base = Image.open(ruta_base).convert('RGB')
+        B = mide_base(base)
+        _cache[ruta_base] = (base, B, tramos_brazalete(base, B))
+    base, B, (arriba, abajo) = _cache[ruta_base]
+
     cab = Image.open(ruta_cabeza).convert('RGBA')
-    B = mide_base(base)
     C = mide_cabeza(cab)
     W, H = base.size
-    bg = B['bg']
-    s = B['caja_w'] / C['caja_w']              # cabeza a tamaño de la base
-    gap = C['gap'] * s                          # ancho de asas ya escalado
+
+    s = B['caja_w']/C['caja_w']                 # cabeza al tamaño de la base
+    gap = C['gap']*s                            # hueco entre asas ya escalado
+    e = gap/B['correa_w']                       # el brazalete, escala UNIFORME
     CX, CY = B['cx'], B['cy']
-    R = B['caja_w'] // 2
 
-    # 1) brazalete al ancho de asas de esta cabeza (bloques limpios)
-    med_old, med_new = B['correa_w']//2, int(gap//2)
-    for y0, y1 in ((0, CY-R-8), (CY+R+8, H)):
-        if y1 <= y0:
-            continue
-        banda = base.crop((CX-med_old, y0, CX+med_old, y1))
-        banda = banda.resize((med_new*2, y1-y0), Image.LANCZOS)
-        base.paste(banda, (CX-med_new, y0))
+    lienzo = Image.new('RGBA', (W, H), B['bg']+(255,))
 
-    # 2) fuera la cabeza vieja (y la corona, que sobresale del círculo)
-    d = Image.new('RGB', base.size, bg)
-    mascara = Image.new('L', base.size, 0)
-    from PIL import ImageDraw
-    ImageDraw.Draw(mascara).ellipse((CX-R-14, CY-R-14, CX+R+14, CY+R+14), fill=255)
-    ImageDraw.Draw(mascara).rectangle((CX+R-40, CY-700, min(W, CX+R+520), CY+700), fill=255)
-    base.paste(d, (0, 0), mascara)
+    for pieza, arriba_p in ((arriba, True), (abajo, False)):
+        np_ = pieza.resize((max(1, round(pieza.width*e)),
+                            max(1, round(pieza.height*e))), Image.LANCZOS)
+        x = round(CX - np_.width/2)
+        # anclado al borde del lienzo: el brazalete siempre llega a sangre
+        # y su corte queda dentro de la caja, tapado por la cabeza
+        y = 0 if arriba_p else H - np_.height
+        lienzo.alpha_composite(np_, (x, y))
+        # segunda pasada hacia la caja, por si el tramo se queda corto
+        y2 = np_.height if arriba_p else H - 2*np_.height
+        lienzo.alpha_composite(np_, (x, y2))
 
-    # 3) la cabeza nueva, registrada por el hueco entre asas
     nc = cab.resize((round(cab.width*s), round(cab.height*s)), Image.LANCZOS)
-    ox, oy = round(CX - C['cx']*s), round(CY - C['cy']*s)
-    compo = base.convert('RGBA')
-    compo.alpha_composite(nc, (ox, oy))
+    lienzo.alpha_composite(nc, (round(CX-C['cx']*s), round(CY-C['cy']*s)))
 
-    # 4) el brazalete sube/baja hasta morder la caja (sin aire)
-    plano = compo.convert('RGB')
-    p = plano.load()
-    a = nc.load()
-
-    def alfa(x, y):
-        xm, ym = x-ox, y-oy
-        return a[xm, ym][3] if 0 <= xm < nc.width and 0 <= ym < nc.height else 0
-
-    def es_bg(q):
-        return abs(q[0]-bg[0]) + abs(q[1]-bg[1]) + abs(q[2]-bg[2]) < 30
-
-    for dx in range(-med_new, med_new+1):
-        x = CX + dx
-        for sentido in (1, -1):
-            borde = None
-            rango = range(CY, H) if sentido > 0 else range(CY, 0, -1)
-            for y in rango:
-                if alfa(x, y) > 128:
-                    borde = y
-            if borde is None:
-                continue
-            y = borde + sentido
-            while 0 < y < H and es_bg(p[x, y]):
-                y += sentido
-            hueco_px = abs(y - borde) - 1
-            if not (3 < hueco_px < 400) or not (0 < y < H):
-                continue
-            alto = 260
-            origen = [p[x, min(H-1, max(0, y + sentido*k))] for k in range(alto)]
-            total = hueco_px + alto
-            for k in range(total):
-                yy = borde + sentido*k
-                if 0 <= yy < H:
-                    p[x, yy] = origen[min(alto-1, int(k*alto/total))]
-
-    plano.resize((px_salida, px_salida), Image.LANCZOS).save(salida, quality=93)
-    return dict(escala=round(s, 4), gap=round(gap), centro=(CX, CY))
+    lienzo.convert('RGB').resize((px_salida, px_salida), Image.LANCZOS)\
+          .save(salida, quality=93)
+    return dict(escala_cabeza=round(s, 4), escala_brazalete=round(e, 4),
+                gap=round(gap))
 
 
 if __name__ == '__main__':
