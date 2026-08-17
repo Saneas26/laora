@@ -172,3 +172,43 @@
   .pv-tecnica{padding:24px 20px 56px}
   .pv-extras{gap:12px}
 }
+
+/* ============================================================
+   EL PIE FIJO DE LA COMPRA (Óscar, 17/08/2026)
+   Vive en la COLUMNA IZQUIERDA, debajo de las fotos, y se queda
+   pegado abajo mientras el resto de la ficha sube. Como es el
+   último hijo de .pv-galeria, se despega solo al terminar esa
+   columna, o sea justo cuando empieza la Ficha Técnica: a partir
+   de ahí el scroll vuelve a ser normal y queda todo arriba.
+   ============================================================ */
+.pv-pie{
+  position:sticky;bottom:0;z-index:6;margin-top:auto;
+  display:flex;flex-direction:column;gap:10px;
+  background:#fff;border-top:1px solid var(--cv2-linea);
+  padding:16px 0 18px;
+}
+.pv-pie .pv-precio{margin:0}
+.pv-pie .pv-imp{margin:0}
+.pv-pie .pv-comprar{margin-top:2px}
+
+@media (max-width:900px){
+  /* Sin dos columnas, el pie se ancla al borde inferior de la
+     pantalla; al llegar a la Ficha Técnica vuelve a su sitio. */
+  .pv-pie{
+    position:fixed;left:0;right:0;bottom:0;
+    padding:12px 20px calc(12px + env(safe-area-inset-bottom));
+    box-shadow:0 -6px 20px rgba(18,20,20,.10);
+    border-top:1px solid var(--cv2-linea);
+  }
+  .pv-pie.pv-pie-quieto{
+    position:static;box-shadow:none;padding:16px 0 0;
+  }
+  .pv-galeria{padding-bottom:150px}
+  .pv-galeria.pv-galeria-suelta{padding-bottom:0}
+}
+
+/* El `main { overflow:hidden }` global (laora.css) anula cualquier
+   position:sticky de dentro. En las fichas se cambia por `clip` en el
+   eje X, que sigue conteniendo el desbordamiento lateral pero deja
+   funcionar al pie fijo y a la columna derecha. */
+main.cv2{ overflow:visible; overflow-x:clip }
