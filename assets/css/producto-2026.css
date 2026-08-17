@@ -47,10 +47,8 @@
 .pv-extras figure:hover img{opacity:1}
 
 /* ---------- LA COLUMNA DE COMPRA ---------- */
-.pv-info{position:relative;min-width:0}
-.pv-info>div{
-  position:sticky;top:76px;display:flex;flex-direction:column;gap:18px;
-}
+.pv-info{position:relative;min-width:0;display:flex;flex-direction:column}
+.pv-info>div{display:flex;flex-direction:column;gap:18px}
 .pv-chips{display:flex;gap:8px}
 .pv-chips .cv2-chip{margin:0}
 .pv-chip-oro{background:var(--cv2-oro);color:var(--cv2-negro)}
@@ -182,7 +180,7 @@
    de ahí el scroll vuelve a ser normal y queda todo arriba.
    ============================================================ */
 .pv-pie{
-  position:sticky;bottom:0;z-index:6;margin-top:auto;
+  position:sticky;bottom:0;z-index:6;margin-top:auto;padding-top:16px;
   display:flex;flex-direction:column;gap:10px;
   background:#fff;border-top:1px solid var(--cv2-linea);
   padding:16px 0 18px;
@@ -212,3 +210,7 @@
    eje X, que sigue conteniendo el desbordamiento lateral pero deja
    funcionar al pie fijo y a la columna derecha. */
 main.cv2{ overflow:visible; overflow-x:clip }
+
+/* `.pv-grupo{display:flex}` le ganaba a `[hidden]` y dejaba el rótulo
+   «Color del nato» colgado sin paleta debajo. */
+.pv-grupo[hidden], .pv-opciones[hidden]{display:none}
