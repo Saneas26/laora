@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=7">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=10">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
@@ -71,6 +71,17 @@
         <figure><img src="/assets/img/trinchera-2026/historia/02.webp" alt="Vista a tres cuartos en el estudio" loading="lazy"></figure>
         <figure><img src="/assets/img/trinchera-2026/historia/05.webp" alt="El cierre abrochado, por detrás" loading="lazy"></figure>
       </div>
+
+      <!-- El pie de compra: se queda fijo abajo hasta la Ficha Técnica -->
+      <div class="pv-pie" data-pv-pie>
+        <p class="pv-precio" data-pv-precio>269,90 €</p>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+        <div class="pv-confianza">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
+        </div>
+      </div>
     </div>
 
     <!-- ============ LA COMPRA ============ -->
@@ -81,8 +92,6 @@
           <span class="cv2-chip">LO-02 · Reloj de campo</span>
         </div>
         <h1>Trinchera</h1>
-        <p class="pv-precio" data-pv-precio>269,90 €</p>
-        <p class="pv-imp">Impuestos incluidos.</p>
         <p class="pv-desc">Nuestro homenaje al <b>Hamilton Khaki Field</b>. Precisión técnica y diseño
           histórico para el día a día: la estética militar clásica con los estándares de la relojería
           mecánica moderna, al precio honesto.</p>
@@ -147,12 +156,6 @@
           <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
-        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
-
-        <div class="pv-confianza">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
-        </div>
       </div>
     </aside>
 
@@ -483,6 +486,20 @@
 
   pinta();
 })();
+
+  /* El pie fijo se suelta al llegar la Ficha Técnica (móvil). */
+  (function () {
+    var pie = document.querySelector('[data-pv-pie]');
+    var tecnica = document.querySelector('.pv-tecnica');
+    var galeria = document.querySelector('.pv-galeria');
+    if (!pie || !tecnica || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (filas) {
+      var llega = filas[0].isIntersecting || filas[0].boundingClientRect.top < window.innerHeight;
+      pie.classList.toggle('pv-pie-quieto', llega);
+      galeria.classList.toggle('pv-galeria-suelta', llega);
+    }, { rootMargin: '0px 0px -35% 0px' }).observe(tecnica);
+  })();
+
 </script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
