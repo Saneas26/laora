@@ -36,9 +36,18 @@
 .site-header a { color: inherit; text-decoration: none; }
 .site-header *, .site-header *::before, .site-header *::after { box-sizing: border-box; }
 
-.site-header .brand { min-width: 150px; }
-.site-header .brand-logo { width: 114px; display: inline-flex; align-items: center; }
+/* LA MARCA VA EN DOS FILAS desde el 17/08/2026, por encargo de Óscar: el
+   logotipo arriba —algo más pequeño que antes, 96 px en vez de 114— y el
+   lema debajo, los dos pegados a la izquierda.
+
+   El lema va en la misma Inter de la cabecera y en la tinta de la casa a
+   un 72 %: el dorado de marca sobre blanco no llega ni a 2:1 de contraste
+   y aquí manda leerse. `nowrap` porque partido en dos líneas no cabe en
+   los 76 px de alto. */
+.site-header .brand { min-width: 150px; display: inline-flex; flex-direction: column; align-items: flex-start; gap: 3px; line-height: 1; }
+.site-header .brand-logo { width: 96px; display: inline-flex; align-items: center; }
 .site-header .brand-logo img { width: 100%; height: auto; display: block; }
+.site-header .brand-claim { font-size: 14px; font-weight: 500; letter-spacing: .002em; white-space: nowrap; color: rgba(28,29,27,.72); }
 
 /* El logotipo dentro de una palabra del menú —«Por qué laOra»— va en
    línea y a la altura de la equis, no como bloque. */
@@ -101,8 +110,12 @@
 }
 
 @media (max-width: 720px) {
-  .site-header { height: 68px; }
-  .site-header .brand-logo { width: 100px; }
+  /* El hueco entre la marca y los iconos baja de 28 a 12 px: con el lema
+     debajo del logotipo la primera fila es mucho más ancha y con 28 no
+     cabía en un teléfono de 360. */
+  .site-header { height: 68px; gap: 12px; }
+  .site-header .brand-logo { width: 84px; }
+  .site-header .brand-claim { font-size: 12px; }
   .site-header .header-actions { gap: 13px; }
   .site-header .main-nav { top: 68px; }
 }
