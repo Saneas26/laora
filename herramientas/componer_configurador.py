@@ -44,24 +44,31 @@ def mide_base(im):
             anchos[y] = g[1]-g[0]
     caja_w = max(anchos.values())
     filas = [y for y, a in anchos.items() if a > caja_w*0.9]
-    # el borde REAL de la caja: donde deja de ser solo brazalete
-    caja = [y for y, a in anchos.items() if a > correa_w*1.12]
+    # el borde REAL de la caja: donde deja de ser solo correa/brazalete
+    caja = [y for y, a in anchos.items() if a > correa_w*1.05]
     return dict(bg=bg, cx=cx, cy=(min(filas)+max(filas))//2, caja_w=caja_w,
                 correa_w=correa_w, caja_y0=min(caja), caja_y1=max(caja))
 
 
-def tramos_brazalete(im, B, margen=110):
-    """Los dos trozos de brazalete, ya recortados y con transparencia."""
+def tramos_brazalete(im, B, margen=None):
+    """Los dos trozos de correa, ya recortados y con transparencia.
+
+    Se corta BIEN LEJOS de la caja (y justo al ancho de la correa) para
+    que no se cuele ni una punta de asa de la foto original.
+    """
     W, H = im.size
     px = im.load()
     bg = B['bg']
+    if margen is None:
+        margen = int(H*0.05)
 
     def objeto(p):
         return abs(p[0]-bg[0]) + abs(p[1]-bg[1]) + abs(p[2]-bg[2]) > 40
 
     piezas = []
     for y0, y1 in ((0, B['caja_y0']-margen), (B['caja_y1']+margen, H)):
-        x0, x1 = B['cx']-B['correa_w']//2-6, B['cx']+B['correa_w']//2+6
+        media = int(B['correa_w']*0.49)          # sin rebabas laterales
+        x0, x1 = B['cx']-media, B['cx']+media
         trozo = im.crop((x0, y0, x1, y1)).convert('RGBA')
         tp = trozo.load()
         for y in range(trozo.height):
@@ -136,21 +143,23 @@ def compone(ruta_base, ruta_cabeza, salida, px_salida=1600, _cache={}):
     CX, CY = B['cx'], B['cy']
 
     lienzo = Image.new('RGBA', (W, H), B['bg']+(255,))
+    nc = cab.resize((round(cab.width*s), round(cab.height*s)), Image.LANCZOS)
+    ox, oy = round(CX-C['cx']*s), round(CY-C['cy']*s)
+    l, t, r, bb = nc.getchannel('A').getbbox()          # silueta de la cabeza
+    cabeza_y0, cabeza_y1 = oy+t, oy+bb
+    dentro = int((cabeza_y1-cabeza_y0)*0.12)            # cuánto se esconde
 
     for pieza, arriba_p in ((arriba, True), (abajo, False)):
-        np_ = pieza.resize((max(1, round(pieza.width*e)),
-                            max(1, round(pieza.height*e))), Image.LANCZOS)
+        # el tramo se estira SOLO lo justo para ir del borde del lienzo
+        # hasta debajo de la caja: ni repetición ni costuras a la vista
+        largo = (cabeza_y0+dentro) if arriba_p else (H - (cabeza_y1-dentro))
+        largo = max(60, largo)
+        np_ = pieza.resize((max(1, round(pieza.width*e)), largo), Image.LANCZOS)
         x = round(CX - np_.width/2)
-        # anclado al borde del lienzo: el brazalete siempre llega a sangre
-        # y su corte queda dentro de la caja, tapado por la cabeza
-        y = 0 if arriba_p else H - np_.height
+        y = 0 if arriba_p else H - largo
         lienzo.alpha_composite(np_, (x, y))
-        # segunda pasada hacia la caja, por si el tramo se queda corto
-        y2 = np_.height if arriba_p else H - 2*np_.height
-        lienzo.alpha_composite(np_, (x, y2))
 
-    nc = cab.resize((round(cab.width*s), round(cab.height*s)), Image.LANCZOS)
-    lienzo.alpha_composite(nc, (round(CX-C['cx']*s), round(CY-C['cy']*s)))
+    lienzo.alpha_composite(nc, (ox, oy))
 
     lienzo.convert('RGB').resize((px_salida, px_salida), Image.LANCZOS)\
           .save(salida, quality=93)

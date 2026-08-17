@@ -97,6 +97,21 @@ function ALTA_2026_08_17() {
 }
 
 /**
+ * Tanda 3 — 17/08/2026. Correa de piel perforada (rally) del Lunar.
+ * Anuncio 1005009640853583 (HQstrap Store), 6,69 € con IVA, 20 mm.
+ * Captura completa: capturas/2026-08-17-1005009640853583.json
+ * SOLO se ofrece con bisel NEGRO (acero o caja negra), nunca con el
+ * bisel azul — decisión de Óscar.
+ */
+function ALTA_2026_08_17B() {
+  var LINK = 'https://es.aliexpress.com/item/1005009640853583.html';
+  var NOTA = 'Piel de vaca genuina hecha a mano, perforada tipo rally con costura de contraste BLANCA · ancho 20 mm (el anuncio también hace 18 y 22) · hebilla de pinza · SIN liberación rápida (aviso de una valoración: hace falta herramienta) · largo y grosor SIN declarar · unisex · vendedor HQstrap Store 95,9% (4,8★/157, 700+ vendidos) · 6,69 € con IVA el 17/08, envío gratis desde 10 € y devoluciones 90 días · SOLO con bisel negro (acero o caja negra), NO con bisel azul';
+  altaPiezas_('ALTA_2026_08_17B', [
+    ['P-027', 'Correa', 'Lunar', 'Correa piel perforada negra tipo rally, costura blanca, hebilla de pinza', 'Piel perforada negra', 'Negro · 20 mm', 6.69, LINK, '', '', NOTA]
+  ], new Date(2026, 7, 17));
+}
+
+/**
  * Motor común de las altas: exige la pestaña Piezas VACÍA por delante
  * de la fila donde escribe (nada viejo se mezcla), es idempotente por
  * el primer ID de la tanda, y respeta el orden de columnas del libro:
