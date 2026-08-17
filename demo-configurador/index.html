@@ -46,7 +46,7 @@
 <body>
 <header>
   <h1>laOra · Lunar</h1>
-  <p>Piloto del configurador por capas — 15 combinaciones desde 14 imágenes</p>
+  <p>Piloto del configurador por capas — 26 combinaciones desde 15 imágenes</p>
 </header>
 
 <div class="envoltorio">
@@ -107,9 +107,12 @@ const AGUJAS = [
   {id:'doradas',   nombre:'Doradas',   color:'#CBAE72'}
 ];
 const CORREAS = [
-  {id:'brazacero', nombre:'Brazalete de acero', color:'#C9CBCC'},
-  {id:'sin',       nombre:'Sin correa (cabeza)', color:'#EDEDEB'}
+  {id:'brazacero', nombre:'Brazalete de acero',     color:'#C9CBCC', prefijo:'braz-'},
+  {id:'pielperf',  nombre:'Piel perforada negra',   color:'#1A1A1A', prefijo:'piel-'},
+  {id:'sin',       nombre:'Sin correa (cabeza)',    color:'#EDEDEB', prefijo:'sola-'}
 ];
+// la piel perforada solo se ofrece con bisel negro (acero o caja negra)
+const correaValida = (id, caja=sel.caja) => id!=='pielperf' || caja!=='acero-bazul';
 
 // catálogo real: qué existe y con qué archivo
 const CATALOGO = {
@@ -148,8 +151,9 @@ function pinta(){
            || Object.keys(CATALOGO).find(k=>k.startsWith(sel.caja+'|'));
     if(k){ const [c,e,a]=k.split('|'); sel.caja=c; sel.esfera=e; sel.agujas=a; }
   }
+  if(!correaValida(sel.correa)) sel.correa = 'brazacero';
   const base = CATALOGO[clave()];
-  const prefijo = sel.correa==='brazacero' ? 'braz-' : 'sola-';
+  const prefijo = CORREAS.find(x=>x.id===sel.correa).prefijo;
   document.getElementById('foto').src = `img/${prefijo}${base}.jpg`;
 
   const nc = CAJAS.find(x=>x.id===sel.caja).nombre;
@@ -167,7 +171,7 @@ function botones(){
     ['cajas', CAJAS, 'caja', v=>hayCon('caja',v)],
     ['esferas', ESFERAS, 'esfera', v=>Object.keys(CATALOGO).some(k=>k.startsWith(sel.caja+'|'+v+'|'))],
     ['agujas', AGUJAS, 'agujas', v=>existe(sel.caja,sel.esfera,v)],
-    ['correas', CORREAS, 'correa', ()=>true]
+    ['correas', CORREAS, 'correa', v=>correaValida(v)]
   ];
   for(const [id, lista, campo, valido] of filas){
     const cont = document.getElementById(id);

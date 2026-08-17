@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "descripcion": "Correa de piel perforada (rally) para el Lunar de laOra. Datos leidos de la pagina del anuncio el 2026-08-17 desde el navegador de Claude Code.",
+    "fecha_extraccion": "2026-08-17",
+    "moneda": "EUR",
+    "convencion_datos_faltantes": "null = el dato NO aparece en la pagina del vendedor. No inferir.",
+    "destino": "Pieza P-027 del libro laOra 2026 (alta ALTA_2026_08_17B en altas-2026.gs)"
+  },
+
+  "anuncio": {
+    "url_limpia": "https://es.aliexpress.com/item/1005009640853583.html",
+    "item_id": "1005009640853583",
+    "titulo": "Correa de piel de vaca hecha a mano, correa de reloj de cuero marron y negro Vintage de 18mm, 20mm y 22mm para pulsera Seiko Premium, pulseras transpirables",
+    "vendedor": {
+      "nombre": "HQstrap Store",
+      "valoraciones_positivas_pct": 95.9,
+      "seguidores": 2283
+    },
+    "valoracion_articulo": 4.8,
+    "num_valoraciones": 157,
+    "unidades_vendidas": "700+",
+    "unidades_disponibles": 25,
+    "precio_eur": 6.69,
+    "precio_incluye_iva": true,
+    "promociones": ["2% de descuento extra con Monedas", "-3,00 EUR en compras de 15,00 EUR"],
+    "envio": "Gratis a partir de 10,00 EUR; entrega estimada 23-28 de agosto; Ecoscooting / Correos / CTT / GLS",
+    "devoluciones": "Gratis, 90 dias",
+    "propiedades_sku": {
+      "Color de la correa": ["Negro (ELEGIDO)", "Marron", "Verde", "Marron oscuro / natural"],
+      "Ancho de banda": ["18 mm", "20 mm (ELEGIDO)", "22 mm"]
+    }
+  },
+
+  "caracteristicas_declaradas": {
+    "material": "Cuero de vaca genuino, hecho a mano",
+    "tipo_cierre": "Hebilla de pinza (clasp)",
+    "genero": "Unisexo",
+    "marca_compatible": "Reloj tradicional",
+    "numero_modelo": "18mm 20mm 22mm",
+    "longitud_correa": null,
+    "grosor_mm": null,
+    "liberacion_rapida": false,
+    "nota_liberacion_rapida": "Una valoracion verificada (08/02/2026) avisa: NO tiene sistema de liberacion rapida para cambiar correas.",
+    "producto_quimico_alta_preocupacion": "Ninguno",
+    "transpirable": "Declarado por el vendedor: cuero natural suave y transpirable",
+    "aviso": "El resumen del articulo esta generado por IA (la propia pagina lo advierte) y la traduccion es automatica; el texto NO menciona ni las perforaciones ni la costura blanca, que si se ven en la foto del SKU negro elegido."
+  },
+
+  "variante_laora": {
+    "pieza": "P-027",
+    "descripcion": "Piel perforada negra tipo rally con costura de contraste BLANCA, ancho 20 mm",
+    "compatibilidad_de_catalogo": "SOLO con bisel NEGRO: caja de acero/bisel negro y caja negra/bisel negro. NO se ofrece con el bisel azul (decision de Oscar, 17/08/2026).",
+    "precio_eur": 6.69
+  },
+
+  "alertas": [
+    "Sin liberacion rapida: el cambio de correa necesita herramienta (dato de una valoracion, no del vendedor).",
+    "Longitud y grosor de la correa NO declarados: pedirlos al vendedor si hacen falta para la ficha.",
+    "El vendedor es HQstrap Store, distinto del proveedor de cajas/esferas (FJ wrist watch store): pedido y portes aparte."
+  ]
+}
