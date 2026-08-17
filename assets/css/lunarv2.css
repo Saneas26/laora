@@ -178,8 +178,18 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .dialogue-brand { display: inline-block; width: 2.45em; margin: 0 .04em; vertical-align: baseline; }
 .dialogue-brand img { width: 100%; height: auto; }
 
-.value-sequence { height: 500svh; position: relative; background: #090909; color: #fff; }
-.value-sequence-sticky { height: calc(100svh - 76px); position: sticky; top: 76px; overflow: hidden; }
+/* Acto 3 · sección normal desde el 11/08/2026.
+   Antes eran cinco pantallas de scroll con un hijo pegado (`sticky`) y
+   cuatro costes que entraban de uno en uno. Óscar la quiso sin animación
+   y sin pausa forzada, así que se queda en lo que es: una foto a sangre
+   con el texto encima. Los costes viven ahora dentro de la imagen.
+
+   La altura sale de `clamp` y no de la proporción de la foto: a 1440 da
+   780 px, muy cerca de los 801 que pediría el 16:9, y en un teléfono no
+   se queda en 210 px de alto —que es lo que daría `height:auto`— sino en
+   460, que es lo que necesita el titular. El recorte lo absorbe
+   `object-fit: cover`, y el hombre va centrado. */
+.value-sequence { position: relative; overflow: hidden; height: clamp(460px, 56vw, 780px); background: #090909; color: #fff; }
 .value-sequence-image, .value-sequence-veil { position: absolute; inset: 0; width: 100%; height: 100%; }
 .value-sequence-image { max-width: none; object-fit: cover; object-position: center center; }
 .value-sequence-veil { background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.03) 46%, rgba(0,0,0,.35)); pointer-events: none; }
@@ -188,24 +198,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .value-sequence-copy h2 { margin: 0; font: 500 clamp(39px, 4.5vw, 68px)/.88 var(--sans); letter-spacing: -.052em; }
 .value-sequence-lead { display: block; margin-bottom: 0; font-size: .52em; font-weight: 400; letter-spacing: -.015em; color: rgba(255,255,255,.86); }
 .value-sequence-copy h2 em { display: block; margin-top: -.5em; font-style: normal; font-weight: 700; color: #fdcc42; }
-.value-sequence-costs { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
-.value-cost { position: absolute; margin: 0; padding: 9px 13px; border: 1px solid rgba(255,255,255,.52); background: rgba(9,9,9,.74); color: white; font-size: clamp(13px, 1.15vw, 18px); font-weight: 500; letter-spacing: -.025em; opacity: 0; transition: opacity .42s ease, transform .72s cubic-bezier(.2,.75,.2,1); }
-.value-cost span { color: #fdcc42; font-size: 1.15em; }
-.value-cost.left { transform: translateX(29vw); }
-.value-cost.right { transform: translateX(-29vw); }
-.value-cost.one { left: 7.5%; top: 50%; }
-.value-cost.two { right: 7.5%; top: 50%; }
-.value-cost.three { left: 17%; top: 79%; }
-.value-cost.four { right: 17%; top: 79%; }
-.value-sequence.stage-1 .value-cost.one, .value-sequence.stage-2 .value-cost.one, .value-sequence.stage-3 .value-cost.one, .value-sequence.stage-4 .value-cost.one,
-.value-sequence.stage-2 .value-cost.two, .value-sequence.stage-3 .value-cost.two, .value-sequence.stage-4 .value-cost.two,
-.value-sequence.stage-3 .value-cost.three, .value-sequence.stage-4 .value-cost.three,
-.value-sequence.stage-4 .value-cost.four { opacity: 1; transform: translateX(0); }
-.value-sequence-result, .value-sequence-essential, .value-sequence-price { opacity: 0; transform: translateY(8px); transition: opacity .3s ease, transform .3s ease; }
-.value-sequence-result.visible, .value-sequence-essential.visible, .value-sequence-price.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
-.value-sequence-result { position: absolute; z-index: 2; top: 34%; left: 50%; width: min(760px, 90vw); margin: 0; transform: translateX(-50%) translateY(8px); text-align: center; font-size: clamp(16px, 1.35vw, 23px); }
-.value-sequence-essential { position: absolute; z-index: 2; left: 50%; bottom: clamp(56px, 10vh, 112px); width: min(680px, 88vw); margin: 0; transform: translateX(-50%) translateY(8px); text-align: center; font: 500 clamp(23px, 2.3vw, 38px)/1.08 var(--sans); letter-spacing: -.045em; text-shadow: 0 2px 22px #000; }
-.value-sequence-price { position: absolute; z-index: 2; left: 50%; bottom: clamp(24px, 4vh, 45px); width: 92vw; margin: 0; transform: translateX(-50%) translateY(8px); text-align: center; font-size: clamp(14px, 1.25vw, 20px); }
 
 .trust-carousel { position: relative; padding: 22px 0 26px; overflow: hidden; background: #111; }
 .trust-carousel-track { display: flex; gap: 18px; padding: 0 max(5vw, 28px); overflow-x: auto; overscroll-behavior-inline: contain; scroll-snap-type: x mandatory; scroll-padding-inline: max(5vw, 28px); scrollbar-width: none; }
@@ -699,20 +691,12 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .lunar-dialogue-copy { top: 24px; left: 50%; right: auto; width: calc(100% - 36px); transform: translateX(-50%); }
   .lunar-dialogue-copy h2 { margin-bottom: 13px; font-size: clamp(31px, 8.6vw, 36px); line-height: 1; }
   .lunar-dialogue-copy p { max-width: 360px; font-size: 17px; line-height: 1.26; }
-  .value-sequence { height: 500svh; }
-  .value-sequence-sticky { height: calc(100svh - 68px); top: 68px; }
-  .value-sequence-image { object-position: center bottom; }
+  .value-sequence { height: clamp(420px, 118vw, 560px); }
+  .value-sequence-image { object-position: center center; }
   .value-sequence-copy { top: 24px; width: calc(100% - 28px); }
   .value-sequence-kicker { margin-bottom: 7px; font-size: 14px; letter-spacing: .13em; }
   .value-sequence-copy h2 { font-size: clamp(30px, 8.2vw, 36px); }
   .value-sequence-lead { font-size: .58em; }
-  .value-cost { max-width: 41vw; padding: 6px 8px; font-size: 12px; line-height: 1.12; }
-  .value-cost.left { transform: translateX(38vw); }
-  .value-cost.right { transform: translateX(-38vw); }
-  .value-cost.one { left: 3%; top: 50%; }
-  .value-cost.two { right: 3%; top: 50%; }
-  .value-cost.three { left: 4%; top: 74%; }
-  .value-cost.four { right: 4%; top: 74%; }
   .trust-carousel { padding: 14px 0 18px; }
   .trust-carousel-track { gap: 10px; padding-inline: 16px; scroll-padding-inline: 16px; }
   .trust-card { flex-basis: calc(100vw - 48px); height: clamp(350px, 46svh, 420px); }
