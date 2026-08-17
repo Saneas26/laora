@@ -332,9 +332,9 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-spec-stage::after { content: ""; position: absolute; left: 50%; bottom: 4%; width: 46vw; max-width: 560px; aspect-ratio: 1; transform: translateX(-50%); border: 1px solid rgba(28,29,27,.07); border-radius: 50%; box-shadow: 0 0 0 6vw rgba(28,29,27,.014), 0 0 0 12vw rgba(28,29,27,.009); }
 .lunar-spec-stage img { width: min(26vw, 300px); height: auto; object-fit: contain; filter: drop-shadow(0 30px 40px rgba(28,29,27,.16)); }
 .lunar-spec-intro { position: absolute; z-index: 2; top: clamp(32px, 6.4vh, 64px); left: 50%; width: min(940px, 86vw); transform: translateX(-50%); text-align: center; }
-.lunar-spec-kicker { margin: 0 0 3px; font-size: clamp(10px, .78vw, 13px); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(28,29,27,.55); }
-.lunar-spec-intro h2 { margin: 0; font: 500 clamp(30px, 3vw, 46px)/1.05 var(--sans); letter-spacing: -.04em; text-wrap: balance; }
-.lunar-spec-lead { display: block; margin-bottom: 0; font-size: .58em; font-weight: 400; letter-spacing: -.005em; color: rgba(28,29,27,.72); }
+.lunar-spec-kicker { margin: 0 0 3px; font-size: clamp(15px, calc(.78vw + 5px), 18px); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(28,29,27,.55); }
+.lunar-spec-intro h2 { margin: 0; font: 500 clamp(39px, 4.5vw, 68px)/1.05 var(--sans); letter-spacing: -.04em; text-wrap: balance; }
+.lunar-spec-lead { display: block; margin-bottom: 0; font-size: .52em; font-weight: 400; letter-spacing: -.005em; color: rgba(28,29,27,.72); }
 .lunar-spec-intro h2 em { display: block; margin-top: -.5em; font-size: 1em; color: var(--gold); font-style: normal; font-weight: 700; }
 .lunar-spec-highlights { margin: 0; padding: 0; list-style: none; }
 .lunar-spec-highlights li { width: clamp(170px, 15vw, 220px); position: absolute; z-index: 2; display: grid; grid-template-columns: 22px 1fr; gap: 9px; align-items: start; color: var(--ink); }
@@ -777,10 +777,10 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .lunar-spec-stage::after { width: 62vw; bottom: auto; top: 186px; }
   .lunar-spec-stage img { width: 46vw; max-width: 200px; }
   .lunar-spec-intro { top: 18px; width: calc(100% - 28px); }
-  .lunar-spec-kicker { margin-bottom: 6px; font-size: 9px; letter-spacing: .13em; }
-  .lunar-spec-intro h2 { max-width: 350px; margin-inline: auto; font-size: clamp(24px, 6.6vw, 29px); line-height: 1.14; }
+  .lunar-spec-kicker { margin-bottom: 6px; font-size: 14px; letter-spacing: .13em; }
+  .lunar-spec-intro h2 { max-width: 350px; margin-inline: auto; font-size: clamp(30px, 8.2vw, 36px); line-height: 1.14; }
   .lunar-spec-intro h2 em { display: block; margin-top: -.35em; }
-  .lunar-spec-lead { font-size: .6em; }
+  .lunar-spec-lead { font-size: .58em; }
   .lunar-spec-highlights { position: static; margin: 0 14px; padding-top: calc(186px + min(46vw, 200px) * 1.503 + 20px); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(28,29,27,.14); border-left: 1px solid rgba(28,29,27,.14); }
   .lunar-spec-highlights li, .lunar-spec-highlights li:nth-child(odd), .lunar-spec-highlights li:nth-child(even) { width: auto; min-width: 0; min-height: 78px; position: static; padding: 10px 8px; display: grid; grid-template-columns: 22px 1fr; gap: 8px; text-align: left; border-right: 1px solid rgba(28,29,27,.14); border-bottom: 1px solid rgba(28,29,27,.14); }
   .lunar-spec-highlights li::after { display: none; }
