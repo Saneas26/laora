@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=12">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=14">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="pv-grupo">
-          <p class="pv-rotulo">Movimiento <b data-pv-cal>Cal. LO_Q6026</b></p>
+          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
           <div class="pv-opciones" data-pv="mov">
             <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
             <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
@@ -369,7 +369,7 @@
   function pinta() {
     normaliza();
     $('[data-pv-precio]').textContent = eu(precio());
-    $('[data-pv-cal]').textContent = 'Cal. ' + MOVS[e.mov].cal;
+    $('[data-pv-cal]').textContent = 'Calibre ' + MOVS[e.mov].cal;
 
     todos('[data-pv="estilo"] button, [data-pv="mov"] button, [data-pv="diam"] button, [data-pv="caja"] button, [data-pv="tapa"] button')
       .forEach(function (b) {

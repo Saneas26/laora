@@ -214,3 +214,22 @@ main.cv2{ overflow:visible; overflow-x:clip }
 /* `.pv-grupo{display:flex}` le ganaba a `[hidden]` y dejaba el rótulo
    «Color del nato» colgado sin paleta debajo. */
 .pv-grupo[hidden], .pv-opciones[hidden]{display:none}
+
+/* ============================================================
+   LAS ELECCIONES, NUMERADAS (Óscar, 17/08/2026)
+   Cada grupo lleva su número por orden dentro de un círculo de oro.
+   Va con contador de CSS: si un grupo se oculta (p. ej. el color del
+   nato cuando no toca), no gasta número y la cuenta sigue seguida.
+   ============================================================ */
+.pv-info>div{counter-reset:paso}
+.pv-grupo>.pv-rotulo{align-items:center;gap:10px;justify-content:flex-start}
+.pv-grupo>.pv-rotulo::before{
+  counter-increment:paso;content:counter(paso);
+  flex:0 0 auto;width:24px;height:24px;border-radius:50%;
+  background:var(--cv2-oro);color:var(--cv2-negro);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;letter-spacing:0;
+}
+/* el rótulo tiene el nombre a la izquierda y el dato a la derecha:
+   el número entra delante sin romper ese reparto */
+.pv-grupo>.pv-rotulo>b{margin-left:auto}
