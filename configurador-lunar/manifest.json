@@ -13,19 +13,19 @@
     "head"
   ],
   "heads": {
-    "cab-acero-bazul-esfblanca-agujas-azules": "assets/heads/cab-acero-bazul-esfblanca-agujas-azules.png",
-    "cab-acero-bazul-esfblanca-agujas-plateadas": "assets/heads/cab-acero-bazul-esfblanca-agujas-plateadas.png",
-    "cab-acero-bnegro-agujas-azules": "assets/heads/cab-acero-bnegro-agujas-azules.png",
-    "cab-acero-bnegro-agujas-doradas": "assets/heads/cab-acero-bnegro-agujas-doradas.png",
-    "cab-acero-bnegro-agujas-naranjas": "assets/heads/cab-acero-bnegro-agujas-naranjas.png",
-    "cab-acero-bnegro-agujas-plateadas": "assets/heads/cab-acero-bnegro-agujas-plateadas.png",
-    "cab-acero-bnegro-esf26-negra-dorada": "assets/heads/cab-acero-bnegro-esf26-negra-dorada.png",
-    "cab-acero-bnegro-esf27-verde": "assets/heads/cab-acero-bnegro-esf27-verde.png",
-    "cab-acero-bnegro-esf44-racing-naranja": "assets/heads/cab-acero-bnegro-esf44-racing-naranja.png",
-    "cab-negra-bnegro-agujas-azules": "assets/heads/cab-negra-bnegro-agujas-azules.png",
-    "cab-negra-bnegro-agujas-doradas": "assets/heads/cab-negra-bnegro-agujas-doradas.png",
-    "cab-negra-bnegro-agujas-naranjas": "assets/heads/cab-negra-bnegro-agujas-naranjas.png",
-    "cab-negra-bnegro-agujas-plateadas": "assets/heads/cab-negra-bnegro-agujas-plateadas.png"
+    "cab-acero-bazul-esfblanca-agujas-azules": "assets/heads-alineadas/cab-acero-bazul-esfblanca-agujas-azules.png",
+    "cab-acero-bazul-esfblanca-agujas-plateadas": "assets/heads-alineadas/cab-acero-bazul-esfblanca-agujas-plateadas.png",
+    "cab-acero-bnegro-agujas-azules": "assets/heads-alineadas/cab-acero-bnegro-agujas-azules.png",
+    "cab-acero-bnegro-agujas-doradas": "assets/heads-alineadas/cab-acero-bnegro-agujas-doradas.png",
+    "cab-acero-bnegro-agujas-naranjas": "assets/heads-alineadas/cab-acero-bnegro-agujas-naranjas.png",
+    "cab-acero-bnegro-agujas-plateadas": "assets/heads-alineadas/cab-acero-bnegro-agujas-plateadas.png",
+    "cab-acero-bnegro-esf26-negra-dorada": "assets/heads-alineadas/cab-acero-bnegro-esf26-negra-dorada.png",
+    "cab-acero-bnegro-esf27-verde": "assets/heads-alineadas/cab-acero-bnegro-esf27-verde.png",
+    "cab-acero-bnegro-esf44-racing-naranja": "assets/heads-alineadas/cab-acero-bnegro-esf44-racing-naranja.png",
+    "cab-negra-bnegro-agujas-azules": "assets/heads-alineadas/cab-negra-bnegro-agujas-azules.png",
+    "cab-negra-bnegro-agujas-doradas": "assets/heads-alineadas/cab-negra-bnegro-agujas-doradas.png",
+    "cab-negra-bnegro-agujas-naranjas": "assets/heads-alineadas/cab-negra-bnegro-agujas-naranjas.png",
+    "cab-negra-bnegro-agujas-plateadas": "assets/heads-alineadas/cab-negra-bnegro-agujas-plateadas.png"
   },
   "straps": {
     "piel-negra-perforada-pespunte-blanco": "assets/straps/piel-negra-perforada-pespunte-blanco.png"
@@ -33,5 +33,15 @@
   "default": {
     "head": "cab-acero-bnegro-agujas-plateadas",
     "strap": "piel-negra-perforada-pespunte-blanco"
+  },
+  "alineado": {
+    "nota": "Las cabezas originales (assets/heads/) venian de generaciones distintas: hasta 13 px de desvio y 6,6% de diferencia de tamano de caja. Se han alineado TODAS a la geometria de la cabeza de referencia, que es la fotografiada con esta correa. Solo se ha movido y escalado la imagen entera; el dibujo no se ha tocado y los originales siguen en assets/heads/.",
+    "referencia": "cab-acero-bnegro-agujas-plateadas",
+    "geometria": {
+      "centro_x": 624.5,
+      "centro_y": 561.5,
+      "diametro_caja": 741
+    },
+    "herramienta": "herramientas/alinear_cabezas.py"
   }
 }
