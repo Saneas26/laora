@@ -184,7 +184,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .value-sequence-image { max-width: none; object-fit: cover; object-position: center center; }
 .value-sequence-veil { background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.03) 46%, rgba(0,0,0,.35)); pointer-events: none; }
 .value-sequence-copy { position: absolute; z-index: 2; top: clamp(24px, 5.8vh, 64px); left: 50%; width: min(1000px, 92vw); transform: translateX(-50%); text-align: center; text-shadow: 0 2px 22px rgba(0,0,0,.52); }
-.value-sequence-kicker { margin: 0 0 3px; font-size: clamp(10px, .78vw, 13px); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.62); }
+.value-sequence-kicker { margin: 0 0 3px; font-size: clamp(15px, calc(.78vw + 5px), 18px); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.62); }
 .value-sequence-copy h2 { margin: 0; font: 500 clamp(39px, 4.5vw, 68px)/.88 var(--sans); letter-spacing: -.052em; }
 .value-sequence-lead { display: block; margin-bottom: 0; font-size: .52em; font-weight: 400; letter-spacing: -.015em; color: rgba(255,255,255,.86); }
 .value-sequence-copy h2 em { display: block; margin-top: -.5em; font-style: normal; font-weight: 700; color: #fdcc42; }
@@ -703,7 +703,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .value-sequence-sticky { height: calc(100svh - 68px); top: 68px; }
   .value-sequence-image { object-position: center bottom; }
   .value-sequence-copy { top: 24px; width: calc(100% - 28px); }
-  .value-sequence-kicker { margin-bottom: 7px; font-size: 9px; letter-spacing: .13em; }
+  .value-sequence-kicker { margin-bottom: 7px; font-size: 14px; letter-spacing: .13em; }
   .value-sequence-copy h2 { font-size: clamp(30px, 8.2vw, 36px); }
   .value-sequence-lead { font-size: .58em; }
   .value-cost { max-width: 41vw; padding: 6px 8px; font-size: 12px; line-height: 1.12; }
