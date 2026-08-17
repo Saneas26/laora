@@ -77,6 +77,24 @@ function filasTanda1_() {
 }
 
 /**
+ * Tanda 2 — 17/08/2026. Correa de caucho del Lunar (anuncio
+ * 1005010706660703, mismo del caucho MoonSwatch de la etapa
+ * anterior): negra con trama textil y pespunte de contraste, final
+ * curvo, 20 mm, 5,59 €. SKUs vistos: pespunte VERDE con hebilla acero
+ * plateado y pespunte NARANJA con hebilla acero PVD negro; el blanco
+ * está por confirmar en el anuncio. Trae herramientas.
+ */
+function ALTA_2026_08_17() {
+  var LINK = 'https://es.aliexpress.com/item/1005010706660703.html';
+  var COMUN = 'Caucho negro trama textil (cesta), final curvo que abraza la caja, ancho 20 mm, trae herramientas · precio 5,59 € capturado el 17/08 · pespuntes de contraste; en la web los colores de pespunte se derivan por máscara de la tira base';
+  var filas = [
+    ['P-019', 'Correa', 'Lunar', 'Correa caucho negra trama textil, pespunte VERDE, hebilla acero plateado', 'Caucho negro pespunte verde', 'pespunte verde + hebilla plata', 5.59, LINK, '', '', COMUN],
+    ['P-020', 'Correa', 'Lunar', 'Correa caucho negra trama textil, pespunte NARANJA, hebilla acero PVD negro', 'Caucho negro pespunte naranja', 'pespunte naranja + hebilla PVD', 5.59, LINK, '', '', COMUN + ' · ALERTA: pespunte blanco por confirmar si existe en el anuncio']
+  ];
+  altaPiezas_('ALTA_2026_08_17', filas, new Date(2026, 7, 17));
+}
+
+/**
  * Motor común de las altas: exige la pestaña Piezas VACÍA por delante
  * de la fila donde escribe (nada viejo se mezcla), es idempotente por
  * el primer ID de la tanda, y respeta el orden de columnas del libro:
