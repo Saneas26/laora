@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "product": "laOra Lunar 2026",
+  "status": "integration-ready-proof",
+  "canvas": {
+    "width": 1254,
+    "height": 1254,
+    "background": "#EAE8E8"
+  },
+  "layerOrder": [
+    "background",
+    "strap",
+    "head"
+  ],
+  "heads": {
+    "cab-acero-bazul-esfblanca-agujas-azules": "assets/heads/cab-acero-bazul-esfblanca-agujas-azules.png",
+    "cab-acero-bazul-esfblanca-agujas-plateadas": "assets/heads/cab-acero-bazul-esfblanca-agujas-plateadas.png",
+    "cab-acero-bnegro-agujas-azules": "assets/heads/cab-acero-bnegro-agujas-azules.png",
+    "cab-acero-bnegro-agujas-doradas": "assets/heads/cab-acero-bnegro-agujas-doradas.png",
+    "cab-acero-bnegro-agujas-naranjas": "assets/heads/cab-acero-bnegro-agujas-naranjas.png",
+    "cab-acero-bnegro-agujas-plateadas": "assets/heads/cab-acero-bnegro-agujas-plateadas.png",
+    "cab-acero-bnegro-esf26-negra-dorada": "assets/heads/cab-acero-bnegro-esf26-negra-dorada.png",
+    "cab-acero-bnegro-esf27-verde": "assets/heads/cab-acero-bnegro-esf27-verde.png",
+    "cab-acero-bnegro-esf44-racing-naranja": "assets/heads/cab-acero-bnegro-esf44-racing-naranja.png",
+    "cab-negra-bnegro-agujas-azules": "assets/heads/cab-negra-bnegro-agujas-azules.png",
+    "cab-negra-bnegro-agujas-doradas": "assets/heads/cab-negra-bnegro-agujas-doradas.png",
+    "cab-negra-bnegro-agujas-naranjas": "assets/heads/cab-negra-bnegro-agujas-naranjas.png",
+    "cab-negra-bnegro-agujas-plateadas": "assets/heads/cab-negra-bnegro-agujas-plateadas.png"
+  },
+  "straps": {
+    "piel-negra-perforada-pespunte-blanco": "assets/straps/piel-negra-perforada-pespunte-blanco.png"
+  },
+  "default": {
+    "head": "cab-acero-bnegro-agujas-plateadas",
+    "strap": "piel-negra-perforada-pespunte-blanco"
+  }
+}
