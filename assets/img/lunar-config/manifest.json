@@ -38,12 +38,12 @@
       ]
     },
     "brazalete-acero-316l-cinco-columnas": {
-      "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=2",
+      "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=3",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "nota": "Capa limpiada el 17/08: la del paquete traia pegado un trozo del bisel de la caja con la que se fotografio y asomaba con cajas mas pequenas (herramientas/limpiar_correa.py); master 4k en masters-2026/lunar/capas/"
+      "nota": "IMAGEN MADRE (orden de Oscar, 17/08): la capa es la foto completa del preview acero-bisel-negro-esfera-negra-brazalete-acero-316l-4k, con el brazalete TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria: ancho 811, centro 568). Master en masters-2026/lunar/capas/brazalete-acero-316l-madre-4k.png"
     }
   },
   "default": {
