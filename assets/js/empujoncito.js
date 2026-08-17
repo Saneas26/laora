@@ -25,16 +25,26 @@
   'use strict';
 
   /* Cada tira con su corte: la portada esconde las flechas a partir de
-     720 px; la colección se apila en columna a partir de 820. */
+     720 px; la colección se apila en columna a partir de 820.
+
+     El presupuesto es UN EMPUJÓN POR GRUPO, no por página: en la colección
+     se lleva uno la barra de nombres de arriba y otro la primera tira de
+     tarjetas, porque son dos cosas distintas y cada una hay que
+     descubrirla por su cuenta. Lo que no se repite es dentro del grupo:
+     las cinco tiras de tarjetas comparten un solo empujón. */
   var TIRAS = [
-    { sel: '[data-carrusel]', media: '(max-width: 720px)' },  /* portada · confianza */
-    { sel: '.cv2-tarjetas',   media: '(max-width: 820px)' }   /* colección · una tira por familia */
+    { sel: '.cv2-modelos div', media: '(max-width: 820px)' }, /* colección · barra de nombres */
+    { sel: '[data-carrusel]',  media: '(max-width: 720px)' }, /* portada · confianza */
+    { sel: '.cv2-tarjetas',    media: '(max-width: 820px)' }  /* colección · una tira por familia */
   ];
 
   if (!window.IntersectionObserver || !window.requestAnimationFrame || !window.matchMedia) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var gastado = false;   /* el empujón de esta página, ya dado */
+  /* Cuándo queda libre el turno. Dos empujones a la vez —la barra pegada
+     arriba y las tarjetas justo debajo entran en pantalla juntas— parecen
+     un temblor; en fila se leen como dos avisos. */
+  var libre = 0;
 
   function empuja(pista) {
     var hijo = pista.firstElementChild;
@@ -65,7 +75,7 @@
     window.requestAnimationFrame(paso);
   }
 
-  function vigila(pista) {
+  function vigila(pista, grupo) {
     var tocado = false;
 
     pista.addEventListener('scroll', function () {
@@ -78,10 +88,14 @@
         vigia.disconnect();
         /* Quien dice si el cliente la ha tocado es el oyente de arriba, no
            el `scrollLeft`: las tiras de la colección no empiezan en cero. */
-        if (gastado || tocado) return;
+        if (grupo.gastado || tocado) return;
         if (pista.scrollWidth <= pista.clientWidth + 8) return;
-        gastado = true;
-        window.setTimeout(function () { if (!tocado) empuja(pista); }, 420);
+        grupo.gastado = true;
+
+        var ahora = Date.now();
+        var espera = Math.max(420, libre - ahora);
+        libre = ahora + espera + 900 + 300;   /* lo que dura el empujón y un respiro */
+        window.setTimeout(function () { if (!tocado) empuja(pista); }, espera);
       }
     }, { threshold: 0.45 });
 
@@ -91,6 +105,6 @@
   for (var i = 0; i < TIRAS.length; i++) {
     if (!window.matchMedia(TIRAS[i].media).matches) continue;
     var pistas = document.querySelectorAll(TIRAS[i].sel);
-    for (var j = 0; j < pistas.length; j++) vigila(pistas[j]);
+    for (var j = 0; j < pistas.length; j++) vigila(pistas[j], TIRAS[i]);
   }
 })();
