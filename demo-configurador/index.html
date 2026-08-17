@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurador laOra · Lunar (piloto)</title>
+<style>
+  :root{
+    --tinta:#141414; --papel:#F7F7F5; --linea:#D8D6D2;
+    --suave:#6B6B6B; --oro:#B08A3E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+       font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  header{padding:22px 20px 10px;text-align:center}
+  header h1{margin:0;font-size:20px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  header p{margin:6px 0 0;color:var(--suave);font-size:14px}
+  .envoltorio{max-width:1180px;margin:0 auto;padding:10px 20px 60px;
+              display:grid;gap:34px;grid-template-columns:1fr}
+  @media (min-width:900px){.envoltorio{grid-template-columns:1.1fr .9fr;align-items:start}}
+  .escena{background:#EDEDEB;border:1px solid var(--linea);border-radius:14px;
+          overflow:hidden;position:relative}
+  .escena img{display:block;width:100%;height:auto}
+  .grupo{margin-bottom:26px}
+  .grupo h2{margin:0 0 10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+            color:var(--suave);font-weight:700}
+  .opciones{display:flex;flex-wrap:wrap;gap:10px}
+  button.op{appearance:none;background:#fff;border:1px solid var(--linea);border-radius:10px;
+            padding:11px 16px;font-size:15px;cursor:pointer;color:var(--tinta);
+            transition:border-color .15s, box-shadow .15s}
+  button.op:hover{border-color:#B9B6B1}
+  button.op[aria-pressed="true"]{border-color:var(--tinta);box-shadow:inset 0 0 0 1px var(--tinta)}
+  button.op[disabled]{text-decoration:line-through;color:#A9A6A2;cursor:not-allowed;
+                      background:#F2F1EF;border-color:#E6E4E1}
+  .muestra{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.18);
+           display:inline-block;vertical-align:-5px;margin-right:9px}
+  .ficha{border-top:1px solid var(--linea);margin-top:26px;padding-top:16px}
+  .ficha strong{display:block;font-size:19px}
+  .ficha span{color:var(--suave);font-size:14px}
+  .nota{margin-top:22px;padding:14px 16px;background:#fff;border:1px solid var(--linea);
+        border-radius:10px;color:var(--suave);font-size:13.5px}
+  .nota b{color:var(--tinta)}
+</style>
+</head>
+<body>
+<header>
+  <h1>laOra · Lunar</h1>
+  <p>Piloto del configurador por capas — 15 combinaciones desde 14 imágenes</p>
+</header>
+
+<div class="envoltorio">
+  <div class="escena">
+    <img id="foto" src="img/braz-acero-bnegro-agujas-plateadas.jpg"
+         alt="Reloj configurado" width="1400" height="1400">
+  </div>
+
+  <div>
+    <div class="grupo">
+      <h2>Caja</h2>
+      <div class="opciones" id="cajas"></div>
+    </div>
+    <div class="grupo">
+      <h2>Esfera</h2>
+      <div class="opciones" id="esferas"></div>
+    </div>
+    <div class="grupo">
+      <h2>Agujas</h2>
+      <div class="opciones" id="agujas"></div>
+    </div>
+    <div class="grupo">
+      <h2>Correa</h2>
+      <div class="opciones" id="correas"></div>
+    </div>
+
+    <div class="ficha">
+      <strong id="titulo">—</strong>
+      <span id="detalle"></span>
+    </div>
+
+    <div class="nota">
+      <b>Lo que demuestra este piloto:</b> el brazalete se fotografió
+      <b>una sola vez</b>. Cada combinación que ves se compone por capas
+      sobre esa misma foto — ninguna se ha generado aparte. Las
+      combinaciones que no existen salen <s>tachadas</s>, nunca escondidas.
+    </div>
+  </div>
+</div>
+
+<script>
+const CAJAS = [
+  {id:'acero-bnegro', nombre:'Acero · bisel negro', color:'#C9CBCC'},
+  {id:'negra-bnegro', nombre:'Negra · bisel negro', color:'#26282A'},
+  {id:'acero-bazul',  nombre:'Acero · bisel azul',  color:'#1F3E77'}
+];
+const ESFERAS = [
+  {id:'negra',        nombre:'Negra',              color:'#131313'},
+  {id:'racing',       nombre:'Racing naranja',     color:'#E8802F'},
+  {id:'negra-dorada', nombre:'Negra y dorada',     color:'#C6A867'},
+  {id:'verde',        nombre:'Verde',              color:'#2E6B4F'},
+  {id:'blanca-azul',  nombre:'Blanca · azul',      color:'#F2F2F0'}
+];
+const AGUJAS = [
+  {id:'plateadas', nombre:'Plateadas', color:'#D7D9DA'},
+  {id:'naranjas',  nombre:'Naranjas',  color:'#EF7C22'},
+  {id:'azules',    nombre:'Azules',    color:'#316BB8'},
+  {id:'doradas',   nombre:'Doradas',   color:'#CBAE72'}
+];
+const CORREAS = [
+  {id:'brazacero', nombre:'Brazalete de acero', color:'#C9CBCC'},
+  {id:'sin',       nombre:'Sin correa (cabeza)', color:'#EDEDEB'}
+];
+
+// catálogo real: qué existe y con qué archivo
+const CATALOGO = {
+  'acero-bnegro|negra|plateadas':'acero-bnegro-agujas-plateadas',
+  'acero-bnegro|negra|naranjas' :'acero-bnegro-agujas-naranjas',
+  'acero-bnegro|negra|azules'   :'acero-bnegro-agujas-azules',
+  'acero-bnegro|negra|doradas'  :'acero-bnegro-agujas-doradas',
+  'acero-bnegro|racing|naranjas':'acero-bnegro-esf44-racing-naranja',
+  'acero-bnegro|negra-dorada|doradas':'acero-bnegro-esf26-negra-dorada',
+  'acero-bnegro|verde|plateadas':'acero-bnegro-esf27-verde',
+  'negra-bnegro|negra|plateadas':'negra-bnegro-agujas-plateadas',
+  'negra-bnegro|negra|naranjas' :'negra-bnegro-agujas-naranjas',
+  'negra-bnegro|negra|azules'   :'negra-bnegro-agujas-azules',
+  'negra-bnegro|negra|doradas'  :'negra-bnegro-agujas-doradas',
+  'acero-bazul|blanca-azul|plateadas':'acero-bazul-esfblanca-agujas-plateadas',
+  'acero-bazul|blanca-azul|azules'   :'acero-bazul-esfblanca-agujas-azules'
+};
+
+let sel = {caja:'acero-bnegro', esfera:'negra', agujas:'plateadas', correa:'brazacero'};
+
+const clave = (c=sel.caja,e=sel.esfera,a=sel.agujas)=>`${c}|${e}|${a}`;
+const existe = (c,e,a)=>!!CATALOGO[clave(c,e,a)];
+const hayCon = (campo,valor)=>Object.keys(CATALOGO).some(k=>{
+  const [c,e,a]=k.split('|');
+  const p={caja:c,esfera:e,agujas:a};
+  p[campo]=p[campo]; // no-op
+  if(campo==='caja') return c===valor;
+  if(campo==='esfera') return e===valor && c===sel.caja;
+  return a===valor && c===sel.caja && e===sel.esfera;
+});
+
+function pinta(){
+  // resuelve una combinación válida si la actual no existe
+  if(!existe(sel.caja,sel.esfera,sel.agujas)){
+    const k = Object.keys(CATALOGO).find(k=>k.startsWith(sel.caja+'|'+sel.esfera+'|'))
+           || Object.keys(CATALOGO).find(k=>k.startsWith(sel.caja+'|'));
+    if(k){ const [c,e,a]=k.split('|'); sel.caja=c; sel.esfera=e; sel.agujas=a; }
+  }
+  const base = CATALOGO[clave()];
+  const prefijo = sel.correa==='brazacero' ? 'braz-' : 'sola-';
+  document.getElementById('foto').src = `img/${prefijo}${base}.jpg`;
+
+  const nc = CAJAS.find(x=>x.id===sel.caja).nombre;
+  const ne = ESFERAS.find(x=>x.id===sel.esfera).nombre;
+  const na = AGUJAS.find(x=>x.id===sel.agujas).nombre;
+  const nr = CORREAS.find(x=>x.id===sel.correa).nombre;
+  document.getElementById('titulo').textContent = `Lunar · esfera ${ne.toLowerCase()}`;
+  document.getElementById('detalle').textContent = `${nc} · agujas ${na.toLowerCase()} · ${nr.toLowerCase()}`;
+
+  botones();
+}
+
+function botones(){
+  const filas = [
+    ['cajas', CAJAS, 'caja', v=>hayCon('caja',v)],
+    ['esferas', ESFERAS, 'esfera', v=>Object.keys(CATALOGO).some(k=>k.startsWith(sel.caja+'|'+v+'|'))],
+    ['agujas', AGUJAS, 'agujas', v=>existe(sel.caja,sel.esfera,v)],
+    ['correas', CORREAS, 'correa', ()=>true]
+  ];
+  for(const [id, lista, campo, valido] of filas){
+    const cont = document.getElementById(id);
+    cont.innerHTML = '';
+    for(const op of lista){
+      const b = document.createElement('button');
+      b.className = 'op';
+      b.type = 'button';
+      b.innerHTML = `<i class="muestra" style="background:${op.color}"></i>${op.nombre}`;
+      b.setAttribute('aria-pressed', String(sel[campo]===op.id));
+      if(!valido(op.id)) b.disabled = true;
+      b.onclick = ()=>{ sel[campo]=op.id; pinta(); };
+      cont.appendChild(b);
+    }
+  }
+}
+
+pinta();
+</script>
+</body>
+</html>
