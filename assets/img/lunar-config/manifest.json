@@ -27,7 +27,23 @@
     "cab-negra-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-plateadas.webp"
   },
   "straps": {
-    "piel-negra-perforada-pespunte-blanco": "/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp"
+    "piel-negra-perforada-pespunte-blanco": {
+      "src": "/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp",
+      "cabezasPermitidas": [
+        "cab-acero-",
+        "cab-negra-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ]
+    },
+    "brazalete-acero-316l-cinco-columnas": {
+      "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": []
+    }
   },
   "default": {
     "head": "cab-acero-bnegro-agujas-plateadas",
