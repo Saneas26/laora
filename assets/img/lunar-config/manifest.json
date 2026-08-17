@@ -38,11 +38,12 @@
       ]
     },
     "brazalete-acero-316l-cinco-columnas": {
-      "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp",
+      "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=2",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
-      "cabezasExcluidas": []
+      "cabezasExcluidas": [],
+      "nota": "Capa limpiada el 17/08: la del paquete traia pegado un trozo del bisel de la caja con la que se fotografio y asomaba con cajas mas pequenas (herramientas/limpiar_correa.py); master 4k en masters-2026/lunar/capas/"
     }
   },
   "default": {
