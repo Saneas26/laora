@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "product": "laOra Lunar 2026",
+  "canvas": {
+    "width": 1254,
+    "height": 1254,
+    "background": "#EAE8E8"
+  },
+  "layerOrder": [
+    "background",
+    "strap",
+    "head"
+  ],
+  "heads": {
+    "cab-acero-bazul-esfblanca-agujas-azules": "/assets/img/lunar-config/heads/cab-acero-bazul-esfblanca-agujas-azules.webp",
+    "cab-acero-bazul-esfblanca-agujas-plateadas": "/assets/img/lunar-config/heads/cab-acero-bazul-esfblanca-agujas-plateadas.webp",
+    "cab-acero-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-azules.webp",
+    "cab-acero-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-doradas.webp",
+    "cab-acero-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-naranjas.webp",
+    "cab-acero-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp",
+    "cab-acero-bnegro-esf26-negra-dorada": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf26-negra-dorada.webp",
+    "cab-acero-bnegro-esf27-verde": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf27-verde.webp",
+    "cab-acero-bnegro-esf44-racing-naranja": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf44-racing-naranja.webp",
+    "cab-negra-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-azules.webp",
+    "cab-negra-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-doradas.webp",
+    "cab-negra-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-naranjas.webp",
+    "cab-negra-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-plateadas.webp"
+  },
+  "straps": {
+    "piel-negra-perforada-pespunte-blanco": "/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp"
+  },
+  "default": {
+    "head": "cab-acero-bnegro-agujas-plateadas",
+    "strap": "piel-negra-perforada-pespunte-blanco"
+  },
+  "alineado": {
+    "nota": "Las cabezas originales (assets/heads/) venian de generaciones distintas: hasta 13 px de desvio y 6,6% de diferencia de tamano de caja. Se han alineado TODAS a la geometria de la cabeza de referencia, que es la fotografiada con esta correa. Solo se ha movido y escalado la imagen entera; el dibujo no se ha tocado y los originales siguen en assets/heads/.",
+    "referencia": "cab-acero-bnegro-agujas-plateadas",
+    "geometria": {
+      "centro_x": 624.5,
+      "centro_y": 561.5,
+      "diametro_caja": 741
+    },
+    "herramienta": "herramientas/alinear_cabezas.py"
+  }
+}
