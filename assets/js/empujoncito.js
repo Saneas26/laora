@@ -42,6 +42,10 @@
     var distancia = Math.max(38, Math.min(64, ancho * 0.18));
     var duracion = 900, inicio = null;
     var snapPrevio = pista.style.scrollSnapType;
+    /* De dónde sale y a dónde vuelve. NO se da por hecho que sea el cero:
+       las tiras de la colección arrancan en 20 px por su propio relleno,
+       y devolverlas a cero les movía el sitio. */
+    var base = pista.scrollLeft;
 
     pista.dataset.empujando = '1';
     pista.style.scrollSnapType = 'none';
@@ -50,12 +54,12 @@
       if (inicio === null) inicio = ahora;
       var p = (ahora - inicio) / duracion;
       if (p >= 1) {
-        pista.scrollLeft = 0;
+        pista.scrollLeft = base;
         pista.style.scrollSnapType = snapPrevio;
         delete pista.dataset.empujando;
         return;
       }
-      pista.scrollLeft = distancia * Math.sin(Math.PI * p);
+      pista.scrollLeft = base + distancia * Math.sin(Math.PI * p);
       window.requestAnimationFrame(paso);
     }
     window.requestAnimationFrame(paso);
@@ -72,8 +76,9 @@
       for (var i = 0; i < entradas.length; i++) {
         if (!entradas[i].isIntersecting) continue;
         vigia.disconnect();
+        /* Quien dice si el cliente la ha tocado es el oyente de arriba, no
+           el `scrollLeft`: las tiras de la colección no empiezan en cero. */
         if (gastado || tocado) return;
-        if (pista.scrollLeft > 4) return;
         if (pista.scrollWidth <= pista.clientWidth + 8) return;
         gastado = true;
         window.setTimeout(function () { if (!tocado) empuja(pista); }, 420);
