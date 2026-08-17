@@ -85,8 +85,6 @@
           <span class="cv2-chip">LO-03 · Cronógrafo</span>
         </div>
         <h1>Lunar</h1>
-        <p class="pv-precio" data-pv-precio>189,90 €</p>
-        <p class="pv-imp">Impuestos incluidos.</p>
         <p class="pv-desc">Nuestro homenaje al <b>Moonwatch</b>. Cronógrafo de tacto mecánico:
           el segundero arranca al instante, barre la esfera y vuelve a cero de golpe. Elige
           la caja, la esfera y las agujas, y móntalo a tu gusto al precio honesto.</p>
@@ -116,8 +114,13 @@
           <div class="pv-opciones" data-pv="correa"></div>
         </div>
 
-        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+      </div>
 
+      <!-- El pie de compra: fijo bajo las elecciones hasta la Ficha Técnica -->
+      <div class="pv-pie" data-pv-pie>
+        <p class="pv-precio" data-pv-precio>189,90 €</p>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
         <div class="pv-confianza">
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
@@ -223,8 +226,11 @@
   };
   var CORREAS = {
     'piel-negra-perforada-pespunte-blanco': {
-      nombre: 'Piel Perforada', coste: 6.69, cierre: 'Hebilla de pinza',
-      tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla de pinza' }
+      nombre: 'Piel Perforada', coste: 6.69, cierre: 'Hebilla de pinza', color: '#1A1A1A',
+      tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla de pinza' },
+    'brazalete-acero-316l-cinco-columnas': {
+      nombre: 'Brazalete de Acero', coste: 19.69, cierre: 'Cierre desplegable', color: '#C9CBCC',
+      tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con cierre desplegable' }
   };
 
   /* Las combinaciones que EXISTEN: cada una, su cabeza del manifiesto. */
@@ -246,6 +252,17 @@
 
   var e = { caja: 'acero-bnegro', esfera: 'negra', agujas: 'plateadas',
             correa: 'piel-negra-perforada-pespunte-blanco' };
+
+  /* Qué correa vale con qué cabeza: sale del manifiesto
+     (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
+     la piel perforada no se ofrece con el bisel azul). */
+  function correaVale(clave, cabeza) {
+    if (!M) return true;
+    var r = M.straps[clave];
+    var ok = (r.cabezasPermitidas || []).some(function (p) { return cabeza.indexOf(p) === 0; });
+    var no = (r.cabezasExcluidas || []).some(function (p) { return cabeza.indexOf(p) === 0; });
+    return ok && !no;
+  }
   var M = null;                       // el manifiesto: rutas de las capas
 
   var $ = function (s) { return document.querySelector(s); };
@@ -311,20 +328,26 @@
   }
 
   function normaliza() {
-    if (existe()) return;
-    var k = Object.keys(CATALOGO).find(function (x) {
-      return x.indexOf(e.caja + '|' + e.esfera + '|') === 0;
-    }) || Object.keys(CATALOGO).find(function (x) {
-      return x.indexOf(e.caja + '|') === 0;
-    });
-    if (k) { var p = k.split('|'); e.caja = p[0]; e.esfera = p[1]; e.agujas = p[2]; }
+    if (!existe()) {
+      var k = Object.keys(CATALOGO).find(function (x) {
+        return x.indexOf(e.caja + '|' + e.esfera + '|') === 0;
+      }) || Object.keys(CATALOGO).find(function (x) {
+        return x.indexOf(e.caja + '|') === 0;
+      });
+      if (k) { var p = k.split('|'); e.caja = p[0]; e.esfera = p[1]; e.agujas = p[2]; }
+    }
+    var cabeza = CATALOGO[clave()];
+    if (cabeza && !correaVale(e.correa, cabeza)) {
+      var otra = Object.keys(CORREAS).find(function (c) { return correaVale(c, cabeza); });
+      if (otra) e.correa = otra;
+    }
   }
 
   function pinta() {
     if (!M) return;
     var cabeza = CATALOGO[clave()];
     $('[data-pv-cabeza-img]').src = M.heads[cabeza];
-    $('[data-pv-correa-img]').src = M.straps[e.correa];
+    $('[data-pv-correa-img]').src = M.straps[e.correa].src;
     $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
       ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase();
 
@@ -339,7 +362,7 @@
       return Object.keys(CATALOGO).some(function (x) { return x.indexOf(e.caja + '|' + k + '|') === 0; });
     });
     botones('agujas', AGUJAS, function (k) { return existe(null, null, k); });
-    botones('correa', CORREAS, function () { return true; });
+    botones('correa', CORREAS, function (k) { return correaVale(k, CATALOGO[clave()]); });
 
     $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
       ' Cristal mineral y tapa trasera roscada con grabado lunar.';
@@ -370,7 +393,7 @@
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
   fetch('/assets/img/lunar-config/manifest.json?v=1')
     .then(function (r) { return r.json(); })
-    .then(function (m) { M = m; pinta(); });
+    .then(function (m) { M = m; normaliza(); pinta(); });
 })();
 </script>
 <script src="/assets/js/telemetria.js" defer></script>
