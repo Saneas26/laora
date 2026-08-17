@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Configura tu laOra Lunar: elige caja, esfera y agujas y míralo montado al instante.">
+<meta name="description" content="laOra Lunar: nuestro homenaje al Moonwatch con cronógrafo mecacuarzo de tacto mecánico y venta al precio honesto. Configura caja, esfera y agujas.">
 <meta property="og:title" content="Lunar · laOra">
-<meta property="og:description" content="Configura tu laOra Lunar: elige caja, esfera y agujas y míralo montado al instante.">
+<meta property="og:description" content="laOra Lunar: nuestro homenaje al Moonwatch con cronógrafo mecacuarzo de tacto mecánico y venta al precio honesto. Configura caja, esfera y agujas.">
 <meta property="og:url" content="https://laora.es/lunar.html">
 <meta property="og:image" content="https://laora.es/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
 <meta property="og:locale" content="es_ES">
@@ -16,47 +16,27 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- CONFIGURADOR LUNAR 2026 (aprobado por Óscar, 17/08/2026).
-     Estructura nueva: el paquete de ChatGPT (ENTREGA-CLAUDE) manda.
-     manifest.json es la ÚNICA fuente de verdad — de él salen las
-     cabezas, la correa y la selección por defecto. Las capas se apilan
-     fondo #EAE8E8 → correa → cabeza, con object-fit:contain y sin
-     ninguna transformación por variante: cambiar de opción es cambiar
-     el src. Las cabezas van previamente alineadas a la geometría de
-     cab-acero-bnegro-agujas-plateadas (herramientas/alinear_cabezas.py). -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- FICHA DE PRODUCTO 2026 (patrón Hamilton, el mismo del Trinchera) con
+     el CONFIGURADOR POR CAPAS del 17/08/2026: la foto ya no es una
+     imagen por combinación, sino fondo #EAE8E8 → correa → cabeza, y
+     cambiar de opción es cambiar el src de una capa.
+     El paquete de activos manda: /assets/img/lunar-config/manifest.json
+     es la ÚNICA fuente de las cabezas y las correas. Las cabezas van
+     alineadas a la geometría de cab-acero-bnegro-agujas-plateadas
+     (herramientas/alinear_cabezas.py), así que ninguna baila.
+     Motor de precio: el de la casa, SIN logo, como siempre el Lunar. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=43">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=7">
 <style>
-  .cfg{ max-width:1180px; margin:0 auto; padding:18px 20px 64px;
-        display:grid; gap:36px; grid-template-columns:1fr }
-  @media (min-width:900px){ .cfg{ grid-template-columns:1.05fr .95fr; align-items:start } }
-
-  /* Render del configurador: contenedor cuadrado y capas apiladas */
-  .lunar-preview{ position:relative; width:100%; aspect-ratio:1;
-                  overflow:hidden; background:#EAE8E8; border-radius:14px }
-  .lunar-preview > img{ position:absolute; inset:0; width:100%; height:100%;
+  /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
+     sobre el fondo de estudio, sin recortes ni transformaciones. */
+  .pv-hero.pv-capas{ background:#EAE8E8 }
+  .pv-hero img.pv-capa{ position:absolute; inset:0; width:100%; height:100%;
                         object-fit:contain; pointer-events:none }
-
-  .cfg h1{ margin:0 0 4px; font-size:30px; letter-spacing:.02em }
-  .cfg .sub{ margin:0 0 22px; color:#6B6B6B; font-size:15px }
-  .cfg-grupo{ margin-bottom:24px }
-  .cfg-grupo h2{ margin:0 0 10px; font-size:11px; letter-spacing:.2em;
-                 text-transform:uppercase; color:#6B6B6B; font-weight:700 }
-  .cfg-ops{ display:flex; flex-wrap:wrap; gap:10px }
-  .cfg-op{ appearance:none; background:#fff; border:1px solid #D8D6D2;
-           border-radius:10px; padding:10px 14px; font:inherit; font-size:14px;
-           color:#141414; cursor:pointer; display:inline-flex; align-items:center;
-           gap:9px; transition:border-color .15s, box-shadow .15s }
-  .cfg-op:hover{ border-color:#B9B6B1 }
-  .cfg-op[aria-pressed="true"]{ border-color:#141414; box-shadow:inset 0 0 0 1px #141414 }
-  .cfg-op i{ width:18px; height:18px; border-radius:50%;
-             border:1px solid rgba(0,0,0,.18); display:inline-block }
-  .cfg-ficha{ border-top:1px solid #D8D6D2; margin-top:26px; padding-top:16px }
-  .cfg-ficha strong{ display:block; font-size:19px }
-  .cfg-ficha span{ color:#6B6B6B; font-size:14px }
-  .cfg-aviso{ margin-top:18px; color:#6B6B6B; font-size:13px }
 </style>
 </head>
 <body><header class="site-header">
@@ -77,38 +57,85 @@
   </div>
 </header>
 
-<main>
-  <div class="cfg">
-    <div class="lunar-preview" id="escena">
-      <img id="capa-strap" alt="Correa del reloj" width="1254" height="1254"
-           src="/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp">
-      <img id="capa-head" alt="Caja, esfera y agujas del reloj" width="1254" height="1254"
-           src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
+<main class="cv2">
+
+  <div class="pv-cuerpo">
+
+    <!-- ============ LA GALERÍA ============ -->
+    <div class="pv-galeria">
+      <div class="pv-hero pv-capas">
+        <img class="pv-capa" data-pv-correa-img alt="Correa del Lunar"
+             src="/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp">
+        <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
+             src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
+        <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
+      </div>
+      <div class="pv-extras">
+        <figure><img src="/assets/img/lunar-config/catalogo/macro-esfera.webp" alt="Macro de la esfera y las subesferas del cronógrafo" loading="lazy"></figure>
+        <figure><img src="/assets/img/lunar-config/catalogo/en-muneca.webp" alt="El Lunar puesto en la muñeca" loading="lazy"></figure>
+        <figure><img src="/assets/img/lunar-config/catalogo/campana-astronauta.webp" alt="El Lunar en su mundo: un astronauta en la superficie lunar" loading="lazy"></figure>
+      </div>
     </div>
 
-    <div>
-      <h1>Lunar</h1>
-      <p class="sub" id="sub">Elige la caja, la esfera y las agujas.</p>
+    <!-- ============ LA COMPRA ============ -->
+    <aside class="pv-info">
+      <div>
+        <div class="pv-chips">
+          <span class="cv2-chip pv-chip-oro">Nuevo</span>
+          <span class="cv2-chip">LO-03 · Cronógrafo</span>
+        </div>
+        <h1>Lunar</h1>
+        <p class="pv-precio" data-pv-precio>189,90 €</p>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <p class="pv-desc">Nuestro homenaje al <b>Moonwatch</b>. Cronógrafo de tacto mecánico:
+          el segundero arranca al instante, barre la esfera y vuelve a cero de golpe. Elige
+          la caja, la esfera y las agujas, y móntalo a tu gusto al precio honesto.</p>
 
-      <div class="cfg-grupo">
-        <h2>Caja y esfera</h2>
-        <div class="cfg-ops" id="cabezas"></div>
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Movimiento <b data-pv-cal>Cal. LO_MQ326</b></p>
+          <p class="pv-fijo">Mecacuarzo japonés · cronógrafo de tacto mecánico</p>
+        </div>
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Caja</p>
+          <div class="pv-opciones" data-pv="caja"></div>
+        </div>
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Esfera</p>
+          <div class="pv-opciones" data-pv="esfera"></div>
+        </div>
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Agujas</p>
+          <div class="pv-opciones" data-pv="agujas"></div>
+        </div>
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Correa <b data-pv-cierre>Hebilla de pinza</b></p>
+          <div class="pv-opciones" data-pv="correa"></div>
+        </div>
+
+        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+
+        <div class="pv-confianza">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
+        </div>
       </div>
+    </aside>
 
-      <div class="cfg-grupo">
-        <h2>Correa</h2>
-        <div class="cfg-ops" id="correas"></div>
-      </div>
-
-      <div class="cfg-ficha">
-        <strong id="seleccion">—</strong>
-        <span id="detalle"></span>
-      </div>
-
-      <p class="cfg-aviso">Las imágenes son montajes de estudio de las piezas reales;
-        pueden contener errores de diseño.</p>
-    </div>
   </div>
+
+  <!-- ============ LA FICHA TÉCNICA ============ -->
+  <section class="pv-tecnica">
+    <h2>Ficha Técnica</h2>
+    <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
+    <details><summary>Movimiento</summary><p data-pv-tec="mov"></p></details>
+    <details><summary>Esfera y agujas</summary><p data-pv-tec="esf"></p></details>
+    <details><summary>Resistencia al agua</summary><p data-pv-tec="agua"></p></details>
+  </section>
+
 </main>
 
 <footer>
@@ -155,90 +182,195 @@
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=1"></script>
 <script>
-(function(){
-  var MANIFIESTO = '/assets/img/lunar-config/manifest.json?v=1';
-  var M = null, sel = { head:null, strap:null };
+(function () {
+  'use strict';
 
-  // Nombres de cara al cliente. La clave la manda el manifiesto; esto
-  // solo la traduce a castellano llano para el botón.
-  var CAJA = {
-    'acero-bnegro': 'Acero · bisel negro',
-    'acero-bazul' : 'Acero · bisel azul',
-    'negra-bnegro': 'Negra · bisel negro'
+  /* ---------- EL MATERIAL ---------- */
+  var MOV = {
+    cal: 'LO_MQ326', coste: 27.59, nombre: 'Mecacuarzo Japonés',
+    tec: "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años."
   };
-  var ESFERA = {
-    'esfblanca': 'esfera blanca', 'esf26': 'esfera negra y dorada',
-    'esf27': 'esfera verde', 'esf44': 'esfera racing'
+  /* Cajas del proveedor del 16/08 (anuncio 1005007892634303). El pack
+     trae caja + esfera + agujas montadas; cambiar el juego de agujas
+     obliga a comprarlo suelto, y la caja negra se monta pieza a pieza. */
+  var PACK = 34.59, JUEGO_AGUJAS = 4.09, CAJA_NEGRA = 29.59 + 7.69 + 4.09;
+
+  var CAJAS = {
+    'acero-bnegro': { nombre: 'Acero · bisel negro', color: '#C9CBCC',
+      tec: 'Caja de acero inoxidable 316L de 39,7 mm con bisel taquimétrico negro, corona y pulsadores de acero. Entre asas 20 mm.' },
+    'acero-bazul':  { nombre: 'Acero · bisel azul',  color: '#1F3E77',
+      tec: 'Caja de acero inoxidable 316L de 39,7 mm con bisel taquimétrico azul, corona y pulsadores de acero. Entre asas 20 mm.' },
+    'negra-bnegro': { nombre: 'Negra · bisel negro', color: '#26282A',
+      tec: 'Caja de acero inoxidable 316L de 39,7 mm con recubrimiento negro tipo PVD y bisel taquimétrico negro, corona y pulsadores en negro. Entre asas 20 mm.' }
   };
-  var AGUJA = {
-    'plateadas':'agujas plateadas', 'naranjas':'agujas naranjas',
-    'azules':'agujas azules', 'doradas':'agujas doradas'
+  var ESFERAS = {
+    'negra':       { nombre: 'Negra',           color: '#131313',
+      tec: 'esfera negra de cronógrafo con tres contadores, índices aplicados y ventana de fecha' },
+    'blanca-azul': { nombre: 'Blanca y azul',   color: '#F2F2F0',
+      tec: 'esfera blanca con los tres contadores en azul, índices aplicados con inserto azul y ventana de fecha' },
+    'racing':      { nombre: 'Racing',          color: '#E8802F',
+      tec: 'esfera negra tipo racing con minutería blanca y tramos naranjas, tres contadores y ventana de fecha' },
+    'negra-dorada':{ nombre: 'Negra y dorada',  color: '#C6A867',
+      tec: 'esfera negra con índices dorados, tres contadores y ventana de fecha' },
+    'verde':       { nombre: 'Verde',           color: '#2E6B4F',
+      tec: 'esfera verde con tres contadores, índices aplicados y ventana de fecha' }
   };
-  var COLOR = {
-    'acero-bnegro':'#C9CBCC', 'acero-bazul':'#1F3E77', 'negra-bnegro':'#26282A',
-    'plateadas':'#D7D9DA','naranjas':'#EF7C22','azules':'#316BB8','doradas':'#CBAE72',
-    'piel':'#1A1A1A'
+  var AGUJAS = {
+    'plateadas': { nombre: 'Plateadas', color: '#D7D9DA' },
+    'naranjas':  { nombre: 'Naranjas',  color: '#EF7C22' },
+    'azules':    { nombre: 'Azules',    color: '#316BB8' },
+    'doradas':   { nombre: 'Doradas',   color: '#CBAE72' }
+  };
+  var CORREAS = {
+    'piel-negra-perforada-pespunte-blanco': {
+      nombre: 'Piel Perforada', coste: 6.69, cierre: 'Hebilla de pinza',
+      tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla de pinza' }
   };
 
-  function partes(clave){
-    var caja = clave.indexOf('acero-bazul') > -1 ? 'acero-bazul'
-             : clave.indexOf('negra-bnegro') > -1 ? 'negra-bnegro' : 'acero-bnegro';
-    var esfera = '';
-    for (var k in ESFERA) if (clave.indexOf(k) > -1) esfera = ESFERA[k];
-    var aguja = '';
-    for (var a in AGUJA) if (clave.indexOf('agujas-'+a) > -1) aguja = AGUJA[a];
-    return { caja:caja, esfera:esfera, aguja:aguja };
+  /* Las combinaciones que EXISTEN: cada una, su cabeza del manifiesto. */
+  var CATALOGO = {
+    'acero-bnegro|negra|plateadas'      : 'cab-acero-bnegro-agujas-plateadas',
+    'acero-bnegro|negra|naranjas'       : 'cab-acero-bnegro-agujas-naranjas',
+    'acero-bnegro|negra|azules'         : 'cab-acero-bnegro-agujas-azules',
+    'acero-bnegro|negra|doradas'        : 'cab-acero-bnegro-agujas-doradas',
+    'acero-bnegro|racing|naranjas'      : 'cab-acero-bnegro-esf44-racing-naranja',
+    'acero-bnegro|negra-dorada|doradas' : 'cab-acero-bnegro-esf26-negra-dorada',
+    'acero-bnegro|verde|plateadas'      : 'cab-acero-bnegro-esf27-verde',
+    'acero-bazul|blanca-azul|plateadas' : 'cab-acero-bazul-esfblanca-agujas-plateadas',
+    'acero-bazul|blanca-azul|azules'    : 'cab-acero-bazul-esfblanca-agujas-azules',
+    'negra-bnegro|negra|plateadas'      : 'cab-negra-bnegro-agujas-plateadas',
+    'negra-bnegro|negra|naranjas'       : 'cab-negra-bnegro-agujas-naranjas',
+    'negra-bnegro|negra|azules'         : 'cab-negra-bnegro-agujas-azules',
+    'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas'
+  };
+
+  var e = { caja: 'acero-bnegro', esfera: 'negra', agujas: 'plateadas',
+            correa: 'piel-negra-perforada-pespunte-blanco' };
+  var M = null;                       // el manifiesto: rutas de las capas
+
+  var $ = function (s) { return document.querySelector(s); };
+  var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var clave = function (c, es, a) { return (c || e.caja) + '|' + (es || e.esfera) + '|' + (a || e.agujas); };
+  var existe = function (c, es, a) { return !!CATALOGO[clave(c, es, a)]; };
+
+  function referencia() {
+    return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas;
   }
 
-  function etiqueta(clave){
-    var p = partes(clave);
-    var trozos = [CAJA[p.caja]];
-    if (p.esfera) trozos.push(p.esfera);
-    if (p.aguja)  trozos.push(p.aguja);
-    return trozos.join(' · ');
+  /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
+  var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
+  function eu(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
+  function redondea(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return (p - bajo) <= (bajo + 10 - p) ? bajo : bajo + 10;
+  }
+  function sube990(p) {
+    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
+    return bajo >= p - 1e-9 ? bajo : bajo + 10;
+  }
+  function sueloPvp(cn) {
+    var queda = 1 - IRPF - SS;
+    var porEuros = (50 / queda + cn) * (1 + IVA);
+    var margen = queda / (1 + IVA) - 0.15;
+    var porciento = margen > 0 ? queda * cn / margen : 0;
+    return sube990(Math.max(porEuros, porciento));
+  }
+  function pvpBase(c) {
+    var neto = c + 9 / 1.21 + (MOV.coste + 19) * 0.05;
+    return Math.max(redondea(c * MULT), sueloPvp(neto));
+  }
+  /* Coste de la cabeza: el pack viene montado con SUS agujas; cambiarlas
+     obliga a comprar el juego suelto, y la caja negra se arma por piezas. */
+  function costeCabeza() {
+    if (e.caja === 'negra-bnegro') return CAJA_NEGRA;
+    var montadas = { 'racing': 'naranjas', 'negra-dorada': 'doradas',
+                     'verde': 'plateadas', 'blanca-azul': 'plateadas',
+                     'negra': 'plateadas' };
+    return PACK + (montadas[e.esfera] === e.agujas ? 0 : JUEGO_AGUJAS);
+  }
+  function precio() {
+    return pvpBase(MOV.coste + costeCabeza() + CORREAS[e.correa].coste);
   }
 
-  function nombreCorrea(clave){
-    return clave.replace(/-/g, ' ').replace(/^piel/, 'Piel');
-  }
-
-  function pinta(){
-    document.getElementById('capa-strap').src = M.straps[sel.strap];
-    document.getElementById('capa-head').src  = M.heads[sel.head];
-    var p = partes(sel.head);
-    document.getElementById('seleccion').textContent = 'Lunar · ' + CAJA[p.caja];
-    document.getElementById('detalle').textContent =
-      [p.esfera || 'esfera negra', p.aguja, nombreCorrea(sel.strap).toLowerCase()]
-        .filter(Boolean).join(' · ');
-
-    [['cabezas', M.heads, 'head', etiqueta, function(k){ return COLOR[partes(k).caja]; }],
-     ['correas', M.straps, 'strap', nombreCorrea, function(){ return COLOR.piel; }]
-    ].forEach(function(fila){
-      var cont = document.getElementById(fila[0]);
-      cont.innerHTML = '';
-      Object.keys(fila[1]).forEach(function(clave){
-        var b = document.createElement('button');
-        b.className = 'cfg-op';
-        b.type = 'button';
-        b.innerHTML = '<i style="background:' + fila[4](clave) + '"></i>' + fila[3](clave);
-        b.setAttribute('aria-pressed', String(sel[fila[2]] === clave));
-        b.addEventListener('click', function(){ sel[fila[2]] = clave; pinta(); });
-        cont.appendChild(b);
-      });
+  /* ---------- pintar ---------- */
+  function botones(grupo, mapa, valido) {
+    var caja = $('[data-pv="' + grupo + '"]');
+    caja.innerHTML = '';
+    Object.keys(mapa).forEach(function (k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.dataset.v = k;
+      b.innerHTML = mapa[k].color
+        ? '<i class="pv-punto" style="background:' + mapa[k].color + '"></i>' + mapa[k].nombre
+        : mapa[k].nombre;
+      b.setAttribute('aria-pressed', String(e[grupo] === k));
+      if (!valido(k)) b.disabled = true;      // lo imposible, tachado
+      b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
+      caja.appendChild(b);
     });
   }
 
-  fetch(MANIFIESTO).then(function(r){ return r.json(); }).then(function(m){
-    M = m;
-    sel.head = m.default.head;
-    sel.strap = m.default.strap;
-    document.getElementById('escena').style.background = m.canvas.background;
-    document.getElementById('sub').textContent =
-      Object.keys(m.heads).length + ' combinaciones de caja, esfera y agujas.';
-    pinta();
-  }).catch(function(e){
-    document.getElementById('sub').textContent = 'No se pudo cargar el configurador.';
+  function normaliza() {
+    if (existe()) return;
+    var k = Object.keys(CATALOGO).find(function (x) {
+      return x.indexOf(e.caja + '|' + e.esfera + '|') === 0;
+    }) || Object.keys(CATALOGO).find(function (x) {
+      return x.indexOf(e.caja + '|') === 0;
+    });
+    if (k) { var p = k.split('|'); e.caja = p[0]; e.esfera = p[1]; e.agujas = p[2]; }
+  }
+
+  function pinta() {
+    if (!M) return;
+    var cabeza = CATALOGO[clave()];
+    $('[data-pv-cabeza-img]').src = M.heads[cabeza];
+    $('[data-pv-correa-img]').src = M.straps[e.correa];
+    $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
+      ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase();
+
+    $('[data-pv-precio]').textContent = eu(precio());
+    $('[data-pv-cal]').textContent = 'Cal. ' + MOV.cal;
+    $('[data-pv-cierre]').textContent = CORREAS[e.correa].cierre;
+
+    botones('caja', CAJAS, function (k) {
+      return Object.keys(CATALOGO).some(function (x) { return x.indexOf(k + '|') === 0; });
+    });
+    botones('esfera', ESFERAS, function (k) {
+      return Object.keys(CATALOGO).some(function (x) { return x.indexOf(e.caja + '|' + k + '|') === 0; });
+    });
+    botones('agujas', AGUJAS, function (k) { return existe(null, null, k); });
+    botones('correa', CORREAS, function () { return true; });
+
+    $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
+      ' Cristal mineral y tapa trasera roscada con grabado lunar.';
+    $('[data-pv-tec="mov"]').textContent = MOV.tec;
+    $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
+      ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
+      CORREAS[e.correa].tec + '.';
+    $('[data-pv-tec="agua"]').textContent =
+      '10 ATM (100 metros): vale para nadar y ducharse, no para bucear con botella. ' +
+      'La corona y los pulsadores no deben accionarse dentro del agua.';
+  }
+
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest('[data-pv-comprar]')) return;
+    if (typeof laoraCarritoAnadir !== 'function') return;
+    laoraCarritoAnadir({
+      ref: referencia(),
+      nombre: 'Lunar ' + ESFERAS[e.esfera].nombre,
+      detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
+               ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' · ' + MOV.nombre,
+      correa: CORREAS[e.correa].nombre,
+      precio: precio(),
+      foto: $('[data-pv-cabeza-img]').src
+    });
+    window.location.href = '/carrito.html';
   });
+
+  /* El manifiesto manda: de él salen las rutas de todas las capas. */
+  fetch('/assets/img/lunar-config/manifest.json?v=1')
+    .then(function (r) { return r.json(); })
+    .then(function (m) { M = m; pinta(); });
 })();
 </script>
 <script src="/assets/js/telemetria.js" defer></script>
