@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=2">
-<link rel="stylesheet" href="/assets/css/lunarv2.css?v=51">
+<link rel="stylesheet" href="/assets/css/lunarv2.css?v=52">
 </head>
 <body>
 <header class="site-header">
@@ -110,20 +110,19 @@
     </div>
   </section>
 
-  <section class="value-sequence" aria-labelledby="value-sequence-title" data-value-sequence>
-    <div class="value-sequence-sticky">
-      <img class="value-sequence-image" src="/assets/img/lunar-v2/acto3-relojero-esencial.png" alt="Relojero apartando del Cero Cero los costes que no mejoran el reloj">
-      <div class="value-sequence-veil" aria-hidden="true"></div>
-      <div class="value-sequence-copy">
-        <p class="value-sequence-kicker">PORQUE…</p>
-        <h2 id="value-sequence-title"><span class="value-sequence-lead">¿Y qué tal si hacemos buenos relojes</span><br><em>quitando todo lo que no lo mejora?</em></h2>
-      </div>
-      <div class="value-sequence-costs" aria-label="Costes que laOra elimina">
-        <p class="value-cost left one" data-value-cost="1"><span>←</span> Intermediarios</p>
-        <p class="value-cost right two" data-value-cost="2">Comerciales <span>→</span></p>
-        <p class="value-cost left three" data-value-cost="3"><span>←</span> Publicidades millonarias</p>
-        <p class="value-cost right four" data-value-cost="4">Embalajes carísimos <span>→</span></p>
-      </div>
+  <!-- Acto 3. Era un tramo de scroll de cinco pantallas que se quedaba
+       pegado y sacaba los cuatro costes de uno en uno. Óscar lo retira el
+       11/08/2026: sección normal, sin animación y sin pausa forzada.
+
+       Los cuatro costes ya no son párrafos: vienen tachados dentro de la
+       propia imagen. Como ahí no los lee un lector de pantalla, van
+       escritos en el `alt`. -->
+  <section class="value-sequence" aria-labelledby="value-sequence-title">
+    <img class="value-sequence-image" src="/assets/img/lunar-v2/acto3-sin-costes.webp" alt="Un relojero aparta con las manos cuatro costes tachados en amarillo —intermediarios, comerciales, promociones millonarias y embalajes carísimos— y deja delante el reloj" loading="lazy" decoding="async" width="1672" height="941">
+    <div class="value-sequence-veil" aria-hidden="true"></div>
+    <div class="value-sequence-copy">
+      <p class="value-sequence-kicker">PORQUE…</p>
+      <h2 id="value-sequence-title"><span class="value-sequence-lead">¿Y qué tal si hacemos buenos relojes</span><br><em>quitando todo lo que no lo mejora?</em></h2>
     </div>
   </section>
 
@@ -359,6 +358,6 @@
 
 <script type="application/json" data-comparaciones>{"lunar": {"pestana": "SPEEDMASTER → LUNAR", "titulo": "El cronógrafo lunar", "intro": "Del canal oficial al mercado irregular: cinco rutas que pueden parecer la misma en una foto y no ofrecen lo mismo.", "nuestro": "Lunar", "filas": [["01 · Boutique oficial", "Omega Speedmaster Moonwatch", "7.700 €", 7700, 7700, "Nuevo, documentado y con garantía oficial.", "regular"], ["02 · Subasta", "Catawiki y similares", "≈ 5.800 € + gastos", 5800, 5800, "Usado. La caja, los papeles y el estado dependen del lote.", "regular"], ["03 · Gris o usado", "Chrono24", "4.400–6.300 €", 4400, 6300, "Rango habitual. La autenticidad y el conjunto cambian el valor.", "regular"], ["04 · Piezas no originales", "Marketplaces generalistas", "650–1.250 €", 650, 1250, "Reacondicionados o con componentes de procedencia no acreditada.", "irregular"], ["05 · Falsificación", "«Superclones»", "600–1.650 €", 600, 1650, "Marca suplantada, origen incierto y sin garantía legítima.", "irregular"]], "alternativas": [["Bulova Lunar Pilot", "549–659 €"], ["Seiko Prospex Speedtimer", "646–680 €"], ["Tissot PR516 Chronograph", "545–625 €"]], "desde": 219.9}, "bitacora": {"pestana": "NAUTILUS → BITÁCORA", "titulo": "El deportivo integrado", "intro": "Del canal oficial a la falsificación: cinco rutas con precios, riesgos y garantías completamente distintos.", "nuestro": "Bitácora", "filas": [["01 · Boutique oficial", "Patek Philippe Nautilus", "≈ 70.000 €", 70000, 70000, "Precio de referencia y listas de espera interminables.", "regular"], ["02 · Subasta", "Casas especializadas", "Muy variable", null, null, "Mandan la referencia, el material, el estado y la documentación.", "regular"], ["03 · Gris o usado", "Chrono24", "105.000–180.000 €", 105000, 180000, "El mercado secundario puede superar ampliamente el precio oficial.", "regular"], ["04 · Piezas no originales", "Marketplaces generalistas", "650–1.500 €", 650, 1500, "Montajes con componentes de procedencia no acreditada.", "irregular"], ["05 · Falsificación", "«Superclones»", "600–1.650 €", 600, 1650, "Marca suplantada, origen incierto y sin garantía legítima.", "irregular"]], "alternativas": [["Tissot PRX Powermatic 80", "≈ 750 €"], ["Citizen Tsuyosa", "≈ 350 €"]], "desde": 319.9}}</script>
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/lunarv2.js?v=9"></script>
+<script src="/assets/js/lunarv2.js?v=10"></script>
 </body>
 </html>
