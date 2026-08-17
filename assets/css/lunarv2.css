@@ -711,7 +711,12 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
      del ancho. La altura decide cuánto se recorta de los lados —a 130vw
      entra del 28 % al 72 %—, así que los rótulos quedan dentro con un poco
      de aire y todo lo lateral (el avión, el camión, el velero) se va. */
-  .value-sequence { height: clamp(440px, 130vw, 620px); }
+  /* `aspect-ratio: auto` NO es un adorno: sin él, el 16:9 de arriba mandaba
+     también aquí y, como la altura es fija, el navegador calculaba el ancho
+     a partir de ella —507 px de alto daban 901 px de ancho en un teléfono de
+     390—. La sección se salía de la pantalla, la portada se podía arrastrar
+     de lado y la foto se veía entera y encogida en vez de recortada. */
+  .value-sequence { aspect-ratio: auto; height: clamp(440px, 130vw, 620px); }
   .value-sequence-image { object-position: center center; }
   .value-sequence-copy { top: 24px; width: calc(100% - 28px); }
   .value-sequence-kicker { margin-bottom: 7px; font-size: 14px; letter-spacing: .13em; }
