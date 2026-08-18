@@ -48,6 +48,51 @@ def a_rgb(h, s, v):
     return out
 
 
+def hilo_blanco_a_azul():
+    """El pespunte de la goma AZUL: de blanco a azul.
+
+    Aquí el reparto es al revés que en la negra —la correa tiene color y
+    el hilo no—, así que el hilo se aísla por lo contrario: dentro de la
+    zona de la correa, lo poco saturado y muy luminoso. La zona de la
+    correa se acota quitando el fondo del estudio y la caja (el alfa de
+    la cabeza, con holgura).
+
+    Teñir un hilo BLANCO sí sale bien, al revés que teñir uno negro: el
+    blanco lleva toda la luz encima —torsión, brillos y sombras—, y el
+    tinte solo le pone color, como el teñido de verdad. Un hilo negro no
+    tiene esa luz y no hay nada que teñir.
+    """
+    from PIL import ImageFilter
+    MADRE_AZUL = 'masters-2026/lunar/capas/goma-azul-pespunte-blanco-madre-4k.png'
+    a = np.asarray(Image.open(MADRE_AZUL).convert('RGB')).astype(float) / 255.0
+    _, s_, v = a_hsv(a)
+
+    fondo = np.abs(a - a[8, 8]).max(axis=2) < 0.055
+    cab = np.asarray(Image.open('assets/img/lunar-config/heads/'
+                                'cab-acero-bazul-esfblanca-agujas-plateadas.webp')
+                     .convert('RGBA'))[:, :, 3] > 40
+    cab = np.asarray(Image.fromarray((cab * 255).astype('uint8'))
+                     .filter(ImageFilter.MaxFilter(21))
+                     .resize(a.shape[1::-1], Image.NEAREST)) > 128
+    correa = (~fondo) & (~cab)
+    hilo = correa & (s_ < 0.22) & (v > np.percentile(v[correa], 88))
+    print('hilo blanco aislado: %d px' % hilo.sum())
+
+    # el borde se difumina, o el tinte deja un halo blanco alrededor
+    peso = np.asarray(Image.fromarray((hilo * 255).astype('uint8'))
+                      .filter(ImageFilter.MaxFilter(5))
+                      .filter(ImageFilter.GaussianBlur(1.6))).astype(float) / 255.0
+    peso = np.clip(peso, 0, 1)[..., None]
+
+    # azul claro: se lee sobre el azul marino y rima con el reborde de
+    # la propia correa. Un azul más oscuro se confundiría con el fondo.
+    tinte = a_rgb(np.full_like(v, 205 / 360.0), np.full_like(v, 0.42), np.clip(v * 0.97, 0, 1))
+    out = a * (1 - peso) + tinte * peso
+    Image.fromarray((np.clip(out, 0, 1) * 255).astype('uint8')) \
+         .save('masters-2026/lunar/capas/goma-azul-pespunte-azul-madre-4k.png')
+    print('escrita goma-azul-pespunte-azul')
+
+
 def recolorea():
     a = np.asarray(Image.open(MADRE).convert('RGB')).astype(float) / 255.0
     h, s, v = a_hsv(a)
@@ -72,3 +117,4 @@ def recolorea():
 
 if __name__ == '__main__':
     recolorea()
+    hilo_blanco_a_azul()

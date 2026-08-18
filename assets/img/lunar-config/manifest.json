@@ -107,6 +107,15 @@
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/goma-azul-pespunte-blanco-madre-4k.png",
       "nota": "SOLO CON BISEL AZUL (orden de Oscar, 18/08). Imagen madre: la foto se genero con la cabeza de bisel negro, pero da igual porque la cabeza se monta encima; verificado fila a fila que la cabeza de bisel azul cubre la caja de la foto (es 3-8 px mas ancha en cada fila). El reborde azul claro que rodea la caja es el final curvo de la correa, no un resto."
+    },
+    "goma-azul-pespunte-azul": {
+      "src": "/assets/img/lunar-config/straps/goma-azul-pespunte-azul.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-bazul-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/goma-azul-pespunte-azul-madre-4k.png",
+      "nota": "Sale de la madre de pespunte blanco tinendo el hilo. Aqui el reparto es al reves que en la goma negra —la correa tiene color y el hilo no—, asi que el hilo se aisla por lo contrario: poco saturado y muy luminoso, dentro de la zona de la correa. Tenir un hilo BLANCO sale bien porque el blanco lleva toda la luz encima; un hilo negro no tendria nada que tenir. SOLO CON BISEL AZUL."
     }
   },
   "default": {
