@@ -278,18 +278,20 @@
     'brazalete-acero-316l-cinco-columnas': {
       coste: 19.69, cierre: 'Cierre desplegable',
       tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con cierre desplegable' },
-    /* Nato + piel: coste PROVISIONAL, Óscar no ha dado el del proveedor. */
-    'nato-piel-verde-militar': { coste: 9.99, cierre: 'Hebilla',
+    /* Nato + piel: 4,79 € (Óscar, 18/08). Ojo, es precio de OFERTA:
+       reverificar antes de comprar. Sale más barato que el nato a secas,
+       que está en 11,29 €. */
+    'nato-piel-verde-militar': { coste: 4.79, cierre: 'Hebilla',
       tec: 'nato de tejido verde militar con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-azul': { coste: 9.99, cierre: 'Hebilla',
+    'nato-piel-azul': { coste: 4.79, cierre: 'Hebilla',
       tec: 'nato de tejido azul con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-beige': { coste: 9.99, cierre: 'Hebilla',
+    'nato-piel-beige': { coste: 4.79, cierre: 'Hebilla',
       tec: 'nato de tejido beige con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-gris-claro': { coste: 9.99, cierre: 'Hebilla',
+    'nato-piel-gris-claro': { coste: 4.79, cierre: 'Hebilla',
       tec: 'nato de tejido gris claro con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-negro': { coste: 9.99, cierre: 'Hebilla',
+    'nato-piel-negro': { coste: 4.79, cierre: 'Hebilla',
       tec: 'nato de tejido negro con refuerzos y pasadores de piel negra, hebilla de acero' },
-    'nato-piel-negro-gris': { coste: 9.99, cierre: 'Hebilla',
+    'nato-piel-negro-gris': { coste: 4.79, cierre: 'Hebilla',
       tec: 'nato de tejido negro con franjas grises, refuerzos y pasadores de piel negra, hebilla de acero' },
     'brazalete-negro-pvd': {
       coste: 26.39, cierre: 'Cierre desplegable',
@@ -684,7 +686,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=26')
+  fetch('/assets/img/lunar-config/manifest.json?v=27')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
