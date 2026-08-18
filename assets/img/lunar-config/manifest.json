@@ -294,6 +294,16 @@
       "master4k": "masters-2026/lunar/capas/nato-piel-beige-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
       "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+    },
+    "nato-piel-marron": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-marron.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-marron-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
     }
   },
   "default": {

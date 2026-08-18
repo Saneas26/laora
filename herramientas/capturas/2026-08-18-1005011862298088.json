@@ -7,19 +7,31 @@
   "precio_visto_en_la_ficha": "5,18 € (varía con el ancho; reverificar antes de comprar)",
   "cierre": "hebilla de MARIPOSA plateada",
   "liberacion_rapida": "sí — una valoración menciona las barras de resorte de liberación rápida",
-  "anchos": ["18mm", "20mm", "22mm"],
+  "anchos": [
+    "18mm",
+    "20mm",
+    "22mm"
+  ],
   "ancho_que_necesitamos": "20 mm",
-  "colores": ["Blue", "Black", "Gray", "Brown", "Khaki"],
+  "colores": [
+    "Blue",
+    "Black",
+    "Gray",
+    "Brown",
+    "Khaki"
+  ],
   "correspondencia_con_nuestras_fotos": {
     "Brown": "topo",
     "Black": "antracita",
     "Gray": "gris",
     "Blue": "azul claro",
-    "Khaki": "beige"
+    "Khaki": "beige",
+    "(sexto color, entregado después)": "marrón"
   },
-  "dados_de_alta": "P-049 a P-053 (ALTA_2026_08_18C)",
+  "dados_de_alta": "P-049 a P-054 (ALTA_2026_08_18C)",
   "alertas": [
     "Es la familia que Óscar llama NATO + PIEL, en tejido de espiga con pespunte blanco. Sustituye a la de lona lisa, que fue un paso en falso y se retiró de la web.",
-    "El anuncio la describe como «tela vaquera y cuero»: el tejido lleva forro/canto de piel."
+    "El anuncio la describe como «tela vaquera y cuero»: el tejido lleva forro/canto de piel.",
+    "Óscar entregó un sexto color, marrón, después de los cinco primeros. Comprobar con qué variante del anuncio se corresponde antes de pedirlo."
   ]
 }

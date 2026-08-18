@@ -251,7 +251,8 @@ function ALTA_2026_08_18C() {
     ['Black', 'antracita'],
     ['Gray',  'gris'],
     ['Blue',  'azul claro'],
-    ['Khaki', 'beige']
+    ['Khaki', 'beige'],
+    ['Brown oscuro (6.º color, entregado despues)', 'marron']
   ];
   var filas = [], n = 49;
   colores.forEach(function (c) {
