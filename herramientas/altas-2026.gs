@@ -216,7 +216,7 @@ function ALTA_2026_08_18() {
  */
 function ALTA_2026_08_18B() {
   var LINK = 'https://es.aliexpress.com/item/1005012621893442.html';
-  var COMUN = 'Modelo HMYT · «correa de cuero y lona NATO» segun el anuncio: tejido con refuerzos y pasadores de piel · hebilla de pinza · pedir ancho 20 mm (el anuncio hace 20 y 22) · largo SIN declarar, preguntar al vendedor · unisex · 11,29 € el 18/08 (dato de Óscar) · en la web se publica como NATO, no como nato+piel';
+  var COMUN = 'Modelo HMYT · «correa de cuero y lona NATO» segun el anuncio: tejido con refuerzos y pasadores de piel · hebilla de pinza · pedir ancho 20 mm (el anuncio hace 20 y 22) · largo SIN declarar, preguntar al vendedor · unisex · 11,29 € el 18/08 (dato de Óscar) · en la web se publica como NATO + PIEL (Oscar intercambio los nombres el 19/08)';
 
   var colores = [
     ['Army Green', 'verde militar'],
@@ -229,8 +229,8 @@ function ALTA_2026_08_18B() {
   var filas = [], n = 43;
   colores.forEach(function (c) {
     filas.push(['P-0' + n, 'Correa', 'Lunar',
-      'Correa nato ' + c[1] + ' con refuerzos de piel, hebilla de pinza',
-      'Nato ' + c[1], c[0] + ' · 20 mm', 11.29, LINK, '', '', COMUN]);
+      'Correa nato ' + c[1] + ' con pasadores y refuerzos de piel, hebilla de pinza',
+      'Nato + piel ' + c[1], c[0] + ' · 20 mm', 11.29, LINK, '', '', COMUN]);
     n++;
   });
   altaPiezas_('ALTA_2026_08_18B', filas, new Date(2026, 7, 18));
@@ -244,7 +244,7 @@ function ALTA_2026_08_18B() {
  */
 function ALTA_2026_08_18C() {
   var LINK = 'https://es.aliexpress.com/item/1005011862298088.html';
-  var COMUN = '«Tela vaquera y cuero» segun el anuncio: tejido de espiga con canto de piel y pespunte blanco · hebilla de MARIPOSA plateada · liberacion rapida (barras de resorte, citado en una valoracion) · pedir ancho 20 mm (el anuncio hace 18, 20 y 22) · 5,48 € (dato de Óscar 18/08; la ficha mostraba 5,18 € segun ancho, reverificar) · 4,8★ sobre 44 valoraciones · en la web es la familia NATO + PIEL';
+  var COMUN = '«Tela vaquera y cuero» segun el anuncio: tejido de espiga con canto de piel y pespunte blanco · hebilla de MARIPOSA plateada · liberacion rapida (barras de resorte, citado en una valoracion) · pedir ancho 20 mm (el anuncio hace 18, 20 y 22) · 5,48 € (dato de Óscar 18/08; la ficha mostraba 5,18 € segun ancho, reverificar) · 4,8★ sobre 44 valoraciones · en la web es la familia NATO (Oscar intercambio los nombres el 19/08)';
 
   var colores = [
     ['Brown', 'topo'],
@@ -258,7 +258,7 @@ function ALTA_2026_08_18C() {
   colores.forEach(function (c) {
     filas.push(['P-0' + n, 'Correa', 'Lunar',
       'Correa tejido espiga ' + c[1] + ' con pespunte blanco y hebilla mariposa',
-      'Nato + piel ' + c[1], c[0] + ' · 20 mm', 5.48, LINK, '', '', COMUN]);
+      'Nato ' + c[1], c[0] + ' · 20 mm', 5.48, LINK, '', '', COMUN]);
     n++;
   });
   altaPiezas_('ALTA_2026_08_18C', filas, new Date(2026, 7, 18));
