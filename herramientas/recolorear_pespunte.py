@@ -67,7 +67,16 @@ def hilo_blanco_a_azul():
     a = np.asarray(Image.open(MADRE_AZUL).convert('RGB')).astype(float) / 255.0
     _, s_, v = a_hsv(a)
 
+    # El fondo del estudio es un gris claro… y el núcleo brillante de
+    # cada puntada blanca cae dentro de esa horquilla, así que entraba
+    # como «fondo» y se quedaba sin teñir: quedaban motas blancas dentro
+    # de cada puntada, invisibles con un tinte claro y escandalosas con
+    # uno oscuro. Se limpia con una apertura: las islas de fondo más
+    # finas que el hilo se borran y solo queda el fondo de verdad.
     fondo = np.abs(a - a[8, 8]).max(axis=2) < 0.055
+    fondo = np.asarray(Image.fromarray((fondo * 255).astype('uint8'))
+                       .filter(ImageFilter.MinFilter(21))
+                       .filter(ImageFilter.MaxFilter(21))) > 128
     cab = np.asarray(Image.open('assets/img/lunar-config/heads/'
                                 'cab-acero-bazul-esfblanca-agujas-plateadas.webp')
                      .convert('RGBA'))[:, :, 3] > 40
@@ -75,18 +84,24 @@ def hilo_blanco_a_azul():
                      .filter(ImageFilter.MaxFilter(21))
                      .resize(a.shape[1::-1], Image.NEAREST)) > 128
     correa = (~fondo) & (~cab)
-    hilo = correa & (s_ < 0.22) & (v > np.percentile(v[correa], 88))
+    # El umbral no puede quedarse corto: con un tinte oscuro, cualquier
+    # píxel del hilo que no entre en la máscara salta como una mota
+    # blanca dentro de la puntada. Se puede bajar sin miedo porque la
+    # correa es azul saturado y cae fuera por el filtro de saturación.
+    hilo = correa & (s_ < 0.30) & (v > np.percentile(v[correa], 72))
     print('hilo blanco aislado: %d px' % hilo.sum())
 
     # el borde se difumina, o el tinte deja un halo blanco alrededor
     peso = np.asarray(Image.fromarray((hilo * 255).astype('uint8'))
-                      .filter(ImageFilter.MaxFilter(5))
+                      .filter(ImageFilter.MaxFilter(9))
                       .filter(ImageFilter.GaussianBlur(1.6))).astype(float) / 255.0
     peso = np.clip(peso, 0, 1)[..., None]
 
-    # azul claro: se lee sobre el azul marino y rima con el reborde de
-    # la propia correa. Un azul más oscuro se confundiría con el fondo.
-    tinte = a_rgb(np.full_like(v, 205 / 360.0), np.full_like(v, 0.42), np.clip(v * 0.97, 0, 1))
+    # Azul OSCURO. Ojo: la primera versión de esta correa era azul
+    # marino y el hilo se tiñó de azul claro; Óscar la cambió por una
+    # azul claro, y entonces el hilo claro desaparecía. Manda la
+    # legibilidad: el pespunte contrasta con SU correa, no al revés.
+    tinte = a_rgb(np.full_like(v, 222 / 360.0), np.full_like(v, 0.78), np.clip(v * 0.52, 0, 1))
     out = a * (1 - peso) + tinte * peso
     Image.fromarray((np.clip(out, 0, 1) * 255).astype('uint8')) \
          .save('masters-2026/lunar/capas/goma-azul-pespunte-azul-madre-4k.png')
