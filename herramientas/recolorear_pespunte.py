@@ -140,7 +140,22 @@ def hilo_blanco_a_negro():
                      .filter(ImageFilter.MaxFilter(21))
                      .resize(a.shape[1::-1], Image.NEAREST)) > 128
     correa = (~fondo) & (~cab)
-    hilo = correa & (v > 0.72)
+
+    # La madre nueva (integrada, 18/08) tiene un charol mucho más
+    # brillante: sus reflejos llegan a 0,99 y ya no se separan del hilo
+    # por luz, como pasaba con la anterior. Lo que sí es fijo es DÓNDE
+    # va la costura: a un 11% y un 88% del ancho de la correa, fila a
+    # fila. Los reflejos viven en el centro y quedan fuera.
+    dentro = np.zeros_like(correa)
+    for y in np.flatnonzero(correa.any(axis=1)):
+        xs = np.flatnonzero(correa[y])
+        x0, x1 = xs.min(), xs.max()
+        ancho = x1 - x0
+        if ancho < 60:
+            continue
+        for a0, a1 in ((0.05, 0.20), (0.80, 0.95)):
+            dentro[y, int(x0 + ancho * a0):int(x0 + ancho * a1)] = True
+    hilo = correa & dentro & (v > 0.55)
     print('hilo crema aislado: %d px' % hilo.sum())
 
     peso = np.asarray(Image.fromarray((hilo * 255).astype('uint8'))
