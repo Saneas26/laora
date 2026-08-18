@@ -72,9 +72,12 @@
       "cabezasPermitidas": [
         "cab-acero-"
       ],
-      "cabezasExcluidas": [],
+      "cabezasExcluidas": [
+        "cab-acero-bnegro-esf27-verde",
+        "cab-negra-bnegro-esf27-verde"
+      ],
       "master4k": "masters-2026/lunar/capas/piel-italiana-azul-madre-4k.png",
-      "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto."
+      "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto. NO con la esfera VERDE (orden de Oscar, 18/08)."
     },
     "goma-negra-costura-verde": {
       "src": "/assets/img/lunar-config/straps/goma-negra-costura-verde.webp?v=1",
