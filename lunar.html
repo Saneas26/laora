@@ -291,6 +291,8 @@
       tec: 'tejido de espiga azul claro con pespunte blanco, hebilla mariposa de acero plateado' },
     'nato-piel-beige': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga beige con pespunte blanco, hebilla mariposa de acero plateado' },
+    'nato-piel-marron': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+      tec: 'tejido de espiga marrón con pespunte blanco, hebilla mariposa de acero plateado' },
     'brazalete-negro-pvd': {
       coste: 26.39, cierre: 'Hebilla desplegable',
       tec: 'brazalete de acero 316L con recubrimiento negro tipo PVD, tres eslabones y hebilla desplegable' },
@@ -373,7 +375,8 @@
       'antracita':  { nombre: 'Antracita',  color: '#3C3E40', correa: 'nato-piel-antracita' },
       'gris':       { nombre: 'Gris',       color: '#6E7175', correa: 'nato-piel-gris' },
       'azul-claro': { nombre: 'Azul claro', color: '#A9C9E6', correa: 'nato-piel-azul-claro' },
-      'beige':      { nombre: 'Beige',      color: '#CDBFA6', correa: 'nato-piel-beige' } } },
+      'beige':      { nombre: 'Beige',      color: '#CDBFA6', correa: 'nato-piel-beige' },
+      'marron':     { nombre: 'Marrón',     color: '#8A6A52', correa: 'nato-piel-marron' } } },
 
     /* El caucho negro se hace con tres costuras, y con una sola foto
        valen las tres: el hilo se tiñe (recolorear_pespunte.py). El azul
@@ -691,7 +694,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=30')
+  fetch('/assets/img/lunar-config/manifest.json?v=31')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
