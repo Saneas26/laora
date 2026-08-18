@@ -268,7 +268,11 @@
     'piel-italiana-marron': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'contraste',
       tec: 'piel de vaca genuina marrón con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
     'piel-italiana-azul':   { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'color',
-      tec: 'piel de vaca genuina azul con relieve de cocodrilo, hebilla de pinza y liberación rápida' }
+      tec: 'piel de vaca genuina azul con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
+    /* Caucho (P-019). Lo que cambia entre variantes es la COSTURA, así
+       que ahí es donde va la paleta del tipo. */
+    'goma-negra-costura-verde': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho negro con trama textil en cesta, costura verde de contraste y final curvo que abraza la caja, hebilla de pinza' }
   };
 
   /* Los seis tipos. `correa` apunta a la capa del manifiesto; sin ella
@@ -291,8 +295,13 @@
       'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
       'azul':          { nombre: 'Azul',          color: '#24406E' },
       'beige':         { nombre: 'Beige',         color: '#C8B79A' } } },
+    /* Del caucho, lo que se elige es el color de la COSTURA: el
+       proveedor lo hace en verde (P-019), naranja (P-020) y blanco
+       (P-025/026). De momento solo hay foto del verde. */
     'caucho': { nombre: 'Caucho', colores: {
-      'negro': { nombre: 'Negro', color: '#1C1D1F' } } }
+      'costura-verde':   { nombre: 'Costura verde',   color: '#2F8F3E', correa: 'goma-negra-costura-verde' },
+      'costura-naranja': { nombre: 'Costura naranja', color: '#EF7C22' },
+      'costura-blanca':  { nombre: 'Costura blanca',  color: '#F2EFE6' } } }
   };
 
   /* ---------- 6. EL PESPUNTE (solo con piel italiana) ---------- */
@@ -552,7 +561,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=7')
+  fetch('/assets/img/lunar-config/manifest.json?v=8')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
