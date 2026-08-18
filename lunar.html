@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=16">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=17">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -68,6 +68,8 @@
              src="/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp">
         <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
              src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
+        <img class="pv-capa pv-capa-tapa" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
+             src="/assets/img/lunar-config/casebacks/tapa-solida-acero.webp">
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
     </div>
@@ -117,6 +119,11 @@
         <div class="pv-grupo" data-pv-grupo="cierre">
           <p class="pv-rotulo">Cierre <b data-pv-cierre>Hebilla de pinza</b></p>
           <div class="pv-opciones" data-pv="cierre"></div>
+        </div>
+
+        <div class="pv-grupo" data-pv-grupo="tapa">
+          <p class="pv-rotulo">Tapa <b>Sin cambio de precio</b></p>
+          <div class="pv-opciones" data-pv="tapa"></div>
         </div>
 
       </div>
@@ -269,6 +276,16 @@
     'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' }
   };
 
+  /* ---------- 8. LA TAPA ROSCADA ----------
+     Las tres del proveedor, sólidas y sin cambio de precio. Al elegir
+     una, el visor la enseña; en cuanto se toca cualquier otro paso,
+     vuelve al reloj. También se alterna con un clic en la imagen. */
+  var TAPAS = {
+    'solida-acero':      { nombre: 'Lisa',      tec: 'lisa de acero cepillado' },
+    'lunar-color':       { nombre: 'Lunar',     tec: 'con la Tierra vista desde la Luna, a color, y la leyenda «Eyes on the stars»' },
+    'huella-astronauta': { nombre: 'La Huella', tec: 'con la huella del astronauta en el polvo lunar, grabada en relieve' }
+  };
+
   /* ---------- 7. EL CIERRE (solo con piel italiana) ----------
      Las cinco hebillas del proveedor. No se ven en la foto (la correa
      entra a sangre), así que ninguna necesita imagen propia. */
@@ -299,7 +316,8 @@
 
   var e = { caja: 'acero-bnegro', esfera: 'negra', agujas: 'plateadas',
             correa: 'piel-negra-perforada-pespunte-blanco',
-            pespunte: 'contraste', cierre: 'plata' };
+            pespunte: 'contraste', cierre: 'plata', tapa: 'solida-acero' };
+  var viendoTapa = false;
 
   /* Qué correa vale con qué cabeza: sale del manifiesto
      (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
@@ -320,7 +338,7 @@
 
   function referencia() {
     return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas +
-           (esItaliana() ? '-' + e.cierre : '');
+           (esItaliana() ? '-' + e.cierre : '') + '-' + e.tapa;
   }
 
   /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
@@ -375,7 +393,11 @@
         : mapa[k].nombre;
       b.setAttribute('aria-pressed', String(e[grupo] === k));
       if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
-      b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
+      b.addEventListener('click', function () {
+        e[grupo] = k;
+        viendoTapa = (grupo === 'tapa');   // el visor sigue al paso que se toca
+        normaliza(); pinta();
+      });
       caja.appendChild(b);
     });
   }
@@ -433,9 +455,14 @@
        tiene foto; el otro se tacha aunque el proveedor lo haga. */
     botones('pespunte', PESPUNTES, function (k) { return k === CORREAS[e.correa].pespunte; }, !esItaliana());
     botones('cierre', CIERRES, function () { return true; }, !esItaliana());
+    botones('tapa', TAPAS, function () { return true; });
+
+    $('[data-pv-tapa-img]').src = M.tapas[e.tapa].src;
+    $('[data-pv-tapa-img]').hidden = !viendoTapa;
+    $('[data-pv-tapa-img]').alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
 
     $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
-      ' Cristal mineral y tapa trasera roscada con grabado lunar.';
+      ' Cristal mineral y tapa trasera roscada y sólida, ' + TAPAS[e.tapa].tec + '.';
     $('[data-pv-tec="mov"]').textContent = MOV.tec;
     $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
       ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
@@ -454,7 +481,8 @@
       ref: referencia(),
       nombre: 'Lunar ' + ESFERAS[e.esfera].nombre,
       detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
-               ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' · ' + MOV.nombre,
+               ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' · tapa ' +
+               TAPAS[e.tapa].nombre.toLowerCase() + ' · ' + MOV.nombre,
       correa: CORREAS[e.correa].nombre + (esItaliana() ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
       precio: precio(),
       foto: $('[data-pv-cabeza-img]').src
@@ -462,8 +490,16 @@
     window.location.href = '/carrito.html';
   });
 
+  /* Un clic en el visor da la vuelta al reloj, para poder mirar la
+     tapa (o volver al frente) sin tener que cambiar nada. */
+  $('.pv-hero').addEventListener('click', function () {
+    if (!M) return;
+    viendoTapa = !viendoTapa;
+    pinta();
+  });
+
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=6')
+  fetch('/assets/img/lunar-config/manifest.json?v=7')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();

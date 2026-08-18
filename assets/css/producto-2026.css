@@ -264,3 +264,11 @@ main.cv2{ overflow:visible; overflow-x:clip }
   .pv-visor-fijo .pv-hero{position:static}
   .pv-visor-fijo>.pv-extras{margin-top:0}
 }
+
+/* ---------- 8. LA TAPA EN EL VISOR (Óscar, 18/08/2026) ----------
+   La tapa es una foto entera, con su propio fondo: va encima de la
+   correa y la cabeza y las tapa. El visor avisa de que se le puede dar
+   la vuelta con un clic. */
+.pv-hero img.pv-capa-tapa{z-index:2}
+.pv-hero img.pv-capa-tapa[hidden]{display:none}
+.pv-visor-fijo .pv-hero{cursor:pointer}
