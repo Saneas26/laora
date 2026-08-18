@@ -375,7 +375,13 @@
     'negra-bnegro|negra|plateadas'      : 'cab-negra-bnegro-agujas-plateadas',
     'negra-bnegro|negra|naranjas'       : 'cab-negra-bnegro-agujas-naranjas',
     'negra-bnegro|negra|azules'         : 'cab-negra-bnegro-agujas-azules',
-    'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas'
+    'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas',
+    /* La caja negra lleva las mismas esferas que la de acero (Óscar,
+       18/08). Estas tres cabezas se montaron trasplantando la esfera de
+       su gemela de acero: herramientas/trasplantar_esfera.py */
+    'negra-bnegro|racing|naranjas'      : 'cab-negra-bnegro-esf44-racing-naranja',
+    'negra-bnegro|negra-dorada|doradas' : 'cab-negra-bnegro-esf26-negra-dorada',
+    'negra-bnegro|verde|plateadas'      : 'cab-negra-bnegro-esf27-verde'
   };
 
   var e = { caja: 'acero-bnegro', tapa: null, esfera: 'negra', agujas: 'plateadas',
@@ -600,7 +606,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=11')
+  fetch('/assets/img/lunar-config/manifest.json?v=12')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();

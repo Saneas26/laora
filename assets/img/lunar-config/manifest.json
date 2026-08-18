@@ -24,7 +24,10 @@
     "cab-negra-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-azules.webp",
     "cab-negra-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-doradas.webp",
     "cab-negra-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-naranjas.webp",
-    "cab-negra-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-plateadas.webp"
+    "cab-negra-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-plateadas.webp",
+    "cab-negra-bnegro-esf44-racing-naranja": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf44-racing-naranja.webp?v=1",
+    "cab-negra-bnegro-esf26-negra-dorada": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf26-negra-dorada.webp?v=1",
+    "cab-negra-bnegro-esf27-verde": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf27-verde.webp?v=1"
   },
   "straps": {
     "piel-negra-perforada-pespunte-blanco": {
@@ -144,5 +147,6 @@
       "src": "/assets/img/lunar-config/casebacks/tapa-huella-astronauta.webp?v=1"
     }
   },
-  "tapas_nota": "Las tres tapas roscadas sólidas del proveedor, sin cambio de precio. Venían de generaciones distintas (Ø 900/918/915 en lienzo 1254): se han igualado con herramientas/alinear_tapas.py moviendo y escalando la imagen entera, sin tocar el dibujo. Masters en masters-2026/lunar/tapas/."
+  "tapas_nota": "Las tres tapas roscadas sólidas del proveedor, sin cambio de precio. Venían de generaciones distintas (Ø 900/918/915 en lienzo 1254): se han igualado con herramientas/alinear_tapas.py moviendo y escalando la imagen entera, sin tocar el dibujo. Masters en masters-2026/lunar/tapas/.",
+  "trasplantes_nota": "Las tres cabezas cab-negra-bnegro-esf* NO vienen del paquete: son la caja negra con la esfera de su gemela de acero, trasplantada por herramientas/trasplantar_esfera.py. El corte va a r=315 (por dentro del aro): cruzar el taquimetro duplicaria los numeros."
 }
