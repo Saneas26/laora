@@ -364,28 +364,8 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 .lunar-spec-highlights strong { display: block; margin: -3px 0 2px; font-size: clamp(16px, 1.4vw, 21px); line-height: 1; letter-spacing: -.03em; }
 .lunar-spec-highlights p { margin: 0; color: rgba(28,29,27,.6); font-size: 13px; line-height: 1.3; letter-spacing: .01em; }
 
-.technical-overlay { position: fixed; z-index: 200; inset: 0; padding: 28px 3.5vw 20px; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 19px; overflow-y: auto; background: #151616; color: white; }
-.technical-overlay::before { content: "LO—01"; position: fixed; right: -1vw; bottom: -5vw; color: rgba(255,255,255,.018); font: 500 22vw/.8 var(--sans); letter-spacing: -.08em; pointer-events: none; }
-.technical-overlay-head { display: grid; grid-template-columns: 1fr auto 52px; align-items: start; gap: 34px; }
-.technical-overlay-head p { margin: 0 0 7px; color: #d4a961; font-size: 14px; font-weight: 700; letter-spacing: .12em; }
-.technical-overlay-head h2 { margin: 0; font: 500 clamp(36px, 3.7vw, 56px)/.94 var(--sans); letter-spacing: -.055em; }
-.technical-overlay-head h2 em { color: #d3a357; font-style: normal; }
-.technical-reference { padding-top: 10px; display: grid; gap: 5px; text-align: right; }
-.technical-reference span { color: rgba(255,255,255,.58); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
-.technical-reference strong { font-size: 16px; font-weight: 500; }
-.technical-overlay-head > button { width: 52px; height: 52px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.46); background: transparent; color: white; font: 35px/1 Arial, sans-serif; cursor: pointer; }
-.technical-groups { min-height: 0; display: grid; grid-template-columns: .88fr 1.12fr 1.18fr; border-top: 1px solid rgba(255,255,255,.16); border-left: 1px solid rgba(255,255,255,.16); }
-.technical-group { min-width: 0; padding: 19px 21px 15px; border-right: 1px solid rgba(255,255,255,.16); border-bottom: 1px solid rgba(255,255,255,.16); }
-.technical-group > header { display: flex; align-items: center; gap: 12px; margin-bottom: 11px; }
-.technical-group > header span { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid rgba(212,169,97,.65); border-radius: 50%; color: #e1b66b; font-size: 12px; }
-.technical-group h3 { margin: 0; font-size: 23px; font-weight: 500; }
-.technical-group dl { margin: 0; }
-.technical-group dl > div { padding: 10px 0 11px; display: grid; grid-template-columns: minmax(112px, .42fr) 1fr; gap: 15px; border-top: 1px solid rgba(255,255,255,.095); }
-.technical-group dt { color: #d4a961; font-size: 14px; font-weight: 700; letter-spacing: .04em; }
-.technical-group dd { margin: 0; color: rgba(255,255,255,.84); font-size: 16px; line-height: 1.35; }
-.technical-overlay-footer { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-.technical-overlay-footer p { margin: 0; color: rgba(255,255,255,.58); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
-.technical-close-bottom { min-height: 46px; padding: 0 28px; border: 1px solid rgba(255,255,255,.55); background: white; color: #171818; font-size: 14px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
+/* El overlay de la ficha técnica (.technical-*) se fue el 18/08/2026
+   junto con su <template> y su JavaScript. */
 
 .featured-products { padding: 0 6vw 140px; text-align: center; }
 .featured-products .button { margin-top: 52px; }
@@ -803,26 +783,6 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
   .lunar-spec-highlights li > span { width: 24px; height: 24px; font-size: 10px; }
   .lunar-spec-highlights strong { margin: 0 0 3px; font-size: clamp(17px, 4.6vw, 20px); }
   .lunar-spec-highlights p { font-size: 11.5px; line-height: 1.25; }
-  .technical-overlay { padding: 16px 12px 12px; display: block; }
-  .technical-overlay::before { display: none; }
-  .technical-overlay-head { padding-bottom: 18px; grid-template-columns: 1fr 42px; gap: 12px; }
-  .technical-overlay-head p { font-size: 12px; }
-  .technical-overlay-head h2 { font-size: 31px; line-height: .94; }
-  .technical-reference { grid-column: 1 / -1; grid-row: 2; padding-top: 0; text-align: left; }
-  .technical-reference span { font-size: 12px; }
-  .technical-reference strong { font-size: 15px; }
-  .technical-overlay-head > button { grid-column: 2; grid-row: 1; width: 42px; height: 42px; font-size: 29px; }
-  .technical-groups { display: block; border: 0; }
-  .technical-group { padding: 15px 0 7px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
-  .technical-group:first-child { border-top: 1px solid rgba(255,255,255,.18); }
-  .technical-group > header { margin-bottom: 10px; }
-  .technical-group h3 { font-size: 22px; }
-  .technical-group dl > div { padding: 11px 0; grid-template-columns: 112px 1fr; gap: 12px; }
-  .technical-group dt { font-size: 12px; }
-  .technical-group dd { font-size: 14px; }
-  .technical-overlay-footer { padding-top: 14px; }
-  .technical-overlay-footer p { display: none; }
-  .technical-close-bottom { width: 100%; min-height: 42px; }
   .editorial-intro, .belief, .club-promise, .workshop-intro { padding: 90px 24px; grid-template-columns: 1fr; gap: 38px; }
   .editorial-intro > div { grid-template-columns: 1fr; gap: 28px; }
   .market-map { padding: 85px 24px 75px; }
