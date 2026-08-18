@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=17">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=18">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -68,7 +68,7 @@
              src="/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp">
         <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
              src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
-        <img class="pv-capa pv-capa-tapa" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
+        <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
              src="/assets/img/lunar-config/casebacks/tapa-solida-acero.webp">
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
@@ -96,6 +96,11 @@
           <div class="pv-opciones" data-pv="caja"></div>
         </div>
 
+        <div class="pv-grupo" data-pv-grupo="tapa">
+          <p class="pv-rotulo">Tapa <b>Sin cambio de precio</b></p>
+          <div class="pv-opciones" data-pv="tapa"></div>
+        </div>
+
         <div class="pv-grupo">
           <p class="pv-rotulo">Esfera</p>
           <div class="pv-opciones" data-pv="esfera"></div>
@@ -108,7 +113,12 @@
 
         <div class="pv-grupo">
           <p class="pv-rotulo">Correa</p>
-          <div class="pv-opciones" data-pv="correa"></div>
+          <div class="pv-opciones" data-pv="tipo"></div>
+        </div>
+
+        <div class="pv-grupo" data-pv-grupo="color">
+          <p class="pv-rotulo">Color <b data-pv-color>Negro</b></p>
+          <div class="pv-opciones" data-pv="color"></div>
         </div>
 
         <div class="pv-grupo" data-pv-grupo="pespunte">
@@ -119,11 +129,6 @@
         <div class="pv-grupo" data-pv-grupo="cierre">
           <p class="pv-rotulo">Cierre <b data-pv-cierre>Hebilla de pinza</b></p>
           <div class="pv-opciones" data-pv="cierre"></div>
-        </div>
-
-        <div class="pv-grupo" data-pv-grupo="tapa">
-          <p class="pv-rotulo">Tapa <b>Sin cambio de precio</b></p>
-          <div class="pv-opciones" data-pv="tapa"></div>
         </div>
 
       </div>
@@ -243,31 +248,51 @@
     'azules':    { nombre: 'Azules',    color: '#316BB8' },
     'doradas':   { nombre: 'Doradas',   color: '#CBAE72' }
   };
+  /* ---------- 6 y 7. LA CORREA: PRIMERO EL TIPO, DESPUÉS EL COLOR ----------
+     Clasificación de Óscar (18/08): Piel Sintética Perforada, Piel
+     Italiana, Brazalete Acero, Nato, Nato+Piel y Caucho. Cada tipo
+     lleva su paleta; los que aún no tienen foto para el Lunar salen
+     TACHADOS, que en esta casa lo imposible se tacha, no se esconde. */
   var CORREAS = {
     'piel-negra-perforada-pespunte-blanco': {
-      nombre: 'Piel Perforada', coste: 6.69, cierre: 'Hebilla de pinza', color: '#1A1A1A',
-      tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla de pinza' },
+      coste: 6.69, cierre: 'Hebilla de pinza',
+      tec: 'piel sintética negra con perforado deportivo y pespunte blanco, hebilla de pinza' },
     'brazalete-acero-316l-cinco-columnas': {
-      nombre: 'Brazalete de Acero', coste: 19.69, cierre: 'Cierre desplegable', color: '#C9CBCC',
+      coste: 19.69, cierre: 'Cierre desplegable',
       tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con cierre desplegable' },
-    /* Piel italiana (MAIKES 7011E, P-028…P-042). Coste el de la hebilla
-       de acero plateado, que es la de las fotos; las otras cuatro
-       hebillas del proveedor caen en el mismo escalón de precio. */
-    /* italiana: abre las elecciones 6 (pespunte) y 7 (cierre).
-       pespunte: el que trae la FOTO que tenemos de esa correa; el otro
-       existe en el proveedor al mismo precio, pero sin foto se tacha. */
-    'piel-italiana-negra': {
-      nombre: 'Piel Italiana Negra', coste: 29.99, cierre: 'Hebilla de pinza', color: '#1C1D1F',
-      italiana: true, pespunte: 'contraste',
+    /* Piel italiana (MAIKES 7011E, P-028…P-042). El coste real lo pone
+       el cierre elegido; el pespunte es el que trae la FOTO de cada
+       una, y el otro se tacha mientras no llegue su foto. */
+    'piel-italiana-negra':  { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'contraste',
       tec: 'piel de vaca genuina negra con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
-    'piel-italiana-marron': {
-      nombre: 'Piel Italiana Marrón', coste: 29.99, cierre: 'Hebilla de pinza', color: '#5B3A28',
-      italiana: true, pespunte: 'contraste',
+    'piel-italiana-marron': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'contraste',
       tec: 'piel de vaca genuina marrón con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
-    'piel-italiana-azul': {
-      nombre: 'Piel Italiana Azul', coste: 29.99, cierre: 'Hebilla de pinza', color: '#1E2B47',
-      italiana: true, pespunte: 'color',
+    'piel-italiana-azul':   { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'color',
       tec: 'piel de vaca genuina azul con relieve de cocodrilo, hebilla de pinza y liberación rápida' }
+  };
+
+  /* Los seis tipos. `correa` apunta a la capa del manifiesto; sin ella
+     el color todavía no tiene foto y va tachado. */
+  var TIPOS = {
+    'perforada': { nombre: 'Piel Sintética Perforada', colores: {
+      'negro': { nombre: 'Negro', color: '#1A1A1A', correa: 'piel-negra-perforada-pespunte-blanco' } } },
+    'italiana': { nombre: 'Piel Italiana', colores: {
+      'negro':  { nombre: 'Negro',  color: '#1C1D1F', correa: 'piel-italiana-negra' },
+      'marron': { nombre: 'Marrón', color: '#5B3A28', correa: 'piel-italiana-marron' },
+      'azul':   { nombre: 'Azul',   color: '#1E2B47', correa: 'piel-italiana-azul' } } },
+    'brazalete': { nombre: 'Brazalete Acero', colores: {
+      'acero': { nombre: 'Acero', color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' } } },
+    'nato': { nombre: 'Nato', colores: {
+      'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
+      'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
+      'azul':          { nombre: 'Azul',          color: '#24406E' } } },
+    'nato-piel': { nombre: 'Nato + Piel', colores: {
+      'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
+      'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
+      'azul':          { nombre: 'Azul',          color: '#24406E' },
+      'beige':         { nombre: 'Beige',         color: '#C8B79A' } } },
+    'caucho': { nombre: 'Caucho', colores: {
+      'negro': { nombre: 'Negro', color: '#1C1D1F' } } }
   };
 
   /* ---------- 6. EL PESPUNTE (solo con piel italiana) ---------- */
@@ -314,20 +339,34 @@
     'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas'
   };
 
-  var e = { caja: 'acero-bnegro', esfera: 'negra', agujas: 'plateadas',
-            correa: 'piel-negra-perforada-pespunte-blanco',
-            pespunte: 'contraste', cierre: 'plata', tapa: 'solida-acero' };
-  var viendoTapa = false;
+  var e = { caja: 'acero-bnegro', tapa: null, esfera: 'negra', agujas: 'plateadas',
+            tipo: 'perforada', color: 'negro',
+            pespunte: 'contraste', cierre: 'plata' };
 
   /* Qué correa vale con qué cabeza: sale del manifiesto
      (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
      la piel perforada no se ofrece con el bisel azul). */
   function correaVale(clave, cabeza) {
-    if (!M) return true;
+    if (!M || !clave) return false;
     var r = M.straps[clave];
+    if (!r) return false;
     var ok = (r.cabezasPermitidas || []).some(function (p) { return cabeza.indexOf(p) === 0; });
     var no = (r.cabezasExcluidas || []).some(function (p) { return cabeza.indexOf(p) === 0; });
     return ok && !no;
+  }
+
+  /* La clave de la capa que toca: tipo + color. */
+  function claveCorrea(tipo, color) {
+    var t = TIPOS[tipo || e.tipo];
+    var c = t && t.colores[color || e.color];
+    return c && c.correa;
+  }
+  var correaActual = function () { return claveCorrea(); };
+  /* Un color vale si su capa existe y encaja con la cabeza de ahora. */
+  function colorVale(tipo, color) { return correaVale(claveCorrea(tipo, color), CATALOGO[clave()]); }
+  /* Un tipo vale si le vale alguno de sus colores. */
+  function tipoVale(tipo) {
+    return Object.keys(TIPOS[tipo].colores).some(function (c) { return colorVale(tipo, c); });
   }
   var M = null;                       // el manifiesto: rutas de las capas
 
@@ -338,7 +377,8 @@
 
   function referencia() {
     return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas +
-           (esItaliana() ? '-' + e.cierre : '') + '-' + e.tapa;
+           (e.tapa ? '-' + e.tapa : '') + '-' + e.tipo + '-' + e.color +
+           (esItaliana() ? '-' + e.pespunte + '-' + e.cierre : '');
   }
 
   /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
@@ -393,11 +433,7 @@
         : mapa[k].nombre;
       b.setAttribute('aria-pressed', String(e[grupo] === k));
       if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
-      b.addEventListener('click', function () {
-        e[grupo] = k;
-        viendoTapa = (grupo === 'tapa');   // el visor sigue al paso que se toca
-        normaliza(); pinta();
-      });
+      b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
       caja.appendChild(b);
     });
   }
@@ -411,37 +447,51 @@
       });
       if (k) { var p = k.split('|'); e.caja = p[0]; e.esfera = p[1]; e.agujas = p[2]; }
     }
-    var cabeza = CATALOGO[clave()];
-    if (cabeza && !correaVale(e.correa, cabeza)) {
-      var otra = Object.keys(CORREAS).find(function (c) { return correaVale(c, cabeza); });
-      if (otra) e.correa = otra;
+    if (!CATALOGO[clave()]) return;
+    /* Si la correa de ahora no encaja con la cabeza, se busca color
+       dentro del mismo tipo antes de cambiar de tipo. */
+    if (!colorVale(e.tipo, e.color)) {
+      var otroColor = Object.keys(TIPOS[e.tipo].colores).find(function (c) { return colorVale(e.tipo, c); });
+      if (otroColor) {
+        e.color = otroColor;
+      } else {
+        var otroTipo = Object.keys(TIPOS).find(tipoVale);
+        if (otroTipo) {
+          e.tipo = otroTipo;
+          e.color = Object.keys(TIPOS[otroTipo].colores).find(function (c) { return colorVale(otroTipo, c); });
+        }
+      }
     }
     /* El pespunte lo manda la foto: de cada correa solo tenemos una. */
-    if (esItaliana()) e.pespunte = CORREAS[e.correa].pespunte;
+    if (esItaliana()) e.pespunte = CORREAS[correaActual()].pespunte;
   }
 
-  var esItaliana = function () { return !!CORREAS[e.correa].italiana; };
+  var esItaliana = function () {
+    var r = CORREAS[correaActual()];
+    return !!(r && r.italiana);
+  };
 
   /* El cierre solo cuenta en la piel italiana; en las demás correas
      manda el que trae la propia correa. */
   function cierreTexto() {
-    return esItaliana() ? CIERRES[e.cierre].nombre : CORREAS[e.correa].cierre;
+    return esItaliana() ? CIERRES[e.cierre].nombre : CORREAS[correaActual()].cierre;
   }
   function costeCorrea() {
-    return esItaliana() ? CIERRES[e.cierre].coste : CORREAS[e.correa].coste;
+    return esItaliana() ? CIERRES[e.cierre].coste : CORREAS[correaActual()].coste;
   }
 
   function pinta() {
     if (!M) return;
     var cabeza = CATALOGO[clave()];
     $('[data-pv-cabeza-img]').src = M.heads[cabeza];
-    $('[data-pv-correa-img]').src = M.straps[e.correa].src;
+    $('[data-pv-correa-img]').src = M.straps[correaActual()].src;
     $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
       ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase();
 
     $('[data-pv-precio]').textContent = eu(precio());
     $('[data-pv-cal]').textContent = 'Calibre ' + MOV.cal;
     $('[data-pv-cierre]').textContent = cierreTexto();
+    $('[data-pv-color]').textContent = TIPOS[e.tipo].colores[e.color].nombre;
 
     botones('caja', CAJAS, function (k) {
       return Object.keys(CATALOGO).some(function (x) { return x.indexOf(k + '|') === 0; });
@@ -450,23 +500,32 @@
       return Object.keys(CATALOGO).some(function (x) { return x.indexOf(e.caja + '|' + k + '|') === 0; });
     });
     botones('agujas', AGUJAS, function (k) { return existe(null, null, k); });
-    botones('correa', CORREAS, function (k) { return correaVale(k, CATALOGO[clave()]); });
-    /* 6 y 7: solo con piel italiana. Del pespunte, solo vale el que
-       tiene foto; el otro se tacha aunque el proveedor lo haga. */
-    botones('pespunte', PESPUNTES, function (k) { return k === CORREAS[e.correa].pespunte; }, !esItaliana());
-    botones('cierre', CIERRES, function () { return true; }, !esItaliana());
     botones('tapa', TAPAS, function () { return true; });
+    botones('tipo', TIPOS, tipoVale);
+    botones('color', TIPOS[e.tipo].colores, function (k) { return colorVale(e.tipo, k); });
+    /* Pespunte y cierre: solo con piel italiana. Del pespunte, solo
+       vale el que tiene foto; el otro se tacha aunque el proveedor lo
+       haga. */
+    botones('pespunte', PESPUNTES,
+            function (k) { return esItaliana() && k === CORREAS[correaActual()].pespunte; }, !esItaliana());
+    botones('cierre', CIERRES, function () { return true; }, !esItaliana());
 
-    $('[data-pv-tapa-img]').src = M.tapas[e.tapa].src;
-    $('[data-pv-tapa-img]').hidden = !viendoTapa;
-    $('[data-pv-tapa-img]').alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
+    /* La tapa no lleva nada elegido de salida: hasta que el cliente
+       toca una, el visor va limpio, sin miniatura. */
+    var mini = $('[data-pv-tapa-img]');
+    mini.hidden = !e.tapa;
+    if (e.tapa) {
+      mini.src = M.tapas[e.tapa].src;
+      mini.alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
+    }
 
     $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
-      ' Cristal mineral y tapa trasera roscada y sólida, ' + TAPAS[e.tapa].tec + '.';
+      ' Cristal mineral y tapa trasera roscada y sólida' +
+      (e.tapa ? ', ' + TAPAS[e.tapa].tec : '') + '.';
     $('[data-pv-tec="mov"]').textContent = MOV.tec;
     $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
       ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
-      CORREAS[e.correa].tec + (esItaliana()
+      CORREAS[correaActual()].tec + (esItaliana()
         ? ', con ' + PESPUNTES[e.pespunte].tec + ' y ' + CIERRES[e.cierre].tec
         : '') + '.';
     $('[data-pv-tec="agua"]').textContent =
@@ -481,21 +540,15 @@
       ref: referencia(),
       nombre: 'Lunar ' + ESFERAS[e.esfera].nombre,
       detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
-               ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' · tapa ' +
-               TAPAS[e.tapa].nombre.toLowerCase() + ' · ' + MOV.nombre,
-      correa: CORREAS[e.correa].nombre + (esItaliana() ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
+               ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() +
+               (e.tapa ? ' · tapa ' + TAPAS[e.tapa].nombre.toLowerCase() : '') + ' · ' + MOV.nombre,
+      correa: TIPOS[e.tipo].nombre + ' ' + TIPOS[e.tipo].colores[e.color].nombre.toLowerCase() +
+              (esItaliana() ? ' · pespunte ' + PESPUNTES[e.pespunte].nombre.toLowerCase() +
+                              ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
       precio: precio(),
       foto: $('[data-pv-cabeza-img]').src
     });
     window.location.href = '/carrito.html';
-  });
-
-  /* Un clic en el visor da la vuelta al reloj, para poder mirar la
-     tapa (o volver al frente) sin tener que cambiar nada. */
-  $('.pv-hero').addEventListener('click', function () {
-    if (!M) return;
-    viendoTapa = !viendoTapa;
-    pinta();
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
