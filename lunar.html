@@ -280,7 +280,9 @@
     /* Coste SUPUESTO, el del resto del caucho: Óscar no ha dado el de
        esta. Solo con bisel azul. */
     'goma-azul-pespunte-blanco':  { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho azul marino con trama textil en cesta, pespunte blanco y final curvo azul claro que abraza la caja, hebilla de pinza' }
+      tec: 'caucho azul marino con trama textil en cesta, pespunte blanco y final curvo azul claro que abraza la caja, hebilla de pinza' },
+    'goma-azul-pespunte-azul':    { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho azul marino con trama textil en cesta, pespunte azul al tono y final curvo azul claro que abraza la caja, hebilla de pinza' }
   };
 
   /* Los seis tipos, en tres niveles: TIPO -> COLOR -> PESPUNTE.
@@ -328,7 +330,8 @@
         'naranja': { nombre: 'Naranja', tec: 'costura naranja de contraste', correa: 'goma-negra-costura-naranja' },
         'blanco':  { nombre: 'Blanco',  tec: 'costura blanca de contraste',  correa: 'goma-negra-costura-blanca' } } },
       'azul':  { nombre: 'Azul',  color: '#1F3E77', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'goma-azul-pespunte-blanco' } } } } }
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste',  correa: 'goma-azul-pespunte-blanco' },
+        'azul':   { nombre: 'Azul',   tec: 'pespunte azul al tono',         correa: 'goma-azul-pespunte-azul' } } } } }
   };
 
   /* ---------- 8. LA TAPA ROSCADA ----------
@@ -591,7 +594,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=10')
+  fetch('/assets/img/lunar-config/manifest.json?v=11')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
