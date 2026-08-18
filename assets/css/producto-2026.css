@@ -286,3 +286,20 @@ main.cv2{ overflow:visible; overflow-x:clip }
    de color quede a media altura de las dos líneas. */
 .pv-opciones button:has(.pv-lineas){display:inline-flex;align-items:center;gap:8px}
 .pv-lineas{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.35}
+
+/* ---------- LA MACRO A TODO LO ANCHO (Óscar, 18/08/2026) ----------
+   Foto de estudio en blanco y negro, entre el configurador y la ficha
+   técnica. Va a sangre completa y con altura acotada: la original es
+   vertical (1440×1800) y a pantalla completa se comería el scroll. */
+.pv-macro{
+  margin:0;background:#0b0b0b;
+  max-height:78vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.pv-macro img{
+  width:100%;height:78vh;object-fit:cover;object-position:center 42%;
+  display:block;
+}
+@media (max-width:900px){
+  .pv-macro, .pv-macro img{height:62vh;max-height:62vh}
+}
