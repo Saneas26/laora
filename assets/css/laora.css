@@ -936,51 +936,63 @@ footer small { font-size: 12px; }
    del resto de la página: mismo borde, mismo oro para el número y
    misma retícula que el bloque del proceso al que sustituye.
    ============================================================ */
-.historia { padding: 130px 6vw; border-bottom: 1px solid var(--line); }
+.historia { padding: 0; border-bottom: 1px solid var(--line); }
 .historia-cabeza { max-width: 1100px; }
 .historia-cabeza h2 { margin: 22px 0 0; }
 
-.historia-actos { display: grid; grid-template-columns: repeat(2, 1fr); margin: 70px 0 0; padding: 0; list-style: none; }
-.historia-actos article { min-height: 340px; padding: 40px; border: 1px solid var(--line);
-                          margin: -1px 0 0 -1px; display: flex; flex-direction: column; }
+/* EL ACTO 2, A PANTALLA COMPLETA (18/08/2026)
+   Óscar: «un mensaje por pantalla, un acto para cada uno… letras grandes
+   y legibles, con contorno, máscaras con opacidad o lo que haga falta
+   para que se lea de manera espectacular».
 
-/* EL ACTO 2 EN MODO INFOGRAFÍA (18/08/2026)
-   Cada acto llevaba debajo un párrafo entrecomillado de seis líneas y
-   Óscar tenía razón: eso no se lee. Ahora cada tarjeta es un pictograma,
-   un dato grande y unas pocas líneas marcadas con su signo.
+   Cada acto es una pantalla entera: la foto a sangre, dos capas de
+   máscara encima y un solo mensaje centrado, el mismo en el ordenador y
+   en el teléfono. La legibilidad no se deja a la suerte de la foto:
+   · una máscara general que oscurece arriba y abajo,
+   · un óvalo oscuro justo detrás del texto, que es donde importa,
+   · un halo desenfocado bajo el bloque de texto,
+   · y contorno propio en la letra (`-webkit-text-stroke` pintado por
+     debajo del relleno con `paint-order`), más dos sombras.
+   Con las cuatro cosas, el texto aguanta encima de una foto clara —el
+   café del acto 4— y de una oscura por igual. */
+.historia-pantallas { margin: 0; padding: 0; list-style: none; }
 
-   Los dibujos van sin `fill` y con el trazo heredado del color de cada
-   sitio: así el mismo símbolo sirve en oro para el icono del acto, en
-   verde para los síes y en gris para los noes, sin duplicar nada. */
-.historia svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.historia-simbolos { position: absolute; width: 0; height: 0; overflow: hidden; }
+.acto-pantalla { position: relative; height: 100svh; min-height: 520px; max-height: 940px;
+                 display: grid; place-items: center; overflow: hidden; background: var(--dark); }
+.acto-foto { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+             object-fit: cover; object-position: center center; }
+/* En el teléfono se ve una franja estrecha de una foto apaisada, así que
+   cada acto mira a donde está su asunto. */
+.acto-deseo .acto-foto { object-position: 42% center; }
+.acto-respuesta .acto-foto { object-position: 58% center; }
 
-.acto-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.acto-numero { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .2em; }
-.acto-icono { width: 38px; height: 38px; color: var(--gold); stroke-width: 1.4; }
-.acto-etiqueta { margin: 6px 0 0; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-                 font-weight: 700; color: var(--muted); }
-/* El titular es lo único que hay que leer si solo se lee una cosa. */
-.historia-actos h3 { margin: 22px 0 24px; font: clamp(25px, 2.3vw, 34px)/1.14 var(--serif); letter-spacing: -.01em; }
+.acto-mascara { position: absolute; inset: 0; pointer-events: none;
+                background:
+                  radial-gradient(ellipse 64% 54% at 50% 50%, rgba(0,0,0,.56), rgba(0,0,0,0) 72%),
+                  linear-gradient(180deg, rgba(0,0,0,.52), rgba(0,0,0,.26) 34%, rgba(0,0,0,.30) 62%, rgba(0,0,0,.66)); }
 
-/* El dato grande: lo que se queda en la cabeza al pasar de largo. */
-.acto-dato { margin: 0 0 22px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
-.acto-dato b { font-size: clamp(26px, 2.7vw, 40px); font-weight: 700; line-height: 1; letter-spacing: -.03em; }
-.acto-dato span { color: var(--muted); font-size: 15px; line-height: 1.35; }
+.acto-mensaje { position: relative; z-index: 2; width: min(1080px, 88vw); padding: 0 4px;
+                text-align: center; color: var(--white); }
+/* El halo: un borrón oscuro debajo del bloque de texto, sin tocar la foto
+   del resto de la pantalla. */
+.acto-mensaje::before { content: ""; position: absolute; z-index: -1; inset: -14% -8%;
+                        border-radius: 50%; background: rgba(0,0,0,.42); filter: blur(38px); }
 
-.acto-lista { margin: auto 0 0; padding: 0; list-style: none; display: grid; gap: 11px; }
-/* Dos hijos y no más: el dibujo y un <span> con TODO el texto. Si el
-   texto va suelto, el `<b>` del principio y lo que viene detrás cuentan
-   como dos casillas distintas de la retícula y cada línea se parte en
-   dos filas: la tarjeta del problema medía 660 px de listado. */
-.acto-lista li { display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 11px;
-                 font-size: 16px; line-height: 1.35; }
-.acto-lista li b { font-weight: 700; }
-.marca { width: 20px; height: 20px; margin-top: 1px; stroke-width: 2; }
-.marca-si { color: var(--green); }
-.marca-no, .marca-paso { color: var(--muted); }
+.acto-orden { margin: 0 0 20px; display: inline-flex; align-items: center; gap: 12px;
+              font-size: clamp(12px, 1.1vw, 14px); font-weight: 700; letter-spacing: .26em;
+              text-transform: uppercase; color: rgba(255,253,248,.88); text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+.acto-orden span { padding: 5px 10px; border: 1px solid rgba(226,192,120,.75); color: #e2c078; letter-spacing: .14em; }
 
-.historia-cierre { margin: 70px 0 0; font: clamp(30px, 3.6vw, 52px)/1.12 var(--serif); letter-spacing: -.02em; }
+.acto-pantalla h3 { margin: 0; font: 500 clamp(32px, 5.1vw, 74px)/1.05 var(--serif); letter-spacing: -.022em;
+                    text-wrap: balance;
+                    -webkit-text-stroke: 1px rgba(0,0,0,.42); paint-order: stroke fill;
+                    text-shadow: 0 2px 4px rgba(0,0,0,.55), 0 14px 40px rgba(0,0,0,.5); }
+.acto-apoyo { max-width: 44ch; margin: 22px auto 0; font-size: clamp(17px, 1.75vw, 23px); line-height: 1.35;
+              color: rgba(255,253,248,.94); text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+
+.historia-remate { padding: 110px 6vw 120px; }
+
+.historia-cierre { margin: 0; font: clamp(30px, 3.6vw, 52px)/1.12 var(--serif); letter-spacing: -.02em; }
 .historia-cierre em { color: var(--muted); }
 
 /* El logotipo dentro de estos titulares hereda color y cuerpo. Sin esto
@@ -1007,14 +1019,12 @@ footer small { font-size: 12px; }
   border-top-color: currentColor; }
 
 @media (max-width: 900px) {
-  .historia { padding: 90px 24px; }
-  .historia-actos { grid-template-columns: 1fr; margin-top: 46px; }
-  .historia-actos article { min-height: 0; padding: 30px 24px; }
-  .historia-actos h3 { margin: 18px 0 20px; }
-  .acto-icono { width: 32px; height: 32px; }
-  .acto-dato { margin-bottom: 18px; padding-top: 16px; }
-  .acto-lista { margin-top: 0; }
-  .historia-cierre { margin-top: 46px; }
+  .historia { padding: 0; }
+  .acto-pantalla { max-height: none; }
+  .acto-mensaje { width: calc(100% - 40px); }
+  .acto-orden { margin-bottom: 16px; }
+  .acto-apoyo { margin-top: 16px; }
+  .historia-remate { padding: 76px 24px 84px; }
 }
 
 /* ============================================================
