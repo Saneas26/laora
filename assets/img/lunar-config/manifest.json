@@ -45,32 +45,32 @@
       "cabezasExcluidas": [],
       "nota": "IMAGEN MADRE (orden de Oscar, 17/08): la capa es la foto completa del preview acero-bisel-negro-esfera-negra-brazalete-acero-316l-4k, con el brazalete TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria: ancho 811, centro 568). Master en masters-2026/lunar/capas/brazalete-acero-316l-madre-4k.png"
     },
-    "piel-cocodrilo-negra": {
-      "src": "/assets/img/lunar-config/straps/piel-cocodrilo-negra.webp?v=1",
+    "piel-italiana-negra": {
+      "src": "/assets/img/lunar-config/straps/piel-italiana-negra.webp?v=2",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/piel-cocodrilo-negra-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/piel-italiana-negra-madre-4k.png",
       "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto."
     },
-    "piel-cocodrilo-azul": {
-      "src": "/assets/img/lunar-config/straps/piel-cocodrilo-azul.webp?v=1",
+    "piel-italiana-marron": {
+      "src": "/assets/img/lunar-config/straps/piel-italiana-marron.webp?v=2",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/piel-cocodrilo-azul-madre-4k.png",
-      "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto."
-    },
-    "piel-cocodrilo-marron": {
-      "src": "/assets/img/lunar-config/straps/piel-cocodrilo-marron.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/piel-cocodrilo-marron-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/piel-italiana-marron-madre-4k.png",
       "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto. La madre venia con la caja en oro rosa (fallo de generacion); se le ha transplantado el metal de la madre negra, que es la MISMA caja de acero en la MISMA posicion. La correa marron no se ha tocado."
+    },
+    "piel-italiana-azul": {
+      "src": "/assets/img/lunar-config/straps/piel-italiana-azul.webp?v=2",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/piel-italiana-azul-madre-4k.png",
+      "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto."
     }
   },
   "default": {
