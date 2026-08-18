@@ -245,37 +245,45 @@
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
       "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. Negro: fuera del bisel azul, por la regla de no ofrecer correa negra con esa caja."
     },
-    "nato-piel-negro": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-negro.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [
-        "cab-acero-bazul-"
-      ],
-      "master4k": "masters-2026/lunar/capas/nato-piel-negro-madre-4k.png",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero. Negra: fuera del bisel azul."
-    },
-    "nato-piel-azul": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-azul.webp?v=1",
+    "nato-piel-topo": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-topo.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-azul-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-piel-topo-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
     },
-    "nato-piel-naranja": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-naranja.webp?v=1",
+    "nato-piel-antracita": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-antracita.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-naranja-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-piel-antracita-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+    },
+    "nato-piel-gris": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-gris.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-gris-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+    },
+    "nato-piel-azul-claro": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-azul-claro.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-azul-claro-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
     },
     "nato-piel-beige": {
       "src": "/assets/img/lunar-config/straps/nato-piel-beige.webp?v=1",
@@ -285,27 +293,7 @@
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/nato-piel-beige-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
-    },
-    "nato-piel-gris-claro": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-gris-claro.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-gris-claro-madre-4k.png",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
-    },
-    "nato-piel-verde-militar": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-verde-militar.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-verde-militar-madre-4k.png",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
     }
   },
   "default": {
