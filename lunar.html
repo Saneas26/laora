@@ -231,18 +231,18 @@
     'brazalete-acero-316l-cinco-columnas': {
       nombre: 'Brazalete de Acero', coste: 19.69, cierre: 'Cierre desplegable', color: '#C9CBCC',
       tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con cierre desplegable' },
-    /* Cocodrilo: coste PROVISIONAL, al precio de la piel perforada,
-       hasta que Oscar dé el del proveedor. El cierre, tambien a
-       confirmar: en la foto no se ve la hebilla. */
-    'piel-cocodrilo-negra': {
-      nombre: 'Cocodrilo Negro', coste: 6.69, cierre: 'Hebilla', color: '#1C1D1F',
-      tec: 'piel de vaca genuina negra grabada en cocodrilo, con pespunte al tono y hebilla' },
-    'piel-cocodrilo-marron': {
-      nombre: 'Cocodrilo Marrón', coste: 6.69, cierre: 'Hebilla', color: '#5B3A28',
-      tec: 'piel de vaca genuina marrón grabada en cocodrilo, con pespunte al tono y hebilla' },
-    'piel-cocodrilo-azul': {
-      nombre: 'Cocodrilo Azul', coste: 6.69, cierre: 'Hebilla', color: '#1E2B47',
-      tec: 'piel de vaca genuina azul grabada en cocodrilo, con pespunte al tono y hebilla' }
+    /* Piel italiana (MAIKES 7011E, P-028…P-042). Coste el de la hebilla
+       de acero plateado, que es la de las fotos; las otras cuatro
+       hebillas del proveedor caen en el mismo escalón de precio. */
+    'piel-italiana-negra': {
+      nombre: 'Piel Italiana Negra', coste: 29.99, cierre: 'Hebilla de pinza', color: '#1C1D1F',
+      tec: 'piel de vaca genuina negra con relieve de cocodrilo y pespunte blanco, hebilla de pinza y liberación rápida' },
+    'piel-italiana-marron': {
+      nombre: 'Piel Italiana Marrón', coste: 29.99, cierre: 'Hebilla de pinza', color: '#5B3A28',
+      tec: 'piel de vaca genuina marrón con relieve de cocodrilo y pespunte blanco, hebilla de pinza y liberación rápida' },
+    'piel-italiana-azul': {
+      nombre: 'Piel Italiana Azul', coste: 29.99, cierre: 'Hebilla de pinza', color: '#1E2B47',
+      tec: 'piel de vaca genuina azul con relieve de cocodrilo y pespunte al tono, hebilla de pinza y liberación rápida' }
   };
 
   /* Las combinaciones que EXISTEN: cada una, su cabeza del manifiesto. */
@@ -403,7 +403,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=5')
+  fetch('/assets/img/lunar-config/manifest.json?v=6')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();

@@ -158,9 +158,13 @@ function altaPiezas_(nombre, filas, fecha) {
  * El anuncio hace 4 colores (negro, marrón oscuro, azul, verde) × 2
  * pespuntes (blanco / al tono) × 5 cierres = 40 SKUs. Aquí entran los
  * TRES colores que ha elegido Óscar (negro, marrón, azul) con los
- * cinco cierres, en la versión de pespunte BLANCO. La misma referencia
- * existe con pespunte al tono a igual precio: se dará de alta cuando
- * Óscar la pida.
+ * cinco cierres, cada uno con el pespunte que se ve en la foto que ya
+ * está montada en la web: blanco en el negro y el marrón, al tono en
+ * el azul. El otro pespunte de cada color existe al mismo precio y se
+ * dará de alta cuando Óscar lo pida.
+ *
+ * Son las MISMAS correas que ya están en el configurador del Lunar
+ * (claves piel-italiana-negra / -marron / -azul).
  *
  * Precios por cierre, dados por Óscar el 18/08:
  *   hebilla plata 29,99 · hebilla negra 31,19 · hebilla oro rosa 29,59
@@ -168,12 +172,14 @@ function altaPiezas_(nombre, filas, fecha) {
  */
 function ALTA_2026_08_18() {
   var LINK = 'https://es.aliexpress.com/item/1005007805649477.html';
-  var COMUN = 'MAIKES mod. 7011E · piel de vaca genuina (grabado GENUINE LEATHER en el forro) con relieve de cocodrilo y acabado brillante · LIBERACIÓN RÁPIDA (pasador con pulsador, se cambia sin herramienta) · pedir ancho 20 mm (el anuncio hace 19/20/21/22) · largo 20 cm · vendedor MAIKES official store (4,9★/541, 1.000+ ventas) · precios de Óscar del 18/08; el anuncio marcaba 26,59 € en oferta hasta el 26/08 (PVP tachado 56,57 €), reverificar antes de comprar · ALERTA: los rótulos de las fotos del vendedor no son de fiar (la foto de «PB BlueB S» dice Gold Buckle y la hebilla es plata); manda el código del SKU · ALERTA: la ficha declara «Butterfly Buckle» para un SKU que es de pinza · existe el mismo modelo en VERDE y con pespunte al tono, sin dar de alta';
+  var COMUN = 'MAIKES mod. 7011E · piel de vaca genuina (grabado GENUINE LEATHER en el forro) con relieve de cocodrilo y acabado brillante · LIBERACIÓN RÁPIDA (pasador con pulsador, se cambia sin herramienta) · pedir ancho 20 mm (el anuncio hace 19/20/21/22) · largo 20 cm · vendedor MAIKES official store (4,9★/541, 1.000+ ventas) · precios de Óscar del 18/08; el anuncio marcaba 26,59 € en oferta hasta el 26/08 (PVP tachado 56,57 €), reverificar antes de comprar · ALERTA: los rótulos de las fotos del vendedor no son de fiar (la foto de «PB BlueB S» dice Gold Buckle y la hebilla es plata); manda el código del SKU · ALERTA: la ficha declara «Butterfly Buckle» para un SKU que es de pinza · existe el mismo modelo en VERDE y con el otro pespunte de cada color, sin dar de alta';
 
+  // El pespunte de cada color sale de la foto que ya tenemos montada
+  // en la web: blanco en el negro y en el marrón, al tono en el azul.
   var colores = [
-    ['negra',  'Negra',  'BlackW'],
-    ['marrón', 'Marrón', 'DarkBrownW'],
-    ['azul',   'Azul',   'BlueW']
+    ['negra',  'Negra',  'BlackW',     'pespunte blanco'],
+    ['marrón', 'Marrón', 'DarkBrownW', 'pespunte blanco'],
+    ['azul',   'Azul',   'BlueB',      'pespunte al tono']
   ];
   var cierres = [
     ['hebilla de pinza acero plateado', 'hebilla plata',     'PB', 'S',  29.99],
@@ -190,7 +196,7 @@ function ALTA_2026_08_18() {
         'P-0' + n,
         'Correa',
         'Lunar',
-        'Correa piel italiana ' + c[0] + ' grabada en cocodrilo, pespunte blanco, ' + h[0],
+        'Correa piel italiana ' + c[0] + ' con relieve de cocodrilo, ' + c[3] + ', ' + h[0],
         'Piel italiana ' + c[1].toLowerCase() + ' · ' + h[1],
         h[2] + ' ' + c[2] + ' ' + h[3] + ' · 20 mm',
         h[4], LINK, '', '', COMUN
