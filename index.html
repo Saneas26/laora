@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/lunarv2.css?v=61">
+<link rel="stylesheet" href="/assets/css/lunarv2.css?v=62">
 </head>
 <body>
 <header class="site-header">
@@ -281,54 +281,11 @@
     </section>
   </div>
 
-  <template data-ficha>
-    <div class="technical-overlay" role="dialog" aria-modal="true" aria-labelledby="technical-title">
-      <div class="technical-overlay-head">
-        <div>
-          <p>LO—07 · FICHA TÉCNICA COMPLETA</p>
-          <h2 id="technical-title">Todo el Bitácora.<br><em>Dato a dato.</em></h2>
-        </div>
-        <div class="technical-reference"><span>Referencia</span><strong>LO-07_Bitacora</strong></div>
-        <button type="button" aria-label="Cerrar ficha técnica" data-cierra-ficha>×</button>
-      </div>
-      <div class="technical-groups">
-        <section class="technical-group">
-          <header><span>01</span><h3>Movimiento</h3></header>
-          <dl>
-            <div><dt>MOVIMIENTO</dt><dd>Arquitectura ETA 2824-2, 11½ líneas</dd></div>
-            <div><dt>TIPO</dt><dd>Automático, 3 agujas</dd></div>
-            <div><dt>FRECUENCIA</dt><dd>21.600 alt/h (3 Hz)</dd></div>
-            <div><dt>AUTONOMÍA</dt><dd>~42 h de reserva de marcha</dd></div>
-          </dl>
-        </section>
-        <section class="technical-group">
-          <header><span>02</span><h3>Caja y cristal</h3></header>
-          <dl>
-            <div><dt>CRISTAL</dt><dd>Zafiro</dd></div>
-            <div><dt>CAJA</dt><dd>Acero inoxidable 316L, pulido y satinado</dd></div>
-            <div><dt>DIÁMETRO</dt><dd>40 mm</dd></div>
-            <div><dt>ESTANQUEIDAD</dt><dd>100 m (10 ATM)</dd></div>
-            <div><dt>BISEL</dt><dd>Fijo, integrado en la caja (no giratorio)</dd></div>
-          </dl>
-        </section>
-        <section class="technical-group">
-          <header><span>03</span><h3>Esfera y ajuste</h3></header>
-          <dl>
-            <div><dt>ESFERA</dt><dd>Turquesa, con textura horizontal</dd></div>
-            <div><dt>LUMINISCENCIA</dt><dd>Agujas con lumen C3 verde</dd></div>
-            <div><dt>BRAZALETE</dt><dd>Integrado, de acero 316L, cierre desplegable</dd></div>
-            <div><dt>FONDO</dt><dd>Macizo, acero inoxidable</dd></div>
-            <div><dt>PESO</dt><dd>unos 140 g</dd></div>
-            <div><dt>REFERENCIA</dt><dd>LO—07</dd></div>
-          </dl>
-        </section>
-      </div>
-      <div class="technical-overlay-footer">
-        <p>Arquitectura ETA 2824-2 · Zafiro · Acero 316L · 100 m</p>
-        <button class="technical-close-bottom" type="button" data-cierra-ficha>Cerrar ficha</button>
-      </div>
-    </div>
-  </template>
+  <!-- La ficha técnica completa (un <template> con el overlay negro de
+       datos del Bitácora) SE BORRA el 18/08/2026 por orden de Óscar. Se
+       quedó sin puerta cuando el acto 4 perdió su pie con el botón que
+       la abría, y llevaba desde entonces en la página sin que nadie
+       pudiera verla. Con ella se van su JavaScript y su CSS. -->
 
   <section class="madrid-section">
     <img src="/assets/img/relojes-2026/workshop-hero.webp" alt="Detalle del proceso de revisión de un reloj laOra">
@@ -363,7 +320,7 @@
 
 <script type="application/json" data-comparaciones>{"lunar": {"pestana": "SPEEDMASTER → LUNAR", "titulo": "El cronógrafo lunar", "intro": "Del canal oficial al mercado irregular: cinco rutas que pueden parecer la misma en una foto y no ofrecen lo mismo.", "nuestro": "Lunar", "filas": [["01 · Boutique oficial", "Omega Speedmaster Moonwatch", "7.700 €", 7700, 7700, "Nuevo, documentado y con garantía oficial.", "regular"], ["02 · Subasta", "Catawiki y similares", "≈ 5.800 € + gastos", 5800, 5800, "Usado. La caja, los papeles y el estado dependen del lote.", "regular"], ["03 · Gris o usado", "Chrono24", "4.400–6.300 €", 4400, 6300, "Rango habitual. La autenticidad y el conjunto cambian el valor.", "regular"], ["04 · Piezas no originales", "Marketplaces generalistas", "650–1.250 €", 650, 1250, "Reacondicionados o con componentes de procedencia no acreditada.", "irregular"], ["05 · Falsificación", "«Superclones»", "600–1.650 €", 600, 1650, "Marca suplantada, origen incierto y sin garantía legítima.", "irregular"]], "alternativas": [["Bulova Lunar Pilot", "549–659 €"], ["Seiko Prospex Speedtimer", "646–680 €"], ["Tissot PR516 Chronograph", "545–625 €"]], "desde": 219.9}, "bitacora": {"pestana": "NAUTILUS → BITÁCORA", "titulo": "El deportivo integrado", "intro": "Del canal oficial a la falsificación: cinco rutas con precios, riesgos y garantías completamente distintos.", "nuestro": "Bitácora", "filas": [["01 · Boutique oficial", "Patek Philippe Nautilus", "≈ 70.000 €", 70000, 70000, "Precio de referencia y listas de espera interminables.", "regular"], ["02 · Subasta", "Casas especializadas", "Muy variable", null, null, "Mandan la referencia, el material, el estado y la documentación.", "regular"], ["03 · Gris o usado", "Chrono24", "105.000–180.000 €", 105000, 180000, "El mercado secundario puede superar ampliamente el precio oficial.", "regular"], ["04 · Piezas no originales", "Marketplaces generalistas", "650–1.500 €", 650, 1500, "Montajes con componentes de procedencia no acreditada.", "irregular"], ["05 · Falsificación", "«Superclones»", "600–1.650 €", 600, 1650, "Marca suplantada, origen incierto y sin garantía legítima.", "irregular"]], "alternativas": [["Tissot PRX Powermatic 80", "≈ 750 €"], ["Citizen Tsuyosa", "≈ 350 €"]], "desde": 319.9}}</script>
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/lunarv2.js?v=12"></script>
+<script src="/assets/js/lunarv2.js?v=13"></script>
 <script src="/assets/js/empujoncito.js?v=3" defer></script>
 </body>
 </html>

@@ -319,46 +319,8 @@
 
 
   /* ---------- 5 · la ficha técnica ----------
-     En React el overlay solo existe mientras está abierto, así que aquí
-     se clona del <template> al abrir y se tira al cerrar. Se bloquea el
-     scroll del fondo, el foco va al aspa y Escape cierra, como allí. */
-  (function ficha() {
-    var plantilla = document.querySelector('[data-ficha]');
-    var abridor = document.querySelector('[data-abre-ficha]');
-    if (!plantilla || !abridor) return;
-
-    var overlay = null;
-    var scrollPrevio = '';
-
-    function conEscape(e) {
-      if (e.key === 'Escape') cerrar();
-    }
-
-    function cerrar() {
-      if (!overlay) return;
-      overlay.parentNode.removeChild(overlay);
-      overlay = null;
-      document.body.style.overflow = scrollPrevio;
-      document.removeEventListener('keydown', conEscape);
-      abridor.focus();
-    }
-
-    abridor.addEventListener('click', function () {
-      if (overlay) return;
-      overlay = plantilla.content.firstElementChild.cloneNode(true);
-      document.body.appendChild(overlay);
-
-      scrollPrevio = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-
-      var cierres = overlay.querySelectorAll('[data-cierra-ficha]');
-      for (var i = 0; i < cierres.length; i++) {
-        cierres[i].addEventListener('click', cerrar);
-      }
-      if (cierres.length) cierres[0].focus();
-
-      document.addEventListener('keydown', conEscape);
-    });
-  })();
+     BORRADO el 18/08/2026: el <template> del que clonaba el overlay ya
+     no está en la portada, y su único botón se había ido con el pie
+     del acto 4. El configurador tiene su propia ficha, aparte. */
 
 })();
