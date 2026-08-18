@@ -260,6 +260,9 @@
     'brazalete-acero-316l-cinco-columnas': {
       coste: 19.69, cierre: 'Cierre desplegable',
       tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con cierre desplegable' },
+    'brazalete-negro-pvd': {
+      coste: 26.39, cierre: 'Cierre desplegable',
+      tec: 'brazalete de acero 316L con recubrimiento negro tipo PVD, tres eslabones y cierre desplegable' },
     /* Piel italiana (MAIKES 7011E, P-028…P-042). El coste real lo pone
        el cierre elegido; el pespunte es el que trae la FOTO de cada
        una, y el otro se tacha mientras no llegue su foto. */
@@ -306,8 +309,11 @@
         'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' },
         'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel', correa: 'piel-italiana-azul' } } } } },
 
-    'brazalete': { nombre: 'Brazalete Acero', colores: {
-      'acero': { nombre: 'Acero', color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' } } },
+    /* El proveedor hace el brazalete en acero y en negro PVD (P-012).
+       El negro todavía no tiene foto. */
+    'brazalete': { nombre: 'Brazalete', colores: {
+      'acero': { nombre: 'Acero',     color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' },
+      'negro': { nombre: 'Negro PVD', color: '#26282A' } } },
 
     'nato': { nombre: 'Nato', colores: {
       'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
