@@ -279,3 +279,10 @@ main.cv2{ overflow:visible; overflow-x:clip }
 }
 .pv-hero img.pv-mini[hidden]{display:none}
 .pv-aviso{right:auto;left:12px}
+
+/* ---------- ROTULOS EN DOS LÍNEAS (Óscar, 18/08/2026) ----------
+   Las cajas se leen mejor con el material arriba y el bisel debajo.
+   El botón pasa a alinear su contenido en el centro para que el punto
+   de color quede a media altura de las dos líneas. */
+.pv-opciones button:has(.pv-lineas){display:inline-flex;align-items:center;gap:8px}
+.pv-lineas{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.35}

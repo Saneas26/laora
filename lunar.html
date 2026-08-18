@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=18">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=19">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -224,12 +224,15 @@
      obliga a comprarlo suelto, y la caja negra se monta pieza a pieza. */
   var PACK = 34.59, JUEGO_AGUJAS = 4.09, CAJA_NEGRA = 29.59 + 7.69 + 4.09;
 
+  /* `lineas` parte el rótulo del botón en dos, como pidió Óscar: el
+     material arriba y el bisel debajo. `nombre` sigue siendo el texto
+     de corrido, que es el que va a la ficha, al carrito y al alt. */
   var CAJAS = {
-    'acero-bnegro': { nombre: 'Acero · bisel negro', color: '#C9CBCC',
+    'acero-bnegro': { nombre: 'Acero · bisel negro', lineas: ['Acero', 'Bisel Negro'], color: '#C9CBCC',
       tec: 'Caja de acero inoxidable 316L de 39,7 mm con bisel taquimétrico negro, corona y pulsadores de acero. Entre asas 20 mm.' },
-    'acero-bazul':  { nombre: 'Acero · bisel azul',  color: '#1F3E77',
+    'acero-bazul':  { nombre: 'Acero · bisel azul',  lineas: ['Acero', 'Bisel Azul'],  color: '#1F3E77',
       tec: 'Caja de acero inoxidable 316L de 39,7 mm con bisel taquimétrico azul, corona y pulsadores de acero. Entre asas 20 mm.' },
-    'negra-bnegro': { nombre: 'Negra · bisel negro', color: '#26282A',
+    'negra-bnegro': { nombre: 'Acero negro PVD · bisel negro', lineas: ['Acero Negro PVD', 'Bisel Negro'], color: '#26282A',
       tec: 'Caja de acero inoxidable 316L de 39,7 mm con recubrimiento negro tipo PVD y bisel taquimétrico negro, corona y pulsadores en negro. Entre asas 20 mm.' }
   };
   var ESFERAS = {
@@ -492,9 +495,14 @@
       var b = document.createElement('button');
       b.type = 'button';
       b.dataset.v = k;
-      b.innerHTML = mapa[k].color
-        ? '<i class="pv-punto" style="background:' + mapa[k].color + '"></i>' + mapa[k].nombre
+      var rotulo = mapa[k].lineas
+        ? '<span class="pv-lineas">' + mapa[k].lineas.map(function (t) {
+            return '<span>' + t + '</span>';
+          }).join('') + '</span>'
         : mapa[k].nombre;
+      b.innerHTML = mapa[k].color
+        ? '<i class="pv-punto" style="background:' + mapa[k].color + '"></i>' + rotulo
+        : rotulo;
       b.setAttribute('aria-pressed', String(e[grupo] === k));
       if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
       b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
