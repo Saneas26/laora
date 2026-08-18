@@ -130,6 +130,16 @@
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/piel-italiana-negra-pespunte-negro-madre-4k.png",
       "nota": "El pespunte al tono de la piel italiana negra: sale de la madre de pespunte blanco tinendo el hilo de negro (recolorear_pespunte.py). El hilo no se separa por color —es crema y los brillos del charol son neutros— pero si por luz: el hilo esta en 0,90 de luminancia y el brillo mas fuerte del cuero en 0,57. El tinte no es plano: mapea el hilo a 0,10-0,23, por encima del cuero, para que la costura se adivine por su relieve."
+    },
+    "brazalete-negro-pvd": {
+      "src": "/assets/img/lunar-config/straps/brazalete-negro-pvd.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-",
+        "cab-negra-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/brazalete-negro-pvd-madre-4k.png",
+      "nota": "IMAGEN MADRE del brazalete negro PVD (Oscar, 18/08). La foto se hizo con caja de ACERO, y sirve igual para la caja negra: comprobado en zoom que el brazalete oscuro tapa el hueco entre asas y no asoma nada del acero de la foto."
     }
   },
   "default": {
