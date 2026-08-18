@@ -150,6 +150,8 @@
       <figure><img src="/assets/img/lunar-config/catalogo/macro-esfera.webp" alt="Macro de la esfera y las subesferas del cronógrafo" loading="lazy"></figure>
       <figure><img src="/assets/img/lunar-config/catalogo/en-muneca.webp" alt="El Lunar puesto en la muñeca" loading="lazy"></figure>
       <figure><img src="/assets/img/lunar-config/catalogo/campana-astronauta.webp" alt="El Lunar en su mundo: un astronauta en la superficie lunar" loading="lazy"></figure>
+      <!-- Solo sale cuando se elige el brazalete negro PVD -->
+      <figure data-pv-extra="brazalete-negro-pvd" hidden><img src="/assets/img/lunar-config/catalogo/cierre-brazalete-negro-pvd.webp" alt="Cierre desplegable del brazalete negro PVD" loading="lazy"></figure>
     </div>
 
   </div>
@@ -570,6 +572,11 @@
 
     /* La tapa no lleva nada elegido de salida: hasta que el cliente
        toca una, el visor va limpio, sin miniatura. */
+    /* Fotos de apoyo que solo valen para una correa concreta. */
+    todos('[data-pv-extra]').forEach(function (f) {
+      f.hidden = (f.dataset.pvExtra !== correaActual());
+    });
+
     var mini = $('[data-pv-tapa-img]');
     mini.hidden = !e.tapa;
     if (e.tapa) {
