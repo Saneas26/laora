@@ -969,6 +969,10 @@ footer small { font-size: 12px; }
 .acto-dato span { color: var(--muted); font-size: 15px; line-height: 1.35; }
 
 .acto-lista { margin: auto 0 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+/* Dos hijos y no más: el dibujo y un <span> con TODO el texto. Si el
+   texto va suelto, el `<b>` del principio y lo que viene detrás cuentan
+   como dos casillas distintas de la retícula y cada línea se parte en
+   dos filas: la tarjeta del problema medía 660 px de listado. */
 .acto-lista li { display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 11px;
                  font-size: 16px; line-height: 1.35; }
 .acto-lista li b { font-weight: 700; }
