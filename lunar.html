@@ -276,44 +276,59 @@
     'goma-negra-costura-naranja': { coste: 5.59, cierre: 'Hebilla de pinza',
       tec: 'caucho negro con trama textil en cesta, costura naranja de contraste y final curvo que abraza la caja, hebilla de pinza' },
     'goma-negra-costura-blanca':  { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con trama textil en cesta, costura blanca de contraste y final curvo que abraza la caja, hebilla de pinza' }
+      tec: 'caucho negro con trama textil en cesta, costura blanca de contraste y final curvo que abraza la caja, hebilla de pinza' },
+    /* Coste SUPUESTO, el del resto del caucho: Óscar no ha dado el de
+       esta. Solo con bisel azul. */
+    'goma-azul-pespunte-blanco':  { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho azul marino con trama textil en cesta, pespunte blanco y final curvo azul claro que abraza la caja, hebilla de pinza' }
   };
 
-  /* Los seis tipos. `correa` apunta a la capa del manifiesto; sin ella
-     el color todavía no tiene foto y va tachado. */
+  /* Los seis tipos, en tres niveles: TIPO -> COLOR -> PESPUNTE.
+     Cada hoja apunta a su capa del manifiesto; sin capa no hay foto y
+     va tachada. Si un color no abre `pespuntes` es que ahí no hay nada
+     que elegir —el brazalete— y el paso del pespunte se apaga. */
   var TIPOS = {
     'perforada': { nombre: 'Piel Perforada', colores: {
-      'negro': { nombre: 'Negro', color: '#1A1A1A', correa: 'piel-negra-perforada-pespunte-blanco' } } },
+      'negro': { nombre: 'Negro', color: '#1A1A1A', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste',
+                    correa: 'piel-negra-perforada-pespunte-blanco' } } } } },
+
     'italiana': { nombre: 'Piel Italiana', colores: {
-      'negro':  { nombre: 'Negro',  color: '#1C1D1F', correa: 'piel-italiana-negra' },
-      'marron': { nombre: 'Marrón', color: '#5B3A28', correa: 'piel-italiana-marron' },
-      'azul':   { nombre: 'Azul',   color: '#1E2B47', correa: 'piel-italiana-azul' } } },
+      'negro':  { nombre: 'Negro',  color: '#1C1D1F', pespuntes: {
+        'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-negra' },
+        'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' } } },
+      'marron': { nombre: 'Marrón', color: '#5B3A28', pespuntes: {
+        'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-marron' },
+        'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' } } },
+      'azul':   { nombre: 'Azul',   color: '#1E2B47', pespuntes: {
+        'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' },
+        'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel', correa: 'piel-italiana-azul' } } } } },
+
     'brazalete': { nombre: 'Brazalete Acero', colores: {
       'acero': { nombre: 'Acero', color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' } } },
+
     'nato': { nombre: 'Nato', colores: {
       'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
       'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
       'azul':          { nombre: 'Azul',          color: '#24406E' } } },
+
     'nato-piel': { nombre: 'Nato + Piel', colores: {
       'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
       'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
       'azul':          { nombre: 'Azul',          color: '#24406E' },
       'beige':         { nombre: 'Beige',         color: '#C8B79A' } } },
-    /* Del caucho, lo que se elige es el color de la COSTURA: el
-       proveedor lo hace en verde (P-019), naranja (P-020) y blanco
-       (P-025/026). Con una sola foto valen las tres: sobre un caucho
-       negro el hilo es lo único con color y se tiñe sin tocar el resto
-       (herramientas/recolorear_pespunte.py). */
-    'caucho': { nombre: 'Caucho', colores: {
-      'costura-verde':   { nombre: 'Costura verde',   color: '#2F8F3E', correa: 'goma-negra-costura-verde' },
-      'costura-naranja': { nombre: 'Costura naranja', color: '#EF7C22', correa: 'goma-negra-costura-naranja' },
-      'costura-blanca':  { nombre: 'Costura blanca',  color: '#F2EFE6', correa: 'goma-negra-costura-blanca' } } }
-  };
 
-  /* ---------- 6. EL PESPUNTE (solo con piel italiana) ---------- */
-  var PESPUNTES = {
-    'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' },
-    'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' }
+    /* El caucho negro se hace con tres costuras, y con una sola foto
+       valen las tres: el hilo se tiñe (recolorear_pespunte.py). El azul
+       solo lo hay con pespunte blanco, y SOLO se ofrece con bisel azul
+       (orden de Óscar, 18/08). */
+    'caucho': { nombre: 'Caucho', colores: {
+      'negro': { nombre: 'Negro', color: '#1C1D1F', pespuntes: {
+        'verde':   { nombre: 'Verde',   tec: 'costura verde de contraste',   correa: 'goma-negra-costura-verde' },
+        'naranja': { nombre: 'Naranja', tec: 'costura naranja de contraste', correa: 'goma-negra-costura-naranja' },
+        'blanco':  { nombre: 'Blanco',  tec: 'costura blanca de contraste',  correa: 'goma-negra-costura-blanca' } } },
+      'azul':  { nombre: 'Azul',  color: '#1F3E77', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'goma-azul-pespunte-blanco' } } } } }
   };
 
   /* ---------- 8. LA TAPA ROSCADA ----------
@@ -355,8 +370,8 @@
   };
 
   var e = { caja: 'acero-bnegro', tapa: null, esfera: 'negra', agujas: 'plateadas',
-            tipo: 'perforada', color: 'negro',
-            pespunte: 'contraste', cierre: 'plata' };
+            tipo: 'perforada', color: 'negro', pespunte: 'blanco',
+            cierre: 'plata' };
 
   /* Qué correa vale con qué cabeza: sale del manifiesto
      (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
@@ -370,16 +385,28 @@
     return ok && !no;
   }
 
-  /* La clave de la capa que toca: tipo + color. */
-  function claveCorrea(tipo, color) {
-    var t = TIPOS[tipo || e.tipo];
-    var c = t && t.colores[color || e.color];
-    return c && c.correa;
+  /* La capa que toca, bajando los tres niveles: tipo, color y —si ese
+     color abre pespuntes— pespunte. */
+  function pespuntesDe(tipo, color) {
+    var c = TIPOS[tipo || e.tipo].colores[color || e.color];
+    return c && c.pespuntes;
+  }
+  function claveCorrea(tipo, color, pespunte) {
+    var c = TIPOS[tipo || e.tipo].colores[color || e.color];
+    if (!c) return null;
+    if (!c.pespuntes) return c.correa;
+    var p = c.pespuntes[pespunte || e.pespunte];
+    return p && p.correa;
   }
   var correaActual = function () { return claveCorrea(); };
-  /* Un color vale si su capa existe y encaja con la cabeza de ahora. */
-  function colorVale(tipo, color) { return correaVale(claveCorrea(tipo, color), CATALOGO[clave()]); }
-  /* Un tipo vale si le vale alguno de sus colores. */
+
+  /* Vale lo que tiene capa Y encaja con la cabeza de ahora. */
+  function pespunteVale(tipo, color, p) { return correaVale(claveCorrea(tipo, color, p), CATALOGO[clave()]); }
+  function colorVale(tipo, color) {
+    var ps = pespuntesDe(tipo, color);
+    if (!ps) return correaVale(claveCorrea(tipo, color), CATALOGO[clave()]);
+    return Object.keys(ps).some(function (p) { return pespunteVale(tipo, color, p); });
+  }
   function tipoVale(tipo) {
     return Object.keys(TIPOS[tipo].colores).some(function (c) { return colorVale(tipo, c); });
   }
@@ -393,7 +420,8 @@
   function referencia() {
     return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas +
            (e.tapa ? '-' + e.tapa : '') + '-' + e.tipo + '-' + e.color +
-           (esItaliana() ? '-' + e.pespunte + '-' + e.cierre : '');
+           (pespuntesDe() ? '-' + e.pespunte : '') +
+           (esItaliana() ? '-' + e.cierre : '');
   }
 
   /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
@@ -463,22 +491,17 @@
       if (k) { var p = k.split('|'); e.caja = p[0]; e.esfera = p[1]; e.agujas = p[2]; }
     }
     if (!CATALOGO[clave()]) return;
-    /* Si la correa de ahora no encaja con la cabeza, se busca color
-       dentro del mismo tipo antes de cambiar de tipo. */
+    /* Se arregla de fuera adentro: primero que el tipo valga, luego el
+       color dentro de ese tipo, y por último el pespunte. Así un cambio
+       de caja no tira al cliente de su correa más de lo justo. */
+    if (!tipoVale(e.tipo)) e.tipo = Object.keys(TIPOS).find(tipoVale) || e.tipo;
     if (!colorVale(e.tipo, e.color)) {
-      var otroColor = Object.keys(TIPOS[e.tipo].colores).find(function (c) { return colorVale(e.tipo, c); });
-      if (otroColor) {
-        e.color = otroColor;
-      } else {
-        var otroTipo = Object.keys(TIPOS).find(tipoVale);
-        if (otroTipo) {
-          e.tipo = otroTipo;
-          e.color = Object.keys(TIPOS[otroTipo].colores).find(function (c) { return colorVale(otroTipo, c); });
-        }
-      }
+      e.color = Object.keys(TIPOS[e.tipo].colores).find(function (c) { return colorVale(e.tipo, c); }) || e.color;
     }
-    /* El pespunte lo manda la foto: de cada correa solo tenemos una. */
-    if (esItaliana()) e.pespunte = CORREAS[correaActual()].pespunte;
+    var ps = pespuntesDe(e.tipo, e.color);
+    if (ps && !pespunteVale(e.tipo, e.color, e.pespunte)) {
+      e.pespunte = Object.keys(ps).find(function (p) { return pespunteVale(e.tipo, e.color, p); }) || e.pespunte;
+    }
   }
 
   var esItaliana = function () {
@@ -518,11 +541,12 @@
     botones('tapa', TAPAS, function () { return true; });
     botones('tipo', TIPOS, tipoVale);
     botones('color', TIPOS[e.tipo].colores, function (k) { return colorVale(e.tipo, k); });
-    /* Pespunte y cierre: solo con piel italiana. Del pespunte, solo
-       vale el que tiene foto; el otro se tacha aunque el proveedor lo
-       haga. */
-    botones('pespunte', PESPUNTES,
-            function (k) { return esItaliana() && k === CORREAS[correaActual()].pespunte; }, !esItaliana());
+    /* El pespunte depende del color: cada uno trae los suyos, y solo
+       vale el que tiene foto. Sin pespuntes —el brazalete—, apagado. */
+    var ps = pespuntesDe();
+    botones('pespunte', ps || { 'blanco': { nombre: '—' } },
+            function (k) { return !!ps && pespunteVale(e.tipo, e.color, k); }, !ps);
+    /* El cierre, solo en la piel italiana. */
     botones('cierre', CIERRES, function () { return true; }, !esItaliana());
 
     /* La tapa no lleva nada elegido de salida: hasta que el cliente
@@ -541,7 +565,7 @@
     $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
       ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
       CORREAS[correaActual()].tec + (esItaliana()
-        ? ', con ' + PESPUNTES[e.pespunte].tec + ' y ' + CIERRES[e.cierre].tec
+        ? ', con ' + CIERRES[e.cierre].tec
         : '') + '.';
     $('[data-pv-tec="agua"]').textContent =
       '10 ATM (100 metros): vale para nadar y ducharse, no para bucear con botella. ' +
@@ -558,8 +582,8 @@
                ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() +
                (e.tapa ? ' · tapa ' + TAPAS[e.tapa].nombre.toLowerCase() : '') + ' · ' + MOV.nombre,
       correa: TIPOS[e.tipo].nombre + ' ' + TIPOS[e.tipo].colores[e.color].nombre.toLowerCase() +
-              (esItaliana() ? ' · pespunte ' + PESPUNTES[e.pespunte].nombre.toLowerCase() +
-                              ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
+              (pespuntesDe() ? ' · pespunte ' + pespuntesDe()[e.pespunte].nombre.toLowerCase() : '') +
+              (esItaliana() ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
       precio: precio(),
       foto: $('[data-pv-cabeza-img]').src
     });
@@ -567,7 +591,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=9')
+  fetch('/assets/img/lunar-config/manifest.json?v=10')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();

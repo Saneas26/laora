@@ -1,0 +1,412 @@
+{
+ "fichas": [
+  {
+   "id": "trinchera-cuarzo-nato",
+   "familia": "trinchera",
+   "modelo": "Trinchera",
+   "acabado": "Cuarzo/Nato",
+   "foto": "/assets/img/trinchera-2026/1200/kblanco-nato.webp",
+   "alt": "Trinchera de cuarzo con nato verde militar y segundero blanco",
+   "precio": 179.9,
+   "mm": 36,
+   "atm": 5,
+   "agua": "Lluvia y lavarse las manos. Ducha no.",
+   "movimiento": "De pila: se pone en hora y a vivir.",
+   "correa": "Correa Nato Premium",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/trinchera.html",
+   "paraQuien": "El que quiere uno solo, discreto, y que no le sobre en la muñeca.",
+   "noEs": "No es para nadar: aguanta lluvia y lavarse las manos, y ahí se acaba."
+  },
+  {
+   "id": "trinchera-murph-pack",
+   "familia": "trinchera",
+   "modelo": "Trinchera",
+   "acabado": "Murph Pack",
+   "foto": "/assets/img/trinchera-2026/1200/pack-murph-amarillo.webp",
+   "alt": "Trinchera Murph de numerales crema con piel negra y brazalete de acero",
+   "precio": 359.9,
+   "mm": 36,
+   "atm": 5,
+   "agua": "Lluvia y lavarse las manos. Ducha no.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Pack Piel + Brazalete Acero",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/trinchera.html",
+   "paraQuien": "El que quiere uno solo, discreto, y que no le sobre en la muñeca.",
+   "noEs": "No es para nadar: aguanta lluvia y lavarse las manos, y ahí se acaba."
+  },
+  {
+   "id": "trinchera-acero-acero",
+   "familia": "trinchera",
+   "modelo": "Trinchera",
+   "acabado": "Acero/Acero",
+   "foto": "/assets/img/trinchera-2026/1200/kblanco-acero.webp",
+   "alt": "Trinchera con brazalete de acero y segundero blanco",
+   "precio": 319.9,
+   "mm": 36,
+   "atm": 5,
+   "agua": "Lluvia y lavarse las manos. Ducha no.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Brazalete Acero 316L",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/trinchera.html",
+   "paraQuien": "El que quiere uno solo, discreto, y que no le sobre en la muñeca.",
+   "noEs": "No es para nadar: aguanta lluvia y lavarse las manos, y ahí se acaba."
+  },
+  {
+   "id": "trinchera-titanio-piel",
+   "familia": "trinchera",
+   "modelo": "Trinchera",
+   "acabado": "Titanio/Piel",
+   "foto": "/assets/img/trinchera-2026/1200/titanio-pielo.webp",
+   "alt": "Trinchera de titanio con piel marrón oscuro, caja de 39 mm",
+   "precio": 359.9,
+   "mm": 39,
+   "atm": 20,
+   "agua": "Mar y natación.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Correa Piel Marrón Oscuro",
+   "usos": [
+    "dia",
+    "agua"
+   ],
+   "enlace": "/trinchera.html",
+   "paraQuien": "El que quiere uno solo, discreto, y que no le sobre en la muñeca.",
+   "noEs": "No es para nadar: aguanta lluvia y lavarse las manos, y ahí se acaba."
+  },
+  {
+   "id": "lunar-acero-acero",
+   "familia": "lunar",
+   "modelo": "Lunar",
+   "acabado": "Acero/Acero",
+   "foto": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-316-A02.webp",
+   "alt": "Lunar con bisel negro y brazalete de acero",
+   "precio": 279.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Mecacuarzo: lleva pila, pero el cronógrafo se siente mecánico.",
+   "correa": "Brazalete Acero 316L",
+   "usos": [
+    "hablar"
+   ],
+   "enlace": "/lunar.html",
+   "paraQuien": "El que quiere que le pregunten qué lleva.",
+   "noEs": "No es un automático: lleva pila, aunque el cronógrafo se sienta mecánico."
+  },
+  {
+   "id": "lunar-pvd-goma",
+   "familia": "lunar",
+   "modelo": "Lunar",
+   "acabado": "PVD/Goma",
+   "foto": "/assets/img/piezas/completas/LO-03-C3-E1-Brz-Goma-G01.webp",
+   "alt": "Lunar con caja negra PVD y goma negra",
+   "precio": 219.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Mecacuarzo: lleva pila, pero el cronógrafo se siente mecánico.",
+   "correa": "Correa Goma Negra",
+   "usos": [
+    "hablar",
+    "agua"
+   ],
+   "enlace": "/lunar.html",
+   "paraQuien": "El que quiere que le pregunten qué lleva.",
+   "noEs": "No es un automático: lleva pila, aunque el cronógrafo se sienta mecánico."
+  },
+  {
+   "id": "lunar-azul-caucho",
+   "familia": "lunar",
+   "modelo": "Lunar",
+   "acabado": "Azul/Caucho",
+   "foto": "/assets/img/piezas/completas/LO-03-C2-E2-Brz-Caucho-C26.webp",
+   "alt": "Lunar con bisel azul, esfera blanca y caucho azul",
+   "precio": 249.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Mecacuarzo: lleva pila, pero el cronógrafo se siente mecánico.",
+   "correa": "Caucho Azul, Banda Blanca",
+   "usos": [
+    "hablar",
+    "agua"
+   ],
+   "enlace": "/lunar.html",
+   "paraQuien": "El que quiere que le pregunten qué lleva.",
+   "noEs": "No es un automático: lleva pila, aunque el cronógrafo se sienta mecánico."
+  },
+  {
+   "id": "lunar-acero-piel",
+   "familia": "lunar",
+   "modelo": "Lunar",
+   "acabado": "Acero/Piel",
+   "foto": "/assets/img/piezas/completas/LO-03-C1-E1-Brz-Piel-P02.webp",
+   "alt": "Lunar con bisel negro y piel negra",
+   "precio": 279.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Mecacuarzo: lleva pila, pero el cronógrafo se siente mecánico.",
+   "correa": "Piel Negra, Pespunte Blanco",
+   "usos": [
+    "hablar"
+   ],
+   "enlace": "/lunar.html",
+   "paraQuien": "El que quiere que le pregunten qué lleva.",
+   "noEs": "No es un automático: lleva pila, aunque el cronógrafo se sienta mecánico."
+  },
+  {
+   "id": "cero-cero-negro-mate-acero",
+   "familia": "cero-cero",
+   "modelo": "Cero Cero",
+   "acabado": "Negro Mate/Acero",
+   "foto": "/assets/img/piezas/completas/LO-05-C4-E2-Brz-904-A12.webp",
+   "alt": "Cero Cero con bisel negro mate y brazalete 904L",
+   "precio": 349.9,
+   "mm": 41,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Brazalete Acero 904L",
+   "usos": [
+    "hablar"
+   ],
+   "enlace": "/coleccion.html#cero-cero",
+   "paraQuien": "El más grande de la casa y el que más se mira.",
+   "noEs": "41 mm: en muñeca fina se ve grande, y con malla milanesa solo aguanta lluvia."
+  },
+  {
+   "id": "cero-cero-azul-malla",
+   "familia": "cero-cero",
+   "modelo": "Cero Cero",
+   "acabado": "Azul/Malla",
+   "foto": "/assets/img/piezas/completas/LO-05-C2-E1-Brz-316-A08.webp",
+   "alt": "Cero Cero con bisel azul y malla milanesa",
+   "precio": 419.9,
+   "mm": 41,
+   "atm": 5,
+   "agua": "Lluvia y lavarse las manos. Ducha no.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Malla Milanesa 316L",
+   "usos": [
+    "hablar",
+    "vestir"
+   ],
+   "enlace": "/coleccion.html#cero-cero",
+   "paraQuien": "El más grande de la casa y el que más se mira.",
+   "noEs": "41 mm: en muñeca fina se ve grande, y con malla milanesa solo aguanta lluvia."
+  },
+  {
+   "id": "cero-cero-oro-rosa-malla",
+   "familia": "cero-cero",
+   "modelo": "Cero Cero",
+   "acabado": "Oro Rosa/Malla",
+   "foto": "/assets/img/piezas/completas/LO-05-C3-E3-Brz-316-A08.webp",
+   "alt": "Cero Cero con bisel negro y oro rosa y malla milanesa",
+   "precio": 419.9,
+   "mm": 41,
+   "atm": 5,
+   "agua": "Lluvia y lavarse las manos. Ducha no.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Malla Milanesa 316L",
+   "usos": [
+    "hablar",
+    "vestir"
+   ],
+   "enlace": "/coleccion.html#cero-cero",
+   "paraQuien": "El más grande de la casa y el que más se mira.",
+   "noEs": "41 mm: en muñeca fina se ve grande, y con malla milanesa solo aguanta lluvia."
+  },
+  {
+   "id": "cero-cero-negro-acero",
+   "familia": "cero-cero",
+   "modelo": "Cero Cero",
+   "acabado": "Negro/Acero",
+   "foto": "/assets/img/piezas/completas/LO-05-C1-E2-Brz-904-A12.webp",
+   "alt": "Cero Cero con bisel negro y blanco y brazalete 904L",
+   "precio": 349.9,
+   "mm": 41,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Brazalete Acero 904L",
+   "usos": [
+    "hablar"
+   ],
+   "enlace": "/coleccion.html#cero-cero",
+   "paraQuien": "El más grande de la casa y el que más se mira.",
+   "noEs": "41 mm: en muñeca fina se ve grande, y con malla milanesa solo aguanta lluvia."
+  },
+  {
+   "id": "precisa-cuarzo-marino",
+   "familia": "precisa",
+   "modelo": "Precisa",
+   "acabado": "Cuarzo/Marino",
+   "foto": "/assets/img/precisa-2026/1200/azul-marino.webp",
+   "alt": "Precisa con esfera azul marino y brazalete integrado",
+   "precio": 249.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "De pila: se pone en hora y a vivir.",
+   "correa": "Brazalete Integrado",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/precisa.html",
+   "paraQuien": "El de todos los días con brazalete integrado, sin correa que cambiar.",
+   "noEs": "No es un reloj de buceo: el bisel no gira."
+  },
+  {
+   "id": "precisa-auto-degradado",
+   "familia": "precisa",
+   "modelo": "Precisa",
+   "acabado": "Auto/Degradado",
+   "foto": "/assets/img/precisa-2026/1200/azul-degradado.webp",
+   "alt": "Precisa con esfera azul degradado y brazalete integrado",
+   "precio": 379.9,
+   "mm": 40,
+   "atm": 20,
+   "agua": "Mar y natación.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Brazalete Integrado",
+   "usos": [
+    "dia",
+    "agua"
+   ],
+   "enlace": "/precisa.html",
+   "paraQuien": "El de todos los días con brazalete integrado, sin correa que cambiar.",
+   "noEs": "No es un reloj de buceo: el bisel no gira."
+  },
+  {
+   "id": "precisa-cuarzo-tiffany",
+   "familia": "precisa",
+   "modelo": "Precisa",
+   "acabado": "Cuarzo/Tiffany",
+   "foto": "/assets/img/precisa-2026/1200/tiffany.webp",
+   "alt": "Precisa con esfera tiffany y brazalete integrado",
+   "precio": 249.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "De pila: se pone en hora y a vivir.",
+   "correa": "Brazalete Integrado",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/precisa.html",
+   "paraQuien": "El de todos los días con brazalete integrado, sin correa que cambiar.",
+   "noEs": "No es un reloj de buceo: el bisel no gira."
+  },
+  {
+   "id": "precisa-auto-negra",
+   "familia": "precisa",
+   "modelo": "Precisa",
+   "acabado": "Auto/Negra",
+   "foto": "/assets/img/precisa-2026/1200/negra.webp",
+   "alt": "Precisa con esfera negra y brazalete integrado",
+   "precio": 379.9,
+   "mm": 40,
+   "atm": 20,
+   "agua": "Mar y natación.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Brazalete Integrado",
+   "usos": [
+    "dia",
+    "agua"
+   ],
+   "enlace": "/precisa.html",
+   "paraQuien": "El de todos los días con brazalete integrado, sin correa que cambiar.",
+   "noEs": "No es un reloj de buceo: el bisel no gira."
+  },
+  {
+   "id": "bitacora-silicona-blanca",
+   "familia": "bitacora",
+   "modelo": "Bitácora",
+   "acabado": "Silicona/Blanca",
+   "foto": "/assets/img/piezas/completas/1200/LO-04-C1-E2-Brz-Goma-Bit-01.webp?v=33cdc1f0",
+   "alt": "Bitácora con esfera blanca y correa de caucho negro",
+   "precio": 319.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Silicona Negra",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/coleccion.html#bitacora",
+   "paraQuien": "Automático de diario, para quien quiere ver la máquina trabajando.",
+   "noEs": "No es el más barato de la casa: aquí se empieza en 319,90 €."
+  },
+  {
+   "id": "bitacora-acero-turquesa",
+   "familia": "bitacora",
+   "modelo": "Bitácora",
+   "acabado": "Acero/Turquesa",
+   "foto": "/assets/img/piezas/completas/1200/LO-04-C1-E1-Brz-Acero-Bit-01.webp?v=ab7d0d08",
+   "alt": "Bitácora original: esfera turquesa y brazalete integrado de acero plata",
+   "precio": 359.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Acero Plata",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/coleccion.html#bitacora",
+   "paraQuien": "Automático de diario, para quien quiere ver la máquina trabajando.",
+   "noEs": "No es el más barato de la casa: aquí se empieza en 319,90 €."
+  },
+  {
+   "id": "bitacora-silicona-marron",
+   "familia": "bitacora",
+   "modelo": "Bitácora",
+   "acabado": "Silicona/Marrón",
+   "foto": "/assets/img/piezas/completas/1200/LO-04-C3-E6-Brz-Goma-Bit-04.webp?v=a0105b7c",
+   "alt": "Bitácora en oro rosa con esfera marrón y correa de caucho marrón",
+   "precio": 339.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Silicona Marrón",
+   "usos": [
+    "dia",
+    "vestir"
+   ],
+   "enlace": "/coleccion.html#bitacora",
+   "paraQuien": "Automático de diario, para quien quiere ver la máquina trabajando.",
+   "noEs": "No es el más barato de la casa: aquí se empieza en 319,90 €."
+  },
+  {
+   "id": "bitacora-acero-negra",
+   "familia": "bitacora",
+   "modelo": "Bitácora",
+   "acabado": "Acero/Negra",
+   "foto": "/assets/img/piezas/completas/1200/LO-04-C4-E3-Brz-Acero-Bit-02.webp?v=e57d07d2",
+   "alt": "Bitácora todo en negro: caja PVD, esfera negra y brazalete de acero negro",
+   "precio": 369.9,
+   "mm": 40,
+   "atm": 10,
+   "agua": "Ducha y piscina sin pensarlo.",
+   "movimiento": "Automático: sin pila, tira del movimiento de tu muñeca.",
+   "correa": "Acero Negro",
+   "usos": [
+    "dia"
+   ],
+   "enlace": "/coleccion.html#bitacora",
+   "paraQuien": "Automático de diario, para quien quiere ver la máquina trabajando.",
+   "noEs": "No es el más barato de la casa: aquí se empieza en 319,90 €."
+  }
+ ]
+}
