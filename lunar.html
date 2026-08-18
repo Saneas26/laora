@@ -316,7 +316,7 @@
        El negro todavía no tiene foto. */
     'brazalete': { nombre: 'Brazalete', colores: {
       'acero': { nombre: 'Acero',     color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' },
-      'negro': { nombre: 'Negro PVD', color: '#26282A' } } },
+      'negro': { nombre: 'Negro PVD', color: '#26282A', correa: 'brazalete-negro-pvd' } } },
 
     'nato': { nombre: 'Nato', colores: {
       'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
@@ -610,7 +610,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=15')
+  fetch('/assets/img/lunar-config/manifest.json?v=16')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
