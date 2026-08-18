@@ -278,21 +278,20 @@
     'brazalete-acero-316l-cinco-columnas': {
       coste: 19.69, cierre: 'Cierre desplegable',
       tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con cierre desplegable' },
-    /* Nato + piel: 4,79 € (Óscar, 18/08). Ojo, es precio de OFERTA:
-       reverificar antes de comprar. Sale más barato que el nato a secas,
-       que está en 11,29 €. */
-    'nato-piel-verde-militar': { coste: 4.79, cierre: 'Hebilla',
-      tec: 'nato de tejido verde militar con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-azul': { coste: 4.79, cierre: 'Hebilla',
-      tec: 'nato de tejido azul con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-beige': { coste: 4.79, cierre: 'Hebilla',
-      tec: 'nato de tejido beige con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-gris-claro': { coste: 4.79, cierre: 'Hebilla',
-      tec: 'nato de tejido gris claro con refuerzos y pasadores de piel marrón, hebilla de acero' },
-    'nato-piel-negro': { coste: 4.79, cierre: 'Hebilla',
-      tec: 'nato de tejido negro con refuerzos y pasadores de piel negra, hebilla de acero' },
-    'nato-piel-negro-gris': { coste: 4.79, cierre: 'Hebilla',
-      tec: 'nato de tejido negro con franjas grises, refuerzos y pasadores de piel negra, hebilla de acero' },
+    /* Nato: 11,29 € (Óscar, 18/08). El nato+piel, cuando haya foto, va
+       a 4,79 € —precio de OFERTA, reverificar antes de comprar—. */
+    'nato-verde-militar': { coste: 11.29, cierre: 'Hebilla',
+      tec: 'nato de tejido verde militar de una pieza, pasadores y hebilla de acero' },
+    'nato-azul': { coste: 11.29, cierre: 'Hebilla',
+      tec: 'nato de tejido azul de una pieza, pasadores y hebilla de acero' },
+    'nato-beige': { coste: 11.29, cierre: 'Hebilla',
+      tec: 'nato de tejido beige de una pieza, pasadores y hebilla de acero' },
+    'nato-gris-claro': { coste: 11.29, cierre: 'Hebilla',
+      tec: 'nato de tejido gris claro de una pieza, pasadores y hebilla de acero' },
+    'nato-negro': { coste: 11.29, cierre: 'Hebilla',
+      tec: 'nato de tejido negro de una pieza, pasadores y hebilla de acero' },
+    'nato-negro-gris': { coste: 11.29, cierre: 'Hebilla',
+      tec: 'nato de tejido negro con franjas grises, pasadores y hebilla de acero' },
     'brazalete-negro-pvd': {
       coste: 26.39, cierre: 'Cierre desplegable',
       tec: 'brazalete de acero 316L con recubrimiento negro tipo PVD, tres eslabones y cierre desplegable' },
@@ -358,20 +357,22 @@
       'acero': { nombre: 'Acero',     color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' },
       'negro': { nombre: 'Negro PVD', color: '#26282A', correa: 'brazalete-negro-pvd' } } },
 
+    /* Nato. Óscar pidió tres colores y ha entregado seis: se montan
+       los seis. */
     'nato': { nombre: 'Nato', colores: {
-      'verde-militar': { nombre: 'Verde militar', color: '#4A5138' },
-      'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
-      'azul':          { nombre: 'Azul',          color: '#24406E' } } },
+      'verde-militar': { nombre: 'Verde militar', color: '#5B5B3A', correa: 'nato-verde-militar' },
+      'azul':          { nombre: 'Azul',          color: '#1F3A6E', correa: 'nato-azul' },
+      'beige':         { nombre: 'Beige',         color: '#B8A075', correa: 'nato-beige' },
+      'gris-claro':    { nombre: 'Gris claro',    color: '#C2C4C4', correa: 'nato-gris-claro' },
+      'negro':         { nombre: 'Negro',         color: '#1C1D1F', correa: 'nato-negro' },
+      'negro-gris':    { nombre: 'Negro y gris',  color: '#4A4C4E', correa: 'nato-negro-gris' } } },
 
-    /* Nato con refuerzos de piel. Óscar pidió cuatro colores y ha
-       entregado seis: se montan los seis. */
+    /* Nato + piel: todavía sin foto. */
     'nato-piel': { nombre: 'Nato + Piel', colores: {
-      'verde-militar': { nombre: 'Verde militar', color: '#5B5B3A', correa: 'nato-piel-verde-militar' },
-      'azul':          { nombre: 'Azul',          color: '#1F3A6E', correa: 'nato-piel-azul' },
-      'beige':         { nombre: 'Beige',         color: '#B8A075', correa: 'nato-piel-beige' },
-      'gris-claro':    { nombre: 'Gris claro',    color: '#C2C4C4', correa: 'nato-piel-gris-claro' },
-      'negro':         { nombre: 'Negro',         color: '#1C1D1F', correa: 'nato-piel-negro' },
-      'negro-gris':    { nombre: 'Negro y gris',  color: '#4A4C4E', correa: 'nato-piel-negro-gris' } } },
+      'verde-militar': { nombre: 'Verde militar', color: '#5B5B3A' },
+      'negro':         { nombre: 'Negro',         color: '#1C1D1F' },
+      'azul':          { nombre: 'Azul',          color: '#1F3A6E' },
+      'beige':         { nombre: 'Beige',         color: '#B8A075' } } },
 
     /* El caucho negro se hace con tres costuras, y con una sola foto
        valen las tres: el hilo se tiñe (recolorear_pespunte.py). El azul
@@ -686,7 +687,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=27')
+  fetch('/assets/img/lunar-config/manifest.json?v=28')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
