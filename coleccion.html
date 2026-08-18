@@ -26,7 +26,7 @@
 <!-- `cabecera.css`: dentro está `.cb-marca`, el logotipo dibujado con
      la O como círculo. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=12">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=13">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -52,6 +52,22 @@
     <div>
     <p class="cv2-kicker">Colección <span class="cb-marca" aria-hidden="true">la<span class="o"></span>ra</span><span class="solo-lectores">laOra</span> · 2026</p>
     <h1>Te suena, te gusta, lo deseas...<br><em>Pero ahora al precio honesto.</em></h1>
+    </div>
+  </section>
+
+  <!-- LAS TRES PREGUNTAS (18/08/2026). La entrada del que llega sin
+       saber de relojes: muñeca, uso y presupuesto, y como mucho tres
+       relojes con el motivo escrito. Va ANTES que la barra de modelos
+       porque quien ya sabe lo que busca se la salta de un vistazo, y
+       quien no lo sabe se encontraba con veinte tarjetas de golpe.
+       El contenido lo pinta `recomendador.js` desde
+       `assets/datos/recomendador.json`; si el archivo no carga, la
+       sección se esconde sola y la colección de abajo sigue entera. -->
+  <section class="rec">
+    <div class="rec-caja" data-recomendador aria-live="polite">
+      <p class="rec-paso">Tres preguntas</p>
+      <h2 class="rec-titulo">Dime cómo eres y te digo cuál.</h2>
+      <p class="rec-pie">Tres preguntas y te enseño dos o tres relojes, no veinte. Con el motivo escrito y con lo que ese reloj no hace.</p>
     </div>
   </section>
 
@@ -834,6 +850,7 @@ document.addEventListener('mouseleave', function (ev) {
   });
 })();
 </script>
+<script src="/assets/js/recomendador.js?v=1" defer></script>
 <script src="/assets/js/empujoncito.js?v=3" defer></script>
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
