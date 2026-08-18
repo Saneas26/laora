@@ -293,7 +293,9 @@
     'piel-italiana-marron-pespunte-tono': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
       tec: 'piel de vaca genuina marrón con relieve de cocodrilo y liberación rápida' },
     'piel-italiana-azul':   { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina azul con relieve de cocodrilo y liberación rápida' },
+      tec: 'piel de vaca genuina azul marino con relieve de cocodrilo y liberación rápida' },
+    'piel-italiana-azul-pespunte-tono': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
+      tec: 'piel de vaca genuina azul marino con relieve de cocodrilo y liberación rápida' },
     /* Caucho (P-019). Lo que cambia entre variantes es la COSTURA, así
        que ahí es donde va la paleta del tipo. */
     'goma-negra-costura-verde':   { coste: 5.59, cierre: 'Hebilla de pinza',
@@ -329,9 +331,11 @@
         'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-marron' },
         'color':     { nombre: 'A color',   tec: 'pespunte marrón al tono de la piel',
                        correa: 'piel-italiana-marron-pespunte-tono' } } },
+      /* La azul, SOLO con bisel azul (Óscar, 18/08). */
       'azul':   { nombre: 'Azul',   color: '#1E2B47', pespuntes: {
-        'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' },
-        'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel', correa: 'piel-italiana-azul' } } } } },
+        'contraste': { nombre: 'Contraste', tec: 'pespunte azul claro de contraste', correa: 'piel-italiana-azul' },
+        'color':     { nombre: 'A color',   tec: 'pespunte azul marino al tono de la piel',
+                       correa: 'piel-italiana-azul-pespunte-tono' } } } } },
 
     /* El proveedor hace el brazalete en acero y en negro PVD (P-012).
        El negro todavía no tiene foto. */
@@ -654,7 +658,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=21')
+  fetch('/assets/img/lunar-config/manifest.json?v=22')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();

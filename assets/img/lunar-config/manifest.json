@@ -68,16 +68,13 @@
       "nota": "MADRE INTEGRADA de Oscar (18/08): la correa abraza la caja con volumen. Sustituye a la anterior, que ademas traia la caja en oro rosa y hubo que transplantarle el acero. Esta viene con caja de acero de origen. Solo con cajas de acero."
     },
     "piel-italiana-azul": {
-      "src": "/assets/img/lunar-config/straps/piel-italiana-azul.webp?v=2",
+      "src": "/assets/img/lunar-config/straps/piel-italiana-azul.webp?v=3",
       "cabezasPermitidas": [
-        "cab-acero-"
+        "cab-acero-bazul-"
       ],
-      "cabezasExcluidas": [
-        "cab-acero-bnegro-esf27-verde",
-        "cab-negra-bnegro-esf27-verde"
-      ],
+      "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/piel-italiana-azul-madre-4k.png",
-      "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto. NO con la esfera VERDE (orden de Oscar, 18/08)."
+      "nota": "MADRE INTEGRADA de Oscar (18/08): la correa abraza la caja. **SOLO CON BISEL AZUL** (orden de Oscar): con el bisel negro y con la caja negra queda tachada. Al restringirla al bisel azul sobra la exclusion de la esfera verde, que es de bisel negro."
     },
     "goma-negra-costura-verde": {
       "src": "/assets/img/lunar-config/straps/goma-negra-costura-verde.webp?v=1",
@@ -152,6 +149,15 @@
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/piel-italiana-marron-pespunte-tono-madre-4k.png",
       "nota": "El pespunte al tono de la marron: hilo crema tenido de marron desde la misma madre. Mismo metodo que la negra integrada: el hilo se localiza por DONDE va (11% y 88% del ancho de la correa, fila a fila), no por luz, porque el charol brilla tanto como el hilo."
+    },
+    "piel-italiana-azul-pespunte-tono": {
+      "src": "/assets/img/lunar-config/straps/piel-italiana-azul-pespunte-tono.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-bazul-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/piel-italiana-azul-pespunte-tono-madre-4k.png",
+      "nota": "El pespunte al tono de la azul: hilo azul claro tenido de azul marino desde la misma madre."
     }
   },
   "default": {
