@@ -85,7 +85,9 @@
          traía pegado, porque el rótulo lo pone ahora la página. -->
     <ol class="historia-pantallas">
       <li class="acto-pantalla acto-deseo">
-        <img class="acto-foto" src="/assets/img/filosofia-2026/acto1-deseo.webp?v=2" alt="Un reloj clásico en la muñeca de un hombre, con la luz de una ventana detrás" loading="lazy" decoding="async" width="1376" height="768">
+        <!-- La primera pantalla se carga sin esperar: viene justo detrás del acto
+             1 y con `lazy` se ve un instante en negro al llegar. -->
+        <img class="acto-foto" src="/assets/img/filosofia-2026/acto1-deseo.webp?v=2" alt="Un reloj clásico en la muñeca de un hombre, con la luz de una ventana detrás" loading="eager" decoding="async" width="1376" height="768">
         <div class="acto-mascara" aria-hidden="true"></div>
         <div class="acto-mensaje">
           <p class="acto-orden"><span>01</span>El deseo</p>
