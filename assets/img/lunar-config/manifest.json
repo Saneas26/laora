@@ -75,7 +75,8 @@
   },
   "default": {
     "head": "cab-acero-bnegro-agujas-plateadas",
-    "strap": "piel-negra-perforada-pespunte-blanco"
+    "strap": "piel-negra-perforada-pespunte-blanco",
+    "tapa": "solida-acero"
   },
   "alineado": {
     "nota": "Las cabezas originales (assets/heads/) venian de generaciones distintas: hasta 13 px de desvio y 6,6% de diferencia de tamano de caja. Se han alineado TODAS a la geometria de la cabeza de referencia, que es la fotografiada con esta correa. Solo se ha movido y escalado la imagen entera; el dibujo no se ha tocado y los originales siguen en assets/heads/.",
@@ -86,5 +87,17 @@
       "diametro_caja": 741
     },
     "herramienta": "herramientas/alinear_cabezas.py"
-  }
+  },
+  "tapas": {
+    "solida-acero": {
+      "src": "/assets/img/lunar-config/casebacks/tapa-solida-acero.webp?v=1"
+    },
+    "lunar-color": {
+      "src": "/assets/img/lunar-config/casebacks/tapa-lunar-color.webp?v=1"
+    },
+    "huella-astronauta": {
+      "src": "/assets/img/lunar-config/casebacks/tapa-huella-astronauta.webp?v=1"
+    }
+  },
+  "tapas_nota": "Las tres tapas roscadas sólidas del proveedor, sin cambio de precio. Venían de generaciones distintas (Ø 900/918/915 en lienzo 1254): se han igualado con herramientas/alinear_tapas.py moviendo y escalando la imagen entera, sin tocar el dibujo. Masters en masters-2026/lunar/tapas/."
 }
