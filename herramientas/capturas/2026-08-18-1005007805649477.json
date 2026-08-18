@@ -1,0 +1,36 @@
+{
+  "capturado": "2026-08-18",
+  "anuncio": "https://es.aliexpress.com/item/1005007805649477.html",
+  "titulo": "Maikes correa de reloj de cuero de liberación rápida 20mm 21mm 22mm",
+  "marca": "MAIKES",
+  "modelo": "7011E",
+  "vendedor": "MAIKES official store",
+  "valoracion": "4,9 sobre 541 valoraciones · 1.000+ ventas de este vendedor",
+  "material": "Piel de vaca genuina (grabado GENUINE LEATHER en el forro), relieve de cocodrilo, acabado brillante",
+  "cierre_declarado_en_ficha": "Butterfly Buckle (ALERTA: la ficha lo declara para un SKU que en la foto es de pinza)",
+  "liberacion_rapida": true,
+  "anchos": ["19mm", "20mm", "21mm", "22mm"],
+  "ancho_que_necesitamos": "20 mm",
+  "largo": "20 cm",
+  "genero": "unisex",
+  "envio": "gratis, 23-28 de agosto; devoluciones gratis en 90 días",
+  "precio_anuncio_18_08": "26,59 € (oferta hasta el 26/08 22:59; PVP tachado 56,57 €)",
+  "precios_de_oscar_18_08": {
+    "hebilla plata": 29.99,
+    "hebilla negra": 31.19,
+    "cierre mariposa": 30.19,
+    "hebilla oro rosa": 29.59,
+    "hebilla oro": 30.99
+  },
+  "estructura_del_sku": "[PB|HD] + Color + [pespunte] + [hebilla]. PB = hebilla de pinza, HD = cierre mariposa. Pespunte: W blanco, B al tono (negro/azul), G en el verde. Hebilla: S plata, B negra, RG oro rosa, G oro.",
+  "colores": ["Black", "DarkBrown", "Blue", "Green"],
+  "skus": 40,
+  "dados_de_alta": "P-028 a P-042: negro, marrón y azul con pespunte blanco, los cinco cierres (ALTA_2026_08_18)",
+  "alertas": [
+    "Los rótulos de las fotos del vendedor no son de fiar: la foto del SKU 'PB BlueB S' dice 'Gold Buckle' y la hebilla que se ve es de plata. Manda el código del SKU, no el rótulo.",
+    "La ficha declara 'Butterfly Buckle' como tipo de cierre del producto entero, pero las variantes PB son de hebilla de pinza.",
+    "Precio capturado en oferta con cuenta atrás: reverificar antes de comprar.",
+    "Las fotos de muestra llevan marcado '21x18': hay que pedir expresamente 20 mm."
+  ],
+  "sin_declarar": ["grosor de la piel", "curtido", "origen real del cuero (el anuncio no dice italiano)"]
+}
