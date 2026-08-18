@@ -206,3 +206,32 @@ function ALTA_2026_08_18() {
   });
   altaPiezas_('ALTA_2026_08_18', filas, new Date(2026, 7, 18));
 }
+
+/**
+ * Tanda 5 — 18/08/2026. Correa NATO del Lunar.
+ * Anuncio 1005012621893442 (modelo HMYT), 11,29 €, seis colores.
+ * El anuncio la vende como «correa de cuero y lona»: lleva refuerzos
+ * de piel, pero en la web va como NATO por decisión de Óscar.
+ * Captura completa: capturas/2026-08-18-1005012621893442.json
+ */
+function ALTA_2026_08_18B() {
+  var LINK = 'https://es.aliexpress.com/item/1005012621893442.html';
+  var COMUN = 'Modelo HMYT · «correa de cuero y lona NATO» segun el anuncio: tejido con refuerzos y pasadores de piel · hebilla de pinza · pedir ancho 20 mm (el anuncio hace 20 y 22) · largo SIN declarar, preguntar al vendedor · unisex · 11,29 € el 18/08 (dato de Óscar) · en la web se publica como NATO, no como nato+piel';
+
+  var colores = [
+    ['Army Green', 'verde militar'],
+    ['Royal Blue', 'azul'],
+    ['Brown',      'beige con piel marrón'],
+    ['Gray',       'gris claro'],
+    ['Black',      'negra'],
+    ['Black Gray', 'negra con franjas grises']
+  ];
+  var filas = [], n = 43;
+  colores.forEach(function (c) {
+    filas.push(['P-0' + n, 'Correa', 'Lunar',
+      'Correa nato ' + c[1] + ' con refuerzos de piel, hebilla de pinza',
+      'Nato ' + c[1], c[0] + ' · 20 mm', 11.29, LINK, '', '', COMUN]);
+    n++;
+  });
+  altaPiezas_('ALTA_2026_08_18B', filas, new Date(2026, 7, 18));
+}
