@@ -760,12 +760,17 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 /* la sección activa, en el oro del material */
 .cb.cb-claro .cb-menu a.activo { color: var(--gold); }
 
-footer { background: var(--dark); color: #d9dbd4; padding: 80px 6vw 28px; display: grid; grid-template-columns: 2fr 1fr; gap: 42px 8vw; }
+footer { background: var(--dark); color: #d9dbd4; padding: 80px 6vw 28px; display: grid; grid-template-columns: 1fr; gap: 34px; }
 footer .cb-marca { font-size: 42px; color: #fff; }
-.pie-links { display: flex; flex-wrap: wrap; align-content: start; gap: 18px 28px; font-size: 12px; }
-.pie-links a:hover { color: var(--gold); }
+/* EL MENÚ DEL PIE SE FUE el 18/08/2026, por encargo de Óscar: repetía
+   la cabecera cuatro enlaces más abajo y no lo usaba nadie. De los cinco
+   solo queda Privacidad, y va al final del todo, a la derecha, junto al
+   aviso de derechos: es un enlace legal, no una sección. */
 .pie-aviso { grid-column: 1 / -1; max-width: 900px; margin: 0; font-size: 12px; line-height: 1.6; color: #858981; }
-footer small { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.15); font-size: 11px; color: #858981; }
+footer small { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.15); font-size: 11px; color: #858981;
+               display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 18px; }
+.pie-privacidad { color: #d9dbd4; font-size: 12px; }
+.pie-privacidad:hover { color: var(--gold); }
 
 .fg-title { grid-column: 1 / -1; justify-self: center; margin: 30px 0 16px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #858981; }
 .fg-title .saneas { font-family: 'Inter', sans-serif; font-weight: 600; color: #5cb6cc; text-transform: none; font-size: 13px; letter-spacing: .5px; }
@@ -908,7 +913,6 @@ footer small { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid rgb
 .config-opciones button span { font-size: 15px; }
 .config-titulo, .config-ref, .pdp-price span { font-size: 13px; }
 .pie-aviso, .ph-aviso, .cmp-aviso, .market-footnote { font-size: 13px; line-height: 1.6; }
-.pie-links a { font-size: 14px; }
 
 /* 13 px → 15. Textos de apoyo que acompañan a una decisión */
 .config-nota, .cur-gancho { font-size: 15px; line-height: 1.5; }
