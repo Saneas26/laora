@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=22">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=23">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -139,7 +139,14 @@
 
       <!-- El pie de compra: fijo bajo las elecciones hasta la Ficha Técnica -->
       <div class="pv-pie" data-pv-pie>
-        <p class="pv-precio" data-pv-precio>189,90 €</p>
+        <div class="pv-precio-fila">
+          <p class="pv-precio" data-pv-precio>189,90 €</p>
+          <!-- Klarna, a la derecha del precio: el hueco que quedaba -->
+          <p class="pv-klarna">
+            <img src="/assets/img/pago/klarna.svg" alt="Klarna" width="45" height="25" loading="lazy">
+            <span>3 pagos de <b data-pv-klarna>63,30 €</b><small>sin intereses</small></span>
+          </p>
+        </div>
         <p class="pv-imp">Impuestos incluidos.</p>
         <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
         <div class="pv-confianza">
@@ -618,6 +625,9 @@
       ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase();
 
     $('[data-pv-precio]').textContent = eu(precio());
+    /* Klarna parte el precio en tres. El tercero se redondea hacia
+       arriba para que 3 plazos nunca sumen menos que el total. */
+    $('[data-pv-klarna]').textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
     $('[data-pv-cal]').textContent = 'Calibre ' + MOV.cal;
     $('[data-pv-cierre]').textContent = cierreTexto();
     $('[data-pv-color]').textContent = TIPOS[e.tipo].colores[e.color].nombre;
