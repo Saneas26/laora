@@ -1,0 +1,27 @@
+{
+  "capturado": "2026-08-18",
+  "anuncio": "https://es.aliexpress.com/item/1005012621893442.html",
+  "titulo": "Correa de cuero y lona NATO para Seiko/Rolex/Hamilton, correa de repuesto, pulsera Universal de 20mm y 22mm",
+  "modelo": "HMYT",
+  "precio": "11,29 €",
+  "cierre_declarado": "Pin Buckle (hebilla de pinza)",
+  "genero": "unisexo",
+  "anchos": ["20mm", "22mm"],
+  "ancho_que_necesitamos": "20 mm",
+  "largo": "sin declarar (la ficha pone «otro»)",
+  "colores": ["Brown", "Gray", "Black", "Army Green", "Royal Blue", "Black Gray"],
+  "correspondencia_con_nuestras_fotos": {
+    "Brown": "beige (tejido beige con piel marrón)",
+    "Army Green": "verde militar",
+    "Royal Blue": "azul",
+    "Gray": "gris claro",
+    "Black": "negro",
+    "Black Gray": "negro y gris"
+  },
+  "dados_de_alta": "P-043 a P-048 (ALTA_2026_08_18B)",
+  "alertas": [
+    "El anuncio la llama «correa de CUERO Y LONA»: lleva refuerzos de piel. En la web va como NATO por decisión de Óscar (18/08), después de corregir la primera publicación que la puso como nato+piel.",
+    "El nato+piel propiamente dicho está en 4,79 € en oferta, según Óscar, y todavía no tiene foto ni anuncio registrado.",
+    "Largo sin declarar: preguntar al vendedor antes de pedir."
+  ]
+}
