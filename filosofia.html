@@ -21,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <!-- Página estática: su generador (generar.py) y el catálogo de acabados
      se retiraron el 11/08/2026. Se edita a mano hasta el rediseño. -->
-<link rel="stylesheet" href="/assets/css/laora.css?v=43">
+<link rel="stylesheet" href="/assets/css/laora.css?v=44">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -70,31 +70,91 @@
 
   <section class="historia">
     <!-- La frase de arriba se fue al acto 1 el 07/08/2026, así que aquí
-         ya no se repite: se entra directo por los cuatro actos. -->
+         ya no se repite: se entra directo por los cuatro actos.
+
+         18/08/2026, Óscar: «ese acto es todo letra y eso no se lo lee
+         nadie. Conviértelo en 4 actos modo infografía». Cada acto tenía
+         debajo un párrafo entrecomillado de seis líneas; ahora tiene un
+         pictograma, un dato grande y tres o cuatro líneas marcadas con
+         su signo. Los titulares y las etiquetas NO se han tocado: son
+         los que escribió Óscar. Lo que dicen las líneas sale de esos
+         mismos párrafos, con sus mismas palabras. Los originales están
+         en el historial de git. -->
+
+    <!-- Los dibujos van una sola vez aquí y las tarjetas los llaman con
+         `<use>`: así el mismo icono no se repite cinco veces en el HTML. -->
+    <svg class="historia-simbolos" aria-hidden="true" focusable="false" width="0" height="0">
+      <defs>
+        <symbol id="ic-deseo" viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="6.6"/><path d="M12 9.3v3.2l2.2 1.4"/><path d="M9.4 5.9 9.8 3h4.4l.4 2.9M9.4 19.1l.4 2.9h4.4l.4-2.9"/></symbol>
+        <symbol id="ic-problema" viewBox="0 0 24 24"><path d="M12 21V9.5"/><path d="M12 9.5 5 5.4v4.3M12 9.5 19 5.4v4.3"/><path d="M2.8 13.2h4.4M16.8 13.2h4.4"/></symbol>
+        <symbol id="ic-respuesta" viewBox="0 0 24 24"><circle cx="10.4" cy="10.4" r="6.1"/><path d="M14.9 14.9 21 21"/><path d="M10.4 7.3v3.1l2 1.3"/></symbol>
+        <symbol id="ic-recompensa" viewBox="0 0 24 24"><path d="M12 2.8 4.6 5.6v6c0 4.4 3 7.7 7.4 9.6 4.4-1.9 7.4-5.2 7.4-9.6v-6z"/><path d="m8.6 11.8 2.5 2.6 4.4-4.7"/></symbol>
+        <symbol id="m-si" viewBox="0 0 16 16"><path d="m3 8.4 3.2 3.2L13 4.8"/></symbol>
+        <symbol id="m-no" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+        <symbol id="m-paso" viewBox="0 0 16 16"><path d="M3 8h9"/><path d="m8.4 4.4 3.9 3.6-3.9 3.6"/></symbol>
+      </defs>
+    </svg>
+
     <ol class="historia-actos">
       <article>
-        <span>01</span>
+        <header class="acto-cabeza">
+          <span class="acto-numero">01</span>
+          <svg class="acto-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ic-deseo"/></svg>
+        </header>
         <p class="acto-etiqueta">El deseo</p>
         <h3>Quiero un reloj que me haga sentir algo.</h3>
-        <blockquote>Mira, a mí siempre me han gustado los relojes buenos. De esos que te los pones y notas que están bien hechos. Pero no tengo 8.000 € para un reloj… y aunque los tuviera, tampoco sé si me los gastaría.</blockquote>
+        <p class="acto-dato"><b>8.000 €</b><span>lo que pide una gran marca por el reloj que me gusta</span></p>
+        <ul class="acto-lista">
+          <li><svg class="marca marca-si" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-si"/></svg>De esos que te pones y notas que están bien hechos</li>
+          <li><svg class="marca marca-no" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-no"/></svg>Ese dinero no lo tengo. Y aunque lo tuviera, no lo gastaría</li>
+        </ul>
       </article>
+
       <article>
-        <span>02</span>
+        <header class="acto-cabeza">
+          <span class="acto-numero">02</span>
+          <svg class="acto-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ic-problema"/></svg>
+        </header>
         <p class="acto-etiqueta">El problema</p>
         <h3>Lo bueno es inaccesible y lo barato genera dudas.</h3>
-        <blockquote>Entonces te pones a mirar. Los de las grandes marcas cuestan una barbaridad. Los baratos de internet prometen mucho, pero no sabes qué te va a llegar. En segunda mano igual aciertas… o igual te comes el problema de otro. Y si lo compras fuera, como falle, búscate la vida.</blockquote>
+        <p class="acto-dato"><b>4 caminos</b><span>y ninguno limpio</span></p>
+        <ul class="acto-lista">
+          <li><svg class="marca marca-no" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-no"/></svg><b>Gran marca.</b> Cuesta una barbaridad</li>
+          <li><svg class="marca marca-no" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-no"/></svg><b>Barato de internet.</b> Promete mucho y no sabes qué te llega</li>
+          <li><svg class="marca marca-no" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-no"/></svg><b>Segunda mano.</b> Igual te comes el problema de otro</li>
+          <li><svg class="marca marca-no" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-no"/></svg><b>Comprar fuera.</b> Como falle, búscate la vida</li>
+        </ul>
       </article>
+
       <article>
-        <span>03</span>
+        <header class="acto-cabeza">
+          <span class="acto-numero">03</span>
+          <svg class="acto-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ic-respuesta"/></svg>
+        </header>
         <p class="acto-etiqueta">La respuesta</p>
         <h3>Seleccionamos, montamos, comprobamos y respondemos aquí.</h3>
-        <blockquote>Y entonces encontré laOra. Ellos buscan buenas piezas, descartan las que no les convencen y las traen a Madrid. Aquí montan cada reloj, comprueban que funcione bien, lo ajustan si hace falta y miran que aguante el agua que promete. No te llega una caja directa de una fábrica que está a 10.000 kilómetros.</blockquote>
+        <p class="acto-dato"><b>Madrid</b><span>no te llega una caja directa de una fábrica a 10.000 km</span></p>
+        <ul class="acto-lista acto-lista-pasos">
+          <li><svg class="marca marca-paso" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-paso"/></svg>Buscamos buenas piezas y descartamos las que no convencen</li>
+          <li><svg class="marca marca-paso" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-paso"/></svg>Montamos aquí cada reloj, uno a uno</li>
+          <li><svg class="marca marca-paso" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-paso"/></svg>Comprobamos que funcione y lo ajustamos si hace falta</li>
+          <li><svg class="marca marca-paso" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-paso"/></svg>Miramos que aguante el agua que promete</li>
+        </ul>
       </article>
+
       <article>
-        <span>04</span>
+        <header class="acto-cabeza">
+          <span class="acto-numero">04</span>
+          <svg class="acto-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ic-recompensa"/></svg>
+        </header>
         <p class="acto-etiqueta">La recompensa</p>
         <h3>Tengo el reloj que quería, puedo pagarlo y estoy tranquilo.</h3>
-        <blockquote>Al final me llevé un reloj que tiene la presencia y la calidad que estaba buscando, pero a un precio que puedo pagar. Sé qué lleva, sé quién lo ha montado y, si algún día pasa algo, tengo a alguien aquí que responde.</blockquote>
+        <p class="acto-dato"><b>Alguien que responde</b><span>y está aquí, no a diez husos horarios</span></p>
+        <ul class="acto-lista">
+          <li><svg class="marca marca-si" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-si"/></svg>La presencia y la calidad que estaba buscando</li>
+          <li><svg class="marca marca-si" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-si"/></svg>A un precio que puedo pagar</li>
+          <li><svg class="marca marca-si" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#m-si"/></svg>Sé qué lleva y quién lo ha montado</li>
+        </ul>
       </article>
     </ol>
 

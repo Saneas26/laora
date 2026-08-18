@@ -943,14 +943,38 @@ footer small { font-size: 12px; }
 .historia-actos { display: grid; grid-template-columns: repeat(2, 1fr); margin: 70px 0 0; padding: 0; list-style: none; }
 .historia-actos article { min-height: 340px; padding: 40px; border: 1px solid var(--line);
                           margin: -1px 0 0 -1px; display: flex; flex-direction: column; }
-.historia-actos article > span { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .2em; }
+
+/* EL ACTO 2 EN MODO INFOGRAFÍA (18/08/2026)
+   Cada acto llevaba debajo un párrafo entrecomillado de seis líneas y
+   Óscar tenía razón: eso no se lee. Ahora cada tarjeta es un pictograma,
+   un dato grande y unas pocas líneas marcadas con su signo.
+
+   Los dibujos van sin `fill` y con el trazo heredado del color de cada
+   sitio: así el mismo símbolo sirve en oro para el icono del acto, en
+   verde para los síes y en gris para los noes, sin duplicar nada. */
+.historia svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.historia-simbolos { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.acto-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.acto-numero { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .2em; }
+.acto-icono { width: 38px; height: 38px; color: var(--gold); stroke-width: 1.4; }
 .acto-etiqueta { margin: 6px 0 0; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
                  font-weight: 700; color: var(--muted); }
 /* El titular es lo único que hay que leer si solo se lee una cosa. */
-.historia-actos h3 { margin: 26px 0 20px; font: clamp(27px, 2.6vw, 38px)/1.15 var(--serif); letter-spacing: -.01em; }
-.historia-actos blockquote { margin: auto 0 0; padding-left: 18px; border-left: 2px solid var(--gold);
-                             color: var(--muted); font-size: 16px; line-height: 1.65; }
-.historia-actos blockquote::before { content: "—"; margin-right: 4px; }
+.historia-actos h3 { margin: 22px 0 24px; font: clamp(25px, 2.3vw, 34px)/1.14 var(--serif); letter-spacing: -.01em; }
+
+/* El dato grande: lo que se queda en la cabeza al pasar de largo. */
+.acto-dato { margin: 0 0 22px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
+.acto-dato b { font-size: clamp(26px, 2.7vw, 40px); font-weight: 700; line-height: 1; letter-spacing: -.03em; }
+.acto-dato span { color: var(--muted); font-size: 15px; line-height: 1.35; }
+
+.acto-lista { margin: auto 0 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+.acto-lista li { display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 11px;
+                 font-size: 16px; line-height: 1.35; }
+.acto-lista li b { font-weight: 700; }
+.marca { width: 20px; height: 20px; margin-top: 1px; stroke-width: 2; }
+.marca-si { color: var(--green); }
+.marca-no, .marca-paso { color: var(--muted); }
 
 .historia-cierre { margin: 70px 0 0; font: clamp(30px, 3.6vw, 52px)/1.12 var(--serif); letter-spacing: -.02em; }
 .historia-cierre em { color: var(--muted); }
@@ -982,8 +1006,10 @@ footer small { font-size: 12px; }
   .historia { padding: 90px 24px; }
   .historia-actos { grid-template-columns: 1fr; margin-top: 46px; }
   .historia-actos article { min-height: 0; padding: 30px 24px; }
-  .historia-actos h3 { margin: 18px 0 16px; }
-  .historia-actos blockquote { margin-top: 0; font-size: 15px; }
+  .historia-actos h3 { margin: 18px 0 20px; }
+  .acto-icono { width: 32px; height: 32px; }
+  .acto-dato { margin-bottom: 18px; padding-top: 16px; }
+  .acto-lista { margin-top: 0; }
   .historia-cierre { margin-top: 46px; }
 }
 
