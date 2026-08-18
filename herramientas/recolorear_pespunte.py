@@ -108,6 +108,54 @@ def hilo_blanco_a_azul():
     print('escrita goma-azul-pespunte-azul')
 
 
+def hilo_blanco_a_negro():
+    """El pespunte de la PIEL ITALIANA NEGRA: de blanco a negro.
+
+    Aquí el hilo no se puede separar por color —el hilo es crema y los
+    brillos del charol son neutros, casi el mismo tono—, pero sí por
+    luz: el hilo está en 0,90 de luminancia y el brillo más fuerte del
+    cuero en 0,57. Con un corte en 0,72 quedan las dos líneas de
+    puntadas y nada más.
+
+    El teñido a negro no puede ser plano: se mapea el rango del hilo a
+    uno oscuro pero vivo (0,10-0,23), por encima del cuero (0,05-0,15).
+    Así la costura se adivina, que es justo lo que hace un pespunte al
+    tono de verdad: se nota el relieve, no el color.
+    """
+    from PIL import ImageFilter
+    MADRE = 'masters-2026/lunar/capas/piel-italiana-negra-madre-4k.png'
+    a = np.asarray(Image.open(MADRE).convert('RGB')).astype(float) / 255.0
+    v = a.max(-1)
+
+    # apertura grande: el núcleo de estas puntadas es ancho y, si no, se
+    # cuela como «fondo» y se queda sin teñir
+    fondo = np.abs(a - a[8, 8]).max(axis=2) < 0.055
+    fondo = np.asarray(Image.fromarray((fondo * 255).astype('uint8'))
+                       .filter(ImageFilter.MinFilter(45))
+                       .filter(ImageFilter.MaxFilter(45))) > 128
+    cab = np.asarray(Image.open('assets/img/lunar-config/heads/'
+                                'cab-acero-bnegro-agujas-plateadas.webp')
+                     .convert('RGBA'))[:, :, 3] > 40
+    cab = np.asarray(Image.fromarray((cab * 255).astype('uint8'))
+                     .filter(ImageFilter.MaxFilter(21))
+                     .resize(a.shape[1::-1], Image.NEAREST)) > 128
+    correa = (~fondo) & (~cab)
+    hilo = correa & (v > 0.72)
+    print('hilo crema aislado: %d px' % hilo.sum())
+
+    peso = np.asarray(Image.fromarray((hilo * 255).astype('uint8'))
+                      .filter(ImageFilter.MaxFilter(9))
+                      .filter(ImageFilter.GaussianBlur(1.6))).astype(float) / 255.0
+    peso = np.clip(peso, 0, 1)[..., None]
+
+    negro = np.clip(0.10 + (v - 0.72) * 0.45, 0, 1)
+    tinte = np.stack([negro, negro, negro * 1.02], -1)
+    out = a * (1 - peso) + tinte * peso
+    Image.fromarray((np.clip(out, 0, 1) * 255).astype('uint8')) \
+         .save('masters-2026/lunar/capas/piel-italiana-negra-pespunte-negro-madre-4k.png')
+    print('escrita piel-italiana-negra-pespunte-negro')
+
+
 def recolorea():
     a = np.asarray(Image.open(MADRE).convert('RGB')).astype(float) / 255.0
     h, s, v = a_hsv(a)
@@ -133,3 +181,4 @@ def recolorea():
 if __name__ == '__main__':
     recolorea()
     hilo_blanco_a_azul()
+    hilo_blanco_a_negro()

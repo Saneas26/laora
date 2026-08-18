@@ -266,7 +266,9 @@
     /* Piel italiana (MAIKES 7011E, P-028…P-042). El coste real lo pone
        el cierre elegido; el pespunte es el que trae la FOTO de cada
        una, y el otro se tacha mientras no llegue su foto. */
-    'piel-italiana-negra':  { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'contraste',
+    'piel-italiana-negra':  { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
+      tec: 'piel de vaca genuina negra con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
+    'piel-italiana-negra-pespunte-negro': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
       tec: 'piel de vaca genuina negra con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
     'piel-italiana-marron': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'contraste',
       tec: 'piel de vaca genuina marrón con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
@@ -301,7 +303,8 @@
     'italiana': { nombre: 'Piel Italiana', colores: {
       'negro':  { nombre: 'Negro',  color: '#1C1D1F', pespuntes: {
         'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-negra' },
-        'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' } } },
+        'color':     { nombre: 'A color',   tec: 'pespunte negro al tono de la piel',
+                       correa: 'piel-italiana-negra-pespunte-negro' } } },
       'marron': { nombre: 'Marrón', color: '#5B3A28', pespuntes: {
         'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-marron' },
         'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' } } },
@@ -375,7 +378,8 @@
     'negra-bnegro|negra|plateadas'      : 'cab-negra-bnegro-agujas-plateadas',
     'negra-bnegro|negra|naranjas'       : 'cab-negra-bnegro-agujas-naranjas',
     'negra-bnegro|negra|azules'         : 'cab-negra-bnegro-agujas-azules',
-    'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas',
+    /* La caja negra con esfera negra NO lleva agujas doradas (Óscar,
+       18/08). Las doradas solo van con la esfera negra y dorada. */
     /* La caja negra lleva las mismas esferas que la de acero (Óscar,
        18/08). Estas tres cabezas se montaron trasplantando la esfera de
        su gemela de acero: herramientas/trasplantar_esfera.py */
@@ -606,7 +610,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=13')
+  fetch('/assets/img/lunar-config/manifest.json?v=14')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
