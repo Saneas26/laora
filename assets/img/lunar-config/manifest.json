@@ -65,7 +65,7 @@
       ],
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/piel-italiana-marron-madre-4k.png",
-      "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto. La madre venia con la caja en oro rosa (fallo de generacion); se le ha transplantado el metal de la madre negra, que es la MISMA caja de acero en la MISMA posicion. La correa marron no se ha tocado."
+      "nota": "MADRE INTEGRADA de Oscar (18/08): la correa abraza la caja con volumen. Sustituye a la anterior, que ademas traia la caja en oro rosa y hubo que transplantarle el acero. Esta viene con caja de acero de origen. Solo con cajas de acero."
     },
     "piel-italiana-azul": {
       "src": "/assets/img/lunar-config/straps/piel-italiana-azul.webp?v=2",
@@ -143,6 +143,15 @@
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/brazalete-negro-pvd-madre-4k.png",
       "nota": "IMAGEN MADRE del brazalete negro PVD (Oscar, 18/08). La foto se hizo con caja de ACERO, y sirve igual para la caja negra: comprobado en zoom que el brazalete oscuro tapa el hueco entre asas y no asoma nada del acero de la foto. Madre CAMBIADA por Oscar el 18/08 a las 17:17: las columnas centrales quedan mas contrastadas. Vuelto a comprobar que encaja con las dos cabezas."
+    },
+    "piel-italiana-marron-pespunte-tono": {
+      "src": "/assets/img/lunar-config/straps/piel-italiana-marron-pespunte-tono.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/piel-italiana-marron-pespunte-tono-madre-4k.png",
+      "nota": "El pespunte al tono de la marron: hilo crema tenido de marron desde la misma madre. Mismo metodo que la negra integrada: el hilo se localiza por DONDE va (11% y 88% del ancho de la correa, fila a fila), no por luz, porque el charol brilla tanto como el hilo."
     }
   },
   "default": {

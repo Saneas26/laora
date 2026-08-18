@@ -171,6 +171,55 @@ def hilo_blanco_a_negro():
     print('escrita piel-italiana-negra-pespunte-negro')
 
 
+def hilo_crema_al_tono(color, madre, salida, tinte_hsv):
+    """El pespunte al tono, en las pieles italianas integradas.
+
+    Vale para la negra y para la marrón: mismo charol, mismo problema.
+    El hilo se localiza por dónde va —a un 11% y un 88% del ancho de la
+    correa, fila a fila— porque por luz ya no se separa de los reflejos.
+    `tinte_hsv` es (tono, saturación, factor de brillo): con saturación
+    0 sale un pespunte negro y con color, uno al tono de la piel.
+    """
+    from PIL import ImageFilter
+    a = np.asarray(Image.open(madre).convert('RGB')).astype(float) / 255.0
+    v = a.max(-1)
+
+    fondo = np.abs(a - a[8, 8]).max(axis=2) < 0.055
+    fondo = np.asarray(Image.fromarray((fondo * 255).astype('uint8'))
+                       .filter(ImageFilter.MinFilter(45))
+                       .filter(ImageFilter.MaxFilter(45))) > 128
+    cab = np.asarray(Image.open('assets/img/lunar-config/heads/'
+                                'cab-acero-bnegro-agujas-plateadas.webp')
+                     .convert('RGBA'))[:, :, 3] > 40
+    cab = np.asarray(Image.fromarray((cab * 255).astype('uint8'))
+                     .filter(ImageFilter.MaxFilter(21))
+                     .resize(a.shape[1::-1], Image.NEAREST)) > 128
+    correa = (~fondo) & (~cab)
+
+    dentro = np.zeros_like(correa)
+    for y in np.flatnonzero(correa.any(axis=1)):
+        xs = np.flatnonzero(correa[y])
+        x0, x1 = xs.min(), xs.max()
+        ancho = x1 - x0
+        if ancho < 60:
+            continue
+        for a0, a1 in ((0.05, 0.20), (0.80, 0.95)):
+            dentro[y, int(x0 + ancho * a0):int(x0 + ancho * a1)] = True
+    hilo = correa & dentro & (v > 0.55)
+    print('%s: hilo aislado %d px' % (color, hilo.sum()))
+
+    peso = np.asarray(Image.fromarray((hilo * 255).astype('uint8'))
+                      .filter(ImageFilter.MaxFilter(9))
+                      .filter(ImageFilter.GaussianBlur(1.6))).astype(float) / 255.0
+    peso = np.clip(peso, 0, 1)[..., None]
+
+    tono, sat, fv = tinte_hsv
+    tinte = a_rgb(np.full_like(v, tono), np.full_like(v, sat), np.clip(v * fv, 0, 1))
+    out = a * (1 - peso) + tinte * peso
+    Image.fromarray((np.clip(out, 0, 1) * 255).astype('uint8')).save(salida)
+    print('escrita', salida.split('/')[-1])
+
+
 def recolorea():
     a = np.asarray(Image.open(MADRE).convert('RGB')).astype(float) / 255.0
     h, s, v = a_hsv(a)
