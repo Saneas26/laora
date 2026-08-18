@@ -964,7 +964,7 @@ footer small { font-size: 12px; }
 /* En el teléfono se ve una franja estrecha de una foto apaisada, así que
    cada acto mira a donde está su asunto. */
 .acto-deseo .acto-foto { object-position: 42% center; }
-.acto-respuesta .acto-foto { object-position: 58% center; }
+.acto-respuesta .acto-foto { object-position: 44% center; }
 
 .acto-mascara { position: absolute; inset: 0; pointer-events: none;
                 background:
