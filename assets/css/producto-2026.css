@@ -233,3 +233,34 @@ main.cv2{ overflow:visible; overflow-x:clip }
 /* el rótulo tiene el nombre a la izquierda y el dato a la derecha:
    el número entra delante sin romper ese reparto */
 .pv-grupo>.pv-rotulo>b{margin-left:auto}
+
+/* ============================================================
+   LA IMAGEN NO SE MUEVE HASTA LA ÚLTIMA ELECCIÓN (Óscar, 18/08/2026)
+   El visor se queda pegado bajo la cabecera mientras el cliente
+   recorre las elecciones, para que vea cada cambio en pantalla. Se
+   suelta solo, sin JS: la galería ya no lleva dentro las fotos de
+   apoyo, así que su altura es la de la columna de compra y el sticky
+   muere justo donde acaban las opciones. A partir de ahí entran las
+   fotos de apoyo y el scroll vuelve a ser normal.
+   ============================================================ */
+.pv-visor-fijo .pv-galeria{align-self:stretch}
+.pv-visor-fijo .pv-hero{
+  position:sticky;top:92px;                 /* 76px de cabecera + aire */
+  max-height:calc(100vh - 108px);           /* en pantallas bajas, que quepa entero */
+}
+.pv-visor-fijo>.pv-extras{grid-column:1;margin-top:24px}
+
+/* ---------- LOS PASOS APAGADOS (Óscar: apagados, no invisibles) ----------
+   El pespunte y el cierre solo tienen sentido con la piel italiana.
+   Con cualquier otra correa el paso se sigue viendo —y sigue contando
+   en la numeración— pero queda deslucido y no admite clic. */
+.pv-grupo.pv-apagado{opacity:.42}
+.pv-grupo.pv-apagado .pv-rotulo::before{background:var(--cv2-linea);color:var(--cv2-gris)}
+.pv-grupo.pv-apagado .pv-opciones{pointer-events:none}
+
+@media (max-width:900px){
+  /* En una sola columna el visor ocupa la pantalla entera: pegarlo
+     dejaría las elecciones fuera de cuadro. */
+  .pv-visor-fijo .pv-hero{position:static}
+  .pv-visor-fijo>.pv-extras{margin-top:0}
+}

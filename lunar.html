@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=14">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=16">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -59,7 +59,7 @@
 
 <main class="cv2">
 
-  <div class="pv-cuerpo">
+  <div class="pv-cuerpo pv-visor-fijo">
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
@@ -69,11 +69,6 @@
         <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
              src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
-      </div>
-      <div class="pv-extras">
-        <figure><img src="/assets/img/lunar-config/catalogo/macro-esfera.webp" alt="Macro de la esfera y las subesferas del cronógrafo" loading="lazy"></figure>
-        <figure><img src="/assets/img/lunar-config/catalogo/en-muneca.webp" alt="El Lunar puesto en la muñeca" loading="lazy"></figure>
-        <figure><img src="/assets/img/lunar-config/catalogo/campana-astronauta.webp" alt="El Lunar en su mundo: un astronauta en la superficie lunar" loading="lazy"></figure>
       </div>
     </div>
 
@@ -110,8 +105,18 @@
         </div>
 
         <div class="pv-grupo">
-          <p class="pv-rotulo">Correa <b data-pv-cierre>Hebilla de pinza</b></p>
+          <p class="pv-rotulo">Correa</p>
           <div class="pv-opciones" data-pv="correa"></div>
+        </div>
+
+        <div class="pv-grupo" data-pv-grupo="pespunte">
+          <p class="pv-rotulo">Pespunte</p>
+          <div class="pv-opciones" data-pv="pespunte"></div>
+        </div>
+
+        <div class="pv-grupo" data-pv-grupo="cierre">
+          <p class="pv-rotulo">Cierre <b data-pv-cierre>Hebilla de pinza</b></p>
+          <div class="pv-opciones" data-pv="cierre"></div>
         </div>
 
       </div>
@@ -127,6 +132,13 @@
         </div>
       </div>
     </aside>
+
+    <!-- Las fotos de apoyo: no salen hasta que se acaban las elecciones -->
+    <div class="pv-extras">
+      <figure><img src="/assets/img/lunar-config/catalogo/macro-esfera.webp" alt="Macro de la esfera y las subesferas del cronógrafo" loading="lazy"></figure>
+      <figure><img src="/assets/img/lunar-config/catalogo/en-muneca.webp" alt="El Lunar puesto en la muñeca" loading="lazy"></figure>
+      <figure><img src="/assets/img/lunar-config/catalogo/campana-astronauta.webp" alt="El Lunar en su mundo: un astronauta en la superficie lunar" loading="lazy"></figure>
+    </div>
 
   </div>
 
@@ -234,15 +246,38 @@
     /* Piel italiana (MAIKES 7011E, P-028…P-042). Coste el de la hebilla
        de acero plateado, que es la de las fotos; las otras cuatro
        hebillas del proveedor caen en el mismo escalón de precio. */
+    /* italiana: abre las elecciones 6 (pespunte) y 7 (cierre).
+       pespunte: el que trae la FOTO que tenemos de esa correa; el otro
+       existe en el proveedor al mismo precio, pero sin foto se tacha. */
     'piel-italiana-negra': {
       nombre: 'Piel Italiana Negra', coste: 29.99, cierre: 'Hebilla de pinza', color: '#1C1D1F',
-      tec: 'piel de vaca genuina negra con relieve de cocodrilo y pespunte blanco, hebilla de pinza y liberación rápida' },
+      italiana: true, pespunte: 'contraste',
+      tec: 'piel de vaca genuina negra con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
     'piel-italiana-marron': {
       nombre: 'Piel Italiana Marrón', coste: 29.99, cierre: 'Hebilla de pinza', color: '#5B3A28',
-      tec: 'piel de vaca genuina marrón con relieve de cocodrilo y pespunte blanco, hebilla de pinza y liberación rápida' },
+      italiana: true, pespunte: 'contraste',
+      tec: 'piel de vaca genuina marrón con relieve de cocodrilo, hebilla de pinza y liberación rápida' },
     'piel-italiana-azul': {
       nombre: 'Piel Italiana Azul', coste: 29.99, cierre: 'Hebilla de pinza', color: '#1E2B47',
-      tec: 'piel de vaca genuina azul con relieve de cocodrilo y pespunte al tono, hebilla de pinza y liberación rápida' }
+      italiana: true, pespunte: 'color',
+      tec: 'piel de vaca genuina azul con relieve de cocodrilo, hebilla de pinza y liberación rápida' }
+  };
+
+  /* ---------- 6. EL PESPUNTE (solo con piel italiana) ---------- */
+  var PESPUNTES = {
+    'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' },
+    'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' }
+  };
+
+  /* ---------- 7. EL CIERRE (solo con piel italiana) ----------
+     Las cinco hebillas del proveedor. No se ven en la foto (la correa
+     entra a sangre), así que ninguna necesita imagen propia. */
+  var CIERRES = {
+    'plata':    { nombre: 'Clásica plata',    coste: 29.99, tec: 'hebilla de pinza de acero plateado' },
+    'negra':    { nombre: 'Clásica negra',    coste: 31.19, tec: 'hebilla de pinza de acero PVD negro' },
+    'oro-rosa': { nombre: 'Clásica oro rosa', coste: 29.59, tec: 'hebilla de pinza en oro rosa' },
+    'oro':      { nombre: 'Clásica oro',      coste: 30.99, tec: 'hebilla de pinza dorada' },
+    'mariposa': { nombre: 'Mariposa plata',   coste: 30.19, tec: 'cierre de mariposa de acero plateado' }
   };
 
   /* Las combinaciones que EXISTEN: cada una, su cabeza del manifiesto. */
@@ -263,7 +298,8 @@
   };
 
   var e = { caja: 'acero-bnegro', esfera: 'negra', agujas: 'plateadas',
-            correa: 'piel-negra-perforada-pespunte-blanco' };
+            correa: 'piel-negra-perforada-pespunte-blanco',
+            pespunte: 'contraste', cierre: 'plata' };
 
   /* Qué correa vale con qué cabeza: sale del manifiesto
      (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
@@ -283,7 +319,8 @@
   var existe = function (c, es, a) { return !!CATALOGO[clave(c, es, a)]; };
 
   function referencia() {
-    return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas;
+    return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas +
+           (esItaliana() ? '-' + e.cierre : '');
   }
 
   /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
@@ -318,12 +355,16 @@
     return PACK + (montadas[e.esfera] === e.agujas ? 0 : JUEGO_AGUJAS);
   }
   function precio() {
-    return pvpBase(MOV.coste + costeCabeza() + CORREAS[e.correa].coste);
+    return pvpBase(MOV.coste + costeCabeza() + costeCorrea());
   }
 
   /* ---------- pintar ---------- */
-  function botones(grupo, mapa, valido) {
+  function botones(grupo, mapa, valido, apagado) {
     var caja = $('[data-pv="' + grupo + '"]');
+    var padre = caja.closest('.pv-grupo');
+    /* Apagado, NO invisible (Óscar, 18/08): el paso se sigue viendo y
+       sigue contando en la numeración; solo queda deslucido y sordo. */
+    if (padre) padre.classList.toggle('pv-apagado', !!apagado);
     caja.innerHTML = '';
     Object.keys(mapa).forEach(function (k) {
       var b = document.createElement('button');
@@ -333,7 +374,7 @@
         ? '<i class="pv-punto" style="background:' + mapa[k].color + '"></i>' + mapa[k].nombre
         : mapa[k].nombre;
       b.setAttribute('aria-pressed', String(e[grupo] === k));
-      if (!valido(k)) b.disabled = true;      // lo imposible, tachado
+      if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
       b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
       caja.appendChild(b);
     });
@@ -353,6 +394,19 @@
       var otra = Object.keys(CORREAS).find(function (c) { return correaVale(c, cabeza); });
       if (otra) e.correa = otra;
     }
+    /* El pespunte lo manda la foto: de cada correa solo tenemos una. */
+    if (esItaliana()) e.pespunte = CORREAS[e.correa].pespunte;
+  }
+
+  var esItaliana = function () { return !!CORREAS[e.correa].italiana; };
+
+  /* El cierre solo cuenta en la piel italiana; en las demás correas
+     manda el que trae la propia correa. */
+  function cierreTexto() {
+    return esItaliana() ? CIERRES[e.cierre].nombre : CORREAS[e.correa].cierre;
+  }
+  function costeCorrea() {
+    return esItaliana() ? CIERRES[e.cierre].coste : CORREAS[e.correa].coste;
   }
 
   function pinta() {
@@ -365,7 +419,7 @@
 
     $('[data-pv-precio]').textContent = eu(precio());
     $('[data-pv-cal]').textContent = 'Calibre ' + MOV.cal;
-    $('[data-pv-cierre]').textContent = CORREAS[e.correa].cierre;
+    $('[data-pv-cierre]').textContent = cierreTexto();
 
     botones('caja', CAJAS, function (k) {
       return Object.keys(CATALOGO).some(function (x) { return x.indexOf(k + '|') === 0; });
@@ -375,13 +429,19 @@
     });
     botones('agujas', AGUJAS, function (k) { return existe(null, null, k); });
     botones('correa', CORREAS, function (k) { return correaVale(k, CATALOGO[clave()]); });
+    /* 6 y 7: solo con piel italiana. Del pespunte, solo vale el que
+       tiene foto; el otro se tacha aunque el proveedor lo haga. */
+    botones('pespunte', PESPUNTES, function (k) { return k === CORREAS[e.correa].pespunte; }, !esItaliana());
+    botones('cierre', CIERRES, function () { return true; }, !esItaliana());
 
     $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
       ' Cristal mineral y tapa trasera roscada con grabado lunar.';
     $('[data-pv-tec="mov"]').textContent = MOV.tec;
     $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
       ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
-      CORREAS[e.correa].tec + '.';
+      CORREAS[e.correa].tec + (esItaliana()
+        ? ', con ' + PESPUNTES[e.pespunte].tec + ' y ' + CIERRES[e.cierre].tec
+        : '') + '.';
     $('[data-pv-tec="agua"]').textContent =
       '10 ATM (100 metros): vale para nadar y ducharse, no para bucear con botella. ' +
       'La corona y los pulsadores no deben accionarse dentro del agua.';
@@ -395,7 +455,7 @@
       nombre: 'Lunar ' + ESFERAS[e.esfera].nombre,
       detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
                ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' · ' + MOV.nombre,
-      correa: CORREAS[e.correa].nombre,
+      correa: CORREAS[e.correa].nombre + (esItaliana() ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
       precio: precio(),
       foto: $('[data-pv-cabeza-img]').src
     });
