@@ -235,3 +235,30 @@ function ALTA_2026_08_18B() {
   });
   altaPiezas_('ALTA_2026_08_18B', filas, new Date(2026, 7, 18));
 }
+
+/**
+ * Tanda 6 — 18/08/2026. Correa NATO + PIEL del Lunar: tejido de espiga
+ * con pespunte blanco y hebilla de MARIPOSA plateada.
+ * Anuncio 1005011862298088, 5,48 € (dato de Óscar).
+ * Captura completa: capturas/2026-08-18-1005011862298088.json
+ */
+function ALTA_2026_08_18C() {
+  var LINK = 'https://es.aliexpress.com/item/1005011862298088.html';
+  var COMUN = '«Tela vaquera y cuero» segun el anuncio: tejido de espiga con canto de piel y pespunte blanco · hebilla de MARIPOSA plateada · liberacion rapida (barras de resorte, citado en una valoracion) · pedir ancho 20 mm (el anuncio hace 18, 20 y 22) · 5,48 € (dato de Óscar 18/08; la ficha mostraba 5,18 € segun ancho, reverificar) · 4,8★ sobre 44 valoraciones · en la web es la familia NATO + PIEL';
+
+  var colores = [
+    ['Brown', 'topo'],
+    ['Black', 'antracita'],
+    ['Gray',  'gris'],
+    ['Blue',  'azul claro'],
+    ['Khaki', 'beige']
+  ];
+  var filas = [], n = 49;
+  colores.forEach(function (c) {
+    filas.push(['P-0' + n, 'Correa', 'Lunar',
+      'Correa tejido espiga ' + c[1] + ' con pespunte blanco y hebilla mariposa',
+      'Nato + piel ' + c[1], c[0] + ' · 20 mm', 5.48, LINK, '', '', COMUN]);
+    n++;
+  });
+  altaPiezas_('ALTA_2026_08_18C', filas, new Date(2026, 7, 18));
+}
