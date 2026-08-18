@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=23">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=24">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -143,7 +143,7 @@
           <p class="pv-precio" data-pv-precio>189,90 €</p>
           <!-- Klarna, a la derecha del precio: el hueco que quedaba -->
           <p class="pv-klarna">
-            <img src="/assets/img/pago/klarna.svg" alt="Klarna" width="45" height="25" loading="lazy">
+            <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
             <span>3 pagos de <b data-pv-klarna>63,30 €</b><small>sin intereses</small></span>
           </p>
         </div>
@@ -278,20 +278,34 @@
     'brazalete-acero-316l-cinco-columnas': {
       coste: 19.69, cierre: 'Hebilla desplegable',
       tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con hebilla desplegable' },
-    /* Nato 11,29 € y nato+piel 4,79 € (Óscar, 18/08; el segundo es
-       precio de OFERTA, reverificar antes de comprar). Todas con
-       hebilla clásica plateada. */
-    'nato-piel-topo': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+    /* OJO con los nombres: Óscar los intercambió el 19/08. Las claves
+       describen la CORREA —pasadores o espiga—, no el tipo comercial,
+       que ya ha cambiado dos veces. Y cada familia trae SU coste:
+       pasadores 11,29 € · espiga 5,48 €. */
+    'nato-pasadores-verde-militar': { coste: 11.29, cierre: 'Hebilla clásica plateada',
+      tec: 'nato de tejido verde militar con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
+    'nato-pasadores-azul': { coste: 11.29, cierre: 'Hebilla clásica plateada',
+      tec: 'nato de tejido azul con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
+    'nato-pasadores-beige': { coste: 11.29, cierre: 'Hebilla clásica plateada',
+      tec: 'nato de tejido beige con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
+    'nato-pasadores-gris-claro': { coste: 11.29, cierre: 'Hebilla clásica plateada',
+      tec: 'nato de tejido gris claro con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
+    'nato-pasadores-negro': { coste: 11.29, cierre: 'Hebilla clásica plateada',
+      tec: 'nato de tejido negro con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
+    'nato-pasadores-negro-gris': { coste: 11.29, cierre: 'Hebilla clásica plateada',
+      tec: 'nato de tejido negro con franjas grises, pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
+
+    'nato-espiga-topo': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga color topo con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-piel-antracita': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+    'nato-espiga-antracita': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga antracita con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-piel-gris': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+    'nato-espiga-gris': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga gris con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-piel-azul-claro': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+    'nato-espiga-azul-claro': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga azul claro con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-piel-beige': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+    'nato-espiga-beige': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga beige con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-piel-marron': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
+    'nato-espiga-marron': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga marrón con pespunte blanco, hebilla mariposa de acero plateado' },
     'brazalete-negro-pvd': {
       coste: 26.39, cierre: 'Hebilla desplegable',
@@ -358,25 +372,23 @@
       'acero': { nombre: 'Acero',     color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' },
       'negro': { nombre: 'Negro PVD', color: '#26282A', correa: 'brazalete-negro-pvd' } } },
 
-    /* Nato. Óscar pidió tres colores y ha entregado seis: se montan
-       los seis. */
+    /* NATO = el tejido de espiga con hebilla mariposa (5,48 €). */
     'nato': { nombre: 'Nato', colores: {
-      'verde-militar': { nombre: 'Verde militar', color: '#5B5B3A', correa: 'nato-verde-militar' },
-      'azul':          { nombre: 'Azul',          color: '#1F3A6E', correa: 'nato-azul' },
-      'beige':         { nombre: 'Beige',         color: '#B8A075', correa: 'nato-beige' },
-      'gris-claro':    { nombre: 'Gris claro',    color: '#C2C4C4', correa: 'nato-gris-claro' },
-      'negro':         { nombre: 'Negro',         color: '#1C1D1F', correa: 'nato-negro' },
-      'negro-gris':    { nombre: 'Negro y gris',  color: '#4A4C4E', correa: 'nato-negro-gris' } } },
+      'topo':       { nombre: 'Topo',       color: '#8C7F76', correa: 'nato-espiga-topo' },
+      'antracita':  { nombre: 'Antracita',  color: '#3C3E40', correa: 'nato-espiga-antracita' },
+      'gris':       { nombre: 'Gris',       color: '#6E7175', correa: 'nato-espiga-gris' },
+      'azul-claro': { nombre: 'Azul claro', color: '#A9C9E6', correa: 'nato-espiga-azul-claro' },
+      'beige':      { nombre: 'Beige',      color: '#CDBFA6', correa: 'nato-espiga-beige' },
+      'marron':     { nombre: 'Marrón',     color: '#8A6A52', correa: 'nato-espiga-marron' } } },
 
-    /* Nato + piel: tejido de espiga con pespunte blanco y hebilla
-       mariposa (Óscar, 18/08). Sustituye a la de lona lisa. */
+    /* NATO + PIEL = el de pasadores y refuerzos de piel (11,29 €). */
     'nato-piel': { nombre: 'Nato + Piel', colores: {
-      'topo':       { nombre: 'Topo',       color: '#8C7F76', correa: 'nato-piel-topo' },
-      'antracita':  { nombre: 'Antracita',  color: '#3C3E40', correa: 'nato-piel-antracita' },
-      'gris':       { nombre: 'Gris',       color: '#6E7175', correa: 'nato-piel-gris' },
-      'azul-claro': { nombre: 'Azul claro', color: '#A9C9E6', correa: 'nato-piel-azul-claro' },
-      'beige':      { nombre: 'Beige',      color: '#CDBFA6', correa: 'nato-piel-beige' },
-      'marron':     { nombre: 'Marrón',     color: '#8A6A52', correa: 'nato-piel-marron' } } },
+      'verde-militar': { nombre: 'Verde militar', color: '#5B5B3A', correa: 'nato-pasadores-verde-militar' },
+      'azul':          { nombre: 'Azul',          color: '#1F3A6E', correa: 'nato-pasadores-azul' },
+      'beige':         { nombre: 'Beige',         color: '#B8A075', correa: 'nato-pasadores-beige' },
+      'gris-claro':    { nombre: 'Gris claro',    color: '#C2C4C4', correa: 'nato-pasadores-gris-claro' },
+      'negro':         { nombre: 'Negro',         color: '#1C1D1F', correa: 'nato-pasadores-negro' },
+      'negro-gris':    { nombre: 'Negro y gris',  color: '#4A4C4E', correa: 'nato-pasadores-negro-gris' } } },
 
     /* El caucho negro se hace con tres costuras, y con una sola foto
        valen las tres: el hilo se tiñe (recolorear_pespunte.py). El azul
@@ -694,7 +706,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=31')
+  fetch('/assets/img/lunar-config/manifest.json?v=32')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();

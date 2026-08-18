@@ -181,129 +181,129 @@
       "nota": "El pespunte al tono de la azul: hilo azul claro tenido de azul marino desde la misma madre.",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
     },
-    "nato-beige": {
-      "src": "/assets/img/lunar-config/straps/nato-beige.webp?v=1",
+    "nato-pasadores-verde-militar": {
+      "src": "/assets/img/lunar-config/straps/nato-pasadores-verde-militar.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-beige-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-pasadores-verde-militar-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. "
+      "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero."
     },
-    "nato-verde-militar": {
-      "src": "/assets/img/lunar-config/straps/nato-verde-militar.webp?v=1",
+    "nato-pasadores-azul": {
+      "src": "/assets/img/lunar-config/straps/nato-pasadores-azul.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-verde-militar-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-pasadores-azul-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. "
+      "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero."
     },
-    "nato-azul": {
-      "src": "/assets/img/lunar-config/straps/nato-azul.webp?v=1",
+    "nato-pasadores-beige": {
+      "src": "/assets/img/lunar-config/straps/nato-pasadores-beige.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-azul-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-pasadores-beige-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. "
+      "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero."
     },
-    "nato-gris-claro": {
-      "src": "/assets/img/lunar-config/straps/nato-gris-claro.webp?v=1",
+    "nato-pasadores-gris-claro": {
+      "src": "/assets/img/lunar-config/straps/nato-pasadores-gris-claro.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-gris-claro-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-pasadores-gris-claro-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. "
+      "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero."
     },
-    "nato-negro": {
-      "src": "/assets/img/lunar-config/straps/nato-negro.webp?v=1",
+    "nato-pasadores-negro": {
+      "src": "/assets/img/lunar-config/straps/nato-pasadores-negro.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [
         "cab-acero-bazul-"
       ],
-      "master4k": "masters-2026/lunar/capas/nato-negro-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-pasadores-negro-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. Negro: fuera del bisel azul, por la regla de no ofrecer correa negra con esa caja."
+      "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. Negra: fuera del bisel azul."
     },
-    "nato-negro-gris": {
-      "src": "/assets/img/lunar-config/straps/nato-negro-gris.webp?v=1",
+    "nato-pasadores-negro-gris": {
+      "src": "/assets/img/lunar-config/straps/nato-pasadores-negro-gris.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [
         "cab-acero-bazul-"
       ],
-      "master4k": "masters-2026/lunar/capas/nato-negro-gris-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-pasadores-negro-gris-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. Negro: fuera del bisel azul, por la regla de no ofrecer correa negra con esa caja."
+      "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. Negra: fuera del bisel azul."
     },
-    "nato-piel-topo": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-topo.webp?v=1",
+    "nato-espiga-topo": {
+      "src": "/assets/img/lunar-config/straps/nato-espiga-topo.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-topo-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-espiga-topo-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+      "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
     },
-    "nato-piel-antracita": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-antracita.webp?v=1",
+    "nato-espiga-antracita": {
+      "src": "/assets/img/lunar-config/straps/nato-espiga-antracita.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-antracita-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-espiga-antracita-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+      "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
     },
-    "nato-piel-gris": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-gris.webp?v=1",
+    "nato-espiga-gris": {
+      "src": "/assets/img/lunar-config/straps/nato-espiga-gris.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-gris-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-espiga-gris-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+      "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
     },
-    "nato-piel-azul-claro": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-azul-claro.webp?v=1",
+    "nato-espiga-azul-claro": {
+      "src": "/assets/img/lunar-config/straps/nato-espiga-azul-claro.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-azul-claro-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-espiga-azul-claro-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+      "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
     },
-    "nato-piel-beige": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-beige.webp?v=1",
+    "nato-espiga-beige": {
+      "src": "/assets/img/lunar-config/straps/nato-espiga-beige.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-beige-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-espiga-beige-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+      "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
     },
-    "nato-piel-marron": {
-      "src": "/assets/img/lunar-config/straps/nato-piel-marron.webp?v=1",
+    "nato-espiga-marron": {
+      "src": "/assets/img/lunar-config/straps/nato-espiga-marron.webp?v=1",
       "cabezasPermitidas": [
         "cab-acero-"
       ],
       "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/nato-piel-marron-madre-4k.png",
+      "master4k": "masters-2026/lunar/capas/nato-espiga-marron-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-      "nota": "NATO + PIEL, familia definitiva (Oscar, 18/08): tejido de ESPIGA con pespunte blanco y hebilla MARIPOSA plateada. Sustituye a la de lona lisa, que fue un paso en falso. Anuncio 1005011862298088, 5,48 €. Solo cajas de acero."
+      "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
     }
   },
   "default": {
@@ -352,5 +352,6 @@
     }
   },
   "hebillas_nota": "Las cinco hebillas del proveedor, en foto suelta (masters-4k/buckles). Salen como miniatura en el visor SOLO cuando el cliente elige una: de salida no hay ninguna elegida. La sexta del paquete, 01-hebilla-negra-desplegable-pvd, es el cierre del brazalete PVD y no se publica aqui: ese brazalete ya lleva su foto de cierre entre las de apoyo. Masters en masters-2026/lunar/hebillas/.",
-  "madres_nota": "Cada correa con master4k es una FOTO COMPLETA del reloj, hecha con la cabeza cab-acero-bnegro-agujas-plateadas. Cuando el cliente elige esa misma cabeza NO se monta nada encima: se enseña la foto tal cual, que es exactamente lo que entrego Oscar. Montar nuestra cabeza sobre su propia foto la empeoraba: nuestras cabezas estan alineadas a otra geometria y dejaban la caja mas pequena, con las asas sin morder la correa. Para las demas combinaciones si hay que montarla, no hay otra."
+  "madres_nota": "Cada correa con master4k es una FOTO COMPLETA del reloj, hecha con la cabeza cab-acero-bnegro-agujas-plateadas. Cuando el cliente elige esa misma cabeza NO se monta nada encima: se enseña la foto tal cual, que es exactamente lo que entrego Oscar. Montar nuestra cabeza sobre su propia foto la empeoraba: nuestras cabezas estan alineadas a otra geometria y dejaban la caja mas pequena, con las asas sin morder la correa. Para las demas combinaciones si hay que montarla, no hay otra.",
+  "nato_nota": "OJO con los nombres, que Oscar los intercambio el 19/08: las claves describen la CORREA (pasadores / espiga), no el tipo comercial. Tipo NATO = espiga (5,48 €). Tipo NATO + PIEL = pasadores (11,29 €)."
 }
