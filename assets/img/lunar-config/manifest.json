@@ -172,5 +172,23 @@
     }
   },
   "tapas_nota": "Las tres tapas roscadas sólidas del proveedor, sin cambio de precio. Venían de generaciones distintas (Ø 900/918/915 en lienzo 1254): se han igualado con herramientas/alinear_tapas.py moviendo y escalando la imagen entera, sin tocar el dibujo. Masters en masters-2026/lunar/tapas/.",
-  "trasplantes_nota": "Las tres cabezas cab-negra-bnegro-esf* NO vienen del paquete: son la caja negra con la esfera de su gemela de acero, trasplantada por herramientas/trasplantar_esfera.py. El corte va a r=315 (por dentro del aro): cruzar el taquimetro duplicaria los numeros."
+  "trasplantes_nota": "Las tres cabezas cab-negra-bnegro-esf* NO vienen del paquete: son la caja negra con la esfera de su gemela de acero, trasplantada por herramientas/trasplantar_esfera.py. El corte va a r=315 (por dentro del aro): cruzar el taquimetro duplicaria los numeros.",
+  "hebillas": {
+    "plata": {
+      "src": "/assets/img/lunar-config/buckles/plata.webp?v=1"
+    },
+    "negra": {
+      "src": "/assets/img/lunar-config/buckles/negra.webp?v=1"
+    },
+    "oro-rosa": {
+      "src": "/assets/img/lunar-config/buckles/oro-rosa.webp?v=1"
+    },
+    "oro": {
+      "src": "/assets/img/lunar-config/buckles/oro.webp?v=1"
+    },
+    "mariposa": {
+      "src": "/assets/img/lunar-config/buckles/mariposa.webp?v=1"
+    }
+  },
+  "hebillas_nota": "Las cinco hebillas del proveedor, en foto suelta (masters-4k/buckles). Salen como miniatura en el visor SOLO cuando el cliente elige una: de salida no hay ninguna elegida. La sexta del paquete, 01-hebilla-negra-desplegable-pvd, es el cierre del brazalete PVD y no se publica aqui: ese brazalete ya lleva su foto de cierre entre las de apoyo. Masters en masters-2026/lunar/hebillas/."
 }

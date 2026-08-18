@@ -272,9 +272,13 @@ main.cv2{ overflow:visible; overflow-x:clip }
    muda a la izquierda para dejarle su rincón.
    OJO: va con «.pv-hero img.» delante para ganarle al 82%/92% de
    «.pv-hero img», igual que el forro. */
-.pv-hero img.pv-mini{
+.pv-minis{
   position:absolute;right:12px;bottom:12px;z-index:3;
-  width:23%;height:auto;aspect-ratio:1/1;object-fit:cover;
+  display:flex;gap:8px;align-items:flex-end;
+}
+.pv-hero .pv-minis img.pv-mini{
+  position:static;width:140px;max-width:23vw;height:auto;
+  aspect-ratio:1/1;object-fit:cover;
   background:#fff;border:1px solid var(--cv2-linea);
 }
 .pv-hero img.pv-mini[hidden]{display:none}

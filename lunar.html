@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=20">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=21">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -68,8 +68,12 @@
              src="/assets/img/lunar-config/straps/piel-negra-perforada-pespunte-blanco.webp">
         <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
              src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
-        <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
-             src="/assets/img/lunar-config/casebacks/tapa-solida-acero.webp">
+        <div class="pv-minis">
+          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Lunar" hidden
+               src="/assets/img/lunar-config/buckles/plata.webp">
+          <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
+               src="/assets/img/lunar-config/casebacks/tapa-solida-acero.webp">
+        </div>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
     </div>
@@ -404,7 +408,7 @@
 
   var e = { caja: 'acero-bnegro', tapa: null, esfera: 'negra', agujas: 'plateadas',
             tipo: 'perforada', color: 'negro', pespunte: 'blanco',
-            cierre: 'plata' };
+            cierre: null };   // la hebilla, sin elegir hasta que el cliente toque una
 
   /* Qué correa vale con qué cabeza: sale del manifiesto
      (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
@@ -454,7 +458,7 @@
     return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas +
            (e.tapa ? '-' + e.tapa : '') + '-' + e.tipo + '-' + e.color +
            (pespuntesDe() ? '-' + e.pespunte : '') +
-           (esItaliana() ? '-' + e.cierre : '');
+           ((esItaliana() && e.cierre) ? '-' + e.cierre : '');
   }
 
   /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
@@ -512,7 +516,7 @@
       b.innerHTML = mapa[k].color
         ? '<i class="pv-punto" style="background:' + mapa[k].color + '"></i>' + rotulo
         : rotulo;
-      b.setAttribute('aria-pressed', String(e[grupo] === k));
+      b.setAttribute('aria-pressed', String(e[grupo] === k));   // null = ninguno marcado
       if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
       b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
       caja.appendChild(b);
@@ -550,10 +554,14 @@
   /* El cierre solo cuenta en la piel italiana; en las demás correas
      manda el que trae la propia correa. */
   function cierreTexto() {
-    return esItaliana() ? CIERRES[e.cierre].nombre : CORREAS[correaActual()].cierre;
+    return (esItaliana() && e.cierre) ? CIERRES[e.cierre].nombre : CORREAS[correaActual()].cierre;
   }
+  /* Sin hebilla elegida se cuenta la de acero plateado. Da igual cuál:
+     las cinco caen en el mismo escalón, así que elegir no mueve el
+     precio. */
   function costeCorrea() {
-    return esItaliana() ? CIERRES[e.cierre].coste : CORREAS[correaActual()].coste;
+    if (!esItaliana()) return CORREAS[correaActual()].coste;
+    return CIERRES[e.cierre || 'plata'].coste;
   }
 
   function pinta() {
@@ -601,13 +609,22 @@
       mini.alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
     }
 
+    /* La hebilla, igual que la tapa: nada hasta que se elige una. */
+    var heb = $('[data-pv-hebilla-img]');
+    var hayHebilla = esItaliana() && e.cierre && M.hebillas && M.hebillas[e.cierre];
+    heb.hidden = !hayHebilla;
+    if (hayHebilla) {
+      heb.src = M.hebillas[e.cierre].src;
+      heb.alt = 'Hebilla del Lunar, ' + CIERRES[e.cierre].tec;
+    }
+
     $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
       ' Cristal mineral y tapa trasera roscada y sólida' +
       (e.tapa ? ', ' + TAPAS[e.tapa].tec : '') + '.';
     $('[data-pv-tec="mov"]').textContent = MOV.tec;
     $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
       ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
-      CORREAS[correaActual()].tec + (esItaliana()
+      CORREAS[correaActual()].tec + ((esItaliana() && e.cierre)
         ? ', con ' + CIERRES[e.cierre].tec
         : '') + '.';
     $('[data-pv-tec="agua"]').textContent =
@@ -626,7 +643,7 @@
                (e.tapa ? ' · tapa ' + TAPAS[e.tapa].nombre.toLowerCase() : '') + ' · ' + MOV.nombre,
       correa: TIPOS[e.tipo].nombre + ' ' + TIPOS[e.tipo].colores[e.color].nombre.toLowerCase() +
               (pespuntesDe() ? ' · pespunte ' + pespuntesDe()[e.pespunte].nombre.toLowerCase() : '') +
-              (esItaliana() ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
+              ((esItaliana() && e.cierre) ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
       precio: precio(),
       foto: $('[data-pv-cabeza-img]').src
     });
@@ -634,7 +651,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=18')
+  fetch('/assets/img/lunar-config/manifest.json?v=19')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
