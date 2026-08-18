@@ -307,3 +307,6 @@ main.cv2{ overflow:visible; overflow-x:clip }
 @media (max-width:900px){
   .pv-macro, .pv-macro img{height:62vh;max-height:62vh}
 }
+
+/* Cuando la foto madre ya trae la cabeza elegida, su capa se retira */
+.pv-hero img.pv-capa[hidden]{display:none}

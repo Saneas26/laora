@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=21">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=22">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -574,6 +574,15 @@
   function pinta() {
     if (!M) return;
     var cabeza = CATALOGO[clave()];
+    /* Las correas con foto madre ya traen el reloj puesto, y la foto se
+       hizo con una cabeza concreta. Si el cliente elige justo esa, no
+       se monta nada encima: se enseña la foto tal cual. Montarle
+       nuestra cabeza a su propia foto la empeoraba —van alineadas a
+       otra geometría y dejaban la caja pequeña, con las asas sin morder
+       la correa—. Para el resto de combinaciones sí hay que montarla. */
+    var capaCorrea = M.straps[correaActual()] || {};
+    var sobra = (capaCorrea.cabezaDeLaFoto === cabeza);
+    $('[data-pv-cabeza-img]').hidden = sobra;
     $('[data-pv-cabeza-img]').src = M.heads[cabeza];
     $('[data-pv-correa-img]').src = M.straps[correaActual()].src;
     $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
@@ -658,7 +667,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=24')
+  fetch('/assets/img/lunar-config/manifest.json?v=25')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
