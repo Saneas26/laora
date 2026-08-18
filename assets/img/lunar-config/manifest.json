@@ -80,6 +80,24 @@
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/goma-negra-costura-verde-madre-4k.png",
       "nota": "IMAGEN MADRE: foto completa del preview, con la correa TAL CUAL y las cabezas encima. Geometria verificada contra las madres ya aprobadas (chords identicos). Solo con cajas de acero: sobre la caja negra asomaria el acero de la foto."
+    },
+    "goma-negra-costura-naranja": {
+      "src": "/assets/img/lunar-config/straps/goma-negra-costura-naranja.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/goma-negra-costura-naranja-madre-4k.png",
+      "nota": "Sale de la madre de la costura verde (P-020 del proveedor). El caucho es NEGRO, o sea sin color, asi que el hilo es lo unico cromatico de la foto y se aisla por saturacion: se le cambia el tono conservando torsion, brillos y relieve. Ni un pixel dibujado. Herramienta: herramientas/recolorear_pespunte.py"
+    },
+    "goma-negra-costura-blanca": {
+      "src": "/assets/img/lunar-config/straps/goma-negra-costura-blanca.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/goma-negra-costura-blanca-madre-4k.png",
+      "nota": "Sale de la madre de la costura verde (P-025/P-026 del proveedor). El caucho es NEGRO, o sea sin color, asi que el hilo es lo unico cromatico de la foto y se aisla por saturacion: se le cambia el tono conservando torsion, brillos y relieve. Ni un pixel dibujado. Herramienta: herramientas/recolorear_pespunte.py"
     }
   },
   "default": {
