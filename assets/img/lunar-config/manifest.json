@@ -244,6 +244,68 @@
       "master4k": "masters-2026/lunar/capas/nato-negro-gris-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
       "nota": "NATO (a secas), madre de Oscar (18/08). Se publicaron por error como nato+piel y Oscar corrigio: esto es nato. Solo cajas de acero. Negro: fuera del bisel azul, por la regla de no ofrecer correa negra con esa caja."
+    },
+    "nato-piel-negro": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-negro.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ],
+      "master4k": "masters-2026/lunar/capas/nato-piel-negro-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero. Negra: fuera del bisel azul."
+    },
+    "nato-piel-azul": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-azul.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-azul-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+    },
+    "nato-piel-naranja": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-naranja.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-naranja-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+    },
+    "nato-piel-beige": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-beige.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-beige-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+    },
+    "nato-piel-gris-claro": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-gris-claro.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-gris-claro-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
+    },
+    "nato-piel-verde-militar": {
+      "src": "/assets/img/lunar-config/straps/nato-piel-verde-militar.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/nato-piel-verde-militar-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "NATO + PIEL (lona lisa con canto de piel), madre de Oscar (18/08). Todas con hebilla clasica plateada. Solo cajas de acero."
     }
   },
   "default": {
