@@ -288,9 +288,11 @@
       tec: 'piel de vaca genuina negra con relieve de cocodrilo y liberación rápida' },
     'piel-italiana-negra-pespunte-negro': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
       tec: 'piel de vaca genuina negra con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-marron': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'contraste',
+    'piel-italiana-marron': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
       tec: 'piel de vaca genuina marrón con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-azul':   { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true, pespunte: 'color',
+    'piel-italiana-marron-pespunte-tono': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
+      tec: 'piel de vaca genuina marrón con relieve de cocodrilo y liberación rápida' },
+    'piel-italiana-azul':   { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
       tec: 'piel de vaca genuina azul con relieve de cocodrilo y liberación rápida' },
     /* Caucho (P-019). Lo que cambia entre variantes es la COSTURA, así
        que ahí es donde va la paleta del tipo. */
@@ -325,7 +327,8 @@
                        correa: 'piel-italiana-negra-pespunte-negro' } } },
       'marron': { nombre: 'Marrón', color: '#5B3A28', pespuntes: {
         'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-marron' },
-        'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel' } } },
+        'color':     { nombre: 'A color',   tec: 'pespunte marrón al tono de la piel',
+                       correa: 'piel-italiana-marron-pespunte-tono' } } },
       'azul':   { nombre: 'Azul',   color: '#1E2B47', pespuntes: {
         'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste' },
         'color':     { nombre: 'A color',   tec: 'pespunte al tono de la piel', correa: 'piel-italiana-azul' } } } } },
@@ -651,7 +654,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=20')
+  fetch('/assets/img/lunar-config/manifest.json?v=21')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
