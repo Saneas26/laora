@@ -106,20 +106,20 @@
     "goma-azul-pespunte-blanco": {
       "src": "/assets/img/lunar-config/straps/goma-azul-pespunte-blanco.webp?v=2",
       "cabezasPermitidas": [
-        "cab-acero-bazul-"
+        "cab-acero-"
       ],
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/goma-azul-pespunte-blanco-madre-4k.png",
-      "nota": "SOLO CON BISEL AZUL (orden de Oscar). Madre regenerada por Oscar el 18/08 a las 14:02: la primera era azul MARINO con reborde azul claro; esta es azul CLARO uniforme."
+      "nota": "Madre regenerada por Oscar el 18/08 a las 14:02: la primera era azul MARINO con reborde azul claro; esta es azul CLARO uniforme. Abierta a las DOS cajas de acero el 18/08 (Oscar sin preferencia): con bisel negro es la propia cabeza de la foto y con bisel azul es la combinacion que el pidio. Fuera la caja negra: queda limpia, pero el azul claro pide acero y ahi el caucho negro no esta disponible, asi que el tipo se quedaria con una sola opcion."
     },
     "goma-azul-pespunte-azul": {
       "src": "/assets/img/lunar-config/straps/goma-azul-pespunte-azul.webp?v=2",
       "cabezasPermitidas": [
-        "cab-acero-bazul-"
+        "cab-acero-"
       ],
       "cabezasExcluidas": [],
       "master4k": "masters-2026/lunar/capas/goma-azul-pespunte-azul-madre-4k.png",
-      "nota": "Sale de la madre de pespunte blanco tinendo el hilo (recolorear_pespunte.py). Con la madre nueva, azul claro, el tinte pasa de azul claro a azul MARINO: el pespunte contrasta con SU correa. SOLO CON BISEL AZUL."
+      "nota": "Sale de la madre de pespunte blanco tinendo el hilo (recolorear_pespunte.py). Con la madre nueva, azul claro, el tinte pasa de azul claro a azul MARINO: el pespunte contrasta con SU correa. Abierta a las DOS cajas de acero el 18/08 (Oscar sin preferencia): con bisel negro es la propia cabeza de la foto y con bisel azul es la combinacion que el pidio. Fuera la caja negra: queda limpia, pero el azul claro pide acero y ahi el caucho negro no esta disponible, asi que el tipo se quedaria con una sola opcion."
     },
     "piel-italiana-negra-pespunte-negro": {
       "src": "/assets/img/lunar-config/straps/piel-italiana-negra-pespunte-negro.webp?v=1",
