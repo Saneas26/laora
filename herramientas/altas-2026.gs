@@ -148,3 +148,55 @@ function altaPiezas_(nombre, filas, fecha) {
   sh.getRange(fila, 8, datos.length, 1).setNumberFormat('dd/mm/yyyy');
   Logger.log(nombre + ': ' + datos.length + ' piezas dadas de alta (filas ' + fila + '–' + (fila + datos.length - 1) + ').');
 }
+
+/**
+ * Tanda 4 — 18/08/2026. Correa de piel italiana del Lunar.
+ * MAIKES modelo 7011E, anuncio 1005007805649477 (MAIKES official
+ * store): piel de vaca genuina grabada en cocodrilo, brillante, con
+ * LIBERACIÓN RÁPIDA (pasador con pulsador, sin herramienta).
+ *
+ * El anuncio hace 4 colores (negro, marrón oscuro, azul, verde) × 2
+ * pespuntes (blanco / al tono) × 5 cierres = 40 SKUs. Aquí entran los
+ * TRES colores que ha elegido Óscar (negro, marrón, azul) con los
+ * cinco cierres, en la versión de pespunte BLANCO. La misma referencia
+ * existe con pespunte al tono a igual precio: se dará de alta cuando
+ * Óscar la pida.
+ *
+ * Precios por cierre, dados por Óscar el 18/08:
+ *   hebilla plata 29,99 · hebilla negra 31,19 · hebilla oro rosa 29,59
+ *   hebilla oro 30,99 · cierre mariposa 30,19
+ */
+function ALTA_2026_08_18() {
+  var LINK = 'https://es.aliexpress.com/item/1005007805649477.html';
+  var COMUN = 'MAIKES mod. 7011E · piel de vaca genuina (grabado GENUINE LEATHER en el forro) con relieve de cocodrilo y acabado brillante · LIBERACIÓN RÁPIDA (pasador con pulsador, se cambia sin herramienta) · pedir ancho 20 mm (el anuncio hace 19/20/21/22) · largo 20 cm · vendedor MAIKES official store (4,9★/541, 1.000+ ventas) · precios de Óscar del 18/08; el anuncio marcaba 26,59 € en oferta hasta el 26/08 (PVP tachado 56,57 €), reverificar antes de comprar · ALERTA: los rótulos de las fotos del vendedor no son de fiar (la foto de «PB BlueB S» dice Gold Buckle y la hebilla es plata); manda el código del SKU · ALERTA: la ficha declara «Butterfly Buckle» para un SKU que es de pinza · existe el mismo modelo en VERDE y con pespunte al tono, sin dar de alta';
+
+  var colores = [
+    ['negra',  'Negra',  'BlackW'],
+    ['marrón', 'Marrón', 'DarkBrownW'],
+    ['azul',   'Azul',   'BlueW']
+  ];
+  var cierres = [
+    ['hebilla de pinza acero plateado', 'hebilla plata',     'PB', 'S',  29.99],
+    ['hebilla de pinza acero PVD negro','hebilla negra',     'PB', 'B',  31.19],
+    ['hebilla de pinza oro rosa',       'hebilla oro rosa',  'PB', 'RG', 29.59],
+    ['hebilla de pinza dorada',         'hebilla oro',       'PB', 'G',  30.99],
+    ['cierre mariposa de acero',        'cierre mariposa',   'HD', 'S',  30.19]
+  ];
+
+  var filas = [], n = 28;
+  colores.forEach(function (c) {
+    cierres.forEach(function (h) {
+      filas.push([
+        'P-0' + n,
+        'Correa',
+        'Lunar',
+        'Correa piel italiana ' + c[0] + ' grabada en cocodrilo, pespunte blanco, ' + h[0],
+        'Piel italiana ' + c[1].toLowerCase() + ' · ' + h[1],
+        h[2] + ' ' + c[2] + ' ' + h[3] + ' · 20 mm',
+        h[4], LINK, '', '', COMUN
+      ]);
+      n++;
+    });
+  });
+  altaPiezas_('ALTA_2026_08_18', filas, new Date(2026, 7, 18));
+}
