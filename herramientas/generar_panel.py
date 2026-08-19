@@ -36,7 +36,8 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 V_CSS = 4   # la 2 quedó envenenada en la caché de Cloudflare: ver README de abajo
-V_JS = 6
+V_JS = 7
+V_FACTURA = 1
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
@@ -160,6 +161,7 @@ PAGINA = f"""<!DOCTYPE html>
 
 <p class="pa-aviso" data-aviso hidden></p>
 
+<script src="/assets/js/factura.js?v={V_FACTURA}"></script>
 <script src="/assets/js/panel.js?v={V_JS}"></script>
 </body>
 </html>

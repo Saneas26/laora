@@ -167,3 +167,10 @@ body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);
          border:1px solid var(--gold);border-radius:14px;
          font-size:15.5px;line-height:1.6}
 .cu-club b{font-weight:700}
+
+/* La factura del cliente. Es un botón secundario: importa, pero menos
+   que pagar lo que aún no se ha pagado. */
+.cu-factura{margin-top:12px;width:100%;padding:14px;border-radius:999px;
+            background:none;border:1px solid var(--line);color:var(--ink);
+            font-size:15px;font-weight:700}
+.cu-factura:hover{border-color:var(--ink)}

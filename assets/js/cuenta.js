@@ -142,6 +142,11 @@
         ? '<button type="button" class="cu-pagar" data-pagar="' + esc(p.numero) + '">' +
           'Pagar ' + euros(p.total) + '</button>'
         : '') +
+      /* «Tu factura, siempre a mano» decía el Club. Ahora es verdad. */
+      (p.factura_numero
+        ? '<button type="button" class="cu-factura" data-factura="' + esc(p.numero) + '">' +
+          'Ver mi factura ' + esc(p.factura_numero) + '</button>'
+        : '') +
       '</li>';
   }
 
@@ -283,6 +288,7 @@
 
   /* ---------- abrir la cuenta ---------- */
   var SOCIO = {};
+  var PEDIDOS = [];
 
   function abrirDentro(usuario) {
     puerta.hidden = true;
@@ -302,6 +308,7 @@
       if (socio) { SOCIO = socio; ponerDatos(socio); pintarClub(socio); }
 
       var pedidos = r[1] || [];
+      PEDIDOS = pedidos;
       var relojes = r[2] || [];
 
       if (relojes.length) {
@@ -344,6 +351,26 @@
       b.disabled = false;
       b.textContent = String(err && err.message || 'No se ha podido abrir el pago');
     });
+  });
+
+  /* La factura la dibuja `factura.js`, el MISMO documento que ve Óscar
+     en su panel. El IVA se saca dividiendo, porque los precios de la
+     web ya lo llevan dentro; multiplicar por 0,21 daría de menos. */
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-factura]');
+    if (!b) return;
+    var pedido = (PEDIDOS || []).filter(function (p) { return p.numero === b.dataset.factura; })[0];
+    if (!pedido) return;
+    var total = Number(pedido.total);
+    var ok = laoraFactura.abrir({
+      pedido: pedido,
+      base: Math.round((total / 1.21) * 100) / 100,
+      iva: Math.round((total - total / 1.21) * 100) / 100,
+      tipo_iva: 21
+    });
+    if (!ok) {
+      b.textContent = 'Tu navegador ha bloqueado la ventana. Permítela y vuelve a pulsar.';
+    }
   });
 
   document.querySelector('[data-salir]').addEventListener('click', function () {
