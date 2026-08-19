@@ -138,6 +138,9 @@ body{margin:0;background:var(--ivory);color:var(--ink);
   border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold);
 }
 .ca-metodos button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* El tercero, el que no pasa por la pasarela, a lo ancho: son dos
+   caminos automáticos y luego uno a mano, y así se lee. */
+.ca-metodos button:nth-child(3){grid-column:1/-1;min-height:0}
 
 @media (max-width:520px){
   .ca-metodos{grid-template-columns:1fr}

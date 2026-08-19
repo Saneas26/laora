@@ -44,7 +44,7 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 8
+V_CSS = 9
 V_JS = 8
 
 V2 = '/assets/img/lunar-v2'
@@ -168,8 +168,8 @@ PAGINA = f"""<!DOCTYPE html>
   <section class="ca-paso ca-hecho" data-paso-pagar hidden>
     <h2>Tu pedido <b data-numero></b></h2>
     <p class="ca-explica">Ya está guardado y lo tenemos apuntado. Solo queda el pago:
-      elige cómo quieres pagarlo y te llevamos a la pasarela de Mollie.
-      Nosotros no vemos ni guardamos los datos de tu tarjeta en ningún momento.</p>
+      elige cómo quieres pagarlo. Con tarjeta o con Klarna te llevamos a la pasarela de
+      Mollie, y nosotros no vemos ni guardamos los datos de tu tarjeta en ningún momento.</p>
     <p class="ca-total-final">A pagar: <b data-total-final></b></p>
 
     <div class="ca-metodos" data-metodos>
