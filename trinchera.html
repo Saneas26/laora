@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=25">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=26">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -55,22 +55,20 @@
       <div class="pv-hero">
         <p class="pv-nota" data-pv-nota hidden>Imagen de la caja en acero plata</p>
         <img data-pv-foto
-          src="/assets/img/trinchera-2026/1200/krojo-nato.webp"
-          srcset="/assets/img/trinchera-2026/1200/krojo-nato.webp 1200w, /assets/img/trinchera-2026/krojo-nato.webp 3983w"
+          src="/assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif"
+          srcset="/assets/img/trinchera-2026/murph/480/acero-negra-crema.avif 480w, /assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif 1200w, /assets/img/trinchera-2026/murph/1600/acero-negra-crema.avif 1600w"
           sizes="(max-width:900px) 100vw, 46vw"
           alt="laOra Trinchera">
         <img class="pv-forro" data-pv-forro src="/assets/img/trinchera-2026/forro-piel.webp"
              alt="Forro interior de piel genuina del nato" hidden>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
-      <div class="pv-extras">
-        <figure><img src="/assets/img/trinchera-2026/historia/03.webp" alt="Macro de la esfera con el lumen encendido" loading="lazy"></figure>
-        <figure><img src="/assets/img/trinchera-2026/historia/04.webp" alt="Macro del nato y la caja de acero" loading="lazy"></figure>
-        <figure><img src="/assets/img/trinchera-2026/historia/06.webp" alt="La tapa trasera, de cerca" loading="lazy"></figure>
-        <figure><img src="/assets/img/trinchera-2026/historia/07.webp" alt="El Trinchera puesto en la muñeca" loading="lazy"></figure>
-        <figure><img src="/assets/img/trinchera-2026/historia/02.webp" alt="Vista a tres cuartos en el estudio" loading="lazy"></figure>
-        <figure><img src="/assets/img/trinchera-2026/historia/05.webp" alt="El cierre abrochado, por detrás" loading="lazy"></figure>
-      </div>
+      <!-- LA GALERÍA YA NO ES UN ÁLBUM, ES UN SELECTOR (19/08/2026).
+           Eran seis macros fijas que valían para cualquier configuración y
+           que ya no existen: las sustituye la serie maestra del Murph, que
+           enseña las seis combinaciones de la caja elegida —tres pieles por
+           dos esferas— y cambia el reloj al pulsarlas. Lo pinta el guion. -->
+      <div class="pv-extras" data-pv-minis></div>
 
     </div>
 
@@ -245,6 +243,11 @@
     NATON: { nombre: 'Nato Negro', coste: 5.69,  tec: 'nato negro de 20 mm con hebilla clásica plateada' },
     PIELN: { nombre: 'Piel Negra',   coste: 13.69, tec: 'piel genuina negra de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     PIELM: { nombre: 'Piel Marrón',  coste: 13.69, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
+    /* La piel verde entra el 19/08/2026 con la serie maestra del Murph. El
+       coste es el MISMO que el de las otras dos pieles genuinas porque es
+       la misma correa en otro color; si el proveedor cobra otra cosa, este
+       es el número que hay que corregir. */
+    PIELV: { nombre: 'Piel Verde',   coste: 13.69, tec: 'piel genuina verde militar de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     ACERO: { nombre: 'Brazalete Acero', coste: 21.99, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
     PACK:  { nombre: 'Pack Piel + Brazalete', coste: 35.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
@@ -269,6 +272,23 @@
     'BRONCE': ['bronce-ante', 4152],
     'TI-ANTE': ['titanio-ante', 4151], 'TI-PIELO': ['titanio-pielo', 4154]
   };
+  /* LA SERIE MAESTRA DEL MURPH (19/08/2026). Doce fotos de verdad:
+     dos cajas × tres pieles × dos esferas. Mandan ellas: si una
+     combinación está aquí, existe; si no, no se fotografió. */
+  var MURPH_IMG = '/assets/img/trinchera-2026/murph/';
+  var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
+  var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
+  var MURPH_ESF    = { MA: 'crema', MB: 'blanco' };
+  function murphFoto(caja, correa, esf) {
+    if (!MURPH_CAJA[caja] || !MURPH_CORREA[correa] || !MURPH_ESF[esf]) return null;
+    return MURPH_CAJA[caja] + '-' + MURPH_CORREA[correa] + '-' + MURPH_ESF[esf];
+  }
+  function murphSrcset(nombre) {
+    return MURPH_IMG + '480/' + nombre + '.avif 480w, ' +
+           MURPH_IMG + '1200/' + nombre + '.avif 1200w, ' +
+           MURPH_IMG + '1600/' + nombre + '.avif 1600w';
+  }
+
   var LOGO = 3.78;
 
   var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG' };
@@ -316,9 +336,12 @@
        sus cajas (la negra con nato negro o piel negra, el bronce todo
        fijo, el titanio con ante o piel oscuro, 20 ATM y tapa opaca). */
     if (e.estilo === 'M') {
-      e.caja = 'PL';
+      /* 19/08/2026: el Murph deja de ser solo de acero. La serie maestra lo
+         fotografía en acero Y en titanio, con las tres pieles. El brazalete
+         y el pack siguen existiendo con sus fotos de antes. */
+      if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
       if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
-      if (e.correa !== 'PIELN' && e.correa !== 'ACERO' && e.correa !== 'PACK') e.correa = 'PIELN';
+      if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' && e.correa !== 'PACK') e.correa = 'PIELN';
     } else {
       if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KR';
       if (e.caja === 'BR') { e.correa = 'ANTE'; e.esf = 'BRZ'; }
@@ -370,9 +393,11 @@
         b.setAttribute('aria-pressed', String(b.dataset.v === e[g]));
       });
 
-    /* Con el Murph, las cajas que no existen se tachan, no se esconden */
+    /* Con el Murph, las cajas que no existen se tachan, no se esconden.
+       Desde el 19/08/2026 el Murph también está fotografiado en titanio,
+       así que las dos cajas de la serie maestra quedan abiertas. */
     todos('[data-pv="caja"] button').forEach(function (b) {
-      b.disabled = (e.estilo === 'M' && b.dataset.v !== 'PL');
+      b.disabled = (e.estilo === 'M' && !MURPH_CAJA[b.dataset.v]);
     });
 
     /* la tapa la manda el movimiento: la opción imposible queda tachada */
@@ -387,7 +412,9 @@
     var esBronce = e.caja === 'BR';
     var esNegra = e.caja === 'NG';
     var esTitanio = e.caja === 'TI';
-    var esfFija = esBronce || esTitanio;
+    /* El titanio traía esfera fija porque solo se había fotografiado con la
+       khaki de agujas blancas. Con la serie maestra ya tiene sus dos Murph. */
+    var esfFija = esBronce || (esTitanio && e.estilo !== 'M');
     $('[data-pv="esf"]').hidden = esfFija;
     $('[data-pv-esf-fija]').hidden = !esfFija;
     if (!esfFija) {
@@ -401,14 +428,19 @@
     $('[data-pv-correa-fija]').hidden = !esBronce;
     if (!esBronce) {
       var esMurph = e.estilo === 'M';
-      botones('correa', esNegra
+      botones('correa', esMurph
+        /* El Murph va con las tres pieles de la serie maestra y con el
+           brazalete y el pack, que siguen fotografiados aparte. */
+        ? [['PIELV', 'Piel Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
+           ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']]
+        : esNegra
         ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'], ['PIELN', 'Piel Negra']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro']]
-        : [['NATO', 'Nato Verde', esMurph], ['NATOP', 'Nato + Piel', esMurph],
-           ['PIELN', 'Piel Negra', false], ['PIELM', 'Piel Marrón', esMurph],
-           ['ACERO', 'Brazalete Acero', false],
-           ['PACK', 'Pack Piel + Brazalete', !esMurph]], e.correa);
+        : [['NATO', 'Nato Verde'], ['NATOP', 'Nato + Piel'],
+           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
+           ['ACERO', 'Brazalete Acero'],
+           ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
     /* el color: solo cuando la correa es el nato con forro de piel */
@@ -422,14 +454,41 @@
     }
     $('[data-pv-forro]').hidden = !conColor;
 
-    /* la foto: la del bronce es suya; el resto se fotografió en plata */
-    var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa :
-                (esNegra ? 'NG-' + (e.correa === 'NATOP' ? 'NATON' : e.correa) :
-                (e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa))));
-    var f = FOTOS[clave];
+    /* LA FOTO. Primero se mira la serie maestra del Murph, que es la que
+       manda; si la combinación no está ahí, se cae a las fotos de antes.
+       De las viejas ya solo se sirve el tamaño de 1.200: los maestros de
+       4.000 px no se publican. */
     var img = $('[data-pv-foto]');
-    img.src = IMG + '1200/' + f[0] + '.webp';
-    img.srcset = IMG + '1200/' + f[0] + '.webp 1200w, ' + IMG + f[0] + '.webp ' + f[1] + 'w';
+    var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf) : null;
+    if (deLaSerie) {
+      img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif';
+      img.srcset = murphSrcset(deLaSerie);
+    } else {
+      var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa :
+                  (esNegra ? 'NG-' + (e.correa === 'NATOP' ? 'NATON' : e.correa) :
+                  (e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa))));
+      var f = FOTOS[clave] || FOTOS['KB-PIELN'];
+      img.src = IMG + '1200/' + f[0] + '.webp';
+      img.srcset = IMG + '1200/' + f[0] + '.webp 1200w';
+    }
+
+    /* La galería de debajo: las seis combinaciones de la caja elegida —tres
+       pieles por dos esferas—, y al pulsarlas cambia el reloj. Cuando la
+       caja no es de la serie (bronce o negra) se enseña la de acero, que es
+       la de referencia. */
+    var cajaSerie = MURPH_CAJA[e.caja] ? e.caja : 'PL';
+    var minis = [];
+    ['PIELV', 'PIELN', 'PIELM'].forEach(function (co) {
+      ['MA', 'MB'].forEach(function (es) {
+        var n = murphFoto(cajaSerie, co, es);
+        minis.push('<button type="button" class="pv-mini" data-mini-correa="' + co + '" data-mini-esf="' + es + '"' +
+                   ' aria-pressed="' + (e.estilo === 'M' && e.caja === cajaSerie && e.correa === co && e.esf === es) + '"' +
+                   ' aria-label="' + CORREAS[co].nombre + ', ' + ESFERAS[es].nombre + '">' +
+                   '<img src="' + MURPH_IMG + '480/' + n + '.avif" alt="" loading="lazy" decoding="async">' +
+                   '</button>');
+      });
+    });
+    $('[data-pv-minis]').innerHTML = minis.join('');
     /* la caja negra aún no está fotografiada con el segundero rojo */
     var sinFoto = esNegra && e.esf === 'KR';
     $('[data-pv-nota]').textContent = 'Fotografiado con segundero blanco';
@@ -448,6 +507,17 @@
   }
 
   document.addEventListener('click', function (ev) {
+    /* Las miniaturas de la serie maestra: cambian correa y esfera de una vez
+       y, si venías de otro estilo, te meten en el Murph. */
+    var mini = ev.target.closest('[data-mini-correa]');
+    if (mini) {
+      e.estilo = 'M';
+      if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
+      e.correa = mini.dataset.miniCorrea;
+      e.esf = mini.dataset.miniEsf;
+      pinta();
+      return;
+    }
     var b = ev.target.closest('[data-pv] button');
     if (b) {
       var g = b.closest('[data-pv]').dataset.pv;
