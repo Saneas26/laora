@@ -19,7 +19,7 @@
 //   Secreto a poner: PANEL_LAORA_PASSWORD
 //
 // ACCIONES (POST con {clave, accion, ...})
-//   entrar · resumen · pedidos · pedido · cobrado · estado
+//   entrar · resumen · pasarela · pedidos · pedido · cobrado · estado
 //   (al marcar 'enviado' se COBRA el pago a plazos de Klarna)
 //   serie  · socios  · socio   · mensajes · responder · leido
 //   valoraciones · moderar
@@ -284,6 +284,32 @@ Deno.serve(async (req) => {
           }
         }
         return json({ ok: true, pedido: filas[0], cobrado });
+      }
+
+      // ---------- la pasarela: ¿real o de pruebas? ----------
+      /* No devuelve la clave ni un trozo de ella: solo si empieza por
+         `live_` o por `test_`, y qué formas de pago tiene activas la
+         cuenta. Es la respuesta a «¿esto cobra de verdad?» sin que
+         nadie tenga que ir a mirar un secreto. */
+      case 'pasarela': {
+        const MOLLIE = Deno.env.get('LAORA_MOLLIE_API_KEY');
+        if (!MOLLIE) return json({ ok: true, hay: false });
+
+        const modo = MOLLIE.startsWith('live_') ? 'real'
+                   : MOLLIE.startsWith('test_') ? 'pruebas' : 'raro';
+
+        /* Se le pide a Mollie con un importe de los nuestros: hay
+           métodos que solo aparecen a partir de cierta cantidad. */
+        const r = await fetch(
+          'https://api.mollie.com/v2/methods?amount[value]=189.90&amount[currency]=EUR&locale=es_ES',
+          { headers: { Authorization: `Bearer ${MOLLIE}` } });
+        if (!r.ok) {
+          console.error('mollie methods', await r.text());
+          return json({ ok: true, hay: true, modo, error: 'Mollie no ha contestado.' });
+        }
+        const d = await r.json();
+        const metodos = (d?._embedded?.methods || []).map((m: any) => m.description || m.id);
+        return json({ ok: true, hay: true, modo, metodos });
       }
 
       // ---------- el reloj y su número ----------

@@ -36,7 +36,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 V_CSS = 4   # la 2 quedó envenenada en la caché de Cloudflare: ver README de abajo
-V_JS = 5
+V_JS = 6
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 

@@ -162,6 +162,16 @@
       var pend = (d.mensajes_sin_leer || 0) + (d.valoraciones_pendientes || 0);
       chipC.textContent = pend || '';
       chipC.hidden = !pend;
+
+      /* La pasarela, al final y aparte: tarda lo que tarde Mollie sin
+         retrasar lo demás. Si sale «PRUEBAS», ningún cobro es real. */
+      api('pasarela').then(function (p) {
+        if (!p.hay) { caja.insertAdjacentHTML('beforeend', tarjeta('Pasarela', 'SIN CLAVE', 'pa-urge')); return; }
+        var real = p.modo === 'real';
+        caja.insertAdjacentHTML('beforeend',
+          tarjeta('Pasarela', real ? 'COBRA DE VERDAD' : 'EN PRUEBAS', real ? '' : 'pa-urge') +
+          tarjeta('Formas de pago', (p.metodos || []).join(', ') || (p.error || '—')));
+      }).catch(function () {});
     }).catch(function (e) { caja.innerHTML = '<p class="pa-nada">' + esc(e.message) + '</p>'; });
   }
 
