@@ -371,9 +371,14 @@ main.cv2{ overflow:visible; overflow-x:clip }
   background:var(--cv2-crema); font-size:13.5px; line-height:1.55;
 }
 .pv-comprar[disabled]{ opacity:.45; cursor:default }
+/* El visor sin foto no puede comerse la pantalla: el `aspect-ratio:1/1`
+   del hero lo estiraba tanto que los pasos se iban debajo del pliegue y
+   la ficha parecía vacía. Mientras no haya foto, un marco corto. */
+.pv-hero-vacio{ aspect-ratio:auto; min-height:0 }
 .pv-foto-pendiente{
-  display:flex; align-items:center; justify-content:center; height:100%;
-  min-height:320px; background:var(--cv2-crema); color:var(--cv2-gris);
-  font-size:14px; letter-spacing:.08em; text-transform:uppercase;
+  display:flex; align-items:center; justify-content:center;
+  min-height:200px; padding:70px 20px; margin:0;
+  background:var(--cv2-crema); color:var(--cv2-gris);
+  font-size:13px; letter-spacing:.08em; text-transform:uppercase; text-align:center;
 }
 .pv-grupo .pv-rotulo small{ font-weight:400; color:var(--cv2-gris); text-transform:none; letter-spacing:0 }
