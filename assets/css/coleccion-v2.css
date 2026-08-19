@@ -193,6 +193,9 @@
   padding:16px 12px;cursor:pointer;width:100%;
   transition:background .2s;
 }
+/* El mismo botón, cuando es un enlace: los modelos que aún no se
+   venden desde aquí llevan a su ficha en vez de a la cesta. */
+a.cv2-comprar{display:block;text-align:center;text-decoration:none}
 .cv2-comprar:hover{background:#2f3131}
 .cv2-comprar:active{opacity:.85}
 
