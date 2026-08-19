@@ -410,6 +410,25 @@
   /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
   function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
 
+  /* LA SERIE 12/24 DEL KHAKI (19/08/2026). Doce fotos: las cuatro cajas
+     —acero, PVD negro, bronce y titanio gris— con las tres pieles italianas
+     de pespunte blanco y la esfera 12/24 de numerales blancos, que es la
+     KB de siempre. Con ellas, el bronce y el titanio dejan de estar atados
+     al ante: ya tienen su piel fotografiada. */
+  var K1224_IMG = '/assets/img/trinchera-2026/khaki1224/';
+  var K1224_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
+  var K1224_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde' };
+  function khakiFoto(caja, correa, esf) {
+    if (esf !== 'KB') return null;
+    if (!K1224_CAJA[caja] || !K1224_CORREA[correa]) return null;
+    return K1224_CAJA[caja] + '-' + K1224_CORREA[correa];
+  }
+  function k1224Srcset(nombre) {
+    return [480, 1200, 1600].map(function (s) {
+      return K1224_IMG + s + '/' + nombre + '.avif' + MURPH_V + ' ' + s + 'w';
+    }).join(', ');
+  }
+
   var LOGO = 3.78;
 
   var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B', cierre: 'plata' };
@@ -484,14 +503,24 @@
       if (e.caja === 'TI' && (e.correa === 'ACERO' || e.correa === 'PACK')) e.correa = 'PIELN';
     } else {
       if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KR';
-      if (e.caja === 'BR') { e.correa = 'ANTE'; e.esf = 'BRZ'; }
+      /* Con piel italiana, el bronce y el titanio llevan la 12/24 de
+         segundero blanco, que es la que se fotografió el 19/08/2026. Con el
+         ante o la piel oscura siguen con su khaki de agujas blancas. */
+      var pielIt = !!K1224_CORREA[e.correa];
+      if (e.caja === 'BR') {
+        if (!pielIt) { e.correa = 'ANTE'; e.esf = 'BRZ'; } else { e.esf = 'KB'; }
+      }
       else if (e.caja === 'TI') {
-        e.esf = 'BRZ';
-        if (e.correa !== 'ANTE' && e.correa !== 'PIELO') e.correa = 'ANTE';
+        if (pielIt) { e.esf = 'KB'; }
+        else {
+          e.esf = 'BRZ';
+          if (e.correa !== 'ANTE' && e.correa !== 'PIELO') e.correa = 'ANTE';
+        }
       }
       else if (e.caja === 'NG') {
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
-        if (e.correa !== 'NATON' && e.correa !== 'PIELN' && e.correa !== 'NATOP') e.correa = 'NATON';
+        if (pielIt) e.esf = 'KB';
+        if (e.correa !== 'NATON' && e.correa !== 'NATOP' && !pielIt) e.correa = 'NATON';
       } else {
         if (e.correa === 'ANTE' || e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
@@ -566,21 +595,30 @@
     var esNegra = e.caja === 'NG';
     var esTitanio = e.caja === 'TI';
     var esMurph = e.estilo === 'M';
-    /* El titanio traía esfera fija porque solo se había fotografiado con la
-       khaki de agujas blancas. Con la serie maestra ya tiene sus dos Murph. */
-    var esfFija = esBronce || (esTitanio && e.estilo !== 'M');
+    /* El bronce y el titanio traían esfera fija porque solo se habían
+       fotografiado con la khaki de agujas blancas. Ya no: el Murph les dio
+       sus dos esferas al titanio, y la serie 12/24 del 19/08/2026 les da la
+       KB a los dos en cuanto llevan piel italiana. */
+    var conPiel1224 = !!K1224_CORREA[e.correa];
+    var esfFija = (esBronce || esTitanio) && e.estilo !== 'M' && !conPiel1224;
     $('[data-pv="esf"]').hidden = esfFija;
     $('[data-pv-esf-fija]').hidden = !esfFija;
     if (!esfFija) {
       botones('esf', e.estilo === 'M'
         ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
-        : [['KR', 'Khaki, Segundero Rojo'], ['KB', 'Khaki, Segundero Blanco']], e.esf);
+        /* Con piel italiana en bronce o titanio solo está fotografiada la
+           12/24 de segundero blanco: la del segundero rojo se tacha. */
+        : [['KR', 'Khaki, Segundero Rojo', conPiel1224 && (esBronce || esTitanio)],
+           ['KB', 'Khaki, Segundero Blanco']], e.esf);
     }
 
     /* la correa: todas salvo el ante, que es del bronce */
-    $('[data-pv="correa"]').hidden = esBronce;
-    $('[data-pv-correa-fija]').hidden = !esBronce;
-    if (!esBronce) {
+    $('[data-pv="correa"]').hidden = false;
+    $('[data-pv-correa-fija]').hidden = true;
+    if (esBronce) {
+      botones('correa', [['ANTE', 'Piel Ante'],
+                         ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']], e.correa);
+    } else {
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
            brazalete y el pack, que siguen fotografiados aparte. */
@@ -591,11 +629,13 @@
            ['ANTE', 'Ante'],
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
-        ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'], ['PIELN', 'Piel Negra']]
+        ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'],
+           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
         : esTitanio
-        ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro']]
+        ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
+           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
         : [['NATO', 'Nato Verde'], ['NATOP', 'Nato + Piel'],
-           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
+           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
@@ -641,9 +681,13 @@
        4.000 px no se publican. */
     var img = $('[data-pv-foto]');
     var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf, e.ante, e.pesp) : null;
+    var del1224 = !deLaSerie && e.estilo === 'K' ? khakiFoto(e.caja, e.correa, e.esf) : null;
     if (deLaSerie) {
       img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif' + MURPH_V;
       img.srcset = murphSrcset(deLaSerie);
+    } else if (del1224) {
+      img.src = K1224_IMG + '1200/' + del1224 + '.avif' + MURPH_V;
+      img.srcset = k1224Srcset(del1224);
     } else {
       /* El Murph con brazalete o con el pack sigue teniendo su foto de
          antes, que se hizo con la caja de acero: si la caja elegida es el
