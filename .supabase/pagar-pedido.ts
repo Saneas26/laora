@@ -2,8 +2,8 @@
 // laOra · Edge Function: pagar-pedido
 // ------------------------------------------------------------
 // Abre el cobro de un pedido que YA está escrito. Devuelve la
-// dirección del checkout de Mollie, donde el cliente elige con qué
-// paga: tarjeta, Bizum, PayPal o Klarna en tres plazos.
+// dirección del checkout de Mollie: tarjeta o transferencia por un
+// lado, y Klarna en tres plazos por otro.
 //
 // POR QUÉ EXISTE
 //   Hasta hoy el carrito abría un enlace de paypal.me con el importe
@@ -11,6 +11,9 @@
 //   a mano con el pedido, y la web anunciaba un pago con Klarna que
 //   en realidad no se podía usar. Esto lo cierra: Mollie cobra, avisa
 //   por el webhook y el pedido queda pagado solo.
+//
+//   El Bizum y el PayPal de la casa NO pasan por aquí: van por fuera
+//   de Mollie y se cobran a mano.
 //
 // EL IMPORTE NO SE ACEPTA DE FUERA
 //   Aquí no entra ni un número del navegador. Solo el número de
@@ -58,10 +61,22 @@ const json = (cuerpo: unknown, status = 200) =>
 
 const dos = (n: number) => (Math.round(n * 100) / 100).toFixed(2);
 
-/* Los métodos que se pueden pedir desde la web. `null` = que Mollie
-   enseñe todos los que tenga activos. */
-const METODOS: Record<string, string | null> = {
-  '': null, tarjeta: 'creditcard', bizum: 'bizum', paypal: 'paypal', klarna: 'klarna',
+/* Los métodos que se pueden pedir desde la web, con lo que hay que
+   mandarle a Mollie. `null` = que enseñe todos los que tenga activos.
+
+   OJO CON KLARNA: va en su propio botón y NO se mezcla con los demás.
+   Si saliera dentro del checkout general, el pago se crearía con
+   captura automática y se le cobraría al cliente antes de que su reloj
+   saliera del taller, que es justo lo que Mollie prohíbe. Por eso el
+   botón normal filtra los métodos y deja Klarna fuera.
+
+   La cuenta tiene activos hoy (19/08/2026): tarjeta, Klarna y
+   transferencia. El Bizum y el PayPal de la casa van por fuera de
+   Mollie, así que aquí no aparecen. */
+const METODOS: Record<string, string | string[] | null> = {
+  '': null,
+  tarjeta: ['creditcard', 'banktransfer'],
+  klarna: 'klarna',
 };
 
 async function quienEs(token: string, url: string, anon: string) {
