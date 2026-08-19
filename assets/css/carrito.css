@@ -35,6 +35,30 @@ body{margin:0;background:var(--ivory);color:var(--ink);
 .ca-cuerpo{flex:1;width:100%;max-width:860px;margin:0 auto;
            padding:clamp(20px,4vh,44px) clamp(16px,4vw,28px)}
 
+/* ---------- DOS COLUMNAS ----------
+   Lo elegido a la izquierda; el resumen a la derecha y quieto
+   mientras se baja, que es donde está el dinero y el botón. En el
+   móvil se apilan: el resumen debajo, que es como se lee. */
+.ca-columnas{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}
+.ca-izquierda{min-width:0}
+
+@media (max-width:900px){
+  .ca-columnas{grid-template-columns:1fr}
+}
+
+/* El aviso de lo que se acaba de añadir: lo primero que se ve al
+   llegar del botón de comprar, para no dejar a nadie con la duda. */
+.ca-anadido{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:18px;padding:14px 16px;
+  background:#e5f2e6;border:1px solid #b9d9bd;border-radius:12px;
+  font-size:15.5px;line-height:1.45;color:#25532c;
+}
+.ca-anadido::before{
+  content:"";flex:0 0 auto;width:20px;height:20px;border-radius:50%;
+  background:#2e7d3a url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='m5 13 4 4L19 7'/></svg>") center/12px no-repeat;
+}
+
 .ca-lineas{display:flex;flex-direction:column;gap:14px}
 .ca-linea{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:clamp(12px,2vw,22px);
           align-items:center;padding:14px;background:var(--paper);
@@ -45,23 +69,45 @@ body{margin:0;background:var(--ivory);color:var(--ink);
 .ca-linea .ca-ref{font-size:13px;color:var(--muted);letter-spacing:.05em;margin-top:4px}
 .ca-lado{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .ca-precio{font-size:20px;font-weight:700;white-space:nowrap}
-.ca-cantidad{display:flex;align-items:center;gap:4px}
-.ca-cantidad button{width:32px;height:32px;border:1px solid var(--line);border-radius:8px;
-                    font-size:17px;line-height:1;background:#fff}
-.ca-cantidad button:hover{border-color:var(--ink)}
-.ca-cantidad span{min-width:26px;text-align:center;font-size:15px;font-weight:700}
+/* La cantidad, en una lista: se elige de una vez y en el móvil abre el
+   selector del teléfono, en vez de pedir puntería para dar clics. */
+.ca-cantidad{display:flex;align-items:center;gap:8px}
+.ca-cantidad span{font-size:13px;color:var(--muted)}
+.ca-cantidad select{height:38px;padding:0 8px;font:inherit;font-size:15px;
+                    background:#fff;border:1px solid var(--line);border-radius:9px;cursor:pointer}
+.ca-cantidad select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--ink)}
 .ca-quitar{font-size:13px;color:var(--muted);text-decoration:underline}
 .ca-quitar:hover{color:var(--ink)}
 
 .ca-vacio{padding:60px 0;text-align:center;font-size:17px;color:var(--muted)}
 .ca-vacio a{display:inline-block;margin-top:10px;color:var(--gold);font-weight:700}
 
-.ca-resumen{margin-top:26px;padding:22px;background:var(--paper);
-            border:1px solid var(--line);border-radius:14px}
-.ca-suma{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
-.ca-suma span{font-size:15px;color:var(--muted)}
-.ca-suma strong{font-size:clamp(26px,3.4vw,34px);font-weight:700;letter-spacing:-.02em}
-.ca-impuestos{margin-top:4px;font-size:13px;color:var(--muted)}
+/* ---------- EL RESUMEN ----------
+   Quieto mientras se baja: el botón de seguir no puede quedarse
+   arriba mientras el cliente mira lo que ha elegido. */
+.ca-resumen{position:sticky;top:24px;padding:24px;background:var(--paper);
+            border:1px solid var(--line);border-radius:16px}
+.ca-resumen-titulo{font-size:22px;font-weight:700;letter-spacing:-.02em}
+
+.ca-desglose{margin-top:18px;display:flex;flex-direction:column;gap:12px;
+             font-size:15px}
+.ca-desglose>div{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.ca-desglose dt{color:var(--muted)}
+.ca-desglose dt small{display:block;font-size:12.5px;margin-top:2px;line-height:1.4}
+.ca-desglose dd{font-variant-numeric:tabular-nums;white-space:nowrap}
+/* El IVA no suma: ya está dentro. Se dice y se pone en gris para que
+   nadie lo sume dos veces. */
+.ca-desglose .ca-iva{color:var(--muted);font-size:13.5px}
+.ca-desglose .ca-iva dd{font-size:13.5px}
+
+.ca-suma{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+         margin-top:18px;padding-top:16px;border-top:2px solid var(--ink)}
+.ca-suma span{font-size:15px;font-weight:700}
+.ca-suma strong{font-size:clamp(24px,3vw,30px);font-weight:700;letter-spacing:-.02em}
+
+.ca-klarna-resumen{display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+                   margin-top:14px;font-size:13px;line-height:1.45;color:var(--muted)}
+.ca-klarna-resumen img{height:18px;width:auto}
 .ca-pagar{width:100%;margin-top:18px;padding:16px;border-radius:999px;
           background:var(--dark);color:#fffdf8;font-size:16px;font-weight:700}
 .ca-pagar:hover:not([disabled]){background:#262925}

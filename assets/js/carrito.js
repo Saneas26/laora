@@ -41,6 +41,10 @@ function laoraCarritoAnadir(linea) {
   if (igual) igual.cantidad = (igual.cantidad || 1) + 1;
   else { linea.cantidad = 1; lineas.push(linea); }
   laoraCarritoGuardar(lineas);
+  /* Se apunta lo último que ha entrado para que la pantalla del
+     carrito pueda decir QUÉ se ha añadido. Vale para un solo viaje: se
+     lee y se borra, porque al recargar ya no es una noticia. */
+  try { sessionStorage.setItem('laora.ultimo', linea.nombre || ''); } catch (e) {}
   return lineas;
 }
 
