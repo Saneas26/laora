@@ -44,8 +44,9 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 8
-V_JS = 11
+V_CSS = 9
+V_JS = 12
+V_FACTURA = 1
 V_SESION = 6
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
@@ -249,6 +250,7 @@ PAGINA = f"""<!DOCTYPE html>
 
 {CAB_SCRIPT}
 <script src="/assets/js/sesion.js?v={V_SESION}"></script>
+<script src="/assets/js/factura.js?v={V_FACTURA}"></script>
 <script src="/assets/js/cuenta.js?v={V_JS}"></script>
 </body>
 </html>
