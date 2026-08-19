@@ -2,3 +2,9 @@
 
 # Configuración local del servidor de pruebas, no se publica
 .claude/
+
+# Los másters 4K son material de trabajo, no web: 474 MB que
+# Cloudflare tenía que clonar y publicar en cada despliegue. Siguen
+# en el disco, pero fuera del sitio.
+masters-2026/
+entrega-temporal/
