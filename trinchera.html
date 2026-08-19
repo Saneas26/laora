@@ -59,8 +59,8 @@
       <div class="pv-hero">
         <p class="pv-nota" data-pv-nota hidden>Imagen de la caja en acero plata</p>
         <img data-pv-foto
-          src="/assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=3"
-          srcset="/assets/img/trinchera-2026/murph/480/acero-negra-crema.avif?v=3 480w, /assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=3 1200w, /assets/img/trinchera-2026/murph/1600/acero-negra-crema.avif?v=3 1600w"
+          src="/assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=4"
+          srcset="/assets/img/trinchera-2026/murph/480/acero-negra-crema.avif?v=4 480w, /assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=4 1200w, /assets/img/trinchera-2026/murph/1600/acero-negra-crema.avif?v=4 1600w"
           sizes="(max-width:900px) 100vw, 46vw"
           alt="laOra Trinchera">
         <img class="pv-forro" data-pv-forro src="/assets/img/trinchera-2026/forro-piel.webp"
@@ -138,6 +138,13 @@
           <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
         </div>
 
+        <!-- El pespunte solo tiene sentido con la piel italiana del Murph:
+             el resto de correas no lo llevan y el grupo se esconde. -->
+        <div class="pv-grupo" data-pv-grupo-pesp hidden>
+          <p class="pv-rotulo">Pespunte</p>
+          <div class="pv-opciones" data-pv="pesp"></div>
+        </div>
+
         <div class="pv-grupo" data-pv-grupo-color hidden>
           <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
           <div class="pv-opciones pv-colores" data-pv="color"></div>
@@ -184,14 +191,14 @@
          pegada no lleva nada más que el visor. -->
     <div class="pv-extras pv-galeria-fija">
       <figure>
-        <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=3"
-             srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif?v=3 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=3 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif?v=3 1600w"
+        <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=4"
+             srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif?v=4 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=4 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif?v=4 1600w"
              sizes="(max-width:900px) 50vw, 23vw"
              alt="El Trinchera Murph con piel negra, puesto en la muñeca" loading="lazy" decoding="async">
       </figure>
       <figure>
-        <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=3"
-             srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif?v=3 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=3 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif?v=3 1600w"
+        <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=4"
+             srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif?v=4 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=4 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif?v=4 1600w"
              sizes="(max-width:900px) 50vw, 23vw"
              alt="El Trinchera Murph de tres cuartos, con la corona a la vista" loading="lazy" decoding="async">
       </figure>
@@ -326,7 +333,7 @@
   /* La versión va en la dirección de la foto porque el borde de Cloudflare
      las guarda cuatro horas y los nombres no cambian: sin esto, quien haya
      entrado hoy seguiría viendo las de antes. Se sube al retocarlas. */
-  var MURPH_V = '?v=3';
+  var MURPH_V = '?v=4';
   var MURPH_IMG = '/assets/img/trinchera-2026/murph/';
   var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
   var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
@@ -336,15 +343,23 @@
      de caja × piel × esfera: son dos fotos concretas y nada más. */
   var MURPH_SUELTAS = { 'PL-ACERO-MA': 'acero-brazalete-crema', 'PL-PACK-MA': 'acero-pack-crema' };
   var MURPH_ANTE = { NEG: 'negro', MOS: 'marronoscuro', AZU: 'azul', MCL: 'marronclaro' };
-  function murphFoto(caja, correa, esf, ante) {
+  /* La piel italiana del Murph, rehecha el 19/08/2026: tres colores por dos
+     pespuntes por dos esferas, y TODAS en acero. Con ellas desaparece la
+     piel en titanio, que era de la serie anterior. */
+  var MURPH_PESP = { B: 'pblanco', T: 'ptono' };
+  var PESPUNTES = { B: 'Blanco', T: 'A tono' };
+  function murphFoto(caja, correa, esf, ante, pesp) {
     /* El ante del Murph: ocho fotos, solo en acero, un color por foto. */
     if (correa === 'ANTE' && caja === 'PL' && MURPH_ANTE[ante] && MURPH_ESF[esf]) {
       return 'acero-ante-' + MURPH_ANTE[ante] + '-' + MURPH_ESF[esf];
     }
     var suelta = MURPH_SUELTAS[caja + '-' + correa + '-' + esf];
     if (suelta) return suelta;
-    if (!MURPH_CAJA[caja] || !MURPH_CORREA[correa] || !MURPH_ESF[esf]) return null;
-    return MURPH_CAJA[caja] + '-' + MURPH_CORREA[correa] + '-' + MURPH_ESF[esf];
+    /* Piel italiana: solo acero, y con su pespunte */
+    if (caja === 'PL' && MURPH_CORREA[correa] && MURPH_ESF[esf] && MURPH_PESP[pesp]) {
+      return 'acero-' + MURPH_CORREA[correa] + '-' + MURPH_PESP[pesp] + '-' + MURPH_ESF[esf];
+    }
+    return null;
   }
   /* Fotos cuyo maestro no llega a 1.600 px: se publica hasta donde hay
      píxeles de verdad y no se ofrece un tamaño inventado. */
@@ -360,7 +375,7 @@
 
   var LOGO = 3.78;
 
-  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG' };
+  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -422,7 +437,7 @@
       /* 19/08/2026: el Murph deja de ser solo de acero. La serie maestra lo
          fotografía en acero Y en titanio, con las tres pieles. El brazalete
          y el pack siguen existiendo con sus fotos de antes. */
-      if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
+      e.caja = 'PL';
       if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
       if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' && e.correa !== 'PACK' && e.correa !== 'ANTE') e.correa = 'PIELN';
       /* El ante del Murph solo está fotografiado en acero */
@@ -454,6 +469,7 @@
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
     if (e.correa === 'ANTE' && e.estilo === 'M') return cola + '-' + e.ante;
+    if (e.estilo === 'M' && MURPH_CORREA[e.correa]) return cola + '-P' + e.pesp;
     return cola;
   }
 
@@ -487,8 +503,11 @@
     /* Con el Murph, las cajas que no existen se tachan, no se esconden.
        Desde el 19/08/2026 el Murph también está fotografiado en titanio,
        así que las dos cajas de la serie maestra quedan abiertas. */
+    /* 19/08/2026: la piel italiana se rehízo SOLO en acero, y el ante, el
+       brazalete y el pack tampoco tienen foto en titanio. Así que el Murph
+       vuelve a existir en acero y nada más, hasta que llegue el titanio. */
     todos('[data-pv="caja"] button').forEach(function (b) {
-      b.disabled = (e.estilo === 'M' && !MURPH_CAJA[b.dataset.v]);
+      b.disabled = (e.estilo === 'M' && b.dataset.v !== 'PL');
     });
 
     /* la tapa la manda el movimiento: la opción imposible queda tachada */
@@ -534,6 +553,13 @@
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
+    /* El pespunte: solo con la piel italiana del Murph */
+    var conPespunte = esMurph && !!MURPH_CORREA[e.correa];
+    $('[data-pv-grupo-pesp]').hidden = !conPespunte;
+    if (conPespunte) {
+      botones('pesp', Object.keys(PESPUNTES).map(function (k) { return [k, PESPUNTES[k]]; }), e.pesp);
+    }
+
     /* El color: lo piden dos correas y cada una tiene su lista y su casilla
        en el estado —el nato con forro y el ante del Murph—. */
     var conColor = e.correa === 'NATOP' || (esMurph && e.correa === 'ANTE');
@@ -555,7 +581,7 @@
        De las viejas ya solo se sirve el tamaño de 1.200: los maestros de
        4.000 px no se publican. */
     var img = $('[data-pv-foto]');
-    var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf, e.ante) : null;
+    var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf, e.ante, e.pesp) : null;
     if (deLaSerie) {
       img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif' + MURPH_V;
       img.srcset = murphSrcset(deLaSerie);
@@ -592,6 +618,8 @@
       'cristal de zafiro. Tapa trasera ' + (e.tapa === 'C' ? 'de cristal que deja ver el movimiento.' : 'roscada sólida.') +
       ' Correa: ' + (e.correa === 'ANTE' && e.estilo === 'M'
         ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
+        : (e.estilo === 'M' && MURPH_CORREA[e.correa])
+        ? CORREAS[e.correa].tec.replace('con pespunte blanco', 'con pespunte ' + PESPUNTES[e.pesp].toLowerCase())
         : CORREAS[e.correa].tec) + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
@@ -627,6 +655,8 @@
           ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
           : (e.correa === 'ANTE' && e.estilo === 'M')
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
+          : (e.estilo === 'M' && MURPH_CORREA[e.correa])
+          ? CORREAS[e.correa].nombre + ', pespunte ' + PESPUNTES[e.pesp].toLowerCase()
           : CORREAS[e.correa].nombre,
         precio: precio(),
         foto: $('[data-pv-foto]').src
