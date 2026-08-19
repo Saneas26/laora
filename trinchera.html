@@ -300,21 +300,26 @@
     MB: { nombre: 'Murph, Numerales Blancos',coste: 21.19, tec: 'Murph negra mate con numerales blancos y agujas catedral con lumen.' },
     BRZ:{ nombre: 'Khaki, Agujas Blancas y Plata', coste: 17.29, tec: 'Khaki negra mate con agujas blancas y plata, para las cajas de bronce y titanio.' }
   };
+  /* COSTES DE LAS CORREAS · corregidos el 19/08/2026 con los anuncios que
+     mandó Óscar. Venían de la hoja de materiales vieja y estaban a menos
+     de la mitad: la piel del Murph a 13,69 cuando el proveedor la cobra a
+     29,99, y el nato a 5,69 cuando son 11,29. El mapa pieza por pieza está
+     en .docs/sourcing-trinchera-2026.md. */
   var CORREAS = {
-    NATO:  { nombre: 'Nato Verde Militar', coste: 5.69,  tec: 'nato verde militar de 20 mm con hebilla clásica plateada' },
-    NATON: { nombre: 'Nato Negro', coste: 5.69,  tec: 'nato negro de 20 mm con hebilla clásica plateada' },
-    PIELN: { nombre: 'Piel Negra',   coste: 13.69, tec: 'piel genuina negra de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
-    PIELM: { nombre: 'Piel Marrón',  coste: 13.69, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
+    NATO:  { nombre: 'Nato Verde Militar', coste: 11.29,  tec: 'nato verde militar de 20 mm con hebilla clásica plateada' },
+    NATON: { nombre: 'Nato Negro', coste: 11.29,  tec: 'nato negro de 20 mm con hebilla clásica plateada' },
+    PIELN: { nombre: 'Piel Negra',   coste: 29.99, tec: 'piel genuina negra de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
+    PIELM: { nombre: 'Piel Marrón',  coste: 29.99, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     /* La piel verde entra el 19/08/2026 con la serie maestra del Murph. El
        coste es el MISMO que el de las otras dos pieles genuinas porque es
        la misma correa en otro color; si el proveedor cobra otra cosa, este
        es el número que hay que corregir. */
-    PIELV: { nombre: 'Piel Verde',   coste: 13.69, tec: 'piel genuina verde militar de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
+    PIELV: { nombre: 'Piel Verde',   coste: 29.99, tec: 'piel genuina verde militar de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     ACERO: { nombre: 'Brazalete Acero', coste: 21.99, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
     PACK:  { nombre: 'Pack Piel + Brazalete', coste: 35.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
     PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' },
-    NATOP: { nombre: 'Nato + Piel', coste: 4.99, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
+    NATOP: { nombre: 'Nato + Piel', coste: 5.48, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
   };
   /* Los cuatro antes del Murph (Óscar, 19/08/2026). Van en su propia lista
      porque no son los del nato: aquel tiene siete y estos cuatro, y el
@@ -387,7 +392,7 @@
      fotos —que son de la correa, no del reloj, y por eso siguen aquí—.
 
      El precio NO se copia del Lunar: allí el coste del cierre incluye su
-     propia correa. Aquí la piel ya cuesta 13,69 con su hebilla plateada, así
+     propia correa. Aquí la piel ya cuesta 29,99 con su hebilla plateada, así
      que se aplica solo la DIFERENCIA entre cierres del proveedor. */
   var CIERRES = {
     'plata':    { nombre: 'Clásica plata',    extra:  0.00, tec: 'hebilla clásica de acero plateado' },
