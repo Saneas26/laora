@@ -464,12 +464,19 @@
       img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif';
       img.srcset = murphSrcset(deLaSerie);
     } else {
-      var clave = esBronce ? 'BRONCE' : (esTitanio ? 'TI-' + e.correa :
-                  (esNegra ? 'NG-' + (e.correa === 'NATOP' ? 'NATON' : e.correa) :
-                  (e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa))));
-      var f = FOTOS[clave] || FOTOS['KB-PIELN'];
-      img.src = IMG + '1200/' + f[0] + '.webp';
-      img.srcset = IMG + '1200/' + f[0] + '.webp 1200w';
+      /* El Murph con brazalete o con el pack sigue teniendo su foto de
+         antes, que se hizo con la caja de acero: si la caja elegida es el
+         titanio se avisa con la nota de siempre en vez de enseñar otra cosa. */
+      var clave = e.estilo === 'M' ? e.esf + '-' + e.correa
+                : esBronce ? 'BRONCE'
+                : esTitanio ? 'TI-' + e.correa
+                : esNegra ? 'NG-' + (e.correa === 'NATOP' ? 'NATON' : e.correa)
+                : e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa);
+      var f = FOTOS[clave];
+      if (f) {
+        img.src = IMG + '1200/' + f[0] + '.webp';
+        img.srcset = IMG + '1200/' + f[0] + '.webp 1200w';
+      }
     }
 
     /* La galería de debajo: las seis combinaciones de la caja elegida —tres
@@ -489,10 +496,13 @@
       });
     });
     $('[data-pv-minis]').innerHTML = minis.join('');
-    /* la caja negra aún no está fotografiada con el segundero rojo */
-    var sinFoto = esNegra && e.esf === 'KR';
-    $('[data-pv-nota]').textContent = 'Fotografiado con segundero blanco';
-    $('[data-pv-nota]').hidden = !sinFoto;
+    /* Cuando la foto no es exactamente la combinación elegida, se dice.
+       Dos casos: la caja negra no está fotografiada con el segundero rojo,
+       y el Murph con brazalete o pack se fotografió en acero, no en titanio. */
+    var notaAcero = e.estilo === 'M' && esTitanio && (e.correa === 'ACERO' || e.correa === 'PACK');
+    var notaSeg = esNegra && e.esf === 'KR';
+    $('[data-pv-nota]').textContent = notaAcero ? 'Imagen con la caja en acero plata' : 'Fotografiado con segundero blanco';
+    $('[data-pv-nota]').hidden = !(notaAcero || notaSeg);
 
     /* la ficha técnica */
     $('[data-pv-tec="caja"]').textContent =
