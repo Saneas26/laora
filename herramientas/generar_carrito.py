@@ -44,8 +44,8 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 10
-V_JS = 9
+V_CSS = 11
+V_JS = 10
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
@@ -156,6 +156,13 @@ PAGINA = f"""<!DOCTYPE html>
   <!-- ---------- paso 3: a dónde va ---------- -->
   <section class="ca-paso" data-paso-datos hidden>
     <h2>¿A dónde te lo enviamos?</h2>
+
+    <!-- LA MUÑECA, ANTES DE CONFIRMAR (19/08/2026).
+         Si el cliente nos dijo su medida, se le recuerda aquí: por si
+         el reloj es un regalo y la muñeca es otra. Y donde el mismo
+         reloj existe en dos diámetros, se le deja cambiarlo sin
+         rehacer el pedido. Lo pinta `carrito-pantalla.js`. -->
+    <div class="ca-muneca" data-muneca hidden></div>
     <p class="ca-explica" data-quien></p>
     <form class="ca-form" data-form-datos>
       {ENVIO}
