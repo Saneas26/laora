@@ -17,6 +17,10 @@ if [ -n "$fichas" ]; then
   echo "→ ha cambiado una ficha: volviendo a volcar el catálogo"
   if node herramientas/volcar_catalogo_2026.js; then
     git add assets/datos/catalogo-2026.json
+    # Y los precios que la colección lleva escritos dentro: si la
+    # tarjeta dice 249,90 y el servidor cobra 259,90, el cliente ve un
+    # precio y paga otro. No es un descuadre estético.
+    node herramientas/sincronizar_precios.js && git add coleccion.html
   else
     echo "⚠️  el volcador ha fallado. El commit sigue, pero el catálogo del"
     echo "    servidor se queda como estaba: revísalo antes de vender."

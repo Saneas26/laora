@@ -384,7 +384,7 @@
     var neto = c + 9 / 1.21 + (MOVS[e.mov].coste + 19) * 0.05;
     return Math.max(redondea(c * MULT), sueloPvp(neto));
   }
-  function precio() {
+  function precioSinKlarna() {
     var extra = e.diam === '39' ? 10 : 0;
     /* El nato+piel se vende 10 € POR ENCIMA del nato de su caja (Óscar,
        16/08/2026): se tarifa con el coste del nato y se le suman 10. */
@@ -393,6 +393,20 @@
     }
     return pvpBase(costes()) + extra;
   }
+
+  /* ---------- EL 2,5 % DE KLARNA (Óscar, 19/08/2026) ----------
+     Klarna se lleva un 5 % de comisión sobre el precio final. Óscar
+     no lo repercute entero: sube los PVP un 2,5 % y la otra mitad la
+     pone la casa. Se aplica al precio YA hecho y se vuelve a redondear
+     al 9,90 más cercano, que es la terminación de siempre.
+
+     CONSECUENCIA CONOCIDA Y ACEPTADA: con escalones de 10 €, un 2,5 %
+     no cabe dentro del escalón. Los de 179,90 y 199,90 se quedan igual
+     y el peso lo llevan los de 209,90 para arriba, que suben un 4-5 %.
+     La media del catálogo sale al +2,54 %, que es lo que se buscaba.
+     Se le enseñaron las tres formas de redondear y eligió esta. */
+  var KLARNA = 1.025;
+  function precio() { return redondea(precioSinKlarna() * KLARNA); }
 
   /* ---------- las REGLAS del catálogo ---------- */
   function normaliza() {
