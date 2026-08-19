@@ -8,3 +8,6 @@
 # en el disco, pero fuera del sitio.
 masters-2026/
 entrega-temporal/
+
+# Rastro del CLI de Supabase, no es del sitio
+supabase/

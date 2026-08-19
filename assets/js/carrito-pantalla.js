@@ -12,6 +12,11 @@
    desde el catálogo, sin fiarse de lo que diga este navegador— y solo
    entonces se abre el pago.
 
+   Y desde el 19/08/2026 el pago es de verdad: `pagar-pedido` crea el
+   cobro en Mollie con el importe que hay en la base —aquí no viaja
+   ni un número— y devuelve la dirección del checkout. Se puede pagar
+   con tarjeta, Bizum, PayPal o con Klarna en tres plazos.
+
    La cesta la sigue llevando `carrito.js`, en el propio navegador. Eso
    es lo que permite que quien se va a buscar el enlace del correo
    vuelva y lo encuentre todo como estaba.
@@ -19,7 +24,9 @@
 (function () {
   'use strict';
 
-  var FUNCION = 'https://uikanfvigunjhzibnhxf.supabase.co/functions/v1/crear-pedido';
+  var API = 'https://uikanfvigunjhzibnhxf.supabase.co/functions/v1/';
+  var FUNCION = API + 'crear-pedido';
+  var COBRO = API + 'pagar-pedido';
 
   var lista = document.querySelector('[data-lineas]');
   var vacio = document.querySelector('[data-vacio]');
@@ -193,7 +200,7 @@
       decir(avisoDatos, 'Guardando tu pedido…');
 
       var cuerpo = {
-        metodo: 'paypal',
+        metodo: 'tarjeta',   // la intención; la definitiva la elige en el paso 4
         lineas: laoraCarritoLeer().map(function (l) {
           return { ref: l.ref, cantidad: l.cantidad || 1 };
         }),
@@ -231,6 +238,10 @@
         pasoPagar.hidden = false;
         document.querySelector('[data-numero]').textContent = PEDIDO.numero;
         document.querySelector('[data-total-final]').textContent = euros(PEDIDO.total);
+        var enBoton = document.querySelector('[data-total-boton]');
+        if (enBoton) enBoton.textContent = euros(PEDIDO.total);
+        pintarPlazo(PEDIDO.total);
+        pintarMetodo();
         pasoPagar.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }).catch(function (err) {
         boton.disabled = false;
@@ -244,21 +255,69 @@
   }
 
   /* ---------- 4. pagar ----------
-     PayPal se abre sin clave ni servidor: un enlace de paypal.me con el
-     importe, a la cuenta @saneascom del Grupo Saneas.
+     Aquí no se calcula nada ni se manda ningún importe: solo el número
+     del pedido. El dinero lo pone el servidor leyéndolo de la base,
+     que es donde lo escribió `crear-pedido` desde el catálogo.
 
-     LO QUE ESTE CAMINO NO HACE: PayPal cobra, pero no dice qué se ha
-     comprado. Por eso el número del pedido va al portapapeles y se pide
-     ponerlo en el concepto; y aun así hay que cruzar el ingreso con el
-     pedido a mano, desde el panel. Lo que lo resuelve de verdad es la
-     pasarela con Mollie, que sí devuelve el pedido pagado. */
+     Dos caminos: el pago normal —que Mollie resuelve con lo que tenga
+     activo: tarjeta, Bizum, PayPal— y Klarna en tres plazos, que no
+     cobra al comprar sino cuando el reloj sale hacia su casa. */
+  var metodo = '';
+  var avisoPagar = document.querySelector('[data-aviso-pagar]');
+  var cajaMetodos = document.querySelector('[data-metodos]');
+
+  function pintarMetodo() {
+    if (!cajaMetodos) return;
+    Array.prototype.forEach.call(cajaMetodos.querySelectorAll('button'), function (b) {
+      b.setAttribute('aria-pressed', String((b.dataset.metodo || '') === metodo));
+    });
+  }
+
+  if (cajaMetodos) {
+    cajaMetodos.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      metodo = b.dataset.metodo || '';
+      pintarMetodo();
+    });
+  }
+
+  /* El tercio se redondea al céntimo HACIA ARRIBA, como en la ficha:
+     tres plazos nunca pueden sumar menos que el total. */
+  function pintarPlazo(total) {
+    var p = document.querySelector('[data-plazo]');
+    if (p) p.textContent = euros(Math.ceil(Number(total) / 3 * 100) / 100);
+  }
+
   var botonPagar = document.querySelector('[data-pagar]');
   if (botonPagar) {
     botonPagar.addEventListener('click', function () {
       if (!PEDIDO) return;
-      try { navigator.clipboard.writeText(PEDIDO.numero); } catch (e) {}
-      window.open('https://www.paypal.me/saneascom/' + Number(PEDIDO.total).toFixed(2) + 'EUR',
-                  '_blank', 'noopener');
+      botonPagar.disabled = true;
+      decir(avisoPagar, 'Abriendo el pago…');
+
+      laoraSesion.token().then(function (t) {
+        if (!t) throw new Error('sin sesión');
+        return fetch(COBRO, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + t },
+          body: JSON.stringify({ numero: PEDIDO.numero, metodo: metodo })
+        });
+      }).then(function (r) {
+        return r.json().then(function (d) { return { ok: r.ok, d: d }; });
+      }).then(function (res) {
+        if (!res.ok || !res.d.url) throw new Error(res.d && res.d.error ? res.d.error : 'no se pudo abrir el pago');
+        /* La cesta ya no hace falta: lo que vale a partir de aquí es el
+           pedido, que está escrito y se ve en «tu cuenta». */
+        laoraCarritoVaciar();
+        window.location.href = res.d.url;
+      }).catch(function (err) {
+        botonPagar.disabled = false;
+        var m = String(err && err.message || '');
+        decir(avisoPagar, m === 'sin sesión'
+          ? 'Tu sesión ha caducado. Vuelve a entrar con tu correo.'
+          : (m || 'No hemos podido abrir el pago. Inténtalo en un momento.'), true);
+      });
     });
   }
 
