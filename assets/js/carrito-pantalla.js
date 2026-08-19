@@ -66,6 +66,11 @@
     }).format(v || 0);
   }
 
+  var esc = function (v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  };
+
   function el(t, c, txt) {
     var e = document.createElement(t);
     if (c) e.className = c;
@@ -213,7 +218,7 @@
         var quien = document.querySelector('[data-quien]');
         if (quien) quien.textContent = 'Estás dentro como ' + u.email + '.';
         laoraSesion.consultar('socios?select=*&limit=1').then(function (filas) {
-          if (filas && filas.length) rellenar(filas[0]);
+          if (filas && filas.length) { rellenar(filas[0]); pintarMuneca(filas[0]); }
         });
         pasoDatos.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }).catch(function () {
@@ -223,6 +228,114 @@
       });
     });
   }
+
+  /* ---------- LA MUÑECA, ANTES DE CONFIRMAR ----------
+     Si sabemos su medida, se le recuerda: por si el reloj es un regalo
+     y la muñeca es otra. Y donde el mismo reloj existe en dos
+     diámetros, se le deja cambiarlo aquí mismo.
+
+     No se le cambia nada por su cuenta ni se le esconde el aviso: se
+     le dice lo que tenemos anotado y decide él. */
+  var CATALOGO = null;
+  var cajaMuneca = document.querySelector('[data-muneca]');
+
+  var TRAMOS = { fina: 'fina', normal: 'normal', ancha: 'ancha' };
+  function tramoDe(cm) {
+    cm = Number(cm);
+    if (!cm) return null;
+    if (cm < 16) return 'fina';
+    if (cm <= 18) return 'normal';
+    return 'ancha';
+  }
+  /* Qué diámetros le van a cada muñeca. Son los mismos tramos que usa
+     el recomendador de la colección: una sola regla en la casa. */
+  var LEVA = { fina: [36, 39, 39.7], normal: [36, 39, 39.7, 40], ancha: [40, 41] };
+
+  function catalogo() {
+    if (CATALOGO) return Promise.resolve(CATALOGO);
+    return fetch('/assets/datos/catalogo-2026.json')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { CATALOGO = d; return d; })
+      .catch(function () { return null; });
+  }
+
+  function pintarMuneca(socio) {
+    if (!cajaMuneca) return;
+    var cm = socio && socio.muneca_cm;
+    var tramo = tramoDe(cm) || (socio && socio.rec_muneca) || null;
+    if (!tramo || tramo === 'nose') return;
+
+    catalogo().then(function (cat) {
+      if (!cat) return;
+      var lineas = laoraCarritoLeer();
+      if (!lineas.length) return;
+
+      var partes = [];
+      var hayCambio = false;
+
+      lineas.forEach(function (l, i) {
+        var r = cat.refs[l.ref];
+        if (!r || !r.mm) return;
+        var vale = LEVA[tramo].indexOf(r.mm) !== -1;
+        var medida = String(r.mm).replace('.', ',');
+
+        var texto = '<p><b>' + esc(l.nombre) + '</b> es de <b>' + medida + ' mm</b>. ' +
+          (vale ? 'Le va bien a una muñeca ' + TRAMOS[tramo] + ' como la que tenemos anotada.'
+                : 'Para una muñeca ' + TRAMOS[tramo] + ' como la que tenemos anotada, esa medida se le va.') +
+          '</p>';
+
+        /* Las otras medidas del MISMO reloj, si las hay. */
+        if (r.otras) {
+          hayCambio = true;
+          var botones = Object.keys(r.otras).sort().map(function (d) {
+            var otra = cat.refs[r.otras[d]];
+            if (!otra) return '';
+            var esta = r.otras[d] === l.ref;
+            return '<button type="button" data-cambiar="' + i + '" data-a="' + esc(r.otras[d]) +
+              '" aria-pressed="' + esta + '"' + (esta ? ' disabled' : '') + '>' +
+              d + ' mm · ' + euros(otra.p) + '</button>';
+          }).join('');
+          texto += '<div class="ca-muneca-medidas">' + botones + '</div>';
+        }
+        partes.push(texto);
+      });
+
+      if (!partes.length) return;
+
+      cajaMuneca.innerHTML =
+        '<p>Tenemos anotada tu muñeca' + (cm ? ' en <b>' + String(cm).replace('.', ',') + ' cm</b>' : '') +
+        '. <b>Si el reloj es un regalo</b>, o si la muñeca no es la tuya, míralo antes de confirmar' +
+        (hayCambio ? ': puedes cambiar la medida aquí mismo.' : '.') + '</p>' +
+        partes.join('');
+      cajaMuneca.hidden = false;
+    });
+  }
+
+  /* Cambiar de medida: se sustituye la línea por la del mismo reloj en
+     el otro diámetro, con su precio. El pedido aún no existe, así que
+     no hay nada que deshacer. */
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-cambiar]');
+    if (!b || !CATALOGO) return;
+    var i = Number(b.dataset.cambiar);
+    var nueva = b.dataset.a;
+    var r = CATALOGO.refs[nueva];
+    if (!r) return;
+
+    var lineas = laoraCarritoLeer();
+    if (!lineas[i]) return;
+    lineas[i].ref = nueva;
+    lineas[i].precio = r.p;
+    lineas[i].nombre = CATALOGO.textos[r.n];
+    lineas[i].detalle = CATALOGO.textos[r.a];
+    lineas[i].correa = CATALOGO.textos[r.c];
+    laoraCarritoGuardar(lineas);
+
+    pintar();
+    laoraSesion.consultar('socios?select=muneca_cm,rec_muneca&limit=1').then(function (f) {
+      pintarMuneca(f && f[0]);
+    });
+  });
 
   /* ---------- 3. a dónde va ---------- */
   var formDatos = document.querySelector('[data-form-datos]');
@@ -481,7 +594,7 @@
       }
       return laoraSesion.consultar('socios?select=*&limit=1');
     }).then(function (filas) {
-      if (filas && filas.length) rellenar(filas[0]);
+      if (filas && filas.length) { rellenar(filas[0]); pintarMuneca(filas[0]); }
     });
   }
 })();

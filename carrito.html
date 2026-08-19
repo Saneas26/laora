@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/carrito.css?v=10">
+<link rel="stylesheet" href="/assets/css/carrito.css?v=11">
 </head>
 <body>
 
@@ -97,6 +97,13 @@
   <!-- ---------- paso 3: a dónde va ---------- -->
   <section class="ca-paso" data-paso-datos hidden>
     <h2>¿A dónde te lo enviamos?</h2>
+
+    <!-- LA MUÑECA, ANTES DE CONFIRMAR (19/08/2026).
+         Si el cliente nos dijo su medida, se le recuerda aquí: por si
+         el reloj es un regalo y la muñeca es otra. Y donde el mismo
+         reloj existe en dos diámetros, se le deja cambiarlo sin
+         rehacer el pedido. Lo pinta `carrito-pantalla.js`. -->
+    <div class="ca-muneca" data-muneca hidden></div>
     <p class="ca-explica" data-quien></p>
     <form class="ca-form" data-form-datos>
       <label class="ca-campo "><span>Nombre</span><input type="text" name="nombre" data-c="nombre" required autocomplete="given-name"></label><label class="ca-campo "><span>Apellidos</span><input type="text" name="apellidos" data-c="apellidos" autocomplete="family-name"></label><label class="ca-campo "><span>Teléfono</span><input type="tel" name="telefono" data-c="telefono" autocomplete="tel"></label><label class="ca-campo ca-ancho"><span>Dirección</span><input type="text" name="direccion" data-c="direccion" required autocomplete="street-address"></label><label class="ca-campo "><span>Código postal</span><input type="text" name="cp" data-c="cp" required autocomplete="postal-code" inputmode="numeric"></label><label class="ca-campo "><span>Población</span><input type="text" name="poblacion" data-c="poblacion" required autocomplete="address-level2"></label><label class="ca-campo "><span>Provincia</span><input type="text" name="provincia" data-c="provincia" required autocomplete="address-level1"></label><label class="ca-campo "><span>País</span><input type="text" name="pais" data-c="pais" autocomplete="country-name" value="España"></label>
@@ -173,8 +180,8 @@
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/sesion.js?v=9"></script>
-<script src="/assets/js/carrito.js?v=9"></script>
-<script src="/assets/js/carrito-pantalla.js?v=9"></script>
+<script src="/assets/js/sesion.js?v=10"></script>
+<script src="/assets/js/carrito.js?v=10"></script>
+<script src="/assets/js/carrito-pantalla.js?v=10"></script>
 </body>
 </html>
