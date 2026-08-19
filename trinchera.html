@@ -48,7 +48,11 @@
 
 <main class="cv2">
 
-  <div class="pv-cuerpo">
+  <!-- `pv-visor-fijo`: la foto se queda pegada mientras bajas por las
+       elecciones, para ver el cambio en directo sin perderla de vista. Es
+       la misma forma que tiene el Lunar (Óscar, 19/08/2026). En una sola
+       columna se despega sola: ahí el visor ocupa la pantalla entera. -->
+  <div class="pv-cuerpo pv-visor-fijo">
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
@@ -167,6 +171,17 @@
         <p class="pv-precio" data-pv-precio>269,90 €</p>
         <p class="pv-imp">Impuestos incluidos.</p>
         <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+
+        <!-- La caja de Klarna, debajo del botón, igual que en el Lunar. OJO:
+             solo se anuncia lo que Mollie tiene aprobado —tres plazos sin
+             intereses—. Nada de «desde X €/mes con su TAE»: eso es otro
+             producto y anunciarlo sin tenerlo sería publicidad financiera
+             falsa. La cifra la calcula el guion con el precio de verdad. -->
+        <p class="pv-klarna">
+          <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+          <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
+        </p>
         <div class="pv-confianza">
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años</span>
@@ -411,6 +426,10 @@
   function pinta() {
     normaliza();
     $('[data-pv-precio]').textContent = eu(precio());
+    /* El plazo de Klarna: un tercio del precio, redondeado hacia arriba al
+       céntimo, como en el Lunar. */
+    var klarna = $('[data-pv-klarna]');
+    if (klarna) klarna.textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
     $('[data-pv-cal]').textContent = 'Calibre ' + MOVS[e.mov].cal;
 
     todos('[data-pv="estilo"] button, [data-pv="mov"] button, [data-pv="diam"] button, [data-pv="caja"] button, [data-pv="tapa"] button')
