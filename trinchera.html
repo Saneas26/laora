@@ -306,8 +306,10 @@
      29,99, y el nato a 5,69 cuando son 11,29. El mapa pieza por pieza está
      en .docs/sourcing-trinchera-2026.md. */
   var CORREAS = {
-    NATO:  { nombre: 'Nato Verde Militar', coste: 11.29,  tec: 'nato verde militar de 20 mm con hebilla clásica plateada' },
-    NATON: { nombre: 'Nato Negro', coste: 11.29,  tec: 'nato negro de 20 mm con hebilla clásica plateada' },
+    /* UN SOLO NATO con cinco colores (Óscar, 19/08/2026). Antes eran dos
+       correas distintas —verde y negro— y ahora es la misma en cinco tonos,
+       como el ante: el color va aparte y entra en la referencia. */
+    NATO:  { nombre: 'Nato', coste: 11.29,  tec: 'nato de 20 mm con hebilla clásica plateada' },
     PIELN: { nombre: 'Piel Negra',   coste: 29.99, tec: 'piel genuina negra de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     PIELM: { nombre: 'Piel Marrón',  coste: 29.99, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
     /* La piel verde entra el 19/08/2026 con la serie maestra del Murph. El
@@ -315,8 +317,12 @@
        la misma correa en otro color; si el proveedor cobra otra cosa, este
        es el número que hay que corregir. */
     PIELV: { nombre: 'Piel Verde',   coste: 29.99, tec: 'piel genuina verde militar de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
-    ACERO: { nombre: 'Brazalete Acero', coste: 21.99, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
-    PACK:  { nombre: 'Pack Piel + Brazalete', coste: 35.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
+    ACERO: { nombre: 'Brazalete Acero', coste: 19.69, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm' },
+    /* El brazalete en PVD negro es SOLO para la caja negra (Óscar, 19/08/2026):
+       un brazalete negro en una caja de acero no es un reloj, es un apaño. */
+    ACERONG: { nombre: 'Brazalete Negro PVD', coste: 26.50, tec: 'brazalete de acero inoxidable 316L de tres eslabones con recubrimiento PVD negro, 20 mm' },
+    /* El pack es la suma de sus dos piezas, como siempre: piel 29,99 + acero 19,69. */
+    PACK:  { nombre: 'Pack Piel + Brazalete', coste: 49.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
     PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' },
     NATOP: { nombre: 'Nato + Piel', coste: 5.48, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
@@ -328,6 +334,14 @@
   var ANTES = {
     NEG: ['Negro', '#2b2a2b'],          MOS: ['Marrón oscuro', '#4b382e'],
     AZU: ['Azul', '#3a586e'],           MCL: ['Marrón claro', '#b0825a']
+  };
+
+  /* LOS CINCO COLORES DEL NATO (Óscar, 19/08/2026). Son los seis del anuncio
+     menos el azul: «usaremos todos excepto el azul». */
+  var NATOS = {
+    VER: ['Verde militar', '#4a5a3a'], NEG: ['Negro', '#1e1f22'],
+    GRI: ['Gris claro', '#8d9095'],    BEI: ['Beige', '#b7a583'],
+    NGR: ['Negro y gris', '#4a4b4f']
   };
 
   /* Los siete colores del nato con forro de piel (Óscar, 16/08/2026) */
@@ -359,14 +373,19 @@
   var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
   var SERIE_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde', ANTE: 'ante',
-                       NATO: 'nato', NATON: 'naton', NATOP: 'natopiel',
-                       ACERO: 'brazalete', PACK: 'pack', PIELO: 'pieloscuro' };
+                       NATO: 'nato', NATOP: 'natopiel',
+                       ACERO: 'brazalete', ACERONG: 'brazaletepvd',
+                       PACK: 'pack', PIELO: 'pieloscuro' };
+  var NATO_FOTO    = { VER: 'verde', NEG: 'negro', GRI: 'gris', BEI: 'beige', NGR: 'negrogris' };
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
     if (!caja || !esf || !correa) return null;
     var clave = caja + '-' + esf + '-' + correa;
     if (MURPH_CORREA[e.correa]) clave += '-' + (e.pesp === 'T' ? 'ptono' : 'pblanco');
     if (e.correa === 'ANTE') clave += '-' + (MURPH_ANTE[e.ante] || 'negro');
+    /* El nato también lleva su color en la clave: la norma de la casa es que
+       jamás se enseña la foto de un reloj que no sea el elegido. */
+    if (e.correa === 'NATO') clave += '-' + NATO_FOTO[e.nato];
     return SERIE[clave] ? clave : null;
   }
 
@@ -413,7 +432,7 @@
      portamovimiento. Hasta hoy se estaba regalando en el precio. */
   var ANILLO = 3.60;
 
-  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B', cierre: 'plata' };
+  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', nato: 'VER', ante: 'NEG', pesp: 'B', cierre: 'plata' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -505,9 +524,9 @@
       else if (e.caja === 'NG') {
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
         if (pielIt || anteIt) e.esf = 'KB';
-        if (e.correa !== 'NATON' && e.correa !== 'NATOP' && !pielIt && !anteIt) e.correa = 'NATON';
+        if (e.correa !== 'NATO' && e.correa !== 'NATOP' && e.correa !== 'ACERONG' && !pielIt && !anteIt) e.correa = 'NATO';
       } else {
-        if (e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
+        if (e.correa === 'PIELO' || e.correa === 'ACERONG') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
         /* 19/08/2026: el ante del acero ya no obliga al segundero blanco.
            Se forzaba porque era la única foto; ahora existen las dos. */
@@ -523,6 +542,7 @@
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
     if (e.caja === 'BR') return seg + 'ANTE';
     var cola = seg + e.esf + '-' + e.correa;
+    if (e.correa === 'NATO') return cola + '-' + e.nato;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
     if (e.correa === 'ANTE' && e.estilo === 'M') return cola + '-' + e.ante;
     if (conCierre()) {
@@ -620,13 +640,13 @@
            ['ANTE', 'Ante'],
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
-        ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'],
+        ? [['NATO', 'Nato'], ['NATOP', 'Nato + Piel'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
-           ['ANTE', 'Ante']]
+           ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
-        : [['NATO', 'Nato Verde'], ['NATOP', 'Nato + Piel'],
+        : [['NATO', 'Nato'], ['NATOP', 'Nato + Piel'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
@@ -660,13 +680,15 @@
        tiene las cuatro pieles en acero, PVD negro y bronce. En el titanio
        con ante no: ahí solo hay una foto y sin color. */
     var anteConColor = e.correa === 'ANTE' && (esMurph || !!K1224_ANTE_CAJA[e.caja]);
-    var conColor = e.correa === 'NATOP' || anteConColor;
+    var esNato = e.correa === 'NATO';
+    var conColor = e.correa === 'NATOP' || anteConColor || esNato;
     var esAnte = anteConColor;
-    var paleta = esAnte ? ANTES : COLORES;
-    var elegido = esAnte ? e.ante : e.color;
+    var paleta = esAnte ? ANTES : esNato ? NATOS : COLORES;
+    var elegido = esAnte ? e.ante : esNato ? e.nato : e.color;
     $('[data-pv-grupo-color]').hidden = !conColor;
     if (conColor) {
-      $('[data-pv-rotulo-color]').textContent = esAnte ? 'Color del ante' : 'Color del nato';
+      $('[data-pv-rotulo-color]').textContent =
+        esAnte ? 'Color del ante' : esNato ? 'Color del nato' : 'Color del nato + piel';
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
@@ -691,7 +713,9 @@
     $('[data-pv-tec="caja"]').textContent =
       'Caja de ' + e.diam + ' mm en ' + CAJAS[e.caja].mat + ', con doble numeración de época y ' +
       'cristal de zafiro. Tapa trasera ' + (e.tapa === 'C' ? 'de cristal que deja ver el movimiento.' : 'roscada sólida.') +
-      ' Correa: ' + (e.correa === 'ANTE' && e.estilo === 'M'
+      ' Correa: ' + (e.correa === 'NATO'
+        ? 'nato ' + NATOS[e.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
+        : (e.correa === 'ANTE' && e.estilo === 'M')
         ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
         : (e.estilo === 'M' && MURPH_CORREA[e.correa])
         ? CORREAS[e.correa].tec.replace('con pespunte blanco', 'con pespunte ' + PESPUNTES[e.pesp].toLowerCase())
@@ -714,6 +738,7 @@
          El ante lo lleva ya el Murph Y el khaki de la 12/24, así que la
          condición es la correa, no el estilo. */
       if (g === 'color' && e.correa === 'ANTE') e.ante = b.dataset.v;
+      else if (g === 'color' && e.correa === 'NATO') e.nato = b.dataset.v;
       else e[g] = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
@@ -731,7 +756,9 @@
                  (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
-        correa: e.correa === 'NATOP'
+        correa: e.correa === 'NATO'
+          ? 'Nato ' + NATOS[e.nato][0].toLowerCase() + ', hebilla clásica plateada'
+          : e.correa === 'NATOP'
           ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
           : (e.correa === 'ANTE' && e.estilo === 'M')
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
