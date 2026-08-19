@@ -20,6 +20,7 @@
 //
 // ACCIONES (POST con {clave, accion, ...})
 //   entrar · resumen · pedidos · pedido · cobrado · estado
+//   (al marcar 'enviado' se COBRA el pago a plazos de Klarna)
 //   serie  · socios  · socio   · mensajes · responder · leido
 //   valoraciones · moderar
 //   cuentas · compras · gastos · gasto_nuevo · gasto_borrar
@@ -95,6 +96,57 @@ async function proponerSerie(ref: string) {
     if (!isNaN(n) && n > mayor) mayor = n;
   }
   return prefijo + String(mayor + 1).padStart(4, '0');
+}
+
+/* ============================================================
+   COBRAR UN PAGO DE KLARNA
+   ------------------------------------------------------------
+   Klarna no cobra al comprar: autoriza. El dinero se captura
+   cuando el pedido se envía, y Mollie da 28 días para hacerlo.
+   Esto es lo que dispara ese cobro.
+
+   No hace nada si el pedido se pagó con tarjeta, Bizum o PayPal
+   —esos ya están cobrados— ni si no hay pago de Mollie detrás.
+   ============================================================ */
+async function capturarKlarna(pedidoId: string): Promise<
+  { capturado: boolean; importe?: string; error?: string }
+> {
+  const MOLLIE = Deno.env.get('LAORA_MOLLIE_API_KEY');
+  const filas = await db(`pedidos?select=id,numero,total,estado,referencia_pago&id=eq.${pedidoId}&limit=1`);
+  const ped = filas[0];
+  if (!ped || !ped.referencia_pago) return { capturado: false };
+  if (!MOLLIE) return { error: 'Falta la clave de Mollie: no se puede cobrar el pago a plazos.' };
+
+  const r = await fetch(`https://api.mollie.com/v2/payments/${ped.referencia_pago}`, {
+    headers: { Authorization: `Bearer ${MOLLIE}` },
+  });
+  if (!r.ok) {
+    console.error('mollie leer pago', await r.text());
+    return { error: 'Mollie no responde. Vuelve a intentarlo en un momento.' };
+  }
+  const pago = await r.json();
+
+  // Ya cobrado (tarjeta, Bizum…) o nada que capturar: se sigue.
+  if (pago.status !== 'authorized') return { capturado: false };
+
+  const cap = await fetch(`https://api.mollie.com/v2/payments/${ped.referencia_pago}/captures`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${MOLLIE}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      amount: pago.amount,
+      description: `laOra · pedido ${ped.numero} enviado`,
+    }),
+  });
+  if (!cap.ok) {
+    console.error('mollie capturar', await cap.text());
+    return { error: 'No se ha podido cobrar el pago a plazos. El pedido sigue sin enviar.' };
+  }
+
+  await db(`pedidos?id=eq.${pedidoId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ estado: 'pagado', pagado_en: new Date().toISOString() }),
+  });
+  return { capturado: true, importe: pago.amount?.value };
 }
 
 Deno.serve(async (req) => {
@@ -187,10 +239,23 @@ Deno.serve(async (req) => {
       // ---------- por dónde va ----------
       case 'estado': {
         const cambio: Record<string, unknown> = { estado: p.estado };
+        let cobrado: string | null = null;
+
         if (p.estado === 'enviado') {
           cambio.enviado_en = new Date().toISOString();
           if (p.transportista) cambio.transportista = p.transportista;
           if (p.seguimiento) cambio.seguimiento = p.seguimiento;
+
+          /* AQUÍ SE COBRA KLARNA. Al pagar a plazos el dinero queda
+             reservado, no cobrado: Mollie lo exige por escrito y da 28
+             días para capturarlo, contados desde que se autorizó. El
+             momento es este, cuando el reloj sale por la puerta.
+             Si la captura falla, el pedido NO se marca como enviado:
+             es preferible repetir el clic a dar por enviado algo que
+             no se ha cobrado. */
+          const cobro = await capturarKlarna(String(p.id));
+          if (cobro.error) return json({ error: cobro.error }, 502);
+          cobrado = cobro.capturado ? cobro.importe! : null;
         }
         if (p.estado === 'entregado') cambio.entregado_en = new Date().toISOString();
         if (p.notas !== undefined) cambio.notas = p.notas;
@@ -218,7 +283,7 @@ Deno.serve(async (req) => {
             }
           }
         }
-        return json({ ok: true, pedido: filas[0] });
+        return json({ ok: true, pedido: filas[0], cobrado });
       }
 
       // ---------- el reloj y su número ----------

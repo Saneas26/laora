@@ -50,6 +50,13 @@ function laoraCarritoQuitar(i) {
   laoraCarritoGuardar(lineas);
 }
 
+/* Se vacía al saltar al pago: a partir de ahí lo que vale es el
+   pedido, que ya está escrito y con su número. Dejar la cesta llena
+   invita a comprar dos veces lo mismo. */
+function laoraCarritoVaciar() {
+  laoraCarritoGuardar([]);
+}
+
 function laoraCarritoCantidad(i, n) {
   var lineas = laoraCarritoLeer();
   if (!lineas[i]) return;

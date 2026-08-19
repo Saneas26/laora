@@ -121,6 +121,28 @@ body{margin:0;background:var(--ivory);color:var(--ink);
 .ca-total-final{margin-top:14px;font-size:19px}
 .ca-total-final b{font-size:25px;font-weight:700}
 
+/* ---------- cómo se paga ----------
+   Dos tarjetas grandes, no una lista de radios diminutos: se pulsa
+   con el pulgar y se lee de un vistazo. La elegida se marca con el
+   oro de la casa, que es como se marca todo aquí. */
+.ca-metodos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 16px}
+.ca-metodos button{
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  min-height:74px;padding:14px 16px;text-align:left;font:inherit;
+  color:var(--ink);background:#fff;cursor:pointer;
+  border:1px solid var(--line);border-radius:12px;
+}
+.ca-metodos button b{font-size:16px;font-weight:700;line-height:1.25}
+.ca-metodos button small{font-size:12.5px;line-height:1.4;color:var(--muted)}
+.ca-metodos button[aria-pressed="true"]{
+  border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold);
+}
+.ca-metodos button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+@media (max-width:520px){
+  .ca-metodos{grid-template-columns:1fr}
+}
+
 @media (max-width:640px){
   .ca-form,.ca-factura{grid-template-columns:1fr}
 }

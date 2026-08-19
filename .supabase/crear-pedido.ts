@@ -10,11 +10,15 @@
 //   sus líneas y la dirección— y solo después se cobra.
 //
 // LA REGLA DEL DINERO
-//   El precio NUNCA es el que dice el navegador. Aquí se vuelve a
-//   calcular desde `catalogo.json`, que es la misma fuente que pinta la
-//   web. Quien manipule la cesta en su navegador no se lleva un reloj
-//   por un euro: si el precio que manda no cuadra con el del catálogo,
-//   manda el del catálogo.
+//   El precio NUNCA es el que dice el navegador. Se lee de
+//   `catalogo-2026.json`, que NO se escribe a mano: lo vuelca
+//   `herramientas/volcar_catalogo_2026.js` ejecutando el motor de
+//   precios que hay dentro de cada ficha, el mismo que ve el cliente.
+//   Quien manipule la cesta en su navegador no se lleva un reloj por un
+//   euro: si la referencia no está en esa lista, no se vende.
+//
+//   OJO: si se toca un configurador y no se vuelve a pasar el volcador,
+//   la web enseñará el precio nuevo y esto rechazará la referencia.
 //
 // QUIÉN PUEDE LLAMARLA
 //   Solo alguien que haya entrado. La app manda su `access_token` en la
@@ -32,7 +36,7 @@
 //   SUPABASE_ANON_KEY y SUPABASE_SERVICE_ROLE_KEY—. No hace falta ninguno más.
 // ============================================================
 
-const CATALOGO = 'https://laora.es/assets/datos/catalogo.json';
+const CATALOGO = 'https://laora.es/assets/datos/catalogo-2026.json';
 
 /* Los gastos de envío. Hoy van incluidos en el precio; el día que
    dejen de estarlo, se cambia aquí y en la pantalla del carrito. */
@@ -65,68 +69,27 @@ async function catalogo() {
   return datos;
 }
 
-const sinTildes = (s: string) => s.normalize('NFD').replace(/\p{Mn}/gu, '');
-
-/* La referencia se compone EXACTAMENTE igual que en
-   `herramientas/generar_configuradores.py`. Si allí cambia, aquí
-   también: es lo que guarda la cesta y lo que hay que reconocer. */
-function referencia(reloj: any, acabado: any, indice: number): string {
-  if (acabado.refs) return acabado.refs[indice] || '';
-  const codigo = String(reloj.codigo).replace(/[—–]/g, '-').replace(/\s/g, '');
-  const modelo = sinTildes(String(reloj.nombre)).replace(/\s/g, '');
-  const letra = acabado.refLetra || String(acabado.nombre).charAt(0).toUpperCase();
-  let num = acabado.refNum;
-  if (Array.isArray(num)) num = num[indice];
-  if (!num) num = ('0' + (indice + 1)).slice(-2);
-  return `${codigo}_${modelo}_${letra}${num}${acabado.refSufijo || ''}`;
-}
-
+/* Lo que se vende hoy, por referencia. Las cadenas vienen
+   deduplicadas —hay dos mil referencias y muchas comparten texto—, así
+   que aquí se resuelven los índices. */
 type Combinacion = {
-  ref: string; slug: string; modelo: string; acabado: string;
-  correa: string; precio: number; ficha: unknown;
+  precio: number; modelo: string; acabado: string; correa: string;
+  ficha: Record<string, string>;
 };
 
-/* Todas las combinaciones que se pueden pedir hoy, por referencia.
-   Las que no tienen precio no entran: no se pueden vender. */
-async function combinaciones(): Promise<Map<string, Combinacion>> {
-  const datos = await catalogo();
-  const mapa = new Map<string, Combinacion>();
-
-  for (const reloj of (datos.relojes || [])) {
-    const cfg = reloj.configurador;
-    if (!cfg) continue;
-    for (const acabado of (cfg.acabados || [])) {
-      const precios = (cfg.precios || {})[acabado.id] || [];
-      (cfg.correas || []).forEach((correa: any, i: number) => {
-        const precio = precios[i];
-        if (precio === null || precio === undefined) return;
-        const ref = referencia(reloj, acabado, i);
-        if (!ref) return;
-        mapa.set(ref, {
-          ref,
-          slug: reloj.slug,
-          modelo: reloj.nombre,
-          acabado: acabado.nombre,
-          correa: correa.nombre,
-          precio: Number(precio),
-          /* Las especificaciones, congeladas: es lo que se vendió,
-             aunque el catálogo cambie mañana. */
-          ficha: {
-            movimiento: acabado.movimiento ?? reloj.movimiento ?? null,
-            diametro: acabado.diametro ?? reloj.diametro ?? null,
-            caja: acabado.caja ?? null,
-            bisel: acabado.bisel ?? null,
-            cristal: acabado.cristal ?? null,
-            estanqueidad: acabado.estanqueidad ?? reloj.hermeticidad ?? null,
-            autonomia: acabado.autonomia ?? null,
-            peso: acabado.peso ?? null,
-            correa: correa.detalle ?? null,
-          },
-        });
-      });
-    }
-  }
-  return mapa;
+async function combinacion(ref: string): Promise<Combinacion | null> {
+  const cat = await catalogo();
+  const r = cat.refs?.[ref];
+  if (!r) return null;
+  const T: string[] = cat.textos || [];
+  const ficha: Record<string, string> = {};
+  for (const k of Object.keys(r.f || {})) ficha[k] = T[r.f[k]] ?? '';
+  return {
+    precio: Number(r.p),
+    /* Se congela lo que vio el cliente: si mañana cambia el catálogo,
+       el pedido sigue diciendo exactamente qué se vendió. */
+    modelo: T[r.n] ?? '', acabado: T[r.a] ?? '', correa: T[r.c] ?? '', ficha,
+  };
 }
 
 /* ---------- quién llama ----------
@@ -140,6 +103,10 @@ async function quienEs(token: string, url: string, anon: string) {
   const u = await r.json();
   return u?.id ? { id: u.id as string, email: (u.email as string) || '' } : null;
 }
+
+/* Los que la web ofrece hoy. El definitivo lo dirá Mollie cuando
+   avise del pago: aquí solo se anota con qué se pensaba pagar. */
+const METODOS = new Set(['tarjeta', 'klarna', 'bizum', 'paypal', 'transferencia']);
 
 const limpio = (v: unknown, max = 120) => String(v ?? '').trim().slice(0, max);
 
@@ -175,22 +142,21 @@ Deno.serve(async (req) => {
   if (faltan.length) return json({ error: 'Faltan datos del envío: ' + faltan.join(', ') }, 400);
 
   /* ---------- el precio, desde el catálogo ---------- */
-  let mapa: Map<string, Combinacion>;
-  try { mapa = await combinaciones(); }
+  try { await catalogo(); }
   catch { return json({ error: 'No hemos podido comprobar los precios. Inténtalo en un momento.' }, 503); }
 
   const preparadas: any[] = [];
   let importe = 0;
 
   for (const l of lineas) {
-    const ref = limpio(l?.ref, 60);
-    const c = mapa.get(ref);
+    const ref = limpio(l?.ref, 80);
+    const c = await combinacion(ref);
     if (!c) return json({ error: `La referencia ${ref || '(vacía)'} ya no está a la venta.` }, 409);
 
     const cantidad = Math.max(1, Math.min(5, parseInt(l?.cantidad, 10) || 1));
     importe += c.precio * cantidad;
     preparadas.push({
-      ref: c.ref, modelo: c.modelo, acabado: c.acabado, correa: c.correa,
+      ref, modelo: c.modelo, acabado: c.acabado, correa: c.correa,
       precio: c.precio, cantidad, ficha: c.ficha,
     });
   }
@@ -250,7 +216,7 @@ Deno.serve(async (req) => {
     body: JSON.stringify({
       numero, socio_id: socio.id,
       importe, envio: ENVIO, total,
-      metodo: limpio(cuerpo?.metodo, 20) || 'paypal',
+      metodo: METODOS.has(String(cuerpo?.metodo)) ? String(cuerpo.metodo) : 'tarjeta',
       estado: 'solicitado',
       env_nombre: [limpio(e.nombre), limpio(e.apellidos)].filter(Boolean).join(' '),
       env_telefono: limpio(e.telefono, 40),

@@ -19,12 +19,13 @@ pasos, uno debajo de otro y sin cambiar de página:
 
   1. lo elegido, y su total
   2. entrar —con el enlace del correo, sin contraseña—
-  3. los datos del envío, y entonces sí, pagar
+  3. los datos del envío
+  4. el pago: tarjeta, Bizum, PayPal o Klarna en tres plazos
 
-El pedido se escribe en la base ANTES de abrir PayPal, con la Edge
-Function `crear-pedido`, que recalcula el precio desde el catálogo y no
-se fía del navegador. Solo después se abre el cobro, ya con un número
-de pedido que poner en el concepto.
+El pedido se escribe en la base ANTES de cobrar, con la Edge Function
+`crear-pedido`, que recalcula el precio desde el catálogo y no se fía
+del navegador. Solo después se abre el cobro, y lo abre `pagar-pedido`,
+que crea el pago en Mollie leyendo el importe de la base.
 
 Quien no haya entrado no pierde nada: la cesta vive en su navegador y
 sigue ahí cuando vuelve del enlace del correo, porque el enlace le
@@ -43,8 +44,8 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 5
-V_JS = 4
+V_CSS = 7
+V_JS = 5
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
@@ -157,15 +158,40 @@ PAGINA = f"""<!DOCTYPE html>
     <p class="ca-aviso-paso" data-aviso-datos hidden></p>
   </section>
 
-  <!-- ---------- paso 4: pagar ---------- -->
+  <!-- ---------- paso 4: pagar ----------
+       Desde el 19/08/2026 cobra Mollie, no un enlace de PayPal. Dos
+       caminos: el pago de siempre —tarjeta, Bizum o PayPal, lo que
+       tenga activo la cuenta— y Klarna en tres plazos.
+       Klarna no cobra al comprar: autoriza, y el dinero se cobra
+       cuando el reloj sale. Aquí se dice, porque es lo que pasa. -->
   <section class="ca-paso ca-hecho" data-paso-pagar hidden>
     <h2>Tu pedido <b data-numero></b></h2>
     <p class="ca-explica">Ya está guardado y lo tenemos apuntado. Solo queda el pago:
-      se abre PayPal con el importe exacto. <b>Pon el número del pedido en el concepto</b>
-      —lo copiamos al portapapeles al pulsar— para que sepamos que ese ingreso es el tuyo.</p>
+      elige cómo quieres pagarlo y te llevamos a la pasarela de Mollie.
+      Nosotros no vemos ni guardamos los datos de tu tarjeta en ningún momento.</p>
     <p class="ca-total-final">A pagar: <b data-total-final></b></p>
-    <button class="ca-pagar" type="button" data-pagar>Pagar con PayPal</button>
-    <p class="ca-explica">Cuando lo confirmemos te avisamos por correo. Puedes ver el pedido
+
+    <div class="ca-metodos" data-metodos>
+      <button type="button" data-metodo="" aria-pressed="true">
+        <b>Tarjeta, Bizum o PayPal</b>
+        <small>Se cobra al momento</small>
+      </button>
+      <button type="button" data-metodo="klarna" aria-pressed="false">
+        <b>Klarna, en 3 plazos</b>
+        <small>3 pagos de <span data-plazo>—</span>, sin intereses (0&nbsp;% TAE)</small>
+      </button>
+    </div>
+
+    <button class="ca-pagar" type="button" data-pagar>Pagar <span data-total-boton></span></button>
+    <p class="ca-aviso-paso" data-aviso-pagar hidden></p>
+
+    <!-- Klarna exige que el cliente vea su aviso ANTES de pagar -->
+    <p class="ca-legal-pago">Si pagas a plazos con Klarna, es Klarna quien te concede el aplazamiento y
+      quien trata tus datos para ello. Lee su
+      <a href="https://www.klarna.com/es/legal/" target="_blank" rel="noopener">aviso de privacidad</a>
+      antes de pagar. Con Klarna el primer plazo se cobra cuando tu reloj sale hacia tu casa.</p>
+
+    <p class="ca-explica">En cuanto el pago se confirme te avisamos por correo. Puedes ver el pedido
       en <a href="/cuenta">tu cuenta</a> cuando quieras.</p>
   </section>
 </main>

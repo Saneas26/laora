@@ -31,7 +31,7 @@ argumento, ninguna.
 # SUBIR EN CADA CAMBIO de la hoja o del script: Cloudflare los sirve
 # con max-age=14400 y sin esto el navegador se queda con la versión
 # vieja hasta cuatro horas.
-V_CAB_CSS = 2
+V_CAB_CSS = 3
 V_CAB_JS = 1
 
 _LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png?v=2'   # tinta, sobre fondo claro
@@ -78,7 +78,7 @@ def marcado(activa=''):
     nav = '\n'.join(enlaces)
 
     return f"""<header class="site-header">
-  <a class="brand" href="/" aria-label="laOra, inicio">{_marca('brand-logo')}</a>
+  <a class="brand" href="/" aria-label="laOra, inicio">{_marca('brand-logo')}<span class="brand-claim">Relojazos al precio honesto</span></a>
   <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
     <span></span><span></span>
   </button>

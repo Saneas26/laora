@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/carrito.css?v=6">
+<link rel="stylesheet" href="/assets/css/carrito.css?v=7">
 </head>
 <body>
 
@@ -99,20 +99,40 @@
     <p class="ca-aviso-paso" data-aviso-datos hidden></p>
   </section>
 
-  <!-- ---------- paso 4: pagar ---------- -->
+  <!-- ---------- paso 4: pagar ----------
+       Desde el 19/08/2026 cobra Mollie, no un enlace de PayPal. Dos
+       caminos: el pago de siempre —tarjeta, Bizum o PayPal, lo que
+       tenga activo la cuenta— y Klarna en tres plazos.
+       Klarna no cobra al comprar: autoriza, y el dinero se cobra
+       cuando el reloj sale. Aquí se dice, porque es lo que pasa. -->
   <section class="ca-paso ca-hecho" data-paso-pagar hidden>
     <h2>Tu pedido <b data-numero></b></h2>
     <p class="ca-explica">Ya está guardado y lo tenemos apuntado. Solo queda el pago:
-      se abre PayPal con el importe exacto. <b>Pon el número del pedido en el concepto</b>
-      —lo copiamos al portapapeles al pulsar— para que sepamos que ese ingreso es el tuyo.</p>
+      elige cómo quieres pagarlo y te llevamos a la pasarela de Mollie.
+      Nosotros no vemos ni guardamos los datos de tu tarjeta en ningún momento.</p>
     <p class="ca-total-final">A pagar: <b data-total-final></b></p>
-    <button class="ca-pagar" type="button" data-pagar>Pagar con PayPal</button>
+
+    <div class="ca-metodos" data-metodos>
+      <button type="button" data-metodo="" aria-pressed="true">
+        <b>Tarjeta, Bizum o PayPal</b>
+        <small>Se cobra al momento</small>
+      </button>
+      <button type="button" data-metodo="klarna" aria-pressed="false">
+        <b>Klarna, en 3 plazos</b>
+        <small>3 pagos de <span data-plazo>—</span>, sin intereses (0&nbsp;% TAE)</small>
+      </button>
+    </div>
+
+    <button class="ca-pagar" type="button" data-pagar>Pagar <span data-total-boton></span></button>
+    <p class="ca-aviso-paso" data-aviso-pagar hidden></p>
+
     <!-- Klarna exige que el cliente vea su aviso ANTES de pagar -->
     <p class="ca-legal-pago">Si pagas a plazos con Klarna, es Klarna quien te concede el aplazamiento y
       quien trata tus datos para ello. Lee su
       <a href="https://www.klarna.com/es/legal/" target="_blank" rel="noopener">aviso de privacidad</a>
-      antes de pagar.</p>
-    <p class="ca-explica">Cuando lo confirmemos te avisamos por correo. Puedes ver el pedido
+      antes de pagar. Con Klarna el primer plazo se cobra cuando tu reloj sale hacia tu casa.</p>
+
+    <p class="ca-explica">En cuanto el pago se confirme te avisamos por correo. Puedes ver el pedido
       en <a href="/cuenta">tu cuenta</a> cuando quieras.</p>
   </section>
 </main>
@@ -122,8 +142,8 @@
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/sesion.js?v=4"></script>
-<script src="/assets/js/carrito.js?v=4"></script>
-<script src="/assets/js/carrito-pantalla.js?v=4"></script>
+<script src="/assets/js/sesion.js?v=5"></script>
+<script src="/assets/js/carrito.js?v=5"></script>
+<script src="/assets/js/carrito-pantalla.js?v=5"></script>
 </body>
 </html>
