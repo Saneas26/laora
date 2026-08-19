@@ -1,0 +1,37 @@
+{
+  "slug": "tortuga",
+  "nombre": "Tortuga",
+  "codigo": null,
+  "clase": "Buceo",
+  "homenaje": "",
+  "desc": "",
+  "listo": false,
+  "pasos": [
+    { "id": "mov", "rotulo": "Movimiento", "opciones": [
+      { "id": "Q", "nombre": "Cuarzo japonés", "coste": null },
+      { "id": "A", "nombre": "Automático japonés", "coste": null } ] },
+
+    { "id": "caja", "rotulo": "Caja", "opciones": [
+      { "id": "MIN-NEG", "nombre": "Mineral · anillo negro",    "color": "#1C1D1F", "coste": null },
+      { "id": "MIN-TUR", "nombre": "Mineral · anillo turquesa", "color": "#1F8A8A", "coste": null },
+      { "id": "MIN-NAR", "nombre": "Mineral · anillo naranja",  "color": "#E4761E", "coste": null },
+      { "id": "ZAF-NEG", "nombre": "Zafiro · anillo negro",     "color": "#1C1D1F", "coste": null },
+      { "id": "ZAF-TUR", "nombre": "Zafiro · anillo turquesa",  "color": "#1F8A8A", "coste": null },
+      { "id": "ZAF-NAR", "nombre": "Zafiro · anillo naranja",   "color": "#E4761E", "coste": null } ] },
+
+    { "id": "esf", "rotulo": "Esfera", "opciones": [
+      { "id": "NEG", "nombre": "Negra", "color": "#131313", "coste": null },
+      { "id": "AZU", "nombre": "Azul",  "color": "#1F3A6E", "coste": null },
+      { "id": "VER", "nombre": "Verde", "color": "#2E6B4F", "coste": null } ] },
+
+    { "id": "correa", "rotulo": "Brazalete o correa", "opciones": [
+      { "id": "A316-DESP", "nombre": "Acero 316L · cierre desplegable", "coste": null },
+      { "id": "A316-MAC",  "nombre": "Acero 316L macizo", "coste": null },
+      { "id": "A316-ANC",  "nombre": "Acero 316L macizo · eslabón ancho", "coste": null },
+      { "id": "A316-FIN",  "nombre": "Acero 316L macizo · eslabón fino", "coste": null },
+      { "id": "A904-MAC",  "nombre": "Acero 904L macizo", "coste": null },
+      { "id": "A904-PLA",  "nombre": "Acero 904L · eslabones planos", "coste": null },
+      { "id": "CAU-HEB",   "nombre": "Caucho con hebilla de acero", "coste": null },
+      { "id": "CAU-FLU",   "nombre": "Caucho fluorado · cierre desplegable", "coste": null } ] }
+  ]
+}

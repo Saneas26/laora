@@ -359,3 +359,21 @@ main.cv2{ overflow:visible; overflow-x:clip }
 /* Las dos fotos de catálogo del Murph (19/08/2026) van debajo del selector,
    con la misma retícula de dos columnas y algo de aire por encima para que
    se lean como otra cosa: aquellas se pulsan, estas se miran. */
+
+/* ---------- FICHAS QUE AÚN NO SE VENDEN ----------
+   Tortuga, Cóctel y Diver tienen las piezas elegidas pero no el coste,
+   y sin coste no hay precio: el motor de la casa lo saca de ahí. Se
+   dice y no se vende, en vez de inventar una cifra o dejar un botón
+   que llevaría a un carrito que el servidor va a rechazar. */
+.pv-precio-pendiente{ color:var(--cv2-gris); font-weight:600 }
+.pv-aviso-pendiente{
+  margin-top:10px; padding:12px 14px; border-left:2px solid var(--cv2-oro);
+  background:var(--cv2-crema); font-size:13.5px; line-height:1.55;
+}
+.pv-comprar[disabled]{ opacity:.45; cursor:default }
+.pv-foto-pendiente{
+  display:flex; align-items:center; justify-content:center; height:100%;
+  min-height:320px; background:var(--cv2-crema); color:var(--cv2-gris);
+  font-size:14px; letter-spacing:.08em; text-transform:uppercase;
+}
+.pv-grupo .pv-rotulo small{ font-weight:400; color:var(--cv2-gris); text-transform:none; letter-spacing:0 }

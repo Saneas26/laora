@@ -2,112 +2,115 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Configura tu Diver · laOra</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Diver de laOra: 22 combinaciones, al precio honesto.">
+<title>Diver · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
+<!-- GENERADO por herramientas/generar_ficha_2026.py — no editar a mano.
+     Los datos viven en assets/datos/fichas/diver.json -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=32">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
+<link rel="stylesheet" href="/assets/css/laora.css?v=51">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=34">
 </head>
-<body>
-
-<header class="cf-cab">
-  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
-    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Diver</b>
-  </a>
-  <!-- La ficha técnica se fue a laOrateca (Óscar, 13/08/2026): el botón y el diálogo no se escriben. FICHA_TECNICA = True los devuelve. -->
+<body><header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
+    <span></span><span></span>
+  </button>
+  <nav class="main-nav" aria-label="Navegación principal" data-nav>
+    <a href="/coleccion.html" class="active">Relojes</a>
+    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/laorateca.html"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra">teca</span></a>
+  </nav>
+  <div class="header-actions">
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
+         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
+         un cero permanente al lado del carrito parece una web rota. -->
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
+  </div>
 </header>
 
-<div class="cf-cuerpo">
-
-  <section class="cf-visor" aria-label="El reloj que estás configurando">
-    <!-- Lo que llevas elegido, dentro de la foto y a la izquierda del
-         todo (Óscar, 13/08/2026). Sin rótulo: cada línea se explica
-         sola, y un «Características» encima solo quitaría sitio. -->
-    <dl class="cf-specs" data-specs aria-label="Lo que llevas elegido"></dl>
-
-    <div class="cf-montaje" data-montaje>
-      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
-      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
-      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
-      <div class="cf-cabeza" data-cabeza>
-        <img data-foto alt="Diver de laOra" hidden>
-        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+<main>
+  <section class="pv">
+    <div class="pv-galeria">
+      <div class="pv-hero" data-pv-hero>
+        <p class="pv-foto-pendiente">Foto por hacer</p>
       </div>
-      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
 
-    <!-- La tarjeta del cierre cuelga del VISOR, no de la cabeza ni del
-         montaje: la cabeza mide cero en modo «foto pendiente» y el
-         montaje es un pasillo estrecho; el visor siempre tiene cuerpo
-         y la esquina es suya. -->
-    <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
-      <img data-cierre-img alt="Detalle del cierre">
-      <figcaption data-cierre-pie></figcaption>
-    </figure>
+    <aside class="pv-info">
+      <p class="pv-chips"><span class="cv2-chip">Buceo</span></p>
+      <h1>Diver</h1>
+      <p class="pv-desc">Ficha en construcción.</p>
 
-    <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
+          <div class="pv-grupo">
+            <p class="pv-rotulo"><b>1</b> Movimiento</p>
+            <div class="pv-opciones" data-pv="mov">
+            <button type="button" data-v="Q" aria-pressed="true">Cuarzo japonés</button>
+            <button type="button" data-v="A">Automático suizo</button>
+            </div>
+          </div>
 
-    <!-- El aviso de «el brazalete va dibujado» se retira de la pantalla
-         (Óscar, 13/08/2026: «comentarios solo a mí, no en pantalla»). Era
-         una nota de taller: el cliente no tiene por qué enterarse de cómo
-         montamos la foto. El JavaScript que lo encendía sigue ahí y no
-         estorba —comprueba que exista—, así que para recuperarlo basta
-         con devolver este párrafo. -->
+          <div class="pv-grupo">
+            <p class="pv-rotulo"><b>2</b> Caja <small>uno solo</small></p>
+            <div class="pv-opciones" data-pv="caja">
+            <button type="button" data-v="ACE" aria-pressed="true">Acero con zafiro · 300 m</button>
+            </div>
+          <p class="pv-nota">Con su esfera, sus agujas y su correa de caucho negra.</p>
+          </div>
 
-    <!-- Óscar, 12/08/2026: que nadie compre creyendo que la imagen es una
-         fotografía del reloj terminado. Va en todas, siempre, chiquita y
-         en la esquina, sin tapar el reloj. -->
-    <p class="cf-aviso-imagen">La imagen puede contener errores de diseño*</p>
+          <div class="pv-grupo">
+            <p class="pv-rotulo"><b>3</b> Brazalete o correa</p>
+            <div class="pv-opciones" data-pv="correa">
+            <button type="button" data-v="CAU-NEG" aria-pressed="true">Caucho negro</button>
+            <button type="button" data-v="A316-DESP">Acero 316L · cierre desplegable</button>
+            <button type="button" data-v="A316-MAC">Acero 316L macizo</button>
+            <button type="button" data-v="A316-ANC">Acero 316L macizo · eslabón ancho</button>
+            <button type="button" data-v="A316-FIN">Acero 316L macizo · eslabón fino</button>
+            <button type="button" data-v="A904-MAC">Acero 904L macizo</button>
+            <button type="button" data-v="A904-PLA">Acero 904L · eslabones planos</button>
+            <button type="button" data-v="CAU-HEB">Caucho con hebilla de acero</button>
+            <button type="button" data-v="CAU-FLU">Caucho fluorado · cierre desplegable</button>
+            <button type="button" data-v="VELA">Tela de vela · hebilla mariposa</button>
+            <button type="button" data-v="LONA">Lona de nailon · liberación rápida</button>
+            </div>
+          </div>
+
+      <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
+           botón y Klarna juntos, como en el Lunar. -->
+      <div class="pv-pie" data-pv-pie>
+        <div class="pv-precio-fila">
+          <p class="pv-precio pv-precio-pendiente">Precio por cerrar</p>
+          <p class="pv-stock"><span>En el taller</span><i aria-hidden="true"></i></p>
+        </div>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <button class="cv2-comprar pv-comprar" type="button" disabled>Todavía no está a la venta</button>
+        <p class="pv-aviso-pendiente">Este modelo está en el taller: las piezas están elegidas y el precio, por cerrar. En cuanto esté, se podrá comprar desde aquí.</p>
+        <div class="pv-confianza">
+          <span>Envío gratis · devolución 30 días</span>
+          <span>Garantía 3 años*</span>
+        </div>
+        <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
+      </div>
+    </aside>
   </section>
+</main>
 
-  <section class="cf-panel" aria-label="Opciones del Diver">
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
-      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
-        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo japonés</button>
-        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático suizo</button>
-      </div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b>uno solo</b></p>
-      <div class="cf-fijo"><b>Acero con zafiro, 300 m</b><span>con su esfera, sus agujas y su correa de caucho negra</span></div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Brazalete <b>11 familias</b></p>
-      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
-        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Caucho negro</span></button>
-        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Acero 316L, cierre desplegable</span></button>
-        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Acero 316L macizo</span></button>
-        <button class="cf-brazalete" type="button" data-brz="3" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón ancho</span></button>
-        <button class="cf-brazalete" type="button" data-brz="4" aria-pressed="false"><i></i><span>Acero 316L macizo, eslabón fino</span></button>
-        <button class="cf-brazalete" type="button" data-brz="5" aria-pressed="false"><i></i><span>Acero 904L macizo</span></button>
-        <button class="cf-brazalete" type="button" data-brz="6" aria-pressed="false"><i></i><span>Acero 904L, eslabones planos</span></button>
-        <button class="cf-brazalete" type="button" data-brz="7" aria-pressed="false"><i></i><span>Caucho con hebilla de acero</span></button>
-        <button class="cf-brazalete" type="button" data-brz="8" aria-pressed="false"><i></i><span>Caucho fluorado, cierre desplegable</span></button>
-        <button class="cf-brazalete" type="button" data-brz="9" aria-pressed="false"><i></i><span>Tela de vela, hebilla mariposa</span></button>
-        <button class="cf-brazalete" type="button" data-brz="10" aria-pressed="false"><i></i><span>Lona de nailon, liberación rápida</span></button>
-      </div>
-      <p class="cf-detalle" data-detalle></p>
-    </div>
-
-    <div class="cf-grupo" data-grupo-var>
-      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
-      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
-    </div>
-  </section>
-</div>
-
-<footer class="cf-barra">
-  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
-  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
-  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
+<footer class="aviso-marcas">
+  <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
-
-
-<script type="application/json" data-piezas>{"nombre": "Diver", "codigo": "LO-08", "incluido": "Correa de caucho negra", "extra": false, "mov": [{"ref": "M1", "cal": "Calibre laOra LO_Q2426", "coste": 11.89, "rot": "Cuarzo japonés de barrido", "specs": "Calibre laOra LO_Q2426, cuarzo de fabricación japonesa con segundero de barrido: da cuatro pasos por segundo en lugar de uno, así que de lejos se mueve como un mecánico. Precisión de ±15 segundos al mes, tres agujas sin fecha, parada de segundero y pila de unos 2 años."}, {"ref": "M2", "cal": "Calibre laOra LO_A3826", "coste": 59.01, "rot": "Automático Suizo", "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."}], "caj": [{"ref": "C1", "nombre": "Acero con zafiro, 300 m", "coste": 69.57}], "esf": [], "brz": [{"id": "B00", "nombre": "La que viene con la caja", "v": [{"ref": "", "nom": "Caucho negro", "c": 0, "foto": "Brz-Diver-Pack"}]}, {"id": "B02", "nombre": "Acero 316L, cierre desplegable", "v": [{"ref": "Brz-316-A02", "nom": "Plata", "c": 28.39}]}, {"id": "B03", "nombre": "Acero 316L macizo", "v": [{"ref": "Brz-316-A05", "nom": "Tres eslabones", "c": 21.79}, {"ref": "Brz-316-A06", "nom": "Cinco eslabones", "c": 21.79}]}, {"id": "B06", "nombre": "Acero 316L macizo, eslabón ancho", "v": [{"ref": "Brz-316-A10", "nom": "Tres eslabones", "c": 59.69}]}, {"id": "B07", "nombre": "Acero 316L macizo, eslabón fino", "v": [{"ref": "Brz-316-A11", "nom": "Cinco eslabones", "c": 78.39}]}, {"id": "B08", "nombre": "Acero 904L macizo", "v": [{"ref": "Brz-904-A12", "nom": "Mate cepillado", "c": 55.39}, {"ref": "Brz-904-A13", "nom": "Brillante pulido", "c": 55.39}]}, {"id": "B09", "nombre": "Acero 904L, eslabones planos", "v": [{"ref": "Brz-904-A14", "nom": "Plata 5 eslabones", "c": 23.79}, {"ref": "Brz-904-A17", "nom": "Plata 3 eslabones cepillado/mate", "c": 23.79}, {"ref": "Brz-904-A18", "nom": "Plata 3 eslabones pulido", "c": 23.79}]}, {"id": "B13", "nombre": "Caucho con hebilla de acero", "v": [{"ref": "Brz-Goma-G04", "nom": "Naranja", "c": 6.39}, {"ref": "Brz-Goma-G05", "nom": "Azul", "c": 6.39}]}, {"id": "B14", "nombre": "Caucho fluorado, cierre desplegable", "v": [{"ref": "Brz-Caucho-C01", "nom": "Azul real blanco 01", "c": 18.29}, {"ref": "Brz-Caucho-C05", "nom": "Azul real blanco", "c": 13.19}, {"ref": "Brz-Caucho-C07", "nom": "Naranja blanco", "c": 13.19}, {"ref": "Brz-Caucho-C14", "nom": "Naranja blanco 01", "c": 18.39}, {"ref": "Brz-Caucho-C21", "nom": "Naranja blanco 02", "c": 19.19}, {"ref": "Brz-Caucho-C26", "nom": "Azul real blanco 02", "c": 19.59}]}, {"id": "B15", "nombre": "Tela de vela, hebilla mariposa", "v": [{"ref": "Brz-Nailon-N01", "nom": "Rojo", "c": 6.49}, {"ref": "Brz-Nailon-N02", "nom": "Naranja", "c": 6.49}, {"ref": "Brz-Nailon-N03", "nom": "Gris", "c": 6.39}, {"ref": "Brz-Nailon-N04", "nom": "Negro", "c": 6.49}, {"ref": "Brz-Nailon-N05", "nom": "Azul", "c": 6.49}, {"ref": "Brz-Nailon-N06", "nom": "Verde", "c": 6.49}, {"ref": "Brz-Nailon-N07", "nom": "Caqui", "c": 6.49}]}, {"id": "B16", "nombre": "Lona de nailon, liberación rápida", "v": [{"ref": "Brz-Lona-L01", "nom": "Negro", "c": 5.39}, {"ref": "Brz-Lona-L02", "nom": "Negro hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L03", "nom": "Gris", "c": 6.09}, {"ref": "Brz-Lona-L04", "nom": "Gris hebilla negra", "c": 5.39}, {"ref": "Brz-Lona-L05", "nom": "Verde militar", "c": 5.49}, {"ref": "Brz-Lona-L06", "nom": "Verde militar hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L07", "nom": "Azul marino", "c": 5.39}, {"ref": "Brz-Lona-L08", "nom": "Caqui hebilla negra", "c": 6.09}, {"ref": "Brz-Lona-L09", "nom": "Caqui", "c": 5.99}, {"ref": "Brz-Lona-L10", "nom": "Azul marino hebilla negra", "c": 6.09}]}], "ejes": {"mov": {"tarjetas": {"M1": "Cuarzo japonés", "M2": "Automático suizo"}}, "caja": {"apunte": "con su esfera, sus agujas y su correa de caucho negra"}, "esf": {}, "brz": {"nombres": {"B00": "Caucho negro"}}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "completas": {}, "peques": {}, "cierres": {"B02": "/assets/img/piezas/cierres/B02.webp?v=c6dc066d", "B03": "/assets/img/piezas/cierres/B03.webp?v=28f80629", "B08": "/assets/img/piezas/cierres/B08.webp?v=c6dc066d"}, "cierresNom": {}, "cierresFam": {}, "detallePies": {}, "solape": 80}</script>
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=11"></script>
-<script src="/assets/js/configurador-v2.js?v=69"></script>
+<script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
