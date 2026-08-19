@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=32">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=33">
 <style>
   /* Las fotos del Bitácora vienen sobre blanco puro de estudio: el
      marco se pone blanco para que no se vea el recorte del lienzo. */
@@ -82,13 +82,6 @@
           <span class="cv2-chip">LO-04 · Deportivo Integrado</span>
         </div>
         <h1>Bitácora</h1>
-      <!-- El pie de compra: fijo bajo las elecciones hasta la Ficha Técnica -->
-      <div class="pv-pie" data-pv-pie>
-          <div class="pv-precio-fila">
-            <p class="pv-precio" data-pv-precio>319,90 €</p>
-            <p class="pv-stock"><span>Disponible</span><i aria-hidden="true"></i></p>
-          </div>
-          <p class="pv-imp">Impuestos incluidos.</p>
           <p class="pv-desc">Nuestro homenaje al <b>Nautilus</b>. La silueta del ojo de buey —caja fina,
             bisel integrado y las dos guardas laterales—, esfera con surcos horizontales y brazalete
             que nace de la caja, al precio honesto.</p>
@@ -113,25 +106,33 @@
             <div class="pv-opciones" data-pv="brz"></div>
           </div>
 
-          <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
-          <!-- La caja de Klarna, debajo del botón. OJO: solo se anuncia lo
-               que Mollie tiene aprobado —tres plazos sin intereses—. Nada
-               de «desde X €/mes con su TAE»: eso es financiación a largo
-               plazo, otro producto, y anunciarla sin tenerla sería
-               publicidad financiera falsa. -->
-          <p class="pv-klarna">
-            <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>—</b> con</span>
-            <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
-            <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
-          </p>
+      <!-- El pie de compra: fijo bajo las elecciones, con el precio,
+           el botón y Klarna juntos, como en el Lunar. -->
+      <div class="pv-pie" data-pv-pie>
+            <div class="pv-precio-fila">
+              <p class="pv-precio" data-pv-precio>319,90 €</p>
+              <p class="pv-stock"><span>Disponible</span><i aria-hidden="true"></i></p>
+            </div>
+            <p class="pv-imp">Impuestos incluidos.</p>
+            <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+            <!-- La caja de Klarna, debajo del botón. OJO: solo se anuncia lo
+                 que Mollie tiene aprobado —tres plazos sin intereses—. Nada
+                 de «desde X €/mes con su TAE»: eso es financiación a largo
+                 plazo, otro producto, y anunciarla sin tenerla sería
+                 publicidad financiera falsa. -->
+            <p class="pv-klarna">
+              <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>—</b> con</span>
+              <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+              <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
+            </p>
 
-          <div class="pv-confianza">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 3 años*</span>
-          </div>
-          <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
-        </div>
+            <div class="pv-confianza">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 3 años*</span>
+            </div>
+            <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
       </div>
+        </div>
     </aside>
 
   </div>
