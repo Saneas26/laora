@@ -139,6 +139,14 @@
 .pv-confianza span{display:flex;align-items:center;gap:8px}
 .pv-confianza svg{width:20px;height:20px;stroke:var(--cv2-oro);flex:0 0 auto}
 
+/* El asterisco de la garantía, explicado donde se lee. La ley da 3
+   años a cualquiera; los 5 son del Club. Decir «5 años» a secas y que
+   luego resulte que no, es de las cosas que hunden una marca. */
+.pv-nota-garantia{
+  margin-top:10px;font-size:12px;line-height:1.5;color:var(--cv2-gris);
+}
+.pv-nota-garantia a{color:inherit;text-decoration:underline}
+
 /* ---------- LA FICHA TÉCNICA ---------- */
 .pv-tecnica{
   max-width:1440px;margin:0 auto;padding:40px 64px 80px;
