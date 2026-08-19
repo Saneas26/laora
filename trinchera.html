@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=28">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=29">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -63,13 +63,11 @@
              alt="Forro interior de piel genuina del nato" hidden>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
-      <!-- LA GALERÍA YA NO ES UN ÁLBUM, ES UN SELECTOR (19/08/2026).
-           Eran seis macros fijas que valían para cualquier configuración y
-           que ya no existen: las sustituye la serie maestra del Murph, que
-           enseña las seis combinaciones de la caja elegida —tres pieles por
-           dos esferas— y cambia el reloj al pulsarlas. Lo pinta el guion. -->
-      <div class="pv-extras" data-pv-minis></div>
-
+      <!-- LA GALERÍA SON DOS FOTOS Y NADA MÁS (Óscar, 19/08/2026): la de
+           muñeca y la inclinada. Aquí hubo un rato un selector con las seis
+           combinaciones de la caja elegida; se retira porque las elecciones
+           ya están en el configurador de la derecha y repetirlas abajo era
+           decir dos veces lo mismo. -->
       <!-- Las dos de galería del 19/08/2026: la muñeca y la vista inclinada.
            No son configuraciones, son fotos de catálogo, así que van fijas
            debajo del selector y no cambian con lo que elijas. -->
@@ -507,23 +505,6 @@
       }
     }
 
-    /* La galería de debajo: las seis combinaciones de la caja elegida —tres
-       pieles por dos esferas—, y al pulsarlas cambia el reloj. Cuando la
-       caja no es de la serie (bronce o negra) se enseña la de acero, que es
-       la de referencia. */
-    var cajaSerie = MURPH_CAJA[e.caja] ? e.caja : 'PL';
-    var minis = [];
-    ['PIELV', 'PIELN', 'PIELM'].forEach(function (co) {
-      ['MA', 'MB'].forEach(function (es) {
-        var n = murphFoto(cajaSerie, co, es);
-        minis.push('<button type="button" class="pv-mini" data-mini-correa="' + co + '" data-mini-esf="' + es + '"' +
-                   ' aria-pressed="' + (e.estilo === 'M' && e.caja === cajaSerie && e.correa === co && e.esf === es) + '"' +
-                   ' aria-label="' + CORREAS[co].nombre + ', ' + ESFERAS[es].nombre + '">' +
-                   '<img src="' + MURPH_IMG + '480/' + n + '.avif' + MURPH_V + '" alt="" loading="lazy" decoding="async">' +
-                   '</button>');
-      });
-    });
-    $('[data-pv-minis]').innerHTML = minis.join('');
     /* Cuando la foto no es exactamente la combinación elegida, se dice.
        Dos casos: la caja negra no está fotografiada con el segundero rojo,
        y el Murph con brazalete o pack se fotografió en acero, no en titanio. */
@@ -548,17 +529,6 @@
   }
 
   document.addEventListener('click', function (ev) {
-    /* Las miniaturas de la serie maestra: cambian correa y esfera de una vez
-       y, si venías de otro estilo, te meten en el Murph. */
-    var mini = ev.target.closest('[data-mini-correa]');
-    if (mini) {
-      e.estilo = 'M';
-      if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
-      e.correa = mini.dataset.miniCorrea;
-      e.esf = mini.dataset.miniEsf;
-      pinta();
-      return;
-    }
     var b = ev.target.closest('[data-pv] button');
     if (b) {
       var g = b.closest('[data-pv]').dataset.pv;
