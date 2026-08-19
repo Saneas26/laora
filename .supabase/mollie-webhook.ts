@@ -157,11 +157,12 @@ async function avisar(
       <p style="font-size:13px;color:#8a92a1;margin-top:6px">IVA y envío incluidos.</p>
       <h3 style="margin:22px 0 6px;font-size:15px">Te lo enviamos a</h3>
       <p style="font-size:14px;line-height:1.6;margin:0">${envio}</p>
-      <p style="font-size:14px;line-height:1.65;margin-top:22px">Tienes <b>14 días naturales</b>
-        desde que lo recibas para devolverlo sin dar explicaciones. Nos lo dices respondiendo a
-        este correo y te devolvemos el dinero entero, por el mismo medio con el que pagaste.
-        No hay formularios ni preguntas.</p>
-      <p style="font-size:14px;line-height:1.65">Tu reloj lleva <b>3 años de garantía</b>, con
+      <p style="font-size:14px;line-height:1.65;margin-top:22px">Tienes <b>30 días</b>
+        desde que lo recibas para devolverlo sin dar explicaciones —la ley obliga a 14 y
+        nosotros te damos el doble—. Nos lo dices respondiendo a este correo y te devolvemos
+        el dinero entero, por el mismo medio con el que pagaste. No hay formularios ni preguntas.</p>
+      <p style="font-size:14px;line-height:1.65">Tu reloj lleva <b>3 años de garantía</b>, que es
+        la que da la ley, <b>y 5 por ser del Club laOra</b>, que va incluido con tu reloj. Con
         servicio técnico propio en España.</p>
       <p style="font-size:13px;color:#8a92a1;line-height:1.6">Puedes ver tu pedido en
         <a href="${WEB}/cuenta" style="color:#C9A227">tu cuenta</a>. Guarda este correo: es tu
@@ -248,6 +249,18 @@ Deno.serve(async (req) => {
       const tocado = (await up.json())[0];
 
       if (tocado && (cambios.estado === 'pagado' || cambios.estado === 'autorizado')) {
+        /* EL CLUB VA INCLUIDO CON EL RELOJ, que es lo que promete su
+           página. Se apunta aquí, al confirmarse el primer pago, y de
+           eso depende que su garantía sea de 5 años en vez de 3. Si ya
+           estaba apuntado, la función no hace nada. */
+        try {
+          await fetch(`${SB}/rest/v1/rpc/apuntar_al_club`, {
+            method: 'POST',
+            headers: { ...cabeceras, Prefer: 'return=minimal' },
+            body: JSON.stringify({ p_socio: tocado.socio_id }),
+          });
+        } catch (e) { console.error('club:', e); }
+
         // Que falle un correo no puede hacer que Mollie reintente el
         // webhook: el pedido ya está bien anotado, que es lo que importa.
         try { await avisar(tocado, leer, cambios.estado === 'autorizado'); }

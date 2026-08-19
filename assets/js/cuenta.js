@@ -84,7 +84,7 @@
       return s;
     }
     if (p.estado === 'entregado') {
-      return 'Entregado. Tu garantía de 3 años cuenta desde ese día.';
+      return 'Entregado. Tu garantía echa a andar ese día.';
     }
     return '';
   }
@@ -268,6 +268,19 @@
     });
   }
 
+  /* ---------- el Club ----------
+     La ley da 3 años de garantía a cualquiera. El Club los sube a 5, y
+     va incluido con el reloj: se es socio desde que se paga el primero.
+     Se dice solo cuando ya es verdad; prometerlo antes sería vender
+     humo en su propia cuenta. */
+  function pintarClub(socio) {
+    var caja = document.querySelector('[data-club]');
+    if (!caja || !socio || !socio.club_desde) return;
+    caja.innerHTML = 'Eres <b>socio del Club laOra</b> desde el ' + esc(fecha(socio.club_desde)) +
+      '. Por eso tu garantía es de <b>5 años</b> y no de los 3 que da la ley.';
+    caja.hidden = false;
+  }
+
   /* ---------- abrir la cuenta ---------- */
   var SOCIO = {};
 
@@ -286,7 +299,7 @@
       document.querySelector('[data-cargando]').hidden = true;
 
       var socio = (r[0] || [])[0];
-      if (socio) { SOCIO = socio; ponerDatos(socio); }
+      if (socio) { SOCIO = socio; ponerDatos(socio); pintarClub(socio); }
 
       var pedidos = r[1] || [];
       var relojes = r[2] || [];

@@ -44,8 +44,8 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 7
-V_JS = 10
+V_CSS = 8
+V_JS = 11
 V_SESION = 6
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
@@ -133,6 +133,10 @@ PAGINA = f"""<!DOCTYPE html>
     </header>
 
     <p class="cu-cargando" data-cargando>Abriendo tu cuenta…</p>
+
+    <!-- La ventaja del Club que se puede tocar: la garantía. Se pinta
+         solo cuando es verdad, es decir, cuando ya es socio. -->
+    <p class="cu-club" data-club hidden></p>
 
     <!-- ---------- mi colección ---------- -->
     <section class="cu-bloque" data-bloque-relojes hidden>

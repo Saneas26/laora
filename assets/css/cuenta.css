@@ -160,3 +160,10 @@ body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);
    mandado el enlace. Mismo remedio que en el carrito.
    ============================================================ */
 [hidden]{display:none !important}
+
+/* La ventaja del Club que se puede tocar: los 5 años de garantía.
+   Solo se pinta cuando ya es socio, que es cuando es verdad. */
+.cu-club{margin-top:26px;padding:16px 20px;background:var(--paper);
+         border:1px solid var(--gold);border-radius:14px;
+         font-size:15.5px;line-height:1.6}
+.cu-club b{font-weight:700}
