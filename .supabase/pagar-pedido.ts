@@ -79,6 +79,15 @@ const METODOS: Record<string, string | string[] | null> = {
   klarna: 'klarna',
 };
 
+/* Los que NO pasan por la pasarela: se cobran a mano y el pedido se
+   queda «sin cobrar» en el panel hasta que Óscar vea el dinero.
+   Los datos viven aquí y no en el JavaScript de la web: así solo los
+   ve quien ha hecho un pedido de verdad y ha entrado con su correo,
+   y el número no queda suelto en una página pública. */
+const A_MANO: Record<string, boolean> = { bizum: true, paypal: true };
+const BIZUM = '676693237';
+const PAYPAL = 'https://paypal.me/saneascom';
+
 async function quienEs(token: string, url: string, anon: string) {
   const r = await fetch(`${url}/auth/v1/user`, {
     headers: { Authorization: `Bearer ${token}`, apikey: anon },
@@ -120,7 +129,9 @@ Deno.serve(async (req) => {
   if (!/^[A-Za-z0-9-]+$/.test(numero)) return json({ error: 'falta el número del pedido' }, 400);
 
   const metodoPedido = String(cuerpo?.metodo || '');
-  if (!(metodoPedido in METODOS)) return json({ error: 'forma de pago no válida' }, 400);
+  if (!(metodoPedido in METODOS) && !A_MANO[metodoPedido]) {
+    return json({ error: 'forma de pago no válida' }, 400);
+  }
   const metodoMollie = METODOS[metodoPedido];
 
   const rest = (ruta: string, opciones: RequestInit = {}) =>
@@ -153,6 +164,24 @@ Deno.serve(async (req) => {
   }
   if (pedido.estado === 'cancelado') {
     return json({ error: 'Este pedido está cancelado.' }, 409);
+  }
+
+  /* ---------- los que se cobran a mano ----------
+     Aquí no se crea ningún pago: se anota con qué piensa pagar y se le
+     devuelven los datos. El pedido sigue «solicitado» hasta que Óscar
+     vea el ingreso y lo marque en el panel. */
+  if (A_MANO[metodoPedido]) {
+    await rest(`pedidos?id=eq.${pedido.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ metodo: metodoPedido, actualizado_en: new Date().toISOString() }),
+    });
+    return json({
+      ok: true, manual: true,
+      importe: dos(Number(pedido.total)),
+      concepto: pedido.numero,
+      bizum: BIZUM,
+      paypal: `${PAYPAL}/${dos(Number(pedido.total))}EUR`,
+    });
   }
 
   /* ---------- ¿ya había un pago abierto? ----------

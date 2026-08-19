@@ -44,8 +44,8 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 7
-V_JS = 7
+V_CSS = 8
+V_JS = 8
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
@@ -181,6 +181,23 @@ PAGINA = f"""<!DOCTYPE html>
         <b>Klarna, en 3 plazos</b>
         <small>3 pagos de <span data-plazo>—</span>, sin intereses (0&nbsp;% TAE)</small>
       </button>
+      <button type="button" data-metodo="bizum" aria-pressed="false">
+        <b>Bizum o PayPal</b>
+        <small>Te damos los datos y lo confirmamos a mano</small>
+      </button>
+    </div>
+
+    <!-- Los que no pasan por la pasarela. Los datos los pone el
+         servidor al pulsar: no están en esta página. -->
+    <div class="ca-manual" data-manual hidden>
+      <p class="ca-manual-que">Haz un <b>Bizum de <span data-manual-importe></span></b> al número</p>
+      <p class="ca-manual-numero" data-manual-bizum></p>
+      <p class="ca-manual-que">poniendo <b data-manual-concepto></b> en el concepto,
+        <button type="button" class="ca-copiar" data-copiar>copiar</button></p>
+      <p class="ca-manual-o">o si lo prefieres,
+        <a data-manual-paypal href="#" target="_blank" rel="noopener">paga con PayPal →</a></p>
+      <p class="ca-manual-fin">En cuanto veamos el ingreso te lo confirmamos por correo,
+        normalmente el mismo día. Tu pedido está guardado y no se pierde.</p>
     </div>
 
     <button class="ca-pagar" type="button" data-pagar>Pagar <span data-total-boton></span></button>
