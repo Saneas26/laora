@@ -497,7 +497,8 @@
       } else {
         if (e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
-        if (anteIt) e.esf = 'KB';   /* el ante del acero solo con la 12/24 */
+        /* 19/08/2026: el ante del acero ya no obliga al segundero blanco.
+           Se forzaba porque era la única foto; ahora existen las dos. */
       }
       if (e.correa !== 'NATOP') e.color = 'NEG';
     }
@@ -581,9 +582,12 @@
       botones('esf', e.estilo === 'M'
         ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
         /* Con piel italiana en bronce o titanio solo está fotografiada la
-           12/24 de segundero blanco: la del segundero rojo se tacha. */
+           12/24 de segundero blanco: la del segundero rojo se tacha. Con el
+           ante pasaba lo mismo, pero el acero ya tiene sus dos fotos, así
+           que ahí solo se tacha en el PVD negro y en el bronce. */
         : [['KR', 'Khaki, Segundero Rojo',
-            (conPiel1224 && (esBronce || esTitanio)) || (e.correa === 'ANTE' && !!K1224_ANTE_CAJA[e.caja])],
+            (conPiel1224 && (esBronce || esTitanio)) ||
+            (e.correa === 'ANTE' && e.caja !== 'PL' && !!K1224_ANTE_CAJA[e.caja])],
            ['KB', 'Khaki, Segundero Blanco']], e.esf);
     }
 
