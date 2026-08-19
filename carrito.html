@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/carrito.css?v=7">
+<link rel="stylesheet" href="/assets/css/carrito.css?v=8">
 </head>
 <body>
 
@@ -122,6 +122,23 @@
         <b>Klarna, en 3 plazos</b>
         <small>3 pagos de <span data-plazo>—</span>, sin intereses (0&nbsp;% TAE)</small>
       </button>
+      <button type="button" data-metodo="bizum" aria-pressed="false">
+        <b>Bizum o PayPal</b>
+        <small>Te damos los datos y lo confirmamos a mano</small>
+      </button>
+    </div>
+
+    <!-- Los que no pasan por la pasarela. Los datos los pone el
+         servidor al pulsar: no están en esta página. -->
+    <div class="ca-manual" data-manual hidden>
+      <p class="ca-manual-que">Haz un <b>Bizum de <span data-manual-importe></span></b> al número</p>
+      <p class="ca-manual-numero" data-manual-bizum></p>
+      <p class="ca-manual-que">poniendo <b data-manual-concepto></b> en el concepto,
+        <button type="button" class="ca-copiar" data-copiar>copiar</button></p>
+      <p class="ca-manual-o">o si lo prefieres,
+        <a data-manual-paypal href="#" target="_blank" rel="noopener">paga con PayPal →</a></p>
+      <p class="ca-manual-fin">En cuanto veamos el ingreso te lo confirmamos por correo,
+        normalmente el mismo día. Tu pedido está guardado y no se pierde.</p>
     </div>
 
     <button class="ca-pagar" type="button" data-pagar>Pagar <span data-total-boton></span></button>
@@ -143,8 +160,8 @@
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/sesion.js?v=7"></script>
-<script src="/assets/js/carrito.js?v=7"></script>
-<script src="/assets/js/carrito-pantalla.js?v=7"></script>
+<script src="/assets/js/sesion.js?v=8"></script>
+<script src="/assets/js/carrito.js?v=8"></script>
+<script src="/assets/js/carrito-pantalla.js?v=8"></script>
 </body>
 </html>

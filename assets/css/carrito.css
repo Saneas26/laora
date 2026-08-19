@@ -143,6 +143,27 @@ body{margin:0;background:var(--ivory);color:var(--ink);
   .ca-metodos{grid-template-columns:1fr}
 }
 
+/* ---------- pagar a mano ----------
+   Lo importante en grande: el número al que hay que mandar el Bizum y
+   el concepto que hay que poner. Si esto se lee mal, el ingreso llega
+   suelto y hay que ir a buscarlo. */
+.ca-manual{
+  margin:4px 0 16px;padding:18px 20px;
+  background:var(--ivory);border:1px solid var(--gold);border-radius:12px;
+}
+.ca-manual-que{font-size:15px;line-height:1.6;margin:0}
+.ca-manual-numero{
+  font-size:30px;font-weight:700;letter-spacing:.04em;
+  margin:6px 0 10px;color:var(--ink);
+}
+.ca-manual-o{font-size:15px;margin:12px 0 0}
+.ca-manual-o a{color:var(--gold);font-weight:700}
+.ca-manual-fin{font-size:13.5px;line-height:1.55;color:var(--muted);margin:14px 0 0}
+.ca-copiar{
+  font:inherit;font-size:13px;font-weight:700;color:var(--gold);
+  background:none;border:0;padding:0 2px;cursor:pointer;text-decoration:underline;
+}
+
 @media (max-width:640px){
   .ca-form,.ca-factura{grid-template-columns:1fr}
 }

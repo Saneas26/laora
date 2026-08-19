@@ -284,11 +284,49 @@
   var metodo = '';
   var avisoPagar = document.querySelector('[data-aviso-pagar]');
   var cajaMetodos = document.querySelector('[data-metodos]');
+  var cajaManual = document.querySelector('[data-manual]');
+
+  var aMano = function () { return metodo === 'bizum' || metodo === 'paypal'; };
 
   function pintarMetodo() {
     if (!cajaMetodos) return;
     Array.prototype.forEach.call(cajaMetodos.querySelectorAll('button'), function (b) {
       b.setAttribute('aria-pressed', String((b.dataset.metodo || '') === metodo));
+    });
+    /* El botón dice lo que va a pasar: con Bizum no se paga aquí, se
+       enseñan los datos. Prometer «Pagar» y no cobrar nada confunde. */
+    var b = document.querySelector('[data-pagar]');
+    if (b) {
+      b.firstChild.nodeValue = aMano() ? 'Ver cómo pagar ' : 'Pagar ';
+      var tot = b.querySelector('[data-total-boton]');
+      if (tot) tot.hidden = aMano();
+    }
+    if (cajaManual && !aMano()) cajaManual.hidden = true;
+  }
+
+  /* Los datos del pago a mano los pone el servidor, no esta página. */
+  function pintarAMano(d) {
+    if (!cajaManual) return;
+    document.querySelector('[data-manual-importe]').textContent =
+      String(d.importe).replace('.', ',') + ' €';
+    var n = String(d.bizum || '');
+    document.querySelector('[data-manual-bizum]').textContent =
+      n.length === 9 ? n.slice(0, 3) + ' ' + n.slice(3, 6) + ' ' + n.slice(6) : n;
+    document.querySelector('[data-manual-concepto]').textContent = d.concepto;
+    document.querySelector('[data-manual-paypal]').href = d.paypal;
+    cajaManual.hidden = false;
+    cajaManual.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  var copiar = document.querySelector('[data-copiar]');
+  if (copiar) {
+    copiar.addEventListener('click', function () {
+      var t = document.querySelector('[data-manual-concepto]').textContent;
+      try {
+        navigator.clipboard.writeText(t);
+        copiar.textContent = 'copiado';
+        setTimeout(function () { copiar.textContent = 'copiar'; }, 2000);
+      } catch (e) {}
     });
   }
 
@@ -326,6 +364,16 @@
         return r.json().then(function (d) { return { ok: r.ok, d: d }; });
       }).then(function (res) {
         if (res.d && res.d.pagado) { olvidar(); throw new Error('Este pedido ya está pagado. Gracias.'); }
+
+        /* A mano no se va a ninguna parte: los datos se enseñan aquí. */
+        if (res.ok && res.d.manual) {
+          laoraCarritoVaciar();
+          pintarAMano(res.d);
+          decir(avisoPagar, '');
+          botonPagar.disabled = false;
+          return;
+        }
+
         if (!res.ok || !res.d.url) throw new Error(res.d && res.d.error ? res.d.error : 'no se pudo abrir el pago');
         /* La cesta ya no hace falta: lo que vale a partir de aquí es el
            pedido, que está escrito y se ve en «tu cuenta». */
