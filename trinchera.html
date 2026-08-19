@@ -57,19 +57,14 @@
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
       <div class="pv-hero">
-        <p class="pv-nota" data-pv-nota hidden>Imagen de la caja en acero plata</p>
-        <img data-pv-foto
-          src="/assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=4"
-          srcset="/assets/img/trinchera-2026/murph/480/acero-negra-crema.avif?v=4 480w, /assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=4 1200w, /assets/img/trinchera-2026/murph/1600/acero-negra-crema.avif?v=4 1600w"
-          sizes="(max-width:900px) 100vw, 46vw"
-          alt="laOra Trinchera">
-        <img class="pv-forro" data-pv-forro src="/assets/img/trinchera-2026/forro-piel.webp"
-             alt="Forro interior de piel genuina del nato" hidden>
-        <!-- La hebilla elegida, en pequeño y en su esquina, igual que en el
-             Lunar: comparten las mismas cinco fotos. -->
-        <div class="pv-minis">
-          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Trinchera" hidden
-               src="/assets/img/lunar-config/buckles/plata.avif?v=2">
+        <!-- SIN FOTOGRAFÍA (Óscar, 19/08/2026): «quiero comenzar de cero sin
+             imágenes que no sirven». El visor queda vacío a propósito hasta
+             que entre la serie nueva. Las TABLAS de lo que existe —qué caja
+             admite qué correa y qué esfera— se quedan: eso es catálogo, no
+             fotografía. Lo único que se ha ido son las imágenes. -->
+        <div class="pv-sinfoto" data-pv-sinfoto>
+          <p>Fotografía en preparación</p>
+          <span>Estamos rehaciendo todas las imágenes del Trinchera. Las medidas, los materiales y el precio son los definitivos.</span>
         </div>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
@@ -328,115 +323,14 @@
     CAQ: ['Caqui', '#8a7a55'],  VER: ['Verde', '#4a5a3a'],  GRI: ['Gris', '#6f7276'],
     NAR: ['Naranja', '#c9661e']
   };
-  var FOTOS = {
-    'KR-NATO': ['krojo-nato', 3983],  'KB-NATO': ['kblanco-nato', 3922],
-    'KR-PIELN': ['krojo-pieln', 3968],'KB-PIELN': ['kblanco-pieln', 3926],
-    'KR-PIELM': ['krojo-pielm', 3968],'KB-PIELM': ['kblanco-pielm', 3946],
-    'KR-ACERO': ['krojo-acero', 3977],'KB-ACERO': ['kblanco-acero', 3978],
-    'MA-PACK': ['pack-murph-amarillo', 3973], 'MB-PACK': ['pack-murph-blanco', 3973],
-    'MA-PIELN': ['murph-amarillo-pieln', 4331], 'MB-PIELN': ['murph-blanco-pieln', 4313],
-    'MA-ACERO': ['murph-amarillo-acero', 4146], 'MB-ACERO': ['murph-blanco-acero', 4138],
-    'NG-NATON': ['negra-nato', 4096], 'NG-PIELN': ['negra-pieln', 4096],
-    'BRONCE': ['bronce-ante', 4152],
-    'TI-ANTE': ['titanio-ante', 4151], 'TI-PIELO': ['titanio-pielo', 4154]
-  };
-  /* LA SERIE MAESTRA DEL MURPH (19/08/2026). Doce fotos de verdad:
-     dos cajas × tres pieles × dos esferas. Mandan ellas: si una
-     combinación está aquí, existe; si no, no se fotografió. */
-  /* La versión va en la dirección de la foto porque el borde de Cloudflare
-     las guarda cuatro horas y los nombres no cambian: sin esto, quien haya
-     entrado hoy seguiría viendo las de antes. Se sube al retocarlas. */
-  var MURPH_V = '?v=4';
-  var MURPH_IMG = '/assets/img/trinchera-2026/murph/';
+  /* Lo que EXISTE del Murph: dos cajas, tres pieles, dos esferas, cuatro
+     antes y dos pespuntes. Son tablas de catálogo, no de fotos. */
   var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
   var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
   var MURPH_ESF    = { MA: 'crema', MB: 'blanco' };
   /* El brazalete y el pack se fotografiaron el 19/08/2026, pero solo en
      acero y con los numerales crema. Van aparte porque no siguen la regla
      de caja × piel × esfera: son dos fotos concretas y nada más. */
-  var MURPH_SUELTAS = { 'PL-ACERO-MA': 'acero-brazalete-crema', 'PL-PACK-MA': 'acero-pack-crema' };
-  var MURPH_ANTE = { NEG: 'negro', MOS: 'marronoscuro', AZU: 'azul', MCL: 'marronclaro' };
-  /* La piel italiana del Murph, rehecha el 19/08/2026: tres colores por dos
-     pespuntes por dos esferas, y TODAS en acero. Con ellas desaparece la
-     piel en titanio, que era de la serie anterior. */
-  var MURPH_PESP = { B: 'pblanco', T: 'ptono' };
-  var PESPUNTES = { B: 'Blanco', T: 'A tono' };
-  function murphFoto(caja, correa, esf, ante, pesp) {
-    /* El ante: cuatro colores por dos esferas, en las DOS cajas desde el
-       19/08/2026, que es cuando llegó el titanio gris natural. */
-    if (correa === 'ANTE' && MURPH_CAJA[caja] && MURPH_ANTE[ante] && MURPH_ESF[esf]) {
-      return MURPH_CAJA[caja] + '-ante-' + MURPH_ANTE[ante] + '-' + MURPH_ESF[esf];
-    }
-    var suelta = MURPH_SUELTAS[caja + '-' + correa + '-' + esf];
-    if (suelta) return suelta;
-    /* Piel italiana: tres colores por dos pespuntes por dos esferas, en las
-       dos cajas. */
-    if (MURPH_CAJA[caja] && MURPH_CORREA[correa] && MURPH_ESF[esf] && MURPH_PESP[pesp]) {
-      return MURPH_CAJA[caja] + '-' + MURPH_CORREA[correa] + '-' + MURPH_PESP[pesp] + '-' + MURPH_ESF[esf];
-    }
-    return null;
-  }
-  /* Fotos cuyo maestro no llega a 1.600 px: se publica hasta donde hay
-     píxeles de verdad y no se ofrece un tamaño inventado. */
-  var MURPH_TOPE = { 'acero-pack-crema': 1200 };
-  function murphSrcset(nombre) {
-    var tope = MURPH_TOPE[nombre] || 1600;
-    var trozos = [];
-    [480, 1200, 1600].forEach(function (s) {
-      if (s <= tope) trozos.push(MURPH_IMG + s + '/' + nombre + '.avif' + MURPH_V + ' ' + s + 'w');
-    });
-    return trozos.join(', ');
-  }
-
-  /* LOS CINCO CIERRES DE LA PIEL (19/08/2026). Óscar: «este tipo de cierre
-     va asociado a la correa de piel, así que donde usemos esa correa también
-     tienen que ir asociados». Son los mismos cinco de la ficha del Lunar y
-     comparten sus fotos.
-
-     El precio NO se copia del Lunar: allí el coste del cierre incluye su
-     propia correa (29,99 € la de plata). Aquí la piel ya cuesta 13,69 con su
-     hebilla clásica plateada, así que lo que se aplica es la DIFERENCIA
-     entre cierres que marca el proveedor en la lista del Lunar: la plata es
-     la base y las demás suben o bajan sobre ella. Si el proveedor cobra otra
-     cosa por estos en 20 mm, se corrige aquí. */
-  var CIERRES = {
-    'plata':    { nombre: 'Clásica plata',    extra:  0.00, tec: 'hebilla clásica de acero plateado' },
-    'negra':    { nombre: 'Clásica negra',    extra:  1.20, tec: 'hebilla clásica de acero con PVD negro' },
-    'oro-rosa': { nombre: 'Clásica oro rosa', extra: -0.40, tec: 'hebilla clásica en oro rosa' },
-    'oro':      { nombre: 'Clásica oro',      extra:  1.00, tec: 'hebilla clásica dorada' },
-    'mariposa': { nombre: 'Mariposa plata',   extra:  0.20, tec: 'cierre de mariposa de acero plateado' }
-  };
-  var CIERRE_IMG = '/assets/img/lunar-config/buckles/';
-  /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
-  function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
-
-  /* LA SERIE 12/24 DEL KHAKI (19/08/2026). Doce fotos: las cuatro cajas
-     —acero, PVD negro, bronce y titanio gris— con las tres pieles italianas
-     de pespunte blanco y la esfera 12/24 de numerales blancos, que es la
-     KB de siempre. Con ellas, el bronce y el titanio dejan de estar atados
-     al ante: ya tienen su piel fotografiada. */
-  var K1224_IMG = '/assets/img/trinchera-2026/khaki1224/';
-  var K1224_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
-  var K1224_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde' };
-  /* El ante con la 12/24 (19/08/2026): cuatro colores en acero, PVD negro y
-     bronce. El titanio con ante sigue con su foto de antes y su esfera de
-     agujas blancas, que es lo único que hay fotografiado de esa pareja. */
-  var K1224_ANTE_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce' };
-  function khakiFoto(caja, correa, esf, ante) {
-    if (esf !== 'KB') return null;
-    if (correa === 'ANTE') {
-      if (!K1224_ANTE_CAJA[caja] || !MURPH_ANTE[ante]) return null;
-      return K1224_ANTE_CAJA[caja] + '-ante-' + MURPH_ANTE[ante];
-    }
-    if (!K1224_CAJA[caja] || !K1224_CORREA[correa]) return null;
-    return K1224_CAJA[caja] + '-' + K1224_CORREA[correa];
-  }
-  function k1224Srcset(nombre) {
-    return [480, 1200, 1600].map(function (s) {
-      return K1224_IMG + s + '/' + nombre + '.avif' + MURPH_V + ' ' + s + 'w';
-    }).join(', ');
-  }
-
   var LOGO = 3.78;
 
   var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B', cierre: 'plata' };
@@ -690,47 +584,15 @@
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
       }).join('');
     }
-    $('[data-pv-forro]').hidden = !conColor;
 
     /* LA FOTO. Primero se mira la serie maestra del Murph, que es la que
        manda; si la combinación no está ahí, se cae a las fotos de antes.
        De las viejas ya solo se sirve el tamaño de 1.200: los maestros de
        4.000 px no se publican. */
-    var img = $('[data-pv-foto]');
-    var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf, e.ante, e.pesp) : null;
-    var del1224 = !deLaSerie && e.estilo === 'K' ? khakiFoto(e.caja, e.correa, e.esf, e.ante) : null;
-    if (deLaSerie) {
-      img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif' + MURPH_V;
-      img.srcset = murphSrcset(deLaSerie);
-    } else if (del1224) {
-      img.src = K1224_IMG + '1200/' + del1224 + '.avif' + MURPH_V;
-      img.srcset = k1224Srcset(del1224);
-    } else {
-      /* El Murph con brazalete o con el pack sigue teniendo su foto de
-         antes, que se hizo con la caja de acero: si la caja elegida es el
-         titanio se avisa con la nota de siempre en vez de enseñar otra cosa. */
-      var clave = e.estilo === 'M' ? e.esf + '-' + e.correa
-                : esBronce ? 'BRONCE'
-                : esTitanio ? 'TI-' + e.correa
-                : esNegra ? 'NG-' + (e.correa === 'NATOP' ? 'NATON' : e.correa)
-                : e.esf + '-' + (e.correa === 'NATOP' ? 'NATO' : e.correa);
-      var f = FOTOS[clave];
-      if (f) {
-        img.src = IMG + '1200/' + f[0] + '.webp';
-        img.srcset = IMG + '1200/' + f[0] + '.webp 1200w';
-      }
-    }
-
-    /* Cuando la foto no es exactamente la combinación elegida, se dice.
-       Dos casos: la caja negra no está fotografiada con el segundero rojo,
-       y el Murph con brazalete o pack se fotografió en acero, no en titanio. */
-    /* El aviso es por la CAJA, no por la foto: con los numerales blancos la
-       foto es vieja pero la caja que se ve es la de acero, que es la
-       elegida, y ahí no hay nada que avisar. */
-    var notaAcero = e.estilo === 'M' && esTitanio && (e.correa === 'ACERO' || e.correa === 'PACK');
-    var notaSeg = esNegra && e.esf === 'KR';
-    $('[data-pv-nota]').textContent = notaAcero ? 'Imagen con la caja en acero plata' : 'Fotografiado con segundero blanco';
-    $('[data-pv-nota]').hidden = !(notaAcero || notaSeg);
+    /* LA FOTO. Retirada el 19/08/2026: ninguna combinación enseña imagen
+       hasta que entre la serie nueva. Cuando llegue, aquí van tres líneas:
+       resolver el archivo por clave, y poner `src` y `srcset` en el <img>
+       que hoy no está. */
 
     /* la ficha técnica */
     $('[data-pv-tec="caja"]').textContent =
@@ -787,7 +649,7 @@
           ? CORREAS[e.correa].nombre + ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
           : CORREAS[e.correa].nombre,
         precio: precio(),
-        foto: $('[data-pv-foto]').src
+        foto: ''   /* sin fotografía mientras se rehace la serie */
       });
       window.location.href = '/carrito.html';
     }
