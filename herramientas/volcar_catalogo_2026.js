@@ -50,24 +50,63 @@ function motorDe(fichero, exporta) {
 
   /* La ficha, fuera del navegador, no tiene ni DOM ni observadores.
      Nada de eso hace falta para calcular precios: se le pone un
-     decorado que no estorba y que devuelve siempre algo. */
-  const nodo = new Proxy({}, {
-    get: (t, k) => k === 'classList' ? { toggle() {}, add() {}, remove() {}, contains: () => false }
-      : k === 'dataset' ? {} : k === 'style' ? {}
-      : ['appendChild', 'addEventListener', 'setAttribute', 'closest', 'querySelector',
-         'scrollIntoView', 'insertBefore', 'removeChild', 'getBoundingClientRect',
-         'observe', 'unobserve', 'focus', 'remove'].includes(k) ? () => nodo : '',
-    set: () => true,
-  });
-  globalThis.document = { querySelector: () => nodo, querySelectorAll: () => [],
-                          createElement: () => nodo, addEventListener: () => {},
-                          documentElement: nodo, body: nodo };
+     decorado que no estorba y que devuelve siempre algo.
+
+     PERO EL DECORADO RECUERDA. `botones()` escribe en el `innerHTML`
+     de cada grupo la lista de opciones que el cliente ve, con su
+     `data-v` y con `disabled` en las imposibles. Guardando ese HTML
+     por selector, el enumerador puede LEER lo que la ficha ofrece en
+     vez de tener una copia de las listas: el 19/08/2026 la copia se
+     quedó vieja —la ficha ya daba «Ante» en el Murph y el catálogo no
+     lo sabía— y esas referencias se quedaron sin poder venderse. */
+  const cajas = new Map();
+
+  function hazNodo(sel) {
+    const estado = { innerHTML: '', hidden: false, textContent: '', disabled: false };
+    const nodo = new Proxy(estado, {
+      get: (t, k) => {
+        if (k in t) return t[k];
+        if (k === 'classList') return { toggle() {}, add() {}, remove() {}, contains: () => false };
+        if (k === 'dataset') return {};
+        if (k === 'style') return {};
+        if (k === 'closest' || k === 'querySelector') return () => nodo;
+        if (k === 'querySelectorAll') return () => [];
+        if (['appendChild', 'addEventListener', 'setAttribute', 'scrollIntoView',
+             'insertBefore', 'removeChild', 'getBoundingClientRect', 'observe',
+             'unobserve', 'focus', 'remove'].includes(k)) return () => nodo;
+        return '';
+      },
+      set: (t, k, v) => { t[k] = v; return true; },
+    });
+    cajas.set(sel, estado);
+    return nodo;
+  }
+
+  const nodos = new Map();
+  const nodo = (sel) => {
+    if (!nodos.has(sel)) nodos.set(sel, hazNodo(sel));
+    return nodos.get(sel);
+  };
+
+  globalThis.document = { querySelector: nodo, querySelectorAll: () => [],
+                          createElement: () => nodo('(creado)'), addEventListener: () => {},
+                          documentElement: nodo('(html)'), body: nodo('(body)') };
   globalThis.window = { location: {}, innerHeight: 800, innerWidth: 1200,
                         addEventListener: () => {}, matchMedia: () => ({ matches: false, addEventListener() {} }) };
   globalThis.IntersectionObserver = function () { return { observe() {}, unobserve() {}, disconnect() {} }; };
   globalThis.ResizeObserver = globalThis.IntersectionObserver;
   globalThis.requestAnimationFrame = () => 0;
   globalThis.fetch = () => new Promise(() => {});   // lo que haga falta se le pasa a mano
+
+  /* Las opciones que la ficha ACABA de pintar en un grupo, sin las
+     tachadas: son las que el cliente puede pulsar de verdad. */
+  globalThis.__OPCIONES = (grupo) => {
+    const caja = cajas.get('[data-pv="' + grupo + '"]');
+    if (!caja) return [];
+    return [...String(caja.innerHTML).matchAll(/data-v="([^"]+)"([^>]*)>/g)]
+      .filter((m) => !/\bdisabled\b/.test(m[2]))
+      .map((m) => m[1]);
+  };
 
   new Function(codigo)();
   return globalThis.__MOTOR();
@@ -125,67 +164,94 @@ function precisa() {
 /* ============================================================
    LO-02 · TRINCHERA
    ------------------------------------------------------------
-   AQUÍ MANDAN LOS BOTONES, NO `normaliza()`.
-   La primera versión de esto recorría el espacio entero y dejaba
-   que `normaliza()` arreglara lo imposible. Salían 64 referencias
-   que la web NO ofrece: `normaliza()` es más permisivo que las
-   listas de botones —no rechaza la piel verde en el khaki, por
-   ejemplo— y eso habría dejado al servidor aceptar relojes que no
-   se pueden pedir por ninguna pantalla.
-   Así que se copian las listas de `pinta()`, que son las que ve el
-   cliente, y se pasa cada combinación por `normaliza()` solo para
-   que ponga la tapa y limpie el color.
+   AQUÍ NO HAY NINGUNA LISTA COPIADA A MANO.
+   La primera versión de esto llevaba las opciones escritas —las
+   correas de cada caja, las esferas de cada estilo— copiadas de la
+   ficha. Duró un día: el 19/08/2026 Óscar añadió el ante al Murph y
+   a la caja negra, la copia se quedó vieja y esas referencias no se
+   podían vender, porque el servidor no las conocía.
+
+   Ahora se le PREGUNTA a la ficha. Se fija un estado, se llama a
+   `pinta()` —que es lo que hace el navegador— y se leen los botones
+   que ha dibujado, saltándose los tachados. Cambie lo que cambie
+   arriba, esto lo sigue.
    ============================================================ */
 function trinchera() {
   const L = motorDe('trinchera.html',
-    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, MURPH_CAJA, e, precio, referencia, normaliza, agua');
+    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, ANTES, PESPUNTES, CIERRES, MURPH_CORREA, ' +
+    'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
-  /* Las mismas listas que pinta la ficha, en el mismo orden. */
-  const correasDe = (estilo, caja) =>
-    estilo === 'M' ? ['PIELV', 'PIELN', 'PIELM', 'ACERO', 'PACK']
-    : caja === 'BR' ? ['ANTE']
-    : caja === 'TI' ? ['ANTE', 'PIELO']
-    : caja === 'NG' ? ['NATON', 'NATOP', 'PIELN']
-    : ['NATO', 'NATOP', 'PIELN', 'PIELM', 'ACERO'];   // el PACK sale tachado
+  /* Lo que la ficha ofrece AHORA MISMO en un grupo, con el estado
+     puesto. `pinta()` primero: es quien dibuja los botones.
+     Hay grupos que NO se dibujan —las cajas y los diámetros están
+     escritos en el HTML y la ficha solo los tacha—, así que si no hay
+     botones se cae a la tabla de datos, que para eso está. */
+  const ofrece = (grupo, deReserva) => {
+    L.pinta();
+    const v = globalThis.__OPCIONES(grupo);
+    return v.length ? v : (deReserva || []);
+  };
 
-  const esferasDe = (estilo, caja) =>
-    caja === 'BR' || (caja === 'TI' && estilo !== 'M') ? ['BRZ']
-    : estilo === 'M' ? ['MA', 'MB']
-    : ['KR', 'KB'];
-
-  const cajasDe = (estilo) =>
-    estilo === 'M' ? Object.keys(L.MURPH_CAJA) : Object.keys(L.CAJAS);
+  const pon = (cambios) => { Object.assign(L.e, cambios); L.normaliza(); };
 
   for (const estilo of ['K', 'M'])
   for (const mov of Object.keys(L.MOVS))
-  for (const diam of ['36', '39'])
-  for (const caja of cajasDe(estilo))
-  for (const esf of esferasDe(estilo, caja))
-  for (const correa of correasDe(estilo, caja))
-  for (const color of (correa === 'NATOP' ? Object.keys(L.COLORES) : ['NEG'])) {
-    Object.assign(L.e, { estilo, mov, diam, caja, esf, correa, color });
-    L.normaliza();   // pone la tapa que toca y limpia lo que sobre
-    const s = L.e;
+  for (const diam of ['36', '39']) {
+    pon({ estilo, mov, diam });
+    for (const caja of ofrece('caja', Object.keys(L.CAJAS))) {
+      pon({ estilo, mov, diam, caja });
+      if (L.e.caja !== caja) continue;          // esa caja no existe en este estilo
 
-    /* Si `normaliza()` ha tenido que cambiar algo, es que esa
-       combinación no existe: se descarta en vez de anotar otra. */
-    if (s.caja !== caja || s.esf !== esf || s.correa !== correa) continue;
+      for (const esf of ofrece('esf', [L.e.esf])) {
+        pon({ estilo, mov, diam, caja, esf });
+        if (L.e.esf !== esf) continue;
 
-    const esBronce = s.caja === 'BR';
-    n += anota(L.referencia(), L.precio(),
-      'Trinchera ' + (esBronce ? 'Bronce' : (s.caja === 'TI' ? 'Titanio' :
-        (s.correa === 'PACK' ? 'Murph Pack' :
-          (s.esf === 'MA' || s.esf === 'MB' ? 'Murph' : 'Militar')))),
-      L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
-        (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.ESFERAS[s.esf].nombre +
-        ' · ' + L.MOVS[s.mov].nombre,
-      s.correa === 'NATOP'
-        ? 'Nato + piel genuina, ' + L.COLORES[s.color][0].toLowerCase() + ', hebilla clásica'
-        : L.CORREAS[s.correa].nombre,
-      { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
-        esfera: L.ESFERAS[s.esf].tec, correa: L.CORREAS[s.correa].tec, agua: L.agua() },
-      Number(s.diam), hermanaDeDiametro(L, { estilo, mov, caja, esf, correa, color })) ? 1 : 0;
+        for (const correa of ofrece('correa', [L.e.correa])) {
+          pon({ estilo, mov, diam, caja, esf, correa });
+          if (L.e.correa !== correa) continue;
+
+          /* Las dimensiones que solo aparecen con ciertas correas: el
+             color del nato+piel, el tono del ante, el pespunte de la
+             piel del Murph y el cierre de cualquier piel. Se preguntan
+             igual, y si el grupo no está pintado, se pasa de largo. */
+          const colores   = correa === 'NATOP' ? ofrece('color', Object.keys(L.COLORES)) : [null];
+          const antes     = (correa === 'ANTE' && estilo === 'M') ? ofrece('ante', Object.keys(L.ANTES || {})) : [null];
+          const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
+
+          for (const color of colores)
+          for (const ante of antes)
+          for (const pesp of pespuntes) {
+            pon({ estilo, mov, diam, caja, esf, correa });
+            if (color) L.e.color = color;
+            if (ante) L.e.ante = ante;
+            if (pesp) L.e.pesp = pesp;
+            const cierres = L.conCierre() ? ofrece('cierre', Object.keys(L.CIERRES)) : [null];
+
+            for (const cierre of cierres) {
+              if (cierre) L.e.cierre = cierre;
+              const s = L.e;
+              const esBronce = s.caja === 'BR';
+              n += anota(L.referencia(), L.precio(),
+                'Trinchera ' + (esBronce ? 'Bronce' : (s.caja === 'TI' ? 'Titanio' :
+                  (s.correa === 'PACK' ? 'Murph Pack' :
+                    (s.esf === 'MA' || s.esf === 'MB' ? 'Murph' : 'Militar')))),
+                L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
+                  (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.ESFERAS[s.esf].nombre +
+                  ' · ' + L.MOVS[s.mov].nombre,
+                s.correa === 'NATOP'
+                  ? 'Nato + piel genuina, ' + L.COLORES[s.color][0].toLowerCase() + ', hebilla clásica'
+                  : (s.correa === 'ANTE' && s.estilo === 'M' && L.ANTES && L.ANTES[s.ante])
+                  ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
+                  : L.CORREAS[s.correa].nombre,
+                { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
+                  esfera: L.ESFERAS[s.esf].tec, correa: L.CORREAS[s.correa].tec, agua: L.agua() },
+                Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
+            }
+          }
+        }
+      }
+    }
   }
   return n;
 }
