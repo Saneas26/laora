@@ -1,0 +1,16 @@
+{
+  "capturado": "2026-08-19",
+  "pieza": "TRINCHERA · anillo espaciador del cuarzo",
+  "anuncio": "https://es.aliexpress.com/item/1005007976335088.html",
+  "titulo": "Anillo de plástico, cubierta interior y espaciador de movimiento para Ronda 515 / 515-24H, cajas LARIMOKER/BLIGER de 36-40 mm",
+  "valoracion": "5,0 sobre 39 valoraciones · 231 vendidos",
+  "precio_19_08": "2,99 € (Óscar lo da a 3,60 €) · 2,89 € desde 2 uds · 2,73 € desde 5",
+  "coste_que_se_ha_metido_en_la_ficha": "3,60 €, el número de Óscar, sumado SOLO al cuarzo",
+  "variantes": ["01", "02", "03", "04", "05"],
+  "alertas": [
+    "⚠️ El anuncio es para el Ronda 515, no para el 715. Centrar centra igual —los dos son 11½''', 25,60 mm de encaje—, pero NO tienen la misma altura sobre la tija: 1,50 mm el 515 y 1,00 mm el 715. Medio milímetro decide si la corona entra derecha.",
+    "Hay cinco variantes (01 a 05) y no está comprobado cuál corresponde a nuestras cajas de 36 y 39 mm.",
+    "El riesgo de fondo ya estaba escrito en .docs/sourcing-bitacora.md: el tubo de la corona va mecanizado en la caja a la cota del movimiento para el que se hizo. Eso un anillo no lo arregla.",
+    "PENDIENTE de comprobar con una unidad física antes de fiar una serie."
+  ]
+}
