@@ -1,0 +1,24 @@
+{
+  "capturado": "2026-08-19",
+  "pieza": "TRINCHERA · las cajas",
+  "anuncio": "https://es.aliexpress.com/item/1005008932757286.html",
+  "titulo": "Pilot NH35 36MM/39MM PVD cristal de zafiro negro caja de reloj cepillado, corona roscada",
+  "vendedor": "CORGEUT Store (vendido por Stone's Store)",
+  "valoracion": "4,9 sobre 150 valoraciones · 900+ ventas del vendedor",
+  "precio_19_08": "19,19 € en oferta (PVP tachado 39,98 €) · IVA incluido · envío gratis",
+  "coste_en_la_ficha": "23,00 € (PL, NG, BR) — por encima del anuncio",
+  "acabados": ["Plata Sólida", "Vidrio Plateado", "Negro Sólido", "Vidrio Negro", "Bronce Sólido", "Vidrio Bronceado"],
+  "correspondencia": {
+    "Sólida": "tapa roscada opaca — la del cuarzo",
+    "Vidrio": "tapa de cristal, se ve el movimiento — la de los automáticos"
+  },
+  "la_segunda_propiedad_no_es_el_dial": "La propiedad que AliExpress llama «Diámetro del dial» es DIÁMETRO DE CAJA + CALIBRE AL QUE VIENE CORTADA: 36 mm NH35/NH36 · 39 mm NH35/NH36 · 36 mm ETA2824/PT5000 · 39 mm ETA2824/PT5000.",
+  "cristal": "zafiro",
+  "corona": "roscada",
+  "alertas": [
+    "NO HAY TITANIO en este anuncio. La ficha ofrece caja de titanio a 54,39 € y viene de otro sitio sin anotar.",
+    "LA CLAVE DE LOS ANILLOS: la caja se pide ya cortada para el movimiento. Para el automático (ETA 2824-2) existe variante y NO haría falta anillo. Para el CUARZO de la ficha, que es un Ronda 715, no hay variante: ese sí necesitaría portamovimiento.",
+    "Precio en oferta con cuenta atrás: reverificar antes de comprar.",
+    "No se comprobó si el precio cambia según acabado o medida: haría falta pinchar las 24 combinaciones."
+  ]
+}
