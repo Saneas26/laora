@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=9">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=26">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=27">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -69,6 +69,24 @@
            enseña las seis combinaciones de la caja elegida —tres pieles por
            dos esferas— y cambia el reloj al pulsarlas. Lo pinta el guion. -->
       <div class="pv-extras" data-pv-minis></div>
+
+      <!-- Las dos de galería del 19/08/2026: la muñeca y la vista inclinada.
+           No son configuraciones, son fotos de catálogo, así que van fijas
+           debajo del selector y no cambian con lo que elijas. -->
+      <div class="pv-extras pv-galeria-fija">
+        <figure>
+          <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif"
+               srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif 1600w"
+               sizes="(max-width:900px) 50vw, 23vw"
+               alt="El Trinchera Murph con piel negra, puesto en la muñeca" loading="lazy" decoding="async">
+        </figure>
+        <figure>
+          <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif"
+               srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif 1600w"
+               sizes="(max-width:900px) 50vw, 23vw"
+               alt="El Trinchera Murph de tres cuartos, con la corona a la vista" loading="lazy" decoding="async">
+        </figure>
+      </div>
 
     </div>
 
@@ -279,7 +297,13 @@
   var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
   var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
   var MURPH_ESF    = { MA: 'crema', MB: 'blanco' };
+  /* El brazalete y el pack se fotografiaron el 19/08/2026, pero solo en
+     acero y con los numerales crema. Van aparte porque no siguen la regla
+     de caja × piel × esfera: son dos fotos concretas y nada más. */
+  var MURPH_SUELTAS = { 'PL-ACERO-MA': 'acero-brazalete-crema', 'PL-PACK-MA': 'acero-pack-crema' };
   function murphFoto(caja, correa, esf) {
+    var suelta = MURPH_SUELTAS[caja + '-' + correa + '-' + esf];
+    if (suelta) return suelta;
     if (!MURPH_CAJA[caja] || !MURPH_CORREA[correa] || !MURPH_ESF[esf]) return null;
     return MURPH_CAJA[caja] + '-' + MURPH_CORREA[correa] + '-' + MURPH_ESF[esf];
   }
@@ -499,7 +523,7 @@
     /* Cuando la foto no es exactamente la combinación elegida, se dice.
        Dos casos: la caja negra no está fotografiada con el segundero rojo,
        y el Murph con brazalete o pack se fotografió en acero, no en titanio. */
-    var notaAcero = e.estilo === 'M' && esTitanio && (e.correa === 'ACERO' || e.correa === 'PACK');
+    var notaAcero = e.estilo === 'M' && !deLaSerie && (e.correa === 'ACERO' || e.correa === 'PACK');
     var notaSeg = esNegra && e.esf === 'KR';
     $('[data-pv-nota]').textContent = notaAcero ? 'Imagen con la caja en acero plata' : 'Fotografiado con segundero blanco';
     $('[data-pv-nota]').hidden = !(notaAcero || notaSeg);
