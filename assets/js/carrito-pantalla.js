@@ -112,24 +112,23 @@
       var lado = el('div', 'ca-lado');
       lado.appendChild(el('p', 'ca-precio', euros(Number(l.precio) * (l.cantidad || 1))));
 
-      var cant = el('div', 'ca-cantidad');
-      var menos = el('button', '', '−');
-      menos.type = 'button';
-      menos.setAttribute('aria-label', 'Quitar una unidad');
-      var n = el('span', '', String(l.cantidad || 1));
-      var mas = el('button', '', '+');
-      mas.type = 'button';
-      mas.setAttribute('aria-label', 'Añadir una unidad');
-      menos.addEventListener('click', function () {
-        var c = (l.cantidad || 1) - 1;
-        if (c < 1) laoraCarritoQuitar(i); else laoraCarritoCantidad(i, c);
+      /* La cantidad, en una lista: se elige de una vez en lugar de ir
+         dando clics, y en el móvil abre el selector del teléfono. */
+      var cant = el('label', 'ca-cantidad');
+      cant.appendChild(el('span', '', 'Cantidad'));
+      var sel = document.createElement('select');
+      sel.setAttribute('aria-label', 'Cuántas unidades de ' + (l.nombre || 'este reloj'));
+      for (var u = 1; u <= 5; u++) {
+        var op = document.createElement('option');
+        op.value = String(u); op.textContent = String(u);
+        if ((l.cantidad || 1) === u) op.selected = true;
+        sel.appendChild(op);
+      }
+      sel.addEventListener('change', function () {
+        laoraCarritoCantidad(i, Number(sel.value));
         volverAlPrincipio();
       });
-      mas.addEventListener('click', function () {
-        laoraCarritoCantidad(i, (l.cantidad || 1) + 1);
-        volverAlPrincipio();
-      });
-      cant.appendChild(menos); cant.appendChild(n); cant.appendChild(mas);
+      cant.appendChild(sel);
       lado.appendChild(cant);
 
       var quitar = el('button', 'ca-quitar', 'Quitar');
@@ -144,8 +143,27 @@
     var hay = lineas.length > 0;
     if (vacio) vacio.hidden = hay;
     if (resumen) resumen.hidden = !hay;
-    if (total) total.textContent = euros(laoraCarritoTotal());
+    pintarResumen(laoraCarritoTotal());
     if (typeof laoraCarritoPintarContador === 'function') laoraCarritoPintarContador();
+  }
+
+  /* ---------- el resumen ----------
+     El IVA no se suma: ya está dentro del precio, así que se saca
+     DIVIDIENDO y se dice que va incluido. Sumarle un 21 % al precio de
+     la web sería cobrarlo dos veces. */
+  function pintarResumen(total) {
+    var poner = function (sel, txt) {
+      var e = document.querySelector(sel);
+      if (e) e.textContent = txt;
+    };
+    poner('[data-subtotal]', euros(total));
+    poner('[data-iva]', euros(Math.round((total - total / 1.21) * 100) / 100));
+    poner('[data-envio]', 'Gratis');
+    poner('[data-envio-como]', 'A toda España, con seguimiento');
+    poner('[data-total]', euros(total));
+    /* El tercio se redondea al céntimo HACIA ARRIBA: tres plazos nunca
+       pueden sumar menos que el total. */
+    poner('[data-klarna-plazo]', euros(Math.ceil(total / 3 * 100) / 100));
   }
 
   /* Si se toca la cesta después de haber hecho el pedido, lo que hay
@@ -564,6 +582,21 @@
   var acabaDeEntrar = laoraSesion.recoger();
 
   pintar();
+
+  /* Lo que se acaba de añadir, dicho por su nombre. Se lee UNA vez:
+     al recargar ya no es una noticia, es la cesta de siempre. */
+  (function loQueAcabaDeEntrar() {
+    var caja = document.querySelector('[data-anadido]');
+    if (!caja) return;
+    var nombre = '';
+    try {
+      nombre = sessionStorage.getItem('laora.ultimo') || '';
+      sessionStorage.removeItem('laora.ultimo');
+    } catch (e) {}
+    if (!nombre || !laoraCarritoLeer().length) return;
+    caja.textContent = 'Has añadido ' + nombre + ' a tu carrito.';
+    caja.hidden = false;
+  })();
 
   /* ¿Quedó un pedido hecho y sin pagar? Se enseña el paso del pago tal
      como estaba, para que pueda terminar sin repetir nada. */

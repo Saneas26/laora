@@ -44,8 +44,8 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 11
-V_JS = 10
+V_CSS = 12
+V_JS = 11
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
@@ -108,21 +108,47 @@ PAGINA = f"""<!DOCTYPE html>
   <!-- Las líneas las pinta `carrito.js` con lo que haya en la cesta.
        Sin JavaScript no hay cesta que enseñar, así que el aviso de
        abajo es lo que se ve, y es cierto. -->
-  <ol class="ca-lineas" data-lineas></ol>
+  <!-- DOS COLUMNAS, como el carrito de Hamilton (Óscar, 19/08/2026):
+       lo elegido a la izquierda y el resumen a la derecha, quieto
+       mientras se baja. Lo que NO se copia de Hamilton: el grabado
+       —Óscar ya dijo que nada de grabados—, el código de descuento
+       —aquí el precio es uno y no hay descuentos que valgan—, Apple
+       Pay —la cuenta de Mollie no lo tiene— y las correas sueltas,
+       que todavía no se venden. Prometer cualquiera de las cuatro
+       sería enseñar un botón que no lleva a ningún sitio. -->
+  <div class="ca-columnas">
+    <div class="ca-izquierda">
+      <p class="ca-anadido" data-anadido hidden></p>
+      <ol class="ca-lineas" data-lineas></ol>
 
-  <p class="ca-vacio" data-vacio hidden>
-    Todavía no has elegido nada.
-    <a href="/coleccion.html">Ver la colección →</a>
-  </p>
-
-  <aside class="ca-resumen" data-resumen hidden>
-    <div class="ca-suma">
-      <span>Total</span>
-      <strong data-total>—</strong>
+      <p class="ca-vacio" data-vacio hidden>
+        Todavía no has elegido nada.
+        <a href="/coleccion.html">Ver la colección →</a>
+      </p>
     </div>
-    <p class="ca-impuestos">Impuestos y envío incluidos.</p>
-    <button class="ca-pagar" type="button" data-continuar>Continuar</button>
-  </aside>
+
+    <aside class="ca-resumen" data-resumen hidden>
+      <h2 class="ca-resumen-titulo">Resumen</h2>
+
+      <dl class="ca-desglose">
+        <div><dt>Subtotal</dt><dd data-subtotal>—</dd></div>
+        <div><dt>Envío <small data-envio-como></small></dt><dd data-envio>—</dd></div>
+        <div class="ca-iva"><dt>IVA incluido en el subtotal</dt><dd data-iva>—</dd></div>
+      </dl>
+
+      <div class="ca-suma">
+        <span>Total del pedido</span>
+        <strong data-total>—</strong>
+      </div>
+
+      <button class="ca-pagar" type="button" data-continuar>Continuar</button>
+
+      <p class="ca-klarna-resumen">
+        <span>O en 3 plazos sin intereses (0&nbsp;% TAE) de <b data-klarna-plazo>—</b> con</span>
+        <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+      </p>
+    </aside>
+  </div>
 
   <!-- ---------- paso 2: entrar ---------- -->
   <section class="ca-paso" data-paso-entrar hidden>
