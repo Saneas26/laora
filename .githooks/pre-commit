@@ -1,0 +1,28 @@
+#!/bin/sh
+# ============================================================
+# laOra · el catálogo del servidor, siempre al día
+# ------------------------------------------------------------
+# El servidor valida los precios contra `assets/datos/catalogo-2026.json`,
+# que se saca EJECUTANDO el motor de precios de cada ficha. Si una
+# ficha cambia y ese archivo no, el carrito empieza a decir «esa
+# referencia ya no está a la venta» y nadie se entera hasta que
+# alguien intenta comprar.
+#
+# Acordarse a mano no funciona —Óscar, 19/08/2026: «el catálogo va a
+# estar cambiando toda la semana a cada hora»—, así que se hace solo
+# en cada commit que toque una ficha.
+#
+# Se instala una vez con:  git config core.hooksPath .githooks
+# ============================================================
+
+fichas=$(git diff --cached --name-only | grep -E '^(precisa|trinchera|lunar|bitacora)\.html$|^assets/img/lunar-config/manifest\.json$')
+[ -z "$fichas" ] && exit 0
+
+echo "→ ha cambiado una ficha: volviendo a volcar el catálogo"
+if node herramientas/volcar_catalogo_2026.js; then
+  git add assets/datos/catalogo-2026.json
+else
+  echo "⚠️  el volcador ha fallado. El commit sigue, pero el catálogo del"
+  echo "    servidor se queda como estaba: revísalo antes de vender."
+fi
+exit 0
