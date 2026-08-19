@@ -345,22 +345,9 @@ main.cv2{ overflow:visible; overflow-x:clip }
 .pv-klarna b{font-weight:700;color:var(--cv2-negro)}
 .pv-klarna a{color:var(--cv2-negro);text-decoration:underline}
 
-/* LAS MINIATURAS DE LA SERIE MAESTRA (19/08/2026). La galería dejó de ser
-   un álbum de macros y pasó a ser un selector: seis botones con las seis
-   combinaciones de la caja elegida. Heredan la retícula de `.pv-extras`,
-   así que aquí solo se viste el botón. */
-.pv-mini{
-  padding:0;border:1px solid var(--cv2-linea);background:var(--cv2-crema);
-  aspect-ratio:1/1;overflow:hidden;cursor:pointer;display:block;
-  transition:border-color .15s ease;
-}
-.pv-mini img{width:100%;height:100%;object-fit:cover;display:block;opacity:.92;transition:opacity .2s}
-.pv-mini:hover img{opacity:1}
-.pv-mini:hover{border-color:var(--cv2-negro)}
-.pv-mini[aria-pressed="true"]{border-color:var(--cv2-negro);border-width:2px}
-.pv-mini:focus-visible{outline:2px solid var(--cv2-negro);outline-offset:2px}
+/* El selector de miniaturas se retiró el 19/08/2026: las elecciones viven
+   en el configurador y debajo del visor solo quedan las dos de catálogo. */
 
 /* Las dos fotos de catálogo del Murph (19/08/2026) van debajo del selector,
    con la misma retícula de dos columnas y algo de aire por encima para que
    se lean como otra cosa: aquellas se pulsan, estas se miran. */
-.pv-galeria-fija{margin-top:4px}
