@@ -42,3 +42,50 @@ body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);
 .cu-aviso-marcas{padding:26px clamp(18px,5vw,64px) 34px}
 .cu-aviso-marcas p{max-width:1100px;margin:0 auto;font-size:9px;line-height:1.55;
                    color:#7b7a72;text-align:center}
+
+/* ============================================================
+   DENTRO
+   ------------------------------------------------------------
+   Los pedidos de quien ha entrado. Hasta el 19/08/2026 esta
+   página no tenía dentro: solo la puerta. Se entraba con el
+   enlace del correo y se volvía a ver el mismo formulario.
+   ============================================================ */
+.cu-dentro{width:100%;max-width:620px}
+.cu-quien{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.cu-quien h1{font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.cu-correo{margin-top:6px;font-size:15px;color:var(--muted)}
+.cu-salir{flex:0 0 auto;padding:9px 16px;border-radius:999px;
+          background:none;border:1px solid var(--line);color:var(--muted);
+          font:inherit;font-size:14px;cursor:pointer}
+.cu-salir:hover{border-color:var(--ink);color:var(--ink)}
+
+.cu-cargando,.cu-sin-nada{margin-top:26px;font-size:16px;color:var(--muted)}
+.cu-sin-nada a{color:var(--gold);font-weight:700}
+
+.cu-pedidos{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.cu-pedido{padding:20px;background:var(--paper);border:1px solid var(--line);border-radius:16px}
+.cu-pedido-alto{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cu-numero{font-size:17px;font-weight:700}
+.cu-fecha{font-size:14px;color:var(--muted)}
+
+/* El estado, de un vistazo y sin depender solo del color. */
+.cu-estado{display:inline-block;margin-top:10px;padding:5px 12px;border-radius:999px;
+           font-size:13px;font-weight:700;letter-spacing:.02em;
+           background:#eceae4;color:#4a4740}
+.cu-estado.es-espera{background:#fdf0c9;color:#7a5c12}
+.cu-estado.es-bien{background:#e2f0e4;color:#2b5c33}
+.cu-estado.es-camino{background:#e4ecf7;color:#28486f}
+
+.cu-relojes{list-style:none;margin:16px 0 0;padding:0;font-size:15px}
+.cu-relojes li{padding:10px 0;border-top:1px solid var(--line);line-height:1.5}
+.cu-relojes b{font-weight:700}
+.cu-relojes small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.cu-total{display:flex;justify-content:space-between;padding-top:12px;margin-top:4px;
+          border-top:2px solid var(--ink);font-size:16px;font-weight:700}
+.cu-nota{margin-top:12px;font-size:14px;line-height:1.55;color:var(--muted)}
+.cu-nota b{color:var(--ink)}
+.cu-pagar{margin-top:14px;width:100%;padding:15px;border-radius:999px;
+          background:var(--dark);color:#fffdf8;border:0;font:inherit;font-size:15px;
+          font-weight:700;cursor:pointer}
+.cu-pagar:hover:not([disabled]){background:#262925}
+.cu-pagar[disabled]{background:#c9c5bb;color:#6f6c64;cursor:not-allowed}

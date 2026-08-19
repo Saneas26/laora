@@ -44,8 +44,9 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 2
-V_JS = 4
+V_CSS = 3
+V_JS = 5
+V_SESION = 4
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
 VENTAJAS = [
@@ -73,7 +74,8 @@ PAGINA = f"""<!DOCTYPE html>
 {cabecera()}
 
 <main class="cu-cuerpo">
-  <div class="cu-caja">
+  <!-- ---------- la puerta: solo para quien NO ha entrado ---------- -->
+  <div class="cu-caja" data-puerta>
     <h1>Tu cuenta<br><em>y tu Club laOra.</em></h1>
     <p class="cu-entrada">Escribe tu correo y te enviamos un enlace para entrar. Sin contraseña: ni la pedimos ni la guardamos.</p>
 
@@ -100,6 +102,35 @@ PAGINA = f"""<!DOCTYPE html>
       y puedes pedir que lo borremos cuando quieras. <a href="/privacidad.html">Cómo tratamos tus datos</a>.
     </p>
   </div>
+
+  <!-- ---------- DENTRO ----------
+       Lo que faltaba hasta el 19/08/2026: esta página solo sabía pedir
+       el correo. Quien entraba con su enlace volvía aquí y se
+       encontraba otra vez el mismo formulario, como si no tuviera
+       cuenta. Y la lista de «qué hay dentro» prometía algo que no
+       existía. Esto es ese dentro. -->
+  <div class="cu-dentro" data-dentro hidden>
+    <div class="cu-quien">
+      <div>
+        <h1>Tu cuenta</h1>
+        <p class="cu-correo" data-correo-dentro></p>
+      </div>
+      <button type="button" class="cu-salir" data-salir>Salir</button>
+    </div>
+
+    <p class="cu-cargando" data-cargando>Buscando tus pedidos…</p>
+
+    <p class="cu-sin-nada" data-sin-nada hidden>
+      Todavía no has comprado nada. <a href="/coleccion.html">Ver la colección →</a>
+    </p>
+
+    <ol class="cu-pedidos" data-pedidos></ol>
+
+    <p class="cu-legal">
+      ¿Alguna duda con un pedido? Respóndenos al correo de la compra y te contestamos.
+      <a href="/privacidad.html">Cómo tratamos tus datos</a>.
+    </p>
+  </div>
 </main>
 
 <footer class="cu-aviso-marcas">
@@ -107,6 +138,7 @@ PAGINA = f"""<!DOCTYPE html>
 </footer>
 
 {CAB_SCRIPT}
+<script src="/assets/js/sesion.js?v={V_SESION}"></script>
 <script src="/assets/js/cuenta.js?v={V_JS}"></script>
 </body>
 </html>

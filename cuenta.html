@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/cuenta.css?v=2">
+<link rel="stylesheet" href="/assets/css/cuenta.css?v=3">
 </head>
 <body>
 
@@ -38,7 +38,8 @@
 </header>
 
 <main class="cu-cuerpo">
-  <div class="cu-caja">
+  <!-- ---------- la puerta: solo para quien NO ha entrado ---------- -->
+  <div class="cu-caja" data-puerta>
     <h1>Tu cuenta<br><em>y tu Club laOra.</em></h1>
     <p class="cu-entrada">Escribe tu correo y te enviamos un enlace para entrar. Sin contraseña: ni la pedimos ni la guardamos.</p>
 
@@ -69,6 +70,35 @@
       y puedes pedir que lo borremos cuando quieras. <a href="/privacidad.html">Cómo tratamos tus datos</a>.
     </p>
   </div>
+
+  <!-- ---------- DENTRO ----------
+       Lo que faltaba hasta el 19/08/2026: esta página solo sabía pedir
+       el correo. Quien entraba con su enlace volvía aquí y se
+       encontraba otra vez el mismo formulario, como si no tuviera
+       cuenta. Y la lista de «qué hay dentro» prometía algo que no
+       existía. Esto es ese dentro. -->
+  <div class="cu-dentro" data-dentro hidden>
+    <div class="cu-quien">
+      <div>
+        <h1>Tu cuenta</h1>
+        <p class="cu-correo" data-correo-dentro></p>
+      </div>
+      <button type="button" class="cu-salir" data-salir>Salir</button>
+    </div>
+
+    <p class="cu-cargando" data-cargando>Buscando tus pedidos…</p>
+
+    <p class="cu-sin-nada" data-sin-nada hidden>
+      Todavía no has comprado nada. <a href="/coleccion.html">Ver la colección →</a>
+    </p>
+
+    <ol class="cu-pedidos" data-pedidos></ol>
+
+    <p class="cu-legal">
+      ¿Alguna duda con un pedido? Respóndenos al correo de la compra y te contestamos.
+      <a href="/privacidad.html">Cómo tratamos tus datos</a>.
+    </p>
+  </div>
 </main>
 
 <footer class="cu-aviso-marcas">
@@ -76,6 +106,7 @@
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/cuenta.js?v=4"></script>
+<script src="/assets/js/sesion.js?v=4"></script>
+<script src="/assets/js/cuenta.js?v=5"></script>
 </body>
 </html>
