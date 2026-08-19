@@ -1,0 +1,18 @@
+{
+  "capturado": "2026-08-19",
+  "pieza": "TRINCHERA · correa de ante",
+  "anuncio": "https://es.aliexpress.com/item/1005007894134908.html",
+  "titulo": "Correa de cuero encerado al aceite vintage, cuero de vaca con costuras hechas a mano, 18/20/21/22 mm",
+  "valoracion": "4,7 sobre 1.560 valoraciones · 10.000+ vendidos",
+  "precio_19_08": "3,59 € en oferta hasta el 26/08 22:59 (PVP tachado 7,80 €)",
+  "coste_en_la_ficha": "4,30 € (ANTE) — el anuncio está 0,71 € por debajo",
+  "colores": ["Dark brown", "Light brown", "Black", "Blue"],
+  "correspondencia_con_la_ficha": {
+    "Black": "NEG", "Dark brown": "MOS", "Blue": "AZU", "Light brown": "MCL"
+  },
+  "alertas": [
+    "Los cuatro colores del anuncio son EXACTAMENTE los cuatro que la ficha ya ofrece en el ante del Murph.",
+    "El anuncio no dice «ante» en ningún sitio: lo describe como cuero encerado al aceite. Confirmar con Óscar que es la correa que él llama de ante.",
+    "Precio en oferta con cuenta atrás."
+  ]
+}
