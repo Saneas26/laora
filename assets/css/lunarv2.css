@@ -1135,3 +1135,14 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
 @media (max-width:899px){
   .aviso-marcas{ padding: 20px 20px 28px; }
 }
+
+/* ---------- el asterisco de la garantía ----------
+   La ley da 3 años a cualquiera; los 5 son del Club. Prometer «5 años»
+   a secas y que luego resulte que solo si te apuntas es de las cosas
+   que hunden una marca, así que el asterisco se explica donde se lee. */
+.nota-garantia{
+  margin-top:14px;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.72);
+  max-width:46ch;
+}
+.nota-garantia a{color:inherit;text-decoration:underline}
+.nota-garantia-centrada{margin:22px auto 0;text-align:center;color:#6c6c64}
