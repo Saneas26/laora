@@ -139,7 +139,7 @@
         </div>
 
         <div class="pv-grupo" data-pv-grupo-color hidden>
-          <p class="pv-rotulo">Color del nato</p>
+          <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
           <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
@@ -290,6 +290,15 @@
     PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' },
     NATOP: { nombre: 'Nato + Piel', coste: 4.99, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
   };
+  /* Los cuatro antes del Murph (Óscar, 19/08/2026). Van en su propia lista
+     porque no son los del nato: aquel tiene siete y estos cuatro, y el
+     estado los guarda aparte para que cambiar de correa no se lleve por
+     delante el color elegido en la otra. */
+  var ANTES = {
+    NEG: ['Negro', '#2b2a2b'],          MOS: ['Marrón oscuro', '#4b382e'],
+    AZU: ['Azul', '#3a586e'],           MCL: ['Marrón claro', '#b0825a']
+  };
+
   /* Los siete colores del nato con forro de piel (Óscar, 16/08/2026) */
   var COLORES = {
     NEG: ['Negro', '#1e1f22'],  AZU: ['Azul', '#27476b'],   ROJ: ['Rojo', '#8a1f1f'],
@@ -323,7 +332,12 @@
      acero y con los numerales crema. Van aparte porque no siguen la regla
      de caja × piel × esfera: son dos fotos concretas y nada más. */
   var MURPH_SUELTAS = { 'PL-ACERO-MA': 'acero-brazalete-crema', 'PL-PACK-MA': 'acero-pack-crema' };
-  function murphFoto(caja, correa, esf) {
+  var MURPH_ANTE = { NEG: 'negro', MOS: 'marronoscuro', AZU: 'azul', MCL: 'marronclaro' };
+  function murphFoto(caja, correa, esf, ante) {
+    /* El ante del Murph: ocho fotos, solo en acero, un color por foto. */
+    if (correa === 'ANTE' && caja === 'PL' && MURPH_ANTE[ante] && MURPH_ESF[esf]) {
+      return 'acero-ante-' + MURPH_ANTE[ante] + '-' + MURPH_ESF[esf];
+    }
     var suelta = MURPH_SUELTAS[caja + '-' + correa + '-' + esf];
     if (suelta) return suelta;
     if (!MURPH_CAJA[caja] || !MURPH_CORREA[correa] || !MURPH_ESF[esf]) return null;
@@ -337,7 +351,7 @@
 
   var LOGO = 3.78;
 
-  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG' };
+  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -387,7 +401,9 @@
          y el pack siguen existiendo con sus fotos de antes. */
       if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
       if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
-      if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' && e.correa !== 'PACK') e.correa = 'PIELN';
+      if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' && e.correa !== 'PACK' && e.correa !== 'ANTE') e.correa = 'PIELN';
+      /* El ante del Murph solo está fotografiado en acero */
+      if (e.correa === 'ANTE' && e.caja !== 'PL') e.caja = 'PL';
     } else {
       if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KR';
       if (e.caja === 'BR') { e.correa = 'ANTE'; e.esf = 'BRZ'; }
@@ -413,7 +429,9 @@
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
     if (e.caja === 'BR') return seg + 'ANTE';
     var cola = seg + e.esf + '-' + e.correa;
-    return e.correa === 'NATOP' ? cola + '-' + e.color : cola;
+    if (e.correa === 'NATOP') return cola + '-' + e.color;
+    if (e.correa === 'ANTE' && e.estilo === 'M') return cola + '-' + e.ante;
+    return cola;
   }
 
   var $ = function (s) { return document.querySelector(s); };
@@ -462,6 +480,7 @@
     var esBronce = e.caja === 'BR';
     var esNegra = e.caja === 'NG';
     var esTitanio = e.caja === 'TI';
+    var esMurph = e.estilo === 'M';
     /* El titanio traía esfera fija porque solo se había fotografiado con la
        khaki de agujas blancas. Con la serie maestra ya tiene sus dos Murph. */
     var esfFija = esBronce || (esTitanio && e.estilo !== 'M');
@@ -477,12 +496,11 @@
     $('[data-pv="correa"]').hidden = esBronce;
     $('[data-pv-correa-fija]').hidden = !esBronce;
     if (!esBronce) {
-      var esMurph = e.estilo === 'M';
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
            brazalete y el pack, que siguen fotografiados aparte. */
         ? [['PIELV', 'Piel Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
-           ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']]
+           ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']]
         : esNegra
         ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'], ['PIELN', 'Piel Negra']]
         : esTitanio
@@ -493,13 +511,18 @@
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
-    /* el color: solo cuando la correa es el nato con forro de piel */
-    var conColor = e.correa === 'NATOP';
+    /* El color: lo piden dos correas y cada una tiene su lista y su casilla
+       en el estado —el nato con forro y el ante del Murph—. */
+    var conColor = e.correa === 'NATOP' || (esMurph && e.correa === 'ANTE');
+    var esAnte = esMurph && e.correa === 'ANTE';
+    var paleta = esAnte ? ANTES : COLORES;
+    var elegido = esAnte ? e.ante : e.color;
     $('[data-pv-grupo-color]').hidden = !conColor;
     if (conColor) {
-      $('[data-pv="color"]').innerHTML = Object.keys(COLORES).map(function (k) {
-        return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === e.color) + '">' +
-               '<i style="background:' + COLORES[k][1] + '"></i><small>' + COLORES[k][0] + '</small></button>';
+      $('[data-pv-rotulo-color]').textContent = esAnte ? 'Color del ante' : 'Color del nato';
+      $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
+        return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
+               '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
       }).join('');
     }
     $('[data-pv-forro]').hidden = !conColor;
@@ -509,7 +532,7 @@
        De las viejas ya solo se sirve el tamaño de 1.200: los maestros de
        4.000 px no se publican. */
     var img = $('[data-pv-foto]');
-    var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf) : null;
+    var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf, e.ante) : null;
     if (deLaSerie) {
       img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif' + MURPH_V;
       img.srcset = murphSrcset(deLaSerie);
@@ -544,7 +567,9 @@
     $('[data-pv-tec="caja"]').textContent =
       'Caja de ' + e.diam + ' mm en ' + CAJAS[e.caja].mat + ', con doble numeración de época y ' +
       'cristal de zafiro. Tapa trasera ' + (e.tapa === 'C' ? 'de cristal que deja ver el movimiento.' : 'roscada sólida.') +
-      ' Correa: ' + CORREAS[e.correa].tec + '.';
+      ' Correa: ' + (e.correa === 'ANTE' && e.estilo === 'M'
+        ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
+        : CORREAS[e.correa].tec) + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
     $('[data-pv-tec="agua"]').textContent = agua() +
@@ -556,7 +581,9 @@
     var b = ev.target.closest('[data-pv] button');
     if (b) {
       var g = b.closest('[data-pv]').dataset.pv;
-      e[g] = b.dataset.v;
+      /* El grupo de color sirve al nato y al ante, y cada uno guarda el suyo */
+      if (g === 'color' && e.estilo === 'M' && e.correa === 'ANTE') e.ante = b.dataset.v;
+      else e[g] = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
       if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
@@ -575,6 +602,8 @@
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
         correa: e.correa === 'NATOP'
           ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
+          : (e.correa === 'ANTE' && e.estilo === 'M')
+          ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
           : CORREAS[e.correa].nombre,
         precio: precio(),
         foto: $('[data-pv-foto]').src
