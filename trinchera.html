@@ -418,8 +418,16 @@
   var K1224_IMG = '/assets/img/trinchera-2026/khaki1224/';
   var K1224_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var K1224_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde' };
-  function khakiFoto(caja, correa, esf) {
+  /* El ante con la 12/24 (19/08/2026): cuatro colores en acero, PVD negro y
+     bronce. El titanio con ante sigue con su foto de antes y su esfera de
+     agujas blancas, que es lo único que hay fotografiado de esa pareja. */
+  var K1224_ANTE_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce' };
+  function khakiFoto(caja, correa, esf, ante) {
     if (esf !== 'KB') return null;
+    if (correa === 'ANTE') {
+      if (!K1224_ANTE_CAJA[caja] || !MURPH_ANTE[ante]) return null;
+      return K1224_ANTE_CAJA[caja] + '-ante-' + MURPH_ANTE[ante];
+    }
     if (!K1224_CAJA[caja] || !K1224_CORREA[correa]) return null;
     return K1224_CAJA[caja] + '-' + K1224_CORREA[correa];
   }
@@ -507,8 +515,10 @@
          segundero blanco, que es la que se fotografió el 19/08/2026. Con el
          ante o la piel oscura siguen con su khaki de agujas blancas. */
       var pielIt = !!K1224_CORREA[e.correa];
+      /* El ante con la 12/24 existe en acero, PVD negro y bronce */
+      var anteIt = e.correa === 'ANTE' && !!K1224_ANTE_CAJA[e.caja];
       if (e.caja === 'BR') {
-        if (!pielIt) { e.correa = 'ANTE'; e.esf = 'BRZ'; } else { e.esf = 'KB'; }
+        if (pielIt || anteIt) { e.esf = 'KB'; } else { e.correa = 'ANTE'; e.esf = 'BRZ'; }
       }
       else if (e.caja === 'TI') {
         if (pielIt) { e.esf = 'KB'; }
@@ -519,11 +529,12 @@
       }
       else if (e.caja === 'NG') {
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
-        if (pielIt) e.esf = 'KB';
-        if (e.correa !== 'NATON' && e.correa !== 'NATOP' && !pielIt) e.correa = 'NATON';
+        if (pielIt || anteIt) e.esf = 'KB';
+        if (e.correa !== 'NATON' && e.correa !== 'NATOP' && !pielIt && !anteIt) e.correa = 'NATON';
       } else {
-        if (e.correa === 'ANTE' || e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
+        if (e.correa === 'NATON' || e.correa === 'PIELO' || e.correa === 'PACK') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
+        if (anteIt) e.esf = 'KB';   /* el ante del acero solo con la 12/24 */
       }
       if (e.correa !== 'NATOP') e.color = 'NEG';
     }
@@ -608,7 +619,8 @@
         ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
         /* Con piel italiana en bronce o titanio solo está fotografiada la
            12/24 de segundero blanco: la del segundero rojo se tacha. */
-        : [['KR', 'Khaki, Segundero Rojo', conPiel1224 && (esBronce || esTitanio)],
+        : [['KR', 'Khaki, Segundero Rojo',
+            (conPiel1224 && (esBronce || esTitanio)) || (e.correa === 'ANTE' && !!K1224_ANTE_CAJA[e.caja])],
            ['KB', 'Khaki, Segundero Blanco']], e.esf);
     }
 
@@ -630,13 +642,14 @@
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
         ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'],
-           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
+           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
+           ['ANTE', 'Ante']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
         : [['NATO', 'Nato Verde'], ['NATOP', 'Nato + Piel'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
-           ['ACERO', 'Brazalete Acero'],
+           ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
@@ -661,8 +674,12 @@
 
     /* El color: lo piden dos correas y cada una tiene su lista y su casilla
        en el estado —el nato con forro y el ante del Murph—. */
-    var conColor = e.correa === 'NATOP' || (esMurph && e.correa === 'ANTE');
-    var esAnte = esMurph && e.correa === 'ANTE';
+    /* El ante lleva color en el Murph y también en la 12/24 del khaki, que
+       tiene las cuatro pieles en acero, PVD negro y bronce. En el titanio
+       con ante no: ahí solo hay una foto y sin color. */
+    var anteConColor = e.correa === 'ANTE' && (esMurph || !!K1224_ANTE_CAJA[e.caja]);
+    var conColor = e.correa === 'NATOP' || anteConColor;
+    var esAnte = anteConColor;
     var paleta = esAnte ? ANTES : COLORES;
     var elegido = esAnte ? e.ante : e.color;
     $('[data-pv-grupo-color]').hidden = !conColor;
@@ -681,7 +698,7 @@
        4.000 px no se publican. */
     var img = $('[data-pv-foto]');
     var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf, e.ante, e.pesp) : null;
-    var del1224 = !deLaSerie && e.estilo === 'K' ? khakiFoto(e.caja, e.correa, e.esf) : null;
+    var del1224 = !deLaSerie && e.estilo === 'K' ? khakiFoto(e.caja, e.correa, e.esf, e.ante) : null;
     if (deLaSerie) {
       img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif' + MURPH_V;
       img.srcset = murphSrcset(deLaSerie);
