@@ -477,9 +477,11 @@
       if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
       if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
       if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' && e.correa !== 'PACK' && e.correa !== 'ANTE') e.correa = 'PIELN';
-      /* El brazalete y el pack solo están fotografiados en acero: con
-         ellos, la caja se queda en acero. */
-      if ((e.correa === 'ACERO' || e.correa === 'PACK') && e.caja !== 'PL') e.caja = 'PL';
+      /* El titanio no tiene ni pack ni brazalete: si venías del acero con
+         una de esas dos y cambias a titanio, te quedas con la piel negra,
+         que es la correa de casa del Murph. Antes se hacía al revés —se
+         volvía a la caja de acero— y parecía que el botón no respondía. */
+      if (e.caja === 'TI' && (e.correa === 'ACERO' || e.correa === 'PACK')) e.correa = 'PIELN';
     } else {
       if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KR';
       if (e.caja === 'BR') { e.correa = 'ANTE'; e.esf = 'BRZ'; }
@@ -548,11 +550,7 @@
        19/08/2026 con sus veinte referencias. El brazalete y el pack siguen
        fotografiados solo en acero, y eso lo avisa la nota del visor. */
     todos('[data-pv="caja"] button').forEach(function (b) {
-      /* Con el brazalete o el pack, que solo están fotografiados en acero,
-         el titanio se TACHA en vez de aceptarse y volver solo al acero: que
-         se vea por qué no se puede, en lugar de que el botón no responda. */
-      var soloAcero = e.correa === 'ACERO' || e.correa === 'PACK';
-      b.disabled = (e.estilo === 'M' && (!MURPH_CAJA[b.dataset.v] || (soloAcero && b.dataset.v !== 'PL')));
+      b.disabled = (e.estilo === 'M' && !MURPH_CAJA[b.dataset.v]);
     });
 
     /* la tapa la manda el movimiento: la opción imposible queda tachada */
@@ -586,8 +584,12 @@
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
            brazalete y el pack, que siguen fotografiados aparte. */
+        /* El titanio no tiene pack (Óscar, 19/08/2026) ni brazalete: el
+           brazalete es de acero y no hay foto de esa pareja. Se tachan, que
+           es como se dice aquí «esto no existe». */
         ? [['PIELV', 'Piel Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
-           ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'], ['PACK', 'Pack Piel + Brazalete']]
+           ['ANTE', 'Ante'],
+           ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
         ? [['NATON', 'Nato Negro'], ['NATOP', 'Nato + Piel'], ['PIELN', 'Piel Negra']]
         : esTitanio
