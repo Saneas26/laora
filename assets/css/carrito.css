@@ -135,3 +135,11 @@ body{margin:0;background:var(--ivory);color:var(--ink);
    paso porque son `display:grid`.
    ============================================================ */
 [hidden]{display:none !important}
+
+/* El aviso de Klarna, antes de pagar. Lo exige Klarna: el cliente tiene
+   que poder leer su política de privacidad antes de fraccionar. */
+.ca-legal-pago{
+  margin-top:14px;font-size:12px;line-height:1.5;color:var(--muted);
+  max-width:52ch;
+}
+.ca-legal-pago a{color:inherit;text-decoration:underline}
