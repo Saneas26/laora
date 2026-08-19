@@ -755,8 +755,10 @@
     var b = ev.target.closest('[data-pv] button');
     if (b) {
       var g = b.closest('[data-pv]').dataset.pv;
-      /* El grupo de color sirve al nato y al ante, y cada uno guarda el suyo */
-      if (g === 'color' && e.estilo === 'M' && e.correa === 'ANTE') e.ante = b.dataset.v;
+      /* El grupo de color sirve al nato y al ante, y cada uno guarda el suyo.
+         El ante lo lleva ya el Murph Y el khaki de la 12/24, así que la
+         condición es la correa, no el estilo. */
+      if (g === 'color' && e.correa === 'ANTE') e.ante = b.dataset.v;
       else e[g] = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
