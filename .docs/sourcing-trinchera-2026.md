@@ -17,7 +17,7 @@ Enlaces entregados por Óscar el **19/08/2026**.
 | `CAJAS.PL` Acero plata | 23,00 € | [1005008932757286](https://es.aliexpress.com/item/1005008932757286.html) | **19,19 €** (oferta; normal 39,98) |
 | `CAJAS.NG` Negra PVD | 23,00 € | mismo anuncio | **19,19 €** |
 | `CAJAS.BR` Bronce | 23,00 € | mismo anuncio | **19,19 €** |
-| `CAJAS.TI` Titanio | 54,39 € | **falta** (no está en ese anuncio) | — |
+| `CAJAS.TI` Titanio 36 y 39 mm | 54,39 € | [1005005751120953](https://es.aliexpress.com/item/1005005751120953.html) | **50,80 €** (oferta; PVP 104,70) |
 | `ESFERAS.KR/KB/BRZ` Khaki 12/24 | 17,29 € | [1005005292610859](https://es.aliexpress.com/item/1005005292610859.html) | **4,88 €** (normal 5,56) |
 | `ESFERAS.MA/MB` Murph | 21,19 € | [1005005589112497](https://es.aliexpress.com/item/1005005589112497.html) | **6,21 €** (normal 7,07) |
 | `CORREAS.NATO/NATON` Nato | **11,29 €** ✅ | [1005012621893442](https://es.aliexpress.com/item/1005012621893442.html) | 11,29 € (captura 18/08) |
@@ -88,9 +88,10 @@ Suizo» se sostiene sin discusión.
 4. **Los colores del nato.** Óscar (19/08): «usaremos todos excepto el azul»,
    y ese anuncio tiene seis — Brown/beige, Gray, Black, Army Green, Black Gray
    y Royal Blue. La ficha solo ofrece dos natos: verde militar y negro.
-5. **El titanio.** El anuncio de cajas trae plata, negra PVD y bronce. El
-   titanio de la ficha (54,39 €, y con fotos del Murph desde el 19/08) viene
-   de otro sitio que no está anotado.
+5. **El titanio, resuelto** (Óscar, 19/08): tiene su propio anuncio, 36 y
+   39 mm, a 50,80 €. La ficha calcula 54,39 y se deja: el margen va a favor.
+   Tampoco esa caja contempla el Ronda 715, así que el cuarzo en titanio
+   necesita el anillo — y el motor ya lo cobra en todo el cuarzo.
 6. **Las tapas.** El anuncio de cajas trae tapa sólida y tapa de cristal al
    mismo precio; la ficha ya las ofrece como `tapa` S/C y no las cobra aparte.
    Confirmado que la sólida va al cuarzo y la de cristal a los automáticos.
