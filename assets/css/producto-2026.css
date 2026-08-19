@@ -311,22 +311,31 @@ main.cv2{ overflow:visible; overflow-x:clip }
 /* Cuando la foto madre ya trae la cabeza elegida, su capa se retira */
 .pv-hero img.pv-capa[hidden]{display:none}
 
-/* ---------- KLARNA, JUNTO AL PRECIO (Óscar, 18/08/2026) ----------
-   A la derecha del precio, en pequeño, aprovechando el hueco que
-   quedaba. Si no cabe, cae debajo en vez de estrujar el precio. */
+/* ---------- LA ZONA DE COMPRA, AL MODO HAMILTON (Óscar, 19/08/2026)
+   Precio y disponibilidad en la misma línea; debajo el botón; y bajo
+   el botón, la caja de Klarna con su marco. ---------- */
 .pv-precio-fila{
   display:flex;align-items:baseline;justify-content:space-between;
   gap:16px;flex-wrap:wrap;
 }
 .pv-precio-fila .pv-precio{margin:0}
-.pv-klarna{
+
+.pv-stock{
   margin:0;display:flex;align-items:center;gap:8px;
-  font-size:12px;line-height:1.3;color:var(--cv2-gris);
+  font-size:14px;color:var(--cv2-gris);
 }
-.pv-klarna img{
-  display:block;flex:none;height:20px;width:auto;
-  background:#FFA8CD;border-radius:4px;padding:4px 6px;
+.pv-stock i{
+  width:9px;height:9px;border-radius:50%;background:#2FA84F;
+  box-shadow:0 0 0 3px rgba(47,168,79,.18);
 }
-.pv-klarna span{display:flex;flex-direction:column}
+
+.pv-klarna{
+  margin:0;display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:6px;
+  border:1px solid var(--cv2-linea);padding:10px 12px;
+  font-size:12.5px;line-height:1.35;color:var(--cv2-gris);text-align:center;
+}
+.pv-klarna img{display:block;flex:none;height:18px;width:auto;
+  background:#FFA8CD;border-radius:4px;padding:3px 5px}
 .pv-klarna b{font-weight:700;color:var(--cv2-negro)}
-.pv-klarna small{font-size:11px;color:var(--cv2-gris)}
+.pv-klarna a{color:var(--cv2-negro);text-decoration:underline}
