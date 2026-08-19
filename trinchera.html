@@ -523,7 +523,10 @@
     /* Cuando la foto no es exactamente la combinación elegida, se dice.
        Dos casos: la caja negra no está fotografiada con el segundero rojo,
        y el Murph con brazalete o pack se fotografió en acero, no en titanio. */
-    var notaAcero = e.estilo === 'M' && !deLaSerie && (e.correa === 'ACERO' || e.correa === 'PACK');
+    /* El aviso es por la CAJA, no por la foto: con los numerales blancos la
+       foto es vieja pero la caja que se ve es la de acero, que es la
+       elegida, y ahí no hay nada que avisar. */
+    var notaAcero = e.estilo === 'M' && esTitanio && (e.correa === 'ACERO' || e.correa === 'PACK');
     var notaSeg = esNegra && e.esf === 'KR';
     $('[data-pv-nota]').textContent = notaAcero ? 'Imagen con la caja en acero plata' : 'Fotografiado con segundero blanco';
     $('[data-pv-nota]').hidden = !(notaAcero || notaSeg);
