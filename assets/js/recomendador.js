@@ -14,8 +14,13 @@
      avisa de en qué falla.
    · Cada recomendación lleva su «pero»: lo que ese reloj NO hace.
      Es lo que hace creíble todo lo demás.
-   · Aquí no se pide un correo ni se guarda nada. No hay embudo
-     que capture: hay una respuesta.
+   · Aquí NO se pide un correo. Al que llega de la calle no se le
+     guarda nada: hay una respuesta, no un embudo que capture.
+   · Al que YA ha entrado con su cuenta sí se le anotan las tres
+     respuestas en su ficha (19/08/2026), y entonces no se le
+     vuelven a preguntar cada vez que abre la colección. Y si ya
+     nos dijo su muñeca en centímetros, la primera pregunta se
+     deduce de ahí: preguntar dos veces lo mismo es de no escuchar.
    ============================================================ */
 (function () {
   'use strict';
@@ -58,6 +63,30 @@
   };
 
   var fichas = null, paso = 0, respuestas = {};
+  var SOCIO = null;       // {id, …} solo si ha entrado con su cuenta
+  var recordado = false;  // true si las tres salieron de su ficha
+
+  /* Su medida en centímetros vale por la primera pregunta: los tramos
+     son los mismos que se le enseñan en los botones. */
+  function deCentimetros(cm) {
+    cm = Number(cm);
+    if (!cm) return null;
+    if (cm < 16) return 'fina';
+    if (cm <= 18) return 'normal';
+    return 'ancha';
+  }
+
+  /* Se anota lo que responde, si es de casa. Si falla, no se le dice
+     nada: no ha venido a guardar un perfil, ha venido a que le
+     recomienden un reloj. */
+  function anota(clave, valor) {
+    if (!SOCIO || !SOCIO.id || !window.laoraSesion || !laoraSesion.escribir) return;
+    var cambios = { rec_fecha: new Date().toISOString() };
+    cambios['rec_' + clave] = valor;
+    laoraSesion.escribir('socios?id=eq.' + SOCIO.id, {
+      method: 'PATCH', body: JSON.stringify(cambios)
+    }).catch(function () {});
+  }
 
   /* ---------- pintar ---------- */
 
@@ -82,7 +111,9 @@
     var botones = caja.querySelectorAll('.rec-opcion');
     for (var j = 0; j < botones.length; j++) {
       botones[j].addEventListener('click', function () {
-        respuestas[PREGUNTAS[paso].clave] = this.dataset.valor;
+        var clave = PREGUNTAS[paso].clave;
+        respuestas[clave] = this.dataset.valor;
+        anota(clave, this.dataset.valor);
         paso++;
         pinta();
       });
@@ -171,18 +202,57 @@
       html += '</div>';
     }
 
+    /* Si las respuestas salen de su ficha, se dice. Que la página
+       acierte sin preguntar está bien; que no se sepa por qué, no. */
+    if (recordado) {
+      var dicho = [];
+      for (var q = 0; q < PREGUNTAS.length; q++) {
+        var pr = PREGUNTAS[q];
+        for (var o = 0; o < pr.opciones.length; o++) {
+          if (pr.opciones[o].v === respuestas[pr.clave]) dicho.push(pr.opciones[o].r.toLowerCase());
+        }
+      }
+      html = '<p class="rec-recordado">Esto va por lo que ya nos contaste: <b>' +
+             dicho.join('</b>, <b>') + '</b>. Si ha cambiado, vuelve a empezar aquí abajo.</p>' + html;
+    }
+
     html += '<button type="button" class="rec-atras" data-otra>← Empezar otra vez</button>';
     caja.innerHTML = html;
     caja.querySelector('[data-otra]').addEventListener('click', function () {
-      paso = 0; respuestas = {}; pinta();
+      paso = 0; respuestas = {}; recordado = false; pinta();
     });
   }
 
   /* ---------- arranque ---------- */
 
-  fetch('/assets/datos/recomendador.json')
-    .then(function (r) { return r.json(); })
-    .then(function (d) { fichas = d.fichas; pinta(); })
+  /* Lo que ya nos contó, si es de casa. Se pregunta solo lo que
+     falte; si están las tres, se le enseña directamente su
+     recomendación, con el «empezar otra vez» de siempre debajo. */
+  function loQueYaSabemos() {
+    if (!window.laoraSesion || !laoraSesion.hay()) return Promise.resolve();
+    return laoraSesion.quienSoy().then(function (u) {
+      if (!u) return;
+      SOCIO = { id: u.id };
+      return laoraSesion.consultar(
+        'socios?select=muneca_cm,rec_muneca,rec_uso,rec_presupuesto&limit=1');
+    }).then(function (filas) {
+      var s = filas && filas[0];
+      if (!s) return;
+      var muneca = s.rec_muneca || deCentimetros(s.muneca_cm);
+      if (muneca) respuestas.muneca = muneca;
+      if (s.rec_uso) respuestas.uso = s.rec_uso;
+      if (s.rec_presupuesto) respuestas.presupuesto = s.rec_presupuesto;
+      /* El paso es la primera pregunta sin contestar. */
+      while (paso < PREGUNTAS.length && respuestas[PREGUNTAS[paso].clave]) paso++;
+      recordado = paso >= PREGUNTAS.length;
+    }).catch(function () {});
+  }
+
+  Promise.all([
+    fetch('/assets/datos/recomendador.json').then(function (r) { return r.json(); }),
+    loQueYaSabemos()
+  ])
+    .then(function (r) { fichas = r[0].fichas; pinta(); })
     .catch(function () {
       /* Sin datos no se enseña un cacharro roto: se quita de en medio
          y la colección de abajo sigue estando entera. */
