@@ -41,6 +41,24 @@
 
   var PEDIDO = null;   // {numero, total} una vez hecho
 
+  /* EL PEDIDO PENDIENTE SE RECUERDA.
+     La cesta se vacía al saltar a la pasarela, así que quien cierre el
+     checkout sin pagar se quedaría sin cesta Y sin manera de volver a
+     pagar lo que ya ha pedido. Se guarda aquí el número, y al volver a
+     esta pantalla aparece otra vez el botón de pagar. El servidor se
+     encarga de lo demás: si ese pago sigue abierto devuelve el mismo
+     checkout, y si ya estaba pagado lo dice y aquí se olvida. */
+  var LLAVE = 'laora.pedido';
+  function recordar(p) {
+    try { localStorage.setItem(LLAVE, JSON.stringify(p)); } catch (e) {}
+  }
+  function recordado() {
+    try { return JSON.parse(localStorage.getItem(LLAVE) || 'null'); } catch (e) { return null; }
+  }
+  function olvidar() {
+    try { localStorage.removeItem(LLAVE); } catch (e) {}
+  }
+
   function euros(v) {
     return new Intl.NumberFormat('es-ES', {
       style: 'currency', currency: 'EUR',
@@ -232,6 +250,7 @@
       }).then(function (res) {
         if (!res.ok || !res.d.ok) throw new Error(res.d && res.d.error ? res.d.error : 'no se pudo');
         PEDIDO = res.d;
+        recordar({ numero: PEDIDO.numero, total: PEDIDO.total });
         decir(avisoDatos, '');
         formDatos.hidden = true;
         pasoDatos.hidden = true;
@@ -306,6 +325,7 @@
       }).then(function (r) {
         return r.json().then(function (d) { return { ok: r.ok, d: d }; });
       }).then(function (res) {
+        if (res.d && res.d.pagado) { olvidar(); throw new Error('Este pedido ya está pagado. Gracias.'); }
         if (!res.ok || !res.d.url) throw new Error(res.d && res.d.error ? res.d.error : 'no se pudo abrir el pago');
         /* La cesta ya no hace falta: lo que vale a partir de aquí es el
            pedido, que está escrito y se ve en «tu cuenta». */
@@ -341,6 +361,24 @@
   var acabaDeEntrar = laoraSesion.recoger();
 
   pintar();
+
+  /* ¿Quedó un pedido hecho y sin pagar? Se enseña el paso del pago tal
+     como estaba, para que pueda terminar sin repetir nada. */
+  (function pendiente() {
+    var p = recordado();
+    if (!p || !p.numero || !laoraSesion.hay()) return;
+    if (laoraCarritoLeer().length) return;   // hay cesta nueva: manda ella
+    PEDIDO = p;
+    if (continuar) continuar.hidden = true;
+    pasoPagar.hidden = false;
+    document.querySelector('[data-numero]').textContent = p.numero;
+    document.querySelector('[data-total-final]').textContent = euros(p.total);
+    var enBoton = document.querySelector('[data-total-boton]');
+    if (enBoton) enBoton.textContent = euros(p.total);
+    pintarPlazo(p.total);
+    pintarMetodo();
+    decir(avisoPagar, 'Este pedido está hecho y a la espera de pago.');
+  })();
 
   if (laoraSesion.hay() && laoraCarritoLeer().length) {
     laoraSesion.quienSoy().then(function (u) {
