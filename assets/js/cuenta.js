@@ -61,6 +61,24 @@
     }
   })();
 
+  /* ---------- de vuelta de la pasarela ----------
+     Mollie devuelve aquí con `?pedido=` cuando el pago termina. No se
+     dice «pagado»: quien lo confirma es el webhook, no esta vuelta.
+     Lo que sí se hace es olvidar el pedido pendiente que el carrito
+     guardó, para que no vuelva a ofrecer pagar lo mismo. */
+  (function deVuelta() {
+    var m = location.search.match(/[?&]pedido=([^&]+)/);
+    if (!m) return;
+    var numero = decodeURIComponent(m[1]);
+    try { localStorage.removeItem('laora.pedido'); } catch (e) {}
+    history.replaceState(null, '', location.pathname);
+    form.hidden = true;
+    hecho.hidden = false;
+    hecho.querySelector('[data-hecho-texto]').textContent =
+      'Hemos recibido tu pedido ' + numero + '. En cuanto el pago quede confirmado ' +
+      'te avisamos por correo. Gracias por confiar en laOra.';
+  })();
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var correo = (campo.value || '').trim();
