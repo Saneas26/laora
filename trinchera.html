@@ -406,6 +406,11 @@
   function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
 
   var LOGO = 3.78;
+  /* EL ANILLO ESPACIADOR DEL CUARZO (Óscar, 19/08/2026). La caja se pide
+     cortada para el calibre y solo existe en NH35/NH36 y en ETA2824/PT5000:
+     el automático entra directo y el Ronda 715 del cuarzo necesita
+     portamovimiento. Hasta hoy se estaba regalando en el precio. */
+  var ANILLO = 3.60;
 
   var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B', cierre: 'plata' };
 
@@ -428,7 +433,8 @@
   }
   function costes() {
     return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
-           CORREAS[e.correa].coste + (conCierre() ? CIERRES[e.cierre].extra : 0) + LOGO;
+           CORREAS[e.correa].coste + (conCierre() ? CIERRES[e.cierre].extra : 0) + LOGO +
+           (e.mov === 'Q' ? ANILLO : 0);
   }
   function pvpBase(c) {
     var neto = c + 9 / 1.21 + (MOVS[e.mov].coste + 19) * 0.05;
