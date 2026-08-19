@@ -253,6 +253,14 @@ function montarHtml(marca: Marca, t: Texto, enlace: string, codigo: string) {
     <tr><td style="padding:20px 30px 0">
       <p style="margin:0 0 6px;font:400 14px/1.5 ${S};color:#6b6862">Si el botón no te funciona, copia esta dirección en el navegador:</p>
       <p style="margin:0;font:400 13px/1.5 ${S};color:${marca.acento};word-break:break-all">${esc(enlace)}</p>
+    </td></tr>
+    <!-- EL CÓDIGO, SIEMPRE (19/08/2026). El enlace vale una sola vez y
+         solo entra en el navegador donde se abre: si el correo lo
+         previsualiza, o si se lee en el móvil y se estaba comprando en
+         el ordenador, no sirve. El código se escribe donde uno esté. -->
+    <tr><td style="padding:22px 30px 0" align="center">
+      <p style="margin:0 0 6px;font:400 14px/1.5 ${S};color:#6b6862">O escribe este código en la misma pantalla donde lo pediste:</p>
+      <p style="margin:0;font:700 32px/1.2 ${S};letter-spacing:.22em;color:${marca.tinta}">${esc(codigo)}</p>
     </td></tr>` : `
     <tr><td style="padding:24px 30px 0" align="center">
       <p style="margin:0 0 8px;font:400 15px/1.5 ${S};color:#6b6862">Tu código:</p>
@@ -281,7 +289,7 @@ function montarTexto(marca: Marca, t: Texto, enlace: string, codigo: string) {
   const otras = MARCAS.filter((m) => m.id !== marca.id)
     .map((m) => `  ${m.nombre} — ${m.que}: ${m.url}`).join('\n');
   const cuerpo = enlace
-    ? `${t.boton}:\n${enlace}`
+    ? `${t.boton}:\n${enlace}\n\nO escribe este código en la misma pantalla donde lo pediste: ${codigo}`
     : `Tu código: ${codigo}`;
   return `${t.titulo}
 

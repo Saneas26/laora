@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/carrito.css?v=9">
+<link rel="stylesheet" href="/assets/css/carrito.css?v=10">
 </head>
 <body>
 
@@ -79,6 +79,19 @@
       <button class="ca-pagar" type="submit" data-enviar-enlace>Enviarme el enlace</button>
     </form>
     <p class="ca-aviso-paso" data-aviso-entrar hidden></p>
+
+    <!-- El código, para quien el enlace no le sirva. Aquí importa más
+         que en ningún sitio: quien abre el correo en el móvil mientras
+         compraba en el ordenador perdería la compra. -->
+    <form class="ca-form ca-codigo" data-form-codigo hidden>
+      <label class="ca-campo ca-ancho">
+        <span>¿No te funciona el enlace? Escribe el código del correo</span>
+        <input type="text" inputmode="numeric" autocomplete="one-time-code"
+               placeholder="000000" maxlength="8" data-codigo>
+      </label>
+      <button class="ca-pagar" type="submit" data-entrar-codigo>Entrar y seguir</button>
+      <p class="ca-aviso-paso" data-aviso-codigo hidden></p>
+    </form>
   </section>
 
   <!-- ---------- paso 3: a dónde va ---------- -->
@@ -160,8 +173,8 @@
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/sesion.js?v=8"></script>
-<script src="/assets/js/carrito.js?v=8"></script>
-<script src="/assets/js/carrito-pantalla.js?v=8"></script>
+<script src="/assets/js/sesion.js?v=9"></script>
+<script src="/assets/js/carrito.js?v=9"></script>
+<script src="/assets/js/carrito-pantalla.js?v=9"></script>
 </body>
 </html>

@@ -4,9 +4,17 @@
    Lo comparten la cuenta, el carrito y la app. Aquí no se pinta
    nada: solo se sabe quién eres y se consigue un token válido.
 
-   Cómo entra la gente: se pide el correo, llega un enlace, y al
-   volver Supabase deja los tokens en el fragmento de la dirección
-   (`#access_token=…`). Se guardan en este navegador y ya está.
+   Cómo entra la gente: se pide el correo y llega un correo con DOS
+   caminos. Si pulsa el enlace, al volver Supabase deja los tokens en
+   el fragmento de la dirección (`#access_token=…`) y se guardan aquí.
+   Si escribe el código de seis cifras, se canjea con `entrarConCodigo`
+   y se guarda igual.
+
+   El código existe porque el enlace falla más de lo que parece: vale
+   una sola vez —y hay gestores de correo que lo abren solos para
+   comprobarlo, gastándolo— y solo deja la sesión en el navegador donde
+   se abre, así que quien lee el correo en el móvil mientras compraba
+   en el ordenador se queda fuera.
 
    EL TOKEN CADUCA A LA HORA. Por eso está `token()`: mira si le
    queda vida y, si no, lo renueva con el `refresh_token` antes de
@@ -116,6 +124,40 @@
     });
   }
 
+  /* ---------- ENTRAR CON EL CÓDIGO ----------
+     El enlace del correo vale UNA vez y solo entra en el navegador
+     donde se abre: si el gestor de correo lo previsualiza, se gasta; y
+     si se lee en el móvil mientras se compraba en el ordenador, la
+     sesión se queda en el móvil. El código no tiene ese problema: se
+     escribe donde uno esté.
+
+     Supabase pide que el `type` coincida con el motivo por el que se
+     mandó el código, y desde fuera no se sabe si el correo era de alta
+     o de entrada. Así que se prueban los tres, en orden. */
+  function entrarConCodigo(correo, codigo) {
+    var tipos = ['email', 'magiclink', 'signup'];
+
+    function intento(i) {
+      if (i >= tipos.length) throw new Error('codigo');
+      return fetch(URL_SB + '/auth/v1/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: ANONIMA },
+        body: JSON.stringify({
+          type: tipos[i],
+          email: String(correo || '').trim(),
+          token: String(codigo || '').replace(/\s/g, '')
+        })
+      }).then(function (r) {
+        if (!r.ok) return intento(i + 1);
+        return r.json().then(function (s) {
+          if (!s || !s.access_token) return intento(i + 1);
+          return guardar(s);
+        });
+      });
+    }
+    return intento(0);
+  }
+
   /* Una llamada a la base con la sesión puesta. `tabla` puede llevar
      el filtro de PostgREST: `socios?select=*`. */
   function consultar(tabla, opciones) {
@@ -147,6 +189,7 @@
     token: token,
     quienSoy: quienSoy,
     pedirEnlace: pedirEnlace,
+    entrarConCodigo: entrarConCodigo,
     consultar: consultar,
     salir: salir
   };

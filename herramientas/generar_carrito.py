@@ -44,8 +44,8 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 9
-V_JS = 8
+V_CSS = 10
+V_JS = 9
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
@@ -138,6 +138,19 @@ PAGINA = f"""<!DOCTYPE html>
       <button class="ca-pagar" type="submit" data-enviar-enlace>Enviarme el enlace</button>
     </form>
     <p class="ca-aviso-paso" data-aviso-entrar hidden></p>
+
+    <!-- El código, para quien el enlace no le sirva. Aquí importa más
+         que en ningún sitio: quien abre el correo en el móvil mientras
+         compraba en el ordenador perdería la compra. -->
+    <form class="ca-form ca-codigo" data-form-codigo hidden>
+      <label class="ca-campo ca-ancho">
+        <span>¿No te funciona el enlace? Escribe el código del correo</span>
+        <input type="text" inputmode="numeric" autocomplete="one-time-code"
+               placeholder="000000" maxlength="8" data-codigo>
+      </label>
+      <button class="ca-pagar" type="submit" data-entrar-codigo>Entrar y seguir</button>
+      <p class="ca-aviso-paso" data-aviso-codigo hidden></p>
+    </form>
   </section>
 
   <!-- ---------- paso 3: a dónde va ---------- -->

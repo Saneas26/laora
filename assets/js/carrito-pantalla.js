@@ -173,11 +173,53 @@
       /* Vuelve AQUÍ, no a la cuenta: así no pierde la compra. */
       laoraSesion.pedirEnlace(correo, '/carrito').then(function () {
         formEntrar.hidden = true;
-        decir(avisoEntrar, 'Te hemos enviado un enlace a ' + correo +
-          '. Ábrelo desde este mismo dispositivo y vuelves aquí, con tu cesta intacta.');
+        if (formCodigo) formCodigo.hidden = false;
+        decir(avisoEntrar, 'Te hemos enviado un correo a ' + correo +
+          '. Si lo abres en este mismo dispositivo, el enlace te trae de vuelta con la ' +
+          'cesta intacta. Y si lo lees en el móvil, escribe aquí abajo el código: sirve igual.');
       }).catch(function () {
         boton.disabled = false;
         decir(avisoEntrar, 'No hemos podido enviar el enlace. Inténtalo dentro de un momento.', true);
+      });
+    });
+  }
+
+  /* Entrar con el código, para quien no pueda con el enlace. Aquí
+     importa más que en ningún sitio: quien lee el correo en el móvil
+     mientras compraba en el ordenador perdería la cesta. */
+  var formCodigo = document.querySelector('[data-form-codigo]');
+  var avisoCodigo = document.querySelector('[data-aviso-codigo]');
+
+  if (formCodigo) {
+    formCodigo.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var correo = (formEntrar.querySelector('[data-correo]').value || '').trim();
+      var codigo = (formCodigo.querySelector('[data-codigo]').value || '').trim();
+      if (!codigo) { decir(avisoCodigo, 'Escribe el código que te ha llegado.', true); return; }
+
+      var b = formCodigo.querySelector('[data-entrar-codigo]');
+      b.disabled = true;
+      decir(avisoCodigo, 'Comprobando…');
+
+      laoraSesion.entrarConCodigo(correo, codigo).then(function () {
+        return laoraSesion.quienSoy();
+      }).then(function (u) {
+        if (!u) throw new Error('codigo');
+        decir(avisoCodigo, '');
+        formCodigo.hidden = true;
+        decir(avisoEntrar, 'Ya estás dentro como ' + u.email + '.');
+        pasoEntrar.hidden = true;
+        pasoDatos.hidden = false;
+        var quien = document.querySelector('[data-quien]');
+        if (quien) quien.textContent = 'Estás dentro como ' + u.email + '.';
+        laoraSesion.consultar('socios?select=*&limit=1').then(function (filas) {
+          if (filas && filas.length) rellenar(filas[0]);
+        });
+        pasoDatos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }).catch(function () {
+        b.disabled = false;
+        decir(avisoCodigo, 'Ese código no vale. Comprueba que lo has copiado entero, ' +
+                           'y que es el del último correo.', true);
       });
     });
   }

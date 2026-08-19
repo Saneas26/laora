@@ -203,6 +203,43 @@
     history.replaceState(null, '', location.pathname);
   }
 
+  /* ---------- entrar con el código ----------
+     El enlace se gasta al primer clic y solo sirve en el navegador que
+     lo abre. Con el código se entra desde donde uno esté. */
+  var formCodigo = document.querySelector('[data-form-codigo]');
+  var avisoCodigo = document.querySelector('[data-aviso-codigo]');
+
+  function decirCodigo(texto, malo) {
+    if (!avisoCodigo) return;
+    avisoCodigo.textContent = texto || '';
+    avisoCodigo.hidden = !texto;
+    avisoCodigo.classList.toggle('cu-error', !!malo);
+  }
+
+  if (formCodigo) {
+    formCodigo.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var correo = (campo.value || '').trim();
+      var codigo = (formCodigo.querySelector('[data-codigo]').value || '').trim();
+      if (!codigo) { decirCodigo('Escribe el código que te ha llegado.', true); return; }
+
+      var b = formCodigo.querySelector('[data-entrar-codigo]');
+      b.disabled = true;
+      decirCodigo('Comprobando…');
+
+      laoraSesion.entrarConCodigo(correo, codigo).then(function () {
+        return laoraSesion.quienSoy();
+      }).then(function (u) {
+        if (!u) throw new Error('codigo');
+        abrirDentro(u);
+      }).catch(function () {
+        b.disabled = false;
+        decirCodigo('Ese código no vale. Comprueba que lo has copiado entero, ' +
+                    'y que es el del último correo.', true);
+      });
+    });
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var correo = (campo.value || '').trim();
