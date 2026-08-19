@@ -1141,7 +1141,7 @@ h2 { font-size: clamp(40px, 5vw, 74px); letter-spacing: -.055em; line-height: .9
    a secas y que luego resulte que solo si te apuntas es de las cosas
    que hunden una marca, así que el asterisco se explica donde se lee. */
 .nota-garantia{
-  margin-top:14px;font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.72);
+  margin-top:14px;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.8);
   max-width:46ch;
 }
 .nota-garantia a{color:inherit;text-decoration:underline}
