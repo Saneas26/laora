@@ -63,6 +63,13 @@
              admite qué correa y qué esfera— se quedan: eso es catálogo, no
              fotografía. Lo único que se ha ido son las imágenes. -->
         <img data-pv-foto alt="laOra Trinchera" hidden>
+        <!-- La hebilla elegida, en su esquina. Es foto de la CORREA, no del
+             reloj, y se comparte con el Lunar: por eso no se fue con las
+             demás cuando se vació el visor. -->
+        <div class="pv-minis">
+          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Trinchera" hidden
+               src="/assets/img/lunar-config/buckles/plata.avif?v=2">
+        </div>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
           <span>Estamos rehaciendo todas las imágenes del Trinchera. Las medidas, los materiales y el precio son los definitivos.</span>
@@ -607,9 +614,12 @@
     /* El cierre: con la piel italiana, y su foto en la esquina del visor */
     var hayCierre = conCierre();
     $('[data-pv-grupo-cierre]').hidden = !hayCierre;
+    /* Con seguro: sin este `if`, quitar la miniatura del HTML tumbaba
+       `pinta()` entera y con ella la foto, el precio y la ficha. Pasó el
+       19/08/2026 al vaciar el visor. */
     var heb = $('[data-pv-hebilla-img]');
-    heb.hidden = !hayCierre;
-    if (hayCierre) {
+    if (heb) heb.hidden = !hayCierre;
+    if (hayCierre && heb) {
       botones('cierre', Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
       heb.src = CIERRE_IMG + e.cierre + '.avif?v=2';
       heb.alt = 'Hebilla del Trinchera, ' + CIERRES[e.cierre].tec;
