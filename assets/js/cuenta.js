@@ -174,8 +174,19 @@
       if (i.type === 'checkbox') i.checked = !!socio[k];
       else if (socio[k] !== null && socio[k] !== undefined) i.value = socio[k];
     });
+    /* En cuanto sabemos su nombre, se le llama por él y el correo se
+       retira: ya no hace falta decirle con qué cuenta ha entrado
+       cuando le estamos saludando por su nombre. Mientras no lo
+       sepamos, el correo se queda: es lo único que le identifica. */
     var hola = document.querySelector('[data-hola]');
-    if (hola && socio.nombre) hola.textContent = 'Hola, ' + socio.nombre;
+    var correo = document.querySelector('[data-correo-dentro]');
+    if (socio.nombre) {
+      if (hola) hola.textContent = 'Hola, ' + socio.nombre;
+      if (correo) correo.hidden = true;
+    } else {
+      if (hola) hola.textContent = 'Hola';
+      if (correo) correo.hidden = false;
+    }
   }
 
   var formGuardar = document.querySelector('[data-form-datos]');
