@@ -81,62 +81,6 @@
       "nota": "MADRE INTEGRADA de Oscar (18/08): la correa abraza la caja. **SOLO CON BISEL AZUL** (orden de Oscar): con el bisel negro y con la caja negra queda tachada. Al restringirla al bisel azul sobra la exclusion de la esfera verde, que es de bisel negro.",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
     },
-    "goma-negra-costura-verde": {
-      "src": "/assets/img/lunar-config/straps/goma-negra-costura-verde.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [
-        "cab-acero-bazul-"
-      ],
-      "master4k": "masters-2026/lunar/capas/goma-negra-costura-verde-madre-4k.png",
-      "nota": "IMAGEN MADRE: foto completa del preview, con la correa TAL CUAL y las cabezas encima. Geometria verificada contra las madres ya aprobadas (chords identicos). Solo con cajas de acero: sobre la caja negra asomaria el acero de la foto. NO con el bisel azul (Oscar, 18/08): con esa caja no se ofrece ninguna correa negra.",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
-    },
-    "goma-negra-costura-naranja": {
-      "src": "/assets/img/lunar-config/straps/goma-negra-costura-naranja.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [
-        "cab-acero-bazul-"
-      ],
-      "master4k": "masters-2026/lunar/capas/goma-negra-costura-naranja-madre-4k.png",
-      "nota": "Sale de la madre de la costura verde (P-020 del proveedor). El caucho es NEGRO, o sea sin color, asi que el hilo es lo unico cromatico de la foto y se aisla por saturacion: se le cambia el tono conservando torsion, brillos y relieve. Ni un pixel dibujado. Herramienta: herramientas/recolorear_pespunte.py NO con el bisel azul (Oscar, 18/08): con esa caja no se ofrece ninguna correa negra.",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
-    },
-    "goma-negra-costura-blanca": {
-      "src": "/assets/img/lunar-config/straps/goma-negra-costura-blanca.webp?v=1",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [
-        "cab-acero-bazul-"
-      ],
-      "master4k": "masters-2026/lunar/capas/goma-negra-costura-blanca-madre-4k.png",
-      "nota": "Sale de la madre de la costura verde (P-025/P-026 del proveedor). El caucho es NEGRO, o sea sin color, asi que el hilo es lo unico cromatico de la foto y se aisla por saturacion: se le cambia el tono conservando torsion, brillos y relieve. Ni un pixel dibujado. Herramienta: herramientas/recolorear_pespunte.py NO con el bisel azul (Oscar, 18/08): con esa caja no se ofrece ninguna correa negra.",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
-    },
-    "goma-azul-pespunte-blanco": {
-      "src": "/assets/img/lunar-config/straps/goma-azul-pespunte-blanco.webp?v=2",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/goma-azul-pespunte-blanco-madre-4k.png",
-      "nota": "Madre regenerada por Oscar el 18/08 a las 14:02: la primera era azul MARINO con reborde azul claro; esta es azul CLARO uniforme. Abierta a las DOS cajas de acero el 18/08 (Oscar sin preferencia): con bisel negro es la propia cabeza de la foto y con bisel azul es la combinacion que el pidio. Fuera la caja negra: queda limpia, pero el azul claro pide acero y ahi el caucho negro no esta disponible, asi que el tipo se quedaria con una sola opcion.",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
-    },
-    "goma-azul-pespunte-azul": {
-      "src": "/assets/img/lunar-config/straps/goma-azul-pespunte-azul.webp?v=2",
-      "cabezasPermitidas": [
-        "cab-acero-"
-      ],
-      "cabezasExcluidas": [],
-      "master4k": "masters-2026/lunar/capas/goma-azul-pespunte-azul-madre-4k.png",
-      "nota": "Sale de la madre de pespunte blanco tinendo el hilo (recolorear_pespunte.py). Con la madre nueva, azul claro, el tinte pasa de azul claro a azul MARINO: el pespunte contrasta con SU correa. Abierta a las DOS cajas de acero el 18/08 (Oscar sin preferencia): con bisel negro es la propia cabeza de la foto y con bisel azul es la combinacion que el pidio. Fuera la caja negra: queda limpia, pero el azul claro pide acero y ahi el caucho negro no esta disponible, asi que el tipo se quedaria con una sola opcion.",
-      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
-    },
     "piel-italiana-negra-pespunte-negro": {
       "src": "/assets/img/lunar-config/straps/piel-italiana-negra-pespunte-negro.webp?v=2",
       "cabezasPermitidas": [
@@ -304,6 +248,126 @@
       "master4k": "masters-2026/lunar/capas/nato-espiga-marron-madre-4k.png",
       "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
       "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero."
+    },
+    "caucho-negro-negro": {
+      "src": "/assets/img/lunar-config/straps/caucho-negro-negro.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ],
+      "master4k": "masters-2026/lunar/capas/caucho-negro-negro-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul."
+    },
+    "caucho-negro-blanco": {
+      "src": "/assets/img/lunar-config/straps/caucho-negro-blanco.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ],
+      "master4k": "masters-2026/lunar/capas/caucho-negro-blanco-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul."
+    },
+    "caucho-negro-verde": {
+      "src": "/assets/img/lunar-config/straps/caucho-negro-verde.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ],
+      "master4k": "masters-2026/lunar/capas/caucho-negro-verde-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul."
+    },
+    "caucho-negro-naranja": {
+      "src": "/assets/img/lunar-config/straps/caucho-negro-naranja.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ],
+      "master4k": "masters-2026/lunar/capas/caucho-negro-naranja-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul."
+    },
+    "caucho-negro-azul": {
+      "src": "/assets/img/lunar-config/straps/caucho-negro-azul.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [
+        "cab-acero-bazul-"
+      ],
+      "master4k": "masters-2026/lunar/capas/caucho-negro-azul-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul."
+    },
+    "caucho-gris-blanco": {
+      "src": "/assets/img/lunar-config/straps/caucho-gris-blanco.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/caucho-gris-blanco-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero."
+    },
+    "caucho-gris-gris": {
+      "src": "/assets/img/lunar-config/straps/caucho-gris-gris.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/caucho-gris-gris-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero."
+    },
+    "caucho-azul-claro-blanco": {
+      "src": "/assets/img/lunar-config/straps/caucho-azul-claro-blanco.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/caucho-azul-claro-blanco-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero."
+    },
+    "caucho-naranja-blanco": {
+      "src": "/assets/img/lunar-config/straps/caucho-naranja-blanco.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/caucho-naranja-blanco-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero."
+    },
+    "caucho-marron-blanco": {
+      "src": "/assets/img/lunar-config/straps/caucho-marron-blanco.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/caucho-marron-blanco-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero."
+    },
+    "caucho-azul-marino-blanco": {
+      "src": "/assets/img/lunar-config/straps/caucho-azul-marino-blanco.webp?v=1",
+      "cabezasPermitidas": [
+        "cab-acero-"
+      ],
+      "cabezasExcluidas": [],
+      "master4k": "masters-2026/lunar/capas/caucho-azul-marino-blanco-madre-4k.png",
+      "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
+      "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero."
     }
   },
   "default": {
