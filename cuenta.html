@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/cuenta.css?v=3">
+<link rel="stylesheet" href="/assets/css/cuenta.css?v=4">
 </head>
 <body>
 
@@ -53,6 +53,17 @@
 
     <div class="cu-hecho" data-hecho hidden>
       <p data-hecho-texto></p>
+
+      <!-- El código, para quien el enlace no le sirva: se gasta al
+           primer clic (hay correos que lo abren solos) y solo entra en
+           el navegador donde se abre. Esto funciona siempre. -->
+      <form class="cu-codigo" data-form-codigo>
+        <label for="codigo">¿No te funciona el enlace? Escribe el código del correo</label>
+        <input id="codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code"
+               placeholder="000000" maxlength="8" data-codigo>
+        <button class="cu-enviar" type="submit" data-entrar-codigo>Entrar</button>
+        <p class="cu-aviso" data-aviso-codigo hidden></p>
+      </form>
     </div>
 
     <div class="cu-ventajas">
@@ -106,7 +117,7 @@
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/sesion.js?v=4"></script>
-<script src="/assets/js/cuenta.js?v=6"></script>
+<script src="/assets/js/sesion.js?v=5"></script>
+<script src="/assets/js/cuenta.js?v=7"></script>
 </body>
 </html>

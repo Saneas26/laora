@@ -189,3 +189,7 @@ body{margin:0;background:var(--ivory);color:var(--ink);
   max-width:52ch;
 }
 .ca-legal-pago a{color:inherit;text-decoration:underline}
+
+/* El código del correo, en el paso de entrar. */
+.ca-codigo{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.ca-codigo input{font-size:24px;font-weight:700;letter-spacing:.28em;text-align:center;height:58px}

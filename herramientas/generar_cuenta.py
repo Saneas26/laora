@@ -44,9 +44,9 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 3
-V_JS = 6
-V_SESION = 4
+V_CSS = 4
+V_JS = 7
+V_SESION = 5
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
 VENTAJAS = [
@@ -89,6 +89,17 @@ PAGINA = f"""<!DOCTYPE html>
 
     <div class="cu-hecho" data-hecho hidden>
       <p data-hecho-texto></p>
+
+      <!-- El código, para quien el enlace no le sirva: se gasta al
+           primer clic (hay correos que lo abren solos) y solo entra en
+           el navegador donde se abre. Esto funciona siempre. -->
+      <form class="cu-codigo" data-form-codigo>
+        <label for="codigo">¿No te funciona el enlace? Escribe el código del correo</label>
+        <input id="codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code"
+               placeholder="000000" maxlength="8" data-codigo>
+        <button class="cu-enviar" type="submit" data-entrar-codigo>Entrar</button>
+        <p class="cu-aviso" data-aviso-codigo hidden></p>
+      </form>
     </div>
 
     <div class="cu-ventajas">
