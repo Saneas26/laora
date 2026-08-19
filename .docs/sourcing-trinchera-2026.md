@@ -65,14 +65,14 @@ derecha o forzada, y eso no lo arregla ningún anillo: el tubo de la corona va
 mecanizado en la caja. **Hay que probarlo con una unidad antes de fiar una
 serie.** Y hay cinco variantes (01 a 05) sin saber cuál va a nuestras cajas.
 
-## ⚠️ «Automático Suizo» con un movimiento de Tianjin
+## «Automático Suizo»: DECIDIDO, se queda (Óscar, 19/08/2026)
 
 El anuncio del automático es un **Tianjin Seagull ST2130**. La arquitectura sí
 es la del ETA 2824-2 y la ficha ya lo dice bien —«Calibre laOra LO_A4026,
-arquitectura Suiza ETA 2824-2»—, pero el **nombre** del escalón es «Automático
-Suizo», y eso afirma un origen que no es. La regla de la casa prohíbe nombrar
-China y la marca del movimiento; no obliga a decir *Suizo*. El cuarzo sí es un
-Ronda 715 de verdad y ahí «Cuarzo Suizo» se sostiene.
+arquitectura Suiza ETA 2824-2»—. Se le planteó a Óscar que el **nombre** del
+escalón afirma un origen que no es el suyo y **decidió dejarlo como está**. No
+se vuelve sobre ello. El cuarzo sí es un Ronda 715 de verdad y ahí «Cuarzo
+Suizo» se sostiene sin discusión.
 
 (También: el anuncio declara **38 h** de reserva de marcha y la web dice 40.)
 
