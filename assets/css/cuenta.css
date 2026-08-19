@@ -44,51 +44,101 @@ body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);
                    color:#7b7a72;text-align:center}
 
 /* ============================================================
-   DENTRO
+   DENTRO · EL CLUB
    ------------------------------------------------------------
-   Los pedidos de quien ha entrado. Hasta el 19/08/2026 esta
-   página no tenía dentro: solo la puerta. Se entraba con el
-   enlace del correo y se volvía a ver el mismo formulario.
+   Lo que la página del Club promete, cumplido. Cuatro bloques
+   numerados, como allí, y mucho aire entre ellos.
+
+   Hasta el 19/08/2026 esta página no tenía dentro: solo la
+   puerta. Se entraba con el enlace del correo y se volvía a ver
+   el mismo formulario.
    ============================================================ */
-.cu-dentro{width:100%;max-width:620px}
-.cu-quien{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-.cu-quien h1{font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
-.cu-correo{margin-top:6px;font-size:15px;color:var(--muted)}
-.cu-salir{flex:0 0 auto;padding:9px 16px;border-radius:999px;
-          background:none;border:1px solid var(--line);color:var(--muted);
-          font:inherit;font-size:14px;cursor:pointer}
+.cu-dentro{width:100%;max-width:720px;padding:8px 0 40px}
+
+.cu-quien{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+          padding-bottom:26px;border-bottom:1px solid var(--line)}
+.cu-hola{font-size:15px;color:var(--muted)}
+.cu-quien h1{margin-top:2px;font-size:clamp(30px,5vw,44px);font-weight:700;
+             letter-spacing:-.03em;line-height:1.05}
+.cu-quien h1 em{font-style:normal;color:var(--gold)}
+.cu-correo{margin-top:8px;font-size:15px;color:var(--muted)}
+.cu-salir{flex:0 0 auto;padding:10px 18px;border-radius:999px;
+          border:1px solid var(--line);color:var(--muted);font-size:14px}
 .cu-salir:hover{border-color:var(--ink);color:var(--ink)}
 
-.cu-cargando,.cu-sin-nada{margin-top:26px;font-size:16px;color:var(--muted)}
+.cu-cargando,.cu-sin-nada{margin-top:30px;font-size:17px;color:var(--muted)}
 .cu-sin-nada a{color:var(--gold);font-weight:700}
 
-.cu-pedidos{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
-.cu-pedido{padding:20px;background:var(--paper);border:1px solid var(--line);border-radius:16px}
-.cu-pedido-alto{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.cu-numero{font-size:17px;font-weight:700}
+/* ---------- los bloques ---------- */
+.cu-bloque{margin-top:46px}
+.cu-rotulo{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+           color:var(--gold)}
+.cu-rotulo-menor{margin-top:30px;color:var(--muted);font-size:12px}
+.cu-explica{margin-top:12px;font-size:16px;line-height:1.6;color:var(--muted);max-width:60ch}
+.cu-lista{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:14px}
+
+/* ---------- una ficha: reloj o pedido ---------- */
+.cu-ficha{padding:22px;background:var(--paper);border:1px solid var(--line);border-radius:18px}
+.cu-ficha-alto{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cu-titulo{font-size:20px;font-weight:700;letter-spacing:-.01em}
 .cu-fecha{font-size:14px;color:var(--muted)}
+.cu-serie{margin-top:4px;font-size:13px;letter-spacing:.1em;color:var(--muted)}
+.cu-detalle{margin-top:10px;font-size:15px;line-height:1.55;color:var(--muted)}
 
 /* El estado, de un vistazo y sin depender solo del color. */
-.cu-estado{display:inline-block;margin-top:10px;padding:5px 12px;border-radius:999px;
-           font-size:13px;font-weight:700;letter-spacing:.02em;
-           background:#eceae4;color:#4a4740}
-.cu-estado.es-espera{background:#fdf0c9;color:#7a5c12}
-.cu-estado.es-bien{background:#e2f0e4;color:#2b5c33}
-.cu-estado.es-camino{background:#e4ecf7;color:#28486f}
+.cu-estado{display:inline-block;margin-top:14px;padding:6px 14px;border-radius:999px;
+           font-size:13px;font-weight:700;background:#eceae4;color:#4a4740}
+.cu-estado.es-espera{background:#f7edcd;color:#75570f}
+.cu-estado.es-bien{background:#e0efe2;color:#28572f}
+.cu-estado.es-camino{background:#e2ebf7;color:#26456c}
 
-.cu-relojes{list-style:none;margin:16px 0 0;padding:0;font-size:15px}
-.cu-relojes li{padding:10px 0;border-top:1px solid var(--line);line-height:1.5}
-.cu-relojes b{font-weight:700}
-.cu-relojes small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
-.cu-total{display:flex;justify-content:space-between;padding-top:12px;margin-top:4px;
-          border-top:2px solid var(--ink);font-size:16px;font-weight:700}
-.cu-nota{margin-top:12px;font-size:14px;line-height:1.55;color:var(--muted)}
+.cu-relojes{list-style:none;margin-top:16px;font-size:15px}
+.cu-relojes li{padding:12px 0;border-top:1px solid var(--line);line-height:1.5}
+.cu-relojes small{display:block;font-size:13.5px;color:var(--muted);margin-top:3px}
+.cu-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:2px;
+          border-top:2px solid var(--ink);font-size:17px;font-weight:700}
+.cu-nota{margin-top:14px;font-size:15px;line-height:1.6;color:var(--muted)}
 .cu-nota b{color:var(--ink)}
-.cu-pagar{margin-top:14px;width:100%;padding:15px;border-radius:999px;
-          background:var(--dark);color:#fffdf8;border:0;font:inherit;font-size:15px;
-          font-weight:700;cursor:pointer}
+.cu-pagar{margin-top:16px;width:100%;padding:16px;border-radius:999px;
+          background:var(--dark);color:#fffdf8;font-size:16px;font-weight:700}
 .cu-pagar:hover:not([disabled]){background:#262925}
 .cu-pagar[disabled]{background:#c9c5bb;color:#6f6c64;cursor:not-allowed}
+
+/* ---------- el taller ---------- */
+.cu-hilo{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.cu-hilo li{max-width:86%;padding:14px 18px;border-radius:16px;font-size:15.5px;line-height:1.55}
+.cu-hilo .de-socio{align-self:flex-end;background:var(--dark);color:#fffdf8;border-bottom-right-radius:5px}
+.cu-hilo .de-laora{align-self:flex-start;background:var(--paper);border:1px solid var(--line);
+                   border-bottom-left-radius:5px}
+.cu-hilo time{display:block;margin-top:6px;font-size:12px;opacity:.7}
+.cu-hilo-vacio{margin-top:18px;font-size:15px;color:var(--muted)}
+.cu-escribir{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+.cu-escribir textarea{padding:15px 16px;border:1px solid var(--line);border-radius:14px;
+                      background:#fff;font-size:16px;line-height:1.5;resize:vertical;min-height:96px}
+.cu-escribir textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--ink)}
+.cu-oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- sus datos ---------- */
+.cu-datos{margin-top:20px;display:flex;flex-direction:column;gap:16px}
+.cu-rejilla{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cu-campo{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cu-campo>span{font-size:14px;font-weight:700}
+.cu-campo>span small{font-weight:400;color:var(--muted)}
+.cu-campo input,.cu-campo select{width:100%;height:52px;padding:0 14px;
+       border:1px solid var(--line);border-radius:12px;background:#fff;font-size:16px}
+.cu-campo input:focus,.cu-campo select:focus{outline:2px solid var(--gold);outline-offset:1px;
+       border-color:var(--ink)}
+.cu-ancho{grid-column:1/-1}
+.cu-cumple{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cu-check{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--paper);
+          border:1px solid var(--line);border-radius:14px;font-size:15px;line-height:1.55;
+          cursor:pointer}
+.cu-check input{flex:0 0 auto;width:24px;height:24px;margin-top:1px;accent-color:var(--gold);cursor:pointer}
+
+@media (max-width:560px){
+  .cu-rejilla{grid-template-columns:1fr}
+  .cu-hilo li{max-width:94%}
+}
 
 /* El código, para quien el enlace no le sirva. Va dentro del aviso de
    «te hemos enviado el correo», que es el momento en que hace falta. */
