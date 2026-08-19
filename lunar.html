@@ -70,7 +70,7 @@
              src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
         <div class="pv-minis">
           <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Lunar" hidden
-               src="/assets/img/lunar-config/buckles/plata.webp">
+               src="/assets/img/lunar-config/buckles/plata.avif?v=2">
           <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
                src="/assets/img/lunar-config/casebacks/tapa-solida-acero.webp">
         </div>
@@ -748,7 +748,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=33')
+  fetch('/assets/img/lunar-config/manifest.json?v=34')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
