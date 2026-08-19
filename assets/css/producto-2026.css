@@ -388,3 +388,17 @@ main.cv2{ overflow:visible; overflow-x:clip }
 .pv-nota-paso{
   margin:8px 0 0; font-size:13px; line-height:1.5; color:var(--cv2-gris);
 }
+
+/* EL VISOR SIN FOTO (19/08/2026). Óscar retiró todas las imágenes del
+   Trinchera para rehacerlas: en vez de dejar un marco vacío o una foto que
+   no corresponde, el visor lo dice. Mismo tamaño y mismo gris que cuando
+   lleva foto, para que la página no dé un salto cuando vuelvan. */
+.pv-sinfoto{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;padding:0 12%;text-align:center;
+}
+.pv-sinfoto p{
+  margin:0;font-family:var(--cv2-mono);font-size:13px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cv2-negro);
+}
+.pv-sinfoto span{max-width:34ch;font-size:14px;line-height:1.45;color:var(--cv2-gris)}
