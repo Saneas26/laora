@@ -45,7 +45,7 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 V_CSS = 7
-V_JS = 6
+V_JS = 7
 
 V2 = '/assets/img/lunar-v2'
 LOGO = V2 + '/laora-wordmark-dark.png'
@@ -160,8 +160,9 @@ PAGINA = f"""<!DOCTYPE html>
 
   <!-- ---------- paso 4: pagar ----------
        Desde el 19/08/2026 cobra Mollie, no un enlace de PayPal. Dos
-       caminos: el pago de siempre —tarjeta, Bizum o PayPal, lo que
-       tenga activo la cuenta— y Klarna en tres plazos.
+       caminos: tarjeta o transferencia, y Klarna en tres plazos.
+       Klarna va aparte a propósito: si saliera mezclado con los demás
+       se cobraría al comprar, y con Klarna hay que cobrar al enviar.
        Klarna no cobra al comprar: autoriza, y el dinero se cobra
        cuando el reloj sale. Aquí se dice, porque es lo que pasa. -->
   <section class="ca-paso ca-hecho" data-paso-pagar hidden>
@@ -173,8 +174,8 @@ PAGINA = f"""<!DOCTYPE html>
 
     <div class="ca-metodos" data-metodos>
       <button type="button" data-metodo="" aria-pressed="true">
-        <b>Tarjeta, Bizum o PayPal</b>
-        <small>Se cobra al momento</small>
+        <b>Tarjeta o transferencia</b>
+        <small>Con tarjeta, al momento</small>
       </button>
       <button type="button" data-metodo="klarna" aria-pressed="false">
         <b>Klarna, en 3 plazos</b>
