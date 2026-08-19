@@ -62,6 +62,7 @@
              que entre la serie nueva. Las TABLAS de lo que existe —qué caja
              admite qué correa y qué esfera— se quedan: eso es catálogo, no
              fotografía. Lo único que se ha ido son las imágenes. -->
+        <img data-pv-foto alt="laOra Trinchera" hidden>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
           <span>Estamos rehaciendo todas las imágenes del Trinchera. Las medidas, los materiales y el precio son los definitivos.</span>
@@ -323,6 +324,35 @@
     CAQ: ['Caqui', '#8a7a55'],  VER: ['Verde', '#4a5a3a'],  GRI: ['Gris', '#6f7276'],
     NAR: ['Naranja', '#c9661e']
   };
+  /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
+     entran de una en una: aquí solo está lo que YA existe, y lo que no está
+     no se enseña —el visor lo dice—. La clave es lo que se ve en la foto:
+     caja, esfera, correa y, en la piel italiana, el pespunte. La hebilla no
+     entra: no cambia el reloj y tiene su propia miniatura.
+
+     Para añadir una foto: se convierte a AVIF en 480/1200/1600 dentro de
+     `assets/img/trinchera-2026/serie/` y se apunta su clave aquí. */
+  var SERIE_IMG = '/assets/img/trinchera-2026/serie/';
+  var SERIE = {
+    'acero-crema-negra-pblanco':  1,
+    'acero-crema-verde-pblanco':  1,
+    'acero-crema-verde-ptono':    1,
+    'acero-crema-marron-pblanco': 1
+  };
+  var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
+  var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
+  var SERIE_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde', ANTE: 'ante',
+                       NATO: 'nato', NATON: 'naton', NATOP: 'natopiel',
+                       ACERO: 'brazalete', PACK: 'pack', PIELO: 'pieloscuro' };
+  function serieFoto() {
+    var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
+    if (!caja || !esf || !correa) return null;
+    var clave = caja + '-' + esf + '-' + correa;
+    if (MURPH_CORREA[e.correa]) clave += '-' + (e.pesp === 'T' ? 'ptono' : 'pblanco');
+    if (e.correa === 'ANTE') clave += '-' + (MURPH_ANTE[e.ante] || 'negro');
+    return SERIE[clave] ? clave : null;
+  }
+
   /* Lo que EXISTE del Murph: dos cajas, tres pieles, dos esferas, cuatro
      antes y dos pespuntes. Son tablas de catálogo, no de fotos. */
   var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
@@ -612,14 +642,19 @@
       }).join('');
     }
 
-    /* LA FOTO. Primero se mira la serie maestra del Murph, que es la que
-       manda; si la combinación no está ahí, se cae a las fotos de antes.
-       De las viejas ya solo se sirve el tamaño de 1.200: los maestros de
-       4.000 px no se publican. */
-    /* LA FOTO. Retirada el 19/08/2026: ninguna combinación enseña imagen
-       hasta que entre la serie nueva. Cuando llegue, aquí van tres líneas:
-       resolver el archivo por clave, y poner `src` y `srcset` en el <img>
-       que hoy no está. */
+    /* LA FOTO: la de la serie nueva si esta combinación ya está hecha, y si
+       no, el cartel. Nunca una imagen que no sea la elegida. */
+    var foto = serieFoto();
+    var img = $('[data-pv-foto]');
+    img.hidden = !foto;
+    $('[data-pv-sinfoto]').hidden = !!foto;
+    if (foto) {
+      img.src = SERIE_IMG + '1200/' + foto + '.avif';
+      img.srcset = [480, 1200, 1600].map(function (s) {
+        return SERIE_IMG + s + '/' + foto + '.avif ' + s + 'w';
+      }).join(', ');
+      img.sizes = '(max-width:900px) 100vw, 46vw';
+    }
 
     /* la ficha técnica */
     $('[data-pv-tec="caja"]').textContent =
@@ -676,7 +711,7 @@
           ? CORREAS[e.correa].nombre + ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
           : CORREAS[e.correa].nombre,
         precio: precio(),
-        foto: ''   /* sin fotografía mientras se rehace la serie */
+        foto: (function () { var i = $('[data-pv-foto]'); return i.hidden ? '' : i.src; })()
       });
       window.location.href = '/carrito.html';
     }
