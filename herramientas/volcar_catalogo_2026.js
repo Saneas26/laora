@@ -235,7 +235,14 @@ function lunar() {
 
         for (const pes of pespuntes) {
           e.tipo = tipo; e.color = color; if (pes) e.pespunte = pes;
-          for (const cierre of (L.esItaliana() ? Object.keys(L.CIERRES) : [null])) {
+          /* CON LA PIEL ITALIANA, EL `null` TAMBIÉN CUENTA.
+             El cierre solo entra en la referencia si el cliente toca
+             una hebilla; si no la toca, la ficha genera la referencia
+             SIN cierre y cobra el de acero plateado. Esa referencia
+             existe de verdad —es la que sale al entrar y elegir piel
+             italiana sin más— y si no está aquí, el servidor rechaza
+             el pedido con «esa referencia ya no está a la venta». */
+          for (const cierre of (L.esItaliana() ? [null, ...Object.keys(L.CIERRES)] : [null])) {
             e.cierre = cierre;
             for (const tapa of [null, ...Object.keys(L.TAPAS)]) {
               e.tapa = tapa;
