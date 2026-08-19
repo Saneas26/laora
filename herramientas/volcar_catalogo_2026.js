@@ -178,7 +178,7 @@ function precisa() {
    ============================================================ */
 function trinchera() {
   const L = motorDe('trinchera.html',
-    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, ANTES, PESPUNTES, CIERRES, MURPH_CORREA, ' +
+    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, NATOS, ANTES, PESPUNTES, CIERRES, MURPH_CORREA, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
@@ -216,14 +216,19 @@ function trinchera() {
              piel del Murph y el cierre de cualquier piel. Se preguntan
              igual, y si el grupo no está pintado, se pasa de largo. */
           const colores   = correa === 'NATOP' ? ofrece('color', Object.keys(L.COLORES)) : [null];
+          /* El nato pasó a ser UNO con cinco colores (Óscar, 19/08/2026), y
+             comparte el grupo «color» del HTML con el nato+piel y el ante. */
+          const natos     = correa === 'NATO' ? ofrece('color', Object.keys(L.NATOS || {})) : [null];
           const antes     = (correa === 'ANTE' && estilo === 'M') ? ofrece('ante', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
 
           for (const color of colores)
+          for (const nato of natos)
           for (const ante of antes)
           for (const pesp of pespuntes) {
             pon({ estilo, mov, diam, caja, esf, correa });
             if (color) L.e.color = color;
+            if (nato) L.e.nato = nato;
             if (ante) L.e.ante = ante;
             if (pesp) L.e.pesp = pesp;
             const cierres = L.conCierre() ? ofrece('cierre', Object.keys(L.CIERRES)) : [null];
@@ -239,13 +244,19 @@ function trinchera() {
                 L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
                   (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.ESFERAS[s.esf].nombre +
                   ' · ' + L.MOVS[s.mov].nombre,
-                s.correa === 'NATOP'
+                s.correa === 'NATO'
+                  ? 'Nato ' + L.NATOS[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
+                  : s.correa === 'NATOP'
                   ? 'Nato + piel genuina, ' + L.COLORES[s.color][0].toLowerCase() + ', hebilla clásica'
                   : (s.correa === 'ANTE' && s.estilo === 'M' && L.ANTES && L.ANTES[s.ante])
                   ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
                   : L.CORREAS[s.correa].nombre,
                 { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
-                  esfera: L.ESFERAS[s.esf].tec, correa: L.CORREAS[s.correa].tec, agua: L.agua() },
+                  esfera: L.ESFERAS[s.esf].tec,
+                  correa: s.correa === 'NATO'
+                    ? 'nato ' + L.NATOS[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
+                    : L.CORREAS[s.correa].tec,
+                  agua: L.agua() },
                 Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
             }
           }
