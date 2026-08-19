@@ -328,9 +328,36 @@
   var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
   var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
   var MURPH_ESF    = { MA: 'crema', MB: 'blanco' };
+  var MURPH_ANTE   = { NEG: 'negro', MOS: 'marronoscuro', AZU: 'azul', MCL: 'marronclaro' };
+  var MURPH_PESP   = { B: 'pblanco', T: 'ptono' };
+
+  /* Lo que EXISTE de la 12/24 del khaki: cuatro cajas con piel italiana y
+     tres con ante. Tablas de catálogo, no de fotos. */
+  var K1224_CAJA      = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
+  var K1224_CORREA    = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde' };
+  var K1224_ANTE_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce' };
   /* El brazalete y el pack se fotografiaron el 19/08/2026, pero solo en
      acero y con los numerales crema. Van aparte porque no siguen la regla
      de caja × piel × esfera: son dos fotos concretas y nada más. */
+  /* LOS CINCO CIERRES DE LA PIEL. Óscar: «este tipo de cierre va asociado a
+     la correa de piel, así que donde usemos esa correa también tienen que ir
+     asociados». Son los mismos cinco de la ficha del Lunar y comparten sus
+     fotos —que son de la correa, no del reloj, y por eso siguen aquí—.
+
+     El precio NO se copia del Lunar: allí el coste del cierre incluye su
+     propia correa. Aquí la piel ya cuesta 13,69 con su hebilla plateada, así
+     que se aplica solo la DIFERENCIA entre cierres del proveedor. */
+  var CIERRES = {
+    'plata':    { nombre: 'Clásica plata',    extra:  0.00, tec: 'hebilla clásica de acero plateado' },
+    'negra':    { nombre: 'Clásica negra',    extra:  1.20, tec: 'hebilla clásica de acero con PVD negro' },
+    'oro-rosa': { nombre: 'Clásica oro rosa', extra: -0.40, tec: 'hebilla clásica en oro rosa' },
+    'oro':      { nombre: 'Clásica oro',      extra:  1.00, tec: 'hebilla clásica dorada' },
+    'mariposa': { nombre: 'Mariposa plata',   extra:  0.20, tec: 'cierre de mariposa de acero plateado' }
+  };
+  var CIERRE_IMG = '/assets/img/lunar-config/buckles/';
+  /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
+  function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
+
   var LOGO = 3.78;
 
   var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B', cierre: 'plata' };
