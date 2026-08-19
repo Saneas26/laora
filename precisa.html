@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=31">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=32">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -71,45 +71,61 @@
           <span class="cv2-chip">LO-01 · Deportivo integrado</span>
         </div>
         <h1>Precisa</h1>
-        <p class="pv-precio" data-pv-precio>249,90 €</p>
-        <p class="pv-imp">Impuestos incluidos.</p>
-        <p class="pv-desc">Nuestro homenaje al <b>Tissot PRX</b>. La forma exacta del tiempo:
-          caja y brazalete integrados en una sola línea de acero, esfera waffle y
-          cristal de zafiro, al precio honesto.</p>
-
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Movimiento <b data-pv-cal>Cal. LO_Q6026</b></p>
-          <div class="pv-opciones" data-pv="mov">
-            <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
-            <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
+      <!-- El pie de compra: fijo bajo las elecciones hasta la Ficha Técnica -->
+      <div class="pv-pie" data-pv-pie>
+          <div class="pv-precio-fila">
+            <p class="pv-precio" data-pv-precio>249,90 €</p>
+            <p class="pv-stock"><span>Disponible</span><i aria-hidden="true"></i></p>
           </div>
-        </div>
+          <p class="pv-imp">Impuestos incluidos.</p>
+          <p class="pv-desc">Nuestro homenaje al <b>Tissot PRX</b>. La forma exacta del tiempo:
+            caja y brazalete integrados en una sola línea de acero, esfera waffle y
+            cristal de zafiro, al precio honesto.</p>
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Caja</p>
-          <p class="pv-fijo">40 mm de acero 316L con brazalete integrado · 11,5 mm de grosor</p>
-        </div>
-
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Tapa trasera</p>
-          <div class="pv-opciones" data-pv="tapa">
-            <button type="button" data-v="S" aria-pressed="true">Roscada Sólida</button>
-            <button type="button" data-v="C" aria-pressed="false">Cristal, Ve el Movimiento</button>
+          <div class="pv-grupo">
+            <p class="pv-rotulo">Movimiento <b data-pv-cal>Cal. LO_Q6026</b></p>
+            <div class="pv-opciones" data-pv="mov">
+              <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
+              <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
+            </div>
           </div>
-        </div>
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Esfera</p>
-          <div class="pv-opciones" data-pv="esf"></div>
-        </div>
+          <div class="pv-grupo">
+            <p class="pv-rotulo">Caja</p>
+            <p class="pv-fijo">40 mm de acero 316L con brazalete integrado · 11,5 mm de grosor</p>
+          </div>
 
-        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+          <div class="pv-grupo">
+            <p class="pv-rotulo">Tapa trasera</p>
+            <div class="pv-opciones" data-pv="tapa">
+              <button type="button" data-v="S" aria-pressed="true">Roscada Sólida</button>
+              <button type="button" data-v="C" aria-pressed="false">Cristal, Ve el Movimiento</button>
+            </div>
+          </div>
 
-        <div class="pv-confianza">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 3 años*</span>
+          <div class="pv-grupo">
+            <p class="pv-rotulo">Esfera</p>
+            <div class="pv-opciones" data-pv="esf"></div>
+          </div>
+
+          <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+          <!-- La caja de Klarna, debajo del botón. OJO: solo se anuncia lo
+               que Mollie tiene aprobado —tres plazos sin intereses—. Nada
+               de «desde X €/mes con su TAE»: eso es financiación a largo
+               plazo, otro producto, y anunciarla sin tenerla sería
+               publicidad financiera falsa. -->
+          <p class="pv-klarna">
+            <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>—</b> con</span>
+            <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+            <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
+          </p>
+
+          <div class="pv-confianza">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 3 años*</span>
+          </div>
+          <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
         </div>
-        <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
       </div>
     </aside>
 
@@ -250,6 +266,11 @@
   function pinta() {
     var m = MOVS[e.mov];
     $('[data-pv-precio]').textContent = eu(precio());
+    /* El plazo de Klarna: un tercio del precio, redondeado hacia arriba
+       al céntimo, como en el Lunar. Tres plazos nunca pueden sumar
+       menos que el total. */
+    var klarna = $('[data-pv-klarna]');
+    if (klarna) klarna.textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
     $('[data-pv-cal]').textContent = 'Cal. ' + m.cal;
 
     todos('[data-pv="mov"] button').forEach(function (b) {
