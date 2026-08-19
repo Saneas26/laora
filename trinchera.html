@@ -55,8 +55,8 @@
       <div class="pv-hero">
         <p class="pv-nota" data-pv-nota hidden>Imagen de la caja en acero plata</p>
         <img data-pv-foto
-          src="/assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif"
-          srcset="/assets/img/trinchera-2026/murph/480/acero-negra-crema.avif 480w, /assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif 1200w, /assets/img/trinchera-2026/murph/1600/acero-negra-crema.avif 1600w"
+          src="/assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=2"
+          srcset="/assets/img/trinchera-2026/murph/480/acero-negra-crema.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/acero-negra-crema.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/acero-negra-crema.avif?v=2 1600w"
           sizes="(max-width:900px) 100vw, 46vw"
           alt="laOra Trinchera">
         <img class="pv-forro" data-pv-forro src="/assets/img/trinchera-2026/forro-piel.webp"
@@ -75,14 +75,14 @@
            debajo del selector y no cambian con lo que elijas. -->
       <div class="pv-extras pv-galeria-fija">
         <figure>
-          <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif"
-               srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif 1600w"
+          <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=2"
+               srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif?v=2 1600w"
                sizes="(max-width:900px) 50vw, 23vw"
                alt="El Trinchera Murph con piel negra, puesto en la muñeca" loading="lazy" decoding="async">
         </figure>
         <figure>
-          <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif"
-               srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif 1600w"
+          <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=2"
+               srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif?v=2 1600w"
                sizes="(max-width:900px) 50vw, 23vw"
                alt="El Trinchera Murph de tres cuartos, con la corona a la vista" loading="lazy" decoding="async">
         </figure>
@@ -293,6 +293,10 @@
   /* LA SERIE MAESTRA DEL MURPH (19/08/2026). Doce fotos de verdad:
      dos cajas × tres pieles × dos esferas. Mandan ellas: si una
      combinación está aquí, existe; si no, no se fotografió. */
+  /* La versión va en la dirección de la foto porque el borde de Cloudflare
+     las guarda cuatro horas y los nombres no cambian: sin esto, quien haya
+     entrado hoy seguiría viendo las de antes. Se sube al retocarlas. */
+  var MURPH_V = '?v=2';
   var MURPH_IMG = '/assets/img/trinchera-2026/murph/';
   var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
   var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
@@ -308,9 +312,9 @@
     return MURPH_CAJA[caja] + '-' + MURPH_CORREA[correa] + '-' + MURPH_ESF[esf];
   }
   function murphSrcset(nombre) {
-    return MURPH_IMG + '480/' + nombre + '.avif 480w, ' +
-           MURPH_IMG + '1200/' + nombre + '.avif 1200w, ' +
-           MURPH_IMG + '1600/' + nombre + '.avif 1600w';
+    return MURPH_IMG + '480/' + nombre + '.avif' + MURPH_V + ' 480w, ' +
+           MURPH_IMG + '1200/' + nombre + '.avif' + MURPH_V + ' 1200w, ' +
+           MURPH_IMG + '1600/' + nombre + '.avif' + MURPH_V + ' 1600w';
   }
 
   var LOGO = 3.78;
@@ -485,7 +489,7 @@
     var img = $('[data-pv-foto]');
     var deLaSerie = e.estilo === 'M' ? murphFoto(e.caja, e.correa, e.esf) : null;
     if (deLaSerie) {
-      img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif';
+      img.src = MURPH_IMG + '1200/' + deLaSerie + '.avif' + MURPH_V;
       img.srcset = murphSrcset(deLaSerie);
     } else {
       /* El Murph con brazalete o con el pack sigue teniendo su foto de
@@ -515,7 +519,7 @@
         minis.push('<button type="button" class="pv-mini" data-mini-correa="' + co + '" data-mini-esf="' + es + '"' +
                    ' aria-pressed="' + (e.estilo === 'M' && e.caja === cajaSerie && e.correa === co && e.esf === es) + '"' +
                    ' aria-label="' + CORREAS[co].nombre + ', ' + ESFERAS[es].nombre + '">' +
-                   '<img src="' + MURPH_IMG + '480/' + n + '.avif" alt="" loading="lazy" decoding="async">' +
+                   '<img src="' + MURPH_IMG + '480/' + n + '.avif' + MURPH_V + '" alt="" loading="lazy" decoding="async">' +
                    '</button>');
       });
     });
