@@ -325,20 +325,32 @@
       tec: 'piel de vaca genuina azul marino con relieve de cocodrilo y liberación rápida' },
     'piel-italiana-azul-pespunte-tono': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
       tec: 'piel de vaca genuina azul marino con relieve de cocodrilo y liberación rápida' },
-    /* Caucho (P-019). Lo que cambia entre variantes es la COSTURA, así
-       que ahí es donde va la paleta del tipo. */
-    'goma-negra-costura-verde':   { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con trama textil en cesta, costura verde de contraste y final curvo que abraza la caja, hebilla de pinza' },
-    'goma-negra-costura-naranja': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con trama textil en cesta, costura naranja de contraste y final curvo que abraza la caja, hebilla de pinza' },
-    'goma-negra-costura-blanca':  { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con trama textil en cesta, costura blanca de contraste y final curvo que abraza la caja, hebilla de pinza' },
-    /* Coste SUPUESTO, el del resto del caucho: Óscar no ha dado el de
-       esta. Solo con bisel azul. */
-    'goma-azul-pespunte-blanco':  { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho azul claro con trama textil en cesta, pespunte blanco y final curvo que abraza la caja, hebilla de pinza' },
-    'goma-azul-pespunte-azul':    { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho azul claro con trama textil en cesta, pespunte azul marino y final curvo que abraza la caja, hebilla de pinza' }
+    /* Caucho tipo MoonSwatch (P-019, 5,59 €): once combinaciones de
+       color de correa y de pespunte.
+       Sustituye a la familia de trama de cesta. */
+    'caucho-negro-negro': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho negro con pespunte negro al tono, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-negro-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho negro con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-negro-verde': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho negro con pespunte verde de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-negro-naranja': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho negro con pespunte naranja de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-negro-azul': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho negro con pespunte azul de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-gris-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho gris con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-gris-gris': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho gris con pespunte gris al tono, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-azul-claro-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho azul claro con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-naranja-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho naranja con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-marron-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho marrón con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
+    'caucho-azul-marino-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
+      tec: 'caucho azul marino con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' }
+
   };
 
   /* Los seis tipos, en tres niveles: TIPO -> COLOR -> PESPUNTE.
@@ -390,18 +402,26 @@
       'negro':         { nombre: 'Negro',         color: '#1C1D1F', correa: 'nato-pasadores-negro' },
       'negro-gris':    { nombre: 'Negro y gris',  color: '#4A4C4E', correa: 'nato-pasadores-negro-gris' } } },
 
-    /* El caucho negro se hace con tres costuras, y con una sola foto
-       valen las tres: el hilo se tiñe (recolorear_pespunte.py). El azul
-       solo lo hay con pespunte blanco, y SOLO se ofrece con bisel azul
-       (orden de Óscar, 18/08). */
+    /* El caucho se elige en dos pasos: color de la correa y color del
+       pespunte. El negro es el que más combinaciones tiene. */
     'caucho': { nombre: 'Caucho', colores: {
-      'negro': { nombre: 'Negro', color: '#1C1D1F', pespuntes: {
-        'verde':   { nombre: 'Verde',   tec: 'costura verde de contraste',   correa: 'goma-negra-costura-verde' },
-        'naranja': { nombre: 'Naranja', tec: 'costura naranja de contraste', correa: 'goma-negra-costura-naranja' },
-        'blanco':  { nombre: 'Blanco',  tec: 'costura blanca de contraste',  correa: 'goma-negra-costura-blanca' } } },
-      'azul':  { nombre: 'Azul',  color: '#5FA8E0', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste',  correa: 'goma-azul-pespunte-blanco' },
-        'azul':   { nombre: 'Azul',   tec: 'pespunte azul marino',          correa: 'goma-azul-pespunte-azul' } } } } }
+      'negro':       { nombre: 'Negro',       color: '#1C1D1F', pespuntes: {
+        'negro':   { nombre: 'Negro',   tec: 'pespunte negro al tono',        correa: 'caucho-negro-negro' },
+        'blanco':  { nombre: 'Blanco',  tec: 'pespunte blanco de contraste',  correa: 'caucho-negro-blanco' },
+        'verde':   { nombre: 'Verde',   tec: 'pespunte verde de contraste',   correa: 'caucho-negro-verde' },
+        'naranja': { nombre: 'Naranja', tec: 'pespunte naranja de contraste', correa: 'caucho-negro-naranja' },
+        'azul':    { nombre: 'Azul',    tec: 'pespunte azul de contraste',    correa: 'caucho-negro-azul' } } },
+      'gris':        { nombre: 'Gris',        color: '#7C7F82', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-gris-blanco' },
+        'gris':   { nombre: 'Gris',   tec: 'pespunte gris al tono',        correa: 'caucho-gris-gris' } } },
+      'azul-claro':  { nombre: 'Azul claro',  color: '#5FA8E0', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-azul-claro-blanco' } } },
+      'azul-marino': { nombre: 'Azul marino', color: '#1F3A5F', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-azul-marino-blanco' } } },
+      'naranja':     { nombre: 'Naranja',     color: '#EE6C1E', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-naranja-blanco' } } },
+      'marron':      { nombre: 'Marrón',      color: '#6B4A38', pespuntes: {
+        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-marron-blanco' } } } } }
   };
 
   /* ---------- 8. LA TAPA ROSCADA ----------
@@ -706,7 +726,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=32')
+  fetch('/assets/img/lunar-config/manifest.json?v=33')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
