@@ -402,3 +402,6 @@ main.cv2{ overflow:visible; overflow-x:clip }
   letter-spacing:.16em;text-transform:uppercase;color:var(--cv2-negro);
 }
 .pv-sinfoto span{max-width:34ch;font-size:14px;line-height:1.45;color:var(--cv2-gris)}
+/* `hidden` no basta contra un `display:flex` propio: la regla de la clase
+   gana al atributo. Sin esta línea el cartel se quedaba encima de la foto. */
+.pv-sinfoto[hidden]{display:none}
