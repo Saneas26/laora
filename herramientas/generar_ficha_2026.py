@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
-V_CSS_PRODUCTO = 36
+V_CSS_PRODUCTO = 37
 V_CSS_COLECCION = 17
 V_JS_CARRITO = 11
 
@@ -122,8 +122,8 @@ def ficha(d):
 </head>
 <body>%(cabecera)s
 
-<main>
-  <section class="pv">
+<main class="cv2">
+  <div class="pv-cuerpo">
     <div class="pv-galeria">
       <div class="pv-hero pv-hero-vacio" data-pv-hero>
         <p class="pv-foto-pendiente">Foto por hacer</p>
@@ -157,7 +157,7 @@ def ficha(d):
         <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
       </div>
     </aside>
-  </section>
+  </div>
 </main>
 
 <footer class="aviso-marcas">
