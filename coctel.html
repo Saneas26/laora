@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/laora.css?v=51">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=35">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=36">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -48,12 +48,15 @@
     </div>
 
     <aside class="pv-info">
-      <p class="pv-chips"><span class="cv2-chip">Vestir</span></p>
-      <h1>Cóctel</h1>
-      <p class="pv-desc">Ficha en construcción.</p>
+      <!-- Este <div> no es decorativo: es el que lleva el contador que
+           numera los pasos (`.pv-info>div{counter-reset:paso}`). -->
+      <div>
+        <div class="pv-chips"><span class="cv2-chip">Vestir</span></div>
+        <h1>Cóctel</h1>
+        <p class="pv-desc">Ficha en construcción.</p>
 
           <div class="pv-grupo">
-            <p class="pv-rotulo"><b>1</b> Movimiento</p>
+            <p class="pv-rotulo">Movimiento</p>
             <div class="pv-opciones" data-pv="mov">
             <button type="button" data-v="Q" aria-pressed="true">Cuarzo japonés</button>
             <button type="button" data-v="A">Automático japonés</button>
@@ -61,7 +64,7 @@
           </div>
 
           <div class="pv-grupo">
-            <p class="pv-rotulo"><b>2</b> Caja y esfera</p>
+            <p class="pv-rotulo">Caja y esfera</p>
             <div class="pv-opciones" data-pv="caja">
             <button type="button" data-v="OR" aria-pressed="true"><i class="pv-punto" style="background:#B76E56"></i>Oro rosa · esfera marrón</button>
             <button type="button" data-v="PL"><i class="pv-punto" style="background:#3A5C8C"></i>Plata · esfera azul</button>
@@ -69,7 +72,7 @@
           </div>
 
           <div class="pv-grupo">
-            <p class="pv-rotulo"><b>3</b> Correa</p>
+            <p class="pv-rotulo">Correa</p>
             <div class="pv-opciones" data-pv="correa">
             <button type="button" data-v="PIEL" aria-pressed="true">Piel</button>
             <button type="button" data-v="SINT">Piel sintética</button>
@@ -77,8 +80,9 @@
             <button type="button" data-v="PIELBRZ">Pack piel + brazalete</button>
             <button type="button" data-v="ANTEBRZ">Pack ante + brazalete</button>
             </div>
-          <p class="pv-nota">La piel montada y el brazalete aparte, para cambiarlo cuando quieras.</p>
+            <p class="pv-nota-paso">La piel montada y el brazalete aparte, para cambiarlo cuando quieras.</p>
           </div>
+      </div>
 
       <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
            botón y Klarna juntos, como en el Lunar. -->
