@@ -2,107 +2,110 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Configura tu Cóctel · laOra</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Cóctel de laOra: 20 combinaciones, al precio honesto.">
+<title>Cóctel · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/manifest.json">
+<!-- GENERADO por herramientas/generar_ficha_2026.py — no editar a mano.
+     Los datos viven en assets/datos/fichas/coctel.json -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/configurador-v2.css?v=32">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
+<link rel="stylesheet" href="/assets/css/laora.css?v=51">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=34">
 </head>
-<body>
-
-<header class="cf-cab">
-  <a class="cf-marca" href="/coleccion.html" aria-label="Volver a la colección de laOra">
-    <img src="/assets/img/lunar-v2/laora-wordmark-dark.png" alt="laOra"><b>Cóctel</b>
-  </a>
-  <!-- La ficha técnica se fue a laOrateca (Óscar, 13/08/2026): el botón y el diálogo no se escriben. FICHA_TECNICA = True los devuelve. -->
+<body><header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
+    <span></span><span></span>
+  </button>
+  <nav class="main-nav" aria-label="Navegación principal" data-nav>
+    <a href="/coleccion.html" class="active">Relojes</a>
+    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/taller.html">Taller</a>
+    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
+    <a href="/laorateca.html"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra">teca</span></a>
+  </nav>
+  <div class="header-actions">
+    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
+         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
+         un cero permanente al lado del carrito parece una web rota. -->
+    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
+  </div>
 </header>
 
-<div class="cf-cuerpo">
-
-  <section class="cf-visor" aria-label="El reloj que estás configurando">
-    <!-- Lo que llevas elegido, dentro de la foto y a la izquierda del
-         todo (Óscar, 13/08/2026). Sin rótulo: cada línea se explica
-         sola, y un «Características» encima solo quitaría sitio. -->
-    <dl class="cf-specs" data-specs aria-label="Lo que llevas elegido"></dl>
-
-    <div class="cf-montaje" data-montaje>
-      <img class="cf-brz arriba" data-brz-img hidden alt="" aria-hidden="true">
-      <img class="cf-brz abajo"  data-brz-img hidden alt="" aria-hidden="true">
-      <div class="cf-correa arriba" data-correa aria-hidden="true"></div>
-      <div class="cf-cabeza" data-cabeza>
-        <img data-foto alt="Cóctel de laOra" hidden>
-        <p class="cf-pendiente" data-pendiente hidden>Foto pendiente</p>
+<main>
+  <section class="pv">
+    <div class="pv-galeria">
+      <div class="pv-hero" data-pv-hero>
+        <p class="pv-foto-pendiente">Foto por hacer</p>
       </div>
-      <div class="cf-correa abajo" data-correa aria-hidden="true"></div>
     </div>
 
-    <!-- La tarjeta del cierre cuelga del VISOR, no de la cabeza ni del
-         montaje: la cabeza mide cero en modo «foto pendiente» y el
-         montaje es un pasillo estrecho; el visor siempre tiene cuerpo
-         y la esquina es suya. -->
-    <figure class="cf-cierre-detalle" data-cierre-detalle hidden>
-      <img data-cierre-img alt="Detalle del cierre">
-      <figcaption data-cierre-pie></figcaption>
-    </figure>
+    <aside class="pv-info">
+      <p class="pv-chips"><span class="cv2-chip">Vestir</span></p>
+      <h1>Cóctel</h1>
+      <p class="pv-desc">Ficha en construcción.</p>
 
-    <aside class="cf-cuentas" data-cuentas hidden aria-label="Cuenta de explotación"></aside>
+          <div class="pv-grupo">
+            <p class="pv-rotulo"><b>1</b> Movimiento</p>
+            <div class="pv-opciones" data-pv="mov">
+            <button type="button" data-v="Q" aria-pressed="true">Cuarzo japonés</button>
+            <button type="button" data-v="A">Automático japonés</button>
+            </div>
+          </div>
 
-    <!-- El aviso de «el brazalete va dibujado» se retira de la pantalla
-         (Óscar, 13/08/2026: «comentarios solo a mí, no en pantalla»). Era
-         una nota de taller: el cliente no tiene por qué enterarse de cómo
-         montamos la foto. El JavaScript que lo encendía sigue ahí y no
-         estorba —comprueba que exista—, así que para recuperarlo basta
-         con devolver este párrafo. -->
+          <div class="pv-grupo">
+            <p class="pv-rotulo"><b>2</b> Caja y esfera</p>
+            <div class="pv-opciones" data-pv="caja">
+            <button type="button" data-v="OR" aria-pressed="true"><i class="pv-punto" style="background:#B76E56"></i>Oro rosa · esfera marrón</button>
+            <button type="button" data-v="PL"><i class="pv-punto" style="background:#3A5C8C"></i>Plata · esfera azul</button>
+            </div>
+          </div>
 
-    <!-- Óscar, 12/08/2026: que nadie compre creyendo que la imagen es una
-         fotografía del reloj terminado. Va en todas, siempre, chiquita y
-         en la esquina, sin tapar el reloj. -->
-    <p class="cf-aviso-imagen">La imagen puede contener errores de diseño*</p>
+          <div class="pv-grupo">
+            <p class="pv-rotulo"><b>3</b> Correa</p>
+            <div class="pv-opciones" data-pv="correa">
+            <button type="button" data-v="PIEL" aria-pressed="true">Piel</button>
+            <button type="button" data-v="SINT">Piel sintética</button>
+            <button type="button" data-v="ANTE">Ante</button>
+            <button type="button" data-v="PIELBRZ">Pack piel + brazalete</button>
+            <button type="button" data-v="ANTEBRZ">Pack ante + brazalete</button>
+            </div>
+          <p class="pv-nota">La piel montada y el brazalete aparte, para cambiarlo cuando quieras.</p>
+          </div>
+
+      <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
+           botón y Klarna juntos, como en el Lunar. -->
+      <div class="pv-pie" data-pv-pie>
+        <div class="pv-precio-fila">
+          <p class="pv-precio pv-precio-pendiente">Precio por cerrar</p>
+          <p class="pv-stock"><span>En el taller</span><i aria-hidden="true"></i></p>
+        </div>
+        <p class="pv-imp">Impuestos incluidos.</p>
+        <button class="cv2-comprar pv-comprar" type="button" disabled>Todavía no está a la venta</button>
+        <p class="pv-aviso-pendiente">Este modelo está en el taller: las piezas están elegidas y el precio, por cerrar. En cuanto esté, se podrá comprar desde aquí.</p>
+        <div class="pv-confianza">
+          <span>Envío gratis · devolución 30 días</span>
+          <span>Garantía 3 años*</span>
+        </div>
+        <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
+      </div>
+    </aside>
   </section>
+</main>
 
-  <section class="cf-panel" aria-label="Opciones del Cóctel">
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Movimiento <b>2 opciones</b></p>
-      <div class="cf-tarjetas" style="grid-template-columns:repeat(2,1fr)" role="group" aria-label="Elegir movimiento">
-        <button class="cf-tarjeta" type="button" data-mov="0" aria-pressed="true">Cuarzo japonés</button>
-        <button class="cf-tarjeta" type="button" data-mov="1" aria-pressed="false">Automático japonés</button>
-      </div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Caja <b>2 opciones</b></p>
-      <div class="cf-fichas" role="group" aria-label="Elegir caja">
-        <button class="cf-ficha" type="button" data-caja="0" aria-pressed="true">Oro rosa, esfera marrón</button>
-        <button class="cf-ficha" type="button" data-caja="1" aria-pressed="false">Plata, esfera azul</button>
-      </div>
-    </div>
-    <div class="cf-grupo">
-      <p class="cf-rotulo">Brazalete <b>3 familias</b></p>
-      <div class="cf-brazaletes" role="group" aria-label="Elegir brazalete">
-        <button class="cf-brazalete" type="button" data-brz="0" aria-pressed="true"><i></i><span>Piel</span></button>
-        <button class="cf-brazalete" type="button" data-brz="1" aria-pressed="false"><i></i><span>Piel sintética</span></button>
-        <button class="cf-brazalete" type="button" data-brz="2" aria-pressed="false"><i></i><span>Ante</span></button>
-      </div>
-      <p class="cf-detalle" data-detalle></p>
-    </div>
-
-    <div class="cf-grupo" data-grupo-var>
-      <p class="cf-rotulo"><span data-rotulo-var>Versión</span> <b data-cuenta-var></b></p>
-      <div class="cf-variantes" data-variantes role="group" aria-label="Elegir versión"></div>
-    </div>
-  </section>
-</div>
-
-<footer class="cf-barra">
-  <div class="cf-barra-izq"><b data-barra-nombre></b><span data-barra-var></span></div>
-  <p class="cf-precio"><b data-precio></b><span>Impuestos incluidos</span></p>
-  <button class="cf-reservar" type="button" data-reservar>Reservar</button>
+<footer class="aviso-marcas">
+  <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
-
-
-<script type="application/json" data-piezas>{"nombre": "Cóctel", "codigo": "LO-06", "incluido": "", "extra": false, "mov": [{"ref": "M1", "cal": "Calibre laOra LO_Q3626", "coste": 4.63, "rot": "Cuarzo japonés", "specs": "Calibre laOra LO_Q3626, cuarzo de fabricación japonesa con fecha a las 3. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."}, {"ref": "M2", "cal": "Calibre laOra LO_A4126", "coste": 61.99, "rot": "Automático japonés", "specs": "Calibre laOra LO_A4126, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."}], "caj": [{"ref": "C1", "nombre": "Oro rosa, esfera marrón", "coste": 45.77}, {"ref": "C2", "nombre": "Plata, esfera azul", "coste": 45.97}], "esf": [], "brz": [{"id": "B10", "nombre": "Piel con liberación rápida", "v": [{"ref": "Brz-Piel-P01", "nom": "Negro, pespunte blanco, hebilla mariposa plateada", "c": 30.99}, {"ref": "Brz-Piel-P02", "nom": "Negro, pespunte blanco, hebilla clásica plateada", "c": 30.79}, {"ref": "Brz-Piel-P03", "nom": "Negro, pespunte blanco, hebilla clásica negra", "c": 31.99}, {"ref": "Brz-Piel-P04", "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa", "c": 30.39}, {"ref": "Brz-Piel-P05", "nom": "Negro, pespunte negro, hebilla mariposa plateada", "c": 30.99}, {"ref": "Brz-Piel-P06", "nom": "Negro, pespunte negro, hebilla clásica plateada", "c": 31.59}, {"ref": "Brz-Piel-P07", "nom": "Negro, pespunte negro, hebilla clásica negra", "c": 31.79}, {"ref": "Brz-Piel-P08", "nom": "Negro, pespunte negro, hebilla clásica de oro rosa", "c": 29.99}, {"ref": "Brz-Piel-P09", "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada", "c": 29.19}, {"ref": "Brz-Piel-P10", "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada", "c": 31.79}, {"ref": "Brz-Piel-P11", "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra", "c": 31.99}, {"ref": "Brz-Piel-P12", "nom": "Marrón oscuro, pespunte blanco, hebilla clásica de oro rosa", "c": 31.19}, {"ref": "Brz-Piel-P13", "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada", "c": 31.79}, {"ref": "Brz-Piel-P14", "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada", "c": 31.59}, {"ref": "Brz-Piel-P15", "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra", "c": 31.99}, {"ref": "Brz-Piel-P16", "nom": "Marrón oscuro, pespunte negro, hebilla clásica de oro rosa", "c": 31.99}, {"ref": "Brz-Piel-P17", "nom": "Azul, pespunte blanco, hebilla mariposa plateada", "c": 29.39}, {"ref": "Brz-Piel-P18", "nom": "Azul, pespunte blanco, hebilla clásica plateada", "c": 29.79}, {"ref": "Brz-Piel-P19", "nom": "Azul, pespunte blanco, hebilla clásica negra", "c": 31.99}, {"ref": "Brz-Piel-P20", "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa", "c": 32.39}, {"ref": "Brz-Piel-P21", "nom": "Azul, pespunte negro, hebilla mariposa plateada", "c": 31.19}, {"ref": "Brz-Piel-P22", "nom": "Azul, pespunte negro, hebilla clásica plateada", "c": 31.99}, {"ref": "Brz-Piel-P23", "nom": "Azul, pespunte negro, hebilla clásica negra", "c": 31.79}, {"ref": "Brz-Piel-P24", "nom": "Azul, pespunte negro, hebilla clásica de oro rosa", "c": 31.99}, {"ref": "Brz-Piel-P25", "nom": "Verde, pespunte blanco, hebilla mariposa plateada", "c": 31.59}, {"ref": "Brz-Piel-P26", "nom": "Verde, pespunte blanco, hebilla clásica plateada", "c": 31.79}, {"ref": "Brz-Piel-P27", "nom": "Verde, pespunte blanco, hebilla clásica negra", "c": 32.39}, {"ref": "Brz-Piel-P28", "nom": "Verde, pespunte blanco, hebilla clásica de oro rosa", "c": 32.39}, {"ref": "Brz-Piel-P29", "nom": "Verde, pespunte a tono, hebilla mariposa plateada", "c": 31.99}, {"ref": "Brz-Piel-P30", "nom": "Verde, pespunte a tono, hebilla clásica plateada", "c": 31.99}, {"ref": "Brz-Piel-P31", "nom": "Verde, pespunte a tono, hebilla clásica negra", "c": 31.99}, {"ref": "Brz-Sintetica-P50", "nom": "Verde, pespunte a tono, hebilla clásica de oro rosa", "c": 31.99}]}, {"id": "B11", "nombre": "Piel sintética, hebilla mariposa", "v": [{"ref": "Brz-Sintetica-P51", "nom": "Marrón", "c": 3.49}, {"ref": "Brz-Sintetica-P52", "nom": "Negro", "c": 3.69}, {"ref": "Brz-Sintetica-P53", "nom": "Negro con pespunte blanco", "c": 4.19}, {"ref": "Brz-Sintetica-P54", "nom": "Marrón con pespunte blanco", "c": 4.19}, {"ref": "Brz-Sintetica-P55", "nom": "Marrón claro", "c": 4.19}]}, {"id": "B12", "nombre": "Ante", "v": [{"ref": "Brz-Ante-P70", "nom": "Marrón oscuro", "c": 4.39}, {"ref": "Brz-Ante-P71", "nom": "Marrón claro", "c": 4.29}, {"ref": "Brz-Ante-P72", "nom": "Negro", "c": 4.39}, {"ref": "Brz-Ante-P73", "nom": "Azul", "c": 4.49}]}], "ejes": {"mov": {"tarjetas": {"M1": "Cuarzo japonés", "M2": "Automático japonés"}}, "caja": {}, "esf": {}, "brz": {"nombres": {"B10": "Piel", "B11": "Piel sintética", "B12": "Ante"}}}, "mult": 2.7235, "cabezas": {}, "brazaletes": {}, "completas": {}, "peques": {}, "cierres": {}, "cierresNom": {}, "cierresFam": {}, "detallePies": {}, "solape": 80}</script>
+<script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=11"></script>
-<script src="/assets/js/configurador-v2.js?v=69"></script>
+<script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
