@@ -65,6 +65,12 @@
           alt="laOra Trinchera">
         <img class="pv-forro" data-pv-forro src="/assets/img/trinchera-2026/forro-piel.webp"
              alt="Forro interior de piel genuina del nato" hidden>
+        <!-- La hebilla elegida, en pequeño y en su esquina, igual que en el
+             Lunar: comparten las mismas cinco fotos. -->
+        <div class="pv-minis">
+          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Trinchera" hidden
+               src="/assets/img/lunar-config/buckles/plata.avif?v=2">
+        </div>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
 
@@ -143,6 +149,13 @@
         <div class="pv-grupo" data-pv-grupo-pesp hidden>
           <p class="pv-rotulo">Pespunte</p>
           <div class="pv-opciones" data-pv="pesp"></div>
+        </div>
+
+        <!-- El cierre va con la piel italiana, la lleve el Murph o el Khaki:
+             es la misma correa y las mismas cinco hebillas del Lunar. -->
+        <div class="pv-grupo" data-pv-grupo-cierre hidden>
+          <p class="pv-rotulo">Cierre</p>
+          <div class="pv-opciones" data-pv="cierre"></div>
         </div>
 
         <div class="pv-grupo" data-pv-grupo-color hidden>
@@ -373,9 +386,31 @@
     return trozos.join(', ');
   }
 
+  /* LOS CINCO CIERRES DE LA PIEL (19/08/2026). Óscar: «este tipo de cierre
+     va asociado a la correa de piel, así que donde usemos esa correa también
+     tienen que ir asociados». Son los mismos cinco de la ficha del Lunar y
+     comparten sus fotos.
+
+     El precio NO se copia del Lunar: allí el coste del cierre incluye su
+     propia correa (29,99 € la de plata). Aquí la piel ya cuesta 13,69 con su
+     hebilla clásica plateada, así que lo que se aplica es la DIFERENCIA
+     entre cierres que marca el proveedor en la lista del Lunar: la plata es
+     la base y las demás suben o bajan sobre ella. Si el proveedor cobra otra
+     cosa por estos en 20 mm, se corrige aquí. */
+  var CIERRES = {
+    'plata':    { nombre: 'Clásica plata',    extra:  0.00, tec: 'hebilla clásica de acero plateado' },
+    'negra':    { nombre: 'Clásica negra',    extra:  1.20, tec: 'hebilla clásica de acero con PVD negro' },
+    'oro-rosa': { nombre: 'Clásica oro rosa', extra: -0.40, tec: 'hebilla clásica en oro rosa' },
+    'oro':      { nombre: 'Clásica oro',      extra:  1.00, tec: 'hebilla clásica dorada' },
+    'mariposa': { nombre: 'Mariposa plata',   extra:  0.20, tec: 'cierre de mariposa de acero plateado' }
+  };
+  var CIERRE_IMG = '/assets/img/lunar-config/buckles/';
+  /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
+  function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
+
   var LOGO = 3.78;
 
-  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B' };
+  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', ante: 'NEG', pesp: 'B', cierre: 'plata' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -396,7 +431,7 @@
   }
   function costes() {
     return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
-           CORREAS[e.correa].coste + LOGO;
+           CORREAS[e.correa].coste + (conCierre() ? CIERRES[e.cierre].extra : 0) + LOGO;
   }
   function pvpBase(c) {
     var neto = c + 9 / 1.21 + (MOVS[e.mov].coste + 19) * 0.05;
@@ -469,7 +504,10 @@
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
     if (e.correa === 'ANTE' && e.estilo === 'M') return cola + '-' + e.ante;
-    if (e.estilo === 'M' && MURPH_CORREA[e.correa]) return cola + '-P' + e.pesp;
+    if (conCierre()) {
+      var c = e.estilo === 'M' && MURPH_CORREA[e.correa] ? cola + '-P' + e.pesp : cola;
+      return c + '-' + e.cierre;
+    }
     return cola;
   }
 
@@ -553,6 +591,18 @@
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
+    /* El cierre: con la piel italiana, y su foto en la esquina del visor */
+    var hayCierre = conCierre();
+    $('[data-pv-grupo-cierre]').hidden = !hayCierre;
+    var heb = $('[data-pv-hebilla-img]');
+    heb.hidden = !hayCierre;
+    if (hayCierre) {
+      botones('cierre', Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
+      heb.src = CIERRE_IMG + e.cierre + '.avif?v=2';
+      heb.alt = 'Hebilla del Trinchera, ' + CIERRES[e.cierre].tec;
+    }
+    $('[data-pv-cierre]').textContent = hayCierre ? CIERRES[e.cierre].nombre : 'Hebilla clásica plateada';
+
     /* El pespunte: solo con la piel italiana del Murph */
     var conPespunte = esMurph && !!MURPH_CORREA[e.correa];
     $('[data-pv-grupo-pesp]').hidden = !conPespunte;
@@ -620,6 +670,9 @@
         ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
         : (e.estilo === 'M' && MURPH_CORREA[e.correa])
         ? CORREAS[e.correa].tec.replace('con pespunte blanco', 'con pespunte ' + PESPUNTES[e.pesp].toLowerCase())
+                               .replace('hebilla clásica plateada', CIERRES[e.cierre].tec)
+        : conCierre()
+        ? CORREAS[e.correa].tec.replace('hebilla clásica plateada', CIERRES[e.cierre].tec)
         : CORREAS[e.correa].tec) + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
@@ -656,7 +709,10 @@
           : (e.correa === 'ANTE' && e.estilo === 'M')
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
           : (e.estilo === 'M' && MURPH_CORREA[e.correa])
-          ? CORREAS[e.correa].nombre + ', pespunte ' + PESPUNTES[e.pesp].toLowerCase()
+          ? CORREAS[e.correa].nombre + ', pespunte ' + PESPUNTES[e.pesp].toLowerCase() +
+            ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
+          : conCierre()
+          ? CORREAS[e.correa].nombre + ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
           : CORREAS[e.correa].nombre,
         precio: precio(),
         foto: $('[data-pv-foto]').src
