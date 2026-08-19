@@ -548,7 +548,11 @@
        19/08/2026 con sus veinte referencias. El brazalete y el pack siguen
        fotografiados solo en acero, y eso lo avisa la nota del visor. */
     todos('[data-pv="caja"] button').forEach(function (b) {
-      b.disabled = (e.estilo === 'M' && !MURPH_CAJA[b.dataset.v]);
+      /* Con el brazalete o el pack, que solo están fotografiados en acero,
+         el titanio se TACHA en vez de aceptarse y volver solo al acero: que
+         se vea por qué no se puede, en lugar de que el botón no responda. */
+      var soloAcero = e.correa === 'ACERO' || e.correa === 'PACK';
+      b.disabled = (e.estilo === 'M' && (!MURPH_CAJA[b.dataset.v] || (soloAcero && b.dataset.v !== 'PL')));
     });
 
     /* la tapa la manda el movimiento: la opción imposible queda tachada */
