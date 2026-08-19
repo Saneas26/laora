@@ -45,7 +45,7 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 V_CSS = 7
-V_JS = 9
+V_JS = 10
 V_SESION = 6
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
