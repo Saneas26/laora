@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/laora.css?v=51">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=35">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=36">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -48,12 +48,15 @@
     </div>
 
     <aside class="pv-info">
-      <p class="pv-chips"><span class="cv2-chip">Buceo</span></p>
-      <h1>Diver</h1>
-      <p class="pv-desc">Ficha en construcción.</p>
+      <!-- Este <div> no es decorativo: es el que lleva el contador que
+           numera los pasos (`.pv-info>div{counter-reset:paso}`). -->
+      <div>
+        <div class="pv-chips"><span class="cv2-chip">Buceo</span></div>
+        <h1>Diver</h1>
+        <p class="pv-desc">Ficha en construcción.</p>
 
           <div class="pv-grupo">
-            <p class="pv-rotulo"><b>1</b> Movimiento</p>
+            <p class="pv-rotulo">Movimiento</p>
             <div class="pv-opciones" data-pv="mov">
             <button type="button" data-v="Q" aria-pressed="true">Cuarzo japonés</button>
             <button type="button" data-v="A">Automático suizo</button>
@@ -61,15 +64,15 @@
           </div>
 
           <div class="pv-grupo">
-            <p class="pv-rotulo"><b>2</b> Caja <small>uno solo</small></p>
+            <p class="pv-rotulo">Caja <b>uno solo</b></p>
             <div class="pv-opciones" data-pv="caja">
             <button type="button" data-v="ACE" aria-pressed="true">Acero con zafiro · 300 m</button>
             </div>
-          <p class="pv-nota">Con su esfera, sus agujas y su correa de caucho negra.</p>
+            <p class="pv-nota-paso">Con su esfera, sus agujas y su correa de caucho negra.</p>
           </div>
 
           <div class="pv-grupo">
-            <p class="pv-rotulo"><b>3</b> Brazalete o correa</p>
+            <p class="pv-rotulo">Brazalete o correa</p>
             <div class="pv-opciones" data-pv="correa">
             <button type="button" data-v="CAU-NEG" aria-pressed="true">Caucho negro</button>
             <button type="button" data-v="A316-DESP">Acero 316L · cierre desplegable</button>
@@ -84,6 +87,7 @@
             <button type="button" data-v="LONA">Lona de nailon · liberación rápida</button>
             </div>
           </div>
+      </div>
 
       <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
            botón y Klarna juntos, como en el Lunar. -->

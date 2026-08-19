@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
-V_CSS_PRODUCTO = 35
+V_CSS_PRODUCTO = 36
 V_CSS_COLECCION = 17
 V_JS_CARRITO = 11
 
@@ -45,7 +45,7 @@ def esc(t):
     return (str(t).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
 
 
-def paso_html(n, paso):
+def paso_html(paso):
     """Un paso del configurador: su número, su rótulo y sus botones."""
     fija = paso.get('fija')
     botones = []
@@ -56,25 +56,27 @@ def paso_html(n, paso):
             % (esc(o['id']), ' aria-pressed="true"' if o is paso['opciones'][0] else '',
                punto, esc(o['nombre'])))
 
+    # `pv-nota` es la etiqueta que flota SOBRE la foto; la de un paso va
+    # debajo de sus botones y necesita su propia clase.
     nota = ''
     for o in paso['opciones']:
         if o.get('nota'):
-            nota = '\n          <p class="pv-nota">%s</p>' % esc(o['nota'])
+            nota = '\n            <p class="pv-nota-paso">%s</p>' % esc(o['nota'])
             break
 
     return """          <div class="pv-grupo">
-            <p class="pv-rotulo"><b>%d</b> %s%s</p>
+            <p class="pv-rotulo">%s%s</p>
             <div class="pv-opciones" data-pv="%s">
 %s
             </div>%s
-          </div>""" % (n, esc(paso['rotulo']),
-                       ' <small>uno solo</small>' if fija else '',
+          </div>""" % (esc(paso['rotulo']),
+                       ' <b>uno solo</b>' if fija else '',
                        esc(paso['id']), '\n'.join(botones), nota)
 
 
 def ficha(d):
     listo = bool(d.get('listo'))
-    pasos = '\n\n'.join(paso_html(i + 1, p) for i, p in enumerate(d['pasos']))
+    pasos = '\n\n'.join(paso_html(p) for p in d['pasos'])
 
     combinaciones = 1
     for p in d['pasos']:
@@ -129,11 +131,15 @@ def ficha(d):
     </div>
 
     <aside class="pv-info">
-      <p class="pv-chips"><span class="cv2-chip">%(clase)s</span></p>
-      <h1>%(nombre)s</h1>
-      <p class="pv-desc">%(desc)s</p>
+      <!-- Este <div> no es decorativo: es el que lleva el contador que
+           numera los pasos (`.pv-info>div{counter-reset:paso}`). -->
+      <div>
+        <div class="pv-chips"><span class="cv2-chip">%(clase)s</span></div>
+        <h1>%(nombre)s</h1>
+        <p class="pv-desc">%(desc)s</p>
 
 %(pasos)s
+      </div>
 
       <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
            botón y Klarna juntos, como en el Lunar. -->

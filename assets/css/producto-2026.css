@@ -382,3 +382,9 @@ main.cv2{ overflow:visible; overflow-x:clip }
   font-size:13px; letter-spacing:.08em; text-transform:uppercase; text-align:center;
 }
 .pv-grupo .pv-rotulo small{ font-weight:400; color:var(--cv2-gris); text-transform:none; letter-spacing:0 }
+
+/* La nota de un paso va debajo de sus botones. No confundir con
+   `.pv-nota`, que es la etiqueta que flota SOBRE la foto. */
+.pv-nota-paso{
+  margin:8px 0 0; font-size:13px; line-height:1.5; color:var(--cv2-gris);
+}
