@@ -67,29 +67,32 @@
              alt="Forro interior de piel genuina del nato" hidden>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
       </div>
-      <!-- LA GALERÍA SON DOS FOTOS Y NADA MÁS (Óscar, 19/08/2026): la de
-           muñeca y la inclinada. Aquí hubo un rato un selector con las seis
-           combinaciones de la caja elegida; se retira porque las elecciones
-           ya están en el configurador de la derecha y repetirlas abajo era
-           decir dos veces lo mismo. -->
-      <!-- Las dos de galería del 19/08/2026: la muñeca y la vista inclinada.
-           No son configuraciones, son fotos de catálogo, así que van fijas
-           debajo del selector y no cambian con lo que elijas. -->
-      <div class="pv-extras pv-galeria-fija">
-        <figure>
-          <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=2"
-               srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif?v=2 1600w"
-               sizes="(max-width:900px) 50vw, 23vw"
-               alt="El Trinchera Murph con piel negra, puesto en la muñeca" loading="lazy" decoding="async">
-        </figure>
-        <figure>
-          <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=2"
-               srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif?v=2 1600w"
-               sizes="(max-width:900px) 50vw, 23vw"
-               alt="El Trinchera Murph de tres cuartos, con la corona a la vista" loading="lazy" decoding="async">
-        </figure>
-      </div>
 
+    </div>
+
+    <!-- LAS DOS DE CATÁLOGO: la muñeca y la vista inclinada. No son
+         configuraciones y no cambian con lo que elijas.
+
+         Van FUERA de `.pv-galeria` a propósito (Óscar, 19/08/2026): dentro,
+         subían con el scroll de las opciones y se montaban encima de la
+         foto principal, que está pegada. Aquí abajo son otra fila de la
+         retícula —la regla `.pv-visor-fijo>.pv-extras` las coloca en la
+         primera columna— y se quedan en su sitio hasta que scrollea la
+         página entera. Es como lo tiene el Lunar, que en su columna
+         pegada no lleva nada más que el visor. -->
+    <div class="pv-extras pv-galeria-fija">
+      <figure>
+        <img src="/assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=2"
+             srcset="/assets/img/trinchera-2026/murph/480/galeria-muneca.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/galeria-muneca.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/galeria-muneca.avif?v=2 1600w"
+             sizes="(max-width:900px) 50vw, 23vw"
+             alt="El Trinchera Murph con piel negra, puesto en la muñeca" loading="lazy" decoding="async">
+      </figure>
+      <figure>
+        <img src="/assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=2"
+             srcset="/assets/img/trinchera-2026/murph/480/galeria-inclinada.avif?v=2 480w, /assets/img/trinchera-2026/murph/1200/galeria-inclinada.avif?v=2 1200w, /assets/img/trinchera-2026/murph/1600/galeria-inclinada.avif?v=2 1600w"
+             sizes="(max-width:900px) 50vw, 23vw"
+             alt="El Trinchera Murph de tres cuartos, con la corona a la vista" loading="lazy" decoding="async">
+      </figure>
     </div>
 
     <!-- ============ LA COMPRA ============ -->
