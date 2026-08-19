@@ -51,9 +51,9 @@
   }
 
   /* ---------- lo que se le dice a cada estado ----------
-     El de la izquierda es el rótulo; el de la derecha, el color. Y
-     `nota` explica lo que toca esperar, que es lo que de verdad quiere
-     saber quien acaba de comprar. */
+     El primero es el rótulo; el segundo, el color. Y `nota` explica lo
+     que toca esperar, que es lo que de verdad quiere saber quien
+     acaba de comprar. */
   var ESTADOS = {
     solicitado:  ['A la espera de pago', 'es-espera'],
     autorizado:  ['Aprobado por Klarna', 'es-espera'],
@@ -89,7 +89,35 @@
     return '';
   }
 
-  /* ---------- pintar un pedido ---------- */
+  /* ---------- 01. mi colección ----------
+     El reloj FÍSICO, con su número de serie y su garantía. Es lo que
+     promete el Club y lo que convierte una compra en una propiedad. */
+  function relojHtml(r) {
+    var g = (r.garantias || [])[0];
+    var vigente = g && g.hasta && new Date(g.hasta) >= new Date();
+    var intervenciones = r.intervenciones || [];
+
+    return '<li class="cu-ficha">' +
+      '<div class="cu-ficha-alto"><span class="cu-titulo">' + esc(r.modelo) + '</span>' +
+      (r.entregado_en ? '<span class="cu-fecha">Tuyo desde el ' + esc(fecha(r.entregado_en)) + '</span>' : '') +
+      '</div>' +
+      '<p class="cu-serie">Nº ' + esc(r.numero_serie) + ' · Ref. ' + esc(r.ref) + '</p>' +
+      '<p class="cu-detalle">' + esc(r.acabado) + (r.correa ? '<br>' + esc(r.correa) : '') + '</p>' +
+      (g
+        ? '<span class="cu-estado ' + (vigente ? 'es-bien' : '') + '">' +
+          (vigente ? 'Garantía activa hasta el ' + esc(fecha(g.hasta))
+                   : 'Garantía terminada el ' + esc(fecha(g.hasta))) + '</span>'
+        : '') +
+      (intervenciones.length
+        ? '<ul class="cu-relojes">' + intervenciones.map(function (i) {
+            return '<li><b>' + esc(fecha(i.fecha)) + '</b> — ' + esc(i.descripcion) +
+              '<small>' + esc(i.tipo) + (i.en_garantia ? ' · en garantía' : '') + '</small></li>';
+          }).join('') + '</ul>'
+        : '') +
+      '</li>';
+  }
+
+  /* ---------- 02. mis pedidos ---------- */
   function pedidoHtml(p) {
     var e = ESTADOS[p.estado] || [p.estado, ''];
     var relojes = (p.pedido_lineas || []).map(function (l) {
@@ -101,9 +129,9 @@
 
     var nota = notaDe(p);
 
-    return '<li class="cu-pedido">' +
-      '<div class="cu-pedido-alto">' +
-        '<span class="cu-numero">Pedido ' + esc(p.numero) + '</span>' +
+    return '<li class="cu-ficha">' +
+      '<div class="cu-ficha-alto">' +
+        '<span class="cu-titulo">Pedido ' + esc(p.numero) + '</span>' +
         '<span class="cu-fecha">' + esc(fecha(p.creado_en)) + '</span>' +
       '</div>' +
       '<span class="cu-estado ' + e[1] + '">' + esc(e[0]) + '</span>' +
@@ -117,25 +145,156 @@
       '</li>';
   }
 
-  /* ---------- dentro ---------- */
+  /* ---------- 03. el taller ---------- */
+  function pintarHilo(mensajes) {
+    var hilo = document.querySelector('[data-hilo]');
+    document.querySelector('[data-hilo-vacio]').hidden = !!(mensajes && mensajes.length);
+    hilo.innerHTML = (mensajes || []).map(function (m) {
+      return '<li class="' + (m.autor === 'socio' ? 'de-socio' : 'de-laora') + '">' +
+        esc(m.texto).replace(/\n/g, '<br>') +
+        '<time>' + esc(fecha(m.creado_en)) + '</time></li>';
+    }).join('');
+  }
+
+  function cargarHilo() {
+    return laoraSesion.consultar('mensajes?select=*&order=creado_en.asc')
+      .then(pintarHilo);
+  }
+
+  /* ---------- 04. sus datos ---------- */
+  var CAMPOS = ['nombre', 'apellidos', 'telefono', 'nif', 'direccion', 'cp', 'poblacion',
+                'provincia', 'pais', 'muneca_cm', 'cumple_dia', 'cumple_mes',
+                'nos_conocio', 'quiere_avisos'];
+
+  function ponerDatos(socio) {
+    if (!socio) return;
+    CAMPOS.forEach(function (k) {
+      var i = document.querySelector('[data-d="' + k + '"]');
+      if (!i) return;
+      if (i.type === 'checkbox') i.checked = !!socio[k];
+      else if (socio[k] !== null && socio[k] !== undefined) i.value = socio[k];
+    });
+    var hola = document.querySelector('[data-hola]');
+    if (hola && socio.nombre) hola.textContent = 'Hola, ' + socio.nombre;
+  }
+
+  var formGuardar = document.querySelector('[data-form-datos]');
+  var avisoDatos = document.querySelector('[data-aviso-datos]');
+
+  function decirDatos(t, malo) {
+    if (!avisoDatos) return;
+    avisoDatos.textContent = t || '';
+    avisoDatos.hidden = !t;
+    avisoDatos.classList.toggle('cu-error', !!malo);
+  }
+
+  if (formGuardar) {
+    formGuardar.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var b = formGuardar.querySelector('[data-guardar]');
+      b.disabled = true;
+      decirDatos('Guardando…');
+
+      var cambios = {};
+      CAMPOS.forEach(function (k) {
+        var i = document.querySelector('[data-d="' + k + '"]');
+        if (!i) return;
+        if (i.type === 'checkbox') { cambios[k] = i.checked; return; }
+        var v = (i.value || '').trim();
+        /* Vacío es NULL, no cadena vacía: un número vacío rompería la
+           columna, y un texto vacío ensucia la ficha. */
+        cambios[k] = v === '' ? null : (i.type === 'number' ? Number(v.replace(',', '.')) : v);
+      });
+      /* Se anota CUÁNDO dijo que sí a los avisos: si algún día alguien
+         pregunta por qué le escribimos, la respuesta está aquí. */
+      if (cambios.quiere_avisos) cambios.avisos_desde = new Date().toISOString();
+      cambios.actualizado_en = new Date().toISOString();
+
+      laoraSesion.escribir('socios?id=eq.' + SOCIO.id, {
+        method: 'PATCH',
+        body: JSON.stringify(cambios)
+      }).then(function () {
+        b.disabled = false;
+        decirDatos('Guardado. Gracias.');
+        ponerDatos(Object.assign(SOCIO, cambios));
+      }).catch(function () {
+        b.disabled = false;
+        decirDatos('No hemos podido guardarlo. Inténtalo en un momento.', true);
+      });
+    });
+  }
+
+  /* ---------- escribir al taller ---------- */
+  var formMensaje = document.querySelector('[data-form-mensaje]');
+  var avisoMensaje = document.querySelector('[data-aviso-mensaje]');
+
+  if (formMensaje) {
+    formMensaje.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var caja = formMensaje.querySelector('[data-mensaje]');
+      var texto = (caja.value || '').trim();
+      if (!texto) return;
+
+      var b = formMensaje.querySelector('[data-enviar-mensaje]');
+      b.disabled = true;
+
+      laoraSesion.escribir('mensajes', {
+        method: 'POST',
+        body: JSON.stringify({ socio_id: SOCIO.id, autor: 'socio', texto: texto })
+      }).then(function () {
+        caja.value = '';
+        b.disabled = false;
+        avisoMensaje.hidden = false;
+        avisoMensaje.classList.remove('cu-error');
+        avisoMensaje.textContent = 'Enviado. Te contestamos por aquí y te avisamos por correo.';
+        return cargarHilo();
+      }).catch(function () {
+        b.disabled = false;
+        avisoMensaje.hidden = false;
+        avisoMensaje.classList.add('cu-error');
+        avisoMensaje.textContent = 'No hemos podido enviarlo. Inténtalo en un momento.';
+      });
+    });
+  }
+
+  /* ---------- abrir la cuenta ---------- */
+  var SOCIO = {};
+
   function abrirDentro(usuario) {
     puerta.hidden = true;
     dentro.hidden = false;
     document.querySelector('[data-correo-dentro]').textContent = usuario.email || '';
+    SOCIO.id = usuario.id;
 
-    laoraSesion.consultar('pedidos?select=*,pedido_lineas(*)&order=creado_en.desc')
-      .then(function (pedidos) {
-        document.querySelector('[data-cargando]').hidden = true;
-        if (!pedidos || !pedidos.length) {
-          document.querySelector('[data-sin-nada]').hidden = false;
-          return;
-        }
+    Promise.all([
+      laoraSesion.consultar('socios?select=*&limit=1'),
+      laoraSesion.consultar('pedidos?select=*,pedido_lineas(*)&order=creado_en.desc'),
+      laoraSesion.consultar('relojes?select=*,garantias(*),intervenciones(*)&order=creado_en.desc'),
+      cargarHilo()
+    ]).then(function (r) {
+      document.querySelector('[data-cargando]').hidden = true;
+
+      var socio = (r[0] || [])[0];
+      if (socio) { SOCIO = socio; ponerDatos(socio); }
+
+      var pedidos = r[1] || [];
+      var relojes = r[2] || [];
+
+      if (relojes.length) {
+        document.querySelector('[data-bloque-relojes]').hidden = false;
+        document.querySelector('[data-relojes]').innerHTML = relojes.map(relojHtml).join('');
+      }
+      if (pedidos.length) {
+        document.querySelector('[data-bloque-pedidos]').hidden = false;
         document.querySelector('[data-pedidos]').innerHTML = pedidos.map(pedidoHtml).join('');
-      })
-      .catch(function () {
-        document.querySelector('[data-cargando]').textContent =
-          'No hemos podido cargar tus pedidos. Vuelve a intentarlo en un momento.';
-      });
+      }
+      if (!relojes.length && !pedidos.length) {
+        document.querySelector('[data-sin-nada]').hidden = false;
+      }
+    }).catch(function () {
+      document.querySelector('[data-cargando]').textContent =
+        'No hemos podido abrir tu cuenta del todo. Vuelve a intentarlo en un momento.';
+    });
   }
 
   /* Terminar de pagar un pedido que se quedó a medias: es el mismo

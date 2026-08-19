@@ -44,9 +44,9 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 5
-V_JS = 7
-V_SESION = 5
+V_CSS = 6
+V_JS = 8
+V_SESION = 6
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
 VENTAJAS = [
@@ -115,31 +115,124 @@ PAGINA = f"""<!DOCTYPE html>
   </div>
 
   <!-- ---------- DENTRO ----------
-       Lo que faltaba hasta el 19/08/2026: esta página solo sabía pedir
-       el correo. Quien entraba con su enlace volvía aquí y se
-       encontraba otra vez el mismo formulario, como si no tuviera
-       cuenta. Y la lista de «qué hay dentro» prometía algo que no
-       existía. Esto es ese dentro. -->
+       Lo que promete la página del Club, cumplido: la colección con
+       sus números de serie y su garantía, el pasaporte de cada
+       pedido, el taller directo y los datos del socio.
+       Lo que NO se copia del boceto del Club son los puntos y el
+       número de miembro: no existe ningún programa de puntos, y
+       enseñar uno sería mentir. -->
   <div class="cu-dentro" data-dentro hidden>
-    <div class="cu-quien">
+
+    <header class="cu-quien">
       <div>
-        <h1>Tu cuenta</h1>
+        <p class="cu-hola" data-hola>Hola</p>
+        <h1>Tu Club <em>laOra</em></h1>
         <p class="cu-correo" data-correo-dentro></p>
       </div>
       <button type="button" class="cu-salir" data-salir>Salir</button>
-    </div>
+    </header>
 
-    <p class="cu-cargando" data-cargando>Buscando tus pedidos…</p>
+    <p class="cu-cargando" data-cargando>Abriendo tu cuenta…</p>
+
+    <!-- ---------- mi colección ---------- -->
+    <section class="cu-bloque" data-bloque-relojes hidden>
+      <p class="cu-rotulo">01 — Mi colección</p>
+      <ol class="cu-lista" data-relojes></ol>
+    </section>
+
+    <!-- ---------- mis pedidos ---------- -->
+    <section class="cu-bloque" data-bloque-pedidos hidden>
+      <p class="cu-rotulo">02 — Mis pedidos</p>
+      <ol class="cu-lista" data-pedidos></ol>
+    </section>
 
     <p class="cu-sin-nada" data-sin-nada hidden>
-      Todavía no has comprado nada. <a href="/coleccion.html">Ver la colección →</a>
+      Todavía no has comprado nada, así que aquí no hay mucho que ver.
+      <a href="/coleccion.html">Ver la colección →</a>
     </p>
 
-    <ol class="cu-pedidos" data-pedidos></ol>
+    <!-- ---------- el taller ---------- -->
+    <section class="cu-bloque" data-bloque-taller>
+      <p class="cu-rotulo">03 — Hablar con el taller</p>
+      <p class="cu-explica">Escríbenos por aquí lo que necesites de tu reloj: una duda, un
+        ruido raro, una correa que quieres cambiar. Lo lee Óscar, no un robot, y te contesta
+        aquí mismo.</p>
+
+      <ol class="cu-hilo" data-hilo></ol>
+      <p class="cu-hilo-vacio" data-hilo-vacio hidden>Todavía no nos has escrito nada.</p>
+
+      <form class="cu-escribir" data-form-mensaje>
+        <label for="mensaje" class="cu-oculto">Tu mensaje</label>
+        <textarea id="mensaje" rows="3" maxlength="1500" data-mensaje
+                  placeholder="Cuéntanos…"></textarea>
+        <button class="cu-enviar" type="submit" data-enviar-mensaje>Enviar</button>
+        <p class="cu-aviso" data-aviso-mensaje hidden></p>
+      </form>
+    </section>
+
+    <!-- ---------- sus datos ---------- -->
+    <section class="cu-bloque" data-bloque-datos>
+      <p class="cu-rotulo">04 — Tus datos</p>
+      <p class="cu-explica">Los de arriba son los que usamos para enviarte el reloj y para la
+        factura. Los de abajo <b>no hacen falta para nada</b>: son cosas que nos ayudan a
+        atenderte mejor, y solo si te apetece contarlas.</p>
+
+      <form class="cu-datos" data-form-datos>
+        <div class="cu-rejilla">
+          <label class="cu-campo"><span>Nombre</span>
+            <input type="text" autocomplete="given-name" data-d="nombre"></label>
+          <label class="cu-campo"><span>Apellidos</span>
+            <input type="text" autocomplete="family-name" data-d="apellidos"></label>
+          <label class="cu-campo"><span>Teléfono</span>
+            <input type="tel" autocomplete="tel" data-d="telefono"></label>
+          <label class="cu-campo"><span>NIF <small>(solo si necesitas factura)</small></span>
+            <input type="text" data-d="nif"></label>
+          <label class="cu-campo cu-ancho"><span>Dirección</span>
+            <input type="text" autocomplete="street-address" data-d="direccion"></label>
+          <label class="cu-campo"><span>Código postal</span>
+            <input type="text" inputmode="numeric" autocomplete="postal-code" data-d="cp"></label>
+          <label class="cu-campo"><span>Población</span>
+            <input type="text" autocomplete="address-level2" data-d="poblacion"></label>
+          <label class="cu-campo"><span>Provincia</span>
+            <input type="text" autocomplete="address-level1" data-d="provincia"></label>
+          <label class="cu-campo"><span>País</span>
+            <input type="text" autocomplete="country-name" data-d="pais"></label>
+        </div>
+
+        <p class="cu-rotulo cu-rotulo-menor">Si te apetece contárnoslo</p>
+        <div class="cu-rejilla">
+          <label class="cu-campo"><span>Tu muñeca <small>(en cm)</small></span>
+            <input type="number" step="0.5" min="10" max="30" inputmode="decimal"
+                   placeholder="17,5" data-d="muneca_cm"></label>
+          <label class="cu-campo"><span>Tu cumpleaños <small>(día y mes)</small></span>
+            <span class="cu-cumple">
+              <input type="number" min="1" max="31" placeholder="Día" data-d="cumple_dia">
+              <input type="number" min="1" max="12" placeholder="Mes" data-d="cumple_mes">
+            </span></label>
+          <label class="cu-campo cu-ancho"><span>¿Cómo nos conociste?</span>
+            <select data-d="nos_conocio">
+              <option value="">Prefiero no decirlo</option>
+              <option value="amigo">Me lo contó alguien</option>
+              <option value="instagram">Por Instagram</option>
+              <option value="buscando">Buscando en internet</option>
+              <option value="otro">De otra manera</option>
+            </select></label>
+        </div>
+
+        <label class="cu-check">
+          <input type="checkbox" data-d="quiere_avisos">
+          <span>Avísame cuando saquéis un modelo o un acabado nuevo. Nada más: ni ofertas,
+            ni recordatorios, ni correos de relleno. Puedes apagarlo aquí mismo cuando quieras.</span>
+        </label>
+
+        <button class="cu-enviar" type="submit" data-guardar>Guardar mis datos</button>
+        <p class="cu-aviso" data-aviso-datos hidden></p>
+      </form>
+    </section>
 
     <p class="cu-legal">
-      ¿Alguna duda con un pedido? Respóndenos al correo de la compra y te contestamos.
-      <a href="/privacidad.html">Cómo tratamos tus datos</a>.
+      Todo esto es tuyo: puedes pedirnos que lo borremos cuando quieras y lo borramos, sin
+      preguntas. <a href="/privacidad.html">Cómo tratamos tus datos</a>.
     </p>
   </div>
 </main>

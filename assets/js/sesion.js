@@ -181,6 +181,39 @@
     });
   }
 
+  /* ESCRIBIR es distinto de leer. `consultar` se traga los errores y
+     devuelve null, que para leer vale —no hay datos y ya está— pero
+     para escribir es peligroso: no se distingue «guardado» de «no se
+     ha podido», y se le diría a alguien que sus datos están a salvo
+     cuando no lo están. Esta revienta si algo va mal. */
+  function escribir(tabla, opciones) {
+    opciones = opciones || {};
+    return token().then(function (t) {
+      if (!t) throw new Error('sin sesión');
+      var cab = {
+        apikey: ANONIMA,
+        Authorization: 'Bearer ' + t,
+        'Accept-Profile': 'laora',
+        'Content-Profile': 'laora',
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      };
+      Object.keys(opciones.headers || {}).forEach(function (k) { cab[k] = opciones.headers[k]; });
+      return fetch(URL_SB + '/rest/v1/' + tabla, {
+        method: opciones.method || 'POST',
+        headers: cab,
+        body: opciones.body
+      });
+    }).then(function (r) {
+      if (!r.ok) {
+        return r.text().then(function (t) {
+          throw new Error('la base ha dicho que no (' + r.status + '): ' + t.slice(0, 120));
+        });
+      }
+      return true;
+    });
+  }
+
   global.laoraSesion = {
     URL: URL_SB,
     ANONIMA: ANONIMA,
@@ -191,6 +224,7 @@
     pedirEnlace: pedirEnlace,
     entrarConCodigo: entrarConCodigo,
     consultar: consultar,
+    escribir: escribir,
     salir: salir
   };
 })(window);
