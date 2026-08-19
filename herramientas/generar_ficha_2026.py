@@ -36,7 +36,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
-V_CSS_PRODUCTO = 34
+V_CSS_PRODUCTO = 35
 V_CSS_COLECCION = 17
 V_JS_CARRITO = 11
 
@@ -123,7 +123,7 @@ def ficha(d):
 <main>
   <section class="pv">
     <div class="pv-galeria">
-      <div class="pv-hero" data-pv-hero>
+      <div class="pv-hero pv-hero-vacio" data-pv-hero>
         <p class="pv-foto-pendiente">Foto por hacer</p>
       </div>
     </div>
