@@ -192,8 +192,14 @@
       if (acabaDeEntrar) decir('Tu enlace ha caducado. Pide otro y entras.', true);
     });
   } else if (location.hash.indexOf('error') >= 0) {
-    var m = location.hash.match(/error_description=([^&]*)/);
-    decir(m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : 'El enlace no ha funcionado.', true);
+    /* Supabase manda el motivo en inglés. Aquí se dice en español y,
+       sobre todo, se dice QUÉ HACER: casi siempre es que el enlace ya
+       se había usado, porque solo vale una vez. */
+    var codigo = (location.hash.match(/error_code=([^&]*)/) || [])[1] || '';
+    decir(codigo === 'otp_expired'
+      ? 'Ese enlace ya no sirve: caducan al poco rato y solo se pueden usar una vez. ' +
+        'Pide otro aquí abajo y entras.'
+      : 'El enlace no ha funcionado. Pide otro aquí abajo y entras.', true);
     history.replaceState(null, '', location.pathname);
   }
 
