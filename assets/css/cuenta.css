@@ -129,7 +129,7 @@ body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);
 .cu-campo input:focus,.cu-campo select:focus{outline:2px solid var(--gold);outline-offset:1px;
        border-color:var(--ink)}
 .cu-ancho{grid-column:1/-1}
-.cu-cumple{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cu-cumple{display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
 .cu-check{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--paper);
           border:1px solid var(--line);border-radius:14px;font-size:15px;line-height:1.55;
           cursor:pointer}
