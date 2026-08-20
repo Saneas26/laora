@@ -208,7 +208,20 @@ function trinchera() {
         pon({ estilo, mov, diam, caja, esf });
         if (L.e.esf !== esf) continue;
 
-        for (const correa of ofrece('correa', [L.e.correa])) {
+        for (const boton of ofrece('correa', [L.e.correa])) {
+          pon({ estilo, mov, diam, caja, esf, correa: boton });
+          if (L.e.correa !== boton) continue;
+
+          /* EL BOTÓN «PIEL» DEL MURPH VALE POR TRES CORREAS (20/08/2026).
+             Desde que el tono se elige en el grupo del color, la fila de
+             correas solo enseña «Piel», y enumerar por ella dejaba fuera
+             la marrón y la verde: 320 referencias que desaparecían del
+             catálogo y que nadie podía comprar. Cada tono es una correa
+             de verdad, con su coste, así que aquí se abren las tres. */
+          const trestonos = (estilo === 'M' && L.MURPH_CORREA[boton])
+            ? ofrece('color', Object.keys(L.PIELES_M || {})) : [boton];
+
+          for (const correa of trestonos) {
           pon({ estilo, mov, diam, caja, esf, correa });
           if (L.e.correa !== correa) continue;
 
@@ -268,6 +281,7 @@ function trinchera() {
                   agua: L.agua() },
                 Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
             }
+          }
           }
         }
       }
