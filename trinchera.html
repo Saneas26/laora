@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="/assets/css/laora.css?v=51">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=24">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=26">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=39">
 </head>
 <body><header class="site-header">
@@ -1113,6 +1113,27 @@
         var antesPesp = e.pesp;
         e.pesp = antesPesp === 'B' ? 'T' : 'B';
         if (!serieFoto()) e.pesp = antesPesp;
+      }
+      /* Y EL COLOR DEL KHAKI SALTA AL QUE TIENE FOTO (Óscar, 20/08/2026).
+         Al entrar en la caja negra con el nato en verde —su color de
+         serie— solo está fotografiado el negro, y el cartel hacía creer
+         que el nato no existía ahí. Como con el pespunte: si lo que has
+         pulsado NO es el color, se busca uno con foto; si eliges tú un
+         color, se respeta aunque salga el cartel. */
+      if (g !== 'color' && e.estilo === 'K' && !serieFoto()) {
+        var cual = e.correa === 'NATO' ? 'nato' : e.correa === 'PIELO' ? 'pielk'
+                 : e.correa === 'NATOP' ? 'color' : e.correa === 'ANTE' ? 'ante' : null;
+        if (cual) {
+          var lista = e.correa === 'NATO' ? NATOS : e.correa === 'PIELO' ? PIELES_K
+                    : e.correa === 'NATOP' ? COLORES : ANTES;
+          var antesColor = e[cual];
+          var ks = Object.keys(lista);
+          for (var ci = 0; ci < ks.length; ci++) {
+            e[cual] = ks[ci];
+            if (serieFoto()) break;
+          }
+          if (!serieFoto()) e[cual] = antesColor;
+        }
       }
       pinta();
       /* AL ELEGIR CORREA, EL PASO DEL COLOR SE VIENE A LA VISTA (Óscar,

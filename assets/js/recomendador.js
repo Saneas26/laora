@@ -28,7 +28,16 @@
   var caja = document.querySelector('[data-recomendador]');
   if (!caja) return;
 
-  var PREGUNTAS = [
+  /* DOS PUERTAS (Óscar, 20/08/2026). Las mismas tres preguntas, pero
+     preguntadas de otra manera cuando el reloj es para otro:
+     · La muñeca cambia de persona Y de respuestas. Nadie mide la
+       muñeca de otro a escondidas, así que «No lo sé» pasa a ser la
+       PRIMERA opción, que es la verdad en casi todos los regalos, y
+       las pistas dejan de ser centímetros para ser lo que se ve.
+     · El uso cambia de persona: «para mojarse», no «para mojarme».
+     · El presupuesto NO cambia. El dinero es de quien regala, así que
+       esa pregunta sigue siendo suya y en primera persona. */
+  var PREGUNTAS_MI = [
     { clave: 'muneca', titulo: '¿Cómo tienes la muñeca?',
       pie: 'Es lo primero, porque un reloj que baila o que sobresale no te lo vas a poner.',
       opciones: [
@@ -55,6 +64,49 @@
       ] }
   ];
 
+  var PREGUNTAS_REGALO = [
+    { clave: 'muneca', titulo: '¿Cómo tiene él o ella la muñeca?',
+      pie: 'Nadie mide la muñeca de otro a escondidas. Si no lo sabes, dilo sin más: es la respuesta normal en un regalo y te enseño lo que le queda bien a casi cualquiera.',
+      opciones: [
+        { v: 'nose',   r: 'No lo sé',  d: 'Lo normal en un regalo. Te enseño lo que vale para casi cualquier muñeca' },
+        { v: 'fina',   r: 'Fina',      d: 'Se le ve la muñeca delgada' },
+        { v: 'normal', r: 'Normal',    d: 'Ni delgada ni fuerte' },
+        { v: 'ancha',  r: 'Ancha',     d: 'Muñeca fuerte, de las que llenan la correa' }
+      ] },
+    { clave: 'uso', titulo: '¿Para qué lo va a usar?',
+      pie: 'Si va a tener uno solo, el de todos los días casi siempre es la respuesta.',
+      opciones: [
+        { v: 'dia',    r: 'Para todos los días', d: 'Trabajo, calle y cena, el mismo' },
+        { v: 'agua',   r: 'Para mojarse',        d: 'Ducha, piscina o mar' },
+        { v: 'vestir', r: 'Para arreglarse',     d: 'Traje, bodas, cenas de las buenas' },
+        { v: 'hablar', r: 'Que dé que hablar',   d: 'De los que le preguntan qué lleva' }
+      ] },
+    { clave: 'presupuesto', titulo: '¿Cuánto te quieres gastar?',
+      pie: 'Esta sigue siendo tuya: aquí el precio es uno y no hay descuentos que valgan.',
+      opciones: [
+        { v: 'hasta200', r: 'Hasta 200 €',   d: '' },
+        { v: '200a300',  r: 'De 200 a 300 €', d: '' },
+        { v: 'mas300',   r: 'Más de 300 €',   d: '' },
+        { v: 'da-igual', r: 'Enséñamelo todo', d: 'Ya decidiré yo' }
+      ] }
+  ];
+
+  var TEXTOS = {
+    mi: {
+      cabecera: 'Lo que yo me llevaría',
+      muneca: 'Para tu muñeca no tengo la medida ideal en ese uso. Estos te valen, pero mírales el diámetro.',
+      red: ''
+    },
+    regalo: {
+      cabecera: 'Lo que yo le regalaría',
+      muneca: 'Para esa muñeca no tengo la medida ideal en ese uso. Estos valen, pero mírales el diámetro.',
+      red: 'Y si la medida no acierta, hay 30 días para devolverlo, con el envío pagado.'
+    }
+  };
+
+  var MODO = 'mi';
+  function PREGS() { return MODO === 'regalo' ? PREGUNTAS_REGALO : PREGUNTAS_MI; }
+
   var MM = { fina: [36, 39], normal: [36, 39, 40], ancha: [40, 41] };
   var TRAMO = {
     hasta200: function (p) { return p <= 200; },
@@ -80,6 +132,9 @@
      nada: no ha venido a guardar un perfil, ha venido a que le
      recomienden un reloj. */
   function anota(clave, valor) {
+    /* En modo regalo NO se anota: esas respuestas son de otra persona
+       y meterlas en su ficha sería ensuciarla. */
+    if (MODO === 'regalo') return;
     if (!SOCIO || !SOCIO.id || !window.laoraSesion || !laoraSesion.escribir) return;
     var cambios = { rec_fecha: new Date().toISOString() };
     cambios['rec_' + clave] = valor;
@@ -91,7 +146,7 @@
   /* ---------- pintar ---------- */
 
   function pinta() {
-    if (paso < PREGUNTAS.length) return pintaPregunta(PREGUNTAS[paso]);
+    if (paso < PREGS().length) return pintaPregunta(PREGS()[paso]);
     pintaRespuesta();
   }
 
@@ -111,7 +166,7 @@
     var botones = caja.querySelectorAll('.rec-opcion');
     for (var j = 0; j < botones.length; j++) {
       botones[j].addEventListener('click', function () {
-        var clave = PREGUNTAS[paso].clave;
+        var clave = PREGS()[paso].clave;
         respuestas[clave] = this.dataset.valor;
         anota(clave, this.dataset.valor);
         paso++;
@@ -173,16 +228,18 @@
 
   function pintaRespuesta() {
     var r = elige();
-    var html = '<p class="rec-paso">Lo que yo me llevaría</p>';
+    var T = TEXTOS[MODO];
+    var html = '<p class="rec-paso">' + T.cabecera + '</p>';
 
     if (r.aviso === 'nada') {
       html += '<h2 class="rec-titulo">Hoy no tengo el reloj que buscas.</h2>' +
               '<p class="rec-pie">Y prefiero decírtelo a colocarte otro. Los que faltan están en el taller de diseño; cuando estén, estarán aquí.</p>';
     } else {
       if (r.aviso === 'precio') html += '<p class="rec-aviso">Con ese presupuesto exacto no tengo nada para ese uso. Esto es lo más cerca que estoy, y te digo el precio de verdad.</p>';
-      if (r.aviso === 'muneca') html += '<p class="rec-aviso">Para tu muñeca no tengo la medida ideal en ese uso. Estos te valen, pero mírales el diámetro.</p>';
+      if (r.aviso === 'muneca') html += '<p class="rec-aviso">' + T.muneca + '</p>';
       if (r.aviso === 'ambos')  html += '<p class="rec-aviso">Ni la medida ni el precio me cuadran del todo con lo que buscas. Te enseño lo que hay, sin adornos.</p>';
 
+      if (T.red) html += '<p class="rec-red">' + T.red + '</p>';
       html += '<div class="rec-fichas">';
       for (var i = 0; i < r.lista.length; i++) {
         var f = r.lista[i];
@@ -206,8 +263,8 @@
        acierte sin preguntar está bien; que no se sepa por qué, no. */
     if (recordado) {
       var dicho = [];
-      for (var q = 0; q < PREGUNTAS.length; q++) {
-        var pr = PREGUNTAS[q];
+      for (var q = 0; q < PREGS().length; q++) {
+        var pr = PREGS()[q];
         for (var o = 0; o < pr.opciones.length; o++) {
           if (pr.opciones[o].v === respuestas[pr.clave]) dicho.push(pr.opciones[o].r.toLowerCase());
         }
@@ -243,20 +300,49 @@
       if (s.rec_uso) respuestas.uso = s.rec_uso;
       if (s.rec_presupuesto) respuestas.presupuesto = s.rec_presupuesto;
       /* El paso es la primera pregunta sin contestar. */
-      while (paso < PREGUNTAS.length && respuestas[PREGUNTAS[paso].clave]) paso++;
-      recordado = paso >= PREGUNTAS.length;
+      while (paso < PREGS().length && respuestas[PREGS()[paso].clave]) paso++;
+      recordado = paso >= PREGS().length;
     }).catch(function () {});
   }
 
-  Promise.all([
-    fetch('/assets/datos/recomendador.json').then(function (r) { return r.json(); }),
-    loQueYaSabemos()
-  ])
-    .then(function (r) { fichas = r[0].fichas; pinta(); })
+  /* ---------- las dos puertas ---------- */
+
+  /* Hasta que no se pulsa un botón no se pregunta nada: quien ya sabe
+     lo que busca baja directo a la colección y no se encuentra un
+     cuestionario delante. */
+  var seccion = caja.closest('.rec');
+  var puertas = document.querySelectorAll('[data-rec-abre]');
+
+  function abre(modo, boton) {
+    MODO = modo;
+    paso = 0; respuestas = {}; recordado = false;
+    for (var i = 0; i < puertas.length; i++) {
+      puertas[i].setAttribute('aria-expanded', puertas[i] === boton ? 'true' : 'false');
+    }
+    if (seccion) seccion.hidden = false;
+    /* Lo que ya nos contó vale para ÉL, no para a quien regala. */
+    var listo = modo === 'mi' ? loQueYaSabemos() : Promise.resolve();
+    listo.then(function () {
+      pinta();
+      if (seccion) seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  fetch('/assets/datos/recomendador.json')
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      fichas = d.fichas;
+      for (var i = 0; i < puertas.length; i++) {
+        puertas[i].addEventListener('click', function () {
+          abre(this.dataset.recAbre, this);
+        });
+      }
+    })
     .catch(function () {
-      /* Sin datos no se enseña un cacharro roto: se quita de en medio
-         y la colección de abajo sigue estando entera. */
-      var seccion = caja.closest('.rec');
+      /* Sin datos no se enseña un cacharro roto ni un botón que no
+         hace nada: se quitan los dos y la colección sigue entera. */
       if (seccion) seccion.hidden = true;
+      var cajaBotones = document.querySelector('[data-puertas]');
+      if (cajaBotones) cajaBotones.hidden = true;
     });
 })();
