@@ -46,23 +46,59 @@ def hueco(caja, umbral=70, muestra=512):
 
 
 def disco(esfera, umbral=90):
-    """El disco de la esfera en la foto del proveedor: centro y semiejes."""
+    """La elipse del disco: centro, semiejes y giro, por mínimos cuadrados.
+
+    Con la caja del contorno no basta. Primero porque las esferas vienen
+    con muescas y eso desplaza la caja; y sobre todo porque en
+    perspectiva LA IMAGEN DEL CENTRO DE UN CÍRCULO NO ES EL CENTRO DE LA
+    ELIPSE. De ahí que la numeración de 13 a 24, que va en un anillo más
+    pequeño, saliera girada respecto a la de 1 a 12.
+    """
     a = np.asarray(esfera.convert('RGB')).astype(float).mean(axis=2)
-    ys, xs = np.where(a < umbral)
-    return ((xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2,
-            (xs.max() - xs.min()) / 2, (ys.max() - ys.min()) / 2)
+    m = a < umbral
+    pts = []
+    for y in range(m.shape[0]):
+        xs = np.where(m[y])[0]
+        if len(xs) > 50:
+            pts += [(xs.min(), y), (xs.max(), y)]
+    for x in range(m.shape[1]):
+        ys = np.where(m[:, x])[0]
+        if len(ys) > 50:
+            pts += [(x, ys.min()), (x, ys.max())]
+    P = np.array(pts, dtype=float)
+    px, py = P[:, 0], P[:, 1]
+    A = np.stack([px * px, px * py, py * py, px, py, np.ones_like(px)], axis=1)
+    aa, bb, cc, dd, ee, ff = np.linalg.svd(A)[2][-1]
+    cx, cy = np.linalg.solve(np.array([[2 * aa, bb], [bb, 2 * cc]]), [-dd, -ee])
+    val, vec = np.linalg.eigh(np.array([[aa, bb / 2], [bb / 2, cc]]))
+    k = aa * cx * cx + bb * cx * cy + cc * cy * cy + dd * cx + ee * cy + ff
+    ejes = np.sqrt(np.abs(-k / val))
+    ang = np.degrees(np.arctan2(vec[1, 0], vec[0, 0]))
+    return cx, cy, ejes[0], ejes[1], ang
 
 
-def montar(caja, esfera, giro=0.0, lado=2048, sombra=0.55, dx=0, dy=0, cristal=0.06, holgura=1.0):
+def montar(caja, esfera, giro=0.0, lado=2048, sombra=0.55, dx=0, dy=0, cristal=0.06,
+           holgura=1.0, centro=None):
     caja = caja.convert('RGB').resize((lado, lado), Image.LANCZOS)
     hx, hy, hr = hueco(caja)
 
-    cx, cy, rx, ry = disco(esfera)
-    lo = int(max(rx, ry) * 2.2)
+    ex_, ey_, r1, r2, ang = disco(esfera)
+    rx = max(r1, r2)
+    # EL CENTRO QUE MANDA es el del DIBUJO, que se mide con pares de
+    # numerales opuestos y se pasa a mano. El de la elipse solo vale de
+    # apaño cuando no lo tenemos.
+    cx, cy = centro if centro else (ex_, ey_)
+
+    lo = int(rx * 2.6)
     e = esfera.convert('RGB').crop((int(cx - lo / 2), int(cy - lo / 2),
-                                   int(cx + lo / 2), int(cy + lo / 2)))
-    if ry != rx:
-        e = e.resize((e.width, int(e.height * rx / ry)), Image.LANCZOS)
+                                    int(cx + lo / 2), int(cy + lo / 2)))
+    # de elipse a círculo, respetando el giro del eje mayor
+    if abs(r1 - r2) > 0.5:
+        may, men = (r1, r2) if r1 >= r2 else (r2, r1)
+        eje = ang if r1 >= r2 else ang + 90
+        e = e.rotate(eje, resample=Image.BICUBIC)
+        e = e.resize((e.width, int(round(e.height * may / men))), Image.LANCZOS)
+        e = e.rotate(-eje, resample=Image.BICUBIC)
     e = e.rotate(giro, resample=Image.BICUBIC)
 
     # HOLGURA: las esferas del proveedor suelen venir con el borde comido
@@ -112,7 +148,9 @@ if __name__ == '__main__':
     p.add_argument('--dy', type=int, default=0)
     p.add_argument('--cristal', type=float, default=0.06)
     p.add_argument('--holgura', type=float, default=1.0)
+    p.add_argument('--centro', default=None, help='centro del DIBUJO de la esfera, x,y')
     a = p.parse_args()
-    img, info = montar(Image.open(a.caja), Image.open(a.esfera), a.giro, a.lado, a.sombra, a.dx, a.dy, a.cristal, a.holgura)
+    img, info = montar(Image.open(a.caja), Image.open(a.esfera), a.giro, a.lado, a.sombra, a.dx, a.dy, a.cristal, a.holgura,
+                      tuple(float(v) for v in a.centro.split(',')) if a.centro else None)
     img.save(a.salida)
     print(a.salida, info)
