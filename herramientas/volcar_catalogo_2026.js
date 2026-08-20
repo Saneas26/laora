@@ -179,7 +179,7 @@ function precisa() {
 function trinchera() {
   const L = motorDe('trinchera.html',
     'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, NATOS, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
-    'CIERRES_K, MURPH_CORREA, conCierreK, ' +
+    'CIERRES_K, MURPH_CORREA, PIELES_M, DUOS_M, conCierreK, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
@@ -219,7 +219,11 @@ function trinchera() {
              catálogo y que nadie podía comprar. Cada tono es una correa
              de verdad, con su coste, así que aquí se abren las tres. */
           const trestonos = (estilo === 'M' && L.MURPH_CORREA[boton])
-            ? ofrece('color', Object.keys(L.PIELES_M || {})) : [boton];
+            ? ofrece('color', Object.keys(L.PIELES_M || {}))
+            /* y lo mismo con el dúo de piel, que desde el 20/08/2026 viene
+               en los mismos tres tonos y por el mismo botón */
+            : (estilo === 'M' && L.DUOS_M && L.DUOS_M[boton])
+            ? ofrece('color', Object.keys(L.DUOS_M)) : [boton];
 
           for (const correa of trestonos) {
           pon({ estilo, mov, diam, caja, esf, correa });
@@ -236,7 +240,9 @@ function trinchera() {
           /* La piel del khaki, que desde el 19/08/2026 tiene tres colores
              y dos hebillas en vez de ser una correa suelta. */
           const pielesK   = correa === 'PIELO' ? ofrece('color', Object.keys(L.PIELES_K || {})) : [null];
-          const antes     = (correa === 'ANTE' && estilo === 'M') ? ofrece('ante', Object.keys(L.ANTES || {})) : [null];
+          /* el ante y el dúo de ante comparten los cuatro colores */
+          const antes     = ((correa === 'ANTE' || correa === 'DUOA') && estilo === 'M')
+            ? ofrece('ante', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
 
           for (const color of colores)
