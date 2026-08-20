@@ -43,7 +43,20 @@ if git diff --cached --name-only | grep -q '^assets/img/trinchera-2026/serie/'; 
   fi
 fi
 
-# ---------- 3. la misma versión en todas las páginas ----------
+# ---------- 3. fotos del Trinchera fuera de la serie ----------
+# La serie de 2026 vive entera en `serie/`, y es la única que se rehace
+# cuando cambia una esfera. Lo que quedó fuera —la galería, las
+# miniaturas antiguas— no se entera de nada y se queda congelado: el
+# 20/08/2026 Óscar seguía viendo el Murph de hace una semana en la
+# colección después de rehacer cien fotos, porque su tarjeta apuntaba a
+# `murph/` y a `1200/`, no a `serie/`.
+viejas=$(grep -oh '/assets/img/trinchera-2026/\(1200\|murph\)/[a-z0-9/-]*\.\(webp\|avif\)' ./*.html 2>/dev/null | sort -u)
+if [ -n "$viejas" ]; then
+  echo "ℹ️  fotos del Trinchera que NO son de la serie (no se rehacen solas):"
+  echo "$viejas" | sed 's/^/   /'
+fi
+
+# ---------- 4. la misma versión en todas las páginas ----------
 # Cloudflare sirve el JS y el CSS con max-age=14400, así que el `?v=`
 # es lo único que obliga al navegador a bajarse la versión nueva. El
 # 19/08/2026 nueve páginas pedían `carrito.js?v=1` mientras el carrito

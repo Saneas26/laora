@@ -20,13 +20,13 @@
      Refinada» de Stitch: JetBrains Mono para títulos y etiquetas,
      Inter para el cuerpo, modo claro y bordes rectos. La cabecera y
      el pie siguen siendo los comunes del sitio. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/laora.css?v=51">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <!-- `cabecera.css`: dentro está `.cb-marca`, el logotipo dibujado con
      la O como círculo. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=17">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=18">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -94,8 +94,40 @@
         clásica con los estándares de la relojería mecánica moderna, al precio honesto.</p>
     </header>
 
-    <p class="cv2-sub cv2-sub-grande">Movimientos Suizos</p>
-    <p class="cv2-sub-linea">Cristal de Zafiro&ensp;|&ensp;Cajas de 36 o 39 mm, Acero, PVD Negro, Bronce o Titanio&ensp;|&ensp;Piel Genuina, Nato o Brazalete de Acero</p>
+    <!-- LOS CALIBRES DEL TRINCHERA (Óscar, 20/08/2026). Sustituyen al
+         «Movimientos Suizos» y a la línea de materiales, que Óscar
+         mandó fuera. Las marcas se citan por su nombre, nunca con su
+         logotipo, y debajo va el mismo aviso legal de la portada. -->
+    <section class="cv2-cal" aria-labelledby="cal-trinchera">
+      <h3 class="cv2-cal-titulo" id="cal-trinchera">Nuestros calibres suizos <span>que han movido lo mejor de lo mejor</span></h3>
+      <div class="cv2-cal-rejilla">
+
+        <article class="cv2-cal-caja">
+          <p class="cv2-cal-tipo">Cuarzo</p>
+          <p class="cv2-cal-rotulo">Calibre</p>
+          <p class="cv2-cal-codigo">LO_Q6026</p>
+          <p class="cv2-cal-lead">Misma eficiencia que</p>
+          <ul class="cv2-cal-refs">
+            <li><span><b>IWC</b> Portugieser Chronograph</span><em>9.900 €</em></li>
+            <li><span><b>TAG Heuer</b> Carrera Calibre 16</span><em>5.200 €</em></li>
+          </ul>
+        </article>
+
+        <article class="cv2-cal-caja">
+          <p class="cv2-cal-tipo">Automático</p>
+          <p class="cv2-cal-rotulo">Calibre</p>
+          <p class="cv2-cal-codigo">LO_A4026</p>
+          <p class="cv2-cal-lead">Misma mecánica que</p>
+          <ul class="cv2-cal-refs">
+            <li><span><b>Tudor</b> Submariner</span><em>3.000 €</em></li>
+            <li><span><b>Breitling</b> Superocean</span><em>5.500 €</em></li>
+            <li><span><b>TAG Heuer</b> Carrera</span><em>3.000 €</em></li>
+          </ul>
+        </article>
+
+      </div>
+      <p class="cv2-cal-aviso">Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado, impuestos y envío. Las marcas citadas pertenecen a sus titulares y no están afiliadas a laOra.</p>
+    </section>
 
     <!-- Las cuatro tarjetas del Lunar son del catálogo viejo: sus
      referencias ya no existen, porque el Lunar se configura pieza a
@@ -130,7 +162,7 @@
       <article class="cv2-tarjeta cv2-t2">
         <div class="cv2-foto">
           <span class="cv2-chip">Murph Pack</span>
-          <img src="/assets/img/trinchera-2026/1200/pack-murph-amarillo.webp" alt="Trinchera Murph de numerales crema con piel negra y brazalete de acero" loading="lazy">
+          <img src="/assets/img/trinchera-2026/serie/1200/36-acero-crema-negra-pblanco.avif?v=14" alt="Trinchera Murph de numerales crema con piel negra y brazalete de acero" loading="lazy">
         </div>
         <div class="cv2-cuerpo">
           <div class="cv2-quieto">
@@ -139,12 +171,12 @@
               <li>Ø 36 mm Acero 316L</li>
               <li>Dúo Piel + Brazalete Acero</li>
               <li>Zafiro | 5 ATM</li>
-              <li class="cv2-precio-lista">409,90 €</li>
+              <li class="cv2-precio-lista">359,90 €</li>
             </ul>
           </div>
           <div class="cv2-encima">
-            <div class="cv2-minis2" aria-label="Otros acabados"><button type="button" data-mini="/assets/img/trinchera-2026/murph/1200/acero-negra-pblanco-crema.avif?v=4" data-var='{"chip":"Murph/Piel","lista":["Automático Suizo","Ø 36 mm Acero 316L","Correa Piel Genuina Negra","Zafiro | 5 ATM"],"anadir":{"ref":"LO-02-A-PL36C-MA-PIELN-PB-plata","nombre":"Trinchera Murph","detalle":"Plata 36 mm, tapa de cristal · Murph numerales crema","correa":"Piel genuina negra, pespunte blanco, hebilla clásica plateada","precio":359.9,"foto":"/assets/img/trinchera-2026/murph/1200/acero-negra-pblanco-crema.avif?v=4"}}'><img src="/assets/img/trinchera-2026/murph/1200/acero-negra-pblanco-crema.avif?v=4" alt="" loading="lazy"></button><button type="button" data-mini="/assets/img/trinchera-2026/1200/murph-amarillo-acero.webp" data-var='{"chip":"Murph/Acero","lista":["Automático Suizo","Ø 36 mm Acero 316L","Brazalete Acero 316L","Zafiro | 5 ATM"],"anadir":{"ref":"LO-02-A-PL36C-MA-ACERO","nombre":"Trinchera Murph","detalle":"Plata 36 mm, tapa de cristal · Murph numerales crema","correa":"Brazalete acero 316L, 3 eslabones","precio":329.9,"foto":"/assets/img/trinchera-2026/1200/murph-amarillo-acero.webp"}}'><img src="/assets/img/trinchera-2026/1200/murph-amarillo-acero.webp" alt="" loading="lazy"></button><button type="button" data-mini="/assets/img/trinchera-2026/1200/pack-murph-blanco.webp" data-var='{"chip":"Murph Dúo","lista":["Automático Suizo","Ø 36 mm Acero 316L","Dúo Piel + Brazalete Acero","Zafiro | 5 ATM"],"anadir":{"ref":"LO-02-A-PL36C-MB-DUON","nombre":"Trinchera Murph Dúo","detalle":"Plata 36 mm, tapa de cristal · Murph numerales blancos","correa":"Dúo: piel negra montada + brazalete acero 3 eslabones","precio":409.9,"foto":"/assets/img/trinchera-2026/1200/pack-murph-blanco.webp"}}'><img src="/assets/img/trinchera-2026/1200/pack-murph-blanco.webp" alt="" loading="lazy"></button><a href="/trinchera.html">+20</a></div>
-            <button class="cv2-comprar" type="button" data-anadir='{"ref":"LO-02-A-PL36C-MA-DUON","nombre":"Trinchera Murph Dúo","detalle":"Plata 36 mm, tapa de cristal · Murph numerales crema","correa":"Dúo: piel negra montada + brazalete acero 3 eslabones","precio":409.9,"foto":"/assets/img/trinchera-2026/1200/pack-murph-amarillo.webp"}'>Añadir al carrito</button>
+            <div class="cv2-minis2" aria-label="Otros acabados"><button type="button" data-mini="/assets/img/trinchera-2026/serie/1200/36-acero-blanco-negra-pblanco.avif?v=14" data-var='{"chip":"Murph/Blancos","lista":["Automático Suizo","Ø 36 mm Acero 316L","Correa Piel Genuina Negra","Zafiro | 5 ATM"],"anadir":{"ref":"LO-02-A-PL36C-MB-PIELN-PB-plata","nombre":"Trinchera Murph","detalle":"Plata 36 mm, tapa de cristal · Murph numerales blancos","correa":"Piel genuina negra, pespunte blanco, hebilla clásica plateada","precio":359.9,"foto":"/assets/img/trinchera-2026/serie/1200/36-acero-blanco-negra-pblanco.avif?v=14"}}'><img src="/assets/img/trinchera-2026/serie/1200/36-acero-blanco-negra-pblanco.avif?v=14" alt="" loading="lazy"></button><button type="button" data-mini="/assets/img/trinchera-2026/serie/1200/36-acero-crema-marron-pblanco.avif?v=14" data-var='{"chip":"Murph/Marrón","lista":["Automático Suizo","Ø 36 mm Acero 316L","Correa Piel Genuina Marrón","Zafiro | 5 ATM"],"anadir":{"ref":"LO-02-A-PL36C-MA-PIELM-PB-plata","nombre":"Trinchera Murph","detalle":"Plata 36 mm, tapa de cristal · Murph numerales crema","correa":"Piel genuina marrón, pespunte blanco, hebilla clásica plateada","precio":359.9,"foto":"/assets/img/trinchera-2026/serie/1200/36-acero-crema-marron-pblanco.avif?v=14"}}'><img src="/assets/img/trinchera-2026/serie/1200/36-acero-crema-marron-pblanco.avif?v=14" alt="" loading="lazy"></button><button type="button" data-mini="/assets/img/trinchera-2026/serie/1200/36-acero-crema-ante-camel.avif?v=14" data-var='{"chip":"Murph/Ante","lista":["Automático Suizo","Ø 36 mm Acero 316L","Correa Piel Ante Camel","Zafiro | 5 ATM"],"anadir":{"ref":"LO-02-A-PL36C-MA-ANTE-CAM","nombre":"Trinchera Murph","detalle":"Plata 36 mm, tapa de cristal · Murph numerales crema","correa":"Ante camel, hebilla clásica plateada","precio":289.9,"foto":"/assets/img/trinchera-2026/serie/1200/36-acero-crema-ante-camel.avif?v=14"}}'><img src="/assets/img/trinchera-2026/serie/1200/36-acero-crema-ante-camel.avif?v=14" alt="" loading="lazy"></button><a href="/trinchera.html">+20</a></div>
+            <button class="cv2-comprar" type="button" data-anadir='{"ref":"LO-02-A-PL36C-MA-PIELN-PB-plata","nombre":"Trinchera Murph","detalle":"Plata 36 mm, tapa de cristal · Murph numerales crema","correa":"Piel genuina negra, pespunte blanco, hebilla clásica plateada","precio":359.9,"foto":"/assets/img/trinchera-2026/serie/1200/36-acero-crema-negra-pblanco.avif?v=14"}'>Añadir al carrito</button>
           </div>
         </div>
       </article>
