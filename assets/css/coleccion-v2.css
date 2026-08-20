@@ -143,7 +143,7 @@
 }
 .cv2-cal-titulo span{color:var(--cv2-gris)}
 .cv2-cal-rejilla{
-  display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;
 }
 .cv2-cal-caja{
   background:#fff;border:1px solid var(--cv2-linea);
