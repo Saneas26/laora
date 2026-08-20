@@ -41,6 +41,27 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 ROJO = (0.80, 0.06, 0.06)
+PLATA = (0.92, 0.93, 0.94)
+
+
+def mascara_por_color(img, centro=None, radio=None):
+    """El segundero cuando YA es rojo: dentro de la esfera es lo único rojo.
+
+    Más fiable que buscarlo por su forma, así que cuando la madre es la de
+    segundero rojo se usa esto y no el barrido de ángulos. Con dos
+    cuidados, que costaron un intento: hay que exigir ROJO DE VERDAD —que
+    el rojo gane a los otros dos canales por un margen, no que sea el
+    mayor— y hay que ceñirse a la esfera, porque un nato marrón o un
+    pasador de piel también tienen el rojo por delante y se teñía la
+    correa entera.
+    """
+    a = np.asarray(img.convert('RGB')).astype(float) / 255
+    r, g, b = a[:, :, 0], a[:, :, 1], a[:, :, 2]
+    rojizo = (r > 0.30) & ((r - np.maximum(g, b)) > 0.13) & (np.abs(g - b) < 0.20)
+    if centro and radio:
+        yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+        rojizo &= ((xx - centro[0]) ** 2 + (yy - centro[1]) ** 2) < radio ** 2
+    return rojizo
 
 
 def angulo_del_segundero(claro, cx, cy, r_max):
@@ -120,16 +141,25 @@ def mascara(img, centro, umbral=150, ancho=22, r_max=None, grueso=9):
     return vis & ~gruesas, math.degrees(th), alcance
 
 
-def pintar(img, centro, color=ROJO, umbral=150, ancho=22, capuchon=0, grueso=9, radio=None):
+def pintar(img, centro, color=ROJO, umbral=150, ancho=22, capuchon=0, grueso=9, radio=None,
+           por_color=False):
     a = np.asarray(img.convert('RGB')).astype(float) / 255
-    m, th, alcance = mascara(img, centro, umbral, ancho, radio, grueso)
+    if por_color:
+        m, th, alcance = mascara_por_color(img, centro, radio), 0.0, 0
+    else:
+        m, th, alcance = mascara(img, centro, umbral, ancho, radio, grueso)
     if capuchon:
         yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
         m = m | (((xx - centro[0]) ** 2 + (yy - centro[1]) ** 2) < capuchon ** 2)
     suave = np.asarray(Image.fromarray((m * 255).astype(np.uint8))
                        .filter(ImageFilter.GaussianBlur(0.7))).astype(float) / 255
     lum = a.mean(axis=2)[:, :, None]
-    tenido = np.clip(np.array(color)[None, None, :] * (0.45 + 0.9 * lum), 0, 1)
+    if max(color) > 0.85 and min(color) > 0.6:
+        # a plata: el rojo es oscuro, así que hay que LEVANTAR la luz o
+        # sale una aguja gris sucia en vez de una plateada
+        tenido = np.clip(np.array(color)[None, None, :] * (0.55 + 1.35 * lum), 0, 1)
+    else:
+        tenido = np.clip(np.array(color)[None, None, :] * (0.45 + 0.9 * lum), 0, 1)
     out = a * (1 - suave[:, :, None]) + tenido * suave[:, :, None]
     return Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8)), int(m.sum()), th, alcance
 
@@ -137,17 +167,22 @@ def pintar(img, centro, color=ROJO, umbral=150, ancho=22, capuchon=0, grueso=9, 
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('origen'); p.add_argument('salida')
-    p.add_argument('--centro', required=True, help='eje de las agujas, x,y')
+    p.add_argument('--centro', default='0,0', help='eje de las agujas, x,y')
     p.add_argument('--umbral', type=int, default=150)
     p.add_argument('--ancho', type=int, default=22, help='medio ancho del corredor')
     p.add_argument('--capuchon', type=int, default=0)
+    p.add_argument('--a', default='rojo', choices=('rojo', 'plata'), help='color de destino')
+    p.add_argument('--por-color', action='store_true',
+                   help='la aguja ya es roja: se aísla por color, que es más fiable')
     p.add_argument('--grueso', type=int, default=9, help='lo más ancho que puede ser el segundero')
     p.add_argument('--radio', type=float, default=None,
                    help='radio de la esfera. SIN esto, en una correa clara —el nato de '
                         'franjas grises— el buscador se va a la correa y no encuentra la aguja')
     a = p.parse_args()
     cx, cy = (float(v) for v in a.centro.split(','))
-    img, n, th, alc = pintar(Image.open(a.origen), (cx, cy), umbral=a.umbral,
-                             ancho=a.ancho, capuchon=a.capuchon, grueso=a.grueso, radio=a.radio)
+    img, n, th, alc = pintar(Image.open(a.origen), (cx, cy),
+                             color=(ROJO if a.a == 'rojo' else PLATA), umbral=a.umbral,
+                             ancho=a.ancho, capuchon=a.capuchon, grueso=a.grueso, radio=a.radio,
+                             por_color=a.por_color)
     img.save(a.salida)
     print('%s · %d px teñidos · segundero a %.1f° · llega a %d px' % (a.salida, n, th, alc))

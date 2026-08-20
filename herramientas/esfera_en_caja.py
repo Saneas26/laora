@@ -78,12 +78,20 @@ def disco(esfera, umbral=90):
 
 
 def montar(caja, esfera, giro=0.0, lado=2048, sombra=0.55, dx=0, dy=0, cristal=0.06,
-           holgura=1.0, centro=None):
+           holgura=1.0, centro=None, resfera=None):
     caja = caja.convert('RGB').resize((lado, lado), Image.LANCZOS)
     hx, hy, hr = hueco(caja)
 
-    ex_, ey_, r1, r2, ang = disco(esfera)
-    rx = max(r1, r2)
+    if resfera:
+        # la esfera ya viene enderezada y recortada: su radio se sabe, y
+        # detectarlo aquí no funcionaría porque fuera del disco se deja
+        # fondo negro a propósito
+        ex_, ey_ = centro if centro else (esfera.width / 2, esfera.height / 2)
+        r1 = r2 = rx = resfera
+        ang = 0.0
+    else:
+        ex_, ey_, r1, r2, ang = disco(esfera)
+        rx = max(r1, r2)
     # EL CENTRO QUE MANDA es el del DIBUJO, que se mide con pares de
     # numerales opuestos y se pasa a mano. El de la elipse solo vale de
     # apaño cuando no lo tenemos.
@@ -149,8 +157,11 @@ if __name__ == '__main__':
     p.add_argument('--cristal', type=float, default=0.06)
     p.add_argument('--holgura', type=float, default=1.0)
     p.add_argument('--centro', default=None, help='centro del DIBUJO de la esfera, x,y')
+    p.add_argument('--resfera', type=float, default=None,
+                   help='radio del disco, para esferas ya enderezadas y recortadas')
     a = p.parse_args()
     img, info = montar(Image.open(a.caja), Image.open(a.esfera), a.giro, a.lado, a.sombra, a.dx, a.dy, a.cristal, a.holgura,
-                      tuple(float(v) for v in a.centro.split(',')) if a.centro else None)
+                      tuple(float(v) for v in a.centro.split(',')) if a.centro else None,
+                      a.resfera)
     img.save(a.salida)
     print(a.salida, info)
