@@ -127,6 +127,18 @@
   font-size:16px;line-height:1.55;color:rgba(18,20,20,.8);margin:0;
 }
 
+/* LA ESTAMPA DEL MODELO (Óscar, 20/08/2026). Una foto a sangre dentro
+   de la sección: se come el padding lateral con márgenes negativos
+   para ir de borde a borde del papel del modelo. */
+.cv2-estampa{
+  margin:44px -64px 0;
+}
+.cv2-estampa img{
+  display:block;width:100%;height:auto;
+  aspect-ratio:16/9;object-fit:cover;
+  background:var(--cv2-linea);
+}
+
 /* ---------- LOS CALIBRES (Óscar, 20/08/2026) ----------
    Ocupa el sitio del antiguo «Movimientos Suizos» y de la línea de
    materiales. Dice lo mismo con más fuerza: qué motor lleva el reloj
@@ -357,6 +369,7 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-puerta{width:100%;text-align:left;font-size:15px;padding:16px 18px}
   .cv2-modelos div{padding:0 20px;gap:20px}
   .cv2-modelo{padding:48px 20px 40px}
+  .cv2-estampa{margin:30px -20px 0}
   .cv2-cal{margin:36px 0 32px}
   .cv2-cal-rejilla{grid-template-columns:1fr;gap:16px}
   .cv2-cal-caja{padding:20px}
