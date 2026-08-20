@@ -43,8 +43,10 @@ CORREAS = [
     ('trinchera-acero-esfera-crema-sin-letras-correa-piel-verde-v1-4096.png',     'verde-ptono'),
 ]
 
-# La piel negra solo se fotografió en 39: no se inventa una de 36.
-SOLO_39 = {'negra-pblanco'}
+# Todas valen para las dos medidas (Óscar, 20/08/2026): «caja de acero y
+# titanio sirve para 36 y 39 mm». Es la misma caja fotografiada de frente
+# y las correas son todas de 20 mm.
+SOLO_39 = set()
 
 ESFERA = {'crema': 'murph-crema.png', 'blanco': 'murph-blanco.png'}
 

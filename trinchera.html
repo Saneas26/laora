@@ -388,6 +388,14 @@
   /* Los tres de la piel del khaki, con sus dos hebillas */
   var PIELES_K = { NEG: ['Negra', '#1c1c1e'], MOS: ['Marrón oscuro', '#5a3b28'],
                    MCL: ['Marrón claro', '#a4552a'] };
+  /* LAS TRES PIELES DEL MURPH, ahora como colores y no como tres correas
+     distintas (Óscar, 20/08/2026): «un botón con Piel y el color en otra
+     elección, como se hace con el ante». Es la misma correa italiana de
+     20 mm; lo único que cambia es el tono. El valor sigue siendo la
+     correa de verdad —PIELN, PIELM, PIELV— para que el coste, la
+     referencia y la ficha técnica no se enteren del cambio. */
+  var PIELES_M = { PIELN: ['Negra', '#1c1c1e'], PIELM: ['Marrón', '#4a2a1c'],
+                   PIELV: ['Verde militar', '#26382a'] };
   var PIELK_FOTO = { NEG: 'negra', MOS: 'marronoscuro', MCL: 'marronclaro' };
   var CIERRES_K = { 'plata': 'Clásica plata', 'negra': 'Clásica negra' };
   /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
@@ -399,6 +407,12 @@
      Para añadir una foto: se convierte a AVIF en 480/1200/1600 dentro de
      `assets/img/trinchera-2026/serie/` y se apunta su clave aquí. */
   var SERIE_IMG = '/assets/img/trinchera-2026/serie/';
+  /* EL NÚMERO DE VERSIÓN DE LAS FOTOS. Cloudflare y el navegador guardan
+     las imágenes por su nombre, así que rehacer una foto SIN cambiarle el
+     nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
+     logotipo en el sitio de antes tres despliegues después. Lo sube solo
+     el hook de pre-commit cuando cambia algo de serie/. */
+  var SERIE_V = '?v=3';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -474,8 +488,11 @@
     '39-acero-blanco-ante-azulpetroleo': 1,
     '39-acero-blanco-ante-camel':        1,
     '39-acero-blanco-brazalete':         1,
-    /* La piel negra del Murph, con su pespunte claro */
+    /* La piel negra del Murph, con su pespunte claro. En las dos medidas:
+       «caja de acero y titanio sirve para 36 y 39 mm» (Óscar, 20/08/2026). */
+    '36-acero-crema-negra-pblanco':      1,
     '39-acero-crema-negra-pblanco':      1,
+    '36-acero-blanco-negra-pblanco':     1,
     '39-acero-blanco-negra-pblanco':     1,
     /* Y sus otras dos pieles, marrón y verde (Óscar, 20/08/2026). Estas
        vienen con el pespunte DEL MISMO TONO que la piel, así que solo
@@ -820,7 +837,7 @@
         /* El titanio no tiene pack (Óscar, 19/08/2026) ni brazalete: el
            brazalete es de acero y no hay foto de esa pareja. Se tachan, que
            es como se dice aquí «esto no existe». */
-        ? [['PIELV', 'Piel Verde'], ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'],
+        ? [['PIELN', 'Piel'],
            ['ANTE', 'Ante'],
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
@@ -830,7 +847,10 @@
         ? [['ANTE', 'Ante'], ['PIELO', 'Piel']]
         : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
-           ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
+           ['PACK', 'Pack Piel + Brazalete', true]],
+        /* el botón «Piel» del Murph vale por las tres: se marca con
+           cualquiera de ellas */
+        esMurph && MURPH_CORREA[e.correa] ? 'PIELN' : e.correa);
     }
 
     /* El cierre: con la piel italiana, y su foto en la esquina del visor */
@@ -868,15 +888,18 @@
     var anteConColor = e.correa === 'ANTE' && (esMurph || !!K1224_ANTE_CAJA[e.caja]);
     var esNato = e.correa === 'NATO';
     var esPielK = e.correa === 'PIELO';
-    var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK;
+    var esPielM = esMurph && !!MURPH_CORREA[e.correa];
+    var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK || esPielM;
     var esAnte = anteConColor;
-    var paleta = esAnte ? ANTES : esNato ? NATOS : esPielK ? PIELES_K : COLORES;
-    var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk : e.color;
+    var paleta = esAnte ? ANTES : esNato ? NATOS : esPielK ? PIELES_K
+               : esPielM ? PIELES_M : COLORES;
+    var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk
+                : esPielM ? e.correa : e.color;
     $('[data-pv-grupo-color]').hidden = !conColor;
     if (conColor) {
       $('[data-pv-rotulo-color]').textContent =
         esAnte ? 'Color del ante' : esNato ? 'Color del nato'
-        : esPielK ? 'Color de la piel' : 'Color del nato + piel';
+        : (esPielK || esPielM) ? 'Color de la piel' : 'Color del nato + piel';
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
@@ -890,9 +913,9 @@
     img.hidden = !foto;
     $('[data-pv-sinfoto]').hidden = !!foto;
     if (foto) {
-      img.src = SERIE_IMG + '1200/' + foto + '.avif';
+      img.src = SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V;
       img.srcset = [480, 1200, 1600].map(function (s) {
-        return SERIE_IMG + s + '/' + foto + '.avif ' + s + 'w';
+        return SERIE_IMG + s + '/' + foto + '.avif' + SERIE_V + ' ' + s + 'w';
       }).join(', ');
       img.sizes = '(max-width:900px) 100vw, 46vw';
     }
@@ -930,6 +953,13 @@
       if (g === 'color' && e.correa === 'ANTE') e.ante = b.dataset.v;
       else if (g === 'color' && e.correa === 'NATO') e.nato = b.dataset.v;
       else if (g === 'color' && e.correa === 'PIELO') e.pielk = b.dataset.v;
+      /* En el Murph el color de la piel ES la correa: negra, marrón y
+         verde son tres correas distintas con tres costes, aunque el
+         cliente solo vea un botón «Piel» y tres tonos. */
+      else if (g === 'color' && e.estilo === 'M' && MURPH_CORREA[e.correa]) e.correa = b.dataset.v;
+      /* y pulsar «Piel» estando ya en una de ellas no te devuelve a la negra */
+      else if (g === 'correa' && b.dataset.v === 'PIELN' &&
+               e.estilo === 'M' && MURPH_CORREA[e.correa]) { /* ya estás */ }
       else e[g] = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
