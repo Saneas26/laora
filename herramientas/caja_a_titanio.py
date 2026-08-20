@@ -78,6 +78,16 @@ def metal(a, centro, resfera, holgura=1.03, sat_max=0.16, luz_min=95):
     r = np.hypot(xx - centro[0], yy - centro[1])
     sil = silueta(a)
     m = sil & (r > resfera * holgura) & (sat < sat_max) & (lum > luz_min)
+
+    # SOLO LA CAJA, NO LA CORREA. «Metal» por color no basta: el pespunte
+    # claro y los brillos del cuero son igual de claros y de grises, y se
+    # pintaban de titanio con ella (Óscar, 20/08/2026). La caja es lo que
+    # está PEGADO al bisel: se siembra en el anillo que rodea la esfera y
+    # se crece por lo metálico. El pespunte es una isla dentro del cuero y
+    # no llega, porque para llegar tendría que cruzar el hueco oscuro por
+    # donde entra la correa.
+    m = pegado_al_bisel(m, centro, resfera, r)
+
     # EL FILO DE LA CAJA es un reflejo casi blanco de dos o tres píxeles,
     # y si se queda fuera el perfil sigue brillando a acero por el canto.
     # Se engorda la máscara y se recorta con la silueta, para no salirse
@@ -85,6 +95,29 @@ def metal(a, centro, resfera, holgura=1.03, sat_max=0.16, luz_min=95):
     m = np.asarray(Image.fromarray((m * 255).astype(np.uint8))
                    .filter(ImageFilter.MaxFilter(7))).astype(bool) & sil
     return m
+
+
+def pegado_al_bisel(m, centro, resfera, r, k=4, semilla=1.12):
+    """De todo lo metálico, lo que forma un cuerpo con el bisel."""
+    grande = m.shape
+    ch = np.asarray(Image.fromarray((m * 255).astype(np.uint8))
+                    .resize((grande[1] // k, grande[0] // k), Image.NEAREST)).astype(bool)
+    rr = np.asarray(Image.fromarray(np.clip(r / 16, 0, 255).astype(np.uint8))
+                    .resize((grande[1] // k, grande[0] // k), Image.NEAREST)).astype(float) * 16
+    H, W = ch.shape
+    visto = np.zeros_like(ch); q = deque()
+    arranque = ch & (rr < resfera * semilla)
+    for y, x in zip(*np.where(arranque)):
+        visto[y, x] = True; q.append((y, x))
+    while q:
+        y, x = q.popleft()
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            ny, nx = y + dy, x + dx
+            if 0 <= ny < H and 0 <= nx < W and ch[ny, nx] and not visto[ny, nx]:
+                visto[ny, nx] = True; q.append((ny, nx))
+    vuelta = np.asarray(Image.fromarray((visto * 255).astype(np.uint8))
+                        .resize((grande[1], grande[0]), Image.BILINEAR)).astype(float)
+    return m & (vuelta > 96)
 
 
 def a_titanio(a, m, oscuro=0.80, reflejos=0.62, calor=0.030, borde=2.4):
