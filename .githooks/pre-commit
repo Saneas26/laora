@@ -39,7 +39,16 @@ if git diff --cached --name-only | grep -q '^assets/img/trinchera-2026/serie/'; 
     nueva=$((v + 1))
     sed -i '' "s/var SERIE_V = '?v=$v';/var SERIE_V = '?v=$nueva';/" trinchera.html
     git add trinchera.html
-    echo "→ fotos de la serie rehechas: SERIE_V pasa a $nueva"
+    # Y las fotos de la serie que otras páginas llevan ESCRITAS —las
+    # miniaturas de la colección—, que el 20/08/2026 se quedaron en la
+    # v14 mientras la ficha iba por la 18: Óscar veía el ante viejo.
+    for h in *.html; do
+      if grep -q 'trinchera-2026/serie/.*avif?v=' "$h"; then
+        sed -i '' "s|\(trinchera-2026/serie/[^\"']*avif\)?v=[0-9]*|\1?v=$nueva|g" "$h"
+        git add "$h"
+      fi
+    done
+    echo "→ fotos de la serie rehechas: SERIE_V pasa a $nueva (ficha y miniaturas)"
   fi
 fi
 
