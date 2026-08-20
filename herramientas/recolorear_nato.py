@@ -36,6 +36,10 @@ COLORES = {
     'negro-gris': {'tejido': (0,   0.00, 0.55), 'piel': (0,   0.00, 0.75)},
     # y la piel del khaki, que es la misma correa en tres tonos
     'marron-oscuro': {'tejido': None, 'piel': (24, 0.46, 0.46)},
+    # los antes, que salen unos de otros como los natos
+    'ante-camel':        {'tejido': None, 'piel': (31, 0.55, 1.55)},
+    'ante-azulpetroleo': {'tejido': None, 'piel': (196, 0.62, 1.05)},
+    'ante-negro':        {'tejido': None, 'piel': (0, 0.00, 0.45)},
 }
 
 
@@ -62,17 +66,34 @@ def rgb(h, s, v):
     return out
 
 
-def correa(a, centro, radio_caja, margen=1.04):
-    """Máscara de la correa: fuera de la caja, con color y sin ser el fondo."""
+def correa(a, centro, radio_caja, margen=1.04, banda=False, vmax=None):
+    """Máscara de la correa: fuera de la caja, con color y sin ser el fondo.
+
+    Con las cajas de acero basta con salirse de un círculo: el metal está
+    desaturado y se queda fuera solo. Con las de BRONCE no, que el bronce
+    tiene tanto color como la correa y se teñía con ella.
+
+    Lo que sí los separa es el BRILLO: el bronce es metal pulido y la
+    correa, cuero mate. Con `vmax` se deja fuera todo lo que brille más
+    que la correa, y así se salvan el bisel y las asas enteras sin tener
+    que adivinar su contorno. Probado antes con una banda horizontal: el
+    corte se veía a media correa y quedaba peor que el problema.
+    """
     h, s, v = hsv(a)
     yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
-    fuera = ((xx - centro[0]) ** 2 + (yy - centro[1]) ** 2) > (radio_caja * margen) ** 2
-    return fuera & (s > 0.12) & ~((v > 0.72) & (s < 0.06)), h, s, v
+    if banda:
+        fuera = np.abs(yy - centro[1]) > radio_caja * margen
+    else:
+        fuera = ((xx - centro[0]) ** 2 + (yy - centro[1]) ** 2) > (radio_caja * margen) ** 2
+    m = fuera & (s > 0.12) & ~((v > 0.72) & (s < 0.06))
+    if vmax is not None:
+        m &= v < vmax
+    return m, h, s, v
 
 
-def recolorear(img, color, centro, radio_caja):
+def recolorear(img, color, centro, radio_caja, banda=False, vmax=None):
     a = np.asarray(img.convert('RGB')).astype(float) / 255
-    zona, h, s, v = correa(a, centro, radio_caja)
+    zona, h, s, v = correa(a, centro, radio_caja, banda=banda, vmax=vmax)
     receta = COLORES[color]
     out = a.copy()
     for parte, rango in (('tejido', (38, 70)), ('piel', (0, 38))):
@@ -99,7 +120,11 @@ if __name__ == '__main__':
     p.add_argument('--color', required=True, choices=sorted(COLORES))
     p.add_argument('--centro', default='1008,946')
     p.add_argument('--radio', type=int, default=430)
+    p.add_argument('--vmax', type=float, default=None,
+                   help='brillo máximo de la correa: deja fuera el metal de la caja')
+    p.add_argument('--banda', action='store_true',
+                   help='para cajas con color, como el bronce: la correa es lo de arriba y abajo')
     a = p.parse_args()
     cx, cy = (int(v) for v in a.centro.split(','))
-    recolorear(Image.open(a.origen), a.color, (cx, cy), a.radio).save(a.salida)
+    recolorear(Image.open(a.origen), a.color, (cx, cy), a.radio, a.banda, a.vmax).save(a.salida)
     print(a.salida, a.color)
