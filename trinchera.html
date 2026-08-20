@@ -336,12 +336,11 @@
     AZU: ['Azul', '#3a586e'],           MCL: ['Marrón claro', '#b0825a']
   };
 
-  /* LOS CINCO COLORES DEL NATO (Óscar, 19/08/2026). Son los seis del anuncio
-     menos el azul: «usaremos todos excepto el azul». */
+  /* LOS COLORES DEL NATO (Óscar, 19/08/2026). Del anuncio se descartan el
+     azul y el gris liso: «gris nato no existe». Quedan cuatro. */
   var NATOS = {
     VER: ['Verde militar', '#4a5a3a'], NEG: ['Negro', '#1e1f22'],
-    GRI: ['Gris claro', '#8d9095'],    BEI: ['Beige', '#b7a583'],
-    NGR: ['Negro y gris', '#4a4b4f']
+    BEI: ['Beige', '#b7a583'],         NGR: ['Negro y gris', '#4a4b4f']
   };
 
   /* Los siete colores del nato con forro de piel (Óscar, 16/08/2026) */
@@ -378,7 +377,6 @@
        cinco franjas, y unas bandas no se sacan de un tejido liso. */
     '39-acero-blanca-nato-verde':     1,
     '39-acero-blanca-nato-negro':     1,
-    '39-acero-blanca-nato-gris':      1,
     '39-acero-blanca-nato-beige':     1,
     '39-acero-blanca-nato-negrogris': 1,
     /* La khaki de segundero rojo es la MISMA esfera con esa aguja en
@@ -387,7 +385,6 @@
        demás, que es lo que se espera de un catálogo. */
     '39-acero-rojo-nato-verde':       1,
     '39-acero-rojo-nato-negro':       1,
-    '39-acero-rojo-nato-gris':        1,
     '39-acero-rojo-nato-beige':       1,
     '39-acero-rojo-nato-negrogris':   1
   };
@@ -397,7 +394,7 @@
                        NATO: 'nato', NATOP: 'natopiel',
                        ACERO: 'brazalete', ACERONG: 'brazaletepvd',
                        PACK: 'pack', PIELO: 'pieloscuro' };
-  var NATO_FOTO    = { VER: 'verde', NEG: 'negro', GRI: 'gris', BEI: 'beige', NGR: 'negrogris' };
+  var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'beige', NGR: 'negrogris' };
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
     if (!caja || !esf || !correa) return null;
@@ -557,10 +554,12 @@
            Se forzaba porque era la única foto; ahora existen las dos. */
       }
       if (e.correa !== 'NATOP') e.color = 'NEG';
-      /* EL NATO NO VA EN LA DE 36 (Óscar, 19/08/2026): mide 275 mm, y a
-         quien busca la caja pequeña por tener la muñeca fina le sobraría
-         media correa. */
+      /* CADA NATO EN SU MEDIDA (Óscar, 19/08/2026). El nato mide 275 mm y
+         no va en la de 36: a quien busca la caja pequeña por tener la
+         muñeca fina le sobraría media correa. Y el nato + piel no va en
+         la de 39. Así que en cada diámetro hay uno solo, no los dos. */
       if (e.diam === '36' && e.correa === 'NATO') e.correa = 'NATOP';
+      if (e.diam === '39' && e.correa === 'NATOP') e.correa = 'NATO';
     }
     /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
        sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
@@ -669,13 +668,13 @@
            ['ANTE', 'Ante'],
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
-        ? [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel'],
+        ? [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
-        : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel'],
+        : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
