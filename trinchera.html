@@ -138,14 +138,12 @@
           </div>
         </div>
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Tapa trasera</p>
-          <div class="pv-opciones" data-pv="tapa" data-pv-tapa-botones>
-            <button type="button" data-v="S" aria-pressed="true">Roscada Sólida</button>
-            <button type="button" data-v="C" aria-pressed="false">Cristal, Ve el Movimiento</button>
-          </div>
-          <p class="pv-fijo" data-pv-tapa-fija hidden>Roscada sólida</p>
-        </div>
+        <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
+             elección del cliente». La decide el movimiento —cuarzo, roscada
+             sólida; automático, de cristal— y el titanio siempre sólida.
+             Se sigue calculando y sigue en la referencia y en la ficha
+             técnica; lo que se ha ido es el paso, que solo enseñaba una
+             opción tachada. -->
 
         <div class="pv-grupo" data-pv-grupo-esf>
           <p class="pv-rotulo">Esfera</p>
@@ -656,7 +654,7 @@
     if (klarna) klarna.textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
     $('[data-pv-cal]').textContent = 'Calibre ' + MOVS[e.mov].cal;
 
-    todos('[data-pv="estilo"] button, [data-pv="mov"] button, [data-pv="diam"] button, [data-pv="caja"] button, [data-pv="tapa"] button')
+    todos('[data-pv="estilo"] button, [data-pv="mov"] button, [data-pv="diam"] button, [data-pv="caja"] button')
       .forEach(function (b) {
         var g = b.closest('[data-pv]').dataset.pv;
         b.setAttribute('aria-pressed', String(b.dataset.v === e[g]));
@@ -670,14 +668,6 @@
        fotografiados solo en acero, y eso lo avisa la nota del visor. */
     todos('[data-pv="caja"] button').forEach(function (b) {
       b.disabled = (e.estilo === 'M' && !MURPH_CAJA[b.dataset.v]);
-    });
-
-    /* la tapa la manda el movimiento: la opción imposible queda tachada */
-    $('[data-pv-tapa-botones]').hidden = false;
-    $('[data-pv-tapa-fija]').hidden = true;
-    var tapaSolida = e.mov === 'Q' || e.caja === 'TI';
-    todos('[data-pv="tapa"] button').forEach(function (b) {
-      b.disabled = tapaSolida ? b.dataset.v === 'C' : b.dataset.v === 'S';
     });
 
     /* la esfera: khaki, murph del pack, o la fija del bronce */
