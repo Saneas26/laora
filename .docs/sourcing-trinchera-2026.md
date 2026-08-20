@@ -101,3 +101,11 @@ Suizo» se sostiene sin discusión.
 
 Los ocho anuncios están capturados con su ficha completa en
 `herramientas/capturas/` (tres del 18/08 y cinco del 19/08).
+
+
+## Nato de la caja de 36 mm (Óscar, 20/08/2026)
+- **Anuncio:** https://es.aliexpress.com/item/1005009739738725.html
+- **Precio:** 5,59 €
+- Es OTRO producto: solo para la caja de 36. El nato de 11,29 € es solo
+  para la de 39 (mide 275 mm). Un solo botón «Nato» en la ficha; el
+  coste lo decide el diámetro (`NATO36` en trinchera.html).
