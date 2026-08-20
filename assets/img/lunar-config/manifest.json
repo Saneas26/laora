@@ -96,14 +96,14 @@
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
   },
   "brazalete-negro-pvd": {
-   "src": "/assets/img/lunar-config/straps/brazalete-negro-pvd.webp?v=2",
+   "src": "/assets/img/lunar-config/straps/brazalete-negro-pvd.webp?v=3",
    "cabezasPermitidas": [
     "cab-acero-",
     "cab-negra-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/brazalete-negro-pvd-madre-4k.png",
-   "nota": "IMAGEN MADRE del brazalete negro PVD (Oscar, 18/08). La foto se hizo con caja de ACERO, y sirve igual para la caja negra: comprobado en zoom que el brazalete oscuro tapa el hueco entre asas y no asoma nada del acero de la foto. Madre CAMBIADA por Oscar el 18/08 a las 17:17: las columnas centrales quedan mas contrastadas. Vuelto a comprobar que encaja con las dos cabezas.",
+   "nota": "IMAGEN MADRE del brazalete negro PVD, CAMBIADA por Oscar el 20/08 22h: la foto nueva viene con CAJA NEGRA y bisel negro (omega-speedmaster-esfera-lunar-pvd-negro, 900px), alineada por correlacion de siluetas (escala 1.52, dx -64, dy -46) a la geometria de la madre anterior. Comprobado que la cabeza negra Y la de acero tapan la caja de la foto. Origen en masters-2026/lunar/capas/brazalete-negro-pvd-caja-negra-origen-900.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
   },
   "piel-italiana-marron-pespunte-tono": {
