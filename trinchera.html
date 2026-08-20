@@ -336,7 +336,11 @@
     /* El pack es la suma de sus dos piezas, como siempre: piel 29,99 + acero 19,69. */
     PACK:  { nombre: 'Pack Piel + Brazalete', coste: 49.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
-    PIELO: { nombre: 'Piel Marrón Oscuro', coste: 4.69, tec: 'piel marrón oscuro de 3 mm con pespunte claro y hebilla clásica de acero' },
+    /* LA PIEL DEL KHAKI (Óscar, 19/08/2026): 15 €, 20 mm, en tres colores
+       y con la hebilla clásica a elegir entre plata y negra. Antes estaba
+       como un solo color a 4,69 —número de la hoja vieja— y solo en el
+       titanio. */
+    PIELO: { nombre: 'Piel del Khaki', coste: 15.00, tec: 'piel de 20 mm con pespunte rectangular claro y hebilla clásica' },
     NATOP: { nombre: 'Nato + Piel', coste: 5.48, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
   };
   /* Los cuatro antes del Murph (Óscar, 19/08/2026). Van en su propia lista
@@ -366,6 +370,11 @@
   };
   var NATOP_FOTO = { MOS: 'mostaza', BEI: 'beige', MAR: 'marron',
                      NEG: 'negro', GRI: 'gris', VER: 'armygreen' };
+  /* Los tres de la piel del khaki, con sus dos hebillas */
+  var PIELES_K = { NEG: ['Negra', '#1c1c1e'], MOS: ['Marrón oscuro', '#5a3b28'],
+                   MCL: ['Marrón claro', '#a4552a'] };
+  var PIELK_FOTO = { NEG: 'negra', MOS: 'marronoscuro', MCL: 'marronclaro' };
+  var CIERRES_K = { 'plata': 'Clásica plata', 'negra': 'Clásica negra' };
   /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
      entran de una en una: aquí solo está lo que YA existe, y lo que no está
      no se enseña —el visor lo dice—. La clave es lo que se ve en la foto:
@@ -417,14 +426,23 @@
     '36-acero-rojo-natopiel-marron':      1,
     '36-acero-rojo-natopiel-negro':       1,
     '36-acero-rojo-natopiel-gris':        1,
-    '36-acero-rojo-natopiel-armygreen':   1
+    '36-acero-rojo-natopiel-armygreen':   1,
+    /* LA PIEL DEL KHAKI en la caja de acero: tres colores por dos
+       segunderos. El marrón oscuro está derivado del claro. */
+    '39-acero-blanca-pielkhaki-marronclaro':  1,
+    '39-acero-blanca-pielkhaki-marronoscuro': 1,
+    '39-acero-blanca-pielkhaki-negra':        1,
+    '39-acero-rojo-pielkhaki-marronclaro':    1,
+    '39-acero-rojo-pielkhaki-marronoscuro':   1,
+    '39-acero-rojo-pielkhaki-negra':          1
   };
   var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
   var SERIE_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde', ANTE: 'ante',
+                       // la del khaki lleva su propio nombre desde que son tres
                        NATO: 'nato', NATOP: 'natopiel',
                        ACERO: 'brazalete', ACERONG: 'brazaletepvd',
-                       PACK: 'pack', PIELO: 'pieloscuro' };
+                       PACK: 'pack', PIELO: 'pielkhaki' };
   var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'beige', NGR: 'negrogris' };
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
@@ -436,6 +454,7 @@
        jamás se enseña la foto de un reloj que no sea el elegido. */
     if (e.correa === 'NATO') clave += '-' + NATO_FOTO[e.nato];
     if (e.correa === 'NATOP') clave += '-' + NATOP_FOTO[e.color];
+    if (e.correa === 'PIELO') clave += '-' + PIELK_FOTO[e.pielk];
     return SERIE[clave] ? clave : null;
   }
 
@@ -474,6 +493,8 @@
   var CIERRE_IMG = '/assets/img/lunar-config/buckles/';
   /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
   function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
+  /* La piel del khaki también elige hebilla, pero solo entre dos */
+  function conCierreK() { return e.correa === 'PIELO'; }
 
   var LOGO = 3.78;
   /* EL ANILLO ESPACIADOR DEL CUARZO (Óscar, 19/08/2026). La caja se pide
@@ -486,7 +507,7 @@
    al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
    la hebilla clásica plateada. Es la única combinación fotografiada, y
    la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pesp: 'B', cierre: 'plata' };
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -507,7 +528,8 @@
   }
   function costes() {
     return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
-           CORREAS[e.correa].coste + (conCierre() ? CIERRES[e.cierre].extra : 0) + LOGO +
+           CORREAS[e.correa].coste +
+           (conCierre() || conCierreK() ? CIERRES[e.cierre].extra : 0) + LOGO +
            (e.mov === 'Q' ? ANILLO : 0);
   }
   function pvpBase(c) {
@@ -580,7 +602,7 @@
         if (pielIt || anteIt) e.esf = 'KB';
         if (e.correa !== 'NATO' && e.correa !== 'NATOP' && e.correa !== 'ACERONG' && !pielIt && !anteIt) e.correa = 'NATO';
       } else {
-        if (e.correa === 'PIELO' || e.correa === 'ACERONG') e.correa = 'NATO';
+        if (e.correa === 'ACERONG') e.correa = 'NATO';
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
         /* 19/08/2026: el ante del acero ya no obliga al segundero blanco.
            Se forzaba porque era la única foto; ahora existen las dos. */
@@ -604,6 +626,7 @@
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATO') return cola + '-' + e.nato;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
+    if (e.correa === 'PIELO') return cola + '-' + e.pielk + '-' + e.cierre;
     if (e.correa === 'ANTE' && e.estilo === 'M') return cola + '-' + e.ante;
     if (conCierre()) {
       var c = e.estilo === 'M' && MURPH_CORREA[e.correa] ? cola + '-P' + e.pesp : cola;
@@ -707,13 +730,14 @@
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
         : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
+           ['PIELO', 'Piel del Khaki'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
     /* El cierre: con la piel italiana, y su foto en la esquina del visor */
-    var hayCierre = conCierre();
+    var hayCierre = conCierre() || conCierreK();
     $('[data-pv-grupo-cierre]').hidden = !hayCierre;
     /* Con seguro: sin este `if`, quitar la miniatura del HTML tumbaba
        `pinta()` entera y con ella la foto, el precio y la ficha. Pasó el
@@ -723,7 +747,10 @@
     var tec = $('[data-pv-tecnica-img]');
     if (tec) tec.hidden = e.correa !== 'NATOP';
     if (hayCierre && heb) {
-      botones('cierre', Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
+      if (conCierreK() && e.cierre !== 'plata' && e.cierre !== 'negra') e.cierre = 'plata';
+      botones('cierre', conCierreK()
+        ? Object.keys(CIERRES_K).map(function (k) { return [k, CIERRES_K[k]]; })
+        : Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
       heb.src = CIERRE_IMG + e.cierre + '.avif?v=2';
       heb.alt = 'Hebilla del Trinchera, ' + CIERRES[e.cierre].tec;
     }
@@ -743,14 +770,16 @@
        con ante no: ahí solo hay una foto y sin color. */
     var anteConColor = e.correa === 'ANTE' && (esMurph || !!K1224_ANTE_CAJA[e.caja]);
     var esNato = e.correa === 'NATO';
-    var conColor = e.correa === 'NATOP' || anteConColor || esNato;
+    var esPielK = e.correa === 'PIELO';
+    var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK;
     var esAnte = anteConColor;
-    var paleta = esAnte ? ANTES : esNato ? NATOS : COLORES;
-    var elegido = esAnte ? e.ante : esNato ? e.nato : e.color;
+    var paleta = esAnte ? ANTES : esNato ? NATOS : esPielK ? PIELES_K : COLORES;
+    var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk : e.color;
     $('[data-pv-grupo-color]').hidden = !conColor;
     if (conColor) {
       $('[data-pv-rotulo-color]').textContent =
-        esAnte ? 'Color del ante' : esNato ? 'Color del nato' : 'Color del nato + piel';
+        esAnte ? 'Color del ante' : esNato ? 'Color del nato'
+        : esPielK ? 'Color de la piel' : 'Color del nato + piel';
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
@@ -775,7 +804,9 @@
     $('[data-pv-tec="caja"]').textContent =
       'Caja de ' + e.diam + ' mm en ' + CAJAS[e.caja].mat + ', con doble numeración de época y ' +
       'cristal de zafiro. Tapa trasera ' + (e.tapa === 'C' ? 'de cristal que deja ver el movimiento.' : 'roscada sólida.') +
-      ' Correa: ' + (e.correa === 'NATO'
+      ' Correa: ' + (e.correa === 'PIELO'
+        ? 'piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' de 20 mm con pespunte rectangular claro y ' + CIERRES[e.cierre].tec
+        : e.correa === 'NATO'
         ? 'nato ' + NATOS[e.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
         : (e.correa === 'ANTE' && e.estilo === 'M')
         ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
@@ -801,6 +832,7 @@
          condición es la correa, no el estilo. */
       if (g === 'color' && e.correa === 'ANTE') e.ante = b.dataset.v;
       else if (g === 'color' && e.correa === 'NATO') e.nato = b.dataset.v;
+      else if (g === 'color' && e.correa === 'PIELO') e.pielk = b.dataset.v;
       else e[g] = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
@@ -818,7 +850,9 @@
                  (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
-        correa: e.correa === 'NATO'
+        correa: e.correa === 'PIELO'
+          ? 'Piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' · ' + CIERRES_K[e.cierre].toLowerCase()
+          : e.correa === 'NATO'
           ? 'Nato ' + NATOS[e.nato][0].toLowerCase() + ', hebilla clásica plateada'
           : e.correa === 'NATOP'
           ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
