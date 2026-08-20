@@ -41,7 +41,7 @@ for (const diam of ['36','39']) {
         const natos = correa==='NATO' ? Object.keys(L.NATOS) : [null];
         for (const p of pespuntes) for (const a of antes) for (const n of natos) {
           if (p) L.e.pesp = p; if (a) L.e.ante = a; if (n) L.e.nato = n;
-          let k = L.SERIE_CAJA[caja] + '-' + L.SERIE_ESF[esf] + '-' + L.SERIE_CORREA[correa];
+          let k = diam + '-' + L.SERIE_CAJA[caja] + '-' + L.SERIE_ESF[esf] + '-' + L.SERIE_CORREA[correa];
           if (L.MURPH_CORREA[correa]) k += '-' + (L.e.pesp==='T'?'ptono':'pblanco');
           if (correa==='ANTE') k += '-' + (L.MURPH_ANTE[L.e.ante] || 'negro');
           if (correa==='NATO') k += '-' + L.NATO_FOTO[L.e.nato];
@@ -57,8 +57,11 @@ console.log('COMBINACIONES VISUALES DEL TRINCHERA:', claves.size);
 console.log('  con foto:', hay.length, '· sin foto:', faltan.length);
 console.log();
 const porCaja = {};
-faltan.forEach(k => { const c = k.split('-')[0]; porCaja[c] = (porCaja[c]||0)+1; });
+faltan.forEach(k => { const c = k.split('-')[1]; porCaja[c] = (porCaja[c]||0)+1; });
 console.log('las que faltan, por caja:', porCaja);
+const porDiam = {};
+faltan.forEach(k => { const d = k.split('-')[0]; porDiam[d] = (porDiam[d]||0)+1; });
+console.log('por diámetro:', porDiam);
 const porCorrea = {};
 faltan.forEach(k => { const c = claves.get(k).correa; porCorrea[c] = (porCorrea[c]||0)+1; });
 console.log('por correa:', porCorrea);

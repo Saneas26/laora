@@ -359,17 +359,19 @@
      Para añadir una foto: se convierte a AVIF en 480/1200/1600 dentro de
      `assets/img/trinchera-2026/serie/` y se apunta su clave aquí. */
   var SERIE_IMG = '/assets/img/trinchera-2026/serie/';
+  /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
+     todas las fotos anteriores y se entra una a una, modelo y versión,
+     comprobando cada una antes de pasar a la siguiente.
+
+     LA CLAVE LLEVA EL DIÁMETRO delante. Antes no, y era un error: el
+     nato mide 275 mm y no vale para la caja de 36 —quien la busca tiene
+     la muñeca fina y le sobraría media correa—, así que una foto de 39
+     no puede servir para las dos medidas.
+
+     Lo que no tiene foto sale con su cartel, nunca con la imagen de
+     otro reloj. */
   var SERIE = {
-    /* 19/08/2026: Óscar deja SOLO el ante negro. Las de piel —negra,
-       marrón y verde, esta última con sus dos pespuntes— no estaban
-       aprobadas y se han retirado, archivo incluido. Lo que no tiene
-       foto sale con su cartel, nunca con la imagen de otro reloj. */
-    'acero-crema-ante-negro':  1,
-    'acero-blanco-ante-negro': 1,
-    'acero-blanca-ante-negro': 1,
-    'acero-rojo-ante-negro':   1,
-    'acero-blanca-nato-verde': 1,
-    'acero-rojo-nato-verde':   1
+    '39-acero-blanca-nato-verde': 1
   };
   var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
@@ -381,7 +383,7 @@
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
     if (!caja || !esf || !correa) return null;
-    var clave = caja + '-' + esf + '-' + correa;
+    var clave = e.diam + '-' + caja + '-' + esf + '-' + correa;
     if (MURPH_CORREA[e.correa]) clave += '-' + (e.pesp === 'T' ? 'ptono' : 'pblanco');
     if (e.correa === 'ANTE') clave += '-' + (MURPH_ANTE[e.ante] || 'negro');
     /* El nato también lleva su color en la clave: la norma de la casa es que
@@ -433,7 +435,11 @@
      portamovimiento. Hasta hoy se estaba regalando en el precio. */
   var ANILLO = 3.60;
 
-  var e = { estilo: 'K', mov: 'Q', diam: '36', caja: 'PL', tapa: 'S', esf: 'KR', correa: 'NATO', color: 'NEG', nato: 'VER', ante: 'NEG', pesp: 'B', cierre: 'plata' };
+  /* LA ENTRADA DEL CONFIGURADOR (Óscar, 19/08/2026): lo primero que se ve
+   al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
+   la hebilla clásica plateada. Es la única combinación fotografiada, y
+   la ficha tiene que abrir enseñando un reloj, no un cartel. */
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'NEG', nato: 'VER', ante: 'NEG', pesp: 'B', cierre: 'plata' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
