@@ -26,6 +26,16 @@
   --cv2-oro:#D4AF37;
   --cv2-linea:rgba(74,74,74,.14);
   --cv2-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  /* EL NOMBRE DEL MODELO (Óscar, 20/08/2026): el mono le daba aire de
+     código —«laOra Trinchera» parecía una variable—. Entra el serif de
+     la casa, el mismo Cormorant Garamond de laora.es: el mono se queda
+     donde le toca, en etiquetas, precios y fichas. */
+  --cv2-titulo:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  /* EL PAPEL DE CADA MODELO: crema y gris, tan suaves que no compiten
+     con la foto, pero bastan para que al bajar se note el salto de un
+     reloj al siguiente sin meter ni una línea de más. */
+  --cv2-papel-crema:#FAF6EE;
+  --cv2-papel-gris:#F1F3F3;
   --cv2-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
   background:#fff;color:var(--cv2-negro);
   font-family:var(--cv2-sans);
@@ -94,7 +104,10 @@
   padding:72px 64px 64px;
   /* El ancla no debe esconderse bajo la barra pegajosa */
   scroll-margin-top:64px;
+  background:var(--cv2-papel-crema);
 }
+/* Alternan crema y gris en el orden en que se bajan */
+#lunar,#precisa{background:var(--cv2-papel-gris)}
 .cv2-modelo>header{max-width:820px}
 .cv2-chip{
   display:inline-block;background:var(--cv2-negro);color:#fff;
@@ -103,9 +116,9 @@
   padding:4px 10px;margin:0 0 18px;
 }
 .cv2-modelo h2{
-  font-family:var(--cv2-mono);font-weight:700;
-  font-size:clamp(26px,3.4vw,40px);letter-spacing:-.01em;
-  margin:0 0 10px;
+  font-family:var(--cv2-titulo);font-weight:600;
+  font-size:clamp(36px,4.8vw,58px);line-height:1.02;letter-spacing:0;
+  margin:0 0 12px;
 }
 .cv2-homenaje{
   font-family:var(--cv2-mono);font-size:15px;font-weight:500;
@@ -114,6 +127,64 @@
 .cv2-homenaje b{color:var(--cv2-oro);font-weight:700}
 .cv2-intro{
   font-size:16px;line-height:1.55;color:rgba(18,20,20,.8);margin:0;
+}
+
+/* ---------- LOS CALIBRES (Óscar, 20/08/2026) ----------
+   Ocupa el sitio del antiguo «Movimientos Suizos» y de la línea de
+   materiales. Dice lo mismo con más fuerza: qué motor lleva el reloj
+   y qué mueve ese mismo tipo de motor ahí fuera. Las marcas se citan
+   por su nombre —jamás con su logotipo— y el aviso legal va debajo,
+   con el mismo texto que ya usa la portada. */
+.cv2-cal{margin:52px 0 40px}
+.cv2-cal-titulo{
+  font-family:var(--cv2-titulo);font-weight:600;
+  font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:0;
+  margin:0 0 26px;max-width:900px;
+}
+.cv2-cal-titulo span{color:var(--cv2-gris)}
+.cv2-cal-rejilla{
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;
+}
+.cv2-cal-caja{
+  background:#fff;border:1px solid var(--cv2-linea);
+  border-top:3px solid var(--cv2-negro);
+  padding:24px 26px 22px;
+}
+.cv2-cal-tipo{
+  display:inline-block;background:var(--cv2-negro);color:#fff;
+  font-family:var(--cv2-mono);font-size:12.5px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 10px;margin:0 0 18px;
+}
+.cv2-cal-rotulo{
+  font-family:var(--cv2-mono);font-size:12px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--cv2-gris);
+  margin:0 0 2px;
+}
+.cv2-cal-codigo{
+  font-family:var(--cv2-mono);font-weight:700;
+  font-size:clamp(26px,3.1vw,38px);letter-spacing:-.02em;
+  color:var(--cv2-negro);margin:0 0 18px;
+}
+.cv2-cal-lead{
+  font-size:14px;font-weight:600;color:var(--cv2-negro);
+  margin:0 0 4px;padding-top:14px;border-top:1px solid var(--cv2-linea);
+}
+.cv2-cal-refs{list-style:none;margin:0;padding:0}
+.cv2-cal-refs li{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:11px 0;border-bottom:1px solid var(--cv2-linea);
+  font-size:15px;line-height:1.35;color:var(--cv2-gris);
+}
+.cv2-cal-refs li:last-child{border-bottom:0;padding-bottom:0}
+.cv2-cal-refs b{color:var(--cv2-negro);font-weight:700}
+.cv2-cal-refs em{
+  font-family:var(--cv2-mono);font-style:normal;font-weight:700;
+  font-size:16px;color:var(--cv2-negro);white-space:nowrap;
+}
+.cv2-cal-aviso{
+  font-size:13px;line-height:1.5;color:var(--cv2-gris);
+  margin:16px 0 0;max-width:900px;
 }
 
 /* ---------- LAS COMBINACIONES FIRMADAS ---------- */
@@ -239,7 +310,7 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   scroll-margin-top:64px;
 }
 .cv2-pendiente h2{
-  font-family:var(--cv2-mono);font-size:20px;font-weight:700;margin:0;
+  font-family:var(--cv2-titulo);font-size:26px;font-weight:600;margin:0;
   min-width:180px;
 }
 .cv2-pendiente p{font-size:14px;color:var(--cv2-gris);margin:0;flex:1}
@@ -263,6 +334,10 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-hero>div{padding:44px 20px 28px}
   .cv2-modelos div{padding:0 20px;gap:20px}
   .cv2-modelo{padding:48px 20px 40px}
+  .cv2-cal{margin:36px 0 32px}
+  .cv2-cal-rejilla{grid-template-columns:1fr;gap:16px}
+  .cv2-cal-caja{padding:20px}
+  .cv2-cal-refs li{font-size:14px}
   .cv2-pendiente{padding:0 20px}
   .cv2-confianza{grid-template-columns:1fr}
   .cv2-pendiente article{flex-wrap:wrap;gap:8px 18px}
