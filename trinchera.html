@@ -855,11 +855,9 @@
       if (e.correa !== 'NATOP') e.color = 'VER';
       /* del Murph al Khaki: la piel italiana no existe aquí */
       if (MURPH_CORREA[e.correa] || DUOS_M[e.correa] || e.correa === 'DUOA') e.correa = 'PIELO';
-      /* CADA NATO EN SU MEDIDA (Óscar, 19/08/2026). El nato mide 275 mm y
-         no va en la de 36: a quien busca la caja pequeña por tener la
-         muñeca fina le sobraría media correa. Y el nato + piel no va en
-         la de 39. Así que en cada diámetro hay uno solo, no los dos. */
-      if (e.diam === '36' && e.correa === 'NATO') e.correa = 'NATOP';
+      /* EL NATO VA EN LAS DOS MEDIDAS (Óscar, 20/08/2026, retirando la
+         regla del 19). La correa técnica —el nato con forro— sigue
+         siendo solo de la caja de 36. */
       if (e.diam === '39' && e.correa === 'NATOP') e.correa = 'NATO';
     }
     /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
@@ -970,11 +968,11 @@
            ['DUON', 'Dúo Piel + Brazalete', esTitanio],
            ['DUOA', 'Dúo Ante + Brazalete', esTitanio]]
         : esNegra
-        ? [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
+        ? [['NATO', 'Nato'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
         ? [['ANTE', 'Ante'], ['PIELO', 'Piel']]
-        : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
+        : [['NATO', 'Nato'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['DUON', 'Dúo Piel + Brazalete', true]],
         /* los botones que valen por varias correas se marcan con
