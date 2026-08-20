@@ -289,11 +289,20 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
 .cv2-confianza p{font-size:14px;color:var(--cv2-gris);margin:2px 0 0}
 
 /* ---------- EL ENLACE AL CONFIGURADOR ---------- */
+/* «¿No encuentras el tuyo?» (Óscar, 20/08/2026): con el dibujo de dos
+   piezas de puzle —una oscura con su pestaña y otra dorada con su
+   hueco— y la frase en negrita, un punto más grande. El puzle va de
+   fondo en el ::before para no repetir el mismo SVG cinco veces. */
 .cv2-configura{
-  margin-top:26px;font-size:15px;color:var(--cv2-gris);
+  margin-top:30px;font-size:17px;font-weight:700;color:var(--cv2-negro);
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.cv2-configura::before{
+  content:"";flex:0 0 auto;width:66px;height:32px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 27'%3E%3Cpath d='M2 3h18v6a5.5 5.5 0 1 1 0 9v6H2Z' fill='none' stroke='%23121414' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M31 3h23v21H31v-6a5.5 5.5 0 1 0 0-9Z' fill='none' stroke='%23D4AF37' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 .cv2-configura a{
-  font-family:var(--cv2-mono);font-weight:700;font-size:14px;
+  font-family:var(--cv2-mono);font-weight:700;font-size:16px;
   color:var(--cv2-negro);text-decoration:none;
   border-bottom:2px solid var(--cv2-oro);padding-bottom:2px;
 }
@@ -339,6 +348,9 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-cal-rejilla{grid-template-columns:1fr;gap:16px}
   .cv2-cal-caja{padding:20px}
   .cv2-cal-refs li{font-size:14px}
+  .cv2-configura{font-size:15px;gap:12px}
+  .cv2-configura::before{width:48px;height:23px}
+  .cv2-configura a{font-size:14px}
   .cv2-pendiente{padding:0 20px}
   .cv2-confianza{grid-template-columns:1fr}
   .cv2-pendiente article{flex-wrap:wrap;gap:8px 18px}
