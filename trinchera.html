@@ -107,8 +107,11 @@
         <!-- EL ORDEN DE LOS PASOS lo fijó Óscar el 19/08/2026: primero el
              tamaño de la caja —en todos los relojes—, luego el modelo, su
              esfera o su segundero, el acabado de la caja, el movimiento y al
-             final la correa con su color y su cierre. Se va de lo que decide
-             el reloj a lo que decide el gusto. -->
+             final la correa. Se va de lo que decide el reloj a lo que decide
+             el gusto.
+             Dentro de la correa, el orden lo cerró el 20/08: el pespunte va
+             pegado a ella, porque es de la propia correa; después el color;
+             y el cierre el último de todos. -->
 
         <div class="pv-grupo">
           <p class="pv-rotulo">Tamaño de caja</p>
@@ -156,19 +159,19 @@
           <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
         </div>
 
+        <div class="pv-grupo" data-pv-grupo-pesp hidden>
+          <p class="pv-rotulo">Pespunte</p>
+          <div class="pv-opciones" data-pv="pesp"></div>
+        </div>
+
         <div class="pv-grupo" data-pv-grupo-color hidden>
           <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
           <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
         <div class="pv-grupo" data-pv-grupo-cierre hidden>
-          <p class="pv-rotulo">Cierre</p>
+          <p class="pv-rotulo">Cierre/hebilla</p>
           <div class="pv-opciones" data-pv="cierre"></div>
-        </div>
-
-        <div class="pv-grupo" data-pv-grupo-pesp hidden>
-          <p class="pv-rotulo">Pespunte</p>
-          <div class="pv-opciones" data-pv="pesp"></div>
         </div>
 
         <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
@@ -180,7 +183,9 @@
         <!-- El pespunte solo tiene sentido con la piel italiana del Murph:
              el resto de correas no lo llevan y el grupo se esconde. -->
         <!-- El cierre va con la piel italiana, la lleve el Murph o el Khaki:
-             es la misma correa y las mismas cinco hebillas del Lunar. -->
+             es la misma correa y las mismas cinco hebillas del Lunar. Se
+             llama «Cierre/hebilla» porque es la palabra que la gente busca
+             (Óscar, 20/08/2026). -->
 
       </div>
 
@@ -472,6 +477,19 @@
     /* La piel negra del Murph, con su pespunte claro */
     '39-acero-crema-negra-pblanco':      1,
     '39-acero-blanco-negra-pblanco':     1,
+    /* Y sus otras dos pieles, marrón y verde (Óscar, 20/08/2026). Estas
+       vienen con el pespunte DEL MISMO TONO que la piel, así que solo
+       existen en la versión «ptono»; la negra sigue siendo la del
+       pespunte claro. Valen para las dos medidas: es la misma correa de
+       20 mm sobre la misma caja. */
+    '36-acero-crema-marron-ptono':       1,
+    '39-acero-crema-marron-ptono':       1,
+    '36-acero-blanco-marron-ptono':      1,
+    '39-acero-blanco-marron-ptono':      1,
+    '36-acero-crema-verde-ptono':        1,
+    '39-acero-crema-verde-ptono':        1,
+    '36-acero-blanco-verde-ptono':       1,
+    '39-acero-blanco-verde-ptono':       1,
     '36-acero-blanco-brazalete':         1,
     /* EL BRONCE con ante, en sus cuatro colores y las dos medidas. Solo
        tres son derivadas: la del marrón oscuro es la foto. */
