@@ -42,6 +42,7 @@
   },
   "brazalete-acero-316l-cinco-columnas": {
    "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=3",
+   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
