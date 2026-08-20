@@ -343,12 +343,17 @@
     BEI: ['Beige', '#b7a583'],         NGR: ['Negro y gris', '#4a4b4f']
   };
 
-  /* Los siete colores del nato con forro de piel (Óscar, 16/08/2026) */
+  /* LOS SEIS DE LA CORREA TÉCNICA, la del nato con forro de piel, que es
+     la que va en la caja de 36 (Óscar, 19/08/2026). Sustituyen a los
+     siete de agosto: aquellos venían del anuncio y estos son los que se
+     han fotografiado. */
   var COLORES = {
-    NEG: ['Negro', '#1e1f22'],  AZU: ['Azul', '#27476b'],   ROJ: ['Rojo', '#8a1f1f'],
-    CAQ: ['Caqui', '#8a7a55'],  VER: ['Verde', '#4a5a3a'],  GRI: ['Gris', '#6f7276'],
-    NAR: ['Naranja', '#c9661e']
+    MOS: ['Mostaza', '#c99a2e'],  BEI: ['Beige', '#c3b393'],
+    MAR: ['Marrón', '#6b4a33'],   NEG: ['Negro', '#1e1f22'],
+    GRI: ['Gris', '#7d8085'],     VER: ['Verde militar', '#4a5a3a']
   };
+  var NATOP_FOTO = { MOS: 'mostaza', BEI: 'beige', MAR: 'marron',
+                     NEG: 'negro', GRI: 'gris', VER: 'armygreen' };
   /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
      entran de una en una: aquí solo está lo que YA existe, y lo que no está
      no se enseña —el visor lo dice—. La clave es lo que se ve en la foto:
@@ -386,7 +391,21 @@
     '39-acero-rojo-nato-verde':       1,
     '39-acero-rojo-nato-negro':       1,
     '39-acero-rojo-nato-beige':       1,
-    '39-acero-rojo-nato-negrogris':   1
+    '39-acero-rojo-nato-negrogris':   1,
+    /* LA CAJA DE 36 con la correa técnica —el nato con forro de piel—,
+       sus seis colores por los dos segunderos. Misma esfera madre. */
+    '36-acero-blanca-natopiel-mostaza':   1,
+    '36-acero-blanca-natopiel-beige':     1,
+    '36-acero-blanca-natopiel-marron':    1,
+    '36-acero-blanca-natopiel-negro':     1,
+    '36-acero-blanca-natopiel-gris':      1,
+    '36-acero-blanca-natopiel-armygreen': 1,
+    '36-acero-rojo-natopiel-mostaza':     1,
+    '36-acero-rojo-natopiel-beige':       1,
+    '36-acero-rojo-natopiel-marron':      1,
+    '36-acero-rojo-natopiel-negro':       1,
+    '36-acero-rojo-natopiel-gris':        1,
+    '36-acero-rojo-natopiel-armygreen':   1
   };
   var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
@@ -404,6 +423,7 @@
     /* El nato también lleva su color en la clave: la norma de la casa es que
        jamás se enseña la foto de un reloj que no sea el elegido. */
     if (e.correa === 'NATO') clave += '-' + NATO_FOTO[e.nato];
+    if (e.correa === 'NATOP') clave += '-' + NATOP_FOTO[e.color];
     return SERIE[clave] ? clave : null;
   }
 
@@ -454,7 +474,7 @@
    al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
    la hebilla clásica plateada. Es la única combinación fotografiada, y
    la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'NEG', nato: 'VER', ante: 'NEG', pesp: 'B', cierre: 'plata' };
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pesp: 'B', cierre: 'plata' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.7235;
@@ -553,7 +573,7 @@
         /* 19/08/2026: el ante del acero ya no obliga al segundero blanco.
            Se forzaba porque era la única foto; ahora existen las dos. */
       }
-      if (e.correa !== 'NATOP') e.color = 'NEG';
+      if (e.correa !== 'NATOP') e.color = 'VER';
       /* CADA NATO EN SU MEDIDA (Óscar, 19/08/2026). El nato mide 275 mm y
          no va en la de 36: a quien busca la caja pequeña por tener la
          muñeca fina le sobraría media correa. Y el nato + piel no va en

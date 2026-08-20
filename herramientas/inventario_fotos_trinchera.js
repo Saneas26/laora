@@ -21,7 +21,7 @@ eval(src.slice(src.indexOf('const fs'), src.indexOf('function motorDe')).replace
 
 const L = motorDe('trinchera.html',
   'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, NATOS, ANTES, PESPUNTES, CIERRES, MURPH_CORREA, ' +
-  'MURPH_ANTE, SERIE, SERIE_CAJA, SERIE_ESF, SERIE_CORREA, NATO_FOTO, e, normaliza, pinta');
+  'MURPH_ANTE, SERIE, SERIE_CAJA, SERIE_ESF, SERIE_CORREA, NATO_FOTO, NATOP_FOTO, e, normaliza, pinta');
 
 const ofrece = (g, res) => { L.pinta(); const v = globalThis.__OPCIONES(g); return v.length ? v : (res||[]); };
 const pon = (c) => { Object.assign(L.e, c); L.normaliza(); };
@@ -39,12 +39,14 @@ for (const diam of ['36','39']) {
         const pespuntes = (estilo==='M' && L.MURPH_CORREA[correa]) ? Object.keys(L.PESPUNTES) : [null];
         const antes = correa==='ANTE' ? Object.keys(L.ANTES) : [null];
         const natos = correa==='NATO' ? Object.keys(L.NATOS) : [null];
-        for (const p of pespuntes) for (const a of antes) for (const n of natos) {
-          if (p) L.e.pesp = p; if (a) L.e.ante = a; if (n) L.e.nato = n;
+        const tecnicos = correa==='NATOP' ? Object.keys(L.COLORES) : [null];
+        for (const p of pespuntes) for (const a of antes) for (const n of natos) for (const t of tecnicos) {
+          if (p) L.e.pesp = p; if (a) L.e.ante = a; if (n) L.e.nato = n; if (t) L.e.color = t;
           let k = diam + '-' + L.SERIE_CAJA[caja] + '-' + L.SERIE_ESF[esf] + '-' + L.SERIE_CORREA[correa];
           if (L.MURPH_CORREA[correa]) k += '-' + (L.e.pesp==='T'?'ptono':'pblanco');
           if (correa==='ANTE') k += '-' + (L.MURPH_ANTE[L.e.ante] || 'negro');
           if (correa==='NATO') k += '-' + L.NATO_FOTO[L.e.nato];
+          if (correa==='NATOP') k += '-' + L.NATOP_FOTO[L.e.color];
           claves.set(k, {caja, esf, correa});
         }
       }
