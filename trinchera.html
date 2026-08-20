@@ -964,6 +964,19 @@
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
       if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
+      /* CON LA PIEL DEL MURPH, EL PESPUNTE SALTA AL QUE TIENE FOTO (Óscar,
+         20/08/2026). Cada tono está fotografiado con uno solo —la negra
+         con el claro, la marrón y la verde a tono—, así que cambiar de
+         color dejaba el visor con el cartel y parecía que se rompía.
+         Se salta solo si lo que acabas de pulsar NO es el pespunte: ahí
+         mandas tú, aunque esa foto no exista todavía. Y solo cambia el
+         visor: las seis combinaciones se siguen fabricando y siguen en
+         el catálogo, porque `normaliza()` no se toca. */
+      if (g !== 'pesp' && e.estilo === 'M' && MURPH_CORREA[e.correa] && !serieFoto()) {
+        var antesPesp = e.pesp;
+        e.pesp = antesPesp === 'B' ? 'T' : 'B';
+        if (!serieFoto()) e.pesp = antesPesp;
+      }
       pinta();
       /* AL ELEGIR CORREA, EL PASO DEL COLOR SE VIENE A LA VISTA (Óscar,
          19/08/2026). Es el único paso que aparece DESPUÉS del que acabas
