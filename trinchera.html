@@ -625,6 +625,8 @@
            Se forzaba porque era la única foto; ahora existen las dos. */
       }
       if (e.correa !== 'NATOP') e.color = 'VER';
+      /* del Murph al Khaki: la piel italiana no existe aquí */
+      if (MURPH_CORREA[e.correa] || e.correa === 'PACK') e.correa = 'PIELO';
       /* CADA NATO EN SU MEDIDA (Óscar, 19/08/2026). El nato mide 275 mm y
          no va en la de 36: a quien busca la caja pequeña por tener la
          muñeca fina le sobraría media correa. Y el nato + piel no va en
@@ -720,9 +722,12 @@
     /* la correa: todas salvo el ante, que es del bronce */
     $('[data-pv="correa"]').hidden = false;
     $('[data-pv-correa-fija]').hidden = true;
+    /* EN EL KHAKI LA PIEL ES UNA (Óscar, 19/08/2026): «solo puede ser un
+       tipo de piel», así que el botón dice «Piel» a secas y el color se
+       elige después. Las tres pieles italianas —negra, marrón y verde, con
+       su pespunte y sus cinco cierres— son del Murph y solo salen ahí. */
     if (esBronce) {
-      botones('correa', [['ANTE', 'Piel Ante'],
-                         ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']], e.correa);
+      botones('correa', [['ANTE', 'Ante'], ['PIELO', 'Piel']], e.correa);
     } else {
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
@@ -735,15 +740,11 @@
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
         ? [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
-           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
-           ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
+           ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
-        ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
-           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
+        ? [['ANTE', 'Ante'], ['PIELO', 'Piel']]
         : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
-           ['PIELO', 'Piel del Khaki'],
-           ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
-           ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
+           ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
     }
 
@@ -849,6 +850,16 @@
          segundero blanco (Óscar, 16/08/2026) */
       if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
       pinta();
+      /* AL ELEGIR CORREA, EL PASO DEL COLOR SE VIENE A LA VISTA (Óscar,
+         19/08/2026). Es el único paso que aparece DESPUÉS del que acabas
+         de pulsar, así que sin esto se queda fuera de pantalla y parece
+         que la correa no tiene colores. */
+      if (g === 'correa') {
+        var grupoColor = $('[data-pv-grupo-color]');
+        if (grupoColor && !grupoColor.hidden && grupoColor.scrollIntoView) {
+          grupoColor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
       return;
     }
     if (ev.target.closest('[data-pv-comprar]')) {
