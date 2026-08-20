@@ -27,7 +27,23 @@ if [ -n "$fichas" ]; then
   fi
 fi
 
-# ---------- 2. la misma versión en todas las páginas ----------
+# ---------- 2. las fotos rehechas, con número nuevo ----------
+# Una foto que se rehace conservando el nombre NO LE LLEGA A NADIE: el
+# navegador y Cloudflare la tienen guardada por ese nombre. El
+# 20/08/2026 Óscar seguía viendo el logotipo del Murph en el sitio de
+# antes, tres despliegues después de haberlo movido. Acordarse a mano de
+# subir el `?v=` no funciona, así que se sube solo.
+if git diff --cached --name-only | grep -q '^assets/img/trinchera-2026/serie/'; then
+  v=$(sed -n "s/.*var SERIE_V = '?v=\([0-9]*\)';.*/\1/p" trinchera.html)
+  if [ -n "$v" ]; then
+    nueva=$((v + 1))
+    sed -i '' "s/var SERIE_V = '?v=$v';/var SERIE_V = '?v=$nueva';/" trinchera.html
+    git add trinchera.html
+    echo "→ fotos de la serie rehechas: SERIE_V pasa a $nueva"
+  fi
+fi
+
+# ---------- 3. la misma versión en todas las páginas ----------
 # Cloudflare sirve el JS y el CSS con max-age=14400, así que el `?v=`
 # es lo único que obliga al navegador a bajarse la versión nueva. El
 # 19/08/2026 nueve páginas pedían `carrito.js?v=1` mientras el carrito
