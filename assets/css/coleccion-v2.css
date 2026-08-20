@@ -183,6 +183,17 @@
   font-family:var(--cv2-mono);font-style:normal;font-weight:700;
   font-size:16px;color:var(--cv2-negro);white-space:nowrap;
 }
+/* Cuando el modelo lleva un solo motor —el Lunar— la caja se estira a
+   todo lo ancho y se parte en dos: el calibre a la izquierda, contra
+   quién se mide a la derecha. En el teléfono vuelve a una columna. */
+.cv2-cal-sola{grid-template-columns:1fr}
+.cv2-cal-ancha{
+  display:grid;grid-template-columns:minmax(200px,.85fr) 1.6fr;
+  gap:0 44px;align-items:start;
+}
+.cv2-cal-ancha .cv2-cal-codigo{margin-bottom:0}
+.cv2-cal-ancha .cv2-cal-lead{padding-top:0;border-top:0}
+
 .cv2-cal-aviso{
   font-size:13px;line-height:1.5;color:var(--cv2-gris);
   margin:16px 0 0;max-width:900px;
@@ -347,6 +358,9 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-cal{margin:36px 0 32px}
   .cv2-cal-rejilla{grid-template-columns:1fr;gap:16px}
   .cv2-cal-caja{padding:20px}
+  .cv2-cal-ancha{grid-template-columns:1fr;gap:16px}
+  .cv2-cal-ancha .cv2-cal-codigo{margin-bottom:0}
+  .cv2-cal-ancha .cv2-cal-lead{padding-top:14px;border-top:1px solid var(--cv2-linea)}
   .cv2-cal-refs li{font-size:14px}
   .cv2-configura{font-size:15px;gap:12px}
   .cv2-configura::before{width:48px;height:23px}
