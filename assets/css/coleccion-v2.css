@@ -26,11 +26,6 @@
   --cv2-oro:#D4AF37;
   --cv2-linea:rgba(74,74,74,.14);
   --cv2-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  /* EL NOMBRE DEL MODELO (Óscar, 20/08/2026): el mono le daba aire de
-     código —«laOra Trinchera» parecía una variable—. Entra el serif de
-     la casa, el mismo Cormorant Garamond de laora.es: el mono se queda
-     donde le toca, en etiquetas, precios y fichas. */
-  --cv2-titulo:'Cormorant Garamond',Georgia,'Times New Roman',serif;
   /* EL PAPEL DE CADA MODELO: crema y gris, tan suaves que no compiten
      con la foto, pero bastan para que al bajar se note el salto de un
      reloj al siguiente sin meter ni una línea de más. */
@@ -115,9 +110,12 @@
   letter-spacing:.1em;text-transform:uppercase;
   padding:4px 10px;margin:0 0 18px;
 }
+/* EL NOMBRE DEL MODELO (Óscar, 20/08/2026): solo el nombre —el «laOra»
+   ya está en la cabecera, en el chip y en el pie— y con la misma letra
+   que el código del calibre, que es la que le da aire de instrumento. */
 .cv2-modelo h2{
-  font-family:var(--cv2-titulo);font-weight:600;
-  font-size:clamp(36px,4.8vw,58px);line-height:1.02;letter-spacing:0;
+  font-family:var(--cv2-mono);font-weight:700;
+  font-size:clamp(32px,4.2vw,50px);line-height:1.05;letter-spacing:-.02em;
   margin:0 0 12px;
 }
 .cv2-homenaje{
@@ -136,10 +134,13 @@
    por su nombre —jamás con su logotipo— y el aviso legal va debajo,
    con el mismo texto que ya usa la portada. */
 .cv2-cal{margin:52px 0 40px}
+/* El titular lleva la letra del chip —mono, versal y espaciada— pero
+   en grande: es el rótulo de la infografía, no una etiqueta. */
 .cv2-cal-titulo{
-  font-family:var(--cv2-titulo);font-weight:600;
-  font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:0;
-  margin:0 0 26px;max-width:900px;
+  font-family:var(--cv2-mono);font-weight:700;
+  font-size:clamp(17px,2.1vw,27px);line-height:1.3;letter-spacing:.07em;
+  text-transform:uppercase;
+  margin:0 0 26px;max-width:1000px;
 }
 .cv2-cal-titulo span{color:var(--cv2-gris)}
 .cv2-cal-rejilla{
@@ -167,7 +168,7 @@
   color:var(--cv2-negro);margin:0 0 18px;
 }
 .cv2-cal-lead{
-  font-size:14px;font-weight:600;color:var(--cv2-negro);
+  font-size:15px;font-weight:700;color:var(--cv2-oro);
   margin:0 0 4px;padding-top:14px;border-top:1px solid var(--cv2-linea);
 }
 .cv2-cal-refs{list-style:none;margin:0;padding:0}
@@ -310,8 +311,8 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   scroll-margin-top:64px;
 }
 .cv2-pendiente h2{
-  font-family:var(--cv2-titulo);font-size:26px;font-weight:600;margin:0;
-  min-width:180px;
+  font-family:var(--cv2-mono);font-size:22px;font-weight:700;margin:0;
+  min-width:180px;letter-spacing:-.02em;
 }
 .cv2-pendiente p{font-size:14px;color:var(--cv2-gris);margin:0;flex:1}
 .cv2-pendiente a{
