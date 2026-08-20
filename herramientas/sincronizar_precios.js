@@ -62,12 +62,23 @@ html = html.replace(/<article class="cv2-tarjeta[\s\S]*?<\/article>/g, (tarjeta)
   try { d = JSON.parse(m[1].replace(/&#39;/g, "'").replace(/&amp;/g, '&')); } catch { return tarjeta; }
   const r = cat.refs[d.ref];
   if (!r) return tarjeta;
-  return tarjeta.replace(/(<li class="cv2-precio-lista">)[^<]*(<\/li>)/,
+  tarjeta = tarjeta.replace(/(<li class="cv2-precio-lista">)[^<]*(<\/li>)/,
     (t, a, b) => {
       if (t.indexOf(eu(r.p)) >= 0) return t;
       tocados++;
       return a + eu(r.p) + b;
     });
+  /* Y LA LÍNEA DE LOS PLAZOS, si la tarjeta la lleva (Óscar, 20/08/2026):
+     un tercio del precio redondeado hacia arriba al céntimo, igual que
+     la caja de Klarna de la ficha. Se recalcula con cada precio. */
+  const plazo = eu(Math.ceil(r.p / 3 * 100) / 100);
+  tarjeta = tarjeta.replace(/(<li class="cv2-plazos">)[^<]*(<\/li>)/,
+    (t, a, b) => {
+      if (t.indexOf(plazo) >= 0) return t;
+      tocados++;
+      return a + 'ó 3 plazos de ' + plazo + b;
+    });
+  return tarjeta;
 });
 
 fs.writeFileSync(p, html);

@@ -151,7 +151,25 @@
     image-set(url("/assets/img/trinchera-2026/editorial/soldado-1600.avif") 1x,
               url("/assets/img/trinchera-2026/editorial/soldado-2560.avif") 2x);
 }
-/* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
+/* El Lunar ya viene oscuro de fábrica —cielo negro—, así que el velo
+   lateral es más suave que el del Trinchera. Lo que sí necesita es un
+   segundo velo vertical que cierre por abajo, donde el regolito es
+   claro y el texto se le perdería encima. */
+.cv2-lienzo-lunar{
+  background-color:#07080b;
+  background-image:
+    linear-gradient(100deg, rgba(4,5,8,.90) 0%, rgba(4,5,8,.78) 34%, rgba(4,5,8,.34) 66%, rgba(4,5,8,.40) 100%),
+    linear-gradient(180deg, rgba(4,5,8,0) 0%, rgba(4,5,8,0) 46%, rgba(4,5,8,.52) 100%),
+    url("/assets/img/lunar-v2/editorial/luna-1600.avif");
+  background-image:
+    linear-gradient(100deg, rgba(4,5,8,.90) 0%, rgba(4,5,8,.78) 34%, rgba(4,5,8,.34) 66%, rgba(4,5,8,.40) 100%),
+    linear-gradient(180deg, rgba(4,5,8,0) 0%, rgba(4,5,8,0) 46%, rgba(4,5,8,.52) 100%),
+    image-set(url("/assets/img/lunar-v2/editorial/luna-1600.avif") 1x,
+              url("/assets/img/lunar-v2/editorial/luna-2560.avif") 2x);
+  background-position:68% 46%;
+}
+
+/* Lo que va encima del lienzo se vuelve claro./* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
    blanco andaba justo de contraste, aquí por fin brilla. */
 .cv2-lienzo .cv2-chip{background:#fff;color:var(--cv2-negro)}
 .cv2-lienzo h2{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.6)}
@@ -412,6 +430,12 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
       linear-gradient(180deg, rgba(6,7,6,.92) 0%, rgba(6,7,6,.89) 42%, rgba(6,7,6,.62) 74%, rgba(6,7,6,.72) 100%),
       url("/assets/img/trinchera-2026/editorial/soldado-1600.avif");
   }
+  .cv2-lienzo-lunar{
+    background-position:66% 40%;
+    background-image:
+      linear-gradient(180deg, rgba(4,5,8,.88) 0%, rgba(4,5,8,.84) 44%, rgba(4,5,8,.58) 72%, rgba(4,5,8,.78) 100%),
+      url("/assets/img/lunar-v2/editorial/luna-1600.avif");
+  }
   .cv2-cal{margin:36px 0 32px}
   .cv2-cal-rejilla{grid-template-columns:1fr;gap:16px}
   .cv2-cal-caja{padding:20px}
@@ -530,6 +554,10 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
 .cv2-lista li.cv2-precio-lista{
   font-family:var(--cv2-mono);font-weight:700;font-size:17px;
   color:var(--cv2-oro);border-bottom:0;
+}
+/* debajo del precio, la vía de los tres plazos (Óscar, 20/08/2026) */
+.cv2-lista li.cv2-plazos{
+  font-size:12px;color:var(--cv2-gris,#777);border-bottom:0;margin-top:-6px;
 }
 .cv2-t2 .cv2-encima{
   position:absolute;inset:0;padding:18px;
