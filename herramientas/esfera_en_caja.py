@@ -78,9 +78,13 @@ def disco(esfera, umbral=90):
 
 
 def montar(caja, esfera, giro=0.0, lado=2048, sombra=0.55, dx=0, dy=0, cristal=0.06,
-           holgura=1.0, centro=None, resfera=None):
+           holgura=1.0, centro=None, resfera=None, hueco_fijo=None):
     caja = caja.convert('RGB').resize((lado, lado), Image.LANCZOS)
-    hx, hy, hr = hueco(caja)
+    # Con la caja vacía el hueco se encuentra solo. Pero a veces la caja
+    # llega CON una esfera puesta —otra distinta de la nuestra— y entonces
+    # no hay mancha lisa que rellenar: se le dan a mano el centro y el radio
+    # y la nuestra se pega encima.
+    hx, hy, hr = hueco_fijo if hueco_fijo else hueco(caja)
 
     if resfera:
         # la esfera ya viene enderezada y recortada: su radio se sabe, y
@@ -157,11 +161,13 @@ if __name__ == '__main__':
     p.add_argument('--cristal', type=float, default=0.06)
     p.add_argument('--holgura', type=float, default=1.0)
     p.add_argument('--centro', default=None, help='centro del DIBUJO de la esfera, x,y')
+    p.add_argument('--hueco', default=None, help='x,y,r del hueco, cuando la caja ya trae otra esfera')
     p.add_argument('--resfera', type=float, default=None,
                    help='radio del disco, para esferas ya enderezadas y recortadas')
     a = p.parse_args()
     img, info = montar(Image.open(a.caja), Image.open(a.esfera), a.giro, a.lado, a.sombra, a.dx, a.dy, a.cristal, a.holgura,
                       tuple(float(v) for v in a.centro.split(',')) if a.centro else None,
-                      a.resfera)
+                      a.resfera,
+                      tuple(float(v) for v in a.hueco.split(',')) if a.hueco else None)
     img.save(a.salida)
     print(a.salida, info)

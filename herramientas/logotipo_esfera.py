@@ -13,6 +13,11 @@ una imitación. Dos cosas cambian respecto al de la web:
    como un fantasma— y se dibuja el pequeño en su sitio.
 2. EL COLOR. En la esfera todo va en PLATA monocroma, con un degradado
    vertical muy leve para que no parezca un gris plano pintado.
+3. EL NOMBRE DEL MODELO ocupa EXACTAMENTE el ancho de «laOra» (Óscar,
+   19/08/2026). No se elige un cuerpo y se mira a ver: se busca el que
+   hace que la palabra mida justo eso, con el espaciado creciendo a la
+   par. Así el bloque queda cuadrado por los dos lados, y un modelo de
+   nombre corto y otro de nombre largo se ven igual de anchos.
 
 Uso:
     python3 herramientas/logotipo_esfera.py TRINCHERA
@@ -40,7 +45,26 @@ def sin_triangulo():
     return Image.fromarray(a.astype(np.uint8))
 
 
-def logotipo(modelo, tam=TRIANGULO, tracking=26, cuerpo=118, sep_nombre=40):
+def cuerpo_para(modelo, ancho, tracking_rel=0.20, alto_max=None):
+    """El cuerpo de letra con el que `modelo` mide `ancho` de largo."""
+    tmp = Image.new('RGBA', (10, 10))
+    d = ImageDraw.Draw(tmp)
+
+    def mide(c):
+        f = ImageFont.truetype(FUENTE, c, index=0)
+        return sum(d.textlength(x, font=f) for x in modelo) + c * tracking_rel * (len(modelo) - 1)
+
+    lo, hi = 20, 600
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if mide(mid) < ancho:
+            lo = mid
+        else:
+            hi = mid
+    return lo
+
+
+def logotipo(modelo, tam=TRIANGULO, tracking=None, cuerpo=None, sep_nombre=40):
     im = sin_triangulo()
     ancho, alto = tam
     top = CY - RI + SEPARACION
@@ -52,14 +76,22 @@ def logotipo(modelo, tam=TRIANGULO, tracking=26, cuerpo=118, sep_nombre=40):
     grad = np.repeat(np.linspace(PLATA[0], PLATA[1], h).reshape(h, 1), A.shape[1], axis=1)
     marca = Image.fromarray(np.dstack([grad, grad, grad, A[:, :, 3]]).astype(np.uint8))
 
+    # el ancho real de «laOra», que es al que se ajusta el nombre
+    caja = marca.getbbox()
+    ancho_marca = caja[2] - caja[0]
+    if cuerpo is None:
+        cuerpo = cuerpo_para(modelo, ancho_marca)
+    if tracking is None:
+        tracking = cuerpo * 0.20
+
     f = ImageFont.truetype(FUENTE, cuerpo, index=0)
-    tmp = Image.new('RGBA', (2200, 260), (0, 0, 0, 0))
+    tmp = Image.new('RGBA', (ancho_marca * 3, cuerpo * 3), (0, 0, 0, 0))
     td = ImageDraw.Draw(tmp)
     letras = [(c, td.textlength(c, font=f)) for c in modelo]
     total = sum(w for _, w in letras) + tracking * (len(modelo) - 1)
-    x = (2200 - total) / 2
+    x = (tmp.width - total) / 2
     for c, w in letras:
-        td.text((x, 40), c, font=f, fill=(214, 214, 214, 255))
+        td.text((x, cuerpo * 0.4), c, font=f, fill=(214, 214, 214, 255))
         x += w + tracking
     nombre = tmp.crop(tmp.getbbox())
 
