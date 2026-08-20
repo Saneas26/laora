@@ -9,9 +9,12 @@ el 15 con el 3 o el 17 con el 5. Esto lo mueve por su radio, que es la
 única dirección en la que se puede mover un numeral de reloj sin que
 deje de marcar su hora.
 
-No se redibuja nada: se recorta el numeral tal cual, se pega desplazado
-y el hueco que deja se tapa con el propio fondo de la esfera —la mediana
-de lo oscuro de alrededor—, que ahí es negro mate y uniforme.
+No se redibuja nada: se recorta el numeral tal cual y se pega desplazado.
+El hueco que deja se tapa CLONANDO un trozo de esfera vacío del mismo
+radio, unos grados más allá. Rellenar con un color plano —la mediana de
+lo oscuro— deja un fantasma bien visible: la esfera tiene textura y cae
+de luz hacia el borde, así que el parche tiene que traer esa misma
+textura y esa misma luz, y a igual radio la trae.
 
 Uso:
     python3 herramientas/mover_numeral.py esfera.png salida.png \
@@ -22,7 +25,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 
-def mover(img, centro, hora, radio, acercar, ventana=52, umbral=150):
+def mover(img, centro, hora, radio, acercar, ventana=52, umbral=150, desde=16.0, dilata=11):
     a = np.asarray(img.convert('RGB')).astype(float)
     cx, cy = centro
     th = math.radians(hora * 30)
@@ -35,15 +38,19 @@ def mover(img, centro, hora, radio, acercar, ventana=52, umbral=150):
     if not claro.any():
         raise SystemExit('no encuentro el numeral en esa ventana')
 
-    # el fondo con el que se tapa el hueco: la mediana de lo oscuro de al lado
-    fondo = np.median(a[y0:y1, x0:x1][~claro], axis=0)
+    # el parche: el mismo radio, unos grados más allá, donde no hay nada
+    tp = th + math.radians(desde)
+    px, py = cx + radio * math.sin(tp), cy - radio * math.cos(tp)
+    parche = a[int(py - ventana):int(py + ventana), int(px - ventana):int(px + ventana)].copy()
+    if parche.shape != trozo.shape:
+        raise SystemExit('el parche se sale de la imagen; prueba otro --desde')
 
-    # borrar el numeral de su sitio, con el borde difuminado para que no
-    # se note el parche
+    # borrar el numeral, con la máscara bien dilatada: el halo del
+    # antialiasing es lo que deja el fantasma si se queda corta
     m = np.asarray(Image.fromarray((claro * 255).astype(np.uint8))
-                   .filter(ImageFilter.MaxFilter(5))
-                   .filter(ImageFilter.GaussianBlur(1.5))).astype(float) / 255
-    a[y0:y1, x0:x1] = trozo * (1 - m[:, :, None]) + fondo[None, None, :] * m[:, :, None]
+                   .filter(ImageFilter.MaxFilter(dilata))
+                   .filter(ImageFilter.GaussianBlur(3.0))).astype(float) / 255
+    a[y0:y1, x0:x1] = trozo * (1 - m[:, :, None]) + parche * m[:, :, None]
 
     # y pegarlo desplazado hacia AFUERA por su radio (acercándolo al
     # numeral grande, que está más lejos del centro)
@@ -64,7 +71,10 @@ if __name__ == '__main__':
     p.add_argument('--centro', required=True)
     p.add_argument('--acercar', type=float, required=True, help='px hacia afuera')
     p.add_argument('--ventana', type=int, default=52)
+    p.add_argument('--desde', type=float, default=16.0, help='grados de donde se clona el parche')
+    p.add_argument('--dilata', type=int, default=11, help='cuánto se ensancha la máscara, impar')
     a = p.parse_args()
     cx, cy = (float(v) for v in a.centro.split(','))
-    mover(Image.open(a.origen), (cx, cy), a.hora, a.radio, a.acercar, a.ventana).save(a.salida)
+    mover(Image.open(a.origen), (cx, cy), a.hora, a.radio, a.acercar, a.ventana,
+          desde=a.desde, dilata=a.dilata).save(a.salida)
     print(a.salida)
