@@ -109,10 +109,18 @@ def medir(img):
         return (x0 + x1) / 2, (y0 + y1) / 2, y0
     x12, y12, _ = centroDe(0)
     x6,  y6,  _ = centroDe(180)
-    _, _, t10 = centroDe(300)
-    _, _, t2  = centroDe(60)
+    # LA LÍNEA DEL 10 Y DEL 2, con tolerancia: a las 10:10 la aguja de
+    # las horas tapa el 10 y su lume se funde con ella. La esfera es
+    # simétrica, así que si uno de los dos falta, el otro basta.
+    bordes = []
+    for g in (300, 60):
+        p10 = cerca(ns, g)
+        if p10:
+            bordes.append(min(q['y0'] for q in p10))
+    if not bordes:
+        raise SystemExit('no encuentro ni el 10 ni el 2')
     return {'disco': (cx, cy, r), 'doce': (x12, y12), 'seis': (x6, y6),
-            'linea': (t10 + t2) / 2}
+            'linea': sum(bordes) / len(bordes)}
 
 
 if __name__ == '__main__':
