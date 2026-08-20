@@ -938,12 +938,16 @@
   function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
   function referencia() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
-    if (e.caja === 'BR') return seg + 'ANTE';
+    /* el bronce lleva el color del ante en la referencia desde que tiene
+       tres (20/08/2026): sin él, dos correas distintas compartían ref y
+       el pedido no decía cuál quería el cliente */
+    if (e.caja === 'BR') return seg + 'ANTE-' + e.ante;
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATO') return cola + '-' + e.nato;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
     if (e.correa === 'PIELO') return cola + '-' + e.pielk + '-' + e.cierre;
-    if ((e.correa === 'ANTE' || e.correa === 'DUOA') && e.estilo === 'M') return cola + '-' + e.ante;
+    /* el ante SIEMPRE con su color: el khaki también elige (20/08/2026) */
+    if (e.correa === 'ANTE' || e.correa === 'DUOA') return cola + '-' + e.ante;
     if (conCierre()) {
       var c = e.estilo === 'M' && MURPH_CORREA[e.correa] ? cola + '-P' + e.pesp : cola;
       return c + '-' + e.cierre;
@@ -1140,7 +1144,7 @@
         ? 'piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' de 20 mm con pespunte rectangular claro y ' + CIERRES[e.cierre].tec
         : e.correa === 'NATO'
         ? 'nato ' + NATOS[e.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
-        : (e.correa === 'ANTE' && e.estilo === 'M')
+        : e.correa === 'ANTE'
         ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
         : (e.estilo === 'M' && MURPH_CORREA[e.correa])
         ? CORREAS[e.correa].tec.replace('con pespunte blanco', 'con pespunte ' + PESPUNTES[e.pesp].toLowerCase())
@@ -1243,7 +1247,7 @@
           ? 'Nato ' + NATOS[e.nato][0].toLowerCase() + ', hebilla clásica plateada'
           : e.correa === 'NATOP'
           ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
-          : (e.correa === 'ANTE' && e.estilo === 'M')
+          : e.correa === 'ANTE'
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
           : (e.correa === 'DUOA' && e.estilo === 'M')
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ' + brazalete de acero'
