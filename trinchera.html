@@ -371,7 +371,15 @@
      Lo que no tiene foto sale con su cartel, nunca con la imagen de
      otro reloj. */
   var SERIE = {
-    '39-acero-blanca-nato-verde': 1
+    /* Los cuatro colores del nato salen de UNA foto: el tejido es el
+       mismo y solo cambia el tono, así que se derivan con
+       recolorear_nato.py en vez de fotografiar cuatro veces lo mismo.
+       El negro-gris no está: ese es de dos tonos y no se puede sacar
+       de un tejido liso, necesita su propia foto. */
+    '39-acero-blanca-nato-verde': 1,
+    '39-acero-blanca-nato-negro': 1,
+    '39-acero-blanca-nato-gris':  1,
+    '39-acero-blanca-nato-beige': 1
   };
   var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
@@ -539,6 +547,10 @@
            Se forzaba porque era la única foto; ahora existen las dos. */
       }
       if (e.correa !== 'NATOP') e.color = 'NEG';
+      /* EL NATO NO VA EN LA DE 36 (Óscar, 19/08/2026): mide 275 mm, y a
+         quien busca la caja pequeña por tener la muñeca fina le sobraría
+         media correa. */
+      if (e.diam === '36' && e.correa === 'NATO') e.correa = 'NATOP';
     }
     /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
        sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
@@ -647,13 +659,13 @@
            ['ANTE', 'Ante'],
            ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
         : esNegra
-        ? [['NATO', 'Nato'], ['NATOP', 'Nato + Piel'],
+        ? [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
         ? [['ANTE', 'Piel Ante'], ['PIELO', 'Piel Marrón Oscuro'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde']]
-        : [['NATO', 'Nato'], ['NATOP', 'Nato + Piel'],
+        : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel'],
            ['PIELN', 'Piel Negra'], ['PIELM', 'Piel Marrón'], ['PIELV', 'Piel Verde'],
            ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['PACK', 'Pack Piel + Brazalete', true]], e.correa);
