@@ -346,8 +346,16 @@
     /* El brazalete en PVD negro es SOLO para la caja negra (Óscar, 19/08/2026):
        un brazalete negro en una caja de acero no es un reloj, es un apaño. */
     ACERONG: { nombre: 'Brazalete Negro PVD', coste: 26.50, tec: 'brazalete de acero inoxidable 316L de tres eslabones con recubrimiento PVD negro, 20 mm' },
-    /* El pack es la suma de sus dos piezas, como siempre: piel 29,99 + acero 19,69. */
-    PACK:  { nombre: 'Pack Piel + Brazalete', coste: 49.68, tec: 'pack con la piel genuina negra montada y el brazalete de acero 316L de tres eslabones aparte, para cambiarlo cuando quieras' },
+    /* LOS DÚOS (Óscar, 20/08/2026): el reloj sale con una correa montada y
+       el brazalete aparte, para cambiarlo cuando quieras. Sustituyen al
+       antiguo «Pack», que era uno solo y con la piel negra fija. Ahora el
+       de piel viene en los tres tonos y hay otro de ante, y el color se
+       elige donde se elige el de la piel y el del ante: en el mismo paso.
+       El coste es la suma de las dos piezas, como siempre. */
+    DUON:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina negra de vaca italiana montada, y el brazalete de acero 316L de tres eslabones aparte' },
+    DUOM:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina marrón de vaca italiana montada, y el brazalete de acero 316L de tres eslabones aparte' },
+    DUOV:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina verde militar de vaca italiana montada, y el brazalete de acero 316L de tres eslabones aparte' },
+    DUOA:  { nombre: 'Dúo Ante + Brazalete', coste: 23.99, tec: 'la correa de piel ante montada, y el brazalete de acero 316L de tres eslabones aparte' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
     /* LA PIEL DEL KHAKI (Óscar, 19/08/2026): 15 €, 20 mm, en tres colores
        y con la hebilla clásica a elegir entre plata y negra. Antes estaba
@@ -396,6 +404,10 @@
      referencia y la ficha técnica no se enteren del cambio. */
   var PIELES_M = { PIELN: ['Negra', '#1c1c1e'], PIELM: ['Marrón', '#4a2a1c'],
                    PIELV: ['Verde militar', '#26382a'] };
+  /* El dúo de piel lleva los mismos tres tonos, y como con la piel suelta
+     el tono ES la correa: cada uno tiene su coste y su referencia. */
+  var DUOS_M   = { DUON: ['Negra', '#1c1c1e'], DUOM: ['Marrón', '#4a2a1c'],
+                   DUOV: ['Verde militar', '#26382a'] };
   var PIELK_FOTO = { NEG: 'negra', MOS: 'marronoscuro', MCL: 'marronclaro' };
   var CIERRES_K = { 'plata': 'Clásica plata', 'negra': 'Clásica negra' };
   /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
@@ -626,7 +638,8 @@
                        // la del khaki lleva su propio nombre desde que son tres
                        NATO: 'nato', NATOP: 'natopiel',
                        ACERO: 'brazalete', ACERONG: 'brazaletepvd',
-                       PACK: 'pack', PIELO: 'pielkhaki' };
+                       DUON: 'duonegra', DUOM: 'duomarron', DUOV: 'duoverde',
+                       DUOA: 'duoante', PIELO: 'pielkhaki' };
   var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'beige', NGR: 'negrogris' };
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
@@ -757,12 +770,14 @@
          y el pack siguen existiendo con sus fotos de antes. */
       if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
       if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
-      if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' && e.correa !== 'PACK' && e.correa !== 'ANTE') e.correa = 'PIELN';
+      if (!MURPH_CORREA[e.correa] && !DUOS_M[e.correa] && e.correa !== 'ACERO' &&
+          e.correa !== 'DUOA' && e.correa !== 'ANTE') e.correa = 'PIELN';
       /* El titanio no tiene ni pack ni brazalete: si venías del acero con
          una de esas dos y cambias a titanio, te quedas con la piel negra,
          que es la correa de casa del Murph. Antes se hacía al revés —se
          volvía a la caja de acero— y parecía que el botón no respondía. */
-      if (e.caja === 'TI' && (e.correa === 'ACERO' || e.correa === 'PACK')) e.correa = 'PIELN';
+      if (e.caja === 'TI' && (e.correa === 'ACERO' || e.correa === 'DUOA' ||
+                             DUOS_M[e.correa])) e.correa = 'PIELN';
     } else {
       if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KR';
       /* Con piel italiana, el bronce y el titanio llevan la 12/24 de
@@ -793,7 +808,7 @@
       }
       if (e.correa !== 'NATOP') e.color = 'VER';
       /* del Murph al Khaki: la piel italiana no existe aquí */
-      if (MURPH_CORREA[e.correa] || e.correa === 'PACK') e.correa = 'PIELO';
+      if (MURPH_CORREA[e.correa] || DUOS_M[e.correa] || e.correa === 'DUOA') e.correa = 'PIELO';
       /* CADA NATO EN SU MEDIDA (Óscar, 19/08/2026). El nato mide 275 mm y
          no va en la de 36: a quien busca la caja pequeña por tener la
          muñeca fina le sobraría media correa. Y el nato + piel no va en
@@ -813,7 +828,7 @@
     if (e.correa === 'NATO') return cola + '-' + e.nato;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
     if (e.correa === 'PIELO') return cola + '-' + e.pielk + '-' + e.cierre;
-    if (e.correa === 'ANTE' && e.estilo === 'M') return cola + '-' + e.ante;
+    if ((e.correa === 'ANTE' || e.correa === 'DUOA') && e.estilo === 'M') return cola + '-' + e.ante;
     if (conCierre()) {
       var c = e.estilo === 'M' && MURPH_CORREA[e.correa] ? cola + '-P' + e.pesp : cola;
       return c + '-' + e.cierre;
@@ -911,7 +926,9 @@
            es como se dice aquí «esto no existe». */
         ? [['PIELN', 'Piel'],
            ['ANTE', 'Ante'],
-           ['ACERO', 'Brazalete Acero', esTitanio], ['PACK', 'Pack Piel + Brazalete', esTitanio]]
+           ['ACERO', 'Brazalete Acero', esTitanio],
+           ['DUON', 'Dúo Piel + Brazalete', esTitanio],
+           ['DUOA', 'Dúo Ante + Brazalete', esTitanio]]
         : esNegra
         ? [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
@@ -919,10 +936,12 @@
         ? [['ANTE', 'Ante'], ['PIELO', 'Piel']]
         : [['NATO', 'Nato', e.diam === '36'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
-           ['PACK', 'Pack Piel + Brazalete', true]],
-        /* el botón «Piel» del Murph vale por las tres: se marca con
-           cualquiera de ellas */
-        esMurph && MURPH_CORREA[e.correa] ? 'PIELN' : e.correa);
+           ['DUON', 'Dúo Piel + Brazalete', true]],
+        /* los botones que valen por varias correas se marcan con
+           cualquiera de ellas: «Piel» por sus tres tonos y «Dúo Piel +
+           Brazalete» por los suyos */
+        esMurph && MURPH_CORREA[e.correa] ? 'PIELN'
+        : esMurph && DUOS_M[e.correa] ? 'DUON' : e.correa);
     }
 
     /* El cierre: con la piel italiana, y su foto en la esquina del visor */
@@ -957,21 +976,26 @@
     /* El ante lleva color en el Murph y también en la 12/24 del khaki, que
        tiene las cuatro pieles en acero, PVD negro y bronce. En el titanio
        con ante no: ahí solo hay una foto y sin color. */
-    var anteConColor = e.correa === 'ANTE' && (esMurph || !!K1224_ANTE_CAJA[e.caja]);
+    /* El dúo de ante abre los mismos cuatro colores que el ante suelto
+       (Óscar, 20/08/2026): es la misma correa, solo que con el brazalete
+       de regalo dentro de la caja. */
+    var anteConColor = (e.correa === 'ANTE' || e.correa === 'DUOA') &&
+                       (esMurph || !!K1224_ANTE_CAJA[e.caja]);
     var esNato = e.correa === 'NATO';
     var esPielK = e.correa === 'PIELO';
     var esPielM = esMurph && !!MURPH_CORREA[e.correa];
-    var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK || esPielM;
+    var esDuoM  = esMurph && !!DUOS_M[e.correa];
+    var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK || esPielM || esDuoM;
     var esAnte = anteConColor;
     var paleta = esAnte ? ANTES : esNato ? NATOS : esPielK ? PIELES_K
-               : esPielM ? PIELES_M : COLORES;
+               : esPielM ? PIELES_M : esDuoM ? DUOS_M : COLORES;
     var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk
-                : esPielM ? e.correa : e.color;
+                : (esPielM || esDuoM) ? e.correa : e.color;
     $('[data-pv-grupo-color]').hidden = !conColor;
     if (conColor) {
       $('[data-pv-rotulo-color]').textContent =
         esAnte ? 'Color del ante' : esNato ? 'Color del nato'
-        : (esPielK || esPielM) ? 'Color de la piel' : 'Color del nato + piel';
+        : (esPielK || esPielM || esDuoM) ? 'Color de la piel' : 'Color del nato + piel';
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
@@ -1022,16 +1046,20 @@
       /* El grupo de color sirve al nato y al ante, y cada uno guarda el suyo.
          El ante lo lleva ya el Murph Y el khaki de la 12/24, así que la
          condición es la correa, no el estilo. */
-      if (g === 'color' && e.correa === 'ANTE') e.ante = b.dataset.v;
+      if (g === 'color' && (e.correa === 'ANTE' || e.correa === 'DUOA')) e.ante = b.dataset.v;
       else if (g === 'color' && e.correa === 'NATO') e.nato = b.dataset.v;
       else if (g === 'color' && e.correa === 'PIELO') e.pielk = b.dataset.v;
       /* En el Murph el color de la piel ES la correa: negra, marrón y
          verde son tres correas distintas con tres costes, aunque el
          cliente solo vea un botón «Piel» y tres tonos. */
       else if (g === 'color' && e.estilo === 'M' && MURPH_CORREA[e.correa]) e.correa = b.dataset.v;
+      /* y lo mismo con el dúo de piel, que también viene en tres tonos */
+      else if (g === 'color' && e.estilo === 'M' && DUOS_M[e.correa]) e.correa = b.dataset.v;
       /* y pulsar «Piel» estando ya en una de ellas no te devuelve a la negra */
       else if (g === 'correa' && b.dataset.v === 'PIELN' &&
                e.estilo === 'M' && MURPH_CORREA[e.correa]) { /* ya estás */ }
+      else if (g === 'correa' && b.dataset.v === 'DUON' &&
+               e.estilo === 'M' && DUOS_M[e.correa]) { /* ya estás */ }
       else e[g] = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
@@ -1068,7 +1096,7 @@
       laoraCarritoAnadir({
         ref: referencia(),
         nombre: 'Trinchera ' + (esBronce ? 'Bronce' : (e.caja === 'TI' ? 'Titanio' :
-                (e.correa === 'PACK' ? 'Murph Pack' :
+                (DUOS_M[e.correa] || e.correa === 'DUOA' ? 'Murph Dúo' :
                  (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
@@ -1080,6 +1108,8 @@
           ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
           : (e.correa === 'ANTE' && e.estilo === 'M')
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
+          : (e.correa === 'DUOA' && e.estilo === 'M')
+          ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ' + brazalete de acero'
           : (e.estilo === 'M' && MURPH_CORREA[e.correa])
           ? CORREAS[e.correa].nombre + ', pespunte ' + PESPUNTES[e.pesp].toLowerCase() +
             ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
