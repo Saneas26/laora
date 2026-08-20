@@ -21,7 +21,7 @@ Uso:
 """
 import argparse
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
 LADO = 1200
 R_NUM = 378        # radio al que quedan los numerales grandes
@@ -44,6 +44,23 @@ def enderezar(img, p12, p3, p6, p9, lado=LADO, r=R_NUM):
     return img.convert('RGB').transform((lado, lado), Image.PERSPECTIVE, co, Image.BICUBIC)
 
 
+def con_cruz(img):
+    """La misma imagen con la cruz de las 12 y las 3 encima.
+
+    MIRARLA NO ES OPCIONAL. El 19/08/2026 la esfera del Murph salió girada
+    30° —el 11 donde va el 12— porque el buscador de numerales tomó uno por
+    otro, y no se vio hasta tener diez fotos hechas. Con la cruz encima se
+    ve en un segundo: el 12 tiene que caer en la línea roja y el 3 en la
+    azul, que es donde está la corona.
+    """
+    im = img.convert('RGB').copy()
+    c = im.width / 2
+    d = ImageDraw.Draw(im)
+    d.line((c, 0, c, im.height), fill=(255, 0, 0), width=4)
+    d.line((0, c, im.width, c), fill=(0, 200, 255), width=4)
+    return im
+
+
 def par(s):
     x, y = s.split(',')
     return float(x), float(y)
@@ -57,6 +74,11 @@ if __name__ == '__main__':
                        help='centro del numeral %s, x,y' % n)
     p.add_argument('--lado', type=int, default=LADO)
     p.add_argument('--radio', type=int, default=R_NUM)
+    p.add_argument('--cruz', help='guarda además una copia con la cruz de comprobación')
     a = p.parse_args()
-    enderezar(Image.open(a.origen), a.p12, a.p3, a.p6, a.p9, a.lado, a.radio).save(a.salida)
+    img = enderezar(Image.open(a.origen), a.p12, a.p3, a.p6, a.p9, a.lado, a.radio)
+    img.save(a.salida)
     print(a.salida)
+    if a.cruz:
+        con_cruz(img).save(a.cruz)
+        print(a.cruz, '· míralo: el 12 en la línea roja y el 3 en la azul')
