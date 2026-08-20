@@ -240,9 +240,11 @@ function trinchera() {
           /* La piel del khaki, que desde el 19/08/2026 tiene tres colores
              y dos hebillas en vez de ser una correa suelta. */
           const pielesK   = correa === 'PIELO' ? ofrece('color', Object.keys(L.PIELES_K || {})) : [null];
-          /* el ante y el dúo de ante comparten los cuatro colores */
-          const antes     = ((correa === 'ANTE' || correa === 'DUOA') && estilo === 'M')
-            ? ofrece('ante', Object.keys(L.ANTES || {})) : [null];
+          /* el ante y el dúo llevan color en TODOS los estilos desde el
+             20/08/2026. El grupo pintado es el del color, y cada caja
+             enseña su paleta: el bronce sin camel, el PVD solo negro. */
+          const antes     = (correa === 'ANTE' || correa === 'DUOA')
+            ? ofrece('color', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
 
           for (const color of colores)
