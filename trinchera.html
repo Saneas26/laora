@@ -424,7 +424,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=19';
+  var SERIE_V = '?v=20';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -566,6 +566,48 @@
     '39-titanio-blanco-verde-pblanco': 1,
     '36-titanio-blanco-verde-ptono': 1,
     '39-titanio-blanco-verde-ptono': 1,
+    /* EL KHAKI, EN LAS DOS MEDIDAS Y EN PVD (Óscar, 20/08/2026): «todas
+       las fotos sirven para 36 y 39 mm». Las claves que estaban en una
+       sola medida se duplican a la otra, y entran las tres cajas negras
+       PVD del Khaki —nato, ante y piel— con sus dos segunderos, montadas
+       por el método del hueco. */
+    '36-acero-blanca-nato-beige':    1,
+    '36-acero-blanca-nato-negro':    1,
+    '36-acero-blanca-nato-negrogris': 1,
+    '36-acero-blanca-nato-verde':    1,
+    '36-acero-blanca-pielkhaki-marronclaro': 1,
+    '36-acero-blanca-pielkhaki-marronoscuro': 1,
+    '36-acero-rojo-nato-beige':      1,
+    '36-acero-rojo-nato-negro':      1,
+    '36-acero-rojo-nato-negrogris':  1,
+    '36-acero-rojo-nato-verde':      1,
+    '36-acero-rojo-pielkhaki-marronclaro': 1,
+    '36-acero-rojo-pielkhaki-marronoscuro': 1,
+    '39-acero-blanca-natopiel-armygreen': 1,
+    '39-acero-blanca-natopiel-beige': 1,
+    '39-acero-blanca-natopiel-gris': 1,
+    '39-acero-blanca-natopiel-marron': 1,
+    '39-acero-blanca-natopiel-mostaza': 1,
+    '39-acero-blanca-natopiel-negro': 1,
+    '39-acero-rojo-natopiel-armygreen': 1,
+    '39-acero-rojo-natopiel-beige':  1,
+    '39-acero-rojo-natopiel-gris':   1,
+    '39-acero-rojo-natopiel-marron': 1,
+    '39-acero-rojo-natopiel-mostaza': 1,
+    '39-acero-rojo-natopiel-negro':  1,
+    '36-pvd-blanca-nato-negro':      1,
+    '39-pvd-blanca-nato-negro':      1,
+    '36-pvd-blanca-ante-negro':      1,
+    '39-pvd-blanca-ante-negro':      1,
+    '36-pvd-blanca-pielkhaki-negra': 1,
+    '39-pvd-blanca-pielkhaki-negra': 1,
+    '36-pvd-rojo-nato-negro':        1,
+    '39-pvd-rojo-nato-negro':        1,
+    '36-pvd-rojo-ante-negro':        1,
+    '39-pvd-rojo-ante-negro':        1,
+    '36-pvd-rojo-pielkhaki-negra':   1,
+    '39-pvd-rojo-pielkhaki-negra':   1,
+
     /* LA CAJA NEGRA PVD CON SU BRAZALETE NEGRO (Óscar, 20/08/2026): la
        caja llegó generada con el hueco vacío y se le encajó la esfera
        khaki aprobada por el método del hueco; la de segundero rojo sale
@@ -789,31 +831,26 @@
                              DUOS_M[e.correa])) e.correa = 'PIELN';
     } else {
       if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KR';
-      /* Con piel italiana, el bronce y el titanio llevan la 12/24 de
-         segundero blanco, que es la que se fotografió el 19/08/2026. Con el
-         ante o la piel oscura siguen con su khaki de agujas blancas. */
-      var pielIt = !!K1224_CORREA[e.correa];
-      /* El ante con la 12/24 existe en acero, PVD negro y bronce */
-      var anteIt = e.correa === 'ANTE' && !!K1224_ANTE_CAJA[e.caja];
+      /* LAS ESFERAS DEL KHAKI, SIMPLIFICADAS (Óscar, 20/08/2026):
+         «segundero rojo para todas las cajas excepto bronce, segundero
+         blanco para todas las cajas». Ya no hay 12/24 forzada por la
+         correa: fuera del bronce siempre se elige entre KB y KR. */
       if (e.caja === 'BR') {
-        if (pielIt || anteIt) { e.esf = 'KB'; } else { e.correa = 'ANTE'; e.esf = 'BRZ'; }
+        /* EL BRONCE, SOLO CON ANTE (Óscar, 20/08/2026): «acepta piel y
+           ante, pues las fotos son solo ante y por el momento solo esa
+           correa». Su esfera sigue siendo la fija de agujas plata. */
+        e.correa = 'ANTE'; e.esf = 'BRZ';
       }
-      else if (e.caja === 'TI') {
-        if (pielIt) { e.esf = 'KB'; }
-        else {
-          e.esf = 'BRZ';
+      else {
+        if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
+        if (e.caja === 'TI') {
           if (e.correa !== 'ANTE' && e.correa !== 'PIELO') e.correa = 'ANTE';
         }
-      }
-      else if (e.caja === 'NG') {
-        if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
-        if (pielIt || anteIt) e.esf = 'KB';
-        if (e.correa !== 'NATO' && e.correa !== 'NATOP' && e.correa !== 'ACERONG' && !pielIt && !anteIt) e.correa = 'NATO';
-      } else {
-        if (e.correa === 'ACERONG') e.correa = 'NATO';
-        if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KR';
-        /* 19/08/2026: el ante del acero ya no obliga al segundero blanco.
-           Se forzaba porque era la única foto; ahora existen las dos. */
+        else if (e.caja === 'NG') {
+          if (e.correa !== 'NATO' && e.correa !== 'NATOP' && e.correa !== 'ACERONG' &&
+              e.correa !== 'PIELO' && e.correa !== 'ANTE') e.correa = 'NATO';
+        }
+        else if (e.correa === 'ACERONG') e.correa = 'NATO';
       }
       if (e.correa !== 'NATOP') e.color = 'VER';
       /* del Murph al Khaki: la piel italiana no existe aquí */
@@ -887,12 +924,11 @@
     var esNegra = e.caja === 'NG';
     var esTitanio = e.caja === 'TI';
     var esMurph = e.estilo === 'M';
-    /* El bronce y el titanio traían esfera fija porque solo se habían
-       fotografiado con la khaki de agujas blancas. Ya no: el Murph les dio
-       sus dos esferas al titanio, y la serie 12/24 del 19/08/2026 les da la
-       KB a los dos en cuanto llevan piel italiana. */
-    var conPiel1224 = !!K1224_CORREA[e.correa];
-    var esfFija = (esBronce || esTitanio) && e.estilo !== 'M' && !conPiel1224;
+    /* Desde el 20/08/2026 la única esfera fija del Khaki es la del
+       bronce: en el resto de cajas se elige siempre entre los dos
+       segunderos. «Segundero rojo para todas las cajas excepto bronce,
+       segundero blanco para todas las cajas» (Óscar). */
+    var esfFija = esBronce && e.estilo !== 'M';
     $('[data-pv="esf"]').hidden = esfFija;
     /* Y SE VACÍA, no solo se esconde. Si se deja el contenido de la vez
        anterior, el enumerador del catálogo —que lee lo que la ficha ha
@@ -906,15 +942,8 @@
       $('[data-pv-rotulo-esf]').textContent = e.estilo === 'M' ? 'Esfera' : 'Segundero';
       botones('esf', e.estilo === 'M'
         ? [['MA', ESFERAS.MA.corto], ['MB', ESFERAS.MB.corto]]
-        /* Con piel italiana en bronce o titanio solo está fotografiada la
-           12/24 de segundero blanco: la del segundero rojo se tacha. Con el
-           ante pasaba lo mismo, pero el acero ya tiene sus dos fotos, así
-           que ahí solo se tacha en el PVD negro y en el bronce. */
         /* el blanco primero, que es el de serie (Óscar, 19/08/2026) */
-        : [['KB', ESFERAS.KB.corto],
-           ['KR', ESFERAS.KR.corto,
-            (conPiel1224 && (esBronce || esTitanio)) ||
-            (e.correa === 'ANTE' && e.caja !== 'PL' && !!K1224_ANTE_CAJA[e.caja])]], e.esf);
+        : [['KB', ESFERAS.KB.corto], ['KR', ESFERAS.KR.corto]], e.esf);
     }
 
     /* la correa: todas salvo el ante, que es del bronce */
@@ -925,7 +954,9 @@
        elige después. Las tres pieles italianas —negra, marrón y verde, con
        su pespunte y sus cinco cierres— son del Murph y solo salen ahí. */
     if (esBronce) {
-      botones('correa', [['ANTE', 'Ante'], ['PIELO', 'Piel']], e.correa);
+      /* solo ante: «las fotos son solo ante y por el momento solo esa
+         correa» (Óscar, 20/08/2026) */
+      botones('correa', [['ANTE', 'Ante']], e.correa);
     } else {
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
