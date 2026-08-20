@@ -369,6 +369,13 @@
      delante el color elegido en la otra. */
   /* LOS CUATRO ANTES (Óscar, 19/08/2026), los mismos para el Khaki y para
      el Murph, y los cuatro fotografiados. */
+  /* RECORTES POR CAJA (Óscar, 20/08/2026): el bronce pierde el camel, y
+     la caja negra PVD solo lleva el negro de cada correa. */
+  var ANTES_BRONCE = { NEG: ['Negro', '#2b2a2b'], MOS: ['Marrón oscuro', '#4b382e'],
+                       AZU: ['Azul petróleo', '#1f5a72'] };
+  var SOLO_NEGRO_NATO = { NEG: ['Negro', '#1e1f22'] };
+  var SOLO_NEGRO_PIEL = { NEG: ['Negra', '#1c1c1e'] };
+  var SOLO_NEGRO_ANTE = { NEG: ['Negro', '#2b2a2b'] };
   var ANTES = {
     NEG: ['Negro', '#2b2a2b'],            MOS: ['Marrón oscuro', '#4b382e'],
     AZU: ['Azul petróleo', '#1f5a72'],    CAM: ['Camel', '#c08a4a']
@@ -423,7 +430,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=20';
+  var SERIE_V = '?v=21';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -606,6 +613,55 @@
     '39-pvd-rojo-ante-negro':        1,
     '36-pvd-rojo-pielkhaki-negra':   1,
     '39-pvd-rojo-pielkhaki-negra':   1,
+
+    /* EL TITANIO DEL KHAKI (Óscar, 20/08/2026): las mismas cajas del
+       acero pasadas a titanio, con la esfera khaki en sus dos segunderos.
+       Nato, ante y piel; sin brazaletes. Cuarenta y cuatro claves de
+       once montajes. */
+    '36-titanio-blanca-nato-verde':      1,
+    '39-titanio-blanca-nato-verde':      1,
+    '36-titanio-blanca-nato-negro':      1,
+    '39-titanio-blanca-nato-negro':      1,
+    '36-titanio-blanca-nato-beige':      1,
+    '39-titanio-blanca-nato-beige':      1,
+    '36-titanio-blanca-nato-negrogris':  1,
+    '39-titanio-blanca-nato-negrogris':  1,
+    '36-titanio-blanca-ante-camel':      1,
+    '39-titanio-blanca-ante-camel':      1,
+    '36-titanio-blanca-ante-azulpetroleo': 1,
+    '39-titanio-blanca-ante-azulpetroleo': 1,
+    '36-titanio-blanca-ante-marronoscuro': 1,
+    '39-titanio-blanca-ante-marronoscuro': 1,
+    '36-titanio-blanca-ante-negro':      1,
+    '39-titanio-blanca-ante-negro':      1,
+    '36-titanio-blanca-pielkhaki-marronclaro': 1,
+    '39-titanio-blanca-pielkhaki-marronclaro': 1,
+    '36-titanio-blanca-pielkhaki-marronoscuro': 1,
+    '39-titanio-blanca-pielkhaki-marronoscuro': 1,
+    '36-titanio-blanca-pielkhaki-negra': 1,
+    '39-titanio-blanca-pielkhaki-negra': 1,
+    '36-titanio-rojo-nato-verde':        1,
+    '39-titanio-rojo-nato-verde':        1,
+    '36-titanio-rojo-nato-negro':        1,
+    '39-titanio-rojo-nato-negro':        1,
+    '36-titanio-rojo-nato-beige':        1,
+    '39-titanio-rojo-nato-beige':        1,
+    '36-titanio-rojo-nato-negrogris':    1,
+    '39-titanio-rojo-nato-negrogris':    1,
+    '36-titanio-rojo-ante-camel':        1,
+    '39-titanio-rojo-ante-camel':        1,
+    '36-titanio-rojo-ante-azulpetroleo': 1,
+    '39-titanio-rojo-ante-azulpetroleo': 1,
+    '36-titanio-rojo-ante-marronoscuro': 1,
+    '39-titanio-rojo-ante-marronoscuro': 1,
+    '36-titanio-rojo-ante-negro':        1,
+    '39-titanio-rojo-ante-negro':        1,
+    '36-titanio-rojo-pielkhaki-marronclaro': 1,
+    '39-titanio-rojo-pielkhaki-marronclaro': 1,
+    '36-titanio-rojo-pielkhaki-marronoscuro': 1,
+    '39-titanio-rojo-pielkhaki-marronoscuro': 1,
+    '36-titanio-rojo-pielkhaki-negra':   1,
+    '39-titanio-rojo-pielkhaki-negra':   1,
 
     /* LA CAJA NEGRA PVD CON SU BRAZALETE NEGRO (Óscar, 20/08/2026): la
        caja llegó generada con el hueco vacío y se le encajó la esfera
@@ -839,15 +895,23 @@
            ante, pues las fotos son solo ante y por el momento solo esa
            correa». Su esfera sigue siendo la fija de agujas plata. */
         e.correa = 'ANTE'; e.esf = 'BRZ';
+        if (e.ante === 'CAM') e.ante = 'NEG';   // el bronce perdió el camel
       }
       else {
         if (e.esf !== 'KR' && e.esf !== 'KB') e.esf = 'KB';
         if (e.caja === 'TI') {
-          if (e.correa !== 'ANTE' && e.correa !== 'PIELO') e.correa = 'ANTE';
+          /* el titanio del Khaki lleva nato, ante y piel; sin brazaletes
+             (Óscar, 20/08/2026) */
+          if (e.correa !== 'ANTE' && e.correa !== 'PIELO' && e.correa !== 'NATO') e.correa = 'ANTE';
         }
         else if (e.caja === 'NG') {
-          if (e.correa !== 'NATO' && e.correa !== 'NATOP' && e.correa !== 'ACERONG' &&
+          /* la caja negra: solo piel, nato y ante EN NEGRO, y su brazalete
+             (Óscar, 20/08/2026). Ni técnica ni el resto de colores. */
+          if (e.correa !== 'NATO' && e.correa !== 'ACERONG' &&
               e.correa !== 'PIELO' && e.correa !== 'ANTE') e.correa = 'NATO';
+          if (e.correa === 'NATO') e.nato = 'NEG';
+          if (e.correa === 'PIELO') e.pielk = 'NEG';
+          if (e.correa === 'ANTE') e.ante = 'NEG';
         }
         else if (e.correa === 'ACERONG') e.correa = 'NATO';
       }
@@ -967,10 +1031,10 @@
            ['DUON', 'Dúo Piel + Brazalete', esTitanio],
            ['DUOA', 'Dúo Ante + Brazalete', esTitanio]]
         : esNegra
-        ? [['NATO', 'Nato'], ['NATOP', 'Nato + Piel', e.diam === '39'],
+        ? [['NATO', 'Nato'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
-        ? [['ANTE', 'Ante'], ['PIELO', 'Piel']]
+        ? [['NATO', 'Nato'], ['ANTE', 'Ante'], ['PIELO', 'Piel']]
         : [['NATO', 'Nato'], ['NATOP', 'Nato + Piel', e.diam === '39'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['DUON', 'Dúo Piel + Brazalete', true]],
@@ -1024,7 +1088,10 @@
     var esDuoM  = esMurph && !!DUOS_M[e.correa];
     var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK || esPielM || esDuoM;
     var esAnte = anteConColor;
-    var paleta = esAnte ? ANTES : esNato ? NATOS : esPielK ? PIELES_K
+    var esNegraK = e.estilo === 'K' && e.caja === 'NG';
+    var paleta = esAnte ? (esBronce ? ANTES_BRONCE : esNegraK ? SOLO_NEGRO_ANTE : ANTES)
+               : esNato ? (esNegraK ? SOLO_NEGRO_NATO : NATOS)
+               : esPielK ? (esNegraK ? SOLO_NEGRO_PIEL : PIELES_K)
                : esPielM ? PIELES_M : esDuoM ? DUOS_M : COLORES;
     var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk
                 : (esPielM || esDuoM) ? e.correa : e.color;
