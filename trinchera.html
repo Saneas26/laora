@@ -104,6 +104,20 @@
           histórico para el día a día: la estética militar clásica con los estándares de la relojería
           mecánica moderna, al precio honesto.</p>
 
+        <!-- EL ORDEN DE LOS PASOS lo fijó Óscar el 19/08/2026: primero el
+             tamaño de la caja —en todos los relojes—, luego el modelo, su
+             esfera o su segundero, el acabado de la caja, el movimiento y al
+             final la correa con su color y su cierre. Se va de lo que decide
+             el reloj a lo que decide el gusto. -->
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Tamaño de caja</p>
+          <div class="pv-opciones" data-pv="diam">
+            <button type="button" data-v="36" aria-pressed="true">36 mm</button>
+            <button type="button" data-v="39" aria-pressed="false">39 mm</button>
+          </div>
+        </div>
+
         <div class="pv-grupo">
           <p class="pv-rotulo">Estilo</p>
           <div class="pv-opciones" data-pv="estilo">
@@ -112,20 +126,10 @@
           </div>
         </div>
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
-          <div class="pv-opciones" data-pv="mov">
-            <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
-            <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
-          </div>
-        </div>
-
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Tamaño de caja</p>
-          <div class="pv-opciones" data-pv="diam">
-            <button type="button" data-v="36" aria-pressed="true">36 mm</button>
-            <button type="button" data-v="39" aria-pressed="false">39 mm</button>
-          </div>
+        <div class="pv-grupo" data-pv-grupo-esf>
+          <p class="pv-rotulo" data-pv-rotulo-esf>Segundero</p>
+          <div class="pv-opciones" data-pv="esf"></div>
+          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, agujas blancas y plata</p>
         </div>
 
         <div class="pv-grupo">
@@ -138,17 +142,12 @@
           </div>
         </div>
 
-        <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
-             elección del cliente». La decide el movimiento —cuarzo, roscada
-             sólida; automático, de cristal— y el titanio siempre sólida.
-             Se sigue calculando y sigue en la referencia y en la ficha
-             técnica; lo que se ha ido es el paso, que solo enseñaba una
-             opción tachada. -->
-
-        <div class="pv-grupo" data-pv-grupo-esf>
-          <p class="pv-rotulo">Esfera</p>
-          <div class="pv-opciones" data-pv="esf"></div>
-          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, agujas blancas y plata</p>
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
+          <div class="pv-opciones" data-pv="mov">
+            <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
+            <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
+          </div>
         </div>
 
         <div class="pv-grupo">
@@ -157,24 +156,31 @@
           <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
         </div>
 
-        <!-- El pespunte solo tiene sentido con la piel italiana del Murph:
-             el resto de correas no lo llevan y el grupo se esconde. -->
-        <div class="pv-grupo" data-pv-grupo-pesp hidden>
-          <p class="pv-rotulo">Pespunte</p>
-          <div class="pv-opciones" data-pv="pesp"></div>
+        <div class="pv-grupo" data-pv-grupo-color hidden>
+          <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
+          <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
-        <!-- El cierre va con la piel italiana, la lleve el Murph o el Khaki:
-             es la misma correa y las mismas cinco hebillas del Lunar. -->
         <div class="pv-grupo" data-pv-grupo-cierre hidden>
           <p class="pv-rotulo">Cierre</p>
           <div class="pv-opciones" data-pv="cierre"></div>
         </div>
 
-        <div class="pv-grupo" data-pv-grupo-color hidden>
-          <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
-          <div class="pv-opciones pv-colores" data-pv="color"></div>
+        <div class="pv-grupo" data-pv-grupo-pesp hidden>
+          <p class="pv-rotulo">Pespunte</p>
+          <div class="pv-opciones" data-pv="pesp"></div>
         </div>
+
+        <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
+             elección del cliente». La decide el movimiento —cuarzo, roscada
+             sólida; automático, de cristal— y el titanio siempre sólida.
+             Se sigue calculando y sigue en la referencia y en la ficha
+             técnica; lo que se ha ido es el paso, que solo enseñaba una
+             opción tachada. -->
+        <!-- El pespunte solo tiene sentido con la piel italiana del Murph:
+             el resto de correas no lo llevan y el grupo se esconde. -->
+        <!-- El cierre va con la piel italiana, la lleve el Murph o el Khaki:
+             es la misma correa y las mismas cinco hebillas del Lunar. -->
 
       </div>
 
@@ -303,12 +309,16 @@
     BR: { nombre: 'Bronce',      mat: 'bronce, que desarrollará su pátina propia', coste: 23.00 },
     TI: { nombre: 'Titanio',     mat: 'titanio, más ligero que el acero e hipoalergénico', coste: 54.39 }
   };
+  /* DOS NOMBRES POR ESFERA (Óscar, 19/08/2026): el corto es el del botón
+     —«ya se sabe que son del Khaki cuando lo señalas», y cuantas menos
+     letras mejor— y el largo el de la ficha y el catálogo, donde la
+     referencia viaja sola y sí necesita decir de qué esfera habla. */
   var ESFERAS = {
-    KR: { nombre: 'Khaki, Segundero Rojo',   coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero rojo y agujas plateadas con lumen verde. Diámetro 29 mm.' },
-    KB: { nombre: 'Khaki, Segundero Blanco', coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero blanco y agujas plateadas con lumen verde. Diámetro 29 mm.' },
-    MA: { nombre: 'Murph, Numerales Crema',  coste: 21.19, tec: 'Murph negra mate con numerales crema y agujas catedral con lumen.' },
-    MB: { nombre: 'Murph, Numerales Blancos',coste: 21.19, tec: 'Murph negra mate con numerales blancos y agujas catedral con lumen.' },
-    BRZ:{ nombre: 'Khaki, Agujas Blancas y Plata', coste: 17.29, tec: 'Khaki negra mate con agujas blancas y plata, para las cajas de bronce y titanio.' }
+    KR: { nombre: 'Khaki, Segundero Rojo', corto: 'Seg Rojo',   coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero rojo y agujas plateadas con lumen verde. Diámetro 29 mm.' },
+    KB: { nombre: 'Khaki, Segundero Blanco', corto: 'Seg Blanco', coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero blanco y agujas plateadas con lumen verde. Diámetro 29 mm.' },
+    MA: { nombre: 'Murph, Numerales Crema', corto: 'Numerales Crema', coste: 21.19, tec: 'Murph negra mate con numerales crema y agujas catedral con lumen.' },
+    MB: { nombre: 'Murph, Numerales Blancos', corto: 'Numerales Blancos', coste: 21.19, tec: 'Murph negra mate con numerales blancos y agujas catedral con lumen.' },
+    BRZ:{ nombre: 'Khaki, Agujas Blancas y Plata', corto: 'Agujas Blancas y Plata', coste: 17.29, tec: 'Khaki negra mate con agujas blancas y plata, para las cajas de bronce y titanio.' }
   };
   /* COSTES DE LAS CORREAS · corregidos el 19/08/2026 con los anuncios que
      mandó Óscar. Venían de la hoja de materiales vieja y estaban a menos
@@ -684,16 +694,18 @@
     $('[data-pv="esf"]').hidden = esfFija;
     $('[data-pv-esf-fija]').hidden = !esfFija;
     if (!esfFija) {
+      $('[data-pv-rotulo-esf]').textContent = e.estilo === 'M' ? 'Esfera' : 'Segundero';
       botones('esf', e.estilo === 'M'
-        ? [['MA', 'Murph, Numerales Crema'], ['MB', 'Murph, Numerales Blancos']]
+        ? [['MA', ESFERAS.MA.corto], ['MB', ESFERAS.MB.corto]]
         /* Con piel italiana en bronce o titanio solo está fotografiada la
            12/24 de segundero blanco: la del segundero rojo se tacha. Con el
            ante pasaba lo mismo, pero el acero ya tiene sus dos fotos, así
            que ahí solo se tacha en el PVD negro y en el bronce. */
-        : [['KR', 'Khaki, Segundero Rojo',
+        /* el blanco primero, que es el de serie (Óscar, 19/08/2026) */
+        : [['KB', ESFERAS.KB.corto],
+           ['KR', ESFERAS.KR.corto,
             (conPiel1224 && (esBronce || esTitanio)) ||
-            (e.correa === 'ANTE' && e.caja !== 'PL' && !!K1224_ANTE_CAJA[e.caja])],
-           ['KB', 'Khaki, Segundero Blanco']], e.esf);
+            (e.correa === 'ANTE' && e.caja !== 'PL' && !!K1224_ANTE_CAJA[e.caja])]], e.esf);
     }
 
     /* la correa: todas salvo el ante, que es del bronce */
