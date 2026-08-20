@@ -56,7 +56,14 @@
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
-      <div class="pv-hero">
+      <!-- pv-hero-llena: la foto ocupa el marco entero y su fondo de
+           estudio hace de fondo (Óscar, 19/08/2026: «el fondo de las
+           imágenes tiene que unirse con el del recuadro, no tiene que
+           parecer una imagen sobrepuesta»). Con el marco a un color plano
+           se veía el salto, porque el gris de las fotos no es plano: cae
+           hacia las esquinas. Las dos son cuadradas, así que llena sin
+           recortar nada. -->
+      <div class="pv-hero pv-hero-llena">
         <!-- SIN FOTOGRAFÍA (Óscar, 19/08/2026): «quiero comenzar de cero sin
              imágenes que no sirven». El visor queda vacío a propósito hasta
              que entre la serie nueva. Las TABLAS de lo que existe —qué caja
@@ -69,6 +76,11 @@
         <div class="pv-minis">
           <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Trinchera" hidden
                src="/assets/img/lunar-config/buckles/plata.avif?v=2">
+          <!-- El cierre de la correa técnica, la del 36. Es su hebilla
+               clásica plateada, fotografiada sobre la propia correa. -->
+          <img class="pv-mini" data-pv-tecnica-img hidden
+               alt="Cierre de la correa técnica del Trinchera"
+               src="/assets/img/trinchera-2026/cierres/natopiel.avif?v=1">
         </div>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
@@ -708,6 +720,8 @@
        19/08/2026 al vaciar el visor. */
     var heb = $('[data-pv-hebilla-img]');
     if (heb) heb.hidden = !hayCierre;
+    var tec = $('[data-pv-tecnica-img]');
+    if (tec) tec.hidden = e.correa !== 'NATOP';
     if (hayCierre && heb) {
       botones('cierre', Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
       heb.src = CIERRE_IMG + e.cierre + '.avif?v=2';
