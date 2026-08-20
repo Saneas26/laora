@@ -703,6 +703,13 @@
     var conPiel1224 = !!K1224_CORREA[e.correa];
     var esfFija = (esBronce || esTitanio) && e.estilo !== 'M' && !conPiel1224;
     $('[data-pv="esf"]').hidden = esfFija;
+    /* Y SE VACÍA, no solo se esconde. Si se deja el contenido de la vez
+       anterior, el enumerador del catálogo —que lee lo que la ficha ha
+       dibujado— cree que aquí siguen ofreciéndose aquellas esferas, las
+       prueba, la ficha las corrige a la fija y las descarta por no
+       coincidir. Resultado: el titanio del Khaki desapareció entero del
+       catálogo sin que nadie lo tocara. */
+    if (esfFija) $('[data-pv="esf"]').innerHTML = '';
     $('[data-pv-esf-fija]').hidden = !esfFija;
     if (!esfFija) {
       $('[data-pv-rotulo-esf]').textContent = e.estilo === 'M' ? 'Esfera' : 'Segundero';
