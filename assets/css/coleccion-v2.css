@@ -169,7 +169,28 @@
   background-position:68% 46%;
 }
 
-/* Lo que va encima del lienzo se vuelve claro./* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
+/* El Cero Cero: noche en la costa, ya oscurísima por la izquierda —mar
+   y cielo— y con las luces del casino a la derecha. El velo casi solo
+   tiene que apuntalar el texto; pasarse aquí sería apagar esas luces,
+   que son lo que cuenta la escena. */
+.cv2-lienzo-cerocero{
+  background-color:#05070c;
+  background-image:
+    linear-gradient(100deg, rgba(3,5,10,.86) 0%, rgba(3,5,10,.74) 34%, rgba(3,5,10,.30) 66%, rgba(3,5,10,.36) 100%),
+    url("/assets/img/cero-cero/editorial/espionaje-1600.avif");
+  background-image:
+    linear-gradient(100deg, rgba(3,5,10,.86) 0%, rgba(3,5,10,.74) 34%, rgba(3,5,10,.30) 66%, rgba(3,5,10,.36) 100%),
+    image-set(url("/assets/img/cero-cero/editorial/espionaje-1600.avif") 1x,
+              url("/assets/img/cero-cero/editorial/espionaje-2560.avif") 2x);
+  background-position:60% 46%;
+}
+/* Mientras un modelo no tenga su bloque de calibres, las dos líneas de
+   movimiento y materiales también se aclaran sobre el lienzo. */
+.cv2-lienzo .cv2-sub{color:rgba(255,255,255,.66)}
+.cv2-lienzo .cv2-sub-grande{color:#fff}
+.cv2-lienzo .cv2-sub-linea{color:rgba(255,255,255,.72)}
+
+/* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
    blanco andaba justo de contraste, aquí por fin brilla. */
 .cv2-lienzo .cv2-chip{background:#fff;color:var(--cv2-negro)}
 .cv2-lienzo h2{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.6)}
@@ -429,6 +450,12 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
     background-image:
       linear-gradient(180deg, rgba(6,7,6,.92) 0%, rgba(6,7,6,.89) 42%, rgba(6,7,6,.62) 74%, rgba(6,7,6,.72) 100%),
       url("/assets/img/trinchera-2026/editorial/soldado-1600.avif");
+  }
+  .cv2-lienzo-cerocero{
+    background-position:58% 44%;
+    background-image:
+      linear-gradient(180deg, rgba(3,5,10,.90) 0%, rgba(3,5,10,.86) 46%, rgba(3,5,10,.54) 78%, rgba(3,5,10,.66) 100%),
+      url("/assets/img/cero-cero/editorial/espionaje-1600.avif");
   }
   .cv2-lienzo-lunar{
     background-position:66% 40%;
