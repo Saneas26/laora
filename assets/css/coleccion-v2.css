@@ -353,6 +353,8 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
 }
 @media (max-width:820px){
   .cv2-hero>div{padding:44px 20px 28px}
+  .cv2-puertas{gap:10px;margin-top:26px}
+  .cv2-puerta{width:100%;text-align:left;font-size:15px;padding:16px 18px}
   .cv2-modelos div{padding:0 20px;gap:20px}
   .cv2-modelo{padding:48px 20px 40px}
   .cv2-cal{margin:36px 0 32px}
@@ -523,6 +525,24 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
    usa con el pulgar y porque el suelo de legibilidad de la casa son
    13 px, y aquí no bajamos de 15.
    ============================================================ */
+/* LAS DOS PUERTAS (Óscar, 20/08/2026). Debajo del titular: una para
+   el que se compra el reloj y otra para el que lo regala. Hasta que
+   no se pulsa una, las tres preguntas ni aparecen. */
+.cv2-puertas{ display:flex; flex-wrap:wrap; gap:14px; margin-top:32px }
+.cv2-puertas[hidden]{ display:none }
+.cv2-puerta{
+  font-family:var(--cv2-mono); font-size:16px; font-weight:700;
+  padding:17px 26px; border:2px solid var(--cv2-negro); border-radius:0;
+  background:#fff; color:var(--cv2-negro); cursor:pointer;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.cv2-puerta:hover{ background:var(--cv2-negro); color:#fff }
+.cv2-puerta-fuerte{ background:var(--cv2-negro); color:#fff }
+.cv2-puerta-fuerte:hover{ background:var(--cv2-oro); border-color:var(--cv2-oro); color:var(--cv2-negro) }
+.cv2-puerta:focus-visible{ outline:2px solid var(--cv2-oro); outline-offset:3px }
+.cv2-puerta[aria-expanded="true"]{ border-color:var(--cv2-oro) }
+
+.rec[hidden]{ display:none }
 .rec{ padding:56px 6vw 60px; background:var(--cv2-crema-hero); border-bottom:1px solid var(--cv2-linea) }
 .rec-caja{ max-width:1000px; margin:0 auto }
 
@@ -550,6 +570,11 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
 /* Cuando las respuestas salen de su ficha y no de sus clics, se dice:
    que la página acierte sin preguntar está bien; que no se sepa por
    qué, no. */
+/* El recordatorio de los 30 días: solo sale cuando el reloj es para
+   otro, que es cuando de verdad tranquiliza. */
+.rec-red{ margin:0 0 22px; padding:14px 16px; border-left:2px solid var(--cv2-oro);
+          background:var(--cv2-crema); font-size:15px; line-height:1.45; font-weight:600 }
+
 .rec-recordado{ margin:0 0 22px; padding:14px 16px; background:var(--cv2-crema);
                 font-size:15px; line-height:1.5 }
 .rec-recordado b{ font-weight:700 }
