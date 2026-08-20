@@ -178,7 +178,8 @@ function precisa() {
    ============================================================ */
 function trinchera() {
   const L = motorDe('trinchera.html',
-    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, NATOS, ANTES, PESPUNTES, CIERRES, MURPH_CORREA, ' +
+    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, NATOS, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
+    'CIERRES_K, MURPH_CORREA, conCierreK, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
@@ -219,19 +220,25 @@ function trinchera() {
           /* El nato pasó a ser UNO con cinco colores (Óscar, 19/08/2026), y
              comparte el grupo «color» del HTML con el nato+piel y el ante. */
           const natos     = correa === 'NATO' ? ofrece('color', Object.keys(L.NATOS || {})) : [null];
+          /* La piel del khaki, que desde el 19/08/2026 tiene tres colores
+             y dos hebillas en vez de ser una correa suelta. */
+          const pielesK   = correa === 'PIELO' ? ofrece('color', Object.keys(L.PIELES_K || {})) : [null];
           const antes     = (correa === 'ANTE' && estilo === 'M') ? ofrece('ante', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
 
           for (const color of colores)
           for (const nato of natos)
+          for (const pielk of pielesK)
           for (const ante of antes)
           for (const pesp of pespuntes) {
             pon({ estilo, mov, diam, caja, esf, correa });
             if (color) L.e.color = color;
             if (nato) L.e.nato = nato;
+            if (pielk) L.e.pielk = pielk;
             if (ante) L.e.ante = ante;
             if (pesp) L.e.pesp = pesp;
-            const cierres = L.conCierre() ? ofrece('cierre', Object.keys(L.CIERRES)) : [null];
+            const cierres = (L.conCierre() || L.conCierreK())
+              ? ofrece('cierre', Object.keys(L.conCierreK() ? L.CIERRES_K : L.CIERRES)) : [null];
 
             for (const cierre of cierres) {
               if (cierre) L.e.cierre = cierre;
@@ -244,7 +251,9 @@ function trinchera() {
                 L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
                   (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.ESFERAS[s.esf].nombre +
                   ' · ' + L.MOVS[s.mov].nombre,
-                s.correa === 'NATO'
+                s.correa === 'PIELO'
+                  ? 'Piel ' + L.PIELES_K[s.pielk][0].toLowerCase() + ' · ' + L.CIERRES_K[s.cierre].toLowerCase()
+                  : s.correa === 'NATO'
                   ? 'Nato ' + L.NATOS[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
                   : s.correa === 'NATOP'
                   ? 'Nato + piel genuina, ' + L.COLORES[s.color][0].toLowerCase() + ', hebilla clásica'

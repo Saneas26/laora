@@ -34,6 +34,8 @@ COLORES = {
     'gris-claro': {'tejido': (0,   0.00, 1.85), 'piel': (0,   0.00, 1.30)},
     'beige':      {'tejido': (42,  0.22, 1.85), 'piel': None},
     'negro-gris': {'tejido': (0,   0.00, 0.55), 'piel': (0,   0.00, 0.75)},
+    # y la piel del khaki, que es la misma correa en tres tonos
+    'marron-oscuro': {'tejido': None, 'piel': (24, 0.46, 0.46)},
 }
 
 
