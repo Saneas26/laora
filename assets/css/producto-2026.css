@@ -273,8 +273,17 @@ main.cv2{ overflow:visible; overflow-x:clip }
 
 @media (max-width:900px){
   /* En una sola columna el visor ocupa la pantalla entera: pegarlo
-     dejaría las elecciones fuera de cuadro. */
-  .pv-visor-fijo .pv-hero{position:static}
+     dejaría las elecciones fuera de cuadro. RELATIVE, no STATIC
+     (21/08/2026): con static el marco deja de ser el ancla de lo que
+     lleva dentro y todo lo colocado en sus esquinas se escapaba al pie
+     de la página — el aviso de «puede contener errores de diseño» se
+     leía encima del paso «Estilo», y con él se iban la miniatura de la
+     tapa, la del forro y el botón de ampliar. Relative despega igual y
+     mantiene el ancla. */
+  /* OJO al `top:auto`: relative SÍ obedece al `top:92px` del sticky —
+     static lo ignoraba— y sin esto la foto bajaba 92 px, dejando un
+     hueco blanco entre la cabecera y el reloj. */
+  .pv-visor-fijo .pv-hero{position:relative;top:auto}
   .pv-visor-fijo>.pv-extras{margin-top:0}
 }
 
@@ -405,3 +414,66 @@ main.cv2{ overflow:visible; overflow-x:clip }
 /* `hidden` no basta contra un `display:flex` propio: la regla de la clase
    gana al atributo. Sin esta línea el cartel se quedaba encima de la foto. */
 .pv-sinfoto[hidden]{display:none}
+
+/* ---------- AMPLIAR LA FOTO (21/08/2026) ----------
+   Cuatrocientos euros de reloj y no se podía acercar la nariz al dial.
+   La lupa la lleva SOLO el Trinchera de momento, y por eso el cursor va
+   con la clase .pv-ampliable: si se pusiera en «.pv-hero img» a secas,
+   las otras seis fichas enseñarían un cursor de lupa que no amplía
+   nada, que es peor que no tenerlo. */
+.pv-hero img.pv-ampliable{cursor:zoom-in}
+/* Arriba a la derecha: abajo a la izquierda se le echaba encima el
+   «La imagen puede contener errores de diseño», que va anclado a la
+   derecha y crece hacia el otro lado. Arriba a la izquierda está la nota
+   del segundero, y abajo a la derecha, la miniatura del forro. */
+.pv-ampliar{
+  position:absolute;right:10px;top:10px;
+  display:inline-flex;align-items:center;gap:6px;
+  min-height:36px;padding:0 12px;
+  background:#fff;border:1px solid var(--cv2-linea);
+  font-family:var(--cv2-mono);font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--cv2-gris);
+  cursor:zoom-in;
+}
+@media (hover:hover) and (pointer:fine){
+  .pv-ampliar:hover{color:var(--cv2-negro);border-color:var(--cv2-negro)}
+}
+.pv-ampliar[hidden]{display:none}
+
+.pv-lupa{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(20,19,18,.94);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;padding:24px;
+}
+.pv-lupa[hidden]{display:none}
+/* El alto descuenta el pie y los márgenes: con 92vh a secas, la frase de
+   abajo se montaba encima de la correa. */
+.pv-lupa img{
+  max-width:min(92vw,80vh);max-height:80vh;
+  width:auto;height:auto;display:block;background:#e9e9e7;
+}
+.pv-lupa-cerrar{
+  position:absolute;top:14px;right:14px;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:none;border:1px solid rgba(255,255,255,.5);color:#fff;
+  font-size:20px;line-height:1;cursor:pointer;
+}
+.pv-lupa-cerrar:hover{border-color:#fff}
+.pv-lupa-pie{
+  margin:0;max-width:min(92vw,640px);text-align:center;
+  font-family:var(--cv2-mono);font-size:12px;line-height:1.5;
+  letter-spacing:.04em;color:rgba(255,255,255,.8);
+}
+
+/* ---------- LA GALERÍA DICE DE QUÉ RELOJ ES (21/08/2026) ----------
+   Las dos fotos grandes de la columna son SIEMPRE el Murph de acero con
+   piel negra. Mientras el cliente esté configurando ese mismo reloj no
+   hace falta decir nada; en cuanto elige otro, hay que avisarle de que
+   esas dos no son el suyo. La norma de la casa es no enseñar nunca un
+   reloj que no sea el elegido sin decirlo. */
+.pv-galeria-nota{
+  grid-column:1/-1;margin:0;
+  font-size:12px;line-height:1.5;color:var(--cv2-gris);
+}
+.pv-galeria-nota[hidden]{display:none}
