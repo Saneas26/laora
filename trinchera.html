@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=33">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=39">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=40">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -87,6 +87,9 @@
           <span>Estamos rehaciendo todas las imágenes del Trinchera. Las medidas, los materiales y el precio son los definitivos.</span>
         </div>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
+        <!-- Ampliar: además del clic en la foto, un botón de verdad, que
+             con el teclado a una imagen no se llega. -->
+        <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
       </div>
 
     </div>
@@ -238,6 +241,9 @@
              sizes="(max-width:900px) 50vw, 23vw"
              alt="El Trinchera Murph de tres cuartos, con la corona a la vista" loading="lazy" decoding="async">
       </figure>
+      <p class="pv-galeria-nota" data-pv-galeria-nota hidden>Estas dos fotos son del
+        <b>Murph en acero con esfera crema y piel negra</b>: están para ver el reloj de
+        cerca y en la muñeca, no son la configuración que has elegido.</p>
     </div>
 
   </div>
@@ -751,6 +757,32 @@
                        DUON: 'duonegra', DUOM: 'duomarron', DUOV: 'duoverde',
                        DUOA: 'duoante', PIELO: 'pielkhaki' };
   var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'beige', NGR: 'negrogris' };
+  /* La frase que describe el reloj elegido. Se usa en el alt de la foto
+     y en el pie de la lupa; es la misma que diría alguien por teléfono. */
+  var CAJA_DICHA = { PL: 'caja de acero plata', NG: 'caja negra de PVD',
+                     BR: 'caja de bronce', TI: 'caja de titanio' };
+  function correaDicha() {
+    if (e.correa === 'PIELO')  return 'correa de piel ' + PIELES_K[e.pielk][0].toLowerCase();
+    if (e.correa === 'NATO')   return 'correa nato ' + NATOS[e.nato][0].toLowerCase();
+    if (e.correa === 'NATOP')  return 'correa nato con forro de piel, en ' + COLORES[e.color][0].toLowerCase();
+    if (e.correa === 'ANTE')   return 'correa de ante ' + ANTES[e.ante][0].toLowerCase();
+    if (e.correa === 'DUOA')   return 'correa de ante ' + ANTES[e.ante][0].toLowerCase() + ' y brazalete de acero';
+    if (DUOS_M[e.correa])      return 'correa de piel ' + DUOS_M[e.correa][0].toLowerCase() + ' y brazalete de acero';
+    if (e.correa === 'ACERO')   return 'brazalete de acero';
+    if (e.correa === 'ACERONG') return 'brazalete de acero negro de PVD';
+    return 'correa de ' + CORREAS[e.correa].nombre.toLowerCase();
+  }
+  function esferaDicha() {
+    /* «Khaki, Segundero Rojo» se lee mal en mitad de una frase: el nombre
+       propio se queda en mayúscula y el resto baja. */
+    var partes = ESFERAS[e.esf].nombre.split(', ');
+    return partes.length > 1 ? partes[0] + ' con ' + partes[1].toLowerCase() : partes[0];
+  }
+  function descripcion() {
+    return 'laOra Trinchera de ' + e.diam + ' mm, ' + CAJA_DICHA[e.caja] +
+           ', esfera ' + esferaDicha() + ' y ' + correaDicha();
+  }
+
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
     if (!caja || !esf || !correa) return null;
@@ -1134,6 +1166,26 @@
         return SERIE_IMG + s + '/' + foto + '.avif' + SERIE_V + ' ' + s + 'w';
       }).join(', ');
       img.sizes = '(max-width:900px) 100vw, 46vw';
+      /* EL ALT DICE QUÉ RELOJ ES (21/08/2026). Antes las 220
+         configuraciones compartían un «laOra Trinchera» a secas: para
+         Google Imágenes eran el mismo reloj, y para quien no ve la
+         pantalla, ninguno. El nombre del fichero ya lo sabía; ahora lo
+         dice también el texto. */
+      img.alt = descripcion();
+      img.classList.add('pv-ampliable');
+    }
+    /* La lupa solo cuando hay foto que ampliar. */
+    var boton = $('[data-pv-ampliar]');
+    if (boton) boton.hidden = !foto;
+
+    /* LA GALERÍA FIJA. Las dos fotos grandes son siempre el Murph en
+       acero, esfera crema y piel negra con pespunte blanco. Si el
+       cliente está mirando justo ese reloj no hay nada que aclarar; si
+       no, se le dice, que es la norma de la casa. */
+    var notaGal = $('[data-pv-galeria-nota]');
+    if (notaGal) {
+      notaGal.hidden = (e.estilo === 'M' && e.caja === 'PL' && e.esf === 'MA' &&
+                        e.correa === 'PIELN' && e.pesp === 'B');
     }
 
     /* la ficha técnica */
@@ -1281,6 +1333,64 @@
   })();
 
 </script>
+
+<!-- ============ LA LUPA ============
+     La foto a pantalla completa, con la de 1600 —que es la que hay— y el
+     pie diciendo qué reloj es. Se cierra con la equis, con Escape o
+     pulsando fuera. Vive fuera de la ficha para que ningún «position» de
+     la columna pegajosa la recorte. -->
+<div class="pv-lupa" data-pv-lupa hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button type="button" class="pv-lupa-cerrar" data-pv-lupa-cerrar aria-label="Cerrar la foto">&#10005;</button>
+  <img data-pv-lupa-img src="" alt="">
+  <p class="pv-lupa-pie" data-pv-lupa-pie></p>
+</div>
+
+<script>
+/* La lupa del visor. Aparte del configurador a propósito: no toca su
+   estado, solo lee la foto que ya está puesta. */
+(function () {
+  var capa   = document.querySelector('[data-pv-lupa]');
+  var grande = document.querySelector('[data-pv-lupa-img]');
+  var pie    = document.querySelector('[data-pv-lupa-pie]');
+  var foto   = document.querySelector('[data-pv-foto]');
+  if (!capa || !grande || !foto) return;
+  var devolverElFoco = null;
+
+  function abrir() {
+    /* Si no hay foto puesta no hay nada que ampliar. */
+    if (foto.hidden || !foto.getAttribute('src')) return;
+    /* Se lee el ATRIBUTO src, no currentSrc: currentSrc es la que el
+       navegador tiene cargada, y va por detrás —al abrir la lupa justo
+       después de cambiar de correa enseñaba la foto anterior—. El
+       atributo lo acaba de escribir pinta(), así que siempre es el
+       reloj que el cliente ve elegido. La de 1600 es la mayor que hay. */
+    grande.src = foto.getAttribute('src').replace('/1200/', '/1600/');
+    grande.alt = foto.alt;
+    pie.textContent = foto.alt;
+    capa.hidden = false;
+    document.body.style.overflow = 'hidden';
+    devolverElFoco = document.activeElement;
+    document.querySelector('[data-pv-lupa-cerrar]').focus();
+  }
+  function cerrar() {
+    capa.hidden = true;
+    document.body.style.overflow = '';
+    if (devolverElFoco && devolverElFoco.focus) devolverElFoco.focus();
+  }
+
+  foto.addEventListener('click', abrir);
+  document.addEventListener('click', function (ev) {
+    if (ev.target.closest('[data-pv-ampliar]')) { abrir(); return; }
+    if (ev.target.closest('[data-pv-lupa-cerrar]')) { cerrar(); return; }
+    /* pulsar el fondo cierra; pulsar la foto, no */
+    if (ev.target === capa) cerrar();
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !capa.hidden) cerrar();
+  });
+})();
+</script>
+
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
