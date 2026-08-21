@@ -11,3 +11,7 @@ entrega-temporal/
 
 # Rastro del CLI de Supabase, no es del sitio
 supabase/
+
+# Las fotos originales de las madres del Lunar: se sacan solas del commit
+# c0bf6d0 (herramientas/alinear_madres.py). No hace falta duplicarlas.
+herramientas/madres-origen/
