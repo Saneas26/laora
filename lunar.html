@@ -86,9 +86,8 @@
           <span class="cv2-chip">LO-03 · Cronógrafo</span>
         </div>
         <h1>Lunar</h1>
-        <p class="pv-desc">Nuestro homenaje al <b>Omega Speedmaster Moonwatch</b>. Cronógrafo de tacto mecánico:
-          el segundero arranca al instante, barre la esfera y vuelve a cero de golpe. Elige
-          la caja, la esfera y las agujas, y móntalo a tu gusto al precio honesto.</p>
+        <!-- El párrafo del homenaje se quitó por orden de Óscar (21/08/2026):
+             aquí se configura, no se cuenta. -->
 
         <div class="pv-grupo">
           <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_MQ326</b></p>
@@ -122,7 +121,7 @@
 
         <div class="pv-grupo" data-pv-grupo="color">
           <p class="pv-rotulo">Color <b data-pv-color>Negro</b></p>
-          <div class="pv-opciones" data-pv="color"></div>
+          <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
         <div class="pv-grupo" data-pv-grupo="pespunte">
@@ -303,8 +302,6 @@
     'nato-pasadores-negro-gris': { coste: 11.29, cierre: 'Hebilla clásica plateada',
       tec: 'nato de tejido negro con franjas grises, pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
 
-    'nato-espiga-topo': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
-      tec: 'tejido de espiga color topo con pespunte blanco, hebilla mariposa de acero plateado' },
     'nato-espiga-antracita': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
       tec: 'tejido de espiga antracita con pespunte blanco, hebilla mariposa de acero plateado' },
     'nato-espiga-gris': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
@@ -394,7 +391,6 @@
 
     /* NATO = el tejido de espiga con hebilla mariposa (5,48 €). */
     'nato': { nombre: 'Nato', colores: {
-      'topo':       { nombre: 'Topo',       color: '#8C7F76', correa: 'nato-espiga-topo' },
       'antracita':  { nombre: 'Antracita',  color: '#3C3E40', correa: 'nato-espiga-antracita' },
       'gris':       { nombre: 'Gris',       color: '#6E7175', correa: 'nato-espiga-gris' },
       'azul-claro': { nombre: 'Azul claro', color: '#A9C9E6', correa: 'nato-espiga-azul-claro' },
@@ -601,12 +597,23 @@
             return '<span>' + t + '</span>';
           }).join('') + '</span>'
         : mapa[k].nombre;
+      /* Los colores, como en el Trinchera (Óscar, 21/08/2026): un cuadrado
+         con el color y debajo su nombre. */
       b.innerHTML = mapa[k].color
-        ? '<i class="pv-punto" style="background:' + mapa[k].color + '"></i>' + rotulo
+        ? '<i style="background:' + mapa[k].color + '"></i><small>' + rotulo + '</small>'
         : rotulo;
       b.setAttribute('aria-pressed', String(e[grupo] === k));   // null = ninguno marcado
       if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
-      b.addEventListener('click', function () { e[grupo] = k; normaliza(); pinta(); });
+      b.addEventListener('click', function () {
+        e[grupo] = k; normaliza(); pinta();
+        /* AL ELEGIR TIPO DE CORREA, EL COLOR SE VIENE A LA VISTA (Óscar,
+           21/08/2026), como en el Trinchera: es el paso que aparece justo
+           después del que acabas de pulsar. */
+        if (grupo === 'tipo') {
+          var gc = $('[data-pv="color"]').closest('.pv-grupo');
+          if (gc && !gc.hidden && gc.scrollIntoView) gc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
       caja.appendChild(b);
     });
   }
