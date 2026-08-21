@@ -9,7 +9,18 @@ cabeza, se pisan: asas dobles, bisel que asoma, esfera descentrada.
 Óscar lo vio en los natos el 21/08/2026; medido, las madres venían hasta
 un 10 % más pequeñas y 10-30 px corridas respecto a la cabeza.
 
-LA MEDIDA es el anillo de cifras del taquímetro, por VOTACIÓN de círculo:
+LA MEDIDA es el BORDE EXTERIOR DEL BISEL —el círculo negro que rodea la
+esfera—, buscado por rayos en los tres arcos limpios (izquierda entera y
+las dos diagonales de la derecha, esquivando asas y pulsadores) y
+ajustado con recorte de atípicos. Antes se usaba el anillo del
+taquímetro y era peor: la cabeza y la madre son fotos de relojes con
+PROPORCIONES distintas —bisel 369 px con taquímetro 324 en la cabeza,
+410 con 324 en las madres—, así que igualando el taquímetro el bisel se
+salía por fuera, y con la esfera negra y dorada cantaba (Óscar,
+21/08/2026). Igualando el bisel, la cabeza tapa su disco entero y sus
+asas, más grandes, tapan las de la madre.
+
+La medida antigua, por votación del taquímetro:
 se toman los píxeles claros rodeados de negro (las cifras; la caja de
 acero es clara rodeada de claro y queda fuera) y se busca el centro y
 radio que más de ellos tienen a la misma distancia. Un borde o un
@@ -90,13 +101,31 @@ def acuerdo(out, ref):
 
 if __name__ == '__main__':
     filtros = sys.argv[1:]
-    m = json.load(open(MANIFEST)); ref = referencia()
-    print('cabeza de referencia: centro=(%d,%d) R=%d (%d votos)' % (ref[1], ref[2], ref[3], ref[0]))
+    from _bisel_lunar import bisel_ext
+    m = json.load(open(MANIFEST))
+    r = Image.open(CABEZA_REF).convert('RGBA')
+    bgr = Image.new('RGBA', r.size, FONDO + (255,)); bgr.alpha_composite(r)
+    rx, ry, rR, err, n = bisel_ext(bgr)
+    print('cabeza de referencia: bisel centro=(%.1f,%.1f) R=%.1f (err %.1f, %d puntos)' % (rx, ry, rR, err, n))
     for k, st in m['straps'].items():
         if filtros and not any(f in k for f in filtros): continue
         if k in NO_TOCAR: print('%-36s es la foto de la cabeza: no se toca' % k); continue
         ruta = '.' + st['src'].split('?')[0]
-        im = Image.open(ruta); med = voto(im)
+        im = Image.open(ruta)
+        mx, my, mR, merr, mn = bisel_ext(im)
+        if mn < 25 or merr > 8:
+            print('%-36s bisel dudoso (err %.1f, %d puntos): NO se toca' % (k, merr, mn)); continue
+        k_esc = rR / mR
+        W, H = im.size
+        g = im.convert('RGB').resize((round(W * k_esc), round(H * k_esc)), Image.LANCZOS)
+        out = Image.new('RGB', (W, H), FONDO); out.paste(g, (round(rx - mx * k_esc), round(ry - my * k_esc)))
+        out.save(ruta, quality=90)
+        ver = st['src'].split('?v='); v = int(ver[1]) + 1 if len(ver) > 1 else 2
+        st['src'] = ver[0] + '?v=%d' % v
+        st['alineada'] = ('21/08/2026: por el BISEL EXTERIOR. Era (%.0f,%.0f) R=%.0f → escala %.3f '
+                          'para casar con el bisel de la cabeza (%.0f,%.0f) R=%.0f' % (mx, my, mR, k_esc, rx, ry, rR))
+        print('%-36s bisel (%.0f,%.0f) R=%.0f → escala %.3f · v%d' % (k, mx, my, mR, k_esc, v))
+        continue
         if med[0] < VOTOS_MIN:
             print('%-36s medida dudosa (%d votos): NO se toca, revisar a ojo' % (k, med[0])); continue
         out, esc = alinear(im, med, ref); ac = acuerdo(out, ref)
