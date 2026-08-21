@@ -228,6 +228,16 @@
   margin:0 0 26px;max-width:1000px;
 }
 .cv2-cal-titulo span{color:var(--cv2-gris)}
+/* Cuando el rótulo no es una etiqueta sino una FRASE (Óscar, 21/08/2026,
+   en el Lunar), se le quita la versalita y el espaciado: cien caracteres
+   en mayúsculas espaciadas no se leen, se descifran. Se queda el mono,
+   que es lo que la hace de la casa, y el remate en claro con la primera
+   mitad un tono por debajo. */
+.cv2-cal-frase{
+  text-transform:none;letter-spacing:0;
+  font-size:clamp(19px,2.4vw,32px);line-height:1.32;
+}
+
 .cv2-cal-rejilla{
   display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;
 }
