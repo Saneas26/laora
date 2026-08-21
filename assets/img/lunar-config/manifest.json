@@ -98,12 +98,11 @@
   "brazalete-negro-pvd": {
    "src": "/assets/img/lunar-config/straps/brazalete-negro-pvd.webp?v=3",
    "cabezasPermitidas": [
-    "cab-acero-",
     "cab-negra-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/brazalete-negro-pvd-madre-4k.png",
-   "nota": "IMAGEN MADRE del brazalete negro PVD, CAMBIADA por Oscar el 20/08 22h: la foto nueva viene con CAJA NEGRA y bisel negro (omega-speedmaster-esfera-lunar-pvd-negro, 900px), alineada por correlacion de siluetas (escala 1.52, dx -64, dy -46) a la geometria de la madre anterior. Comprobado que la cabeza negra Y la de acero tapan la caja de la foto. Origen en masters-2026/lunar/capas/brazalete-negro-pvd-caja-negra-origen-900.png",
+   "nota": "IMAGEN MADRE del brazalete negro PVD, CAMBIADA por Oscar el 20/08 22h: la foto nueva viene con CAJA NEGRA y bisel negro (omega-speedmaster-esfera-lunar-pvd-negro, 900px), alineada por correlacion de siluetas (escala 1.52, dx -64, dy -46) a la geometria de la madre anterior. Comprobado que la cabeza negra Y la de acero tapan la caja de la foto. Origen en masters-2026/lunar/capas/brazalete-negro-pvd-caja-negra-origen-900.png REGLA (Oscar, 21/08): el brazalete negro PVD es SOLO para la caja negra; la caja de acero con bisel negro no lo lleva.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
   },
   "piel-italiana-marron-pespunte-tono": {
@@ -373,8 +372,9 @@
  },
  "default": {
   "head": "cab-acero-bnegro-agujas-plateadas",
-  "strap": "piel-negra-perforada-pespunte-blanco",
-  "tapa": "solida-acero"
+  "strap": "brazalete-acero-316l-cinco-columnas",
+  "tapa": "solida-acero",
+  "nota": "LA CONFIGURACION DE ENTRADA ES LA ORIGINAL (Oscar, 21/08/2026): caja de acero, bisel negro, esfera negra, agujas plateadas y brazalete de acero. Norma para todos los relojes: se entra por el original."
  },
  "alineado": {
   "nota": "Las cabezas originales (assets/heads/) venian de generaciones distintas: hasta 13 px de desvio y 6,6% de diferencia de tamano de caja. Se han alineado TODAS a la geometria de la cabeza de referencia, que es la fotografiada con esta correa. Solo se ha movido y escalado la imagen entera; el dibujo no se ha tocado y los originales siguen en assets/heads/.",
@@ -388,13 +388,13 @@
  },
  "tapas": {
   "solida-acero": {
-   "src": "/assets/img/lunar-config/casebacks/tapa-solida-acero.webp?v=1"
+   "src": "/assets/img/lunar-config/casebacks/tapa-solida-acero.webp?v=2"
   },
   "lunar-color": {
-   "src": "/assets/img/lunar-config/casebacks/tapa-lunar-color.webp?v=1"
+   "src": "/assets/img/lunar-config/casebacks/tapa-lunar-color.webp?v=2"
   },
   "huella-astronauta": {
-   "src": "/assets/img/lunar-config/casebacks/tapa-huella-astronauta.webp?v=1"
+   "src": "/assets/img/lunar-config/casebacks/tapa-huella-astronauta.webp?v=2"
   }
  },
  "tapas_nota": "Las tres tapas roscadas sólidas del proveedor, sin cambio de precio. Venían de generaciones distintas (Ø 900/918/915 en lienzo 1254): se han igualado con herramientas/alinear_tapas.py moviendo y escalando la imagen entera, sin tocar el dibujo. Masters en masters-2026/lunar/tapas/.",
