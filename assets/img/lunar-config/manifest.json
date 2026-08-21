@@ -41,13 +41,13 @@
    ]
   },
   "brazalete-acero-316l-cinco-columnas": {
-   "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=3",
+   "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=4",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
-   "nota": "IMAGEN MADRE (orden de Oscar, 17/08): la capa es la foto completa del preview acero-bisel-negro-esfera-negra-brazalete-acero-316l-4k, con el brazalete TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria: ancho 811, centro 568). Master en masters-2026/lunar/capas/brazalete-acero-316l-madre-4k.png"
+   "nota": "IMAGEN MADRE del brazalete de acero, CAMBIADA por Oscar el 21/08: la foto nueva (omega-speedmaster-esfera-lunar-fondo-eae8e8, 900px, caja acero + bisel negro + brazalete acero) alineada por correlacion de siluetas (escala 1.672, dx -128, dy -104) a la geometria de la madre anterior. Comprobado que la tapan las cabezas de acero con bisel negro, bisel azul y racing. Origen en masters-2026/lunar/capas/brazalete-acero-316l-bisel-negro-origen-900.png"
   },
   "piel-italiana-negra": {
    "src": "/assets/img/lunar-config/straps/piel-italiana-negra.webp?v=3",
