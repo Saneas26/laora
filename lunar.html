@@ -42,13 +42,16 @@
      las asas y el encuentro con la correa son los de la foto de verdad.
      La máscara es un SVG con el mismo lienzo (1254) que las fotos y se
      coloca igual que ellas —contain y centrada—, así que cuadra sea cual
-     sea la forma del marco; con clip-path habría que saber el alto. */
+     sea la forma del marco; con clip-path habría que saber el alto.
+     EL CÍRCULO NO SE TOCA A OJO: es el borde exterior del bisel medido por
+     herramientas/_bisel_lunar.py —centro (628,2 · 567,3) y R=370—, con
+     medio píxel de margen para que nunca asome el acero de la cabeza. */
   .pv-hero img.pv-capa.pv-disco{
     -webkit-mask-image:var(--disco); mask-image:var(--disco);
     -webkit-mask-size:contain; mask-size:contain;
     -webkit-mask-position:center; mask-position:center;
     -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat }
-  .pv-capas{ --disco:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1254 1254'%3E%3Ccircle cx='627.4' cy='565.3' r='371' fill='%23fff'/%3E%3C/svg%3E") }
+  .pv-capas{ --disco:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1254 1254'%3E%3Ccircle cx='628.2' cy='567.3' r='368.5' fill='%23fff'/%3E%3C/svg%3E") }
 </style>
 </head>
 <body><header class="site-header">
@@ -77,7 +80,7 @@
     <div class="pv-galeria">
       <div class="pv-hero pv-capas">
         <img class="pv-capa" data-pv-correa-img alt="Brazalete del Lunar"
-             src="/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=11">
+             src="/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=12">
         <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
              src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
         <div class="pv-minis">
@@ -687,11 +690,15 @@
        · Solo cuando hay que cambiar la caja —cabeza negra sobre una foto
          de acero— se monta la cabeza entera. */
     var capaCorrea = M.straps[correaActual()] || {};
+    /* La piel perforada no es una foto del reloj: es la CORREA SOLA con el
+       hueco de la caja, así que ahí la cabeza va SIEMPRE entera. */
+    var soloCorrea = !!capaCorrea.soloCorrea;
     var cajaFoto = capaCorrea.cajaDeLaFoto || 'acero';
     var cajaCabeza = cabeza.indexOf('cab-negra-') === 0 ? 'negra' : 'acero';
-    var sobra = (capaCorrea.cabezaDeLaFoto === cabeza);
+    var sobra = !soloCorrea && (capaCorrea.cabezaDeLaFoto === cabeza);
     $('[data-pv-cabeza-img]').hidden = sobra;
-    $('[data-pv-cabeza-img]').classList.toggle('pv-disco', !sobra && cajaCabeza === cajaFoto);
+    $('[data-pv-cabeza-img]').classList.toggle('pv-disco',
+      !sobra && !soloCorrea && cajaCabeza === cajaFoto);
     $('[data-pv-cabeza-img]').src = M.heads[cabeza];
     $('[data-pv-correa-img]').src = M.straps[correaActual()].src;
     $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
@@ -779,7 +786,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=36')
+  fetch('/assets/img/lunar-config/manifest.json?v=37')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
