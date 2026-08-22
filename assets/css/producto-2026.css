@@ -477,3 +477,10 @@ main.cv2{ overflow:visible; overflow-x:clip }
   font-size:12px;line-height:1.5;color:var(--cv2-gris);
 }
 .pv-galeria-nota[hidden]{display:none}
+
+/* ---------- LA LUPA DEL LUNAR (21/08/2026) ----------
+   Su foto no es una imagen: son dos capas superpuestas y la de arriba
+   puede llevar la máscara del disco. La lupa clona el visor entero y lo
+   agranda, así que aquí solo hace falta darle tamaño al clon. */
+.pv-lupa-marco{width:min(92vw,80vh);aspect-ratio:1/1}
+.pv-lupa-visor{width:100%;height:100%;border:0}
