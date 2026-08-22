@@ -157,13 +157,16 @@
    "cabezasPermitidas": [
     "cab-acero-"
    ],
-   "cabezasExcluidas": [],
+   "cabezasExcluidas": [
+    "cab-acero-bazul-"
+   ],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-verde-militar-madre-4k.png",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0025; queda en (627.0,566.6) R=369.7 contra la cabeza (628.2,567.3) R=370.0",
    "fondo": "#d8d5d6",
    "soloCorrea": true,
-   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 32 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 32 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera.",
+   "nota_regla": "REGLA (Óscar, 22/08): el bisel azul no lleva esta correa."
   },
   "nato-pasadores-azul": {
    "src": "/assets/img/lunar-config/straps/nato-pasadores-azul.webp?v=9",
@@ -209,7 +212,8 @@
   "nato-pasadores-negro": {
    "src": "/assets/img/lunar-config/straps/nato-pasadores-negro.webp?v=9",
    "cabezasPermitidas": [
-    "cab-acero-"
+    "cab-acero-",
+    "cab-negra-"
    ],
    "cabezasExcluidas": [
     "cab-acero-bazul-"
@@ -219,12 +223,14 @@
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0023; queda en (628.1,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
    "fondo": "#d8d5d6",
    "soloCorrea": true,
-   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 31 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 31 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera.",
+   "nota_regla": "ABIERTA A LA CAJA NEGRA (Óscar, 22/08): caja negra con esfera negra la lleva."
   },
   "nato-pasadores-negro-gris": {
    "src": "/assets/img/lunar-config/straps/nato-pasadores-negro-gris.webp?v=9",
    "cabezasPermitidas": [
-    "cab-acero-"
+    "cab-acero-",
+    "cab-negra-"
    ],
    "cabezasExcluidas": [
     "cab-acero-bazul-"
@@ -234,12 +240,14 @@
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0020; queda en (628.6,567.1) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "fondo": "#d8d5d6",
    "soloCorrea": true,
-   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 36 arriba y 29 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 36 arriba y 29 abajo. El reloj de la foto se ha quitado: la cabeza va entera.",
+   "nota_regla": "ABIERTA A LA CAJA NEGRA (Óscar, 22/08): caja negra con esfera negra la lleva."
   },
   "nato-espiga-antracita": {
    "src": "/assets/img/lunar-config/straps/nato-espiga-antracita.webp?v=9",
    "cabezasPermitidas": [
-    "cab-acero-"
+    "cab-acero-",
+    "cab-negra-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-espiga-antracita-madre-4k.png",
@@ -247,7 +255,8 @@
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.0 → escala 1.0017; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
    "fondo": "#d8d5d6",
    "soloCorrea": true,
-   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 23 arriba y 24 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 23 arriba y 24 abajo. El reloj de la foto se ha quitado: la cabeza va entera.",
+   "nota_regla": "ABIERTA A LA CAJA NEGRA (Óscar, 22/08): caja negra con esfera negra la lleva."
   },
   "nato-espiga-gris": {
    "src": "/assets/img/lunar-config/straps/nato-espiga-gris.webp?v=9",
@@ -306,7 +315,8 @@
   "caucho-negro-negro": {
    "src": "/assets/img/lunar-config/straps/caucho-negro-negro.webp?v=8",
    "cabezasPermitidas": [
-    "cab-acero-"
+    "cab-acero-",
+    "cab-negra-"
    ],
    "cabezasExcluidas": [
     "cab-acero-bazul-"
@@ -316,7 +326,8 @@
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (632,581) R=350.1 → escala 1.0520; queda en (627.9,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero",
-   "fondo": "#e5e3e3"
+   "fondo": "#e5e3e3",
+   "nota_regla": "ABIERTA A LA CAJA NEGRA (Óscar, 22/08): caja negra con esfera negra la lleva."
   },
   "caucho-negro-blanco": {
    "src": "/assets/img/lunar-config/straps/caucho-negro-blanco.webp?v=8",
@@ -437,13 +448,16 @@
    "cabezasPermitidas": [
     "cab-acero-"
    ],
-   "cabezasExcluidas": [],
+   "cabezasExcluidas": [
+    "cab-acero-bazul-"
+   ],
    "master4k": "masters-2026/lunar/capas/caucho-marron-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (642,581) R=373.8 → escala 1.0003; queda en (628.4,567.2) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero",
-   "fondo": "#d6d5d5"
+   "fondo": "#d6d5d5",
+   "nota_regla": "REGLA (Óscar, 22/08): el bisel azul no lleva esta correa."
   },
   "caucho-azul-marino-blanco": {
    "src": "/assets/img/lunar-config/straps/caucho-azul-marino-blanco.webp?v=8",
