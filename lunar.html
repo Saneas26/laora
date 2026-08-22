@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=36">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=40">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=41">
 <style>
   /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
      sobre el fondo de estudio, sin recortes ni transformaciones. */
@@ -79,17 +79,29 @@
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
       <div class="pv-hero pv-capas">
+        <!-- La correa de salida va YA en el HTML —es lo primero que se ve y
+             no debe esperar al manifiesto—, pero en AVIF y con sus tres
+             tamaños. El data-puesta es la ruta del manifiesto: así pinta()
+             sabe que esta capa ya está y no la vuelve a pedir en webp. -->
         <img class="pv-capa" data-pv-correa-img alt="Brazalete del Lunar"
-             src="/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=12">
-        <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar"
-             src="/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
+             data-puesta="/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=12"
+             src="/assets/img/lunar-config/straps/1254/brazalete-acero-316l-cinco-columnas.avif?v=12"
+             srcset="/assets/img/lunar-config/straps/480/brazalete-acero-316l-cinco-columnas.avif?v=12 480w,
+                     /assets/img/lunar-config/straps/800/brazalete-acero-316l-cinco-columnas.avif?v=12 800w,
+                     /assets/img/lunar-config/straps/1254/brazalete-acero-316l-cinco-columnas.avif?v=12 1254w"
+             sizes="(max-width:900px) 100vw, 46vw">
+        <!-- SIN src: estas tres entran OCULTAS y el navegador se las bajaba
+             igual. Eran 345 KB de los 513 de la primera pantalla, para no
+             enseñar nada. Las pone pinta() cuando de verdad se ven. -->
+        <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar" hidden>
         <div class="pv-minis">
-          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Lunar" hidden
-               src="/assets/img/lunar-config/buckles/plata.avif?v=2">
-          <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden
-               src="/assets/img/lunar-config/casebacks/tapa-solida-acero.webp?v=2">
+          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Lunar" hidden>
+          <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden>
         </div>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
+        <!-- Ampliar: además del clic en la foto, un botón de verdad, que
+             con el teclado a una imagen no se llega. -->
+        <button type="button" class="pv-ampliar" data-pv-ampliar>Ampliar</button>
       </div>
     </div>
 
@@ -711,6 +723,46 @@
     return CIERRES[e.cierre || 'plata'].coste;
   }
 
+  /* ---- LAS CAPAS, EN AVIF Y EN TRES TAMAÑOS ----
+     El máster sigue siendo el webp de 1254; junto a él viven las
+     subcarpetas 480/800/1254 con el AVIF, que las escribe
+     `herramientas/capas_lunar_a_avif.py`. Hay que volver a pasar ese
+     guión cada vez que se rehaga una madre, o el AVIF se queda viejo
+     sin avisar.
+     Los tamaños salen de dónde se ve el visor: 46vw en escritorio y
+     toda la pantalla en el móvil. */
+  var TAMANOS_CAPA = [480, 800, 1254];
+  var cabezaURL = '';                 /* la de la cabeza de ahora, para el carrito */
+  function enAvif(url, tam) {
+    var i = url.indexOf('?'), v = i < 0 ? '' : url.slice(i), base = i < 0 ? url : url.slice(0, i);
+    var c = base.lastIndexOf('/');
+    return base.slice(0, c) + '/' + tam + '/' +
+           base.slice(c + 1).replace(/\.(webp|png|avif)$/, '') + '.avif' + v;
+  }
+  /* Pone la capa. Si va oculta NO se le toca el src: una imagen escondida
+     se descarga igual, y ese era el agujero. */
+  function ponCapa(img, url, oculta) {
+    img.hidden = !!oculta;
+    if (oculta || !url) return;
+    if (img.dataset.puesta === url) return;      /* ya está, no se repinta */
+    img.dataset.puesta = url;
+    img.src = enAvif(url, 1254);
+    img.srcset = TAMANOS_CAPA.map(function (t) {
+      return enAvif(url, t) + ' ' + t + 'w';
+    }).join(', ');
+    img.sizes = '(max-width:900px) 100vw, 46vw';
+  }
+  /* Las miniaturas de tapa y hebilla se ven a 140 px: con la de 480 sobra. */
+  function ponMini(img, url, oculta) {
+    img.hidden = !!oculta;
+    if (oculta || !url) return;
+    if (img.dataset.puesta === url) return;
+    img.dataset.puesta = url;
+    img.src = enAvif(url, 480);
+    img.removeAttribute('srcset');
+    img.sizes = '140px';
+  }
+
   function pinta() {
     if (!M) return;
     var cabeza = CATALOGO[clave()];
@@ -740,18 +792,27 @@
     var fuera = (capaCorrea.mascaraFuera || []).some(function (p) {
       return cabeza.indexOf(p) === 0;
     });
-    $('[data-pv-cabeza-img]').hidden = sobra;
     $('[data-pv-cabeza-img]').classList.toggle('pv-disco',
       !sobra && !soloCorrea && !fuera && cajaCabeza === cajaFoto);
-    $('[data-pv-cabeza-img]').src = M.heads[cabeza];
-    $('[data-pv-correa-img]').src = M.straps[correaActual()].src;
+    /* La URL se guarda SIEMPRE, aunque la capa vaya oculta y no se
+       descargue: el carrito la usa de miniatura y sin esto se quedaba
+       sin foto justo en las correas que son foto del reloj entero. */
+    cabezaURL = enAvif(M.heads[cabeza], 1254);
+    ponCapa($('[data-pv-cabeza-img]'), M.heads[cabeza], sobra);
+    ponCapa($('[data-pv-correa-img]'), M.straps[correaActual()].src, false);
     /* El marco se pinta con el gris de estudio de ESA foto: cuando el hueco
        es más ancho que alto la foto no lo llena y, si los grises no son el
        mismo, se ven dos. Las de brazalete son #EAE8E9 y las de correa
        #D7D5D6. */
     $('.pv-hero.pv-capas').style.background = capaCorrea.fondo || '#EAE8E8';
     $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
-      ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase();
+      ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
+      ', agujas ' + AGUJAS[e.agujas].nombre.toLowerCase();
+    /* La correa dicha con palabras, para el alt de su capa y el pie de la
+       lupa: antes decía «Brazalete del Lunar» pusiera lo que pusiera. */
+    window.__correaDicha = TIPOS[e.tipo].nombre.toLowerCase() + ' ' +
+      TIPOS[e.tipo].colores[e.color].nombre.toLowerCase();
+    $('[data-pv-correa-img]').alt = 'Correa del Lunar: ' + window.__correaDicha;
 
     $('[data-pv-precio]').textContent = eu(precio());
     /* Klarna parte el precio en tres. El tercero se redondea hacia
@@ -787,20 +848,14 @@
     });
 
     var mini = $('[data-pv-tapa-img]');
-    mini.hidden = !e.tapa;
-    if (e.tapa) {
-      mini.src = M.tapas[e.tapa].src;
-      mini.alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
-    }
+    ponMini(mini, e.tapa && M.tapas[e.tapa].src, !e.tapa);
+    if (e.tapa) mini.alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
 
     /* La hebilla, igual que la tapa: nada hasta que se elige una. */
     var heb = $('[data-pv-hebilla-img]');
     var hayHebilla = esItaliana() && e.cierre && M.hebillas && M.hebillas[e.cierre];
-    heb.hidden = !hayHebilla;
-    if (hayHebilla) {
-      heb.src = M.hebillas[e.cierre].src;
-      heb.alt = 'Hebilla del Lunar, ' + CIERRES[e.cierre].tec;
-    }
+    ponMini(heb, hayHebilla && M.hebillas[e.cierre].src, !hayHebilla);
+    if (hayHebilla) heb.alt = 'Hebilla del Lunar, ' + CIERRES[e.cierre].tec;
 
     $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
       ' Cristal mineral y tapa trasera roscada y sólida' +
@@ -829,17 +884,80 @@
               (pespuntesDe() ? ' · pespunte ' + pespuntesDe()[e.pespunte].nombre.toLowerCase() : '') +
               ((esItaliana() && e.cierre) ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
       precio: precio(),
-      foto: $('[data-pv-cabeza-img]').src
+      foto: cabezaURL
     });
     window.location.href = '/carrito.html';
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=41')
+  fetch('/assets/img/lunar-config/manifest.json?v=42')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
 </script>
+<!-- ============ LA LUPA ============
+     Aquí la foto no es una imagen: son dos capas superpuestas, y la de
+     arriba puede llevar la máscara del disco. Así que en vez de
+     reimplementar el montaje —y arriesgarse a que la lupa enseñe algo
+     distinto de lo que hay en la ficha— se CLONA el visor entero y se
+     agranda. Lo que se ve en grande es, por construcción, lo mismo. -->
+<div class="pv-lupa" data-pv-lupa hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button type="button" class="pv-lupa-cerrar" data-pv-lupa-cerrar aria-label="Cerrar la foto">&#10005;</button>
+  <div class="pv-lupa-marco" data-pv-lupa-marco></div>
+  <p class="pv-lupa-pie" data-pv-lupa-pie></p>
+</div>
+
+<script>
+(function () {
+  var capa   = document.querySelector('[data-pv-lupa]');
+  var marco  = document.querySelector('[data-pv-lupa-marco]');
+  var pie    = document.querySelector('[data-pv-lupa-pie]');
+  var visor  = document.querySelector('.pv-hero.pv-capas');
+  if (!capa || !visor) return;
+  var devolverElFoco = null;
+
+  function abrir() {
+    var clon = visor.cloneNode(true);
+    clon.classList.add('pv-lupa-visor');
+    /* Fuera lo que no es el reloj: el aviso, el botón y las miniaturas
+       de tapa y hebilla, que en grande no pintan nada. */
+    ['.pv-aviso', '.pv-ampliar', '.pv-minis'].forEach(function (s) {
+      var x = clon.querySelector(s); if (x) x.remove();
+    });
+    /* En grande hay que pedir la capa grande: con el sizes del visor el
+       navegador se quedaría con la de 480 y se vería borrosa. */
+    clon.querySelectorAll('img').forEach(function (i) { i.sizes = '90vh'; });
+    marco.innerHTML = '';
+    marco.appendChild(clon);
+    pie.textContent = (document.querySelector('[data-pv-cabeza-img]').alt || 'laOra Lunar') +
+      ' · ' + (window.__correaDicha || '');
+    capa.hidden = false;
+    document.body.style.overflow = 'hidden';
+    devolverElFoco = document.activeElement;
+    document.querySelector('[data-pv-lupa-cerrar]').focus();
+  }
+  function cerrar() {
+    capa.hidden = true;
+    marco.innerHTML = '';                 /* que no se queden las capas cargadas */
+    document.body.style.overflow = '';
+    if (devolverElFoco && devolverElFoco.focus) devolverElFoco.focus();
+  }
+
+  visor.addEventListener('click', function (ev) {
+    if (ev.target.closest('.pv-ampliar')) return;   /* ya lo coge el de abajo */
+    abrir();
+  });
+  document.addEventListener('click', function (ev) {
+    if (ev.target.closest('[data-pv-ampliar]')) { abrir(); return; }
+    if (ev.target.closest('[data-pv-lupa-cerrar]')) { cerrar(); return; }
+    if (ev.target === capa) cerrar();
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !capa.hidden) cerrar();
+  });
+})();
+</script>
+
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
