@@ -225,10 +225,19 @@
     var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
     return bajo >= p - 1e-9 ? bajo : bajo + 10;
   }
+  /* EL SUELO, CON LA COMISIÓN DENTRO (Óscar, 22/08/2026).
+     Antes el suelo se calculaba sobre el precio de tarifa y DESPUÉS se
+     le sumaba el 2,5 % de Klarna, así que la comisión se comía el
+     suelo: el Lunar más barato prometía 50 € limpios y dejaba 46,69.
+     Ahora se calcula sobre lo que queda de cada euro DESPUÉS de pagar
+     la comisión, y ningún reloj sale a la venta por debajo de 50 €
+     limpios o del 15 % de beneficio neto. */
+  var COMISION = 0.05;                     // lo que se lleva la pasarela
   function sueloPvp(cn) {
-    var queda = 1 - IRPF - SS;
-    var porEuros = (50 / queda + cn) * (1 + IVA);
-    var margen = queda / (1 + IVA) - 0.15;
+    var queda = 1 - IRPF - SS;             // del beneficio, tras IRPF y SS
+    var euro = 1 / (1 + IVA) - COMISION;   // lo que llega de cada euro de PVP
+    var porEuros = (50 / queda + cn) / euro;
+    var margen = euro * queda - 0.15;
     var porciento = margen > 0 ? queda * cn / margen : 0;
     return sube990(Math.max(porEuros, porciento));
   }
@@ -249,12 +258,21 @@
      al 9,90 más cercano, que es la terminación de siempre.
 
      CONSECUENCIA CONOCIDA Y ACEPTADA: con escalones de 10 €, un 2,5 %
-     no cabe dentro del escalón. Los de 179,90 y 199,90 se quedan igual
-     y el peso lo llevan los de 209,90 para arriba, que suben un 4-5 %.
-     La media del catálogo sale al +2,54 %, que es lo que se buscaba.
-     Se le enseñaron las tres formas de redondear y eligió esta. */
+     no cabe dentro del escalón, así que el peso no se reparte por igual.
+     Se le enseñaron las tres formas de redondear y eligió esta.
+
+     22/08/2026: ese 2,5 % dejaba a los más baratos por debajo del suelo
+     —el Lunar de 179,90 prometía 50 € limpios y dejaba 46,69—, así que
+     el suelo pasó a calcularse CON la comisión dentro y a exigirse otra
+     vez después de redondear. Subieron 274 referencias de 2.908, todas
+     10 €: se acabó el escalón de 179,90. */
   var KLARNA = 1.025;
-  function precio() { return redondea(precioSinKlarna() * KLARNA); }
+  /* El redondeo al 9,90 puede dejar el precio por debajo del suelo, así
+     que el suelo se vuelve a exigir DESPUÉS de redondear: manda él. */
+  function netoDeCoste() { return costes() + 9 / 1.21 + (MOVS[e.mov].coste + 19) * 0.05; }
+  function precio() {
+    return Math.max(redondea(precioSinKlarna() * KLARNA), sueloPvp(netoDeCoste()));
+  }
   function referencia() {
     var m = MOVS[e.mov];
     return 'LO-01-' + e.mov + '-40' + m.tapa + '-' + e.esf;
