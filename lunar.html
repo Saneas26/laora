@@ -701,6 +701,11 @@
       !sobra && !soloCorrea && cajaCabeza === cajaFoto);
     $('[data-pv-cabeza-img]').src = M.heads[cabeza];
     $('[data-pv-correa-img]').src = M.straps[correaActual()].src;
+    /* El marco se pinta con el gris de estudio de ESA foto: cuando el hueco
+       es más ancho que alto la foto no lo llena y, si los grises no son el
+       mismo, se ven dos. Las de brazalete son #EAE8E9 y las de correa
+       #D7D5D6. */
+    $('.pv-hero.pv-capas').style.background = capaCorrea.fondo || '#EAE8E8';
     $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
       ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase();
 
@@ -786,7 +791,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=37')
+  fetch('/assets/img/lunar-config/manifest.json?v=38')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
