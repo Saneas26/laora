@@ -74,6 +74,13 @@ FICHA_TECNICA = False
 
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 MULT = 2.7235
+# EL MOTOR DE 2026 (Óscar, 22/08/2026), el mismo del Trinchera y el Lunar:
+# el multiplicador se aplica al COSTE COMPLETO —piezas, packing, envío,
+# fondo de garantía y Seguridad Social—, y al PVP se le suma el 2,5 % de
+# Klarna. Se enciende ficha a ficha: aquí van los códigos que ya lo llevan;
+# los demás siguen con el motor de siempre hasta que Óscar los diga.
+MOTOR_2026 = {'LO-05'}          # Cero Cero
+MULT_2026 = 2.28
 
 with open(os.path.join(RAIZ, 'assets/datos/piezas.json'), encoding='utf-8') as f:
     PIEZAS = json.load(f)
@@ -645,7 +652,9 @@ def pantalla(slug):
     # a la página, que la lee cualquiera con el botón derecho.
     d = {k: v for k, v in d.items() if not k.startswith('_')}
 
-    datos = json.dumps({**d, 'mult': MULT, 'cabezas': cabezas,
+    nuevo = d['codigo'] in MOTOR_2026
+    datos = json.dumps({**d, 'mult': MULT_2026 if nuevo else MULT,
+                        **({'motor': '2026'} if nuevo else {}), 'cabezas': cabezas,
                         'brazaletes': brazaletes, 'completas': completas, 'peques': peques, 'cierres': cierres,
                         'cierresNom': cierres_nom, 'cierresFam': cierres_fam,
                         'detallePies': detalle_pies,

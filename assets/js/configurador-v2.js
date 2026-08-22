@@ -871,7 +871,35 @@
      y se redondea HACIA ARRIBA, nunca hacia abajo: redondear al más
      cercano podría dejarlo otra vez por debajo del suelo.
      ------------------------------------------------------------ */
+  /* ------------------------------------------------------------
+     EL MOTOR DE 2026 (Óscar, 22/08/2026)
+
+     El mismo que estrenaron el Trinchera y el Lunar ese día, y que
+     aquí se enciende ficha a ficha con `"motor": "2026"` en su JSON:
+     los demás configuradores se quedan clavados donde están hasta que
+     Óscar los vaya diciendo.
+
+     Lo que cambia respecto al motor de siempre:
+       · el coste que se multiplica ya no son solo las PIEZAS: lleva
+         dentro el packing y el envío, el fondo de garantía y la
+         Seguridad Social;
+       · la Seguridad Social deja de ser un pellizco del beneficio y
+         pasa a ser lo que es, un 5 % de gasto;
+       · el fondo de garantía son 4 € fijos;
+       · el suelo se calcula CON la comisión de la pasarela dentro, al
+         2,5 % —Klarna cobra el 5 % y solo la mitad de las ventas van
+         por Klarna—;
+       · y al PVP de tarifa se le suma el 2,5 % de Klarna.
+     El multiplicador de las fichas con este motor es 2,28: no es que se
+     gane menos, es que multiplica un coste bastante mayor.
+     ------------------------------------------------------------ */
+  var GARANTIA_2026 = 4.00, COMISION_2026 = 0.025, KLARNA_2026 = 1.025;
+  function motor2026() { return D.motor === '2026'; }
+
   function costeNeto(c, mov) {
+    if (motor2026()) {
+      return (c + sinIva(EMBALAJE) + sinIva(ENVIO) + GARANTIA_2026) * (1 + SS);
+    }
     return c + sinIva(EMBALAJE) + sinIva(ENVIO) + fondoGarantia(mov);
   }
 
@@ -881,9 +909,12 @@
   }
 
   function sueloPvp(cn) {
-    var queda = 1 - IRPF - SS;                       // 0,75 de cada euro bruto
-    var porEuros = (MIN_EUROS / queda + cn) * (1 + IVA);
-    var margen = queda / (1 + IVA) - MIN_PORCENTAJE; // lo que gana el PVP por euro
+    /* Con el motor de 2026 la SS ya va dentro del coste y de cada euro
+       de PVP se va además la comisión de la pasarela. */
+    var queda = motor2026() ? 1 - IRPF : 1 - IRPF - SS;
+    var euro = 1 / (1 + IVA) - (motor2026() ? COMISION_2026 : 0);
+    var porEuros = (MIN_EUROS / queda + cn) / euro;
+    var margen = euro * queda - MIN_PORCENTAJE;      // lo que gana el PVP por euro
     var porciento = margen > 0 ? queda * cn / margen : 0;
     return sube990(Math.max(porEuros, porciento));
   }
@@ -900,7 +931,11 @@
   function baseDe(costeCaja) {
     var p = piezas();
     var c = p.mov.coste + costeCaja + (p.esf ? p.esf.coste : 0) + p.v.c;
-    return Math.max(redondea(c * D.mult), sueloPvp(costeNeto(c, p.mov)));
+    var cn = costeNeto(c, p.mov);
+    if (motor2026()) {
+      return Math.max(redondea(redondea(cn * D.mult) * KLARNA_2026), sueloPvp(cn));
+    }
+    return Math.max(redondea(c * D.mult), sueloPvp(cn));
   }
 
   function precio() {
@@ -963,13 +998,15 @@
                  (EMBALAJE - embNeto) + (ENVIO - envNeto);
     var conIva = cn + ivaSop;
 
-    var porMult = redondea(piezasCoste * D.mult);
+    var porMult = motor2026() ? redondea(redondea(cn * D.mult) * KLARNA_2026)
+                              : redondea(piezasCoste * D.mult);
     var pvp = precio();
     var ivaRep = pvp - sinIva(pvp);
     var base = pvp - ivaRep;
 
-    var bruto = base - cn;
-    var irpf = bruto * IRPF, ss = bruto * SS;
+    var comision = motor2026() ? pvp * COMISION_2026 : 0;
+    var bruto = base - cn - comision;
+    var irpf = bruto * IRPF, ss = motor2026() ? 0 : bruto * SS;
     var neto = bruto - irpf - ss;
 
     var bienEuros = neto >= MIN_EUROS;
