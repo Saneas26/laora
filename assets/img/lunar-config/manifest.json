@@ -153,23 +153,20 @@
    "fondo": "#d7d5d6"
   },
   "nato-pasadores-verde-militar": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-verde-militar.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-verde-militar.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-verde-militar-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0025; queda en (627.0,566.6) R=369.7 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 32 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-pasadores-azul": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-azul.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-azul.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -177,49 +174,40 @@
     "cab-acero-bnegro-"
    ],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-azul-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. REGLA (Oscar, 21/08): la caja de acero con bisel negro no lleva esta correa.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0021; queda en (629.0,567.5) R=370.2 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 59 arriba y 36 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-pasadores-beige": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-beige.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-beige.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-beige-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0024; queda en (628.1,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 32 arriba y 36 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-pasadores-gris-claro": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-gris-claro.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-gris-claro.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-gris-claro-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0025; queda en (628.4,567.0) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 32 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-pasadores-negro": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -227,17 +215,14 @@
     "cab-acero-bazul-"
    ],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-negro-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. Negra: fuera del bisel azul.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0023; queda en (628.1,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 31 arriba y 33 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-pasadores-negro-gris": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro-gris.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro-gris.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -245,49 +230,40 @@
     "cab-acero-bazul-"
    ],
    "master4k": "masters-2026/lunar/capas/nato-pasadores-negro-gris-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. Negra: fuera del bisel azul.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0020; queda en (628.6,567.1) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 36 arriba y 29 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-espiga-antracita": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-antracita.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-antracita.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-espiga-antracita-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.0 → escala 1.0017; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 23 arriba y 24 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-espiga-gris": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-gris.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-gris.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-espiga-gris-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0033; queda en (627.7,567.6) R=369.4 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 21 arriba y 29 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-espiga-azul-claro": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-azul-claro.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-azul-claro.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -295,46 +271,37 @@
     "cab-acero-bnegro-"
    ],
    "master4k": "masters-2026/lunar/capas/nato-espiga-azul-claro-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero. REGLA (Oscar, 22/08): el bisel negro no lleva correa azul; era la ultima azul que quedaba con esa caja.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0016; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 21 arriba y 43 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-espiga-beige": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-beige.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-beige.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-espiga-beige-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0018; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 18 arriba y 22 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "nato-espiga-marron": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-marron.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-marron.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "master4k": "masters-2026/lunar/capas/nato-espiga-marron-madre-4k.png",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
    "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0028; queda en (628.4,567.1) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
-   "cajaDeLaFoto": "acero",
-   "fondo": "#d7d5d6",
-   "mascaraFuera": [
-    "cab-acero-bnegro-"
-   ]
+   "fondo": "#d8d5d6",
+   "soloCorrea": true,
+   "correa_sola": "22/08/2026: tejido solo, llevado a la geometría de nato-espiga-marron y prolongado con periodo 19 arriba y 23 abajo. El reloj de la foto se ha quitado: la cabeza va entera."
   },
   "caucho-negro-negro": {
    "src": "/assets/img/lunar-config/straps/caucho-negro-negro.webp?v=8",
@@ -545,5 +512,5 @@
  "nato_nota": "OJO con los nombres, que Oscar los intercambio el 19/08: las claves describen la CORREA (pasadores / espiga), no el tipo comercial. Tipo NATO = espiga (5,48 €). Tipo NATO + PIEL = pasadores (11,29 €).",
  "capas_nota": "SOLO EL DISCO: cuando la caja de la cabeza elegida es la misma que la de la foto (cajaDeLaFoto), la cabeza se recorta al disco de la esfera y el bisel (r=371 sobre 1254, centro 627,565) y se deja caer dentro de la foto. Asi la caja, las asas y el encuentro con la correa son los de la foto real de Oscar, que es lo que nunca cuadraba: la cabeza y las madres son relojes con proporciones distintas (la cabeza casi no tiene pared de caja fuera del bisel; las madres si), y montando la cabeza entera siempre asomaba un anillo o unas asas dobles. La cabeza entera solo se monta cuando hay que CAMBIAR la caja: cabeza negra sobre foto de acero.",
  "fondo_nota": "El gris de estudio de CADA foto, medido en sus columnas de fuera. El marco del visor se pinta con él: las fotos no son todas del mismo gris (215 las de correa, 234 las de brazalete) y con un gris fijo en el marco se veían dos grises en cuanto el hueco del visor era más ancho que alto.",
- "mascara_nota": "`mascaraFuera` son los prefijos de cabeza que en ESA correa van ENTERAS, sin recortar al disco. Orden de Óscar (22/08): en nato y nato+piel, ninguna caja de acero con bisel negro lleva máscara. Se puede porque desde la 2.ª alineación de ese día la caja de la cabeza tapa de sobra la de la foto: no asoman ni las asas ni el bisel de debajo."
+ "mascara_nota": "`mascaraFuera` son los prefijos de cabeza que en ESA correa van enteras. Ya no lo usa ninguna: las once de nato y nato+piel pasaron a `soloCorrea` el 22/08 —son tejido sin reloj— y ahí la cabeza va siempre entera, sea cual sea el bisel."
 }
