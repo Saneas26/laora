@@ -696,9 +696,15 @@
     var cajaFoto = capaCorrea.cajaDeLaFoto || 'acero';
     var cajaCabeza = cabeza.indexOf('cab-negra-') === 0 ? 'negra' : 'acero';
     var sobra = !soloCorrea && (capaCorrea.cabezaDeLaFoto === cabeza);
+    /* Cabezas que en esta correa van ENTERAS aunque la caja sea la misma
+       (Óscar, 22/08: en nato y nato + piel, ninguna caja de acero con bisel
+       negro lleva máscara). Sale del manifiesto, no de adivinar el nombre. */
+    var fuera = (capaCorrea.mascaraFuera || []).some(function (p) {
+      return cabeza.indexOf(p) === 0;
+    });
     $('[data-pv-cabeza-img]').hidden = sobra;
     $('[data-pv-cabeza-img]').classList.toggle('pv-disco',
-      !sobra && !soloCorrea && cajaCabeza === cajaFoto);
+      !sobra && !soloCorrea && !fuera && cajaCabeza === cajaFoto);
     $('[data-pv-cabeza-img]').src = M.heads[cabeza];
     $('[data-pv-correa-img]').src = M.straps[correaActual()].src;
     /* El marco se pinta con el gris de estudio de ESA foto: cuando el hueco
@@ -791,7 +797,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=38')
+  fetch('/assets/img/lunar-config/manifest.json?v=39')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
