@@ -478,8 +478,9 @@
     'negra-bnegro|negra|plateadas'      : 'cab-negra-bnegro-agujas-plateadas',
     'negra-bnegro|negra|naranjas'       : 'cab-negra-bnegro-agujas-naranjas',
     'negra-bnegro|negra|azules'         : 'cab-negra-bnegro-agujas-azules',
-    /* La caja negra con esfera negra NO lleva agujas doradas (Óscar,
-       18/08). Las doradas solo van con la esfera negra y dorada. */
+    /* Las doradas SÍ van con la caja negra y la esfera negra (Óscar,
+       22/08; el 18/08 las había dejado fuera). */
+    'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas',
     /* La caja negra lleva las mismas esferas que la de acero (Óscar,
        18/08). Estas tres cabezas se montaron trasplantando la esfera de
        su gemela de acero: herramientas/trasplantar_esfera.py */
@@ -798,7 +799,7 @@
   });
 
   /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=40')
+  fetch('/assets/img/lunar-config/manifest.json?v=41')
     .then(function (r) { return r.json(); })
     .then(function (m) { M = m; normaliza(); pinta(); });
 })();
