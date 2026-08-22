@@ -12,22 +12,22 @@
   "head"
  ],
  "heads": {
-  "cab-acero-bazul-esfblanca-agujas-azules": "/assets/img/lunar-config/heads/cab-acero-bazul-esfblanca-agujas-azules.webp",
-  "cab-acero-bazul-esfblanca-agujas-plateadas": "/assets/img/lunar-config/heads/cab-acero-bazul-esfblanca-agujas-plateadas.webp",
-  "cab-acero-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-azules.webp",
-  "cab-acero-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-doradas.webp",
-  "cab-acero-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-naranjas.webp",
+  "cab-acero-bazul-esfblanca-agujas-azules": "/assets/img/lunar-config/heads/cab-acero-bazul-esfblanca-agujas-azules.webp?v=2",
+  "cab-acero-bazul-esfblanca-agujas-plateadas": "/assets/img/lunar-config/heads/cab-acero-bazul-esfblanca-agujas-plateadas.webp?v=2",
+  "cab-acero-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-azules.webp?v=2",
+  "cab-acero-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-doradas.webp?v=2",
+  "cab-acero-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-naranjas.webp?v=2",
   "cab-acero-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp",
-  "cab-acero-bnegro-esf26-negra-dorada": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf26-negra-dorada.webp",
-  "cab-acero-bnegro-esf27-verde": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf27-verde.webp",
-  "cab-acero-bnegro-esf44-racing-naranja": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf44-racing-naranja.webp",
-  "cab-negra-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-azules.webp",
-  "cab-negra-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-doradas.webp",
-  "cab-negra-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-naranjas.webp",
-  "cab-negra-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-plateadas.webp",
-  "cab-negra-bnegro-esf44-racing-naranja": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf44-racing-naranja.webp?v=1",
-  "cab-negra-bnegro-esf26-negra-dorada": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf26-negra-dorada.webp?v=1",
-  "cab-negra-bnegro-esf27-verde": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf27-verde.webp?v=1"
+  "cab-acero-bnegro-esf26-negra-dorada": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf26-negra-dorada.webp?v=2",
+  "cab-acero-bnegro-esf27-verde": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf27-verde.webp?v=2",
+  "cab-acero-bnegro-esf44-racing-naranja": "/assets/img/lunar-config/heads/cab-acero-bnegro-esf44-racing-naranja.webp?v=2",
+  "cab-negra-bnegro-agujas-azules": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-azules.webp?v=2",
+  "cab-negra-bnegro-agujas-doradas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-doradas.webp?v=2",
+  "cab-negra-bnegro-agujas-naranjas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-naranjas.webp?v=2",
+  "cab-negra-bnegro-agujas-plateadas": "/assets/img/lunar-config/heads/cab-negra-bnegro-agujas-plateadas.webp?v=2",
+  "cab-negra-bnegro-esf44-racing-naranja": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf44-racing-naranja.webp?v=2",
+  "cab-negra-bnegro-esf26-negra-dorada": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf26-negra-dorada.webp?v=2",
+  "cab-negra-bnegro-esf27-verde": "/assets/img/lunar-config/heads/cab-negra-bnegro-esf27-verde.webp?v=2"
  },
  "straps": {
   "piel-negra-perforada-pespunte-blanco": {
@@ -39,22 +39,22 @@
    "cabezasExcluidas": [
     "cab-acero-bazul-"
    ],
-   "cajaDeLaFoto": "acero",
-   "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas"
+   "soloCorrea": true,
+   "nota": "OJO: esta madre NO es una foto del reloj entero, es la CORREA SOLA con el hueco de la caja. Por eso lleva soloCorrea: aqui la cabeza se monta SIEMPRE entera; ni se esconde ni se recorta al disco. Hasta el 22/08 tenia cabezaDeLaFoto y con las agujas plateadas se quedaba en una correa sin reloj."
   },
   "brazalete-acero-316l-cinco-columnas": {
-   "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=11",
+   "src": "/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=12",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
    "cabezasExcluidas": [],
    "nota": "IMAGEN MADRE del brazalete de acero, CAMBIADA por Oscar el 21/08: la foto nueva (omega-speedmaster-esfera-lunar-fondo-eae8e8, 900px, caja acero + bisel negro + brazalete acero) alineada por correlacion de siluetas (escala 1.672, dx -128, dy -104) a la geometria de la madre anterior. Comprobado que la tapan las cabezas de acero con bisel negro, bisel azul y racing. Origen en masters-2026/lunar/capas/brazalete-acero-316l-bisel-negro-origen-900.png",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (629,584) R=384 → escala 0.9603; queda en (626.6,565.1) R=368.4 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,561) R=369.6 → escala 1.0015; queda en (627.8,567.4) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "piel-italiana-negra": {
-   "src": "/assets/img/lunar-config/straps/piel-italiana-negra.webp?v=9",
+   "src": "/assets/img/lunar-config/straps/piel-italiana-negra.webp?v=10",
    "cabezasPermitidas": [
     "cab-acero-",
     "cab-negra-"
@@ -65,11 +65,11 @@
    "master4k": "masters-2026/lunar/capas/piel-italiana-negra-madre-4k.png",
    "nota": "IMAGEN MADRE: la capa es la foto completa del preview de la entrega, con la correa TAL CUAL; las cabezas se montan encima y tapan la de la foto (misma geometria verificada). Solo con cajas de acero: sobre caja negra asomaria el acero de la foto. CAJA NEGRA ABIERTA el 18/08: comprobado en zoom que la correa negra tapa el hueco entre asas y no asoma nada del acero de la foto. El caucho NO puede: alli la correa se estrecha al nacer y deja ver el metal. MADRE CAMBIADA el 18/08 por la version INTEGRADA de Oscar (acero-bisel-negro-esfera-negra-piel-cocodrilo-negra-integrada-final-4k): la correa abraza la caja con volumen. Comprobado que encajan todas las cabezas, incluida la negra. NO con el bisel azul (Oscar, 18/08): con esa caja no se ofrece ninguna correa negra.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (632,570) R=381 → escala 0.9677; queda en (627.8,566.1) R=369.2 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0020; queda en (628.7,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "piel-italiana-marron": {
-   "src": "/assets/img/lunar-config/straps/piel-italiana-marron.webp?v=10",
+   "src": "/assets/img/lunar-config/straps/piel-italiana-marron.webp?v=11",
    "cabezasPermitidas": [
     "cab-acero-bnegro-"
    ],
@@ -77,11 +77,11 @@
    "master4k": "masters-2026/lunar/capas/piel-italiana-marron-madre-4k.png",
    "nota": "MADRE INTEGRADA de Oscar (18/08). Va SOLO con la caja de ACERO y BISEL NEGRO (orden de Oscar): esa es la combinacion para la que se coloca esta imagen. La integracion de la correa no es perfecta —no se mete del todo bajo las asas— y esta pendiente de regenerar, pero Oscar la quiere puesta.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,570) R=382 → escala 0.9666; queda en (627.4,565.7) R=369.7 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0023; queda en (627.5,567.9) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "piel-italiana-azul": {
-   "src": "/assets/img/lunar-config/straps/piel-italiana-azul.webp?v=9",
+   "src": "/assets/img/lunar-config/straps/piel-italiana-azul.webp?v=10",
    "cabezasPermitidas": [
     "cab-acero-bazul-"
    ],
@@ -89,11 +89,11 @@
    "master4k": "masters-2026/lunar/capas/piel-italiana-azul-madre-4k.png",
    "nota": "MADRE INTEGRADA de Oscar (18/08): la correa abraza la caja. **SOLO CON BISEL AZUL** (orden de Oscar): con el bisel negro y con la caja negra queda tachada. Al restringirla al bisel azul sobra la exclusion de la esfera verde, que es de bisel negro.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (632,570) R=381 → escala 0.9646; queda en (627.7,565.6) R=369.2 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0030; queda en (627.2,567.9) R=369.6 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "piel-italiana-negra-pespunte-negro": {
-   "src": "/assets/img/lunar-config/straps/piel-italiana-negra-pespunte-negro.webp?v=8",
+   "src": "/assets/img/lunar-config/straps/piel-italiana-negra-pespunte-negro.webp?v=9",
    "cabezasPermitidas": [
     "cab-acero-",
     "cab-negra-"
@@ -104,11 +104,11 @@
    "master4k": "masters-2026/lunar/capas/piel-italiana-negra-pespunte-negro-madre-4k.png",
    "nota": "El pespunte al tono, tenido desde la madre integrada. En esta foto el charol brilla hasta 0,99 y el hilo YA NO se separa por luz (en la madre anterior el reflejo maximo era 0,57 y bastaba un umbral). Lo que si es fijo es DONDE va la costura: a un 11% y un 88% del ancho de la correa, fila a fila; los reflejos viven en el centro y quedan fuera. Ver herramientas/recolorear_pespunte.py NO con el bisel azul (Oscar, 18/08): con esa caja no se ofrece ninguna correa negra.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,569) R=381 → escala 0.9677; queda en (627.5,564.9) R=369.1 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0019; queda en (629.1,567.5) R=370.3 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "brazalete-negro-pvd": {
-   "src": "/assets/img/lunar-config/straps/brazalete-negro-pvd.webp?v=9",
+   "src": "/assets/img/lunar-config/straps/brazalete-negro-pvd.webp?v=10",
    "cabezasPermitidas": [
     "cab-negra-"
    ],
@@ -116,11 +116,11 @@
    "master4k": "masters-2026/lunar/capas/brazalete-negro-pvd-madre-4k.png",
    "nota": "IMAGEN MADRE del brazalete negro PVD, CAMBIADA por Oscar el 20/08 22h: la foto nueva viene con CAJA NEGRA y bisel negro (omega-speedmaster-esfera-lunar-pvd-negro, 900px), alineada por correlacion de siluetas (escala 1.52, dx -64, dy -46) a la geometria de la madre anterior. Comprobado que la cabeza negra Y la de acero tapan la caja de la foto. Origen en masters-2026/lunar/capas/brazalete-negro-pvd-caja-negra-origen-900.png Su cabeza gemela es la NEGRA (la foto es caja negra), no la de acero. REGLA (Oscar, 21/08): el brazalete negro PVD es SOLO para la caja negra; la caja de acero con bisel negro no lo lleva.",
    "cabezaDeLaFoto": "cab-negra-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (646,562) R=381 → escala 0.9657; queda en (627.0,565.3) R=369.2 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (614,557) R=331.7 → escala 1.1118; queda en (625.2,567.7) R=367.2 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "negra"
   },
   "piel-italiana-marron-pespunte-tono": {
-   "src": "/assets/img/lunar-config/straps/piel-italiana-marron-pespunte-tono.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/piel-italiana-marron-pespunte-tono.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-bnegro-"
    ],
@@ -128,11 +128,11 @@
    "master4k": "masters-2026/lunar/capas/piel-italiana-marron-pespunte-tono-madre-4k.png",
    "nota": "MADRE INTEGRADA de Oscar (18/08). Va SOLO con la caja de ACERO y BISEL NEGRO (orden de Oscar): esa es la combinacion para la que se coloca esta imagen. La integracion de la correa no es perfecta —no se mete del todo bajo las asas— y esta pendiente de regenerar, pero Oscar la quiere puesta.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (634,569) R=382 → escala 0.9644; queda en (627.5,566.1) R=369.4 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0022; queda en (628.6,567.1) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "piel-italiana-azul-pespunte-tono": {
-   "src": "/assets/img/lunar-config/straps/piel-italiana-azul-pespunte-tono.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/piel-italiana-azul-pespunte-tono.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-bazul-"
    ],
@@ -140,11 +140,11 @@
    "master4k": "masters-2026/lunar/capas/piel-italiana-azul-pespunte-tono-madre-4k.png",
    "nota": "El pespunte al tono de la azul: hilo azul claro tenido de azul marino desde la misma madre.",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,570) R=382 → escala 0.9639; queda en (628.4,566.1) R=369.9 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0023; queda en (628.6,567.1) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-pasadores-verde-militar": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-verde-militar.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-verde-militar.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -152,11 +152,11 @@
    "master4k": "masters-2026/lunar/capas/nato-pasadores-verde-militar-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (632,567) R=381 → escala 0.9682; queda en (627.1,565.1) R=369.3 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0025; queda en (627.0,566.6) R=369.7 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-pasadores-azul": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-azul.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-azul.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -166,11 +166,11 @@
    "master4k": "masters-2026/lunar/capas/nato-pasadores-azul-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. REGLA (Oscar, 21/08): la caja de acero con bisel negro no lleva esta correa.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,566) R=382 → escala 0.9682; queda en (627.1,564.9) R=369.1 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0021; queda en (629.0,567.5) R=370.2 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-pasadores-beige": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-beige.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-beige.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -178,11 +178,11 @@
    "master4k": "masters-2026/lunar/capas/nato-pasadores-beige-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,567) R=382 → escala 0.9651; queda en (628.5,562.4) R=369.7 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0024; queda en (628.1,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-pasadores-gris-claro": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-gris-claro.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-gris-claro.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -190,11 +190,11 @@
    "master4k": "masters-2026/lunar/capas/nato-pasadores-gris-claro-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (631,570) R=380 → escala 0.9692; queda en (627.8,561.7) R=370.0 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0025; queda en (628.4,567.0) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-pasadores-negro": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -204,11 +204,11 @@
    "master4k": "masters-2026/lunar/capas/nato-pasadores-negro-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. Negra: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (632,567) R=381 → escala 0.9662; queda en (627.3,565.0) R=369.5 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0023; queda en (628.1,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-pasadores-negro-gris": {
-   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro-gris.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-pasadores-negro-gris.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -218,11 +218,11 @@
    "master4k": "masters-2026/lunar/capas/nato-pasadores-negro-gris-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido con PASADORES y refuerzos de piel, 11,29 € (anuncio HMYT 1005012621893442). Desde el 19/08 es la familia que se llama NATO + PIEL. Solo cajas de acero. Negra: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,569) R=382 → escala 0.9663; queda en (628.6,564.2) R=370.1 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0020; queda en (628.6,567.1) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-espiga-antracita": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-antracita.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-antracita.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -230,11 +230,11 @@
    "master4k": "masters-2026/lunar/capas/nato-espiga-antracita-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (631,572) R=379 → escala 0.9672; queda en (628.0,563.7) R=369.2 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.0 → escala 1.0017; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-espiga-gris": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-gris.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-gris.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -242,11 +242,11 @@
    "master4k": "masters-2026/lunar/capas/nato-espiga-gris-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (632,572) R=381 → escala 0.9672; queda en (627.0,564.3) R=368.8 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0033; queda en (627.7,567.6) R=369.4 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-espiga-azul-claro": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-azul-claro.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-azul-claro.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -256,11 +256,11 @@
    "master4k": "masters-2026/lunar/capas/nato-espiga-azul-claro-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero. REGLA (Oscar, 22/08): el bisel negro no lleva correa azul; era la ultima azul que quedaba con esa caja.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (632,575) R=380 → escala 0.9707; queda en (627.5,565.7) R=369.4 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0016; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-espiga-beige": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-beige.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-beige.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -268,11 +268,11 @@
    "master4k": "masters-2026/lunar/capas/nato-espiga-beige-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,573) R=382 → escala 0.9639; queda en (627.6,565.3) R=369.7 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.2 → escala 1.0018; queda en (628.6,568.1) R=370.1 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "nato-espiga-marron": {
-   "src": "/assets/img/lunar-config/straps/nato-espiga-marron.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/nato-espiga-marron.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -280,11 +280,11 @@
    "master4k": "masters-2026/lunar/capas/nato-espiga-marron-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Tejido de ESPIGA con pespunte blanco y hebilla mariposa, 5,48 € (anuncio 1005011862298088). Desde el 19/08 es la familia que se llama NATO. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,566) R=381 → escala 0.9667; queda en (628.6,563.7) R=369.9 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,565) R=369.1 → escala 1.0028; queda en (628.4,567.1) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-negro-negro": {
-   "src": "/assets/img/lunar-config/straps/caucho-negro-negro.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-negro-negro.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -294,11 +294,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-negro-negro-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (638,587) R=361 → escala 1.0313; queda en (626.7,565.7) R=369.0 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (632,581) R=350.1 → escala 1.0520; queda en (627.9,567.6) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-negro-blanco": {
-   "src": "/assets/img/lunar-config/straps/caucho-negro-blanco.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-negro-blanco.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -308,11 +308,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-negro-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (635,619) R=381 → escala 0.9684; queda en (627.2,565.1) R=369.5 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (629,572) R=364.4 → escala 0.9879; queda en (626.8,567.1) R=370.6 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-negro-verde": {
-   "src": "/assets/img/lunar-config/straps/caucho-negro-verde.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-negro-verde.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -322,11 +322,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-negro-verde-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (628,595) R=359 → escala 1.0283; queda en (627.5,565.2) R=369.0 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (625,581) R=345.3 → escala 1.0515; queda en (627.8,566.9) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-negro-naranja": {
-   "src": "/assets/img/lunar-config/straps/caucho-negro-naranja.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-negro-naranja.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -336,11 +336,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-negro-naranja-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (638,568) R=363 → escala 1.0180; queda en (626.5,563.9) R=369.5 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (631,566) R=351.9 → escala 1.0476; queda en (628.2,567.3) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-negro-azul": {
-   "src": "/assets/img/lunar-config/straps/caucho-negro-azul.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-negro-azul.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -350,11 +350,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-negro-azul-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. Negro: fuera del bisel azul.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (639,582) R=365 → escala 1.0099; queda en (628.2,563.7) R=369.8 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (632,577) R=355.8 → escala 1.0386; queda en (628.1,566.7) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-gris-blanco": {
-   "src": "/assets/img/lunar-config/straps/caucho-gris-blanco.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-gris-blanco.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -362,11 +362,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-gris-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (633,568) R=362 → escala 1.0208; queda en (627.2,565.7) R=369.1 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (626,561) R=350.2 → escala 1.0592; queda en (627.8,567.0) R=369.8 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-gris-gris": {
-   "src": "/assets/img/lunar-config/straps/caucho-gris-gris.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-gris-gris.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -374,11 +374,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-gris-gris-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (642,579) R=358 → escala 1.0306; queda en (627.4,565.2) R=369.0 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (641,578) R=353.1 → escala 1.0652; queda en (628.2,567.8) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-azul-claro-blanco": {
-   "src": "/assets/img/lunar-config/straps/caucho-azul-claro-blanco.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-azul-claro-blanco.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -388,11 +388,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-azul-claro-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. REGLA (Oscar, 21/08): la caja de acero con bisel negro no lleva esta correa.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (630,584) R=359 → escala 1.0315; queda en (627.8,565.7) R=369.3 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (630,571) R=356.5 → escala 1.0399; queda en (629.2,567.9) R=371.1 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-naranja-blanco": {
-   "src": "/assets/img/lunar-config/straps/caucho-naranja-blanco.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-naranja-blanco.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -400,11 +400,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-naranja-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (680,604) R=390 → escala 0.9426; queda en (627.3,565.3) R=369.3 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (678,594) R=381.3 → escala 0.9659; queda en (628.4,566.5) R=370.3 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-marron-blanco": {
-   "src": "/assets/img/lunar-config/straps/caucho-marron-blanco.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-marron-blanco.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -412,11 +412,11 @@
    "master4k": "masters-2026/lunar/capas/caucho-marron-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (642,583) R=380 → escala 0.9726; queda en (627.3,564.8) R=369.3 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (642,581) R=373.8 → escala 1.0003; queda en (628.4,567.2) R=370.0 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   },
   "caucho-azul-marino-blanco": {
-   "src": "/assets/img/lunar-config/straps/caucho-azul-marino-blanco.webp?v=7",
+   "src": "/assets/img/lunar-config/straps/caucho-azul-marino-blanco.webp?v=8",
    "cabezasPermitidas": [
     "cab-acero-"
    ],
@@ -426,7 +426,7 @@
    "master4k": "masters-2026/lunar/capas/caucho-azul-marino-blanco-madre-4k.png",
    "cabezaDeLaFoto": "cab-acero-bnegro-agujas-plateadas",
    "nota": "Caucho tipo MoonSwatch, familia de Oscar del 19/08: once combinaciones de color de correa y color de pespunte. Sustituye a la de trama de cesta. Solo cajas de acero. REGLA (Oscar, 21/08): la caja de acero con bisel negro no lleva esta correa.",
-   "alineada": "22/08/2026: desde la foto original, por el BORDE EXTERIOR DEL BISEL. Era (638,628) R=400 → escala 0.9204; queda en (627.9,565.2) R=369.1 contra la cabeza (627,565) R=369",
+   "alineada": "22/08/2026 (2.ª tanda): desde la foto original, midiendo el bisel de FUERA A DENTRO. Era (629,583) R=370.4 → escala 0.9396; queda en (627.8,567.2) R=369.9 contra la cabeza (628.2,567.3) R=370.0",
    "cajaDeLaFoto": "acero"
   }
  },
