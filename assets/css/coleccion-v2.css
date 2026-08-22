@@ -206,6 +206,22 @@
   background-position:66% 44%;
 }
 
+/* La Bitácora: la mesa de cartas de un camarote, con el ojo de buey, el
+   compás y el cuaderno abierto. Es la más oscura de las cinco, así que
+   el velo apenas apuntala el texto por la izquierda y se abre del todo
+   a la derecha, donde está el quinqué —la única luz de la escena—. */
+.cv2-lienzo-bitacora{
+  background-color:#0b0906;
+  background-image:
+    linear-gradient(100deg, rgba(6,5,4,.84) 0%, rgba(6,5,4,.70) 34%, rgba(6,5,4,.26) 66%, rgba(6,5,4,.32) 100%),
+    url("/assets/img/bitacora/editorial/camarote-1600.avif");
+  background-image:
+    linear-gradient(100deg, rgba(6,5,4,.84) 0%, rgba(6,5,4,.70) 34%, rgba(6,5,4,.26) 66%, rgba(6,5,4,.32) 100%),
+    image-set(url("/assets/img/bitacora/editorial/camarote-1600.avif") 1x,
+              url("/assets/img/bitacora/editorial/camarote-2560.avif") 2x);
+  background-position:50% 52%;
+}
+
 /* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
    blanco andaba justo de contraste, aquí por fin brilla. */
 .cv2-lienzo .cv2-chip{background:#fff;color:var(--cv2-negro)}
@@ -485,6 +501,12 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
     background-image:
       linear-gradient(180deg, rgba(6,7,6,.92) 0%, rgba(6,7,6,.89) 42%, rgba(6,7,6,.62) 74%, rgba(6,7,6,.72) 100%),
       url("/assets/img/trinchera-2026/editorial/soldado-1600.avif");
+  }
+  .cv2-lienzo-bitacora{
+    background-position:54% 50%;
+    background-image:
+      linear-gradient(180deg, rgba(6,5,4,.88) 0%, rgba(6,5,4,.84) 46%, rgba(6,5,4,.52) 76%, rgba(6,5,4,.64) 100%),
+      url("/assets/img/bitacora/editorial/camarote-1600.avif");
   }
   .cv2-lienzo-precisa{
     background-position:64% 42%;
