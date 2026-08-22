@@ -60,8 +60,9 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SUBIR EN CADA CAMBIO: Cloudflare sirve el CSS y el JS con max-age=14400.
+V_CARRITO = 11          # OJO: iba a pelo como ?v=1 y al regenerar BAJABA la versión
 V_CSS = 32
-V_JS = 69
+V_JS = 70
 
 # LA FICHA TÉCNICA, APAGADA (Óscar, 13/08/2026)
 # ------------------------------------------------------------
@@ -738,7 +739,7 @@ def pantalla(slug):
 {MANTO_FICHA}
 
 <script type="application/json" data-piezas>{datos}</script>
-<script src="/assets/js/carrito.js?v=1"></script>
+<script src="/assets/js/carrito.js?v={V_CARRITO}"></script>
 <script src="/assets/js/configurador-v2.js?v={V_JS}"></script>
 </body>
 </html>

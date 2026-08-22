@@ -1,2212 +1,2228 @@
 {
-  "precisa": {
-    "nombre": "Precisa",
-    "codigo": "LO-01",
-    "incluido": "Acero 316, color plata",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M1",
-        "cal": "Calibre laOra LO_Q6026",
-        "coste": 15.05,
-        "rot": "Cuarzo Suizo",
-        "specs": "Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y fecha a las 3. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %. Pila de hasta 60 meses de autonomía."
-      },
-      {
-        "ref": "M2",
-        "cal": "Calibre laOra LO_A3826",
-        "coste": 59.01,
-        "rot": "Automático Suizo",
-        "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Acero 316L, fondo sólido",
-        "coste": 69.86
-      },
-      {
-        "ref": "C2",
-        "nombre": "Acero 316L y zafiro, fondo de cristal",
-        "coste": 51.46,
-        "foto": "C1"
-      },
-      {
-        "ref": "C3",
-        "nombre": "Acero 316L y zafiro antirreflejante",
-        "coste": 95.26,
-        "foto": "C1"
-      }
-    ],
-    "esf": [
-      {
-        "ref": "E1",
-        "nombre": "Azul claro",
-        "coste": 10.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E2",
-        "nombre": "Azul",
-        "coste": 10.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E3",
-        "nombre": "Blanca",
-        "coste": 10.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E4",
-        "nombre": "Negra",
-        "coste": 10.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E5",
-        "nombre": "Naranja",
-        "coste": 10.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E6",
-        "nombre": "Tiffany",
-        "coste": 10.39,
-        "cajas": "Todas"
-      }
-    ],
-    "brz": [
-      {
-        "id": "B00",
-        "nombre": "Acero 316, color plata",
-        "v": [
-          {
-            "ref": "Brz-Precisa-316",
-            "nom": "Plata",
-            "c": 0
-          }
-        ]
-      }
-    ],
-    "ejes": {
-      "mov": {
-        "pregunta": "Si es suizo, nuestros relojes también",
-        "tarjetas": {
-          "M1": "Cuarzo suizo",
-          "M2": "Automático suizo"
-        }
-      },
-      "caja": {
-        "porMov": {
-          "M1": {
-            "refs": [
-              "C1"
-            ],
-            "apunte": "fondo sólido: en un cuarzo no hay nada que enseñar"
-          },
-          "M2": {
-            "refs": [
-              "C2",
-              "C3"
-            ],
-            "apunte": "fondo de cristal para ver el movimiento"
-          }
-        }
-      },
-      "esf": {},
-      "brz": {
-        "apunte": ""
-      }
+ "precisa": {
+  "nombre": "Precisa",
+  "codigo": "LO-01",
+  "incluido": "Acero 316, color plata",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M1",
+    "cal": "Calibre laOra LO_Q6026",
+    "coste": 15.05,
+    "rot": "Cuarzo Suizo",
+    "specs": "Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y fecha a las 3. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %. Pila de hasta 60 meses de autonomía."
+   },
+   {
+    "ref": "M2",
+    "cal": "Calibre laOra LO_A3826",
+    "coste": 59.01,
+    "rot": "Automático Suizo",
+    "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Acero 316L, fondo sólido",
+    "coste": 69.86
+   },
+   {
+    "ref": "C2",
+    "nombre": "Acero 316L y zafiro, fondo de cristal",
+    "coste": 51.46,
+    "foto": "C1"
+   },
+   {
+    "ref": "C3",
+    "nombre": "Acero 316L y zafiro antirreflejante",
+    "coste": 95.26,
+    "foto": "C1"
+   }
+  ],
+  "esf": [
+   {
+    "ref": "E1",
+    "nombre": "Azul claro",
+    "coste": 10.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E2",
+    "nombre": "Azul",
+    "coste": 10.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E3",
+    "nombre": "Blanca",
+    "coste": 10.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E4",
+    "nombre": "Negra",
+    "coste": 10.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E5",
+    "nombre": "Naranja",
+    "coste": 10.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E6",
+    "nombre": "Tiffany",
+    "coste": 10.39,
+    "cajas": "Todas"
+   }
+  ],
+  "brz": [
+   {
+    "id": "B00",
+    "nombre": "Acero 316, color plata",
+    "v": [
+     {
+      "ref": "Brz-Precisa-316",
+      "nom": "Plata",
+      "c": 0
+     }
+    ]
+   }
+  ],
+  "ejes": {
+   "mov": {
+    "pregunta": "Si es suizo, nuestros relojes también",
+    "tarjetas": {
+     "M1": "Cuarzo suizo",
+     "M2": "Automático suizo"
     }
-  },
-  "lunar": {
-    "nombre": "Lunar",
-    "codigo": "LO-03",
-    "incluido": "",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M1",
-        "cal": "Calibre laOra LO_MQ326",
-        "coste": 27.59,
-        "rot": "Mecacuarzo japonés",
-        "specs": "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años.",
-        "ficha": [
-          {
-            "h": "El original, sin cuento",
-            "p": "Montamos un calibre mecacuarzo original de fabricación japonesa, ensamblado en Japón. No es una copia ni un módulo genérico: es el mismo calibre, comprado como tal, que montan relojes muy respetados del sector. Lo decimos así de claro porque en este rango de precio es donde más se recorta por dentro, donde no se ve."
-          },
-          {
-            "h": "Dos relojes en uno",
-            "p": "El mecacuarzo es un híbrido honesto: la hora la gobierna un oscilador de cuarzo a 32.768 Hz, con una desviación máxima de ±20 segundos AL MES (un mecánico decente se desvía eso mismo cada día o dos). Y el cronógrafo es un módulo mecánico independiente, con levas, embrague, muelles y martillos de puesta a cero, igual que en los cronógrafos de miles de euros."
-          },
-          {
-            "h": "Lo que notas al usarlo",
-            "p": "Al pulsar el botón de arranque, la aguja central salta al instante, sin el retardo electrónico de los cuarzos corrientes, y avanza barriendo la esfera a cinco pasos por segundo (1/5 de segundo de resolución). Al parar, para en seco. Y al poner a cero, el martillo devuelve la aguja de un golpe limpio e instantáneo, con ese chasquido que solo dan los cronógrafos mecánicos. Los tres contadores funcionan de verdad: nada de subesferas de adorno."
-          },
-          {
-            "h": "Especificaciones del calibre",
-            "t": [
-              [
-                "Calibre",
-                "laOra LO_MQ326"
-              ],
-              [
-                "Origen",
-                "Fabricación japonesa"
-              ],
-              [
-                "Tipo",
-                "Mecacuarzo: cuarzo + módulo cronógrafo mecánico"
-              ],
-              [
-                "Frecuencia",
-                "32.768 Hz"
-              ],
-              [
-                "Precisión",
-                "±20 segundos al mes"
-              ],
-              [
-                "Cronógrafo",
-                "60 minutos, resolución 1/5 de segundo"
-              ],
-              [
-                "Contador 60 min",
-                "a las 9"
-              ],
-              [
-                "Indicador 24 horas",
-                "a las 3"
-              ],
-              [
-                "Segundero pequeño",
-                "a las 6, continuo"
-              ],
-              [
-                "Calendario",
-                "fecha con ajuste rápido por corona"
-              ],
-              [
-                "Parada de segundero",
-                "sí (hacking al poner en hora)"
-              ],
-              [
-                "Agujas",
-                "6"
-              ],
-              [
-                "Diámetro",
-                "30,8 × 29,1 mm (13½ líneas)"
-              ],
-              [
-                "Altura",
-                "5,10 mm"
-              ],
-              [
-                "Pila",
-                "394 (SR936SW)"
-              ],
-              [
-                "Autonomía",
-                "unos 3 años, usando el cronógrafo a diario"
-              ]
-            ]
-          },
-          {
-            "h": "Mantenimiento: casi ninguno",
-            "p": "Ni cuerda, ni rotor, ni engrases, ni regulación. El único mantenimiento real es cambiar la pila cada tres años, aprovechando para revisar las juntas. Y si tras muchos años el módulo se agotara, se sustituye entero por menos de lo que cuesta una revisión corriente de un cronógrafo mecánico: hay repuesto original del fabricante en todo el mundo."
-          },
-          {
-            "h": "En buena compañía",
-            "p": "Este mismo calibre late dentro de relojes tan respetados como el Dan Henry 1963, varios Undone, los AVI-8 de aviación o los Vostok-Europe. No lo elegimos por barato: lo elegimos porque es el estándar del mecacuarzo, y lo demás son imitaciones."
-          },
-          {
-            "h": "Ojo con los cronos de módulo genérico",
-            "p": "En este precio abundan los cronógrafos con módulos genéricos de bajo coste, y conviene saber qué se compra. Lo típico: la aguja del cronógrafo avanza a saltos de un segundo, sin barrido; la puesta a cero es perezosa, la aguja vuelve girando despacio o se queda torcida, y con el uso los contadores pierden el cero y hay que recalibrarlos; hay subesferas pintadas que no funcionan; tijas y pulsadores que se desacoplan; y cuando fallan no hay repuestos ni servicio técnico: el reloj entero, al cajón. Por eso el módulo de este reloj es un original japonés con repuesto en todo el mundo, no un genérico sin nombre."
-          }
-        ],
-        "apunte": ""
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Bisel Negro",
-        "coste": 31.57
-      },
-      {
-        "ref": "C2",
-        "nombre": "Bisel Azul",
-        "coste": 31.57
-      },
-      {
-        "ref": "C3",
-        "nombre": "Caja Negra PVD",
-        "coste": 32.57
-      }
-    ],
-    "esf": [
-      {
-        "ref": "E1",
-        "nombre": "Negra",
-        "coste": 14.19,
-        "cajas": "C1, C3"
-      },
-      {
-        "ref": "E2",
-        "nombre": "Blanca",
-        "coste": 14.19,
-        "cajas": "C2"
-      }
-    ],
-    "brz": [
-      {
-        "id": "B02",
-        "nombre": "Acero 316L, cierre Ostra",
-        "v": [
-          {
-            "ref": "Brz-316-A02",
-            "nom": "Plata",
-            "c": 28.39,
-            "cier": "Cierre Ostra",
-            "eti": "Plata",
-            "hex": "#c9cdd2",
-            "esl": "5 eslabones"
-          },
-          {
-            "ref": "Brz-316-A03",
-            "nom": "Plata y oro rosa",
-            "c": 30.79,
-            "cier": "Cierre Ostra",
-            "eti": "Oro rosa",
-            "hex": "#c9cdd2",
-            "hex2": "#c98d6b",
-            "esl": "5 eslabones"
-          },
-          {
-            "ref": "Brz-316-A04",
-            "nom": "Negro",
-            "c": 30.79,
-            "cier": "Cierre Ostra",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "esl": "5 eslabones"
-          }
-        ],
-        "mat": "Acero 316L"
-      },
-      {
-        "id": "B03",
-        "nombre": "Acero 316L macizo",
-        "v": [
-          {
-            "ref": "Brz-316-A05",
-            "nom": "Tres eslabones",
-            "c": 21.79,
-            "cier": "Cierre desplegable",
-            "eti": "Plata",
-            "hex": "#c9cdd2",
-            "esl": "3 eslabones"
-          },
-          {
-            "ref": "Brz-316-A06",
-            "nom": "Cinco eslabones",
-            "c": 21.79,
-            "cier": "Cierre desplegable",
-            "eti": "Plata",
-            "hex": "#c9cdd2",
-            "esl": "5 eslabones"
-          },
-          {
-            "ref": "Brz-316-A07",
-            "nom": "Tres eslabones negro",
-            "c": 25.19,
-            "cier": "Cierre desplegable",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "esl": "3 eslabones"
-          }
-        ],
-        "mat": "Acero 316L"
-      },
-      {
-        "id": "B08",
-        "nombre": "Acero 904L, Ostra tres eslabones",
-        "mat": "Acero 904L",
-        "v": [
-          {
-            "ref": "Brz-904-A13",
-            "nom": "Mate cepillado",
-            "c": 21.19,
-            "esl": "3 eslabones",
-            "eti": "Plata mate",
-            "hex": "#aeb2b8",
-            "cier": "Cierre Ostra",
-            "foto": "Brz-316-A05"
-          },
-          {
-            "ref": "Brz-904-A14",
-            "nom": "Cepillado pulido",
-            "c": 20.99,
-            "esl": "3 eslabones",
-            "eti": "Plata pulida",
-            "hex": "#d6d9dd",
-            "cier": "Cierre Ostra",
-            "foto": "Brz-316-A05"
-          },
-          {
-            "ref": "Brz-904-A19",
-            "nom": "Negro",
-            "c": 20.99,
-            "esl": "3 eslabones",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "cier": "Cierre Ostra",
-            "foto": "Brz-316-A07"
-          }
-        ]
-      },
-      {
-        "id": "B09",
-        "nombre": "Acero 904L, Jubilee cinco eslabones",
-        "mat": "Acero 904L",
-        "v": [
-          {
-            "ref": "Brz-904-A12",
-            "nom": "Mate cepillado",
-            "c": 20.99,
-            "esl": "5 eslabones",
-            "eti": "Plata mate",
-            "hex": "#aeb2b8",
-            "cier": "Cierre Ostra",
-            "foto": "Brz-316-A02"
-          },
-          {
-            "ref": "Brz-904-A15",
-            "nom": "Plata y oro rosa",
-            "c": 25.19,
-            "esl": "5 eslabones",
-            "eti": "Oro rosa",
-            "hex": "#c9cdd2",
-            "hex2": "#c98d6b",
-            "cier": "Cierre Ostra",
-            "foto": "Brz-316-A03"
-          },
-          {
-            "ref": "Brz-904-A16",
-            "nom": "Negro",
-            "c": 24.99,
-            "esl": "5 eslabones",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "cier": "Cierre Ostra",
-            "foto": "Brz-316-A04"
-          }
-        ]
-      },
-      {
-        "id": "B10",
-        "nombre": "Piel con liberación rápida",
-        "v": [
-          {
-            "ref": "Brz-Piel-P01",
-            "nom": "Negro, pespunte blanco, hebilla mariposa plateada",
-            "c": 30.99,
-            "cier": "Hebilla mariposa plateada",
-            "eti": "Negro, pespunte blanco",
-            "hex": "#1e1f22",
-            "bor": "#f2f0ea",
-            "esl": "",
-            "foto": "Brz-Piel-P02"
-          },
-          {
-            "ref": "Brz-Piel-P02",
-            "nom": "Negro, pespunte blanco, hebilla clásica plateada",
-            "c": 30.79,
-            "cier": "Hebilla clásica plateada",
-            "eti": "Negro, pespunte blanco",
-            "hex": "#1e1f22",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Piel-P03",
-            "nom": "Negro, pespunte blanco, hebilla clásica negra",
-            "c": 31.99,
-            "cier": "Hebilla clásica negra",
-            "eti": "Negro, pespunte blanco",
-            "hex": "#1e1f22",
-            "bor": "#f2f0ea",
-            "esl": "",
-            "foto": "Brz-Piel-P02"
-          },
-          {
-            "ref": "Brz-Piel-P05",
-            "nom": "Negro, pespunte negro, hebilla mariposa plateada",
-            "c": 30.99,
-            "cier": "Hebilla mariposa plateada",
-            "eti": "Negro, pespunte negro",
-            "hex": "#1e1f22",
-            "esl": "",
-            "foto": "Brz-Piel-P06"
-          },
-          {
-            "ref": "Brz-Piel-P06",
-            "nom": "Negro, pespunte negro, hebilla clásica plateada",
-            "c": 31.59,
-            "cier": "Hebilla clásica plateada",
-            "eti": "Negro, pespunte negro",
-            "hex": "#1e1f22",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Piel-P07",
-            "nom": "Negro, pespunte negro, hebilla clásica negra",
-            "c": 31.79,
-            "cier": "Hebilla clásica negra",
-            "eti": "Negro, pespunte negro",
-            "hex": "#1e1f22",
-            "esl": "",
-            "foto": "Brz-Piel-P06"
-          },
-          {
-            "ref": "Brz-Piel-P09",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada",
-            "c": 29.19,
-            "cier": "Hebilla mariposa plateada",
-            "eti": "Marrón oscuro, pespunte blanco",
-            "hex": "#4a2e1c",
-            "esl": "",
-            "bor": "#f2f0ea",
-            "foto": "Brz-Piel-P10"
-          },
-          {
-            "ref": "Brz-Piel-P10",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada",
-            "c": 31.79,
-            "cier": "Hebilla clásica plateada",
-            "eti": "Marrón oscuro, pespunte blanco",
-            "hex": "#4a2e1c",
-            "esl": "",
-            "bor": "#f2f0ea"
-          },
-          {
-            "ref": "Brz-Piel-P11",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra",
-            "c": 31.99,
-            "cier": "Hebilla clásica negra",
-            "eti": "Marrón oscuro, pespunte blanco",
-            "hex": "#4a2e1c",
-            "esl": "",
-            "bor": "#f2f0ea",
-            "foto": "Brz-Piel-P10"
-          },
-          {
-            "ref": "Brz-Piel-P13",
-            "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada",
-            "c": 31.79,
-            "cier": "Hebilla mariposa plateada",
-            "eti": "Marrón oscuro, pespunte negro",
-            "hex": "#4a2e1c",
-            "esl": "",
-            "foto": "Brz-Piel-P14"
-          },
-          {
-            "ref": "Brz-Piel-P14",
-            "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada",
-            "c": 31.59,
-            "cier": "Hebilla clásica plateada",
-            "eti": "Marrón oscuro, pespunte negro",
-            "hex": "#4a2e1c",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Piel-P15",
-            "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra",
-            "c": 31.99,
-            "cier": "Hebilla clásica negra",
-            "eti": "Marrón oscuro, pespunte negro",
-            "hex": "#4a2e1c",
-            "esl": "",
-            "foto": "Brz-Piel-P14"
-          },
-          {
-            "ref": "Brz-Piel-P17",
-            "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
-            "c": 29.39,
-            "cier": "Hebilla mariposa plateada",
-            "eti": "Azul, pespunte blanco",
-            "hex": "#274472",
-            "bor": "#f2f0ea",
-            "esl": "",
-            "foto": "Brz-Piel-P18"
-          },
-          {
-            "ref": "Brz-Piel-P18",
-            "nom": "Azul, pespunte blanco, hebilla clásica plateada",
-            "c": 29.79,
-            "cier": "Hebilla clásica plateada",
-            "eti": "Azul, pespunte blanco",
-            "hex": "#274472",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Piel-P32",
-            "nom": "Azul, pespunte azul, hebilla clásica plateada",
-            "c": 31.99,
-            "cier": "Hebilla clásica plateada",
-            "eti": "Azul, pespunte azul",
-            "hex": "#274472",
-            "bor": "#4a6da3",
-            "esl": ""
-          }
-        ],
-        "mat": "Piel"
-      },
-      {
-        "id": "B11",
-        "nombre": "Piel sintética, hebilla mariposa",
-        "v": [
-          {
-            "ref": "Brz-Sintetica-P51",
-            "nom": "Marrón, pespunte a tono",
-            "c": 3.49,
-            "cier": "Hebilla mariposa",
-            "eti": "Marrón",
-            "hex": "#7b4a2a",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Sintetica-P54",
-            "nom": "Marrón, pespunte blanco",
-            "c": 4.19,
-            "cier": "Hebilla mariposa",
-            "eti": "Marrón, pespunte blanco",
-            "hex": "#7b4a2a",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Sintetica-P55",
-            "nom": "Marrón claro",
-            "c": 4.19,
-            "cier": "Hebilla mariposa",
-            "eti": "Marrón claro",
-            "hex": "#b5763f",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Sintetica-P52",
-            "nom": "Negro",
-            "c": 3.69,
-            "cier": "Hebilla mariposa",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Sintetica-P53",
-            "nom": "Negro con pespunte blanco",
-            "c": 4.19,
-            "cier": "Hebilla mariposa",
-            "eti": "Negro, pespunte blanco",
-            "hex": "#1e1f22",
-            "bor": "#f2f0ea",
-            "esl": ""
-          }
-        ],
-        "mat": "Piel sintética"
-      },
-      {
-        "id": "B13",
-        "nombre": "Caucho con hebilla de acero",
-        "v": [
-          {
-            "ref": "Brz-Goma-G01",
-            "nom": "Negro",
-            "c": 5.69,
-            "cier": "Hebilla de acero",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Goma-G02",
-            "nom": "Blanco",
-            "c": 5.89,
-            "cier": "Hebilla de acero",
-            "eti": "Blanco",
-            "hex": "#eceae4",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Goma-G05",
-            "nom": "Azul",
-            "c": 6.39,
-            "cier": "Hebilla de acero",
-            "eti": "Azul",
-            "hex": "#2456a4",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Goma-G07",
-            "nom": "Gris",
-            "c": 5.79,
-            "cier": "Hebilla de acero",
-            "eti": "Gris",
-            "hex": "#8a8d91",
-            "esl": ""
-          }
-        ],
-        "mat": "Goma"
-      },
-      {
-        "id": "B14",
-        "nombre": "Caucho fluorado, cierre desplegable",
-        "v": [
-          {
-            "ref": "Brz-Caucho-C11",
-            "nom": "Negro negro 01",
-            "c": 18.39,
-            "cier": "Hebilla mariposa",
-            "eti": "Negro, banda negra",
-            "hex": "#1e1f22",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Caucho-C14",
-            "nom": "Naranja blanco 01",
-            "c": 18.39,
-            "cier": "Hebilla mariposa",
-            "eti": "Naranja, banda blanca",
-            "hex": "#e2711d",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Caucho-C15",
-            "nom": "Gris blanco 01",
-            "c": 18.39,
-            "cier": "Hebilla mariposa",
-            "eti": "Gris, banda blanca",
-            "hex": "#8a8d91",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Caucho-C23",
-            "nom": "Blanco blanco 01",
-            "c": 19.59,
-            "cier": "Hebilla mariposa",
-            "eti": "Blanco, banda blanca",
-            "hex": "#eceae4",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Caucho-C26",
-            "nom": "Azul real blanco 02",
-            "c": 19.59,
-            "cier": "Hebilla mariposa",
-            "eti": "Azul real, banda blanca",
-            "hex": "#2456a4",
-            "bor": "#f2f0ea",
-            "esl": ""
-          },
-          {
-            "ref": "Brz-Caucho-C31",
-            "nom": "Negro, cierre oro rosa",
-            "c": 12.69,
-            "cier": "Hebilla mariposa oro rosa",
-            "eti": "Negro, banda negra",
-            "hex": "#1e1f22",
-            "esl": "",
-            "foto": "Brz-Caucho-C11"
-          }
-        ],
-        "mat": "Caucho"
-      },
-      {
-        "id": "B20",
-        "nombre": "Nato con forro de piel genuina",
-        "v": [
-          {
-            "ref": "Brz-NatoPiel-NP01",
-            "nom": "Negro",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Negro",
-            "hex": "#1e1f22",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          },
-          {
-            "ref": "Brz-NatoPiel-NP02",
-            "nom": "Azul",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Azul",
-            "hex": "#27476b",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          },
-          {
-            "ref": "Brz-NatoPiel-NP03",
-            "nom": "Rojo",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Rojo",
-            "hex": "#8a1f1f",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          },
-          {
-            "ref": "Brz-NatoPiel-NP04",
-            "nom": "Caqui",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Caqui",
-            "hex": "#8a7a55",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          },
-          {
-            "ref": "Brz-NatoPiel-NP05",
-            "nom": "Verde",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Verde",
-            "hex": "#4a5a3a",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          },
-          {
-            "ref": "Brz-NatoPiel-NP06",
-            "nom": "Gris",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Gris",
-            "hex": "#6f7276",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          },
-          {
-            "ref": "Brz-NatoPiel-NP07",
-            "nom": "Naranja",
-            "c": 4.99,
-            "cier": "Hebilla clásica",
-            "eti": "Naranja",
-            "hex": "#c9661e",
-            "esl": "",
-            "foto": "Brz-Nailon-N04"
-          }
-        ]
-      }
-    ],
-    "ejes": {
-      "mov": {},
-      "caja": {
-        "esfPar": {
-          "C1": "E1",
-          "C2": "E2",
-          "C3": "E1"
-        }
-      },
-      "esf": {
-        "auto": true
-      },
-      "brz": {
-        "compat": {
-          "C3": [
-            "Brz-316-A04",
-            "Brz-316-A07",
-            "Brz-904-A19",
-            "Brz-904-A16",
-            "Brz-Piel-P01",
-            "Brz-Piel-P02",
-            "Brz-Piel-P03",
-            "Brz-Piel-P05",
-            "Brz-Piel-P06",
-            "Brz-Piel-P07",
-            "Brz-Sintetica-P52",
-            "Brz-Sintetica-P53",
-            "Brz-Goma-G01",
-            "Brz-Caucho-C11"
-          ]
-        },
-        "compatNo": {
-          "C1": [
-            "Brz-316-A04",
-            "Brz-316-A07",
-            "Brz-904-A19",
-            "Brz-904-A16",
-            "Brz-Piel-P17",
-            "Brz-Piel-P18",
-            "Brz-Piel-P32"
-          ],
-          "C2": [
-            "Brz-316-A04",
-            "Brz-316-A07",
-            "Brz-904-A19",
-            "Brz-904-A16",
-            "Brz-Piel-P03",
-            "Brz-Piel-P07",
-            "Brz-Piel-P01",
-            "Brz-Piel-P02",
-            "Brz-Piel-P05",
-            "Brz-Piel-P06",
-            "Brz-Piel-P09",
-            "Brz-Piel-P10",
-            "Brz-Piel-P11",
-            "Brz-Piel-P13",
-            "Brz-Piel-P14",
-            "Brz-Piel-P15",
-            "Brz-Sintetica-P51",
-            "Brz-Sintetica-P52",
-            "Brz-Sintetica-P53"
-          ]
-        },
-        "cierreSoloAlPulsar": [
-          "Piel",
-          "Piel sintética"
-        ]
-      }
-    },
-    "inicio": {
-      "brz": "B03",
-      "v": 0
-    },
-    "_nota_esferas": "La esfera no se elige: la manda el bisel (Oscar, 10/08/2026). Negro lleva la negra E1 y azul la blanca E2. La esfera azul E3 quedo fuera del catalogo del Lunar ese dia; si vuelve, quitar ejes.esf.auto y restaurar la fila.",
-    "fichaMat": {
-      "Acero 316L": [
-        {
-          "h": "Acero 316L, el estándar de la buena relojería",
-          "p": "El 316L es el acero quirúrgico de baja emisión de carbono: el mismo que monta la inmensa mayoría de la relojería suiza de calidad, desde las marcas de entrada hasta casas de varios miles de euros. Resiste la corrosión, el sudor y el agua de mar, es el acero hipoalergénico de referencia y se pule y mantiene con facilidad. Es, sencillamente, el material con el que se mide todo lo demás."
-        },
-        {
-          "h": "Lo que hay que saber de esta gama",
-          "p": "Para dejar el precio donde está, en esta gama algunos brazaletes combinan eslabones macizos con eslabones huecos. En la práctica pesan menos en la muñeca —hay quien lo prefiere así para todo el día— y suenan un poco más vivos que un enterizo. Quien busque el peso y el silencio de un brazalete macizo tiene en lo más alto el 904L."
-        }
+   },
+   "caja": {
+    "porMov": {
+     "M1": {
+      "refs": [
+       "C1"
       ],
-      "Acero 316L macizo": [
-        {
-          "h": "Acero 316L macizo, eslabón a eslabón",
-          "p": "El mismo acero quirúrgico 316L, pero con cada eslabón mecanizado en una pieza maciza: más peso, más solidez y ese silencio en la muñeca que distingue a un brazalete enterizo de uno hueco. La nobleza del macizo sin el sobrecoste del 904L."
-        },
-        {
-          "h": "Y frente al 904L",
-          "p": "El 904L añade a la receta más cromo, níquel, cobre y molibdeno: gana un brillo más profundo y aún más resistencia a la corrosión. La diferencia existe y se paga, pero es sutil: el 316L macizo da prácticamente la misma sensación de solidez, y sigue siendo la referencia hipoalergénica para pieles sensibles."
-        }
+      "apunte": "fondo sólido: en un cuarzo no hay nada que enseñar"
+     },
+     "M2": {
+      "refs": [
+       "C2",
+       "C3"
       ],
-      "Acero 904L": [
-        {
-          "h": "Acero 904L, el acero de los grandes",
-          "p": "El 904L es una aleación superior al 316L: lleva más cromo, níquel, cobre y molibdeno. Dos consecuencias: una resistencia a la corrosión excepcional —ácidos, sudor, agua de mar— y, sobre todo, un pulido más profundo y brillante, con ese tono plateado húmedo que caracteriza a los brazaletes de las casas más exclusivas de Suiza, que lo reservan para relojes de decenas de miles de euros. Casi nadie lo monta porque es difícil y caro de mecanizar: por eso distingue a quien lo lleva."
-        },
-        {
-          "h": "Para ser justos",
-          "p": "Frente al 316L pesa un poco más y, al llevar más níquel, en pieles extremadamente sensibles el 316L sigue siendo la referencia hipoalergénica. Y como todo acero se puede rayar con el uso; la ventaja es que su pulido se recupera de maravilla. Por lo demás, es el mejor acero que se puede poner en una muñeca."
-        }
-      ]
+      "apunte": "fondo de cristal para ver el movimiento"
+     }
     }
-  },
-  "bitacora": {
-    "nombre": "Bitácora",
-    "codigo": "LO-04",
-    "incluido": "",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M1",
-        "cal": "Calibre laOra LO_A3826",
-        "coste": 59.01,
-        "rot": "Automático Suizo",
-        "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática.",
-        "apunte": ""
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Plata",
-        "coste": 29.57
-      },
-      {
-        "ref": "C3",
-        "nombre": "Oro Rosa",
-        "coste": 34.97
-      },
-      {
-        "ref": "C4",
-        "nombre": "Negro",
-        "coste": 34.97
-      }
-    ],
-    "esf": [
-      {
-        "ref": "E1",
-        "nombre": "Turquesa",
-        "coste": 21.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E2",
-        "nombre": "Blanca",
-        "coste": 21.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E3",
-        "nombre": "Negra",
-        "coste": 21.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E4",
-        "nombre": "Azul",
-        "coste": 21.39,
-        "cajas": "C1, C3"
-      },
-      {
-        "ref": "E5",
-        "nombre": "Gris",
-        "coste": 21.39,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E6",
-        "nombre": "Marrón",
-        "coste": 25.99,
-        "cajas": "C1, C3"
-      }
-    ],
-    "brz": [
-      {
-        "id": "B18",
-        "nombre": "Acero integrado, cierre plegable",
-        "v": [
-          {
-            "ref": "Brz-Acero-Bit-01",
-            "nom": "Plata",
-            "c": 21.19,
-            "cier": "Cierre plegable",
-            "eti": "Plata",
-            "hex": "#c9cdd2"
-          },
-          {
-            "ref": "Brz-Acero-Bit-07",
-            "nom": "Plata y oro rosa",
-            "c": 21.19,
-            "cier": "Cierre plegable",
-            "eti": "Plata y oro rosa",
-            "hex": "#c9cdd2",
-            "hex2": "#d9a48a"
-          },
-          {
-            "ref": "Brz-Acero-Bit-06",
-            "nom": "Oro rosa",
-            "c": 21.19,
-            "cier": "Cierre plegable",
-            "eti": "Oro rosa",
-            "hex": "#d9a48a"
-          }
-        ],
-        "mat": "Acero"
-      },
-      {
-        "id": "B21",
-        "nombre": "Acero con PVD negro, cierre plegable",
-        "mat": "Negro PVD",
-        "v": [
-          {
-            "ref": "Brz-Acero-Bit-02",
-            "nom": "Negro",
-            "c": 21.19,
-            "cier": "Cierre plegable",
-            "eti": "Negro",
-            "hex": "#1a1a1a"
-          }
-        ]
-      },
-      {
-        "id": "B17",
-        "nombre": "Correa de silicona, hebilla mariposa",
-        "v": [
-          {
-            "ref": "Brz-Goma-Bit-01",
-            "nom": "Negra",
-            "c": 6.39,
-            "cier": "Hebilla mariposa",
-            "eti": "Negra",
-            "hex": "#1a1a1a"
-          },
-          {
-            "ref": "Brz-Goma-Bit-03",
-            "nom": "Azul",
-            "c": 6.39,
-            "cier": "Hebilla mariposa",
-            "eti": "Azul",
-            "hex": "#26426b"
-          },
-          {
-            "ref": "Brz-Goma-Bit-04",
-            "nom": "Marrón",
-            "c": 6.39,
-            "cier": "Hebilla mariposa",
-            "eti": "Marrón",
-            "hex": "#5c4033"
-          }
-        ],
-        "mat": "Silicona"
-      }
-    ],
-    "ejes": {
-      "mov": {},
-      "caja": {},
-      "esf": {},
-      "brz": {
-        "compat": {
-          "C1": [
-            "Brz-Goma-Bit-01",
-            "Brz-Goma-Bit-03",
-            "Brz-Acero-Bit-01",
-            "Brz-Acero-Bit-07"
-          ],
-          "C3": [
-            "Brz-Goma-Bit-04",
-            "Brz-Acero-Bit-06",
-            "Brz-Acero-Bit-07"
-          ],
-          "C4": [
-            "Brz-Goma-Bit-01",
-            "Brz-Acero-Bit-02"
-          ]
-        }
-      },
-      "veto": [
-        "C3-E4-Brz-Goma-Bit-04",
-        "C3-E2-Brz-Goma-Bit-04",
-        "C3-E3-Brz-Goma-Bit-04",
-        "C3-E5-Brz-Goma-Bit-04",
-        "C1-E6-Brz-Acero-Bit-07",
-        "C1-E6-Brz-Goma-Bit-01",
-        "C1-E6-Brz-Goma-Bit-03",
-        "C3-E2-Brz-Acero-Bit-07",
-        "C3-E3-Brz-Acero-Bit-07",
-        "C3-E4-Brz-Acero-Bit-07",
-        "C3-E5-Brz-Acero-Bit-07",
-        "C1-E3-Brz-Goma-Bit-03",
-        "C3-E4-Brz-Acero-Bit-06",
-        "C3-E5-Brz-Acero-Bit-06"
-      ]
-    },
-    "inicio": {
-      "brz": "B18",
-      "v": 0
-    }
-  },
-  "cerocero": {
-    "nombre": "Cero Cero",
-    "codigo": "LO-05",
-    "incluido": "",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M2",
-        "cal": "Calibre laOra LO_A3826",
-        "coste": 59.01,
-        "rot": "Automático Suizo",
-        "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática.",
-        "apunte": ""
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Bisel negro y blanco",
-        "coste": 35.57
-      },
-      {
-        "ref": "C2",
-        "nombre": "Bisel azul y blanco",
-        "coste": 35.57
-      },
-      {
-        "ref": "C3",
-        "nombre": "Bisel negro y oro rosa",
-        "coste": 35.57
-      },
-      {
-        "ref": "C4",
-        "nombre": "Bisel negro mate",
-        "coste": 35.57
-      }
-    ],
-    "esf": [
-      {
-        "ref": "E1",
-        "nombre": "Azul con oro rosa",
-        "coste": 12.79,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E2",
-        "nombre": "Negra y dorado",
-        "coste": 12.79,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E3",
-        "nombre": "Negra con oro rosa",
-        "coste": 12.79,
-        "cajas": "Todas"
-      }
-    ],
-    "brz": [
-      {
-        "id": "B09",
-        "nombre": "Acero 904L, Jubilee cinco eslabones",
-        "mat": "Acero 904L",
-        "v": [
-          {
-            "ref": "Brz-904-A12",
-            "nom": "Plata",
-            "c": 20.99,
-            "cier": "Cierre desplegable",
-            "eti": "Plata",
-            "hex": "#c9cdd2",
-            "esl": "5 eslabones"
-          }
-        ]
-      },
-      {
-        "id": "B19",
-        "nombre": "Malla milanesa, hebilla plegable",
-        "mat": "Malla milanesa",
-        "v": [
-          {
-            "ref": "Brz-316-A08",
-            "nom": "Plata",
-            "c": 45.79,
-            "cier": "Hebilla plegable",
-            "eti": "Plata",
-            "hex": "#c9cdd2"
-          }
-        ]
-      },
-      {
-        "id": "B20",
-        "nombre": "Malla milanesa de 2,8 mm",
-        "mat": "Malla milanesa 2,8 mm",
-        "detallePie": "La malla · 2,8 mm de grosor, acero 316L macizo",
-        "v": [
-          {
-            "ref": "Brz-316-A09",
-            "nom": "Plata",
-            "c": 52.76,
-            "cier": "Hebilla plegable",
-            "eti": "Plata",
-            "hex": "#c9cdd2",
-            "foto": "Brz-316-A08"
-          }
-        ]
-      }
-    ],
-    "ejes": {
-      "mov": {
-        "pregunta": "Si es suizo, nuestros relojes también",
-        "tarjetas": {
-          "M2": "Automático suizo"
-        }
-      },
-      "caja": {},
-      "esf": {},
-      "brz": {
-        "apunte": "incluido en el precio"
-      }
-    },
-    "_nota": "EL CERO CERO NO MONTA CUARZO. Óscar, 10/08/2026: «no hemos encontrado caja de tapa sólida y por tanto por el momento no montamos cuarzo en el cero cero». El Ronda 715 (M1, 15,05 €) estaba aquí y se ha sacado. Si aparece la caja de tapa sólida, vuelve a entrar. Las claves que empiezan por _ no salen a la página.",
-    "inicio": {
-      "brz": 0,
-      "v": 0
-    },
-    "_notaCajas": "14/08/2026: la caja base es la de 31,79 € (cristal mineral, 100 m). La malla milanesa monta OTRA caja, la de 44,19 € (zafiro, 50 m): sus brazaletes llevan sumada la diferencia de 12,40 €. La hoja aún dice 35,19/56,99; los 44,19 y 31,79 son de Óscar, de hoy."
-  },
-  "coctel": {
-    "nombre": "Cóctel",
-    "codigo": "LO-06",
-    "incluido": "",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M1",
-        "cal": "Calibre laOra LO_Q3626",
-        "coste": 4.63,
-        "rot": "Cuarzo japonés",
-        "specs": "Calibre laOra LO_Q3626, cuarzo de fabricación japonesa con fecha a las 3. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."
-      },
-      {
-        "ref": "M2",
-        "cal": "Calibre laOra LO_A4126",
-        "coste": 61.99,
-        "rot": "Automático japonés",
-        "specs": "Calibre laOra LO_A4126, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Oro rosa, esfera marrón",
-        "coste": 45.77
-      },
-      {
-        "ref": "C2",
-        "nombre": "Plata, esfera azul",
-        "coste": 45.97
-      }
-    ],
-    "esf": [],
-    "brz": [
-      {
-        "id": "B10",
-        "nombre": "Piel con liberación rápida",
-        "v": [
-          {
-            "ref": "Brz-Piel-P01",
-            "nom": "Negro, pespunte blanco, hebilla mariposa plateada",
-            "c": 30.99
-          },
-          {
-            "ref": "Brz-Piel-P02",
-            "nom": "Negro, pespunte blanco, hebilla clásica plateada",
-            "c": 30.79
-          },
-          {
-            "ref": "Brz-Piel-P03",
-            "nom": "Negro, pespunte blanco, hebilla clásica negra",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P04",
-            "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa",
-            "c": 30.39
-          },
-          {
-            "ref": "Brz-Piel-P05",
-            "nom": "Negro, pespunte negro, hebilla mariposa plateada",
-            "c": 30.99
-          },
-          {
-            "ref": "Brz-Piel-P06",
-            "nom": "Negro, pespunte negro, hebilla clásica plateada",
-            "c": 31.59
-          },
-          {
-            "ref": "Brz-Piel-P07",
-            "nom": "Negro, pespunte negro, hebilla clásica negra",
-            "c": 31.79
-          },
-          {
-            "ref": "Brz-Piel-P08",
-            "nom": "Negro, pespunte negro, hebilla clásica de oro rosa",
-            "c": 29.99
-          },
-          {
-            "ref": "Brz-Piel-P09",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada",
-            "c": 29.19
-          },
-          {
-            "ref": "Brz-Piel-P10",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada",
-            "c": 31.79
-          },
-          {
-            "ref": "Brz-Piel-P11",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P12",
-            "nom": "Marrón oscuro, pespunte blanco, hebilla clásica de oro rosa",
-            "c": 31.19
-          },
-          {
-            "ref": "Brz-Piel-P13",
-            "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada",
-            "c": 31.79
-          },
-          {
-            "ref": "Brz-Piel-P14",
-            "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada",
-            "c": 31.59
-          },
-          {
-            "ref": "Brz-Piel-P15",
-            "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P16",
-            "nom": "Marrón oscuro, pespunte negro, hebilla clásica de oro rosa",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P17",
-            "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
-            "c": 29.39
-          },
-          {
-            "ref": "Brz-Piel-P18",
-            "nom": "Azul, pespunte blanco, hebilla clásica plateada",
-            "c": 29.79
-          },
-          {
-            "ref": "Brz-Piel-P19",
-            "nom": "Azul, pespunte blanco, hebilla clásica negra",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P20",
-            "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa",
-            "c": 32.39
-          },
-          {
-            "ref": "Brz-Piel-P21",
-            "nom": "Azul, pespunte negro, hebilla mariposa plateada",
-            "c": 31.19
-          },
-          {
-            "ref": "Brz-Piel-P22",
-            "nom": "Azul, pespunte negro, hebilla clásica plateada",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P23",
-            "nom": "Azul, pespunte negro, hebilla clásica negra",
-            "c": 31.79
-          },
-          {
-            "ref": "Brz-Piel-P24",
-            "nom": "Azul, pespunte negro, hebilla clásica de oro rosa",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P25",
-            "nom": "Verde, pespunte blanco, hebilla mariposa plateada",
-            "c": 31.59
-          },
-          {
-            "ref": "Brz-Piel-P26",
-            "nom": "Verde, pespunte blanco, hebilla clásica plateada",
-            "c": 31.79
-          },
-          {
-            "ref": "Brz-Piel-P27",
-            "nom": "Verde, pespunte blanco, hebilla clásica negra",
-            "c": 32.39
-          },
-          {
-            "ref": "Brz-Piel-P28",
-            "nom": "Verde, pespunte blanco, hebilla clásica de oro rosa",
-            "c": 32.39
-          },
-          {
-            "ref": "Brz-Piel-P29",
-            "nom": "Verde, pespunte a tono, hebilla mariposa plateada",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P30",
-            "nom": "Verde, pespunte a tono, hebilla clásica plateada",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Piel-P31",
-            "nom": "Verde, pespunte a tono, hebilla clásica negra",
-            "c": 31.99
-          },
-          {
-            "ref": "Brz-Sintetica-P50",
-            "nom": "Verde, pespunte a tono, hebilla clásica de oro rosa",
-            "c": 31.99
-          }
-        ]
-      },
-      {
-        "id": "B11",
-        "nombre": "Piel sintética, hebilla mariposa",
-        "v": [
-          {
-            "ref": "Brz-Sintetica-P51",
-            "nom": "Marrón",
-            "c": 3.49
-          },
-          {
-            "ref": "Brz-Sintetica-P52",
-            "nom": "Negro",
-            "c": 3.69
-          },
-          {
-            "ref": "Brz-Sintetica-P53",
-            "nom": "Negro con pespunte blanco",
-            "c": 4.19
-          },
-          {
-            "ref": "Brz-Sintetica-P54",
-            "nom": "Marrón con pespunte blanco",
-            "c": 4.19
-          },
-          {
-            "ref": "Brz-Sintetica-P55",
-            "nom": "Marrón claro",
-            "c": 4.19
-          }
-        ]
-      },
-      {
-        "id": "B12",
-        "nombre": "Ante",
-        "v": [
-          {
-            "ref": "Brz-Ante-P70",
-            "nom": "Marrón oscuro",
-            "c": 4.39
-          },
-          {
-            "ref": "Brz-Ante-P71",
-            "nom": "Marrón claro",
-            "c": 4.29
-          },
-          {
-            "ref": "Brz-Ante-P72",
-            "nom": "Negro",
-            "c": 4.39
-          },
-          {
-            "ref": "Brz-Ante-P73",
-            "nom": "Azul",
-            "c": 4.49
-          }
-        ]
-      }
-    ],
-    "ejes": {
-      "mov": {
-        "tarjetas": {
-          "M1": "Cuarzo japonés",
-          "M2": "Automático japonés"
-        }
-      },
-      "caja": {},
-      "esf": {},
-      "brz": {
-        "nombres": {
-          "B10": "Piel",
-          "B11": "Piel sintética",
-          "B12": "Ante"
-        }
-      }
-    }
-  },
-  "tortuga": {
-    "nombre": "Tortuga",
-    "codigo": "LO-07",
-    "incluido": "",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M1",
-        "cal": "Calibre laOra LO_Q3626D",
-        "coste": 8.99,
-        "rot": "Cuarzo japonés",
-        "specs": "Calibre laOra LO_Q3626D, cuarzo de fabricación japonesa con día y fecha a las 3 y el disco del día en español. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."
-      },
-      {
-        "ref": "M2",
-        "cal": "Calibre laOra LO_A4126D",
-        "coste": 67.36,
-        "rot": "Automático japonés",
-        "specs": "Calibre laOra LO_A4126D, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, día y fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Mineral, anillo negro",
-        "coste": 36.17
-      },
-      {
-        "ref": "C2",
-        "nombre": "Mineral, anillo turquesa",
-        "coste": 36.17
-      },
-      {
-        "ref": "C3",
-        "nombre": "Mineral, anillo naranja",
-        "coste": 36.17
-      },
-      {
-        "ref": "C4",
-        "nombre": "Zafiro, anillo negro",
-        "coste": 40.37
-      },
-      {
-        "ref": "C5",
-        "nombre": "Zafiro, anillo turquesa",
-        "coste": 40.37
-      },
-      {
-        "ref": "C6",
-        "nombre": "Zafiro, anillo naranja",
-        "coste": 40.37
-      }
-    ],
-    "esf": [
-      {
-        "ref": "E1",
-        "nombre": "Negra",
-        "coste": 17.38,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E2",
-        "nombre": "Azul",
-        "coste": 17.38,
-        "cajas": "Todas"
-      },
-      {
-        "ref": "E3",
-        "nombre": "Verde",
-        "coste": 17.38,
-        "cajas": "Todas"
-      }
-    ],
-    "brz": [
-      {
-        "id": "B02",
-        "nombre": "Acero 316L, cierre desplegable",
-        "v": [
-          {
-            "ref": "Brz-316-A02",
-            "nom": "Plata",
-            "c": 28.39
-          },
-          {
-            "ref": "Brz-316-A03",
-            "nom": "Plata y oro rosa",
-            "c": 30.79
-          },
-          {
-            "ref": "Brz-316-A04",
-            "nom": "Negro",
-            "c": 30.79
-          }
-        ]
-      },
-      {
-        "id": "B03",
-        "nombre": "Acero 316L macizo",
-        "v": [
-          {
-            "ref": "Brz-316-A05",
-            "nom": "Tres eslabones",
-            "c": 21.79
-          },
-          {
-            "ref": "Brz-316-A06",
-            "nom": "Cinco eslabones",
-            "c": 21.79
-          }
-        ]
-      },
-      {
-        "id": "B06",
-        "nombre": "Acero 316L macizo, eslabón ancho",
-        "v": [
-          {
-            "ref": "Brz-316-A10",
-            "nom": "Tres eslabones",
-            "c": 59.69
-          }
-        ]
-      },
-      {
-        "id": "B07",
-        "nombre": "Acero 316L macizo, eslabón fino",
-        "v": [
-          {
-            "ref": "Brz-316-A11",
-            "nom": "Cinco eslabones",
-            "c": 78.39
-          }
-        ]
-      },
-      {
-        "id": "B08",
-        "nombre": "Acero 904L macizo",
-        "v": [
-          {
-            "ref": "Brz-904-A12",
-            "nom": "Mate cepillado",
-            "c": 55.39
-          },
-          {
-            "ref": "Brz-904-A13",
-            "nom": "Brillante pulido",
-            "c": 55.39
-          }
-        ]
-      },
-      {
-        "id": "B09",
-        "nombre": "Acero 904L, eslabones planos",
-        "v": [
-          {
-            "ref": "Brz-904-A14",
-            "nom": "Plata 5 eslabones",
-            "c": 23.79
-          },
-          {
-            "ref": "Brz-904-A15",
-            "nom": "Plata / Oro rosa 5 eslabones",
-            "c": 28.19
-          },
-          {
-            "ref": "Brz-904-A16",
-            "nom": "Negro 5 eslabones",
-            "c": 28.19
-          },
-          {
-            "ref": "Brz-904-A17",
-            "nom": "Plata 3 eslabones cepillado/mate",
-            "c": 23.79
-          },
-          {
-            "ref": "Brz-904-A18",
-            "nom": "Plata 3 eslabones pulido",
-            "c": 23.79
-          },
-          {
-            "ref": "Brz-904-A19",
-            "nom": "Negro 3 eslabones pulido",
-            "c": 28.19
-          },
-          {
-            "ref": "Brz-904-A20",
-            "nom": "Plata / Oro Rosa 3 eslabones pulido",
-            "c": 28.19
-          }
-        ]
-      },
-      {
-        "id": "B13",
-        "nombre": "Caucho con hebilla de acero",
-        "v": [
-          {
-            "ref": "Brz-Goma-G01",
-            "nom": "Negro",
-            "c": 5.69
-          },
-          {
-            "ref": "Brz-Goma-G02",
-            "nom": "Blanco",
-            "c": 5.89
-          },
-          {
-            "ref": "Brz-Goma-G03",
-            "nom": "Rojo",
-            "c": 6.29
-          },
-          {
-            "ref": "Brz-Goma-G04",
-            "nom": "Naranja",
-            "c": 6.39
-          },
-          {
-            "ref": "Brz-Goma-G05",
-            "nom": "Azul",
-            "c": 6.39
-          },
-          {
-            "ref": "Brz-Goma-G06",
-            "nom": "Marrón",
-            "c": 6.39
-          },
-          {
-            "ref": "Brz-Goma-G07",
-            "nom": "Gris",
-            "c": 5.79
-          }
-        ]
-      },
-      {
-        "id": "B14",
-        "nombre": "Caucho fluorado, cierre desplegable",
-        "v": [
-          {
-            "ref": "Brz-Caucho-C01",
-            "nom": "Azul real blanco 01",
-            "c": 18.29
-          },
-          {
-            "ref": "Brz-Caucho-C02",
-            "nom": "Negro blanco",
-            "c": 12.49
-          },
-          {
-            "ref": "Brz-Caucho-C03",
-            "nom": "Negro negro",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C04",
-            "nom": "Verde militar blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C05",
-            "nom": "Azul real blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C06",
-            "nom": "Rojo blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C07",
-            "nom": "Naranja blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C08",
-            "nom": "Gris blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C09",
-            "nom": "Beige blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C10",
-            "nom": "Negro blanco 01",
-            "c": 17.39
-          },
-          {
-            "ref": "Brz-Caucho-C11",
-            "nom": "Negro negro 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C12",
-            "nom": "Verde militar blanco 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C13",
-            "nom": "Rojo blanco 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C14",
-            "nom": "Naranja blanco 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C15",
-            "nom": "Gris blanco 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C16",
-            "nom": "Beige blanco 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C17",
-            "nom": "Negro blanco 02",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C18",
-            "nom": "Negro negro 02",
-            "c": 19.29
-          },
-          {
-            "ref": "Brz-Caucho-C19",
-            "nom": "Verde militar blanco 02",
-            "c": 19.29
-          },
-          {
-            "ref": "Brz-Caucho-C20",
-            "nom": "Rojo blanco 02",
-            "c": 19.29
-          },
-          {
-            "ref": "Brz-Caucho-C21",
-            "nom": "Naranja blanco 02",
-            "c": 19.19
-          },
-          {
-            "ref": "Brz-Caucho-C22",
-            "nom": "Gris blanco 02",
-            "c": 19.19
-          },
-          {
-            "ref": "Brz-Caucho-C23",
-            "nom": "Blanco blanco 01",
-            "c": 19.59
-          },
-          {
-            "ref": "Brz-Caucho-C24",
-            "nom": "Blanco blanco 02",
-            "c": 20.59
-          },
-          {
-            "ref": "Brz-Caucho-C25",
-            "nom": "Marrón blanco 01",
-            "c": 19.59
-          },
-          {
-            "ref": "Brz-Caucho-C26",
-            "nom": "Azul real blanco 02",
-            "c": 19.59
-          },
-          {
-            "ref": "Brz-Caucho-C27",
-            "nom": "Marrón blanco 02",
-            "c": 20.59
-          },
-          {
-            "ref": "Brz-Caucho-C28",
-            "nom": "Blanco blanco",
-            "c": 20.59
-          },
-          {
-            "ref": "Brz-Caucho-C29",
-            "nom": "Marrón blanco",
-            "c": 14.19
-          },
-          {
-            "ref": "Brz-Caucho-C30",
-            "nom": "Beige blanco 02",
-            "c": 14.19
-          }
-        ]
-      }
-    ],
-    "ejes": {
-      "mov": {
-        "tarjetas": {
-          "M1": "Cuarzo japonés",
-          "M2": "Automático japonés"
-        }
-      },
-      "caja": {},
-      "esf": {},
-      "brz": {}
-    }
-  },
-  "diver": {
-    "nombre": "Diver",
-    "codigo": "LO-08",
-    "incluido": "Correa de caucho negra",
-    "extra": false,
-    "mov": [
-      {
-        "ref": "M1",
-        "cal": "Calibre laOra LO_Q2426",
-        "coste": 11.89,
-        "rot": "Cuarzo japonés de barrido",
-        "specs": "Calibre laOra LO_Q2426, cuarzo de fabricación japonesa con segundero de barrido: da cuatro pasos por segundo en lugar de uno, así que de lejos se mueve como un mecánico. Precisión de ±15 segundos al mes, tres agujas sin fecha, parada de segundero y pila de unos 2 años."
-      },
-      {
-        "ref": "M2",
-        "cal": "Calibre laOra LO_A3826",
-        "coste": 59.01,
-        "rot": "Automático Suizo",
-        "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."
-      }
-    ],
-    "caj": [
-      {
-        "ref": "C1",
-        "nombre": "Acero con zafiro, 300 m",
-        "coste": 69.57
-      }
-    ],
-    "esf": [],
-    "brz": [
-      {
-        "id": "B00",
-        "nombre": "La que viene con la caja",
-        "v": [
-          {
-            "ref": "",
-            "nom": "Caucho negro",
-            "c": 0,
-            "foto": "Brz-Diver-Pack"
-          }
-        ]
-      },
-      {
-        "id": "B02",
-        "nombre": "Acero 316L, cierre desplegable",
-        "v": [
-          {
-            "ref": "Brz-316-A02",
-            "nom": "Plata",
-            "c": 28.39
-          }
-        ]
-      },
-      {
-        "id": "B03",
-        "nombre": "Acero 316L macizo",
-        "v": [
-          {
-            "ref": "Brz-316-A05",
-            "nom": "Tres eslabones",
-            "c": 21.79
-          },
-          {
-            "ref": "Brz-316-A06",
-            "nom": "Cinco eslabones",
-            "c": 21.79
-          }
-        ]
-      },
-      {
-        "id": "B06",
-        "nombre": "Acero 316L macizo, eslabón ancho",
-        "v": [
-          {
-            "ref": "Brz-316-A10",
-            "nom": "Tres eslabones",
-            "c": 59.69
-          }
-        ]
-      },
-      {
-        "id": "B07",
-        "nombre": "Acero 316L macizo, eslabón fino",
-        "v": [
-          {
-            "ref": "Brz-316-A11",
-            "nom": "Cinco eslabones",
-            "c": 78.39
-          }
-        ]
-      },
-      {
-        "id": "B08",
-        "nombre": "Acero 904L macizo",
-        "v": [
-          {
-            "ref": "Brz-904-A12",
-            "nom": "Mate cepillado",
-            "c": 55.39
-          },
-          {
-            "ref": "Brz-904-A13",
-            "nom": "Brillante pulido",
-            "c": 55.39
-          }
-        ]
-      },
-      {
-        "id": "B09",
-        "nombre": "Acero 904L, eslabones planos",
-        "v": [
-          {
-            "ref": "Brz-904-A14",
-            "nom": "Plata 5 eslabones",
-            "c": 23.79
-          },
-          {
-            "ref": "Brz-904-A17",
-            "nom": "Plata 3 eslabones cepillado/mate",
-            "c": 23.79
-          },
-          {
-            "ref": "Brz-904-A18",
-            "nom": "Plata 3 eslabones pulido",
-            "c": 23.79
-          }
-        ]
-      },
-      {
-        "id": "B13",
-        "nombre": "Caucho con hebilla de acero",
-        "v": [
-          {
-            "ref": "Brz-Goma-G04",
-            "nom": "Naranja",
-            "c": 6.39
-          },
-          {
-            "ref": "Brz-Goma-G05",
-            "nom": "Azul",
-            "c": 6.39
-          }
-        ]
-      },
-      {
-        "id": "B14",
-        "nombre": "Caucho fluorado, cierre desplegable",
-        "v": [
-          {
-            "ref": "Brz-Caucho-C01",
-            "nom": "Azul real blanco 01",
-            "c": 18.29
-          },
-          {
-            "ref": "Brz-Caucho-C05",
-            "nom": "Azul real blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C07",
-            "nom": "Naranja blanco",
-            "c": 13.19
-          },
-          {
-            "ref": "Brz-Caucho-C14",
-            "nom": "Naranja blanco 01",
-            "c": 18.39
-          },
-          {
-            "ref": "Brz-Caucho-C21",
-            "nom": "Naranja blanco 02",
-            "c": 19.19
-          },
-          {
-            "ref": "Brz-Caucho-C26",
-            "nom": "Azul real blanco 02",
-            "c": 19.59
-          }
-        ]
-      },
-      {
-        "id": "B15",
-        "nombre": "Tela de vela, hebilla mariposa",
-        "v": [
-          {
-            "ref": "Brz-Nailon-N01",
-            "nom": "Rojo",
-            "c": 6.49
-          },
-          {
-            "ref": "Brz-Nailon-N02",
-            "nom": "Naranja",
-            "c": 6.49
-          },
-          {
-            "ref": "Brz-Nailon-N03",
-            "nom": "Gris",
-            "c": 6.39
-          },
-          {
-            "ref": "Brz-Nailon-N04",
-            "nom": "Negro",
-            "c": 6.49
-          },
-          {
-            "ref": "Brz-Nailon-N05",
-            "nom": "Azul",
-            "c": 6.49
-          },
-          {
-            "ref": "Brz-Nailon-N06",
-            "nom": "Verde",
-            "c": 6.49
-          },
-          {
-            "ref": "Brz-Nailon-N07",
-            "nom": "Caqui",
-            "c": 6.49
-          }
-        ]
-      },
-      {
-        "id": "B16",
-        "nombre": "Lona de nailon, liberación rápida",
-        "v": [
-          {
-            "ref": "Brz-Lona-L01",
-            "nom": "Negro",
-            "c": 5.39
-          },
-          {
-            "ref": "Brz-Lona-L02",
-            "nom": "Negro hebilla negra",
-            "c": 6.09
-          },
-          {
-            "ref": "Brz-Lona-L03",
-            "nom": "Gris",
-            "c": 6.09
-          },
-          {
-            "ref": "Brz-Lona-L04",
-            "nom": "Gris hebilla negra",
-            "c": 5.39
-          },
-          {
-            "ref": "Brz-Lona-L05",
-            "nom": "Verde militar",
-            "c": 5.49
-          },
-          {
-            "ref": "Brz-Lona-L06",
-            "nom": "Verde militar hebilla negra",
-            "c": 6.09
-          },
-          {
-            "ref": "Brz-Lona-L07",
-            "nom": "Azul marino",
-            "c": 5.39
-          },
-          {
-            "ref": "Brz-Lona-L08",
-            "nom": "Caqui hebilla negra",
-            "c": 6.09
-          },
-          {
-            "ref": "Brz-Lona-L09",
-            "nom": "Caqui",
-            "c": 5.99
-          },
-          {
-            "ref": "Brz-Lona-L10",
-            "nom": "Azul marino hebilla negra",
-            "c": 6.09
-          }
-        ]
-      }
-    ],
-    "ejes": {
-      "mov": {
-        "tarjetas": {
-          "M1": "Cuarzo japonés",
-          "M2": "Automático suizo"
-        }
-      },
-      "caja": {
-        "apunte": "con su esfera, sus agujas y su correa de caucho negra"
-      },
-      "esf": {},
-      "brz": {
-        "nombres": {
-          "B00": "Caucho negro"
-        }
-      }
-    }
+   },
+   "esf": {},
+   "brz": {
+    "apunte": ""
+   }
   }
+ },
+ "lunar": {
+  "nombre": "Lunar",
+  "codigo": "LO-03",
+  "incluido": "",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M1",
+    "cal": "Calibre laOra LO_MQ326",
+    "coste": 27.59,
+    "rot": "Mecacuarzo japonés",
+    "specs": "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años.",
+    "ficha": [
+     {
+      "h": "El original, sin cuento",
+      "p": "Montamos un calibre mecacuarzo original de fabricación japonesa, ensamblado en Japón. No es una copia ni un módulo genérico: es el mismo calibre, comprado como tal, que montan relojes muy respetados del sector. Lo decimos así de claro porque en este rango de precio es donde más se recorta por dentro, donde no se ve."
+     },
+     {
+      "h": "Dos relojes en uno",
+      "p": "El mecacuarzo es un híbrido honesto: la hora la gobierna un oscilador de cuarzo a 32.768 Hz, con una desviación máxima de ±20 segundos AL MES (un mecánico decente se desvía eso mismo cada día o dos). Y el cronógrafo es un módulo mecánico independiente, con levas, embrague, muelles y martillos de puesta a cero, igual que en los cronógrafos de miles de euros."
+     },
+     {
+      "h": "Lo que notas al usarlo",
+      "p": "Al pulsar el botón de arranque, la aguja central salta al instante, sin el retardo electrónico de los cuarzos corrientes, y avanza barriendo la esfera a cinco pasos por segundo (1/5 de segundo de resolución). Al parar, para en seco. Y al poner a cero, el martillo devuelve la aguja de un golpe limpio e instantáneo, con ese chasquido que solo dan los cronógrafos mecánicos. Los tres contadores funcionan de verdad: nada de subesferas de adorno."
+     },
+     {
+      "h": "Especificaciones del calibre",
+      "t": [
+       [
+        "Calibre",
+        "laOra LO_MQ326"
+       ],
+       [
+        "Origen",
+        "Fabricación japonesa"
+       ],
+       [
+        "Tipo",
+        "Mecacuarzo: cuarzo + módulo cronógrafo mecánico"
+       ],
+       [
+        "Frecuencia",
+        "32.768 Hz"
+       ],
+       [
+        "Precisión",
+        "±20 segundos al mes"
+       ],
+       [
+        "Cronógrafo",
+        "60 minutos, resolución 1/5 de segundo"
+       ],
+       [
+        "Contador 60 min",
+        "a las 9"
+       ],
+       [
+        "Indicador 24 horas",
+        "a las 3"
+       ],
+       [
+        "Segundero pequeño",
+        "a las 6, continuo"
+       ],
+       [
+        "Calendario",
+        "fecha con ajuste rápido por corona"
+       ],
+       [
+        "Parada de segundero",
+        "sí (hacking al poner en hora)"
+       ],
+       [
+        "Agujas",
+        "6"
+       ],
+       [
+        "Diámetro",
+        "30,8 × 29,1 mm (13½ líneas)"
+       ],
+       [
+        "Altura",
+        "5,10 mm"
+       ],
+       [
+        "Pila",
+        "394 (SR936SW)"
+       ],
+       [
+        "Autonomía",
+        "unos 3 años, usando el cronógrafo a diario"
+       ]
+      ]
+     },
+     {
+      "h": "Mantenimiento: casi ninguno",
+      "p": "Ni cuerda, ni rotor, ni engrases, ni regulación. El único mantenimiento real es cambiar la pila cada tres años, aprovechando para revisar las juntas. Y si tras muchos años el módulo se agotara, se sustituye entero por menos de lo que cuesta una revisión corriente de un cronógrafo mecánico: hay repuesto original del fabricante en todo el mundo."
+     },
+     {
+      "h": "En buena compañía",
+      "p": "Este mismo calibre late dentro de relojes tan respetados como el Dan Henry 1963, varios Undone, los AVI-8 de aviación o los Vostok-Europe. No lo elegimos por barato: lo elegimos porque es el estándar del mecacuarzo, y lo demás son imitaciones."
+     },
+     {
+      "h": "Ojo con los cronos de módulo genérico",
+      "p": "En este precio abundan los cronógrafos con módulos genéricos de bajo coste, y conviene saber qué se compra. Lo típico: la aguja del cronógrafo avanza a saltos de un segundo, sin barrido; la puesta a cero es perezosa, la aguja vuelve girando despacio o se queda torcida, y con el uso los contadores pierden el cero y hay que recalibrarlos; hay subesferas pintadas que no funcionan; tijas y pulsadores que se desacoplan; y cuando fallan no hay repuestos ni servicio técnico: el reloj entero, al cajón. Por eso el módulo de este reloj es un original japonés con repuesto en todo el mundo, no un genérico sin nombre."
+     }
+    ],
+    "apunte": ""
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Bisel Negro",
+    "coste": 31.57
+   },
+   {
+    "ref": "C2",
+    "nombre": "Bisel Azul",
+    "coste": 31.57
+   },
+   {
+    "ref": "C3",
+    "nombre": "Caja Negra PVD",
+    "coste": 32.57
+   }
+  ],
+  "esf": [
+   {
+    "ref": "E1",
+    "nombre": "Negra",
+    "coste": 14.19,
+    "cajas": "C1, C3"
+   },
+   {
+    "ref": "E2",
+    "nombre": "Blanca",
+    "coste": 14.19,
+    "cajas": "C2"
+   }
+  ],
+  "brz": [
+   {
+    "id": "B02",
+    "nombre": "Acero 316L, cierre Ostra",
+    "v": [
+     {
+      "ref": "Brz-316-A02",
+      "nom": "Plata",
+      "c": 28.39,
+      "cier": "Cierre Ostra",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "esl": "5 eslabones"
+     },
+     {
+      "ref": "Brz-316-A03",
+      "nom": "Plata y oro rosa",
+      "c": 30.79,
+      "cier": "Cierre Ostra",
+      "eti": "Oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#c98d6b",
+      "esl": "5 eslabones"
+     },
+     {
+      "ref": "Brz-316-A04",
+      "nom": "Negro",
+      "c": 30.79,
+      "cier": "Cierre Ostra",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": "5 eslabones"
+     }
+    ],
+    "mat": "Acero 316L"
+   },
+   {
+    "id": "B03",
+    "nombre": "Acero 316L macizo",
+    "v": [
+     {
+      "ref": "Brz-316-A05",
+      "nom": "Tres eslabones",
+      "c": 21.79,
+      "cier": "Cierre desplegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "esl": "3 eslabones"
+     },
+     {
+      "ref": "Brz-316-A06",
+      "nom": "Cinco eslabones",
+      "c": 21.79,
+      "cier": "Cierre desplegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "esl": "5 eslabones"
+     },
+     {
+      "ref": "Brz-316-A07",
+      "nom": "Tres eslabones negro",
+      "c": 25.19,
+      "cier": "Cierre desplegable",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": "3 eslabones"
+     }
+    ],
+    "mat": "Acero 316L"
+   },
+   {
+    "id": "B08",
+    "nombre": "Acero 904L, Ostra tres eslabones",
+    "mat": "Acero 904L",
+    "v": [
+     {
+      "ref": "Brz-904-A13",
+      "nom": "Mate cepillado",
+      "c": 21.19,
+      "esl": "3 eslabones",
+      "eti": "Plata mate",
+      "hex": "#aeb2b8",
+      "cier": "Cierre Ostra",
+      "foto": "Brz-316-A05"
+     },
+     {
+      "ref": "Brz-904-A14",
+      "nom": "Cepillado pulido",
+      "c": 20.99,
+      "esl": "3 eslabones",
+      "eti": "Plata pulida",
+      "hex": "#d6d9dd",
+      "cier": "Cierre Ostra",
+      "foto": "Brz-316-A05"
+     },
+     {
+      "ref": "Brz-904-A19",
+      "nom": "Negro",
+      "c": 20.99,
+      "esl": "3 eslabones",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "cier": "Cierre Ostra",
+      "foto": "Brz-316-A07"
+     }
+    ]
+   },
+   {
+    "id": "B09",
+    "nombre": "Acero 904L, Jubilee cinco eslabones",
+    "mat": "Acero 904L",
+    "v": [
+     {
+      "ref": "Brz-904-A12",
+      "nom": "Mate cepillado",
+      "c": 20.99,
+      "esl": "5 eslabones",
+      "eti": "Plata mate",
+      "hex": "#aeb2b8",
+      "cier": "Cierre Ostra",
+      "foto": "Brz-316-A02"
+     },
+     {
+      "ref": "Brz-904-A15",
+      "nom": "Plata y oro rosa",
+      "c": 25.19,
+      "esl": "5 eslabones",
+      "eti": "Oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#c98d6b",
+      "cier": "Cierre Ostra",
+      "foto": "Brz-316-A03"
+     },
+     {
+      "ref": "Brz-904-A16",
+      "nom": "Negro",
+      "c": 24.99,
+      "esl": "5 eslabones",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "cier": "Cierre Ostra",
+      "foto": "Brz-316-A04"
+     }
+    ]
+   },
+   {
+    "id": "B10",
+    "nombre": "Piel con liberación rápida",
+    "v": [
+     {
+      "ref": "Brz-Piel-P01",
+      "nom": "Negro, pespunte blanco, hebilla mariposa plateada",
+      "c": 30.99,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea",
+      "esl": "",
+      "foto": "Brz-Piel-P02"
+     },
+     {
+      "ref": "Brz-Piel-P02",
+      "nom": "Negro, pespunte blanco, hebilla clásica plateada",
+      "c": 30.79,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P03",
+      "nom": "Negro, pespunte blanco, hebilla clásica negra",
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea",
+      "esl": "",
+      "foto": "Brz-Piel-P02"
+     },
+     {
+      "ref": "Brz-Piel-P05",
+      "nom": "Negro, pespunte negro, hebilla mariposa plateada",
+      "c": 30.99,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22",
+      "esl": "",
+      "foto": "Brz-Piel-P06"
+     },
+     {
+      "ref": "Brz-Piel-P06",
+      "nom": "Negro, pespunte negro, hebilla clásica plateada",
+      "c": 31.59,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P07",
+      "nom": "Negro, pespunte negro, hebilla clásica negra",
+      "c": 31.79,
+      "cier": "Hebilla clásica negra",
+      "eti": "Negro, pespunte negro",
+      "hex": "#1e1f22",
+      "esl": "",
+      "foto": "Brz-Piel-P06"
+     },
+     {
+      "ref": "Brz-Piel-P09",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada",
+      "c": 29.19,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Marrón oscuro, pespunte blanco",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "bor": "#f2f0ea",
+      "foto": "Brz-Piel-P10"
+     },
+     {
+      "ref": "Brz-Piel-P10",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada",
+      "c": 31.79,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Marrón oscuro, pespunte blanco",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "bor": "#f2f0ea"
+     },
+     {
+      "ref": "Brz-Piel-P11",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra",
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Marrón oscuro, pespunte blanco",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "bor": "#f2f0ea",
+      "foto": "Brz-Piel-P10"
+     },
+     {
+      "ref": "Brz-Piel-P13",
+      "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada",
+      "c": 31.79,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Marrón oscuro, pespunte negro",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "foto": "Brz-Piel-P14"
+     },
+     {
+      "ref": "Brz-Piel-P14",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada",
+      "c": 31.59,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Marrón oscuro, pespunte negro",
+      "hex": "#4a2e1c",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P15",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra",
+      "c": 31.99,
+      "cier": "Hebilla clásica negra",
+      "eti": "Marrón oscuro, pespunte negro",
+      "hex": "#4a2e1c",
+      "esl": "",
+      "foto": "Brz-Piel-P14"
+     },
+     {
+      "ref": "Brz-Piel-P17",
+      "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
+      "c": 29.39,
+      "cier": "Hebilla mariposa plateada",
+      "eti": "Azul, pespunte blanco",
+      "hex": "#274472",
+      "bor": "#f2f0ea",
+      "esl": "",
+      "foto": "Brz-Piel-P18"
+     },
+     {
+      "ref": "Brz-Piel-P18",
+      "nom": "Azul, pespunte blanco, hebilla clásica plateada",
+      "c": 29.79,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Azul, pespunte blanco",
+      "hex": "#274472",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Piel-P32",
+      "nom": "Azul, pespunte azul, hebilla clásica plateada",
+      "c": 31.99,
+      "cier": "Hebilla clásica plateada",
+      "eti": "Azul, pespunte azul",
+      "hex": "#274472",
+      "bor": "#4a6da3",
+      "esl": ""
+     }
+    ],
+    "mat": "Piel"
+   },
+   {
+    "id": "B11",
+    "nombre": "Piel sintética, hebilla mariposa",
+    "v": [
+     {
+      "ref": "Brz-Sintetica-P51",
+      "nom": "Marrón, pespunte a tono",
+      "c": 3.49,
+      "cier": "Hebilla mariposa",
+      "eti": "Marrón",
+      "hex": "#7b4a2a",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Sintetica-P54",
+      "nom": "Marrón, pespunte blanco",
+      "c": 4.19,
+      "cier": "Hebilla mariposa",
+      "eti": "Marrón, pespunte blanco",
+      "hex": "#7b4a2a",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Sintetica-P55",
+      "nom": "Marrón claro",
+      "c": 4.19,
+      "cier": "Hebilla mariposa",
+      "eti": "Marrón claro",
+      "hex": "#b5763f",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Sintetica-P52",
+      "nom": "Negro",
+      "c": 3.69,
+      "cier": "Hebilla mariposa",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Sintetica-P53",
+      "nom": "Negro con pespunte blanco",
+      "c": 4.19,
+      "cier": "Hebilla mariposa",
+      "eti": "Negro, pespunte blanco",
+      "hex": "#1e1f22",
+      "bor": "#f2f0ea",
+      "esl": ""
+     }
+    ],
+    "mat": "Piel sintética"
+   },
+   {
+    "id": "B13",
+    "nombre": "Caucho con hebilla de acero",
+    "v": [
+     {
+      "ref": "Brz-Goma-G01",
+      "nom": "Negro",
+      "c": 5.69,
+      "cier": "Hebilla de acero",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Goma-G02",
+      "nom": "Blanco",
+      "c": 5.89,
+      "cier": "Hebilla de acero",
+      "eti": "Blanco",
+      "hex": "#eceae4",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Goma-G05",
+      "nom": "Azul",
+      "c": 6.39,
+      "cier": "Hebilla de acero",
+      "eti": "Azul",
+      "hex": "#2456a4",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Goma-G07",
+      "nom": "Gris",
+      "c": 5.79,
+      "cier": "Hebilla de acero",
+      "eti": "Gris",
+      "hex": "#8a8d91",
+      "esl": ""
+     }
+    ],
+    "mat": "Goma"
+   },
+   {
+    "id": "B14",
+    "nombre": "Caucho fluorado, cierre desplegable",
+    "v": [
+     {
+      "ref": "Brz-Caucho-C11",
+      "nom": "Negro negro 01",
+      "c": 18.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Negro, banda negra",
+      "hex": "#1e1f22",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Caucho-C14",
+      "nom": "Naranja blanco 01",
+      "c": 18.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Naranja, banda blanca",
+      "hex": "#e2711d",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Caucho-C15",
+      "nom": "Gris blanco 01",
+      "c": 18.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Gris, banda blanca",
+      "hex": "#8a8d91",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Caucho-C23",
+      "nom": "Blanco blanco 01",
+      "c": 19.59,
+      "cier": "Hebilla mariposa",
+      "eti": "Blanco, banda blanca",
+      "hex": "#eceae4",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Caucho-C26",
+      "nom": "Azul real blanco 02",
+      "c": 19.59,
+      "cier": "Hebilla mariposa",
+      "eti": "Azul real, banda blanca",
+      "hex": "#2456a4",
+      "bor": "#f2f0ea",
+      "esl": ""
+     },
+     {
+      "ref": "Brz-Caucho-C31",
+      "nom": "Negro, cierre oro rosa",
+      "c": 12.69,
+      "cier": "Hebilla mariposa oro rosa",
+      "eti": "Negro, banda negra",
+      "hex": "#1e1f22",
+      "esl": "",
+      "foto": "Brz-Caucho-C11"
+     }
+    ],
+    "mat": "Caucho"
+   },
+   {
+    "id": "B20",
+    "nombre": "Nato con forro de piel genuina",
+    "v": [
+     {
+      "ref": "Brz-NatoPiel-NP01",
+      "nom": "Negro",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Negro",
+      "hex": "#1e1f22",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-NatoPiel-NP02",
+      "nom": "Azul",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Azul",
+      "hex": "#27476b",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-NatoPiel-NP03",
+      "nom": "Rojo",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Rojo",
+      "hex": "#8a1f1f",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-NatoPiel-NP04",
+      "nom": "Caqui",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Caqui",
+      "hex": "#8a7a55",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-NatoPiel-NP05",
+      "nom": "Verde",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Verde",
+      "hex": "#4a5a3a",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-NatoPiel-NP06",
+      "nom": "Gris",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Gris",
+      "hex": "#6f7276",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     },
+     {
+      "ref": "Brz-NatoPiel-NP07",
+      "nom": "Naranja",
+      "c": 4.99,
+      "cier": "Hebilla clásica",
+      "eti": "Naranja",
+      "hex": "#c9661e",
+      "esl": "",
+      "foto": "Brz-Nailon-N04"
+     }
+    ]
+   }
+  ],
+  "ejes": {
+   "mov": {},
+   "caja": {
+    "esfPar": {
+     "C1": "E1",
+     "C2": "E2",
+     "C3": "E1"
+    }
+   },
+   "esf": {
+    "auto": true
+   },
+   "brz": {
+    "compat": {
+     "C3": [
+      "Brz-316-A04",
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16",
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P03",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P07",
+      "Brz-Sintetica-P52",
+      "Brz-Sintetica-P53",
+      "Brz-Goma-G01",
+      "Brz-Caucho-C11"
+     ]
+    },
+    "compatNo": {
+     "C1": [
+      "Brz-316-A04",
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16",
+      "Brz-Piel-P17",
+      "Brz-Piel-P18",
+      "Brz-Piel-P32"
+     ],
+     "C2": [
+      "Brz-316-A04",
+      "Brz-316-A07",
+      "Brz-904-A19",
+      "Brz-904-A16",
+      "Brz-Piel-P03",
+      "Brz-Piel-P07",
+      "Brz-Piel-P01",
+      "Brz-Piel-P02",
+      "Brz-Piel-P05",
+      "Brz-Piel-P06",
+      "Brz-Piel-P09",
+      "Brz-Piel-P10",
+      "Brz-Piel-P11",
+      "Brz-Piel-P13",
+      "Brz-Piel-P14",
+      "Brz-Piel-P15",
+      "Brz-Sintetica-P51",
+      "Brz-Sintetica-P52",
+      "Brz-Sintetica-P53"
+     ]
+    },
+    "cierreSoloAlPulsar": [
+     "Piel",
+     "Piel sintética"
+    ]
+   }
+  },
+  "inicio": {
+   "brz": "B03",
+   "v": 0
+  },
+  "_nota_esferas": "La esfera no se elige: la manda el bisel (Oscar, 10/08/2026). Negro lleva la negra E1 y azul la blanca E2. La esfera azul E3 quedo fuera del catalogo del Lunar ese dia; si vuelve, quitar ejes.esf.auto y restaurar la fila.",
+  "fichaMat": {
+   "Acero 316L": [
+    {
+     "h": "Acero 316L, el estándar de la buena relojería",
+     "p": "El 316L es el acero quirúrgico de baja emisión de carbono: el mismo que monta la inmensa mayoría de la relojería suiza de calidad, desde las marcas de entrada hasta casas de varios miles de euros. Resiste la corrosión, el sudor y el agua de mar, es el acero hipoalergénico de referencia y se pule y mantiene con facilidad. Es, sencillamente, el material con el que se mide todo lo demás."
+    },
+    {
+     "h": "Lo que hay que saber de esta gama",
+     "p": "Para dejar el precio donde está, en esta gama algunos brazaletes combinan eslabones macizos con eslabones huecos. En la práctica pesan menos en la muñeca —hay quien lo prefiere así para todo el día— y suenan un poco más vivos que un enterizo. Quien busque el peso y el silencio de un brazalete macizo tiene en lo más alto el 904L."
+    }
+   ],
+   "Acero 316L macizo": [
+    {
+     "h": "Acero 316L macizo, eslabón a eslabón",
+     "p": "El mismo acero quirúrgico 316L, pero con cada eslabón mecanizado en una pieza maciza: más peso, más solidez y ese silencio en la muñeca que distingue a un brazalete enterizo de uno hueco. La nobleza del macizo sin el sobrecoste del 904L."
+    },
+    {
+     "h": "Y frente al 904L",
+     "p": "El 904L añade a la receta más cromo, níquel, cobre y molibdeno: gana un brillo más profundo y aún más resistencia a la corrosión. La diferencia existe y se paga, pero es sutil: el 316L macizo da prácticamente la misma sensación de solidez, y sigue siendo la referencia hipoalergénica para pieles sensibles."
+    }
+   ],
+   "Acero 904L": [
+    {
+     "h": "Acero 904L, el acero de los grandes",
+     "p": "El 904L es una aleación superior al 316L: lleva más cromo, níquel, cobre y molibdeno. Dos consecuencias: una resistencia a la corrosión excepcional —ácidos, sudor, agua de mar— y, sobre todo, un pulido más profundo y brillante, con ese tono plateado húmedo que caracteriza a los brazaletes de las casas más exclusivas de Suiza, que lo reservan para relojes de decenas de miles de euros. Casi nadie lo monta porque es difícil y caro de mecanizar: por eso distingue a quien lo lleva."
+    },
+    {
+     "h": "Para ser justos",
+     "p": "Frente al 316L pesa un poco más y, al llevar más níquel, en pieles extremadamente sensibles el 316L sigue siendo la referencia hipoalergénica. Y como todo acero se puede rayar con el uso; la ventaja es que su pulido se recupera de maravilla. Por lo demás, es el mejor acero que se puede poner en una muñeca."
+    }
+   ]
+  }
+ },
+ "bitacora": {
+  "nombre": "Bitácora",
+  "codigo": "LO-04",
+  "incluido": "",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M1",
+    "cal": "Calibre laOra LO_A3826",
+    "coste": 59.01,
+    "rot": "Automático Suizo",
+    "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática.",
+    "apunte": ""
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Plata",
+    "coste": 29.57
+   },
+   {
+    "ref": "C3",
+    "nombre": "Oro Rosa",
+    "coste": 34.97
+   },
+   {
+    "ref": "C4",
+    "nombre": "Negro",
+    "coste": 34.97
+   }
+  ],
+  "esf": [
+   {
+    "ref": "E1",
+    "nombre": "Turquesa",
+    "coste": 21.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E2",
+    "nombre": "Blanca",
+    "coste": 21.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E3",
+    "nombre": "Negra",
+    "coste": 21.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E4",
+    "nombre": "Azul",
+    "coste": 21.39,
+    "cajas": "C1, C3"
+   },
+   {
+    "ref": "E5",
+    "nombre": "Gris",
+    "coste": 21.39,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E6",
+    "nombre": "Marrón",
+    "coste": 25.99,
+    "cajas": "C1, C3"
+   }
+  ],
+  "brz": [
+   {
+    "id": "B18",
+    "nombre": "Acero integrado, cierre plegable",
+    "v": [
+     {
+      "ref": "Brz-Acero-Bit-01",
+      "nom": "Plata",
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
+     },
+     {
+      "ref": "Brz-Acero-Bit-07",
+      "nom": "Plata y oro rosa",
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Plata y oro rosa",
+      "hex": "#c9cdd2",
+      "hex2": "#d9a48a"
+     },
+     {
+      "ref": "Brz-Acero-Bit-06",
+      "nom": "Oro rosa",
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Oro rosa",
+      "hex": "#d9a48a"
+     }
+    ],
+    "mat": "Acero"
+   },
+   {
+    "id": "B21",
+    "nombre": "Acero con PVD negro, cierre plegable",
+    "mat": "Negro PVD",
+    "v": [
+     {
+      "ref": "Brz-Acero-Bit-02",
+      "nom": "Negro",
+      "c": 21.19,
+      "cier": "Cierre plegable",
+      "eti": "Negro",
+      "hex": "#1a1a1a"
+     }
+    ]
+   },
+   {
+    "id": "B17",
+    "nombre": "Correa de silicona, hebilla mariposa",
+    "v": [
+     {
+      "ref": "Brz-Goma-Bit-01",
+      "nom": "Negra",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Negra",
+      "hex": "#1a1a1a"
+     },
+     {
+      "ref": "Brz-Goma-Bit-03",
+      "nom": "Azul",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Azul",
+      "hex": "#26426b"
+     },
+     {
+      "ref": "Brz-Goma-Bit-04",
+      "nom": "Marrón",
+      "c": 6.39,
+      "cier": "Hebilla mariposa",
+      "eti": "Marrón",
+      "hex": "#5c4033"
+     }
+    ],
+    "mat": "Silicona"
+   }
+  ],
+  "ejes": {
+   "mov": {},
+   "caja": {},
+   "esf": {},
+   "brz": {
+    "compat": {
+     "C1": [
+      "Brz-Goma-Bit-01",
+      "Brz-Goma-Bit-03",
+      "Brz-Acero-Bit-01",
+      "Brz-Acero-Bit-07"
+     ],
+     "C3": [
+      "Brz-Goma-Bit-04",
+      "Brz-Acero-Bit-06",
+      "Brz-Acero-Bit-07"
+     ],
+     "C4": [
+      "Brz-Goma-Bit-01",
+      "Brz-Acero-Bit-02"
+     ]
+    }
+   },
+   "veto": [
+    "C3-E4-Brz-Goma-Bit-04",
+    "C3-E2-Brz-Goma-Bit-04",
+    "C3-E3-Brz-Goma-Bit-04",
+    "C3-E5-Brz-Goma-Bit-04",
+    "C1-E6-Brz-Acero-Bit-07",
+    "C1-E6-Brz-Goma-Bit-01",
+    "C1-E6-Brz-Goma-Bit-03",
+    "C3-E2-Brz-Acero-Bit-07",
+    "C3-E3-Brz-Acero-Bit-07",
+    "C3-E4-Brz-Acero-Bit-07",
+    "C3-E5-Brz-Acero-Bit-07",
+    "C1-E3-Brz-Goma-Bit-03",
+    "C3-E4-Brz-Acero-Bit-06",
+    "C3-E5-Brz-Acero-Bit-06"
+   ]
+  },
+  "inicio": {
+   "brz": "B18",
+   "v": 0
+  }
+ },
+ "cerocero": {
+  "nombre": "Cero Cero",
+  "codigo": "LO-05",
+  "incluido": "",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M2",
+    "cal": "Calibre laOra LO_A3826",
+    "coste": 59.01,
+    "rot": "Automático Suizo",
+    "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática.",
+    "apunte": ""
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Bisel negro y numerales blancos",
+    "coste": 32.59
+   },
+   {
+    "ref": "C2",
+    "nombre": "Bisel azul y numerales blancos",
+    "coste": 32.59
+   },
+   {
+    "ref": "C3",
+    "nombre": "Bisel negro brillo y numerales oro rosa brillo",
+    "coste": 32.59
+   },
+   {
+    "ref": "C4",
+    "nombre": "Bisel negro mate y numerales negro mate",
+    "coste": 32.59
+   },
+   {
+    "ref": "C5",
+    "nombre": "Bisel negro brillo y numerales oro rosa mate",
+    "coste": 32.59
+   },
+   {
+    "ref": "C6",
+    "nombre": "Bisel azul y oro rosa",
+    "coste": 32.59
+   },
+   {
+    "ref": "C7",
+    "nombre": "Bisel negro mate y numerales oro rosa mate",
+    "coste": 32.59
+   }
+  ],
+  "esf": [
+   {
+    "ref": "E1",
+    "nombre": "Azul con oro rosa",
+    "coste": 12.79,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E2",
+    "nombre": "Negra y dorado",
+    "coste": 12.79,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E3",
+    "nombre": "Negra con oro rosa",
+    "coste": 12.79,
+    "cajas": "Todas"
+   }
+  ],
+  "brz": [
+   {
+    "id": "B09",
+    "nombre": "Acero 904L, Jubilee cinco eslabones",
+    "mat": "Acero 904L",
+    "v": [
+     {
+      "ref": "Brz-904-A12",
+      "nom": "Plata",
+      "c": 20.1,
+      "cier": "Cierre desplegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "esl": "5 eslabones"
+     }
+    ]
+   },
+   {
+    "id": "B19",
+    "nombre": "Malla milanesa, hebilla plegable",
+    "mat": "Malla milanesa",
+    "v": [
+     {
+      "ref": "Brz-316-A08",
+      "nom": "Plata",
+      "c": 17.1,
+      "cier": "Hebilla plegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2"
+     }
+    ]
+   },
+   {
+    "id": "B20",
+    "nombre": "Malla milanesa de 2,8 mm",
+    "mat": "Malla milanesa 2,8 mm",
+    "detallePie": "La malla · 2,8 mm de grosor, acero 316L macizo",
+    "v": [
+     {
+      "ref": "Brz-316-A09",
+      "nom": "Plata",
+      "c": 52.76,
+      "cier": "Hebilla plegable",
+      "eti": "Plata",
+      "hex": "#c9cdd2",
+      "foto": "Brz-316-A08"
+     }
+    ]
+   }
+  ],
+  "ejes": {
+   "mov": {
+    "pregunta": "Si es suizo, nuestros relojes también",
+    "tarjetas": {
+     "M2": "Automático suizo"
+    }
+   },
+   "caja": {},
+   "esf": {},
+   "brz": {
+    "apunte": "incluido en el precio"
+   }
+  },
+  "_nota": "EL CERO CERO NO MONTA CUARZO. Óscar, 10/08/2026: «no hemos encontrado caja de tapa sólida y por tanto por el momento no montamos cuarzo en el cero cero». El Ronda 715 (M1, 15,05 €) estaba aquí y se ha sacado. Si aparece la caja de tapa sólida, vuelve a entrar. Las claves que empiezan por _ no salen a la página.",
+  "inicio": {
+   "brz": 0,
+   "v": 0
+  },
+  "_notaCajas": "14/08/2026: la caja base es la de 31,79 € (cristal mineral, 100 m). La malla milanesa monta OTRA caja, la de 44,19 € (zafiro, 50 m): sus brazaletes llevan sumada la diferencia de 12,40 €. La hoja aún dice 35,19/56,99; los 44,19 y 31,79 son de Óscar, de hoy.",
+  "_costes_nota": "22/08/2026. La caja sola son 32,59 € (anuncio 1005008909811108, 41 mm, esfera 31 mm, trasera transparente, 17 biseles A1-A17, 4,7 con 215 vendidos). Los brazaletes NO se compran sueltos: se compran en pack con la caja, así que su coste aquí es lo que el pack suma sobre la caja sola — Jubilee 904L 52,69 € el pack (20,10 de más) y malla milanesa 49,69 € el pack del anuncio 1005009907882368 (17,10 de más). Sumando salen los packs exactos y no hay merma. La malla de 2,8 mm (Brz-316-A09) sí va suelta, a 52,76 €."
+ },
+ "coctel": {
+  "nombre": "Cóctel",
+  "codigo": "LO-06",
+  "incluido": "",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M1",
+    "cal": "Calibre laOra LO_Q3626",
+    "coste": 4.63,
+    "rot": "Cuarzo japonés",
+    "specs": "Calibre laOra LO_Q3626, cuarzo de fabricación japonesa con fecha a las 3. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."
+   },
+   {
+    "ref": "M2",
+    "cal": "Calibre laOra LO_A4126",
+    "coste": 61.99,
+    "rot": "Automático japonés",
+    "specs": "Calibre laOra LO_A4126, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Oro rosa, esfera marrón",
+    "coste": 45.77
+   },
+   {
+    "ref": "C2",
+    "nombre": "Plata, esfera azul",
+    "coste": 45.97
+   }
+  ],
+  "esf": [],
+  "brz": [
+   {
+    "id": "B10",
+    "nombre": "Piel con liberación rápida",
+    "v": [
+     {
+      "ref": "Brz-Piel-P01",
+      "nom": "Negro, pespunte blanco, hebilla mariposa plateada",
+      "c": 30.99
+     },
+     {
+      "ref": "Brz-Piel-P02",
+      "nom": "Negro, pespunte blanco, hebilla clásica plateada",
+      "c": 30.79
+     },
+     {
+      "ref": "Brz-Piel-P03",
+      "nom": "Negro, pespunte blanco, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P04",
+      "nom": "Negro, pespunte blanco, hebilla clásica de oro rosa",
+      "c": 30.39
+     },
+     {
+      "ref": "Brz-Piel-P05",
+      "nom": "Negro, pespunte negro, hebilla mariposa plateada",
+      "c": 30.99
+     },
+     {
+      "ref": "Brz-Piel-P06",
+      "nom": "Negro, pespunte negro, hebilla clásica plateada",
+      "c": 31.59
+     },
+     {
+      "ref": "Brz-Piel-P07",
+      "nom": "Negro, pespunte negro, hebilla clásica negra",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P08",
+      "nom": "Negro, pespunte negro, hebilla clásica de oro rosa",
+      "c": 29.99
+     },
+     {
+      "ref": "Brz-Piel-P09",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla mariposa plateada",
+      "c": 29.19
+     },
+     {
+      "ref": "Brz-Piel-P10",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica plateada",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P11",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P12",
+      "nom": "Marrón oscuro, pespunte blanco, hebilla clásica de oro rosa",
+      "c": 31.19
+     },
+     {
+      "ref": "Brz-Piel-P13",
+      "nom": "Marrón oscuro, pespunte negro, hebilla mariposa plateada",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P14",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica plateada",
+      "c": 31.59
+     },
+     {
+      "ref": "Brz-Piel-P15",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P16",
+      "nom": "Marrón oscuro, pespunte negro, hebilla clásica de oro rosa",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P17",
+      "nom": "Azul, pespunte blanco, hebilla mariposa plateada",
+      "c": 29.39
+     },
+     {
+      "ref": "Brz-Piel-P18",
+      "nom": "Azul, pespunte blanco, hebilla clásica plateada",
+      "c": 29.79
+     },
+     {
+      "ref": "Brz-Piel-P19",
+      "nom": "Azul, pespunte blanco, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P20",
+      "nom": "Azul, pespunte blanco, hebilla clásica de oro rosa",
+      "c": 32.39
+     },
+     {
+      "ref": "Brz-Piel-P21",
+      "nom": "Azul, pespunte negro, hebilla mariposa plateada",
+      "c": 31.19
+     },
+     {
+      "ref": "Brz-Piel-P22",
+      "nom": "Azul, pespunte negro, hebilla clásica plateada",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P23",
+      "nom": "Azul, pespunte negro, hebilla clásica negra",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P24",
+      "nom": "Azul, pespunte negro, hebilla clásica de oro rosa",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P25",
+      "nom": "Verde, pespunte blanco, hebilla mariposa plateada",
+      "c": 31.59
+     },
+     {
+      "ref": "Brz-Piel-P26",
+      "nom": "Verde, pespunte blanco, hebilla clásica plateada",
+      "c": 31.79
+     },
+     {
+      "ref": "Brz-Piel-P27",
+      "nom": "Verde, pespunte blanco, hebilla clásica negra",
+      "c": 32.39
+     },
+     {
+      "ref": "Brz-Piel-P28",
+      "nom": "Verde, pespunte blanco, hebilla clásica de oro rosa",
+      "c": 32.39
+     },
+     {
+      "ref": "Brz-Piel-P29",
+      "nom": "Verde, pespunte a tono, hebilla mariposa plateada",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P30",
+      "nom": "Verde, pespunte a tono, hebilla clásica plateada",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Piel-P31",
+      "nom": "Verde, pespunte a tono, hebilla clásica negra",
+      "c": 31.99
+     },
+     {
+      "ref": "Brz-Sintetica-P50",
+      "nom": "Verde, pespunte a tono, hebilla clásica de oro rosa",
+      "c": 31.99
+     }
+    ]
+   },
+   {
+    "id": "B11",
+    "nombre": "Piel sintética, hebilla mariposa",
+    "v": [
+     {
+      "ref": "Brz-Sintetica-P51",
+      "nom": "Marrón",
+      "c": 3.49
+     },
+     {
+      "ref": "Brz-Sintetica-P52",
+      "nom": "Negro",
+      "c": 3.69
+     },
+     {
+      "ref": "Brz-Sintetica-P53",
+      "nom": "Negro con pespunte blanco",
+      "c": 4.19
+     },
+     {
+      "ref": "Brz-Sintetica-P54",
+      "nom": "Marrón con pespunte blanco",
+      "c": 4.19
+     },
+     {
+      "ref": "Brz-Sintetica-P55",
+      "nom": "Marrón claro",
+      "c": 4.19
+     }
+    ]
+   },
+   {
+    "id": "B12",
+    "nombre": "Ante",
+    "v": [
+     {
+      "ref": "Brz-Ante-P70",
+      "nom": "Marrón oscuro",
+      "c": 4.39
+     },
+     {
+      "ref": "Brz-Ante-P71",
+      "nom": "Marrón claro",
+      "c": 4.29
+     },
+     {
+      "ref": "Brz-Ante-P72",
+      "nom": "Negro",
+      "c": 4.39
+     },
+     {
+      "ref": "Brz-Ante-P73",
+      "nom": "Azul",
+      "c": 4.49
+     }
+    ]
+   }
+  ],
+  "ejes": {
+   "mov": {
+    "tarjetas": {
+     "M1": "Cuarzo japonés",
+     "M2": "Automático japonés"
+    }
+   },
+   "caja": {},
+   "esf": {},
+   "brz": {
+    "nombres": {
+     "B10": "Piel",
+     "B11": "Piel sintética",
+     "B12": "Ante"
+    }
+   }
+  }
+ },
+ "tortuga": {
+  "nombre": "Tortuga",
+  "codigo": "LO-07",
+  "incluido": "",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M1",
+    "cal": "Calibre laOra LO_Q3626D",
+    "coste": 8.99,
+    "rot": "Cuarzo japonés",
+    "specs": "Calibre laOra LO_Q3626D, cuarzo de fabricación japonesa con día y fecha a las 3 y el disco del día en español. Precisión de ±20 segundos al mes, tres agujas con parada de segundero y pila de unos 3 años."
+   },
+   {
+    "ref": "M2",
+    "cal": "Calibre laOra LO_A4126D",
+    "coste": 67.36,
+    "rot": "Automático japonés",
+    "specs": "Calibre laOra LO_A4126D, automático de fabricación japonesa con 24 rubíes. Late a 21.600 alternancias por hora, 41 horas de reserva de marcha, día y fecha a las 3, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante."
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Mineral, anillo negro",
+    "coste": 36.17
+   },
+   {
+    "ref": "C2",
+    "nombre": "Mineral, anillo turquesa",
+    "coste": 36.17
+   },
+   {
+    "ref": "C3",
+    "nombre": "Mineral, anillo naranja",
+    "coste": 36.17
+   },
+   {
+    "ref": "C4",
+    "nombre": "Zafiro, anillo negro",
+    "coste": 40.37
+   },
+   {
+    "ref": "C5",
+    "nombre": "Zafiro, anillo turquesa",
+    "coste": 40.37
+   },
+   {
+    "ref": "C6",
+    "nombre": "Zafiro, anillo naranja",
+    "coste": 40.37
+   }
+  ],
+  "esf": [
+   {
+    "ref": "E1",
+    "nombre": "Negra",
+    "coste": 17.38,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E2",
+    "nombre": "Azul",
+    "coste": 17.38,
+    "cajas": "Todas"
+   },
+   {
+    "ref": "E3",
+    "nombre": "Verde",
+    "coste": 17.38,
+    "cajas": "Todas"
+   }
+  ],
+  "brz": [
+   {
+    "id": "B02",
+    "nombre": "Acero 316L, cierre desplegable",
+    "v": [
+     {
+      "ref": "Brz-316-A02",
+      "nom": "Plata",
+      "c": 28.39
+     },
+     {
+      "ref": "Brz-316-A03",
+      "nom": "Plata y oro rosa",
+      "c": 30.79
+     },
+     {
+      "ref": "Brz-316-A04",
+      "nom": "Negro",
+      "c": 30.79
+     }
+    ]
+   },
+   {
+    "id": "B03",
+    "nombre": "Acero 316L macizo",
+    "v": [
+     {
+      "ref": "Brz-316-A05",
+      "nom": "Tres eslabones",
+      "c": 21.79
+     },
+     {
+      "ref": "Brz-316-A06",
+      "nom": "Cinco eslabones",
+      "c": 21.79
+     }
+    ]
+   },
+   {
+    "id": "B06",
+    "nombre": "Acero 316L macizo, eslabón ancho",
+    "v": [
+     {
+      "ref": "Brz-316-A10",
+      "nom": "Tres eslabones",
+      "c": 59.69
+     }
+    ]
+   },
+   {
+    "id": "B07",
+    "nombre": "Acero 316L macizo, eslabón fino",
+    "v": [
+     {
+      "ref": "Brz-316-A11",
+      "nom": "Cinco eslabones",
+      "c": 78.39
+     }
+    ]
+   },
+   {
+    "id": "B08",
+    "nombre": "Acero 904L macizo",
+    "v": [
+     {
+      "ref": "Brz-904-A12",
+      "nom": "Mate cepillado",
+      "c": 55.39
+     },
+     {
+      "ref": "Brz-904-A13",
+      "nom": "Brillante pulido",
+      "c": 55.39
+     }
+    ]
+   },
+   {
+    "id": "B09",
+    "nombre": "Acero 904L, eslabones planos",
+    "v": [
+     {
+      "ref": "Brz-904-A14",
+      "nom": "Plata 5 eslabones",
+      "c": 23.79
+     },
+     {
+      "ref": "Brz-904-A15",
+      "nom": "Plata / Oro rosa 5 eslabones",
+      "c": 28.19
+     },
+     {
+      "ref": "Brz-904-A16",
+      "nom": "Negro 5 eslabones",
+      "c": 28.19
+     },
+     {
+      "ref": "Brz-904-A17",
+      "nom": "Plata 3 eslabones cepillado/mate",
+      "c": 23.79
+     },
+     {
+      "ref": "Brz-904-A18",
+      "nom": "Plata 3 eslabones pulido",
+      "c": 23.79
+     },
+     {
+      "ref": "Brz-904-A19",
+      "nom": "Negro 3 eslabones pulido",
+      "c": 28.19
+     },
+     {
+      "ref": "Brz-904-A20",
+      "nom": "Plata / Oro Rosa 3 eslabones pulido",
+      "c": 28.19
+     }
+    ]
+   },
+   {
+    "id": "B13",
+    "nombre": "Caucho con hebilla de acero",
+    "v": [
+     {
+      "ref": "Brz-Goma-G01",
+      "nom": "Negro",
+      "c": 5.69
+     },
+     {
+      "ref": "Brz-Goma-G02",
+      "nom": "Blanco",
+      "c": 5.89
+     },
+     {
+      "ref": "Brz-Goma-G03",
+      "nom": "Rojo",
+      "c": 6.29
+     },
+     {
+      "ref": "Brz-Goma-G04",
+      "nom": "Naranja",
+      "c": 6.39
+     },
+     {
+      "ref": "Brz-Goma-G05",
+      "nom": "Azul",
+      "c": 6.39
+     },
+     {
+      "ref": "Brz-Goma-G06",
+      "nom": "Marrón",
+      "c": 6.39
+     },
+     {
+      "ref": "Brz-Goma-G07",
+      "nom": "Gris",
+      "c": 5.79
+     }
+    ]
+   },
+   {
+    "id": "B14",
+    "nombre": "Caucho fluorado, cierre desplegable",
+    "v": [
+     {
+      "ref": "Brz-Caucho-C01",
+      "nom": "Azul real blanco 01",
+      "c": 18.29
+     },
+     {
+      "ref": "Brz-Caucho-C02",
+      "nom": "Negro blanco",
+      "c": 12.49
+     },
+     {
+      "ref": "Brz-Caucho-C03",
+      "nom": "Negro negro",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C04",
+      "nom": "Verde militar blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C05",
+      "nom": "Azul real blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C06",
+      "nom": "Rojo blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C07",
+      "nom": "Naranja blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C08",
+      "nom": "Gris blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C09",
+      "nom": "Beige blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C10",
+      "nom": "Negro blanco 01",
+      "c": 17.39
+     },
+     {
+      "ref": "Brz-Caucho-C11",
+      "nom": "Negro negro 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C12",
+      "nom": "Verde militar blanco 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C13",
+      "nom": "Rojo blanco 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C14",
+      "nom": "Naranja blanco 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C15",
+      "nom": "Gris blanco 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C16",
+      "nom": "Beige blanco 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C17",
+      "nom": "Negro blanco 02",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C18",
+      "nom": "Negro negro 02",
+      "c": 19.29
+     },
+     {
+      "ref": "Brz-Caucho-C19",
+      "nom": "Verde militar blanco 02",
+      "c": 19.29
+     },
+     {
+      "ref": "Brz-Caucho-C20",
+      "nom": "Rojo blanco 02",
+      "c": 19.29
+     },
+     {
+      "ref": "Brz-Caucho-C21",
+      "nom": "Naranja blanco 02",
+      "c": 19.19
+     },
+     {
+      "ref": "Brz-Caucho-C22",
+      "nom": "Gris blanco 02",
+      "c": 19.19
+     },
+     {
+      "ref": "Brz-Caucho-C23",
+      "nom": "Blanco blanco 01",
+      "c": 19.59
+     },
+     {
+      "ref": "Brz-Caucho-C24",
+      "nom": "Blanco blanco 02",
+      "c": 20.59
+     },
+     {
+      "ref": "Brz-Caucho-C25",
+      "nom": "Marrón blanco 01",
+      "c": 19.59
+     },
+     {
+      "ref": "Brz-Caucho-C26",
+      "nom": "Azul real blanco 02",
+      "c": 19.59
+     },
+     {
+      "ref": "Brz-Caucho-C27",
+      "nom": "Marrón blanco 02",
+      "c": 20.59
+     },
+     {
+      "ref": "Brz-Caucho-C28",
+      "nom": "Blanco blanco",
+      "c": 20.59
+     },
+     {
+      "ref": "Brz-Caucho-C29",
+      "nom": "Marrón blanco",
+      "c": 14.19
+     },
+     {
+      "ref": "Brz-Caucho-C30",
+      "nom": "Beige blanco 02",
+      "c": 14.19
+     }
+    ]
+   }
+  ],
+  "ejes": {
+   "mov": {
+    "tarjetas": {
+     "M1": "Cuarzo japonés",
+     "M2": "Automático japonés"
+    }
+   },
+   "caja": {},
+   "esf": {},
+   "brz": {}
+  }
+ },
+ "diver": {
+  "nombre": "Diver",
+  "codigo": "LO-08",
+  "incluido": "Correa de caucho negra",
+  "extra": false,
+  "mov": [
+   {
+    "ref": "M1",
+    "cal": "Calibre laOra LO_Q2426",
+    "coste": 11.89,
+    "rot": "Cuarzo japonés de barrido",
+    "specs": "Calibre laOra LO_Q2426, cuarzo de fabricación japonesa con segundero de barrido: da cuatro pasos por segundo en lugar de uno, así que de lejos se mueve como un mecánico. Precisión de ±15 segundos al mes, tres agujas sin fecha, parada de segundero y pila de unos 2 años."
+   },
+   {
+    "ref": "M2",
+    "cal": "Calibre laOra LO_A3826",
+    "coste": 59.01,
+    "rot": "Automático Suizo",
+    "specs": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."
+   }
+  ],
+  "caj": [
+   {
+    "ref": "C1",
+    "nombre": "Acero con zafiro, 300 m",
+    "coste": 69.57
+   }
+  ],
+  "esf": [],
+  "brz": [
+   {
+    "id": "B00",
+    "nombre": "La que viene con la caja",
+    "v": [
+     {
+      "ref": "",
+      "nom": "Caucho negro",
+      "c": 0,
+      "foto": "Brz-Diver-Pack"
+     }
+    ]
+   },
+   {
+    "id": "B02",
+    "nombre": "Acero 316L, cierre desplegable",
+    "v": [
+     {
+      "ref": "Brz-316-A02",
+      "nom": "Plata",
+      "c": 28.39
+     }
+    ]
+   },
+   {
+    "id": "B03",
+    "nombre": "Acero 316L macizo",
+    "v": [
+     {
+      "ref": "Brz-316-A05",
+      "nom": "Tres eslabones",
+      "c": 21.79
+     },
+     {
+      "ref": "Brz-316-A06",
+      "nom": "Cinco eslabones",
+      "c": 21.79
+     }
+    ]
+   },
+   {
+    "id": "B06",
+    "nombre": "Acero 316L macizo, eslabón ancho",
+    "v": [
+     {
+      "ref": "Brz-316-A10",
+      "nom": "Tres eslabones",
+      "c": 59.69
+     }
+    ]
+   },
+   {
+    "id": "B07",
+    "nombre": "Acero 316L macizo, eslabón fino",
+    "v": [
+     {
+      "ref": "Brz-316-A11",
+      "nom": "Cinco eslabones",
+      "c": 78.39
+     }
+    ]
+   },
+   {
+    "id": "B08",
+    "nombre": "Acero 904L macizo",
+    "v": [
+     {
+      "ref": "Brz-904-A12",
+      "nom": "Mate cepillado",
+      "c": 55.39
+     },
+     {
+      "ref": "Brz-904-A13",
+      "nom": "Brillante pulido",
+      "c": 55.39
+     }
+    ]
+   },
+   {
+    "id": "B09",
+    "nombre": "Acero 904L, eslabones planos",
+    "v": [
+     {
+      "ref": "Brz-904-A14",
+      "nom": "Plata 5 eslabones",
+      "c": 23.79
+     },
+     {
+      "ref": "Brz-904-A17",
+      "nom": "Plata 3 eslabones cepillado/mate",
+      "c": 23.79
+     },
+     {
+      "ref": "Brz-904-A18",
+      "nom": "Plata 3 eslabones pulido",
+      "c": 23.79
+     }
+    ]
+   },
+   {
+    "id": "B13",
+    "nombre": "Caucho con hebilla de acero",
+    "v": [
+     {
+      "ref": "Brz-Goma-G04",
+      "nom": "Naranja",
+      "c": 6.39
+     },
+     {
+      "ref": "Brz-Goma-G05",
+      "nom": "Azul",
+      "c": 6.39
+     }
+    ]
+   },
+   {
+    "id": "B14",
+    "nombre": "Caucho fluorado, cierre desplegable",
+    "v": [
+     {
+      "ref": "Brz-Caucho-C01",
+      "nom": "Azul real blanco 01",
+      "c": 18.29
+     },
+     {
+      "ref": "Brz-Caucho-C05",
+      "nom": "Azul real blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C07",
+      "nom": "Naranja blanco",
+      "c": 13.19
+     },
+     {
+      "ref": "Brz-Caucho-C14",
+      "nom": "Naranja blanco 01",
+      "c": 18.39
+     },
+     {
+      "ref": "Brz-Caucho-C21",
+      "nom": "Naranja blanco 02",
+      "c": 19.19
+     },
+     {
+      "ref": "Brz-Caucho-C26",
+      "nom": "Azul real blanco 02",
+      "c": 19.59
+     }
+    ]
+   },
+   {
+    "id": "B15",
+    "nombre": "Tela de vela, hebilla mariposa",
+    "v": [
+     {
+      "ref": "Brz-Nailon-N01",
+      "nom": "Rojo",
+      "c": 6.49
+     },
+     {
+      "ref": "Brz-Nailon-N02",
+      "nom": "Naranja",
+      "c": 6.49
+     },
+     {
+      "ref": "Brz-Nailon-N03",
+      "nom": "Gris",
+      "c": 6.39
+     },
+     {
+      "ref": "Brz-Nailon-N04",
+      "nom": "Negro",
+      "c": 6.49
+     },
+     {
+      "ref": "Brz-Nailon-N05",
+      "nom": "Azul",
+      "c": 6.49
+     },
+     {
+      "ref": "Brz-Nailon-N06",
+      "nom": "Verde",
+      "c": 6.49
+     },
+     {
+      "ref": "Brz-Nailon-N07",
+      "nom": "Caqui",
+      "c": 6.49
+     }
+    ]
+   },
+   {
+    "id": "B16",
+    "nombre": "Lona de nailon, liberación rápida",
+    "v": [
+     {
+      "ref": "Brz-Lona-L01",
+      "nom": "Negro",
+      "c": 5.39
+     },
+     {
+      "ref": "Brz-Lona-L02",
+      "nom": "Negro hebilla negra",
+      "c": 6.09
+     },
+     {
+      "ref": "Brz-Lona-L03",
+      "nom": "Gris",
+      "c": 6.09
+     },
+     {
+      "ref": "Brz-Lona-L04",
+      "nom": "Gris hebilla negra",
+      "c": 5.39
+     },
+     {
+      "ref": "Brz-Lona-L05",
+      "nom": "Verde militar",
+      "c": 5.49
+     },
+     {
+      "ref": "Brz-Lona-L06",
+      "nom": "Verde militar hebilla negra",
+      "c": 6.09
+     },
+     {
+      "ref": "Brz-Lona-L07",
+      "nom": "Azul marino",
+      "c": 5.39
+     },
+     {
+      "ref": "Brz-Lona-L08",
+      "nom": "Caqui hebilla negra",
+      "c": 6.09
+     },
+     {
+      "ref": "Brz-Lona-L09",
+      "nom": "Caqui",
+      "c": 5.99
+     },
+     {
+      "ref": "Brz-Lona-L10",
+      "nom": "Azul marino hebilla negra",
+      "c": 6.09
+     }
+    ]
+   }
+  ],
+  "ejes": {
+   "mov": {
+    "tarjetas": {
+     "M1": "Cuarzo japonés",
+     "M2": "Automático suizo"
+    }
+   },
+   "caja": {
+    "apunte": "con su esfera, sus agujas y su correa de caucho negra"
+   },
+   "esf": {},
+   "brz": {
+    "nombres": {
+     "B00": "Caucho negro"
+    }
+   }
+  }
+ }
 }
