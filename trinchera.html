@@ -380,10 +380,14 @@
   /* LOS CUATRO ANTES (Óscar, 19/08/2026), los mismos para el Khaki y para
      el Murph, y los cuatro fotografiados. */
   /* RECORTES POR CAJA (Óscar, 20/08/2026): el bronce pierde el camel, y
-     la caja negra PVD solo lleva el negro de cada correa. */
+     la caja negra PVD solo lleva el negro de cada correa —salvo el nato,
+     que desde el 23/08/2026 lleva también el verde militar. */
   var ANTES_BRONCE = { NEG: ['Negro', '#2b2a2b'], MOS: ['Marrón oscuro', '#4b382e'],
                        AZU: ['Azul petróleo', '#1f5a72'] };
-  var SOLO_NEGRO_NATO = { NEG: ['Negro', '#1e1f22'] };
+  /* EL NATO DEL PVD ABRE AL VERDE (Óscar, 23/08/2026): «ahora vamos a
+     ofrecer la caja pvd negra con nato verde también». Solo el nato y solo
+     esos dos colores; la piel y el ante siguen en negro y punto. */
+  var NATOS_PVD = { NEG: ['Negro', '#1e1f22'], VER: ['Verde militar', '#4a5a3a'] };
   var SOLO_NEGRO_PIEL = { NEG: ['Negra', '#1c1c1e'] };
   var SOLO_NEGRO_ANTE = { NEG: ['Negro', '#2b2a2b'] };
   var ANTES = {
@@ -987,11 +991,14 @@
           if (e.correa !== 'ANTE' && e.correa !== 'PIELO' && e.correa !== 'NATO') e.correa = 'ANTE';
         }
         else if (e.caja === 'NG') {
-          /* la caja negra: solo piel, nato y ante EN NEGRO, y su brazalete
-             (Óscar, 20/08/2026). Ni técnica ni el resto de colores. */
+          /* la caja negra: solo piel, nato y ante, y su brazalete (Óscar,
+             20/08/2026). Ni técnica ni el resto de colores. La piel y el
+             ante van en negro; el nato admite negro y verde militar desde
+             el 23/08/2026. */
           if (e.correa !== 'NATO' && e.correa !== 'ACERONG' &&
               e.correa !== 'PIELO' && e.correa !== 'ANTE') e.correa = 'NATO';
-          if (e.correa === 'NATO') e.nato = 'NEG';
+          /* el nato del PVD acepta negro y verde; cualquier otro cae al negro */
+          if (e.correa === 'NATO' && !NATOS_PVD[e.nato]) e.nato = 'NEG';
           if (e.correa === 'PIELO') e.pielk = 'NEG';
           if (e.correa === 'ANTE') e.ante = 'NEG';
         }
@@ -1180,7 +1187,7 @@
     var esAnte = anteConColor;
     var esNegraK = e.estilo === 'K' && e.caja === 'NG';
     var paleta = esAnte ? (esBronce ? ANTES_BRONCE : esNegraK ? SOLO_NEGRO_ANTE : ANTES)
-               : esNato ? (esNegraK ? SOLO_NEGRO_NATO : NATOS)
+               : esNato ? (esNegraK ? NATOS_PVD : NATOS)
                : esPielK ? (esNegraK ? SOLO_NEGRO_PIEL : PIELES_K)
                : esPielM ? PIELES_M : esDuoM ? DUOS_M : COLORES;
     var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk
