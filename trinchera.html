@@ -1178,10 +1178,8 @@
        reloj de la foto y el precio son los del clásico desde el primer
        momento, pero los botones no se atribuyen una elección que el cliente
        todavía no ha hecho: se desmarcan los grupos que no ha tocado. */
-    CADENA.forEach(function (k) {
-      if (tocado[k]) return;
-      var g = $('[data-pv="' + k + '"]');
-      if (!g) return;
+    [].forEach.call(document.querySelectorAll('[data-pv]'), function (g) {
+      if (tocado[g.dataset.pv]) return;
       [].forEach.call(g.querySelectorAll('button'), function (b) {
         b.setAttribute('aria-pressed', 'false');
       });
@@ -1220,8 +1218,10 @@
       /* Lo que pides con el botón de la correa se queda anotado: es a lo
          que hay que volver cuando una caja te la haya quitado. */
       if (g === 'correa') e.correaPedida = b.dataset.v;
-      /* queda anotado que este paso ya lo has decidido tú */
-      if (CADENA.indexOf(g) > -1) tocado[g] = true;
+      /* queda anotado que este grupo ya lo has decidido tú. TODOS, no solo
+         los de la cadena: el color de la esfera, el segundero y el color de
+         la correa también llegan sin señalar. */
+      tocado[g] = true;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
       if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
