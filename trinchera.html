@@ -27,6 +27,19 @@
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=39">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
+<style>
+  /* La fila del diámetro y el movimiento (Óscar, 24/08/2026). Solo en esta
+     ficha: el resto de configuradores sigue con un paso por línea. */
+  .pv-fila-cabeza{
+    display:flex; flex-wrap:wrap; gap:18px 28px;
+    align-items:flex-start; justify-content:space-between;
+  }
+  /* `space-between` y no `margin-left:auto`: cuando la columna se estrecha y
+     los dos grupos ya no caben, cada uno se queda en su renglón y alineado a
+     la izquierda. Con el margen automático, el del movimiento se iba solo a
+     la derecha en su propia línea y parecía descolgado. */
+  .pv-fila-cabeza>.pv-grupo{ flex:0 1 auto }
+</style>
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -115,12 +128,25 @@
              pegado a ella, porque es de la propia correa; después el color;
              y el cierre el último de todos. -->
 
+        <!-- EL DIÁMETRO Y EL MOVIMIENTO, EN LA MISMA LÍNEA (Óscar,
+             24/08/2026): el diámetro a la izquierda y el movimiento a la
+             derecha. En pantalla estrecha se apilan solos. -->
+        <div class="pv-fila-cabeza">
         <div class="pv-grupo">
           <p class="pv-rotulo">Tamaño de caja</p>
           <div class="pv-opciones" data-pv="diam">
-            <button type="button" data-v="36" aria-pressed="true">36 mm</button>
-            <button type="button" data-v="39" aria-pressed="false">39 mm</button>
+            <button type="button" data-v="36" aria-pressed="true">&#216; 36</button>
+            <button type="button" data-v="39" aria-pressed="false">&#216; 39</button>
           </div>
+        </div>
+
+        <div class="pv-grupo">
+          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
+          <div class="pv-opciones" data-pv="mov">
+            <button type="button" data-v="A" aria-pressed="false">Automático</button>
+            <button type="button" data-v="Q" aria-pressed="true">Cuarzo (Pila)</button>
+          </div>
+        </div>
         </div>
 
         <div class="pv-grupo">
@@ -147,13 +173,6 @@
           </div>
         </div>
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
-          <div class="pv-opciones" data-pv="mov">
-            <button type="button" data-v="Q" aria-pressed="true">Cuarzo Suizo</button>
-            <button type="button" data-v="A" aria-pressed="false">Automático Suizo</button>
-          </div>
-        </div>
 
         <div class="pv-grupo">
           <p class="pv-rotulo">Correa <b data-pv-cierre>Hebilla clásica plateada</b></p>
