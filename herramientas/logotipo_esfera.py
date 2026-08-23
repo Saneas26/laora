@@ -64,7 +64,8 @@ def cuerpo_para(modelo, ancho, tracking_rel=0.20, alto_max=None):
     return lo
 
 
-def logotipo(modelo, tam=TRIANGULO, tracking=None, cuerpo=None, sep_nombre=40):
+def logotipo(modelo, tam=TRIANGULO, tracking=None, cuerpo=None,
+             sep_nombre=54, dx_nombre=12):
     im = sin_triangulo()
     ancho, alto = tam
     top = CY - RI + SEPARACION
@@ -95,10 +96,15 @@ def logotipo(modelo, tam=TRIANGULO, tracking=None, cuerpo=None, sep_nombre=40):
         x += w + tracking
     nombre = tmp.crop(tmp.getbbox())
 
-    W = max(marca.width, nombre.width)
+    W = max(marca.width, nombre.width + abs(dx_nombre) * 2)  # sitio para el ajuste óptico
     out = Image.new('RGBA', (W, marca.height + sep_nombre + nombre.height), (0, 0, 0, 0))
     out.alpha_composite(marca, ((W - marca.width) // 2, 0))
-    out.alpha_composite(nombre, ((W - nombre.width) // 2, marca.height + sep_nombre))
+    # Centrado ÓPTICO, no matemático: «TRINCHERA» abre con T —que llena la
+    # línea de arriba— y cierra con A —un triángulo que deja hueco justo ahí—,
+    # así que centrada al píxel se lee corrida a la izquierda. `dx_nombre` la
+    # devuelve al eje visual de «laOra». (Óscar, 23/08/2026)
+    out.alpha_composite(nombre, ((W - nombre.width) // 2 + dx_nombre,
+                                 marca.height + sep_nombre))
     return out
 
 
@@ -106,8 +112,10 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('modelo', help='TRINCHERA, LUNAR, PRECISA…')
     p.add_argument('--salida', default='assets/img/marca/')
+    p.add_argument('--sep', type=int, default=54, help='aire entre laOra y el modelo')
+    p.add_argument('--dx', type=int, default=12, help='ajuste óptico a la derecha')
     a = p.parse_args()
     os.makedirs(a.salida, exist_ok=True)
     f = os.path.join(a.salida, 'logo-esfera-%s.png' % a.modelo.lower())
-    logotipo(a.modelo).save(f)
+    logotipo(a.modelo, sep_nombre=a.sep, dx_nombre=a.dx).save(f)
     print(f)
