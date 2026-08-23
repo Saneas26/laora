@@ -14,14 +14,16 @@
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- FICHA DE PRODUCTO 2026 (Óscar, 15/08/2026), patrón Hamilton.
      PÁGINA ESCRITA A MANO: el generador ya no la toca (NO_GENERAR).
      El catálogo es el de la pestaña DetalleTrinchera del sheet:
      196 referencias, y esta página calcula el precio con el MISMO
      motor (×2,7235 al 9,90, suelo de 50 € limpios, +10 € el 39). -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- SIN GOOGLE FONTS (Óscar, 24/08/2026): las dos familias se sirven
+     desde aquí. Se precargan porque son la letra de todo lo que se lee. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/nunito-sans-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fuentes.css?v=1">
 <link rel="stylesheet" href="/assets/css/laora.css?v=52">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
@@ -39,6 +41,36 @@
      la izquierda. Con el margen automático, el del movimiento se iba solo a
      la derecha en su propia línea y parecía descolgado. */
   .pv-fila-cabeza>.pv-grupo{ flex:0 1 auto }
+  /* Un paso que todavía no toca. Va con clase y no con `hidden` porque
+     `hidden` ya lo usan los grupos para su propia lógica. */
+  .pv-cerrado{ display:none !important }
+
+  /* LA LETRA DE LA FICHA (Óscar, 24/08/2026): Montserrat en los titulares,
+     Nunito Sans en el texto de las opciones, ninguna serifa y CERO
+     interletrado. Va aquí y no en producto-2026.css porque de momento es
+     solo este configurador. */
+  .pv-info, .pv-info *{ letter-spacing:normal !important }
+  /* Primero lo general —todo lo que se lee corrido va en Nunito Sans— y
+     DESPUÉS los titulares en Montserrat. En este orden, porque `.pv-rotulo`
+     y `.pv-precio` son párrafos: con las reglas al revés, la genérica de
+     `.pv-info p` los pisaba y salían en Nunito. */
+  .pv-info p, .pv-info li, .pv-info small, .pv-info a,
+  .pv-opciones button, .pv-fijo, .pv-sinfoto{
+    font-family:'Nunito Sans', system-ui, sans-serif !important;
+  }
+  /* Con `.pv-info` delante a propósito: el rótulo y el precio son párrafos,
+     y `.pv-info p` (una clase + un elemento) pesa más que `.pv-rotulo` a
+     secas. Sin esto ganaba la regla de Nunito por especificidad, no por
+     orden, y los titulares salían con la letra del texto. */
+  .pv-info h1, .pv-info .pv-rotulo, .pv-info .pv-chip, .pv-info .pv-codigo,
+  .pv-info .pv-precio, .pv-info .pv-comprar, .pv-comprar{
+    font-family:'Montserrat', system-ui, sans-serif !important;
+  }
+  .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
+  /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
+     y no hace falta gritar. */
+  .pv-rotulo{ text-transform:none; font-size:14px }
+  .pv-opciones button{ text-transform:none; font-size:14px }
 </style>
 </head>
 <body><header class="site-header">
@@ -132,7 +164,7 @@
              24/08/2026): el diámetro a la izquierda y el movimiento a la
              derecha. En pantalla estrecha se apilan solos. -->
         <div class="pv-fila-cabeza">
-        <div class="pv-grupo">
+        <div class="pv-grupo" data-paso="diam">
           <p class="pv-rotulo">Tamaño de caja</p>
           <div class="pv-opciones" data-pv="diam">
             <button type="button" data-v="36" aria-pressed="true">&#216; 36</button>
@@ -140,7 +172,7 @@
           </div>
         </div>
 
-        <div class="pv-grupo">
+        <div class="pv-grupo" data-paso="mov">
           <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
           <div class="pv-opciones" data-pv="mov">
             <button type="button" data-v="A" aria-pressed="false">Automático</button>
@@ -149,7 +181,7 @@
         </div>
         </div>
 
-        <div class="pv-grupo">
+        <div class="pv-grupo" data-paso="estilo">
           <p class="pv-rotulo">Estilo</p>
           <div class="pv-opciones" data-pv="estilo">
             <button type="button" data-v="K" aria-pressed="true">Khaki</button>
@@ -157,13 +189,13 @@
           </div>
         </div>
 
-        <div class="pv-grupo" data-pv-grupo-esf>
+        <div class="pv-grupo" data-pv-grupo-esf data-paso="esf">
           <p class="pv-rotulo" data-pv-rotulo-esf>Segundero</p>
           <div class="pv-opciones" data-pv="esf"></div>
           <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, segundero blanco</p>
         </div>
 
-        <div class="pv-grupo">
+        <div class="pv-grupo" data-paso="caja">
           <p class="pv-rotulo">Acabado de caja</p>
           <div class="pv-opciones" data-pv="caja">
             <button type="button" data-v="PL" aria-pressed="true">Acero Plata</button>
@@ -174,23 +206,23 @@
         </div>
 
 
-        <div class="pv-grupo">
+        <div class="pv-grupo" data-paso="correa">
           <p class="pv-rotulo">Correa <b data-pv-cierre>Hebilla clásica plateada</b></p>
           <div class="pv-opciones" data-pv="correa"></div>
           <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
         </div>
 
-        <div class="pv-grupo" data-pv-grupo-pesp hidden>
+        <div class="pv-grupo" data-cuelga="pesp" data-pv-grupo-pesp hidden>
           <p class="pv-rotulo">Pespunte</p>
           <div class="pv-opciones" data-pv="pesp"></div>
         </div>
 
-        <div class="pv-grupo" data-pv-grupo-color hidden>
+        <div class="pv-grupo" data-cuelga="color" data-pv-grupo-color hidden>
           <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
           <div class="pv-opciones pv-colores" data-pv="color"></div>
         </div>
 
-        <div class="pv-grupo" data-pv-grupo-cierre hidden>
+        <div class="pv-grupo" data-cuelga="cierre" data-pv-grupo-cierre hidden>
           <p class="pv-rotulo">Cierre/hebilla</p>
           <div class="pv-opciones" data-pv="cierre"></div>
         </div>
@@ -795,6 +827,48 @@
     }).join('');
   }
 
+  /* LOS PASOS SE ABREN DE UNO EN UNO (Óscar, 24/08/2026): «ninguna opción
+     se verá hasta no haber elegido primero la 1 y la 2. Por tanto luego
+     teniendo seleccionada la 1 y la 2 aparecerá la sección 3, antes no y
+     ninguna posterior».
+
+     El 1 y el 2 están siempre. Del 3 en adelante, cada uno espera a que
+     hayas pulsado el de antes. Un paso que su propia lógica esconde —el
+     segundero cuando la caja lleva esfera fija— no atasca la fila: se da
+     por pasado y deja seguir al siguiente.
+
+     Se cierra con una clase y no con `hidden` a propósito: `hidden` ya lo
+     usan los grupos para su propia lógica, y si los dos escribieran en el
+     mismo sitio se pisarían. */
+  var CADENA = ['diam', 'mov', 'estilo', 'esf', 'caja', 'correa'];
+  var tocado = {};
+
+  /* Un paso sin nada que elegir se da por pasado. Ojo: el grupo del
+     segundero NO se esconde a sí mismo cuando la caja lleva esfera fija;
+     lo que hace es vaciar sus botones y dejar el rótulo con el texto fijo.
+     Mirando solo el `hidden` del grupo, la fila se quedaba atascada ahí y
+     el acabado de caja no aparecía nunca. */
+  function sinNadaQueElegir(g) {
+    var op = g.querySelector('.pv-opciones');
+    return !op || op.hidden || !op.querySelector('button');
+  }
+
+  function abrirPasos() {
+    var abierto = !!(tocado.diam && tocado.mov);
+    for (var i = 2; i < CADENA.length; i++) {
+      var g = $('[data-paso="' + CADENA[i] + '"]');
+      if (!g) continue;
+      g.classList.toggle('pv-cerrado', !abierto);
+      if (abierto) abierto = g.hidden || sinNadaQueElegir(g) || !!tocado[CADENA[i]];
+    }
+    /* pespunte, color y cierre son de la correa: hasta que no la eliges,
+       no pintan nada */
+    ['pesp', 'color', 'cierre'].forEach(function (k) {
+      var g = $('[data-cuelga="' + k + '"]');
+      if (g) g.classList.toggle('pv-cerrado', !tocado.correa);
+    });
+  }
+
   function pinta() {
     normaliza();
     $('[data-pv-precio]').textContent = eu(precio());
@@ -1002,6 +1076,7 @@
         : CORREAS[e.correa].tec) + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
+    abrirPasos();
     $('[data-pv-tec="agua"]').textContent = agua() +
       (e.caja === 'TI' ? '. La más hermética de la familia, con tapa roscada.' :
        '. Aguanta lluvia, salpicaduras y lavarse las manos; para nadar, mejor el titanio.');
@@ -1032,6 +1107,8 @@
       /* Lo que pides con el botón de la correa se queda anotado: es a lo
          que hay que volver cuando una caja te la haya quitado. */
       if (g === 'correa') e.correaPedida = b.dataset.v;
+      /* queda anotado que este paso ya lo has decidido tú */
+      if (CADENA.indexOf(g) > -1) tocado[g] = true;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
       if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
@@ -1090,6 +1167,15 @@
         }
       }
       pinta();
+      /* AL ELEGIR EL MOVIMIENTO, EL PASO 3 SE VIENE A LA VISTA (Óscar,
+         24/08/2026): «al pulsar la opción 2 el scroll baja a la opción 3
+         que acaba de aparecer». Solo si de verdad acaba de abrirse. */
+      if (g === 'mov') {
+        var paso3 = $('[data-paso="estilo"]');
+        if (paso3 && !paso3.classList.contains('pv-cerrado') && paso3.scrollIntoView) {
+          paso3.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
       /* AL ELEGIR CORREA, EL PASO DEL COLOR SE VIENE A LA VISTA (Óscar,
          19/08/2026). Es el único paso que aparece DESPUÉS del que acabas
          de pulsar, así que sin esto se queda fuera de pantalla y parece
