@@ -134,7 +134,7 @@
         <div class="pv-grupo" data-pv-grupo-esf>
           <p class="pv-rotulo" data-pv-rotulo-esf>Segundero</p>
           <div class="pv-opciones" data-pv="esf"></div>
-          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, agujas blancas y plata</p>
+          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, segundero blanco</p>
         </div>
 
         <div class="pv-grupo">
@@ -444,7 +444,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=29';
+  var SERIE_V = '?v=30';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -469,6 +469,7 @@
      el AVIF. Lo que no esté aquí sale con el cartel, que es la verdad. */
   var SERIE = {
     '39-acero-blanca-nato-verde': 1,
+    '39-bronce-blanca-nato-verde': 1,
     '39-pvd-blanca-nato-verde': 1,
     '39-titanio-blanca-nato-verde': 1,
   };
@@ -696,10 +697,15 @@
          blanco para todas las cajas». Ya no hay 12/24 forzada por la
          correa: fuera del bronce siempre se elige entre KB y KR. */
       if (e.caja === 'BR') {
-        /* EL BRONCE, SOLO CON ANTE (Óscar, 20/08/2026): «acepta piel y
-           ante, pues las fotos son solo ante y por el momento solo esa
-           correa». Su esfera sigue siendo la fija de agujas plata. */
-        e.correa = 'ANTE'; e.esf = 'BRZ';
+        /* EL BRONCE ENTRA EN LA NORMA (Óscar, 23/08/2026). Hasta hoy iba
+           forzado a ante y a su propia esfera de agujas plata, y el motivo
+           escrito era «las fotos son solo ante»: con la foto del nato verde
+           esa razón se acabó. Ahora acepta nato y ante, y lleva la MISMA
+           esfera que el resto —la KB de segundero blanco—, así que hay una
+           esfera menos que mantener. El segundero rojo sigue fuera del
+           bronce, como mandó el 20/08. */
+        if (e.correa !== 'ANTE' && e.correa !== 'NATO') e.correa = 'ANTE';
+        e.esf = 'KB';
         if (e.ante === 'CAM') e.ante = 'NEG';   // el bronce perdió el camel
       }
       else {
@@ -738,10 +744,13 @@
   function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
   function referencia() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
-    /* el bronce lleva el color del ante en la referencia desde que tiene
-       tres (20/08/2026): sin él, dos correas distintas compartían ref y
-       el pedido no decía cuál quería el cliente */
-    if (e.caja === 'BR') return seg + 'ANTE-' + e.ante;
+    /* el bronce lleva el color en la referencia desde que tiene tres
+       antes (20/08/2026): sin él, dos correas distintas compartían ref y
+       el pedido no decía cuál quería el cliente. Desde el 23/08/2026
+       nombra también la correa, que ya no es siempre el ante; las refs de
+       ante que ya existían no cambian ni una letra. */
+    if (e.caja === 'BR')
+      return seg + e.correa + '-' + (e.correa === 'NATO' ? e.nato : e.ante);
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATO') return cola + '-' + e.nato;
     if (e.correa === 'NATOP') return cola + '-' + e.color;
@@ -827,9 +836,9 @@
        elige después. Las tres pieles italianas —negra, marrón y verde, con
        su pespunte y sus cinco cierres— son del Murph y solo salen ahí. */
     if (esBronce) {
-      /* solo ante: «las fotos son solo ante y por el momento solo esa
-         correa» (Óscar, 20/08/2026) */
-      botones('correa', [['ANTE', 'Ante']], e.correa);
+      /* nato y ante (Óscar, 23/08/2026), con el nato delante como en las
+         demás cajas */
+      botones('correa', [['NATO', 'Nato'], ['ANTE', 'Ante']], e.correa);
     } else {
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
