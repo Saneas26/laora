@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "montserrat",
+        "createdAt": "2026-08-23T22:46:02.843Z",
+        "reason": "Óscar la eligió por su nombre el 24/08/2026 para los titulares del configurador del Trinchera"
+      }
+    ]
+  }
+}
