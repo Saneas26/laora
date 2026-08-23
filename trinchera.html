@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=39">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=41">
+<link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -456,305 +456,20 @@
 
      Lo que no tiene foto sale con su cartel, nunca con la imagen de
      otro reloj. */
+  /* LAS FOTOS QUE EXISTEN DE VERDAD, y nada más (23/08/2026).
+
+     Antes esta tabla declaraba las 224 combinaciones de la serie vieja. Al
+     borrarlas todas se quedó mintiendo: `serieFoto()` pregunta AQUÍ, no al
+     disco, así que la ficha daba por buena una foto que ya no estaba, pintaba
+     un <img> en 404 y encima escondía el cartel de «Fotografía en
+     preparación». Y el rescate que busca otra combinación con foto tampoco
+     servía de nada, porque cualquiera le parecía válida.
+
+     LA NORMA: una línea por foto publicada, y se añade EN EL MISMO COMMIT que
+     el AVIF. Lo que no esté aquí sale con el cartel, que es la verdad. */
   var SERIE = {
-    /* Cuatro de los cinco colores del nato salen de UNA foto: el tejido
-       es el mismo y solo cambia el tono, así que se derivan con
-       recolorear_nato.py en vez de fotografiar cuatro veces lo mismo.
-       El negro-gris sí tiene la suya, y tenía que tenerla: es el Bond de
-       cinco franjas, y unas bandas no se sacan de un tejido liso. */
-    '39-acero-blanca-nato-verde':     1,
-    '39-acero-blanca-nato-negro':     1,
-    '39-acero-blanca-nato-beige':     1,
-    '39-acero-blanca-nato-negrogris': 1,
-    /* La khaki de segundero rojo es la MISMA esfera con esa aguja en
-       rojo, así que sale de las cinco de arriba con segundero_rojo.py.
-       Ni una foto nueva, y las dos versiones quedan idénticas en todo lo
-       demás, que es lo que se espera de un catálogo. */
-    '39-acero-rojo-nato-verde':       1,
-    '39-acero-rojo-nato-negro':       1,
-    '39-acero-rojo-nato-beige':       1,
-    '39-acero-rojo-nato-negrogris':   1,
-    /* LA CAJA DE 36 con la correa técnica —el nato con forro de piel—,
-       sus seis colores por los dos segunderos. Misma esfera madre. */
-    '36-acero-blanca-natopiel-mostaza':   1,
-    '36-acero-blanca-natopiel-beige':     1,
-    '36-acero-blanca-natopiel-marron':    1,
-    '36-acero-blanca-natopiel-negro':     1,
-    '36-acero-blanca-natopiel-gris':      1,
-    '36-acero-blanca-natopiel-armygreen': 1,
-    '36-acero-rojo-natopiel-mostaza':     1,
-    '36-acero-rojo-natopiel-beige':       1,
-    '36-acero-rojo-natopiel-marron':      1,
-    '36-acero-rojo-natopiel-negro':       1,
-    '36-acero-rojo-natopiel-gris':        1,
-    '36-acero-rojo-natopiel-armygreen':   1,
-    /* LA PIEL DEL KHAKI en la caja de acero: tres colores por dos
-       segunderos. El marrón oscuro está derivado del claro. */
-    '39-acero-blanca-pielkhaki-marronclaro':  1,
-    '39-acero-blanca-pielkhaki-marronoscuro': 1,
-    /* La piel negra del Khaki, en las dos medidas: la caja llegó con otra
-       esfera —y con ventana de fecha— y se le puso la nuestra encima. */
-    '36-acero-blanca-pielkhaki-negra':        1,
-    '36-acero-rojo-pielkhaki-negra':          1,
-    '39-acero-blanca-pielkhaki-negra':        1,
-    '39-acero-rojo-pielkhaki-marronclaro':    1,
-    '39-acero-rojo-pielkhaki-marronoscuro':   1,
-    '39-acero-rojo-pielkhaki-negra':          1,
-    /* El brazalete de acero, en las dos medidas (Óscar, 19/08/2026). Aquí
-       va con la esfera del Khaki; la del Murph entrará con su foto. */
-    '36-acero-blanca-brazalete': 1,
-    '36-acero-rojo-brazalete':   1,
-    '39-acero-blanca-brazalete': 1,
-    '39-acero-rojo-brazalete':   1,
-    /* EL MURPH, con sus dos esferas sobre las cajas que ya hay: el ante en
-       sus cuatro colores y el brazalete de acero. La de numerales blancos
-       está derivada de la crema. */
-    '39-acero-crema-ante-negro':         1,
-    '39-acero-crema-ante-marronoscuro':  1,
-    '39-acero-crema-ante-azulpetroleo':  1,
-    '39-acero-crema-ante-camel':         1,
-    '39-acero-crema-brazalete':          1,
-    '36-acero-crema-brazalete':          1,
-    '39-acero-blanco-ante-negro':        1,
-    '39-acero-blanco-ante-marronoscuro': 1,
-    '39-acero-blanco-ante-azulpetroleo': 1,
-    '39-acero-blanco-ante-camel':        1,
-    '39-acero-blanco-brazalete':         1,
-    /* La piel negra del Murph, con su pespunte claro. En las dos medidas:
-       «caja de acero y titanio sirve para 36 y 39 mm» (Óscar, 20/08/2026). */
-    '36-acero-crema-negra-pblanco':      1,
-    '39-acero-crema-negra-pblanco':      1,
-    '36-acero-blanco-negra-pblanco':     1,
-    '39-acero-blanco-negra-pblanco':     1,
-    /* Y sus otras dos pieles, marrón y verde (Óscar, 20/08/2026). Estas
-       vienen con el pespunte DEL MISMO TONO que la piel, así que solo
-       existen en la versión «ptono»; la negra sigue siendo la del
-       pespunte claro. Valen para las dos medidas: es la misma correa de
-       20 mm sobre la misma caja. */
-    '36-acero-crema-marron-ptono':       1,
-    '39-acero-crema-marron-ptono':       1,
-    '36-acero-blanco-marron-ptono':      1,
-    '39-acero-blanco-marron-ptono':      1,
-    '36-acero-crema-verde-ptono':        1,
-    '39-acero-crema-verde-ptono':        1,
-    '36-acero-blanco-verde-ptono':       1,
-    '39-acero-blanco-verde-ptono':       1,
-    /* EL OTRO PESPUNTE DE CADA PIEL (Óscar, 20/08/2026). No hizo falta
-       fotografiar seis correas: la costura se cambia de color sobre la
-       que ya hay. En la negra el hilo claro se tiñe al tono de la piel;
-       en la marrón y la verde, donde el hilo es del mismo color que el
-       cuero y no hay manera de aislarlo, se trae entero el de la negra
-       —las tres fotos encajan sin mover un píxel—. */
-    '36-acero-crema-negra-ptono':        1,
-    '39-acero-crema-negra-ptono':        1,
-    '36-acero-blanco-negra-ptono':       1,
-    '39-acero-blanco-negra-ptono':       1,
-    '36-acero-crema-marron-pblanco':     1,
-    '39-acero-crema-marron-pblanco':     1,
-    '36-acero-blanco-marron-pblanco':    1,
-    '39-acero-blanco-marron-pblanco':    1,
-    '36-acero-crema-verde-pblanco':      1,
-    '39-acero-crema-verde-pblanco':      1,
-    '36-acero-blanco-verde-pblanco':     1,
-    '39-acero-blanco-verde-pblanco':     1,
-    /* EL TITANIO DEL MURPH, sobre las mismas cajas ya aprobadas (Óscar,
-       20/08/2026). No es otra foto: es el mismo reloj con el metal
-       repintado, que se puede hacer porque acero y titanio se
-       diferencian en la claridad y en cuánto disparan los reflejos, no
-       en el color. */
-    '36-titanio-crema-negra-pblanco': 1,
-    '39-titanio-crema-negra-pblanco': 1,
-    '36-titanio-crema-negra-ptono': 1,
-    '39-titanio-crema-negra-ptono': 1,
-    '36-titanio-crema-marron-pblanco': 1,
-    '39-titanio-crema-marron-pblanco': 1,
-    '36-titanio-crema-marron-ptono': 1,
-    '39-titanio-crema-marron-ptono': 1,
-    '36-titanio-crema-verde-pblanco': 1,
-    '39-titanio-crema-verde-pblanco': 1,
-    '36-titanio-crema-verde-ptono': 1,
-    '39-titanio-crema-verde-ptono': 1,
-    '36-titanio-blanco-negra-pblanco': 1,
-    '39-titanio-blanco-negra-pblanco': 1,
-    '36-titanio-blanco-negra-ptono': 1,
-    '39-titanio-blanco-negra-ptono': 1,
-    '36-titanio-blanco-marron-pblanco': 1,
-    '39-titanio-blanco-marron-pblanco': 1,
-    '36-titanio-blanco-marron-ptono': 1,
-    '39-titanio-blanco-marron-ptono': 1,
-    '36-titanio-blanco-verde-pblanco': 1,
-    '39-titanio-blanco-verde-pblanco': 1,
-    '36-titanio-blanco-verde-ptono': 1,
-    '39-titanio-blanco-verde-ptono': 1,
-    /* EL KHAKI, EN LAS DOS MEDIDAS Y EN PVD (Óscar, 20/08/2026): «todas
-       las fotos sirven para 36 y 39 mm». Las claves que estaban en una
-       sola medida se duplican a la otra, y entran las tres cajas negras
-       PVD del Khaki —nato, ante y piel— con sus dos segunderos, montadas
-       por el método del hueco. */
-    '36-acero-blanca-nato-beige':    1,
-    '36-acero-blanca-nato-negro':    1,
-    '36-acero-blanca-nato-negrogris': 1,
-    '36-acero-blanca-nato-verde':    1,
-    '36-acero-blanca-pielkhaki-marronclaro': 1,
-    '36-acero-blanca-pielkhaki-marronoscuro': 1,
-    '36-acero-rojo-nato-beige':      1,
-    '36-acero-rojo-nato-negro':      1,
-    '36-acero-rojo-nato-negrogris':  1,
-    '36-acero-rojo-nato-verde':      1,
-    '36-acero-rojo-pielkhaki-marronclaro': 1,
-    '36-acero-rojo-pielkhaki-marronoscuro': 1,
-    '39-acero-blanca-natopiel-armygreen': 1,
-    '39-acero-blanca-natopiel-beige': 1,
-    '39-acero-blanca-natopiel-gris': 1,
-    '39-acero-blanca-natopiel-marron': 1,
-    '39-acero-blanca-natopiel-mostaza': 1,
-    '39-acero-blanca-natopiel-negro': 1,
-    '39-acero-rojo-natopiel-armygreen': 1,
-    '39-acero-rojo-natopiel-beige':  1,
-    '39-acero-rojo-natopiel-gris':   1,
-    '39-acero-rojo-natopiel-marron': 1,
-    '39-acero-rojo-natopiel-mostaza': 1,
-    '39-acero-rojo-natopiel-negro':  1,
-    '36-pvd-blanca-nato-negro':      1,
-    '39-pvd-blanca-nato-negro':      1,
-    /* EL PVD CON NATO VERDE (23/08/2026). La tabla solo tenía el nato negro
-       para la caja de PVD, así que la foto del verde militar —que es la que
-       hay— no la habría enseñado nunca por mucho que estuviera el fichero. */
-    '39-pvd-blanca-nato-verde':      1,
-    '36-pvd-blanca-ante-negro':      1,
-    '39-pvd-blanca-ante-negro':      1,
-    '36-pvd-blanca-pielkhaki-negra': 1,
-    '39-pvd-blanca-pielkhaki-negra': 1,
-    '36-pvd-rojo-nato-negro':        1,
-    '39-pvd-rojo-nato-negro':        1,
-    '36-pvd-rojo-ante-negro':        1,
-    '39-pvd-rojo-ante-negro':        1,
-    '36-pvd-rojo-pielkhaki-negra':   1,
-    '39-pvd-rojo-pielkhaki-negra':   1,
-
-    /* EL TITANIO DEL KHAKI (Óscar, 20/08/2026): las mismas cajas del
-       acero pasadas a titanio, con la esfera khaki en sus dos segunderos.
-       Nato, ante y piel; sin brazaletes. Cuarenta y cuatro claves de
-       once montajes. */
-    '36-titanio-blanca-nato-verde':      1,
-    '39-titanio-blanca-nato-verde':      1,
-    '36-titanio-blanca-nato-negro':      1,
-    '39-titanio-blanca-nato-negro':      1,
-    '36-titanio-blanca-nato-beige':      1,
-    '39-titanio-blanca-nato-beige':      1,
-    '36-titanio-blanca-nato-negrogris':  1,
-    '39-titanio-blanca-nato-negrogris':  1,
-    '36-titanio-blanca-ante-camel':      1,
-    '39-titanio-blanca-ante-camel':      1,
-    '36-titanio-blanca-ante-azulpetroleo': 1,
-    '39-titanio-blanca-ante-azulpetroleo': 1,
-    '36-titanio-blanca-ante-marronoscuro': 1,
-    '39-titanio-blanca-ante-marronoscuro': 1,
-    '36-titanio-blanca-ante-negro':      1,
-    '39-titanio-blanca-ante-negro':      1,
-    '36-titanio-blanca-pielkhaki-marronclaro': 1,
-    '39-titanio-blanca-pielkhaki-marronclaro': 1,
-    '36-titanio-blanca-pielkhaki-marronoscuro': 1,
-    '39-titanio-blanca-pielkhaki-marronoscuro': 1,
-    '36-titanio-blanca-pielkhaki-negra': 1,
-    '39-titanio-blanca-pielkhaki-negra': 1,
-    '36-titanio-rojo-nato-verde':        1,
-    '39-titanio-rojo-nato-verde':        1,
-    '36-titanio-rojo-nato-negro':        1,
-    '39-titanio-rojo-nato-negro':        1,
-    '36-titanio-rojo-nato-beige':        1,
-    '39-titanio-rojo-nato-beige':        1,
-    '36-titanio-rojo-nato-negrogris':    1,
-    '39-titanio-rojo-nato-negrogris':    1,
-    '36-titanio-rojo-ante-camel':        1,
-    '39-titanio-rojo-ante-camel':        1,
-    '36-titanio-rojo-ante-azulpetroleo': 1,
-    '39-titanio-rojo-ante-azulpetroleo': 1,
-    '36-titanio-rojo-ante-marronoscuro': 1,
-    '39-titanio-rojo-ante-marronoscuro': 1,
-    '36-titanio-rojo-ante-negro':        1,
-    '39-titanio-rojo-ante-negro':        1,
-    '36-titanio-rojo-pielkhaki-marronclaro': 1,
-    '39-titanio-rojo-pielkhaki-marronclaro': 1,
-    '36-titanio-rojo-pielkhaki-marronoscuro': 1,
-    '39-titanio-rojo-pielkhaki-marronoscuro': 1,
-    '36-titanio-rojo-pielkhaki-negra':   1,
-    '39-titanio-rojo-pielkhaki-negra':   1,
-
-    /* LA CAJA NEGRA PVD CON SU BRAZALETE NEGRO (Óscar, 20/08/2026): la
-       caja llegó generada con el hueco vacío y se le encajó la esfera
-       khaki aprobada por el método del hueco; la de segundero rojo sale
-       de su propia foto publicada. */
-    '36-pvd-blanca-brazaletepvd': 1,
-    '39-pvd-blanca-brazaletepvd': 1,
-    '36-pvd-rojo-brazaletepvd':   1,
-    '39-pvd-rojo-brazaletepvd':   1,
-
-    /* EL ANTE EN TITANIO. Las cuatro cajas de ante llegaron con el hueco
-       de la esfera 69 px más arriba de donde toca —el bisel medía 132 px
-       arriba y 267 abajo, el doble—, y Óscar lo vio a simple vista. Se
-       compensa poniendo la esfera donde va, centrada en la CAJA, y
-       agrandándola lo justo para que siga tapando el hueco corrido: el
-       bisel queda parejo a cambio de una esfera algo mayor que en las
-       fotos de piel, que él dio por buena antes que el bisel torcido. */
-    '36-titanio-crema-ante-negro': 1,
-    '39-titanio-crema-ante-negro': 1,
-    '36-titanio-crema-ante-marronoscuro': 1,
-    '39-titanio-crema-ante-marronoscuro': 1,
-    '36-titanio-crema-ante-azulpetroleo': 1,
-    '39-titanio-crema-ante-azulpetroleo': 1,
-    '36-titanio-crema-ante-camel': 1,
-    '39-titanio-crema-ante-camel': 1,
-    '36-titanio-blanco-ante-negro': 1,
-    '39-titanio-blanco-ante-negro': 1,
-    '36-titanio-blanco-ante-marronoscuro': 1,
-    '39-titanio-blanco-ante-marronoscuro': 1,
-    '36-titanio-blanco-ante-azulpetroleo': 1,
-    '39-titanio-blanco-ante-azulpetroleo': 1,
-    '36-titanio-blanco-ante-camel': 1,
-    '39-titanio-blanco-ante-camel': 1,
-
-
-    '36-acero-blanco-brazalete':         1,
-    /* EL BRONCE con ante, en sus cuatro colores y las dos medidas. Solo
-       tres son derivadas: la del marrón oscuro es la foto. */
-    '36-bronce-plata-ante-negro':         1,
-    '36-bronce-plata-ante-marronoscuro':  1,
-    '36-bronce-plata-ante-azulpetroleo':  1,
-    '36-bronce-plata-ante-camel':         1,
-    '39-bronce-plata-ante-negro':         1,
-    '39-bronce-plata-ante-marronoscuro':  1,
-    '39-bronce-plata-ante-azulpetroleo':  1,
-    '39-bronce-plata-ante-camel':         1,
-
-    /* EL ANTE sirve para las dos medidas (Óscar, 19/08/2026): es la misma
-       correa de 20 mm y la misma caja, así que la foto vale igual. */
-    '36-acero-blanca-ante-negro':   1,
-    '36-acero-blanca-ante-marronoscuro': 1,
-    '36-acero-blanca-ante-azulpetroleo': 1,
-    '36-acero-blanca-ante-camel':   1,
-    '36-acero-rojo-ante-negro':     1,
-    '36-acero-rojo-ante-marronoscuro': 1,
-    '36-acero-rojo-ante-azulpetroleo': 1,
-    '36-acero-rojo-ante-camel':     1,
-    '36-acero-crema-ante-negro':    1,
-    '36-acero-crema-ante-marronoscuro': 1,
-    '36-acero-crema-ante-azulpetroleo': 1,
-    '36-acero-crema-ante-camel':    1,
-    '36-acero-blanco-ante-negro':   1,
-    '36-acero-blanco-ante-marronoscuro': 1,
-    '36-acero-blanco-ante-azulpetroleo': 1,
-    '36-acero-blanco-ante-camel':   1,
-
-    /* EL ANTE, sus cuatro colores */
-    '39-acero-blanca-ante-negro':        1,
-    '39-acero-rojo-ante-negro':          1,
-    '39-acero-blanca-ante-marronoscuro': 1,
-    '39-acero-blanca-ante-azulpetroleo': 1,
-    '39-acero-blanca-ante-camel':        1,
-    '39-acero-rojo-ante-marronoscuro':   1,
-    '39-acero-rojo-ante-azulpetroleo':   1,
-    '39-acero-rojo-ante-camel':          1
+    '39-acero-blanca-nato-verde': 1,
+    '39-pvd-blanca-nato-verde': 1,
   };
   var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
@@ -855,7 +570,10 @@
    al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
    la hebilla clásica plateada. Es la única combinación fotografiada, y
    la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata' };
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata',
+            /* la última correa que pediste TÚ, para poder devolvértela cuando
+               un recorte por caja te la haya cambiado (23/08/2026) */
+            correaPedida: 'NATO' };
 
   /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
   /* EL MULTIPLICADOR (Óscar, 22/08/2026). Era 2,7235 sobre las PIEZAS;
@@ -1282,6 +1000,9 @@
       else if (g === 'correa' && b.dataset.v === 'DUON' &&
                e.estilo === 'M' && DUOS_M[e.correa]) { /* ya estás */ }
       else e[g] = b.dataset.v;
+      /* Lo que pides con el botón de la correa se queda anotado: es a lo
+         que hay que volver cuando una caja te la haya quitado. */
+      if (g === 'correa') e.correaPedida = b.dataset.v;
       /* al entrar en la caja negra, la esfera por defecto es la de
          segundero blanco (Óscar, 16/08/2026) */
       if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
@@ -1304,6 +1025,26 @@
          que el nato no existía ahí. Como con el pespunte: si lo que has
          pulsado NO es el color, se busca uno con foto; si eliges tú un
          color, se respeta aunque salga el cartel. */
+      /* NORMALIZAR ANTES DE BUSCAR FOTO (23/08/2026). El rescate de abajo
+         preguntaba por la foto con el estado a medio hacer: al volver del
+         bronce la esfera seguía siendo la de agujas plata, así que buscaba
+         una foto que no era la que se iba a pintar. normaliza() solo
+         recorta, así que llamarla de más no cambia nada. */
+      normaliza();
+      /* LA CORREA VUELVE SOLA (Óscar, 23/08/2026): «si elijo otra correa,
+         u otro color de caja, al regresar a acero no aparece foto, y
+         debería volver a mostrar la que sí tenemos». El bronce solo lleva
+         ante, así que al pasar por él la correa se cambia sola; al volver
+         al acero nadie la devolvía y el visor se quedaba vacío. Aquí se
+         recupera la última que pediste tú, y SOLO si con ella hay foto.
+         Si acabas de pulsar la correa mandas tú y esto no se mete. */
+      if (g !== 'correa' && e.estilo === 'K' && !serieFoto() &&
+          e.correaPedida && e.correa !== e.correaPedida) {
+        var correaAntes = e.correa;
+        e.correa = e.correaPedida;
+        normaliza();
+        if (!serieFoto()) { e.correa = correaAntes; normaliza(); }
+      }
       if (g !== 'color' && e.estilo === 'K' && !serieFoto()) {
         var cual = e.correa === 'NATO' ? 'nato' : e.correa === 'PIELO' ? 'pielk'
                  : e.correa === 'NATOP' ? 'color' : e.correa === 'ANTE' ? 'ante' : null;

@@ -26,6 +26,12 @@
   aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
 }
 .pv-hero img{width:82%;height:92%;object-fit:contain;display:block}
+/* Y LA FOTO, LO MISMO (23/08/2026). El `display:block` de la línea de arriba
+   le ganaba al atributo `hidden`, así que cuando una combinación se quedaba
+   sin foto el <img> seguía pintado y el cartel de «Fotografía en preparación»
+   le caía encima, ilegible. Es la misma trampa que ya tenían el forro, las
+   miniaturas, las capas y el propio cartel. */
+.pv-hero img[hidden]{display:none}
 /* Fotos «tal cual» (régimen del 15/08): la foto llena el marco y su
    propio fondo de estudio hace de fondo, con la sombra natural. */
 .pv-hero-llena{background:none}
