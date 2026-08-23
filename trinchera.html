@@ -69,8 +69,12 @@
   .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
   /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
      y no hace falta gritar. */
-  .pv-rotulo{ text-transform:none; font-size:14px }
-  .pv-opciones button{ text-transform:none; font-size:14px }
+  /* LA ESCALA. Al quitar mayúsculas e interletrado se me quedó casi todo
+     en 14 px y no había jerarquía: el título de la fila pesaba lo mismo que
+     un botón. Cuatro escalones con aire entre ellos —42 / 20 / 16 / 13—, y
+     de paso los botones se leen mejor, que es lo que manda aquí. */
+  .pv-info .pv-rotulo{ text-transform:none; font-size:20px; line-height:1.25 }
+  .pv-info .pv-opciones button{ text-transform:none; font-size:16px }
 
   /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
      cuando está señalado, «recuadro blanco y letras negras» cuando no.
@@ -93,7 +97,7 @@
 
   /* El calibre, debajo de la fila y solo cuando ya has elegido. */
   .pv-calibre{
-    margin:2px 0 0; font-size:14px; color:#121414;
+    margin:2px 0 0; font-size:13px; color:#121414;
     font-family:'Nunito Sans', system-ui, sans-serif;
   }
   .pv-calibre[hidden]{ display:none }
@@ -249,7 +253,7 @@
             <p class="pv-subrotulo" data-pv-rotulo-esf>Numerales</p>
             <div class="pv-opciones" data-pv="esf"></div>
           </div>
-          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, segundero blanco</p>
+          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, numerales y agujas blancas</p>
         </div>
 
         <!-- FILA 3 -->
