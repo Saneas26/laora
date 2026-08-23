@@ -71,6 +71,52 @@
      y no hace falta gritar. */
   .pv-rotulo{ text-transform:none; font-size:14px }
   .pv-opciones button{ text-transform:none; font-size:14px }
+
+  /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
+     cuando está señalado, «recuadro blanco y letras negras» cuando no.
+     El amarillo es el oro de la marca, el mismo del rótulo NUEVO. Sobre
+     negro da 9,4:1, así que se lee de sobra. */
+  .pv-info .pv-opciones button{
+    background:#fff; color:#121414;
+    border:1px solid rgba(18,20,20,.28);
+  }
+  .pv-info .pv-opciones button:hover{ border-color:#121414 }
+  .pv-info .pv-opciones button[aria-pressed="true"]{
+    background:var(--cv2-oro); color:#121414; border-color:var(--cv2-oro);
+  }
+  /* el filete de debajo era la marca de «elegido»; ahora lo dice el
+     propio recuadro, así que sobra */
+  .pv-info .pv-opciones button[aria-pressed="true"]::after{ display:none }
+  .pv-info .pv-opciones button[disabled]{
+    background:#fff; color:#121414; opacity:.4;
+  }
+
+  /* El calibre, debajo de la fila y solo cuando ya has elegido. */
+  .pv-calibre{
+    margin:2px 0 0; font-size:14px; color:#121414;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-calibre[hidden]{ display:none }
+
+  /* LAS CUATRO FILAS. Sin los círculos numerados de antes: la estructura
+     que pidió Óscar el 24/08/2026 son cuatro bloques, no seis pasos, y el
+     número dejaba de cuadrar. */
+  .pv-info .pv-grupo>.pv-rotulo::before{ display:none }
+  .pv-info .pv-rotulo{ padding-left:0 }
+  .pv-fila{ display:flex; flex-direction:column; gap:12px }
+  .pv-info .pv-fila+.pv-fila{ margin-top:6px }
+  /* Lo que cuelga de una fila —el segundero, el color, el cierre— va un
+     escalón por dentro, para que se lea como parte de ella y no como otra
+     pregunta al mismo nivel. */
+  .pv-sub{ display:flex; flex-direction:column; gap:8px; padding-left:14px;
+           border-left:2px solid rgba(18,20,20,.12) }
+  .pv-sub[hidden]{ display:none }
+  .pv-subrotulo{
+    margin:0; font-size:13px; color:#4A4A4A;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    display:flex; justify-content:space-between; gap:10px;
+  }
+  .pv-subrotulo b{ font-weight:400; color:#121414 }
 </style>
 </head>
 <body><header class="site-header">
@@ -163,68 +209,80 @@
         <!-- EL DIÁMETRO Y EL MOVIMIENTO, EN LA MISMA LÍNEA (Óscar,
              24/08/2026): el diámetro a la izquierda y el movimiento a la
              derecha. En pantalla estrecha se apilan solos. -->
-        <div class="pv-fila-cabeza">
-        <div class="pv-grupo" data-paso="diam">
-          <p class="pv-rotulo">Tamaño de caja</p>
-          <div class="pv-opciones" data-pv="diam">
-            <button type="button" data-v="36" aria-pressed="true">&#216; 36</button>
-            <button type="button" data-v="39" aria-pressed="false">&#216; 39</button>
+        <!-- LAS CUATRO FILAS (Óscar, 24/08/2026). Fila 1: diámetro y
+             movimiento, con el calibre debajo. Fila 2: la esfera —estilo,
+             color y segundero—. Fila 3: el acabado de caja. Fila 4: la
+             correa con su color y su cierre. -->
+
+        <!-- FILA 1 -->
+        <div class="pv-fila">
+          <div class="pv-fila-cabeza">
+            <div class="pv-grupo" data-paso="diam">
+              <p class="pv-rotulo">Tamaño de caja</p>
+              <div class="pv-opciones" data-pv="diam">
+                <button type="button" data-v="36" aria-pressed="false">&#216; 36</button>
+                <button type="button" data-v="39" aria-pressed="false">&#216; 39</button>
+              </div>
+            </div>
+
+            <div class="pv-grupo" data-paso="mov">
+              <p class="pv-rotulo">Movimiento</p>
+              <div class="pv-opciones" data-pv="mov">
+                <button type="button" data-v="A" aria-pressed="false">Automático</button>
+                <button type="button" data-v="Q" aria-pressed="false">Cuarzo (Pila)</button>
+              </div>
+            </div>
           </div>
+          <!-- «debajo el calibre escogido que aparece una vez escogido nada más» -->
+          <p class="pv-calibre" data-pv-calibre hidden><b data-pv-cal>Calibre LO_Q6026</b></p>
         </div>
 
-        <div class="pv-grupo" data-paso="mov">
-          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_Q6026</b></p>
-          <div class="pv-opciones" data-pv="mov">
-            <button type="button" data-v="A" aria-pressed="false">Automático</button>
-            <button type="button" data-v="Q" aria-pressed="true">Cuarzo (Pila)</button>
-          </div>
-        </div>
-        </div>
-
-        <div class="pv-grupo" data-paso="estilo">
-          <p class="pv-rotulo">Estilo</p>
+        <!-- FILA 2 -->
+        <div class="pv-fila pv-grupo" data-paso="estilo">
+          <p class="pv-rotulo">Elige tu esfera</p>
           <div class="pv-opciones" data-pv="estilo">
-            <button type="button" data-v="K" aria-pressed="true">Khaki</button>
+            <button type="button" data-v="K" aria-pressed="false">Khaki</button>
             <button type="button" data-v="M" aria-pressed="false">Murph</button>
           </div>
-        </div>
-
-        <div class="pv-grupo" data-pv-grupo-esf data-paso="esf">
-          <p class="pv-rotulo" data-pv-rotulo-esf>Segundero</p>
-          <div class="pv-opciones" data-pv="esf"></div>
+          <div class="pv-opciones pv-colores" data-pv="esfColor"></div>
+          <div class="pv-sub" data-pv-grupo-esf>
+            <p class="pv-subrotulo" data-pv-rotulo-esf>Segundero</p>
+            <div class="pv-opciones" data-pv="esf"></div>
+          </div>
           <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, segundero blanco</p>
         </div>
 
-        <div class="pv-grupo" data-paso="caja">
+        <!-- FILA 3 -->
+        <div class="pv-fila pv-grupo" data-paso="caja">
           <p class="pv-rotulo">Acabado de caja</p>
           <div class="pv-opciones" data-pv="caja">
-            <button type="button" data-v="PL" aria-pressed="true">Acero Plata</button>
+            <button type="button" data-v="PL" aria-pressed="false">Acero Plata</button>
             <button type="button" data-v="NG" aria-pressed="false">Negra PVD</button>
             <button type="button" data-v="BR" aria-pressed="false">Bronce</button>
             <button type="button" data-v="TI" aria-pressed="false">Titanio</button>
           </div>
         </div>
 
-
-        <div class="pv-grupo" data-paso="correa">
-          <p class="pv-rotulo">Correa <b data-pv-cierre>Hebilla clásica plateada</b></p>
+        <!-- FILA 4 -->
+        <div class="pv-fila pv-grupo" data-paso="correa">
+          <p class="pv-rotulo">Correa</p>
           <div class="pv-opciones" data-pv="correa"></div>
           <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
-        </div>
 
-        <div class="pv-grupo" data-cuelga="pesp" data-pv-grupo-pesp hidden>
-          <p class="pv-rotulo">Pespunte</p>
-          <div class="pv-opciones" data-pv="pesp"></div>
-        </div>
+          <div class="pv-sub" data-cuelga="color" data-pv-grupo-color hidden>
+            <p class="pv-subrotulo" data-pv-rotulo-color>Color del nato</p>
+            <div class="pv-opciones pv-colores" data-pv="color"></div>
+          </div>
 
-        <div class="pv-grupo" data-cuelga="color" data-pv-grupo-color hidden>
-          <p class="pv-rotulo" data-pv-rotulo-color>Color del nato</p>
-          <div class="pv-opciones pv-colores" data-pv="color"></div>
-        </div>
+          <div class="pv-sub" data-cuelga="pesp" data-pv-grupo-pesp hidden>
+            <p class="pv-subrotulo">Pespunte</p>
+            <div class="pv-opciones" data-pv="pesp"></div>
+          </div>
 
-        <div class="pv-grupo" data-cuelga="cierre" data-pv-grupo-cierre hidden>
-          <p class="pv-rotulo">Cierre/hebilla</p>
-          <div class="pv-opciones" data-pv="cierre"></div>
+          <div class="pv-sub" data-cuelga="cierre" data-pv-grupo-cierre hidden>
+            <p class="pv-subrotulo">Cierre y hebilla <b data-pv-cierre>Hebilla clásica plateada</b></p>
+            <div class="pv-opciones" data-pv="cierre"></div>
+          </div>
         </div>
 
         <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
@@ -440,6 +498,17 @@
      esos dos colores; la piel y el ante siguen en negro y punto. */
   var NATOS_PVD = { NEG: ['Negro', '#1e1f22'], VER: ['Verde militar', '#4a5a3a'] };
   var SOLO_NEGRO_PIEL = { NEG: ['Negra', '#1c1c1e'] };
+  /* EL COLOR DE LA ESFERA (Óscar, 24/08/2026): «Negra, Blanca, Azul, Gris,
+     debajo recuadros del color y nombre del color». De momento solo está
+     hecha la negra; las otras tres salen tachadas —que es como se dice
+     aquí «esto todavía no existe»— hasta que Óscar apruebe su coste y su
+     foto. Sin precio no se venden. */
+  var ESF_COLORES = {
+    NEG: ['Negra',  '#16181a', true],
+    BLA: ['Blanca', '#f1efe9', false],
+    AZU: ['Azul',   '#1f3b63', false],
+    GRI: ['Gris',   '#6f7378', false]
+  };
   var SOLO_NEGRO_ANTE = { NEG: ['Negro', '#2b2a2b'] };
   var ANTES = {
     NEG: ['Negro', '#2b2a2b'],            MOS: ['Marrón oscuro', '#4b382e'],
@@ -623,7 +692,7 @@
    al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
    la hebilla clásica plateada. Es la única combinación fotografiada, y
    la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata',
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata', esfColor: 'NEG',
             /* la última correa que pediste TÚ, para poder devolvértela cuando
                un recorte por caja te la haya cambiado (23/08/2026) */
             correaPedida: 'NATO' };
@@ -840,7 +909,9 @@
      Se cierra con una clase y no con `hidden` a propósito: `hidden` ya lo
      usan los grupos para su propia lógica, y si los dos escribieran en el
      mismo sitio se pisarían. */
-  var CADENA = ['diam', 'mov', 'estilo', 'esf', 'caja', 'correa'];
+  /* La esfera entera —estilo, color y segundero— es UN paso: la fila 2.
+     El segundero dejó de ser un paso propio el 24/08/2026. */
+  var CADENA = ['diam', 'mov', 'estilo', 'caja', 'correa'];
   var tocado = {};
 
   /* Un paso sin nada que elegir se da por pasado. Ojo: el grupo del
@@ -852,6 +923,20 @@
     var op = g.querySelector('.pv-opciones');
     return !op || op.hidden || !op.querySelector('button');
   }
+
+  /* EL HUECO DEL PIE (24/08/2026). El bloque del precio va `sticky` pegado
+     abajo y con fondo blanco, así que se come el final de la columna cuando
+     las opciones son más altas que la pantalla. Con las cuatro filas abiertas
+     tapaba el segundero. Aquí se le reserva su propio alto —medido, no
+     inventado— para que nunca quede nada debajo. */
+  function huecoParaElPie() {
+    var pie = document.querySelector('.pv-pie');
+    var col = document.querySelector('.pv-info > div');
+    if (!pie || !col) return;
+    var alto = pie.getBoundingClientRect().height;
+    if (alto) col.style.paddingBottom = Math.round(alto + 24) + 'px';
+  }
+  window.addEventListener('resize', huecoParaElPie);
 
   function abrirPasos() {
     var abierto = !!(tocado.diam && tocado.mov);
@@ -903,8 +988,20 @@
        bronce: en el resto de cajas se elige siempre entre los dos
        segunderos. «Segundero rojo para todas las cajas excepto bronce,
        segundero blanco para todas las cajas» (Óscar). */
+    /* LOS CUATRO COLORES DE ESFERA (Óscar, 24/08/2026). Los que aún no
+       existen salen tachados: se ven, para que se sepa por dónde va la
+       familia, pero no se pueden elegir. */
+    $('[data-pv="esfColor"]').innerHTML = Object.keys(ESF_COLORES).map(function (k) {
+      var c = ESF_COLORES[k];
+      return '<button type="button" data-v="' + k + '"' + (c[2] ? '' : ' disabled') +
+             ' aria-pressed="' + (k === e.esfColor) + '">' +
+             '<i style="background:' + c[1] + '"></i><small>' + c[0] + '</small></button>';
+    }).join('');
+
     var esfFija = esBronce && e.estilo !== 'M';
     $('[data-pv="esf"]').hidden = esfFija;
+    /* el sub-bloque del segundero se va entero cuando la esfera es fija */
+    $('[data-pv-grupo-esf]').hidden = esfFija;
     /* Y SE VACÍA, no solo se esconde. Si se deja el contenido de la vez
        anterior, el enumerador del catálogo —que lee lo que la ficha ha
        dibujado— cree que aquí siguen ofreciéndose aquellas esferas, las
@@ -1077,6 +1174,22 @@
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
     abrirPasos();
+    /* NINGUNA OPCIÓN SEÑALADA HASTA QUE LA PULSES (Óscar, 24/08/2026). El
+       reloj de la foto y el precio son los del clásico desde el primer
+       momento, pero los botones no se atribuyen una elección que el cliente
+       todavía no ha hecho: se desmarcan los grupos que no ha tocado. */
+    CADENA.forEach(function (k) {
+      if (tocado[k]) return;
+      var g = $('[data-pv="' + k + '"]');
+      if (!g) return;
+      [].forEach.call(g.querySelectorAll('button'), function (b) {
+        b.setAttribute('aria-pressed', 'false');
+      });
+    });
+    /* el calibre, solo cuando ya has elegido movimiento */
+    var cal = $('[data-pv-calibre]');
+    if (cal) cal.hidden = !tocado.mov;
+    huecoParaElPie();
     $('[data-pv-tec="agua"]').textContent = agua() +
       (e.caja === 'TI' ? '. La más hermética de la familia, con tapa roscada.' :
        '. Aguanta lluvia, salpicaduras y lavarse las manos; para nadar, mejor el titanio.');
