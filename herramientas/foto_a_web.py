@@ -20,7 +20,14 @@ CALIDAD = {480: 62, 1200: 66, 1600: 68}
 
 
 def publicar(origen, carpeta, nombre):
-    im = Image.open(origen).convert('RGB')
+    # EL ALFA SE CONSERVA (23/08/2026). Antes esto hacía convert('RGB') a
+    # secas, y en un máster con fondo transparente los píxeles de fuera son
+    # (0,0,0,0): al tirar el canal alfa el reloj salía recortado sobre NEGRO.
+    # AVIF guarda transparencia, así que la foto se adapta al fondo de cada
+    # sitio —#e9e9e7 en la ficha, #eae8e8 en colección— en vez de traerse
+    # un cuadrado gris que no casa con ninguno de los dos.
+    im = Image.open(origen)
+    im = im.convert('RGBA' if 'A' in im.getbands() else 'RGB')
     hechos = []
     for t in TAMANOS:
         d = os.path.join(carpeta, str(t))
