@@ -47,15 +47,21 @@
   max-width:1440px;margin:0 auto;
   padding:72px 64px 40px;
 }
+/* Más grande (Óscar, 21/08/2026): era una etiqueta de 13 px perdida
+   encima del titular. El logotipo dibujado sube con ella, que va en em
+   y arrastra su círculo. */
 .cv2-kicker{
-  font-family:var(--cv2-mono);font-size:13px;font-weight:700;
+  font-family:var(--cv2-mono);font-size:clamp(16px,1.7vw,22px);font-weight:700;
   letter-spacing:.1em;text-transform:uppercase;color:var(--cv2-gris);
-  display:flex;align-items:baseline;gap:8px;margin:0 0 20px;
+  /* Nada de flex: el rótulo es UNA línea de texto con el logotipo
+     dentro. Con display:flex, cada trozo se volvía un ítem y el
+     «· 2026» acababa pegado al borde derecho en el teléfono. */
+  margin:0 0 24px;
 }
 /* El logotipo dibujado viene pensado para fondo oscuro —color #fff—
    y aquí el hero es blanco: sin este color era invisible. */
 .cv2-kicker .cb-marca{
-  font-size:17px;text-transform:none;letter-spacing:0;
+  font-size:clamp(21px,2.2vw,29px);text-transform:none;letter-spacing:0;
   color:var(--cv2-negro);
 }
 .cv2-hero h1{
