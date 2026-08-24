@@ -509,7 +509,6 @@
   /* EL NATO DEL PVD ABRE AL VERDE (Óscar, 23/08/2026): «ahora vamos a
      ofrecer la caja pvd negra con nato verde también». Solo el nato y solo
      esos dos colores; la piel y el ante siguen en negro y punto. */
-  var NATOS_PVD = { NEG: ['Negro', '#1e1f22'], VER: ['Verde militar', '#4a5a3a'] };
   var SOLO_NEGRO_PIEL = { NEG: ['Negra', '#1c1c1e'] };
   /* EL COLOR DE LA ESFERA (Óscar, 24/08/2026): «Negra, Blanca, Azul, Gris,
      debajo recuadros del color y nombre del color». De momento solo está
@@ -530,10 +529,21 @@
 
   /* LOS COLORES DEL NATO (Óscar, 19/08/2026). Del anuncio se descartan el
      azul y el gris liso: «gris nato no existe». Quedan cuatro. */
+  /* LOS SEIS COLORES DEL NATO (Óscar, 24/08/2026), con la foto de cada uno
+     en las cajas de acero, PVD y bronce. El beige pasa a llamarse ARENA,
+     que es como viene nombrado el material; su código sigue siendo BEI para
+     no mover las referencias que ya existen. Los tonos son los MEDIDOS en
+     las fotos, no los del catálogo viejo. */
   var NATOS = {
-    VER: ['Verde militar', '#4a5a3a'], NEG: ['Negro', '#1e1f22'],
-    BEI: ['Beige', '#b7a583'],         NGR: ['Negro y gris', '#4a4b4f']
+    VER: ['Verde militar', '#5e5739'], NEG: ['Negro', '#222323'],
+    BEI: ['Arena', '#766445'],         NGR: ['Negro y gris', '#2f2f2e'],
+    GRI: ['Gris', '#5d5d5a'],          AZM: ['Azul marino', '#1e2c39']
   };
+  /* El PVD tiene foto de los seis colores desde el 24/08/2026, así que ya no
+     se le recorta la paleta: lleva la misma que las demás cajas. Va DESPUÉS
+     de NATOS a propósito; declarado antes valía `undefined` y el grupo de
+     color del PVD se quedaba vacío. */
+  var NATOS_PVD = NATOS;
 
   /* LOS SEIS DE LA CORREA TÉCNICA, la del nato con forro de piel, que es
      la que va en la caja de 36 (Óscar, 19/08/2026). Sustituyen a los
@@ -577,7 +587,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=36';
+  var SERIE_V = '?v=37';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -601,8 +611,23 @@
      LA NORMA: una línea por foto publicada, y se añade EN EL MISMO COMMIT que
      el AVIF. Lo que no esté aquí sale con el cartel, que es la verdad. */
   var SERIE = {
+    '39-acero-blanca-nato-arena': 1,
+    '39-acero-blanca-nato-azulmarino': 1,
+    '39-acero-blanca-nato-gris': 1,
+    '39-acero-blanca-nato-negro': 1,
+    '39-acero-blanca-nato-negrogris': 1,
     '39-acero-blanca-nato-verde': 1,
+    '39-bronce-blanca-nato-arena': 1,
+    '39-bronce-blanca-nato-azulmarino': 1,
+    '39-bronce-blanca-nato-gris': 1,
+    '39-bronce-blanca-nato-negro': 1,
+    '39-bronce-blanca-nato-negrogris': 1,
     '39-bronce-blanca-nato-verde': 1,
+    '39-pvd-blanca-nato-arena': 1,
+    '39-pvd-blanca-nato-azulmarino': 1,
+    '39-pvd-blanca-nato-gris': 1,
+    '39-pvd-blanca-nato-negro': 1,
+    '39-pvd-blanca-nato-negrogris': 1,
     '39-pvd-blanca-nato-verde': 1,
     '39-titanio-blanca-nato-verde': 1,
   };
@@ -614,7 +639,8 @@
                        ACERO: 'brazalete', ACERONG: 'brazaletepvd',
                        DUON: 'duonegra', DUOM: 'duomarron', DUOV: 'duoverde',
                        DUOA: 'duoante', PIELO: 'pielkhaki' };
-  var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'beige', NGR: 'negrogris' };
+  var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'arena', NGR: 'negrogris',
+                       GRI: 'gris', AZM: 'azulmarino' };
   /* La frase que describe el reloj elegido. Se usa en el alt de la foto
      y en el pie de la lupa; es la misma que diría alguien por teléfono. */
   var CAJA_DICHA = { PL: 'caja de acero plata', NG: 'caja negra de PVD',
