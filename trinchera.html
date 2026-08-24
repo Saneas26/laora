@@ -69,14 +69,19 @@
   .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
   /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
      y no hace falta gritar. */
-  /* LA ESCALA: 42 / 22 / 17 / 13. Al quitar mayúsculas e interletrado se me
-     quedó casi todo en 14 px y el título de una fila pesaba lo mismo que un
-     botón. Con 20 / 16 / 13 el salto de los botones al rótulo pequeño se
-     quedaba en 1,23 y seguía leyéndose plano; con 22 / 17 / 13 los tres
-     saltos pasan de 1,29. Y los botones a 17 px se leen de lejos, que aquí
-     la legibilidad manda sobre todo lo demás. */
+  /* LA ESCALA: DOS TAMAÑOS Y NADA MÁS. 22 px para el título de cada fila y
+     16 px —el tamaño base del navegador— para todo lo demás. Un salto de
+     1,38 y se acabó.
+
+     Antes iba con cuatro escalones y no valía: 17 px para los botones choca
+     con los 16 px del cuerpo de la página, que también cuenta, y dos
+     tamaños separados por un píxel no son jerarquía, son ruido. Lo que
+     distingue un rótulo pequeño de un botón es el COLOR, no un píxel.
+
+     De paso los rótulos pequeños suben de 13 a 16 px, que se leen mucho
+     mejor: aquí la legibilidad manda sobre todo lo demás. */
   .pv-info .pv-rotulo{ text-transform:none; font-size:22px; line-height:1.25 }
-  .pv-info .pv-opciones button{ text-transform:none; font-size:17px }
+  .pv-info .pv-opciones button{ text-transform:none; font-size:16px }
 
   /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
      cuando está señalado, «recuadro blanco y letras negras» cuando no.
@@ -99,7 +104,7 @@
 
   /* El calibre, debajo de la fila y solo cuando ya has elegido. */
   .pv-calibre{
-    margin:2px 0 0; font-size:13px; color:#121414;
+    margin:2px 0 0; font-size:16px; color:#4A4A4A;
     font-family:'Nunito Sans', system-ui, sans-serif;
   }
   .pv-calibre[hidden]{ display:none }
@@ -118,7 +123,7 @@
            border-left:2px solid rgba(18,20,20,.12) }
   .pv-sub[hidden]{ display:none }
   .pv-subrotulo{
-    margin:0; font-size:13px; color:#4A4A4A;
+    margin:0; font-size:16px; color:#4A4A4A;
     font-family:'Nunito Sans', system-ui, sans-serif;
     display:flex; justify-content:space-between; gap:10px;
   }
