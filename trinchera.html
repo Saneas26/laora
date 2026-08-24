@@ -69,12 +69,14 @@
   .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
   /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
      y no hace falta gritar. */
-  /* LA ESCALA. Al quitar mayúsculas e interletrado se me quedó casi todo
-     en 14 px y no había jerarquía: el título de la fila pesaba lo mismo que
-     un botón. Cuatro escalones con aire entre ellos —42 / 20 / 16 / 13—, y
-     de paso los botones se leen mejor, que es lo que manda aquí. */
-  .pv-info .pv-rotulo{ text-transform:none; font-size:20px; line-height:1.25 }
-  .pv-info .pv-opciones button{ text-transform:none; font-size:16px }
+  /* LA ESCALA: 42 / 22 / 17 / 13. Al quitar mayúsculas e interletrado se me
+     quedó casi todo en 14 px y el título de una fila pesaba lo mismo que un
+     botón. Con 20 / 16 / 13 el salto de los botones al rótulo pequeño se
+     quedaba en 1,23 y seguía leyéndose plano; con 22 / 17 / 13 los tres
+     saltos pasan de 1,29. Y los botones a 17 px se leen de lejos, que aquí
+     la legibilidad manda sobre todo lo demás. */
+  .pv-info .pv-rotulo{ text-transform:none; font-size:22px; line-height:1.25 }
+  .pv-info .pv-opciones button{ text-transform:none; font-size:17px }
 
   /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
      cuando está señalado, «recuadro blanco y letras negras» cuando no.
