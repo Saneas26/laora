@@ -115,6 +115,17 @@
   .pv-info .pv-grupo>.pv-rotulo::before{ display:none }
   .pv-info .pv-rotulo{ padding-left:0 }
   .pv-fila{ display:flex; flex-direction:column; gap:12px }
+  /* LA ESFERA, EN UNA SOLA LÍNEA (Óscar, 24/08/2026): el estilo —Khaki o
+     Murph— y el color van uno al lado del otro, no en dos renglones. El
+     rótulo, lo que cuelga y la frase fija siguen ocupando su línea
+     entera; si la columna se estrecha, los dos grupos se reparten solos
+     en dos renglones. */
+  .pv-fila[data-paso="estilo"]{
+    flex-direction:row; flex-wrap:wrap; align-items:center; gap:12px 26px;
+  }
+  .pv-fila[data-paso="estilo"]>.pv-rotulo,
+  .pv-fila[data-paso="estilo"]>.pv-sub,
+  .pv-fila[data-paso="estilo"]>.pv-fijo{ flex:0 0 100% }
   .pv-info .pv-fila+.pv-fila{ margin-top:6px }
   /* Lo que cuelga de una fila —el segundero, el color, el cierre— va un
      escalón por dentro, para que se lea como parte de ella y no como otra
