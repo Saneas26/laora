@@ -24,7 +24,13 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 
-def a_blanco(img, centro, radio, sat_min=0.18, luz=1.12):
+def a_blanco(img, centro, radio, sat_min=0.18, luz=1.12, fuerza=1.0):
+    """`fuerza` mezcla entre el crema original (0) y el blanco (1), para
+    poder dejarlo «un poco más blanco» en vez de blanco del todo."""
+    # EL ALFA SE CONSERVA (24/08/2026). Con convert('RGB') a secas, un máster
+    # de fondo transparente sale recortado sobre negro y hay que rehacerlo
+    # entero. Es la misma trampa que tenía foto_a_web.py.
+    alfa = img.getchannel('A') if 'A' in img.getbands() else None
     a = np.asarray(img.convert('RGB')).astype(float) / 255
     mx = a.max(axis=2); mn = a.min(axis=2)
     sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1e-6), 0)
@@ -37,8 +43,13 @@ def a_blanco(img, centro, radio, sat_min=0.18, luz=1.12):
                        .filter(ImageFilter.GaussianBlur(0.6))).astype(float) / 255
     # a blanco conservando la luz de cada píxel: el relieve del lume se queda
     gris = np.clip(mx * luz, 0, 1)[:, :, None]
-    out = a * (1 - suave[:, :, None]) + np.repeat(gris, 3, axis=2) * suave[:, :, None]
-    return Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8)), int(crema.sum())
+    m = (suave * fuerza)[:, :, None]
+    out = a * (1 - m) + np.repeat(gris, 3, axis=2) * m
+    fuera = Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8))
+    if alfa is not None:
+        fuera = fuera.convert('RGBA')
+        fuera.putalpha(alfa)
+    return fuera, int(crema.sum())
 
 
 if __name__ == '__main__':
@@ -47,8 +58,10 @@ if __name__ == '__main__':
     p.add_argument('--centro', required=True); p.add_argument('--radio', type=float, required=True)
     p.add_argument('--sat', type=float, default=0.18)
     p.add_argument('--luz', type=float, default=1.12)
+    p.add_argument('--fuerza', type=float, default=1.0,
+                   help='0 = como está, 1 = blanco del todo')
     a = p.parse_args()
     cx, cy = (float(v) for v in a.centro.split(','))
-    img, n = a_blanco(Image.open(a.origen), (cx, cy), a.radio, a.sat, a.luz)
+    img, n = a_blanco(Image.open(a.origen), (cx, cy), a.radio, a.sat, a.luz, a.fuerza)
     img.save(a.salida)
     print(a.salida, '· píxeles pasados a blanco:', n)
