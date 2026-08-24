@@ -42,6 +42,19 @@ def mascara(a, centro, radio):
     return op & anillo & (mx > 140) & (R > B + 12)
 
 
+def nucleo(a, m):
+    """El centro del índice, no su contorno.
+
+    Un índice pintado tiene el borde suavizado contra el negro de la esfera,
+    y esos píxeles mezclados apagan el color. Promediando la máscara entera
+    sale un beige lavado que no es el tono real de la pieza. Se toma el
+    cuarto más saturado, que es el relleno."""
+    sat = a[..., :3].max(2) - a[..., :3].min(2)
+    if not m.any():
+        return m
+    return m & (sat >= np.percentile(sat[m], 75))
+
+
 def ajustar(img, centro, radio, rb_obj, gb_obj):
     a = np.asarray(img.convert('RGBA')).astype(float)
     m = mascara(a, centro, radio)
@@ -49,10 +62,12 @@ def ajustar(img, centro, radio, rb_obj, gb_obj):
         raise SystemExit('no encuentro los índices: revisa el centro y el radio')
 
     R, G, B = a[..., 0], a[..., 1], a[..., 2]
-    rb, gb = (R[m] - B[m]).mean(), (G[m] - B[m]).mean()
+    n = nucleo(a, m)
+    rb, gb = (R[n] - B[n]).mean(), (G[n] - B[n]).mean()
     sube_b = rb - rb_obj              # cuánto azul falta
     sube_g = gb_obj + sube_b - gb     # y el verde que lo acompaña
-    print('ahora  R-B %+.1f · G-B %+.1f  (%d píxeles)' % (rb, gb, m.sum()))
+    print('ahora  R-B %+.1f · G-B %+.1f  (núcleo de %d px, sobre %d marcados)'
+          % (rb, gb, n.sum(), m.sum()))
     print('subo   azul %+.1f · verde %+.1f' % (sube_b, sube_g))
 
     # el borde se difumina medio píxel para que no se vea el recorte
@@ -65,8 +80,8 @@ def ajustar(img, centro, radio, rb_obj, gb_obj):
 
     b = np.asarray(fuera).astype(float)
     print('queda  R-B %+.1f · G-B %+.1f  (objetivo %+.1f / %+.1f)'
-          % ((b[..., 0][m] - b[..., 2][m]).mean(),
-             (b[..., 1][m] - b[..., 2][m]).mean(), rb_obj, gb_obj))
+          % ((b[..., 0][n] - b[..., 2][n]).mean(),
+             (b[..., 1][n] - b[..., 2][n]).mean(), rb_obj, gb_obj))
     return fuera, m
 
 
