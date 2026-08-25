@@ -541,7 +541,6 @@
        como un solo color a 4,69 —número de la hoja vieja— y solo en el
        titanio. */
     PIELO: { nombre: 'Piel del Khaki', coste: 15.00, tec: 'piel de 20 mm con pespunte rectangular claro y hebilla clásica' },
-    NATOP: { nombre: 'Nato + Piel', coste: 5.48, tec: 'nato de lona con forro interior de piel genuina que evita molestias en la muñeca, 4 mm de grosor, hebilla clásica' }
   };
   /* Los cuatro antes del Murph (Óscar, 19/08/2026). Van en su propia lista
      porque no son los del nato: aquel tiene siete y estos cuatro, y el
@@ -619,17 +618,10 @@
   var ABIERTA_V   = '?v=1';
 
 
-  /* LOS SEIS DE LA CORREA TÉCNICA, la del nato con forro de piel, que es
-     la que va en la caja de 36 (Óscar, 19/08/2026). Sustituyen a los
-     siete de agosto: aquellos venían del anuncio y estos son los que se
-     han fotografiado. */
-  var COLORES = {
-    MOS: ['Mostaza', '#c99a2e'],  BEI: ['Beige', '#c3b393'],
-    MAR: ['Marrón', '#6b4a33'],   NEG: ['Negro', '#1e1f22'],
-    GRI: ['Gris', '#7d8085'],     VER: ['Verde militar', '#4a5a3a']
-  };
-  var NATOP_FOTO = { MOS: 'mostaza', BEI: 'beige', MAR: 'marron',
-                     NEG: 'negro', GRI: 'gris', VER: 'armygreen' };
+  /* FUERA EL NATO + PIEL (Óscar, 25/08/2026): «ni 36 ni 39 van a tener
+     nato+piel». Con él se van sus seis colores, que no los usaba nadie más,
+     y el precio especial que llevaba —se tarifaba con el coste del nato y
+     se le sumaban 10 €—. El nato de lona se queda tal cual. */
   /* Los tres de la piel del khaki, con sus dos hebillas */
   /* LAS PIELES DEL KHAKI. El AZUL entra el 25/08/2026 con sus fotos en las
      cuatro cajas de 36. Los tonos son los MEDIDOS en esas fotos, no los del
@@ -758,7 +750,7 @@
   var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
   var SERIE_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde', ANTE: 'ante',
                        // la del khaki lleva su propio nombre desde que son tres
-                       NATO: 'nato', NATOP: 'natopiel',
+                       NATO: 'nato',
                        ACERO: 'brazalete', ACERONG: 'brazaletepvd',
                        DUON: 'duonegra', DUOM: 'duomarron', DUOV: 'duoverde',
                        DUOA: 'duoante', PIELO: 'pielkhaki' };
@@ -773,7 +765,6 @@
   function correaDicha() {
     if (e.correa === 'PIELO')  return 'correa de piel ' + PIELES_K[e.pielk][0].toLowerCase();
     if (e.correa === 'NATO')   return 'correa nato ' + natos()[e.nato][0].toLowerCase();
-    if (e.correa === 'NATOP')  return 'correa nato con forro de piel, en ' + COLORES[e.color][0].toLowerCase();
     if (e.correa === 'ANTE')   return 'correa de ante ' + ANTES[e.ante][0].toLowerCase();
     if (e.correa === 'DUOA')   return 'correa de ante ' + ANTES[e.ante][0].toLowerCase() + ' y brazalete de acero';
     if (DUOS_M[e.correa])      return 'correa de piel ' + DUOS_M[e.correa][0].toLowerCase() + ' y brazalete de acero';
@@ -795,7 +786,11 @@
   /* Las correas que son la MISMA en las dos cajas, y por tanto comparten
      foto: la piel y el ante, los dos de 20 mm. */
   var DOS_MEDIDAS = { PIELO: 1, ANTE: 1 };
-  function serieFoto() {
+  /* CÓMO SE LLAMA LA FOTO de la configuración puesta, exista o no. Va
+     aparte de `serieFoto()` para que el inventario de fotos pendientes
+     pueda preguntar el NOMBRE de la que falta sin volver a escribir esta
+     regla en otro sitio: copiada en dos ficheros, se desincroniza. */
+  function claveSerie() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
     if (!caja || !esf || !correa) return null;
     var clave = e.diam + '-' + caja + '-' + esf + '-' + correa;
@@ -804,8 +799,13 @@
     /* El nato también lleva su color en la clave: la norma de la casa es que
        jamás se enseña la foto de un reloj que no sea el elegido. */
     if (e.correa === 'NATO') clave += '-' + NATO_FOTO[e.nato];
-    if (e.correa === 'NATOP') clave += '-' + NATOP_FOTO[e.color];
     if (e.correa === 'PIELO') clave += '-' + PIELK_FOTO[e.pielk];
+    return clave;
+  }
+
+  function serieFoto() {
+    var clave = claveSerie();
+    if (!clave) return null;
     /* LA PIEL VALE PARA LAS DOS MEDIDAS (Óscar, 25/08/2026): «la piel del
        khaki sirve para 36 y para 39mm». Es la misma correa de 20 mm, y la
        caja de 36 y la de 39 no se distinguen en una foto frontal sin nada
@@ -871,7 +871,7 @@
    al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
    la hebilla clásica plateada. Es la única combinación fotografiada, y
    la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', color: 'VER', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata', esfColor: 'NEG',
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata', esfColor: 'NEG',
             /* la última correa que pediste TÚ, para poder devolvértela cuando
                un recorte por caja te la haya cambiado (23/08/2026) */
             correaPedida: 'NATO' };
@@ -941,12 +941,6 @@
   function pvpBase(c) { return redondea(costeCompleto(c) * MULT); }
   function precioTarifa() {
     var extra = e.diam === '39' ? 10 : 0;
-    /* El nato+piel se vende 10 € POR ENCIMA del nato de su caja (Óscar,
-       16/08/2026): se tarifa con el coste del nato y se le suman 10. */
-    if (e.correa === 'NATOP') {
-      var natoDeSuCaja = e.diam === '36' ? NATO36 : CORREAS.NATO.coste;
-      return pvpBase(costes() - CORREAS.NATOP.coste + natoDeSuCaja) + 10 + extra;
-    }
     return pvpBase(costes()) + extra;
   }
 
@@ -1039,13 +1033,14 @@
          esto `natos()[e.nato]` valdría undefined y tumbaría la ficha entera.
          Se cae al verde, que está en las dos. */
       if (e.correa === 'NATO' && !natos()[e.nato]) e.nato = 'VER';
-      if (e.correa !== 'NATOP') e.color = 'VER';
       /* del Murph al Khaki: la piel italiana no existe aquí */
       if (MURPH_CORREA[e.correa] || DUOS_M[e.correa] || e.correa === 'DUOA') e.correa = 'PIELO';
-      /* EL NATO VA EN LAS DOS MEDIDAS (Óscar, 20/08/2026, retirando la
-         regla del 19). La correa técnica —el nato con forro— sigue
-         siendo solo de la caja de 36. */
-      if (e.diam === '39' && e.correa === 'NATOP') e.correa = 'NATO';
+      /* El nato va en las dos medidas (Óscar, 20/08/2026, retirando la
+         regla del 19). Y desde el 25/08 la correa técnica —el nato con
+         forro de piel— no va en ninguna: si llega en un enlace viejo o en
+         una pestaña que llevaba días abierta, se cae al nato de lona en vez
+         de tumbar la ficha. */
+      if (e.correa === 'NATOP') e.correa = 'NATO';
     }
     /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
        sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
@@ -1073,7 +1068,6 @@
             : e.ante);
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATO') return cola + '-' + e.nato;
-    if (e.correa === 'NATOP') return cola + '-' + e.color;
     if (e.correa === 'PIELO') return cola + '-' + e.pielk + '-' + e.cierre;
     /* el ante SIEMPRE con su color: el khaki también elige (20/08/2026) */
     if (e.correa === 'ANTE' || e.correa === 'DUOA') return cola + '-' + e.ante;
@@ -1245,7 +1239,7 @@
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
         : esTitanio
         ? [['NATO', 'Nato'], ['ANTE', 'Ante'], ['PIELO', 'Piel']]
-        : [['NATO', 'Nato'], ['NATOP', 'Nato + Piel', e.diam === '39'],
+        : [['NATO', 'Nato'],
            ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero'],
            ['DUON', 'Dúo Piel + Brazalete', true]],
         /* los botones que valen por varias correas se marcan con
@@ -1322,8 +1316,8 @@
       botones('pesp', Object.keys(PESPUNTES).map(function (k) { return [k, PESPUNTES[k]]; }), e.pesp);
     }
 
-    /* El color: lo piden dos correas y cada una tiene su lista y su casilla
-       en el estado —el nato con forro y el ante del Murph—. */
+    /* El color: lo piden varias correas y cada una guarda el suyo en su
+       propia casilla del estado —el nato, la piel del khaki y el ante—. */
     /* El ante lleva color en el Murph y también en la 12/24 del khaki, que
        tiene las cuatro pieles en acero, PVD negro y bronce. En el titanio
        con ante no: ahí solo hay una foto y sin color. */
@@ -1336,20 +1330,19 @@
     var esPielK = e.correa === 'PIELO';
     var esPielM = esMurph && !!MURPH_CORREA[e.correa];
     var esDuoM  = esMurph && !!DUOS_M[e.correa];
-    var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK || esPielM || esDuoM;
+    var conColor = anteConColor || esNato || esPielK || esPielM || esDuoM;
     var esAnte = anteConColor;
     var esNegraK = e.estilo === 'K' && e.caja === 'NG';
     var paleta = esAnte ? ANTES
                : esNato ? natos()
                : esPielK ? PIELES_K
-               : esPielM ? PIELES_M : esDuoM ? DUOS_M : COLORES;
-    var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk
-                : (esPielM || esDuoM) ? e.correa : e.color;
+               : esPielM ? PIELES_M : DUOS_M;
+    var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk : e.correa;
     $('[data-pv-grupo-color]').hidden = !conColor;
     if (conColor) {
       $('[data-pv-rotulo-color]').textContent =
         esAnte ? 'Color del ante' : esNato ? 'Color del nato'
-        : (esPielK || esPielM || esDuoM) ? 'Color de la piel' : 'Color del nato + piel';
+        : 'Color de la piel';
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
@@ -1507,10 +1500,10 @@
       }
       if (g !== 'color' && e.estilo === 'K' && !serieFoto()) {
         var cual = e.correa === 'NATO' ? 'nato' : e.correa === 'PIELO' ? 'pielk'
-                 : e.correa === 'NATOP' ? 'color' : e.correa === 'ANTE' ? 'ante' : null;
+                 : e.correa === 'ANTE' ? 'ante' : null;
         if (cual) {
-          var lista = e.correa === 'NATO' ? natos() : e.correa === 'PIELO' ? PIELES_K
-                    : e.correa === 'NATOP' ? COLORES : ANTES;
+          var lista = e.correa === 'NATO' ? natos()
+                    : e.correa === 'PIELO' ? PIELES_K : ANTES;
           var antesColor = e[cual];
           var ks = Object.keys(lista);
           for (var ci = 0; ci < ks.length; ci++) {
@@ -1556,8 +1549,6 @@
           ? 'Piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' · ' + CIERRES_K[e.cierre].toLowerCase()
           : e.correa === 'NATO'
           ? 'Nato ' + natos()[e.nato][0].toLowerCase() + ', hebilla clásica plateada'
-          : e.correa === 'NATOP'
-          ? 'Nato + piel genuina, ' + COLORES[e.color][0].toLowerCase() + ', hebilla clásica'
           : e.correa === 'ANTE'
           ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
           : (e.correa === 'DUOA' && e.estilo === 'M')

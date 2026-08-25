@@ -178,7 +178,7 @@ function precisa() {
    ============================================================ */
 function trinchera() {
   const L = motorDe('trinchera.html',
-    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
+    'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
     'CIERRES_K, MURPH_CORREA, PIELES_M, DUOS_M, conCierreK, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
@@ -233,7 +233,6 @@ function trinchera() {
              color del nato+piel, el tono del ante, el pespunte de la
              piel del Murph y el cierre de cualquier piel. Se preguntan
              igual, y si el grupo no está pintado, se pasa de largo. */
-          const colores   = correa === 'NATOP' ? ofrece('color', Object.keys(L.COLORES)) : [null];
           /* El nato pasó a ser UNO con cinco colores (Óscar, 19/08/2026), y
              comparte el grupo «color» del HTML con el nato+piel y el ante.
              CADA MEDIDA TIENE SU GAMA desde el 24/08/2026, así que la ficha
@@ -252,13 +251,11 @@ function trinchera() {
             ? ofrece('color', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
 
-          for (const color of colores)
           for (const nato of natos)
           for (const pielk of pielesK)
           for (const ante of antes)
           for (const pesp of pespuntes) {
             pon({ estilo, mov, diam, caja, esf, correa });
-            if (color) L.e.color = color;
             if (nato) L.e.nato = nato;
             if (pielk) L.e.pielk = pielk;
             if (ante) L.e.ante = ante;
@@ -281,8 +278,6 @@ function trinchera() {
                   ? 'Piel ' + L.PIELES_K[s.pielk][0].toLowerCase() + ' · ' + L.CIERRES_K[s.cierre].toLowerCase()
                   : s.correa === 'NATO'
                   ? 'Nato ' + L.natos()[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
-                  : s.correa === 'NATOP'
-                  ? 'Nato + piel genuina, ' + L.COLORES[s.color][0].toLowerCase() + ', hebilla clásica'
                   /* el tono del ante también en el khaki: elige color desde el
                      20/08/2026 y su referencia ya lo lleva */
                   : (s.correa === 'ANTE' && L.ANTES && L.ANTES[s.ante])
