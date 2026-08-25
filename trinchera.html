@@ -672,6 +672,9 @@
      nato mide 275 mm y no vale para la caja de 36 —quien la busca tiene
      la muñeca fina y le sobraría media correa—, así que una foto de 39
      no puede servir para las dos medidas.
+     LA PIEL ES LA EXCEPCIÓN, y por ese mismo motivo al revés: mide 20 mm y
+     es la misma en las dos cajas, así que sus fotos sirven para ambas. Lo
+     resuelve `serieFoto()`; aquí siguen dadas de alta una sola vez.
 
      Lo que no tiene foto sale con su cartel, nunca con la imagen de
      otro reloj. */
@@ -783,6 +786,17 @@
     if (e.correa === 'NATO') clave += '-' + NATO_FOTO[e.nato];
     if (e.correa === 'NATOP') clave += '-' + NATOP_FOTO[e.color];
     if (e.correa === 'PIELO') clave += '-' + PIELK_FOTO[e.pielk];
+    /* LA PIEL VALE PARA LAS DOS MEDIDAS (Óscar, 25/08/2026): «la piel del
+       khaki sirve para 36 y para 39mm». Es la misma correa de 20 mm, y la
+       caja de 36 y la de 39 no se distinguen en una foto frontal sin nada
+       al lado que dé la escala, así que la foto de 36 se da por buena en la
+       de 39. Se resuelve AQUÍ y no duplicando dieciséis ficheros con otro
+       nombre: cuarenta y ocho copias idénticas que el día que Óscar rehaga
+       una foto se quedarían viejas en silencio.
+       El nato no entra en esto: mide 275 mm y por eso cada medida lleva la
+       suya, que es de lo que hablaba la norma del diámetro en la clave. */
+    if (!SERIE[clave] && e.correa === 'PIELO' && e.diam === '39')
+      clave = '36' + clave.slice(2);
     return SERIE[clave] ? clave : null;
   }
 
