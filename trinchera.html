@@ -1309,7 +1309,13 @@
       ' Correa: ' + (e.correa === 'PIELO'
         ? 'piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' de 20 mm con pespunte rectangular claro y ' + CIERRES[e.cierre].tec
         : e.correa === 'NATO'
+        /* EL LARGO DEL NATO DE 39 (Óscar, 25/08/2026): 275 mm, que es una
+           correa larga de verdad. Se dice porque decide una compra: quien
+           tiene la muñeca grande necesita saberlo antes, y quien la tiene
+           fina también. El nato de la caja de 36 es otro producto del
+           proveedor y su largo no está medido, así que ahí no se afirma. */
         ? 'nato ' + natos()[e.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
+          + (e.diam === '39' ? ', 275 mm de largo, para muñecas grandes' : '')
         : e.correa === 'ANTE'
         ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
         : (e.estilo === 'M' && MURPH_CORREA[e.correa])
