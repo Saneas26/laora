@@ -45,6 +45,26 @@
      `hidden` ya lo usan los grupos para su propia lógica. */
   .pv-cerrado{ display:none !important }
 
+  /* La miniatura de la correa abierta, con su pie. Va en la misma esquina
+     que las otras dos y con el mismo ancho; el `figure` necesita su propio
+     [hidden] porque, igual que el cartel, trae display propio. */
+  .pv-mini-fig{ margin:0; display:flex; flex-direction:column; align-items:center; gap:4px }
+  .pv-mini-fig[hidden]{ display:none }
+  /* Esta va por ALTURA y no por anchura: la correa extendida es 1:4, y
+     dándole el 24% de ancho como a las otras minis se salía del visor por
+     abajo. El `.pv-hero img.pv-mini{width:24%}` de la hoja compartida hay
+     que ganárselo con el selector puesto delante. */
+  .pv-hero .pv-mini-fig img{
+    width:auto !important; display:block;
+    /* el alto lo manda el VISOR, no la ventana: así la correa y su pie
+       caben siempre dentro del marco, que es cuadrado */
+    height:min(26vw, 150px); object-fit:contain;
+  }
+  .pv-mini-fig figcaption{
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    font-size:11px; color:var(--cv2-gris); text-align:center;
+  }
+
   /* LA LETRA DE LA FICHA (Óscar, 24/08/2026): Montserrat en los titulares,
      Nunito Sans en el texto de las opciones, ninguna serifa y CERO
      interletrado. Va aquí y no en producto-2026.css porque de momento es
@@ -194,6 +214,19 @@
           <img class="pv-mini" data-pv-tecnica-img hidden
                alt="Cierre de la correa técnica del Trinchera"
                src="/assets/img/trinchera-2026/cierres/natopiel.avif?v=1">
+          <!-- LA CORREA DE 36 ABIERTA (Óscar, 25/08/2026). Enseña cómo es el
+               nato de esta medida —su hebilla, su largo y sus agujeros—, así
+               que sale con cualquiera de los seis colores aunque la foto sea
+               la beige. Por eso lleva pie: sin él parecería que el reloj
+               elegido es ese. -->
+          <figure class="pv-mini-fig" data-pv-nato36 hidden>
+            <!-- SIN la clase pv-mini a propósito: esa regla la fuerza a
+                 140 px de ancho con object-fit:cover, y a una correa de
+                 proporción 1:4 eso le recorta todo menos el centro. -->
+            <img alt="La correa nato de 36 mm, extendida"
+                 src="/assets/img/trinchera-2026/correas/nato36-abierta-beige.avif?v=1">
+            <figcaption>Así es la correa</figcaption>
+          </figure>
         </div>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
@@ -1146,6 +1179,9 @@
     if (heb) heb.hidden = !hayCierre;
     var tec = $('[data-pv-tecnica-img]');
     if (tec) tec.hidden = e.correa !== 'NATOP';
+    /* la correa de 36 abierta: con el nato de esa medida, sea cual sea el color */
+    var n36 = $('[data-pv-nato36]');
+    if (n36) n36.hidden = !(e.correa === 'NATO' && e.diam === '36');
     if (hayCierre && heb) {
       if (conCierreK() && e.cierre !== 'plata' && e.cierre !== 'negra') e.cierre = 'plata';
       botones('cierre', conCierreK()
