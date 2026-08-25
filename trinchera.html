@@ -549,11 +549,13 @@
      delante el color elegido en la otra. */
   /* LOS CUATRO ANTES (Óscar, 19/08/2026), los mismos para el Khaki y para
      el Murph, y los cuatro fotografiados. */
-  /* RECORTES POR CAJA (Óscar, 20/08/2026): el bronce pierde el camel, y
-     la caja negra PVD solo lleva el negro de cada correa —salvo el nato,
-     que desde el 23/08/2026 lleva también el verde militar. */
-  var ANTES_BRONCE = { NEG: ['Negro', '#2b2a2b'], MOS: ['Marrón oscuro', '#4b382e'],
-                       AZU: ['Azul petróleo', '#1f5a72'] };
+  /* SE ACABARON LOS RECORTES DEL ANTE (Óscar, 25/08/2026): «correas de ante
+     ya en la carpeta y sirven para 36 y 39mm». Llegaron las dieciséis fotos
+     —cuatro cajas por cuatro colores— y con ellas caen las dos excepciones
+     del 20/08: el bronce vuelve a tener el camel y la caja negra de PVD deja
+     de estar atada al negro. El motivo escrito entonces era «no hay más
+     fotos», y ya las hay. Sigue en pie el recorte de la PIEL en el PVD, que
+     es otra correa y otra decisión. */
   /* EL NATO DEL PVD ABRE AL VERDE (Óscar, 23/08/2026): «ahora vamos a
      ofrecer la caja pvd negra con nato verde también». Solo el nato y solo
      esos dos colores; la piel y el ante siguen en negro y punto. */
@@ -568,7 +570,6 @@
     AZU: ['Azul',   '#1f3b63', false],
     GRI: ['Gris',   '#6f7378', false]
   };
-  var SOLO_NEGRO_ANTE = { NEG: ['Negro', '#2b2a2b'] };
   var ANTES = {
     NEG: ['Negro', '#2b2a2b'],            MOS: ['Marrón oscuro', '#4b382e'],
     AZU: ['Azul petróleo', '#1f5a72'],    CAM: ['Camel', '#c08a4a']
@@ -663,7 +664,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=41';
+  var SERIE_V = '?v=42';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -690,6 +691,10 @@
      LA NORMA: una línea por foto publicada, y se añade EN EL MISMO COMMIT que
      el AVIF. Lo que no esté aquí sale con el cartel, que es la verdad. */
   var SERIE = {
+    '36-acero-blanca-ante-azulpetroleo': 1,
+    '36-acero-blanca-ante-camel': 1,
+    '36-acero-blanca-ante-marronoscuro': 1,
+    '36-acero-blanca-ante-negro': 1,
     '36-acero-blanca-nato-azulmarino': 1,
     '36-acero-blanca-nato-beige': 1,
     '36-acero-blanca-nato-gris': 1,
@@ -700,14 +705,26 @@
     '36-acero-blanca-pielkhaki-marronclaro': 1,
     '36-acero-blanca-pielkhaki-marronoscuro': 1,
     '36-acero-blanca-pielkhaki-negra': 1,
+    '36-bronce-blanca-ante-azulpetroleo': 1,
+    '36-bronce-blanca-ante-camel': 1,
+    '36-bronce-blanca-ante-marronoscuro': 1,
+    '36-bronce-blanca-ante-negro': 1,
     '36-bronce-blanca-pielkhaki-azul': 1,
     '36-bronce-blanca-pielkhaki-marronclaro': 1,
     '36-bronce-blanca-pielkhaki-marronoscuro': 1,
     '36-bronce-blanca-pielkhaki-negra': 1,
+    '36-pvd-blanca-ante-azulpetroleo': 1,
+    '36-pvd-blanca-ante-camel': 1,
+    '36-pvd-blanca-ante-marronoscuro': 1,
+    '36-pvd-blanca-ante-negro': 1,
     '36-pvd-blanca-pielkhaki-azul': 1,
     '36-pvd-blanca-pielkhaki-marronclaro': 1,
     '36-pvd-blanca-pielkhaki-marronoscuro': 1,
     '36-pvd-blanca-pielkhaki-negra': 1,
+    '36-titanio-blanca-ante-azulpetroleo': 1,
+    '36-titanio-blanca-ante-camel': 1,
+    '36-titanio-blanca-ante-marronoscuro': 1,
+    '36-titanio-blanca-ante-negro': 1,
     '36-titanio-blanca-pielkhaki-azul': 1,
     '36-titanio-blanca-pielkhaki-marronclaro': 1,
     '36-titanio-blanca-pielkhaki-marronoscuro': 1,
@@ -775,6 +792,9 @@
            ', esfera ' + esferaDicha() + ' y ' + correaDicha();
   }
 
+  /* Las correas que son la MISMA en las dos cajas, y por tanto comparten
+     foto: la piel y el ante, los dos de 20 mm. */
+  var DOS_MEDIDAS = { PIELO: 1, ANTE: 1 };
   function serieFoto() {
     var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
     if (!caja || !esf || !correa) return null;
@@ -793,9 +813,11 @@
        de 39. Se resuelve AQUÍ y no duplicando dieciséis ficheros con otro
        nombre: cuarenta y ocho copias idénticas que el día que Óscar rehaga
        una foto se quedarían viejas en silencio.
-       El nato no entra en esto: mide 275 mm y por eso cada medida lleva la
-       suya, que es de lo que hablaba la norma del diámetro en la clave. */
-    if (!SERIE[clave] && e.correa === 'PIELO' && e.diam === '39')
+       El ante entra por lo mismo el 25/08/2026: «correas de ante ya en la
+       carpeta y sirven para 36 y 39mm».
+       El nato NO entra: mide 275 mm y por eso cada medida lleva la suya,
+       que es de lo que hablaba la norma del diámetro en la clave. */
+    if (!SERIE[clave] && e.diam === '39' && DOS_MEDIDAS[e.correa])
       clave = '36' + clave.slice(2);
     return SERIE[clave] ? clave : null;
   }
@@ -985,7 +1007,7 @@
            colores fotografiados en la caja de 36 */
         if (e.correa !== 'ANTE' && e.correa !== 'NATO' && e.correa !== 'PIELO') e.correa = 'ANTE';
         e.esf = 'KB';
-        if (e.ante === 'CAM') e.ante = 'NEG';   // el bronce perdió el camel
+        /* el camel vuelve al bronce el 25/08/2026, con su foto */
       }
       else {
         /* FUERA EL SEGUNDERO (Óscar, 24/08/2026): la esfera se elige por
@@ -1004,11 +1026,11 @@
              el 23/08/2026. */
           if (e.correa !== 'NATO' && e.correa !== 'ACERONG' &&
               e.correa !== 'PIELO' && e.correa !== 'ANTE') e.correa = 'NATO';
-          /* el nato y la piel del PVD llevan su gama entera: el nato desde el
-             24/08/2026 y la piel desde el 25, cuando llegaron sus cuatro
-             colores fotografiados. El ante sigue en negro, que de ese no
-             hay más fotos. */
-          if (e.correa === 'ANTE') e.ante = 'NEG';
+          /* la caja negra ya lleva la gama entera de las tres correas: el
+             nato desde el 24/08/2026, la piel desde el 25 por la mañana y
+             el ante esa misma tarde. */
+          /* y el ante del PVD abre a sus cuatro colores el 25/08/2026, que
+             ya están fotografiados en esta caja */
         }
         else if (e.correa === 'ACERONG') e.correa = 'NATO';
       }
@@ -1307,7 +1329,7 @@
     var conColor = e.correa === 'NATOP' || anteConColor || esNato || esPielK || esPielM || esDuoM;
     var esAnte = anteConColor;
     var esNegraK = e.estilo === 'K' && e.caja === 'NG';
-    var paleta = esAnte ? (esBronce ? ANTES_BRONCE : esNegraK ? SOLO_NEGRO_ANTE : ANTES)
+    var paleta = esAnte ? ANTES
                : esNato ? natos()
                : esPielK ? PIELES_K
                : esPielM ? PIELES_M : esDuoM ? DUOS_M : COLORES;
