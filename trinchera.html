@@ -656,7 +656,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=44';
+  var SERIE_V = '?v=45';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -710,6 +710,7 @@
     '36-pvd-blanca-ante-camel': 1,
     '36-pvd-blanca-ante-marronoscuro': 1,
     '36-pvd-blanca-ante-negro': 1,
+    '36-pvd-blanca-brazaletepvd': 1,
     '36-pvd-blanca-pielkhaki-azul': 1,
     '36-pvd-blanca-pielkhaki-marronclaro': 1,
     '36-pvd-blanca-pielkhaki-marronoscuro': 1,
@@ -786,9 +787,9 @@
 
   /* Las correas que son la MISMA en las dos cajas, y por tanto comparten
      foto: la piel y el ante, los dos de 20 mm, y el brazalete de acero
-     (Óscar, 25/08/2026). El de PVD negro entrará aquí en cuanto tenga su
-     foto de 36; hoy no cambiaría nada porque no la tiene. */
-  var DOS_MEDIDAS = { PIELO: 1, ANTE: 1, ACERO: 1 };
+     y el de PVD negro (Óscar, 25/08/2026). El nato es la única excepción:
+     mide 275 mm y por eso cada caja lleva el suyo. */
+  var DOS_MEDIDAS = { PIELO: 1, ANTE: 1, ACERO: 1, ACERONG: 1 };
   /* CÓMO SE LLAMA LA FOTO de la configuración puesta, exista o no. Va
      aparte de `serieFoto()` para que el inventario de fotos pendientes
      pueda preguntar el NOMBRE de la que falta sin volver a escribir esta
