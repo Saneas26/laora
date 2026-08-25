@@ -553,7 +553,6 @@
   /* EL NATO DEL PVD ABRE AL VERDE (Óscar, 23/08/2026): «ahora vamos a
      ofrecer la caja pvd negra con nato verde también». Solo el nato y solo
      esos dos colores; la piel y el ante siguen en negro y punto. */
-  var SOLO_NEGRO_PIEL = { NEG: ['Negra', '#1c1c1e'] };
   /* EL COLOR DE LA ESFERA (Óscar, 24/08/2026): «Negra, Blanca, Azul, Gris,
      debajo recuadros del color y nombre del color». De momento solo está
      hecha la negra; las otras tres salen tachadas —que es como se dice
@@ -625,8 +624,11 @@
   var NATOP_FOTO = { MOS: 'mostaza', BEI: 'beige', MAR: 'marron',
                      NEG: 'negro', GRI: 'gris', VER: 'armygreen' };
   /* Los tres de la piel del khaki, con sus dos hebillas */
-  var PIELES_K = { NEG: ['Negra', '#1c1c1e'], MOS: ['Marrón oscuro', '#5a3b28'],
-                   MCL: ['Marrón claro', '#a4552a'] };
+  /* LAS PIELES DEL KHAKI. El AZUL entra el 25/08/2026 con sus fotos en las
+     cuatro cajas de 36. Los tonos son los MEDIDOS en esas fotos, no los del
+     catálogo viejo, que iban bastante más oscuros de lo que sale en estudio. */
+  var PIELES_K = { NEG: ['Negra', '#3d3d3c'], MOS: ['Marrón oscuro', '#614a41'],
+                   MCL: ['Marrón claro', '#a85f3f'], AZU: ['Azul', '#46575c'] };
   /* LAS TRES PIELES DEL MURPH, ahora como colores y no como tres correas
      distintas (Óscar, 20/08/2026): «un botón con Piel y el color en otra
      elección, como se hace con el ante». Es la misma correa italiana de
@@ -639,7 +641,7 @@
      el tono ES la correa: cada uno tiene su coste y su referencia. */
   var DUOS_M   = { DUON: ['Negra', '#1c1c1e'], DUOM: ['Marrón', '#4a2a1c'],
                    DUOV: ['Verde militar', '#26382a'] };
-  var PIELK_FOTO = { NEG: 'negra', MOS: 'marronoscuro', MCL: 'marronclaro' };
+  var PIELK_FOTO = { NEG: 'negra', MOS: 'marronoscuro', MCL: 'marronclaro', AZU: 'azul' };
   var CIERRES_K = { 'plata': 'Clásica plata', 'negra': 'Clásica negra' };
   /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
      entran de una en una: aquí solo está lo que YA existe, y lo que no está
@@ -655,7 +657,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=40';
+  var SERIE_V = '?v=41';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -685,6 +687,22 @@
     '36-acero-blanca-nato-mostaza': 1,
     '36-acero-blanca-nato-negro': 1,
     '36-acero-blanca-nato-verde': 1,
+    '36-acero-blanca-pielkhaki-azul': 1,
+    '36-acero-blanca-pielkhaki-marronclaro': 1,
+    '36-acero-blanca-pielkhaki-marronoscuro': 1,
+    '36-acero-blanca-pielkhaki-negra': 1,
+    '36-bronce-blanca-pielkhaki-azul': 1,
+    '36-bronce-blanca-pielkhaki-marronclaro': 1,
+    '36-bronce-blanca-pielkhaki-marronoscuro': 1,
+    '36-bronce-blanca-pielkhaki-negra': 1,
+    '36-pvd-blanca-pielkhaki-azul': 1,
+    '36-pvd-blanca-pielkhaki-marronclaro': 1,
+    '36-pvd-blanca-pielkhaki-marronoscuro': 1,
+    '36-pvd-blanca-pielkhaki-negra': 1,
+    '36-titanio-blanca-pielkhaki-azul': 1,
+    '36-titanio-blanca-pielkhaki-marronclaro': 1,
+    '36-titanio-blanca-pielkhaki-marronoscuro': 1,
+    '36-titanio-blanca-pielkhaki-negra': 1,
     '39-acero-blanca-nato-arena': 1,
     '39-acero-blanca-nato-azulmarino': 1,
     '39-acero-blanca-nato-gris': 1,
@@ -944,7 +962,9 @@
            esfera que el resto —la KB de segundero blanco—, así que hay una
            esfera menos que mantener. El segundero rojo sigue fuera del
            bronce, como mandó el 20/08. */
-        if (e.correa !== 'ANTE' && e.correa !== 'NATO') e.correa = 'ANTE';
+        /* y desde el 25/08/2026 también la piel, que ya tiene sus cuatro
+           colores fotografiados en la caja de 36 */
+        if (e.correa !== 'ANTE' && e.correa !== 'NATO' && e.correa !== 'PIELO') e.correa = 'ANTE';
         e.esf = 'KB';
         if (e.ante === 'CAM') e.ante = 'NEG';   // el bronce perdió el camel
       }
@@ -965,9 +985,10 @@
              el 23/08/2026. */
           if (e.correa !== 'NATO' && e.correa !== 'ACERONG' &&
               e.correa !== 'PIELO' && e.correa !== 'ANTE') e.correa = 'NATO';
-          /* el nato del PVD acepta negro y verde; cualquier otro cae al negro */
-          /* el PVD lleva la gama entera de su medida desde el 24/08/2026 */
-          if (e.correa === 'PIELO') e.pielk = 'NEG';
+          /* el nato y la piel del PVD llevan su gama entera: el nato desde el
+             24/08/2026 y la piel desde el 25, cuando llegaron sus cuatro
+             colores fotografiados. El ante sigue en negro, que de ese no
+             hay más fotos. */
           if (e.correa === 'ANTE') e.ante = 'NEG';
         }
         else if (e.correa === 'ACERONG') e.correa = 'NATO';
@@ -1153,9 +1174,9 @@
        elige después. Las tres pieles italianas —negra, marrón y verde, con
        su pespunte y sus cinco cierres— son del Murph y solo salen ahí. */
     if (esBronce) {
-      /* nato y ante (Óscar, 23/08/2026), con el nato delante como en las
-         demás cajas */
-      botones('correa', [['NATO', 'Nato'], ['ANTE', 'Ante']], e.correa);
+      /* nato y ante (Óscar, 23/08/2026) y piel desde el 25/08, con sus cuatro
+         colores fotografiados. El orden, como en las demás cajas. */
+      botones('correa', [['NATO', 'Nato'], ['PIELO', 'Piel'], ['ANTE', 'Ante']], e.correa);
     } else {
       botones('correa', esMurph
         /* El Murph va con las tres pieles de la serie maestra y con el
@@ -1253,7 +1274,7 @@
     var esNegraK = e.estilo === 'K' && e.caja === 'NG';
     var paleta = esAnte ? (esBronce ? ANTES_BRONCE : esNegraK ? SOLO_NEGRO_ANTE : ANTES)
                : esNato ? natos()
-               : esPielK ? (esNegraK ? SOLO_NEGRO_PIEL : PIELES_K)
+               : esPielK ? PIELES_K
                : esPielM ? PIELES_M : esDuoM ? DUOS_M : COLORES;
     var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk
                 : (esPielM || esDuoM) ? e.correa : e.color;
