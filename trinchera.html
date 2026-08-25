@@ -203,17 +203,12 @@
              admite qué correa y qué esfera— se quedan: eso es catálogo, no
              fotografía. Lo único que se ha ido son las imágenes. -->
         <img data-pv-foto alt="laOra Trinchera" hidden>
-        <!-- La hebilla elegida, en su esquina. Es foto de la CORREA, no del
-             reloj, y se comparte con el Lunar: por eso no se fue con las
-             demás cuando se vació el visor. -->
+        <!-- UNA SOLA MINIATURA (Óscar, 25/08/2026). Aquí había otras dos —la
+             hebilla suelta y el cierre de la correa técnica— y las dos
+             apuntaban a ficheros que se fueron en la purga: salían vacías
+             al lado de la buena. Además ya sobran: la correa extendida
+             enseña su propia hebilla, y del color elegido. -->
         <div class="pv-minis">
-          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Trinchera" hidden
-               src="/assets/img/lunar-config/buckles/plata.avif?v=2">
-          <!-- El cierre de la correa técnica, la del 36. Es su hebilla
-               clásica plateada, fotografiada sobre la propia correa. -->
-          <img class="pv-mini" data-pv-tecnica-img hidden
-               alt="Cierre de la correa técnica del Trinchera"
-               src="/assets/img/trinchera-2026/cierres/natopiel.avif?v=1">
           <!-- LA CORREA DE 36 ABIERTA (Óscar, 25/08/2026). Enseña cómo es el
                nato de esta medida —su hebilla, su largo y sus agujeros—, así
                que sale con cualquiera de los seis colores aunque la foto sea
@@ -824,7 +819,6 @@
     'oro':      { nombre: 'Clásica oro',      extra:  1.00, tec: 'hebilla clásica dorada' },
     'mariposa': { nombre: 'Mariposa plata',   extra:  0.20, tec: 'cierre de mariposa de acero plateado' }
   };
-  var CIERRE_IMG = '/assets/img/lunar-config/buckles/';
   /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
   function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
   /* La piel del khaki también elige hebilla, pero solo entre dos */
@@ -1218,13 +1212,6 @@
     /* El cierre: con la piel italiana, y su foto en la esquina del visor */
     var hayCierre = conCierre() || conCierreK();
     $('[data-pv-grupo-cierre]').hidden = !hayCierre;
-    /* Con seguro: sin este `if`, quitar la miniatura del HTML tumbaba
-       `pinta()` entera y con ella la foto, el precio y la ficha. Pasó el
-       19/08/2026 al vaciar el visor. */
-    var heb = $('[data-pv-hebilla-img]');
-    if (heb) heb.hidden = !hayCierre;
-    var tec = $('[data-pv-tecnica-img]');
-    if (tec) tec.hidden = e.correa !== 'NATOP';
     /* LA PIEL ABIERTA. Con la piel, en las dos medidas. */
     var pielAb = $('[data-pv-piel]');
     if (pielAb) {
@@ -1267,13 +1254,14 @@
           propia ? 'La correa, extendida' : 'Así es la correa';
       }
     }
-    if (hayCierre && heb) {
+    /* Los botones del cierre ya no cuelgan de que exista la miniatura de la
+       hebilla: colgaban, y el día que esa miniatura faltó el grupo se quedó
+       sin nada que pulsar. */
+    if (hayCierre) {
       if (conCierreK() && e.cierre !== 'plata' && e.cierre !== 'negra') e.cierre = 'plata';
       botones('cierre', conCierreK()
         ? Object.keys(CIERRES_K).map(function (k) { return [k, CIERRES_K[k]]; })
         : Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
-      heb.src = CIERRE_IMG + e.cierre + '.avif?v=2';
-      heb.alt = 'Hebilla del Trinchera, ' + CIERRES[e.cierre].tec;
     }
     $('[data-pv-cierre]').textContent = hayCierre ? CIERRES[e.cierre].nombre
       /* los brazaletes no llevan hebilla: cierran con desplegable
@@ -1566,7 +1554,9 @@
      la columna pegajosa la recorte. -->
 <div class="pv-lupa" data-pv-lupa hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
   <button type="button" class="pv-lupa-cerrar" data-pv-lupa-cerrar aria-label="Cerrar la foto">&#10005;</button>
-  <img data-pv-lupa-img src="" alt="">
+  <!-- sin `src` de partida: vacío, el navegador se pide la propia página
+       como si fuera una imagen. La lupa se lo pone al abrirse. -->
+  <img data-pv-lupa-img alt="">
   <p class="pv-lupa-pie" data-pv-lupa-pie></p>
 </div>
 
