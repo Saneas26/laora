@@ -1231,9 +1231,20 @@
       var tocaPiel = e.correa === 'PIELO' && !!ABIERTA_PIEL[e.pielk];
       pielAb.hidden = !tocaPiel;
       if (tocaPiel) {
+        /* LA HEBILLA, DEL COLOR ELEGIDO (Óscar, 25/08/2026). Quien pide la
+           clásica negra tiene que verla negra: si no, la miniatura le enseña
+           una hebilla que no es la que compra. De la piel del khaki solo hay
+           dos cierres, plata y negra, así que son dos ficheros por color. */
         var imgP = pielAb.querySelector('img');
-        imgP.src = ABIERTA_IMG + 'piel-abierta-' + PIELK_FOTO[e.pielk] + '.avif' + ABIERTA_V;
-        imgP.alt = 'La correa de piel ' + PIELES_K[e.pielk][0].toLowerCase() + ', extendida';
+        /* OJO CON EL NOMBRE: `heb` ya está cogido en esta misma función para
+           la miniatura de la hebilla. Con `var`, la segunda declaración se iza
+           y pisa a la primera, así que llamarlo igual dejaba el grupo del
+           cierre SIN BOTONES: más abajo, `if (hayCierre && heb)` recibía una
+           cadena vacía en vez del elemento. */
+        var sufHeb = e.cierre === 'negra' ? '-negra' : '';
+        imgP.src = ABIERTA_IMG + 'piel-abierta-' + PIELK_FOTO[e.pielk] + sufHeb + '.avif' + ABIERTA_V;
+        imgP.alt = 'La correa de piel ' + PIELES_K[e.pielk][0].toLowerCase() +
+                   ' con ' + CIERRES[e.cierre].tec + ', extendida';
       }
     }
     /* LA CORREA DE 36 ABIERTA. Sale con el nato de esa medida, sea cual sea
