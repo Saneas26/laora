@@ -601,8 +601,14 @@
   /* LAS CORREAS DE 36 FOTOGRAFIADAS ABIERTAS. Una línea por foto nueva; el
      color que no esté aquí enseña la beige con su pie. Los ficheros van a
      assets/img/trinchera-2026/correas/nato36-abierta-{tono}.avif, con el
-     tono de NATO_FOTO: beige, verde, negro, gris, azulmarino, mostaza. */
-  var ABIERTA_36  = { BGE: 1 };
+     tono de NATO_FOTO: beige, verde, negro, gris, azulmarino, mostaza.
+
+     Los seis están. La beige es la foto de Óscar; las otras cinco salen de
+     ella teñidas con recolorear_correa.py, que copia el color MEDIDO en la
+     foto grande de cada tono. No es un tinte plano: se traslada la
+     luminancia del tejido —media y desviación— para que la trama, los
+     pliegues y la sombra se queden donde estaban. */
+  var ABIERTA_36  = { BGE: 1, VER: 1, NEG: 1, GRI: 1, AZM: 1, MOS: 1 };
   var ABIERTA_IMG = '/assets/img/trinchera-2026/correas/';
   var ABIERTA_V   = '?v=1';
 
