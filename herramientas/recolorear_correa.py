@@ -77,26 +77,91 @@ def mascara_tejido(a, calibre=31):
     return semilla & op & (R > B + 8)
 
 
-def color_destino(img, franja=(0.08, 0.22)):
-    """La correa en la foto del reloj puesto: la franja de arriba, que es
-    tejido limpio y sin la cabeza ni la hebilla dentro."""
+def mascara_piel(a, _=None):
+    """La piel: opaca, OSCURA y CONECTADA con los extremos de la foto.
+
+    Una correa de piel negra no se distingue por el tono, como el nato, sino
+    por lo oscura que es. Eso deja fuera la caja de acero, la hebilla y el
+    pespunte, que son claros —y el pespunte tiene que quedarse claro, que es
+    blanco en todos los colores—. Lo que queda dentro y no debería es la
+    ESFERA, tan negra como la correa.
+
+    Con un disco alrededor del reloj no hay manera: pequeño deja un halo
+    teñido en el bisel, y grande se come el trozo de correa que entra bajo
+    las asas y lo deja del color viejo. Lo que sí distingue a una de otra es
+    la FORMA: la correa entra por arriba y sale por abajo, y la esfera es una
+    mancha aislada en medio. Así que se siembra en la primera y la última
+    fila y se deja crecer por dentro de lo oscuro; lo que no alcanza el
+    crecimiento es la esfera.
+
+    La inundación se hace a un cuarto de tamaño, que va de sobra para separar
+    dos manchas tan grandes y es mucho más rápida.
+    """
+    op = a[..., 3] > 200
+    mx = a[..., :3].max(2)
+    m = op & (mx < 120)
+
+    ch, cw = m.shape[0] // 4, m.shape[1] // 4
+    peq = np.asarray(Image.fromarray((m * 255).astype(np.uint8))
+                     .resize((cw, ch), Image.NEAREST)) > 127
+    # LA SEMILLA: todo lo oscuro que cae FUERA de las filas de la cabeza.
+    # Sembrar solo en las filas extremas no valía: arriba lo primero que
+    # aparece es la correa doblada bajo la hebilla, y los pasadores la
+    # separan del resto, así que la inundación se quedaba encerrada ahí y
+    # medio brazalete se quedaba sin teñir.
+    anchos = np.array([(a[..., 3] > 200)[y].sum() for y in range(a.shape[0])])
+    correa_ancho = np.median(anchos[anchos > 0][:400])
+    cabeza = np.where(anchos > correa_ancho * 1.5)[0]
+    if len(cabeza):
+        ymax = int(np.argmax(anchos))
+        y0 = y1 = ymax
+        while y0 > 0 and anchos[y0 - 1] > correa_ancho * 1.5:
+            y0 -= 1
+        while y1 < len(anchos) - 1 and anchos[y1 + 1] > correa_ancho * 1.5:
+            y1 += 1
+    else:
+        y0 = y1 = a.shape[0] // 2
+    crece = peq.copy()
+    crece[max(0, y0 // 4):min(peq.shape[0], y1 // 4 + 1)] = False
+    for _ in range(400):
+        antes = crece.sum()
+        d = np.asarray(Image.fromarray((crece * 255).astype(np.uint8))
+                       .filter(ImageFilter.MaxFilter(9))) > 127
+        crece = d & peq
+        if crece.sum() == antes:
+            break
+
+    grande = np.asarray(Image.fromarray((crece * 255).astype(np.uint8))
+                        .resize((m.shape[1], m.shape[0]), Image.BILINEAR)) > 100
+    return m & grande
+
+
+def color_destino(img, franja=(0.08, 0.22), piel=False):
+    """El color de la correa en la foto del reloj puesto: la franja de
+    arriba, que es correa limpia y no tiene dentro ni la cabeza ni la
+    hebilla. Con `piel`, se descarta el pespunte, que es claro y no debe
+    entrar en la media."""
     a = np.asarray(img.convert('RGBA')).astype(float)
     h, w = a.shape[:2]
     z = a[int(h * franja[0]):int(h * franja[1]), int(w * .36):int(w * .64)]
     o = z[..., 3] > 200
+    if piel:
+        # el pespunte es lo más claro de la franja: fuera el quinto de arriba
+        lz = luminancia(z)
+        o = o & (lz <= np.percentile(lz[o], 80))
     if o.sum() < 500:
         raise SystemExit('no encuentro la correa en la foto de destino')
     lum = luminancia(z)[o]
     return z[..., 0][o].mean(), z[..., 1][o].mean(), z[..., 2][o].mean(), lum.mean(), lum.std()
 
 
-def recolorear(abierta, destino, calibre=31):
+def recolorear(abierta, destino, calibre=31, esfera=None):
     a = np.asarray(abierta.convert('RGBA')).astype(float)
-    m = mascara_tejido(a, calibre)
+    m = mascara_piel(a, esfera) if esfera else mascara_tejido(a, calibre)
     if not m.any():
-        raise SystemExit('no encuentro el tejido en la foto abierta')
+        raise SystemExit('no encuentro la correa en la foto abierta')
 
-    dr, dg, db, dlum, dstd = color_destino(destino)
+    dr, dg, db, dlum, dstd = color_destino(destino, piel=bool(esfera))
     lum = luminancia(a)
     olum, ostd = lum[m].mean(), lum[m].std()
 
@@ -129,6 +194,9 @@ if __name__ == '__main__':
     p.add_argument('abierta'); p.add_argument('destino'); p.add_argument('salida')
     p.add_argument('--calibre', type=int, default=31,
                    help='islas más finas que esto se descartan (los índices de lume)')
+    p.add_argument('--esfera', help='cx,cy,radio: activa el modo PIEL, que busca '
+                                    'lo oscuro en vez de lo cálido')
     a = p.parse_args()
-    recolorear(Image.open(a.abierta), Image.open(a.destino), a.calibre).save(a.salida)
+    esf = tuple(int(v) for v in a.esfera.split(',')) if a.esfera else None
+    recolorear(Image.open(a.abierta), Image.open(a.destino), a.calibre, esf).save(a.salida)
     print(a.salida)

@@ -219,6 +219,15 @@
                que sale con cualquiera de los seis colores aunque la foto sea
                la beige. Por eso lleva pie: sin él parecería que el reloj
                elegido es ese. -->
+          <!-- LA CORREA DE PIEL ABIERTA (Óscar, 25/08/2026). Vale para las
+               dos medidas, 36 y 39, que la correa es la misma. La negra es
+               su foto; las otras tres salen de ella teñidas con el color
+               medido en la foto grande de cada tono. -->
+          <figure class="pv-mini-fig" data-pv-piel hidden>
+            <img alt="La correa de piel, extendida"
+                 src="/assets/img/trinchera-2026/correas/piel-abierta-negra.avif?v=1">
+            <figcaption>La correa, extendida</figcaption>
+          </figure>
           <figure class="pv-mini-fig" data-pv-nato36 hidden>
             <!-- SIN la clase pv-mini a propósito: esa regla la fuerza a
                  140 px de ancho con object-fit:cover, y a una correa de
@@ -608,6 +617,8 @@
      luminancia del tejido —media y desviación— para que la trama, los
      pliegues y la sombra se queden donde estaban. */
   var ABIERTA_36  = { BGE: 1, VER: 1, NEG: 1, GRI: 1, AZM: 1, MOS: 1 };
+  /* La piel abierta, en sus cuatro colores y para las dos medidas. */
+  var ABIERTA_PIEL = { NEG: 1, MOS: 1, MCL: 1, AZU: 1 };
   var ABIERTA_IMG = '/assets/img/trinchera-2026/correas/';
   var ABIERTA_V   = '?v=1';
 
@@ -1214,6 +1225,17 @@
     if (heb) heb.hidden = !hayCierre;
     var tec = $('[data-pv-tecnica-img]');
     if (tec) tec.hidden = e.correa !== 'NATOP';
+    /* LA PIEL ABIERTA. Con la piel, en las dos medidas. */
+    var pielAb = $('[data-pv-piel]');
+    if (pielAb) {
+      var tocaPiel = e.correa === 'PIELO' && !!ABIERTA_PIEL[e.pielk];
+      pielAb.hidden = !tocaPiel;
+      if (tocaPiel) {
+        var imgP = pielAb.querySelector('img');
+        imgP.src = ABIERTA_IMG + 'piel-abierta-' + PIELK_FOTO[e.pielk] + '.avif' + ABIERTA_V;
+        imgP.alt = 'La correa de piel ' + PIELES_K[e.pielk][0].toLowerCase() + ', extendida';
+      }
+    }
     /* LA CORREA DE 36 ABIERTA. Sale con el nato de esa medida, sea cual sea
        el color. Si de ese color hay foto propia se enseña la suya y el pie lo
        dice; si todavía no la hay, se cae a la beige y el pie avisa de que
