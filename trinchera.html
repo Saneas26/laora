@@ -598,6 +598,14 @@
   /* La gama que toca, según la medida elegida. */
   function natos() { return e.diam === '36' ? NATOS_36 : NATOS_39; }
 
+  /* LAS CORREAS DE 36 FOTOGRAFIADAS ABIERTAS. Una línea por foto nueva; el
+     color que no esté aquí enseña la beige con su pie. Los ficheros van a
+     assets/img/trinchera-2026/correas/nato36-abierta-{tono}.avif, con el
+     tono de NATO_FOTO: beige, verde, negro, gris, azulmarino, mostaza. */
+  var ABIERTA_36  = { BGE: 1 };
+  var ABIERTA_IMG = '/assets/img/trinchera-2026/correas/';
+  var ABIERTA_V   = '?v=1';
+
 
   /* LOS SEIS DE LA CORREA TÉCNICA, la del nato con forro de piel, que es
      la que va en la caja de 36 (Óscar, 19/08/2026). Sustituyen a los
@@ -1179,9 +1187,26 @@
     if (heb) heb.hidden = !hayCierre;
     var tec = $('[data-pv-tecnica-img]');
     if (tec) tec.hidden = e.correa !== 'NATOP';
-    /* la correa de 36 abierta: con el nato de esa medida, sea cual sea el color */
+    /* LA CORREA DE 36 ABIERTA. Sale con el nato de esa medida, sea cual sea
+       el color. Si de ese color hay foto propia se enseña la suya y el pie lo
+       dice; si todavía no la hay, se cae a la beige y el pie avisa de que
+       aquello es cómo ES la correa, no el reloj que has elegido. */
     var n36 = $('[data-pv-nato36]');
-    if (n36) n36.hidden = !(e.correa === 'NATO' && e.diam === '36');
+    if (n36) {
+      var toca36 = e.correa === 'NATO' && e.diam === '36';
+      n36.hidden = !toca36;
+      if (toca36) {
+        var propia = !!ABIERTA_36[e.nato];
+        var tono = NATO_FOTO[propia ? e.nato : 'BGE'];
+        var img36 = n36.querySelector('img');
+        img36.src = ABIERTA_IMG + 'nato36-abierta-' + tono + '.avif' + ABIERTA_V;
+        img36.alt = propia
+          ? 'La correa nato de 36 mm ' + natos()[e.nato][0].toLowerCase() + ', extendida'
+          : 'La correa nato de 36 mm, extendida';
+        n36.querySelector('figcaption').textContent =
+          propia ? 'La correa, extendida' : 'Así es la correa';
+      }
+    }
     if (hayCierre && heb) {
       if (conCierreK() && e.cierre !== 'plata' && e.cierre !== 'negra') e.cierre = 'plata';
       botones('cierre', conCierreK()
