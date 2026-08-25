@@ -1059,8 +1059,18 @@
        el pedido no decía cuál quería el cliente. Desde el 23/08/2026
        nombra también la correa, que ya no es siempre el ante; las refs de
        ante que ya existían no cambian ni una letra. */
+    /* Y LA PIEL LLEVA SU COLOR Y SU CIERRE (25/08/2026). Esta rama se
+       escribió cuando el bronce solo tenía ante; al abrirle la piel esa
+       mañana se coló por el `: e.ante` final y las treinta y dos
+       combinaciones de bronce con piel se quedaron en CUATRO referencias,
+       todas nombradas con un color de ANTE. Quien pidiera bronce con piel
+       negra y hebilla negra recibía una referencia que no decía ni el
+       color ni la hebilla. Las refs de ante y de nato no cambian. */
     if (e.caja === 'BR')
-      return seg + e.correa + '-' + (e.correa === 'NATO' ? e.nato : e.ante);
+      return seg + e.correa + '-' +
+             (e.correa === 'NATO'  ? e.nato
+            : e.correa === 'PIELO' ? e.pielk + '-' + e.cierre
+            : e.ante);
     var cola = seg + e.esf + '-' + e.correa;
     if (e.correa === 'NATO') return cola + '-' + e.nato;
     if (e.correa === 'NATOP') return cola + '-' + e.color;

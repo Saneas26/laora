@@ -178,7 +178,7 @@ function precisa() {
    ============================================================ */
 function trinchera() {
   const L = motorDe('trinchera.html',
-    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, NATOS, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
+    'MOVS, CAJAS, ESFERAS, CORREAS, COLORES, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
     'CIERRES_K, MURPH_CORREA, PIELES_M, DUOS_M, conCierreK, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
@@ -235,14 +235,19 @@ function trinchera() {
              igual, y si el grupo no está pintado, se pasa de largo. */
           const colores   = correa === 'NATOP' ? ofrece('color', Object.keys(L.COLORES)) : [null];
           /* El nato pasó a ser UNO con cinco colores (Óscar, 19/08/2026), y
-             comparte el grupo «color» del HTML con el nato+piel y el ante. */
-          const natos     = correa === 'NATO' ? ofrece('color', Object.keys(L.NATOS || {})) : [null];
+             comparte el grupo «color» del HTML con el nato+piel y el ante.
+             CADA MEDIDA TIENE SU GAMA desde el 24/08/2026, así que la ficha
+             ya no exporta una tabla NATOS sino la función natos(), que
+             devuelve la del diámetro puesto. Esto se quedó pidiendo la tabla
+             y el volcador reventaba en silencio —«NATOS is not defined»— con
+             el catálogo del servidor congelado desde entonces. */
+          const natos     = correa === 'NATO' ? ofrece('color', Object.keys(L.natos())) : [null];
           /* La piel del khaki, que desde el 19/08/2026 tiene tres colores
              y dos hebillas en vez de ser una correa suelta. */
           const pielesK   = correa === 'PIELO' ? ofrece('color', Object.keys(L.PIELES_K || {})) : [null];
           /* el ante y el dúo llevan color en TODOS los estilos desde el
-             20/08/2026. El grupo pintado es el del color, y cada caja
-             enseña su paleta: el bronce sin camel, el PVD solo negro. */
+             20/08/2026. El grupo pintado es el del color; desde el
+             25/08/2026 las cuatro cajas enseñan los cuatro tonos. */
           const antes     = (correa === 'ANTE' || correa === 'DUOA')
             ? ofrece('color', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
@@ -275,16 +280,18 @@ function trinchera() {
                 s.correa === 'PIELO'
                   ? 'Piel ' + L.PIELES_K[s.pielk][0].toLowerCase() + ' · ' + L.CIERRES_K[s.cierre].toLowerCase()
                   : s.correa === 'NATO'
-                  ? 'Nato ' + L.NATOS[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
+                  ? 'Nato ' + L.natos()[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
                   : s.correa === 'NATOP'
                   ? 'Nato + piel genuina, ' + L.COLORES[s.color][0].toLowerCase() + ', hebilla clásica'
-                  : (s.correa === 'ANTE' && s.estilo === 'M' && L.ANTES && L.ANTES[s.ante])
+                  /* el tono del ante también en el khaki: elige color desde el
+                     20/08/2026 y su referencia ya lo lleva */
+                  : (s.correa === 'ANTE' && L.ANTES && L.ANTES[s.ante])
                   ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
                   : L.CORREAS[s.correa].nombre,
                 { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
                   esfera: L.ESFERAS[s.esf].tec,
                   correa: s.correa === 'NATO'
-                    ? 'nato ' + L.NATOS[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
+                    ? 'nato ' + L.natos()[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
                     : L.CORREAS[s.correa].tec,
                   agua: L.agua() },
                 Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
@@ -323,7 +330,33 @@ function lunar() {
     'MOV, CAJAS, ESFERAS, AGUJAS, TAPAS, CORREAS, CIERRES, TIPOS, CATALOGO, e, ' +
     'precio, referencia, correaActual, pespuntesDe, esItaliana, tipoVale, colorVale, pespunteVale, ' +
     'setM: function (m) { M = m; }');
-  L.setM(JSON.parse(fs.readFileSync(path.join(RAIZ, 'assets/img/lunar-config/manifest.json'), 'utf8')));
+  /* SIN MANIFIESTO NO HAY LUNAR (25/08/2026). La purga de fotos del 23/08
+     se llevó `assets/img/lunar-config/` entera, manifiesto incluido, y de
+     él salen las reglas de qué correa encaja con qué cabeza. Desde ese día
+     el volcador moría AQUÍ y con él el catálogo de los cuatro modelos: la
+     ficha del Trinchera cambió veinte veces y el servidor seguía con la
+     copia del 23.
+     Lo que NO se hace es dejar el Lunar fuera del fichero: son mil
+     novecientas referencias y desaparecer del catálogo es dejar de
+     venderse. Se copian tal cual estaban y se dice en voz alta. */
+  const manifiesto = path.join(RAIZ, 'assets/img/lunar-config/manifest.json');
+  if (!fs.existsSync(manifiesto)) {
+    const viejo = JSON.parse(fs.readFileSync(path.join(RAIZ, 'assets/datos/catalogo-2026.json'), 'utf8'));
+    let n = 0;
+    for (const [ref, r] of Object.entries(viejo.refs)) {
+      if (!ref.startsWith('LO-03-')) continue;
+      refs[ref] = Object.fromEntries(Object.entries(r).map(([k, v]) =>
+        [k, k === 'p' || k === 'mm' || k === 'h' ? v
+          : Array.isArray(v) ? v.map((i) => t(viejo.textos[i]))
+          : typeof v === 'number' ? t(viejo.textos[v]) : v]));
+      n++;
+    }
+    console.log('⚠️  el Lunar se queda como estaba: falta assets/img/lunar-config/manifest.json,\n' +
+                '    que se fue en la purga del 23/08. Sus ' + n + ' referencias se copian del\n' +
+                '    catálogo anterior sin recalcular. El resto de modelos sí se rehace.');
+    return n;
+  }
+  L.setM(JSON.parse(fs.readFileSync(manifiesto, 'utf8')));
 
   const e = L.e;
   const AGUA = '10 ATM (100 metros): vale para nadar y ducharse, no para bucear con botella. ' +
