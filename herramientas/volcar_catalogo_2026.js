@@ -180,6 +180,7 @@ function trinchera() {
   const L = motorDe('trinchera.html',
     'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
     'CIERRES_K, MURPH_CORREA, PIELES_M, puedeDuo, conCierreK, esfNombre, esfTec, ' +
+    'vetada, firma, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
@@ -281,6 +282,12 @@ function trinchera() {
               const duos = L.puedeDuo() ? [false, true] : [false];
               for (const duo of duos) {
               L.e.duo = duo;
+              /* LAS VETADAS NO ENTRAN EN EL CATÁLOGO. La ficha ya no las
+                 dibuja, pero aquí el estado se pone a mano en los últimos
+                 bucles —hebilla, color de esfera, dúo—, así que podría
+                 colarse una combinación que Óscar dio por muerta y el
+                 servidor la seguiría vendiendo. */
+              if (L.vetada(L.firma())) continue;
               const s = L.e;
               const esBronce = s.caja === 'BR';
               n += anota(L.referencia(), L.precio(),

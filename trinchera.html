@@ -1620,7 +1620,7 @@
      sacarte: si no, te quedas viendo un reloj que acabas de quitar. Se busca
      el primer botón de cualquier grupo que NO lleve a una marcada. */
   function escapaDeMarcada() {
-    if (!APLICADAS || !marcada(firma())) return;
+    if (!vetada(firma()) && !(APLICADAS && marcada(firma()))) return;
     var grupos = ['esfColor', 'color', 'cierre', 'pesp', 'correa', 'caja', 'esf', 'mov', 'diam'];
     for (var i = 0; i < grupos.length; i++) {
       var caja = $('[data-pv="' + grupos[i] + '"]');
@@ -1636,10 +1636,12 @@
      Dos cosas la ensuciaban y las dos hacían que una marca no valiera para
      todo lo que tenía que valer:
 
-     · EL DIÁMETRO (Óscar, 26/08/2026: «quiero que se quiten, pero además de
-       la caja de 36 y 39»). Lo que se está curando es el ASPECTO del reloj,
-       y el aspecto es el mismo en las dos medidas. Marcada en una, fuera en
-       las dos.
+     · EL DIÁMETRO Y EL MOVIMIENTO (Óscar, 26/08/2026: «que se quiten, pero
+       además de la caja de 36 y 39», y «las quitamos en automático y
+       cuarzo»). Lo que se está curando es el ASPECTO del reloj, y el aspecto
+       es el mismo en las dos medidas y con los dos calibres: lo que cambia
+       es el tamaño, la tapa y el precio, no lo que se ve por delante.
+       Marcada una vez, fuera las cuatro.
 
      · LOS CAMPOS QUE NO SE VEN. El estado guarda el color del ante aunque
        lleves puesto un nato —para devolvértelo cuando vuelvas al ante—, y lo
@@ -1656,6 +1658,7 @@
     var pielM = estilo === 'M' &&
                 (correa === 'PIELN' || correa === 'PIELM' || correa === 'PIELV');
     p[0] = '';                                    // el diámetro no cuenta
+    p[1] = '';                                    // ni el movimiento
     if (estilo !== 'K') p[5] = '';                // el color de esfera es del Khaki
     if (correa !== 'NATO')  p[7] = '';
     if (correa !== 'ANTE')  p[8] = '';
@@ -1666,11 +1669,40 @@
   }
   /* Las firmas guardadas, ya en limpio, para no recorrer la lista entera en
      cada botón de cada pintada. */
+  /* ---------- LAS QUE YA ESTÁN QUITADAS DE VERDAD ----------
+     Aquí van, escritas a mano, las combinaciones que Óscar ha dado por
+     muertas. Son firmas EN LIMPIO —sin diámetro y sin movimiento— y valen
+     para todo el mundo, no sólo para su navegador: la ficha no las dibuja y
+     el volcador no las mete en el catálogo del servidor.
+
+     El orden de los campos es el de `firma()`:
+       diam|mov|estilo|caja|esf|esfColor|correa|nato|ante|pielk|pesp|cierre|duo
+     y en limpio los dos primeros van vacíos.
+
+     Mientras esté vacía no quita nada. Se llena cuando Óscar pasa su lista
+     del panel; a partir de ahí el panel se vacía solo, porque lo que ya está
+     aquí deja de estar pendiente. */
+  var VETADAS = {};
+  function vetada(f) { return !!VETADAS[canon(f)]; }
+
   var COMBIS_CANON = {};
   function recanon() {
     COMBIS_CANON = {};
     for (var k in COMBIS) COMBIS_CANON[canon(k)] = 1;
   }
+  /* LO QUE YA ESTÁ VETADO SE CAE DE LA LISTA. Óscar: «me dejas el listado en
+     el panel de nuevo limpio». No hace falta que vacíe a mano: en cuanto una
+     combinación pasa a `VETADAS`, deja de estar pendiente y se va sola. */
+  (function () {
+    var toco = false, k;
+    for (k in COMBIS) if (VETADAS[canon(k)]) { delete COMBIS[k]; toco = true; }
+    if (toco) {
+      try {
+        if (window.localStorage)
+          window.localStorage.setItem('laora.trinchera.combis', JSON.stringify(COMBIS));
+      } catch (x) {}
+    }
+  })();
   recanon();
   function marcada(f) { return !!COMBIS_CANON[canon(f)]; }
   /* Al desmarcar hay que borrar TODAS las que caen en la misma firma limpia:
@@ -1717,12 +1749,12 @@
      entre pulsar un botón y la combinación final está `normaliza()`, que
      puede cambiar de correa o de esfera por el camino. */
   function llevaAMarcada(grupo, valor) {
-    if (!APLICADAS) return false;
     var copia = {}, k;
     for (k in e) copia[k] = e[k];
     aplicaOpcion(grupo, valor);
     normaliza();
-    var esta = marcada(firma());
+    /* las vetadas no dependen del interruptor: están quitadas para todos */
+    var esta = vetada(firma()) || (APLICADAS && marcada(firma()));
     for (k in copia) e[k] = copia[k];
     return esta;
   }
