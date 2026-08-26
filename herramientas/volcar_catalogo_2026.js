@@ -179,7 +179,7 @@ function precisa() {
 function trinchera() {
   const L = motorDe('trinchera.html',
     'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
-    'CIERRES_K, MURPH_CORREA, PIELES_M, puedeDuo, conCierreK, ' +
+    'CIERRES_K, MURPH_CORREA, PIELES_M, puedeDuo, conCierreK, esfNombre, esfTec, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
@@ -267,8 +267,17 @@ function trinchera() {
                estuviera, las referencias `-DUO` no llegarían al catálogo y
                el servidor le diría al cliente que lo que acaba de comprar
                «ya no está a la venta». */
+            /* EL COLOR DE LA ESFERA (Óscar, 26/08/2026). Entró en la
+               referencia hoy, y hasta hoy no se enumeraba: los cuatro
+               colores del Khaki compartían una sola referencia y el
+               servidor no sabía distinguirlos. Sólo el Khaki elige; el
+               Murph tiene la esfera negra y punto, y su grupo se pinta
+               vacío, así que `ofrece` devuelve la lista corta sola. */
             for (const cierre of cierres) {
               if (cierre) L.e.cierre = cierre;
+              const colores = ofrece('esfColor', ['NEG']);
+              for (const esfColor of colores) {
+              L.e.esfColor = esfColor;
               const duos = L.puedeDuo() ? [false, true] : [false];
               for (const duo of duos) {
               L.e.duo = duo;
@@ -279,7 +288,7 @@ function trinchera() {
                   (s.duo ? 'Murph Dúo' :
                     (s.esf === 'MA' || s.esf === 'MB' ? 'Murph' : 'Militar')))),
                 L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
-                  (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.ESFERAS[s.esf].nombre +
+                  (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.esfNombre() +
                   ' · ' + L.MOVS[s.mov].nombre,
                 (s.correa === 'PIELO'
                   ? 'Piel ' + L.PIELES_K[s.pielk][0].toLowerCase() + ' · ' + L.CIERRES_K[s.cierre].toLowerCase()
@@ -291,13 +300,14 @@ function trinchera() {
                   ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
                   : L.CORREAS[s.correa].nombre) + (s.duo ? ' + brazalete de acero' : ''),
                 { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
-                  esfera: L.ESFERAS[s.esf].tec,
+                  esfera: L.esfTec(),
                   correa: (s.correa === 'NATO'
                     ? 'nato ' + L.natos()[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
                     : L.CORREAS[s.correa].tec) +
                     (s.duo ? ', y el brazalete de acero 316L de tres eslabones aparte' : ''),
                   agua: L.agua() },
                 Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
+              }
               }
             }
           }

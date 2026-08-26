@@ -643,6 +643,17 @@
   /* Y CÓMO SE LLAMA CADA UNA EN LA FOTO. La negra no pone nada: es la que
      había y sus 93 claves no cambian ni una letra. */
   var ESF_FOTO = { NEG: '', BLA: '-esfblanca', AZU: '-esfazul', GRI: '-esfgris' };
+  /* Y CÓMO SE LLAMA EN LA REFERENCIA (Óscar, 26/08/2026). Hasta hoy no se
+     llamaba de ninguna manera: el color de la esfera NO entraba en la
+     referencia, así que la Khaki negra y la Khaki azul del mismo reloj
+     compartían `LO-02-A-PL36C-KB-NATO-VER` y quien compraba la azul mandaba
+     un pedido con el código de la negra. Se abrió el 26/08 con las fotos de
+     la blanca, la azul y la gris, y el descuadre entró con ellas.
+
+     La NEGRA no pone nada, como en las fotos: sus referencias no cambian ni
+     una letra y lo que ya está vendido sigue valiendo. Va sólo en el Khaki,
+     que es el único que elige color. */
+  var ESF_REF  = { NEG: '', BLA: '-ESFBLA', AZU: '-ESFAZU', GRI: '-ESFGRI' };
   var ANTES = {
     NEG: ['Negro', '#2b2a2b'],            MOS: ['Marrón oscuro', '#4b382e'],
     AZU: ['Azul petróleo', '#1f5a72'],    CAM: ['Camel', '#c08a4a']
@@ -1148,10 +1159,26 @@
     if (e.correa === 'ACERONG') return 'brazalete de acero negro de PVD';
     return 'correa de ' + CORREAS[e.correa].nombre.toLowerCase();
   }
+  /* EL COLOR VA PEGADO AL NOMBRE DE LA ESFERA (26/08/2026). Al meterlo en
+     la referencia se vio que en ningún texto se decía: el pedido de una
+     esfera azul llegaba como «Khaki, Segundero Blanco» y la ficha técnica
+     seguía diciendo «Khaki NEGRA mate». Se dice en los tres sitios —el
+     nombre, la frase y la ficha técnica— desde aquí. */
+  function esfConColor(txt, corte) {
+    if (e.estilo !== 'K' || !ESF_REF[e.esfColor]) return txt;
+    return txt.replace(corte, corte + ' ' + ESF_COLORES[e.esfColor][0].toLowerCase());
+  }
+  function esfNombre() { return esfConColor(ESFERAS[e.esf].nombre, 'Khaki'); }
+  function esfTec() {
+    return e.estilo === 'K' && ESF_REF[e.esfColor]
+      ? ESFERAS[e.esf].tec.replace('Khaki negra mate',
+          'Khaki ' + ESF_COLORES[e.esfColor][0].toLowerCase() + ' mate')
+      : ESFERAS[e.esf].tec;
+  }
   function esferaDicha() {
     /* «Khaki, Segundero Rojo» se lee mal en mitad de una frase: el nombre
        propio se queda en mayúscula y el resto baja. */
-    var partes = ESFERAS[e.esf].nombre.split(', ');
+    var partes = esfNombre().split(', ');
     return partes.length > 1 ? partes[0] + ' con ' + partes[1].toLowerCase() : partes[0];
   }
   function descripcion() {
@@ -1165,8 +1192,6 @@
      pespunte, ni la hebilla, ni si lleva el brazalete añadido. */
   function dichoCompleto() {
     var t = descripcion();
-    if (e.estilo === 'K' && ESF_COLORES[e.esfColor])
-      t += ' (esfera ' + ESF_COLORES[e.esfColor][0].toLowerCase() + ')';
     if (e.estilo === 'M' && MURPH_CORREA[e.correa])
       t += ', pespunte ' + PESPUNTES[e.pesp].toLowerCase();
     if (conCierreK()) t += ', ' + CIERRES_K[e.cierre].toLowerCase();
@@ -1503,7 +1528,11 @@
   /* LA REFERENCIA DEL DÚO VA DETRÁS, no en el sitio de la correa: el reloj
      es el mismo y lo que se añade es una pieza suelta. Así ninguna de las
      referencias que ya existían cambia una letra. */
-  function referencia() { return referenciaBase() + (e.duo ? '-DUO' : ''); }
+  function referencia() {
+    return referenciaBase() +
+           (e.estilo === 'K' ? (ESF_REF[e.esfColor] || '') : '') +
+           (e.duo ? '-DUO' : '');
+  }
   function referenciaBase() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
     /* el bronce lleva el color en la referencia desde que tiene tres
@@ -1965,7 +1994,7 @@
         : CORREAS[e.correa].tec)
       + (e.duo ? ', y el brazalete de acero 316L de tres eslabones aparte' : '') + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
-    $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
+    $('[data-pv-tec="esf"]').textContent = esfTec();
     abrirPasos();
     /* el panel de curar lleva dentro la combinación que tienes puesta, así
        que se rehace con cada pintada, no solo al marcar algo */
@@ -2221,7 +2250,7 @@
                 (e.duo ? 'Murph Dúo' :
                  (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
-                 ' · ' + ESFERAS[e.esf].nombre + ' · ' + MOVS[e.mov].nombre,
+                 ' · ' + esfNombre() + ' · ' + MOVS[e.mov].nombre,
         correa: (e.correa === 'PIELO'
           ? 'Piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' · ' + CIERRES_K[e.cierre].toLowerCase()
           : e.correa === 'NATO'
