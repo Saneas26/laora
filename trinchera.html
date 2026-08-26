@@ -598,8 +598,20 @@
     BGE: ['Beige', '#dac4a4'],         MOS: ['Mostaza', '#b27c16'],
     GRI: ['Gris', '#646665'],          AZM: ['Azul marino', '#294058']
   };
-  /* La gama que toca, según la medida elegida. */
-  function natos() { return e.diam === '36' ? NATOS_36 : NATOS_39; }
+  /* EL NATO DEL PVD DE 36 SON TRES (Óscar, 26/08/2026): «verde, mostaza,
+     azul no son opciones para pvd». SOLO en la caja de 36: la de 39 se
+     queda con sus seis, que además llevan su foto publicada desde el
+     24/08 —también el verde y el azul marino—, y quitarlos de allí sería
+     tirar tres fotos buenas.
+     Se declara DESPUÉS de NATOS_36 a propósito: con `var`, una tabla que
+     se copia de otra declarada más abajo se iza como undefined y el grupo
+     de colores sale vacío. Ya pasó el 24/08. */
+  var NATOS_36_PVD = { BGE: NATOS_36.BGE, NEG: NATOS_36.NEG, GRI: NATOS_36.GRI };
+  /* La gama que toca, según la medida y la caja elegidas. */
+  function natos() {
+    if (e.diam !== '36') return NATOS_39;
+    return e.caja === 'NG' ? NATOS_36_PVD : NATOS_36;
+  }
 
   /* LAS CORREAS DE 36 FOTOGRAFIADAS ABIERTAS. Una línea por foto nueva; el
      color que no esté aquí enseña la beige con su pie. Los ficheros van a
@@ -1035,8 +1047,12 @@
       /* CADA MEDIDA TIENE SU GAMA DE NATO (24/08/2026): al pasar de 39 a 36
          —o al revés— el color elegido puede no existir en la otra, y sin
          esto `natos()[e.nato]` valdría undefined y tumbaría la ficha entera.
-         Se cae al verde, que está en las dos. */
-      if (e.correa === 'NATO' && !natos()[e.nato]) e.nato = 'VER';
+         Y desde el 26/08/2026 también al cambiar de CAJA, que el PVD de 36
+         lleva su propia gama de tres. */
+      /* Y AL PRIMERO DE LA GAMA QUE TOQUE, no al verde a secas: desde el
+         26/08/2026 el PVD de 36 no tiene verde, así que aquel apaño dejaba
+         `e.nato` en un color que su propia paleta no ofrece. */
+      if (e.correa === 'NATO' && !natos()[e.nato]) e.nato = Object.keys(natos())[0];
       /* del Murph al Khaki: la piel italiana no existe aquí */
       if (MURPH_CORREA[e.correa] || DUOS_M[e.correa] || e.correa === 'DUOA') e.correa = 'PIELO';
       /* El nato va en las dos medidas (Óscar, 20/08/2026, retirando la
