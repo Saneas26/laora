@@ -219,6 +219,17 @@
   .pv-curar button{ font-size:13px; padding:9px 12px; cursor:pointer;
     background:#fff; color:#121414; border:1px solid rgba(18,20,20,.28);
     font-family:inherit; white-space:nowrap }
+  /* El cuadro con la lista para pasármela. Un `textarea` a pelo trae el
+     borde y los dos píxeles de relleno del navegador, y el texto queda
+     pegado a la raya. */
+  .pv-curar-texto{
+    display:block; width:100%; box-sizing:border-box; margin:0 0 12px;
+    padding:10px 12px; font-family:ui-monospace, Menlo, monospace;
+    font-size:12px; line-height:1.5; color:#121414;
+    background:#fafaf8; border:1px solid rgba(18,20,20,.28); resize:vertical;
+  }
+  .pv-curar-ok{ margin-left:10px; font-size:13px; color:#4A4A4A }
+  .pv-curar-ok[hidden]{ display:none }
 </style>
 </head>
 <body><header class="site-header">
