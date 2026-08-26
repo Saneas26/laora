@@ -147,17 +147,20 @@ los 45,16 € que da Óscar. Sin resolver: preguntar antes de fiarse del 8,17.
 | `CORREAS.ACERO` Brazalete de acero | 19,69 € | **19,59 €** | −0,10 |
 | `CORREAS.ACERONG` Brazalete PVD negro | 26,50 € | **26,19 €** | −0,31 |
 
-⚠️ **EL ENLACE QUE MANDÓ NO ES UN BRAZALETE.** El
-[1005007892634303](https://es.aliexpress.com/item/1005007892634303.html) que dio
-para el brazalete de acero es, abierto el 26/08/2026, una **caja de metal de
-39,7 mm para movimiento VK63** a 14,69 € (−50 %, normal 29,38 €), 4,8 · 278
-vendidos, con esfera y manecillas y 42 colores. Nada que ver con un brazalete.
-Los **19,59 €** se dan por buenos porque los da Óscar, pero **el enlace del
-brazalete de acero sigue sin estar** y el del PVD tampoco («mismo proveedor»
-apunta a un anuncio que no es el que toca).
+**Proveedor: [FJ wrist watch store](https://es.aliexpress.com/store/1100026060)**
+(tienda `1100026060`), a través del anuncio
+[1005007892634303](https://es.aliexpress.com/item/1005007892634303.html).
 
-Nota aparte: esa caja de VK63 **sí interesa para el MEDUSA** (LO-09), que monta
-precisamente ese calibre. Apuntada por si viene bien.
+Óscar, 26/08/2026: «este es el enlace del proveedor de **las cajas del Lunar y
+los brazaletes**». El anuncio se titula «Caja de Metal para Reloj de 39,7 mm
+compatible con movimiento VK63» —que es **la caja del Lunar**, no una del
+Trinchera— y tiene **54 variantes numeradas** (NO.1 … NO.51) entre 14,69 € y
+61,55 €. Los brazaletes salen de ahí.
+
+⚠️ **Las variantes son códigos numéricos, no descripciones.** Sin abrir cada
+miniatura no se sabe qué NO.x es cada brazalete. **Falta apuntar el número de
+variante exacto** del brazalete de acero y del PVD negro para poder pedirlos
+sin equivocarse.
 
 ### Lo que arrastran los brazaletes
 
