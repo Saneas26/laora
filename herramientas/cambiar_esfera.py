@@ -67,8 +67,67 @@ def centro_caja(a):
     return (col.min() + col.max()) / 2, (fil.min() + fil.max()) / 2
 
 
-def hueco(foto, margen=1100):
-    """El disco de la esfera: centro y radio, buscados y no supuestos."""
+def radio_por_caja(a):
+    """El radio de la esfera deducido del ancho de la caja.
+
+    Medido sobre los másters de ACERO, donde el canto se ve nítido, y sale
+    CLAVADO dentro de cada familia:
+
+        familia del nato        caja 1476 px · esfera 738 · r/caja 0,5000
+        familia del ante,
+        la piel y el brazalete  caja 1679 px · esfera 826 · r/caja 0,4920
+
+    Hace falta porque en las cajas OSCURAS —el PVD, y el bronce en sombra—
+    el borde de la esfera no es negro-contra-claro sino negro-contra-negro,
+    y buscarlo a ciegas se desvía: en la piel del PVD daba r=351 donde sus
+    hermanas de familia dan 323. El centro sí se sigue buscando; lo que se
+    fija es el radio.
+    """
+    op = a[..., 3] > 200
+    alto = op.shape[0]
+    col = np.where(op.sum(0) > alto * .30)[0]
+    anc = col.max() - col.min()
+    return anc * (0.4920 if anc > alto * 0.39 else 0.5000), anc
+
+
+def hueco_geometrico(a):
+    """Dónde va la esfera, deducido de la caja y sin buscar nada.
+
+    Medido sobre los cuatro másters de ACERO de cada familia, donde el canto se
+    ve nítido, y sale CONSTANTE hasta la milésima:
+
+        familia del nato        dx/caja  0,0000 ±0,0000 · dy/caja -0,0271 ±0,0000
+        ante, piel, brazalete   dx/caja +0,0039 ±0,0010 · dy/caja -0,0229 ±0,0021
+
+    En una caja de 1.476 px son +0,-40 px y +6,-34 px. La esfera va MÁS ARRIBA
+    que el centro de la caja porque el cuerpo que se mide incluye las asas.
+
+    Esto sustituye a la búsqueda, y no por gusto: en las cajas oscuras el borde
+    de la esfera es negro contra negro y la búsqueda se pierde —en el PVD de 39
+    con nato negro la nitidez del borde bajaba a 0,04, o sea, nada que medir—.
+    La geometría no depende de que se vea el canto.
+    """
+    op = a[..., 3] > 200
+    alto = op.shape[0]
+    col = np.where(op.sum(0) > alto * .30)[0]
+    fil = np.where(op.sum(1) > alto * .30)[0]
+    if not len(col) or not len(fil):
+        raise SystemExit('no encuentro la caja en la foto')
+    anc = col.max() - col.min()
+    ccx = (col.min() + col.max()) / 2
+    ccy = (fil.min() + fil.max()) / 2
+    if anc > alto * 0.39:                       # familia del ante, la piel y el brazalete
+        dx, dy, rr = 0.0039, -0.0229, 0.4920
+    else:                                        # familia del nato
+        dx, dy, rr = 0.0000, -0.0271, 0.5000
+    return ccx + dx * anc, ccy + dy * anc, rr * anc, anc
+
+
+def hueco(foto, margen=1100, radio_fijo=None):
+    """El disco de la esfera: centro y radio.
+
+    Con `radio_fijo` se da el radio por sabido —lo normal, ver
+    radio_por_caja()— y solo se busca el centro."""
     a = np.asarray(foto).astype(float)
     cx0, cy0 = centro_caja(a)
     caja = (int(cx0 - margen), int(cy0 - margen), int(cx0 + margen), int(cy0 + margen))
@@ -88,6 +147,15 @@ def hueco(foto, margen=1100):
                 an = (d >= r) & (d < r + 1)
                 fr.append(osc[an].mean() if an.sum() > 20 else np.nan)
             fr = np.array(fr)
+            if radio_fijo is not None:
+                # el radio se da por sabido: el centro bueno es el que hace
+                # que el borde caiga JUSTO ahí
+                rr = radio_fijo * BUSCA / (2 * margen)
+                k = int(np.clip(rr - rs[0], 1, len(rs) - 2))
+                salto = np.nanmax(fr[max(0, k - 3):k + 1]) - np.nanmin(fr[k:k + 4])
+                if mejor is None or salto > mejor[0]:
+                    mejor = (salto, cx, cy, rr)
+                continue
             i = np.where(fr < 0.5)[0]
             if not len(i):
                 continue
@@ -119,13 +187,19 @@ def suave(t):
     return t * t * (3 - 2 * t)
 
 
-def cambiar(foto, esf, sombra=0.82, desde=0.90):
+def cambiar(foto, esf, sombra=0.82, desde=0.90, buscando=False):
     b = np.asarray(foto).astype(float)
     H = b.shape[0]
-    CX, CY, R, salto = hueco(foto)
+    if buscando:
+        CX, CY, R, salto = hueco(foto, margen=int(H * 0.27),
+                                 radio_fijo=radio_por_caja(b)[0])
+        print('hueco BUSCADO:     centro (%.0f, %.0f) · radio %.0f · nitidez %.2f'
+              % (CX, CY, R, salto))
+    else:
+        CX, CY, R, anc = hueco_geometrico(b)
+        print('hueco por geometría: caja %d px → centro (%.0f, %.0f) · radio %.0f'
+              % (anc, CX, CY, R))
     ex, ey, ER = radio_esfera(esf)
-    print('hueco en la foto:  centro (%.0f, %.0f) · radio %.0f · nitidez del borde %.2f'
-          % (CX, CY, R, salto))
     print('esfera suelta:     centro (%.0f, %.0f) · radio %.0f' % (ex, ey, ER))
     k = R / ER
     print('escala:            %.4f' % k)
@@ -174,9 +248,12 @@ def cambiar(foto, esf, sombra=0.82, desde=0.90):
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('foto'); p.add_argument('esfera'); p.add_argument('salida')
+    p.add_argument('--buscando', action='store_true',
+                   help='buscar el hueco en vez de deducirlo de la caja (más lento y se pierde en las cajas oscuras)')
     p.add_argument('--sombra', type=float, default=0.82,
                    help='cuánto se oscurece el canto del disco: 1 = nada, 0,82 por defecto')
     a = p.parse_args()
-    im = cambiar(Image.open(a.foto).convert('RGBA'), Image.open(a.esfera).convert('RGBA'), a.sombra)
+    im = cambiar(Image.open(a.foto).convert('RGBA'), Image.open(a.esfera).convert('RGBA'),
+                 a.sombra, buscando=a.buscando)
     im.save(a.salida)
     print(a.salida)
