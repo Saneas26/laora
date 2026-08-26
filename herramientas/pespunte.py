@@ -25,13 +25,31 @@ Uso:
     python3 herramientas/pespunte.py foto.png salida.png --a blanco
 """
 import argparse
+import os
+import sys
 from collections import deque
 import numpy as np
 from PIL import Image, ImageFilter
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from titanio_del_par import donde_cambia
 
-def correa(a, centro, radio, cierre=9):
+
+def correa(a, centro, radio, cierre=9, alfa=None, sin=None):
     """Lo que hay fuera del reloj y no es fondo: la correa.
+
+    EL FONDO PUEDE SER TRANSPARENCIA (26/08/2026). Las fotos del Khaki
+    vienen sobre el gris del estudio y el fondo se reconoce por color;
+    las del Murph vienen con alfa, y al pasarlas a RGB lo de fuera se
+    vuelve NEGRO, que es justo el color de la piel de la correa: la
+    correa entera se daba por fondo y no se teñía nada. Si la foto trae
+    alfa, el fondo es lo transparente y no hace falta adivinarlo.
+
+    Y `sin` deja fuera la caja. El radio solo no basta en el Murph: las
+    asas llegan a 1.095 px del centro y la costura empieza en 861, así
+    que no hay circunferencia que separe una cosa de la otra. La caja se
+    sabe exacta —los píxeles que cambian entre la foto de acero y la de
+    titanio— y se pasa por aquí.
 
     Con el cuidado de TAPAR LOS AGUJEROS. El fondo del estudio es gris
     claro y el hilo crema también, así que los puntos más luminosos de la
@@ -43,8 +61,11 @@ def correa(a, centro, radio, cierre=9):
     H, W, _ = a.shape
     yy, xx = np.mgrid[0:H, 0:W]
     fuera = ((xx - centro[0]) ** 2 + (yy - centro[1]) ** 2) > radio ** 2
-    fondo = np.median(np.concatenate([a[:60].reshape(-1, 3), a[-60:].reshape(-1, 3)]), axis=0)
-    esFondo = np.abs(a - fondo).max(axis=2) <= 18
+    if alfa is not None:
+        esFondo = alfa < 200
+    else:
+        fondo = np.median(np.concatenate([a[:60].reshape(-1, 3), a[-60:].reshape(-1, 3)]), axis=0)
+        esFondo = np.abs(a - fondo).max(axis=2) <= 18
     # el fondo DE VERDAD es el que se toca desde el borde de la foto; lo
     # que parece fondo y está encerrado dentro de la correa es hilo
     im = Image.fromarray((esFondo * 255).astype(np.uint8))
@@ -69,7 +90,12 @@ def correa(a, centro, radio, cierre=9):
                 alcanzado[ny, nx] = True; q.append((ny, nx))
     im = Image.fromarray(((~alcanzado) * 255).astype(np.uint8))
     im = im.filter(ImageFilter.MaxFilter(cierre)).filter(ImageFilter.MinFilter(cierre))
-    return fuera & np.asarray(im).astype(bool)
+    z = fuera & np.asarray(im).astype(bool)
+    if sin is not None:
+        gordo = np.asarray(Image.fromarray((sin * 255).astype(np.uint8))
+                           .filter(ImageFilter.MaxFilter(9))).astype(bool)
+        z = z & ~gordo
+    return z
 
 
 def crecer(semilla, permitido, vueltas=26):
@@ -139,23 +165,39 @@ if __name__ == '__main__':
     p.add_argument('foto'); p.add_argument('salida')
     p.add_argument('--a', choices=['tono', 'blanco'], required=True)
     p.add_argument('--de', help='foto de la que traer el hilo claro (para --a blanco)')
+    p.add_argument('--caja-por-par', nargs=2, metavar=('ACERO', 'TITANIO'),
+                   help='las dos fotos de la misma madre que solo se diferencian '
+                        'en el metal: lo que cambia entre ellas es la caja, y se '
+                        'deja fuera de la correa')
     p.add_argument('--centro', default='1936,1984'); p.add_argument('--radio', type=float, default=1150)
     p.add_argument('--luz', type=float, default=125)
     p.add_argument('--suelo', type=float, default=70)
     p.add_argument('--contraste', type=float, default=0.55)
     a_ = p.parse_args()
-    img = Image.open(a_.foto).convert('RGB')
-    a = np.asarray(img).astype(float)
+    img = Image.open(a_.foto)
+    tiene_alfa = 'A' in img.getbands()
+    alfa = np.asarray(img.convert('RGBA')).astype(float)[..., 3] if tiene_alfa else None
+    a = np.asarray(img.convert('RGB')).astype(float)
     cx, cy = (float(v) for v in a_.centro.split(','))
-    zona = correa(a, (cx, cy), a_.radio)
+    sin = None
+    if a_.caja_por_par:
+        ac = np.asarray(Image.open(a_.caja_por_par[0]).convert('RGB')).astype(float)
+        ti = np.asarray(Image.open(a_.caja_por_par[1]).convert('RGB')).astype(float)
+        sin = donde_cambia(ac, ti)
+    zona = correa(a, (cx, cy), a_.radio, alfa=alfa, sin=sin)
     if a_.a == 'blanco' and a_.de:
         b = np.asarray(Image.open(a_.de).convert('RGB')).astype(float)
-        m = hilo_claro(b, correa(b, (cx, cy), a_.radio), a_.luz, suelo=a_.suelo)
+        m = hilo_claro(b, correa(b, (cx, cy), a_.radio, alfa=alfa, sin=sin), a_.luz, suelo=a_.suelo)
         out = injertar(a, b, m)
-        print(a_.salida, '· hilo injertado de %s: %d px' % (a_.de.split('/')[-1], m.sum()))
+        print(a_.salida, '. hilo injertado de %s: %d px' % (a_.de.split('/')[-1], m.sum()))
     else:
         m = hilo_claro(a, zona, a_.luz, suelo=a_.suelo)
         color = tono_de_la_piel(a, zona, m) if a_.a == 'tono' else np.array([236., 232., 222.])
         out = tenir(a, m, color, contraste=a_.contraste)
-        print(a_.salida, '· hilo: %d px · color %s' % (m.sum(), np.round(color).astype(int)))
-    Image.fromarray(np.clip(out, 0, 255).astype(np.uint8)).save(a_.salida)
+        print(a_.salida, '. correa: %d px . hilo: %d px . color %s'
+              % (zona.sum(), m.sum(), np.round(color).astype(int)))
+    out = np.clip(out, 0, 255)
+    if tiene_alfa:
+        Image.fromarray(np.dstack([out, alfa]).astype(np.uint8), 'RGBA').save(a_.salida)
+    else:
+        Image.fromarray(out.astype(np.uint8)).save(a_.salida)
