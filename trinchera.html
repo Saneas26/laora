@@ -1637,7 +1637,7 @@
      sacarte: si no, te quedas viendo un reloj que acabas de quitar. Se busca
      el primer botón de cualquier grupo que NO lleve a una marcada. */
   function escapaDeMarcada() {
-    if (!APLICADAS || !COMBIS[firma()]) return;
+    if (!APLICADAS || !marcada(firma())) return;
     var grupos = ['esfColor', 'color', 'cierre', 'pesp', 'correa', 'caja', 'esf', 'mov', 'diam'];
     for (var i = 0; i < grupos.length; i++) {
       var caja = $('[data-pv="' + grupos[i] + '"]');
@@ -1649,7 +1649,55 @@
       }
     }
   }
+  /* ---------- LA FIRMA, EN LIMPIO ----------
+     Dos cosas la ensuciaban y las dos hacían que una marca no valiera para
+     todo lo que tenía que valer:
+
+     · EL DIÁMETRO (Óscar, 26/08/2026: «quiero que se quiten, pero además de
+       la caja de 36 y 39»). Lo que se está curando es el ASPECTO del reloj,
+       y el aspecto es el mismo en las dos medidas. Marcada en una, fuera en
+       las dos.
+
+     · LOS CAMPOS QUE NO SE VEN. El estado guarda el color del ante aunque
+       lleves puesto un nato —para devolvértelo cuando vuelvas al ante—, y lo
+       mismo con el del nato, el de la piel del Khaki, el pespunte y la
+       hebilla. Dos relojes idénticos con el mismo nato verde podían tener
+       firmas distintas por un ante que no está en la foto ni en el precio.
+       Aquí se ponen a cero los que no pintan nada en esa combinación.
+
+     Se aplica igual a las firmas guardadas, así que lo que ya estaba marcado
+     sigue valiendo: no hay que volver a marcar nada. */
+  function canon(f) {
+    var p = String(f).split('|');
+    var estilo = p[2], correa = p[6];
+    var pielM = estilo === 'M' &&
+                (correa === 'PIELN' || correa === 'PIELM' || correa === 'PIELV');
+    p[0] = '';                                    // el diámetro no cuenta
+    if (estilo !== 'K') p[5] = '';                // el color de esfera es del Khaki
+    if (correa !== 'NATO')  p[7] = '';
+    if (correa !== 'ANTE')  p[8] = '';
+    if (correa !== 'PIELO') p[9] = '';
+    if (!pielM) p[10] = '';                       // pespunte: piel del Murph
+    if (!pielM && correa !== 'PIELO') p[11] = ''; // hebilla: las cuatro pieles
+    return p.join('|');
+  }
+  /* Las firmas guardadas, ya en limpio, para no recorrer la lista entera en
+     cada botón de cada pintada. */
+  var COMBIS_CANON = {};
+  function recanon() {
+    COMBIS_CANON = {};
+    for (var k in COMBIS) COMBIS_CANON[canon(k)] = 1;
+  }
+  recanon();
+  function marcada(f) { return !!COMBIS_CANON[canon(f)]; }
+  /* Al desmarcar hay que borrar TODAS las que caen en la misma firma limpia:
+     la misma combinación pudo marcarse en 36 y en 39 antes de hoy. */
+  function desmarca(f) {
+    var c = canon(f), k;
+    for (k in COMBIS) if (canon(k) === c) delete COMBIS[k];
+  }
   function guardaCombis() {
+    recanon();
     try {
       if (window.localStorage)
         window.localStorage.setItem('laora.trinchera.combis', JSON.stringify(COMBIS));
@@ -1709,9 +1757,9 @@
     for (k in e) copia[k] = e[k];
     aplicaOpcion(grupo, valor);
     normaliza();
-    var marcada = !!COMBIS[firma()];
+    var esta = marcada(firma());
     for (k in copia) e[k] = copia[k];
-    return marcada;
+    return esta;
   }
 
   function valorDe(grupo) {
@@ -2098,6 +2146,11 @@
   /* LA LISTA DE LO QUITADO, para que Óscar vea lo que lleva marcado y me
      lo pueda pasar. Se dibuja desde el JS y solo con `?curar`: así el
      cliente no la tiene ni en el HTML, y el volcador del catálogo tampoco. */
+  /* La frase se guardó con su medida dentro —«laOra Trinchera de 36 mm,
+     …»— y ahora la marca vale para las dos, así que al enseñarla se le
+     quita: decir «de 36 mm» sería mentir sobre lo que se va a quitar. */
+  function sinMedida(t) { return String(t).replace(/ de 3[69] mm,/, ','); }
+
   function panelCurar() {
     if (!CURAR) return;
     var p = document.getElementById('pv-curar');
@@ -2109,8 +2162,7 @@
     }
     var claves = Object.keys(QUITADAS).sort();
     var combis = Object.keys(COMBIS);
-    var f = firma();
-    var yaEsta = !!COMBIS[f];
+    var yaEsta = marcada(firma());
     p.innerHTML =
       '<b>Esta combinación</b>' +
       '<p class="pv-curar-dicho">' + dichoCompleto() + '</p>' +
@@ -2122,7 +2174,7 @@
       '<b>Combinaciones marcadas (' + combis.length + ')</b>' +
       (combis.length
         ? '<ul>' + combis.map(function (k) {
-            return '<li><span>' + COMBIS[k].dicho + '</span>' +
+            return '<li><span>' + sinMedida(COMBIS[k].dicho) + '</span>' +
                    '<button type="button" data-descombi="' + k + '">quitar de la lista</button></li>';
           }).join('') + '</ul>' +
           '<button type="button" data-curar-aplica>' +
@@ -2131,10 +2183,11 @@
           '</button>' +
           '<p class="pv-curar-dicho">' +
             (APLICADAS
-              ? 'Quitadas <b>en este navegador</b>. Para que desaparezcan ' +
-                'para todo el mundo, cópiame la lista y las escribo en la ficha.'
+              ? 'Quitadas <b>en este navegador</b> y en <b>las dos medidas</b>. ' +
+                'Para que desaparezcan para todo el mundo, cópiame la lista y ' +
+                'las escribo en la ficha.'
               : 'Marcadas, pero todavía en pie. Púlsalo y desaparecen del ' +
-                'configurador para que veas cómo queda.') +
+                'configurador —en <b>las dos medidas</b>— para que veas cómo queda.') +
           '</p>'
         : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: ' +
           'sigue todo en pie hasta que lo confirmes.</p>') +
@@ -2180,9 +2233,9 @@
     if (v) { delete QUITADAS[v.dataset.vuelve]; guardaQuitadas(); pinta(); panelCurar(); return; }
     if (ev.target.closest('[data-curar-combi]')) {
       var f = firma();
-      if (COMBIS[f]) delete COMBIS[f];
-      else COMBIS[f] = { ref: referencia(), dicho: dichoCompleto(), estado: firma() };
-      guardaCombis(); panelCurar();
+      if (marcada(f)) desmarca(f);
+      else COMBIS[f] = { ref: referencia(), dicho: dichoCompleto(), estado: f };
+      guardaCombis(); pinta(); escapaDeMarcada(); panelCurar();
       return;
     }
     var dc = ev.target.closest('[data-descombi]');
@@ -2200,7 +2253,8 @@
     if (ev.target.closest('[data-curar-copia]')) {
       var lista = 'COMBINACIONES A QUITAR\n' +
         Object.keys(COMBIS).map(function (k) {
-          return '  ' + k + '\n    ' + COMBIS[k].dicho + '\n    ref ' + COMBIS[k].ref;
+          return '  ' + canon(k) + '\n    ' + sinMedida(COMBIS[k].dicho) +
+                 '\n    ref ' + COMBIS[k].ref + '  (las dos medidas)';
         }).join('\n') +
         '\n\nOPCIONES A QUITAR DEL TODO\n' +
         Object.keys(QUITADAS).sort().map(function (k) { return '  ' + k; }).join('\n');
