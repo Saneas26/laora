@@ -222,7 +222,12 @@
   .pv-curar ul{ margin:10px 0; padding:0; list-style:none }
   .pv-curar li{ display:flex; align-items:center; justify-content:space-between;
                 gap:10px; padding:9px 0; border-top:1px solid rgba(18,20,20,.12) }
-  .pv-curar code{ font-size:14px }
+  .pv-curar code{ font-size:14px; word-break:break-all }
+  .pv-curar hr{ border:0; border-top:1px solid rgba(18,20,20,.14); margin:14px 0 }
+  .pv-curar > b{ display:block; margin-bottom:6px }
+  .pv-curar p{ margin:0 0 10px }
+  .pv-curar-dicho{ color:#4A4A4A }
+  .pv-curar li span{ flex:1 1 auto }
   .pv-curar button{ font-size:13px; padding:9px 12px; cursor:pointer;
     background:#fff; color:#121414; border:1px solid rgba(18,20,20,.28);
     font-family:inherit; white-space:nowrap }
@@ -1154,6 +1159,30 @@
            ', esfera ' + esferaDicha() + ' y ' + correaDicha();
   }
 
+  /* TODO lo que distingue a este reloj de otro, dicho en cristiano. La
+     `descripcion()` de arriba es la del alt de la foto y se queda corta
+     para marcar combinaciones: no dice el color de la esfera, ni el
+     pespunte, ni la hebilla, ni si lleva el brazalete añadido. */
+  function dichoCompleto() {
+    var t = descripcion();
+    if (e.estilo === 'K' && ESF_COLORES[e.esfColor])
+      t += ' (esfera ' + ESF_COLORES[e.esfColor][0].toLowerCase() + ')';
+    if (e.estilo === 'M' && MURPH_CORREA[e.correa])
+      t += ', pespunte ' + PESPUNTES[e.pesp].toLowerCase();
+    if (conCierreK()) t += ', ' + CIERRES_K[e.cierre].toLowerCase();
+    else if (conCierre()) t += ', ' + CIERRES[e.cierre].nombre.toLowerCase();
+    if (e.duo) t += ', con el brazalete añadido';
+    return t + ' · ' + MOVS[e.mov].nombre;
+  }
+  /* LA FIRMA DE UNA COMBINACIÓN. No vale la referencia: el color de la
+     esfera NO entra en ella, así que la Khaki negra y la Khaki azul del
+     mismo reloj comparten referencia y marcando una se marcarían las dos.
+     Aquí va todo lo que el cliente elige. */
+  function firma() {
+    return [e.diam, e.mov, e.estilo, e.caja, e.esf, e.esfColor, e.correa,
+            e.nato, e.ante, e.pielk, e.pesp, e.cierre, e.duo ? 'DUO' : ''].join('|');
+  }
+
   /* Las correas que son la MISMA en las dos cajas, y por tanto comparten
      foto: la piel y el ante, los dos de 20 mm, y el brazalete de acero
      y el de PVD negro (Óscar, 25/08/2026). El nato es la única excepción:
@@ -1544,6 +1573,26 @@
         window.localStorage.setItem('laora.trinchera.quitadas', JSON.stringify(QUITADAS));
     } catch (x) {}
   }
+  /* ---------- QUITAR UNA COMBINACIÓN, NO UNA OPCIÓN (Óscar, 26/08/2026)
+     «Si pulso esfera azul, ¿se elimina ya para todas las combinaciones
+     futuras o sólo para esta ocasión?» Con el aspa, para todas: mata la
+     opción entera. Y a veces lo que no gusta no es la esfera azul, es la
+     esfera azul CON ese nato verde.
+
+     Por eso, además del aspa, se puede marcar la combinación entera que
+     tienes puesta. No se quita de la ficha: se anota. Óscar va combinando
+     y marcando, y cuando tenga la lista se ejecutan de una vez. */
+  var COMBIS = {};
+  try {
+    if (window.localStorage)
+      COMBIS = JSON.parse(window.localStorage.getItem('laora.trinchera.combis') || '{}') || {};
+  } catch (x) { COMBIS = {}; }
+  function guardaCombis() {
+    try {
+      if (window.localStorage)
+        window.localStorage.setItem('laora.trinchera.combis', JSON.stringify(COMBIS));
+    } catch (x) {}
+  }
   function fuera(grupo, valor) { return !!QUITADAS[grupo + ':' + valor]; }
   function aspa(grupo, valor) {
     return CURAR ? '<span class="pv-quita" data-quita="' + grupo + ':' + valor +
@@ -1918,6 +1967,9 @@
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = ESFERAS[e.esf].tec;
     abrirPasos();
+    /* el panel de curar lleva dentro la combinación que tienes puesta, así
+       que se rehace con cada pintada, no solo al marcar algo */
+    if (CURAR) panelCurar();
     /* NINGUNA OPCIÓN SEÑALADA HASTA QUE LA PULSES (Óscar, 24/08/2026). El
        reloj de la foto y el precio son los del clásico desde el primer
        momento, pero los botones no se atribuyen una elección que el cliente
@@ -1950,16 +2002,37 @@
       document.body.classList.add('curando');
     }
     var claves = Object.keys(QUITADAS).sort();
-    p.innerHTML = '<b>Opciones quitadas (' + claves.length + ')</b>' +
+    var combis = Object.keys(COMBIS);
+    var f = firma();
+    var yaEsta = !!COMBIS[f];
+    p.innerHTML =
+      '<b>Esta combinación</b>' +
+      '<p class="pv-curar-dicho">' + dichoCompleto() + '</p>' +
+      '<p><code>' + referencia() + '</code></p>' +
+      '<button type="button" data-curar-combi>' +
+        (yaEsta ? '\u2611  Marcada para quitar' : '\u2610  Quitar esta combinación') +
+      '</button>' +
+      '<hr>' +
+      '<b>Combinaciones marcadas (' + combis.length + ')</b>' +
+      (combis.length
+        ? '<ul>' + combis.map(function (k) {
+            return '<li><span>' + COMBIS[k].dicho + '</span>' +
+                   '<button type="button" data-descombi="' + k + '">quitar de la lista</button></li>';
+          }).join('') + '</ul>'
+        : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: ' +
+          'sigue todo en pie hasta que me pases la lista.</p>') +
+      '<hr>' +
+      '<b>Opciones quitadas del todo (' + claves.length + ')</b>' +
       (claves.length
         ? '<ul>' + claves.map(function (k) {
             return '<li><code>' + k + '</code>' +
                    '<button type="button" data-vuelve="' + k + '">volver a poner</button></li>';
-          }).join('') + '</ul>' +
-          '<button type="button" data-curar-copia>Copiar la lista</button> ' +
-          '<button type="button" data-curar-vacia>Vaciar</button>'
-        : '<p>Pulsa el aspa roja de cualquier botón para quitar esa opción. ' +
-          'Se guarda solo en este navegador; el catálogo no se toca.</p>');
+          }).join('') + '</ul>'
+        : '<p>Ninguna. El aspa roja de un botón quita esa opción ' +
+          '<b>de todas</b> las combinaciones.</p>') +
+      '<hr>' +
+      '<button type="button" data-curar-copia>Copiar las dos listas</button> ' +
+      '<button type="button" data-curar-vacia>Vaciar</button>';
   }
 
   document.addEventListener('click', function (ev) {
@@ -1988,11 +2061,26 @@
     }
     var v = ev.target.closest('[data-vuelve]');
     if (v) { delete QUITADAS[v.dataset.vuelve]; guardaQuitadas(); pinta(); panelCurar(); return; }
+    if (ev.target.closest('[data-curar-combi]')) {
+      var f = firma();
+      if (COMBIS[f]) delete COMBIS[f];
+      else COMBIS[f] = { ref: referencia(), dicho: dichoCompleto(), estado: firma() };
+      guardaCombis(); panelCurar();
+      return;
+    }
+    var dc = ev.target.closest('[data-descombi]');
+    if (dc) { delete COMBIS[dc.dataset.descombi]; guardaCombis(); panelCurar(); return; }
     if (ev.target.closest('[data-curar-vacia]')) {
-      QUITADAS = {}; guardaQuitadas(); pinta(); panelCurar(); return;
+      QUITADAS = {}; COMBIS = {}; guardaQuitadas(); guardaCombis(); pinta(); panelCurar();
+      return;
     }
     if (ev.target.closest('[data-curar-copia]')) {
-      var lista = Object.keys(QUITADAS).sort().join('\n');
+      var lista = 'COMBINACIONES A QUITAR\n' +
+        Object.keys(COMBIS).map(function (k) {
+          return '  ' + k + '\n    ' + COMBIS[k].dicho + '\n    ref ' + COMBIS[k].ref;
+        }).join('\n') +
+        '\n\nOPCIONES A QUITAR DEL TODO\n' +
+        Object.keys(QUITADAS).sort().map(function (k) { return '  ' + k; }).join('\n');
       try { navigator.clipboard.writeText(lista); } catch (err) {}
       return;
     }
