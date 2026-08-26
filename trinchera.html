@@ -1795,7 +1795,15 @@
        coincidir. Resultado: el titanio del Khaki desapareció entero del
        catálogo sin que nadie lo tocara. */
     if (esfFija) $('[data-pv="esf"]').innerHTML = '';
-    $('[data-pv-esf-fija]').hidden = !esfFija;
+    var fijaEsf = $('[data-pv-esf-fija]');
+    fijaEsf.hidden = !esfFija;
+    /* Y DICE EL COLOR (26/08/2026). Estaba escrita a mano —«Khaki negra
+       mate»— y se quedaba diciendo «negra» con la esfera azul puesta
+       delante. Era el último sitio donde el color elegido no llegaba. */
+    if (esfFija)
+      fijaEsf.textContent = 'Khaki ' +
+        (ESF_REF[e.esfColor] ? ESF_COLORES[e.esfColor][0].toLowerCase() : 'negra') +
+        ' mate, numerales y agujas blancas';
     if (!esfFija) {
       $('[data-pv-rotulo-esf]').textContent = 'Numerales';
       botones('esf', [['MA', ESFERAS.MA.corto], ['MB', ESFERAS.MB.corto]], e.esf);
