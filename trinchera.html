@@ -1305,6 +1305,21 @@
   };
   /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
   function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
+  /* LAS HEBILLAS DE LA PIEL DEL MURPH (Óscar, 26/08/2026):
+     «en el murph piel quitamos la hebilla de oro rosa y dorado para todas
+     las combinaciones» y «en el murph piel negra está disponible hebilla
+     clásica negra y plateada, pero la hebilla negra solo estará disponible
+     para la piel negra».
+
+     Así que de las cinco se quedan tres, y la negra sólo con la piel negra:
+     una hebilla negra sobre una correa marrón o verde no es una elección,
+     es un descuido. La mariposa se queda en las tres: Óscar nombró dos para
+     quitar, y la mariposa no es una clásica. */
+  function cierreVale(k) {
+    if (k === 'oro' || k === 'oro-rosa') return false;
+    if (k === 'negra') return e.correa === 'PIELN';
+    return true;
+  }
   /* La piel del khaki también elige hebilla, pero solo entre dos */
   function conCierreK() { return e.correa === 'PIELO'; }
 
@@ -1509,6 +1524,10 @@
          de tumbar la ficha. */
       if (e.correa === 'NATOP') e.correa = 'NATO';
     }
+    /* LA HEBILLA, DENTRO DE LO QUE VALE. Sin esto te quedas con la negra
+       puesta al pasar de la piel negra a la marrón: el botón ya no está,
+       pero la referencia y el precio la seguirían llevando. */
+    if (conCierre() && !cierreVale(e.cierre)) e.cierre = 'plata';
     /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
        sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
     e.tapa = (e.mov === 'Q' || e.caja === 'TI') ? 'S' : 'C';
@@ -2073,7 +2092,8 @@
       if (conCierreK() && e.cierre !== 'plata' && e.cierre !== 'negra') e.cierre = 'plata';
       botones('cierre', conCierreK()
         ? Object.keys(CIERRES_K).map(function (k) { return [k, CIERRES_K[k]]; })
-        : Object.keys(CIERRES).map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
+        : Object.keys(CIERRES).filter(cierreVale)
+                              .map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
     }
     $('[data-pv-cierre]').textContent = hayCierre ? CIERRES[e.cierre].nombre
       /* los brazaletes no llevan hebilla: cierran con desplegable
