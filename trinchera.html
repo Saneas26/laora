@@ -1218,13 +1218,29 @@
        segundero blanco para todas las cajas» (Óscar). */
     /* LOS CUATRO COLORES DE ESFERA (Óscar, 24/08/2026). Los que aún no
        existen salen tachados: se ven, para que se sepa por dónde va la
-       familia, pero no se pueden elegir. */
-    $('[data-pv="esfColor"]').innerHTML = Object.keys(ESF_COLORES).map(function (k) {
-      var c = ESF_COLORES[k];
-      return '<button type="button" data-v="' + k + '"' + (c[2] ? '' : ' disabled') +
-             ' aria-pressed="' + (k === e.esfColor) + '">' +
-             '<i style="background:' + c[1] + '"></i><small>' + c[0] + '</small></button>';
-    }).join('');
+       familia, pero no se pueden elegir.
+       EN EL MURPH NO SE ELIGE (Óscar, 26/08/2026): «en el murph no se puede
+       elegir esfera negra, se quita esa opción. Solo se elige numerales
+       blancos o crema, pero la esfera siempre es negra». Su esfera es negra
+       y punto, así que enseñar una fila de colores con uno solo pulsable era
+       ofrecer una elección que no existe.
+       Y SE VACÍA además de esconderse, por lo mismo que el sub-bloque de los
+       numerales de aquí abajo: el volcador del catálogo lee lo que la ficha
+       ha DIBUJADO, y con el contenido de la vez anterior dentro creería que
+       esos colores se siguen ofreciendo. */
+    var colorEsf = $('[data-pv="esfColor"]');
+    colorEsf.hidden = esMurph;
+    if (esMurph) {
+      colorEsf.innerHTML = '';
+      e.esfColor = 'NEG';
+    } else {
+      colorEsf.innerHTML = Object.keys(ESF_COLORES).map(function (k) {
+        var c = ESF_COLORES[k];
+        return '<button type="button" data-v="' + k + '"' + (c[2] ? '' : ' disabled') +
+               ' aria-pressed="' + (k === e.esfColor) + '">' +
+               '<i style="background:' + c[1] + '"></i><small>' + c[0] + '</small></button>';
+      }).join('');
+    }
 
     /* El sub-bloque de debajo de los colores ya solo sirve al Murph, para
        elegir sus numerales; en el khaki no hay nada que preguntar desde que
