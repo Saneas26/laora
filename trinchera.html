@@ -196,21 +196,9 @@
   .pv-subrotulo b{ font-weight:400; color:#121414 }
 
   /* EL MODO CURAR (Óscar, 26/08/2026), que solo existe con `?curar` en la
-     dirección: el aspa nace escondida y solo la enseña `body.curando`, que
-     únicamente se pone en ese modo. Así, si algún día alguien deja el
-     marcado en el HTML, el cliente sigue sin verlo. */
-  .pv-quita{ display:none }
-  /* EN UNA ESQUINA Y FUERA DEL FLUJO: si el aspa ocupara sitio dentro del
-     botón, cada botón crecería treinta píxeles y la fila de arriba
-     —tamaño y movimiento, que van una al lado de otra— se partiría en dos
-     renglones. El modo curar tiene que enseñar la ficha COMO ES. */
-  body.curando .pv-info .pv-opciones button{ position:relative; overflow:visible }
-  body.curando .pv-quita{
-    display:flex; align-items:center; justify-content:center;
-    position:absolute; top:-9px; right:-9px; width:19px; height:19px;
-    border-radius:50%; background:#b3261e; color:#fff;
-    font-size:11px; line-height:1; z-index:2; cursor:pointer;
-  }
+     dirección. El aspa roja de cada botón se fue el mismo día: quitaba una
+     opción de TODAS las combinaciones y no era lo que hacía falta. Queda el
+     panel, que marca combinaciones enteras. */
   .pv-curar{
     position:fixed; right:16px; bottom:16px; z-index:60;
     width:320px; max-height:62vh; overflow:auto; padding:14px 16px;
@@ -1586,22 +1574,17 @@
      NAVEGADOR, no en la ficha: es una lista de trabajo para decidir qué se
      cae, y hasta que Óscar lo diga el catálogo sigue entero y el servidor
      sigue vendiendo esas referencias. */
-  var CURAR = false, QUITADAS = {};
+  var CURAR = false;
   try { CURAR = /[?&]curar(=|&|$)/.test(location.search); } catch (x) {}
-  /* Por `window.localStorage` y no por `localStorage` a secas: el volcador
-     del catálogo corre esta misma ficha en node, donde tocar el global
-     suelta un aviso en cada commit. Su `window` es de mentira y no lo
-     tiene, así que por ahí no pasa. */
+  /* EL ASPA DE CADA BOTÓN SE FUE (Óscar, 26/08/2026: «ya no me hacen falta
+     las aspas en las elecciones»). Quitaba una opción de TODAS las
+     combinaciones, y resultó no ser lo que hacía falta: lo que no gusta casi
+     nunca es la esfera azul, es la esfera azul CON ese nato. Se queda sólo el
+     marcado de combinaciones, que es lo que Óscar ha estado usando.
+     De paso se borra su lista vieja del navegador, que ya no la lee nadie. */
   try {
-    if (window.localStorage)
-      QUITADAS = JSON.parse(window.localStorage.getItem('laora.trinchera.quitadas') || '{}') || {};
-  } catch (x) { QUITADAS = {}; }
-  function guardaQuitadas() {
-    try {
-      if (window.localStorage)
-        window.localStorage.setItem('laora.trinchera.quitadas', JSON.stringify(QUITADAS));
-    } catch (x) {}
-  }
+    if (window.localStorage) window.localStorage.removeItem('laora.trinchera.quitadas');
+  } catch (x) {}
   /* ---------- QUITAR UNA COMBINACIÓN, NO UNA OPCIÓN (Óscar, 26/08/2026)
      «Si pulso esfera azul, ¿se elimina ya para todas las combinaciones
      futuras o sólo para esta ocasión?» Con el aspa, para todas: mata la
@@ -1703,29 +1686,11 @@
         window.localStorage.setItem('laora.trinchera.combis', JSON.stringify(COMBIS));
     } catch (x) {}
   }
-  function fuera(grupo, valor) { return !!QUITADAS[grupo + ':' + valor]; }
-  function aspa(grupo, valor) {
-    return CURAR ? '<span class="pv-quita" data-quita="' + grupo + ':' + valor +
-                   '" title="Quitar esta opción">\u2715</span>' : '';
-  }
-
   /* QUÉ VALOR TIENE PUESTO CADA GRUPO. Hace falta para saber si lo que
      acabas de quitar era justo lo que estaba elegido: en ese caso hay que
      moverse a otra cosa, o te quedas con una opción activa que ya no se ve.
      No vale mirar `aria-pressed`, porque la ficha desmarca a propósito los
      grupos que el cliente todavía no ha tocado. */
-  /* EL GRUPO DEL COLOR SIRVE A CUATRO PALETAS, y hay valores que se repiten
-     entre ellas: `NEG` es un color de nato Y un color de ante, y `MOS` está
-     en el ante y en la piel del Khaki. Si la lista de quitadas guardara
-     `color:NEG` a secas, quitar el nato negro se llevaría por delante el
-     ante negro. Por eso cada paleta lleva su propio ámbito, y el grupo del
-     HTML se saca de lo que va antes del guion. */
-  function ambitoColor() {
-    return e.correa === 'ANTE' ? 'color-ante'
-         : e.correa === 'NATO' ? 'color-nato'
-         : e.correa === 'PIELO' ? 'color-pielk' : 'color-piel';
-  }
-
   /* LO QUE HACE PULSAR UN BOTÓN, en una sola función. Estaba escrito dentro
      del manejador del clic, y desde el 26/08/2026 hace falta también para
      PROBAR una opción sin pulsarla: para saber si llevaría a una combinación
@@ -1774,11 +1739,10 @@
   function botones(grupo, opciones, activo) {
     var caja = $('[data-pv="' + grupo + '"]');
     caja.innerHTML = opciones.filter(function (o) {
-      return !o[2] && !fuera(grupo, o[0]) && !llevaAMarcada(grupo, o[0]);
+      return !o[2] && !llevaAMarcada(grupo, o[0]);
     }).map(function (o) {
       return '<button type="button" data-v="' + o[0] + '"' +
-             ' aria-pressed="' + (o[0] === activo) + '">' + o[1] +
-             aspa(grupo, o[0]) + '</button>';
+             ' aria-pressed="' + (o[0] === activo) + '">' + o[1] + '</button>';
     }).join('');
   }
 
@@ -1889,13 +1853,12 @@
     }
     if (!esMurph) {
       colorEsf.innerHTML = Object.keys(ESF_COLORES).filter(function (k) {
-        return ESF_COLORES[k][2] && !fuera('esfColor', k) && !llevaAMarcada('esfColor', k);
+        return ESF_COLORES[k][2] && !llevaAMarcada('esfColor', k);
       }).map(function (k) {
         var c = ESF_COLORES[k];
         return '<button type="button" data-v="' + k + '"' +
                ' aria-pressed="' + (k === e.esfColor) + '">' +
-               '<i style="background:' + c[1] + '"></i><small>' + c[0] + '</small>' +
-               aspa('esfColor', k) + '</button>';
+               '<i style="background:' + c[1] + '"></i><small>' + c[0] + '</small></button>';
       }).join('');
     }
 
@@ -2061,13 +2024,11 @@
       $('[data-pv-rotulo-color]').textContent =
         esAnte ? 'Color del ante' : esNato ? 'Color del nato'
         : 'Color de la piel';
-      var amb = ambitoColor();
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).filter(function (k) {
-        return !fuera(amb, k) && !llevaAMarcada('color', k);
+        return !llevaAMarcada('color', k);
       }).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
-               '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small>' +
-               aspa(amb, k) + '</button>';
+               '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
       }).join('');
     }
 
@@ -2158,9 +2119,7 @@
       p = document.createElement('div');
       p.id = 'pv-curar'; p.className = 'pv-curar';
       document.body.appendChild(p);
-      document.body.classList.add('curando');
     }
-    var claves = Object.keys(QUITADAS).sort();
     var combis = Object.keys(COMBIS);
     var yaEsta = marcada(firma());
     p.innerHTML =
@@ -2192,45 +2151,11 @@
         : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: ' +
           'sigue todo en pie hasta que lo confirmes.</p>') +
       '<hr>' +
-      '<b>Opciones quitadas del todo (' + claves.length + ')</b>' +
-      (claves.length
-        ? '<ul>' + claves.map(function (k) {
-            return '<li><code>' + k + '</code>' +
-                   '<button type="button" data-vuelve="' + k + '">volver a poner</button></li>';
-          }).join('') + '</ul>'
-        : '<p>Ninguna. El aspa roja de un botón quita esa opción ' +
-          '<b>de todas</b> las combinaciones.</p>') +
-      '<hr>' +
-      '<button type="button" data-curar-copia>Copiar las dos listas</button> ' +
+      '<button type="button" data-curar-copia>Copiar la lista</button> ' +
       '<button type="button" data-curar-vacia>Vaciar</button>';
   }
 
   document.addEventListener('click', function (ev) {
-    /* EL ASPA VA ANTES QUE EL BOTÓN: está dentro de él, así que sin esto
-       quitar una opción la elegiría además de quitarla. */
-    var x = ev.target.closest('[data-quita]');
-    if (x) {
-      ev.preventDefault(); ev.stopPropagation();
-      var trozo = x.dataset.quita.split(':');
-      /* el ámbito puede ser `color-ante`; el grupo del HTML es `color` */
-      var grupo = trozo[0].split('-')[0], valor = trozo[1];
-      var eraLaPuesta = valorDe(grupo) === valor;
-      QUITADAS[x.dataset.quita] = 1;
-      guardaQuitadas();
-      if (grupo === 'duo') e.duo = false;
-      pinta();
-      /* si te has quitado la que tenías puesta, te mueves a la primera que
-         quede: si no, sigue elegida una opción que ya no está en pantalla */
-      if (eraLaPuesta && grupo !== 'duo') {
-        var cont = $('[data-pv="' + grupo + '"]');
-        var primero = cont && cont.querySelector('button');
-        if (primero) primero.click();
-      }
-      panelCurar();
-      return;
-    }
-    var v = ev.target.closest('[data-vuelve]');
-    if (v) { delete QUITADAS[v.dataset.vuelve]; guardaQuitadas(); pinta(); panelCurar(); return; }
     if (ev.target.closest('[data-curar-combi]')) {
       var f = firma();
       if (marcada(f)) desmarca(f);
@@ -2246,8 +2171,8 @@
       return;
     }
     if (ev.target.closest('[data-curar-vacia]')) {
-      QUITADAS = {}; COMBIS = {}; APLICADAS = false;
-      guardaQuitadas(); guardaCombis(); guardaAplicadas(); pinta(); panelCurar();
+      COMBIS = {}; APLICADAS = false;
+      guardaCombis(); guardaAplicadas(); pinta(); panelCurar();
       return;
     }
     if (ev.target.closest('[data-curar-copia]')) {
@@ -2255,9 +2180,7 @@
         Object.keys(COMBIS).map(function (k) {
           return '  ' + canon(k) + '\n    ' + sinMedida(COMBIS[k].dicho) +
                  '\n    ref ' + COMBIS[k].ref + '  (las dos medidas)';
-        }).join('\n') +
-        '\n\nOPCIONES A QUITAR DEL TODO\n' +
-        Object.keys(QUITADAS).sort().map(function (k) { return '  ' + k; }).join('\n');
+        }).join('\n');
       try { navigator.clipboard.writeText(lista); } catch (err) {}
       return;
     }
