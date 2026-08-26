@@ -514,13 +514,18 @@
        anuncio 1005009739738725, a 5,59 €, y SOLO ese para la de 36. El de
        11,29 es solo para la de 39. Un solo botón «Nato»: el coste lo
        decide el diámetro en costes(). */
-    PIELN: { nombre: 'Piel Negra',   coste: 29.99, tec: 'piel genuina negra de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
-    PIELM: { nombre: 'Piel Marrón',  coste: 29.99, tec: 'piel genuina marrón claro de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
+    /* GRABADAS EN COCO (Óscar, 26/08/2026). La foto madre del Murph llegó
+       con la correa en cocodrilo brillante, no en la lisa encerada que
+       decía esta ficha; preguntado cuál manda, dijo que la foto. OJO AL
+       COSTE: los 29,99 € son los de la lisa; si el proveedor cobra otra
+       cosa por la grabada, este es el número que hay que corregir. */
+    PIELN: { nombre: 'Piel Negra',   coste: 29.99, tec: 'piel genuina negra de vaca italiana grabada en coco, con pespunte blanco, hebilla clásica plateada' },
+    PIELM: { nombre: 'Piel Marrón',  coste: 29.99, tec: 'piel genuina marrón claro de vaca italiana grabada en coco, con pespunte blanco, hebilla clásica plateada' },
     /* La piel verde entra el 19/08/2026 con la serie maestra del Murph. El
        coste es el MISMO que el de las otras dos pieles genuinas porque es
        la misma correa en otro color; si el proveedor cobra otra cosa, este
        es el número que hay que corregir. */
-    PIELV: { nombre: 'Piel Verde',   coste: 29.99, tec: 'piel genuina verde militar de vaca italiana, encerada y con pespunte blanco, hebilla clásica plateada' },
+    PIELV: { nombre: 'Piel Verde',   coste: 29.99, tec: 'piel genuina verde militar de vaca italiana grabada en coco, con pespunte blanco, hebilla clásica plateada' },
     ACERO: { nombre: 'Brazalete Acero', coste: 19.69, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm, con cierre desplegable' },
     /* El brazalete en PVD negro es SOLO para la caja negra (Óscar, 19/08/2026):
        un brazalete negro en una caja de acero no es un reloj, es un apaño. */
@@ -531,9 +536,9 @@
        de piel viene en los tres tonos y hay otro de ante, y el color se
        elige donde se elige el de la piel y el del ante: en el mismo paso.
        El coste es la suma de las dos piezas, como siempre. */
-    DUON:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina negra de vaca italiana montada, y el brazalete de acero 316L de tres eslabones aparte' },
-    DUOM:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina marrón de vaca italiana montada, y el brazalete de acero 316L de tres eslabones aparte' },
-    DUOV:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina verde militar de vaca italiana montada, y el brazalete de acero 316L de tres eslabones aparte' },
+    DUON:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina negra de vaca italiana grabada en coco montada, y el brazalete de acero 316L de tres eslabones aparte' },
+    DUOM:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina marrón de vaca italiana grabada en coco montada, y el brazalete de acero 316L de tres eslabones aparte' },
+    DUOV:  { nombre: 'Dúo Piel + Brazalete', coste: 49.68, tec: 'la piel genuina verde militar de vaca italiana grabada en coco montada, y el brazalete de acero 316L de tres eslabones aparte' },
     DUOA:  { nombre: 'Dúo Ante + Brazalete', coste: 23.99, tec: 'la correa de piel ante montada, y el brazalete de acero 316L de tres eslabones aparte' },
     ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
     /* LA PIEL DEL KHAKI (Óscar, 19/08/2026): 15 €, 20 mm, en tres colores
@@ -668,7 +673,7 @@
      nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
      logotipo en el sitio de antes tres despliegues después. Lo sube solo
      el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=46';
+  var SERIE_V = '?v=47';
   /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
      todas las fotos anteriores y se entra una a una, modelo y versión,
      comprobando cada una antes de pasar a la siguiente.
@@ -699,6 +704,7 @@
     '36-acero-blanca-ante-camel': 1,
     '36-acero-blanca-ante-marronoscuro': 1,
     '36-acero-blanca-ante-negro': 1,
+    '36-acero-blanco-negra-pblanco': 1,
     '36-acero-blanca-brazalete': 1,
     '36-acero-blanca-nato-azulmarino': 1,
     '36-acero-blanca-nato-beige': 1,
@@ -804,7 +810,12 @@
      foto: la piel y el ante, los dos de 20 mm, y el brazalete de acero
      y el de PVD negro (Óscar, 25/08/2026). El nato es la única excepción:
      mide 275 mm y por eso cada caja lleva el suyo. */
-  var DOS_MEDIDAS = { PIELO: 1, ANTE: 1, ACERO: 1, ACERONG: 1 };
+  /* Y LAS TRES PIELES ITALIANAS DEL MURPH desde el 26/08/2026: es la misma
+     correa de 20 mm en tres tonos, así que una foto vale para las dos cajas.
+     Los DÚOS no entran: llevan el brazalete dentro de la foto y son otra
+     composición. */
+  var DOS_MEDIDAS = { PIELO: 1, ANTE: 1, ACERO: 1, ACERONG: 1,
+                      PIELN: 1, PIELM: 1, PIELV: 1 };
   /* CÓMO SE LLAMA LA FOTO de la configuración puesta, exista o no. Va
      aparte de `serieFoto()` para que el inventario de fotos pendientes
      pueda preguntar el NOMBRE de la que falta sin volver a escribir esta
