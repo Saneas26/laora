@@ -45,6 +45,35 @@
      `hidden` ya lo usan los grupos para su propia lógica. */
   .pv-cerrado{ display:none !important }
 
+  /* UNA LÍNEA ENTRE SECCIONES (Óscar, 26/08/2026): «entre cada sección
+     quiero una línea delgada y elegante que separe cada una de las
+     secciones». Un pelo de 1 px del gris de la casa —el mismo `--cv2-linea`
+     que ya separa los desplegables de la ficha técnica—, con aire a los dos
+     lados para que separe sin hacer ruido. */
+  .pv-info .pv-fila + .pv-fila{
+    border-top:1px solid var(--cv2-linea);
+    padding-top:20px; margin-top:20px;
+  }
+  /* ENTRE EL TAMAÑO Y EL MOVIMIENTO LA LÍNEA ES VERTICAL, porque esos dos
+     van uno al lado del otro (Óscar, 24/08). */
+  .pv-fila-cabeza>.pv-grupo+.pv-grupo{
+    border-left:1px solid var(--cv2-linea);
+    padding-left:28px;
+  }
+  /* Y SE PONE HORIZONTAL cuando la columna se estrecha y se apilan. Los dos
+     grupos necesitan 453 px y la columna es el 36 % del ancho de pantalla,
+     así que dejan de caber sobre los 1.260. Sin esto quedaría un palito
+     vertical suelto encima del movimiento. Se fuerza el apilado en vez de
+     dejarlo al `wrap` para que la línea y la ruptura ocurran a la vez. */
+  @media (max-width:1260px){
+    .pv-fila-cabeza>.pv-grupo{ flex:0 0 100% }
+    .pv-fila-cabeza>.pv-grupo+.pv-grupo{
+      border-left:0; padding-left:0;
+      border-top:1px solid var(--cv2-linea);
+      padding-top:18px;
+    }
+  }
+
   /* La miniatura de la correa abierta, con su pie. Va en la misma esquina
      que las otras dos y con el mismo ancho; el `figure` necesita su propio
      [hidden] porque, igual que el cartel, trae display propio. */
@@ -146,7 +175,6 @@
   .pv-fila[data-paso="estilo"]>.pv-rotulo,
   .pv-fila[data-paso="estilo"]>.pv-sub,
   .pv-fila[data-paso="estilo"]>.pv-fijo{ flex:0 0 100% }
-  .pv-info .pv-fila+.pv-fila{ margin-top:6px }
   /* Lo que cuelga de una fila —el segundero, el color, el cierre— va un
      escalón por dentro, para que se lea como parte de ella y no como otra
      pregunta al mismo nivel. */
@@ -285,7 +313,7 @@
             </div>
 
             <div class="pv-grupo" data-paso="mov">
-              <p class="pv-rotulo">Movimiento</p>
+              <p class="pv-rotulo">Movimiento suizo</p>
               <div class="pv-opciones" data-pv="mov">
                 <button type="button" data-v="A" aria-pressed="false">Automático</button>
                 <button type="button" data-v="Q" aria-pressed="false">Cuarzo (Pila)</button>
