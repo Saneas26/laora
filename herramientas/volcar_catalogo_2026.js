@@ -179,7 +179,7 @@ function precisa() {
 function trinchera() {
   const L = motorDe('trinchera.html',
     'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
-    'CIERRES_K, MURPH_CORREA, PIELES_M, DUOS_M, conCierreK, ' +
+    'CIERRES_K, MURPH_CORREA, PIELES_M, puedeDuo, conCierreK, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   let n = 0;
 
@@ -220,10 +220,7 @@ function trinchera() {
              de verdad, con su coste, así que aquí se abren las tres. */
           const trestonos = (estilo === 'M' && L.MURPH_CORREA[boton])
             ? ofrece('color', Object.keys(L.PIELES_M || {}))
-            /* y lo mismo con el dúo de piel, que desde el 20/08/2026 viene
-               en los mismos tres tonos y por el mismo botón */
-            : (estilo === 'M' && L.DUOS_M && L.DUOS_M[boton])
-            ? ofrece('color', Object.keys(L.DUOS_M)) : [boton];
+            : [boton];
 
           for (const correa of trestonos) {
           pon({ estilo, mov, diam, caja, esf, correa });
@@ -247,7 +244,7 @@ function trinchera() {
           /* el ante y el dúo llevan color en TODOS los estilos desde el
              20/08/2026. El grupo pintado es el del color; desde el
              25/08/2026 las cuatro cajas enseñan los cuatro tonos. */
-          const antes     = (correa === 'ANTE' || correa === 'DUOA')
+          const antes     = correa === 'ANTE'
             ? ofrece('color', Object.keys(L.ANTES || {})) : [null];
           const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
 
@@ -263,18 +260,28 @@ function trinchera() {
             const cierres = (L.conCierre() || L.conCierreK())
               ? ofrece('cierre', Object.keys(L.conCierreK() ? L.CIERRES_K : L.CIERRES)) : [null];
 
+            /* EL DÚO YA NO ES UNA CORREA (Óscar, 26/08/2026): es un
+               añadido que se marca encima de una combinación válida. Así
+               que no se enumera en la fila de correas, se enumera AQUÍ,
+               doblando cada combinación donde se puede añadir. Si esto no
+               estuviera, las referencias `-DUO` no llegarían al catálogo y
+               el servidor le diría al cliente que lo que acaba de comprar
+               «ya no está a la venta». */
             for (const cierre of cierres) {
               if (cierre) L.e.cierre = cierre;
+              const duos = L.puedeDuo() ? [false, true] : [false];
+              for (const duo of duos) {
+              L.e.duo = duo;
               const s = L.e;
               const esBronce = s.caja === 'BR';
               n += anota(L.referencia(), L.precio(),
                 'Trinchera ' + (esBronce ? 'Bronce' : (s.caja === 'TI' ? 'Titanio' :
-                  (s.correa === 'PACK' ? 'Murph Pack' :
+                  (s.duo ? 'Murph Dúo' :
                     (s.esf === 'MA' || s.esf === 'MB' ? 'Murph' : 'Militar')))),
                 L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
                   (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.ESFERAS[s.esf].nombre +
                   ' · ' + L.MOVS[s.mov].nombre,
-                s.correa === 'PIELO'
+                (s.correa === 'PIELO'
                   ? 'Piel ' + L.PIELES_K[s.pielk][0].toLowerCase() + ' · ' + L.CIERRES_K[s.cierre].toLowerCase()
                   : s.correa === 'NATO'
                   ? 'Nato ' + L.natos()[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
@@ -282,14 +289,16 @@ function trinchera() {
                      20/08/2026 y su referencia ya lo lleva */
                   : (s.correa === 'ANTE' && L.ANTES && L.ANTES[s.ante])
                   ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
-                  : L.CORREAS[s.correa].nombre,
+                  : L.CORREAS[s.correa].nombre) + (s.duo ? ' + brazalete de acero' : ''),
                 { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
                   esfera: L.ESFERAS[s.esf].tec,
-                  correa: s.correa === 'NATO'
+                  correa: (s.correa === 'NATO'
                     ? 'nato ' + L.natos()[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
-                    : L.CORREAS[s.correa].tec,
+                    : L.CORREAS[s.correa].tec) +
+                    (s.duo ? ', y el brazalete de acero 316L de tres eslabones aparte' : ''),
                   agua: L.agua() },
                 Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
+              }
             }
           }
           }
