@@ -1555,6 +1555,18 @@
      moverse a otra cosa, o te quedas con una opción activa que ya no se ve.
      No vale mirar `aria-pressed`, porque la ficha desmarca a propósito los
      grupos que el cliente todavía no ha tocado. */
+  /* EL GRUPO DEL COLOR SIRVE A CUATRO PALETAS, y hay valores que se repiten
+     entre ellas: `NEG` es un color de nato Y un color de ante, y `MOS` está
+     en el ante y en la piel del Khaki. Si la lista de quitadas guardara
+     `color:NEG` a secas, quitar el nato negro se llevaría por delante el
+     ante negro. Por eso cada paleta lleva su propio ámbito, y el grupo del
+     HTML se saca de lo que va antes del guion. */
+  function ambitoColor() {
+    return e.correa === 'ANTE' ? 'color-ante'
+         : e.correa === 'NATO' ? 'color-nato'
+         : e.correa === 'PIELO' ? 'color-pielk' : 'color-piel';
+  }
+
   function valorDe(grupo) {
     if (grupo === 'color')
       return e.correa === 'ANTE' ? e.ante
@@ -1846,9 +1858,13 @@
       $('[data-pv-rotulo-color]').textContent =
         esAnte ? 'Color del ante' : esNato ? 'Color del nato'
         : 'Color de la piel';
-      $('[data-pv="color"]').innerHTML = Object.keys(paleta).map(function (k) {
+      var amb = ambitoColor();
+      $('[data-pv="color"]').innerHTML = Object.keys(paleta).filter(function (k) {
+        return !fuera(amb, k);
+      }).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
-               '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
+               '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small>' +
+               aspa(amb, k) + '</button>';
       }).join('');
     }
 
@@ -1953,7 +1969,8 @@
     if (x) {
       ev.preventDefault(); ev.stopPropagation();
       var trozo = x.dataset.quita.split(':');
-      var grupo = trozo[0], valor = trozo[1];
+      /* el ámbito puede ser `color-ante`; el grupo del HTML es `color` */
+      var grupo = trozo[0].split('-')[0], valor = trozo[1];
       var eraLaPuesta = valorDe(grupo) === valor;
       QUITADAS[x.dataset.quita] = 1;
       guardaQuitadas();
