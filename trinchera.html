@@ -1532,6 +1532,30 @@
         normaliza();
         if (!serieFoto()) { e.correa = correaAntes; normaliza(); }
       }
+      /* Y LA ESFERA DEL MURPH IGUAL (Óscar, 26/08/2026): «no veo ninguna
+         imagen del murph».
+
+         El Murph entra por la esfera de numerales CREMA y la única foto que
+         hay hoy es la de numerales BLANCOS, así que al pulsar «Murph» salía
+         el cartel y parecía que ese reloj no tenía ni una imagen. Estaba
+         publicada; lo que fallaba era que nadie llegaba a ella.
+
+         Los dos rescates que ya había —el de la correa y el del color— están
+         escritos SOLO para el Khaki (`e.estilo === 'K'`), así que al Murph no
+         le cubría nada más que el pespunte.
+
+         VA DESPUÉS DE normaliza(), y no antes, por lo mismo que avisa el
+         comentario de arriba: al pulsar «Murph» la esfera todavía es la del
+         Khaki, así que preguntar aquí por la foto con el estado a medio
+         hacer devuelve una respuesta que no vale.
+
+         Como los demás: si lo que has pulsado ES la esfera, mandas tú y se
+         respeta aunque salga el cartel. */
+      if (g !== 'esf' && e.estilo === 'M' && !serieFoto()) {
+        var antesEsf = e.esf;
+        e.esf = antesEsf === 'MA' ? 'MB' : 'MA';
+        if (!serieFoto()) e.esf = antesEsf;
+      }
       if (g !== 'color' && e.estilo === 'K' && !serieFoto()) {
         var cual = e.correa === 'NATO' ? 'nato' : e.correa === 'PIELO' ? 'pielk'
                  : e.correa === 'ANTE' ? 'ante' : null;
