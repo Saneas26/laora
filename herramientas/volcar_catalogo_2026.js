@@ -180,8 +180,14 @@ function trinchera() {
   const L = motorDe('trinchera.html',
     'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
     'CIERRES_K, MURPH_CORREA, PIELES_M, puedeDuo, conCierreK, esfNombre, esfTec, ' +
-    'vetada, firma, ' +
+    'vetada, firma, sinVeto, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
+  /* Ver el árbol ENTERO: lo vetado se descarta hoja por hoja más abajo, no
+     escondiéndolo. La ficha esconde lo vetado —es el escaparate—, y leyendo
+     esos botones se caían ramas buenas: preguntando por los colores del nato
+     con una esfera azul puesta desaparecían los natos vetados con esa esfera,
+     y con ellos TODAS sus esferas, también las que están bien. */
+  L.sinVeto(true);
   let n = 0;
 
   /* Lo que la ficha ofrece AHORA MISMO en un grupo, con el estado

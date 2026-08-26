@@ -1682,8 +1682,52 @@
      Mientras esté vacía no quita nada. Se llena cuando Óscar pasa su lista
      del panel; a partir de ahí el panel se vacía solo, porque lo que ya está
      aquí deja de estar pendiente. */
-  var VETADAS = {};
+  var VETADAS = {
+    '||K|PL|KB|AZU|NATO|NEG|||||': 1,
+    '||K|PL|KB|AZU|NATO|VER|||||': 1,
+    '||K|BR|KB|GRI|NATO|VER|||||': 1,
+    '||K|BR|KB|GRI|NATO|BGE|||||': 1,
+    '||K|BR|KB|GRI|NATO|MOS|||||': 1,
+    '||K|TI|KB|AZU|NATO|VER|||||': 1,
+    '||K|TI|KB|GRI|ANTE||MOS||||': 1,
+    '||K|TI|KB|GRI|PIELO|||MOS||plata|': 1,
+    '||K|PL|KB|AZU|PIELO|||MOS||plata|': 1,
+    '||K|PL|KB|AZU|PIELO|||NEG||plata|': 1,
+    '||K|PL|KB|AZU|NATO|MOS|||||': 1,
+    '||K|PL|KB|AZU|ANTE||NEG||||': 1,
+    '||K|PL|KB|AZU|ANTE||MOS||||': 1,
+    '||K|NG|KB|AZU|PIELO|||MOS||plata|': 1,
+    '||K|BR|KB|AZU|ANTE||CAM||||': 1,
+    '||K|BR|KB|AZU|ANTE||NEG||||': 1,
+    '||K|BR|KB|AZU|ANTE||MOS||||': 1,
+    '||K|BR|KB|AZU|NATO|VER|||||': 1,
+    '||K|BR|KB|AZU|NATO|NEG|||||': 1,
+    '||K|BR|KB|AZU|NATO|BGE|||||': 1,
+    '||K|BR|KB|AZU|NATO|MOS|||||': 1,
+    '||K|BR|KB|AZU|NATO|GRI|||||': 1,
+    '||K|BR|KB|AZU|PIELO|||NEG||plata|': 1,
+    '||K|BR|KB|AZU|PIELO|||MOS||plata|': 1,
+    '||K|BR|KB|AZU|PIELO|||MCL||plata|': 1,
+    '||K|BR|KB|NEG|ANTE||CAM||||': 1,
+    '||M|TI|MB||PIELN||||B|oro-rosa|': 1,
+    '||M|TI|MB||PIELM||||B|oro|': 1,
+    '||M|TI|MB||PIELN||||B|oro|': 1,
+    '||M|TI|MB||PIELV||||B|oro-rosa|': 1,
+    '||M|TI|MB||PIELM||||B|oro-rosa|': 1
+  };
   function vetada(f) { return !!VETADAS[canon(f)]; }
+  /* EL VOLCADOR TIENE QUE VERLO TODO. Lee lo que la ficha DIBUJA para saber
+     qué existe, y la ficha ya no dibuja lo vetado: al preguntar por los
+     colores del nato con una esfera azul puesta, se le escondían los natos
+     vetados con esa esfera y desaparecían del inventario CON TODAS SUS
+     ESFERAS, también las buenas. El bronce con nato beige perdía las cuatro
+     cuando sólo estaban vetadas dos.
+
+     Así que el veto se apaga mientras el volcador recorre el árbol —ve el
+     catálogo entero, como antes— y él descarta al final, hoja por hoja, con
+     `vetada()`. Esconder es cosa del escaparate; contar, del inventario. */
+  var SIN_VETO = false;
+  function sinVeto(v) { SIN_VETO = !!v; }
 
   var COMBIS_CANON = {};
   function recanon() {
@@ -1754,7 +1798,7 @@
     aplicaOpcion(grupo, valor);
     normaliza();
     /* las vetadas no dependen del interruptor: están quitadas para todos */
-    var esta = vetada(firma()) || (APLICADAS && marcada(firma()));
+    var esta = (!SIN_VETO && vetada(firma())) || (APLICADAS && marcada(firma()));
     for (k in copia) e[k] = copia[k];
     return esta;
   }
@@ -2144,6 +2188,15 @@
      quita: decir «de 36 mm» sería mentir sobre lo que se va a quitar. */
   function sinMedida(t) { return String(t).replace(/ de 3[69] mm,/, ','); }
 
+  /* Lo que hay que pasarme para que las quitadas lo sean de verdad: la
+     firma EN LIMPIO, que es lo que va a `VETADAS`, y debajo la frase, para
+     poder leer de un vistazo qué es cada una. */
+  function paraMi() {
+    return Object.keys(COMBIS).map(function (k) {
+      return canon(k) + '   · ' + sinMedida(COMBIS[k].dicho);
+    }).join('\n');
+  }
+
   function panelCurar() {
     if (!CURAR) return;
     var p = document.getElementById('pv-curar');
@@ -2183,8 +2236,19 @@
         : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: ' +
           'sigue todo en pie hasta que lo confirmes.</p>') +
       '<hr>' +
+      /* EL TEXTO, A LA VISTA Y SELECCIONABLE. El botón de copiar usa el
+         portapapeles del navegador, que puede fallar en silencio —hace falta
+         permiso y que la pestaña esté al frente—, y entonces Óscar cree que
+         ha copiado y no ha copiado nada. Con el cuadro delante siempre puede
+         seleccionar y copiar a mano, y además VE lo que me va a mandar. */
+      (combis.length
+        ? '<b>Para pasármelo</b>' +
+          '<textarea class="pv-curar-texto" readonly rows="4" ' +
+          'onclick="this.select()">' + paraMi() + '</textarea>'
+        : '') +
       '<button type="button" data-curar-copia>Copiar la lista</button> ' +
-      '<button type="button" data-curar-vacia>Vaciar</button>';
+      '<button type="button" data-curar-vacia>Vaciar</button>' +
+      '<span class="pv-curar-ok" data-curar-ok hidden>copiado</span>';
   }
 
   document.addEventListener('click', function (ev) {
@@ -2208,12 +2272,23 @@
       return;
     }
     if (ev.target.closest('[data-curar-copia]')) {
-      var lista = 'COMBINACIONES A QUITAR\n' +
-        Object.keys(COMBIS).map(function (k) {
-          return '  ' + canon(k) + '\n    ' + sinMedida(COMBIS[k].dicho) +
-                 '\n    ref ' + COMBIS[k].ref + '  (las dos medidas)';
-        }).join('\n');
-      try { navigator.clipboard.writeText(lista); } catch (err) {}
+      var ok = $('[data-curar-ok]');
+      var caja = document.querySelector('.pv-curar-texto');
+      /* Primero a la vieja usanza, que funciona siempre; el portapapeles
+         moderno queda de respaldo y sin él tampoco pasa nada, porque el
+         texto está delante para seleccionarlo. */
+      var hecho = false;
+      if (caja) {
+        caja.select();
+        try { hecho = document.execCommand('copy'); } catch (err) {}
+      }
+      if (!hecho) {
+        try { navigator.clipboard.writeText(paraMi()); hecho = true; } catch (err) {}
+      }
+      if (ok) {
+        ok.textContent = hecho ? 'copiado' : 'no he podido: selecciónalo tú';
+        ok.hidden = false;
+      }
       return;
     }
     var b = ev.target.closest('[data-pv] button');
