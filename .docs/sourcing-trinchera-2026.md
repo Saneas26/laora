@@ -191,3 +191,46 @@ cual porque él las repasó y no las corrigió:
 
 Y **falta el enlace del brazalete de acero y el del PVD** (el que mandó no
 era un brazalete). Los costes valen; los enlaces no están.
+
+---
+
+## 📐 LAS TRES REGLAS DEL COSTE (Óscar, 26/08/2026) — no volver a discutirlas
+
+1. **Las piezas de AliExpress van SIN IVA.** «El IVA se paga después sobre el
+   precio marcado.» Por tanto el coste que entra al motor es **neto** y **no
+   hay que quitarle nada**: los 62,77 € del Militar son 62,77 € de coste real.
+   Se planteó deducir un IVA soportado sobre las piezas y **es un error**: ese
+   IVA se paga a la importación y se deduce, así que no es coste.
+2. **El packing y el envío SÍ llevan IVA dentro.** Los 9,00 € son con IVA y por
+   eso el motor los mete como `9 / 1,21 = 7,44 €`. Está bien así.
+3. **La Seguridad Social se queda en el 5 % del coste** «porque lo quiero yo
+   así». Es decisión de Óscar, no una estimación a mejorar. No proponer
+   repartir la cuota anual entre unidades.
+
+## Cuenta de explotación del más económico, con los costes reales
+
+`LO-02-Q-PL36S-KB-NATO-VER` · Trinchera Militar · cuarzo · acero 36 · nato verde
+
+| Concepto | € |
+|---|--:|
+| Movimiento cuarzo LO_Q6026 | 15,05 |
+| Caja de acero 36 mm | 18,50 |
+| Esfera Khaki + agujas | 16,25 |
+| Nato de 36 mm | 5,59 |
+| Grabado del logotipo | 3,78 |
+| Anillo espaciador (solo cuarzo) | 3,60 |
+| **Piezas** | **62,77** |
+| + packing y envío (9,00 con IVA → sin IVA) | 7,44 |
+| + fondo de garantía | 4,00 |
+| + 5 % de Seguridad Social | 3,71 |
+| **Coste completo** | **77,92** |
+| PVP (77,92 × 2,28 → 179,90; el suelo exige lo mismo) | **179,90** |
+| − IVA repercutido 21 % | −31,22 |
+| − comisión de pasarela 2,5 % | −4,50 |
+| − coste completo | −77,92 |
+| = beneficio antes de IRPF | 66,26 |
+| − IRPF 20 % | −13,25 |
+| **BENEFICIO NETO** | **53,01 € · 29,5 %** |
+
+**En este reloj manda el SUELO, no el multiplicador**: el 2,28 da 177,65 → 179,90
+y el suelo exige 179,90 exactos. Coinciden.
