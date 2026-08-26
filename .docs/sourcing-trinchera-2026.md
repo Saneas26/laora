@@ -109,3 +109,85 @@ Los ocho anuncios están capturados con su ficha completa en
 - Es OTRO producto: solo para la caja de 36. El nato de 11,29 € es solo
   para la de 39 (mide 275 mm). Un solo botón «Nato» en la ficha; el
   coste lo decide el diámetro (`NATO36` en trinchera.html).
+
+---
+
+## 📌 COSTES CONFIRMADOS POR ÓSCAR EL 26/08/2026
+
+Estos mandan sobre todo lo anterior. **Cinco piezas bajan de coste** y con ellas
+el PVP de las 368 referencias vivas del modelo.
+
+| Pieza | Coste que usaba | **Coste confirmado** | Δ | Anuncio |
+|---|--:|--:|--:|---|
+| `ESFERAS.KR/KB/BRZ` Khaki **con agujas** | 17,29 € | **16,25 €** | −1,04 | [1005007043976717](https://es.aliexpress.com/item/1005007043976717.html) |
+| `ESFERAS.MA/MB` Murph | 21,19 € | **18,63 €** | −2,56 | [1005005589112497](https://es.aliexpress.com/item/1005005589112497.html) |
+| `CAJAS.BR` Bronce | 23,00 € | **22,60 €** | −0,40 | [1005009937589354](https://es.aliexpress.com/item/1005009937589354.html) |
+| `CAJAS.PL` Acero | 23,00 € | **18,50 €** | −4,50 | mismo anuncio |
+| `CAJAS.NG` PVD negro | 23,00 € | **18,50 €** | −4,50 | mismo anuncio |
+| `CAJAS.TI` Titanio | 54,39 € | **45,16 €** | −9,23 | [1005010605313493](https://es.aliexpress.com/item/1005010605313493.html) · **tandorio** |
+
+**OJO A DOS COSAS:**
+
+1. **La caja ya no vale lo mismo en los tres acabados.** Hasta hoy acero, PVD y
+   bronce compartían los 23,00 €. Óscar: «Caja acero/PVD/bronce 22,60 **aunque
+   en acero y pvd son 18,50**». El bronce es el caro de los tres.
+2. **La esfera del Khaki incluye las agujas.** Por eso cuesta lo que cuesta y
+   no los 4,88 € que decía el anuncio viejo: aquel era la esfera sola.
+
+**El proveedor del titanio es TANDORIO** y hay que rescatarlo más adelante:
+tiene esferas de todo tipo y agujas con lumen crema. Ficha completa en la
+memoria `laora-proveedor-tandorio`.
+⚠️ Su anuncio mostraba **8,17 €** el 26/08 con la variante por defecto, contra
+los 45,16 € que da Óscar. Sin resolver: preguntar antes de fiarse del 8,17.
+
+### Los brazaletes · costes de Óscar del 26/08/2026
+
+| Pieza | Coste que usaba | **Coste confirmado** | Δ |
+|---|--:|--:|--:|
+| `CORREAS.ACERO` Brazalete de acero | 19,69 € | **19,59 €** | −0,10 |
+| `CORREAS.ACERONG` Brazalete PVD negro | 26,50 € | **26,19 €** | −0,31 |
+
+⚠️ **EL ENLACE QUE MANDÓ NO ES UN BRAZALETE.** El
+[1005007892634303](https://es.aliexpress.com/item/1005007892634303.html) que dio
+para el brazalete de acero es, abierto el 26/08/2026, una **caja de metal de
+39,7 mm para movimiento VK63** a 14,69 € (−50 %, normal 29,38 €), 4,8 · 278
+vendidos, con esfera y manecillas y 42 colores. Nada que ver con un brazalete.
+Los **19,59 €** se dan por buenos porque los da Óscar, pero **el enlace del
+brazalete de acero sigue sin estar** y el del PVD tampoco («mismo proveedor»
+apunta a un anuncio que no es el que toca).
+
+Nota aparte: esa caja de VK63 **sí interesa para el MEDUSA** (LO-09), que monta
+precisamente ese calibre. Apuntada por si viene bien.
+
+### Lo que arrastran los brazaletes
+
+Los cuatro dúos son suma de piezas, así que bajan solos:
+
+| Dúo | Antes | **Ahora** |
+|---|--:|--:|
+| `DUON/DUOM/DUOV` piel 29,99 + brazalete | 49,68 € | **49,58 €** |
+| `DUOA` ante 4,30 + brazalete | 23,99 € | **23,89 €** |
+
+### ✅ LAS ESFERAS DE COLOR CUESTAN LO MISMO (Óscar, 26/08/2026)
+
+«Las esferas del khaki valen todas lo mismo y en el murph también.» Negra,
+blanca, azul y gris **al mismo precio**: 16,25 € la del Khaki (con agujas) y
+18,63 € la del Murph. El motor ya lo calcula así, no hay que tocar nada.
+
+## 🟢 INVENTARIO DEL TRINCHERA CERRADO — 26/08/2026
+
+Las 31 piezas tienen coste. Lo que sigue sin confirmar Óscar, y que el motor
+cobra POR ENCIMA de lo que dice el anuncio, son ocho piezas que se dejan tal
+cual porque él las repasó y no las corrigió:
+
+| Pieza | Motor | Anuncio | Δ |
+|---|--:|--:|--:|
+| Movimiento automático | 50,09 | 47,19 | +2,90 |
+| Movimiento cuarzo | 15,05 | 13,79 | +1,26 |
+| Piel del Khaki | 15,00 | 13,29 | +1,71 |
+| Ante | 4,30 | 3,59 | +0,71 |
+| Anillo espaciador (cuarzo) | 3,60 | 2,99 | +0,61 |
+| Nato 39 · Nato 36 · Piel del Murph | = | = | sin diferencia |
+
+Y **falta el enlace del brazalete de acero y el del PVD** (el que mandó no
+era un brazalete). Los costes valen; los enlaces no están.
