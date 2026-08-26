@@ -1616,6 +1616,39 @@
     if (window.localStorage)
       COMBIS = JSON.parse(window.localStorage.getItem('laora.trinchera.combis') || '{}') || {};
   } catch (x) { COMBIS = {}; }
+  /* MARCADAS Y EN VIGOR SON DOS COSAS (Óscar, 26/08/2026: «una vez que
+     tengo 2 seleccionadas, ¿cómo lo confirmo para que se quiten?»).
+     Marcar sólo anota, para poder seguir combinando sin que la ficha se
+     mueva bajo los pies; el botón de confirmar es el que las pone en vigor.
+     Si se aplicaran al marcar, en cuanto marcas una la ficha te saca de ahí
+     y ya no sabes dónde estabas. */
+  var APLICADAS = false;
+  try {
+    if (window.localStorage)
+      APLICADAS = window.localStorage.getItem('laora.trinchera.aplicadas') === '1';
+  } catch (x) {}
+  function guardaAplicadas() {
+    try {
+      if (window.localStorage)
+        window.localStorage.setItem('laora.trinchera.aplicadas', APLICADAS ? '1' : '0');
+    } catch (x) {}
+  }
+  /* Si al ponerlas en vigor estabas justo en una de las marcadas, hay que
+     sacarte: si no, te quedas viendo un reloj que acabas de quitar. Se busca
+     el primer botón de cualquier grupo que NO lleve a una marcada. */
+  function escapaDeMarcada() {
+    if (!APLICADAS || !COMBIS[firma()]) return;
+    var grupos = ['esfColor', 'color', 'cierre', 'pesp', 'correa', 'caja', 'esf', 'mov', 'diam'];
+    for (var i = 0; i < grupos.length; i++) {
+      var caja = $('[data-pv="' + grupos[i] + '"]');
+      if (!caja) continue;
+      var bs = caja.querySelectorAll('button');
+      for (var j = 0; j < bs.length; j++) {
+        if (bs[j].dataset.v === valorDe(grupos[i])) continue;
+        if (!llevaAMarcada(grupos[i], bs[j].dataset.v)) { bs[j].click(); return; }
+      }
+    }
+  }
   function guardaCombis() {
     try {
       if (window.localStorage)
@@ -1645,6 +1678,42 @@
          : e.correa === 'PIELO' ? 'color-pielk' : 'color-piel';
   }
 
+  /* LO QUE HACE PULSAR UN BOTÓN, en una sola función. Estaba escrito dentro
+     del manejador del clic, y desde el 26/08/2026 hace falta también para
+     PROBAR una opción sin pulsarla: para saber si llevaría a una combinación
+     que Óscar ha marcado para quitar. Teniéndolo en dos sitios, el día que
+     cambie una regla se quedaría medio cambiada. */
+  function aplicaOpcion(g, v) {
+    if (g === 'duo') e.duo = !e.duo;
+    else if (g === 'color' && e.correa === 'ANTE') e.ante = v;
+    else if (g === 'color' && e.correa === 'NATO') e.nato = v;
+    else if (g === 'color' && e.correa === 'PIELO') e.pielk = v;
+    /* En el Murph el color de la piel ES la correa: negra, marrón y verde
+       son tres correas distintas con tres costes, aunque el cliente solo
+       vea un botón «Piel» y tres tonos. */
+    else if (g === 'color' && e.estilo === 'M' && MURPH_CORREA[e.correa]) e.correa = v;
+    /* y pulsar «Piel» estando ya en una de ellas no te devuelve a la negra */
+    else if (g === 'correa' && v === 'PIELN' &&
+             e.estilo === 'M' && MURPH_CORREA[e.correa]) { /* ya estás */ }
+    else e[g] = v;
+  }
+
+  /* ¿ESTE BOTÓN LLEVA A UNA COMBINACIÓN MARCADA? Se prueba de verdad: se
+     copia el estado, se pulsa en falso, se normaliza, se mira la firma y se
+     deja todo como estaba. Es la única manera honrada de saberlo, porque
+     entre pulsar un botón y la combinación final está `normaliza()`, que
+     puede cambiar de correa o de esfera por el camino. */
+  function llevaAMarcada(grupo, valor) {
+    if (!APLICADAS) return false;
+    var copia = {}, k;
+    for (k in e) copia[k] = e[k];
+    aplicaOpcion(grupo, valor);
+    normaliza();
+    var marcada = !!COMBIS[firma()];
+    for (k in copia) e[k] = copia[k];
+    return marcada;
+  }
+
   function valorDe(grupo) {
     if (grupo === 'color')
       return e.correa === 'ANTE' ? e.ante
@@ -1657,7 +1726,7 @@
   function botones(grupo, opciones, activo) {
     var caja = $('[data-pv="' + grupo + '"]');
     caja.innerHTML = opciones.filter(function (o) {
-      return !o[2] && !fuera(grupo, o[0]);
+      return !o[2] && !fuera(grupo, o[0]) && !llevaAMarcada(grupo, o[0]);
     }).map(function (o) {
       return '<button type="button" data-v="' + o[0] + '"' +
              ' aria-pressed="' + (o[0] === activo) + '">' + o[1] +
@@ -1772,7 +1841,7 @@
     }
     if (!esMurph) {
       colorEsf.innerHTML = Object.keys(ESF_COLORES).filter(function (k) {
-        return ESF_COLORES[k][2] && !fuera('esfColor', k);
+        return ESF_COLORES[k][2] && !fuera('esfColor', k) && !llevaAMarcada('esfColor', k);
       }).map(function (k) {
         var c = ESF_COLORES[k];
         return '<button type="button" data-v="' + k + '"' +
@@ -1946,7 +2015,7 @@
         : 'Color de la piel';
       var amb = ambitoColor();
       $('[data-pv="color"]').innerHTML = Object.keys(paleta).filter(function (k) {
-        return !fuera(amb, k);
+        return !fuera(amb, k) && !llevaAMarcada('color', k);
       }).map(function (k) {
         return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
                '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small>' +
@@ -2055,9 +2124,20 @@
         ? '<ul>' + combis.map(function (k) {
             return '<li><span>' + COMBIS[k].dicho + '</span>' +
                    '<button type="button" data-descombi="' + k + '">quitar de la lista</button></li>';
-          }).join('') + '</ul>'
+          }).join('') + '</ul>' +
+          '<button type="button" data-curar-aplica>' +
+            (APLICADAS ? 'Volver a ponerlas todas'
+                       : 'Quitarlas ya (' + combis.length + ')') +
+          '</button>' +
+          '<p class="pv-curar-dicho">' +
+            (APLICADAS
+              ? 'Quitadas <b>en este navegador</b>. Para que desaparezcan ' +
+                'para todo el mundo, cópiame la lista y las escribo en la ficha.'
+              : 'Marcadas, pero todavía en pie. Púlsalo y desaparecen del ' +
+                'configurador para que veas cómo queda.') +
+          '</p>'
         : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: ' +
-          'sigue todo en pie hasta que me pases la lista.</p>') +
+          'sigue todo en pie hasta que lo confirmes.</p>') +
       '<hr>' +
       '<b>Opciones quitadas del todo (' + claves.length + ')</b>' +
       (claves.length
@@ -2106,9 +2186,15 @@
       return;
     }
     var dc = ev.target.closest('[data-descombi]');
-    if (dc) { delete COMBIS[dc.dataset.descombi]; guardaCombis(); panelCurar(); return; }
+    if (dc) { delete COMBIS[dc.dataset.descombi]; guardaCombis(); pinta(); panelCurar(); return; }
+    if (ev.target.closest('[data-curar-aplica]')) {
+      APLICADAS = !APLICADAS; guardaAplicadas();
+      pinta(); escapaDeMarcada(); panelCurar();
+      return;
+    }
     if (ev.target.closest('[data-curar-vacia]')) {
-      QUITADAS = {}; COMBIS = {}; guardaQuitadas(); guardaCombis(); pinta(); panelCurar();
+      QUITADAS = {}; COMBIS = {}; APLICADAS = false;
+      guardaQuitadas(); guardaCombis(); guardaAplicadas(); pinta(); panelCurar();
       return;
     }
     if (ev.target.closest('[data-curar-copia]')) {
@@ -2127,18 +2213,7 @@
       /* El grupo de color sirve al nato y al ante, y cada uno guarda el suyo.
          El ante lo lleva ya el Murph Y el khaki de la 12/24, así que la
          condición es la correa, no el estilo. */
-      if (g === 'duo') e.duo = !e.duo;
-      else if (g === 'color' && e.correa === 'ANTE') e.ante = b.dataset.v;
-      else if (g === 'color' && e.correa === 'NATO') e.nato = b.dataset.v;
-      else if (g === 'color' && e.correa === 'PIELO') e.pielk = b.dataset.v;
-      /* En el Murph el color de la piel ES la correa: negra, marrón y
-         verde son tres correas distintas con tres costes, aunque el
-         cliente solo vea un botón «Piel» y tres tonos. */
-      else if (g === 'color' && e.estilo === 'M' && MURPH_CORREA[e.correa]) e.correa = b.dataset.v;
-      /* y pulsar «Piel» estando ya en una de ellas no te devuelve a la negra */
-      else if (g === 'correa' && b.dataset.v === 'PIELN' &&
-               e.estilo === 'M' && MURPH_CORREA[e.correa]) { /* ya estás */ }
-      else e[g] = b.dataset.v;
+      aplicaOpcion(g, b.dataset.v);
       /* Lo que pides con el botón de la correa se queda anotado: es a lo
          que hay que volver cuando una caja te la haya quitado. */
       if (g === 'correa') e.correaPedida = b.dataset.v;
