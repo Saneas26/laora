@@ -44,6 +44,11 @@ Viene montada, con esfera y agujas dentro. **Siete combinaciones:**
 De la **nº 6** dio además el desglose por piezas: **esfera 8,99 · agujas 4,79 ·
 caja + bisel 23,79**.
 
+**Las siete son la lista completa: no hay más.** La captura del 16/08 recogía
+otras dos que el proveedor sí monta —**esfera verde** (SKU NO.27) y **esfera
+azul con bisel azul** (NO.29)— y Óscar las mató el 27/08: «el verde y azul no
+los quiero ya». Quedan como **RETIRADA** en las piezas P-005 y P-006 del libro.
+
 ### Brazalete de acero — 19,79 €, aparte
 No va dentro de ninguna de las cajas de arriba.
 
