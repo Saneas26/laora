@@ -243,6 +243,19 @@
   }
   .pv-curar-ok{ margin-left:10px; font-size:13px; color:#4A4A4A }
   .pv-curar-ok[hidden]{ display:none }
+  /* EL AVISO, LEGIBLE SOBRE CUALQUIER FONDO (27/08/2026). Desde que las
+     fotos del Lunar traen su fondo pintado, el gris #6b6664 de la hoja
+     compartida se queda corto: medido, cae a 2,91:1 sobre el azul marino y a
+     2,71:1 sobre el oro rosa, cuando sobre el fondo claro de la ficha daba
+     4,66:1. Se le pone una chapita clara debajo y vuelve a leerse en los
+     tres. Va aquí y no en producto-2026.css porque esa hoja la usan todas
+     las fichas y las demás no tienen este problema. */
+  .pv-hero .pv-aviso{
+    color:#3a3735;
+    background:rgba(255,255,255,.88);
+    padding:3px 7px; border-radius:3px;
+    right:8px; bottom:6px;
+  }
 </style>
 </head>
 <body><header class="site-header">
