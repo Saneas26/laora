@@ -428,10 +428,16 @@
   };
   var ESFERAS = {
     NEG: { nombre: 'Negra', coste: 0,
-           tec: 'Esfera negra con tres contadores, índices aplicados y lumen.' }
+           tec: 'Esfera negra con tres contadores, índices aplicados y lumen.' },
+    /* La blanca lleva los tres contadores en azul: es una sola esfera, no
+       una blanca a la que luego se le elija el color de los contadores. */
+    BLA: { nombre: 'Blanca', coste: 0,
+           tec: 'Esfera plateada con los tres contadores en azul, índices ' +
+                'aplicados y lumen.' }
   };
   var BISELES = {
-    NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' }
+    NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' },
+    AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul' }
   };
   var AGUJAS = {
     BLA: { nombre: 'Blancas', coste: 0, tec: 'agujas blancas con lumen' }
@@ -454,7 +460,8 @@
   var SERIE_V = '?v=1';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
-    'acero-negra-bnegro-blancas-brazalete': 1
+    'acero-negra-bnegro-blancas-brazalete': 1,
+    'acero-blanca-bazul-blancas-brazalete': 1
   };
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
@@ -580,8 +587,8 @@
      retoque, la ficha pide una foto que no existe y sale el cartel sin que
      nadie haya tocado una imagen. Así lo hace el Trinchera. */
   var SERIE_CAJA   = { PL: 'acero' };
-  var SERIE_ESF    = { NEG: 'negra' };
-  var SERIE_BISEL  = { NEG: 'bnegro' };
+  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca' };
+  var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul' };
   var SERIE_AGUJAS = { BLA: 'blancas' };
   var SERIE_CORREA = { ACERO: 'brazalete' };
   function claveSerie() {
