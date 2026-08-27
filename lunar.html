@@ -902,6 +902,65 @@
   panelCurar();
 })();
 </script>
+<!-- ============ LA LUPA ============
+     La foto a pantalla completa, con la de 1600 —que es la que hay— y el
+     pie diciendo qué reloj es. Se cierra con la equis, con Escape o
+     pulsando fuera. Vive fuera de la ficha para que ningún «position» de
+     la columna pegajosa la recorte. -->
+<div class="pv-lupa" data-pv-lupa hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button type="button" class="pv-lupa-cerrar" data-pv-lupa-cerrar aria-label="Cerrar la foto">&#10005;</button>
+  <!-- sin `src` de partida: vacío, el navegador se pide la propia página
+       como si fuera una imagen. La lupa se lo pone al abrirse. -->
+  <img data-pv-lupa-img alt="">
+  <p class="pv-lupa-pie" data-pv-lupa-pie></p>
+</div>
+
+<script>
+/* La lupa del visor. Aparte del configurador a propósito: no toca su
+   estado, solo lee la foto que ya está puesta. */
+(function () {
+  var capa   = document.querySelector('[data-pv-lupa]');
+  var grande = document.querySelector('[data-pv-lupa-img]');
+  var pie    = document.querySelector('[data-pv-lupa-pie]');
+  var foto   = document.querySelector('[data-pv-foto]');
+  if (!capa || !grande || !foto) return;
+  var devolverElFoco = null;
+
+  function abrir() {
+    /* Si no hay foto puesta no hay nada que ampliar. */
+    if (foto.hidden || !foto.getAttribute('src')) return;
+    /* Se lee el ATRIBUTO src, no currentSrc: currentSrc es la que el
+       navegador tiene cargada, y va por detrás —al abrir la lupa justo
+       después de cambiar de correa enseñaba la foto anterior—. El
+       atributo lo acaba de escribir pinta(), así que siempre es el
+       reloj que el cliente ve elegido. La de 1600 es la mayor que hay. */
+    grande.src = foto.getAttribute('src').replace('/1200/', '/1600/');
+    grande.alt = foto.alt;
+    pie.textContent = foto.alt;
+    capa.hidden = false;
+    document.body.style.overflow = 'hidden';
+    devolverElFoco = document.activeElement;
+    document.querySelector('[data-pv-lupa-cerrar]').focus();
+  }
+  function cerrar() {
+    capa.hidden = true;
+    document.body.style.overflow = '';
+    if (devolverElFoco && devolverElFoco.focus) devolverElFoco.focus();
+  }
+
+  foto.addEventListener('click', abrir);
+  document.addEventListener('click', function (ev) {
+    if (ev.target.closest('[data-pv-ampliar]')) { abrir(); return; }
+    if (ev.target.closest('[data-pv-lupa-cerrar]')) { cerrar(); return; }
+    /* pulsar el fondo cierra; pulsar la foto, no */
+    if (ev.target === capa) cerrar();
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !capa.hidden) cerrar();
+  });
+})();
+</script>
+
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>
