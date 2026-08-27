@@ -427,7 +427,7 @@
   var MOVS = {
     MQ: { nombre: 'Mecacuarzo japonés', cal: 'LO_MQ326', coste: 0,
           tec: 'Mecacuarzo japonés, calibre LO_MQ326: cronógrafo de tres ' +
-               'contadores con aguja de barrido.' }
+               'contadores, aguja de barrido y fecha.' }
   };
   var CAJAS = {
     PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0 }
@@ -474,6 +474,11 @@
   };
   /* El cristal no se elige: es de la casa y va en la ficha técnica. */
   var CRISTAL = 'cristal mineral';
+  /* LA FECHA LA LLEVAN TODOS (Óscar, 27/08/2026). No se elige, así que va
+     escrita en la ficha y no en el configurador. ⚠️ Las dos fotos que había
+     publicadas —la esfera negra y la blanca con agujas plata— se hicieron
+     SIN ventanilla y hay que rehacerlas. */
+  var FECHA = 'Ventanilla de fecha a las 4:30.';
   var LOGO = 3.78;
 
   /* LAS FOTOS QUE EXISTEN, y nada más. Una línea por foto publicada, y se
@@ -841,8 +846,8 @@
       'Caja de ' + CAJAS[e.caja].mat + ', ' + CRISTAL + '. ' + agua() + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent =
-      ESFERAS[e.esf].tec + ' Bisel: ' + BISELES[e.bisel].tec + '. Agujas: ' +
-      AGUJAS[e.agujas].tec + '.';
+      ESFERAS[e.esf].tec + ' ' + FECHA + ' Bisel: ' + BISELES[e.bisel].tec +
+      '. Agujas: ' + AGUJAS[e.agujas].tec + '.';
     $('[data-pv-tec="agua"]').textContent = agua() + '.';
 
     abrirPasos();
