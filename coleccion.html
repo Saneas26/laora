@@ -26,7 +26,7 @@
 <!-- `cabecera.css`: dentro está `.cb-marca`, el logotipo dibujado con
      la O como círculo. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=39">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=41">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -115,29 +115,36 @@
       <div class="cv2-cal-rejilla">
 
         <article class="cv2-cal-caja">
-          <p class="cv2-cal-tipo">Cuarzo</p>
-          <p class="cv2-cal-rotulo">Calibre</p>
-          <p class="cv2-cal-codigo">LO_Q6026</p>
+          <div class="cv2-cal-cab">
+            <p class="cv2-cal-tipo">Cuarzo</p>
+            <p class="cv2-cal-rotulo">Calibre</p>
+            <p class="cv2-cal-codigo">LO_Q6026</p>
+            <p class="cv2-cal-dato">60 meses de autonomía</p>
+          </div>
+          <p class="cv2-cal-quees"><a href="/laorateca.html#cuarzo-mecanico-automatico">¿Qué es un movimiento de cuarzo?</a></p>
           <p class="cv2-cal-lead">Misma eficiencia que</p>
           <ul class="cv2-cal-refs">
-            <li><span><b>Hamilton</b></span><em>495 €</em></li>
-            <li><span><b>Luminox</b></span><em>≈ 800 €</em></li>
-            <li><span><b>Longines</b></span><em>1.500 €</em></li>
+            <li><b>Hamilton</b><em>495 €</em></li>
+            <li><b>Luminox</b><em>≈ 800 €</em></li>
+            <li><b>Longines</b><em>1.500 €</em></li>
           </ul>
         </article>
 
         <article class="cv2-cal-caja">
-          <p class="cv2-cal-tipo">Automático</p>
-          <p class="cv2-cal-rotulo">Calibre</p>
-          <p class="cv2-cal-codigo">LO_A4026</p>
+          <div class="cv2-cal-cab">
+            <p class="cv2-cal-tipo">Automático</p>
+            <p class="cv2-cal-rotulo">Calibre</p>
+            <p class="cv2-cal-codigo">LO_A4026</p>
+            <p class="cv2-cal-dato">40 h de reserva de marcha</p>
+          </div>
+          <p class="cv2-cal-quees"><a href="/laorateca.html#cuarzo-mecanico-automatico">¿Qué es un movimiento automático?</a></p>
           <p class="cv2-cal-lead">Misma mecánica que</p>
           <ul class="cv2-cal-refs">
-            <li><span><b>Tudor</b> Submariner</span><em>3.000 €</em></li>
-            <li><span><b>Breitling</b> Superocean</span><em>5.500 €</em></li>
-            <li><span><b>TAG Heuer</b> Carrera</span><em>3.000 €</em></li>
+            <li><b>Tudor</b><span>Submariner</span><em>3.000 €</em></li>
+            <li><b>Breitling</b><span>Superocean</span><em>5.500 €</em></li>
+            <li><b>TAG Heuer</b><span>Carrera</span><em>3.000 €</em></li>
           </ul>
         </article>
-
       </div>
       <p class="cv2-cal-aviso">Precios orientativos consultados en agosto de 2026; pueden variar por referencia, estado, impuestos y envío. Las marcas citadas pertenecen a sus titulares y no están afiliadas a laOra.</p>
     </section>
@@ -277,26 +284,25 @@
         con un mecacuarzo japonés de aguja de barrido y al precio honesto.</p>
     </header>
 
-    <!-- EL CALIBRE DEL LUNAR (Óscar, 20/08/2026). El Lunar lleva un solo
-         motor, así que su caja va a lo ancho: a la izquierda el calibre,
-         a la derecha contra quién se mide. Mismo aviso legal que arriba. -->
+    <!-- EL CALIBRE DEL LUNAR. Un solo motor, así que la caja ocupa todo
+         el ancho. Mismo aviso legal que arriba. -->
     <section class="cv2-cal" aria-labelledby="cal-lunar">
       <h3 class="cv2-cal-titulo cv2-cal-frase" id="cal-lunar"><span>Ni el Omega ni el nuestro te llevarán a la LUNA,</span> pero al menos este te costará 35 veces menos y con más precisión.</h3>
       <div class="cv2-cal-rejilla cv2-cal-sola">
 
-        <article class="cv2-cal-caja cv2-cal-ancha">
-          <div class="cv2-cal-id">
+        <article class="cv2-cal-caja">
+          <div class="cv2-cal-cab">
             <p class="cv2-cal-tipo">Mecacuarzo</p>
             <p class="cv2-cal-rotulo">Calibre</p>
             <p class="cv2-cal-codigo">LO_MQ326</p>
+            <p class="cv2-cal-dato">Pila de unos 3 años</p>
           </div>
-          <div class="cv2-cal-vs">
-            <p class="cv2-cal-lead">Misma eficiencia que</p>
-            <ul class="cv2-cal-refs">
-              <li><span><b>IWC</b> Portugieser Chronograph</span><em>9.900 €</em></li>
-              <li><span><b>TAG Heuer</b> Carrera Calibre 16</span><em>5.200 €</em></li>
-            </ul>
-          </div>
+          <p class="cv2-cal-quees"><a href="/laorateca.html#mecacuarzo">¿Qué es un mecacuarzo?</a></p>
+          <p class="cv2-cal-lead">Misma eficiencia que</p>
+          <ul class="cv2-cal-refs">
+            <li><b>IWC</b><span>Portugieser Chronograph</span><em>9.900 €</em></li>
+            <li><b>TAG Heuer</b><span>Carrera Calibre 16</span><em>5.200 €</em></li>
+          </ul>
         </article>
 
       </div>
@@ -416,28 +422,27 @@
         automático de arquitectura suiza y ventana de fecha, al precio honesto.</p>
     </header>
 
-    <!-- EL CALIBRE DEL CERO CERO (Óscar, 21/08/2026). Sustituye al
-         «Automático Suizo» y a la línea de materiales. Un solo motor, así
-         que la caja va a lo ancho, como en el Lunar. El código sale de su
-         propia ficha: LO_A3826, arquitectura Suiza ETA 2824-2. -->
+    <!-- EL CALIBRE DEL CERO CERO. Un solo motor, así que la caja ocupa
+         todo el ancho. El código sale de su propia ficha: LO_A3826,
+         arquitectura Suiza ETA 2824-2. -->
     <section class="cv2-cal" aria-labelledby="cal-cerocero">
       <h3 class="cv2-cal-titulo" id="cal-cerocero">Nuestros calibres han movido <span>lo mejor de la relojería mundial</span></h3>
       <div class="cv2-cal-rejilla cv2-cal-sola">
 
-        <article class="cv2-cal-caja cv2-cal-ancha">
-          <div class="cv2-cal-id">
+        <article class="cv2-cal-caja">
+          <div class="cv2-cal-cab">
             <p class="cv2-cal-tipo">Automático</p>
             <p class="cv2-cal-rotulo">Calibre</p>
             <p class="cv2-cal-codigo">LO_A3826</p>
+            <p class="cv2-cal-dato">38 h de reserva de marcha</p>
           </div>
-          <div class="cv2-cal-vs">
-            <p class="cv2-cal-lead">Misma mecánica que</p>
-            <ul class="cv2-cal-refs">
-              <li><span><b>Longines</b> HydroConquest</span><em>2.000 €</em></li>
-              <li><span><b>Hamilton</b> Khaki Navy</span><em>1.000 €</em></li>
-              <li><span><b>Tissot</b> Le Locle Chronomètre</span><em>1.000 €</em></li>
-            </ul>
-          </div>
+          <p class="cv2-cal-quees"><a href="/laorateca.html#cuarzo-mecanico-automatico">¿Qué es un movimiento automático?</a></p>
+          <p class="cv2-cal-lead">Misma mecánica que</p>
+          <ul class="cv2-cal-refs">
+            <li><b>Longines</b><span>HydroConquest</span><em>2.000 €</em></li>
+            <li><b>Hamilton</b><span>Khaki Navy</span><em>1.000 €</em></li>
+            <li><b>Tissot</b><span>Le Locle Chronomètre</span><em>1.000 €</em></li>
+          </ul>
         </article>
 
       </div>

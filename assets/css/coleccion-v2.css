@@ -190,6 +190,25 @@
               url("/assets/img/cero-cero/editorial/espionaje-2560.avif") 2x);
   background-position:60% 46%;
 }
+/* LA CABECERA, EN UNA LÍNEA (Óscar, 24/08/2026). El tipo, el rótulo, el
+   código y el dato que de verdad importa —la autonomía o la reserva de
+   marcha— iban uno debajo de otro y el bloque se comía media pantalla.
+   Ahora van seguidos y el bloque mide la mitad. */
+.cv2-cal-cab{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;
+}
+.cv2-cal-cab>p{margin:0}
+.cv2-cal-dato{
+  font-size:15px;color:var(--cv2-gris);
+}
+/* El enlace a la laOrateca: pequeño, subrayado y sin gritar. Quien ya
+   sabe lo que es un cuarzo pasa de largo; quien no, tiene dónde ir. */
+.cv2-cal-quees{margin:8px 0 0;font-size:13.5px}
+.cv2-cal-quees a{
+  color:var(--cv2-gris);text-decoration:underline;text-underline-offset:3px;
+}
+.cv2-cal-quees a:hover{color:var(--cv2-negro)}
+
 /* Mientras un modelo no tenga su bloque de calibres, las dos líneas de
    movimiento y materiales también se aclaran sobre el lienzo. */
 .cv2-lienzo .cv2-sub{color:rgba(255,255,255,.66)}
@@ -245,7 +264,10 @@
 .cv2-lienzo .cv2-cal-rotulo{color:rgba(255,255,255,.62)}
 .cv2-lienzo .cv2-cal-codigo{color:#fff}
 .cv2-lienzo .cv2-cal-lead{border-top-color:rgba(255,255,255,.20)}
-.cv2-lienzo .cv2-cal-refs li{color:rgba(255,255,255,.72);border-bottom-color:rgba(255,255,255,.15)}
+.cv2-lienzo .cv2-cal-refs li{color:rgba(255,255,255,.72)}
+.cv2-lienzo .cv2-cal-dato{color:rgba(255,255,255,.72)}
+.cv2-lienzo .cv2-cal-quees a{color:rgba(255,255,255,.72)}
+.cv2-lienzo .cv2-cal-quees a:hover{color:#fff}
 .cv2-lienzo .cv2-cal-refs b,
 .cv2-lienzo .cv2-cal-refs em{color:#fff}
 .cv2-lienzo .cv2-cal-aviso{color:rgba(255,255,255,.62)}
@@ -288,44 +310,43 @@
   display:inline-block;background:var(--cv2-negro);color:#fff;
   font-family:var(--cv2-mono);font-size:12.5px;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;
-  padding:4px 10px;margin:0 0 18px;
+  padding:4px 10px;margin:0;
 }
 .cv2-cal-rotulo{
   font-family:var(--cv2-mono);font-size:12px;font-weight:700;
   letter-spacing:.18em;text-transform:uppercase;color:var(--cv2-gris);
-  margin:0 0 2px;
+  margin:0;
 }
 .cv2-cal-codigo{
   font-family:var(--cv2-mono);font-weight:700;
-  font-size:clamp(26px,3.1vw,38px);letter-spacing:-.02em;
-  color:var(--cv2-negro);margin:0 0 18px;
+  font-size:clamp(24px,2.8vw,34px);letter-spacing:-.02em;
+  color:var(--cv2-negro);margin:0;
 }
 .cv2-cal-lead{
   font-size:15px;font-weight:700;color:var(--cv2-oro);
-  margin:0 0 4px;padding-top:14px;border-top:1px solid var(--cv2-linea);
+  margin:0 0 10px;padding-top:14px;border-top:1px solid var(--cv2-linea);
 }
-.cv2-cal-refs{list-style:none;margin:0;padding:0}
+/* LAS REFERENCIAS, EN FILA (Óscar, 24/08/2026): una columna por marca,
+   el nombre arriba y el precio debajo. Antes era una lista de tres
+   renglones y sumaba altura sin decir nada más. */
+.cv2-cal-refs{
+  list-style:none;margin:0;padding:0;
+  /* En fila y pegadas a la izquierda, no repartidas: con dos marcas, una
+     rejilla de columnas iguales las mandaba a los extremos de la caja. */
+  display:flex;flex-wrap:wrap;gap:14px 36px;
+}
 .cv2-cal-refs li{
-  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  padding:11px 0;border-bottom:1px solid var(--cv2-linea);
-  font-size:15px;line-height:1.35;color:var(--cv2-gris);
+  display:flex;flex-direction:column;gap:1px;min-width:96px;
+  font-size:15px;line-height:1.3;color:var(--cv2-gris);
 }
-.cv2-cal-refs li:last-child{border-bottom:0;padding-bottom:0}
 .cv2-cal-refs b{color:var(--cv2-negro);font-weight:700}
+.cv2-cal-refs span{font-size:13.5px}
 .cv2-cal-refs em{
   font-family:var(--cv2-mono);font-style:normal;font-weight:700;
-  font-size:16px;color:var(--cv2-negro);white-space:nowrap;
+  font-size:17px;color:var(--cv2-negro);white-space:nowrap;margin-top:3px;
 }
-/* Cuando el modelo lleva un solo motor —el Lunar— la caja se estira a
-   todo lo ancho y se parte en dos: el calibre a la izquierda, contra
-   quién se mide a la derecha. En el teléfono vuelve a una columna. */
+/* Un solo motor —el Lunar, el Cero Cero— y la caja ocupa todo el ancho. */
 .cv2-cal-sola{grid-template-columns:1fr}
-.cv2-cal-ancha{
-  display:grid;grid-template-columns:minmax(200px,.85fr) 1.6fr;
-  gap:0 44px;align-items:start;
-}
-.cv2-cal-ancha .cv2-cal-codigo{margin-bottom:0}
-.cv2-cal-ancha .cv2-cal-lead{padding-top:0;border-top:0}
 
 .cv2-cal-aviso{
   font-size:13px;line-height:1.5;color:var(--cv2-gris);
@@ -535,9 +556,6 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-cal{margin:36px 0 32px}
   .cv2-cal-rejilla{grid-template-columns:1fr;gap:16px}
   .cv2-cal-caja{padding:20px}
-  .cv2-cal-ancha{grid-template-columns:1fr;gap:16px}
-  .cv2-cal-ancha .cv2-cal-codigo{margin-bottom:0}
-  .cv2-cal-ancha .cv2-cal-lead{padding-top:14px;border-top:1px solid var(--cv2-linea)}
   .cv2-cal-refs li{font-size:14px}
   .cv2-configura{font-size:15px;gap:12px}
   .cv2-configura::before{width:48px;height:23px}
