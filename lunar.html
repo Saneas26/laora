@@ -3,55 +3,246 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra Lunar: nuestro homenaje al Omega Speedmaster Moonwatch con cronógrafo mecacuarzo de tacto mecánico y venta al precio honesto. Configura caja, esfera y agujas.">
+<meta name="description" content="laOra Lunar: el cronógrafo de esfera negra y bisel de taquímetro, montado en Madrid y vendido al precio honesto.">
 <meta property="og:title" content="Lunar · laOra">
-<meta property="og:description" content="laOra Lunar: nuestro homenaje al Omega Speedmaster Moonwatch con cronógrafo mecacuarzo de tacto mecánico y venta al precio honesto. Configura caja, esfera y agujas.">
+<meta property="og:description" content="laOra Lunar: el cronógrafo de esfera negra y bisel de taquímetro, montado en Madrid y vendido al precio honesto.">
 <meta property="og:url" content="https://laora.es/lunar.html">
-<meta property="og:image" content="https://laora.es/assets/img/lunar-config/heads/cab-acero-bnegro-agujas-plateadas.webp">
 <meta property="og:locale" content="es_ES">
 <meta property="og:type" content="website">
 <title>Lunar · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- FICHA DE PRODUCTO 2026 (patrón Hamilton, el mismo del Trinchera) con
-     el CONFIGURADOR POR CAPAS del 17/08/2026: la foto ya no es una
-     imagen por combinación, sino fondo #EAE8E8 → correa → cabeza, y
-     cambiar de opción es cambiar el src de una capa.
-     El paquete de activos manda: /assets/img/lunar-config/manifest.json
-     es la ÚNICA fuente de las cabezas y las correas. Las cabezas van
-     alineadas a la geometría de cab-acero-bnegro-agujas-plateadas
-     (herramientas/alinear_cabezas.py), así que ninguna baila.
-     Motor de precio: el de la casa, SIN logo, como siempre el Lunar. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<!-- EL LUNAR, DESDE CERO (Óscar, 26/08/2026): «el lunar lo vamos a hacer
+     desde cero de nuevo, nada de lo que hay me interesa del lunar en el
+     configurador» y «desde cero, por tanto todo lo anterior no nos vale».
+     Esta página no tiene una línea de la anterior: se ha escrito con el
+     MECANISMO del Trinchera, que es lo que Óscar pidió —los pasos que se
+     abren de uno en uno, los botones que se dibujan desde una tabla, la
+     clave de foto, la firma de la combinación y el modo `?curar`—, pero con
+     el catálogo del Lunar, que hoy es una sola configuración.
+
+     PÁGINA ESCRITA A MANO: el generador no la toca (NO_GENERAR).
+
+     LA BASE, dicha por Óscar el 26/08/2026: esfera negra, bisel negro de
+     taquímetro, agujas blancas, caja de acero, brazalete de acero y cristal
+     mineral. Todo lo que se añada a partir de aquí entra en las tablas de
+     abajo, no en el HTML. -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/nunito-sans-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fuentes.css?v=1">
 <link rel="stylesheet" href="/assets/css/laora.css?v=52">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=43">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
 <style>
-  /* El hero deja de ser una foto y pasa a ser el configurador: dos capas
-     sobre el fondo de estudio, sin recortes ni transformaciones. */
-  .pv-hero.pv-capas{ background:#EAE8E8 }
-  .pv-hero img.pv-capa{ position:absolute; inset:0; width:100%; height:100%;
-                        object-fit:contain; pointer-events:none }
-  /* SOLO EL DISCO. Cuando la caja de la cabeza es la misma que la de la
-     foto, de la cabeza solo cae dentro la esfera con su bisel: la caja,
-     las asas y el encuentro con la correa son los de la foto de verdad.
-     La máscara es un SVG con el mismo lienzo (1254) que las fotos y se
-     coloca igual que ellas —contain y centrada—, así que cuadra sea cual
-     sea la forma del marco; con clip-path habría que saber el alto.
-     EL CÍRCULO NO SE TOCA A OJO: es el borde exterior del bisel medido por
-     herramientas/_bisel_lunar.py —centro (628,2 · 567,3) y R=370—, con
-     medio píxel de margen para que nunca asome el acero de la cabeza. */
-  .pv-hero img.pv-capa.pv-disco{
-    -webkit-mask-image:var(--disco); mask-image:var(--disco);
-    -webkit-mask-size:contain; mask-size:contain;
-    -webkit-mask-position:center; mask-position:center;
-    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat }
-  .pv-capas{ --disco:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1254 1254'%3E%3Ccircle cx='628.2' cy='567.3' r='368.5' fill='%23fff'/%3E%3C/svg%3E") }
+  /* La fila del diámetro y el movimiento (Óscar, 24/08/2026). Solo en esta
+     ficha: el resto de configuradores sigue con un paso por línea. */
+  .pv-fila-cabeza{
+    display:flex; flex-wrap:wrap; gap:18px 28px;
+    align-items:flex-start; justify-content:space-between;
+  }
+  /* `space-between` y no `margin-left:auto`: cuando la columna se estrecha y
+     los dos grupos ya no caben, cada uno se queda en su renglón y alineado a
+     la izquierda. Con el margen automático, el del movimiento se iba solo a
+     la derecha en su propia línea y parecía descolgado. */
+  .pv-fila-cabeza>.pv-grupo{ flex:0 1 auto }
+  /* Un paso que todavía no toca. Va con clase y no con `hidden` porque
+     `hidden` ya lo usan los grupos para su propia lógica. */
+  .pv-cerrado{ display:none !important }
+
+  /* UNA LÍNEA ENTRE SECCIONES (Óscar, 26/08/2026): «entre cada sección
+     quiero una línea delgada y elegante que separe cada una de las
+     secciones». Un pelo de 1 px del gris de la casa —el mismo `--cv2-linea`
+     que ya separa los desplegables de la ficha técnica—, con aire a los dos
+     lados para que separe sin hacer ruido. */
+  .pv-info .pv-fila + .pv-fila{
+    border-top:1px solid var(--cv2-linea);
+    padding-top:20px; margin-top:20px;
+  }
+  /* ENTRE EL TAMAÑO Y EL MOVIMIENTO LA LÍNEA ES VERTICAL, porque esos dos
+     van uno al lado del otro (Óscar, 24/08). */
+  .pv-fila-cabeza>.pv-grupo+.pv-grupo{
+    border-left:1px solid var(--cv2-linea);
+    padding-left:28px;
+  }
+  /* Y SE PONE HORIZONTAL cuando la columna se estrecha y se apilan. Los dos
+     grupos necesitan 453 px y la columna es el 36 % del ancho de pantalla,
+     así que dejan de caber sobre los 1.260. Sin esto quedaría un palito
+     vertical suelto encima del movimiento. Se fuerza el apilado en vez de
+     dejarlo al `wrap` para que la línea y la ruptura ocurran a la vez. */
+  @media (max-width:1260px){
+    .pv-fila-cabeza>.pv-grupo{ flex:0 0 100% }
+    .pv-fila-cabeza>.pv-grupo+.pv-grupo{
+      border-left:0; padding-left:0;
+      border-top:1px solid var(--cv2-linea);
+      padding-top:18px;
+    }
+  }
+
+  /* La miniatura de la correa abierta, con su pie. Va en la misma esquina
+     que las otras dos y con el mismo ancho; el `figure` necesita su propio
+     [hidden] porque, igual que el cartel, trae display propio. */
+  .pv-mini-fig{ margin:0; display:flex; flex-direction:column; align-items:center; gap:4px }
+  .pv-mini-fig[hidden]{ display:none }
+  /* Esta va por ALTURA y no por anchura: la correa extendida es 1:4, y
+     dándole el 24% de ancho como a las otras minis se salía del visor por
+     abajo. El `.pv-hero img.pv-mini{width:24%}` de la hoja compartida hay
+     que ganárselo con el selector puesto delante. */
+  .pv-hero .pv-mini-fig img{
+    width:auto !important; display:block;
+    /* el alto lo manda el VISOR, no la ventana: así la correa y su pie
+       caben siempre dentro del marco, que es cuadrado */
+    height:min(26vw, 150px); object-fit:contain;
+  }
+  .pv-mini-fig figcaption{
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    font-size:11px; color:var(--cv2-gris); text-align:center;
+  }
+
+  /* LA LETRA DE LA FICHA (Óscar, 24/08/2026): Montserrat en los titulares,
+     Nunito Sans en el texto de las opciones, ninguna serifa y CERO
+     interletrado. Va aquí y no en producto-2026.css porque de momento es
+     solo este configurador. */
+  .pv-info, .pv-info *{ letter-spacing:normal !important }
+  /* Primero lo general —todo lo que se lee corrido va en Nunito Sans— y
+     DESPUÉS los titulares en Montserrat. En este orden, porque `.pv-rotulo`
+     y `.pv-precio` son párrafos: con las reglas al revés, la genérica de
+     `.pv-info p` los pisaba y salían en Nunito. */
+  .pv-info p, .pv-info li, .pv-info small, .pv-info a,
+  .pv-opciones button, .pv-fijo, .pv-sinfoto{
+    font-family:'Nunito Sans', system-ui, sans-serif !important;
+  }
+  /* Con `.pv-info` delante a propósito: el rótulo y el precio son párrafos,
+     y `.pv-info p` (una clase + un elemento) pesa más que `.pv-rotulo` a
+     secas. Sin esto ganaba la regla de Nunito por especificidad, no por
+     orden, y los titulares salían con la letra del texto. */
+  .pv-info h1, .pv-info .pv-rotulo, .pv-info .pv-chip, .pv-info .pv-codigo,
+  .pv-info .pv-precio, .pv-info .pv-comprar, .pv-comprar{
+    font-family:'Montserrat', system-ui, sans-serif !important;
+  }
+  .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
+  /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
+     y no hace falta gritar. */
+  /* LA ESCALA: DOS TAMAÑOS Y NADA MÁS. 22 px para el título de cada fila y
+     16 px —el tamaño base del navegador— para todo lo demás. Un salto de
+     1,38 y se acabó.
+
+     Antes iba con cuatro escalones y no valía: 17 px para los botones choca
+     con los 16 px del cuerpo de la página, que también cuenta, y dos
+     tamaños separados por un píxel no son jerarquía, son ruido. Lo que
+     distingue un rótulo pequeño de un botón es el COLOR, no un píxel.
+
+     De paso los rótulos pequeños suben de 13 a 16 px, que se leen mucho
+     mejor: aquí la legibilidad manda sobre todo lo demás. */
+  .pv-info .pv-rotulo{ text-transform:none; font-size:22px; line-height:1.25 }
+  /* LA LETRA SUBE Y EL RELLENO CON ELLA. El 24/08 la letra de los botones
+     pasó de 13 a 16 px y se quedó el relleno del CSS base —11 px arriba y
+     14 a los lados—, que estaba calculado para la letra pequeña: el texto
+     quedaba pegado al recuadro. Sube en la misma proporción, 16/13. */
+  .pv-info .pv-opciones button{
+    text-transform:none; font-size:16px;
+    padding:14px 17px;
+  }
+
+  /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
+     cuando está señalado, «recuadro blanco y letras negras» cuando no.
+     El amarillo es el oro de la marca, el mismo del rótulo NUEVO. Sobre
+     negro da 9,4:1, así que se lee de sobra. */
+  .pv-info .pv-opciones button{
+    background:#fff; color:#121414;
+    border:1px solid rgba(18,20,20,.28);
+  }
+  .pv-info .pv-opciones button:hover{ border-color:#121414 }
+  .pv-info .pv-opciones button[aria-pressed="true"]{
+    background:var(--cv2-oro); color:#121414; border-color:var(--cv2-oro);
+  }
+  /* el filete de debajo era la marca de «elegido»; ahora lo dice el
+     propio recuadro, así que sobra */
+  .pv-info .pv-opciones button[aria-pressed="true"]::after{ display:none }
+  .pv-info .pv-opciones button[disabled]{
+    background:#fff; color:#121414; opacity:.4;
+  }
+
+  /* El calibre, debajo de la fila y solo cuando ya has elegido. */
+  .pv-calibre{
+    margin:2px 0 0; font-size:16px; color:#4A4A4A;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-calibre[hidden]{ display:none }
+
+  /* LAS CUATRO FILAS. Sin los círculos numerados de antes: la estructura
+     que pidió Óscar el 24/08/2026 son cuatro bloques, no seis pasos, y el
+     número dejaba de cuadrar. */
+  .pv-info .pv-grupo>.pv-rotulo::before{ display:none }
+  .pv-info .pv-rotulo{ padding-left:0 }
+  .pv-fila{ display:flex; flex-direction:column; gap:12px }
+  /* LA ESFERA, EN UNA SOLA LÍNEA (Óscar, 24/08/2026): el estilo —Khaki o
+     Murph— y el color van uno al lado del otro, no en dos renglones. El
+     rótulo, lo que cuelga y la frase fija siguen ocupando su línea
+     entera; si la columna se estrecha, los dos grupos se reparten solos
+     en dos renglones. */
+  .pv-fila[data-paso="estilo"]{
+    flex-direction:row; flex-wrap:wrap; align-items:center; gap:12px 26px;
+  }
+  .pv-fila[data-paso="estilo"]>.pv-rotulo,
+  .pv-fila[data-paso="estilo"]>.pv-sub,
+  .pv-fila[data-paso="estilo"]>.pv-fijo{ flex:0 0 100% }
+  /* Lo que cuelga de una fila —el segundero, el color, el cierre— va un
+     escalón por dentro, para que se lea como parte de ella y no como otra
+     pregunta al mismo nivel. */
+  .pv-sub{ display:flex; flex-direction:column; gap:8px; padding-left:14px;
+           border-left:2px solid rgba(18,20,20,.12) }
+  .pv-sub[hidden]{ display:none }
+  .pv-subrotulo{
+    margin:0; font-size:16px; color:#4A4A4A;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    display:flex; justify-content:space-between; gap:10px;
+  }
+  .pv-subrotulo b{ font-weight:400; color:#121414 }
+  /* `hidden` NO PUEDE CON UN `display` DE LA HOJA. `.pv-klarna` y
+     `.pv-stock` se pintan con `display:flex` en producto-2026.css, y eso le
+     gana a la regla del navegador para `[hidden]`: la caja de los plazos y
+     el punto verde de «Disponible» se quedaban puestos con el precio sin
+     definir, diciendo dos cosas que no son verdad. */
+  .pv-klarna[hidden], .pv-stock[hidden]{ display:none !important }
+
+  /* EL MODO CURAR (Óscar, 26/08/2026), que solo existe con `?curar` en la
+     dirección. El aspa roja de cada botón se fue el mismo día: quitaba una
+     opción de TODAS las combinaciones y no era lo que hacía falta. Queda el
+     panel, que marca combinaciones enteras. */
+  .pv-curar{
+    position:fixed; right:16px; bottom:16px; z-index:60;
+    width:320px; max-height:62vh; overflow:auto; padding:14px 16px;
+    background:#fff; border:1px solid rgba(18,20,20,.28);
+    box-shadow:0 6px 24px rgba(0,0,0,.18);
+    font-family:'Nunito Sans', system-ui, sans-serif; font-size:15px;
+    line-height:1.45; color:#121414;
+  }
+  .pv-curar ul{ margin:10px 0; padding:0; list-style:none }
+  .pv-curar li{ display:flex; align-items:center; justify-content:space-between;
+                gap:10px; padding:9px 0; border-top:1px solid rgba(18,20,20,.12) }
+  .pv-curar code{ font-size:14px; word-break:break-all }
+  .pv-curar hr{ border:0; border-top:1px solid rgba(18,20,20,.14); margin:14px 0 }
+  .pv-curar > b{ display:block; margin-bottom:6px }
+  .pv-curar p{ margin:0 0 10px }
+  .pv-curar-dicho{ color:#4A4A4A }
+  .pv-curar li span{ flex:1 1 auto }
+  .pv-curar button{ font-size:13px; padding:9px 12px; cursor:pointer;
+    background:#fff; color:#121414; border:1px solid rgba(18,20,20,.28);
+    font-family:inherit; white-space:nowrap }
+  /* El cuadro con la lista para pasármela. Un `textarea` a pelo trae el
+     borde y los dos píxeles de relleno del navegador, y el texto queda
+     pegado a la raya. */
+  .pv-curar-texto{
+    display:block; width:100%; box-sizing:border-box; margin:0 0 12px;
+    padding:10px 12px; font-family:ui-monospace, Menlo, monospace;
+    font-size:12px; line-height:1.5; color:#121414;
+    background:#fafaf8; border:1px solid rgba(18,20,20,.28); resize:vertical;
+  }
+  .pv-curar-ok{ margin-left:10px; font-size:13px; color:#4A4A4A }
+  .pv-curar-ok[hidden]{ display:none }
 </style>
 </head>
 <body><header class="site-header">
@@ -71,37 +262,20 @@
     <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
   </div>
 </header>
-
 <main class="cv2">
 
   <div class="pv-cuerpo pv-visor-fijo">
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
-      <div class="pv-hero pv-capas">
-        <!-- La correa de salida va YA en el HTML —es lo primero que se ve y
-             no debe esperar al manifiesto—, pero en AVIF y con sus tres
-             tamaños. El data-puesta es la ruta del manifiesto: así pinta()
-             sabe que esta capa ya está y no la vuelve a pedir en webp. -->
-        <img class="pv-capa" data-pv-correa-img alt="Brazalete del Lunar"
-             data-puesta="/assets/img/lunar-config/straps/brazalete-acero-316l-cinco-columnas.webp?v=12"
-             src="/assets/img/lunar-config/straps/1254/brazalete-acero-316l-cinco-columnas.avif?v=12"
-             srcset="/assets/img/lunar-config/straps/480/brazalete-acero-316l-cinco-columnas.avif?v=12 480w,
-                     /assets/img/lunar-config/straps/800/brazalete-acero-316l-cinco-columnas.avif?v=12 800w,
-                     /assets/img/lunar-config/straps/1254/brazalete-acero-316l-cinco-columnas.avif?v=12 1254w"
-             sizes="(max-width:900px) 100vw, 46vw">
-        <!-- SIN src: estas tres entran OCULTAS y el navegador se las bajaba
-             igual. Eran 345 KB de los 513 de la primera pantalla, para no
-             enseñar nada. Las pone pinta() cuando de verdad se ven. -->
-        <img class="pv-capa" data-pv-cabeza-img alt="laOra Lunar" hidden>
-        <div class="pv-minis">
-          <img class="pv-mini" data-pv-hebilla-img alt="Hebilla del Lunar" hidden>
-          <img class="pv-mini" data-pv-tapa-img alt="Tapa trasera del Lunar" hidden>
+      <div class="pv-hero pv-hero-llena">
+        <img data-pv-foto alt="laOra Lunar" hidden>
+        <div class="pv-sinfoto" data-pv-sinfoto>
+          <p>Fotografía en preparación</p>
+          <span>El Lunar se está rehaciendo entero. Aquí no se enseña ninguna imagen hasta que sea la del reloj elegido.</span>
         </div>
         <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
-        <!-- Ampliar: además del clic en la foto, un botón de verdad, que
-             con el teclado a una imagen no se llega. -->
-        <button type="button" class="pv-ampliar" data-pv-ampliar>Ampliar</button>
+        <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
       </div>
     </div>
 
@@ -113,52 +287,38 @@
           <span class="cv2-chip">LO-03 · Cronógrafo</span>
         </div>
         <h1>Lunar</h1>
-        <!-- El párrafo del homenaje se quitó por orden de Óscar (21/08/2026):
-             aquí se configura, no se cuenta. -->
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Movimiento <b data-pv-cal>Calibre LO_MQ326</b></p>
-          <p class="pv-fijo">Mecacuarzo japonés · cronógrafo de tacto mecánico</p>
+        <!-- «Movimiento» a secas, no «Movimiento suizo». El rótulo del
+             Trinchera dice suizo porque sus calibres lo son; del Lunar
+             nuevo todavía no se sabe, y afirmarlo sería inventarse una
+             procedencia en una página de venta. -->
+        <div class="pv-fila pv-grupo" data-paso="mov">
+          <p class="pv-rotulo">Movimiento</p>
+          <div class="pv-opciones" data-pv="mov"></div>
+        </div>
+        <p class="pv-calibre" data-pv-calibre hidden><span data-pv-cal>Calibre</span></p>
+
+        <div class="pv-fila pv-grupo" data-paso="esf">
+          <p class="pv-rotulo">Esfera</p>
+          <div class="pv-opciones" data-pv="esf"></div>
+          <div class="pv-sub" data-cuelga="bisel" data-pv-grupo-bisel hidden>
+            <p class="pv-subrotulo">Bisel</p>
+            <div class="pv-opciones" data-pv="bisel"></div>
+          </div>
+          <div class="pv-sub" data-cuelga="agujas" data-pv-grupo-agujas hidden>
+            <p class="pv-subrotulo">Agujas</p>
+            <div class="pv-opciones" data-pv="agujas"></div>
+          </div>
         </div>
 
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Caja</p>
+        <div class="pv-fila pv-grupo" data-paso="caja">
+          <p class="pv-rotulo">Acabado de caja</p>
           <div class="pv-opciones" data-pv="caja"></div>
         </div>
 
-        <div class="pv-grupo" data-pv-grupo="tapa">
-          <p class="pv-rotulo">Tapa <b>Sin cambio de precio</b></p>
-          <div class="pv-opciones" data-pv="tapa"></div>
-        </div>
-
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Esfera</p>
-          <div class="pv-opciones" data-pv="esfera"></div>
-        </div>
-
-        <div class="pv-grupo">
-          <p class="pv-rotulo">Agujas</p>
-          <div class="pv-opciones" data-pv="agujas"></div>
-        </div>
-
-        <div class="pv-grupo">
+        <div class="pv-fila pv-grupo" data-paso="correa">
           <p class="pv-rotulo">Correa</p>
-          <div class="pv-opciones" data-pv="tipo"></div>
-        </div>
-
-        <div class="pv-grupo" data-pv-grupo="color">
-          <p class="pv-rotulo">Color <b data-pv-color>Negro</b></p>
-          <div class="pv-opciones pv-colores" data-pv="color"></div>
-        </div>
-
-        <div class="pv-grupo" data-pv-grupo="pespunte">
-          <p class="pv-rotulo">Pespunte</p>
-          <div class="pv-opciones" data-pv="pespunte"></div>
-        </div>
-
-        <div class="pv-grupo" data-pv-grupo="cierre">
-          <p class="pv-rotulo">Cierre <b data-pv-cierre>Hebilla de pinza</b></p>
-          <div class="pv-opciones" data-pv="cierre"></div>
+          <div class="pv-opciones" data-pv="correa"></div>
         </div>
 
       </div>
@@ -166,19 +326,19 @@
       <!-- El pie de compra: fijo bajo las elecciones hasta la Ficha Técnica -->
       <div class="pv-pie" data-pv-pie>
         <div class="pv-precio-fila">
-          <p class="pv-precio" data-pv-precio>189,90 €</p>
+          <p class="pv-precio" data-pv-precio>269,90 €</p>
           <p class="pv-stock"><span>Disponible</span><i aria-hidden="true"></i></p>
         </div>
         <p class="pv-imp">Impuestos incluidos.</p>
         <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
 
-        <!-- La caja de Klarna, debajo del botón. OJO: solo se anuncia lo
-             que Mollie tiene aprobado —tres plazos sin intereses—. Nada
-             de «desde X €/mes con su TAE»: eso es financiación a largo
-             plazo, otro producto, y anunciarla sin tenerla sería
-             publicidad financiera falsa. -->
+        <!-- La caja de Klarna, debajo del botón, igual que en el Lunar. OJO:
+             solo se anuncia lo que Mollie tiene aprobado —tres plazos sin
+             intereses—. Nada de «desde X €/mes con su TAE»: eso es otro
+             producto y anunciarlo sin tenerlo sería publicidad financiera
+             falsa. La cifra la calcula el guion con el precio de verdad. -->
         <p class="pv-klarna">
-          <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>63,30 €</b> con</span>
+          <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
           <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
           <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
         </p>
@@ -190,27 +350,8 @@
       </div>
     </aside>
 
-    <!-- Las fotos de apoyo: no salen hasta que se acaban las elecciones -->
-    <div class="pv-extras">
-      <figure><img src="/assets/img/lunar-config/catalogo/macro-esfera.webp" alt="Macro de la esfera y las subesferas del cronógrafo" loading="lazy"></figure>
-      <figure><img src="/assets/img/lunar-config/catalogo/en-muneca.webp" alt="El Lunar puesto en la muñeca" loading="lazy"></figure>
-      <figure><img src="/assets/img/lunar-config/catalogo/campana-astronauta.webp" alt="El Lunar en su mundo: un astronauta en la superficie lunar" loading="lazy"></figure>
-      <!-- Solo sale cuando se elige el brazalete negro PVD -->
-      <figure data-pv-extra="brazalete-negro-pvd" hidden><img src="/assets/img/lunar-config/catalogo/cierre-brazalete-negro-pvd.webp" alt="Cierre desplegable del brazalete negro PVD" loading="lazy"></figure>
-    </div>
-
   </div>
 
-  <!-- ============ LA MACRO ============
-       Va a todo lo ancho, entre el configurador y la ficha técnica: es
-       una foto de estudio en blanco y negro y pide sitio. -->
-  <figure class="pv-macro">
-    <img src="/assets/img/lunar-config/catalogo/macro-bisel-bn.webp"
-         alt="Macro del bisel taquimétrico del Lunar, con la esfera y el segundero al fondo"
-         loading="lazy" width="1440" height="1800">
-  </figure>
-
-  <!-- ============ LA FICHA TÉCNICA ============ -->
   <section class="pv-tecnica">
     <h2>Ficha Técnica</h2>
     <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
@@ -254,319 +395,213 @@
   </div>
   <small>© 2026 laOra® · Todos los derechos reservados<a class="pie-privacidad" href="/privacidad.html">Privacidad</a></small>
 </footer>
-
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=11"></script>
 <script>
+/* ============================================================
+   EL CONFIGURADOR DEL LUNAR 2026
+   Escrito desde cero (Óscar, 26/08/2026) con el MECANISMO del
+   Trinchera: los pasos que se abren de uno en uno, los botones que
+   se dibujan desde una tabla, la clave de foto, la firma de la
+   combinación, las vetadas y el modo `?curar`.
+   ============================================================ */
 (function () {
-  'use strict';
+  /* ============================================================
+     EL LUNAR · el catálogo
+     ------------------------------------------------------------
+     Una sola configuración de momento, que es la base que dio Óscar el
+     26/08/2026. Todo lo que se añada entra AQUÍ, no en el HTML: los pasos
+     se dibujan solos desde estas tablas, igual que en el Trinchera.
+     ============================================================ */
 
-  /* ---------- EL MATERIAL ---------- */
-  var MOV = {
-    cal: 'LO_MQ326', coste: 27.59, nombre: 'Mecacuarzo Japonés',
-    tec: "Calibre laOra LO_MQ326, mecacuarzo de fabricación japonesa. La hora la lleva un cuarzo de precisión y el cronógrafo lo mueve un módulo mecánico de verdad, con sus levas y sus martillos: el segundero arranca al instante, barre la esfera y regresa a cero de golpe, con tacto mecánico en cada pulsador. Precisión de ±20 segundos al mes y pila de unos 3 años."
+  /* El movimiento. El calibre y el coste están por decidir: el Lunar se
+     rehace desde cero y los números del viejo no valen. */
+  var MOVS = {
+    CR: { nombre: 'Cronógrafo', cal: 'por definir', coste: 0,
+          tec: 'Cronógrafo de tres contadores. Calibre por confirmar.' }
   };
-  /* Cajas del proveedor del 16/08 (anuncio 1005007892634303). El pack
-     trae caja + esfera + agujas montadas; cambiar el juego de agujas
-     obliga a comprarlo suelto, y la caja negra se monta pieza a pieza. */
-  var PACK = 34.59, JUEGO_AGUJAS = 4.09, CAJA_NEGRA = 29.59 + 7.69 + 4.09;
-
-  /* `lineas` parte el rótulo del botón en dos, como pidió Óscar: el
-     material arriba y el bisel debajo. `nombre` sigue siendo el texto
-     de corrido, que es el que va a la ficha, al carrito y al alt. */
   var CAJAS = {
-    'acero-bnegro': { nombre: 'Acero · bisel negro', lineas: ['Acero', 'Bisel Negro'], color: '#C9CBCC',
-      tec: 'Caja de acero inoxidable 316L de 39,7 mm con bisel taquimétrico negro, corona y pulsadores de acero. Entre asas 20 mm.' },
-    'acero-bazul':  { nombre: 'Acero · bisel azul',  lineas: ['Acero', 'Bisel Azul'],  color: '#1F3E77',
-      tec: 'Caja de acero inoxidable 316L de 39,7 mm con bisel taquimétrico azul, corona y pulsadores de acero. Entre asas 20 mm.' },
-    'negra-bnegro': { nombre: 'Acero negro PVD · bisel negro', lineas: ['Acero Negro PVD', 'Bisel Negro'], color: '#26282A',
-      tec: 'Caja de acero inoxidable 316L de 39,7 mm con recubrimiento negro tipo PVD y bisel taquimétrico negro, corona y pulsadores en negro. Entre asas 20 mm.' }
+    PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0 }
   };
   var ESFERAS = {
-    'negra':       { nombre: 'Negra',           color: '#131313',
-      tec: 'esfera negra de cronógrafo con tres contadores, índices aplicados y ventana de fecha' },
-    'blanca-azul': { nombre: 'Blanca y azul',   color: '#F2F2F0',
-      tec: 'esfera blanca con los tres contadores en azul, índices aplicados con inserto azul y ventana de fecha' },
-    'racing':      { nombre: 'Racing',          color: '#E8802F',
-      tec: 'esfera negra tipo racing con minutería blanca y tramos naranjas, tres contadores y ventana de fecha' },
-    'negra-dorada':{ nombre: 'Negra y dorada',  color: '#C6A867',
-      tec: 'esfera negra con índices dorados, tres contadores y ventana de fecha' },
-    'verde':       { nombre: 'Verde',           color: '#2E6B4F',
-      tec: 'esfera verde con tres contadores, índices aplicados y ventana de fecha' }
+    NEG: { nombre: 'Negra', coste: 0,
+           tec: 'Esfera negra con tres contadores, índices aplicados y lumen.' }
+  };
+  var BISELES = {
+    NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' }
   };
   var AGUJAS = {
-    'plateadas': { nombre: 'Plateadas', color: '#D7D9DA' },
-    'naranjas':  { nombre: 'Naranjas',  color: '#EF7C22' },
-    'azules':    { nombre: 'Azules',    color: '#316BB8' },
-    'doradas':   { nombre: 'Doradas',   color: '#CBAE72' }
+    BLA: { nombre: 'Blancas', coste: 0, tec: 'agujas blancas con lumen' }
   };
-  /* ---------- 6 y 7. LA CORREA: PRIMERO EL TIPO, DESPUÉS EL COLOR ----------
-     Clasificación de Óscar (18/08): Piel Sintética Perforada, Piel
-     Italiana, Brazalete Acero, Nato, Nato+Piel y Caucho. Cada tipo
-     lleva su paleta; los que aún no tienen foto para el Lunar salen
-     TACHADOS, que en esta casa lo imposible se tacha, no se esconde. */
   var CORREAS = {
-    'piel-negra-perforada-pespunte-blanco': {
-      coste: 6.69, cierre: 'Hebilla clásica plata',
-      tec: 'piel de vaca genuina negra con perforado deportivo y pespunte blanco, hebilla clásica de acero plateado' },
-    'brazalete-acero-316l-cinco-columnas': {
-      coste: 19.69, cierre: 'Hebilla desplegable',
-      tec: 'brazalete de acero 316L de cinco columnas (tres cepilladas mate y dos pulidas espejo) con hebilla desplegable' },
-    /* OJO con los nombres: Óscar los intercambió el 19/08. Las claves
-       describen la CORREA —pasadores o espiga—, no el tipo comercial,
-       que ya ha cambiado dos veces. Y cada familia trae SU coste:
-       pasadores 11,29 € · espiga 5,48 €. */
-    'nato-pasadores-verde-militar': { coste: 11.29, cierre: 'Hebilla clásica plateada',
-      tec: 'nato de tejido verde militar con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
-    'nato-pasadores-azul': { coste: 11.29, cierre: 'Hebilla clásica plateada',
-      tec: 'nato de tejido azul con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
-    'nato-pasadores-beige': { coste: 11.29, cierre: 'Hebilla clásica plateada',
-      tec: 'nato de tejido beige con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
-    'nato-pasadores-gris-claro': { coste: 11.29, cierre: 'Hebilla clásica plateada',
-      tec: 'nato de tejido gris claro con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
-    'nato-pasadores-negro': { coste: 11.29, cierre: 'Hebilla clásica plateada',
-      tec: 'nato de tejido negro con pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
-    'nato-pasadores-negro-gris': { coste: 11.29, cierre: 'Hebilla clásica plateada',
-      tec: 'nato de tejido negro con franjas grises, pasadores y refuerzos de piel, hebilla clásica de acero plateado' },
-
-    'nato-espiga-antracita': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
-      tec: 'tejido de espiga antracita con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-espiga-gris': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
-      tec: 'tejido de espiga gris con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-espiga-azul-claro': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
-      tec: 'tejido de espiga azul claro con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-espiga-beige': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
-      tec: 'tejido de espiga beige con pespunte blanco, hebilla mariposa de acero plateado' },
-    'nato-espiga-marron': { coste: 5.48, cierre: 'Hebilla mariposa plateada',
-      tec: 'tejido de espiga marrón con pespunte blanco, hebilla mariposa de acero plateado' },
-    'brazalete-negro-pvd': {
-      coste: 26.39, cierre: 'Hebilla desplegable',
-      tec: 'brazalete de acero 316L con recubrimiento negro tipo PVD, tres eslabones y hebilla desplegable' },
-    /* Piel italiana (MAIKES 7011E, P-028…P-042). El coste real lo pone
-       el cierre elegido; el pespunte es el que trae la FOTO de cada
-       una, y el otro se tacha mientras no llegue su foto. */
-    'piel-italiana-negra':  { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina negra con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-negra-pespunte-negro': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina negra con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-marron': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina marrón con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-marron-pespunte-tono': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina marrón con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-azul':   { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina azul marino con relieve de cocodrilo y liberación rápida' },
-    'piel-italiana-azul-pespunte-tono': { coste: 29.99, cierre: 'Hebilla de pinza', italiana: true,
-      tec: 'piel de vaca genuina azul marino con relieve de cocodrilo y liberación rápida' },
-    /* Caucho tipo MoonSwatch (P-019, 5,59 €): once combinaciones de
-       color de correa y de pespunte.
-       Sustituye a la familia de trama de cesta. */
-    'caucho-negro-negro': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con pespunte negro al tono, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-negro-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-negro-verde': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con pespunte verde de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-negro-naranja': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con pespunte naranja de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-negro-azul': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho negro con pespunte azul de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-gris-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho gris con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-gris-gris': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho gris con pespunte gris al tono, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-azul-claro-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho azul claro con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-naranja-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho naranja con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-marron-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho marrón con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' },
-    'caucho-azul-marino-blanco': { coste: 5.59, cierre: 'Hebilla de pinza',
-      tec: 'caucho azul marino con pespunte blanco de contraste, final curvo que abraza la caja, hebilla de pinza' }
-
+    ACERO: { nombre: 'Brazalete de acero', coste: 0,
+             tec: 'brazalete de acero inoxidable 316L con cierre desplegable' }
   };
+  /* El cristal no se elige: es de la casa y va en la ficha técnica. */
+  var CRISTAL = 'cristal mineral';
+  var LOGO = 3.78;
 
-  /* Los seis tipos, en tres niveles: TIPO -> COLOR -> PESPUNTE.
-     Cada hoja apunta a su capa del manifiesto; sin capa no hay foto y
-     va tachada. Si un color no abre `pespuntes` es que ahí no hay nada
-     que elegir —el brazalete— y el paso del pespunte se apaga. */
-  var TIPOS = {
-    'perforada': { nombre: 'Piel Perforada', colores: {
-      'negro': { nombre: 'Negro', color: '#1A1A1A', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste',
-                    correa: 'piel-negra-perforada-pespunte-blanco' } } } } },
+  /* LAS FOTOS QUE EXISTEN, y nada más. Vacía: la única que había se
+     rechazó el 26/08 —fondo de damero pintado y 1.254 px— y Óscar la
+     rehace a 4096 con alfa. Mientras esté vacía, el visor enseña su
+     cartel, que es la verdad. */
+  var SERIE_V = '?v=1';
+  var SERIE_IMG = '/assets/img/lunar-2026/serie/';
+  var SERIE = {};
 
-    'italiana': { nombre: 'Piel Italiana', colores: {
-      'negro':  { nombre: 'Negro',  color: '#1C1D1F', pespuntes: {
-        'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-negra' },
-        'color':     { nombre: 'A color',   tec: 'pespunte negro al tono de la piel',
-                       correa: 'piel-italiana-negra-pespunte-negro' } } },
-      'marron': { nombre: 'Marrón', color: '#5B3A28', pespuntes: {
-        'contraste': { nombre: 'Contraste', tec: 'pespunte blanco de contraste', correa: 'piel-italiana-marron' },
-        'color':     { nombre: 'A color',   tec: 'pespunte marrón al tono de la piel',
-                       correa: 'piel-italiana-marron-pespunte-tono' } } },
-      /* La azul, SOLO con bisel azul (Óscar, 18/08). */
-      'azul':   { nombre: 'Azul',   color: '#1E2B47', pespuntes: {
-        'contraste': { nombre: 'Contraste', tec: 'pespunte azul claro de contraste', correa: 'piel-italiana-azul' },
-        'color':     { nombre: 'A color',   tec: 'pespunte azul marino al tono de la piel',
-                       correa: 'piel-italiana-azul-pespunte-tono' } } } } },
+  var e = { mov: 'CR', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
+            caja: 'PL', correa: 'ACERO' };
 
-    /* El proveedor hace el brazalete en acero y en negro PVD (P-012).
-       El negro todavía no tiene foto. */
-    'brazalete': { nombre: 'Brazalete', colores: {
-      'acero': { nombre: 'Acero',     color: '#C9CBCC', correa: 'brazalete-acero-316l-cinco-columnas' },
-      'negro': { nombre: 'Negro PVD', color: '#26282A', correa: 'brazalete-negro-pvd' } } },
 
-    /* NATO = el tejido de espiga con hebilla mariposa (5,48 €). */
-    'nato': { nombre: 'Nato', colores: {
-      'antracita':  { nombre: 'Antracita',  color: '#3C3E40', correa: 'nato-espiga-antracita' },
-      'gris':       { nombre: 'Gris',       color: '#6E7175', correa: 'nato-espiga-gris' },
-      'azul-claro': { nombre: 'Azul claro', color: '#A9C9E6', correa: 'nato-espiga-azul-claro' },
-      'beige':      { nombre: 'Beige',      color: '#CDBFA6', correa: 'nato-espiga-beige' },
-      'marron':     { nombre: 'Marrón',     color: '#8A6A52', correa: 'nato-espiga-marron' } } },
-
-    /* NATO + PIEL = el de pasadores y refuerzos de piel (11,29 €). */
-    'nato-piel': { nombre: 'Nato + Piel', colores: {
-      'verde-militar': { nombre: 'Verde militar', color: '#5B5B3A', correa: 'nato-pasadores-verde-militar' },
-      'azul':          { nombre: 'Azul',          color: '#1F3A6E', correa: 'nato-pasadores-azul' },
-      'beige':         { nombre: 'Beige',         color: '#B8A075', correa: 'nato-pasadores-beige' },
-      'gris-claro':    { nombre: 'Gris claro',    color: '#C2C4C4', correa: 'nato-pasadores-gris-claro' },
-      'negro':         { nombre: 'Negro',         color: '#1C1D1F', correa: 'nato-pasadores-negro' },
-      'negro-gris':    { nombre: 'Negro y gris',  color: '#4A4C4E', correa: 'nato-pasadores-negro-gris' } } },
-
-    /* El caucho se elige en dos pasos: color de la correa y color del
-       pespunte. El negro es el que más combinaciones tiene. */
-    'caucho': { nombre: 'Caucho', colores: {
-      'negro':       { nombre: 'Negro',       color: '#1C1D1F', pespuntes: {
-        'negro':   { nombre: 'Negro',   tec: 'pespunte negro al tono',        correa: 'caucho-negro-negro' },
-        'blanco':  { nombre: 'Blanco',  tec: 'pespunte blanco de contraste',  correa: 'caucho-negro-blanco' },
-        'verde':   { nombre: 'Verde',   tec: 'pespunte verde de contraste',   correa: 'caucho-negro-verde' },
-        'naranja': { nombre: 'Naranja', tec: 'pespunte naranja de contraste', correa: 'caucho-negro-naranja' },
-        'azul':    { nombre: 'Azul',    tec: 'pespunte azul de contraste',    correa: 'caucho-negro-azul' } } },
-      'gris':        { nombre: 'Gris',        color: '#7C7F82', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-gris-blanco' },
-        'gris':   { nombre: 'Gris',   tec: 'pespunte gris al tono',        correa: 'caucho-gris-gris' } } },
-      'azul-claro':  { nombre: 'Azul claro',  color: '#5FA8E0', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-azul-claro-blanco' } } },
-      'azul-marino': { nombre: 'Azul marino', color: '#1F3A5F', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-azul-marino-blanco' } } },
-      'naranja':     { nombre: 'Naranja',     color: '#EE6C1E', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-naranja-blanco' } } },
-      'marron':      { nombre: 'Marrón',      color: '#6B4A38', pespuntes: {
-        'blanco': { nombre: 'Blanco', tec: 'pespunte blanco de contraste', correa: 'caucho-marron-blanco' } } } } }
-  };
-
-  /* ---------- 8. LA TAPA ROSCADA ----------
-     Las tres del proveedor, sólidas y sin cambio de precio. Al elegir
-     una, el visor la enseña; en cuanto se toca cualquier otro paso,
-     vuelve al reloj. También se alterna con un clic en la imagen. */
-  var TAPAS = {
-    'solida-acero':      { nombre: 'Lisa',      tec: 'lisa de acero cepillado' },
-    'lunar-color':       { nombre: 'Lunar',     tec: 'con la Tierra vista desde la Luna, a color, y la leyenda «Eyes on the stars»' },
-    'huella-astronauta': { nombre: 'La Huella', tec: 'con la huella del astronauta en el polvo lunar, grabada en relieve' }
-  };
-
-  /* ---------- 7. EL CIERRE (solo con piel italiana) ----------
-     Las cinco hebillas del proveedor. No se ven en la foto (la correa
-     entra a sangre), así que ninguna necesita imagen propia. */
-  var CIERRES = {
-    'plata':    { nombre: 'Clásica plata',    coste: 29.99, tec: 'hebilla de pinza de acero plateado' },
-    'negra':    { nombre: 'Clásica negra',    coste: 31.19, tec: 'hebilla de pinza de acero PVD negro' },
-    'oro-rosa': { nombre: 'Clásica oro rosa', coste: 29.59, tec: 'hebilla de pinza en oro rosa' },
-    'oro':      { nombre: 'Clásica oro',      coste: 30.99, tec: 'hebilla de pinza dorada' },
-    'mariposa': { nombre: 'Mariposa plata',   coste: 30.19, tec: 'cierre de mariposa de acero plateado' }
-  };
-
-  /* Las combinaciones que EXISTEN: cada una, su cabeza del manifiesto. */
-  var CATALOGO = {
-    'acero-bnegro|negra|plateadas'      : 'cab-acero-bnegro-agujas-plateadas',
-    'acero-bnegro|negra|naranjas'       : 'cab-acero-bnegro-agujas-naranjas',
-    'acero-bnegro|negra|azules'         : 'cab-acero-bnegro-agujas-azules',
-    'acero-bnegro|negra|doradas'        : 'cab-acero-bnegro-agujas-doradas',
-    'acero-bnegro|racing|naranjas'      : 'cab-acero-bnegro-esf44-racing-naranja',
-    'acero-bnegro|negra-dorada|doradas' : 'cab-acero-bnegro-esf26-negra-dorada',
-    'acero-bnegro|verde|plateadas'      : 'cab-acero-bnegro-esf27-verde',
-    'acero-bazul|blanca-azul|plateadas' : 'cab-acero-bazul-esfblanca-agujas-plateadas',
-    'acero-bazul|blanca-azul|azules'    : 'cab-acero-bazul-esfblanca-agujas-azules',
-    'negra-bnegro|negra|plateadas'      : 'cab-negra-bnegro-agujas-plateadas',
-    'negra-bnegro|negra|naranjas'       : 'cab-negra-bnegro-agujas-naranjas',
-    'negra-bnegro|negra|azules'         : 'cab-negra-bnegro-agujas-azules',
-    /* Las doradas SÍ van con la caja negra y la esfera negra (Óscar,
-       22/08; el 18/08 las había dejado fuera). */
-    'negra-bnegro|negra|doradas'        : 'cab-negra-bnegro-agujas-doradas',
-    /* La caja negra lleva las mismas esferas que la de acero (Óscar,
-       18/08). Estas tres cabezas se montaron trasplantando la esfera de
-       su gemela de acero: herramientas/trasplantar_esfera.py */
-    'negra-bnegro|racing|naranjas'      : 'cab-negra-bnegro-esf44-racing-naranja',
-    'negra-bnegro|negra-dorada|doradas' : 'cab-negra-bnegro-esf26-negra-dorada',
-    'negra-bnegro|verde|plateadas'      : 'cab-negra-bnegro-esf27-verde'
-  };
-
-  /* LA ENTRADA ES EL ORIGINAL (Óscar, 21/08/2026): caja de acero, bisel
-     negro, esfera negra, agujas plateadas y BRAZALETE DE ACERO — la
-     configuración típica del Moonwatch. Norma para todos los relojes. */
-  var e = { caja: 'acero-bnegro', tapa: null, esfera: 'negra', agujas: 'plateadas',
-            tipo: 'brazalete', color: 'acero', pespunte: null,
-            cierre: null };   // la hebilla, sin elegir hasta que el cliente toque una
-
-  /* Qué correa vale con qué cabeza: sale del manifiesto
-     (cabezasPermitidas) y de la regla de Óscar (cabezasExcluidas:
-     la piel perforada no se ofrece con el bisel azul). */
-  function correaVale(clave, cabeza) {
-    if (!M || !clave) return false;
-    var r = M.straps[clave];
-    if (!r) return false;
-    var ok = (r.cabezasPermitidas || []).some(function (p) { return cabeza.indexOf(p) === 0; });
-    var no = (r.cabezasExcluidas || []).some(function (p) { return cabeza.indexOf(p) === 0; });
-    return ok && !no;
-  }
-
-  /* La capa que toca, bajando los tres niveles: tipo, color y —si ese
-     color abre pespuntes— pespunte. */
-  function pespuntesDe(tipo, color) {
-    var c = TIPOS[tipo || e.tipo].colores[color || e.color];
-    return c && c.pespuntes;
-  }
-  function claveCorrea(tipo, color, pespunte) {
-    var c = TIPOS[tipo || e.tipo].colores[color || e.color];
-    if (!c) return null;
-    if (!c.pespuntes) return c.correa;
-    var p = c.pespuntes[pespunte || e.pespunte];
-    return p && p.correa;
-  }
-  var correaActual = function () { return claveCorrea(); };
-
-  /* Vale lo que tiene capa Y encaja con la cabeza de ahora. */
-  function pespunteVale(tipo, color, p) { return correaVale(claveCorrea(tipo, color, p), CATALOGO[clave()]); }
-  function colorVale(tipo, color) {
-    var ps = pespuntesDe(tipo, color);
-    if (!ps) return correaVale(claveCorrea(tipo, color), CATALOGO[clave()]);
-    return Object.keys(ps).some(function (p) { return pespunteVale(tipo, color, p); });
-  }
-  function tipoVale(tipo) {
-    return Object.keys(TIPOS[tipo].colores).some(function (c) { return colorVale(tipo, c); });
-  }
-  var M = null;                       // el manifiesto: rutas de las capas
+  /* ============================================================
+     EL MECANISMO, el mismo que el del Trinchera (Óscar, 26/08/2026:
+     «crea el configurador igual que el del trinchera, con el mismo
+     mecanismo»). Los nombres son los de allí a propósito: el día que se
+     arregle algo en uno, se sabe dónde está en el otro.
+     ============================================================ */
 
   var $ = function (s) { return document.querySelector(s); };
-  var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
-  var clave = function (c, es, a) { return (c || e.caja) + '|' + (es || e.esfera) + '|' + (a || e.agujas); };
-  var existe = function (c, es, a) { return !!CATALOGO[clave(c, es, a)]; };
+  function eu(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
 
-  function referencia() {
-    return 'LO-03-' + e.caja + '-' + e.esfera + '-' + e.agujas +
-           (e.tapa ? '-' + e.tapa : '') + '-' + e.tipo + '-' + e.color +
-           (pespuntesDe() ? '-' + e.pespunte : '') +
-           ((esItaliana() && e.cierre) ? '-' + e.cierre : '');
+  /* ---------- LA FIRMA DE UNA COMBINACIÓN ----------
+     Todo lo que el cliente elige, en orden. Sirve para marcar y para vetar,
+     igual que en el Trinchera. */
+  function firma() {
+    return [e.mov, e.esf, e.bisel, e.agujas, e.caja, e.correa].join('|');
+  }
+  /* En limpio: aquí todavía no hay nada que quitar, pero la función existe
+     desde el principio para que el día que el Lunar tenga dos medidas o dos
+     movimientos no haya que reescribir la lista de vetadas. */
+  function canon(f) { return String(f); }
+
+  /* Las combinaciones que Óscar da por muertas. Valen para todo el mundo:
+     ni se dibujan ni entran en el catálogo del servidor. */
+  var VETADAS = {};
+  function vetada(f) { return !!VETADAS[canon(f)]; }
+  /* El volcador tiene que ver el árbol ENTERO y descartar al final, hoja por
+     hoja: leyendo los botones que la ficha esconde se caen ramas buenas.
+     Es el fallo que costó cuarenta referencias sanas en el Trinchera. */
+  var SIN_VETO = false;
+  function sinVeto(v) { SIN_VETO = !!v; }
+
+  /* ---------- EL MODO CURAR, sólo con `?curar` ---------- */
+  var CURAR = false;
+  try { CURAR = /[?&]curar(=|&|$)/.test(location.search); } catch (x) {}
+  var COMBIS = {};
+  try {
+    if (window.localStorage)
+      COMBIS = JSON.parse(window.localStorage.getItem('laora.lunar.combis') || '{}') || {};
+  } catch (x) { COMBIS = {}; }
+  function guardaCombis() {
+    recanon();
+    try {
+      if (window.localStorage)
+        window.localStorage.setItem('laora.lunar.combis', JSON.stringify(COMBIS));
+    } catch (x) {}
+  }
+  /* Lo que ya está vetado deja de estar pendiente y se cae de la lista solo */
+  (function () {
+    var toco = false, k;
+    for (k in COMBIS) if (VETADAS[canon(k)]) { delete COMBIS[k]; toco = true; }
+    if (toco) {
+      try {
+        if (window.localStorage)
+          window.localStorage.setItem('laora.lunar.combis', JSON.stringify(COMBIS));
+      } catch (x) {}
+    }
+  })();
+  var COMBIS_CANON = {};
+  function recanon() {
+    COMBIS_CANON = {};
+    for (var k in COMBIS) COMBIS_CANON[canon(k)] = 1;
+  }
+  recanon();
+  function marcada(f) { return !!COMBIS_CANON[canon(f)]; }
+  function desmarca(f) {
+    var c = canon(f), k;
+    for (k in COMBIS) if (canon(k) === c) delete COMBIS[k];
+  }
+  var APLICADAS = false;
+  try {
+    if (window.localStorage)
+      APLICADAS = window.localStorage.getItem('laora.lunar.aplicadas') === '1';
+  } catch (x) {}
+  function guardaAplicadas() {
+    try {
+      if (window.localStorage)
+        window.localStorage.setItem('laora.lunar.aplicadas', APLICADAS ? '1' : '0');
+    } catch (x) {}
   }
 
-  /* ---------- el MOTOR del precio (sin logo, como siempre el Lunar) ---------- */
-  /* EL MULTIPLICADOR (Óscar, 22/08/2026). Era 2,7235 sobre las PIEZAS;
-     ahora se aplica al COSTE COMPLETO —piezas, packing, envío, garantía
-     y Seguridad Social—, que es bastante mayor, así que el número tenía
-     que bajar para que los precios se quedaran donde están. Con 2,28 el
-     catálogo se mueve un −1,2 % de media y el Lunar más barato sigue en
-     189,90 €, que es lo que Óscar pidió: la misma tarifa, pero con la
-     cuenta bien hecha. */
+  /* ---------- LOS BOTONES ----------
+     Lo que no se puede elegir NO se dibuja (Óscar, 26/08/2026). */
+  function aplicaOpcion(g, v) { e[g] = v; }
+
+  function llevaAMarcada(grupo, valor) {
+    var copia = {}, k;
+    for (k in e) copia[k] = e[k];
+    aplicaOpcion(grupo, valor);
+    normaliza();
+    var esta = (!SIN_VETO && vetada(firma())) || (APLICADAS && marcada(firma()));
+    for (k in copia) e[k] = copia[k];
+    return esta;
+  }
+
+  function botones(grupo, opciones, activo) {
+    var caja = $('[data-pv="' + grupo + '"]');
+    if (!caja) return;
+    caja.innerHTML = opciones.filter(function (o) {
+      return !o[2] && !llevaAMarcada(grupo, o[0]);
+    }).map(function (o) {
+      return '<button type="button" data-v="' + o[0] + '"' +
+             ' aria-pressed="' + (o[0] === activo) + '">' + o[1] + '</button>';
+    }).join('');
+  }
+  function deTabla(tabla) {
+    return Object.keys(tabla).map(function (k) { return [k, tabla[k].nombre]; });
+  }
+
+  /* ---------- LA FOTO ----------
+     La clave es lo que se VE en la foto: caja, esfera, bisel, agujas y
+     correa. El movimiento no entra: por delante no se distingue. */
+  function claveSerie() {
+    return [CAJAS[e.caja].nombre, ESFERAS[e.esf].nombre, BISELES[e.bisel].nombre,
+            AGUJAS[e.agujas].nombre, CORREAS[e.correa].nombre]
+           .join('-').toLowerCase().replace(/ /g, '');
+  }
+  function serieFoto() {
+    var clave = claveSerie();
+    return SERIE[clave] ? clave : null;
+  }
+
+  /* ---------- LA REFERENCIA ---------- */
+  function referencia() {
+    return 'LO-03-' + e.mov + '-' + e.caja + '-' + e.esf + '-' + e.bisel +
+           '-' + e.agujas + '-' + e.correa;
+  }
+  function agua() { return '5 ATM / 50 metros'; }
+
+  /* ---------- LAS FRASES ---------- */
+  function descripcion() {
+    return 'laOra Lunar, caja de ' + CAJAS[e.caja].mat + ', esfera ' +
+           ESFERAS[e.esf].nombre.toLowerCase() + ', ' + BISELES[e.bisel].tec +
+           ', ' + AGUJAS[e.agujas].tec + ' y ' + CORREAS[e.correa].tec;
+  }
+  function dichoCompleto() { return descripcion() + ' · ' + MOVS[e.mov].nombre; }
+
+  /* ---------- LAS REGLAS ----------
+     Hoy no hay ninguna: una sola configuración. La función existe desde el
+     principio porque es donde van a vivir, y porque el resto del mecanismo
+     la llama en cada pintada. */
+  function normaliza() {
+    if (!MOVS[e.mov]) e.mov = Object.keys(MOVS)[0];
+    if (!CAJAS[e.caja]) e.caja = Object.keys(CAJAS)[0];
+    if (!ESFERAS[e.esf]) e.esf = Object.keys(ESFERAS)[0];
+    if (!BISELES[e.bisel]) e.bisel = Object.keys(BISELES)[0];
+    if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
+    if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
+  }
+
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.28;
   /* EL COSTE COMPLETO (Óscar, 22/08/2026).
      «Todos los costes tienen que incluir packing + envío + 5 % de SS,
@@ -590,7 +625,6 @@
   function costeCompleto(c) {
     return (c + PACKING_ENVIO / (1 + IVA) + GARANTIA) * (1 + SS);
   }
-  function eu(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
   function redondea(p) {
     var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
     return (p - bajo) <= (bajo + 10 - p) ? bajo : bajo + 10;
@@ -614,16 +648,19 @@
     var porciento = margen > 0 ? queda * cn / margen : 0;
     return sube990(Math.max(porEuros, porciento));
   }
-  /* Coste de la cabeza: el pack viene montado con SUS agujas; cambiarlas
-     obliga a comprar el juego suelto, y la caja negra se arma por piezas. */
-  function costeCabeza() {
-    if (e.caja === 'negra-bnegro') return CAJA_NEGRA;
-    var montadas = { 'racing': 'naranjas', 'negra-dorada': 'doradas',
-                     'verde': 'plateadas', 'blanca-azul': 'plateadas',
-                     'negra': 'plateadas' };
-    return PACK + (montadas[e.esfera] === e.agujas ? 0 : JUEGO_AGUJAS);
+  /* LAS PIEZAS DEL LUNAR. Vacías a propósito: el Lunar se rehace desde
+     cero (Óscar, 26/08/2026) y los costes del viejo no valen. Mientras
+     `COSTES_PUESTOS` sea falso la ficha NO enseña precio y no deja comprar,
+     que es la única manera honrada de tener la página en pie sin números.
+     En cuanto Óscar dé los costes se rellenan aquí y se pone a `true`. */
+  var COSTES_PUESTOS = false;
+  function costes() {
+    return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
+           BISELES[e.bisel].coste + AGUJAS[e.agujas].coste +
+           CORREAS[e.correa].coste + LOGO;
   }
-  function costes() { return MOV.coste + costeCabeza() + costeCorrea(); }
+  function pvpBase(c) { return redondea(costeCompleto(c) * MULT); }
+  function precioTarifa() { return pvpBase(costes()); }
 
   /* ---------- LA COMISIÓN DE LA PASARELA ----------
      Hasta el 22/08/2026 se repercutía subiendo el PVP un 2,5 % —la mitad
@@ -634,7 +671,6 @@
      llega al suelo, sube de escalón hasta cumplirlo. */
   /* El redondeo al 9,90 puede dejar el precio por debajo del suelo, así
      que el suelo se vuelve a exigir DESPUÉS de redondear: manda él. */
-  function precioTarifa() { return redondea(costeCompleto(costes()) * MULT); }
   function netoDeCoste() { return costeCompleto(costes()); }
   /* EL 2,5 % DE KLARNA (Óscar, 19/08/2026, confirmado el 22/08): el PVP
      de tarifa sube un 2,5 % y se vuelve a redondear al 9,90. Después, el
@@ -644,320 +680,228 @@
     return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste()));
   }
 
-  /* ---------- pintar ---------- */
-  function botones(grupo, mapa, valido, apagado) {
-    var caja = $('[data-pv="' + grupo + '"]');
-    var padre = caja.closest('.pv-grupo');
-    /* Apagado, NO invisible (Óscar, 18/08): el paso se sigue viendo y
-       sigue contando en la numeración; solo queda deslucido y sordo. */
-    if (padre) padre.classList.toggle('pv-apagado', !!apagado);
-    caja.innerHTML = '';
-    Object.keys(mapa).forEach(function (k) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.dataset.v = k;
-      var rotulo = mapa[k].lineas
-        ? '<span class="pv-lineas">' + mapa[k].lineas.map(function (t) {
-            return '<span>' + t + '</span>';
-          }).join('') + '</span>'
-        : mapa[k].nombre;
-      /* Los colores, como en el Trinchera (Óscar, 21/08/2026): un cuadrado
-         con el color y debajo su nombre. */
-      b.innerHTML = mapa[k].color
-        ? '<i style="background:' + mapa[k].color + '"></i><small>' + rotulo + '</small>'
-        : rotulo;
-      b.setAttribute('aria-pressed', String(e[grupo] === k));   // null = ninguno marcado
-      if (apagado || !valido(k)) b.disabled = true;   // lo imposible, tachado
-      b.addEventListener('click', function () {
-        e[grupo] = k; normaliza(); pinta();
-        /* AL ELEGIR TIPO DE CORREA, EL COLOR SE VIENE A LA VISTA (Óscar,
-           21/08/2026), como en el Trinchera: es el paso que aparece justo
-           después del que acabas de pulsar. */
-        if (grupo === 'tipo') {
-          var gc = $('[data-pv="color"]').closest('.pv-grupo');
-          if (gc && !gc.hidden && gc.scrollIntoView) gc.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-      caja.appendChild(b);
+
+  /* ---------- LOS PASOS SE ABREN DE UNO EN UNO ----------
+     Igual que en el Trinchera: ninguna opción se ve hasta haber elegido la
+     anterior. Un paso sin nada que elegir no cuenta como cerrado. */
+  var CADENA = ['mov', 'esf', 'caja', 'correa'];
+  var tocado = {};
+  function sinNadaQueElegir(g) {
+    var op = g.querySelector('.pv-opciones');
+    return !op || op.hidden || !op.querySelector('button');
+  }
+  function abrirPasos() {
+    var abierto = true;
+    for (var i = 0; i < CADENA.length; i++) {
+      var g = document.querySelector('[data-paso="' + CADENA[i] + '"]');
+      if (!g) continue;
+      g.classList.toggle('pv-cerrado', !abierto);
+      if (abierto) abierto = g.hidden || sinNadaQueElegir(g) || !!tocado[CADENA[i]];
+    }
+    ['bisel', 'agujas'].forEach(function (k) {
+      var g = $('[data-cuelga="' + k + '"]');
+      if (g) g.classList.toggle('pv-cerrado', !tocado.esf);
     });
-  }
-
-  function normaliza() {
-    if (!existe()) {
-      var k = Object.keys(CATALOGO).find(function (x) {
-        return x.indexOf(e.caja + '|' + e.esfera + '|') === 0;
-      }) || Object.keys(CATALOGO).find(function (x) {
-        return x.indexOf(e.caja + '|') === 0;
-      });
-      if (k) { var p = k.split('|'); e.caja = p[0]; e.esfera = p[1]; e.agujas = p[2]; }
-    }
-    if (!CATALOGO[clave()]) return;
-    /* Se arregla de fuera adentro: primero que el tipo valga, luego el
-       color dentro de ese tipo, y por último el pespunte. Así un cambio
-       de caja no tira al cliente de su correa más de lo justo. */
-    if (!tipoVale(e.tipo)) e.tipo = Object.keys(TIPOS).find(tipoVale) || e.tipo;
-    if (!colorVale(e.tipo, e.color)) {
-      e.color = Object.keys(TIPOS[e.tipo].colores).find(function (c) { return colorVale(e.tipo, c); }) || e.color;
-    }
-    var ps = pespuntesDe(e.tipo, e.color);
-    if (ps && !pespunteVale(e.tipo, e.color, e.pespunte)) {
-      e.pespunte = Object.keys(ps).find(function (p) { return pespunteVale(e.tipo, e.color, p); }) || e.pespunte;
-    }
-  }
-
-  var esItaliana = function () {
-    var r = CORREAS[correaActual()];
-    return !!(r && r.italiana);
-  };
-
-  /* El cierre solo cuenta en la piel italiana; en las demás correas
-     manda el que trae la propia correa. */
-  function cierreTexto() {
-    return (esItaliana() && e.cierre) ? CIERRES[e.cierre].nombre : CORREAS[correaActual()].cierre;
-  }
-  /* Sin hebilla elegida se cuenta la de acero plateado. Da igual cuál:
-     las cinco caen en el mismo escalón, así que elegir no mueve el
-     precio. */
-  function costeCorrea() {
-    if (!esItaliana()) return CORREAS[correaActual()].coste;
-    return CIERRES[e.cierre || 'plata'].coste;
-  }
-
-  /* ---- LAS CAPAS, EN AVIF Y EN TRES TAMAÑOS ----
-     El máster sigue siendo el webp de 1254; junto a él viven las
-     subcarpetas 480/800/1254 con el AVIF, que las escribe
-     `herramientas/capas_lunar_a_avif.py`. Hay que volver a pasar ese
-     guión cada vez que se rehaga una madre, o el AVIF se queda viejo
-     sin avisar.
-     Los tamaños salen de dónde se ve el visor: 46vw en escritorio y
-     toda la pantalla en el móvil. */
-  var TAMANOS_CAPA = [480, 800, 1254];
-  var cabezaURL = '';                 /* la de la cabeza de ahora, para el carrito */
-  function enAvif(url, tam) {
-    var i = url.indexOf('?'), v = i < 0 ? '' : url.slice(i), base = i < 0 ? url : url.slice(0, i);
-    var c = base.lastIndexOf('/');
-    return base.slice(0, c) + '/' + tam + '/' +
-           base.slice(c + 1).replace(/\.(webp|png|avif)$/, '') + '.avif' + v;
-  }
-  /* Pone la capa. Si va oculta NO se le toca el src: una imagen escondida
-     se descarga igual, y ese era el agujero. */
-  function ponCapa(img, url, oculta) {
-    img.hidden = !!oculta;
-    if (oculta || !url) return;
-    if (img.dataset.puesta === url) return;      /* ya está, no se repinta */
-    img.dataset.puesta = url;
-    img.src = enAvif(url, 1254);
-    img.srcset = TAMANOS_CAPA.map(function (t) {
-      return enAvif(url, t) + ' ' + t + 'w';
-    }).join(', ');
-    img.sizes = '(max-width:900px) 100vw, 46vw';
-  }
-  /* Las miniaturas de tapa y hebilla se ven a 140 px: con la de 480 sobra. */
-  function ponMini(img, url, oculta) {
-    img.hidden = !!oculta;
-    if (oculta || !url) return;
-    if (img.dataset.puesta === url) return;
-    img.dataset.puesta = url;
-    img.src = enAvif(url, 480);
-    img.removeAttribute('srcset');
-    img.sizes = '140px';
   }
 
   function pinta() {
-    if (!M) return;
-    var cabeza = CATALOGO[clave()];
-    /* Cada correa es una FOTO COMPLETA de un reloj, hecha con una cabeza
-       concreta. De ahí, tres formas de pintarla:
-       · Si el cliente elige justo esa cabeza, no se monta nada: la foto
-         tal cual, que es lo mejor que hay.
-       · Si solo cambia la esfera, las agujas o el bisel —la caja es la
-         misma—, de la cabeza cae únicamente el DISCO (esfera y bisel)
-         dentro de la foto. La caja, las asas y el encuentro con la
-         correa siguen siendo los de la foto. Montar la cabeza entera no
-         cuadraba nunca: son relojes de proporciones distintas y siempre
-         asomaba un anillo de más o unas asas dobles.
-       · Solo cuando hay que cambiar la caja —cabeza negra sobre una foto
-         de acero— se monta la cabeza entera. */
-    var capaCorrea = M.straps[correaActual()] || {};
-    /* Correas que NO son una foto del reloj, sino tejido solo: la piel
-       perforada y, desde el 22/08, las once de nato y nato + piel. Ahí la
-       cabeza va SIEMPRE entera: debajo no hay nada que pueda asomar. */
-    var soloCorrea = !!capaCorrea.soloCorrea;
-    var cajaFoto = capaCorrea.cajaDeLaFoto || 'acero';
-    var cajaCabeza = cabeza.indexOf('cab-negra-') === 0 ? 'negra' : 'acero';
-    var sobra = !soloCorrea && (capaCorrea.cabezaDeLaFoto === cabeza);
-    /* Cabezas que en esta correa van ENTERAS aunque la caja sea la misma
-       (Óscar, 22/08: en nato y nato + piel, ninguna caja de acero con bisel
-       negro lleva máscara). Sale del manifiesto, no de adivinar el nombre. */
-    var fuera = (capaCorrea.mascaraFuera || []).some(function (p) {
-      return cabeza.indexOf(p) === 0;
+    normaliza();
+
+    /* EL PRECIO, SÓLO SI HAY COSTES. Sin ellos no se enseña un número ni se
+       deja comprar: una cifra inventada en una tienda es peor que ninguna. */
+    var hayPrecio = COSTES_PUESTOS;
+    var pie = $('[data-pv-pie]');
+    $('[data-pv-precio]').textContent = hayPrecio ? eu(precio()) : 'Precio por definir';
+    /* SIN PRECIO NO HAY PLAZOS NI «DISPONIBLE». La caja de Klarna venía con
+       un número de ejemplo dentro y el punto verde diciendo que está a la
+       venta: las dos cosas serían mentira hasta que haya costes. */
+    var klarna = $('.pv-klarna');
+    if (klarna) klarna.hidden = !hayPrecio;
+    if (hayPrecio) $('[data-pv-klarna]').textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
+    var stock = document.querySelector('.pv-stock');
+    if (stock) stock.hidden = !hayPrecio;
+    if (pie) pie.classList.toggle('pv-sin-precio', !hayPrecio);
+    var comprar = $('[data-pv-comprar]');
+    if (comprar) {
+      comprar.disabled = !hayPrecio;
+      comprar.textContent = hayPrecio ? 'Añadir al carrito' : 'Todavía no está a la venta';
+    }
+
+    botones('mov', deTabla(MOVS), e.mov);
+    botones('esf', deTabla(ESFERAS), e.esf);
+    botones('bisel', deTabla(BISELES), e.bisel);
+    botones('agujas', deTabla(AGUJAS), e.agujas);
+    botones('caja', deTabla(CAJAS), e.caja);
+    botones('correa', deTabla(CORREAS), e.correa);
+
+    $('[data-pv-grupo-bisel]').hidden = false;
+    $('[data-pv-grupo-agujas]').hidden = false;
+
+    var cal = $('[data-pv-calibre]');
+    if (cal) {
+      cal.hidden = !tocado.mov;
+      $('[data-pv-cal]').textContent = 'Calibre ' + MOVS[e.mov].cal;
+    }
+
+    /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
+       cartel. Nunca una imagen que no sea la elegida. */
+    var foto = serieFoto();
+    var img = $('[data-pv-foto]');
+    var cartel = $('[data-pv-sinfoto]');
+    var lupa = $('[data-pv-ampliar]');
+    img.hidden = !foto;
+    cartel.hidden = !!foto;
+    if (lupa) lupa.hidden = !foto;
+    if (foto) {
+      img.src = SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V;
+      img.srcset = SERIE_IMG + '480/' + foto + '.avif' + SERIE_V + ' 480w, ' +
+                   SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V + ' 1200w, ' +
+                   SERIE_IMG + '1600/' + foto + '.avif' + SERIE_V + ' 1600w';
+      img.sizes = '(max-width: 900px) 100vw, 620px';
+      img.alt = descripcion();
+    }
+
+    $('[data-pv-tec="caja"]').textContent =
+      'Caja de ' + CAJAS[e.caja].mat + ', ' + CRISTAL + '. ' + agua() + '.';
+    $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
+    $('[data-pv-tec="esf"]').textContent =
+      ESFERAS[e.esf].tec + ' Bisel: ' + BISELES[e.bisel].tec + '. Agujas: ' +
+      AGUJAS[e.agujas].tec + '.';
+    $('[data-pv-tec="agua"]').textContent = agua() + '.';
+
+    abrirPasos();
+    if (CURAR) panelCurar();
+
+    /* NINGUNA OPCIÓN SEÑALADA HASTA QUE LA PULSES: los botones no se
+       atribuyen una elección que el cliente todavía no ha hecho. */
+    [].forEach.call(document.querySelectorAll('[data-pv]'), function (g) {
+      if (tocado[g.dataset.pv]) return;
+      [].forEach.call(g.querySelectorAll('button'), function (b) {
+        b.setAttribute('aria-pressed', 'false');
+      });
     });
-    $('[data-pv-cabeza-img]').classList.toggle('pv-disco',
-      !sobra && !soloCorrea && !fuera && cajaCabeza === cajaFoto);
-    /* La URL se guarda SIEMPRE, aunque la capa vaya oculta y no se
-       descargue: el carrito la usa de miniatura y sin esto se quedaba
-       sin foto justo en las correas que son foto del reloj entero. */
-    cabezaURL = enAvif(M.heads[cabeza], 1254);
-    ponCapa($('[data-pv-cabeza-img]'), M.heads[cabeza], sobra);
-    ponCapa($('[data-pv-correa-img]'), M.straps[correaActual()].src, false);
-    /* El marco se pinta con el gris de estudio de ESA foto: cuando el hueco
-       es más ancho que alto la foto no lo llena y, si los grises no son el
-       mismo, se ven dos. Las de brazalete son #EAE8E9 y las de correa
-       #D7D5D6. */
-    $('.pv-hero.pv-capas').style.background = capaCorrea.fondo || '#EAE8E8';
-    $('[data-pv-cabeza-img]').alt = 'laOra Lunar, ' + CAJAS[e.caja].nombre.toLowerCase() +
-      ', esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
-      ', agujas ' + AGUJAS[e.agujas].nombre.toLowerCase();
-    /* La correa dicha con palabras, para el alt de su capa y el pie de la
-       lupa: antes decía «Brazalete del Lunar» pusiera lo que pusiera. */
-    window.__correaDicha = TIPOS[e.tipo].nombre.toLowerCase() + ' ' +
-      TIPOS[e.tipo].colores[e.color].nombre.toLowerCase();
-    $('[data-pv-correa-img]').alt = 'Correa del Lunar: ' + window.__correaDicha;
-
-    $('[data-pv-precio]').textContent = eu(precio());
-    /* Klarna parte el precio en tres. El tercero se redondea hacia
-       arriba para que 3 plazos nunca sumen menos que el total. */
-    $('[data-pv-klarna]').textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
-    $('[data-pv-cal]').textContent = 'Calibre ' + MOV.cal;
-    $('[data-pv-cierre]').textContent = cierreTexto();
-    $('[data-pv-color]').textContent = TIPOS[e.tipo].colores[e.color].nombre;
-
-    botones('caja', CAJAS, function (k) {
-      return Object.keys(CATALOGO).some(function (x) { return x.indexOf(k + '|') === 0; });
-    });
-    botones('esfera', ESFERAS, function (k) {
-      return Object.keys(CATALOGO).some(function (x) { return x.indexOf(e.caja + '|' + k + '|') === 0; });
-    });
-    botones('agujas', AGUJAS, function (k) { return existe(null, null, k); });
-    botones('tapa', TAPAS, function () { return true; });
-    botones('tipo', TIPOS, tipoVale);
-    botones('color', TIPOS[e.tipo].colores, function (k) { return colorVale(e.tipo, k); });
-    /* El pespunte depende del color: cada uno trae los suyos, y solo
-       vale el que tiene foto. Sin pespuntes —el brazalete—, apagado. */
-    var ps = pespuntesDe();
-    botones('pespunte', ps || { 'blanco': { nombre: '—' } },
-            function (k) { return !!ps && pespunteVale(e.tipo, e.color, k); }, !ps);
-    /* El cierre, solo en la piel italiana. */
-    botones('cierre', CIERRES, function () { return true; }, !esItaliana());
-
-    /* La tapa no lleva nada elegido de salida: hasta que el cliente
-       toca una, el visor va limpio, sin miniatura. */
-    /* Fotos de apoyo que solo valen para una correa concreta. */
-    todos('[data-pv-extra]').forEach(function (f) {
-      f.hidden = (f.dataset.pvExtra !== correaActual());
-    });
-
-    var mini = $('[data-pv-tapa-img]');
-    ponMini(mini, e.tapa && M.tapas[e.tapa].src, !e.tapa);
-    if (e.tapa) mini.alt = 'Tapa trasera del Lunar, ' + TAPAS[e.tapa].tec;
-
-    /* La hebilla, igual que la tapa: nada hasta que se elige una. */
-    var heb = $('[data-pv-hebilla-img]');
-    var hayHebilla = esItaliana() && e.cierre && M.hebillas && M.hebillas[e.cierre];
-    ponMini(heb, hayHebilla && M.hebillas[e.cierre].src, !hayHebilla);
-    if (hayHebilla) heb.alt = 'Hebilla del Lunar, ' + CIERRES[e.cierre].tec;
-
-    $('[data-pv-tec="caja"]').textContent = CAJAS[e.caja].tec +
-      ' Cristal mineral y tapa trasera roscada y sólida' +
-      (e.tapa ? ', ' + TAPAS[e.tapa].tec : '') + '.';
-    $('[data-pv-tec="mov"]').textContent = MOV.tec;
-    $('[data-pv-tec="esf"]').textContent = 'Lunar con ' + ESFERAS[e.esfera].tec +
-      ' a las 4:30, agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
-      CORREAS[correaActual()].tec + ((esItaliana() && e.cierre)
-        ? ', con ' + CIERRES[e.cierre].tec
-        : '') + '.';
-    $('[data-pv-tec="agua"]').textContent =
-      '10 ATM (100 metros): vale para nadar y ducharse, no para bucear con botella. ' +
-      'La corona y los pulsadores no deben accionarse dentro del agua.';
   }
 
+  /* ---------- EL PANEL DE CURAR ---------- */
+  function paraMi() {
+    return Object.keys(COMBIS).map(function (k) {
+      return canon(k) + '   · ' + COMBIS[k].dicho;
+    }).join('\n');
+  }
+  function panelCurar() {
+    if (!CURAR) return;
+    var p = document.getElementById('pv-curar');
+    if (!p) {
+      p = document.createElement('div');
+      p.id = 'pv-curar'; p.className = 'pv-curar';
+      document.body.appendChild(p);
+    }
+    var combis = Object.keys(COMBIS);
+    var yaEsta = marcada(firma());
+    p.innerHTML =
+      '<b>Esta combinación</b>' +
+      '<p class="pv-curar-dicho">' + dichoCompleto() + '</p>' +
+      '<p><code>' + referencia() + '</code></p>' +
+      '<button type="button" data-curar-combi>' +
+        (yaEsta ? '☑  Marcada para quitar' : '☐  Quitar esta combinación') +
+      '</button>' +
+      '<hr>' +
+      '<b>Combinaciones marcadas (' + combis.length + ')</b>' +
+      (combis.length
+        ? '<ul>' + combis.map(function (k) {
+            return '<li><span>' + COMBIS[k].dicho + '</span>' +
+                   '<button type="button" data-descombi="' + k + '">quitar de la lista</button></li>';
+          }).join('') + '</ul>' +
+          '<button type="button" data-curar-aplica>' +
+            (APLICADAS ? 'Volver a ponerlas todas' : 'Quitarlas ya (' + combis.length + ')') +
+          '</button>' +
+          '<p class="pv-curar-dicho">' +
+            (APLICADAS
+              ? 'Quitadas <b>en este navegador</b>. Para que desaparezcan para todo el mundo, cópiame la lista y las escribo en la ficha.'
+              : 'Marcadas, pero todavía en pie. Púlsalo y desaparecen del configurador para que veas cómo queda.') +
+          '</p>' +
+          '<b>Para pasármelo</b>' +
+          '<textarea class="pv-curar-texto" readonly rows="4" onclick="this.select()">' + paraMi() + '</textarea>'
+        : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: sigue todo en pie hasta que lo confirmes.</p>') +
+      '<hr>' +
+      '<button type="button" data-curar-copia>Copiar la lista</button> ' +
+      '<button type="button" data-curar-vacia>Vaciar</button>' +
+      '<span class="pv-curar-ok" data-curar-ok hidden>copiado</span>';
+  }
+  function escapaDeMarcada() {
+    if (!vetada(firma()) && !(APLICADAS && marcada(firma()))) return;
+    var grupos = ['correa', 'agujas', 'bisel', 'esf', 'caja', 'mov'];
+    for (var i = 0; i < grupos.length; i++) {
+      var caja = $('[data-pv="' + grupos[i] + '"]');
+      if (!caja) continue;
+      var bs = caja.querySelectorAll('button');
+      for (var j = 0; j < bs.length; j++) {
+        if (bs[j].dataset.v === e[grupos[i]]) continue;
+        if (!llevaAMarcada(grupos[i], bs[j].dataset.v)) { bs[j].click(); return; }
+      }
+    }
+  }
+
+  /* ---------- LOS CLICS ---------- */
   document.addEventListener('click', function (ev) {
-    if (!ev.target.closest('[data-pv-comprar]')) return;
-    if (typeof laoraCarritoAnadir !== 'function') return;
-    laoraCarritoAnadir({
-      ref: referencia(),
-      nombre: 'Lunar ' + ESFERAS[e.esfera].nombre,
-      detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esfera].nombre.toLowerCase() +
-               ' · agujas ' + AGUJAS[e.agujas].nombre.toLowerCase() +
-               (e.tapa ? ' · tapa ' + TAPAS[e.tapa].nombre.toLowerCase() : '') + ' · ' + MOV.nombre,
-      correa: TIPOS[e.tipo].nombre + ' ' + TIPOS[e.tipo].colores[e.color].nombre.toLowerCase() +
-              (pespuntesDe() ? ' · pespunte ' + pespuntesDe()[e.pespunte].nombre.toLowerCase() : '') +
-              ((esItaliana() && e.cierre) ? ' · ' + CIERRES[e.cierre].nombre.toLowerCase() : ''),
-      precio: precio(),
-      foto: cabezaURL
-    });
-    window.location.href = '/carrito.html';
+    if (ev.target.closest('[data-curar-combi]')) {
+      var f = firma();
+      if (marcada(f)) desmarca(f);
+      else COMBIS[f] = { ref: referencia(), dicho: dichoCompleto() };
+      guardaCombis(); pinta(); escapaDeMarcada(); panelCurar();
+      return;
+    }
+    var dc = ev.target.closest('[data-descombi]');
+    if (dc) { delete COMBIS[dc.dataset.descombi]; guardaCombis(); pinta(); panelCurar(); return; }
+    if (ev.target.closest('[data-curar-aplica]')) {
+      APLICADAS = !APLICADAS; guardaAplicadas();
+      pinta(); escapaDeMarcada(); panelCurar();
+      return;
+    }
+    if (ev.target.closest('[data-curar-vacia]')) {
+      COMBIS = {}; APLICADAS = false; guardaCombis(); guardaAplicadas();
+      pinta(); panelCurar();
+      return;
+    }
+    if (ev.target.closest('[data-curar-copia]')) {
+      var ok = $('[data-curar-ok]');
+      var caja = document.querySelector('.pv-curar-texto');
+      var hecho = false;
+      if (caja) { caja.select(); try { hecho = document.execCommand('copy'); } catch (err) {} }
+      if (!hecho) { try { navigator.clipboard.writeText(paraMi()); hecho = true; } catch (err) {} }
+      if (ok) { ok.textContent = hecho ? 'copiado' : 'no he podido: selecciónalo tú'; ok.hidden = false; }
+      return;
+    }
+
+    var b = ev.target.closest('[data-pv] button');
+    if (b) {
+      var g = b.closest('[data-pv]').dataset.pv;
+      aplicaOpcion(g, b.dataset.v);
+      tocado[g] = true;
+      pinta();
+      return;
+    }
+
+    if (ev.target.closest('[data-pv-comprar]')) {
+      if (!COSTES_PUESTOS) return;
+      if (typeof laoraCarritoAnadir !== 'function') return;
+      laoraCarritoAnadir({
+        ref: referencia(),
+        nombre: 'Lunar',
+        detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esf].nombre.toLowerCase() +
+                 ' · bisel ' + BISELES[e.bisel].nombre.toLowerCase() + ' · ' + MOVS[e.mov].nombre,
+        correa: CORREAS[e.correa].nombre,
+        precio: precio(),
+        foto: (function () { var i = $('[data-pv-foto]'); return i.hidden ? '' : i.src; })()
+      });
+      window.location.href = '/carrito.html';
+    }
   });
 
-  /* El manifiesto manda: de él salen las rutas de todas las capas. */
-  fetch('/assets/img/lunar-config/manifest.json?v=42')
-    .then(function (r) { return r.json(); })
-    .then(function (m) { M = m; normaliza(); pinta(); });
+  pinta();
+  panelCurar();
 })();
 </script>
-<!-- ============ LA LUPA ============
-     Aquí la foto no es una imagen: son dos capas superpuestas, y la de
-     arriba puede llevar la máscara del disco. Así que en vez de
-     reimplementar el montaje —y arriesgarse a que la lupa enseñe algo
-     distinto de lo que hay en la ficha— se CLONA el visor entero y se
-     agranda. Lo que se ve en grande es, por construcción, lo mismo. -->
-<div class="pv-lupa" data-pv-lupa hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
-  <button type="button" class="pv-lupa-cerrar" data-pv-lupa-cerrar aria-label="Cerrar la foto">&#10005;</button>
-  <div class="pv-lupa-marco" data-pv-lupa-marco></div>
-  <p class="pv-lupa-pie" data-pv-lupa-pie></p>
-</div>
-
-<script>
-(function () {
-  var capa   = document.querySelector('[data-pv-lupa]');
-  var marco  = document.querySelector('[data-pv-lupa-marco]');
-  var pie    = document.querySelector('[data-pv-lupa-pie]');
-  var visor  = document.querySelector('.pv-hero.pv-capas');
-  if (!capa || !visor) return;
-  var devolverElFoco = null;
-
-  function abrir() {
-    var clon = visor.cloneNode(true);
-    clon.classList.add('pv-lupa-visor');
-    /* Fuera lo que no es el reloj: el aviso, el botón y las miniaturas
-       de tapa y hebilla, que en grande no pintan nada. */
-    ['.pv-aviso', '.pv-ampliar', '.pv-minis'].forEach(function (s) {
-      var x = clon.querySelector(s); if (x) x.remove();
-    });
-    /* En grande hay que pedir la capa grande: con el sizes del visor el
-       navegador se quedaría con la de 480 y se vería borrosa. */
-    clon.querySelectorAll('img').forEach(function (i) { i.sizes = '90vh'; });
-    marco.innerHTML = '';
-    marco.appendChild(clon);
-    pie.textContent = (document.querySelector('[data-pv-cabeza-img]').alt || 'laOra Lunar') +
-      ' · ' + (window.__correaDicha || '');
-    capa.hidden = false;
-    document.body.style.overflow = 'hidden';
-    devolverElFoco = document.activeElement;
-    document.querySelector('[data-pv-lupa-cerrar]').focus();
-  }
-  function cerrar() {
-    capa.hidden = true;
-    marco.innerHTML = '';                 /* que no se queden las capas cargadas */
-    document.body.style.overflow = '';
-    if (devolverElFoco && devolverElFoco.focus) devolverElFoco.focus();
-  }
-
-  visor.addEventListener('click', function (ev) {
-    if (ev.target.closest('.pv-ampliar')) return;   /* ya lo coge el de abajo */
-    abrir();
-  });
-  document.addEventListener('click', function (ev) {
-    if (ev.target.closest('[data-pv-ampliar]')) { abrir(); return; }
-    if (ev.target.closest('[data-pv-lupa-cerrar]')) { cerrar(); return; }
-    if (ev.target === capa) cerrar();
-  });
-  document.addEventListener('keydown', function (ev) {
-    if (ev.key === 'Escape' && !capa.hidden) cerrar();
-  });
-})();
-</script>
-
 <script src="/assets/js/telemetria.js" defer></script>
 </body>
 </html>

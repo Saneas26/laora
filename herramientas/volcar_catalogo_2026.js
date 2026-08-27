@@ -353,92 +353,59 @@ function hermanaDeDiametro(L, base) {
    qué correa encaja con qué cabeza.
    ============================================================ */
 function lunar() {
+  /* EL LUNAR, DESDE CERO (Óscar, 26/08/2026): «el lunar lo vamos a hacer
+     desde cero de nuevo» y «desde cero, por tanto todo lo anterior no nos
+     vale». La ficha se ha reescrito entera con el mecanismo del Trinchera y
+     hoy tiene UNA sola configuración —la base: esfera negra, bisel negro,
+     agujas blancas, caja de acero, brazalete de acero y cristal mineral—
+     todavía sin costes.
+
+     LO QUE HABÍA AQUÍ Y SE VA. Desde el 25/08 este volcador copiaba tal cual
+     las 1.944 referencias del Lunar viejo del catálogo anterior, porque
+     faltaba el manifiesto de sus fotos. Eran referencias de un reloj que ya
+     no se configura así, y el servidor las seguía dando por vendibles: quien
+     llegara a una por un enlace guardado podía comprarla. Se han ido con el
+     resto del Lunar viejo.
+
+     SIN COSTES NO HAY REFERENCIAS. Mientras la ficha diga que no los tiene,
+     el Lunar no aporta ni una: no se puede vender lo que no se sabe lo que
+     cuesta. En cuanto Óscar dé los costes, esto enumera solo. */
   const L = motorDe('lunar.html',
-    'MOV, CAJAS, ESFERAS, AGUJAS, TAPAS, CORREAS, CIERRES, TIPOS, CATALOGO, e, ' +
-    'precio, referencia, correaActual, pespuntesDe, esItaliana, tipoVale, colorVale, pespunteVale, ' +
-    'setM: function (m) { M = m; }');
-  /* SIN MANIFIESTO NO HAY LUNAR (25/08/2026). La purga de fotos del 23/08
-     se llevó `assets/img/lunar-config/` entera, manifiesto incluido, y de
-     él salen las reglas de qué correa encaja con qué cabeza. Desde ese día
-     el volcador moría AQUÍ y con él el catálogo de los cuatro modelos: la
-     ficha del Trinchera cambió veinte veces y el servidor seguía con la
-     copia del 23.
-     Lo que NO se hace es dejar el Lunar fuera del fichero: son mil
-     novecientas referencias y desaparecer del catálogo es dejar de
-     venderse. Se copian tal cual estaban y se dice en voz alta. */
-  const manifiesto = path.join(RAIZ, 'assets/img/lunar-config/manifest.json');
-  if (!fs.existsSync(manifiesto)) {
-    const viejo = JSON.parse(fs.readFileSync(path.join(RAIZ, 'assets/datos/catalogo-2026.json'), 'utf8'));
-    let n = 0;
-    for (const [ref, r] of Object.entries(viejo.refs)) {
-      if (!ref.startsWith('LO-03-')) continue;
-      refs[ref] = Object.fromEntries(Object.entries(r).map(([k, v]) =>
-        [k, k === 'p' || k === 'mm' || k === 'h' ? v
-          : Array.isArray(v) ? v.map((i) => t(viejo.textos[i]))
-          : typeof v === 'number' ? t(viejo.textos[v]) : v]));
-      n++;
-    }
-    console.log('⚠️  el Lunar se queda como estaba: falta assets/img/lunar-config/manifest.json,\n' +
-                '    que se fue en la purga del 23/08. Sus ' + n + ' referencias se copian del\n' +
-                '    catálogo anterior sin recalcular. El resto de modelos sí se rehace.');
-    return n;
+    'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTAL, COSTES_PUESTOS, ' +
+    'e, precio, referencia, normaliza, pinta, agua, vetada, firma, sinVeto');
+  if (!L.COSTES_PUESTOS) {
+    console.log('ℹ️  el Lunar no aporta referencias: se está rehaciendo desde cero y\n' +
+                '    todavía no tiene costes. Las 1.944 del Lunar viejo ya no se copian.');
+    return 0;
   }
-  L.setM(JSON.parse(fs.readFileSync(manifiesto, 'utf8')));
-
+  L.sinVeto(true);
   const e = L.e;
-  const AGUA = '10 ATM (100 metros): vale para nadar y ducharse, no para bucear con botella. ' +
-               'La corona y los pulsadores no deben accionarse dentro del agua.';
   let n = 0;
-
-  for (const k of Object.keys(L.CATALOGO)) {
-    const [caja, esfera, agujas] = k.split('|');
-    e.caja = caja; e.esfera = esfera; e.agujas = agujas;
-
-    for (const tipo of Object.keys(L.TIPOS)) {
-      if (!L.tipoVale(tipo)) continue;
-      for (const color of Object.keys(L.TIPOS[tipo].colores)) {
-        if (!L.colorVale(tipo, color)) continue;
-        const ps = L.pespuntesDe(tipo, color);
-        const pespuntes = ps ? Object.keys(ps).filter((p) => L.pespunteVale(tipo, color, p)) : [null];
-
-        for (const pes of pespuntes) {
-          e.tipo = tipo; e.color = color; if (pes) e.pespunte = pes;
-          /* CON LA PIEL ITALIANA, EL `null` TAMBIÉN CUENTA.
-             El cierre solo entra en la referencia si el cliente toca
-             una hebilla; si no la toca, la ficha genera la referencia
-             SIN cierre y cobra el de acero plateado. Esa referencia
-             existe de verdad —es la que sale al entrar y elegir piel
-             italiana sin más— y si no está aquí, el servidor rechaza
-             el pedido con «esa referencia ya no está a la venta». */
-          for (const cierre of (L.esItaliana() ? [null, ...Object.keys(L.CIERRES)] : [null])) {
-            e.cierre = cierre;
-            for (const tapa of [null, ...Object.keys(L.TAPAS)]) {
-              e.tapa = tapa;
-              n += anota(L.referencia(), L.precio(),
-                'Lunar ' + L.ESFERAS[e.esfera].nombre,
-                L.CAJAS[e.caja].nombre + ' · esfera ' + L.ESFERAS[e.esfera].nombre.toLowerCase() +
-                  ' · agujas ' + L.AGUJAS[e.agujas].nombre.toLowerCase() +
-                  (e.tapa ? ' · tapa ' + L.TAPAS[e.tapa].nombre.toLowerCase() : '') +
-                  ' · ' + L.MOV.nombre,
-                L.TIPOS[e.tipo].nombre + ' ' + L.TIPOS[e.tipo].colores[e.color].nombre.toLowerCase() +
-                  (L.pespuntesDe() ? ' · pespunte ' + L.pespuntesDe()[e.pespunte].nombre.toLowerCase() : '') +
-                  ((L.esItaliana() && e.cierre) ? ' · ' + L.CIERRES[e.cierre].nombre.toLowerCase() : ''),
-                { movimiento: L.MOV.tec,
-                  caja: L.CAJAS[e.caja].tec + ' Cristal mineral y tapa trasera roscada y sólida' +
-                        (e.tapa ? ', ' + L.TAPAS[e.tapa].tec : '') + '.',
-                  esfera: 'Lunar con ' + L.ESFERAS[e.esfera].tec + ' a las 4:30, agujas ' +
-                          L.AGUJAS[e.agujas].nombre.toLowerCase() + ' con lume, y ' +
-                          L.CORREAS[L.correaActual()].tec +
-                          ((L.esItaliana() && e.cierre) ? ', con ' + L.CIERRES[e.cierre].tec : '') + '.',
-                  agua: AGUA }, 39.7) ? 1 : 0;
-            }
-          }
-        }
-      }
-    }
+  for (const mov of Object.keys(L.MOVS))
+  for (const caja of Object.keys(L.CAJAS))
+  for (const esf of Object.keys(L.ESFERAS))
+  for (const bisel of Object.keys(L.BISELES))
+  for (const agujas of Object.keys(L.AGUJAS))
+  for (const correa of Object.keys(L.CORREAS)) {
+    e.mov = mov; e.caja = caja; e.esf = esf;
+    e.bisel = bisel; e.agujas = agujas; e.correa = correa;
+    L.normaliza();
+    if (L.vetada(L.firma())) continue;
+    n += anota(L.referencia(), L.precio(),
+      'Lunar',
+      L.CAJAS[caja].nombre + ' · esfera ' + L.ESFERAS[esf].nombre.toLowerCase() +
+        ' · bisel ' + L.BISELES[bisel].nombre.toLowerCase() + ' · ' + L.MOVS[mov].nombre,
+      L.CORREAS[correa].nombre,
+      { movimiento: L.MOVS[mov].tec,
+        caja: 'Caja de ' + L.CAJAS[caja].mat + ', ' + L.CRISTAL + '.',
+        esfera: L.ESFERAS[esf].tec + ' Bisel: ' + L.BISELES[bisel].tec +
+                '. Agujas: ' + L.AGUJAS[agujas].tec + '.',
+        agua: L.agua() },
+      null, null) ? 1 : 0;
   }
   return n;
 }
+
 
 /* ============================================================
    LO-04 · BITÁCORA
