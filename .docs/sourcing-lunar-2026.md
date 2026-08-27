@@ -7,6 +7,8 @@ trabaja ahora porque es el turno del modelo — ver `laora-modelo-a-modelo`.
 > `COSTES_PUESTOS = false` y todos sus `coste: 0`, así que el volcador lo deja
 > fuera del catálogo del servidor: **0 referencias**. Hasta que estos costes
 > entren en la ficha, no se puede vender ni un Lunar.
+>
+> A 27/08 ya están todos los costes menos **las cinco correas de caucho**.
 
 ---
 
@@ -82,53 +84,41 @@ aparte en vez de meterla en el saco de las montadas.
 
 ---
 
-## 3 · Lo que hace falta para poner precio
+## 3 · El movimiento
 
-**Falta un solo dato y sin él no hay precio: el coste del movimiento.**
+**LO_MQ326 · mecacuarzo japonés, arquitectura VK63 · 26,67 €**
+[1005011972357411](https://es.aliexpress.com/item/1005011972357411.html)
+— dato de Óscar, 27/08/2026.
 
-`lunar.html` tiene `MOVS.MQ.coste = 0`. El Lunar monta el **LO_MQ326**,
-mecacuarzo japonés de arquitectura **VK63**, y el anuncio de las cajas dice
-expresamente *«movimiento NO incluido»*. En todo el repo no hay ni un precio de
-VK63: ni en las capturas, ni en el sourcing, ni en el libro.
+El anuncio de las cajas dice expresamente *«movimiento NO incluido»*, así que
+va sumado aparte en todas las versiones. **Falta la captura de este anuncio**:
+variantes, envío, mínimos y descuento por volumen.
 
-Lo demás del motor ya está: logo 3,78 · packing y envío 9 (con IVA) · garantía
-4 · SS 5 % · multiplicador 2,28 · IVA 21 % · IRPF 20 %, y el suelo de la
-**regla nº1** (50 € limpios o 15 % neto medido con Klarna al 5 %).
-
-### Lo que costaría cada versión, sin el movimiento
-
-Piezas, ya sumado el logo de 3,78 €:
-
-| Versión | Caja | Correa | Piezas sin movimiento |
-|---|--:|--:|--:|
-| Acero · mineral · montada | 34,59 | 19,79 | **58,16 €** |
-| Acero · mineral · a piezas (bisel blanco + oro rosa) | 37,57 | 19,79 | **61,14 €** |
-| Acero · **zafiro** · montada | 48,99 | 19,79 | **72,56 €** |
-| **PVD** · mineral · pack con brazalete | 48,99 | incl. | **53,77 €** + esfera y agujas |
-
-El PVD sale **más barato que el acero con zafiro** aun llevando el brazalete
-dentro, pero le faltan esfera y agujas: si son las sueltas (8,99 + 4,79), se
-queda en **67,55 €**, todavía por debajo del zafiro.
-
----
+Lo demás del motor ya estaba: logo 3,78 · packing y envío 9 (con IVA) ·
+garantía 4 · SS 5 % · multiplicador 2,28 · IVA 21 % · IRPF 20 %, y el suelo de
+la **regla nº1** (50 € limpios o 15 % neto medido con Klarna al 5 %).
 
 ## 4 · Lo que falta por confirmar
 
-1. **El coste del movimiento VK63 / LO_MQ326.** Bloquea todo.
-2. **El zafiro de 48,99, ¿lleva brazalete?** Por cómo funciona el otro anuncio
+1. ~~El coste del movimiento VK63.~~ ✅ **26,67 €**, dado el 27/08 — sección 3.
+2. **El coste de las cinco correas de caucho**, que siguen a cero. Es lo único
+   que falta para tener el Lunar entero costeado.
+3. **El zafiro de 48,99, ¿lleva brazalete?** Por cómo funciona el otro anuncio
    diría que no, y así está contado arriba. Si lo lleva, esa versión baja
    19,79 €.
-3. **La esfera y las agujas del PVD, ¿son las sueltas de 8,99 y 4,79?** Y con
+4. **La esfera y las agujas del PVD, ¿son las sueltas de 8,99 y 4,79?** Y con
    qué colores se ofrece.
-4. **«Dorada» y «oro rosa», ¿son dos acabados distintos o el mismo?** Óscar
+5. **«Dorada» y «oro rosa», ¿son dos acabados distintos o el mismo?** Óscar
    nombró los dos en la misma lista, y en la captura de agosto sólo hay un
    juego de agujas doradas (NO.42). En la ficha hay una sola entrada, `ORO`.
-5. **«Bisel blanco», ¿es el «bisel plateado» de la captura de agosto?** Los
+6. **«Bisel blanco», ¿es el «bisel plateado» de la captura de agosto?** Los
    montajes nº 6 y nº 7 encajan con las piezas P-001 y P-007, que la captura
    describe como *bisel taquimétrico plateado*.
-6. **El enlace de las cajas con zafiro** llega sin captura. Hay que hacerla
-   antes de comprar: variantes, envío, mínimos y descuento por volumen.
-7. **Envío y descuentos.** Del proveedor de mineral se sabe: envío **4,52 €**,
+7. **Dos anuncios sin captura**: el de las cajas con zafiro
+   (`1005012226039294`) y el del movimiento (`1005011972357411`). Hay que
+   hacerlas antes de comprar: variantes, envío, mínimos y descuento por
+   volumen.
+8. **Envío y descuentos.** Del proveedor de mineral se sabe: envío **4,52 €**,
    **−5 % desde 5 unidades**, mínimo 1, devoluciones gratis 90 días, y los
    precios de agosto llevaban un **−50 %** de promoción que hay que
    reverificar en sesión limpia antes de pedir.
@@ -157,24 +147,34 @@ del motor de la ficha, y lo lleva el chat de la web. Aquí queda el dato.
 
 ---
 
-## 6 · Qué PVP saldría, según lo que cueste el movimiento
+## 6 · Los precios del Lunar, ya con todo
 
-Con el motor de siempre y el suelo de la regla nº1. Entre paréntesis, lo que
-queda **limpio pagando por Klarna**.
+Con el VK63 a 26,67 €, el logo, el packing, la garantía, la SS y el
+multiplicador de siempre. «Limpio» es lo que queda **pagando por Klarna**, que
+es como se mide la regla nº1.
 
-| Movimiento | Acero · mineral · montada | Acero · mineral · a piezas | Acero · **zafiro** | **PVD** · pack + esfera y agujas |
-|--:|---|---|---|---|
-| 10,00 € | 189,90 € (51,10) | 199,90 € (54,80) | 229,90 € (63,85) | 209,90 € (56,47) |
-| 15,00 € | 199,90 € (53,11) | 209,90 € (56,82) | 239,90 € (65,86) | 219,90 € (58,48) |
-| 20,00 € | 209,90 € (55,12) | 219,90 € (58,83) | 249,90 € (67,87) | 229,90 € (60,49) |
-| 25,00 € | 229,90 € (63,34) | 229,90 € (60,84) | 259,90 € (69,88) | 249,90 € (68,72) |
-| 30,00 € | 239,90 € (65,35) | 249,90 € (69,06) | 269,90 € (71,89) | 259,90 € (70,73) |
-| 35,00 € | 249,90 € (67,36) | 259,90 € (71,07) | 279,90 € (73,90) | 269,90 € (72,74) |
-| 40,00 € | 259,90 € (69,38) | 269,90 € (73,08) | 299,90 € (82,13) | 279,90 € (74,75) |
+| Versión | Piezas | Coste completo | **PVP** | Limpio | % |
+|---|--:|--:|--:|--:|--:|
+| Acero · mineral · montada | 84,83 € | 101,08 € | **229,90 €** | 61,94 € | 26,9 % |
+| Acero · mineral · a piezas *(bisel blanco + oro rosa)* | 87,81 € | 104,21 € | **239,90 €** | 65,65 € | 27,4 % |
+| **PVD** · pack con brazalete + esfera y agujas | 93,22 € | 109,89 € | **249,90 €** | 67,31 € | 26,9 % |
+| Acero · **zafiro** · montada | 99,23 € | 116,20 € | **269,90 €** | 74,69 € | 27,7 % |
 
-Todas las filas cumplen la regla nº1: en el peor caso —movimiento a 10 € y
-caja montada— quedan 51,10 € limpios. **Ninguna versión del Lunar se cae por
-abajo, cueste lo que cueste el movimiento.**
+Todas van con **brazalete**. Las cuatro **cumplen la regla nº1** de sobra: la
+peor deja 61,94 € limpios, un 26,9 %.
 
-La portada anuncia hoy el Lunar a **219,90 €**. Eso encaja con un movimiento
-de entre 20 y 25 € en la versión de acero, mineral y montada.
+⚠️ **Falta el coste de las correas de caucho.** `lunar.html` tiene cinco
+—negro, azul marino, marrón, gris y naranja— a `coste: 0`. Si el caucho es más
+barato que los 19,79 € del brazalete, el Lunar más barato bajará de 229,90 €.
+
+### Lo que la web anuncia hoy y no cuadra
+
+| Dónde | Dice | Lo más barato de verdad |
+|---|--:|--:|
+| Portada (`index.html`) | 219,90 € | **229,90 €** |
+| Colección y `desde.json` | 189,90 € | **229,90 €** |
+
+Son precios del Lunar viejo, de antes de que se pusiera a cero el 26/08. Como
+el Lunar está fuera del catálogo, hoy no se puede comprar a ningún precio; pero
+en cuanto vuelva, esas dos cifras hay que corregirlas o se anuncia una cosa y
+se cobra otra. **Lo decide Óscar.**
