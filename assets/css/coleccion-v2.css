@@ -688,6 +688,10 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   background:#fff;border:1px solid var(--cv2-linea);
 }
 .cv2-minis2 button:hover{border-color:var(--cv2-negro)}
+/* La miniatura elegida se señala, que si no no se sabe cuál manda. */
+.cv2-minis2 button[aria-pressed="true"]{
+  border-color:var(--cv2-negro);box-shadow:inset 0 0 0 2px var(--cv2-oro);
+}
 .cv2-minis2 img{width:100%;height:100%;object-fit:contain;display:block}
 .cv2-minis2 a{
   margin-left:auto;font-family:var(--cv2-mono);font-size:14px;font-weight:700;
