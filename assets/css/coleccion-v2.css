@@ -152,10 +152,9 @@
   background-image:
     linear-gradient(100deg, rgba(6,7,6,.92) 0%, rgba(6,7,6,.84) 32%, rgba(6,7,6,.46) 64%, rgba(6,7,6,.50) 100%),
     url("/assets/img/trinchera-2026/editorial/soldado-1600.avif");
-  background-image:
-    linear-gradient(100deg, rgba(6,7,6,.92) 0%, rgba(6,7,6,.84) 32%, rgba(6,7,6,.46) 64%, rgba(6,7,6,.50) 100%),
-    image-set(url("/assets/img/trinchera-2026/editorial/soldado-1600.avif") 1x,
-              url("/assets/img/trinchera-2026/editorial/soldado-2560.avif") 2x);
+  /* Sin image-set y sin 2560: el máster que quedó de esta escena mide
+     1672 px de ancho, así que el 1600 es todo lo que hay. Ampliar para
+     fingir una versión de retina solo pesaría más sin verse mejor. */
 }
 /* El Lunar ya viene oscuro de fábrica —cielo negro—, así que el velo
    lateral es más suave que el del Trinchera. Lo que sí necesita es un
