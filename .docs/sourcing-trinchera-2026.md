@@ -11,8 +11,8 @@ Enlaces entregados por Óscar el **19/08/2026**.
 
 | Pieza en la ficha | Coste que usa hoy | Anuncio de Óscar | Precio conocido del anuncio |
 |---|---|---|---|
-| `MOVS.A` Automático (LO_A4026) | 50,09 € | [1005007137519976](https://es.aliexpress.com/item/1005007137519976.html) | **47,19 €** (−47 %; PVP 89,04) |
-| `MOVS.Q` Cuarzo Ronda 715 (LO_Q6026) | 15,05 € | [1005007185210188](https://es.aliexpress.com/item/1005007185210188.html) | **13,79 €** (−50 %; PVP 27,58) |
+| `MOVS.A` Automático (LO_A4026) **· también del PRECISA** | 50,09 € | [1005007137519976](https://es.aliexpress.com/item/1005007137519976.html) | **47,19 €** (−47 %; PVP 89,04) |
+| `MOVS.Q` Cuarzo Ronda 715 (LO_Q6026) **· también del PRECISA** | 15,05 € | [1005007185210188](https://es.aliexpress.com/item/1005007185210188.html) | **13,79 €** (−50 %; PVP 27,58) |
 | Anillo espaciador (solo el cuarzo) | **3,60 €** ✅ | [1005007976335088](https://es.aliexpress.com/item/1005007976335088.html) | 2,99 € · 2,89 desde 2 uds · 2,73 desde 5 |
 | `CAJAS.PL` Acero plata | 23,00 € | [1005008932757286](https://es.aliexpress.com/item/1005008932757286.html) | **19,19 €** (oferta; normal 39,98) |
 | `CAJAS.NG` Negra PVD | 23,00 € | mismo anuncio | **19,19 €** |
@@ -237,3 +237,40 @@ era un brazalete). Los costes valen; los enlaces no están.
 
 **En este reloj manda el SUELO, no el multiplicador**: el 2,28 da 177,65 → 179,90
 y el suelo exige 179,90 exactos. Coinciden.
+
+
+---
+
+## Los dos movimientos son también los del Precisa (27/08/2026)
+
+**Óscar:** «Para el Precisa usamos lo mismo que para el Trinchera ya que van a
+llevar los mismos movimientos.»
+
+El cuarzo ya coincidía: los dos modelos montaban el **LO_Q6026** a 15,05 €. El
+automático no: el Precisa llevaba un PT5000 propio (**LO_A3826**, 61,69 €) y
+pasa al **LO_A4026** del Trinchera, 50,09 €.
+
+**Qué cambia al comprar:**
+
+- **Un proveedor menos.** El PT5000 del Precisa desaparece de la lista de
+  compra. Quedan dos anuncios de movimiento para los dos modelos.
+- **Pedidos más grandes en los mismos dos anuncios**, que es donde se negocian
+  los descuentos por volumen. El automático está hoy con un −47 % que hay que
+  **reverificar antes de comprar**: 47,19 € frente a los 50,09 € de la ficha.
+- **11,60 € menos de coste** en cada Precisa automático. El PVP baja de
+  369,90 € a **349,90 €**, y deja **99,75 € limpios (28,5 %)** por Klarna.
+
+### ⚠️ La reserva son 38 horas, no 40
+
+El anuncio declara **38 h** (captura del 19/08 en
+`herramientas/capturas/2026-08-19-1005007137519976.json`). La ficha del
+**Trinchera dice 40 h y está mal**; el Precisa dice 38 y está bien. Hay que
+corregir el Trinchera, no copiar el error.
+
+### ⚠️ Y no es suizo
+
+El mismo anuncio: es un **Tianjin Seagull ST2130**. La arquitectura sí es la
+del ETA 2824-2, pero las dos fichas lo llaman «Automático Suizo». La norma de
+la casa prohíbe nombrar China y la marca del movimiento — no obliga a decir
+«Suizo». Con el calibre ahora compartido, el problema aparece en dos modelos en
+vez de en uno.

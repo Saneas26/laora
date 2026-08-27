@@ -193,15 +193,29 @@
 
   /* Los costes son los de DetallePrecisa (Óscar, 15/08/2026):
      caja cuarzo 62,99 (tapa sólida, 10 ATM) · caja automático 59,40
-     (tapa de cristal, 20 ATM) · esfera 10,39 · agujas del PT5000
-     4,89 · logo 3,78. El brazalete integrado va incluido en la caja. */
+     (tapa de cristal, 20 ATM) · esfera 10,39 · agujas 4,89 · logo 3,78.
+     El brazalete integrado va incluido en la caja.
+
+     LOS MOVIMIENTOS SON LOS DEL TRINCHERA (Óscar, 27/08/2026): «para el
+     Precisa usamos lo mismo que para el Trinchera ya que van a llevar los
+     mismos movimientos». El cuarzo ya coincidía —LO_Q6026, 15,05—; el
+     automático era un PT5000 propio (LO_A3826, 61,69) y pasa a ser el
+     LO_A4026 del Trinchera: 50,09. Un solo calibre automático para los
+     dos modelos: un proveedor menos, un pedido más grande y 11,60 €
+     menos de coste por reloj. Las agujas se siguen comprando
+     aparte, que van con la esfera del Precisa y no con el movimiento.
+
+     LA RESERVA SON 38 HORAS, no 40. El anuncio del proveedor declara 38
+     (captura del 19/08 en herramientas/capturas/2026-08-19-1005007137519976.json)
+     y el Precisa ya decía 38. La ficha del Trinchera dice 40 y está mal:
+     ahí hay que corregirlo, no copiarlo aquí. */
   var MOVS = {
     Q: { nombre: 'Cuarzo Suizo', cal: 'LO_Q6026', coste: 15.05, caja: 62.99, agujas: 0,
          tapa: 'S', agua: '10 ATM / 100 metros',
          tec: 'Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y fecha a las 3. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %. Pila de hasta 60 meses de autonomía.' },
-    A: { nombre: 'Automático Suizo', cal: 'LO_A3826', coste: 61.69, caja: 59.40, agujas: 4.89,
+    A: { nombre: 'Automático Suizo', cal: 'LO_A4026', coste: 50.09, caja: 59.40, agujas: 4.89,
          tapa: 'C', agua: '20 ATM / 200 metros',
-         tec: 'Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2 con 25 rubíes. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional visible por la tapa de cristal.' }
+         tec: 'Calibre laOra LO_A4026, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional visible por la tapa de cristal.' }
   };
   var ESFERAS = {
     AZM: { nombre: 'Azul Marino',    foto: 'azul-marino',    tec: 'Waffle azul marino con índices y agujas aplicadas con lumen. Fecha a las 3. Ø 31,8 mm.' },
