@@ -371,9 +371,9 @@ function lunar() {
      el Lunar no aporta ni una: no se puede vender lo que no se sabe lo que
      cuesta. En cuanto Óscar dé los costes, esto enumera solo. */
   const L = motorDe('lunar.html',
-    'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTALES, COMBOS, ' +
-    'COSTES_PUESTOS, e, precio, referencia, normaliza, pinta, agua, vetada, ' +
-    'firma, sinVeto');
+    'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTALES, PAQUETES, ' +
+    'COSTES_PUESTOS, costes, e, precio, referencia, normaliza, pinta, agua, ' +
+    'vetada, firma, sinVeto');
   if (!L.COSTES_PUESTOS) {
     console.log('ℹ️  el Lunar no aporta referencias: se está rehaciendo desde cero y\n' +
                 '    todavía no tiene costes. Las 1.944 del Lunar viejo ya no se copian.');
@@ -382,19 +382,23 @@ function lunar() {
   L.sinVeto(true);
   const e = L.e;
   let n = 0;
-  /* SE RECORRE LA TABLA DE TERNAS, no el producto de esfera × bisel × agujas.
-     Desde el 27/08/2026 sólo existen cuatro combinaciones de las doce que
-     salían de cruzarlo todo, y cruzarlas confiando en que `normaliza()` las
-     arregle daría la misma referencia varias veces. La tabla es la verdad. */
+  /* SE RECORRE LA TABLA DE PAQUETES, no el producto de todas las casillas.
+     El proveedor vende la caja montada con bisel, esfera y agujas dentro, y
+     sólo en las combinaciones que él monta: cruzarlo todo daría referencias
+     que nadie puede fabricar, y con un precio repartido a ojo.
+
+     Y LO QUE NO TIENE COSTE NO ENTRA. `costes()` devuelve null cuando la
+     correa no tiene precio de compra —hoy, las cinco de caucho—: sin coste
+     no hay precio, y sin precio no se vende. */
   for (const mov of Object.keys(L.MOVS))
-  for (const caja of Object.keys(L.CAJAS))
-  for (const cristal of Object.keys(L.CRISTALES))
-  for (const c of L.COMBOS)
+  for (const p of L.PAQUETES)
   for (const correa of Object.keys(L.CORREAS)) {
-    e.mov = mov; e.caja = caja; e.cristal = cristal;
-    e.esf = c.esf; e.bisel = c.bisel; e.agujas = c.agujas; e.correa = correa;
+    e.mov = mov; e.caja = p.caja; e.cristal = p.cristal;
+    e.esf = p.esf; e.bisel = p.bisel; e.agujas = p.agujas; e.correa = correa;
     L.normaliza();
     if (L.vetada(L.firma())) continue;
+    if (L.costes() === null) continue;
+    const caja = p.caja, cristal = p.cristal, c = p;
     n += anota(L.referencia(), L.precio(),
       'Lunar',
       L.CAJAS[caja].nombre + ' · esfera ' + L.ESFERAS[c.esf].nombre.toLowerCase() +

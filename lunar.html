@@ -456,12 +456,16 @@
      LO_A4026, LO_A3826. Dos maneras de llamar a la misma pieza en la misma
      tienda es un descuadre que acaba en un pedido mal leído. */
   var MOVS = {
-    MQ: { nombre: 'Mecacuarzo japonés', cal: 'LO_MQ326', coste: 0,
+    MQ: { nombre: 'Mecacuarzo japonés', cal: 'LO_MQ326', coste: 26.67,
           tec: 'Mecacuarzo japonés, calibre LO_MQ326: cronógrafo de tres ' +
                'contadores, aguja de barrido y fecha.' }
   };
+  /* El coste de la caja NO está aquí: va en PAQUETES, porque el proveedor
+     la vende montada con bisel, esfera y agujas dentro. Aquí sólo viven el
+     nombre y el material. */
   var CAJAS = {
-    PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0 }
+    PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0 },
+    NG: { nombre: 'Negro PVD', mat: 'acero inoxidable 316L con PVD negro', coste: 0 }
   };
   var ESFERAS = {
     NEG: { nombre: 'Negra', coste: 0,
@@ -471,13 +475,21 @@
     BLA: { nombre: 'Blanca', coste: 0,
            tec: 'Esfera plateada con los tres contadores en azul, índices ' +
                 'aplicados y lumen.' },
+    NAR: { nombre: 'Naranja',  coste: 0,
+           tec: 'Esfera naranja con tres contadores, índices aplicados y lumen.' },
+    DOR: { nombre: 'Dorada',   coste: 0,
+           tec: 'Esfera dorada con tres contadores, índices aplicados y lumen.' },
+    ORO: { nombre: 'Oro rosa', coste: 0,
+           tec: 'Esfera con detalles de oro rosa, tres contadores, índices ' +
+                'aplicados y lumen.' },
+    PAN: { nombre: 'Panda',    coste: 0,
+           tec: 'Esfera panda: fondo claro con los tres contadores oscuros, ' +
+                'índices aplicados y lumen.' }
   };
-  /* La grafito estuvo publicada el 27/08/2026 y salió el mismo día: Óscar,
-     «esfera negra, y blanca, no hay grafito». Su AVIF sigue en la carpeta
-     de la serie, sin que lo pida nadie, por si vuelve. */
   var BISELES = {
     NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' },
-    AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul' }
+    AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul' },
+    BLA: { nombre: 'Blanco', coste: 0, tec: 'bisel de taquímetro blanco' }
   };
   /* Las azules son horaria y minutero AZULADOS; el segundero del
      cronógrafo y los índices siguen siendo de acero. De momento sólo hay
@@ -491,17 +503,27 @@
            tec: 'horaria y minutero en oro rosa con segundero de acero' },
     NAR: { nombre: 'Naranja',  coste: 0,
            tec: 'horaria y minutero naranjas con segundero de acero' },
+    /* ⚠️ La hoja de compra lista «esfera dorada · agujas doradas» como una
+       combinación aparte de la de oro rosa, y al mismo coste, así que son
+       dos acabados y no uno. La propia hoja lo deja como pregunta abierta. */
+    DOR: { nombre: 'Doradas',  coste: 0,
+           tec: 'horaria y minutero dorados con segundero de acero' },
     AZU: { nombre: 'Azules',   coste: 0,
            tec: 'horaria y minutero azulados con segundero de acero' }
   };
+  /* ⚠️ LAS CINCO DE CAUCHO NO TIENEN COSTE (`coste: null`). Es lo único que
+     falta de la hoja de compra. Se siguen dibujando —Óscar las pidió— pero
+     la ficha dice «Precio por definir» y no deja comprarlas: un coste
+     inventado es un precio inventado, y de ahí sale un pedido que pierde
+     dinero. En cuanto llegue el número, se escribe aquí y ya está. */
   var CORREAS = {
-    ACERO: { nombre: 'Brazalete de acero', coste: 0,
+    ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
              tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
-    CNEG: { nombre: 'Caucho negro',      coste: 0, tec: 'correa de caucho negra' },
-    CAZU: { nombre: 'Caucho azul marino', coste: 0, tec: 'correa de caucho azul marino' },
-    CMAR: { nombre: 'Caucho marrón',     coste: 0, tec: 'correa de caucho marrón' },
-    CGRI: { nombre: 'Caucho gris',       coste: 0, tec: 'correa de caucho gris' },
-    CNAR: { nombre: 'Caucho naranja',    coste: 0, tec: 'correa de caucho naranja' }
+    CNEG: { nombre: 'Caucho negro',       coste: null, tec: 'correa de caucho negra' },
+    CAZU: { nombre: 'Caucho azul marino', coste: null, tec: 'correa de caucho azul marino' },
+    CMAR: { nombre: 'Caucho marrón',      coste: null, tec: 'correa de caucho marrón' },
+    CGRI: { nombre: 'Caucho gris',        coste: null, tec: 'correa de caucho gris' },
+    CNAR: { nombre: 'Caucho naranja',     coste: null, tec: 'correa de caucho naranja' }
   };
   /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
      Zafiro»). No se ve en la foto, así que NO entra en la clave de la
@@ -540,7 +562,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=2';
+  var SERIE_V = '?v=3';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -677,11 +699,12 @@
      nombre de un fichero a un texto de pantalla: el día que ese texto se
      retoque, la ficha pide una foto que no existe y sale el cartel sin que
      nadie haya tocado una imagen. Así lo hace el Trinchera. */
-  var SERIE_CAJA   = { PL: 'acero' };
-  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca' };
-  var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul' };
-  var SERIE_AGUJAS = { BLA: 'blancas', ORO: 'ororosa',
-                       NAR: 'naranja', AZU: 'azules' };
+  var SERIE_CAJA   = { PL: 'acero', NG: 'pvd' };
+  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca', NAR: 'naranja',
+                       DOR: 'dorada', ORO: 'ororosa', PAN: 'panda' };
+  var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul', BLA: 'bblanco' };
+  var SERIE_AGUJAS = { BLA: 'blancas', ORO: 'ororosa', NAR: 'naranja',
+                       DOR: 'doradas', AZU: 'azules' };
   var SERIE_CORREA = { ACERO: 'brazalete', CNEG: 'cauchoneg', CAZU: 'cauchoazu',
                        CMAR: 'cauchomar', CGRI: 'cauchogri', CNAR: 'cauchonar' };
   function claveSerie() {
@@ -724,16 +747,51 @@
      abajo se recoloca solo. Comprobar en los dos sentidos dejaría al cliente
      encerrado: con las agujas naranjas puestas desaparecería el botón de la
      esfera blanca. */
-  var COMBOS = [
-    { esf: 'NEG', bisel: 'NEG', agujas: 'BLA' },
-    { esf: 'NEG', bisel: 'NEG', agujas: 'NAR' },
-    { esf: 'BLA', bisel: 'NEG', agujas: 'ORO' },
-    { esf: 'BLA', bisel: 'AZU', agujas: 'AZU' }
+  /* EL PROVEEDOR VENDE PAQUETES, NO DIMENSIONES SUELTAS (hoja de compra,
+     27/08/2026). La caja montada de 34,59 YA TRAE bisel, esfera y agujas
+     dentro, y sólo existe en las combinaciones que él monta. Repartir esos
+     34,59 entre cuatro casillas daría un precio inventado a cualquier
+     combinación que no venda: por eso el coste sale de ESTA TABLA y no de
+     una suma de piezas.
+
+     Y montar a piezas cuesta MÁS que comprarla montada —23,79 + 8,99 + 4,79
+     = 37,57 contra 34,59—, así que sólo se monta lo que no viene montado.
+     Hoy es una sola: bisel blanco con esfera de oro rosa.
+
+     La tabla manda también sobre los BOTONES: sólo se dibuja lo que aparece
+     aquí, en el orden esfera → bisel → agujas → caja → cristal. */
+  var PAQUETES = [
+    /* acero · mineral · caja montada ........................ 34,59 */
+    { caja: 'PL', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 34.59 },
+    { caja: 'PL', cristal: 'MIN', esf: 'NAR', bisel: 'NEG', agujas: 'NAR', coste: 34.59 },
+    { caja: 'PL', cristal: 'MIN', esf: 'DOR', bisel: 'NEG', agujas: 'DOR', coste: 34.59 },
+    { caja: 'PL', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'ORO', coste: 34.59 },
+    { caja: 'PL', cristal: 'MIN', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 34.59 },
+    { caja: 'PL', cristal: 'MIN', esf: 'PAN', bisel: 'BLA', agujas: 'BLA', coste: 34.59 },
+    /* acero · mineral · montada a piezas .................... 37,57 */
+    { caja: 'PL', cristal: 'MIN', esf: 'ORO', bisel: 'BLA', agujas: 'ORO', coste: 37.57 },
+    /* acero · zafiro · caja montada, 100 m .................. 48,99 */
+    { caja: 'PL', cristal: 'ZAF', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 48.99 },
+    { caja: 'PL', cristal: 'ZAF', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 48.99 }
+    /* ⚠️ FALTA EL PVD, la décima de la hoja: el pack de 48,99 trae caja,
+       bisel negro y brazalete PVD, pero la esfera y las agujas están «por
+       decidir». Sin saber cuáles, no se puede escribir la combinación, y
+       por eso la caja `NG` no se dibuja: los botones salen de esta tabla. */
   ];
+  /* El paquete de una combinación, o null si el proveedor no la monta. */
+  function paqueteDe(s) {
+    s = s || e;
+    for (var i = 0; i < PAQUETES.length; i++) {
+      var p = PAQUETES[i];
+      if (p.caja === s.caja && p.cristal === s.cristal && p.esf === s.esf &&
+          p.bisel === s.bisel && p.agujas === s.agujas) return p;
+    }
+    return null;
+  }
   /* Un filtro parcial: se le pasa lo que ya está decidido y devuelve las
      ternas que todavía encajan. Con `{}` devuelve las cuatro. */
   function combos(fij) {
-    return COMBOS.filter(function (c) {
+    return PAQUETES.filter(function (c) {
       for (var k in fij) if (fij[k] && c[k] !== fij[k]) return false;
       return true;
     });
@@ -757,11 +815,12 @@
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
        delante de una combinación que no existe. */
-    if (valores('esf', {}).indexOf(e.esf) < 0) e.esf = valores('esf', {})[0];
-    var bs = valores('bisel', { esf: e.esf });
-    if (bs.indexOf(e.bisel) < 0) e.bisel = bs[0];
-    var ag = valores('agujas', { esf: e.esf, bisel: e.bisel });
-    if (ag.indexOf(e.agujas) < 0) e.agujas = ag[0];
+    var fij = {};
+    ['esf', 'bisel', 'agujas', 'caja', 'cristal'].forEach(function (k) {
+      var ok = valores(k, fij);
+      if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
+      fij[k] = e[k];
+    });
   }
 
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.28;
@@ -815,11 +874,16 @@
      `COSTES_PUESTOS` sea falso la ficha NO enseña precio y no deja comprar,
      que es la única manera honrada de tener la página en pie sin números.
      En cuanto Óscar dé los costes se rellenan aquí y se pone a `true`. */
-  var COSTES_PUESTOS = false;
+  var COSTES_PUESTOS = true;
+  /* EL COSTE, DEL PAQUETE MÁS LO QUE SE LE AÑADE. Devuelve `null` cuando no
+     se sabe —una combinación que el proveedor no monta, o una correa sin
+     coste—, y entonces la ficha no enseña precio ni deja comprar. */
   function costes() {
-    return MOVS[e.mov].coste + CAJAS[e.caja].coste + CRISTALES[e.cristal].coste +
-           ESFERAS[e.esf].coste + BISELES[e.bisel].coste + AGUJAS[e.agujas].coste +
-           CORREAS[e.correa].coste + LOGO;
+    var p = paqueteDe();
+    if (!p) return null;
+    var c = CORREAS[e.correa];
+    if (!c || c.coste === null || c.coste === undefined) return null;
+    return MOVS[e.mov].coste + p.coste + (p.correaDentro ? 0 : c.coste) + LOGO;
   }
   function pvpBase(c) { return redondea(costeCompleto(c) * MULT); }
   function precioTarifa() { return pvpBase(costes()); }
@@ -877,7 +941,7 @@
 
     /* EL PRECIO, SÓLO SI HAY COSTES. Sin ellos no se enseña un número ni se
        deja comprar: una cifra inventada en una tienda es peor que ninguna. */
-    var hayPrecio = COSTES_PUESTOS;
+    var hayPrecio = COSTES_PUESTOS && costes() !== null;
     var pie = $('[data-pv-pie]');
     $('[data-pv-precio]').textContent = hayPrecio ? eu(precio()) : 'Precio por definir';
     /* SIN PRECIO NO HAY PLAZOS NI «DISPONIBLE». La caja de Klarna venía con
@@ -906,8 +970,10 @@
     botones('esf', soloDe(ESFERAS, 'esf', {}), e.esf);
     botones('bisel', soloDe(BISELES, 'bisel', { esf: e.esf }), e.bisel);
     botones('agujas', soloDe(AGUJAS, 'agujas', { esf: e.esf, bisel: e.bisel }), e.agujas);
-    botones('caja', deTabla(CAJAS), e.caja);
-    botones('cristal', deTabla(CRISTALES), e.cristal);
+    botones('caja', soloDe(CAJAS, 'caja',
+      { esf: e.esf, bisel: e.bisel, agujas: e.agujas }), e.caja);
+    botones('cristal', soloDe(CRISTALES, 'cristal',
+      { esf: e.esf, bisel: e.bisel, agujas: e.agujas, caja: e.caja }), e.cristal);
     botones('correa', deTabla(CORREAS), e.correa);
 
     $('[data-pv-grupo-bisel]').hidden = false;
