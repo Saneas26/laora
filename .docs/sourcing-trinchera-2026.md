@@ -260,12 +260,17 @@ pasa al **LO_A4026** del Trinchera, 50,09 €.
 - **11,60 € menos de coste** en cada Precisa automático. El PVP baja de
   369,90 € a **349,90 €**, y deja **99,75 € limpios (28,5 %)** por Klarna.
 
-### ⚠️ La reserva son 38 horas, no 40
+### La reserva que se publica son 40 horas
 
-El anuncio declara **38 h** (captura del 19/08 en
-`herramientas/capturas/2026-08-19-1005007137519976.json`). La ficha del
-**Trinchera dice 40 h y está mal**; el Precisa dice 38 y está bien. Hay que
-corregir el Trinchera, no copiar el error.
+**Óscar, 27/08/2026:** «Vas a dejar 40 h en el Trinchera y en el Precisa y
+donde yo te lo diga. Gracias por avisarme pero yo soy quien dice si se pone o
+no.»
+
+Queda decidido y no se vuelve a mover sin que lo diga él. Se apunta aquí, en la
+hoja de compra, sólo para que el dato del proveedor no se pierda: el anuncio
+declara **38 h** (captura del 19/08 en
+`herramientas/capturas/2026-08-19-1005007137519976.json`). Las dos fichas
+publican **40 h**.
 
 ### ⚠️ Y no es suizo
 
