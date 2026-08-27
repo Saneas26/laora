@@ -511,20 +511,28 @@
     AZU: { nombre: 'Azules',   coste: 0,
            tec: 'horaria y minutero azulados con segundero de acero' }
   };
-  /* EL CAUCHO CUESTA 12,99 (Óscar, 28/08/2026), y es MÁS BARATO que el
-     brazalete de acero de 19,79: con correa, el Lunar baja un escalón. */
+  /* LAS CORREAS DE CAUCHO SON LAS DE LAS FOTOS (Óscar, 28/08/2026).
+     Sustituyen a la lista de un solo color del 27/08 —negro, azul marino,
+     marrón, gris, naranja y negro/azul celeste—, que se quedó sin ninguna
+     foto: ahora son las cinco de dos tonos que él fotografió.
+
+     El caucho cuesta 12,99 y es MÁS BARATO que el brazalete de 19,79: con
+     correa, el Lunar baja un escalón. */
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
              tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
-    CNEG: { nombre: 'Caucho negro',       coste: 12.99, tec: 'correa de caucho negra' },
-    CAZU: { nombre: 'Caucho azul marino', coste: 12.99, tec: 'correa de caucho azul marino' },
-    CMAR: { nombre: 'Caucho marrón',      coste: 12.99, tec: 'correa de caucho marrón' },
-    CGRI: { nombre: 'Caucho gris',        coste: 12.99, tec: 'correa de caucho gris' },
-    CNAR: { nombre: 'Caucho naranja',     coste: 12.99, tec: 'correa de caucho naranja' },
-    /* La de dos tonos, añadida el 28/08/2026. */
-    CNAZ: { nombre: 'Caucho negro y azul celeste', coste: 12.99,
-            tec: 'correa de caucho negra con azul celeste' }
+    CAZU: { nombre: 'Caucho azul', coste: 12.99,
+            tec: 'correa de caucho azul' },
+    CAZN: { nombre: 'Caucho azul y naranja', coste: 12.99,
+            tec: 'correa de caucho azul con naranja' },
+    CMAC: { nombre: 'Caucho marrón y crema', coste: 12.99,
+            tec: 'correa de caucho marrón con crema' },
+    CNVF: { nombre: 'Caucho negro y verde flúor', coste: 12.99,
+            tec: 'correa de caucho negra con verde flúor' },
+    CBLA: { nombre: 'Caucho blanco', coste: 12.99,
+            tec: 'correa de caucho blanca' }
   };
+
   /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
      Zafiro»). No se ve en la foto, así que NO entra en la clave de la
      serie: el mismo AVIF vale para los dos. Sí entra en la referencia,
@@ -566,6 +574,11 @@
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
+    'acero-negra-bnegro-blancas-cauchoazul': 1,
+    'acero-negra-bnegro-blancas-cauchoazunar': 1,
+    'acero-negra-bnegro-blancas-cauchomarcre': 1,
+    'acero-negra-bnegro-blancas-cauchonegverde': 1,
+    'acero-negra-bnegro-blancas-cauchoblanco': 1,
     'acero-negra-bnegro-naranja-brazalete': 1,
     'acero-blanca-bazul-azules-brazalete': 1,
     'acero-blanca-bnegro-ororosa-brazalete': 1
@@ -705,9 +718,9 @@
   var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul', BLA: 'bblanco' };
   var SERIE_AGUJAS = { BLA: 'blancas', ORO: 'ororosa', NAR: 'naranja',
                        DOR: 'doradas', AZU: 'azules' };
-  var SERIE_CORREA = { ACERO: 'brazalete', CNEG: 'cauchoneg', CAZU: 'cauchoazu',
-                       CMAR: 'cauchomar', CGRI: 'cauchogri', CNAR: 'cauchonar',
-                       CNAZ: 'cauchonegazu' };
+  var SERIE_CORREA = { ACERO: 'brazalete', CAZU: 'cauchoazul',
+                       CAZN: 'cauchoazunar', CMAC: 'cauchomarcre',
+                       CNVF: 'cauchonegverde', CBLA: 'cauchoblanco' };
   function claveSerie() {
     var c = SERIE_CAJA[e.caja], f = SERIE_ESF[e.esf], b = SERIE_BISEL[e.bisel],
         g = SERIE_AGUJAS[e.agujas], r = SERIE_CORREA[e.correa];
