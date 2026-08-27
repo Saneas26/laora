@@ -327,6 +327,10 @@
         <div class="pv-fila pv-grupo" data-paso="caja">
           <p class="pv-rotulo">Acabado de caja</p>
           <div class="pv-opciones" data-pv="caja"></div>
+          <div class="pv-sub" data-cuelga="cristal" data-pv-grupo-cristal hidden>
+            <p class="pv-subrotulo">Cristal</p>
+            <div class="pv-opciones" data-pv="cristal"></div>
+          </div>
         </div>
 
         <div class="pv-fila pv-grupo" data-paso="correa">
@@ -469,11 +473,6 @@
      los índices se quedan de acero salvo que una foto diga otra cosa. */
   var AGUJAS = {
     BLA: { nombre: 'Blancas',  coste: 0, tec: 'agujas blancas con lumen' },
-    /* «Plata» y «blancas» no son la misma aguja y se ve midiéndolas: las de
-       la esfera negra llevan una franja de lumen crema por el medio y las de
-       la esfera blanca son acero pulido a secas, sin lumen. Por eso la foto
-       de la blanca con bisel azul es `plata` y no `blancas`. */
-    PLA: { nombre: 'Plata',    coste: 0, tec: 'agujas de acero pulido' },
     ORO: { nombre: 'Oro rosa', coste: 0,
            tec: 'horaria y minutero en oro rosa con segundero de acero' },
     NAR: { nombre: 'Naranja',  coste: 0,
@@ -483,10 +482,22 @@
   };
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 0,
-             tec: 'brazalete de acero inoxidable 316L con cierre desplegable' }
+             tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
+    CNEG: { nombre: 'Caucho negro',      coste: 0, tec: 'correa de caucho negra' },
+    CAZU: { nombre: 'Caucho azul marino', coste: 0, tec: 'correa de caucho azul marino' },
+    CMAR: { nombre: 'Caucho marrón',     coste: 0, tec: 'correa de caucho marrón' },
+    CGRI: { nombre: 'Caucho gris',       coste: 0, tec: 'correa de caucho gris' },
+    CNAR: { nombre: 'Caucho naranja',    coste: 0, tec: 'correa de caucho naranja' }
   };
-  /* El cristal no se elige: es de la casa y va en la ficha técnica. */
-  var CRISTAL = 'cristal mineral';
+  /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
+     Zafiro»). No se ve en la foto, así que NO entra en la clave de la
+     serie: el mismo AVIF vale para los dos. Sí entra en la referencia,
+     porque son dos productos distintos, y llevará precios distintos en
+     cuanto haya costes. */
+  var CRISTALES = {
+    MIN: { nombre: 'Mineral', coste: 0, tec: 'cristal mineral' },
+    ZAF: { nombre: 'Zafiro',  coste: 0, tec: 'cristal de zafiro' }
+  };
   /* LA FECHA LA LLEVAN TODOS (Óscar, 27/08/2026). No se elige, así que va
      escrita en la ficha y no en el configurador. ⚠️ Las dos fotos que había
      publicadas —la esfera negra y la blanca con agujas plata— se hicieron
@@ -519,14 +530,18 @@
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
-    'acero-blanca-bazul-plata-brazalete': 1,
     'acero-blanca-bazul-azules-brazalete': 1,
-    'acero-blanca-bnegro-ororosa-brazalete': 1,
-    'acero-blanca-bnegro-naranja-brazalete': 1
+    'acero-blanca-bnegro-ororosa-brazalete': 1
   };
+  /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
+     cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
+       · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
+       · `acero-blanca-bnegro-naranja-brazalete` — las naranjas van con la
+         esfera NEGRA, no con la blanca, así que esta foto no cuadra con
+         ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', correa: 'ACERO' };
+            caja: 'PL', cristal: 'MIN', correa: 'ACERO' };
 
 
   /* ============================================================
@@ -543,7 +558,7 @@
      Todo lo que el cliente elige, en orden. Sirve para marcar y para vetar,
      igual que en el Trinchera. */
   function firma() {
-    return [e.mov, e.esf, e.bisel, e.agujas, e.caja, e.correa].join('|');
+    return [e.mov, e.esf, e.bisel, e.agujas, e.caja, e.cristal, e.correa].join('|');
   }
   /* En limpio: aquí todavía no hay nada que quitar, pero la función existe
      desde el principio para que el día que el Lunar tenga dos medidas o dos
@@ -650,9 +665,10 @@
   var SERIE_CAJA   = { PL: 'acero' };
   var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca' };
   var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul' };
-  var SERIE_AGUJAS = { BLA: 'blancas', PLA: 'plata', ORO: 'ororosa',
+  var SERIE_AGUJAS = { BLA: 'blancas', ORO: 'ororosa',
                        NAR: 'naranja', AZU: 'azules' };
-  var SERIE_CORREA = { ACERO: 'brazalete' };
+  var SERIE_CORREA = { ACERO: 'brazalete', CNEG: 'cauchoneg', CAZU: 'cauchoazu',
+                       CMAR: 'cauchomar', CGRI: 'cauchogri', CNAR: 'cauchonar' };
   function claveSerie() {
     var c = SERIE_CAJA[e.caja], f = SERIE_ESF[e.esf], b = SERIE_BISEL[e.bisel],
         g = SERIE_AGUJAS[e.agujas], r = SERIE_CORREA[e.correa];
@@ -666,33 +682,53 @@
 
   /* ---------- LA REFERENCIA ---------- */
   function referencia() {
-    return 'LO-03-' + e.mov + '-' + e.caja + '-' + e.esf + '-' + e.bisel +
-           '-' + e.agujas + '-' + e.correa;
+    return 'LO-03-' + e.mov + '-' + e.caja + e.cristal + '-' + e.esf + '-' +
+           e.bisel + '-' + e.agujas + '-' + e.correa;
   }
   function agua() { return '5 ATM / 50 metros'; }
 
   /* ---------- LAS FRASES ---------- */
   function descripcion() {
-    return 'laOra Lunar, caja de ' + CAJAS[e.caja].mat + ', esfera ' +
+    return 'laOra Lunar, caja de ' + CAJAS[e.caja].mat + ' con ' +
+           CRISTALES[e.cristal].tec + ', esfera ' +
            ESFERAS[e.esf].nombre.toLowerCase() + ', ' + BISELES[e.bisel].tec +
            ', ' + AGUJAS[e.agujas].tec + ' y ' + CORREAS[e.correa].tec;
   }
   function dichoCompleto() { return descripcion() + ' · ' + MOVS[e.mov].nombre; }
 
-  /* ---------- LAS REGLAS ----------
-     LA ESFERA MANDA SOBRE EL BISEL (Óscar, 27/08/2026: «si la esfera es
-     negra, el bisel no puede ser azul»). Va aquí y no en VETADAS porque no
-     es una combinación suelta que se cae: es una regla que vale de golpe
-     para todas las agujas, las de hoy y las que vengan.
+  /* ---------- LAS CUATRO COMBINACIONES QUE EXISTEN ----------
+     Óscar, 27/08/2026. Esfera, bisel y agujas no se combinan libres: hay
+     CUATRO ternas y ninguna más. Se escriben tal cual él las dictó, y de
+     esta tabla salen los botones, las reparaciones y lo que el volcador
+     mete en el catálogo. Antes esto era una regla suelta —«con esfera negra
+     no hay bisel azul»—; con cuatro ternas cerradas, una regla por pareja se
+     quedaba corta.
 
-     Y manda en un solo sentido. Si se comprobara en los dos, elegir esfera
-     negra teniendo puesto el bisel azul haría desaparecer el botón de la
-     esfera negra, que es justo lo contrario de lo que se quiere: la esfera
-     se elige antes, y al elegirla el bisel se recoloca solo. */
-  function biselVale(esf, bisel) { return !(esf === 'NEG' && bisel === 'AZU'); }
-  function primerBisel(esf) {
-    var k = Object.keys(BISELES).filter(function (b) { return biselVale(esf, b); });
-    return k[0];
+     EL ORDEN MANDA: esfera → bisel → agujas. Cada paso enseña sólo lo que
+     sigue teniendo salida con lo ya elegido, y al cambiar hacia atrás lo de
+     abajo se recoloca solo. Comprobar en los dos sentidos dejaría al cliente
+     encerrado: con las agujas naranjas puestas desaparecería el botón de la
+     esfera blanca. */
+  var COMBOS = [
+    { esf: 'NEG', bisel: 'NEG', agujas: 'BLA' },
+    { esf: 'NEG', bisel: 'NEG', agujas: 'NAR' },
+    { esf: 'BLA', bisel: 'NEG', agujas: 'ORO' },
+    { esf: 'BLA', bisel: 'AZU', agujas: 'AZU' }
+  ];
+  /* Un filtro parcial: se le pasa lo que ya está decidido y devuelve las
+     ternas que todavía encajan. Con `{}` devuelve las cuatro. */
+  function combos(fij) {
+    return COMBOS.filter(function (c) {
+      for (var k in fij) if (fij[k] && c[k] !== fij[k]) return false;
+      return true;
+    });
+  }
+  function valores(campo, fij) {
+    var v = [];
+    combos(fij).forEach(function (x) {
+      if (v.indexOf(x[campo]) < 0) v.push(x[campo]);
+    });
+    return v;
   }
 
   function normaliza() {
@@ -702,7 +738,15 @@
     if (!BISELES[e.bisel]) e.bisel = Object.keys(BISELES)[0];
     if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
     if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
-    if (!biselVale(e.esf, e.bisel)) e.bisel = primerBisel(e.esf);
+    if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
+    /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
+       dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
+       delante de una combinación que no existe. */
+    if (valores('esf', {}).indexOf(e.esf) < 0) e.esf = valores('esf', {})[0];
+    var bs = valores('bisel', { esf: e.esf });
+    if (bs.indexOf(e.bisel) < 0) e.bisel = bs[0];
+    var ag = valores('agujas', { esf: e.esf, bisel: e.bisel });
+    if (ag.indexOf(e.agujas) < 0) e.agujas = ag[0];
   }
 
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.28;
@@ -758,8 +802,8 @@
      En cuanto Óscar dé los costes se rellenan aquí y se pone a `true`. */
   var COSTES_PUESTOS = false;
   function costes() {
-    return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
-           BISELES[e.bisel].coste + AGUJAS[e.agujas].coste +
+    return MOVS[e.mov].coste + CAJAS[e.caja].coste + CRISTALES[e.cristal].coste +
+           ESFERAS[e.esf].coste + BISELES[e.bisel].coste + AGUJAS[e.agujas].coste +
            CORREAS[e.correa].coste + LOGO;
   }
   function pvpBase(c) { return redondea(costeCompleto(c) * MULT); }
@@ -809,6 +853,8 @@
       var g = $('[data-cuelga="' + k + '"]');
       if (g) g.classList.toggle('pv-cerrado', !tocado.esf);
     });
+    var gc = $('[data-cuelga="cristal"]');
+    if (gc) gc.classList.toggle('pv-cerrado', !tocado.caja);
   }
 
   function pinta() {
@@ -834,18 +880,24 @@
       comprar.textContent = hayPrecio ? 'Añadir al carrito' : 'Todavía no está a la venta';
     }
 
+    /* Cada paso de la terna enseña sólo lo que sigue teniendo salida con lo
+       ya elegido por encima. El hueco `o[2]` de `botones()` es «no lo
+       dibujes». */
+    function soloDe(tabla, campo, fij) {
+      var ok = valores(campo, fij);
+      return deTabla(tabla).map(function (o) { o[2] = ok.indexOf(o[0]) < 0; return o; });
+    }
     botones('mov', deTabla(MOVS), e.mov);
-    botones('esf', deTabla(ESFERAS), e.esf);
-    botones('bisel', deTabla(BISELES).map(function (o) {
-      o[2] = !biselVale(e.esf, o[0]);          // con esfera negra, sin azul
-      return o;
-    }), e.bisel);
-    botones('agujas', deTabla(AGUJAS), e.agujas);
+    botones('esf', soloDe(ESFERAS, 'esf', {}), e.esf);
+    botones('bisel', soloDe(BISELES, 'bisel', { esf: e.esf }), e.bisel);
+    botones('agujas', soloDe(AGUJAS, 'agujas', { esf: e.esf, bisel: e.bisel }), e.agujas);
     botones('caja', deTabla(CAJAS), e.caja);
+    botones('cristal', deTabla(CRISTALES), e.cristal);
     botones('correa', deTabla(CORREAS), e.correa);
 
     $('[data-pv-grupo-bisel]').hidden = false;
     $('[data-pv-grupo-agujas]').hidden = false;
+    $('[data-pv-grupo-cristal]').hidden = false;
 
     var cal = $('[data-pv-calibre]');
     if (cal) {
@@ -872,7 +924,8 @@
     }
 
     $('[data-pv-tec="caja"]').textContent =
-      'Caja de ' + CAJAS[e.caja].mat + ', ' + CRISTAL + '. ' + agua() + '.';
+      'Caja de ' + CAJAS[e.caja].mat + ', ' + CRISTALES[e.cristal].tec + '. ' +
+      agua() + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent =
       ESFERAS[e.esf].tec + ' ' + FECHA + ' Bisel: ' + BISELES[e.bisel].tec +
@@ -940,7 +993,7 @@
   }
   function escapaDeMarcada() {
     if (!vetada(firma()) && !(APLICADAS && marcada(firma()))) return;
-    var grupos = ['correa', 'agujas', 'bisel', 'esf', 'caja', 'mov'];
+    var grupos = ['correa', 'cristal', 'agujas', 'bisel', 'esf', 'caja', 'mov'];
     for (var i = 0; i < grupos.length; i++) {
       var caja = $('[data-pv="' + grupos[i] + '"]');
       if (!caja) continue;

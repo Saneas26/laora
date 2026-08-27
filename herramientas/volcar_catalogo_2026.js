@@ -371,8 +371,9 @@ function lunar() {
      el Lunar no aporta ni una: no se puede vender lo que no se sabe lo que
      cuesta. En cuanto Óscar dé los costes, esto enumera solo. */
   const L = motorDe('lunar.html',
-    'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTAL, COSTES_PUESTOS, ' +
-    'e, precio, referencia, normaliza, pinta, agua, vetada, firma, sinVeto');
+    'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTALES, COMBOS, ' +
+    'COSTES_PUESTOS, e, precio, referencia, normaliza, pinta, agua, vetada, ' +
+    'firma, sinVeto');
   if (!L.COSTES_PUESTOS) {
     console.log('ℹ️  el Lunar no aporta referencias: se está rehaciendo desde cero y\n' +
                 '    todavía no tiene costes. Las 1.944 del Lunar viejo ya no se copian.');
@@ -381,25 +382,30 @@ function lunar() {
   L.sinVeto(true);
   const e = L.e;
   let n = 0;
+  /* SE RECORRE LA TABLA DE TERNAS, no el producto de esfera × bisel × agujas.
+     Desde el 27/08/2026 sólo existen cuatro combinaciones de las doce que
+     salían de cruzarlo todo, y cruzarlas confiando en que `normaliza()` las
+     arregle daría la misma referencia varias veces. La tabla es la verdad. */
   for (const mov of Object.keys(L.MOVS))
   for (const caja of Object.keys(L.CAJAS))
-  for (const esf of Object.keys(L.ESFERAS))
-  for (const bisel of Object.keys(L.BISELES))
-  for (const agujas of Object.keys(L.AGUJAS))
+  for (const cristal of Object.keys(L.CRISTALES))
+  for (const c of L.COMBOS)
   for (const correa of Object.keys(L.CORREAS)) {
-    e.mov = mov; e.caja = caja; e.esf = esf;
-    e.bisel = bisel; e.agujas = agujas; e.correa = correa;
+    e.mov = mov; e.caja = caja; e.cristal = cristal;
+    e.esf = c.esf; e.bisel = c.bisel; e.agujas = c.agujas; e.correa = correa;
     L.normaliza();
     if (L.vetada(L.firma())) continue;
     n += anota(L.referencia(), L.precio(),
       'Lunar',
-      L.CAJAS[caja].nombre + ' · esfera ' + L.ESFERAS[esf].nombre.toLowerCase() +
-        ' · bisel ' + L.BISELES[bisel].nombre.toLowerCase() + ' · ' + L.MOVS[mov].nombre,
+      L.CAJAS[caja].nombre + ' · esfera ' + L.ESFERAS[c.esf].nombre.toLowerCase() +
+        ' · bisel ' + L.BISELES[c.bisel].nombre.toLowerCase() +
+        ' · ' + L.CRISTALES[cristal].nombre.toLowerCase() +
+        ' · ' + L.MOVS[mov].nombre,
       L.CORREAS[correa].nombre,
       { movimiento: L.MOVS[mov].tec,
-        caja: 'Caja de ' + L.CAJAS[caja].mat + ', ' + L.CRISTAL + '.',
-        esfera: L.ESFERAS[esf].tec + ' Bisel: ' + L.BISELES[bisel].tec +
-                '. Agujas: ' + L.AGUJAS[agujas].tec + '.',
+        caja: 'Caja de ' + L.CAJAS[caja].mat + ', ' + L.CRISTALES[cristal].tec + '.',
+        esfera: L.ESFERAS[c.esf].tec + ' Bisel: ' + L.BISELES[c.bisel].tec +
+                '. Agujas: ' + L.AGUJAS[c.agujas].tec + '.',
         agua: L.agua() },
       null, null) ? 1 : 0;
   }
