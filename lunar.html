@@ -439,7 +439,13 @@
        una blanca a la que luego se le elija el color de los contadores. */
     BLA: { nombre: 'Blanca', coste: 0,
            tec: 'Esfera plateada con los tres contadores en azul, índices ' +
-                'aplicados y lumen.' }
+                'aplicados y lumen.' },
+    /* El naranja es de la esfera, no de las agujas de la hora: las que se
+       tiñen son las del cronógrafo y las de los tres contadores. Por eso va
+       aquí y no en AGUJAS, que sigue siendo una sola. */
+    GRA: { nombre: 'Grafito', coste: 0,
+           tec: 'Esfera grafito con acabado de rayos, índices aplicados con ' +
+                'lumen y las agujas del cronógrafo en naranja.' }
   };
   var BISELES = {
     NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' },
@@ -467,7 +473,8 @@
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
-    'acero-blanca-bazul-blancas-brazalete': 1
+    'acero-blanca-bazul-blancas-brazalete': 1,
+    'acero-grafito-bnegro-blancas-brazalete': 1
   };
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
@@ -593,7 +600,7 @@
      retoque, la ficha pide una foto que no existe y sale el cartel sin que
      nadie haya tocado una imagen. Así lo hace el Trinchera. */
   var SERIE_CAJA   = { PL: 'acero' };
-  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca' };
+  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca', GRA: 'grafito' };
   var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul' };
   var SERIE_AGUJAS = { BLA: 'blancas' };
   var SERIE_CORREA = { ACERO: 'brazalete' };
