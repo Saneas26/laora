@@ -451,8 +451,14 @@
     NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' },
     AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul' }
   };
+  /* Las azules son horaria y minutero AZULADOS; el segundero del
+     cronógrafo y los índices siguen siendo de acero. De momento sólo hay
+     foto con la esfera blanca y el bisel azul: el resto sale con el cartel
+     hasta que se fotografíe. */
   var AGUJAS = {
-    BLA: { nombre: 'Blancas', coste: 0, tec: 'agujas blancas con lumen' }
+    BLA: { nombre: 'Blancas', coste: 0, tec: 'agujas blancas con lumen' },
+    AZU: { nombre: 'Azules',  coste: 0,
+           tec: 'horaria y minutero azulados, y segundero de acero' }
   };
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 0,
@@ -474,7 +480,8 @@
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
     'acero-blanca-bazul-blancas-brazalete': 1,
-    'acero-grafito-bnegro-blancas-brazalete': 1
+    'acero-grafito-bnegro-blancas-brazalete': 1,
+    'acero-blanca-bazul-azules-brazalete': 1
   };
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
@@ -602,7 +609,7 @@
   var SERIE_CAJA   = { PL: 'acero' };
   var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca', GRA: 'grafito' };
   var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul' };
-  var SERIE_AGUJAS = { BLA: 'blancas' };
+  var SERIE_AGUJAS = { BLA: 'blancas', AZU: 'azules' };
   var SERIE_CORREA = { ACERO: 'brazalete' };
   function claveSerie() {
     var c = SERIE_CAJA[e.caja], f = SERIE_ESF[e.esf], b = SERIE_BISEL[e.bisel],
