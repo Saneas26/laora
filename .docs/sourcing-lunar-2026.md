@@ -8,7 +8,8 @@ trabaja ahora porque es el turno del modelo — ver `laora-modelo-a-modelo`.
 > fuera del catálogo del servidor: **0 referencias**. Hasta que estos costes
 > entren en la ficha, no se puede vender ni un Lunar.
 >
-> A 27/08 ya están todos los costes menos **las cinco correas de caucho**.
+> A 27/08 **ya están todos los costes**. Lo que queda es meterlos en la ficha y
+> montar la tabla de paquetes — sección 5.
 
 ---
 
@@ -51,6 +52,12 @@ los quiero ya». Quedan como **RETIRADA** en las piezas P-005 y P-006 del libro.
 
 ### Brazalete de acero — 19,79 €, aparte
 No va dentro de ninguna de las cajas de arriba.
+
+### Correa de caucho — 12,99 €, aparte
+[1005012895843323](https://es.aliexpress.com/item/1005012895843323.html) —
+Óscar, 27/08/2026. **Los cinco colores al mismo precio**: negro, azul marino,
+marrón, gris y naranja. Es **6,80 € más barata que el brazalete**, y por eso el
+Lunar más barato pasa a ser uno de caucho.
 
 ### Caja PVD — 48,99 €
 Caja PVD + bisel negro + **brazalete PVD** incluido. **Esfera y agujas aparte.**
@@ -106,8 +113,8 @@ la **regla nº1** (50 € limpios o 15 % neto medido con Klarna al 5 %).
 ## 4 · Lo que falta por confirmar
 
 1. ~~El coste del movimiento VK63.~~ ✅ **26,67 €**, dado el 27/08 — sección 3.
-2. **El coste de las cinco correas de caucho**, que siguen a cero. Es lo único
-   que falta para tener el Lunar entero costeado.
+2. ~~El coste de las cinco correas de caucho.~~ ✅ **12,99 €**, los cinco
+   colores igual, dado el 27/08. **Ya no falta ningún coste.**
 3. **El zafiro de 48,99, ¿lleva brazalete?** Por cómo funciona el otro anuncio
    diría que no, y así está contado arriba. Si lo lleva, esa versión baja
    19,79 €.
@@ -158,28 +165,37 @@ Con el VK63 a 26,67 €, el logo, el packing, la garantía, la SS y el
 multiplicador de siempre. «Limpio» es lo que queda **pagando por Klarna**, que
 es como se mide la regla nº1.
 
-| Versión | Piezas | Coste completo | **PVP** | Limpio | % |
-|---|--:|--:|--:|--:|--:|
-| Acero · mineral · montada | 84,83 € | 101,08 € | **229,90 €** | 61,94 € | 26,9 % |
-| Acero · mineral · a piezas *(bisel blanco + oro rosa)* | 87,81 € | 104,21 € | **239,90 €** | 65,65 € | 27,4 % |
-| **PVD** · pack con brazalete + esfera y agujas | 93,22 € | 109,89 € | **249,90 €** | 67,31 € | 26,9 % |
-| Acero · **zafiro** · montada | 99,23 € | 116,20 € | **269,90 €** | 74,69 € | 27,7 % |
+| Versión | Correa | Piezas | **PVP** | Limpio | % |
+|---|---|--:|--:|--:|--:|
+| Acero · mineral · montada | brazalete | 84,83 € | **229,90 €** | 61,94 € | 26,9 % |
+| Acero · mineral · montada | **caucho** | 78,03 € | **209,90 €** | 55,23 € | 26,3 % |
+| Acero · mineral · a piezas | brazalete | 87,81 € | **239,90 €** | 65,65 € | 27,4 % |
+| Acero · mineral · a piezas | **caucho** | 81,01 € | **219,90 €** | 58,94 € | 26,8 % |
+| Acero · **zafiro** · montada | brazalete | 99,23 € | **269,90 €** | 74,69 € | 27,7 % |
+| Acero · **zafiro** · montada | **caucho** | 92,43 € | **249,90 €** | 67,98 € | 27,2 % |
+| **PVD** · pack + esfera y agujas | brazalete PVD (dentro) | 93,22 € | **249,90 €** | 67,31 € | 26,9 % |
+| **PVD** · caja vacía + esfera y agujas | **caucho** | 86,81 € | **239,90 €** | 66,49 € | 27,7 % |
 
-Todas van con **brazalete**. Las cuatro **cumplen la regla nº1** de sobra: la
-peor deja 61,94 € limpios, un 26,9 %.
+**Las ocho cumplen la regla nº1.** La peor deja 55,23 € limpios, un 26,3 %.
 
-⚠️ **Falta el coste de las correas de caucho.** `lunar.html` tiene cinco
-—negro, azul marino, marrón, gris y naranja— a `coste: 0`. Si el caucho es más
-barato que los 19,79 € del brazalete, el Lunar más barato bajará de 229,90 €.
+**El Lunar más barato son 209,90 €**: acero, mineral, caja montada y caucho.
+
+### ⚠️ El PVD con caucho no se compra con el pack
+
+El pack de PVD (48,99 €) trae el brazalete dentro. Para una versión de caucho
+sale a cuenta comprar la **caja PVD vacía** de 29,59 € (P-010) y sumarle esfera,
+agujas y correa: **86,81 €** frente a los 99,80 € que costaría el pack con el
+brazalete sin usar más el caucho. **Trece euros de diferencia por reloj.**
+Es decisión de Óscar si esa versión se ofrece.
 
 ### Lo que la web anuncia hoy y no cuadra
 
 | Dónde | Dice | Lo más barato de verdad |
 |---|--:|--:|
-| Portada (`index.html`) | 219,90 € | **229,90 €** |
-| Colección y `desde.json` | 189,90 € | **229,90 €** |
+| Portada (`index.html`) | 219,90 € | **209,90 €** — se pasa 10 € |
+| Colección y `desde.json` | 189,90 € | **209,90 €** — se queda 20 € corto |
 
-Son precios del Lunar viejo, de antes de que se pusiera a cero el 26/08. Como
-el Lunar está fuera del catálogo, hoy no se puede comprar a ningún precio; pero
-en cuanto vuelva, esas dos cifras hay que corregirlas o se anuncia una cosa y
-se cobra otra. **Lo decide Óscar.**
+Son precios del Lunar viejo, de antes de ponerlo a cero el 26/08. Como el Lunar
+está fuera del catálogo, hoy no se puede comprar a ningún precio; pero en cuanto
+vuelva, esas dos cifras hay que corregirlas o se anuncia una cosa y se cobra
+otra. **Lo decide Óscar.**
