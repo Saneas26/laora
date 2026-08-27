@@ -440,13 +440,10 @@
     BLA: { nombre: 'Blanca', coste: 0,
            tec: 'Esfera plateada con los tres contadores en azul, índices ' +
                 'aplicados y lumen.' },
-    /* El naranja es de la esfera, no de las agujas de la hora: las que se
-       tiñen son las del cronógrafo y las de los tres contadores. Por eso va
-       aquí y no en AGUJAS, que sigue siendo una sola. */
-    GRA: { nombre: 'Grafito', coste: 0,
-           tec: 'Esfera grafito con acabado de rayos, índices aplicados con ' +
-                'lumen y las agujas del cronógrafo en naranja.' }
   };
+  /* La grafito estuvo publicada el 27/08/2026 y salió el mismo día: Óscar,
+     «esfera negra, y blanca, no hay grafito». Su AVIF sigue en la carpeta
+     de la serie, sin que lo pida nadie, por si vuelve. */
   var BISELES = {
     NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' },
     AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul' }
@@ -455,9 +452,16 @@
      cronógrafo y los índices siguen siendo de acero. De momento sólo hay
      foto con la esfera blanca y el bisel azul: el resto sale con el cartel
      hasta que se fotografíe. */
+  /* Sólo cambian la horaria y el minutero: el segundero del cronógrafo y
+     los índices se quedan de acero salvo que una foto diga otra cosa. */
   var AGUJAS = {
-    BLA: { nombre: 'Blancas', coste: 0, tec: 'agujas blancas con lumen' },
-    AZU: { nombre: 'Azules',  coste: 0,
+    BLA: { nombre: 'Blancas',  coste: 0, tec: 'agujas blancas con lumen' },
+    PLA: { nombre: 'Plata',    coste: 0, tec: 'agujas de acero pulido' },
+    ORO: { nombre: 'Oro rosa', coste: 0,
+           tec: 'horaria y minutero en oro rosa con segundero de acero' },
+    NAR: { nombre: 'Naranja',  coste: 0,
+           tec: 'horaria y minutero naranjas con segundero de acero' },
+    AZU: { nombre: 'Azules',   coste: 0,
            tec: 'horaria y minutero azulados con segundero de acero' }
   };
   var CORREAS = {
@@ -480,7 +484,6 @@
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
     'acero-blanca-bazul-blancas-brazalete': 1,
-    'acero-grafito-bnegro-blancas-brazalete': 1,
     'acero-blanca-bazul-azules-brazalete': 1
   };
 
@@ -607,9 +610,10 @@
      retoque, la ficha pide una foto que no existe y sale el cartel sin que
      nadie haya tocado una imagen. Así lo hace el Trinchera. */
   var SERIE_CAJA   = { PL: 'acero' };
-  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca', GRA: 'grafito' };
+  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca' };
   var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul' };
-  var SERIE_AGUJAS = { BLA: 'blancas', AZU: 'azules' };
+  var SERIE_AGUJAS = { BLA: 'blancas', PLA: 'plata', ORO: 'ororosa',
+                       NAR: 'naranja', AZU: 'azules' };
   var SERIE_CORREA = { ACERO: 'brazalete' };
   function claveSerie() {
     var c = SERIE_CAJA[e.caja], f = SERIE_ESF[e.esf], b = SERIE_BISEL[e.bisel],
@@ -638,9 +642,21 @@
   function dichoCompleto() { return descripcion() + ' · ' + MOVS[e.mov].nombre; }
 
   /* ---------- LAS REGLAS ----------
-     Hoy no hay ninguna: una sola configuración. La función existe desde el
-     principio porque es donde van a vivir, y porque el resto del mecanismo
-     la llama en cada pintada. */
+     LA ESFERA MANDA SOBRE EL BISEL (Óscar, 27/08/2026: «si la esfera es
+     negra, el bisel no puede ser azul»). Va aquí y no en VETADAS porque no
+     es una combinación suelta que se cae: es una regla que vale de golpe
+     para todas las agujas, las de hoy y las que vengan.
+
+     Y manda en un solo sentido. Si se comprobara en los dos, elegir esfera
+     negra teniendo puesto el bisel azul haría desaparecer el botón de la
+     esfera negra, que es justo lo contrario de lo que se quiere: la esfera
+     se elige antes, y al elegirla el bisel se recoloca solo. */
+  function biselVale(esf, bisel) { return !(esf === 'NEG' && bisel === 'AZU'); }
+  function primerBisel(esf) {
+    var k = Object.keys(BISELES).filter(function (b) { return biselVale(esf, b); });
+    return k[0];
+  }
+
   function normaliza() {
     if (!MOVS[e.mov]) e.mov = Object.keys(MOVS)[0];
     if (!CAJAS[e.caja]) e.caja = Object.keys(CAJAS)[0];
@@ -648,6 +664,7 @@
     if (!BISELES[e.bisel]) e.bisel = Object.keys(BISELES)[0];
     if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
     if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
+    if (!biselVale(e.esf, e.bisel)) e.bisel = primerBisel(e.esf);
   }
 
   var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.28;
@@ -733,7 +750,11 @@
      Igual que en el Trinchera: ninguna opción se ve hasta haber elegido la
      anterior. Un paso sin nada que elegir no cuenta como cerrado. */
   var CADENA = ['mov', 'esf', 'caja', 'correa'];
-  var tocado = {};
+  /* EL MOVIMIENTO YA VIENE SEÑALADO (Óscar, 27/08/2026). El Lunar sólo
+     tiene el LO_MQ326: pedirle al cliente que pulse el único botón que hay
+     es hacerle perder un paso. Se deja marcado de entrada, con su calibre
+     escrito debajo, y el primer paso abierto es la esfera. */
+  var tocado = { mov: true };
   function sinNadaQueElegir(g) {
     var op = g.querySelector('.pv-opciones');
     return !op || op.hidden || !op.querySelector('button');
@@ -777,7 +798,10 @@
 
     botones('mov', deTabla(MOVS), e.mov);
     botones('esf', deTabla(ESFERAS), e.esf);
-    botones('bisel', deTabla(BISELES), e.bisel);
+    botones('bisel', deTabla(BISELES).map(function (o) {
+      o[2] = !biselVale(e.esf, o[0]);          // con esfera negra, sin azul
+      return o;
+    }), e.bisel);
     botones('agujas', deTabla(AGUJAS), e.agujas);
     botones('caja', deTabla(CAJAS), e.caja);
     botones('correa', deTabla(CORREAS), e.correa);
