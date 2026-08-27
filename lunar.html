@@ -456,6 +456,10 @@
      los índices se quedan de acero salvo que una foto diga otra cosa. */
   var AGUJAS = {
     BLA: { nombre: 'Blancas',  coste: 0, tec: 'agujas blancas con lumen' },
+    /* «Plata» y «blancas» no son la misma aguja y se ve midiéndolas: las de
+       la esfera negra llevan una franja de lumen crema por el medio y las de
+       la esfera blanca son acero pulido a secas, sin lumen. Por eso la foto
+       de la blanca con bisel azul es `plata` y no `blancas`. */
     PLA: { nombre: 'Plata',    coste: 0, tec: 'agujas de acero pulido' },
     ORO: { nombre: 'Oro rosa', coste: 0,
            tec: 'horaria y minutero en oro rosa con segundero de acero' },
@@ -483,7 +487,7 @@
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
-    'acero-blanca-bazul-blancas-brazalete': 1,
+    'acero-blanca-bazul-plata-brazalete': 1,
     'acero-blanca-bazul-azules-brazalete': 1
   };
 
