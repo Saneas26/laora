@@ -165,9 +165,21 @@
     background:#fff; color:#121414; opacity:.4;
   }
 
-  /* El calibre, debajo de la fila y solo cuando ya has elegido. */
+  /* EL CALIBRE, A LA ALTURA DEL BOTÓN (Óscar, 28/08/2026: «creo que el
+     calibre cabe a la misma altura que el botón de Mecacuarzo Japonés»).
+     Y de paso arregla lo otro que pedía: la línea entre Movimiento y
+     Esfera no salía porque el separador es `.pv-fila + .pv-fila`, y este
+     párrafo se había quedado ENTRE las dos filas rompiendo la adyacencia.
+     Metido dentro del grupo del movimiento, los dos hermanos vuelven a
+     tocarse y la línea aparece sola.
+
+     `flex-wrap`: si la columna se estrecha, el calibre baja a su renglón
+     en vez de estrujar el botón. */
+  .pv-mov-linea{
+    display:flex; align-items:center; flex-wrap:wrap; gap:6px 14px;
+  }
   .pv-calibre{
-    margin:2px 0 0; font-size:16px; color:#4A4A4A;
+    margin:0; font-size:16px; color:#4A4A4A;
     font-family:'Nunito Sans', system-ui, sans-serif;
   }
   .pv-calibre[hidden]{ display:none }
@@ -307,9 +319,11 @@
              procedencia en una página de venta. -->
         <div class="pv-fila pv-grupo" data-paso="mov">
           <p class="pv-rotulo">Movimiento</p>
-          <div class="pv-opciones" data-pv="mov"></div>
+          <div class="pv-mov-linea">
+            <div class="pv-opciones" data-pv="mov"></div>
+            <p class="pv-calibre" data-pv-calibre hidden><span data-pv-cal>Calibre</span></p>
+          </div>
         </div>
-        <p class="pv-calibre" data-pv-calibre hidden><span data-pv-cal>Calibre</span></p>
 
         <div class="pv-fila pv-grupo" data-paso="esf">
           <p class="pv-rotulo">Esfera</p>
