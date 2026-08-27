@@ -523,7 +523,10 @@
     CAZU: { nombre: 'Caucho azul marino', coste: null, tec: 'correa de caucho azul marino' },
     CMAR: { nombre: 'Caucho marrón',      coste: null, tec: 'correa de caucho marrón' },
     CGRI: { nombre: 'Caucho gris',        coste: null, tec: 'correa de caucho gris' },
-    CNAR: { nombre: 'Caucho naranja',     coste: null, tec: 'correa de caucho naranja' }
+    CNAR: { nombre: 'Caucho naranja',     coste: null, tec: 'correa de caucho naranja' },
+    /* La de dos tonos, añadida el 28/08/2026. */
+    CNAZ: { nombre: 'Caucho negro y azul celeste', coste: null,
+            tec: 'correa de caucho negra con azul celeste' }
   };
   /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
      Zafiro»). No se ve en la foto, así que NO entra en la clave de la
@@ -706,7 +709,8 @@
   var SERIE_AGUJAS = { BLA: 'blancas', ORO: 'ororosa', NAR: 'naranja',
                        DOR: 'doradas', AZU: 'azules' };
   var SERIE_CORREA = { ACERO: 'brazalete', CNEG: 'cauchoneg', CAZU: 'cauchoazu',
-                       CMAR: 'cauchomar', CGRI: 'cauchogri', CNAR: 'cauchonar' };
+                       CMAR: 'cauchomar', CGRI: 'cauchogri', CNAR: 'cauchonar',
+                       CNAZ: 'cauchonegazu' };
   function claveSerie() {
     var c = SERIE_CAJA[e.caja], f = SERIE_ESF[e.esf], b = SERIE_BISEL[e.bisel],
         g = SERIE_AGUJAS[e.agujas], r = SERIE_CORREA[e.correa];
