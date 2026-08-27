@@ -511,21 +511,18 @@
     AZU: { nombre: 'Azules',   coste: 0,
            tec: 'horaria y minutero azulados con segundero de acero' }
   };
-  /* ⚠️ LAS CINCO DE CAUCHO NO TIENEN COSTE (`coste: null`). Es lo único que
-     falta de la hoja de compra. Se siguen dibujando —Óscar las pidió— pero
-     la ficha dice «Precio por definir» y no deja comprarlas: un coste
-     inventado es un precio inventado, y de ahí sale un pedido que pierde
-     dinero. En cuanto llegue el número, se escribe aquí y ya está. */
+  /* EL CAUCHO CUESTA 12,99 (Óscar, 28/08/2026), y es MÁS BARATO que el
+     brazalete de acero de 19,79: con correa, el Lunar baja un escalón. */
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
              tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
-    CNEG: { nombre: 'Caucho negro',       coste: null, tec: 'correa de caucho negra' },
-    CAZU: { nombre: 'Caucho azul marino', coste: null, tec: 'correa de caucho azul marino' },
-    CMAR: { nombre: 'Caucho marrón',      coste: null, tec: 'correa de caucho marrón' },
-    CGRI: { nombre: 'Caucho gris',        coste: null, tec: 'correa de caucho gris' },
-    CNAR: { nombre: 'Caucho naranja',     coste: null, tec: 'correa de caucho naranja' },
+    CNEG: { nombre: 'Caucho negro',       coste: 12.99, tec: 'correa de caucho negra' },
+    CAZU: { nombre: 'Caucho azul marino', coste: 12.99, tec: 'correa de caucho azul marino' },
+    CMAR: { nombre: 'Caucho marrón',      coste: 12.99, tec: 'correa de caucho marrón' },
+    CGRI: { nombre: 'Caucho gris',        coste: 12.99, tec: 'correa de caucho gris' },
+    CNAR: { nombre: 'Caucho naranja',     coste: 12.99, tec: 'correa de caucho naranja' },
     /* La de dos tonos, añadida el 28/08/2026. */
-    CNAZ: { nombre: 'Caucho negro y azul celeste', coste: null,
+    CNAZ: { nombre: 'Caucho negro y azul celeste', coste: 12.99,
             tec: 'correa de caucho negra con azul celeste' }
   };
   /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
