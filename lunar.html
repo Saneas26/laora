@@ -957,12 +957,12 @@
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
              tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
-    /* EL BRAZALETE PVD, SIN COSTE TODAVÍA (28/08/2026). La hoja de compra
-       dice que el pack de PVD de 48,99 trae caja, bisel negro y brazalete
-       PVD juntos, así que su precio no es una suma: hay que sacarlo del
-       pack. Con `coste: null` la opción existe y se dibuja, pero `costes()`
-       devuelve null, el precio dice «por definir» y no se puede comprar. */
-    ACERONG: { nombre: 'Brazalete PVD negro', coste: null,
+    /* EL BRAZALETE PVD SALE DE UNA RESTA (Óscar, 28/08/2026: «la caja sola
+       vale 28,39»). El pack de PVD son 48,99 con caja, bisel y brazalete;
+       quitando la caja quedan 20,60 de brazalete. Cuadra: es ochenta
+       céntimos más que el de acero, que es lo que se espera de la misma
+       pieza con un recubrimiento encima. */
+    ACERONG: { nombre: 'Brazalete PVD negro', coste: 20.60,
                tec: 'brazalete de acero inoxidable 316L con PVD negro y ' +
                     'cierre desplegable' },
     CAZU: { nombre: 'Caucho azul', coste: 9.89,
@@ -1045,7 +1045,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=17';
+  var SERIE_V = '?v=18';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1581,28 +1581,24 @@
     { caja: 'PL', cristal: 'ZAF', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 48.99 },
     { caja: 'PL', cristal: 'ZAF', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 48.99 },
     /* EL PVD, CON SU REPARTO (Óscar, 28/08/2026): «caja, bisel y brazalete
-       48,99, esfera 8,99 y agujas 4,99. Movimiento el mismo». O sea 62,97
-       de paquete, y el brazalete de PVD ya viene dentro de esos 48,99.
+       48,99, esfera 8,99 y agujas 4,99», y después «la caja sola vale
+       28,39». Con esa resta el pack se abre: 28,39 de caja y bisel, 20,60
+       de brazalete. El paquete son 28,39 + 8,99 + 4,99 = 42,37 y el
+       brazalete se paga aparte como cualquier otra correa.
 
-       POR ESO LLEVA `correaQueTrae`. `correaDentro` a secas dejaría la
-       correa a cero fuera cual fuese: quien eligiera caucho se llevaría el
-       brazalete de PVD sin pagarlo Y el caucho de regalo, y el reloj
-       saldría casi diez euros de coste por debajo de la verdad. Con
-       `correaQueTrae` sólo entra gratis la que de verdad trae el pack; si
-       se elige otra, el pack se paga igual —el brazalete viene en la caja
-       aunque no se use— y la correa se suma aparte. */
-    { caja: 'NG', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
-      correaDentro: true, correaQueTrae: 'ACERONG' },
-    { caja: 'NG', cristal: 'MIN', esf: 'BLA', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
-      correaDentro: true, correaQueTrae: 'ACERONG' },
-    { caja: 'NG', cristal: 'MIN', esf: 'NAR', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
-      correaDentro: true, correaQueTrae: 'ACERONG' },
-    { caja: 'NG', cristal: 'MIN', esf: 'DOR', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
-      correaDentro: true, correaQueTrae: 'ACERONG' },
-    { caja: 'NG', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
-      correaDentro: true, correaQueTrae: 'ACERONG' },
-    { caja: 'NG', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
-      correaDentro: true, correaQueTrae: 'ACERONG' }
+       Y ASÍ SE VA LA RAREZA. Cuando el brazalete iba DENTRO del paquete, el
+       PVD con caucho salía más caro que con su propio brazalete —el pack se
+       pagaba entero aunque el brazalete se quedara en el cajón—, y el
+       cliente veía subir el precio al elegir una correa más barata.
+       Separado, cada correa cuesta lo que cuesta.
+
+       El movimiento no cambia: el mismo de siempre, 26,67. */
+    { caja: 'NG', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 42.37 },
+    { caja: 'NG', cristal: 'MIN', esf: 'BLA', bisel: 'NEG', agujas: 'BLA', coste: 42.37 },
+    { caja: 'NG', cristal: 'MIN', esf: 'NAR', bisel: 'NEG', agujas: 'BLA', coste: 42.37 },
+    { caja: 'NG', cristal: 'MIN', esf: 'DOR', bisel: 'NEG', agujas: 'BLA', coste: 42.37 },
+    { caja: 'NG', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'BLA', coste: 42.37 },
+    { caja: 'NG', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'BLA', coste: 42.37 }
   ];
   /* El paquete de una combinación, o null si el proveedor no la monta. */
   /* LAS AGUJAS SE ELIGEN LIBRES (Óscar, 28/08/2026: «en cuanto a las agujas
