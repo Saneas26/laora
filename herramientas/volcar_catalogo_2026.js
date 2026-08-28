@@ -373,7 +373,7 @@ function lunar() {
   const L = motorDe('lunar.html',
     'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTALES, PAQUETES, ' +
     'COSTES_PUESTOS, costes, MM, e, precio, referencia, normaliza, pinta, agua, ' +
-    'vetada, firma, sinVeto');
+    'vetada, firma, sinVeto, AGUJAS_LIBRES');
   if (!L.COSTES_PUESTOS) {
     console.log('ℹ️  el Lunar no aporta referencias: se está rehaciendo desde cero y\n' +
                 '    todavía no tiene costes. Las 1.944 del Lunar viejo ya no se copian.');
@@ -387,14 +387,22 @@ function lunar() {
      sólo en las combinaciones que él monta: cruzarlo todo daría referencias
      que nadie puede fabricar, y con un precio repartido a ojo.
 
+     LAS AGUJAS SÍ SE CRUZAN (Óscar, 28/08/2026: «déjame todas las opciones
+     puestas por defecto, luego te diré yo las combinaciones que no
+     quiero»). La ficha ya las deja elegir libres, así que el catálogo tiene
+     que enumerar lo mismo: si no, un cliente mete en el carrito una
+     referencia que el servidor no conoce. Es el paquete el que pone el
+     coste, y en la hoja de compra no cambia con el color de las agujas.
+
      Y LO QUE NO TIENE COSTE NO ENTRA. `costes()` devuelve null cuando la
-     correa no tiene precio de compra —hoy, las cinco de caucho—: sin coste
-     no hay precio, y sin precio no se vende. */
+     correa no tiene precio de compra: sin coste no hay precio, y sin precio
+     no se vende. */
   for (const mov of Object.keys(L.MOVS))
   for (const p of L.PAQUETES)
+  for (const agujas of (L.AGUJAS_LIBRES ? Object.keys(L.AGUJAS) : [p.agujas]))
   for (const correa of Object.keys(L.CORREAS)) {
     e.mov = mov; e.caja = p.caja; e.cristal = p.cristal;
-    e.esf = p.esf; e.bisel = p.bisel; e.agujas = p.agujas; e.correa = correa;
+    e.esf = p.esf; e.bisel = p.bisel; e.agujas = agujas; e.correa = correa;
     L.normaliza();
     if (L.vetada(L.firma())) continue;
     if (L.costes() === null) continue;
@@ -410,7 +418,7 @@ function lunar() {
         caja: 'Caja de ' + L.CAJAS[caja].mat + ' de ' + L.MM + ' mm, ' +
               L.CRISTALES[cristal].tec + '.',
         esfera: L.ESFERAS[c.esf].tec + ' Bisel: ' + L.BISELES[c.bisel].tec +
-                '. Agujas: ' + L.AGUJAS[c.agujas].tec + '.',
+                '. Agujas: ' + L.AGUJAS[agujas].tec + '.',
         agua: L.agua() },
       /* El diámetro va al catálogo para que el carrito pueda avisar de si el
          reloj le va a la muñeca de quien compra, igual que hace el Trinchera

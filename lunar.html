@@ -992,7 +992,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=12';
+  var SERIE_V = '?v=13';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1184,9 +1184,12 @@
      eligiendo, cada pieza se posa encima. Lo que todavía no se ha tocado no
      se enseña, porque enseñarlo sería decidir por el cliente.
 
-     VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy LAS SEIS
-     esferas, los tres biseles, cuatro juegos de agujas de cinco y el
-     brazalete; de las cinco correas de caucho, ninguna. Cambiar el visor entero dejaría a la mayoría de las
+     VA CON `?capas` Y NO EN LA TIENDA. Desde el 28/08 por la noche están
+     TODAS: seis esferas, tres biseles, cinco juegos de agujas, el brazalete
+     y las cinco correas de caucho. Lo que falta ya no son capas, es
+     cuadrarlas: las agujas pequeñas van dentro de su capa y cada esfera
+     tiene los contadores en otro sitio, así que cada pareja que sobreviva a
+     la criba de Óscar necesita su copia cuadrada. Cambiar el visor entero dejaría a la mayoría de las
      combinaciones sin nada que enseñar, y eso hoy se vende. Cuando estén
      todas, se quita la condición y se acabaron los AVIF por combinación.
      ============================================================ */
@@ -1216,13 +1219,19 @@
     agujas: { BLA: '06-agujas-plata-1010-segundero-37',
               AZU: '07-agujas-azules-1010-segundero-37',
               ORO: '09-agujas-oro-rosa-1010-segundero-37',
+              DOR: '16-agujas-doradas-1010-segundero-37',
               NAR: { '*': '12-agujas-rally-naranjas-1010-segundero-37',
-                     NAR: '16-agujas-rally-naranjas-para-rally' } },
+                     NAR: '12-agujas-rally-naranjas-para-rally' } },
     /* El brazalete llegó 300 px más estrecho que el hueco entre las asas y
        cargado a la izquierda; lo encaja `herramientas/encajar_correa.py`,
        que lo agranda un 30 % hasta que no se queda corto en ninguna fila de
        las asas. Lo que se pasa del hueco no se ve: la correa va detrás. */
-    correa: { ACERO: '14-brazalete-acero' }
+    correa: { ACERO: '14-brazalete-acero',
+              CAZU:  '17-correa-caucho-azul',
+              CAZN:  '18-correa-caucho-azul-naranja',
+              CBLA:  '19-correa-caucho-blanca',
+              CMAC:  '20-correa-caucho-marron-crema',
+              CNVF:  '21-correa-caucho-negra-verde-fluor' }
   };
   /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
      haber tocado para que la pieza aparezca. La caja no espera a nadie.
@@ -1465,12 +1474,32 @@
        por eso la caja `NG` no se dibuja: los botones salen de esta tabla. */
   ];
   /* El paquete de una combinación, o null si el proveedor no la monta. */
+  /* LAS AGUJAS SE ELIGEN LIBRES (Óscar, 28/08/2026: «en cuanto a las agujas
+     déjame todas las opciones puestas por defecto, luego te diré yo las
+     combinaciones que no quiero»). Antes cada pareja bisel+esfera traía UN
+     juego de agujas y el paso no tenía nada que elegir; ahora salen los
+     cinco acabados con cualquier esfera y cualquier bisel, y la criba la
+     hace él.
+
+     ⚠️ EL COSTE SALE DEL PAQUETE SIN MIRAR LAS AGUJAS. En la hoja de compra
+     todas las cajas montadas de mineral valen lo mismo —34,59— lleven las
+     agujas que lleven, así que el color de las agujas no mueve el precio.
+     Es una suposición, no un dato: si el proveedor cobra distinto por unas
+     agujas, esto hay que rehacerlo. */
+  var AGUJAS_LIBRES = true;
   function paqueteDe(s) {
     s = s || e;
-    for (var i = 0; i < PAQUETES.length; i++) {
-      var p = PAQUETES[i];
+    var i, p;
+    for (i = 0; i < PAQUETES.length; i++) {
+      p = PAQUETES[i];
       if (p.caja === s.caja && p.cristal === s.cristal && p.esf === s.esf &&
           p.bisel === s.bisel && p.agujas === s.agujas) return p;
+    }
+    if (!AGUJAS_LIBRES) return null;
+    for (i = 0; i < PAQUETES.length; i++) {
+      p = PAQUETES[i];
+      if (p.caja === s.caja && p.cristal === s.cristal && p.esf === s.esf &&
+          p.bisel === s.bisel) return p;
     }
     return null;
   }
@@ -1501,8 +1530,11 @@
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
        delante de una combinación que no existe. */
+    /* LAS AGUJAS NO ENTRAN EN LA CADENA. Ni se reparan —valen todas— ni
+       filtran a las de abajo: si se metieran en `fij`, elegir unas agujas
+       que ningún paquete lleva dejaría la caja y el cristal sin opciones. */
     var fij = {};
-    ['bisel', 'esf', 'agujas', 'caja', 'cristal'].forEach(function (k) {
+    ['bisel', 'esf', 'caja', 'cristal'].forEach(function (k) {
       var ok = valores(k, fij);
       if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
       fij[k] = e[k];
@@ -1758,14 +1790,15 @@
     botones('mov', deTabla(MOVS), e.mov);
     botones('bisel', soloDe(BISELES, 'bisel', {}), e.bisel);
     botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }), e.esf);
-    botones('agujas', soloDe(AGUJAS, 'agujas', { esf: e.esf, bisel: e.bisel }), e.agujas);
+    /* Los cinco acabados, siempre. */
+    botones('agujas', deTabla(AGUJAS), e.agujas);
     /* La caja y el cristal se dibujan ENTEROS, con lo que no tiene paquete
        apagado: así se ve que existe el PVD y los dos zafiros antirreflejos
        aunque todavía no se puedan comprar (Óscar, 28/08/2026). */
     botones('caja', soloDe(CAJAS, 'caja',
-      { esf: e.esf, bisel: e.bisel, agujas: e.agujas }, true), e.caja);
+      { esf: e.esf, bisel: e.bisel }, true), e.caja);
     botones('cristal', soloDe(CRISTALES, 'cristal',
-      { esf: e.esf, bisel: e.bisel, agujas: e.agujas, caja: e.caja }, true), e.cristal);
+      { esf: e.esf, bisel: e.bisel, caja: e.caja }, true), e.cristal);
     botones('correamat', deTabla(MATERIALES), matDe(e.correa));
     botones('correa', deTabla(CORREAS).map(function (o) {
       o[2] = matDe(o[0]) !== matDe(e.correa);      // sólo los de su material
