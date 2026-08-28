@@ -835,7 +835,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=5';
+  var SERIE_V = '?v=6';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1038,17 +1038,24 @@
     esf:    { NEG: '04-esfera-negra-sin-agujas',
               BLA: '05-esfera-blanca-subesferas-azules-sin-agujas' },
     agujas: { BLA: '06-agujas-plata-1010-segundero-37',
-              AZU: '07-agujas-azules-1010-segundero-37' },
+              AZU: '07-agujas-azules-1010-segundero-37',
+              ORO: '09-agujas-oro-rosa-1010-segundero-37' },
     correa: {}
   };
   /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
-     haber tocado para que la pieza aparezca. La caja no espera a nadie. */
+     haber tocado para que la pieza aparezca. La caja no espera a nadie.
+
+     `necesita` es otra cosa: la pieza no se dibuja si la de debajo no está
+     dibujada. Las agujas necesitan esfera. Hay agujas de sobra sin su
+     esfera —las de oro rosa sin la esfera de oro rosa, por ejemplo—, y sin
+     esta regla saldrían flotando sobre el agujero de la caja, que no parece
+     un reloj a medio montar sino un fallo. */
   var PILA = [
     { capa: 'correa', grupo: 'correa', espera: 'correa' },
     { capa: 'caja',   grupo: 'caja',   espera: null },
     { capa: 'bisel',  grupo: 'bisel',  espera: 'bisel' },
     { capa: 'esf',    grupo: 'esf',    espera: 'esf' },
-    { capa: 'agujas', grupo: 'agujas', espera: 'agujas' }
+    { capa: 'agujas', grupo: 'agujas', espera: 'agujas', necesita: 'esf' }
   ];
 
   /* SE PRECARGAN TODAS DE GOLPE. Cambiar el `src` de un <img> lo deja en
@@ -1072,15 +1079,18 @@
     if (!caja) return;
     caja.hidden = !CAPAS;
     if (!CAPAS) return;
+    var puestas = {};
     PILA.forEach(function (p) {
       var img = caja.querySelector('[data-capa="' + p.capa + '"]');
       if (!img) return;
       var f = CAPA[p.grupo] && CAPA[p.grupo][e[p.grupo]];
       var toca = !p.espera || !!tocado[p.espera];
-      if (!f || !toca) { img.hidden = true; img.removeAttribute('src'); return; }
+      var apoyo = !p.necesita || !!puestas[p.necesita];
+      if (!f || !toca || !apoyo) { img.hidden = true; img.removeAttribute('src'); return; }
       var src = CAPA_IMG + f + '.avif' + SERIE_V;
       if (img.getAttribute('src') !== src) img.setAttribute('src', src);
       img.hidden = false;
+      puestas[p.capa] = true;
     });
     /* El carrusel mueve el paso que se está tocando ahora mismo. */
     var c = $('[data-pv-carrusel]');
