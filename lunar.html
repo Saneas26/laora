@@ -296,6 +296,61 @@
   .pv-info .pv-comprar{ border-radius:6px }
   .pv-info .pv-klarna{ border-radius:6px }
 
+  /* ---------- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO ----------
+     Óscar, 28/08/2026: «debajo de la foto vamos a colocar una barra donde
+     se va marcando el precio de las elecciones del cliente y permanece
+     visible sólo hasta que el scroll llega a la tarjeta donde ya se ve la
+     otra tarjeta de precio con el botón añadir al carrito».
+
+     QUIÉN SE QUEDA PEGADO. Antes era la foto; ahora es el envoltorio, con
+     la foto y la barra dentro. Así las dos suben juntas y no hay que
+     calcular a mano dónde acaba la foto para pegar la barra debajo.
+
+     Y EL ALTO SE REPARTE: «no puede ocupar más altura que la que queda
+     libre en pantalla completa». El envoltorio no pasa de la pantalla, la
+     barra se lleva lo suyo —que es poco— y la foto se queda con el resto.
+     La foto encoge sola porque las capas van con `contain`: el reloj sale
+     más pequeño, nunca cortado. El `min-height:0` es imprescindible: sin
+     él un hijo de flex no baja de su tamaño natural y la barra se saldría
+     de la pantalla por abajo. */
+  @media (min-width:901px){
+    .pv-visor{
+      position:sticky; top:92px; max-height:calc(100vh - 108px);
+      display:flex; flex-direction:column; gap:12px;
+    }
+    /* El sticky se lo queda el envoltorio, así que la foto vuelve a ser
+       una caja normal; si no, se pegaría dos veces. */
+    .pv-visor-fijo .pv-visor .pv-hero{
+      position:static; max-height:none; min-height:0; flex:1 1 auto;
+    }
+    .pv-barra{ flex:0 0 auto }
+  }
+  .pv-barra{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center;
+    gap:16px; padding:10px 14px;
+    border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
+    transition:opacity .18s;
+  }
+  /* SE APAGA SIN IRSE. Con `display:none` la foto crecería de golpe al
+     cruzar el pie y volvería a encoger al subir: un salto en cada pasada.
+     Apagada deja su hueco y no se mueve nada. */
+  .pv-barra-fuera{ opacity:0; visibility:hidden }
+  .pv-barra .pv-barra-precio{ margin:0; font-size:22px; line-height:1.1 }
+  .pv-barra-klarna{
+    margin:0; display:flex; align-items:center; justify-content:center;
+    flex-wrap:wrap; gap:6px;
+    font-size:12.5px; line-height:1.35; color:var(--cv2-gris); text-align:center;
+  }
+  .pv-barra-klarna[hidden]{ display:none !important }
+  .pv-barra .pv-barra-comprar{
+    width:auto; margin:0; padding:12px 22px; border-radius:6px;
+  }
+  /* En una columna la barra no cabe en tres trozos y, sobre todo, ahí ya
+     está el pie anclado al borde de abajo haciendo su trabajo. */
+  @media (max-width:900px){
+    .pv-barra{ display:none }
+  }
+
   /* ---------- EL MONTAJE POR CAPAS ----------
      Cinco imágenes una encima de otra, todas del mismo lienzo cuadrado de
      4096 y con el mismo eje, así que basta con apilarlas: no hay que
@@ -434,6 +489,11 @@
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
+     <!-- LA FOTO Y LA BARRA VIAJAN JUNTAS. El envoltorio es el que se queda
+          pegado a la pantalla; dentro, la barra manda sobre su alto y la
+          foto se queda con lo que sobre (Óscar, 28/08/2026: «no puede
+          ocupar más altura que la que queda libre en pantalla completa»). -->
+     <div class="pv-visor">
       <div class="pv-hero pv-hero-llena">
         <!-- EL MONTAJE POR CAPAS, sólo con `?capas` (Óscar, 28/08/2026).
              Cinco huecos, de atrás hacia delante: la correa va detrás de la
@@ -457,6 +517,23 @@
         </div>
         <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
       </div>
+
+      <!-- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO (Óscar, 28/08/2026):
+           «a la izquierda precio, en el centro 3 pagos con Klarna 0 %
+           intereses y a la derecha botón de añadir al carrito». Se apaga
+           sola cuando aparece el pie de la columna de la derecha, que dice
+           lo mismo con más detalle: dos botones de comprar a la vez
+           confunden. Deja su hueco al apagarse para que la foto no pegue
+           un salto cada vez que se cruza el pie. -->
+      <div class="pv-barra" data-pv-barra>
+        <p class="pv-precio pv-barra-precio" data-pv-precio>269,90 €</p>
+        <p class="pv-barra-klarna">
+          <span>3 pagos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+        </p>
+        <button class="cv2-comprar pv-comprar pv-barra-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+      </div>
+     </div>
     </div>
 
     <!-- ============ LA COMPRA ============ -->
@@ -880,6 +957,14 @@
      ============================================================ */
 
   var $ = function (s) { return document.querySelector(s); };
+  /* DESDE QUE HAY BARRA, EL PRECIO SALE EN DOS SITIOS. `$` devuelve el
+     primero que encuentra, así que lo que se pinta por duplicado —el
+     precio, la cuota de Klarna y el botón de comprar— se pinta con esto
+     en TODOS. Si se dejara `$`, la barra se quedaría con el precio de
+     ejemplo del HTML puesto para siempre. */
+  var todos = function (s) {
+    return [].slice.call(document.querySelectorAll(s));
+  };
   function eu(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
 
   /* ---------- LA FIRMA DE UNA COMBINACIÓN ----------
@@ -1512,21 +1597,24 @@
        deja comprar: una cifra inventada en una tienda es peor que ninguna. */
     var hayPrecio = COSTES_PUESTOS && costes() !== null;
     var pie = $('[data-pv-pie]');
-    $('[data-pv-precio]').textContent = hayPrecio ? eu(precio()) : 'Precio por definir';
+    todos('[data-pv-precio]').forEach(function (n) {
+      n.textContent = hayPrecio ? eu(precio()) : 'Precio por definir';
+    });
     /* SIN PRECIO NO HAY PLAZOS NI «DISPONIBLE». La caja de Klarna venía con
        un número de ejemplo dentro y el punto verde diciendo que está a la
        venta: las dos cosas serían mentira hasta que haya costes. */
-    var klarna = $('.pv-klarna');
-    if (klarna) klarna.hidden = !hayPrecio;
-    if (hayPrecio) $('[data-pv-klarna]').textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
+    todos('.pv-klarna, .pv-barra-klarna').forEach(function (n) { n.hidden = !hayPrecio; });
+    if (hayPrecio) {
+      var cuota = eu(Math.ceil(precio() / 3 * 100) / 100);
+      todos('[data-pv-klarna]').forEach(function (n) { n.textContent = cuota; });
+    }
     var stock = document.querySelector('.pv-stock');
     if (stock) stock.hidden = !hayPrecio;
     if (pie) pie.classList.toggle('pv-sin-precio', !hayPrecio);
-    var comprar = $('[data-pv-comprar]');
-    if (comprar) {
-      comprar.disabled = !hayPrecio;
-      comprar.textContent = hayPrecio ? 'Añadir al carrito' : 'Todavía no está a la venta';
-    }
+    todos('[data-pv-comprar]').forEach(function (b) {
+      b.disabled = !hayPrecio;
+      b.textContent = hayPrecio ? 'Añadir al carrito' : 'Todavía no está a la venta';
+    });
 
     /* Cada paso enseña sólo lo que sigue teniendo salida con lo ya elegido
        por encima. `o[2]` es «no lo dibujes» y `o[3]` es «dibújalo apagado». */
@@ -1583,6 +1671,7 @@
     entrega();
     modoDeCompra();
     pintaCapas();
+    repasaBarra();
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
@@ -1681,23 +1770,56 @@
     }
   }
 
+  /* ---------- LA BARRA SE APAGA CUANDO SALE EL PIE ----------
+     Óscar, 28/08/2026: la barra «permanece visible sólo hasta que el scroll
+     llega a la tarjeta donde ya se ve la otra tarjeta de precio con el
+     botón añadir al carrito».
+
+     LA REGLA, EN UNA LÍNEA: el pie asoma por abajo. `ASOMO` son los píxeles
+     que tiene que haber entrado para que cuente, y evitan que la barra
+     parpadee cuando el pie roza el filo de la pantalla.
+
+     SE MIRA A MANO Y NO CON UN IntersectionObserver, que era la primera
+     versión: el observador es más fino, pero no hay forma de comprobarlo
+     desde aquí —en el panel del navegador no llega a dispararse ni una
+     vez—, y una regla que no se puede probar no se publica. Ésta se mide
+     con `getBoundingClientRect`, que sí responde, y se puede recorrer
+     entera sobre la página de verdad.
+
+     SE VUELVE A MIRAR EN TRES SITIOS, no sólo al desplazarse: al elegir
+     —cambiar de correa hace crecer la columna y el pie se mueve sin que
+     nadie toque el scroll—, al cambiar el tamaño de la ventana y al
+     arrancar. */
+  var ASOMO = 24;
+  function repasaBarra() {
+    var barra = $('[data-pv-barra]'), pie = $('[data-pv-pie]');
+    if (!barra || !pie) return;
+    var r = pie.getBoundingClientRect();
+    barra.classList.toggle('pv-barra-fuera',
+      r.top < window.innerHeight - ASOMO && r.bottom > 0);
+  }
+
   /* ---------- LOS CLICS ---------- */
-  /* El carrusel se repinta al desplazarse, una vez por fotograma: mirar el
-     `getBoundingClientRect` de cinco cajas en cada píxel de scroll es tirar
-     trabajo, y con `requestAnimationFrame` basta y sobra. */
+  /* La barra y el carrusel se repasan al desplazarse, una vez por
+     fotograma: mirar el `getBoundingClientRect` de seis cajas en cada píxel
+     de scroll es tirar trabajo, y con `requestAnimationFrame` basta. */
   (function () {
     var pedido = false;
-    window.addEventListener('scroll', function () {
-      if (!CAPAS || pedido) return;
+    function apunta() {
+      if (pedido) return;
       pedido = true;
       requestAnimationFrame(function () {
         pedido = false;
+        repasaBarra();
+        if (!CAPAS) return;
         var c = $('[data-pv-carrusel]');
         if (!c || c.hidden) return;
         var g = pasoEnJuego();
         if (g) c.querySelector('[data-carrusel-paso]').textContent = ROTULO[g];
       });
-    }, { passive: true });
+    }
+    window.addEventListener('scroll', apunta, { passive: true });
+    window.addEventListener('resize', apunta);
   })();
 
   document.addEventListener('click', function (ev) {
