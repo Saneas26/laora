@@ -280,6 +280,22 @@
     .pv-info .pv-pie{ position:static; margin-top:8px }
   }
 
+  /* ---------- EL PIE DE PAGO, AFINADO (Óscar, 28/08/2026) ----------
+     Medido antes de tocar nada: del precio a «Impuestos incluidos» había
+     18 px, y de la fila de confianza a la nota de la garantía, 28. Los dos
+     son hijos de un flex con `gap:10px`, así que la separación se recorta
+     con margen negativo, que es lo único que resta del hueco del flex.
+
+     La nota de la garantía se va a la derecha y baja a 12 px: cuelga de
+     «Garantía 5 años*», que es la segunda columna de la fila de arriba, y
+     alineada a la izquierda parecía que colgaba del envío. */
+  .pv-info .pv-pie .pv-imp{ margin-top:-14px }
+  .pv-info .pv-nota-garantia{
+    margin-top:-14px; font-size:12px; line-height:17px; text-align:right;
+  }
+  .pv-info .pv-comprar{ border-radius:6px }
+  .pv-info .pv-klarna{ border-radius:6px }
+
   .pv-oculto{
     position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
     white-space:nowrap;
