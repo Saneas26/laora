@@ -208,12 +208,12 @@
   .pv-modo{
     width:100%; font:500 14px/20px 'Nunito Sans', system-ui, sans-serif;
     color:#171A20; background:#fff; border:1px solid var(--cv2-linea);
-    border-radius:4px; padding:11px 12px; margin:0 0 8px;
+    border-radius:6px; padding:11px 12px; margin:0 0 8px;
   }
   .pv-modo-nota{
     margin:0 0 20px; font-size:14px; line-height:20px; color:#393C41;
     font-family:'Nunito Sans', system-ui, sans-serif;
-    background:#F4F4F2; border-radius:4px; padding:10px 12px;
+    background:#F4F4F2; border-radius:6px; padding:10px 12px;
   }
   .pv-modo-nota[hidden]{ display:none }
   .pv-modo-nota b{ color:#171A20 }
@@ -227,14 +227,20 @@
     font-family:'Nunito Sans', system-ui, sans-serif; letter-spacing:0;
   }
   .pv-g{ display:flex; flex-direction:column; gap:8px }
+  /* EL RÓTULO Y LO ELEGIDO EN NEGRITA, LA EXPLICACIÓN MÁS PEQUEÑA
+     (Óscar, 28/08/2026: «Tamaño de la caja 14 px negrita / Pendiente 14 px
+     negrita / la explicación normal y más pequeña 12 px»). Se separa más de
+     Tesla, que lo pone todo a 14, pero así la explicación pesa menos y la
+     línea de la elección canta. Los 12 px se aguantan porque el gris #393C41
+     sobre la tarjeta da 9,9:1 de contraste. */
   .pv-g-cab{
     margin:0; display:flex; align-items:baseline; justify-content:space-between;
-    gap:12px; font-size:14px; line-height:20px; font-weight:500; color:#171A20;
+    gap:12px; font-size:14px; line-height:20px; font-weight:700; color:#171A20;
     font-family:'Nunito Sans', system-ui, sans-serif;
   }
-  .pv-g-cab .pv-g-valor{ color:#171A20; text-align:right }
+  .pv-g-cab .pv-g-valor{ color:#171A20; text-align:right; font-weight:700 }
   .pv-g-explica{
-    margin:0; font-size:14px; line-height:20px; font-weight:400; color:#393C41;
+    margin:0; font-size:12px; line-height:17px; font-weight:400; color:#393C41;
     font-family:'Nunito Sans', system-ui, sans-serif;
   }
   .pv-g-explica:empty{ display:none }
@@ -242,9 +248,20 @@
   /* Un paso que todavía no tiene datos: se ve, para que se sepa que va a
      estar, pero no se puede tocar. */
   .pv-g-vacio .pv-g-cab, .pv-g-vacio .pv-g-explica{ color:#8E9095 }
-  .pv-g-vacio .pv-g-cab .pv-g-valor{ color:#8E9095; font-weight:400 }
+  .pv-g-vacio .pv-g-cab .pv-g-valor{ color:#8E9095 }
   .pv-tarjeta .pv-opciones{ gap:8px }
   .pv-tarjeta .pv-opciones button{ font-size:14px; padding:9px 14px }
+
+  /* ESQUINAS UN POQUITO REDONDEADAS Y EL ORO AL 60 % (Óscar, 28/08/2026).
+     El oro de la marca es #D4AF37; al 60 % sobre la tarjeta queda
+     RGB(225, 203, 130), y con la letra negra sube a 11,5:1 de contraste —el
+     oro puro daba 8,8:1—, así que se lee mejor que antes, no peor.
+     Se toca sólo dentro del Lunar: esos botones son de la hoja compartida. */
+  .pv-info .pv-opciones button{ border-radius:6px }
+  .pv-info .pv-opciones button[aria-pressed="true"]{
+    background:rgba(212,175,55,.6); border-color:rgba(212,175,55,.6);
+  }
+  .pv-modo{ background:rgba(212,175,55,.6); border-color:rgba(212,175,55,.6) }
   /* EL PIE DEJA DE IR PEGADO ABAJO EN EL LUNAR. `.pv-pie` es `sticky` en la
      hoja compartida y con tres tarjetas la columna mide más de dos mil
      píxeles: el pie se quedaba flotando encima de la tarjeta del movimiento
@@ -1155,23 +1172,25 @@
      la pasarela, no de esta ficha. Lo que sí hace ya es decir la verdad de
      cuánto se pide al reservar. */
   /* ---------- LA SEÑAL DE LA RESERVA ----------
-     Óscar, 28/08/2026: se sube el coste de compra «al 9,90 más próximo por
-     arriba», y al cliente se le dice el PORCENTAJE del precio que adelanta
-     más el importe en euros.
+     EL 40 % DEL PRECIO, SIEMPRE (Óscar, 28/08/2026: «para que no varíe tanto,
+     se va a pedir el 40 % del importe siempre como fijo, es decir el valor
+     más alto de los calculados»).
 
-     Dos cosas de fondo. La primera: al redondear al 9,90 de arriba, la señal
-     deja de ser el coste exacto, así que la página ya no publica lo que nos
-     cuesta el reloj —antes decía «79,03 €, lo que cuesta comprar las piezas»
-     y de ahí se sacaba el margen en dos segundos—. La segunda: el porcentaje
-     se redondea HACIA ARRIBA. Así lo que se cobra de verdad nunca pasa del
-     porcentaje anunciado; al revés, el cliente pagaría un pelo más de lo que
-     se le dijo. El euro es el que manda y va escrito al lado. */
+     Antes salía del coste de compra redondeado al 9,90 de arriba y bailaba
+     entre el 36 % y el 40 % según la configuración. Un porcentaje fijo se
+     explica en una línea, se entiende sin mirar la tabla, y —lo que importa—
+     **sigue sin publicar lo que nos cuesta el reloj**, que es lo que hacía la
+     primera versión. Cubre el coste en las seis configuraciones: la más
+     ajustada, la de oro rosa con caucho, cuesta 81,01 y adelanta 91,96.
+
+     No se redondea al 9,90: entonces ya no sería el 40 % y habría que volver
+     a decir un porcentaje distinto en cada reloj. */
+  var SENAL = 0.40;
   function senal() {
-    var c = costes();
-    if (c === null) return null;
-    var ahora = sube990(c), total = precio();
-    return { ahora: ahora, luego: total - ahora,
-             pct: Math.ceil(ahora / total * 100) };
+    if (costes() === null) return null;
+    var total = precio(), ahora = Math.round(total * SENAL * 100) / 100;
+    return { ahora: ahora, luego: Math.round((total - ahora) * 100) / 100,
+             pct: Math.round(SENAL * 100) };
   }
 
   function modoDeCompra() {
