@@ -302,9 +302,12 @@
      visible sólo hasta que el scroll llega a la tarjeta donde ya se ve la
      otra tarjeta de precio con el botón añadir al carrito».
 
-     QUIÉN SE QUEDA PEGADO. Antes era la foto; ahora es el envoltorio, con
-     la foto y la barra dentro. Así las dos suben juntas y no hay que
-     calcular a mano dónde acaba la foto para pegar la barra debajo. */
+     LA FOTO NO SE TOCA. Sigue pegada arriba con la regla de siempre; la
+     barra se pega abajo por su cuenta. Hubo una versión intermedia que las
+     metía en un envoltorio y las hacía repartirse el alto de la pantalla:
+     la foto encogía para dejarle sitio, y entre las dos se comían la
+     pantalla entera. Está contada en el bloque de escritorio de más abajo,
+     que es donde se arregló. */
   .pv-barra{
     display:grid; grid-template-columns:auto 1fr auto; align-items:center;
     gap:16px; padding:10px 14px;
@@ -336,41 +339,29 @@
      el `flex-wrap:wrap` de la línea de Klarna le ganaba a su `nowrap` y la
      barra seguía partiéndose en dos renglones. */
   @media (min-width:901px){
-    /* LA FOTO NO DEJA DE SER CUADRADA (Óscar, 28/08/2026: «has alargado la
-       caja de la foto, y tapa la nueva tarjeta de precios»).
+    /* LA FOTO SE QUEDA COMO ESTABA Y LA BARRA SE PEGA ABAJO (Óscar,
+       28/08/2026: «quiero que la caja de la foto ocupe lo que antes, y
+       permita ver la tarjeta de precios fija, hasta que el scroll baje a la
+       otra tarjeta de precios»).
 
-       La primera versión dejaba que el marco encogiera a lo alto como un
-       hijo de flex cualquiera: en una pantalla de 768 se quedaba en 685×559
-       —achatado— y encima, con la foto en `cover`, recortada. Ahora el
-       marco se mide de una vez: el LADO es el menor entre el ancho de la
-       columna y el hueco que queda de alto, así que sale cuadrado siempre y
-       cuando sobra ancho se centra.
+       DE DÓNDE VENÍA EL LÍO. Yo había metido la foto y la barra dentro de
+       un envoltorio y las hacía repartirse el alto de la pantalla: la foto
+       encogía para dejarle sitio a la barra. Con eso la foto pasaba a
+       ocupar la pantalla entera de arriba abajo —foto más barra— y, en
+       cuanto no cabían las dos, una de las dos se quedaba fuera.
 
-       LAS CUENTAS DEL HUECO: 116 px hasta el borde de arriba del visor —76
-       de cabecera y 40 de aire—, 16 de respiro abajo, 12 de separación y 72
-       de barra. Se descuenta desde donde EMPIEZA y no desde donde acaba
-       pegado (92), porque el peor caso es sin desplazar, que es cuando más
-       se mira; pegado sobran esos 24 px y no molestan. */
-    .pv-visor{
-      position:sticky; top:92px;
-      display:flex; flex-direction:column; align-items:center; gap:12px;
+       AHORA NO SE REPARTEN NADA. La foto vuelve a ser lo que era: pegada a
+       92 px de arriba y sin pasar de `100vh - 108`, la regla de la hoja
+       compartida, que es la que había antes de tocar nada. Y la barra ya no
+       va detrás de ella en la fila: se pega al BORDE DE ABAJO de la
+       pantalla, encima de lo que haya, hasta que la columna se acaba.
+
+       `margin-top:auto` la manda al final de la columna, que es donde se
+       despega; sin eso se soltaría a la altura de la foto, mucho antes. */
+    .pv-barra{
+      position:sticky; bottom:16px; margin-top:auto; z-index:5;
+      box-shadow:0 6px 20px rgba(18,20,20,.10);
     }
-    /* El sticky se lo queda el envoltorio, así que la foto vuelve a ser
-       una caja normal; si no, se pegaría dos veces. */
-    .pv-visor-fijo .pv-visor .pv-hero{
-      position:static; flex:0 0 auto;
-      width:min(100%, calc(100vh - 216px)); max-height:none;
-    }
-    /* LA BARRA, DE ALTO FIJO. Si se la deja crecer, la línea de Klarna
-       parte en dos al estrecharse la columna, la barra pasa de 66 a 80 y la
-       cuenta del hueco de la foto deja de valer.
-
-       Y CON EL ALTO FIJO, QUE PARTA. Se probó a recortarla con puntos
-       suspensivos para tenerla en un solo renglón, y quedaba «3 pagos sin
-       intereses (0 % TAE) de 79,97 …»: cortar un importe por la mitad es
-       peor que un renglón de más. En dos líneas ocupa 34 px de los 72, así
-       que cabe de sobra y la barra no se mueve. */
-    .pv-barra{ flex:0 0 auto; width:100%; height:72px }
   }
 
   /* ---------- LA MISMA BARRA EN MÓVIL, PEGADA ABAJO (Óscar, 28/08/2026) ----------
@@ -549,11 +540,6 @@
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
-     <!-- LA FOTO Y LA BARRA VIAJAN JUNTAS. El envoltorio es el que se queda
-          pegado a la pantalla; dentro, la barra manda sobre su alto y la
-          foto se queda con lo que sobre (Óscar, 28/08/2026: «no puede
-          ocupar más altura que la que queda libre en pantalla completa»). -->
-     <div class="pv-visor">
       <div class="pv-hero pv-hero-llena">
         <!-- EL MONTAJE POR CAPAS, sólo con `?capas` (Óscar, 28/08/2026).
              Cinco huecos, de atrás hacia delante: la correa va detrás de la
@@ -593,7 +579,6 @@
         </p>
         <button class="cv2-comprar pv-comprar pv-barra-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
       </div>
-     </div>
     </div>
 
     <!-- ============ LA COMPRA ============ -->
