@@ -1154,18 +1154,39 @@
      entero en el carrito: partir el cobro en una señal y un resto es cosa de
      la pasarela, no de esta ficha. Lo que sí hace ya es decir la verdad de
      cuánto se pide al reservar. */
+  /* ---------- LA SEÑAL DE LA RESERVA ----------
+     Óscar, 28/08/2026: se sube el coste de compra «al 9,90 más próximo por
+     arriba», y al cliente se le dice el PORCENTAJE del precio que adelanta
+     más el importe en euros.
+
+     Dos cosas de fondo. La primera: al redondear al 9,90 de arriba, la señal
+     deja de ser el coste exacto, así que la página ya no publica lo que nos
+     cuesta el reloj —antes decía «79,03 €, lo que cuesta comprar las piezas»
+     y de ahí se sacaba el margen en dos segundos—. La segunda: el porcentaje
+     se redondea HACIA ARRIBA. Así lo que se cobra de verdad nunca pasa del
+     porcentaje anunciado; al revés, el cliente pagaría un pelo más de lo que
+     se le dijo. El euro es el que manda y va escrito al lado. */
+  function senal() {
+    var c = costes();
+    if (c === null) return null;
+    var ahora = sube990(c), total = precio();
+    return { ahora: ahora, luego: total - ahora,
+             pct: Math.ceil(ahora / total * 100) };
+  }
+
   function modoDeCompra() {
     var sel = $('[data-pv-modo]'), nota = $('[data-pv-modo-nota]');
     if (!sel || !nota) return;
-    var v = sel.value, c = costes();
+    var v = sel.value;
     if (v === 'P-RES' || v === 'E-RES') {
       nota.hidden = false;
-      nota.innerHTML = c === null
-        ? 'Al reservar se cobra por adelantado lo que cuesta comprar las piezas ' +
-          'de este reloj, y el resto una semana antes de la entrega.'
-        : 'Al reservar se cobran ahora <b>' + eu(c) + '</b> —lo que cuesta ' +
-          'comprar las piezas de este reloj— y el resto, ' +
-          '<b>' + eu(precio() - c) + '</b>, una semana antes de la entrega.';
+      var r = senal();
+      nota.innerHTML = r === null
+        ? 'Al reservar se adelanta una parte del precio, y el resto una semana ' +
+          'antes de la entrega.'
+        : 'Al reservar adelantas el <b>' + r.pct + ' %</b> del precio, ' +
+          '<b>' + eu(r.ahora) + '</b>. El resto, <b>' + eu(r.luego) + '</b>, una ' +
+          'semana antes de la entrega.';
     } else if (v === 'P-3' || v === 'E-3') {
       nota.hidden = false;
       nota.innerHTML = 'Tres plazos sin intereses (0&nbsp;% TAE) con Klarna. El ' +
