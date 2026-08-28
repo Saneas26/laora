@@ -417,20 +417,20 @@
     position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
   }
   .pv-capas img[hidden]{ display:none }
-  /* ---------- LA CÁMARA SE ALEJA EN LA CORREA (Óscar, 28/08/2026) ----------
-     «cuando el scroll llega a brazalete o correa, la imagen principal hace
-     zoom y se aleja, para ver más parte de la correa o brazalete».
+  /* ⛔ LA CÁMARA QUE SE ALEJABA EN LA CORREA: QUITADA (Óscar, 28/08/2026).
+     La pidió para «ver más parte de la correa», se hizo, y al probarla dijo
+     lo que pasaba de verdad: «se aleja la imagen pero el brazalete sigue
+     cortado como si estuviera ampliado».
 
-     El brazalete ocupa el lienzo entero de arriba abajo, así que en el
-     visor cuadrado se queda cortado por los dos extremos: alejándose sale a
-     la vista casi la mitad más de tira.
+     Y TENÍA QUE PASAR: el brazalete de la capa llega hasta la fila 0 y la
+     4.095, o sea que ACABA EN EL BORDE DE SU PROPIA IMAGEN. En el visor
+     cuadrado ya se ve entero; alejándose no aparece más tira, aparece su
+     corte flotando dentro del marco, que se ve peor que dejarlo quieto.
 
-     SE ENCOGEN LAS IMÁGENES, NO SU CAJA. `.pv-capas` lleva el gris del
-     fondo, y encogiéndola a ella se vería el borde del gris recortado sobre
-     el blanco —`.pv-hero-llena` se queda sin fondo—. Encogiendo sólo las
-     capas, el gris sigue llenando el marco. */
-  .pv-capas img{ transition:transform .4s cubic-bezier(.2,.6,.2,1) }
-  .pv-capas-lejos img{ transform:scale(.72) }
+     PARA QUE FUNCIONE hace falta una capa de brazalete con tira de sobra
+     por fuera: la misma, a la misma escala, dibujada sobre un lienzo más
+     alto —unos 5.700 px para que al 72 % siga llegando a los bordes—. Con
+     eso puesto, volver a encenderlo son dos reglas de CSS y una función. */
   .pv-carrusel{
     position:absolute; left:0; right:0; bottom:14px; z-index:3;
     display:flex; align-items:center; justify-content:center; gap:14px;
@@ -681,7 +681,7 @@
         </section>
 
         <!-- ============ TARJETA 3 · LA CORREA ============ -->
-        <section class="pv-tarjeta" data-pv-tarjeta="correa">
+        <section class="pv-tarjeta">
           <h2 class="pv-tarjeta-tit">El brazalete o la correa</h2>
           <div class="pv-g" data-g="correamat">
             <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="correamat"></span></p>
@@ -990,7 +990,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=11';
+  var SERIE_V = '?v=12';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1182,8 +1182,8 @@
      eligiendo, cada pieza se posa encima. Lo que todavía no se ha tocado no
      se enseña, porque enseñarlo sería decidir por el cliente.
 
-     VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy cinco esferas
-     de seis, los tres biseles, cuatro juegos de agujas de cinco y el
+     VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy LAS SEIS
+     esferas, los tres biseles, cuatro juegos de agujas de cinco y el
      brazalete; de las cinco correas de caucho, ninguna. Cambiar el visor entero dejaría a la mayoría de las
      combinaciones sin nada que enseñar, y eso hoy se vende. Cuando estén
      todas, se quita la condición y se acabaron los AVIF por combinación.
@@ -1202,11 +1202,20 @@
               BLA: '05-esfera-blanca-subesferas-azules-sin-agujas',
               PAN: '10-esfera-panda-sin-agujas',
               ORO: '11-esfera-blanca-oro-rosa-sin-agujas',
-              DOR: '13-esfera-dorada-sin-agujas' },
+              DOR: '13-esfera-dorada-sin-agujas',
+              NAR: '15-esfera-rally-sin-agujas' },
+    /* UN JUEGO DE AGUJAS PUEDE NECESITAR UNA COPIA POR ESFERA. Las agujas
+       pequeñas van dentro de la capa, y cada esfera tiene los contadores
+       en un sitio distinto: las naranjas valen para la panda tal cual, pero
+       en la Rally se quedaban a treinta y cuarenta píxeles de sus
+       contadores. Cuando hace falta, el valor deja de ser un nombre y pasa
+       a ser una tabla: `'*'` es la de siempre y la clave de la esfera, la
+       copia cuadrada para ella. */
     agujas: { BLA: '06-agujas-plata-1010-segundero-37',
               AZU: '07-agujas-azules-1010-segundero-37',
               ORO: '09-agujas-oro-rosa-1010-segundero-37',
-              NAR: '12-agujas-rally-naranjas-1010-segundero-37' },
+              NAR: { '*': '12-agujas-rally-naranjas-1010-segundero-37',
+                     NAR: '16-agujas-rally-naranjas-para-rally' } },
     /* El brazalete llegó 300 px más estrecho que el hueco entre las asas y
        cargado a la izquierda; lo encaja `herramientas/encajar_correa.py`,
        que lo agranda un 30 % hasta que no se queda corto en ninguna fila de
@@ -1234,14 +1243,30 @@
      parpadeo en cada pulsación. Las siete pesan 252 KB juntas —menos que
      tres fotos—, así que se piden una vez al abrir y a partir de ahí los
      cambios son instantáneos. */
+  /* El fichero de una opción: o es un nombre, o es una tabla con una copia
+     por esfera y `'*'` de comodín. */
+  function ficheroCapa(grupo, valor) {
+    var v = CAPA[grupo] && CAPA[grupo][valor];
+    if (!v) return null;
+    if (typeof v === 'string') return v;
+    return v[e.esf] || v['*'] || null;
+  }
+  function cadaFicheroCapa(hazlo) {
+    for (var g in CAPA) for (var k in CAPA[g]) {
+      var v = CAPA[g][k];
+      if (typeof v === 'string') hazlo(v);
+      else for (var d in v) hazlo(v[d]);
+    }
+  }
+
   var PRECARGADAS = false;
   function precargaCapas() {
     if (PRECARGADAS || !CAPAS) return;
     PRECARGADAS = true;
-    for (var g in CAPA) for (var k in CAPA[g]) {
+    cadaFicheroCapa(function (f) {
       var i = new Image();
-      i.src = CAPA_IMG + CAPA[g][k] + '.avif' + SERIE_V;
-    }
+      i.src = CAPA_IMG + f + '.avif' + SERIE_V;
+    });
   }
 
   function pintaCapas() {
@@ -1254,7 +1279,7 @@
     PILA.forEach(function (p) {
       var img = caja.querySelector('[data-capa="' + p.capa + '"]');
       if (!img) return;
-      var f = CAPA[p.grupo] && CAPA[p.grupo][e[p.grupo]];
+      var f = ficheroCapa(p.grupo, e[p.grupo]);
       var toca = !p.espera || !!tocado[p.espera];
       var apoyo = !p.necesita || !!puestas[p.necesita];
       if (!f || !toca || !apoyo) { img.hidden = true; img.removeAttribute('src'); return; }
@@ -1774,7 +1799,6 @@
     modoDeCompra();
     pintaCapas();
     repasaBarra();
-    repasaVisor();
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
@@ -1903,24 +1927,6 @@
      desplazar nada, así que la barra nacía apagada y no se veía nunca. */
   var LLEGADA = 0.60;
 
-  /* ---------- LA CÁMARA SE ALEJA EN LA CORREA ----------
-     Óscar, 28/08/2026: «cuando el scroll llega a brazalete o correa, la
-     imagen principal hace zoom y se aleja, para ver más parte de la correa
-     o brazalete».
-
-     Manda la TARJETA entera, no el paso: los dos pasos de la correa —el
-     material y el color— viven en ella, y el color se esconde con el
-     brazalete puesto, así que mirar la tarjeta es lo único que vale para
-     los dos casos. Se considera que se ha llegado cuando ocupa la franja
-     de en medio de la pantalla. */
-  function repasaVisor() {
-    var capas = $('[data-pv-capas]');
-    var t = document.querySelector('[data-pv-tarjeta="correa"]');
-    if (!capas || !t) return;
-    var r = t.getBoundingClientRect();
-    capas.classList.toggle('pv-capas-lejos',
-      r.top < window.innerHeight * 0.60 && r.bottom > window.innerHeight * 0.15);
-  }
   /* NO SE DECIDE NADA HASTA QUE LA PÁGINA ESTÁ CUADRADA. Mientras las fotos
      no han cargado, la columna mide bastante menos y el pie cae dentro de la
      pantalla: la barra se apagaba, la página terminaba de cuadrar y volvía a
@@ -1931,7 +1937,6 @@
   window.addEventListener('load', function () {
     PAGINA_LISTA = true;
     repasaBarra();
-    repasaVisor();
   });
   function repasaBarra() {
     var barra = $('[data-pv-barra]'), pie = $('[data-pv-pie]');
@@ -1957,7 +1962,6 @@
       requestAnimationFrame(function () {
         pedido = false;
         repasaBarra();
-        repasaVisor();
         if (!CAPAS) return;
         var c = $('[data-pv-carrusel]');
         if (!c || c.hidden) return;
