@@ -184,6 +184,86 @@
   }
   .pv-calibre[hidden]{ display:none }
 
+  /* ============================================================
+     EL CONFIGURADOR EN TARJETAS, A LA MANERA DE TESLA
+     (Óscar, 28/08/2026: «vamos a diseñar la experiencia de usuario como
+     si fuese a comprarse un tesla»). Medido en tesla.com/es_es/modely:
+
+       · título de tarjeta ......... 24 px
+       · nombre de la opción ....... 14 px, semi, casi negro
+       · precio de la opción ....... 14 px, semi, casi negro
+       · explicación ............... 14 px, regular, gris #393C41
+       · entrega y forma de compra . 14 px
+
+     UNA SOLA LETRA PEQUEÑA, y todo el trabajo lo hace el contraste: no
+     hay tamaños intermedios. Aquí se respeta eso al pie de la letra.
+
+     Y SE ACABÓ ABRIR LOS PASOS DE UNO EN UNO: en Tesla se ve la
+     configuración entera desde el primer momento y el cliente va y viene.
+     Es lo que se ha pedido copiar. */
+  .pv-entrega{
+    margin:2px 0 12px; font-size:14px; line-height:20px; font-weight:500;
+    color:#5C5E62; font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-modo{
+    width:100%; font:500 14px/20px 'Nunito Sans', system-ui, sans-serif;
+    color:#171A20; background:#fff; border:1px solid var(--cv2-linea);
+    border-radius:4px; padding:11px 12px; margin:0 0 8px;
+  }
+  .pv-modo-nota{
+    margin:0 0 20px; font-size:14px; line-height:20px; color:#393C41;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    background:#F4F4F2; border-radius:4px; padding:10px 12px;
+  }
+  .pv-modo-nota[hidden]{ display:none }
+  .pv-modo-nota b{ color:#171A20 }
+
+  .pv-tarjeta{
+    background:#F4F4F2; border-radius:6px; padding:20px 18px; margin:0 0 16px;
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .pv-tarjeta-tit{
+    margin:0; font-size:24px; line-height:28px; font-weight:500; color:#171A20;
+    font-family:'Nunito Sans', system-ui, sans-serif; letter-spacing:0;
+  }
+  .pv-g{ display:flex; flex-direction:column; gap:8px }
+  .pv-g-cab{
+    margin:0; display:flex; align-items:baseline; justify-content:space-between;
+    gap:12px; font-size:14px; line-height:20px; font-weight:500; color:#171A20;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-g-cab .pv-g-valor{ color:#171A20; text-align:right }
+  .pv-g-explica{
+    margin:0; font-size:14px; line-height:20px; font-weight:400; color:#393C41;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-g-explica:empty{ display:none }
+  .pv-g[hidden]{ display:none }
+  /* Un paso que todavía no tiene datos: se ve, para que se sepa que va a
+     estar, pero no se puede tocar. */
+  .pv-g-vacio .pv-g-cab, .pv-g-vacio .pv-g-explica{ color:#8E9095 }
+  .pv-g-vacio .pv-g-cab .pv-g-valor{ color:#8E9095; font-weight:400 }
+  .pv-tarjeta .pv-opciones{ gap:8px }
+  .pv-tarjeta .pv-opciones button{ font-size:14px; padding:9px 14px }
+  /* EL PIE DEJA DE IR PEGADO ABAJO EN EL LUNAR. `.pv-pie` es `sticky` en la
+     hoja compartida y con tres tarjetas la columna mide más de dos mil
+     píxeles: el pie se quedaba flotando encima de la tarjeta del movimiento
+     y de la de la correa, tapándolas. Ahora cae al final de la columna, que
+     es donde Tesla pone el bloque de precio; su barra fija de abajo es otra
+     cosa —delgada, de ancho completo— y todavía no está hecha.
+     Se toca sólo aquí: esa hoja la usan todas las fichas.
+     Y SÓLO EN ESCRITORIO: por debajo de 900 px la hoja compartida lo ancla
+     al borde inferior de la pantalla, que ahí sí es lo que hace falta, y
+     este selector le ganaba por especificidad. */
+  @media (min-width:901px){
+    .pv-info .pv-pie{ position:static; margin-top:8px }
+  }
+
+  .pv-oculto{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
+    white-space:nowrap;
+  }
+
   /* LAS CUATRO FILAS. Sin los círculos numerados de antes: la estructura
      que pidió Óscar el 24/08/2026 son cuatro bloques, no seis pasos, y el
      número dejaba de cuadrar. */
@@ -313,44 +393,93 @@
         </div>
         <h1>Lunar</h1>
 
-        <!-- «Movimiento» a secas, no «Movimiento suizo». El rótulo del
-             Trinchera dice suizo porque sus calibres lo son; del Lunar
-             nuevo todavía no se sabe, y afirmarlo sería inventarse una
-             procedencia en una página de venta. -->
-        <div class="pv-fila pv-grupo" data-paso="mov">
-          <p class="pv-rotulo">Movimiento</p>
-          <div class="pv-mov-linea">
-            <div class="pv-opciones" data-pv="mov"></div>
-            <p class="pv-calibre" data-pv-calibre hidden><span data-pv-cal>Calibre</span></p>
-          </div>
-        </div>
+        <!-- LA CABECERA DE LA COLUMNA, como en Tesla: primero cuándo llega
+             y cómo se paga, y después lo que se elige. -->
+        <p class="pv-entrega" data-pv-entrega>Entrega estimada</p>
+        <label class="pv-oculto" for="pv-modo">Forma de compra</label>
+        <select class="pv-modo" id="pv-modo" data-pv-modo>
+          <optgroup label="Particular">
+            <option value="P-DIR">Particular · Pago directo</option>
+            <option value="P-3">Particular · 3 pagos sin intereses</option>
+            <option value="P-RES">Particular · Reservar</option>
+          </optgroup>
+          <optgroup label="Empresa">
+            <option value="E-DIR">Empresa · Pago directo</option>
+            <option value="E-3">Empresa · 3 pagos sin intereses</option>
+            <option value="E-RES">Empresa · Reservar</option>
+          </optgroup>
+        </select>
+        <p class="pv-modo-nota" data-pv-modo-nota hidden></p>
 
-        <div class="pv-fila pv-grupo" data-paso="esf">
-          <p class="pv-rotulo">Esfera</p>
-          <div class="pv-opciones" data-pv="esf"></div>
-          <div class="pv-sub" data-cuelga="bisel" data-pv-grupo-bisel hidden>
-            <p class="pv-subrotulo">Bisel</p>
+        <!-- ============ TARJETA 1 · LA CAJA ============ -->
+        <section class="pv-tarjeta">
+          <h2 class="pv-tarjeta-tit">La caja</h2>
+          <div class="pv-g pv-g-vacio" data-g="tamano">
+            <p class="pv-g-cab"><span>Tamaño de la caja</span><span class="pv-g-valor" data-valor="tamano">Pendiente</span></p>
+            <p class="pv-g-explica" data-explica="tamano"></p>
+          </div>
+          <div class="pv-g" data-g="caja">
+            <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="caja"></span></p>
+            <p class="pv-g-explica" data-explica="caja"></p>
+            <div class="pv-opciones" data-pv="caja"></div>
+          </div>
+          <div class="pv-g" data-g="bisel">
+            <p class="pv-g-cab"><span>Bisel</span><span class="pv-g-valor" data-valor="bisel"></span></p>
+            <p class="pv-g-explica" data-explica="bisel"></p>
             <div class="pv-opciones" data-pv="bisel"></div>
           </div>
-          <div class="pv-sub" data-cuelga="agujas" data-pv-grupo-agujas hidden>
-            <p class="pv-subrotulo">Agujas</p>
+          <div class="pv-g pv-g-vacio" data-g="biselmat">
+            <p class="pv-g-cab"><span>Material y acabado del bisel</span><span class="pv-g-valor" data-valor="biselmat">Pendiente</span></p>
+            <p class="pv-g-explica" data-explica="biselmat"></p>
+          </div>
+          <div class="pv-g" data-g="esf">
+            <p class="pv-g-cab"><span>Esfera</span><span class="pv-g-valor" data-valor="esf"></span></p>
+            <p class="pv-g-explica" data-explica="esf"></p>
+            <div class="pv-opciones" data-pv="esf"></div>
+          </div>
+          <div class="pv-g" data-g="agujas">
+            <p class="pv-g-cab"><span>Agujas</span><span class="pv-g-valor" data-valor="agujas"></span></p>
+            <p class="pv-g-explica" data-explica="agujas"></p>
             <div class="pv-opciones" data-pv="agujas"></div>
           </div>
-        </div>
-
-        <div class="pv-fila pv-grupo" data-paso="caja">
-          <p class="pv-rotulo">Acabado de caja</p>
-          <div class="pv-opciones" data-pv="caja"></div>
-          <div class="pv-sub" data-cuelga="cristal" data-pv-grupo-cristal hidden>
-            <p class="pv-subrotulo">Cristal</p>
+          <div class="pv-g" data-g="cristal">
+            <p class="pv-g-cab"><span>Cristal</span><span class="pv-g-valor" data-valor="cristal"></span></p>
+            <p class="pv-g-explica" data-explica="cristal"></p>
             <div class="pv-opciones" data-pv="cristal"></div>
           </div>
-        </div>
+        </section>
 
-        <div class="pv-fila pv-grupo" data-paso="correa">
-          <p class="pv-rotulo">Correa</p>
-          <div class="pv-opciones" data-pv="correa"></div>
-        </div>
+        <!-- ============ TARJETA 2 · EL MOVIMIENTO ============
+             Aquí la explicación va DEBAJO DE CADA calibre y no sólo del
+             elegido, que es como lo pidió Óscar. Con un solo movimiento se
+             ve igual; con dos, cada uno lleva la suya. -->
+        <section class="pv-tarjeta">
+          <h2 class="pv-tarjeta-tit">El movimiento</h2>
+          <div class="pv-g" data-g="mov">
+            <p class="pv-g-cab"><span>Calibre</span><span class="pv-g-valor" data-valor="mov"></span></p>
+            <p class="pv-g-explica" data-explica="mov"></p>
+            <div class="pv-opciones" data-pv="mov"></div>
+          </div>
+        </section>
+
+        <!-- ============ TARJETA 3 · LA CORREA ============ -->
+        <section class="pv-tarjeta">
+          <h2 class="pv-tarjeta-tit">El brazalete o la correa</h2>
+          <div class="pv-g" data-g="correamat">
+            <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="correamat"></span></p>
+            <p class="pv-g-explica" data-explica="correamat"></p>
+            <div class="pv-opciones" data-pv="correamat"></div>
+          </div>
+          <div class="pv-g" data-g="correa">
+            <p class="pv-g-cab"><span>Color</span><span class="pv-g-valor" data-valor="correa"></span></p>
+            <p class="pv-g-explica" data-explica="correa"></p>
+            <div class="pv-opciones" data-pv="correa"></div>
+          </div>
+          <div class="pv-g pv-g-vacio" data-g="cierre">
+            <p class="pv-g-cab"><span>Cierre</span><span class="pv-g-valor" data-valor="cierre">Pendiente</span></p>
+            <p class="pv-g-explica" data-explica="cierre"></p>
+          </div>
+        </section>
 
       </div>
 
@@ -464,8 +593,12 @@
      la vende montada con bisel, esfera y agujas dentro. Aquí sólo viven el
      nombre y el material. */
   var CAJAS = {
-    PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0 },
-    NG: { nombre: 'Negro PVD', mat: 'acero inoxidable 316L con PVD negro', coste: 0 }
+    PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0,
+          expl: 'Acero inoxidable 316L, el que se usa en relojería de buceo: ' +
+                'no lo pican el sudor ni el agua salada.' },
+    NG: { nombre: 'Negro PVD', mat: 'acero inoxidable 316L con PVD negro', coste: 0,
+          expl: 'El mismo acero 316L con un recubrimiento negro por deposición ' +
+                'de vapor, más duro que cualquier pintura.' }
   };
   var ESFERAS = {
     NEG: { nombre: 'Negra', coste: 0,
@@ -487,9 +620,13 @@
                 'índices aplicados y lumen.' }
   };
   var BISELES = {
-    NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro' },
-    AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul' },
-    BLA: { nombre: 'Blanco', coste: 0, tec: 'bisel de taquímetro blanco' }
+    NEG: { nombre: 'Negro', coste: 0, tec: 'bisel de taquímetro negro',
+           expl: 'Escala de taquímetro: mide la velocidad media de un ' +
+                 'recorrido cronometrando un kilómetro.' },
+    AZU: { nombre: 'Azul',  coste: 0, tec: 'bisel de taquímetro azul',
+           expl: 'La misma escala de taquímetro, en azul.' },
+    BLA: { nombre: 'Blanco', coste: 0, tec: 'bisel de taquímetro blanco',
+           expl: 'La misma escala de taquímetro, en blanco.' }
   };
   /* Las azules son horaria y minutero AZULADOS; el segundero del
      cronógrafo y los índices siguen siendo de acero. De momento sólo hay
@@ -533,14 +670,44 @@
             tec: 'correa de caucho blanca' }
   };
 
+  /* LA CORREA, EN DOS PASOS: material y color, como Tesla parte el
+     exterior en color y llantas. El estado sigue siendo uno solo —`e.correa`—
+     y el material se deduce de él; elegir material salta a la primera correa
+     de ese material. */
+  var CORREA_MAT = { ACERO: 'ACERO', CAZU: 'CAUCHO', CAZN: 'CAUCHO',
+                     CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO' };
+  var MATERIALES = {
+    ACERO:  { nombre: 'Acero',  expl: 'Brazalete de acero inoxidable 316L con ' +
+                                      'cierre desplegable.' },
+    CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
+                                      'el único que se puede mojar sin pensarlo.' }
+  };
+  function matDe(c) { return CORREA_MAT[c] || 'ACERO'; }
+  function primeraDe(mat) {
+    var k = Object.keys(CORREAS).filter(function (c) { return matDe(c) === mat; });
+    return k[0];
+  }
+
   /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
      Zafiro»). No se ve en la foto, así que NO entra en la clave de la
      serie: el mismo AVIF vale para los dos. Sí entra en la referencia,
      porque son dos productos distintos, y llevará precios distintos en
      cuanto haya costes. */
   var CRISTALES = {
-    MIN: { nombre: 'Mineral', coste: 0, tec: 'cristal mineral' },
-    ZAF: { nombre: 'Zafiro',  coste: 0, tec: 'cristal de zafiro' }
+    MIN: { nombre: 'Mineral', coste: 0, tec: 'cristal mineral',
+           expl: 'Cristal endurecido. Aguanta bien los golpes y se raya antes ' +
+                 'que el zafiro.' },
+    ZAF: { nombre: 'Zafiro',  coste: 0, tec: 'cristal de zafiro',
+           expl: 'Dureza 9 sobre 10: en el día a día no se raya. Refleja algo ' +
+                 'más la luz que el mineral.' },
+    /* Los dos antirreflejos los pidió Óscar el 28/08/2026 y se dibujan
+       apagados: no hay ningún paquete con ellos, así que no se pueden
+       comprar. En cuanto exista uno, se encienden solos. */
+    ZAR: { nombre: 'Zafiro AR', coste: 0, tec: 'cristal de zafiro con antirreflejos',
+           expl: 'Zafiro con tratamiento antirreflejos por la cara interior.' },
+    ZA2: { nombre: 'Zafiro ARx2', coste: 0, tec: 'cristal de zafiro con antirreflejos por las dos caras',
+           expl: 'Zafiro con antirreflejos por las dos caras: el cristal casi ' +
+                 'desaparece y la esfera se lee como si no lo llevara.' }
   };
   /* LA FECHA LA LLEVAN TODOS (Óscar, 27/08/2026). No se elige, así que va
      escrita en la ficha y no en el configurador. ⚠️ Las dos fotos que había
@@ -689,7 +856,10 @@
 
   /* ---------- LOS BOTONES ----------
      Lo que no se puede elegir NO se dibuja (Óscar, 26/08/2026). */
-  function aplicaOpcion(g, v) { e[g] = v; }
+  function aplicaOpcion(g, v) {
+    if (g === 'correamat') { e.correa = primeraDe(v); return; }
+    e[g] = v;
+  }
 
   function llevaAMarcada(grupo, valor) {
     var copia = {}, k;
@@ -705,10 +875,12 @@
     var caja = $('[data-pv="' + grupo + '"]');
     if (!caja) return;
     caja.innerHTML = opciones.filter(function (o) {
-      return !o[2] && !llevaAMarcada(grupo, o[0]);
+      return !o[2] && (o[3] || !llevaAMarcada(grupo, o[0]));
     }).map(function (o) {
-      return '<button type="button" data-v="' + o[0] + '"' +
-             ' aria-pressed="' + (o[0] === activo) + '">' + o[1] + '</button>';
+      /* `o[3]` es «dibújalo pero apagado»: sirve para enseñar a dónde va el
+         configurador sin dejar comprar lo que todavía no existe. */
+      return '<button type="button" data-v="' + o[0] + '"' + (o[3] ? ' disabled' : '') +
+             ' aria-pressed="' + (!o[3] && o[0] === activo) + '">' + o[1] + '</button>';
     }).join('');
   }
   function deTabla(tabla) {
@@ -947,20 +1119,64 @@
     var op = g.querySelector('.pv-opciones');
     return !op || op.hidden || !op.querySelector('button');
   }
-  function abrirPasos() {
-    var abierto = true;
-    for (var i = 0; i < CADENA.length; i++) {
-      var g = document.querySelector('[data-paso="' + CADENA[i] + '"]');
-      if (!g) continue;
-      g.classList.toggle('pv-cerrado', !abierto);
-      if (abierto) abierto = g.hidden || sinNadaQueElegir(g) || !!tocado[CADENA[i]];
+  /* SE ACABÓ ABRIR LOS PASOS DE UNO EN UNO (Óscar, 28/08/2026). En Tesla la
+     configuración entera se ve desde el primer momento y el cliente va y
+     viene; es lo que se ha pedido copiar. La función se queda vacía para no
+     tener que perseguir sus llamadas. */
+  function abrirPasos() {}
+
+  /* ---------- LA CABECERA DE CADA GRUPO ----------
+     Lo elegido a la derecha y su explicación debajo, en letra pequeña. Es el
+     patrón de Tesla y es lo que sostiene la tarjeta. */
+  function rotula(g, valor, expl) {
+    var v = document.querySelector('[data-valor="' + g + '"]');
+    var x = document.querySelector('[data-explica="' + g + '"]');
+    if (v) v.textContent = valor;
+    if (x) x.textContent = expl || '';
+  }
+
+  /* ---------- LA ENTREGA ----------
+     Treinta días desde HOY, recalculado en cada carga: una fecha escrita a
+     mano envejece sola y acaba prometiendo una entrega que ya pasó. */
+  var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+               'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  function entrega() {
+    var el = $('[data-pv-entrega]');
+    if (!el) return;
+    var d = new Date();
+    d.setDate(d.getDate() + 30);
+    el.textContent = 'Entrega estimada: ' + d.getDate() + ' de ' +
+                     MESES[d.getMonth()] + ' de ' + d.getFullYear();
+  }
+
+  /* ---------- LA FORMA DE COMPRA ----------
+     ⚠️ DE MOMENTO SÓLO EXPLICA, NO COBRA. El botón sigue metiendo el reloj
+     entero en el carrito: partir el cobro en una señal y un resto es cosa de
+     la pasarela, no de esta ficha. Lo que sí hace ya es decir la verdad de
+     cuánto se pide al reservar. */
+  function modoDeCompra() {
+    var sel = $('[data-pv-modo]'), nota = $('[data-pv-modo-nota]');
+    if (!sel || !nota) return;
+    var v = sel.value, c = costes();
+    if (v === 'P-RES' || v === 'E-RES') {
+      nota.hidden = false;
+      nota.innerHTML = c === null
+        ? 'Al reservar se cobra por adelantado lo que cuesta comprar las piezas ' +
+          'de este reloj, y el resto una semana antes de la entrega.'
+        : 'Al reservar se cobran ahora <b>' + eu(c) + '</b> —lo que cuesta ' +
+          'comprar las piezas de este reloj— y el resto, ' +
+          '<b>' + eu(precio() - c) + '</b>, una semana antes de la entrega.';
+    } else if (v === 'P-3' || v === 'E-3') {
+      nota.hidden = false;
+      nota.innerHTML = 'Tres plazos sin intereses (0&nbsp;% TAE) con Klarna. El ' +
+                       'primero al comprar y los otros dos, cada treinta días.';
+    } else if (v === 'E-DIR') {
+      nota.hidden = false;
+      nota.textContent = 'Se factura con tus datos fiscales. El IVA va desglosado ' +
+                         'en la factura.';
+    } else {
+      nota.hidden = true;
     }
-    ['bisel', 'agujas'].forEach(function (k) {
-      var g = $('[data-cuelga="' + k + '"]');
-      if (g) g.classList.toggle('pv-cerrado', !tocado.esf);
-    });
-    var gc = $('[data-cuelga="cristal"]');
-    if (gc) gc.classList.toggle('pv-cerrado', !tocado.caja);
   }
 
   function pinta() {
@@ -986,32 +1202,60 @@
       comprar.textContent = hayPrecio ? 'Añadir al carrito' : 'Todavía no está a la venta';
     }
 
-    /* Cada paso de la terna enseña sólo lo que sigue teniendo salida con lo
-       ya elegido por encima. El hueco `o[2]` de `botones()` es «no lo
-       dibujes». */
-    function soloDe(tabla, campo, fij) {
+    /* Cada paso enseña sólo lo que sigue teniendo salida con lo ya elegido
+       por encima. `o[2]` es «no lo dibujes» y `o[3]` es «dibújalo apagado». */
+    function soloDe(tabla, campo, fij, apagaSobrantes) {
       var ok = valores(campo, fij);
-      return deTabla(tabla).map(function (o) { o[2] = ok.indexOf(o[0]) < 0; return o; });
+      return deTabla(tabla).map(function (o) {
+        var fuera = ok.indexOf(o[0]) < 0;
+        if (apagaSobrantes) o[3] = fuera; else o[2] = fuera;
+        return o;
+      });
     }
     botones('mov', deTabla(MOVS), e.mov);
     botones('esf', soloDe(ESFERAS, 'esf', {}), e.esf);
     botones('bisel', soloDe(BISELES, 'bisel', { esf: e.esf }), e.bisel);
     botones('agujas', soloDe(AGUJAS, 'agujas', { esf: e.esf, bisel: e.bisel }), e.agujas);
+    /* La caja y el cristal se dibujan ENTEROS, con lo que no tiene paquete
+       apagado: así se ve que existe el PVD y los dos zafiros antirreflejos
+       aunque todavía no se puedan comprar (Óscar, 28/08/2026). */
     botones('caja', soloDe(CAJAS, 'caja',
-      { esf: e.esf, bisel: e.bisel, agujas: e.agujas }), e.caja);
+      { esf: e.esf, bisel: e.bisel, agujas: e.agujas }, true), e.caja);
     botones('cristal', soloDe(CRISTALES, 'cristal',
-      { esf: e.esf, bisel: e.bisel, agujas: e.agujas, caja: e.caja }), e.cristal);
-    botones('correa', deTabla(CORREAS), e.correa);
+      { esf: e.esf, bisel: e.bisel, agujas: e.agujas, caja: e.caja }, true), e.cristal);
+    botones('correamat', deTabla(MATERIALES), matDe(e.correa));
+    botones('correa', deTabla(CORREAS).map(function (o) {
+      o[2] = matDe(o[0]) !== matDe(e.correa);      // sólo los de su material
+      return o;
+    }), e.correa);
 
-    $('[data-pv-grupo-bisel]').hidden = false;
-    $('[data-pv-grupo-agujas]').hidden = false;
-    $('[data-pv-grupo-cristal]').hidden = false;
+    rotula('tamano', 'Pendiente', 'Hoy el Lunar sale en una sola medida. Cuando ' +
+           'haya más de una, se elige aquí.');
+    rotula('caja', CAJAS[e.caja].nombre, CAJAS[e.caja].expl);
+    rotula('bisel', BISELES[e.bisel].nombre, BISELES[e.bisel].expl);
+    rotula('biselmat', 'Pendiente', 'El material y el acabado del bisel —cerámico ' +
+           'o de aluminio, brillo o mate— todavía no se eligen.');
+    rotula('esf', ESFERAS[e.esf].nombre, ESFERAS[e.esf].tec);
+    rotula('agujas', AGUJAS[e.agujas].nombre,
+           AGUJAS[e.agujas].tec.charAt(0).toUpperCase() + AGUJAS[e.agujas].tec.slice(1) + '.');
+    rotula('cristal', CRISTALES[e.cristal].nombre, CRISTALES[e.cristal].expl);
+    rotula('mov', MOVS[e.mov].cal, MOVS[e.mov].tec);
+    rotula('correamat', MATERIALES[matDe(e.correa)].nombre,
+           MATERIALES[matDe(e.correa)].expl);
+    /* CON BRAZALETE NO HAY COLOR QUE ELEGIR: el acero es uno solo, y el
+       grupo repetía palabra por palabra lo que acababa de decir el material.
+       Se esconde entero, como Tesla esconde lo que no tiene alternativa. */
+    var gColor = document.querySelector('[data-g="correa"]');
+    var hayColor = matDe(e.correa) !== 'ACERO';
+    if (gColor) gColor.hidden = !hayColor;
+    if (hayColor)
+      rotula('correa', CORREAS[e.correa].nombre,
+             CORREAS[e.correa].tec.charAt(0).toUpperCase() + CORREAS[e.correa].tec.slice(1) + '.');
+    rotula('cierre', 'Pendiente', 'El cierre y la hebilla todavía no se eligen: ' +
+           'el brazalete va con cierre desplegable y el caucho con hebilla.');
 
-    var cal = $('[data-pv-calibre]');
-    if (cal) {
-      cal.hidden = !tocado.mov;
-      $('[data-pv-cal]').textContent = 'Calibre ' + MOVS[e.mov].cal;
-    }
+    entrega();
+    modoDeCompra();
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
@@ -1043,14 +1287,10 @@
     abrirPasos();
     if (CURAR) panelCurar();
 
-    /* NINGUNA OPCIÓN SEÑALADA HASTA QUE LA PULSES: los botones no se
-       atribuyen una elección que el cliente todavía no ha hecho. */
-    [].forEach.call(document.querySelectorAll('[data-pv]'), function (g) {
-      if (tocado[g.dataset.pv]) return;
-      [].forEach.call(g.querySelectorAll('button'), function (b) {
-        b.setAttribute('aria-pressed', 'false');
-      });
-    });
+    /* Y TODO SEÑALADO DESDE EL PRINCIPIO: en Tesla el coche entra
+       configurado y el resumen de arriba dice lo que llevas puesto. Esconder
+       la elección de partida dejaría la tarjeta diciendo un nombre que
+       ningún botón confirma. */
   }
 
   /* ---------- EL PANEL DE CURAR ---------- */
@@ -1114,6 +1354,9 @@
   }
 
   /* ---------- LOS CLICS ---------- */
+  document.addEventListener('change', function (ev) {
+    if (ev.target.closest('[data-pv-modo]')) modoDeCompra();
+  });
   document.addEventListener('click', function (ev) {
     if (ev.target.closest('[data-curar-combi]')) {
       var f = firma();
@@ -1145,6 +1388,7 @@
     }
 
     var b = ev.target.closest('[data-pv] button');
+    if (b && b.disabled) return;
     if (b) {
       var g = b.closest('[data-pv]').dataset.pv;
       aplicaOpcion(g, b.dataset.v);
