@@ -1045,7 +1045,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=16';
+  var SERIE_V = '?v=17';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1580,19 +1580,29 @@
     /* acero · zafiro · caja montada, 100 m .................. 48,99 */
     { caja: 'PL', cristal: 'ZAF', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 48.99 },
     { caja: 'PL', cristal: 'ZAF', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 48.99 },
-    /* EL PVD, SIN COSTE TODAVÍA (28/08/2026). La hoja lista un pack de
-       48,99 con caja, bisel negro y brazalete PVD juntos, y la esfera y las
-       agujas «por decidir». Ahora que hay fotos de la caja y del brazalete,
-       las combinaciones se escriben para que se puedan VER, pero con
-       `coste: null`: la opción se dibuja y se monta, y el precio dice «por
-       definir» hasta que Óscar reparta ese pack. Bisel negro, que es el que
-       trae. */
-    { caja: 'NG', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: null },
-    { caja: 'NG', cristal: 'MIN', esf: 'BLA', bisel: 'NEG', agujas: 'BLA', coste: null },
-    { caja: 'NG', cristal: 'MIN', esf: 'NAR', bisel: 'NEG', agujas: 'BLA', coste: null },
-    { caja: 'NG', cristal: 'MIN', esf: 'DOR', bisel: 'NEG', agujas: 'BLA', coste: null },
-    { caja: 'NG', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'BLA', coste: null },
-    { caja: 'NG', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'BLA', coste: null }
+    /* EL PVD, CON SU REPARTO (Óscar, 28/08/2026): «caja, bisel y brazalete
+       48,99, esfera 8,99 y agujas 4,99. Movimiento el mismo». O sea 62,97
+       de paquete, y el brazalete de PVD ya viene dentro de esos 48,99.
+
+       POR ESO LLEVA `correaQueTrae`. `correaDentro` a secas dejaría la
+       correa a cero fuera cual fuese: quien eligiera caucho se llevaría el
+       brazalete de PVD sin pagarlo Y el caucho de regalo, y el reloj
+       saldría casi diez euros de coste por debajo de la verdad. Con
+       `correaQueTrae` sólo entra gratis la que de verdad trae el pack; si
+       se elige otra, el pack se paga igual —el brazalete viene en la caja
+       aunque no se use— y la correa se suma aparte. */
+    { caja: 'NG', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
+      correaDentro: true, correaQueTrae: 'ACERONG' },
+    { caja: 'NG', cristal: 'MIN', esf: 'BLA', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
+      correaDentro: true, correaQueTrae: 'ACERONG' },
+    { caja: 'NG', cristal: 'MIN', esf: 'NAR', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
+      correaDentro: true, correaQueTrae: 'ACERONG' },
+    { caja: 'NG', cristal: 'MIN', esf: 'DOR', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
+      correaDentro: true, correaQueTrae: 'ACERONG' },
+    { caja: 'NG', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
+      correaDentro: true, correaQueTrae: 'ACERONG' },
+    { caja: 'NG', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'BLA', coste: 62.97,
+      correaDentro: true, correaQueTrae: 'ACERONG' }
   ];
   /* El paquete de una combinación, o null si el proveedor no la monta. */
   /* LAS AGUJAS SE ELIGEN LIBRES (Óscar, 28/08/2026: «en cuanto a las agujas
@@ -1719,12 +1729,23 @@
      coste—, y entonces la ficha no enseña precio ni deja comprar. */
   function costes() {
     var p = paqueteDe();
-    /* Un paquete SIN coste —el del PVD— cuenta como no saberlo: se dibuja,
-       pero no se pone precio ni se vende. */
+    /* Un paquete sin coste cuenta como no saberlo: se dibuja, pero no se
+       pone precio ni se vende. */
     if (!p || p.coste === null || p.coste === undefined) return null;
-    var c = CORREAS[e.correa];
-    if (!c || c.coste === null || c.coste === undefined) return null;
-    return MOVS[e.mov].coste + p.coste + (p.correaDentro ? 0 : c.coste) + LOGO;
+    /* LA CORREA QUE TRAE EL PAQUETE NO SE PAGA APARTE, y sólo esa: si el
+       paquete dice cuál trae y se ha elegido otra, se suma la elegida y el
+       paquete se paga entero igual. */
+    var dentro = p.correaDentro &&
+                 (!p.correaQueTrae || p.correaQueTrae === e.correa);
+    var extra = 0;
+    if (!dentro) {
+      var c = CORREAS[e.correa];
+      /* Sin precio de compra de la correa no hay coste: el brazalete de PVD
+         suelto no lo tiene, porque su precio va dentro del pack. */
+      if (!c || c.coste === null || c.coste === undefined) return null;
+      extra = c.coste;
+    }
+    return MOVS[e.mov].coste + p.coste + extra + LOGO;
   }
   function pvpBase(c) { return redondea(costeCompleto(c) * MULT); }
   function precioTarifa() { return pvpBase(costes()); }
