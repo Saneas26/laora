@@ -296,6 +296,39 @@
   .pv-info .pv-comprar{ border-radius:6px }
   .pv-info .pv-klarna{ border-radius:6px }
 
+  /* ---------- EL MONTAJE POR CAPAS ----------
+     Cinco imágenes una encima de otra, todas del mismo lienzo cuadrado de
+     4096 y con el mismo eje, así que basta con apilarlas: no hay que
+     colocar nada a mano. `contain` y no `cover` porque el visor es cuadrado
+     y el lienzo también; si algún día dejan de serlo, `cover` recortaría.
+
+     LAS SIETE CAPAS PESAN 252 KB a 1.200. Una sola foto pesa 90, así que el
+     juego entero cuesta menos que tres fotos y cubre TODAS las
+     combinaciones: por eso se montan en el navegador y no se generan mil
+     quinientas imágenes. */
+  .pv-capas{ position:absolute; inset:0; background:#e9e9e7 }
+  .pv-capas[hidden]{ display:none }
+  .pv-capas img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  }
+  .pv-capas img[hidden]{ display:none }
+  .pv-carrusel{
+    position:absolute; left:0; right:0; bottom:14px; z-index:3;
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-carrusel[hidden]{ display:none }
+  .pv-carrusel button{
+    width:40px; height:40px; border-radius:20px; border:1px solid rgba(18,20,20,.18);
+    background:rgba(255,255,255,.92); color:#121414; font-size:22px; line-height:1;
+    cursor:pointer;
+  }
+  .pv-carrusel button:hover{ border-color:#121414 }
+  .pv-carrusel span{
+    font-size:13px; color:#393C41; background:rgba(255,255,255,.92);
+    border-radius:6px; padding:6px 12px;
+  }
+
   .pv-oculto{
     position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
     white-space:nowrap;
@@ -411,6 +444,21 @@
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
       <div class="pv-hero pv-hero-llena">
+        <!-- EL MONTAJE POR CAPAS, sólo con `?capas` (Óscar, 28/08/2026).
+             Cinco huecos, de atrás hacia delante: la correa va detrás de la
+             caja porque pasa por debajo de las asas. -->
+        <div class="pv-capas" data-pv-capas hidden>
+          <img data-capa="correa" alt="" hidden>
+          <img data-capa="caja" alt="" hidden>
+          <img data-capa="bisel" alt="" hidden>
+          <img data-capa="esf" alt="" hidden>
+          <img data-capa="agujas" alt="" hidden>
+        </div>
+        <div class="pv-carrusel" data-pv-carrusel hidden>
+          <button type="button" data-carrusel="-1" aria-label="Opción anterior">‹</button>
+          <span data-carrusel-paso></span>
+          <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
+        </div>
         <img data-pv-foto alt="laOra Lunar" hidden>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
@@ -947,6 +995,92 @@
     return Object.keys(tabla).map(function (k) { return [k, tabla[k].nombre]; });
   }
 
+  /* ============================================================
+     EL MONTAJE POR CAPAS  ·  `?capas`
+     ------------------------------------------------------------
+     Óscar, 28/08/2026: «prefiero que se vayan sobreponiendo las capas sin
+     ocultarse unas a otras. Y así nos evitamos crear 1500 imágenes, y sirve
+     como juego interactivo para el cliente».
+
+     Y SE CONSTRUYE POCO A POCO: al abrir sólo está la caja; según se va
+     eligiendo, cada pieza se posa encima. Lo que todavía no se ha tocado no
+     se enseña, porque enseñarlo sería decidir por el cliente.
+
+     VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy dos esferas de
+     seis, dos biseles de tres y dos juegos de agujas de cinco, y no hay
+     ninguna correa. Cambiar el visor entero dejaría a la mayoría de las
+     combinaciones sin nada que enseñar, y eso hoy se vende. Cuando estén
+     todas, se quita la condición y se acabaron los AVIF por combinación.
+     ============================================================ */
+  var CAPAS = false;
+  try { CAPAS = /[?&]capas(=|&|$)/.test(location.search); } catch (x) {}
+  var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
+  /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
+     capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
+     la elegida. */
+  var CAPA = {
+    caja:   { PL: '01-caja-acero' },
+    bisel:  { NEG: '02-bisel-negro-taquimetro', AZU: '03-bisel-azul-taquimetro' },
+    esf:    { NEG: '04-esfera-negra-sin-agujas',
+              BLA: '05-esfera-blanca-subesferas-azules-sin-agujas' },
+    agujas: { BLA: '06-agujas-plata-1010-segundero-37',
+              AZU: '07-agujas-azules-1010-segundero-37' },
+    correa: {}
+  };
+  /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
+     haber tocado para que la pieza aparezca. La caja no espera a nadie. */
+  var PILA = [
+    { capa: 'correa', grupo: 'correa', espera: 'correa' },
+    { capa: 'caja',   grupo: 'caja',   espera: null },
+    { capa: 'bisel',  grupo: 'bisel',  espera: 'bisel' },
+    { capa: 'esf',    grupo: 'esf',    espera: 'esf' },
+    { capa: 'agujas', grupo: 'agujas', espera: 'agujas' }
+  ];
+
+  function pintaCapas() {
+    var caja = $('[data-pv-capas]');
+    if (!caja) return;
+    caja.hidden = !CAPAS;
+    if (!CAPAS) return;
+    PILA.forEach(function (p) {
+      var img = caja.querySelector('[data-capa="' + p.capa + '"]');
+      if (!img) return;
+      var f = CAPA[p.grupo] && CAPA[p.grupo][e[p.grupo]];
+      var toca = !p.espera || !!tocado[p.espera];
+      if (!f || !toca) { img.hidden = true; img.removeAttribute('src'); return; }
+      var src = CAPA_IMG + f + '.avif' + SERIE_V;
+      if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+      img.hidden = false;
+    });
+    /* El carrusel mueve el paso que se está tocando ahora mismo. */
+    var c = $('[data-pv-carrusel]');
+    if (c) {
+      var g = pasoEnJuego();
+      c.hidden = !g;
+      if (g) c.querySelector('[data-carrusel-paso]').textContent = ROTULO[g];
+    }
+  }
+
+  var ROTULO = { esf: 'Esfera', bisel: 'Bisel', agujas: 'Agujas',
+                 caja: 'Material', cristal: 'Cristal', correa: 'Correa' };
+  var ULTIMO = null;
+  function pasoEnJuego() {
+    if (ULTIMO && ROTULO[ULTIMO]) return ULTIMO;
+    return tocado.bisel ? (tocado.esf ? 'agujas' : 'esf') : 'bisel';
+  }
+  /* Pasar a la opción de al lado del paso en juego, dando la vuelta al
+     llegar al final. Sólo cuenta lo que de verdad se puede elegir: los
+     botones apagados no entran en la rueda. */
+  function gira(paso) {
+    var caja = $('[data-pv="' + (pasoEnJuego() || 'esf') + '"]');
+    if (!caja) return;
+    var bs = [].slice.call(caja.querySelectorAll('button:not([disabled])'));
+    if (bs.length < 2) return;
+    var i = 0;
+    bs.forEach(function (b, k) { if (b.getAttribute('aria-pressed') === 'true') i = k; });
+    bs[(i + paso + bs.length) % bs.length].click();
+  }
+
   /* ---------- LA FOTO ----------
      La clave es lo que se VE en la foto: caja, esfera, bisel, agujas y
      correa. El movimiento no entra: por delante no se distingue.
@@ -1001,11 +1135,18 @@
      no hay bisel azul»—; con cuatro ternas cerradas, una regla por pareja se
      quedaba corta.
 
-     EL ORDEN MANDA: esfera → bisel → agujas. Cada paso enseña sólo lo que
+     EL ORDEN MANDA: bisel → esfera → agujas. Cada paso enseña sólo lo que
      sigue teniendo salida con lo ya elegido, y al cambiar hacia atrás lo de
      abajo se recoloca solo. Comprobar en los dos sentidos dejaría al cliente
      encerrado: con las agujas naranjas puestas desaparecería el botón de la
-     esfera blanca. */
+     esfera blanca.
+
+     EL BISEL VA PRIMERO desde el 28/08/2026, cuando Óscar ordenó el montaje
+     por capas: «2- se elige el bisel… 3- se elige la esfera». Antes mandaba
+     la esfera. Da igual para el catálogo —las siete ternas son las mismas—
+     pero así el orden de las tarjetas, el del carrusel y el de la regla
+     dicen todos lo mismo. Con bisel negro quedan cuatro esferas; con azul,
+     una; con blanco, dos. */
   /* EL PROVEEDOR VENDE PAQUETES, NO DIMENSIONES SUELTAS (hoja de compra,
      27/08/2026). La caja montada de 34,59 YA TRAE bisel, esfera y agujas
      dentro, y sólo existe en las combinaciones que él monta. Repartir esos
@@ -1075,7 +1216,7 @@
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
        delante de una combinación que no existe. */
     var fij = {};
-    ['esf', 'bisel', 'agujas', 'caja', 'cristal'].forEach(function (k) {
+    ['bisel', 'esf', 'agujas', 'caja', 'cristal'].forEach(function (k) {
       var ok = valores(k, fij);
       if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
       fij[k] = e[k];
@@ -1300,8 +1441,8 @@
       });
     }
     botones('mov', deTabla(MOVS), e.mov);
-    botones('esf', soloDe(ESFERAS, 'esf', {}), e.esf);
-    botones('bisel', soloDe(BISELES, 'bisel', { esf: e.esf }), e.bisel);
+    botones('bisel', soloDe(BISELES, 'bisel', {}), e.bisel);
+    botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }), e.esf);
     botones('agujas', soloDe(AGUJAS, 'agujas', { esf: e.esf, bisel: e.bisel }), e.agujas);
     /* La caja y el cristal se dibujan ENTEROS, con lo que no tiene paquete
        apagado: así se ve que existe el PVD y los dos zafiros antirreflejos
@@ -1343,6 +1484,7 @@
 
     entrega();
     modoDeCompra();
+    pintaCapas();
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
@@ -1350,9 +1492,10 @@
     var img = $('[data-pv-foto]');
     var cartel = $('[data-pv-sinfoto]');
     var lupa = $('[data-pv-ampliar]');
-    img.hidden = !foto;
-    cartel.hidden = !!foto;
-    if (lupa) lupa.hidden = !foto;
+    /* Con `?capas` manda la pila: ni foto ni cartel. */
+    img.hidden = CAPAS || !foto;
+    cartel.hidden = CAPAS || !!foto;
+    if (lupa) lupa.hidden = CAPAS || !foto;
     if (foto) {
       img.src = SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V;
       img.srcset = SERIE_IMG + '480/' + foto + '.avif' + SERIE_V + ' 480w, ' +
@@ -1441,6 +1584,10 @@
   }
 
   /* ---------- LOS CLICS ---------- */
+  document.addEventListener('click', function (ev) {
+    var fl = ev.target.closest('[data-carrusel]');
+    if (fl) { gira(Number(fl.dataset.carrusel)); }
+  });
   document.addEventListener('change', function (ev) {
     if (ev.target.closest('[data-pv-modo]')) modoDeCompra();
   });
@@ -1480,6 +1627,7 @@
       var g = b.closest('[data-pv]').dataset.pv;
       aplicaOpcion(g, b.dataset.v);
       tocado[g] = true;
+      ULTIMO = g;
       pinta();
       return;
     }
