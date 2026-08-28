@@ -417,7 +417,40 @@
     position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
   }
   .pv-capas img[hidden]{ display:none }
-  /* ⛔ LA CÁMARA QUE SE ALEJABA EN LA CORREA: QUITADA (Óscar, 28/08/2026).
+  /* ---------- LA CÁMARA SE ALEJA Y SALE LA MINIATURA ----------
+     Óscar, 28/08/2026: «retomo la opción de alejar el zoom y en la parte
+     inferior izquierda colocas una miniatura».
+
+     LO QUE FALTABA ERA LA MINIATURA, no el zoom. El alejarse solo no
+     enseñaba más correa —las capas acaban en el borde del lienzo, no hay
+     más tira que sacar— y encima dejaba su corte a la vista dentro del
+     marco. Con la foto del proveedor abajo a la izquierda sí se ve la
+     correa entera, suelta y con su cierre, y el alejarse pasa a ser lo que
+     le hace sitio.
+
+     SE ENCOGEN LAS IMÁGENES, NO SU CAJA. `.pv-capas` lleva el gris del
+     fondo, y encogiéndola a ella se vería el borde del gris recortado sobre
+     el blanco, porque `.pv-hero-llena` se queda sin fondo. */
+  .pv-capas img{ transition:transform .4s cubic-bezier(.2,.6,.2,1) }
+  .pv-capas-lejos img{ transform:scale(.72) }
+  /* ⚠️ EL SELECTOR VA CON `.pv-hero img.` DELANTE. La hoja compartida trae
+     `.pv-hero-llena img{width:100%;height:100%;object-fit:cover}`, que pesa
+     más que una clase sola: con `.pv-mini-correa` a secas la miniatura
+     salía a pantalla completa tapando el reloj. Le pasa a todo lo que se
+     mete dentro del marco —el forro y la miniatura de la tapa llevan el
+     mismo aviso en producto-2026.css—. */
+  .pv-hero img.pv-mini-correa{
+    position:absolute; left:16px; bottom:16px; z-index:4;
+    width:118px; height:118px; object-fit:cover;
+    border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
+    box-shadow:0 4px 14px rgba(18,20,20,.12);
+    opacity:0; transform:translateY(8px); pointer-events:none;
+    transition:opacity .3s, transform .3s;
+  }
+  .pv-hero img.pv-mini-correa[hidden]{ display:none }
+  .pv-hero img.pv-mini-correa.pv-mini-dentro{ opacity:1; transform:none }
+
+  /* ⛔ EL PRIMER INTENTO, sin miniatura, no podía funcionar (28/08/2026).
      La pidió para «ver más parte de la correa», se hizo, y al probarla dijo
      lo que pasaba de verdad: «se aleja la imagen pero el brazalete sigue
      cortado como si estuviera ampliado».
@@ -582,6 +615,11 @@
           <span>El Lunar se está rehaciendo entero. Aquí no se enseña ninguna imagen hasta que sea la del reloj elegido.</span>
         </div>
         <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
+        <!-- LA MINIATURA DE LA CORREA (Óscar, 28/08/2026): «en la parte
+             inferior izquierda colocas una miniatura». Es la foto del
+             proveedor, la correa suelta y entera, que es lo que el montaje
+             no puede enseñar: sus capas acaban en el borde del lienzo. -->
+        <img class="pv-mini-correa" data-pv-mini alt="" hidden>
       </div>
 
       <!-- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO (Óscar, 28/08/2026):
@@ -646,7 +684,11 @@
             <div class="pv-opciones" data-pv="bisel"></div>
             <p class="pv-g-explica" data-explica="bisel"></p>
           </div>
-          <div class="pv-g pv-g-vacio" data-g="biselmat">
+          <!-- ESCONDIDO HASTA QUE HAYA ALGO QUE ELEGIR (Óscar, 28/08/2026):
+               «lo dejamos invisible mientras no haya distintos materiales a
+               explicar. Cuando haya algún porcelánico lo decimos». Un paso
+               que sólo sabe decir «Pendiente» ocupa sitio y no informa. -->
+          <div class="pv-g pv-g-vacio" data-g="biselmat" hidden>
             <p class="pv-g-cab"><span>Material y acabado del bisel</span><span class="pv-g-valor" data-valor="biselmat">Pendiente</span></p>
             <p class="pv-g-explica" data-explica="biselmat"></p>
           </div>
@@ -681,7 +723,7 @@
         </section>
 
         <!-- ============ TARJETA 3 · LA CORREA ============ -->
-        <section class="pv-tarjeta">
+        <section class="pv-tarjeta" data-pv-tarjeta="correa">
           <h2 class="pv-tarjeta-tit">El brazalete o la correa</h2>
           <div class="pv-g" data-g="correamat">
             <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="correamat"></span></p>
@@ -693,7 +735,7 @@
             <div class="pv-opciones" data-pv="correa"></div>
             <p class="pv-g-explica" data-explica="correa"></p>
           </div>
-          <div class="pv-g pv-g-vacio" data-g="cierre">
+          <div class="pv-g" data-g="cierre">
             <p class="pv-g-cab"><span>Cierre</span><span class="pv-g-valor" data-valor="cierre">Pendiente</span></p>
             <p class="pv-g-explica" data-explica="cierre"></p>
           </div>
@@ -908,20 +950,22 @@
      marrón, gris, naranja y negro/azul celeste—, que se quedó sin ninguna
      foto: ahora son las cinco de dos tonos que él fotografió.
 
-     El caucho cuesta 12,99 y es MÁS BARATO que el brazalete de 19,79: con
-     correa, el Lunar baja un escalón. */
+     EL CAUCHO BAJA A 9,89 (Óscar, 28/08/2026, con el enlace del proveedor:
+     https://es.aliexpress.com/item/1005008055142978.html). Venía de 12,99.
+     Sigue siendo MÁS BARATO que el brazalete de 19,79, así que con correa
+     el Lunar baja un escalón, y ahora dos. */
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
              tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
-    CAZU: { nombre: 'Caucho azul', coste: 12.99,
+    CAZU: { nombre: 'Caucho azul', coste: 9.89,
             tec: 'correa de caucho azul' },
-    CAZN: { nombre: 'Caucho azul y naranja', coste: 12.99,
+    CAZN: { nombre: 'Caucho azul y naranja', coste: 9.89,
             tec: 'correa de caucho azul con naranja' },
-    CMAC: { nombre: 'Caucho marrón y crema', coste: 12.99,
+    CMAC: { nombre: 'Caucho marrón y crema', coste: 9.89,
             tec: 'correa de caucho marrón con crema' },
-    CNVF: { nombre: 'Caucho negro y verde flúor', coste: 12.99,
+    CNVF: { nombre: 'Caucho negro y verde flúor', coste: 9.89,
             tec: 'correa de caucho negra con verde flúor' },
-    CBLA: { nombre: 'Caucho blanco', coste: 12.99,
+    CBLA: { nombre: 'Caucho blanco', coste: 9.89,
             tec: 'correa de caucho blanca' }
   };
 
@@ -992,7 +1036,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=13';
+  var SERIE_V = '?v=14';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1269,6 +1313,13 @@
       else for (var d in v) hazlo(v[d]);
     }
   }
+
+  /* LA FOTO DEL PROVEEDOR DE CADA CORREA, la que sale de miniatura. El
+     brazalete no tiene: de él sí se ve todo lo que hay que ver en el
+     montaje. */
+  var MINI_IMG = '/assets/img/lunar-2026/correas/';
+  var MINI = { CAZU: 'cazu', CAZN: 'cazn', CBLA: 'cbla',
+               CMAC: 'cmac', CNVF: 'cnvf' };
 
   var PRECARGADAS = false;
   function precargaCapas() {
@@ -1809,8 +1860,7 @@
     rotula('tamano', TAMANOS.T40.nombre, TAMANOS.T40.expl);
     rotula('caja', CAJAS[e.caja].nombre, CAJAS[e.caja].expl);
     rotula('bisel', BISELES[e.bisel].nombre, BISELES[e.bisel].expl);
-    rotula('biselmat', 'Pendiente', 'El material y el acabado del bisel —cerámico ' +
-           'o de aluminio, brillo o mate— todavía no se eligen.');
+    /* El paso del material del bisel está escondido: no se rotula. */
     rotula('esf', ESFERAS[e.esf].nombre, ESFERAS[e.esf].tec);
     rotula('agujas', AGUJAS[e.agujas].nombre,
            AGUJAS[e.agujas].tec.charAt(0).toUpperCase() + AGUJAS[e.agujas].tec.slice(1) + '.');
@@ -1827,13 +1877,22 @@
     if (hayColor)
       rotula('correa', CORREAS[e.correa].nombre,
              CORREAS[e.correa].tec.charAt(0).toUpperCase() + CORREAS[e.correa].tec.slice(1) + '.');
-    rotula('cierre', 'Pendiente', 'El cierre y la hebilla todavía no se eligen: ' +
-           'el brazalete va con cierre desplegable y el caucho con hebilla.');
+    /* EL CIERRE YA NO ESTÁ PENDIENTE (Óscar, 28/08/2026): las correas de
+       caucho llevan «hebilla/cierre mariposa resistente al agua y a golpes»
+       y son de 20 mm, que es justo lo que mide el hueco entre las asas. El
+       brazalete sigue con su desplegable. */
+    var esAcero = matDe(e.correa) === 'ACERO';
+    rotula('cierre', esAcero ? 'Desplegable' : 'Mariposa',
+           esAcero
+             ? 'Cierre desplegable de acero inoxidable.'
+             : 'Cierre de mariposa, resistente al agua y a los golpes. ' +
+               'La correa mide 20 mm de ancho.');
 
     entrega();
     modoDeCompra();
     pintaCapas();
     repasaBarra();
+    repasaVisor();
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
@@ -1962,6 +2021,33 @@
      desplazar nada, así que la barra nacía apagada y no se veía nunca. */
   var LLEGADA = 0.60;
 
+  /* ---------- LA CÁMARA SE ALEJA EN LA CORREA ----------
+     Manda la TARJETA entera, no el paso: los dos pasos de la correa —el
+     material y el color— viven en ella, y el color se esconde con el
+     brazalete puesto, así que mirar la tarjeta es lo único que vale para
+     los dos casos. Se considera que se ha llegado cuando ocupa la franja
+     de en medio de la pantalla. */
+  function repasaVisor() {
+    var t = document.querySelector('[data-pv-tarjeta="correa"]');
+    if (!t) return;
+    var r = t.getBoundingClientRect();
+    var enJuego = r.top < window.innerHeight * 0.60 &&
+                  r.bottom > window.innerHeight * 0.15;
+    var capas = $('[data-pv-capas]');
+    if (capas) capas.classList.toggle('pv-capas-lejos', enJuego && CAPAS);
+    var mini = $('[data-pv-mini]');
+    if (!mini) return;
+    var f = MINI[e.correa];
+    mini.hidden = !f;
+    if (f) {
+      var src = MINI_IMG + f + '.avif' + SERIE_V;
+      if (mini.getAttribute('src') !== src) mini.setAttribute('src', src);
+      mini.alt = 'Correa ' + CORREAS[e.correa].nombre.toLowerCase() +
+                 ', foto del fabricante';
+    }
+    mini.classList.toggle('pv-mini-dentro', enJuego && !!f);
+  }
+
   /* NO SE DECIDE NADA HASTA QUE LA PÁGINA ESTÁ CUADRADA. Mientras las fotos
      no han cargado, la columna mide bastante menos y el pie cae dentro de la
      pantalla: la barra se apagaba, la página terminaba de cuadrar y volvía a
@@ -1972,6 +2058,7 @@
   window.addEventListener('load', function () {
     PAGINA_LISTA = true;
     repasaBarra();
+    repasaVisor();
   });
   function repasaBarra() {
     var barra = $('[data-pv-barra]'), pie = $('[data-pv-pie]');
@@ -1997,6 +2084,7 @@
       requestAnimationFrame(function () {
         pedido = false;
         repasaBarra();
+        repasaVisor();
         if (!CAPAS) return;
         var c = $('[data-pv-carrusel]');
         if (!c || c.hidden) return;
