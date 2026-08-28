@@ -24,12 +24,22 @@ LO QUE HACE ESTE PROGRAMA. Mide las dos cosas y mueve cada aguja pequeña
 por separado —son tres trozos sueltos de la imagen, no se tocan entre
 ellas ni tocan a las agujas grandes—:
 
-  · LA DIANA es el resalte claro del centro del contador. Se inunda
-    desde una semilla por parecido de color; sale un disco de unos 80 px
-    que no se mueve aunque se cambie la tolerancia, y los dos contadores
-    de los lados quedan simétricos respecto al eje a menos de un píxel.
-    Esa simetría es la comprobación de que la medida es buena, y si no
-    se cumple el programa se planta en vez de mover nada.
+  · LA DIANA es el resalte del centro del contador, y se busca de DOS
+    MANERAS porque ninguna vale para todas las esferas:
+
+      1) POR INUNDACIÓN desde una semilla, mientras el color se parezca.
+         Va bien cuando el resalte destaca sobre su contador —el blanco
+         sobre el azul de la esfera blanca—: sale un disco de unos 80 px
+         que no se mueve aunque se cambie la tolerancia.
+      2) POR DIFERENCIA CON EL COLOR DE ALREDEDOR, cuando la inundación
+         se escapa. En la esfera de oro rosa el contador es del mismo
+         blanco que la esfera, así que la inundación se lleva el dial
+         entero; ahí se coge la mancha pequeña más cercana al centro que
+         se salga de la mediana de su alrededor.
+
+    Y la comprobación es la misma para las dos: los contadores de los
+    lados tienen que salir simétricos respecto al eje. Si no, el programa
+    se planta en vez de mover nada.
 
   · EL HUB de la aguja es la tapa redonda de su base. Se ajusta un
     círculo al borde de DEBAJO de la fila más ancha: por arriba la aguja
@@ -130,6 +140,42 @@ def hub(trozo):
     return X, Y, R, err
 
 
+def por_diferencia(rgb, semilla, radio=170, dif=28):
+    """La mancha pequeña del centro que se sale del color de alrededor."""
+    cx, cy = int(semilla[0]), int(semilla[1])
+    x0, y0 = cx - radio, cy - radio
+    sub = rgb[y0:y0 + 2 * radio, x0:x0 + 2 * radio].astype(int)
+    m = np.abs(sub - np.median(sub.reshape(-1, 3), axis=0)).max(axis=2) > dif
+    h, w = m.shape
+    visto = np.zeros_like(m, bool)
+    mejor, cerca = None, 1e9
+    for yy, xx in zip(*np.where(m)):
+        if visto[yy, xx]:
+            continue
+        cola = deque([(yy, xx)])
+        visto[yy, xx] = True
+        pts = []
+        while cola:
+            y, x = cola.popleft()
+            pts.append((y, x))
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1),
+                           (1, 1), (1, -1), (-1, 1), (-1, -1)):
+                ny, nx = y + dy, x + dx
+                if 0 <= ny < h and 0 <= nx < w and m[ny, nx] and not visto[ny, nx]:
+                    visto[ny, nx] = True
+                    cola.append((ny, nx))
+        p = np.array(pts)
+        ys, xs = p[:, 0], p[:, 1]
+        ancho = max(xs.max() - xs.min() + 1, ys.max() - ys.min() + 1)
+        if not 40 <= ancho <= 160:
+            continue
+        c = ((xs.min() + xs.max()) / 2.0, (ys.min() + ys.max()) / 2.0)
+        d = (c[0] - radio) ** 2 + (c[1] - radio) ** 2
+        if d < cerca:
+            cerca, mejor = d, (c[0] + x0, c[1] + y0, ancho)
+    return mejor
+
+
 def diana(rgb, alfa, semilla, tol=60, radio=460):
     """El resalte claro del centro del contador: se inunda por color."""
     cx, cy = int(semilla[0]), int(semilla[1])
@@ -170,10 +216,15 @@ if __name__ == '__main__':
     dianas = {}
     for nom, s in SEMILLAS.items():
         d = diana(e[..., :3], e[..., 3] > 128, s)
+        como = 'inundando'
+        if d is None:
+            d = por_diferencia(e[..., :3], s)
+            como = 'por diferencia'
         if d is None:
             sys.exit('no encuentro el resalte del contador %s en %s' % (nom, o.esfera))
         dianas[nom] = (d[0], d[1])
-        print('contador %-10s %8.2f,%8.2f  (resalte de %d px)' % (nom, d[0], d[1], d[2]))
+        print('contador %-10s %8.2f,%8.2f  (resalte de %d px, %s)'
+              % (nom, d[0], d[1], d[2], como))
 
     # LA COMPROBACIÓN: los dos contadores de los lados tienen que salir
     # simétricos respecto al eje. Si no, la medida está mal y no se mueve nada.
