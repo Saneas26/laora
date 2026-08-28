@@ -324,6 +324,12 @@
      debajo de la foto, que es justo lo que se veía. */
   .pv-barra-fuera{ display:none }
   .pv-barra .pv-barra-precio{ margin:0; font-size:22px; line-height:1.1 }
+  /* EL «× 3 PAGOS» que acompaña a la cuota, en pequeño y sin negrita: el
+     número que manda es el de la cuota, esto sólo dice de qué es. */
+  .pv-precio-x{
+    font-size:.55em; font-weight:400; letter-spacing:0; color:var(--cv2-gris);
+    white-space:nowrap;
+  }
   .pv-barra-klarna{
     margin:0; display:flex; align-items:center; justify-content:center;
     flex-wrap:wrap; gap:6px;
@@ -411,6 +417,20 @@
     position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
   }
   .pv-capas img[hidden]{ display:none }
+  /* ---------- LA CÁMARA SE ALEJA EN LA CORREA (Óscar, 28/08/2026) ----------
+     «cuando el scroll llega a brazalete o correa, la imagen principal hace
+     zoom y se aleja, para ver más parte de la correa o brazalete».
+
+     El brazalete ocupa el lienzo entero de arriba abajo, así que en el
+     visor cuadrado se queda cortado por los dos extremos: alejándose sale a
+     la vista casi la mitad más de tira.
+
+     SE ENCOGEN LAS IMÁGENES, NO SU CAJA. `.pv-capas` lleva el gris del
+     fondo, y encogiéndola a ella se vería el borde del gris recortado sobre
+     el blanco —`.pv-hero-llena` se queda sin fondo—. Encogiendo sólo las
+     capas, el gris sigue llenando el marco. */
+  .pv-capas img{ transition:transform .4s cubic-bezier(.2,.6,.2,1) }
+  .pv-capas-lejos img{ transform:scale(.72) }
   .pv-carrusel{
     position:absolute; left:0; right:0; bottom:14px; z-index:3;
     display:flex; align-items:center; justify-content:center; gap:14px;
@@ -661,7 +681,7 @@
         </section>
 
         <!-- ============ TARJETA 3 · LA CORREA ============ -->
-        <section class="pv-tarjeta">
+        <section class="pv-tarjeta" data-pv-tarjeta="correa">
           <h2 class="pv-tarjeta-tit">El brazalete o la correa</h2>
           <div class="pv-g" data-g="correamat">
             <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="correamat"></span></p>
@@ -1628,6 +1648,14 @@
              pct: Math.round(SENAL * 100) };
   }
 
+  /* La cuota de los tres plazos, redondeada HACIA ARRIBA al céntimo: tres
+     cuotas tienen que sumar el precio o más, nunca menos. */
+  function cuota() { return Math.ceil(precio() / 3 * 100) / 100; }
+  function modoEnTresPagos() {
+    var sel = $('[data-pv-modo]');
+    return !!sel && (sel.value === 'P-3' || sel.value === 'E-3');
+  }
+
   function modoDeCompra() {
     var sel = $('[data-pv-modo]'), nota = $('[data-pv-modo-nota]');
     if (!sel || !nota) return;
@@ -1661,16 +1689,26 @@
        deja comprar: una cifra inventada en una tienda es peor que ninguna. */
     var hayPrecio = COSTES_PUESTOS && costes() !== null;
     var pie = $('[data-pv-pie]');
+    /* EN «3 PAGOS» EL PRECIO GRANDE ES LA CUOTA (Óscar, 28/08/2026: «no
+       pone 239,90, pone 79,97 € y más pequeño ×3 pagos»). Es lo que el
+       cliente va a pagar hoy, así que es el número que manda; el total
+       sigue estando en la ficha técnica y en el carrito.
+       ⚠️ LO QUE SE METE EN EL CARRITO NO CAMBIA: allí va `precio()`, el
+       total. Partir el cobro es cosa de la pasarela, no de la ficha. */
+    var tres = modoEnTresPagos();
     todos('[data-pv-precio]').forEach(function (n) {
-      n.textContent = hayPrecio ? eu(precio()) : 'Precio por definir';
+      if (!hayPrecio) { n.textContent = 'Precio por definir'; return; }
+      n.innerHTML = tres
+        ? eu(cuota()) + ' <span class="pv-precio-x">×&nbsp;3 pagos</span>'
+        : eu(precio());
     });
     /* SIN PRECIO NO HAY PLAZOS NI «DISPONIBLE». La caja de Klarna venía con
        un número de ejemplo dentro y el punto verde diciendo que está a la
        venta: las dos cosas serían mentira hasta que haya costes. */
     todos('.pv-klarna, .pv-barra-klarna').forEach(function (n) { n.hidden = !hayPrecio; });
     if (hayPrecio) {
-      var cuota = eu(Math.ceil(precio() / 3 * 100) / 100);
-      todos('[data-pv-klarna]').forEach(function (n) { n.textContent = cuota; });
+      var c = eu(cuota());
+      todos('[data-pv-klarna]').forEach(function (n) { n.textContent = c; });
     }
     var stock = document.querySelector('.pv-stock');
     if (stock) stock.hidden = !hayPrecio;
@@ -1736,6 +1774,7 @@
     modoDeCompra();
     pintaCapas();
     repasaBarra();
+    repasaVisor();
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
@@ -1863,6 +1902,25 @@
      en un monitor de más de 1.800 px el pie ya entra en cuadro sin
      desplazar nada, así que la barra nacía apagada y no se veía nunca. */
   var LLEGADA = 0.60;
+
+  /* ---------- LA CÁMARA SE ALEJA EN LA CORREA ----------
+     Óscar, 28/08/2026: «cuando el scroll llega a brazalete o correa, la
+     imagen principal hace zoom y se aleja, para ver más parte de la correa
+     o brazalete».
+
+     Manda la TARJETA entera, no el paso: los dos pasos de la correa —el
+     material y el color— viven en ella, y el color se esconde con el
+     brazalete puesto, así que mirar la tarjeta es lo único que vale para
+     los dos casos. Se considera que se ha llegado cuando ocupa la franja
+     de en medio de la pantalla. */
+  function repasaVisor() {
+    var capas = $('[data-pv-capas]');
+    var t = document.querySelector('[data-pv-tarjeta="correa"]');
+    if (!capas || !t) return;
+    var r = t.getBoundingClientRect();
+    capas.classList.toggle('pv-capas-lejos',
+      r.top < window.innerHeight * 0.60 && r.bottom > window.innerHeight * 0.15);
+  }
   /* NO SE DECIDE NADA HASTA QUE LA PÁGINA ESTÁ CUADRADA. Mientras las fotos
      no han cargado, la columna mide bastante menos y el pie cae dentro de la
      pantalla: la barra se apagaba, la página terminaba de cuadrar y volvía a
@@ -1873,6 +1931,7 @@
   window.addEventListener('load', function () {
     PAGINA_LISTA = true;
     repasaBarra();
+    repasaVisor();
   });
   function repasaBarra() {
     var barra = $('[data-pv-barra]'), pie = $('[data-pv-pie]');
@@ -1898,6 +1957,7 @@
       requestAnimationFrame(function () {
         pedido = false;
         repasaBarra();
+        repasaVisor();
         if (!CAPAS) return;
         var c = $('[data-pv-carrusel]');
         if (!c || c.hidden) return;
@@ -1914,7 +1974,10 @@
     if (fl) { gira(Number(fl.dataset.carrusel)); }
   });
   document.addEventListener('change', function (ev) {
-    if (ev.target.closest('[data-pv-modo]')) modoDeCompra();
+    /* `pinta()` y no sólo `modoDeCompra()`: desde que el precio grande
+       cambia con la forma de pago, cambiar el desplegable tiene que repintar
+       el precio de la tarjeta y el de la barra. */
+    if (ev.target.closest('[data-pv-modo]')) pinta();
   });
   document.addEventListener('click', function (ev) {
     if (ev.target.closest('[data-curar-combi]')) {
