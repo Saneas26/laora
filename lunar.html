@@ -970,7 +970,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=10';
+  var SERIE_V = '?v=11';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1163,8 +1163,8 @@
      se enseña, porque enseñarlo sería decidir por el cliente.
 
      VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy cinco esferas
-     de seis, los tres biseles y cuatro juegos de agujas de cinco, y no hay
-     ninguna correa. Cambiar el visor entero dejaría a la mayoría de las
+     de seis, los tres biseles, cuatro juegos de agujas de cinco y el
+     brazalete; de las cinco correas de caucho, ninguna. Cambiar el visor entero dejaría a la mayoría de las
      combinaciones sin nada que enseñar, y eso hoy se vende. Cuando estén
      todas, se quita la condición y se acabaron los AVIF por combinación.
      ============================================================ */
@@ -1187,7 +1187,11 @@
               AZU: '07-agujas-azules-1010-segundero-37',
               ORO: '09-agujas-oro-rosa-1010-segundero-37',
               NAR: '12-agujas-rally-naranjas-1010-segundero-37' },
-    correa: {}
+    /* El brazalete llegó 300 px más estrecho que el hueco entre las asas y
+       cargado a la izquierda; lo encaja `herramientas/encajar_correa.py`,
+       que lo agranda un 30 % hasta que no se queda corto en ninguna fila de
+       las asas. Lo que se pasa del hueco no se ve: la correa va detrás. */
+    correa: { ACERO: '14-brazalete-acero' }
   };
   /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
      haber tocado para que la pieza aparezca. La caja no espera a nadie.
