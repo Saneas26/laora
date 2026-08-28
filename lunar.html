@@ -309,12 +309,17 @@
     display:grid; grid-template-columns:auto 1fr auto; align-items:center;
     gap:16px; padding:10px 14px;
     border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
-    transition:opacity .18s;
   }
-  /* SE APAGA SIN IRSE. Con `display:none` la foto crecería de golpe al
-     cruzar el pie y volvería a encoger al subir: un salto en cada pasada.
-     Apagada deja su hueco y no se mueve nada. */
-  .pv-barra-fuera{ opacity:0; visibility:hidden }
+  /* SE APAGA Y SE VA (Óscar, 28/08/2026: «había un hueco blanco vacío»).
+
+     La primera versión la dejaba invisible PERO OCUPANDO SU SITIO, para
+     que la foto no diera un salto al crecer y encoger en cada pasada.
+     Aquello dejó de tener sentido en cuanto el marco pasó a medirse solo
+     —su lado es el menor entre el ancho de la columna y el hueco de alto, y
+     esa cuenta no depende de la barra—, así que quitarla de en medio ya no
+     mueve nada. Lo que sí hacía era dejar setenta y dos píxeles de blanco
+     debajo de la foto, que es justo lo que se veía. */
+  .pv-barra-fuera{ display:none }
   .pv-barra .pv-barra-precio{ margin:0; font-size:22px; line-height:1.1 }
   .pv-barra-klarna{
     margin:0; display:flex; align-items:center; justify-content:center;
@@ -1860,7 +1865,15 @@
      —cambiar de correa hace crecer la columna y el pie se mueve sin que
      nadie toque el scroll—, al cambiar el tamaño de la ventana y al
      arrancar. */
-  var ASOMO = 24;
+  /* CUÁNDO SE CONSIDERA QUE «EL SCROLL HA LLEGADO» AL PIE: cuando su borde
+     de arriba ha subido por encima del 60 % de la pantalla, o sea cuando el
+     precio y el botón del pie se ven de verdad, no cuando el pie asoma por
+     el filo.
+
+     ANTES BASTABA CON QUE ASOMARA 24 px, y eso rompía las pantallas altas:
+     en un monitor de más de 1.800 px el pie ya entra en cuadro sin
+     desplazar nada, así que la barra nacía apagada y no se veía nunca. */
+  var LLEGADA = 0.60;
   /* NO SE DECIDE NADA HASTA QUE LA PÁGINA ESTÁ CUADRADA. Mientras las fotos
      no han cargado, la columna mide bastante menos y el pie cae dentro de la
      pantalla: la barra se apagaba, la página terminaba de cuadrar y volvía a
@@ -1880,7 +1893,8 @@
        llega» a la tarjeta del pie. Una vez llegado, se queda apagada el
        resto de la página en vez de reaparecer por debajo del pie encima de
        la ficha técnica y del pie de página. */
-    barra.classList.toggle('pv-barra-fuera', r.top < window.innerHeight - ASOMO);
+    barra.classList.toggle('pv-barra-fuera',
+      r.top < window.innerHeight * LLEGADA);
   }
 
   /* ---------- LOS CLICS ---------- */
