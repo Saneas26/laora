@@ -304,27 +304,7 @@
 
      QUIÉN SE QUEDA PEGADO. Antes era la foto; ahora es el envoltorio, con
      la foto y la barra dentro. Así las dos suben juntas y no hay que
-     calcular a mano dónde acaba la foto para pegar la barra debajo.
-
-     Y EL ALTO SE REPARTE: «no puede ocupar más altura que la que queda
-     libre en pantalla completa». El envoltorio no pasa de la pantalla, la
-     barra se lleva lo suyo —que es poco— y la foto se queda con el resto.
-     La foto encoge sola porque las capas van con `contain`: el reloj sale
-     más pequeño, nunca cortado. El `min-height:0` es imprescindible: sin
-     él un hijo de flex no baja de su tamaño natural y la barra se saldría
-     de la pantalla por abajo. */
-  @media (min-width:901px){
-    .pv-visor{
-      position:sticky; top:92px; max-height:calc(100vh - 108px);
-      display:flex; flex-direction:column; gap:12px;
-    }
-    /* El sticky se lo queda el envoltorio, así que la foto vuelve a ser
-       una caja normal; si no, se pegaría dos veces. */
-    .pv-visor-fijo .pv-visor .pv-hero{
-      position:static; max-height:none; min-height:0; flex:1 1 auto;
-    }
-    .pv-barra{ flex:0 0 auto }
-  }
+     calcular a mano dónde acaba la foto para pegar la barra debajo. */
   .pv-barra{
     display:grid; grid-template-columns:auto 1fr auto; align-items:center;
     gap:16px; padding:10px 14px;
@@ -345,6 +325,49 @@
   .pv-barra .pv-barra-comprar{
     width:auto; margin:0; padding:12px 22px; border-radius:6px;
   }
+
+  /* ⚠️ ESTO VA DESPUÉS DE LO DE ARRIBA, NO ANTES. Los selectores pesan lo
+     mismo, así que manda el último: con el bloque de escritorio delante,
+     el `flex-wrap:wrap` de la línea de Klarna le ganaba a su `nowrap` y la
+     barra seguía partiéndose en dos renglones. */
+  @media (min-width:901px){
+    /* LA FOTO NO DEJA DE SER CUADRADA (Óscar, 28/08/2026: «has alargado la
+       caja de la foto, y tapa la nueva tarjeta de precios»).
+
+       La primera versión dejaba que el marco encogiera a lo alto como un
+       hijo de flex cualquiera: en una pantalla de 768 se quedaba en 685×559
+       —achatado— y encima, con la foto en `cover`, recortada. Ahora el
+       marco se mide de una vez: el LADO es el menor entre el ancho de la
+       columna y el hueco que queda de alto, así que sale cuadrado siempre y
+       cuando sobra ancho se centra.
+
+       LAS CUENTAS DEL HUECO: 116 px hasta el borde de arriba del visor —76
+       de cabecera y 40 de aire—, 16 de respiro abajo, 12 de separación y 72
+       de barra. Se descuenta desde donde EMPIEZA y no desde donde acaba
+       pegado (92), porque el peor caso es sin desplazar, que es cuando más
+       se mira; pegado sobran esos 24 px y no molestan. */
+    .pv-visor{
+      position:sticky; top:92px;
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+    }
+    /* El sticky se lo queda el envoltorio, así que la foto vuelve a ser
+       una caja normal; si no, se pegaría dos veces. */
+    .pv-visor-fijo .pv-visor .pv-hero{
+      position:static; flex:0 0 auto;
+      width:min(100%, calc(100vh - 216px)); max-height:none;
+    }
+    /* LA BARRA, DE ALTO FIJO. Si se la deja crecer, la línea de Klarna
+       parte en dos al estrecharse la columna, la barra pasa de 66 a 80 y la
+       cuenta del hueco de la foto deja de valer.
+
+       Y CON EL ALTO FIJO, QUE PARTA. Se probó a recortarla con puntos
+       suspensivos para tenerla en un solo renglón, y quedaba «3 pagos sin
+       intereses (0 % TAE) de 79,97 …»: cortar un importe por la mitad es
+       peor que un renglón de más. En dos líneas ocupa 34 px de los 72, así
+       que cabe de sobra y la barra no se mueve. */
+    .pv-barra{ flex:0 0 auto; width:100%; height:72px }
+  }
+
   /* ---------- LA MISMA BARRA EN MÓVIL, PEGADA ABAJO (Óscar, 28/08/2026) ----------
      EN EL LUNAR NO HABÍA NINGUNA. La hoja compartida ancla `.pv-pie` al
      borde de abajo por debajo de 900 px, pero otra regla suya —
@@ -408,6 +431,13 @@
     font-size:13px; color:#393C41; background:rgba(255,255,255,.92);
     border-radius:6px; padding:6px 12px;
   }
+
+  /* EL MARCO DE LA FOTO, CON LAS ESQUINAS REDONDEADAS (Óscar, 28/08/2026),
+     los mismos 6 px que los botones, el desplegable y la barra. El
+     `overflow:hidden` es lo que hace que se noten: las capas van con
+     `position:absolute; inset:0` y sin recortar asomarían por las esquinas
+     tapando el redondeo. */
+  .pv-hero{ border-radius:6px; overflow:hidden }
 
   .pv-oculto{
     position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
@@ -1816,9 +1846,20 @@
      nadie toque el scroll—, al cambiar el tamaño de la ventana y al
      arrancar. */
   var ASOMO = 24;
+  /* NO SE DECIDE NADA HASTA QUE LA PÁGINA ESTÁ CUADRADA. Mientras las fotos
+     no han cargado, la columna mide bastante menos y el pie cae dentro de la
+     pantalla: la barra se apagaba, la página terminaba de cuadrar y volvía a
+     encenderse. Un parpadeo en cada carga, que se ve —así salió en la
+     primera foto de producción, con la tarjeta transparentándose a través
+     de la barra a medio desvanecer—. */
+  var PAGINA_LISTA = document.readyState === 'complete';
+  window.addEventListener('load', function () {
+    PAGINA_LISTA = true;
+    repasaBarra();
+  });
   function repasaBarra() {
     var barra = $('[data-pv-barra]'), pie = $('[data-pv-pie]');
-    if (!barra || !pie) return;
+    if (!barra || !pie || !PAGINA_LISTA) return;
     var r = pie.getBoundingClientRect();
     /* Sólo el borde de arriba: «permanece visible SÓLO HASTA QUE el scroll
        llega» a la tarjeta del pie. Una vez llegado, se queda apagada el
