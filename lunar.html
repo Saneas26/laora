@@ -1078,9 +1078,43 @@
   }
 
   var ROTULO = { esf: 'Esfera', bisel: 'Bisel', agujas: 'Agujas',
-                 caja: 'Material', cristal: 'Cristal', correa: 'Correa' };
+                 caja: 'Material', correamat: 'Correa', correa: 'Color' };
+  /* ---------- QUÉ PASO MANDA EL CARRUSEL ----------
+     Óscar, 28/08/2026: «cuando el scroll baja a esfera, el cursor pasa de
+     poner Bisel a poner Esfera y por tanto el selector sería para la esfera,
+     después para las agujas».
+
+     Manda el desplazamiento: de los pasos que cambian el dibujo, gana el que
+     esté más cerca de la línea imaginaria del 40 % de la pantalla. Se eligió
+     el 40 % y no el centro porque la columna es larga y con el centro el paso
+     cambiaba demasiado tarde, cuando el grupo ya se había pasado de largo.
+
+     Pulsar un botón también manda, porque para pulsarlo hay que estar
+     mirándolo; el desplazamiento lo confirma en el mismo sitio. */
+  var SEGUIBLES = ['caja', 'bisel', 'esf', 'agujas', 'correamat', 'correa'];
+  /* Un paso con una sola opción no entra en la rueda: las flechas no
+     tendrían a dónde ir y el rótulo se quedaría quieto engañando. Hoy le
+     pasa al material de la caja, que sólo es acero. */
+  function giraSolo(g) {
+    var c = document.querySelector('[data-pv="' + g + '"]');
+    return !!c && c.querySelectorAll('button:not([disabled])').length > 1;
+  }
   var ULTIMO = null;
+  function pasoPorScroll() {
+    var linea = window.innerHeight * 0.40, mejor = null, cerca = 1e9;
+    SEGUIBLES.forEach(function (g) {
+      var caja = document.querySelector('[data-g="' + g + '"]');
+      if (!caja || caja.hidden || !giraSolo(g)) return;
+      var r = caja.getBoundingClientRect();
+      if (!r.height) return;
+      var d = Math.abs((r.top + r.bottom) / 2 - linea);
+      if (d < cerca) { cerca = d; mejor = g; }
+    });
+    return mejor;
+  }
   function pasoEnJuego() {
+    var g = pasoPorScroll();
+    if (g) return g;
     if (ULTIMO && ROTULO[ULTIMO]) return ULTIMO;
     return tocado.bisel ? (tocado.esf ? 'agujas' : 'esf') : 'bisel';
   }
@@ -1600,6 +1634,24 @@
   }
 
   /* ---------- LOS CLICS ---------- */
+  /* El carrusel se repinta al desplazarse, una vez por fotograma: mirar el
+     `getBoundingClientRect` de cinco cajas en cada píxel de scroll es tirar
+     trabajo, y con `requestAnimationFrame` basta y sobra. */
+  (function () {
+    var pedido = false;
+    window.addEventListener('scroll', function () {
+      if (!CAPAS || pedido) return;
+      pedido = true;
+      requestAnimationFrame(function () {
+        pedido = false;
+        var c = $('[data-pv-carrusel]');
+        if (!c || c.hidden) return;
+        var g = pasoEnJuego();
+        if (g) c.querySelector('[data-carrusel-paso]').textContent = ROTULO[g];
+      });
+    }, { passive: true });
+  })();
+
   document.addEventListener('click', function (ev) {
     var fl = ev.target.closest('[data-carrusel]');
     if (fl) { gira(Number(fl.dataset.carrusel)); }
