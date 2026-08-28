@@ -345,10 +345,35 @@
   .pv-barra .pv-barra-comprar{
     width:auto; margin:0; padding:12px 22px; border-radius:6px;
   }
-  /* En una columna la barra no cabe en tres trozos y, sobre todo, ahí ya
-     está el pie anclado al borde de abajo haciendo su trabajo. */
+  /* ---------- LA MISMA BARRA EN MÓVIL, PEGADA ABAJO (Óscar, 28/08/2026) ----------
+     EN EL LUNAR NO HABÍA NINGUNA. La hoja compartida ancla `.pv-pie` al
+     borde de abajo por debajo de 900 px, pero otra regla suya —
+     `.pv-info>div{position:static}`— le gana por especificidad, y sólo le
+     pasa a esta ficha: en las demás el pie vive en la columna de las fotos
+     y esa regla no lo alcanza. En vez de resucitar aquel pie —mide 286 px,
+     un tercio de la pantalla de un móvil— se ancla esta barra, que hace lo
+     mismo ocupando la cuarta parte.
+
+     EN DOS RENGLONES, que a 375 px no caben los tres trozos en fila: el
+     precio y el botón abajo, y encima la línea de Klarna en pequeño. */
   @media (max-width:900px){
-    .pv-barra{ display:none }
+    .pv-barra{
+      position:fixed; left:0; right:0; bottom:0; z-index:9;
+      grid-template-columns:auto 1fr;
+      grid-template-areas:"klarna klarna" "precio boton";
+      gap:6px 12px;
+      border-radius:0; border-left:0; border-right:0; border-bottom:0;
+      padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+      box-shadow:0 -6px 20px rgba(18,20,20,.10);
+    }
+    .pv-barra .pv-barra-precio{ grid-area:precio; font-size:19px }
+    .pv-barra-klarna{ grid-area:klarna; justify-content:flex-start; font-size:11.5px }
+    .pv-barra .pv-barra-comprar{ grid-area:boton; justify-self:end; padding:11px 18px }
+    /* El hueco que la hoja compartida reserva bajo las fotos es para el pie
+       fijo que aquí no llega a serlo; la barra va pegada a la VENTANA, así
+       que lo que hay que apartar es el final de la página. */
+    .pv-galeria{ padding-bottom:0 }
+    body{ padding-bottom:96px }
   }
 
   /* ---------- EL MONTAJE POR CAPAS ----------
@@ -1795,8 +1820,11 @@
     var barra = $('[data-pv-barra]'), pie = $('[data-pv-pie]');
     if (!barra || !pie) return;
     var r = pie.getBoundingClientRect();
-    barra.classList.toggle('pv-barra-fuera',
-      r.top < window.innerHeight - ASOMO && r.bottom > 0);
+    /* Sólo el borde de arriba: «permanece visible SÓLO HASTA QUE el scroll
+       llega» a la tarjeta del pie. Una vez llegado, se queda apagada el
+       resto de la página en vez de reaparecer por debajo del pie encima de
+       la ficha técnica y del pie de página. */
+    barra.classList.toggle('pv-barra-fuera', r.top < window.innerHeight - ASOMO);
   }
 
   /* ---------- LOS CLICS ---------- */
