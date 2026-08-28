@@ -618,9 +618,18 @@
      Hoy sólo hay uno, así que NO entra en la referencia: meterlo movería las
      54 que ya se venden sin que cambie el reloj. El día que haya una segunda
      medida hay que meterlo, porque entonces sí serán dos productos. */
+  /* LA MEDIDA DE MUÑECA SALE DE LA REGLA DE LA CASA, no de una frase suelta.
+     `assets/js/carrito-pantalla.js` reparte así los diámetros:
+       · muñeca fina   (menos de 16 cm) .... 36 · 39 · 39,7
+       · muñeca normal (de 16 a 18 cm) ..... 36 · 39 · 39,7 · 40
+       · muñeca ancha  (más de 18 cm) ...... 40 · 41
+     Los 40 mm entran en normal y en ancha, y NO en fina. Si esa tabla cambia,
+     esta frase tiene que cambiar con ella: si no, la ficha diría una cosa y el
+     carrito otra sobre el mismo reloj. */
   var TAMANOS = {
     T40: { nombre: '40 mm', coste: 0,
-           expl: '40 mm de diámetro. De momento el Lunar sale en una sola medida.' }
+           expl: 'Le va bien a una muñeca normal o ancha, de 16 cm en ' +
+                 'adelante. Por debajo de esa medida se le va grande.' }
   };
   var MM = 40;
 
