@@ -845,7 +845,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=3';
+  var SERIE_V = '?v=4';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -979,16 +979,39 @@
     return esta;
   }
 
+  /* ---------- NADA SALE SEÑALADO HASTA QUE SE PULSA ----------
+     Óscar, 28/08/2026: «la caja sale vacía pero con Bisel negro señalado, no
+     puede haber ninguno señalado porque no lo están. Hay que esperar a que se
+     señale un botón para que quede señalado».
+
+     SÓLO EN EL MONTAJE POR CAPAS, y sólo en los pasos que dibujan una pieza.
+     Ahí el reloj se construye poco a poco y la pieza no está puesta todavía:
+     marcarle el botón es decir que se ha elegido algo que no se ve. La caja
+     sí sale marcada —«en la primera opción damos por defecto señalada Acero,
+     ok»— porque su capa se dibuja desde el principio, y el cristal también,
+     porque no se ve en el dibujo y no hay nada que contradecir.
+
+     En la tienda (sin `?capas`) NO cambia nada: allí la foto enseña el reloj
+     entero desde el primer momento, así que lo marcado es lo que se ve. */
+  var ESPERA_PULSACION = { bisel: 'bisel', esf: 'esf', agujas: 'agujas',
+                           correamat: 'correa', correa: 'correa' };
+  function marcado(g) {
+    if (!CAPAS) return true;
+    var q = ESPERA_PULSACION[g];
+    return !q || !!tocado[q];
+  }
+
   function botones(grupo, opciones, activo) {
     var caja = $('[data-pv="' + grupo + '"]');
     if (!caja) return;
+    var marca = marcado(grupo);
     caja.innerHTML = opciones.filter(function (o) {
       return !o[2] && (o[3] || !llevaAMarcada(grupo, o[0]));
     }).map(function (o) {
       /* `o[3]` es «dibújalo pero apagado»: sirve para enseñar a dónde va el
          configurador sin dejar comprar lo que todavía no existe. */
       return '<button type="button" data-v="' + o[0] + '"' + (o[3] ? ' disabled' : '') +
-             ' aria-pressed="' + (!o[3] && o[0] === activo) + '">' + o[1] + '</button>';
+             ' aria-pressed="' + (marca && !o[3] && o[0] === activo) + '">' + o[1] + '</button>';
     }).join('');
   }
   function deTabla(tabla) {
@@ -1020,7 +1043,8 @@
      la elegida. */
   var CAPA = {
     caja:   { PL: '01-caja-acero' },
-    bisel:  { NEG: '02-bisel-negro-taquimetro', AZU: '03-bisel-azul-taquimetro' },
+    bisel:  { NEG: '02-bisel-negro-taquimetro', AZU: '03-bisel-azul-taquimetro',
+              BLA: '08-bisel-blanco-taquimetro' },
     esf:    { NEG: '04-esfera-negra-sin-agujas',
               BLA: '05-esfera-blanca-subesferas-azules-sin-agujas' },
     agujas: { BLA: '06-agujas-plata-1010-segundero-37',
@@ -1126,8 +1150,13 @@
     if (!caja) return;
     var bs = [].slice.call(caja.querySelectorAll('button:not([disabled])'));
     if (bs.length < 2) return;
-    var i = 0;
-    bs.forEach(function (b, k) { if (b.getAttribute('aria-pressed') === 'true') i = k; });
+    var i = 0, hay = false;
+    bs.forEach(function (b, k) {
+      if (b.getAttribute('aria-pressed') === 'true') { i = k; hay = true; }
+    });
+    /* Si el paso aún no se ha tocado no hay nada marcado: la primera vuelta
+       de rueda pone la PRIMERA opción, no la segunda. */
+    if (!hay) { bs[0].click(); return; }
     bs[(i + paso + bs.length) % bs.length].click();
   }
 
@@ -1218,6 +1247,15 @@
     { caja: 'PL', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'ORO', coste: 34.59 },
     { caja: 'PL', cristal: 'MIN', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 34.59 },
     { caja: 'PL', cristal: 'MIN', esf: 'PAN', bisel: 'BLA', agujas: 'BLA', coste: 34.59 },
+    /* LA PANDA TAMBIÉN VA CON EL BISEL NEGRO (Óscar, 28/08/2026: «con bisel
+       negro sí puede haber esfera blanca, que será Panda u Oro Rosa»). La de
+       oro rosa ya estaba dos líneas más arriba; la panda faltaba, y eso que
+       está fotografiada: `acero-panda-bnegro-naranja-brazalete`, la que él
+       mandó el 28/08 «con agujas naranja». Las agujas salen de esa foto.
+       ⚠️ EL COSTE ESTÁ COPIADO de las otras cajas montadas de mineral: la
+       hoja de compra no lista esta combinación, así que sale al mismo precio
+       que las demás cajas montadas de mineral. */
+    { caja: 'PL', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'NAR', coste: 34.59 },
     /* acero · mineral · montada a piezas .................... 37,57 */
     { caja: 'PL', cristal: 'MIN', esf: 'ORO', bisel: 'BLA', agujas: 'ORO', coste: 37.57 },
     /* acero · zafiro · caja montada, 100 m .................. 48,99 */
@@ -1382,6 +1420,14 @@
   function rotula(g, valor, expl) {
     var v = document.querySelector('[data-valor="' + g + '"]');
     var x = document.querySelector('[data-explica="' + g + '"]');
+    /* Si el paso todavía no se ha pulsado, la cabecera tampoco puede cantar
+       un valor: diría por escrito lo mismo que el botón marcado tenía
+       prohibido decir. Se pone en gris con «Sin elegir» y sin explicación,
+       que es lo que ya hacen los pasos pendientes. */
+    if (!marcado(g)) { valor = 'Sin elegir'; expl = ''; }
+    var caja = document.querySelector('[data-g="' + g + '"]');
+    if (caja && ESPERA_PULSACION[g])
+      caja.classList.toggle('pv-g-vacio', !marcado(g));
     if (v) v.textContent = valor;
     if (x) x.textContent = expl || '';
   }
@@ -1695,6 +1741,11 @@
       var g = b.closest('[data-pv]').dataset.pv;
       aplicaOpcion(g, b.dataset.v);
       tocado[g] = true;
+      /* Elegir el material ya deja puesta una correa concreta —salta a la
+         primera de ese material—, así que cuenta como haber elegido correa:
+         si no, la capa no se dibujaría hasta tocar además el color, y con
+         brazalete no hay color que tocar. */
+      if (g === 'correamat') tocado.correa = true;
       ULTIMO = g;
       pinta();
       return;
