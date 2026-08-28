@@ -210,6 +210,13 @@ if __name__ == '__main__':
     ap.add_argument('agujas')
     ap.add_argument('esfera')
     ap.add_argument('salida')
+    # CUÁNTO SE LE PERDONA AL CONTROL DE SIMETRÍA. Los contadores de los
+    # lados deberían caer simétricos respecto al eje; si no, la medida suele
+    # estar mal —cuando la inundación se escapa, se va cientos de píxeles—.
+    # Pero la esfera panda los tiene DE VERDAD 8 px descentrados, así que con
+    # 6 el programa se plantaba en una esfera buena. A 10 sigue cazando los
+    # errores gordos, que son de otro orden.
+    ap.add_argument('--simetria', type=float, default=10.0)
     o = ap.parse_args()
 
     e = np.asarray(Image.open(o.esfera).convert('RGBA'))
@@ -231,7 +238,7 @@ if __name__ == '__main__':
     medio = (dianas['izquierdo'][0] + dianas['derecho'][0]) / 2.0
     print('punto medio de los dos laterales: %.2f  (el eje está en %.1f, %.2f de diferencia)'
           % (medio, EJE_X, abs(medio - EJE_X)))
-    if abs(medio - EJE_X) > 6:
+    if abs(medio - EJE_X) > o.simetria:
         sys.exit('los contadores no salen simétricos: la medida no es de fiar')
 
     a = np.asarray(Image.open(o.agujas).convert('RGBA'))

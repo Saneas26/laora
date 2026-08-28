@@ -1036,7 +1036,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=14';
+  var SERIE_V = '?v=15';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1253,23 +1253,56 @@
               ORO: '11-esfera-blanca-oro-rosa-sin-agujas',
               DOR: '13-esfera-dorada-sin-agujas',
               NAR: '15-esfera-rally-sin-agujas' },
-    /* UN JUEGO DE AGUJAS PUEDE NECESITAR UNA COPIA POR ESFERA. Las agujas
-       pequeñas van dentro de la capa, y cada esfera tiene los contadores
-       en un sitio distinto: las naranjas valen para la panda tal cual, pero
-       en la Rally se quedaban a treinta y cuarenta píxeles de sus
-       contadores. Cuando hace falta, el valor deja de ser un nombre y pasa
-       a ser una tabla: `'*'` es la de siempre y la clave de la esfera, la
-       copia cuadrada para ella. */
-    agujas: { BLA: '06-agujas-plata-1010-segundero-37',
-              AZU: '07-agujas-azules-1010-segundero-37',
-              ORO: '09-agujas-oro-rosa-1010-segundero-37',
-              DOR: '16-agujas-doradas-1010-segundero-37',
-              NAR: { '*': '12-agujas-rally-naranjas-1010-segundero-37',
-                     NAR: '12-agujas-rally-naranjas-para-rally' } },
-    /* El brazalete llegó 300 px más estrecho que el hueco entre las asas y
-       cargado a la izquierda; lo encaja `herramientas/encajar_correa.py`,
-       que lo agranda un 30 % hasta que no se queda corto en ninguna fila de
-       las asas. Lo que se pasa del hueco no se ve: la correa va detrás. */
+    /* CADA JUEGO DE AGUJAS TIENE SU COPIA PARA CADA ESFERA (Óscar,
+       28/08/2026: «con la esfera blanca y bisel azul sólo encajan las
+       agujas azules (…) si hay que hacerlas de nuevo y definir exactamente
+       las coordenadas de cada eje, se hace, tiene que quedar un trabajo
+       profesional»).
+
+       LAS TREINTA. Las agujas pequeñas van dentro de la capa y cada esfera
+       tiene los contadores en otro punto; todas las capas se dibujaron con
+       los de la esfera NEGRA, así que encajaban ahí y bailaban en las
+       demás. `herramientas/cuadrar_todas_las_agujas.py` mide y mueve las
+       tres agujas pequeñas de cada pareja: las hace las treinta de una vez
+       y escribe esta tabla. Ninguna se libró —la que menos se movía, doce
+       píxeles—, así que `'*'` no llega a usarse nunca; se deja por si algún
+       día entra una esfera antes que sus copias. */
+    agujas: {
+      BLA: { '*': '06-agujas-plata-1010-segundero-37',
+             NEG: '06-agujas-plata-para-negra',
+             BLA: '06-agujas-plata-para-blanca',
+             PAN: '06-agujas-plata-para-panda',
+             ORO: '06-agujas-plata-para-ororosa',
+             DOR: '06-agujas-plata-para-dorada',
+             NAR: '06-agujas-plata-para-rally' },
+      AZU: { '*': '07-agujas-azules-1010-segundero-37',
+             NEG: '07-agujas-azules-para-negra',
+             BLA: '07-agujas-azules-para-blanca',
+             PAN: '07-agujas-azules-para-panda',
+             ORO: '07-agujas-azules-para-ororosa',
+             DOR: '07-agujas-azules-para-dorada',
+             NAR: '07-agujas-azules-para-rally' },
+      ORO: { '*': '09-agujas-oro-rosa-1010-segundero-37',
+             NEG: '09-agujas-oro-rosa-para-negra',
+             BLA: '09-agujas-oro-rosa-para-blanca',
+             PAN: '09-agujas-oro-rosa-para-panda',
+             ORO: '09-agujas-oro-rosa-para-ororosa',
+             DOR: '09-agujas-oro-rosa-para-dorada',
+             NAR: '09-agujas-oro-rosa-para-rally' },
+      NAR: { '*': '12-agujas-rally-naranjas-1010-segundero-37',
+             NEG: '12-agujas-rally-naranjas-para-negra',
+             BLA: '12-agujas-rally-naranjas-para-blanca',
+             PAN: '12-agujas-rally-naranjas-para-panda',
+             ORO: '12-agujas-rally-naranjas-para-ororosa',
+             DOR: '12-agujas-rally-naranjas-para-dorada',
+             NAR: '12-agujas-rally-naranjas-para-rally' },
+      DOR: { '*': '16-agujas-doradas-1010-segundero-37',
+             NEG: '16-agujas-doradas-para-negra',
+             BLA: '16-agujas-doradas-para-blanca',
+             PAN: '16-agujas-doradas-para-panda',
+             ORO: '16-agujas-doradas-para-ororosa',
+             DOR: '16-agujas-doradas-para-dorada',
+             NAR: '16-agujas-doradas-para-rally' } },
     correa: { ACERO: '14-brazalete-acero',
               CAZU:  '17-correa-caucho-azul',
               CAZN:  '18-correa-caucho-azul-naranja',
@@ -1309,8 +1342,8 @@
   function cadaFicheroCapa(hazlo) {
     for (var g in CAPA) for (var k in CAPA[g]) {
       var v = CAPA[g][k];
-      if (typeof v === 'string') hazlo(v);
-      else for (var d in v) hazlo(v[d]);
+      if (typeof v === 'string') hazlo(v, g);
+      else for (var d in v) hazlo(v[d], g);
     }
   }
 
@@ -1321,14 +1354,32 @@
   var MINI = { CAZU: 'cazu', CAZN: 'cazn', CBLA: 'cbla',
                CMAC: 'cmac', CNVF: 'cnvf' };
 
-  var PRECARGADAS = false;
+  /* ---------- LA PRECARGA, POR ESFERA ----------
+     Cambiar el `src` de un <img> lo deja en blanco mientras baja el fichero
+     nuevo, y en un configurador eso es un parpadeo en cada pulsación, así
+     que las capas se piden por delante.
+
+     PERO LAS AGUJAS YA NO SE PIDEN TODAS. Con una copia por esfera son 30
+     capas: pedirlas de golpe son 400 KB que el cliente se baja para usar
+     cinco. Se piden LAS CINCO DE LA ESFERA PUESTA, y cuando se cambia de
+     esfera se piden las cinco de la nueva. Así el peso de la precarga se
+     queda donde estaba antes de las copias. */
+  var PRECARGADAS = false, PRECARGADA_ESF = null;
+  function pideCapa(f) {
+    if (!f) return;
+    var i = new Image();
+    i.src = CAPA_IMG + f + '.avif' + SERIE_V;
+  }
   function precargaCapas() {
-    if (PRECARGADAS || !CAPAS) return;
-    PRECARGADAS = true;
-    cadaFicheroCapa(function (f) {
-      var i = new Image();
-      i.src = CAPA_IMG + f + '.avif' + SERIE_V;
-    });
+    if (!CAPAS) return;
+    if (!PRECARGADAS) {
+      PRECARGADAS = true;
+      cadaFicheroCapa(function (f, g) { if (g !== 'agujas') pideCapa(f); });
+    }
+    if (PRECARGADA_ESF !== e.esf) {
+      PRECARGADA_ESF = e.esf;
+      for (var k in CAPA.agujas) pideCapa(ficheroCapa('agujas', k));
+    }
   }
 
   function pintaCapas() {
