@@ -1229,6 +1229,10 @@
      No se redondea al 9,90: entonces ya no sería el 40 % y habría que volver
      a decir un porcentaje distinto en cada reloj. */
   var SENAL = 0.40;
+  /* LA CUENTA, PARA CUANDO LA HAGA LA PASARELA. La ficha ya no enseña los
+     importes —sólo el porcentaje—, pero la regla tiene que vivir en un solo
+     sitio: el día que el carrito cobre la señal de verdad, saca de aquí lo
+     que cobra ahora y lo que queda. */
   function senal() {
     if (costes() === null) return null;
     var total = precio(), ahora = Math.round(total * SENAL * 100) / 100;
@@ -1242,13 +1246,13 @@
     var v = sel.value;
     if (v === 'P-RES' || v === 'E-RES') {
       nota.hidden = false;
-      var r = senal();
-      nota.innerHTML = r === null
-        ? 'Al reservar se adelanta una parte del precio, y el resto una semana ' +
-          'antes de la entrega.'
-        : 'Al reservar adelantas el <b>' + r.pct + ' %</b> del precio, ' +
-          '<b>' + eu(r.ahora) + '</b>. El resto, <b>' + eu(r.luego) + '</b>, una ' +
-          'semana antes de la entrega.';
+      /* SIN IMPORTES AQUÍ (Óscar, 28/08/2026): «no mostramos el importe, solo
+         al final de la compra». El porcentaje sale de `SENAL`, que es donde
+         vive la regla, para que no haya un 40 escrito a mano que se quede
+         viejo el día que cambie. */
+      nota.innerHTML = 'Para la reserva solo tendrás que abonar el <b>' +
+        Math.round(SENAL * 100) + '&nbsp;%</b> del total hoy.<br>' +
+        'El resto una semana antes de la entrega, te avisamos nosotros.';
     } else if (v === 'P-3' || v === 'E-3') {
       nota.hidden = false;
       nota.innerHTML = 'Tres plazos sin intereses (0&nbsp;% TAE) con Klarna. El ' +
