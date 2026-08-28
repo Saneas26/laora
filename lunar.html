@@ -247,8 +247,12 @@
   .pv-g[hidden]{ display:none }
   /* Un paso que todavía no tiene datos: se ve, para que se sepa que va a
      estar, pero no se puede tocar. */
-  .pv-g-vacio .pv-g-cab, .pv-g-vacio .pv-g-explica{ color:#8E9095 }
-  .pv-g-vacio .pv-g-cab .pv-g-valor{ color:#8E9095 }
+  /* El gris de un paso pendiente: #8E9095 en el rótulo, que es la señal de
+     «esto todavía no se toca», pero la EXPLICACIÓN a #61646A. Con el gris
+     claro daba 2,9:1 de contraste, y a 12 px eso no se lee; a #61646A sube a
+     5,4:1. Es texto que el cliente lee, no un control apagado. */
+  .pv-g-vacio .pv-g-cab, .pv-g-vacio .pv-g-cab .pv-g-valor{ color:#8E9095 }
+  .pv-g-vacio .pv-g-explica{ color:#61646A }
   .pv-tarjeta .pv-opciones{ gap:8px }
   .pv-tarjeta .pv-opciones button{ font-size:14px; padding:9px 14px }
 
