@@ -838,7 +838,14 @@
     BLA: { nombre: 'Blanca', coste: 0,
            tec: 'Esfera plateada con los tres contadores en azul, índices ' +
                 'aplicados y lumen.' },
-    NAR: { nombre: 'Naranja',  coste: 0,
+    /* SE LLAMA RALLY, NO NARANJA (Óscar, 28/08/2026: «esfera naranja que se
+       llama rally realmente»). El código sigue siendo NAR: es el que arma
+       la clave de las fotos y la referencia, y cambiarlo dejaría sin foto a
+       lo que ya está publicado.
+       ⚠️ LA FRASE TÉCNICA SIGUE DICIENDO «naranja» y no la toco por mi
+       cuenta: no hay capa de esta esfera todavía, así que no puedo ver de
+       qué color es ni si lo de «rally» es el minutero a cuadros. */
+    NAR: { nombre: 'Rally',  coste: 0,
            tec: 'Esfera naranja con tres contadores, índices aplicados y lumen.' },
     DOR: { nombre: 'Dorada',   coste: 0,
            tec: 'Esfera dorada con tres contadores, índices aplicados y lumen.' },
@@ -967,7 +974,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=9';
+  var SERIE_V = '?v=10';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1159,7 +1166,7 @@
      eligiendo, cada pieza se posa encima. Lo que todavía no se ha tocado no
      se enseña, porque enseñarlo sería decidir por el cliente.
 
-     VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy cuatro esferas
+     VA CON `?capas` Y NO EN LA TIENDA. Las capas cubren hoy cinco esferas
      de seis, los tres biseles y cuatro juegos de agujas de cinco, y no hay
      ninguna correa. Cambiar el visor entero dejaría a la mayoría de las
      combinaciones sin nada que enseñar, y eso hoy se vende. Cuando estén
@@ -1178,7 +1185,8 @@
     esf:    { NEG: '04-esfera-negra-sin-agujas',
               BLA: '05-esfera-blanca-subesferas-azules-sin-agujas',
               PAN: '10-esfera-panda-sin-agujas',
-              ORO: '11-esfera-blanca-oro-rosa-sin-agujas' },
+              ORO: '11-esfera-blanca-oro-rosa-sin-agujas',
+              DOR: '13-esfera-dorada-sin-agujas' },
     agujas: { BLA: '06-agujas-plata-1010-segundero-37',
               AZU: '07-agujas-azules-1010-segundero-37',
               ORO: '09-agujas-oro-rosa-1010-segundero-37',
