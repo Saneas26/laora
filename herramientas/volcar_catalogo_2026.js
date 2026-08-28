@@ -372,7 +372,7 @@ function lunar() {
      cuesta. En cuanto Óscar dé los costes, esto enumera solo. */
   const L = motorDe('lunar.html',
     'MOVS, CAJAS, ESFERAS, BISELES, AGUJAS, CORREAS, CRISTALES, PAQUETES, ' +
-    'COSTES_PUESTOS, costes, e, precio, referencia, normaliza, pinta, agua, ' +
+    'COSTES_PUESTOS, costes, MM, e, precio, referencia, normaliza, pinta, agua, ' +
     'vetada, firma, sinVeto');
   if (!L.COSTES_PUESTOS) {
     console.log('ℹ️  el Lunar no aporta referencias: se está rehaciendo desde cero y\n' +
@@ -407,11 +407,15 @@ function lunar() {
         ' · ' + L.MOVS[mov].nombre,
       L.CORREAS[correa].nombre,
       { movimiento: L.MOVS[mov].tec,
-        caja: 'Caja de ' + L.CAJAS[caja].mat + ', ' + L.CRISTALES[cristal].tec + '.',
+        caja: 'Caja de ' + L.CAJAS[caja].mat + ' de ' + L.MM + ' mm, ' +
+              L.CRISTALES[cristal].tec + '.',
         esfera: L.ESFERAS[c.esf].tec + ' Bisel: ' + L.BISELES[c.bisel].tec +
                 '. Agujas: ' + L.AGUJAS[c.agujas].tec + '.',
         agua: L.agua() },
-      null, null) ? 1 : 0;
+      /* El diámetro va al catálogo para que el carrito pueda avisar de si el
+         reloj le va a la muñeca de quien compra, igual que hace el Trinchera
+         con sus 36 y 39. */
+      L.MM, null) ? 1 : 0;
   }
   return n;
 }

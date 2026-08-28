@@ -435,19 +435,20 @@
         <!-- ============ TARJETA 1 · LA CAJA ============ -->
         <section class="pv-tarjeta">
           <h2 class="pv-tarjeta-tit">La caja</h2>
-          <div class="pv-g pv-g-vacio" data-g="tamano">
-            <p class="pv-g-cab"><span>Tamaño de la caja</span><span class="pv-g-valor" data-valor="tamano">Pendiente</span></p>
+          <div class="pv-g" data-g="tamano">
+            <p class="pv-g-cab"><span>Tamaño de la caja</span><span class="pv-g-valor" data-valor="tamano"></span></p>
+            <div class="pv-opciones" data-pv="tamano"></div>
             <p class="pv-g-explica" data-explica="tamano"></p>
           </div>
           <div class="pv-g" data-g="caja">
             <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="caja"></span></p>
-            <p class="pv-g-explica" data-explica="caja"></p>
             <div class="pv-opciones" data-pv="caja"></div>
+            <p class="pv-g-explica" data-explica="caja"></p>
           </div>
           <div class="pv-g" data-g="bisel">
             <p class="pv-g-cab"><span>Bisel</span><span class="pv-g-valor" data-valor="bisel"></span></p>
-            <p class="pv-g-explica" data-explica="bisel"></p>
             <div class="pv-opciones" data-pv="bisel"></div>
+            <p class="pv-g-explica" data-explica="bisel"></p>
           </div>
           <div class="pv-g pv-g-vacio" data-g="biselmat">
             <p class="pv-g-cab"><span>Material y acabado del bisel</span><span class="pv-g-valor" data-valor="biselmat">Pendiente</span></p>
@@ -455,18 +456,18 @@
           </div>
           <div class="pv-g" data-g="esf">
             <p class="pv-g-cab"><span>Esfera</span><span class="pv-g-valor" data-valor="esf"></span></p>
-            <p class="pv-g-explica" data-explica="esf"></p>
             <div class="pv-opciones" data-pv="esf"></div>
+            <p class="pv-g-explica" data-explica="esf"></p>
           </div>
           <div class="pv-g" data-g="agujas">
             <p class="pv-g-cab"><span>Agujas</span><span class="pv-g-valor" data-valor="agujas"></span></p>
-            <p class="pv-g-explica" data-explica="agujas"></p>
             <div class="pv-opciones" data-pv="agujas"></div>
+            <p class="pv-g-explica" data-explica="agujas"></p>
           </div>
           <div class="pv-g" data-g="cristal">
             <p class="pv-g-cab"><span>Cristal</span><span class="pv-g-valor" data-valor="cristal"></span></p>
-            <p class="pv-g-explica" data-explica="cristal"></p>
             <div class="pv-opciones" data-pv="cristal"></div>
+            <p class="pv-g-explica" data-explica="cristal"></p>
           </div>
         </section>
 
@@ -478,8 +479,8 @@
           <h2 class="pv-tarjeta-tit">El movimiento</h2>
           <div class="pv-g" data-g="mov">
             <p class="pv-g-cab"><span>Calibre</span><span class="pv-g-valor" data-valor="mov"></span></p>
-            <p class="pv-g-explica" data-explica="mov"></p>
             <div class="pv-opciones" data-pv="mov"></div>
+            <p class="pv-g-explica" data-explica="mov"></p>
           </div>
         </section>
 
@@ -488,13 +489,13 @@
           <h2 class="pv-tarjeta-tit">El brazalete o la correa</h2>
           <div class="pv-g" data-g="correamat">
             <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="correamat"></span></p>
-            <p class="pv-g-explica" data-explica="correamat"></p>
             <div class="pv-opciones" data-pv="correamat"></div>
+            <p class="pv-g-explica" data-explica="correamat"></p>
           </div>
           <div class="pv-g" data-g="correa">
             <p class="pv-g-cab"><span>Color</span><span class="pv-g-valor" data-valor="correa"></span></p>
-            <p class="pv-g-explica" data-explica="correa"></p>
             <div class="pv-opciones" data-pv="correa"></div>
+            <p class="pv-g-explica" data-explica="correa"></p>
           </div>
           <div class="pv-g pv-g-vacio" data-g="cierre">
             <p class="pv-g-cab"><span>Cierre</span><span class="pv-g-valor" data-valor="cierre">Pendiente</span></p>
@@ -613,6 +614,16 @@
   /* El coste de la caja NO está aquí: va en PAQUETES, porque el proveedor
      la vende montada con bisel, esfera y agujas dentro. Aquí sólo viven el
      nombre y el material. */
+  /* EL DIÁMETRO (Óscar, 28/08/2026: «el tamaño de la caja es de 40 mm»).
+     Hoy sólo hay uno, así que NO entra en la referencia: meterlo movería las
+     54 que ya se venden sin que cambie el reloj. El día que haya una segunda
+     medida hay que meterlo, porque entonces sí serán dos productos. */
+  var TAMANOS = {
+    T40: { nombre: '40 mm', coste: 0,
+           expl: '40 mm de diámetro. De momento el Lunar sale en una sola medida.' }
+  };
+  var MM = 40;
+
   var CAJAS = {
     PL: { nombre: 'Acero', mat: 'acero inoxidable 316L', coste: 0,
           expl: 'Acero inoxidable 316L, el que se usa en relojería de buceo: ' +
@@ -947,8 +958,8 @@
 
   /* ---------- LAS FRASES ---------- */
   function descripcion() {
-    return 'laOra Lunar, caja de ' + CAJAS[e.caja].mat + ' con ' +
-           CRISTALES[e.cristal].tec + ', esfera ' +
+    return 'laOra Lunar, caja de ' + CAJAS[e.caja].mat + ' de ' + MM +
+           ' mm con ' + CRISTALES[e.cristal].tec + ', esfera ' +
            ESFERAS[e.esf].nombre.toLowerCase() + ', ' + BISELES[e.bisel].tec +
            ', ' + AGUJAS[e.agujas].tec + ' y ' + CORREAS[e.correa].tec;
   }
@@ -1273,8 +1284,8 @@
       return o;
     }), e.correa);
 
-    rotula('tamano', 'Pendiente', 'Hoy el Lunar sale en una sola medida. Cuando ' +
-           'haya más de una, se elige aquí.');
+    botones('tamano', deTabla(TAMANOS), 'T40');
+    rotula('tamano', TAMANOS.T40.nombre, TAMANOS.T40.expl);
     rotula('caja', CAJAS[e.caja].nombre, CAJAS[e.caja].expl);
     rotula('bisel', BISELES[e.bisel].nombre, BISELES[e.bisel].expl);
     rotula('biselmat', 'Pendiente', 'El material y el acabado del bisel —cerámico ' +
@@ -1320,8 +1331,8 @@
     }
 
     $('[data-pv-tec="caja"]').textContent =
-      'Caja de ' + CAJAS[e.caja].mat + ', ' + CRISTALES[e.cristal].tec + '. ' +
-      agua() + '.';
+      'Caja de ' + CAJAS[e.caja].mat + ' de ' + MM + ' mm, ' +
+      CRISTALES[e.cristal].tec + '. ' + agua() + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent =
       ESFERAS[e.esf].tec + ' ' + FECHA + ' Bisel: ' + BISELES[e.bisel].tec +
