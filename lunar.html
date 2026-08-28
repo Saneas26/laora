@@ -1037,7 +1037,23 @@
     { capa: 'agujas', grupo: 'agujas', espera: 'agujas' }
   ];
 
+  /* SE PRECARGAN TODAS DE GOLPE. Cambiar el `src` de un <img> lo deja en
+     blanco mientras baja el fichero nuevo, y en un carrusel eso es un
+     parpadeo en cada pulsación. Las siete pesan 252 KB juntas —menos que
+     tres fotos—, así que se piden una vez al abrir y a partir de ahí los
+     cambios son instantáneos. */
+  var PRECARGADAS = false;
+  function precargaCapas() {
+    if (PRECARGADAS || !CAPAS) return;
+    PRECARGADAS = true;
+    for (var g in CAPA) for (var k in CAPA[g]) {
+      var i = new Image();
+      i.src = CAPA_IMG + CAPA[g][k] + '.avif' + SERIE_V;
+    }
+  }
+
   function pintaCapas() {
+    precargaCapas();
     var caja = $('[data-pv-capas]');
     if (!caja) return;
     caja.hidden = !CAPAS;
