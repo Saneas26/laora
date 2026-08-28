@@ -957,6 +957,14 @@
   var CORREAS = {
     ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
              tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
+    /* EL BRAZALETE PVD, SIN COSTE TODAVÍA (28/08/2026). La hoja de compra
+       dice que el pack de PVD de 48,99 trae caja, bisel negro y brazalete
+       PVD juntos, así que su precio no es una suma: hay que sacarlo del
+       pack. Con `coste: null` la opción existe y se dibuja, pero `costes()`
+       devuelve null, el precio dice «por definir» y no se puede comprar. */
+    ACERONG: { nombre: 'Brazalete PVD negro', coste: null,
+               tec: 'brazalete de acero inoxidable 316L con PVD negro y ' +
+                    'cierre desplegable' },
     CAZU: { nombre: 'Caucho azul', coste: 9.89,
             tec: 'correa de caucho azul' },
     CAZN: { nombre: 'Caucho azul y naranja', coste: 9.89,
@@ -973,7 +981,8 @@
      exterior en color y llantas. El estado sigue siendo uno solo —`e.correa`—
      y el material se deduce de él; elegir material salta a la primera correa
      de ese material. */
-  var CORREA_MAT = { ACERO: 'ACERO', CAZU: 'CAUCHO', CAZN: 'CAUCHO',
+  var CORREA_MAT = { ACERO: 'ACERO', ACERONG: 'ACERO',
+                     CAZU: 'CAUCHO', CAZN: 'CAUCHO',
                      CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO' };
   var MATERIALES = {
     ACERO:  { nombre: 'Acero',  expl: 'Brazalete de acero inoxidable 316L con ' +
@@ -1036,7 +1045,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=15';
+  var SERIE_V = '?v=16';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1244,7 +1253,7 @@
      capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
      la elegida. */
   var CAPA = {
-    caja:   { PL: '01-caja-acero' },
+    caja:   { PL: '01-caja-acero', NG: '22-caja-pvd-negra' },
     bisel:  { NEG: '02-bisel-negro-taquimetro', AZU: '03-bisel-azul-taquimetro',
               BLA: '08-bisel-blanco-taquimetro' },
     esf:    { NEG: '04-esfera-negra-sin-agujas',
@@ -1304,6 +1313,7 @@
              DOR: '16-agujas-doradas-para-dorada',
              NAR: '16-agujas-doradas-para-rally' } },
     correa: { ACERO: '14-brazalete-acero',
+              ACERONG: '23-brazalete-pvd-negro',
               CAZU:  '17-correa-caucho-azul',
               CAZN:  '18-correa-caucho-azul-naranja',
               CBLA:  '19-correa-caucho-blanca',
@@ -1569,11 +1579,20 @@
     { caja: 'PL', cristal: 'MIN', esf: 'ORO', bisel: 'BLA', agujas: 'ORO', coste: 37.57 },
     /* acero · zafiro · caja montada, 100 m .................. 48,99 */
     { caja: 'PL', cristal: 'ZAF', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 48.99 },
-    { caja: 'PL', cristal: 'ZAF', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 48.99 }
-    /* ⚠️ FALTA EL PVD, la décima de la hoja: el pack de 48,99 trae caja,
-       bisel negro y brazalete PVD, pero la esfera y las agujas están «por
-       decidir». Sin saber cuáles, no se puede escribir la combinación, y
-       por eso la caja `NG` no se dibuja: los botones salen de esta tabla. */
+    { caja: 'PL', cristal: 'ZAF', esf: 'BLA', bisel: 'AZU', agujas: 'AZU', coste: 48.99 },
+    /* EL PVD, SIN COSTE TODAVÍA (28/08/2026). La hoja lista un pack de
+       48,99 con caja, bisel negro y brazalete PVD juntos, y la esfera y las
+       agujas «por decidir». Ahora que hay fotos de la caja y del brazalete,
+       las combinaciones se escriben para que se puedan VER, pero con
+       `coste: null`: la opción se dibuja y se monta, y el precio dice «por
+       definir» hasta que Óscar reparta ese pack. Bisel negro, que es el que
+       trae. */
+    { caja: 'NG', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: null },
+    { caja: 'NG', cristal: 'MIN', esf: 'BLA', bisel: 'NEG', agujas: 'BLA', coste: null },
+    { caja: 'NG', cristal: 'MIN', esf: 'NAR', bisel: 'NEG', agujas: 'BLA', coste: null },
+    { caja: 'NG', cristal: 'MIN', esf: 'DOR', bisel: 'NEG', agujas: 'BLA', coste: null },
+    { caja: 'NG', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'BLA', coste: null },
+    { caja: 'NG', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'BLA', coste: null }
   ];
   /* El paquete de una combinación, o null si el proveedor no la monta. */
   /* LAS AGUJAS SE ELIGEN LIBRES (Óscar, 28/08/2026: «en cuanto a las agujas
@@ -1700,7 +1719,9 @@
      coste—, y entonces la ficha no enseña precio ni deja comprar. */
   function costes() {
     var p = paqueteDe();
-    if (!p) return null;
+    /* Un paquete SIN coste —el del PVD— cuenta como no saberlo: se dibuja,
+       pero no se pone precio ni se vende. */
+    if (!p || p.coste === null || p.coste === undefined) return null;
     var c = CORREAS[e.correa];
     if (!c || c.coste === null || c.coste === undefined) return null;
     return MOVS[e.mov].coste + p.coste + (p.correaDentro ? 0 : c.coste) + LOGO;
@@ -1919,11 +1940,15 @@
     rotula('mov', MOVS[e.mov].cal, MOVS[e.mov].tec);
     rotula('correamat', MATERIALES[matDe(e.correa)].nombre,
            MATERIALES[matDe(e.correa)].expl);
-    /* CON BRAZALETE NO HAY COLOR QUE ELEGIR: el acero es uno solo, y el
-       grupo repetía palabra por palabra lo que acababa de decir el material.
-       Se esconde entero, como Tesla esconde lo que no tiene alternativa. */
+    /* EL PASO DEL COLOR SE ESCONDE CUANDO NO HAY NADA QUE ELEGIR, y eso ya
+       no es lo mismo que «es de acero»: desde que existe el brazalete PVD,
+       el acero tiene dos. Se cuenta cuántas correas comparten material con
+       la puesta; con una sola, el grupo repetiría palabra por palabra lo que
+       acaba de decir el material. */
     var gColor = document.querySelector('[data-g="correa"]');
-    var hayColor = matDe(e.correa) !== 'ACERO';
+    var hayColor = Object.keys(CORREAS).filter(function (c) {
+      return matDe(c) === matDe(e.correa);
+    }).length > 1;
     if (gColor) gColor.hidden = !hayColor;
     if (hayColor)
       rotula('correa', CORREAS[e.correa].nombre,
