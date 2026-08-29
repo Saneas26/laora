@@ -561,6 +561,14 @@
   }
   .pv-criba-pie b{ font-size:13px }
 
+  /* La foto del cierre elegido, debajo de sus botones. Pequeña: es una
+     ayuda para reconocerlo, no el protagonista de la tarjeta. */
+  .pv-cierre-foto{
+    display:block; width:120px; height:120px; object-fit:cover;
+    border:1px solid var(--cv2-linea); border-radius:6px; margin-top:2px;
+  }
+  .pv-cierre-foto[hidden]{ display:none }
+
   .pv-oculto{
     position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
     white-space:nowrap;
@@ -809,7 +817,11 @@
             <p class="pv-g-explica" data-explica="correa"></p>
           </div>
           <div class="pv-g" data-g="cierre">
-            <p class="pv-g-cab"><span>Cierre</span><span class="pv-g-valor" data-valor="cierre">Pendiente</span></p>
+            <p class="pv-g-cab"><span>Cierre</span><span class="pv-g-valor" data-valor="cierre"></span></p>
+            <div class="pv-opciones" data-pv="cierre"></div>
+            <!-- LA FOTO DEL CIERRE ELEGIDO. Es la del proveedor, recortada
+                 para dejar fuera su rótulo y su marca de agua. -->
+            <img class="pv-cierre-foto" data-pv-cierre-foto alt="" hidden>
             <p class="pv-g-explica" data-explica="cierre"></p>
           </div>
         </section>
@@ -1123,7 +1135,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=20';
+  var SERIE_V = '?v=21';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1157,7 +1169,7 @@
          ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', cristal: 'MIN', correa: 'ACERO' };
+            caja: 'PL', cristal: 'MIN', correa: 'ACERO', cierre: 'MARI' };
 
 
   /* ============================================================
@@ -1452,6 +1464,38 @@
       else for (var d in v) hazlo(v[d], g);
     }
   }
+
+  /* ---------- LOS CINCO CIERRES (Óscar, 29/08/2026) ----------
+     Los dictó por su nombre de taller —«tipo omega», «tipo AP», «tipo
+     Rolex»—, que sirve para entendernos pero NO PUEDE SALIR EN LA WEB: el
+     pie de todas las páginas promete que laOra «no utiliza marcas, emblemas
+     o logotipos ajenos», y poner «desplegable tipo Rolex» en la ficha lo
+     desmiente en la misma pantalla. Así que se describen por lo que son.
+     Entre paréntesis queda el nombre con el que él los pidió.
+
+     ⚠️ TODAVÍA NO MUEVEN EL PRECIO NI LA REFERENCIA. Falta lo que cuesta
+     cada uno y cuál viene de serie con cada correa. Meterlos en la
+     referencia multiplicaría por cinco las 560 que hay, así que de momento
+     el cierre se elige, se ve y se escribe en la línea del carrito para que
+     el pedido diga cuál es, pero no se cobra aparte. */
+  var CIERRE_IMG = '/assets/img/lunar-2026/cierres/';
+  var CIERRES = {
+    /* 1 · «desplegable mariposa con hebilla clásica» */
+    MARI: { nombre: 'Mariposa con hebilla vista', mini: null,
+            tec: 'cierre de mariposa con la hebilla clásica a la vista' },
+    /* 2 · «desplegable mariposa tipo omega» */
+    MOCU: { nombre: 'Mariposa oculta', mini: 'mariposa-oculta',
+            tec: 'cierre de mariposa oculto, sin hebilla a la vista' },
+    /* 3 · «desplegable mariposa integrado tipo AP» */
+    MINT: { nombre: 'Mariposa integrada', mini: 'mariposa-integrada',
+            tec: 'cierre de mariposa integrado en el brazalete' },
+    /* 4 · «desplegable tipo Omega» */
+    DES2: { nombre: 'Desplegable de dos pulsadores', mini: 'desplegable-dos',
+            tec: 'cierre desplegable con dos pulsadores laterales' },
+    /* 5 · «desplegable tipo Rolex» */
+    DSEG: { nombre: 'Desplegable con seguro abatible', mini: 'desplegable-seguro',
+            tec: 'cierre desplegable con seguro abatible' }
+  };
 
   /* LA FOTO DEL PROVEEDOR DE CADA CORREA, la que sale de miniatura. El
      brazalete no tiene: de él sí se ve todo lo que hay que ver en el
@@ -1751,6 +1795,7 @@
     if (!BISELES[e.bisel]) e.bisel = Object.keys(BISELES)[0];
     if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
     if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
+    if (!CIERRES[e.cierre]) e.cierre = Object.keys(CIERRES)[0];
     if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
@@ -2080,11 +2125,22 @@
        y son de 20 mm, que es justo lo que mide el hueco entre las asas. El
        brazalete sigue con su desplegable. */
     var esAcero = matDe(e.correa) === 'ACERO';
-    rotula('cierre', esAcero ? 'Desplegable' : 'Mariposa',
-           esAcero
-             ? 'Cierre desplegable de acero inoxidable.'
-             : 'Cierre de mariposa, resistente al agua y a los golpes. ' +
-               'La correa mide 20 mm de ancho.');
+    botones('cierre', deTabla(CIERRES), e.cierre);
+    var ci = CIERRES[e.cierre];
+    rotula('cierre', ci.nombre,
+           ci.tec.charAt(0).toUpperCase() + ci.tec.slice(1) + '. ' +
+           (esAcero ? 'De acero inoxidable.'
+                    : 'Resistente al agua y a los golpes. La correa mide 20 mm ' +
+                      'de ancho.'));
+    var cf = $('[data-pv-cierre-foto]');
+    if (cf) {
+      cf.hidden = !ci.mini;
+      if (ci.mini) {
+        var csrc = CIERRE_IMG + ci.mini + '.avif' + SERIE_V;
+        if (cf.getAttribute('src') !== csrc) cf.setAttribute('src', csrc);
+        cf.alt = ci.nombre + ', foto del fabricante';
+      }
+    }
 
     entrega();
     modoDeCompra();
@@ -2497,8 +2553,12 @@
       laoraCarritoAnadir({
         ref: referencia(),
         nombre: 'Lunar',
+        /* EL CIERRE VA EN EL DETALLE aunque todavía no esté en la
+           referencia: si no, el pedido no diría cuál lleva. */
         detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esf].nombre.toLowerCase() +
-                 ' · bisel ' + BISELES[e.bisel].nombre.toLowerCase() + ' · ' + MOVS[e.mov].nombre,
+                 ' · bisel ' + BISELES[e.bisel].nombre.toLowerCase() +
+                 ' · cierre ' + CIERRES[e.cierre].nombre.toLowerCase() +
+                 ' · ' + MOVS[e.mov].nombre,
         correa: CORREAS[e.correa].nombre,
         precio: precio(),
         foto: (function () { var i = $('[data-pv-foto]'); return i.hidden ? '' : i.src; })()
