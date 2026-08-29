@@ -380,18 +380,29 @@
 <script src="/assets/js/carrito.js?v=11"></script>
 <script>
 /* ============================================================
-   LAS PIEZAS DEL LUNAR 2026
+   LAS PIEZAS DEL LUNAR · LO-03 · 2026
    ============================================================
    Aquí solo hay PIEZAS: movimientos, cajas, biseles, esferas, agujas,
    correas, cierres, cristales, los paquetes del proveedor con sus costes
-   y las capas con las que se dibuja. Ni una línea de cómo funciona el
+   y las capas con las que se dibuja. Ni una línea de CÓMO funciona el
    configurador: eso es de la casa y vive en
    `/assets/js/configurador-2026.js`, que se carga justo debajo y lo
    comparten los diez modelos.
 
-   Si algo de aquí hace falta en otro reloj, no se copia: se sube al motor
-   o a la biblioteca de componentes.
+   Si algo de aquí hace falta en otro reloj, no se copia: sube al motor o
+   a la biblioteca de componentes.
    ============================================================ */
+
+  /* EL MOVIMIENTO (Óscar, 27/08/2026): «el lunar solo tiene un mecanismo que
+     se denomina LO-MQ326, movimiento de mecacuarzo japonés». Uno solo, así
+     que el paso enseña un botón y ya está: se queda porque el día que haya
+     otro entra aquí y la ficha se entera sola. El coste sigue pendiente.
+
+     SE ESCRIBE CON GUION BAJO. Óscar lo escribió con guion y así lo puse,
+     pero el resto del sitio —la portada, la colección y la laOrateca— dice
+     `LO_MQ326`, y los demás calibres de la casa van igual: LO_Q6026,
+     LO_A4026, LO_A3826. Dos maneras de llamar a la misma pieza en la misma
+     tienda es un descuadre que acaba en un pedido mal leído. */
   var MOVS = {
     MQ: { nombre: 'Mecacuarzo japonés', cal: 'LO_MQ326', coste: 26.67,
           /* Texto de Óscar (28/08/2026). «mecánico» en minúscula, que es
@@ -400,6 +411,14 @@
           tec: 'Mecacuarzo japonés, calibre LO_MQ326: cronógrafo de tres ' +
                'contadores, aguja de barrido y fecha, con tacto mecánico.' }
   };
+  /* LA MEDIDA DE MUÑECA SALE DE LA REGLA DE LA CASA, no de una frase suelta.
+     `assets/js/carrito-pantalla.js` reparte así los diámetros:
+       · muñeca fina   (menos de 16 cm) .... 36 · 39 · 39,7
+       · muñeca normal (de 16 a 18 cm) ..... 36 · 39 · 39,7 · 40
+       · muñeca ancha  (más de 18 cm) ...... 40 · 41
+     Los 40 mm entran en normal y en ancha, y NO en fina. Si esa tabla cambia,
+     esta frase tiene que cambiar con ella: si no, la ficha diría una cosa y el
+     carrito otra sobre el mismo reloj. */
   var TAMANOS = {
     T40: { nombre: '40 mm', coste: 0,
            expl: 'Le va bien a una muñeca normal o ancha, de 16 cm en ' +
@@ -458,6 +477,8 @@
     BLA: { nombre: 'Blanco', coste: 0, tec: 'bisel de taquímetro blanco',
            expl: 'La misma escala de taquímetro, en blanco.' }
   };
+  /* Sólo cambian la horaria y el minutero: el segundero del cronógrafo y
+     los índices se quedan de acero salvo que una foto diga otra cosa. */
   var AGUJAS = {
     BLA: { nombre: 'Blancas',  coste: 0, tec: 'agujas blancas con lumen' },
     ORO: { nombre: 'Oro rosa', coste: 0,
@@ -472,6 +493,19 @@
     AZU: { nombre: 'Azules',   coste: 0,
            tec: 'horaria y minutero azulados con segundero de acero' }
   };
+  /* ---------- LAS CORREAS, DE LA BIBLIOTECA DE COMPONENTES ----------
+     Óscar, 29/08/2026: «las mismas correas para el Lunar me servirán para
+     el Trinchera, para el Cero Cero, etc., así será mucho menos material e
+     intercambiables; ahora será piel vaca italiana negra, y no un solo
+     modelo con toda la referencia para colocar una foto».
+
+     Las imágenes ya no viven en la carpeta del Lunar: viven en
+     `assets/img/componentes/correas/` con el nombre de LA PIEZA, y de ahí
+     las coge cualquier modelo. Aquí solo se dice cuáles monta el Lunar,
+     cuánto cuestan y cómo se llaman de cara al cliente.
+
+     `pieza` es el nombre en la biblioteca. El código corto de la izquierda
+     es lo que viaja en la referencia. */
   var CORREAS = {
     /* --- Acero 316L · ocho brazaletes ---
        Cuatro con el eslabón central SATINADO como el resto, y cuatro con el
@@ -543,6 +577,9 @@
     VGRI: { nombre: 'Gris', coste: null, pieza: 'vaquera-gris', tec: 'correa de tela vaquera de trama diagonal, gris, forrada en cuero coñac' },
     VAZU: { nombre: 'Azul claro', coste: null, pieza: 'vaquera-azul-claro', tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada en cuero coñac' }
   };
+  /* De qué familia es cada correa. Las familias son las once de la casa
+     ([[laora-familias-de-correa]]); aquí solo salen las que el Lunar monta
+     hoy, y el paso del material enseña solo esas. */
   var CORREA_MAT = {
     A316S: 'A316', A316NGS: 'A316', A316ORS: 'A316', A316AMS: 'A316',
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
@@ -569,6 +606,12 @@
               expl: 'Tela vaquera de trama diagonal por fuera y cuero coñac por ' +
                     'dentro, con cierre desplegable. 2,8 mm de grosor: la más fina.' }
   };
+
+  /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
+     Zafiro»). No se ve en la foto, así que NO entra en la clave de la
+     serie: el mismo AVIF vale para los dos. Sí entra en la referencia,
+     porque son dos productos distintos, y llevará precios distintos en
+     cuanto haya costes. */
   var CRISTALES = {
     /* Los dos textos son de Óscar, palabra por palabra (28/08/2026). */
     MIN: { nombre: 'Mineral', coste: 0, tec: 'cristal mineral',
@@ -585,13 +628,31 @@
            expl: 'Zafiro con antirreflejos por las dos caras: el cristal casi ' +
                  'desaparece y la esfera se lee como si no lo llevara.' }
   };
+  /* LA FECHA LA LLEVAN TODOS (Óscar, 27/08/2026). No se elige, así que va
+     escrita en la ficha y no en el configurador. ⚠️ Las dos fotos que había
+     publicadas —la esfera negra y la blanca con agujas plata— se hicieron
+     SIN ventanilla y hay que rehacerlas. */
   var FECHA = 'Ventanilla de fecha a las 4:30.';
   var LOGO = 3.78;
+  /* ⚠️ SERIE_V A MANO. El gancho de pre-commit sólo sube el del Trinchera.
+     Si se rehace una foto del Lunar con el MISMO nombre y no se sube esto,
+     Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
+     rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
+     cuando la de agujas azules se cambió por la de fondo azul marino. */
   var SERIE_V = '?v=31';
+  /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
+     cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
+       · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
+       · `acero-blanca-bnegro-naranja-brazalete` — las naranjas van con la
+         esfera NEGRA, no con la blanca, así que esta foto no cuadra con
+         ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
             caja: 'PL', cristal: 'MIN', correa: 'A316S', cierre: 'MARI' };
   var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
+  /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
+     capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
+     la elegida. */
   var CAPA = {
     caja:   { PL: '01-caja-acero', NG: '22-caja-pvd-negra' },
     bisel:  { NEG: '02-bisel-negro-taquimetro', AZU: '03-bisel-azul-taquimetro',
@@ -658,6 +719,14 @@
        cómo se llama la suya; `ficheroCapa` va a buscarla allí. */
     correa: null
   };
+  /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
+     haber tocado para que la pieza aparezca. La caja no espera a nadie.
+
+     `necesita` es otra cosa: la pieza no se dibuja si la de debajo no está
+     dibujada. Las agujas necesitan esfera. Hay agujas de sobra sin su
+     esfera —las de oro rosa sin la esfera de oro rosa, por ejemplo—, y sin
+     esta regla saldrían flotando sobre el agujero de la caja, que no parece
+     un reloj a medio montar sino un fallo. */
   var PILA = [
     { capa: 'correa', grupo: 'correa', espera: 'correa' },
     { capa: 'caja',   grupo: 'caja',   espera: null },
@@ -665,6 +734,24 @@
     { capa: 'esf',    grupo: 'esf',    espera: 'esf' },
     { capa: 'agujas', grupo: 'agujas', espera: 'agujas', necesita: 'esf' }
   ];
+
+  /* ---------- LOS CINCO CIERRES (Óscar, 29/08/2026) ----------
+     Los dictó por su nombre de taller —«tipo omega», «tipo AP», «tipo
+     Rolex»—, que sirve para entendernos pero NO PUEDE SALIR EN LA WEB: el
+     pie de todas las páginas promete que laOra «no utiliza marcas, emblemas
+     o logotipos ajenos», y poner «desplegable tipo Rolex» en la ficha lo
+     desmiente en la misma pantalla. Así que se describen por lo que son.
+     Entre paréntesis queda el nombre con el que él los pidió.
+
+     NO MUEVEN EL PRECIO, Y AHORA SE SABE POR QUÉ (Óscar, 29/08/2026: «las
+     hebillas todas van incluidas en las correas»). No es que falte el
+     dato: es que el cierre viene con la correa y no se cobra aparte.
+
+     ⚠️ PERO TAMPOCO ESTÁ EN LA REFERENCIA, y eso sí es una decisión
+     pendiente. Dos relojes iguales con distinto cierre llevan hoy la misma
+     referencia; el cierre sólo se escribe en la línea del carrito para que
+     el pedido diga cuál lleva. Meterlo en la referencia multiplicaría por
+     cinco las 560 que hay. */
   var CIERRE_IMG = '/assets/img/lunar-2026/cierres/';
   var CIERRES = {
     /* 1 · «desplegable mariposa con hebilla clásica» */
@@ -683,6 +770,24 @@
     DSEG: { nombre: 'Desplegable con seguro abatible', mini: 'desplegable-seguro',
             tec: 'cierre desplegable con seguro abatible' }
   };
+
+  /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
+     Una lista por correa, y se apilan en la esquina de abajo a la
+     izquierda en ese orden, la primera abajo. El brazalete no tiene
+     ninguna: de él sí se ve todo lo que hay que ver en el montaje.
+
+     LA PIEL LLEVA TRES (Óscar, 29/08/2026). Su color suelto, el interior
+     —forro oscuro perforado, que el montaje no puede contar— y la muñeca.
+
+     ⚠️ `piel-dentro` ES LA COÑAC y sale con las cuatro. Como detalle del
+     forro vale; el canto que se ve es coñac.
+
+     ⚠️ `piel-muneca` VA RECORTADA A PROPÓSITO. La foto original trae un
+     reloj entero puesto, y NO es un Lunar: es un buceador de esfera negra
+     con bisel de 60 minutos, calcado de uno muy conocido. Enseñar el reloj
+     de otro en la ficha del nuestro no se hace, así que el recorte se
+     queda con la correa en la muñeca y la cabeza se va fuera. De paso cae
+     el rótulo del proveedor, que cruzaba la esfera. */
   var MINI_IMG = '/assets/img/lunar-2026/correas/';
   var MINI = {
     CAZU: ['cazu'], CAZN: ['cazn'], CBLA: ['cbla'],
@@ -707,6 +812,8 @@
     PNEGT: ['piel-pneg', 'piel-dentro', 'piel-muneca'],
     PNEGB: ['piel-pneg', 'piel-dentro', 'piel-muneca']
   };
+  /* Lo que se lee en voz alta de cada foto. Las de color no están aquí: su
+     texto sale del nombre de la correa, que ya lo dice todo. */
   var MINI_ALT = {
     'piel-dentro': 'El interior de la correa de piel, forrado y perforado',
     'piel-muneca': 'La correa de piel puesta en la muñeca',
@@ -730,6 +837,19 @@
            ', ' + AGUJAS[e.agujas].tec + ' y ' + CORREAS[e.correa].tec;
   }
   function dichoCompleto(e) { return descripcion(e) + ' · ' + MOVS[e.mov].nombre; }
+  /* EL PROVEEDOR VENDE PAQUETES, NO DIMENSIONES SUELTAS (hoja de compra,
+     27/08/2026). La caja montada de 34,59 YA TRAE bisel, esfera y agujas
+     dentro, y sólo existe en las combinaciones que él monta. Repartir esos
+     34,59 entre cuatro casillas daría un precio inventado a cualquier
+     combinación que no venda: por eso el coste sale de ESTA TABLA y no de
+     una suma de piezas.
+
+     Y montar a piezas cuesta MÁS que comprarla montada —23,79 + 8,99 + 4,79
+     = 37,57 contra 34,59—, así que sólo se monta lo que no viene montado.
+     Hoy es una sola: bisel blanco con esfera de oro rosa.
+
+     La tabla manda también sobre los BOTONES: sólo se dibuja lo que aparece
+     aquí, en el orden esfera → bisel → agujas → caja → cristal. */
   var PAQUETES = [
     /* acero · mineral · caja montada ........................ 34,59 */
     { caja: 'PL', cristal: 'MIN', esf: 'NEG', bisel: 'NEG', agujas: 'BLA', coste: 34.59 },
@@ -772,15 +892,42 @@
     { caja: 'NG', cristal: 'MIN', esf: 'ORO', bisel: 'NEG', agujas: 'BLA', coste: 42.37 },
     { caja: 'NG', cristal: 'MIN', esf: 'PAN', bisel: 'NEG', agujas: 'BLA', coste: 42.37 }
   ];
+  /* LAS AGUJAS SE ELIGEN LIBRES (Óscar, 28/08/2026: «en cuanto a las agujas
+     déjame todas las opciones puestas por defecto, luego te diré yo las
+     combinaciones que no quiero»). Antes cada pareja bisel+esfera traía UN
+     juego de agujas y el paso no tenía nada que elegir; ahora salen los
+     cinco acabados con cualquier esfera y cualquier bisel, y la criba la
+     hace él.
+
+     ⚠️ EL COSTE SALE DEL PAQUETE SIN MIRAR LAS AGUJAS. En la hoja de compra
+     todas las cajas montadas de mineral valen lo mismo —34,59— lleven las
+     agujas que lleven, así que el color de las agujas no mueve el precio.
+     Es una suposición, no un dato: si el proveedor cobra distinto por unas
+     agujas, esto hay que rehacerlo. */
   var AGUJAS_LIBRES = true;
+  /* LAS PIEZAS DEL LUNAR. Vacías a propósito: el Lunar se rehace desde
+     cero (Óscar, 26/08/2026) y los costes del viejo no valen. Mientras
+     `COSTES_PUESTOS` sea falso la ficha NO enseña precio y no deja comprar,
+     que es la única manera honrada de tener la página en pie sin números.
+     En cuanto Óscar dé los costes se rellenan aquí y se pone a `true`. */
   var COSTES_PUESTOS = true;
+
+
+  /* ---------- LOS PASOS SE ABREN DE UNO EN UNO ----------
+     Igual que en el Trinchera: ninguna opción se ve hasta haber elegido la
+     anterior. Un paso sin nada que elegir no cuenta como cerrado. */
   var CADENA = ['mov', 'esf', 'caja', 'correa'];
 
   /* ---------- LO QUE EL MOTOR NECESITA SABER DEL LUNAR ----------
-     Todo lo de arriba son PIEZAS del Lunar. Aquí se le entregan al motor
-     de la casa, que es el que las monta. El motor se carga después y
-     arranca solo; si esta línea faltara, no haría nada en vez de romper. */
+     Todo lo de arriba son PIEZAS. Aquí se le entregan al motor de la casa,
+     que es quien las monta. El motor se carga después y arranca solo; si
+     esta línea faltara no haría nada, en vez de romper.
+
+     `slug` no es decorativo: con él el motor guarda la criba y las
+     combinaciones en el navegador con el nombre del modelo delante, para
+     que dos relojes no se pisen lo guardado. */
   window.LAORA_MODELO = {
+    slug: 'lunar', nombre: 'Lunar',
     MOVS: MOVS, TAMANOS: TAMANOS, MM: MM, CAJAS: CAJAS, ESFERAS: ESFERAS,
     BISELES: BISELES, AGUJAS: AGUJAS, CORREAS: CORREAS,
     CORREA_MAT: CORREA_MAT, MATERIALES: MATERIALES, CRISTALES: CRISTALES,

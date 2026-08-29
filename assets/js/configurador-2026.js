@@ -14,23 +14,27 @@
 
        <script>
          var MOVS = {...}, ESFERAS = {...};      // lo del modelo
-         window.LAORA_MODELO = { MOVS: MOVS, ESFERAS: ESFERAS, … };
+         window.LAORA_MODELO = { slug: 'lunar', MOVS: MOVS, … };
        </script>
        <script src="/assets/js/configurador-2026.js"></script>
 
    QUÉ PONE EL MODELO Y QUÉ PONE EL MOTOR. El modelo pone las PIEZAS
    —movimientos, cajas, biseles, esferas, agujas, correas, cierres,
    cristales—, los PAQUETES del proveedor con sus costes, las CAPAS con
-   las que se dibuja, y cuatro frases suyas: la referencia, la
-   descripción, la resistencia al agua y el dicho completo.
+   las que se dibuja, su `slug` y su `nombre`, y cuatro frases suyas: la
+   referencia, la descripción, la resistencia al agua y el dicho completo.
 
    El motor pone TODO LO DEMÁS y es igual en los diez: los pasos que se
    abren de uno en uno, el montaje por capas, la foto de presentación
    hasta la primera elección, el precio desde el coste con su suelo, la
    barra de precio, las miniaturas de la correa, la criba y el carrito.
 
-   ⚠️ EL MOTOR NO SABE DE NINGÚN MODELO. Si aquí dentro aparece la palabra
-   «Lunar», algo se ha colado donde no toca.
+   ⚠️ UN SOLO ENVOLTORIO, y esto costó una tarde. Todo vive dentro del
+   `(function () {` que ya traía el configurador, y los alias del modelo se
+   declaran DENTRO de él. Al sacarlo de la ficha se probó a envolverlo en
+   otro IIFE con los alias fuera: las funciones quedaban en un ámbito y los
+   alias en otro, y el volcador veía `MOVS` pero no `precio`. Si hay que
+   añadir algo, va aquí dentro.
    ============================================================ */
 (function () {
   var M = window.LAORA_MODELO;
@@ -46,9 +50,14 @@
       CIERRES = M.CIERRES, CIERRE_IMG = M.CIERRE_IMG,
       MINI = M.MINI, MINI_IMG = M.MINI_IMG, MINI_ALT = M.MINI_ALT,
       PAQUETES = M.PAQUETES, AGUJAS_LIBRES = M.AGUJAS_LIBRES,
-      COSTES_PUESTOS = M.COSTES_PUESTOS, CADENA = M.CADENA,
-      PRESENTACION = M.PRESENTACION;
+      COSTES_PUESTOS = M.COSTES_PUESTOS, CADENA = M.CADENA;
   var e = M.e;
+
+  /* ⚠️ LO QUE SE GUARDA EN EL NAVEGADOR VA CON EL NOMBRE DEL MODELO
+     DELANTE. Eran tres llaves escritas a mano con «lunar» dentro: con el
+     motor compartido, el segundo modelo habría leído y pisado la criba y
+     las combinaciones del primero. */
+  var LLAVE = 'laora.' + (M.slug || 'modelo') + '.';
 
   /* Las cuatro frases que solo sabe decir el modelo. */
   function referencia() { return M.referencia(e); }
@@ -56,25 +65,6 @@
   function descripcion() { return M.descripcion(e); }
   function dichoCompleto() { return M.dichoCompleto(e); }
 
-(function () {
-  /* ============================================================
-     EL LUNAR · el catálogo
-     ------------------------------------------------------------
-     Una sola configuración de momento, que es la base que dio Óscar el
-     26/08/2026. Todo lo que se añada entra AQUÍ, no en el HTML: los pasos
-     se dibujan solos desde estas tablas, igual que en el Trinchera.
-     ============================================================ */
-
-  /* EL MOVIMIENTO (Óscar, 27/08/2026): «el lunar solo tiene un mecanismo que
-     se denomina LO-MQ326, movimiento de mecacuarzo japonés». Uno solo, así
-     que el paso enseña un botón y ya está: se queda porque el día que haya
-     otro entra aquí y la ficha se entera sola. El coste sigue pendiente.
-
-     SE ESCRIBE CON GUION BAJO. Óscar lo escribió con guion y así lo puse,
-     pero el resto del sitio —la portada, la colección y la laOrateca— dice
-     `LO_MQ326`, y los demás calibres de la casa van igual: LO_Q6026,
-     LO_A4026, LO_A3826. Dos maneras de llamar a la misma pieza en la misma
-     tienda es un descuadre que acaba en un pedido mal leído. */
   /* El coste de la caja NO está aquí: va en PAQUETES, porque el proveedor
      la vende montada con bisel, esfera y agujas dentro. Aquí sólo viven el
      nombre y el material. */
@@ -82,20 +72,10 @@
      Hoy sólo hay uno, así que NO entra en la referencia: meterlo movería las
      54 que ya se venden sin que cambie el reloj. El día que haya una segunda
      medida hay que meterlo, porque entonces sí serán dos productos. */
-  /* LA MEDIDA DE MUÑECA SALE DE LA REGLA DE LA CASA, no de una frase suelta.
-     `assets/js/carrito-pantalla.js` reparte así los diámetros:
-       · muñeca fina   (menos de 16 cm) .... 36 · 39 · 39,7
-       · muñeca normal (de 16 a 18 cm) ..... 36 · 39 · 39,7 · 40
-       · muñeca ancha  (más de 18 cm) ...... 40 · 41
-     Los 40 mm entran en normal y en ancha, y NO en fina. Si esa tabla cambia,
-     esta frase tiene que cambiar con ella: si no, la ficha diría una cosa y el
-     carrito otra sobre el mismo reloj. */
   /* Las azules son horaria y minutero AZULADOS; el segundero del
      cronógrafo y los índices siguen siendo de acero. De momento sólo hay
      foto con la esfera blanca y el bisel azul: el resto sale con el cartel
      hasta que se fotografíe. */
-  /* Sólo cambian la horaria y el minutero: el segundero del cronógrafo y
-     los índices se quedan de acero salvo que una foto diga otra cosa. */
   /* LAS CORREAS DE CAUCHO SON LAS DE LAS FOTOS (Óscar, 28/08/2026).
      Sustituyen a la lista de un solo color del 27/08 —negro, azul marino,
      marrón, gris, naranja y negro/azul celeste—, que se quedó sin ninguna
@@ -105,42 +85,16 @@
      https://es.aliexpress.com/item/1005008055142978.html). Venía de 12,99.
      Sigue siendo MÁS BARATO que el brazalete de 19,79, así que con correa
      el Lunar baja un escalón, y ahora dos. */
-  /* ---------- LAS CORREAS, DE LA BIBLIOTECA DE COMPONENTES ----------
-     Óscar, 29/08/2026: «las mismas correas para el Lunar me servirán para
-     el Trinchera, para el Cero Cero, etc., así será mucho menos material e
-     intercambiables; ahora será piel vaca italiana negra, y no un solo
-     modelo con toda la referencia para colocar una foto».
-
-     Las imágenes ya no viven en la carpeta del Lunar: viven en
-     `assets/img/componentes/correas/` con el nombre de LA PIEZA, y de ahí
-     las coge cualquier modelo. Aquí solo se dice cuáles monta el Lunar,
-     cuánto cuestan y cómo se llaman de cara al cliente.
-
-     `pieza` es el nombre en la biblioteca. El código corto de la izquierda
-     es lo que viaja en la referencia. */
 
   /* LA CORREA, EN DOS PASOS: material y color, como Tesla parte el
      exterior en color y llantas. El estado sigue siendo uno solo —`e.correa`—
      y el material se deduce de él; elegir material salta a la primera correa
      de ese material. */
-  /* De qué familia es cada correa. Las familias son las once de la casa
-     ([[laora-familias-de-correa]]); aquí solo salen las que el Lunar monta
-     hoy, y el paso del material enseña solo esas. */
   function matDe(c) { return CORREA_MAT[c] || 'A316'; }
   function primeraDe(mat) {
     var k = Object.keys(CORREAS).filter(function (c) { return matDe(c) === mat; });
     return k[0];
   }
-
-  /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
-     Zafiro»). No se ve en la foto, así que NO entra en la clave de la
-     serie: el mismo AVIF vale para los dos. Sí entra en la referencia,
-     porque son dos productos distintos, y llevará precios distintos en
-     cuanto haya costes. */
-  /* LA FECHA LA LLEVAN TODOS (Óscar, 27/08/2026). No se elige, así que va
-     escrita en la ficha y no en el configurador. ⚠️ Las dos fotos que había
-     publicadas —la esfera negra y la blanca con agujas plata— se hicieron
-     SIN ventanilla y hay que rehacerlas. */
 
   /* ⚠️ LAS FOTOS DEL LUNAR VAN CON SU FONDO PINTADO (Óscar, 27/08/2026:
      «vamos a poner el fondo como viene… en el azul y en el oro rosa, y
@@ -158,23 +112,12 @@
      La primera entró el 27/08/2026: la madre del Lunar, 4096² con alfa de
      verdad. La anterior se rechazó —fondo de damero PINTADO en los píxeles
      y 1.254 px— y Óscar la rehizo. */
-  /* ⚠️ SERIE_V A MANO. El gancho de pre-commit sólo sube el del Trinchera.
-     Si se rehace una foto del Lunar con el MISMO nombre y no se sube esto,
-     Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
-     rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
-     cuando la de agujas azules se cambió por la de fondo azul marino. */
   /* ⛔ AQUÍ VIVÍA `SERIE`: una foto por combinación entera, con la clave
      hecha de caja+esfera+bisel+agujas+correa. Se ha ido el 29/08/2026 por
      orden de Óscar —«no quiero que se guarde nada de fotos y combinaciones
      anteriores de ningún modelo, todo desde cero»—, y porque es justo lo
      contrario de montar por piezas: una foto por combinación son miles de
      imágenes para enseñar las mismas cinco piezas barajadas. */
-  /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
-     cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
-       · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
-       · `acero-blanca-bnegro-naranja-brazalete` — las naranjas van con la
-         esfera NEGRA, no con la blanca, así que esta foto no cuadra con
-         ninguna de las cuatro. */
 
 
   /* ============================================================
@@ -226,13 +169,13 @@
   var COMBIS = {};
   try {
     if (window.localStorage)
-      COMBIS = JSON.parse(window.localStorage.getItem('laora.lunar.combis') || '{}') || {};
+      COMBIS = JSON.parse(window.localStorage.getItem(LLAVE + 'combis') || '{}') || {};
   } catch (x) { COMBIS = {}; }
   function guardaCombis() {
     recanon();
     try {
       if (window.localStorage)
-        window.localStorage.setItem('laora.lunar.combis', JSON.stringify(COMBIS));
+        window.localStorage.setItem(LLAVE + 'combis', JSON.stringify(COMBIS));
     } catch (x) {}
   }
   /* Lo que ya está vetado deja de estar pendiente y se cae de la lista solo */
@@ -242,7 +185,7 @@
     if (toco) {
       try {
         if (window.localStorage)
-          window.localStorage.setItem('laora.lunar.combis', JSON.stringify(COMBIS));
+          window.localStorage.setItem(LLAVE + 'combis', JSON.stringify(COMBIS));
       } catch (x) {}
     }
   })();
@@ -260,12 +203,12 @@
   var APLICADAS = false;
   try {
     if (window.localStorage)
-      APLICADAS = window.localStorage.getItem('laora.lunar.aplicadas') === '1';
+      APLICADAS = window.localStorage.getItem(LLAVE + 'aplicadas') === '1';
   } catch (x) {}
   function guardaAplicadas() {
     try {
       if (window.localStorage)
-        window.localStorage.setItem('laora.lunar.aplicadas', APLICADAS ? '1' : '0');
+        window.localStorage.setItem(LLAVE + 'aplicadas', APLICADAS ? '1' : '0');
     } catch (x) {}
   }
 
@@ -350,17 +293,6 @@
      cliente elige —caja, bisel, esfera, agujas, correa—, cada una su
      imagen, y ninguna foto pertenece a una combinación entera. */
   var CAPAS = true;
-  /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
-     capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
-     la elegida. */
-  /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
-     haber tocado para que la pieza aparezca. La caja no espera a nadie.
-
-     `necesita` es otra cosa: la pieza no se dibuja si la de debajo no está
-     dibujada. Las agujas necesitan esfera. Hay agujas de sobra sin su
-     esfera —las de oro rosa sin la esfera de oro rosa, por ejemplo—, y sin
-     esta regla saldrían flotando sobre el agujero de la caja, que no parece
-     un reloj a medio montar sino un fallo. */
 
   /* SE PRECARGAN TODAS DE GOLPE. Cambiar el `src` de un <img> lo deja en
      blanco mientras baja el fichero nuevo, y en un carrusel eso es un
@@ -370,7 +302,7 @@
   /* El fichero de una opción: o es un nombre, o es una tabla con una copia
      por esfera y `'*'` de comodín. */
   function ficheroCapa(grupo, valor, esf) {
-    /* LA CORREA SALE DE LA BIBLIOTECA, no de la tabla del Lunar: es una
+    /* LA CORREA SALE DE LA BIBLIOTECA, no de la tabla del modelo: es una
        pieza compartida y se llama por lo que es. */
     if (grupo === 'correa') {
       var c = CORREAS[valor];
@@ -384,7 +316,7 @@
     return v[esf || e.esf] || v['*'] || null;
   }
   /* De qué carpeta sale cada pieza. Las correas ya están en la biblioteca
-     de componentes; las demás siguen en la del Lunar hasta que lleguen
+     de componentes; las demás siguen en la carpeta del modelo hasta que lleguen
      rehechas, que es lo que Óscar dijo el 29/08: se rehace todo. */
   var COMPONENTE_IMG = '/assets/img/componentes/';
   function baseCapa(grupo) {
@@ -416,44 +348,6 @@
     for (var c in CORREAS) if (CORREAS[c].pieza) hazlo(CORREAS[c].pieza, 'correa');
   }
 
-  /* ---------- LOS CINCO CIERRES (Óscar, 29/08/2026) ----------
-     Los dictó por su nombre de taller —«tipo omega», «tipo AP», «tipo
-     Rolex»—, que sirve para entendernos pero NO PUEDE SALIR EN LA WEB: el
-     pie de todas las páginas promete que laOra «no utiliza marcas, emblemas
-     o logotipos ajenos», y poner «desplegable tipo Rolex» en la ficha lo
-     desmiente en la misma pantalla. Así que se describen por lo que son.
-     Entre paréntesis queda el nombre con el que él los pidió.
-
-     NO MUEVEN EL PRECIO, Y AHORA SE SABE POR QUÉ (Óscar, 29/08/2026: «las
-     hebillas todas van incluidas en las correas»). No es que falte el
-     dato: es que el cierre viene con la correa y no se cobra aparte.
-
-     ⚠️ PERO TAMPOCO ESTÁ EN LA REFERENCIA, y eso sí es una decisión
-     pendiente. Dos relojes iguales con distinto cierre llevan hoy la misma
-     referencia; el cierre sólo se escribe en la línea del carrito para que
-     el pedido diga cuál lleva. Meterlo en la referencia multiplicaría por
-     cinco las 560 que hay. */
-
-  /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
-     Una lista por correa, y se apilan en la esquina de abajo a la
-     izquierda en ese orden, la primera abajo. El brazalete no tiene
-     ninguna: de él sí se ve todo lo que hay que ver en el montaje.
-
-     LA PIEL LLEVA TRES (Óscar, 29/08/2026). Su color suelto, el interior
-     —forro oscuro perforado, que el montaje no puede contar— y la muñeca.
-
-     ⚠️ `piel-dentro` ES LA COÑAC y sale con las cuatro. Como detalle del
-     forro vale; el canto que se ve es coñac.
-
-     ⚠️ `piel-muneca` VA RECORTADA A PROPÓSITO. La foto original trae un
-     reloj entero puesto, y NO es un Lunar: es un buceador de esfera negra
-     con bisel de 60 minutos, calcado de uno muy conocido. Enseñar el reloj
-     de otro en la ficha del nuestro no se hace, así que el recorte se
-     queda con la correa en la muñeca y la cabeza se va fuera. De paso cae
-     el rótulo del proveedor, que cruzaba la esfera. */
-  /* Lo que se lee en voz alta de cada foto. Las de color no están aquí: su
-     texto sale del nombre de la correa, que ya lo dice todo. */
-
   /* ---------- LA PRECARGA, POR ESFERA ----------
      Cambiar el `src` de un <img> lo deja en blanco mientras baja el fichero
      nuevo, y en un configurador eso es un parpadeo en cada pulsación, así
@@ -483,13 +377,13 @@
   }
 
   /* ---------- MIENTRAS NADIE HA ELEGIDO NADA ----------
-     Óscar, 29/08/2026: «la página laora.es/lunar arranca con la primera
+     Óscar, 29/08/2026: «la página del modelo arranca con la primera
      imagen así hasta que el cliente escoja su primera elección de
      componentes».
 
      Es la misma regla del 28/08 —ningún botón sale señalado hasta que se
      pulsa— llevada a la foto: si el cliente no ha decidido nada, la ficha
-     no tiene ningún reloj concreto que enseñar, así que enseña EL Lunar, el
+     no tiene ningún reloj concreto que enseñar, así que enseña EL reloj, el
      de la foto de presentación, y no una caja desnuda ni el cartel de
      «fotografía en preparación».
 
@@ -632,32 +526,7 @@
      pero así el orden de las tarjetas, el del carrusel y el de la regla
      dicen todos lo mismo. Con bisel negro quedan cuatro esferas; con azul,
      una; con blanco, dos. */
-  /* EL PROVEEDOR VENDE PAQUETES, NO DIMENSIONES SUELTAS (hoja de compra,
-     27/08/2026). La caja montada de 34,59 YA TRAE bisel, esfera y agujas
-     dentro, y sólo existe en las combinaciones que él monta. Repartir esos
-     34,59 entre cuatro casillas daría un precio inventado a cualquier
-     combinación que no venda: por eso el coste sale de ESTA TABLA y no de
-     una suma de piezas.
-
-     Y montar a piezas cuesta MÁS que comprarla montada —23,79 + 8,99 + 4,79
-     = 37,57 contra 34,59—, así que sólo se monta lo que no viene montado.
-     Hoy es una sola: bisel blanco con esfera de oro rosa.
-
-     La tabla manda también sobre los BOTONES: sólo se dibuja lo que aparece
-     aquí, en el orden esfera → bisel → agujas → caja → cristal. */
   /* El paquete de una combinación, o null si el proveedor no la monta. */
-  /* LAS AGUJAS SE ELIGEN LIBRES (Óscar, 28/08/2026: «en cuanto a las agujas
-     déjame todas las opciones puestas por defecto, luego te diré yo las
-     combinaciones que no quiero»). Antes cada pareja bisel+esfera traía UN
-     juego de agujas y el paso no tenía nada que elegir; ahora salen los
-     cinco acabados con cualquier esfera y cualquier bisel, y la criba la
-     hace él.
-
-     ⚠️ EL COSTE SALE DEL PAQUETE SIN MIRAR LAS AGUJAS. En la hoja de compra
-     todas las cajas montadas de mineral valen lo mismo —34,59— lleven las
-     agujas que lleven, así que el color de las agujas no mueve el precio.
-     Es una suposición, no un dato: si el proveedor cobra distinto por unas
-     agujas, esto hay que rehacerlo. */
   function paqueteDe(s) {
     s = s || e;
     var i, p;
@@ -759,11 +628,6 @@
     var porciento = margen > 0 ? queda * cn / margen : 0;
     return sube990(Math.max(porEuros, porciento));
   }
-  /* LAS PIEZAS DEL LUNAR. Vacías a propósito: el Lunar se rehace desde
-     cero (Óscar, 26/08/2026) y los costes del viejo no valen. Mientras
-     `COSTES_PUESTOS` sea falso la ficha NO enseña precio y no deja comprar,
-     que es la única manera honrada de tener la página en pie sin números.
-     En cuanto Óscar dé los costes se rellenan aquí y se pone a `true`. */
   /* EL COSTE, DEL PAQUETE MÁS LO QUE SE LE AÑADE. Devuelve `null` cuando no
      se sabe —una combinación que el proveedor no monta, o una correa sin
      coste—, y entonces la ficha no enseña precio ni deja comprar. */
@@ -807,11 +671,6 @@
   function precio() {
     return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste()));
   }
-
-
-  /* ---------- LOS PASOS SE ABREN DE UNO EN UNO ----------
-     Igual que en el Trinchera: ninguna opción se ve hasta haber elegido la
-     anterior. Un paso sin nada que elegir no cuenta como cerrado. */
   /* EL MOVIMIENTO YA VIENE SEÑALADO (Óscar, 27/08/2026). El Lunar sólo
      tiene el LO_MQ326: pedirle al cliente que pulse el único botón que hay
      es hacerle perder un paso. Se deja marcado de entrada, con su calibre
@@ -1101,12 +960,12 @@
   var CRIBA = {};
   try {
     if (window.localStorage)
-      CRIBA = JSON.parse(window.localStorage.getItem('laora.lunar.criba') || '{}') || {};
+      CRIBA = JSON.parse(window.localStorage.getItem(LLAVE + 'criba') || '{}') || {};
   } catch (x) { CRIBA = {}; }
   function guardaCriba() {
     try {
       if (window.localStorage)
-        window.localStorage.setItem('laora.lunar.criba', JSON.stringify(CRIBA));
+        window.localStorage.setItem(LLAVE + 'criba', JSON.stringify(CRIBA));
     } catch (x) {}
   }
   function clave(tipo, a, b) { return tipo + ':' + a + '|' + b; }
@@ -1132,7 +991,7 @@
     var esferas = Object.keys(ESFERAS), agujas = Object.keys(AGUJAS);
     var html =
       '<button type="button" class="pv-criba-cierra" data-criba-cierra>Cerrar</button>' +
-      '<h2>Criba del Lunar</h2>' +
+      '<h2>Criba del ' + M.nombre + '</h2>' +
       '<p>Marca lo que <b>no puede ser</b>. Lo marcado se queda a la vista, ' +
       'apagado en el configurador, y sigue aquí hasta que lo desmarques. ' +
       'Cuando termines, cópiame la lista de abajo.</p>';
@@ -1525,18 +1384,11 @@
   /* ---------- LA PUERTA DE SERVICIO ----------
      `herramientas/volcar_catalogo_2026.js` ejecuta este motor FUERA del
      navegador para calcular las tres mil referencias del catálogo, y
-     necesita alcanzar sus tripas.
-
-     Hasta el 29/08/2026 el volcador se las apañaba metiéndole por su
-     cuenta un exportador al principio del IIFE y confiando en el
-     hoisting. Con el motor dentro de la ficha funcionaba; en cuanto salió
-     a su propio fichero dejó de ver las funciones —los `var` sí, las
-     `function` no— y el volcado se paraba con «costes is not defined».
-
-     Inyectar código en un fichero ajeno adivinando dónde empieza su
-     ámbito es frágil por definición. Así que el motor lo dice él: aquí
-     está lo que expone, con nombre y apellidos. Si mañana el volcador
-     necesita algo más, se añade a esta lista y se ve en el diff.
+     necesita alcanzar sus tripas. Antes se las apañaba inyectándole un
+     exportador y confiando en el hoisting; adivinar dónde empieza el
+     ámbito de un fichero ajeno es frágil por definición, así que ahora el
+     motor dice él lo que expone, con nombre y apellidos y a la vista en
+     el diff.
 
      No es una API pública: es una puerta de servicio para la casa. */
   window.__LAORA_MOTOR = {
@@ -1548,5 +1400,5 @@
     PAQUETES: PAQUETES, COSTES_PUESTOS: COSTES_PUESTOS, MM: MM,
     AGUJAS_LIBRES: AGUJAS_LIBRES
   };
-})();
+
 })();
