@@ -57,7 +57,11 @@ def filas_de_asa(caja):
     543,7 a 1.060,9. Es el contrato con el que se publican las piezas
     (`herramientas/publicar_componente.py`), no una medida a ojo."""
     escala = caja.shape[1] / 4096.0
-    IZQ, DER = 1392 * escala, 2716 * escala
+    # ⚠️ LA CAJA ENCOGIÓ UN 3 %% EL 29/08/2026 (Óscar: la correa de 20 mm
+    # manda y es la misma para todos los relojes; lo que se ajusta es la
+    # caja). Las asas de 1392–2716 pasaron a 1412–2696, encogidas
+    # alrededor del eje 2047,5. El hueco queda en 1284 px.
+    IZQ, DER = 1411.7 * escala, 2696.0 * escala
     HOLGURA = 10
     out = []
     for y in range(caja.shape[0]):

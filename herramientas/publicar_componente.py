@@ -59,7 +59,11 @@ GRUPOS = ('correas', 'cajas', 'biseles', 'esferas', 'agujas')
 TAMANOS = (480, 1200, 1600)
 PESO = {480: 9000, 1200: 34000, 1600: 46000}
 CALIDADES = (72, 68, 64, 60, 56, 52, 48, 44, 40)
-ASAS = (1392, 2716)
+# ⚠️ Desde el 29/08/2026 la caja del Lunar va encogida un 3 %% y sus asas
+# están en 1412–2696 (hueco 1284): LA CORREA DE 20 MM MANDA y la caja se
+# ajustó a ella, no al revés. Una correa nueva se dibuja a 20 mm
+# (1 mm = 65,4 px del original) y con eso SOBRA para el hueco.
+ASAS = (1412, 2696)
 
 
 def publica(grupo, ident, origen):
