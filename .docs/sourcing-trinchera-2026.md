@@ -293,12 +293,12 @@ envío gratis, entrega 05–10 SEP · devoluciones gratis 90 días.
 
 Leído del anuncio el 27/08/2026.
 
-### 🚫 No sirve para producción: UNA UNIDAD POR CLIENTE
+### ⚠️ El problema serio: UNA UNIDAD POR CLIENTE
 
 El anuncio dice, junto al botón de comprar: **«1 pieza(s) como máximo por
 cliente»**. No se puede pedir un lote. Para una caja suelta vale; para tener
-stock, no. **Esto lo descarta como proveedor de verdad mientras siga así**, por
-bueno que sea el precio.
+stock, no. **Hay que resolver esto con el vendedor antes de contar con él**,
+por bueno que sea lo que ofrece.
 
 ### Lo que trae, y lo que no
 
@@ -324,8 +324,11 @@ Murph» es en realidad otra cosa. Los dos ejes del anuncio son:
 | `steel-soild back` · `steel-glass back` | **acero**, tapa sólida o de cristal |
 | `steelP-soild back` · `steelP-glass back` | **acero pulido**, tapa sólida o de cristal |
 
-El satinado/pulido es de las variantes de **acero**, no del titanio. Y el
-titanio no tiene esa elección.
+Los sufijos `steel` y `steelP` distinguen **satinado y pulido**. Óscar, que
+está mirando las fotos, dice que **este proveedor sí tiene el bisel pulido** y
+que **tandorio sólo lo da satinado**. Eso importa más que el precio: **el Murph
+de verdad lleva el bisel pulido**, y hoy el Trinchera Murph se estaría montando
+con un bisel que no es el suyo.
 
 **Diámetro del dial** — cuatro opciones: `36mm NH`, `36mm ETA PT`, `39mm NH`,
 `39mm ETA PT`. Es el **asiento del movimiento**, NH35 contra ETA/PT, no la
@@ -347,7 +350,7 @@ Verificar la variante exacta antes de pedir.
 | `1005010605313493` · **tandorio** | 45,16 € | caja **+ esfera 29 mm + agujas** · 20 ATM | Su anuncio marcaba 8,17 € con la variante por defecto: sin aclarar. |
 | **`1005011632967463`** · GRAYSS | **41,19 €** | **sólo la caja** · zafiro AR · 20 ATM | **Una unidad por cliente.** |
 
-### 🚫 Y aun sin ese límite, no sale más barato
+### Cuesta más, pero no se compra por el precio
 
 El de tandorio son 45,16 € **con esfera y agujas dentro**. Éste es sólo la
 caja, así que hay que sumarle la esfera del Khaki, 16,25 €:
@@ -374,6 +377,36 @@ Medido con el volcador, con los costes reales y el suelo al 5 %:
 
 Los 3,97 € se los come el redondeo al 9,90: el precio no se mueve y la
 diferencia entera se va al margen.
+
+### ✅ La decisión (Óscar, 27/08/2026)
+
+**«Déjalo anotado; de momento empezaremos con tandorio y calcularemos los
+precios de venta con ellos.»**
+
+Así que el coste del titanio que va al motor sigue siendo **45,16 €**, el de
+tandorio, tal y como ya dice el encargo de precios. GRAYSS se queda apuntado,
+sin usar, para cuando toque revisar el bisel del Murph.
+
+### Los precios del titanio con tandorio
+
+Con los costes reales y el suelo al 5 %, las **1.656 referencias de titanio**
+del Trinchera quedan así:
+
+| PVP | Referencias |
+|--:|--:|
+| 279,90 € | 320 |
+| 289,90 € | 360 |
+| 299,90 € | 100 |
+| 309,90 € | 32 |
+| 319,90 € | 16 |
+| 349,90 € | 192 |
+| 359,90 € | 424 |
+| 369,90 € | 164 |
+| 389,90 € | 32 |
+| 399,90 € | 16 |
+
+La más barata —cuarzo, 36 mm, nato— sale a **279,90 €** y deja **89,13 €
+limpios pagando por Klarna, un 31,8 %**. Muy por encima de la regla nº1.
 
 ### Lo que falta
 
