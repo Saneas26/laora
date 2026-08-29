@@ -439,16 +439,48 @@
      salía a pantalla completa tapando el reloj. Le pasa a todo lo que se
      mete dentro del marco —el forro y la miniatura de la tapa llevan el
      mismo aviso en producto-2026.css—. */
+  /* LA PILA, de abajo arriba. La piel enseña tres fotos —el color, el
+     interior y la muñeca— y el caucho una, así que la caja crece sola con
+     lo que le echen. `flex-direction:column-reverse` para que la primera
+     de la lista sea la de abajo: es la esquina que mira el ojo. */
+  /* ⚠️ SE LLAMA `pv-pila-correa` Y NO `pv-minis` A PROPÓSITO. `.pv-minis`
+     YA EXISTE en producto-2026.css y es del TRINCHERA: sus miniaturas de
+     tapa y hebilla, en fila, abajo a la DERECHA y de 140 px. Al estrenar
+     esta pila con ese nombre heredó su `right:12px` y su
+     `align-items:flex-end`, y las tres fotos se fueron al filo derecho,
+     encima del reloj y medio fuera del marco. Se veía tapado porque aquí
+     se pisaba regla por regla; con que la hoja compartida cambie una, se
+     rompe otra vez. Nombre propio y se acabó.
+     Y también por eso lleva `right:auto`: con left y right a la vez la
+     caja se estira de lado a lado. */
+  .pv-hero .pv-pila-correa{
+    position:absolute; left:16px; right:auto; bottom:16px; z-index:4;
+    display:flex; flex-direction:column-reverse; align-items:flex-start;
+    gap:8px; pointer-events:none;
+  }
+  .pv-hero .pv-pila-correa[hidden]{ display:none }
+  /* EN EL MÓVIL, EN FILA Y MÁS PEQUEÑAS. En columna, tres miniaturas son
+     dos tercios de la altura del marco y se plantan encima del reloj —se vio
+     en el móvil de 375, tapando el asa y media correa—. En fila por abajo
+     son 208 px de ancho sobre 335 y sólo 64 de alto: dejan el reloj entero.
+     `row` y no `row-reverse`, que aquí la primera de la lista va a la
+     izquierda igual que arriba iba abajo. */
+  @media (max-width:900px){
+    .pv-hero .pv-pila-correa{ flex-direction:row; align-items:flex-end }
+    .pv-hero img.pv-mini-correa{ width:64px !important; height:64px !important }
+  }
   .pv-hero img.pv-mini-correa{
-    position:absolute; left:16px; bottom:16px; z-index:4;
-    width:118px; height:118px; object-fit:cover;
+    display:block; width:104px; height:104px; object-fit:cover;
     border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
     box-shadow:0 4px 14px rgba(18,20,20,.12);
-    opacity:0; transform:translateY(8px); pointer-events:none;
+    opacity:0; transform:translateY(8px);
     transition:opacity .3s, transform .3s;
   }
-  .pv-hero img.pv-mini-correa[hidden]{ display:none }
-  .pv-hero img.pv-mini-correa.pv-mini-dentro{ opacity:1; transform:none }
+  /* ESCALONADAS, no todas a la vez: la de abajo entra primero. Con tres
+     fotos apareciendo de golpe el ojo no sabe dónde mirar. */
+  .pv-pila-dentro img.pv-mini-correa{ opacity:1; transform:none }
+  .pv-pila-dentro img.pv-mini-correa:nth-child(2){ transition-delay:.07s }
+  .pv-pila-dentro img.pv-mini-correa:nth-child(3){ transition-delay:.14s }
 
   /* ⛔ EL PRIMER INTENTO, sin miniatura, no podía funcionar (28/08/2026).
      La pidió para «ver más parte de la correa», se hizo, y al probarla dijo
@@ -696,11 +728,15 @@
           <span>El Lunar se está rehaciendo entero. Aquí no se enseña ninguna imagen hasta que sea la del reloj elegido.</span>
         </div>
         <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
-        <!-- LA MINIATURA DE LA CORREA (Óscar, 28/08/2026): «en la parte
+        <!-- LAS MINIATURAS DE LA CORREA (Óscar, 28/08/2026): «en la parte
              inferior izquierda colocas una miniatura». Es la foto del
              proveedor, la correa suelta y entera, que es lo que el montaje
-             no puede enseñar: sus capas acaban en el borde del lienzo. -->
-        <img class="pv-mini-correa" data-pv-mini alt="" hidden>
+             no puede enseñar: sus capas acaban en el borde del lienzo.
+
+             DE UNA A VARIAS el 29/08/2026: «miniatura cuando se elija esa
+             piel, que se añade a la que ya sale». Las pinta `repasaVisor()`
+             con lo que diga MINI. -->
+        <div class="pv-pila-correa" data-pv-pila-correa hidden></div>
       </div>
 
       <!-- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO (Óscar, 28/08/2026):
@@ -1156,7 +1192,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=23';
+  var SERIE_V = '?v=24';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1526,21 +1562,38 @@
             tec: 'cierre desplegable con seguro abatible' }
   };
 
-  /* LA FOTO DEL PROVEEDOR DE CADA CORREA, la que sale de miniatura. El
-     brazalete no tiene: de él sí se ve todo lo que hay que ver en el
-     montaje.
+  /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
+     Una lista por correa, y se apilan en la esquina de abajo a la
+     izquierda en ese orden, la primera abajo. El brazalete no tiene
+     ninguna: de él sí se ve todo lo que hay que ver en el montaje.
 
-     LA PIEL ENSEÑA EL INTERIOR (Óscar, 29/08/2026: «cada vez que salga
-     elegida ponemos esta miniatura como detalle del interior de la
-     correa»). Es lo que el montaje no puede contar: por dentro la piel va
-     forrada en oscuro y perforada, y el canto en el color de la correa.
-     ⚠️ LA FOTO ES DE LA COÑAC y sale igual con las cuatro. Vale como
-     detalle del acabado, pero el canto que se ve es coñac: si se quiere
-     exacto por color, hacen falta las otras tres fotos. */
+     LA PIEL LLEVA TRES (Óscar, 29/08/2026). Su color suelto, el interior
+     —forro oscuro perforado, que el montaje no puede contar— y la muñeca.
+
+     ⚠️ `piel-dentro` ES LA COÑAC y sale con las cuatro. Como detalle del
+     forro vale; el canto que se ve es coñac.
+
+     ⚠️ `piel-muneca` VA RECORTADA A PROPÓSITO. La foto original trae un
+     reloj entero puesto, y NO es un Lunar: es un buceador de esfera negra
+     con bisel de 60 minutos, calcado de uno muy conocido. Enseñar el reloj
+     de otro en la ficha del nuestro no se hace, así que el recorte se
+     queda con la correa en la muñeca y la cabeza se va fuera. De paso cae
+     el rótulo del proveedor, que cruzaba la esfera. */
   var MINI_IMG = '/assets/img/lunar-2026/correas/';
-  var MINI = { CAZU: 'cazu', CAZN: 'cazn', CBLA: 'cbla',
-               CMAC: 'cmac', CNVF: 'cnvf',
-               PCAQ: 'piel', PCON: 'piel', PMAR: 'piel', PNEG: 'piel' };
+  var MINI = {
+    CAZU: ['cazu'], CAZN: ['cazn'], CBLA: ['cbla'],
+    CMAC: ['cmac'], CNVF: ['cnvf'],
+    PCAQ: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
+    PCON: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
+    PMAR: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
+    PNEG: ['piel-pneg', 'piel-dentro', 'piel-muneca']
+  };
+  /* Lo que se lee en voz alta de cada foto. Las de color no están aquí: su
+     texto sale del nombre de la correa, que ya lo dice todo. */
+  var MINI_ALT = {
+    'piel-dentro': 'El interior de la correa de piel, forrado y perforado',
+    'piel-muneca': 'La correa de piel puesta en la muñeca'
+  };
 
   /* ---------- LA PRECARGA, POR ESFERA ----------
      Cambiar el `src` de un <img> lo deja en blanco mientras baja el fichero
@@ -2443,19 +2496,71 @@
                   r.bottom > window.innerHeight * 0.15;
     var capas = $('[data-pv-capas]');
     if (capas) capas.classList.toggle('pv-capas-lejos', enJuego && CAPAS);
-    var mini = $('[data-pv-mini]');
-    if (!mini) return;
-    var f = MINI[e.correa];
-    mini.hidden = !f;
-    if (f) {
-      var src = MINI_IMG + f + '.avif' + SERIE_V;
-      if (mini.getAttribute('src') !== src) mini.setAttribute('src', src);
-      mini.alt = (f === 'piel'
-                    ? 'Interior de la correa de piel, perforada y forrada'
-                    : 'Correa ' + CORREAS[e.correa].nombre.toLowerCase()) +
+    pintaMinis(enJuego);
+  }
+
+  /* LAS MINIATURAS DE LA CORREA. Se rehacen sólo cuando cambia la lista:
+     tocar el `src` de una imagen que ya está puesta la deja en blanco
+     mientras vuelve a bajar, y aquí eso sería un parpadeo por cada
+     pulsación en el paso del color. */
+  var MINIS_PUESTAS = '';
+  function pintaMinis(enJuego) {
+    var caja = $('[data-pv-pila-correa]');
+    if (!caja) return;
+    var lista = MINI[e.correa] || [];
+    caja.hidden = !lista.length;
+    var firma = lista.join('|');
+    if (firma !== MINIS_PUESTAS) {
+      MINIS_PUESTAS = firma;
+      caja.innerHTML = '';
+      lista.forEach(function (f) {
+        var im = new Image();
+        im.className = 'pv-mini-correa';
+        im.src = MINI_IMG + f + '.avif' + SERIE_V;
+        im.alt = (MINI_ALT[f] ||
+                  'Correa ' + CORREAS[e.correa].nombre.toLowerCase()) +
                  ', foto del fabricante';
+        caja.appendChild(im);
+      });
     }
-    mini.classList.toggle('pv-mini-dentro', enJuego && !!f);
+    caja.classList.toggle('pv-pila-dentro', enJuego && !!lista.length);
+    apartaDeLoQueEstorbe(caja);
+  }
+
+  /* ⚠️ ESA ESQUINA ESTÁ OCUPADA POR DOS COSAS.
+
+     LA BARRA DE PRECIO, en escritorio: el marco es más alto que la
+     pantalla, así que su parte de abajo cae por debajo del filo y ahí es
+     donde la barra se queda pegada. La miniatura de abajo —la del color
+     elegido, la que más importa— desaparecía detrás del precio. Ya pasaba
+     con la miniatura suelta y no se vio porque una sola cabía por encima;
+     con tres se vio a la primera.
+
+     EL CARRUSEL, en el móvil: los botones ‹ › y el nombre del paso viven
+     abajo en medio del marco, y la fila de miniaturas les pasaba por
+     encima. No estorban a la pulsación —la pila lleva `pointer-events:
+     none`—, pero tapar un botón ya es motivo.
+
+     Ninguna de las dos se arregla con un número fijo: la barra mide
+     distinto según la pantalla y se apaga al llegar al pie, y el carrusel
+     va y viene. Se miden las dos y se aparta de la que más suba. */
+  function apartaDeLoQueEstorbe(caja) {
+    var hero = caja.closest('.pv-hero');
+    if (!hero) return;
+    var suelo = hero.getBoundingClientRect().bottom, hueco = 16;
+
+    function esquiva(el, margen) {
+      if (!el || el.hidden) return;
+      var r = el.getBoundingClientRect();
+      if (!r.height) return;
+      var solape = suelo - r.top;
+      if (solape > 0) hueco = Math.max(hueco, Math.round(solape) + margen);
+    }
+    var barra = $('[data-pv-barra]');
+    if (barra && !barra.classList.contains('pv-barra-fuera')) esquiva(barra, 12);
+    esquiva($('[data-pv-carrusel]'), 10);
+
+    caja.style.bottom = hueco + 'px';
   }
 
   /* NO SE DECIDE NADA HASTA QUE LA PÁGINA ESTÁ CUADRADA. Mientras las fotos
