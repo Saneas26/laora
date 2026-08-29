@@ -69,6 +69,12 @@ function motorDe(fichero, exporta) {
         if (k === 'classList') return { toggle() {}, add() {}, remove() {}, contains: () => false };
         if (k === 'dataset') return {};
         if (k === 'style') return {};
+        /* `getAttribute` devuelve cadena vacía, no el nodo: la ficha la
+           compara con la URL que va a poner —«si ya es ésta, no la
+           toques»— y devolver un nodo haría que nunca coincidiera. Faltaba,
+           y la ficha se paró entera al leer el `src` de la foto del cierre:
+           el volcador no falla con un aviso, revienta. */
+        if (k === 'getAttribute') return () => '';
         if (k === 'closest' || k === 'querySelector') return () => nodo;
         if (k === 'querySelectorAll') return () => [];
         if (['appendChild', 'addEventListener', 'setAttribute', 'scrollIntoView',
