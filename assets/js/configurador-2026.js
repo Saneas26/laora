@@ -516,6 +516,10 @@
     /* LA CORREA SALE DE LA BIBLIOTECA, no de la tabla del modelo: es una
        pieza compartida y se llama por lo que es. */
     if (grupo === 'correa') {
+      /* Y el nombre de la pieza puede depender de más de un paso —el
+         pespunte de la piel va en el mismo fichero que el color—, así que
+         si el modelo sabe armarlo, se le pregunta. */
+      if (M.piezaDe) return M.piezaDe(e);
       var c = CORREAS[valor];
       return c && c.pieza ? c.pieza : null;
     }

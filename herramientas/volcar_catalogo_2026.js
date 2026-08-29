@@ -491,9 +491,15 @@ function lunar() {
   for (const mov of Object.keys(L.MOVS))
   for (const p of L.PAQUETES)
   for (const agujas of (L.AGUJAS_LIBRES ? Object.keys(L.AGUJAS) : [p.agujas]))
-  for (const correa of Object.keys(L.CORREAS)) {
+  for (const correa of Object.keys(L.CORREAS))
+  /* EL PESPUNTE, en las familias que lo eligen (29/08/2026). Es un paso más
+     de la ficha, así que el catálogo tiene que enumerar lo mismo: si no, el
+     cliente mete en el carrito una referencia que el servidor no conoce.
+     En las que no lo eligen, una sola vuelta. */
+  for (const pespunte of (L.M.CON_PESPUNTE_DE(correa) ? ['T', 'B'] : ['T'])) {
     e.mov = mov; e.caja = p.caja; e.cristal = p.cristal;
     e.esf = p.esf; e.bisel = p.bisel; e.agujas = agujas; e.correa = correa;
+    e.pespunte = pespunte;
     L.normaliza();
     if (L.vetada(L.firma())) continue;
     if (L.costes() === null) continue;

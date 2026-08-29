@@ -476,30 +476,35 @@
     CAZC: { nombre: 'Azul celeste', coste: null, pieza: 'caucho-azul-celeste', tec: 'correa de caucho azul celeste' },
     CBGR: { nombre: 'Blanca y gris', coste: null, pieza: 'caucho-blanca-gris', tec: 'correa de caucho blanca con gris' },
 
-    /* --- Piel perforada · cuatro colores por dos pespuntes ---
-       ⚠️ EL COSTE DE 6,69 ES EL QUE ÓSCAR DIO PARA ESTA PIEL cuando eran
-       cuatro correas. Ahora cada color viene con el pespunte al tono y con
-       el pespunte blanco: es la misma piel del mismo proveedor, así que se
-       mantiene el precio. Si el pespunte blanco se cobra aparte, esto hay
-       que corregirlo. */
-    PCAQT: { nombre: 'Caqui oliva, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-caqui-oliva-pespunte-al-tono', tec: 'correa de piel perforada caqui oliva con pespunte al tono' },
-    PCAQB: { nombre: 'Caqui oliva, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-caqui-oliva-pespunte-blanco', tec: 'correa de piel perforada caqui oliva con pespunte blanco' },
-    PCONT: { nombre: 'Coñac y naranja, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-conac-naranja-pespunte-al-tono', tec: 'correa de piel perforada coñac y naranja con pespunte al tono' },
-    PCONB: { nombre: 'Coñac y naranja, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-conac-naranja-pespunte-blanco', tec: 'correa de piel perforada coñac y naranja con pespunte blanco' },
-    PMART: { nombre: 'Marrón, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-marron-pespunte-al-tono', tec: 'correa de piel perforada marrón con pespunte al tono' },
-    PMARB: { nombre: 'Marrón, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-marron-pespunte-blanco', tec: 'correa de piel perforada marrón con pespunte blanco' },
-    PNEGT: { nombre: 'Negra, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-negra-pespunte-al-tono', tec: 'correa de piel perforada negra con pespunte al tono' },
-    PNEGB: { nombre: 'Negra, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-negra-pespunte-blanco', tec: 'correa de piel perforada negra con pespunte blanco' },
+    /* --- Piel perforada y piel italiana: cuatro colores cada una ---
+       EL PESPUNTE ES UN PASO APARTE desde el 29/08/2026 (Óscar: «añade
+       pespunte siempre en todos los modelos con correa de piel italiana»).
+       Antes eran ocho correas por familia —cada color con su pespunte
+       dentro— y el paso del color tenía ocho botones para cuatro pieles.
 
-    /* --- Piel italiana hecha a mano · cuatro colores por dos pespuntes --- */
-    IMART: { nombre: 'Marrón, pespunte al tono', coste: null, pieza: 'piel-italiana-marron-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, marrón, con pespunte al tono' },
-    IMARB: { nombre: 'Marrón, pespunte blanco', coste: null, pieza: 'piel-italiana-marron-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, marrón, con pespunte blanco' },
-    INEGT: { nombre: 'Negra, pespunte al tono', coste: null, pieza: 'piel-italiana-negra-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, negra, con pespunte al tono' },
-    INEGB: { nombre: 'Negra, pespunte blanco', coste: null, pieza: 'piel-italiana-negra-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, negra, con pespunte blanco' },
-    IVERT: { nombre: 'Verde, pespunte al tono', coste: null, pieza: 'piel-italiana-verde-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, verde, con pespunte al tono' },
-    IVERB: { nombre: 'Verde, pespunte blanco', coste: null, pieza: 'piel-italiana-verde-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, verde, con pespunte blanco' },
-    IAZUT: { nombre: 'Azul, pespunte al tono', coste: null, pieza: 'piel-italiana-azul-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, azul, con pespunte al tono' },
-    IAZUB: { nombre: 'Azul, pespunte blanco', coste: null, pieza: 'piel-italiana-azul-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, azul, con pespunte blanco' },
+       ⚠️ LA REFERENCIA NO CAMBIA. Sigue viajando el código de siempre
+       —`PCAQT`, `PCAQB`— porque el color y el pespunte se juntan al
+       escribirla. Una referencia emitida esta mañana se resuelve igual.
+
+       ⚠️ EL COSTE DE 6,69 ES EL QUE ÓSCAR DIO PARA ESTA PIEL. Es la misma
+       del mismo proveedor con el pespunte en otro color: si el blanco se
+       cobrara aparte, esto hay que corregirlo. */
+    PCAQ: { nombre: 'Caqui oliva', coste: 6.69, pieza: 'piel-perforada-caqui-oliva',
+            tec: 'correa de piel perforada caqui oliva' },
+    PCON: { nombre: 'Coñac y naranja', coste: 6.69, pieza: 'piel-perforada-conac-naranja',
+            tec: 'correa de piel perforada coñac y naranja' },
+    PMAR: { nombre: 'Marrón', coste: 6.69, pieza: 'piel-perforada-marron',
+            tec: 'correa de piel perforada marrón' },
+    PNEG: { nombre: 'Negra', coste: 6.69, pieza: 'piel-perforada-negra',
+            tec: 'correa de piel perforada negra' },
+    IMAR: { nombre: 'Marrón', coste: null, pieza: 'piel-italiana-marron',
+            tec: 'correa de piel italiana hecha a mano, marrón' },
+    INEG: { nombre: 'Negra', coste: null, pieza: 'piel-italiana-negra',
+            tec: 'correa de piel italiana hecha a mano, negra' },
+    IVER: { nombre: 'Verde', coste: null, pieza: 'piel-italiana-verde',
+            tec: 'correa de piel italiana hecha a mano, verde' },
+    IAZU: { nombre: 'Azul', coste: null, pieza: 'piel-italiana-azul',
+            tec: 'correa de piel italiana hecha a mano, azul' },
 
     /* --- Tela vaquera · cinco colores ---
        20 mm de ancho, 18 en el cierre, 2,8 de grosor, trama diagonal por
@@ -518,12 +523,18 @@
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
     CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
-    PCAQT: 'PPER', PCAQB: 'PPER', PCONT: 'PPER', PCONB: 'PPER',
-    PMART: 'PPER', PMARB: 'PPER', PNEGT: 'PPER', PNEGB: 'PPER',
-    IMART: 'PITA', IMARB: 'PITA', INEGT: 'PITA', INEGB: 'PITA',
-    IVERT: 'PITA', IVERB: 'PITA', IAZUT: 'PITA', IAZUB: 'PITA',
+    PCAQ: 'PPER', PCON: 'PPER', PMAR: 'PPER', PNEG: 'PPER',
+    IMAR: 'PITA', INEG: 'PITA', IVER: 'PITA', IAZU: 'PITA',
     VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA', VGRI: 'TELA', VAZU: 'TELA'
   };
+  /* LOS DOS PESPUNTES. `sufijo` es lo que se le añade al nombre de la
+     pieza en la biblioteca, y `ref` lo que viaja pegado al color en la
+     referencia para que no cambie ninguna de las ya emitidas. */
+  var PESPUNTES = { T: { nombre: 'Al tono', sufijo: '-pespunte-al-tono', ref: 'T' },
+                    B: { nombre: 'Blanco',  sufijo: '-pespunte-blanco',  ref: 'B' } };
+  /* Las familias que lo eligen. Las demás no enseñan el paso. */
+  var CON_PESPUNTE = { PPER: 1, PITA: 1 };
+
   var MATERIALES = {
     A316:   { nombre: 'Acero 316L',
               expl: 'Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable.' },
@@ -581,7 +592,7 @@
          ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', cristal: 'MIN', correa: 'A316S', cierre: 'MARI' };
+            caja: 'PL', cristal: 'MIN', correa: 'A316S', pespunte: 'T', cierre: 'MARI' };
   var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
   /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
      capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
@@ -756,9 +767,25 @@
   };
 
   /* ---------- LA REFERENCIA ---------- */
+  /* EL NOMBRE DE LA PIEZA en la biblioteca: el de la correa más el sufijo
+     del pespunte, si esa familia lo elige. */
+  function piezaDe(e) {
+    var c = CORREAS[e.correa];
+    if (!c || !c.pieza) return null;
+    return c.pieza + (CON_PESPUNTE[matDeCorrea(e.correa)]
+      ? PESPUNTES[e.pespunte].sufijo : '');
+  }
+  function matDeCorrea(c) { return CORREA_MAT[c] || 'A316'; }
+
   function referencia(e) {
+    /* ⚠️ EL PESPUNTE SE PEGA AL COLOR, no va aparte. Las pieles se
+       vendieron esta mañana como `PCAQT` y `PCAQB`; partirlas en dos pasos
+       es cosa de la pantalla, no del pedido. Una referencia emitida antes
+       tiene que seguir resolviéndose. */
+    var correa = e.correa + (CON_PESPUNTE[matDeCorrea(e.correa)]
+      ? PESPUNTES[e.pespunte].ref : '');
     return 'LO-03-' + e.mov + '-' + e.caja + e.cristal + '-' + e.esf + '-' +
-           e.bisel + '-' + e.agujas + '-' + e.correa;
+           e.bisel + '-' + e.agujas + '-' + correa;
   }
   function agua(e) { return '5 ATM / 50 metros'; }
 
@@ -921,6 +948,18 @@
        caucho llevan «hebilla/cierre mariposa resistente al agua y a golpes»
        y son de 20 mm, que es justo lo que mide el hueco entre las asas. El
        brazalete sigue con su desplegable. */
+    /* EL PESPUNTE, solo en las familias que lo eligen. */
+    var conPesp = !!CON_PESPUNTE[matDe(e.correa)];
+    var gPesp = $('[data-g="pespunte"]');
+    if (gPesp) gPesp.hidden = !conPesp;
+    if (conPesp) {
+      botones('pespunte', deTabla(PESPUNTES), e.pespunte);
+      rotula('pespunte', PESPUNTES[e.pespunte].nombre,
+             'Pespunte ' + PESPUNTES[e.pespunte].nombre.toLowerCase() + '.');
+    } else {
+      $('[data-pv="pespunte"]').innerHTML = '';
+    }
+
     var esAcero = matDe(e.correa) === 'A316';
     botones('cierre', deTabla(CIERRES), e.cierre);
     var ci = CIERRES[e.cierre];
@@ -1031,7 +1070,9 @@
     CAPA: CAPA, CAPA_IMG: CAPA_IMG, PILA: PILA,
     CIERRES: CIERRES, CIERRE_IMG: CIERRE_IMG,
     MINI: MINI, MINI_IMG: MINI_IMG, MINI_ALT: MINI_ALT,
-    PAQUETES: PAQUETES, AGUJAS_LIBRES: AGUJAS_LIBRES,
+    PAQUETES: PAQUETES, AGUJAS_LIBRES: AGUJAS_LIBRES, piezaDe: piezaDe,
+    /* Para el volcador: si esta correa elige pespunte, hay dos referencias. */
+    CON_PESPUNTE_DE: function (c) { return !!CON_PESPUNTE[matDeCorrea(c)]; },
     COSTES_PUESTOS: COSTES_PUESTOS, CADENA: CADENA,
     e: e,
     pintaPasos: pintaPasos, normaliza: normaliza, detalle: detalle,
