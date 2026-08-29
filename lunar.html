@@ -1067,16 +1067,20 @@
             tec: 'correa de caucho blanca' },
     /* LAS CUATRO DE PIEL (Óscar, 29/08/2026). Piel rally perforada, con su
        hebilla incluida como todas.
-       ⚠️ SIN COSTE DE COMPRA TODAVÍA: se eligen y se montan, pero el precio
-       dice «por definir» y no se venden, igual que le pasó al PVD hasta que
-       él dio los números. */
-    PCAQ: { nombre: 'Piel caqui oliva', coste: null,
+
+       6,69 LA MÁS BARATA DE LAS TRES (Óscar, 29/08/2026). Se queda por
+       debajo del caucho —9,89— y a un tercio del brazalete, así que con
+       piel el Lunar baja otro escalón: es la combinación más barata que
+       hay. Que la piel salga más barata que el caucho suena raro y no lo
+       es: la de caucho lleva hebilla de acero maciza y molde propio, y
+       estas son piel cosida con una hebilla fina. */
+    PCAQ: { nombre: 'Piel caqui oliva', coste: 6.69,
             tec: 'correa de piel rally perforada, caqui oliva' },
-    PCON: { nombre: 'Piel coñac y naranja', coste: null,
+    PCON: { nombre: 'Piel coñac y naranja', coste: 6.69,
             tec: 'correa de piel rally perforada, coñac con naranja' },
-    PMAR: { nombre: 'Piel marrón', coste: null,
+    PMAR: { nombre: 'Piel marrón', coste: 6.69,
             tec: 'correa de piel rally perforada, marrón' },
-    PNEG: { nombre: 'Piel negra', coste: null,
+    PNEG: { nombre: 'Piel negra', coste: 6.69,
             tec: 'correa de piel rally perforada, negra' }
   };
 
@@ -1152,7 +1156,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=22';
+  var SERIE_V = '?v=23';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1524,10 +1528,19 @@
 
   /* LA FOTO DEL PROVEEDOR DE CADA CORREA, la que sale de miniatura. El
      brazalete no tiene: de él sí se ve todo lo que hay que ver en el
-     montaje. */
+     montaje.
+
+     LA PIEL ENSEÑA EL INTERIOR (Óscar, 29/08/2026: «cada vez que salga
+     elegida ponemos esta miniatura como detalle del interior de la
+     correa»). Es lo que el montaje no puede contar: por dentro la piel va
+     forrada en oscuro y perforada, y el canto en el color de la correa.
+     ⚠️ LA FOTO ES DE LA COÑAC y sale igual con las cuatro. Vale como
+     detalle del acabado, pero el canto que se ve es coñac: si se quiere
+     exacto por color, hacen falta las otras tres fotos. */
   var MINI_IMG = '/assets/img/lunar-2026/correas/';
   var MINI = { CAZU: 'cazu', CAZN: 'cazn', CBLA: 'cbla',
-               CMAC: 'cmac', CNVF: 'cnvf' };
+               CMAC: 'cmac', CNVF: 'cnvf',
+               PCAQ: 'piel', PCON: 'piel', PMAR: 'piel', PNEG: 'piel' };
 
   /* ---------- LA PRECARGA, POR ESFERA ----------
      Cambiar el `src` de un <img> lo deja en blanco mientras baja el fichero
@@ -2437,7 +2450,9 @@
     if (f) {
       var src = MINI_IMG + f + '.avif' + SERIE_V;
       if (mini.getAttribute('src') !== src) mini.setAttribute('src', src);
-      mini.alt = 'Correa ' + CORREAS[e.correa].nombre.toLowerCase() +
+      mini.alt = (f === 'piel'
+                    ? 'Interior de la correa de piel, perforada y forrada'
+                    : 'Correa ' + CORREAS[e.correa].nombre.toLowerCase()) +
                  ', foto del fabricante';
     }
     mini.classList.toggle('pv-mini-dentro', enJuego && !!f);
