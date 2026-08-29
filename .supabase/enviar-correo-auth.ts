@@ -338,13 +338,34 @@ Deno.serve(async (req) => {
   const marca = marcaDe(destino);
   const t = textoDe(d.email_action_type, marca);
 
-  /* La confirmación se pide SIEMPRE al servidor de Supabase, que es
-     quien sabe del token; `redirect_to` es a dónde va el cliente
-     después. En «reauthentication» no hay enlace, solo código. */
+  /* ---------- A DÓNDE LLEVA EL BOTÓN ----------
+     EN LAORA, A UNA PÁGINA DE LA CASA, no a la puerta de Supabase.
+
+     La puerta de Supabase canjea la llave en cuanto se ABRE el enlace, y
+     Outlook y Hotmail tienen un escáner que abre los enlaces de cada
+     correo antes de entregarlo: la llave llegaba muerta, y con ella el
+     código de seis cifras, que es la misma. Le pasó a Óscar el
+     29/08/2026 dándose de alta desde otro teléfono con una cuenta de
+     Hotmail: «el botón no hace nada y el código tampoco».
+
+     `laora.es/entrar` enseña un botón y canjea la llave cuando EL
+     CLIENTE lo pulsa (token_hash por POST). Un escáner carga la página
+     pero no pulsa botones, así que la llave sobrevive.
+
+     LAS DEMÁS MARCAS SIGUEN CON EL ENLACE DIRECTO a propósito: la
+     página `/entrar` existe en laora.es y en ningún otro sitio, y
+     mandar a Activala a una página que no tiene sería dejarla sin
+     entrada. Cuando cada casa tenga la suya, se añade aquí su rama.
+
+     En «reauthentication» no hay enlace, solo código. */
   const enlace = d.email_action_type === 'reauthentication' ? '' :
-    `${API}/auth/v1/verify?token=${encodeURIComponent(d.token_hash)}` +
-    `&type=${encodeURIComponent(d.email_action_type)}` +
-    (destino ? `&redirect_to=${encodeURIComponent(destino)}` : '');
+    marca.id === 'laora'
+      ? `${marca.web}/entrar?llave=${encodeURIComponent(d.token_hash)}` +
+        `&tipo=${encodeURIComponent(d.email_action_type)}` +
+        (destino ? `&vuelve=${encodeURIComponent(destino)}` : '')
+      : `${API}/auth/v1/verify?token=${encodeURIComponent(d.token_hash)}` +
+        `&type=${encodeURIComponent(d.email_action_type)}` +
+        (destino ? `&redirect_to=${encodeURIComponent(destino)}` : '');
 
   const envio = await fetch('https://api.resend.com/emails', {
     method: 'POST',

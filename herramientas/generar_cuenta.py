@@ -47,7 +47,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 V_CSS = 9
 V_JS = 12
 V_FACTURA = 1
-V_SESION = 11
+V_SESION = 12
 LOGO = '/assets/img/lunar-v2/laora-wordmark-dark.png'
 
 VENTAJAS = [

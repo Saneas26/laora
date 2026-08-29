@@ -158,6 +158,43 @@
     return intento(0);
   }
 
+  /* ---------- ENTRAR CON LA LLAVE DEL CORREO ----------
+     El botón del correo ya no lleva a la puerta de Supabase: lleva a
+     `/entrar`, una página de la casa, y es la página quien canjea la
+     llave cuando EL CLIENTE pulsa.
+
+     POR QUÉ. El enlace directo se gasta al primer GET, y Outlook y
+     Hotmail tienen un escáner que abre los enlaces de cada correo antes
+     de entregarlo: la llave llegaba muerta, y con ella el código, que es
+     la misma. Le pasó a Óscar el 29/08/2026 dándose de alta desde otro
+     teléfono: «el botón no hace nada y el código tampoco». Un escáner
+     carga una página pero no pulsa botones, así que la llave sobrevive.
+
+     `tipo` es el motivo del correo (magiclink, signup…). Igual que en
+     `entrarConCodigo`, desde fuera no se sabe seguro cuál era, así que
+     si el que viene falla se prueban los demás. */
+  function entrarConLlave(llave, tipo) {
+    var tipos = [tipo, 'magiclink', 'signup', 'email'].filter(function (t, i, a) {
+      return t && a.indexOf(t) === i;
+    });
+
+    function intento(i) {
+      if (i >= tipos.length) throw new Error('llave');
+      return fetch(URL_SB + '/auth/v1/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: ANONIMA },
+        body: JSON.stringify({ type: tipos[i], token_hash: String(llave || '').trim() })
+      }).then(function (r) {
+        if (!r.ok) return intento(i + 1);
+        return r.json().then(function (s) {
+          if (!s || !s.access_token) return intento(i + 1);
+          return guardar(s);
+        });
+      });
+    }
+    return intento(0);
+  }
+
   /* Una llamada a la base con la sesión puesta. `tabla` puede llevar
      el filtro de PostgREST: `socios?select=*`. */
   function consultar(tabla, opciones) {
@@ -223,6 +260,7 @@
     quienSoy: quienSoy,
     pedirEnlace: pedirEnlace,
     entrarConCodigo: entrarConCodigo,
+    entrarConLlave: entrarConLlave,
     consultar: consultar,
     escribir: escribir,
     salir: salir

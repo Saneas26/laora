@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Entra en tu cuenta de laOra.">
+<meta name="robots" content="noindex, nofollow">
+<title>Entrar · laOra</title>
+<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+<!-- ============================================================
+     LA PUERTA DEL CORREO · /entrar
+     ============================================================
+     Aquí llega el botón del correo de entrada. ANTES el botón iba
+     directo a la puerta de Supabase, que canjea la llave en cuanto se
+     abre el enlace; y Outlook y Hotmail tienen un escáner que abre los
+     enlaces de cada correo antes de entregarlo, así que la llave
+     llegaba muerta —y con ella el código de seis cifras, que es la
+     misma—. Le pasó a Óscar el 29/08/2026 dándose de alta desde otro
+     teléfono con una cuenta de Hotmail: «el botón no hace nada y el
+     código tampoco».
+
+     Esta página no canjea nada al cargar: enseña UN botón y canjea
+     cuando el CLIENTE lo pulsa. Un escáner carga la página, no pulsa
+     el botón, y la llave sobrevive.
+
+     Llega con tres datos en la dirección:
+       llave   el token_hash del correo
+       tipo    el motivo (magiclink, signup…), orientativo
+       vuelve  a dónde ir al entrar (por defecto, /cuenta)
+     Los pone la Edge Function `enviar-correo-auth` al armar el correo.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
+<link rel="stylesheet" href="/assets/css/cuenta.css?v=9">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
+</header>
+
+<main class="cu-cuerpo">
+  <div class="cu-caja" style="text-align:center">
+    <h1>Ya casi<br><em>estás dentro.</em></h1>
+
+    <div data-paso-boton>
+      <p class="cu-entrada">Pulsa el botón y entras en tu cuenta. Sin contraseña.</p>
+      <form class="cu-form" data-form-entrar>
+        <button class="cu-enviar" type="submit" data-boton-entrar>Entrar en mi cuenta</button>
+        <p class="cu-aviso" data-aviso hidden></p>
+      </form>
+    </div>
+
+    <div data-paso-mal hidden>
+      <p class="cu-entrada" data-mal-texto></p>
+      <p><a class="cu-enviar" style="display:inline-block;text-decoration:none;padding:16px 28px" href="/cuenta">Pedir otro enlace</a></p>
+    </div>
+
+    <p class="cu-legal">Si no has pedido tú este enlace, cierra esta página y no ocurre nada.</p>
+  </div>
+</main>
+
+<script src="/assets/js/sesion.js?v=12"></script>
+<script>
+(function () {
+  'use strict';
+  var q = new URLSearchParams(location.search);
+  var llave = q.get('llave') || '';
+  var tipo = q.get('tipo') || '';
+  /* `vuelve` solo puede ser un camino de ESTA casa: viene escrito en un
+     correo, y un correo se puede falsificar. Con una dirección completa
+     alguien podría fabricar un enlace de laora.es que acabara en su web. */
+  var vuelve = q.get('vuelve') || '/cuenta';
+  try { vuelve = new URL(vuelve, location.origin).pathname || '/cuenta'; }
+  catch (e) { vuelve = '/cuenta'; }
+
+  var boton = document.querySelector('[data-boton-entrar]');
+  var aviso = document.querySelector('[data-aviso]');
+  var pasoBoton = document.querySelector('[data-paso-boton]');
+  var pasoMal = document.querySelector('[data-paso-mal]');
+  var malTexto = document.querySelector('[data-mal-texto]');
+
+  function mal(texto) {
+    pasoBoton.hidden = true;
+    pasoMal.hidden = false;
+    malTexto.textContent = texto;
+  }
+
+  if (!llave) {
+    mal('A este enlace le falta la llave. Pide otro y te llega un correo nuevo.');
+    return;
+  }
+
+  document.querySelector('[data-form-entrar]').addEventListener('submit', function (e) {
+    e.preventDefault();
+    boton.disabled = true;
+    aviso.textContent = 'Un momento…';
+    aviso.hidden = false;
+    laoraSesion.entrarConLlave(llave, tipo).then(function () {
+      aviso.textContent = 'Dentro. Te llevamos a tu cuenta…';
+      location.replace(vuelve);
+    }).catch(function () {
+      /* La llave vale una hora y una sola vez. Si no vale, el camino
+         que SIEMPRE funciona es pedir otro correo. */
+      mal('Este enlace ya no vale: caduca a la hora y sirve una sola vez. ' +
+          'Pide otro y entras con el correo nuevo.');
+    });
+  });
+})();
+</script>
+</body>
+</html>
