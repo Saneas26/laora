@@ -93,7 +93,33 @@
     lineas.forEach(function (l, i) {
       var li = el('li', 'ca-linea');
 
-      if (l.foto) {
+      /* ---------- EL RELOJ QUE ELEGISTE, DELANTE ----------
+         Óscar, 29/08/2026: «cuando va al carrito para ver cómo es el reloj
+         que ha elegido, recordarlo, no está, no existe».
+
+         Desde que el reloj se arma por piezas ya no hay una foto del
+         conjunto, y la línea llegaba con `foto` vacía: el hueco se quedaba
+         en blanco y el cliente tenía que fiarse del texto. Pero la ficha
+         manda `capas` —correa, caja, bisel, esfera y agujas, en orden de
+         montaje—, así que aquí se apilan igual que en el configurador y el
+         cliente ve EXACTAMENTE el reloj que armó, no una captura ni una
+         foto parecida. Las capas ya están en la caché del navegador: las
+         bajó la propia ficha al elegirlas, así que esto no pide nada nuevo. */
+      if (l.capas && l.capas.length) {
+        var monta = el('div', 'ca-montaje');
+        l.capas.forEach(function (src) {
+          var capa = document.createElement('img');
+          capa.src = src;
+          capa.alt = '';
+          capa.loading = 'lazy';
+          monta.appendChild(capa);
+        });
+        /* El alt del conjunto va en el envoltorio: las capas sueltas no
+           significan nada por separado. */
+        monta.setAttribute('role', 'img');
+        monta.setAttribute('aria-label', l.nombre || 'Reloj laOra');
+        li.appendChild(monta);
+      } else if (l.foto) {
         var img = document.createElement('img');
         img.src = l.foto;
         img.alt = l.nombre || 'Reloj laOra';
