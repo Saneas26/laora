@@ -1064,7 +1064,20 @@
     CNVF: { nombre: 'Caucho negro y verde flúor', coste: 9.89,
             tec: 'correa de caucho negra con verde flúor' },
     CBLA: { nombre: 'Caucho blanco', coste: 9.89,
-            tec: 'correa de caucho blanca' }
+            tec: 'correa de caucho blanca' },
+    /* LAS CUATRO DE PIEL (Óscar, 29/08/2026). Piel rally perforada, con su
+       hebilla incluida como todas.
+       ⚠️ SIN COSTE DE COMPRA TODAVÍA: se eligen y se montan, pero el precio
+       dice «por definir» y no se venden, igual que le pasó al PVD hasta que
+       él dio los números. */
+    PCAQ: { nombre: 'Piel caqui oliva', coste: null,
+            tec: 'correa de piel rally perforada, caqui oliva' },
+    PCON: { nombre: 'Piel coñac y naranja', coste: null,
+            tec: 'correa de piel rally perforada, coñac con naranja' },
+    PMAR: { nombre: 'Piel marrón', coste: null,
+            tec: 'correa de piel rally perforada, marrón' },
+    PNEG: { nombre: 'Piel negra', coste: null,
+            tec: 'correa de piel rally perforada, negra' }
   };
 
   /* LA CORREA, EN DOS PASOS: material y color, como Tesla parte el
@@ -1073,12 +1086,16 @@
      de ese material. */
   var CORREA_MAT = { ACERO: 'ACERO', ACERONG: 'ACERO',
                      CAZU: 'CAUCHO', CAZN: 'CAUCHO',
-                     CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO' };
+                     CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
+                     PCAQ: 'PIEL', PCON: 'PIEL', PMAR: 'PIEL', PNEG: 'PIEL' };
   var MATERIALES = {
     ACERO:  { nombre: 'Acero',  expl: 'Brazalete de acero inoxidable 316L con ' +
                                       'cierre desplegable.' },
     CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
-                                      'el único que se puede mojar sin pensarlo.' }
+                                      'el único que se puede mojar sin pensarlo.' },
+    PIEL:   { nombre: 'Piel',   expl: 'Piel rally perforada, la de siempre para un ' +
+                                      'cronógrafo. Se ablanda con el uso, pero no ' +
+                                      'se moja.' }
   };
   function matDe(c) { return CORREA_MAT[c] || 'ACERO'; }
   function primeraDe(mat) {
@@ -1135,7 +1152,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=21';
+  var SERIE_V = '?v=22';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1412,7 +1429,11 @@
               CAZN:  '18-correa-caucho-azul-naranja',
               CBLA:  '19-correa-caucho-blanca',
               CMAC:  '20-correa-caucho-marron-crema',
-              CNVF:  '21-correa-caucho-negra-verde-fluor' }
+              CNVF:  '21-correa-caucho-negra-verde-fluor',
+              PCAQ:  '25-correa-piel-rally-caqui-oliva',
+              PCON:  '26-correa-piel-rally-conac-naranja',
+              PMAR:  '27-correa-piel-rally-marron',
+              PNEG:  '28-correa-piel-rally-negra' }
   };
   /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
      haber tocado para que la pieza aparezca. La caja no espera a nadie.
@@ -1473,15 +1494,19 @@
      desmiente en la misma pantalla. Así que se describen por lo que son.
      Entre paréntesis queda el nombre con el que él los pidió.
 
-     ⚠️ TODAVÍA NO MUEVEN EL PRECIO NI LA REFERENCIA. Falta lo que cuesta
-     cada uno y cuál viene de serie con cada correa. Meterlos en la
-     referencia multiplicaría por cinco las 560 que hay, así que de momento
-     el cierre se elige, se ve y se escribe en la línea del carrito para que
-     el pedido diga cuál es, pero no se cobra aparte. */
+     NO MUEVEN EL PRECIO, Y AHORA SE SABE POR QUÉ (Óscar, 29/08/2026: «las
+     hebillas todas van incluidas en las correas»). No es que falte el
+     dato: es que el cierre viene con la correa y no se cobra aparte.
+
+     ⚠️ PERO TAMPOCO ESTÁ EN LA REFERENCIA, y eso sí es una decisión
+     pendiente. Dos relojes iguales con distinto cierre llevan hoy la misma
+     referencia; el cierre sólo se escribe en la línea del carrito para que
+     el pedido diga cuál lleva. Meterlo en la referencia multiplicaría por
+     cinco las 560 que hay. */
   var CIERRE_IMG = '/assets/img/lunar-2026/cierres/';
   var CIERRES = {
     /* 1 · «desplegable mariposa con hebilla clásica» */
-    MARI: { nombre: 'Mariposa con hebilla vista', mini: null,
+    MARI: { nombre: 'Mariposa con hebilla vista', mini: 'mariposa-hebilla',
             tec: 'cierre de mariposa con la hebilla clásica a la vista' },
     /* 2 · «desplegable mariposa tipo omega» */
     MOCU: { nombre: 'Mariposa oculta', mini: 'mariposa-oculta',
