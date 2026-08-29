@@ -95,10 +95,6 @@
     "expl": "Tela vaquera de trama diagonal, forrada en cuero coñac por dentro."}
   ],
   "colores": [
-   {"id": "A316S",   "familia": "A316", "nombre": "Acero satinado", "coste": 19.79},
-   {"id": "A316NGS", "familia": "A316", "nombre": "PVD negro satinado", "coste": 20.60},
-   {"id": "A316ORS", "familia": "A316", "nombre": "Centro oro rosa satinado"},
-   {"id": "A316AMS", "familia": "A316", "nombre": "Centro oro amarillo satinado"},
    {"id": "A316P",   "familia": "A316", "nombre": "Acero, centro pulido", "coste": 20.19},
    {"id": "A316NGP", "familia": "A316", "nombre": "PVD negro, centro pulido", "coste": 20.19},
    {"id": "A316ORP", "familia": "A316", "nombre": "Centro oro rosa pulido", "coste": 20.19},

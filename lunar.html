@@ -440,18 +440,20 @@
      `pieza` es el nombre en la biblioteca. El código corto de la izquierda
      es lo que viaja en la referencia. */
   var CORREAS = {
-    /* --- Acero 316L · ocho brazaletes ---
-       Cuatro con el eslabón central SATINADO como el resto, y cuatro con el
-       central PULIDO. En cada familia: acero, PVD negro, centro en oro rosa
-       y centro en oro amarillo. */
-    A316S:   { nombre: 'Acero satinado', coste: 19.79, pieza: 'acero-316l-satinado',
-               tec: 'brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable' },
-    A316NGS: { nombre: 'PVD negro satinado', coste: 20.60, pieza: 'acero-316l-pvd-negro-satinado',
-               tec: 'brazalete de acero inoxidable 316L con PVD negro, satinado, con cierre desplegable' },
-    A316ORS: { nombre: 'Centro oro rosa satinado', coste: null, pieza: 'acero-316l-centro-oro-rosa-satinado',
-               tec: 'brazalete de acero inoxidable 316L con el eslabón central en oro rosa satinado' },
-    A316AMS: { nombre: 'Centro oro amarillo satinado', coste: null, pieza: 'acero-316l-centro-oro-amarillo-satinado',
-               tec: 'brazalete de acero inoxidable 316L con el eslabón central en oro amarillo satinado' },
+    /* --- Acero 316L · cuatro brazaletes ---
+       Acero, PVD negro, centro en oro rosa y centro en oro amarillo. Todos
+       con el eslabón central PULIDO.
+
+       ⚠️ SE FUERON LOS CUATRO SATINADOS (Óscar, 29/08/2026: «yo no quiero el
+       brazalete acero satinado, quita todos»). Eran los mismos cuatro con
+       el eslabón central sin pulir, y medido sobre las imágenes publicadas
+       el satinado y el pulido de acero se separaban DOS puntos de color
+       sobre 255: al cliente le llegaban como el mismo brazalete con dos
+       nombres. Dos de ellos —oro rosa y oro amarillo— además no tenían
+       coste de compra, así que ni se podían vender.
+
+       Con ellos se van sus cuatro imágenes de la biblioteca y las 160
+       referencias que ponían en el catálogo. */
     A316P:   { nombre: 'Acero, centro pulido', coste: 20.19, pieza: 'acero-316l-centro-pulido',
                tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el central pulido y cierre desplegable con seguro abatible' },
     A316NGP: { nombre: 'PVD negro, centro pulido', coste: 20.19, pieza: 'acero-316l-pvd-negro-centro-pulido',
@@ -519,7 +521,6 @@
      ([[laora-familias-de-correa]]); aquí solo salen las que el Lunar monta
      hoy, y el paso del material enseña solo esas. */
   var CORREA_MAT = {
-    A316S: 'A316', A316NGS: 'A316', A316ORS: 'A316', A316AMS: 'A316',
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
     CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
@@ -583,7 +584,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=31';
+  var SERIE_V = '?v=32';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -592,7 +593,7 @@
          ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', cristal: 'MIN', correa: 'A316S', pespunte: 'T', cierre: 'MARI' };
+            caja: 'PL', cristal: 'MIN', correa: 'A316P', pespunte: 'T', cierre: 'MARI' };
   var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
   /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
      capa: ese paso se queda en blanco en vez de enseñar una pieza que no es

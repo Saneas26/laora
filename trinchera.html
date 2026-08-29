@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Trinchera de laOra: 6816 combinaciones, al precio honesto.">
+<meta name="description" content="Trinchera de laOra: 6624 combinaciones, al precio honesto.">
 <title>Trinchera · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -339,24 +339,6 @@
       }
     },
     "correa": {
-      "A316S": {
-        "nombre": "Acero satinado",
-        "coste": 19.79,
-        "familia": "A316"
-      },
-      "A316NGS": {
-        "nombre": "PVD negro satinado",
-        "coste": 20.6,
-        "familia": "A316"
-      },
-      "A316ORS": {
-        "nombre": "Centro oro rosa satinado",
-        "familia": "A316"
-      },
-      "A316AMS": {
-        "nombre": "Centro oro amarillo satinado",
-        "familia": "A316"
-      },
       "A316P": {
         "nombre": "Acero, centro pulido",
         "coste": 20.19,
@@ -521,7 +503,7 @@
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316S", "pespunte": "T", "cierre": "plata"};
+  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316P", "pespunte": "T", "cierre": "plata"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -632,7 +614,7 @@
   window.LAORA_MODELO = {
     slug: "trinchera", nombre: "Trinchera",
     OPCIONES: OPCIONES, e: e,
-    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"A316S": "A316", "A316NGS": "A316", "A316ORS": "A316", "A316AMS": "A316", "A316P": "A316", "A316NGP": "A316", "A316ORP": "A316", "A316AMP": "A316", "CAZU": "CAUCHO", "CAZN": "CAUCHO", "CMAC": "CAUCHO", "CNVF": "CAUCHO", "CBLA": "CAUCHO", "CNBL": "CAUCHO", "CBOR": "CAUCHO", "CNGR": "CAUCHO", "CAZC": "CAUCHO", "CBGR": "CAUCHO", "PCAQ": "PPER", "PCON": "PPER", "PMAR": "PPER", "PNEG": "PPER", "IMAR": "PITA", "INEG": "PITA", "IVER": "PITA", "IAZU": "PITA", "VBEI": "TELA", "VMAL": "TELA", "VNEG": "TELA", "VGRI": "TELA", "VAZU": "TELA"},
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"A316P": "A316", "A316NGP": "A316", "A316ORP": "A316", "A316AMP": "A316", "CAZU": "CAUCHO", "CAZN": "CAUCHO", "CMAC": "CAUCHO", "CNVF": "CAUCHO", "CBLA": "CAUCHO", "CNBL": "CAUCHO", "CBOR": "CAUCHO", "CNGR": "CAUCHO", "CAZC": "CAUCHO", "CBGR": "CAUCHO", "PCAQ": "PPER", "PCON": "PPER", "PMAR": "PPER", "PNEG": "PPER", "IMAR": "PITA", "INEG": "PITA", "IVER": "PITA", "IAZU": "PITA", "VBEI": "TELA", "VMAL": "TELA", "VNEG": "TELA", "VGRI": "TELA", "VAZU": "TELA"},
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
     /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
        paquetes no hay coste, así que la ficha dice «Precio por definir» y
