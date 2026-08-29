@@ -35,8 +35,27 @@ const ORIGEN = path.join(RAIZ, 'herramientas/volcar_catalogo_2026.js');
 function prepara() {
   let s = fs.readFileSync(ORIGEN, 'utf8');
   s = s.replace(/^const RAIZ = .*$/m, `const RAIZ = ${JSON.stringify(RAIZ)};`);
-  s = s.replace('codigo = codigo.replace(abre,',
-    "if (process.env.SUELO) codigo = codigo.replace(/var COMISION(_2026)? = 0\\.025/, (m, g) => 'var COMISION' + (g || '') + ' = ' + process.env.SUELO);\n  codigo = codigo.replace(abre,");
+  /* ⚠️ EL SUELO YA NO VIVE EN LA FICHA (29/08/2026): se fue a
+     `assets/js/precio-2026.js`, que comparten los diez modelos. Parchear
+     solo el cuerpo del configurador dejaba la constante intacta, las dos
+     pasadas salían idénticas y el auditor decía VERDE sin haber probado
+     nada. Se parchea TODO el fuente ensamblado, y si no aparece por
+     ningún lado se aborta: un verde que no ha medido nada es peor que no
+     tener auditor. */
+  s = s.replace('const cuerpo = suelto || enLinea;',
+    "if (process.env.SUELO) { const R = /var (COMISION(?:_2026)?) = 0\\.025/g;\n"
+    + "    const n = (precio.match(R) || []).length + (enLinea.match(R) || []).length + (suelto.match(R) || []).length;\n"
+    + "    if (!n) throw new Error('AUDITOR CIEGO: no encuentro la constante del suelo en ' + fichero);\n"
+    + "    precio = precio.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO);\n"
+    + "    enLinea = enLinea.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO);\n"
+    + "    suelto = suelto.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO); }\n"
+    + "  const cuerpo = suelto || enLinea;");
+  /* las tres piezas se declaran con const en el volcador: hay que poder
+     reasignarlas para parchearlas. */
+  s = s.replace('  const precio = [...html.matchAll', '  let precio = [...html.matchAll');
+  s = s.replace('  const suelto = [...html.matchAll', '  let suelto = [...html.matchAll');
+  s = s.replace('  const enLinea = [...html.matchAll', '  let enLinea = [...html.matchAll');
+
   s = s.replace(/^const destino = path\.join\(RAIZ, 'assets\/datos\/catalogo-2026\.json'\);$/m,
     'const destino = process.env.DESTINO;');
   const f = path.join(os.tmpdir(), 'laora-auditar-regla1.js');
@@ -79,7 +98,8 @@ for (const [subida, refs] of Object.entries(porSubida).sort((a, b) => b[0] - a[0
   for (const k of refs.slice(0, 5)) console.log(`      ${k}  ${eur(hoy[k].p)} → ${eur(duro[k].p)}`);
   if (refs.length > 5) console.log(`      … y ${refs.length - 5} más`);
 }
-console.log('\n  ARREGLO: poner COMISION (COMISION_2026 en el JS) a 0.05 en');
-console.log('  precisa.html, trinchera.html, lunar.html, bitacora.html y');
-console.log('  assets/js/configurador-v2.js. Después, volcar el catálogo.');
+console.log('\n  ARREGLO: poner COMISION a 0.05 en assets/js/precio-2026.js,');
+console.log('  que es donde vive el suelo desde el 29/08. Si alguna ficha');
+console.log('  vieja todavía lo lleva dentro, también ahí. Después, volcar');
+console.log('  el catálogo con herramientas/volcar_catalogo_2026.js.');
 process.exit(1);
