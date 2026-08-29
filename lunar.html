@@ -1280,8 +1280,12 @@
     VAZU: { nombre: 'Vaquera azul claro', coste: null,
             tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada ' +
                  'en cuero coñac' },
-    /* LAS CUATRO DE PIEL (Óscar, 29/08/2026). Piel rally perforada, con su
-       hebilla incluida como todas.
+    /* LAS CUATRO DE PIEL PERFORADA (Óscar, 29/08/2026), con su hebilla
+       incluida como todas.
+
+       ⚠️ NO SE LLAMAN «RALLY». Se escribieron así un rato, por parecido con
+       la esfera Rally, y Óscar lo cortó en seco esa misma tarde: «no existe
+       piel rally». La familia se llama PIEL PERFORADA y punto.
 
        6,69 LA MÁS BARATA DE LAS TRES (Óscar, 29/08/2026). Se queda por
        debajo del caucho —9,89— y a un tercio del brazalete, así que con
@@ -1290,13 +1294,13 @@
        es: la de caucho lleva hebilla de acero maciza y molde propio, y
        estas son piel cosida con una hebilla fina. */
     PCAQ: { nombre: 'Piel caqui oliva', coste: 6.69,
-            tec: 'correa de piel rally perforada, caqui oliva' },
+            tec: 'correa de piel perforada, caqui oliva' },
     PCON: { nombre: 'Piel coñac y naranja', coste: 6.69,
-            tec: 'correa de piel rally perforada, coñac con naranja' },
+            tec: 'correa de piel perforada, coñac con naranja' },
     PMAR: { nombre: 'Piel marrón', coste: 6.69,
-            tec: 'correa de piel rally perforada, marrón' },
+            tec: 'correa de piel perforada, marrón' },
     PNEG: { nombre: 'Piel negra', coste: 6.69,
-            tec: 'correa de piel rally perforada, negra' }
+            tec: 'correa de piel perforada, negra' }
   };
 
   /* LA CORREA, EN DOS PASOS: material y color, como Tesla parte el
@@ -1311,14 +1315,28 @@
                      VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA',
                      VGRI: 'TELA', VAZU: 'TELA',
                      PCAQ: 'PIEL', PCON: 'PIEL', PMAR: 'PIEL', PNEG: 'PIEL' };
+  /* ⚠️ LAS FAMILIAS DE CORREA LAS FIJÓ ÓSCAR (29/08/2026) Y SON ONCE.
+     No se inventa ninguna ni se le cambia el nombre a ninguna:
+
+         Piel vaca · Piel italiana hecha a mano · Piel perforada ·
+         Piel sintética · Tela vaquera · Acero 316L · Acero 904L ·
+         Caucho · Goma · Nato · Naylon
+
+     Aquí abajo sólo están las que YA tienen correas montadas; las demás
+     entran cuando lleguen sus capas. El paso del material enseña sólo las
+     que tienen algo que enseñar, así que una familia vacía no molesta.
+
+     `ACERO` se llama «Acero 316L» —no «Acero» a secas— porque el 904L es
+     otra familia de la lista y el día que llegue tienen que distinguirse
+     sin tocar nada. */
   var MATERIALES = {
-    ACERO:  { nombre: 'Acero',  expl: 'Brazalete de acero inoxidable 316L con ' +
-                                      'cierre desplegable.' },
+    ACERO:  { nombre: 'Acero 316L',
+              expl: 'Brazalete de acero inoxidable 316L con cierre desplegable.' },
     CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
                                       'el único que se puede mojar sin pensarlo.' },
-    PIEL:   { nombre: 'Piel',   expl: 'Piel rally perforada, la de siempre para un ' +
-                                      'cronógrafo. Se ablanda con el uso, pero no ' +
-                                      'se moja.' },
+    PIEL:   { nombre: 'Piel perforada',
+              expl: 'Piel perforada, la de siempre para un cronógrafo. Se ablanda ' +
+                    'con el uso, pero no se moja.' },
     /* Las medidas salen de la ficha de datos que vino con las fotos, no de
        una suposición: 20 mm de ancho, 18 en el cierre y 2,8 de grosor. */
     TELA:   { nombre: 'Tela vaquera',
@@ -1381,7 +1399,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=29';
+  var SERIE_V = '?v=30';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
