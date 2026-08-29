@@ -1,31 +1,89 @@
 {
-  "slug": "diver",
-  "nombre": "Diver",
-  "codigo": null,
-  "clase": "Buceo",
-  "homenaje": "",
-  "desc": "",
-  "listo": false,
-  "pasos": [
-    { "id": "mov", "rotulo": "Movimiento", "opciones": [
-      { "id": "Q", "nombre": "Cuarzo japonés", "coste": null },
-      { "id": "A", "nombre": "Automático suizo", "coste": null } ] },
-
-    { "id": "caja", "rotulo": "Caja", "fija": true, "opciones": [
-      { "id": "ACE", "nombre": "Acero con zafiro · 300 m", "coste": null,
-        "nota": "Con su esfera, sus agujas y su correa de caucho negra." } ] },
-
-    { "id": "correa", "rotulo": "Brazalete o correa", "opciones": [
-      { "id": "CAU-NEG",   "nombre": "Caucho negro", "coste": null },
-      { "id": "A316-DESP", "nombre": "Acero 316L · cierre desplegable", "coste": null },
-      { "id": "A316-MAC",  "nombre": "Acero 316L macizo", "coste": null },
-      { "id": "A316-ANC",  "nombre": "Acero 316L macizo · eslabón ancho", "coste": null },
-      { "id": "A316-FIN",  "nombre": "Acero 316L macizo · eslabón fino", "coste": null },
-      { "id": "A904-MAC",  "nombre": "Acero 904L macizo", "coste": null },
-      { "id": "A904-PLA",  "nombre": "Acero 904L · eslabones planos", "coste": null },
-      { "id": "CAU-HEB",   "nombre": "Caucho con hebilla de acero", "coste": null },
-      { "id": "CAU-FLU",   "nombre": "Caucho fluorado · cierre desplegable", "coste": null },
-      { "id": "VELA",      "nombre": "Tela de vela · hebilla mariposa", "coste": null },
-      { "id": "LONA",      "nombre": "Lona de nailon · liberación rápida", "coste": null } ] }
-  ]
+ "slug": "diver",
+ "nombre": "Diver",
+ "codigo": null,
+ "clase": "Buceo",
+ "desc": "",
+ "listo": false,
+ "caja": {
+  "tamanos": [],
+  "materiales": [
+   {
+    "id": "ACE",
+    "nombre": "Acero 316L",
+    "expl": "Acero con zafiro y 300 m de resistencia al agua."
+   }
+  ],
+  "integrada": false
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": []
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [
+  {
+   "id": "ZAF",
+   "nombre": "Zafiro",
+   "expl": "Cristal de zafiro."
+  }
+ ],
+ "movimiento": [
+  {
+   "id": "Q",
+   "nombre": "Cuarzo japonés"
+  },
+  {
+   "id": "A",
+   "nombre": "Automático suizo"
+  }
+ ],
+ "correa": {
+  "familias": [
+   {
+    "id": "CAU",
+    "nombre": "Caucho"
+   },
+   {
+    "id": "A316",
+    "nombre": "Acero 316L"
+   }
+  ],
+  "colores": [
+   {
+    "id": "CAU-NEG",
+    "nombre": "Caucho negro",
+    "familia": "CAU",
+    "color": "#1C1D1F"
+   },
+   {
+    "id": "A316-DESP",
+    "nombre": "Acero, cierre desplegable",
+    "familia": "A316"
+   },
+   {
+    "id": "A316-MAC",
+    "nombre": "Acero macizo",
+    "familia": "A316"
+   },
+   {
+    "id": "A316-ANC",
+    "nombre": "Acero macizo, eslabón ancho",
+    "familia": "A316"
+   },
+   {
+    "id": "A316-FIN",
+    "nombre": "Acero macizo, eslabón fino",
+    "familia": "A316"
+   }
+  ],
+  "cierres": [],
+  "colores_cierre": []
+ }
 }

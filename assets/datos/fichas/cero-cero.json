@@ -1,0 +1,32 @@
+{
+ "slug": "cero-cero",
+ "nombre": "Cero Cero",
+ "codigo": null,
+ "clase": "Vestir",
+ "desc": "",
+ "listo": false,
+ "caja": {
+  "tamanos": [],
+  "materiales": [],
+  "integrada": false
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": []
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [],
+ "movimiento": [],
+ "correa": {
+  "familias": [],
+  "colores": [],
+  "cierres": [],
+  "colores_cierre": []
+ }
+}

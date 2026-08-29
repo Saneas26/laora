@@ -1,27 +1,76 @@
 {
-  "slug": "coctel",
-  "nombre": "Cóctel",
-  "codigo": null,
-  "clase": "Vestir",
-  "homenaje": "",
-  "desc": "",
-  "listo": false,
-  "pasos": [
-    { "id": "mov", "rotulo": "Movimiento", "opciones": [
-      { "id": "Q", "nombre": "Cuarzo japonés", "coste": null },
-      { "id": "A", "nombre": "Automático japonés", "coste": null } ] },
-
-    { "id": "caja", "rotulo": "Caja y esfera", "opciones": [
-      { "id": "OR", "nombre": "Oro rosa · esfera marrón", "color": "#B76E56", "coste": null },
-      { "id": "PL", "nombre": "Plata · esfera azul",      "color": "#3A5C8C", "coste": null } ] },
-
-    { "id": "correa", "rotulo": "Correa", "opciones": [
-      { "id": "PIEL",     "nombre": "Piel",             "coste": null },
-      { "id": "SINT",     "nombre": "Piel sintética",   "coste": null },
-      { "id": "ANTE",     "nombre": "Ante",             "coste": null },
-      { "id": "PIELBRZ",  "nombre": "Pack piel + brazalete", "coste": null,
-        "nota": "La piel montada y el brazalete aparte, para cambiarlo cuando quieras." },
-      { "id": "ANTEBRZ",  "nombre": "Pack ante + brazalete", "coste": null,
-        "nota": "El ante montado y el brazalete aparte, para cambiarlo cuando quieras." } ] }
+ "slug": "coctel",
+ "nombre": "Cóctel",
+ "codigo": null,
+ "clase": "Vestir",
+ "desc": "",
+ "listo": false,
+ "caja": {
+  "tamanos": [],
+  "materiales": [
+   {
+    "id": "OR",
+    "nombre": "Oro rosa",
+    "color": "#B76E56"
+   },
+   {
+    "id": "PL",
+    "nombre": "Plata",
+    "color": "#C9CCCE"
+   }
+  ],
+  "integrada": false
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": [
+   {
+    "id": "MAR",
+    "nombre": "Marrón",
+    "color": "#6B4B33"
+   },
+   {
+    "id": "AZU",
+    "nombre": "Azul",
+    "color": "#3A5C8C"
+   }
   ]
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [],
+ "movimiento": [
+  {
+   "id": "Q",
+   "nombre": "Cuarzo japonés"
+  },
+  {
+   "id": "A",
+   "nombre": "Automático japonés"
+  }
+ ],
+ "correa": {
+  "familias": [
+   {
+    "id": "PIEL",
+    "nombre": "Piel vaca"
+   },
+   {
+    "id": "SINT",
+    "nombre": "Piel sintética"
+   },
+   {
+    "id": "ANTE",
+    "nombre": "Ante"
+   }
+  ],
+  "colores": [],
+  "cierres": [],
+  "colores_cierre": []
+ }
 }

@@ -1,0 +1,32 @@
+{
+ "slug": "barlovento",
+ "nombre": "Barlovento",
+ "codigo": null,
+ "clase": "Vestir",
+ "desc": "Todavía no hay ninguna pieza decidida.",
+ "listo": false,
+ "caja": {
+  "tamanos": [],
+  "materiales": [],
+  "integrada": false
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": []
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [],
+ "movimiento": [],
+ "correa": {
+  "familias": [],
+  "colores": [],
+  "cierres": [],
+  "colores_cierre": []
+ }
+}

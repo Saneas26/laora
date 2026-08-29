@@ -1,0 +1,148 @@
+{
+ "slug": "bitacora",
+ "nombre": "Bitácora",
+ "codigo": "LO-04",
+ "clase": "Deportivo",
+ "desc": "Brazalete integrado y automático suizo.",
+ "listo": false,
+ "caja": {
+  "tamanos": [],
+  "materiales": [
+   {
+    "id": "C1",
+    "nombre": "Plata",
+    "color": "#C9CCCE"
+   },
+   {
+    "id": "C3",
+    "nombre": "Oro rosa",
+    "color": "#B76E56"
+   },
+   {
+    "id": "C4",
+    "nombre": "Negro PVD",
+    "color": "#1C1D1F"
+   }
+  ],
+  "integrada": true
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": [
+   {
+    "id": "E1",
+    "nombre": "Turquesa",
+    "color": "#2AA7A2"
+   },
+   {
+    "id": "E2",
+    "nombre": "Blanca",
+    "color": "#F2F2EF"
+   },
+   {
+    "id": "E3",
+    "nombre": "Negra",
+    "color": "#1C1D1F"
+   },
+   {
+    "id": "E4",
+    "nombre": "Azul",
+    "color": "#2E4A7D"
+   },
+   {
+    "id": "E5",
+    "nombre": "Gris",
+    "color": "#8A8D8F"
+   },
+   {
+    "id": "E6",
+    "nombre": "Marrón",
+    "color": "#6B4B33"
+   }
+  ]
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [],
+ "movimiento": [
+  {
+   "id": "A",
+   "nombre": "Automático Suizo LO_A3826",
+   "expl": "Calibre laOra LO_A3826, arquitectura Suiza. Automático de 28.800 alternancias, 38 horas de reserva, fecha a las 3, cuerda manual y parada de segundero."
+  }
+ ],
+ "correa": {
+  "familias": [
+   {
+    "id": "GOMA",
+    "nombre": "Goma"
+   },
+   {
+    "id": "A316",
+    "nombre": "Acero 316L"
+   }
+  ],
+  "colores": [
+   {
+    "id": "Brz-Goma-Bit-01",
+    "nombre": "Silicona negra",
+    "familia": "GOMA",
+    "color": "#1C1D1F"
+   },
+   {
+    "id": "Brz-Goma-Bit-03",
+    "nombre": "Silicona azul",
+    "familia": "GOMA",
+    "color": "#2E4A7D"
+   },
+   {
+    "id": "Brz-Goma-Bit-04",
+    "nombre": "Silicona marrón",
+    "familia": "GOMA",
+    "color": "#6B4B33"
+   },
+   {
+    "id": "Brz-Acero-Bit-01",
+    "nombre": "Acero plata",
+    "familia": "A316",
+    "color": "#C9CCCE"
+   },
+   {
+    "id": "Brz-Acero-Bit-07",
+    "nombre": "Acero plata y oro rosa",
+    "familia": "A316",
+    "color": "#D9A08A"
+   },
+   {
+    "id": "Brz-Acero-Bit-06",
+    "nombre": "Acero oro rosa",
+    "familia": "A316",
+    "color": "#B76E56"
+   },
+   {
+    "id": "Brz-Acero-Bit-02",
+    "nombre": "Acero negro",
+    "familia": "A316",
+    "color": "#1C1D1F"
+   }
+  ],
+  "cierres": [
+   {
+    "id": "MARI",
+    "nombre": "Hebilla mariposa",
+    "expl": "Hebilla mariposa de acero, en las de goma."
+   },
+   {
+    "id": "PLEG",
+    "nombre": "Cierre plegable",
+    "expl": "Cierre plegable, en los brazaletes de acero."
+   }
+  ],
+  "colores_cierre": []
+ }
+}

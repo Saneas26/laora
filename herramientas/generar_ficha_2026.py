@@ -1,27 +1,44 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-laOra · LAS FICHAS DE 2026, CON EL FORMATO DEL LUNAR
+laOra · LOS CONFIGURADORES DE 2026, TODOS CON LOS MISMOS PASOS
 ============================================================
 Óscar, 19/08/2026: «el formato que manda es el del Lunar para el
 configurador, vete montando todos los demás porque vamos a necesitar».
+Y el 29/08/2026, el orden de pasos para los diez modelos.
 
-Esto escribe una ficha completa a partir de un archivo de datos en
-`assets/datos/fichas/<modelo>.json`: los pasos numerados, el visor, el
-pie de compra con el precio, «Disponible», el botón, Klarna y la
-confianza. El mismo esqueleto que el Lunar.
+EL ORDEN DE PASOS NO ESTÁ AQUÍ: está en `assets/datos/pasos-2026.json`,
+que es el contrato. Aquí solo se obedece. Si mañana cambia el orden se
+toca ese fichero y se vuelven a generar las diez fichas.
 
-POR QUÉ UN GENERADOR Y NO CUATRO FICHAS A MANO
-    Porque el catálogo está cambiando toda la semana. Con los datos
-    fuera, cuando lleguen los costes y las fotos solo hay que rellenar
-    el JSON y volver a pasar esto: no se rehace ninguna ficha.
+LAS DOS REGLAS DE ÓSCAR, y son las que hacen que esto valga para diez
+modelos distintos sin escribir diez ficheros a mano:
+
+    · UN PASO CON UNA SOLA OPCIÓN sale ya señalado y explicado. No se
+      esconde. El cliente tiene que saber que su reloj lleva zafiro
+      aunque no haya podido elegir otra cosa.
+
+    · UN PASO SIN OPCIONES NO APARECE. Ni rótulo vacío, ni «pendiente»,
+      ni un botón solo que no lleva a ningún sitio. Con caja integrada
+      —Precisa, Bitácora— eso deja la ficha sin bisel, y así tiene que
+      ser.
+
+POR QUÉ UN GENERADOR Y NO DIEZ FICHAS A MANO
+    Porque el catálogo cambia todas las semanas. Con los datos fuera,
+    cuando lleguen los costes y las fotos solo hay que rellenar el JSON
+    y volver a pasar esto: no se rehace ninguna ficha.
 
 MIENTRAS NO HAYA PRECIO, NO SE VENDE
-    El motor de la casa calcula el PVP a partir del COSTE de cada
-    pieza. Si el JSON todavía no los tiene (`"listo": false`), la ficha
-    sale con el precio sin poner y el botón apagado, y lo dice. Es
-    preferible a inventar un precio o a dejar un botón que llevaría a
-    un carrito que el servidor va a rechazar.
+    El motor de la casa calcula el PVP a partir del COSTE de cada pieza.
+    Si el JSON todavía no los tiene (`"listo": false`), la ficha sale con
+    el precio sin poner y el botón apagado, y lo dice. Es preferible a
+    inventar un precio o a dejar un botón que llevaría a un carrito que
+    el servidor va a rechazar.
+
+⚠️ NO GENERA `lunar.html` NI `trinchera.html`. Los dos están vendiendo y
+   llevan dentro cosas que este generador todavía no sabe hacer —el
+   montaje por capas, la criba, el motor de precios—. Se niega a
+   escribirlos aunque se le pida por nombre.
 
 USO
     python3 herramientas/generar_ficha_2026.py tortuga coctel diver
@@ -39,30 +56,84 @@ from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 V_CSS_PRODUCTO = 37
 V_CSS_COLECCION = 17
 V_JS_CARRITO = 11
+MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
+
+# ⚠️ LOS QUE ESTÁN VENDIENDO. NO SE TOCAN.
+#
+# Llevan dentro cosas que este generador todavía no sabe hacer —el montaje
+# por capas, la criba, el motor de precios que saca el PVP del coste— y
+# sobrescribirlos sería tirarlos de la tienda.
+#
+# ESTO NO ES UNA PRECAUCIÓN TEÓRICA: el 29/08/2026, la primera vez que se
+# pasó el generador con los diez modelos, se llevó por delante `precisa.html`
+# y `bitacora.html`, que estaban vendiendo, y las dejó con «Todavía no está a
+# la venta». Se recuperaron de una copia hecha un minuto antes. De ahí esta
+# lista y de ahí que se compruebe ANTES de escribir nada.
+INTOCABLES = ('lunar', 'trinchera', 'precisa', 'bitacora', 'cero-cero')
+
+# ⚠️ Y LA COMPROBACIÓN DE VERDAD: este generador SOLO reescribe páginas que
+# él mismo escribió. Lo dicen ellas en su propia cabecera. `cero-cero.html`
+# no lleva esa marca —viene del configurador viejo, el de las clases `cf-`—
+# y por eso está arriba en la lista: no es suyo, no lo toca.
 
 
 def esc(t):
     return (str(t).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
 
 
-def paso_html(paso):
-    """Un paso del configurador: su número, su rótulo y sus botones."""
-    fija = paso.get('fija')
+ORDEN = os.path.join(RAIZ, 'assets/datos/pasos-2026.json')
+
+
+def bolsa(d, ruta):
+    """Saca `caja.materiales` de los datos del modelo. Lo que no está,
+    vuelve como lista vacía: es lo que hace que el paso no aparezca."""
+    sitio = d
+    for tramo in ruta.split('.'):
+        if not isinstance(sitio, dict):
+            return []
+        sitio = sitio.get(tramo)
+        if sitio is None:
+            return []
+    return sitio if isinstance(sitio, list) else []
+
+
+def paso_html(paso, opciones):
+    """Un paso del configurador: su número, su rótulo y sus botones.
+
+    ⚠️ CON UNA SOLA OPCIÓN NO SE ESCONDE EL PASO. Sale señalada y con su
+    explicación a la vista, que es la regla de Óscar: el cliente tiene que
+    saber que su reloj lleva zafiro aunque no haya podido elegir otra cosa.
+    ⚠️ Y NO SE MARCA `disabled`. Se probó y quedaba justo al revés de lo que
+    él pide: la hoja compartida pinta los botones deshabilitados TACHADOS y
+    al 35 % de opacidad, que es como dice «esto no lo puedes llevar». La
+    única opción que hay tiene que verse como lo que es —lo que lleva el
+    reloj—, no como algo agotado. Se queda señalada, entera y pulsable; la
+    marca de que no hay más es el «uno solo» del rótulo."""
+    sola = len(opciones) == 1
     botones = []
-    for o in paso['opciones']:
+    for o in opciones:
         punto = ('<i class="pv-punto" style="background:%s"></i>' % o['color']) if o.get('color') else ''
         botones.append(
-            '            <button type="button" data-v="%s"%s>%s%s</button>'
-            % (esc(o['id']), ' aria-pressed="true"' if o is paso['opciones'][0] else '',
+            '            <button type="button" data-v="%s"%s%s>%s%s</button>'
+            % (esc(o['id']),
+               ' aria-pressed="true"' if o is opciones[0] else '',
+               '',
                punto, esc(o['nombre'])))
 
     # `pv-nota` es la etiqueta que flota SOBRE la foto; la de un paso va
     # debajo de sus botones y necesita su propia clase.
+    #
+    # CON UNA SOLA OPCIÓN, SU EXPLICACIÓN SALE SIEMPRE. Con varias, solo si
+    # alguna la trae: ahí la explicación la da el propio rótulo al pulsar.
     nota = ''
-    for o in paso['opciones']:
-        if o.get('nota'):
-            nota = '\n            <p class="pv-nota-paso">%s</p>' % esc(o['nota'])
-            break
+    if sola and (opciones[0].get('expl') or opciones[0].get('nota')):
+        nota = '\n            <p class="pv-nota-paso">%s</p>' % esc(
+            opciones[0].get('expl') or opciones[0]['nota'])
+    else:
+        for o in opciones:
+            if o.get('nota'):
+                nota = '\n            <p class="pv-nota-paso">%s</p>' % esc(o['nota'])
+                break
 
     return """          <div class="pv-grupo">
             <p class="pv-rotulo">%s%s</p>
@@ -70,17 +141,54 @@ def paso_html(paso):
 %s
             </div>%s
           </div>""" % (esc(paso['rotulo']),
-                       ' <b>uno solo</b>' if fija else '',
+                       ' <b>uno solo</b>' if sola else '',
                        esc(paso['id']), '\n'.join(botones), nota)
+
+
+def pasos_del_modelo(d):
+    """Los pasos que le tocan a este modelo, en el orden de la casa.
+
+    Aquí viven las dos reglas: un paso sin opciones no sale, y un paso que
+    depende de algo que este modelo no tiene —el bisel de una caja
+    integrada— tampoco."""
+    with open(ORDEN, encoding='utf-8') as f:
+        orden = json.load(f)['pasos']
+    fuera, dentro = [], []
+    for paso in orden:
+        salta = paso.get('salta_si')
+        if salta and bolsa_bool(d, salta):
+            fuera.append((paso['id'], 'caja integrada'))
+            continue
+        ops = bolsa(d, paso['de'])
+        if not ops:
+            fuera.append((paso['id'], 'sin opciones'))
+            continue
+        dentro.append((paso, ops))
+    return dentro, fuera
+
+
+def bolsa_bool(d, ruta):
+    sitio = d
+    for tramo in ruta.split('.'):
+        if not isinstance(sitio, dict):
+            return False
+        sitio = sitio.get(tramo)
+    return bool(sitio)
 
 
 def ficha(d):
     listo = bool(d.get('listo'))
-    pasos = '\n\n'.join(paso_html(p) for p in d['pasos'])
+    dentro, _fuera = pasos_del_modelo(d)
+    # UNA FICHA SIN NINGÚN PASO NO SE INDEXA. Medusa y Barlovento existen
+    # como página para poder empezar a llenarlas, pero hoy no tienen ni una
+    # pieza decidida: dejar que Google las liste sería anunciar un reloj que
+    # no existe. En cuanto tengan un paso, el noindex se cae solo.
+    noindex = '' if dentro else '<meta name="robots" content="noindex">\n'
+    pasos = '\n\n'.join(paso_html(p, ops) for p, ops in dentro)
 
     combinaciones = 1
-    for p in d['pasos']:
-        combinaciones *= len(p['opciones'])
+    for _p, ops in dentro:
+        combinaciones *= len(ops)
 
     # Sin costes no hay precio: se dice y no se vende.
     if listo:
@@ -110,7 +218,7 @@ def ficha(d):
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="%(nombre)s de laOra: %(combinaciones)d combinaciones, al precio honesto.">
 <title>%(nombre)s · laOra</title>
-<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
+%(noindex)s<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
 <!-- GENERADO por herramientas/generar_ficha_2026.py — no editar a mano.
@@ -173,6 +281,7 @@ def ficha(d):
         'nombre': esc(d['nombre']), 'slug': d['slug'], 'clase': esc(d.get('clase', '')),
         'desc': esc(d.get('desc') or 'Ficha en construcción.'),
         'combinaciones': combinaciones,
+        'noindex': noindex,
         'recursos': RECURSOS, 'cabecera': marcado('relojes'), 'script': SCRIPT,
         'vcol': V_CSS_COLECCION, 'vprod': V_CSS_PRODUCTO, 'vjs': V_JS_CARRITO,
         'pasos': pasos, 'precio': precio, 'boton': boton, 'klarna': klarna, 'aviso': aviso,
@@ -186,16 +295,30 @@ def main():
         f[:-5] for f in os.listdir(carpeta) if f.endswith('.json'))
 
     for slug in quiere:
+        destino = os.path.join(RAIZ, slug + '.html')
+        if slug in INTOCABLES:
+            print('%-10s ⛔ no se toca: no es de este generador' % slug)
+            continue
+        if os.path.exists(destino):
+            with open(destino, encoding='utf-8') as f:
+                if MARCA not in f.read(4096):
+                    print('%-10s ⛔ existe y NO lleva la marca de este '
+                          'generador: no se pisa' % slug)
+                    continue
         with open(os.path.join(carpeta, slug + '.json'), encoding='utf-8') as f:
             d = json.load(f)
         with open(os.path.join(RAIZ, slug + '.html'), 'w', encoding='utf-8') as f:
             f.write(ficha(d))
+        dentro, fuera = pasos_del_modelo(d)
         n = 1
-        for p in d['pasos']:
-            n *= len(p['opciones'])
-        print('%-10s %d pasos · %d combinaciones · %s'
-              % (slug, len(d['pasos']), n,
-                 'a la venta' if d.get('listo') else 'sin precio, no se vende'))
+        for _p, ops in dentro:
+            n *= len(ops)
+        print('%-11s %2d pasos · %5d combinaciones · %s'
+              % (slug, len(dentro), n,
+                 'a la venta' if d.get('listo') else 'sin precio, NO se vende'))
+        if fuera:
+            print('%-11s    sin salir: %s' % ('',
+                  ', '.join('%s (%s)' % f for f in fuera)))
 
 
 if __name__ == '__main__':

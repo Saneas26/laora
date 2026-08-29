@@ -1,0 +1,92 @@
+{
+ "slug": "precisa",
+ "nombre": "Precisa",
+ "codigo": "LO-05",
+ "clase": "Deportivo",
+ "desc": "El deportivo de brazalete integrado, con esfera waffle y zafiro.",
+ "listo": false,
+ "caja": {
+  "tamanos": [
+   {
+    "id": "40",
+    "nombre": "40 mm",
+    "expl": "40 mm de acero 316L con brazalete integrado y 11,5 mm de grosor."
+   }
+  ],
+  "materiales": [
+   {
+    "id": "PL",
+    "nombre": "Acero 316L",
+    "expl": "Acero inoxidable 316L pulido y cepillado."
+   }
+  ],
+  "integrada": true
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": [
+   {
+    "id": "AZM",
+    "nombre": "Azul marino"
+   },
+   {
+    "id": "AZD",
+    "nombre": "Azul degradado"
+   },
+   {
+    "id": "BLA",
+    "nombre": "Blanca"
+   },
+   {
+    "id": "NEG",
+    "nombre": "Negra"
+   },
+   {
+    "id": "TIF",
+    "nombre": "Tiffany"
+   },
+   {
+    "id": "VER",
+    "nombre": "Verde"
+   }
+  ]
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [
+  {
+   "id": "ZAF",
+   "nombre": "Zafiro",
+   "expl": "Cristal de zafiro: solo lo raya algo tan duro como él."
+  }
+ ],
+ "movimiento": [
+  {
+   "id": "Q",
+   "nombre": "Cuarzo Suizo LO_Q6026",
+   "expl": "Calibre laOra LO_Q6026, arquitectura Suiza. Cuarzo de −10/+20 s al mes, fecha a las 3 y pila de hasta 60 meses. 10 ATM."
+  },
+  {
+   "id": "A",
+   "nombre": "Automático Suizo LO_A4026",
+   "expl": "Calibre laOra LO_A4026, arquitectura Suiza. Automático de 28.800 alternancias, 40 horas de reserva, cuerda manual y parada de segundero. Tapa de cristal y 20 ATM."
+  }
+ ],
+ "correa": {
+  "familias": [
+   {
+    "id": "A316",
+    "nombre": "Acero 316L",
+    "expl": "Brazalete integrado, del mismo acero que la caja."
+   }
+  ],
+  "colores": [],
+  "cierres": [],
+  "colores_cierre": []
+ }
+}

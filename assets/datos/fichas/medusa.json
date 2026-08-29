@@ -1,0 +1,32 @@
+{
+ "slug": "medusa",
+ "nombre": "Medusa",
+ "codigo": null,
+ "clase": "Vestir",
+ "desc": "Caja transparente. Todavía es una idea: no hay ninguna pieza decidida.",
+ "listo": false,
+ "caja": {
+  "tamanos": [],
+  "materiales": [],
+  "integrada": false
+ },
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
+ "esfera": {
+  "tipos": [],
+  "colores": []
+ },
+ "agujas": {
+  "colores": []
+ },
+ "cristal": [],
+ "movimiento": [],
+ "correa": {
+  "familias": [],
+  "colores": [],
+  "cierres": [],
+  "colores_cierre": []
+ }
+}
