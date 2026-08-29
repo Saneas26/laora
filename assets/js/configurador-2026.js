@@ -1399,10 +1399,24 @@
       lista.forEach(function (f) {
         var im = new Image();
         im.className = 'pv-mini-correa';
-        im.src = MINI_IMG + f + '.avif' + SERIE_V;
+        /* UNA MINIATURA PUEDE VENIR DE LA BIBLIOTECA COMPARTIDA (con la
+           ruta entera, empezando por «/») en vez de la carpeta del modelo:
+           la «correa completa» de la piel es un dibujo de la casa, no una
+           foto del proveedor, y vale para todos los relojes que la monten.
+           Por eso tampoco se firma como «foto del fabricante». */
+        var deCasa = f.charAt(0) === '/';
+        im.src = (deCasa ? f : MINI_IMG + f) + '.avif' + SERIE_V;
         im.alt = (MINI_ALT[f] ||
                   'Correa ' + CORREAS[e.correa].nombre.toLowerCase()) +
-                 ', foto del fabricante';
+                 (deCasa ? '' : ', foto del fabricante');
+        /* La correa completa es más alta que ancha y quiere verse ENTERA,
+           no recortada al cuadrado como las fotos del proveedor. */
+        (function (img) {
+          function pon() {
+            img.classList.toggle('pv-mini-entera', img.naturalHeight > img.naturalWidth);
+          }
+          if (img.complete && img.naturalWidth) pon(); else img.onload = pon;
+        })(im);
         caja.appendChild(im);
       });
     }

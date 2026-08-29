@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=44">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
-<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=2">
+<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=3">
 <!-- El estilo del configurador vive en su hoja desde el 29/08/2026, para
      que lo usen los diez modelos y no solo este. -->
 </head>
@@ -575,7 +575,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=36';
+  var SERIE_V = '?v=37';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -728,6 +728,13 @@
     CMAC: ['cmac'], CNVF: ['cnvf'],
     /* Las cinco de caucho nuevas todavía no tienen foto de proveedor:
        sin foto, no sale miniatura. */
+    /* LA PIEL ENSEÑA SU CORREA COMPLETA (Óscar, 29/08/2026): el dibujo
+       entero con su hebilla, de la biblioteca compartida. Con la ruta
+       entera, que no es de la carpeta del modelo. */
+    PNEG: ['/assets/img/componentes/correas/enteras/piel-perforada-negra'],
+    PCON: ['/assets/img/componentes/correas/enteras/piel-perforada-conac'],
+    PMAR: ['/assets/img/componentes/correas/enteras/piel-perforada-marron'],
+    PVER: ['/assets/img/componentes/correas/enteras/piel-perforada-verde-oliva'],
     /* LA VAQUERA ENSEÑA LO QUE NO SE VE EN EL MONTAJE: la trama diagonal
        de cerca, el desplegable y el forro de cuero coñac. Las tres valen
        para los cinco colores porque lo que cuentan es el ACABADO, no el
@@ -744,6 +751,10 @@
   /* Lo que se lee en voz alta de cada foto. Las de color no están aquí: su
      texto sale del nombre de la correa, que ya lo dice todo. */
   var MINI_ALT = {
+    '/assets/img/componentes/correas/enteras/piel-perforada-negra': 'La correa de piel perforada negra completa, con su hebilla',
+    '/assets/img/componentes/correas/enteras/piel-perforada-conac': 'La correa de piel perforada coñac completa, con su hebilla',
+    '/assets/img/componentes/correas/enteras/piel-perforada-marron': 'La correa de piel perforada marrón completa, con su hebilla',
+    '/assets/img/componentes/correas/enteras/piel-perforada-verde-oliva': 'La correa de piel perforada verde oliva completa, con su hebilla',
     'vaquera-trama': 'La trama diagonal de la tela vaquera, de cerca',
     'vaquera-dentro': 'El forro de cuero coñac de la correa de tela vaquera',
     'vaquera-cierre': 'El cierre desplegable de la correa de tela vaquera'
@@ -1097,7 +1108,7 @@
 <!-- El motor de precio, el mismo para todos los modelos. Va DELANTE del
      configurador: el configurador lo usa nada más arrancar. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=3"></script>
+<script src="/assets/js/configurador-2026.js?v=4"></script>
 <!-- ============ LA LUPA ============
      La foto a pantalla completa, con la de 1600 —que es la que hay— y el
      pie diciendo qué reloj es. Se cierra con la equis, con Escape o

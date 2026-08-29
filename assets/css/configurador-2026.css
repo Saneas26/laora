@@ -522,6 +522,14 @@
   }
   /* ESCALONADAS, no todas a la vez: la de abajo entra primero. Con tres
      fotos apareciendo de golpe el ojo no sabe dónde mirar. */
+  /* LA CORREA COMPLETA (Óscar, 29/08/2026: «cuando se hace el zoom y se
+     aleja la imagen, colocamos una miniatura de la correa completa»). Es
+     el dibujo entero con su hebilla, más alto que ancho: se ve completo,
+     no recortado al cuadrado como las fotos del proveedor. */
+  .pv-hero img.pv-mini-correa.pv-mini-entera{ height:156px; object-fit:contain }
+  @media (max-width:900px){
+    .pv-hero img.pv-mini-correa.pv-mini-entera{ height:96px !important }
+  }
   .pv-pila-dentro img.pv-mini-correa{ opacity:1; transform:none }
   .pv-pila-dentro img.pv-mini-correa:nth-child(2){ transition-delay:.07s }
   .pv-pila-dentro img.pv-mini-correa:nth-child(3){ transition-delay:.14s }
