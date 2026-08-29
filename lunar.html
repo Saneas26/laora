@@ -1135,6 +1135,31 @@
             tec: 'correa de caucho negra con verde flúor' },
     CBLA: { nombre: 'Caucho blanco', coste: 9.89,
             tec: 'correa de caucho blanca' },
+    /* LAS CINCO DE TELA VAQUERA (Óscar, 29/08/2026). Llegaron con su
+       ficha de datos —`book.json`— y es la primera correa que viene así:
+       20 mm de ancho, 18 en el cierre, 2,8 de grosor, 75 y 125 de largo,
+       trama diagonal por fuera, CUERO COÑAC POR DENTRO y desplegable de
+       acero pulido. Todo eso sale de ahí, no me lo invento.
+
+       ⚠️ SIN COSTE DE COMPRA TODAVÍA: la ficha de datos trae las medidas y
+       los materiales, pero no el precio. Se eligen y se ven montadas, y el
+       precio dice «por definir» y no se venden — igual que le pasó al PVD y
+       a la piel hasta que él dio los números. */
+    VBEI: { nombre: 'Vaquera beige', coste: null,
+            tec: 'correa de tela vaquera de trama diagonal, beige, forrada en ' +
+                 'cuero coñac' },
+    VMAL: { nombre: 'Vaquera malva', coste: null,
+            tec: 'correa de tela vaquera de trama diagonal, malva, forrada en ' +
+                 'cuero coñac' },
+    VNEG: { nombre: 'Vaquera negra', coste: null,
+            tec: 'correa de tela vaquera de trama diagonal, negra, forrada en ' +
+                 'cuero coñac' },
+    VGRI: { nombre: 'Vaquera gris', coste: null,
+            tec: 'correa de tela vaquera de trama diagonal, gris, forrada en ' +
+                 'cuero coñac' },
+    VAZU: { nombre: 'Vaquera azul claro', coste: null,
+            tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada ' +
+                 'en cuero coñac' },
     /* LAS CUATRO DE PIEL (Óscar, 29/08/2026). Piel rally perforada, con su
        hebilla incluida como todas.
 
@@ -1163,6 +1188,8 @@
                      ORO3: 'ACERO', AMA3: 'ACERO',
                      CAZU: 'CAUCHO', CAZN: 'CAUCHO',
                      CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
+                     VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA',
+                     VGRI: 'TELA', VAZU: 'TELA',
                      PCAQ: 'PIEL', PCON: 'PIEL', PMAR: 'PIEL', PNEG: 'PIEL' };
   var MATERIALES = {
     ACERO:  { nombre: 'Acero',  expl: 'Brazalete de acero inoxidable 316L con ' +
@@ -1171,7 +1198,13 @@
                                       'el único que se puede mojar sin pensarlo.' },
     PIEL:   { nombre: 'Piel',   expl: 'Piel rally perforada, la de siempre para un ' +
                                       'cronógrafo. Se ablanda con el uso, pero no ' +
-                                      'se moja.' }
+                                      'se moja.' },
+    /* Las medidas salen de la ficha de datos que vino con las fotos, no de
+       una suposición: 20 mm de ancho, 18 en el cierre y 2,8 de grosor. */
+    TELA:   { nombre: 'Tela vaquera',
+              expl: 'Tela vaquera de trama diagonal por fuera y cuero coñac por ' +
+                    'dentro, con cierre desplegable. 2,8 mm de grosor: la más ' +
+                    'fina de las cuatro.' }
   };
   function matDe(c) { return CORREA_MAT[c] || 'ACERO'; }
   function primeraDe(mat) {
@@ -1228,7 +1261,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=25';
+  var SERIE_V = '?v=26';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1513,6 +1546,13 @@
               CBLA:  '19-correa-caucho-blanca',
               CMAC:  '20-correa-caucho-marron-crema',
               CNVF:  '21-correa-caucho-negra-verde-fluor',
+              /* Las cinco vaqueras llegaron encajadas, como los brazaletes
+                 del 31 al 34: mismo ancho y mismo centro. */
+              VBEI:  '35-correa-vaquera-beige-20mm',
+              VMAL:  '36-correa-vaquera-malva-20mm',
+              VNEG:  '37-correa-vaquera-negra-20mm',
+              VGRI:  '38-correa-vaquera-gris-20mm',
+              VAZU:  '39-correa-vaquera-azul-claro-20mm',
               PCAQ:  '25-correa-piel-rally-caqui-oliva',
               PCON:  '26-correa-piel-rally-conac-naranja',
               PMAR:  '27-correa-piel-rally-marron',
@@ -1626,6 +1666,15 @@
   var MINI = {
     CAZU: ['cazu'], CAZN: ['cazn'], CBLA: ['cbla'],
     CMAC: ['cmac'], CNVF: ['cnvf'],
+    /* LA VAQUERA ENSEÑA LO QUE NO SE VE EN EL MONTAJE: la trama diagonal
+       de cerca, el desplegable y el forro de cuero coñac. Las tres valen
+       para los cinco colores porque lo que cuentan es el ACABADO, no el
+       color, y el color ya se ve en el reloj. */
+    VBEI: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
+    VMAL: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
+    VNEG: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
+    VGRI: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
+    VAZU: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
     PCAQ: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
     PCON: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
     PMAR: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
@@ -1635,7 +1684,10 @@
      texto sale del nombre de la correa, que ya lo dice todo. */
   var MINI_ALT = {
     'piel-dentro': 'El interior de la correa de piel, forrado y perforado',
-    'piel-muneca': 'La correa de piel puesta en la muñeca'
+    'piel-muneca': 'La correa de piel puesta en la muñeca',
+    'vaquera-trama': 'La trama diagonal de la tela vaquera, de cerca',
+    'vaquera-dentro': 'El forro de cuero coñac de la correa de tela vaquera',
+    'vaquera-cierre': 'El cierre desplegable de la correa de tela vaquera'
   };
 
   /* ---------- LA PRECARGA, POR ESFERA ----------
