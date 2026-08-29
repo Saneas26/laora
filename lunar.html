@@ -478,35 +478,22 @@
     CAZC: { nombre: 'Azul celeste', coste: null, pieza: 'caucho-azul-celeste', tec: 'correa de caucho azul celeste' },
     CBGR: { nombre: 'Blanca y gris', coste: null, pieza: 'caucho-blanca-gris', tec: 'correa de caucho blanca con gris' },
 
-    /* --- Piel perforada y piel italiana: cuatro colores cada una ---
-       EL PESPUNTE ES UN PASO APARTE desde el 29/08/2026 (Óscar: «añade
-       pespunte siempre en todos los modelos con correa de piel italiana»).
-       Antes eran ocho correas por familia —cada color con su pespunte
-       dentro— y el paso del color tenía ocho botones para cuatro pieles.
+    /* --- Piel · UNA correa, la de las primeras pruebas ---
+       LAS OCHO PIELES DE ANTES SE FUERON el 29/08/2026 (Óscar: «quita
+       todas las correas de piel que tenemos ahora porque no nos vale
+       ninguna»): las cuatro perforadas con sus dos pespuntes y las cuatro
+       italianas. Con ellas se va el paso del pespunte, que era suyo.
 
-       ⚠️ LA REFERENCIA NO CAMBIA. Sigue viajando el código de siempre
-       —`PCAQT`, `PCAQB`— porque el color y el pespunte se juntan al
-       escribirla. Una referencia emitida esta mañana se resuelve igual.
+       Esta es la primera del formato nuevo: la correa ABIERTA, con su
+       hebilla y su pespunte crema ya puestos, dibujada a 20 mm y montada
+       a la escala real de la caja (1 mm = 65,4 px), SIN estirarla al
+       hueco de las asas. Es a propósito: Óscar quiere ver cómo encaja
+       tal cual, y si asoma el fondo por los lados, que se vea.
 
-       ⚠️ EL COSTE DE 6,69 ES EL QUE ÓSCAR DIO PARA ESTA PIEL. Es la misma
-       del mismo proveedor con el pespunte en otro color: si el blanco se
-       cobrara aparte, esto hay que corregirlo. */
-    PCAQ: { nombre: 'Caqui oliva', coste: 6.69, pieza: 'piel-perforada-caqui-oliva',
-            tec: 'correa de piel perforada caqui oliva' },
-    PCON: { nombre: 'Coñac y naranja', coste: 6.69, pieza: 'piel-perforada-conac-naranja',
-            tec: 'correa de piel perforada coñac y naranja' },
-    PMAR: { nombre: 'Marrón', coste: 6.69, pieza: 'piel-perforada-marron',
-            tec: 'correa de piel perforada marrón' },
+       ⚠️ LA REFERENCIA ES NUEVA: `PNEG` a secas, sin la letra del
+       pespunte. Las `PCAQT`/`PNEGB` de antes ya no se resuelven. */
     PNEG: { nombre: 'Negra', coste: 6.69, pieza: 'piel-perforada-negra',
-            tec: 'correa de piel perforada negra' },
-    IMAR: { nombre: 'Marrón', coste: null, pieza: 'piel-italiana-marron',
-            tec: 'correa de piel italiana hecha a mano, marrón' },
-    INEG: { nombre: 'Negra', coste: null, pieza: 'piel-italiana-negra',
-            tec: 'correa de piel italiana hecha a mano, negra' },
-    IVER: { nombre: 'Verde', coste: null, pieza: 'piel-italiana-verde',
-            tec: 'correa de piel italiana hecha a mano, verde' },
-    IAZU: { nombre: 'Azul', coste: null, pieza: 'piel-italiana-azul',
-            tec: 'correa de piel italiana hecha a mano, azul' },
+            tec: 'correa de piel perforada negra de 20 mm, pespunte crema, hebilla clásica plateada' },
 
     /* --- Tela vaquera · cinco colores ---
        20 mm de ancho, 18 en el cierre, 2,8 de grosor, trama diagonal por
@@ -524,8 +511,7 @@
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
     CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
-    PCAQ: 'PPER', PCON: 'PPER', PMAR: 'PPER', PNEG: 'PPER',
-    IMAR: 'PITA', INEG: 'PITA', IVER: 'PITA', IAZU: 'PITA',
+    PNEG: 'PPER',
     VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA', VGRI: 'TELA', VAZU: 'TELA'
   };
   /* LOS DOS PESPUNTES. `sufijo` es lo que se le añade al nombre de la
@@ -533,8 +519,10 @@
      referencia para que no cambie ninguna de las ya emitidas. */
   var PESPUNTES = { T: { nombre: 'Al tono', sufijo: '-pespunte-al-tono', ref: 'T' },
                     B: { nombre: 'Blanco',  sufijo: '-pespunte-blanco',  ref: 'B' } };
-  /* Las familias que lo eligen. Las demás no enseñan el paso. */
-  var CON_PESPUNTE = { PPER: 1, PITA: 1 };
+  /* Las familias que lo eligen. VACÍO desde el 29/08/2026: la piel nueva
+     trae el pespunte puesto en la propia correa. La tabla se queda por si
+     alguna familia vuelve a dar a elegir; sin entradas, el paso no sale. */
+  var CON_PESPUNTE = {};
 
   var MATERIALES = {
     A316:   { nombre: 'Acero 316L',
@@ -544,9 +532,6 @@
     PPER:   { nombre: 'Piel perforada',
               expl: 'Piel perforada, la de siempre para un cronógrafo. Se ablanda ' +
                     'con el uso, pero no se moja.' },
-    PITA:   { nombre: 'Piel italiana',
-              expl: 'Piel italiana hecha a mano, de vestir. Cada color con el ' +
-                    'pespunte al tono o en blanco.' },
     TELA:   { nombre: 'Tela vaquera',
               expl: 'Tela vaquera de trama diagonal por fuera y cuero coñac por ' +
                     'dentro, con cierre desplegable. 2,8 mm de grosor: la más fina.' }
@@ -584,7 +569,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=32';
+  var SERIE_V = '?v=33';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -721,24 +706,14 @@
      izquierda en ese orden, la primera abajo. El brazalete no tiene
      ninguna: de él sí se ve todo lo que hay que ver en el montaje.
 
-     LA PIEL LLEVA TRES (Óscar, 29/08/2026). Su color suelto, el interior
-     —forro oscuro perforado, que el montaje no puede contar— y la muñeca.
-
-     ⚠️ `piel-dentro` ES LA COÑAC y sale con las cuatro. Como detalle del
-     forro vale; el canto que se ve es coñac.
-
-     ⚠️ `piel-muneca` VA RECORTADA A PROPÓSITO. La foto original trae un
-     reloj entero puesto, y NO es un Lunar: es un buceador de esfera negra
-     con bisel de 60 minutos, calcado de uno muy conocido. Enseñar el reloj
-     de otro en la ficha del nuestro no se hace, así que el recorte se
-     queda con la correa en la muñeca y la cabeza se va fuera. De paso cae
-     el rótulo del proveedor, que cruzaba la esfera. */
+     Las pieles viejas llevaban tres fotos del proveedor; se fueron con
+     ellas el 29/08/2026. */
   var MINI_IMG = '/assets/img/lunar-2026/correas/';
   var MINI = {
     CAZU: ['cazu'], CAZN: ['cazn'], CBLA: ['cbla'],
     CMAC: ['cmac'], CNVF: ['cnvf'],
-    /* Las cinco de caucho nuevas y las ocho de piel italiana todavía no
-       tienen foto de proveedor: sin foto, no sale miniatura. */
+    /* Las cinco de caucho nuevas todavía no tienen foto de proveedor:
+       sin foto, no sale miniatura. */
     /* LA VAQUERA ENSEÑA LO QUE NO SE VE EN EL MONTAJE: la trama diagonal
        de cerca, el desplegable y el forro de cuero coñac. Las tres valen
        para los cinco colores porque lo que cuentan es el ACABADO, no el
@@ -747,21 +722,14 @@
     VMAL: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
     VNEG: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
     VGRI: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    VAZU: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    PCAQT: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
-    PCAQB: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
-    PCONT: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
-    PCONB: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
-    PMART: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
-    PMARB: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
-    PNEGT: ['piel-pneg', 'piel-dentro', 'piel-muneca'],
-    PNEGB: ['piel-pneg', 'piel-dentro', 'piel-muneca']
+    VAZU: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre']
+    /* Las miniaturas de las pieles viejas se fueron con ellas (29/08/2026):
+       eran fotos del proveedor de unas correas que ya no se venden. La
+       piel nueva enseña su hebilla y su pespunte en la propia capa. */
   };
   /* Lo que se lee en voz alta de cada foto. Las de color no están aquí: su
      texto sale del nombre de la correa, que ya lo dice todo. */
   var MINI_ALT = {
-    'piel-dentro': 'El interior de la correa de piel, forrado y perforado',
-    'piel-muneca': 'La correa de piel puesta en la muñeca',
     'vaquera-trama': 'La trama diagonal de la tela vaquera, de cerca',
     'vaquera-dentro': 'El forro de cuero coñac de la correa de tela vaquera',
     'vaquera-cierre': 'El cierre desplegable de la correa de tela vaquera'
@@ -790,10 +758,10 @@
   }
 
   function referencia(e) {
-    /* ⚠️ EL PESPUNTE SE PEGA AL COLOR, no va aparte. Las pieles se
-       vendieron esta mañana como `PCAQT` y `PCAQB`; partirlas en dos pasos
-       es cosa de la pantalla, no del pedido. Una referencia emitida antes
-       tiene que seguir resolviéndose. */
+    /* El pespunte se pegaba aquí al color (`PCAQT`, `PCAQB`) mientras las
+       pieles lo eligieron; desde el 29/08/2026 ninguna familia lo elige y
+       `CON_PESPUNTE` está vacío, así que no añade nada. Se queda el
+       mecanismo por si vuelve. */
     var correa = e.correa + (CON_PESPUNTE[matDeCorrea(e.correa)]
       ? PESPUNTES[e.pespunte].ref : '');
     return 'LO-03-' + e.mov + '-' + e.caja + e.cristal + '-' + e.esf + '-' +
