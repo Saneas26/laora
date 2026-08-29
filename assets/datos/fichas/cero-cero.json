@@ -1,13 +1,49 @@
 {
  "slug": "cero-cero",
  "nombre": "Cero Cero",
- "codigo": null,
- "clase": "Vestir",
+ "codigo": "LO-05",
+ "clase": "Buceo",
  "desc": "",
- "listo": false,
+ "listo": true,
  "caja": {
   "tamanos": [],
-  "materiales": [],
+  "materiales": [
+   {
+    "id": "C1",
+    "nombre": "Bisel negro y numerales blancos",
+    "coste": 32.59
+   },
+   {
+    "id": "C2",
+    "nombre": "Bisel azul y numerales blancos",
+    "coste": 32.59
+   },
+   {
+    "id": "C3",
+    "nombre": "Bisel negro brillo y numerales oro rosa brillo",
+    "coste": 32.59
+   },
+   {
+    "id": "C4",
+    "nombre": "Bisel negro mate y numerales negro mate",
+    "coste": 32.59
+   },
+   {
+    "id": "C5",
+    "nombre": "Bisel negro brillo y numerales oro rosa mate",
+    "coste": 32.59
+   },
+   {
+    "id": "C6",
+    "nombre": "Bisel azul y oro rosa",
+    "coste": 32.59
+   },
+   {
+    "id": "C7",
+    "nombre": "Bisel negro mate y numerales oro rosa mate",
+    "coste": 32.59
+   }
+  ],
   "integrada": false
  },
  "bisel": {
@@ -16,17 +52,299 @@
  },
  "esfera": {
   "tipos": [],
-  "colores": []
+  "colores": [
+   {
+    "id": "E1",
+    "nombre": "Azul con oro rosa",
+    "coste": 12.79
+   },
+   {
+    "id": "E2",
+    "nombre": "Negra y dorado",
+    "coste": 12.79
+   },
+   {
+    "id": "E3",
+    "nombre": "Negra con oro rosa",
+    "coste": 12.79
+   }
+  ]
  },
  "agujas": {
   "colores": []
  },
  "cristal": [],
- "movimiento": [],
+ "movimiento": [
+  {
+   "id": "A",
+   "nombre": "Automático Suizo LO_A3826",
+   "coste": 0,
+   "expl": "Calibre laOra LO_A3826, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 38 horas de reserva de marcha, fecha a las 3, cuerda manual y parada de segundero. Segundero de barrido fino y rotor bidireccional de cuerda automática."
+  }
+ ],
  "correa": {
-  "familias": [],
-  "colores": [],
+  "familias": [
+   {
+    "id": "ACERO904",
+    "nombre": "Acero 904L",
+    "coste": 0
+   },
+   {
+    "id": "MALLAMIL",
+    "nombre": "Malla milanesa",
+    "coste": 0
+   }
+  ],
+  "colores": [
+   {
+    "id": "Brz-904-A12",
+    "nombre": "Acero 904L, Jubilee cinco eslabones · Plata",
+    "coste": 20.1,
+    "familia": "ACERO904",
+    "color": "#c9cdd2"
+   },
+   {
+    "id": "Brz-316-A08",
+    "nombre": "Malla milanesa, hebilla plegable · Plata",
+    "coste": 17.1,
+    "familia": "MALLAMIL",
+    "color": "#c9cdd2"
+   },
+   {
+    "id": "Brz-316-A09",
+    "nombre": "Malla milanesa de 2,8 mm · Plata",
+    "coste": 52.76,
+    "familia": "MALLAMIL",
+    "color": "#c9cdd2"
+   }
+  ],
   "cierres": [],
   "colores_cierre": []
- }
+ },
+ "referencia": "LO-05-{caja}-{esf}-{correa}",
+ "cadena": [
+  "caja",
+  "esf",
+  "correa"
+ ],
+ "extra": 59.01,
+ "combinaciones": [
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E1",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E1",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E1",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E2",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E2",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E2",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E3",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E3",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E3",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-904-A12",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-316-A08",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-316-A09",
+   "coste": 0
+  }
+ ],
+ "_datos": "Sale del bloque `data-piezas` del configurador viejo de Cero Cero. Las combinaciones son las que tenían foto: 7 cajas x 3 esferas x 3 brazaletes darían 63, y la ficha vieja solo montaba estas."
 }
