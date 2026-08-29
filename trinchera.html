@@ -2,237 +2,25 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="laOra Trinchera: el reloj de campo con movimientos suizos, zafiro y venta al precio honesto.">
-<meta property="og:title" content="Trinchera · laOra">
-<meta property="og:description" content="laOra Trinchera: el reloj de campo con movimientos suizos, zafiro y venta al precio honesto.">
-<meta property="og:url" content="https://laora.es/trinchera.html">
-<meta property="og:image" content="https://laora.es/assets/img/trinchera-2026/1200/krojo-nato.webp?v=8a7d9835">
-<meta property="og:locale" content="es_ES">
-<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Trinchera de laOra: 6816 combinaciones, al precio honesto.">
 <title>Trinchera · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/manifest.json">
-<!-- FICHA DE PRODUCTO 2026 (Óscar, 15/08/2026), patrón Hamilton.
-     PÁGINA ESCRITA A MANO: el generador ya no la toca (NO_GENERAR).
-     El catálogo es el de la pestaña DetalleTrinchera del sheet:
-     196 referencias, y esta página calcula el precio con el MISMO
-     motor (×2,7235 al 9,90, suelo de 50 € limpios, +10 € el 39). -->
-<!-- SIN GOOGLE FONTS (Óscar, 24/08/2026): las dos familias se sirven
-     desde aquí. Se precargan porque son la letra de todo lo que se lee. -->
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/montserrat-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/nunito-sans-latin.woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/fuentes.css?v=1">
-<link rel="stylesheet" href="/assets/css/laora.css?v=52">
+<!-- GENERADO por herramientas/generar_ficha_2026.py — no editar a mano.
+     Los datos viven en assets/datos/fichas/trinchera.json -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
+<link rel="stylesheet" href="/assets/css/laora.css?v=52">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=44">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
-<style>
-  /* La fila del diámetro y el movimiento (Óscar, 24/08/2026). Solo en esta
-     ficha: el resto de configuradores sigue con un paso por línea. */
-  .pv-fila-cabeza{
-    display:flex; flex-wrap:wrap; gap:18px 28px;
-    align-items:flex-start; justify-content:space-between;
-  }
-  /* `space-between` y no `margin-left:auto`: cuando la columna se estrecha y
-     los dos grupos ya no caben, cada uno se queda en su renglón y alineado a
-     la izquierda. Con el margen automático, el del movimiento se iba solo a
-     la derecha en su propia línea y parecía descolgado. */
-  .pv-fila-cabeza>.pv-grupo{ flex:0 1 auto }
-  /* Un paso que todavía no toca. Va con clase y no con `hidden` porque
-     `hidden` ya lo usan los grupos para su propia lógica. */
-  .pv-cerrado{ display:none !important }
-
-  /* UNA LÍNEA ENTRE SECCIONES (Óscar, 26/08/2026): «entre cada sección
-     quiero una línea delgada y elegante que separe cada una de las
-     secciones». Un pelo de 1 px del gris de la casa —el mismo `--cv2-linea`
-     que ya separa los desplegables de la ficha técnica—, con aire a los dos
-     lados para que separe sin hacer ruido. */
-  .pv-info .pv-fila + .pv-fila{
-    border-top:1px solid var(--cv2-linea);
-    padding-top:20px; margin-top:20px;
-  }
-  /* ENTRE EL TAMAÑO Y EL MOVIMIENTO LA LÍNEA ES VERTICAL, porque esos dos
-     van uno al lado del otro (Óscar, 24/08). */
-  .pv-fila-cabeza>.pv-grupo+.pv-grupo{
-    border-left:1px solid var(--cv2-linea);
-    padding-left:28px;
-  }
-  /* Y SE PONE HORIZONTAL cuando la columna se estrecha y se apilan. Los dos
-     grupos necesitan 453 px y la columna es el 36 % del ancho de pantalla,
-     así que dejan de caber sobre los 1.260. Sin esto quedaría un palito
-     vertical suelto encima del movimiento. Se fuerza el apilado en vez de
-     dejarlo al `wrap` para que la línea y la ruptura ocurran a la vez. */
-  @media (max-width:1260px){
-    .pv-fila-cabeza>.pv-grupo{ flex:0 0 100% }
-    .pv-fila-cabeza>.pv-grupo+.pv-grupo{
-      border-left:0; padding-left:0;
-      border-top:1px solid var(--cv2-linea);
-      padding-top:18px;
-    }
-  }
-
-  /* La miniatura de la correa abierta, con su pie. Va en la misma esquina
-     que las otras dos y con el mismo ancho; el `figure` necesita su propio
-     [hidden] porque, igual que el cartel, trae display propio. */
-  .pv-mini-fig{ margin:0; display:flex; flex-direction:column; align-items:center; gap:4px }
-  .pv-mini-fig[hidden]{ display:none }
-  /* Esta va por ALTURA y no por anchura: la correa extendida es 1:4, y
-     dándole el 24% de ancho como a las otras minis se salía del visor por
-     abajo. El `.pv-hero img.pv-mini{width:24%}` de la hoja compartida hay
-     que ganárselo con el selector puesto delante. */
-  .pv-hero .pv-mini-fig img{
-    width:auto !important; display:block;
-    /* el alto lo manda el VISOR, no la ventana: así la correa y su pie
-       caben siempre dentro del marco, que es cuadrado */
-    height:min(26vw, 150px); object-fit:contain;
-  }
-  .pv-mini-fig figcaption{
-    font-family:'Nunito Sans', system-ui, sans-serif;
-    font-size:11px; color:var(--cv2-gris); text-align:center;
-  }
-
-  /* LA LETRA DE LA FICHA (Óscar, 24/08/2026): Montserrat en los titulares,
-     Nunito Sans en el texto de las opciones, ninguna serifa y CERO
-     interletrado. Va aquí y no en producto-2026.css porque de momento es
-     solo este configurador. */
-  .pv-info, .pv-info *{ letter-spacing:normal !important }
-  /* Primero lo general —todo lo que se lee corrido va en Nunito Sans— y
-     DESPUÉS los titulares en Montserrat. En este orden, porque `.pv-rotulo`
-     y `.pv-precio` son párrafos: con las reglas al revés, la genérica de
-     `.pv-info p` los pisaba y salían en Nunito. */
-  .pv-info p, .pv-info li, .pv-info small, .pv-info a,
-  .pv-opciones button, .pv-fijo, .pv-sinfoto{
-    font-family:'Nunito Sans', system-ui, sans-serif !important;
-  }
-  /* Con `.pv-info` delante a propósito: el rótulo y el precio son párrafos,
-     y `.pv-info p` (una clase + un elemento) pesa más que `.pv-rotulo` a
-     secas. Sin esto ganaba la regla de Nunito por especificidad, no por
-     orden, y los titulares salían con la letra del texto. */
-  .pv-info h1, .pv-info .pv-rotulo, .pv-info .pv-chip, .pv-info .pv-codigo,
-  .pv-info .pv-precio, .pv-info .pv-comprar, .pv-comprar{
-    font-family:'Montserrat', system-ui, sans-serif !important;
-  }
-  .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
-  /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
-     y no hace falta gritar. */
-  /* LA ESCALA: DOS TAMAÑOS Y NADA MÁS. 22 px para el título de cada fila y
-     16 px —el tamaño base del navegador— para todo lo demás. Un salto de
-     1,38 y se acabó.
-
-     Antes iba con cuatro escalones y no valía: 17 px para los botones choca
-     con los 16 px del cuerpo de la página, que también cuenta, y dos
-     tamaños separados por un píxel no son jerarquía, son ruido. Lo que
-     distingue un rótulo pequeño de un botón es el COLOR, no un píxel.
-
-     De paso los rótulos pequeños suben de 13 a 16 px, que se leen mucho
-     mejor: aquí la legibilidad manda sobre todo lo demás. */
-  .pv-info .pv-rotulo{ text-transform:none; font-size:22px; line-height:1.25 }
-  /* LA LETRA SUBE Y EL RELLENO CON ELLA. El 24/08 la letra de los botones
-     pasó de 13 a 16 px y se quedó el relleno del CSS base —11 px arriba y
-     14 a los lados—, que estaba calculado para la letra pequeña: el texto
-     quedaba pegado al recuadro. Sube en la misma proporción, 16/13. */
-  .pv-info .pv-opciones button{
-    text-transform:none; font-size:16px;
-    padding:14px 17px;
-  }
-
-  /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
-     cuando está señalado, «recuadro blanco y letras negras» cuando no.
-     El amarillo es el oro de la marca, el mismo del rótulo NUEVO. Sobre
-     negro da 9,4:1, así que se lee de sobra. */
-  .pv-info .pv-opciones button{
-    background:#fff; color:#121414;
-    border:1px solid rgba(18,20,20,.28);
-  }
-  .pv-info .pv-opciones button:hover{ border-color:#121414 }
-  .pv-info .pv-opciones button[aria-pressed="true"]{
-    background:var(--cv2-oro); color:#121414; border-color:var(--cv2-oro);
-  }
-  /* el filete de debajo era la marca de «elegido»; ahora lo dice el
-     propio recuadro, así que sobra */
-  .pv-info .pv-opciones button[aria-pressed="true"]::after{ display:none }
-  .pv-info .pv-opciones button[disabled]{
-    background:#fff; color:#121414; opacity:.4;
-  }
-
-  /* El calibre, debajo de la fila y solo cuando ya has elegido. */
-  .pv-calibre{
-    margin:2px 0 0; font-size:16px; color:#4A4A4A;
-    font-family:'Nunito Sans', system-ui, sans-serif;
-  }
-  .pv-calibre[hidden]{ display:none }
-
-  /* LAS CUATRO FILAS. Sin los círculos numerados de antes: la estructura
-     que pidió Óscar el 24/08/2026 son cuatro bloques, no seis pasos, y el
-     número dejaba de cuadrar. */
-  .pv-info .pv-grupo>.pv-rotulo::before{ display:none }
-  .pv-info .pv-rotulo{ padding-left:0 }
-  .pv-fila{ display:flex; flex-direction:column; gap:12px }
-  /* LA ESFERA, EN UNA SOLA LÍNEA (Óscar, 24/08/2026): el estilo —Khaki o
-     Murph— y el color van uno al lado del otro, no en dos renglones. El
-     rótulo, lo que cuelga y la frase fija siguen ocupando su línea
-     entera; si la columna se estrecha, los dos grupos se reparten solos
-     en dos renglones. */
-  .pv-fila[data-paso="estilo"]{
-    flex-direction:row; flex-wrap:wrap; align-items:center; gap:12px 26px;
-  }
-  .pv-fila[data-paso="estilo"]>.pv-rotulo,
-  .pv-fila[data-paso="estilo"]>.pv-sub,
-  .pv-fila[data-paso="estilo"]>.pv-fijo{ flex:0 0 100% }
-  /* Lo que cuelga de una fila —el segundero, el color, el cierre— va un
-     escalón por dentro, para que se lea como parte de ella y no como otra
-     pregunta al mismo nivel. */
-  .pv-sub{ display:flex; flex-direction:column; gap:8px; padding-left:14px;
-           border-left:2px solid rgba(18,20,20,.12) }
-  .pv-sub[hidden]{ display:none }
-  .pv-subrotulo{
-    margin:0; font-size:16px; color:#4A4A4A;
-    font-family:'Nunito Sans', system-ui, sans-serif;
-    display:flex; justify-content:space-between; gap:10px;
-  }
-  .pv-subrotulo b{ font-weight:400; color:#121414 }
-
-  /* EL MODO CURAR (Óscar, 26/08/2026), que solo existe con `?curar` en la
-     dirección. El aspa roja de cada botón se fue el mismo día: quitaba una
-     opción de TODAS las combinaciones y no era lo que hacía falta. Queda el
-     panel, que marca combinaciones enteras. */
-  .pv-curar{
-    position:fixed; right:16px; bottom:16px; z-index:60;
-    width:320px; max-height:62vh; overflow:auto; padding:14px 16px;
-    background:#fff; border:1px solid rgba(18,20,20,.28);
-    box-shadow:0 6px 24px rgba(0,0,0,.18);
-    font-family:'Nunito Sans', system-ui, sans-serif; font-size:15px;
-    line-height:1.45; color:#121414;
-  }
-  .pv-curar ul{ margin:10px 0; padding:0; list-style:none }
-  .pv-curar li{ display:flex; align-items:center; justify-content:space-between;
-                gap:10px; padding:9px 0; border-top:1px solid rgba(18,20,20,.12) }
-  .pv-curar code{ font-size:14px; word-break:break-all }
-  .pv-curar hr{ border:0; border-top:1px solid rgba(18,20,20,.14); margin:14px 0 }
-  .pv-curar > b{ display:block; margin-bottom:6px }
-  .pv-curar p{ margin:0 0 10px }
-  .pv-curar-dicho{ color:#4A4A4A }
-  .pv-curar li span{ flex:1 1 auto }
-  .pv-curar button{ font-size:13px; padding:9px 12px; cursor:pointer;
-    background:#fff; color:#121414; border:1px solid rgba(18,20,20,.28);
-    font-family:inherit; white-space:nowrap }
-  /* El cuadro con la lista para pasármela. Un `textarea` a pelo trae el
-     borde y los dos píxeles de relleno del navegador, y el texto queda
-     pegado a la raya. */
-  .pv-curar-texto{
-    display:block; width:100%; box-sizing:border-box; margin:0 0 12px;
-    padding:10px 12px; font-family:ui-monospace, Menlo, monospace;
-    font-size:12px; line-height:1.5; color:#121414;
-    background:#fafaf8; border:1px solid rgba(18,20,20,.28); resize:vertical;
-  }
-  .pv-curar-ok{ margin-left:10px; font-size:13px; color:#4A4A4A }
-  .pv-curar-ok[hidden]{ display:none }
-</style>
-<!-- El motor de precio, el mismo para todos los modelos. -->
-<script src="/assets/js/precio-2026.js?v=1"></script>
+<!-- EL ESTILO DEL CONFIGURADOR, el del Lunar, que desde el 29/08/2026 es el
+     de la casa. VA DESPUÉS de producto-2026.css: buena parte de sus reglas
+     están para ganarle a esa hoja, y cargándolo antes pierde. -->
+<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=1">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -248,191 +36,123 @@
   </nav>
   <div class="header-actions">
     <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
+    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
+         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
+         un cero permanente al lado del carrito parece una web rota. -->
     <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
   </div>
 </header>
 
+<!-- ============================================================
+     laOra · EL ESQUELETO DE UNA FICHA-CONFIGURADOR, 2026
+     ============================================================
+     Sale de `lunar.html`, que es el que Óscar señaló como patrón el
+     29/08/2026: «el estilo del Lunar pasa a ser el único estilo a utilizar
+     en el resto de modelos».
+
+     Lo rellena `herramientas/generar_ficha_2026.py`. Los huecos son cinco
+     —nombre, código, nuevo, presentación y «de cerca»— y todo lo demás lo
+     monta el motor en el navegador: los pasos salen del contrato y las
+     piezas, del modelo.
+
+     ⚠️ NO SE EDITA UNA FICHA GENERADA: se edita esto y se vuelven a
+     generar todas. Si algo de aquí solo vale para un reloj, no va aquí.
+     ============================================================ -->
 <main class="cv2">
 
-  <!-- `pv-visor-fijo`: la foto se queda pegada mientras bajas por las
-       elecciones, para ver el cambio en directo sin perderla de vista. Es
-       la misma forma que tiene el Lunar (Óscar, 19/08/2026). En una sola
-       columna se despega sola: ahí el visor ocupa la pantalla entera. -->
   <div class="pv-cuerpo pv-visor-fijo">
 
     <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
-      <!-- pv-hero-llena: la foto ocupa el marco entero y su fondo de
-           estudio hace de fondo (Óscar, 19/08/2026: «el fondo de las
-           imágenes tiene que unirse con el del recuadro, no tiene que
-           parecer una imagen sobrepuesta»). Con el marco a un color plano
-           se veía el salto, porque el gris de las fotos no es plano: cae
-           hacia las esquinas. Las dos son cuadradas, así que llena sin
-           recortar nada. -->
       <div class="pv-hero pv-hero-llena">
-        <!-- SIN FOTOGRAFÍA (Óscar, 19/08/2026): «quiero comenzar de cero sin
-             imágenes que no sirven». El visor queda vacío a propósito hasta
-             que entre la serie nueva. Las TABLAS de lo que existe —qué caja
-             admite qué correa y qué esfera— se quedan: eso es catálogo, no
-             fotografía. Lo único que se ha ido son las imágenes. -->
-        <img data-pv-foto alt="laOra Trinchera" hidden>
-        <!-- UNA SOLA MINIATURA (Óscar, 25/08/2026). Aquí había otras dos —la
-             hebilla suelta y el cierre de la correa técnica— y las dos
-             apuntaban a ficheros que se fueron en la purga: salían vacías
-             al lado de la buena. Además ya sobran: la correa extendida
-             enseña su propia hebilla, y del color elegido. -->
-        <div class="pv-minis">
-          <!-- LA CORREA DE 36 ABIERTA (Óscar, 25/08/2026). Enseña cómo es el
-               nato de esta medida —su hebilla, su largo y sus agujeros—, así
-               que sale con cualquiera de los seis colores aunque la foto sea
-               la beige. Por eso lleva pie: sin él parecería que el reloj
-               elegido es ese. -->
-          <!-- LA CORREA DE PIEL ABIERTA (Óscar, 25/08/2026). Vale para las
-               dos medidas, 36 y 39, que la correa es la misma. La negra es
-               su foto; las otras tres salen de ella teñidas con el color
-               medido en la foto grande de cada tono. -->
-          <figure class="pv-mini-fig" data-pv-piel hidden>
-            <img alt="La correa de piel, extendida"
-                 src="/assets/img/trinchera-2026/correas/piel-abierta-negra.avif?v=1">
-            <figcaption>La correa, extendida</figcaption>
-          </figure>
-          <figure class="pv-mini-fig" data-pv-nato36 hidden>
-            <!-- SIN la clase pv-mini a propósito: esa regla la fuerza a
-                 140 px de ancho con object-fit:cover, y a una correa de
-                 proporción 1:4 eso le recorta todo menos el centro. -->
-            <img alt="La correa nato de 36 mm, extendida"
-                 src="/assets/img/trinchera-2026/correas/nato36-abierta-beige.avif?v=1">
-            <figcaption>Así es la correa</figcaption>
-          </figure>
+        <!-- EL MONTAJE POR CAPAS, sólo con `?capas` (Óscar, 28/08/2026).
+             Cinco huecos, de atrás hacia delante: la correa va detrás de la
+             caja porque pasa por debajo de las asas. -->
+        <div class="pv-capas" data-pv-capas hidden>
+          <img data-capa="correa" alt="" hidden>
+          <img data-capa="caja" alt="" hidden>
+          <img data-capa="bisel" alt="" hidden>
+          <img data-capa="esf" alt="" hidden>
+          <img data-capa="agujas" alt="" hidden>
         </div>
-        <div class="pv-sinfoto" data-pv-sinfoto>
-          <p>Fotografía en preparación</p>
-          <span>Estamos rehaciendo todas las imágenes del Trinchera. Las medidas, los materiales y el precio son los definitivos.</span>
+        <div class="pv-carrusel" data-pv-carrusel hidden>
+          <button type="button" data-carrusel="-1" aria-label="Opción anterior">‹</button>
+          <span data-carrusel-paso></span>
+          <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
         </div>
-        <p class="pv-aviso">La imagen puede contener errores de diseño*</p>
-        <!-- Ampliar: además del clic en la foto, un botón de verdad, que
-             con el teclado a una imagen no se llega. -->
-        <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
+
+        <!-- ⛔ AQUÍ ESTABAN la foto de la combinación entera, el cartel de
+             «fotografía en preparación» y el botón de ampliar. Los tres eran
+             del mundo de una foto por reloj, que se acabó el 29/08/2026: el
+             visor solo tiene dos estados, la presentación mientras nadie ha
+             elegido nada y el reloj armado con sus piezas en cuanto se elige
+             la primera. -->
+        <!-- LAS MINIATURAS DE LA CORREA (Óscar, 28/08/2026): «en la parte
+             inferior izquierda colocas una miniatura». Es la foto del
+             proveedor, la correa suelta y entera, que es lo que el montaje
+             no puede enseñar: sus capas acaban en el borde del lienzo.
+
+             DE UNA A VARIAS el 29/08/2026: «miniatura cuando se elija esa
+             piel, que se añade a la que ya sale». Las pinta `repasaVisor()`
+             con lo que diga MINI. -->
+        <div class="pv-pila-correa" data-pv-pila-correa hidden></div>
       </div>
 
+      <!-- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO (Óscar, 28/08/2026):
+           «a la izquierda precio, en el centro 3 pagos con Klarna 0 %
+           intereses y a la derecha botón de añadir al carrito». Se apaga
+           sola cuando aparece el pie de la columna de la derecha, que dice
+           lo mismo con más detalle: dos botones de comprar a la vez
+           confunden. Deja su hueco al apagarse para que la foto no pegue
+           un salto cada vez que se cruza el pie. -->
+      <div class="pv-barra" data-pv-barra>
+        <p class="pv-precio pv-barra-precio" data-pv-precio>269,90 €</p>
+        <p class="pv-barra-klarna">
+          <span>3 pagos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+        </p>
+        <button class="cv2-comprar pv-comprar pv-barra-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+      </div>
     </div>
-
 
     <!-- ============ LA COMPRA ============ -->
     <aside class="pv-info">
       <div>
         <div class="pv-chips">
-          <span class="cv2-chip pv-chip-oro">Nuevo</span>
+          
           <span class="cv2-chip">LO-02 · Reloj de campo</span>
         </div>
         <h1>Trinchera</h1>
-        <!-- La descripción del homenaje se quitó del configurador por
-             orden de Óscar (20/08/2026): aquí se configura, no se cuenta. -->
 
-        <!-- EL ORDEN DE LOS PASOS lo fijó Óscar el 19/08/2026: primero el
-             tamaño de la caja —en todos los relojes—, luego el modelo, su
-             esfera o su segundero, el acabado de la caja, el movimiento y al
-             final la correa. Se va de lo que decide el reloj a lo que decide
-             el gusto.
-             Dentro de la correa, el orden lo cerró el 20/08: el pespunte va
-             pegado a ella, porque es de la propia correa; después el color;
-             y el cierre el último de todos. -->
+        <!-- LA CABECERA DE LA COLUMNA, como en Tesla: primero cuándo llega
+             y cómo se paga, y después lo que se elige. -->
+        <p class="pv-entrega" data-pv-entrega>Entrega estimada</p>
+        <label class="pv-oculto" for="pv-modo">Forma de compra</label>
+        <select class="pv-modo" id="pv-modo" data-pv-modo>
+          <optgroup label="Particular">
+            <option value="P-DIR">Particular · Pago directo</option>
+            <option value="P-3">Particular · 3 pagos sin intereses</option>
+            <option value="P-RES">Particular · Reservar</option>
+          </optgroup>
+          <optgroup label="Empresa">
+            <option value="E-DIR">Empresa · Pago directo</option>
+            <option value="E-3">Empresa · 3 pagos sin intereses</option>
+            <option value="E-RES">Empresa · Reservar</option>
+          </optgroup>
+        </select>
+        <p class="pv-modo-nota" data-pv-modo-nota hidden></p>
 
-        <!-- EL DIÁMETRO Y EL MOVIMIENTO, EN LA MISMA LÍNEA (Óscar,
-             24/08/2026): el diámetro a la izquierda y el movimiento a la
-             derecha. En pantalla estrecha se apilan solos. -->
-        <!-- LAS CUATRO FILAS (Óscar, 24/08/2026). Fila 1: diámetro y
-             movimiento, con el calibre debajo. Fila 2: la esfera —estilo,
-             color y segundero—. Fila 3: el acabado de caja. Fila 4: la
-             correa con su color y su cierre. -->
+        <!-- ============ LOS PASOS ============
+             Vacío a propósito. Hasta el 29/08/2026 aquí estaban escritas a
+             mano las once cajas de opciones, con su rótulo y su orden; con
+             diez modelos eso son diez copias que se separan en cuanto
+             alguien cambia una.
 
-        <!-- FILA 1 -->
-        <div class="pv-fila">
-          <div class="pv-fila-cabeza">
-            <div class="pv-grupo" data-paso="diam">
-              <p class="pv-rotulo">Tamaño de caja</p>
-              <div class="pv-opciones" data-pv="diam">
-                <button type="button" data-v="36" aria-pressed="false">&#216; 36</button>
-                <button type="button" data-v="39" aria-pressed="false">&#216; 39</button>
-              </div>
-            </div>
-
-            <div class="pv-grupo" data-paso="mov">
-              <p class="pv-rotulo">Movimiento suizo</p>
-              <div class="pv-opciones" data-pv="mov">
-                <button type="button" data-v="A" aria-pressed="false">Automático</button>
-                <button type="button" data-v="Q" aria-pressed="false">Cuarzo (Pila)</button>
-              </div>
-            </div>
-          </div>
-          <!-- «debajo el calibre escogido que aparece una vez escogido nada más» -->
-          <p class="pv-calibre" data-pv-calibre hidden><b data-pv-cal>Calibre LO_Q6026</b></p>
-        </div>
-
-        <!-- FILA 2 -->
-        <div class="pv-fila pv-grupo" data-paso="estilo">
-          <p class="pv-rotulo">Elige tu esfera</p>
-          <div class="pv-opciones" data-pv="estilo">
-            <button type="button" data-v="K" aria-pressed="false">Khaki</button>
-            <button type="button" data-v="M" aria-pressed="false">Murph</button>
-          </div>
-          <div class="pv-opciones pv-colores" data-pv="esfColor"></div>
-          <div class="pv-sub" data-pv-grupo-esf>
-            <p class="pv-subrotulo" data-pv-rotulo-esf>Numerales</p>
-            <div class="pv-opciones" data-pv="esf"></div>
-          </div>
-          <p class="pv-fijo" data-pv-esf-fija hidden>Khaki negra mate, numerales y agujas blancas</p>
-        </div>
-
-        <!-- FILA 3 -->
-        <div class="pv-fila pv-grupo" data-paso="caja">
-          <p class="pv-rotulo">Acabado de caja</p>
-          <div class="pv-opciones" data-pv="caja">
-            <button type="button" data-v="PL" aria-pressed="false">Acero Plata</button>
-            <button type="button" data-v="NG" aria-pressed="false">Negra PVD</button>
-            <button type="button" data-v="BR" aria-pressed="false">Bronce</button>
-            <button type="button" data-v="TI" aria-pressed="false">Titanio</button>
-          </div>
-        </div>
-
-        <!-- FILA 4 -->
-        <div class="pv-fila pv-grupo" data-paso="correa">
-          <p class="pv-rotulo">Correa</p>
-          <div class="pv-opciones" data-pv="correa"></div>
-          <p class="pv-fijo" data-pv-correa-fija hidden>Piel ante marrón claro</p>
-
-          <div class="pv-sub" data-cuelga="color" data-pv-grupo-color hidden>
-            <p class="pv-subrotulo" data-pv-rotulo-color>Color del nato</p>
-            <div class="pv-opciones pv-colores" data-pv="color"></div>
-          </div>
-
-          <div class="pv-sub" data-cuelga="pesp" data-pv-grupo-pesp hidden>
-            <p class="pv-subrotulo">Pespunte</p>
-            <div class="pv-opciones" data-pv="pesp"></div>
-          </div>
-
-          <div class="pv-sub" data-cuelga="cierre" data-pv-grupo-cierre hidden>
-            <p class="pv-subrotulo">Cierre y hebilla <b data-pv-cierre>Hebilla clásica plateada</b></p>
-            <div class="pv-opciones" data-pv="cierre"></div>
-          </div>
-
-          <!-- EL DÚO, QUE NO ES UNA CORREA (Óscar, 26/08/2026). Va el
-               último del bloque a propósito: es un añadido sobre lo que ya
-               has elegido, no otra manera de elegirlo. No cambia la foto. -->
-        </div>
-
-        <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
-             elección del cliente». La decide el movimiento —cuarzo, roscada
-             sólida; automático, de cristal— y el titanio siempre sólida.
-             Se sigue calculando y sigue en la referencia y en la ficha
-             técnica; lo que se ha ido es el paso, que solo enseñaba una
-             opción tachada. -->
-        <!-- El pespunte solo tiene sentido con la piel italiana del Murph:
-             el resto de correas no lo llevan y el grupo se esconde. -->
-        <!-- El cierre va con la piel italiana, la lleve el Murph o el Khaki:
-             es la misma correa y las mismas cinco hebillas del Lunar. Se
-             llama «Cierre/hebilla» porque es la palabra que la gente busca
-             (Óscar, 20/08/2026). -->
+             Ahora las monta el motor leyendo el contrato de
+             `assets/datos/pasos-2026.json`: el orden, en qué tarjeta va
+             cada paso y cómo se llama. Si hay que mover un paso o
+             cambiarle el nombre, se toca el contrato, no esto. -->
+        <div data-pv-pasos></div>
 
       </div>
 
@@ -445,7 +165,7 @@
         <p class="pv-imp">Impuestos incluidos.</p>
         <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
 
-        <!-- La caja de Klarna, debajo del botón, igual que en el Lunar. OJO:
+        <!-- La caja de Klarna, debajo del botón, OJO:
              solo se anuncia lo que Mollie tiene aprobado —tres plazos sin
              intereses—. Nada de «desde X €/mes con su TAE»: eso es otro
              producto y anunciarlo sin tenerlo sería publicidad financiera
@@ -463,16 +183,8 @@
       </div>
     </aside>
 
-    <!-- LA GALERÍA FIJA, RETIRADA el 26/08/2026. Eran dos fotos de catálogo
-         del Murph —la muñeca y la vista inclinada— y sus AVIF se fueron en
-         la purga del 23/08 con todo lo demás. Desde entonces la ficha
-         pintaba DOS RECUADROS ROTOS de 350x350 debajo del visor, en todas
-         las configuraciones. Vuelve cuando haya fotos: el hueco de la
-         retícula lo ocupa el visor solo, como en el Lunar. -->
-
   </div>
 
-  <!-- ============ LA FICHA TÉCNICA ============ -->
   <section class="pv-tecnica">
     <h2>Ficha Técnica</h2>
     <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
@@ -483,2016 +195,469 @@
 
 </main>
 
-<footer>
-  <a class="cb-marca" href="/coleccion.html" aria-label="laOra, a la colección">la<span class="o"></span>ra<sup>®</sup></a>
-  <p class="pie-aviso">
-    laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos
-    ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje;
-    no implican afiliación con sus fabricantes.
-  </p>
-  <div class="fg-title">Grupo <span class="saneas">Saneas</span></div>
-  <div class="gp-grid">
-    <a class="gp-item" href="https://saneas.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas-web.png" alt="Saneas web" loading="lazy"><b>Saneas web</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/instala-app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-saneas.png" alt="Saneas app" loading="lazy"><b>Saneas app</b>
-    </a>
-    <a class="gp-item" href="https://saneas.es/asesorias" target="_blank" rel="noopener">
-      <span class="gp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><b>Asesorías</b>
-    </a>
-    <a class="gp-item" href="https://pordondevoy-saneas.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-pordondevoy.png" alt="APP Pordondevoy" loading="lazy"><b>Pordondevoy</b>
-    </a>
-    <a class="gp-item" href="https://activala.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-activala.png" alt="Activala" loading="lazy"><b>Activala</b>
-    </a>
-    <a class="gp-item" href="https://acumula.es" target="_blank" rel="noopener">
-      <img src="/assets/img/app-acumula.png?v=2" alt="APP Acumula" loading="lazy"><b>Acumula</b>
-    </a>
-    <a class="gp-item" href="https://quemedices.vercel.app" target="_blank" rel="noopener">
-      <img src="/assets/img/app-quemedices.png" alt="APP ¿Qué me dices?" loading="lazy"><b>¿Qué me dices?</b>
-    </a>
-  </div>
-  <small>© 2026 laOra® · Todos los derechos reservados<a class="pie-privacidad" href="/privacidad.html">Privacidad</a></small>
+<footer class="aviso-marcas">
+  <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
 </footer>
 
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=11"></script>
+<script src="/assets/js/telemetria.js" defer></script>
 <script>
 /* ============================================================
-   EL CONFIGURADOR DEL TRINCHERA 2026
-   El estado son seis letras y de ahí sale todo: la referencia
-   EXACTA de la pestaña DetalleTrinchera, el precio con el motor
-   de siempre, la foto y la ficha técnica. Ni un precio a mano.
+   LAS PIEZAS DEL TRINCHERA
+   ============================================================
+   GENERADO por herramientas/generar_ficha_2026.py desde
+   `assets/datos/fichas/trinchera.json`. No se edita a mano: se edita el
+   JSON y se vuelve a generar.
+
+   Aquí solo hay PIEZAS. Cómo funciona el configurador es de la casa y
+   vive en `/assets/js/configurador-2026.js`, que se carga debajo.
    ============================================================ */
-(function () {
-  'use strict';
-
-  var IMG = '/assets/img/trinchera-2026/';
-
-  var MOVS = {
-    A: { nombre: 'Automático Suizo', cal: 'LO_A4026', coste: 50.09,
-         tec: 'Calibre laOra LO_A4026, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 40 horas de reserva de marcha, cuerda manual y parada de segundero.' },
-    Q: { nombre: 'Cuarzo Suizo', cal: 'LO_Q6026', coste: 15.05,
-         tec: 'Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y pila de hasta 60 meses. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %.' }
+  var OPCIONES = {
+    "tamano": {
+      "36": {
+        "nombre": "36 mm",
+        "expl": "Caja de 36 mm, la medida clásica del reloj de campo.",
+        "coste": 0
+      },
+      "39": {
+        "nombre": "39 mm",
+        "expl": "Caja de 39 mm, algo más presente en la muñeca.",
+        "coste": 0
+      }
+    },
+    "caja": {
+      "PL": {
+        "nombre": "Acero plata",
+        "expl": "Acero inoxidable 316 en acabado plata.",
+        "coste": 23.0
+      },
+      "NG": {
+        "nombre": "Negra PVD",
+        "expl": "Acero inoxidable 316 con recubrimiento PVD negro.",
+        "coste": 23.0
+      },
+      "BR": {
+        "nombre": "Bronce",
+        "expl": "Bronce, que desarrollará su pátina propia con el uso.",
+        "coste": 23.0
+      },
+      "TI": {
+        "nombre": "Titanio",
+        "expl": "Titanio, más ligero que el acero e hipoalergénico. Es la única caja que aguanta 20 ATM.",
+        "coste": 54.39,
+        "agua": "20 ATM / 200 metros"
+      }
+    },
+    "esftipo": {
+      "K": {
+        "nombre": "Khaki",
+        "expl": "Esfera de campo mate con doble numeración —12 y 24 horas— y lumen verde. Diámetro 29 mm.",
+        "coste": 17.29
+      },
+      "M": {
+        "nombre": "Murph",
+        "expl": "Esfera mate con numerales grandes aplicados y agujas catedral con lumen.",
+        "coste": 21.19
+      }
+    },
+    "esf": {
+      "NEG": {
+        "nombre": "Negra",
+        "color": "#16181a",
+        "coste": 0
+      },
+      "BLA": {
+        "nombre": "Blanca",
+        "color": "#efeae0",
+        "coste": 0
+      },
+      "AZU": {
+        "nombre": "Azul",
+        "color": "#2f5a95",
+        "coste": 0
+      },
+      "GRI": {
+        "nombre": "Gris",
+        "color": "#726b69",
+        "coste": 0
+      },
+      "MCR": {
+        "nombre": "Numerales crema",
+        "color": "#e2d4b4",
+        "coste": 0
+      },
+      "MBL": {
+        "nombre": "Numerales blancos",
+        "color": "#f2f2ef",
+        "coste": 0
+      }
+    },
+    "mov": {
+      "Q": {
+        "nombre": "Cuarzo Suizo",
+        "expl": "Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y pila de hasta 60 meses. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %.",
+        "coste": 18.65
+      },
+      "A": {
+        "nombre": "Automático Suizo",
+        "expl": "Calibre laOra LO_A4026, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 40 horas de reserva de marcha, cuerda manual y parada de segundero.",
+        "coste": 50.09
+      }
+    },
+    "correamat": {
+      "A316": {
+        "nombre": "Acero 316L",
+        "expl": "Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable.",
+        "coste": 0
+      },
+      "CAUCHO": {
+        "nombre": "Caucho",
+        "expl": "Caucho con textura, cómodo en verano y el único que se puede mojar sin pensarlo.",
+        "coste": 0,
+        "cierre": true
+      },
+      "PPER": {
+        "nombre": "Piel perforada",
+        "expl": "Piel perforada. Se ablanda con el uso, pero no se moja.",
+        "coste": 0,
+        "cierre": true,
+        "pespunte": true
+      },
+      "PITA": {
+        "nombre": "Piel italiana hecha a mano",
+        "expl": "Piel de vaca italiana cosida a mano, con el canto pintado.",
+        "coste": 0,
+        "cierre": true,
+        "pespunte": true
+      },
+      "TELA": {
+        "nombre": "Tela vaquera",
+        "expl": "Tela vaquera de trama diagonal, forrada en cuero coñac por dentro.",
+        "coste": 0,
+        "cierre": true
+      }
+    },
+    "correa": {
+      "A316S": {
+        "nombre": "Acero satinado",
+        "coste": 19.79,
+        "familia": "A316"
+      },
+      "A316NGS": {
+        "nombre": "PVD negro satinado",
+        "coste": 20.6,
+        "familia": "A316"
+      },
+      "A316ORS": {
+        "nombre": "Centro oro rosa satinado",
+        "familia": "A316"
+      },
+      "A316AMS": {
+        "nombre": "Centro oro amarillo satinado",
+        "familia": "A316"
+      },
+      "A316P": {
+        "nombre": "Acero, centro pulido",
+        "coste": 20.19,
+        "familia": "A316"
+      },
+      "A316NGP": {
+        "nombre": "PVD negro, centro pulido",
+        "coste": 20.19,
+        "familia": "A316"
+      },
+      "A316ORP": {
+        "nombre": "Centro oro rosa pulido",
+        "coste": 20.19,
+        "familia": "A316"
+      },
+      "A316AMP": {
+        "nombre": "Centro oro amarillo pulido",
+        "coste": 20.19,
+        "familia": "A316"
+      },
+      "CAZU": {
+        "nombre": "Azul",
+        "coste": 9.89,
+        "familia": "CAUCHO"
+      },
+      "CAZN": {
+        "nombre": "Azul y naranja",
+        "coste": 9.89,
+        "familia": "CAUCHO"
+      },
+      "CMAC": {
+        "nombre": "Marrón y crema",
+        "coste": 9.89,
+        "familia": "CAUCHO"
+      },
+      "CNVF": {
+        "nombre": "Negra y verde flúor",
+        "coste": 9.89,
+        "familia": "CAUCHO"
+      },
+      "CBLA": {
+        "nombre": "Blanca",
+        "coste": 9.89,
+        "familia": "CAUCHO"
+      },
+      "CNBL": {
+        "nombre": "Negra y blanca",
+        "familia": "CAUCHO"
+      },
+      "CBOR": {
+        "nombre": "Blanca y oro rosa",
+        "familia": "CAUCHO"
+      },
+      "CNGR": {
+        "nombre": "Negra y gris",
+        "familia": "CAUCHO"
+      },
+      "CAZC": {
+        "nombre": "Azul celeste",
+        "familia": "CAUCHO"
+      },
+      "CBGR": {
+        "nombre": "Blanca y gris",
+        "familia": "CAUCHO"
+      },
+      "PCAQ": {
+        "nombre": "Caqui oliva",
+        "coste": 6.69,
+        "familia": "PPER"
+      },
+      "PCON": {
+        "nombre": "Coñac y naranja",
+        "coste": 6.69,
+        "familia": "PPER"
+      },
+      "PMAR": {
+        "nombre": "Marrón",
+        "coste": 6.69,
+        "familia": "PPER"
+      },
+      "PNEG": {
+        "nombre": "Negra",
+        "coste": 6.69,
+        "familia": "PPER"
+      },
+      "IMAR": {
+        "nombre": "Marrón",
+        "familia": "PITA"
+      },
+      "INEG": {
+        "nombre": "Negra",
+        "familia": "PITA"
+      },
+      "IVER": {
+        "nombre": "Verde",
+        "familia": "PITA"
+      },
+      "IAZU": {
+        "nombre": "Azul",
+        "familia": "PITA"
+      },
+      "VBEI": {
+        "nombre": "Beige",
+        "familia": "TELA"
+      },
+      "VMAL": {
+        "nombre": "Malva",
+        "familia": "TELA"
+      },
+      "VNEG": {
+        "nombre": "Negra",
+        "familia": "TELA"
+      },
+      "VGRI": {
+        "nombre": "Gris",
+        "familia": "TELA"
+      },
+      "VAZU": {
+        "nombre": "Azul claro",
+        "familia": "TELA"
+      }
+    },
+    "pespunte": {
+      "T": {
+        "nombre": "Al tono",
+        "coste": 0,
+        "ref": "T"
+      },
+      "B": {
+        "nombre": "Blanco",
+        "coste": 0,
+        "ref": "B"
+      }
+    },
+    "cierre": {
+      "plata": {
+        "nombre": "Clásica plata",
+        "expl": "Hebilla clásica de acero plateado.",
+        "coste": 0
+      },
+      "negra": {
+        "nombre": "Clásica negra",
+        "expl": "Hebilla clásica de acero con PVD negro.",
+        "coste": 1.2
+      },
+      "oro-rosa": {
+        "nombre": "Clásica oro rosa",
+        "expl": "Hebilla clásica en oro rosa.",
+        "coste": 0
+      },
+      "oro": {
+        "nombre": "Clásica oro",
+        "expl": "Hebilla clásica dorada.",
+        "coste": 1.0
+      },
+      "mariposa": {
+        "nombre": "Mariposa plata",
+        "expl": "Cierre de mariposa de acero plateado.",
+        "coste": 0.2
+      }
+    }
   };
-  var CAJAS = {
-    PL: { nombre: 'Acero Plata', mat: 'acero inoxidable 316 en acabado plata', coste: 23.00 },
-    NG: { nombre: 'Negra PVD',   mat: 'acero inoxidable 316 con recubrimiento PVD negro', coste: 23.00 },
-    BR: { nombre: 'Bronce',      mat: 'bronce, que desarrollará su pátina propia', coste: 23.00 },
-    TI: { nombre: 'Titanio',     mat: 'titanio, más ligero que el acero e hipoalergénico', coste: 54.39 }
+
+  /* Lo que viene puesto al abrir: la primera opción de cada paso. */
+  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316S", "pespunte": "T", "cierre": "plata"};
+
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, así que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviéndose hoy.
+
+     Por eso el modelo puede traer su plantilla en el JSON. `{esf}` es lo
+     elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
+     que no traiga ninguna, se arma con el código y todos los pasos en el
+     orden del contrato. */
+  var ORDEN = ["tamano", "caja", "esftipo", "esf", "mov", "correamat", "correa", "pespunte", "cierre"];
+
+  /* ---------- LAS PUERTAS ----------
+     Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
+     con un brazalete de acero no hay nada que coser, y ensenarlo seria
+     preguntar por algo que ese reloj no lleva. Se declara en el JSON
+
+         "puertas": { "pespunte": { "paso": "correamat", "campo": "pespunte" } }
+
+     y se lee asi: el paso `pespunte` se abre cuando la opcion elegida en
+     `correamat` trae el campo `pespunte`. El motor esconde los cerrados y
+     no les suma el coste; aqui se les quita ademas de la referencia y de
+     la descripcion, que es lo que hace que el reloj se llame igual
+     eligiendo un pespunte que el otro cuando no lleva ninguno. */
+  var PUERTAS = {"pespunte": {"paso": "correamat", "campo": "pespunte"}, "cierre": {"paso": "correamat", "campo": "cierre"}};
+
+  /* ---------- LOS FILTROS ----------
+     Un paso cuyas opciones dependen de lo elegido en otro. El color de la
+     correa es del MATERIAL: eligiendo acero no se ensena el azul celeste
+     del caucho. Se declara en el JSON
+
+         "filtros": { "correa": { "paso": "correamat", "campo": "familia" } }
+
+     y se lee asi: en `correa` solo salen las opciones cuyo `familia` sea el
+     material elegido. Sin esto los dos pasos van cada uno por su lado: el
+     29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
+     6.816 porque montaba brazaletes de acero con hebilla de piel. */
+  var FILTROS = {"correa": {"paso": "correamat", "campo": "familia"}};
+  function cuelgaDe(k) { return FILTROS[k] || null; }
+  function valeEn(k, id, s) {
+    var f = cuelgaDe(k);
+    if (!f) return true;
+    var o = OPCIONES[k] && OPCIONES[k][id];
+    return !!o && o[f.campo] === (s || e)[f.paso];
+  }
+  function abierta(k, s) {
+    var g = PUERTAS[k];
+    if (!g) return true;
+    var o = OPCIONES[g.paso] && OPCIONES[g.paso][(s || e)[g.paso]];
+    return !!(o && o[g.campo]);
+  }
+
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, asi que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviendose hoy.
+
+     `{esf}` es lo elegido en ese paso y `{mov.tapa}` un dato de la opcion
+     elegida. Un paso con la puerta cerrada no escribe nada, y el guion que
+     le tocaba se cae con el: sin eso, un brazalete acabaria en `-A316S-` y
+     el mismo reloj tendria dos referencias segun un pespunte que no lleva. */
+  var PLANTILLA_REF = "LO-02-{mov}-{caja}{tamano}-{esftipo}{esf}-{correa}{pespunte.ref}-{cierre}";
+  function referencia(e) {
+    if (!PLANTILLA_REF) {
+      return 'LO-02-' + ORDEN.filter(function (k) { return abierta(k, e); })
+        .map(function (k) { return e[k]; }).join('-');
+    }
+    return PLANTILLA_REF.replace(/\{([a-z]+)(?:\.([a-z]+))?\}/g, function (_, paso, campo) {
+      if (!abierta(paso, e)) return '';
+      var v = e[paso];
+      if (!campo) return v;
+      var o = OPCIONES[paso] && OPCIONES[paso][v];
+      return (o && o[campo]) || '';
+    }).replace(/-{2,}/g, '-').replace(/-+$/, '');
+  }
+  function nombreDe(k) {
+    if (!abierta(k)) return '';
+    var t = OPCIONES[k], o = t && t[e[k]];
+    return o ? o.nombre : '';
+  }
+  function descripcion(e) {
+    return 'laOra Trinchera, ' + ORDEN.map(nombreDe).filter(Boolean)
+      .join(', ').toLowerCase() + '.';
+  }
+  function dichoCompleto(e) { return descripcion(e); }
+  function detalle(e) {
+    return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
+  }
+  /* LA ESTANQUEIDAD PUEDE SER DE UNA PIEZA. El Trinchera aguanta 5 ATM
+     salvo en titanio, que son 20: la caja lo dice en su propia opcion y
+     manda sobre la del modelo. Vale para cualquier paso. */
+  function agua(e) {
+    for (var i = 0; i < ORDEN.length; i++) {
+      var t = OPCIONES[ORDEN[i]], o = t && t[e[ORDEN[i]]];
+      if (o && o.agua) return o.agua;
+    }
+    return "5 ATM / 50 metros";
+  }
+
+  /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
+     técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
+     lo que decía antes: nada. */
+  function tecnica(e) {
+    return { caja: detalle(e) + '.', mov: nombreDe('mov'),
+             esf: nombreDe('esf'), agua: agua(e) };
+  }
+
+  window.LAORA_MODELO = {
+    slug: "trinchera", nombre: "Trinchera",
+    OPCIONES: OPCIONES, e: e,
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"A316S": "A316", "A316NGS": "A316", "A316ORS": "A316", "A316AMS": "A316", "A316P": "A316", "A316NGP": "A316", "A316ORP": "A316", "A316AMP": "A316", "CAZU": "CAUCHO", "CAZN": "CAUCHO", "CMAC": "CAUCHO", "CNVF": "CAUCHO", "CBLA": "CAUCHO", "CNBL": "CAUCHO", "CBOR": "CAUCHO", "CNGR": "CAUCHO", "CAZC": "CAUCHO", "CBGR": "CAUCHO", "PCAQ": "PPER", "PCON": "PPER", "PMAR": "PPER", "PNEG": "PPER", "IMAR": "PITA", "INEG": "PITA", "IVER": "PITA", "IAZU": "PITA", "VBEI": "TELA", "VMAL": "TELA", "VNEG": "TELA", "VGRI": "TELA", "VAZU": "TELA"},
+    MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
+    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
+       paquetes no hay coste, así que la ficha dice «Precio por definir» y
+       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
+    CAPA: {}, PILA: [],
+    /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
+       salen muchas más de las que se montan: la Bitácora da 126 y monta
+       36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
+       salida con lo ya elegido. Vacía quiere decir «todas valen». */
+    PAQUETES: [{"esftipo": "K", "esf": "NEG"}, {"esftipo": "K", "esf": "BLA"}, {"esftipo": "K", "esf": "AZU"}, {"esftipo": "K", "esf": "GRI"}, {"esftipo": "M", "esf": "MCR"}, {"esftipo": "M", "esf": "MBL"}],
+    /* EL COSTE, SUMANDO LO ELEGIDO. Cada opción trae el suyo y el modelo
+       añade lo que no depende de ningún paso —el logo—. Si a una le falta,
+       no hay coste: se dibuja, pero no se pone precio ni se vende. */
+    COSTES_PUESTOS: true, EXTRA: 3.78,
+    CADENA: ["esftipo", "esf"],
+    /* Las puertas: el motor esconde el paso cerrado y no le suma coste. */
+    PUERTAS: PUERTAS, abierta: abierta,
+    FILTROS: FILTROS, valeEn: valeEn,
+    referencia: referencia, descripcion: descripcion,
+    dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
+    tecnica: tecnica
   };
-  /* DOS NOMBRES POR ESFERA (Óscar, 19/08/2026): el corto es el del botón
-     —«ya se sabe que son del Khaki cuando lo señalas», y cuantas menos
-     letras mejor— y el largo el de la ficha y el catálogo, donde la
-     referencia viaja sola y sí necesita decir de qué esfera habla. */
-  var ESFERAS = {
-    /* RETIRADA el 24/08/2026: la esfera se elige por color y el segundero
-       rojo deja de venderse. Se queda definida por si vuelve. */
-    KR: { nombre: 'Khaki, Segundero Rojo', corto: 'Seg Rojo',   coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero rojo y agujas plateadas con lumen verde. Diámetro 29 mm.' },
-    KB: { nombre: 'Khaki, Segundero Blanco', corto: 'Seg Blanco', coste: 17.29, tec: 'Khaki negra mate con numerales blancos y lumen verde, doble numeración, segundero blanco y agujas plateadas con lumen verde. Diámetro 29 mm.' },
-    MA: { nombre: 'Murph, Numerales Crema', corto: 'Numerales Crema', coste: 21.19, tec: 'Murph negra mate con numerales crema y agujas catedral con lumen.' },
-    MB: { nombre: 'Murph, Numerales Blancos', corto: 'Numerales Blancos', coste: 21.19, tec: 'Murph negra mate con numerales blancos y agujas catedral con lumen.' },
-    BRZ:{ nombre: 'Khaki, Agujas Blancas y Plata', corto: 'Agujas Blancas y Plata', coste: 17.29, tec: 'Khaki negra mate con agujas blancas y plata, para las cajas de bronce y titanio.' }
-  };
-  /* COSTES DE LAS CORREAS · corregidos el 19/08/2026 con los anuncios que
-     mandó Óscar. Venían de la hoja de materiales vieja y estaban a menos
-     de la mitad: la piel del Murph a 13,69 cuando el proveedor la cobra a
-     29,99, y el nato a 5,69 cuando son 11,29. El mapa pieza por pieza está
-     en .docs/sourcing-trinchera-2026.md. */
-  var CORREAS = {
-    /* UN SOLO NATO con cinco colores (Óscar, 19/08/2026). Antes eran dos
-       correas distintas —verde y negro— y ahora es la misma en cinco tonos,
-       como el ante: el color va aparte y entra en la referencia. */
-    NATO:  { nombre: 'Nato', coste: 11.29,  tec: 'nato de 20 mm con hebilla clásica plateada' },
-    /* EL NATO DE LA CAJA DE 36 ES OTRO PRODUCTO (Óscar, 20/08/2026):
-       anuncio 1005009739738725, a 5,59 €, y SOLO ese para la de 36. El de
-       11,29 es solo para la de 39. Un solo botón «Nato»: el coste lo
-       decide el diámetro en costes(). */
-    /* GRABADAS EN COCO (Óscar, 26/08/2026). La foto madre del Murph llegó
-       con la correa en cocodrilo brillante, no en la lisa encerada que
-       decía esta ficha; preguntado cuál manda, dijo que la foto. OJO AL
-       COSTE: los 29,99 € son los de la lisa; si el proveedor cobra otra
-       cosa por la grabada, este es el número que hay que corregir. */
-    PIELN: { nombre: 'Piel Negra',   coste: 29.99, tec: 'piel genuina negra de vaca italiana grabada en coco, con pespunte blanco, hebilla clásica plateada' },
-    PIELM: { nombre: 'Piel Marrón',  coste: 29.99, tec: 'piel genuina marrón claro de vaca italiana grabada en coco, con pespunte blanco, hebilla clásica plateada' },
-    /* La piel verde entra el 19/08/2026 con la serie maestra del Murph. El
-       coste es el MISMO que el de las otras dos pieles genuinas porque es
-       la misma correa en otro color; si el proveedor cobra otra cosa, este
-       es el número que hay que corregir. */
-    PIELV: { nombre: 'Piel Verde',   coste: 29.99, tec: 'piel genuina verde militar de vaca italiana grabada en coco, con pespunte blanco, hebilla clásica plateada' },
-    ACERO: { nombre: 'Brazalete Acero', coste: 19.69, tec: 'brazalete de acero inoxidable 316L de tres eslabones, acabado brillante, 20 mm, con cierre desplegable' },
-    /* El brazalete en PVD negro es SOLO para la caja negra (Óscar, 19/08/2026):
-       un brazalete negro en una caja de acero no es un reloj, es un apaño. */
-    ACERONG: { nombre: 'Brazalete Negro PVD', coste: 26.50, tec: 'brazalete de acero inoxidable 316L de tres eslabones con recubrimiento PVD negro, 20 mm, con cierre desplegable' },
-    /* LOS DÚOS YA NO SON CORREAS (Óscar, 26/08/2026): «no tiene que enseñar
-       ninguna imagen, es un botón auxiliar que añade el precio de venta de
-       los dos brazaletes, pero siempre sobre una combinación válida ya
-       elegida». Eran cuatro entradas de esta tabla —DUON, DUOM, DUOV y
-       DUOA—, cada una con su coste y su foto propia, y esa foto no existía:
-       elegir el dúo te dejaba con el cartel de «Fotografía en preparación»
-       en vez de con el reloj que acababas de configurar.
-
-       Ahora el dúo es un añadido: se marca sobre la correa ya elegida, la
-       foto no cambia y el precio suma el brazalete. La cuenta sale igual
-       que antes —29,99 de piel + 19,69 de brazalete son los 49,68 de DUON,
-       y 4,30 de ante + 19,69 son los 23,99 de DUOA—, así que ningún precio
-       se mueve. Lo que cambia es la referencia, que ahora es la de la
-       correa con `-DUO` detrás. */
-    ANTE:  { nombre: 'Piel Ante', coste: 4.30, tec: 'correa de piel ante marrón claro con hebilla clásica plateada' },
-    /* LA PIEL DEL KHAKI (Óscar, 19/08/2026): 15 €, 20 mm, en tres colores
-       y con la hebilla clásica a elegir entre plata y negra. Antes estaba
-       como un solo color a 4,69 —número de la hoja vieja— y solo en el
-       titanio. */
-    PIELO: { nombre: 'Piel del Khaki', coste: 15.00, tec: 'piel de 20 mm con pespunte rectangular claro y hebilla clásica' },
-  };
-  /* Los cuatro antes del Murph (Óscar, 19/08/2026). Van en su propia lista
-     porque no son los del nato: aquel tiene siete y estos cuatro, y el
-     estado los guarda aparte para que cambiar de correa no se lleve por
-     delante el color elegido en la otra. */
-  /* LOS CUATRO ANTES (Óscar, 19/08/2026), los mismos para el Khaki y para
-     el Murph, y los cuatro fotografiados. */
-  /* SE ACABARON LOS RECORTES DEL ANTE (Óscar, 25/08/2026): «correas de ante
-     ya en la carpeta y sirven para 36 y 39mm». Llegaron las dieciséis fotos
-     —cuatro cajas por cuatro colores— y con ellas caen las dos excepciones
-     del 20/08: el bronce vuelve a tener el camel y la caja negra de PVD deja
-     de estar atada al negro. El motivo escrito entonces era «no hay más
-     fotos», y ya las hay. Sigue en pie el recorte de la PIEL en el PVD, que
-     es otra correa y otra decisión. */
-  /* EL NATO DEL PVD ABRE AL VERDE (Óscar, 23/08/2026): «ahora vamos a
-     ofrecer la caja pvd negra con nato verde también». Solo el nato y solo
-     esos dos colores; la piel y el ante siguen en negro y punto. */
-  /* EL COLOR DE LA ESFERA (Óscar, 24/08/2026): «Negra, Blanca, Azul, Gris,
-     debajo recuadros del color y nombre del color». De momento solo está
-     hecha la negra; las otras tres salen tachadas —que es como se dice
-     aquí «esto todavía no existe»— hasta que Óscar apruebe su coste y su
-     foto. Sin precio no se venden. */
-  /* LOS CUATRO COLORES, y tres de ellos YA SE PUEDEN PULSAR (26/08/2026).
-     Blanca, azul y gris entran hoy con sus fotos; el cuarto valor de cada
-     línea es si se puede elegir. */
-  var ESF_COLORES = {
-    NEG: ['Negra',  '#16181a', true],
-    BLA: ['Blanca', '#efeae0', true],
-    AZU: ['Azul',   '#2f5a95', true],
-    GRI: ['Gris',   '#726b69', true]
-  };
-  /* Y CÓMO SE LLAMA CADA UNA EN LA FOTO. La negra no pone nada: es la que
-     había y sus 93 claves no cambian ni una letra. */
-  var ESF_FOTO = { NEG: '', BLA: '-esfblanca', AZU: '-esfazul', GRI: '-esfgris' };
-  /* Y CÓMO SE LLAMA EN LA REFERENCIA (Óscar, 26/08/2026). Hasta hoy no se
-     llamaba de ninguna manera: el color de la esfera NO entraba en la
-     referencia, así que la Khaki negra y la Khaki azul del mismo reloj
-     compartían `LO-02-A-PL36C-KB-NATO-VER` y quien compraba la azul mandaba
-     un pedido con el código de la negra. Se abrió el 26/08 con las fotos de
-     la blanca, la azul y la gris, y el descuadre entró con ellas.
-
-     La NEGRA no pone nada, como en las fotos: sus referencias no cambian ni
-     una letra y lo que ya está vendido sigue valiendo. Va sólo en el Khaki,
-     que es el único que elige color. */
-  var ESF_REF  = { NEG: '', BLA: '-ESFBLA', AZU: '-ESFAZU', GRI: '-ESFGRI' };
-  var ANTES = {
-    NEG: ['Negro', '#2b2a2b'],            MOS: ['Marrón oscuro', '#4b382e'],
-    AZU: ['Azul petróleo', '#1f5a72'],    CAM: ['Camel', '#c08a4a']
-  };
-
-  /* LOS COLORES DEL NATO (Óscar, 19/08/2026). Del anuncio se descartan el
-     azul y el gris liso: «gris nato no existe». Quedan cuatro. */
-  /* LOS SEIS COLORES DEL NATO (Óscar, 24/08/2026), con la foto de cada uno
-     en las cajas de acero, PVD y bronce. El beige pasa a llamarse ARENA,
-     que es como viene nombrado el material; su código sigue siendo BEI para
-     no mover las referencias que ya existen. Los tonos son los MEDIDOS en
-     las fotos, no los del catálogo viejo. */
-  var NATOS_39 = {
-    VER: ['Verde militar', '#5e5739'], NEG: ['Negro', '#222323'],
-    BEI: ['Arena', '#766445'],         NGR: ['Negro y gris', '#2f2f2e'],
-    GRI: ['Gris', '#5d5d5a'],          AZM: ['Azul marino', '#1e2c39']
-  };
-  /* LA CAJA DE 36 LLEVA OTRO NATO, y por tanto otra gama (Óscar,
-     24/08/2026). No es el mismo producto del proveedor, así que sus colores
-     no son los mismos: comparte el verde, el negro, el gris y el azul, pero
-     el suyo tiene BEIGE claro y MOSTAZA, y no tiene el arena ni el negro y
-     gris del de 39. Se comprobó que la diferencia es real y no de la luz:
-     la caja de acero mide 178 de luminancia en una serie y 181 en la otra.
-     Los tonos son los MEDIDOS en las fotos de cada gama. */
-  var NATOS_36 = {
-    VER: ['Verde militar', '#3c4f36'], NEG: ['Negro', '#252626'],
-    BGE: ['Beige', '#dac4a4'],         MOS: ['Mostaza', '#b27c16'],
-    GRI: ['Gris', '#646665'],          AZM: ['Azul marino', '#294058']
-  };
-  /* EL NATO DEL PVD DE 36 SON TRES (Óscar, 26/08/2026): «verde, mostaza,
-     azul no son opciones para pvd». SOLO en la caja de 36: la de 39 se
-     queda con sus seis, que además llevan su foto publicada desde el
-     24/08 —también el verde y el azul marino—, y quitarlos de allí sería
-     tirar tres fotos buenas.
-     Se declara DESPUÉS de NATOS_36 a propósito: con `var`, una tabla que
-     se copia de otra declarada más abajo se iza como undefined y el grupo
-     de colores sale vacío. Ya pasó el 24/08. */
-  var NATOS_36_PVD = { BGE: NATOS_36.BGE, NEG: NATOS_36.NEG, GRI: NATOS_36.GRI };
-  /* La gama que toca, según la medida y la caja elegidas. */
-  function natos() {
-    if (e.diam !== '36') return NATOS_39;
-    return e.caja === 'NG' ? NATOS_36_PVD : NATOS_36;
-  }
-
-  /* LAS CORREAS DE 36 FOTOGRAFIADAS ABIERTAS. Una línea por foto nueva; el
-     color que no esté aquí enseña la beige con su pie. Los ficheros van a
-     assets/img/trinchera-2026/correas/nato36-abierta-{tono}.avif, con el
-     tono de NATO_FOTO: beige, verde, negro, gris, azulmarino, mostaza.
-
-     Los seis están. La beige es la foto de Óscar; las otras cinco salen de
-     ella teñidas con recolorear_correa.py, que copia el color MEDIDO en la
-     foto grande de cada tono. No es un tinte plano: se traslada la
-     luminancia del tejido —media y desviación— para que la trama, los
-     pliegues y la sombra se queden donde estaban. */
-  var ABIERTA_36  = { BGE: 1, VER: 1, NEG: 1, GRI: 1, AZM: 1, MOS: 1 };
-  /* La piel abierta, en sus cuatro colores y para las dos medidas. */
-  var ABIERTA_PIEL = { NEG: 1, MOS: 1, MCL: 1, AZU: 1 };
-  var ABIERTA_IMG = '/assets/img/trinchera-2026/correas/';
-  var ABIERTA_V   = '?v=1';
-
-
-  /* FUERA EL NATO + PIEL (Óscar, 25/08/2026): «ni 36 ni 39 van a tener
-     nato+piel». Con él se van sus seis colores, que no los usaba nadie más,
-     y el precio especial que llevaba —se tarifaba con el coste del nato y
-     se le sumaban 10 €—. El nato de lona se queda tal cual. */
-  /* Los tres de la piel del khaki, con sus dos hebillas */
-  /* LAS PIELES DEL KHAKI. El AZUL entra el 25/08/2026 con sus fotos en las
-     cuatro cajas de 36. Los tonos son los MEDIDOS en esas fotos, no los del
-     catálogo viejo, que iban bastante más oscuros de lo que sale en estudio. */
-  var PIELES_K = { NEG: ['Negra', '#3d3d3c'], MOS: ['Marrón oscuro', '#614a41'],
-                   MCL: ['Marrón claro', '#a85f3f'], AZU: ['Azul', '#46575c'] };
-  /* LAS TRES PIELES DEL MURPH, ahora como colores y no como tres correas
-     distintas (Óscar, 20/08/2026): «un botón con Piel y el color en otra
-     elección, como se hace con el ante». Es la misma correa italiana de
-     20 mm; lo único que cambia es el tono. El valor sigue siendo la
-     correa de verdad —PIELN, PIELM, PIELV— para que el coste, la
-     referencia y la ficha técnica no se enteren del cambio. */
-  var PIELES_M = { PIELN: ['Negra', '#1c1c1e'], PIELM: ['Marrón', '#4a2a1c'],
-                   PIELV: ['Verde militar', '#26382a'] };
-  /* De los dúos viejos solo queda la traducción, para que un enlace o un
-     carrito guardado con la correa `DUOM` siga abriendo el reloj que pedía:
-     la piel marrón, con el brazalete añadido. */
-  var DUO_VIEJO = { DUON: 'PIELN', DUOM: 'PIELM', DUOV: 'PIELV', DUOA: 'ANTE' };
-  var PIELK_FOTO = { NEG: 'negra', MOS: 'marronoscuro', MCL: 'marronclaro', AZU: 'azul' };
-  var CIERRES_K = { 'plata': 'Clásica plata', 'negra': 'Clásica negra' };
-  /* LA SERIE NUEVA (19/08/2026). Se rehace el Trinchera entero y las fotos
-     entran de una en una: aquí solo está lo que YA existe, y lo que no está
-     no se enseña —el visor lo dice—. La clave es lo que se ve en la foto:
-     caja, esfera, correa y, en la piel italiana, el pespunte. La hebilla no
-     entra: no cambia el reloj y tiene su propia miniatura.
-
-     Para añadir una foto: se convierte a AVIF en 480/1200/1600 dentro de
-     `assets/img/trinchera-2026/serie/` y se apunta su clave aquí. */
-  var SERIE_IMG = '/assets/img/trinchera-2026/serie/';
-  /* EL NÚMERO DE VERSIÓN DE LAS FOTOS. Cloudflare y el navegador guardan
-     las imágenes por su nombre, así que rehacer una foto SIN cambiarle el
-     nombre no llega a nadie: el 20/08/2026 Óscar seguía viendo el
-     logotipo en el sitio de antes tres despliegues después. Lo sube solo
-     el hook de pre-commit cuando cambia algo de serie/. */
-  var SERIE_V = '?v=59';
-  /* LA SERIE, EMPEZADA DE CERO el 19/08/2026 por orden de Óscar: fuera
-     todas las fotos anteriores y se entra una a una, modelo y versión,
-     comprobando cada una antes de pasar a la siguiente.
-
-     LA CLAVE LLEVA EL DIÁMETRO delante. Antes no, y era un error: el
-     nato mide 275 mm y no vale para la caja de 36 —quien la busca tiene
-     la muñeca fina y le sobraría media correa—, así que una foto de 39
-     no puede servir para las dos medidas.
-     LA PIEL ES LA EXCEPCIÓN, y por ese mismo motivo al revés: mide 20 mm y
-     es la misma en las dos cajas, así que sus fotos sirven para ambas. Lo
-     resuelve `serieFoto()`; aquí siguen dadas de alta una sola vez.
-
-     Lo que no tiene foto sale con su cartel, nunca con la imagen de
-     otro reloj. */
-  /* LAS FOTOS QUE EXISTEN DE VERDAD, y nada más (23/08/2026).
-
-     Antes esta tabla declaraba las 224 combinaciones de la serie vieja. Al
-     borrarlas todas se quedó mintiendo: `serieFoto()` pregunta AQUÍ, no al
-     disco, así que la ficha daba por buena una foto que ya no estaba, pintaba
-     un <img> en 404 y encima escondía el cartel de «Fotografía en
-     preparación». Y el rescate que busca otra combinación con foto tampoco
-     servía de nada, porque cualquiera le parecía válida.
-
-     LA NORMA: una línea por foto publicada, y se añade EN EL MISMO COMMIT que
-     el AVIF. Lo que no esté aquí sale con el cartel, que es la verdad. */
-  var SERIE = {
-    '36-acero-blanca-ante-azulpetroleo': 1,
-    '36-acero-blanca-ante-azulpetroleo-esfazul': 1,
-    '36-acero-blanca-ante-azulpetroleo-esfblanca': 1,
-    '36-acero-blanca-ante-azulpetroleo-esfgris': 1,
-    '36-acero-blanca-ante-camel': 1,
-    '36-acero-blanca-ante-camel-esfazul': 1,
-    '36-acero-blanca-ante-camel-esfblanca': 1,
-    '36-acero-blanca-ante-camel-esfgris': 1,
-    '36-acero-blanca-ante-marronoscuro': 1,
-    '36-acero-blanca-ante-marronoscuro-esfazul': 1,
-    '36-acero-blanca-ante-marronoscuro-esfblanca': 1,
-    '36-acero-blanca-ante-marronoscuro-esfgris': 1,
-    '36-acero-blanca-ante-negro': 1,
-    '36-acero-blanca-ante-negro-esfazul': 1,
-    '36-acero-blanca-ante-negro-esfblanca': 1,
-    '36-acero-blanca-ante-negro-esfgris': 1,
-    '36-acero-blanca-brazalete': 1,
-    '36-acero-blanca-brazalete-esfazul': 1,
-    '36-acero-blanca-brazalete-esfblanca': 1,
-    '36-acero-blanca-brazalete-esfgris': 1,
-    '36-acero-blanca-nato-azulmarino': 1,
-    '36-acero-blanca-nato-azulmarino-esfazul': 1,
-    '36-acero-blanca-nato-azulmarino-esfblanca': 1,
-    '36-acero-blanca-nato-azulmarino-esfgris': 1,
-    '36-acero-blanca-nato-beige': 1,
-    '36-acero-blanca-nato-beige-esfazul': 1,
-    '36-acero-blanca-nato-beige-esfblanca': 1,
-    '36-acero-blanca-nato-beige-esfgris': 1,
-    '36-acero-blanca-nato-gris': 1,
-    '36-acero-blanca-nato-gris-esfazul': 1,
-    '36-acero-blanca-nato-gris-esfblanca': 1,
-    '36-acero-blanca-nato-gris-esfgris': 1,
-    '36-acero-blanca-nato-mostaza': 1,
-    '36-acero-blanca-nato-mostaza-esfazul': 1,
-    '36-acero-blanca-nato-mostaza-esfblanca': 1,
-    '36-acero-blanca-nato-mostaza-esfgris': 1,
-    '36-acero-blanca-nato-negro': 1,
-    '36-acero-blanca-nato-negro-esfazul': 1,
-    '36-acero-blanca-nato-negro-esfblanca': 1,
-    '36-acero-blanca-nato-negro-esfgris': 1,
-    '36-acero-blanca-nato-verde': 1,
-    '36-acero-blanca-nato-verde-esfazul': 1,
-    '36-acero-blanca-nato-verde-esfblanca': 1,
-    '36-acero-blanca-nato-verde-esfgris': 1,
-    '36-acero-blanca-pielkhaki-azul': 1,
-    '36-acero-blanca-pielkhaki-azul-esfazul': 1,
-    '36-acero-blanca-pielkhaki-azul-esfblanca': 1,
-    '36-acero-blanca-pielkhaki-azul-esfgris': 1,
-    '36-acero-blanca-pielkhaki-marronclaro': 1,
-    '36-acero-blanca-pielkhaki-marronclaro-esfazul': 1,
-    '36-acero-blanca-pielkhaki-marronclaro-esfblanca': 1,
-    '36-acero-blanca-pielkhaki-marronclaro-esfgris': 1,
-    '36-acero-blanca-pielkhaki-marronoscuro': 1,
-    '36-acero-blanca-pielkhaki-marronoscuro-esfazul': 1,
-    '36-acero-blanca-pielkhaki-marronoscuro-esfblanca': 1,
-    '36-acero-blanca-pielkhaki-marronoscuro-esfgris': 1,
-    '36-acero-blanca-pielkhaki-negra': 1,
-    '36-acero-blanca-pielkhaki-negra-esfazul': 1,
-    '36-acero-blanca-pielkhaki-negra-esfblanca': 1,
-    '36-acero-blanca-pielkhaki-negra-esfgris': 1,
-    '36-acero-blanco-ante-azulpetroleo': 1,
-    '36-acero-blanco-ante-camel': 1,
-    '36-acero-blanco-ante-marronoscuro': 1,
-    '36-acero-blanco-ante-negro': 1,
-    '36-acero-blanco-brazalete': 1,
-    '36-acero-blanco-marron-pblanco': 1,
-    '36-acero-blanco-marron-ptono': 1,
-    '36-acero-blanco-negra-pblanco': 1,
-    '36-acero-blanco-negra-ptono': 1,
-    '36-acero-blanco-verde-pblanco': 1,
-    '36-acero-blanco-verde-ptono': 1,
-    '36-acero-crema-ante-azulpetroleo': 1,
-    '36-acero-crema-ante-camel': 1,
-    '36-acero-crema-ante-marronoscuro': 1,
-    '36-acero-crema-ante-negro': 1,
-    '36-acero-crema-brazalete': 1,
-    '36-acero-crema-marron-pblanco': 1,
-    '36-acero-crema-marron-ptono': 1,
-    '36-acero-crema-negra-pblanco': 1,
-    '36-acero-crema-negra-ptono': 1,
-    '36-acero-crema-verde-pblanco': 1,
-    '36-acero-crema-verde-ptono': 1,
-    '36-bronce-blanca-ante-azulpetroleo': 1,
-    '36-bronce-blanca-ante-azulpetroleo-esfazul': 1,
-    '36-bronce-blanca-ante-azulpetroleo-esfblanca': 1,
-    '36-bronce-blanca-ante-azulpetroleo-esfgris': 1,
-    '36-bronce-blanca-ante-camel': 1,
-    '36-bronce-blanca-ante-camel-esfazul': 1,
-    '36-bronce-blanca-ante-camel-esfblanca': 1,
-    '36-bronce-blanca-ante-camel-esfgris': 1,
-    '36-bronce-blanca-ante-marronoscuro': 1,
-    '36-bronce-blanca-ante-marronoscuro-esfazul': 1,
-    '36-bronce-blanca-ante-marronoscuro-esfblanca': 1,
-    '36-bronce-blanca-ante-marronoscuro-esfgris': 1,
-    '36-bronce-blanca-ante-negro': 1,
-    '36-bronce-blanca-ante-negro-esfazul': 1,
-    '36-bronce-blanca-ante-negro-esfblanca': 1,
-    '36-bronce-blanca-ante-negro-esfgris': 1,
-    '36-bronce-blanca-nato-azulmarino': 1,
-    '36-bronce-blanca-nato-azulmarino-esfazul': 1,
-    '36-bronce-blanca-nato-azulmarino-esfblanca': 1,
-    '36-bronce-blanca-nato-azulmarino-esfgris': 1,
-    '36-bronce-blanca-nato-gris': 1,
-    '36-bronce-blanca-nato-gris-esfazul': 1,
-    '36-bronce-blanca-nato-gris-esfblanca': 1,
-    '36-bronce-blanca-nato-gris-esfgris': 1,
-    '36-bronce-blanca-nato-negro': 1,
-    '36-bronce-blanca-nato-negro-esfazul': 1,
-    '36-bronce-blanca-nato-negro-esfblanca': 1,
-    '36-bronce-blanca-nato-negro-esfgris': 1,
-    '36-bronce-blanca-nato-verde': 1,
-    '36-bronce-blanca-nato-verde-esfazul': 1,
-    '36-bronce-blanca-nato-verde-esfblanca': 1,
-    '36-bronce-blanca-nato-verde-esfgris': 1,
-    '36-bronce-blanca-pielkhaki-azul': 1,
-    '36-bronce-blanca-pielkhaki-azul-esfazul': 1,
-    '36-bronce-blanca-pielkhaki-azul-esfblanca': 1,
-    '36-bronce-blanca-pielkhaki-azul-esfgris': 1,
-    '36-bronce-blanca-pielkhaki-marronclaro': 1,
-    '36-bronce-blanca-pielkhaki-marronclaro-esfazul': 1,
-    '36-bronce-blanca-pielkhaki-marronclaro-esfblanca': 1,
-    '36-bronce-blanca-pielkhaki-marronclaro-esfgris': 1,
-    '36-bronce-blanca-pielkhaki-marronoscuro': 1,
-    '36-bronce-blanca-pielkhaki-marronoscuro-esfazul': 1,
-    '36-bronce-blanca-pielkhaki-marronoscuro-esfblanca': 1,
-    '36-bronce-blanca-pielkhaki-marronoscuro-esfgris': 1,
-    '36-bronce-blanca-pielkhaki-negra': 1,
-    '36-bronce-blanca-pielkhaki-negra-esfazul': 1,
-    '36-bronce-blanca-pielkhaki-negra-esfblanca': 1,
-    '36-bronce-blanca-pielkhaki-negra-esfgris': 1,
-    '36-pvd-blanca-ante-azulpetroleo': 1,
-    '36-pvd-blanca-ante-azulpetroleo-esfazul': 1,
-    '36-pvd-blanca-ante-azulpetroleo-esfblanca': 1,
-    '36-pvd-blanca-ante-azulpetroleo-esfgris': 1,
-    '36-pvd-blanca-ante-camel': 1,
-    '36-pvd-blanca-ante-camel-esfazul': 1,
-    '36-pvd-blanca-ante-camel-esfblanca': 1,
-    '36-pvd-blanca-ante-camel-esfgris': 1,
-    '36-pvd-blanca-ante-marronoscuro': 1,
-    '36-pvd-blanca-ante-marronoscuro-esfazul': 1,
-    '36-pvd-blanca-ante-marronoscuro-esfblanca': 1,
-    '36-pvd-blanca-ante-marronoscuro-esfgris': 1,
-    '36-pvd-blanca-ante-negro': 1,
-    '36-pvd-blanca-ante-negro-esfazul': 1,
-    '36-pvd-blanca-ante-negro-esfblanca': 1,
-    '36-pvd-blanca-ante-negro-esfgris': 1,
-    '36-pvd-blanca-brazaletepvd': 1,
-    '36-pvd-blanca-brazaletepvd-esfazul': 1,
-    '36-pvd-blanca-brazaletepvd-esfblanca': 1,
-    '36-pvd-blanca-brazaletepvd-esfgris': 1,
-    '36-pvd-blanca-nato-beige': 1,
-    '36-pvd-blanca-nato-beige-esfazul': 1,
-    '36-pvd-blanca-nato-beige-esfblanca': 1,
-    '36-pvd-blanca-nato-beige-esfgris': 1,
-    '36-pvd-blanca-nato-gris': 1,
-    '36-pvd-blanca-nato-gris-esfazul': 1,
-    '36-pvd-blanca-nato-gris-esfblanca': 1,
-    '36-pvd-blanca-nato-gris-esfgris': 1,
-    '36-pvd-blanca-nato-negro': 1,
-    '36-pvd-blanca-nato-negro-esfazul': 1,
-    '36-pvd-blanca-nato-negro-esfblanca': 1,
-    '36-pvd-blanca-nato-negro-esfgris': 1,
-    '36-pvd-blanca-pielkhaki-azul': 1,
-    '36-pvd-blanca-pielkhaki-azul-esfazul': 1,
-    '36-pvd-blanca-pielkhaki-azul-esfblanca': 1,
-    '36-pvd-blanca-pielkhaki-azul-esfgris': 1,
-    '36-pvd-blanca-pielkhaki-marronclaro': 1,
-    '36-pvd-blanca-pielkhaki-marronclaro-esfazul': 1,
-    '36-pvd-blanca-pielkhaki-marronclaro-esfblanca': 1,
-    '36-pvd-blanca-pielkhaki-marronclaro-esfgris': 1,
-    '36-pvd-blanca-pielkhaki-marronoscuro': 1,
-    '36-pvd-blanca-pielkhaki-marronoscuro-esfazul': 1,
-    '36-pvd-blanca-pielkhaki-marronoscuro-esfblanca': 1,
-    '36-pvd-blanca-pielkhaki-marronoscuro-esfgris': 1,
-    '36-pvd-blanca-pielkhaki-negra': 1,
-    '36-pvd-blanca-pielkhaki-negra-esfazul': 1,
-    '36-pvd-blanca-pielkhaki-negra-esfblanca': 1,
-    '36-pvd-blanca-pielkhaki-negra-esfgris': 1,
-    '36-titanio-blanca-ante-azulpetroleo': 1,
-    '36-titanio-blanca-ante-azulpetroleo-esfazul': 1,
-    '36-titanio-blanca-ante-azulpetroleo-esfblanca': 1,
-    '36-titanio-blanca-ante-azulpetroleo-esfgris': 1,
-    '36-titanio-blanca-ante-camel': 1,
-    '36-titanio-blanca-ante-camel-esfazul': 1,
-    '36-titanio-blanca-ante-camel-esfblanca': 1,
-    '36-titanio-blanca-ante-camel-esfgris': 1,
-    '36-titanio-blanca-ante-marronoscuro': 1,
-    '36-titanio-blanca-ante-marronoscuro-esfazul': 1,
-    '36-titanio-blanca-ante-marronoscuro-esfblanca': 1,
-    '36-titanio-blanca-ante-marronoscuro-esfgris': 1,
-    '36-titanio-blanca-ante-negro': 1,
-    '36-titanio-blanca-ante-negro-esfazul': 1,
-    '36-titanio-blanca-ante-negro-esfblanca': 1,
-    '36-titanio-blanca-ante-negro-esfgris': 1,
-    '36-titanio-blanca-nato-azulmarino': 1,
-    '36-titanio-blanca-nato-azulmarino-esfazul': 1,
-    '36-titanio-blanca-nato-azulmarino-esfblanca': 1,
-    '36-titanio-blanca-nato-azulmarino-esfgris': 1,
-    '36-titanio-blanca-nato-beige': 1,
-    '36-titanio-blanca-nato-beige-esfazul': 1,
-    '36-titanio-blanca-nato-beige-esfblanca': 1,
-    '36-titanio-blanca-nato-beige-esfgris': 1,
-    '36-titanio-blanca-nato-gris': 1,
-    '36-titanio-blanca-nato-gris-esfazul': 1,
-    '36-titanio-blanca-nato-gris-esfblanca': 1,
-    '36-titanio-blanca-nato-gris-esfgris': 1,
-    '36-titanio-blanca-nato-mostaza': 1,
-    '36-titanio-blanca-nato-mostaza-esfazul': 1,
-    '36-titanio-blanca-nato-mostaza-esfblanca': 1,
-    '36-titanio-blanca-nato-mostaza-esfgris': 1,
-    '36-titanio-blanca-nato-negro': 1,
-    '36-titanio-blanca-nato-negro-esfazul': 1,
-    '36-titanio-blanca-nato-negro-esfblanca': 1,
-    '36-titanio-blanca-nato-negro-esfgris': 1,
-    '36-titanio-blanca-nato-verde': 1,
-    '36-titanio-blanca-nato-verde-esfazul': 1,
-    '36-titanio-blanca-nato-verde-esfblanca': 1,
-    '36-titanio-blanca-nato-verde-esfgris': 1,
-    '36-titanio-blanca-pielkhaki-azul': 1,
-    '36-titanio-blanca-pielkhaki-azul-esfazul': 1,
-    '36-titanio-blanca-pielkhaki-azul-esfblanca': 1,
-    '36-titanio-blanca-pielkhaki-azul-esfgris': 1,
-    '36-titanio-blanca-pielkhaki-marronclaro': 1,
-    '36-titanio-blanca-pielkhaki-marronclaro-esfazul': 1,
-    '36-titanio-blanca-pielkhaki-marronclaro-esfblanca': 1,
-    '36-titanio-blanca-pielkhaki-marronclaro-esfgris': 1,
-    '36-titanio-blanca-pielkhaki-marronoscuro': 1,
-    '36-titanio-blanca-pielkhaki-marronoscuro-esfazul': 1,
-    '36-titanio-blanca-pielkhaki-marronoscuro-esfblanca': 1,
-    '36-titanio-blanca-pielkhaki-marronoscuro-esfgris': 1,
-    '36-titanio-blanca-pielkhaki-negra': 1,
-    '36-titanio-blanca-pielkhaki-negra-esfazul': 1,
-    '36-titanio-blanca-pielkhaki-negra-esfblanca': 1,
-    '36-titanio-blanca-pielkhaki-negra-esfgris': 1,
-    '36-titanio-blanco-ante-azulpetroleo': 1,
-    '36-titanio-blanco-ante-camel': 1,
-    '36-titanio-blanco-ante-marronoscuro': 1,
-    '36-titanio-blanco-ante-negro': 1,
-    '36-titanio-blanco-marron-pblanco': 1,
-    '36-titanio-blanco-marron-ptono': 1,
-    '36-titanio-blanco-negra-pblanco': 1,
-    '36-titanio-blanco-negra-ptono': 1,
-    '36-titanio-blanco-verde-pblanco': 1,
-    '36-titanio-blanco-verde-ptono': 1,
-    '36-titanio-crema-ante-azulpetroleo': 1,
-    '36-titanio-crema-ante-camel': 1,
-    '36-titanio-crema-ante-marronoscuro': 1,
-    '36-titanio-crema-ante-negro': 1,
-    '36-titanio-crema-marron-pblanco': 1,
-    '36-titanio-crema-marron-ptono': 1,
-    '36-titanio-crema-negra-pblanco': 1,
-    '36-titanio-crema-negra-ptono': 1,
-    '36-titanio-crema-verde-pblanco': 1,
-    '36-titanio-crema-verde-ptono': 1,
-    '39-acero-blanca-nato-arena': 1,
-    '39-acero-blanca-nato-arena-esfazul': 1,
-    '39-acero-blanca-nato-arena-esfblanca': 1,
-    '39-acero-blanca-nato-arena-esfgris': 1,
-    '39-acero-blanca-nato-azulmarino': 1,
-    '39-acero-blanca-nato-azulmarino-esfazul': 1,
-    '39-acero-blanca-nato-azulmarino-esfblanca': 1,
-    '39-acero-blanca-nato-azulmarino-esfgris': 1,
-    '39-acero-blanca-nato-gris': 1,
-    '39-acero-blanca-nato-gris-esfazul': 1,
-    '39-acero-blanca-nato-gris-esfblanca': 1,
-    '39-acero-blanca-nato-gris-esfgris': 1,
-    '39-acero-blanca-nato-negro': 1,
-    '39-acero-blanca-nato-negro-esfazul': 1,
-    '39-acero-blanca-nato-negro-esfblanca': 1,
-    '39-acero-blanca-nato-negro-esfgris': 1,
-    '39-acero-blanca-nato-negrogris': 1,
-    '39-acero-blanca-nato-negrogris-esfazul': 1,
-    '39-acero-blanca-nato-negrogris-esfblanca': 1,
-    '39-acero-blanca-nato-negrogris-esfgris': 1,
-    '39-acero-blanca-nato-verde': 1,
-    '39-acero-blanca-nato-verde-esfazul': 1,
-    '39-acero-blanca-nato-verde-esfblanca': 1,
-    '39-acero-blanca-nato-verde-esfgris': 1,
-    '39-bronce-blanca-nato-arena': 1,
-    '39-bronce-blanca-nato-arena-esfazul': 1,
-    '39-bronce-blanca-nato-arena-esfblanca': 1,
-    '39-bronce-blanca-nato-arena-esfgris': 1,
-    '39-bronce-blanca-nato-azulmarino': 1,
-    '39-bronce-blanca-nato-azulmarino-esfazul': 1,
-    '39-bronce-blanca-nato-azulmarino-esfblanca': 1,
-    '39-bronce-blanca-nato-azulmarino-esfgris': 1,
-    '39-bronce-blanca-nato-gris': 1,
-    '39-bronce-blanca-nato-gris-esfazul': 1,
-    '39-bronce-blanca-nato-gris-esfblanca': 1,
-    '39-bronce-blanca-nato-gris-esfgris': 1,
-    '39-bronce-blanca-nato-negro': 1,
-    '39-bronce-blanca-nato-negro-esfazul': 1,
-    '39-bronce-blanca-nato-negro-esfblanca': 1,
-    '39-bronce-blanca-nato-negro-esfgris': 1,
-    '39-bronce-blanca-nato-negrogris': 1,
-    '39-bronce-blanca-nato-negrogris-esfazul': 1,
-    '39-bronce-blanca-nato-negrogris-esfblanca': 1,
-    '39-bronce-blanca-nato-negrogris-esfgris': 1,
-    '39-bronce-blanca-nato-verde': 1,
-    '39-bronce-blanca-nato-verde-esfazul': 1,
-    '39-bronce-blanca-nato-verde-esfblanca': 1,
-    '39-bronce-blanca-nato-verde-esfgris': 1,
-    '39-pvd-blanca-nato-arena': 1,
-    '39-pvd-blanca-nato-arena-esfazul': 1,
-    '39-pvd-blanca-nato-arena-esfblanca': 1,
-    '39-pvd-blanca-nato-arena-esfgris': 1,
-    '39-pvd-blanca-nato-azulmarino': 1,
-    '39-pvd-blanca-nato-azulmarino-esfazul': 1,
-    '39-pvd-blanca-nato-azulmarino-esfblanca': 1,
-    '39-pvd-blanca-nato-azulmarino-esfgris': 1,
-    '39-pvd-blanca-nato-gris': 1,
-    '39-pvd-blanca-nato-gris-esfazul': 1,
-    '39-pvd-blanca-nato-gris-esfblanca': 1,
-    '39-pvd-blanca-nato-gris-esfgris': 1,
-    '39-pvd-blanca-nato-negro': 1,
-    '39-pvd-blanca-nato-negro-esfazul': 1,
-    '39-pvd-blanca-nato-negro-esfblanca': 1,
-    '39-pvd-blanca-nato-negro-esfgris': 1,
-    '39-pvd-blanca-nato-negrogris': 1,
-    '39-pvd-blanca-nato-negrogris-esfazul': 1,
-    '39-pvd-blanca-nato-negrogris-esfblanca': 1,
-    '39-pvd-blanca-nato-negrogris-esfgris': 1,
-    '39-pvd-blanca-nato-verde': 1,
-    '39-pvd-blanca-nato-verde-esfazul': 1,
-    '39-pvd-blanca-nato-verde-esfblanca': 1,
-    '39-pvd-blanca-nato-verde-esfgris': 1,
-    '39-titanio-blanca-nato-arena': 1,
-    '39-titanio-blanca-nato-arena-esfazul': 1,
-    '39-titanio-blanca-nato-arena-esfblanca': 1,
-    '39-titanio-blanca-nato-arena-esfgris': 1,
-    '39-titanio-blanca-nato-azulmarino': 1,
-    '39-titanio-blanca-nato-azulmarino-esfazul': 1,
-    '39-titanio-blanca-nato-azulmarino-esfblanca': 1,
-    '39-titanio-blanca-nato-azulmarino-esfgris': 1,
-    '39-titanio-blanca-nato-gris': 1,
-    '39-titanio-blanca-nato-gris-esfazul': 1,
-    '39-titanio-blanca-nato-gris-esfblanca': 1,
-    '39-titanio-blanca-nato-gris-esfgris': 1,
-    '39-titanio-blanca-nato-negro': 1,
-    '39-titanio-blanca-nato-negro-esfazul': 1,
-    '39-titanio-blanca-nato-negro-esfblanca': 1,
-    '39-titanio-blanca-nato-negro-esfgris': 1,
-    '39-titanio-blanca-nato-negrogris': 1,
-    '39-titanio-blanca-nato-negrogris-esfazul': 1,
-    '39-titanio-blanca-nato-negrogris-esfblanca': 1,
-    '39-titanio-blanca-nato-negrogris-esfgris': 1,
-    '39-titanio-blanca-nato-verde': 1,
-    '39-titanio-blanca-nato-verde-esfazul': 1,
-    '39-titanio-blanca-nato-verde-esfblanca': 1,
-    '39-titanio-blanca-nato-verde-esfgris': 1,
-  };
-  var SERIE_CAJA   = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
-  var SERIE_ESF    = { MA: 'crema', MB: 'blanco', KR: 'rojo', KB: 'blanca', BRZ: 'plata' };
-  var SERIE_CORREA = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde', ANTE: 'ante',
-                       // la del khaki lleva su propio nombre desde que son tres
-                       NATO: 'nato',
-                       ACERO: 'brazalete', ACERONG: 'brazaletepvd',
-                       /* el dúo no tiene clave propia: es la foto de su
-                          correa, que el brazalete va aparte en la caja */
-                       PIELO: 'pielkhaki' };
-  var NATO_FOTO    = { VER: 'verde', NEG: 'negro', BEI: 'arena', NGR: 'negrogris',
-                       GRI: 'gris', AZM: 'azulmarino',
-                       /* solo en la caja de 36 */
-                       BGE: 'beige', MOS: 'mostaza' };
-  /* La frase que describe el reloj elegido. Se usa en el alt de la foto
-     y en el pie de la lupa; es la misma que diría alguien por teléfono. */
-  var CAJA_DICHA = { PL: 'caja de acero plata', NG: 'caja negra de PVD',
-                     BR: 'caja de bronce', TI: 'caja de titanio' };
-  function correaDicha() {
-    return correaSola();
-  }
-  function correaSola() {
-    if (e.correa === 'PIELO')  return 'correa de piel ' + PIELES_K[e.pielk][0].toLowerCase();
-    if (e.correa === 'NATO')   return 'correa nato ' + natos()[e.nato][0].toLowerCase();
-    if (e.correa === 'ANTE')   return 'correa de ante ' + ANTES[e.ante][0].toLowerCase();
-    if (e.correa === 'ACERO')   return 'brazalete de acero';
-    if (e.correa === 'ACERONG') return 'brazalete de acero negro de PVD';
-    return 'correa de ' + CORREAS[e.correa].nombre.toLowerCase();
-  }
-  /* EL COLOR VA PEGADO AL NOMBRE DE LA ESFERA (26/08/2026). Al meterlo en
-     la referencia se vio que en ningún texto se decía: el pedido de una
-     esfera azul llegaba como «Khaki, Segundero Blanco» y la ficha técnica
-     seguía diciendo «Khaki NEGRA mate». Se dice en los tres sitios —el
-     nombre, la frase y la ficha técnica— desde aquí. */
-  function esfConColor(txt, corte) {
-    if (e.estilo !== 'K' || !ESF_REF[e.esfColor]) return txt;
-    return txt.replace(corte, corte + ' ' + ESF_COLORES[e.esfColor][0].toLowerCase());
-  }
-  function esfNombre() { return esfConColor(ESFERAS[e.esf].nombre, 'Khaki'); }
-  function esfTec() {
-    return e.estilo === 'K' && ESF_REF[e.esfColor]
-      ? ESFERAS[e.esf].tec.replace('Khaki negra mate',
-          'Khaki ' + ESF_COLORES[e.esfColor][0].toLowerCase() + ' mate')
-      : ESFERAS[e.esf].tec;
-  }
-  function esferaDicha() {
-    /* «Khaki, Segundero Rojo» se lee mal en mitad de una frase: el nombre
-       propio se queda en mayúscula y el resto baja. */
-    var partes = esfNombre().split(', ');
-    return partes.length > 1 ? partes[0] + ' con ' + partes[1].toLowerCase() : partes[0];
-  }
-  function descripcion() {
-    return 'laOra Trinchera de ' + e.diam + ' mm, ' + CAJA_DICHA[e.caja] +
-           ', esfera ' + esferaDicha() + ' y ' + correaDicha();
-  }
-
-  /* TODO lo que distingue a este reloj de otro, dicho en cristiano. La
-     `descripcion()` de arriba es la del alt de la foto y se queda corta
-     para marcar combinaciones: no dice el color de la esfera, ni el
-     pespunte, ni la hebilla, ni si lleva el brazalete añadido. */
-  function dichoCompleto() {
-    var t = descripcion();
-    if (e.estilo === 'M' && MURPH_CORREA[e.correa])
-      t += ', pespunte ' + PESPUNTES[e.pesp].toLowerCase();
-    if (conCierreK()) t += ', ' + CIERRES_K[e.cierre].toLowerCase();
-    else if (conCierre()) t += ', ' + CIERRES[e.cierre].nombre.toLowerCase();
-    return t + ' · ' + MOVS[e.mov].nombre;
-  }
-  /* LA FIRMA DE UNA COMBINACIÓN. No vale la referencia: el color de la
-     esfera NO entra en ella, así que la Khaki negra y la Khaki azul del
-     mismo reloj comparten referencia y marcando una se marcarían las dos.
-     Aquí va todo lo que el cliente elige. */
-  function firma() {
-    return [e.diam, e.mov, e.estilo, e.caja, e.esf, e.esfColor, e.correa,
-            e.nato, e.ante, e.pielk, e.pesp, e.cierre].join('|');
-  }
-
-  /* Las correas que son la MISMA en las dos cajas, y por tanto comparten
-     foto: la piel y el ante, los dos de 20 mm, y el brazalete de acero
-     y el de PVD negro (Óscar, 25/08/2026). El nato es la única excepción:
-     mide 275 mm y por eso cada caja lleva el suyo. */
-  /* Y LAS TRES PIELES ITALIANAS DEL MURPH desde el 26/08/2026: es la misma
-     correa de 20 mm en tres tonos, así que una foto vale para las dos cajas.
-     Los DÚOS no entran: llevan el brazalete dentro de la foto y son otra
-     composición. */
-  var DOS_MEDIDAS = { PIELO: 1, ANTE: 1, ACERO: 1, ACERONG: 1,
-                      PIELN: 1, PIELM: 1, PIELV: 1 };
-  /* CÓMO SE LLAMA LA FOTO de la configuración puesta, exista o no. Va
-     aparte de `serieFoto()` para que el inventario de fotos pendientes
-     pueda preguntar el NOMBRE de la que falta sin volver a escribir esta
-     regla en otro sitio: copiada en dos ficheros, se desincroniza. */
-  function claveSerie() {
-    var caja = SERIE_CAJA[e.caja], esf = SERIE_ESF[e.esf], correa = SERIE_CORREA[e.correa];
-    if (!caja || !esf || !correa) return null;
-    var clave = e.diam + '-' + caja + '-' + esf + '-' + correa;
-    if (MURPH_CORREA[e.correa]) clave += '-' + (e.pesp === 'T' ? 'ptono' : 'pblanco');
-    if (e.correa === 'ANTE') clave += '-' + (MURPH_ANTE[e.ante] || 'negro');
-    /* El nato también lleva su color en la clave: la norma de la casa es que
-       jamás se enseña la foto de un reloj que no sea el elegido. */
-    if (e.correa === 'NATO') clave += '-' + NATO_FOTO[e.nato];
-    if (e.correa === 'PIELO') clave += '-' + PIELK_FOTO[e.pielk];
-    /* EL COLOR DE LA ESFERA, AL FINAL (26/08/2026). Óscar: «utilizar los
-       modelos que ya tenemos con la posibilidad de elegir esferas solo para
-       el khaki». Hasta hoy `esfColor` era decorativo —se pintaban los
-       botones y no entraba en ningún sitio—, así que aunque las fotos
-       estuvieran subidas la ficha seguía pidiendo la de la esfera negra y
-       no había manera de ver las otras.
-       Va SOLO en el Khaki: el Murph no elige color de esfera. */
-    if (e.estilo === 'K') clave += ESF_FOTO[e.esfColor] || '';
-    return clave;
-  }
-
-  function serieFoto() {
-    var clave = claveSerie();
-    if (!clave) return null;
-    /* LA PIEL VALE PARA LAS DOS MEDIDAS (Óscar, 25/08/2026): «la piel del
-       khaki sirve para 36 y para 39mm». Es la misma correa de 20 mm, y la
-       caja de 36 y la de 39 no se distinguen en una foto frontal sin nada
-       al lado que dé la escala, así que la foto de 36 se da por buena en la
-       de 39. Se resuelve AQUÍ y no duplicando dieciséis ficheros con otro
-       nombre: cuarenta y ocho copias idénticas que el día que Óscar rehaga
-       una foto se quedarían viejas en silencio.
-       El ante entra por lo mismo el 25/08/2026: «correas de ante ya en la
-       carpeta y sirven para 36 y 39mm».
-       El nato NO entra: mide 275 mm y por eso cada medida lleva la suya,
-       que es de lo que hablaba la norma del diámetro en la clave. */
-    if (!SERIE[clave] && e.diam === '39' && DOS_MEDIDAS[e.correa])
-      clave = '36' + clave.slice(2);
-    return SERIE[clave] ? clave : null;
-  }
-
-  /* Lo que EXISTE del Murph: dos cajas, tres pieles, dos esferas, cuatro
-     antes y dos pespuntes. Son tablas de catálogo, no de fotos. */
-  var MURPH_CAJA   = { PL: 'acero', TI: 'titanio' };
-  /* LOS GRUPOS QUE ESTABAN ESCRITOS A MANO EN EL HTML. Se dibujan desde
-     aquí desde el 26/08/2026: hace falta para poder quitar opciones y para
-     que lo que no se puede elegir no salga. El HTML se queda con ellos
-     dentro para que la página diga algo antes de que corra el JS. */
-  var CAJAS_BOTON  = [['PL', 'Acero Plata'], ['NG', 'Negra PVD'],
-                      ['BR', 'Bronce'], ['TI', 'Titanio']];
-  var DIAM_BOTON   = [['36', '\u00D8 36'], ['39', '\u00D8 39']];
-  var MOV_BOTON    = [['A', 'Automático'], ['Q', 'Cuarzo (Pila)']];
-  var ESTILO_BOTON = [['K', 'Khaki'], ['M', 'Murph']];
-  var MURPH_CORREA = { PIELV: 'verde', PIELN: 'negra', PIELM: 'marron' };
-  var MURPH_ESF    = { MA: 'crema', MB: 'blanco' };
-  var MURPH_ANTE   = { NEG: 'negro', MOS: 'marronoscuro', AZU: 'azulpetroleo', CAM: 'camel' };
-  var MURPH_PESP   = { B: 'pblanco', T: 'ptono' };
-  var PESPUNTES    = { B: 'Blanco', T: 'A tono' };
-
-  /* Lo que EXISTE de la 12/24 del khaki: cuatro cajas con piel italiana y
-     tres con ante. Tablas de catálogo, no de fotos. */
-  var K1224_CAJA      = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
-  var K1224_CORREA    = { PIELN: 'negra', PIELM: 'marron', PIELV: 'verde' };
-  /* el titanio entró el 20/08/2026 con las fotos del khaki en titanio */
-  var K1224_ANTE_CAJA = { PL: 'acero', NG: 'pvd', BR: 'bronce', TI: 'titanio' };
-  /* El brazalete y el pack se fotografiaron el 19/08/2026, pero solo en
-     acero y con los numerales crema. Van aparte porque no siguen la regla
-     de caja × piel × esfera: son dos fotos concretas y nada más. */
-  /* LOS CINCO CIERRES DE LA PIEL. Óscar: «este tipo de cierre va asociado a
-     la correa de piel, así que donde usemos esa correa también tienen que ir
-     asociados». Son los mismos cinco de la ficha del Lunar y comparten sus
-     fotos —que son de la correa, no del reloj, y por eso siguen aquí—.
-
-     El precio NO se copia del Lunar: allí el coste del cierre incluye su
-     propia correa. Aquí la piel ya cuesta 29,99 con su hebilla plateada, así
-     que se aplica solo la DIFERENCIA entre cierres del proveedor. */
-  var CIERRES = {
-    'plata':    { nombre: 'Clásica plata',    extra:  0.00, tec: 'hebilla clásica de acero plateado' },
-    'negra':    { nombre: 'Clásica negra',    extra:  1.20, tec: 'hebilla clásica de acero con PVD negro' },
-    'oro-rosa': { nombre: 'Clásica oro rosa', extra: -0.40, tec: 'hebilla clásica en oro rosa' },
-    'oro':      { nombre: 'Clásica oro',      extra:  1.00, tec: 'hebilla clásica dorada' },
-    'mariposa': { nombre: 'Mariposa plata',   extra:  0.20, tec: 'cierre de mariposa de acero plateado' }
-  };
-  /* La piel italiana, la lleve el Murph o el Khaki: es la misma correa. */
-  function conCierre() { return e.correa === 'PIELV' || e.correa === 'PIELN' || e.correa === 'PIELM'; }
-  /* LAS HEBILLAS DE LA PIEL DEL MURPH (Óscar, 26/08/2026):
-     «en el murph piel quitamos la hebilla de oro rosa y dorado para todas
-     las combinaciones» y «en el murph piel negra está disponible hebilla
-     clásica negra y plateada, pero la hebilla negra solo estará disponible
-     para la piel negra».
-
-     Así que de las cinco se quedan tres, y la negra sólo con la piel negra:
-     una hebilla negra sobre una correa marrón o verde no es una elección,
-     es un descuido. La mariposa se queda en las tres: Óscar nombró dos para
-     quitar, y la mariposa no es una clásica. */
-  function cierreVale(k) {
-    if (k === 'oro' || k === 'oro-rosa') return false;
-    if (k === 'negra') return e.correa === 'PIELN';
-    return true;
-  }
-  /* La piel del khaki también elige hebilla, pero solo entre dos */
-  function conCierreK() { return e.correa === 'PIELO'; }
-
-  var LOGO = 3.78;
-  /* EL ANILLO ESPACIADOR DEL CUARZO (Óscar, 19/08/2026). La caja se pide
-     cortada para el calibre y solo existe en NH35/NH36 y en ETA2824/PT5000:
-     el automático entra directo y el Ronda 715 del cuarzo necesita
-     portamovimiento. Hasta hoy se estaba regalando en el precio. */
-  var ANILLO = 3.60;
-
-  /* LA ENTRADA DEL CONFIGURADOR (Óscar, 19/08/2026): lo primero que se ve
-   al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
-   la hebilla clásica plateada. Es la única combinación fotografiada, y
-   la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata', esfColor: 'NEG',
-            /* la última correa que pediste TÚ, para poder devolvértela cuando
-               un recorte por caja te la haya cambiado (23/08/2026) */
-            correaPedida: 'NATO' };
-
-  /* ---------- el MOTOR del precio, calcado del de siempre ---------- */
-  /* EL MULTIPLICADOR (Óscar, 22/08/2026). Era 2,7235 sobre las PIEZAS;
-     ahora se aplica al COSTE COMPLETO —piezas, packing, envío, garantía
-     y Seguridad Social—, que es bastante mayor, así que el número tenía
-     que bajar para que los precios se quedaran donde están. Con 2,28 el
-     catálogo se mueve un −1,2 % de media y el Lunar más barato sigue en
-     189,90 €, que es lo que Óscar pidió: la misma tarifa, pero con la
-     cuenta bien hecha. */
-  /* ---------- EL PRECIO, DEL COSTE AL PVP ----------
-     El multiplicador, el redondeo al 9,90, el 2,5 % de la pasarela y el
-     suelo de la REGLA Nº1 viven en `/assets/js/precio-2026.js`, que
-     comparten todos los modelos. Estaban COPIADOS aquí y en el Lunar,
-     palabra por palabra: dos relojes vendiendo con dos copias de la regla
-     que decide cuánto cobran. Si cambia el multiplicador o el suelo, se
-     toca allí y cambia en los dos. */
-  var P = window.laoraPrecio;
-  var IVA = P.IVA, IRPF = P.IRPF, SS = P.SS, MULT = P.MULT;
-  var PACKING_ENVIO = P.PACKING_ENVIO, GARANTIA = P.GARANTIA, COMISION = P.COMISION;
-  var KLARNA = P.KLARNA;
-  var costeCompleto = P.costeCompleto, redondea = P.redondea,
-      sube990 = P.sube990, sueloPvp = P.sueloPvp, pvpBase = P.pvpBase;
-  var NATO36 = 5.59;      // el nato corto de la caja de 36, otro anuncio
-  function costes() {
-    var correa = (e.correa === 'NATO' && e.diam === '36') ? NATO36 : CORREAS[e.correa].coste;
-    return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
-           correa +
-           (conCierre() || conCierreK() ? CIERRES[e.cierre].extra : 0) + LOGO +
-           (e.mov === 'Q' ? ANILLO : 0);
-  }
-  function precioTarifa() {
-    var extra = e.diam === '39' ? 10 : 0;
-    return pvpBase(costes()) + extra;
-  }
-
-  /* ---------- LA COMISIÓN DE LA PASARELA ----------
-     Hasta el 22/08/2026 se repercutía subiendo el PVP un 2,5 % —la mitad
-     del 5 % de Klarna— por fuera del motor. Ahora entra por donde debe:
-     el SUELO se calcula sobre lo que queda de cada euro DESPUÉS de
-     pagarla, así que subir además un 2,5 % sería cobrarla dos veces.
-     El PVP es el coste completo por el multiplicador y, si con él no se
-     llega al suelo, sube de escalón hasta cumplirlo. */
-  /* El redondeo al 9,90 puede dejar el precio por debajo del suelo, así
-     que el suelo se vuelve a exigir DESPUÉS de redondear: manda él. */
-  function netoDeCoste() { return costeCompleto(costes()); }
-  /* EL 2,5 % DE KLARNA (Óscar, 19/08/2026, confirmado el 22/08): el PVP
-     de tarifa sube un 2,5 % y se vuelve a redondear al 9,90. Después, el
-     suelo: si no llega a 50 € limpios o al 15 %, sube de escalón. */
-  function precio() {
-    return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste()));
-  }
-
-  /* ---------- las REGLAS del catálogo ---------- */
-  function normaliza() {
-    /* Un enlace o un carrito guardado podía traer el dúo como si fuera una
-       correa. Se traduce a lo que pedía: la correa de verdad más el
-       añadido. Va lo PRIMERO, antes de que ninguna regla mire `e.correa` y
-       no reconozca `DUOM`. */
-    if (DUO_VIEJO[e.correa]) e.correa = DUO_VIEJO[e.correa];
-    /* El catálogo cerrado (Óscar, 15/08/2026): solo las combinaciones
-       fotografiadas. El ESTILO manda: el Murph solo existe en acero
-       plata y va con piel negra, brazalete o el pack; el khaki reparte
-       sus cajas (la negra con nato negro o piel negra, el bronce todo
-       fijo, el titanio con ante o piel oscuro, 20 ATM y tapa opaca). */
-    if (e.estilo === 'M') {
-      /* 19/08/2026: el Murph deja de ser solo de acero. La serie maestra lo
-         fotografía en acero Y en titanio, con las tres pieles. El brazalete
-         y el pack siguen existiendo con sus fotos de antes. */
-      if (!MURPH_CAJA[e.caja]) e.caja = 'PL';
-      if (e.esf !== 'MA' && e.esf !== 'MB') e.esf = 'MA';
-      if (!MURPH_CORREA[e.correa] && e.correa !== 'ACERO' &&
-          e.correa !== 'ANTE') e.correa = 'PIELN';
-      /* El titanio no tiene ni pack ni brazalete: si venías del acero con
-         una de esas dos y cambias a titanio, te quedas con la piel negra,
-         que es la correa de casa del Murph. Antes se hacía al revés —se
-         volvía a la caja de acero— y parecía que el botón no respondía. */
-      if (e.caja === 'TI' && e.correa === 'ACERO') e.correa = 'PIELN';
-    } else {
-      if (e.esf === 'MA' || e.esf === 'MB') e.esf = 'KB';
-      /* LAS ESFERAS DEL KHAKI, SIMPLIFICADAS (Óscar, 20/08/2026):
-         «segundero rojo para todas las cajas excepto bronce, segundero
-         blanco para todas las cajas». Ya no hay 12/24 forzada por la
-         correa: fuera del bronce siempre se elige entre KB y KR. */
-      if (e.caja === 'BR') {
-        /* EL BRONCE ENTRA EN LA NORMA (Óscar, 23/08/2026). Hasta hoy iba
-           forzado a ante y a su propia esfera de agujas plata, y el motivo
-           escrito era «las fotos son solo ante»: con la foto del nato verde
-           esa razón se acabó. Ahora acepta nato y ante, y lleva la MISMA
-           esfera que el resto —la KB de segundero blanco—, así que hay una
-           esfera menos que mantener. El segundero rojo sigue fuera del
-           bronce, como mandó el 20/08. */
-        /* y desde el 25/08/2026 también la piel, que ya tiene sus cuatro
-           colores fotografiados en la caja de 36 */
-        if (e.correa !== 'ANTE' && e.correa !== 'NATO' && e.correa !== 'PIELO') e.correa = 'ANTE';
-        e.esf = 'KB';
-        /* el camel vuelve al bronce el 25/08/2026, con su foto */
-      }
-      else {
-        /* FUERA EL SEGUNDERO (Óscar, 24/08/2026): la esfera se elige por
-           color y nada más. El khaki se queda con la de segundero blanco;
-           la de segundero rojo deja de venderse. */
-        e.esf = 'KB';
-        if (e.caja === 'TI') {
-          /* el titanio del Khaki lleva nato, ante y piel; sin brazaletes
-             (Óscar, 20/08/2026) */
-          if (e.correa !== 'ANTE' && e.correa !== 'PIELO' && e.correa !== 'NATO') e.correa = 'ANTE';
-        }
-        else if (e.caja === 'NG') {
-          /* la caja negra: solo piel, nato y ante, y su brazalete (Óscar,
-             20/08/2026). Ni técnica ni el resto de colores. La piel y el
-             ante van en negro; el nato admite negro y verde militar desde
-             el 23/08/2026. */
-          if (e.correa !== 'NATO' && e.correa !== 'ACERONG' &&
-              e.correa !== 'PIELO' && e.correa !== 'ANTE') e.correa = 'NATO';
-          /* la caja negra ya lleva la gama entera de las tres correas: el
-             nato desde el 24/08/2026, la piel desde el 25 por la mañana y
-             el ante esa misma tarde. */
-          /* y el ante del PVD abre a sus cuatro colores el 25/08/2026, que
-             ya están fotografiados en esta caja */
-        }
-        else if (e.correa === 'ACERONG') e.correa = 'NATO';
-      }
-      /* CADA MEDIDA TIENE SU GAMA DE NATO (24/08/2026): al pasar de 39 a 36
-         —o al revés— el color elegido puede no existir en la otra, y sin
-         esto `natos()[e.nato]` valdría undefined y tumbaría la ficha entera.
-         Y desde el 26/08/2026 también al cambiar de CAJA, que el PVD de 36
-         lleva su propia gama de tres. */
-      /* Y AL PRIMERO DE LA GAMA QUE TOQUE, no al verde a secas: desde el
-         26/08/2026 el PVD de 36 no tiene verde, así que aquel apaño dejaba
-         `e.nato` en un color que su propia paleta no ofrece. */
-      if (e.correa === 'NATO' && !natos()[e.nato]) e.nato = Object.keys(natos())[0];
-      /* del Murph al Khaki: la piel italiana no existe aquí */
-      if (MURPH_CORREA[e.correa]) e.correa = 'PIELO';
-      /* El nato va en las dos medidas (Óscar, 20/08/2026, retirando la
-         regla del 19). Y desde el 25/08 la correa técnica —el nato con
-         forro de piel— no va en ninguna: si llega en un enlace viejo o en
-         una pestaña que llevaba días abierta, se cae al nato de lona en vez
-         de tumbar la ficha. */
-      if (e.correa === 'NATOP') e.correa = 'NATO';
-    }
-    /* LA HEBILLA, DENTRO DE LO QUE VALE. Sin esto te quedas con la negra
-       puesta al pasar de la piel negra a la marrón: el botón ya no está,
-       pero la referencia y el precio la seguirían llevando. */
-    if (conCierre() && !cierreVale(e.cierre)) e.cierre = 'plata';
-    /* La tapa la decide el movimiento (Óscar, 15/08): cuarzo → roscada
-       sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
-    e.tapa = (e.mov === 'Q' || e.caja === 'TI') ? 'S' : 'C';
-    /* y el añadido del brazalete se cae solo en cuanto deja de valer */
-  }
-  function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
-  /* LA REFERENCIA DEL DÚO VA DETRÁS, no en el sitio de la correa: el reloj
-     es el mismo y lo que se añade es una pieza suelta. Así ninguna de las
-     referencias que ya existían cambia una letra. */
-  function referencia() {
-    return referenciaBase() +
-           (e.estilo === 'K' ? (ESF_REF[e.esfColor] || '') : '') +
-           '';
-  }
-  function referenciaBase() {
-    var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
-    /* el bronce lleva el color en la referencia desde que tiene tres
-       antes (20/08/2026): sin él, dos correas distintas compartían ref y
-       el pedido no decía cuál quería el cliente. Desde el 23/08/2026
-       nombra también la correa, que ya no es siempre el ante; las refs de
-       ante que ya existían no cambian ni una letra. */
-    /* Y LA PIEL LLEVA SU COLOR Y SU CIERRE (25/08/2026). Esta rama se
-       escribió cuando el bronce solo tenía ante; al abrirle la piel esa
-       mañana se coló por el `: e.ante` final y las treinta y dos
-       combinaciones de bronce con piel se quedaron en CUATRO referencias,
-       todas nombradas con un color de ANTE. Quien pidiera bronce con piel
-       negra y hebilla negra recibía una referencia que no decía ni el
-       color ni la hebilla. Las refs de ante y de nato no cambian. */
-    if (e.caja === 'BR')
-      return seg + e.correa + '-' +
-             (e.correa === 'NATO'  ? e.nato
-            : e.correa === 'PIELO' ? e.pielk + '-' + e.cierre
-            : e.ante);
-    var cola = seg + e.esf + '-' + e.correa;
-    if (e.correa === 'NATO') return cola + '-' + e.nato;
-    if (e.correa === 'PIELO') return cola + '-' + e.pielk + '-' + e.cierre;
-    /* el ante SIEMPRE con su color: el khaki también elige (20/08/2026) */
-    if (e.correa === 'ANTE') return cola + '-' + e.ante;
-    if (conCierre()) {
-      var c = e.estilo === 'M' && MURPH_CORREA[e.correa] ? cola + '-P' + e.pesp : cola;
-      return c + '-' + e.cierre;
-    }
-    return cola;
-  }
-
-  var $ = function (s) { return document.querySelector(s); };
-  var todos = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
-  function eu(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
-
-  /* ---------- LO QUE NO SE PUEDE ELEGIR, NO SE ENSEÑA ----------
-     Óscar, 26/08/2026: «ningún botón que no pueda ser elegido debe aparecer
-     en el configurador». Hasta hoy salían tachados —era la manera de decir
-     «esto existe pero no en esta caja»—, y con el catálogo ya cerrado eso
-     solo es ruido: enseña puertas que no abren.
-
-     El volcador del catálogo no se entera: ya descartaba los tachados, así
-     que dejar de dibujarlos le da exactamente la misma lista.
-
-     ---------- Y EL MODO CURAR, que es solo de Óscar ----------
-     «Quiero, aunque sea sólo para mí, que en el configurador haya un check
-     que si lo pulso, esa opción elegida en ese momento desaparezca.»
-
-     Se enciende poniendo `?curar` en la dirección. Sin eso no existe: ni el
-     cliente lo ve ni el volcador lo lee. Lo quitado se guarda EN EL
-     NAVEGADOR, no en la ficha: es una lista de trabajo para decidir qué se
-     cae, y hasta que Óscar lo diga el catálogo sigue entero y el servidor
-     sigue vendiendo esas referencias. */
-  var CURAR = false;
-  try { CURAR = /[?&]curar(=|&|$)/.test(location.search); } catch (x) {}
-  /* EL ASPA DE CADA BOTÓN SE FUE (Óscar, 26/08/2026: «ya no me hacen falta
-     las aspas en las elecciones»). Quitaba una opción de TODAS las
-     combinaciones, y resultó no ser lo que hacía falta: lo que no gusta casi
-     nunca es la esfera azul, es la esfera azul CON ese nato. Se queda sólo el
-     marcado de combinaciones, que es lo que Óscar ha estado usando.
-     De paso se borra su lista vieja del navegador, que ya no la lee nadie. */
-  try {
-    if (window.localStorage) window.localStorage.removeItem('laora.trinchera.quitadas');
-  } catch (x) {}
-  /* ---------- QUITAR UNA COMBINACIÓN, NO UNA OPCIÓN (Óscar, 26/08/2026)
-     «Si pulso esfera azul, ¿se elimina ya para todas las combinaciones
-     futuras o sólo para esta ocasión?» Con el aspa, para todas: mata la
-     opción entera. Y a veces lo que no gusta no es la esfera azul, es la
-     esfera azul CON ese nato verde.
-
-     Por eso, además del aspa, se puede marcar la combinación entera que
-     tienes puesta. No se quita de la ficha: se anota. Óscar va combinando
-     y marcando, y cuando tenga la lista se ejecutan de una vez. */
-  var COMBIS = {};
-  try {
-    if (window.localStorage)
-      COMBIS = JSON.parse(window.localStorage.getItem('laora.trinchera.combis') || '{}') || {};
-  } catch (x) { COMBIS = {}; }
-  /* MARCADAS Y EN VIGOR SON DOS COSAS (Óscar, 26/08/2026: «una vez que
-     tengo 2 seleccionadas, ¿cómo lo confirmo para que se quiten?»).
-     Marcar sólo anota, para poder seguir combinando sin que la ficha se
-     mueva bajo los pies; el botón de confirmar es el que las pone en vigor.
-     Si se aplicaran al marcar, en cuanto marcas una la ficha te saca de ahí
-     y ya no sabes dónde estabas. */
-  var APLICADAS = false;
-  try {
-    if (window.localStorage)
-      APLICADAS = window.localStorage.getItem('laora.trinchera.aplicadas') === '1';
-  } catch (x) {}
-  function guardaAplicadas() {
-    try {
-      if (window.localStorage)
-        window.localStorage.setItem('laora.trinchera.aplicadas', APLICADAS ? '1' : '0');
-    } catch (x) {}
-  }
-  /* Si al ponerlas en vigor estabas justo en una de las marcadas, hay que
-     sacarte: si no, te quedas viendo un reloj que acabas de quitar. Se busca
-     el primer botón de cualquier grupo que NO lleve a una marcada. */
-  function escapaDeMarcada() {
-    if (!vetada(firma()) && !(APLICADAS && marcada(firma()))) return;
-    var grupos = ['esfColor', 'color', 'cierre', 'pesp', 'correa', 'caja', 'esf', 'mov', 'diam'];
-    for (var i = 0; i < grupos.length; i++) {
-      var caja = $('[data-pv="' + grupos[i] + '"]');
-      if (!caja) continue;
-      var bs = caja.querySelectorAll('button');
-      for (var j = 0; j < bs.length; j++) {
-        if (bs[j].dataset.v === valorDe(grupos[i])) continue;
-        if (!llevaAMarcada(grupos[i], bs[j].dataset.v)) { bs[j].click(); return; }
-      }
-    }
-  }
-  /* ---------- LA FIRMA, EN LIMPIO ----------
-     Dos cosas la ensuciaban y las dos hacían que una marca no valiera para
-     todo lo que tenía que valer:
-
-     · EL DIÁMETRO Y EL MOVIMIENTO (Óscar, 26/08/2026: «que se quiten, pero
-       además de la caja de 36 y 39», y «las quitamos en automático y
-       cuarzo»). Lo que se está curando es el ASPECTO del reloj, y el aspecto
-       es el mismo en las dos medidas y con los dos calibres: lo que cambia
-       es el tamaño, la tapa y el precio, no lo que se ve por delante.
-       Marcada una vez, fuera las cuatro.
-
-     · LOS CAMPOS QUE NO SE VEN. El estado guarda el color del ante aunque
-       lleves puesto un nato —para devolvértelo cuando vuelvas al ante—, y lo
-       mismo con el del nato, el de la piel del Khaki, el pespunte y la
-       hebilla. Dos relojes idénticos con el mismo nato verde podían tener
-       firmas distintas por un ante que no está en la foto ni en el precio.
-       Aquí se ponen a cero los que no pintan nada en esa combinación.
-
-     Se aplica igual a las firmas guardadas, así que lo que ya estaba marcado
-     sigue valiendo: no hay que volver a marcar nada. */
-  function canon(f) {
-    var p = String(f).split('|');
-    var estilo = p[2], correa = p[6];
-    var pielM = estilo === 'M' &&
-                (correa === 'PIELN' || correa === 'PIELM' || correa === 'PIELV');
-    p[0] = '';                                    // el diámetro no cuenta
-    p[1] = '';                                    // ni el movimiento
-    if (estilo !== 'K') p[5] = '';                // el color de esfera es del Khaki
-    if (correa !== 'NATO')  p[7] = '';
-    if (correa !== 'ANTE')  p[8] = '';
-    if (correa !== 'PIELO') p[9] = '';
-    if (!pielM) p[10] = '';                       // pespunte: piel del Murph
-    if (!pielM && correa !== 'PIELO') p[11] = ''; // hebilla: las cuatro pieles
-    return p.join('|');
-  }
-  /* Las firmas guardadas, ya en limpio, para no recorrer la lista entera en
-     cada botón de cada pintada. */
-  /* ---------- LAS QUE YA ESTÁN QUITADAS DE VERDAD ----------
-     Aquí van, escritas a mano, las combinaciones que Óscar ha dado por
-     muertas. Son firmas EN LIMPIO —sin diámetro y sin movimiento— y valen
-     para todo el mundo, no sólo para su navegador: la ficha no las dibuja y
-     el volcador no las mete en el catálogo del servidor.
-
-     El orden de los campos es el de `firma()`:
-       diam|mov|estilo|caja|esf|esfColor|correa|nato|ante|pielk|pesp|cierre
-     y en limpio los dos primeros van vacíos.
-
-     Mientras esté vacía no quita nada. Se llena cuando Óscar pasa su lista
-     del panel; a partir de ahí el panel se vacía solo, porque lo que ya está
-     aquí deja de estar pendiente. */
-  /* ⚠️ LAS FIRMAS PERDIERON SU ÚLTIMO CAMPO EL 29/08/2026, cuando se fue el
-     dúo. Eran trece —el último, el dúo— y ahora son doce. La primera vez
-     que se quitó el paso sin tocar esto, ninguna clave casaba y NOVENTA Y
-     CUATRO combinaciones que Óscar había dado por muertas volvieron al
-     catálogo. Lo cazó el recuento: 1.456 en vez de 1.362.
-
-     Si algún día se añade o se quita un campo de `firma()`, esta tabla se
-     toca a la vez o los vetos dejan de existir en silencio. */
-  var VETADAS = {
-    '||K|PL|KB|AZU|NATO|NEG||||': 1,
-    '||K|PL|KB|AZU|NATO|VER||||': 1,
-    '||K|BR|KB|GRI|NATO|VER||||': 1,
-    '||K|BR|KB|GRI|NATO|BGE||||': 1,
-    '||K|BR|KB|GRI|NATO|MOS||||': 1,
-    '||K|TI|KB|AZU|NATO|VER||||': 1,
-    '||K|TI|KB|GRI|ANTE||MOS|||': 1,
-    '||K|TI|KB|GRI|PIELO|||MOS||plata': 1,
-    '||K|PL|KB|AZU|PIELO|||MOS||plata': 1,
-    '||K|PL|KB|AZU|PIELO|||NEG||plata': 1,
-    '||K|PL|KB|AZU|NATO|MOS||||': 1,
-    '||K|PL|KB|AZU|ANTE||NEG|||': 1,
-    '||K|PL|KB|AZU|ANTE||MOS|||': 1,
-    '||K|NG|KB|AZU|PIELO|||MOS||plata': 1,
-    '||K|BR|KB|AZU|ANTE||CAM|||': 1,
-    '||K|BR|KB|AZU|ANTE||NEG|||': 1,
-    '||K|BR|KB|AZU|ANTE||MOS|||': 1,
-    '||K|BR|KB|AZU|NATO|VER||||': 1,
-    '||K|BR|KB|AZU|NATO|NEG||||': 1,
-    '||K|BR|KB|AZU|NATO|BGE||||': 1,
-    '||K|BR|KB|AZU|NATO|MOS||||': 1,
-    '||K|BR|KB|AZU|NATO|GRI||||': 1,
-    '||K|BR|KB|AZU|PIELO|||NEG||plata': 1,
-    '||K|BR|KB|AZU|PIELO|||MOS||plata': 1,
-    '||K|BR|KB|AZU|PIELO|||MCL||plata': 1,
-    '||K|BR|KB|NEG|ANTE||CAM|||': 1,
-    '||M|TI|MB||PIELN||||B|oro-rosa': 1,
-    '||M|TI|MB||PIELM||||B|oro': 1,
-    '||M|TI|MB||PIELN||||B|oro': 1,
-    '||M|TI|MB||PIELV||||B|oro-rosa': 1,
-    '||M|TI|MB||PIELM||||B|oro-rosa': 1
-  };
-  function vetada(f) { return !!VETADAS[canon(f)]; }
-  /* EL VOLCADOR TIENE QUE VERLO TODO. Lee lo que la ficha DIBUJA para saber
-     qué existe, y la ficha ya no dibuja lo vetado: al preguntar por los
-     colores del nato con una esfera azul puesta, se le escondían los natos
-     vetados con esa esfera y desaparecían del inventario CON TODAS SUS
-     ESFERAS, también las buenas. El bronce con nato beige perdía las cuatro
-     cuando sólo estaban vetadas dos.
-
-     Así que el veto se apaga mientras el volcador recorre el árbol —ve el
-     catálogo entero, como antes— y él descarta al final, hoja por hoja, con
-     `vetada()`. Esconder es cosa del escaparate; contar, del inventario. */
-  var SIN_VETO = false;
-  function sinVeto(v) { SIN_VETO = !!v; }
-
-  var COMBIS_CANON = {};
-  function recanon() {
-    COMBIS_CANON = {};
-    for (var k in COMBIS) COMBIS_CANON[canon(k)] = 1;
-  }
-  /* LO QUE YA ESTÁ VETADO SE CAE DE LA LISTA. Óscar: «me dejas el listado en
-     el panel de nuevo limpio». No hace falta que vacíe a mano: en cuanto una
-     combinación pasa a `VETADAS`, deja de estar pendiente y se va sola. */
-  (function () {
-    var toco = false, k;
-    for (k in COMBIS) if (VETADAS[canon(k)]) { delete COMBIS[k]; toco = true; }
-    if (toco) {
-      try {
-        if (window.localStorage)
-          window.localStorage.setItem('laora.trinchera.combis', JSON.stringify(COMBIS));
-      } catch (x) {}
-    }
-  })();
-  recanon();
-  function marcada(f) { return !!COMBIS_CANON[canon(f)]; }
-  /* Al desmarcar hay que borrar TODAS las que caen en la misma firma limpia:
-     la misma combinación pudo marcarse en 36 y en 39 antes de hoy. */
-  function desmarca(f) {
-    var c = canon(f), k;
-    for (k in COMBIS) if (canon(k) === c) delete COMBIS[k];
-  }
-  function guardaCombis() {
-    recanon();
-    try {
-      if (window.localStorage)
-        window.localStorage.setItem('laora.trinchera.combis', JSON.stringify(COMBIS));
-    } catch (x) {}
-  }
-  /* QUÉ VALOR TIENE PUESTO CADA GRUPO. Hace falta para saber si lo que
-     acabas de quitar era justo lo que estaba elegido: en ese caso hay que
-     moverse a otra cosa, o te quedas con una opción activa que ya no se ve.
-     No vale mirar `aria-pressed`, porque la ficha desmarca a propósito los
-     grupos que el cliente todavía no ha tocado. */
-  /* LO QUE HACE PULSAR UN BOTÓN, en una sola función. Estaba escrito dentro
-     del manejador del clic, y desde el 26/08/2026 hace falta también para
-     PROBAR una opción sin pulsarla: para saber si llevaría a una combinación
-     que Óscar ha marcado para quitar. Teniéndolo en dos sitios, el día que
-     cambie una regla se quedaría medio cambiada. */
-  function aplicaOpcion(g, v) {
-    /* La cadena empezaba en el dúo, que se fue el 29/08/2026; ahora abre el
-       color del ante. */
-    if (g === 'color' && e.correa === 'ANTE') e.ante = v;
-    else if (g === 'color' && e.correa === 'NATO') e.nato = v;
-    else if (g === 'color' && e.correa === 'PIELO') e.pielk = v;
-    /* En el Murph el color de la piel ES la correa: negra, marrón y verde
-       son tres correas distintas con tres costes, aunque el cliente solo
-       vea un botón «Piel» y tres tonos. */
-    else if (g === 'color' && e.estilo === 'M' && MURPH_CORREA[e.correa]) e.correa = v;
-    /* y pulsar «Piel» estando ya en una de ellas no te devuelve a la negra */
-    else if (g === 'correa' && v === 'PIELN' &&
-             e.estilo === 'M' && MURPH_CORREA[e.correa]) { /* ya estás */ }
-    else e[g] = v;
-  }
-
-  /* ¿ESTE BOTÓN LLEVA A UNA COMBINACIÓN MARCADA? Se prueba de verdad: se
-     copia el estado, se pulsa en falso, se normaliza, se mira la firma y se
-     deja todo como estaba. Es la única manera honrada de saberlo, porque
-     entre pulsar un botón y la combinación final está `normaliza()`, que
-     puede cambiar de correa o de esfera por el camino. */
-  function llevaAMarcada(grupo, valor) {
-    var copia = {}, k;
-    for (k in e) copia[k] = e[k];
-    aplicaOpcion(grupo, valor);
-    normaliza();
-    /* las vetadas no dependen del interruptor: están quitadas para todos */
-    var esta = (!SIN_VETO && vetada(firma())) || (APLICADAS && marcada(firma()));
-    for (k in copia) e[k] = copia[k];
-    return esta;
-  }
-
-  function valorDe(grupo) {
-    if (grupo === 'color')
-      return e.correa === 'ANTE' ? e.ante
-           : e.correa === 'NATO' ? e.nato
-           : e.correa === 'PIELO' ? e.pielk : e.correa;
-    return e[grupo];
-  }
-
-  function botones(grupo, opciones, activo) {
-    var caja = $('[data-pv="' + grupo + '"]');
-    caja.innerHTML = opciones.filter(function (o) {
-      return !o[2] && !llevaAMarcada(grupo, o[0]);
-    }).map(function (o) {
-      return '<button type="button" data-v="' + o[0] + '"' +
-             ' aria-pressed="' + (o[0] === activo) + '">' + o[1] + '</button>';
-    }).join('');
-  }
-
-  /* LOS PASOS SE ABREN DE UNO EN UNO (Óscar, 24/08/2026): «ninguna opción
-     se verá hasta no haber elegido primero la 1 y la 2. Por tanto luego
-     teniendo seleccionada la 1 y la 2 aparecerá la sección 3, antes no y
-     ninguna posterior».
-
-     El 1 y el 2 están siempre. Del 3 en adelante, cada uno espera a que
-     hayas pulsado el de antes. Un paso que su propia lógica esconde —el
-     segundero cuando la caja lleva esfera fija— no atasca la fila: se da
-     por pasado y deja seguir al siguiente.
-
-     Se cierra con una clase y no con `hidden` a propósito: `hidden` ya lo
-     usan los grupos para su propia lógica, y si los dos escribieran en el
-     mismo sitio se pisarían. */
-  /* La esfera entera —estilo, color y segundero— es UN paso: la fila 2.
-     El segundero dejó de ser un paso propio el 24/08/2026. */
-  var CADENA = ['diam', 'mov', 'estilo', 'caja', 'correa'];
-  var tocado = {};
-
-  /* Un paso sin nada que elegir se da por pasado. Ojo: el grupo del
-     segundero NO se esconde a sí mismo cuando la caja lleva esfera fija;
-     lo que hace es vaciar sus botones y dejar el rótulo con el texto fijo.
-     Mirando solo el `hidden` del grupo, la fila se quedaba atascada ahí y
-     el acabado de caja no aparecía nunca. */
-  function sinNadaQueElegir(g) {
-    var op = g.querySelector('.pv-opciones');
-    return !op || op.hidden || !op.querySelector('button');
-  }
-
-  /* EL HUECO DEL PIE (24/08/2026). El bloque del precio va `sticky` pegado
-     abajo y con fondo blanco, así que se come el final de la columna cuando
-     las opciones son más altas que la pantalla. Con las cuatro filas abiertas
-     tapaba el segundero. Aquí se le reserva su propio alto —medido, no
-     inventado— para que nunca quede nada debajo. */
-  function huecoParaElPie() {
-    var pie = document.querySelector('.pv-pie');
-    var col = document.querySelector('.pv-info > div');
-    if (!pie || !col) return;
-    var alto = pie.getBoundingClientRect().height;
-    if (alto) col.style.paddingBottom = Math.round(alto + 24) + 'px';
-  }
-  window.addEventListener('resize', huecoParaElPie);
-
-  function abrirPasos() {
-    var abierto = !!(tocado.diam && tocado.mov);
-    for (var i = 2; i < CADENA.length; i++) {
-      var g = $('[data-paso="' + CADENA[i] + '"]');
-      if (!g) continue;
-      g.classList.toggle('pv-cerrado', !abierto);
-      if (abierto) abierto = g.hidden || sinNadaQueElegir(g) || !!tocado[CADENA[i]];
-    }
-    /* pespunte, color y cierre son de la correa: hasta que no la eliges,
-       no pintan nada */
-    ['pesp', 'color', 'cierre'].forEach(function (k) {
-      var g = $('[data-cuelga="' + k + '"]');
-      if (g) g.classList.toggle('pv-cerrado', !tocado.correa);
-    });
-  }
-
-  function pinta() {
-    normaliza();
-    $('[data-pv-precio]').textContent = eu(precio());
-    /* El plazo de Klarna: un tercio del precio, redondeado hacia arriba al
-       céntimo, como en el Lunar. */
-    var klarna = $('[data-pv-klarna]');
-    if (klarna) klarna.textContent = eu(Math.ceil(precio() / 3 * 100) / 100);
-    $('[data-pv-cal]').textContent = 'Calibre ' + MOVS[e.mov].cal;
-
-    botones('diam', DIAM_BOTON, e.diam);
-    botones('mov', MOV_BOTON, e.mov);
-    botones('estilo', ESTILO_BOTON, e.estilo);
-    /* Con el Murph solo existen dos acabados, y los otros dos ya no se
-       tachan: no se dibujan. */
-    botones('caja', CAJAS_BOTON.map(function (c) {
-      return [c[0], c[1], e.estilo === 'M' && !MURPH_CAJA[c[0]]];
-    }), e.caja);
-
-    /* la esfera: khaki, murph del pack, o la fija del bronce */
-    var esBronce = e.caja === 'BR';
-    var esNegra = e.caja === 'NG';
-    var esTitanio = e.caja === 'TI';
-    var esMurph = e.estilo === 'M';
-    /* Desde el 20/08/2026 la única esfera fija del Khaki es la del
-       bronce: en el resto de cajas se elige siempre entre los dos
-       segunderos. «Segundero rojo para todas las cajas excepto bronce,
-       segundero blanco para todas las cajas» (Óscar). */
-    /* LOS CUATRO COLORES DE ESFERA (Óscar, 24/08/2026). Los que aún no
-       existen salen tachados: se ven, para que se sepa por dónde va la
-       familia, pero no se pueden elegir.
-       EN EL MURPH NO SE ELIGE (Óscar, 26/08/2026): «en el murph no se puede
-       elegir esfera negra, se quita esa opción. Solo se elige numerales
-       blancos o crema, pero la esfera siempre es negra». Su esfera es negra
-       y punto, así que enseñar una fila de colores con uno solo pulsable era
-       ofrecer una elección que no existe.
-       Y SE VACÍA además de esconderse, por lo mismo que el sub-bloque de los
-       numerales de aquí abajo: el volcador del catálogo lee lo que la ficha
-       ha DIBUJADO, y con el contenido de la vez anterior dentro creería que
-       esos colores se siguen ofreciendo. */
-    var colorEsf = $('[data-pv="esfColor"]');
-    colorEsf.hidden = esMurph;
-    if (esMurph) {
-      colorEsf.innerHTML = '';
-      e.esfColor = 'NEG';
-    } else if (!ESF_COLORES[e.esfColor] || !ESF_COLORES[e.esfColor][2]) {
-      e.esfColor = 'NEG';
-    }
-    if (!esMurph) {
-      colorEsf.innerHTML = Object.keys(ESF_COLORES).filter(function (k) {
-        return ESF_COLORES[k][2] && !llevaAMarcada('esfColor', k);
-      }).map(function (k) {
-        var c = ESF_COLORES[k];
-        return '<button type="button" data-v="' + k + '"' +
-               ' aria-pressed="' + (k === e.esfColor) + '">' +
-               '<i style="background:' + c[1] + '"></i><small>' + c[0] + '</small></button>';
-      }).join('');
-    }
-
-    /* El sub-bloque de debajo de los colores ya solo sirve al Murph, para
-       elegir sus numerales; en el khaki no hay nada que preguntar desde que
-       se fue el segundero rojo. */
-    var esfFija = e.estilo !== 'M';
-    $('[data-pv="esf"]').hidden = esfFija;
-    $('[data-pv-grupo-esf]').hidden = esfFija;
-    /* Y SE VACÍA, no solo se esconde. Si se deja el contenido de la vez
-       anterior, el enumerador del catálogo —que lee lo que la ficha ha
-       dibujado— cree que aquí siguen ofreciéndose aquellas esferas, las
-       prueba, la ficha las corrige a la fija y las descarta por no
-       coincidir. Resultado: el titanio del Khaki desapareció entero del
-       catálogo sin que nadie lo tocara. */
-    if (esfFija) $('[data-pv="esf"]').innerHTML = '';
-    var fijaEsf = $('[data-pv-esf-fija]');
-    fijaEsf.hidden = !esfFija;
-    /* Y DICE EL COLOR (26/08/2026). Estaba escrita a mano —«Khaki negra
-       mate»— y se quedaba diciendo «negra» con la esfera azul puesta
-       delante. Era el último sitio donde el color elegido no llegaba. */
-    if (esfFija)
-      fijaEsf.textContent = 'Khaki ' +
-        (ESF_REF[e.esfColor] ? ESF_COLORES[e.esfColor][0].toLowerCase() : 'negra') +
-        ' mate, numerales y agujas blancas';
-    if (!esfFija) {
-      $('[data-pv-rotulo-esf]').textContent = 'Numerales';
-      botones('esf', [['MA', ESFERAS.MA.corto], ['MB', ESFERAS.MB.corto]], e.esf);
-    }
-
-    /* la correa: todas salvo el ante, que es del bronce */
-    $('[data-pv="correa"]').hidden = false;
-    $('[data-pv-correa-fija]').hidden = true;
-    /* EN EL KHAKI LA PIEL ES UNA (Óscar, 19/08/2026): «solo puede ser un
-       tipo de piel», así que el botón dice «Piel» a secas y el color se
-       elige después. Las tres pieles italianas —negra, marrón y verde, con
-       su pespunte y sus cinco cierres— son del Murph y solo salen ahí. */
-    if (esBronce) {
-      /* nato y ante (Óscar, 23/08/2026) y piel desde el 25/08, con sus cuatro
-         colores fotografiados. El orden, como en las demás cajas. */
-      botones('correa', [['NATO', 'Nato'], ['PIELO', 'Piel'], ['ANTE', 'Ante']], e.correa);
-    } else {
-      botones('correa', esMurph
-        /* El Murph va con las tres pieles de la serie maestra y con el
-           brazalete y el pack, que siguen fotografiados aparte. */
-        /* El titanio no tiene pack (Óscar, 19/08/2026) ni brazalete: el
-           brazalete es de acero y no hay foto de esa pareja. Se tachan, que
-           es como se dice aquí «esto no existe». */
-        ? [['PIELN', 'Piel'],
-           ['ANTE', 'Ante'],
-           ['ACERO', 'Brazalete Acero', esTitanio]]
-        : esNegra
-        ? [['NATO', 'Nato'],
-           ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERONG', 'Brazalete Negro PVD']]
-        : esTitanio
-        ? [['NATO', 'Nato'], ['ANTE', 'Ante'], ['PIELO', 'Piel']]
-        : [['NATO', 'Nato'],
-           ['PIELO', 'Piel'], ['ANTE', 'Ante'], ['ACERO', 'Brazalete Acero']],
-        /* «Piel» vale por sus tres tonos, así que se marca con cualquiera */
-        esMurph && MURPH_CORREA[e.correa] ? 'PIELN' : e.correa);
-    }
-
-    /* EL AÑADIDO DEL BRAZALETE. Se dice lo que suma de verdad —con el
-       multiplicador, el redondeo al 9,90 y el suelo ya aplicados—, no el
-       coste de la pieza: es lo que le van a cobrar. */
-    /* ⛔ EL PASO DEL DÚO SE FUE (Óscar, 29/08/2026): «el dúo no, porque
-       ofreceremos la posibilidad de comprar más cosas, más correas, antes
-       de pasar al carrito, y por tanto ya no hará falta el dúo por ahora».
-       Era un botón para llevarse además el brazalete de acero. Se quita el
-       paso y con él las 144 referencias acabadas en `-DUO`. */
-
-    /* El cierre: con la piel italiana, y su foto en la esquina del visor */
-    var hayCierre = conCierre() || conCierreK();
-    $('[data-pv-grupo-cierre]').hidden = !hayCierre;
-    /* LA PIEL ABIERTA. Con la piel, en las dos medidas. */
-    var pielAb = $('[data-pv-piel]');
-    if (pielAb) {
-      var tocaPiel = e.correa === 'PIELO' && !!ABIERTA_PIEL[e.pielk];
-      pielAb.hidden = !tocaPiel;
-      if (tocaPiel) {
-        /* LA HEBILLA, DEL COLOR ELEGIDO (Óscar, 25/08/2026). Quien pide la
-           clásica negra tiene que verla negra: si no, la miniatura le enseña
-           una hebilla que no es la que compra. De la piel del khaki solo hay
-           dos cierres, plata y negra, así que son dos ficheros por color. */
-        var imgP = pielAb.querySelector('img');
-        /* OJO CON EL NOMBRE: `heb` ya está cogido en esta misma función para
-           la miniatura de la hebilla. Con `var`, la segunda declaración se iza
-           y pisa a la primera, así que llamarlo igual dejaba el grupo del
-           cierre SIN BOTONES: más abajo, `if (hayCierre && heb)` recibía una
-           cadena vacía en vez del elemento. */
-        var sufHeb = e.cierre === 'negra' ? '-negra' : '';
-        imgP.src = ABIERTA_IMG + 'piel-abierta-' + PIELK_FOTO[e.pielk] + sufHeb + '.avif' + ABIERTA_V;
-        imgP.alt = 'La correa de piel ' + PIELES_K[e.pielk][0].toLowerCase() +
-                   ' con ' + CIERRES[e.cierre].tec + ', extendida';
-      }
-    }
-    /* LA CORREA DE 36 ABIERTA. Sale con el nato de esa medida, sea cual sea
-       el color. Si de ese color hay foto propia se enseña la suya y el pie lo
-       dice; si todavía no la hay, se cae a la beige y el pie avisa de que
-       aquello es cómo ES la correa, no el reloj que has elegido. */
-    var n36 = $('[data-pv-nato36]');
-    if (n36) {
-      var toca36 = e.correa === 'NATO' && e.diam === '36';
-      n36.hidden = !toca36;
-      if (toca36) {
-        var propia = !!ABIERTA_36[e.nato];
-        var tono = NATO_FOTO[propia ? e.nato : 'BGE'];
-        var img36 = n36.querySelector('img');
-        img36.src = ABIERTA_IMG + 'nato36-abierta-' + tono + '.avif' + ABIERTA_V;
-        img36.alt = propia
-          ? 'La correa nato de 36 mm ' + natos()[e.nato][0].toLowerCase() + ', extendida'
-          : 'La correa nato de 36 mm, extendida';
-        n36.querySelector('figcaption').textContent =
-          propia ? 'La correa, extendida' : 'Así es la correa';
-      }
-    }
-    /* Los botones del cierre ya no cuelgan de que exista la miniatura de la
-       hebilla: colgaban, y el día que esa miniatura faltó el grupo se quedó
-       sin nada que pulsar. */
-    if (hayCierre) {
-      if (conCierreK() && e.cierre !== 'plata' && e.cierre !== 'negra') e.cierre = 'plata';
-      botones('cierre', conCierreK()
-        ? Object.keys(CIERRES_K).map(function (k) { return [k, CIERRES_K[k]]; })
-        : Object.keys(CIERRES).filter(cierreVale)
-                              .map(function (k) { return [k, CIERRES[k].nombre]; }), e.cierre);
-    }
-    $('[data-pv-cierre]').textContent = hayCierre ? CIERRES[e.cierre].nombre
-      /* los brazaletes no llevan hebilla: cierran con desplegable
-         (Óscar, 20/08/2026) */
-      : (e.correa === 'ACERO' || e.correa === 'ACERONG') ? 'Cierre desplegable'
-      : 'Hebilla clásica plateada';
-
-    /* El pespunte: solo con la piel italiana del Murph */
-    var conPespunte = esMurph && !!MURPH_CORREA[e.correa];
-    $('[data-pv-grupo-pesp]').hidden = !conPespunte;
-    if (conPespunte) {
-      botones('pesp', Object.keys(PESPUNTES).map(function (k) { return [k, PESPUNTES[k]]; }), e.pesp);
-    }
-
-    /* El color: lo piden varias correas y cada una guarda el suyo en su
-       propia casilla del estado —el nato, la piel del khaki y el ante—. */
-    /* El ante lleva color en el Murph y también en la 12/24 del khaki, que
-       tiene las cuatro pieles en acero, PVD negro y bronce. En el titanio
-       con ante no: ahí solo hay una foto y sin color. */
-    var anteConColor = e.correa === 'ANTE' &&
-                       (esMurph || !!K1224_ANTE_CAJA[e.caja]);
-    var esNato = e.correa === 'NATO';
-    var esPielK = e.correa === 'PIELO';
-    var esPielM = esMurph && !!MURPH_CORREA[e.correa];
-    var conColor = anteConColor || esNato || esPielK || esPielM;
-    var esAnte = anteConColor;
-    var esNegraK = e.estilo === 'K' && e.caja === 'NG';
-    var paleta = esAnte ? ANTES
-               : esNato ? natos()
-               : esPielK ? PIELES_K
-               : PIELES_M;
-    var elegido = esAnte ? e.ante : esNato ? e.nato : esPielK ? e.pielk : e.correa;
-    $('[data-pv-grupo-color]').hidden = !conColor;
-    if (conColor) {
-      $('[data-pv-rotulo-color]').textContent =
-        esAnte ? 'Color del ante' : esNato ? 'Color del nato'
-        : 'Color de la piel';
-      $('[data-pv="color"]').innerHTML = Object.keys(paleta).filter(function (k) {
-        return !llevaAMarcada('color', k);
-      }).map(function (k) {
-        return '<button type="button" data-v="' + k + '" aria-pressed="' + (k === elegido) + '">' +
-               '<i style="background:' + paleta[k][1] + '"></i><small>' + paleta[k][0] + '</small></button>';
-      }).join('');
-    }
-
-    /* LA FOTO: la de la serie nueva si esta combinación ya está hecha, y si
-       no, el cartel. Nunca una imagen que no sea la elegida. */
-    var foto = serieFoto();
-    var img = $('[data-pv-foto]');
-    img.hidden = !foto;
-    $('[data-pv-sinfoto]').hidden = !!foto;
-    if (foto) {
-      img.src = SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V;
-      img.srcset = [480, 1200, 1600].map(function (s) {
-        return SERIE_IMG + s + '/' + foto + '.avif' + SERIE_V + ' ' + s + 'w';
-      }).join(', ');
-      img.sizes = '(max-width:900px) 100vw, 46vw';
-      /* EL ALT DICE QUÉ RELOJ ES (21/08/2026). Antes las 220
-         configuraciones compartían un «laOra Trinchera» a secas: para
-         Google Imágenes eran el mismo reloj, y para quien no ve la
-         pantalla, ninguno. El nombre del fichero ya lo sabía; ahora lo
-         dice también el texto. */
-      img.alt = descripcion();
-      img.classList.add('pv-ampliable');
-    }
-    /* La lupa solo cuando hay foto que ampliar. */
-    var boton = $('[data-pv-ampliar]');
-    if (boton) boton.hidden = !foto;
-
-    /* la ficha técnica */
-    $('[data-pv-tec="caja"]').textContent =
-      'Caja de ' + e.diam + ' mm en ' + CAJAS[e.caja].mat + ', con doble numeración de época y ' +
-      'cristal de zafiro. Tapa trasera ' + (e.tapa === 'C' ? 'de cristal que deja ver el movimiento.' : 'roscada sólida.') +
-      ' Correa: ' + (e.correa === 'PIELO'
-        ? 'piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' de 20 mm con pespunte rectangular claro y ' + CIERRES[e.cierre].tec
-        : e.correa === 'NATO'
-        /* EL LARGO DEL NATO DE 39 (Óscar, 25/08/2026): 275 mm, que es una
-           correa larga de verdad. Se dice porque decide una compra: quien
-           tiene la muñeca grande necesita saberlo antes, y quien la tiene
-           fina también. El nato de la caja de 36 es otro producto del
-           proveedor y su largo no está medido, así que ahí no se afirma. */
-        ? 'nato ' + natos()[e.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
-          + (e.diam === '39' ? ', 275 mm de largo, para muñecas grandes' : '')
-        : e.correa === 'ANTE'
-        ? 'ante ' + ANTES[e.ante][0].toLowerCase() + ' con hebilla clásica plateada'
-        : (e.estilo === 'M' && MURPH_CORREA[e.correa])
-        ? CORREAS[e.correa].tec.replace('con pespunte blanco', 'con pespunte ' + PESPUNTES[e.pesp].toLowerCase())
-                               .replace('hebilla clásica plateada', CIERRES[e.cierre].tec)
-        : conCierre()
-        ? CORREAS[e.correa].tec.replace('hebilla clásica plateada', CIERRES[e.cierre].tec)
-        : CORREAS[e.correa].tec)
-      + '.';
-    $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
-    $('[data-pv-tec="esf"]').textContent = esfTec();
-    abrirPasos();
-    /* el panel de curar lleva dentro la combinación que tienes puesta, así
-       que se rehace con cada pintada, no solo al marcar algo */
-    if (CURAR) panelCurar();
-    /* NINGUNA OPCIÓN SEÑALADA HASTA QUE LA PULSES (Óscar, 24/08/2026). El
-       reloj de la foto y el precio son los del clásico desde el primer
-       momento, pero los botones no se atribuyen una elección que el cliente
-       todavía no ha hecho: se desmarcan los grupos que no ha tocado. */
-    [].forEach.call(document.querySelectorAll('[data-pv]'), function (g) {
-      if (tocado[g.dataset.pv]) return;
-      [].forEach.call(g.querySelectorAll('button'), function (b) {
-        b.setAttribute('aria-pressed', 'false');
-      });
-    });
-    /* el calibre, solo cuando ya has elegido movimiento */
-    var cal = $('[data-pv-calibre]');
-    if (cal) cal.hidden = !tocado.mov;
-    huecoParaElPie();
-    $('[data-pv-tec="agua"]').textContent = agua() +
-      (e.caja === 'TI' ? '. La más hermética de la familia, con tapa roscada.' :
-       '. Aguanta lluvia, salpicaduras y lavarse las manos; para nadar, mejor el titanio.');
-  }
-
-  /* LA LISTA DE LO QUITADO, para que Óscar vea lo que lleva marcado y me
-     lo pueda pasar. Se dibuja desde el JS y solo con `?curar`: así el
-     cliente no la tiene ni en el HTML, y el volcador del catálogo tampoco. */
-  /* La frase se guardó con su medida dentro —«laOra Trinchera de 36 mm,
-     …»— y ahora la marca vale para las dos, así que al enseñarla se le
-     quita: decir «de 36 mm» sería mentir sobre lo que se va a quitar. */
-  function sinMedida(t) { return String(t).replace(/ de 3[69] mm,/, ','); }
-
-  /* Lo que hay que pasarme para que las quitadas lo sean de verdad: la
-     firma EN LIMPIO, que es lo que va a `VETADAS`, y debajo la frase, para
-     poder leer de un vistazo qué es cada una. */
-  function paraMi() {
-    return Object.keys(COMBIS).map(function (k) {
-      return canon(k) + '   · ' + sinMedida(COMBIS[k].dicho);
-    }).join('\n');
-  }
-
-  function panelCurar() {
-    if (!CURAR) return;
-    var p = document.getElementById('pv-curar');
-    if (!p) {
-      p = document.createElement('div');
-      p.id = 'pv-curar'; p.className = 'pv-curar';
-      document.body.appendChild(p);
-    }
-    var combis = Object.keys(COMBIS);
-    var yaEsta = marcada(firma());
-    p.innerHTML =
-      '<b>Esta combinación</b>' +
-      '<p class="pv-curar-dicho">' + dichoCompleto() + '</p>' +
-      '<p><code>' + referencia() + '</code></p>' +
-      '<button type="button" data-curar-combi>' +
-        (yaEsta ? '\u2611  Marcada para quitar' : '\u2610  Quitar esta combinación') +
-      '</button>' +
-      '<hr>' +
-      '<b>Combinaciones marcadas (' + combis.length + ')</b>' +
-      (combis.length
-        ? '<ul>' + combis.map(function (k) {
-            return '<li><span>' + sinMedida(COMBIS[k].dicho) + '</span>' +
-                   '<button type="button" data-descombi="' + k + '">quitar de la lista</button></li>';
-          }).join('') + '</ul>' +
-          '<button type="button" data-curar-aplica>' +
-            (APLICADAS ? 'Volver a ponerlas todas'
-                       : 'Quitarlas ya (' + combis.length + ')') +
-          '</button>' +
-          '<p class="pv-curar-dicho">' +
-            (APLICADAS
-              ? 'Quitadas <b>en este navegador</b> y en <b>las dos medidas</b>. ' +
-                'Para que desaparezcan para todo el mundo, cópiame la lista y ' +
-                'las escribo en la ficha.'
-              : 'Marcadas, pero todavía en pie. Púlsalo y desaparecen del ' +
-                'configurador —en <b>las dos medidas</b>— para que veas cómo queda.') +
-          '</p>'
-        : '<p>Ninguna. Combina, y cuando algo no te guste márcalo aquí: ' +
-          'sigue todo en pie hasta que lo confirmes.</p>') +
-      '<hr>' +
-      /* EL TEXTO, A LA VISTA Y SELECCIONABLE. El botón de copiar usa el
-         portapapeles del navegador, que puede fallar en silencio —hace falta
-         permiso y que la pestaña esté al frente—, y entonces Óscar cree que
-         ha copiado y no ha copiado nada. Con el cuadro delante siempre puede
-         seleccionar y copiar a mano, y además VE lo que me va a mandar. */
-      (combis.length
-        ? '<b>Para pasármelo</b>' +
-          '<textarea class="pv-curar-texto" readonly rows="4" ' +
-          'onclick="this.select()">' + paraMi() + '</textarea>'
-        : '') +
-      '<button type="button" data-curar-copia>Copiar la lista</button> ' +
-      '<button type="button" data-curar-vacia>Vaciar</button>' +
-      '<span class="pv-curar-ok" data-curar-ok hidden>copiado</span>';
-  }
-
-  document.addEventListener('click', function (ev) {
-    if (ev.target.closest('[data-curar-combi]')) {
-      var f = firma();
-      if (marcada(f)) desmarca(f);
-      else COMBIS[f] = { ref: referencia(), dicho: dichoCompleto(), estado: f };
-      guardaCombis(); pinta(); escapaDeMarcada(); panelCurar();
-      return;
-    }
-    var dc = ev.target.closest('[data-descombi]');
-    if (dc) { delete COMBIS[dc.dataset.descombi]; guardaCombis(); pinta(); panelCurar(); return; }
-    if (ev.target.closest('[data-curar-aplica]')) {
-      APLICADAS = !APLICADAS; guardaAplicadas();
-      pinta(); escapaDeMarcada(); panelCurar();
-      return;
-    }
-    if (ev.target.closest('[data-curar-vacia]')) {
-      COMBIS = {}; APLICADAS = false;
-      guardaCombis(); guardaAplicadas(); pinta(); panelCurar();
-      return;
-    }
-    if (ev.target.closest('[data-curar-copia]')) {
-      var ok = $('[data-curar-ok]');
-      var caja = document.querySelector('.pv-curar-texto');
-      /* Primero a la vieja usanza, que funciona siempre; el portapapeles
-         moderno queda de respaldo y sin él tampoco pasa nada, porque el
-         texto está delante para seleccionarlo. */
-      var hecho = false;
-      if (caja) {
-        caja.select();
-        try { hecho = document.execCommand('copy'); } catch (err) {}
-      }
-      if (!hecho) {
-        try { navigator.clipboard.writeText(paraMi()); hecho = true; } catch (err) {}
-      }
-      if (ok) {
-        ok.textContent = hecho ? 'copiado' : 'no he podido: selecciónalo tú';
-        ok.hidden = false;
-      }
-      return;
-    }
-    var b = ev.target.closest('[data-pv] button');
-    if (b) {
-      var g = b.closest('[data-pv]').dataset.pv;
-      /* El grupo de color sirve al nato y al ante, y cada uno guarda el suyo.
-         El ante lo lleva ya el Murph Y el khaki de la 12/24, así que la
-         condición es la correa, no el estilo. */
-      aplicaOpcion(g, b.dataset.v);
-      /* Lo que pides con el botón de la correa se queda anotado: es a lo
-         que hay que volver cuando una caja te la haya quitado. */
-      if (g === 'correa') e.correaPedida = b.dataset.v;
-      /* queda anotado que este grupo ya lo has decidido tú. TODOS, no solo
-         los de la cadena: el color de la esfera, el segundero y el color de
-         la correa también llegan sin señalar. */
-      tocado[g] = true;
-      /* al entrar en la caja negra, la esfera por defecto es la de
-         segundero blanco (Óscar, 16/08/2026) */
-      if (g === 'caja' && b.dataset.v === 'NG') e.esf = 'KB';
-      /* CON LA PIEL DEL MURPH, EL PESPUNTE SALTA AL QUE TIENE FOTO (Óscar,
-         20/08/2026). Cada tono está fotografiado con uno solo —la negra
-         con el claro, la marrón y la verde a tono—, así que cambiar de
-         color dejaba el visor con el cartel y parecía que se rompía.
-         Se salta solo si lo que acabas de pulsar NO es el pespunte: ahí
-         mandas tú, aunque esa foto no exista todavía. Y solo cambia el
-         visor: las seis combinaciones se siguen fabricando y siguen en
-         el catálogo, porque `normaliza()` no se toca. */
-      if (g !== 'pesp' && e.estilo === 'M' && MURPH_CORREA[e.correa] && !serieFoto()) {
-        var antesPesp = e.pesp;
-        e.pesp = antesPesp === 'B' ? 'T' : 'B';
-        if (!serieFoto()) e.pesp = antesPesp;
-      }
-      /* Y EL COLOR DEL KHAKI SALTA AL QUE TIENE FOTO (Óscar, 20/08/2026).
-         Al entrar en la caja negra con el nato en verde —su color de
-         serie— solo está fotografiado el negro, y el cartel hacía creer
-         que el nato no existía ahí. Como con el pespunte: si lo que has
-         pulsado NO es el color, se busca uno con foto; si eliges tú un
-         color, se respeta aunque salga el cartel. */
-      /* NORMALIZAR ANTES DE BUSCAR FOTO (23/08/2026). El rescate de abajo
-         preguntaba por la foto con el estado a medio hacer: al volver del
-         bronce la esfera seguía siendo la de agujas plata, así que buscaba
-         una foto que no era la que se iba a pintar. normaliza() solo
-         recorta, así que llamarla de más no cambia nada. */
-      normaliza();
-      /* LA CORREA VUELVE SOLA (Óscar, 23/08/2026): «si elijo otra correa,
-         u otro color de caja, al regresar a acero no aparece foto, y
-         debería volver a mostrar la que sí tenemos». El bronce solo lleva
-         ante, así que al pasar por él la correa se cambia sola; al volver
-         al acero nadie la devolvía y el visor se quedaba vacío. Aquí se
-         recupera la última que pediste tú, y SOLO si con ella hay foto.
-         Si acabas de pulsar la correa mandas tú y esto no se mete. */
-      if (g !== 'correa' && e.estilo === 'K' && !serieFoto() &&
-          e.correaPedida && e.correa !== e.correaPedida) {
-        var correaAntes = e.correa;
-        e.correa = e.correaPedida;
-        normaliza();
-        if (!serieFoto()) { e.correa = correaAntes; normaliza(); }
-      }
-      /* Y LA ESFERA DEL MURPH IGUAL (Óscar, 26/08/2026): «no veo ninguna
-         imagen del murph».
-
-         El Murph entra por la esfera de numerales CREMA y la única foto que
-         hay hoy es la de numerales BLANCOS, así que al pulsar «Murph» salía
-         el cartel y parecía que ese reloj no tenía ni una imagen. Estaba
-         publicada; lo que fallaba era que nadie llegaba a ella.
-
-         Los dos rescates que ya había —el de la correa y el del color— están
-         escritos SOLO para el Khaki (`e.estilo === 'K'`), así que al Murph no
-         le cubría nada más que el pespunte.
-
-         VA DESPUÉS DE normaliza(), y no antes, por lo mismo que avisa el
-         comentario de arriba: al pulsar «Murph» la esfera todavía es la del
-         Khaki, así que preguntar aquí por la foto con el estado a medio
-         hacer devuelve una respuesta que no vale.
-
-         Como los demás: si lo que has pulsado ES la esfera, mandas tú y se
-         respeta aunque salga el cartel. */
-      if (g !== 'esf' && e.estilo === 'M' && !serieFoto()) {
-        var antesEsf = e.esf;
-        e.esf = antesEsf === 'MA' ? 'MB' : 'MA';
-        if (!serieFoto()) e.esf = antesEsf;
-      }
-      if (g !== 'color' && e.estilo === 'K' && !serieFoto()) {
-        var cual = e.correa === 'NATO' ? 'nato' : e.correa === 'PIELO' ? 'pielk'
-                 : e.correa === 'ANTE' ? 'ante' : null;
-        if (cual) {
-          var lista = e.correa === 'NATO' ? natos()
-                    : e.correa === 'PIELO' ? PIELES_K : ANTES;
-          var antesColor = e[cual];
-          var ks = Object.keys(lista);
-          for (var ci = 0; ci < ks.length; ci++) {
-            e[cual] = ks[ci];
-            if (serieFoto()) break;
-          }
-          if (!serieFoto()) e[cual] = antesColor;
-        }
-      }
-      pinta();
-      /* AL ELEGIR EL MOVIMIENTO, EL PASO 3 SE VIENE A LA VISTA (Óscar,
-         24/08/2026): «al pulsar la opción 2 el scroll baja a la opción 3
-         que acaba de aparecer». Solo si de verdad acaba de abrirse. */
-      if (g === 'mov') {
-        var paso3 = $('[data-paso="estilo"]');
-        if (paso3 && !paso3.classList.contains('pv-cerrado') && paso3.scrollIntoView) {
-          paso3.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-      /* AL ELEGIR CORREA, EL PASO DEL COLOR SE VIENE A LA VISTA (Óscar,
-         19/08/2026). Es el único paso que aparece DESPUÉS del que acabas
-         de pulsar, así que sin esto se queda fuera de pantalla y parece
-         que la correa no tiene colores. */
-      if (g === 'correa') {
-        var grupoColor = $('[data-pv-grupo-color]');
-        if (grupoColor && !grupoColor.hidden && grupoColor.scrollIntoView) {
-          grupoColor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-      return;
-    }
-    if (ev.target.closest('[data-pv-comprar]')) {
-      if (typeof laoraCarritoAnadir !== 'function') return;
-      var esBronce = e.caja === 'BR';
-      laoraCarritoAnadir({
-        ref: referencia(),
-        nombre: 'Trinchera ' + (esBronce ? 'Bronce'
-                : e.caja === 'TI' ? 'Titanio'
-                : (e.esf === 'MA' || e.esf === 'MB') ? 'Murph'
-                : 'Militar'),
-        detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
-                 ' · ' + esfNombre() + ' · ' + MOVS[e.mov].nombre,
-        correa: (e.correa === 'PIELO'
-          ? 'Piel ' + PIELES_K[e.pielk][0].toLowerCase() + ' · ' + CIERRES_K[e.cierre].toLowerCase()
-          : e.correa === 'NATO'
-          ? 'Nato ' + natos()[e.nato][0].toLowerCase() + ', hebilla clásica plateada'
-          : e.correa === 'ANTE'
-          ? 'Ante ' + ANTES[e.ante][0].toLowerCase() + ', hebilla clásica plateada'
-          : (e.estilo === 'M' && MURPH_CORREA[e.correa])
-          ? CORREAS[e.correa].nombre + ', pespunte ' + PESPUNTES[e.pesp].toLowerCase() +
-            ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
-          : conCierre()
-          ? CORREAS[e.correa].nombre + ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
-          : CORREAS[e.correa].nombre),
-        precio: precio(),
-        foto: (function () { var i = $('[data-pv-foto]'); return i.hidden ? '' : i.src; })()
-      });
-      window.location.href = '/carrito.html';
-    }
-  });
-
-  pinta();
-  panelCurar();
-})();
-
-  /* El pie fijo se suelta al llegar la Ficha Técnica (móvil). */
-  (function () {
-    var pie = document.querySelector('[data-pv-pie]');
-    var tecnica = document.querySelector('.pv-tecnica');
-    var galeria = document.querySelector('.pv-galeria');
-    if (!pie || !tecnica || !('IntersectionObserver' in window)) return;
-    new IntersectionObserver(function (filas) {
-      var llega = filas[0].isIntersecting || filas[0].boundingClientRect.top < window.innerHeight;
-      pie.classList.toggle('pv-pie-quieto', llega);
-      galeria.classList.toggle('pv-galeria-suelta', llega);
-    }, { rootMargin: '0px 0px -35% 0px' }).observe(tecnica);
-  })();
-
 </script>
-
-<!-- ============ LA LUPA ============
-     La foto a pantalla completa, con la de 1600 —que es la que hay— y el
-     pie diciendo qué reloj es. Se cierra con la equis, con Escape o
-     pulsando fuera. Vive fuera de la ficha para que ningún «position» de
-     la columna pegajosa la recorte. -->
-<div class="pv-lupa" data-pv-lupa hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
-  <button type="button" class="pv-lupa-cerrar" data-pv-lupa-cerrar aria-label="Cerrar la foto">&#10005;</button>
-  <!-- sin `src` de partida: vacío, el navegador se pide la propia página
-       como si fuera una imagen. La lupa se lo pone al abrirse. -->
-  <img data-pv-lupa-img alt="">
-  <p class="pv-lupa-pie" data-pv-lupa-pie></p>
-</div>
-
-<script>
-/* La lupa del visor. Aparte del configurador a propósito: no toca su
-   estado, solo lee la foto que ya está puesta. */
-(function () {
-  var capa   = document.querySelector('[data-pv-lupa]');
-  var grande = document.querySelector('[data-pv-lupa-img]');
-  var pie    = document.querySelector('[data-pv-lupa-pie]');
-  var foto   = document.querySelector('[data-pv-foto]');
-  if (!capa || !grande || !foto) return;
-  var devolverElFoco = null;
-
-  function abrir() {
-    /* Si no hay foto puesta no hay nada que ampliar. */
-    if (foto.hidden || !foto.getAttribute('src')) return;
-    /* Se lee el ATRIBUTO src, no currentSrc: currentSrc es la que el
-       navegador tiene cargada, y va por detrás —al abrir la lupa justo
-       después de cambiar de correa enseñaba la foto anterior—. El
-       atributo lo acaba de escribir pinta(), así que siempre es el
-       reloj que el cliente ve elegido. La de 1600 es la mayor que hay. */
-    grande.src = foto.getAttribute('src').replace('/1200/', '/1600/');
-    grande.alt = foto.alt;
-    pie.textContent = foto.alt;
-    capa.hidden = false;
-    document.body.style.overflow = 'hidden';
-    devolverElFoco = document.activeElement;
-    document.querySelector('[data-pv-lupa-cerrar]').focus();
-  }
-  function cerrar() {
-    capa.hidden = true;
-    document.body.style.overflow = '';
-    if (devolverElFoco && devolverElFoco.focus) devolverElFoco.focus();
-  }
-
-  foto.addEventListener('click', abrir);
-  document.addEventListener('click', function (ev) {
-    if (ev.target.closest('[data-pv-ampliar]')) { abrir(); return; }
-    if (ev.target.closest('[data-pv-lupa-cerrar]')) { cerrar(); return; }
-    /* pulsar el fondo cierra; pulsar la foto, no */
-    if (ev.target === capa) cerrar();
-  });
-  document.addEventListener('keydown', function (ev) {
-    if (ev.key === 'Escape' && !capa.hidden) cerrar();
-  });
-})();
-</script>
-
-<script src="/assets/js/telemetria.js" defer></script>
+<!-- El motor de precio y el configurador, los mismos para los diez. -->
+<script src="/assets/js/precio-2026.js?v=1"></script>
+<script src="/assets/js/configurador-2026.js?v=2"></script>
 </body>
 </html>

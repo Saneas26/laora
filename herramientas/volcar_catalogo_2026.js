@@ -240,9 +240,28 @@ function generado(slug, nombre, clase, mm) {
       const dicho = pasos
         .map(([id, _]) => (M.OPCIONES[id][L.e[id]] || {}).nombre)
         .filter(Boolean);
+      /* EL DIÁMETRO Y LAS HERMANAS. Si el modelo tiene paso de tamaño, el
+         diámetro sale de lo elegido —el Trinchera vende 36 y 39— y de paso
+         se apunta el MISMO reloj en las otras medidas, para poder cambiarlo
+         desde el carrito sin volver a configurarlo. Lo hacía a mano la
+         función del Trinchera; ahora vale para cualquiera que tenga el paso. */
+      let diametro = mm, hermanas = null;
+      const tam = pasos.find(([id]) => id === 'tamano');
+      if (tam) {
+        diametro = parseInt(L.e.tamano, 10) || mm;
+        const guardado = L.e.tamano;
+        hermanas = {};
+        for (const v of tam[1]) {
+          L.e.tamano = v;
+          L.normaliza();
+          hermanas[parseInt(v, 10) || v] = L.referencia();
+        }
+        L.e.tamano = guardado;
+        L.normaliza();
+      }
       n += anota(L.referencia(), p, nombre + ' ' + (dicho[dicho.length - 1] || ''),
         dicho.join(' · '), dicho[dicho.length - 1] || '',
-        { modelo: clase, agua: L.agua() }, mm) ? 1 : 0;
+        { modelo: clase, agua: L.agua() }, diametro, hermanas) ? 1 : 0;
       return;
     }
     const [id, ops] = pasos[i];
@@ -255,189 +274,16 @@ function generado(slug, nombre, clase, mm) {
 /* ============================================================
    LO-02 · TRINCHERA
    ------------------------------------------------------------
-   AQUÍ NO HAY NINGUNA LISTA COPIADA A MANO.
-   La primera versión de esto llevaba las opciones escritas —las
-   correas de cada caja, las esferas de cada estilo— copiadas de la
-   ficha. Duró un día: el 19/08/2026 Óscar añadió el ante al Murph y
-   a la caja negra, la copia se quedó vieja y esas referencias no se
-   podían vender, porque el servidor no las conocía.
+   AQUÍ HABÍA 235 LÍNEAS y se fueron el 29/08/2026 con el configurador
+   viejo, por orden de Óscar: «quita todo lo que tengas en el configurador
+   del trinchera». Recorrían a mano sus estilos, sus natos por medida, sus
+   antes, sus pieles y sus vetos, y hacían falta porque la ficha llevaba
+   dentro reglas que nadie más entendía.
 
-   Ahora se le PREGUNTA a la ficha. Se fija un estado, se llama a
-   `pinta()` —que es lo que hace el navegador— y se leen los botones
-   que ha dibujado, saltándose los tachados. Cambie lo que cambie
-   arriba, esto lo sigue.
+   Ahora el Trinchera se genera como los otros ocho, así que lo recorre
+   `generado()`, que le pregunta a la ficha en vez de tener una copia de
+   sus listas.
    ============================================================ */
-function trinchera() {
-  const L = motorDe('trinchera.html',
-    'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
-    'CIERRES_K, MURPH_CORREA, PIELES_M, conCierreK, esfNombre, esfTec, ' +
-    'vetada, firma, sinVeto, ' +
-    'e, precio, referencia, normaliza, agua, pinta, conCierre');
-  /* Ver el árbol ENTERO: lo vetado se descarta hoja por hoja más abajo, no
-     escondiéndolo. La ficha esconde lo vetado —es el escaparate—, y leyendo
-     esos botones se caían ramas buenas: preguntando por los colores del nato
-     con una esfera azul puesta desaparecían los natos vetados con esa esfera,
-     y con ellos TODAS sus esferas, también las que están bien. */
-  L.sinVeto(true);
-  let n = 0;
-
-  /* Lo que la ficha ofrece AHORA MISMO en un grupo, con el estado
-     puesto. `pinta()` primero: es quien dibuja los botones.
-     Hay grupos que NO se dibujan —las cajas y los diámetros están
-     escritos en el HTML y la ficha solo los tacha—, así que si no hay
-     botones se cae a la tabla de datos, que para eso está. */
-  const ofrece = (grupo, deReserva) => {
-    L.pinta();
-    const v = globalThis.__OPCIONES(grupo);
-    return v.length ? v : (deReserva || []);
-  };
-
-  const pon = (cambios) => { Object.assign(L.e, cambios); L.normaliza(); };
-
-  for (const estilo of ['K', 'M'])
-  for (const mov of Object.keys(L.MOVS))
-  for (const diam of ['36', '39']) {
-    pon({ estilo, mov, diam });
-    for (const caja of ofrece('caja', Object.keys(L.CAJAS))) {
-      pon({ estilo, mov, diam, caja });
-      if (L.e.caja !== caja) continue;          // esa caja no existe en este estilo
-
-      for (const esf of ofrece('esf', [L.e.esf])) {
-        pon({ estilo, mov, diam, caja, esf });
-        if (L.e.esf !== esf) continue;
-
-        for (const boton of ofrece('correa', [L.e.correa])) {
-          pon({ estilo, mov, diam, caja, esf, correa: boton });
-          if (L.e.correa !== boton) continue;
-
-          /* EL BOTÓN «PIEL» DEL MURPH VALE POR TRES CORREAS (20/08/2026).
-             Desde que el tono se elige en el grupo del color, la fila de
-             correas solo enseña «Piel», y enumerar por ella dejaba fuera
-             la marrón y la verde: 320 referencias que desaparecían del
-             catálogo y que nadie podía comprar. Cada tono es una correa
-             de verdad, con su coste, así que aquí se abren las tres. */
-          const trestonos = (estilo === 'M' && L.MURPH_CORREA[boton])
-            ? ofrece('color', Object.keys(L.PIELES_M || {}))
-            : [boton];
-
-          for (const correa of trestonos) {
-          pon({ estilo, mov, diam, caja, esf, correa });
-          if (L.e.correa !== correa) continue;
-
-          /* Las dimensiones que solo aparecen con ciertas correas: el
-             color del nato+piel, el tono del ante, el pespunte de la
-             piel del Murph y el cierre de cualquier piel. Se preguntan
-             igual, y si el grupo no está pintado, se pasa de largo. */
-          /* El nato pasó a ser UNO con cinco colores (Óscar, 19/08/2026), y
-             comparte el grupo «color» del HTML con el nato+piel y el ante.
-             CADA MEDIDA TIENE SU GAMA desde el 24/08/2026, así que la ficha
-             ya no exporta una tabla NATOS sino la función natos(), que
-             devuelve la del diámetro puesto. Esto se quedó pidiendo la tabla
-             y el volcador reventaba en silencio —«NATOS is not defined»— con
-             el catálogo del servidor congelado desde entonces. */
-          const natos     = correa === 'NATO' ? ofrece('color', Object.keys(L.natos())) : [null];
-          /* La piel del khaki, que desde el 19/08/2026 tiene tres colores
-             y dos hebillas en vez de ser una correa suelta. */
-          const pielesK   = correa === 'PIELO' ? ofrece('color', Object.keys(L.PIELES_K || {})) : [null];
-          /* el ante y el dúo llevan color en TODOS los estilos desde el
-             20/08/2026. El grupo pintado es el del color; desde el
-             25/08/2026 las cuatro cajas enseñan los cuatro tonos. */
-          const antes     = correa === 'ANTE'
-            ? ofrece('color', Object.keys(L.ANTES || {})) : [null];
-          const pespuntes = (estilo === 'M' && L.MURPH_CORREA[correa]) ? ofrece('pesp', Object.keys(L.PESPUNTES || {})) : [null];
-
-          for (const nato of natos)
-          for (const pielk of pielesK)
-          for (const ante of antes)
-          for (const pesp of pespuntes) {
-            pon({ estilo, mov, diam, caja, esf, correa });
-            if (nato) L.e.nato = nato;
-            if (pielk) L.e.pielk = pielk;
-            if (ante) L.e.ante = ante;
-            if (pesp) L.e.pesp = pesp;
-            const cierres = (L.conCierre() || L.conCierreK())
-              ? ofrece('cierre', Object.keys(L.conCierreK() ? L.CIERRES_K : L.CIERRES)) : [null];
-
-            /* EL DÚO YA NO ES UNA CORREA (Óscar, 26/08/2026): es un
-               añadido que se marca encima de una combinación válida. Así
-               que no se enumera en la fila de correas, se enumera AQUÍ,
-               doblando cada combinación donde se puede añadir. Si esto no
-               estuviera, las referencias `-DUO` no llegarían al catálogo y
-               el servidor le diría al cliente que lo que acaba de comprar
-               «ya no está a la venta». */
-            /* EL COLOR DE LA ESFERA (Óscar, 26/08/2026). Entró en la
-               referencia hoy, y hasta hoy no se enumeraba: los cuatro
-               colores del Khaki compartían una sola referencia y el
-               servidor no sabía distinguirlos. Sólo el Khaki elige; el
-               Murph tiene la esfera negra y punto, y su grupo se pinta
-               vacío, así que `ofrece` devuelve la lista corta sola. */
-            for (const cierre of cierres) {
-              if (cierre) L.e.cierre = cierre;
-              const colores = ofrece('esfColor', ['NEG']);
-              for (const esfColor of colores) {
-              L.e.esfColor = esfColor;
-              /* ⛔ AQUÍ SE ABRÍA EL DÚO, que se fue el 29/08/2026 con sus 144
-                 referencias: «ofreceremos la posibilidad de comprar más
-                 cosas, más correas, antes de pasar al carrito».
-
-                 LAS VETADAS NO ENTRAN EN EL CATÁLOGO. La ficha ya no las
-                 dibuja, pero aquí el estado se pone a mano en los últimos
-                 bucles —hebilla, color de esfera—, así que podría colarse
-                 una combinación que Óscar dio por muerta y el servidor la
-                 seguiría vendiendo. */
-              if (L.vetada(L.firma())) continue;
-              const s = L.e;
-              const esBronce = s.caja === 'BR';
-              n += anota(L.referencia(), L.precio(),
-                'Trinchera ' + (esBronce ? 'Bronce'
-                  : s.caja === 'TI' ? 'Titanio'
-                  : (s.esf === 'MA' || s.esf === 'MB') ? 'Murph'
-                  : 'Militar'),
-                L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
-                  (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.esfNombre() +
-                  ' · ' + L.MOVS[s.mov].nombre,
-                (s.correa === 'PIELO'
-                  ? 'Piel ' + L.PIELES_K[s.pielk][0].toLowerCase() + ' · ' + L.CIERRES_K[s.cierre].toLowerCase()
-                  : s.correa === 'NATO'
-                  ? 'Nato ' + L.natos()[s.nato][0].toLowerCase() + ', hebilla clásica plateada'
-                  /* el tono del ante también en el khaki: elige color desde el
-                     20/08/2026 y su referencia ya lo lleva */
-                  : (s.correa === 'ANTE' && L.ANTES && L.ANTES[s.ante])
-                  ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
-                  : L.CORREAS[s.correa].nombre),
-                { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
-                  esfera: L.esfTec(),
-                  correa: (s.correa === 'NATO'
-                    ? 'nato ' + L.natos()[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
-                    : L.CORREAS[s.correa].tec),
-                  agua: L.agua() },
-                Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
-              }
-            }
-          }
-          }
-        }
-      }
-    }
-  }
-  return n;
-}
-
-/* El Trinchera es el único que se hace en dos medidas. Aquí se
-   averigua cómo se llama el MISMO reloj en cada una, para poder
-   cambiarlo desde el carrito sin rehacer el pedido. */
-function hermanaDeDiametro(L, base) {
-  const guardado = Object.assign({}, L.e);
-  const salida = {};
-  for (const d of ['36', '39']) {
-    Object.assign(L.e, base, { diam: d });
-    L.normaliza();
-    salida[d] = L.referencia();
-  }
-  Object.assign(L.e, guardado);
-  return salida;
-}
-
 /* ============================================================
    LO-03 · LUNAR
    El único que necesita el manifiesto: de él salen las reglas de
@@ -537,7 +383,8 @@ function lunar() {
 /* ---------- a escribir ---------- */
 const cuenta = {
   Precisa: generado('precisa', 'Precisa', 'Deportivo de brazalete integrado', 40),
-  Trinchera: trinchera(), Lunar: lunar(),
+  Trinchera: generado('trinchera', 'Trinchera', 'Reloj de campo'),
+  Lunar: lunar(),
   'Bitácora': generado('bitacora', 'Bitácora', 'Deportivo de brazalete integrado', 40),
   'Cero Cero': generado('cero-cero', 'Cero Cero', 'Buceo', 40),
 };

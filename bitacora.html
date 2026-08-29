@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Bitácora de laOra: 252 combinaciones, al precio honesto.">
+<meta name="description" content="Bitácora de laOra: 36 combinaciones, al precio honesto.">
 <title>Bitácora · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -286,37 +286,44 @@
       "Brz-Goma-Bit-01": {
         "nombre": "Silicona negra",
         "color": "#1C1D1F",
-        "coste": 6.39
+        "coste": 6.39,
+        "familia": "GOMA"
       },
       "Brz-Goma-Bit-03": {
         "nombre": "Silicona azul",
         "color": "#2E4A7D",
-        "coste": 6.39
+        "coste": 6.39,
+        "familia": "GOMA"
       },
       "Brz-Goma-Bit-04": {
         "nombre": "Silicona marrón",
         "color": "#6B4B33",
-        "coste": 6.39
+        "coste": 6.39,
+        "familia": "GOMA"
       },
       "Brz-Acero-Bit-01": {
         "nombre": "Acero plata",
         "color": "#C9CCCE",
-        "coste": 21.19
+        "coste": 21.19,
+        "familia": "A316"
       },
       "Brz-Acero-Bit-07": {
         "nombre": "Acero plata y oro rosa",
         "color": "#D9A08A",
-        "coste": 21.19
+        "coste": 21.19,
+        "familia": "A316"
       },
       "Brz-Acero-Bit-06": {
         "nombre": "Acero oro rosa",
         "color": "#B76E56",
-        "coste": 21.19
+        "coste": 21.19,
+        "familia": "A316"
       },
       "Brz-Acero-Bit-02": {
         "nombre": "Acero negro",
         "color": "#1C1D1F",
-        "coste": 21.19
+        "coste": 21.19,
+        "familia": "A316"
       }
     }
   };
@@ -334,19 +341,72 @@
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
   var ORDEN = ["caja", "esf", "mov", "correamat", "correa"];
+
+  /* ---------- LAS PUERTAS ----------
+     Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
+     con un brazalete de acero no hay nada que coser, y ensenarlo seria
+     preguntar por algo que ese reloj no lleva. Se declara en el JSON
+
+         "puertas": { "pespunte": { "paso": "correamat", "campo": "pespunte" } }
+
+     y se lee asi: el paso `pespunte` se abre cuando la opcion elegida en
+     `correamat` trae el campo `pespunte`. El motor esconde los cerrados y
+     no les suma el coste; aqui se les quita ademas de la referencia y de
+     la descripcion, que es lo que hace que el reloj se llame igual
+     eligiendo un pespunte que el otro cuando no lleva ninguno. */
+  var PUERTAS = {};
+
+  /* ---------- LOS FILTROS ----------
+     Un paso cuyas opciones dependen de lo elegido en otro. El color de la
+     correa es del MATERIAL: eligiendo acero no se ensena el azul celeste
+     del caucho. Se declara en el JSON
+
+         "filtros": { "correa": { "paso": "correamat", "campo": "familia" } }
+
+     y se lee asi: en `correa` solo salen las opciones cuyo `familia` sea el
+     material elegido. Sin esto los dos pasos van cada uno por su lado: el
+     29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
+     6.816 porque montaba brazaletes de acero con hebilla de piel. */
+  var FILTROS = {"correa": {"paso": "correamat", "campo": "familia"}};
+  function cuelgaDe(k) { return FILTROS[k] || null; }
+  function valeEn(k, id, s) {
+    var f = cuelgaDe(k);
+    if (!f) return true;
+    var o = OPCIONES[k] && OPCIONES[k][id];
+    return !!o && o[f.campo] === (s || e)[f.paso];
+  }
+  function abierta(k, s) {
+    var g = PUERTAS[k];
+    if (!g) return true;
+    var o = OPCIONES[g.paso] && OPCIONES[g.paso][(s || e)[g.paso]];
+    return !!(o && o[g.campo]);
+  }
+
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, asi que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviendose hoy.
+
+     `{esf}` es lo elegido en ese paso y `{mov.tapa}` un dato de la opcion
+     elegida. Un paso con la puerta cerrada no escribe nada, y el guion que
+     le tocaba se cae con el: sin eso, un brazalete acabaria en `-A316S-` y
+     el mismo reloj tendria dos referencias segun un pespunte que no lleva. */
   var PLANTILLA_REF = "LO-04-{caja}-{esf}-{correa}";
   function referencia(e) {
     if (!PLANTILLA_REF) {
-      return 'LO-04-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+      return 'LO-04-' + ORDEN.filter(function (k) { return abierta(k, e); })
+        .map(function (k) { return e[k]; }).join('-');
     }
     return PLANTILLA_REF.replace(/\{([a-z]+)(?:\.([a-z]+))?\}/g, function (_, paso, campo) {
+      if (!abierta(paso, e)) return '';
       var v = e[paso];
       if (!campo) return v;
       var o = OPCIONES[paso] && OPCIONES[paso][v];
       return (o && o[campo]) || '';
-    });
+    }).replace(/-{2,}/g, '-').replace(/-+$/, '');
   }
   function nombreDe(k) {
+    if (!abierta(k)) return '';
     var t = OPCIONES[k], o = t && t[e[k]];
     return o ? o.nombre : '';
   }
@@ -358,7 +418,16 @@
   function detalle(e) {
     return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
   }
-  function agua(e) { return ""; }
+  /* LA ESTANQUEIDAD PUEDE SER DE UNA PIEZA. El Trinchera aguanta 5 ATM
+     salvo en titanio, que son 20: la caja lo dice en su propia opcion y
+     manda sobre la del modelo. Vale para cualquier paso. */
+  function agua(e) {
+    for (var i = 0; i < ORDEN.length; i++) {
+      var t = OPCIONES[ORDEN[i]], o = t && t[e[ORDEN[i]]];
+      if (o && o.agua) return o.agua;
+    }
+    return "";
+  }
 
   /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
      técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
@@ -387,6 +456,9 @@
        no hay coste: se dibuja, pero no se pone precio ni se vende. */
     COSTES_PUESTOS: true, EXTRA: 59.01,
     CADENA: ["caja", "esf", "correa"],
+    /* Las puertas: el motor esconde el paso cerrado y no le suma coste. */
+    PUERTAS: PUERTAS, abierta: abierta,
+    FILTROS: FILTROS, valeEn: valeEn,
     referencia: referencia, descripcion: descripcion,
     dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
     tecnica: tecnica
@@ -394,6 +466,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=1"></script>
+<script src="/assets/js/configurador-2026.js?v=2"></script>
 </body>
 </html>

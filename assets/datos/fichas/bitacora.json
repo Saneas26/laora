@@ -155,6 +155,13 @@
   "cierres": [],
   "colores_cierre": []
  },
+ "filtros": {
+  "correa": {
+   "paso": "correamat",
+   "campo": "familia"
+  }
+ },
+ "_filtros": "El color de la correa es del MATERIAL: eligiendo acero 904L no se ensena la malla milanesa. Sin esto los dos pasos van cada uno por su lado (29/08/2026).",
  "referencia": "LO-04-{caja}-{esf}-{correa}",
  "extra": 59.01,
  "combinaciones": [

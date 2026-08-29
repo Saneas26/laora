@@ -776,6 +776,17 @@
       ? PESPUNTES[e.pespunte].sufijo : '');
   }
   function matDeCorrea(c) { return CORREA_MAT[c] || 'A316'; }
+  /* TODOS los nombres que puede tener esa correa en la biblioteca. Lo usa la
+     precarga, que pide las piezas por delante para que no parpadeen: pidiendo
+     `piel-italiana-marron.avif` a secas se llevaba ocho 404 en cada visita,
+     porque desde que el pespunte es un paso aparte ese fichero no existe: son
+     `-pespunte-al-tono` y `-pespunte-blanco`. */
+  function piezasDe(c) {
+    var base = CORREAS[c] && CORREAS[c].pieza;
+    if (!base) return [];
+    if (!CON_PESPUNTE[matDeCorrea(c)]) return [base];
+    return Object.keys(PESPUNTES).map(function (k) { return base + PESPUNTES[k].sufijo; });
+  }
 
   function referencia(e) {
     /* ⚠️ EL PESPUNTE SE PEGA AL COLOR, no va aparte. Las pieles se
@@ -1071,6 +1082,7 @@
     CIERRES: CIERRES, CIERRE_IMG: CIERRE_IMG,
     MINI: MINI, MINI_IMG: MINI_IMG, MINI_ALT: MINI_ALT,
     PAQUETES: PAQUETES, AGUJAS_LIBRES: AGUJAS_LIBRES, piezaDe: piezaDe,
+    piezasDe: piezasDe,
     /* Para el volcador: si esta correa elige pespunte, hay dos referencias. */
     CON_PESPUNTE_DE: function (c) { return !!CON_PESPUNTE[matDeCorrea(c)]; },
     COSTES_PUESTOS: COSTES_PUESTOS, CADENA: CADENA,
@@ -1086,7 +1098,7 @@
 <!-- El motor de precio, el mismo para todos los modelos. Va DELANTE del
      configurador: el configurador lo usa nada más arrancar. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=1"></script>
+<script src="/assets/js/configurador-2026.js?v=2"></script>
 <!-- ============ LA LUPA ============
      La foto a pantalla completa, con la de 1600 —que es la que hay— y el
      pie diciendo qué reloj es. Se cierra con la equis, con Escape o

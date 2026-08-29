@@ -425,9 +425,22 @@
 
   /* ---------- LOS BOTONES ----------
      Lo que no se puede elegir NO se dibuja (Óscar, 26/08/2026). */
+  /* ⚠️ EL MATERIAL DE LA CORREA SE GUARDA, además de arrastrar el color.
+     Esta función se escribió para el Lunar, donde el material NO es un paso
+     del estado: se deduce de la correa elegida, y por eso aquí ponía la
+     primera correa de la familia y se iba sin guardar nada.
+
+     En los modelos generados el material SÍ es un paso —tiene su tabla y su
+     valor—, y sin guardarlo pasaba esto: pulsabas «Piel italiana», la correa
+     se iba a la primera de la familia... y `normaliza` la devolvía al brazalete
+     de acero, porque el material seguía diciendo acero. El botón no respondía.
+     (29/08/2026, la primera prueba del Trinchera nuevo.) */
   function aplicaOpcion(g, v) {
-    if (g === 'correamat') { e.correa = primeraDe(v); return; }
     e[g] = v;
+    if (g === 'correamat') {
+      var c = primeraDe(v);
+      if (c) e.correa = c;
+    }
   }
 
   function llevaAMarcada(grupo, valor) {
@@ -560,7 +573,13 @@
     }
     /* Las correas van aparte porque ya no están en CAPA: son piezas de la
        biblioteca y cada una dice su nombre en `CORREAS[x].pieza`. */
-    for (var c in CORREAS) if (CORREAS[c].pieza) hazlo(CORREAS[c].pieza, 'correa');
+    for (var c in CORREAS) {
+      /* Y una correa puede tener MÁS DE UN nombre: la piel viene con el
+         pespunte dentro del fichero, así que son dos. El modelo los da. */
+      var piezas = M.piezasDe ? M.piezasDe(c)
+                 : (CORREAS[c].pieza ? [CORREAS[c].pieza] : []);
+      for (var q = 0; q < piezas.length; q++) hazlo(piezas[q], 'correa');
+    }
   }
 
   /* ---------- LA PRECARGA, POR ESFERA ----------
@@ -784,11 +803,21 @@
      configurador sin reglas nunca enseñe algo que no existe. */
   function normaliza() {
     if (M.normaliza) return M.normaliza(e, HERRAMIENTAS);
-    /* Primero, que lo elegido exista en su paso. */
+    /* Primero, que lo elegido exista en su paso... */
     PASOS.forEach(function (p) {
       var t = M.OPCIONES && M.OPCIONES[p.id];
       if (!t) return;
       if (!t[e[p.id]]) e[p.id] = Object.keys(t)[0];
+      /* ...y que siga valiendo con lo elegido arriba: al pasar de piel a
+         acero, el color de la piel ya no existe en el brazalete, y sin esto
+         la referencia y el coste se quedan con el color de la correa que
+         acabas de dejar. */
+      if (M.valeEn && !M.valeEn(p.id, e[p.id], e)) {
+        var vale = Object.keys(t).filter(function (k) {
+          return M.valeEn(p.id, k, e);
+        });
+        if (vale.length) e[p.id] = vale[0];
+      }
     });
     /* Y si el modelo dice qué combinaciones EXISTEN —no todos los relojes
        admiten todas: la Bitácora monta 36 de las 126 que salen de
@@ -807,17 +836,40 @@
 
   /* Los pasos, uno detrás de otro, con lo que diga `OPCIONES`. Sin reglas
      entre ellos: el que las tenga, las escribe. */
+  /* ---------- LAS PUERTAS ----------
+     Un paso que solo aparece si otro lo abre: el pespunte es de la piel, y
+     con un brazalete de acero no hay nada que coser. El modelo las declara
+     y trae su propia `abierta`; el que no traiga ninguna tiene todos los
+     pasos abiertos, que es como estaba esto hasta hoy.
+
+     Cerrado quiere decir tres cosas a la vez: no se pinta —y `escondeVacios`
+     lo esconde por la regla de siempre—, no se cobra, y no entra en la
+     referencia. Si faltara la tercera, el mismo reloj tendría dos
+     referencias según un pespunte que no lleva. */
+  function abierta(id) { return M.abierta ? M.abierta(id, e) : true; }
+
+  /* Y LOS FILTROS: un paso cuyas opciones dependen de lo elegido en otro.
+     El color de la correa es del material —con acero no se enseña el azul
+     celeste del caucho—. El modelo dice cuál vale; el que no traiga
+     ninguno enseña todos, que es como estaba esto hasta hoy. */
+  function valeEn(id, v) { return M.valeEn ? M.valeEn(id, v, e) : true; }
+  function filtra(id, ops) {
+    if (!M.valeEn) return ops;
+    return ops.filter(function (o) { return valeEn(id, o[0]); });
+  }
+
   function pintaPasosGenerico() {
     var fij = {};
     PASOS.forEach(function (p) {
       var t = M.OPCIONES && M.OPCIONES[p.id];
       if (!t) return;
+      if (!abierta(p.id)) { botones(p.id, [], null); return; }
       var op = t[e[p.id]];
       /* Con lista de combinaciones, cada paso enseña sólo lo que sigue
          teniendo salida con lo ya elegido por encima; sin ella, todo. */
-      var ops = (PAQUETES.length && CADENA.indexOf(p.id) >= 0)
+      var ops = filtra(p.id, (PAQUETES.length && CADENA.indexOf(p.id) >= 0)
         ? HERRAMIENTAS.soloDe(t, p.id, fij)
-        : deTabla(t);
+        : deTabla(t));
       if (PAQUETES.length && CADENA.indexOf(p.id) >= 0) fij[p.id] = e[p.id];
       botones(p.id, ops, e[p.id]);
       if (op) rotula(p.id, op.nombre, op.expl || op.tec || '');
@@ -855,6 +907,10 @@
     if (M.costes) return M.costes(e);
     var total = M.EXTRA || 0;
     for (var i = 0; i < PASOS.length; i++) {
+      /* UN PASO CERRADO NO SE COBRA. La hebilla es de la correa de piel;
+         con un brazalete de acero el cierre viene con él, y sumar además
+         el de la hebilla sería cobrar dos veces una pieza que no lleva. */
+      if (!abierta(PASOS[i].id)) continue;
       var t = M.OPCIONES && M.OPCIONES[PASOS[i].id];
       if (!t) continue;
       var o = t[e[PASOS[i].id]];

@@ -133,7 +133,7 @@ Crea `<carpeta>/480|1200|1600/<nombre>.avif`. Imprime el peso de cada uno.
 
 | Página | Carpeta | Patrón del nombre |
 |---|---|---|
-| `trinchera.html` | `assets/img/trinchera-2026/serie/` | `{36\|39}-{acero\|titanio\|pvd}-{blanca\|rojo\|crema}-{correa}-{color}` |
+| `trinchera.html` | `assets/img/componentes/<grupo>/` | por PIEZA, no por reloj — ver abajo |
 | `lunar.html` | `assets/img/lunar-config/{heads,straps,buckles,casebacks}/` | por pieza, más `manifest.json` |
 | `precisa.html` | `assets/img/precisa-2026/` | |
 | `bitacora.html` | `assets/img/bitacora/` y `assets/img/piezas/completas/` | |
@@ -142,7 +142,7 @@ Crea `<carpeta>/480|1200|1600/<nombre>.avif`. Imprime el peso de cada uno.
 
 ### Los contadores de versión hay que subirlos a mano
 Cada ficha tiene su constante y **Cloudflare cachea 4 h**:
-- `trinchera.html:443` → `var SERIE_V = '?v=24';`
+- ~~`trinchera.html` → `var SERIE_V`~~ · **se fue el 29/08/2026**: el Trinchera se genera desde `assets/datos/fichas/trinchera.json` y ya no lleva fotos propias dentro.
 - `lunar.html` → `?v=12` en las rutas de `lunar-config`
 - Al regenerar con `generar_configurador_v2.py`, **comprobar que no BAJA** las
   versiones (`V_CARRITO`, `V_JS`): es una trampa conocida.

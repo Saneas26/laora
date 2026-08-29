@@ -57,6 +57,12 @@ from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 V_CSS_PRODUCTO = 42
 V_CSS_COLECCION = 44
 V_CSS_CONFIG = 1
+# EL MOTOR DEL CONFIGURADOR. Cloudflare lo guarda 4 h por su nombre, así que
+# cambiarlo SIN subir este número no le llega a nadie: la ficha nueva sigue
+# funcionando con el motor de anteayer. Se sube cada vez que se toca
+# `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
+# `lunar.html`, que no sale de aquí.
+V_JS_CONFIG = 2
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -71,7 +77,15 @@ MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 # y `bitacora.html`, que estaban vendiendo, y las dejó con «Todavía no está a
 # la venta». Se recuperaron de una copia hecha un minuto antes. De ahí esta
 # lista y de ahí que se compruebe ANTES de escribir nada.
-INTOCABLES = ('lunar', 'trinchera')
+INTOCABLES = ('lunar',)
+
+# EL TRINCHERA SALIÓ DE ESTA LISTA el 29/08/2026, por orden de Óscar: «quita
+# todo lo que tengas en el configurador del trinchera, que vamos a empezar de
+# cero». Su configurador propio —2.498 líneas, 93 fotos de serie, 31
+# combinaciones vetadas y un recorte por caja para cada foto que faltaba— se
+# fue entero, y ahora se genera desde `assets/datos/fichas/trinchera.json`
+# como los otros ocho. El Lunar se queda: monta por capas y tiene criba, y
+# eso este generador todavía no sabe hacerlo.
 
 # Precisa y Bitácora salieron de aquí el 29/08/2026, cuando sus costes
 # pasaron a su JSON y el generador supo hacerles el precio. Se hizo con una
@@ -103,52 +117,11 @@ def bolsa(d, ruta):
     return sitio if isinstance(sitio, list) else []
 
 
-def paso_html(paso, opciones):
-    """Un paso del configurador: su número, su rótulo y sus botones.
-
-    ⚠️ CON UNA SOLA OPCIÓN NO SE ESCONDE EL PASO. Sale señalada y con su
-    explicación a la vista, que es la regla de Óscar: el cliente tiene que
-    saber que su reloj lleva zafiro aunque no haya podido elegir otra cosa.
-    ⚠️ Y NO SE MARCA `disabled`. Se probó y quedaba justo al revés de lo que
-    él pide: la hoja compartida pinta los botones deshabilitados TACHADOS y
-    al 35 % de opacidad, que es como dice «esto no lo puedes llevar». La
-    única opción que hay tiene que verse como lo que es —lo que lleva el
-    reloj—, no como algo agotado. Se queda señalada, entera y pulsable; la
-    marca de que no hay más es el «uno solo» del rótulo."""
-    sola = len(opciones) == 1
-    botones = []
-    for o in opciones:
-        punto = ('<i class="pv-punto" style="background:%s"></i>' % o['color']) if o.get('color') else ''
-        botones.append(
-            '            <button type="button" data-v="%s"%s%s>%s%s</button>'
-            % (esc(o['id']),
-               ' aria-pressed="true"' if o is opciones[0] else '',
-               '',
-               punto, esc(o['nombre'])))
-
-    # `pv-nota` es la etiqueta que flota SOBRE la foto; la de un paso va
-    # debajo de sus botones y necesita su propia clase.
-    #
-    # CON UNA SOLA OPCIÓN, SU EXPLICACIÓN SALE SIEMPRE. Con varias, solo si
-    # alguna la trae: ahí la explicación la da el propio rótulo al pulsar.
-    nota = ''
-    if sola and (opciones[0].get('expl') or opciones[0].get('nota')):
-        nota = '\n            <p class="pv-nota-paso">%s</p>' % esc(
-            opciones[0].get('expl') or opciones[0]['nota'])
-    else:
-        for o in opciones:
-            if o.get('nota'):
-                nota = '\n            <p class="pv-nota-paso">%s</p>' % esc(o['nota'])
-                break
-
-    return """          <div class="pv-grupo">
-            <p class="pv-rotulo">%s%s</p>
-            <div class="pv-opciones" data-pv="%s">
-%s
-            </div>%s
-          </div>""" % (esc(paso['rotulo']),
-                       ' <b>uno solo</b>' if sola else '',
-                       esc(paso['id']), '\n'.join(botones), nota)
+# LOS BOTONES DE CADA PASO YA NO SE ESCRIBEN AQUI. Los pinta el motor de la
+# casa desde el contrato —`montaPasos()` en `assets/js/configurador-2026.js`—
+# y esta funcion se quedó escribiendo un HTML que nadie leia: la plantilla
+# solo deja el hueco `<div data-pv-pasos>`. Se quita para que no parezca que
+# las dos reglas de Oscar viven en dos sitios; viven en el motor.
 
 
 def pasos_del_modelo(d):
@@ -208,7 +181,7 @@ def tabla(opciones):
         # Cualquier otro dato de la opción viaja tal cual: lo usan las
         # plantillas de referencia, como la tapa de la Precisa.
         for k in o:
-            if k not in ('id', 'nombre', 'expl', 'color', 'coste', 'familia', 'nota'):
+            if k not in ('id', 'nombre', 'expl', 'color', 'coste', 'nota'):
                 fila[k] = o[k]
         t[o['id']] = fila
     return t
@@ -263,19 +236,72 @@ def modelo_js(d, dentro):
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
   var ORDEN = %(orden)s;
+
+  /* ---------- LAS PUERTAS ----------
+     Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
+     con un brazalete de acero no hay nada que coser, y ensenarlo seria
+     preguntar por algo que ese reloj no lleva. Se declara en el JSON
+
+         "puertas": { "pespunte": { "paso": "correamat", "campo": "pespunte" } }
+
+     y se lee asi: el paso `pespunte` se abre cuando la opcion elegida en
+     `correamat` trae el campo `pespunte`. El motor esconde los cerrados y
+     no les suma el coste; aqui se les quita ademas de la referencia y de
+     la descripcion, que es lo que hace que el reloj se llame igual
+     eligiendo un pespunte que el otro cuando no lleva ninguno. */
+  var PUERTAS = %(puertas)s;
+
+  /* ---------- LOS FILTROS ----------
+     Un paso cuyas opciones dependen de lo elegido en otro. El color de la
+     correa es del MATERIAL: eligiendo acero no se ensena el azul celeste
+     del caucho. Se declara en el JSON
+
+         "filtros": { "correa": { "paso": "correamat", "campo": "familia" } }
+
+     y se lee asi: en `correa` solo salen las opciones cuyo `familia` sea el
+     material elegido. Sin esto los dos pasos van cada uno por su lado: el
+     29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
+     6.816 porque montaba brazaletes de acero con hebilla de piel. */
+  var FILTROS = %(filtros)s;
+  function cuelgaDe(k) { return FILTROS[k] || null; }
+  function valeEn(k, id, s) {
+    var f = cuelgaDe(k);
+    if (!f) return true;
+    var o = OPCIONES[k] && OPCIONES[k][id];
+    return !!o && o[f.campo] === (s || e)[f.paso];
+  }
+  function abierta(k, s) {
+    var g = PUERTAS[k];
+    if (!g) return true;
+    var o = OPCIONES[g.paso] && OPCIONES[g.paso][(s || e)[g.paso]];
+    return !!(o && o[g.campo]);
+  }
+
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, asi que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviendose hoy.
+
+     `{esf}` es lo elegido en ese paso y `{mov.tapa}` un dato de la opcion
+     elegida. Un paso con la puerta cerrada no escribe nada, y el guion que
+     le tocaba se cae con el: sin eso, un brazalete acabaria en `-A316S-` y
+     el mismo reloj tendria dos referencias segun un pespunte que no lleva. */
   var PLANTILLA_REF = %(plantillaref)s;
   function referencia(e) {
     if (!PLANTILLA_REF) {
-      return '%(codigo)s-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+      return '%(codigo)s-' + ORDEN.filter(function (k) { return abierta(k, e); })
+        .map(function (k) { return e[k]; }).join('-');
     }
     return PLANTILLA_REF.replace(/\{([a-z]+)(?:\.([a-z]+))?\}/g, function (_, paso, campo) {
+      if (!abierta(paso, e)) return '';
       var v = e[paso];
       if (!campo) return v;
       var o = OPCIONES[paso] && OPCIONES[paso][v];
       return (o && o[campo]) || '';
-    });
+    }).replace(/-{2,}/g, '-').replace(/-+$/, '');
   }
   function nombreDe(k) {
+    if (!abierta(k)) return '';
     var t = OPCIONES[k], o = t && t[e[k]];
     return o ? o.nombre : '';
   }
@@ -287,7 +313,16 @@ def modelo_js(d, dentro):
   function detalle(e) {
     return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
   }
-  function agua(e) { return %(agua)s; }
+  /* LA ESTANQUEIDAD PUEDE SER DE UNA PIEZA. El Trinchera aguanta 5 ATM
+     salvo en titanio, que son 20: la caja lo dice en su propia opcion y
+     manda sobre la del modelo. Vale para cualquier paso. */
+  function agua(e) {
+    for (var i = 0; i < ORDEN.length; i++) {
+      var t = OPCIONES[ORDEN[i]], o = t && t[e[ORDEN[i]]];
+      if (o && o.agua) return o.agua;
+    }
+    return %(agua)s;
+  }
 
   /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
      técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
@@ -316,6 +351,9 @@ def modelo_js(d, dentro):
        no hay coste: se dibuja, pero no se pone precio ni se vende. */
     COSTES_PUESTOS: %(listo)s, EXTRA: %(extra)s,
     CADENA: %(cadena)s,
+    /* Las puertas: el motor esconde el paso cerrado y no le suma coste. */
+    PUERTAS: PUERTAS, abierta: abierta,
+    FILTROS: FILTROS, valeEn: valeEn,
     referencia: referencia, descripcion: descripcion,
     dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
     tecnica: tecnica
@@ -323,7 +361,7 @@ def modelo_js(d, dentro):
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=1"></script>""" % {
+<script src="/assets/js/configurador-2026.js?v=%(vjsconf)d"></script>""" % {
         'NOMBRE': d['nombre'].upper(), 'slug': d['slug'],
         'nombre': d['nombre'], 'nombrejs': js(d['nombre']), 'slugjs': js(d['slug']),
         'codigo': codigo, 'orden': js(orden),
@@ -331,12 +369,75 @@ def modelo_js(d, dentro):
         'estado': js(estado),
         'correamat': js(correa_mat),
         'agua': js(d.get('agua', '')),
+        'puertas': js(d.get('puertas', {})),
+        'filtros': js(d.get('filtros', {})),
         'plantillaref': js(d.get('referencia')) if d.get('referencia') else 'null',
         'listo': 'true' if d.get('listo') else 'false',
         'extra': js(d.get('extra', 0)),
         'combis': json.dumps(d.get('combinaciones', []), ensure_ascii=False),
         'cadena': js(d.get('cadena')) if d.get('cadena') else 'ORDEN',
+        'vjsconf': V_JS_CONFIG,
     }
+
+
+def cuantas(d, dentro):
+    """Cuántos relojes distintos se pueden comprar de verdad.
+
+    NO es multiplicar los pasos. Ese número miente por tres sitios: el
+    modelo puede decir qué combinaciones existen —el Trinchera monta la
+    esfera Murph solo en sus dos numerales—, un paso puede depender de otro
+    —el color de la correa, de su material— y un paso con la puerta cerrada
+    no multiplica nada —el pespunte de un brazalete de acero—. Multiplicando
+    a lo bruto, el Trinchera decía 297.600 y son 6.816.
+
+    Y SOLO CUENTA LO QUE TIENE PRECIO. Una correa sin coste se dibuja pero
+    no se vende, así que no es una combinación que nadie pueda comprar; el
+    volcador la deja fuera del catálogo por la misma razón. Este número sale
+    en la descripción de la página: tiene que ser el de verdad."""
+    pasos = [(p['id'], ops) for p, ops in dentro]
+    puertas = d.get('puertas', {})
+    filtros = d.get('filtros', {})
+    cadena = d.get('cadena') or []
+    combis = d.get('combinaciones') or []
+
+    def abierta(idp, elegido):
+        g = puertas.get(idp)
+        if not g:
+            return True
+        o = elegido.get(g['paso'])
+        return bool(o and o.get(g['campo']))
+
+    def vale(idp, o, elegido):
+        f = filtros.get(idp)
+        if not f:
+            return True
+        padre = elegido.get(f['paso'])
+        return bool(padre) and o.get(f['campo']) == padre['id']
+
+    def anda(i, elegido):
+        if i == len(pasos):
+            # Con lista de combinaciones, la terna elegida tiene que estar.
+            if combis and cadena:
+                firma = {k: elegido[k]['id'] for k in cadena if k in elegido}
+                if not any(all(c.get(k) == v for k, v in firma.items())
+                           for c in combis):
+                    return 0
+            return 1
+        idp, ops = pasos[i]
+        if not abierta(idp, elegido):
+            return anda(i + 1, elegido)
+        n = 0
+        for o in ops:
+            if 'coste' not in o or o['coste'] is None:
+                continue                      # sin coste no se vende
+            if not vale(idp, o, elegido):
+                continue
+            elegido[idp] = o
+            n += anda(i + 1, elegido)
+            del elegido[idp]
+        return n
+
+    return anda(0, {})
 
 
 def ficha(d):
@@ -348,9 +449,7 @@ def ficha(d):
     # no existe. En cuanto tengan un paso, el noindex se cae solo.
     noindex = '' if dentro else '<meta name="robots" content="noindex">\n'
 
-    combinaciones = 1
-    for _p, ops in dentro:
-        combinaciones *= len(ops)
+    combinaciones = cuantas(d, dentro)
 
     cuerpo = io.open(PLANTILLA, encoding='utf-8').read() % {
         'nombre': esc(d['nombre']),
@@ -430,9 +529,7 @@ def main():
         with open(os.path.join(RAIZ, slug + '.html'), 'w', encoding='utf-8') as f:
             f.write(ficha(d))
         dentro, fuera = pasos_del_modelo(d)
-        n = 1
-        for _p, ops in dentro:
-            n *= len(ops)
+        n = cuantas(d, dentro)
         print('%-11s %2d pasos · %5d combinaciones · %s'
               % (slug, len(dentro), n,
                  'a la venta' if d.get('listo') else 'sin precio, NO se vende'))

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Diver de laOra: 20 combinaciones, al precio honesto.">
+<meta name="description" content="Diver de laOra: 0 combinaciones, al precio honesto.">
 <title>Diver · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -245,19 +245,24 @@
     "correa": {
       "CAU-NEG": {
         "nombre": "Caucho negro",
-        "color": "#1C1D1F"
+        "color": "#1C1D1F",
+        "familia": "CAU"
       },
       "A316-DESP": {
-        "nombre": "Acero, cierre desplegable"
+        "nombre": "Acero, cierre desplegable",
+        "familia": "A316"
       },
       "A316-MAC": {
-        "nombre": "Acero macizo"
+        "nombre": "Acero macizo",
+        "familia": "A316"
       },
       "A316-ANC": {
-        "nombre": "Acero macizo, eslabón ancho"
+        "nombre": "Acero macizo, eslabón ancho",
+        "familia": "A316"
       },
       "A316-FIN": {
-        "nombre": "Acero macizo, eslabón fino"
+        "nombre": "Acero macizo, eslabón fino",
+        "familia": "A316"
       }
     }
   };
@@ -265,14 +270,82 @@
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
   var e = {"caja": "ACE", "cristal": "ZAF", "mov": "Q", "correamat": "CAU", "correa": "CAU-NEG"};
 
-  /* LA REFERENCIA la forman el código del modelo y lo elegido en cada
-     paso, en el orden del contrato. Es la que viaja al carrito y la que el
-     servidor comprueba, así que se arma siempre igual. */
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, así que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviéndose hoy.
+
+     Por eso el modelo puede traer su plantilla en el JSON. `{esf}` es lo
+     elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
+     que no traiga ninguna, se arma con el código y todos los pasos en el
+     orden del contrato. */
   var ORDEN = ["caja", "cristal", "mov", "correamat", "correa"];
+
+  /* ---------- LAS PUERTAS ----------
+     Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
+     con un brazalete de acero no hay nada que coser, y ensenarlo seria
+     preguntar por algo que ese reloj no lleva. Se declara en el JSON
+
+         "puertas": { "pespunte": { "paso": "correamat", "campo": "pespunte" } }
+
+     y se lee asi: el paso `pespunte` se abre cuando la opcion elegida en
+     `correamat` trae el campo `pespunte`. El motor esconde los cerrados y
+     no les suma el coste; aqui se les quita ademas de la referencia y de
+     la descripcion, que es lo que hace que el reloj se llame igual
+     eligiendo un pespunte que el otro cuando no lleva ninguno. */
+  var PUERTAS = {};
+
+  /* ---------- LOS FILTROS ----------
+     Un paso cuyas opciones dependen de lo elegido en otro. El color de la
+     correa es del MATERIAL: eligiendo acero no se ensena el azul celeste
+     del caucho. Se declara en el JSON
+
+         "filtros": { "correa": { "paso": "correamat", "campo": "familia" } }
+
+     y se lee asi: en `correa` solo salen las opciones cuyo `familia` sea el
+     material elegido. Sin esto los dos pasos van cada uno por su lado: el
+     29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
+     6.816 porque montaba brazaletes de acero con hebilla de piel. */
+  var FILTROS = {"correa": {"paso": "correamat", "campo": "familia"}};
+  function cuelgaDe(k) { return FILTROS[k] || null; }
+  function valeEn(k, id, s) {
+    var f = cuelgaDe(k);
+    if (!f) return true;
+    var o = OPCIONES[k] && OPCIONES[k][id];
+    return !!o && o[f.campo] === (s || e)[f.paso];
+  }
+  function abierta(k, s) {
+    var g = PUERTAS[k];
+    if (!g) return true;
+    var o = OPCIONES[g.paso] && OPCIONES[g.paso][(s || e)[g.paso]];
+    return !!(o && o[g.campo]);
+  }
+
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, asi que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviendose hoy.
+
+     `{esf}` es lo elegido en ese paso y `{mov.tapa}` un dato de la opcion
+     elegida. Un paso con la puerta cerrada no escribe nada, y el guion que
+     le tocaba se cae con el: sin eso, un brazalete acabaria en `-A316S-` y
+     el mismo reloj tendria dos referencias segun un pespunte que no lleva. */
+  var PLANTILLA_REF = null;
   function referencia(e) {
-    return 'DIVER-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+    if (!PLANTILLA_REF) {
+      return 'DIVER-' + ORDEN.filter(function (k) { return abierta(k, e); })
+        .map(function (k) { return e[k]; }).join('-');
+    }
+    return PLANTILLA_REF.replace(/\{([a-z]+)(?:\.([a-z]+))?\}/g, function (_, paso, campo) {
+      if (!abierta(paso, e)) return '';
+      var v = e[paso];
+      if (!campo) return v;
+      var o = OPCIONES[paso] && OPCIONES[paso][v];
+      return (o && o[campo]) || '';
+    }).replace(/-{2,}/g, '-').replace(/-+$/, '');
   }
   function nombreDe(k) {
+    if (!abierta(k)) return '';
     var t = OPCIONES[k], o = t && t[e[k]];
     return o ? o.nombre : '';
   }
@@ -284,7 +357,16 @@
   function detalle(e) {
     return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
   }
-  function agua(e) { return ""; }
+  /* LA ESTANQUEIDAD PUEDE SER DE UNA PIEZA. El Trinchera aguanta 5 ATM
+     salvo en titanio, que son 20: la caja lo dice en su propia opcion y
+     manda sobre la del modelo. Vale para cualquier paso. */
+  function agua(e) {
+    for (var i = 0; i < ORDEN.length; i++) {
+      var t = OPCIONES[ORDEN[i]], o = t && t[e[ORDEN[i]]];
+      if (o && o.agua) return o.agua;
+    }
+    return "";
+  }
 
   /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
      técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
@@ -302,8 +384,20 @@
     /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
        paquetes no hay coste, así que la ficha dice «Precio por definir» y
        no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
-    CAPA: {}, PILA: [], PAQUETES: [], COSTES_PUESTOS: false,
+    CAPA: {}, PILA: [],
+    /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
+       salen muchas más de las que se montan: la Bitácora da 126 y monta
+       36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
+       salida con lo ya elegido. Vacía quiere decir «todas valen». */
+    PAQUETES: [],
+    /* EL COSTE, SUMANDO LO ELEGIDO. Cada opción trae el suyo y el modelo
+       añade lo que no depende de ningún paso —el logo—. Si a una le falta,
+       no hay coste: se dibuja, pero no se pone precio ni se vende. */
+    COSTES_PUESTOS: false, EXTRA: 0,
     CADENA: ORDEN,
+    /* Las puertas: el motor esconde el paso cerrado y no le suma coste. */
+    PUERTAS: PUERTAS, abierta: abierta,
+    FILTROS: FILTROS, valeEn: valeEn,
     referencia: referencia, descripcion: descripcion,
     dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
     tecnica: tecnica
@@ -311,6 +405,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=1"></script>
+<script src="/assets/js/configurador-2026.js?v=2"></script>
 </body>
 </html>

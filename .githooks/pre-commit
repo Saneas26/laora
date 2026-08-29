@@ -21,7 +21,10 @@ if git diff --cached --name-only | grep -qE '^assets/(datos/pasos-2026\.json|js/
   python3 herramientas/sincronizar_pasos.py --comprobar || exit 1
 fi
 
-fichas=$(git diff --cached --name-only | grep -E '^(precisa|trinchera|lunar|bitacora)\.html$|^assets/img/lunar-config/manifest\.json$')
+# CUALQUIER FICHA, no una lista de cuatro nombres. Las fichas generadas
+# salen de `assets/datos/fichas/*.json`, así que tocar un JSON también mueve
+# el catálogo aunque el HTML no aparezca todavía en el commit.
+fichas=$(git diff --cached --name-only | grep -E '^(precisa|trinchera|lunar|bitacora|cero-cero|coctel|tortuga|diver|medusa|barlovento)\.html$|^assets/datos/fichas/.*\.json$|^assets/js/(configurador|precio)-2026\.js$|^assets/img/lunar-config/manifest\.json$')
 if [ -n "$fichas" ]; then
   echo "→ ha cambiado una ficha: volviendo a volcar el catálogo"
   if node herramientas/volcar_catalogo_2026.js; then
@@ -36,43 +39,18 @@ if [ -n "$fichas" ]; then
   fi
 fi
 
-# ---------- 2. las fotos rehechas, con número nuevo ----------
-# Una foto que se rehace conservando el nombre NO LE LLEGA A NADIE: el
-# navegador y Cloudflare la tienen guardada por ese nombre. El
-# 20/08/2026 Óscar seguía viendo el logotipo del Murph en el sitio de
-# antes, tres despliegues después de haberlo movido. Acordarse a mano de
-# subir el `?v=` no funciona, así que se sube solo.
-if git diff --cached --name-only | grep -q '^assets/img/trinchera-2026/serie/'; then
-  v=$(sed -n "s/.*var SERIE_V = '?v=\([0-9]*\)';.*/\1/p" trinchera.html)
-  if [ -n "$v" ]; then
-    nueva=$((v + 1))
-    sed -i '' "s/var SERIE_V = '?v=$v';/var SERIE_V = '?v=$nueva';/" trinchera.html
-    git add trinchera.html
-    # Y las fotos de la serie que otras páginas llevan ESCRITAS —las
-    # miniaturas de la colección—, que el 20/08/2026 se quedaron en la
-    # v14 mientras la ficha iba por la 18: Óscar veía el ante viejo.
-    for h in *.html; do
-      if grep -q 'trinchera-2026/serie/.*avif?v=' "$h"; then
-        sed -i '' "s|\(trinchera-2026/serie/[^\"']*avif\)?v=[0-9]*|\1?v=$nueva|g" "$h"
-        git add "$h"
-      fi
-    done
-    echo "→ fotos de la serie rehechas: SERIE_V pasa a $nueva (ficha y miniaturas)"
-  fi
-fi
-
-# ---------- 3. fotos del Trinchera fuera de la serie ----------
-# La serie de 2026 vive entera en `serie/`, y es la única que se rehace
-# cuando cambia una esfera. Lo que quedó fuera —la galería, las
-# miniaturas antiguas— no se entera de nada y se queda congelado: el
-# 20/08/2026 Óscar seguía viendo el Murph de hace una semana en la
-# colección después de rehacer cien fotos, porque su tarjeta apuntaba a
-# `murph/` y a `1200/`, no a `serie/`.
-viejas=$(grep -oh '/assets/img/trinchera-2026/\(1200\|murph\)/[a-z0-9/-]*\.\(webp\|avif\)' ./*.html 2>/dev/null | sort -u)
-if [ -n "$viejas" ]; then
-  echo "ℹ️  fotos del Trinchera que NO son de la serie (no se rehacen solas):"
-  echo "$viejas" | sed 's/^/   /'
-fi
+# ---------- 2. (vacío) ----------
+# AQUÍ HABÍA DOS GUARDIAS DE LAS FOTOS DEL TRINCHERA y se fueron el
+# 29/08/2026 con su configurador viejo. Uno subía el `SERIE_V` de
+# `trinchera.html` cuando cambiaba algo de `serie/` —para que Cloudflare no
+# siguiera sirviendo la foto de antes— y el otro cantaba las fotos que se
+# habían quedado fuera de la serie.
+#
+# Los dos vigilaban una ficha que llevaba dentro 93 fotos escritas a mano y
+# una variable de versión. La ficha generada no tiene ninguna de las dos
+# cosas: se arma con las piezas de la biblioteca. El día que el Trinchera
+# vuelva a tener fotos propias, el guardia se escribe otra vez, y sabiendo
+# por qué: sin él, una foto rehecha con el mismo nombre no le llega a nadie.
 
 # ---------- 4. la misma versión en todas las páginas ----------
 # Cloudflare sirve el JS y el CSS con max-age=14400, así que el `?v=`

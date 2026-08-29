@@ -85,5 +85,11 @@
   ],
   "cierres": [],
   "colores_cierre": []
+ },
+ "filtros": {
+  "correa": {
+   "paso": "correamat",
+   "campo": "familia"
+  }
  }
 }
