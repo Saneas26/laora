@@ -1,12 +1,12 @@
 # Encargo para el chat de la web · Costes del Trinchera y REGLA Nº1
 
-Reescrito el **27/08/2026** (la versión del 26/08 tenía números de línea
+Reescrito el **29/08/2026** (la versión del 26/08 tenía números de línea
 viejos y cuatro dúos que ya no existen). Todo verificado ejecutando el motor
 de las fichas fuera del navegador. **No hay que recalcular nada: solo aplicar.**
 
 > ## ⚖️ La regla que manda
 >
-> **Óscar, 27/08/2026:** «Nunca puede haber ninguna referencia por debajo de
+> **Óscar, 29/08/2026:** «Nunca puede haber ninguna referencia por debajo de
 > 50 € o un 15 % de beneficio neto, **jamás**. Si eso ocurre, **que cambia
 > todo**. Esa es la regla número 1.»
 >

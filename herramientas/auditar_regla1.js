@@ -3,7 +3,7 @@
    ------------------------------------------------------------
    «Nunca puede haber ninguna referencia por debajo de 50 € o de
     un 15 % de beneficio neto, jamás. Si eso ocurre, que cambia
-    todo.»  — Óscar, 27/08/2026
+    todo.»  — Óscar, 29/08/2026
 
    CÓMO FUNCIONA
      No recalcula nada por su cuenta: eso es lo que salió mal el

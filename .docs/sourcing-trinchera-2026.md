@@ -282,7 +282,7 @@ vez de en uno.
 
 ---
 
-## Tercer proveedor para la caja de titanio (27/08/2026)
+## Tercer proveedor para la caja de titanio (29/08/2026)
 
 **Óscar:** «Anota proveedor caja Trinchera de titanio en 36 y 39 mm por 41,19.»
 
@@ -291,7 +291,7 @@ vez de en uno.
 900+ vendidos · **41,19 €** (−4 %; el más bajo en 30 días fue 42,97 €) ·
 envío gratis, entrega 05–10 SEP · devoluciones gratis 90 días.
 
-Leído del anuncio el 27/08/2026.
+Leído del anuncio el 29/08/2026.
 
 ### ⚠️ El problema serio: UNA UNIDAD POR CLIENTE
 
@@ -378,7 +378,7 @@ Medido con el volcador, con los costes reales y el suelo al 5 %:
 Los 3,97 € se los come el redondeo al 9,90: el precio no se mueve y la
 diferencia entera se va al margen.
 
-### ✅ La decisión (Óscar, 27/08/2026)
+### ✅ La decisión (Óscar, 29/08/2026)
 
 **«Déjalo anotado; de momento empezaremos con tandorio y calcularemos los
 precios de venta con ellos.»**

@@ -1,6 +1,6 @@
 # laOra · Lunar 2026 · hoja de compra
 
-Abierto el **27/08/2026**, con los datos que dio Óscar ese día. El Lunar se
+Abierto el **29/08/2026**, con los datos que dio Óscar ese día. El Lunar se
 trabaja ahora porque es el turno del modelo — ver `laora-modelo-a-modelo`.
 
 > **Estado: el Lunar NO está a la venta.** `lunar.html` tiene
@@ -55,7 +55,7 @@ No va dentro de ninguna de las cajas de arriba.
 
 ### Correa de caucho — 12,99 €, aparte
 [1005012895843323](https://es.aliexpress.com/item/1005012895843323.html) —
-Óscar, 27/08/2026. **Los cinco colores al mismo precio**: negro, azul marino,
+Óscar, 29/08/2026. **Los cinco colores al mismo precio**: negro, azul marino,
 marrón, gris y naranja. Es **6,80 € más barata que el brazalete**, y por eso el
 Lunar más barato pasa a ser uno de caucho.
 
@@ -100,7 +100,7 @@ aparte en vez de meterla en el saco de las montadas.
 
 **LO_MQ326 · mecacuarzo japonés, arquitectura VK63 · 26,67 €**
 [1005011972357411](https://es.aliexpress.com/item/1005011972357411.html)
-— dato de Óscar, 27/08/2026.
+— dato de Óscar, 29/08/2026.
 
 El anuncio de las cajas dice expresamente *«movimiento NO incluido»*, así que
 va sumado aparte en todas las versiones. **Falta la captura de este anuncio**:
