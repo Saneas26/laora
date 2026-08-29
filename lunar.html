@@ -501,14 +501,16 @@
     PVER: { nombre: 'Verde oliva', coste: 6.69, pieza: 'piel-perforada-verde-oliva',
             tec: 'correa de piel perforada verde oliva de 20 mm, pespunte al tono, hebilla clásica plateada' },
 
-    /* --- Tela vaquera · cinco colores ---
-       20 mm de ancho, 18 en el cierre, 2,8 de grosor, trama diagonal por
-       fuera y cuero coñac por dentro. Sale de su ficha de datos. */
-    VBEI: { nombre: 'Beige', coste: null, pieza: 'vaquera-beige', tec: 'correa de tela vaquera de trama diagonal, beige, forrada en cuero coñac' },
-    VMAL: { nombre: 'Malva', coste: null, pieza: 'vaquera-malva', tec: 'correa de tela vaquera de trama diagonal, malva, forrada en cuero coñac' },
-    VNEG: { nombre: 'Negra', coste: null, pieza: 'vaquera-negra', tec: 'correa de tela vaquera de trama diagonal, negra, forrada en cuero coñac' },
-    VGRI: { nombre: 'Gris', coste: null, pieza: 'vaquera-gris', tec: 'correa de tela vaquera de trama diagonal, gris, forrada en cuero coñac' },
-    VAZU: { nombre: 'Azul claro', coste: null, pieza: 'vaquera-azul-claro', tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada en cuero coñac' }
+    /* --- Tela vaquera · los cinco colores del formato nuevo ---
+       20 mm de ancho, 2,8 de grosor, trama diagonal por fuera y cuero
+       coñac por dentro. REDIBUJADAS el 30/08/2026 con su mariposa
+       plateada puesta: se van el beige y el malva, entran el arena y el
+       topo, y las tres que repiten color estrenan dibujo. */
+    VARE: { nombre: 'Arena', coste: null, pieza: 'vaquera-arena', tec: 'correa de tela vaquera de trama diagonal, arena, forrada en cuero coñac, con cierre de mariposa plateado' },
+    VAZU: { nombre: 'Azul claro', coste: null, pieza: 'vaquera-azul-claro', tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada en cuero coñac, con cierre de mariposa plateado' },
+    VGRI: { nombre: 'Gris', coste: null, pieza: 'vaquera-gris', tec: 'correa de tela vaquera de trama diagonal, gris, forrada en cuero coñac, con cierre de mariposa plateado' },
+    VNEG: { nombre: 'Negra', coste: null, pieza: 'vaquera-negra', tec: 'correa de tela vaquera de trama diagonal, negra, forrada en cuero coñac, con cierre de mariposa plateado' },
+    VTOP: { nombre: 'Topo', coste: null, pieza: 'vaquera-topo', tec: 'correa de tela vaquera de trama diagonal, topo, forrada en cuero coñac, con cierre de mariposa plateado' }
   };
   /* De qué familia es cada correa. Las familias son las once de la casa
      ([[laora-familias-de-correa]]); aquí solo salen las que el Lunar monta
@@ -518,7 +520,7 @@
     CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
     PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
-    VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA', VGRI: 'TELA', VAZU: 'TELA'
+    VARE: 'TELA', VAZU: 'TELA', VGRI: 'TELA', VNEG: 'TELA', VTOP: 'TELA'
   };
   /* LOS DOS PESPUNTES. `sufijo` es lo que se le añade al nombre de la
      pieza en la biblioteca, y `ref` lo que viaja pegado al color en la
@@ -540,7 +542,7 @@
                     'con el uso, pero no se moja.' },
     TELA:   { nombre: 'Tela vaquera',
               expl: 'Tela vaquera de trama diagonal por fuera y cuero coñac por ' +
-                    'dentro, con cierre desplegable. 2,8 mm de grosor: la más fina.' }
+                    'dentro, con cierre de mariposa plateado. 2,8 mm de grosor: la más fina.' }
   };
 
   /* EL CRISTAL SE ELIGE (Óscar, 27/08/2026: «Caja Acero con Mineral o
@@ -575,7 +577,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=37';
+  var SERIE_V = '?v=38';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -698,6 +700,11 @@
        desplegables. */
     HEBP: { nombre: 'Hebilla clásica plateada',
             tec: 'hebilla clásica de acero plateado' },
+    /* 0b · LA DE LA TELA VAQUERA (Óscar, 30/08/2026: «con hebilla mariposa
+       y solo puede elegirse con esa hebilla»). Como la de la piel: viene
+       DIBUJADA en la correa y no lleva miniatura. */
+    MARP: { nombre: 'Mariposa plateada',
+            tec: 'cierre de mariposa de acero plateado' },
     /* 1 · «desplegable mariposa con hebilla clásica» */
     MARI: { nombre: 'Mariposa con hebilla vista', mini: 'mariposa-hebilla',
             tec: 'cierre de mariposa con la hebilla clásica a la vista' },
@@ -714,6 +721,10 @@
     DSEG: { nombre: 'Desplegable con seguro abatible', mini: 'desplegable-seguro',
             tec: 'cierre desplegable con seguro abatible' }
   };
+  /* Qué familia lleva el cierre puesto de fábrica. Las que están aquí solo
+     ofrecen el suyo; las que no, ofrecen los cinco desplegables y ninguno
+     de estos. */
+  var CIERRE_FIJO = { PPER: 'HEBP', TELA: 'MARP' };
 
   /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
      Una lista por correa, y se apilan en la esquina de abajo a la
@@ -739,11 +750,15 @@
        de cerca, el desplegable y el forro de cuero coñac. Las tres valen
        para los cinco colores porque lo que cuentan es el ACABADO, no el
        color, y el color ya se ve en el reloj. */
-    VBEI: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    VMAL: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    VNEG: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    VGRI: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    VAZU: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre']
+    /* La vaquera enseña su correa completa —el dibujo con la mariposa— y
+       las dos fotos del proveedor que cuentan lo que el montaje no puede:
+       la trama de cerca y el forro coñac. La foto del cierre desplegable
+       se fue el 30/08/2026 con el cierre: ahora es mariposa y ya se ve. */
+    VARE: ['/assets/img/componentes/correas/enteras/vaquera-arena', 'vaquera-trama', 'vaquera-dentro'],
+    VAZU: ['/assets/img/componentes/correas/enteras/vaquera-azul-claro', 'vaquera-trama', 'vaquera-dentro'],
+    VGRI: ['/assets/img/componentes/correas/enteras/vaquera-gris', 'vaquera-trama', 'vaquera-dentro'],
+    VNEG: ['/assets/img/componentes/correas/enteras/vaquera-negra', 'vaquera-trama', 'vaquera-dentro'],
+    VTOP: ['/assets/img/componentes/correas/enteras/vaquera-topo', 'vaquera-trama', 'vaquera-dentro']
     /* Las miniaturas de las pieles viejas se fueron con ellas (29/08/2026):
        eran fotos del proveedor de unas correas que ya no se venden. La
        piel nueva enseña su hebilla y su pespunte en la propia capa. */
@@ -757,7 +772,11 @@
     '/assets/img/componentes/correas/enteras/piel-perforada-verde-oliva': 'La correa de piel perforada verde oliva completa, con su hebilla',
     'vaquera-trama': 'La trama diagonal de la tela vaquera, de cerca',
     'vaquera-dentro': 'El forro de cuero coñac de la correa de tela vaquera',
-    'vaquera-cierre': 'El cierre desplegable de la correa de tela vaquera'
+    '/assets/img/componentes/correas/enteras/vaquera-arena': 'La correa de tela vaquera arena completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/vaquera-azul-claro': 'La correa de tela vaquera azul claro completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/vaquera-gris': 'La correa de tela vaquera gris completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/vaquera-negra': 'La correa de tela vaquera negra completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/vaquera-topo': 'La correa de tela vaquera topo completa, con su mariposa'
   };
 
   /* ---------- LA REFERENCIA ---------- */
@@ -966,14 +985,16 @@
     }
 
     var esAcero = matDe(e.correa) === 'A316';
-    /* LA PIEL PERFORADA SOLO LLEVA SU HEBILLA, y las demás familias no la
-       llevan nunca: la hebilla está dibujada en la correa, y ofrecer una
-       mariposa sobre un dibujo con hebilla sería enseñar una cosa y vender
-       otra. */
-    var conHebilla = matDe(e.correa) === 'PPER';
+    /* LAS FAMILIAS CON CIERRE FIJO solo ofrecen el suyo, y las demás no lo
+       ofrecen nunca: el cierre viene DIBUJADO en la correa, y ofrecer una
+       mariposa sobre un dibujo con hebilla —o al revés— sería enseñar una
+       cosa y vender otra. La tabla está junto a `CIERRES`. */
+    var fijo = CIERRE_FIJO[matDe(e.correa)];
+    var fijos = {};
+    for (var cf in CIERRE_FIJO) fijos[CIERRE_FIJO[cf]] = 1;
     var cierresDe = {};
     Object.keys(CIERRES).forEach(function (k) {
-      if ((k === 'HEBP') === conHebilla) cierresDe[k] = CIERRES[k];
+      if (fijo ? k === fijo : !fijos[k]) cierresDe[k] = CIERRES[k];
     });
     botones('cierre', deTabla(cierresDe), e.cierre);
     var ci = CIERRES[e.cierre];
@@ -1006,13 +1027,16 @@
     if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
     if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
     if (!CIERRES[e.cierre]) e.cierre = Object.keys(CIERRES)[0];
-    /* La hebilla clásica es SOLO de la piel perforada, y la piel perforada
-       solo lleva hebilla clásica. Sin esto, cambiar de correa te dejaba
-       puesto un cierre que su paso ya no ofrece: el botón no estaba, pero
-       la ficha técnica y el carrito lo seguían llevando. */
-    var perf = (CORREA_MAT[e.correa] || 'A316') === 'PPER';
-    if (perf && e.cierre !== 'HEBP') e.cierre = 'HEBP';
-    if (!perf && e.cierre === 'HEBP') e.cierre = 'MARI';
+    /* Cada familia con cierre fijo lleva EL SUYO, y ninguna otra lo lleva.
+       Sin esto, cambiar de correa te dejaba puesto un cierre que su paso ya
+       no ofrece: el botón no estaba, pero la ficha técnica y el carrito lo
+       seguían llevando. */
+    var fijoDe = CIERRE_FIJO[CORREA_MAT[e.correa] || 'A316'];
+    if (fijoDe) { e.cierre = fijoDe; }
+    else {
+      for (var cfam in CIERRE_FIJO)
+        if (e.cierre === CIERRE_FIJO[cfam]) e.cierre = 'MARI';
+    }
     if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
