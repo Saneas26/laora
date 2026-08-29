@@ -443,6 +443,37 @@
      interior y la muñeca— y el caucho una, así que la caja crece sola con
      lo que le echen. `flex-direction:column-reverse` para que la primera
      de la lista sea la de abajo: es la esquina que mira el ojo. */
+  /* ---------- LAS FOTOS FIJAS DEL MODELO ----------
+     Misma caja que la Ficha Técnica —mismo ancho, mismo margen— para que
+     las dos secciones de debajo del configurador se lean como una sola
+     columna y no como dos anchos distintos. */
+  .pv-fijas{ max-width:1440px; margin:0 auto; padding:40px 64px 0 }
+  .pv-fijas h2{
+    font-family:var(--cv2-mono); font-weight:700; text-transform:uppercase;
+    font-size:clamp(22px,2.6vw,30px); letter-spacing:-.01em; margin:0 0 18px;
+  }
+  .pv-fijas-rejilla{
+    display:grid; gap:20px;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .pv-fijas figure{ margin:0 }
+  /* ⚠️ CON `.pv-fijas img` A SECAS NO BASTA en cuanto una de estas fotos
+     caiga dentro de un marco: la hoja compartida trae `.pv-hero img` con
+     ancho y alto propios. Aquí están fuera del marco, pero el ancho y el
+     `aspect-ratio` se ponen igual para que el hueco esté reservado antes de
+     que baje la imagen y la página no pegue un salto al cargar. */
+  .pv-fijas figure img{
+    display:block; width:100%; height:auto; aspect-ratio:1/1;
+    object-fit:cover; border-radius:6px; background:#f2f2f0;
+  }
+  .pv-fijas figcaption{
+    margin-top:10px; font-size:15px; line-height:1.5; color:var(--cv2-gris);
+  }
+  @media (max-width:900px){
+    .pv-fijas{ padding:24px 20px 0 }
+    .pv-fijas-rejilla{ grid-template-columns:1fr; gap:24px }
+  }
+
   /* ⚠️ SE LLAMA `pv-pila-correa` Y NO `pv-minis` A PROPÓSITO. `.pv-minis`
      YA EXISTE en producto-2026.css y es del TRINCHERA: sus miniaturas de
      tapa y hebilla, en fila, abajo a la DERECHA y de 140 px. Al estrenar
@@ -893,6 +924,57 @@
 
   </div>
 
+  <!-- ============ LAS FOTOS FIJAS DEL MODELO ============
+       Óscar, 29/08/2026: «al terminar el scroll del configurador, la
+       pantalla completa puede seguir bajando; pues justo debajo de imagen
+       principal mostraremos imágenes fijas de cada modelo, ahí es donde hay
+       que ponerlas».
+
+       FIJAS quiere decir que NO cambian con lo que se elija arriba: el
+       configurador ya enseña la combinación viva, y esto es lo otro —el
+       reloj puesto, el detalle, el plano—, lo que una foto montada por
+       capas no puede contar.
+
+       ⚠️ VAN CON `loading="lazy"` Y CON srcset. Son fotos de verdad, de 95
+       a 230 KB en el tamaño de escritorio: si se bajaran con la página, la
+       ficha pesaría cuatro veces más para enseñar algo que está por debajo
+       del filo. Se piden cuando el scroll llega. -->
+  <section class="pv-fijas">
+    <h2>De cerca</h2>
+    <div class="pv-fijas-rejilla">
+      <figure>
+        <img src="/assets/img/lunar-2026/galeria/1200/vaquera-contexto.avif?v=1"
+             srcset="/assets/img/lunar-2026/galeria/480/vaquera-contexto.avif?v=1 480w,
+                     /assets/img/lunar-2026/galeria/1200/vaquera-contexto.avif?v=1 1200w,
+                     /assets/img/lunar-2026/galeria/1600/vaquera-contexto.avif?v=1 1600w"
+             sizes="(max-width:900px) 100vw, 33vw" loading="lazy" decoding="async"
+             width="1200" height="1200"
+             alt="El laOra Lunar con la correa de tela vaquera gris, sobre cuero">
+        <figcaption>El Lunar con la vaquera gris.</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/img/lunar-2026/galeria/1200/vaquera-gama.avif?v=1"
+             srcset="/assets/img/lunar-2026/galeria/480/vaquera-gama.avif?v=1 480w,
+                     /assets/img/lunar-2026/galeria/1200/vaquera-gama.avif?v=1 1200w,
+                     /assets/img/lunar-2026/galeria/1600/vaquera-gama.avif?v=1 1600w"
+             sizes="(max-width:900px) 100vw, 33vw" loading="lazy" decoding="async"
+             width="1200" height="1200"
+             alt="Los cinco colores de la correa de tela vaquera: beige, malva, negra, gris y azul claro">
+        <figcaption>Los cinco colores, con su cierre desplegable.</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/img/lunar-2026/galeria/1200/vaquera-medidas.avif?v=1"
+             srcset="/assets/img/lunar-2026/galeria/480/vaquera-medidas.avif?v=1 480w,
+                     /assets/img/lunar-2026/galeria/1200/vaquera-medidas.avif?v=1 1200w,
+                     /assets/img/lunar-2026/galeria/1600/vaquera-medidas.avif?v=1 1600w"
+             sizes="(max-width:900px) 100vw, 33vw" loading="lazy" decoding="async"
+             width="1200" height="1200"
+             alt="Plano de la correa de tela vaquera: 20 mm de ancho, 18 en el cierre, 2,8 de grosor y tramos de 75 y 125 mm">
+        <figcaption>20&nbsp;mm de ancho y 2,8 de grosor. Los tramos, de 75 y 125&nbsp;mm.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="pv-tecnica">
     <h2>Ficha Técnica</h2>
     <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
@@ -1261,7 +1343,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=26';
+  var SERIE_V = '?v=27';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
