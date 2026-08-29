@@ -42,15 +42,23 @@
 
   /* Las piezas del modelo, con el nombre corto de siempre para que el
      motor se lea igual que cuando vivía dentro de la ficha. */
-  var MOVS = M.MOVS, TAMANOS = M.TAMANOS, MM = M.MM, CAJAS = M.CAJAS,
-      ESFERAS = M.ESFERAS, BISELES = M.BISELES, AGUJAS = M.AGUJAS,
-      CORREAS = M.CORREAS, CORREA_MAT = M.CORREA_MAT, MATERIALES = M.MATERIALES,
-      CRISTALES = M.CRISTALES, FECHA = M.FECHA, LOGO = M.LOGO,
-      SERIE_V = M.SERIE_V, CAPA = M.CAPA, CAPA_IMG = M.CAPA_IMG, PILA = M.PILA,
-      CIERRES = M.CIERRES, CIERRE_IMG = M.CIERRE_IMG,
-      MINI = M.MINI, MINI_IMG = M.MINI_IMG, MINI_ALT = M.MINI_ALT,
-      PAQUETES = M.PAQUETES, AGUJAS_LIBRES = M.AGUJAS_LIBRES,
-      COSTES_PUESTOS = M.COSTES_PUESTOS, CADENA = M.CADENA;
+  /* ⚠️ TODO LO QUE NO TRAIGA EL MODELO VIENE VACÍO, NO `undefined`. Un
+     modelo recién nacido no tiene capas, ni miniaturas, ni cierres, ni
+     paquetes: es el caso normal desde que los diez tienen configurador sin
+     tener fotos (Óscar, 29/08/2026). Sin estos «o vacío» el motor se paraba
+     con «Cannot read properties of undefined» a la primera, y la ficha se
+     quedaba con las tarjetas puestas y los pasos escondidos. */
+  var MOVS = M.MOVS || {}, TAMANOS = M.TAMANOS || {}, MM = M.MM,
+      CAJAS = M.CAJAS || {}, ESFERAS = M.ESFERAS || {}, BISELES = M.BISELES || {},
+      AGUJAS = M.AGUJAS || {}, CORREAS = M.CORREAS || {},
+      CORREA_MAT = M.CORREA_MAT || {}, MATERIALES = M.MATERIALES || {},
+      CRISTALES = M.CRISTALES || {}, FECHA = M.FECHA || '', LOGO = M.LOGO || 0,
+      SERIE_V = M.SERIE_V || '', CAPA = M.CAPA || {}, CAPA_IMG = M.CAPA_IMG || '',
+      PILA = M.PILA || [],
+      CIERRES = M.CIERRES || {}, CIERRE_IMG = M.CIERRE_IMG || '',
+      MINI = M.MINI || {}, MINI_IMG = M.MINI_IMG || '', MINI_ALT = M.MINI_ALT || {},
+      PAQUETES = M.PAQUETES || [], AGUJAS_LIBRES = M.AGUJAS_LIBRES,
+      COSTES_PUESTOS = !!M.COSTES_PUESTOS, CADENA = M.CADENA || [];
   var e = M.e;
 
   /* ⚠️ LO QUE SE GUARDA EN EL NAVEGADOR VA CON EL NOMBRE DEL MODELO
@@ -249,9 +257,15 @@
      exterior en color y llantas. El estado sigue siendo uno solo —`e.correa`—
      y el material se deduce de él; elegir material salta a la primera correa
      de ese material. */
-  function matDe(c) { return CORREA_MAT[c] || 'A316'; }
+  /* DE QUÉ FAMILIA ES UNA CORREA, y cuál es la primera de cada familia.
+     Con `CORREA_MAT` puesto, el motor lo sabe solo; sin él —un modelo que
+     todavía no reparte sus correas por familias— cada correa es su propia
+     familia y el paso del material no estorba. */
+  function matDe(c) {
+    return (CORREA_MAT && CORREA_MAT[c]) || c;
+  }
   function primeraDe(mat) {
-    var k = Object.keys(CORREAS).filter(function (c) { return matDe(c) === mat; });
+    var k = Object.keys(CORREAS || {}).filter(function (c) { return matDe(c) === mat; });
     return k[0];
   }
 
@@ -718,28 +732,54 @@
     return v;
   }
 
+  /* ---------- REPARAR LO ELEGIDO ----------
+     Igual que el pintado: las dependencias entre pasos son del MODELO
+     —qué bisel admite esta esfera, qué caja queda con las dos— y el Lunar
+     escribe las suyas en su ficha.
+
+     El que no tenga ninguna se repara solo: si lo elegido en un paso ya no
+     está entre sus opciones, se coge la primera. Es lo mínimo para que un
+     configurador sin reglas nunca enseñe algo que no existe. */
   function normaliza() {
-    if (!MOVS[e.mov]) e.mov = Object.keys(MOVS)[0];
-    if (!CAJAS[e.caja]) e.caja = Object.keys(CAJAS)[0];
-    if (!ESFERAS[e.esf]) e.esf = Object.keys(ESFERAS)[0];
-    if (!BISELES[e.bisel]) e.bisel = Object.keys(BISELES)[0];
-    if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
-    if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
-    if (!CIERRES[e.cierre]) e.cierre = Object.keys(CIERRES)[0];
-    if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
-    /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
-       dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
-       delante de una combinación que no existe. */
-    /* LAS AGUJAS NO ENTRAN EN LA CADENA. Ni se reparan —valen todas— ni
-       filtran a las de abajo: si se metieran en `fij`, elegir unas agujas
-       que ningún paquete lleva dejaría la caja y el cristal sin opciones. */
-    var fij = {};
-    ['bisel', 'esf', 'caja', 'cristal'].forEach(function (k) {
-      var ok = valores(k, fij);
-      if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
-      fij[k] = e[k];
+    if (M.normaliza) return M.normaliza(e, HERRAMIENTAS);
+    PASOS.forEach(function (p) {
+      var t = M.OPCIONES && M.OPCIONES[p.id];
+      if (!t) return;
+      if (!t[e[p.id]]) e[p.id] = Object.keys(t)[0];
     });
   }
+
+  /* Los pasos, uno detrás de otro, con lo que diga `OPCIONES`. Sin reglas
+     entre ellos: el que las tenga, las escribe. */
+  function pintaPasosGenerico() {
+    PASOS.forEach(function (p) {
+      var t = M.OPCIONES && M.OPCIONES[p.id];
+      if (!t) return;
+      var op = t[e[p.id]];
+      botones(p.id, deTabla(t), e[p.id]);
+      if (op) rotula(p.id, op.nombre, op.expl || op.tec || '');
+    });
+  }
+
+  /* LO QUE EL MOTOR LE PRESTA AL MODELO para que pinte sus pasos. Se pasa
+     explícito y no por variables sueltas: así se ve de un vistazo con qué
+     cuenta una ficha, y añadir algo aquí es una decisión, no un descuido. */
+  var HERRAMIENTAS = {
+    botones: botones, rotula: rotula, deTabla: deTabla, valores: valores,
+    combos: combos, cribado: cribado, marcado: marcado, $: $, todos: todos,
+    matDe: matDe, primeraDe: primeraDe,
+    /* Cada paso enseña sólo lo que sigue teniendo salida con lo ya elegido
+       por encima. `o[2]` es «no lo dibujes» y `o[3]` es «dibújalo apagado». */
+    soloDe: function (tabla, campo, fij, apagaSobrantes) {
+      var ok = valores(campo, fij);
+      return deTabla(tabla).map(function (o) {
+        var fuera = ok.indexOf(o[0]) < 0;
+        if (apagaSobrantes) o[3] = fuera; else o[2] = fuera;
+        return o;
+      });
+    }
+  };
+
 
   /* ---------- EL PRECIO, DEL COSTE AL PVP ----------
      El multiplicador, el redondeo al 9,90, el 2,5 % de la pasarela y el
@@ -942,87 +982,20 @@
       b.textContent = hayPrecio ? 'Añadir al carrito' : 'Todavía no está a la venta';
     });
 
-    /* Cada paso enseña sólo lo que sigue teniendo salida con lo ya elegido
-       por encima. `o[2]` es «no lo dibujes» y `o[3]` es «dibújalo apagado». */
-    function soloDe(tabla, campo, fij, apagaSobrantes) {
-      var ok = valores(campo, fij);
-      return deTabla(tabla).map(function (o) {
-        var fuera = ok.indexOf(o[0]) < 0;
-        if (apagaSobrantes) o[3] = fuera; else o[2] = fuera;
-        return o;
-      });
-    }
-    botones('mov', deTabla(MOVS), e.mov);
-    botones('bisel', soloDe(BISELES, 'bisel', {}), e.bisel);
-    botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }).map(function (o) {
-      /* Con la caja de PVD, las esferas cribadas para el PVD se apagan. */
-      if (cribado('CE', e.caja, o[0])) { o[2] = false; o[3] = true; }
-      return o;
-    }), e.esf);
-    /* Los cinco acabados, siempre; los cribados, dibujados pero apagados. */
-    botones('agujas', deTabla(AGUJAS).map(function (o) {
-      o[3] = cribado('EA', e.esf, o[0]);
-      return o;
-    }), e.agujas);
-    /* La caja y el cristal se dibujan ENTEROS, con lo que no tiene paquete
-       apagado: así se ve que existe el PVD y los dos zafiros antirreflejos
-       aunque todavía no se puedan comprar (Óscar, 28/08/2026). */
-    botones('caja', soloDe(CAJAS, 'caja',
-      { esf: e.esf, bisel: e.bisel }, true), e.caja);
-    botones('cristal', soloDe(CRISTALES, 'cristal',
-      { esf: e.esf, bisel: e.bisel, caja: e.caja }, true), e.cristal);
-    botones('correamat', deTabla(MATERIALES), matDe(e.correa));
-    botones('correa', deTabla(CORREAS).map(function (o) {
-      o[2] = matDe(o[0]) !== matDe(e.correa);      // sólo los de su material
-      return o;
-    }), e.correa);
+    /* ---------- QUÉ TABLA LLENA CADA PASO ----------
+       Esto ya no lo decide el motor: lo decide el MODELO, porque es donde
+       viven las dependencias entre pasos —qué esferas admite este bisel,
+       qué cajas quedan con esa esfera, qué correa trae el paquete—. El
+       Lunar tiene las suyas y las escribe en su ficha.
 
-    botones('tamano', deTabla(TAMANOS), 'T40');
-    rotula('tamano', TAMANOS.T40.nombre, TAMANOS.T40.expl);
-    rotula('caja', CAJAS[e.caja].nombre, CAJAS[e.caja].expl);
-    rotula('bisel', BISELES[e.bisel].nombre, BISELES[e.bisel].expl);
-    /* El paso del material del bisel está escondido: no se rotula. */
-    rotula('esf', ESFERAS[e.esf].nombre, ESFERAS[e.esf].tec);
-    rotula('agujas', AGUJAS[e.agujas].nombre,
-           AGUJAS[e.agujas].tec.charAt(0).toUpperCase() + AGUJAS[e.agujas].tec.slice(1) + '.');
-    rotula('cristal', CRISTALES[e.cristal].nombre, CRISTALES[e.cristal].expl);
-    rotula('mov', MOVS[e.mov].cal, MOVS[e.mov].tec);
-    rotula('correamat', MATERIALES[matDe(e.correa)].nombre,
-           MATERIALES[matDe(e.correa)].expl);
-    /* EL PASO DEL COLOR SE ESCONDE CUANDO NO HAY NADA QUE ELEGIR, y eso ya
-       no es lo mismo que «es de acero»: desde que existe el brazalete PVD,
-       el acero tiene dos. Se cuenta cuántas correas comparten material con
-       la puesta; con una sola, el grupo repetiría palabra por palabra lo que
-       acaba de decir el material. */
-    var gColor = document.querySelector('[data-g="correa"]');
-    var hayColor = Object.keys(CORREAS).filter(function (c) {
-      return matDe(c) === matDe(e.correa);
-    }).length > 1;
-    if (gColor) gColor.hidden = !hayColor;
-    if (hayColor)
-      rotula('correa', CORREAS[e.correa].nombre,
-             CORREAS[e.correa].tec.charAt(0).toUpperCase() + CORREAS[e.correa].tec.slice(1) + '.');
-    /* EL CIERRE YA NO ESTÁ PENDIENTE (Óscar, 28/08/2026): las correas de
-       caucho llevan «hebilla/cierre mariposa resistente al agua y a golpes»
-       y son de 20 mm, que es justo lo que mide el hueco entre las asas. El
-       brazalete sigue con su desplegable. */
-    var esAcero = matDe(e.correa) === 'A316';
-    botones('cierre', deTabla(CIERRES), e.cierre);
-    var ci = CIERRES[e.cierre];
-    rotula('cierre', ci.nombre,
-           ci.tec.charAt(0).toUpperCase() + ci.tec.slice(1) + '. ' +
-           (esAcero ? 'De acero inoxidable.'
-                    : 'Resistente al agua y a los golpes. La correa mide 20 mm ' +
-                      'de ancho.'));
-    var cf = $('[data-pv-cierre-foto]');
-    if (cf) {
-      cf.hidden = !ci.mini;
-      if (ci.mini) {
-        var csrc = CIERRE_IMG + ci.mini + '.avif' + SERIE_V;
-        if (cf.getAttribute('src') !== csrc) cf.setAttribute('src', csrc);
-        cf.alt = ci.nombre + ', foto del fabricante';
-      }
-    }
+       Y EL QUE NO TENGA NINGUNA se pinta solo: paso por paso, del contrato,
+       con la tabla que el modelo haya puesto en `OPCIONES`. Es lo que
+       permite que los diez modelos tengan configurador desde el primer día
+       —con sus pasos, su estado y su referencia— aunque todavía no tengan
+       ni una foto ni un coste (Óscar, 29/08/2026: «quiero todos ya aunque
+       no estén las imágenes»). */
+    if (M.pintaPasos) M.pintaPasos(e, HERRAMIENTAS);
+    else pintaPasosGenerico();
 
     entrega();
     modoDeCompra();
@@ -1040,14 +1013,15 @@
     var lupa = $('[data-pv-ampliar]');
     if (lupa) lupa.hidden = true;
 
-    $('[data-pv-tec="caja"]').textContent =
-      'Caja de ' + CAJAS[e.caja].mat + ' de ' + MM + ' mm, ' +
-      CRISTALES[e.cristal].tec + '. ' + agua() + '.';
-    $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
-    $('[data-pv-tec="esf"]').textContent =
-      ESFERAS[e.esf].tec + ' ' + FECHA + ' Bisel: ' + BISELES[e.bisel].tec +
-      '. Agujas: ' + AGUJAS[e.agujas].tec + '.';
-    $('[data-pv-tec="agua"]').textContent = agua() + '.';
+    /* LA FICHA TÉCNICA LA ESCRIBE EL MODELO. Estaba aquí con las tablas del
+       Lunar —caja, cristal, movimiento, esfera, bisel, agujas—, y en un
+       modelo que aún no tenga esas tablas reventaba al leer `.mat`. Cada
+       ficha sabe decir su reloj; el motor solo reparte lo que le den. */
+    var tec = M.tecnica ? M.tecnica(e) : {};
+    ['caja', 'mov', 'esf', 'agua'].forEach(function (k) {
+      var n = $('[data-pv-tec="' + k + '"]');
+      if (n) n.textContent = tec[k] || '';
+    });
 
     escondeVacios();
     abrirPasos();
@@ -1480,14 +1454,16 @@
       if (typeof laoraCarritoAnadir !== 'function') return;
       laoraCarritoAnadir({
         ref: referencia(),
-        nombre: 'Lunar',
-        /* EL CIERRE VA EN EL DETALLE aunque todavía no esté en la
+        nombre: M.nombre,
+        /* EL DETALLE LO ESCRIBE EL MODELO. Aquí estaba escrito a mano con
+           las tablas del Lunar —caja, esfera, bisel, cierre, movimiento—,
+           y en un modelo que no tenga bisel eso revienta. Cada ficha sabe
+           cómo se dice su reloj; el motor solo pregunta.
+
+           EL CIERRE VA EN EL DETALLE aunque todavía no esté en la
            referencia: si no, el pedido no diría cuál lleva. */
-        detalle: CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esf].nombre.toLowerCase() +
-                 ' · bisel ' + BISELES[e.bisel].nombre.toLowerCase() +
-                 ' · cierre ' + CIERRES[e.cierre].nombre.toLowerCase() +
-                 ' · ' + MOVS[e.mov].nombre,
-        correa: CORREAS[e.correa].nombre,
+        detalle: M.detalle ? M.detalle(e) : dichoCompleto(),
+        correa: (CORREAS && CORREAS[e.correa] && CORREAS[e.correa].nombre) || '',
         precio: precio(),
         /* ⚠️ LA LÍNEA DEL CARRITO VA SIN FOTO, y es a propósito. Ya no
            existe una foto del reloj entero: el reloj se arma con sus piezas.
@@ -1496,7 +1472,7 @@
            Hasta entonces la línea sale con su texto, que dice exactamente
            lo mismo. */
         foto: '',
-        capas: PILA.map(function (p) { return urlCapa(p.grupo, e[p.grupo]); })
+        capas: (PILA || []).map(function (p) { return urlCapa(p.grupo, e[p.grupo]); })
                    .filter(Boolean)
       });
       window.location.href = '/carrito.html';

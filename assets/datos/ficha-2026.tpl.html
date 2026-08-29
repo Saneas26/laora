@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Cóctel de laOra: 24 combinaciones, al precio honesto.">
-<title>Cóctel · laOra</title>
-<link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
-<link rel="manifest" href="/manifest.json">
-<!-- GENERADO por herramientas/generar_ficha_2026.py — no editar a mano.
-     Los datos viven en assets/datos/fichas/coctel.json -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
-<link rel="stylesheet" href="/assets/css/laora.css?v=52">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=44">
-<link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
-<!-- EL ESTILO DEL CONFIGURADOR, el del Lunar, que desde el 29/08/2026 es el
-     de la casa. VA DESPUÉS de producto-2026.css: buena parte de sus reglas
-     están para ganarle a esa hoja, y cargándolo antes pierde. -->
-<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=1">
-</head>
-<body><header class="site-header">
-  <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
-  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu>
-    <span></span><span></span>
-  </button>
-  <nav class="main-nav" aria-label="Navegación principal" data-nav>
-    <a href="/coleccion.html" class="active">Relojes</a>
-    <a href="/filosofia.html">Por qué <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
-    <a href="/taller.html">Taller</a>
-    <a href="/club.html">Club <span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span></a>
-    <a href="/laorateca.html"><span class="brand-word"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra">teca</span></a>
-  </nav>
-  <div class="header-actions">
-    <a class="header-icon profile-icon" href="/cuenta" aria-label="Tu cuenta"><span aria-hidden="true"></span></a>
-    <!-- `data-carrito-cuenta` es lo que busca `carrito.js` para pintar
-         cuántas unidades hay. Sale oculto y aparece solo si hay algo:
-         un cero permanente al lado del carrito parece una web rota. -->
-    <a class="header-icon bag-icon" href="/carrito" aria-label="Tu carrito"><span aria-hidden="true"></span><b data-carrito-cuenta hidden>0</b></a>
-  </div>
-</header>
-
 <!-- ============================================================
      laOra · EL ESQUELETO DE UNA FICHA-CONFIGURADOR, 2026
      ============================================================
@@ -80,7 +35,7 @@
           <span data-carrusel-paso></span>
           <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
         </div>
-
+%(presentacion)s
         <!-- ⛔ AQUÍ ESTABAN la foto de la combinación entera, el cartel de
              «fotografía en preparación» y el botón de ampliar. Los tres eran
              del mundo de una foto por reloj, que se acabó el 29/08/2026: el
@@ -99,7 +54,7 @@
       </div>
 
       <!-- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO (Óscar, 28/08/2026):
-           «a la izquierda precio, en el centro 3 pagos con Klarna 0 %
+           «a la izquierda precio, en el centro 3 pagos con Klarna 0 %%
            intereses y a la derecha botón de añadir al carrito». Se apaga
            sola cuando aparece el pie de la columna de la derecha, que dice
            lo mismo con más detalle: dos botones de comprar a la vez
@@ -108,7 +63,7 @@
       <div class="pv-barra" data-pv-barra>
         <p class="pv-precio pv-barra-precio" data-pv-precio>269,90 €</p>
         <p class="pv-barra-klarna">
-          <span>3 pagos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <span>3 pagos sin intereses (0&nbsp;%% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
           <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
         </p>
         <button class="cv2-comprar pv-comprar pv-barra-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
@@ -119,10 +74,10 @@
     <aside class="pv-info">
       <div>
         <div class="pv-chips">
-          <span class="cv2-chip pv-chip-oro">Nuevo</span>
-          <span class="cv2-chip">Vestir</span>
+          %(nuevo)s
+          <span class="cv2-chip">%(codigo)s</span>
         </div>
-        <h1>Cóctel</h1>
+        <h1>%(nombre)s</h1>
 
         <!-- LA CABECERA DE LA COLUMNA, como en Tesla: primero cuándo llega
              y cómo se paga, y después lo que se elige. -->
@@ -171,7 +126,7 @@
              producto y anunciarlo sin tenerlo sería publicidad financiera
              falsa. La cifra la calcula el guion con el precio de verdad. -->
         <p class="pv-klarna">
-          <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <span>3 plazos sin intereses (0&nbsp;%% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
           <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
           <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
         </p>
@@ -185,7 +140,7 @@
 
   </div>
 
-  <section class="pv-tecnica">
+%(decerca)s  <section class="pv-tecnica">
     <h2>Ficha Técnica</h2>
     <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
     <details><summary>Movimiento</summary><p data-pv-tec="mov"></p></details>
@@ -194,116 +149,3 @@
   </section>
 
 </main>
-
-<footer class="aviso-marcas">
-  <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
-</footer>
-
-<script src="/assets/js/cabecera-laora.js?v=1"></script>
-<script src="/assets/js/carrito.js?v=11"></script>
-<script src="/assets/js/telemetria.js" defer></script>
-<script>
-/* ============================================================
-   LAS PIEZAS DEL CÓCTEL
-   ============================================================
-   GENERADO por herramientas/generar_ficha_2026.py desde
-   `assets/datos/fichas/coctel.json`. No se edita a mano: se edita el
-   JSON y se vuelve a generar.
-
-   Aquí solo hay PIEZAS. Cómo funciona el configurador es de la casa y
-   vive en `/assets/js/configurador-2026.js`, que se carga debajo.
-   ============================================================ */
-  var OPCIONES = {
-    "caja": {
-      "OR": {
-        "nombre": "Oro rosa",
-        "color": "#B76E56"
-      },
-      "PL": {
-        "nombre": "Plata",
-        "color": "#C9CCCE"
-      }
-    },
-    "esf": {
-      "MAR": {
-        "nombre": "Marrón",
-        "color": "#6B4B33"
-      },
-      "AZU": {
-        "nombre": "Azul",
-        "color": "#3A5C8C"
-      }
-    },
-    "mov": {
-      "Q": {
-        "nombre": "Cuarzo japonés"
-      },
-      "A": {
-        "nombre": "Automático japonés"
-      }
-    },
-    "correamat": {
-      "PIEL": {
-        "nombre": "Piel vaca"
-      },
-      "SINT": {
-        "nombre": "Piel sintética"
-      },
-      "ANTE": {
-        "nombre": "Ante"
-      }
-    }
-  };
-
-  /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"caja": "OR", "esf": "MAR", "mov": "Q", "correamat": "PIEL"};
-
-  /* LA REFERENCIA la forman el código del modelo y lo elegido en cada
-     paso, en el orden del contrato. Es la que viaja al carrito y la que el
-     servidor comprueba, así que se arma siempre igual. */
-  var ORDEN = ["caja", "esf", "mov", "correamat"];
-  function referencia(e) {
-    return 'COCTEL-' + ORDEN.map(function (k) { return e[k]; }).join('-');
-  }
-  function nombreDe(k) {
-    var t = OPCIONES[k], o = t && t[e[k]];
-    return o ? o.nombre : '';
-  }
-  function descripcion(e) {
-    return 'laOra Cóctel, ' + ORDEN.map(nombreDe).filter(Boolean)
-      .join(', ').toLowerCase() + '.';
-  }
-  function dichoCompleto(e) { return descripcion(e); }
-  function detalle(e) {
-    return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
-  }
-  function agua(e) { return ""; }
-
-  /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
-     técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
-     lo que decía antes: nada. */
-  function tecnica(e) {
-    return { caja: detalle(e) + '.', mov: nombreDe('mov'),
-             esf: nombreDe('esf'), agua: agua(e) };
-  }
-
-  window.LAORA_MODELO = {
-    slug: "coctel", nombre: "Cóctel",
-    OPCIONES: OPCIONES, e: e,
-    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {},
-    MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
-    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
-       paquetes no hay coste, así que la ficha dice «Precio por definir» y
-       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
-    CAPA: {}, PILA: [], PAQUETES: [], COSTES_PUESTOS: false,
-    CADENA: ORDEN,
-    referencia: referencia, descripcion: descripcion,
-    dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
-    tecnica: tecnica
-  };
-</script>
-<!-- El motor de precio y el configurador, los mismos para los diez. -->
-<script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=1"></script>
-</body>
-</html>

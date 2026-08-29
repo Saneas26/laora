@@ -851,6 +851,138 @@
      anterior. Un paso sin nada que elegir no cuenta como cerrado. */
   var CADENA = ['mov', 'esf', 'caja', 'correa'];
 
+  /* ---------- QUÉ TABLA LLENA CADA PASO, Y CON QUÉ REGLAS ----------
+     El motor pone el armazón —qué pasos hay y en qué orden, del contrato—;
+     esto pone lo que va dentro y las dependencias entre pasos, que son del
+     Lunar y de nadie más: qué esferas admite cada bisel, qué cajas quedan
+     con esa esfera, cuándo el color de correa no tiene nada que elegir.
+
+     `H` son las herramientas que presta el motor. Se reciben como argumento
+     y no como variables sueltas para que se vea con qué cuenta la ficha. */
+  function pintaPasos(e, H) {
+    var botones = H.botones, rotula = H.rotula, deTabla = H.deTabla,
+        soloDe = H.soloDe, cribado = H.cribado, $ = H.$, matDe = H.matDe;
+    botones('mov', deTabla(MOVS), e.mov);
+    botones('bisel', soloDe(BISELES, 'bisel', {}), e.bisel);
+    botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }).map(function (o) {
+      /* Con la caja de PVD, las esferas cribadas para el PVD se apagan. */
+      if (cribado('CE', e.caja, o[0])) { o[2] = false; o[3] = true; }
+      return o;
+    }), e.esf);
+    /* Los cinco acabados, siempre; los cribados, dibujados pero apagados. */
+    botones('agujas', deTabla(AGUJAS).map(function (o) {
+      o[3] = cribado('EA', e.esf, o[0]);
+      return o;
+    }), e.agujas);
+    /* La caja y el cristal se dibujan ENTEROS, con lo que no tiene paquete
+       apagado: así se ve que existe el PVD y los dos zafiros antirreflejos
+       aunque todavía no se puedan comprar (Óscar, 28/08/2026). */
+    botones('caja', soloDe(CAJAS, 'caja',
+      { esf: e.esf, bisel: e.bisel }, true), e.caja);
+    botones('cristal', soloDe(CRISTALES, 'cristal',
+      { esf: e.esf, bisel: e.bisel, caja: e.caja }, true), e.cristal);
+    botones('correamat', deTabla(MATERIALES), matDe(e.correa));
+    botones('correa', deTabla(CORREAS).map(function (o) {
+      o[2] = matDe(o[0]) !== matDe(e.correa);      // sólo los de su material
+      return o;
+    }), e.correa);
+
+    botones('tamano', deTabla(TAMANOS), 'T40');
+    rotula('tamano', TAMANOS.T40.nombre, TAMANOS.T40.expl);
+    rotula('caja', CAJAS[e.caja].nombre, CAJAS[e.caja].expl);
+    rotula('bisel', BISELES[e.bisel].nombre, BISELES[e.bisel].expl);
+    /* El paso del material del bisel está escondido: no se rotula. */
+    rotula('esf', ESFERAS[e.esf].nombre, ESFERAS[e.esf].tec);
+    rotula('agujas', AGUJAS[e.agujas].nombre,
+           AGUJAS[e.agujas].tec.charAt(0).toUpperCase() + AGUJAS[e.agujas].tec.slice(1) + '.');
+    rotula('cristal', CRISTALES[e.cristal].nombre, CRISTALES[e.cristal].expl);
+    rotula('mov', MOVS[e.mov].cal, MOVS[e.mov].tec);
+    rotula('correamat', MATERIALES[matDe(e.correa)].nombre,
+           MATERIALES[matDe(e.correa)].expl);
+    /* EL PASO DEL COLOR SE ESCONDE CUANDO NO HAY NADA QUE ELEGIR, y eso ya
+       no es lo mismo que «es de acero»: desde que existe el brazalete PVD,
+       el acero tiene dos. Se cuenta cuántas correas comparten material con
+       la puesta; con una sola, el grupo repetiría palabra por palabra lo que
+       acaba de decir el material. */
+    var gColor = document.querySelector('[data-g="correa"]');
+    var hayColor = Object.keys(CORREAS).filter(function (c) {
+      return matDe(c) === matDe(e.correa);
+    }).length > 1;
+    if (gColor) gColor.hidden = !hayColor;
+    if (hayColor)
+      rotula('correa', CORREAS[e.correa].nombre,
+             CORREAS[e.correa].tec.charAt(0).toUpperCase() + CORREAS[e.correa].tec.slice(1) + '.');
+    /* EL CIERRE YA NO ESTÁ PENDIENTE (Óscar, 28/08/2026): las correas de
+       caucho llevan «hebilla/cierre mariposa resistente al agua y a golpes»
+       y son de 20 mm, que es justo lo que mide el hueco entre las asas. El
+       brazalete sigue con su desplegable. */
+    var esAcero = matDe(e.correa) === 'A316';
+    botones('cierre', deTabla(CIERRES), e.cierre);
+    var ci = CIERRES[e.cierre];
+    rotula('cierre', ci.nombre,
+           ci.tec.charAt(0).toUpperCase() + ci.tec.slice(1) + '. ' +
+           (esAcero ? 'De acero inoxidable.'
+                    : 'Resistente al agua y a los golpes. La correa mide 20 mm ' +
+                      'de ancho.'));
+    var cf = $('[data-pv-cierre-foto]');
+    if (cf) {
+      cf.hidden = !ci.mini;
+      if (ci.mini) {
+        var csrc = CIERRE_IMG + ci.mini + '.avif' + SERIE_V;
+        if (cf.getAttribute('src') !== csrc) cf.setAttribute('src', csrc);
+        cf.alt = ci.nombre + ', foto del fabricante';
+      }
+    }
+  }
+
+  /* ---------- REPARAR LO ELEGIDO ----------
+     La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
+     dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
+     delante de una combinación que no existe. */
+  function normaliza(e, H) {
+    var valores = H.valores;
+    if (!MOVS[e.mov]) e.mov = Object.keys(MOVS)[0];
+    if (!CAJAS[e.caja]) e.caja = Object.keys(CAJAS)[0];
+    if (!ESFERAS[e.esf]) e.esf = Object.keys(ESFERAS)[0];
+    if (!BISELES[e.bisel]) e.bisel = Object.keys(BISELES)[0];
+    if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
+    if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
+    if (!CIERRES[e.cierre]) e.cierre = Object.keys(CIERRES)[0];
+    if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
+    /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
+       dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
+       delante de una combinación que no existe. */
+    /* LAS AGUJAS NO ENTRAN EN LA CADENA. Ni se reparan —valen todas— ni
+       filtran a las de abajo: si se metieran en `fij`, elegir unas agujas
+       que ningún paquete lleva dejaría la caja y el cristal sin opciones. */
+    var fij = {};
+    ['bisel', 'esf', 'caja', 'cristal'].forEach(function (k) {
+      var ok = valores(k, fij);
+      if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
+      fij[k] = e[k];
+    });
+  }
+
+  /* La ficha técnica del Lunar, con sus piezas. */
+  function tecnica(e) {
+    return {
+      caja: 'Caja de ' + CAJAS[e.caja].mat + ' de ' + MM + ' mm, ' +
+            CRISTALES[e.cristal].tec + '. ' + agua(e) + '.',
+      mov: MOVS[e.mov].tec,
+      esf: ESFERAS[e.esf].tec + ' ' + FECHA + ' Bisel: ' + BISELES[e.bisel].tec +
+           '. Agujas: ' + AGUJAS[e.agujas].tec + '.',
+      agua: agua(e) + '.'
+    };
+  }
+
+  /* Cómo se dice este reloj en la línea del carrito. */
+  function detalle(e) {
+    return CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esf].nombre.toLowerCase() +
+           ' · bisel ' + BISELES[e.bisel].nombre.toLowerCase() +
+           ' · cierre ' + CIERRES[e.cierre].nombre.toLowerCase() +
+           ' · ' + MOVS[e.mov].nombre;
+  }
+
   /* ---------- LO QUE EL MOTOR NECESITA SABER DEL LUNAR ----------
      Todo lo de arriba son PIEZAS. Aquí se le entregan al motor de la casa,
      que es quien las monta. El motor se carga después y arranca solo; si
@@ -871,6 +1003,8 @@
     PAQUETES: PAQUETES, AGUJAS_LIBRES: AGUJAS_LIBRES,
     COSTES_PUESTOS: COSTES_PUESTOS, CADENA: CADENA,
     e: e,
+    pintaPasos: pintaPasos, normaliza: normaliza, detalle: detalle,
+    tecnica: tecnica,
     referencia: referencia, agua: agua,
     descripcion: descripcion, dichoCompleto: dichoCompleto
   };

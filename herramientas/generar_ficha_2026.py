@@ -45,6 +45,7 @@ USO
     python3 herramientas/generar_ficha_2026.py            (todas)
 """
 
+import io
 import json
 import os
 import sys
@@ -177,6 +178,124 @@ def bolsa_bool(d, ruta):
     return bool(sitio)
 
 
+PLANTILLA = os.path.join(RAIZ, 'assets/datos/ficha-2026.tpl.html')
+
+
+def js(v):
+    """Un valor de Python escrito como JavaScript legible."""
+    return json.dumps(v, ensure_ascii=False)
+
+
+def tabla(opciones):
+    """De la lista de opciones del JSON a la tabla que espera el motor:
+    `{ID: {nombre, expl}}`. El motor no sabe de listas."""
+    t = {}
+    for o in opciones:
+        fila = {'nombre': o['nombre']}
+        if o.get('expl'):
+            fila['expl'] = o['expl']
+        if o.get('color'):
+            fila['color'] = o['color']
+        t[o['id']] = fila
+    return t
+
+
+def modelo_js(d, dentro):
+    """El bloque `window.LAORA_MODELO` de una ficha generada.
+
+    Aquí NO hay reglas: solo las piezas. Un modelo con dependencias entre
+    pasos —el Lunar— escribe las suyas a mano en su ficha; los demás se
+    pintan y se reparan solos, que es lo que permite que los diez tengan
+    configurador desde el primer día aunque no tengan ni una foto ni un
+    coste (Óscar, 29/08/2026: «quiero todos ya aunque no estén las
+    imágenes»)."""
+    opciones, estado = {}, {}
+    for paso, ops in dentro:
+        opciones[paso['id']] = tabla(ops)
+        estado[paso['id']] = ops[0]['id']
+
+    # Las familias de correa, si las hay: de qué familia es cada color.
+    correa_mat = {}
+    for o in d.get('correa', {}).get('colores', []):
+        if o.get('familia'):
+            correa_mat[o['id']] = o['familia']
+
+    codigo = d.get('codigo') or d['slug'][:6].upper()
+    orden = [p['id'] for p, _ in dentro]
+
+    return """<script>
+/* ============================================================
+   LAS PIEZAS DEL %(NOMBRE)s
+   ============================================================
+   GENERADO por herramientas/generar_ficha_2026.py desde
+   `assets/datos/fichas/%(slug)s.json`. No se edita a mano: se edita el
+   JSON y se vuelve a generar.
+
+   Aquí solo hay PIEZAS. Cómo funciona el configurador es de la casa y
+   vive en `/assets/js/configurador-2026.js`, que se carga debajo.
+   ============================================================ */
+  var OPCIONES = %(opciones)s;
+
+  /* Lo que viene puesto al abrir: la primera opción de cada paso. */
+  var e = %(estado)s;
+
+  /* LA REFERENCIA la forman el código del modelo y lo elegido en cada
+     paso, en el orden del contrato. Es la que viaja al carrito y la que el
+     servidor comprueba, así que se arma siempre igual. */
+  var ORDEN = %(orden)s;
+  function referencia(e) {
+    return '%(codigo)s-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+  }
+  function nombreDe(k) {
+    var t = OPCIONES[k], o = t && t[e[k]];
+    return o ? o.nombre : '';
+  }
+  function descripcion(e) {
+    return 'laOra %(nombre)s, ' + ORDEN.map(nombreDe).filter(Boolean)
+      .join(', ').toLowerCase() + '.';
+  }
+  function dichoCompleto(e) { return descripcion(e); }
+  function detalle(e) {
+    return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
+  }
+  function agua(e) { return %(agua)s; }
+
+  /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
+     técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
+     lo que decía antes: nada. */
+  function tecnica(e) {
+    return { caja: detalle(e) + '.', mov: nombreDe('mov'),
+             esf: nombreDe('esf'), agua: agua(e) };
+  }
+
+  window.LAORA_MODELO = {
+    slug: %(slugjs)s, nombre: %(nombrejs)s,
+    OPCIONES: OPCIONES, e: e,
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: %(correamat)s,
+    MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
+    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
+       paquetes no hay coste, así que la ficha dice «Precio por definir» y
+       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
+    CAPA: {}, PILA: [], PAQUETES: [], COSTES_PUESTOS: false,
+    CADENA: ORDEN,
+    referencia: referencia, descripcion: descripcion,
+    dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
+    tecnica: tecnica
+  };
+</script>
+<!-- El motor de precio y el configurador, los mismos para los diez. -->
+<script src="/assets/js/precio-2026.js?v=1"></script>
+<script src="/assets/js/configurador-2026.js?v=1"></script>""" % {
+        'NOMBRE': d['nombre'].upper(), 'slug': d['slug'],
+        'nombre': d['nombre'], 'nombrejs': js(d['nombre']), 'slugjs': js(d['slug']),
+        'codigo': codigo, 'orden': js(orden),
+        'opciones': json.dumps(opciones, ensure_ascii=False, indent=2).replace('\n', '\n  '),
+        'estado': js(estado),
+        'correamat': js(correa_mat),
+        'agua': js(d.get('agua', '')),
+    }
+
+
 def ficha(d):
     listo = bool(d.get('listo'))
     dentro, _fuera = pasos_del_modelo(d)
@@ -185,32 +304,21 @@ def ficha(d):
     # pieza decidida: dejar que Google las liste sería anunciar un reloj que
     # no existe. En cuanto tengan un paso, el noindex se cae solo.
     noindex = '' if dentro else '<meta name="robots" content="noindex">\n'
-    pasos = '\n\n'.join(paso_html(p, ops) for p, ops in dentro)
 
     combinaciones = 1
     for _p, ops in dentro:
         combinaciones *= len(ops)
 
-    # Sin costes no hay precio: se dice y no se vende.
-    if listo:
-        precio = '<p class="pv-precio" data-pv-precio>—</p>'
-        boton = ('<button class="cv2-comprar pv-comprar" type="button" '
-                 'data-pv-comprar>Añadir al carrito</button>')
-        klarna = """
-        <p class="pv-klarna">
-          <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>—</b> con</span>
-          <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
-          <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
-        </p>"""
-        aviso = ''
-    else:
-        precio = '<p class="pv-precio pv-precio-pendiente">Precio por cerrar</p>'
-        boton = ('<button class="cv2-comprar pv-comprar" type="button" disabled>'
-                 'Todavía no está a la venta</button>')
-        klarna = ''
-        aviso = ('\n        <p class="pv-aviso-pendiente">Este modelo está en el taller: '
-                 'las piezas están elegidas y el precio, por cerrar. '
-                 'En cuanto esté, se podrá comprar desde aquí.</p>')
+    cuerpo = io.open(PLANTILLA, encoding='utf-8').read() % {
+        'nombre': esc(d['nombre']),
+        'codigo': esc((d.get('codigo') or '') + (' · ' if d.get('codigo') else '') + d.get('clase', '')),
+        'nuevo': '<span class="cv2-chip pv-chip-oro">Nuevo</span>' if not listo else '',
+        # SIN FOTO DE PRESENTACIÓN NO SE PONE NADA. El visor se queda con el
+        # montaje por capas, que sin capas no dibuja: un marco vacío dice la
+        # verdad mejor que una foto de otro reloj.
+        'presentacion': '',
+        'decerca': '',
+    }
 
     return """<!DOCTYPE html>
 <html lang="es">
@@ -235,43 +343,7 @@ def ficha(d):
 </head>
 <body>%(cabecera)s
 
-<main class="cv2">
-  <div class="pv-cuerpo">
-    <div class="pv-galeria">
-      <div class="pv-hero pv-hero-vacio" data-pv-hero>
-        <p class="pv-foto-pendiente">Foto por hacer</p>
-      </div>
-    </div>
-
-    <aside class="pv-info">
-      <!-- Este <div> no es decorativo: es el que lleva el contador que
-           numera los pasos (`.pv-info>div{counter-reset:paso}`). -->
-      <div>
-        <div class="pv-chips"><span class="cv2-chip">%(clase)s</span></div>
-        <h1>%(nombre)s</h1>
-        <p class="pv-desc">%(desc)s</p>
-
-%(pasos)s
-      </div>
-
-      <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
-           botón y Klarna juntos, como en el Lunar. -->
-      <div class="pv-pie" data-pv-pie>
-        <div class="pv-precio-fila">
-          %(precio)s
-          <p class="pv-stock"><span>%(stock)s</span><i aria-hidden="true"></i></p>
-        </div>
-        <p class="pv-imp">Impuestos incluidos.</p>
-        %(boton)s%(klarna)s%(aviso)s
-        <div class="pv-confianza">
-          <span>Envío gratis · devolución 30 días</span>
-          <span>Garantía 3 años*</span>
-        </div>
-        <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
-      </div>
-    </aside>
-  </div>
-</main>
+%(cuerpo)s
 
 <footer class="aviso-marcas">
   <p>laOra es una marca independiente. No fabrica réplicas ni utiliza marcas, emblemas o logotipos ajenos. Las referencias a iconos relojeros se ofrecen únicamente como contexto del homenaje; no implican afiliación con sus fabricantes.</p>
@@ -280,18 +352,17 @@ def ficha(d):
 %(script)s
 <script src="/assets/js/carrito.js?v=%(vjs)d"></script>
 <script src="/assets/js/telemetria.js" defer></script>
+%(modelo)s
 </body>
 </html>
 """ % {
-        'nombre': esc(d['nombre']), 'slug': d['slug'], 'clase': esc(d.get('clase', '')),
-        'desc': esc(d.get('desc') or 'Ficha en construcción.'),
-        'combinaciones': combinaciones,
-        'noindex': noindex,
+        'nombre': esc(d['nombre']), 'slug': d['slug'],
+        'combinaciones': combinaciones, 'noindex': noindex,
         'recursos': RECURSOS, 'cabecera': marcado('relojes'), 'script': SCRIPT,
         'vcol': V_CSS_COLECCION, 'vprod': V_CSS_PRODUCTO, 'vjs': V_JS_CARRITO,
         'vconf': V_CSS_CONFIG,
-        'pasos': pasos, 'precio': precio, 'boton': boton, 'klarna': klarna, 'aviso': aviso,
-        'stock': 'Disponible' if listo else 'En el taller',
+        'cuerpo': cuerpo,
+        'modelo': modelo_js(d, dentro),
     }
 
 

@@ -43,66 +43,156 @@
   </div>
 </header>
 
+<!-- ============================================================
+     laOra · EL ESQUELETO DE UNA FICHA-CONFIGURADOR, 2026
+     ============================================================
+     Sale de `lunar.html`, que es el que Óscar señaló como patrón el
+     29/08/2026: «el estilo del Lunar pasa a ser el único estilo a utilizar
+     en el resto de modelos».
+
+     Lo rellena `herramientas/generar_ficha_2026.py`. Los huecos son cinco
+     —nombre, código, nuevo, presentación y «de cerca»— y todo lo demás lo
+     monta el motor en el navegador: los pasos salen del contrato y las
+     piezas, del modelo.
+
+     ⚠️ NO SE EDITA UNA FICHA GENERADA: se edita esto y se vuelven a
+     generar todas. Si algo de aquí solo vale para un reloj, no va aquí.
+     ============================================================ -->
 <main class="cv2">
-  <div class="pv-cuerpo">
+
+  <div class="pv-cuerpo pv-visor-fijo">
+
+    <!-- ============ LA GALERÍA ============ -->
     <div class="pv-galeria">
-      <div class="pv-hero pv-hero-vacio" data-pv-hero>
-        <p class="pv-foto-pendiente">Foto por hacer</p>
+      <div class="pv-hero pv-hero-llena">
+        <!-- EL MONTAJE POR CAPAS, sólo con `?capas` (Óscar, 28/08/2026).
+             Cinco huecos, de atrás hacia delante: la correa va detrás de la
+             caja porque pasa por debajo de las asas. -->
+        <div class="pv-capas" data-pv-capas hidden>
+          <img data-capa="correa" alt="" hidden>
+          <img data-capa="caja" alt="" hidden>
+          <img data-capa="bisel" alt="" hidden>
+          <img data-capa="esf" alt="" hidden>
+          <img data-capa="agujas" alt="" hidden>
+        </div>
+        <div class="pv-carrusel" data-pv-carrusel hidden>
+          <button type="button" data-carrusel="-1" aria-label="Opción anterior">‹</button>
+          <span data-carrusel-paso></span>
+          <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
+        </div>
+
+        <!-- ⛔ AQUÍ ESTABAN la foto de la combinación entera, el cartel de
+             «fotografía en preparación» y el botón de ampliar. Los tres eran
+             del mundo de una foto por reloj, que se acabó el 29/08/2026: el
+             visor solo tiene dos estados, la presentación mientras nadie ha
+             elegido nada y el reloj armado con sus piezas en cuanto se elige
+             la primera. -->
+        <!-- LAS MINIATURAS DE LA CORREA (Óscar, 28/08/2026): «en la parte
+             inferior izquierda colocas una miniatura». Es la foto del
+             proveedor, la correa suelta y entera, que es lo que el montaje
+             no puede enseñar: sus capas acaban en el borde del lienzo.
+
+             DE UNA A VARIAS el 29/08/2026: «miniatura cuando se elija esa
+             piel, que se añade a la que ya sale». Las pinta `repasaVisor()`
+             con lo que diga MINI. -->
+        <div class="pv-pila-correa" data-pv-pila-correa hidden></div>
+      </div>
+
+      <!-- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO (Óscar, 28/08/2026):
+           «a la izquierda precio, en el centro 3 pagos con Klarna 0 %
+           intereses y a la derecha botón de añadir al carrito». Se apaga
+           sola cuando aparece el pie de la columna de la derecha, que dice
+           lo mismo con más detalle: dos botones de comprar a la vez
+           confunden. Deja su hueco al apagarse para que la foto no pegue
+           un salto cada vez que se cruza el pie. -->
+      <div class="pv-barra" data-pv-barra>
+        <p class="pv-precio pv-barra-precio" data-pv-precio>269,90 €</p>
+        <p class="pv-barra-klarna">
+          <span>3 pagos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+        </p>
+        <button class="cv2-comprar pv-comprar pv-barra-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
       </div>
     </div>
 
+    <!-- ============ LA COMPRA ============ -->
     <aside class="pv-info">
-      <!-- Este <div> no es decorativo: es el que lleva el contador que
-           numera los pasos (`.pv-info>div{counter-reset:paso}`). -->
       <div>
-        <div class="pv-chips"><span class="cv2-chip">Buceo</span></div>
+        <div class="pv-chips">
+          <span class="cv2-chip pv-chip-oro">Nuevo</span>
+          <span class="cv2-chip">Buceo</span>
+        </div>
         <h1>Tortuga</h1>
-        <p class="pv-desc">Ficha en construcción.</p>
 
-          <div class="pv-grupo">
-            <p class="pv-rotulo">Bisel</p>
-            <div class="pv-opciones" data-pv="bisel">
-            <button type="button" data-v="NEG" aria-pressed="true"><i class="pv-punto" style="background:#1C1D1F"></i>Negro</button>
-            <button type="button" data-v="TUR"><i class="pv-punto" style="background:#1F8A8A"></i>Turquesa</button>
-            <button type="button" data-v="NAR"><i class="pv-punto" style="background:#E4761E"></i>Naranja</button>
-            </div>
-          </div>
+        <!-- LA CABECERA DE LA COLUMNA, como en Tesla: primero cuándo llega
+             y cómo se paga, y después lo que se elige. -->
+        <p class="pv-entrega" data-pv-entrega>Entrega estimada</p>
+        <label class="pv-oculto" for="pv-modo">Forma de compra</label>
+        <select class="pv-modo" id="pv-modo" data-pv-modo>
+          <optgroup label="Particular">
+            <option value="P-DIR">Particular · Pago directo</option>
+            <option value="P-3">Particular · 3 pagos sin intereses</option>
+            <option value="P-RES">Particular · Reservar</option>
+          </optgroup>
+          <optgroup label="Empresa">
+            <option value="E-DIR">Empresa · Pago directo</option>
+            <option value="E-3">Empresa · 3 pagos sin intereses</option>
+            <option value="E-RES">Empresa · Reservar</option>
+          </optgroup>
+        </select>
+        <p class="pv-modo-nota" data-pv-modo-nota hidden></p>
 
-          <div class="pv-grupo">
-            <p class="pv-rotulo">Cristal</p>
-            <div class="pv-opciones" data-pv="cristal">
-            <button type="button" data-v="MIN" aria-pressed="true">Mineral</button>
-            <button type="button" data-v="ZAF">Zafiro</button>
-            </div>
-          </div>
+        <!-- ============ LOS PASOS ============
+             Vacío a propósito. Hasta el 29/08/2026 aquí estaban escritas a
+             mano las once cajas de opciones, con su rótulo y su orden; con
+             diez modelos eso son diez copias que se separan en cuanto
+             alguien cambia una.
 
-          <div class="pv-grupo">
-            <p class="pv-rotulo">Movimiento</p>
-            <div class="pv-opciones" data-pv="mov">
-            <button type="button" data-v="Q" aria-pressed="true">Cuarzo japonés</button>
-            <button type="button" data-v="A">Automático japonés</button>
-            </div>
-          </div>
+             Ahora las monta el motor leyendo el contrato de
+             `assets/datos/pasos-2026.json`: el orden, en qué tarjeta va
+             cada paso y cómo se llama. Si hay que mover un paso o
+             cambiarle el nombre, se toca el contrato, no esto. -->
+        <div data-pv-pasos></div>
+
       </div>
 
-      <!-- El pie de compra: fijo bajo las elecciones, con el precio, el
-           botón y Klarna juntos, como en el Lunar. -->
+      <!-- El pie de compra: fijo bajo las elecciones hasta la Ficha Técnica -->
       <div class="pv-pie" data-pv-pie>
         <div class="pv-precio-fila">
-          <p class="pv-precio pv-precio-pendiente">Precio por cerrar</p>
-          <p class="pv-stock"><span>En el taller</span><i aria-hidden="true"></i></p>
+          <p class="pv-precio" data-pv-precio>269,90 €</p>
+          <p class="pv-stock"><span>Disponible</span><i aria-hidden="true"></i></p>
         </div>
         <p class="pv-imp">Impuestos incluidos.</p>
-        <button class="cv2-comprar pv-comprar" type="button" disabled>Todavía no está a la venta</button>
-        <p class="pv-aviso-pendiente">Este modelo está en el taller: las piezas están elegidas y el precio, por cerrar. En cuanto esté, se podrá comprar desde aquí.</p>
+        <button class="cv2-comprar pv-comprar" type="button" data-pv-comprar>Añadir al carrito</button>
+
+        <!-- La caja de Klarna, debajo del botón, OJO:
+             solo se anuncia lo que Mollie tiene aprobado —tres plazos sin
+             intereses—. Nada de «desde X €/mes con su TAE»: eso es otro
+             producto y anunciarlo sin tenerlo sería publicidad financiera
+             falsa. La cifra la calcula el guion con el precio de verdad. -->
+        <p class="pv-klarna">
+          <span>3 plazos sin intereses (0&nbsp;% TAE) de <b data-pv-klarna>89,97 €</b> con</span>
+          <img src="/assets/img/pago/klarna.svg?v=2" alt="Klarna" width="48" height="20" loading="lazy">
+          <a href="https://www.klarna.com/es/a-plazos/" target="_blank" rel="noopener">Más información</a>
+        </p>
         <div class="pv-confianza">
-          <span>Envío gratis · devolución 30 días</span>
-          <span>Garantía 3 años*</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis · devolución 30 días</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Garantía 5 años*</span>
         </div>
-        <p class="pv-nota-garantia">* La ley da 3 años. Los 5 son para los socios del <a href="/club.html">Club laOra</a>, que va incluido con tu reloj.</p>
+        <p class="pv-nota-garantia">* 3 años si aún no eres soci@ del <a href="/club.html">Club laOra</a></p>
       </div>
     </aside>
+
   </div>
+
+  <section class="pv-tecnica">
+    <h2>Ficha Técnica</h2>
+    <details><summary>Caja y materiales</summary><p data-pv-tec="caja"></p></details>
+    <details><summary>Movimiento</summary><p data-pv-tec="mov"></p></details>
+    <details><summary>Esfera y agujas</summary><p data-pv-tec="esf"></p></details>
+    <details><summary>Resistencia al agua</summary><p data-pv-tec="agua"></p></details>
+  </section>
+
 </main>
 
 <footer class="aviso-marcas">
@@ -112,5 +202,99 @@
 <script src="/assets/js/cabecera-laora.js?v=1"></script>
 <script src="/assets/js/carrito.js?v=11"></script>
 <script src="/assets/js/telemetria.js" defer></script>
+<script>
+/* ============================================================
+   LAS PIEZAS DEL TORTUGA
+   ============================================================
+   GENERADO por herramientas/generar_ficha_2026.py desde
+   `assets/datos/fichas/tortuga.json`. No se edita a mano: se edita el
+   JSON y se vuelve a generar.
+
+   Aquí solo hay PIEZAS. Cómo funciona el configurador es de la casa y
+   vive en `/assets/js/configurador-2026.js`, que se carga debajo.
+   ============================================================ */
+  var OPCIONES = {
+    "bisel": {
+      "NEG": {
+        "nombre": "Negro",
+        "color": "#1C1D1F"
+      },
+      "TUR": {
+        "nombre": "Turquesa",
+        "color": "#1F8A8A"
+      },
+      "NAR": {
+        "nombre": "Naranja",
+        "color": "#E4761E"
+      }
+    },
+    "cristal": {
+      "MIN": {
+        "nombre": "Mineral"
+      },
+      "ZAF": {
+        "nombre": "Zafiro"
+      }
+    },
+    "mov": {
+      "Q": {
+        "nombre": "Cuarzo japonés"
+      },
+      "A": {
+        "nombre": "Automático japonés"
+      }
+    }
+  };
+
+  /* Lo que viene puesto al abrir: la primera opción de cada paso. */
+  var e = {"bisel": "NEG", "cristal": "MIN", "mov": "Q"};
+
+  /* LA REFERENCIA la forman el código del modelo y lo elegido en cada
+     paso, en el orden del contrato. Es la que viaja al carrito y la que el
+     servidor comprueba, así que se arma siempre igual. */
+  var ORDEN = ["bisel", "cristal", "mov"];
+  function referencia(e) {
+    return 'TORTUG-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+  }
+  function nombreDe(k) {
+    var t = OPCIONES[k], o = t && t[e[k]];
+    return o ? o.nombre : '';
+  }
+  function descripcion(e) {
+    return 'laOra Tortuga, ' + ORDEN.map(nombreDe).filter(Boolean)
+      .join(', ').toLowerCase() + '.';
+  }
+  function dichoCompleto(e) { return descripcion(e); }
+  function detalle(e) {
+    return ORDEN.map(nombreDe).filter(Boolean).join(' · ');
+  }
+  function agua(e) { return ""; }
+
+  /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
+     técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
+     lo que decía antes: nada. */
+  function tecnica(e) {
+    return { caja: detalle(e) + '.', mov: nombreDe('mov'),
+             esf: nombreDe('esf'), agua: agua(e) };
+  }
+
+  window.LAORA_MODELO = {
+    slug: "tortuga", nombre: "Tortuga",
+    OPCIONES: OPCIONES, e: e,
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {},
+    MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
+    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
+       paquetes no hay coste, así que la ficha dice «Precio por definir» y
+       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
+    CAPA: {}, PILA: [], PAQUETES: [], COSTES_PUESTOS: false,
+    CADENA: ORDEN,
+    referencia: referencia, descripcion: descripcion,
+    dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
+    tecnica: tecnica
+  };
+</script>
+<!-- El motor de precio y el configurador, los mismos para los diez. -->
+<script src="/assets/js/precio-2026.js?v=1"></script>
+<script src="/assets/js/configurador-2026.js?v=1"></script>
 </body>
 </html>
