@@ -392,7 +392,7 @@
      juego entero cuesta menos que tres fotos y cubre TODAS las
      combinaciones: por eso se montan en el navegador y no se generan mil
      quinientas imágenes. */
-  .pv-capas{ position:absolute; inset:0; background:#e9e9e7 }
+  .pv-capas{ position:absolute; inset:0; background:#e9e9e7; overflow:hidden }
   .pv-capas[hidden]{ display:none }
   .pv-capas img{
     position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
@@ -414,6 +414,27 @@
      el blanco, porque `.pv-hero-llena` se queda sin fondo. */
   .pv-capas img{ transition:transform .4s cubic-bezier(.2,.6,.2,1) }
   .pv-capas-lejos img{ transform:scale(.72) }
+  /* ---------- LA CORREA LARGA (29/08/2026) ----------
+     Óscar, tras días detrás del efecto: «cuando la imagen está en primer
+     plano se ve una cantidad de correa, pero al alejarse se puede ver
+     mucha más, porque esa es la intención».
+
+     El aviso de arriba —«no hay más tira que sacar»— dejó de ser verdad
+     hoy: la correa del formato nuevo se publica en un lienzo ALTO
+     (4096 x 5688, que es 4096 ÷ 0,72). La capa se coloca por su CENTRO,
+     que trae el mismo descentrado del eje que el cuadrado: en primer
+     plano el marco la recorta y se ve la franja de siempre; al alejarse
+     al 72 % cabe entera, justa en el marco. Como todas las capas escalan
+     alrededor del centro del marco, la correa y la caja no se
+     desalinean ni un píxel durante el viaje.
+
+     La clase la pone el motor al cargar la imagen, mirando si es más
+     alta que ancha: una correa cuadrada de las de antes ni se entera. */
+  .pv-capas img.pv-capa-larga{
+    height:auto; top:50%; bottom:auto;
+    transform:translateY(-50%);
+  }
+  .pv-capas-lejos img.pv-capa-larga{ transform:translateY(-50%) scale(.72) }
   /* ⚠️ EL SELECTOR VA CON `.pv-hero img.` DELANTE. La hoja compartida trae
      `.pv-hero-llena img{width:100%;height:100%;object-fit:cover}`, que pesa
      más que una clase sola: con `.pv-mini-correa` a secas la miniatura

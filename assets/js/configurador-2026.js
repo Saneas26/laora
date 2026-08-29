@@ -634,6 +634,14 @@
     return puesta;
   }
 
+  function marcaLarga(img) {
+    function pon() {
+      img.classList.toggle('pv-capa-larga', img.naturalHeight > img.naturalWidth);
+    }
+    if (img.complete && img.naturalWidth) pon();
+    else img.onload = pon;
+  }
+
   function pintaCapas() {
     precargaCapas();
     var caja = $('[data-pv-capas]');
@@ -657,6 +665,11 @@
       var src = baseCapa(p.grupo) + f + '.avif' + SERIE_V;
       if (img.getAttribute('src') !== src) img.setAttribute('src', src);
       img.hidden = false;
+      /* LA CAPA LARGA se conoce por su forma, no por una lista: una pieza
+         más alta que ancha es una correa de lienzo alto y se coloca por su
+         centro (ver configurador-2026.css). Se mira al cargar porque hasta
+         entonces naturalHeight vale 0. */
+      marcaLarga(img);
       puestas[p.capa] = true;
     });
     /* El carrusel mueve el paso que se está tocando ahora mismo. Con la

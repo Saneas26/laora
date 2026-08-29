@@ -72,8 +72,20 @@ def publica(grupo, ident, origen):
     im = Image.open(origen)
     if im.mode != 'RGBA':
         im = im.convert('RGBA')
-    if im.size != (4096, 4096):
-        sys.exit('✗ %s no mide 4096x4096 sino %dx%d' % (origen, im.size[0], im.size[1]))
+    # ⚠️ UNA CORREA PUEDE SER MÁS ALTA QUE EL CUADRADO (29/08/2026). Óscar
+    # lleva días detrás de esto: «al alejarse se puede ver mucha más correa,
+    # porque esa es la intención». El visor se aleja al 72 %, así que el
+    # lienzo alto mide 4096 ÷ 0,72 = 5688: en primer plano se ve la franja
+    # del cuadrado y al alejarse cabe la tira entera, justa en el marco.
+    # El eje del reloj conserva su descentrado respecto del centro del
+    # lienzo (y = H/2 − 123,5) para que todas las capas escalen alrededor
+    # del mismo punto. Las demás piezas siguen siendo cuadradas.
+    ALTO_LARGO = 5688
+    if grupo == 'correas' and im.size == (4096, ALTO_LARGO):
+        pass
+    elif im.size != (4096, 4096):
+        sys.exit('✗ %s no mide 4096x4096 (ni 4096x%d si es correa) sino %dx%d'
+                 % (origen, ALTO_LARGO, im.size[0], im.size[1]))
     if im.getchannel('A').getextrema()[0] == 255:
         sys.exit('✗ %s no tiene transparencia: taparía a las piezas de debajo' % origen)
 
@@ -92,7 +104,8 @@ def publica(grupo, ident, origen):
 
     linea = '%-10s %-42s' % (grupo, ident)
     for t in TAMANOS:
-        chica = im.resize((t, t), Image.LANCZOS)
+        alto = round(im.size[1] * t / 4096.0)
+        chica = im.resize((t, alto), Image.LANCZOS)
         for q in CALIDADES:
             b = _io.BytesIO()
             chica.save(b, 'AVIF', quality=q)

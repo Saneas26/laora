@@ -100,12 +100,18 @@ def filas_de_asa(caja):
     return [(y, i, d) for y, i, d in out if y <= fin_arriba or y >= ini_abajo]
 
 
-def falta(correa, asas):
-    """Cuánto se queda corta la correa por cada lado, en píxeles."""
+def falta(correa, asas, alto_caja):
+    """Cuánto se queda corta la correa por cada lado, en píxeles.
+
+    UNA CORREA PUEDE VENIR EN LIENZO ALTO (4096x5688, ver
+    publicar_componente.py): entonces sus filas no son las de la caja.
+    El eje comparte descentrado en los dos lienzos, así que la fila
+    equivalente es la de la caja más la mitad de la diferencia de altos."""
+    desfase = (correa.shape[0] - alto_caja) // 2
     izq_max = der_max = 0
     filas_vacias = 0
     for y, izq, der in asas:
-        idx = np.where(correa[y])[0]
+        idx = np.where(correa[y + desfase])[0]
         if not len(idx):
             filas_vacias += 1
             continue
@@ -140,7 +146,7 @@ def main():
     print('-' * 82)
     for n in nombres:
         c = mascara(os.path.join(CORREAS, n + '.avif'))
-        i, d, v = falta(c, asas)
+        i, d, v = falta(c, asas, caja.shape[0])
         peor = max(i, d)
         marca = 'entra' if peor <= 0 and not v else ('SE VE EL FONDO: %d px' % peor)
         if v:

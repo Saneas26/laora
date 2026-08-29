@@ -112,6 +112,16 @@
           capa.src = src;
           capa.alt = '';
           capa.loading = 'lazy';
+          /* LA CORREA LARGA (29/08/2026): la del formato nuevo viene en un
+             lienzo más alto que ancho, para que la ficha pueda alejarse y
+             enseñar más tira. Aquí se coloca por su centro y la miniatura
+             la recorta: se ve lo mismo que en el primer plano de la ficha.
+             Sin esto, `object-fit:contain` la encogería y la correa
+             saldría enana debajo de su propia caja. */
+          function pon() {
+            capa.classList.toggle('ca-capa-larga', capa.naturalHeight > capa.naturalWidth);
+          }
+          if (capa.complete && capa.naturalWidth) pon(); else capa.onload = pon;
           monta.appendChild(capa);
         });
         /* El alt del conjunto va en el envoltorio: las capas sueltas no
