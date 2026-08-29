@@ -488,6 +488,79 @@
      tapando el redondeo. */
   .pv-hero{ border-radius:6px; overflow:hidden }
 
+  /* ---------- LA PANTALLA DE CRIBA (Óscar, 28/08/2026) ----------
+     «monta la pantalla curar sobre lunar?capas para que yo te diga cuáles
+     combinaciones no pueden ser».
+
+     ES OTRA COSA QUE EL PANEL DE `?curar` DE SIEMPRE. Aquel marca UNA
+     referencia entera cada vez —movimiento, esfera, bisel, agujas, caja,
+     cristal y correa—, y con 560 referencias eso es inservible: habría que
+     recorrerlas una a una. Lo que hay que cribar son las PAREJAS que se
+     dejaron libres, que son treinta de esfera y agujas y seis de esfera con
+     la caja de PVD. Así que la criba enseña las treinta y seis en una
+     rejilla, montadas con las mismas capas del configurador, y se marcan a
+     golpe de dedo.
+
+     Y SE ABRE DESDE `?capas`, con un botón discreto abajo a la izquierda,
+     porque es ahí donde él está mirando el reloj. */
+  .pv-criba-abre{
+    position:fixed; left:16px; bottom:16px; z-index:40;
+    font-family:'Nunito Sans', system-ui, sans-serif; font-size:13px;
+    padding:10px 14px; border-radius:6px; cursor:pointer;
+    border:1px solid rgba(18,20,20,.18); background:#fff; color:#121414;
+  }
+  .pv-criba-abre[hidden]{ display:none }
+  .pv-criba{
+    position:fixed; inset:0; z-index:50; overflow:auto;
+    background:#fff; padding:24px 24px 80px;
+    font-family:'Nunito Sans', system-ui, sans-serif; color:#121414;
+  }
+  .pv-criba[hidden]{ display:none }
+  .pv-criba h2{ font-size:20px; margin:0 0 4px }
+  .pv-criba h3{ font-size:15px; margin:26px 0 10px }
+  .pv-criba p{ margin:0 0 8px; font-size:13px; color:#61646A; max-width:60ch }
+  .pv-criba-cierra{
+    position:absolute; right:20px; top:20px;
+    font-size:13px; padding:9px 13px; border-radius:6px; cursor:pointer;
+    border:1px solid rgba(18,20,20,.18); background:#fff;
+  }
+  .pv-criba-rejilla{ display:grid; gap:10px; margin-top:8px }
+  .pv-criba-celda{
+    border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
+    padding:0; cursor:pointer; overflow:hidden; text-align:center;
+    font-family:inherit; font-size:11px; color:#393C41; line-height:1.3;
+  }
+  .pv-criba-celda span{ display:block; padding:5px 4px 7px }
+  /* LA MINIATURA SE MONTA CON LAS MISMAS CAPAS. Un cuadrado con las
+     imágenes superpuestas, igual que el visor grande pero pequeño: así lo
+     que se criba es exactamente lo que se va a ver. */
+  .pv-criba-foto{ position:relative; aspect-ratio:1/1; background:#e9e9e7 }
+  .pv-criba-foto img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  }
+  /* MARCADA = FUERA. Se tacha y se apaga, pero se sigue viendo: hay que
+     poder desmarcar de un vistazo lo que se marcó de más. */
+  .pv-criba-celda[aria-pressed="true"]{
+    border-color:#B3261E; background:#FBE9E7;
+  }
+  .pv-criba-celda[aria-pressed="true"] .pv-criba-foto{ opacity:.28 }
+  .pv-criba-celda[aria-pressed="true"] span{ color:#B3261E; text-decoration:line-through }
+  .pv-criba-texto{
+    width:100%; margin-top:10px; font-family:var(--cv2-mono, monospace);
+    font-size:12px; padding:10px; border:1px solid var(--cv2-linea);
+    border-radius:6px; background:#fafafa;
+  }
+  .pv-criba-pie{
+    position:fixed; left:0; right:0; bottom:0; z-index:51;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    padding:12px 24px; background:#fff; border-top:1px solid var(--cv2-linea);
+  }
+  .pv-criba-pie button{
+    font-size:13px; padding:10px 14px; border-radius:6px; cursor:pointer;
+    border:1px solid rgba(18,20,20,.18); background:#fff;
+  }
+  .pv-criba-pie b{ font-size:13px }
+
   .pv-oculto{
     position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
     white-space:nowrap;
@@ -782,6 +855,11 @@
 
 </main>
 
+<!-- LA CRIBA. Vacía hasta que se abre; el botón sólo sale con `?capas`. -->
+<button type="button" class="pv-criba-abre" data-pv-criba-abre hidden>Criba</button>
+<div class="pv-criba" data-pv-criba hidden></div>
+<div class="pv-criba-pie" data-pv-criba-pie hidden></div>
+
 <footer>
   <a class="cb-marca" href="/coleccion.html" aria-label="laOra, a la colección">la<span class="o"></span>ra<sup>®</sup></a>
   <p class="pie-aviso">
@@ -1045,7 +1123,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=18';
+  var SERIE_V = '?v=19';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1343,11 +1421,25 @@
      cambios son instantáneos. */
   /* El fichero de una opción: o es un nombre, o es una tabla con una copia
      por esfera y `'*'` de comodín. */
-  function ficheroCapa(grupo, valor) {
+  function ficheroCapa(grupo, valor, esf) {
     var v = CAPA[grupo] && CAPA[grupo][valor];
     if (!v) return null;
     if (typeof v === 'string') return v;
-    return v[e.esf] || v['*'] || null;
+    /* `esf` se pasa a mano desde la pantalla de criba, que dibuja parejas
+       que no son la que está puesta. */
+    return v[esf || e.esf] || v['*'] || null;
+  }
+  function urlCapa(grupo, valor, esf) {
+    var f = ficheroCapa(grupo, valor, esf);
+    return f ? CAPA_IMG + f + '.avif' + SERIE_V : null;
+  }
+  /* El bisel con el que el proveedor monta cada esfera: el del primer
+     paquete que la lleve. Lo usa la criba para que cada miniatura salga con
+     su bisel y no con uno cualquiera. */
+  function biselDe(esf) {
+    for (var i = 0; i < PAQUETES.length; i++)
+      if (PAQUETES[i].esf === esf) return PAQUETES[i].bisel;
+    return 'NEG';
   }
   function cadaFicheroCapa(hazlo) {
     for (var g in CAPA) for (var k in CAPA[g]) {
@@ -1397,6 +1489,8 @@
     var caja = $('[data-pv-capas]');
     if (!caja) return;
     caja.hidden = !CAPAS;
+    var abre = $('[data-pv-criba-abre]');
+    if (abre) abre.hidden = !CAPAS;
     if (!CAPAS) return;
     var puestas = {};
     PILA.forEach(function (p) {
@@ -1929,9 +2023,16 @@
     }
     botones('mov', deTabla(MOVS), e.mov);
     botones('bisel', soloDe(BISELES, 'bisel', {}), e.bisel);
-    botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }), e.esf);
-    /* Los cinco acabados, siempre. */
-    botones('agujas', deTabla(AGUJAS), e.agujas);
+    botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }).map(function (o) {
+      /* Con la caja de PVD, las esferas cribadas para el PVD se apagan. */
+      if (cribado('CE', e.caja, o[0])) { o[2] = false; o[3] = true; }
+      return o;
+    }), e.esf);
+    /* Los cinco acabados, siempre; los cribados, dibujados pero apagados. */
+    botones('agujas', deTabla(AGUJAS).map(function (o) {
+      o[3] = cribado('EA', e.esf, o[0]);
+      return o;
+    }), e.agujas);
     /* La caja y el cristal se dibujan ENTEROS, con lo que no tiene paquete
        apagado: así se ve que existe el PVD y los dos zafiros antirreflejos
        aunque todavía no se puedan comprar (Óscar, 28/08/2026). */
@@ -2022,6 +2123,122 @@
        configurado y el resumen de arriba dice lo que llevas puesto. Esconder
        la elección de partida dejaría la tarjeta diciendo un nombre que
        ningún botón confirma. */
+  }
+
+  /* ============================================================
+     LA PANTALLA DE CRIBA  ·  botón en `?capas`
+     ------------------------------------------------------------
+     Óscar, 28/08/2026: «monta la pantalla curar sobre lunar?capas para que
+     yo te diga cuáles combinaciones no pueden ser».
+
+     QUÉ SE CRIBA. Sólo lo que se dejó libre y nadie ha revisado:
+
+       · ESFERA × AGUJAS, treinta parejas. Las agujas se liberaron el 28/08
+         y salen las cinco con cualquier esfera.
+       · CAJA DE PVD × ESFERA, seis. La hoja de compra dice que con el PVD
+         la esfera está «por decidir», así que están las seis puestas.
+
+     Lo demás no se criba porque no es libre: el bisel de cada esfera lo
+     manda la tabla de paquetes, y las correas van con todo.
+
+     LO MARCADO NO SE BORRA, SE APAGA. Las parejas cribadas salen en el
+     configurador dibujadas pero sin poder pulsarse, igual que el PVD antes
+     de tener precio: así se ve el efecto sin perder de vista lo que se
+     quitó. Y vive en este navegador —localStorage—; para que desaparezca
+     para todo el mundo hay que pasarme la lista y escribirla en la ficha.
+     ============================================================ */
+  var CRIBA = {};
+  try {
+    if (window.localStorage)
+      CRIBA = JSON.parse(window.localStorage.getItem('laora.lunar.criba') || '{}') || {};
+  } catch (x) { CRIBA = {}; }
+  function guardaCriba() {
+    try {
+      if (window.localStorage)
+        window.localStorage.setItem('laora.lunar.criba', JSON.stringify(CRIBA));
+    } catch (x) {}
+  }
+  function clave(tipo, a, b) { return tipo + ':' + a + '|' + b; }
+  function cribado(tipo, a, b) { return !!CRIBA[clave(tipo, a, b)]; }
+
+  var CRIBA_ABIERTA = false;
+  function dibujaCriba() {
+    var caja = $('[data-pv-criba]');
+    if (!caja) return;
+    caja.hidden = !CRIBA_ABIERTA;
+    if (!CRIBA_ABIERTA) return;
+
+    function celda(tipo, a, b, capas, rotulo) {
+      return '<button type="button" class="pv-criba-celda" data-criba="' +
+             clave(tipo, a, b) + '" aria-pressed="' + cribado(tipo, a, b) + '">' +
+             '<span class="pv-criba-foto">' +
+               capas.map(function (u) {
+                 return u ? '<img src="' + u + '" alt="" loading="lazy">' : '';
+               }).join('') +
+             '</span><span>' + rotulo + '</span></button>';
+    }
+
+    var esferas = Object.keys(ESFERAS), agujas = Object.keys(AGUJAS);
+    var html =
+      '<button type="button" class="pv-criba-cierra" data-criba-cierra>Cerrar</button>' +
+      '<h2>Criba del Lunar</h2>' +
+      '<p>Marca lo que <b>no puede ser</b>. Lo marcado se queda a la vista, ' +
+      'apagado en el configurador, y sigue aquí hasta que lo desmarques. ' +
+      'Cuando termines, cópiame la lista de abajo.</p>';
+
+    html += '<h3>Esfera y agujas · ' + (esferas.length * agujas.length) + ' parejas</h3>' +
+            '<p>Las agujas salen libres con cualquier esfera desde que lo pediste. ' +
+            'Cada miniatura va con el bisel que el proveedor le monta a esa esfera.</p>' +
+            '<div class="pv-criba-rejilla" style="grid-template-columns:repeat(' +
+            agujas.length + ',minmax(96px,1fr))">';
+    esferas.forEach(function (ek) {
+      var bi = biselDe(ek);
+      agujas.forEach(function (ak) {
+        html += celda('EA', ek, ak, [
+          urlCapa('caja', 'PL'), urlCapa('bisel', bi),
+          urlCapa('esf', ek), urlCapa('agujas', ak, ek)
+        ], ESFERAS[ek].nombre + ' · ' + AGUJAS[ak].nombre);
+      });
+    });
+    html += '</div>';
+
+    html += '<h3>Caja de PVD y esfera · ' + esferas.length + '</h3>' +
+            '<p>La hoja de compra deja la esfera del PVD «por decidir», así que ' +
+            'están las seis puestas.</p>' +
+            '<div class="pv-criba-rejilla" style="grid-template-columns:repeat(' +
+            esferas.length + ',minmax(96px,1fr))">';
+    esferas.forEach(function (ek) {
+      html += celda('CE', 'NG', ek, [
+        urlCapa('caja', 'NG'), urlCapa('bisel', 'NEG'),
+        urlCapa('esf', ek), urlCapa('agujas', 'BLA', ek)
+      ], 'PVD · ' + ESFERAS[ek].nombre);
+    });
+    html += '</div>';
+
+    var lista = listaCriba();
+    html += '<h3>Para pasármelo</h3>' +
+            '<textarea class="pv-criba-texto" readonly rows="6" ' +
+            'onclick="this.select()">' + (lista || 'Nada marcado todavía.') + '</textarea>';
+    caja.innerHTML = html;
+
+    var pie = $('[data-pv-criba-pie]');
+    if (pie) {
+      pie.hidden = false;
+      pie.innerHTML =
+        '<b>' + Object.keys(CRIBA).length + ' marcadas</b>' +
+        '<button type="button" data-criba-copia>Copiar la lista</button>' +
+        '<button type="button" data-criba-vacia>Desmarcar todas</button>' +
+        '<button type="button" data-criba-cierra>Cerrar</button>' +
+        '<span class="pv-curar-ok" data-criba-ok hidden>copiado</span>';
+    }
+  }
+  function listaCriba() {
+    return Object.keys(CRIBA).sort().map(function (k) {
+      var t = k.slice(0, 2), p = k.slice(3).split('|');
+      if (t === 'EA') return 'esfera ' + ESFERAS[p[0]].nombre + ' + agujas ' +
+                             AGUJAS[p[1]].nombre + '   (' + k + ')';
+      return 'caja PVD + esfera ' + ESFERAS[p[1]].nombre + '   (' + k + ')';
+    }).join('\n');
   }
 
   /* ---------- EL PANEL DE CURAR ---------- */
@@ -2192,6 +2409,31 @@
   document.addEventListener('click', function (ev) {
     var fl = ev.target.closest('[data-carrusel]');
     if (fl) { gira(Number(fl.dataset.carrusel)); }
+
+    if (ev.target.closest('[data-pv-criba-abre]')) {
+      CRIBA_ABIERTA = true; dibujaCriba(); return;
+    }
+    if (ev.target.closest('[data-criba-cierra]')) {
+      CRIBA_ABIERTA = false; dibujaCriba();
+      var pie = $('[data-pv-criba-pie]'); if (pie) pie.hidden = true;
+      pinta(); return;
+    }
+    var c = ev.target.closest('[data-criba]');
+    if (c) {
+      var k = c.dataset.criba;
+      if (CRIBA[k]) delete CRIBA[k]; else CRIBA[k] = 1;
+      guardaCriba(); dibujaCriba(); return;
+    }
+    if (ev.target.closest('[data-criba-vacia]')) {
+      CRIBA = {}; guardaCriba(); dibujaCriba(); return;
+    }
+    if (ev.target.closest('[data-criba-copia]')) {
+      var ta = $('.pv-criba-texto'), ok = $('[data-criba-ok]'), hecho = false;
+      if (ta) { ta.select(); try { hecho = document.execCommand('copy'); } catch (err) {} }
+      if (!hecho) { try { navigator.clipboard.writeText(listaCriba()); hecho = true; } catch (err) {} }
+      if (ok) { ok.textContent = hecho ? 'copiado' : 'no he podido: selecciónalo tú'; ok.hidden = false; }
+      return;
+    }
   });
   document.addEventListener('change', function (ev) {
     /* `pinta()` y no sólo `modoDeCompra()`: desde que el precio grande
