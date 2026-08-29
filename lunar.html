@@ -791,12 +791,12 @@
              sizes="(max-width: 900px) 100vw, 620px"
              fetchpriority="high" decoding="async" width="1200" height="1200"
              alt="Hazlo tuyo: el laOra Lunar con brazalete de acero sobre un suelo lunar, con un astronauta y un cohete al fondo">
-        <img data-pv-foto alt="laOra Lunar" hidden>
-        <div class="pv-sinfoto" data-pv-sinfoto>
-          <p>Fotografía en preparación</p>
-          <span>El Lunar se está rehaciendo entero. Aquí no se enseña ninguna imagen hasta que sea la del reloj elegido.</span>
-        </div>
-        <button type="button" class="pv-ampliar" data-pv-ampliar hidden>Ampliar</button>
+        <!-- ⛔ AQUÍ ESTABAN la foto de la combinación entera, el cartel de
+             «fotografía en preparación» y el botón de ampliar. Los tres eran
+             del mundo de una foto por reloj, que se acabó el 29/08/2026: el
+             visor solo tiene dos estados, la presentación mientras nadie ha
+             elegido nada y el reloj armado con sus piezas en cuanto se elige
+             la primera. -->
         <!-- LAS MINIATURAS DE LA CORREA (Óscar, 28/08/2026): «en la parte
              inferior izquierda colocas una miniatura». Es la foto del
              proveedor, la correa suelta y entera, que es lo que el montaje
@@ -1200,151 +1200,125 @@
      https://es.aliexpress.com/item/1005008055142978.html). Venía de 12,99.
      Sigue siendo MÁS BARATO que el brazalete de 19,79, así que con correa
      el Lunar baja un escalón, y ahora dos. */
+  /* ---------- LAS CORREAS, DE LA BIBLIOTECA DE COMPONENTES ----------
+     Óscar, 29/08/2026: «las mismas correas para el Lunar me servirán para
+     el Trinchera, para el Cero Cero, etc., así será mucho menos material e
+     intercambiables; ahora será piel vaca italiana negra, y no un solo
+     modelo con toda la referencia para colocar una foto».
+
+     Las imágenes ya no viven en la carpeta del Lunar: viven en
+     `assets/img/componentes/correas/` con el nombre de LA PIEZA, y de ahí
+     las coge cualquier modelo. Aquí solo se dice cuáles monta el Lunar,
+     cuánto cuestan y cómo se llaman de cara al cliente.
+
+     `pieza` es el nombre en la biblioteca. El código corto de la izquierda
+     es lo que viaja en la referencia. */
   var CORREAS = {
-    ACERO: { nombre: 'Brazalete de acero', coste: 19.79,
-             tec: 'brazalete de acero inoxidable 316L con cierre desplegable' },
-    /* EL BRAZALETE PVD SALE DE UNA RESTA (Óscar, 28/08/2026: «la caja sola
-       vale 28,39»). El pack de PVD son 48,99 con caja, bisel y brazalete;
-       quitando la caja quedan 20,60 de brazalete. Cuadra: es ochenta
-       céntimos más que el de acero, que es lo que se espera de la misma
-       pieza con un recubrimiento encima. */
-    ACERONG: { nombre: 'Brazalete PVD negro', coste: 20.60,
-               tec: 'brazalete de acero inoxidable 316L con PVD negro y ' +
-                    'cierre desplegable' },
-    /* LOS CUATRO DE TRES ESLABONES CON EL CENTRO PULIDO (Óscar,
-       29/08/2026): «brazaletes de acero 316L con diferentes acabados (…) con
-       cierre desplegable tipo Oyster (…) a 20,19 € de coste».
+    /* --- Acero 316L · ocho brazaletes ---
+       Cuatro con el eslabón central SATINADO como el resto, y cuatro con el
+       central PULIDO. En cada familia: acero, PVD negro, centro en oro rosa
+       y centro en oro amarillo. */
+    A316S:   { nombre: 'Acero satinado', coste: 19.79, pieza: 'acero-316l-satinado',
+               tec: 'brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable' },
+    A316NGS: { nombre: 'PVD negro satinado', coste: 20.60, pieza: 'acero-316l-pvd-negro-satinado',
+               tec: 'brazalete de acero inoxidable 316L con PVD negro, satinado, con cierre desplegable' },
+    A316ORS: { nombre: 'Centro oro rosa satinado', coste: null, pieza: 'acero-316l-centro-oro-rosa-satinado',
+               tec: 'brazalete de acero inoxidable 316L con el eslabón central en oro rosa satinado' },
+    A316AMS: { nombre: 'Centro oro amarillo satinado', coste: null, pieza: 'acero-316l-centro-oro-amarillo-satinado',
+               tec: 'brazalete de acero inoxidable 316L con el eslabón central en oro amarillo satinado' },
+    A316P:   { nombre: 'Acero, centro pulido', coste: 20.19, pieza: 'acero-316l-centro-pulido',
+               tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el central pulido y cierre desplegable con seguro abatible' },
+    A316NGP: { nombre: 'PVD negro, centro pulido', coste: 20.19, pieza: 'acero-316l-pvd-negro-centro-pulido',
+               tec: 'brazalete de acero inoxidable 316L con PVD negro, con el eslabón central pulido' },
+    A316ORP: { nombre: 'Centro oro rosa pulido', coste: 20.19, pieza: 'acero-316l-centro-oro-rosa-pulido',
+               tec: 'brazalete de acero inoxidable 316L con el eslabón central pulido en oro rosa' },
+    A316AMP: { nombre: 'Centro oro amarillo pulido', coste: 20.19, pieza: 'acero-316l-centro-oro-amarillo-pulido',
+               tec: 'brazalete de acero inoxidable 316L con el eslabón central pulido en oro amarillo' },
 
-       NO SUSTITUYEN A LOS DOS DE ARRIBA, se suman. Los seis son de tres
-       eslabones; lo que cambia es el centro: el 14 y el 24 lo llevan
-       satinado como el resto del brazalete, y estos cuatro lo llevan
-       PULIDO, en acero, en PVD, en oro rosa o en oro amarillo. Puestos uno
-       al lado del otro se distinguen a la primera.
+    /* --- Caucho · diez colores ---
+       Los cinco primeros son los del anuncio 1005008055142978, a 9,89. Los
+       cinco de abajo llegaron el 29/08 y todavía no tienen precio de
+       compra. */
+    CAZU: { nombre: 'Azul', coste: 9.89, pieza: 'caucho-azul', tec: 'correa de caucho azul' },
+    CAZN: { nombre: 'Azul y naranja', coste: 9.89, pieza: 'caucho-azul-naranja', tec: 'correa de caucho azul con naranja' },
+    CMAC: { nombre: 'Marrón y crema', coste: 9.89, pieza: 'caucho-marron-crema', tec: 'correa de caucho marrón con crema' },
+    CNVF: { nombre: 'Negra y verde flúor', coste: 9.89, pieza: 'caucho-negra-verde-fluor', tec: 'correa de caucho negra con verde flúor' },
+    CBLA: { nombre: 'Blanca', coste: 9.89, pieza: 'caucho-blanca', tec: 'correa de caucho blanca' },
+    CNBL: { nombre: 'Negra y blanca', coste: null, pieza: 'caucho-negra-blanca', tec: 'correa de caucho negra con blanco' },
+    CBOR: { nombre: 'Blanca y oro rosa', coste: null, pieza: 'caucho-blanca-oro-rosa', tec: 'correa de caucho blanca con oro rosa' },
+    CNGR: { nombre: 'Negra y gris', coste: null, pieza: 'caucho-negra-gris', tec: 'correa de caucho negra con gris' },
+    CAZC: { nombre: 'Azul celeste', coste: null, pieza: 'caucho-azul-celeste', tec: 'correa de caucho azul celeste' },
+    CBGR: { nombre: 'Blanca y gris', coste: null, pieza: 'caucho-blanca-gris', tec: 'correa de caucho blanca con gris' },
 
-       EL DE ORO ROSA ES EL QUE LE INTERESA para la esfera de oro rosa
-       —lo dijo con esas palabras—, así que si algún día hay que cribar
-       brazaletes, ese no se toca.
+    /* --- Piel perforada · cuatro colores por dos pespuntes ---
+       ⚠️ EL COSTE DE 6,69 ES EL QUE ÓSCAR DIO PARA ESTA PIEL cuando eran
+       cuatro correas. Ahora cada color viene con el pespunte al tono y con
+       el pespunte blanco: es la misma piel del mismo proveedor, así que se
+       mantiene el precio. Si el pespunte blanco se cobra aparte, esto hay
+       que corregirlo. */
+    PCAQT: { nombre: 'Caqui oliva, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-caqui-oliva-pespunte-al-tono', tec: 'correa de piel perforada caqui oliva con pespunte al tono' },
+    PCAQB: { nombre: 'Caqui oliva, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-caqui-oliva-pespunte-blanco', tec: 'correa de piel perforada caqui oliva con pespunte blanco' },
+    PCONT: { nombre: 'Coñac y naranja, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-conac-naranja-pespunte-al-tono', tec: 'correa de piel perforada coñac y naranja con pespunte al tono' },
+    PCONB: { nombre: 'Coñac y naranja, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-conac-naranja-pespunte-blanco', tec: 'correa de piel perforada coñac y naranja con pespunte blanco' },
+    PMART: { nombre: 'Marrón, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-marron-pespunte-al-tono', tec: 'correa de piel perforada marrón con pespunte al tono' },
+    PMARB: { nombre: 'Marrón, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-marron-pespunte-blanco', tec: 'correa de piel perforada marrón con pespunte blanco' },
+    PNEGT: { nombre: 'Negra, pespunte al tono', coste: 6.69, pieza: 'piel-perforada-negra-pespunte-al-tono', tec: 'correa de piel perforada negra con pespunte al tono' },
+    PNEGB: { nombre: 'Negra, pespunte blanco', coste: 6.69, pieza: 'piel-perforada-negra-pespunte-blanco', tec: 'correa de piel perforada negra con pespunte blanco' },
 
-       ⚠️ EL CIERRE, SIN NOMBRE AJENO. Él los describe «tipo Oyster», que es
-       marca registrada de otra casa y no se escribe en la web
-       ([[laora-calibres-sin-fabricante]] vale igual para los cierres). En
-       el texto del cliente van como desplegable con seguro abatible, que es
-       lo que son. */
-    ACE3: { nombre: 'Brazalete acero, centro pulido', coste: 20.19,
-            tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el ' +
-                 'central pulido y cierre desplegable con seguro abatible' },
-    NEG3: { nombre: 'Brazalete PVD negro, centro pulido', coste: 20.19,
-            tec: 'brazalete de acero inoxidable 316L con PVD negro, de tres ' +
-                 'eslabones, con el central pulido y cierre desplegable con ' +
-                 'seguro abatible' },
-    ORO3: { nombre: 'Brazalete acero, centro oro rosa', coste: 20.19,
-            tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el ' +
-                 'central pulido en oro rosa y cierre desplegable con seguro ' +
-                 'abatible' },
-    AMA3: { nombre: 'Brazalete acero, centro oro amarillo', coste: 20.19,
-            tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el ' +
-                 'central pulido en oro amarillo y cierre desplegable con ' +
-                 'seguro abatible' },
-    CAZU: { nombre: 'Caucho azul', coste: 9.89,
-            tec: 'correa de caucho azul' },
-    CAZN: { nombre: 'Caucho azul y naranja', coste: 9.89,
-            tec: 'correa de caucho azul con naranja' },
-    CMAC: { nombre: 'Caucho marrón y crema', coste: 9.89,
-            tec: 'correa de caucho marrón con crema' },
-    CNVF: { nombre: 'Caucho negro y verde flúor', coste: 9.89,
-            tec: 'correa de caucho negra con verde flúor' },
-    CBLA: { nombre: 'Caucho blanco', coste: 9.89,
-            tec: 'correa de caucho blanca' },
-    /* LAS CINCO DE TELA VAQUERA (Óscar, 29/08/2026). Llegaron con su
-       ficha de datos —`book.json`— y es la primera correa que viene así:
-       20 mm de ancho, 18 en el cierre, 2,8 de grosor, 75 y 125 de largo,
-       trama diagonal por fuera, CUERO COÑAC POR DENTRO y desplegable de
-       acero pulido. Todo eso sale de ahí, no me lo invento.
+    /* --- Piel italiana hecha a mano · cuatro colores por dos pespuntes --- */
+    IMART: { nombre: 'Marrón, pespunte al tono', coste: null, pieza: 'piel-italiana-marron-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, marrón, con pespunte al tono' },
+    IMARB: { nombre: 'Marrón, pespunte blanco', coste: null, pieza: 'piel-italiana-marron-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, marrón, con pespunte blanco' },
+    INEGT: { nombre: 'Negra, pespunte al tono', coste: null, pieza: 'piel-italiana-negra-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, negra, con pespunte al tono' },
+    INEGB: { nombre: 'Negra, pespunte blanco', coste: null, pieza: 'piel-italiana-negra-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, negra, con pespunte blanco' },
+    IVERT: { nombre: 'Verde, pespunte al tono', coste: null, pieza: 'piel-italiana-verde-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, verde, con pespunte al tono' },
+    IVERB: { nombre: 'Verde, pespunte blanco', coste: null, pieza: 'piel-italiana-verde-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, verde, con pespunte blanco' },
+    IAZUT: { nombre: 'Azul, pespunte al tono', coste: null, pieza: 'piel-italiana-azul-pespunte-al-tono', tec: 'correa de piel italiana hecha a mano, azul, con pespunte al tono' },
+    IAZUB: { nombre: 'Azul, pespunte blanco', coste: null, pieza: 'piel-italiana-azul-pespunte-blanco', tec: 'correa de piel italiana hecha a mano, azul, con pespunte blanco' },
 
-       ⚠️ SIN COSTE DE COMPRA TODAVÍA: la ficha de datos trae las medidas y
-       los materiales, pero no el precio. Se eligen y se ven montadas, y el
-       precio dice «por definir» y no se venden — igual que le pasó al PVD y
-       a la piel hasta que él dio los números. */
-    VBEI: { nombre: 'Vaquera beige', coste: null,
-            tec: 'correa de tela vaquera de trama diagonal, beige, forrada en ' +
-                 'cuero coñac' },
-    VMAL: { nombre: 'Vaquera malva', coste: null,
-            tec: 'correa de tela vaquera de trama diagonal, malva, forrada en ' +
-                 'cuero coñac' },
-    VNEG: { nombre: 'Vaquera negra', coste: null,
-            tec: 'correa de tela vaquera de trama diagonal, negra, forrada en ' +
-                 'cuero coñac' },
-    VGRI: { nombre: 'Vaquera gris', coste: null,
-            tec: 'correa de tela vaquera de trama diagonal, gris, forrada en ' +
-                 'cuero coñac' },
-    VAZU: { nombre: 'Vaquera azul claro', coste: null,
-            tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada ' +
-                 'en cuero coñac' },
-    /* LAS CUATRO DE PIEL PERFORADA (Óscar, 29/08/2026), con su hebilla
-       incluida como todas.
-
-       ⚠️ NO SE LLAMAN «RALLY». Se escribieron así un rato, por parecido con
-       la esfera Rally, y Óscar lo cortó en seco esa misma tarde: «no existe
-       piel rally». La familia se llama PIEL PERFORADA y punto.
-
-       6,69 LA MÁS BARATA DE LAS TRES (Óscar, 29/08/2026). Se queda por
-       debajo del caucho —9,89— y a un tercio del brazalete, así que con
-       piel el Lunar baja otro escalón: es la combinación más barata que
-       hay. Que la piel salga más barata que el caucho suena raro y no lo
-       es: la de caucho lleva hebilla de acero maciza y molde propio, y
-       estas son piel cosida con una hebilla fina. */
-    PCAQ: { nombre: 'Piel caqui oliva', coste: 6.69,
-            tec: 'correa de piel perforada, caqui oliva' },
-    PCON: { nombre: 'Piel coñac y naranja', coste: 6.69,
-            tec: 'correa de piel perforada, coñac con naranja' },
-    PMAR: { nombre: 'Piel marrón', coste: 6.69,
-            tec: 'correa de piel perforada, marrón' },
-    PNEG: { nombre: 'Piel negra', coste: 6.69,
-            tec: 'correa de piel perforada, negra' }
+    /* --- Tela vaquera · cinco colores ---
+       20 mm de ancho, 18 en el cierre, 2,8 de grosor, trama diagonal por
+       fuera y cuero coñac por dentro. Sale de su ficha de datos. */
+    VBEI: { nombre: 'Beige', coste: null, pieza: 'vaquera-beige', tec: 'correa de tela vaquera de trama diagonal, beige, forrada en cuero coñac' },
+    VMAL: { nombre: 'Malva', coste: null, pieza: 'vaquera-malva', tec: 'correa de tela vaquera de trama diagonal, malva, forrada en cuero coñac' },
+    VNEG: { nombre: 'Negra', coste: null, pieza: 'vaquera-negra', tec: 'correa de tela vaquera de trama diagonal, negra, forrada en cuero coñac' },
+    VGRI: { nombre: 'Gris', coste: null, pieza: 'vaquera-gris', tec: 'correa de tela vaquera de trama diagonal, gris, forrada en cuero coñac' },
+    VAZU: { nombre: 'Azul claro', coste: null, pieza: 'vaquera-azul-claro', tec: 'correa de tela vaquera de trama diagonal, azul claro, forrada en cuero coñac' }
   };
 
   /* LA CORREA, EN DOS PASOS: material y color, como Tesla parte el
      exterior en color y llantas. El estado sigue siendo uno solo —`e.correa`—
      y el material se deduce de él; elegir material salta a la primera correa
      de ese material. */
-  var CORREA_MAT = { ACERO: 'ACERO', ACERONG: 'ACERO',
-                     ACE3: 'ACERO', NEG3: 'ACERO',
-                     ORO3: 'ACERO', AMA3: 'ACERO',
-                     CAZU: 'CAUCHO', CAZN: 'CAUCHO',
-                     CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
-                     VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA',
-                     VGRI: 'TELA', VAZU: 'TELA',
-                     PCAQ: 'PIEL', PCON: 'PIEL', PMAR: 'PIEL', PNEG: 'PIEL' };
-  /* ⚠️ LAS FAMILIAS DE CORREA LAS FIJÓ ÓSCAR (29/08/2026) Y SON ONCE.
-     No se inventa ninguna ni se le cambia el nombre a ninguna:
-
-         Piel vaca · Piel italiana hecha a mano · Piel perforada ·
-         Piel sintética · Tela vaquera · Acero 316L · Acero 904L ·
-         Caucho · Goma · Nato · Naylon
-
-     Aquí abajo sólo están las que YA tienen correas montadas; las demás
-     entran cuando lleguen sus capas. El paso del material enseña sólo las
-     que tienen algo que enseñar, así que una familia vacía no molesta.
-
-     `ACERO` se llama «Acero 316L» —no «Acero» a secas— porque el 904L es
-     otra familia de la lista y el día que llegue tienen que distinguirse
-     sin tocar nada. */
+  /* De qué familia es cada correa. Las familias son las once de la casa
+     ([[laora-familias-de-correa]]); aquí solo salen las que el Lunar monta
+     hoy, y el paso del material enseña solo esas. */
+  var CORREA_MAT = {
+    A316S: 'A316', A316NGS: 'A316', A316ORS: 'A316', A316AMS: 'A316',
+    A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
+    CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
+    CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
+    PCAQT: 'PPER', PCAQB: 'PPER', PCONT: 'PPER', PCONB: 'PPER',
+    PMART: 'PPER', PMARB: 'PPER', PNEGT: 'PPER', PNEGB: 'PPER',
+    IMART: 'PITA', IMARB: 'PITA', INEGT: 'PITA', INEGB: 'PITA',
+    IVERT: 'PITA', IVERB: 'PITA', IAZUT: 'PITA', IAZUB: 'PITA',
+    VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA', VGRI: 'TELA', VAZU: 'TELA'
+  };
   var MATERIALES = {
-    ACERO:  { nombre: 'Acero 316L',
-              expl: 'Brazalete de acero inoxidable 316L con cierre desplegable.' },
+    A316:   { nombre: 'Acero 316L',
+              expl: 'Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable.' },
     CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
                                       'el único que se puede mojar sin pensarlo.' },
-    PIEL:   { nombre: 'Piel perforada',
+    PPER:   { nombre: 'Piel perforada',
               expl: 'Piel perforada, la de siempre para un cronógrafo. Se ablanda ' +
                     'con el uso, pero no se moja.' },
-    /* Las medidas salen de la ficha de datos que vino con las fotos, no de
-       una suposición: 20 mm de ancho, 18 en el cierre y 2,8 de grosor. */
+    PITA:   { nombre: 'Piel italiana',
+              expl: 'Piel italiana hecha a mano, de vestir. Cada color con el ' +
+                    'pespunte al tono o en blanco.' },
     TELA:   { nombre: 'Tela vaquera',
               expl: 'Tela vaquera de trama diagonal por fuera y cuero coñac por ' +
-                    'dentro, con cierre desplegable. 2,8 mm de grosor: la más ' +
-                    'fina de las cuatro.' }
+                    'dentro, con cierre desplegable. 2,8 mm de grosor: la más fina.' }
   };
-  function matDe(c) { return CORREA_MAT[c] || 'ACERO'; }
+  function matDe(c) { return CORREA_MAT[c] || 'A316'; }
   function primeraDe(mat) {
     var k = Object.keys(CORREAS).filter(function (c) { return matDe(c) === mat; });
     return k[0];
@@ -1399,32 +1373,13 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=30';
-  var SERIE_IMG = '/assets/img/lunar-2026/serie/';
-  var SERIE = {
-    'acero-negra-bnegro-blancas-brazalete': 1,
-    'acero-negra-bnegro-blancas-cauchoazul': 1,
-    'acero-negra-bnegro-blancas-cauchoazunar': 1,
-    'acero-negra-bnegro-blancas-cauchomarcre': 1,
-    'acero-negra-bnegro-blancas-cauchonegverde': 1,
-    'acero-negra-bnegro-blancas-cauchoblanco': 1,
-    'acero-negra-bnegro-naranja-brazalete': 1,
-    'acero-blanca-bazul-azules-brazalete': 1,
-    'acero-ororosa-bnegro-ororosa-brazalete': 1,
-    'acero-ororosa-bnegro-ororosa-cauchoblanco': 1,
-    'acero-ororosa-bnegro-ororosa-cauchomarcre': 1,
-    'acero-blanca-bazul-azules-cauchoblanco': 1,
-    'acero-blanca-bazul-azules-cauchoazul': 1,
-    'acero-blanca-bazul-azules-cauchomarcre': 1,
-    /* ⚠️ LA PANDA CON AGUJAS NARANJAS TODAVÍA NO SE PUEDE ELEGIR. Óscar
-       (28/08/2026): «esta es un panda con agujas naranja». La foto está
-       publicada y la clave dada de alta, pero en PAQUETES la panda sólo
-       existe con BISEL BLANCO y AGUJAS BLANCAS —así la vende el proveedor
-       según la hoja de compra—, y ésta lleva bisel negro y agujas naranjas.
-       En cuanto se sepa que se puede comprar así y a cuánto, se añade el
-       paquete y la foto sale sola. */
-    'acero-panda-bnegro-naranja-brazalete': 1
-  };
+  var SERIE_V = '?v=31';
+  /* ⛔ AQUÍ VIVÍA `SERIE`: una foto por combinación entera, con la clave
+     hecha de caja+esfera+bisel+agujas+correa. Se ha ido el 29/08/2026 por
+     orden de Óscar —«no quiero que se guarde nada de fotos y combinaciones
+     anteriores de ningún modelo, todo desde cero»—, y porque es justo lo
+     contrario de montar por piezas: una foto por combinación son miles de
+     imágenes para enseñar las mismas cinco piezas barajadas. */
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -1433,7 +1388,7 @@
          ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', cristal: 'MIN', correa: 'ACERO', cierre: 'MARI' };
+            caja: 'PL', cristal: 'MIN', correa: 'A316S', cierre: 'MARI' };
 
 
   /* ============================================================
@@ -1476,6 +1431,10 @@
   function sinVeto(v) { SIN_VETO = !!v; }
 
   /* ---------- EL MODO CURAR, sólo con `?curar` ---------- */
+  /* La criba y el panel de curar son herramientas de casa: se piden por
+     la barra de direcciones y no salen solas. */
+  var CRIBA_VISIBLE = false;
+  try { CRIBA_VISIBLE = /[?&](criba|capas)(=|&|$)/.test(location.search); } catch (x) {}
   var CURAR = false;
   try { CURAR = /[?&]curar(=|&|$)/.test(location.search); } catch (x) {}
   var COMBIS = {};
@@ -1600,8 +1559,11 @@
      combinaciones sin nada que enseñar, y eso hoy se vende. Cuando estén
      todas, se quita la condición y se acabaron los AVIF por combinación.
      ============================================================ */
-  var CAPAS = false;
-  try { CAPAS = /[?&]capas(=|&|$)/.test(location.search); } catch (x) {}
+  /* EL MONTAJE POR CAPAS YA NO ES UNA PRUEBA: ES LA FICHA (Óscar,
+     29/08/2026). Se acabó `?capas`. El reloj se arma con las piezas que el
+     cliente elige —caja, bisel, esfera, agujas, correa—, cada una su
+     imagen, y ninguna foto pertenece a una combinación entera. */
+  var CAPAS = true;
   var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
   /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
      capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
@@ -1666,49 +1628,11 @@
              ORO: '16-agujas-doradas-para-ororosa',
              DOR: '16-agujas-doradas-para-dorada',
              NAR: '16-agujas-doradas-para-rally' } },
-    correa: { ACERO: '14-brazalete-acero',
-              /* El 24 sustituye al 23 (29/08/2026): mismo brazalete rehecho
-                 desde la foto madre. Llega más ancho que el hueco de las asas,
-                 así que entra sin agrandar nada —el 23 pedía un 9-12 %— y sus
-                 eslabones son los del brazalete de acero, no un dibujo aparte. */
-              ACERONG: '24-brazalete-pvd-negro',
-              /* Los cuatro del 29/08 llegaron YA ENCAJADOS: 1.324 px de
-                 ancho centrados en 2.054, clavado en el hueco de las asas.
-                 No pasaron por `encajar_correa.py`. */
-              ACE3: '31-brazalete-3-eslabones-acero',
-              NEG3: '32-brazalete-3-eslabones-pvd-negro',
-              ORO3: '33-brazalete-3-eslabones-acero-centro-oro-rosa',
-              AMA3: '34-brazalete-3-eslabones-acero-centro-oro-amarillo',
-              CAZU:  '17-correa-caucho-azul',
-              CAZN:  '18-correa-caucho-azul-naranja',
-              CBLA:  '19-correa-caucho-blanca',
-              CMAC:  '20-correa-caucho-marron-crema',
-              CNVF:  '21-correa-caucho-negra-verde-fluor',
-              /* ⚠️ TODAS LAS CORREAS SE REHICIERON EL 29/08/2026 POR LA
-                 TARDE, con el mismo nombre y otra imagen (Óscar: «no me
-                 gustaba cómo quedaban las correas, tienen todas nuevo
-                 formato»).
-
-                 EL FORMATO NUEVO es una silueta común: la tira se estrecha
-                 al alejarse de la caja y termina en punta —1.322 px de
-                 ancho a la altura del asa y 363 al pie del lienzo— en vez de
-                 bajar recta hasta el borde. Todas iguales, así que ninguna
-                 desentona al lado de otra. Y todas siguen entrando en las
-                 asas: 1.324 de ancho, centro en 2.053,5.
-
-                 POR ESO HAY QUE SUBIR `SERIE_V` A MANO. Los ficheros se
-                 llaman igual que antes; sin subirlo, Cloudflare seguiría
-                 sirviendo los viejos cuatro horas y el cambio no se vería
-                 en producción. */
-              VBEI:  '35-correa-vaquera-beige-20mm',
-              VMAL:  '36-correa-vaquera-malva-20mm',
-              VNEG:  '37-correa-vaquera-negra-20mm',
-              VGRI:  '38-correa-vaquera-gris-20mm',
-              VAZU:  '39-correa-vaquera-azul-claro-20mm',
-              PCAQ:  '25-correa-piel-rally-caqui-oliva',
-              PCON:  '26-correa-piel-rally-conac-naranja',
-              PMAR:  '27-correa-piel-rally-marron',
-              PNEG:  '28-correa-piel-rally-negra' }
+    /* ⚠️ LAS CORREAS NO ESTÁN AQUÍ. Viven en la biblioteca de componentes
+       —`assets/img/componentes/correas/`—, con el nombre de la pieza, y las
+       comparten todos los modelos. Cada correa dice en `CORREAS[x].pieza`
+       cómo se llama la suya; `ficheroCapa` va a buscarla allí. */
+    correa: null
   };
   /* El orden de la pila lo pone el HTML; aquí sólo se dice qué paso hay que
      haber tocado para que la pieza aparezca. La caja no espera a nadie.
@@ -1734,6 +1658,12 @@
   /* El fichero de una opción: o es un nombre, o es una tabla con una copia
      por esfera y `'*'` de comodín. */
   function ficheroCapa(grupo, valor, esf) {
+    /* LA CORREA SALE DE LA BIBLIOTECA, no de la tabla del Lunar: es una
+       pieza compartida y se llama por lo que es. */
+    if (grupo === 'correa') {
+      var c = CORREAS[valor];
+      return c && c.pieza ? c.pieza : null;
+    }
     var v = CAPA[grupo] && CAPA[grupo][valor];
     if (!v) return null;
     if (typeof v === 'string') return v;
@@ -1741,9 +1671,16 @@
        que no son la que está puesta. */
     return v[esf || e.esf] || v['*'] || null;
   }
+  /* De qué carpeta sale cada pieza. Las correas ya están en la biblioteca
+     de componentes; las demás siguen en la del Lunar hasta que lleguen
+     rehechas, que es lo que Óscar dijo el 29/08: se rehace todo. */
+  var COMPONENTE_IMG = '/assets/img/componentes/';
+  function baseCapa(grupo) {
+    return grupo === 'correa' ? COMPONENTE_IMG + 'correas/1200/' : CAPA_IMG;
+  }
   function urlCapa(grupo, valor, esf) {
     var f = ficheroCapa(grupo, valor, esf);
-    return f ? CAPA_IMG + f + '.avif' + SERIE_V : null;
+    return f ? baseCapa(grupo) + f + '.avif' + SERIE_V : null;
   }
   /* El bisel con el que el proveedor monta cada esfera: el del primer
      paquete que la lleve. Lo usa la criba para que cada miniatura salga con
@@ -1754,11 +1691,17 @@
     return 'NEG';
   }
   function cadaFicheroCapa(hazlo) {
-    for (var g in CAPA) for (var k in CAPA[g]) {
-      var v = CAPA[g][k];
-      if (typeof v === 'string') hazlo(v, g);
-      else for (var d in v) hazlo(v[d], g);
+    for (var g in CAPA) {
+      if (!CAPA[g]) continue;
+      for (var k in CAPA[g]) {
+        var v = CAPA[g][k];
+        if (typeof v === 'string') hazlo(v, g);
+        else for (var d in v) hazlo(v[d], g);
+      }
     }
+    /* Las correas van aparte porque ya no están en CAPA: son piezas de la
+       biblioteca y cada una dice su nombre en `CORREAS[x].pieza`. */
+    for (var c in CORREAS) if (CORREAS[c].pieza) hazlo(CORREAS[c].pieza, 'correa');
   }
 
   /* ---------- LOS CINCO CIERRES (Óscar, 29/08/2026) ----------
@@ -1818,6 +1761,8 @@
   var MINI = {
     CAZU: ['cazu'], CAZN: ['cazn'], CBLA: ['cbla'],
     CMAC: ['cmac'], CNVF: ['cnvf'],
+    /* Las cinco de caucho nuevas y las ocho de piel italiana todavía no
+       tienen foto de proveedor: sin foto, no sale miniatura. */
     /* LA VAQUERA ENSEÑA LO QUE NO SE VE EN EL MONTAJE: la trama diagonal
        de cerca, el desplegable y el forro de cuero coñac. Las tres valen
        para los cinco colores porque lo que cuentan es el ACABADO, no el
@@ -1827,10 +1772,14 @@
     VNEG: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
     VGRI: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
     VAZU: ['vaquera-trama', 'vaquera-dentro', 'vaquera-cierre'],
-    PCAQ: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
-    PCON: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
-    PMAR: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
-    PNEG: ['piel-pneg', 'piel-dentro', 'piel-muneca']
+    PCAQT: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
+    PCAQB: ['piel-pcaq', 'piel-dentro', 'piel-muneca'],
+    PCONT: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
+    PCONB: ['piel-pcon', 'piel-dentro', 'piel-muneca'],
+    PMART: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
+    PMARB: ['piel-pmar', 'piel-dentro', 'piel-muneca'],
+    PNEGT: ['piel-pneg', 'piel-dentro', 'piel-muneca'],
+    PNEGB: ['piel-pneg', 'piel-dentro', 'piel-muneca']
   };
   /* Lo que se lee en voz alta de cada foto. Las de color no están aquí: su
      texto sale del nombre de la correa, que ya lo dice todo. */
@@ -1853,20 +1802,20 @@
      esfera se piden las cinco de la nueva. Así el peso de la precarga se
      queda donde estaba antes de las copias. */
   var PRECARGADAS = false, PRECARGADA_ESF = null;
-  function pideCapa(f) {
+  function pideCapa(f, grupo) {
     if (!f) return;
     var i = new Image();
-    i.src = CAPA_IMG + f + '.avif' + SERIE_V;
+    i.src = baseCapa(grupo) + f + '.avif' + SERIE_V;
   }
   function precargaCapas() {
     if (!CAPAS) return;
     if (!PRECARGADAS) {
       PRECARGADAS = true;
-      cadaFicheroCapa(function (f, g) { if (g !== 'agujas') pideCapa(f); });
+      cadaFicheroCapa(function (f, g) { if (g !== 'agujas') pideCapa(f, g); });
     }
     if (PRECARGADA_ESF !== e.esf) {
       PRECARGADA_ESF = e.esf;
-      for (var k in CAPA.agujas) pideCapa(ficheroCapa('agujas', k));
+      for (var k in CAPA.agujas) pideCapa(ficheroCapa('agujas', k), 'agujas');
     }
   }
 
@@ -1899,8 +1848,12 @@
     var caja = $('[data-pv-capas]');
     if (!caja) return;
     caja.hidden = !CAPAS;
+    /* ⚠️ EL BOTÓN DE CRIBA ES PARA ÓSCAR, NO PARA EL CLIENTE. Salía con
+       `?capas`, y desde que el montaje por piezas ES la ficha, `CAPAS`
+       está siempre puesto: sin esto, la criba se le aparecería a
+       cualquiera. Ahora pide `?criba` a mano. */
     var abre = $('[data-pv-criba-abre]');
-    if (abre) abre.hidden = !CAPAS;
+    if (abre) abre.hidden = !CRIBA_VISIBLE;
     if (!CAPAS) return;
     var puestas = {};
     PILA.forEach(function (p) {
@@ -1910,7 +1863,7 @@
       var toca = !p.espera || !!tocado[p.espera];
       var apoyo = !p.necesita || !!puestas[p.necesita];
       if (!f || !toca || !apoyo) { img.hidden = true; img.removeAttribute('src'); return; }
-      var src = CAPA_IMG + f + '.avif' + SERIE_V;
+      var src = baseCapa(p.grupo) + f + '.avif' + SERIE_V;
       if (img.getAttribute('src') !== src) img.setAttribute('src', src);
       img.hidden = false;
       puestas[p.capa] = true;
@@ -1995,25 +1948,6 @@
      nombre de un fichero a un texto de pantalla: el día que ese texto se
      retoque, la ficha pide una foto que no existe y sale el cartel sin que
      nadie haya tocado una imagen. Así lo hace el Trinchera. */
-  var SERIE_CAJA   = { PL: 'acero', NG: 'pvd' };
-  var SERIE_ESF    = { NEG: 'negra', BLA: 'blanca', NAR: 'naranja',
-                       DOR: 'dorada', ORO: 'ororosa', PAN: 'panda' };
-  var SERIE_BISEL  = { NEG: 'bnegro', AZU: 'bazul', BLA: 'bblanco' };
-  var SERIE_AGUJAS = { BLA: 'blancas', ORO: 'ororosa', NAR: 'naranja',
-                       DOR: 'doradas', AZU: 'azules' };
-  var SERIE_CORREA = { ACERO: 'brazalete', CAZU: 'cauchoazul',
-                       CAZN: 'cauchoazunar', CMAC: 'cauchomarcre',
-                       CNVF: 'cauchonegverde', CBLA: 'cauchoblanco' };
-  function claveSerie() {
-    var c = SERIE_CAJA[e.caja], f = SERIE_ESF[e.esf], b = SERIE_BISEL[e.bisel],
-        g = SERIE_AGUJAS[e.agujas], r = SERIE_CORREA[e.correa];
-    if (!c || !f || !b || !g || !r) return null;
-    return c + '-' + f + '-' + b + '-' + g + '-' + r;
-  }
-  function serieFoto() {
-    var clave = claveSerie();
-    return clave && SERIE[clave] ? clave : null;
-  }
 
   /* ---------- LA REFERENCIA ---------- */
   function referencia() {
@@ -2488,7 +2422,7 @@
        caucho llevan «hebilla/cierre mariposa resistente al agua y a golpes»
        y son de 20 mm, que es justo lo que mide el hueco entre las asas. El
        brazalete sigue con su desplegable. */
-    var esAcero = matDe(e.correa) === 'ACERO';
+    var esAcero = matDe(e.correa) === 'A316';
     botones('cierre', deTabla(CIERRES), e.cierre);
     var ci = CIERRES[e.cierre];
     rotula('cierre', ci.nombre,
@@ -2514,24 +2448,13 @@
 
     /* LA FOTO: la de la serie si esta combinación ya está hecha, y si no, el
        cartel. Nunca una imagen que no sea la elegida. */
-    var foto = serieFoto();
-    var img = $('[data-pv-foto]');
-    var cartel = $('[data-pv-sinfoto]');
+    /* EL VISOR SOLO TIENE DOS ESTADOS: la foto de presentación mientras
+       nadie ha elegido nada, y el reloj armado con sus piezas en cuanto se
+       elige la primera. Ni foto de combinación ni cartel de «en
+       preparación»: eso era del mundo de una foto por reloj. */
+    pintaPresentacion();
     var lupa = $('[data-pv-ampliar]');
-    /* Con `?capas` manda la pila: ni foto ni cartel. Y mientras nadie ha
-       elegido nada manda la foto de presentación, por encima de las dos. */
-    var presentando = pintaPresentacion();
-    img.hidden = presentando || CAPAS || !foto;
-    cartel.hidden = presentando || CAPAS || !!foto;
-    if (lupa) lupa.hidden = presentando || CAPAS || !foto;
-    if (foto) {
-      img.src = SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V;
-      img.srcset = SERIE_IMG + '480/' + foto + '.avif' + SERIE_V + ' 480w, ' +
-                   SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V + ' 1200w, ' +
-                   SERIE_IMG + '1600/' + foto + '.avif' + SERIE_V + ' 1600w';
-      img.sizes = '(max-width: 900px) 100vw, 620px';
-      img.alt = descripcion();
-    }
+    if (lupa) lupa.hidden = true;
 
     $('[data-pv-tec="caja"]').textContent =
       'Caja de ' + CAJAS[e.caja].mat + ' de ' + MM + ' mm, ' +
@@ -2981,7 +2904,15 @@
                  ' · ' + MOVS[e.mov].nombre,
         correa: CORREAS[e.correa].nombre,
         precio: precio(),
-        foto: (function () { var i = $('[data-pv-foto]'); return i.hidden ? '' : i.src; })()
+        /* ⚠️ LA LÍNEA DEL CARRITO VA SIN FOTO, y es a propósito. Ya no
+           existe una foto del reloj entero: el reloj se arma con sus piezas.
+           Lo que se manda son LAS PIEZAS, en orden de montaje, para que el
+           carrito pueda apilarlas igual que la ficha el día que se toque.
+           Hasta entonces la línea sale con su texto, que dice exactamente
+           lo mismo. */
+        foto: '',
+        capas: PILA.map(function (p) { return urlCapa(p.grupo, e[p.grupo]); })
+                   .filter(Boolean)
       });
       window.location.href = '/carrito.html';
     }

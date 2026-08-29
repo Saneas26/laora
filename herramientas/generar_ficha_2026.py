@@ -53,8 +53,8 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
-V_CSS_PRODUCTO = 37
-V_CSS_COLECCION = 17
+V_CSS_PRODUCTO = 42
+V_CSS_COLECCION = 44
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -224,7 +224,7 @@ def ficha(d):
 <!-- GENERADO por herramientas/generar_ficha_2026.py — no editar a mano.
      Los datos viven en assets/datos/fichas/%(slug)s.json -->
 %(recursos)s
-<link rel="stylesheet" href="/assets/css/laora.css?v=51">
+<link rel="stylesheet" href="/assets/css/laora.css?v=52">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=%(vcol)d">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=%(vprod)d">
 </head>

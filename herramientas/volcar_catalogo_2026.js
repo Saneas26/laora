@@ -79,7 +79,8 @@ function motorDe(fichero, exporta) {
         if (k === 'querySelectorAll') return () => [];
         if (['appendChild', 'addEventListener', 'setAttribute', 'scrollIntoView',
              'insertBefore', 'removeChild', 'getBoundingClientRect', 'observe',
-             'unobserve', 'focus', 'remove'].includes(k)) return () => nodo;
+             'unobserve', 'focus', 'remove', 'removeAttribute',
+             'replaceChildren', 'contains', 'matches'].includes(k)) return () => nodo;
         return '';
       },
       set: (t, k, v) => { t[k] = v; return true; },
@@ -102,6 +103,11 @@ function motorDe(fichero, exporta) {
   globalThis.IntersectionObserver = function () { return { observe() {}, unobserve() {}, disconnect() {} }; };
   globalThis.ResizeObserver = globalThis.IntersectionObserver;
   globalThis.requestAnimationFrame = () => 0;
+  /* `new Image()` es la precarga de capas. Desde que el montaje por piezas
+     es LA ficha —29/08/2026, se acabó el `?capas`— la precarga corre
+     siempre, también aquí. Un objeto con `src` basta: no hay que bajar
+     nada, solo dejar que el guion siga. */
+  globalThis.Image = function () { return { set src(v) {}, get src() { return ''; } }; };
   globalThis.fetch = () => new Promise(() => {});   // lo que haga falta se le pasa a mano
 
   /* Las opciones que la ficha ACABA de pintar en un grupo, sin las
