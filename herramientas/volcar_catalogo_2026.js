@@ -34,19 +34,57 @@ const RAIZ = path.resolve(__dirname, '..');
    mano cuando lo necesiten. */
 function motorDe(fichero, exporta) {
   const html = fs.readFileSync(path.join(RAIZ, fichero), 'utf8');
-  /* El configurador es el IIFE grande de la ficha. En vez de buscarle
-     el cierre —que es traicionero, porque dentro hay más funciones que
-     se cierran igual— se le mete al PRINCIPIO un exportador: una
-     función que, cuando se la llama luego, devuelve las tripas ya
-     rellenas. El hoisting hace el resto. */
-  const i = html.indexOf('\n(function () {');
-  const fin = html.indexOf('</script>', i);
-  if (i < 0 || fin < 0) throw new Error('no encuentro el configurador dentro de ' + fichero);
+
+  /* ⚠️ EL MOTOR YA NO ESTÁ DENTRO DE LA FICHA (29/08/2026). La ficha se
+     quedó con sus PIEZAS y el configurador se fue a
+     `/assets/js/configurador-2026.js`, que comparten los diez modelos. Así
+     que aquí hay que juntar las dos partes antes de ejecutar nada: primero
+     lo que la ficha define en línea, y detrás el motor, igual que hace el
+     navegador. Las fichas que todavía lo lleven dentro siguen valiendo:
+     entonces no hay `<script src>` que buscar y el trozo de fuera va
+     vacío. */
+  const enLinea = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((m) => m[1]).join('\n');
+  const suelto = [...html.matchAll(/<script[^>]*\bsrc="(\/assets\/js\/configurador-[^"?]+)/g)]
+    .map((m) => fs.readFileSync(path.join(RAIZ, m[1].replace(/^\//, '')), 'utf8'))
+    .join('\n');
+  /* ⚠️ EL IIFE BUENO ES EL DEL MOTOR, no el primero que aparezca. La ficha
+     lleva otro IIFE al final —el de la lupa— y buscando «(function () {»
+     sobre todo el texto se cazaba ése: el exportador entraba en un ámbito
+     donde las piezas no existen y saltaba «MOVS is not defined». Se busca
+     en el trozo del motor si lo hay, y en la ficha solo cuando no. */
+  const cuerpo = suelto || enLinea;
+  const antes = suelto ? enLinea + '\n' : '';
+
+  /* En vez de buscarle el cierre al IIFE —que es traicionero, porque dentro
+     hay más funciones que se cierran igual— se le mete al PRINCIPIO un
+     exportador: una función que, cuando se la llama luego, devuelve las
+     tripas ya rellenas. El hoisting hace el resto. */
+  const i = cuerpo.indexOf('\n(function () {');
+  if (i < 0) throw new Error('no encuentro el configurador de ' + fichero);
 
   const abre = '(function () {';
-  let codigo = html.slice(i, fin);
-  codigo = codigo.replace(abre,
-    abre + `\n  globalThis.__MOTOR = function () { return {${exporta}}; };\n`);
+  let codigo;
+  if (suelto) {
+    /* ⚠️ AL MOTOR DE LA CASA NO SE LE INYECTA NADA. Él deja lo suyo en
+       `window.__LAORA_MOTOR` —su puerta de servicio, escrita en el propio
+       motor— y aquí solo se recoge.
+
+       Antes se le metía un exportador al principio del IIFE, confiando en
+       el hoisting. Con el motor dentro de la ficha funcionaba; al sacarlo
+       a su fichero dejó de ver las funciones —los `var` sí, las `function`
+       no— y el volcado se paraba con «costes is not defined». Adivinar
+       dónde empieza el ámbito de un fichero ajeno es frágil por
+       definición, y esto lo quita de en medio. */
+    codigo = antes + cuerpo;
+  } else {
+    /* Con el motor todavía DENTRO de la ficha —el Trinchera— sigue el
+       apaño de siempre: exportador al principio del IIFE, que ahí el
+       hoisting sí funciona. Cuando el Trinchera pase al motor de la casa,
+       esta rama se cae. */
+    codigo = cuerpo.slice(i).replace(abre,
+      abre + `\n  globalThis.__MOTOR = function () { return {${exporta}}; };\n`);
+  }
 
   /* La ficha, fuera del navegador, no tiene ni DOM ni observadores.
      Nada de eso hace falta para calcular precios: se le pone un
@@ -121,6 +159,10 @@ function motorDe(fichero, exporta) {
   };
 
   new Function(codigo)();
+  /* El de la casa deja su puerta de servicio en `window`; el viejo, un
+     `__MOTOR` global. Se prueba primero la puerta buena. */
+  var puerta = globalThis.window && globalThis.window.__LAORA_MOTOR;
+  if (puerta) { delete globalThis.window.__LAORA_MOTOR; return puerta; }
   return globalThis.__MOTOR();
 }
 
