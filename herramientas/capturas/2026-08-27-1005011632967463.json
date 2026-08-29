@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "descripcion": "Caja de titanio para el Trinchera. Tercer proveedor. Datos leidos de la pagina del anuncio el 2026-08-27 (Atlantic/Canary).",
+    "fecha_extraccion": "2026-08-27",
+    "moneda": "EUR",
+    "convencion_datos_faltantes": "null = el dato NO aparece en la pagina. NO inferir."
+  },
+  "anuncio": {
+    "url_limpia": "https://es.aliexpress.com/item/1005011632967463.html",
+    "item_id": "1005011632967463",
+    "titulo": "Caja de Reloj de Buceo para Piloto, de Titanio/Acero T2, para NH34 NH35 NH38 NH70 PT/ETA, Cristal de Zafiro AR, Resistente al Agua 20 BAR, Antialergico, Pieza de Repuesto para Reloj",
+    "vendedor": { "nombre": "GRAYSS Factory Store", "valoraciones_positivas_pct": 97.1, "seguidores": 1040 },
+    "marca": "GRAYSS",
+    "valoracion_articulo": 4.9,
+    "num_valoraciones": 108,
+    "unidades_vendidas": "900+",
+    "precio_27_08": "41,19 EUR con -4% (mas bajo en 30 dias antes del descuento: 42,97 EUR)",
+    "coste_dado_por_oscar": 41.19,
+    "envio": "gratis; entrega estimada 05-10 de septiembre",
+    "devoluciones": "gratis, 90 dias",
+    "origen": "CN"
+  },
+  "limite_de_compra": {
+    "texto_literal": "1 pieza(s) como maximo por cliente",
+    "consecuencia": "NO SIRVE PARA PRODUCCION. No se puede pedir un lote. Hay que preguntar al vendedor si lo levanta para un pedido de varias unidades."
+  },
+  "que_incluye": {
+    "tipo_articulo_declarado": "Cajas para Relojes",
+    "material_caja_declarado": "Titanio",
+    "cristal": "zafiro con tratamiento antirreflejos (AR)",
+    "estanqueidad": "20 BAR / 20 ATM",
+    "esfera_incluida": false,
+    "agujas_incluidas": false,
+    "movimiento_incluido": false,
+    "nota": "Es una pieza de repuesto: solo la caja. El proveedor tandorio (1005010605313493, 45,16) SI trae esfera de 29 mm y agujas."
+  },
+  "ejes_de_variante": {
+    "Color": {
+      "que_es_en_realidad": "Mezcla MATERIAL y TAPA en un solo eje. El satinado/pulido (steel vs steelP) es de las variantes de ACERO: el titanio no tiene esa eleccion.",
+      "opciones": [
+        { "valor": "solid back", "material": "titanio", "tapa": "solida" },
+        { "valor": "glass back", "material": "titanio", "tapa": "cristal" },
+        { "valor": "steel-soild back", "material": "acero", "tapa": "solida" },
+        { "valor": "steel-glass back", "material": "acero", "tapa": "cristal" },
+        { "valor": "steelP-soild back", "material": "acero pulido", "tapa": "solida" },
+        { "valor": "steelP-glass back", "material": "acero pulido", "tapa": "cristal" }
+      ]
+    },
+    "Diametro del dial": {
+      "que_es_en_realidad": "El ASIENTO DEL MOVIMIENTO y el tamano de caja, no la esfera del Khaki contra la del Murph.",
+      "opciones": ["36mm NH", "36mm ETA PT", "39mm NH", "39mm ETA PT"]
+    }
+  },
+  "compatibilidad_declarada": ["NH34", "NH35", "NH38", "NH70", "PT", "ETA"],
+  "alertas": [
+    "LIMITE DE UNA UNIDAD POR CLIENTE. Es lo primero que hay que resolver con el vendedor: sin eso no hay proveedor.",
+    "El precio es POR VARIANTE y 41,19 es el del titanio. La URL de entrada arrastraba 20,39, que es el de alguna variante de acero. Verificar la variante exacta antes de pedir.",
+    "NO contempla el Ronda 715: el cuarzo en titanio sigue necesitando el anillo espaciador de 3,60 (P-043).",
+    "Oscar leyo los ejes como 'bisel satinado o pulido' y 'caja de Khaki y caja de Murph'. El anuncio no dice eso: son material+tapa y asiento del movimiento.",
+    "Solo la caja: sumandole la esfera del Khaki (16,25) sale a 57,44, doce euros por encima del pack de tandorio de 45,16. Lo que si tiene mejor es el zafiro AR, que tandorio no declara."
+  ]
+}

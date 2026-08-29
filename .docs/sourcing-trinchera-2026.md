@@ -279,3 +279,105 @@ del ETA 2824-2, pero las dos fichas lo llaman «Automático Suizo». La norma de
 la casa prohíbe nombrar China y la marca del movimiento — no obliga a decir
 «Suizo». Con el calibre ahora compartido, el problema aparece en dos modelos en
 vez de en uno.
+
+---
+
+## Tercer proveedor para la caja de titanio (27/08/2026)
+
+**Óscar:** «Anota proveedor caja Trinchera de titanio en 36 y 39 mm por 41,19.»
+
+[1005011632967463](https://es.aliexpress.com/item/1005011632967463.html) ·
+**GRAYSS Factory Store** · 97,1 % positivas · 4,9 sobre 108 valoraciones ·
+900+ vendidos · **41,19 €** (−4 %; el más bajo en 30 días fue 42,97 €) ·
+envío gratis, entrega 05–10 SEP · devoluciones gratis 90 días.
+
+Leído del anuncio el 27/08/2026.
+
+### 🚫 No sirve para producción: UNA UNIDAD POR CLIENTE
+
+El anuncio dice, junto al botón de comprar: **«1 pieza(s) como máximo por
+cliente»**. No se puede pedir un lote. Para una caja suelta vale; para tener
+stock, no. **Esto lo descarta como proveedor de verdad mientras siga así**, por
+bueno que sea el precio.
+
+### Lo que trae, y lo que no
+
+| | |
+|---|---|
+| Material | **Titanio** (marca GRAYSS, origen CN) |
+| Cristal | **Zafiro con tratamiento AR** |
+| Estanqueidad | **20 BAR / 20 ATM** |
+| Tipo de artículo | **«Cajas para Relojes»** · «Pieza de repuesto» |
+| Esfera y agujas | **NO las trae** |
+
+### Ojo: los ejes no son los que parecían
+
+Lo que Óscar leyó como «bisel satinado o pulido» y «caja de Khaki y caja de
+Murph» es en realidad otra cosa. Los dos ejes del anuncio son:
+
+**Color** — seis opciones, y ahí dentro va el material *y* la tapa:
+
+| Opción | Qué es |
+|---|---|
+| `solid back` | **titanio**, tapa sólida |
+| `glass back` | **titanio**, tapa de cristal |
+| `steel-soild back` · `steel-glass back` | **acero**, tapa sólida o de cristal |
+| `steelP-soild back` · `steelP-glass back` | **acero pulido**, tapa sólida o de cristal |
+
+El satinado/pulido es de las variantes de **acero**, no del titanio. Y el
+titanio no tiene esa elección.
+
+**Diámetro del dial** — cuatro opciones: `36mm NH`, `36mm ETA PT`, `39mm NH`,
+`39mm ETA PT`. Es el **asiento del movimiento**, NH35 contra ETA/PT, no la
+esfera del Khaki contra la del Murph. La caja se pide por el calibre que va a
+llevar dentro, igual que la de acero.
+
+**No contempla el Ronda 715**, así que el cuarzo en titanio sigue necesitando
+el anillo espaciador de 3,60 € — que el motor ya cobra en todo el cuarzo.
+
+⚠️ **El precio es por variante y 41,19 € es el del titanio.** La URL del
+anuncio arrastraba un precio de 20,39 €, que es el de alguna variante de acero.
+Verificar la variante exacta antes de pedir.
+
+### Los tres proveedores de titanio, uno al lado del otro
+
+| Anuncio | Precio | Qué trae | Problema |
+|---|--:|---|---|
+| `1005005751120953` | 50,80 € | caja | El primero, del 19/08. Tampoco contempla el Ronda 715. |
+| `1005010605313493` · **tandorio** | 45,16 € | caja **+ esfera 29 mm + agujas** · 20 ATM | Su anuncio marcaba 8,17 € con la variante por defecto: sin aclarar. |
+| **`1005011632967463`** · GRAYSS | **41,19 €** | **sólo la caja** · zafiro AR · 20 ATM | **Una unidad por cliente.** |
+
+### 🚫 Y aun sin ese límite, no sale más barato
+
+El de tandorio son 45,16 € **con esfera y agujas dentro**. Éste es sólo la
+caja, así que hay que sumarle la esfera del Khaki, 16,25 €:
+
+| | |
+|---|--:|
+| tandorio, todo incluido | **45,16 €** |
+| GRAYSS 41,19 + esfera 16,25 | **57,44 €** |
+
+**Doce euros y pico más caro por reloj.** Lo que sí tiene mejor es el **cristal
+de zafiro con AR**: el de tandorio no lo declara. Si el zafiro importa, esa es
+la razón para pagarlo — no el precio.
+
+### Qué pasaría si aun así se adoptara a 41,19 sin sumar nada
+
+Medido con el volcador, con los costes reales y el suelo al 5 %:
+
+| | |
+|---|--:|
+| Referencias de titanio del Trinchera | **1.656** |
+| Referencias que cambian de PVP | **0** |
+| Ahorro en coste completo por reloj | 4,17 € |
+| **Más limpio por reloj** | **3,33 €** |
+
+Los 3,97 € se los come el redondeo al 9,90: el precio no se mueve y la
+diferencia entera se va al margen.
+
+### Lo que falta
+
+1. **Preguntar a GRAYSS si levantan el límite de una unidad** para un pedido de
+   varias. Sin eso, no hay proveedor.
+2. **La captura del anuncio**, con el precio de cada variante.
+3. Confirmar si el zafiro AR compensa los doce euros frente a tandorio.
