@@ -45,6 +45,11 @@ function motorDe(fichero, exporta) {
      vacío. */
   const enLinea = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)]
     .map((m) => m[1]).join('\n');
+  /* El motor de precio va delante de todo: lo usan los dos, el que ya
+     tiene el configurador fuera y el que todavía lo lleva dentro. */
+  const precio = [...html.matchAll(/<script[^>]*\bsrc="(\/assets\/js\/precio-[^"?]+)/g)]
+    .map((m) => fs.readFileSync(path.join(RAIZ, m[1].replace(/^\//, '')), 'utf8'))
+    .join('\n');
   const suelto = [...html.matchAll(/<script[^>]*\bsrc="(\/assets\/js\/configurador-[^"?]+)/g)]
     .map((m) => fs.readFileSync(path.join(RAIZ, m[1].replace(/^\//, '')), 'utf8'))
     .join('\n');
@@ -54,7 +59,7 @@ function motorDe(fichero, exporta) {
      donde las piezas no existen y saltaba «MOVS is not defined». Se busca
      en el trozo del motor si lo hay, y en la ficha solo cuando no. */
   const cuerpo = suelto || enLinea;
-  const antes = suelto ? enLinea + '\n' : '';
+  const antes = precio + '\n' + (suelto ? enLinea + '\n' : '');
 
   /* En vez de buscarle el cierre al IIFE —que es traicionero, porque dentro
      hay más funciones que se cierran igual— se le mete al PRINCIPIO un
@@ -82,7 +87,7 @@ function motorDe(fichero, exporta) {
        apaño de siempre: exportador al principio del IIFE, que ahí el
        hoisting sí funciona. Cuando el Trinchera pase al motor de la casa,
        esta rama se cae. */
-    codigo = cuerpo.slice(i).replace(abre,
+    codigo = precio + '\n' + cuerpo.slice(i).replace(abre,
       abre + `\n  globalThis.__MOTOR = function () { return {${exporta}}; };\n`);
   }
 

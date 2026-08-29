@@ -741,52 +741,18 @@
     });
   }
 
-  var IVA = 0.21, IRPF = 0.20, SS = 0.05, MULT = 2.28;
-  /* EL COSTE COMPLETO (Óscar, 22/08/2026).
-     «Todos los costes tienen que incluir packing + envío + 5 % de SS,
-     todos. Y a partir de ahí se aplica el multiplicador.»
-
-     · Las piezas de AliExpress se anuncian SIN IVA. Para el margen valen
-       lo anunciado: el IVA soportado de la compra se descuenta del
-       repercutido en la liquidación, así que no se pierde.
-     · Packing y envío: 9 € CON IVA, como siempre — su parte sin IVA es
-       la que cuesta de verdad.
-     · Fondo de garantía: 4 € por reloj (antes era un 5 % del movimiento,
-       que se quedaba corto).
-     · Seguridad Social: un 5 % del coste. Es un gasto, no un impuesto
-       sobre lo que ganas.
-
-     LA COMISIÓN DE LA PASARELA se calcula al 2,5 %: Klarna se lleva el
-     5 %, pero solo la mitad de las ventas van por Klarna (Óscar, 22/08). */
-  var PACKING_ENVIO = 9;                   // con IVA, como siempre
-  var GARANTIA = 4;                        // fondo de garantía por reloj
-  var COMISION = 0.025;                    // 5 % de Klarna en la mitad de las ventas
-  function costeCompleto(c) {
-    return (c + PACKING_ENVIO / (1 + IVA) + GARANTIA) * (1 + SS);
-  }
-  function redondea(p) {
-    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
-    return (p - bajo) <= (bajo + 10 - p) ? bajo : bajo + 10;
-  }
-  function sube990(p) {
-    var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
-    return bajo >= p - 1e-9 ? bajo : bajo + 10;
-  }
-  /* EL SUELO, CON LA COMISIÓN DENTRO (Óscar, 22/08/2026).
-     Antes el suelo se calculaba sobre el precio de tarifa y DESPUÉS se
-     le sumaba el 2,5 % de Klarna, así que la comisión se comía el
-     suelo: el Lunar más barato prometía 50 € limpios y dejaba 46,69.
-     Ahora se calcula sobre lo que queda de cada euro DESPUÉS de pagar
-     la comisión, y ningún reloj sale a la venta por debajo de 50 €
-     limpios o del 15 % de beneficio neto. */
-  function sueloPvp(cn) {
-    var queda = 1 - IRPF;                  // la SS ya va dentro del coste
-    var euro = 1 / (1 + IVA) - COMISION;   // lo que llega de cada euro de PVP
-    var porEuros = (50 / queda + cn) / euro;
-    var margen = euro * queda - 0.15;
-    var porciento = margen > 0 ? queda * cn / margen : 0;
-    return sube990(Math.max(porEuros, porciento));
-  }
+  /* ---------- EL PRECIO, DEL COSTE AL PVP ----------
+     El multiplicador, el redondeo al 9,90, el 2,5 % de la pasarela y el
+     suelo de la REGLA Nº1 viven en `/assets/js/precio-2026.js`, que
+     comparten todos los modelos. Estaban COPIADOS aquí y en la otra ficha,
+     palabra por palabra: dos relojes vendiendo con dos copias de la regla
+     que decide cuánto cobran. */
+  var P = window.laoraPrecio;
+  var IVA = P.IVA, IRPF = P.IRPF, SS = P.SS, MULT = P.MULT;
+  var PACKING_ENVIO = P.PACKING_ENVIO, GARANTIA = P.GARANTIA, COMISION = P.COMISION;
+  var KLARNA = P.KLARNA;
+  var costeCompleto = P.costeCompleto, redondea = P.redondea,
+      sube990 = P.sube990, sueloPvp = P.sueloPvp, pvpBase = P.pvpBase;
   /* EL COSTE, DEL PAQUETE MÁS LO QUE SE LE AÑADE. Devuelve `null` cuando no
      se sabe —una combinación que el proveedor no monta, o una correa sin
      coste—, y entonces la ficha no enseña precio ni deja comprar. */
@@ -810,7 +776,6 @@
     }
     return MOVS[e.mov].coste + p.coste + extra + LOGO;
   }
-  function pvpBase(c) { return redondea(costeCompleto(c) * MULT); }
   function precioTarifa() { return pvpBase(costes()); }
 
   /* ---------- LA COMISIÓN DE LA PASARELA ----------
@@ -826,7 +791,6 @@
   /* EL 2,5 % DE KLARNA (Óscar, 19/08/2026, confirmado el 22/08): el PVP
      de tarifa sube un 2,5 % y se vuelve a redondear al 9,90. Después, el
      suelo: si no llega a 50 € limpios o al 15 %, sube de escalón. */
-  var KLARNA = 1.025;
   function precio() {
     return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste()));
   }
