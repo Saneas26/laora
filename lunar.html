@@ -37,10 +37,10 @@
      en la primera prueba de móvil—. Con `imagesrcset` pide EL MISMO tamaño
      que elegirá el <img>, no otro: si no, se bajarían dos. -->
 <link rel="preload" as="image" fetchpriority="high"
-      href="/assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1"
-      imagesrcset="/assets/img/lunar-2026/presentacion/480/lunar-astronauta.avif?v=1 480w,
-                   /assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1 1200w,
-                   /assets/img/lunar-2026/presentacion/1600/lunar-astronauta.avif?v=1 1600w"
+      href="/assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1"
+      imagesrcset="/assets/img/lunar-2026/presentacion/480/lunar-hazlo-tuyo.avif?v=1 480w,
+                   /assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1 1200w,
+                   /assets/img/lunar-2026/presentacion/1600/lunar-hazlo-tuyo.avif?v=1 1600w"
       imagesizes="(max-width: 900px) 100vw, 620px">
 <link rel="stylesheet" href="/assets/css/fuentes.css?v=1">
 <link rel="stylesheet" href="/assets/css/laora.css?v=52">
@@ -784,13 +784,13 @@
              se ve al abrir la ficha, así que pedirla tarde sería enseñar un
              hueco gris justo donde tiene que estar el reloj. -->
         <img class="pv-presenta" data-pv-presenta
-             src="/assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1"
-             srcset="/assets/img/lunar-2026/presentacion/480/lunar-astronauta.avif?v=1 480w,
-                     /assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1 1200w,
-                     /assets/img/lunar-2026/presentacion/1600/lunar-astronauta.avif?v=1 1600w"
+             src="/assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1"
+             srcset="/assets/img/lunar-2026/presentacion/480/lunar-hazlo-tuyo.avif?v=1 480w,
+                     /assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1 1200w,
+                     /assets/img/lunar-2026/presentacion/1600/lunar-hazlo-tuyo.avif?v=1 1600w"
              sizes="(max-width: 900px) 100vw, 620px"
              fetchpriority="high" decoding="async" width="1200" height="1200"
-             alt="El laOra Lunar con brazalete de acero sobre un suelo lunar, con un astronauta y un cohete al fondo">
+             alt="Hazlo tuyo: el laOra Lunar con brazalete de acero sobre un suelo lunar, con un astronauta y un cohete al fondo">
         <img data-pv-foto alt="laOra Lunar" hidden>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
@@ -1381,7 +1381,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=28';
+  var SERIE_V = '?v=29';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1666,14 +1666,22 @@
               CBLA:  '19-correa-caucho-blanca',
               CMAC:  '20-correa-caucho-marron-crema',
               CNVF:  '21-correa-caucho-negra-verde-fluor',
-              /* Las cinco vaqueras llegaron encajadas, como los brazaletes
-                 del 31 al 34: mismo ancho y mismo centro.
-                 REHECHAS el 29/08/2026 por la tarde («sustituye las correas
-                 de tela vaquera por las nuevas»): MISMOS NOMBRES, otra
-                 imagen. La tira es más ancha, el pespunte va a puntadas
-                 sueltas en vez de línea corrida y ya no lleva la hilera de
-                 agujeros. Por eso hace falta subir `SERIE_V`: el fichero se
-                 llama igual y Cloudflare serviría el viejo cuatro horas. */
+              /* ⚠️ TODAS LAS CORREAS SE REHICIERON EL 29/08/2026 POR LA
+                 TARDE, con el mismo nombre y otra imagen (Óscar: «no me
+                 gustaba cómo quedaban las correas, tienen todas nuevo
+                 formato»).
+
+                 EL FORMATO NUEVO es una silueta común: la tira se estrecha
+                 al alejarse de la caja y termina en punta —1.322 px de
+                 ancho a la altura del asa y 363 al pie del lienzo— en vez de
+                 bajar recta hasta el borde. Todas iguales, así que ninguna
+                 desentona al lado de otra. Y todas siguen entrando en las
+                 asas: 1.324 de ancho, centro en 2.053,5.
+
+                 POR ESO HAY QUE SUBIR `SERIE_V` A MANO. Los ficheros se
+                 llaman igual que antes; sin subirlo, Cloudflare seguiría
+                 sirviendo los viejos cuatro horas y el cambio no se vería
+                 en producción. */
               VBEI:  '35-correa-vaquera-beige-20mm',
               VMAL:  '36-correa-vaquera-malva-20mm',
               VNEG:  '37-correa-vaquera-negra-20mm',
