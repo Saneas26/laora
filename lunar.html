@@ -30,6 +30,18 @@
      abajo, no en el HTML. -->
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/montserrat-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/nunito-sans-latin.woff2" crossorigin>
+<!-- LA FOTO DE PRESENTACIÓN, PEDIDA CUANTO ANTES. Desde el 29/08/2026 es lo
+     primero que se ve al abrir la ficha, o sea la imagen grande que decide
+     cuándo parece que la página ha cargado. Sin esto el navegador no la pide
+     hasta llegar al <img>, y el marco se queda en blanco un momento —se vio
+     en la primera prueba de móvil—. Con `imagesrcset` pide EL MISMO tamaño
+     que elegirá el <img>, no otro: si no, se bajarían dos. -->
+<link rel="preload" as="image" fetchpriority="high"
+      href="/assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1"
+      imagesrcset="/assets/img/lunar-2026/presentacion/480/lunar-astronauta.avif?v=1 480w,
+                   /assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1 1200w,
+                   /assets/img/lunar-2026/presentacion/1600/lunar-astronauta.avif?v=1 1600w"
+      imagesizes="(max-width: 900px) 100vw, 620px">
 <link rel="stylesheet" href="/assets/css/fuentes.css?v=1">
 <link rel="stylesheet" href="/assets/css/laora.css?v=52">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
@@ -443,6 +455,17 @@
      interior y la muñeca— y el caucho una, así que la caja crece sola con
      lo que le echen. `flex-direction:column-reverse` para que la primera
      de la lista sea la de abajo: es la esquina que mira el ojo. */
+  /* LA FOTO DE PRESENTACIÓN, encima de la pila y de todo lo demás.
+     ⚠️ Con `.pv-presenta` a secas no basta: la hoja compartida trae
+     `.pv-hero img{width:82%;height:92%;object-fit:contain}` y
+     `.pv-hero-llena img{width:100%;height:100%;object-fit:cover}`, que pesan
+     más que una clase sola. Con `.pv-hero img.` delante manda ésta. */
+  .pv-hero img.pv-presenta{
+    position:absolute; inset:0; z-index:6;
+    width:100%; height:100%; object-fit:cover;
+  }
+  .pv-hero img.pv-presenta[hidden]{ display:none }
+
   /* ---------- LAS FOTOS FIJAS DEL MODELO ----------
      Misma caja que la Ficha Técnica —mismo ancho, mismo margen— para que
      las dos secciones de debajo del configurador se lean como una sola
@@ -753,6 +776,21 @@
           <span data-carrusel-paso></span>
           <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
         </div>
+        <!-- LA FOTO DE PRESENTACIÓN (Óscar, 29/08/2026): «la página
+             laora.es/lunar arranca con la primera imagen así hasta que el
+             cliente escoja su primera elección de componentes».
+
+             Va con `fetchpriority="high"` y SIN `lazy`: es lo primero que
+             se ve al abrir la ficha, así que pedirla tarde sería enseñar un
+             hueco gris justo donde tiene que estar el reloj. -->
+        <img class="pv-presenta" data-pv-presenta
+             src="/assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1"
+             srcset="/assets/img/lunar-2026/presentacion/480/lunar-astronauta.avif?v=1 480w,
+                     /assets/img/lunar-2026/presentacion/1200/lunar-astronauta.avif?v=1 1200w,
+                     /assets/img/lunar-2026/presentacion/1600/lunar-astronauta.avif?v=1 1600w"
+             sizes="(max-width: 900px) 100vw, 620px"
+             fetchpriority="high" decoding="async" width="1200" height="1200"
+             alt="El laOra Lunar con brazalete de acero sobre un suelo lunar, con un astronauta y un cohete al fondo">
         <img data-pv-foto alt="laOra Lunar" hidden>
         <div class="pv-sinfoto" data-pv-sinfoto>
           <p>Fotografía en preparación</p>
@@ -1806,6 +1844,30 @@
     }
   }
 
+  /* ---------- MIENTRAS NADIE HA ELEGIDO NADA ----------
+     Óscar, 29/08/2026: «la página laora.es/lunar arranca con la primera
+     imagen así hasta que el cliente escoja su primera elección de
+     componentes».
+
+     Es la misma regla del 28/08 —ningún botón sale señalado hasta que se
+     pulsa— llevada a la foto: si el cliente no ha decidido nada, la ficha
+     no tiene ningún reloj concreto que enseñar, así que enseña EL Lunar, el
+     de la foto de presentación, y no una caja desnuda ni el cartel de
+     «fotografía en preparación».
+
+     `mov` no cuenta: viene puesto de fábrica —hay un solo movimiento— y no
+     es una elección de nadie. */
+  function sinElegirNada() {
+    for (var k in tocado) if (k !== 'mov' && tocado[k]) return false;
+    return true;
+  }
+  function pintaPresentacion() {
+    var im = $('[data-pv-presenta]');
+    var puesta = sinElegirNada();
+    if (im) im.hidden = !puesta;
+    return puesta;
+  }
+
   function pintaCapas() {
     precargaCapas();
     var caja = $('[data-pv-capas]');
@@ -1827,10 +1889,12 @@
       img.hidden = false;
       puestas[p.capa] = true;
     });
-    /* El carrusel mueve el paso que se está tocando ahora mismo. */
+    /* El carrusel mueve el paso que se está tocando ahora mismo. Con la
+       foto de presentación puesta no hay paso que mover, y además quedaría
+       flotando encima de la foto. */
     var c = $('[data-pv-carrusel]');
     if (c) {
-      var g = pasoEnJuego();
+      var g = sinElegirNada() ? null : pasoEnJuego();
       c.hidden = !g;
       if (g) c.querySelector('[data-carrusel-paso]').textContent = ROTULO[g];
     }
@@ -2428,10 +2492,12 @@
     var img = $('[data-pv-foto]');
     var cartel = $('[data-pv-sinfoto]');
     var lupa = $('[data-pv-ampliar]');
-    /* Con `?capas` manda la pila: ni foto ni cartel. */
-    img.hidden = CAPAS || !foto;
-    cartel.hidden = CAPAS || !!foto;
-    if (lupa) lupa.hidden = CAPAS || !foto;
+    /* Con `?capas` manda la pila: ni foto ni cartel. Y mientras nadie ha
+       elegido nada manda la foto de presentación, por encima de las dos. */
+    var presentando = pintaPresentacion();
+    img.hidden = presentando || CAPAS || !foto;
+    cartel.hidden = presentando || CAPAS || !!foto;
+    if (lupa) lupa.hidden = presentando || CAPAS || !foto;
     if (foto) {
       img.src = SERIE_IMG + '1200/' + foto + '.avif' + SERIE_V;
       img.srcset = SERIE_IMG + '480/' + foto + '.avif' + SERIE_V + ' 480w, ' +
