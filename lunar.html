@@ -1091,6 +1091,40 @@
     ACERONG: { nombre: 'Brazalete PVD negro', coste: 20.60,
                tec: 'brazalete de acero inoxidable 316L con PVD negro y ' +
                     'cierre desplegable' },
+    /* LOS CUATRO DE TRES ESLABONES CON EL CENTRO PULIDO (Óscar,
+       29/08/2026): «brazaletes de acero 316L con diferentes acabados (…) con
+       cierre desplegable tipo Oyster (…) a 20,19 € de coste».
+
+       NO SUSTITUYEN A LOS DOS DE ARRIBA, se suman. Los seis son de tres
+       eslabones; lo que cambia es el centro: el 14 y el 24 lo llevan
+       satinado como el resto del brazalete, y estos cuatro lo llevan
+       PULIDO, en acero, en PVD, en oro rosa o en oro amarillo. Puestos uno
+       al lado del otro se distinguen a la primera.
+
+       EL DE ORO ROSA ES EL QUE LE INTERESA para la esfera de oro rosa
+       —lo dijo con esas palabras—, así que si algún día hay que cribar
+       brazaletes, ese no se toca.
+
+       ⚠️ EL CIERRE, SIN NOMBRE AJENO. Él los describe «tipo Oyster», que es
+       marca registrada de otra casa y no se escribe en la web
+       ([[laora-calibres-sin-fabricante]] vale igual para los cierres). En
+       el texto del cliente van como desplegable con seguro abatible, que es
+       lo que son. */
+    ACE3: { nombre: 'Brazalete acero, centro pulido', coste: 20.19,
+            tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el ' +
+                 'central pulido y cierre desplegable con seguro abatible' },
+    NEG3: { nombre: 'Brazalete PVD negro, centro pulido', coste: 20.19,
+            tec: 'brazalete de acero inoxidable 316L con PVD negro, de tres ' +
+                 'eslabones, con el central pulido y cierre desplegable con ' +
+                 'seguro abatible' },
+    ORO3: { nombre: 'Brazalete acero, centro oro rosa', coste: 20.19,
+            tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el ' +
+                 'central pulido en oro rosa y cierre desplegable con seguro ' +
+                 'abatible' },
+    AMA3: { nombre: 'Brazalete acero, centro oro amarillo', coste: 20.19,
+            tec: 'brazalete de acero inoxidable 316L de tres eslabones, con el ' +
+                 'central pulido en oro amarillo y cierre desplegable con ' +
+                 'seguro abatible' },
     CAZU: { nombre: 'Caucho azul', coste: 9.89,
             tec: 'correa de caucho azul' },
     CAZN: { nombre: 'Caucho azul y naranja', coste: 9.89,
@@ -1125,6 +1159,8 @@
      y el material se deduce de él; elegir material salta a la primera correa
      de ese material. */
   var CORREA_MAT = { ACERO: 'ACERO', ACERONG: 'ACERO',
+                     ACE3: 'ACERO', NEG3: 'ACERO',
+                     ORO3: 'ACERO', AMA3: 'ACERO',
                      CAZU: 'CAUCHO', CAZN: 'CAUCHO',
                      CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
                      PCAQ: 'PIEL', PCON: 'PIEL', PMAR: 'PIEL', PNEG: 'PIEL' };
@@ -1192,7 +1228,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=24';
+  var SERIE_V = '?v=25';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1465,6 +1501,13 @@
                  así que entra sin agrandar nada —el 23 pedía un 9-12 %— y sus
                  eslabones son los del brazalete de acero, no un dibujo aparte. */
               ACERONG: '24-brazalete-pvd-negro',
+              /* Los cuatro del 29/08 llegaron YA ENCAJADOS: 1.324 px de
+                 ancho centrados en 2.054, clavado en el hueco de las asas.
+                 No pasaron por `encajar_correa.py`. */
+              ACE3: '31-brazalete-3-eslabones-acero',
+              NEG3: '32-brazalete-3-eslabones-pvd-negro',
+              ORO3: '33-brazalete-3-eslabones-acero-centro-oro-rosa',
+              AMA3: '34-brazalete-3-eslabones-acero-centro-oro-amarillo',
               CAZU:  '17-correa-caucho-azul',
               CAZN:  '18-correa-caucho-azul-naranja',
               CBLA:  '19-correa-caucho-blanca',
