@@ -1343,7 +1343,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=27';
+  var SERIE_V = '?v=28';
   var SERIE_IMG = '/assets/img/lunar-2026/serie/';
   var SERIE = {
     'acero-negra-bnegro-blancas-brazalete': 1,
@@ -1629,7 +1629,13 @@
               CMAC:  '20-correa-caucho-marron-crema',
               CNVF:  '21-correa-caucho-negra-verde-fluor',
               /* Las cinco vaqueras llegaron encajadas, como los brazaletes
-                 del 31 al 34: mismo ancho y mismo centro. */
+                 del 31 al 34: mismo ancho y mismo centro.
+                 REHECHAS el 29/08/2026 por la tarde («sustituye las correas
+                 de tela vaquera por las nuevas»): MISMOS NOMBRES, otra
+                 imagen. La tira es más ancha, el pespunte va a puntadas
+                 sueltas en vez de línea corrida y ya no lleva la hilera de
+                 agujeros. Por eso hace falta subir `SERIE_V`: el fichero se
+                 llama igual y Cloudflare serviría el viejo cuatro horas. */
               VBEI:  '35-correa-vaquera-beige-20mm',
               VMAL:  '36-correa-vaquera-malva-20mm',
               VNEG:  '37-correa-vaquera-negra-20mm',
