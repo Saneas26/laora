@@ -859,9 +859,14 @@
 
      `H` son las herramientas que presta el motor. Se reciben como argumento
      y no como variables sueltas para que se vea con qué cuenta la ficha. */
+  /* El motor entrega sus herramientas al arrancar, antes de nada: `costes`
+     las necesita y se llama antes del primer pintado. */
+  var LAORA_H = {};
+  function tomaHerramientas(H) { LAORA_H = H; }
   function pintaPasos(e, H) {
     var botones = H.botones, rotula = H.rotula, deTabla = H.deTabla,
-        soloDe = H.soloDe, cribado = H.cribado, $ = H.$, matDe = H.matDe;
+        soloDe = H.soloDe, cribado = H.cribado, matDe = H.matDe;
+    var $ = H.$;
     botones('mov', deTabla(MOVS), e.mov);
     botones('bisel', soloDe(BISELES, 'bisel', {}), e.bisel);
     botones('esf', soloDe(ESFERAS, 'esf', { bisel: e.bisel }).map(function (o) {
@@ -963,6 +968,32 @@
     });
   }
 
+  /* EL COSTE DEL LUNAR: del paquete que monta el proveedor más lo que se
+     le añade. Nunca de sumar piezas sueltas: a piezas sale más caro.
+     El motor lo pide; esto lo contesta. */
+  function costes(e) {
+    /* `paqueteDe` es del motor: busca en PAQUETES la combinación puesta.
+       Se recibe por las herramientas, como todo lo demás. */
+    var p = LAORA_H.paqueteDe();
+    /* Un paquete sin coste cuenta como no saberlo: se dibuja, pero no se
+       pone precio ni se vende. */
+    if (!p || p.coste === null || p.coste === undefined) return null;
+    /* LA CORREA QUE TRAE EL PAQUETE NO SE PAGA APARTE, y sólo esa: si el
+       paquete dice cuál trae y se ha elegido otra, se suma la elegida y el
+       paquete se paga entero igual. */
+    var dentro = p.correaDentro &&
+                 (!p.correaQueTrae || p.correaQueTrae === e.correa);
+    var extra = 0;
+    if (!dentro) {
+      var c = CORREAS[e.correa];
+      /* Sin precio de compra de la correa no hay coste: el brazalete de PVD
+         suelto no lo tiene, porque su precio va dentro del pack. */
+      if (!c || c.coste === null || c.coste === undefined) return null;
+      extra = c.coste;
+    }
+    return MOVS[e.mov].coste + p.coste + extra + LOGO;
+  }
+
   /* La ficha técnica del Lunar, con sus piezas. */
   function tecnica(e) {
     return {
@@ -1004,7 +1035,7 @@
     COSTES_PUESTOS: COSTES_PUESTOS, CADENA: CADENA,
     e: e,
     pintaPasos: pintaPasos, normaliza: normaliza, detalle: detalle,
-    tecnica: tecnica,
+    tecnica: tecnica, costes: costes, tomaHerramientas: tomaHerramientas,
     referencia: referencia, agua: agua,
     descripcion: descripcion, dichoCompleto: dichoCompleto
   };

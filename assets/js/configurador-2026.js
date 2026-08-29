@@ -232,6 +232,38 @@
   function descripcion() { return M.descripcion(e); }
   function dichoCompleto() { return M.dichoCompleto(e); }
 
+  /* LO QUE EL MOTOR LE PRESTA AL MODELO para que pinte sus pasos. Se pasa
+     explícito y no por variables sueltas: así se ve de un vistazo con qué
+     cuenta una ficha, y añadir algo aquí es una decisión, no un descuido. */
+  var HERRAMIENTAS = {
+    botones: botones, rotula: rotula, deTabla: deTabla, valores: valores,
+    combos: combos, cribado: cribado, marcado: marcado,
+    /* ⚠️ `$` y `todos` van ENVUELTOS. Son `var`, no `function`, así que
+       cuando este objeto se arma —lo primero de todo, para que el modelo
+       tenga sus herramientas antes del primer coste— todavía valen
+       `undefined`. Envueltas se resuelven al llamarlas, que es cuando ya
+       existen. */
+    $: function (sel) { return $(sel); },
+    todos: function (sel) { return todos(sel); },
+    matDe: matDe, primeraDe: primeraDe, paqueteDe: paqueteDe,
+    /* Cada paso enseña sólo lo que sigue teniendo salida con lo ya elegido
+       por encima. `o[2]` es «no lo dibujes» y `o[3]` es «dibújalo apagado». */
+    soloDe: function (tabla, campo, fij, apagaSobrantes) {
+      var ok = valores(campo, fij);
+      return deTabla(tabla).map(function (o) {
+        var fuera = ok.indexOf(o[0]) < 0;
+        if (apagaSobrantes) o[3] = fuera; else o[2] = fuera;
+        return o;
+      });
+    }
+  };
+
+  /* ⚠️ Y SE LE ENTREGAN AL MODELO AQUÍ, ANTES DE NADA. Se probó a pasarlas
+     solo al pintar los pasos, y no vale: `costes()` se llama antes que el
+     primer pintado —el precio se calcula al principio de `pinta()`— y el
+     modelo se quedaba sin herramientas justo cuando las necesitaba. */
+  if (M.tomaHerramientas) M.tomaHerramientas(HERRAMIENTAS);
+
   /* El coste de la caja NO está aquí: va en PAQUETES, porque el proveedor
      la vende montada con bisel, esfera y agujas dentro. Aquí sólo viven el
      nombre y el material. */
@@ -742,43 +774,46 @@
      configurador sin reglas nunca enseñe algo que no existe. */
   function normaliza() {
     if (M.normaliza) return M.normaliza(e, HERRAMIENTAS);
+    /* Primero, que lo elegido exista en su paso. */
     PASOS.forEach(function (p) {
       var t = M.OPCIONES && M.OPCIONES[p.id];
       if (!t) return;
       if (!t[e[p.id]]) e[p.id] = Object.keys(t)[0];
+    });
+    /* Y si el modelo dice qué combinaciones EXISTEN —no todos los relojes
+       admiten todas: la Bitácora monta 36 de las 126 que salen de
+       multiplicar—, se repara la cadena hacia abajo, igual que el Lunar.
+       Así cambiar la caja nunca deja al cliente delante de algo que no se
+       fabrica. */
+    if (!PAQUETES.length || !CADENA.length) return;
+    var fij = {};
+    CADENA.forEach(function (k) {
+      var ok = valores(k, fij);
+      if (!ok.length) return;
+      if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
+      fij[k] = e[k];
     });
   }
 
   /* Los pasos, uno detrás de otro, con lo que diga `OPCIONES`. Sin reglas
      entre ellos: el que las tenga, las escribe. */
   function pintaPasosGenerico() {
+    var fij = {};
     PASOS.forEach(function (p) {
       var t = M.OPCIONES && M.OPCIONES[p.id];
       if (!t) return;
       var op = t[e[p.id]];
-      botones(p.id, deTabla(t), e[p.id]);
+      /* Con lista de combinaciones, cada paso enseña sólo lo que sigue
+         teniendo salida con lo ya elegido por encima; sin ella, todo. */
+      var ops = (PAQUETES.length && CADENA.indexOf(p.id) >= 0)
+        ? HERRAMIENTAS.soloDe(t, p.id, fij)
+        : deTabla(t);
+      if (PAQUETES.length && CADENA.indexOf(p.id) >= 0) fij[p.id] = e[p.id];
+      botones(p.id, ops, e[p.id]);
       if (op) rotula(p.id, op.nombre, op.expl || op.tec || '');
     });
   }
 
-  /* LO QUE EL MOTOR LE PRESTA AL MODELO para que pinte sus pasos. Se pasa
-     explícito y no por variables sueltas: así se ve de un vistazo con qué
-     cuenta una ficha, y añadir algo aquí es una decisión, no un descuido. */
-  var HERRAMIENTAS = {
-    botones: botones, rotula: rotula, deTabla: deTabla, valores: valores,
-    combos: combos, cribado: cribado, marcado: marcado, $: $, todos: todos,
-    matDe: matDe, primeraDe: primeraDe,
-    /* Cada paso enseña sólo lo que sigue teniendo salida con lo ya elegido
-       por encima. `o[2]` es «no lo dibujes» y `o[3]` es «dibújalo apagado». */
-    soloDe: function (tabla, campo, fij, apagaSobrantes) {
-      var ok = valores(campo, fij);
-      return deTabla(tabla).map(function (o) {
-        var fuera = ok.indexOf(o[0]) < 0;
-        if (apagaSobrantes) o[3] = fuera; else o[2] = fuera;
-        return o;
-      });
-    }
-  };
 
 
   /* ---------- EL PRECIO, DEL COSTE AL PVP ----------
@@ -796,25 +831,28 @@
   /* EL COSTE, DEL PAQUETE MÁS LO QUE SE LE AÑADE. Devuelve `null` cuando no
      se sabe —una combinación que el proveedor no monta, o una correa sin
      coste—, y entonces la ficha no enseña precio ni deja comprar. */
+  /* ---------- EL COSTE DE COMPRA ----------
+     De qué se compone el coste de un reloj es del MODELO: el Lunar lo saca
+     de los paquetes que monta su proveedor, la Precisa lo suma por piezas
+     y cada uno tiene sus reglas —qué correa va dentro del paquete, qué
+     cambia con el movimiento—. El motor no se mete: pide el número.
+
+     Y el que no diga nada se suma solo: el coste de cada opción elegida
+     más lo que el modelo ponga de fijo —el logo—. Si a alguna le falta el
+     coste, no hay coste: se dibuja, pero no se pone precio ni se vende.
+     Vale para cualquier modelo que compre por piezas. */
   function costes() {
-    var p = paqueteDe();
-    /* Un paquete sin coste cuenta como no saberlo: se dibuja, pero no se
-       pone precio ni se vende. */
-    if (!p || p.coste === null || p.coste === undefined) return null;
-    /* LA CORREA QUE TRAE EL PAQUETE NO SE PAGA APARTE, y sólo esa: si el
-       paquete dice cuál trae y se ha elegido otra, se suma la elegida y el
-       paquete se paga entero igual. */
-    var dentro = p.correaDentro &&
-                 (!p.correaQueTrae || p.correaQueTrae === e.correa);
-    var extra = 0;
-    if (!dentro) {
-      var c = CORREAS[e.correa];
-      /* Sin precio de compra de la correa no hay coste: el brazalete de PVD
-         suelto no lo tiene, porque su precio va dentro del pack. */
-      if (!c || c.coste === null || c.coste === undefined) return null;
-      extra = c.coste;
+    if (M.costes) return M.costes(e);
+    var total = M.EXTRA || 0;
+    for (var i = 0; i < PASOS.length; i++) {
+      var t = M.OPCIONES && M.OPCIONES[PASOS[i].id];
+      if (!t) continue;
+      var o = t[e[PASOS[i].id]];
+      if (!o) continue;
+      if (o.coste === null || o.coste === undefined) return null;
+      total += o.coste;
     }
-    return MOVS[e.mov].coste + p.coste + extra + LOGO;
+    return total;
   }
   function precioTarifa() { return pvpBase(costes()); }
 
@@ -831,7 +869,16 @@
   /* EL 2,5 % DE KLARNA (Óscar, 19/08/2026, confirmado el 22/08): el PVP
      de tarifa sube un 2,5 % y se vuelve a redondear al 9,90. Después, el
      suelo: si no llega a 50 € limpios o al 15 %, sube de escalón. */
+  /* ⚠️ SIN COSTE NO HAY PRECIO, Y DEVUELVE `null`. Antes esto no lo
+     comprobaba: `costes()` devolvía `null`, JavaScript lo trataba como cero
+     al sumarlo, y salía un precio de 99,90 € para un reloj cuyo coste no se
+     sabe. Lo enseñó el volcador el 29/08/2026 con la Precisa recién
+     generada —doce referencias a 99,90 que ningún proveedor puede
+     cubrir—. Un precio calculado sobre un coste desconocido es peor que no
+     tener precio. */
   function precio() {
+    var c = costes();
+    if (c === null || c === undefined) return null;
     return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste()));
   }
   /* EL MOVIMIENTO YA VIENE SEÑALADO (Óscar, 27/08/2026). El Lunar sólo
@@ -1492,10 +1539,16 @@
      el diff.
 
      No es una API pública: es una puerta de servicio para la casa. */
-  window.__LAORA_MOTOR = {
+  /* `__LAORA_ULTIMO` guarda lo mismo bajo otro nombre para el volcador,
+     que lo lee después de ejecutar la ficha. */
+  window.__LAORA_MOTOR = window.__LAORA_ULTIMO = {
     e: e, precio: precio, costes: costes, referencia: referencia,
     normaliza: normaliza, pinta: pinta, agua: agua, firma: firma,
     vetada: vetada, sinVeto: sinVeto,
+    /* El contrato de pasos y las opciones del modelo: con los dos, el
+       volcador puede recorrer todas las combinaciones sin tener una copia
+       de las listas, que es lo que se quedaba viejo. */
+    PASOS: PASOS, OPCIONES: M.OPCIONES || null, M: M,
     MOVS: MOVS, CAJAS: CAJAS, ESFERAS: ESFERAS, BISELES: BISELES,
     AGUJAS: AGUJAS, CORREAS: CORREAS, CRISTALES: CRISTALES,
     PAQUETES: PAQUETES, COSTES_PUESTOS: COSTES_PUESTOS, MM: MM,

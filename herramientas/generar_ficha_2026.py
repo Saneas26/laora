@@ -71,7 +71,11 @@ MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 # y `bitacora.html`, que estaban vendiendo, y las dejó con «Todavía no está a
 # la venta». Se recuperaron de una copia hecha un minuto antes. De ahí esta
 # lista y de ahí que se compruebe ANTES de escribir nada.
-INTOCABLES = ('lunar', 'trinchera', 'precisa', 'bitacora', 'cero-cero')
+INTOCABLES = ('lunar', 'trinchera')
+
+# Precisa y Bitácora salieron de aquí el 29/08/2026, cuando sus costes
+# pasaron a su JSON y el generador supo hacerles el precio. Se hizo con una
+# copia delante y comprobando que sus referencias salían idénticas.
 
 # ⚠️ Y LA COMPROBACIÓN DE VERDAD: este generador SOLO reescribe páginas que
 # él mismo escribió. Lo dicen ellas en su propia cabecera. `cero-cero.html`
@@ -196,6 +200,16 @@ def tabla(opciones):
             fila['expl'] = o['expl']
         if o.get('color'):
             fila['color'] = o['color']
+        # ⚠️ EL COSTE VIAJA TAL CUAL, y la diferencia entre 0 y ausente es
+        # deliberada: `0` es «esta pieza no añade coste» y ausente es «no se
+        # sabe». Sin coste no hay precio y no se vende.
+        if 'coste' in o:
+            fila['coste'] = o['coste']
+        # Cualquier otro dato de la opción viaja tal cual: lo usan las
+        # plantillas de referencia, como la tapa de la Precisa.
+        for k in o:
+            if k not in ('id', 'nombre', 'expl', 'color', 'coste', 'familia', 'nota'):
+                fila[k] = o[k]
         t[o['id']] = fila
     return t
 
@@ -239,12 +253,27 @@ def modelo_js(d, dentro):
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
   var e = %(estado)s;
 
-  /* LA REFERENCIA la forman el código del modelo y lo elegido en cada
-     paso, en el orden del contrato. Es la que viaja al carrito y la que el
-     servidor comprueba, así que se arma siempre igual. */
+  /* ---------- LA REFERENCIA ----------
+     Es la que viaja al carrito y la que el servidor comprueba, así que NO
+     se puede cambiar de forma a la ligera: una referencia emitida ayer
+     tiene que seguir resolviéndose hoy.
+
+     Por eso el modelo puede traer su plantilla en el JSON. `{esf}` es lo
+     elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
+     que no traiga ninguna, se arma con el código y todos los pasos en el
+     orden del contrato. */
   var ORDEN = %(orden)s;
+  var PLANTILLA_REF = %(plantillaref)s;
   function referencia(e) {
-    return '%(codigo)s-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+    if (!PLANTILLA_REF) {
+      return '%(codigo)s-' + ORDEN.map(function (k) { return e[k]; }).join('-');
+    }
+    return PLANTILLA_REF.replace(/\{([a-z]+)(?:\.([a-z]+))?\}/g, function (_, paso, campo) {
+      var v = e[paso];
+      if (!campo) return v;
+      var o = OPCIONES[paso] && OPCIONES[paso][v];
+      return (o && o[campo]) || '';
+    });
   }
   function nombreDe(k) {
     var t = OPCIONES[k], o = t && t[e[k]];
@@ -276,8 +305,17 @@ def modelo_js(d, dentro):
     /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
        paquetes no hay coste, así que la ficha dice «Precio por definir» y
        no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
-    CAPA: {}, PILA: [], PAQUETES: [], COSTES_PUESTOS: false,
-    CADENA: ORDEN,
+    CAPA: {}, PILA: [],
+    /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
+       salen muchas más de las que se montan: la Bitácora da 126 y monta
+       36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
+       salida con lo ya elegido. Vacía quiere decir «todas valen». */
+    PAQUETES: %(combis)s,
+    /* EL COSTE, SUMANDO LO ELEGIDO. Cada opción trae el suyo y el modelo
+       añade lo que no depende de ningún paso —el logo—. Si a una le falta,
+       no hay coste: se dibuja, pero no se pone precio ni se vende. */
+    COSTES_PUESTOS: %(listo)s, EXTRA: %(extra)s,
+    CADENA: %(cadena)s,
     referencia: referencia, descripcion: descripcion,
     dichoCompleto: dichoCompleto, detalle: detalle, agua: agua,
     tecnica: tecnica
@@ -293,6 +331,11 @@ def modelo_js(d, dentro):
         'estado': js(estado),
         'correamat': js(correa_mat),
         'agua': js(d.get('agua', '')),
+        'plantillaref': js(d.get('referencia')) if d.get('referencia') else 'null',
+        'listo': 'true' if d.get('listo') else 'false',
+        'extra': js(d.get('extra', 0)),
+        'combis': json.dumps(d.get('combinaciones', []), ensure_ascii=False),
+        'cadena': js(d.get('cadena')) if d.get('cadena') else 'ORDEN',
     }
 
 

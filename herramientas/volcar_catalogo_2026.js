@@ -201,22 +201,54 @@ function anota(ref, precio, nombre, detalle, correa, ficha, mm, hermanas) {
 /* ============================================================
    LO-01 · PRECISA
    ============================================================ */
-function precisa() {
-  const L = motorDe('precisa.html', 'MOVS, ESFERAS, e, precio, referencia');
+/* ============================================================
+   LOS MODELOS GENERADOS
+   ------------------------------------------------------------
+   Una sola función para todos los que llevan el configurador de la casa
+   y no tienen reglas propias: Precisa, Cóctel, Tortuga, Diver y los que
+   vengan. No hay ninguna lista copiada aquí. Se le PREGUNTA a la ficha:
+   qué pasos tiene —del contrato—, qué opciones hay en cada uno, y se
+   recorren todas las combinaciones pidiéndole a ella el precio y la
+   referencia.
+
+   La primera versión de esto llevaba las opciones escritas a mano,
+   copiadas de la ficha. Duró un día: el 19/08/2026 Óscar añadió el ante
+   al Murph, la copia se quedó vieja y esas referencias no se podían
+   vender porque el servidor no las conocía. No se repite.
+   ============================================================ */
+function generado(slug, nombre, clase, mm) {
+  const L = motorDe(slug + '.html',
+    'e, precio, referencia, normaliza, pinta, agua');
+  const M = globalThis.window.__LAORA_ULTIMO;
+  if (!M || !M.OPCIONES) return 0;
+
+  /* Los pasos que de verdad tienen algo que elegir, en el orden del
+     contrato. Los vacíos no multiplican nada. */
+  const pasos = M.PASOS
+    .map((p) => [p.id, Object.keys(M.OPCIONES[p.id] || {})])
+    .filter(([, ops]) => ops.length);
+
   let n = 0;
-  for (const mov of Object.keys(L.MOVS)) {
-    for (const esf of Object.keys(L.ESFERAS)) {
-      L.e.mov = mov; L.e.esf = esf;
-      const m = L.MOVS[mov];
-      n += anota(L.referencia(), L.precio(),
-        'Precisa ' + L.ESFERAS[esf].nombre,
-        'Acero 316L 40 mm, brazalete integrado, tapa ' +
-          (m.tapa === 'C' ? 'de cristal' : 'sólida') + ' · Esfera ' +
-          L.ESFERAS[esf].nombre + ' · ' + m.nombre,
-        'Brazalete integrado de acero 316L',
-        { movimiento: m.tec, esfera: L.ESFERAS[esf].tec, agua: m.agua }, 40) ? 1 : 0;
+  const anda = (i) => {
+    if (i === pasos.length) {
+      L.normaliza();
+      const p = L.precio();
+      /* Sin coste no hay precio: la ficha devuelve `null` y esa combinación
+         no entra en el catálogo. No se vende lo que no se sabe cuánto
+         cuesta. */
+      if (p === null || p === undefined || !isFinite(p)) return;
+      const dicho = pasos
+        .map(([id, _]) => (M.OPCIONES[id][L.e[id]] || {}).nombre)
+        .filter(Boolean);
+      n += anota(L.referencia(), p, nombre + ' ' + (dicho[dicho.length - 1] || ''),
+        dicho.join(' · '), dicho[dicho.length - 1] || '',
+        { modelo: clase, agua: L.agua() }, mm) ? 1 : 0;
+      return;
     }
-  }
+    const [id, ops] = pasos[i];
+    for (const v of ops) { L.e[id] = v; anda(i + 1); }
+  };
+  anda(0);
   return n;
 }
 
@@ -492,28 +524,15 @@ function lunar() {
    LO-04 · BITÁCORA
    La foto es la lista de validez: solo existe lo fotografiado.
    ============================================================ */
-function bitacora() {
-  const L = motorDe('bitacora.html',
-    'CAJAS, ESFERAS, BRZ, MOV, ORDEN_CAJAS, ORDEN_ESF, ORDEN_BRZ, e, precio, referencia, existe');
-  let n = 0;
-  for (const caja of L.ORDEN_CAJAS)
-  for (const esf of L.ORDEN_ESF)
-  for (const brz of L.ORDEN_BRZ) {
-    if (!L.existe(caja, esf, brz)) continue;
-    Object.assign(L.e, { caja, esf, brz });
-    n += anota(L.referencia(), L.precio(),
-      'Bitácora ' + L.ESFERAS[esf].nombre,
-      'Caja ' + L.CAJAS[caja].nombre + ' 40 mm · Esfera ' + L.ESFERAS[esf].nombre + ' · ' + L.MOV.nombre,
-      L.BRZ[brz].nombre + ', ' + L.BRZ[brz].cierre,
-      { movimiento: L.MOV.tec, caja: 'Caja de ' + L.CAJAS[caja].mat + '.',
-        correa: L.BRZ[brz].tec }, 40) ? 1 : 0;
-  }
-  return n;
-}
+/* La Bitácora pasó al generador el 29/08/2026: su función a mano se
+   fue con ella. Ahora la recorre `generado()`, que le pregunta a la ficha
+   en vez de tener una copia de sus listas. */
 
 /* ---------- a escribir ---------- */
 const cuenta = {
-  Precisa: precisa(), Trinchera: trinchera(), Lunar: lunar(), 'Bitácora': bitacora(),
+  Precisa: generado('precisa', 'Precisa', 'Deportivo de brazalete integrado', 40),
+  Trinchera: trinchera(), Lunar: lunar(),
+  'Bitácora': generado('bitacora', 'Bitácora', 'Deportivo de brazalete integrado', 40),
 };
 
 const destino = path.join(RAIZ, 'assets/datos/catalogo-2026.json');

@@ -4,23 +4,26 @@
  "codigo": "LO-04",
  "clase": "Deportivo",
  "desc": "Brazalete integrado y automático suizo.",
- "listo": false,
+ "listo": true,
  "caja": {
   "tamanos": [],
   "materiales": [
    {
     "id": "C1",
     "nombre": "Plata",
+    "coste": 29.57,
     "color": "#C9CCCE"
    },
    {
     "id": "C3",
     "nombre": "Oro rosa",
+    "coste": 34.97,
     "color": "#B76E56"
    },
    {
     "id": "C4",
     "nombre": "Negro PVD",
+    "coste": 34.97,
     "color": "#1C1D1F"
    }
   ],
@@ -36,31 +39,37 @@
    {
     "id": "E1",
     "nombre": "Turquesa",
+    "coste": 21.39,
     "color": "#2AA7A2"
    },
    {
     "id": "E2",
     "nombre": "Blanca",
+    "coste": 21.39,
     "color": "#F2F2EF"
    },
    {
     "id": "E3",
     "nombre": "Negra",
+    "coste": 21.39,
     "color": "#1C1D1F"
    },
    {
     "id": "E4",
     "nombre": "Azul",
+    "coste": 21.39,
     "color": "#2E4A7D"
    },
    {
     "id": "E5",
     "nombre": "Gris",
+    "coste": 21.39,
     "color": "#8A8D8F"
    },
    {
     "id": "E6",
     "nombre": "Marrón",
+    "coste": 25.99,
     "color": "#6B4B33"
    }
   ]
@@ -73,6 +82,7 @@
   {
    "id": "A",
    "nombre": "Automático Suizo LO_A3826",
+   "coste": 0,
    "expl": "Calibre laOra LO_A3826, arquitectura Suiza. Automático de 28.800 alternancias, 38 horas de reserva, fecha a las 3, cuerda manual y parada de segundero."
   }
  ],
@@ -80,69 +90,295 @@
   "familias": [
    {
     "id": "GOMA",
-    "nombre": "Goma"
+    "nombre": "Goma",
+    "coste": 0,
+    "expl": "Silicona con hebilla mariposa de acero."
    },
    {
     "id": "A316",
-    "nombre": "Acero 316L"
+    "nombre": "Acero 316L",
+    "coste": 0,
+    "expl": "Brazalete integrado con cierre plegable."
    }
   ],
   "colores": [
    {
     "id": "Brz-Goma-Bit-01",
     "nombre": "Silicona negra",
+    "coste": 6.39,
     "familia": "GOMA",
     "color": "#1C1D1F"
    },
    {
     "id": "Brz-Goma-Bit-03",
     "nombre": "Silicona azul",
+    "coste": 6.39,
     "familia": "GOMA",
     "color": "#2E4A7D"
    },
    {
     "id": "Brz-Goma-Bit-04",
     "nombre": "Silicona marrón",
+    "coste": 6.39,
     "familia": "GOMA",
     "color": "#6B4B33"
    },
    {
     "id": "Brz-Acero-Bit-01",
     "nombre": "Acero plata",
+    "coste": 21.19,
     "familia": "A316",
     "color": "#C9CCCE"
    },
    {
     "id": "Brz-Acero-Bit-07",
     "nombre": "Acero plata y oro rosa",
+    "coste": 21.19,
     "familia": "A316",
     "color": "#D9A08A"
    },
    {
     "id": "Brz-Acero-Bit-06",
     "nombre": "Acero oro rosa",
+    "coste": 21.19,
     "familia": "A316",
     "color": "#B76E56"
    },
    {
     "id": "Brz-Acero-Bit-02",
     "nombre": "Acero negro",
+    "coste": 21.19,
     "familia": "A316",
     "color": "#1C1D1F"
    }
   ],
-  "cierres": [
-   {
-    "id": "MARI",
-    "nombre": "Hebilla mariposa",
-    "expl": "Hebilla mariposa de acero, en las de goma."
-   },
-   {
-    "id": "PLEG",
-    "nombre": "Cierre plegable",
-    "expl": "Cierre plegable, en los brazaletes de acero."
-   }
-  ],
+  "cierres": [],
   "colores_cierre": []
- }
+ },
+ "referencia": "LO-04-{caja}-{esf}-{correa}",
+ "extra": 59.01,
+ "combinaciones": [
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-03",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-03",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Goma-Bit-03",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E5",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E5",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E5",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E5",
+   "correa": "Brz-Goma-Bit-03",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E5",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E5",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  }
+ ],
+ "cadena": [
+  "caja",
+  "esf",
+  "correa"
+ ],
+ "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen."
 }
