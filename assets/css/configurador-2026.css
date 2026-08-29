@@ -1,0 +1,706 @@
+/* ============================================================
+   laOra · EL CONFIGURADOR, LA HOJA DE ESTILO DE LA CASA
+   ============================================================
+   Óscar, 29/08/2026: «el estilo del Lunar pasa a ser el único estilo a
+   utilizar en el resto de modelos, por tanto Trinchera y todos los demás
+   ya deberían tener instalado el configurador con el estilo Lunar».
+
+   Esto SALE DE `lunar.html`, donde vivía dentro de un `<style>` de 687
+   líneas. Mientras estuvo ahí, el estilo era de un modelo; en un fichero
+   es de la casa, y el día que se retoque un botón se retoca en los diez a
+   la vez.
+
+   VA DESPUÉS DE `producto-2026.css` EN EL <head>, siempre. Buena parte de
+   estas reglas están aquí justamente para ganarle a esa hoja —el visor, la
+   pila de miniaturas, la barra de precio—, y si se carga antes, pierde.
+
+   NO LLEVA NADA DE UN MODELO CONCRETO: ni una medida del Lunar, ni un
+   color de su esfera. Lo que es del Lunar se queda en su página.
+   ============================================================ */
+
+  /* La fila del diámetro y el movimiento (Óscar, 24/08/2026). Solo en esta
+     ficha: el resto de configuradores sigue con un paso por línea. */
+  .pv-fila-cabeza{
+    display:flex; flex-wrap:wrap; gap:18px 28px;
+    align-items:flex-start; justify-content:space-between;
+  }
+  /* `space-between` y no `margin-left:auto`: cuando la columna se estrecha y
+     los dos grupos ya no caben, cada uno se queda en su renglón y alineado a
+     la izquierda. Con el margen automático, el del movimiento se iba solo a
+     la derecha en su propia línea y parecía descolgado. */
+  .pv-fila-cabeza>.pv-grupo{ flex:0 1 auto }
+  /* Un paso que todavía no toca. Va con clase y no con `hidden` porque
+     `hidden` ya lo usan los grupos para su propia lógica. */
+  .pv-cerrado{ display:none !important }
+
+  /* UNA LÍNEA ENTRE SECCIONES (Óscar, 26/08/2026): «entre cada sección
+     quiero una línea delgada y elegante que separe cada una de las
+     secciones». Un pelo de 1 px del gris de la casa —el mismo `--cv2-linea`
+     que ya separa los desplegables de la ficha técnica—, con aire a los dos
+     lados para que separe sin hacer ruido. */
+  .pv-info .pv-fila + .pv-fila{
+    border-top:1px solid var(--cv2-linea);
+    padding-top:20px; margin-top:20px;
+  }
+  /* ENTRE EL TAMAÑO Y EL MOVIMIENTO LA LÍNEA ES VERTICAL, porque esos dos
+     van uno al lado del otro (Óscar, 24/08). */
+  .pv-fila-cabeza>.pv-grupo+.pv-grupo{
+    border-left:1px solid var(--cv2-linea);
+    padding-left:28px;
+  }
+  /* Y SE PONE HORIZONTAL cuando la columna se estrecha y se apilan. Los dos
+     grupos necesitan 453 px y la columna es el 36 % del ancho de pantalla,
+     así que dejan de caber sobre los 1.260. Sin esto quedaría un palito
+     vertical suelto encima del movimiento. Se fuerza el apilado en vez de
+     dejarlo al `wrap` para que la línea y la ruptura ocurran a la vez. */
+  @media (max-width:1260px){
+    .pv-fila-cabeza>.pv-grupo{ flex:0 0 100% }
+    .pv-fila-cabeza>.pv-grupo+.pv-grupo{
+      border-left:0; padding-left:0;
+      border-top:1px solid var(--cv2-linea);
+      padding-top:18px;
+    }
+  }
+
+  /* La miniatura de la correa abierta, con su pie. Va en la misma esquina
+     que las otras dos y con el mismo ancho; el `figure` necesita su propio
+     [hidden] porque, igual que el cartel, trae display propio. */
+  .pv-mini-fig{ margin:0; display:flex; flex-direction:column; align-items:center; gap:4px }
+  .pv-mini-fig[hidden]{ display:none }
+  /* Esta va por ALTURA y no por anchura: la correa extendida es 1:4, y
+     dándole el 24% de ancho como a las otras minis se salía del visor por
+     abajo. El `.pv-hero img.pv-mini{width:24%}` de la hoja compartida hay
+     que ganárselo con el selector puesto delante. */
+  .pv-hero .pv-mini-fig img{
+    width:auto !important; display:block;
+    /* el alto lo manda el VISOR, no la ventana: así la correa y su pie
+       caben siempre dentro del marco, que es cuadrado */
+    height:min(26vw, 150px); object-fit:contain;
+  }
+  .pv-mini-fig figcaption{
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    font-size:11px; color:var(--cv2-gris); text-align:center;
+  }
+
+  /* LA LETRA DE LA FICHA (Óscar, 24/08/2026): Montserrat en los titulares,
+     Nunito Sans en el texto de las opciones, ninguna serifa y CERO
+     interletrado. Va aquí y no en producto-2026.css porque de momento es
+     solo este configurador. */
+  .pv-info, .pv-info *{ letter-spacing:normal !important }
+  /* Primero lo general —todo lo que se lee corrido va en Nunito Sans— y
+     DESPUÉS los titulares en Montserrat. En este orden, porque `.pv-rotulo`
+     y `.pv-precio` son párrafos: con las reglas al revés, la genérica de
+     `.pv-info p` los pisaba y salían en Nunito. */
+  .pv-info p, .pv-info li, .pv-info small, .pv-info a,
+  .pv-opciones button, .pv-fijo, .pv-sinfoto{
+    font-family:'Nunito Sans', system-ui, sans-serif !important;
+  }
+  /* Con `.pv-info` delante a propósito: el rótulo y el precio son párrafos,
+     y `.pv-info p` (una clase + un elemento) pesa más que `.pv-rotulo` a
+     secas. Sin esto ganaba la regla de Nunito por especificidad, no por
+     orden, y los titulares salían con la letra del texto. */
+  .pv-info h1, .pv-info .pv-rotulo, .pv-info .pv-chip, .pv-info .pv-codigo,
+  .pv-info .pv-precio, .pv-info .pv-comprar, .pv-comprar{
+    font-family:'Montserrat', system-ui, sans-serif !important;
+  }
+  .pv-info h1, .pv-info .pv-rotulo, .pv-comprar{ font-weight:700 }
+  /* El rótulo iba en versalitas apretadas; sin interletrado se lee mejor
+     y no hace falta gritar. */
+  /* LA ESCALA: DOS TAMAÑOS Y NADA MÁS. 22 px para el título de cada fila y
+     16 px —el tamaño base del navegador— para todo lo demás. Un salto de
+     1,38 y se acabó.
+
+     Antes iba con cuatro escalones y no valía: 17 px para los botones choca
+     con los 16 px del cuerpo de la página, que también cuenta, y dos
+     tamaños separados por un píxel no son jerarquía, son ruido. Lo que
+     distingue un rótulo pequeño de un botón es el COLOR, no un píxel.
+
+     De paso los rótulos pequeños suben de 13 a 16 px, que se leen mucho
+     mejor: aquí la legibilidad manda sobre todo lo demás. */
+  .pv-info .pv-rotulo{ text-transform:none; font-size:22px; line-height:1.25 }
+  /* LA LETRA SUBE Y EL RELLENO CON ELLA. El 24/08 la letra de los botones
+     pasó de 13 a 16 px y se quedó el relleno del CSS base —11 px arriba y
+     14 a los lados—, que estaba calculado para la letra pequeña: el texto
+     quedaba pegado al recuadro. Sube en la misma proporción, 16/13. */
+  .pv-info .pv-opciones button{
+    text-transform:none; font-size:16px;
+    padding:14px 17px;
+  }
+
+  /* LOS BOTONES (Óscar, 24/08/2026): «recuadro amarillo con letras negras»
+     cuando está señalado, «recuadro blanco y letras negras» cuando no.
+     El amarillo es el oro de la marca, el mismo del rótulo NUEVO. Sobre
+     negro da 9,4:1, así que se lee de sobra. */
+  .pv-info .pv-opciones button{
+    background:#fff; color:#121414;
+    border:1px solid rgba(18,20,20,.28);
+  }
+  .pv-info .pv-opciones button:hover{ border-color:#121414 }
+  .pv-info .pv-opciones button[aria-pressed="true"]{
+    background:var(--cv2-oro); color:#121414; border-color:var(--cv2-oro);
+  }
+  /* el filete de debajo era la marca de «elegido»; ahora lo dice el
+     propio recuadro, así que sobra */
+  .pv-info .pv-opciones button[aria-pressed="true"]::after{ display:none }
+  .pv-info .pv-opciones button[disabled]{
+    background:#fff; color:#121414; opacity:.4;
+  }
+
+  /* EL CALIBRE, A LA ALTURA DEL BOTÓN (Óscar, 28/08/2026: «creo que el
+     calibre cabe a la misma altura que el botón de Mecacuarzo Japonés»).
+     Y de paso arregla lo otro que pedía: la línea entre Movimiento y
+     Esfera no salía porque el separador es `.pv-fila + .pv-fila`, y este
+     párrafo se había quedado ENTRE las dos filas rompiendo la adyacencia.
+     Metido dentro del grupo del movimiento, los dos hermanos vuelven a
+     tocarse y la línea aparece sola.
+
+     `flex-wrap`: si la columna se estrecha, el calibre baja a su renglón
+     en vez de estrujar el botón. */
+  .pv-mov-linea{
+    display:flex; align-items:center; flex-wrap:wrap; gap:6px 14px;
+  }
+  .pv-calibre{
+    margin:0; font-size:16px; color:#4A4A4A;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-calibre[hidden]{ display:none }
+
+  /* ============================================================
+     EL CONFIGURADOR EN TARJETAS, A LA MANERA DE TESLA
+     (Óscar, 28/08/2026: «vamos a diseñar la experiencia de usuario como
+     si fuese a comprarse un tesla»). Medido en tesla.com/es_es/modely:
+
+       · título de tarjeta ......... 24 px
+       · nombre de la opción ....... 14 px, semi, casi negro
+       · precio de la opción ....... 14 px, semi, casi negro
+       · explicación ............... 14 px, regular, gris #393C41
+       · entrega y forma de compra . 14 px
+
+     UNA SOLA LETRA PEQUEÑA, y todo el trabajo lo hace el contraste: no
+     hay tamaños intermedios. Aquí se respeta eso al pie de la letra.
+
+     Y SE ACABÓ ABRIR LOS PASOS DE UNO EN UNO: en Tesla se ve la
+     configuración entera desde el primer momento y el cliente va y viene.
+     Es lo que se ha pedido copiar. */
+  .pv-entrega{
+    margin:2px 0 12px; font-size:14px; line-height:20px; font-weight:500;
+    color:#5C5E62; font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-modo{
+    width:100%; font:500 14px/20px 'Nunito Sans', system-ui, sans-serif;
+    color:#171A20; background:#fff; border:1px solid var(--cv2-linea);
+    border-radius:6px; padding:11px 12px; margin:0 0 8px;
+  }
+  .pv-modo-nota{
+    margin:0 0 20px; font-size:14px; line-height:20px; color:#393C41;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    background:#F4F4F2; border-radius:6px; padding:10px 12px;
+  }
+  .pv-modo-nota[hidden]{ display:none }
+  .pv-modo-nota b{ color:#171A20 }
+
+  .pv-tarjeta{
+    background:#F4F4F2; border-radius:6px; padding:20px 18px; margin:0 0 16px;
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .pv-tarjeta-tit{
+    margin:0; font-size:24px; line-height:28px; font-weight:500; color:#171A20;
+    font-family:'Nunito Sans', system-ui, sans-serif; letter-spacing:0;
+  }
+  .pv-g{ display:flex; flex-direction:column; gap:8px }
+  /* EL RÓTULO Y LO ELEGIDO EN NEGRITA, LA EXPLICACIÓN MÁS PEQUEÑA
+     (Óscar, 28/08/2026: «Tamaño de la caja 14 px negrita / Pendiente 14 px
+     negrita / la explicación normal y más pequeña 12 px»). Se separa más de
+     Tesla, que lo pone todo a 14, pero así la explicación pesa menos y la
+     línea de la elección canta. Los 12 px se aguantan porque el gris #393C41
+     sobre la tarjeta da 9,9:1 de contraste. */
+  .pv-g-cab{
+    margin:0; display:flex; align-items:baseline; justify-content:space-between;
+    gap:12px; font-size:14px; line-height:20px; font-weight:700; color:#171A20;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-g-cab .pv-g-valor{ color:#171A20; text-align:right; font-weight:700 }
+  .pv-g-explica{
+    margin:0; font-size:12px; line-height:17px; font-weight:400; color:#393C41;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-g-explica:empty{ display:none }
+  .pv-g[hidden]{ display:none }
+  /* Un paso que todavía no tiene datos: se ve, para que se sepa que va a
+     estar, pero no se puede tocar. */
+  /* El gris de un paso pendiente: #8E9095 en el rótulo, que es la señal de
+     «esto todavía no se toca», pero la EXPLICACIÓN a #61646A. Con el gris
+     claro daba 2,9:1 de contraste, y a 12 px eso no se lee; a #61646A sube a
+     5,4:1. Es texto que el cliente lee, no un control apagado. */
+  .pv-g-vacio .pv-g-cab, .pv-g-vacio .pv-g-cab .pv-g-valor{ color:#8E9095 }
+  .pv-g-vacio .pv-g-explica{ color:#61646A }
+  .pv-tarjeta .pv-opciones{ gap:8px }
+  .pv-tarjeta .pv-opciones button{ font-size:14px; padding:9px 14px }
+
+  /* ESQUINAS UN POQUITO REDONDEADAS Y EL ORO AL 60 % (Óscar, 28/08/2026).
+     El oro de la marca es #D4AF37; al 60 % sobre la tarjeta queda
+     RGB(225, 203, 130), y con la letra negra sube a 11,5:1 de contraste —el
+     oro puro daba 8,8:1—, así que se lee mejor que antes, no peor.
+     Se toca sólo dentro del Lunar: esos botones son de la hoja compartida. */
+  .pv-info .pv-opciones button{ border-radius:6px }
+  .pv-info .pv-opciones button[aria-pressed="true"]{
+    background:rgba(212,175,55,.6); border-color:rgba(212,175,55,.6);
+  }
+  .pv-modo{ background:rgba(212,175,55,.6); border-color:rgba(212,175,55,.6) }
+  /* EL PIE DEJA DE IR PEGADO ABAJO EN EL LUNAR. `.pv-pie` es `sticky` en la
+     hoja compartida y con tres tarjetas la columna mide más de dos mil
+     píxeles: el pie se quedaba flotando encima de la tarjeta del movimiento
+     y de la de la correa, tapándolas. Ahora cae al final de la columna, que
+     es donde Tesla pone el bloque de precio; su barra fija de abajo es otra
+     cosa —delgada, de ancho completo— y todavía no está hecha.
+     Se toca sólo aquí: esa hoja la usan todas las fichas.
+     Y SÓLO EN ESCRITORIO: por debajo de 900 px la hoja compartida lo ancla
+     al borde inferior de la pantalla, que ahí sí es lo que hace falta, y
+     este selector le ganaba por especificidad. */
+  @media (min-width:901px){
+    .pv-info .pv-pie{ position:static; margin-top:8px }
+  }
+
+  /* ---------- EL PIE DE PAGO, AFINADO (Óscar, 28/08/2026) ----------
+     Medido antes de tocar nada: del precio a «Impuestos incluidos» había
+     18 px, y de la fila de confianza a la nota de la garantía, 28. Los dos
+     son hijos de un flex con `gap:10px`, así que la separación se recorta
+     con margen negativo, que es lo único que resta del hueco del flex.
+
+     La nota de la garantía se va a la derecha y baja a 12 px: cuelga de
+     «Garantía 5 años*», que es la segunda columna de la fila de arriba, y
+     alineada a la izquierda parecía que colgaba del envío. */
+  .pv-info .pv-pie .pv-imp{ margin-top:-14px }
+  .pv-info .pv-nota-garantia{
+    margin-top:-14px; font-size:12px; line-height:17px; text-align:right;
+  }
+  .pv-info .pv-comprar{ border-radius:6px }
+  .pv-info .pv-klarna{ border-radius:6px }
+
+  /* ---------- LA BARRA DE PRECIO DE DEBAJO DE LA FOTO ----------
+     Óscar, 28/08/2026: «debajo de la foto vamos a colocar una barra donde
+     se va marcando el precio de las elecciones del cliente y permanece
+     visible sólo hasta que el scroll llega a la tarjeta donde ya se ve la
+     otra tarjeta de precio con el botón añadir al carrito».
+
+     LA FOTO NO SE TOCA. Sigue pegada arriba con la regla de siempre; la
+     barra se pega abajo por su cuenta. Hubo una versión intermedia que las
+     metía en un envoltorio y las hacía repartirse el alto de la pantalla:
+     la foto encogía para dejarle sitio, y entre las dos se comían la
+     pantalla entera. Está contada en el bloque de escritorio de más abajo,
+     que es donde se arregló. */
+  .pv-barra{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center;
+    gap:16px; padding:10px 14px;
+    border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
+  }
+  /* SE APAGA Y SE VA (Óscar, 28/08/2026: «había un hueco blanco vacío»).
+
+     La primera versión la dejaba invisible PERO OCUPANDO SU SITIO, para
+     que la foto no diera un salto al crecer y encoger en cada pasada.
+     Aquello dejó de tener sentido en cuanto el marco pasó a medirse solo
+     —su lado es el menor entre el ancho de la columna y el hueco de alto, y
+     esa cuenta no depende de la barra—, así que quitarla de en medio ya no
+     mueve nada. Lo que sí hacía era dejar setenta y dos píxeles de blanco
+     debajo de la foto, que es justo lo que se veía. */
+  .pv-barra-fuera{ display:none }
+  .pv-barra .pv-barra-precio{ margin:0; font-size:22px; line-height:1.1 }
+  /* EL «× 3 PAGOS» que acompaña a la cuota, en pequeño y sin negrita: el
+     número que manda es el de la cuota, esto sólo dice de qué es. */
+  .pv-precio-x{
+    font-size:.55em; font-weight:400; letter-spacing:0; color:var(--cv2-gris);
+    white-space:nowrap;
+  }
+  .pv-barra-klarna{
+    margin:0; display:flex; align-items:center; justify-content:center;
+    flex-wrap:wrap; gap:6px;
+    font-size:12.5px; line-height:1.35; color:var(--cv2-gris); text-align:center;
+  }
+  .pv-barra-klarna[hidden]{ display:none !important }
+  .pv-barra .pv-barra-comprar{
+    width:auto; margin:0; padding:12px 22px; border-radius:6px;
+  }
+
+  /* ⚠️ ESTO VA DESPUÉS DE LO DE ARRIBA, NO ANTES. Los selectores pesan lo
+     mismo, así que manda el último: con el bloque de escritorio delante,
+     el `flex-wrap:wrap` de la línea de Klarna le ganaba a su `nowrap` y la
+     barra seguía partiéndose en dos renglones. */
+  @media (min-width:901px){
+    /* LA FOTO SE QUEDA COMO ESTABA Y LA BARRA SE PEGA ABAJO (Óscar,
+       28/08/2026: «quiero que la caja de la foto ocupe lo que antes, y
+       permita ver la tarjeta de precios fija, hasta que el scroll baje a la
+       otra tarjeta de precios»).
+
+       DE DÓNDE VENÍA EL LÍO. Yo había metido la foto y la barra dentro de
+       un envoltorio y las hacía repartirse el alto de la pantalla: la foto
+       encogía para dejarle sitio a la barra. Con eso la foto pasaba a
+       ocupar la pantalla entera de arriba abajo —foto más barra— y, en
+       cuanto no cabían las dos, una de las dos se quedaba fuera.
+
+       AHORA NO SE REPARTEN NADA. La foto vuelve a ser lo que era: pegada a
+       92 px de arriba y sin pasar de `100vh - 108`, la regla de la hoja
+       compartida, que es la que había antes de tocar nada. Y la barra ya no
+       va detrás de ella en la fila: se pega al BORDE DE ABAJO de la
+       pantalla, encima de lo que haya, hasta que la columna se acaba.
+
+       `margin-top:auto` la manda al final de la columna, que es donde se
+       despega; sin eso se soltaría a la altura de la foto, mucho antes. */
+    .pv-barra{
+      position:sticky; bottom:16px; margin-top:auto; z-index:5;
+      box-shadow:0 6px 20px rgba(18,20,20,.10);
+    }
+  }
+
+  /* ---------- LA MISMA BARRA EN MÓVIL, PEGADA ABAJO (Óscar, 28/08/2026) ----------
+     EN EL LUNAR NO HABÍA NINGUNA. La hoja compartida ancla `.pv-pie` al
+     borde de abajo por debajo de 900 px, pero otra regla suya —
+     `.pv-info>div{position:static}`— le gana por especificidad, y sólo le
+     pasa a esta ficha: en las demás el pie vive en la columna de las fotos
+     y esa regla no lo alcanza. En vez de resucitar aquel pie —mide 286 px,
+     un tercio de la pantalla de un móvil— se ancla esta barra, que hace lo
+     mismo ocupando la cuarta parte.
+
+     EN DOS RENGLONES, que a 375 px no caben los tres trozos en fila: el
+     precio y el botón abajo, y encima la línea de Klarna en pequeño. */
+  @media (max-width:900px){
+    .pv-barra{
+      position:fixed; left:0; right:0; bottom:0; z-index:9;
+      grid-template-columns:auto 1fr;
+      grid-template-areas:"klarna klarna" "precio boton";
+      gap:6px 12px;
+      border-radius:0; border-left:0; border-right:0; border-bottom:0;
+      padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+      box-shadow:0 -6px 20px rgba(18,20,20,.10);
+    }
+    .pv-barra .pv-barra-precio{ grid-area:precio; font-size:19px }
+    .pv-barra-klarna{ grid-area:klarna; justify-content:flex-start; font-size:11.5px }
+    .pv-barra .pv-barra-comprar{ grid-area:boton; justify-self:end; padding:11px 18px }
+    /* El hueco que la hoja compartida reserva bajo las fotos es para el pie
+       fijo que aquí no llega a serlo; la barra va pegada a la VENTANA, así
+       que lo que hay que apartar es el final de la página. */
+    .pv-galeria{ padding-bottom:0 }
+    body{ padding-bottom:96px }
+  }
+
+  /* ---------- EL MONTAJE POR CAPAS ----------
+     Cinco imágenes una encima de otra, todas del mismo lienzo cuadrado de
+     4096 y con el mismo eje, así que basta con apilarlas: no hay que
+     colocar nada a mano. `contain` y no `cover` porque el visor es cuadrado
+     y el lienzo también; si algún día dejan de serlo, `cover` recortaría.
+
+     LAS SIETE CAPAS PESAN 252 KB a 1.200. Una sola foto pesa 90, así que el
+     juego entero cuesta menos que tres fotos y cubre TODAS las
+     combinaciones: por eso se montan en el navegador y no se generan mil
+     quinientas imágenes. */
+  .pv-capas{ position:absolute; inset:0; background:#e9e9e7 }
+  .pv-capas[hidden]{ display:none }
+  .pv-capas img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  }
+  .pv-capas img[hidden]{ display:none }
+  /* ---------- LA CÁMARA SE ALEJA Y SALE LA MINIATURA ----------
+     Óscar, 28/08/2026: «retomo la opción de alejar el zoom y en la parte
+     inferior izquierda colocas una miniatura».
+
+     LO QUE FALTABA ERA LA MINIATURA, no el zoom. El alejarse solo no
+     enseñaba más correa —las capas acaban en el borde del lienzo, no hay
+     más tira que sacar— y encima dejaba su corte a la vista dentro del
+     marco. Con la foto del proveedor abajo a la izquierda sí se ve la
+     correa entera, suelta y con su cierre, y el alejarse pasa a ser lo que
+     le hace sitio.
+
+     SE ENCOGEN LAS IMÁGENES, NO SU CAJA. `.pv-capas` lleva el gris del
+     fondo, y encogiéndola a ella se vería el borde del gris recortado sobre
+     el blanco, porque `.pv-hero-llena` se queda sin fondo. */
+  .pv-capas img{ transition:transform .4s cubic-bezier(.2,.6,.2,1) }
+  .pv-capas-lejos img{ transform:scale(.72) }
+  /* ⚠️ EL SELECTOR VA CON `.pv-hero img.` DELANTE. La hoja compartida trae
+     `.pv-hero-llena img{width:100%;height:100%;object-fit:cover}`, que pesa
+     más que una clase sola: con `.pv-mini-correa` a secas la miniatura
+     salía a pantalla completa tapando el reloj. Le pasa a todo lo que se
+     mete dentro del marco —el forro y la miniatura de la tapa llevan el
+     mismo aviso en producto-2026.css—. */
+  /* LA PILA, de abajo arriba. La piel enseña tres fotos —el color, el
+     interior y la muñeca— y el caucho una, así que la caja crece sola con
+     lo que le echen. `flex-direction:column-reverse` para que la primera
+     de la lista sea la de abajo: es la esquina que mira el ojo. */
+  /* LA FOTO DE PRESENTACIÓN, encima de la pila y de todo lo demás.
+     ⚠️ Con `.pv-presenta` a secas no basta: la hoja compartida trae
+     `.pv-hero img{width:82%;height:92%;object-fit:contain}` y
+     `.pv-hero-llena img{width:100%;height:100%;object-fit:cover}`, que pesan
+     más que una clase sola. Con `.pv-hero img.` delante manda ésta. */
+  .pv-hero img.pv-presenta{
+    position:absolute; inset:0; z-index:6;
+    width:100%; height:100%; object-fit:cover;
+  }
+  .pv-hero img.pv-presenta[hidden]{ display:none }
+
+  /* ---------- LAS FOTOS FIJAS DEL MODELO ----------
+     Misma caja que la Ficha Técnica —mismo ancho, mismo margen— para que
+     las dos secciones de debajo del configurador se lean como una sola
+     columna y no como dos anchos distintos. */
+  .pv-fijas{ max-width:1440px; margin:0 auto; padding:40px 64px 0 }
+  .pv-fijas h2{
+    font-family:var(--cv2-mono); font-weight:700; text-transform:uppercase;
+    font-size:clamp(22px,2.6vw,30px); letter-spacing:-.01em; margin:0 0 18px;
+  }
+  .pv-fijas-rejilla{
+    display:grid; gap:20px;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .pv-fijas figure{ margin:0 }
+  /* ⚠️ CON `.pv-fijas img` A SECAS NO BASTA en cuanto una de estas fotos
+     caiga dentro de un marco: la hoja compartida trae `.pv-hero img` con
+     ancho y alto propios. Aquí están fuera del marco, pero el ancho y el
+     `aspect-ratio` se ponen igual para que el hueco esté reservado antes de
+     que baje la imagen y la página no pegue un salto al cargar. */
+  .pv-fijas figure img{
+    display:block; width:100%; height:auto; aspect-ratio:1/1;
+    object-fit:cover; border-radius:6px; background:#f2f2f0;
+  }
+  .pv-fijas figcaption{
+    margin-top:10px; font-size:15px; line-height:1.5; color:var(--cv2-gris);
+  }
+  @media (max-width:900px){
+    .pv-fijas{ padding:24px 20px 0 }
+    .pv-fijas-rejilla{ grid-template-columns:1fr; gap:24px }
+  }
+
+  /* ⚠️ SE LLAMA `pv-pila-correa` Y NO `pv-minis` A PROPÓSITO. `.pv-minis`
+     YA EXISTE en producto-2026.css y es del TRINCHERA: sus miniaturas de
+     tapa y hebilla, en fila, abajo a la DERECHA y de 140 px. Al estrenar
+     esta pila con ese nombre heredó su `right:12px` y su
+     `align-items:flex-end`, y las tres fotos se fueron al filo derecho,
+     encima del reloj y medio fuera del marco. Se veía tapado porque aquí
+     se pisaba regla por regla; con que la hoja compartida cambie una, se
+     rompe otra vez. Nombre propio y se acabó.
+     Y también por eso lleva `right:auto`: con left y right a la vez la
+     caja se estira de lado a lado. */
+  .pv-hero .pv-pila-correa{
+    position:absolute; left:16px; right:auto; bottom:16px; z-index:4;
+    display:flex; flex-direction:column-reverse; align-items:flex-start;
+    gap:8px; pointer-events:none;
+  }
+  .pv-hero .pv-pila-correa[hidden]{ display:none }
+  /* EN EL MÓVIL, EN FILA Y MÁS PEQUEÑAS. En columna, tres miniaturas son
+     dos tercios de la altura del marco y se plantan encima del reloj —se vio
+     en el móvil de 375, tapando el asa y media correa—. En fila por abajo
+     son 208 px de ancho sobre 335 y sólo 64 de alto: dejan el reloj entero.
+     `row` y no `row-reverse`, que aquí la primera de la lista va a la
+     izquierda igual que arriba iba abajo. */
+  @media (max-width:900px){
+    .pv-hero .pv-pila-correa{ flex-direction:row; align-items:flex-end }
+    .pv-hero img.pv-mini-correa{ width:64px !important; height:64px !important }
+  }
+  .pv-hero img.pv-mini-correa{
+    display:block; width:104px; height:104px; object-fit:cover;
+    border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
+    box-shadow:0 4px 14px rgba(18,20,20,.12);
+    opacity:0; transform:translateY(8px);
+    transition:opacity .3s, transform .3s;
+  }
+  /* ESCALONADAS, no todas a la vez: la de abajo entra primero. Con tres
+     fotos apareciendo de golpe el ojo no sabe dónde mirar. */
+  .pv-pila-dentro img.pv-mini-correa{ opacity:1; transform:none }
+  .pv-pila-dentro img.pv-mini-correa:nth-child(2){ transition-delay:.07s }
+  .pv-pila-dentro img.pv-mini-correa:nth-child(3){ transition-delay:.14s }
+
+  /* ⛔ EL PRIMER INTENTO, sin miniatura, no podía funcionar (28/08/2026).
+     La pidió para «ver más parte de la correa», se hizo, y al probarla dijo
+     lo que pasaba de verdad: «se aleja la imagen pero el brazalete sigue
+     cortado como si estuviera ampliado».
+
+     Y TENÍA QUE PASAR: el brazalete de la capa llega hasta la fila 0 y la
+     4.095, o sea que ACABA EN EL BORDE DE SU PROPIA IMAGEN. En el visor
+     cuadrado ya se ve entero; alejándose no aparece más tira, aparece su
+     corte flotando dentro del marco, que se ve peor que dejarlo quieto.
+
+     PARA QUE FUNCIONE hace falta una capa de brazalete con tira de sobra
+     por fuera: la misma, a la misma escala, dibujada sobre un lienzo más
+     alto —unos 5.700 px para que al 72 % siga llegando a los bordes—. Con
+     eso puesto, volver a encenderlo son dos reglas de CSS y una función. */
+  .pv-carrusel{
+    position:absolute; left:0; right:0; bottom:14px; z-index:3;
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+  }
+  .pv-carrusel[hidden]{ display:none }
+  .pv-carrusel button{
+    width:40px; height:40px; border-radius:20px; border:1px solid rgba(18,20,20,.18);
+    background:rgba(255,255,255,.92); color:#121414; font-size:22px; line-height:1;
+    cursor:pointer;
+  }
+  .pv-carrusel button:hover{ border-color:#121414 }
+  .pv-carrusel span{
+    font-size:13px; color:#393C41; background:rgba(255,255,255,.92);
+    border-radius:6px; padding:6px 12px;
+  }
+
+  /* EL MARCO DE LA FOTO, CON LAS ESQUINAS REDONDEADAS (Óscar, 28/08/2026),
+     los mismos 6 px que los botones, el desplegable y la barra. El
+     `overflow:hidden` es lo que hace que se noten: las capas van con
+     `position:absolute; inset:0` y sin recortar asomarían por las esquinas
+     tapando el redondeo. */
+  .pv-hero{ border-radius:6px; overflow:hidden }
+
+  /* ---------- LA PANTALLA DE CRIBA (Óscar, 28/08/2026) ----------
+     «monta la pantalla curar sobre lunar?capas para que yo te diga cuáles
+     combinaciones no pueden ser».
+
+     ES OTRA COSA QUE EL PANEL DE `?curar` DE SIEMPRE. Aquel marca UNA
+     referencia entera cada vez —movimiento, esfera, bisel, agujas, caja,
+     cristal y correa—, y con 560 referencias eso es inservible: habría que
+     recorrerlas una a una. Lo que hay que cribar son las PAREJAS que se
+     dejaron libres, que son treinta de esfera y agujas y seis de esfera con
+     la caja de PVD. Así que la criba enseña las treinta y seis en una
+     rejilla, montadas con las mismas capas del configurador, y se marcan a
+     golpe de dedo.
+
+     Y SE ABRE DESDE `?capas`, con un botón discreto abajo a la izquierda,
+     porque es ahí donde él está mirando el reloj. */
+  .pv-criba-abre{
+    position:fixed; left:16px; bottom:16px; z-index:40;
+    font-family:'Nunito Sans', system-ui, sans-serif; font-size:13px;
+    padding:10px 14px; border-radius:6px; cursor:pointer;
+    border:1px solid rgba(18,20,20,.18); background:#fff; color:#121414;
+  }
+  .pv-criba-abre[hidden]{ display:none }
+  .pv-criba{
+    position:fixed; inset:0; z-index:50; overflow:auto;
+    background:#fff; padding:24px 24px 80px;
+    font-family:'Nunito Sans', system-ui, sans-serif; color:#121414;
+  }
+  .pv-criba[hidden]{ display:none }
+  .pv-criba h2{ font-size:20px; margin:0 0 4px }
+  .pv-criba h3{ font-size:15px; margin:26px 0 10px }
+  .pv-criba p{ margin:0 0 8px; font-size:13px; color:#61646A; max-width:60ch }
+  .pv-criba-cierra{
+    position:absolute; right:20px; top:20px;
+    font-size:13px; padding:9px 13px; border-radius:6px; cursor:pointer;
+    border:1px solid rgba(18,20,20,.18); background:#fff;
+  }
+  .pv-criba-rejilla{ display:grid; gap:10px; margin-top:8px }
+  .pv-criba-celda{
+    border:1px solid var(--cv2-linea); border-radius:6px; background:#fff;
+    padding:0; cursor:pointer; overflow:hidden; text-align:center;
+    font-family:inherit; font-size:11px; color:#393C41; line-height:1.3;
+  }
+  .pv-criba-celda span{ display:block; padding:5px 4px 7px }
+  /* LA MINIATURA SE MONTA CON LAS MISMAS CAPAS. Un cuadrado con las
+     imágenes superpuestas, igual que el visor grande pero pequeño: así lo
+     que se criba es exactamente lo que se va a ver. */
+  .pv-criba-foto{ position:relative; aspect-ratio:1/1; background:#e9e9e7 }
+  .pv-criba-foto img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  }
+  /* MARCADA = FUERA. Se tacha y se apaga, pero se sigue viendo: hay que
+     poder desmarcar de un vistazo lo que se marcó de más. */
+  .pv-criba-celda[aria-pressed="true"]{
+    border-color:#B3261E; background:#FBE9E7;
+  }
+  .pv-criba-celda[aria-pressed="true"] .pv-criba-foto{ opacity:.28 }
+  .pv-criba-celda[aria-pressed="true"] span{ color:#B3261E; text-decoration:line-through }
+  .pv-criba-texto{
+    width:100%; margin-top:10px; font-family:var(--cv2-mono, monospace);
+    font-size:12px; padding:10px; border:1px solid var(--cv2-linea);
+    border-radius:6px; background:#fafafa;
+  }
+  .pv-criba-pie{
+    position:fixed; left:0; right:0; bottom:0; z-index:51;
+    display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    padding:12px 24px; background:#fff; border-top:1px solid var(--cv2-linea);
+  }
+  .pv-criba-pie button{
+    font-size:13px; padding:10px 14px; border-radius:6px; cursor:pointer;
+    border:1px solid rgba(18,20,20,.18); background:#fff;
+  }
+  .pv-criba-pie b{ font-size:13px }
+
+  /* La foto del cierre elegido, debajo de sus botones. Pequeña: es una
+     ayuda para reconocerlo, no el protagonista de la tarjeta. */
+  .pv-cierre-foto{
+    display:block; width:120px; height:120px; object-fit:cover;
+    border:1px solid var(--cv2-linea); border-radius:6px; margin-top:2px;
+  }
+  .pv-cierre-foto[hidden]{ display:none }
+
+  .pv-oculto{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
+    white-space:nowrap;
+  }
+
+  /* LAS CUATRO FILAS. Sin los círculos numerados de antes: la estructura
+     que pidió Óscar el 24/08/2026 son cuatro bloques, no seis pasos, y el
+     número dejaba de cuadrar. */
+  .pv-info .pv-grupo>.pv-rotulo::before{ display:none }
+  .pv-info .pv-rotulo{ padding-left:0 }
+  .pv-fila{ display:flex; flex-direction:column; gap:12px }
+  /* LA ESFERA, EN UNA SOLA LÍNEA (Óscar, 24/08/2026): el estilo —Khaki o
+     Murph— y el color van uno al lado del otro, no en dos renglones. El
+     rótulo, lo que cuelga y la frase fija siguen ocupando su línea
+     entera; si la columna se estrecha, los dos grupos se reparten solos
+     en dos renglones. */
+  .pv-fila[data-paso="estilo"]{
+    flex-direction:row; flex-wrap:wrap; align-items:center; gap:12px 26px;
+  }
+  .pv-fila[data-paso="estilo"]>.pv-rotulo,
+  .pv-fila[data-paso="estilo"]>.pv-sub,
+  .pv-fila[data-paso="estilo"]>.pv-fijo{ flex:0 0 100% }
+  /* Lo que cuelga de una fila —el segundero, el color, el cierre— va un
+     escalón por dentro, para que se lea como parte de ella y no como otra
+     pregunta al mismo nivel. */
+  .pv-sub{ display:flex; flex-direction:column; gap:8px; padding-left:14px;
+           border-left:2px solid rgba(18,20,20,.12) }
+  .pv-sub[hidden]{ display:none }
+  .pv-subrotulo{
+    margin:0; font-size:16px; color:#4A4A4A;
+    font-family:'Nunito Sans', system-ui, sans-serif;
+    display:flex; justify-content:space-between; gap:10px;
+  }
+  .pv-subrotulo b{ font-weight:400; color:#121414 }
+  /* `hidden` NO PUEDE CON UN `display` DE LA HOJA. `.pv-klarna` y
+     `.pv-stock` se pintan con `display:flex` en producto-2026.css, y eso le
+     gana a la regla del navegador para `[hidden]`: la caja de los plazos y
+     el punto verde de «Disponible» se quedaban puestos con el precio sin
+     definir, diciendo dos cosas que no son verdad. */
+  .pv-klarna[hidden], .pv-stock[hidden]{ display:none !important }
+
+  /* EL MODO CURAR (Óscar, 26/08/2026), que solo existe con `?curar` en la
+     dirección. El aspa roja de cada botón se fue el mismo día: quitaba una
+     opción de TODAS las combinaciones y no era lo que hacía falta. Queda el
+     panel, que marca combinaciones enteras. */
+  .pv-curar{
+    position:fixed; right:16px; bottom:16px; z-index:60;
+    width:320px; max-height:62vh; overflow:auto; padding:14px 16px;
+    background:#fff; border:1px solid rgba(18,20,20,.28);
+    box-shadow:0 6px 24px rgba(0,0,0,.18);
+    font-family:'Nunito Sans', system-ui, sans-serif; font-size:15px;
+    line-height:1.45; color:#121414;
+  }
+  .pv-curar ul{ margin:10px 0; padding:0; list-style:none }
+  .pv-curar li{ display:flex; align-items:center; justify-content:space-between;
+                gap:10px; padding:9px 0; border-top:1px solid rgba(18,20,20,.12) }
+  .pv-curar code{ font-size:14px; word-break:break-all }
+  .pv-curar hr{ border:0; border-top:1px solid rgba(18,20,20,.14); margin:14px 0 }
+  .pv-curar > b{ display:block; margin-bottom:6px }
+  .pv-curar p{ margin:0 0 10px }
+  .pv-curar-dicho{ color:#4A4A4A }
+  .pv-curar li span{ flex:1 1 auto }
+  .pv-curar button{ font-size:13px; padding:9px 12px; cursor:pointer;
+    background:#fff; color:#121414; border:1px solid rgba(18,20,20,.28);
+    font-family:inherit; white-space:nowrap }
+  /* El cuadro con la lista para pasármela. Un `textarea` a pelo trae el
+     borde y los dos píxeles de relleno del navegador, y el texto queda
+     pegado a la raya. */
+  .pv-curar-texto{
+    display:block; width:100%; box-sizing:border-box; margin:0 0 12px;
+    padding:10px 12px; font-family:ui-monospace, Menlo, monospace;
+    font-size:12px; line-height:1.5; color:#121414;
+    background:#fafaf8; border:1px solid rgba(18,20,20,.28); resize:vertical;
+  }
+  .pv-curar-ok{ margin-left:10px; font-size:13px; color:#4A4A4A }
+  .pv-curar-ok[hidden]{ display:none }
+  /* FUERA EL «La imagen puede contener errores de diseño» (Óscar,
+     28/08/2026: «quita este mensaje»). SÓLO EN EL LUNAR: las otras fichas
+     lo siguen llevando, y por eso la regla que lo hacía legible sobre los
+     fondos pintados se va con él en vez de quedarse muerta aquí. */

@@ -321,33 +321,22 @@
     </div>
 
 
-    <!-- LAS TARJETAS DEL LUNAR (Óscar, 28/08/2026). Aquí no había ninguna
-         desde que el modelo se puso a cero: sólo la presentación y el aviso
-         de que estaba en obras. Ya se vende, así que vuelve a tener sus
-         cuatro tarjetas como el resto de la colección —la rejilla es de
-         cuatro columnas y una sola se quedaba en un cuarto de fila—, con la
-         foto que eligió Óscar la primera.
+    <!-- UNA SOLA TARJETA PARA EL LUNAR (29/08/2026). Aquí había CINCO, una
+         por correa, y cada una con su foto del reloj entero más tres
+         miniaturas de otras combinaciones: cuarenta y cuatro fotos de
+         conjunto para enseñar el mismo reloj con la correa cambiada.
 
-         Los precios NO se escriben a mano: `sincronizar_precios.js` los
-         copia del catálogo del servidor en cada commit que toque una ficha,
-         que es el que cobra de verdad. -->
-    <div class="cv2-tarjetas">
-      <!-- ⚠️ UNA SOLA TARJETA PARA EL LUNAR (29/08/2026). Aquí había CUATRO,
-           una por correa, y cada una con su foto del reloj entero y sus
-           miniaturas de otras combinaciones: quince fotos de conjunto para
-           enseñar el mismo reloj con la correa cambiada.
-
-           Óscar cortó eso el 29/08: «no quiero que se guarde nada de fotos
-           y combinaciones anteriores de ningún modelo». El Lunar se arma
-           con sus piezas en su propia página, así que en la colección le
-           basta con una tarjeta, su foto de presentación y el camino al
-           configurador. Las 1.520 combinaciones se eligen allí, no aquí. -->
+         Óscar cortó eso el 29/08: «no quiero que se guarde nada de fotos y
+         combinaciones anteriores de ningún modelo». El Lunar se arma con sus
+         piezas en su propia página, así que en la colección le basta con una
+         tarjeta, su foto de presentación y el camino al configurador. Las
+         1.520 combinaciones se eligen allí, no aquí. -->
+    <div class="cv2-rejilla">
       <article class="cv2-tarjeta cv2-t2">
         <div class="cv2-foto">
           <span class="cv2-chip">Hazlo tuyo</span>
           <img src="/assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1"
-               srcset="/assets/img/lunar-2026/presentacion/480/lunar-hazlo-tuyo.avif?v=1 480w,
-                       /assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1 1200w"
+               srcset="/assets/img/lunar-2026/presentacion/480/lunar-hazlo-tuyo.avif?v=1 480w, /assets/img/lunar-2026/presentacion/1200/lunar-hazlo-tuyo.avif?v=1 1200w"
                sizes="(max-width: 900px) 100vw, 380px"
                alt="El laOra Lunar con brazalete de acero sobre un suelo lunar, con un astronauta y un cohete al fondo"
                loading="lazy" width="1200" height="1200">
@@ -367,7 +356,37 @@
             <a class="cv2-comprar" href="/lunar.html">Elegir el tuyo</a>
           </div>
         </div>
-      </article><article class="cv2-cal-caja">
+      </article>
+    </div>
+
+    <p class="cv2-configura">¿No encuentras el tuyo?
+      <a href="/lunar.html">Configúralo a tu gusto · + de 1.500 combinaciones</a>
+    </p>
+  </section>
+
+  <!-- ============ MODELO 3 · CERO CERO ============ -->
+  <section class="cv2-modelo" id="cero-cero">
+    <!-- EL LIENZO DEL CERO CERO (Óscar, 20/08/2026). Tercero del patrón.
+         El Cero Cero todavía no tiene bloque de calibres, así que dentro
+         del lienzo van la presentación y las dos líneas de movimiento y
+         materiales; cuando lleguen sus calibres, ocuparán su sitio. -->
+    <div class="cv2-lienzo cv2-lienzo-cerocero">
+    <header>
+      <p class="cv2-chip">LO-05 · Buceo</p>
+      <h2>Cero Cero</h2>
+      <p class="cv2-homenaje">Nuestro homenaje al <b>Omega Seamaster 300M</b>, el reloj de James Bond.</p>
+      <p class="cv2-intro">Herramienta bajo el agua, carácter fuera de ella. Caja de dos coronas,
+        automático de arquitectura suiza y ventana de fecha, al precio honesto.</p>
+    </header>
+
+    <!-- EL CALIBRE DEL CERO CERO. Un solo motor, así que la caja ocupa
+         todo el ancho. El código sale de su propia ficha: LO_A3826,
+         arquitectura Suiza ETA 2824-2. -->
+    <section class="cv2-cal" aria-labelledby="cal-cerocero">
+      <h3 class="cv2-cal-titulo" id="cal-cerocero">Nuestros calibres han movido <span>lo mejor de la relojería mundial</span></h3>
+      <div class="cv2-cal-rejilla cv2-cal-sola">
+
+        <article class="cv2-cal-caja">
           <div class="cv2-cal-cab">
             <p class="cv2-cal-tipo">Automático</p>
             <p class="cv2-cal-rotulo">Calibre</p>

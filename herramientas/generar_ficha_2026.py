@@ -55,6 +55,7 @@ from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
 V_CSS_PRODUCTO = 42
 V_CSS_COLECCION = 44
+V_CSS_CONFIG = 1
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -227,6 +228,10 @@ def ficha(d):
 <link rel="stylesheet" href="/assets/css/laora.css?v=52">
 <link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=%(vcol)d">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=%(vprod)d">
+<!-- EL ESTILO DEL CONFIGURADOR, el del Lunar, que desde el 29/08/2026 es el
+     de la casa. VA DESPUÉS de producto-2026.css: buena parte de sus reglas
+     están para ganarle a esa hoja, y cargándolo antes pierde. -->
+<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=%(vconf)d">
 </head>
 <body>%(cabecera)s
 
@@ -284,6 +289,7 @@ def ficha(d):
         'noindex': noindex,
         'recursos': RECURSOS, 'cabecera': marcado('relojes'), 'script': SCRIPT,
         'vcol': V_CSS_COLECCION, 'vprod': V_CSS_PRODUCTO, 'vjs': V_JS_CARRITO,
+        'vconf': V_CSS_CONFIG,
         'pasos': pasos, 'precio': precio, 'boton': boton, 'klarna': klarna, 'aviso': aviso,
         'stock': 'Disponible' if listo else 'En el taller',
     }
