@@ -478,13 +478,13 @@
     CAZC: { nombre: 'Azul celeste', coste: null, pieza: 'caucho-azul-celeste', tec: 'correa de caucho azul celeste' },
     CBGR: { nombre: 'Blanca y gris', coste: null, pieza: 'caucho-blanca-gris', tec: 'correa de caucho blanca con gris' },
 
-    /* --- Piel · UNA correa, la de las primeras pruebas ---
+    /* --- Piel perforada · los cuatro colores del formato nuevo ---
        LAS OCHO PIELES DE ANTES SE FUERON el 29/08/2026 (Óscar: «quita
        todas las correas de piel que tenemos ahora porque no nos vale
        ninguna»): las cuatro perforadas con sus dos pespuntes y las cuatro
        italianas. Con ellas se va el paso del pespunte, que era suyo.
 
-       Esta es la primera del formato nuevo: la correa ABIERTA, con su
+       Son las del formato nuevo: la correa ABIERTA, con su
        hebilla y su pespunte crema ya puestos, dibujada a 20 mm y montada
        a la escala real de la caja (1 mm = 65,4 px), SIN estirarla al
        hueco de las asas. Es a propósito: Óscar quiere ver cómo encaja
@@ -494,6 +494,12 @@
        pespunte. Las `PCAQT`/`PNEGB` de antes ya no se resuelven. */
     PNEG: { nombre: 'Negra', coste: 6.69, pieza: 'piel-perforada-negra',
             tec: 'correa de piel perforada negra de 20 mm, pespunte crema, hebilla clásica plateada' },
+    PCON: { nombre: 'Coñac', coste: 6.69, pieza: 'piel-perforada-conac',
+            tec: 'correa de piel perforada coñac de 20 mm, pespunte al tono, hebilla clásica plateada' },
+    PMAR: { nombre: 'Marrón', coste: 6.69, pieza: 'piel-perforada-marron',
+            tec: 'correa de piel perforada marrón de 20 mm, pespunte al tono, hebilla clásica plateada' },
+    PVER: { nombre: 'Verde oliva', coste: 6.69, pieza: 'piel-perforada-verde-oliva',
+            tec: 'correa de piel perforada verde oliva de 20 mm, pespunte al tono, hebilla clásica plateada' },
 
     /* --- Tela vaquera · cinco colores ---
        20 mm de ancho, 18 en el cierre, 2,8 de grosor, trama diagonal por
@@ -511,7 +517,7 @@
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
     CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
-    PNEG: 'PPER',
+    PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
     VBEI: 'TELA', VMAL: 'TELA', VNEG: 'TELA', VGRI: 'TELA', VAZU: 'TELA'
   };
   /* LOS DOS PESPUNTES. `sufijo` es lo que se le añade al nombre de la
@@ -569,7 +575,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=35';
+  var SERIE_V = '?v=36';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -684,6 +690,14 @@
      cinco las 560 que hay. */
   var CIERRE_IMG = '/assets/img/lunar-2026/cierres/';
   var CIERRES = {
+    /* 0 · LA DE LA PIEL PERFORADA (Óscar, 29/08/2026: «si se elige esta
+       correa solo puede ser hebilla clásica plateada, las demás no pueden
+       elegirse»). Es la que viene DIBUJADA en la propia correa, así que no
+       lleva miniatura: ya se le ve la cara en el montaje. Y al revés
+       también: las otras familias no la ofrecen, porque sus cierres son
+       desplegables. */
+    HEBP: { nombre: 'Hebilla clásica plateada',
+            tec: 'hebilla clásica de acero plateado' },
     /* 1 · «desplegable mariposa con hebilla clásica» */
     MARI: { nombre: 'Mariposa con hebilla vista', mini: 'mariposa-hebilla',
             tec: 'cierre de mariposa con la hebilla clásica a la vista' },
@@ -941,7 +955,16 @@
     }
 
     var esAcero = matDe(e.correa) === 'A316';
-    botones('cierre', deTabla(CIERRES), e.cierre);
+    /* LA PIEL PERFORADA SOLO LLEVA SU HEBILLA, y las demás familias no la
+       llevan nunca: la hebilla está dibujada en la correa, y ofrecer una
+       mariposa sobre un dibujo con hebilla sería enseñar una cosa y vender
+       otra. */
+    var conHebilla = matDe(e.correa) === 'PPER';
+    var cierresDe = {};
+    Object.keys(CIERRES).forEach(function (k) {
+      if ((k === 'HEBP') === conHebilla) cierresDe[k] = CIERRES[k];
+    });
+    botones('cierre', deTabla(cierresDe), e.cierre);
     var ci = CIERRES[e.cierre];
     rotula('cierre', ci.nombre,
            ci.tec.charAt(0).toUpperCase() + ci.tec.slice(1) + '. ' +
@@ -972,6 +995,13 @@
     if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
     if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
     if (!CIERRES[e.cierre]) e.cierre = Object.keys(CIERRES)[0];
+    /* La hebilla clásica es SOLO de la piel perforada, y la piel perforada
+       solo lleva hebilla clásica. Sin esto, cambiar de correa te dejaba
+       puesto un cierre que su paso ya no ofrece: el botón no estaba, pero
+       la ficha técnica y el carrito lo seguían llevando. */
+    var perf = (CORREA_MAT[e.correa] || 'A316') === 'PPER';
+    if (perf && e.cierre !== 'HEBP') e.cierre = 'HEBP';
+    if (!perf && e.cierre === 'HEBP') e.cierre = 'MARI';
     if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
