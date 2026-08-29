@@ -167,84 +167,17 @@
         </select>
         <p class="pv-modo-nota" data-pv-modo-nota hidden></p>
 
-        <!-- ============ TARJETA 1 · LA CAJA ============ -->
-        <section class="pv-tarjeta">
-          <h2 class="pv-tarjeta-tit">La caja</h2>
-          <div class="pv-g" data-g="tamano">
-            <p class="pv-g-cab"><span>Tamaño de la caja</span><span class="pv-g-valor" data-valor="tamano"></span></p>
-            <div class="pv-opciones" data-pv="tamano"></div>
-            <p class="pv-g-explica" data-explica="tamano"></p>
-          </div>
-          <div class="pv-g" data-g="caja">
-            <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="caja"></span></p>
-            <div class="pv-opciones" data-pv="caja"></div>
-            <p class="pv-g-explica" data-explica="caja"></p>
-          </div>
-          <div class="pv-g" data-g="bisel">
-            <p class="pv-g-cab"><span>Bisel</span><span class="pv-g-valor" data-valor="bisel"></span></p>
-            <div class="pv-opciones" data-pv="bisel"></div>
-            <p class="pv-g-explica" data-explica="bisel"></p>
-          </div>
-          <!-- ESCONDIDO HASTA QUE HAYA ALGO QUE ELEGIR (Óscar, 28/08/2026):
-               «lo dejamos invisible mientras no haya distintos materiales a
-               explicar. Cuando haya algún porcelánico lo decimos». Un paso
-               que sólo sabe decir «Pendiente» ocupa sitio y no informa. -->
-          <div class="pv-g pv-g-vacio" data-g="biselmat" hidden>
-            <p class="pv-g-cab"><span>Material y acabado del bisel</span><span class="pv-g-valor" data-valor="biselmat">Pendiente</span></p>
-            <p class="pv-g-explica" data-explica="biselmat"></p>
-          </div>
-          <div class="pv-g" data-g="esf">
-            <p class="pv-g-cab"><span>Esfera</span><span class="pv-g-valor" data-valor="esf"></span></p>
-            <div class="pv-opciones" data-pv="esf"></div>
-            <p class="pv-g-explica" data-explica="esf"></p>
-          </div>
-          <div class="pv-g" data-g="agujas">
-            <p class="pv-g-cab"><span>Agujas</span><span class="pv-g-valor" data-valor="agujas"></span></p>
-            <div class="pv-opciones" data-pv="agujas"></div>
-            <p class="pv-g-explica" data-explica="agujas"></p>
-          </div>
-          <div class="pv-g" data-g="cristal">
-            <p class="pv-g-cab"><span>Cristal</span><span class="pv-g-valor" data-valor="cristal"></span></p>
-            <div class="pv-opciones" data-pv="cristal"></div>
-            <p class="pv-g-explica" data-explica="cristal"></p>
-          </div>
-        </section>
+        <!-- ============ LOS PASOS ============
+             Vacío a propósito. Hasta el 29/08/2026 aquí estaban escritas a
+             mano las once cajas de opciones, con su rótulo y su orden; con
+             diez modelos eso son diez copias que se separan en cuanto
+             alguien cambia una.
 
-        <!-- ============ TARJETA 2 · EL MOVIMIENTO ============
-             Aquí la explicación va DEBAJO DE CADA calibre y no sólo del
-             elegido, que es como lo pidió Óscar. Con un solo movimiento se
-             ve igual; con dos, cada uno lleva la suya. -->
-        <section class="pv-tarjeta">
-          <h2 class="pv-tarjeta-tit">El movimiento</h2>
-          <div class="pv-g" data-g="mov">
-            <p class="pv-g-cab"><span>Calibre</span><span class="pv-g-valor" data-valor="mov"></span></p>
-            <div class="pv-opciones" data-pv="mov"></div>
-            <p class="pv-g-explica" data-explica="mov"></p>
-          </div>
-        </section>
-
-        <!-- ============ TARJETA 3 · LA CORREA ============ -->
-        <section class="pv-tarjeta" data-pv-tarjeta="correa">
-          <h2 class="pv-tarjeta-tit">El brazalete o la correa</h2>
-          <div class="pv-g" data-g="correamat">
-            <p class="pv-g-cab"><span>Material</span><span class="pv-g-valor" data-valor="correamat"></span></p>
-            <div class="pv-opciones" data-pv="correamat"></div>
-            <p class="pv-g-explica" data-explica="correamat"></p>
-          </div>
-          <div class="pv-g" data-g="correa">
-            <p class="pv-g-cab"><span>Color</span><span class="pv-g-valor" data-valor="correa"></span></p>
-            <div class="pv-opciones" data-pv="correa"></div>
-            <p class="pv-g-explica" data-explica="correa"></p>
-          </div>
-          <div class="pv-g" data-g="cierre">
-            <p class="pv-g-cab"><span>Cierre</span><span class="pv-g-valor" data-valor="cierre"></span></p>
-            <div class="pv-opciones" data-pv="cierre"></div>
-            <!-- LA FOTO DEL CIERRE ELEGIDO. Es la del proveedor, recortada
-                 para dejar fuera su rótulo y su marca de agua. -->
-            <img class="pv-cierre-foto" data-pv-cierre-foto alt="" hidden>
-            <p class="pv-g-explica" data-explica="cierre"></p>
-          </div>
-        </section>
+             Ahora las monta el motor leyendo el contrato de
+             `assets/datos/pasos-2026.json`: el orden, en qué tarjeta va
+             cada paso y cómo se llama. Si hay que mover un paso o
+             cambiarle el nombre, se toca el contrato, no esto. -->
+        <div data-pv-pasos></div>
 
       </div>
 

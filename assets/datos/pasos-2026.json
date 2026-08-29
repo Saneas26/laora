@@ -1,94 +1,127 @@
 {
-  "_": [
-    "EL ORDEN DE PASOS DE TODOS LOS CONFIGURADORES DE laOra.",
-    "Lo dictó Óscar el 29/08/2026 y vale para los diez modelos: Trinchera,",
-    "Lunar, Precisa, Bitácora, Cóctel, Cero Cero, Tortuga, Diver, Medusa y",
-    "Barlovento. Este fichero es el contrato: el generador lee de aquí el",
-    "orden y las reglas, y ninguna ficha se inventa un paso ni se salta otro.",
-    "",
-    "LAS DOS REGLAS QUE VALEN PARA TODOS LOS PASOS:",
-    "  · Si un paso tiene UNA SOLA opción, sale ya señalada y explicada.",
-    "    No se esconde: el cliente tiene que saber lo que lleva puesto.",
-    "  · Si un paso no tiene NINGUNA opción, el paso NO APARECE.",
-    "    Nada de rótulos vacíos ni de «próximamente»."
-  ],
-  "reglas": {
-    "una_opcion": "senalada_y_explicada",
-    "sin_opciones": "el_paso_no_aparece"
+ "_": [
+  "EL ORDEN DE PASOS DE TODOS LOS CONFIGURADORES DE laOra.",
+  "Lo dictó Óscar el 29/08/2026 y vale para los diez modelos: Trinchera,",
+  "Lunar, Precisa, Bitácora, Cóctel, Cero Cero, Tortuga, Diver, Medusa y",
+  "Barlovento. Este fichero es el contrato: el generador lee de aquí el",
+  "orden y las reglas, y ninguna ficha se inventa un paso ni se salta otro.",
+  "",
+  "LAS DOS REGLAS QUE VALEN PARA TODOS LOS PASOS:",
+  "  · Si un paso tiene UNA SOLA opción, sale ya señalada y explicada.",
+  "    No se esconde: el cliente tiene que saber lo que lleva puesto.",
+  "  · Si un paso no tiene NINGUNA opción, el paso NO APARECE.",
+  "    Nada de rótulos vacíos ni de «próximamente».",
+  "",
+  "CADA PASO DICE EN QUÉ TARJETA VA Y CON QUÉ RÓTULO. El motor pinta",
+  "las tarjetas y los pasos leyendo esto, así que el orden y los",
+  "nombres se cambian AQUÍ y no en once sitios del HTML."
+ ],
+ "reglas": {
+  "una_opcion": "senalada_y_explicada",
+  "sin_opciones": "el_paso_no_aparece"
+ },
+ "pasos": [
+  {
+   "id": "tamano",
+   "rotulo": "Tamaño de la caja",
+   "de": "caja.tamanos",
+   "tarjeta": "caja"
   },
-  "pasos": [
-    {
-      "id": "tamano",
-      "rotulo": "Tamaño de la caja",
-      "de": "caja.tamanos"
-    },
-    {
-      "id": "caja",
-      "rotulo": "Material de la caja",
-      "de": "caja.materiales",
-      "nota": "Acero, PVD, bronce o titanio."
-    },
-    {
-      "id": "bisel",
-      "rotulo": "Bisel",
-      "de": "bisel.colores",
-      "salta_si": "caja.integrada",
-      "porque": "Con caja integrada —Precisa, Bitácora— no hay bisel que elegir, así que no sale ni el paso."
-    },
-    {
-      "id": "biselmat",
-      "rotulo": "Material del bisel",
-      "de": "bisel.materiales",
-      "salta_si": "caja.integrada",
-      "porque": "Aluminio, porcelana… Solo aparece si de verdad se dan a elegir; si no se dan opciones, del material del bisel no se dice nada."
-    },
-    {
-      "id": "esftipo",
-      "rotulo": "Tipo de esfera",
-      "de": "esfera.tipos",
-      "porque": "El Trinchera tiene Khaki y Murph; la mayoría no tiene tipos y este paso no aparece."
-    },
-    {
-      "id": "esf",
-      "rotulo": "Color de la esfera",
-      "de": "esfera.colores"
-    },
-    {
-      "id": "agujas",
-      "rotulo": "Color de las agujas",
-      "de": "agujas.colores"
-    },
-    {
-      "id": "cristal",
-      "rotulo": "Cristal",
-      "de": "cristal"
-    },
-    {
-      "id": "mov",
-      "rotulo": "Movimiento",
-      "de": "movimiento",
-      "porque": "Con el nombre que le pone la casa —«Calibre laOra LO_xxxx»— y su explicación. Nunca el nombre del fabricante."
-    },
-    {
-      "id": "correamat",
-      "rotulo": "Correa o brazalete",
-      "de": "correa.familias",
-      "porque": "Las once familias de la casa: piel vaca, piel italiana hecha a mano, piel perforada, piel sintética, tela vaquera, acero 316L, acero 904L, caucho, goma, nato y naylon."
-    },
-    {
-      "id": "correa",
-      "rotulo": "Color",
-      "de": "correa.colores"
-    },
-    {
-      "id": "cierre",
-      "rotulo": "Cierre",
-      "de": "correa.cierres"
-    },
-    {
-      "id": "cierrecolor",
-      "rotulo": "Color del cierre",
-      "de": "correa.colores_cierre"
-    }
-  ]
+  {
+   "id": "caja",
+   "rotulo": "Material",
+   "de": "caja.materiales",
+   "nota": "Acero, PVD, bronce o titanio.",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "bisel",
+   "rotulo": "Bisel",
+   "de": "bisel.colores",
+   "salta_si": "caja.integrada",
+   "porque": "Con caja integrada —Precisa, Bitácora— no hay bisel que elegir, así que no sale ni el paso.",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "biselmat",
+   "rotulo": "Material y acabado del bisel",
+   "de": "bisel.materiales",
+   "salta_si": "caja.integrada",
+   "porque": "Aluminio, porcelana… Solo aparece si de verdad se dan a elegir; si no se dan opciones, del material del bisel no se dice nada.",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "esftipo",
+   "rotulo": "Tipo de esfera",
+   "de": "esfera.tipos",
+   "porque": "El Trinchera tiene Khaki y Murph; la mayoría no tiene tipos y este paso no aparece.",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "esf",
+   "rotulo": "Esfera",
+   "de": "esfera.colores",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "agujas",
+   "rotulo": "Agujas",
+   "de": "agujas.colores",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "cristal",
+   "rotulo": "Cristal",
+   "de": "cristal",
+   "tarjeta": "caja"
+  },
+  {
+   "id": "mov",
+   "rotulo": "Calibre",
+   "de": "movimiento",
+   "porque": "Con el nombre que le pone la casa —«Calibre laOra LO_xxxx»— y su explicación. Nunca el nombre del fabricante.",
+   "tarjeta": "mov"
+  },
+  {
+   "id": "correamat",
+   "rotulo": "Material",
+   "de": "correa.familias",
+   "porque": "Las once familias de la casa: piel vaca, piel italiana hecha a mano, piel perforada, piel sintética, tela vaquera, acero 316L, acero 904L, caucho, goma, nato y naylon.",
+   "tarjeta": "correa"
+  },
+  {
+   "id": "correa",
+   "rotulo": "Color",
+   "de": "correa.colores",
+   "tarjeta": "correa"
+  },
+  {
+   "id": "cierre",
+   "rotulo": "Cierre",
+   "de": "correa.cierres",
+   "tarjeta": "correa"
+  },
+  {
+   "id": "cierrecolor",
+   "rotulo": "Color del cierre",
+   "de": "correa.colores_cierre",
+   "tarjeta": "correa"
+  }
+ ],
+ "tarjetas": [
+  {
+   "id": "caja",
+   "titulo": "La caja"
+  },
+  {
+   "id": "mov",
+   "titulo": "El movimiento"
+  },
+  {
+   "id": "correa",
+   "titulo": "El brazalete o la correa",
+   "marca": "correa",
+   "porque": "La marca la usa el visor para saber cuándo el cliente está en la correa."
+  }
+ ]
 }

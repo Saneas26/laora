@@ -12,6 +12,15 @@
 # ya no está a la venta» y nadie se entera hasta que alguien compra.
 # Acordarse a mano no funciona —Óscar, 19/08/2026: «el catálogo va a
 # estar cambiando toda la semana a cada hora»—, así que se hace solo.
+# EL CONTRATO DE PASOS Y SU COPIA DENTRO DEL MOTOR. El motor lleva una copia
+# literal de `assets/datos/pasos-2026.json` porque pinta antes de que el
+# cliente vea nada y además corre fuera del navegador cuando se vuelca el
+# catálogo. Si alguien toca el JSON y no pasa el sincronizador, la ficha se
+# queda con unos pasos y el contrato dice otros. Esto lo caza aquí.
+if git diff --cached --name-only | grep -qE '^assets/(datos/pasos-2026\.json|js/configurador-2026\.js)$'; then
+  python3 herramientas/sincronizar_pasos.py --comprobar || exit 1
+fi
+
 fichas=$(git diff --cached --name-only | grep -E '^(precisa|trinchera|lunar|bitacora)\.html$|^assets/img/lunar-config/manifest\.json$')
 if [ -n "$fichas" ]; then
   echo "→ ha cambiado una ficha: volviendo a volcar el catálogo"

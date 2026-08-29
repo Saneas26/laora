@@ -59,6 +59,165 @@
      las combinaciones del primero. */
   var LLAVE = 'laora.' + (M.slug || 'modelo') + '.';
 
+  /* ---------- EL CONTRATO DE PASOS ----------
+     El orden que llevan los diez modelos, con sus dos reglas: una sola
+     opción sale señalada y explicada, y sin opciones el paso no aparece.
+     Manda `assets/datos/pasos-2026.json`; esto es una copia literal que
+     mete `herramientas/sincronizar_pasos.py`, porque el motor pinta antes
+     de que el cliente vea nada y además corre fuera del navegador cuando
+     el volcador calcula el catálogo: un `fetch` estorbaría en los dos
+     sitios. El gancho de pre-commit avisa si las dos se separan. */
+  /* >>> pasos-2026.json · lo copia herramientas/sincronizar_pasos.py */
+  var PASOS = [
+    {
+      "id": "tamano",
+      "rotulo": "Tamaño de la caja",
+      "de": "caja.tamanos",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "caja",
+      "rotulo": "Material",
+      "de": "caja.materiales",
+      "nota": "Acero, PVD, bronce o titanio.",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "bisel",
+      "rotulo": "Bisel",
+      "de": "bisel.colores",
+      "salta_si": "caja.integrada",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "biselmat",
+      "rotulo": "Material y acabado del bisel",
+      "de": "bisel.materiales",
+      "salta_si": "caja.integrada",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "esftipo",
+      "rotulo": "Tipo de esfera",
+      "de": "esfera.tipos",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "esf",
+      "rotulo": "Esfera",
+      "de": "esfera.colores",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "agujas",
+      "rotulo": "Agujas",
+      "de": "agujas.colores",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "cristal",
+      "rotulo": "Cristal",
+      "de": "cristal",
+      "tarjeta": "caja"
+    },
+    {
+      "id": "mov",
+      "rotulo": "Calibre",
+      "de": "movimiento",
+      "tarjeta": "mov"
+    },
+    {
+      "id": "correamat",
+      "rotulo": "Material",
+      "de": "correa.familias",
+      "tarjeta": "correa"
+    },
+    {
+      "id": "correa",
+      "rotulo": "Color",
+      "de": "correa.colores",
+      "tarjeta": "correa"
+    },
+    {
+      "id": "cierre",
+      "rotulo": "Cierre",
+      "de": "correa.cierres",
+      "tarjeta": "correa"
+    },
+    {
+      "id": "cierrecolor",
+      "rotulo": "Color del cierre",
+      "de": "correa.colores_cierre",
+      "tarjeta": "correa"
+    }
+  ];
+  var TARJETAS = [
+    {
+      "id": "caja",
+      "titulo": "La caja"
+    },
+    {
+      "id": "mov",
+      "titulo": "El movimiento"
+    },
+    {
+      "id": "correa",
+      "titulo": "El brazalete o la correa",
+      "marca": "correa"
+    }
+  ];
+  /* <<< fin del contrato de pasos */
+
+  /* ---------- LOS PASOS SE PINTAN, NO SE ESCRIBEN ----------
+     Hasta el 29/08/2026 las once cajas de opciones estaban escritas a mano
+     en el HTML de la ficha, con su rótulo y su orden. Con diez modelos eso
+     son diez copias que se separan en cuanto alguien cambia una: el orden
+     lo manda el contrato, así que el motor las monta desde él.
+
+     QUÉ TABLA LLENA CADA PASO sigue decidiéndolo `pinta()`, que es donde
+     vive lo que un paso puede depender de otro. Aquí sólo se pone el
+     armazón: la tarjeta, el rótulo, el hueco de los botones y el de la
+     explicación. Un paso al que `pinta()` no le eche opciones se queda
+     vacío y `pinta()` lo esconde, que es la segunda regla del contrato. */
+  function montaPasos() {
+    var caja = $('[data-pv-pasos]');
+    if (!caja || !PASOS.length) return;
+    var html = '';
+    TARJETAS.forEach(function (t) {
+      var suyos = PASOS.filter(function (p) { return p.tarjeta === t.id; });
+      if (!suyos.length) return;
+      html += '<section class="pv-tarjeta"' +
+              (t.marca ? ' data-pv-tarjeta="' + t.marca + '"' : '') + '>' +
+              '<h2 class="pv-tarjeta-tit">' + t.titulo + '</h2>';
+      suyos.forEach(function (p) {
+        html += '<div class="pv-g" data-g="' + p.id + '" hidden>' +
+                '<p class="pv-g-cab"><span>' + p.rotulo + '</span>' +
+                '<span class="pv-g-valor" data-valor="' + p.id + '"></span></p>' +
+                '<div class="pv-opciones" data-pv="' + p.id + '"></div>' +
+                /* La foto del cierre vive dentro de su paso: es lo único que
+                   un paso enseña además de sus botones. */
+                (p.id === 'cierre'
+                  ? '<img class="pv-cierre-foto" data-pv-cierre-foto alt="" hidden>' : '') +
+                '<p class="pv-g-explica" data-explica="' + p.id + '"></p>' +
+                '</div>';
+      });
+      html += '</section>';
+    });
+    caja.innerHTML = html;
+  }
+
+  /* UN PASO SIN OPCIONES NO SE VE. Es la segunda regla del contrato, y se
+     aplica después de que `pinta()` haya repartido los botones: el paso
+     nace escondido y sólo aparece si le ha caído alguno. */
+  function escondeVacios() {
+    PASOS.forEach(function (p) {
+      var g = $('[data-g="' + p.id + '"]');
+      if (!g) return;
+      var ops = g.querySelector('[data-pv="' + p.id + '"]');
+      g.hidden = !ops || !ops.children.length;
+    });
+  }
+
   /* Las cuatro frases que solo sabe decir el modelo. */
   function referencia() { return M.referencia(e); }
   function agua() { return M.agua(e); }
@@ -926,6 +1085,7 @@
       '. Agujas: ' + AGUJAS[e.agujas].tec + '.';
     $('[data-pv-tec="agua"]').textContent = agua() + '.';
 
+    escondeVacios();
     abrirPasos();
     if (CURAR) panelCurar();
 
@@ -1379,6 +1539,7 @@
     }
   });
 
+  montaPasos();
   pinta();
   panelCurar();
   /* ---------- LA PUERTA DE SERVICIO ----------
