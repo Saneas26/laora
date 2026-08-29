@@ -14,7 +14,12 @@
   "",
   "CADA PASO DICE EN QUÉ TARJETA VA Y CON QUÉ RÓTULO. El motor pinta",
   "las tarjetas y los pasos leyendo esto, así que el orden y los",
-  "nombres se cambian AQUÍ y no en once sitios del HTML."
+  "nombres se cambian AQUÍ y no en once sitios del HTML.",
+  "",
+  "⚠️ EL DÚO SE FUE el 29/08/2026, y no por un problema técnico:",
+  "«ofreceremos la posibilidad de comprar más cosas, más correas,",
+  "antes de pasar al carrito, y por tanto ya no hará falta el dúo».",
+  "Era un paso del Trinchera para llevarse un segundo brazalete."
  ],
  "reglas": {
   "una_opcion": "senalada_y_explicada",
@@ -94,6 +99,13 @@
    "rotulo": "Color",
    "de": "correa.colores",
    "tarjeta": "correa"
+  },
+  {
+   "id": "pespunte",
+   "rotulo": "Pespunte",
+   "de": "correa.pespuntes",
+   "tarjeta": "correa",
+   "porque": "Óscar, 29/08/2026: «añade pespunte siempre en todos los modelos con correa de piel italiana». Al tono o en blanco. El que no dé a elegir pespunte no enseña el paso, como todos."
   },
   {
    "id": "cierre",

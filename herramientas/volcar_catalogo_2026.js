@@ -270,7 +270,7 @@ function generado(slug, nombre, clase, mm) {
 function trinchera() {
   const L = motorDe('trinchera.html',
     'MOVS, CAJAS, ESFERAS, CORREAS, natos, PIELES_K, ANTES, PESPUNTES, CIERRES, ' +
-    'CIERRES_K, MURPH_CORREA, PIELES_M, puedeDuo, conCierreK, esfNombre, esfTec, ' +
+    'CIERRES_K, MURPH_CORREA, PIELES_M, conCierreK, esfNombre, esfTec, ' +
     'vetada, firma, sinVeto, ' +
     'e, precio, referencia, normaliza, agua, pinta, conCierre');
   /* Ver el árbol ENTERO: lo vetado se descarta hoja por hoja más abajo, no
@@ -376,21 +376,23 @@ function trinchera() {
               const colores = ofrece('esfColor', ['NEG']);
               for (const esfColor of colores) {
               L.e.esfColor = esfColor;
-              const duos = L.puedeDuo() ? [false, true] : [false];
-              for (const duo of duos) {
-              L.e.duo = duo;
-              /* LAS VETADAS NO ENTRAN EN EL CATÁLOGO. La ficha ya no las
+              /* ⛔ AQUÍ SE ABRÍA EL DÚO, que se fue el 29/08/2026 con sus 144
+                 referencias: «ofreceremos la posibilidad de comprar más
+                 cosas, más correas, antes de pasar al carrito».
+
+                 LAS VETADAS NO ENTRAN EN EL CATÁLOGO. La ficha ya no las
                  dibuja, pero aquí el estado se pone a mano en los últimos
-                 bucles —hebilla, color de esfera, dúo—, así que podría
-                 colarse una combinación que Óscar dio por muerta y el
-                 servidor la seguiría vendiendo. */
+                 bucles —hebilla, color de esfera—, así que podría colarse
+                 una combinación que Óscar dio por muerta y el servidor la
+                 seguiría vendiendo. */
               if (L.vetada(L.firma())) continue;
               const s = L.e;
               const esBronce = s.caja === 'BR';
               n += anota(L.referencia(), L.precio(),
-                'Trinchera ' + (esBronce ? 'Bronce' : (s.caja === 'TI' ? 'Titanio' :
-                  (s.duo ? 'Murph Dúo' :
-                    (s.esf === 'MA' || s.esf === 'MB' ? 'Murph' : 'Militar')))),
+                'Trinchera ' + (esBronce ? 'Bronce'
+                  : s.caja === 'TI' ? 'Titanio'
+                  : (s.esf === 'MA' || s.esf === 'MB') ? 'Murph'
+                  : 'Militar'),
                 L.CAJAS[s.caja].nombre + ' ' + s.diam + ' mm, tapa ' +
                   (s.tapa === 'C' ? 'de cristal' : 'sólida') + ' · ' + L.esfNombre() +
                   ' · ' + L.MOVS[s.mov].nombre,
@@ -402,16 +404,14 @@ function trinchera() {
                      20/08/2026 y su referencia ya lo lleva */
                   : (s.correa === 'ANTE' && L.ANTES && L.ANTES[s.ante])
                   ? 'Ante ' + L.ANTES[s.ante][0].toLowerCase()
-                  : L.CORREAS[s.correa].nombre) + (s.duo ? ' + brazalete de acero' : ''),
+                  : L.CORREAS[s.correa].nombre),
                 { movimiento: L.MOVS[s.mov].tec, caja: 'Caja de ' + L.CAJAS[s.caja].mat + '.',
                   esfera: L.esfTec(),
                   correa: (s.correa === 'NATO'
                     ? 'nato ' + L.natos()[s.nato][0].toLowerCase() + ' de 20 mm con hebilla clásica plateada'
-                    : L.CORREAS[s.correa].tec) +
-                    (s.duo ? ', y el brazalete de acero 316L de tres eslabones aparte' : ''),
+                    : L.CORREAS[s.correa].tec),
                   agua: L.agua() },
                 Number(s.diam), hermanaDeDiametro(L, Object.assign({}, s))) ? 1 : 0;
-              }
               }
             }
           }

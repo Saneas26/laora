@@ -147,6 +147,12 @@
       "tarjeta": "correa"
     },
     {
+      "id": "pespunte",
+      "rotulo": "Pespunte",
+      "de": "correa.pespuntes",
+      "tarjeta": "correa"
+    },
+    {
       "id": "cierre",
       "rotulo": "Cierre",
       "de": "correa.cierres",

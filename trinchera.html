@@ -419,10 +419,6 @@
           <!-- EL DÚO, QUE NO ES UNA CORREA (Óscar, 26/08/2026). Va el
                último del bloque a propósito: es un añadido sobre lo que ya
                has elegido, no otra manera de elegirlo. No cambia la foto. -->
-          <div class="pv-sub" data-cuelga="duo" data-pv-grupo-duo hidden>
-            <p class="pv-subrotulo">Y además</p>
-            <div class="pv-opciones" data-pv="duo"></div>
-          </div>
         </div>
 
         <!-- LA TAPA NO ES UN PASO (Óscar, 19/08/2026): «realmente no es una
@@ -1150,7 +1146,7 @@
   var CAJA_DICHA = { PL: 'caja de acero plata', NG: 'caja negra de PVD',
                      BR: 'caja de bronce', TI: 'caja de titanio' };
   function correaDicha() {
-    return correaSola() + (e.duo ? ' y el brazalete de acero aparte' : '');
+    return correaSola();
   }
   function correaSola() {
     if (e.correa === 'PIELO')  return 'correa de piel ' + PIELES_K[e.pielk][0].toLowerCase();
@@ -1197,7 +1193,6 @@
       t += ', pespunte ' + PESPUNTES[e.pesp].toLowerCase();
     if (conCierreK()) t += ', ' + CIERRES_K[e.cierre].toLowerCase();
     else if (conCierre()) t += ', ' + CIERRES[e.cierre].nombre.toLowerCase();
-    if (e.duo) t += ', con el brazalete añadido';
     return t + ' · ' + MOVS[e.mov].nombre;
   }
   /* LA FIRMA DE UNA COMBINACIÓN. No vale la referencia: el color de la
@@ -1206,7 +1201,7 @@
      Aquí va todo lo que el cliente elige. */
   function firma() {
     return [e.diam, e.mov, e.estilo, e.caja, e.esf, e.esfColor, e.correa,
-            e.nato, e.ante, e.pielk, e.pesp, e.cierre, e.duo ? 'DUO' : ''].join('|');
+            e.nato, e.ante, e.pielk, e.pesp, e.cierre].join('|');
   }
 
   /* Las correas que son la MISMA en las dos cajas, y por tanto comparten
@@ -1336,7 +1331,7 @@
    al llegar es el Khaki de 39 mm en acero, con el nato verde militar y
    la hebilla clásica plateada. Es la única combinación fotografiada, y
    la ficha tiene que abrir enseñando un reloj, no un cartel. */
-  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata', esfColor: 'NEG', duo: false,
+  var e = { estilo: 'K', mov: 'Q', diam: '39', caja: 'PL', tapa: 'S', esf: 'KB', correa: 'NATO', nato: 'VER', ante: 'NEG', pielk: 'MCL', pesp: 'B', cierre: 'plata', esfColor: 'NEG',
             /* la última correa que pediste TÚ, para poder devolvértela cuando
                un recorte por caja te la haya cambiado (23/08/2026) */
             correaPedida: 'NATO' };
@@ -1366,20 +1361,9 @@
   function costes() {
     var correa = (e.correa === 'NATO' && e.diam === '36') ? NATO36 : CORREAS[e.correa].coste;
     return MOVS[e.mov].coste + CAJAS[e.caja].coste + ESFERAS[e.esf].coste +
-           correa + (e.duo ? CORREAS.ACERO.coste : 0) +
+           correa +
            (conCierre() || conCierreK() ? CIERRES[e.cierre].extra : 0) + LOGO +
            (e.mov === 'Q' ? ANILLO : 0);
-  }
-  /* Lo que sube el precio por añadir el brazalete. No es el coste de la
-     pieza: se pasa por el multiplicador, el redondeo al 9,90 y el suelo,
-     igual que todo lo demás, así que la única manera honrada de saberlo es
-     calcular el precio con él y sin él. */
-  function masDuo() {
-    var antes = e.duo;
-    e.duo = false; var sin = precio();
-    e.duo = true;  var con = precio();
-    e.duo = antes;
-    return con - sin;
   }
   function precioTarifa() {
     var extra = e.diam === '39' ? 10 : 0;
@@ -1409,7 +1393,7 @@
        correa. Se traduce a lo que pedía: la correa de verdad más el
        añadido. Va lo PRIMERO, antes de que ninguna regla mire `e.correa` y
        no reconozca `DUOM`. */
-    if (DUO_VIEJO[e.correa]) { e.correa = DUO_VIEJO[e.correa]; e.duo = true; }
+    if (DUO_VIEJO[e.correa]) e.correa = DUO_VIEJO[e.correa];
     /* El catálogo cerrado (Óscar, 15/08/2026): solo las combinaciones
        fotografiadas. El ESTILO manda: el Murph solo existe en acero
        plata y va con piel negra, brazalete o el pack; el khaki reparte
@@ -1499,24 +1483,15 @@
        sólida, automático → cristal; el titanio siempre sólida (20 ATM). */
     e.tapa = (e.mov === 'Q' || e.caja === 'TI') ? 'S' : 'C';
     /* y el añadido del brazalete se cae solo en cuanto deja de valer */
-    if (!puedeDuo()) e.duo = false;
   }
   function agua() { return e.caja === 'TI' ? '20 ATM / 200 metros' : '5 ATM / 50 metros'; }
-  /* DÓNDE SE PUEDE AÑADIR EL BRAZALETE (Óscar, 26/08/2026: «donde está hoy,
-     sólo el Murph en acero»). Es un añadido, no una correa: hace falta
-     haber elegido antes una combinación válida —piel o ante— y el dúo se
-     suma encima. En titanio no hay brazalete, así que ahí no aparece. */
-  function puedeDuo() {
-    return e.estilo === 'M' && e.caja === 'PL' &&
-           (!!MURPH_CORREA[e.correa] || e.correa === 'ANTE');
-  }
   /* LA REFERENCIA DEL DÚO VA DETRÁS, no en el sitio de la correa: el reloj
      es el mismo y lo que se añade es una pieza suelta. Así ninguna de las
      referencias que ya existían cambia una letra. */
   function referencia() {
     return referenciaBase() +
            (e.estilo === 'K' ? (ESF_REF[e.esfColor] || '') : '') +
-           (e.duo ? '-DUO' : '');
+           '';
   }
   function referenciaBase() {
     var seg = 'LO-02-' + e.mov + '-' + e.caja + e.diam + e.tapa + '-';
@@ -1673,44 +1648,52 @@
      el volcador no las mete en el catálogo del servidor.
 
      El orden de los campos es el de `firma()`:
-       diam|mov|estilo|caja|esf|esfColor|correa|nato|ante|pielk|pesp|cierre|duo
+       diam|mov|estilo|caja|esf|esfColor|correa|nato|ante|pielk|pesp|cierre
      y en limpio los dos primeros van vacíos.
 
      Mientras esté vacía no quita nada. Se llena cuando Óscar pasa su lista
      del panel; a partir de ahí el panel se vacía solo, porque lo que ya está
      aquí deja de estar pendiente. */
+  /* ⚠️ LAS FIRMAS PERDIERON SU ÚLTIMO CAMPO EL 29/08/2026, cuando se fue el
+     dúo. Eran trece —el último, el dúo— y ahora son doce. La primera vez
+     que se quitó el paso sin tocar esto, ninguna clave casaba y NOVENTA Y
+     CUATRO combinaciones que Óscar había dado por muertas volvieron al
+     catálogo. Lo cazó el recuento: 1.456 en vez de 1.362.
+
+     Si algún día se añade o se quita un campo de `firma()`, esta tabla se
+     toca a la vez o los vetos dejan de existir en silencio. */
   var VETADAS = {
-    '||K|PL|KB|AZU|NATO|NEG|||||': 1,
-    '||K|PL|KB|AZU|NATO|VER|||||': 1,
-    '||K|BR|KB|GRI|NATO|VER|||||': 1,
-    '||K|BR|KB|GRI|NATO|BGE|||||': 1,
-    '||K|BR|KB|GRI|NATO|MOS|||||': 1,
-    '||K|TI|KB|AZU|NATO|VER|||||': 1,
-    '||K|TI|KB|GRI|ANTE||MOS||||': 1,
-    '||K|TI|KB|GRI|PIELO|||MOS||plata|': 1,
-    '||K|PL|KB|AZU|PIELO|||MOS||plata|': 1,
-    '||K|PL|KB|AZU|PIELO|||NEG||plata|': 1,
-    '||K|PL|KB|AZU|NATO|MOS|||||': 1,
-    '||K|PL|KB|AZU|ANTE||NEG||||': 1,
-    '||K|PL|KB|AZU|ANTE||MOS||||': 1,
-    '||K|NG|KB|AZU|PIELO|||MOS||plata|': 1,
-    '||K|BR|KB|AZU|ANTE||CAM||||': 1,
-    '||K|BR|KB|AZU|ANTE||NEG||||': 1,
-    '||K|BR|KB|AZU|ANTE||MOS||||': 1,
-    '||K|BR|KB|AZU|NATO|VER|||||': 1,
-    '||K|BR|KB|AZU|NATO|NEG|||||': 1,
-    '||K|BR|KB|AZU|NATO|BGE|||||': 1,
-    '||K|BR|KB|AZU|NATO|MOS|||||': 1,
-    '||K|BR|KB|AZU|NATO|GRI|||||': 1,
-    '||K|BR|KB|AZU|PIELO|||NEG||plata|': 1,
-    '||K|BR|KB|AZU|PIELO|||MOS||plata|': 1,
-    '||K|BR|KB|AZU|PIELO|||MCL||plata|': 1,
-    '||K|BR|KB|NEG|ANTE||CAM||||': 1,
-    '||M|TI|MB||PIELN||||B|oro-rosa|': 1,
-    '||M|TI|MB||PIELM||||B|oro|': 1,
-    '||M|TI|MB||PIELN||||B|oro|': 1,
-    '||M|TI|MB||PIELV||||B|oro-rosa|': 1,
-    '||M|TI|MB||PIELM||||B|oro-rosa|': 1
+    '||K|PL|KB|AZU|NATO|NEG||||': 1,
+    '||K|PL|KB|AZU|NATO|VER||||': 1,
+    '||K|BR|KB|GRI|NATO|VER||||': 1,
+    '||K|BR|KB|GRI|NATO|BGE||||': 1,
+    '||K|BR|KB|GRI|NATO|MOS||||': 1,
+    '||K|TI|KB|AZU|NATO|VER||||': 1,
+    '||K|TI|KB|GRI|ANTE||MOS|||': 1,
+    '||K|TI|KB|GRI|PIELO|||MOS||plata': 1,
+    '||K|PL|KB|AZU|PIELO|||MOS||plata': 1,
+    '||K|PL|KB|AZU|PIELO|||NEG||plata': 1,
+    '||K|PL|KB|AZU|NATO|MOS||||': 1,
+    '||K|PL|KB|AZU|ANTE||NEG|||': 1,
+    '||K|PL|KB|AZU|ANTE||MOS|||': 1,
+    '||K|NG|KB|AZU|PIELO|||MOS||plata': 1,
+    '||K|BR|KB|AZU|ANTE||CAM|||': 1,
+    '||K|BR|KB|AZU|ANTE||NEG|||': 1,
+    '||K|BR|KB|AZU|ANTE||MOS|||': 1,
+    '||K|BR|KB|AZU|NATO|VER||||': 1,
+    '||K|BR|KB|AZU|NATO|NEG||||': 1,
+    '||K|BR|KB|AZU|NATO|BGE||||': 1,
+    '||K|BR|KB|AZU|NATO|MOS||||': 1,
+    '||K|BR|KB|AZU|NATO|GRI||||': 1,
+    '||K|BR|KB|AZU|PIELO|||NEG||plata': 1,
+    '||K|BR|KB|AZU|PIELO|||MOS||plata': 1,
+    '||K|BR|KB|AZU|PIELO|||MCL||plata': 1,
+    '||K|BR|KB|NEG|ANTE||CAM|||': 1,
+    '||M|TI|MB||PIELN||||B|oro-rosa': 1,
+    '||M|TI|MB||PIELM||||B|oro': 1,
+    '||M|TI|MB||PIELN||||B|oro': 1,
+    '||M|TI|MB||PIELV||||B|oro-rosa': 1,
+    '||M|TI|MB||PIELM||||B|oro-rosa': 1
   };
   function vetada(f) { return !!VETADAS[canon(f)]; }
   /* EL VOLCADOR TIENE QUE VERLO TODO. Lee lo que la ficha DIBUJA para saber
@@ -1770,8 +1753,9 @@
      que Óscar ha marcado para quitar. Teniéndolo en dos sitios, el día que
      cambie una regla se quedaría medio cambiada. */
   function aplicaOpcion(g, v) {
-    if (g === 'duo') e.duo = !e.duo;
-    else if (g === 'color' && e.correa === 'ANTE') e.ante = v;
+    /* La cadena empezaba en el dúo, que se fue el 29/08/2026; ahora abre el
+       color del ante. */
+    if (g === 'color' && e.correa === 'ANTE') e.ante = v;
     else if (g === 'color' && e.correa === 'NATO') e.nato = v;
     else if (g === 'color' && e.correa === 'PIELO') e.pielk = v;
     /* En el Murph el color de la piel ES la correa: negra, marrón y verde
@@ -1805,7 +1789,6 @@
       return e.correa === 'ANTE' ? e.ante
            : e.correa === 'NATO' ? e.nato
            : e.correa === 'PIELO' ? e.pielk : e.correa;
-    if (grupo === 'duo') return e.duo ? 'SI' : '';
     return e[grupo];
   }
 
@@ -1871,7 +1854,7 @@
     }
     /* pespunte, color y cierre son de la correa: hasta que no la eliges,
        no pintan nada */
-    ['pesp', 'color', 'cierre', 'duo'].forEach(function (k) {
+    ['pesp', 'color', 'cierre'].forEach(function (k) {
       var g = $('[data-cuelga="' + k + '"]');
       if (g) g.classList.toggle('pv-cerrado', !tocado.correa);
     });
@@ -1997,15 +1980,11 @@
     /* EL AÑADIDO DEL BRAZALETE. Se dice lo que suma de verdad —con el
        multiplicador, el redondeo al 9,90 y el suelo ya aplicados—, no el
        coste de la pieza: es lo que le van a cobrar. */
-    var grupoDuo = $('[data-pv-grupo-duo]');
-    var tocaDuo = puedeDuo();
-    grupoDuo.hidden = !tocaDuo;
-    /* y se VACÍA además de esconderse, por lo mismo que los numerales: el
-       volcador del catálogo lee lo que la ficha ha dibujado */
-    if (!tocaDuo) $('[data-pv="duo"]').innerHTML = '';
-    else botones('duo', [['SI', (e.duo ? '\u2611' : '\u2610') +
-                          '  Añade el brazalete de acero  +' + eu(masDuo())]],
-                 e.duo ? 'SI' : '');
+    /* ⛔ EL PASO DEL DÚO SE FUE (Óscar, 29/08/2026): «el dúo no, porque
+       ofreceremos la posibilidad de comprar más cosas, más correas, antes
+       de pasar al carrito, y por tanto ya no hará falta el dúo por ahora».
+       Era un botón para llevarse además el brazalete de acero. Se quita el
+       paso y con él las 144 referencias acabadas en `-DUO`. */
 
     /* El cierre: con la piel italiana, y su foto en la esquina del visor */
     var hayCierre = conCierre() || conCierreK();
@@ -2152,7 +2131,7 @@
         : conCierre()
         ? CORREAS[e.correa].tec.replace('hebilla clásica plateada', CIERRES[e.cierre].tec)
         : CORREAS[e.correa].tec)
-      + (e.duo ? ', y el brazalete de acero 316L de tres eslabones aparte' : '') + '.';
+      + '.';
     $('[data-pv-tec="mov"]').textContent = MOVS[e.mov].tec;
     $('[data-pv-tec="esf"]').textContent = esfTec();
     abrirPasos();
@@ -2411,9 +2390,10 @@
       var esBronce = e.caja === 'BR';
       laoraCarritoAnadir({
         ref: referencia(),
-        nombre: 'Trinchera ' + (esBronce ? 'Bronce' : (e.caja === 'TI' ? 'Titanio' :
-                (e.duo ? 'Murph Dúo' :
-                 (e.esf === 'MA' || e.esf === 'MB' ? 'Murph' : 'Militar')))),
+        nombre: 'Trinchera ' + (esBronce ? 'Bronce'
+                : e.caja === 'TI' ? 'Titanio'
+                : (e.esf === 'MA' || e.esf === 'MB') ? 'Murph'
+                : 'Militar'),
         detalle: CAJAS[e.caja].nombre + ' ' + e.diam + ' mm, tapa ' + (e.tapa === 'C' ? 'de cristal' : 'sólida') +
                  ' · ' + esfNombre() + ' · ' + MOVS[e.mov].nombre,
         correa: (e.correa === 'PIELO'
@@ -2427,7 +2407,7 @@
             ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
           : conCierre()
           ? CORREAS[e.correa].nombre + ' · ' + CIERRES[e.cierre].nombre.toLowerCase()
-          : CORREAS[e.correa].nombre) + (e.duo ? ' + brazalete de acero' : ''),
+          : CORREAS[e.correa].nombre),
         precio: precio(),
         foto: (function () { var i = $('[data-pv-foto]'); return i.hidden ? '' : i.src; })()
       });
