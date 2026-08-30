@@ -597,7 +597,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=39';
+  var SERIE_V = '?v=40';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -718,7 +718,7 @@
        lleva miniatura: ya se le ve la cara en el montaje. Y al revés
        también: las otras familias no la ofrecen, porque sus cierres son
        desplegables. */
-    HEBP: { nombre: 'Hebilla clásica plateada',
+    HEBP: { nombre: 'Hebilla clásica plateada', mini: 'hebilla-plata',
             tec: 'hebilla clásica de acero plateado' },
     /* 0b · LA DE LA TELA VAQUERA (Óscar, 30/08/2026: «con hebilla mariposa
        y solo puede elegirse con esa hebilla»). Como la de la piel: viene
@@ -727,8 +727,17 @@
             tec: 'cierre de mariposa de acero plateado' },
     /* 0c · LA DE LA PIEL VINTAGE (30/08/2026): la hebilla clásica en negro,
        dibujada en la propia correa. */
-    HEBN: { nombre: 'Hebilla clásica negra',
+    HEBN: { nombre: 'Hebilla clásica negra', mini: 'hebilla-negra',
             tec: 'hebilla clásica de acero con PVD negro' },
+    /* 0d · EL RESTO DEL CATÁLOGO DE HEBILLAS (Óscar, 30/08/2026: «vamos a
+       completar el catálogo por si en otra correa tuviéramos que dar a
+       elegir más colores»). HOY NO LAS OFRECE NADIE: no están en la lista
+       de ninguna familia, así que no salen en ningún paso. El día que una
+       correa las dé a elegir, se añaden a su lista y ya está. */
+    HEBO: { nombre: 'Hebilla clásica oro rosa', mini: 'hebilla-oro-rosa',
+            tec: 'hebilla clásica en oro rosa' },
+    HEBD: { nombre: 'Hebilla clásica dorada', mini: 'hebilla-dorada',
+            tec: 'hebilla clásica dorada' },
     /* 1 · «desplegable mariposa con hebilla clásica» */
     MARI: { nombre: 'Mariposa con hebilla vista', mini: 'mariposa-hebilla',
             tec: 'cierre de mariposa con la hebilla clásica a la vista' },
@@ -745,10 +754,13 @@
     DSEG: { nombre: 'Desplegable con seguro abatible', mini: 'desplegable-seguro',
             tec: 'cierre desplegable con seguro abatible' }
   };
-  /* Qué familia lleva el cierre puesto de fábrica. Las que están aquí solo
-     ofrecen el suyo; las que no, ofrecen los cinco desplegables y ninguno
-     de estos. */
-  var CIERRE_FIJO = { PPER: 'HEBP', TELA: 'MARP', PVIN: 'HEBN' };
+  /* Qué cierres ofrece cada familia que trae el suyo de fábrica. Una
+     LISTA, no un valor: la piel vintage elige entre la hebilla negra y la
+     plateada (Óscar, 30/08/2026). El primero de la lista es el que viene
+     puesto —el dibujado en la correa—. Las familias que no están aquí
+     ofrecen los cinco desplegables (`CIERRES_LIBRES`) y ninguna hebilla. */
+  var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'] };
+  var CIERRES_LIBRES = ['MARI', 'MOCU', 'MINT', 'DES2', 'DSEG'];
 
   /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
      Una lista por correa, y se apilan en la esquina de abajo a la
@@ -1023,13 +1035,9 @@
        ofrecen nunca: el cierre viene DIBUJADO en la correa, y ofrecer una
        mariposa sobre un dibujo con hebilla —o al revés— sería enseñar una
        cosa y vender otra. La tabla está junto a `CIERRES`. */
-    var fijo = CIERRE_FIJO[matDe(e.correa)];
-    var fijos = {};
-    for (var cf in CIERRE_FIJO) fijos[CIERRE_FIJO[cf]] = 1;
+    var lista = CIERRE_FIJO[matDe(e.correa)] || CIERRES_LIBRES;
     var cierresDe = {};
-    Object.keys(CIERRES).forEach(function (k) {
-      if (fijo ? k === fijo : !fijos[k]) cierresDe[k] = CIERRES[k];
-    });
+    lista.forEach(function (k) { cierresDe[k] = CIERRES[k]; });
     botones('cierre', deTabla(cierresDe), e.cierre);
     var ci = CIERRES[e.cierre];
     rotula('cierre', ci.nombre,
@@ -1061,16 +1069,13 @@
     if (!AGUJAS[e.agujas]) e.agujas = Object.keys(AGUJAS)[0];
     if (!CORREAS[e.correa]) e.correa = Object.keys(CORREAS)[0];
     if (!CIERRES[e.cierre]) e.cierre = Object.keys(CIERRES)[0];
-    /* Cada familia con cierre fijo lleva EL SUYO, y ninguna otra lo lleva.
+    /* El cierre puesto tiene que estar entre los que su familia ofrece.
        Sin esto, cambiar de correa te dejaba puesto un cierre que su paso ya
        no ofrece: el botón no estaba, pero la ficha técnica y el carrito lo
-       seguían llevando. */
-    var fijoDe = CIERRE_FIJO[CORREA_MAT[e.correa] || 'A316'];
-    if (fijoDe) { e.cierre = fijoDe; }
-    else {
-      for (var cfam in CIERRE_FIJO)
-        if (e.cierre === CIERRE_FIJO[cfam]) e.cierre = 'MARI';
-    }
+       seguían llevando. Al entrar en una familia con cierre de fábrica se
+       pone el PRIMERO de su lista, que es el dibujado en la correa. */
+    var deFam = CIERRE_FIJO[CORREA_MAT[e.correa] || 'A316'] || CIERRES_LIBRES;
+    if (deFam.indexOf(e.cierre) < 0) e.cierre = deFam[0];
     if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
