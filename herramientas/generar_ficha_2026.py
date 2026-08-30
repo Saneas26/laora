@@ -63,7 +63,7 @@ V_CSS_CONFIG = 3
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
 V_JS_CONFIG = 11
-V_JS_CARRITO = 12
+V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
 # ⚠️ LOS QUE ESTÁN VENDIENDO. NO SE TOCAN.
