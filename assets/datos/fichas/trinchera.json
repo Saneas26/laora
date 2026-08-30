@@ -125,7 +125,8 @@
     "color": "#f2f2ef"
    }
   ],
-  "_gris": "LA GRIS NO EXISTE (Oscar, 31/08/2026: «trinchera no tiene esfera gris»). Estaba en la ficha desde el configurador viejo y la entrega del 29/08 no trae ninguna gris: se quita. Lo que si trajo y NO esta en la ficha es una «berenjena y ocre»; si algun dia se vende, entra con su coste."
+  "_gris": "LA GRIS NO EXISTE (Oscar, 31/08/2026: «trinchera no tiene esfera gris»). Estaba en la ficha desde el configurador viejo y la entrega del 29/08 no trae ninguna gris: se quito, y con ella sus 2.128 referencias.",
+  "_berenjena": "LA «BERENJENA Y OCRE» ESTA DESCARTADA (Oscar, 31/08/2026: «quitala»). Venia en la entrega del 29/08 —trinchera-esfera-berenjena-ocre.png— y no estaba en la ficha; preguntado si entraba, dijo que no. NO SE PROPONE MAS: si alguien la ve en la carpeta de la entrega, es material descartado, no una esfera pendiente."
  },
  "agujas": {
   "colores": []
@@ -692,7 +693,7 @@
   "_asas": "LA CAJA SE ESCALA CONTRA LA CORREA. Las correas del Trinchera salen de la biblioteca compartida, dibujada para un hueco de asas de 376 px (1412-2696 en el lienzo de 4096): la caja se encoge hasta que su hueco mide eso mismo y se coloca con el centro del hueco y el centro de sus dos filas de asa donde los tiene la caja del Lunar. Asi cualquier correa de la biblioteca le entra igual de bien.",
   "_agujas": "Cuelgan de `mov`, que siempre tiene valor, y con TABLA POR ESFERA: el Murph lleva sus propias agujas, con los numerales en crema o en blanco, y el resto las de siempre (el comodin `*`). `necesita: esf` para que no floten solas.",
   "_esferas": "El mapeo lo elegi yo mirando los dibujos y hay que confirmarlo: NEG sale de «esfera-logo-6mm», BLA de «blanca-mate», AZU de «azul-degradado», MCR de «murph-negra-v2» (numerales crema) y MBL de «murph-blanco-plata».",
-  "_faltan": "YA NO FALTA NINGUNA ESFERA: la gris se quito el 31/08/2026 porque no existe. Sobra en la entrega una «berenjena y ocre» que no esta en la ficha. Los dos tamanos (36 y 39 mm) siguen compartiendo el mismo dibujo de caja: el configurador no los distingue.",
+  "_faltan": "NO FALTA NI SOBRA NINGUNA ESFERA. Las cinco de la ficha se pintan. La gris se quito el 31/08/2026 porque no existe y la «berenjena y ocre» de la entrega esta DESCARTADA por Oscar el mismo dia. Lo unico pendiente del dibujo: los dos tamanos (36 y 39 mm) comparten la misma caja, el configurador no los distingue.",
   "_montado": "Montado el 30/08/2026 con herramientas/capas_trinchera.py desde tri/outputs/transparentes/, que esta vez SI trae alfa de verdad."
  }
 }
