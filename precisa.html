@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Precisa de laOra: 12 combinaciones, al precio honesto.">
+<meta name="description" content="Precisa de laOra: 36 combinaciones, al precio honesto.">
 <title>Precisa · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -234,7 +234,7 @@
         "coste": 10.39
       },
       "AZD": {
-        "nombre": "Azul degradado",
+        "nombre": "Azul hielo",
         "coste": 10.39
       },
       "BLA": {
@@ -242,16 +242,36 @@
         "coste": 10.39
       },
       "NEG": {
-        "nombre": "Negra",
+        "nombre": "Antracita",
         "coste": 10.39
       },
       "TIF": {
-        "nombre": "Tiffany",
+        "nombre": "Turquesa",
         "coste": 10.39
       },
       "VER": {
         "nombre": "Verde",
         "coste": 10.39
+      },
+      "NAR": {
+        "nombre": "Naranja"
+      },
+      "BOR": {
+        "nombre": "Blanca y oro rosa"
+      }
+    },
+    "agujas": {
+      "PLA": {
+        "nombre": "Plata",
+        "coste": 0
+      },
+      "ORO": {
+        "nombre": "Oro rosa",
+        "coste": 0
+      },
+      "NEG": {
+        "nombre": "Negras",
+        "coste": 0
       }
     },
     "cristal": {
@@ -285,7 +305,7 @@
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "40", "caja": "PL", "esf": "AZM", "cristal": "ZAF", "mov": "Q", "correamat": "A316"};
+  var e = {"tamano": "40", "caja": "PL", "esf": "AZM", "agujas": "PLA", "cristal": "ZAF", "mov": "Q", "correamat": "A316"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -296,7 +316,7 @@
      elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
-  var ORDEN = ["tamano", "caja", "esf", "cristal", "mov", "correamat"];
+  var ORDEN = ["tamano", "caja", "esf", "agujas", "cristal", "mov", "correamat"];
 
   /* ---------- LAS PUERTAS ----------
      Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
@@ -347,7 +367,7 @@
      elegida. Un paso con la puerta cerrada no escribe nada, y el guion que
      le tocaba se cae con el: sin eso, un brazalete acabaria en `-A316S-` y
      el mismo reloj tendria dos referencias segun un pespunte que no lleva. */
-  var PLANTILLA_REF = "LO-01-{mov}-40{mov.tapa}-{esf}";
+  var PLANTILLA_REF = "LO-01-{mov}-40{mov.tapa}-{esf}-{agujas}";
   function referencia(e) {
     if (!PLANTILLA_REF) {
       return 'LO-01-' + ORDEN.filter(function (k) { return abierta(k, e); })
@@ -398,10 +418,34 @@
     OPCIONES: OPCIONES, e: e,
     CORREAS: OPCIONES.correa || {}, CORREA_MAT: {},
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
-    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
-       paquetes no hay coste, así que la ficha dice «Precio por definir» y
-       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
-    CAPA: {}, PILA: [],
+    /* EL MONTAJE POR CAPAS, si el modelo lo trae. Se declara en el JSON:
+
+           "montaje": { "img": "/assets/img/<modelo>/capas/", "v": "?v=1",
+                        "pila": [{"capa": "esf", "grupo": "esf"}, ...],
+                        "capas": { "esf": {"AZM": "esfera-azul-marino"}, ... } }
+
+       `pila` es el orden de apilado (con `necesita` para lo que no puede
+       flotar solo, como las agujas sin su esfera) y `capas` dice qué
+       fichero dibuja cada opción. El que no traiga nada se queda sin
+       dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
+    CAPA: {
+    "esf": {
+      "AZM": "esfera-azul-marino",
+      "AZD": "esfera-azul-hielo",
+      "BLA": "esfera-blanca",
+      "NEG": "esfera-antracita",
+      "TIF": "esfera-turquesa",
+      "VER": "esfera-verde",
+      "NAR": "esfera-naranja",
+      "BOR": "esfera-blanca-oro-rosa"
+    },
+    "agujas": {
+      "PLA": "agujas-plata",
+      "ORO": "agujas-oro-rosa",
+      "NEG": "agujas-negras"
+    }
+  }, CAPA_IMG: "/assets/img/precisa-2026/capas/1200/", SERIE_V: "?v=1",
+    PILA: [{"capa": "esf", "grupo": "esf"}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo

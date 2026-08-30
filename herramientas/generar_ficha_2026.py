@@ -337,10 +337,18 @@ def modelo_js(d, dentro):
     OPCIONES: OPCIONES, e: e,
     CORREAS: OPCIONES.correa || {}, CORREA_MAT: %(correamat)s,
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
-    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
-       paquetes no hay coste, así que la ficha dice «Precio por definir» y
-       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
-    CAPA: {}, PILA: [],
+    /* EL MONTAJE POR CAPAS, si el modelo lo trae. Se declara en el JSON:
+
+           "montaje": { "img": "/assets/img/<modelo>/capas/", "v": "?v=1",
+                        "pila": [{"capa": "esf", "grupo": "esf"}, ...],
+                        "capas": { "esf": {"AZM": "esfera-azul-marino"}, ... } }
+
+       `pila` es el orden de apilado (con `necesita` para lo que no puede
+       flotar solo, como las agujas sin su esfera) y `capas` dice qué
+       fichero dibuja cada opción. El que no traiga nada se queda sin
+       dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
+    CAPA: %(capa)s, CAPA_IMG: %(capaimg)s, SERIE_V: %(seriev)s,
+    PILA: %(pila)s,
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -375,6 +383,10 @@ def modelo_js(d, dentro):
         'listo': 'true' if d.get('listo') else 'false',
         'extra': js(d.get('extra', 0)),
         'combis': json.dumps(d.get('combinaciones', []), ensure_ascii=False),
+        'capa': json.dumps(d.get('montaje', {}).get('capas', {}), ensure_ascii=False, indent=2).replace('\n', '\n  '),
+        'capaimg': js(d.get('montaje', {}).get('img', '')),
+        'seriev': js(d.get('montaje', {}).get('v', '')),
+        'pila': json.dumps(d.get('montaje', {}).get('pila', []), ensure_ascii=False),
         'cadena': js(d.get('cadena')) if d.get('cadena') else 'ORDEN',
         'vjsconf': V_JS_CONFIG,
     }

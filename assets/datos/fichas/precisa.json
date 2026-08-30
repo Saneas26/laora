@@ -38,7 +38,7 @@
    },
    {
     "id": "AZD",
-    "nombre": "Azul degradado",
+    "nombre": "Azul hielo",
     "coste": 10.39
    },
    {
@@ -48,23 +48,47 @@
    },
    {
     "id": "NEG",
-    "nombre": "Negra",
+    "nombre": "Antracita",
     "coste": 10.39
    },
    {
     "id": "TIF",
-    "nombre": "Tiffany",
+    "nombre": "Turquesa",
     "coste": 10.39
    },
    {
     "id": "VER",
     "nombre": "Verde",
     "coste": 10.39
+   },
+   {
+    "id": "NAR",
+    "nombre": "Naranja"
+   },
+   {
+    "id": "BOR",
+    "nombre": "Blanca y oro rosa"
    }
   ]
  },
  "agujas": {
-  "colores": []
+  "colores": [
+   {
+    "id": "PLA",
+    "nombre": "Plata",
+    "coste": 0
+   },
+   {
+    "id": "ORO",
+    "nombre": "Oro rosa",
+    "coste": 0
+   },
+   {
+    "id": "NEG",
+    "nombre": "Negras",
+    "coste": 0
+   }
+  ]
  },
  "cristal": [
   {
@@ -106,6 +130,40 @@
  "extra": 3.78,
  "agua": "",
  "_coste": "El coste sale de precisa.html: por movimiento, su calibre más su caja más sus agujas —la caja y el brazalete integrado van DENTRO del movimiento, por eso los demás pasos llevan 0—; por esfera, 10,39; y el logo, 3,78, en `extra`. Un 0 es «no añade coste»; no poner nada es «no se sabe», y entonces no se vende.",
- "referencia": "LO-01-{mov}-40{mov.tapa}-{esf}",
- "_referencia": "La forma la manda lo que ya se ha vendido: `LO-01-Q-40S-AZM`. La `S` y la `C` son la tapa —sólida con el cuarzo, de cristal con el automático—, y salen del propio movimiento."
+ "referencia": "LO-01-{mov}-40{mov.tapa}-{esf}-{agujas}",
+ "_referencia": "CAMBIÓ el 30/08/2026 al entrar las agujas: `LO-01-Q-40S-AZM-PLA`. Las doce referencias anteriores (sin cola de agujas) ya no se resuelven. La S y la C son la tapa, del propio movimiento.",
+ "_esferas": "REDIBUJADAS el 30/08/2026 con la entrega de Óscar (8 colores waffle). Seis CONSERVAN id y coste porque son la continuación del mismo color con dibujo nuevo (AZD pasa a llamarse Azul hielo, NEG Antracita, TIF Turquesa); Naranja y Blanca y oro rosa son NUEVAS y van sin coste hasta que Óscar lo dé: se dibujan, no se venden.",
+ "_agujas": "Nuevas el 30/08/2026. Coste 0 y no null: van DENTRO del movimiento, como la caja (ver _coste). Entran en la referencia: sin ellas, dos relojes con agujas distintas viajarían con el mismo código y el pedido no diría cuál quiere.",
+ "montaje": {
+  "img": "/assets/img/precisa-2026/capas/1200/",
+  "v": "?v=1",
+  "pila": [
+   {
+    "capa": "esf",
+    "grupo": "esf"
+   },
+   {
+    "capa": "agujas",
+    "grupo": "agujas",
+    "necesita": "esf"
+   }
+  ],
+  "capas": {
+   "esf": {
+    "AZM": "esfera-azul-marino",
+    "AZD": "esfera-azul-hielo",
+    "BLA": "esfera-blanca",
+    "NEG": "esfera-antracita",
+    "TIF": "esfera-turquesa",
+    "VER": "esfera-verde",
+    "NAR": "esfera-naranja",
+    "BOR": "esfera-blanca-oro-rosa"
+   },
+   "agujas": {
+    "PLA": "agujas-plata",
+    "ORO": "agujas-oro-rosa",
+    "NEG": "agujas-negras"
+   }
+  }
+ }
 }
