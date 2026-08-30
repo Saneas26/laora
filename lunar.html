@@ -463,20 +463,31 @@
     A316AMP: { nombre: 'Centro oro amarillo pulido', coste: 20.19, pieza: 'acero-316l-centro-oro-amarillo-pulido',
                tec: 'brazalete de acero inoxidable 316L con el eslabón central pulido en oro amarillo' },
 
-    /* --- Caucho · diez colores ---
-       Los cinco primeros son los del anuncio 1005008055142978, a 9,89. Los
-       cinco de abajo llegaron el 29/08 y todavía no tienen precio de
-       compra. */
-    CAZU: { nombre: 'Azul', coste: 9.89, pieza: 'caucho-azul', tec: 'correa de caucho azul' },
-    CAZN: { nombre: 'Azul y naranja', coste: 9.89, pieza: 'caucho-azul-naranja', tec: 'correa de caucho azul con naranja' },
-    CMAC: { nombre: 'Marrón y crema', coste: 9.89, pieza: 'caucho-marron-crema', tec: 'correa de caucho marrón con crema' },
-    CNVF: { nombre: 'Negra y verde flúor', coste: 9.89, pieza: 'caucho-negra-verde-fluor', tec: 'correa de caucho negra con verde flúor' },
-    CBLA: { nombre: 'Blanca', coste: 9.89, pieza: 'caucho-blanca', tec: 'correa de caucho blanca' },
-    CNBL: { nombre: 'Negra y blanca', coste: null, pieza: 'caucho-negra-blanca', tec: 'correa de caucho negra con blanco' },
-    CBOR: { nombre: 'Blanca y oro rosa', coste: null, pieza: 'caucho-blanca-oro-rosa', tec: 'correa de caucho blanca con oro rosa' },
-    CNGR: { nombre: 'Negra y gris', coste: null, pieza: 'caucho-negra-gris', tec: 'correa de caucho negra con gris' },
-    CAZC: { nombre: 'Azul celeste', coste: null, pieza: 'caucho-azul-celeste', tec: 'correa de caucho azul celeste' },
-    CBGR: { nombre: 'Blanca y gris', coste: null, pieza: 'caucho-blanca-gris', tec: 'correa de caucho blanca con gris' },
+    /* --- Caucho · los nueve colores del formato nuevo (30/08/2026) ---
+       Silicona de alta calidad, y REDIBUJADOS de cero: la correa curvada
+       abierta con su MARIPOSA puesta, cada color con el metal que le pega
+       —y luego se puede elegir cualquiera de los cuatro—. Los diez del
+       catálogo viejo se van enteros. A 5,79 de coste los nueve.
+       `cierreDibujado` es el metal que trae el dibujo: es el que sale
+       puesto al entrar. */
+    KAMM: { nombre: 'Azul marino y menta', coste: 5.79, pieza: 'caucho-curvada-azul-marino-menta-oro-rosa', cierreDibujado: 'MARO',
+            tec: 'correa de silicona azul marino con menta, curvada, con cierre de mariposa' },
+    KBLG: { nombre: 'Blanco y gris', coste: 5.79, pieza: 'caucho-curvada-blanco-gris', cierreDibujado: 'MARP',
+            tec: 'correa de silicona blanca con gris, curvada, con cierre de mariposa' },
+    KCEL: { nombre: 'Celeste y blanco', coste: 5.79, pieza: 'caucho-curvada-celeste-blanco', cierreDibujado: 'MARP',
+            tec: 'correa de silicona celeste con blanco, curvada, con cierre de mariposa' },
+    KCRE: { nombre: 'Crema y rosa', coste: 5.79, pieza: 'caucho-curvada-crema-rosa', cierreDibujado: 'MARO',
+            tec: 'correa de silicona crema con rosa, curvada, con cierre de mariposa' },
+    KMAR: { nombre: 'Marrón y crema', coste: 5.79, pieza: 'caucho-curvada-marron-crema', cierreDibujado: 'MARN',
+            tec: 'correa de silicona marrón con crema, curvada, con cierre de mariposa' },
+    KNBL: { nombre: 'Negro y blanco', coste: 5.79, pieza: 'caucho-curvada-negro-blanco', cierreDibujado: 'MARP',
+            tec: 'correa de silicona negra con blanco, curvada, con cierre de mariposa' },
+    KNNO: { nombre: 'Negro y naranja', coste: 5.79, pieza: 'caucho-curvada-negro-naranja-oro', cierreDibujado: 'MARD',
+            tec: 'correa de silicona negra con naranja, curvada, con cierre de mariposa' },
+    KNEG: { nombre: 'Negro', coste: 5.79, pieza: 'caucho-curvada-negro-negro', cierreDibujado: 'MARP',
+            tec: 'correa de silicona negra, curvada, con cierre de mariposa' },
+    KRNE: { nombre: 'Rosa y negro', coste: 5.79, pieza: 'caucho-curvada-rosa-negro', cierreDibujado: 'MARP',
+            tec: 'correa de silicona rosa con negro, curvada, con cierre de mariposa' },
 
     /* --- Piel perforada · los cuatro colores del formato nuevo ---
        LAS OCHO PIELES DE ANTES SE FUERON el 29/08/2026 (Óscar: «quita
@@ -550,8 +561,8 @@
      hoy, y el paso del material enseña solo esas. */
   var CORREA_MAT = {
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
-    CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
-    CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
+    KAMM: 'CAUCHO', KBLG: 'CAUCHO', KCEL: 'CAUCHO', KCRE: 'CAUCHO', KMAR: 'CAUCHO',
+    KNBL: 'CAUCHO', KNNO: 'CAUCHO', KNEG: 'CAUCHO', KRNE: 'CAUCHO',
     PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
     PVAZ: 'PVIN', PVBU: 'PVIN', PVCO: 'PVIN', PVMO: 'PVIN', PVNE: 'PVIN',
     IMAR: 'PITA', INEG: 'PITA', IAZU: 'PITA', IVER: 'PITA',
@@ -574,8 +585,13 @@
   var MATERIALES = {
     A316:   { nombre: 'Acero 316L',
               expl: 'Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable.' },
-    CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
-                                      'el único que se puede mojar sin pensarlo.' },
+    /* El texto es de Óscar (30/08/2026), y habla de silicona: es el
+       material de verdad de esta gama, aunque la familia de la casa se
+       siga llamando Caucho. */
+    CAUCHO: { nombre: 'Caucho',
+              expl: 'Silicona de alta calidad: antimicrobiana, transpirable y ' +
+                    'resistente al sudor. Cómoda durante horas, y la única que ' +
+                    'se puede mojar sin pensarlo.' },
     PITA:   { nombre: 'Piel italiana hecha a mano',
               expl: 'Piel italiana genuina, hecha a mano y grabada en coco, con el ' +
                     'pespunte a elegir. De vestir; no se moja.' },
@@ -622,7 +638,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=43';
+  var SERIE_V = '?v=44';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -805,7 +821,10 @@
      30/08/2026: «con hebillas clásicas negra, plata, oro rosa o dorada,
      pero mariposa solo plata». */
   var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'],
-                      PITA: ['MARP', 'HEBN', 'HEBP', 'HEBO', 'HEBD'] };
+                      PITA: ['MARP', 'HEBN', 'HEBP', 'HEBO', 'HEBD'],
+                      /* el caucho elige su mariposa en cualquier metal
+                         (Óscar, 30/08/2026) */
+                      CAUCHO: ['MARP', 'MARN', 'MARD', 'MARO'] };
   var CIERRES_LIBRES = ['MARI', 'MOCU', 'MINT', 'DES2', 'DSEG'];
 
   /* ---------- EL AÑADIDO DE LA MARIPOSA (Óscar, 30/08/2026) ----------
@@ -833,10 +852,17 @@
      ellas el 29/08/2026. */
   var MINI_IMG = '/assets/img/lunar-2026/correas/';
   var MINI = {
-    CAZU: ['cazu'], CAZN: ['cazn'], CBLA: ['cbla'],
-    CMAC: ['cmac'], CNVF: ['cnvf'],
-    /* Las cinco de caucho nuevas todavía no tienen foto de proveedor:
-       sin foto, no sale miniatura. */
+    /* Las fotos del proveedor del caucho viejo se fueron con él
+       (30/08/2026): la gama nueva enseña su correa completa dibujada. */
+    KAMM: ['/assets/img/componentes/correas/enteras/caucho-curvada-azul-marino-menta-oro-rosa'],
+    KBLG: ['/assets/img/componentes/correas/enteras/caucho-curvada-blanco-gris'],
+    KCEL: ['/assets/img/componentes/correas/enteras/caucho-curvada-celeste-blanco'],
+    KCRE: ['/assets/img/componentes/correas/enteras/caucho-curvada-crema-rosa'],
+    KMAR: ['/assets/img/componentes/correas/enteras/caucho-curvada-marron-crema'],
+    KNBL: ['/assets/img/componentes/correas/enteras/caucho-curvada-negro-blanco'],
+    KNNO: ['/assets/img/componentes/correas/enteras/caucho-curvada-negro-naranja-oro'],
+    KNEG: ['/assets/img/componentes/correas/enteras/caucho-curvada-negro-negro'],
+    KRNE: ['/assets/img/componentes/correas/enteras/caucho-curvada-rosa-negro'],
     /* LA PIEL ENSEÑA SU CORREA COMPLETA (Óscar, 29/08/2026): el dibujo
        entero con su hebilla, de la biblioteca compartida. Con la ruta
        entera, que no es de la carpeta del modelo. */
@@ -1177,7 +1203,11 @@
        seguían llevando. Al entrar en una familia con cierre de fábrica se
        pone el PRIMERO de su lista, que es el dibujado en la correa. */
     var deFam = CIERRE_FIJO[CORREA_MAT[e.correa] || 'A316'] || CIERRES_LIBRES;
-    if (deFam.indexOf(e.cierre) < 0) e.cierre = deFam[0];
+    if (deFam.indexOf(e.cierre) < 0) {
+      /* si la correa dice qué metal trae dibujado, ese; si no, el primero */
+      var dib = CORREAS[e.correa] && CORREAS[e.correa].cierreDibujado;
+      e.cierre = (dib && deFam.indexOf(dib) >= 0) ? dib : deFam[0];
+    }
     /* Y el añadido de la mariposa: donde no se ofrece, fuera; y si el color
        que casaba ya no casa —cambió la hebilla de la vintage—, se cambia el
        color sin quitarle al cliente el añadido que pidió. */
