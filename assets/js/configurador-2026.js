@@ -966,7 +966,13 @@
   function precio() {
     var c = costes();
     if (c === null || c === undefined) return null;
-    return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste()));
+    /* UN AÑADIDO A PRECIO PLANO (Óscar, 30/08/2026: «el añadido a 9,90
+       plano»). Va DESPUÉS del multiplicador, del redondeo y del suelo: es
+       un accesorio con su precio de accesorio, no un coste más que la
+       cadena convertiría en +20 €. El modelo dice cuánto; sin el gancho,
+       cero. */
+    var extra = M.precioExtra ? M.precioExtra(e) : 0;
+    return Math.max(redondea(precioTarifa() * KLARNA), sueloPvp(netoDeCoste())) + extra;
   }
   /* EL MOVIMIENTO YA VIENE SEÑALADO (Óscar, 27/08/2026). El Lunar sólo
      tiene el LO_MQ326: pedirle al cliente que pulse el único botón que hay

@@ -517,6 +517,21 @@
     PVNE: { nombre: 'Negra', pieza: 'piel-vintage-negra',
             tec: 'correa de piel vintage negra de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
 
+    /* --- Piel italiana hecha a mano · cuatro colores (30/08/2026) ---
+       Genuina, grabada en coco, y LA VUELTA DEL PESPUNTE: cada color se
+       elige con el pespunte claro o a color (el del azul es azul y oro
+       rosa, que así viene dibujado). `pespTono` es el fichero del pespunte
+       a color de CADA una; el claro es '-pespunte-blanco' para todas.
+       SIN COSTE de compra todavía: se dibujan, no se venden. */
+    IMAR: { nombre: 'Marrón', pieza: 'piel-italiana-cocodrilo-marron', pespTono: '-pespunte-marron',
+            tec: 'correa de piel italiana genuina hecha a mano, grabada en coco, marrón' },
+    INEG: { nombre: 'Negra', pieza: 'piel-italiana-cocodrilo-negra', pespTono: '-pespunte-negro',
+            tec: 'correa de piel italiana genuina hecha a mano, grabada en coco, negra' },
+    IAZU: { nombre: 'Azul', pieza: 'piel-italiana-cocodrilo-azul', pespTono: '-pespunte-azul-oro-rosa',
+            tec: 'correa de piel italiana genuina hecha a mano, grabada en coco, azul' },
+    IVER: { nombre: 'Verde', pieza: 'piel-italiana-cocodrilo-verde', pespTono: '-pespunte-verde',
+            tec: 'correa de piel italiana genuina hecha a mano, grabada en coco, verde' },
+
     /* --- Tela vaquera · los cinco colores del formato nuevo ---
        20 mm de ancho, 2,8 de grosor, trama diagonal por fuera y cuero
        coñac por dentro. REDIBUJADAS el 30/08/2026 con su mariposa
@@ -537,23 +552,31 @@
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
     PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
     PVAZ: 'PVIN', PVBU: 'PVIN', PVCO: 'PVIN', PVMO: 'PVIN', PVNE: 'PVIN',
+    IMAR: 'PITA', INEG: 'PITA', IAZU: 'PITA', IVER: 'PITA',
     VARE: 'TELA', VAZU: 'TELA', VGRI: 'TELA', VNEG: 'TELA', VTOP: 'TELA'
   };
   /* LOS DOS PESPUNTES. `sufijo` es lo que se le añade al nombre de la
      pieza en la biblioteca, y `ref` lo que viaja pegado al color en la
      referencia para que no cambie ninguna de las ya emitidas. */
-  var PESPUNTES = { T: { nombre: 'Al tono', sufijo: '-pespunte-al-tono', ref: 'T' },
-                    B: { nombre: 'Blanco',  sufijo: '-pespunte-blanco',  ref: 'B' } };
-  /* Las familias que lo eligen. VACÍO desde el 29/08/2026: la piel nueva
-     trae el pespunte puesto en la propia correa. La tabla se queda por si
-     alguna familia vuelve a dar a elegir; sin entradas, el paso no sale. */
-  var CON_PESPUNTE = {};
+  /* Los dos pespuntes, con los nombres de Óscar («claro o a color»). El
+     fichero del claro es el mismo para todas; el del a color lo dice cada
+     correa en `pespTono`, porque el del azul es azul y oro rosa. `ref` es
+     la letra que viaja pegada al color en la referencia. */
+  var PESPUNTES = { T: { nombre: 'A color', ref: 'T' },
+                    B: { nombre: 'Claro',   ref: 'B' } };
+  /* Las familias que lo eligen. La piel italiana lo recuperó el
+     30/08/2026: claro o a color, como los dibujos. Las demás lo traen
+     puesto y no enseñan el paso. */
+  var CON_PESPUNTE = { PITA: 1 };
 
   var MATERIALES = {
     A316:   { nombre: 'Acero 316L',
               expl: 'Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable.' },
     CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
                                       'el único que se puede mojar sin pensarlo.' },
+    PITA:   { nombre: 'Piel italiana hecha a mano',
+              expl: 'Piel italiana genuina, hecha a mano y grabada en coco, con el ' +
+                    'pespunte a elegir. De vestir; no se moja.' },
     PVIN:   { nombre: 'Piel vintage',
               expl: 'Piel con carácter, de aire envejecido, con el pespunte crema ' +
                     'en contraste. Se ablanda con el uso, pero no se moja.' },
@@ -597,7 +620,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=42';
+  var SERIE_V = '?v=43';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -775,7 +798,12 @@
      plateada (Óscar, 30/08/2026). El primero de la lista es el que viene
      puesto —el dibujado en la correa—. Las familias que no están aquí
      ofrecen los cinco desplegables (`CIERRES_LIBRES`) y ninguna hebilla. */
-  var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'] };
+  /* La piel italiana estrena a las cuatro clásicas y a la mariposa, y su
+     dibujo lleva la mariposa plata puesta: por eso va la primera. Óscar,
+     30/08/2026: «con hebillas clásicas negra, plata, oro rosa o dorada,
+     pero mariposa solo plata». */
+  var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'],
+                      PITA: ['MARP', 'HEBN', 'HEBP', 'HEBO', 'HEBD'] };
   var CIERRES_LIBRES = ['MARI', 'MOCU', 'MINT', 'DES2', 'DSEG'];
 
   /* ---------- EL AÑADIDO DE LA MARIPOSA (Óscar, 30/08/2026) ----------
@@ -819,6 +847,10 @@
     PVCO: ['/assets/img/componentes/correas/enteras/piel-vintage-conac'],
     PVMO: ['/assets/img/componentes/correas/enteras/piel-vintage-marron-oscuro'],
     PVNE: ['/assets/img/componentes/correas/enteras/piel-vintage-negra'],
+    IMAR: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-marron'],
+    INEG: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-negra'],
+    IAZU: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-azul'],
+    IVER: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-verde'],
     /* LA VAQUERA ENSEÑA LO QUE NO SE VE EN EL MONTAJE: la trama diagonal
        de cerca, el desplegable y el forro de cuero coñac. Las tres valen
        para los cinco colores porque lo que cuentan es el ACABADO, no el
@@ -848,6 +880,10 @@
     '/assets/img/componentes/correas/enteras/piel-vintage-conac': 'La correa de piel vintage coñac completa, con su hebilla negra',
     '/assets/img/componentes/correas/enteras/piel-vintage-marron-oscuro': 'La correa de piel vintage marrón oscuro completa, con su hebilla negra',
     '/assets/img/componentes/correas/enteras/piel-vintage-negra': 'La correa de piel vintage negra completa, con su hebilla negra',
+    '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-marron': 'La correa de piel italiana marrón completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-negra': 'La correa de piel italiana negra completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-azul': 'La correa de piel italiana azul completa, con su mariposa',
+    '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-verde': 'La correa de piel italiana verde completa, con su mariposa',
     'vaquera-trama': 'La trama diagonal de la tela vaquera, de cerca',
     'vaquera-dentro': 'El forro de cuero coñac de la correa de tela vaquera',
     '/assets/img/componentes/correas/enteras/vaquera-arena': 'La correa de tela vaquera arena completa, con su mariposa',
@@ -863,8 +899,8 @@
   function piezaDe(e) {
     var c = CORREAS[e.correa];
     if (!c || !c.pieza) return null;
-    return c.pieza + (CON_PESPUNTE[matDeCorrea(e.correa)]
-      ? PESPUNTES[e.pespunte].sufijo : '');
+    if (!CON_PESPUNTE[matDeCorrea(e.correa)]) return c.pieza;
+    return c.pieza + (e.pespunte === 'B' ? '-pespunte-blanco' : c.pespTono);
   }
   function matDeCorrea(c) { return CORREA_MAT[c] || 'A316'; }
   /* TODOS los nombres que puede tener esa correa en la biblioteca. Lo usa la
@@ -873,10 +909,10 @@
      porque desde que el pespunte es un paso aparte ese fichero no existe: son
      `-pespunte-al-tono` y `-pespunte-blanco`. */
   function piezasDe(c) {
-    var base = CORREAS[c] && CORREAS[c].pieza;
-    if (!base) return [];
-    if (!CON_PESPUNTE[matDeCorrea(c)]) return [base];
-    return Object.keys(PESPUNTES).map(function (k) { return base + PESPUNTES[k].sufijo; });
+    var d = CORREAS[c];
+    if (!d || !d.pieza) return [];
+    if (!CON_PESPUNTE[matDeCorrea(c)]) return [d.pieza];
+    return [d.pieza + '-pespunte-blanco', d.pieza + d.pespTono];
   }
 
   function referencia(e) {
@@ -1184,9 +1220,17 @@
       if (!c || c.coste === null || c.coste === undefined) return null;
       extra = c.coste;
     }
-    /* El añadido de la mariposa, con su coste de catálogo. */
-    var mar = e.mariposa !== 'SIN' && CIERRES[e.mariposa] ? CIERRES[e.mariposa].coste || 0 : 0;
-    return MOVS[e.mov].coste + p.coste + extra + LOGO + mar;
+    /* El añadido de la mariposa NO va en el coste: su precio es PLANO
+       (9,90, Óscar 30/08/2026) y lo pone `precioExtra`, después del
+       multiplicador y del redondeo. Meter aquí sus 3,89 lo convertía en
+       +20 € de PVP. */
+    return MOVS[e.mov].coste + p.coste + extra + LOGO;
+  }
+
+  /* El precio del añadido, plano y a la vista. */
+  var MARIPOSA_PVP = 9.90;
+  function precioExtra(e) {
+    return e.mariposa !== 'SIN' ? MARIPOSA_PVP : 0;
   }
 
   /* La ficha técnica del Lunar, con sus piezas. */
@@ -1232,6 +1276,7 @@
     piezasDe: piezasDe,
     /* Para el volcador: si esta correa elige pespunte, hay dos referencias. */
     CON_PESPUNTE_DE: function (c) { return !!CON_PESPUNTE[matDeCorrea(c)]; },
+    precioExtra: precioExtra,
     /* Para el volcador: qué mariposa de recambio ofrece este estado. */
     MARIPOSA_DE: mariposaDe,
     COSTES_PUESTOS: COSTES_PUESTOS, CADENA: CADENA,

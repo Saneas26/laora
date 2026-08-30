@@ -71,14 +71,19 @@ def main():
                 if not os.path.exists(p):
                     faltan.append('%s/%s%s → %s' % (grupo, k, '·' + esf if esf else '', fich))
     # las correas viven en la biblioteca y su nombre lleva el pespunte
+    def sufijos_de(c, d):
+        """El pespunte va DENTRO del nombre de la pieza: claro para todas,
+        y el a color lo dice cada correa en `pespTono` (30/08/2026)."""
+        mat = M['CORREA_MAT'].get(c, 'A316')
+        if not M['CON_PESPUNTE'].get(mat):
+            return ['']
+        return ['-pespunte-blanco', d.get('pespTono', '')]
+
     for c, d in M['CORREAS'].items():
         if not d.get('pieza'):
             faltan.append('correa/%s no dice de qué pieza sale' % c)
             continue
-        mat = M['CORREA_MAT'].get(c, 'A316')
-        sufijos = ([p['sufijo'] for p in M['PESPUNTES'].values()]
-                   if M['CON_PESPUNTE'].get(mat) else [''])
-        for su in sufijos:
+        for su in sufijos_de(c, d):
             p = os.path.join(comp, d['pieza'] + su + '.avif')
             if not os.path.exists(p):
                 faltan.append('correa/%s → %s' % (c, d['pieza'] + su))
@@ -95,10 +100,7 @@ def main():
     print('=' * 74)
     usadas = set()
     for c, d in M['CORREAS'].items():
-        mat = M['CORREA_MAT'].get(c, 'A316')
-        sufijos = ([p['sufijo'] for p in M['PESPUNTES'].values()]
-                   if M['CON_PESPUNTE'].get(mat) else [''])
-        for su in sufijos:
+        for su in sufijos_de(c, d):
             usadas.add(d['pieza'] + su)
     hay = set(f[:-5] for f in os.listdir(comp) if f.endswith('.avif'))
     sobran = sorted(hay - usadas)
