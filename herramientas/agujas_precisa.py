@@ -6,6 +6,7 @@
     ... --minutero 0.95 --segundero 1.05   (estirar o acortar una aguja suelta)
     ... --segundero igual                  (el segundero, tan largo como el minutero)
     ... --sin-tono                          (no igualar el tono a los índices)
+    ... --tono oro-rosa                     (igualar al oro rosa, no al acero)
 
 POR QUÉ EXISTE. Las agujas del Precisa se colocaron a mano el 30/08/2026
 y salieron largas: «el minutero y el segundero se salen de la esfera»
@@ -177,35 +178,100 @@ def tono_de_los_indices():
     return L[m]
 
 
-def iguala_el_tono(im):
-    """Le pone a las agujas la misma escalera de grises que a los índices.
+def indices_oro_rosa():
+    """Los índices de la esfera BLANCA Y ORO ROSA, píxel a píxel (RGB).
+
+    Se cogen por el color, no por el brillo: sobre una esfera blanca lo
+    único que distingue una barra de oro rosa es que es CÁLIDA (R−B por
+    encima de 18). Filtrando por brillo, como se hace en la antracita, la
+    máscara se comía la esfera entera."""
+    a = np.asarray(Image.open(os.path.join(CAPAS, '1200/esfera-blanca-oro-rosa.avif'))
+                   .convert('RGBA')).astype(float)
+    rgb = a[:, :, :3]
+    eje, _, _, _ = eje_del_reloj()
+    y, x = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    r = np.hypot(x - eje[0], y - eje[1])
+    m = (a[:, :, 3] > 250) & ((rgb[:, :, 0] - rgb[:, :, 2]) > 18) & (r > 200) & (r < 330)
+    lab, n = ndimage.label(m)
+    t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    m = np.isin(lab, [i + 1 for i in range(n) if t[i] > 150])
+    return rgb[m]
+
+
+def lumen(im):
+    """El canal de lumen de las agujas de plata.
+
+    El acero es neutro y el lumen es cálido, así que el canal se separa
+    solo con R−B ≥ 3. Salen DOS trozos grandes —el del minutero y el de la
+    horaria— y ninguno más: si salieran otros, la regla no valdría."""
+    a = np.asarray(im).astype(float)
+    op = a[:, :, 3] > 250
+    cand = op & ((a[:, :, 0] - a[:, :, 2]) >= 3)
+    lab, n = ndimage.label(cand)
+    t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    return np.isin(lab, [i + 1 for i in range(n) if t[i] > 800])
+
+
+def _lut(origen, destino):
+    """La tabla que lleva una escalera de grises encima de la otra."""
+    bins = np.arange(0, 257)
+    co = np.cumsum(np.histogram(origen, bins)[0]).astype(float)
+    cd = np.cumsum(np.histogram(destino, bins)[0]).astype(float)
+    if co[-1] == 0 or cd[-1] == 0:
+        return np.arange(256, dtype=float)
+    return np.interp(co / co[-1], cd / cd[-1], np.arange(256))
+
+
+def _aplica(a, zona, lut):
+    """Pinta la zona con la tabla, arrastrando el color con el brillo."""
+    L = a[:, :, :3].mean(2)
+    Ln = np.interp(L, np.arange(256), lut)
+    k = np.where(L > 1, Ln / np.maximum(L, 1e-6), 1.0)
+    for c in range(3):
+        canal = a[:, :, c]
+        canal[zona] = np.clip(canal[zona] * k[zona], 0, 255)
+    return a
+
+
+def iguala_el_tono(im, patron='acero'):
+    """Le pone a las agujas el color, el brillo y el tono de los índices.
 
     Óscar, 30/08/2026: «el color de las agujas, el brillo y el tono tiene
     que ser igual al de los indicadores de la esfera y ahora es más
-    blanco». Medido: en los índices el cuartil bajo está en 183 y en las
-    agujas en 220 — las agujas no tienen grises, y por eso al lado de una
-    barra de acero parecen plástico blanco. No es cosa del color: el tinte
-    (R−B) de los dos es cero.
+    blanco». Y con la foto del homenaje delante: «mira cómo son las agujas
+    cuando llevan negro».
 
-    Se emparejan las dos escaleras por acumulado y el color se arrastra
-    con el brillo (se multiplican los tres canales por el mismo factor),
-    así que el tinte del lumen no se toca."""
-    ref = tono_de_los_indices()
-    a = np.asarray(im).astype(np.float32)
+    ACERO, POR ZONAS. Una barra de la esfera son dos cosas: un marco
+    pulido y un CANAL oscuro por dentro (mediana 150). La aguja tiene lo
+    mismo —marco y canal de lumen—, pero su canal estaba en 218 y su marco
+    en 244, casi plano: de ahí que pareciera plástico blanco al lado de una
+    barra de acero. Se emparejan las dos zonas por separado, cada una con
+    la suya. Emparejar la aguja entera de una vez no vale: el canal ocupa
+    el 16 % de la aguja y el 35 % de la barra, y la cuenta acumulada lo
+    dejaba casi tan claro como estaba.
+
+    ORO ROSA, entero. Ahí el marco también es cálido y la regla del R−B no
+    separa nada, pero tampoco hace falta: el dibujo de oro rosa ya trae el
+    reparto de luces y sombras de las barras (cuartiles 130/191/217 contra
+    119/187/231). Se empareja canal por canal —R, G y B por separado—, que
+    además de la escalera iguala el tinte."""
+    a = np.asarray(im).astype(np.float32).copy()
     op = a[:, :, 3] > 250
+    if patron == 'oro-rosa':
+        ref = indices_oro_rosa()
+        for c in range(3):
+            lut = _lut(a[:, :, c][op], ref[:, c])
+            canal = a[:, :, c]
+            canal[op] = np.interp(canal[op], np.arange(256), lut)
+        return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+    ref = tono_de_los_indices()
+    corte = np.percentile(ref, 35)
+    lum = lumen(im) & op
+    marco = op & ~lum
     L = a[:, :, :3].mean(2)
-    src = L[op]
-    bins = np.arange(0, 257)
-    cs = np.cumsum(np.histogram(src, bins)[0]).astype(float); cs /= cs[-1]
-    cr = np.cumsum(np.histogram(ref, bins)[0]).astype(float); cr /= cr[-1]
-    lut = np.interp(cs, cr, np.arange(256))
-    Ln = np.interp(L, np.arange(256), lut)
-    k = np.where(L > 1, Ln / np.maximum(L, 1e-6), 1.0)
-    k = np.where(a[:, :, 3] > 0, k, 1.0)
-    out = a.copy()
-    for c in range(3):
-        out[:, :, c] = np.clip(a[:, :, c] * k, 0, 255)
-    return Image.fromarray(out.astype(np.uint8))
+    a = _aplica(a, lum,   _lut(L[lum],   ref[ref <= corte]))
+    a = _aplica(a, marco, _lut(L[marco], ref[ref > corte]))
+    return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
 
 
 def guarda(im, ident):
@@ -224,7 +290,7 @@ def guarda(im, ident):
         print('  %-5d %6d B' % (t, len(datos)))
 
 
-def coloca(origen, f_min=1.0, f_seg=1.0, tono=True):
+def coloca(origen, f_min=1.0, f_seg=1.0, tono='acero'):
     im = Image.open(origen).convert('RGBA')
     eje, radio, caja, esf = eje_del_reloj()
     dentro, fuera = pista_de_minutos()
@@ -258,8 +324,11 @@ def coloca(origen, f_min=1.0, f_seg=1.0, tono=True):
             '   ⚠️ sigue sin llegar a los índices'
             if segundero['largo'] * s * f_seg < dentro else '   ✓ ya llega a los índices'))
     if tono:
-        im = iguala_el_tono(im)
-        print('  tono igualado a los índices de la esfera')
+        n_lum = int((lumen(im) & (np.asarray(im)[:, :, 3] > 250)).sum())
+        im = iguala_el_tono(im, tono)
+        print('  tono igualado a los índices %s%s' % (
+            'de acero' if tono == 'acero' else 'de oro rosa',
+            ' (canal de lumen: %d px)' % n_lum if tono == 'acero' else ''))
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
@@ -288,11 +357,13 @@ if __name__ == '__main__':
     f_min = opt('--minutero', 1.0)
     f_seg = opt('--segundero', 1.0)
     args = [a for i, a in enumerate(argv)
-            if not a.startswith('--') and not (i and argv[i - 1] in ('--minutero', '--segundero'))]
+            if not a.startswith('--')
+            and not (i and argv[i - 1] in ('--minutero', '--segundero', '--tono'))]
     if len(args) < 2:
         sys.exit(__doc__)
     origen, color = args[0], args[1]
-    capa = coloca(origen, f_min, f_seg, tono='--sin-tono' not in argv)
+    patron = argv[argv.index('--tono') + 1] if '--tono' in argv else 'acero'
+    capa = coloca(origen, f_min, f_seg, False if '--sin-tono' in argv else patron)
     prueba = '--prueba' in sys.argv
     salida = (os.path.join(os.environ.get('TMPDIR', '/tmp'), 'precisa-agujas.png')
               if prueba else os.path.join(RAIZ, 'herramientas/capturas/precisa-agujas.png'))
