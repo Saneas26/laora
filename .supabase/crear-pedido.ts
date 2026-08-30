@@ -36,7 +36,13 @@
 //   SUPABASE_ANON_KEY y SUPABASE_SERVICE_ROLE_KEY—. No hace falta ninguno más.
 // ============================================================
 
-const CATALOGO = 'https://laora.es/assets/datos/catalogo-2026.json';
+/* EL CATÁLOGO, PARTIDO POR MODELO (31/08/2026). El de una pieza pasó de
+   2,6 a 4,6 MB al vestir el Trinchera con las correas oficiales, y aquí se
+   bajaba entero para mirar UNA referencia. El código del modelo va delante
+   —LO-02-…—, así que se pide sólo su trozo. El de una pieza se sigue
+   escribiendo: lo leen las herramientas. */
+const TROZO = (ref: string) =>
+  `https://laora.es/assets/datos/catalogo/${ref.split('-').slice(0, 2).join('-')}.json`;
 
 /* Los gastos de envío. Hoy van incluidos en el precio; el día que
    dejen de estarlo, se cambia aquí y en la pantalla del carrito. */
@@ -57,15 +63,17 @@ const json = (cuerpo: unknown, status = 200) =>
 /* ---------- el catálogo ----------
    Se pide una vez y se guarda mientras la función siga viva. Si laOra
    cambia un precio, tarda como mucho un rato en verse aquí. */
-let catalogoCache: { cuando: number; datos: any } | null = null;
+const catalogoCache = new Map<string, { cuando: number; datos: any }>();
 
-async function catalogo() {
+async function catalogo(ref: string) {
+  const url = TROZO(ref);
   const ahora = Date.now();
-  if (catalogoCache && (ahora - catalogoCache.cuando) < 300_000) return catalogoCache.datos;
-  const r = await fetch(CATALOGO, { cache: 'no-store' });
+  const c = catalogoCache.get(url);
+  if (c && (ahora - c.cuando) < 300_000) return c.datos;
+  const r = await fetch(url, { cache: 'no-store' });
   if (!r.ok) throw new Error('no se pudo leer el catálogo');
   const datos = await r.json();
-  catalogoCache = { cuando: ahora, datos };
+  catalogoCache.set(url, { cuando: ahora, datos });
   return datos;
 }
 
@@ -78,7 +86,7 @@ type Combinacion = {
 };
 
 async function combinacion(ref: string): Promise<Combinacion | null> {
-  const cat = await catalogo();
+  const cat = await catalogo(ref);
   const r = cat.refs?.[ref];
   if (!r) return null;
   const T: string[] = cat.textos || [];

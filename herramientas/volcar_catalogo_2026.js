@@ -403,9 +403,55 @@ fs.writeFileSync(destino, JSON.stringify({
   textos, refs,
 }));
 
+/* ---------- Y EL MISMO CATÁLOGO, PARTIDO POR MODELO ----------
+   El de arriba es el de las herramientas: lo leen el auditor de la regla
+   nº1 y el sincronizador de precios, y de un tirón. Pero la PANTALLA DEL
+   CARRITO se lo bajaba entero, y con las correas oficiales del Trinchera
+   pasó de 2,6 a 4,6 MB. Nadie necesita las 17.000 referencias: el carrito
+   necesita las de los relojes que lleva dentro, y el servidor la de la
+   referencia que le piden. Las dos cosas saben el modelo, que es lo que
+   va delante del código (LO-02-…), así que se escribe un fichero por
+   modelo.
+
+   LOS TEXTOS SE VUELVEN A INDEXAR en cada trozo: si se copiara la tabla
+   entera, cada fichero pesaría lo que pesa la tabla y no se habría
+   ahorrado nada. */
+const porModelo = {};
+for (const [ref, r] of Object.entries(refs)) {
+  const cod = ref.split('-').slice(0, 2).join('-');   // LO-02
+  (porModelo[cod] = porModelo[cod] || {})[ref] = r;
+}
+const carpeta = path.join(RAIZ, 'assets/datos/catalogo');
+fs.mkdirSync(carpeta, { recursive: true });
+for (const viejo of fs.readdirSync(carpeta)) {
+  if (viejo.endsWith('.json') && !Object.keys(porModelo).includes(viejo.slice(0, -5))) {
+    fs.unlinkSync(path.join(carpeta, viejo));        // un modelo que ya no vende
+  }
+}
+const trozos = [];
+for (const [cod, suyas] of Object.entries(porModelo)) {
+  const mapa = new Map();
+  const suyos = [];
+  const idx = (i) => {
+    if (i === undefined || i === null) return i;
+    if (!mapa.has(i)) { mapa.set(i, suyos.length); suyos.push(textos[i]); }
+    return mapa.get(i);
+  };
+  const nuevas = {};
+  for (const [ref, r] of Object.entries(suyas)) {
+    const n = { ...r, n: idx(r.n), a: idx(r.a), c: idx(r.c) };
+    if (r.f) { n.f = {}; for (const k of Object.keys(r.f)) n.f[k] = idx(r.f[k]); }
+    nuevas[ref] = n;
+  }
+  const f = path.join(carpeta, cod + '.json');
+  fs.writeFileSync(f, JSON.stringify({ textos: suyos, refs: nuevas }));
+  trozos.push(`${cod} ${(fs.statSync(f).size / 1024).toFixed(0)} KB`);
+}
+
 const total = Object.keys(refs).length;
 const kb = (fs.statSync(destino).size / 1024).toFixed(0);
 console.log(Object.entries(cuenta).map(([k, v]) => `${k}: ${v}`).join(' · '));
 console.log(`TOTAL ${total} referencias · ${textos.length} textos · ${kb} KB`);
+console.log('por modelo: ' + trozos.join(' · '));
 const precios = [...new Set(Object.values(refs).map((r) => r.p))].sort((a, b) => a - b);
 console.log('precios: ' + precios.map((p) => p.toFixed(2).replace('.', ',')).join(' · ') + ' €');

@@ -1415,6 +1415,26 @@
      desplazar nada, así que la barra nacía apagada y no se veía nunca. */
   var LLEGADA = 0.60;
 
+  /* La medida de la caja y el MISMO reloj en las otras medidas. Sale del
+     paso `tamano`, igual que en el volcador: se prueba cada tamaño y se
+     apunta la referencia que sale. Un modelo de una sola medida devuelve
+     la medida y ninguna hermana. */
+  function medidas() {
+    var t = M.OPCIONES && M.OPCIONES.tamano;
+    var mm = parseInt(e.tamano, 10) || parseInt(M.MM, 10) || 0;
+    if (!t || !mm) return mm ? { mm: mm } : null;
+    var guardado = e.tamano, otras = {}, n = 0;
+    Object.keys(t).forEach(function (v) {
+      e.tamano = v;
+      normaliza();
+      otras[parseInt(v, 10) || v] = referencia();
+      n++;
+    });
+    e.tamano = guardado;
+    normaliza();
+    return n > 1 ? { mm: mm, otras: otras } : { mm: mm };
+  }
+
   /* ---------- LA CÁMARA SE ALEJA EN LA CORREA ----------
      Manda la TARJETA entera, no el paso: los dos pasos de la correa —el
      material y el color— viven en ella, y el color se esconde con el
@@ -1642,9 +1662,17 @@
     if (ev.target.closest('[data-pv-comprar]')) {
       if (!COSTES_PUESTOS) return;
       if (typeof laoraCarritoAnadir !== 'function') return;
+      var med = medidas();
       laoraCarritoAnadir({
         ref: referencia(),
         nombre: M.nombre,
+        /* LA MEDIDA Y SUS HERMANAS VIAJAN EN LA LÍNEA (31/08/2026). El
+           carrito las necesita para el aviso de la muñeca, y hasta hoy se
+           las buscaba bajándose el catálogo entero: 4,6 MB para leer dos
+           datos de dos o tres relojes. Quien las sabe es esta pantalla,
+           que es la que acaba de armar el reloj. */
+        mm: med && med.mm,
+        otras: med && med.otras,
         /* EL DETALLE LO ESCRIBE EL MODELO. Aquí estaba escrito a mano con
            las tablas del Lunar —caja, esfera, bisel, cierre, movimiento—,
            y en un modelo que no tenga bisel eso revienta. Cada ficha sabe

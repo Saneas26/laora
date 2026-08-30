@@ -290,7 +290,6 @@
 
      No se le cambia nada por su cuenta ni se le esconde el aviso: se
      le dice lo que tenemos anotado y decide él. */
-  var CATALOGO = null;
   var cajaMuneca = document.querySelector('[data-muneca]');
 
   var TRAMOS = { fina: 'fina', normal: 'normal', ancha: 'ancha' };
@@ -305,12 +304,39 @@
      el recomendador de la colección: una sola regla en la casa. */
   var LEVA = { fina: [36, 39, 39.7], normal: [36, 39, 39.7, 40], ancha: [40, 41] };
 
-  function catalogo() {
-    if (CATALOGO) return Promise.resolve(CATALOGO);
-    return fetch('/assets/datos/catalogo-2026.json')
-      .then(function (r) { return r.json(); })
-      .then(function (d) { CATALOGO = d; return d; })
+  /* ⚠️ EL CARRITO YA NO SE BAJA EL CATÁLOGO ENTERO (31/08/2026). Eran
+     4,6 MB —diecisiete mil referencias— para leer la medida de dos o tres
+     relojes, y con las correas oficiales del Trinchera no paraba de
+     crecer. Ahora la medida y sus hermanas VIAJAN EN LA LÍNEA: las
+     escribe el configurador, que es quien acaba de armar el reloj.
+
+     Esto es sólo el paracaídas para las líneas guardadas ANTES del
+     cambio, que no las llevan: se baja el trozo del catálogo de ESE
+     modelo —el código va delante de la referencia— y no el de todos. */
+  var TROZOS = {};
+  function trozo(ref) {
+    var cod = String(ref).split('-').slice(0, 2).join('-');
+    if (!/^LO-\d+$/.test(cod)) return Promise.resolve(null);
+    if (TROZOS[cod]) return TROZOS[cod];
+    TROZOS[cod] = fetch('/assets/datos/catalogo/' + cod + '.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; });
+    return TROZOS[cod];
+  }
+  /* La medida de una línea: la suya si la trae, y si no la del trozo. */
+  function medidaDe(l) {
+    if (l && l.mm) return Promise.resolve({ mm: l.mm, otras: l.otras || null });
+    return trozo(l && l.ref).then(function (c) {
+      var r = c && c.refs && c.refs[l.ref];
+      return r && r.mm ? { mm: r.mm, otras: r.otras || null } : null;
+    });
+  }
+  /* El precio de una referencia hermana, para el botón de cambiar. */
+  function precioDe(ref) {
+    return trozo(ref).then(function (c) {
+      var r = c && c.refs && c.refs[ref];
+      return r ? r.p : null;
+    });
   }
 
   function pintarMuneca(socio) {
@@ -318,20 +344,30 @@
     var cm = socio && socio.muneca_cm;
     var tramo = tramoDe(cm) || (socio && socio.rec_muneca) || null;
     if (!tramo || tramo === 'nose') return;
+    var lineas = laoraCarritoLeer();
+    if (!lineas.length) return;
 
-    catalogo().then(function (cat) {
-      if (!cat) return;
-      var lineas = laoraCarritoLeer();
-      if (!lineas.length) return;
-
+    Promise.all(lineas.map(medidaDe)).then(function (medidas) {
+      /* Los precios de las hermanas, que son los únicos que hay que
+         buscar fuera: el de la línea ya lo tiene la propia línea. */
+      var hermanas = [];
+      medidas.forEach(function (m) {
+        if (m && m.otras) Object.keys(m.otras).forEach(function (d) { hermanas.push(m.otras[d]); });
+      });
+      return Promise.all(hermanas.map(precioDe)).then(function (ps) {
+        var precio = {};
+        hermanas.forEach(function (r, k) { precio[r] = ps[k]; });
+        return { medidas: medidas, precio: precio };
+      });
+    }).then(function (d) {
       var partes = [];
       var hayCambio = false;
 
       lineas.forEach(function (l, i) {
-        var r = cat.refs[l.ref];
-        if (!r || !r.mm) return;
-        var vale = LEVA[tramo].indexOf(r.mm) !== -1;
-        var medida = String(r.mm).replace('.', ',');
+        var m = d.medidas[i];
+        if (!m || !m.mm) return;
+        var vale = LEVA[tramo].indexOf(m.mm) !== -1;
+        var medida = String(m.mm).replace('.', ',');
 
         var texto = '<p><b>' + esc(l.nombre) + '</b> es de <b>' + medida + ' mm</b>. ' +
           (vale ? 'Le va bien a una muñeca ' + TRAMOS[tramo] + ' como la que tenemos anotada.'
@@ -339,15 +375,16 @@
           '</p>';
 
         /* Las otras medidas del MISMO reloj, si las hay. */
-        if (r.otras) {
+        if (m.otras) {
           hayCambio = true;
-          var botones = Object.keys(r.otras).sort().map(function (d) {
-            var otra = cat.refs[r.otras[d]];
-            if (!otra) return '';
-            var esta = r.otras[d] === l.ref;
-            return '<button type="button" data-cambiar="' + i + '" data-a="' + esc(r.otras[d]) +
+          var botones = Object.keys(m.otras).sort().map(function (dd) {
+            var ref = m.otras[dd];
+            var p = ref === l.ref ? l.precio : d.precio[ref];
+            if (p === null || p === undefined) return '';
+            var esta = ref === l.ref;
+            return '<button type="button" data-cambiar="' + i + '" data-a="' + esc(ref) +
               '" aria-pressed="' + esta + '"' + (esta ? ' disabled' : '') + '>' +
-              d + ' mm · ' + euros(otra.p) + '</button>';
+              dd + ' mm · ' + euros(p) + '</button>';
           }).join('');
           texto += '<div class="ca-muneca-medidas">' + botones + '</div>';
         }
@@ -370,24 +407,32 @@
      no hay nada que deshacer. */
   document.addEventListener('click', function (ev) {
     var b = ev.target.closest('[data-cambiar]');
-    if (!b || !CATALOGO) return;
+    if (!b) return;
     var i = Number(b.dataset.cambiar);
     var nueva = b.dataset.a;
-    var r = CATALOGO.refs[nueva];
-    if (!r) return;
+    /* AQUÍ SÍ HAY QUE PREGUNTAR FUERA, y es el único sitio: el reloj de la
+       otra medida no lo ha armado nadie, así que su precio y sus textos no
+       están en ninguna línea. Se baja SÓLO el trozo de su modelo, y sólo
+       al pulsar. */
+    trozo(nueva).then(function (c) {
+      var r = c && c.refs && c.refs[nueva];
+      if (!r) return;
+      var lineas = laoraCarritoLeer();
+      if (!lineas[i]) return;
+      var m = lineas[i].otras || null;
+      lineas[i].ref = nueva;
+      lineas[i].precio = r.p;
+      lineas[i].nombre = c.textos[r.n];
+      lineas[i].detalle = c.textos[r.a];
+      lineas[i].correa = c.textos[r.c];
+      if (r.mm) lineas[i].mm = r.mm;
+      lineas[i].otras = r.otras || m;
+      laoraCarritoGuardar(lineas);
 
-    var lineas = laoraCarritoLeer();
-    if (!lineas[i]) return;
-    lineas[i].ref = nueva;
-    lineas[i].precio = r.p;
-    lineas[i].nombre = CATALOGO.textos[r.n];
-    lineas[i].detalle = CATALOGO.textos[r.a];
-    lineas[i].correa = CATALOGO.textos[r.c];
-    laoraCarritoGuardar(lineas);
-
-    pintar();
-    laoraSesion.consultar('socios?select=muneca_cm,rec_muneca&limit=1').then(function (f) {
-      pintarMuneca(f && f[0]);
+      pintar();
+      laoraSesion.consultar('socios?select=muneca_cm,rec_muneca&limit=1').then(function (f) {
+        pintarMuneca(f && f[0]);
+      });
     });
   });
 
