@@ -44,10 +44,29 @@ CALIDADES = (72, 64, 56, 48, 40)
 PESO = 95000
 FONDO = (233, 233, 231, 255)
 
-# Dónde cae el borde del hueco de la caja sobre el radio de la esfera.
-# 0,96 es donde se acaba el dibujo en las esferas limpias y donde empieza
-# el gajo sucio en las manchadas: el único punto que salva las dos cosas.
+# Dónde cae el borde del hueco sobre el radio del recorte DEL PATRÓN.
 CORTE = 0.96
+PATRON_ESF = 'esfera-antracita'    # la que Óscar dio por buena (30/08/2026)
+
+# ⚠️ LAS DEMÁS NO SE MIDEN POR SU DISCO, SE ALINEAN CON EL PATRÓN.
+# Óscar, 30/08/2026: «la única esfera que veo bien colocada es la de
+# antracita, revisa por qué es la única». Y era esto: el disco recortado
+# de cada entrega tiene un radio distinto —de 578 a 597 px— y encima el
+# DIBUJO ocupa una fracción distinta de ese disco, del 0,919 al 0,964.
+# Escalando por el disco, como se hacía, cada esfera salía con el dibujo
+# de un tamaño: hasta un 4,7 % de diferencia entre la blanca y la azul
+# hielo. Sólo una podía estar bien, y era la antracita.
+#
+# Medirle a cada una su pista de minutos tampoco salía: el borde sucio de
+# la entrega —el gajo blanco del canto de la antracita— da más energía que
+# la propia pista y se llevaba la medida veinte píxeles hacia fuera.
+#
+# Lo que sí sale es COMPARAR cada dibujo con el de la antracita por
+# correlación de bordes: son el mismo dibujo en otro color y se solapan
+# casi perfecto.
+#
+# La antracita se queda EXACTAMENTE donde está —por su disco, como hasta
+# ahora— y las otras siete se alinean con ella.
 
 # LA ESFERA VA UN POCO MÁS ABAJO QUE EL EJE DEL HUECO (Óscar, 30/08/2026:
 # «todas las esferas deben bajar 2 grados hacia el sur»). Dos grados de
@@ -91,7 +110,7 @@ def hueco_de_la_caja():
 
 
 def disco(f):
-    """Centro y radio de la esfera entregada."""
+    """Centro y radio del recorte. Ya sólo sirve para acotar la búsqueda."""
     a = np.asarray(Image.open(f).convert('RGBA'))[:, :, 3] > 200
     ys, xs = np.where(a)
     cx, cy = (xs.min() + xs.max()) / 2.0, (ys.min() + ys.max()) / 2.0
@@ -99,15 +118,75 @@ def disco(f):
     return (cx, cy), r
 
 
-def coloca(f, eje, radio_hueco):
+def _bordes(f, lado=320):
+    """Mapa de bordes normalizado, chico, para comparar dibujos."""
+    a = np.asarray(Image.open(f).convert('RGBA')).astype(np.float32)
+    m = a[:, :, 3] > 200
+    L = a[:, :, :3].mean(2) * m
+    g = np.hypot(ndimage.sobel(L, 1), ndimage.sobel(L, 0)) * m
+    k = lado / float(max(g.shape))
+    g = ndimage.zoom(g, k, order=1)
+    g = g - g.mean()
+    n = np.linalg.norm(g)
+    return (g / n if n else g), k
+
+
+def alinea_con_patron(f, ref, kref):
+    """Qué escala y qué desplazamiento llevan el dibujo de `f` sobre el patrón.
+
+    Óscar, 30/08/2026: «la única esfera que veo bien colocada es la de
+    antracita... para que todas las demás hagan lo mismo». Pues eso: en vez
+    de medirle a cada una su pista —que el borde sucio de la entrega
+    despista—, se COMPARA cada dibujo con el de la antracita. Son el mismo
+    dibujo en otro color, así que el mapa de bordes se solapa casi perfecto
+    y la escala sale sin discutir.
+
+    La correlación va por FFT. Hacerla a lo bruto con `ndimage.correlate`
+    y un núcleo del tamaño de la imagen se come la memoria y el proceso
+    muere (exit 137): son 320^4 cuentas por cada escala que se prueba."""
+    g, k = _bordes(f)
+    H, W = ref.shape
+    F = np.fft.fft2(ref)
+    mejor = None
+    for esc in np.arange(0.90, 1.1001, 0.005):
+        z = ndimage.zoom(g, esc, order=1)
+        h = np.zeros_like(ref)
+        oy, ox = (H - z.shape[0]) // 2, (W - z.shape[1]) // 2
+        sy = slice(max(oy, 0), max(oy, 0) + min(z.shape[0], H))
+        sx = slice(max(ox, 0), max(ox, 0) + min(z.shape[1], W))
+        zy = slice(max(-oy, 0), max(-oy, 0) + (sy.stop - sy.start))
+        zx = slice(max(-ox, 0), max(-ox, 0) + (sx.stop - sx.start))
+        h[sy, sx] = z[zy, zx]
+        c = np.real(np.fft.ifft2(np.fft.fft2(h) * np.conj(F)))
+        i = np.unravel_index(np.argmax(c), c.shape)
+        dy = i[0] - (H if i[0] > H // 2 else 0)
+        dx = i[1] - (W if i[1] > W // 2 else 0)
+        v = float(c[i])
+        if mejor is None or v > mejor[0]:
+            mejor = (v, float(esc), dx, dy)
+    _, esc, dx, dy = mejor
+    return esc, -dx / k, -dy / k, mejor[0]
+
+
+def coloca(f, eje, radio_hueco, patron=None):
+    """Coloca una esfera. El patrón va por su disco; las demás, por él."""
     im = Image.open(f).convert('RGBA')
     c, r = disco(f)
-    s = (radio_hueco + BAJADA) / (CORTE * r)
     eje = (eje[0], eje[1] + BAJADA)
+    if patron is None:
+        s = (radio_hueco + BAJADA) / (CORTE * r)
+        cx, cy = c
+    else:
+        ref, kref, cpat, spat = patron
+        esc, dx, dy, _ = alinea_con_patron(f, ref, kref)
+        # el dibujo de esta esfera es `esc` veces el del patrón y está
+        # corrido (dx, dy) respecto de él: se deshace lo uno y lo otro.
+        s = spat / esc
+        cx, cy = cpat[0] - dx, cpat[1] - dy
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
-    L.alpha_composite(n, (round(eje[0] - c[0] * s), round(eje[1] - c[1] * s)))
+    L.alpha_composite(n, (round(eje[0] - cx * s), round(eje[1] - cy * s)))
     return L, s, r
 
 
@@ -145,12 +224,20 @@ def hoja(capas, destino):
 if __name__ == '__main__':
     eje, rh = hueco_de_la_caja()
     print('OJO DE LA CAJA: centro %.2f, %.2f · radio %.1f px' % (eje[0], eje[1], rh))
-    print('El borde del hueco cae en el %.0f %% del radio de cada esfera.' % (CORTE * 100))
+    print('La antracita manda; las otras siete se alinean con su dibujo.')
     print('La esfera baja %.1f px (2 grados de arco) y crece lo mismo para taparlo.' % BAJADA)
     capas = {}
+    # el patrón primero, y por su cuenta: es el que Óscar dio por bueno
+    fp = ENTREGA + ESFERAS[PATRON_ESF]
+    capas[PATRON_ESF], sp, rp = coloca(fp, eje, rh)
+    cpat, _ = disco(fp)
+    ref, kref = _bordes(fp)
+    print('  %-24s PATRÓN · recorte r=%5.1f  escala %.4f' % (PATRON_ESF, rp, sp))
     for ident, f in sorted(ESFERAS.items()):
-        capas[ident], s, r = coloca(ENTREGA + f, eje, rh)
-        print('  %-24s entregada r=%5.1f  escala %.4f  -> r=%5.1f' % (ident, r, s, r * s))
+        if ident == PATRON_ESF:
+            continue
+        capas[ident], s, r = coloca(ENTREGA + f, eje, rh, (ref, kref, cpat, sp))
+        print('  %-24s dibujo x%.4f del patrón  ->  escala %.4f' % (ident, sp / s, s))
     prueba = '--prueba' in sys.argv
     d = (os.path.join(os.environ.get('TMPDIR', '/tmp'), 'precisa-esferas.png') if prueba
          else os.path.join(RAIZ, 'herramientas/capturas/precisa-esferas.png'))

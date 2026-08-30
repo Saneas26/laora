@@ -460,6 +460,14 @@
                tec: 'brazalete de acero inoxidable 316L con PVD negro, con el eslabón central pulido' },
     A316ORP: { nombre: 'Centro oro rosa pulido', coste: 20.19, pieza: 'acero-316l-centro-oro-rosa-pulido',
                tec: 'brazalete de acero inoxidable 316L con el eslabón central pulido en oro rosa' },
+    /* Los dos que entraron el 30/08/2026 con el dibujo nuevo: el acero
+       entero y el oro rosa entero. Mismo brazalete y mismo proveedor que
+       los otros cuatro, así que MISMO COSTE (20,19) hasta que Óscar diga
+       otra cosa. */
+    A316SAT: { nombre: 'Acero satinado', coste: 20.19, pieza: 'acero-316l-satinado',
+    tec: 'brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable con seguro abatible' },
+    A316OR:  { nombre: 'Oro rosa', coste: 20.19, pieza: 'acero-316l-oro-rosa',
+    tec: 'brazalete de acero inoxidable 316L de tres eslabones en oro rosa, con cierre desplegable con seguro abatible' },
     A316AMP: { nombre: 'Centro oro amarillo pulido', coste: 20.19, pieza: 'acero-316l-centro-oro-amarillo-pulido',
                tec: 'brazalete de acero inoxidable 316L con el eslabón central pulido en oro amarillo' },
 
@@ -555,6 +563,15 @@
     IVER: { nombre: 'Verde', coste: 37.39, pieza: 'piel-italiana-cocodrilo-verde', pespTono: '-pespunte-verde',
             tec: 'correa de piel italiana genuina hecha a mano, grabada en coco, verde' },
 
+    /* --- Nato · cinco colores (Óscar, 30/08/2026) ---
+       Tejido de una pieza con pasador y refuerzos de piel, y su hebilla
+       clásica plateada dibujada. 3,99 de coste, el que dio Óscar. */
+    NNEG: { nombre: 'Negra', coste: 3.99, pieza: 'nato-negra-piel-negra', tec: 'correa nato negra de una pieza, con pasador y refuerzos de piel negra y hebilla clásica plateada' },
+    NAZU: { nombre: 'Azul marino', coste: 3.99, pieza: 'nato-azul-marino-piel-azul', tec: 'correa nato azul marino de una pieza, con pasador y refuerzos de piel azul y hebilla clásica plateada' },
+    NGRI: { nombre: 'Gris', coste: 3.99, pieza: 'nato-gris-piel-negra', tec: 'correa nato gris de una pieza, con pasador y refuerzos de piel negra y hebilla clásica plateada' },
+    NARE: { nombre: 'Arena', coste: 3.99, pieza: 'nato-arena-piel-conac', tec: 'correa nato arena de una pieza, con pasador y refuerzos de piel coñac y hebilla clásica plateada' },
+    NOLI: { nombre: 'Verde oliva', coste: 3.99, pieza: 'nato-verde-oliva-piel-conac', tec: 'correa nato verde oliva de una pieza, con pasador y refuerzos de piel coñac y hebilla clásica plateada' },
+
     /* --- Tela vaquera · los cinco colores del formato nuevo ---
        20 mm de ancho, 2,8 de grosor, trama diagonal por fuera y cuero
        coñac por dentro. REDIBUJADAS el 30/08/2026 con su mariposa
@@ -571,6 +588,8 @@
      hoy, y el paso del material enseña solo esas. */
   var CORREA_MAT = {
     A316P: 'A316', A316NGP: 'A316', A316ORP: 'A316', A316AMP: 'A316',
+    A316SAT: 'A316', A316OR: 'A316',
+    NNEG: 'NATO', NAZU: 'NATO', NGRI: 'NATO', NARE: 'NATO', NOLI: 'NATO',
     KAMM: 'CAUCHO', KBLG: 'CAUCHO', KCEL: 'CAUCHO', KCRE: 'CAUCHO', KMAR: 'CAUCHO',
     KNBL: 'CAUCHO', KNNO: 'CAUCHO', KNEG: 'CAUCHO', KRNE: 'CAUCHO',
     PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
@@ -615,6 +634,10 @@
     PPER:   { nombre: 'Piel perforada',
               expl: 'Piel perforada, la de siempre para un cronógrafo. Se ablanda ' +
                     'con el uso, pero no se moja.' },
+    NATO:   { nombre: 'Nato',
+              expl: 'Tejido nato de una sola pieza, con pasador y refuerzos ' +
+                    'de piel. La correa de toda la vida para el uso diario: ' +
+                    'se moja, se lava y se seca sola.' },
     TELA:   { nombre: 'Tela vaquera',
               expl: 'Tela vaquera de trama diagonal por fuera y cuero coñac por ' +
                     'dentro, con cierre de mariposa plateado. 2,8 mm de grosor: la más fina.' }
@@ -652,7 +675,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=45';
+  var SERIE_V = '?v=46';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -835,6 +858,7 @@
      30/08/2026: «con hebillas clásicas negra, plata, oro rosa o dorada,
      pero mariposa solo plata». */
   var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'],
+                      NATO: ['HEBP'],
                       PCOS: ['HEBP'],
                       PITA: ['MARP', 'HEBN', 'HEBP', 'HEBO', 'HEBD'],
                       /* el caucho elige su mariposa en cualquier metal
