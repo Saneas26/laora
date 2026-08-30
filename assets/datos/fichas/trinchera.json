@@ -113,12 +113,6 @@
     "color": "#2f5a95"
    },
    {
-    "id": "GRI",
-    "nombre": "Gris",
-    "coste": 0,
-    "color": "#726b69"
-   },
-   {
     "id": "MCR",
     "nombre": "Numerales crema",
     "coste": 0,
@@ -130,7 +124,8 @@
     "coste": 0,
     "color": "#f2f2ef"
    }
-  ]
+  ],
+  "_gris": "LA GRIS NO EXISTE (Oscar, 31/08/2026: «trinchera no tiene esfera gris»). Estaba en la ficha desde el configurador viejo y la entrega del 29/08 no trae ninguna gris: se quita. Lo que si trajo y NO esta en la ficha es una «berenjena y ocre»; si algun dia se vende, entra con su coste."
  },
  "agujas": {
   "colores": []
@@ -633,10 +628,6 @@
    "esf": "AZU"
   },
   {
-   "esftipo": "K",
-   "esf": "GRI"
-  },
-  {
    "esftipo": "M",
    "esf": "MCR"
   },
@@ -650,7 +641,7 @@
  "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
  "montaje": {
   "img": "/assets/img/trinchera-2026/capas/1200/",
-  "v": "?v=3",
+  "v": "?v=4",
   "pila": [
    {
     "capa": "correa",
@@ -701,7 +692,7 @@
   "_asas": "LA CAJA SE ESCALA CONTRA LA CORREA. Las correas del Trinchera salen de la biblioteca compartida, dibujada para un hueco de asas de 376 px (1412-2696 en el lienzo de 4096): la caja se encoge hasta que su hueco mide eso mismo y se coloca con el centro del hueco y el centro de sus dos filas de asa donde los tiene la caja del Lunar. Asi cualquier correa de la biblioteca le entra igual de bien.",
   "_agujas": "Cuelgan de `mov`, que siempre tiene valor, y con TABLA POR ESFERA: el Murph lleva sus propias agujas, con los numerales en crema o en blanco, y el resto las de siempre (el comodin `*`). `necesita: esf` para que no floten solas.",
   "_esferas": "El mapeo lo elegi yo mirando los dibujos y hay que confirmarlo: NEG sale de «esfera-logo-6mm», BLA de «blanca-mate», AZU de «azul-degradado», MCR de «murph-negra-v2» (numerales crema) y MBL de «murph-blanco-plata».",
-  "_faltan": "SIN DIBUJO: la esfera GRI (Gris) — la entrega no trae ninguna gris. Y sobra una «berenjena y ocre» que no esta en la ficha. Ademas los dos tamanos (36 y 39 mm) comparten el mismo dibujo de caja: el configurador no los distingue.",
+  "_faltan": "YA NO FALTA NINGUNA ESFERA: la gris se quito el 31/08/2026 porque no existe. Sobra en la entrega una «berenjena y ocre» que no esta en la ficha. Los dos tamanos (36 y 39 mm) siguen compartiendo el mismo dibujo de caja: el configurador no los distingue.",
   "_montado": "Montado el 30/08/2026 con herramientas/capas_trinchera.py desde tri/outputs/transparentes/, que esta vez SI trae alfa de verdad."
  }
 }
