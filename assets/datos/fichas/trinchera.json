@@ -163,15 +163,13 @@
     "nombre": "Caucho",
     "coste": 0,
     "cierre": true,
-    "expl": "Caucho con textura, cómodo en verano y el único que se puede mojar sin pensarlo."
+    "expl": "Silicona de alta calidad: antimicrobiana, transpirable y resistente al sudor. La única que se puede mojar sin pensarlo."
    },
    {
-    "id": "PPER",
-    "nombre": "Piel perforada",
+    "id": "PCOS",
+    "nombre": "Piel con costura lateral",
     "coste": 0,
-    "cierre": true,
-    "pespunte": true,
-    "expl": "Piel perforada. Se ablanda con el uso, pero no se moja."
+    "expl": "Piel de aire vintage con la costura vista a los lados, en hilo crema. Se ablanda con el uso, pero no se moja."
    },
    {
     "id": "PITA",
@@ -179,14 +177,32 @@
     "coste": 0,
     "cierre": true,
     "pespunte": true,
-    "expl": "Piel de vaca italiana cosida a mano, con el canto pintado."
+    "expl": "Piel italiana genuina, hecha a mano y grabada en coco, con el pespunte a elegir. De vestir; no se moja."
+   },
+   {
+    "id": "PVIN",
+    "nombre": "Piel vintage",
+    "coste": 0,
+    "cierre": true,
+    "expl": "Piel con carácter, de aire envejecido, con el pespunte crema en contraste. Se ablanda con el uso, pero no se moja."
+   },
+   {
+    "id": "PPER",
+    "nombre": "Piel perforada",
+    "coste": 0,
+    "expl": "Piel perforada, la de siempre para un reloj de campo. Se ablanda con el uso, pero no se moja."
+   },
+   {
+    "id": "NATO",
+    "nombre": "Nato",
+    "coste": 0,
+    "expl": "Tejido nato de una sola pieza, con pasador y refuerzos de piel. La de toda la vida para el uso diario: se moja, se lava y se seca sola."
    },
    {
     "id": "TELA",
     "nombre": "Tela vaquera",
     "coste": 0,
-    "cierre": true,
-    "expl": "Tela vaquera de trama diagonal, forrada en cuero coñac por dentro."
+    "expl": "Tela vaquera de trama diagonal por fuera y cuero coñac por dentro, con cierre de mariposa plateado. 2,8 mm de grosor: la más fina."
    }
   ],
   "colores": [
@@ -195,197 +211,340 @@
     "familia": "A316",
     "nombre": "Acero, centro pulido",
     "coste": 20.19,
-    "pieza": "acero-316l-centro-pulido"
+    "pieza": "acero-316l-centro-pulido",
+    "tec": "brazalete de acero inoxidable 316L de tres eslabones, con el central pulido y cierre desplegable con seguro abatible"
    },
    {
     "id": "A316NGP",
     "familia": "A316",
     "nombre": "PVD negro, centro pulido",
     "coste": 20.19,
-    "pieza": "acero-316l-pvd-negro-centro-pulido"
+    "pieza": "acero-316l-pvd-negro-centro-pulido",
+    "tec": "brazalete de acero inoxidable 316L con PVD negro, con el eslabón central pulido"
    },
    {
     "id": "A316ORP",
     "familia": "A316",
     "nombre": "Centro oro rosa pulido",
     "coste": 20.19,
-    "pieza": "acero-316l-centro-oro-rosa-pulido"
+    "pieza": "acero-316l-centro-oro-rosa-pulido",
+    "tec": "brazalete de acero inoxidable 316L con el eslabón central pulido en oro rosa"
    },
    {
     "id": "A316AMP",
     "familia": "A316",
     "nombre": "Centro oro amarillo pulido",
     "coste": 20.19,
-    "pieza": "acero-316l-centro-oro-amarillo-pulido"
+    "pieza": "acero-316l-centro-oro-amarillo-pulido",
+    "tec": "brazalete de acero inoxidable 316L con el eslabón central pulido en oro amarillo"
    },
    {
-    "id": "CAZU",
+    "id": "A316SAT",
+    "familia": "A316",
+    "nombre": "Acero satinado",
+    "coste": 20.19,
+    "pieza": "acero-316l-satinado",
+    "tec": "brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable con seguro abatible"
+   },
+   {
+    "id": "A316OR",
+    "familia": "A316",
+    "nombre": "Oro rosa",
+    "coste": 20.19,
+    "pieza": "acero-316l-oro-rosa",
+    "tec": "brazalete de acero inoxidable 316L de tres eslabones en oro rosa, con cierre desplegable con seguro abatible"
+   },
+   {
+    "id": "KAMM",
     "familia": "CAUCHO",
-    "nombre": "Azul",
-    "coste": 9.89,
-    "pieza": "caucho-azul"
+    "nombre": "Azul marino y menta",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-azul-marino-menta-oro-rosa",
+    "tec": "correa de silicona azul marino con menta, curvada, con cierre de mariposa"
    },
    {
-    "id": "CAZN",
+    "id": "KBLG",
     "familia": "CAUCHO",
-    "nombre": "Azul y naranja",
-    "coste": 9.89,
-    "pieza": "caucho-azul-naranja"
+    "nombre": "Blanco y gris",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-blanco-gris",
+    "tec": "correa de silicona blanca con gris, curvada, con cierre de mariposa"
    },
    {
-    "id": "CMAC",
+    "id": "KCEL",
+    "familia": "CAUCHO",
+    "nombre": "Celeste y blanco",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-celeste-blanco",
+    "tec": "correa de silicona celeste con blanco, curvada, con cierre de mariposa"
+   },
+   {
+    "id": "KCRE",
+    "familia": "CAUCHO",
+    "nombre": "Crema y rosa",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-crema-rosa",
+    "tec": "correa de silicona crema con rosa, curvada, con cierre de mariposa"
+   },
+   {
+    "id": "KMAR",
     "familia": "CAUCHO",
     "nombre": "Marrón y crema",
-    "coste": 9.89,
-    "pieza": "caucho-marron-crema"
+    "coste": 5.79,
+    "pieza": "caucho-curvada-marron-crema",
+    "tec": "correa de silicona marrón con crema, curvada, con cierre de mariposa"
    },
    {
-    "id": "CNVF",
+    "id": "KNBL",
     "familia": "CAUCHO",
-    "nombre": "Negra y verde flúor",
-    "coste": 9.89,
-    "pieza": "caucho-negra-verde-fluor"
+    "nombre": "Negro y blanco",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-negro-blanco",
+    "tec": "correa de silicona negra con blanco, curvada, con cierre de mariposa"
    },
    {
-    "id": "CBLA",
+    "id": "KNNO",
     "familia": "CAUCHO",
-    "nombre": "Blanca",
-    "coste": 9.89,
-    "pieza": "caucho-blanca"
+    "nombre": "Negro y naranja",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-negro-naranja-oro",
+    "tec": "correa de silicona negra con naranja, curvada, con cierre de mariposa"
    },
    {
-    "id": "CNBL",
+    "id": "KNEG",
     "familia": "CAUCHO",
-    "nombre": "Negra y blanca",
-    "pieza": "caucho-negra-blanca"
+    "nombre": "Negro",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-negro-negro",
+    "tec": "correa de silicona negra, curvada, con cierre de mariposa"
    },
    {
-    "id": "CBOR",
+    "id": "KRNE",
     "familia": "CAUCHO",
-    "nombre": "Blanca y oro rosa",
-    "pieza": "caucho-blanca-oro-rosa"
-   },
-   {
-    "id": "CNGR",
-    "familia": "CAUCHO",
-    "nombre": "Negra y gris",
-    "pieza": "caucho-negra-gris"
-   },
-   {
-    "id": "CAZC",
-    "familia": "CAUCHO",
-    "nombre": "Azul celeste",
-    "pieza": "caucho-azul-celeste"
-   },
-   {
-    "id": "CBGR",
-    "familia": "CAUCHO",
-    "nombre": "Blanca y gris",
-    "pieza": "caucho-blanca-gris"
-   },
-   {
-    "id": "PCAQ",
-    "familia": "PPER",
-    "nombre": "Caqui oliva",
-    "coste": 6.69,
-    "pieza": {
-     "B": "piel-perforada-caqui-oliva-pespunte-blanco",
-     "*": "piel-perforada-caqui-oliva-pespunte-al-tono"
-    }
-   },
-   {
-    "id": "PCON",
-    "familia": "PPER",
-    "nombre": "Coñac y naranja",
-    "coste": 6.69,
-    "pieza": {
-     "B": "piel-perforada-conac-naranja-pespunte-blanco",
-     "*": "piel-perforada-conac-naranja-pespunte-al-tono"
-    }
-   },
-   {
-    "id": "PMAR",
-    "familia": "PPER",
-    "nombre": "Marrón",
-    "coste": 6.69,
-    "pieza": {
-     "B": "piel-perforada-marron-pespunte-blanco",
-     "*": "piel-perforada-marron-pespunte-al-tono"
-    }
+    "nombre": "Rosa y negro",
+    "coste": 5.79,
+    "pieza": "caucho-curvada-rosa-negro",
+    "tec": "correa de silicona rosa con negro, curvada, con cierre de mariposa"
    },
    {
     "id": "PNEG",
     "familia": "PPER",
     "nombre": "Negra",
     "coste": 6.69,
-    "pieza": {
-     "B": "piel-perforada-negra-pespunte-blanco",
-     "*": "piel-perforada-negra-pespunte-al-tono"
-    }
+    "pieza": "piel-perforada-negra",
+    "tec": "correa de piel perforada negra de 20 mm, pespunte crema, hebilla clásica plateada"
+   },
+   {
+    "id": "PCON",
+    "familia": "PPER",
+    "nombre": "Coñac",
+    "coste": 6.69,
+    "pieza": "piel-perforada-conac",
+    "tec": "correa de piel perforada coñac de 20 mm, pespunte al tono, hebilla clásica plateada"
+   },
+   {
+    "id": "PMAR",
+    "familia": "PPER",
+    "nombre": "Marrón",
+    "coste": 6.69,
+    "pieza": "piel-perforada-marron",
+    "tec": "correa de piel perforada marrón de 20 mm, pespunte al tono, hebilla clásica plateada"
+   },
+   {
+    "id": "PVER",
+    "familia": "PPER",
+    "nombre": "Verde oliva",
+    "coste": 6.69,
+    "pieza": "piel-perforada-verde-oliva",
+    "tec": "correa de piel perforada verde oliva de 20 mm, pespunte al tono, hebilla clásica plateada"
+   },
+   {
+    "id": "PVAZ",
+    "familia": "PVIN",
+    "nombre": "Azul petróleo",
+    "coste": 16.89,
+    "pieza": "piel-vintage-azul-petroleo",
+    "tec": "correa de piel vintage azul petróleo de 20 mm, pespunte crema en contraste, hebilla clásica plateada"
+   },
+   {
+    "id": "PVBU",
+    "familia": "PVIN",
+    "nombre": "Burdeos",
+    "coste": 16.89,
+    "pieza": "piel-vintage-burdeos",
+    "tec": "correa de piel vintage burdeos de 20 mm, pespunte crema en contraste, hebilla clásica negra"
+   },
+   {
+    "id": "PVCO",
+    "familia": "PVIN",
+    "nombre": "Coñac",
+    "coste": 16.89,
+    "pieza": "piel-vintage-conac",
+    "tec": "correa de piel vintage coñac de 20 mm, pespunte crema en contraste, hebilla clásica negra"
+   },
+   {
+    "id": "PVMO",
+    "familia": "PVIN",
+    "nombre": "Marrón oscuro",
+    "coste": 16.89,
+    "pieza": "piel-vintage-marron-oscuro",
+    "tec": "correa de piel vintage marrón oscuro de 20 mm, pespunte crema en contraste, hebilla clásica negra"
+   },
+   {
+    "id": "PVNE",
+    "familia": "PVIN",
+    "nombre": "Negra",
+    "coste": 16.89,
+    "pieza": "piel-vintage-negra",
+    "tec": "correa de piel vintage negra de 20 mm, pespunte crema en contraste, hebilla clásica negra"
+   },
+   {
+    "id": "LCON",
+    "familia": "PCOS",
+    "nombre": "Coñac",
+    "coste": 7.69,
+    "pieza": "piel-costura-lateral-conac",
+    "tec": "correa de piel coñac de 20 mm con costura lateral en crema, hebilla clásica plateada"
+   },
+   {
+    "id": "LMAR",
+    "familia": "PCOS",
+    "nombre": "Marrón oscuro",
+    "coste": 7.69,
+    "pieza": "piel-costura-lateral-marron-oscuro",
+    "tec": "correa de piel marrón oscuro de 20 mm con costura lateral en crema, hebilla clásica plateada"
+   },
+   {
+    "id": "LNEG",
+    "familia": "PCOS",
+    "nombre": "Negra",
+    "coste": 7.69,
+    "pieza": "piel-costura-lateral-negra",
+    "tec": "correa de piel negra de 20 mm con costura lateral en crema, hebilla clásica plateada"
    },
    {
     "id": "IMAR",
     "familia": "PITA",
     "nombre": "Marrón",
+    "coste": 37.39,
     "pieza": {
-     "B": "piel-italiana-marron-pespunte-blanco",
-     "*": "piel-italiana-marron-pespunte-al-tono"
-    }
+     "B": "piel-italiana-cocodrilo-marron-pespunte-blanco",
+     "*": "piel-italiana-cocodrilo-marron-pespunte-marron"
+    },
+    "tec": "correa de piel italiana genuina hecha a mano, grabada en coco, marrón"
    },
    {
     "id": "INEG",
     "familia": "PITA",
     "nombre": "Negra",
+    "coste": 37.39,
     "pieza": {
-     "B": "piel-italiana-negra-pespunte-blanco",
-     "*": "piel-italiana-negra-pespunte-al-tono"
-    }
-   },
-   {
-    "id": "IVER",
-    "familia": "PITA",
-    "nombre": "Verde",
-    "pieza": {
-     "B": "piel-italiana-verde-pespunte-blanco",
-     "*": "piel-italiana-verde-pespunte-al-tono"
-    }
+     "B": "piel-italiana-cocodrilo-negra-pespunte-blanco",
+     "*": "piel-italiana-cocodrilo-negra-pespunte-negro"
+    },
+    "tec": "correa de piel italiana genuina hecha a mano, grabada en coco, negra"
    },
    {
     "id": "IAZU",
     "familia": "PITA",
     "nombre": "Azul",
+    "coste": 37.39,
     "pieza": {
-     "B": "piel-italiana-azul-pespunte-blanco",
-     "*": "piel-italiana-azul-pespunte-al-tono"
-    }
+     "B": "piel-italiana-cocodrilo-azul-pespunte-blanco",
+     "*": "piel-italiana-cocodrilo-azul-pespunte-azul-oro-rosa"
+    },
+    "tec": "correa de piel italiana genuina hecha a mano, grabada en coco, azul"
    },
    {
-    "id": "VBEI",
-    "familia": "TELA",
-    "nombre": "Beige"
+    "id": "IVER",
+    "familia": "PITA",
+    "nombre": "Verde",
+    "coste": 37.39,
+    "pieza": {
+     "B": "piel-italiana-cocodrilo-verde-pespunte-blanco",
+     "*": "piel-italiana-cocodrilo-verde-pespunte-verde"
+    },
+    "tec": "correa de piel italiana genuina hecha a mano, grabada en coco, verde"
    },
    {
-    "id": "VMAL",
-    "familia": "TELA",
-    "nombre": "Malva"
-   },
-   {
-    "id": "VNEG",
-    "familia": "TELA",
+    "id": "NNEG",
+    "familia": "NATO",
     "nombre": "Negra",
-    "pieza": "vaquera-negra"
+    "coste": 3.99,
+    "pieza": "nato-negra-piel-negra",
+    "tec": "correa nato negra de una pieza, con pasador y refuerzos de piel negra y hebilla clásica plateada"
    },
    {
-    "id": "VGRI",
-    "familia": "TELA",
+    "id": "NAZU",
+    "familia": "NATO",
+    "nombre": "Azul marino",
+    "coste": 3.99,
+    "pieza": "nato-azul-marino-piel-azul",
+    "tec": "correa nato azul marino de una pieza, con pasador y refuerzos de piel azul y hebilla clásica plateada"
+   },
+   {
+    "id": "NGRI",
+    "familia": "NATO",
     "nombre": "Gris",
-    "pieza": "vaquera-gris"
+    "coste": 3.99,
+    "pieza": "nato-gris-piel-negra",
+    "tec": "correa nato gris de una pieza, con pasador y refuerzos de piel negra y hebilla clásica plateada"
+   },
+   {
+    "id": "NARE",
+    "familia": "NATO",
+    "nombre": "Arena",
+    "coste": 3.99,
+    "pieza": "nato-arena-piel-conac",
+    "tec": "correa nato arena de una pieza, con pasador y refuerzos de piel coñac y hebilla clásica plateada"
+   },
+   {
+    "id": "NOLI",
+    "familia": "NATO",
+    "nombre": "Verde oliva",
+    "coste": 3.99,
+    "pieza": "nato-verde-oliva-piel-conac",
+    "tec": "correa nato verde oliva de una pieza, con pasador y refuerzos de piel coñac y hebilla clásica plateada"
+   },
+   {
+    "id": "VARE",
+    "familia": "TELA",
+    "nombre": "Arena",
+    "coste": 5.99,
+    "pieza": "vaquera-arena",
+    "tec": "correa de tela vaquera de trama diagonal, arena, forrada en cuero coñac, con cierre de mariposa plateado"
    },
    {
     "id": "VAZU",
     "familia": "TELA",
     "nombre": "Azul claro",
-    "pieza": "vaquera-azul-claro"
+    "coste": 5.99,
+    "pieza": "vaquera-azul-claro",
+    "tec": "correa de tela vaquera de trama diagonal, azul claro, forrada en cuero coñac, con cierre de mariposa plateado"
+   },
+   {
+    "id": "VGRI",
+    "familia": "TELA",
+    "nombre": "Gris",
+    "coste": 5.99,
+    "pieza": "vaquera-gris",
+    "tec": "correa de tela vaquera de trama diagonal, gris, forrada en cuero coñac, con cierre de mariposa plateado"
+   },
+   {
+    "id": "VNEG",
+    "familia": "TELA",
+    "nombre": "Negra",
+    "coste": 5.99,
+    "pieza": "vaquera-negra",
+    "tec": "correa de tela vaquera de trama diagonal, negra, forrada en cuero coñac, con cierre de mariposa plateado"
+   },
+   {
+    "id": "VTOP",
+    "familia": "TELA",
+    "nombre": "Topo",
+    "coste": 5.99,
+    "pieza": "vaquera-topo",
+    "tec": "correa de tela vaquera de trama diagonal, topo, forrada en cuero coñac, con cierre de mariposa plateado"
    }
   ],
   "pespuntes": [
@@ -435,7 +594,9 @@
    }
   ],
   "colores_cierre": [],
-  "_piezas": "Cada correa dice qué dibujo de la BIBLIOTECA compartida es (30/08/2026). Las de piel llevan el pespunte dentro del nombre del fichero, así que su `pieza` es una TABLA por el paso `pespunte`: «B» el blanco y «*» el resto. SIN DIBUJO se quedan VBEI (beige) y VMAL (malva): la tela vaquera se rehizo el 30/08 y esos dos colores se fueron —entraron arena y topo—, así que sus piezas ya no existen. O se cambian los dos colores por arena y topo, o esas referencias salen sin correa."
+  "_piezas": "Cada correa dice qué dibujo de la BIBLIOTECA compartida es (30/08/2026). Las de piel llevan el pespunte dentro del nombre del fichero, así que su `pieza` es una TABLA por el paso `pespunte`: «B» el blanco y «*» el resto. SIN DIBUJO se quedan VBEI (beige) y VMAL (malva): la tela vaquera se rehizo el 30/08 y esos dos colores se fueron —entraron arena y topo—, así que sus piezas ya no existen. O se cambian los dos colores por arena y topo, o esas referencias salen sin correa.",
+  "_oficiales": "LAS CORREAS SON LAS DE LA CASA, LAS MISMAS PARA TODOS (Óscar, 30/08/2026): «las correas del lunar son las oficiales y las que tiene que vestir el trinchera... el nato del lunar es el nato de todos los relojes». Se copian TAL CUAL del Lunar: ocho familias y cuarenta y una correas, con sus costes y sus dibujos de la biblioteca compartida. Fuera las que tenía el Trinchera por su cuenta. La piel italiana lleva el pespunte dentro del nombre del fichero, así que su `pieza` es una tabla por el paso `pespunte`.",
+  "_cierre": "EL CIERRE SOLO SE ELIGE DONDE HAY ELECCION DE VERDAD. La correa oficial viene con su cierre DIBUJADO —la perforada con hebilla clasica plateada, la vaquera y el nato con la suya—, asi que ofrecer cinco cierres encima del dibujo era mentir: se cobraba un cierre que la foto no ensena. Queda abierto en piel italiana, piel vintage y caucho, que son las tres que en el Lunar admiten mas de uno. Ojo: el Lunar ademas limita CUALES (el caucho solo mariposas, la vintage solo negra o plata) y eso aqui todavia no se puede decir."
  },
  "filtros": {
   "correa": {
@@ -489,7 +650,7 @@
  "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
  "montaje": {
   "img": "/assets/img/trinchera-2026/capas/1200/",
-  "v": "?v=2",
+  "v": "?v=3",
   "pila": [
    {
     "capa": "correa",
