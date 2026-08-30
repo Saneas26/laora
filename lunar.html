@@ -501,6 +501,22 @@
     PVER: { nombre: 'Verde oliva', coste: 6.69, pieza: 'piel-perforada-verde-oliva',
             tec: 'correa de piel perforada verde oliva de 20 mm, pespunte al tono, hebilla clásica plateada' },
 
+    /* --- Piel vintage · cinco colores (30/08/2026) ---
+       El mismo formato: la correa abierta con su cierre puesto, que aquí es
+       la HEBILLA CLÁSICA NEGRA, y el pespunte crema en contraste ya cosido.
+       SIN COSTE de compra todavía: se dibujan y se eligen, pero dicen
+       «Precio por definir» y no se venden hasta que Óscar dé el número. */
+    PVAZ: { nombre: 'Azul petróleo', pieza: 'piel-vintage-azul-petroleo',
+            tec: 'correa de piel vintage azul petróleo de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
+    PVBU: { nombre: 'Burdeos', pieza: 'piel-vintage-burdeos',
+            tec: 'correa de piel vintage burdeos de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
+    PVCO: { nombre: 'Coñac', pieza: 'piel-vintage-conac',
+            tec: 'correa de piel vintage coñac de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
+    PVMO: { nombre: 'Marrón oscuro', pieza: 'piel-vintage-marron-oscuro',
+            tec: 'correa de piel vintage marrón oscuro de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
+    PVNE: { nombre: 'Negra', pieza: 'piel-vintage-negra',
+            tec: 'correa de piel vintage negra de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
+
     /* --- Tela vaquera · los cinco colores del formato nuevo ---
        20 mm de ancho, 2,8 de grosor, trama diagonal por fuera y cuero
        coñac por dentro. REDIBUJADAS el 30/08/2026 con su mariposa
@@ -520,6 +536,7 @@
     CAZU: 'CAUCHO', CAZN: 'CAUCHO', CMAC: 'CAUCHO', CNVF: 'CAUCHO', CBLA: 'CAUCHO',
     CNBL: 'CAUCHO', CBOR: 'CAUCHO', CNGR: 'CAUCHO', CAZC: 'CAUCHO', CBGR: 'CAUCHO',
     PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
+    PVAZ: 'PVIN', PVBU: 'PVIN', PVCO: 'PVIN', PVMO: 'PVIN', PVNE: 'PVIN',
     VARE: 'TELA', VAZU: 'TELA', VGRI: 'TELA', VNEG: 'TELA', VTOP: 'TELA'
   };
   /* LOS DOS PESPUNTES. `sufijo` es lo que se le añade al nombre de la
@@ -537,6 +554,9 @@
               expl: 'Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable.' },
     CAUCHO: { nombre: 'Caucho', expl: 'Caucho con textura, cómodo en verano y ' +
                                       'el único que se puede mojar sin pensarlo.' },
+    PVIN:   { nombre: 'Piel vintage',
+              expl: 'Piel con carácter, de aire envejecido, con el pespunte crema ' +
+                    'en contraste. Se ablanda con el uso, pero no se moja.' },
     PPER:   { nombre: 'Piel perforada',
               expl: 'Piel perforada, la de siempre para un cronógrafo. Se ablanda ' +
                     'con el uso, pero no se moja.' },
@@ -577,7 +597,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=38';
+  var SERIE_V = '?v=39';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -705,6 +725,10 @@
        DIBUJADA en la correa y no lleva miniatura. */
     MARP: { nombre: 'Mariposa plateada',
             tec: 'cierre de mariposa de acero plateado' },
+    /* 0c · LA DE LA PIEL VINTAGE (30/08/2026): la hebilla clásica en negro,
+       dibujada en la propia correa. */
+    HEBN: { nombre: 'Hebilla clásica negra',
+            tec: 'hebilla clásica de acero con PVD negro' },
     /* 1 · «desplegable mariposa con hebilla clásica» */
     MARI: { nombre: 'Mariposa con hebilla vista', mini: 'mariposa-hebilla',
             tec: 'cierre de mariposa con la hebilla clásica a la vista' },
@@ -724,7 +748,7 @@
   /* Qué familia lleva el cierre puesto de fábrica. Las que están aquí solo
      ofrecen el suyo; las que no, ofrecen los cinco desplegables y ninguno
      de estos. */
-  var CIERRE_FIJO = { PPER: 'HEBP', TELA: 'MARP' };
+  var CIERRE_FIJO = { PPER: 'HEBP', TELA: 'MARP', PVIN: 'HEBN' };
 
   /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
      Una lista por correa, y se apilan en la esquina de abajo a la
@@ -746,6 +770,11 @@
     PCON: ['/assets/img/componentes/correas/enteras/piel-perforada-conac'],
     PMAR: ['/assets/img/componentes/correas/enteras/piel-perforada-marron'],
     PVER: ['/assets/img/componentes/correas/enteras/piel-perforada-verde-oliva'],
+    PVAZ: ['/assets/img/componentes/correas/enteras/piel-vintage-azul-petroleo'],
+    PVBU: ['/assets/img/componentes/correas/enteras/piel-vintage-burdeos'],
+    PVCO: ['/assets/img/componentes/correas/enteras/piel-vintage-conac'],
+    PVMO: ['/assets/img/componentes/correas/enteras/piel-vintage-marron-oscuro'],
+    PVNE: ['/assets/img/componentes/correas/enteras/piel-vintage-negra'],
     /* LA VAQUERA ENSEÑA LO QUE NO SE VE EN EL MONTAJE: la trama diagonal
        de cerca, el desplegable y el forro de cuero coñac. Las tres valen
        para los cinco colores porque lo que cuentan es el ACABADO, no el
@@ -770,6 +799,11 @@
     '/assets/img/componentes/correas/enteras/piel-perforada-conac': 'La correa de piel perforada coñac completa, con su hebilla',
     '/assets/img/componentes/correas/enteras/piel-perforada-marron': 'La correa de piel perforada marrón completa, con su hebilla',
     '/assets/img/componentes/correas/enteras/piel-perforada-verde-oliva': 'La correa de piel perforada verde oliva completa, con su hebilla',
+    '/assets/img/componentes/correas/enteras/piel-vintage-azul-petroleo': 'La correa de piel vintage azul petróleo completa, con su hebilla negra',
+    '/assets/img/componentes/correas/enteras/piel-vintage-burdeos': 'La correa de piel vintage burdeos completa, con su hebilla negra',
+    '/assets/img/componentes/correas/enteras/piel-vintage-conac': 'La correa de piel vintage coñac completa, con su hebilla negra',
+    '/assets/img/componentes/correas/enteras/piel-vintage-marron-oscuro': 'La correa de piel vintage marrón oscuro completa, con su hebilla negra',
+    '/assets/img/componentes/correas/enteras/piel-vintage-negra': 'La correa de piel vintage negra completa, con su hebilla negra',
     'vaquera-trama': 'La trama diagonal de la tela vaquera, de cerca',
     'vaquera-dentro': 'El forro de cuero coñac de la correa de tela vaquera',
     '/assets/img/componentes/correas/enteras/vaquera-arena': 'La correa de tela vaquera arena completa, con su mariposa',
