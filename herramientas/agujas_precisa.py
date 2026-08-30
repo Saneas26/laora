@@ -4,6 +4,7 @@
     python3 herramientas/agujas_precisa.py <fichero.png> <plata|oro-rosa|negras>
     python3 herramientas/agujas_precisa.py <fichero.png> plata --prueba
     ... --minutero 0.95 --segundero 1.05   (estirar o acortar una aguja suelta)
+    ... --segundero igual                  (el segundero, tan largo como el minutero)
     ... --sin-tono                          (no igualar el tono a los índices)
 
 POR QUÉ EXISTE. Las agujas del Precisa se colocaron a mano el 30/08/2026
@@ -245,6 +246,11 @@ def coloca(origen, f_min=1.0, f_seg=1.0, tono=True):
     if abs(f_min - 1.0) > 1e-6:
         im = estira(im, anc, minutero['mask'], f_min)
         print('  minutero x%.3f -> %5.1f px' % (f_min, minutero['largo'] * s * f_min))
+    if segundero and f_seg == 'igual':
+        # Óscar, 30/08/2026: «el segundero debe ser igual de largo que el
+        # minutero». Se calcula aquí para que no dependa de una cuenta a
+        # mano que se queda vieja en cuanto cambie el dibujo.
+        f_seg = (minutero['largo'] * f_min) / segundero['largo']
     if segundero and abs(f_seg - 1.0) > 1e-6:
         im = estira(im, anc, segundero['mask'], f_seg)
         print('  segundero x%.3f -> %5.1f px%s' % (
@@ -275,7 +281,10 @@ def hoja(capa, destino):
 if __name__ == '__main__':
     argv = sys.argv[1:]
     def opt(nombre, por_defecto):
-        return float(argv[argv.index(nombre) + 1]) if nombre in argv else por_defecto
+        if nombre not in argv:
+            return por_defecto
+        v = argv[argv.index(nombre) + 1]
+        return v if v == 'igual' else float(v)
     f_min = opt('--minutero', 1.0)
     f_seg = opt('--segundero', 1.0)
     args = [a for i, a in enumerate(argv)
