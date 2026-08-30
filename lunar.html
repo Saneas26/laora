@@ -597,7 +597,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=40';
+  var SERIE_V = '?v=41';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -723,8 +723,23 @@
     /* 0b · LA DE LA TELA VAQUERA (Óscar, 30/08/2026: «con hebilla mariposa
        y solo puede elegirse con esa hebilla»). Como la de la piel: viene
        DIBUJADA en la correa y no lleva miniatura. */
-    MARP: { nombre: 'Mariposa plateada',
-            tec: 'cierre de mariposa de acero plateado' },
+    /* ---------- EL CATÁLOGO DE MARIPOSAS (Óscar, 30/08/2026) ----------
+       Cuatro colores del anuncio 1005007900051846, a 3,89 € de COSTE cada
+       una. El plan de Óscar: «vamos a ofrecer en algunas correas que no la
+       lleven la posibilidad de AÑADIR a su pedido una hebilla mariposa» —
+       un añadido con su precio, no un recambio del cierre—. El coste queda
+       aquí apuntado para ese día; QUÉ correas la ofrecen todavía no está
+       decidido, así que hoy solo la plata pulida sale (con la vaquera, que
+       la trae puesta y por tanto SIN cobrarla: su `coste` no se suma en
+       ningún sitio hasta que exista el añadido). */
+    MARP: { nombre: 'Mariposa plata pulida', mini: 'mariposa-catalogo-plata', coste: 3.89,
+            tec: 'cierre de mariposa de acero plata pulida' },
+    MARN: { nombre: 'Mariposa negra pulida', mini: 'mariposa-catalogo-negra', coste: 3.89,
+            tec: 'cierre de mariposa de acero negro pulido' },
+    MARD: { nombre: 'Mariposa dorada', mini: 'mariposa-catalogo-dorada', coste: 3.89,
+            tec: 'cierre de mariposa dorado' },
+    MARO: { nombre: 'Mariposa oro rosa', mini: 'mariposa-catalogo-oro-rosa', coste: 3.89,
+            tec: 'cierre de mariposa en oro rosa' },
     /* 0c · LA DE LA PIEL VINTAGE (30/08/2026): la hebilla clásica en negro,
        dibujada en la propia correa. */
     HEBN: { nombre: 'Hebilla clásica negra', mini: 'hebilla-negra',
