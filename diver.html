@@ -381,10 +381,18 @@
     OPCIONES: OPCIONES, e: e,
     CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"CAU-NEG": "CAU", "A316-DESP": "A316", "A316-MAC": "A316", "A316-ANC": "A316", "A316-FIN": "A316"},
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
-    /* SIN PIEZAS DIBUJADAS TODAVÍA: sin capas no se arma el reloj, y sin
-       paquetes no hay coste, así que la ficha dice «Precio por definir» y
-       no deja comprar. Es lo honrado hasta que lleguen las dos cosas. */
-    CAPA: {}, PILA: [],
+    /* EL MONTAJE POR CAPAS, si el modelo lo trae. Se declara en el JSON:
+
+           "montaje": { "img": "/assets/img/<modelo>/capas/", "v": "?v=1",
+                        "pila": [{"capa": "esf", "grupo": "esf"}, ...],
+                        "capas": { "esf": {"AZM": "esfera-azul-marino"}, ... } }
+
+       `pila` es el orden de apilado (con `necesita` para lo que no puede
+       flotar solo, como las agujas sin su esfera) y `capas` dice qué
+       fichero dibuja cada opción. El que no traiga nada se queda sin
+       dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
+    CAPA: {}, CAPA_IMG: "", SERIE_V: "",
+    PILA: [],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -405,6 +413,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=4"></script>
+<script src="/assets/js/configurador-2026.js?v=5"></script>
 </body>
 </html>

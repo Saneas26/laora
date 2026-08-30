@@ -597,7 +597,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=41';
+  var SERIE_V = '?v=42';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -606,7 +606,8 @@
          ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', cristal: 'MIN', correa: 'A316P', pespunte: 'T', cierre: 'MARI' };
+            caja: 'PL', cristal: 'MIN', correa: 'A316P', pespunte: 'T', cierre: 'MARI',
+            mariposa: 'SIN' };
   var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
   /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
      capa: ese paso se queda en blanco en vez de enseñar una pieza que no es
@@ -777,6 +778,22 @@
   var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'] };
   var CIERRES_LIBRES = ['MARI', 'MOCU', 'MINT', 'DES2', 'DSEG'];
 
+  /* ---------- EL AÑADIDO DE LA MARIPOSA (Óscar, 30/08/2026) ----------
+     «Vamos a ofrecer en algunas correas que no la lleven la posibilidad de
+     añadir a su pedido una hebilla mariposa.» Lo ofrecen la piel perforada
+     y la vintage, y EL COLOR CASA CON LA HEBILLA de la correa: plateada →
+     mariposa plata pulida, negra → negra pulida. Es un criterio de Óscar
+     («según la correa») aplicado por lo obvio; si dicta otro fino, se
+     cambia aquí. No es un recambio del cierre puesto: es una pieza más en
+     el pedido, con su coste (3,89, en el catálogo de CIERRES) y su cola en
+     la referencia. */
+  function mariposaDe(e) {
+    var fam = matDeCorrea(e.correa);
+    if (fam === 'PPER') return 'MARP';
+    if (fam === 'PVIN') return e.cierre === 'HEBN' ? 'MARN' : 'MARP';
+    return null;
+  }
+
   /* LAS FOTOS DEL PROVEEDOR DE CADA CORREA, las que salen de miniatura.
      Una lista por correa, y se apilan en la esquina de abajo a la
      izquierda en ese orden, la primera abajo. El brazalete no tiene
@@ -870,7 +887,11 @@
     var correa = e.correa + (CON_PESPUNTE[matDeCorrea(e.correa)]
       ? PESPUNTES[e.pespunte].ref : '');
     return 'LO-03-' + e.mov + '-' + e.caja + e.cristal + '-' + e.esf + '-' +
-           e.bisel + '-' + e.agujas + '-' + correa;
+           e.bisel + '-' + e.agujas + '-' + correa +
+           /* la mariposa añadida va DETRÁS, como iba el dúo del otro
+              modelo: el reloj es el mismo y lo que cambia es una pieza más
+              en la caja. Sin ella, ni rastro. */
+           (e.mariposa !== 'SIN' ? '-' + e.mariposa : '');
   }
   function agua(e) { return '5 ATM / 50 metros'; }
 
@@ -1069,6 +1090,34 @@
         cf.alt = ci.nombre + ', foto del fabricante';
       }
     }
+
+    /* EL AÑADIDO DE LA MARIPOSA: sólo donde se ofrece, con su foto cuando
+       se elige. El precio no se escribe aquí: lo dice el total, que es el
+       único número que no puede mentir. */
+    var mar = mariposaDe(e);
+    var gMar = $('[data-g="mariposa"]');
+    if (gMar) gMar.hidden = !mar;
+    if (mar) {
+      botones('mariposa', [['SIN', 'Sin mariposa'], [mar, CIERRES[mar].nombre]], e.mariposa);
+      rotula('mariposa', e.mariposa === 'SIN' ? 'No' : CIERRES[mar].nombre,
+             e.mariposa === 'SIN'
+               ? 'Una hebilla mariposa de recambio, aparte de la que lleva la correa.'
+               : CIERRES[mar].tec.charAt(0).toUpperCase() + CIERRES[mar].tec.slice(1) +
+                 ' de recambio, aparte de la hebilla puesta. Va en el estuche.');
+    } else {
+      var opMar = $('[data-pv="mariposa"]');
+      if (opMar) opMar.innerHTML = '';
+    }
+    var mf = $('[data-pv-mariposa-foto]');
+    if (mf) {
+      var conFoto = mar && e.mariposa !== 'SIN' && CIERRES[e.mariposa] && CIERRES[e.mariposa].mini;
+      mf.hidden = !conFoto;
+      if (conFoto) {
+        var msrc = CIERRE_IMG + CIERRES[e.mariposa].mini + '.avif' + SERIE_V;
+        if (mf.getAttribute('src') !== msrc) mf.setAttribute('src', msrc);
+        mf.alt = CIERRES[e.mariposa].nombre + ', foto del fabricante';
+      }
+    }
   }
 
   /* ---------- REPARAR LO ELEGIDO ----------
@@ -1091,6 +1140,12 @@
        pone el PRIMERO de su lista, que es el dibujado en la correa. */
     var deFam = CIERRE_FIJO[CORREA_MAT[e.correa] || 'A316'] || CIERRES_LIBRES;
     if (deFam.indexOf(e.cierre) < 0) e.cierre = deFam[0];
+    /* Y el añadido de la mariposa: donde no se ofrece, fuera; y si el color
+       que casaba ya no casa —cambió la hebilla de la vintage—, se cambia el
+       color sin quitarle al cliente el añadido que pidió. */
+    var mar = mariposaDe(e);
+    if (!mar) e.mariposa = 'SIN';
+    else if (e.mariposa !== 'SIN' && e.mariposa !== mar) e.mariposa = mar;
     if (!CRISTALES[e.cristal]) e.cristal = Object.keys(CRISTALES)[0];
     /* La terna se repara HACIA ABAJO: la esfera manda sobre el bisel y los
        dos sobre las agujas. Así cambiar la esfera nunca deja al cliente
@@ -1129,7 +1184,9 @@
       if (!c || c.coste === null || c.coste === undefined) return null;
       extra = c.coste;
     }
-    return MOVS[e.mov].coste + p.coste + extra + LOGO;
+    /* El añadido de la mariposa, con su coste de catálogo. */
+    var mar = e.mariposa !== 'SIN' && CIERRES[e.mariposa] ? CIERRES[e.mariposa].coste || 0 : 0;
+    return MOVS[e.mov].coste + p.coste + extra + LOGO + mar;
   }
 
   /* La ficha técnica del Lunar, con sus piezas. */
@@ -1149,6 +1206,8 @@
     return CAJAS[e.caja].nombre + ' · esfera ' + ESFERAS[e.esf].nombre.toLowerCase() +
            ' · bisel ' + BISELES[e.bisel].nombre.toLowerCase() +
            ' · cierre ' + CIERRES[e.cierre].nombre.toLowerCase() +
+           (e.mariposa !== 'SIN' && CIERRES[e.mariposa]
+             ? ' · con ' + CIERRES[e.mariposa].nombre.toLowerCase() + ' de recambio' : '') +
            ' · ' + MOVS[e.mov].nombre;
   }
 
@@ -1173,6 +1232,8 @@
     piezasDe: piezasDe,
     /* Para el volcador: si esta correa elige pespunte, hay dos referencias. */
     CON_PESPUNTE_DE: function (c) { return !!CON_PESPUNTE[matDeCorrea(c)]; },
+    /* Para el volcador: qué mariposa de recambio ofrece este estado. */
+    MARIPOSA_DE: mariposaDe,
     COSTES_PUESTOS: COSTES_PUESTOS, CADENA: CADENA,
     e: e,
     pintaPasos: pintaPasos, normaliza: normaliza, detalle: detalle,
@@ -1186,7 +1247,7 @@
 <!-- El motor de precio, el mismo para todos los modelos. Va DELANTE del
      configurador: el configurador lo usa nada más arrancar. -->
 <script src="/assets/js/precio-2026.js?v=1"></script>
-<script src="/assets/js/configurador-2026.js?v=4"></script>
+<script src="/assets/js/configurador-2026.js?v=5"></script>
 <!-- ============ LA LUPA ============
      La foto a pantalla completa, con la de 1600 —que es la que hay— y el
      pie diciendo qué reloj es. Se cierra con la equis, con Escape o

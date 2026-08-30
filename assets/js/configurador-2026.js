@@ -159,6 +159,12 @@
       "tarjeta": "correa"
     },
     {
+      "id": "mariposa",
+      "rotulo": "Añade una mariposa",
+      "de": "correa.mariposas",
+      "tarjeta": "correa"
+    },
+    {
       "id": "cierrecolor",
       "rotulo": "Color del cierre",
       "de": "correa.colores_cierre",
@@ -208,10 +214,12 @@
                 '<p class="pv-g-cab"><span>' + p.rotulo + '</span>' +
                 '<span class="pv-g-valor" data-valor="' + p.id + '"></span></p>' +
                 '<div class="pv-opciones" data-pv="' + p.id + '"></div>' +
-                /* La foto del cierre vive dentro de su paso: es lo único que
-                   un paso enseña además de sus botones. */
+                /* La foto del cierre vive dentro de su paso; el añadido de la
+                   mariposa (30/08/2026) enseña la suya igual. */
                 (p.id === 'cierre'
                   ? '<img class="pv-cierre-foto" data-pv-cierre-foto alt="" hidden>' : '') +
+                (p.id === 'mariposa'
+                  ? '<img class="pv-cierre-foto" data-pv-mariposa-foto alt="" hidden>' : '') +
                 '<p class="pv-g-explica" data-explica="' + p.id + '"></p>' +
                 '</div>';
       });

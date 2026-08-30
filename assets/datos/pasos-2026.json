@@ -114,6 +114,13 @@
    "tarjeta": "correa"
   },
   {
+   "id": "mariposa",
+   "rotulo": "Añade una mariposa",
+   "de": "correa.mariposas",
+   "tarjeta": "correa",
+   "porque": "Óscar, 30/08/2026: en algunas correas que no la llevan se puede AÑADIR al pedido una hebilla mariposa de recambio (coste 3,89, anuncio 1005007900051846). Es un añadido con su precio, no un recambio del cierre puesto. El que no la ofrezca no enseña el paso, como todos."
+  },
+  {
    "id": "cierrecolor",
    "rotulo": "Color del cierre",
    "de": "correa.colores_cierre",

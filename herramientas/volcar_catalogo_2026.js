@@ -342,11 +342,17 @@ function lunar() {
      de la ficha, así que el catálogo tiene que enumerar lo mismo: si no, el
      cliente mete en el carrito una referencia que el servidor no conoce.
      En las que no lo eligen, una sola vuelta. */
-  for (const pespunte of (L.M.CON_PESPUNTE_DE(correa) ? ['T', 'B'] : ['T'])) {
+  for (const pespunte of (L.M.CON_PESPUNTE_DE(correa) ? ['T', 'B'] : ['T']))
+  /* EL AÑADIDO DE LA MARIPOSA (30/08/2026): donde la correa lo ofrece hay
+     DOS referencias, sin y con. Se prueban los tres candidatos y
+     `normaliza` descarta lo que ese estado no ofrece: si tras normalizar
+     no es lo que se pedía, esa vuelta sobra. */
+  for (const mariposa of ['SIN', 'MARP', 'MARN']) {
     e.mov = mov; e.caja = p.caja; e.cristal = p.cristal;
     e.esf = p.esf; e.bisel = p.bisel; e.agujas = agujas; e.correa = correa;
-    e.pespunte = pespunte;
+    e.pespunte = pespunte; e.mariposa = mariposa;
     L.normaliza();
+    if (e.mariposa !== mariposa) continue;
     if (L.vetada(L.firma())) continue;
     if (L.costes() === null) continue;
     const caja = p.caja, cristal = p.cristal, c = p;
@@ -355,7 +361,8 @@ function lunar() {
       L.CAJAS[caja].nombre + ' · esfera ' + L.ESFERAS[c.esf].nombre.toLowerCase() +
         ' · bisel ' + L.BISELES[c.bisel].nombre.toLowerCase() +
         ' · ' + L.CRISTALES[cristal].nombre.toLowerCase() +
-        ' · ' + L.MOVS[mov].nombre,
+        ' · ' + L.MOVS[mov].nombre +
+        (e.mariposa !== 'SIN' ? ' · con mariposa de recambio' : ''),
       L.CORREAS[correa].nombre,
       { movimiento: L.MOVS[mov].tec,
         caja: 'Caja de ' + L.CAJAS[caja].mat + ' de ' + L.MM + ' mm, ' +
