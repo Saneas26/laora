@@ -49,6 +49,16 @@ FONDO = (233, 233, 231, 255)
 # el gajo sucio en las manchadas: el único punto que salva las dos cosas.
 CORTE = 0.96
 
+# LA ESFERA VA UN POCO MÁS ABAJO QUE EL EJE DEL HUECO (Óscar, 30/08/2026:
+# «todas las esferas deben bajar 2 grados hacia el sur»). Dos grados de
+# arco sobre el radio de la esfera son 11,5 px en el lienzo de 1200.
+# Y al bajarla hay que AGRANDARLA lo mismo, o por arriba asomaría el
+# fondo: la condición es que el 96 % del radio siga tapando el hueco por
+# el lado alto, o sea Rd = (radio del hueco + bajada) / 0,96.
+# Lo que se paga: por abajo la pista de minutos se mete bajo el bisel.
+# Preguntado y confirmado por Óscar antes de hacerlo.
+BAJADA = 11.5
+
 ESFERAS = {
     'esfera-antracita':      'laora-precisa-esfera-antracita.png',
     'esfera-azul-hielo':     'laora-precisa-esfera-azul-hielo.png',
@@ -92,7 +102,8 @@ def disco(f):
 def coloca(f, eje, radio_hueco):
     im = Image.open(f).convert('RGBA')
     c, r = disco(f)
-    s = radio_hueco / (CORTE * r)
+    s = (radio_hueco + BAJADA) / (CORTE * r)
+    eje = (eje[0], eje[1] + BAJADA)
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
@@ -135,6 +146,7 @@ if __name__ == '__main__':
     eje, rh = hueco_de_la_caja()
     print('OJO DE LA CAJA: centro %.2f, %.2f · radio %.1f px' % (eje[0], eje[1], rh))
     print('El borde del hueco cae en el %.0f %% del radio de cada esfera.' % (CORTE * 100))
+    print('La esfera baja %.1f px (2 grados de arco) y crece lo mismo para taparlo.' % BAJADA)
     capas = {}
     for ident, f in sorted(ESFERAS.items()):
         capas[ident], s, r = coloca(ENTREGA + f, eje, rh)

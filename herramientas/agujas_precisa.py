@@ -48,6 +48,11 @@ TAMANOS = (480, 1200, 1600)
 CALIDADES = (72, 64, 56, 48, 40)
 PESO = 60000
 MINUTERO_R = 300.0               # dónde cae la punta del minutero, en px de 1200
+# LAS AGUJAS BAJAN CON LA ESFERA. Giran sobre el eje del movimiento, que
+# atraviesa la esfera por su centro: si la esfera baja y ellas no, el buje
+# se queda 11,5 px por encima del centro del dibujo y canta. La bajada la
+# manda esferas_precisa.py para que no haya dos números.
+from esferas_precisa import BAJADA
 FONDO = (233, 233, 231, 255)
 ESFERA_PATRON = 'esfera-antracita.avif'   # la negra: sus barras se recortan solas
 
@@ -332,7 +337,8 @@ def coloca(origen, f_min=1.0, f_seg=1.0, tono='acero'):
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
-    L.alpha_composite(n, (round(eje[0] - anc[0] * s), round(eje[1] - anc[1] * s)))
+    L.alpha_composite(n, (round(eje[0] - anc[0] * s),
+                          round(eje[1] + BAJADA - anc[1] * s)))
     return L
 
 
