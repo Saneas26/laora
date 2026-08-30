@@ -54,12 +54,41 @@ colores de vaquera a `coste: null`.
 
 ---
 
+## Piel con costura — 7,69 € · tres colores
+
+[1005010114856652](https://es.aliexpress.com/item/1005010114856652.html) —
+Óscar, **30/08/2026**. **Anuncio nuevo, sin captura.**
+
+**Tres colores**, con foto ya hecha en
+`~/Documents/Codex/2026-08-29/correas-x20/outputs/`:
+
+| Color | Fichero |
+|---|---|
+| Negra | `laora-correa-piel-costura-lateral-20mm-negra.png` |
+| Coñac | `laora-correa-piel-costura-lateral-20mm-conac-prueba-02.png` |
+| Marrón oscuro | `laora-correa-piel-costura-lateral-20mm-marron-oscuro.png` |
+
+Lo que se ve en la foto de la negra: piel de grano marcado, **20 mm**, hebilla
+clásica de acero cepillado, **dos pasadores** —uno fijo y otro corredizo— y
+**costura de contraste crema**, dos puntadas cortas junto a las asas y otras
+dos a media correa. No es un pespunte corrido por el canto.
+
+⚠️ **El nombre del fichero dice «costura lateral» y la foto no enseña eso.**
+Antes de escribirlo en la ficha conviene fijar cómo se llama, que es lo que
+lee el cliente.
+
+⚠️ **Óscar NO ha dicho que ésta vaya a todos los modelos.** Las otras dos sí
+llevan esa norma; ésta se queda sin asignar hasta que él lo diga.
+
+---
+
 ## Qué cuesta cada correa de la casa, ordenadas
 
 | Correa | Coste | Modelos |
 |---|--:|---|
 | **Tela vaquera** | **5,99 €** | todos |
 | **Piel perforada** | **6,79 €** | todos |
+| **Piel con costura** | **7,69 €** | *sin asignar* |
 | Caucho del Lunar | 12,99 € | Lunar |
 | Nato 20 mm (caja de 39) | 11,29 € | Trinchera |
 | Brazalete de acero del Lunar | 19,79 € | Lunar |
@@ -80,3 +109,6 @@ ofrezcan**.
 4. **Decidir de qué modelos salen.** Por defecto entran en todos; Óscar dirá
    las excepciones.
 5. **Envío, mínimos y descuento por volumen** de HQstrap: no están anotados.
+6. **Captura del anuncio de la piel con costura** (`1005010114856652`): no hay
+   ninguna. Faltan variantes, anchos, colores reales, envío y mínimos.
+7. **Decidir en qué modelos entra la piel con costura**, y cómo se llama.
