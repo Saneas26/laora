@@ -8,6 +8,10 @@ Correas que Óscar da **para todos los modelos**. Abierta el **29/08/2026**.
 > Es decir: **entran por defecto en los diez modelos**, y sólo salen de donde
 > Óscar diga expresamente. Al contrario de como se venía trabajando, que era
 > modelo a modelo.
+>
+> **Las tres correas de esta hoja van a todos**: piel perforada, tela vaquera y
+> piel con costura. Son también las tres más baratas del catálogo, así que
+> bajan el «desde» de cualquier ficha donde se ofrezcan.
 
 ---
 
@@ -54,7 +58,7 @@ colores de vaquera a `coste: null`.
 
 ---
 
-## Piel con costura — 7,69 € · tres colores
+## Piel con costura — 7,69 € · tres colores · **todos los modelos**
 
 [1005010114856652](https://es.aliexpress.com/item/1005010114856652.html) —
 Óscar, **30/08/2026**. **Anuncio nuevo, sin captura.**
@@ -77,8 +81,8 @@ dos a media correa. No es un pespunte corrido por el canto.
 Antes de escribirlo en la ficha conviene fijar cómo se llama, que es lo que
 lee el cliente.
 
-⚠️ **Óscar NO ha dicho que ésta vaya a todos los modelos.** Las otras dos sí
-llevan esa norma; ésta se queda sin asignar hasta que él lo diga.
+**Va a todos los modelos, como las otras dos.** Óscar, 30/08/2026: «piel con
+costura por el momento a todas también, **hasta que te indique lo contrario**».
 
 ---
 
@@ -88,7 +92,7 @@ llevan esa norma; ésta se queda sin asignar hasta que él lo diga.
 |---|--:|---|
 | **Tela vaquera** | **5,99 €** | todos |
 | **Piel perforada** | **6,79 €** | todos |
-| **Piel con costura** | **7,69 €** | *sin asignar* |
+| **Piel con costura** | **7,69 €** | todos |
 | Caucho del Lunar | 12,99 € | Lunar |
 | Nato 20 mm (caja de 39) | 11,29 € | Trinchera |
 | Brazalete de acero del Lunar | 19,79 € | Lunar |
@@ -111,4 +115,5 @@ ofrezcan**.
 5. **Envío, mínimos y descuento por volumen** de HQstrap: no están anotados.
 6. **Captura del anuncio de la piel con costura** (`1005010114856652`): no hay
    ninguna. Faltan variantes, anchos, colores reales, envío y mínimos.
-7. **Decidir en qué modelos entra la piel con costura**, y cómo se llama.
+7. **Cómo se llama la piel con costura** de cara al cliente: el nombre del
+   fichero dice «costura lateral» y la foto no enseña eso.
