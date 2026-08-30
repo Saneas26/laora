@@ -30,144 +30,467 @@
  "clase": "Reloj de campo",
  "listo": true,
  "agua": "5 ATM / 50 metros",
-
  "caja": {
   "integrada": false,
   "tamanos": [
-   {"id": "36", "nombre": "36 mm", "coste": 0,
-    "expl": "Caja de 36 mm, la medida clásica del reloj de campo."},
-   {"id": "39", "nombre": "39 mm", "coste": 0,
-    "expl": "Caja de 39 mm, algo más presente en la muñeca."}
+   {
+    "id": "36",
+    "nombre": "36 mm",
+    "coste": 0,
+    "expl": "Caja de 36 mm, la medida clásica del reloj de campo."
+   },
+   {
+    "id": "39",
+    "nombre": "39 mm",
+    "coste": 0,
+    "expl": "Caja de 39 mm, algo más presente en la muñeca."
+   }
   ],
   "materiales": [
-   {"id": "PL", "nombre": "Acero plata", "coste": 23.00,
-    "expl": "Acero inoxidable 316 en acabado plata."},
-   {"id": "NG", "nombre": "Negra PVD", "coste": 23.00,
-    "expl": "Acero inoxidable 316 con recubrimiento PVD negro."},
-   {"id": "BR", "nombre": "Bronce", "coste": 23.00,
-    "expl": "Bronce, que desarrollará su pátina propia con el uso."},
-   {"id": "TI", "nombre": "Titanio", "coste": 54.39,
+   {
+    "id": "PL",
+    "nombre": "Acero plata",
+    "coste": 23.0,
+    "expl": "Acero inoxidable 316 en acabado plata."
+   },
+   {
+    "id": "NG",
+    "nombre": "Negra PVD",
+    "coste": 23.0,
+    "expl": "Acero inoxidable 316 con recubrimiento PVD negro."
+   },
+   {
+    "id": "BR",
+    "nombre": "Bronce",
+    "coste": 23.0,
+    "expl": "Bronce, que desarrollará su pátina propia con el uso."
+   },
+   {
+    "id": "TI",
+    "nombre": "Titanio",
+    "coste": 54.39,
     "agua": "20 ATM / 200 metros",
-    "expl": "Titanio, más ligero que el acero e hipoalergénico. Es la única caja que aguanta 20 ATM."}
+    "expl": "Titanio, más ligero que el acero e hipoalergénico. Es la única caja que aguanta 20 ATM."
+   }
   ]
  },
-
- "bisel": {"colores": [], "materiales": []},
-
+ "bisel": {
+  "colores": [],
+  "materiales": []
+ },
  "esfera": {
   "tipos": [
-   {"id": "K", "nombre": "Khaki", "coste": 17.29,
-    "expl": "Esfera de campo mate con doble numeración —12 y 24 horas— y lumen verde. Diámetro 29 mm."},
-   {"id": "M", "nombre": "Murph", "coste": 21.19,
-    "expl": "Esfera mate con numerales grandes aplicados y agujas catedral con lumen."}
+   {
+    "id": "K",
+    "nombre": "Khaki",
+    "coste": 17.29,
+    "expl": "Esfera de campo mate con doble numeración —12 y 24 horas— y lumen verde. Diámetro 29 mm."
+   },
+   {
+    "id": "M",
+    "nombre": "Murph",
+    "coste": 21.19,
+    "expl": "Esfera mate con numerales grandes aplicados y agujas catedral con lumen."
+   }
   ],
   "colores": [
-   {"id": "NEG", "nombre": "Negra", "coste": 0, "color": "#16181a"},
-   {"id": "BLA", "nombre": "Blanca", "coste": 0, "color": "#efeae0"},
-   {"id": "AZU", "nombre": "Azul", "coste": 0, "color": "#2f5a95"},
-   {"id": "GRI", "nombre": "Gris", "coste": 0, "color": "#726b69"},
-   {"id": "MCR", "nombre": "Numerales crema", "coste": 0, "color": "#e2d4b4"},
-   {"id": "MBL", "nombre": "Numerales blancos", "coste": 0, "color": "#f2f2ef"}
+   {
+    "id": "NEG",
+    "nombre": "Negra",
+    "coste": 0,
+    "color": "#16181a"
+   },
+   {
+    "id": "BLA",
+    "nombre": "Blanca",
+    "coste": 0,
+    "color": "#efeae0"
+   },
+   {
+    "id": "AZU",
+    "nombre": "Azul",
+    "coste": 0,
+    "color": "#2f5a95"
+   },
+   {
+    "id": "GRI",
+    "nombre": "Gris",
+    "coste": 0,
+    "color": "#726b69"
+   },
+   {
+    "id": "MCR",
+    "nombre": "Numerales crema",
+    "coste": 0,
+    "color": "#e2d4b4"
+   },
+   {
+    "id": "MBL",
+    "nombre": "Numerales blancos",
+    "coste": 0,
+    "color": "#f2f2ef"
+   }
   ]
  },
-
- "agujas": {"colores": []},
+ "agujas": {
+  "colores": []
+ },
  "cristal": [],
-
  "movimiento": [
-  {"id": "Q", "nombre": "Cuarzo Suizo", "coste": 18.65,
-   "expl": "Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y pila de hasta 60 meses. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %."},
-  {"id": "A", "nombre": "Automático Suizo", "coste": 50.09,
-   "expl": "Calibre laOra LO_A4026, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 40 horas de reserva de marcha, cuerda manual y parada de segundero."}
+  {
+   "id": "Q",
+   "nombre": "Cuarzo Suizo",
+   "coste": 18.65,
+   "expl": "Calibre laOra LO_Q6026, arquitectura Suiza Ronda 715. Cuarzo con precisión de −10/+20 segundos al mes y pila de hasta 60 meses. Al tirar de la corona el segundero se detiene y el consumo baja un 70 %."
+  },
+  {
+   "id": "A",
+   "nombre": "Automático Suizo",
+   "coste": 50.09,
+   "expl": "Calibre laOra LO_A4026, arquitectura Suiza ETA 2824-2. Automático de 28.800 alternancias por hora, 40 horas de reserva de marcha, cuerda manual y parada de segundero."
+  }
  ],
-
  "correa": {
   "familias": [
-   {"id": "A316", "nombre": "Acero 316L", "coste": 0,
-    "expl": "Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable."},
-   {"id": "CAUCHO", "nombre": "Caucho", "coste": 0, "cierre": true,
-    "expl": "Caucho con textura, cómodo en verano y el único que se puede mojar sin pensarlo."},
-   {"id": "PPER", "nombre": "Piel perforada", "coste": 0, "cierre": true, "pespunte": true,
-    "expl": "Piel perforada. Se ablanda con el uso, pero no se moja."},
-   {"id": "PITA", "nombre": "Piel italiana hecha a mano", "coste": 0, "cierre": true, "pespunte": true,
-    "expl": "Piel de vaca italiana cosida a mano, con el canto pintado."},
-   {"id": "TELA", "nombre": "Tela vaquera", "coste": 0, "cierre": true,
-    "expl": "Tela vaquera de trama diagonal, forrada en cuero coñac por dentro."}
+   {
+    "id": "A316",
+    "nombre": "Acero 316L",
+    "coste": 0,
+    "expl": "Brazalete de acero inoxidable 316L de tres eslabones, con cierre desplegable."
+   },
+   {
+    "id": "CAUCHO",
+    "nombre": "Caucho",
+    "coste": 0,
+    "cierre": true,
+    "expl": "Caucho con textura, cómodo en verano y el único que se puede mojar sin pensarlo."
+   },
+   {
+    "id": "PPER",
+    "nombre": "Piel perforada",
+    "coste": 0,
+    "cierre": true,
+    "pespunte": true,
+    "expl": "Piel perforada. Se ablanda con el uso, pero no se moja."
+   },
+   {
+    "id": "PITA",
+    "nombre": "Piel italiana hecha a mano",
+    "coste": 0,
+    "cierre": true,
+    "pespunte": true,
+    "expl": "Piel de vaca italiana cosida a mano, con el canto pintado."
+   },
+   {
+    "id": "TELA",
+    "nombre": "Tela vaquera",
+    "coste": 0,
+    "cierre": true,
+    "expl": "Tela vaquera de trama diagonal, forrada en cuero coñac por dentro."
+   }
   ],
   "colores": [
-   {"id": "A316P",   "familia": "A316", "nombre": "Acero, centro pulido", "coste": 20.19},
-   {"id": "A316NGP", "familia": "A316", "nombre": "PVD negro, centro pulido", "coste": 20.19},
-   {"id": "A316ORP", "familia": "A316", "nombre": "Centro oro rosa pulido", "coste": 20.19},
-   {"id": "A316AMP", "familia": "A316", "nombre": "Centro oro amarillo pulido", "coste": 20.19},
-
-   {"id": "CAZU", "familia": "CAUCHO", "nombre": "Azul", "coste": 9.89},
-   {"id": "CAZN", "familia": "CAUCHO", "nombre": "Azul y naranja", "coste": 9.89},
-   {"id": "CMAC", "familia": "CAUCHO", "nombre": "Marrón y crema", "coste": 9.89},
-   {"id": "CNVF", "familia": "CAUCHO", "nombre": "Negra y verde flúor", "coste": 9.89},
-   {"id": "CBLA", "familia": "CAUCHO", "nombre": "Blanca", "coste": 9.89},
-   {"id": "CNBL", "familia": "CAUCHO", "nombre": "Negra y blanca"},
-   {"id": "CBOR", "familia": "CAUCHO", "nombre": "Blanca y oro rosa"},
-   {"id": "CNGR", "familia": "CAUCHO", "nombre": "Negra y gris"},
-   {"id": "CAZC", "familia": "CAUCHO", "nombre": "Azul celeste"},
-   {"id": "CBGR", "familia": "CAUCHO", "nombre": "Blanca y gris"},
-
-   {"id": "PCAQ", "familia": "PPER", "nombre": "Caqui oliva", "coste": 6.69},
-   {"id": "PCON", "familia": "PPER", "nombre": "Coñac y naranja", "coste": 6.69},
-   {"id": "PMAR", "familia": "PPER", "nombre": "Marrón", "coste": 6.69},
-   {"id": "PNEG", "familia": "PPER", "nombre": "Negra", "coste": 6.69},
-
-   {"id": "IMAR", "familia": "PITA", "nombre": "Marrón"},
-   {"id": "INEG", "familia": "PITA", "nombre": "Negra"},
-   {"id": "IVER", "familia": "PITA", "nombre": "Verde"},
-   {"id": "IAZU", "familia": "PITA", "nombre": "Azul"},
-
-   {"id": "VBEI", "familia": "TELA", "nombre": "Beige"},
-   {"id": "VMAL", "familia": "TELA", "nombre": "Malva"},
-   {"id": "VNEG", "familia": "TELA", "nombre": "Negra"},
-   {"id": "VGRI", "familia": "TELA", "nombre": "Gris"},
-   {"id": "VAZU", "familia": "TELA", "nombre": "Azul claro"}
+   {
+    "id": "A316P",
+    "familia": "A316",
+    "nombre": "Acero, centro pulido",
+    "coste": 20.19
+   },
+   {
+    "id": "A316NGP",
+    "familia": "A316",
+    "nombre": "PVD negro, centro pulido",
+    "coste": 20.19
+   },
+   {
+    "id": "A316ORP",
+    "familia": "A316",
+    "nombre": "Centro oro rosa pulido",
+    "coste": 20.19
+   },
+   {
+    "id": "A316AMP",
+    "familia": "A316",
+    "nombre": "Centro oro amarillo pulido",
+    "coste": 20.19
+   },
+   {
+    "id": "CAZU",
+    "familia": "CAUCHO",
+    "nombre": "Azul",
+    "coste": 9.89
+   },
+   {
+    "id": "CAZN",
+    "familia": "CAUCHO",
+    "nombre": "Azul y naranja",
+    "coste": 9.89
+   },
+   {
+    "id": "CMAC",
+    "familia": "CAUCHO",
+    "nombre": "Marrón y crema",
+    "coste": 9.89
+   },
+   {
+    "id": "CNVF",
+    "familia": "CAUCHO",
+    "nombre": "Negra y verde flúor",
+    "coste": 9.89
+   },
+   {
+    "id": "CBLA",
+    "familia": "CAUCHO",
+    "nombre": "Blanca",
+    "coste": 9.89
+   },
+   {
+    "id": "CNBL",
+    "familia": "CAUCHO",
+    "nombre": "Negra y blanca"
+   },
+   {
+    "id": "CBOR",
+    "familia": "CAUCHO",
+    "nombre": "Blanca y oro rosa"
+   },
+   {
+    "id": "CNGR",
+    "familia": "CAUCHO",
+    "nombre": "Negra y gris"
+   },
+   {
+    "id": "CAZC",
+    "familia": "CAUCHO",
+    "nombre": "Azul celeste"
+   },
+   {
+    "id": "CBGR",
+    "familia": "CAUCHO",
+    "nombre": "Blanca y gris"
+   },
+   {
+    "id": "PCAQ",
+    "familia": "PPER",
+    "nombre": "Caqui oliva",
+    "coste": 6.69
+   },
+   {
+    "id": "PCON",
+    "familia": "PPER",
+    "nombre": "Coñac y naranja",
+    "coste": 6.69
+   },
+   {
+    "id": "PMAR",
+    "familia": "PPER",
+    "nombre": "Marrón",
+    "coste": 6.69
+   },
+   {
+    "id": "PNEG",
+    "familia": "PPER",
+    "nombre": "Negra",
+    "coste": 6.69
+   },
+   {
+    "id": "IMAR",
+    "familia": "PITA",
+    "nombre": "Marrón"
+   },
+   {
+    "id": "INEG",
+    "familia": "PITA",
+    "nombre": "Negra"
+   },
+   {
+    "id": "IVER",
+    "familia": "PITA",
+    "nombre": "Verde"
+   },
+   {
+    "id": "IAZU",
+    "familia": "PITA",
+    "nombre": "Azul"
+   },
+   {
+    "id": "VBEI",
+    "familia": "TELA",
+    "nombre": "Beige"
+   },
+   {
+    "id": "VMAL",
+    "familia": "TELA",
+    "nombre": "Malva"
+   },
+   {
+    "id": "VNEG",
+    "familia": "TELA",
+    "nombre": "Negra"
+   },
+   {
+    "id": "VGRI",
+    "familia": "TELA",
+    "nombre": "Gris"
+   },
+   {
+    "id": "VAZU",
+    "familia": "TELA",
+    "nombre": "Azul claro"
+   }
   ],
   "pespuntes": [
-   {"id": "T", "nombre": "Al tono", "coste": 0, "ref": "T"},
-   {"id": "B", "nombre": "Blanco", "coste": 0, "ref": "B"}
+   {
+    "id": "T",
+    "nombre": "Al tono",
+    "coste": 0,
+    "ref": "T"
+   },
+   {
+    "id": "B",
+    "nombre": "Blanco",
+    "coste": 0,
+    "ref": "B"
+   }
   ],
   "cierres": [
-   {"id": "plata",    "nombre": "Clásica plata", "coste": 0,
-    "expl": "Hebilla clásica de acero plateado."},
-   {"id": "negra",    "nombre": "Clásica negra", "coste": 1.20,
-    "expl": "Hebilla clásica de acero con PVD negro."},
-   {"id": "oro-rosa", "nombre": "Clásica oro rosa", "coste": 0,
-    "expl": "Hebilla clásica en oro rosa."},
-   {"id": "oro",      "nombre": "Clásica oro", "coste": 1.00,
-    "expl": "Hebilla clásica dorada."},
-   {"id": "mariposa", "nombre": "Mariposa plata", "coste": 0.20,
-    "expl": "Cierre de mariposa de acero plateado."}
+   {
+    "id": "plata",
+    "nombre": "Clásica plata",
+    "coste": 0,
+    "expl": "Hebilla clásica de acero plateado."
+   },
+   {
+    "id": "negra",
+    "nombre": "Clásica negra",
+    "coste": 1.2,
+    "expl": "Hebilla clásica de acero con PVD negro."
+   },
+   {
+    "id": "oro-rosa",
+    "nombre": "Clásica oro rosa",
+    "coste": 0,
+    "expl": "Hebilla clásica en oro rosa."
+   },
+   {
+    "id": "oro",
+    "nombre": "Clásica oro",
+    "coste": 1.0,
+    "expl": "Hebilla clásica dorada."
+   },
+   {
+    "id": "mariposa",
+    "nombre": "Mariposa plata",
+    "coste": 0.2,
+    "expl": "Cierre de mariposa de acero plateado."
+   }
   ],
   "colores_cierre": []
  },
-
  "filtros": {
-  "correa": {"paso": "correamat", "campo": "familia"}
+  "correa": {
+   "paso": "correamat",
+   "campo": "familia"
+  }
  },
-
  "puertas": {
-  "pespunte": {"paso": "correamat", "campo": "pespunte"},
-  "cierre":   {"paso": "correamat", "campo": "cierre"}
+  "pespunte": {
+   "paso": "correamat",
+   "campo": "pespunte"
+  },
+  "cierre": {
+   "paso": "correamat",
+   "campo": "cierre"
+  }
  },
-
  "referencia": "LO-02-{mov}-{caja}{tamano}-{esftipo}{esf}-{correa}{pespunte.ref}-{cierre}",
-
- "cadena": ["esftipo", "esf"],
- "combinaciones": [
-  {"esftipo": "K", "esf": "NEG"},
-  {"esftipo": "K", "esf": "BLA"},
-  {"esftipo": "K", "esf": "AZU"},
-  {"esftipo": "K", "esf": "GRI"},
-  {"esftipo": "M", "esf": "MCR"},
-  {"esftipo": "M", "esf": "MBL"}
+ "cadena": [
+  "esftipo",
+  "esf"
  ],
-
+ "combinaciones": [
+  {
+   "esftipo": "K",
+   "esf": "NEG"
+  },
+  {
+   "esftipo": "K",
+   "esf": "BLA"
+  },
+  {
+   "esftipo": "K",
+   "esf": "AZU"
+  },
+  {
+   "esftipo": "K",
+   "esf": "GRI"
+  },
+  {
+   "esftipo": "M",
+   "esf": "MCR"
+  },
+  {
+   "esftipo": "M",
+   "esf": "MBL"
+  }
+ ],
  "extra": 3.78,
  "_extra": "El logotipo grabado, 3,78 €. Va en todos.",
- "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción."
+ "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
+ "montaje": {
+  "img": "/assets/img/trinchera-2026/capas/1200/",
+  "v": "?v=1",
+  "pila": [
+   {
+    "capa": "correa",
+    "grupo": "correa"
+   },
+   {
+    "capa": "esf",
+    "grupo": "esf"
+   },
+   {
+    "capa": "caja",
+    "grupo": "caja"
+   },
+   {
+    "capa": "agujas",
+    "grupo": "mov",
+    "necesita": "esf"
+   }
+  ],
+  "capas": {
+   "caja": {
+    "PL": "caja-acero",
+    "NG": "caja-negra",
+    "BR": "caja-bronce",
+    "TI": "caja-titanio"
+   },
+   "esf": {
+    "NEG": "esfera-negra",
+    "BLA": "esfera-blanca",
+    "AZU": "esfera-azul",
+    "MCR": "esfera-murph-crema",
+    "MBL": "esfera-murph-blanca"
+   },
+   "mov": {
+    "Q": {
+     "MCR": "agujas-murph-crema",
+     "MBL": "agujas-murph-blancas",
+     "*": "agujas"
+    },
+    "A": {
+     "MCR": "agujas-murph-crema",
+     "MBL": "agujas-murph-blancas",
+     "*": "agujas"
+    }
+   }
+  },
+  "_orden": "De abajo arriba: correa, esfera, caja, agujas. La esfera va DEBAJO de la caja: el bisel le tapa el canto, como el reloj de verdad.",
+  "_asas": "LA CAJA SE ESCALA CONTRA LA CORREA. Las correas del Trinchera salen de la biblioteca compartida, dibujada para un hueco de asas de 376 px (1412-2696 en el lienzo de 4096): la caja se encoge hasta que su hueco mide eso mismo y se coloca con el centro del hueco y el centro de sus dos filas de asa donde los tiene la caja del Lunar. Asi cualquier correa de la biblioteca le entra igual de bien.",
+  "_agujas": "Cuelgan de `mov`, que siempre tiene valor, y con TABLA POR ESFERA: el Murph lleva sus propias agujas, con los numerales en crema o en blanco, y el resto las de siempre (el comodin `*`). `necesita: esf` para que no floten solas.",
+  "_esferas": "El mapeo lo elegi yo mirando los dibujos y hay que confirmarlo: NEG sale de «esfera-logo-6mm», BLA de «blanca-mate», AZU de «azul-degradado», MCR de «murph-negra-v2» (numerales crema) y MBL de «murph-blanco-plata».",
+  "_faltan": "SIN DIBUJO: la esfera GRI (Gris) — la entrega no trae ninguna gris. Y sobra una «berenjena y ocre» que no esta en la ficha. Ademas los dos tamanos (36 y 39 mm) comparten el mismo dibujo de caja: el configurador no los distingue.",
+  "_montado": "Montado el 30/08/2026 con herramientas/capas_trinchera.py desde tri/outputs/transparentes/, que esta vez SI trae alfa de verdad."
+ }
 }
