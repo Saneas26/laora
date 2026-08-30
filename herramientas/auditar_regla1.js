@@ -43,7 +43,7 @@ function prepara() {
      ningún lado se aborta: un verde que no ha medido nada es peor que no
      tener auditor. */
   s = s.replace('const cuerpo = suelto || enLinea;',
-    "if (process.env.SUELO) { const R = /var (COMISION(?:_2026)?) = 0\\.025/g;\n"
+    "if (process.env.SUELO) { const R = /var (COMISION(?:_2026)?) = 0\\.\\d+/g;  // cualquier valor: desde el 30/08 la buena ES 0.05, y esto caza a quien la baje\n"
     + "    const n = (precio.match(R) || []).length + (enLinea.match(R) || []).length + (suelto.match(R) || []).length;\n"
     + "    if (!n) throw new Error('AUDITOR CIEGO: no encuentro la constante del suelo en ' + fichero);\n"
     + "    precio = precio.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO);\n"
@@ -72,10 +72,22 @@ function pasada(script, suelo) {
 }
 
 const script = prepara();
-const hoy = pasada(script, '0.025');
+/* LA PRIMERA PASADA ES EL CATÁLOGO DE VERDAD, el que cobra el servidor.
+   Hasta el 30/08 se forzaba al 2,5 % —era lo que valía la constante— y
+   al subir el suelo al 5 % esa pasada se convirtió en una mentira: medía
+   un catálogo que ya no existe y cantaba en rojo el arreglo ya hecho. */
+const hoy = JSON.parse(fs.readFileSync(
+  path.join(RAIZ, 'assets/datos/catalogo-2026.json'), 'utf8')).refs;
 const duro = pasada(script, '0.05');
 
-const rotas = Object.keys(hoy).filter((k) => hoy[k].p !== duro[k].p);
+const distintas = Object.keys(hoy).length !== Object.keys(duro).length ||
+  Object.keys(hoy).some((k) => !(k in duro));
+if (distintas) {
+  console.log('✗ el catálogo del disco y el recién volcado no enumeran lo mismo:');
+  console.log('  hay que volcar antes de auditar (node herramientas/volcar_catalogo_2026.js).');
+  process.exit(1);
+}
+const rotas = Object.keys(hoy).filter((k) => hoy[k].p < duro[k].p);
 const eur = (n) => n.toFixed(2).replace('.', ',') + ' €';
 
 console.log(`Catálogo: ${Object.keys(hoy).length} referencias.`);
@@ -98,7 +110,7 @@ for (const [subida, refs] of Object.entries(porSubida).sort((a, b) => b[0] - a[0
   for (const k of refs.slice(0, 5)) console.log(`      ${k}  ${eur(hoy[k].p)} → ${eur(duro[k].p)}`);
   if (refs.length > 5) console.log(`      … y ${refs.length - 5} más`);
 }
-console.log('\n  ARREGLO: poner COMISION a 0.05 en assets/js/precio-2026.js,');
+console.log('\n  ARREGLO: COMISION tiene que valer 0.05 en assets/js/precio-2026.js');
 console.log('  que es donde vive el suelo desde el 29/08. Si alguna ficha');
 console.log('  vieja todavía lo lleva dentro, también ahí. Después, volcar');
 console.log('  el catálogo con herramientas/volcar_catalogo_2026.js.');

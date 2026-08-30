@@ -368,7 +368,7 @@ def modelo_js(d, dentro):
   };
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
-<script src="/assets/js/precio-2026.js?v=1"></script>
+<script src="/assets/js/precio-2026.js?v=2"></script>
 <script src="/assets/js/configurador-2026.js?v=%(vjsconf)d"></script>""" % {
         'NOMBRE': d['nombre'].upper(), 'slug': d['slug'],
         'nombre': d['nombre'], 'nombrejs': js(d['nombre']), 'slugjs': js(d['slug']),

@@ -41,11 +41,18 @@
      · Seguridad Social: un 5 % del coste. Es un gasto, no un impuesto
        sobre lo que ganas.
 
-     LA COMISIÓN DE LA PASARELA se calcula al 2,5 %: Klarna se lleva el
-     5 %, pero solo la mitad de las ventas van por Klarna (Óscar, 22/08). */
+     LA COMISIÓN, AL 5 % DESDE EL 30/08/2026. Estaba al 2,5 % —la mitad,
+     porque solo la mitad de las ventas van por Klarna— y eso vale para el
+     margen MEDIO, pero no para el SUELO: la REGLA Nº1 se mide con Klarna
+     al 5 % ([[laora-suelo-por-canal]]), porque al cliente concreto que
+     paga por Klarna no se le puede vender por debajo de 50 € limpios. Con
+     el 2,5 % el suelo daba por buenas referencias que, pagadas por
+     Klarna, dejaban 49 y pico: el auditor cazó 192 en el filo. Solo mueve
+     el suelo: la tarifa no cambia, y únicamente suben las referencias que
+     estaban en el borde. */
   var PACKING_ENVIO = 9;                   // con IVA, como siempre
   var GARANTIA = 4;                        // fondo de garantía por reloj
-  var COMISION = 0.025;                    // 5 % de Klarna en la mitad de las ventas
+  var COMISION = 0.05;                     // el 5 % entero: el suelo protege al que paga por Klarna
   function costeCompleto(c) {
     return (c + PACKING_ENVIO / (1 + IVA) + GARANTIA) * (1 + SS);
   }
