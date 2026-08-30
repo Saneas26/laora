@@ -136,11 +136,15 @@
  "_agujas": "Nuevas el 30/08/2026. Coste 0 y no null: van DENTRO del movimiento, como la caja (ver _coste). Entran en la referencia: sin ellas, dos relojes con agujas distintas viajarían con el mismo código y el pedido no diría cuál quiere.",
  "montaje": {
   "img": "/assets/img/precisa-2026/capas/1200/",
-  "v": "?v=1",
+  "v": "?v=2",
   "pila": [
    {
     "capa": "esf",
     "grupo": "esf"
+   },
+   {
+    "capa": "caja",
+    "grupo": "caja"
    },
    {
     "capa": "agujas",
@@ -163,7 +167,11 @@
     "PLA": "agujas-plata",
     "ORO": "agujas-oro-rosa",
     "NEG": "agujas-negras"
+   },
+   "caja": {
+    "PL": "caja-brazalete-acero"
    }
-  }
+  },
+  "_orden": "La esfera va DEBAJO de la caja a propósito: el aro de la caja tapa el canto de la esfera (35 px por lado), como el reloj de verdad, y así el encaje es perfecto sin medir la esfera contra el hueco. Las agujas, encima de todo. La caja llegó el 30/08/2026 en un fichero llamado «trinchera» por error: es la del Precisa, y Óscar confirmó dónde montarla."
  }
 }

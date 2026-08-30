@@ -663,9 +663,15 @@
     if (abre) abre.hidden = !CRIBA_VISIBLE;
     if (!CAPAS) return;
     var puestas = {};
-    PILA.forEach(function (p) {
+    PILA.forEach(function (p, alturaEnLaPila) {
       var img = caja.querySelector('[data-capa="' + p.capa + '"]');
       if (!img) return;
+      /* EL ORDEN DE APILADO ES EL DE LA PILA, no el del HTML. La plantilla
+         trae los cinco huecos en el orden del Lunar (correa, caja, bisel,
+         esfera, agujas), y el Precisa apila distinto: su esfera va DEBAJO
+         de la caja, que la tapa por el canto como el reloj de verdad. Sin
+         esto, el orden del modelo se ignoraba en silencio (30/08/2026). */
+      img.style.zIndex = String(alturaEnLaPila + 1);
       var f = ficheroCapa(p.grupo, e[p.grupo]);
       var toca = !p.espera || !!tocado[p.espera];
       var apoyo = !p.necesita || !!puestas[p.necesita];
