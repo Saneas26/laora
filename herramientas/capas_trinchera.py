@@ -45,6 +45,13 @@ ASAS_HUECO = 376.0
 ASAS_CX = 601.5          # centro del hueco entre asas
 ASAS_CY = 554.5          # centro entre la fila de arriba y la de abajo
 HOLGURA_ESF = 1.02       # la esfera se mete un pelín bajo el bisel
+# LAS AGUJAS NO SE COLOCAN A LA ESCALA DE LA ESFERA (Óscar, 30/08/2026:
+# «hay que reducir la imagen de las agujas, se salen de la esfera»). Y es
+# verdad: puestas a la escala de la esfera llegaban a 404 px cuando la
+# pista de minutos se acaba en 270. El dibujo de las agujas viene más
+# largo de lo que le toca a esta esfera, así que se encoge hasta que la
+# más larga muere justo dentro de la pista.
+PUNTA_AGUJA = 0.98       # de la pista de minutos de la esfera
 
 CAJAS = {'caja-acero': 'trinchera-caja-acero.png',
          'caja-negra': 'trinchera-caja-pvd-negro.png',
@@ -180,11 +187,33 @@ def monta():
     for ident, f in sorted(ESFERAS.items()):
         capas[ident] = pon(Image.open(ENTREGA + f).convert('RGBA'), se,
                            eje_esfera(ENTREGA + f), eje)
-    # las agujas, al eje y a la escala de la esfera
+    # la pista de minutos de la esfera, ya colocada: hasta ahí llegan las agujas
+    pista = pista_de_la_esfera(capas['esfera-negra'], eje)
+    print('PISTA de minutos a %.1f px · las agujas mueren en %.1f' % (pista, pista * PUNTA_AGUJA))
     for ident, f in sorted(AGUJAS.items()):
-        capas[ident] = pon(Image.open(ENTREGA + f).convert('RGBA'), se, buje(ENTREGA + f), eje)
-        print('AGUJAS %-22s buje %.1f,%.1f' % (ident, *buje(ENTREGA + f)))
+        b = buje(ENTREGA + f)
+        im = Image.open(ENTREGA + f).convert('RGBA')
+        m = np.asarray(im)[:, :, 3] > 128
+        ys, xs = np.where(m)
+        largo = float(np.hypot(xs - b[0], ys - b[1]).max())
+        sa = pista * PUNTA_AGUJA / largo
+        capas[ident] = pon(im, sa, b, eje)
+        print('AGUJAS %-22s buje %.0f,%.0f · largo %.0f -> %.0f px (escala %.4f)'
+              % (ident, b[0], b[1], largo, largo * sa, sa))
     return capas
+
+
+def pista_de_la_esfera(capa, eje):
+    """Hasta dónde llega el dibujo de la esfera: su anillo claro de fuera."""
+    a = np.asarray(capa).astype(float)
+    m = a[:, :, 3] > 128
+    L = a[:, :, :3].mean(2)
+    y, x = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    r = np.hypot(x - eje[0], y - eje[1])
+    claro = m & (L > 150)
+    if not claro.any():
+        return float(r[m].max())
+    return float(np.percentile(r[claro], 99.5))
 
 
 def hoja(capas, destino):

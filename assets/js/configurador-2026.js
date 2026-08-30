@@ -548,7 +548,14 @@
          si el modelo sabe armarlo, se le pregunta. */
       if (M.piezaDe) return M.piezaDe(e);
       var c = CORREAS[valor];
-      return c && c.pieza ? c.pieza : null;
+      if (!c || !c.pieza) return null;
+      if (typeof c.pieza === 'string') return c.pieza;
+      /* Y UNA CORREA PUEDE LLAMARSE DISTINTO SEGÚN OTRO PASO: la piel lleva
+         el pespunte dentro del nombre del fichero. El Lunar lo resolvía con
+         su propio `piezaDe`, que es de la casa; un modelo generado no tiene
+         dónde escribir eso, así que lo declara como tabla en la ficha —la
+         misma idea que `CAPA`, que ya admite una tabla por esfera. */
+      return c.pieza[e.pespunte] || c.pieza['*'] || null;
     }
     var v = CAPA[grupo] && CAPA[grupo][valor];
     if (!v) return null;

@@ -194,124 +194,170 @@
     "id": "A316P",
     "familia": "A316",
     "nombre": "Acero, centro pulido",
-    "coste": 20.19
+    "coste": 20.19,
+    "pieza": "acero-316l-centro-pulido"
    },
    {
     "id": "A316NGP",
     "familia": "A316",
     "nombre": "PVD negro, centro pulido",
-    "coste": 20.19
+    "coste": 20.19,
+    "pieza": "acero-316l-pvd-negro-centro-pulido"
    },
    {
     "id": "A316ORP",
     "familia": "A316",
     "nombre": "Centro oro rosa pulido",
-    "coste": 20.19
+    "coste": 20.19,
+    "pieza": "acero-316l-centro-oro-rosa-pulido"
    },
    {
     "id": "A316AMP",
     "familia": "A316",
     "nombre": "Centro oro amarillo pulido",
-    "coste": 20.19
+    "coste": 20.19,
+    "pieza": "acero-316l-centro-oro-amarillo-pulido"
    },
    {
     "id": "CAZU",
     "familia": "CAUCHO",
     "nombre": "Azul",
-    "coste": 9.89
+    "coste": 9.89,
+    "pieza": "caucho-azul"
    },
    {
     "id": "CAZN",
     "familia": "CAUCHO",
     "nombre": "Azul y naranja",
-    "coste": 9.89
+    "coste": 9.89,
+    "pieza": "caucho-azul-naranja"
    },
    {
     "id": "CMAC",
     "familia": "CAUCHO",
     "nombre": "Marrón y crema",
-    "coste": 9.89
+    "coste": 9.89,
+    "pieza": "caucho-marron-crema"
    },
    {
     "id": "CNVF",
     "familia": "CAUCHO",
     "nombre": "Negra y verde flúor",
-    "coste": 9.89
+    "coste": 9.89,
+    "pieza": "caucho-negra-verde-fluor"
    },
    {
     "id": "CBLA",
     "familia": "CAUCHO",
     "nombre": "Blanca",
-    "coste": 9.89
+    "coste": 9.89,
+    "pieza": "caucho-blanca"
    },
    {
     "id": "CNBL",
     "familia": "CAUCHO",
-    "nombre": "Negra y blanca"
+    "nombre": "Negra y blanca",
+    "pieza": "caucho-negra-blanca"
    },
    {
     "id": "CBOR",
     "familia": "CAUCHO",
-    "nombre": "Blanca y oro rosa"
+    "nombre": "Blanca y oro rosa",
+    "pieza": "caucho-blanca-oro-rosa"
    },
    {
     "id": "CNGR",
     "familia": "CAUCHO",
-    "nombre": "Negra y gris"
+    "nombre": "Negra y gris",
+    "pieza": "caucho-negra-gris"
    },
    {
     "id": "CAZC",
     "familia": "CAUCHO",
-    "nombre": "Azul celeste"
+    "nombre": "Azul celeste",
+    "pieza": "caucho-azul-celeste"
    },
    {
     "id": "CBGR",
     "familia": "CAUCHO",
-    "nombre": "Blanca y gris"
+    "nombre": "Blanca y gris",
+    "pieza": "caucho-blanca-gris"
    },
    {
     "id": "PCAQ",
     "familia": "PPER",
     "nombre": "Caqui oliva",
-    "coste": 6.69
+    "coste": 6.69,
+    "pieza": {
+     "B": "piel-perforada-caqui-oliva-pespunte-blanco",
+     "*": "piel-perforada-caqui-oliva-pespunte-al-tono"
+    }
    },
    {
     "id": "PCON",
     "familia": "PPER",
     "nombre": "Coñac y naranja",
-    "coste": 6.69
+    "coste": 6.69,
+    "pieza": {
+     "B": "piel-perforada-conac-naranja-pespunte-blanco",
+     "*": "piel-perforada-conac-naranja-pespunte-al-tono"
+    }
    },
    {
     "id": "PMAR",
     "familia": "PPER",
     "nombre": "Marrón",
-    "coste": 6.69
+    "coste": 6.69,
+    "pieza": {
+     "B": "piel-perforada-marron-pespunte-blanco",
+     "*": "piel-perforada-marron-pespunte-al-tono"
+    }
    },
    {
     "id": "PNEG",
     "familia": "PPER",
     "nombre": "Negra",
-    "coste": 6.69
+    "coste": 6.69,
+    "pieza": {
+     "B": "piel-perforada-negra-pespunte-blanco",
+     "*": "piel-perforada-negra-pespunte-al-tono"
+    }
    },
    {
     "id": "IMAR",
     "familia": "PITA",
-    "nombre": "Marrón"
+    "nombre": "Marrón",
+    "pieza": {
+     "B": "piel-italiana-marron-pespunte-blanco",
+     "*": "piel-italiana-marron-pespunte-al-tono"
+    }
    },
    {
     "id": "INEG",
     "familia": "PITA",
-    "nombre": "Negra"
+    "nombre": "Negra",
+    "pieza": {
+     "B": "piel-italiana-negra-pespunte-blanco",
+     "*": "piel-italiana-negra-pespunte-al-tono"
+    }
    },
    {
     "id": "IVER",
     "familia": "PITA",
-    "nombre": "Verde"
+    "nombre": "Verde",
+    "pieza": {
+     "B": "piel-italiana-verde-pespunte-blanco",
+     "*": "piel-italiana-verde-pespunte-al-tono"
+    }
    },
    {
     "id": "IAZU",
     "familia": "PITA",
-    "nombre": "Azul"
+    "nombre": "Azul",
+    "pieza": {
+     "B": "piel-italiana-azul-pespunte-blanco",
+     "*": "piel-italiana-azul-pespunte-al-tono"
+    }
    },
    {
     "id": "VBEI",
@@ -326,17 +372,20 @@
    {
     "id": "VNEG",
     "familia": "TELA",
-    "nombre": "Negra"
+    "nombre": "Negra",
+    "pieza": "vaquera-negra"
    },
    {
     "id": "VGRI",
     "familia": "TELA",
-    "nombre": "Gris"
+    "nombre": "Gris",
+    "pieza": "vaquera-gris"
    },
    {
     "id": "VAZU",
     "familia": "TELA",
-    "nombre": "Azul claro"
+    "nombre": "Azul claro",
+    "pieza": "vaquera-azul-claro"
    }
   ],
   "pespuntes": [
@@ -385,7 +434,8 @@
     "expl": "Cierre de mariposa de acero plateado."
    }
   ],
-  "colores_cierre": []
+  "colores_cierre": [],
+  "_piezas": "Cada correa dice qué dibujo de la BIBLIOTECA compartida es (30/08/2026). Las de piel llevan el pespunte dentro del nombre del fichero, así que su `pieza` es una TABLA por el paso `pespunte`: «B» el blanco y «*» el resto. SIN DIBUJO se quedan VBEI (beige) y VMAL (malva): la tela vaquera se rehizo el 30/08 y esos dos colores se fueron —entraron arena y topo—, así que sus piezas ya no existen. O se cambian los dos colores por arena y topo, o esas referencias salen sin correa."
  },
  "filtros": {
   "correa": {
@@ -439,7 +489,7 @@
  "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
  "montaje": {
   "img": "/assets/img/trinchera-2026/capas/1200/",
-  "v": "?v=1",
+  "v": "?v=2",
   "pila": [
    {
     "capa": "correa",
