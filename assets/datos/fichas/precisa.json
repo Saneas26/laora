@@ -136,7 +136,7 @@
  "_agujas": "Nuevas el 30/08/2026. Coste 0 y no null: van DENTRO del movimiento, como la caja (ver _coste). Entran en la referencia: sin ellas, dos relojes con agujas distintas viajarían con el mismo código y el pedido no diría cuál quiere.",
  "montaje": {
   "img": "/assets/img/precisa-2026/capas/1200/",
-  "v": "?v=2",
+  "v": "?v=3",
   "pila": [
    {
     "capa": "esf",
@@ -155,10 +155,10 @@
   "capas": {
    "esf": {
     "AZM": "esfera-azul-marino",
-    "AZD": "esfera-azul-hielo",
+    "AZD": "esfera-turquesa",
     "BLA": "esfera-blanca",
     "NEG": "esfera-antracita",
-    "TIF": "esfera-turquesa",
+    "TIF": "esfera-azul-hielo",
     "VER": "esfera-verde",
     "NAR": "esfera-naranja",
     "BOR": "esfera-blanca-oro-rosa"
@@ -172,6 +172,7 @@
     "PL": "caja-brazalete-acero"
    }
   },
-  "_orden": "La esfera va DEBAJO de la caja a propósito: el aro de la caja tapa el canto de la esfera (35 px por lado), como el reloj de verdad, y así el encaje es perfecto sin medir la esfera contra el hueco. Las agujas, encima de todo. La caja llegó el 30/08/2026 en un fichero llamado «trinchera» por error: es la del Precisa, y Óscar confirmó dónde montarla."
+  "_orden": "La esfera va DEBAJO de la caja a propósito: el aro de la caja tapa el canto de la esfera (35 px por lado), como el reloj de verdad, y así el encaje es perfecto sin medir la esfera contra el hueco. Las agujas, encima de todo. La caja llegó el 30/08/2026 en un fichero llamado «trinchera» por error: es la del Precisa, y Óscar confirmó dónde montarla.",
+  "_esferas_cruzadas": "Los FICHEROS de la entrega llegaron cruzados: el que se llama «esfera-turquesa» dibuja el azul hielo y el «esfera-azul-hielo» dibuja el turquesa. Lo vio Óscar el 30/08/2026 en la ficha. Se cruza AQUÍ el mapeo en vez de renombrar los ficheros, y queda dicho para que nadie lo «arregle» al revés."
  }
 }
