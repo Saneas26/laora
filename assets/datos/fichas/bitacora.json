@@ -387,5 +387,54 @@
   "esf",
   "correa"
  ],
- "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen."
+ "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
+ "montaje": {
+  "img": "/assets/img/bitacora-2026/capas/1200/",
+  "v": "?v=1",
+  "pila": [
+   {
+    "capa": "correa",
+    "grupo": "correa"
+   },
+   {
+    "capa": "esf",
+    "grupo": "esf"
+   },
+   {
+    "capa": "caja",
+    "grupo": "caja"
+   },
+   {
+    "capa": "agujas",
+    "grupo": "mov",
+    "necesita": "esf"
+   }
+  ],
+  "capas": {
+   "correa": {
+    "Brz-Acero-Bit-01": "brazalete-acero",
+    "Brz-Acero-Bit-06": "brazalete-oro-rosa",
+    "Brz-Acero-Bit-02": "brazalete-negro-pvd"
+   },
+   "esf": {
+    "E1": "esfera-turquesa",
+    "E2": "esfera-blanca",
+    "E3": "esfera-negra",
+    "E4": "esfera-azul"
+   },
+   "caja": {
+    "C1": "caja-plata",
+    "C3": "caja-oro-rosa",
+    "C4": "caja-negro-pvd"
+   },
+   "mov": {
+    "A": "agujas"
+   }
+  },
+  "_orden": "De abajo arriba: brazalete, esfera, caja, agujas. La esfera va DEBAJO de la caja a proposito: el bisel le tapa el canto, como el reloj de verdad, y asi el encaje es perfecto sin medir la esfera contra el hueco. El brazalete, debajo de todo, porque su primer eslabon se mete bajo el asa.",
+  "_agujas": "Cuelgan de `mov` porque la Bitacora no tiene paso de agujas: hay un solo juego y un solo movimiento, asi que `mov` es el grupo que SIEMPRE tiene valor. `necesita: esf` para que no floten en el aire antes de elegir esfera.",
+  "_correa": "El brazalete NO sale de la biblioteca de componentes: es integrado, nace de la caja y no encaja en ningun otro reloj. Vive en la carpeta del modelo, y el motor lo respeta porque `CAPA.correa` existe (configurador-2026.js, 30/08/2026).",
+  "_montado": "Montado el 30/08/2026 con la entrega de Oscar, por herramientas/capas_bitacora.py, que mide y coloca cada pieza. La entrega llego en RGB con un damero DIBUJADO en vez de alfa: el script se lo quita.",
+  "_faltan": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron), el brazalete Brz-Acero-Bit-07 (acero plata y oro rosa) y las tres correas de goma. La entrega trajo ademas dos cajas (bronce y oro) y una esfera (cobre) que NO estan en la ficha: no se anaden hasta que Oscar diga que se venden y a que coste."
+ }
 }

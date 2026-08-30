@@ -452,8 +452,28 @@
        flotar solo, como las agujas sin su esfera) y `capas` dice qué
        fichero dibuja cada opción. El que no traiga nada se queda sin
        dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
-    CAPA: {}, CAPA_IMG: "", SERIE_V: "",
-    PILA: [],
+    CAPA: {
+    "correa": {
+      "Brz-Acero-Bit-01": "brazalete-acero",
+      "Brz-Acero-Bit-06": "brazalete-oro-rosa",
+      "Brz-Acero-Bit-02": "brazalete-negro-pvd"
+    },
+    "esf": {
+      "E1": "esfera-turquesa",
+      "E2": "esfera-blanca",
+      "E3": "esfera-negra",
+      "E4": "esfera-azul"
+    },
+    "caja": {
+      "C1": "caja-plata",
+      "C3": "caja-oro-rosa",
+      "C4": "caja-negro-pvd"
+    },
+    "mov": {
+      "A": "agujas"
+    }
+  }, CAPA_IMG: "/assets/img/bitacora-2026/capas/1200/", SERIE_V: "?v=1",
+    PILA: [{"capa": "correa", "grupo": "correa"}, {"capa": "esf", "grupo": "esf"}, {"capa": "caja", "grupo": "caja"}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -474,6 +494,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=7"></script>
+<script src="/assets/js/configurador-2026.js?v=9"></script>
 </body>
 </html>

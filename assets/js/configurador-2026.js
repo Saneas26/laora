@@ -535,8 +535,14 @@
      por esfera y `'*'` de comodín. */
   function ficheroCapa(grupo, valor, esf) {
     /* LA CORREA SALE DE LA BIBLIOTECA, no de la tabla del modelo: es una
-       pieza compartida y se llama por lo que es. */
-    if (grupo === 'correa') {
+       pieza compartida y se llama por lo que es.
+
+       SALVO QUE EL MODELO LA TRAIGA EN SU PROPIA TABLA. El brazalete
+       integrado de la Bitácora no es una pieza compartida: sale de la caja,
+       se estrecha con ella y no encaja en ningún otro reloj, así que vive
+       en la carpeta del modelo como la caja o la esfera. Si `CAPA.correa`
+       existe, manda ella (30/08/2026). */
+    if (grupo === 'correa' && !CAPA.correa) {
       /* Y el nombre de la pieza puede depender de más de un paso —el
          pespunte de la piel va en el mismo fichero que el color—, así que
          si el modelo sabe armarlo, se le pregunta. */
@@ -556,7 +562,10 @@
      rehechas, que es lo que Óscar dijo el 29/08: se rehace todo. */
   var COMPONENTE_IMG = '/assets/img/componentes/';
   function baseCapa(grupo) {
-    return grupo === 'correa' ? COMPONENTE_IMG + 'correas/1200/' : CAPA_IMG;
+    /* Y la correa que el modelo trae en su propia tabla sale de su carpeta,
+       no de la biblioteca: ver `ficheroCapa`. */
+    return (grupo === 'correa' && !CAPA.correa)
+      ? COMPONENTE_IMG + 'correas/1200/' : CAPA_IMG;
   }
   function urlCapa(grupo, valor, esf) {
     var f = ficheroCapa(grupo, valor, esf);
@@ -854,10 +863,24 @@
     if (!PAQUETES.length || !CADENA.length) return;
     var fij = {};
     CADENA.forEach(function (k) {
-      var ok = valores(k, fij);
-      if (!ok.length) return;
+      var todos = valores(k, fij);
+      if (!todos.length) return;
+      /* ⚠️ EL FILTRO TAMBIÉN MANDA AQUÍ (30/08/2026). El repaso de arriba
+         cambiaba bien la correa al cambiar de material, y esta línea la
+         devolvía a la primera que existe con la caja y la esfera puestas,
+         que es de acero: la Bitácora se quedaba con «Goma» elegido y la
+         referencia LO-04-C3-E1-Brz-Acero-Bit-06 en el carrito. Con el
+         montaje por capas encima se veía, porque dibujaba el brazalete. */
+      var ok = todos.filter(function (v) { return valeEn(k, v); });
+      if (!ok.length) ok = todos;
       if (ok.indexOf(e[k]) < 0) e[k] = ok[0];
       fij[k] = e[k];
+      /* Y si se ha cedido —esa familia no se monta con lo elegido arriba—,
+         el paso del que cuelga se pone al de la pieza que ha quedado. Manda
+         la pieza, no la etiqueta. */
+      var f = M.FILTROS && M.FILTROS[k];
+      var o = f && M.OPCIONES && M.OPCIONES[k] && M.OPCIONES[k][e[k]];
+      if (f && o && e[f.paso] !== o[f.campo]) e[f.paso] = o[f.campo];
     });
   }
 
