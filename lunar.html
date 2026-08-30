@@ -527,6 +527,17 @@
     PVNE: { nombre: 'Negra', coste: 16.89, pieza: 'piel-vintage-negra',
             tec: 'correa de piel vintage negra de 20 mm, pespunte crema en contraste, hebilla clásica negra' },
 
+    /* --- Piel con costura lateral · tres colores (30/08/2026) ---
+       El estilo vintage de costura vista a los lados, en hilo crema, con
+       su hebilla clásica plateada dibujada. A 7,69 DE COSTE los tres
+       (anuncio 1005010114856652). */
+    LCON: { nombre: 'Coñac', coste: 7.69, pieza: 'piel-costura-lateral-conac',
+            tec: 'correa de piel coñac de 20 mm con costura lateral en crema, hebilla clásica plateada' },
+    LMAR: { nombre: 'Marrón oscuro', coste: 7.69, pieza: 'piel-costura-lateral-marron-oscuro',
+            tec: 'correa de piel marrón oscuro de 20 mm con costura lateral en crema, hebilla clásica plateada' },
+    LNEG: { nombre: 'Negra', coste: 7.69, pieza: 'piel-costura-lateral-negra',
+            tec: 'correa de piel negra de 20 mm con costura lateral en crema, hebilla clásica plateada' },
+
     /* --- Piel italiana hecha a mano · cuatro colores (30/08/2026) ---
        Genuina, grabada en coco, y LA VUELTA DEL PESPUNTE: cada color se
        elige con el pespunte claro o a color (el del azul es azul y oro
@@ -564,6 +575,7 @@
     KNBL: 'CAUCHO', KNNO: 'CAUCHO', KNEG: 'CAUCHO', KRNE: 'CAUCHO',
     PNEG: 'PPER', PCON: 'PPER', PMAR: 'PPER', PVER: 'PPER',
     PVAZ: 'PVIN', PVBU: 'PVIN', PVCO: 'PVIN', PVMO: 'PVIN', PVNE: 'PVIN',
+    LCON: 'PCOS', LMAR: 'PCOS', LNEG: 'PCOS',
     IMAR: 'PITA', INEG: 'PITA', IAZU: 'PITA', IVER: 'PITA',
     VARE: 'TELA', VAZU: 'TELA', VGRI: 'TELA', VNEG: 'TELA', VTOP: 'TELA'
   };
@@ -591,6 +603,9 @@
               expl: 'Silicona de alta calidad: antimicrobiana, transpirable y ' +
                     'resistente al sudor. Cómoda durante horas, y la única que ' +
                     'se puede mojar sin pensarlo.' },
+    PCOS:   { nombre: 'Piel con costura lateral',
+              expl: 'Piel de aire vintage con la costura vista a los lados, en ' +
+                    'hilo crema. Se ablanda con el uso, pero no se moja.' },
     PITA:   { nombre: 'Piel italiana hecha a mano',
               expl: 'Piel italiana genuina, hecha a mano y grabada en coco, con el ' +
                     'pespunte a elegir. De vestir; no se moja.' },
@@ -637,7 +652,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=44';
+  var SERIE_V = '?v=45';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -820,6 +835,7 @@
      30/08/2026: «con hebillas clásicas negra, plata, oro rosa o dorada,
      pero mariposa solo plata». */
   var CIERRE_FIJO = { PPER: ['HEBP'], TELA: ['MARP'], PVIN: ['HEBN', 'HEBP'],
+                      PCOS: ['HEBP'],
                       PITA: ['MARP', 'HEBN', 'HEBP', 'HEBO', 'HEBD'],
                       /* el caucho elige su mariposa en cualquier metal
                          (Óscar, 30/08/2026) */
@@ -874,6 +890,9 @@
     PVCO: ['/assets/img/componentes/correas/enteras/piel-vintage-conac'],
     PVMO: ['/assets/img/componentes/correas/enteras/piel-vintage-marron-oscuro'],
     PVNE: ['/assets/img/componentes/correas/enteras/piel-vintage-negra'],
+    LCON: ['/assets/img/componentes/correas/enteras/piel-costura-lateral-conac'],
+    LMAR: ['/assets/img/componentes/correas/enteras/piel-costura-lateral-marron-oscuro'],
+    LNEG: ['/assets/img/componentes/correas/enteras/piel-costura-lateral-negra'],
     IMAR: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-marron'],
     INEG: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-negra'],
     IAZU: ['/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-azul'],
@@ -907,6 +926,9 @@
     '/assets/img/componentes/correas/enteras/piel-vintage-conac': 'La correa de piel vintage coñac completa, con su hebilla negra',
     '/assets/img/componentes/correas/enteras/piel-vintage-marron-oscuro': 'La correa de piel vintage marrón oscuro completa, con su hebilla negra',
     '/assets/img/componentes/correas/enteras/piel-vintage-negra': 'La correa de piel vintage negra completa, con su hebilla negra',
+    '/assets/img/componentes/correas/enteras/piel-costura-lateral-conac': 'La correa de piel coñac con costura lateral completa, con su hebilla',
+    '/assets/img/componentes/correas/enteras/piel-costura-lateral-marron-oscuro': 'La correa de piel marrón oscuro con costura lateral completa, con su hebilla',
+    '/assets/img/componentes/correas/enteras/piel-costura-lateral-negra': 'La correa de piel negra con costura lateral completa, con su hebilla',
     '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-marron': 'La correa de piel italiana marrón completa, con su mariposa',
     '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-negra': 'La correa de piel italiana negra completa, con su mariposa',
     '/assets/img/componentes/correas/enteras/piel-italiana-cocodrilo-azul': 'La correa de piel italiana azul completa, con su mariposa',
