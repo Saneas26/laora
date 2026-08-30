@@ -19,7 +19,15 @@
     "id": "PL",
     "nombre": "Acero 316L",
     "expl": "Acero inoxidable 316L pulido y cepillado.",
-    "coste": 0
+    "coste": 0,
+    "ref": ""
+   },
+   {
+    "id": "NA",
+    "nombre": "Negro arena",
+    "expl": "Acero 316L con recubrimiento negro y textura de arena en relieve, caja y brazalete.",
+    "coste": 72.99,
+    "ref": "-NA"
    }
   ],
   "integrada": true
@@ -87,6 +95,11 @@
     "id": "NEG",
     "nombre": "Negras",
     "coste": 0
+   },
+   {
+    "id": "AZU",
+    "nombre": "Azul",
+    "coste": 0
    }
   ]
  },
@@ -129,14 +142,14 @@
  },
  "extra": 3.78,
  "agua": "",
- "_coste": "El coste sale de precisa.html: por movimiento, su calibre más su caja más sus agujas —la caja y el brazalete integrado van DENTRO del movimiento, por eso los demás pasos llevan 0—; por esfera, 10,39; y el logo, 3,78, en `extra`. Un 0 es «no añade coste»; no poner nada es «no se sabe», y entonces no se vende.",
- "referencia": "LO-01-{mov}-40{mov.tapa}-{esf}-{agujas}",
- "_referencia": "CAMBIÓ el 30/08/2026 al entrar las agujas: `LO-01-Q-40S-AZM-PLA`. Las doce referencias anteriores (sin cola de agujas) ya no se resuelven. La S y la C son la tapa, del propio movimiento.",
+ "_coste": "El coste sale de precisa.html: por movimiento, su calibre más su caja más sus agujas —la caja y el brazalete integrado van DENTRO del movimiento, por eso los demás pasos llevan 0—; por esfera, 10,39; y el logo, 3,78, en `extra`. Un 0 es «no añade coste»; no poner nada es «no se sabe», y entonces no se vende. LA CAJA NEGRA ARENA cuesta 72,99 (Oscar, 30/08/2026: «esta caja tiene un coste de 72,99 para automatico y cuarzo»), y como la de acero va DENTRO del movimiento con coste 0, los 72,99 se SUMAN enteros a lo que ya vale el reloj. Si lo que queria decir es que la caja negra sustituye a la de acero, habria que descontar antes lo que la de acero vale dentro del movimiento, y ese numero no lo tengo.",
+ "referencia": "LO-01-{mov}-40{mov.tapa}-{esf}-{agujas}{caja.ref}",
+ "_referencia": "CAMBIÓ el 30/08/2026 al entrar las agujas: `LO-01-Q-40S-AZM-PLA`. Las doce referencias anteriores (sin cola de agujas) ya no se resuelven. La S y la C son la tapa, del propio movimiento. Y el 30/08/2026 se le anade la cola `{caja.ref}` al entrar la caja negra arena: la de acero lleva `ref` VACIA, asi que sus 48 referencias no se mueven ni una, y solo las de la caja nueva llevan el sufijo -NA.",
  "_esferas": "REDIBUJADAS el 30/08/2026 con la entrega de Óscar (8 colores waffle). Seis CONSERVAN id y coste porque son la continuación del mismo color con dibujo nuevo (AZD pasa a llamarse Azul hielo, NEG Antracita, TIF Turquesa); Naranja y Blanca y oro rosa son NUEVAS y van sin coste hasta que Óscar lo dé: se dibujan, no se venden.",
  "_agujas": "Nuevas el 30/08/2026. Coste 0 y no null: van DENTRO del movimiento, como la caja (ver _coste). Entran en la referencia: sin ellas, dos relojes con agujas distintas viajarían con el mismo código y el pedido no diría cuál quiere.",
  "montaje": {
   "img": "/assets/img/precisa-2026/capas/1200/",
-  "v": "?v=12",
+  "v": "?v=13",
   "pila": [
    {
     "capa": "esf",
@@ -166,10 +179,12 @@
    "agujas": {
     "PLA": "agujas-plata",
     "ORO": "agujas-oro-rosa",
-    "NEG": "agujas-negras"
+    "NEG": "agujas-negras",
+    "AZU": "agujas-azul"
    },
    "caja": {
-    "PL": "caja-brazalete-acero"
+    "PL": "caja-brazalete-acero",
+    "NA": "caja-brazalete-negro-arena"
    }
   },
   "_orden": "La esfera va DEBAJO de la caja a propósito: el aro de la caja tapa el canto de la esfera (35 px por lado), como el reloj de verdad, y así el encaje es perfecto sin medir la esfera contra el hueco. Las agujas, encima de todo. La caja llegó el 30/08/2026 en un fichero llamado «trinchera» por error: es la del Precisa, y Óscar confirmó dónde montarla.",
@@ -184,6 +199,7 @@
   "_caja_pulida": "PULIDA el 30/08/2026. Óscar: «cerca del 3 todas tienen una mancha blanca, revisa y pule los pequeños detalles que no queden restos de otras máscaras». Y no era de las esferas: el dibujo de la caja llegó en RGB con el damero pintado y al recortarlo quedaron trozos de acero colgando DENTRO del hueco; el mayor, 14x24 px justo debajo de la barra de las 3. Como la esfera va por debajo, se veían encima de ella, en las ocho. herramientas/pulir_caja_precisa.py los quita sin pintar nada: cierra el ojo morfológicamente —da igual con 21 que con 51 px, la forma buena no tiene entrantes— y le pone el alfa a cero a lo que sobra. 701 px en el tamaño 1200.",
   "_agujas_aprobadas": "LAS TRES, del mismo dibujo aprobado (30/08/2026): «agujas-originales-segundero-rectangular» para la plata, y «aprobadas-negro-completo» y «aprobadas-oro-rosa-completo» para las otras dos — las de BORDE, que estuvieron puestas un rato, las sustituyó Óscar por las completas. Misma forma y mismo segundero rectangular en las tres, solo cambia el acabado. No se les toca el tono: vienen aprobadas. Largos, minutero 285 y segundero igual.",
   "_bajada": "LA ESFERA VA 11,5 px MÁS ABAJO que el eje del hueco (Óscar, 30/08/2026: «todas las esferas deben bajar 2 grados hacia el sur»). Dos grados de arco sobre el radio de la esfera son esos 11,5 px en el lienzo de 1200. Al bajarla hay que AGRANDARLA lo mismo o por arriba asomaría el fondo: Rd = (radio del hueco + bajada) / 0,96. LO QUE SE PAGA, avisado y aceptado antes de hacerlo: por abajo la pista de minutos se mete unos 23 px bajo el bisel y sus rayitas salen cortadas. LAS AGUJAS BAJAN LO MISMO: giran sobre el eje del movimiento, que atraviesa la esfera por su centro, y si no bajaran el buje se quedaría 11,5 px por encima del centro del dibujo. La bajada la manda esferas_precisa.py y agujas_precisa.py la importa, para que no haya dos números.",
-  "_esferas_3": "LAS OCHO SE ALINEAN CON LA ANTRACITA (30/08/2026). Óscar: «la única esfera que veo bien colocada es la de antracita, revisa por qué es la única». Era esto: se escalaban por su DISCO recortado, y el disco de cada entrega mide distinto —de 578 a 597 px— y encima el dibujo ocupa una fracción distinta de él, del 0,919 al 0,964. Cada esfera salía con el dibujo de un tamaño, hasta un 4,7 % de diferencia. Medirle a cada una su pista de minutos tampoco valía: el gajo blanco del canto de la antracita da más energía de borde que la propia pista. Lo que sí vale es COMPARAR cada dibujo con el de la antracita por correlación de bordes (FFT): son el mismo dibujo en otro color. La antracita se queda donde estaba y las otras siete se le pegan."
+  "_esferas_3": "LAS OCHO SE ALINEAN CON LA ANTRACITA (30/08/2026). Óscar: «la única esfera que veo bien colocada es la de antracita, revisa por qué es la única». Era esto: se escalaban por su DISCO recortado, y el disco de cada entrega mide distinto —de 578 a 597 px— y encima el dibujo ocupa una fracción distinta de él, del 0,919 al 0,964. Cada esfera salía con el dibujo de un tamaño, hasta un 4,7 % de diferencia. Medirle a cada una su pista de minutos tampoco valía: el gajo blanco del canto de la antracita da más energía de borde que la propia pista. Lo que sí vale es COMPARAR cada dibujo con el de la antracita por correlación de bordes (FFT): son el mismo dibujo en otro color. La antracita se queda donde estaba y las otras siete se le pegan.",
+  "_caja_negra": "LA CAJA NEGRA ARENA se coloca CONTRA LA DE ACERO, igualandole el ojo en centro y en radio (599,86 contra 600,14 y 316,7 contra 315,6): asi la esfera y las agujas, que se colocan contra ese ojo, no se enteran de que ha cambiado la caja. Lo hace herramientas/caja_precisa.py."
  }
 }
