@@ -3,6 +3,8 @@
 
     python3 herramientas/agujas_precisa.py <fichero.png> <plata|oro-rosa|negras>
     python3 herramientas/agujas_precisa.py <fichero.png> plata --prueba
+    ... --minutero 0.95 --segundero 1.05   (estirar o acortar una aguja suelta)
+    ... --sin-tono                          (no igualar el tono a los índices)
 
 POR QUÉ EXISTE. Las agujas del Precisa se colocaron a mano el 30/08/2026
 y salieron largas: «el minutero y el segundero se salen de la esfera»
@@ -45,6 +47,7 @@ CALIDADES = (72, 64, 56, 48, 40)
 PESO = 60000
 MINUTERO_R = 300.0               # dónde cae la punta del minutero, en px de 1200
 FONDO = (233, 233, 231, 255)
+ESFERA_PATRON = 'esfera-antracita.avif'   # la negra: sus barras se recortan solas
 
 
 def _alfa(f):
@@ -109,13 +112,99 @@ def brazos(im):
         s = lab2 == q
         if s.sum() < 400:
             continue
-        trozos.append({'largo': float(r[s].max()), 'area': int(s.sum())})
+        trozos.append({'largo': float(r[s].max()), 'area': int(s.sum()), 'mask': s})
     trozos.sort(key=lambda d: -d['area'])
     minutero = max(trozos[:2], key=lambda d: d['largo'])   # de los dos anchos, el largo
     horaria = min(trozos[:2], key=lambda d: d['largo'])
     finos = [d for d in trozos[2:]]
     segundero = max(finos, key=lambda d: d['largo']) if finos else None
     return eje, minutero, horaria, segundero
+
+
+def estira(im, hub, arm_mask, f):
+    """Alarga o acorta UNA aguja por su eje, dejando quieto el arranque.
+
+    Escalar el dibujo entero no vale: mueve las tres a la vez. Y escalar la
+    aguja alrededor del buje la engorda igual que la alarga, y despega su
+    arranque del buje. Aquí se trabaja en el eje de la propia aguja: se
+    estira a lo largo y no a lo ancho, y el punto de arranque se queda
+    donde estaba, así que no aparece ninguna costura."""
+    if abs(f - 1.0) < 1e-6:
+        return im
+    a = np.asarray(im).astype(np.float32)
+    ys, xs = np.where(arm_mask)
+    d = np.stack([xs - hub[0], ys - hub[1]], 1)
+    r = np.hypot(d[:, 0], d[:, 1])
+    punta = d[int(np.argmax(r))]
+    u = punta / np.hypot(*punta)                       # eje de la aguja
+    r0, R = float(r.min()), float(r.max())
+    g = (R * f - r0) / (R - r0)
+    # el mapa inverso, en coordenadas (fila, columna)
+    U = np.array([[u[1], -u[0]], [u[0], u[1]]])        # columnas: eje y perpendicular
+    Sinv = np.diag([1.0 / g, 1.0])
+    Minv = U.dot(Sinv).dot(U.T)
+    hubrc = np.array([hub[1], hub[0]])
+    corr = U.dot(np.array([r0 - r0 / g, 0.0]))
+    off = hubrc - Minv.dot(hubrc) + corr
+    salida = np.zeros_like(a)
+    for c in range(4):
+        salida[:, :, c] = ndimage.affine_transform(
+            a[:, :, c] * arm_mask, Minv, offset=off, order=1, mode='constant')
+    base = a.copy()
+    base[arm_mask] = 0                                  # se quita la aguja de su sitio
+    dentro = salida[:, :, 3:4] / 255.0
+    mezcla = base * (1 - dentro) + salida * dentro
+    return Image.fromarray(np.clip(mezcla, 0, 255).astype(np.uint8))
+
+
+def tono_de_los_indices():
+    """La escalera de grises de las barras aplicadas de la esfera.
+
+    Se leen en la esfera ANTRACITA porque ahí el fondo es casi negro y las
+    barras se recortan solas; en la blanca la máscara se come la esfera."""
+    a = np.asarray(Image.open(os.path.join(CAPAS, '1200', ESFERA_PATRON))
+                   .convert('RGBA'))
+    L = a[:, :, :3].astype(float).mean(2)
+    eje, _, _, _ = eje_del_reloj()
+    y, x = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    r = np.hypot(x - eje[0], y - eje[1])
+    m = (a[:, :, 3] > 250) & (L > 80) & (r > 215) & (r < 320)
+    lab, n = ndimage.label(m)
+    t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    m = ndimage.binary_fill_holes(
+        np.isin(lab, [i + 1 for i in range(n) if t[i] > 250]))
+    return L[m]
+
+
+def iguala_el_tono(im):
+    """Le pone a las agujas la misma escalera de grises que a los índices.
+
+    Óscar, 30/08/2026: «el color de las agujas, el brillo y el tono tiene
+    que ser igual al de los indicadores de la esfera y ahora es más
+    blanco». Medido: en los índices el cuartil bajo está en 183 y en las
+    agujas en 220 — las agujas no tienen grises, y por eso al lado de una
+    barra de acero parecen plástico blanco. No es cosa del color: el tinte
+    (R−B) de los dos es cero.
+
+    Se emparejan las dos escaleras por acumulado y el color se arrastra
+    con el brillo (se multiplican los tres canales por el mismo factor),
+    así que el tinte del lumen no se toca."""
+    ref = tono_de_los_indices()
+    a = np.asarray(im).astype(np.float32)
+    op = a[:, :, 3] > 250
+    L = a[:, :, :3].mean(2)
+    src = L[op]
+    bins = np.arange(0, 257)
+    cs = np.cumsum(np.histogram(src, bins)[0]).astype(float); cs /= cs[-1]
+    cr = np.cumsum(np.histogram(ref, bins)[0]).astype(float); cr /= cr[-1]
+    lut = np.interp(cs, cr, np.arange(256))
+    Ln = np.interp(L, np.arange(256), lut)
+    k = np.where(L > 1, Ln / np.maximum(L, 1e-6), 1.0)
+    k = np.where(a[:, :, 3] > 0, k, 1.0)
+    out = a.copy()
+    for c in range(3):
+        out[:, :, c] = np.clip(a[:, :, c] * k, 0, 255)
+    return Image.fromarray(out.astype(np.uint8))
 
 
 def guarda(im, ident):
@@ -134,7 +223,7 @@ def guarda(im, ident):
         print('  %-5d %6d B' % (t, len(datos)))
 
 
-def coloca(origen):
+def coloca(origen, f_min=1.0, f_seg=1.0, tono=True):
     im = Image.open(origen).convert('RGBA')
     eje, radio, caja, esf = eje_del_reloj()
     dentro, fuera = pista_de_minutos()
@@ -151,6 +240,20 @@ def coloca(origen):
         print('  segundero %6.1f -> %5.1f px%s'
               % (segundero['largo'], segundero['largo'] * s,
                  '   ⚠️ no llega a los índices' if segundero['largo'] * s < dentro else ''))
+    # las agujas se estiran ANTES de escalar: así el 5 % es del dibujo, no
+    # del encaje, y la escala global sigue siendo la del minutero original.
+    if abs(f_min - 1.0) > 1e-6:
+        im = estira(im, anc, minutero['mask'], f_min)
+        print('  minutero x%.3f -> %5.1f px' % (f_min, minutero['largo'] * s * f_min))
+    if segundero and abs(f_seg - 1.0) > 1e-6:
+        im = estira(im, anc, segundero['mask'], f_seg)
+        print('  segundero x%.3f -> %5.1f px%s' % (
+            f_seg, segundero['largo'] * s * f_seg,
+            '   ⚠️ sigue sin llegar a los índices'
+            if segundero['largo'] * s * f_seg < dentro else '   ✓ ya llega a los índices'))
+    if tono:
+        im = iguala_el_tono(im)
+        print('  tono igualado a los índices de la esfera')
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
@@ -170,11 +273,17 @@ def hoja(capa, destino):
 
 
 if __name__ == '__main__':
-    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    argv = sys.argv[1:]
+    def opt(nombre, por_defecto):
+        return float(argv[argv.index(nombre) + 1]) if nombre in argv else por_defecto
+    f_min = opt('--minutero', 1.0)
+    f_seg = opt('--segundero', 1.0)
+    args = [a for i, a in enumerate(argv)
+            if not a.startswith('--') and not (i and argv[i - 1] in ('--minutero', '--segundero'))]
     if len(args) < 2:
         sys.exit(__doc__)
     origen, color = args[0], args[1]
-    capa = coloca(origen)
+    capa = coloca(origen, f_min, f_seg, tono='--sin-tono' not in argv)
     prueba = '--prueba' in sys.argv
     salida = (os.path.join(os.environ.get('TMPDIR', '/tmp'), 'precisa-agujas.png')
               if prueba else os.path.join(RAIZ, 'herramientas/capturas/precisa-agujas.png'))
