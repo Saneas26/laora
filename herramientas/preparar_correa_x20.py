@@ -35,6 +35,12 @@ ASAS = (1412, 2696)
 PATRON = 'piel-vintage-negra'      # la referencia: ya está en lienzo alto y pasa la auditoría
 
 
+def tiras(m):
+    filas = np.where(m.any(1))[0]
+    cortes = np.where(np.diff(filas) > 1)[0]
+    return [(int(t[0]), int(t[-1])) for t in np.split(filas, cortes + 1)]
+
+
 def sin_fondo(f, tol=12, sat=18):
     """Alfa de una foto de estudio con fondo liso."""
     a = np.asarray(Image.open(f).convert('RGB')).astype(float)
@@ -45,17 +51,53 @@ def sin_fondo(f, tol=12, sat=18):
     marco[:, :40] = marco[:, -40:] = True
     gris = float(np.median(L[marco]))
     m = (np.abs(L - gris) > tol) | (s > sat)
+    L_ = L
     m = ndimage.binary_closing(m, np.ones((5, 5)))
     lab, n = ndimage.label(m)
     t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
-    dos = np.isin(lab, [int(i) + 1 for i in np.argsort(t)[::-1][:2]])
-    return ndimage.binary_fill_holes(dos), a
+    dos = ndimage.binary_fill_holes(
+        np.isin(lab, [int(i) + 1 for i in np.argsort(t)[::-1][:2]]))
+    # SE PELA LO QUE SE PUEDA, NO LO QUE SE QUIERA. En el brazalete de
+    # centro oro el pelado llegó a partir una tira en dos —tres bandas
+    # donde tiene que haber dos—, así que se prueba de más a menos y se
+    # queda la primera que sigue dejando la correa entera.
+    for tope in (60, 40, 25, 12, 0):
+        m = _pela(dos, L, gris, tope=tope) if tope else dos
+        if len(tiras(m)) == 2:
+            return m, a
+    return dos, a
 
 
-def tiras(m):
-    filas = np.where(m.any(1))[0]
-    cortes = np.where(np.diff(filas) > 1)[0]
-    return [(int(t[0]), int(t[-1])) for t in np.split(filas, cortes + 1)]
+def _pela(m, L, gris, tope=60):
+    """Le quita al canto la SOMBRA de estudio.
+
+    La foto trae una sombra suave alrededor de la pieza: en la piel con
+    costura, veintiocho píxeles de rampa que van del 117 al 253 del fondo.
+    El umbral del recorte la da por pieza y se veía como una orla clara
+    pegada al canto.
+
+    La rampa se pela por dónde CAE SU GRIS: se toma el gris del corazón de
+    la pieza y el del fondo, y se van quitando los píxeles del borde que
+    estén más cerca del fondo que de la pieza. Un pelado por umbral fijo no
+    valía —el fondo no siempre es el mismo gris, y una correa clara se
+    habría comido a sí misma—; éste se adapta a cada foto.
+
+    Con tope, por si acaso: sesenta píxeles de 4.096 son quince centésimas
+    de milímetro. Si hiciera falta pelar más, es que el recorte está mal y
+    hay que mirarlo, no seguir comiendo.
+    """
+    nucleo = ndimage.binary_erosion(m, np.ones((21, 21)))
+    if not nucleo.any():
+        return m
+    medio = (float(np.median(L[nucleo])) + gris) / 2.0
+    claro = L > medio if gris > np.median(L[nucleo]) else L < medio
+    for _ in range(tope):
+        borde = m & ~ndimage.binary_erosion(m, np.ones((3, 3)))
+        fuera = borde & claro
+        if not fuera.any():
+            break
+        m = m & ~fuera
+    return m
 
 
 def medidas(m):

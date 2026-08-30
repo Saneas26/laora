@@ -592,7 +592,8 @@
   "colores_cierre": [],
   "_piezas": "Cada correa dice qué dibujo de la BIBLIOTECA compartida es (30/08/2026). Las de piel llevan el pespunte dentro del nombre del fichero, así que su `pieza` es una TABLA por el paso `pespunte`: «B» el blanco y «*» el resto. SIN DIBUJO se quedan VBEI (beige) y VMAL (malva): la tela vaquera se rehizo el 30/08 y esos dos colores se fueron —entraron arena y topo—, así que sus piezas ya no existen. O se cambian los dos colores por arena y topo, o esas referencias salen sin correa.",
   "_oficiales": "LAS CORREAS SON LAS DE LA CASA, LAS MISMAS PARA TODOS (Óscar, 30/08/2026): «las correas del lunar son las oficiales y las que tiene que vestir el trinchera... el nato del lunar es el nato de todos los relojes». Se copian TAL CUAL del Lunar: ocho familias y cuarenta y una correas, con sus costes y sus dibujos de la biblioteca compartida. Fuera las que tenía el Trinchera por su cuenta. La piel italiana lleva el pespunte dentro del nombre del fichero, así que su `pieza` es una tabla por el paso `pespunte`.",
-  "_cierre": "EL CIERRE SOLO SE ELIGE DONDE HAY ELECCION DE VERDAD. La correa oficial viene con su cierre DIBUJADO —la perforada con hebilla clasica plateada, la vaquera y el nato con la suya—, asi que ofrecer cinco cierres encima del dibujo era mentir: se cobraba un cierre que la foto no ensena. Queda abierto en piel italiana, piel vintage y caucho, que son las tres que en el Lunar admiten mas de uno. Ojo: el Lunar ademas limita CUALES (el caucho solo mariposas, la vintage solo negra o plata) y eso aqui todavia no se puede decir."
+  "_cierre": "EL CIERRE SOLO SE ELIGE DONDE HAY ELECCION DE VERDAD. La correa oficial viene con su cierre DIBUJADO —la perforada con hebilla clasica plateada, la vaquera y el nato con la suya—, asi que ofrecer cinco cierres encima del dibujo era mentir: se cobraba un cierre que la foto no ensena. Queda abierto en piel italiana, piel vintage y caucho, que son las tres que en el Lunar admiten mas de uno. Ojo: el Lunar ademas limita CUALES (el caucho solo mariposas, la vintage solo negra o plata) y eso aqui todavia no se puede decir.",
+  "_ancho": "LA PIEL CON COSTURA ESTABA ESTRECHA (Oscar, 31/08/2026: «parece de 18mm cuando deberia ser de 20mm»). Y lo estaba: 1.359 px de ancho contra los 1.477-1.513 de las demas familias, un 6 % menos, que sobre 20 mm son 18,8. Rehecha desde la entrega con preparar_correa_x20.py, que iguala el ancho al de la pieza patron. Ahora 1.454."
  },
  "filtros": {
   "correa": {
@@ -642,7 +643,7 @@
  "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
  "montaje": {
   "img": "/assets/img/trinchera-2026/capas/1200/",
-  "v": "?v=4",
+  "v": "?v=5",
   "pila": [
    {
     "capa": "correa",
