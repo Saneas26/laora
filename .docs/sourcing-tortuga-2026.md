@@ -9,13 +9,14 @@ ficha todavía figura como **no listo** y sin código asignado.
 
 **Óscar, 30/08/2026: NH36 y Miyota 2105.**
 
-| Paso de la ficha | Movimiento | Coste |
-|---|---|--:|
-| **A** · Automático japonés | **NH36** | **falta** |
-| **Q** · Cuarzo japonés | **Miyota 2105** | **falta** |
+| Paso de la ficha | Movimiento | Coste | Proveedor |
+|---|---|--:|---|
+| **A** · Automático japonés | **NH36** | **65,00 €** | [1005012173045057](https://es.aliexpress.com/item/1005012173045057.html) |
+| **Q** · Cuarzo japonés | **Miyota 2105** | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
 
-Encaja con lo que la ficha ya tenía: el NH36 es el automático y el 2105 el
-cuarzo. Faltan **coste y anuncio de los dos**.
+**Entre los dos hay 56 € de coste**, que el multiplicador convierte en unos
+**134 € de precio**. Es el salto más grande de la casa: el mismo Tortuga sale a
+169,90 € en cuarzo y a 289,90 € en automático.
 
 ⚠️ **Dos cosas que decidir antes de que esto llegue a la web:**
 
@@ -26,7 +27,25 @@ cuarzo. Faltan **coste y anuncio de los dos**.
    día de la semana, eso cambia la esfera y hay que saberlo antes de encargar
    las imágenes.
 
-## Caja — 36,59 € con zafiro
+## Agujas — 5,59 € · súper lumen C3
+
+[1005010529978866](https://es.aliexpress.com/item/1005010529978866.html)
+
+Van aparte de la esfera, al contrario que en el Trinchera.
+
+## El bisel es negro; lo que cambia es el anillo interior
+
+**Óscar, 30/08/2026:** «el bisel del Tortuga siempre es negro, pero tiene un
+anillo interior al bisel que sí es el que cambia de color».
+
+Así que los tres colores que la ficha tiene puestos como *bisel* —negro,
+turquesa y naranja— **son del anillo interior**, no del bisel. En la ficha hay
+que renombrar el paso: el bisel no se elige.
+
+Falta el **coste y el anuncio del anillo**, y saber si viene con la caja o se
+compra suelto.
+
+## Caja — 32,39 €
 
 [1005005096109310](https://es.aliexpress.com/item/1005005096109310.html)
 
@@ -37,16 +56,15 @@ cuarzo. Faltan **coste y anuncio de los dos**.
 | Estanqueidad | **200 m / 20 ATM** |
 | Cristal | **zafiro**, y aquí sí se elige |
 
-**El cristal cambia el precio de la caja, no se compra aparte:**
+**El cristal suma 4,50 €:** mineral a cero y **zafiro +4,50 €**. La ficha ya
+tiene el paso `cristal` con los dos.
 
-| Cristal | Coste de la caja |
-|---|--:|
-| **Zafiro** | **36,59 €** |
-| **Mineral** | **32,09 €** *(4,50 € menos)* |
-
-Para el motor conviene partirlo así: **caja 32,09 € + zafiro 4,50 €**. La
-ficha ya tiene el paso `cristal` con Mineral y Zafiro, y así el mineral queda a
-cero y el zafiro suma lo que de verdad cuesta.
+⚠️ **El precio de la caja ha bailado y hay que fijarlo.** Primero fueron
+**36,59 €** con zafiro (32,09 con mineral) y después **32,39 €** a secas, del
+mismo anuncio. Aquí está puesto el último, **32,39 €**, entendiendo que es la
+caja base y que el zafiro sigue sumando 4,50. Ojo: 32,39 € es también, al
+céntimo, lo que cuesta el brazalete — conviene confirmar que no se han cruzado
+los dos números.
 
 ## Brazalete de acero — 32,39 €
 
@@ -90,11 +108,12 @@ buzo.
 
 ## Lo que falta
 
-1. **El coste y el anuncio de los dos movimientos**, y sus códigos `LO_`.
-2. **La esfera**: no hay ni tipos ni colores.
-3. **El bisel**: hay tres colores —negro, turquesa y naranja— sin coste. Y no
-   se sabe si el bisel va dentro de la caja o se compra aparte.
-4. **Las agujas** y los **tamaños de caja**: vacíos.
+1. **Confirmar el precio de la caja**: 36,59 o 32,39.
+2. **La esfera**: no hay ni tipos ni colores, ni coste.
+3. **El anillo interior**: coste, anuncio, y si viene con la caja.
+4. **Los códigos `LO_`** del NH36 y el Miyota, que de cara al cliente no se
+   nombra al fabricante.
+5. Los **tamaños de caja**: vacíos.
 5. **El cierre** de las dos correas de buzo: si lo llevan puesto o hay que
    elegirlo.
 6. **El grabado del logotipo**: si va, son 3,78 € del proveedor de siempre.
