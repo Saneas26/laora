@@ -129,15 +129,22 @@ def patron():
     return {kk: vv * k for kk, vv in m.items()}
 
 
-def prepara(origen, holgura=1.0):
+def prepara(origen, holgura=1.0, ancho=0, factor=1.0):
     m, rgb = sin_fondo(origen)
     mio = medidas(m)
     ref = patron()
+    # EL ANCHO SE PUEDE PEDIR A PELO, y es lo que hace falta para que una
+    # correa mida 20 mm de verdad: el patrón está a 23,33 y copiarlo es
+    # heredar su error (Óscar, 31/08/2026: «hay que estrecharla a 20 mm,
+    # ahora mismo está como en 22»). 20 mm SON LOS 1.284 px del hueco entre
+    # asas: la correa entra justo entre ellas, ni las tapa ni deja rendija.
+    if ancho:
+        ref = dict(ref, ancho=float(ancho))
     # ⚠️ LA HOLGURA es para los brazaletes que van de 20 a 16 mm: igualando
     # el ancho máximo al del patrón, en las filas de las asas se quedaban
     # entre 8 y 14 px cortos y `auditar_correas.py` los cantaba. Lo que
     # sobra no se ve —la correa va detrás de la caja—, lo que falta sí.
-    s = ref['ancho'] / mio['ancho'] * holgura
+    s = ref['ancho'] / mio['ancho'] * holgura * factor
     im = Image.fromarray(rgb.astype(np.uint8)).convert('RGBA')
     im.putalpha(Image.fromarray(
         np.clip(ndimage.gaussian_filter((m * 255).astype(np.float32), 0.8), 0, 255).astype(np.uint8)))
@@ -223,16 +230,85 @@ def sella_canto(L):
     return Image.fromarray(a)
 
 
-def acerca_al_asa(L, px):
-    """Separa las dos tiras `px` píxeles: la de arriba sube, la de abajo baja.
+# LAS FILAS DONDE ESTÁN LAS ASAS, en el lienzo de 4.096. Salen de la caja:
+# de la 1.155 a la 1.449 asoma la correa por el hueco de arriba, y abajo su
+# espejo. Es la única franja donde el ancho de la correa importa de verdad;
+# por encima se la ve entera y por debajo la tapa el cuerpo del reloj.
+ASA_FILAS = ((1155, 1449), (4239, 4533))
+
+
+def banda_en_las_asas(L):
+    """Cuánto mide la correa DONDE LAS ASAS, en el peor sitio.
+
+    Es la única medida que decide si se ve fondo o no: el canto izquierdo
+    que más se mete y el derecho que menos llega, en las filas del hueco.
+    1.284 px son 20 mm justos, que es lo que mide ese hueco."""
+    a = np.asarray(L)[:, :, 3] > 60
+    izq, der = [], []
+    for r0, r1 in ASA_FILAS:
+        for r in range(r0, min(r1, a.shape[0] - 1) + 1):
+            idx = np.where(a[r])[0]
+            if len(idx):
+                izq.append(idx[0])
+                der.append(idx[-1])
+    if not izq:
+        return 0
+    return min(der) - max(izq) + 1
+
+
+def centra(L):
+    """Vuelve a poner la pieza en el eje de las asas.
+
+    ⚠️ NO SE CENTRA POR EL RECUADRO DE LA PIEZA. Esto es una foto de una
+    correa de verdad, no un dibujo: sus cantos no son paralelos y el
+    recuadro los promedia. Centrando así, con la correa a 20 mm justos, el
+    canto izquierdo se quedaba seis píxeles dentro del asa y el derecho
+    sobraba ocho: una rendija de fondo por la izquierda de arriba abajo.
+
+    SE CENTRA POR DONDE APRIETA: se busca, en las filas de las asas, el
+    canto izquierdo que más se mete y el derecho que menos llega, y se
+    centra esa banda —la peor— en el eje del hueco. Así lo que falte, si
+    falta, falta por igual a los dos lados.
+
+    Y se llama DESPUÉS de sellar, que rellena la mordida del hilo por un
+    solo canto y mueve la pieza."""
+    a = np.asarray(L)[:, :, 3] > 60
+    izq, der = [], []
+    for r0, r1 in ASA_FILAS:
+        for r in range(r0, min(r1, a.shape[0] - 1) + 1):
+            idx = np.where(a[r])[0]
+            if len(idx):
+                izq.append(idx[0])
+                der.append(idx[-1])
+    if not izq:
+        return L
+    centro = (max(izq) + min(der)) / 2.0
+    dx = int(round((ASAS[0] + ASAS[1]) / 2.0 - centro))
+    if not dx:
+        return L
+    n = Image.new('RGBA', L.size, (0, 0, 0, 0))
+    n.alpha_composite(L, (dx, 0))
+    return n
+
+
+def acerca_al_asa(L, px=0, punta=0):
+    """Separa las dos tiras: la de arriba sube, la de abajo baja.
 
     Sirve para sacar de debajo del asa un detalle que se estaba comiendo la
-    caja. Lo que se descubre por dentro no deja hueco: el extremo de la
-    tira sigue quedando bajo el cuerpo de la caja, que a 4.096 tapa de la
-    fila 1.667 hacia dentro."""
+    caja —la costura de la piel con costura va en la punta—. Lo que se
+    descubre por dentro no deja hueco: el extremo de la tira sigue quedando
+    bajo el cuerpo de la caja, que a 4.096 tapa de la fila 1.667 hacia
+    dentro.
+
+    CON `punta` SE PIDE EL SITIO, no el empujón, y es lo que hay que usar:
+    el empujón en píxeles vale para UNA escala, y en cuanto la correa se
+    estrecha o se ensancha deja de valer. Diciendo dónde tiene que morir el
+    extremo, la costura cae en el mismo hueco mida lo que mida la pieza."""
     a = np.asarray(L)
     m = a[:, :, 3] > 60
     t = tiras(m)
+    if punta:
+        px = t[0][1] - int(punta)
     n = Image.new('RGBA', L.size, (0, 0, 0, 0))
     med = (t[0][1] + t[1][0]) // 2
     n.alpha_composite(L.crop((0, 0, L.width, med)), (0, -px))
@@ -241,7 +317,7 @@ def acerca_al_asa(L, px):
 
 
 if __name__ == '__main__':
-    CON_VALOR = ('--holgura', '--acerca')
+    CON_VALOR = ('--holgura', '--acerca', '--punta', '--ancho', '--asas')
     args = [a for i, a in enumerate(sys.argv[1:])
             if not a.startswith('--') and not (i and sys.argv[i] in CON_VALOR)]
     if len(args) < 2:
@@ -249,18 +325,46 @@ if __name__ == '__main__':
     origen, ident = args[0], args[1]
     holgura = float(sys.argv[sys.argv.index('--holgura') + 1]) if '--holgura' in sys.argv else 1.0
     acerca = int(sys.argv[sys.argv.index('--acerca') + 1]) if '--acerca' in sys.argv else 0
-    capa, s, mio, ref = prepara(origen, holgura)
-    if '--sella' in sys.argv:
-        capa = sella_canto(capa)
-    if acerca:
-        capa = acerca_al_asa(capa, acerca)
+    punta = int(sys.argv[sys.argv.index('--punta') + 1]) if '--punta' in sys.argv else 0
+    ancho_pedido = int(sys.argv[sys.argv.index('--ancho') + 1]) if '--ancho' in sys.argv else 0
+    asas = int(sys.argv[sys.argv.index('--asas') + 1]) if '--asas' in sys.argv else 0
+
+    def monta(factor):
+        capa, s, mio, ref = prepara(origen, holgura, ancho_pedido, factor)
+        if '--sella' in sys.argv:
+            capa = sella_canto(capa)
+        if acerca or punta:
+            capa = acerca_al_asa(capa, acerca, punta)
+        # el centrado va el ÚLTIMO: mira las filas de las asas, y hasta que las
+        # tiras no están en su sitio esas filas no enseñan lo que van a enseñar.
+        return centra(capa), s
+
+    # ⚠️ EL ANCHO QUE VE ÓSCAR NO ES EL DEL DIBUJO. La correa se estrecha
+    # hacia la hebilla y sus cantos no son paralelos —es una foto—, así que
+    # escalar «el ancho máximo» deja la parte de las asas más estrecha de lo
+    # pedido: pidiendo 20 mm salían 19,1 en las asas y una rendija de fondo.
+    # Con `--asas` se pide la medida DONDE IMPORTA y se busca la escala que
+    # la da, midiéndola en cada vuelta. Dos o tres vueltas y está.
+    factor = 1.0
+    capa, s = monta(factor)
+    if asas:
+        for _ in range(6):
+            b = banda_en_las_asas(capa)
+            if not b or abs(b - asas) <= 1:
+                break
+            factor *= asas / float(b)
+            capa, s = monta(factor)
+        print('   banda en las asas: %d px = %.2f mm' % (
+            banda_en_las_asas(capa), banda_en_las_asas(capa) / 1284.0 * 20))
     a = np.asarray(capa)[:, :, 3] > 128
     ys, xs = np.where(a)
     ancho = xs.max() - xs.min() + 1
     hueco = ASAS[1] - ASAS[0]
-    print('%-38s escala %.4f · ancho %d para un hueco de %d %s · centro en x=%.0f (toca 2054)' % (
-        ident, s, ancho, hueco, 'OK' if ancho >= hueco else '✗ SE QUEDA CORTA',
-        (xs.min() + xs.max()) / 2.0))
+    print('%-38s escala %.4f · ancho %d px = %.2f mm para un hueco de %d %s · '
+          'centro en x=%.0f (toca 2054) · punta en la fila %d' % (
+        ident, s, ancho, ancho / float(hueco) * 20, hueco,
+        'OK' if ancho >= hueco else '✗ SE QUEDA CORTA',
+        (xs.min() + xs.max()) / 2.0, tiras(a)[0][1]))
     salida = os.path.join(os.environ.get('TMPDIR', '/tmp'), ident + '.png')
     capa.save(salida)
     print('   ' + salida)
