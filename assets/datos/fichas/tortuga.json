@@ -50,11 +50,13 @@
  "movimiento": [
   {
    "id": "Q",
-   "nombre": "Cuarzo japonés"
+   "nombre": "Cuarzo japonés",
+   "_real": "Miyota 2105"
   },
   {
    "id": "A",
-   "nombre": "Automático japonés"
+   "nombre": "Automático japonés",
+   "_real": "NH36"
   }
  ],
  "correa": {
@@ -62,5 +64,6 @@
   "colores": [],
   "cierres": [],
   "colores_cierre": []
- }
+ },
+ "_movimiento": "LOS MOVIMIENTOS SON NH36 (automatico) y MIYOTA 2105 (cuarzo), Oscar 30/08/2026. Falta el coste de los dos, su anuncio y su codigo LO_ para la web: la norma de la casa es no nombrar al fabricante. OJO: el NH36 lleva DIA Y FECHA, no solo fecha."
 }

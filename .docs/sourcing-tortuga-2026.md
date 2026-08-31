@@ -5,6 +5,27 @@ ficha todavía figura como **no listo** y sin código asignado.
 
 ---
 
+## Movimientos
+
+**Óscar, 30/08/2026: NH36 y Miyota 2105.**
+
+| Paso de la ficha | Movimiento | Coste |
+|---|---|--:|
+| **A** · Automático japonés | **NH36** | **falta** |
+| **Q** · Cuarzo japonés | **Miyota 2105** | **falta** |
+
+Encaja con lo que la ficha ya tenía: el NH36 es el automático y el 2105 el
+cuarzo. Faltan **coste y anuncio de los dos**.
+
+⚠️ **Dos cosas que decidir antes de que esto llegue a la web:**
+
+1. **El nombre de cara al cliente.** La norma de la casa es no nombrar al
+   fabricante: van como **«Calibre laOra LO_xxxx»** con su arquitectura. Hacen
+   falta los dos códigos.
+2. **El NH36 lleva día Y fecha**, no sólo fecha. Si el Tortuga va a enseñar el
+   día de la semana, eso cambia la esfera y hay que saberlo antes de encargar
+   las imágenes.
+
 ## Caja — 36,59 € con zafiro
 
 [1005005096109310](https://es.aliexpress.com/item/1005005096109310.html)
@@ -69,8 +90,7 @@ buzo.
 
 ## Lo que falta
 
-1. **El movimiento.** La ficha tiene cuarzo japonés y automático japonés, los
-   dos sin coste y sin calibre.
+1. **El coste y el anuncio de los dos movimientos**, y sus códigos `LO_`.
 2. **La esfera**: no hay ni tipos ni colores.
 3. **El bisel**: hay tres colores —negro, turquesa y naranja— sin coste. Y no
    se sabe si el bisel va dentro de la caja o se compra aparte.
