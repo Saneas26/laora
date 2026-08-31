@@ -139,6 +139,14 @@ def ancho_maximo(f):
     return int(xs.max() - xs.min() + 1), float((xs.min() + xs.max()) / 2.0)
 
 
+def tiras_de(f):
+    """Las dos tiras de una correa, en las filas del fichero de la entrega."""
+    a = alfa(f)
+    filas = np.where(a.any(1))[0]
+    cortes = np.where(np.diff(filas) > 1)[0]
+    return [(int(x[0]), int(x[-1])) for x in np.split(filas, cortes + 1)]
+
+
 def pon_correa(f, s, cx, centro, baja=0, sube=0):
     """Escala una correa y pega cada tira con su propio desplazamiento.
 
@@ -270,6 +278,14 @@ def monta():
         cols = np.where(b.any(0))[0]
         arr, aba = cubierto_por_la_caja(CAJA_PATRON, (cols.min(), cols.max()))
         _, baja, sube = pega_a_la_caja(capa, arr, aba)
+        # ⚠️ Y NO SE PUEDE METER MÁS DE LO QUE SOBRA POR EL OTRO EXTREMO. La
+        # correa de caucho se sale del lienzo por arriba y por abajo, así que
+        # tiene de dónde; el brazalete es una pieza corta que llega justa al
+        # canto, y metiéndolo se despegaba de él. Se mete lo que se puede.
+        ta = tiras_de(f)
+        dy = LIENZO / 2.0 - (LIENZO / 2.0) * s
+        baja = int(min(baja, max(0.0, -(dy + ta[0][0] * s))))
+        sube = int(min(sube, max(0.0, dy + ta[1][1] * s - (LIENZO - 1))))
         if baja or sube:                       # y se vuelve a montar, ya con el sitio
             capa = pon_correa(f, s, cx, centro_astas, baja, sube)
         capas[ident] = capa.resize((ANCHO, ANCHO), Image.LANCZOS)
