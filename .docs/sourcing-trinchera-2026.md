@@ -68,6 +68,7 @@ para montar una combinación que el anuncio de la esfera no dé.
 ## Correas
 
 Las correas son las de la casa y están en `.docs/sourcing-correas-2026.md`.
+**Las ocho familias tienen coste cerrado.**
 
 ## El grabado del logotipo — 3,78 € · para TODOS los modelos
 
@@ -89,7 +90,12 @@ al hilo del anuncio.
 
 ## Lo que falta
 
-1. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
+**Ninguna pieza del Trinchera está sin coste.** Lo que queda es de compra, no
+de precio:
+
+1. **El enlace del anuncio de cuatro correas** —brazalete satinado, piel
+   vintage, piel italiana y nato—: el coste está cerrado, el proveedor no.
+2. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
    desplegable para que llegue la pieza correcta.
 3. **Envío, mínimos y descuento por volumen** de cada proveedor.
 4. Los precios se capturaron con ofertas activas: **reverificar antes de

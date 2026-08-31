@@ -123,6 +123,26 @@ reglas y Óscar las dará cuando toque.** No suponer nada.
 
 ---
 
+## Las cuatro que valen lo que dice la ficha
+
+**Óscar, 30/08/2026: «respeta los costes de la ficha».** De estas cuatro no hay
+que tocar el número: el que está puesto es el bueno.
+
+| Correa | Coste |
+|---|--:|
+| Brazalete acero 316L satinado | **20,19 €** |
+| Piel vintage | **16,89 €** |
+| Piel italiana hecha a mano | **37,39 €** |
+| Nato | **3,99 €** |
+
+Con esto **el Trinchera queda costeado entero**: no queda ni una pieza sin
+precio.
+
+Lo que sigue faltando de las cuatro es el **enlace del anuncio** —el coste está
+cerrado, el proveedor no—, y eso hace falta para la hoja de pedido del panel.
+
+---
+
 ## Qué cuesta cada correa de la casa, ordenadas
 
 | Correa | Coste | Modelos |
