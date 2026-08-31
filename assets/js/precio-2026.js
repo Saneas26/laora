@@ -53,8 +53,30 @@
   var PACKING_ENVIO = 9;                   // con IVA, como siempre
   var GARANTIA = 4;                        // fondo de garantía por reloj
   var COMISION = 0.05;                     // el 5 % entero: el suelo protege al que paga por Klarna
+
+  /* LOS DOS GASTOS QUE FALTABAN (Óscar, 31/08/2026). Su regla es que
+     «con todos los gastos posibles, absolutamente todos», tienen que
+     quedarle 50 € y el 15 %. Y había dos fuera de la cuenta:
+
+     · EL ENVÍO DEL PROVEEDOR. Los 9 € de arriba son el packing y el
+       envío AL CLIENTE. Lo que cobra AliExpress por traer las piezas no
+       estaba en ningún sitio: hay proveedores que lo dan gratis y otros
+       que cobran 4,52 € por pedido, que se reparten entre las piezas de
+       ese pedido. 1,00 € por reloj es una estimación prudente hasta que
+       haya pedidos de verdad con los que medirlo.
+     · LAS DEVOLUCIONES. La casa promete 30 días. Un reloj que vuelve se
+       lleva el envío de ida, el de vuelta y el tiempo en que no se
+       vende. Va como porcentaje del PVP, igual que la comisión, porque
+       es una merma sobre lo vendido y no un coste de la pieza.
+
+     Los dos son ESTIMACIONES de Óscar, no datos de factura: cuando haya
+     pedidos y devoluciones reales se ajustan aquí y todo el catálogo se
+     recalcula solo. */
+  var ENVIO_PROVEEDOR = 1.00;              // lo que cuesta traer las piezas, por reloj
+  var DEVOLUCIONES = 0.10;                // 1,5 % del PVP: la merma de los 30 días
+
   function costeCompleto(c) {
-    return (c + PACKING_ENVIO / (1 + IVA) + GARANTIA) * (1 + SS);
+    return (c + PACKING_ENVIO / (1 + IVA) + GARANTIA + ENVIO_PROVEEDOR) * (1 + SS);
   }
   function redondea(p) {
     var bajo = Math.floor((p - 9.90) / 10) * 10 + 9.90;
@@ -73,7 +95,7 @@
      limpios o del 15 % de beneficio neto. */
   function sueloPvp(cn) {
     var queda = 1 - IRPF;                  // la SS ya va dentro del coste
-    var euro = 1 / (1 + IVA) - COMISION;   // lo que llega de cada euro de PVP
+    var euro = 1 / (1 + IVA) - COMISION - DEVOLUCIONES;  // lo que llega de cada euro de PVP
     var porEuros = (50 / queda + cn) / euro;
     var margen = euro * queda - 0.15;
     var porciento = margen > 0 ? queda * cn / margen : 0;
@@ -89,6 +111,7 @@
   window.laoraPrecio = {
     IVA: IVA, IRPF: IRPF, SS: SS, MULT: MULT,
     PACKING_ENVIO: PACKING_ENVIO, GARANTIA: GARANTIA, COMISION: COMISION,
+    ENVIO_PROVEEDOR: ENVIO_PROVEEDOR, DEVOLUCIONES: DEVOLUCIONES,
     KLARNA: KLARNA,
     costeCompleto: costeCompleto, redondea: redondea, sube990: sube990,
     sueloPvp: sueloPvp, pvpBase: pvpBase

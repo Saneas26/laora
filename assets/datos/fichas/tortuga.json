@@ -6,134 +6,123 @@
  "desc": "",
  "listo": false,
  "caja": {
+  "integrada": false,
   "tamanos": [
    {
-    "id": "44",
-    "nombre": "44 mm",
-    "coste": 0,
-    "expl": "Caja de 44 mm, la medida del reloj de buceo."
+    "id": "45",
+    "nombre": "45 mm",
+    "expl": "Caja de 45 mm, la medida del buceador clásico."
    }
   ],
-  "materiales": [],
-  "integrada": false
+  "materiales": [
+   {
+    "id": "AC",
+    "nombre": "Acero 316L",
+    "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo."
+   }
+  ]
  },
  "bisel": {
   "colores": [
    {
     "id": "NAR",
     "nombre": "Naranja",
-    "coste": 0
+    "expl": "Anillo de minutos en naranja, bajo el cristal."
    },
    {
-    "id": "NAG",
+    "id": "NRG",
     "nombre": "Naranja grueso",
-    "coste": 0
+    "expl": "Anillo de minutos en naranja grueso, bajo el cristal."
    },
    {
     "id": "PLA",
     "nombre": "Plata",
-    "coste": 0
+    "expl": "Anillo de minutos en plata, bajo el cristal."
    },
    {
     "id": "AZU",
     "nombre": "Azul",
-    "coste": 0
+    "expl": "Anillo de minutos en azul, bajo el cristal."
    },
    {
     "id": "VER",
     "nombre": "Verde",
-    "coste": 0
+    "expl": "Anillo de minutos en verde, bajo el cristal."
    },
    {
     "id": "NEG",
     "nombre": "Negro",
-    "coste": 0
+    "expl": "Anillo de minutos en negro, bajo el cristal."
    },
    {
     "id": "OLI",
     "nombre": "Oliva",
-    "coste": 0
+    "expl": "Anillo de minutos en oliva, bajo el cristal."
    },
    {
     "id": "BUR",
     "nombre": "Burdeos",
-    "coste": 0
+    "expl": "Anillo de minutos en burdeos, bajo el cristal."
    },
    {
     "id": "TUR",
     "nombre": "Turquesa",
-    "coste": 0
+    "expl": "Anillo de minutos en turquesa, bajo el cristal."
    },
    {
     "id": "ACE",
-    "nombre": "Acero liso",
-    "coste": 0
+    "nombre": "Acero",
+    "expl": "Anillo de minutos en acero, bajo el cristal."
    }
   ],
   "materiales": []
  },
  "esfera": {
-  "tipos": [
-   {
-    "id": "T",
-    "nombre": "Tortuga",
-    "coste": 11.19
-   }
-  ],
+  "tipos": [],
   "colores": [
    {
     "id": "NEG",
-    "nombre": "Negra",
-    "coste": 0
+    "nombre": "Negra"
    },
    {
     "id": "AZT",
-    "nombre": "Azul texturizada",
-    "coste": 0
+    "nombre": "Azul texturizada"
    },
    {
     "id": "AZS",
-    "nombre": "Azul sunburst",
-    "coste": 0
+    "nombre": "Azul sunburst"
    },
    {
     "id": "TUS",
-    "nombre": "Turquesa sunburst",
-    "coste": 0
+    "nombre": "Turquesa sunburst"
    },
    {
     "id": "TUC",
-    "nombre": "Turquesa champagne",
-    "coste": 0
+    "nombre": "Turquesa champán"
    },
    {
-    "id": "ROJ",
-    "nombre": "Roja fumé",
-    "coste": 0
+    "id": "ROF",
+    "nombre": "Roja fumé"
    },
    {
-    "id": "NEM",
-    "nombre": "Negra marfil",
-    "coste": 0
+    "id": "NMA",
+    "nombre": "Negra y marfil"
    },
    {
-    "id": "FRA",
-    "nombre": "Frambuesa fumé",
-    "coste": 0
+    "id": "FRF",
+    "nombre": "Frambuesa fumé"
    }
   ]
  },
  "agujas": {
   "colores": [
    {
-    "id": "GRI",
-    "nombre": "Gris oscuro",
-    "coste": 0
+    "id": "ACE",
+    "nombre": "Acero inoxidable"
    },
    {
-    "id": "ACE",
-    "nombre": "Acero inoxidable",
-    "coste": 0
+    "id": "GRI",
+    "nombre": "Gris oscuro"
    }
   ]
  },
@@ -162,23 +151,63 @@
   }
  ],
  "correa": {
-  "familias": [],
-  "colores": [],
-  "cierres": [
+  "familias": [
    {
-    "id": "plata",
-    "nombre": "Clásica plata",
-    "coste": 0,
-    "expl": "Hebilla clásica de acero plateado."
+    "id": "CAUCHO",
+    "nombre": "Caucho",
+    "expl": "Caucho de buceo con ranuras, la de toda la vida para el agua."
+   },
+   {
+    "id": "A316",
+    "nombre": "Brazalete de acero",
+    "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja."
    }
   ],
+  "colores": [
+   {
+    "id": "KNEG",
+    "familia": "CAUCHO",
+    "nombre": "Negra"
+   },
+   {
+    "id": "KAZU",
+    "familia": "CAUCHO",
+    "nombre": "Azul marino"
+   },
+   {
+    "id": "KGRI",
+    "familia": "CAUCHO",
+    "nombre": "Gris"
+   },
+   {
+    "id": "KVER",
+    "familia": "CAUCHO",
+    "nombre": "Verde"
+   },
+   {
+    "id": "KROJ",
+    "familia": "CAUCHO",
+    "nombre": "Roja"
+   },
+   {
+    "id": "KNAR",
+    "familia": "CAUCHO",
+    "nombre": "Naranja"
+   },
+   {
+    "id": "BRZ",
+    "familia": "A316",
+    "nombre": "Acero 316L"
+   }
+  ],
+  "cierres": [],
   "colores_cierre": []
  },
  "_movimiento": "NH36 (automatico, 65,00) y MIYOTA 2105 (cuarzo, 9,00), Oscar 30/08/2026. Los dos con FECHA LARGA, dia y fecha; el del cuarzo es BILINGUE espanol/ingles. Calibres de la casa (Oscar, 31/08): LO_A4126 el automatico y LO_Q3626 el cuarzo. Se escriben con GUION BAJO, como los demas de la casa. El codigo lleva dentro la especificacion: A + horas de reserva (41) y Q + meses de pila (36), y 26 del ano.",
  "_bisel": "EL BISEL SIEMPRE ES NEGRO (Oscar 30/08). Lo que aqui se llama \"bisel\" es en realidad el ANILLO INTERIOR, el aro fino de color pegado al borde de la esfera. Hay que renombrar el paso. No cuesta aparte: viene en la caja, junto con el bisel y el cristal.",
  "_agujas": "Dos acabados de la entrega del 31/08: gris oscuro y acero inoxidable. Las agujas cuestan 5,59 y van APARTE de la esfera.",
  "_esfera": "Ocho colores de la entrega del 31/08, 28,5 mm, a 11,19 cada una. LA ESFERA ES SIEMPRE LA DE LA FOTO (Oscar, 31/08), con una sola diferencia: al CUARZO no se le pone AUTOMATIC. Mismo dibujo, misma esfera y mismo coste; cambia solo esa palabra impresa. Los dos movimientos llevan fecha larga, asi que la ventanilla de dia y fecha vale para los dos.",
- "agua": "200 m / 20 ATM",
+ "agua": "20 ATM / 200 metros",
  "_tamano": "UNA SOLA MEDIDA: 44 mm (Oscar, 31/08/2026). No se elige.",
  "_codigo": "LO-06, dado por Óscar el 31/08/2026. Los cinco anteriores son LO-01 Precisa, LO-02 Trinchera, LO-03 Lunar, LO-04 Bitácora y LO-05 Cero Cero.",
  "montaje": {
@@ -200,24 +229,31 @@
    },
    {
     "capa": "caja",
-    "grupo": "bisel",
+    "grupo": "caja",
     "espera": [
      "tamano",
-     "caja",
-     "bisel"
+     "caja"
     ]
+   },
+   {
+    "capa": "bisel",
+    "grupo": "bisel",
+    "espera": "bisel"
    },
    {
     "capa": "agujas",
     "grupo": "agujas",
-    "necesita": "esf",
-    "espera": "agujas"
+    "espera": "agujas",
+    "necesita": "esf"
    }
   ],
   "capas": {
+   "caja": {
+    "AC": "caja-acero"
+   },
    "bisel": {
     "NAR": "caja-anillo-naranja",
-    "NAG": "caja-anillo-naranja-grueso",
+    "NRG": "caja-anillo-naranja-grueso",
     "PLA": "caja-anillo-plata",
     "AZU": "caja-anillo-azul",
     "VER": "caja-anillo-verde",
@@ -233,20 +269,34 @@
     "AZS": "esfera-azul-sunburst",
     "TUS": "esfera-turquesa-sunburst",
     "TUC": "esfera-turquesa-champagne",
-    "ROJ": "esfera-roja-fume",
-    "NEM": "esfera-negra-marfil",
-    "FRA": "esfera-frambuesa-fume"
+    "ROF": "esfera-roja-fume",
+    "NMA": "esfera-negra-marfil",
+    "FRF": "esfera-frambuesa-fume"
    },
    "agujas": {
-    "ACE": "agujas"
+    "ACE": "agujas-acero",
+    "GRI": "agujas-gris-oscuro"
+   },
+   "correa": {
+    "KNEG": "caucho-negra",
+    "KAZU": "caucho-azul-marino",
+    "KGRI": "caucho-gris",
+    "KVER": "caucho-verde",
+    "KROJ": "caucho-roja",
+    "KNAR": "caucho-naranja",
+    "BRZ": "brazalete-acero"
    }
   },
-  "_caja": "LA CAJA LA DIBUJA EL PASO DEL BISEL, no el de la caja. En la Tortuga el bisel de buceo y el anillo de minutos van DENTRO del dibujo de la caja: cada color de anillo es una caja entera. Por eso la capa `caja` cuelga del grupo `bisel`, y espera a que se haya señalado el tamaño, el material o el propio anillo.",
-  "_agujas": "SOLO HAY UN JUEGO DE AGUJAS DIBUJADO, el de la entrega del 31/08: acero con lumen crema. Se mapea a «ACE». «GRI» (gris oscuro) NO tiene dibujo, así que al elegirlo el reloj sale sin agujas, que es la verdad. Hace falta el mismo juego en gris oscuro.",
-  "_correas": "PUBLICADAS PERO SIN MAPEAR: seis correas de caucho —negra, azul marino, gris, verde, roja y naranja— y el brazalete de acero, todas montadas y llegando hasta la caja. Faltan los ids del paso de correa en la ficha para engancharlas: `caucho-negra`, `caucho-azul-marino`, `caucho-gris`, `caucho-verde`, `caucho-roja`, `caucho-naranja` y `brazalete-acero`.",
-  "_medida": "⚠️ LA FICHA DICE 44 mm Y YO MEDÍ 45 EN EL DIBUJO. La escala del montaje no depende de eso —sale de píxeles medidos, no de milímetros— pero el aviso del hueco entre astas sí: a 44 mm el hueco es de 22,44 mm en vez de 22,95. En los dos casos está lejos de los 20 que dicen los nombres de las correas."
+  "_orden": "LA CORREA VA LA PRIMERA y las agujas las últimas. El anillo de minutos va DENTRO de la caja —cada color es una caja entera, no una capa aparte—, así que la capa `bisel` se dibuja ENCIMA de la caja lisa y la tapa entera. Es a propósito: así la caja aparece al señalar el tamaño y el anillo aparece al señalarlo, sin tener que dibujar once cajas por cada combinación."
  },
  "extra": 3.78,
  "_extra": "El logotipo grabado, 3,78 €. Va en TODOS los modelos y siempre cuesta lo mismo (Oscar, 30 y 31/08/2026).",
- "_cierre": "LAS CORREAS DE BUZO LLEVAN HEBILLA CLASICA PLATEADA Y SOLO ESA (Oscar, 31/08/2026). No se elige: viene con la correa y no suma coste. Ojo: las dos hebillas de 1,79 y 2,69 son SOLO del caucho del Trinchera y del Lunar, no de aqui."
+ "_cierre": "LAS CORREAS DE BUZO LLEVAN HEBILLA CLASICA PLATEADA Y SOLO ESA (Oscar, 31/08/2026). No se elige: viene con la correa y no suma coste. Ojo: las dos hebillas de 1,79 y 2,69 son SOLO del caucho del Trinchera y del Lunar, no de aqui.",
+ "_montaje_nota": "MONTADO EL 31/08/2026 con la entrega de ese día. LOS PASOS SALEN DE LAS PIEZAS QUE HAY, no de una decisión de producto: Óscar todavía no ha dicho cuáles de los once anillos se venden, ni las medidas, ni los calibres, ni lo que cuesta cada pieza. Por eso `listo` sigue en false: la ficha se ve y se configura, pero no pone precio ni deja comprar, y el volcador no mete ni una referencia en el catálogo. En cuanto lleguen los costes, esto se vende sin tocar una línea de código.",
+ "filtros": {
+  "correa": {
+   "paso": "correamat",
+   "campo": "familia"
+  }
+ }
 }

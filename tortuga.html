@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/cabecera-laora.css?v=3">
 <link rel="stylesheet" href="/assets/css/laora.css?v=52">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=44">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=45">
 <link rel="stylesheet" href="/assets/css/producto-2026.css?v=42">
 <!-- EL ESTILO DEL CONFIGURADOR, el del Lunar, que desde el 29/08/2026 es el
      de la casa. VA DESPUÉS de producto-2026.css: buena parte de sus reglas
@@ -215,102 +215,91 @@
    ============================================================ */
   var OPCIONES = {
     "tamano": {
-      "44": {
-        "nombre": "44 mm",
-        "expl": "Caja de 44 mm, la medida del reloj de buceo.",
-        "coste": 0
+      "45": {
+        "nombre": "45 mm",
+        "expl": "Caja de 45 mm, la medida del buceador clásico."
+      }
+    },
+    "caja": {
+      "AC": {
+        "nombre": "Acero 316L",
+        "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo."
       }
     },
     "bisel": {
       "NAR": {
         "nombre": "Naranja",
-        "coste": 0
+        "expl": "Anillo de minutos en naranja, bajo el cristal."
       },
-      "NAG": {
+      "NRG": {
         "nombre": "Naranja grueso",
-        "coste": 0
+        "expl": "Anillo de minutos en naranja grueso, bajo el cristal."
       },
       "PLA": {
         "nombre": "Plata",
-        "coste": 0
+        "expl": "Anillo de minutos en plata, bajo el cristal."
       },
       "AZU": {
         "nombre": "Azul",
-        "coste": 0
+        "expl": "Anillo de minutos en azul, bajo el cristal."
       },
       "VER": {
         "nombre": "Verde",
-        "coste": 0
+        "expl": "Anillo de minutos en verde, bajo el cristal."
       },
       "NEG": {
         "nombre": "Negro",
-        "coste": 0
+        "expl": "Anillo de minutos en negro, bajo el cristal."
       },
       "OLI": {
         "nombre": "Oliva",
-        "coste": 0
+        "expl": "Anillo de minutos en oliva, bajo el cristal."
       },
       "BUR": {
         "nombre": "Burdeos",
-        "coste": 0
+        "expl": "Anillo de minutos en burdeos, bajo el cristal."
       },
       "TUR": {
         "nombre": "Turquesa",
-        "coste": 0
+        "expl": "Anillo de minutos en turquesa, bajo el cristal."
       },
       "ACE": {
-        "nombre": "Acero liso",
-        "coste": 0
-      }
-    },
-    "esftipo": {
-      "T": {
-        "nombre": "Tortuga",
-        "coste": 11.19
+        "nombre": "Acero",
+        "expl": "Anillo de minutos en acero, bajo el cristal."
       }
     },
     "esf": {
       "NEG": {
-        "nombre": "Negra",
-        "coste": 0
+        "nombre": "Negra"
       },
       "AZT": {
-        "nombre": "Azul texturizada",
-        "coste": 0
+        "nombre": "Azul texturizada"
       },
       "AZS": {
-        "nombre": "Azul sunburst",
-        "coste": 0
+        "nombre": "Azul sunburst"
       },
       "TUS": {
-        "nombre": "Turquesa sunburst",
-        "coste": 0
+        "nombre": "Turquesa sunburst"
       },
       "TUC": {
-        "nombre": "Turquesa champagne",
-        "coste": 0
+        "nombre": "Turquesa champán"
       },
-      "ROJ": {
-        "nombre": "Roja fumé",
-        "coste": 0
+      "ROF": {
+        "nombre": "Roja fumé"
       },
-      "NEM": {
-        "nombre": "Negra marfil",
-        "coste": 0
+      "NMA": {
+        "nombre": "Negra y marfil"
       },
-      "FRA": {
-        "nombre": "Frambuesa fumé",
-        "coste": 0
+      "FRF": {
+        "nombre": "Frambuesa fumé"
       }
     },
     "agujas": {
-      "GRI": {
-        "nombre": "Gris oscuro",
-        "coste": 0
-      },
       "ACE": {
-        "nombre": "Acero inoxidable",
-        "coste": 0
+        "nombre": "Acero inoxidable"
+      },
+      "GRI": {
+        "nombre": "Gris oscuro"
       }
     },
     "cristal": {
@@ -332,11 +321,51 @@
         "_real": "NH36",
         "cal": "LO_A4126"
       }
+    },
+    "correamat": {
+      "CAUCHO": {
+        "nombre": "Caucho",
+        "expl": "Caucho de buceo con ranuras, la de toda la vida para el agua."
+      },
+      "A316": {
+        "nombre": "Brazalete de acero",
+        "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja."
+      }
+    },
+    "correa": {
+      "KNEG": {
+        "nombre": "Negra",
+        "familia": "CAUCHO"
+      },
+      "KAZU": {
+        "nombre": "Azul marino",
+        "familia": "CAUCHO"
+      },
+      "KGRI": {
+        "nombre": "Gris",
+        "familia": "CAUCHO"
+      },
+      "KVER": {
+        "nombre": "Verde",
+        "familia": "CAUCHO"
+      },
+      "KROJ": {
+        "nombre": "Roja",
+        "familia": "CAUCHO"
+      },
+      "KNAR": {
+        "nombre": "Naranja",
+        "familia": "CAUCHO"
+      },
+      "BRZ": {
+        "nombre": "Acero 316L",
+        "familia": "A316"
+      }
     }
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "44", "bisel": "NAR", "esftipo": "T", "esf": "NEG", "agujas": "GRI", "cristal": "MIN", "mov": "Q"};
+  var e = {"tamano": "45", "caja": "AC", "bisel": "NAR", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -347,7 +376,7 @@
      elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
-  var ORDEN = ["tamano", "bisel", "esftipo", "esf", "agujas", "cristal", "mov"];
+  var ORDEN = ["tamano", "caja", "bisel", "esf", "agujas", "cristal", "mov", "correamat", "correa"];
 
   /* ---------- LAS PUERTAS ----------
      Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
@@ -374,7 +403,7 @@
      material elegido. Sin esto los dos pasos van cada uno por su lado: el
      29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
      6.816 porque montaba brazaletes de acero con hebilla de piel. */
-  var FILTROS = {};
+  var FILTROS = {"correa": {"paso": "correamat", "campo": "familia"}};
 
   /* AÑADIDOS A PRECIO PLANO, por paso y opción. Óscar, 31/08/2026: «el
      precio de la caja de 39 es 10 € más que la caja de 36 en cualquier
@@ -442,7 +471,7 @@
       var t = OPCIONES[ORDEN[i]], o = t && t[e[ORDEN[i]]];
       if (o && o.agua) return o.agua;
     }
-    return "200 m / 20 ATM";
+    return "20 ATM / 200 metros";
   }
 
   /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
@@ -456,7 +485,7 @@
   window.LAORA_MODELO = {
     slug: "tortuga", nombre: "Tortuga",
     OPCIONES: OPCIONES, e: e,
-    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {},
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"KNEG": "CAUCHO", "KAZU": "CAUCHO", "KGRI": "CAUCHO", "KVER": "CAUCHO", "KROJ": "CAUCHO", "KNAR": "CAUCHO", "BRZ": "A316"},
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
     /* EL MONTAJE POR CAPAS, si el modelo lo trae. Se declara en el JSON:
 
@@ -469,9 +498,12 @@
        fichero dibuja cada opción. El que no traiga nada se queda sin
        dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
     CAPA: {
+    "caja": {
+      "AC": "caja-acero"
+    },
     "bisel": {
       "NAR": "caja-anillo-naranja",
-      "NAG": "caja-anillo-naranja-grueso",
+      "NRG": "caja-anillo-naranja-grueso",
       "PLA": "caja-anillo-plata",
       "AZU": "caja-anillo-azul",
       "VER": "caja-anillo-verde",
@@ -487,15 +519,25 @@
       "AZS": "esfera-azul-sunburst",
       "TUS": "esfera-turquesa-sunburst",
       "TUC": "esfera-turquesa-champagne",
-      "ROJ": "esfera-roja-fume",
-      "NEM": "esfera-negra-marfil",
-      "FRA": "esfera-frambuesa-fume"
+      "ROF": "esfera-roja-fume",
+      "NMA": "esfera-negra-marfil",
+      "FRF": "esfera-frambuesa-fume"
     },
     "agujas": {
-      "ACE": "agujas"
+      "ACE": "agujas-acero",
+      "GRI": "agujas-gris-oscuro"
+    },
+    "correa": {
+      "KNEG": "caucho-negra",
+      "KAZU": "caucho-azul-marino",
+      "KGRI": "caucho-gris",
+      "KVER": "caucho-verde",
+      "KROJ": "caucho-roja",
+      "KNAR": "caucho-naranja",
+      "BRZ": "brazalete-acero"
     }
   }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=1",
-    PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "bisel", "espera": ["tamano", "caja", "bisel"]}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf", "espera": "agujas"}],
+    PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "bisel", "grupo": "bisel", "espera": "bisel"}, {"capa": "agujas", "grupo": "agujas", "espera": "agujas", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -504,7 +546,7 @@
     /* EL COSTE, SUMANDO LO ELEGIDO. Cada opción trae el suyo y el modelo
        añade lo que no depende de ningún paso —el logo—. Si a una le falta,
        no hay coste: se dibuja, pero no se pone precio ni se vende. */
-    COSTES_PUESTOS: false, EXTRA: 0,
+    COSTES_PUESTOS: false, EXTRA: 3.78,
     CADENA: ORDEN,
     PVP_EXTRA: PVP_EXTRA,
     precioExtra: function (s) {

@@ -35,38 +35,45 @@ const ORIGEN = path.join(RAIZ, 'herramientas/volcar_catalogo_2026.js');
 function prepara() {
   let s = fs.readFileSync(ORIGEN, 'utf8');
   s = s.replace(/^const RAIZ = .*$/m, `const RAIZ = ${JSON.stringify(RAIZ)};`);
-  /* ⚠️ EL SUELO YA NO VIVE EN LA FICHA (29/08/2026): se fue a
-     `assets/js/precio-2026.js`, que comparten los diez modelos. Parchear
-     solo el cuerpo del configurador dejaba la constante intacta, las dos
-     pasadas salían idénticas y el auditor decía VERDE sin haber probado
-     nada. Se parchea TODO el fuente ensamblado, y si no aparece por
-     ningún lado se aborta: un verde que no ha medido nada es peor que no
-     tener auditor. */
+  s = s.replace(/^const destino = path\.join\(RAIZ, 'assets\/datos\/catalogo-2026\.json'\);$/m,
+    'const destino = process.env.DESTINO;');
+
+  /* ⚠️ CÓMO SE COMPRUEBA LA REGLA, desde el 31/08/2026.
+     Antes se volcaba dos veces cambiando la comisión del suelo y se
+     comparaban los precios. Eso dejó de valer cuando el suelo pasó a
+     medirse ya con Klarna al 5 %: no había nada que cambiar.
+
+     Ahora se hace de frente. Se vuelca una vez CON EL PRECIO DE TARIFA
+     ANULADO —`pvpBase` devuelve 0— para que el precio de cada
+     referencia sea exactamente su SUELO, y se compara con el catálogo
+     de verdad. Si el suelo de una referencia es mayor que su precio,
+     esa referencia se está vendiendo por debajo de los 50 € limpios o
+     del 15 % neto.
+
+     Se parchea el motor de precio, la ficha y el configurador, los
+     tres, y si no se encuentra `pvpBase` en ninguno se ABORTA: un verde
+     que no ha medido nada es peor que no tener auditor. */
   s = s.replace('const cuerpo = suelto || enLinea;',
-    "if (process.env.SUELO) { const R = /var (COMISION(?:_2026)?) = 0\\.\\d+/g;  // cualquier valor: desde el 30/08 la buena ES 0.05, y esto caza a quien la baje\n"
-    + "    const n = (precio.match(R) || []).length + (enLinea.match(R) || []).length + (suelto.match(R) || []).length;\n"
-    + "    if (!n) throw new Error('AUDITOR CIEGO: no encuentro la constante del suelo en ' + fichero);\n"
-    + "    precio = precio.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO);\n"
-    + "    enLinea = enLinea.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO);\n"
-    + "    suelto = suelto.replace(R, (m, g) => 'var ' + g + ' = ' + process.env.SUELO); }\n"
+    "{ const R = /function pvpBase\\(c\\) \\{ return redondea\\(costeCompleto\\(c\\) \\* MULT\\); \\}/;\n"
+    + "    const n = (precio.match(R)?1:0) + (enLinea.match(R)?1:0) + (suelto.match(R)?1:0);\n"
+    + "    if (!n) throw new Error('AUDITOR CIEGO: no encuentro pvpBase en ' + fichero);\n"
+    + "    const CERO = 'function pvpBase(c) { return 0; }';\n"
+    + "    precio = precio.replace(R, CERO);\n"
+    + "    enLinea = enLinea.replace(R, CERO);\n"
+    + "    suelto = suelto.replace(R, CERO); }\n"
     + "  const cuerpo = suelto || enLinea;");
-  /* las tres piezas se declaran con const en el volcador: hay que poder
-     reasignarlas para parchearlas. */
   s = s.replace('  const precio = [...html.matchAll', '  let precio = [...html.matchAll');
   s = s.replace('  const suelto = [...html.matchAll', '  let suelto = [...html.matchAll');
   s = s.replace('  const enLinea = [...html.matchAll', '  let enLinea = [...html.matchAll');
-
-  s = s.replace(/^const destino = path\.join\(RAIZ, 'assets\/datos\/catalogo-2026\.json'\);$/m,
-    'const destino = process.env.DESTINO;');
   const f = path.join(os.tmpdir(), 'laora-auditar-regla1.js');
   fs.writeFileSync(f, s);
   return f;
 }
 
-function pasada(script, suelo) {
-  const destino = path.join(os.tmpdir(), `laora-cat-${suelo}.json`);
+function pasada(script) {
+  const destino = path.join(os.tmpdir(), 'laora-cat-suelo.json');
   execFileSync(process.execPath, [script], {
-    env: { ...process.env, SUELO: suelo, DESTINO: destino }, stdio: 'ignore',
+    env: { ...process.env, DESTINO: destino }, stdio: 'ignore',
   });
   return JSON.parse(fs.readFileSync(destino, 'utf8')).refs;
 }

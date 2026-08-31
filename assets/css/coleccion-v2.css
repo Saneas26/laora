@@ -246,6 +246,18 @@
   background-position:50% 52%;
 }
 
+/* EL TORTUGA TODAVÍA NO TIENE FOTO DE AMBIENTE (31/08/2026). Los otros
+   cinco lienzos son una escena —la trinchera, la luna, el camarote— y sin
+   una el bloque se queda transparente: el texto es blanco y desaparece
+   sobre el crema de la página. Hasta que llegue la suya, un degradado de
+   fondo de mar, que es donde va este reloj. */
+.cv2-lienzo-tortuga{
+  background-color:#05171d;
+  background-image:
+    linear-gradient(103deg, rgba(3,12,16,.92) 0%, rgba(4,22,29,.72) 46%, rgba(7,44,56,.58) 100%),
+    radial-gradient(120% 90% at 78% 18%, rgba(58,150,168,.42) 0%, rgba(5,23,29,0) 62%);
+}
+
 /* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
    blanco andaba justo de contraste, aquí por fin brilla. */
 .cv2-lienzo .cv2-chip{background:#fff;color:var(--cv2-negro)}
