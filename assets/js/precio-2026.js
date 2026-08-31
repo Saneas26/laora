@@ -73,7 +73,7 @@
      pedidos y devoluciones reales se ajustan aquí y todo el catálogo se
      recalcula solo. */
   var ENVIO_PROVEEDOR = 1.00;              // lo que cuesta traer las piezas, por reloj
-  var DEVOLUCIONES = 0.10;                // 1,5 % del PVP: la merma de los 30 días
+  var DEVOLUCIONES = 0.015;                // 1,5 % del PVP: la merma de los 30 días
 
   function costeCompleto(c) {
     return (c + PACKING_ENVIO / (1 + IVA) + GARANTIA + ENVIO_PROVEEDOR) * (1 + SS);
