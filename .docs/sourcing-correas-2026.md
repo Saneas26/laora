@@ -123,23 +123,23 @@ reglas y Óscar las dará cuando toque.** No suponer nada.
 
 ---
 
-## Las cuatro que valen lo que dice la ficha
+## Las otras cuatro · precios y proveedores de hoy, 30/08/2026
 
-**Óscar, 30/08/2026: «respeta los costes de la ficha».** De estas cuatro no hay
-que tocar el número: el que está puesto es el bueno.
+| Correa | Coste | Colores | Proveedor |
+|---|--:|---|---|
+| Brazalete acero 316L satinado | **21,79 €** | — | [1005006729305423](https://es.aliexpress.com/item/1005006729305423.html) |
+| Piel vintage | **13,80 €** | **tres**, todos al mismo precio | [1005005192599430](https://es.aliexpress.com/item/1005005192599430.html) |
+| Piel italiana hecha a mano | **35,28 €** | todos al mismo precio | [1005005866150401](https://es.aliexpress.com/item/1005005866150401.html) |
+| Nato | **3,99 €** | todos al mismo precio | [1005007750531503](https://es.aliexpress.com/item/1005007750531503.html) |
 
-| Correa | Coste |
-|---|--:|
-| Brazalete acero 316L satinado | **20,19 €** |
-| Piel vintage | **16,89 €** |
-| Piel italiana hecha a mano | **37,39 €** |
-| Nato | **3,99 €** |
+**El pespunte de la italiana —al tono o blanco— NO cambia el precio** (Óscar,
+30/08). Es el único paso de pespunte que hay, y es sólo de aspecto.
 
-Con esto **el Trinchera queda costeado entero**: no queda ni una pieza sin
-precio.
+⚠️ **La vintage tiene tres colores, no cinco.** Óscar: «13,80 hoy en los **3
+colores**, mismo precio». La ficha ofrece cinco —azul petróleo, burdeos, coñac,
+marrón oscuro y negra—. **Faltan dos por decidir: o se quitan, o se buscan.**
 
-Lo que sigue faltando de las cuatro es el **enlace del anuncio** —el coste está
-cerrado, el proveedor no—, y eso hace falta para la hoja de pedido del panel.
+Con esto **no queda ni una correa sin coste ni sin proveedor.**
 
 ---
 

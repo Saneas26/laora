@@ -68,7 +68,19 @@ para montar una combinación que el anuncio de la esfera no dé.
 ## Correas
 
 Las correas son las de la casa y están en `.docs/sourcing-correas-2026.md`.
-**Las ocho familias tienen coste cerrado.**
+**Las ocho familias tienen coste y proveedor.**
+
+## Lo que el Trinchera NO elige (Óscar, 30/08/2026)
+
+| | |
+|---|---|
+| **Bisel** | **El Trinchera no tiene bisel.** No es un paso vacío: es que no existe. |
+| **Agujas** | **Van fijas a la esfera**, por el momento. La esfera las trae y no se eligen aparte. |
+| **Cristal** | **Siempre zafiro.** No se elige. |
+
+⚠️ **El zafiro hay que pedirlo.** Si la caja se ofrece con mineral o con
+zafiro, la variante de pedido tiene que ser **siempre la de zafiro**, en las
+cuatro cajas. Va en la variante, no en el precio.
 
 ## El grabado del logotipo — 3,78 € · para TODOS los modelos
 
@@ -93,8 +105,8 @@ al hilo del anuncio.
 **Ninguna pieza del Trinchera está sin coste.** Lo que queda es de compra, no
 de precio:
 
-1. **El enlace del anuncio de cuatro correas** —brazalete satinado, piel
-   vintage, piel italiana y nato—: el coste está cerrado, el proveedor no.
+1. **Los dos colores de más de la piel vintage**: el anuncio da tres y la
+   ficha ofrece cinco.
 2. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
    desplegable para que llegue la pieza correcta.
 3. **Envío, mínimos y descuento por volumen** de cada proveedor.
