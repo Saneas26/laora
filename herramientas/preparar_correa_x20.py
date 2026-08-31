@@ -215,45 +215,113 @@ def sella_canto(L):
         falta[r0:r1 + 1, x0:x1] = ~solido[r0:r1 + 1, x0:x1]
         if not falta.any():
             continue
-        # SE RELLENA CON LA PIEL DE AL LADO, no con un trozo de otra fila:
-        # copiando la fila limpia más cercana se veían los recuadros del
-        # parche, porque el grano no casa. Aquí cada hueco toma el color del
-        # píxel opaco más próximo y luego se difumina SOLO por dentro del
-        # parche, que es lo que hace que no se note.
-        _, idx = ndimage.distance_transform_edt(
-            falta, return_distances=True, return_indices=True)
-        parche = a[idx[0], idx[1]].astype(np.float32)
-        for canal in range(3):
-            parche[:, :, canal] = ndimage.gaussian_filter(parche[:, :, canal], 12)
-        a[falta] = np.clip(parche[falta], 0, 255).astype(np.uint8)
-        a[:, :, 3][falta] = 255
+        _rellena(a, falta)
     return Image.fromarray(a)
 
 
-# LAS FILAS DONDE ESTÁN LAS ASAS, en el lienzo de 4.096. Salen de la caja:
-# de la 1.155 a la 1.449 asoma la correa por el hueco de arriba, y abajo su
-# espejo. Es la única franja donde el ancho de la correa importa de verdad;
-# por encima se la ve entera y por debajo la tapa el cuerpo del reloj.
-ASA_FILAS = ((1155, 1449), (4239, 4533))
+def _rellena(a, falta):
+    """Tapa un hueco CON LA PIEL DE AL LADO.
+
+    No vale copiar un trozo de otra fila: se veían los recuadros del parche,
+    porque el grano no casa. Cada hueco toma el color del píxel opaco más
+    próximo y luego se difumina SOLO por dentro del parche, que es lo que
+    hace que no se note."""
+    if not falta.any():
+        return
+    _, idx = ndimage.distance_transform_edt(
+        falta, return_distances=True, return_indices=True)
+    parche = a[idx[0], idx[1]].astype(np.float32)
+    for canal in range(3):
+        parche[:, :, canal] = ndimage.gaussian_filter(parche[:, :, canal], 12)
+    a[falta] = np.clip(parche[falta], 0, 255).astype(np.uint8)
+    a[:, :, 3][falta] = 255
+
+
+# LAS FILAS DONDE ESTÁN LAS ASAS, en el lienzo de 4.096. Es la única franja
+# donde el ancho de la correa decide si se ve fondo o no: por encima se la
+# ve entera y por debajo la tapa el cuerpo del reloj.
+#
+# ⚠️ NO SON SIMÉTRICAS, y ése fue el fallo. La primera vez se puso la de
+# abajo como espejo de la de arriba alrededor del centro del lienzo, y el
+# reloj NO está centrado en el lienzo de la correa: su eje cae 150 px por
+# encima. La franja de abajo quedaba 260 px fuera de sitio y por ahí seguían
+# saliendo tres píxeles de fondo por mucho que se ensanchara la correa.
+#
+# Salen de medir las cuatro cajas que montan estas correas —el Lunar y las
+# del Trinchera— con `filas_de_asa` de `auditar_correas.py`, y de coger la
+# unión con un poco de margen:
+#     Lunar acero      1152–1448  ·  3975–4226
+#     Trinchera acero  1185–1484  ·  3896–4193
+#     titanio          1190–1489  ·  3914–4231
+#     bronce           1157–1472  ·  4147–4221
+ASA_FILAS = ((1145, 1495), (3888, 4240))
+
+
+def _cantos_en_la_punta_del_asa(L):
+    """Los dos cantos EN LA PUNTA DEL ASA, que es donde se ve el ancho.
+
+    Ni el máximo de la pieza ni el mínimo de la franja: la correa se
+    estrecha hacia la hebilla, así que su ancho depende de dónde se mida.
+    El que ve el cliente es el de la fila donde la correa asoma por primera
+    vez —la punta del asa—; de ahí hacia dentro es más ancha y la tapa la
+    caja, y de ahí hacia fuera se estrecha como debe."""
+    a = np.asarray(L)[:, :, 3] > 60
+    izq, der = [], []
+    for i, (r0, r1) in enumerate(ASA_FILAS):
+        r = r0 if i == 0 else r1
+        idx = np.where(a[min(r, a.shape[0] - 1)])[0]
+        if len(idx):
+            izq.append(int(idx[0]))
+            der.append(int(idx[-1]))
+    if not izq:
+        return None
+    return sum(izq) / float(len(izq)), sum(der) / float(len(der))
 
 
 def banda_en_las_asas(L):
-    """Cuánto mide la correa DONDE LAS ASAS, en el peor sitio.
+    """El ancho de la correa en la punta del asa. 1.284 px son 20 mm."""
+    c = _cantos_en_la_punta_del_asa(L)
+    return 0 if not c else int(round(c[1] - c[0] + 1))
 
-    Es la única medida que decide si se ve fondo o no: el canto izquierdo
-    que más se mete y el derecho que menos llega, en las filas del hueco.
-    1.284 px son 20 mm justos, que es lo que mide ese hueco."""
-    a = np.asarray(L)[:, :, 3] > 60
-    izq, der = [], []
+
+def cuadra_las_asas(L, ancho):
+    """Deja la correa RECTA y de `ancho` justo donde entra en las asas.
+
+    Óscar, 31/08/2026: «hazla a 20 mm exactos y centrada sobre el eje, debe
+    haber la misma distancia de hueco a izquierda y derecha de las asas».
+
+    ⚠️ ESCALAR NO BASTA. Esto es la foto de una correa de verdad: sus cantos
+    no son paralelos y bailan veinte píxeles. Con la pieza a 20 mm justos,
+    una fila se metía seis píxeles dentro del asa y se veía el fondo, y el
+    hueco de asa que quedaba a la vista no era el mismo a los dos lados.
+
+    Aquí se le pone el canto que tiene la correa de verdad: una banda de
+    1.284 px —los 20 mm del hueco entre asas— centrada en el eje 2.054.
+    Sólo en las filas de las asas y hacia dentro, que es donde la correa es
+    recta; por encima sigue estrechándose hacia la hebilla como en la foto.
+
+    SÓLO SE RELLENA, NO SE RECORTA. Lo que sobra por los lados queda detrás
+    del asa y no se ve; lo que falta sí. Recortando además se le comía a la
+    correa el canto de las filas de dentro, que es lo que la sujeta."""
+    a = np.asarray(L).copy()
+    x0 = int(round((ASAS[0] + ASAS[1]) / 2.0 - ancho / 2.0))
+    x1 = x0 + int(ancho)
+    # ⚠️ Y EL CONTRATO POR ENCIMA DE TODO. El hueco entre asas va de la 1.412
+    # a la 2.696 INCLUIDAS, y en la primera fila del asa —la punta, donde la
+    # caja está achaflanada— es un píxel más ancho todavía. Una banda de
+    # 1.284 centrada y redondeada se quedaba corta justo ahí, y
+    # `auditar_correas.py` lo cantaba. Se estira lo justo para taparlo:
+    # nueve píxeles de 4.096, catorce centésimas de milímetro.
+    x0, x1 = min(x0, ASAS[0] - 4), max(x1, ASAS[1] + 5)
+    vivo = a[:, :, 3] > 60
+    falta = np.zeros(a.shape[:2], bool)
     for r0, r1 in ASA_FILAS:
         for r in range(r0, min(r1, a.shape[0] - 1) + 1):
-            idx = np.where(a[r])[0]
-            if len(idx):
-                izq.append(idx[0])
-                der.append(idx[-1])
-    if not izq:
-        return 0
-    return min(der) - max(izq) + 1
+            if not vivo[r].any():
+                continue
+            falta[r, x0:x1] = a[r, x0:x1, 3] <= 250
+    _rellena(a, falta)
+    return Image.fromarray(a)
 
 
 def centra(L):
@@ -272,17 +340,10 @@ def centra(L):
 
     Y se llama DESPUÉS de sellar, que rellena la mordida del hilo por un
     solo canto y mueve la pieza."""
-    a = np.asarray(L)[:, :, 3] > 60
-    izq, der = [], []
-    for r0, r1 in ASA_FILAS:
-        for r in range(r0, min(r1, a.shape[0] - 1) + 1):
-            idx = np.where(a[r])[0]
-            if len(idx):
-                izq.append(idx[0])
-                der.append(idx[-1])
-    if not izq:
+    c = _cantos_en_la_punta_del_asa(L)
+    if not c:
         return L
-    centro = (max(izq) + min(der)) / 2.0
+    centro = (c[0] + c[1]) / 2.0
     dx = int(round((ASAS[0] + ASAS[1]) / 2.0 - centro))
     if not dx:
         return L
@@ -317,7 +378,7 @@ def acerca_al_asa(L, px=0, punta=0):
 
 
 if __name__ == '__main__':
-    CON_VALOR = ('--holgura', '--acerca', '--punta', '--ancho', '--asas')
+    CON_VALOR = ('--holgura', '--acerca', '--punta', '--ancho', '--asas', '--cuadra')
     args = [a for i, a in enumerate(sys.argv[1:])
             if not a.startswith('--') and not (i and sys.argv[i] in CON_VALOR)]
     if len(args) < 2:
@@ -328,6 +389,7 @@ if __name__ == '__main__':
     punta = int(sys.argv[sys.argv.index('--punta') + 1]) if '--punta' in sys.argv else 0
     ancho_pedido = int(sys.argv[sys.argv.index('--ancho') + 1]) if '--ancho' in sys.argv else 0
     asas = int(sys.argv[sys.argv.index('--asas') + 1]) if '--asas' in sys.argv else 0
+    cuadra = int(sys.argv[sys.argv.index('--cuadra') + 1]) if '--cuadra' in sys.argv else 0
 
     def monta(factor):
         capa, s, mio, ref = prepara(origen, holgura, ancho_pedido, factor)
@@ -337,7 +399,10 @@ if __name__ == '__main__':
             capa = acerca_al_asa(capa, acerca, punta)
         # el centrado va el ÚLTIMO: mira las filas de las asas, y hasta que las
         # tiras no están en su sitio esas filas no enseñan lo que van a enseñar.
-        return centra(capa), s
+        capa = centra(capa)
+        if cuadra:
+            capa = cuadra_las_asas(capa, cuadra)
+        return capa, s
 
     # ⚠️ EL ANCHO QUE VE ÓSCAR NO ES EL DEL DIBUJO. La correa se estrecha
     # hacia la hebilla y sus cantos no son paralelos —es una foto—, así que
