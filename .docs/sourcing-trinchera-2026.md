@@ -43,19 +43,27 @@ Los colores de esfera **valen todos lo mismo**.
 
 Las correas son las de la casa y están en `.docs/sourcing-correas-2026.md`.
 
-## Extra
+## El grabado del logotipo — 3,78 € · para TODOS los modelos
 
-| Pieza | Coste | Proveedor |
-|---|--:|---|
-| Grabado del logotipo | **3,78 €** | **falta** |
+**Óscar, 30/08/2026:** «El logotipo cuesta 3,78 como ya está contemplado para
+este modelo y **para todos**. Siempre cuesta eso el logo.»
+
+| | |
+|---|---|
+| Coste | **3,78 €**, fijo, en todos los modelos |
+| Proveedor | [1005009508960559](https://es.aliexpress.com/item/1005009508960559.html) |
+| **WhatsApp** | **+86 198 4800 6940** |
+
+Es el **único proveedor de la casa con teléfono directo**. Sirve para lo que no
+se puede preguntar por el chat de AliExpress: mandarle el archivo del logo,
+confirmar el grabado antes de una tirada o resolver una incidencia sin esperar
+al hilo del anuncio.
 
 ---
 
 ## Lo que falta
 
-1. **El anuncio del grabado del logotipo.** Es la única pieza del Trinchera sin
-   proveedor.
-2. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
+1. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
    desplegable para que llegue la pieza correcta.
 3. **Envío, mínimos y descuento por volumen** de cada proveedor.
 4. Los precios se capturaron con ofertas activas: **reverificar antes de
