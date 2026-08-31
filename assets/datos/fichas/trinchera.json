@@ -203,52 +203,12 @@
   ],
   "colores": [
    {
-    "id": "A316P",
-    "familia": "A316",
-    "nombre": "Acero, centro pulido",
-    "coste": 20.19,
-    "pieza": "acero-316l-centro-pulido",
-    "tec": "brazalete de acero inoxidable 316L de tres eslabones, con el central pulido y cierre desplegable con seguro abatible"
-   },
-   {
-    "id": "A316NGP",
-    "familia": "A316",
-    "nombre": "PVD negro, centro pulido",
-    "coste": 20.19,
-    "pieza": "acero-316l-pvd-negro-centro-pulido",
-    "tec": "brazalete de acero inoxidable 316L con PVD negro, con el eslabón central pulido"
-   },
-   {
-    "id": "A316ORP",
-    "familia": "A316",
-    "nombre": "Centro oro rosa pulido",
-    "coste": 20.19,
-    "pieza": "acero-316l-centro-oro-rosa-pulido",
-    "tec": "brazalete de acero inoxidable 316L con el eslabón central pulido en oro rosa"
-   },
-   {
-    "id": "A316AMP",
-    "familia": "A316",
-    "nombre": "Centro oro amarillo pulido",
-    "coste": 20.19,
-    "pieza": "acero-316l-centro-oro-amarillo-pulido",
-    "tec": "brazalete de acero inoxidable 316L con el eslabón central pulido en oro amarillo"
-   },
-   {
     "id": "A316SAT",
     "familia": "A316",
     "nombre": "Acero satinado",
     "coste": 20.19,
     "pieza": "acero-316l-satinado",
     "tec": "brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable con seguro abatible"
-   },
-   {
-    "id": "A316OR",
-    "familia": "A316",
-    "nombre": "Oro rosa",
-    "coste": 20.19,
-    "pieza": "acero-316l-oro-rosa",
-    "tec": "brazalete de acero inoxidable 316L de tres eslabones en oro rosa, con cierre desplegable con seguro abatible"
    },
    {
     "id": "KAMM",
@@ -593,7 +553,8 @@
   "_piezas": "Cada correa dice qué dibujo de la BIBLIOTECA compartida es (30/08/2026). Las de piel llevan el pespunte dentro del nombre del fichero, así que su `pieza` es una TABLA por el paso `pespunte`: «B» el blanco y «*» el resto. SIN DIBUJO se quedan VBEI (beige) y VMAL (malva): la tela vaquera se rehizo el 30/08 y esos dos colores se fueron —entraron arena y topo—, así que sus piezas ya no existen. O se cambian los dos colores por arena y topo, o esas referencias salen sin correa.",
   "_oficiales": "LAS CORREAS SON LAS DE LA CASA, LAS MISMAS PARA TODOS (Óscar, 30/08/2026): «las correas del lunar son las oficiales y las que tiene que vestir el trinchera... el nato del lunar es el nato de todos los relojes». Se copian TAL CUAL del Lunar: ocho familias y cuarenta y una correas, con sus costes y sus dibujos de la biblioteca compartida. Fuera las que tenía el Trinchera por su cuenta. La piel italiana lleva el pespunte dentro del nombre del fichero, así que su `pieza` es una tabla por el paso `pespunte`.",
   "_cierre": "EL CIERRE SOLO SE ELIGE DONDE HAY ELECCION DE VERDAD. La correa oficial viene con su cierre DIBUJADO —la perforada con hebilla clasica plateada, la vaquera y el nato con la suya—, asi que ofrecer cinco cierres encima del dibujo era mentir: se cobraba un cierre que la foto no ensena. Queda abierto en piel italiana, piel vintage y caucho, que son las tres que en el Lunar admiten mas de uno. Ojo: el Lunar ademas limita CUALES (el caucho solo mariposas, la vintage solo negra o plata) y eso aqui todavia no se puede decir.",
-  "_ancho": "LA PIEL CON COSTURA ESTABA ESTRECHA (Oscar, 31/08/2026: «parece de 18mm cuando deberia ser de 20mm»). Y lo estaba: 1.359 px de ancho contra los 1.477-1.513 de las demas familias, un 6 % menos, que sobre 20 mm son 18,8. Rehecha desde la entrega con preparar_correa_x20.py, que iguala el ancho al de la pieza patron. Ahora 1.454."
+  "_ancho": "LA PIEL CON COSTURA ESTABA ESTRECHA (Oscar, 31/08/2026: «parece de 18mm cuando deberia ser de 20mm»). Y lo estaba: 1.359 px de ancho contra los 1.477-1.513 de las demas familias, un 6 % menos, que sobre 20 mm son 18,8. Rehecha desde la entrega con preparar_correa_x20.py, que iguala el ancho al de la pieza patron. Ahora 1.454.",
+  "_acero": "SOLO EL SATINADO (Oscar, 31/08/2026: «solo se ofrece con acero satinado de las opciones de acero»). La biblioteca tiene seis brazaletes de 316L y el Trinchera vestia los seis; se quedan el satinado y fuera los otros cinco —centro pulido, PVD negro con centro pulido, centro oro rosa, centro oro amarillo y oro rosa entero—. Siguen vivos en la biblioteca para los demas modelos: aqui no se borra ninguna pieza, se deja de ofrecer."
  },
  "filtros": {
   "correa": {
@@ -643,7 +604,7 @@
  "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
  "montaje": {
   "img": "/assets/img/trinchera-2026/capas/1200/",
-  "v": "?v=5",
+  "v": "?v=6",
   "pila": [
    {
     "capa": "correa",

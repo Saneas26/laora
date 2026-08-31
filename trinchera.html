@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Trinchera de laOra: 10640 combinaciones, al precio honesto.">
+<meta name="description" content="Trinchera de laOra: 10240 combinaciones, al precio honesto.">
 <title>Trinchera · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -347,47 +347,12 @@
       }
     },
     "correa": {
-      "A316P": {
-        "nombre": "Acero, centro pulido",
-        "coste": 20.19,
-        "familia": "A316",
-        "pieza": "acero-316l-centro-pulido",
-        "tec": "brazalete de acero inoxidable 316L de tres eslabones, con el central pulido y cierre desplegable con seguro abatible"
-      },
-      "A316NGP": {
-        "nombre": "PVD negro, centro pulido",
-        "coste": 20.19,
-        "familia": "A316",
-        "pieza": "acero-316l-pvd-negro-centro-pulido",
-        "tec": "brazalete de acero inoxidable 316L con PVD negro, con el eslabón central pulido"
-      },
-      "A316ORP": {
-        "nombre": "Centro oro rosa pulido",
-        "coste": 20.19,
-        "familia": "A316",
-        "pieza": "acero-316l-centro-oro-rosa-pulido",
-        "tec": "brazalete de acero inoxidable 316L con el eslabón central pulido en oro rosa"
-      },
-      "A316AMP": {
-        "nombre": "Centro oro amarillo pulido",
-        "coste": 20.19,
-        "familia": "A316",
-        "pieza": "acero-316l-centro-oro-amarillo-pulido",
-        "tec": "brazalete de acero inoxidable 316L con el eslabón central pulido en oro amarillo"
-      },
       "A316SAT": {
         "nombre": "Acero satinado",
         "coste": 20.19,
         "familia": "A316",
         "pieza": "acero-316l-satinado",
         "tec": "brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable con seguro abatible"
-      },
-      "A316OR": {
-        "nombre": "Oro rosa",
-        "coste": 20.19,
-        "familia": "A316",
-        "pieza": "acero-316l-oro-rosa",
-        "tec": "brazalete de acero inoxidable 316L de tres eslabones en oro rosa, con cierre desplegable con seguro abatible"
       },
       "KAMM": {
         "nombre": "Azul marino y menta",
@@ -689,7 +654,7 @@
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316P", "pespunte": "T", "cierre": "plata"};
+  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316SAT", "pespunte": "T", "cierre": "plata"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -800,7 +765,7 @@
   window.LAORA_MODELO = {
     slug: "trinchera", nombre: "Trinchera",
     OPCIONES: OPCIONES, e: e,
-    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"A316P": "A316", "A316NGP": "A316", "A316ORP": "A316", "A316AMP": "A316", "A316SAT": "A316", "A316OR": "A316", "KAMM": "CAUCHO", "KBLG": "CAUCHO", "KCEL": "CAUCHO", "KCRE": "CAUCHO", "KMAR": "CAUCHO", "KNBL": "CAUCHO", "KNNO": "CAUCHO", "KNEG": "CAUCHO", "KRNE": "CAUCHO", "PNEG": "PPER", "PCON": "PPER", "PMAR": "PPER", "PVER": "PPER", "PVAZ": "PVIN", "PVBU": "PVIN", "PVCO": "PVIN", "PVMO": "PVIN", "PVNE": "PVIN", "LCON": "PCOS", "LMAR": "PCOS", "LNEG": "PCOS", "IMAR": "PITA", "INEG": "PITA", "IAZU": "PITA", "IVER": "PITA", "NNEG": "NATO", "NAZU": "NATO", "NGRI": "NATO", "NARE": "NATO", "NOLI": "NATO", "VARE": "TELA", "VAZU": "TELA", "VGRI": "TELA", "VNEG": "TELA", "VTOP": "TELA"},
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"A316SAT": "A316", "KAMM": "CAUCHO", "KBLG": "CAUCHO", "KCEL": "CAUCHO", "KCRE": "CAUCHO", "KMAR": "CAUCHO", "KNBL": "CAUCHO", "KNNO": "CAUCHO", "KNEG": "CAUCHO", "KRNE": "CAUCHO", "PNEG": "PPER", "PCON": "PPER", "PMAR": "PPER", "PVER": "PPER", "PVAZ": "PVIN", "PVBU": "PVIN", "PVCO": "PVIN", "PVMO": "PVIN", "PVNE": "PVIN", "LCON": "PCOS", "LMAR": "PCOS", "LNEG": "PCOS", "IMAR": "PITA", "INEG": "PITA", "IAZU": "PITA", "IVER": "PITA", "NNEG": "NATO", "NAZU": "NATO", "NGRI": "NATO", "NARE": "NATO", "NOLI": "NATO", "VARE": "TELA", "VAZU": "TELA", "VGRI": "TELA", "VNEG": "TELA", "VTOP": "TELA"},
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
     /* EL MONTAJE POR CAPAS, si el modelo lo trae. Se declara en el JSON:
 
@@ -838,7 +803,7 @@
         "*": "agujas"
       }
     }
-  }, CAPA_IMG: "/assets/img/trinchera-2026/capas/1200/", SERIE_V: "?v=5",
+  }, CAPA_IMG: "/assets/img/trinchera-2026/capas/1200/", SERIE_V: "?v=6",
     PILA: [{"capa": "correa", "grupo": "correa"}, {"capa": "esf", "grupo": "esf"}, {"capa": "caja", "grupo": "caja"}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
@@ -860,6 +825,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=11"></script>
+<script src="/assets/js/configurador-2026.js?v=12"></script>
 </body>
 </html>

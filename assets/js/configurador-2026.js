@@ -599,9 +599,18 @@
        biblioteca y cada una dice su nombre en `CORREAS[x].pieza`. */
     for (var c in CORREAS) {
       /* Y una correa puede tener MÁS DE UN nombre: la piel viene con el
-         pespunte dentro del fichero, así que son dos. El modelo los da. */
-      var piezas = M.piezasDe ? M.piezasDe(c)
-                 : (CORREAS[c].pieza ? [CORREAS[c].pieza] : []);
+         pespunte dentro del fichero, así que son dos. El modelo los da…
+         y si no lo da, la propia correa: en un modelo generado `pieza` es
+         una TABLA por pespunte, y sin abrirla la precarga pedía
+         `[object Object].avif` y se llevaba un 404 por cada piel. */
+      var pz = CORREAS[c].pieza, piezas;
+      if (M.piezasDe) piezas = M.piezasDe(c);
+      else if (!pz) piezas = [];
+      else if (typeof pz === 'string') piezas = [pz];
+      else {
+        piezas = [];
+        for (var pk in pz) if (pz[pk]) piezas.push(pz[pk]);
+      }
       for (var q = 0; q < piezas.length; q++) hazlo(piezas[q], 'correa');
     }
   }

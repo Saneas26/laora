@@ -62,13 +62,13 @@ def sin_fondo(f, tol=12, sat=18):
     # donde tiene que haber dos—, así que se prueba de más a menos y se
     # queda la primera que sigue dejando la correa entera.
     for tope in (60, 40, 25, 12, 0):
-        m = _pela(dos, L, gris, tope=tope) if tope else dos
+        m = _pela(dos, L, gris, s > sat, tope=tope) if tope else dos
         if len(tiras(m)) == 2:
             return m, a
     return dos, a
 
 
-def _pela(m, L, gris, tope=60):
+def _pela(m, L, gris, color, tope=60):
     """Le quita al canto la SOMBRA de estudio.
 
     La foto trae una sombra suave alrededor de la pieza: en la piel con
@@ -85,6 +85,13 @@ def _pela(m, L, gris, tope=60):
     Con tope, por si acaso: sesenta píxeles de 4.096 son quince centésimas
     de milímetro. Si hiciera falta pelar más, es que el recorte está mal y
     hay que mirarlo, no seguir comiendo.
+
+    ⚠️ LO QUE TIENE COLOR NO SE PELA (31/08/2026). El hilo crema de la piel
+    con costura es CLARO, y en una correa negra el pelado lo daba por fondo
+    y se comía la costura entera: por eso al sacarla de debajo del asa
+    aparecían boquetes justo donde va el hilo. El fondo del estudio y su
+    sombra son grises neutros; el hilo, no. Se pela por gris, pero solo
+    donde no hay color.
     """
     nucleo = ndimage.binary_erosion(m, np.ones((21, 21)))
     if not nucleo.any():
@@ -93,7 +100,7 @@ def _pela(m, L, gris, tope=60):
     claro = L > medio if gris > np.median(L[nucleo]) else L < medio
     for _ in range(tope):
         borde = m & ~ndimage.binary_erosion(m, np.ones((3, 3)))
-        fuera = borde & claro
+        fuera = borde & claro & ~color
         if not fuera.any():
             break
         m = m & ~fuera
@@ -148,14 +155,105 @@ def prepara(origen, holgura=1.0):
     return L, s, mio, ref
 
 
+
+def sella_canto(L):
+    """Tapa lo que el hilo deja al cinchar la piel, junto al asa.
+
+    Óscar, 31/08/2026: «la correa de piel con costura pierde la costura si
+    no la movemos un poco más cerca del asa». Al acercarla sale la costura…
+    y sale con ella lo que el hilo deja al cinchar: en la coñac, una mordida
+    de setenta píxeles en el canto izquierdo y unas ranuras entre las
+    hebras. Por todas se veía el FONDO DE LA PÁGINA.
+
+    Eso es del estudio, no del producto: en la muñeca, detrás está el asa.
+
+    CÓMO. En la zona de la costura —y SOLO ahí— la correa es una banda
+    maciza: se toma el canto izquierdo y el derecho que tiene la pieza en
+    esa zona y se rellena todo lo que quede en medio y esté vacío, con la
+    piel de la fila limpia más cercana. El hilo, que va por encima, no se
+    toca.
+
+    LOS DOS LÍMITES DE LA ZONA, y son los que hacen que esto no estropee
+    nada más:
+      · por dentro, PUNTA: el corte del extremo se estrecha de verdad y se
+        mete bajo la caja. No se toca.
+      · por fuera, ZONA: los agujeros de la hebilla son de verdad y están a
+        mil ochocientos píxeles del extremo. Ni se acercan.
+    """
+    a = np.asarray(L).copy()
+    alfa = a[:, :, 3] > 60
+    # ⚠️ NO VALE «hay alfa»: la máscara viene de una foto de 1.024 px
+    # estirada a 4.096, así que cada canto es una RAMPA de cien píxeles. En
+    # la mordida del hilo el alfa se quedaba entre 65 y 232 —opaco para un
+    # umbral de 60— y por ahí seguía viéndose el fondo. Dentro de la correa
+    # el alfa es 255 o no es nada.
+    solido = a[:, :, 3] > 250
+    PUNTA, ZONA = 150, 750
+    for ini, fin in tiras(alfa):
+        arriba = ini == 0
+        borde_dentro = fin if arriba else ini
+        r0, r1 = ((borde_dentro - ZONA, borde_dentro - PUNTA) if arriba
+                  else (borde_dentro + PUNTA, borde_dentro + ZONA))
+        r0, r1 = max(ini, r0), min(fin, r1)
+        izq, der = [], []
+        for r in range(r0, r1 + 1):
+            idx = np.where(solido[r])[0]
+            if len(idx):
+                izq.append(idx[0])
+                der.append(idx[-1])
+        if not izq:
+            continue
+        x0, x1 = int(np.median(izq)), int(np.median(der)) + 1
+        falta = np.zeros_like(alfa)
+        falta[r0:r1 + 1, x0:x1] = ~solido[r0:r1 + 1, x0:x1]
+        if not falta.any():
+            continue
+        # SE RELLENA CON LA PIEL DE AL LADO, no con un trozo de otra fila:
+        # copiando la fila limpia más cercana se veían los recuadros del
+        # parche, porque el grano no casa. Aquí cada hueco toma el color del
+        # píxel opaco más próximo y luego se difumina SOLO por dentro del
+        # parche, que es lo que hace que no se note.
+        _, idx = ndimage.distance_transform_edt(
+            falta, return_distances=True, return_indices=True)
+        parche = a[idx[0], idx[1]].astype(np.float32)
+        for canal in range(3):
+            parche[:, :, canal] = ndimage.gaussian_filter(parche[:, :, canal], 12)
+        a[falta] = np.clip(parche[falta], 0, 255).astype(np.uint8)
+        a[:, :, 3][falta] = 255
+    return Image.fromarray(a)
+
+
+def acerca_al_asa(L, px):
+    """Separa las dos tiras `px` píxeles: la de arriba sube, la de abajo baja.
+
+    Sirve para sacar de debajo del asa un detalle que se estaba comiendo la
+    caja. Lo que se descubre por dentro no deja hueco: el extremo de la
+    tira sigue quedando bajo el cuerpo de la caja, que a 4.096 tapa de la
+    fila 1.667 hacia dentro."""
+    a = np.asarray(L)
+    m = a[:, :, 3] > 60
+    t = tiras(m)
+    n = Image.new('RGBA', L.size, (0, 0, 0, 0))
+    med = (t[0][1] + t[1][0]) // 2
+    n.alpha_composite(L.crop((0, 0, L.width, med)), (0, -px))
+    n.alpha_composite(L.crop((0, med, L.width, L.height)), (0, med + px))
+    return n
+
+
 if __name__ == '__main__':
+    CON_VALOR = ('--holgura', '--acerca')
     args = [a for i, a in enumerate(sys.argv[1:])
-            if not a.startswith('--') and not (i and sys.argv[i] == '--holgura')]
+            if not a.startswith('--') and not (i and sys.argv[i] in CON_VALOR)]
     if len(args) < 2:
         sys.exit(__doc__)
     origen, ident = args[0], args[1]
     holgura = float(sys.argv[sys.argv.index('--holgura') + 1]) if '--holgura' in sys.argv else 1.0
+    acerca = int(sys.argv[sys.argv.index('--acerca') + 1]) if '--acerca' in sys.argv else 0
     capa, s, mio, ref = prepara(origen, holgura)
+    if '--sella' in sys.argv:
+        capa = sella_canto(capa)
+    if acerca:
+        capa = acerca_al_asa(capa, acerca)
     a = np.asarray(capa)[:, :, 3] > 128
     ys, xs = np.where(a)
     ancho = xs.max() - xs.min() + 1

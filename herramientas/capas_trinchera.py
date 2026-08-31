@@ -51,7 +51,12 @@ HOLGURA_ESF = 1.02       # la esfera se mete un pelín bajo el bisel
 # pista de minutos se acaba en 270. El dibujo de las agujas viene más
 # largo de lo que le toca a esta esfera, así que se encoge hasta que la
 # más larga muere justo dentro de la pista.
-PUNTA_AGUJA = 0.98       # de la pista de minutos de la esfera
+# Y AÚN ASÍ SE PASABAN (Óscar, 31/08/2026: «un poco más pequeña la imagen
+# de las agujas, siguen siendo más largas de lo normal»). Con el 98 % el
+# minutero moría en la pista de minutos, por fuera del anillo de cifras;
+# con el 90 % muere en la punta de los triángulos, que es donde acaba un
+# minutero de reloj de campo.
+PUNTA_AGUJA = 0.90       # de la pista de minutos de la esfera
 
 CAJAS = {'caja-acero': 'trinchera-caja-acero.png',
          'caja-negra': 'trinchera-caja-pvd-negro.png',
