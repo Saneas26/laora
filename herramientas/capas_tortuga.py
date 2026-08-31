@@ -75,6 +75,18 @@ ESFERAS = {
     'esfera-negra-marfil':     '17-esfera-negra-marfil-28-5mm-4096.png',
     'esfera-frambuesa-fume':   '18-esfera-frambuesa-fume-28-5mm-4096.png',
 }
+# LAS AGUJAS VIENEN YA MONTADAS (Óscar, 31/08/2026). Las primeras llegaron
+# sueltas —las tres tumbadas una al lado de otra, sin eje— y habría habido
+# que buscarle a cada una su pivote y girarla. Éstas vienen armadas sobre el
+# eje 2.048 y DIBUJADAS PARA LA ESFERA DE 28,5 mm, que es la misma a la que
+# están dibujadas las esferas: por eso van a la escala de la esfera, no a
+# una suya. Si se les midiera el largo y se escalaran aparte, la hora que
+# marcan seguiría siendo la misma pero las puntas dejarían de caer donde el
+# dibujante las puso.
+AGUJAS = {
+    'agujas-acero':       '39-agujas-tortuga-acero-inoxidable-esfera-28-5mm-eje-2048.png',
+    'agujas-gris-oscuro': '38-agujas-tortuga-gris-oscuro-esfera-28-5mm-eje-2048.png',
+}
 CORREAS = {
     'caucho-negra':      '32-correa-caucho-negra-buzo-20-18mm-eje-2048.png',
     'caucho-azul-marino': '33-correa-caucho-azul-marino-buzo-20-18mm-eje-2048.png',
@@ -268,6 +280,15 @@ def monta():
         c = ((xx.min() + xx.max()) / 2.0, (yy.min() + yy.max()) / 2.0)
         capas[ident] = pon(f, se, c, eje)
 
+    # las agujas, a la MISMA escala que la esfera: están dibujadas para ella
+    for ident, f in sorted(AGUJAS.items()):
+        b = alfa(f)
+        yy, xx = np.where(b)
+        largo = float(np.hypot(xx - LIENZO / 2.0, yy - LIENZO / 2.0).max())
+        capas[ident] = pon(f, se, (LIENZO / 2.0, LIENZO / 2.0), eje)
+        print('AGUJAS %-20s largo %.0f -> %.0f px, de un ojo de %.0f (%.0f %% del radio)'
+              % (ident, largo, largo * se, r_ojo, 100 * largo * se / r_ojo))
+
     # las correas, a llenar el hueco entre astas Y a llegar hasta la caja
     a_caja = alfa(CAJA_PATRON)
     for ident, f in sorted(CORREAS.items()):
@@ -296,18 +317,18 @@ def monta():
 
 
 def hoja(capas, destino):
-    tiros = [('caja-acero', 'esfera-negra', 'caucho-negra'),
-             ('caja-anillo-naranja', 'esfera-negra-marfil', 'caucho-naranja'),
-             ('caja-anillo-azul', 'esfera-azul-sunburst', 'brazalete-acero'),
-             ('caja-anillo-turquesa', 'esfera-turquesa-champagne', 'caucho-gris'),
-             ('caja-anillo-burdeos', 'esfera-frambuesa-fume', 'caucho-roja'),
-             ('caja-anillo-oliva', 'esfera-roja-fume', 'caucho-verde')]
+    tiros = [('caja-acero', 'esfera-negra', 'caucho-negra', 'agujas-acero'),
+             ('caja-anillo-naranja', 'esfera-negra-marfil', 'caucho-naranja', 'agujas-acero'),
+             ('caja-anillo-azul', 'esfera-azul-sunburst', 'brazalete-acero', 'agujas-acero'),
+             ('caja-anillo-turquesa', 'esfera-turquesa-champagne', 'caucho-gris', 'agujas-gris-oscuro'),
+             ('caja-anillo-burdeos', 'esfera-frambuesa-fume', 'caucho-roja', 'agujas-gris-oscuro'),
+             ('caja-anillo-oliva', 'esfera-roja-fume', 'caucho-verde', 'agujas-gris-oscuro')]
     cols = 3
     filas = (len(tiros) + cols - 1) // cols
     h = Image.new('RGB', (cols * 420, filas * 420), FONDO[:3])
-    for i, (caja, esf, cor) in enumerate(tiros):
+    for i, (caja, esf, cor, ag) in enumerate(tiros):
         L = Image.new('RGBA', (ANCHO, ANCHO), FONDO)
-        for k in (cor, esf, caja):
+        for k in (cor, esf, caja, ag):
             L.alpha_composite(capas[k])
         h.paste(L.convert('RGB').resize((420, 420)),
                 ((i % cols) * 420, (i // cols) * 420))
