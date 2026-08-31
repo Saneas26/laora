@@ -76,11 +76,7 @@ Las correas son las de la casa y están en `.docs/sourcing-correas-2026.md`.
 |---|---|
 | **Bisel** | **El Trinchera no tiene bisel.** No es un paso vacío: es que no existe. |
 | **Agujas** | **Van fijas a la esfera**, por el momento. La esfera las trae y no se eligen aparte. |
-| **Cristal** | **Siempre zafiro.** No se elige. |
-
-⚠️ **El zafiro hay que pedirlo.** Si la caja se ofrece con mineral o con
-zafiro, la variante de pedido tiene que ser **siempre la de zafiro**, en las
-cuatro cajas. Va en la variante, no en el precio.
+| **Cristal** | **Siempre zafiro**, y **la caja ya viene con él**: no hay variante que elegir al pedir ni coste aparte. |
 
 ## El grabado del logotipo — 3,78 € · para TODOS los modelos
 
@@ -105,10 +101,8 @@ al hilo del anuncio.
 **Ninguna pieza del Trinchera está sin coste.** Lo que queda es de compra, no
 de precio:
 
-1. **Los dos colores de más de la piel vintage**: el anuncio da tres y la
-   ficha ofrece cinco.
-2. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
+1. **La variante exacta de pedido de cada anuncio**: qué hay que elegir en el
    desplegable para que llegue la pieza correcta.
-3. **Envío, mínimos y descuento por volumen** de cada proveedor.
-4. Los precios se capturaron con ofertas activas: **reverificar antes de
+2. **Envío, mínimos y descuento por volumen** de cada proveedor.
+3. Los precios se capturaron con ofertas activas: **reverificar antes de
    comprar**.
