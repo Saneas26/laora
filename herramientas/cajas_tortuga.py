@@ -66,7 +66,12 @@ ENTREGA = ('/Users/oscar/Documents/Codex/2026-08-31/'
 DESTINO = os.path.join(ENTREGA, 'preparadas')
 
 PATRON = '19-caja-tortuga-45mm-eje-2048.png'
-MM_CAJA = 45.0          # la caja, de lado a lado
+# ⚠️ CUARENTA Y CUATRO, NO CUARENTA Y CINCO (Óscar, 31/08/2026). El nombre
+# del fichero del patrón dice «45mm» y la landing decía 45, pero la ficha
+# la puso a 44 y él confirma que manda la ficha. Importa, y mucho: de esta
+# cifra sale cuánto mide un milímetro en el dibujo, y de ahí los 20 mm de
+# la ranura de las astas. A 45 salían 1.428 px; a 44 son 1.460.
+MM_CAJA = 44.0          # la caja, de lado a lado
 MM_ASTAS = 20.0         # lo que tienen que medir las astas al acabar
 BANDA = 340.0           # hasta dónde llega el estirón, hacia fuera de la pared
 COLA = 90               # y cuántas filas tarda en apagarse por debajo del hueco
@@ -189,7 +194,7 @@ def hueco(al):
 
 
 def ancho_en_el_eje(al):
-    """Los 45 mm de la caja se miden en la fila del eje, como en
+    """Los milímetros de la caja se miden en la fila del eje, como en
     `capas_tortuga.py`: es la medida con la que ya está publicado todo."""
     fila = np.where(al[al.shape[0] // 2] > SOLIDO)[0]
     return int(fila.max() - fila.min() + 1)
@@ -256,7 +261,7 @@ def al_patron(a, ancho_patron):
     del plata además llevaba pelusa del recorte.
 
     Y LA MEDIDA ES EL ANCHO EN LA FILA DEL EJE, no el del marco: es la
-    misma con la que `capas_tortuga.py` calcula los 45 mm, y una fila
+    misma con la que `capas_tortuga.py` calcula los milímetros, y una fila
     limpia no la ensucia ni una mota suelta."""
     s = ancho_patron / float(ancho_en_el_eje(a[:, :, 3]))
     lado = a.shape[0]

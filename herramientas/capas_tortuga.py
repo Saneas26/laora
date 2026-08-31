@@ -22,12 +22,13 @@ LAS DOS COSAS QUE NO ESTÁN A ESCALA, y por eso hay que escalarlas:
 El BRAZALETE, en cambio, sí llega a escala (1.635 px para un hueco de
 1.637): sólo hay que centrarlo, que viene 28 px a la izquierda.
 
-⚠️ EL HUECO ENTRE LAS ASTAS SON 22,4 mm, NO 20. La caja mide 45 mm de
-lado a lado (3.212 px en la fila del centro, o sea 71,4 px por milímetro)
-y el hueco entre las astas es de 1.637 px. Las correas de la entrega se
-llaman «20-18mm». O la correa sube a 22 —que es lo que lleva el reloj al
-que homenajea— o las astas se cierran 2,4 mm. Mientras tanto se llena el
-hueco, que es lo único que no deja ver el fondo, y queda dicho.
+⚠️ LAS ASTAS SE CIERRAN A 20 mm, y la caja mide 44 (Óscar, 31/08/2026).
+El hueco venía de 22 y pico y las correas de la entrega se llaman
+«20-18mm», así que se cierran las astas: lo hace
+`herramientas/cajas_tortuga.py`, que hay que pasar ANTES que esto.
+⚠️ Y SON 44 mm, NO 45, aunque el fichero del patrón se llame «45mm»: lo
+dice la ficha y lo confirmó Óscar. De ahí salen 73,0 px por milímetro y
+una ranura de 1.460 px.
 """
 import io as _io
 import os
@@ -57,6 +58,7 @@ FONDO = (233, 233, 231, 255)
 # 1.428 px, o sea 20 mm clavados. Si esa carpeta no existe, se ejecuta ese
 # guión primero.
 CAJA_PATRON = 'preparadas/19-caja-tortuga-45mm-eje-2048.png'
+MM_CAJA = 44.0                   # la caja, de lado a lado (lo dice la ficha)
 HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
 # LAS AGUJAS NO LLEGAN AL ÍNDICE (Óscar, 31/08/2026: «la aguja del minutero
 # tiene que señalar el indicador pero el indicador no puede ser tapado, al
@@ -319,6 +321,64 @@ def _tramo_recto(a, y0, y1, desde_arriba):
     return max(n, 2)
 
 
+def tapa_los_agujeros(L, dejar=1):
+    """Deja en cada tira sólo el agujero de más afuera y tapa los demás.
+
+    Óscar, 31/08/2026: «al trozo de la correa de abajo le has hecho más
+    agujeros de los que realmente tiene; haciendo zoom sólo se debería de
+    ver uno, el que está más abajo del todo; los cuatro más próximos a la
+    caja no existen, así que tápalos».
+
+    Vienen así en la entrega: la cola del caucho llega con cinco agujeros
+    seguidos. Se buscan los huecos cerrados de cada tira, se ordenan por lo
+    lejos que están del eje del reloj y se tapa todo menos el último.
+
+    El relleno sale del color que tiene al lado —el más cercano que sea
+    opaco— y se suaviza un poco: copiando un cuadrado de goma se veía el
+    parche, porque el caucho lleva un degradado de luz a lo largo."""
+    from scipy import ndimage
+    a = np.asarray(L).astype(np.float32).copy()
+    al = a[:, :, 3] > 128
+    filas = np.where(al.any(1))[0]
+    if not len(filas):
+        return L
+    tiras = np.split(filas, np.where(np.diff(filas) > 1)[0] + 1)
+    eje = a.shape[0] / 2.0
+    tapar = np.zeros(al.shape, bool)
+    for t in tiras:
+        y0, y1 = int(t[0]), int(t[-1])
+        trozo = al[y0:y1 + 1]
+        hueco = ndimage.binary_fill_holes(trozo) & ~trozo
+        lab, n = ndimage.label(hueco)
+        cand = []
+        for k in range(1, n + 1):
+            m = lab == k
+            if m.sum() < 200:            # una mota no es un agujero
+                continue
+            ys, xs = np.where(m)
+            cand.append((abs((ys.mean() + y0) - eje), m))
+        if len(cand) <= dejar:
+            continue
+        cand.sort(key=lambda c: -c[0])   # el más lejos del reloj, primero
+        for _, m in cand[dejar:]:
+            tapar[y0:y1 + 1][m] = True
+    if not tapar.any():
+        return L
+    # ⚠️ Y SE TAPA UN POCO MÁS ANCHO QUE EL AGUJERO. El dibujo lleva
+    # alrededor de cada agujero una sombra de avellanado, y rellenando sólo
+    # lo transparente quedaba el anillo oscuro flotando: cinco aros donde
+    # antes había cinco agujeros. Se ensancha catorce píxeles, que es lo que
+    # mide esa sombra, y desaparece con él.
+    tapar = ndimage.binary_dilation(tapar, iterations=14)
+    lejos = ndimage.distance_transform_edt(tapar | ~al, return_distances=False,
+                                           return_indices=True)
+    relleno = a[lejos[0], lejos[1]]
+    suave = np.dstack([ndimage.gaussian_filter(relleno[:, :, c], 8) for c in range(4)])
+    a[tapar] = suave[tapar]
+    a[:, :, 3][tapar] = 255
+    return Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA')
+
+
 def alarga_las_tiras(L):
     """Alarga cada tira, espejándola, hasta el canto del lienzo alto.
 
@@ -503,13 +563,14 @@ def guarda(im, ident):
 def monta():
     eje, r_ojo = hueco_de_la_caja(CAJA_PATRON)
     astas, centro_astas, hasta = hueco_entre_astas(CAJA_PATRON)
-    # LA ESCALA DEL RELOJ: 45 mm de lado a lado, medidos en la fila del eje.
+    # LA ESCALA DEL RELOJ: los milímetros de lado a lado, en la fila del eje.
     ancho_caja = int(np.ptp(np.where(alfa(CAJA_PATRON)[LIENZO // 2])[0])) + 1
-    por_mm = ancho_caja / 45.0
+    por_mm = ancho_caja / MM_CAJA
     print('CAJA · ojo en %.1f,%.1f r %.0f · hueco entre astas %d px centrado en '
           '%.1f, visible hasta la fila %d' % (eje[0], eje[1], r_ojo, astas,
                                               centro_astas, hasta))
-    print('        45 mm son %d px: %.1f px por milímetro' % (ancho_caja, por_mm))
+    print('        %g mm son %d px: %.1f px por milímetro'
+          % (MM_CAJA, ancho_caja, por_mm))
     print('        ⚠️ el hueco entre astas mide %.2f mm, y las correas de la '
           'entrega se llaman «20-18mm»' % (astas / por_mm))
 
@@ -589,6 +650,7 @@ def monta():
             capa = pon_correa(f, s, cx, centro_astas, baja, sube)
         capa = rellena_las_astas(capa, CAJA_PATRON, centro_astas)
         capa = alarga_las_tiras(capa)
+        capa = tapa_los_agujeros(capa)
         capas[ident] = capa.resize((ANCHO, alto_pub), Image.LANCZOS)
         vis = np.asarray(capas[ident])[:, :, 3] > 128
         fil = np.where(vis.any(1))[0]
