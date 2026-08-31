@@ -44,8 +44,9 @@ de arriba son los del fabricante del calibre, no del vendedor. Si van a la
 ficha de cara al cliente, conviene pedírselos por escrito al vendedor, que es
 como se hizo con la estanqueidad y el acero de las cajas.
 
-⚠️ **El anuncio del NH36 limita a TRES PIEZAS POR CLIENTE.** Para producción
-hay que hablarlo con el vendedor o buscar otro anuncio.
+El anuncio del NH36 limita a tres piezas por cliente. **Óscar, 31/08: «el
+límite ahora no me importa».** Queda apuntado para cuando haga falta producir
+en serie, no antes.
 
 **Entre los dos hay 56 € de coste**, que el multiplicador convierte en unos
 **134 € de precio**. Es el salto más grande de la casa: el mismo Tortuga sale a
@@ -201,26 +202,34 @@ gris oscuro · acero inoxidable
 
 ---
 
-## La esfera dice AUTOMATIC, y una de las dos versiones no lo es
+## La esfera: la misma para los dos, menos una palabra
 
-**El Miyota 2105 lleva fecha larga** —día y fecha—, así que la ventanilla de la
-esfera le va bien. Lo que no le va es la palabra: la esfera lleva impreso
-**«AUTOMATIC · WATER 200m RESIST»** y el cuarzo no es automático.
+**Óscar, 31/08/2026: «la esfera siempre será la de la foto, aunque luego al
+cuarzo no le pondremos AUTOMATIC».**
 
-Es lo único que separa la esfera de valer para los dos. Cómo se arregla lo dice
-Óscar: se quita la palabra y la esfera sirve para las dos versiones, o se hace
-una variante con el texto del cuarzo.
+Mismo dibujo, misma esfera, **mismo coste de 11,19 €**. La única diferencia es
+esa palabra impresa: la lleva el automático y no la lleva el cuarzo. Los dos
+movimientos tienen fecha larga, así que la ventanilla de día y fecha vale
+igual para los dos.
+
+Para el dibujo son **dos versiones de cada color**: ocho con «AUTOMATIC» y ocho
+sin ella. Para la compra es **una sola pieza**.
+
+## La caja es de 44 mm, y sólo de 44
+
+**Óscar, 31/08/2026.** Una sola medida, no se elige. Es la del reloj de buceo,
+con sus 200 m.
 
 ## Lo que falta
 
-**Ninguna pieza del Tortuga está sin coste ni sin proveedor.** Lo que queda:
+**El Tortuga está cerrado**: ninguna pieza sin coste, sin proveedor ni sin
+color. Lo que queda no es de catálogo, es de compra:
 
-1. **Los colores de la esfera** y los del anillo: el anuncio de la esfera hay
-   que mirarlo para saber cuáles da.
-2. Los **tamaños de caja**: la ficha los tiene vacíos.
-3. Que la esfera dice **AUTOMATIC** y una de las dos versiones no lo es.
-5. **El cierre** de las dos correas de buzo: si lo llevan puesto o hay que
+1. **El cierre de las dos correas de buzo**: si lo llevan puesto o hay que
    elegirlo.
-6. **El grabado del logotipo**: si va, son 3,78 € del proveedor de siempre.
-7. **Envío, mínimos y descuento por volumen** de los tres anuncios, y **la
-   variante exacta de pedido**.
+2. **Si el grabado del logotipo va también aquí** — si va, son 3,78 € del
+   proveedor de siempre, que es el precio fijo en todos los modelos.
+3. **Envío, mínimos y descuento por volumen** de cada anuncio, y **la variante
+   exacta de pedido**.
+4. Los precios se capturaron con ofertas activas: **reverificar antes de
+   comprar**.
