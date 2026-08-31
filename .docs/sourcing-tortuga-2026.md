@@ -9,10 +9,18 @@ ficha todavía figura como **no listo** y sin código asignado.
 
 **Óscar, 30/08/2026: NH36 y Miyota 2105.**
 
-| Paso de la ficha | Movimiento | Coste | Proveedor |
+| Calibre de la casa | Movimiento | Coste | Proveedor |
 |---|---|--:|---|
-| **A** · Automático japonés | **NH36** | **65,00 €** | [1005012173045057](https://es.aliexpress.com/item/1005012173045057.html) |
-| **Q** · Cuarzo japonés | **Miyota 2105** | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
+| **LO_A4126** · Automático japonés | NH36 | **65,00 €** | [1005012173045057](https://es.aliexpress.com/item/1005012173045057.html) |
+| **LO_Q3626** · Cuarzo japonés | Miyota 2105 | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
+
+Óscar, 31/08/2026. **Se escriben con guion bajo**, como los demás de la casa
+—`LO_Q6026`, `LO_A4026`, `LO_MQ326`—: dos maneras de llamar a la misma pieza en
+la misma tienda acaban en un pedido mal leído.
+
+El código lleva la especificación dentro: **A + las horas de reserva (41)** y
+**Q + los meses de pila (36)**, más el año. Cuadra con la ficha técnica de
+abajo.
 
 **Los dos llevan fecha larga**, día y fecha, así que la ventanilla de la esfera
 vale para las dos versiones. Y el **día del Miyota es bilingüe, español e
@@ -43,9 +51,8 @@ hay que hablarlo con el vendedor o buscar otro anuncio.
 **134 € de precio**. Es el salto más grande de la casa: el mismo Tortuga sale a
 169,90 € en cuarzo y a 289,90 € en automático.
 
-⚠️ **El nombre de cara al cliente.** La norma de la casa es no nombrar al
-fabricante: van como **«Calibre laOra LO_xxxx»** con su arquitectura japonesa.
-Hacen falta los dos códigos.
+De cara al cliente van como **«Calibre laOra LO_A4126»** y **«Calibre laOra
+LO_Q3626»**, con su arquitectura japonesa y sin nombrar al fabricante.
 
 ## Agujas — 5,59 € · súper lumen C3
 
@@ -210,9 +217,8 @@ una variante con el texto del cuarzo.
 
 1. **Los colores de la esfera** y los del anillo: el anuncio de la esfera hay
    que mirarlo para saber cuáles da.
-2. **Los códigos `LO_`** del NH36 y el Miyota, que de cara al cliente no se
-   nombra al fabricante.
-3. Los **tamaños de caja**: la ficha los tiene vacíos.
+2. Los **tamaños de caja**: la ficha los tiene vacíos.
+3. Que la esfera dice **AUTOMATIC** y una de las dos versiones no lo es.
 5. **El cierre** de las dos correas de buzo: si lo llevan puesto o hay que
    elegirlo.
 6. **El grabado del logotipo**: si va, son 3,78 € del proveedor de siempre.
