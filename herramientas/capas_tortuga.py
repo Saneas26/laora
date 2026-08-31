@@ -48,22 +48,30 @@ CALIDADES = (72, 64, 56, 48, 40)
 PESO = 95000
 FONDO = (233, 233, 231, 255)
 
-CAJA_PATRON = '19-caja-tortuga-45mm-eje-2048.png'
+# ⚠️ LAS CAJAS SE LEEN DE `preparadas/`, NO DE LA ENTREGA (Óscar,
+# 31/08/2026: «Las astas se cierran a 20»). Las once llegan a tamaños
+# distintos —la lisa un 7 % más pequeña que las de anillo— y con el hueco
+# entre astas a 22,4 mm, que no es lo que miden las correas. Antes de
+# montar nada hay que pasarlas por `herramientas/cajas_tortuga.py`, que las
+# deja todas del mismo tamaño, centradas por el ojo, y con la ranura a
+# 1.428 px, o sea 20 mm clavados. Si esa carpeta no existe, se ejecuta ese
+# guión primero.
+CAJA_PATRON = 'preparadas/19-caja-tortuga-45mm-eje-2048.png'
 HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
 HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
 
 CAJAS = {
-    'caja-acero':            '19-caja-tortuga-45mm-eje-2048.png',
-    'caja-anillo-naranja':   '21-caja-tortuga-anillo-naranja-eje-2048.png',
-    'caja-anillo-naranja-grueso': '22-caja-tortuga-anillo-naranja-grueso-escala-negra.png',
-    'caja-anillo-plata':     '23-caja-tortuga-anillo-plata-escala-negra.png',
-    'caja-anillo-azul':      '24-caja-tortuga-anillo-azul-escala-negra.png',
-    'caja-anillo-verde':     '25-caja-tortuga-anillo-verde-escala-negra.png',
-    'caja-anillo-negro':     '26-caja-tortuga-anillo-negro-escala-clara.png',
-    'caja-anillo-oliva':     '27-caja-tortuga-anillo-oliva-escala-negra.png',
-    'caja-anillo-burdeos':   '28-caja-tortuga-anillo-burdeos-escala-negra.png',
-    'caja-anillo-turquesa':  '29-caja-tortuga-anillo-turquesa-escala-negra.png',
-    'caja-anillo-acero':     '30-caja-tortuga-anillo-acero-liso.png',
+    'caja-acero':            'preparadas/19-caja-tortuga-45mm-eje-2048.png',
+    'caja-anillo-naranja':   'preparadas/21-caja-tortuga-anillo-naranja-eje-2048.png',
+    'caja-anillo-naranja-grueso': 'preparadas/22-caja-tortuga-anillo-naranja-grueso-escala-negra.png',
+    'caja-anillo-plata':     'preparadas/23-caja-tortuga-anillo-plata-escala-negra.png',
+    'caja-anillo-azul':      'preparadas/24-caja-tortuga-anillo-azul-escala-negra.png',
+    'caja-anillo-verde':     'preparadas/25-caja-tortuga-anillo-verde-escala-negra.png',
+    'caja-anillo-negro':     'preparadas/26-caja-tortuga-anillo-negro-escala-clara.png',
+    'caja-anillo-oliva':     'preparadas/27-caja-tortuga-anillo-oliva-escala-negra.png',
+    'caja-anillo-burdeos':   'preparadas/28-caja-tortuga-anillo-burdeos-escala-negra.png',
+    'caja-anillo-turquesa':  'preparadas/29-caja-tortuga-anillo-turquesa-escala-negra.png',
+    'caja-anillo-acero':     'preparadas/30-caja-tortuga-anillo-acero-liso.png',
 }
 ESFERAS = {
     'esfera-negra':            '11-esfera-negra-28-5mm-4096.png',
