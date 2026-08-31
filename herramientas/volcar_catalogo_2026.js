@@ -403,6 +403,7 @@ const cuenta = {
   Lunar: lunar(),
   'Bitácora': generado('bitacora', 'Bitácora', 'Deportivo de brazalete integrado', 40),
   'Cero Cero': generado('cero-cero', 'Cero Cero', 'Buceo', 40),
+  Tortuga: generado('tortuga', 'Tortuga', 'Buceo', 44),
 };
 
 const destino = path.join(RAIZ, 'assets/datos/catalogo-2026.json');

@@ -380,16 +380,26 @@ def rellena_las_astas(L, caja, centro):
     ys = np.where(al.any(1))[0]
     for arriba in (True, False):
         rango = range(ys.min(), LIENZO // 2) if arriba else range(ys.max(), LIENZO // 2, -1)
-        visto = False
+        visto, malas = False, 0
         for r in rango:
             idx = np.where(al[r])[0]
-            if not len(idx):
+            # ⚠️ UNA MOTA NO ES EL FINAL DE LA RANURA. Cerrar las astas deja
+            # algún píxel suelto en la punta, y con «si esta fila no vale, se
+            # acabó» el barrido de abajo se paraba a las SEIS filas: la tira
+            # de abajo se quedó sin ensanchar y sólo se arregló la de arriba.
+            # Se salta lo que no llegue a cuarenta píxeles de caja y se
+            # aguantan cuatro filas malas seguidas antes de dar por cerrada
+            # la ranura.
+            if len(idx) < 40:
                 continue
             seg = np.split(idx, np.where(np.diff(idx) > 1)[0] + 1)
             if len(seg) < 2 or int(seg[-1][0]) - int(seg[0][-1]) < 400:
                 if visto:
-                    break
+                    malas += 1
+                    if malas > 4:
+                        break
                 continue
+            malas = 0
             visto = True
             filas.append((r, int(seg[0][-1]), int(seg[-1][0]), 1 if arriba else -1))
     if not filas:

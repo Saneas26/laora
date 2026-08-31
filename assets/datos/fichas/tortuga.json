@@ -4,7 +4,7 @@
  "codigo": "LO-06",
  "clase": "Buceo",
  "desc": "",
- "listo": false,
+ "listo": true,
  "caja": {
   "integrada": false,
   "tamanos": [
@@ -337,5 +337,6 @@
   }
  },
  "_coste": "COSTES PUESTOS EL 31/08/2026, todos dados por Oscar. Movimiento 9,00 el cuarzo y 65,00 el automatico. Caja 32,39, que trae caja, bisel, anillo y cristal mineral; el ZAFIRO suma 4,20 en el paso del cristal, que es la diferencia entre los 32,39 y los 36,59 del anuncio. Esfera 11,19, agujas 5,59, logotipo 3,78. Correa de buzo 3,39 y brazalete de acero 32,39. El anillo interior y la hebilla no cuestan aparte. La correa de buzo profesional de 3,89 todavia no esta en la ficha.",
- "_correas": "SOLO LA CORREA DE BUZO Y EL BRAZALETE (Oscar, 31/08/2026: \"dejamos solo correa buzo nada mas, la profesional de momento no\"). La correa de buzo profesional de 3,89 en negro, que esta fichada en el libro como P-078, NO entra en la ficha. Queda apuntada por si vuelve."
+ "_correas": "SOLO LA CORREA DE BUZO Y EL BRAZALETE (Oscar, 31/08/2026: \"dejamos solo correa buzo nada mas, la profesional de momento no\"). La correa de buzo profesional de 3,89 en negro, que esta fichada en el libro como P-078, NO entra en la ficha. Queda apuntada por si vuelve.",
+ "_listo": "A LA VENTA desde el 31/08/2026, por orden de Oscar."
 }
