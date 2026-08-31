@@ -400,6 +400,13 @@
 .cv2-tarjetas{
   display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
 }
+/* AIRE ENTRE EL LIENZO Y LAS FOTOS (Óscar, 31/08/2026: «justo debajo de la
+   tarjeta espacio libre y las 4 fotos de promoción de ese reloj»). El lienzo
+   cierra con 60 px de relleno, así que las fotos se le quedaban pegadas: un
+   respiro de papel crema y se ve dónde acaba la tarjeta y dónde empiezan los
+   relojes. El Trinchera no lo necesita: entre los dos lleva las cajas de
+   envío y garantía. */
+.cv2-lienzo + .cv2-tarjetas{margin-top:44px}
 .cv2-tarjeta{
   background:var(--cv2-crema);border:1px solid var(--cv2-linea);
   display:flex;flex-direction:column;
