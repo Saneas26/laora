@@ -572,6 +572,25 @@
    "campo": "cierre"
   }
  },
+ "vetos": [],
+ "_vetos": [
+  "LO QUE ÓSCAR DA POR MUERTO, y no es una opción entera: es una COMBINACIÓN.",
+  "Una firma por línea, con los pasos del contrato en orden y sin el tamaño",
+  "ni el calibre: caja|esftipo|esf|correamat|correa|pespunte|cierre. Un paso",
+  "cerrado va en blanco.",
+  "",
+  "CADA LÍNEA SE LLEVA CUATRO REFERENCIAS —36 y 39, cuarzo y automático—,",
+  "porque lo que se cura es el ASPECTO y el aspecto no cambia con la medida",
+  "ni con el calibre: cambian la tapa y el precio (Óscar, 31/08/2026).",
+  "",
+  "Se puede escribir el nombre detrás de un « · » para poder leerlo; el",
+  "generador se queda con lo de delante:",
+  "  \"TI|K|NEG|A316|A316SAT||   · titanio, khaki negra, brazalete de acero\"",
+  "",
+  "DE DÓNDE SALEN: de `https://laora.es/trinchera?curar`. Óscar combina,",
+  "marca lo que no quiere, pulsa «Copiar la lista» y me la pasa. Su",
+  "localStorage no lo puede leer nadie más."
+ ],
  "referencia": "LO-02-{mov}-{caja}{tamano}-{esftipo}{esf}-{correa}{pespunte.ref}-{cierre}",
  "cadena": [
   "esftipo",

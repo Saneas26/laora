@@ -358,19 +358,58 @@
   function eu(v) { return v.toFixed(2).replace('.', ',') + ' €'; }
 
   /* ---------- LA FIRMA DE UNA COMBINACIÓN ----------
-     Todo lo que el cliente elige, en orden. Sirve para marcar y para vetar,
-     igual que en el Trinchera. */
+     Lo que el cliente elige Y SE VE, en el orden del contrato de pasos.
+     Sirve para marcar y para vetar.
+
+     ⚠️ ESTABA ESCRITA CON LOS PASOS DEL LUNAR —`mov, esf, bisel, agujas,
+     caja, cristal, correa`— y el motor lo comparten diez modelos: en el
+     Trinchera firmaba `Q|NEG|||PL||A316SAT`, sin el tipo de esfera ni el
+     material de la correa, y con dos huecos de pasos que ese reloj no
+     tiene. Marcar una combinación marcaba media. Ahora sale del contrato.
+
+     QUÉ NO FIRMA (Óscar, 31/08/2026: una marca vale por las cuatro):
+       · EL TAMAÑO y EL CALIBRE, porque no cambian nada de lo que se ve por
+         delante. Cambian la tapa y el precio. Marcar «titanio + khaki negra
+         + brazalete de acero» se lleva las cuatro referencias: 36 y 39,
+         cuarzo y automático.
+       · LA MARIPOSA DE RECAMBIO, que es un añadido que va en la caja del
+         reloj, no en el reloj.
+
+     Y UN PASO CERRADO NO FIRMA. El estado guarda el pespunte aunque lleves
+     un brazalete de acero: sin esto, dos relojes idénticos tendrían firmas
+     distintas según si has mirado las pieles por el camino, y la marca
+     dejaría de aplicarse sin avisar. */
+  var NO_FIRMAN = { tamano: 1, mov: 1, mariposa: 1 };
+  /* SE MIRA EL ESTADO DE PARTIDA, y a propósito: es el único momento en que
+     el estado es exactamente el que la ficha declara. Después el motor le
+     añade campos derivados —el Lunar no guarda `correamat` hasta que se
+     pulsa un material, y lo deduce de la correa—, y si la lista se armara
+     más tarde la firma cambiaría de forma según lo que el cliente hubiera
+     tocado. El volcador arranca igual, así que las dos firmas coinciden. */
+  var PASOS_FIRMA = PASOS.filter(function (p) {
+    return !NO_FIRMAN[p.id] && e && e[p.id] !== undefined;
+  }).map(function (p) { return p.id; });
   function firma() {
-    return [e.mov, e.esf, e.bisel, e.agujas, e.caja, e.cristal, e.correa].join('|');
+    return PASOS_FIRMA.map(function (id) {
+      return abierta(id) ? (e[id] || '') : '';
+    }).join('|');
   }
-  /* En limpio: aquí todavía no hay nada que quitar, pero la función existe
-     desde el principio para que el día que el Lunar tenga dos medidas o dos
-     movimientos no haya que reescribir la lista de vetadas. */
+  /* En limpio: la firma ya sale limpia —los pasos cerrados van en blanco y
+     el tamaño y el calibre no están—, así que aquí no queda nada que
+     enderezar. La función se queda porque es el único sitio por donde
+     pasarían todas las firmas el día que haga falta. */
   function canon(f) { return String(f); }
 
-  /* Las combinaciones que Óscar da por muertas. Valen para todo el mundo:
-     ni se dibujan ni entran en el catálogo del servidor. */
+  /* ---------- LO QUE ÓSCAR DA POR MUERTO ----------
+     Sale de la ficha del modelo (`"vetos"` en su JSON, o `VETOS` en la
+     ficha escrita a mano) y vale PARA TODO EL MUNDO: la ficha no dibuja
+     el botón que llevaría ahí y el volcador no mete esas referencias en el
+     catálogo, así que el servidor tampoco las vende.
+
+     Se llenan con la lista que Óscar copia del panel de `?curar`: su
+     `localStorage` no lo puede leer nadie más. */
   var VETADAS = {};
+  (M.VETOS || []).forEach(function (f) { VETADAS[canon(f)] = 1; });
   function vetada(f) { return !!VETADAS[canon(f)]; }
   /* El volcador tiene que ver el árbol ENTERO y descartar al final, hoja por
      hoja: leyendo los botones que la ficha esconde se caen ramas buenas.
@@ -397,10 +436,16 @@
         window.localStorage.setItem(LLAVE + 'combis', JSON.stringify(COMBIS));
     } catch (x) {}
   }
-  /* Lo que ya está vetado deja de estar pendiente y se cae de la lista solo */
+  /* Lo que ya está vetado deja de estar pendiente y se cae de la lista solo.
+     Y CON ÉL, LAS FIRMAS DE OTRA ÉPOCA: si el modelo cambia de pasos, lo
+     marcado antes ya no casa con nada y se quedaría en el panel para
+     siempre, sin poder aplicarse ni caerse. Se conocen por el número de
+     campos. */
   (function () {
     var toco = false, k;
     for (k in COMBIS) if (VETADAS[canon(k)]) { delete COMBIS[k]; toco = true; }
+    for (k in COMBIS)
+      if (String(k).split('|').length !== PASOS_FIRMA.length) { delete COMBIS[k]; toco = true; }
     if (toco) {
       try {
         if (window.localStorage)
@@ -1335,6 +1380,23 @@
   }
 
   /* ---------- EL PANEL DE CURAR ---------- */
+  /* QUÉ SE LLEVA POR DELANTE UNA MARCA, dicho con todas las letras. El
+     `dicho` de la combinación nombra el tamaño y el calibre porque describe
+     el reloj que tienes puesto, y eso confunde: la marca no es de ése, es
+     del ASPECTO, y vale para las cuatro referencias. Se dice aquí en vez de
+     dejarlo a la interpretación. */
+  function alcanceDicho() {
+    var partes = [];
+    ['tamano', 'mov'].forEach(function (id) {
+      if (e[id] === undefined) return;
+      var t = (M.OPCIONES && M.OPCIONES[id]) || (id === 'mov' ? MOVS : TAMANOS);
+      var ns = Object.keys(t || {}).map(function (k) { return t[k].nombre; });
+      if (ns.length < 2) return;
+      partes.push(ns.join(' y ').toLowerCase());
+    });
+    if (!partes.length) return '';
+    return 'Se la lleva en ' + partes.join(', y en ') + '.';
+  }
   function paraMi() {
     return Object.keys(COMBIS).map(function (k) {
       return canon(k) + '   · ' + COMBIS[k].dicho;
@@ -1357,6 +1419,10 @@
       '<button type="button" data-curar-combi>' +
         (yaEsta ? '☑  Marcada para quitar' : '☐  Quitar esta combinación') +
       '</button>' +
+      (alcanceDicho()
+        ? '<p class="pv-curar-dicho">' + alcanceDicho() +
+          ' El tamaño y el calibre no cuentan: no cambian nada de lo que se ve.</p>'
+        : '') +
       '<hr>' +
       '<b>Combinaciones marcadas (' + combis.length + ')</b>' +
       (combis.length
@@ -1382,7 +1448,10 @@
   }
   function escapaDeMarcada() {
     if (!vetada(firma()) && !(APLICADAS && marcada(firma()))) return;
-    var grupos = ['correa', 'cristal', 'agujas', 'bisel', 'esf', 'caja', 'mov'];
+    /* De abajo arriba, que es lo que menos mueve al que está mirando: se
+       prueba antes cambiar la correa que la caja. Los pasos son los del
+       contrato, no una lista escrita a mano con los del Lunar. */
+    var grupos = PASOS_FIRMA.slice().reverse();
     for (var i = 0; i < grupos.length; i++) {
       var caja = $('[data-pv="' + grupos[i] + '"]');
       if (!caja) continue;

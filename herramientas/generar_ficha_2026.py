@@ -62,7 +62,7 @@ V_CSS_CONFIG = 3
 # funcionando con el motor de anteayer. Se sube cada vez que se toca
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
-V_JS_CONFIG = 12
+V_JS_CONFIG = 13
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -359,6 +359,12 @@ def modelo_js(d, dentro):
        no hay coste: se dibuja, pero no se pone precio ni se vende. */
     COSTES_PUESTOS: %(listo)s, EXTRA: %(extra)s,
     CADENA: %(cadena)s,
+    /* LO QUE ÓSCAR DA POR MUERTO. Firmas de combinación en el orden del
+       contrato de pasos, sin el tamaño ni el calibre: una vale por las
+       cuatro referencias. Ni se dibujan ni entran en el catálogo. Salen
+       del `"vetos"` del JSON, que se llena con la lista que Óscar copia
+       del panel de `?curar`. */
+    VETOS: %(vetos)s,
     /* Las puertas: el motor esconde el paso cerrado y no le suma coste. */
     PUERTAS: PUERTAS, abierta: abierta,
     FILTROS: FILTROS, valeEn: valeEn,
@@ -383,6 +389,8 @@ def modelo_js(d, dentro):
         'listo': 'true' if d.get('listo') else 'false',
         'extra': js(d.get('extra', 0)),
         'combis': json.dumps(d.get('combinaciones', []), ensure_ascii=False),
+        'vetos': json.dumps([v.split('·')[0].strip().strip('"') if '·' in v else v
+                             for v in d.get('vetos', [])], ensure_ascii=False),
         'capa': json.dumps(d.get('montaje', {}).get('capas', {}), ensure_ascii=False, indent=2).replace('\n', '\n  '),
         'capaimg': js(d.get('montaje', {}).get('img', '')),
         'seriev': js(d.get('montaje', {}).get('v', '')),
@@ -405,8 +413,18 @@ def cuantas(d, dentro):
     Y SOLO CUENTA LO QUE TIENE PRECIO. Una correa sin coste se dibuja pero
     no se vende, así que no es una combinación que nadie pueda comprar; el
     volcador la deja fuera del catálogo por la misma razón. Este número sale
-    en la descripción de la página: tiene que ser el de verdad."""
+    en la descripción de la página: tiene que ser el de verdad.
+
+    NI LO VETADO, por lo mismo: si el catálogo no lo lleva, la página no lo
+    puede anunciar. La firma se arma igual que en el motor —los pasos del
+    contrato menos el tamaño, el calibre y la mariposa, y en blanco el paso
+    cerrado—, que es lo que hace que una línea de `vetos` valga por las
+    cuatro referencias."""
     pasos = [(p['id'], ops) for p, ops in dentro]
+    NO_FIRMAN = ('tamano', 'mov', 'mariposa')
+    firman = [i for i, _ in pasos if i not in NO_FIRMAN]
+    vetos = set(v.split('·')[0].strip().strip('"') if '·' in v else v
+                for v in d.get('vetos', []))
     puertas = d.get('puertas', {})
     filtros = d.get('filtros', {})
     cadena = d.get('cadena') or []
@@ -428,6 +446,9 @@ def cuantas(d, dentro):
 
     def anda(i, elegido):
         if i == len(pasos):
+            if vetos and '|'.join(
+                    (elegido[k]['id'] if k in elegido else '') for k in firman) in vetos:
+                return 0
             # Con lista de combinaciones, la terna elegida tiene que estar.
             if combis and cadena:
                 firma = {k: elegido[k]['id'] for k in cadena if k in elegido}

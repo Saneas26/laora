@@ -1353,6 +1353,21 @@
     piezasDe: piezasDe,
     /* Para el volcador: si esta correa elige pespunte, hay dos referencias. */
     CON_PESPUNTE_DE: function (c) { return !!CON_PESPUNTE[matDeCorrea(c)]; },
+    /* QUÉ PASOS ESTÁN ABIERTOS. El Lunar pinta sus pasos a mano, así que
+       esto no cambia ni un botón: es para la FIRMA de la combinación. Sin
+       ello el estado firma con el pespunte de una piel que ya no llevas, y
+       el mismo reloj tiene dos firmas según si has mirado las pieles por el
+       camino: la marca deja de aplicarse sin avisar. */
+    abierta: function (id, e) {
+      if (id === 'pespunte') return !!CON_PESPUNTE[matDeCorrea(e.correa)];
+      if (id === 'mariposa') return !!mariposaDe(e);
+      return true;
+    },
+    /* LO QUE ÓSCAR DA POR MUERTO, en el orden del contrato de pasos y sin
+       el tamaño ni el calibre. Se llena con la lista que copia del panel de
+       `?curar` (`https://laora.es/lunar?curar`): ni se dibuja ni entra en el
+       catálogo del servidor. De momento, ninguna. */
+    VETOS: [],
     precioExtra: precioExtra,
     /* Para el volcador: qué mariposa de recambio ofrece este estado. */
     MARIPOSA_DE: mariposaDe,
@@ -1369,7 +1384,7 @@
 <!-- El motor de precio, el mismo para todos los modelos. Va DELANTE del
      configurador: el configurador lo usa nada más arrancar. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=12"></script>
+<script src="/assets/js/configurador-2026.js?v=13"></script>
 <!-- ============ LA LUPA ============
      La foto a pantalla completa, con la de 1600 —que es la que hay— y el
      pie diciendo qué reloj es. Se cierra con la equis, con Escape o

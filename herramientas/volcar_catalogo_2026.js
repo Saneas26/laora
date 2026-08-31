@@ -218,9 +218,16 @@ function anota(ref, precio, nombre, detalle, correa, ficha, mm, hermanas) {
    ============================================================ */
 function generado(slug, nombre, clase, mm) {
   const L = motorDe(slug + '.html',
-    'e, precio, referencia, normaliza, pinta, agua');
+    'e, precio, referencia, normaliza, pinta, agua, vetada, firma, sinVeto');
   const M = globalThis.window.__LAORA_ULTIMO;
   if (!M || !M.OPCIONES) return 0;
+  /* ⚠️ EL VOLCADOR TIENE QUE VER EL ÁRBOL ENTERO y descartar al final, hoja
+     por hoja. La ficha ESCONDE los botones que llevarían a una combinación
+     vetada; si el recorrido leyera eso, con una esfera vetada se caerían
+     también sus correas buenas. Esconder es del escaparate; contar, del
+     inventario. Es el fallo que costó cuarenta referencias sanas en el
+     Trinchera viejo, y por eso se repite aquí. */
+  L.sinVeto(true);
 
   /* Los pasos que de verdad tienen algo que elegir, en el orden del
      contrato. Los vacíos no multiplican nada. */
@@ -232,6 +239,8 @@ function generado(slug, nombre, clase, mm) {
   const anda = (i) => {
     if (i === pasos.length) {
       L.normaliza();
+      /* Y AQUÍ, EN LA HOJA, se cae lo que Óscar dio por muerto. */
+      if (L.vetada(L.firma())) return;
       const p = L.precio();
       /* Sin coste no hay precio: la ficha devuelve `null` y esa combinación
          no entra en el catálogo. No se vende lo que no se sabe cuánto
