@@ -514,7 +514,8 @@
     "id": "B",
     "nombre": "Blanco",
     "coste": 0,
-    "ref": "B"
+    "ref": "B",
+    "defecto": true
    }
   ],
   "cierres": [
@@ -623,26 +624,11 @@
  "_anillo": "El anillo espaciador del cuarzo, 3,60 €, va DENTRO del coste del calibre LO_Q6026 (15,05 + 3,60 = 18,65): la caja se pide cortada para el automático y el Ronda 715 necesita portamovimiento. Antes se sumaba aparte en la ficha; el motor de la casa suma por opción, así que vive en la opción.",
  "montaje": {
   "img": "/assets/img/trinchera-2026/capas/1200/",
-  "v": "?v=7",
-  "pila": [
-   {
-    "capa": "correa",
-    "grupo": "correa"
-   },
-   {
-    "capa": "esf",
-    "grupo": "esf"
-   },
-   {
-    "capa": "caja",
-    "grupo": "caja"
-   },
-   {
-    "capa": "agujas",
-    "grupo": "mov",
-    "necesita": "esf"
-   }
-  ],
+  "bienvenida": "trinchera-hazlo-tuyo",
+  "bienvenida_v": "?v=1",
+  "bienvenida_alt": "Hazlo tuyo: dos laOra Trinchera sobre un mapa de campaña, uno con nato verde oliva y otro con piel negra",
+  "v": "?v=8",
+  "pila": [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
   "capas": {
    "caja": {
     "PL": "caja-acero",

@@ -391,25 +391,7 @@
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
   "v": "?v=1",
-  "pila": [
-   {
-    "capa": "correa",
-    "grupo": "correa"
-   },
-   {
-    "capa": "esf",
-    "grupo": "esf"
-   },
-   {
-    "capa": "caja",
-    "grupo": "caja"
-   },
-   {
-    "capa": "agujas",
-    "grupo": "mov",
-    "necesita": "esf"
-   }
-  ],
+  "pila": [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
   "capas": {
    "correa": {
     "Brz-Acero-Bit-01": "brazalete-acero",

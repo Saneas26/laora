@@ -80,6 +80,14 @@
           <span data-carrusel-paso></span>
           <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
         </div>
+        <img class="pv-presenta" data-pv-presenta
+             src="/assets/img/trinchera-2026/presentacion/1200/trinchera-hazlo-tuyo.avif?v=1"
+             srcset="/assets/img/trinchera-2026/presentacion/480/trinchera-hazlo-tuyo.avif?v=1 480w,
+                     /assets/img/trinchera-2026/presentacion/1200/trinchera-hazlo-tuyo.avif?v=1 1200w,
+                     /assets/img/trinchera-2026/presentacion/1600/trinchera-hazlo-tuyo.avif?v=1 1600w"
+             sizes="(max-width: 900px) 100vw, 620px"
+             fetchpriority="high" decoding="async" width="1200" height="1200"
+             alt="Hazlo tuyo: dos laOra Trinchera sobre un mapa de campaña, uno con nato verde oliva y otro con piel negra">
 
         <!-- ⛔ AQUÍ ESTABAN la foto de la combinación entera, el cartel de
              «fotografía en preparación» y el botón de ampliar. Los tres eran
@@ -621,7 +629,8 @@
       "B": {
         "nombre": "Blanco",
         "coste": 0,
-        "ref": "B"
+        "ref": "B",
+        "defecto": true
       }
     },
     "cierre": {
@@ -654,7 +663,7 @@
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316SAT", "pespunte": "T", "cierre": "plata"};
+  var e = {"tamano": "36", "caja": "PL", "esftipo": "K", "esf": "NEG", "mov": "Q", "correamat": "A316", "correa": "A316SAT", "pespunte": "B", "cierre": "plata"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -803,8 +812,8 @@
         "*": "agujas"
       }
     }
-  }, CAPA_IMG: "/assets/img/trinchera-2026/capas/1200/", SERIE_V: "?v=7",
-    PILA: [{"capa": "correa", "grupo": "correa"}, {"capa": "esf", "grupo": "esf"}, {"capa": "caja", "grupo": "caja"}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
+  }, CAPA_IMG: "/assets/img/trinchera-2026/capas/1200/", SERIE_V: "?v=8",
+    PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -831,6 +840,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=13"></script>
+<script src="/assets/js/configurador-2026.js?v=14"></script>
 </body>
 </html>

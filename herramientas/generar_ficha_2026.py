@@ -62,7 +62,7 @@ V_CSS_CONFIG = 3
 # funcionando con el motor de anteayer. Se sube cada vez que se toca
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
-V_JS_CONFIG = 13
+V_JS_CONFIG = 14
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -199,7 +199,12 @@ def modelo_js(d, dentro):
     opciones, estado = {}, {}
     for paso, ops in dentro:
         opciones[paso['id']] = tabla(ops)
-        estado[paso['id']] = ops[0]['id']
+        # LA PRIMERA OPCIÓN MANDA… SALVO QUE OTRA DIGA `defecto`. Óscar,
+        # 31/08/2026: «en la piel italiana quiero que por defecto comience
+        # en pespunte blanco». Se marca en el JSON y no hace falta cambiar
+        # el orden de los botones, que es otra cosa.
+        estado[paso['id']] = next((o['id'] for o in ops if o.get('defecto')),
+                                  ops[0]['id'])
 
     # Las familias de correa, si las hay: de qué familia es cada color.
     correa_mat = {}
@@ -400,6 +405,32 @@ def modelo_js(d, dentro):
     }
 
 
+
+def presentacion(d):
+    """El <img> de la foto de bienvenida, si el modelo la trae.
+
+    Va con `fetchpriority="high"` y SIN `lazy`: es lo primero que se ve al
+    abrir la ficha, así que pedirla tarde sería enseñar un hueco gris justo
+    donde tiene que estar el reloj."""
+    m = d.get('montaje', {})
+    nombre = m.get('bienvenida')
+    if not nombre:
+        return ''
+    base = '/assets/img/%s-2026/presentacion/' % d['slug']
+    v = m.get('bienvenida_v', '?v=1')
+    return ('        <img class="pv-presenta" data-pv-presenta\n'
+            '             src="%(b)s1200/%(n)s.avif%(v)s"\n'
+            '             srcset="%(b)s480/%(n)s.avif%(v)s 480w,\n'
+            '                     %(b)s1200/%(n)s.avif%(v)s 1200w,\n'
+            '                     %(b)s1600/%(n)s.avif%(v)s 1600w"\n'
+            '             sizes="(max-width: 900px) 100vw, 620px"\n'
+            '             fetchpriority="high" decoding="async" '
+            'width="1200" height="1200"\n'
+            '             alt="%(a)s">\n') % {
+        'b': base, 'n': nombre, 'v': v,
+        'a': esc(m.get('bienvenida_alt', 'Hazlo tuyo: el laOra ' + d['nombre']))}
+
+
 def cuantas(d, dentro):
     """Cuántos relojes distintos se pueden comprar de verdad.
 
@@ -488,10 +519,17 @@ def ficha(d):
         'nombre': esc(d['nombre']),
         'codigo': esc((d.get('codigo') or '') + (' · ' if d.get('codigo') else '') + d.get('clase', '')),
         'nuevo': '<span class="cv2-chip pv-chip-oro">Nuevo</span>' if not listo else '',
-        # SIN FOTO DE PRESENTACIÓN NO SE PONE NADA. El visor se queda con el
-        # montaje por capas, que sin capas no dibuja: un marco vacío dice la
-        # verdad mejor que una foto de otro reloj.
-        'presentacion': '',
+        # LA FOTO DE BIENVENIDA. Óscar, 31/08/2026: «al abrir la página solo
+        # aparece la imagen de inicio, y según se señale el tamaño de la
+        # caja aparece la caja del reloj sola». Se declara en el JSON:
+        #
+        #     "montaje": { "bienvenida": "trinchera-hazlo-tuyo",
+        #                  "bienvenida_alt": "…", "bienvenida_v": "?v=1" }
+        #
+        # SIN FOTO NO SE PONE NADA. El visor se queda con el montaje por
+        # capas, que sin capas no dibuja: un marco vacío dice la verdad
+        # mejor que una foto de otro reloj.
+        'presentacion': presentacion(d),
         'decerca': '',
     }
 

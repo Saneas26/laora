@@ -700,14 +700,22 @@
      «fotografía en preparación».
 
      `mov` no cuenta: viene puesto de fábrica —hay un solo movimiento— y no
-     es una elección de nadie. */
+     es una elección de nadie.
+
+     ⚠️ Y NO ES «NADIE HA TOCADO NADA», ES «NO HAY NI UNA PIEZA PUESTA».
+     Óscar, 31/08/2026: el reloj se arma pieza a pieza, y la primera que
+     aparece es la caja al señalar el tamaño. Con la regla vieja, tocar
+     antes el calibre —que no dibuja nada— quitaba la bienvenida y dejaba el
+     visor en blanco: ni foto ni reloj. Ahora manda el dibujo. */
+  var HAY_PIEZAS = false;
+  var HAY_BIENVENIDA = false;
   function sinElegirNada() {
     for (var k in tocado) if (k !== 'mov' && tocado[k]) return false;
     return true;
   }
   function pintaPresentacion() {
     var im = $('[data-pv-presenta]');
-    var puesta = sinElegirNada();
+    var puesta = !HAY_PIEZAS;
     if (im) im.hidden = !puesta;
     return puesta;
   }
@@ -720,7 +728,17 @@
     else img.onload = pon;
   }
 
+  function esperaCumplida(q) {
+    if (typeof q === 'string') return !!tocado[q];
+    for (var i = 0; i < q.length; i++) if (tocado[q[i]]) return true;
+    return false;
+  }
+
   function pintaCapas() {
+    /* ⚠️ AQUÍ, NO EN `pintaPresentacion`: ésa corre DESPUÉS que ésta, y en
+       la primera pintada el dato habría llegado tarde —el Trinchera abría
+       con el reloj entero puesto en vez de con su foto de bienvenida—. */
+    HAY_BIENVENIDA = !!$('[data-pv-presenta]');
     precargaCapas();
     var caja = $('[data-pv-capas]');
     if (!caja) return;
@@ -743,7 +761,18 @@
          esto, el orden del modelo se ignoraba en silencio (30/08/2026). */
       img.style.zIndex = String(alturaEnLaPila + 1);
       var f = ficheroCapa(p.grupo, e[p.grupo]);
-      var toca = !p.espera || !!tocado[p.espera];
+      /* `espera` es el paso que tiene que haberse pulsado para que esta
+         pieza aparezca, y puede ser UNA LISTA: la caja sale al señalar el
+         tamaño, y en los modelos que no tienen tamaño, al señalar el
+         material. Vale cualquiera de los dos.
+
+         ⚠️ SOLO SE ESPERA SI HAY ALGO QUE ENSEÑAR MIENTRAS TANTO. El reloj
+         se arma pieza a pieza sobre la foto de bienvenida; en un modelo que
+         todavía no tiene esa foto, esperar deja el visor en blanco al
+         abrir, que es peor que lo que había. Ése dibuja lo que puede desde
+         el principio, y pasa al montaje progresivo el día que llegue su
+         foto, sin tocar una línea. */
+      var toca = !p.espera || !HAY_BIENVENIDA || esperaCumplida(p.espera);
       var apoyo = !p.necesita || !!puestas[p.necesita];
       if (!f || !toca || !apoyo) { img.hidden = true; img.removeAttribute('src'); return; }
       var src = baseCapa(p.grupo) + f + '.avif' + SERIE_V;
@@ -756,6 +785,13 @@
       marcaLarga(img);
       puestas[p.capa] = true;
     });
+    /* CUÁNTAS PIEZAS HAY PUESTAS, que es lo que decide si sigue la foto de
+       bienvenida. Se apunta aquí porque es el único sitio que lo sabe de
+       verdad: una pieza puede no dibujarse porque su paso no se ha tocado,
+       porque le falta el apoyo —las agujas sin su esfera— o porque todavía
+       no tiene fichero. */
+    HAY_PIEZAS = false;
+    for (var q in puestas) { HAY_PIEZAS = true; break; }
     /* El carrusel mueve el paso que se está tocando ahora mismo. Con la
        foto de presentación puesta no hay paso que mover, y además quedaría
        flotando encima de la foto. */

@@ -461,7 +461,7 @@
       "NA": "caja-brazalete-negro-arena"
     }
   }, CAPA_IMG: "/assets/img/precisa-2026/capas/1200/", SERIE_V: "?v=13",
-    PILA: [{"capa": "esf", "grupo": "esf"}, {"capa": "caja", "grupo": "caja"}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf"}],
+    PILA: [{"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf", "espera": "agujas"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -488,6 +488,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=13"></script>
+<script src="/assets/js/configurador-2026.js?v=14"></script>
 </body>
 </html>

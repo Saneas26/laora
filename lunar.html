@@ -675,7 +675,7 @@
      Cloudflare sigue sirviendo la vieja hasta cuatro horas: el `?v=` no le
      rompe la caché, se la rompe un nombre nuevo. Subió a 2 el 27/08/2026,
      cuando la de agujas azules se cambió por la de fondo azul marino. */
-  var SERIE_V = '?v=49';
+  var SERIE_V = '?v=50';
   /* DOS AVIF SE QUEDARON SIN CASILLA el 27/08/2026, cuando Óscar cerró las
      cuatro ternas. Siguen en la carpeta de la serie, sin que los pida nadie:
        · `acero-blanca-bazul-plata-brazalete`   — las agujas plata ya no están
@@ -684,7 +684,7 @@
          ninguna de las cuatro. */
 
   var e = { mov: 'MQ', esf: 'NEG', bisel: 'NEG', agujas: 'BLA',
-            caja: 'PL', cristal: 'MIN', correa: 'A316P', pespunte: 'T', cierre: 'MARI',
+            caja: 'PL', cristal: 'MIN', correa: 'A316P', pespunte: 'B', cierre: 'MARI',
             mariposa: 'SIN' };
   var CAPA_IMG = '/assets/img/lunar-2026/capas/1200/';
   /* Qué fichero le toca a cada opción. Lo que no está aquí todavía no tiene
@@ -766,7 +766,13 @@
      un reloj a medio montar sino un fallo. */
   var PILA = [
     { capa: 'correa', grupo: 'correa', espera: 'correa' },
-    { capa: 'caja',   grupo: 'caja',   espera: null },
+    /* LA CAJA SALE AL SEÑALAR EL TAMAÑO (Óscar, 31/08/2026: «al abrir la
+       página solo aparece la imagen de inicio, y según se señale el tamaño
+       de la caja aparece la caja del reloj sola, la de acero»). Antes iba
+       con `espera: null` —siempre dibujada—, así que la foto de bienvenida
+       no llegaba a verse. Vale el tamaño o el material: en un modelo sin
+       paso de tamaño, el material. */
+    { capa: 'caja',   grupo: 'caja',   espera: ['tamano', 'caja'] },
     { capa: 'bisel',  grupo: 'bisel',  espera: 'bisel' },
     { capa: 'esf',    grupo: 'esf',    espera: 'esf' },
     { capa: 'agujas', grupo: 'agujas', espera: 'agujas', necesita: 'esf' }
@@ -1384,7 +1390,7 @@
 <!-- El motor de precio, el mismo para todos los modelos. Va DELANTE del
      configurador: el configurador lo usa nada más arrancar. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=13"></script>
+<script src="/assets/js/configurador-2026.js?v=14"></script>
 <!-- ============ LA LUPA ============
      La foto a pantalla completa, con la de 1600 —que es la que hay— y el
      pie diciendo qué reloj es. Se cierra con la equis, con Escape o

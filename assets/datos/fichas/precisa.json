@@ -150,21 +150,7 @@
  "montaje": {
   "img": "/assets/img/precisa-2026/capas/1200/",
   "v": "?v=13",
-  "pila": [
-   {
-    "capa": "esf",
-    "grupo": "esf"
-   },
-   {
-    "capa": "caja",
-    "grupo": "caja"
-   },
-   {
-    "capa": "agujas",
-    "grupo": "agujas",
-    "necesita": "esf"
-   }
-  ],
+  "pila": [{"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf", "espera": "agujas"}],
   "capas": {
    "esf": {
     "AZM": "esfera-azul-marino",
