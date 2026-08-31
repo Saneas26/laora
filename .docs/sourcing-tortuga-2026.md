@@ -15,7 +15,29 @@ ficha todavía figura como **no listo** y sin código asignado.
 | **Q** · Cuarzo japonés | **Miyota 2105** | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
 
 **Los dos llevan fecha larga**, día y fecha, así que la ventanilla de la esfera
-vale para las dos versiones.
+vale para las dos versiones. Y el **día del Miyota es bilingüe, español e
+inglés** (`2105-20A`), con rueda blanca y numeración arábiga — eso se puede
+decir en la ficha.
+
+### Ficha técnica de los dos
+
+| | NH36 | Miyota 2105 |
+|---|---|---|
+| Tipo | automático | cuarzo |
+| **Reserva de marcha** | **41 horas** | — |
+| **Duración de la pila** | — | **unos 3 años (36 meses)** |
+| Frecuencia | 21.600 alt/h | — |
+| Rubíes | 24 | — |
+| Cuerda manual y parada de segundero | sí | — |
+| Día y fecha | sí | sí, **bilingüe ES/EN** |
+
+⚠️ **Ninguno de los dos anuncios declara ni la reserva ni la pila.** Los datos
+de arriba son los del fabricante del calibre, no del vendedor. Si van a la
+ficha de cara al cliente, conviene pedírselos por escrito al vendedor, que es
+como se hizo con la estanqueidad y el acero de las cajas.
+
+⚠️ **El anuncio del NH36 limita a TRES PIEZAS POR CLIENTE.** Para producción
+hay que hablarlo con el vendedor o buscar otro anuncio.
 
 **Entre los dos hay 56 € de coste**, que el multiplicador convierte en unos
 **134 € de precio**. Es el salto más grande de la casa: el mismo Tortuga sale a
