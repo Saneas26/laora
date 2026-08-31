@@ -59,6 +59,17 @@ FONDO = (233, 233, 231, 255)
 CAJA_PATRON = 'preparadas/19-caja-tortuga-45mm-eje-2048.png'
 HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
 HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
+# EL LIENZO ALTO DE LAS CORREAS (Óscar, 31/08/2026: «cuando hacemos zoom es
+# precisamente para que se vea más correa, como ya funciona con las otras
+# correas en trinchera y lunar»). Es la norma de la casa desde el 29/08: la
+# correa se publica en un lienzo 4.096 ÷ 0,72 = 5.688 de alto y se coloca
+# por su centro. En primer plano el marco cuadrado la recorta y se ve la
+# franja de siempre; al alejarse al 72 % cabe entera y aparece el resto de
+# la tira. Publicada cuadrada —como estaba el Tortuga— al alejarse no sale
+# más correa: sale su corte flotando dentro del marco.
+ALTO_COR = 5688
+DESP_COR = (ALTO_COR - LIENZO) // 2   # de fila de la caja a fila de la correa
+MARGEN_COR = 40                  # lo que la punta se mete bajo la caja
 
 CAJAS = {
     'caja-acero':            'preparadas/19-caja-tortuga-45mm-eje-2048.png',
@@ -170,6 +181,10 @@ def tiras_de(f):
 def pon_correa(f, s, cx, centro, baja=0, sube=0):
     """Escala una correa y pega cada tira con su propio desplazamiento.
 
+    Va sobre el LIENZO ALTO: el eje del reloj cae en el centro del lienzo
+    alto, que es donde el navegador centra la imagen, así que una fila `r`
+    de la caja es la fila `r + DESP_COR` de la correa.
+
     ⚠️ EL DESPLAZAMIENTO VA ANTES DE RECORTAR AL LIENZO, y esto costó una
     pasada. Moviendo las tiras DESPUÉS de pegarlas, lo que se había salido
     del lienzo al escalar ya estaba perdido: al meter la tira de abajo
@@ -186,11 +201,69 @@ def pon_correa(f, s, cx, centro, baja=0, sube=0):
     t = [(int(x[0]), int(x[-1])) for x in np.split(filas, cortes + 1)]
     med = (t[0][1] + t[1][0]) // 2 if len(t) == 2 else n.height // 2
     dx = round(centro - cx * s)
-    dy = round(LIENZO / 2.0 - (LIENZO / 2.0) * s)
-    L = Image.new('RGBA', (LIENZO, LIENZO), (0, 0, 0, 0))
+    dy = round(LIENZO / 2.0 - (LIENZO / 2.0) * s) + DESP_COR
+    L = Image.new('RGBA', (LIENZO, ALTO_COR), (0, 0, 0, 0))
     L.alpha_composite(n.crop((0, 0, n.width, med)), (dx, dy + baja))
     L.alpha_composite(n.crop((0, med, n.width, n.height)), (dx, dy + med - sube))
     return L
+
+
+def _tramo_recto(a, y0, y1, desde_arriba):
+    """Cuántas filas seguidas del extremo de FUERA van rectas.
+
+    ⚠️ SE ESPEJA SÓLO EL TRAMO RECTO, no la tira entera. Espejando entera,
+    lo que se repetía era el eslabón de la caja —el que lleva el corte
+    curvo para abrazarla—, y el brazalete salía con unos ojales en forma de
+    lente cada dos eslabones. Recto es donde la fila es un solo trozo y
+    mide casi lo que la tira más ancha."""
+    al = a[y0:y1 + 1, :, 3] > 128
+    anchos = al.sum(1)
+    tope = anchos.max()
+    n = 0
+    for i in (range(len(al)) if desde_arriba else range(len(al) - 1, -1, -1)):
+        idx = np.where(al[i])[0]
+        if not len(idx) or anchos[i] < tope * 0.93:
+            break
+        if len(np.split(idx, np.where(np.diff(idx) > 1)[0] + 1)) > 1:
+            break
+        n += 1
+    return max(n, 2)
+
+
+def alarga_las_tiras(L):
+    """Alarga cada tira, espejándola, hasta el canto del lienzo alto.
+
+    ⚠️ SÓLO HACE FALTA PARA EL BRAZALETE. Las de caucho vienen dibujadas
+    largas y de sobra llegan; el brazalete de la entrega son dos muñones de
+    unos 700 px —el eslabón de la caja y poco más—, así que sacándolo hacia
+    fuera se quedaba a 900 px del canto y en el visor se le veía el corte
+    flotando. Se refleja sobre sí mismo: como los eslabones son iguales, el
+    empalme cae en pixel continuo y no se nota la costura.
+
+    Se refleja SÓLO por el lado de fuera; el de dentro es la punta que va
+    bajo la caja y no se toca."""
+    a = np.asarray(L).copy()
+    al = a[:, :, 3] > 128
+    filas = np.where(al.any(1))[0]
+    if not len(filas):
+        return L
+    t = [(int(x[0]), int(x[-1]))
+         for x in np.split(filas, np.where(np.diff(filas) > 1)[0] + 1)]
+    if len(t) != 2:
+        return L
+    (y0, y1), (y2, y3) = t
+    alto = a.shape[0]
+    if y0 > 0:
+        n = _tramo_recto(a, y0, y1, True)
+        bloque = a[y0:y0 + n]
+        a[0:y0] = np.pad(bloque, ((y0, 0), (0, 0), (0, 0)), mode='reflect')[0:y0]
+    if y3 < alto - 1:
+        falta = alto - 1 - y3
+        n = _tramo_recto(a, y2, y3, False)
+        bloque = a[y3 + 1 - n:y3 + 1]
+        a[y3 + 1:] = np.pad(bloque, ((0, falta), (0, 0), (0, 0)),
+                            mode='reflect')[-falta:]
+    return Image.fromarray(a)
 
 
 def cubierto_por_la_caja(caja, cols):
@@ -201,34 +274,30 @@ def cubierto_por_la_caja(caja, cols):
     return (filas[0], filas[-1]) if filas else (0, a.shape[0] - 1)
 
 
-def pega_a_la_caja(L, arriba, abajo, margen=40):
-    """Mete cada tira hasta que su punta queda DEBAJO de la caja.
+def cuanto_mover(L, arriba, abajo, margen=MARGEN_COR):
+    """Cuánto hay que mover cada tira para que su punta quede JUSTO bajo la caja.
 
-    Óscar, 31/08/2026: «extrae la correa hasta la caja». Y no llegaba: la
-    correa de caucho viene dibujada a menos de la mitad de tamaño, y al
-    escalarla x2,22 DESDE EL CENTRO las dos puntas se van hacia fuera —el
-    hueco entre ellas pasa de 876 px a 1.945—. Por abajo se quedaba 94 px
-    corta y por ahí se veía el fondo entre la correa y la caja.
+    Óscar, 31/08/2026: «la correa tienes que sacarla más hacia fuera, el
+    reloj monta mucho encima de la correa (…) la máscara de la caja monta
+    mucho trozo de la correa».
 
-    Cada tira se mueve por su cuenta y SÓLO HACIA DENTRO: sacarla hacia
-    fuera dejaría un hueco en el canto del lienzo, que es por donde la
-    correa se sale de la foto. El brazalete, que ya llega, casi no se
-    mueve."""
+    Y tenía razón con números: la punta del caucho —que es su parte ANCHA,
+    los 20 mm de las asas— se quedaba mil píxeles por debajo del borde de
+    la caja. Lo que asomaba entre las astas ya era la parte estrecha de la
+    tira, y por eso se veía fondo a los lados: 48 px por banda.
+
+    Así que la punta se lleva a `margen` píxeles dentro de la primera fila
+    en que la caja tapa la correa de lado a lado: lo justo para que el
+    corte no se vea, y ni un píxel más. Y AHORA SE MUEVE EN LOS DOS
+    SENTIDOS, no sólo hacia dentro: con el lienzo alto ya no hay canto que
+    despegar, hay tira de sobra."""
     a = np.asarray(L)[:, :, 3] > 128
     filas = np.where(a.any(1))[0]
     cortes = np.where(np.diff(filas) > 1)[0]
     t = [(int(x[0]), int(x[-1])) for x in np.split(filas, cortes + 1)]
     if len(t) != 2:
-        return L, 0, 0
-    med = (t[0][1] + t[1][0]) // 2
-    baja = max(0, (arriba + margen) - t[0][1])
-    sube = max(0, t[1][0] - (abajo - margen))
-    if not baja and not sube:
-        return L, 0, 0
-    n = Image.new('RGBA', L.size, (0, 0, 0, 0))
-    n.alpha_composite(L.crop((0, 0, L.width, med)), (0, baja))
-    n.alpha_composite(L.crop((0, med, L.width, L.height)), (0, med - sube))
-    return n, baja, sube
+        return 0, 0
+    return (arriba + margen) - t[0][1], t[1][0] - (abajo - margen)
 
 
 def pon(f, s, eje_origen, eje_destino, sin_bajar=False):
@@ -297,8 +366,9 @@ def monta():
         print('AGUJAS %-20s largo %.0f -> %.0f px, de un ojo de %.0f (%.0f %% del radio)'
               % (ident, largo, largo * se, r_ojo, 100 * largo * se / r_ojo))
 
-    # las correas, a llenar el hueco entre astas Y a llegar hasta la caja
-    a_caja = alfa(CAJA_PATRON)
+    # las correas: a llenar el hueco entre astas, con la punta justo bajo la
+    # caja y en el lienzo alto, para que el alejarse enseñe más tira
+    alto_pub = round(ANCHO * ALTO_COR / float(LIENZO))
     for ident, f in sorted(CORREAS.items()):
         an, cx = ancho_maximo(f)
         s = astas * HOLGURA_COR / an
@@ -306,22 +376,33 @@ def monta():
         b = np.asarray(capa)[:, :, 3] > 128
         cols = np.where(b.any(0))[0]
         arr, aba = cubierto_por_la_caja(CAJA_PATRON, (cols.min(), cols.max()))
-        _, baja, sube = pega_a_la_caja(capa, arr, aba)
-        # ⚠️ Y NO SE PUEDE METER MÁS DE LO QUE SOBRA POR EL OTRO EXTREMO. La
-        # correa de caucho se sale del lienzo por arriba y por abajo, así que
-        # tiene de dónde; el brazalete es una pieza corta que llega justa al
-        # canto, y metiéndolo se despegaba de él. Se mete lo que se puede.
-        ta = tiras_de(f)
-        dy = LIENZO / 2.0 - (LIENZO / 2.0) * s
-        baja = int(min(baja, max(0.0, -(dy + ta[0][0] * s))))
-        sube = int(min(sube, max(0.0, dy + ta[1][1] * s - (LIENZO - 1))))
+        baja, sube = cuanto_mover(capa, arr + DESP_COR, aba + DESP_COR)
         if baja or sube:                       # y se vuelve a montar, ya con el sitio
             capa = pon_correa(f, s, cx, centro_astas, baja, sube)
-        capas[ident] = capa.resize((ANCHO, ANCHO), Image.LANCZOS)
+        capa = alarga_las_tiras(capa)
+        capas[ident] = capa.resize((ANCHO, alto_pub), Image.LANCZOS)
+        vis = np.asarray(capas[ident])[:, :, 3] > 128
+        fil = np.where(vis.any(1))[0]
+        tir = [(int(x[0]), int(x[-1]))
+               for x in np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)]
         print('CORREA %-20s ancho %4d -> %4d (escala %.4f) · la caja tapa de la '
-              '%d a la %d · tira de arriba %+d, la de abajo %+d'
-              % (ident, an, round(an * s), s, arr, aba, baja, -sube))
+              '%d a la %d · tira de arriba %+d, la de abajo %+d · publicada '
+              'en %dx%d, tiras %s'
+              % (ident, an, round(an * s), s, arr, aba, baja, -sube,
+                 ANCHO, alto_pub, tir))
     return capas
+
+
+def en_el_marco(capa):
+    """Lo que se ve de una capa en el visor cuadrado, en primer plano.
+
+    La correa se publica más alta que ancha y el navegador la centra en
+    vertical y le recorta lo que sobra; esto hace lo mismo, para que la
+    hoja de control enseñe lo que verá el cliente y no la capa entera."""
+    if capa.size[1] == ANCHO:
+        return capa
+    y = (capa.size[1] - ANCHO) // 2
+    return capa.crop((0, y, ANCHO, y + ANCHO))
 
 
 def hoja(capas, destino):
@@ -337,7 +418,7 @@ def hoja(capas, destino):
     for i, (caja, esf, cor, ag) in enumerate(tiros):
         L = Image.new('RGBA', (ANCHO, ANCHO), FONDO)
         for k in (cor, esf, caja, ag):
-            L.alpha_composite(capas[k])
+            L.alpha_composite(en_el_marco(capas[k]))
         h.paste(L.convert('RGB').resize((420, 420)),
                 ((i % cols) * 420, (i // cols) * 420))
     h.save(destino)

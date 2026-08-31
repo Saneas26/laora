@@ -28,7 +28,19 @@ fichas=$(git diff --cached --name-only | grep -E '^(precisa|trinchera|lunar|bita
 if [ -n "$fichas" ]; then
   echo "→ ha cambiado una ficha: volviendo a volcar el catálogo"
   if node herramientas/volcar_catalogo_2026.js; then
-    git add assets/datos/catalogo-2026.json
+    # ⚠️ Y LA CARPETA PARTIDA POR MODELO, QUE ES LA QUE MIRA EL SERVIDOR
+    # (31/08/2026). Aquí sólo se subía `catalogo-2026.json`, que es el
+    # archivo VIEJO: `crear-pedido.ts` pide
+    # `assets/datos/catalogo/LO-0X.json`, y ésos no los añadía nadie. Se
+    # publicaban sólo cuando un `git add -A` posterior pillaba de paso lo
+    # que hubiera dejado el último volcado en el disco, así que iban
+    # siempre por detrás.
+    #
+    # El día que se vio, en producción había 11.533 referencias de 14.168
+    # con OTRO precio, y siempre más barato: el cliente veía 349,90 en la
+    # tarjeta y el servidor le cobraba 289,90. No es un descuadre
+    # estético: es lo que se cobra.
+    git add assets/datos/catalogo-2026.json assets/datos/catalogo
     # Y los precios que la colección lleva escritos dentro: si la
     # tarjeta dice 249,90 y el servidor cobra 259,90, el cliente ve un
     # precio y paga otro. No es un descuadre estético.
