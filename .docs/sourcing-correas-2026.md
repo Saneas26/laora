@@ -86,45 +86,40 @@ costura por el momento a todas también, **hasta que te indique lo contrario**»
 
 ---
 
-## Correas de caucho — 5,89 € · todas con hebilla
+## LA CORREA DE CAUCHO
 
-Óscar, **30/08/2026**. **Dos anuncios**, los dos sin captura:
+Óscar, **30/08/2026**. **Todo lo de este apartado vale SOLO para el caucho.**
 
-- [1005008055142978](https://es.aliexpress.com/item/1005008055142978.html)
-- [1005009645605490](https://es.aliexpress.com/item/1005009645605490.html)
+> «La correa de caucho es la correa **más** la hebilla, y puede ser una o la
+> otra, y hay diferentes colores. Es obligatorio que lleve una hebilla.»
 
-> **«Todas las correas de caucho llevan hebilla, o mariposa o clásica.»**
+Es decir: en el caucho una correa **no es una pieza, son dos**. Se compran
+siempre juntas y el cierre no se puede quitar.
 
-O sea: en el caucho **el cierre no es opcional y hay que sumarlo siempre**, y
-sólo se puede elegir entre esos dos. Con la clásica sale a **7,68 €** y con la
-mariposa a **8,58 €**.
+### Las piezas
 
-⚠️ **Resuelto el descuadre de esta mañana**, y por un tercer número: yo tenía
-12,99 € (que Óscar dio para el Lunar) contra los 5,79 € de la ficha. El bueno
-es **5,89 €**. La ficha —Trinchera y Lunar— hay que subirla de 5,79 a 5,89.
-
----
-
-## Hebillas — clásica 1,79 € · mariposa 2,69 €
-
-Óscar, **30/08/2026**. **Los cuatro colores al mismo precio: negro, plata, oro
-y oro rosa.**
-
-| Hebilla | Coste | Proveedor |
+| Pieza | Coste | Proveedor |
 |---|--:|---|
-| **Clásica** | **1,79 €** | [1005007688549523](https://es.aliexpress.com/item/1005007688549523.html) |
-| **Mariposa** | **2,69 €** | [1005008996913269](https://es.aliexpress.com/item/1005008996913269.html) |
+| **Correa de caucho** · varios colores | **5,89 €** | [1005008055142978](https://es.aliexpress.com/item/1005008055142978.html) y [1005009645605490](https://es.aliexpress.com/item/1005009645605490.html) |
+| **Hebilla clásica** · negro, plata, oro, oro rosa | **1,79 €** | [1005007688549523](https://es.aliexpress.com/item/1005007688549523.html) |
+| **Hebilla mariposa** · negro, plata, oro, oro rosa | **2,69 €** | [1005008996913269](https://es.aliexpress.com/item/1005008996913269.html) |
 
-⚠️ **Esto sube el coste, no lo baja.** La ficha del Trinchera tiene hoy las
-hebillas casi regaladas —plata y oro rosa a **0 €**, oro a 1,00, negra a 1,20 y
-la mariposa a **0,20**—, números de la hoja de materiales vieja. Los de verdad
-son 1,79 y 2,69, iguales en los cuatro colores. **La mariposa cuesta trece
-veces lo que dice la ficha.**
+Los cuatro colores de cada hebilla **valen lo mismo**.
 
-Y hay una consecuencia de fondo: hasta ahora el color de hebilla cambiaba el
-precio (la negra sumaba 1,20 y la de oro rosa restaba 0,40). **Ya no: los
-cuatro colores valen igual.** Lo que cambia el precio es el TIPO, clásica o
-mariposa.
+### Lo que cuesta una correa de caucho montada
+
+| Con la hebilla… | Coste |
+|---|--:|
+| clásica | **7,68 €** |
+| mariposa | **8,58 €** |
+
+Nunca 5,89 a secas: sin hebilla no hay correa.
+
+### 🚫 Esto NO vale para nada más
+
+Estas dos hebillas son **del caucho**. No se aplican a la piel, ni al nato, ni
+a la vaquera, ni a los brazaletes. **Cada familia de correa tiene sus propias
+reglas y Óscar las dará cuando toque.** No suponer nada.
 
 ---
 
@@ -135,9 +130,8 @@ mariposa.
 | **Tela vaquera** | **5,99 €** | todos |
 | **Piel perforada** | **6,79 €** | todos |
 | **Piel con costura** | **7,69 €** | todos |
-| **Caucho** *(+ hebilla obligatoria)* | **5,89 €** | todos |
-| Hebilla clásica · 4 colores | 1,79 € | — |
-| Hebilla mariposa · 4 colores | 2,69 € | — |
+| **Caucho + hebilla clásica** | **7,68 €** | todos |
+| **Caucho + hebilla mariposa** | **8,58 €** | todos |
 | Caucho del Lunar | 12,99 € | Lunar |
 | Nato 20 mm (caja de 39) | 11,29 € | Trinchera |
 | Brazalete de acero del Lunar | 19,79 € | Lunar |
