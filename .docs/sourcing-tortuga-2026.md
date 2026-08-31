@@ -14,18 +14,16 @@ ficha todavía figura como **no listo** y sin código asignado.
 | **A** · Automático japonés | **NH36** | **65,00 €** | [1005012173045057](https://es.aliexpress.com/item/1005012173045057.html) |
 | **Q** · Cuarzo japonés | **Miyota 2105** | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
 
+**Los dos llevan fecha larga**, día y fecha, así que la ventanilla de la esfera
+vale para las dos versiones.
+
 **Entre los dos hay 56 € de coste**, que el multiplicador convierte en unos
 **134 € de precio**. Es el salto más grande de la casa: el mismo Tortuga sale a
 169,90 € en cuarzo y a 289,90 € en automático.
 
-⚠️ **Dos cosas que decidir antes de que esto llegue a la web:**
-
-1. **El nombre de cara al cliente.** La norma de la casa es no nombrar al
-   fabricante: van como **«Calibre laOra LO_xxxx»** con su arquitectura. Hacen
-   falta los dos códigos.
-2. **El NH36 lleva día Y fecha**, no sólo fecha. Si el Tortuga va a enseñar el
-   día de la semana, eso cambia la esfera y hay que saberlo antes de encargar
-   las imágenes.
+⚠️ **El nombre de cara al cliente.** La norma de la casa es no nombrar al
+fabricante: van como **«Calibre laOra LO_xxxx»** con su arquitectura japonesa.
+Hacen falta los dos códigos.
 
 ## Agujas — 5,59 € · súper lumen C3
 
@@ -174,24 +172,15 @@ gris oscuro · acero inoxidable
 
 ---
 
-## 🔴 La esfera dice AUTOMATIC, y hay un cuarzo
+## La esfera dice AUTOMATIC, y una de las dos versiones no lo es
 
-La esfera de la entrega lleva impreso **«AUTOMATIC · WATER 200m RESIST»** y una
-**ventanilla de día y fecha**. Las dos cosas son del NH36.
+**El Miyota 2105 lleva fecha larga** —día y fecha—, así que la ventanilla de la
+esfera le va bien. Lo que no le va es la palabra: la esfera lleva impreso
+**«AUTOMATIC · WATER 200m RESIST»** y el cuarzo no es automático.
 
-**El Tortuga de cuarzo monta un Miyota 2105, que no lleva día.** Con esta
-esfera, el cuarzo enseñaría una ventanilla de día vacía y una palabra que no le
-corresponde.
-
-Hay tres salidas y **es decisión de Óscar**:
-
-1. **Una segunda esfera para el cuarzo**, sin «AUTOMATIC» y con ventanilla sólo
-   de fecha. Son ocho dibujos más y otro coste de esfera.
-2. **Un movimiento de cuarzo con día y fecha** en vez del 2105.
-3. **Que el Tortuga sea sólo automático** y se caiga el paso del movimiento.
-
-La tercera es la que menos trabajo da y la que más precio quita: sin el cuarzo,
-el Tortuga empieza en 319,90 € en vez de 189,90 €.
+Es lo único que separa la esfera de valer para los dos. Cómo se arregla lo dice
+Óscar: se quita la palabra y la esfera sirve para las dos versiones, o se hace
+una variante con el texto del cuarzo.
 
 ## Lo que falta
 
