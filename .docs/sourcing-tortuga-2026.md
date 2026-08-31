@@ -116,7 +116,12 @@ Es el brazalete más caro de la casa.
 
 No entra en la biblioteca compartida y no se ofrece en ningún otro reloj.
 
-## Correa de buzo profesional — 3,89 € · sólo negro
+## ~~Correa de buzo profesional — 3,89 € · sólo negro~~ · **NO ENTRA**
+
+**Óscar, 31/08/2026: «dejamos sólo correa buzo, nada más; la profesional de
+momento no».** Se queda fuera de la ficha. El anuncio y el precio quedan
+apuntados por si vuelve.
+
 
 [1005007635684706](https://es.aliexpress.com/item/1005007635684706.html)
 
@@ -135,8 +140,7 @@ Un solo color: **negro**.
 | Grabado del logotipo | 3,78 € |
 | **Movimiento** · cuarzo Miyota 2105 | 9,00 € |
 | **Movimiento** · automático NH36 | 65,00 € |
-| **Correa** · buzo | 3,39 € |
-| **Correa** · buzo profesional | 3,89 € |
+| **Correa** · buzo, seis colores | 3,39 € |
 | **Correa** · brazalete de acero | 32,39 € |
 
 ## Los precios que salen

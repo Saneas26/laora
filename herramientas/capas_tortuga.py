@@ -83,6 +83,8 @@ HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
 ALTO_COR = 5688
 DESP_COR = (ALTO_COR - LIENZO) // 2   # de fila de la caja a fila de la correa
 MARGEN_COR = 40                  # lo que la punta se mete bajo la caja
+SOBRA_COR = 1.02                 # y lo que la correa se mete bajo las astas
+DESTENSA = 180                   # las filas que tarda en volver a su ancho natural
 
 CAJAS = {
     'caja-acero':            'preparadas/19-caja-tortuga-45mm-eje-2048.png',
@@ -353,6 +355,80 @@ def alarga_las_tiras(L):
     return Image.fromarray(a)
 
 
+def rellena_las_astas(L, caja, centro):
+    """Ensancha la correa, fila a fila, hasta llenar la ranura de las astas.
+
+    Óscar, 31/08/2026: «la correa de abajo tiene que salir más de debajo de
+    la caja, tiene que unir su extremo a la caja, y el de arriba igual».
+
+    Y no era sacarla más: sacada un pelo más ya asoma su propio corte. Lo
+    que pasa es que LA CORREA VIENE DIBUJADA EN PERSPECTIVA, cayendo hacia
+    la muñeca, así que se estrecha desde la misma punta: mide sus 20 mm
+    justo en el asa y un 10 % menos cinco milímetros más allá. La ranura,
+    en cambio, es un carril recto de 20 mm. Resultado: un hilo de fondo a
+    los dos lados, entre la correa y el asta, justo donde tienen que
+    juntarse.
+
+    Aquí se le devuelve el ancho SÓLO EN LAS FILAS DE LA RANURA: cada fila
+    se estira en horizontal hasta que la correa mide lo que la ranura —un
+    2 % más, para que se meta bajo el asta— y hacia fuera se vuelve a su
+    ancho natural en 180 filas, que es lo que hace una correa de verdad:
+    llena el asa y empieza a estrechar en cuanto la pasa."""
+    a = np.asarray(L).astype(np.float32).copy()
+    al = alfa(caja)
+    filas = []
+    ys = np.where(al.any(1))[0]
+    for arriba in (True, False):
+        rango = range(ys.min(), LIENZO // 2) if arriba else range(ys.max(), LIENZO // 2, -1)
+        visto = False
+        for r in rango:
+            idx = np.where(al[r])[0]
+            if not len(idx):
+                continue
+            seg = np.split(idx, np.where(np.diff(idx) > 1)[0] + 1)
+            if len(seg) < 2 or int(seg[-1][0]) - int(seg[0][-1]) < 400:
+                if visto:
+                    break
+                continue
+            visto = True
+            filas.append((r, int(seg[0][-1]), int(seg[-1][0]), 1 if arriba else -1))
+    if not filas:
+        return L
+    # y las de fuera, para que el ensanche se apague sin dar un escalón
+    borde = {1: min(r for r, _, _, d in filas if d == 1),
+             -1: max(r for r, _, _, d in filas if d == -1)}
+    ancho_ranura = {}
+    for r, i, d, s_ in filas:
+        ancho_ranura[r] = (d - i) * SOBRA_COR
+    for lado in (1, -1):
+        r0 = borde[lado]
+        base = ancho_ranura.get(r0, 0)
+        for k in range(1, DESTENSA + 1):
+            r = r0 - k * lado
+            if 0 <= r < LIENZO:
+                ancho_ranura[r] = base * _suave(k / float(DESTENSA))
+    for r, objetivo in ancho_ranura.items():
+        fila = a[r + DESP_COR]
+        xs = np.where(fila[:, 3] > 128)[0]
+        if len(xs) < 10:
+            continue
+        actual = float(xs.max() - xs.min() + 1)
+        k = max(1.0, objetivo / actual) if objetivo else 1.0
+        if k <= 1.001:
+            continue
+        x = np.arange(LIENZO, dtype=np.float64)
+        origen = np.clip(centro + (x - centro) / k, 0, LIENZO - 2)
+        i0 = np.floor(origen).astype(int)
+        w = (origen - i0)[:, None]
+        a[r + DESP_COR] = fila[i0] * (1 - w) + fila[i0 + 1] * w
+    return Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA')
+
+
+def _suave(t):
+    t = float(np.clip(t, 0.0, 1.0))
+    return 1.0 - (3 * t * t - 2 * t * t * t)
+
+
 def cubierto_por_la_caja(caja, cols):
     """De qué fila a qué fila tapa la caja TODO el ancho de la correa."""
     a = alfa(caja)
@@ -501,6 +577,7 @@ def monta():
         baja, sube = cuanto_mover(capa, arr + DESP_COR, aba + DESP_COR)
         if baja or sube:                       # y se vuelve a montar, ya con el sitio
             capa = pon_correa(f, s, cx, centro_astas, baja, sube)
+        capa = rellena_las_astas(capa, CAJA_PATRON, centro_astas)
         capa = alarga_las_tiras(capa)
         capas[ident] = capa.resize((ANCHO, alto_pub), Image.LANCZOS)
         vis = np.asarray(capas[ident])[:, :, 3] > 128
