@@ -398,8 +398,14 @@ def centra(L):
     eje = (L.width - 1) / 2.0
     alto = a.shape[0]
     med = (ASA_FILAS[0][1] + ASA_FILAS[1][0]) // 2
-    ventanas = ((0, med, 0, ASA_FILAS[0][0]),
-                (med, alto, ASA_FILAS[1][1], alto - 1))
+    # SE MIDE JUNTO AL ASA, no en toda la tira. Los cantos de la foto no son
+    # paralelos: la mediana de la tira entera dice «centrada de media» y deja
+    # la correa tres píxeles corrida justo donde el ojo la compara con el
+    # asa. Se miran los 350 px de correa que salen del asa hacia fuera, que
+    # es el trozo que se ve pegado a la caja.
+    VENTANA = 350
+    ventanas = ((0, med, max(0, ASA_FILAS[0][0] - VENTANA), ASA_FILAS[0][0]),
+                (med, alto, ASA_FILAS[1][1], ASA_FILAS[1][1] + VENTANA))
     n = Image.new('RGBA', L.size, (0, 0, 0, 0))
     for y0, y1, v0, v1 in ventanas:
         centros = []
