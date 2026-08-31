@@ -231,7 +231,8 @@
       "39": {
         "nombre": "39 mm",
         "expl": "Caja de 39 mm, algo más presente en la muñeca.",
-        "coste": 0
+        "coste": 0,
+        "pvp": 10
       }
     },
     "caja": {
@@ -702,6 +703,15 @@
      29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
      6.816 porque montaba brazaletes de acero con hebilla de piel. */
   var FILTROS = {"correa": {"paso": "correamat", "campo": "familia"}};
+
+  /* AÑADIDOS A PRECIO PLANO, por paso y opción. Óscar, 31/08/2026: «el
+     precio de la caja de 39 es 10 € más que la caja de 36 en cualquier
+     combinación». No es un coste: un coste pasa por el multiplicador y por
+     el redondeo al 9,90, y diez euros de coste serían treinta de precio y
+     distintos en cada combinación. Esto se suma AL FINAL, encima del precio
+     ya hecho, así que la diferencia son diez euros clavados siempre.
+     Se declara con `"pvp"` en la opción del JSON. */
+  var PVP_EXTRA = {"tamano": {"39": 10}};
   function cuelgaDe(k) { return FILTROS[k] || null; }
   function valeEn(k, id, s) {
     var f = cuelgaDe(k);
@@ -812,7 +822,7 @@
         "*": "agujas"
       }
     }
-  }, CAPA_IMG: "/assets/img/trinchera-2026/capas/1200/", SERIE_V: "?v=8",
+  }, CAPA_IMG: "/assets/img/trinchera-2026/capas/1200/", SERIE_V: "?v=9",
     PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
@@ -824,6 +834,16 @@
        no hay coste: se dibuja, pero no se pone precio ni se vende. */
     COSTES_PUESTOS: true, EXTRA: 3.78,
     CADENA: ["esftipo", "esf"],
+    PVP_EXTRA: PVP_EXTRA,
+    precioExtra: function (s) {
+      var t = 0;
+      for (var k in PVP_EXTRA) {
+        if (!abierta(k, s)) continue;
+        var v = PVP_EXTRA[k][(s || e)[k]];
+        if (v) t += v;
+      }
+      return t;
+    },
     /* LO QUE ÓSCAR DA POR MUERTO. Firmas de combinación en el orden del
        contrato de pasos, sin el tamaño ni el calibre: una vale por las
        cuatro referencias. Ni se dibujan ni entran en el catálogo. Salen
@@ -840,6 +860,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=14"></script>
+<script src="/assets/js/configurador-2026.js?v=15"></script>
 </body>
 </html>

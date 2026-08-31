@@ -64,8 +64,42 @@ def sin_fondo(f, tol=12, sat=18):
     for tope in (60, 40, 25, 12, 0):
         m = _pela(dos, L, gris, s > sat, tope=tope) if tope else dos
         if len(tiras(m)) == 2:
-            return m, a
+            return _despinta(m, s), a
     return dos, a
+
+
+def _despinta(m, sat, tope=25):
+    """Le quita al canto la SOMBRA GRIS que el pelado por gris no ve.
+
+    El pelado quita lo que se parece al fondo. Pero entre el fondo y la piel
+    hay una franja de sombra MÁS OSCURA que el fondo —en la coñac, trece
+    píxeles que van del gris 132 al 170—: no se parece al fondo, así que se
+    quedaba, y al estrechar la correa a 20 mm dejó de esconderse detrás del
+    asa y salió a la vista como una raya gris por el lado derecho.
+
+    Se conoce por el COLOR, no por el brillo: la piel coñac tiene ciento
+    treinta y cinco de saturación y la sombra diez. Se pelan los píxeles del
+    borde que no tienen color… pero SÓLO SI LA PIEZA SÍ LO TIENE: en una
+    correa negra la propia piel es gris y esto se la comería entera.
+
+    Se lleva por delante unos píxeles del canto quemado de la piel, que
+    también es oscuro y apagado. Son cinco de 4.096 —ocho centésimas de
+    milímetro— y a cambio se va media décima de sombra de estudio.
+    """
+    nucleo = ndimage.binary_erosion(m, np.ones((21, 21)))
+    if not nucleo.any():
+        return m
+    color = float(np.median(sat[nucleo]))
+    if color < 25:                      # la pieza es gris: aquí no hay nada que hacer
+        return m
+    apagado = sat < color / 3.0
+    for _ in range(tope):
+        borde = m & ~ndimage.binary_erosion(m, np.ones((3, 3)))
+        fuera = borde & apagado
+        if not fuera.any():
+            break
+        m = m & ~fuera
+    return m if len(tiras(m)) == 2 else m
 
 
 def _pela(m, L, gris, color, tope=60):
@@ -256,6 +290,12 @@ def _rellena(a, falta):
 #     bronce           1157–1472  ·  4147–4221
 ASA_FILAS = ((1145, 1495), (3888, 4240))
 
+# EL HUECO MÁS ANCHO DE TODAS LAS CAJAS, medido con `filas_de_asa` en el
+# Lunar (acero y PVD) y en las cuatro del Trinchera. No es el del contrato
+# —1.412 a 2.696— porque los dibujos no lo cumplen: el titanio abre hasta la
+# 2.708 en la fila del chaflán. La correa tiene que taparlos a todos.
+HUECO_PEOR = (1406, 2712)
+
 
 def _cantos_en_la_punta_del_asa(L):
     """Los dos cantos EN LA PUNTA DEL ASA, que es donde se ve el ancho.
@@ -295,24 +335,34 @@ def cuadra_las_asas(L, ancho):
     una fila se metía seis píxeles dentro del asa y se veía el fondo, y el
     hueco de asa que quedaba a la vista no era el mismo a los dos lados.
 
-    Aquí se le pone el canto que tiene la correa de verdad: una banda de
-    1.284 px —los 20 mm del hueco entre asas— centrada en el eje 2.054.
-    Sólo en las filas de las asas y hacia dentro, que es donde la correa es
-    recta; por encima sigue estrechándose hacia la hebilla como en la foto.
+    Aquí se le pone el canto que tiene la correa de verdad: una banda recta
+    centrada EN EL EJE DEL RELOJ —el centro del lienzo—, no en el centro del
+    hueco entre asas, que cae seis píxeles y medio más a la derecha. Sólo en
+    las filas de las asas, que es donde la correa es recta; por encima sigue
+    estrechándose hacia la hebilla como en la foto.
+
+    Y POR ESO LA BANDA TIENE QUE SER MÁS ANCHA QUE EL HUECO: centrada en el
+    eje del reloj y con 1.284 px justos se quedaría corta por la derecha,
+    donde el asa llega hasta la 2.696. Hacen falta 1.300 para tocar los dos
+    lados, y se pide un poco más para no ir al filo.
 
     SÓLO SE RELLENA, NO SE RECORTA. Lo que sobra por los lados queda detrás
     del asa y no se ve; lo que falta sí. Recortando además se le comía a la
     correa el canto de las filas de dentro, que es lo que la sujeta."""
     a = np.asarray(L).copy()
-    x0 = int(round((ASAS[0] + ASAS[1]) / 2.0 - ancho / 2.0))
+    eje = (a.shape[1] - 1) / 2.0
+    x0 = int(round(eje - ancho / 2.0))
     x1 = x0 + int(ancho)
-    # ⚠️ Y EL CONTRATO POR ENCIMA DE TODO. El hueco entre asas va de la 1.412
-    # a la 2.696 INCLUIDAS, y en la primera fila del asa —la punta, donde la
-    # caja está achaflanada— es un píxel más ancho todavía. Una banda de
-    # 1.284 centrada y redondeada se quedaba corta justo ahí, y
-    # `auditar_correas.py` lo cantaba. Se estira lo justo para taparlo:
-    # nueve píxeles de 4.096, catorce centésimas de milímetro.
-    x0, x1 = min(x0, ASAS[0] - 4), max(x1, ASAS[1] + 5)
+    # ⚠️ Y EL HUECO DE VERDAD POR ENCIMA DEL CONTRATO. El contrato dice
+    # 1.412–2.696, pero los dibujos de las cajas no lo cumplen a rajatabla:
+    # en la primera fila del asa, donde están achaflanadas, el titanio abre
+    # hasta la 2.708 y su hueco no está centrado en el eje del reloj sino
+    # siete píxeles a la derecha. Medido en las cinco cajas que montan estas
+    # correas, el hueco más ancho de todos va de la 1.410 a la 2.709.
+    #
+    # La banda se estira lo justo para taparlo pase lo que pase: vale más un
+    # píxel escondido detrás del asa que un píxel de fondo a la vista.
+    x0, x1 = min(x0, HUECO_PEOR[0]), max(x1, HUECO_PEOR[1] + 1)
     vivo = a[:, :, 3] > 60
     falta = np.zeros(a.shape[:2], bool)
     for r0, r1 in ASA_FILAS:
@@ -325,30 +375,40 @@ def cuadra_las_asas(L, ancho):
 
 
 def centra(L):
-    """Vuelve a poner la pieza en el eje de las asas.
+    """Pone CADA TIRA en el eje del reloj, y por separado.
 
-    ⚠️ NO SE CENTRA POR EL RECUADRO DE LA PIEZA. Esto es una foto de una
-    correa de verdad, no un dibujo: sus cantos no son paralelos y el
-    recuadro los promedia. Centrando así, con la correa a 20 mm justos, el
-    canto izquierdo se quedaba seis píxeles dentro del asa y el derecho
-    sobraba ocho: una rendija de fondo por la izquierda de arriba abajo.
+    ⚠️ EL EJE DEL RELOJ NO ES EL CENTRO DEL HUECO ENTRE ASAS. El hueco va de
+    la 1.412 a la 2.696 y su centro cae en la 2.054; el ojo de la caja —el
+    centro de la esfera, que es el eje que se ve— está en la 2.047,5, que es
+    el centro del lienzo. Seis píxeles y medio de diferencia, y la caja los
+    tiene porque su dibujo es así. La correa se centra en el EJE DEL RELOJ:
+    es la línea contra la que Óscar la mira.
 
-    SE CENTRA POR DONDE APRIETA: se busca, en las filas de las asas, el
-    canto izquierdo que más se mete y el derecho que menos llega, y se
-    centra esa banda —la peor— en el eje del hueco. Así lo que falte, si
-    falta, falta por igual a los dos lados.
+    ⚠️ Y UNA TIRA NO ES LA OTRA. Son dos trozos de una foto de una correa de
+    verdad y cada uno tiene su propio descentrado: la de arriba caía en la
+    800,5 y la de abajo en la 803 —del lienzo de 1.600—, o sea que la de
+    abajo se iba dos píxeles y medio a la derecha de la de arriba. Con un
+    solo desplazamiento se repartía el error entre las dos y ninguna
+    quedaba en su sitio (Óscar, 31/08/2026: «ni está centrada sobre el eje
+    Y»). Se mide y se mueve cada una por su cuenta.
 
-    Y se llama DESPUÉS de sellar, que rellena la mordida del hilo por un
-    solo canto y mueve la pieza."""
-    c = _cantos_en_la_punta_del_asa(L)
-    if not c:
-        return L
-    centro = (c[0] + c[1]) / 2.0
-    dx = int(round((ASAS[0] + ASAS[1]) / 2.0 - centro))
-    if not dx:
-        return L
+    SE MIDE DONDE SE VE, que es por fuera de las asas: ahí es donde el ojo
+    juzga si el reloj está torcido. Por dentro la tapa la caja."""
+    a = np.asarray(L)[:, :, 3] > 60
+    eje = (L.width - 1) / 2.0
+    alto = a.shape[0]
+    med = (ASA_FILAS[0][1] + ASA_FILAS[1][0]) // 2
+    ventanas = ((0, med, 0, ASA_FILAS[0][0]),
+                (med, alto, ASA_FILAS[1][1], alto - 1))
     n = Image.new('RGBA', L.size, (0, 0, 0, 0))
-    n.alpha_composite(L, (dx, 0))
+    for y0, y1, v0, v1 in ventanas:
+        centros = []
+        for r in range(max(0, v0), min(v1, alto - 1) + 1):
+            idx = np.where(a[r])[0]
+            if len(idx) > 10:
+                centros.append((idx[0] + idx[-1]) / 2.0)
+        dx = int(round(eje - np.median(centros))) if centros else 0
+        n.alpha_composite(L.crop((0, y0, L.width, y1)), (dx, y0))
     return n
 
 
@@ -400,9 +460,17 @@ if __name__ == '__main__':
         # el centrado va el ÚLTIMO: mira las filas de las asas, y hasta que las
         # tiras no están en su sitio esas filas no enseñan lo que van a enseñar.
         capa = centra(capa)
+        # ⚠️ EL ANCHO SE MIDE ANTES DE CUADRAR, y esto costó una pasada. Si se
+        # mide después, la medida es la de la banda que acaba de pintarse y la
+        # búsqueda de escala se da por buena a la primera: la correa se quedaba
+        # estrecha y el cuadrado la ensanchaba ESTIRÁNDOLE EL CANTO OSCURO,
+        # que salía como una raya negra por el lado derecho. Midiendo antes,
+        # la escala crece hasta que la piel llega sola y al cuadrado sólo le
+        # queda enderezar el temblor de la foto.
+        natural = banda_en_las_asas(capa)
         if cuadra:
             capa = cuadra_las_asas(capa, cuadra)
-        return capa, s
+        return capa, s, natural
 
     # ⚠️ EL ANCHO QUE VE ÓSCAR NO ES EL DEL DIBUJO. La correa se estrecha
     # hacia la hebilla y sus cantos no son paralelos —es una foto—, así que
@@ -411,15 +479,15 @@ if __name__ == '__main__':
     # Con `--asas` se pide la medida DONDE IMPORTA y se busca la escala que
     # la da, midiéndola en cada vuelta. Dos o tres vueltas y está.
     factor = 1.0
-    capa, s = monta(factor)
+    capa, s, natural = monta(factor)
     if asas:
-        for _ in range(6):
-            b = banda_en_las_asas(capa)
-            if not b or abs(b - asas) <= 1:
+        for _ in range(8):
+            if not natural or abs(natural - asas) <= 2:
                 break
-            factor *= asas / float(b)
-            capa, s = monta(factor)
-        print('   banda en las asas: %d px = %.2f mm' % (
+            factor *= asas / float(natural)
+            capa, s, natural = monta(factor)
+        print('   piel en las asas: %d px = %.2f mm · publicada: %d px = %.2f mm' % (
+            natural, natural / 1284.0 * 20,
             banda_en_las_asas(capa), banda_en_las_asas(capa) / 1284.0 * 20))
     a = np.asarray(capa)[:, :, 3] > 128
     ys, xs = np.where(a)

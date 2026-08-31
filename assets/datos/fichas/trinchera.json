@@ -43,9 +43,11 @@
     "id": "39",
     "nombre": "39 mm",
     "coste": 0,
+    "pvp": 10,
     "expl": "Caja de 39 mm, algo más presente en la muñeca."
    }
   ],
+  "_pvp39": "LA DE 39 CUESTA 10 € MÁS QUE LA DE 36, en cualquier combinación (Óscar, 31/08/2026). Va como `pvp`, no como `coste`: un coste pasa por el multiplicador y por el redondeo al 9,90, y diez euros de coste serían treinta de precio y distintos en cada combinación. `pvp` se suma al final, encima del precio ya hecho, así que la diferencia son diez euros clavados siempre.",
   "materiales": [
    {
     "id": "PL",
@@ -627,7 +629,7 @@
   "bienvenida": "trinchera-hazlo-tuyo",
   "bienvenida_v": "?v=1",
   "bienvenida_alt": "Hazlo tuyo: dos laOra Trinchera sobre un mapa de campaña, uno con nato verde oliva y otro con piel negra",
-  "v": "?v=8",
+  "v": "?v=9",
   "pila": [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
   "capas": {
    "caja": {

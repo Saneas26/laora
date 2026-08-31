@@ -62,7 +62,7 @@ V_CSS_CONFIG = 3
 # funcionando con el motor de anteayer. Se sube cada vez que se toca
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
-V_JS_CONFIG = 14
+V_JS_CONFIG = 15
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -268,6 +268,15 @@ def modelo_js(d, dentro):
      29/08/2026 el volcador saco 23.040 referencias del Trinchera en vez de
      6.816 porque montaba brazaletes de acero con hebilla de piel. */
   var FILTROS = %(filtros)s;
+
+  /* AÑADIDOS A PRECIO PLANO, por paso y opción. Óscar, 31/08/2026: «el
+     precio de la caja de 39 es 10 € más que la caja de 36 en cualquier
+     combinación». No es un coste: un coste pasa por el multiplicador y por
+     el redondeo al 9,90, y diez euros de coste serían treinta de precio y
+     distintos en cada combinación. Esto se suma AL FINAL, encima del precio
+     ya hecho, así que la diferencia son diez euros clavados siempre.
+     Se declara con `"pvp"` en la opción del JSON. */
+  var PVP_EXTRA = %(pvpextra)s;
   function cuelgaDe(k) { return FILTROS[k] || null; }
   function valeEn(k, id, s) {
     var f = cuelgaDe(k);
@@ -364,6 +373,16 @@ def modelo_js(d, dentro):
        no hay coste: se dibuja, pero no se pone precio ni se vende. */
     COSTES_PUESTOS: %(listo)s, EXTRA: %(extra)s,
     CADENA: %(cadena)s,
+    PVP_EXTRA: PVP_EXTRA,
+    precioExtra: function (s) {
+      var t = 0;
+      for (var k in PVP_EXTRA) {
+        if (!abierta(k, s)) continue;
+        var v = PVP_EXTRA[k][(s || e)[k]];
+        if (v) t += v;
+      }
+      return t;
+    },
     /* LO QUE ÓSCAR DA POR MUERTO. Firmas de combinación en el orden del
        contrato de pasos, sin el tamaño ni el calibre: una vale por las
        cuatro referencias. Ni se dibujan ni entran en el catálogo. Salen
@@ -394,6 +413,10 @@ def modelo_js(d, dentro):
         'listo': 'true' if d.get('listo') else 'false',
         'extra': js(d.get('extra', 0)),
         'combis': json.dumps(d.get('combinaciones', []), ensure_ascii=False),
+        'pvpextra': json.dumps(
+            {p['id']: {o['id']: o['pvp'] for o in ops if o.get('pvp')}
+             for p, ops in dentro if any(o.get('pvp') for o in ops)},
+            ensure_ascii=False),
         'vetos': json.dumps([v.split('·')[0].strip().strip('"') if '·' in v else v
                              for v in d.get('vetos', [])], ensure_ascii=False),
         'capa': json.dumps(d.get('montaje', {}).get('capas', {}), ensure_ascii=False, indent=2).replace('\n', '\n  '),
