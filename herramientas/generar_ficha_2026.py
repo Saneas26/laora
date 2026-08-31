@@ -55,7 +55,7 @@ sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
 V_CSS_PRODUCTO = 42
-V_CSS_COLECCION = 45
+V_CSS_COLECCION = 46
 V_CSS_CONFIG = 3
 # EL MOTOR DEL CONFIGURADOR. Cloudflare lo guarda 4 h por su nombre, así que
 # cambiarlo SIN subir este número no le llega a nadie: la ficha nueva sigue

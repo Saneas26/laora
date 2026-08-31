@@ -298,7 +298,15 @@
   text-transform:uppercase;
   margin:0 0 26px;max-width:1000px;
 }
+/* EL TITULAR VA EN DOS RENGLONES, y son los que Óscar escribió
+   (31/08/2026): «NUESTROS CALIBRES HAN MOVIDO» arriba y «LO MEJOR DE LA
+   RELOJERÍA MUNDIAL» debajo. Antes se partía por donde cayera el ancho de
+   la pantalla, así que en cada modelo rompía en un sitio distinto. */
 .cv2-cal-titulo span{color:var(--cv2-gris)}
+/* ⚠️ SÓLO EN EL TITULAR DE ETIQUETA, no en la frase del Lunar: allí el
+   `span` va al PRINCIPIO de la oración y partirlo en bloque la rompe por
+   la mitad. */
+.cv2-cal-titulo:not(.cv2-cal-frase) span{display:block}
 /* Cuando el rótulo no es una etiqueta sino una FRASE (Óscar, 21/08/2026,
    en el Lunar), se le quita la versalita y el espaciado: cien caracteres
    en mayúsculas espaciadas no se leen, se descifran. Se queda el mono,
@@ -309,8 +317,14 @@
   font-size:clamp(19px,2.4vw,32px);line-height:1.32;
 }
 
+/* ⚠️ CADA CAJA, DE SU ALTO (Óscar, 31/08/2026: «las tarjetas mucho menos
+   altas»). Iban con `align-items:stretch`, así que las dos crecían hasta
+   la más alta: la del automático lleva nombres de modelo que hacen dos
+   renglones —Tudor Submariner, Breitling Superocean— y la del cuarzo,
+   que sólo lleva marcas, se quedaba con un palmo de fondo vacío debajo.
+   Con `start` cada una mide lo que dice. */
 .cv2-cal-rejilla{
-  display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;
 }
 .cv2-cal-caja{
   background:#fff;border:1px solid var(--cv2-linea);
