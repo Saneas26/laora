@@ -137,6 +137,62 @@ Dos de ellas —las de cuarzo con correa de buzo— **las sube el suelo**: por
 tarifa saldrían más baratas y el suelo las levanta un escalón para que dejen
 sus 50 € limpios. Es la regla nº1 haciendo su trabajo.
 
+## Lo que trae la entrega del 31/08
+
+`~/Documents/Codex/2026-08-31/tortuga-eres-el-dise-ador-gr/outputs/`
+
+### Ocho esferas, 28,5 mm — 11,19 € cada una
+
+negra · azul texturizada · azul sunburst · turquesa sunburst · turquesa
+champagne · roja fumé · negra marfil · **frambuesa fumé**
+
+### Diez anillos interiores — sin coste, vienen en la caja
+
+naranja · naranja grueso · plata · azul · verde · negro · oliva · burdeos ·
+turquesa · **acero liso**
+
+Todos con escala negra salvo el negro, que la lleva clara, y el de acero, que
+va liso. En la foto se ve bien lo que es: el aro fino de color pegado al borde
+de la esfera, dentro del bisel negro.
+
+⚠️ **La ficha sólo tiene tres colores** —negro, turquesa y naranja— puestos
+además como *bisel*. Faltan siete y hay que renombrar el paso.
+
+### Seis colores de correa de buzo — 3,39 €
+
+negra · azul marino · gris · verde · roja · naranja
+
+Cuadran con los que dio Óscar salvo uno: él dijo **rojo, negro, verde, naranja,
+azul y gris**, y la entrega trae **azul marino**. Es el mismo color, con el
+nombre afinado.
+
+### Dos acabados de agujas — 5,59 €
+
+gris oscuro · acero inoxidable
+
+⚠️ **La ficha no tiene paso de agujas** y aquí hay dos acabados que elegir.
+
+---
+
+## 🔴 La esfera dice AUTOMATIC, y hay un cuarzo
+
+La esfera de la entrega lleva impreso **«AUTOMATIC · WATER 200m RESIST»** y una
+**ventanilla de día y fecha**. Las dos cosas son del NH36.
+
+**El Tortuga de cuarzo monta un Miyota 2105, que no lleva día.** Con esta
+esfera, el cuarzo enseñaría una ventanilla de día vacía y una palabra que no le
+corresponde.
+
+Hay tres salidas y **es decisión de Óscar**:
+
+1. **Una segunda esfera para el cuarzo**, sin «AUTOMATIC» y con ventanilla sólo
+   de fecha. Son ocho dibujos más y otro coste de esfera.
+2. **Un movimiento de cuarzo con día y fecha** en vez del 2105.
+3. **Que el Tortuga sea sólo automático** y se caiga el paso del movimiento.
+
+La tercera es la que menos trabajo da y la que más precio quita: sin el cuarzo,
+el Tortuga empieza en 319,90 € en vez de 189,90 €.
+
 ## Lo que falta
 
 **Ninguna pieza del Tortuga está sin coste ni sin proveedor.** Lo que queda:

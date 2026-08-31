@@ -13,29 +13,122 @@
  "bisel": {
   "colores": [
    {
+    "id": "NAR",
+    "nombre": "Naranja",
+    "coste": 0
+   },
+   {
+    "id": "NAG",
+    "nombre": "Naranja grueso",
+    "coste": 0
+   },
+   {
+    "id": "PLA",
+    "nombre": "Plata",
+    "coste": 0
+   },
+   {
+    "id": "AZU",
+    "nombre": "Azul",
+    "coste": 0
+   },
+   {
+    "id": "VER",
+    "nombre": "Verde",
+    "coste": 0
+   },
+   {
     "id": "NEG",
     "nombre": "Negro",
-    "color": "#1C1D1F"
+    "coste": 0
+   },
+   {
+    "id": "OLI",
+    "nombre": "Oliva",
+    "coste": 0
+   },
+   {
+    "id": "BUR",
+    "nombre": "Burdeos",
+    "coste": 0
    },
    {
     "id": "TUR",
     "nombre": "Turquesa",
-    "color": "#1F8A8A"
+    "coste": 0
    },
    {
-    "id": "NAR",
-    "nombre": "Naranja",
-    "color": "#E4761E"
+    "id": "ACE",
+    "nombre": "Acero liso",
+    "coste": 0
    }
   ],
   "materiales": []
  },
  "esfera": {
-  "tipos": [],
-  "colores": []
+  "tipos": [
+   {
+    "id": "T",
+    "nombre": "Tortuga",
+    "coste": 11.19
+   }
+  ],
+  "colores": [
+   {
+    "id": "NEG",
+    "nombre": "Negra",
+    "coste": 0
+   },
+   {
+    "id": "AZT",
+    "nombre": "Azul texturizada",
+    "coste": 0
+   },
+   {
+    "id": "AZS",
+    "nombre": "Azul sunburst",
+    "coste": 0
+   },
+   {
+    "id": "TUS",
+    "nombre": "Turquesa sunburst",
+    "coste": 0
+   },
+   {
+    "id": "TUC",
+    "nombre": "Turquesa champagne",
+    "coste": 0
+   },
+   {
+    "id": "ROJ",
+    "nombre": "Roja fumé",
+    "coste": 0
+   },
+   {
+    "id": "NEM",
+    "nombre": "Negra marfil",
+    "coste": 0
+   },
+   {
+    "id": "FRA",
+    "nombre": "Frambuesa fumé",
+    "coste": 0
+   }
+  ]
  },
  "agujas": {
-  "colores": []
+  "colores": [
+   {
+    "id": "GRI",
+    "nombre": "Gris oscuro",
+    "coste": 0
+   },
+   {
+    "id": "ACE",
+    "nombre": "Acero inoxidable",
+    "coste": 0
+   }
+  ]
  },
  "cristal": [
   {
@@ -65,5 +158,8 @@
   "cierres": [],
   "colores_cierre": []
  },
- "_movimiento": "LOS MOVIMIENTOS SON NH36 (automatico) y MIYOTA 2105 (cuarzo), Oscar 30/08/2026. Falta el coste de los dos, su anuncio y su codigo LO_ para la web: la norma de la casa es no nombrar al fabricante. OJO: el NH36 lleva DIA Y FECHA, no solo fecha."
+ "_movimiento": "LOS MOVIMIENTOS SON NH36 (automatico) y MIYOTA 2105 (cuarzo), Oscar 30/08/2026. Falta el coste de los dos, su anuncio y su codigo LO_ para la web: la norma de la casa es no nombrar al fabricante. OJO: el NH36 lleva DIA Y FECHA, no solo fecha.",
+ "_bisel": "EL BISEL SIEMPRE ES NEGRO (Oscar 30/08). Lo que aqui se llama \"bisel\" es en realidad el ANILLO INTERIOR, el aro fino de color pegado al borde de la esfera. Hay que renombrar el paso. No cuesta aparte: viene en la caja, junto con el bisel y el cristal.",
+ "_agujas": "Dos acabados de la entrega del 31/08: gris oscuro y acero inoxidable. Las agujas cuestan 5,59 y van APARTE de la esfera.",
+ "_esfera": "Ocho colores de la entrega del 31/08, 28,5 mm, a 11,19 cada una. OJO: la esfera entregada lleva impreso AUTOMATIC y ventanilla de DIA Y FECHA, las dos cosas del NH36. El cuarzo Miyota 2105 no lleva dia: con esta esfera no vale. Decision pendiente de Oscar."
 }
