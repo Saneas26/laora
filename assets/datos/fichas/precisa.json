@@ -149,8 +149,31 @@
  "_agujas": "Nuevas el 30/08/2026. Coste 0 y no null: van DENTRO del movimiento, como la caja (ver _coste). Entran en la referencia: sin ellas, dos relojes con agujas distintas viajarían con el mismo código y el pedido no diría cuál quiere.",
  "montaje": {
   "img": "/assets/img/precisa-2026/capas/1200/",
-  "v": "?v=13",
-  "pila": [{"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf", "espera": "agujas"}],
+  "v": "?v=14",
+  "pila": [
+   {
+    "capa": "esf",
+    "grupo": "esf",
+    "espera": [
+     "esf",
+     "esftipo"
+    ]
+   },
+   {
+    "capa": "caja",
+    "grupo": "caja",
+    "espera": [
+     "tamano",
+     "caja"
+    ]
+   },
+   {
+    "capa": "agujas",
+    "grupo": "agujas",
+    "necesita": "esf",
+    "espera": "agujas"
+   }
+  ],
   "capas": {
    "esf": {
     "AZM": "esfera-azul-marino",
@@ -184,8 +207,10 @@
   "_agujas_negras": "PENDIENTE DE REDIBUJAR. Óscar mandó una foto del homenaje: «así son las agujas negras en realidad». En la foto la aguja es de ACERO PULIDO con un inserto NEGRO por dentro. El dibujo que hay («negras-exactas») es lo contrario: una barra negra mate con un canal de lumen crema ancho, sin bisel pulido. Eso no se arregla midiendo ni colocando; hay que rehacer el dibujo — la aguja nueva de plata con el inserto en negro.",
   "_caja_pulida": "PULIDA el 30/08/2026. Óscar: «cerca del 3 todas tienen una mancha blanca, revisa y pule los pequeños detalles que no queden restos de otras máscaras». Y no era de las esferas: el dibujo de la caja llegó en RGB con el damero pintado y al recortarlo quedaron trozos de acero colgando DENTRO del hueco; el mayor, 14x24 px justo debajo de la barra de las 3. Como la esfera va por debajo, se veían encima de ella, en las ocho. herramientas/pulir_caja_precisa.py los quita sin pintar nada: cierra el ojo morfológicamente —da igual con 21 que con 51 px, la forma buena no tiene entrantes— y le pone el alfa a cero a lo que sobra. 701 px en el tamaño 1200.",
   "_agujas_aprobadas": "LAS TRES, del mismo dibujo aprobado (30/08/2026): «agujas-originales-segundero-rectangular» para la plata, y «aprobadas-negro-completo» y «aprobadas-oro-rosa-completo» para las otras dos — las de BORDE, que estuvieron puestas un rato, las sustituyó Óscar por las completas. Misma forma y mismo segundero rectangular en las tres, solo cambia el acabado. No se les toca el tono: vienen aprobadas. Largos, minutero 285 y segundero igual.",
-  "_bajada": "LA ESFERA VA 11,5 px MÁS ABAJO que el eje del hueco (Óscar, 30/08/2026: «todas las esferas deben bajar 2 grados hacia el sur»). Dos grados de arco sobre el radio de la esfera son esos 11,5 px en el lienzo de 1200. Al bajarla hay que AGRANDARLA lo mismo o por arriba asomaría el fondo: Rd = (radio del hueco + bajada) / 0,96. LO QUE SE PAGA, avisado y aceptado antes de hacerlo: por abajo la pista de minutos se mete unos 23 px bajo el bisel y sus rayitas salen cortadas. LAS AGUJAS BAJAN LO MISMO: giran sobre el eje del movimiento, que atraviesa la esfera por su centro, y si no bajaran el buje se quedaría 11,5 px por encima del centro del dibujo. La bajada la manda esferas_precisa.py y agujas_precisa.py la importa, para que no haya dos números.",
-  "_esferas_3": "LAS OCHO SE ALINEAN CON LA ANTRACITA (30/08/2026). Óscar: «la única esfera que veo bien colocada es la de antracita, revisa por qué es la única». Era esto: se escalaban por su DISCO recortado, y el disco de cada entrega mide distinto —de 578 a 597 px— y encima el dibujo ocupa una fracción distinta de él, del 0,919 al 0,964. Cada esfera salía con el dibujo de un tamaño, hasta un 4,7 % de diferencia. Medirle a cada una su pista de minutos tampoco valía: el gajo blanco del canto de la antracita da más energía de borde que la propia pista. Lo que sí vale es COMPARAR cada dibujo con el de la antracita por correlación de bordes (FFT): son el mismo dibujo en otro color. La antracita se queda donde estaba y las otras siete se le pegan.",
-  "_caja_negra": "LA CAJA NEGRA ARENA se coloca CONTRA LA DE ACERO, igualandole el ojo en centro y en radio (599,86 contra 600,14 y 316,7 contra 315,6): asi la esfera y las agujas, que se colocan contra ese ojo, no se enteran de que ha cambiado la caja. Lo hace herramientas/caja_precisa.py."
+  "_bajada": "⛔ ANULADA el 31/08/2026. Decía que la esfera bajaba 11,5 px respecto al eje del hueco («todas las esferas deben bajar 2 grados hacia el sur», 30/08). Esa bajada es justo lo que hace que los índices de segundo no se vean igual de largos en toda la vuelta, que es lo que Óscar pidió el 31/08: por arriba se los comía el bisel y por abajo sobraban. La esfera va centrada en el ojo de la caja, y las agujas con ella.",
+  "_esferas_3": "⛔ SUPERADA el 31/08/2026 por `_esferas_4`. Alinear las siete con la antracita las dejaba iguales entre sí, que estaba bien, pero heredaba el error de la antracita, que también estaba colocada por su disco recortado. Ahora cada una se mide sola.",
+  "_caja_negra": "LA CAJA NEGRA ARENA se coloca CONTRA LA DE ACERO, igualandole el ojo en centro y en radio (599,86 contra 600,14 y 316,7 contra 315,6): asi la esfera y las agujas, que se colocan contra ese ojo, no se enteran de que ha cambiado la caja. Lo hace herramientas/caja_precisa.py.",
+  "_esferas_4": "LAS OCHO, AJUSTADAS A LA CAJA POR SU PISTA DE MINUTOS (31/08/2026). Óscar: «las esferas del Precisa no están ajustadas perfectamente a la caja; revisa el tamaño de las imágenes y ajusta el centro, donde se vean en la misma longitud los indicadores de segundos alrededor de toda la esfera». Y estaban mal por dos sitios: el centro se iba hasta 7 px en x y 11 en y entre unas y otras, y la punta de los índices de segundo caía del 100,2 % al 102,8 % del radio del hueco, o sea POR FUERA: el bisel se los comía, y a cada esfera de una manera. AHORA SE MIDE LA PISTA, no el recorte: se pasa la esfera a polares y se busca el anillo con más energía en el armónico 60, que es la firma de los sesenta índices de segundo. Ni el canto sucio de la entrega ni el fondo laten sesenta veces por vuelta. El centro sale de lo mismo: el que deja el armónico más limpio. Luego se recorta un círculo un 2 % por fuera de la punta de los índices y se lleva a medio punto por fuera del hueco, así que el canto sucio y el recorte irregular de la entrega se van a la vez. MEDIDO DESPUÉS: el centro queda a menos de 1,4 px en x y 4 en y del ojo de la caja, y la punta de los índices al 98,3-98,6 % del radio en las ocho (1,3 px de diferencia entre esferas). Cero píxeles de fondo dentro del hueco, con las dos cajas.",
+  "_1600": "EL FICHERO DE 1.600 YA NO SE AGRANDA (31/08/2026). Esferas y agujas se montaban en un lienzo de 1.200 y el de 1.600 —el que ve la lupa— salía estirándolo: la esfera se encogía a 0,55 y luego se estiraba a 1,33. La entrega da de sobra para 1.600 (el disco viene a 1.160 px de diámetro y las agujas a 1.536), así que se monta grande y se baja."
  }
 }

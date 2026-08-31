@@ -42,17 +42,21 @@ from scipy import ndimage
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CAPAS = os.path.join(RAIZ, 'assets/img/precisa-2026/capas')
-ANCHO = 1200                     # el lienzo en el que se mide todo
-ALTO_CAJA = 1666                 # la caja va en lienzo alto
+# ⚠️ SE MONTA A 1.600 (31/08/2026), como las esferas: el fichero grande —el
+# que ve la lupa— se sacaba agrandando el de 1.200 y lo que se pierde por el
+# camino no vuelve. La entrega de agujas viene a 1.536 px, así que a 1.600
+# el montaje ya no inventa nada.
+ANCHO = 1600                     # el lienzo en el que se mide todo
+ALTO_CAJA = 2222                 # la caja va en lienzo alto
 TAMANOS = (480, 1200, 1600)
 CALIDADES = (72, 64, 56, 48, 40)
 PESO = 60000
-MINUTERO_R = 300.0               # dónde cae la punta del minutero, en px de 1200
-# LAS AGUJAS BAJAN CON LA ESFERA. Giran sobre el eje del movimiento, que
-# atraviesa la esfera por su centro: si la esfera baja y ellas no, el buje
-# se queda 11,5 px por encima del centro del dibujo y canta. La bajada la
-# manda esferas_precisa.py para que no haya dos números.
-from esferas_precisa import BAJADA
+MINUTERO_R = 400.0               # dónde cae la punta del minutero, en px de 1600
+                                 # (los 300 de 1.200 de siempre, a la nueva escala)
+# ⛔ AQUÍ SE IMPORTABA `BAJADA`, los 11,5 px que la esfera bajaba respecto
+# al hueco de la caja. Se fue el 31/08/2026 con ella: ahora la esfera se
+# coloca por SU pista de minutos, centrada en el ojo de la caja, así que el
+# eje del movimiento es el del ojo y no hay nada que corregir.
 FONDO = (233, 233, 231, 255)
 ESFERA_PATRON = 'esfera-antracita.avif'   # la negra: sus barras se recortan solas
 
@@ -63,7 +67,7 @@ def _alfa(f):
 
 def eje_del_reloj():
     """El centro del reloj: donde coinciden el hueco de la caja y la esfera."""
-    c = _alfa(os.path.join(CAPAS, '1200/caja-brazalete-acero.avif')) > 128
+    c = _alfa(os.path.join(CAPAS, '%d/caja-brazalete-acero.avif' % ANCHO)) > 128
     h = ndimage.binary_fill_holes(c) & ~c
     lab, n = ndimage.label(h)
     t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
@@ -72,23 +76,29 @@ def eje_del_reloj():
     caja = (float(ox.mean()), float(oy.mean()) - (ALTO_CAJA - ANCHO) / 2.0)
     radio = (ox.max() - ox.min() + 1) / 2.0
 
-    e = _alfa(os.path.join(CAPAS, '1200/esfera-turquesa.avif')) > 128
+    e = _alfa(os.path.join(CAPAS, '%d/esfera-turquesa.avif' % ANCHO)) > 128
     ys, xs = np.where(e)
     esf = ((float(xs.min()) + float(xs.max())) / 2.0,
            (float(ys.min()) + float(ys.max())) / 2.0)
-    return ((caja[0] + esf[0]) / 2.0, (caja[1] + esf[1]) / 2.0), radio, caja, esf
+    # ⚠️ EL EJE ES EL DEL OJO DE LA CAJA, a secas. Antes se promediaba con el
+    # centro del RECORTE de la esfera, y ese recorte es irregular: su centro
+    # no es el del dibujo y arrastraba el buje unos píxeles. Desde que la
+    # esfera se coloca por su pista de minutos, centrada en el ojo, el eje
+    # del movimiento es el del ojo y promediar sólo puede estropearlo.
+    return caja, radio, caja, esf
 
 
 def pista_de_minutos():
     """Hasta dónde llegan los índices aplicados de la esfera."""
-    a = np.asarray(Image.open(os.path.join(CAPAS, '1200/esfera-turquesa.avif'))
+    a = np.asarray(Image.open(os.path.join(CAPAS, '%d/esfera-turquesa.avif' % ANCHO))
                    .convert('RGBA'))
     rgb = a[:, :, :3].astype(int)
     eje, _, _, _ = eje_del_reloj()
     y, x = np.mgrid[0:a.shape[0], 0:a.shape[1]]
     r = np.hypot(x - eje[0], y - eje[1])
     ind = ((a[:, :, 3] > 200) & (rgb.mean(2) > 190)
-           & (rgb.max(2) - rgb.min(2) < 45) & (r > 200) & (r < 330))
+           & (rgb.max(2) - rgb.min(2) < 45)
+           & (r > 200 * ANCHO / 1200.0) & (r < 330 * ANCHO / 1200.0))
     rr = r[ind]
     # p10 y no p2: por debajo hay flecos del logo y del waffle brillante, y el
     # borde interior de las barras está en 230, no en 208.
@@ -190,7 +200,7 @@ def indices_oro_rosa():
     único que distingue una barra de oro rosa es que es CÁLIDA (R−B por
     encima de 18). Filtrando por brillo, como se hace en la antracita, la
     máscara se comía la esfera entera."""
-    a = np.asarray(Image.open(os.path.join(CAPAS, '1200/esfera-blanca-oro-rosa.avif'))
+    a = np.asarray(Image.open(os.path.join(CAPAS, '%d/esfera-blanca-oro-rosa.avif' % ANCHO))
                    .convert('RGBA')).astype(float)
     rgb = a[:, :, :3]
     eje, _, _, _ = eje_del_reloj()
@@ -281,8 +291,8 @@ def iguala_el_tono(im, patron='acero'):
 
 def guarda(im, ident):
     for t in TAMANOS:
-        alto = round(im.size[1] * t / float(ANCHO))
-        chica = im.resize((t, alto), Image.LANCZOS)
+        chica = (im if t == ANCHO
+                 else im.resize((t, round(im.size[1] * t / float(ANCHO))), Image.LANCZOS))
         for q in CALIDADES:
             b = _io.BytesIO()
             chica.save(b, 'AVIF', quality=q)
@@ -338,15 +348,15 @@ def coloca(origen, f_min=1.0, f_seg=1.0, tono='acero'):
                   Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
     L.alpha_composite(n, (round(eje[0] - anc[0] * s),
-                          round(eje[1] + BAJADA - anc[1] * s)))
+                          round(eje[1] - anc[1] * s)))
     return L
 
 
 def hoja(capa, destino):
     L = Image.new('RGBA', (ANCHO, ANCHO), FONDO)
-    L.alpha_composite(Image.open(os.path.join(CAPAS, '1200/esfera-turquesa.avif'))
+    L.alpha_composite(Image.open(os.path.join(CAPAS, '%d/esfera-turquesa.avif' % ANCHO))
                       .convert('RGBA'))
-    c = Image.open(os.path.join(CAPAS, '1200/caja-brazalete-acero.avif')).convert('RGBA')
+    c = Image.open(os.path.join(CAPAS, '%d/caja-brazalete-acero.avif' % ANCHO)).convert('RGBA')
     L.alpha_composite(c.crop((0, (ALTO_CAJA - ANCHO) // 2,
                               ANCHO, (ALTO_CAJA + ANCHO) // 2)))
     L.alpha_composite(capa)
