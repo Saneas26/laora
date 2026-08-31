@@ -18,6 +18,22 @@ Superpuestas y llevadas al mismo ancho, las siluetas coinciden: es el mismo
 reloj a otra escala. Así que se escalan al ancho de la lisa y se centran
 por su caja, y a partir de ahí las once son intercambiables.
 
+⚠️ Y EL ANILLO NO ES OTRA CAJA: ES UN ARO DENTRO DE LA MISMA CAJA (Óscar,
+31/08/2026: «lo que has hecho con el tortuga es montar la caja sobre otra
+caja y lo que hay que hacer es sustituir la caja por otra, pero siempre
+todas del mismo tamaño en el mismo punto central del eje, es decir cuando
+yo cambio de elección la caja no se mueve»).
+
+Escalar cada render y centrarlo por su ojo no bastaba: puestos uno encima
+de otro, el contorno seguía bailando hasta 60 px —los once renders no se
+ponen de acuerdo en dónde cae el cuerpo respecto del ojo— y al cambiar de
+anillo el reloj daba un salto. Así que de los diez renders de anillo NO SE
+USA LA CAJA: se les recorta SÓLO lo que hay dentro del ojo —el aro de color
+y su escala— y se pega dentro de la caja del patrón. Las once cajas salen
+entonces del MISMO dibujo, con el mismo contorno y el mismo bisel; lo único
+que cambia de una a otra es el aro. Píxel a píxel, fuera del ojo son
+idénticas: cambiar de anillo no mueve nada.
+
 ⚠️ LA DEL ANILLO PLATA VENÍA SOBRE FONDO NEGRO, con el alfa a 255 en casi
 todo el lienzo. Publicada tal cual era un cuadro negro. Se le recorta el
 fondo por el negro que toca el borde —el negro del bisel no lo toca, así
@@ -180,6 +196,55 @@ def ancho_en_el_eje(al):
     return int(fila.max() - fila.min() + 1)
 
 
+def ojo_de(al):
+    """El centro y el radio del ojo de la caja: por ahí se ve la esfera."""
+    h = ndimage.binary_fill_holes(al > SOLIDO) & ~(al > SOLIDO)
+    lab, n = ndimage.label(h)
+    t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    m = lab == 1 + int(np.argmax(t))
+    ys, xs = np.where(m)
+    cx, cy = float(xs.mean()), float(ys.mean())
+    return (cx, cy), float(np.hypot(xs - cx, ys - cy).max())
+
+
+def corre(a, dx, dy):
+    """Mueve el dibujo entero, sin salirse del lienzo."""
+    im = Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA')
+    return np.asarray(im.transform(im.size, Image.AFFINE,
+                                   (1, 0, -dx, 0, 1, -dy),
+                                   resample=Image.BICUBIC)).astype(np.float32)
+
+
+def dentro_del_ojo(aro, caja, centro, radio, margen=12):
+    """Mete el aro DENTRO de la caja del patrón, y tira el resto.
+
+    El aro va debajo: la caja tapa todo lo que sobresalga, así que el filo
+    del ojo lo pone siempre el patrón y no hay costura que cuadrar."""
+    yy, xx = np.mgrid[0:aro.shape[0], 0:aro.shape[1]]
+    d = np.hypot(xx - centro[0], yy - centro[1])
+    b = aro.copy()
+    b[d > radio + margen] = 0
+    # «encima» de verdad, con alfa recta: donde la caja es opaca no se toca
+    # ni un píxel, y en el filo del ojo —que viene difuminado— se mezcla
+    # como es debido. Multiplicando a lo bruto salía una orla oscura en
+    # todo el contorno, y las diez cajas dejaban de ser idénticas por
+    # 190.522 píxeles de nada.
+    aA = caja[:, :, 3:4] / 255.0
+    aB = b[:, :, 3:4] / 255.0
+    salida = aA + aB * (1 - aA)
+    rgb = np.where(salida > 0,
+                   (caja[:, :, :3] * aA + b[:, :, :3] * aB * (1 - aA)) /
+                   np.maximum(salida, 1e-6), 0)
+    junta = np.dstack([rgb, salida * 255.0])
+    # y donde el aro no pinta nada, la caja se copia TAL CUAL: recalcular
+    # esos píxeles los redondeaba distinto y dejaba las once cajas
+    # diferentes en 32.315 píxeles del contorno, que es justo lo que no
+    # puede pasar.
+    quieto = (b[:, :, 3] <= 0)
+    junta[quieto] = caja[quieto]
+    return junta
+
+
 # ---------- llevar al patrón ----------
 
 def al_patron(a, ancho_patron):
@@ -300,22 +365,36 @@ def prepara(mira=False):
     print('  caja %d px en la fila del eje · %.2f px por mm · las astas se '
           'cierran a %.0f px (%.0f mm)' % (ancho_patron, por_mm, objetivo, MM_ASTAS))
 
-    for f in CAJAS:
-        a = np.asarray(Image.open(ENTREGA + f).convert('RGBA')).astype(np.float32)
+    # 1 · LA CAJA, UNA SOLA VEZ: la del patrón, con las astas cerradas.
+    a = np.asarray(Image.open(ENTREGA + PATRON).convert('RGBA')).astype(np.float32)
+    caja, medido, dx = cierra_las_astas(a, objetivo)
+    ahora, centro = hueco(caja[:, :, 3])
+    ojo_c, ojo_r = ojo_de(caja[:, :, 3])
+    Image.fromarray(np.clip(caja, 0, 255).astype('uint8'), 'RGBA').save(
+        os.path.join(DESTINO, PATRON))
+    print('%-56s astas %4d -> %4d px (%.2f mm) centradas en %.1f · ojo en '
+          '%.1f,%.1f r %.0f'
+          % (PATRON, int(medido), int(ahora), ahora / por_mm, centro,
+             ojo_c[0], ojo_c[1], ojo_r))
+
+    # 2 · Y LOS DIEZ AROS, cada uno metido en esa misma caja.
+    for f in CAJAS[1:]:
+        b = np.asarray(Image.open(ENTREGA + f).convert('RGBA')).astype(np.float32)
         aviso = ''
-        if sobre_fondo_negro(a):
-            a = quita_el_fondo_negro(a)
+        if sobre_fondo_negro(b):
+            b = quita_el_fondo_negro(b)
             aviso = ' · venía sobre FONDO NEGRO, recortado'
-        antes_an = ancho_en_el_eje(a[:, :, 3])
-        a, s = al_patron(a, ancho_patron)
-        a, medido, dx = cierra_las_astas(a, objetivo)
-        ahora, centro = hueco(a[:, :, 3])
-        Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA').save(
+        antes_an = ancho_en_el_eje(b[:, :, 3])
+        b, s = al_patron(b, ancho_patron)
+        c, r = ojo_de(b[:, :, 3])
+        b = corre(b, ojo_c[0] - c[0], ojo_c[1] - c[1])   # su ojo, sobre el del patrón
+        junta = dentro_del_ojo(b, caja, ojo_c, ojo_r)
+        Image.fromarray(np.clip(junta, 0, 255).astype('uint8'), 'RGBA').save(
             os.path.join(DESTINO, f))
-        print('%-56s caja %4d -> %4d px (x%.4f) · astas %4d -> %4d px '
-              '(%.2f mm) centradas en %.1f%s'
-              % (f, antes_an, ancho_en_el_eje(a[:, :, 3]), s,
-                 int(medido), int(ahora), ahora / por_mm, centro, aviso))
+        print('%-56s aro r %4.0f -> %4.0f · caja %4d -> %4d px (x%.4f) · '
+              'movido %+5.1f,%+5.1f para cuadrar el ojo%s'
+              % (f, r, ojo_r, antes_an, ancho_patron, s,
+                 ojo_c[0] - c[0], ojo_c[1] - c[1], aviso))
     print('\nescritas en %s' % DESTINO)
 
 

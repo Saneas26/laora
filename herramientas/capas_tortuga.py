@@ -58,6 +58,15 @@ FONDO = (233, 233, 231, 255)
 # guión primero.
 CAJA_PATRON = 'preparadas/19-caja-tortuga-45mm-eje-2048.png'
 HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
+# LAS AGUJAS NO LLEGAN AL ÍNDICE (Óscar, 31/08/2026: «la aguja del minutero
+# tiene que señalar el indicador pero el indicador no puede ser tapado, al
+# igual que el segundero, y por tanto la aguja de las horas se encogerá en
+# la misma proporción»). Iban a la escala de la ESFERA, así que el minutero
+# se plantaba en 1.072 px con los índices empezando en 824: los cruzaba
+# enteros. Ahora las tres se escalan para que la punta del minutero se pare
+# un pelo antes del índice al que apunta, y las otras dos bajan con ella.
+GRADOS_MINUTERO = 60.0           # a las 10:10 el minutero apunta al minuto 10
+HUECO_INDICE = 30.0              # y se para esto antes de tocarlo (unidades de esfera)
 HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
 # EL LIENZO ALTO DE LAS CORREAS (Óscar, 31/08/2026: «cuando hacemos zoom es
 # precisamente para que se vea más correa, como ya funciona con las otras
@@ -167,6 +176,35 @@ def hueco_entre_astas(f):
         if der - izq > peor:
             peor, centro = der - izq, (izq + der) / 2.0
     return peor, centro, ultima
+
+
+def borde_del_indice(grados=GRADOS_MINUTERO, tol=14.0):
+    """Dónde empieza el índice al que apunta el minutero, en unidades de esfera.
+
+    Se miden LAS OCHO esferas y manda la que lo trae más adentro: la capa de
+    agujas es una sola y tiene que valer para todas. Los índices se conocen
+    por el lumen —crema, claro y más cálido que azul—; los batones de las 12
+    y las 6 entran mucho más adentro que los redondos, así que sólo se mira
+    el que cae en el ángulo del minutero."""
+    from scipy import ndimage
+    fuera = []
+    for f in sorted(ESFERAS.values()):
+        a = np.asarray(Image.open(ENTREGA + f).convert('RGBA'))
+        al = a[:, :, 3] > 128
+        rgb = a[:, :, :3].astype(int)
+        lume = (al & (rgb[:, :, 0] > 150) & (rgb[:, :, 1] > 150) &
+                (rgb[:, :, 2] < rgb[:, :, 1] - 8))
+        lab, n = ndimage.label(lume)
+        c = LIENZO / 2.0 - 0.5
+        for k in range(1, n + 1):
+            m = lab == k
+            if m.sum() < 8000:
+                continue
+            ys, xs = np.where(m)
+            ang = np.degrees(np.arctan2(xs.mean() - c, -(ys.mean() - c))) % 360
+            if min(abs(ang - grados), 360 - abs(ang - grados)) < tol:
+                fuera.append(float(np.hypot(xs - c, ys - c).min()))
+    return min(fuera) if fuera else 0.0
 
 
 def ancho_maximo(f):
@@ -362,14 +400,25 @@ def monta():
         c = ((xx.min() + xx.max()) / 2.0, (yy.min() + yy.max()) / 2.0)
         capas[ident] = pon(f, se, c, eje)
 
-    # las agujas, a la MISMA escala que la esfera: están dibujadas para ella
+    # LAS AGUJAS, A SU PROPIA ESCALA: la que deja el minutero justo antes
+    # del índice. Vienen dibujadas para la esfera —por eso iban con `se`—,
+    # pero a esa escala la cruzan entera.
+    r_ind = borde_del_indice()
+    tope = (r_ind - HUECO_INDICE) * se           # hasta dónde puede llegar la punta
+    largos = {}
     for ident, f in sorted(AGUJAS.items()):
-        b = alfa(f)
-        yy, xx = np.where(b)
-        largo = float(np.hypot(xx - LIENZO / 2.0, yy - LIENZO / 2.0).max())
-        capas[ident] = pon(f, se, (LIENZO / 2.0, LIENZO / 2.0), eje)
+        yy, xx = np.where(alfa(f))
+        largos[ident] = float(np.hypot(xx - LIENZO / 2.0, yy - LIENZO / 2.0).max())
+    sa = tope / max(largos.values())
+    print('ÍNDICES · el del minuto 10 empieza en %.0f de esfera = %.0f px; el '
+          'minutero se para en %.0f' % (r_ind, r_ind * se, tope))
+    print('AGUJAS · escala %.4f en vez de la de la esfera (%.4f): un %.0f %% más chicas'
+          % (sa, se, 100 * (1 - sa / se)))
+    for ident, f in sorted(AGUJAS.items()):
+        capas[ident] = pon(f, sa, (LIENZO / 2.0, LIENZO / 2.0), eje)
         print('AGUJAS %-20s largo %.0f -> %.0f px, de un ojo de %.0f (%.0f %% del radio)'
-              % (ident, largo, largo * se, r_ojo, 100 * largo * se / r_ojo))
+              % (ident, largos[ident], largos[ident] * sa, r_ojo,
+                 100 * largos[ident] * sa / r_ojo))
 
     # las correas: a llenar el hueco entre astas, con la punta justo bajo la
     # caja y en el lienzo alto, para que el alejarse enseñe más tira

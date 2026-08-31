@@ -212,7 +212,7 @@
  "_codigo": "LO-06, dado por Óscar el 31/08/2026. Los cinco anteriores son LO-01 Precisa, LO-02 Trinchera, LO-03 Lunar, LO-04 Bitácora y LO-05 Cero Cero.",
  "montaje": {
   "img": "/assets/img/tortuga-2026/capas/1200/",
-  "v": "?v=4",
+  "v": "?v=5",
   "pila": [
    {
     "capa": "correa",
@@ -238,7 +238,8 @@
    {
     "capa": "bisel",
     "grupo": "bisel",
-    "espera": "bisel"
+    "espera": "bisel",
+    "sustituye": "caja"
    },
    {
     "capa": "agujas",
@@ -287,7 +288,8 @@
     "BRZ": "brazalete-acero"
    }
   },
-  "_orden": "LA CORREA VA LA PRIMERA y las agujas las últimas. El anillo de minutos va DENTRO de la caja —cada color es una caja entera, no una capa aparte—, así que la capa `bisel` se dibuja ENCIMA de la caja lisa y la tapa entera. Es a propósito: así la caja aparece al señalar el tamaño y el anillo aparece al señalarlo, sin tener que dibujar once cajas por cada combinación."
+  "_orden": "LA CORREA VA LA PRIMERA y las agujas las últimas. El anillo de minutos va DENTRO de la caja —cada color es una caja entera, no una capa aparte—, así que la capa `bisel` se dibuja ENCIMA de la caja lisa y la tapa entera. Es a propósito: así la caja aparece al señalar el tamaño y el anillo aparece al señalarlo, sin tener que dibujar once cajas por cada combinación.",
+  "_anillo": "EL ANILLO SUSTITUYE A LA CAJA, no se pinta encima (Óscar, 31/08/2026). Cada color de anillo es una CAJA ENTERA —el aro va dibujado dentro de ella—, así que apilarlas era montar dos cajas. Con `sustituye` sale una sola: la lisa al señalar el tamaño y la del anillo en cuanto se elige. Y las once salen del MISMO dibujo: `herramientas/cajas_tortuga.py` recorta de cada render sólo lo que hay dentro del ojo y lo mete en la caja del patrón, así que fuera del ojo no se diferencian NI EN UN PÍXEL y cambiar de anillo no mueve el reloj."
  },
  "extra": 3.78,
  "_extra": "El logotipo grabado, 3,78 €. Va en TODOS los modelos y siempre cuesta lo mismo (Oscar, 30 y 31/08/2026).",

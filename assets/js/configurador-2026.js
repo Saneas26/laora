@@ -785,6 +785,25 @@
       marcaLarga(img);
       puestas[p.capa] = true;
     });
+    /* ---------- UNA PIEZA QUE SUSTITUYE A OTRA ----------
+       Óscar, 31/08/2026, sobre el Tortuga: «lo que has hecho es montar la
+       caja sobre otra caja, y lo que hay que hacer es sustituir la caja por
+       otra». El anillo de minutos no es una capa aparte: cada color es una
+       CAJA ENTERA, y hasta hoy se pintaba encima de la caja lisa. Se veía
+       bien porque tapa, pero son dos cajas apiladas: basta que una traiga
+       un píxel de diferencia para que el reloj dé un salto al elegir.
+
+       `sustituye` dice a qué capa reemplaza. Se resuelve DESPUÉS de la
+       vuelta, cuando ya se sabe qué se ha llegado a dibujar: si la de
+       arriba no sale —porque su paso no se ha tocado— la de abajo se
+       queda, que es lo que hace que la caja lisa aparezca al señalar el
+       tamaño y se cambie por la del anillo al elegirlo. */
+    PILA.forEach(function (p) {
+      if (!p.sustituye || !puestas[p.capa]) return;
+      var otra = caja.querySelector('[data-capa="' + p.sustituye + '"]');
+      if (otra) { otra.hidden = true; otra.removeAttribute('src'); }
+      delete puestas[p.sustituye];
+    });
     /* CUÁNTAS PIEZAS HAY PUESTAS, que es lo que decide si sigue la foto de
        bienvenida. Se apunta aquí porque es el único sitio que lo sabe de
        verdad: una pieza puede no dibujarse porque su paso no se ha tocado,
