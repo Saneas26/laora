@@ -325,14 +325,6 @@
     "tec": "correa de piel vintage azul petróleo de 20 mm, pespunte crema en contraste, hebilla clásica plateada"
    },
    {
-    "id": "PVBU",
-    "familia": "PVIN",
-    "nombre": "Burdeos",
-    "coste": 16.89,
-    "pieza": "piel-vintage-burdeos",
-    "tec": "correa de piel vintage burdeos de 20 mm, pespunte crema en contraste, hebilla clásica negra"
-   },
-   {
     "id": "PVCO",
     "familia": "PVIN",
     "nombre": "Coñac",
@@ -557,7 +549,8 @@
   "_oficiales": "LAS CORREAS SON LAS DE LA CASA, LAS MISMAS PARA TODOS (Óscar, 30/08/2026): «las correas del lunar son las oficiales y las que tiene que vestir el trinchera... el nato del lunar es el nato de todos los relojes». Se copian TAL CUAL del Lunar: ocho familias y cuarenta y una correas, con sus costes y sus dibujos de la biblioteca compartida. Fuera las que tenía el Trinchera por su cuenta. La piel italiana lleva el pespunte dentro del nombre del fichero, así que su `pieza` es una tabla por el paso `pespunte`.",
   "_cierre": "EL CIERRE SOLO SE ELIGE DONDE HAY ELECCION DE VERDAD. La correa oficial viene con su cierre DIBUJADO —la perforada con hebilla clasica plateada, la vaquera y el nato con la suya—, asi que ofrecer cinco cierres encima del dibujo era mentir: se cobraba un cierre que la foto no ensena. Queda abierto en piel italiana, piel vintage y caucho, que son las tres que en el Lunar admiten mas de uno. Ojo: el Lunar ademas limita CUALES (el caucho solo mariposas, la vintage solo negra o plata) y eso aqui todavia no se puede decir.",
   "_ancho": "LA PIEL CON COSTURA ESTABA ESTRECHA (Oscar, 31/08/2026: «parece de 18mm cuando deberia ser de 20mm»). Y lo estaba: 1.359 px de ancho contra los 1.477-1.513 de las demas familias, un 6 % menos, que sobre 20 mm son 18,8. Rehecha desde la entrega con preparar_correa_x20.py, que iguala el ancho al de la pieza patron. Ahora 1.454.",
-  "_acero": "SOLO EL SATINADO (Oscar, 31/08/2026: «solo se ofrece con acero satinado de las opciones de acero»). La biblioteca tiene seis brazaletes de 316L y el Trinchera vestia los seis; se quedan el satinado y fuera los otros cinco —centro pulido, PVD negro con centro pulido, centro oro rosa, centro oro amarillo y oro rosa entero—. Siguen vivos en la biblioteca para los demas modelos: aqui no se borra ninguna pieza, se deja de ofrecer."
+  "_acero": "SOLO EL SATINADO (Oscar, 31/08/2026: «solo se ofrece con acero satinado de las opciones de acero»). La biblioteca tiene seis brazaletes de 316L y el Trinchera vestia los seis; se quedan el satinado y fuera los otros cinco —centro pulido, PVD negro con centro pulido, centro oro rosa, centro oro amarillo y oro rosa entero—. Siguen vivos en la biblioteca para los demas modelos: aqui no se borra ninguna pieza, se deja de ofrecer.",
+  "_vintage": "EL BURDEOS NO EXISTE (Oscar, 30/08/2026: «el burdeos no existe, se queda la piel vintage en 4 colores»). Quitado de los colores. La piel vintage se queda en azul petroleo, conac, marron oscuro y negra, las cuatro a 13,80. OJO: lunar.html todavia lo lleva."
  },
  "filtros": {
   "correa": {
@@ -630,7 +623,34 @@
   "bienvenida_v": "?v=1",
   "bienvenida_alt": "Hazlo tuyo: dos laOra Trinchera sobre un mapa de campaña, uno con nato verde oliva y otro con piel negra",
   "v": "?v=9",
-  "pila": [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
+  "pila": [
+   {
+    "capa": "correa",
+    "grupo": "correa",
+    "espera": "correa"
+   },
+   {
+    "capa": "esf",
+    "grupo": "esf",
+    "espera": [
+     "esf",
+     "esftipo"
+    ]
+   },
+   {
+    "capa": "caja",
+    "grupo": "caja",
+    "espera": [
+     "tamano",
+     "caja"
+    ]
+   },
+   {
+    "capa": "agujas",
+    "grupo": "mov",
+    "necesita": "esf"
+   }
+  ],
   "capas": {
    "caja": {
     "PL": "caja-acero",
