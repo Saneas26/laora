@@ -139,7 +139,71 @@ def ancho_maximo(f):
     return int(xs.max() - xs.min() + 1), float((xs.min() + xs.max()) / 2.0)
 
 
-def pon(f, s, eje_origen, eje_destino):
+def pon_correa(f, s, cx, centro, baja=0, sube=0):
+    """Escala una correa y pega cada tira con su propio desplazamiento.
+
+    ⚠️ EL DESPLAZAMIENTO VA ANTES DE RECORTAR AL LIENZO, y esto costó una
+    pasada. Moviendo las tiras DESPUÉS de pegarlas, lo que se había salido
+    del lienzo al escalar ya estaba perdido: al meter la tira de abajo
+    hacia el reloj, su otro extremo se despegaba del canto de la foto y la
+    correa se acababa 109 px antes de tiempo. Escalando y pegando con el
+    desplazamiento puesto, el sobrante sigue estando y sólo se recorta lo
+    que sobra."""
+    im = Image.open(ENTREGA + f).convert('RGBA')
+    n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
+                  Image.LANCZOS)
+    a = np.asarray(n)[:, :, 3] > 128
+    filas = np.where(a.any(1))[0]
+    cortes = np.where(np.diff(filas) > 1)[0]
+    t = [(int(x[0]), int(x[-1])) for x in np.split(filas, cortes + 1)]
+    med = (t[0][1] + t[1][0]) // 2 if len(t) == 2 else n.height // 2
+    dx = round(centro - cx * s)
+    dy = round(LIENZO / 2.0 - (LIENZO / 2.0) * s)
+    L = Image.new('RGBA', (LIENZO, LIENZO), (0, 0, 0, 0))
+    L.alpha_composite(n.crop((0, 0, n.width, med)), (dx, dy + baja))
+    L.alpha_composite(n.crop((0, med, n.width, n.height)), (dx, dy + med - sube))
+    return L
+
+
+def cubierto_por_la_caja(caja, cols):
+    """De qué fila a qué fila tapa la caja TODO el ancho de la correa."""
+    a = alfa(caja)
+    c0, c1 = cols
+    filas = [r for r in range(a.shape[0]) if a[r, c0:c1 + 1].all()]
+    return (filas[0], filas[-1]) if filas else (0, a.shape[0] - 1)
+
+
+def pega_a_la_caja(L, arriba, abajo, margen=40):
+    """Mete cada tira hasta que su punta queda DEBAJO de la caja.
+
+    Óscar, 31/08/2026: «extrae la correa hasta la caja». Y no llegaba: la
+    correa de caucho viene dibujada a menos de la mitad de tamaño, y al
+    escalarla x2,22 DESDE EL CENTRO las dos puntas se van hacia fuera —el
+    hueco entre ellas pasa de 876 px a 1.945—. Por abajo se quedaba 94 px
+    corta y por ahí se veía el fondo entre la correa y la caja.
+
+    Cada tira se mueve por su cuenta y SÓLO HACIA DENTRO: sacarla hacia
+    fuera dejaría un hueco en el canto del lienzo, que es por donde la
+    correa se sale de la foto. El brazalete, que ya llega, casi no se
+    mueve."""
+    a = np.asarray(L)[:, :, 3] > 128
+    filas = np.where(a.any(1))[0]
+    cortes = np.where(np.diff(filas) > 1)[0]
+    t = [(int(x[0]), int(x[-1])) for x in np.split(filas, cortes + 1)]
+    if len(t) != 2:
+        return L, 0, 0
+    med = (t[0][1] + t[1][0]) // 2
+    baja = max(0, (arriba + margen) - t[0][1])
+    sube = max(0, t[1][0] - (abajo - margen))
+    if not baja and not sube:
+        return L, 0, 0
+    n = Image.new('RGBA', L.size, (0, 0, 0, 0))
+    n.alpha_composite(L.crop((0, 0, L.width, med)), (0, baja))
+    n.alpha_composite(L.crop((0, med, L.width, L.height)), (0, med - sube))
+    return n, baja, sube
+
+
+def pon(f, s, eje_origen, eje_destino, sin_bajar=False):
     """Escala una pieza y le pone su eje donde toca."""
     im = Image.open(ENTREGA + f).convert('RGBA')
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
@@ -147,7 +211,7 @@ def pon(f, s, eje_origen, eje_destino):
     L = Image.new('RGBA', (LIENZO, LIENZO), (0, 0, 0, 0))
     L.alpha_composite(n, (round(eje_destino[0] - eje_origen[0] * s),
                           round(eje_destino[1] - eje_origen[1] * s)))
-    return L.resize((ANCHO, ANCHO), Image.LANCZOS)
+    return L if sin_bajar else L.resize((ANCHO, ANCHO), Image.LANCZOS)
 
 
 def guarda(im, ident):
@@ -196,13 +260,22 @@ def monta():
         c = ((xx.min() + xx.max()) / 2.0, (yy.min() + yy.max()) / 2.0)
         capas[ident] = pon(f, se, c, eje)
 
-    # las correas, a llenar el hueco entre astas
+    # las correas, a llenar el hueco entre astas Y a llegar hasta la caja
+    a_caja = alfa(CAJA_PATRON)
     for ident, f in sorted(CORREAS.items()):
         an, cx = ancho_maximo(f)
         s = astas * HOLGURA_COR / an
-        capas[ident] = pon(f, s, (cx, LIENZO / 2.0), (centro_astas, LIENZO / 2.0))
-        print('CORREA %-20s ancho %4d -> %4d (escala %.4f) · centro %.1f -> %.1f'
-              % (ident, an, round(an * s), s, cx, centro_astas))
+        capa = pon_correa(f, s, cx, centro_astas)
+        b = np.asarray(capa)[:, :, 3] > 128
+        cols = np.where(b.any(0))[0]
+        arr, aba = cubierto_por_la_caja(CAJA_PATRON, (cols.min(), cols.max()))
+        _, baja, sube = pega_a_la_caja(capa, arr, aba)
+        if baja or sube:                       # y se vuelve a montar, ya con el sitio
+            capa = pon_correa(f, s, cx, centro_astas, baja, sube)
+        capas[ident] = capa.resize((ANCHO, ANCHO), Image.LANCZOS)
+        print('CORREA %-20s ancho %4d -> %4d (escala %.4f) · la caja tapa de la '
+              '%d a la %d · tira de arriba %+d, la de abajo %+d'
+              % (ident, an, round(an * s), s, arr, aba, baja, -sube))
     return capas
 
 

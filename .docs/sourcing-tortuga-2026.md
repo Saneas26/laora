@@ -38,33 +38,38 @@ Van aparte de la esfera, al contrario que en el Trinchera.
 **Óscar, 30/08/2026:** «el bisel del Tortuga siempre es negro, pero tiene un
 anillo interior al bisel que sí es el que cambia de color».
 
-Así que los tres colores que la ficha tiene puestos como *bisel* —negro,
-turquesa y naranja— **son del anillo interior**, no del bisel. En la ficha hay
-que renombrar el paso: el bisel no se elige.
+Los tres colores que la ficha tiene puestos como *bisel* —negro, turquesa y
+naranja— **son del anillo interior**. En la ficha hay que renombrar el paso: el
+bisel no se elige.
 
-Falta el **coste y el anuncio del anillo**, y saber si viene con la caja o se
-compra suelto.
+**El anillo no cuesta aparte: viene en la caja**, junto con el bisel y el
+cristal.
 
-## Caja — 32,39 €
+## Caja — 32,39 € con mineral · 36,59 € con zafiro
 
 [1005005096109310](https://es.aliexpress.com/item/1005005096109310.html)
+
+**La caja trae caja, bisel, anillo y cristal.** Es un conjunto: ni el bisel ni
+el anillo se compran aparte, y no tienen coste propio.
 
 | | |
 |---|---|
 | Material | **acero 316L** |
 | Tapa | **sólida** |
 | Estanqueidad | **200 m / 20 ATM** |
-| Cristal | **zafiro**, y aquí sí se elige |
 
-**El cristal suma 4,50 €:** mineral a cero y **zafiro +4,50 €**. La ficha ya
-tiene el paso `cristal` con los dos.
+| Cristal | Coste |
+|---|--:|
+| **Mineral** | **32,39 €** |
+| **Zafiro** | **36,59 €** |
 
-⚠️ **El precio de la caja ha bailado y hay que fijarlo.** Primero fueron
-**36,59 €** con zafiro (32,09 con mineral) y después **32,39 €** a secas, del
-mismo anuncio. Aquí está puesto el último, **32,39 €**, entendiendo que es la
-caja base y que el zafiro sigue sumando 4,50. Ojo: 32,39 € es también, al
-céntimo, lo que cuesta el brazalete — conviene confirmar que no se han cruzado
-los dos números.
+Para el motor: **caja 32,39 € + zafiro 4,20 €**. La ficha ya tiene el paso
+`cristal` con Mineral y Zafiro, así que el mineral queda a cero y el zafiro
+suma los 4,20.
+
+## Esfera — 11,19 €
+
+[1005009699673508](https://es.aliexpress.com/item/1005009699673508.html)
 
 ## Brazalete de acero — 32,39 €
 
@@ -91,29 +96,56 @@ Un solo color: **negro**.
 
 ---
 
-## Lo que cuesta vestir un Tortuga
+## El Tortuga completo, pieza a pieza
 
-| Correa | Con caja de mineral | Con caja de zafiro |
-|---|--:|--:|
-| Buzo | 35,48 € | 39,98 € |
-| Buzo profesional | 35,98 € | 40,48 € |
-| Brazalete de acero | 64,48 € | 68,98 € |
+| Pieza | Coste |
+|---|--:|
+| Caja *(con bisel, anillo y cristal mineral)* | 32,39 € |
+| Zafiro, si se elige | +4,20 € |
+| Esfera | 11,19 € |
+| Agujas súper lumen C3 | 5,59 € |
+| Grabado del logotipo | 3,78 € |
+| **Movimiento** · cuarzo Miyota 2105 | 9,00 € |
+| **Movimiento** · automático NH36 | 65,00 € |
+| **Correa** · buzo | 3,39 € |
+| **Correa** · buzo profesional | 3,89 € |
+| **Correa** · brazalete de acero | 32,39 € |
 
-*(caja + correa, sin movimiento, sin logotipo y sin lo demás)*
+## Los precios que salen
 
-**El brazalete casi duplica el reloj**: cuesta diez veces lo que la correa de
-buzo.
+Con el motor de siempre y el suelo de la regla nº1. «Limpio» es lo que queda
+pagando por Klarna.
 
----
+| Movimiento | Cristal | Correa | Piezas | **PVP** | Limpio | % |
+|---|---|---|--:|--:|--:|--:|
+| Cuarzo | mineral | buzo | 65,34 € | **189,90 €** | 53,46 € | 28,2 % |
+| Cuarzo | mineral | buzo pro | 65,84 € | **189,90 €** | 53,04 € | 27,9 % |
+| Cuarzo | mineral | brazalete | 94,34 € | **249,90 €** | 66,37 € | 26,6 % |
+| Cuarzo | zafiro | buzo | 69,54 € | **199,90 €** | 56,15 € | 28,1 % |
+| Cuarzo | zafiro | buzo pro | 70,04 € | **199,90 €** | 55,73 € | 27,9 % |
+| Cuarzo | zafiro | brazalete | 98,54 € | **259,90 €** | 69,06 € | 26,6 % |
+| Automático | mineral | buzo | 121,34 € | **319,90 €** | 87,17 € | 27,3 % |
+| Automático | mineral | buzo pro | 121,84 € | **319,90 €** | 86,75 € | 27,1 % |
+| Automático | mineral | brazalete | 150,34 € | **389,90 €** | 106,30 € | 27,3 % |
+| Automático | zafiro | buzo | 125,54 € | **329,90 €** | 89,86 € | 27,2 % |
+| Automático | zafiro | buzo pro | 126,04 € | **329,90 €** | 89,44 € | 27,1 % |
+| Automático | zafiro | brazalete | 154,54 € | **399,90 €** | 108,98 € | 27,3 % |
+
+**Las doce cumplen la regla nº1.** El Tortuga va **de 189,90 € a 399,90 €**.
+
+Dos de ellas —las de cuarzo con correa de buzo— **las sube el suelo**: por
+tarifa saldrían más baratas y el suelo las levanta un escalón para que dejen
+sus 50 € limpios. Es la regla nº1 haciendo su trabajo.
 
 ## Lo que falta
 
-1. **Confirmar el precio de la caja**: 36,59 o 32,39.
-2. **La esfera**: no hay ni tipos ni colores, ni coste.
-3. **El anillo interior**: coste, anuncio, y si viene con la caja.
-4. **Los códigos `LO_`** del NH36 y el Miyota, que de cara al cliente no se
+**Ninguna pieza del Tortuga está sin coste ni sin proveedor.** Lo que queda:
+
+1. **Los colores de la esfera** y los del anillo: el anuncio de la esfera hay
+   que mirarlo para saber cuáles da.
+2. **Los códigos `LO_`** del NH36 y el Miyota, que de cara al cliente no se
    nombra al fabricante.
-5. Los **tamaños de caja**: vacíos.
+3. Los **tamaños de caja**: la ficha los tiene vacíos.
 5. **El cierre** de las dos correas de buzo: si lo llevan puesto o hay que
    elegirlo.
 6. **El grabado del logotipo**: si va, son 3,78 € del proveedor de siempre.
