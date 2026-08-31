@@ -102,9 +102,14 @@ ESFERAS = {
 # una suya. Si se les midiera el largo y se escalaran aparte, la hora que
 # marcan seguiría siendo la misma pero las puntas dejarían de caer donde el
 # dibujante las puso.
+# ⚠️ Y LAS AGUJAS TAMBIÉN SE LEEN DE `preparadas/` (Óscar, 31/08/2026:
+# «las agujas tienen que mostrar las 10:10 y el segundero el segundo 37»).
+# Las dos entregas llegan a su aire —el minutero casi en las 12 y el
+# segundero por el 21—, así que antes de montar hay que pasarlas por
+# `herramientas/agujas_en_hora.py`, que gira cada una por su lado.
 AGUJAS = {
-    'agujas-acero':       '39-agujas-tortuga-acero-inoxidable-esfera-28-5mm-eje-2048.png',
-    'agujas-gris-oscuro': '38-agujas-tortuga-gris-oscuro-esfera-28-5mm-eje-2048.png',
+    'agujas-acero':       'preparadas/39-agujas-tortuga-acero-inoxidable-esfera-28-5mm-eje-2048.png',
+    'agujas-gris-oscuro': 'preparadas/38-agujas-tortuga-gris-oscuro-esfera-28-5mm-eje-2048.png',
 }
 CORREAS = {
     'caucho-negra':      '32-correa-caucho-negra-buzo-20-18mm-eje-2048.png',
