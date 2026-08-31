@@ -1,7 +1,7 @@
 {
  "slug": "tortuga",
  "nombre": "Tortuga",
- "codigo": null,
+ "codigo": "LO-06",
  "clase": "Buceo",
  "desc": "",
  "listo": false,
@@ -164,7 +164,14 @@
  "correa": {
   "familias": [],
   "colores": [],
-  "cierres": [],
+  "cierres": [
+   {
+    "id": "plata",
+    "nombre": "Clásica plata",
+    "coste": 0,
+    "expl": "Hebilla clásica de acero plateado."
+   }
+  ],
   "colores_cierre": []
  },
  "_movimiento": "NH36 (automatico, 65,00) y MIYOTA 2105 (cuarzo, 9,00), Oscar 30/08/2026. Los dos con FECHA LARGA, dia y fecha; el del cuarzo es BILINGUE espanol/ingles. Calibres de la casa (Oscar, 31/08): LO_A4126 el automatico y LO_Q3626 el cuarzo. Se escriben con GUION BAJO, como los demas de la casa. El codigo lleva dentro la especificacion: A + horas de reserva (41) y Q + meses de pila (36), y 26 del ano.",
@@ -172,5 +179,74 @@
  "_agujas": "Dos acabados de la entrega del 31/08: gris oscuro y acero inoxidable. Las agujas cuestan 5,59 y van APARTE de la esfera.",
  "_esfera": "Ocho colores de la entrega del 31/08, 28,5 mm, a 11,19 cada una. LA ESFERA ES SIEMPRE LA DE LA FOTO (Oscar, 31/08), con una sola diferencia: al CUARZO no se le pone AUTOMATIC. Mismo dibujo, misma esfera y mismo coste; cambia solo esa palabra impresa. Los dos movimientos llevan fecha larga, asi que la ventanilla de dia y fecha vale para los dos.",
  "agua": "200 m / 20 ATM",
- "_tamano": "UNA SOLA MEDIDA: 44 mm (Oscar, 31/08/2026). No se elige."
+ "_tamano": "UNA SOLA MEDIDA: 44 mm (Oscar, 31/08/2026). No se elige.",
+ "_codigo": "LO-06, dado por Óscar el 31/08/2026. Los cinco anteriores son LO-01 Precisa, LO-02 Trinchera, LO-03 Lunar, LO-04 Bitácora y LO-05 Cero Cero.",
+ "montaje": {
+  "img": "/assets/img/tortuga-2026/capas/1200/",
+  "v": "?v=1",
+  "pila": [
+   {
+    "capa": "correa",
+    "grupo": "correa",
+    "espera": "correa"
+   },
+   {
+    "capa": "esf",
+    "grupo": "esf",
+    "espera": [
+     "esf",
+     "esftipo"
+    ]
+   },
+   {
+    "capa": "caja",
+    "grupo": "bisel",
+    "espera": [
+     "tamano",
+     "caja",
+     "bisel"
+    ]
+   },
+   {
+    "capa": "agujas",
+    "grupo": "agujas",
+    "necesita": "esf",
+    "espera": "agujas"
+   }
+  ],
+  "capas": {
+   "bisel": {
+    "NAR": "caja-anillo-naranja",
+    "NAG": "caja-anillo-naranja-grueso",
+    "PLA": "caja-anillo-plata",
+    "AZU": "caja-anillo-azul",
+    "VER": "caja-anillo-verde",
+    "NEG": "caja-anillo-negro",
+    "OLI": "caja-anillo-oliva",
+    "BUR": "caja-anillo-burdeos",
+    "TUR": "caja-anillo-turquesa",
+    "ACE": "caja-anillo-acero"
+   },
+   "esf": {
+    "NEG": "esfera-negra",
+    "AZT": "esfera-azul-texturizada",
+    "AZS": "esfera-azul-sunburst",
+    "TUS": "esfera-turquesa-sunburst",
+    "TUC": "esfera-turquesa-champagne",
+    "ROJ": "esfera-roja-fume",
+    "NEM": "esfera-negra-marfil",
+    "FRA": "esfera-frambuesa-fume"
+   },
+   "agujas": {
+    "ACE": "agujas"
+   }
+  },
+  "_caja": "LA CAJA LA DIBUJA EL PASO DEL BISEL, no el de la caja. En la Tortuga el bisel de buceo y el anillo de minutos van DENTRO del dibujo de la caja: cada color de anillo es una caja entera. Por eso la capa `caja` cuelga del grupo `bisel`, y espera a que se haya señalado el tamaño, el material o el propio anillo.",
+  "_agujas": "SOLO HAY UN JUEGO DE AGUJAS DIBUJADO, el de la entrega del 31/08: acero con lumen crema. Se mapea a «ACE». «GRI» (gris oscuro) NO tiene dibujo, así que al elegirlo el reloj sale sin agujas, que es la verdad. Hace falta el mismo juego en gris oscuro.",
+  "_correas": "PUBLICADAS PERO SIN MAPEAR: seis correas de caucho —negra, azul marino, gris, verde, roja y naranja— y el brazalete de acero, todas montadas y llegando hasta la caja. Faltan los ids del paso de correa en la ficha para engancharlas: `caucho-negra`, `caucho-azul-marino`, `caucho-gris`, `caucho-verde`, `caucho-roja`, `caucho-naranja` y `brazalete-acero`.",
+  "_medida": "⚠️ LA FICHA DICE 44 mm Y YO MEDÍ 45 EN EL DIBUJO. La escala del montaje no depende de eso —sale de píxeles medidos, no de milímetros— pero el aviso del hueco entre astas sí: a 44 mm el hueco es de 22,44 mm en vez de 22,95. En los dos casos está lejos de los 20 que dicen los nombres de las correas."
+ },
+ "extra": 3.78,
+ "_extra": "El logotipo grabado, 3,78 €. Va en TODOS los modelos y siempre cuesta lo mismo (Oscar, 30 y 31/08/2026).",
+ "_cierre": "LAS CORREAS DE BUZO LLEVAN HEBILLA CLASICA PLATEADA Y SOLO ESA (Oscar, 31/08/2026). No se elige: viene con la correa y no suma coste. Ojo: las dos hebillas de 1,79 y 2,69 son SOLO del caucho del Trinchera y del Lunar, no de aqui."
 }

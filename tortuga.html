@@ -120,7 +120,7 @@
       <div>
         <div class="pv-chips">
           <span class="cv2-chip pv-chip-oro">Nuevo</span>
-          <span class="cv2-chip">Buceo</span>
+          <span class="cv2-chip">LO-06 · Buceo</span>
         </div>
         <h1>Tortuga</h1>
 
@@ -214,18 +214,103 @@
    vive en `/assets/js/configurador-2026.js`, que se carga debajo.
    ============================================================ */
   var OPCIONES = {
+    "tamano": {
+      "44": {
+        "nombre": "44 mm",
+        "expl": "Caja de 44 mm, la medida del reloj de buceo.",
+        "coste": 0
+      }
+    },
     "bisel": {
+      "NAR": {
+        "nombre": "Naranja",
+        "coste": 0
+      },
+      "NAG": {
+        "nombre": "Naranja grueso",
+        "coste": 0
+      },
+      "PLA": {
+        "nombre": "Plata",
+        "coste": 0
+      },
+      "AZU": {
+        "nombre": "Azul",
+        "coste": 0
+      },
+      "VER": {
+        "nombre": "Verde",
+        "coste": 0
+      },
       "NEG": {
         "nombre": "Negro",
-        "color": "#1C1D1F"
+        "coste": 0
+      },
+      "OLI": {
+        "nombre": "Oliva",
+        "coste": 0
+      },
+      "BUR": {
+        "nombre": "Burdeos",
+        "coste": 0
       },
       "TUR": {
         "nombre": "Turquesa",
-        "color": "#1F8A8A"
+        "coste": 0
       },
-      "NAR": {
-        "nombre": "Naranja",
-        "color": "#E4761E"
+      "ACE": {
+        "nombre": "Acero liso",
+        "coste": 0
+      }
+    },
+    "esftipo": {
+      "T": {
+        "nombre": "Tortuga",
+        "coste": 11.19
+      }
+    },
+    "esf": {
+      "NEG": {
+        "nombre": "Negra",
+        "coste": 0
+      },
+      "AZT": {
+        "nombre": "Azul texturizada",
+        "coste": 0
+      },
+      "AZS": {
+        "nombre": "Azul sunburst",
+        "coste": 0
+      },
+      "TUS": {
+        "nombre": "Turquesa sunburst",
+        "coste": 0
+      },
+      "TUC": {
+        "nombre": "Turquesa champagne",
+        "coste": 0
+      },
+      "ROJ": {
+        "nombre": "Roja fumé",
+        "coste": 0
+      },
+      "NEM": {
+        "nombre": "Negra marfil",
+        "coste": 0
+      },
+      "FRA": {
+        "nombre": "Frambuesa fumé",
+        "coste": 0
+      }
+    },
+    "agujas": {
+      "GRI": {
+        "nombre": "Gris oscuro",
+        "coste": 0
+      },
+      "ACE": {
+        "nombre": "Acero inoxidable",
+        "coste": 0
       }
     },
     "cristal": {
@@ -238,16 +323,20 @@
     },
     "mov": {
       "Q": {
-        "nombre": "Cuarzo japonés"
+        "nombre": "Cuarzo japonés",
+        "_real": "Miyota 2105",
+        "cal": "LO_Q3626"
       },
       "A": {
-        "nombre": "Automático japonés"
+        "nombre": "Automático japonés",
+        "_real": "NH36",
+        "cal": "LO_A4126"
       }
     }
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"bisel": "NEG", "cristal": "MIN", "mov": "Q"};
+  var e = {"tamano": "44", "bisel": "NAR", "esftipo": "T", "esf": "NEG", "agujas": "GRI", "cristal": "MIN", "mov": "Q"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -258,7 +347,7 @@
      elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
-  var ORDEN = ["bisel", "cristal", "mov"];
+  var ORDEN = ["tamano", "bisel", "esftipo", "esf", "agujas", "cristal", "mov"];
 
   /* ---------- LAS PUERTAS ----------
      Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
@@ -321,7 +410,7 @@
   var PLANTILLA_REF = null;
   function referencia(e) {
     if (!PLANTILLA_REF) {
-      return 'TORTUG-' + ORDEN.filter(function (k) { return abierta(k, e); })
+      return 'LO-06-' + ORDEN.filter(function (k) { return abierta(k, e); })
         .map(function (k) { return e[k]; }).join('-');
     }
     return PLANTILLA_REF.replace(/\{([a-z]+)(?:\.([a-z]+))?\}/g, function (_, paso, campo) {
@@ -353,7 +442,7 @@
       var t = OPCIONES[ORDEN[i]], o = t && t[e[ORDEN[i]]];
       if (o && o.agua) return o.agua;
     }
-    return "";
+    return "200 m / 20 ATM";
   }
 
   /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
@@ -379,8 +468,34 @@
        flotar solo, como las agujas sin su esfera) y `capas` dice qué
        fichero dibuja cada opción. El que no traiga nada se queda sin
        dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
-    CAPA: {}, CAPA_IMG: "", SERIE_V: "",
-    PILA: [],
+    CAPA: {
+    "bisel": {
+      "NAR": "caja-anillo-naranja",
+      "NAG": "caja-anillo-naranja-grueso",
+      "PLA": "caja-anillo-plata",
+      "AZU": "caja-anillo-azul",
+      "VER": "caja-anillo-verde",
+      "NEG": "caja-anillo-negro",
+      "OLI": "caja-anillo-oliva",
+      "BUR": "caja-anillo-burdeos",
+      "TUR": "caja-anillo-turquesa",
+      "ACE": "caja-anillo-acero"
+    },
+    "esf": {
+      "NEG": "esfera-negra",
+      "AZT": "esfera-azul-texturizada",
+      "AZS": "esfera-azul-sunburst",
+      "TUS": "esfera-turquesa-sunburst",
+      "TUC": "esfera-turquesa-champagne",
+      "ROJ": "esfera-roja-fume",
+      "NEM": "esfera-negra-marfil",
+      "FRA": "esfera-frambuesa-fume"
+    },
+    "agujas": {
+      "ACE": "agujas"
+    }
+  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=1",
+    PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "bisel", "espera": ["tamano", "caja", "bisel"]}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf", "espera": "agujas"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo

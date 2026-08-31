@@ -220,16 +220,26 @@ sin ella. Para la compra es **una sola pieza**.
 **Óscar, 31/08/2026.** Una sola medida, no se elige. Es la del reloj de buceo,
 con sus 200 m.
 
+## El cierre, el logotipo y los costes fijos
+
+**Óscar, 31/08/2026:**
+
+- **Las dos correas de buzo llevan hebilla clásica plateada, y sólo esa.** No
+  se elige y no suma coste: viene con la correa. *(Las hebillas de 1,79 y 2,69
+  son del caucho, no de aquí.)*
+- **El logotipo va siempre, en todos los modelos**: 3,78 €.
+- **Los costes fijos son los de siempre**: packing y envío 9 € con IVA,
+  garantía 4 €, Seguridad Social 5 %, multiplicador 2,28, IVA 21 %, IRPF 20 %,
+  y el suelo de la regla nº1 medido con Klarna al 5 %.
+
+---
+
 ## Lo que falta
 
-**El Tortuga está cerrado**: ninguna pieza sin coste, sin proveedor ni sin
-color. Lo que queda no es de catálogo, es de compra:
+**El Tortuga está cerrado.** Ninguna pieza sin coste, sin proveedor, sin color
+ni sin cierre. Lo único pendiente es de compra, no de catálogo:
 
-1. **El cierre de las dos correas de buzo**: si lo llevan puesto o hay que
-   elegirlo.
-2. **Si el grabado del logotipo va también aquí** — si va, son 3,78 € del
-   proveedor de siempre, que es el precio fijo en todos los modelos.
-3. **Envío, mínimos y descuento por volumen** de cada anuncio, y **la variante
+1. **Envío, mínimos y descuento por volumen** de cada anuncio, y **la variante
    exacta de pedido**.
-4. Los precios se capturaron con ofertas activas: **reverificar antes de
+2. Los precios se capturaron con ofertas activas: **reverificar antes de
    comprar**.

@@ -64,12 +64,14 @@ def piezas():
     out = []
     for i in np.argsort(t)[::-1][:3]:
         p = lab == i + 1
-        piv = _pivote(p)
-        ys, xs = np.where(p)
+        piv, agujero = _pivote(p)
+        lleno = ndimage.binary_fill_holes(p) & ~agujero
+        ys, xs = np.where(lleno)
         d = np.hypot(xs - piv[0], ys - piv[1])
         k = int(np.argmax(d))
-        out.append(dict(mask=p, pivote=piv, punta=(float(xs[k]), float(ys[k])),
-                        largo=float(d.max()), area=int(t[i])))
+        out.append(dict(mask=p, agujero=agujero, pivote=piv,
+                        punta=(float(xs[k]), float(ys[k])),
+                        largo=float(d.max()), area=int(lleno.sum())))
     # el más largo es el segundero; de los otros dos, el largo es el minutero
     out.sort(key=lambda h: -h['largo'])
     seg = max(out, key=lambda h: h['largo'] / max(1.0, np.sqrt(h['area'])))
@@ -91,16 +93,24 @@ def _pivote(p):
         r = float(np.hypot(xs - cx, ys - cy).max())
         redondez = len(ys) / (np.pi * r * r)
         if mejor is None or redondez > mejor[0]:
-            mejor = (redondez, float(cx), float(cy), r)
-    return (mejor[1], mejor[2]) if mejor else (0.0, 0.0)
+            mejor = (redondez, float(cx), float(cy), lab == k)
+    if not mejor:
+        return (0.0, 0.0), np.zeros_like(p)
+    return (mejor[1], mejor[2]), mejor[3]
 
 
 def capa(h, rgb, s, grados, eje):
-    """Una aguja escalada, girada sobre su pivote y puesta en el eje."""
+    """Una aguja escalada, girada sobre su pivote y puesta en el eje.
+
+    ⚠️ LA MÁSCARA SE RELLENA. Lo que separa la aguja del damero es «oscuro
+    o con color», y el LUMEN CREMA del interior no es ni lo uno ni lo otro:
+    salía como agujero y las agujas se publicaron huecas, en puro contorno.
+    Se rellenan los agujeros y se vuelve a abrir EL DEL PIVOTE, que ése sí
+    es un agujero de verdad: por él se ve la esfera."""
+    m = ndimage.binary_fill_holes(h['mask']) & ~h['agujero']
     a = np.zeros(rgb.shape[:2] + (4,), np.uint8)
     a[:, :, :3] = rgb.astype(np.uint8)
-    borde = np.clip(ndimage.gaussian_filter(h['mask'].astype(np.float32), 0.6),
-                    0, 1)
+    borde = np.clip(ndimage.gaussian_filter(m.astype(np.float32), 0.6), 0, 1)
     a[:, :, 3] = (borde * 255).astype(np.uint8)
     im = Image.fromarray(a)
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
