@@ -15,14 +15,22 @@ hoy. Nada de material anterior.
 
 El cuarzo va a la ficha como **18,65 €**, con el anillo dentro.
 
-## Cajas
+## Cajas · precios de hoy, 30/08/2026
 
 | Pieza | Coste | Proveedor |
 |---|--:|---|
-| Acero plata | **18,50 €** | [1005009937589354](https://es.aliexpress.com/item/1005009937589354.html) |
-| Negra PVD | **18,50 €** | mismo anuncio |
-| Bronce | **22,60 €** | mismo anuncio |
-| Titanio | **45,16 €** | [1005010605313493](https://es.aliexpress.com/item/1005010605313493.html) · tandorio |
+| Acero plata | **21,25 €** | [1005009937589354](https://es.aliexpress.com/item/1005009937589354.html) |
+| Negra PVD | **25,21 €** | mismo anuncio |
+| Bronce | **25,21 €** | mismo anuncio |
+| Titanio | **52,69 €** | [1005010605313493](https://es.aliexpress.com/item/1005010605313493.html) · tandorio |
+
+**La plata ya no vale lo mismo que la PVD.** Ahora hay tres escalones: plata,
+después PVD y bronce empatados, y el titanio arriba.
+
+⚠️ Óscar dijo «mismo proveedor» en las cuatro. Se ha entendido que **cada caja
+mantiene el anuncio que ya tenía**: las tres de acero y bronce en
+`1005009937589354` y el titanio en tandorio. Si el titanio ha pasado también al
+primer anuncio, corregir aquí.
 
 **Titanio: se empieza con tandorio.** Hay un segundo anuncio apuntado
 —[1005011632967463](https://es.aliexpress.com/item/1005011632967463.html),
@@ -30,14 +38,33 @@ El cuarzo va a la ficha como **18,65 €**, con el anillo dentro.
 y es sólo la caja. Queda en reserva. Captura en
 `herramientas/capturas/2026-08-29-1005011632967463.json`.
 
-## Esferas
+## Esferas · precios de hoy, 30/08/2026
 
-| Pieza | Coste | Proveedor |
-|---|--:|---|
-| Khaki *(agujas incluidas)* | **16,25 €** | [1005007043976717](https://es.aliexpress.com/item/1005007043976717.html) |
-| Murph | **18,63 €** | [1005005589112497](https://es.aliexpress.com/item/1005005589112497.html) |
+| Esfera | Colores | Sin agujas | **Con agujas** | Proveedor |
+|---|---|--:|--:|---|
+| **Khaki** | blanca, azul y negra | 12,00 € | **15,50 €** | [1005012081121123](https://es.aliexpress.com/item/1005012081121123.html) |
+| **Murph** | blanca y crema | — | **20,39 €** | [1005005589112497](https://es.aliexpress.com/item/1005005589112497.html) |
 
-Los colores de esfera **valen todos lo mismo**.
+**Se compran con agujas**: 15,50 y 20,39. Los 12,00 € de la Khaki sola sólo
+sirven si algún día se montan agujas distintas.
+
+Los colores **valen todos lo mismo**, y los del anuncio cuadran exactamente con
+los de la ficha: la Khaki da negra, blanca y azul, y la Murph crema y blanca.
+
+## Manecillas sueltas · por si hacen falta
+
+Óscar: «en caso necesario». No entran en el coste del reloj —la esfera ya las
+trae—, son **repuesto**: para una que llegue doblada, para una reparación o
+para montar una combinación que el anuncio de la esfera no dé.
+
+| Para | Coste | Compatibles | Proveedor |
+|---|--:|---|---|
+| **Khaki** | **4,49 €** | ETA 2824 y Miyota 8215 | [1005011718174362](https://es.aliexpress.com/item/1005011718174362.html) |
+| **Murph** | **4,99 €** | ETA 2824 y Miyota 8215 | [1005007430601821](https://es.aliexpress.com/item/1005007430601821.html) |
+
+⚠️ Las dos son para **ETA 2824 y Miyota 8215**. El Trinchera de cuarzo monta un
+**Ronda 715**: si alguna vez hace falta una aguja de repuesto para el cuarzo,
+**estas dos no valen**.
 
 ## Correas
 
