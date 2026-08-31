@@ -95,24 +95,47 @@ definición: es que no hay constancia de que Óscar los haya dado.**
 
 | Concepto | Coste | Refs afectadas | Nota |
 |---|--:|--:|---|
-| Caucho curvado | 5,79 € | **4.928** | ⚠️ ver abajo |
+| ~~Caucho curvado~~ | ~~5,79 €~~ | 4.928 | ✅ resuelto: **5,89 €** |
 | Piel vintage | 16,89 € | 1.600 | sin origen |
 | Nato | 3,99 € | 320 | Óscar dio 11,29 (39) y 5,59 (36) para el nato viejo |
 | Acero 316L satinado | 20,19 € | 64 | Óscar dio 19,59 (Trinchera) y 19,79 (Lunar) |
 | Piel italiana | 37,39 € | *(sin refs vivas)* | Óscar dio 29,99 para la italiana vieja |
-| Hebilla negra / oro / mariposa | 1,20 / 1,00 / 0,20 € | — | de la hoja vieja |
+| ~~Hebillas~~ | — | todas | ✅ resuelto: **1,79 y 2,69** |
 | Grabado del logotipo | 3,78 € | todas | de la hoja vieja, sin anuncio |
 
-### ⚠️ El caucho no cuadra, y son 4.928 referencias
+### ✅ El caucho, resuelto el mismo día: 5,89 €
 
-Óscar dio hoy **12,99 €** para el caucho del Lunar, cinco colores. La ficha
-—del Trinchera y del Lunar— tiene **5,79 €** para nueve colores de «caucho
-curvado». **Son más del doble de diferencia y afectan a casi la mitad del
-Trinchera.**
+Óscar, 30/08 por la tarde: **«correas de caucho 5,89»**, con dos anuncios
+—`1005008055142978` y `1005009645605490`—. Ni los 12,99 € de la mañana ni los
+5,79 € de la ficha: **5,89 €**. La ficha hay que subirla diez céntimos.
 
-O son dos productos distintos —el curvado de la entrega x20 contra el que
-Óscar coteó— o uno de los dos números está mal. **Hay que resolverlo antes de
-pedir nada.**
+**Y no va sola: «todas las correas de caucho llevan hebilla, o mariposa o
+clásica».** En el caucho el cierre **no es opcional** y hay que sumarlo
+siempre: con la clásica sale a 7,68 € y con la mariposa a 8,58 €.
+
+### ⚠️ Las hebillas cuestan diez veces lo que dice la ficha
+
+Óscar, 30/08: **clásica 1,79 € y mariposa 2,69 €, los cuatro colores al mismo
+precio** —negro, plata, oro y oro rosa—. Proveedores `1005007688549523` y
+`1005008996913269`.
+
+| Hebilla | Ficha hoy | **De verdad** |
+|---|--:|--:|
+| Clásica plata | 0,00 € | **1,79 €** |
+| Clásica oro rosa | 0,00 € | **1,79 €** |
+| Clásica oro | 1,00 € | **1,79 €** |
+| Clásica negra | 1,20 € | **1,79 €** |
+| **Mariposa** | **0,20 €** | **2,69 €** |
+
+Es el único bloque de esta auditoría donde el coste **sube**. Y cambia una
+regla del configurador: hasta ahora **el color de la hebilla movía el precio**
+—la negra sumaba 1,20 y la de oro rosa restaba 0,40—; ya no. **Los cuatro
+colores valen igual y lo que mueve el precio es el tipo.**
+
+Medido: en el Trinchera de cuarzo, acero 36, Khaki negra y caucho con
+mariposa, el coste sube 2,49 € y **el PVP no se mueve** —189,90 € antes y
+después—, porque el redondeo al 9,90 se lo come. Se paga en margen, no en
+precio: unos **2,09 € menos limpios** por reloj.
 
 ---
 
@@ -130,8 +153,9 @@ al día.
 
 ## 7 · Qué hacer, por orden
 
-1. **Resolver el caucho**: 5,79 o 12,99. Bloquea 4.928 referencias.
-2. **Aplicar los seis costes confirmados** en `assets/datos/fichas/trinchera.json`
+1. ~~Resolver el caucho.~~ ✅ 5,89 €, y con hebilla obligatoria.
+2. **Aplicar los costes confirmados** —los seis de las cajas y esferas, la
+   perforada a 6,79, el caucho a 5,89 y las hebillas a 1,79 y 2,69— en `assets/datos/fichas/trinchera.json`
    y regenerar la ficha. Bajan 8.608 precios.
 3. **Poner al día P-019…P-049 del libro** contra el JSON de la ficha.
 4. **Confirmar o sustituir** los costes sin origen: vintage, nato, acero
