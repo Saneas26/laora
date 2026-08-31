@@ -27,10 +27,9 @@ El cuarzo va a la ficha como **18,65 €**, con el anillo dentro.
 **La plata ya no vale lo mismo que la PVD.** Ahora hay tres escalones: plata,
 después PVD y bronce empatados, y el titanio arriba.
 
-⚠️ Óscar dijo «mismo proveedor» en las cuatro. Se ha entendido que **cada caja
-mantiene el anuncio que ya tenía**: las tres de acero y bronce en
-`1005009937589354` y el titanio en tandorio. Si el titanio ha pasado también al
-primer anuncio, corregir aquí.
+**Los proveedores no cambian** (Óscar, 30/08/2026): las tres de acero y bronce
+siguen en `1005009937589354` y el titanio en tandorio. Lo que ha cambiado hoy
+es sólo el precio.
 
 **Titanio: se empieza con tandorio.** Hay un segundo anuncio apuntado
 —[1005011632967463](https://es.aliexpress.com/item/1005011632967463.html),
