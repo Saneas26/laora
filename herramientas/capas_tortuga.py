@@ -67,6 +67,10 @@ HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
 # un pelo antes del índice al que apunta, y las otras dos bajan con ella.
 GRADOS_MINUTERO = 60.0           # a las 10:10 el minutero apunta al minuto 10
 HUECO_INDICE = 30.0              # y se para esto antes de tocarlo (unidades de esfera)
+# Y SIETE PÍXELES MÁS (Óscar, 31/08/2026: «la aguja del segundero y del
+# minutero ahora son demasiado cortas, auméntalas 7 px de largo»). Los 7
+# son del lienzo que se publica, el de 1.200, así que aquí se convierten.
+MAS_LARGO = 7.0                  # px del lienzo de 1.200
 HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
 # EL LIENZO ALTO DE LAS CORREAS (Óscar, 31/08/2026: «cuando hacemos zoom es
 # precisamente para que se vea más correa, como ya funciona con las otras
@@ -82,7 +86,6 @@ MARGEN_COR = 40                  # lo que la punta se mete bajo la caja
 
 CAJAS = {
     'caja-acero':            'preparadas/19-caja-tortuga-45mm-eje-2048.png',
-    'caja-anillo-naranja':   'preparadas/21-caja-tortuga-anillo-naranja-eje-2048.png',
     'caja-anillo-naranja-grueso': 'preparadas/22-caja-tortuga-anillo-naranja-grueso-escala-negra.png',
     'caja-anillo-plata':     'preparadas/23-caja-tortuga-anillo-plata-escala-negra.png',
     'caja-anillo-azul':      'preparadas/24-caja-tortuga-anillo-azul-escala-negra.png',
@@ -176,6 +179,47 @@ def hueco_entre_astas(f):
         if der - izq > peor:
             peor, centro = der - izq, (izq + der) / 2.0
     return peor, centro, ultima
+
+
+def borde_del_aro(f):
+    """El borde interior del aro de minutos de esa caja: por ahí se ve la esfera."""
+    from scipy import ndimage
+    al = alfa(f)
+    h = ndimage.binary_fill_holes(al) & ~al
+    lab, n = ndimage.label(h)
+    t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    ys, xs = np.where(lab == 1 + int(np.argmax(t)))
+    return float(np.hypot(xs - xs.mean(), ys - ys.mean()).max())
+
+
+def punta_del_indice(fondo=120.0):
+    """Hasta dónde llega el índice más largo de las ocho esferas, hacia fuera.
+
+    ⚠️ HAY QUE DESCARTAR EL CANTO DE LA ESFERA. La de turquesa champán tiene
+    el borde claro y cálido, así que pasa por lumen igual que un índice y
+    daba una «punta» de 1.800: el radio entero de la esfera. Un índice tiene
+    FONDO —del orden de 400 px del centro a la punta—; el canto es una tira
+    de veinte. Con eso se distinguen sin mirar ninguno en concreto."""
+    from scipy import ndimage
+    lejos = 0.0
+    for f in sorted(ESFERAS.values()):
+        a = np.asarray(Image.open(ENTREGA + f).convert('RGBA'))
+        al = a[:, :, 3] > 128
+        rgb = a[:, :, :3].astype(int)
+        lume = (al & (rgb[:, :, 0] > 150) & (rgb[:, :, 1] > 150) &
+                (rgb[:, :, 2] < rgb[:, :, 1] - 8))
+        lab, n = ndimage.label(lume)
+        c = LIENZO / 2.0 - 0.5
+        for k in range(1, n + 1):
+            m = lab == k
+            if m.sum() < 8000:
+                continue
+            ys, xs = np.where(m)
+            d = np.hypot(xs - c, ys - c)
+            if d.max() - d.min() < fondo:
+                continue
+            lejos = max(lejos, float(d.max()))
+    return lejos
 
 
 def borde_del_indice(grados=GRADOS_MINUTERO, tol=14.0):
@@ -387,13 +431,36 @@ def monta():
     for ident, f in sorted(CAJAS.items()):
         capas[ident] = pon(f, 1.0, (0, 0), (0, 0))
 
-    # la esfera, a llenar el ojo
+    # LA ESFERA, A CABER DENTRO DEL ARO (Óscar, 31/08/2026: «la esfera tiene
+    # que reducirse para encajar dentro de la caja y el anillo»).
+    #
+    # Iba a llenar el OJO DE LA CAJA —1.140 px— y el aro empieza mucho antes,
+    # entre 900 y 944 según el color, así que el aro le comía el borde de los
+    # índices: los redondos salían con un lado cortado.
+    #
+    # La escala sale de dos topes que se miden solos:
+    #   · POR ARRIBA, el aro más cerrado. Ningún índice puede pasar de su
+    #     borde interior, o ese anillo se lo come.
+    #   · POR ABAJO, el aro más abierto. La esfera tiene que llegar más allá
+    #     de él, o entre esfera y aro se vería el fondo.
+    # Se coge el punto medio de los dos, que deja aire por los dos lados.
     a = alfa(ESFERAS['esfera-negra'])
     ys, xs = np.where(a)
     ce = ((xs.min() + xs.max()) / 2.0, (ys.min() + ys.max()) / 2.0)
     re = float(np.hypot(xs - ce[0], ys - ce[1]).max())
-    se = r_ojo * HOLGURA_ESF / re
-    print('ESFERA · r %.0f -> %.0f (escala %.4f)' % (re, re * se, se))
+    aros = [borde_del_aro(f) for k, f in sorted(CAJAS.items()) if k != 'caja-acero']
+    r_marca = punta_del_indice()
+    tope = min(aros) / r_marca
+    piso = max(aros) / re
+    se = (tope + piso) / 2.0
+    print('ESFERA · aros de %.0f a %.0f px · el índice más largo llega a %.0f de '
+          'esfera' % (min(aros), max(aros), r_marca))
+    print('         no puede pasar de x%.4f (se lo comería el aro más cerrado) ni '
+          'bajar de x%.4f (se vería el fondo con el más abierto): x%.4f'
+          % (tope, piso, se))
+    print('ESFERA · r %.0f -> %.0f (escala %.4f) · los índices se paran en %.0f, '
+          'el aro más cerrado empieza en %.0f'
+          % (re, re * se, se, r_marca * se, min(aros)))
     for ident, f in sorted(ESFERAS.items()):
         b = alfa(f)
         yy, xx = np.where(b)
@@ -404,7 +471,8 @@ def monta():
     # del índice. Vienen dibujadas para la esfera —por eso iban con `se`—,
     # pero a esa escala la cruzan entera.
     r_ind = borde_del_indice()
-    tope = (r_ind - HUECO_INDICE) * se           # hasta dónde puede llegar la punta
+    tope = ((r_ind - HUECO_INDICE) * se +
+            MAS_LARGO * LIENZO / 1200.0)        # hasta dónde puede llegar la punta
     largos = {}
     for ident, f in sorted(AGUJAS.items()):
         yy, xx = np.where(alfa(f))
@@ -460,8 +528,13 @@ def en_el_marco(capa):
 
 
 def hoja(capas, destino):
-    tiros = [('caja-acero', 'esfera-negra', 'caucho-negra', 'agujas-acero'),
-             ('caja-anillo-naranja', 'esfera-negra-marfil', 'caucho-naranja', 'agujas-acero'),
+    # ⚠️ LA HOJA ENSEÑA CAJAS CON ANILLO, NO LA LISA. Desde que el anillo
+    # SUSTITUYE a la caja, la lisa no llega a verse nunca en la ficha: el
+    # paso del anillo siempre tiene valor. Y suelta se ve mal a propósito
+    # —su ojo es de 1.140 y la esfera se para en 978, así que asoma el
+    # fondo—, que es justo lo que el anillo viene a tapar.
+    tiros = [('caja-anillo-negro', 'esfera-negra', 'caucho-negra', 'agujas-acero'),
+             ('caja-anillo-naranja-grueso', 'esfera-negra-marfil', 'caucho-naranja', 'agujas-acero'),
              ('caja-anillo-azul', 'esfera-azul-sunburst', 'brazalete-acero', 'agujas-acero'),
              ('caja-anillo-turquesa', 'esfera-turquesa-champagne', 'caucho-gris', 'agujas-gris-oscuro'),
              ('caja-anillo-burdeos', 'esfera-frambuesa-fume', 'caucho-roja', 'agujas-gris-oscuro'),

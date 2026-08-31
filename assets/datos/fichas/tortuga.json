@@ -25,11 +25,6 @@
  "bisel": {
   "colores": [
    {
-    "id": "NAR",
-    "nombre": "Naranja",
-    "expl": "Anillo de minutos en naranja, bajo el cristal."
-   },
-   {
     "id": "NRG",
     "nombre": "Naranja grueso",
     "expl": "Anillo de minutos en naranja grueso, bajo el cristal."
@@ -204,7 +199,7 @@
   "colores_cierre": []
  },
  "_movimiento": "NH36 (automatico, 65,00) y MIYOTA 2105 (cuarzo, 9,00), Oscar 30/08/2026. Los dos con FECHA LARGA, dia y fecha; el del cuarzo es BILINGUE espanol/ingles. Calibres de la casa (Oscar, 31/08): LO_A4126 el automatico y LO_Q3626 el cuarzo. Se escriben con GUION BAJO, como los demas de la casa. El codigo lleva dentro la especificacion: A + horas de reserva (41) y Q + meses de pila (36), y 26 del ano.",
- "_bisel": "EL BISEL SIEMPRE ES NEGRO (Oscar 30/08). Lo que aqui se llama \"bisel\" es en realidad el ANILLO INTERIOR, el aro fino de color pegado al borde de la esfera. Hay que renombrar el paso. No cuesta aparte: viene en la caja, junto con el bisel y el cristal.",
+ "_bisel": "EL BISEL SIEMPRE ES NEGRO (Oscar 30/08). Lo que aqui se llama \"bisel\" es en realidad el ANILLO INTERIOR, el aro fino de color pegado al borde de la esfera. Hay que renombrar el paso. No cuesta aparte: viene en la caja, junto con el bisel y el cristal. ⚠️ EL ANILLO «NARANJA» FINO SE FUE EL 31/08/2026 (Óscar: «no existe el anillo naranja y el anillo naranja grueso, directamente solo existe el grueso»). Queda uno solo, el que sigue llamándose «Naranja grueso»; el nombre habla de una distinción que ya no existe y está pendiente de que Óscar diga cómo se llama.",
  "_agujas": "Dos acabados de la entrega del 31/08: gris oscuro y acero inoxidable. Las agujas cuestan 5,59 y van APARTE de la esfera.",
  "_esfera": "Ocho colores de la entrega del 31/08, 28,5 mm, a 11,19 cada una. LA ESFERA ES SIEMPRE LA DE LA FOTO (Oscar, 31/08), con una sola diferencia: al CUARZO no se le pone AUTOMATIC. Mismo dibujo, misma esfera y mismo coste; cambia solo esa palabra impresa. Los dos movimientos llevan fecha larga, asi que la ventanilla de dia y fecha vale para los dos.",
  "agua": "20 ATM / 200 metros",
@@ -212,7 +207,7 @@
  "_codigo": "LO-06, dado por Óscar el 31/08/2026. Los cinco anteriores son LO-01 Precisa, LO-02 Trinchera, LO-03 Lunar, LO-04 Bitácora y LO-05 Cero Cero.",
  "montaje": {
   "img": "/assets/img/tortuga-2026/capas/1200/",
-  "v": "?v=5",
+  "v": "?v=6",
   "pila": [
    {
     "capa": "correa",
@@ -253,7 +248,6 @@
     "AC": "caja-acero"
    },
    "bisel": {
-    "NAR": "caja-anillo-naranja",
     "NRG": "caja-anillo-naranja-grueso",
     "PLA": "caja-anillo-plata",
     "AZU": "caja-anillo-azul",

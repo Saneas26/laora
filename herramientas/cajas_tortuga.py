@@ -75,7 +75,6 @@ SOLIDO = 128            # el alfa a partir del cual una fila cuenta como caja
 
 CAJAS = [
     '19-caja-tortuga-45mm-eje-2048.png',
-    '21-caja-tortuga-anillo-naranja-eje-2048.png',
     '22-caja-tortuga-anillo-naranja-grueso-escala-negra.png',
     '23-caja-tortuga-anillo-plata-escala-negra.png',
     '24-caja-tortuga-anillo-azul-escala-negra.png',

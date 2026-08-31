@@ -227,10 +227,6 @@
       }
     },
     "bisel": {
-      "NAR": {
-        "nombre": "Naranja",
-        "expl": "Anillo de minutos en naranja, bajo el cristal."
-      },
       "NRG": {
         "nombre": "Naranja grueso",
         "expl": "Anillo de minutos en naranja grueso, bajo el cristal."
@@ -365,7 +361,7 @@
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "45", "caja": "AC", "bisel": "NAR", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG"};
+  var e = {"tamano": "45", "caja": "AC", "bisel": "NRG", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -502,7 +498,6 @@
       "AC": "caja-acero"
     },
     "bisel": {
-      "NAR": "caja-anillo-naranja",
       "NRG": "caja-anillo-naranja-grueso",
       "PLA": "caja-anillo-plata",
       "AZU": "caja-anillo-azul",
@@ -536,7 +531,7 @@
       "KNAR": "caucho-naranja",
       "BRZ": "brazalete-acero"
     }
-  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=5",
+  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=6",
     PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "bisel", "grupo": "bisel", "espera": "bisel", "sustituye": "caja"}, {"capa": "agujas", "grupo": "agujas", "espera": "agujas", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
