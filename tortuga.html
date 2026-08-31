@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Tortuga de laOra: 0 combinaciones, al precio honesto.">
+<meta name="description" content="Tortuga de laOra: 4032 combinaciones, al precio honesto.">
 <title>Tortuga · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -215,105 +215,130 @@
    ============================================================ */
   var OPCIONES = {
     "tamano": {
-      "45": {
-        "nombre": "45 mm",
-        "expl": "Caja de 45 mm, la medida del buceador clásico."
+      "44": {
+        "nombre": "44 mm",
+        "expl": "Caja de 44 mm, la medida del reloj de buceo.",
+        "coste": 0
       }
     },
     "caja": {
       "AC": {
         "nombre": "Acero 316L",
-        "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo."
+        "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo.",
+        "coste": 32.39
       }
     },
     "bisel": {
       "NRG": {
         "nombre": "Naranja grueso",
-        "expl": "Anillo de minutos en naranja grueso, bajo el cristal."
+        "expl": "Anillo de minutos en naranja grueso, bajo el cristal.",
+        "coste": 0
       },
       "PLA": {
         "nombre": "Plata",
-        "expl": "Anillo de minutos en plata, bajo el cristal."
+        "expl": "Anillo de minutos en plata, bajo el cristal.",
+        "coste": 0
       },
       "AZU": {
         "nombre": "Azul",
-        "expl": "Anillo de minutos en azul, bajo el cristal."
+        "expl": "Anillo de minutos en azul, bajo el cristal.",
+        "coste": 0
       },
       "VER": {
         "nombre": "Verde",
-        "expl": "Anillo de minutos en verde, bajo el cristal."
+        "expl": "Anillo de minutos en verde, bajo el cristal.",
+        "coste": 0
       },
       "NEG": {
         "nombre": "Negro",
-        "expl": "Anillo de minutos en negro, bajo el cristal."
+        "expl": "Anillo de minutos en negro, bajo el cristal.",
+        "coste": 0
       },
       "OLI": {
         "nombre": "Oliva",
-        "expl": "Anillo de minutos en oliva, bajo el cristal."
+        "expl": "Anillo de minutos en oliva, bajo el cristal.",
+        "coste": 0
       },
       "BUR": {
         "nombre": "Burdeos",
-        "expl": "Anillo de minutos en burdeos, bajo el cristal."
+        "expl": "Anillo de minutos en burdeos, bajo el cristal.",
+        "coste": 0
       },
       "TUR": {
         "nombre": "Turquesa",
-        "expl": "Anillo de minutos en turquesa, bajo el cristal."
+        "expl": "Anillo de minutos en turquesa, bajo el cristal.",
+        "coste": 0
       },
       "ACE": {
         "nombre": "Acero",
-        "expl": "Anillo de minutos en acero, bajo el cristal."
+        "expl": "Anillo de minutos en acero, bajo el cristal.",
+        "coste": 0
       }
     },
     "esf": {
       "NEG": {
-        "nombre": "Negra"
+        "nombre": "Negra",
+        "coste": 11.19
       },
       "AZT": {
-        "nombre": "Azul texturizada"
+        "nombre": "Azul texturizada",
+        "coste": 11.19
       },
       "AZS": {
-        "nombre": "Azul sunburst"
+        "nombre": "Azul sunburst",
+        "coste": 11.19
       },
       "TUS": {
-        "nombre": "Turquesa sunburst"
+        "nombre": "Turquesa sunburst",
+        "coste": 11.19
       },
       "TUC": {
-        "nombre": "Turquesa champán"
+        "nombre": "Turquesa champán",
+        "coste": 11.19
       },
       "ROF": {
-        "nombre": "Roja fumé"
+        "nombre": "Roja fumé",
+        "coste": 11.19
       },
       "NMA": {
-        "nombre": "Negra y marfil"
+        "nombre": "Negra y marfil",
+        "coste": 11.19
       },
       "FRF": {
-        "nombre": "Frambuesa fumé"
+        "nombre": "Frambuesa fumé",
+        "coste": 11.19
       }
     },
     "agujas": {
       "ACE": {
-        "nombre": "Acero inoxidable"
+        "nombre": "Acero inoxidable",
+        "coste": 5.59
       },
       "GRI": {
-        "nombre": "Gris oscuro"
+        "nombre": "Gris oscuro",
+        "coste": 5.59
       }
     },
     "cristal": {
       "MIN": {
-        "nombre": "Mineral"
+        "nombre": "Mineral",
+        "coste": 0
       },
       "ZAF": {
-        "nombre": "Zafiro"
+        "nombre": "Zafiro",
+        "coste": 4.2
       }
     },
     "mov": {
       "Q": {
         "nombre": "Cuarzo japonés",
+        "coste": 9.0,
         "_real": "Miyota 2105",
         "cal": "LO_Q3626"
       },
       "A": {
         "nombre": "Automático japonés",
+        "coste": 65.0,
         "_real": "NH36",
         "cal": "LO_A4126"
       }
@@ -321,47 +346,63 @@
     "correamat": {
       "CAUCHO": {
         "nombre": "Caucho",
-        "expl": "Caucho de buceo con ranuras, la de toda la vida para el agua."
+        "expl": "Caucho de buceo con ranuras, la de toda la vida para el agua.",
+        "coste": 0
       },
       "A316": {
         "nombre": "Brazalete de acero",
-        "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja."
+        "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja.",
+        "coste": 0
       }
     },
     "correa": {
       "KNEG": {
         "nombre": "Negra",
+        "coste": 3.39,
         "familia": "CAUCHO"
       },
       "KAZU": {
         "nombre": "Azul marino",
+        "coste": 3.39,
         "familia": "CAUCHO"
       },
       "KGRI": {
         "nombre": "Gris",
+        "coste": 3.39,
         "familia": "CAUCHO"
       },
       "KVER": {
         "nombre": "Verde",
+        "coste": 3.39,
         "familia": "CAUCHO"
       },
       "KROJ": {
         "nombre": "Roja",
+        "coste": 3.39,
         "familia": "CAUCHO"
       },
       "KNAR": {
         "nombre": "Naranja",
+        "coste": 3.39,
         "familia": "CAUCHO"
       },
       "BRZ": {
         "nombre": "Acero 316L",
+        "coste": 32.39,
         "familia": "A316"
+      }
+    },
+    "cierre": {
+      "plata": {
+        "nombre": "Clásica plata",
+        "expl": "Hebilla clásica de acero plateado.",
+        "coste": 0
       }
     }
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "45", "caja": "AC", "bisel": "NRG", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG"};
+  var e = {"tamano": "44", "caja": "AC", "bisel": "NRG", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG", "cierre": "plata"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -372,7 +413,7 @@
      elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
-  var ORDEN = ["tamano", "caja", "bisel", "esf", "agujas", "cristal", "mov", "correamat", "correa"];
+  var ORDEN = ["tamano", "caja", "bisel", "esf", "agujas", "cristal", "mov", "correamat", "correa", "cierre"];
 
   /* ---------- LAS PUERTAS ----------
      Un paso que solo aparece si otro lo abre. El pespunte es de la piel:

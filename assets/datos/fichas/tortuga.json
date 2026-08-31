@@ -9,16 +9,18 @@
   "integrada": false,
   "tamanos": [
    {
-    "id": "45",
-    "nombre": "45 mm",
-    "expl": "Caja de 45 mm, la medida del buceador clásico."
+    "id": "44",
+    "nombre": "44 mm",
+    "coste": 0,
+    "expl": "Caja de 44 mm, la medida del reloj de buceo."
    }
   ],
   "materiales": [
    {
     "id": "AC",
     "nombre": "Acero 316L",
-    "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo."
+    "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo.",
+    "coste": 32.39
    }
   ]
  },
@@ -27,47 +29,56 @@
    {
     "id": "NRG",
     "nombre": "Naranja grueso",
-    "expl": "Anillo de minutos en naranja grueso, bajo el cristal."
+    "expl": "Anillo de minutos en naranja grueso, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "PLA",
     "nombre": "Plata",
-    "expl": "Anillo de minutos en plata, bajo el cristal."
+    "expl": "Anillo de minutos en plata, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "AZU",
     "nombre": "Azul",
-    "expl": "Anillo de minutos en azul, bajo el cristal."
+    "expl": "Anillo de minutos en azul, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "VER",
     "nombre": "Verde",
-    "expl": "Anillo de minutos en verde, bajo el cristal."
+    "expl": "Anillo de minutos en verde, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "NEG",
     "nombre": "Negro",
-    "expl": "Anillo de minutos en negro, bajo el cristal."
+    "expl": "Anillo de minutos en negro, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "OLI",
     "nombre": "Oliva",
-    "expl": "Anillo de minutos en oliva, bajo el cristal."
+    "expl": "Anillo de minutos en oliva, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "BUR",
     "nombre": "Burdeos",
-    "expl": "Anillo de minutos en burdeos, bajo el cristal."
+    "expl": "Anillo de minutos en burdeos, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "TUR",
     "nombre": "Turquesa",
-    "expl": "Anillo de minutos en turquesa, bajo el cristal."
+    "expl": "Anillo de minutos en turquesa, bajo el cristal.",
+    "coste": 0
    },
    {
     "id": "ACE",
     "nombre": "Acero",
-    "expl": "Anillo de minutos en acero, bajo el cristal."
+    "expl": "Anillo de minutos en acero, bajo el cristal.",
+    "coste": 0
    }
   ],
   "materiales": []
@@ -77,35 +88,43 @@
   "colores": [
    {
     "id": "NEG",
-    "nombre": "Negra"
+    "nombre": "Negra",
+    "coste": 11.19
    },
    {
     "id": "AZT",
-    "nombre": "Azul texturizada"
+    "nombre": "Azul texturizada",
+    "coste": 11.19
    },
    {
     "id": "AZS",
-    "nombre": "Azul sunburst"
+    "nombre": "Azul sunburst",
+    "coste": 11.19
    },
    {
     "id": "TUS",
-    "nombre": "Turquesa sunburst"
+    "nombre": "Turquesa sunburst",
+    "coste": 11.19
    },
    {
     "id": "TUC",
-    "nombre": "Turquesa champán"
+    "nombre": "Turquesa champán",
+    "coste": 11.19
    },
    {
     "id": "ROF",
-    "nombre": "Roja fumé"
+    "nombre": "Roja fumé",
+    "coste": 11.19
    },
    {
     "id": "NMA",
-    "nombre": "Negra y marfil"
+    "nombre": "Negra y marfil",
+    "coste": 11.19
    },
    {
     "id": "FRF",
-    "nombre": "Frambuesa fumé"
+    "nombre": "Frambuesa fumé",
+    "coste": 11.19
    }
   ]
  },
@@ -113,22 +132,26 @@
   "colores": [
    {
     "id": "ACE",
-    "nombre": "Acero inoxidable"
+    "nombre": "Acero inoxidable",
+    "coste": 5.59
    },
    {
     "id": "GRI",
-    "nombre": "Gris oscuro"
+    "nombre": "Gris oscuro",
+    "coste": 5.59
    }
   ]
  },
  "cristal": [
   {
    "id": "MIN",
-   "nombre": "Mineral"
+   "nombre": "Mineral",
+   "coste": 0
   },
   {
    "id": "ZAF",
-   "nombre": "Zafiro"
+   "nombre": "Zafiro",
+   "coste": 4.2
   }
  ],
  "movimiento": [
@@ -136,13 +159,15 @@
    "id": "Q",
    "nombre": "Cuarzo japonés",
    "_real": "Miyota 2105",
-   "cal": "LO_Q3626"
+   "cal": "LO_Q3626",
+   "coste": 9.0
   },
   {
    "id": "A",
    "nombre": "Automático japonés",
    "_real": "NH36",
-   "cal": "LO_A4126"
+   "cal": "LO_A4126",
+   "coste": 65.0
   }
  ],
  "correa": {
@@ -150,52 +175,68 @@
    {
     "id": "CAUCHO",
     "nombre": "Caucho",
-    "expl": "Caucho de buceo con ranuras, la de toda la vida para el agua."
+    "expl": "Caucho de buceo con ranuras, la de toda la vida para el agua.",
+    "coste": 0
    },
    {
     "id": "A316",
     "nombre": "Brazalete de acero",
-    "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja."
+    "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja.",
+    "coste": 0
    }
   ],
   "colores": [
    {
     "id": "KNEG",
     "familia": "CAUCHO",
-    "nombre": "Negra"
+    "nombre": "Negra",
+    "coste": 3.39
    },
    {
     "id": "KAZU",
     "familia": "CAUCHO",
-    "nombre": "Azul marino"
+    "nombre": "Azul marino",
+    "coste": 3.39
    },
    {
     "id": "KGRI",
     "familia": "CAUCHO",
-    "nombre": "Gris"
+    "nombre": "Gris",
+    "coste": 3.39
    },
    {
     "id": "KVER",
     "familia": "CAUCHO",
-    "nombre": "Verde"
+    "nombre": "Verde",
+    "coste": 3.39
    },
    {
     "id": "KROJ",
     "familia": "CAUCHO",
-    "nombre": "Roja"
+    "nombre": "Roja",
+    "coste": 3.39
    },
    {
     "id": "KNAR",
     "familia": "CAUCHO",
-    "nombre": "Naranja"
+    "nombre": "Naranja",
+    "coste": 3.39
    },
    {
     "id": "BRZ",
     "familia": "A316",
-    "nombre": "Acero 316L"
+    "nombre": "Acero 316L",
+    "coste": 32.39
    }
   ],
-  "cierres": [],
+  "cierres": [
+   {
+    "id": "plata",
+    "nombre": "Clásica plata",
+    "coste": 0,
+    "expl": "Hebilla clásica de acero plateado."
+   }
+  ],
   "colores_cierre": []
  },
  "_movimiento": "NH36 (automatico, 65,00) y MIYOTA 2105 (cuarzo, 9,00), Oscar 30/08/2026. Los dos con FECHA LARGA, dia y fecha; el del cuarzo es BILINGUE espanol/ingles. Calibres de la casa (Oscar, 31/08): LO_A4126 el automatico y LO_Q3626 el cuarzo. Se escriben con GUION BAJO, como los demas de la casa. El codigo lleva dentro la especificacion: A + horas de reserva (41) y Q + meses de pila (36), y 26 del ano.",
@@ -294,5 +335,6 @@
    "paso": "correamat",
    "campo": "familia"
   }
- }
+ },
+ "_coste": "COSTES PUESTOS EL 31/08/2026, todos dados por Oscar. Movimiento 9,00 el cuarzo y 65,00 el automatico. Caja 32,39, que trae caja, bisel, anillo y cristal mineral; el ZAFIRO suma 4,20 en el paso del cristal, que es la diferencia entre los 32,39 y los 36,59 del anuncio. Esfera 11,19, agujas 5,59, logotipo 3,78. Correa de buzo 3,39 y brazalete de acero 32,39. El anillo interior y la hebilla no cuestan aparte. La correa de buzo profesional de 3,89 todavia no esta en la ficha."
 }
