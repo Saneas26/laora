@@ -86,6 +86,18 @@ HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
 # no lo tapan»). Antes el tope era el índice redondo; ahora es la pista.
 HUECO_PISTA = 18.0               # lo que se paran antes de tocarla (px del 4.096)
 HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
+# EL CAUCHO, MÁS ESTRECHO Y MÁS METIDO (Óscar, 01/09/2026: «el caucho en el
+# tortuga hay que estrecharlo un poco más, y meterlo un poquito más debajo
+# de la caja»). Son dos cosas distintas y por eso son dos números: el ancho
+# es cuánto asoma a los lados y el margen es cuánto se esconde la punta bajo
+# la caja. Sólo para el caucho: el brazalete no lo nombró y se queda como
+# estaba.
+# ⚠️ Estrechar NO deja ver el fondo entre la correa y el asta, porque
+# `rellena_las_astas` le devuelve el ancho en las filas de la ranura: la
+# correa se ve más estrecha donde el cliente la ve, y sigue llenando el
+# hueco donde no se ve.
+HOLGURA_CAUCHO = 0.96
+MARGEN_CAUCHO = 110
 # EL LIENZO ALTO DE LAS CORREAS (Óscar, 31/08/2026: «cuando hacemos zoom es
 # precisamente para que se vea más correa, como ya funciona con las otras
 # correas en trinchera y lunar»). Es la norma de la casa desde el 29/08: la
@@ -746,12 +758,15 @@ def monta():
     for ident, f in sorted(CORREAS.items()):
         an, cx = (ancho_en_las_puntas(f) if ident in POR_LAS_PUNTAS
                   else ancho_maximo(f))
-        s = astas * HOLGURA_COR / an
+        es_caucho = ident.startswith('caucho')
+        holgura = HOLGURA_CAUCHO if es_caucho else HOLGURA_COR
+        margen = MARGEN_CAUCHO if es_caucho else MARGEN_COR
+        s = astas * holgura / an
         capa = pon_correa(f, s, cx, centro_astas)
         b = np.asarray(capa)[:, :, 3] > 128
         cols = np.where(b.any(0))[0]
         arr, aba = cubierto_por_la_caja(CAJA_PATRON, (cols.min(), cols.max()))
-        baja, sube = cuanto_mover(capa, arr + DESP_COR, aba + DESP_COR)
+        baja, sube = cuanto_mover(capa, arr + DESP_COR, aba + DESP_COR, margen)
         if baja or sube:                       # y se vuelve a montar, ya con el sitio
             capa = pon_correa(f, s, cx, centro_astas, baja, sube)
         capa = rellena_las_astas(capa, CAJA_PATRON, centro_astas)

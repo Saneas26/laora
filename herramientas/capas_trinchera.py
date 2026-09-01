@@ -45,6 +45,12 @@ ASAS_HUECO = 376.0
 ASAS_CX = 601.5          # centro del hueco entre asas
 ASAS_CY = 554.5          # centro entre la fila de arriba y la de abajo
 HOLGURA_ESF = 1.02       # la esfera se mete un pelín bajo el bisel
+# EL PELLIZCO DEL MURPH (Óscar, 01/09/2026). Sus numerales de minutos van
+# más afuera que los índices de las demás, así que aun con todas las
+# esferas del mismo tamaño se quedaban rozando el bisel. Un 1,5 % menos los
+# separa lo mismo que los de las otras, y la esfera sigue metiéndose bajo
+# el bisel: 1,02 x 0,985 = 1,005 del ojo.
+AJUSTE = {'esfera-murph-crema': 0.985, 'esfera-murph-blanca': 0.985}
 # LAS AGUJAS NO SE COLOCAN A LA ESCALA DE LA ESFERA (Óscar, 30/08/2026:
 # «hay que reducir la imagen de las agujas, se salen de la esfera»). Y es
 # verdad: puestas a la escala de la esfera llegaban a 404 px cuando la
@@ -180,18 +186,34 @@ def monta():
     for ident, f in sorted(CAJAS.items()):
         im = Image.open(ENTREGA + f).convert('RGBA')
         capas[ident] = pon(im, s, (-dx / s, -dy / s), (0, 0))
-    # la esfera, al ojo
-    prim = ENTREGA + ESFERAS['esfera-negra']
-    a = alfa(prim)
-    ce = eje_esfera(prim)
-    ys, xs = np.where(a)
-    re = float(np.hypot(xs - ce[0], ys - ce[1]).max())
-    se = r_ojo * s * HOLGURA_ESF / re
-    print('ESFERA r=%.1f -> %.1f (escala %.4f, con %.0f %% de holgura bajo el bisel)'
-          % (re, re * se, se, (HOLGURA_ESF - 1) * 100))
+    # LA ESFERA, AL OJO, Y CADA UNA CON SU RADIO.
+    #
+    # ⚠️ NO TODAS ESTÁN DIBUJADAS DEL MISMO TAMAÑO, y eso costó los
+    # numerales del Murph. Hasta el 01/09/2026 las cinco se escalaban con
+    # el número que salía de la NEGRA (radio 501), y las dos del Murph
+    # vienen dibujadas a 545: al montarlas quedaban un 9 % más grandes que
+    # el ojo, así que su corona de minutos —que en ellas llega al 96,5 %
+    # del radio, mucho más afuera que el 94 % de las demás— se metía debajo
+    # del bisel y salía cortada. Óscar, 01/09/2026: «la esfera del murph
+    # hay que hacerla un pelín más pequeña, sobre el mismo eje, porque los
+    # numerales de los minutos quedan muy cerca del borde de la caja y
+    # tienen que verse un poco más».
+    #
+    # Ahora cada esfera se escala con SU radio, así que todas acaban del
+    # tamaño del ojo con la misma holgura bajo el bisel. Y al Murph se le
+    # da además un pelín menos —`AJUSTE`— para que sus numerales queden a la
+    # misma distancia del bisel que los índices de las otras: con la
+    # normalización sola se quedaban al 98,4 % del ojo, o sea rozándolo.
     for ident, f in sorted(ESFERAS.items()):
-        capas[ident] = pon(Image.open(ENTREGA + f).convert('RGBA'), se,
-                           eje_esfera(ENTREGA + f), eje)
+        ruta = ENTREGA + f
+        ce = eje_esfera(ruta)
+        ys, xs = np.where(alfa(ruta))
+        re = float(np.hypot(xs - ce[0], ys - ce[1]).max())
+        se = r_ojo * s * HOLGURA_ESF / re * AJUSTE.get(ident, 1.0)
+        print('ESFERA %-22s r=%.1f -> %.1f (escala %.4f%s)'
+              % (ident, re, re * se, se,
+                 ', ajustada x%.3f' % AJUSTE[ident] if ident in AJUSTE else ''))
+        capas[ident] = pon(Image.open(ruta).convert('RGBA'), se, ce, eje)
     # la pista de minutos de la esfera, ya colocada: hasta ahí llegan las agujas
     pista = pista_de_la_esfera(capas['esfera-negra'], eje)
     print('PISTA de minutos a %.1f px · las agujas mueren en %.1f' % (pista, pista * PUNTA_AGUJA))

@@ -289,6 +289,21 @@
 .cv2-vs-lista li.cv2-vs-nuestro em{color:var(--cv2-oro)}
 .cv2-vs-lista li.cv2-vs-nuestro em{font-size:20px}
 
+/* LO QUE GANA EL NUESTRO (Óscar, 27/08/2026). Debajo de la comparativa de
+   precios: tres razones, y las tres con una cifra NUESTRA delante. Ni un
+   dato de la competencia aquí —esos viven en la tabla de arriba, con su
+   aviso—, así que este bloque no depende de comprobar nada ajeno. */
+.cv2-vs-gana{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:18px 30px;margin:22px 0 0;max-width:900px;
+}
+.cv2-vs-gana div{border-top:2px solid var(--cv2-oro);padding-top:12px}
+.cv2-vs-gana b{
+  display:block;font-family:var(--cv2-mono);font-weight:700;
+  font-size:19px;color:var(--cv2-negro);margin-bottom:4px;
+}
+.cv2-vs-gana span{font-size:15px;line-height:1.45;color:var(--cv2-gris)}
+
 /* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
    blanco andaba justo de contraste, aquí por fin brilla. */
 .cv2-lienzo .cv2-chip{background:#fff;color:var(--cv2-negro)}
@@ -319,6 +334,8 @@
 .cv2-lienzo .cv2-vs-lista b{color:#fff}
 .cv2-lienzo .cv2-vs-lista em{color:#fff}
 .cv2-lienzo .cv2-vs-lista li.cv2-vs-nuestro{border-top-color:rgba(255,255,255,.55)}
+.cv2-lienzo .cv2-vs-gana b{color:#fff}
+.cv2-lienzo .cv2-vs-gana span{color:rgba(255,255,255,.78)}
 
 /* ---------- LOS CALIBRES (Óscar, 20/08/2026) ----------
    Ocupa el sitio del antiguo «Movimientos Suizos» y de la línea de
