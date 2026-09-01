@@ -139,13 +139,19 @@ AGUJAS = {
     'agujas-acero':       '41-agujas-tortuga-acero-inoxidable-10-10-37-esfera-28-5mm-eje-2048.png',
     'agujas-gris-oscuro': '40-agujas-tortuga-gris-muy-oscuro-10-10-37-esfera-28-5mm-eje-2048.png',
 }
+# LAS DE CAUCHO SON LAS «LUJO» DEL 01/09/2026 (Óscar: «cambia las correas
+# del tortuga, sustituye por estas»). Es el mismo caucho de buceo de
+# siempre, pero renderizado en estudio: con volumen, brillo y la hebilla
+# dentro del cuadro. Llegan las cinco de color; ⚠️ LA NEGRA LISA NO VINO en
+# esa entrega, así que se queda con el dibujo plano de agosto y se nota al
+# lado de las otras. En cuanto llegue su «lujo», es cambiar esta línea.
 CORREAS = {
     'caucho-negra':      '32-correa-caucho-negra-buzo-20-18mm-eje-2048.png',
-    'caucho-azul-marino': '33-correa-caucho-azul-marino-buzo-20-18mm-eje-2048.png',
-    'caucho-gris':       '34-correa-caucho-gris-buzo-20-18mm-eje-2048.png',
-    'caucho-verde':      '35-correa-caucho-verde-buzo-20-18mm-eje-2048.png',
-    'caucho-roja':       '36-correa-caucho-roja-buzo-20-18mm-eje-2048.png',
-    'caucho-naranja':    '37-correa-caucho-naranja-buzo-20-18mm-eje-2048.png',
+    'caucho-azul-marino': '52-correa-caucho-azul-marino-lujo-4k-hueco-caja-44mm.png',
+    'caucho-gris':       '50-correa-caucho-gris-lujo-4k-hueco-caja-44mm.png',
+    'caucho-verde':      '51-correa-caucho-verde-lujo-4k-hueco-caja-44mm.png',
+    'caucho-roja':       '53-correa-caucho-roja-lujo-4k-hueco-caja-44mm.png',
+    'caucho-naranja':    '49-muestra-correa-caucho-naranja-lujo-4k-hueco-caja-44mm.png',
     # LA PROFESIONAL LLEGA CON LA HEBILLA DENTRO DEL CUADRO (Óscar,
     # 01/09/2026: «monta esta correa de caucho en el tortuga y la nombras
     # caucho profesional»). Es la única de la entrega que se dibuja entera
@@ -167,17 +173,22 @@ CORREAS = {
     'caucho-profesional': '48-correa-caucho-negra-lujo-4k-hueco-44mm-tabla-4-columnas.png',
     'brazalete-acero':   '20-brazalete-tortuga-eje-2048.png',
 }
-# ⚠️ SE MIDE EN LAS PUNTAS, NO EN EL MÁXIMO, y sólo en las que hace falta.
-# Lo que tiene que llenar la ranura es el ancho DEL ASA, que es donde la
-# correa entra: en las seis de caucho y en el brazalete el sitio más ancho
-# del dibujo es justo ése, así que el número no cambia y no se toca nada de
-# lo publicado. En la profesional el sitio más ancho es la hebilla, y
-# midiendo por el máximo la correa entraba un 4 % estrecha en el asa.
-POR_LAS_PUNTAS = ('caucho-profesional',)
-# Y NO SE LE TAPAN LOS AGUJEROS. `tapa_los_agujeros` está para el defecto de
-# las seis de caucho, que traen cinco agujeros pegados a la caja donde sólo
-# hay uno; ésta trae su escalera de agujeros bien dibujada y a su distancia.
-SIN_TAPAR = ('caucho-profesional',)
+# ⚠️ SE MIDE EN LAS PUNTAS, NO EN EL MÁXIMO. Lo que tiene que llenar la
+# ranura es el ancho DEL ASA, que es donde la correa entra. En los dibujos
+# planos de agosto —la negra y el brazalete— el sitio más ancho es justo
+# ése, así que da igual medirlo de una manera o de otra y se dejan como
+# estaban. En todas las «lujo» el sitio más ancho es LA HEBILLA, que ahora
+# entra en el cuadro: 376 px contra los 335 del asa. Midiendo por el
+# máximo, la correa entraba un 11 % estrecha en la ranura.
+POR_LAS_PUNTAS = ('caucho-profesional', 'caucho-azul-marino', 'caucho-gris',
+                  'caucho-verde', 'caucho-roja', 'caucho-naranja')
+# Y A LAS «LUJO» NO SE LES TAPAN LOS AGUJEROS. `tapa_los_agujeros` está
+# para el defecto de los dibujos planos de agosto, que traían cinco
+# agujeros pegados a la caja donde sólo hay uno; las nuevas traen su fila
+# de agujeros bien dibujada y a su distancia. La negra lisa, que sigue
+# siendo la de agosto, sí lo necesita.
+SIN_TAPAR = ('caucho-profesional', 'caucho-azul-marino', 'caucho-gris',
+             'caucho-verde', 'caucho-roja', 'caucho-naranja')
 
 
 def alfa(f, u=128):
