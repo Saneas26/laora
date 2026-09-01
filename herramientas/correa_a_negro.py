@@ -3,6 +3,13 @@
 
     python3 herramientas/correa_a_negro.py
 
+⚠️⚠️ EL TORTUGA YA NO LO USA. Esa misma tarde Óscar mandó la pieza 48,
+que es la misma correa DIBUJADA NEGRA de origen —mismo lienzo, mismas
+tiras y mismas puntas— y con la tabla en cuatro columnas. Un dibujo negro
+de verdad siempre gana a un azul al que se le ha quitado el color: la 48
+mide 0,145 de valor medio y esto dejaba 0,266. Se queda escrito por si
+vuelve a llegar una correa en un color que no es el que se vende.
+
 Óscar, 01/09/2026: «la profesional es negra». El render de estudio que
 mandó —la pieza 47— está dibujado en azul marino, pero las tres fotos de
 la correa de verdad son negras, y la miniatura que se enseña al elegirla
