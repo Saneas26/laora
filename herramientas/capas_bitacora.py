@@ -147,12 +147,48 @@ ESFERAS = {
 # 1024x1536.
 BRAZALETES = {
     'brazalete-acero':
-        'bitacora-brazalete-acero-frontal-hueco-caja-transparente-v1.png',
+        'bitacora-brazalete-acero-frontal-hueco-caja-transparente-4k-v1.png',
     'brazalete-oro-rosa':
-        'bitacora-brazalete-oro-rosa-frontal-hueco-caja-transparente-v1.png',
+        'bitacora-brazalete-oro-rosa-frontal-hueco-caja-transparente-4k-v1.png',
     'brazalete-negro-pvd':
-        'bitacora-brazalete-negro-pvd-frontal-hueco-caja-transparente-v1.png',
+        'bitacora-brazalete-negro-pvd-frontal-hueco-caja-transparente-4k-v1.png',
 }
+# LOS 4K, Y NO POR CAPRICHO (Óscar, 01/09/2026). Con el dibujo de 1.024 el
+# brazalete se publicaba AMPLIADO: la rama mide 299 px en la entrega y 495
+# en la capa, o sea un 65 % de estirón, y se veía. El de 4.096 llega al
+# mismo sitio ENCOGIENDO, que es lo que hay que hacer siempre.
+#
+# ⚠️ SON OTRO LIENZO. El registro se mide contra el combinado, que es de
+# 1.024x1.536, así que hay que llevar la escala y el ancla de un lienzo al
+# otro. La cuenta no se estima: se midió cuadrando las dos siluetas del
+# acero, que dan IoU 0,9985 con
+#     p_1024 = p_4096 x 0,37491 + (-256, 0)
+# y de ahí salen `PASO_4K` y `SESGO_4K`. Si un día llega otra entrega a 4K,
+# se vuelve a medir; no se copia este número.
+PASO_4K = 0.37491
+SESGO_4K = (-256.0, 0.0)
+
+# ---------------------------------------------------------------- la piel
+# LA BITÁCORA SÓLO LLEVA CORREAS SUYAS (Óscar, 01/09/2026: «estas correas
+# son exclusivamente del bitácora […] el resto de correas y brazaletes al
+# bitácora no le sirven, el bitácora sólo tiene correas y brazaletes
+# exclusivos»). Y es de cajón: la caja es integrada, la correa entra por un
+# hueco con la forma del asa y ninguna de las 45 de la biblioteca —todas de
+# asas rectas de 20 mm— encaja ahí. Por eso la Bitácora nunca ha tirado de
+# `assets/img/componentes/correas/`, y por eso no debe empezar.
+ENTREGA_COR = '/Users/oscar/Documents/Codex/2026-08-29/correas-x20/outputs/'
+PIELES = {
+    'piel-azul-marino':
+        'laora-correa-bitacora-piel-especial-25mm-azul-marino.png',
+    'piel-marron-burdeos':
+        'laora-correa-bitacora-piel-especial-25mm-marron-burdeos-oro-rosa.png',
+    # ⚠️ LA NEGRA VIENE MARCADA «prueba-01». Se monta porque es la que falta
+    # para tener las tres, pero es un ensayo: antes de venderla, que Óscar
+    # confirme que ésa es la buena.
+    'piel-negra':
+        'laora-correa-bitacora-piel-especial-25mm-negra-prueba-01.png',
+}
+
 # ⚠️ SÓLO EL DE ACERO TRAE ALFA DE VERDAD. Los otros dos llegan en RGBA
 # pero con el canal entero opaco: el fondo es un damero clarísimo pintado
 # —alterna entre 254 y 247 sobre blanco—, así que publicados tal cual serían
@@ -169,7 +205,7 @@ BRAZALETES = {
 # del canto y no otra forma. El fleco blanco que deja ese canto se lo come
 # `desfleca`.
 SILUETA_BRAZALETE = ('bitacora-brazalete-acero-'
-                     'frontal-hueco-caja-transparente-v1.png')
+                     'frontal-hueco-caja-transparente-4k-v1.png')
 # ⛔ LAS AGUJAS SE FUERON el 01/09/2026, por orden de Óscar: «quita las
 # agujas». Eran las de la entrega de agosto y no acompañaban a las esferas
 # nuevas: el segundero se salía de la esfera y cruzaba el bisel, y el
@@ -495,6 +531,99 @@ def guarda(im, ident):
     return len(datos)
 
 
+def _dos_ramas(m, minimo=3000):
+    """Las dos tiras de una correa o un brazalete, sin las motas del fondo."""
+    lab, n = ndimage.label(m)
+    tam = ndimage.sum(m, lab, range(1, n + 1))
+    gr = sorted([i + 1 for i, t in enumerate(tam) if t >= minimo],
+                key=lambda i: -tam[i - 1])[:2]
+    return lab, gr
+
+
+def hueco_de_asas(mascara):
+    """Dónde y con qué ancho se mete una correa bajo la caja.
+
+    Devuelve (ancho del asa, fin de la rama de arriba, principio de la de
+    abajo, centro en x). El ancho se mide en el lado de DENTRO de la rama
+    de arriba —el que toca la caja—, saltándose las últimas cuatro filas,
+    que son la muesca y el suavizado del filo."""
+    lab, gr = _dos_ramas(mascara)
+    tapas = sorted((int(np.where(lab == i)[0].min()), i) for i in gr)
+    (_, arriba), (_, abajo) = tapas
+    fin = int(np.where(lab == arriba)[0].max())
+    ini = int(np.where(lab == abajo)[0].min())
+    ancho = 0
+    for y in range(max(0, fin - 60), max(1, fin - 4)):
+        xs = np.where(lab[y] == arriba)[0]
+        if len(xs):
+            ancho = max(ancho, int(xs.max() - xs.min() + 1))
+    return ancho, fin, ini, float(np.where(mascara)[1].mean())
+
+
+def alfa_de_piel(im):
+    """La correa de piel, recortada del papel Y DE SU SOMBRA.
+
+    La entrega de correas no viene contra damero sino contra papel blanco
+    con una sombra suave a la derecha. La sombra es lo que hay que quitar:
+    con el umbral de siempre —«más claro que 232 es fondo»— se colaban diez
+    píxeles de gris por todo el canto derecho, que en la capa publicada son
+    veintiocho y se ven como una mancha.
+
+    LA REGLA: el papel y su sombra son GRISES y CLAROS; la piel tiene color
+    (azul, burdeos) o es oscura (negra). Así que fuera todo lo que sea gris
+    —menos de 12 de diferencia entre canales— y claro —de 120 para arriba—.
+
+    ⚠️ ESTO SE COME LAS HEBILLAS DE ACERO, que son grises y claras. No
+    importa para lo que se publica: la correa se coloca escalada casi tres
+    veces y la hebilla cae MUY por encima del lienzo, así que no entra en
+    cuadro ni con el zoom más alejado. Si algún día hace falta la correa
+    entera —una miniatura como la del Lunar—, hay que recortarla de otra
+    manera. Se probó a rescatar la hebilla pidiendo que el fondo fuera
+    además LISO, y no vale: la sombra es una rampa, y una rampa tampoco es
+    lisa, así que volvía a colarse entera."""
+    a = np.asarray(im.convert('RGB')).astype(np.float32)
+    gris = (a.max(2) - a.min(2)) <= 12
+    claro = a.mean(2) >= 120
+    lab, gr = _dos_ramas(~(gris & claro))
+    return ndimage.binary_fill_holes(np.isin(lab, gr))
+
+
+def capas_de_piel(brazalete):
+    """Las correas de piel, colocadas por el hueco de las asas.
+
+    NO HAY DIBUJO DE CAJA+CORREA con el que registrarlas, que es como se
+    registra el brazalete. Pero no hace falta: la correa y el brazalete
+    entran POR EL MISMO SITIO, así que valen dos reglas y las dos se miden:
+      · el ancho del asa de la correa tiene que ser el del brazalete —495 px
+        en la capa publicada—, que es el hueco de la caja;
+      · el hueco entre sus dos ramas se centra en el eje del reloj.
+    El resto —que la correa sobresalga por arriba y por abajo del marco— sale
+    solo, porque es mucho más larga que el lienzo.
+
+    ⚠️ LA CORREA SE CENTRA EN EL EJE, no en el brazalete. El brazalete cae
+    3,5 px a la derecha del eje porque así viene dibujado; copiar ese sesgo
+    en la correa sería copiar el error de otro dibujo."""
+    ancho_b, _, _, _ = hueco_de_asas(np.asarray(brazalete)[:, :, 3] > 128)
+    largo = (ANCHO, ALTO_LARGO)
+    salida = {}
+    for ident, f in sorted(PIELES.items()):
+        im = Image.open(ENTREGA_COR + f).convert('RGB')
+        mask = alfa_de_piel(im)
+        ancho_p, fin, ini, cx = hueco_de_asas(mask)
+        s = float(ancho_b) / ancho_p
+        cy = (fin + ini) / 2.0
+        r = im.convert('RGBA')
+        r.putalpha(Image.fromarray((mask * 255).astype(np.uint8)))
+        r = desfleca(r)
+        n = r.resize((max(1, int(round(r.width * s))),
+                      max(1, int(round(r.height * s)))), Image.LANCZOS)
+        L = Image.new('RGBA', largo, (0, 0, 0, 0))
+        L.alpha_composite(n, (int(round(ANCHO / 2.0 - cx * s)),
+                              int(round(ALTO_LARGO / 2.0 - cy * s))))
+        salida[ident] = L
+    return salida
+
+
 def capas(m):
     """Devuelve {ident: imagen ya colocada en el lienzo común}."""
     salida = {}
@@ -514,9 +643,13 @@ def capas(m):
     largo = (ANCHO, ALTO_LARGO)
     eje_l = (ANCHO / 2.0, ALTO_LARGO / 2.0)
     brz = Image.fromarray(np.asarray(abre(SILUETA_BRAZALETE).convert('RGBA'))[:, :, 3])
+    # del lienzo del combinado (1.024) al de la entrega de 4K
+    esc4 = m['brazalete']['escala'] * PASO_4K
+    anc4 = ((m['brazalete']['ancla'][0] - SESGO_4K[0]) / PASO_4K,
+            (m['brazalete']['ancla'][1] - SESGO_4K[1]) / PASO_4K)
     for ident, f in BRAZALETES.items():
-        salida[ident] = coloca(con_alfa(f, mascara=brz), m['brazalete']['escala'],
-                               m['brazalete']['ancla'], largo, eje_l)
+        salida[ident] = coloca(con_alfa(f, mascara=brz), esc4, anc4, largo, eje_l)
+    salida.update(capas_de_piel(salida['brazalete-acero']))
     return salida
 
 
