@@ -51,6 +51,7 @@ HOLGURA_ESF = 1.02       # la esfera se mete un pelín bajo el bisel
 # separa lo mismo que los de las otras, y la esfera sigue metiéndose bajo
 # el bisel: 1,02 x 0,985 = 1,005 del ojo.
 AJUSTE = {'esfera-murph-crema': 0.985, 'esfera-murph-blanca': 0.985}
+CANTO_ESF = 18           # lo que se le estira el borde para que no asome el fondo
 # LAS AGUJAS NO SE COLOCAN A LA ESCALA DE LA ESFERA (Óscar, 30/08/2026:
 # «hay que reducir la imagen de las agujas, se salen de la esfera»). Y es
 # verdad: puestas a la escala de la esfera llegaban a 404 px cuando la
@@ -151,6 +152,34 @@ def buje(f):
     return mejor[1], mejor[2]
 
 
+def alarga_el_canto(capa, px=CANTO_ESF):
+    """Le estira el canto a la esfera para que llegue siempre bajo el bisel.
+
+    ⚠️ EL OJO NO ES UN CÍRCULO PERFECTO y la esfera sí, así que por algún
+    sitio se quedaba corta y entre las dos asomaba el fondo de la página:
+    una uña roja de unos 3.000 px, la peor en el titanio a las cuatro y
+    media. Pasaba ya antes de tocar nada, y al encoger el Murph se hizo más
+    grande.
+
+    No se arregla escalando —crecer para tapar el canto es volver a comerse
+    los numerales—, sino ESTIRANDO EL BORDE: se le añaden unos píxeles a la
+    silueta y se pintan con el color del píxel de esfera más cercano. El
+    canto de la esfera es un anillo de un solo color, así que lo que se
+    prolonga es ese color, no dibujo; y además acaba debajo del bisel."""
+    a = np.asarray(capa).astype(np.float32).copy()
+    m = a[:, :, 3] > 128
+    if not m.any():
+        return capa
+    gordo = ndimage.binary_dilation(m, iterations=px)
+    nuevo = gordo & ~m
+    if not nuevo.any():
+        return capa
+    _, idx = ndimage.distance_transform_edt(~m, return_distances=True, return_indices=True)
+    a[nuevo] = a[idx[0], idx[1]][nuevo]
+    a[:, :, 3][nuevo] = 255
+    return Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA')
+
+
 def pon(im, s, ancla, eje):
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
     L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
@@ -204,6 +233,7 @@ def monta():
     # da además un pelín menos —`AJUSTE`— para que sus numerales queden a la
     # misma distancia del bisel que los índices de las otras: con la
     # normalización sola se quedaban al 98,4 % del ojo, o sea rozándolo.
+    sin_canto = {}
     for ident, f in sorted(ESFERAS.items()):
         ruta = ENTREGA + f
         ce = eje_esfera(ruta)
@@ -213,9 +243,15 @@ def monta():
         print('ESFERA %-22s r=%.1f -> %.1f (escala %.4f%s)'
               % (ident, re, re * se, se,
                  ', ajustada x%.3f' % AJUSTE[ident] if ident in AJUSTE else ''))
-        capas[ident] = pon(Image.open(ruta).convert('RGBA'), se, ce, eje)
+        # ⚠️ LA PISTA SE MIDE ANTES DE ESTIRAR EL CANTO. Estirar copia hacia
+        # fuera el color del borde, y en la negra ese borde ES la pista
+        # clara: midiéndola después, la pista salía 18 px más afuera y las
+        # agujas crecían con ella hasta cruzarla.
+        plana = pon(Image.open(ruta).convert('RGBA'), se, ce, eje)
+        sin_canto[ident] = plana
+        capas[ident] = alarga_el_canto(plana)
     # la pista de minutos de la esfera, ya colocada: hasta ahí llegan las agujas
-    pista = pista_de_la_esfera(capas['esfera-negra'], eje)
+    pista = pista_de_la_esfera(sin_canto['esfera-negra'], eje)
     print('PISTA de minutos a %.1f px · las agujas mueren en %.1f' % (pista, pista * PUNTA_AGUJA))
     for ident, f in sorted(AGUJAS.items()):
         b = buje(ENTREGA + f)

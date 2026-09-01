@@ -37,15 +37,19 @@ ZOOM = 1.12
 
 # Las cuatro que vende la colección, con la referencia que lleva escrita
 # `coleccion.html` al lado para poder cotejarlas de un vistazo.
+# LAS CUATRO SON LAS DEL CARRITO DE ÓSCAR (01/09/2026: «las 4 promociones
+# del tortuga que quiero en la colección son las que tengo en el carrito»).
+# Ojo: NO son las cuatro de siempre —tres llevan cuarzo y una mineral, así
+# que hay dos a 199,90 y la landing ya no abre por los 339,90 de antes—.
 TARJETAS = {
-    'negra':    ('caucho-profesional', 'esfera-negra', 'caja-anillo-negro', 'agujas-acero',
-                 'LO-06-44-AC-NEG-NEG-ACE-ZAF-A-CAUCHO-KPRO-NEG-plata'),
-    'turquesa': ('caucho-gris', 'esfera-turquesa-champagne', 'caja-anillo-turquesa', 'agujas-acero',
-                 'LO-06-44-AC-TUR-TUC-ACE-ZAF-A-CAUCHO-KGRI-plata'),
-    'azul':     ('brazalete-cepillado', 'esfera-azul-sunburst', 'caja-anillo-azul', 'agujas-acero',
-                 'LO-06-44-AC-AZU-AZS-ACE-ZAF-A-A316-A316SAT-plata'),
-    'naranja':  ('caucho-naranja', 'esfera-negra', 'caja-anillo-naranja-grueso', 'agujas-acero',
-                 'LO-06-44-AC-NRG-NEG-ACE-ZAF-A-CAUCHO-KNAR-plata'),
+    'naranja':  ('caucho-profesional', 'esfera-negra', 'caja-anillo-naranja-grueso', 'agujas-acero',
+                 'LO-06-44-AC-NRG-NEG-ACE-MIN-Q-CAUCHO-KPRO-NEG-plata'),
+    'turquesa': ('caucho-profesional', 'esfera-turquesa-sunburst', 'caja-anillo-negro', 'agujas-acero',
+                 'LO-06-44-AC-NEG-TUS-ACE-ZAF-A-CAUCHO-KPRO-NEG-plata'),
+    'champan':  ('caucho-naranja', 'esfera-turquesa-champagne', 'caja-anillo-turquesa', 'agujas-acero',
+                 'LO-06-44-AC-TUR-TUC-ACE-ZAF-Q-CAUCHO-KNAR-plata'),
+    'acero':    ('brazalete-cepillado', 'esfera-negra', 'caja-anillo-negro', 'agujas-acero',
+                 'LO-06-44-AC-NEG-NEG-ACE-ZAF-Q-A316-A316SAT-plata'),
 }
 
 
