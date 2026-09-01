@@ -217,61 +217,61 @@
     "tamano": {
       "44": {
         "nombre": "44 mm",
-        "expl": "Caja de 44 mm, la medida del reloj de buceo.",
+        "expl": "Caja de 44 mm con la corona a las 3,8, apartada del dorso de la mano: no se clava al doblar la muñeca.",
         "coste": 0
       }
     },
     "caja": {
       "AC": {
         "nombre": "Acero 316L",
-        "expl": "Acero inoxidable 316L cepillado, con bisel giratorio de buceo.",
+        "expl": "Acero inoxidable 316L, el de grado quirúrgico: lleva molibdeno, así que aguanta el sudor y el agua salada sin picarse. Cepillado en los flancos y pulido en los cantos.",
         "coste": 32.39
       }
     },
     "bisel": {
       "NRG": {
         "nombre": "Naranja",
-        "expl": "Anillo de minutos en naranja, bajo el cristal.",
+        "expl": "Anillo de minutos en naranja, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "PLA": {
         "nombre": "Plata",
-        "expl": "Anillo de minutos en plata, bajo el cristal.",
+        "expl": "Anillo de minutos en plata, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "AZU": {
         "nombre": "Azul",
-        "expl": "Anillo de minutos en azul, bajo el cristal.",
+        "expl": "Anillo de minutos en azul, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "VER": {
         "nombre": "Verde",
-        "expl": "Anillo de minutos en verde, bajo el cristal.",
+        "expl": "Anillo de minutos en verde, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "NEG": {
         "nombre": "Negro",
-        "expl": "Anillo de minutos en negro, bajo el cristal.",
+        "expl": "Anillo de minutos en negro, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "OLI": {
         "nombre": "Oliva",
-        "expl": "Anillo de minutos en oliva, bajo el cristal.",
+        "expl": "Anillo de minutos en oliva, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "BUR": {
         "nombre": "Burdeos",
-        "expl": "Anillo de minutos en burdeos, bajo el cristal.",
+        "expl": "Anillo de minutos en burdeos, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "TUR": {
         "nombre": "Turquesa",
-        "expl": "Anillo de minutos en turquesa, bajo el cristal.",
+        "expl": "Anillo de minutos en turquesa, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       },
       "ACE": {
         "nombre": "Acero",
-        "expl": "Anillo de minutos en acero, bajo el cristal.",
+        "expl": "Anillo de minutos en acero, bajo el cristal. El bisel de buceo no se elige: es siempre negro, gira en un solo sentido y con seguridad, para que una inmersión no se pueda alargar por error. Lo que se elige es este anillo interior.",
         "coste": 0
       }
     },
@@ -312,10 +312,12 @@
     "agujas": {
       "ACE": {
         "nombre": "Acero inoxidable",
+        "expl": "Agujas de acero inoxidable pulido, con lumen en las tres. El segundero también lo lleva, como manda un reloj de buceo: bajo el agua es la aguja que dice si el reloj sigue andando.",
         "coste": 5.59
       },
       "GRI": {
         "nombre": "Gris oscuro",
+        "expl": "Agujas de acero en gris oscuro, con lumen en las tres. El segundero también lo lleva, como manda un reloj de buceo: bajo el agua es la aguja que dice si el reloj sigue andando.",
         "coste": 5.59
       }
     },
@@ -513,12 +515,41 @@
     return "20 ATM / 200 metros";
   }
 
-  /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
-     técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
-     lo que decía antes: nada. */
+  /* ---------- LA FICHA TÉCNICA ----------
+     Por defecto dice lo que el cliente lleva puesto, que es más de lo que
+     decía antes: nada. Pero un modelo puede escribir la suya en el JSON,
+     en `tecnica`, y entonces manda ella.
+
+     Óscar, 01/09/2026, sobre el Tortuga: «Automático japonés · Caucho ·
+     Negra · Clásica plata: esto no va en el apartado de caja». Tenía razón:
+     el apartado se llama «Caja y materiales» y le estábamos metiendo la
+     configuración entera, movimiento y correa incluidos.
+
+     Cada entrada puede ser un texto o una TABLA por paso —`{"A": "…",
+     "Q": "…"}`—, para que el movimiento se explique según cuál se elija.
+     Dentro del texto, `{esf}`, `{caja}`… se cambian por el nombre de lo
+     elegido en ese paso. */
+  var TECNICA = {
+  "caja": "Caja de cojín de 44 mm en acero inoxidable 316L, con la corona a las 3,8 —apartada del dorso de la mano, no se clava al doblar la muñeca— y bisel giratorio de buceo, unidireccional y con seguridad. Dentro, el anillo de minutos {bisel} bajo el cristal. El 316L es el acero de grado quirúrgico: lleva molibdeno, y eso es lo que le hace aguantar el sudor y el agua salada sin picarse ni oxidarse, además de liberar muy poco níquel. Cepillado en los flancos y pulido en los cantos. Cristal {cristal} y fondo roscado.",
+  "mov": {
+    "A": "Calibre laOra LO_A4126D, automático de fabricación japonesa: la misma arquitectura que mueve al Seiko 5 Sports, uno de los automáticos más vendidos del mundo y el patrón por el que se mide un automático fiable a este precio. Veinticuatro rubíes, 21.600 alternancias por hora, 41 horas de reserva de marcha, día y fecha a las 3 —el disco del día en español y en inglés—, cuerda manual, parada de segundero y rotor bidireccional. Sistema antichoque en el volante. Se pone en hora sin trucos y lo repara cualquier relojero.",
+    "Q": "Calibre laOra LO_Q3626D, cuarzo de fabricación japonesa, de la familia que mueve media relojería del mundo. Precisión de ±20 segundos al mes —un automático anda a ±20 al día—, día y fecha a las 3 con el disco del día en español y en inglés, tres agujas con parada de segundero y pila de unos 3 años. Sin cuerda, sin ponerlo en hora cada semana: se pone y anda."
+  },
+  "esf": "Esfera {esf} con índices aplicados y agujas en {agujas}, todo en súper lumen C3 japonés: es el que más brilla y más aguanta, se carga con cualquier luz y se lee toda la noche. El segundero también lo lleva, que es lo que distingue a un reloj de buceo de verdad: bajo el agua es la aguja que dice si el reloj sigue andando."
+};
+  function deTecnica(k, porDefecto) {
+    var v = TECNICA[k];
+    if (v && typeof v === 'object') v = v[e[k]] || v['*'];
+    if (!v) return porDefecto;
+    return v.replace(/\{(\w+)\}/g, function (_, g) {
+      return (nombreDe(g) || '').toLowerCase();
+    });
+  }
   function tecnica(e) {
-    return { caja: detalle(e) + '.', mov: nombreDe('mov'),
-             esf: nombreDe('esf'), agua: agua(e) };
+    return { caja: deTecnica('caja', detalle(e) + '.'),
+             mov: deTecnica('mov', nombreDe('mov')),
+             esf: deTecnica('esf', nombreDe('esf')),
+             agua: deTecnica('agua', agua(e)) };
   }
 
   window.LAORA_MODELO = {
@@ -574,7 +605,7 @@
       "KNAR": "caucho-naranja",
       "BRZ": "brazalete-acero"
     }
-  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=9",
+  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=10",
     PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "bisel", "grupo": "bisel", "espera": "bisel", "sustituye": "caja"}, {"capa": "agujas", "grupo": "agujas", "espera": "agujas", "necesita": "esf"}],
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta

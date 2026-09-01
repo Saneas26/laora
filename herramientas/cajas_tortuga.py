@@ -211,6 +211,57 @@ def ojo_de(al):
     return (cx, cy), float(np.hypot(xs - cx, ys - cy).max())
 
 
+def cuerpo_de(al):
+    """El centro del CUERPO dibujado de la caja, relleno de agujeros.
+
+    No vale el ojo: el ojo es una ventana redonda recortada en el centro
+    del lienzo, igual en las diez, mientras que el DIBUJO cae donde cae."""
+    lleno = ndimage.binary_fill_holes(al > SOLIDO)
+    ys, xs = np.where(lleno)
+    return ((float(xs.min() + xs.max()) / 2.0), (float(ys.min() + ys.max()) / 2.0))
+
+
+def redondea_el_ojo(a, centro, hasta):
+    """Deja la ventana del aro como un círculo centrado en el eje, SIN ADELGAZARLO.
+
+    Al mover el dibujo, su ventana —que venía clavada en el eje— se va con
+    él y queda descentrada: por un lado se comería el aro y por el otro
+    asomaría el filo viejo.
+
+    ⚠️ Y NO VALE RECORTAR UN CÍRCULO GRANDE que se lleve el mordisco: en la
+    turquesa y la burdeos eso dejaba el aro en un hilo, tres veces más fino
+    que antes. Lo que se hace es DEVOLVERLE el trozo que la ventana vieja se
+    había comido —se rellena con el color que tiene justo al lado, que es el
+    del propio aro— y después se recorta la ventana buena, un pelo por
+    dentro de donde llega la esfera para que ella tape la juntura.
+
+    Lo único que se pierde son las rayitas de la escala en el trozo
+    reconstruido, y esas ya se las había comido la ventana vieja."""
+    al = a[:, :, 3] > SOLIDO
+    hueco = ndimage.binary_fill_holes(al) & ~al
+    lab, n = ndimage.label(hueco)
+    if not n:
+        return a, 0.0
+    t = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
+    m = lab == 1 + int(np.argmax(t))
+    ys, xs = np.where(m)
+    r = float(np.hypot(xs - centro[0], ys - centro[1]).max())
+    yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    d = np.hypot(xx - centro[0], yy - centro[1])
+    b = a.copy()
+    falta = m & (d <= r)
+    if falta.any():
+        cerca = ndimage.distance_transform_edt(falta, return_distances=False,
+                                               return_indices=True)
+        relleno = b[cerca[0], cerca[1]]
+        suave = np.dstack([ndimage.gaussian_filter(relleno[:, :, c], 6)
+                           for c in range(4)])
+        b[falta] = suave[falta]
+        b[:, :, 3][falta] = 255
+    b[d <= hasta] = 0
+    return b, hasta
+
+
 def corre(a, dx, dy):
     """Mueve el dibujo entero, sin salirse del lienzo."""
     im = Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA')
@@ -374,6 +425,10 @@ def prepara(mira=False):
     caja, medido, dx = cierra_las_astas(a, objetivo)
     ahora, centro = hueco(caja[:, :, 3])
     ojo_c, ojo_r = ojo_de(caja[:, :, 3])
+    cuerpo_patron = cuerpo_de(caja[:, :, 3])
+    # LA VENTANA DEL ARO, un pelo por dentro de donde llega la esfera, para
+    # que sea ella la que tape la juntura (la esfera mide 978 px de radio).
+    ventana = 968.0
     Image.fromarray(np.clip(caja, 0, 255).astype('uint8'), 'RGBA').save(
         os.path.join(DESTINO, PATRON))
     print('%-56s astas %4d -> %4d px (%.2f mm) centradas en %.1f · ojo en '
@@ -390,15 +445,26 @@ def prepara(mira=False):
             aviso = ' · venía sobre FONDO NEGRO, recortado'
         antes_an = ancho_en_el_eje(b[:, :, 3])
         b, s = al_patron(b, ancho_patron)
-        c, r = ojo_de(b[:, :, 3])
-        b = corre(b, ojo_c[0] - c[0], ojo_c[1] - c[1])   # su ojo, sobre el del patrón
+        # ⚠️ SE CUADRA POR EL CUERPO DIBUJADO, NO POR LA VENTANA (Óscar,
+        # 01/09/2026: «naranja, plata y azul están bien colocados, el resto
+        # de los anillos hay que cuadrarlos al centro, todos los demás se
+        # caen hacia el sur»).
+        #
+        # Y tenía razón con números: la ventana redonda del centro viene
+        # clavada en el eje en las diez —círculo de 1.000 px, desviación de
+        # 0,3—, pero EL DIBUJO cae más abajo, hasta 92 px en la turquesa.
+        # Cuadrando por la ventana, el aro quedaba fino arriba y gordo
+        # abajo. Se cuadra por el cuerpo y la ventana se vuelve a recortar.
+        cu = cuerpo_de(b[:, :, 3])
+        b = corre(b, cuerpo_patron[0] - cu[0], cuerpo_patron[1] - cu[1])
+        b, r = redondea_el_ojo(b, ojo_c, ventana)
         junta = dentro_del_ojo(b, caja, ojo_c, ojo_r)
         Image.fromarray(np.clip(junta, 0, 255).astype('uint8'), 'RGBA').save(
             os.path.join(DESTINO, f))
-        print('%-56s aro r %4.0f -> %4.0f · caja %4d -> %4d px (x%.4f) · '
-              'movido %+5.1f,%+5.1f para cuadrar el ojo%s'
-              % (f, r, ojo_r, antes_an, ancho_patron, s,
-                 ojo_c[0] - c[0], ojo_c[1] - c[1], aviso))
+        print('%-56s caja %4d -> %4d px (x%.4f) · movido %+5.1f,%+5.1f para '
+              'cuadrar el cuerpo · ventana redonda a r %4.0f%s'
+              % (f, antes_an, ancho_patron, s,
+                 cuerpo_patron[0] - cu[0], cuerpo_patron[1] - cu[1], r, aviso))
     print('\nescritas en %s' % DESTINO)
 
 

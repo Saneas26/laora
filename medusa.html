@@ -326,12 +326,34 @@
     return "";
   }
 
-  /* La ficha técnica, con lo elegido en cada paso. Mientras no haya textos
-     técnicos de verdad, dice lo que el cliente lleva puesto, que es más de
-     lo que decía antes: nada. */
+  /* ---------- LA FICHA TÉCNICA ----------
+     Por defecto dice lo que el cliente lleva puesto, que es más de lo que
+     decía antes: nada. Pero un modelo puede escribir la suya en el JSON,
+     en `tecnica`, y entonces manda ella.
+
+     Óscar, 01/09/2026, sobre el Tortuga: «Automático japonés · Caucho ·
+     Negra · Clásica plata: esto no va en el apartado de caja». Tenía razón:
+     el apartado se llama «Caja y materiales» y le estábamos metiendo la
+     configuración entera, movimiento y correa incluidos.
+
+     Cada entrada puede ser un texto o una TABLA por paso —`{"A": "…",
+     "Q": "…"}`—, para que el movimiento se explique según cuál se elija.
+     Dentro del texto, `{esf}`, `{caja}`… se cambian por el nombre de lo
+     elegido en ese paso. */
+  var TECNICA = {};
+  function deTecnica(k, porDefecto) {
+    var v = TECNICA[k];
+    if (v && typeof v === 'object') v = v[e[k]] || v['*'];
+    if (!v) return porDefecto;
+    return v.replace(/\{(\w+)\}/g, function (_, g) {
+      return (nombreDe(g) || '').toLowerCase();
+    });
+  }
   function tecnica(e) {
-    return { caja: detalle(e) + '.', mov: nombreDe('mov'),
-             esf: nombreDe('esf'), agua: agua(e) };
+    return { caja: deTecnica('caja', detalle(e) + '.'),
+             mov: deTecnica('mov', nombreDe('mov')),
+             esf: deTecnica('esf', nombreDe('esf')),
+             agua: deTecnica('agua', agua(e)) };
   }
 
   window.LAORA_MODELO = {
