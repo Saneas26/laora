@@ -49,6 +49,9 @@ from PIL import Image
 from scipy import ndimage
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
+from tarjeta_de_capas import ESCALA, apila                      # noqa: E402
+
 ENTREGA = ('/Users/oscar/Documents/Codex/2026-08-29/'
            'bitacora-eres-el-dise-ador-grafico/outputs/')
 DESTINO = os.path.join(RAIZ, 'assets/img/bitacora-2026/capas/1200')
@@ -475,14 +478,21 @@ def capas(m):
 
 
 def arma(cs, caja, esfera, brazalete):
-    """El reloj entero sobre el gris del marco, como lo pinta el navegador."""
-    L = Image.new('RGBA', (ANCHO, ANCHO), FONDO + (255,))
-    b = cs[brazalete]
-    L.alpha_composite(b.crop((0, (ALTO_LARGO - ANCHO) // 2,
-                              ANCHO, (ALTO_LARGO + ANCHO) // 2)))
-    for c in ([esfera, caja, 'agujas'] if CON_AGUJAS else [esfera, caja]):
-        L.alpha_composite(cs[c])
-    return L.convert('RGB')
+    """El reloj entero sobre el gris del marco, como lo pinta el navegador.
+
+    ALEJADO, como todo en la casa desde el 01/09/2026 («el reloj debe
+    presentarse siempre más alejado con más correa o brazalete»): el mismo
+    0,72 de `tarjeta_de_capas.ESCALA` y de `configurador-2026.css`. Antes se
+    recortaba el brazalete por el centro; ahora se encoge todo alrededor del
+    centro del marco, que es lo que hace el navegador.
+
+    ⚠️ EL BRAZALETE DE LA BITÁCORA ES MÁS ALTO QUE 1/0,72 —1.952 sobre
+    1.200, o sea 1,63 contra 1,39—, así que al 72 % sigue saliéndose del
+    marco por arriba y por abajo. No es un fallo: se ve más tira que antes
+    y sigue llegando a los bordes, que es lo que se buscaba.
+    """
+    orden = [brazalete, esfera, caja] + (['agujas'] if CON_AGUJAS else [])
+    return apila([cs[c] for c in orden], ANCHO, FONDO, ESCALA).convert('RGB')
 
 
 def combinaciones():
@@ -524,14 +534,8 @@ def hoja_de_control(cs, destino):
              ('caja-negro-pvd', 'esfera-negra', 'brazalete-negro-pvd')]
     hoja = Image.new('RGB', (ANCHO * len(tiros), ANCHO), (233, 233, 231))
     for i, (caja, esf, brz) in enumerate(tiros):
-        L = Image.new('RGBA', (ANCHO, ANCHO), (233, 233, 231, 255))
-        # el brazalete es alto: se recorta por el centro, como hace el marco
-        b = cs[brz]
-        L.alpha_composite(b.crop((0, (ALTO_LARGO - ANCHO) // 2,
-                                  ANCHO, (ALTO_LARGO + ANCHO) // 2)))
-        for c in ([esf, caja, 'agujas'] if CON_AGUJAS else [esf, caja]):
-            L.alpha_composite(cs[c])
-        hoja.paste(L.convert('RGB'), (i * ANCHO, 0))
+        # el mismo encuadre alejado de la tarjeta: se mira lo que se publica
+        hoja.paste(arma(cs, caja, esf, brz), (i * ANCHO, 0))
     hoja.resize((hoja.width // 3, hoja.height // 3)).save(destino)
 
 

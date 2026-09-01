@@ -398,22 +398,35 @@
     position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
   }
   .pv-capas img[hidden]{ display:none }
-  /* ---------- LA CÁMARA SE ALEJA Y SALE LA MINIATURA ----------
-     Óscar, 28/08/2026: «retomo la opción de alejar el zoom y en la parte
-     inferior izquierda colocas una miniatura».
+  /* ---------- LA CÁMARA NACE ALEJADA ----------
+     Óscar, 01/09/2026: «hay que hacer un esfuerzo por mostrar la foto con
+     el zoom alejado, que se vea más correa […]. Lo no habitual es hacer
+     zoom para ver el detalle mejor de la esfera, pero el reloj debe
+     presentarse SIEMPRE más alejado con más correa o brazalete».
 
-     LO QUE FALTABA ERA LA MINIATURA, no el zoom. El alejarse solo no
-     enseñaba más correa —las capas acaban en el borde del lienzo, no hay
-     más tira que sacar— y encima dejaba su corte a la vista dentro del
-     marco. Con la foto del proveedor abajo a la izquierda sí se ve la
-     correa entera, suelta y con su cierre, y el alejarse pasa a ser lo que
-     le hace sitio.
+     ASÍ QUE SE DA LA VUELTA A LO DE AGOSTO. Hasta hoy el visor nacía en
+     primer plano y sólo se alejaba al llegar a la tarjeta de la correa;
+     desde hoy nace alejado y el primer plano es la excepción —la esfera—.
+     Un reloj se enseña entero, con su correa: en primer plano se enseña
+     una caja.
+
+     EL 72 % NO ES UN GUSTO, ES EL LÍMITE DEL DIBUJO. La correa se publica
+     en un lienzo de 4.096 x 5.688, que es 4.096 ÷ 0,72: al 72 % cabe
+     entera y llega justa a los cuatro bordes del marco. Alejarse más
+     dejaría su corte flotando dentro del marco, que es peor que no
+     alejarse. Para alejarse más hay que dibujar la correa más larga.
 
      SE ENCOGEN LAS IMÁGENES, NO SU CAJA. `.pv-capas` lleva el gris del
      fondo, y encogiéndola a ella se vería el borde del gris recortado sobre
      el blanco, porque `.pv-hero-llena` se queda sin fondo. */
-  .pv-capas img{ transition:transform .4s cubic-bezier(.2,.6,.2,1) }
-  .pv-capas-lejos img{ transform:scale(.72) }
+  .pv-capas img{
+    transition:transform .4s cubic-bezier(.2,.6,.2,1);
+    transform:scale(.72);
+  }
+  /* LA EXCEPCIÓN, Y SÓLO ELLA: mientras el cliente está eligiendo esfera,
+     la cámara se acerca para que se vean los índices y el rótulo. La pone
+     el motor mirando dónde cae el paso `esf`. */
+  .pv-capas-cerca img{ transform:none }
   /* ---------- LA CORREA LARGA (29/08/2026) ----------
      Óscar, tras días detrás del efecto: «cuando la imagen está en primer
      plano se ve una cantidad de correa, pero al alejarse se puede ver
@@ -422,9 +435,9 @@
      El aviso de arriba —«no hay más tira que sacar»— dejó de ser verdad
      hoy: la correa del formato nuevo se publica en un lienzo ALTO
      (4096 x 5688, que es 4096 ÷ 0,72). La capa se coloca por su CENTRO,
-     que trae el mismo descentrado del eje que el cuadrado: en primer
-     plano el marco la recorta y se ve la franja de siempre; al alejarse
-     al 72 % cabe entera, justa en el marco. Como todas las capas escalan
+     que trae el mismo descentrado del eje que el cuadrado: al 72 % —que
+     es como se presenta— cabe entera y justa en el marco, y al acercarse
+     a la esfera el marco la recorta. Como todas las capas escalan
      alrededor del centro del marco, la correa y la caja no se
      desalinean ni un píxel durante el viaje.
 
@@ -432,9 +445,9 @@
      alta que ancha: una correa cuadrada de las de antes ni se entera. */
   .pv-capas img.pv-capa-larga{
     height:auto; top:50%; bottom:auto;
-    transform:translateY(-50%);
+    transform:translateY(-50%) scale(.72);
   }
-  .pv-capas-lejos img.pv-capa-larga{ transform:translateY(-50%) scale(.72) }
+  .pv-capas-cerca img.pv-capa-larga{ transform:translateY(-50%) }
   /* ⚠️ EL SELECTOR VA CON `.pv-hero img.` DELANTE. La hoja compartida trae
      `.pv-hero-llena img{width:100%;height:100%;object-fit:cover}`, que pesa
      más que una clase sola: con `.pv-mini-correa` a secas la miniatura

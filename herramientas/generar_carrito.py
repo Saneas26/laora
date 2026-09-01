@@ -44,7 +44,7 @@ from cabecera_laora import RECURSOS as CAB_RECURSOS, SCRIPT as CAB_SCRIPT, marca
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-V_CSS = 12
+V_CSS = 15
 V_JS = 11
 
 V2 = '/assets/img/lunar-v2'

@@ -1584,21 +1584,39 @@
     return n > 1 ? { mm: mm, otras: otras } : { mm: mm };
   }
 
-  /* ---------- LA CÁMARA SE ALEJA EN LA CORREA ----------
-     Manda la TARJETA entera, no el paso: los dos pasos de la correa —el
-     material y el color— viven en ella, y el color se esconde con el
-     brazalete puesto, así que mirar la tarjeta es lo único que vale para
-     los dos casos. Se considera que se ha llegado cuando ocupa la franja
-     de en medio de la pantalla. */
+  /* ---------- LA CÁMARA NACE ALEJADA Y SÓLO SE ACERCA EN LA ESFERA ----------
+     Óscar, 01/09/2026: «el reloj debe presentarse SIEMPRE más alejado con
+     más correa o brazalete; lo no habitual es hacer zoom para ver el
+     detalle mejor de la esfera».
+
+     ASÍ QUE ESTO YA NO ALEJA, ACERCA. El alejarse lo hace la hoja de
+     estilos y no se pregunta a nadie: es como se presenta el reloj. Lo
+     único que se mira aquí es si el cliente está en el paso de la esfera,
+     que es la excepción que él nombró.
+
+     ⚠️ SE MIRA EL PASO `esf`, NO SU TARJETA. La esfera vive en la tarjeta
+     «La caja» junto con el tamaño, el material, el bisel, las agujas y el
+     cristal: con la tarjeta entera el reloj estaría en primer plano
+     durante media página, que es justo lo que se ha venido a quitar.
+     Y se mira `offsetParent` porque un paso sin opciones va con `hidden`:
+     un rectángulo de ceros cae dentro de cualquier franja.
+
+     LAS MINIATURAS SIGUEN COLGANDO DE LA TARJETA DE LA CORREA, que para
+     ellas sí manda: los dos pasos —material y color— viven en ella y el
+     color se esconde con el brazalete puesto. */
+  function enLaFranja(el) {
+    if (!el || !el.offsetParent) return false;
+    var r = el.getBoundingClientRect();
+    return r.top < window.innerHeight * 0.60 &&
+           r.bottom > window.innerHeight * 0.15;
+  }
   function repasaVisor() {
-    var t = document.querySelector('[data-pv-tarjeta="correa"]');
-    if (!t) return;
-    var r = t.getBoundingClientRect();
-    var enJuego = r.top < window.innerHeight * 0.60 &&
-                  r.bottom > window.innerHeight * 0.15;
     var capas = $('[data-pv-capas]');
-    if (capas) capas.classList.toggle('pv-capas-lejos', enJuego && CAPAS);
-    pintaMinis(enJuego);
+    if (capas)
+      capas.classList.toggle('pv-capas-cerca',
+                             CAPAS && enLaFranja($('[data-g="esf"]')));
+    var t = document.querySelector('[data-pv-tarjeta="correa"]');
+    if (t) pintaMinis(enLaFranja(t));
   }
 
   /* LAS MINIATURAS DE LA CORREA. Se rehacen sólo cuando cambia la lista:

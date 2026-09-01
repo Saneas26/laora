@@ -55,14 +55,14 @@ sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
 V_CSS_PRODUCTO = 42
-V_CSS_COLECCION = 49
-V_CSS_CONFIG = 4
+V_CSS_COLECCION = 50
+V_CSS_CONFIG = 5
 # EL MOTOR DEL CONFIGURADOR. Cloudflare lo guarda 4 h por su nombre, así que
 # cambiarlo SIN subir este número no le llega a nadie: la ficha nueva sigue
 # funcionando con el motor de anteayer. Se sube cada vez que se toca
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
-V_JS_CONFIG = 17
+V_JS_CONFIG = 18
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 

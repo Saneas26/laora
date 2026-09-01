@@ -15,9 +15,9 @@ import io as _io
 import os
 import sys
 
-from PIL import Image
-
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
+from tarjeta_de_capas import ESCALA, apila                     # noqa: E402
 CAPAS = os.path.join(RAIZ, 'assets/img/trinchera-2026/capas/1200')
 CORREAS = os.path.join(RAIZ, 'assets/img/componentes/correas/1200')
 DESTINO = os.path.join(RAIZ, 'assets/img/trinchera-2026/tarjetas')
@@ -45,16 +45,10 @@ def pieza(nombre):
     return f if os.path.exists(f) else os.path.join(CORREAS, nombre + '.avif')
 
 
-def arma(capas):
-    L = Image.new('RGBA', (LADO, LADO), FONDO + (255,))
-    for c in capas:
-        im = Image.open(pieza(c)).convert('RGBA')
-        w, h = im.size
-        if w != LADO:
-            im = im.resize((LADO, round(h * LADO / w)), Image.LANCZOS)
-            w, h = im.size
-        L.alpha_composite(im, (0, (LADO - h) // 2))
-    return L.convert('RGB')
+def arma(capas, escala=ESCALA):
+    """El mismo encuadre que el configurador: alejado, con la correa entera
+    (Óscar, 01/09/2026). Ver `tarjeta_de_capas.apila`."""
+    return apila([pieza(c) for c in capas], LADO, FONDO, escala).convert('RGB')
 
 
 def main():
