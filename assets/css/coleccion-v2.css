@@ -629,10 +629,14 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-modelos div{padding:0 20px;gap:20px}
   .cv2-modelo{padding:48px 20px 40px}
   .cv2-lienzo{margin:-48px -20px 0;padding:48px 20px 36px;background-position:60% 28%}
-  /* La tortuga, en el teléfono, más grande y más apagada: el texto pasa a
-     ocupar el ancho entero y a 30% no se vería, pero a plena opacidad se
-     comería el «Tortuga» del título. */
-  .cv2-fauna{width:52%;opacity:.42}
+  /* La tortuga, del móvil para abajo. Aquí el texto pasa a ocupar el ancho
+     entero y el párrafo de presentación sube hasta la altura del bicho, así
+     que el tamaño no se elige a ojo: es el mayor que NO se mete debajo del
+     texto. Medido a 820, 768, 640, 560 y 430 px: a 820 sólo cabe el 36 %; de
+     560 para abajo el párrafo ya baja lo suficiente y cabe el 52 %.
+     Y apagada, que va por detrás y no debe pelearse con lo que hay que leer
+     —ver [legibilidad por encima de todo]—. */
+  .cv2-fauna{width:36%;opacity:.5}
   /* En el teléfono el texto ocupa el ancho entero, así que el velo se
      cierra arriba —donde cae— y se abre abajo, que es donde las cajas
      traen su propio fondo y la foto puede respirar. */
@@ -676,6 +680,10 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-confianza{grid-template-columns:1fr}
   .cv2-pendiente article{flex-wrap:wrap;gap:8px 18px}
 }
+@media (max-width:560px){
+  .cv2-fauna{width:52%;opacity:.42}
+}
+
 /* En el teléfono las fichas se deslizan de lado (Óscar, 14/08/2026):
    una tira horizontal con parada tarjeta a tarjeta, en vez de apilarse
    en una columna que no acaba nunca. */
