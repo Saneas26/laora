@@ -11,8 +11,8 @@ ficha todavía figura como **no listo** y sin código asignado.
 
 | Calibre de la casa | Movimiento | Coste | Proveedor |
 |---|---|--:|---|
-| **LO_A4126** · Automático japonés | NH36 | **65,00 €** | [1005012173045057](https://es.aliexpress.com/item/1005012173045057.html) |
-| **LO_Q3626** · Cuarzo japonés | Miyota 2105 | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
+| **LO_A4126D** · Automático japonés | NH36 | **65,00 €** | [1005012173045057](https://es.aliexpress.com/item/1005012173045057.html) |
+| **LO_Q3626D** · Cuarzo japonés | Miyota 2105 | **9,00 €** | [1005012042078891](https://es.aliexpress.com/item/1005012042078891.html) |
 
 Óscar, 31/08/2026. **Se escriben con guion bajo**, como los demás de la casa
 —`LO_Q6026`, `LO_A4026`, `LO_MQ326`—: dos maneras de llamar a la misma pieza en
@@ -52,8 +52,8 @@ en serie, no antes.
 **134 € de precio**. Es el salto más grande de la casa: el mismo Tortuga sale a
 169,90 € en cuarzo y a 289,90 € en automático.
 
-De cara al cliente van como **«Calibre laOra LO_A4126»** y **«Calibre laOra
-LO_Q3626»**, con su arquitectura japonesa y sin nombrar al fabricante.
+De cara al cliente van como **«Calibre laOra LO_A4126D»** y **«Calibre laOra
+LO_Q3626D»**, con su arquitectura japonesa y sin nombrar al fabricante.
 
 ## Agujas — 5,59 € · súper lumen C3
 
