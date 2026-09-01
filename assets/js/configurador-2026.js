@@ -67,6 +67,12 @@
       MINI_PASO = M.MINI_PASO || 'correa',
       MINI_LADO = M.MINI_LADO || 'izquierda',
       MINI_SUELTA = !!M.MINI_SUELTA,
+      /* Y CON QUÉ PUESTO SE ENSEÑA. La puerta del paso no siempre basta: el
+         Trinchera cuelga la miniatura del CIERRE, y el cierre lo tienen tres
+         familias de correa, pero Óscar la pidió sólo para la piel italiana
+         (01/09/2026). `MINI_CUANDO` es un «esto tiene que valer esto» por
+         cada paso; sin él, se enseña siempre que la puerta esté abierta. */
+      MINI_CUANDO = M.MINI_CUANDO || {},
       PAQUETES = M.PAQUETES || [], AGUJAS_LIBRES = M.AGUJAS_LIBRES,
       COSTES_PUESTOS = !!M.COSTES_PUESTOS, CADENA = M.CADENA || [];
   var e = M.e;
@@ -1632,6 +1638,11 @@
      mientras vuelve a bajar, y aquí eso sería un parpadeo por cada
      pulsación en el paso del color. */
   var MINIS_PUESTAS = '';
+  /* ¿Se dan las condiciones que pide el modelo para enseñar la miniatura? */
+  function miniPide() {
+    for (var k in MINI_CUANDO) if (e[k] !== MINI_CUANDO[k]) return false;
+    return true;
+  }
   function pintaMinis(enJuego) {
     var caja = $('[data-pv-pila-correa]');
     if (!caja) return;
@@ -1639,7 +1650,7 @@
        todos los pasos, también para los que no salen: sin mirar la puerta,
        la foto de los pasadores se le aparecía a quien eligiera cualquier
        otra correa. */
-    var lista = (abierta(MINI_PASO) && MINI[e[MINI_PASO]]) || [];
+    var lista = (abierta(MINI_PASO) && miniPide() && MINI[e[MINI_PASO]]) || [];
     caja.hidden = !lista.length;
     caja.classList.toggle('pv-pila-derecha', MINI_LADO === 'derecha');
     var firma = lista.join('|');

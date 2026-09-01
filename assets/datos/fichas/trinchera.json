@@ -702,5 +702,39 @@
   ]
  },
  "_cribas": "LO QUE SE CAE DE UN PASO PORQUE OTRO VALE TAL COSA. Un FILTRO dice de quien cuelga un paso -el color de la correa cuelga del material-; una CRIBA quita opciones. Aqui: con esfera Murph (esftipo M) no salen ni CAUCHO ni NATO. No se hace con `vetos` porque un veto es una combinacion entera: habria que escribir una linea por cada caja, cada color de caucho, cada nato y cada cierre -cientos-, y a la primera correa nueva se quedaria corto. La reparacion la hace `normaliza()`: quien tenga un caucho puesto y se pase al Murph se encuentra la correa cambiada.",
- "_correa_orden": "EL ORDEN DE LOS COLORES ES EL ORDEN DE LOS BOTONES Y, SOBRE TODO, EL DEFECTO: al elegir una familia el motor se queda con el primero que valga. Oscar, 01/09/2026: «en el trinchera los colores de piel italiana debe empezar por defecto por negro, despues marron», asi que la PITA va INEG, IMAR, IAZU, IVER. Solo se toco la piel italiana, que es la que nombro. OJO: la piel vintage (PVIN) empieza por azul petroleo y la de costura lateral (PCOS) por conac, con la negra la ultima de las dos; si hay que hacer lo mismo con ellas, lo dice el."
+ "_correa_orden": "EL ORDEN DE LOS COLORES ES EL ORDEN DE LOS BOTONES Y, SOBRE TODO, EL DEFECTO: al elegir una familia el motor se queda con el primero que valga. Oscar, 01/09/2026: «en el trinchera los colores de piel italiana debe empezar por defecto por negro, despues marron», asi que la PITA va INEG, IMAR, IAZU, IVER. Solo se toco la piel italiana, que es la que nombro. OJO: la piel vintage (PVIN) empieza por azul petroleo y la de costura lateral (PCOS) por conac, con la negra la ultima de las dos; si hay que hacer lo mismo con ellas, lo dice el.",
+ "miniatura": {
+  "img": "/assets/img/trinchera-2026/miniaturas/",
+  "paso": "cierre",
+  "cuando": {
+   "correamat": "PITA"
+  },
+  "lado": "derecha",
+  "suelta": true,
+  "fotos": {
+   "mariposa": [
+    "cierre-mariposa"
+   ],
+   "oro": [
+    "cierre-clasica-oro"
+   ],
+   "plata": [
+    "cierre-clasica-plata"
+   ],
+   "oro-rosa": [
+    "cierre-clasica-oro-rosa"
+   ],
+   "negra": [
+    "cierre-clasica-negra"
+   ]
+  },
+  "alt": {
+   "cierre-mariposa": "Cierre de mariposa de acero",
+   "cierre-clasica-oro": "Hebilla clásica dorada",
+   "cierre-clasica-plata": "Hebilla clásica plateada",
+   "cierre-clasica-oro-rosa": "Hebilla clásica en oro rosa",
+   "cierre-clasica-negra": "Hebilla clásica negra"
+  }
+ },
+ "_miniatura": "LA MINIATURA DEL CIERRE (Oscar, 01/09/2026: «cuando se selecciona piel italiana, hebilla mariposa es esta imagen que hay que colocar en la fotografia grande, abajo a la derecha», y otras cuatro para las clasicas dorada, plateada, oro rosa y negra). Cuelga del paso `cierre` y va abajo a la DERECHA y SUELTA -sin tarjeta-, como la del Tortuga. OJO AL `cuando`: el paso `cierre` lo abren TRES familias -caucho, piel italiana y piel vintage-, pero Oscar la pidio solo para la piel italiana, asi que la miniatura pide ademas que `correamat` valga PITA. Sin eso, la foto de una correa de cocodrilo se le aparecia a quien eligiera un caucho. Las fotos las prepara `herramientas/miniaturas_cierre.py` desde las capturas del escritorio de Oscar. NO son las del Lunar (`assets/img/lunar-2026/cierres/`): aquellas son la hebilla sola en primer plano y estas la correa entera con el cierre puesto."
 }

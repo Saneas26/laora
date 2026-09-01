@@ -881,8 +881,9 @@
        que es de donde colgaba cuando sólo la tenía el Lunar—; si ese paso
        lleva puerta y está cerrada, no se enseña nada. `lado` la manda a la
        otra esquina y `suelta` le quita la tarjeta blanca. */
-    MINI: {}, MINI_IMG: "", MINI_ALT: {},
-    MINI_PASO: "correa", MINI_LADO: "izquierda", MINI_SUELTA: false,
+    MINI: {"mariposa": ["cierre-mariposa"], "oro": ["cierre-clasica-oro"], "plata": ["cierre-clasica-plata"], "oro-rosa": ["cierre-clasica-oro-rosa"], "negra": ["cierre-clasica-negra"]}, MINI_IMG: "/assets/img/trinchera-2026/miniaturas/", MINI_ALT: {"cierre-mariposa": "Cierre de mariposa de acero", "cierre-clasica-oro": "Hebilla clásica dorada", "cierre-clasica-plata": "Hebilla clásica plateada", "cierre-clasica-oro-rosa": "Hebilla clásica en oro rosa", "cierre-clasica-negra": "Hebilla clásica negra"},
+    MINI_PASO: "cierre", MINI_LADO: "derecha", MINI_SUELTA: true,
+    MINI_CUANDO: {"correamat": "PITA"},
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -919,6 +920,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=19"></script>
+<script src="/assets/js/configurador-2026.js?v=20"></script>
 </body>
 </html>

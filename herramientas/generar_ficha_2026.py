@@ -62,7 +62,7 @@ V_CSS_CONFIG = 5
 # funcionando con el motor de anteayer. Se sube cada vez que se toca
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
-V_JS_CONFIG = 19
+V_JS_CONFIG = 20
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -429,6 +429,7 @@ def modelo_js(d, dentro):
        otra esquina y `suelta` le quita la tarjeta blanca. */
     MINI: %(mini)s, MINI_IMG: %(miniimg)s, MINI_ALT: %(minialt)s,
     MINI_PASO: %(minipaso)s, MINI_LADO: %(minilado)s, MINI_SUELTA: %(minisuelta)s,
+    MINI_CUANDO: %(minicuando)s,
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -484,6 +485,7 @@ def modelo_js(d, dentro):
         'miniimg': js(d.get('miniatura', {}).get('img', '')),
         'minialt': js(d.get('miniatura', {}).get('alt', {})),
         'minipaso': js(d.get('miniatura', {}).get('paso', 'correa')),
+        'minicuando': js(d.get('miniatura', {}).get('cuando', {})),
         'minilado': js(d.get('miniatura', {}).get('lado', 'izquierda')),
         'minisuelta': 'true' if d.get('miniatura', {}).get('suelta') else 'false',
         'pvpextra': json.dumps(
