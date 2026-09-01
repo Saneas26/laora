@@ -56,13 +56,13 @@ from cabecera_laora import RECURSOS, SCRIPT, marcado          # noqa: E402
 
 V_CSS_PRODUCTO = 42
 V_CSS_COLECCION = 47
-V_CSS_CONFIG = 3
+V_CSS_CONFIG = 4
 # EL MOTOR DEL CONFIGURADOR. Cloudflare lo guarda 4 h por su nombre, así que
 # cambiarlo SIN subir este número no le llega a nadie: la ficha nueva sigue
 # funcionando con el motor de anteayer. Se sube cada vez que se toca
 # `assets/js/configurador-2026.js`, y hay que subirlo también a mano en
 # `lunar.html`, que no sale de aquí.
-V_JS_CONFIG = 16
+V_JS_CONFIG = 17
 V_JS_CARRITO = 11
 MARCA = 'GENERADO por herramientas/generar_ficha_2026.py'
 
@@ -385,6 +385,22 @@ def modelo_js(d, dentro):
        dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
     CAPA: %(capa)s, CAPA_IMG: %(capaimg)s, SERIE_V: %(seriev)s,
     PILA: %(pila)s,
+    /* LA MINIATURA DE LA CORREA, si el modelo la trae. Es la foto de la
+       correa de verdad, suelta y entera, que el montaje no puede enseñar:
+       sus capas se acaban en el borde del lienzo. Se declara en el JSON
+
+           "miniatura": { "img": "/assets/img/<modelo>/miniaturas/",
+                          "paso": "pasadores", "lado": "derecha",
+                          "suelta": true,
+                          "fotos": { "NEG": ["pasadores-negros"] },
+                          "alt": { "pasadores-negros": "…" } }
+
+       `paso` es de qué elección cuelga —por defecto el color de la correa,
+       que es de donde colgaba cuando sólo la tenía el Lunar—; si ese paso
+       lleva puerta y está cerrada, no se enseña nada. `lado` la manda a la
+       otra esquina y `suelta` le quita la tarjeta blanca. */
+    MINI: %(mini)s, MINI_IMG: %(miniimg)s, MINI_ALT: %(minialt)s,
+    MINI_PASO: %(minipaso)s, MINI_LADO: %(minilado)s, MINI_SUELTA: %(minisuelta)s,
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -435,6 +451,12 @@ def modelo_js(d, dentro):
         'listo': 'true' if d.get('listo') else 'false',
         'extra': js(d.get('extra', 0)),
         'combis': json.dumps(d.get('combinaciones', []), ensure_ascii=False),
+        'mini': js(d.get('miniatura', {}).get('fotos', {})),
+        'miniimg': js(d.get('miniatura', {}).get('img', '')),
+        'minialt': js(d.get('miniatura', {}).get('alt', {})),
+        'minipaso': js(d.get('miniatura', {}).get('paso', 'correa')),
+        'minilado': js(d.get('miniatura', {}).get('lado', 'izquierda')),
+        'minisuelta': 'true' if d.get('miniatura', {}).get('suelta') else 'false',
         'pvpextra': json.dumps(
             {p['id']: {o['id']: o['pvp'] for o in ops if o.get('pvp')}
              for p, ops in dentro if any(o.get('pvp') for o in ops)},

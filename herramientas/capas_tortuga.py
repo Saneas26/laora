@@ -32,7 +32,8 @@ una ranura de 1.460 px.
 
 LA CORREA PROFESIONAL (Óscar, 01/09/2026: «monta esta correa de caucho en
 el tortuga y la nombras caucho profesional»). Es la número 47 de la
-entrega y viene dibujada entera —hebilla, trabilla, tabla de tiempos sin
+entrega —y se monta EN NEGRO, que es como es la correa de verdad: la pasa
+`herramientas/correa_a_negro.py`— y viene dibujada entera —hebilla, trabilla, tabla de tiempos sin
 descompresión y su escalera de agujeros—, así que hay dos cosas que no se
 pueden hacer con ella como con las otras seis: medirla por su punto más
 ancho, que es la HEBILLA y no el asa, y pasarle `tapa_los_agujeros`, que
@@ -150,7 +151,13 @@ CORREAS = {
     # —hebilla, trabilla, tabla de tiempos sin descompresión y la escalera
     # de agujeros—, y la hebilla es MÁS ANCHA que la correa: 373 px contra
     # 359 en el asa. Por eso ésta se mide por las puntas y no por el máximo.
-    'caucho-profesional': '47-correa-caucho-azul-lujo-4k-hueco-caja-44mm.png',
+    # ⚠️ Y VA EN NEGRO, no en el azul con el que llegó dibujada (Óscar,
+    # 01/09/2026: «la profesional es negra»). La miniatura que se enseña al
+    # elegirla es una foto de la correa de verdad, y la de verdad es negra:
+    # con el render azul se enseñaban dos correas distintas en la misma
+    # pantalla. La pasa `herramientas/correa_a_negro.py`, que sólo le quita
+    # el color y le baja las sombras —ni un píxel de sitio, ni el alfa.
+    'caucho-profesional': 'preparadas/47-correa-caucho-profesional-negra.png',
     'brazalete-acero':   '20-brazalete-tortuga-eje-2048.png',
 }
 # ⚠️ SE MIDE EN LAS PUNTAS, NO EN EL MÁXIMO, y sólo en las que hace falta.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Tortuga de laOra: 4608 combinaciones, al precio honesto.">
+<meta name="description" content="Tortuga de laOra: 5184 combinaciones, al precio honesto.">
 <title>Tortuga · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -20,7 +20,7 @@
 <!-- EL ESTILO DEL CONFIGURADOR, el del Lunar, que desde el 29/08/2026 es el
      de la casa. VA DESPUÉS de producto-2026.css: buena parte de sus reglas
      están para ganarle a esa hoja, y cargándolo antes pierde. -->
-<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=3">
+<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=4">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -394,12 +394,25 @@
         "nombre": "Profesional",
         "expl": "Caucho de buceo con la tabla de tiempos sin descompresión impresa en la tira: la que el buceador lleva a la vista en la muñeca.",
         "coste": 3.89,
-        "familia": "CAUCHO"
+        "familia": "CAUCHO",
+        "pasadores": true
       },
       "BRZ": {
         "nombre": "Acero 316L",
         "coste": 32.39,
         "familia": "A316"
+      }
+    },
+    "pasadores": {
+      "NEG": {
+        "nombre": "Negros",
+        "expl": "Trabillas de caucho negro, del mismo material que la correa: no se ven, que es justo lo que se le pide a un pasador.",
+        "coste": 0
+      },
+      "PLA": {
+        "nombre": "Plata",
+        "expl": "Trabillas de acero, a juego con la hebilla y con la caja.",
+        "coste": 0
       }
     },
     "cierre": {
@@ -412,7 +425,7 @@
   };
 
   /* Lo que viene puesto al abrir: la primera opción de cada paso. */
-  var e = {"tamano": "44", "caja": "AC", "bisel": "NRG", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG", "cierre": "plata"};
+  var e = {"tamano": "44", "caja": "AC", "bisel": "NRG", "esf": "NEG", "agujas": "ACE", "cristal": "MIN", "mov": "Q", "correamat": "CAUCHO", "correa": "KNEG", "pasadores": "NEG", "cierre": "plata"};
 
   /* ---------- LA REFERENCIA ----------
      Es la que viaja al carrito y la que el servidor comprueba, así que NO
@@ -423,7 +436,7 @@
      elegido en ese paso y `{mov.tapa}` un dato de la opción elegida. El
      que no traiga ninguna, se arma con el código y todos los pasos en el
      orden del contrato. */
-  var ORDEN = ["tamano", "caja", "bisel", "esf", "agujas", "cristal", "mov", "correamat", "correa", "cierre"];
+  var ORDEN = ["tamano", "caja", "bisel", "esf", "agujas", "cristal", "mov", "correamat", "correa", "pasadores", "cierre"];
 
   /* ---------- LAS PUERTAS ----------
      Un paso que solo aparece si otro lo abre. El pespunte es de la piel:
@@ -437,7 +450,7 @@
      no les suma el coste; aqui se les quita ademas de la referencia y de
      la descripcion, que es lo que hace que el reloj se llame igual
      eligiendo un pespunte que el otro cuando no lleva ninguno. */
-  var PUERTAS = {};
+  var PUERTAS = {"pasadores": {"paso": "correa", "campo": "pasadores"}};
 
   /* ---------- LOS FILTROS ----------
      Un paso cuyas opciones dependen de lo elegido en otro. El color de la
@@ -612,8 +625,24 @@
       "KPRO": "caucho-profesional",
       "BRZ": "brazalete-acero"
     }
-  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=11",
+  }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=12",
     PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "bisel", "grupo": "bisel", "espera": "bisel", "sustituye": "caja"}, {"capa": "agujas", "grupo": "agujas", "espera": "agujas", "necesita": "esf"}],
+    /* LA MINIATURA DE LA CORREA, si el modelo la trae. Es la foto de la
+       correa de verdad, suelta y entera, que el montaje no puede enseñar:
+       sus capas se acaban en el borde del lienzo. Se declara en el JSON
+
+           "miniatura": { "img": "/assets/img/<modelo>/miniaturas/",
+                          "paso": "pasadores", "lado": "derecha",
+                          "suelta": true,
+                          "fotos": { "NEG": ["pasadores-negros"] },
+                          "alt": { "pasadores-negros": "…" } }
+
+       `paso` es de qué elección cuelga —por defecto el color de la correa,
+       que es de donde colgaba cuando sólo la tenía el Lunar—; si ese paso
+       lleva puerta y está cerrada, no se enseña nada. `lado` la manda a la
+       otra esquina y `suelta` le quita la tarjeta blanca. */
+    MINI: {"NEG": ["pasadores-negros"], "PLA": ["pasadores-plata"]}, MINI_IMG: "/assets/img/tortuga-2026/miniaturas/", MINI_ALT: {"pasadores-negros": "Correa de caucho profesional con pasadores negros", "pasadores-plata": "Correa de caucho profesional con pasadores de acero"},
+    MINI_PASO: "pasadores", MINI_LADO: "derecha", MINI_SUELTA: true,
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -650,6 +679,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=16"></script>
+<script src="/assets/js/configurador-2026.js?v=17"></script>
 </body>
 </html>

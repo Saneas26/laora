@@ -101,6 +101,13 @@
    "tarjeta": "correa"
   },
   {
+   "id": "pasadores",
+   "rotulo": "Pasadores",
+   "de": "correa.pasadores",
+   "porque": "Las trabillas que sujetan el rabo de la correa. Sólo lo pregunta la correa que de verdad se sirve de las dos maneras, con una puerta en su ficha; las demás no lo ven.",
+   "tarjeta": "correa"
+  },
+  {
    "id": "pespunte",
    "rotulo": "Pespunte",
    "de": "correa.pespuntes",

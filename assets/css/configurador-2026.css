@@ -530,6 +530,35 @@
   @media (max-width:900px){
     .pv-hero img.pv-mini-correa.pv-mini-entera{ height:96px !important }
   }
+  /* ---------- LA PILA, AL OTRO LADO ----------
+     Óscar, 01/09/2026, sobre la correa profesional del Tortuga: «colocamos
+     esta miniatura en la parte derecha inferior de la imagen grande».
+     La casa la puso a la izquierda el 28/08 y ahí sigue en el Lunar y el
+     Trinchera: esto es de quien lo pida en su ficha, no de todos.
+     ⚠️ Con `left` y `right` a la vez la caja se estira de lado a lado, así
+     que hay que apagar el que no toca. */
+  .pv-hero .pv-pila-correa.pv-pila-derecha{
+    left:auto; right:16px; align-items:flex-end;
+  }
+  @media (max-width:900px){
+    .pv-hero .pv-pila-correa.pv-pila-derecha{ flex-direction:row-reverse }
+  }
+  /* ---------- LA MINIATURA SUELTA ----------
+     «En vertical sin fondo» (Óscar, 01/09/2026). La foto llega ya recortada
+     contra transparente, así que la tarjeta —fondo blanco, marco y sombra—
+     sobra: le pondría un rectángulo alrededor a algo que ya tiene su
+     silueta. Se ve entera y más alta, que para una correa de pie es lo
+     suyo.
+     ⚠️ VA CON `.pv-hero img.` DELANTE, como sus vecinas: la hoja compartida
+     trae `.pv-hero-llena img{width:100%;height:100%}` y pesa más que una
+     clase sola. */
+  .pv-hero img.pv-mini-correa.pv-mini-suelta{
+    width:auto !important; height:240px !important; object-fit:contain;
+    background:none; border:0; border-radius:0; box-shadow:none;
+  }
+  @media (max-width:900px){
+    .pv-hero img.pv-mini-correa.pv-mini-suelta{ height:132px !important }
+  }
   .pv-pila-dentro img.pv-mini-correa{ opacity:1; transform:none }
   .pv-pila-dentro img.pv-mini-correa:nth-child(2){ transition-delay:.07s }
   .pv-pila-dentro img.pv-mini-correa:nth-child(3){ transition-delay:.14s }

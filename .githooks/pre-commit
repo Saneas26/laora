@@ -40,6 +40,29 @@ if [ -n "$fichas" ]; then
     # con OTRO precio, y siempre más barato: el cliente veía 349,90 en la
     # tarjeta y el servidor le cobraba 289,90. No es un descuadre
     # estético: es lo que se cobra.
+    # ⚠️ Y SE VUELVE A VOLCAR PARA COMPROBAR QUE SALE LO MISMO.
+    # El 01/09/2026 el catálogo salió MAL tres veces en la misma sesión, sin
+    # que se pudiera repetir a voluntad: el Tortuga automático se quedaba en
+    # 269,90 cuando su propia ficha —preguntada a mano— decía 329,90, y el
+    # brazalete en 309,90 en vez de 409,90. Volviendo a volcar salía bien.
+    # No es un descuadre estético: `crear-pedido.ts` COBRA lo que diga este
+    # archivo, así que un volcado malo son sesenta euros por reloj regalados
+    # y nadie se entera.
+    #
+    # Mientras no se sepa por qué, esto lo caza: se vuelca dos veces y se
+    # comparan. Dos volcados del mismo repo TIENEN que dar el mismo archivo;
+    # si no, algo se mueve y el commit se para. No es la cura, es la alarma.
+    antes=$(cat assets/datos/catalogo-2026.json assets/datos/catalogo/*.json | shasum | cut -d' ' -f1)
+    node herramientas/volcar_catalogo_2026.js >/dev/null 2>&1
+    despues=$(cat assets/datos/catalogo-2026.json assets/datos/catalogo/*.json | shasum | cut -d' ' -f1)
+    if [ "$antes" != "$despues" ]; then
+      echo "⛔ DOS VOLCADOS DEL CATÁLOGO HAN DADO COSAS DISTINTAS."
+      echo "   El servidor cobra lo que diga ese archivo, así que no se sube"
+      echo "   hasta saber cuál de los dos es el bueno. Vuelve a pasar"
+      echo "   'node herramientas/volcar_catalogo_2026.js' y compara los"
+      echo "   precios con los que enseña la ficha antes de nada."
+      exit 1
+    fi
     git add assets/datos/catalogo-2026.json assets/datos/catalogo
     # Y los precios que la colección lleva escritos dentro: si la
     # tarjeta dice 249,90 y el servidor cobra 259,90, el cliente ve un

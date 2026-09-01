@@ -20,7 +20,7 @@
 <!-- EL ESTILO DEL CONFIGURADOR, el del Lunar, que desde el 29/08/2026 es el
      de la casa. VA DESPUÉS de producto-2026.css: buena parte de sus reglas
      están para ganarle a esa hoja, y cargándolo antes pierde. -->
-<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=3">
+<link rel="stylesheet" href="/assets/css/configurador-2026.css?v=4">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -424,6 +424,22 @@
        dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
     CAPA: {}, CAPA_IMG: "", SERIE_V: "",
     PILA: [],
+    /* LA MINIATURA DE LA CORREA, si el modelo la trae. Es la foto de la
+       correa de verdad, suelta y entera, que el montaje no puede enseñar:
+       sus capas se acaban en el borde del lienzo. Se declara en el JSON
+
+           "miniatura": { "img": "/assets/img/<modelo>/miniaturas/",
+                          "paso": "pasadores", "lado": "derecha",
+                          "suelta": true,
+                          "fotos": { "NEG": ["pasadores-negros"] },
+                          "alt": { "pasadores-negros": "…" } }
+
+       `paso` es de qué elección cuelga —por defecto el color de la correa,
+       que es de donde colgaba cuando sólo la tenía el Lunar—; si ese paso
+       lleva puerta y está cerrada, no se enseña nada. `lado` la manda a la
+       otra esquina y `suelta` le quita la tarjeta blanca. */
+    MINI: {}, MINI_IMG: "", MINI_ALT: {},
+    MINI_PASO: "correa", MINI_LADO: "izquierda", MINI_SUELTA: false,
     /* LAS COMBINACIONES QUE EXISTEN DE VERDAD. De multiplicar los pasos
        salen muchas más de las que se montan: la Bitácora da 126 y monta
        36. Con esta lista, cada paso enseña sólo lo que sigue teniendo
@@ -460,6 +476,6 @@
 </script>
 <!-- El motor de precio y el configurador, los mismos para los diez. -->
 <script src="/assets/js/precio-2026.js?v=2"></script>
-<script src="/assets/js/configurador-2026.js?v=16"></script>
+<script src="/assets/js/configurador-2026.js?v=17"></script>
 </body>
 </html>

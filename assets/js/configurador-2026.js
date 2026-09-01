@@ -57,6 +57,16 @@
       PILA = M.PILA || [],
       CIERRES = M.CIERRES || {}, CIERRE_IMG = M.CIERRE_IMG || '',
       MINI = M.MINI || {}, MINI_IMG = M.MINI_IMG || '', MINI_ALT = M.MINI_ALT || {},
+      /* DE QUÉ PASO CUELGA LA MINIATURA, y cómo se enseña. Nació colgando
+         del color de la correa, que es de donde cuelga en el Lunar y en el
+         Trinchera, y así se queda si el modelo no dice otra cosa. El
+         Tortuga la cuelga de los PASADORES (Óscar, 01/09/2026), que es un
+         paso con puerta: cuando la puerta está cerrada —cualquier correa
+         que no sea la profesional— no hay miniatura que enseñar, aunque el
+         paso siga teniendo un valor guardado. */
+      MINI_PASO = M.MINI_PASO || 'correa',
+      MINI_LADO = M.MINI_LADO || 'izquierda',
+      MINI_SUELTA = !!M.MINI_SUELTA,
       PAQUETES = M.PAQUETES || [], AGUJAS_LIBRES = M.AGUJAS_LIBRES,
       COSTES_PUESTOS = !!M.COSTES_PUESTOS, CADENA = M.CADENA || [];
   var e = M.e;
@@ -144,6 +154,12 @@
       "id": "correa",
       "rotulo": "Color",
       "de": "correa.colores",
+      "tarjeta": "correa"
+    },
+    {
+      "id": "pasadores",
+      "rotulo": "Pasadores",
+      "de": "correa.pasadores",
       "tarjeta": "correa"
     },
     {
@@ -1593,15 +1609,23 @@
   function pintaMinis(enJuego) {
     var caja = $('[data-pv-pila-correa]');
     if (!caja) return;
-    var lista = MINI[e.correa] || [];
+    /* ⚠️ CON LA PUERTA CERRADA NO HAY MINIATURA. `e` guarda un valor para
+       todos los pasos, también para los que no salen: sin mirar la puerta,
+       la foto de los pasadores se le aparecía a quien eligiera cualquier
+       otra correa. */
+    var lista = (abierta(MINI_PASO) && MINI[e[MINI_PASO]]) || [];
     caja.hidden = !lista.length;
+    caja.classList.toggle('pv-pila-derecha', MINI_LADO === 'derecha');
     var firma = lista.join('|');
     if (firma !== MINIS_PUESTAS) {
       MINIS_PUESTAS = firma;
       caja.innerHTML = '';
       lista.forEach(function (f) {
         var im = new Image();
-        im.className = 'pv-mini-correa';
+        /* SUELTA quiere decir sin tarjeta: ni fondo blanco, ni marco, ni
+           sombra (Óscar, 01/09/2026: «en vertical sin fondo»). Es para las
+           fotos que ya vienen recortadas contra transparente. */
+        im.className = 'pv-mini-correa' + (MINI_SUELTA ? ' pv-mini-suelta' : '');
         /* UNA MINIATURA PUEDE VENIR DE LA BIBLIOTECA COMPARTIDA (con la
            ruta entera, empezando por «/») en vez de la carpeta del modelo:
            la «correa completa» de la piel es un dibujo de la casa, no una
@@ -1610,7 +1634,7 @@
         var deCasa = f.charAt(0) === '/';
         im.src = (deCasa ? f : MINI_IMG + f) + '.avif' + SERIE_V;
         im.alt = (MINI_ALT[f] ||
-                  'Correa ' + CORREAS[e.correa].nombre.toLowerCase()) +
+                  'Correa ' + ((CORREAS[e.correa] || {}).nombre || '').toLowerCase()) +
                  (deCasa ? '' : ', foto del fabricante');
         /* La correa completa es más alta que ancha y quiere verse ENTERA,
            no recortada al cuadrado como las fotos del proveedor. */

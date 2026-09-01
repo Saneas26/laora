@@ -35,8 +35,27 @@ const ORIGEN = path.join(RAIZ, 'herramientas/volcar_catalogo_2026.js');
 function prepara() {
   let s = fs.readFileSync(ORIGEN, 'utf8');
   s = s.replace(/^const RAIZ = .*$/m, `const RAIZ = ${JSON.stringify(RAIZ)};`);
+  const antes = s;
   s = s.replace(/^const destino = path\.join\(RAIZ, 'assets\/datos\/catalogo-2026\.json'\);$/m,
     'const destino = process.env.DESTINO;');
+  /* ⚠️⚠️ Y LA CARPETA PARTIDA POR MODELO, QUE ES LA QUE COBRA.
+     ESTE AUDITOR ESTUVO PISANDO EL CATÁLOGO DE VERDAD (visto el
+     01/09/2026). Redirigía sólo `catalogo-2026.json` —el de las
+     herramientas— y se olvidaba de `assets/datos/catalogo/LO-0X.json`, que
+     es lo que lee `crear-pedido.ts` para cobrar. Como la pasada del auditor
+     corre con el precio de tarifa ANULADO, lo que dejaba escrito ahí eran
+     los SUELOS: el Tortuga automático se quedaba en 269,90 en vez de
+     329,90 y el brazalete en 309,90 en vez de 409,90. Sesenta y noventa
+     euros por reloj, en el archivo que cobra, puestos por la herramienta
+     que estaba para vigilar justo eso.
+     Se salvaba de milagro porque el gancho de pre-commit vuelve a volcar
+     cuando cambia una ficha; con la ficha quieta, se habría subido. */
+  s = s.replace(/^const carpeta = path\.join\(RAIZ, 'assets\/datos\/catalogo'\);$/m,
+    "const carpeta = process.env.DESTINO + '.carpeta';");
+  if (s === antes || !s.includes('process.env.DESTINO + ')) {
+    throw new Error('AUDITOR PELIGROSO: no he sabido desviar las dos escrituras del ' +
+                    'volcador, así que escribiría encima del catálogo que cobra.');
+  }
 
   /* ⚠️ CÓMO SE COMPRUEBA LA REGLA, desde el 31/08/2026.
      Antes se volcaba dos veces cambiando la comisión del suelo y se
