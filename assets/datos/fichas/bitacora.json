@@ -25,6 +25,12 @@
     "nombre": "Negro PVD",
     "coste": 34.97,
     "color": "#1C1D1F"
+   },
+   {
+    "id": "C2",
+    "nombre": "Bronce",
+    "coste": 34.97,
+    "color": "#A9754A"
    }
   ],
   "integrada": true
@@ -59,6 +65,12 @@
     "nombre": "Azul",
     "coste": 21.39,
     "color": "#2E4A7D"
+   },
+   {
+    "id": "E7",
+    "nombre": "Cobre",
+    "coste": 21.39,
+    "color": "#B5701F"
    }
   ]
  },
@@ -308,6 +320,12 @@
    "esf": "E3",
    "correa": "Brz-Goma-Bit-01",
    "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
   }
  ],
  "cadena": [
@@ -352,12 +370,14 @@
     "E1": "esfera-turquesa",
     "E2": "esfera-blanca",
     "E3": "esfera-negra",
-    "E4": "esfera-azul"
+    "E4": "esfera-azul",
+    "E7": "esfera-cobre"
    },
    "caja": {
     "C1": "caja-plata",
     "C3": "caja-oro-rosa",
-    "C4": "caja-negro-pvd"
+    "C4": "caja-negro-pvd",
+    "C2": "caja-bronce"
    }
   },
   "_orden": "De abajo arriba: brazalete, esfera, caja, agujas. La esfera va DEBAJO de la caja a proposito: el bisel le tapa el canto, como el reloj de verdad, y asi el encaje es perfecto sin medir la esfera contra el hueco. El brazalete, debajo de todo, porque su primer eslabon se mete bajo el asa.",
@@ -368,5 +388,6 @@
   "_esferas": "ESFERAS NUEVAS EL 01/09/2026 (Oscar: \"cambia las esferas del bitacora por estas\"). Entrega `Codex/2026-09-01/esferas-bitacora-simplemente-a-esta-esfera/outputs/4k-transparent/`: indices con relieve, doble baton a las 12, pista de minutos punteada y el rotulo AUTOMATIC. NO se montan tal cual: los radios se llevan un 3,7 %, el eje baila hasta 80 px y la blanca es un poligono con un trozo de damero en una esquina. Las normaliza `herramientas/esferas_bitacora.py` ANTES de `capas_bitacora.py`. La cobre YA SE MONTA (Oscar, 01/09/2026: \"monta tambien el cobre\") y su capa se publica, pero todavia NO SE VENDE: la Bitacora vende por lista de combinaciones —que caja con que esfera y con que correa monta el proveedor— y esa lista es de Oscar. En cuanto la de, la esfera entra como un color mas.",
   "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color."
  },
- "_esferas_fuera": "FUERA DE LA VENTA LA GRIS (E5) Y LA MARRON (E6), por orden de Oscar el 01/09/2026: \"sacalas de la venta\". Se venden desde el 30/08 pero NUNCA han tenido dibujo, asi que al elegirlas el visor se quedaba con la caja vacia y el boton de comprar activo: 10 de las 36 referencias eran un reloj que la web no sabe ensenar. La gris costaba 21,39 y la marron 25,99. Vuelven en cuanto lleguen sus esferas dibujadas, y con ellas estas diez combinaciones: C1+E5+Brz-Acero-Bit-01; C1+E5+Brz-Acero-Bit-07; C1+E5+Brz-Goma-Bit-01; C1+E5+Brz-Goma-Bit-03; C1+E6+Brz-Acero-Bit-01; C3+E6+Brz-Acero-Bit-06; C3+E6+Brz-Acero-Bit-07; C3+E6+Brz-Goma-Bit-04; C4+E5+Brz-Acero-Bit-02; C4+E5+Brz-Goma-Bit-01."
+ "_esferas_fuera": "FUERA DE LA VENTA LA GRIS (E5) Y LA MARRON (E6), por orden de Oscar el 01/09/2026: \"sacalas de la venta\". Se venden desde el 30/08 pero NUNCA han tenido dibujo, asi que al elegirlas el visor se quedaba con la caja vacia y el boton de comprar activo: 10 de las 36 referencias eran un reloj que la web no sabe ensenar. La gris costaba 21,39 y la marron 25,99. Vuelven en cuanto lleguen sus esferas dibujadas, y con ellas estas diez combinaciones: C1+E5+Brz-Acero-Bit-01; C1+E5+Brz-Acero-Bit-07; C1+E5+Brz-Goma-Bit-01; C1+E5+Brz-Goma-Bit-03; C1+E6+Brz-Acero-Bit-01; C3+E6+Brz-Acero-Bit-06; C3+E6+Brz-Acero-Bit-07; C3+E6+Brz-Goma-Bit-04; C4+E5+Brz-Acero-Bit-02; C4+E5+Brz-Goma-Bit-01.",
+ "_bronce": "LA CAJA BRONCE (C2) Y LA ESFERA COBRE (E7) entran el 01/09/2026, por orden de Oscar: \"monta tambien el cobre\" y, preguntado con que caja, \"con una caja bronce nueva\". Caja 34,97 (el mismo escalon que la oro rosa y la negro PVD) y esfera 21,39 (como las demas), los dos dados por Oscar. SOLO EXISTE UNA COMBINACION: C2 + E7 + silicona negra, que es con lo que dijo que sale. La bronce no se ofrece con otras esferas ni la cobre con otras cajas, porque la Bitacora vende por lista de combinaciones y esa lista es la del proveedor, no una multiplicacion. OJO: BRAZALETE DE BRONCE NO HAY DIBUJADO -los tres que existen son acero plata, acero oro rosa y acero negro-, y la silicona TAMPOCO tiene capa, asi que esta referencia se ve con la caja y la esfera pero sin correa."
 }
