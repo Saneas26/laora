@@ -125,23 +125,48 @@ def redonda(a, eje, radio, hueco):
                                                return_indices=True)
         rgb[corto] = a[:, :, :3][cerca[0], cerca[1]][corto]
 
-    # ⚠️ EL AGUJERO DEL CAÑÓN SE TAPA LISO, con el color del anillo que lo
-    # rodea. Se probaron los dos rellenos «listos» y los dos se ven: por
-    # vecino más cercano sale un borrón con forma de cometa, y copiando lo
-    # que hay en el mismo ángulo justo fuera salen RAYOS, porque lo que
-    # rodea al cañón es su propia sombra circular y proyectarla hacia
-    # dentro la convierte en un abanico. Liso no se ve nada: el buje de las
-    # agujas es más grande que el agujero (32 px de radio contra 22 en la
-    # capa publicada) y va justo encima. Esto es sólo el suelo, para que el
-    # día que cambien las agujas no aparezca un agujero.
+    # ⚠️ EL AGUJERO DEL CAÑÓN SE TAPA SIGUIENDO LAS RAYAS, fila por fila.
+    # Y AHORA SE VE: hasta el 01/09 lo tapaba el buje de las agujas, pero
+    # Óscar las quitó («quita las agujas»), así que el centro de la esfera
+    # queda a la vista y el parche tiene que ser invisible.
+    # Los otros dos rellenos que se probaron NO valen: por vecino más
+    # cercano sale un borrón con forma de cometa, y copiando lo que hay en
+    # el mismo ángulo justo fuera salen RAYOS, porque lo que rodea al cañón
+    # es su propia sombra circular y proyectarla hacia dentro la convierte
+    # en un abanico. La esfera de la Bitácora está rayada EN HORIZONTAL, así
+    # que cruzando cada fila de un lado al otro del agujero las rayas
+    # siguen su camino y el parche desaparece.
     if hueco.any():
-        hy, hx = np.where(hueco)
-        borde_h = float(np.hypot(hx - eje[0], hy - eje[1]).max())
-        anillo = (d > borde_h + 4) & (d < borde_h + 20) & bueno
-        rgb[hy, hx] = np.median(a[:, :, :3][anillo], axis=0).astype(a.dtype)
+        # ⚠️ Y SE COSE UN POCO MÁS ANCHO QUE EL AGUJERO. Alrededor del
+        # cañón, el dibujo lleva su sombra; cosiendo sólo lo transparente,
+        # esa sombra se quedaba dando la vuelta al parche y lo que se veía
+        # era un anillo oscuro con una cúpula clara dentro. Cuarenta
+        # píxeles se la llevan por delante.
+        rgb = _cose_las_rayas(rgb, ndimage.binary_dilation(hueco, iterations=40))
     # alfa: disco con el filo suavizado un píxel
     alfa = np.clip(radio + 0.5 - d, 0, 1) * 255.0
     return np.dstack([rgb, alfa]).astype(np.uint8)
+
+
+def _cose_las_rayas(rgb, hueco):
+    """Cruza cada fila del agujero del color que tiene a los dos lados.
+
+    Fila a fila: se coge el último píxel bueno de la izquierda y el primero
+    de la derecha y se pasa de uno a otro. Es una interpolación de nada,
+    pero como la esfera está rayada en horizontal cada raya se reengancha
+    con la suya y no hay manera de ver por dónde iba el agujero."""
+    ys = np.where(hueco.any(1))[0]
+    fuera = rgb.astype(np.float32)
+    for y in ys:
+        xs = np.where(hueco[y])[0]
+        i, j = int(xs.min()), int(xs.max())
+        if i == 0 or j >= rgb.shape[1] - 1:
+            continue
+        izq = fuera[y, i - 1]
+        der = fuera[y, j + 1]
+        t = np.linspace(0.0, 1.0, j - i + 3)[1:-1][:, None]
+        fuera[y, i:j + 1] = izq * (1 - t) + der * t
+    return np.clip(fuera, 0, 255).astype(rgb.dtype)
 
 
 def prepara(f):

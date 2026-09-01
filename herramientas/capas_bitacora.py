@@ -87,10 +87,15 @@ ALTO_LARGO = 1952               # lienzo del brazalete (alto, se coloca por el c
 HOLGURA_ESFERA = 1.02
 
 # --- lo que se publica y de qué fichero sale -------------------------------
+# ⚠️ LAS CAJAS SON LAS «-transparente-v2» (Óscar, 01/09/2026: «sustituye
+# las imágenes de las cajas»). Llegan con ALFA DE VERDAD, así que ya no hay
+# que adivinarles el recorte quitándoles el damero pintado: eso era lo que
+# les comía un pelo del ojo —el hueco de la esfera salía 3.800 px más
+# pequeño de lo que es— y lo que obligaba a inventarse una silueta.
 CAJAS = {
-    'caja-plata':     'bitacora-caja-40mm-acero-plata-v1.png',
-    'caja-oro-rosa':  'bitacora-caja-40mm-oro-rosa-v1.png',
-    'caja-negro-pvd': 'bitacora-caja-40mm-negro-pvd-v1.png',
+    'caja-plata':     'bitacora-caja-40mm-acero-plata-transparente-v2.png',
+    'caja-oro-rosa':  'bitacora-caja-40mm-oro-rosa-transparente-v2.png',
+    'caja-negro-pvd': 'bitacora-caja-40mm-negro-pvd-transparente-v2.png',
 }
 # ⚠️ LAS ESFERAS SON LAS DEL 01/09/2026 Y VIVEN EN OTRA CARPETA (Óscar:
 # «cambia las esferas del bitacora por estas»). Traen índices con relieve,
@@ -108,16 +113,26 @@ ESFERAS = {
     'esfera-blanca':   ENTREGA_ESF + 'bitacora-esfera-blanca-26.png',
     'esfera-negra':    ENTREGA_ESF + 'bitacora-esfera-negra-26.png',
     'esfera-azul':     ENTREGA_ESF + 'bitacora-esfera-azul-26.png',
+    # LA COBRE SE MONTA (Óscar, 01/09/2026: «monta también el cobre»). La
+    # capa se publica; que se pueda COMPRAR es otra cosa y depende de que
+    # Óscar diga con qué cajas y con qué correas la sirve el proveedor: la
+    # ficha vende por lista de combinaciones, no por multiplicación.
+    'esfera-cobre':    ENTREGA_ESF + 'bitacora-esfera-cobre-26.png',
 }
-# LA COBRE SE QUEDA FUERA, otra vez y por lo mismo: la entrega la trae y la
-# ficha no la vende. Está preparada en esa misma carpeta, así que el día que
-# Óscar diga a qué coste, es añadir una línea aquí y otra en la ficha.
+
 BRAZALETES = {
     'brazalete-acero':      'bitacora-brazalete-acero-v1.png',
     'brazalete-oro-rosa':   'bitacora-brazalete-oro-rosa-v1.png',
     'brazalete-negro-pvd':  'bitacora-brazalete-negro-pvd-v1.png',
 }
+# ⛔ LAS AGUJAS SE FUERON el 01/09/2026, por orden de Óscar: «quita las
+# agujas». Eran las de la entrega de agosto y no acompañaban a las esferas
+# nuevas: el segundero se salía de la esfera y cruzaba el bisel, y el
+# minutero tapaba el rótulo BITÁCORA. El fichero sigue en la entrega y aquí
+# queda su nombre, para que volver a ponerlas sea deshacer esto y no
+# reconstruirlo.
 AGUJAS = 'bitacora-agujas-v1.png'
+CON_AGUJAS = False
 # Para registrar el brazalete, no se publica. SE USA EL DE ORO ROSA a
 # propósito: el combinado plateado es acero pulido y se recorta mal, por lo
 # mismo que la caja plateada (ver CAJAS_LIMPIAS).
@@ -131,10 +146,19 @@ COMBINADO = 'bitacora-caja-brazalete-oro-rosa-v1.png'
 # sitio con dos píxeles de margen, así que se recortan todas con la silueta
 # que votan las de color. De paso, el eje del reloj deja de bailar medio
 # píxel de un color a otro.
-CAJAS_LIMPIAS = ('bitacora-caja-40mm-bronce-v1.png',
-                 'bitacora-caja-40mm-negro-pvd-v1.png',
-                 'bitacora-caja-40mm-oro-rosa-v1.png',
-                 'bitacora-caja-40mm-oro-v1.png')
+# ⚠️ Y LA SILUETA LA SIGUEN VOTANDO CUATRO, aunque ahora traigan alfa.
+# La de acero plateado NO cae donde las otras: su recorte es un 0,8 % más
+# gordo de cuerpo y un 1 % más chico de ojo (IoU 0,95 contra ellas, que
+# entre sí dan 0,99). Publicándolas cada una con su alfa, el reloj cambia
+# de tamaño al cambiar de color. Con la silueta votada, las tres salen del
+# mismo contorno y el eje no se mueve ni medio píxel.
+# La de oro entra de votante y no de capa: su fichero v2 está roto —llega
+# casi sin alfa, en pedazos—, pero para votar no se usa, así que se queda
+# fuera también de aquí. Votan las cuatro buenas.
+CAJAS_LIMPIAS = ('bitacora-caja-40mm-acero-plata-transparente-v2.png',
+                 'bitacora-caja-40mm-bronce-transparente-v2.png',
+                 'bitacora-caja-40mm-negro-pvd-transparente-v2.png',
+                 'bitacora-caja-40mm-oro-rosa-transparente-v2.png')
 
 CALIDADES = (72, 64, 56, 48, 40)
 PESO = 90000
@@ -280,7 +304,9 @@ def silueta_caja():
     if 'm' not in _CONSENSO:
         votos = None
         for f in CAJAS_LIMPIAS:
-            m = (alfa(Image.open(ENTREGA + f), cuerpos=1) > 128).astype(np.int8)
+            im = abre(f)
+            m = ((np.asarray(im.convert('RGBA'))[:, :, 3] > 128) if im.mode == 'RGBA'
+                 else (alfa(im, cuerpos=1) > 128)).astype(np.int8)
             votos = m if votos is None else votos + m
         _CONSENSO['m'] = votos >= 3
     return _CONSENSO['m']
@@ -294,7 +320,10 @@ def abre(nombre):
 
 def con_alfa(nombre, cuerpos=1, mascara=None):
     im = abre(nombre)
-    if im.mode == 'RGBA':
+    # ⚠️ SI SE LE DA MÁSCARA, MANDA LA MÁSCARA, traiga alfa o no. Las cajas
+    # v2 vienen con su alfa, pero cada una recortada a su manera, y lo que
+    # se publica tiene que ser el mismo contorno para las tres.
+    if im.mode == 'RGBA' and mascara is None:
         return desfleca(im.copy())
     r = im.convert('RGB').copy()
     m = mascara if mascara is not None else alfa(im, cuerpos=cuerpos)
@@ -370,7 +399,8 @@ def medidas():
     m['esfera'] = {'escala': s, 'iou': iou, 'ancla': (639.5, 639.5),
                    'cae': (639.5 * s + ox, 639.5 * s + oy)}
     # las agujas: eje propio, escala de la esfera
-    m['agujas'] = {'ancla': buje_agujas(abre(AGUJAS)), 'escala': s}
+    if CON_AGUJAS:
+        m['agujas'] = {'ancla': buje_agujas(abre(AGUJAS)), 'escala': s}
     # el brazalete, registrando la caja suelta dentro del combinado
     oc = ojo(Image.open(ENTREGA + COMBINADO))
     s0 = (oc.sum() / o.sum()) ** 0.5
@@ -416,8 +446,9 @@ def capas(m):
     for ident, f in ESFERAS.items():
         salida[ident] = coloca(con_alfa(f), m['esfera']['escala'] * HOLGURA_ESFERA,
                                m['esfera']['ancla'], cuad, eje_c)
-    salida['agujas'] = coloca(con_alfa(AGUJAS), m['agujas']['escala'],
-                              m['agujas']['ancla'], cuad, eje_c)
+    if CON_AGUJAS:
+        salida['agujas'] = coloca(con_alfa(AGUJAS), m['agujas']['escala'],
+                                  m['agujas']['ancla'], cuad, eje_c)
     largo = (ANCHO, ALTO_LARGO)
     eje_l = (ANCHO / 2.0, ALTO_LARGO / 2.0)
     for ident, f in BRAZALETES.items():
@@ -432,7 +463,7 @@ def arma(cs, caja, esfera, brazalete):
     b = cs[brazalete]
     L.alpha_composite(b.crop((0, (ALTO_LARGO - ANCHO) // 2,
                               ANCHO, (ALTO_LARGO + ANCHO) // 2)))
-    for c in (esfera, caja, 'agujas'):
+    for c in ([esfera, caja, 'agujas'] if CON_AGUJAS else [esfera, caja]):
         L.alpha_composite(cs[c])
     return L.convert('RGB')
 
@@ -481,7 +512,7 @@ def hoja_de_control(cs, destino):
         b = cs[brz]
         L.alpha_composite(b.crop((0, (ALTO_LARGO - ANCHO) // 2,
                                   ANCHO, (ALTO_LARGO + ANCHO) // 2)))
-        for c in (esf, caja, 'agujas'):
+        for c in ([esf, caja, 'agujas'] if CON_AGUJAS else [esf, caja]):
             L.alpha_composite(cs[c])
         hoja.paste(L.convert('RGB'), (i * ANCHO, 0))
     hoja.resize((hoja.width // 3, hoja.height // 3)).save(destino)
@@ -494,9 +525,12 @@ if __name__ == '__main__':
     print('ESFERA    escala %.4f (IoU %.4f contra el ojo); su centro cae en '
           '%.1f,%.1f' % (m['esfera']['escala'], m['esfera']['iou'],
                          m['esfera']['cae'][0], m['esfera']['cae'][1]))
-    print('AGUJAS    buje %.2f,%.2f · escala %.4f (la de la esfera, NO la de '
-          'la caja)' % (m['agujas']['ancla'][0], m['agujas']['ancla'][1],
-                        m['agujas']['escala']))
+    if CON_AGUJAS:
+        print('AGUJAS    buje %.2f,%.2f · escala %.4f (la de la esfera, NO la de '
+              'la caja)' % (m['agujas']['ancla'][0], m['agujas']['ancla'][1],
+                            m['agujas']['escala']))
+    else:
+        print('AGUJAS    fuera, por orden de Óscar (01/09/2026)')
     print('BRAZALETE escala %.4f (IoU %.4f registrando la caja en el '
           'combinado); eje en %.1f,%.1f' %
           (m['brazalete']['escala'], m['brazalete']['iou'],
