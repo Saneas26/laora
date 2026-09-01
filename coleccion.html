@@ -26,7 +26,7 @@
 <!-- `cabecera.css`: dentro está `.cb-marca`, el logotipo dibujado con
      la O como círculo. Sin él se lee «lara». -->
 <link rel="stylesheet" href="/assets/css/cabecera.css?v=15">
-<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=50">
+<link rel="stylesheet" href="/assets/css/coleccion-v2.css?v=51">
 </head>
 <body><header class="site-header">
   <a class="brand" href="/" aria-label="laOra, inicio"><span class="brand-logo"><img src="/assets/img/lunar-v2/laora-wordmark-dark.png?v=2" alt="laOra"></span><span class="brand-claim">Relojazos al precio honesto</span></a>
@@ -970,6 +970,21 @@
        segundos. -->
   <section class="cv2-modelo" id="tortuga">
     <div class="cv2-lienzo cv2-lienzo-tortuga">
+    <!-- LA TORTUGA QUE NADA EN LA ESQUINA (Óscar, 01/09/2026: «coloca esta
+         imagen (…) en la parte derecha superior que ocupe el 30% del
+         espacio»). El original es un PNG 4K con alfa de verdad, pero traía
+         el damero DIBUJADO en el RGB de la parte transparente —blancos
+         hasta el 255—, que con AVIF con pérdida se derrama y deja una orla
+         sucia alrededor del bicho. Antes de exportar se sangra el color del
+         borde hacia fuera y se ponen a cero las motas de alfa 1..7.
+         Recortada a su alfa: 1.417 × 793. -->
+    <img class="cv2-fauna" alt="" aria-hidden="true" loading="lazy" decoding="async"
+         width="1417" height="793"
+         src="/assets/img/tortuga-2026/editorial/tortuga-800.avif?v=1"
+         srcset="/assets/img/tortuga-2026/editorial/tortuga-480.avif?v=1 480w,
+                 /assets/img/tortuga-2026/editorial/tortuga-800.avif?v=1 800w,
+                 /assets/img/tortuga-2026/editorial/tortuga-1200.avif?v=1 1200w"
+         sizes="(max-width:820px) 52vw, 30vw">
     <header>
       <p class="cv2-chip">LO-06 · Buceo</p>
       <h2>Tortuga</h2>

@@ -258,6 +258,24 @@
     radial-gradient(120% 90% at 78% 18%, rgba(58,150,168,.42) 0%, rgba(5,23,29,0) 62%);
 }
 
+/* LA TORTUGA DEL LIENZO (Óscar, 01/09/2026): «coloca esta imagen (…) en la
+   parte derecha superior que ocupe el 30% del espacio». Es el único lienzo
+   sin foto: los otros cinco llevan una escena de fondo a sangre y éste sólo
+   tenía degradados. Aquí no cabía una foto de fondo —la entrega es un
+   recorte con alfa, no una escena— así que va montada encima, nadando en la
+   esquina, que es justo para lo que la hicieron (el archivo se llama
+   «overlay»).
+
+   Va DETRÁS del texto (z-index 0 contra el 1 del contenido) y con
+   `pointer-events:none`, para que no se coma ni un clic de la comparativa.
+   El 30% es del ancho del lienzo, como pidió. */
+.cv2-lienzo-tortuga > *{position:relative;z-index:1}
+.cv2-fauna{
+  position:absolute;top:0;right:0;z-index:0;
+  width:30%;height:auto;
+  pointer-events:none;user-select:none;
+}
+
 /* CONTRA QUIÉN SE MIDE CADA MODELO (Óscar, 27/08/2026). La regla de la
    casa: la comparativa mira SIEMPRE hacia arriba —o a la misma altura
    dando mucho más—, nunca hacia abajo. Van el homenajeado y dos
@@ -611,6 +629,10 @@ a.cv2-comprar{display:block;text-align:center;text-decoration:none}
   .cv2-modelos div{padding:0 20px;gap:20px}
   .cv2-modelo{padding:48px 20px 40px}
   .cv2-lienzo{margin:-48px -20px 0;padding:48px 20px 36px;background-position:60% 28%}
+  /* La tortuga, en el teléfono, más grande y más apagada: el texto pasa a
+     ocupar el ancho entero y a 30% no se vería, pero a plena opacidad se
+     comería el «Tortuga» del título. */
+  .cv2-fauna{width:52%;opacity:.42}
   /* En el teléfono el texto ocupa el ancho entero, así que el velo se
      cierra arriba —donde cae— y se abre abajo, que es donde las cajas
      traen su propio fondo y la foto puede respirar. */

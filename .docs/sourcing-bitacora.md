@@ -236,3 +236,29 @@ servicio pieza a pieza, no serie.
 Además, el proceso va a **120–160 °C**: se recubre caja, bisel, fondo, corona,
 eslabones y cierre **desnudos**, y se monta después con juntas nuevas. Es un paso
 más en el flujo de montaje de Madrid.
+
+---
+
+## Correa de piel — 8,69 € · **SÓLO PARA LA BITÁCORA**
+
+[1005007345083993](https://es.aliexpress.com/item/1005007345083993.html) —
+Óscar, **01/09/2026**: «correas de piel a 8,69 **sólo para el Bitácora**».
+
+No entra en la biblioteca compartida ni se ofrece en ningún otro modelo.
+
+**Es la tercera familia de correa de la Bitácora.** Hoy sólo tiene dos:
+
+| Correa | Coste |
+|---|--:|
+| **Piel** *(nueva)* | **8,69 €** |
+| Goma de silicona | 6,39 € |
+| Brazalete de acero | 21,19 € |
+
+Se queda en medio: por encima de la goma y muy por debajo del brazalete, que
+cuesta más del doble.
+
+### Lo que falta
+
+- **Los colores** que da el anuncio. Sin ellos no se puede montar el paso.
+- **Los dibujos de la correa** para el configurador.
+- La captura del anuncio: variantes, envío y mínimos.
