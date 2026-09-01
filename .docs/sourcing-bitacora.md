@@ -244,6 +244,8 @@ más en el flujo de montaje de Madrid.
 [1005007345083993](https://es.aliexpress.com/item/1005007345083993.html) —
 Óscar, **01/09/2026**: «correas de piel a 8,69 **sólo para el Bitácora**».
 
+**Tres colores: azul, marrón y negro** (Óscar, 01/09/2026).
+
 No entra en la biblioteca compartida ni se ofrece en ningún otro modelo.
 
 **Es la tercera familia de correa de la Bitácora.** Hoy sólo tiene dos:
@@ -259,6 +261,12 @@ cuesta más del doble.
 
 ### Lo que falta
 
-- **Los colores** que da el anuncio. Sin ellos no se puede montar el paso.
-- **Los dibujos de la correa** para el configurador.
-- La captura del anuncio: variantes, envío y mínimos.
+- **Los tres dibujos** —azul, marrón y negro— para el configurador. Es lo único
+  que impide montar el paso: la familia entraría con sus colores pero sin
+  imagen, y el configurador los enseñaría en blanco.
+- La captura del anuncio: variantes de pedido, envío y mínimos.
+
+### Lo que añade al catálogo
+
+La Bitácora tiene hoy **cuatro cajas × cinco esferas × siete correas**. Con la
+piel pasa a **diez correas**, así que el modelo crece cerca de un 40 %.
