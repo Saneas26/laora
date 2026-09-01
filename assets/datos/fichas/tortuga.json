@@ -229,16 +229,10 @@
     "coste": 3.89
    },
    {
-    "id": "BRZ",
-    "familia": "A316",
-    "nombre": "Acero 316L",
-    "coste": 32.39
-   },
-   {
     "id": "A316SAT",
     "familia": "A316",
-    "nombre": "Acero satinado",
-    "expl": "Brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable y seguro abatible. Es el mismo que monta el Trinchera.",
+    "nombre": "Acero cepillado",
+    "expl": "Brazalete de acero inoxidable 316L de tres eslabones, cepillado, con cierre desplegable y seguro abatible. Es el mismo que monta el Trinchera.",
     "coste": 20.19
    }
   ],
@@ -347,8 +341,7 @@
     "KROJ": "caucho-roja",
     "KNAR": "caucho-naranja",
     "KPRO": "caucho-profesional",
-    "BRZ": "brazalete-acero",
-    "A316SAT": "brazalete-satinado"
+    "A316SAT": "brazalete-cepillado"
    }
   },
   "_orden": "LA CORREA VA LA PRIMERA y las agujas las últimas. El anillo de minutos va DENTRO de la caja —cada color es una caja entera, no una capa aparte—, así que la capa `bisel` se dibuja ENCIMA de la caja lisa y la tapa entera. Es a propósito: así la caja aparece al señalar el tamaño y el anillo aparece al señalarlo, sin tener que dibujar once cajas por cada combinación.",
@@ -403,5 +396,5 @@
  },
  "_miniatura": "LA FOTO DE LA CORREA DE VERDAD, abajo a la DERECHA y sin tarjeta (Oscar, 01/09/2026: \"colocamos esta miniatura en la parte derecha inferior de la imagen grande, en vertical sin fondo\"). En el Lunar y el Trinchera la miniatura va abajo a la IZQUIERDA desde el 28/08: esto es solo del Tortuga, porque asi la pidio. Cuelga del paso `pasadores`, que lleva puerta, asi que solo sale con la profesional. Las recorta `herramientas/miniaturas_correa.py`. OJO: la de los pasadores de plata es de 220 px, la unica que hay, y al lado de la de los negros -679 px- se nota que son dos fotos distintas y en otra pose.",
  "_agua": "LOS 200 METROS VAN EN EL CONFIGURADOR, no en la ficha tecnica (Oscar, 01/09/2026: \"quiero que vaya en el configurador no en la ficha tecnica\"). Estan en la explicacion del paso de la caja, que es lo que el cliente lee mientras elige. La ficha tecnica ya tiene ademas su fila \"Resistencia al agua\" con el 20 ATM / 200 metros.",
- "_brazaletes": "DOS BRAZALETES DESDE EL 01/09/2026 (Oscar: \"coloca el acero satinado del trinchera para el tortuga tambien\"). El BRZ es el integrado del Tortuga, nacido de su caja, a 32,39; el A316SAT es la pieza de la BIBLIOTECA COMPARTIDA -tres eslabones, satinado, con cierre desplegable- a 20,19, la misma que monta el Trinchera y con el coste que ya tenia fichado alli. No se copia el dibujo: `capas_tortuga.py` monta la pieza PUBLICADA en assets/img/componentes/correas/, asi que el dia que se rehaga vale para los dos. OJO: la explicacion de la familia decia \"del mismo acabado que la caja\", que era verdad con un solo brazalete y deja de serlo con dos; se ha quitado esa coletilla."
+ "_brazaletes": "UN SOLO BRAZALETE, Y ES EL DE LA CASA (Oscar, 01/09/2026: \"en el tortuga el acero 316L es el que hemos denominado satinado solamente\" y \"en el tortuga quita el acero 316L\"). Se va el BRZ, el brazalete integrado del Tortuga a 32,39, y se queda el A316SAT: la pieza de la BIBLIOTECA COMPARTIDA, tres eslabones, acero 316L CEPILLADO, a 20,19. Es la misma que montan el Trinchera y el Lunar, y por ahora la unica de acero cepillado de la casa. No se copia el dibujo: `capas_tortuga.py` monta la pieza publicada en assets/img/componentes/correas/, asi que rehacerla vale para los tres. El id A316SAT se queda aunque ya no se llame satinado: va dentro de referencias emitidas."
 }
