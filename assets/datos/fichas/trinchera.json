@@ -686,5 +686,20 @@
   "_montado": "Montado el 30/08/2026 con herramientas/capas_trinchera.py desde tri/outputs/transparentes/, que esta vez SI trae alfa de verdad.",
   "_esferas_tamano": "CADA ESFERA CON SU RADIO desde el 01/09/2026. Las cinco se escalaban con el numero que salia de la NEGRA (radio 501) y las dos del Murph vienen dibujadas a 545: quedaban un 9 % mas grandes que el ojo y su corona de minutos -que llega al 96,5 % del radio, mucho mas afuera que el 94 % de las demas- se metia bajo el bisel y salia cortada. Oscar: \"la esfera del murph hay que hacerla un pelin mas pequena, sobre el mismo eje, porque los numerales de los minutos quedan muy cerca del borde de la caja y tienen que verse un poco mas\". Ademas al Murph se le da un 1,5 % menos (AJUSTE) para que sus numerales queden a la misma distancia del bisel que los indices de las otras. Y a TODAS se les estira el canto 18 px (CANTO_ESF) con el color del borde: el ojo no es un circulo perfecto y por algun sitio asomaba el fondo de la pagina -hasta 3.452 px en el titanio-, cosa que ya pasaba antes. Ahora: 0 de 20 parejas con fondo a la vista."
  },
- "_cepillado": "ACERO CEPILLADO, NO SATINADO (Oscar, 01/09/2026: \"lo vamos a denominar a nivel de laOra en acero cepillado en todos los modelos\"). Solo cambia el NOMBRE y el nombre del fichero de la pieza; el id A316SAT se queda, porque va dentro de las referencias que ya se han emitido y una referencia de ayer tiene que seguir resolviendose hoy. Y es EL UNICO brazalete de acero 316L cepillado de la casa: uno para todos los modelos, hasta que Oscar meta mas."
+ "_cepillado": "ACERO CEPILLADO, NO SATINADO (Oscar, 01/09/2026: \"lo vamos a denominar a nivel de laOra en acero cepillado en todos los modelos\"). Solo cambia el NOMBRE y el nombre del fichero de la pieza; el id A316SAT se queda, porque va dentro de las referencias que ya se han emitido y una referencia de ayer tiene que seguir resolviendose hoy. Y es EL UNICO brazalete de acero 316L cepillado de la casa: uno para todos los modelos, hasta que Oscar meta mas.",
+ "cribas": {
+  "correamat": [
+   {
+    "cuando": {
+     "esftipo": "M"
+    },
+    "fuera": [
+     "CAUCHO",
+     "NATO"
+    ],
+    "porque": "El Trinchera Murph no va a tener caucho ni nato (Oscar, 01/09/2026)."
+   }
+  ]
+ },
+ "_cribas": "LO QUE SE CAE DE UN PASO PORQUE OTRO VALE TAL COSA. Un FILTRO dice de quien cuelga un paso -el color de la correa cuelga del material-; una CRIBA quita opciones. Aqui: con esfera Murph (esftipo M) no salen ni CAUCHO ni NATO. No se hace con `vetos` porque un veto es una combinacion entera: habria que escribir una linea por cada caja, cada color de caucho, cada nato y cada cierre -cientos-, y a la primera correa nueva se quedaria corto. La reparacion la hace `normaliza()`: quien tenga un caucho puesto y se pase al Murph se encuentra la correa cambiada."
 }

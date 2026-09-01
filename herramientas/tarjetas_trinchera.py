@@ -34,8 +34,14 @@ TARJETAS = {
                       'LO-02-A-BR39-KBLA-PVCO-plata'),
     'pvd-azul':      ('acero-316l-cepillado', 'esfera-azul', 'caja-negra', 'agujas',
                       'LO-02-A-NG39-KAZU-A316SAT'),
-    'titanio-murph': ('nato-negra-piel-negra', 'esfera-murph-crema', 'caja-titanio', 'agujas-murph-crema',
-                      'LO-02-A-TI39-MMCR-NNEG'),
+    # ⚠️ ERA NATO NEGRO Y YA NO PUEDE SERLO (Óscar, 01/09/2026: «el trinchera
+    # murph no va a tener caucho ni nato»). La referencia de esa tarjeta dejó
+    # de existir en el catálogo, así que el servidor la habría rechazado al
+    # cobrar. Pasa a VAQUERA NEGRA, que es la que deja el precio donde estaba
+    # —369,90— y sigue siendo una correa de diario. Las de piel suben a
+    # 379,90, la vintage a 399,90 y el brazalete a 409,90.
+    'titanio-murph': ('vaquera-negra', 'esfera-murph-crema', 'caja-titanio', 'agujas-murph-crema',
+                      'LO-02-A-TI39-MMCR-VNEG'),
 }
 
 

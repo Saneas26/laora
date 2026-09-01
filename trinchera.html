@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Trinchera de laOra: 9840 combinaciones, al precio honesto.">
+<meta name="description" content="Trinchera de laOra: 8240 combinaciones, al precio honesto.">
 <title>Trinchera · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -697,6 +697,25 @@
      6.816 porque montaba brazaletes de acero con hebilla de piel. */
   var FILTROS = {"correa": {"paso": "correamat", "campo": "familia"}};
 
+  /* ---------- LAS CRIBAS ----------
+     Un filtro dice de QUIÉN cuelga un paso; una criba dice qué se CAE de un
+     paso cuando otro vale tal cosa. Óscar, 01/09/2026: «el trinchera murph
+     no va a tener caucho ni nato».
+
+     POR QUÉ NO VALE UN VETO: un veto es una combinación entera, firma a
+     firma, y esto no es una combinación: son dos familias enteras fuera
+     para dos esferas. Con vetos habría que escribir una línea por cada
+     caja, cada color de caucho, cada nato y cada cierre —cientos—, y a la
+     primera correa nueva se quedaría corto.
+
+     LA REPARACIÓN SALE GRATIS: `normaliza()` ya cambia lo elegido cuando
+     deja de valer, así que quien tenga puesto un caucho y se pase al Murph
+     se encuentra la correa cambiada, no un reloj que no existe. Y el
+     volcador recorre el árbol entero y normaliza en la hoja, así que esas
+     ramas caen encima de referencias que ya cuenta: no entran al catálogo
+     y no hay que tocarlo. */
+  var CRIBAS = {"correamat": [{"cuando": {"esftipo": "M"}, "fuera": ["CAUCHO", "NATO"], "porque": "El Trinchera Murph no va a tener caucho ni nato (Oscar, 01/09/2026)."}]};
+
   /* AÑADIDOS A PRECIO PLANO, por paso y opción. Óscar, 31/08/2026: «el
      precio de la caja de 39 es 10 € más que la caja de 36 en cualquier
      combinación». No es un coste: un coste pasa por el multiplicador y por
@@ -707,10 +726,19 @@
   var PVP_EXTRA = {"tamano": {"39": 10}};
   function cuelgaDe(k) { return FILTROS[k] || null; }
   function valeEn(k, id, s) {
+    var est = s || e;
     var f = cuelgaDe(k);
-    if (!f) return true;
-    var o = OPCIONES[k] && OPCIONES[k][id];
-    return !!o && o[f.campo] === (s || e)[f.paso];
+    if (f) {
+      var o = OPCIONES[k] && OPCIONES[k][id];
+      if (!o || o[f.campo] !== est[f.paso]) return false;
+    }
+    var cs = CRIBAS[k];
+    for (var i = 0; cs && i < cs.length; i++) {
+      var c = cs[i], toca = true;
+      for (var q in c.cuando) if (est[q] !== c.cuando[q]) { toca = false; break; }
+      if (toca && c.fuera.indexOf(id) >= 0) return false;
+    }
+    return true;
   }
   function abierta(k, s) {
     var g = PUERTAS[k];

@@ -269,6 +269,25 @@ def modelo_js(d, dentro):
      6.816 porque montaba brazaletes de acero con hebilla de piel. */
   var FILTROS = %(filtros)s;
 
+  /* ---------- LAS CRIBAS ----------
+     Un filtro dice de QUIÉN cuelga un paso; una criba dice qué se CAE de un
+     paso cuando otro vale tal cosa. Óscar, 01/09/2026: «el trinchera murph
+     no va a tener caucho ni nato».
+
+     POR QUÉ NO VALE UN VETO: un veto es una combinación entera, firma a
+     firma, y esto no es una combinación: son dos familias enteras fuera
+     para dos esferas. Con vetos habría que escribir una línea por cada
+     caja, cada color de caucho, cada nato y cada cierre —cientos—, y a la
+     primera correa nueva se quedaría corto.
+
+     LA REPARACIÓN SALE GRATIS: `normaliza()` ya cambia lo elegido cuando
+     deja de valer, así que quien tenga puesto un caucho y se pase al Murph
+     se encuentra la correa cambiada, no un reloj que no existe. Y el
+     volcador recorre el árbol entero y normaliza en la hoja, así que esas
+     ramas caen encima de referencias que ya cuenta: no entran al catálogo
+     y no hay que tocarlo. */
+  var CRIBAS = %(cribas)s;
+
   /* AÑADIDOS A PRECIO PLANO, por paso y opción. Óscar, 31/08/2026: «el
      precio de la caja de 39 es 10 € más que la caja de 36 en cualquier
      combinación». No es un coste: un coste pasa por el multiplicador y por
@@ -279,10 +298,19 @@ def modelo_js(d, dentro):
   var PVP_EXTRA = %(pvpextra)s;
   function cuelgaDe(k) { return FILTROS[k] || null; }
   function valeEn(k, id, s) {
+    var est = s || e;
     var f = cuelgaDe(k);
-    if (!f) return true;
-    var o = OPCIONES[k] && OPCIONES[k][id];
-    return !!o && o[f.campo] === (s || e)[f.paso];
+    if (f) {
+      var o = OPCIONES[k] && OPCIONES[k][id];
+      if (!o || o[f.campo] !== est[f.paso]) return false;
+    }
+    var cs = CRIBAS[k];
+    for (var i = 0; cs && i < cs.length; i++) {
+      var c = cs[i], toca = true;
+      for (var q in c.cuando) if (est[q] !== c.cuando[q]) { toca = false; break; }
+      if (toca && c.fuera.indexOf(id) >= 0) return false;
+    }
+    return true;
   }
   function abierta(k, s) {
     var g = PUERTAS[k];
@@ -447,6 +475,7 @@ def modelo_js(d, dentro):
         'agua': js(d.get('agua', '')),
         'puertas': js(d.get('puertas', {})),
         'filtros': js(d.get('filtros', {})),
+        'cribas': js(d.get('cribas', {})),
         'plantillaref': js(d.get('referencia')) if d.get('referencia') else 'null',
         'listo': 'true' if d.get('listo') else 'false',
         'extra': js(d.get('extra', 0)),
@@ -526,6 +555,7 @@ def cuantas(d, dentro):
                 for v in d.get('vetos', []))
     puertas = d.get('puertas', {})
     filtros = d.get('filtros', {})
+    cribas = d.get('cribas', {})
     cadena = d.get('cadena') or []
     combis = d.get('combinaciones') or []
 
@@ -538,10 +568,16 @@ def cuantas(d, dentro):
 
     def vale(idp, o, elegido):
         f = filtros.get(idp)
-        if not f:
-            return True
-        padre = elegido.get(f['paso'])
-        return bool(padre) and o.get(f['campo']) == padre['id']
+        if f:
+            padre = elegido.get(f['paso'])
+            if not padre or o.get(f['campo']) != padre['id']:
+                return False
+        # y las cribas: lo que se cae de un paso porque otro vale tal cosa
+        for c in cribas.get(idp, []):
+            if all((elegido.get(q) or {}).get('id') == v
+                   for q, v in c['cuando'].items()) and o['id'] in c['fuera']:
+                return False
+        return True
 
     def anda(i, elegido):
         if i == len(pasos):
