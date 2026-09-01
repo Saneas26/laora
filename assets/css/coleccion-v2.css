@@ -258,6 +258,37 @@
     radial-gradient(120% 90% at 78% 18%, rgba(58,150,168,.42) 0%, rgba(5,23,29,0) 62%);
 }
 
+/* CONTRA QUIÉN SE MIDE CADA MODELO (Óscar, 27/08/2026). La regla de la
+   casa: la comparativa mira SIEMPRE hacia arriba —o a la misma altura
+   dando mucho más—, nunca hacia abajo. Van el homenajeado y dos
+   superventas de su liga, y el nuestro al final, que es el remate. */
+.cv2-vs{margin:34px 0 0}
+.cv2-vs-titulo{
+  font-family:var(--cv2-mono);font-weight:700;
+  font-size:clamp(15px,1.7vw,20px);line-height:1.3;letter-spacing:.07em;
+  text-transform:uppercase;margin:0 0 16px;
+}
+.cv2-vs-titulo span{color:var(--cv2-gris)}
+.cv2-vs-lista{list-style:none;margin:0;padding:0;max-width:760px}
+.cv2-vs-lista li{
+  display:flex;align-items:baseline;justify-content:space-between;gap:18px;
+  padding:12px 0;border-bottom:1px solid var(--cv2-linea);
+  font-size:16px;line-height:1.3;color:var(--cv2-gris);
+}
+.cv2-vs-lista b{color:var(--cv2-negro);font-weight:700}
+.cv2-vs-lista em{
+  font-family:var(--cv2-mono);font-style:normal;font-weight:700;
+  font-size:17px;color:var(--cv2-negro);white-space:nowrap;
+}
+/* El nuestro cierra la lista y se ve que es el nuestro. */
+.cv2-vs-lista li.cv2-vs-nuestro{
+  border-bottom:0;border-top:2px solid var(--cv2-negro);
+  margin-top:6px;padding-top:14px;
+}
+.cv2-vs-lista li.cv2-vs-nuestro b,
+.cv2-vs-lista li.cv2-vs-nuestro em{color:var(--cv2-oro)}
+.cv2-vs-lista li.cv2-vs-nuestro em{font-size:20px}
+
 /* Lo que va encima del lienzo se vuelve claro. El dorado, que sobre
    blanco andaba justo de contraste, aquí por fin brilla. */
 .cv2-lienzo .cv2-chip{background:#fff;color:var(--cv2-negro)}
@@ -282,6 +313,12 @@
 .cv2-lienzo .cv2-cal-refs b,
 .cv2-lienzo .cv2-cal-refs em{color:#fff}
 .cv2-lienzo .cv2-cal-aviso{color:rgba(255,255,255,.62)}
+.cv2-lienzo .cv2-vs-titulo{color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.55)}
+.cv2-lienzo .cv2-vs-titulo span{color:rgba(255,255,255,.64)}
+.cv2-lienzo .cv2-vs-lista li{color:rgba(255,255,255,.72);border-bottom-color:rgba(255,255,255,.16)}
+.cv2-lienzo .cv2-vs-lista b{color:#fff}
+.cv2-lienzo .cv2-vs-lista em{color:#fff}
+.cv2-lienzo .cv2-vs-lista li.cv2-vs-nuestro{border-top-color:rgba(255,255,255,.55)}
 
 /* ---------- LOS CALIBRES (Óscar, 20/08/2026) ----------
    Ocupa el sitio del antiguo «Movimientos Suizos» y de la línea de
