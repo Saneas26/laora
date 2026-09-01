@@ -227,6 +227,13 @@
     "coste": 3.39
    },
    {
+    "id": "KPRO",
+    "familia": "CAUCHO",
+    "nombre": "Profesional",
+    "expl": "Caucho de buceo con la tabla de tiempos sin descompresión impresa en la tira: la que el buceador lleva a la vista en la muñeca.",
+    "coste": 3.89
+   },
+   {
     "id": "BRZ",
     "familia": "A316",
     "nombre": "Acero 316L",
@@ -252,7 +259,7 @@
  "_codigo": "LO-06, dado por Óscar el 31/08/2026. Los cinco anteriores son LO-01 Precisa, LO-02 Trinchera, LO-03 Lunar, LO-04 Bitácora y LO-05 Cero Cero.",
  "montaje": {
   "img": "/assets/img/tortuga-2026/capas/1200/",
-  "v": "?v=10",
+  "v": "?v=11",
   "pila": [
    {
     "capa": "correa",
@@ -324,6 +331,7 @@
     "KVER": "caucho-verde",
     "KROJ": "caucho-roja",
     "KNAR": "caucho-naranja",
+    "KPRO": "caucho-profesional",
     "BRZ": "brazalete-acero"
    }
   },
@@ -340,8 +348,8 @@
    "campo": "familia"
   }
  },
- "_coste": "COSTES PUESTOS EL 31/08/2026, todos dados por Oscar. Movimiento 9,00 el cuarzo y 65,00 el automatico. Caja 32,39, que trae caja, bisel, anillo y cristal mineral; el ZAFIRO suma 4,20 en el paso del cristal, que es la diferencia entre los 32,39 y los 36,59 del anuncio. Esfera 11,19, agujas 5,59, logotipo 3,78. Correa de buzo 3,39 y brazalete de acero 32,39. El anillo interior y la hebilla no cuestan aparte. La correa de buzo profesional de 3,89 todavia no esta en la ficha.",
- "_correas": "SOLO LA CORREA DE BUZO Y EL BRAZALETE (Oscar, 31/08/2026: \"dejamos solo correa buzo nada mas, la profesional de momento no\"). La correa de buzo profesional de 3,89 en negro, que esta fichada en el libro como P-078, NO entra en la ficha. Queda apuntada por si vuelve.",
+ "_coste": "COSTES PUESTOS EL 31/08/2026, todos dados por Oscar. Movimiento 9,00 el cuarzo y 65,00 el automatico. Caja 32,39, que trae caja, bisel, anillo y cristal mineral; el ZAFIRO suma 4,20 en el paso del cristal, que es la diferencia entre los 32,39 y los 36,59 del anuncio. Esfera 11,19, agujas 5,59, logotipo 3,78. Correa de buzo 3,39 y brazalete de acero 32,39. El anillo interior y la hebilla no cuestan aparte. La correa de buzo profesional, 3,89.",
+ "_correas": "LA DE BUZO, LA PROFESIONAL Y EL BRAZALETE. El 31/08/2026 Oscar dejo fuera la profesional (\"dejamos solo correa buzo nada mas, la profesional de momento no\") y el 01/09/2026 la mando montar: \"monta esta correa de caucho en el tortuga y la nombras caucho profesional\". Entra como color de la familia Caucho, con el coste de 3,89 que ya estaba fichado en el libro como P-078. OJO: el P-078 esta fichado en NEGRO y el dibujo que mando Oscar es AZUL MARINO; se le pone ese coste porque es la misma correa, pero el color esta por confirmar.",
  "_listo": "A LA VENTA desde el 31/08/2026, por orden de Oscar.",
  "tecnica": {
   "caja": "Caja de cojín de 44 mm en acero inoxidable 316L, con la corona a las 3,8 —apartada del dorso de la mano, no se clava al doblar la muñeca— y bisel giratorio de buceo, unidireccional y con seguridad. Dentro, el anillo de minutos {bisel} bajo el cristal. El 316L es el acero de grado quirúrgico: lleva molibdeno, y eso es lo que le hace aguantar el sudor y el agua salada sin picarse ni oxidarse, además de liberar muy poco níquel. Cepillado en los flancos y pulido en los cantos. Cristal {cristal} y fondo roscado.",

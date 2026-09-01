@@ -29,6 +29,17 @@ El hueco venía de 22 y pico y las correas de la entrega se llaman
 ⚠️ Y SON 44 mm, NO 45, aunque el fichero del patrón se llame «45mm»: lo
 dice la ficha y lo confirmó Óscar. De ahí salen 73,0 px por milímetro y
 una ranura de 1.460 px.
+
+LA CORREA PROFESIONAL (Óscar, 01/09/2026: «monta esta correa de caucho en
+el tortuga y la nombras caucho profesional»). Es la número 47 de la
+entrega y viene dibujada entera —hebilla, trabilla, tabla de tiempos sin
+descompresión y su escalera de agujeros—, así que hay dos cosas que no se
+pueden hacer con ella como con las otras seis: medirla por su punto más
+ancho, que es la HEBILLA y no el asa, y pasarle `tapa_los_agujeros`, que
+está para un defecto que ésta no tiene. De ahí `POR_LAS_PUNTAS` y
+`SIN_TAPAR`. Lo que se ve en el visor son los 17 mm de correa que asoman
+a cada lado de la caja; la tabla y los agujeros caen fuera del marco, y
+sólo el rótulo «N.D.LIMITS» llega a asomar al alejarse.
 """
 import io as _io
 import os
@@ -133,8 +144,26 @@ CORREAS = {
     'caucho-verde':      '35-correa-caucho-verde-buzo-20-18mm-eje-2048.png',
     'caucho-roja':       '36-correa-caucho-roja-buzo-20-18mm-eje-2048.png',
     'caucho-naranja':    '37-correa-caucho-naranja-buzo-20-18mm-eje-2048.png',
+    # LA PROFESIONAL LLEGA CON LA HEBILLA DENTRO DEL CUADRO (Óscar,
+    # 01/09/2026: «monta esta correa de caucho en el tortuga y la nombras
+    # caucho profesional»). Es la única de la entrega que se dibuja entera
+    # —hebilla, trabilla, tabla de tiempos sin descompresión y la escalera
+    # de agujeros—, y la hebilla es MÁS ANCHA que la correa: 373 px contra
+    # 359 en el asa. Por eso ésta se mide por las puntas y no por el máximo.
+    'caucho-profesional': '47-correa-caucho-azul-lujo-4k-hueco-caja-44mm.png',
     'brazalete-acero':   '20-brazalete-tortuga-eje-2048.png',
 }
+# ⚠️ SE MIDE EN LAS PUNTAS, NO EN EL MÁXIMO, y sólo en las que hace falta.
+# Lo que tiene que llenar la ranura es el ancho DEL ASA, que es donde la
+# correa entra: en las seis de caucho y en el brazalete el sitio más ancho
+# del dibujo es justo ése, así que el número no cambia y no se toca nada de
+# lo publicado. En la profesional el sitio más ancho es la hebilla, y
+# midiendo por el máximo la correa entraba un 4 % estrecha en el asa.
+POR_LAS_PUNTAS = ('caucho-profesional',)
+# Y NO SE LE TAPAN LOS AGUJEROS. `tapa_los_agujeros` está para el defecto de
+# las seis de caucho, que traen cinco agujeros pegados a la caja donde sólo
+# hay uno; ésta trae su escalera de agujeros bien dibujada y a su distancia.
+SIN_TAPAR = ('caucho-profesional',)
 
 
 def alfa(f, u=128):
@@ -262,6 +291,26 @@ def ancho_maximo(f):
     a = alfa(f)
     xs = np.where(a.any(0))[0]
     return int(xs.max() - xs.min() + 1), float((xs.min() + xs.max()) / 2.0)
+
+
+def ancho_en_las_puntas(f):
+    """Lo que mide la correa en el asa: las puntas que miran a la caja.
+
+    Se toma la mediana de doce filas de cada punta —la primera llega
+    difuminada y miente— y manda la más ancha de las dos, que es la que
+    tiene que caber."""
+    al = alfa(f)
+    filas = np.where(al.any(1))[0]
+    t = [(int(x[0]), int(x[-1]))
+         for x in np.split(filas, np.where(np.diff(filas) > 1)[0] + 1)]
+    if len(t) != 2:
+        return ancho_maximo(f)
+    anchos, centros = [], []
+    for ys in (range(t[0][1] - 11, t[0][1] + 1), range(t[1][0], t[1][0] + 12)):
+        w = [np.where(al[y])[0] for y in ys if al[y].any()]
+        anchos.append(np.median([int(np.ptp(i)) + 1 for i in w]))
+        centros.append(np.median([(int(i.min()) + int(i.max())) / 2.0 for i in w]))
+    return int(max(anchos)), float(np.mean(centros))
 
 
 def tiras_de(f):
@@ -645,7 +694,8 @@ def monta():
     # caja y en el lienzo alto, para que el alejarse enseñe más tira
     alto_pub = round(ANCHO * ALTO_COR / float(LIENZO))
     for ident, f in sorted(CORREAS.items()):
-        an, cx = ancho_maximo(f)
+        an, cx = (ancho_en_las_puntas(f) if ident in POR_LAS_PUNTAS
+                  else ancho_maximo(f))
         s = astas * HOLGURA_COR / an
         capa = pon_correa(f, s, cx, centro_astas)
         b = np.asarray(capa)[:, :, 3] > 128
@@ -656,7 +706,8 @@ def monta():
             capa = pon_correa(f, s, cx, centro_astas, baja, sube)
         capa = rellena_las_astas(capa, CAJA_PATRON, centro_astas)
         capa = alarga_las_tiras(capa)
-        capa = tapa_los_agujeros(capa)
+        if ident not in SIN_TAPAR:
+            capa = tapa_los_agujeros(capa)
         capas[ident] = capa.resize((ANCHO, alto_pub), Image.LANCZOS)
         vis = np.asarray(capas[ident])[:, :, 3] > 128
         fil = np.where(vis.any(1))[0]
@@ -693,7 +744,8 @@ def hoja(capas, destino):
              ('caja-anillo-azul', 'esfera-azul-sunburst', 'brazalete-acero', 'agujas-acero'),
              ('caja-anillo-turquesa', 'esfera-turquesa-champagne', 'caucho-gris', 'agujas-gris-oscuro'),
              ('caja-anillo-burdeos', 'esfera-frambuesa-fume', 'caucho-roja', 'agujas-gris-oscuro'),
-             ('caja-anillo-oliva', 'esfera-roja-fume', 'caucho-verde', 'agujas-gris-oscuro')]
+             ('caja-anillo-oliva', 'esfera-roja-fume', 'caucho-verde', 'agujas-gris-oscuro'),
+             ('caja-anillo-azul', 'esfera-azul-texturizada', 'caucho-profesional', 'agujas-acero')]
     cols = 3
     filas = (len(tiros) + cols - 1) // cols
     h = Image.new('RGB', (cols * 420, filas * 420), FONDO[:3])
