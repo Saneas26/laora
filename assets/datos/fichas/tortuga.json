@@ -250,7 +250,7 @@
  "_codigo": "LO-06, dado por Óscar el 31/08/2026. Los cinco anteriores son LO-01 Precisa, LO-02 Trinchera, LO-03 Lunar, LO-04 Bitácora y LO-05 Cero Cero.",
  "montaje": {
   "img": "/assets/img/tortuga-2026/capas/1200/",
-  "v": "?v=8",
+  "v": "?v=9",
   "pila": [
    {
     "capa": "correa",

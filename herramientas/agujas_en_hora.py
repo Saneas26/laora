@@ -9,6 +9,12 @@ y el Precisa, cuyas capas hasta se llaman `1010-segundero-37`— y las dos
 entregas del Tortuga llegaban a su aire: el minutero casi en las 12, la
 horaria pasadas las ocho y media y el segundero por el 21.
 
+⚠️⚠️ EL TORTUGA YA NO LO USA (Óscar, 01/09/2026: «vuelve a colocar las
+agujas originales»). Mandó las suyas ya dibujadas a las 10:10 con el
+segundero en el 37 —las `40-` y `41-`—, así que no hay nada que girar, y con
+el giro se va el sombreado torcido que dejaba. Esto se queda por si vuelve a
+llegar una entrega a su aire, que es para lo que se escribió.
+
 ⚠️ ESTAS AGUJAS VIENEN ARMADAS, no sueltas. `herramientas/agujas_tortuga.py`
 monta las de la primera entrega, que llegaban tumbadas una al lado de otra
 y había que buscarle a cada una su pivote. Las que Óscar mandó después

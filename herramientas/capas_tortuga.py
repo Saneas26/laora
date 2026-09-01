@@ -67,12 +67,11 @@ HOLGURA_ESF = 1.005              # la esfera se mete un pelín bajo el anillo
 # se plantaba en 1.072 px con los índices empezando en 824: los cruzaba
 # enteros. Ahora las tres se escalan para que la punta del minutero se pare
 # un pelo antes del índice al que apunta, y las otras dos bajan con ella.
-GRADOS_MINUTERO = 60.0           # a las 10:10 el minutero apunta al minuto 10
-HUECO_INDICE = 30.0              # y se para esto antes de tocarlo (unidades de esfera)
-# Y SIETE PÍXELES MÁS (Óscar, 31/08/2026: «la aguja del segundero y del
-# minutero ahora son demasiado cortas, auméntalas 7 px de largo»). Los 7
-# son del lienzo que se publica, el de 1.200, así que aquí se convierten.
-MAS_LARGO = 7.0                  # px del lienzo de 1.200
+# EL TOPE DE LAS AGUJAS ES LA PISTA DE SEGUNDOS (Óscar, 01/09/2026: «el
+# segundero y el minutero quedan siempre justo antes del indicador de
+# segundos, dejan ver la línea del indicador —por ejemplo segundo 14— pero
+# no lo tapan»). Antes el tope era el índice redondo; ahora es la pista.
+HUECO_PISTA = 18.0               # lo que se paran antes de tocarla (px del 4.096)
 HOLGURA_COR = 1.010              # y la correa, un pelín bajo las astas
 # EL LIENZO ALTO DE LAS CORREAS (Óscar, 31/08/2026: «cuando hacemos zoom es
 # precisamente para que se vea más correa, como ya funciona con las otras
@@ -118,14 +117,14 @@ ESFERAS = {
 # una suya. Si se les midiera el largo y se escalaran aparte, la hora que
 # marcan seguiría siendo la misma pero las puntas dejarían de caer donde el
 # dibujante las puso.
-# ⚠️ Y LAS AGUJAS TAMBIÉN SE LEEN DE `preparadas/` (Óscar, 31/08/2026:
-# «las agujas tienen que mostrar las 10:10 y el segundero el segundo 37»).
-# Las dos entregas llegan a su aire —el minutero casi en las 12 y el
-# segundero por el 21—, así que antes de montar hay que pasarlas por
-# `herramientas/agujas_en_hora.py`, que gira cada una por su lado.
+# LAS AGUJAS VUELVEN A SER LAS DEL DIBUJANTE (Óscar, 01/09/2026: «en el
+# Tortuga vuelve a colocar las agujas originales»). Las mandó ya dibujadas
+# a las 10:10 con el segundero en el 37, así que aquí NO se gira nada: la
+# `agujas_en_hora.py` que las ponía en hora a base de girarlas ya no hace
+# falta para este modelo, y con ella se va el sombreado girado.
 AGUJAS = {
-    'agujas-acero':       'preparadas/39-agujas-tortuga-acero-inoxidable-esfera-28-5mm-eje-2048.png',
-    'agujas-gris-oscuro': 'preparadas/38-agujas-tortuga-gris-oscuro-esfera-28-5mm-eje-2048.png',
+    'agujas-acero':       '41-agujas-tortuga-acero-inoxidable-10-10-37-esfera-28-5mm-eje-2048.png',
+    'agujas-gris-oscuro': '40-agujas-tortuga-gris-muy-oscuro-10-10-37-esfera-28-5mm-eje-2048.png',
 }
 CORREAS = {
     'caucho-negra':      '32-correa-caucho-negra-buzo-20-18mm-eje-2048.png',
@@ -226,33 +225,37 @@ def punta_del_indice(fondo=120.0):
     return lejos
 
 
-def borde_del_indice(grados=GRADOS_MINUTERO, tol=14.0):
-    """Dónde empieza el índice al que apunta el minutero, en unidades de esfera.
+def borde_de_la_pista(paso=4):
+    """Dónde empieza, hacia dentro, la pista de segundos de la esfera.
 
-    Se miden LAS OCHO esferas y manda la que lo trae más adentro: la capa de
-    agujas es una sola y tiene que valer para todas. Los índices se conocen
-    por el lumen —crema, claro y más cálido que azul—; los batones de las 12
-    y las 6 entran mucho más adentro que los redondos, así que sólo se mira
-    el que cae en el ángulo del minutero."""
-    from scipy import ndimage
-    fuera = []
+    SE CONOCE POR EL ARMÓNICO 60, que es el mismo truco de la Precisa: la
+    pista es lo ÚNICO del dibujo que se repite sesenta veces por vuelta. Se
+    remuestrea la esfera en círculos, se mira la fuerza de ese armónico en
+    cada radio y se coge el pico; desde el pico se camina hacia dentro
+    mientras siga valiendo más de la mitad, y ahí está el borde.
+
+    Se miden LAS OCHO esferas y manda la que trae la pista más adentro: la
+    capa de agujas es una sola y no puede taparla en ninguna."""
+    c = LIENZO / 2.0 - 0.5
+    th = np.linspace(0, 2 * np.pi, 720, endpoint=False)
+    dentro = []
     for f in sorted(ESFERAS.values()):
         a = np.asarray(Image.open(ENTREGA + f).convert('RGBA'))
-        al = a[:, :, 3] > 128
-        rgb = a[:, :, :3].astype(int)
-        lume = (al & (rgb[:, :, 0] > 150) & (rgb[:, :, 1] > 150) &
-                (rgb[:, :, 2] < rgb[:, :, 1] - 8))
-        lab, n = ndimage.label(lume)
-        c = LIENZO / 2.0 - 0.5
-        for k in range(1, n + 1):
-            m = lab == k
-            if m.sum() < 8000:
-                continue
-            ys, xs = np.where(m)
-            ang = np.degrees(np.arctan2(xs.mean() - c, -(ys.mean() - c))) % 360
-            if min(abs(ang - grados), 360 - abs(ang - grados)) < tol:
-                fuera.append(float(np.hypot(xs - c, ys - c).min()))
-    return min(fuera) if fuera else 0.0
+        g = np.where(a[:, :, 3] > 128, a[:, :, :3].mean(2), 0).astype(np.float32)
+        rr, vv = [], []
+        for r in range(1300, 1790, paso):
+            xs = np.round(c + r * np.sin(th)).astype(int).clip(0, LIENZO - 1)
+            ys = np.round(c - r * np.cos(th)).astype(int).clip(0, LIENZO - 1)
+            v = g[ys, xs]
+            rr.append(r)
+            vv.append(abs(np.fft.rfft(v - v.mean())[60]))
+        vv = np.asarray(vv)
+        i = int(np.argmax(vv))
+        j = i
+        while j > 0 and vv[j - 1] >= vv[i] * 0.55:
+            j -= 1
+        dentro.append(rr[j])
+    return float(min(dentro))
 
 
 def ancho_maximo(f):
@@ -617,16 +620,19 @@ def monta():
     # LAS AGUJAS, A SU PROPIA ESCALA: la que deja el minutero justo antes
     # del índice. Vienen dibujadas para la esfera —por eso iban con `se`—,
     # pero a esa escala la cruzan entera.
-    r_ind = borde_del_indice()
-    tope = ((r_ind - HUECO_INDICE) * se +
-            MAS_LARGO * LIENZO / 1200.0)        # hasta dónde puede llegar la punta
+    r_pista = borde_de_la_pista()
+    tope = r_pista * se - HUECO_PISTA           # hasta dónde puede llegar la punta
     largos = {}
     for ident, f in sorted(AGUJAS.items()):
         yy, xx = np.where(alfa(f))
         largos[ident] = float(np.hypot(xx - LIENZO / 2.0, yy - LIENZO / 2.0).max())
+    # ⚠️ MANDA LA AGUJA MÁS LARGA DE LAS DOS ENTREGAS, no cada una por su
+    # cuenta: son dos capas del mismo reloj y tienen que verse del mismo
+    # tamaño. Y la más larga no es siempre el minutero —en la de acero lo es
+    # el segundero—, así que se mira el largo, no el nombre.
     sa = tope / max(largos.values())
-    print('ÍNDICES · el del minuto 10 empieza en %.0f de esfera = %.0f px; el '
-          'minutero se para en %.0f' % (r_ind, r_ind * se, tope))
+    print('PISTA · el indicador de segundos empieza en %.0f de esfera = %.0f px; '
+          'las agujas se paran en %.0f' % (r_pista, r_pista * se, tope))
     print('AGUJAS · escala %.4f en vez de la de la esfera (%.4f): un %.0f %% más chicas'
           % (sa, se, 100 * (1 - sa / se)))
     for ident, f in sorted(AGUJAS.items()):
