@@ -59,18 +59,6 @@
     "nombre": "Azul",
     "coste": 21.39,
     "color": "#2E4A7D"
-   },
-   {
-    "id": "E5",
-    "nombre": "Gris",
-    "coste": 21.39,
-    "color": "#8A8D8F"
-   },
-   {
-    "id": "E6",
-    "nombre": "Marrón",
-    "coste": 25.99,
-    "color": "#6B4B33"
    }
   ]
  },
@@ -256,36 +244,6 @@
    "coste": 0
   },
   {
-   "caja": "C1",
-   "esf": "E5",
-   "correa": "Brz-Acero-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E5",
-   "correa": "Brz-Acero-Bit-07",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E5",
-   "correa": "Brz-Goma-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E5",
-   "correa": "Brz-Goma-Bit-03",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E6",
-   "correa": "Brz-Acero-Bit-01",
-   "coste": 0
-  },
-  {
    "caja": "C3",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-06",
@@ -316,24 +274,6 @@
    "coste": 0
   },
   {
-   "caja": "C3",
-   "esf": "E6",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E6",
-   "correa": "Brz-Acero-Bit-07",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E6",
-   "correa": "Brz-Goma-Bit-04",
-   "coste": 0
-  },
-  {
    "caja": "C4",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-02",
@@ -366,18 +306,6 @@
   {
    "caja": "C4",
    "esf": "E3",
-   "correa": "Brz-Goma-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E5",
-   "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E5",
    "correa": "Brz-Goma-Bit-01",
    "coste": 0
   }
@@ -390,7 +318,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=3",
+  "v": "?v=4",
   "pila": [
    {
     "capa": "correa",
@@ -439,5 +367,6 @@
   "_faltan": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron), el brazalete Brz-Acero-Bit-07 (acero plata y oro rosa) y las tres correas de goma. La entrega trajo ademas dos cajas (bronce y oro) y una esfera (cobre) que NO estan en la ficha: no se anaden hasta que Oscar diga que se venden y a que coste.",
   "_esferas": "ESFERAS NUEVAS EL 01/09/2026 (Oscar: \"cambia las esferas del bitacora por estas\"). Entrega `Codex/2026-09-01/esferas-bitacora-simplemente-a-esta-esfera/outputs/4k-transparent/`: indices con relieve, doble baton a las 12, pista de minutos punteada y el rotulo AUTOMATIC. NO se montan tal cual: los radios se llevan un 3,7 %, el eje baila hasta 80 px y la blanca es un poligono con un trozo de damero en una esquina. Las normaliza `herramientas/esferas_bitacora.py` ANTES de `capas_bitacora.py`. La cobre YA SE MONTA (Oscar, 01/09/2026: \"monta tambien el cobre\") y su capa se publica, pero todavia NO SE VENDE: la Bitacora vende por lista de combinaciones —que caja con que esfera y con que correa monta el proveedor— y esa lista es de Oscar. En cuanto la de, la esfera entra como un color mas.",
   "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color."
- }
+ },
+ "_esferas_fuera": "FUERA DE LA VENTA LA GRIS (E5) Y LA MARRON (E6), por orden de Oscar el 01/09/2026: \"sacalas de la venta\". Se venden desde el 30/08 pero NUNCA han tenido dibujo, asi que al elegirlas el visor se quedaba con la caja vacia y el boton de comprar activo: 10 de las 36 referencias eran un reloj que la web no sabe ensenar. La gris costaba 21,39 y la marron 25,99. Vuelven en cuanto lleguen sus esferas dibujadas, y con ellas estas diez combinaciones: C1+E5+Brz-Acero-Bit-01; C1+E5+Brz-Acero-Bit-07; C1+E5+Brz-Goma-Bit-01; C1+E5+Brz-Goma-Bit-03; C1+E6+Brz-Acero-Bit-01; C3+E6+Brz-Acero-Bit-06; C3+E6+Brz-Acero-Bit-07; C3+E6+Brz-Goma-Bit-04; C4+E5+Brz-Acero-Bit-02; C4+E5+Brz-Goma-Bit-01."
 }

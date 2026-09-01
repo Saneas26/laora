@@ -79,12 +79,23 @@ UNIDAD = 1254.0                 # el lienzo de la caja es la regla del montaje
 F = ANCHO / UNIDAD
 ALTO_LARGO = 1952               # lienzo del brazalete (alto, se coloca por el centro)
 
-# LA ESFERA, UN 2 % MÁS GRANDE que el ajuste medido. El ajuste por
-# solapamiento la deja de la medida justa del ojo, y por arriba y por abajo
-# le sobraban tres píxeles: ahí asomaba el canto de la esfera dentro del
-# marco. Creciendo un 2 % se mete bajo el bisel por los cuatro lados, y lo
-# que se esconde es canto, no dibujo.
-HOLGURA_ESFERA = 1.02
+# LA ESFERA, UN 5 % MÁS GRANDE que el ajuste medido (Óscar, 01/09/2026:
+# «haz un poquito más grande la imagen de la esfera por debajo de la caja,
+# bien cuadrada en el eje central»).
+#
+# ⚠️ Y NO ES UN CAPRICHO: EL OJO NO ES REDONDO Y LA ESFERA SÍ. El ojo de la
+# Bitácora es un cuadrado de esquinas blandas —un cojín—: mide 282 px de
+# radio por los lados y 314 por las esquinas. El ajuste por solapamiento
+# iguala las ÁREAS, así que deja un círculo que se mete bajo el bisel por
+# los lados y se queda corto en las esquinas: con el 2 % de antes asomaban
+# 2.765 px de fondo, dos medias lunas arriba y abajo que se veían a simple
+# vista sobre el gris del marco.
+#
+# Se probaron cuatro medidas contando los píxeles de fondo que quedan
+# dentro del ojo: 1,02 deja 2.765; 1,035 deja 517; 1,05 deja CERO y 1,065
+# también. Se queda en 1,05, que es el primero que tapa y el que menos
+# esconde: la pista de puntos de los minutos se sigue viendo entera.
+HOLGURA_ESFERA = 1.05
 
 # --- lo que se publica y de qué fichero sale -------------------------------
 # ⚠️ LAS CAJAS SON LAS «-transparente-v2» (Óscar, 01/09/2026: «sustituye

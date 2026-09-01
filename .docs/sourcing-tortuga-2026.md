@@ -238,12 +238,21 @@ con sus 200 m.
 
 ---
 
-## Lo que falta
+## Lo que falta · revisado el 01/09/2026
 
-**El Tortuga está cerrado.** Ninguna pieza sin coste, sin proveedor, sin color
-ni sin cierre. Lo único pendiente es de compra, no de catálogo:
+**Costes: ninguno.** Las nueve piezas del Tortuga están en el libro con precio
+y con enlace: caja (P-075), brazalete (P-076), correa de buzo (P-077), buzo
+profesional (P-078), NH36 (P-079), Miyota 2105 (P-080), agujas (P-081), esfera
+(P-082) y el logotipo compartido (P-062).
 
-1. **Envío, mínimos y descuento por volumen** de cada anuncio, y **la variante
-   exacta de pedido**.
-2. Los precios se capturaron con ofertas activas: **reverificar antes de
+**Lo que sí falta, y lo ve el cliente: 17 textos.** En la ficha están vacías las
+explicaciones de los **ocho colores de esfera**, de las **siete correas** y de
+los **dos cristales**. En la página salen como una casilla sin nada. Los demás
+pasos —movimiento, caja, anillo, agujas— sí los tienen.
+
+**Y lo de compra, como en todos los modelos:**
+
+1. **La variante exacta de pedido** de cada anuncio.
+2. **Envío, mínimos y descuento por volumen** de cada proveedor.
+3. Los precios se capturaron con ofertas activas: **reverificar antes de
    comprar**.
