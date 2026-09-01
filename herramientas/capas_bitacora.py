@@ -140,11 +140,36 @@ ESFERAS = {
     'esfera-cobre':    ENTREGA_ESF + 'bitacora-esfera-cobre-26.png',
 }
 
+# ⚠️ LOS BRAZALETES SON LOS «-frontal-hueco-caja» (Óscar, 01/09/2026:
+# «coloca estos brazaletes al bitácora y sustituyes los anteriores»). Los de
+# agosto eran una tira corta; éstos traen LAS DOS RAMAS con el hueco de la
+# caja en medio, que es lo que el montaje por capas necesita, y llegan a
+# 1024x1536.
 BRAZALETES = {
-    'brazalete-acero':      'bitacora-brazalete-acero-v1.png',
-    'brazalete-oro-rosa':   'bitacora-brazalete-oro-rosa-v1.png',
-    'brazalete-negro-pvd':  'bitacora-brazalete-negro-pvd-v1.png',
+    'brazalete-acero':
+        'bitacora-brazalete-acero-frontal-hueco-caja-transparente-v1.png',
+    'brazalete-oro-rosa':
+        'bitacora-brazalete-oro-rosa-frontal-hueco-caja-transparente-v1.png',
+    'brazalete-negro-pvd':
+        'bitacora-brazalete-negro-pvd-frontal-hueco-caja-transparente-v1.png',
 }
+# ⚠️ SÓLO EL DE ACERO TRAE ALFA DE VERDAD. Los otros dos llegan en RGBA
+# pero con el canal entero opaco: el fondo es un damero clarísimo pintado
+# —alterna entre 254 y 247 sobre blanco—, así que publicados tal cual serían
+# un rectángulo blanco tapando el reloj. Y no basta con «si es RGBA, su
+# alfa»: ahí es donde estaba la trampa.
+#
+# LOS TRES SE RECORTAN CON EL ALFA DEL DE ACERO, por lo mismo que las cajas
+# se recortan con una silueta común: si cada color trae su contorno, el
+# reloj cambia de tamaño al cambiar de color. Y se puede: los tres son el
+# MISMO render con distinto acabado. Medido, recortando los otros dos por su
+# fondo casi blanco y quedándose con las dos ramas: IoU 0,9861 el negro y
+# 0,9803 el oro rosa contra el alfa del acero, y el 97-98 % de lo que no
+# coincide cae a menos de tres píxeles del filo, o sea que es el suavizado
+# del canto y no otra forma. El fleco blanco que deja ese canto se lo come
+# `desfleca`.
+SILUETA_BRAZALETE = ('bitacora-brazalete-acero-'
+                     'frontal-hueco-caja-transparente-v1.png')
 # ⛔ LAS AGUJAS SE FUERON el 01/09/2026, por orden de Óscar: «quita las
 # agujas». Eran las de la entrega de agosto y no acompañaban a las esferas
 # nuevas: el segundero se salía de la esfera y cruzaba el bisel, y el
@@ -153,10 +178,13 @@ BRAZALETES = {
 # reconstruirlo.
 AGUJAS = 'bitacora-agujas-v1.png'
 CON_AGUJAS = False
-# Para registrar el brazalete, no se publica. SE USA EL DE ORO ROSA a
-# propósito: el combinado plateado es acero pulido y se recorta mal, por lo
-# mismo que la caja plateada (ver CAJAS_LIMPIAS).
-COMBINADO = 'bitacora-caja-brazalete-oro-rosa-v1.png'
+# Para registrar el brazalete, no se publica: dice DÓNDE cae el eje del
+# reloj dentro del dibujo del brazalete. Tiene que ser el combinado del
+# MISMO juego que los brazaletes que se publican —mismo lienzo, misma
+# cámara—, así que con los frontales entra el frontal. El de oro rosa de
+# agosto ya no vale: es otro encuadre y dejaría el reloj descolocado.
+# Éste trae alfa de verdad, así que no hay que adivinarle el recorte.
+COMBINADO = 'bitacora-caja-brazalete-acero-frontal-transparente-v1.png'
 
 # LA SILUETA DE LA CAJA SALE DE LAS DE COLOR, Y VALE PARA LAS CINCO.
 # La caja plateada es acero pulido y neutro: su propio brillo pasa por
@@ -352,9 +380,23 @@ def con_alfa(nombre, cuerpos=1, mascara=None):
 
 
 # ---------------------------------------------------------------- medir
+def _silueta_de(im, cuerpos=1):
+    """La silueta de una pieza: su alfa si lo trae de verdad, y si no, el
+    damero.
+
+    ⚠️ «TRAE ALFA» NO ES «ES RGBA». Los brazaletes nuevos llegan en RGBA con
+    el canal entero opaco y el damero pintado dentro: preguntando sólo por
+    el modo, la silueta sería el rectángulo del lienzo."""
+    if im.mode == 'RGBA':
+        a = np.asarray(im)[:, :, 3]
+        if a.min() < 250:
+            return a > 128
+    return alfa(im, cuerpos=cuerpos) > 128
+
+
 def ojo(im, m=None):
     """El ojo de la caja: lo que la pieza encierra."""
-    a = m if m is not None else (alfa(im, cuerpos=1) > 128)
+    a = m if m is not None else _silueta_de(im)
     h = ndimage.binary_fill_holes(a) & ~a
     lab, n = ndimage.label(h)
     if not n:
@@ -471,8 +513,9 @@ def capas(m):
                                   m['agujas']['ancla'], cuad, eje_c)
     largo = (ANCHO, ALTO_LARGO)
     eje_l = (ANCHO / 2.0, ALTO_LARGO / 2.0)
+    brz = Image.fromarray(np.asarray(abre(SILUETA_BRAZALETE).convert('RGBA'))[:, :, 3])
     for ident, f in BRAZALETES.items():
-        salida[ident] = coloca(con_alfa(f, cuerpos=2), m['brazalete']['escala'],
+        salida[ident] = coloca(con_alfa(f, mascara=brz), m['brazalete']['escala'],
                                m['brazalete']['ancla'], largo, eje_l)
     return salida
 

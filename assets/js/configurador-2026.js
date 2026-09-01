@@ -1594,16 +1594,25 @@
      único que se mira aquí es si el cliente está en el paso de la esfera,
      que es la excepción que él nombró.
 
-     ⚠️ SE MIRA EL PASO `esf`, NO SU TARJETA. La esfera vive en la tarjeta
-     «La caja» junto con el tamaño, el material, el bisel, las agujas y el
-     cristal: con la tarjeta entera el reloj estaría en primer plano
-     durante media página, que es justo lo que se ha venido a quitar.
-     Y se mira `offsetParent` porque un paso sin opciones va con `hidden`:
-     un rectángulo de ceros cae dentro de cualquier franja.
+     ⚠️ SE ACERCA CUANDO LA ESFERA ES EL PASO EN JUEGO, no cuando se ve.
+     Dos intentos antes de acertar:
+       · La TARJETA de la esfera no vale: la esfera vive en «La caja» junto
+         con el tamaño, el material, el bisel, las agujas y el cristal, así
+         que el reloj estaría de cerca durante media página.
+       · «Que el paso `esf` caiga en la franja de en medio» tampoco: en un
+         configurador CORTO —la Bitácora tiene cinco pasos— la esfera está
+         en esa franja ya nada más abrir, y el reloj nacía de cerca, que es
+         justo lo contrario de lo que pidió Óscar. Se vio en pantalla.
+     Manda `pasoPorScroll()`, que es el que el motor ya usaba para el
+     carrusel: de todos los pasos elige UNO, el que tiene el centro más
+     cerca de la línea de lectura. Si el que gana es la esfera, es que el
+     cliente está en la esfera.
 
      LAS MINIATURAS SIGUEN COLGANDO DE LA TARJETA DE LA CORREA, que para
      ellas sí manda: los dos pasos —material y color— viven en ella y el
-     color se esconde con el brazalete puesto. */
+     color se esconde con el brazalete puesto. Y se mira `offsetParent`
+     porque un paso sin opciones va con `hidden`: un rectángulo de ceros
+     cae dentro de cualquier franja. */
   function enLaFranja(el) {
     if (!el || !el.offsetParent) return false;
     var r = el.getBoundingClientRect();
@@ -1613,8 +1622,7 @@
   function repasaVisor() {
     var capas = $('[data-pv-capas]');
     if (capas)
-      capas.classList.toggle('pv-capas-cerca',
-                             CAPAS && enLaFranja($('[data-g="esf"]')));
+      capas.classList.toggle('pv-capas-cerca', CAPAS && pasoPorScroll() === 'esf');
     var t = document.querySelector('[data-pv-tarjeta="correa"]');
     if (t) pintaMinis(enLaFranja(t));
   }
