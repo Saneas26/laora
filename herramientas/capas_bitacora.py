@@ -107,6 +107,12 @@ CAJAS = {
     'caja-plata':     'bitacora-caja-40mm-acero-plata-transparente-v2.png',
     'caja-oro-rosa':  'bitacora-caja-40mm-oro-rosa-transparente-v2.png',
     'caja-negro-pvd': 'bitacora-caja-40mm-negro-pvd-transparente-v2.png',
+    # LA BRONCE, para la esfera cobre (Óscar, 01/09/2026). Su capa se
+    # publica; que se pueda COMPRAR depende de dos datos que son suyos: lo
+    # que cuesta la caja y con qué brazalete o correa la sirve el
+    # proveedor. Brazalete de bronce no hay dibujado: los tres que existen
+    # son acero plata, acero oro rosa y acero negro.
+    'caja-bronce':    'bitacora-caja-40mm-bronce-transparente-v2.png',
 }
 # ⚠️ LAS ESFERAS SON LAS DEL 01/09/2026 Y VIVEN EN OTRA CARPETA (Óscar:
 # «cambia las esferas del bitacora por estas»). Traen índices con relieve,
