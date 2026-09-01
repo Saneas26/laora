@@ -160,14 +160,16 @@
    "nombre": "Cuarzo japonés",
    "_real": "Miyota 2105",
    "cal": "LO_Q3626",
-   "coste": 9.0
+   "coste": 9.0,
+   "expl": "Calibre laOra LO_Q3626, de fabricación japonesa. Cuarzo con día y fecha —el disco del día, en español y en inglés— y pila de hasta 36 meses."
   },
   {
    "id": "A",
    "nombre": "Automático japonés",
    "_real": "NH36",
    "cal": "LO_A4126",
-   "coste": 65.0
+   "coste": 65.0,
+   "expl": "Calibre laOra LO_A4126, de fabricación japonesa. Automático con día y fecha y 41 horas de reserva de marcha."
   }
  ],
  "correa": {
@@ -239,7 +241,7 @@
   ],
   "colores_cierre": []
  },
- "_movimiento": "NH36 (automatico, 65,00) y MIYOTA 2105 (cuarzo, 9,00), Oscar 30/08/2026. Los dos con FECHA LARGA, dia y fecha; el del cuarzo es BILINGUE espanol/ingles. Calibres de la casa (Oscar, 31/08): LO_A4126 el automatico y LO_Q3626 el cuarzo. Se escriben con GUION BAJO, como los demas de la casa. El codigo lleva dentro la especificacion: A + horas de reserva (41) y Q + meses de pila (36), y 26 del ano.",
+ "_movimiento": "NH36 (automatico, 65,00) y MIYOTA 2105 (cuarzo, 9,00), Oscar 30/08/2026. Los dos con FECHA LARGA, dia y fecha; el del cuarzo es BILINGUE espanol/ingles. Calibres de la casa (Oscar, 31/08): LO_A4126 el automatico y LO_Q3626 el cuarzo. Se escriben con GUION BAJO, como los demas de la casa. El codigo lleva dentro la especificacion: A + horas de reserva (41) y Q + meses de pila (36), y 26 del ano. | LA EXPLICACION, puesta el 01/09/2026 (Oscar: «falta la explicacion del calibre en el tortuga»). Era el unico modelo cuyo paso del movimiento no decia nada debajo. Se escribe con la NORMA DE LA CASA: nunca el fabricante real —ni NH36 ni Miyota ni el pais de fabricacion de la base—, solo «Calibre laOra LO_xxxx, de fabricacion japonesa» y las caracteristicas. Y solo se dice lo que Oscar ha dado: dia y fecha, el disco del dia bilingue en el de cuarzo, 36 meses de pila y 41 horas de reserva, que son las cifras que llevan dentro los propios codigos. Si quiere anadir precision, cuerda manual o parada de segundero, que lo diga: no se inventan.",
  "_bisel": "EL BISEL SIEMPRE ES NEGRO (Oscar 30/08). Lo que aqui se llama \"bisel\" es en realidad el ANILLO INTERIOR, el aro fino de color pegado al borde de la esfera. Hay que renombrar el paso. No cuesta aparte: viene en la caja, junto con el bisel y el cristal. ⚠️ EL ANILLO «NARANJA» FINO SE FUE EL 31/08/2026 (Óscar: «no existe el anillo naranja y el anillo naranja grueso, directamente solo existe el grueso»). Queda uno solo, y desde el 31/08/2026 se llama «Naranja» a secas (Óscar: «al anillo naranja grueso llámalo sólo Naranja»): ya no hay fino del que distinguirlo. ⚠️ Su id sigue siendo NRG y el fichero de su capa sigue siendo `caja-anillo-naranja-grueso`; cambiarlos rompería las 448 referencias que ya están en el catálogo.",
  "_agujas": "Dos acabados de la entrega del 31/08: gris oscuro y acero inoxidable. Las agujas cuestan 5,59 y van APARTE de la esfera.",
  "_esfera": "Ocho colores de la entrega del 31/08, 28,5 mm, a 11,19 cada una. LA ESFERA ES SIEMPRE LA DE LA FOTO (Oscar, 31/08), con una sola diferencia: al CUARZO no se le pone AUTOMATIC. Mismo dibujo, misma esfera y mismo coste; cambia solo esa palabra impresa. Los dos movimientos llevan fecha larga, asi que la ventanilla de dia y fecha vale para los dos.",
