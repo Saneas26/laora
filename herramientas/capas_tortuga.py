@@ -142,11 +142,10 @@ AGUJAS = {
 # LAS DE CAUCHO SON LAS «LUJO» DEL 01/09/2026 (Óscar: «cambia las correas
 # del tortuga, sustituye por estas»). Es el mismo caucho de buceo de
 # siempre, pero renderizado en estudio: con volumen, brillo y la hebilla
-# dentro del cuadro. Llegan las cinco de color; ⚠️ LA NEGRA LISA NO VINO en
-# esa entrega, así que se queda con el dibujo plano de agosto y se nota al
-# lado de las otras. En cuanto llegue su «lujo», es cambiar esta línea.
+# dentro del cuadro. Llegan las cinco de color; la negra lisa no vino, y
+# por eso ya no está: el negro lo cubre la profesional, que también es
+# negra y está dibujada igual (Óscar, 01/09/2026).
 CORREAS = {
-    'caucho-negra':      '32-correa-caucho-negra-buzo-20-18mm-eje-2048.png',
     'caucho-azul-marino': '52-correa-caucho-azul-marino-lujo-4k-hueco-caja-44mm.png',
     'caucho-gris':       '50-correa-caucho-gris-lujo-4k-hueco-caja-44mm.png',
     'caucho-verde':      '51-correa-caucho-verde-lujo-4k-hueco-caja-44mm.png',
@@ -764,7 +763,7 @@ def hoja(capas, destino):
     # paso del anillo siempre tiene valor. Y suelta se ve mal a propósito
     # —su ojo es de 1.140 y la esfera se para en 978, así que asoma el
     # fondo—, que es justo lo que el anillo viene a tapar.
-    tiros = [('caja-anillo-negro', 'esfera-negra', 'caucho-negra', 'agujas-acero'),
+    tiros = [('caja-anillo-negro', 'esfera-negra', 'caucho-profesional', 'agujas-acero'),
              ('caja-anillo-naranja-grueso', 'esfera-negra-marfil', 'caucho-naranja', 'agujas-acero'),
              ('caja-anillo-azul', 'esfera-azul-sunburst', 'brazalete-acero', 'agujas-acero'),
              ('caja-anillo-turquesa', 'esfera-turquesa-champagne', 'caucho-gris', 'agujas-gris-oscuro'),
