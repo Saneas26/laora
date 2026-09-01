@@ -390,8 +390,35 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=1",
-  "pila": [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "mov", "necesita": "esf"}],
+  "v": "?v=2",
+  "pila": [
+   {
+    "capa": "correa",
+    "grupo": "correa",
+    "espera": "correa"
+   },
+   {
+    "capa": "esf",
+    "grupo": "esf",
+    "espera": [
+     "esf",
+     "esftipo"
+    ]
+   },
+   {
+    "capa": "caja",
+    "grupo": "caja",
+    "espera": [
+     "tamano",
+     "caja"
+    ]
+   },
+   {
+    "capa": "agujas",
+    "grupo": "mov",
+    "necesita": "esf"
+   }
+  ],
   "capas": {
    "correa": {
     "Brz-Acero-Bit-01": "brazalete-acero",
@@ -417,6 +444,7 @@
   "_agujas": "Cuelgan de `mov` porque la Bitacora no tiene paso de agujas: hay un solo juego y un solo movimiento, asi que `mov` es el grupo que SIEMPRE tiene valor. `necesita: esf` para que no floten en el aire antes de elegir esfera.",
   "_correa": "El brazalete NO sale de la biblioteca de componentes: es integrado, nace de la caja y no encaja en ningun otro reloj. Vive en la carpeta del modelo, y el motor lo respeta porque `CAPA.correa` existe (configurador-2026.js, 30/08/2026).",
   "_montado": "Montado el 30/08/2026 con la entrega de Oscar, por herramientas/capas_bitacora.py, que mide y coloca cada pieza. La entrega llego en RGB con un damero DIBUJADO en vez de alfa: el script se lo quita.",
-  "_faltan": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron), el brazalete Brz-Acero-Bit-07 (acero plata y oro rosa) y las tres correas de goma. La entrega trajo ademas dos cajas (bronce y oro) y una esfera (cobre) que NO estan en la ficha: no se anaden hasta que Oscar diga que se venden y a que coste."
+  "_faltan": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron), el brazalete Brz-Acero-Bit-07 (acero plata y oro rosa) y las tres correas de goma. La entrega trajo ademas dos cajas (bronce y oro) y una esfera (cobre) que NO estan en la ficha: no se anaden hasta que Oscar diga que se venden y a que coste.",
+  "_esferas": "ESFERAS NUEVAS EL 01/09/2026 (Oscar: \"cambia las esferas del bitacora por estas\"). Entrega `Codex/2026-09-01/esferas-bitacora-simplemente-a-esta-esfera/outputs/4k-transparent/`: indices con relieve, doble baton a las 12, pista de minutos punteada y el rotulo AUTOMATIC. NO se montan tal cual: los radios se llevan un 3,7 %, el eje baila hasta 80 px y la blanca es un poligono con un trozo de damero en una esquina. Las normaliza `herramientas/esferas_bitacora.py` ANTES de `capas_bitacora.py`. La cobre viene en la entrega y sigue sin venderse: preparada, pero fuera."
  }
 }

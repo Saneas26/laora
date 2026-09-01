@@ -92,12 +92,26 @@ CAJAS = {
     'caja-oro-rosa':  'bitacora-caja-40mm-oro-rosa-v1.png',
     'caja-negro-pvd': 'bitacora-caja-40mm-negro-pvd-v1.png',
 }
+# ⚠️ LAS ESFERAS SON LAS DEL 01/09/2026 Y VIVEN EN OTRA CARPETA (Óscar:
+# «cambia las esferas del bitacora por estas»). Traen índices con relieve,
+# doble batón a las 12, pista de minutos punteada y el rótulo AUTOMATIC, y
+# llegan a 4.096 con alfa de verdad. Se leen de `preparadas/`, que las deja
+# todas del mismo tamaño, con el mismo eje y con el borde redondo: pasar
+# antes `herramientas/esferas_bitacora.py` NO ES OPCIONAL —tal cual vienen,
+# los radios se llevan un 3,7 %, el eje baila 80 px y la blanca es un
+# polígono con un trozo de damero en una esquina—.
+ENTREGA_ESF = ('/Users/oscar/Documents/Codex/2026-09-01/'
+               'esferas-bitacora-simplemente-a-esta-esfera/outputs/'
+               '4k-transparent/preparadas/')
 ESFERAS = {
-    'esfera-turquesa': 'bitacora-esfera-turquesa-28_5mm-transparente-v3.png',
-    'esfera-blanca':   'bitacora-esfera-blanca-28_5mm-transparente-v3.png',
-    'esfera-negra':    'bitacora-esfera-negra-28_5mm-transparente-v3.png',
-    'esfera-azul':     'bitacora-esfera-azul-28_5mm-transparente-v3.png',
+    'esfera-turquesa': ENTREGA_ESF + 'bitacora-esfera-turquesa-26.png',
+    'esfera-blanca':   ENTREGA_ESF + 'bitacora-esfera-blanca-26.png',
+    'esfera-negra':    ENTREGA_ESF + 'bitacora-esfera-negra-26.png',
+    'esfera-azul':     ENTREGA_ESF + 'bitacora-esfera-azul-26.png',
 }
+# LA COBRE SE QUEDA FUERA, otra vez y por lo mismo: la entrega la trae y la
+# ficha no la vende. Está preparada en esa misma carpeta, así que el día que
+# Óscar diga a qué coste, es añadir una línea aquí y otra en la ficha.
 BRAZALETES = {
     'brazalete-acero':      'bitacora-brazalete-acero-v1.png',
     'brazalete-oro-rosa':   'bitacora-brazalete-oro-rosa-v1.png',
@@ -272,8 +286,14 @@ def silueta_caja():
     return _CONSENSO['m']
 
 
+def abre(nombre):
+    """Las piezas ya no están todas en la misma carpeta: las esferas son de
+    la entrega del 01/09 y las demás de la del 29/08."""
+    return Image.open(nombre if os.path.isabs(nombre) else ENTREGA + nombre)
+
+
 def con_alfa(nombre, cuerpos=1, mascara=None):
-    im = Image.open(ENTREGA + nombre)
+    im = abre(nombre)
     if im.mode == 'RGBA':
         return desfleca(im.copy())
     r = im.convert('RGB').copy()
@@ -344,13 +364,13 @@ def medidas():
     o = ojo(None, silueta)
     m['eje'] = centro(o)                       # el mismo para las cinco cajas
     # la esfera se ajusta al ojo por solapamiento
-    esf = np.asarray(Image.open(ENTREGA + ESFERAS['esfera-turquesa']))[:, :, 3] > 128
+    esf = np.asarray(abre(ESFERAS['esfera-turquesa']).convert('RGBA'))[:, :, 3] > 128
     s0 = (o.sum() / esf.sum()) ** 0.5
     iou, s, ox, oy = _iou_escalando(esf, o, s0, 0.03, 24)
     m['esfera'] = {'escala': s, 'iou': iou, 'ancla': (639.5, 639.5),
                    'cae': (639.5 * s + ox, 639.5 * s + oy)}
     # las agujas: eje propio, escala de la esfera
-    m['agujas'] = {'ancla': buje_agujas(Image.open(ENTREGA + AGUJAS)), 'escala': s}
+    m['agujas'] = {'ancla': buje_agujas(abre(AGUJAS)), 'escala': s}
     # el brazalete, registrando la caja suelta dentro del combinado
     oc = ojo(Image.open(ENTREGA + COMBINADO))
     s0 = (oc.sum() / o.sum()) ** 0.5
