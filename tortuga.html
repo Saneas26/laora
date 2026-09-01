@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Tortuga de laOra: 4608 combinaciones, al precio honesto.">
+<meta name="description" content="Tortuga de laOra: 5184 combinaciones, al precio honesto.">
 <title>Tortuga · laOra</title>
 <link rel="icon" type="image/png" href="/assets/img/app-laora.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -355,7 +355,7 @@
       },
       "A316": {
         "nombre": "Brazalete de acero",
-        "expl": "Brazalete de acero inoxidable 316L, del mismo acabado que la caja.",
+        "expl": "Brazalete de acero inoxidable 316L con cierre desplegable.",
         "coste": 0
       }
     },
@@ -395,6 +395,12 @@
       "BRZ": {
         "nombre": "Acero 316L",
         "coste": 32.39,
+        "familia": "A316"
+      },
+      "A316SAT": {
+        "nombre": "Acero satinado",
+        "expl": "Brazalete de acero inoxidable 316L de tres eslabones, satinado, con cierre desplegable y seguro abatible. Es el mismo que monta el Trinchera.",
+        "coste": 20.19,
         "familia": "A316"
       }
     },
@@ -569,7 +575,7 @@
   window.LAORA_MODELO = {
     slug: "tortuga", nombre: "Tortuga",
     OPCIONES: OPCIONES, e: e,
-    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"KAZU": "CAUCHO", "KGRI": "CAUCHO", "KVER": "CAUCHO", "KROJ": "CAUCHO", "KNAR": "CAUCHO", "KPRO": "CAUCHO", "BRZ": "A316"},
+    CORREAS: OPCIONES.correa || {}, CORREA_MAT: {"KAZU": "CAUCHO", "KGRI": "CAUCHO", "KVER": "CAUCHO", "KROJ": "CAUCHO", "KNAR": "CAUCHO", "KPRO": "CAUCHO", "BRZ": "A316", "A316SAT": "A316"},
     MATERIALES: OPCIONES.correamat || {}, CIERRES: OPCIONES.cierre || {},
     /* EL MONTAJE POR CAPAS, si el modelo lo trae. Se declara en el JSON:
 
@@ -617,7 +623,8 @@
       "KROJ": "caucho-roja",
       "KNAR": "caucho-naranja",
       "KPRO": "caucho-profesional",
-      "BRZ": "brazalete-acero"
+      "BRZ": "brazalete-acero",
+      "A316SAT": "brazalete-satinado"
     }
   }, CAPA_IMG: "/assets/img/tortuga-2026/capas/1200/", SERIE_V: "?v=14",
     PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa"}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "bisel", "grupo": "bisel", "espera": "bisel", "sustituye": "caja"}, {"capa": "agujas", "grupo": "agujas", "espera": "agujas", "necesita": "esf"}],

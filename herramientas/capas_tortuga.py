@@ -171,6 +171,13 @@ CORREAS = {
     # una en color, pero este modelo ya no lo usa.
     'caucho-profesional': '48-correa-caucho-negra-lujo-4k-hueco-44mm-tabla-4-columnas.png',
     'brazalete-acero':   '20-brazalete-tortuga-eje-2048.png',
+    # EL SATINADO ES EL DEL TRINCHERA (Óscar, 01/09/2026: «coloca el acero
+    # satinado del trinchera para el tortuga también»). No se copia el
+    # dibujo: se monta LA PIEZA PUBLICADA de la biblioteca compartida, la
+    # misma que enseña el Trinchera, para que el día que se rehaga se
+    # rehaga una vez y valga para los dos.
+    'brazalete-satinado': os.path.join(
+        RAIZ, 'assets/img/componentes/correas/1600/acero-316l-satinado.avif'),
 }
 # ⚠️ SE MIDE EN LAS PUNTAS, NO EN EL MÁXIMO. Lo que tiene que llenar la
 # ranura es el ancho DEL ASA, que es donde la correa entra. En los dibujos
@@ -180,18 +187,33 @@ CORREAS = {
 # entra en el cuadro: 376 px contra los 335 del asa. Midiendo por el
 # máximo, la correa entraba un 11 % estrecha en la ranura.
 POR_LAS_PUNTAS = ('caucho-profesional', 'caucho-azul-marino', 'caucho-gris',
-                  'caucho-verde', 'caucho-roja', 'caucho-naranja')
+                  'caucho-verde', 'caucho-roja', 'caucho-naranja',
+                  'brazalete-satinado')
 # Y A LAS «LUJO» NO SE LES TAPAN LOS AGUJEROS. `tapa_los_agujeros` está
 # para el defecto de los dibujos planos de agosto, que traían cinco
 # agujeros pegados a la caja donde sólo hay uno; las nuevas traen su fila
 # de agujeros bien dibujada y a su distancia. La negra lisa, que sigue
 # siendo la de agosto, sí lo necesita.
 SIN_TAPAR = ('caucho-profesional', 'caucho-azul-marino', 'caucho-gris',
-             'caucho-verde', 'caucho-roja', 'caucho-naranja')
+             'caucho-verde', 'caucho-roja', 'caucho-naranja',
+             'brazalete-satinado')
+
+
+def _ruta(f):
+    """Dónde está esa pieza.
+
+    Casi todas son de la entrega del Tortuga, pero desde el 01/09/2026 el
+    modelo monta también una pieza de la BIBLIOTECA COMPARTIDA —el
+    brazalete de acero satinado que ya lleva el Trinchera—, y ésa vive en
+    el repo y se pasa con su ruta entera. Se lee la pieza PUBLICADA, no un
+    dibujo aparte: así el brazalete que enseña el Tortuga es exactamente el
+    mismo que enseña el Trinchera, y el día que se rehaga se rehace una vez
+    para los dos."""
+    return f if os.path.isabs(f) else ENTREGA + f
 
 
 def alfa(f, u=128):
-    return np.asarray(Image.open(ENTREGA + f).convert('RGBA'))[:, :, 3] > u
+    return np.asarray(Image.open(_ruta(f)).convert('RGBA'))[:, :, 3] > u
 
 
 def hueco_de_la_caja(f):
@@ -259,7 +281,7 @@ def punta_del_indice(fondo=120.0):
     from scipy import ndimage
     lejos = 0.0
     for f in sorted(ESFERAS.values()):
-        a = np.asarray(Image.open(ENTREGA + f).convert('RGBA'))
+        a = np.asarray(Image.open(_ruta(f)).convert('RGBA'))
         al = a[:, :, 3] > 128
         rgb = a[:, :, :3].astype(int)
         lume = (al & (rgb[:, :, 0] > 150) & (rgb[:, :, 1] > 150) &
@@ -293,7 +315,7 @@ def borde_de_la_pista(paso=4):
     th = np.linspace(0, 2 * np.pi, 720, endpoint=False)
     dentro = []
     for f in sorted(ESFERAS.values()):
-        a = np.asarray(Image.open(ENTREGA + f).convert('RGBA'))
+        a = np.asarray(Image.open(_ruta(f)).convert('RGBA'))
         g = np.where(a[:, :, 3] > 128, a[:, :, :3].mean(2), 0).astype(np.float32)
         rr, vv = [], []
         for r in range(1300, 1790, paso):
@@ -359,7 +381,7 @@ def pon_correa(f, s, cx, centro, baja=0, sube=0):
     correa se acababa 109 px antes de tiempo. Escalando y pegando con el
     desplazamiento puesto, el sobrante sigue estando y sólo se recorta lo
     que sobra."""
-    im = Image.open(ENTREGA + f).convert('RGBA')
+    im = Image.open(_ruta(f)).convert('RGBA')
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     a = np.asarray(n)[:, :, 3] > 128
@@ -611,7 +633,7 @@ def cuanto_mover(L, arriba, abajo, margen=MARGEN_COR):
 
 def pon(f, s, eje_origen, eje_destino, sin_bajar=False):
     """Escala una pieza y le pone su eje donde toca."""
-    im = Image.open(ENTREGA + f).convert('RGBA')
+    im = Image.open(_ruta(f)).convert('RGBA')
     n = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))),
                   Image.LANCZOS)
     L = Image.new('RGBA', (LIENZO, LIENZO), (0, 0, 0, 0))
