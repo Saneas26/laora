@@ -493,6 +493,44 @@ def tapa_los_agujeros(L, dejar=1):
     return Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGBA')
 
 
+# CUÁNTAS FILAS HACEN FALTA para que espejar signifique algo: menos que
+# esto no es un eslabón, es una raya.
+ESPEJO_MINIMO = 60
+
+
+def _no_inventes(a, y0, y1, y2, y3, alto):
+    """Se niega a alargar una tira con un trozo que no da para eslabón.
+
+    ⚠️ ESTO SALTÓ EL 01/09/2026 y de milagro. Al arreglar el brazalete de la
+    biblioteca —separar sus dos ramas para que no se metan bajo la caja— la
+    tira del Tortuga dejó de llegar al canto del lienzo después de moverla,
+    así que `alarga_las_tiras` entró por primera vez de verdad… y espejó un
+    bloque de DOS FILAS, que es lo que `_tramo_recto` devuelve en un
+    brazalete: sus filas nunca llegan al 93 % del ancho máximo porque va de
+    20 a 16 mm, así que el bucle se corta en la primera. El resultado era un
+    brazalete con eslabones arriba y UNA BANDA LISA debajo, y se publicó sin
+    que nada chistara.
+
+    Antes no se veía porque las dos ramas ya llegaban al canto y esta
+    función no llegaba a hacer nada.
+
+    Así que ahora avisa en vez de inventar. Para que el Tortuga pueda montar
+    el brazalete nuevo hay que darle tira de sobra —dibujarlo más largo— o
+    reescribir el espejo para que repita ESLABONES ENTEROS, no las filas
+    rectas del extremo."""
+    for (ini, fin, hueco) in ((y0, y1, y0), (y2, y3, alto - 1 - y3)):
+        if hueco <= 0:
+            continue
+        n = _tramo_recto(a, ini, fin, ini == y0)
+        if n < ESPEJO_MINIMO and hueco > ESPEJO_MINIMO:
+            raise SystemExit(
+                '✗ NO SE PUEDE ALARGAR ESTA TIRA SIN INVENTÁRSELA: hay que '
+                'rellenar %d filas y el tramo recto del extremo son %d. '
+                'Espejando eso sale una banda lisa, no un brazalete. '
+                'Ver `_no_inventes` en herramientas/capas_tortuga.py.'
+                % (hueco, n))
+
+
 def alarga_las_tiras(L):
     """Alarga cada tira, espejándola, hasta el canto del lienzo alto.
 
@@ -516,6 +554,7 @@ def alarga_las_tiras(L):
         return L
     (y0, y1), (y2, y3) = t
     alto = a.shape[0]
+    _no_inventes(a, y0, y1, y2, y3, alto)
     if y0 > 0:
         n = _tramo_recto(a, y0, y1, True)
         bloque = a[y0:y0 + n]
