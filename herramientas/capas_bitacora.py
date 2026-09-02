@@ -828,7 +828,12 @@ def arma(cs, caja, esfera, brazalete):
     marco por arriba y por abajo. No es un fallo: se ve más tira que antes
     y sigue llegando a los bordes, que es lo que se buscaba.
     """
-    orden = [brazalete, esfera, caja] + (['agujas'] if CON_AGUJAS else [])
+    # ⚠️ EL BRAZALETE, EL ÚLTIMO: VA POR ENCIMA DE LA CAJA (Óscar,
+    # 02/09/2026). Es integrado y su primer eslabón monta sobre ella, así que
+    # aquí no se apila como en los demás relojes. Este orden y el `pila` de
+    # la ficha tienen que decir lo mismo, o la foto de la colección enseñará
+    # un reloj distinto del que arma el configurador.
+    orden = [esfera, caja] + (['agujas'] if CON_AGUJAS else []) + [brazalete]
     return apila([cs[c] for c in orden], ANCHO, FONDO, ESCALA).convert('RGB')
 
 

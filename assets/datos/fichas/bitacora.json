@@ -336,13 +336,8 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=9",
+  "v": "?v=10",
   "pila": [
-   {
-    "capa": "correa",
-    "grupo": "correa",
-    "espera": "correa"
-   },
    {
     "capa": "esf",
     "grupo": "esf",
@@ -358,6 +353,11 @@
      "tamano",
      "caja"
     ]
+   },
+   {
+    "capa": "correa",
+    "grupo": "correa",
+    "espera": "correa"
    }
   ],
   "capas": {
@@ -390,5 +390,6 @@
  },
  "_esferas_fuera": "FUERA DE LA VENTA LA GRIS (E5) Y LA MARRON (E6), por orden de Oscar el 01/09/2026: \"sacalas de la venta\". Se venden desde el 30/08 pero NUNCA han tenido dibujo, asi que al elegirlas el visor se quedaba con la caja vacia y el boton de comprar activo: 10 de las 36 referencias eran un reloj que la web no sabe ensenar. La gris costaba 21,39 y la marron 25,99. Vuelven en cuanto lleguen sus esferas dibujadas, y con ellas estas diez combinaciones: C1+E5+Brz-Acero-Bit-01; C1+E5+Brz-Acero-Bit-07; C1+E5+Brz-Goma-Bit-01; C1+E5+Brz-Goma-Bit-03; C1+E6+Brz-Acero-Bit-01; C3+E6+Brz-Acero-Bit-06; C3+E6+Brz-Acero-Bit-07; C3+E6+Brz-Goma-Bit-04; C4+E5+Brz-Acero-Bit-02; C4+E5+Brz-Goma-Bit-01.",
  "_bronce": "LA CAJA BRONCE (C2) Y LA ESFERA COBRE (E7) entran el 01/09/2026, por orden de Oscar: \"monta tambien el cobre\" y, preguntado con que caja, \"con una caja bronce nueva\". Caja 34,97 (el mismo escalon que la oro rosa y la negro PVD) y esfera 21,39 (como las demas), los dos dados por Oscar. SOLO EXISTE UNA COMBINACION: C2 + E7 + silicona negra, que es con lo que dijo que sale. La bronce no se ofrece con otras esferas ni la cobre con otras cajas, porque la Bitacora vende por lista de combinaciones y esa lista es la del proveedor, no una multiplicacion. OJO: BRAZALETE DE BRONCE NO HAY DIBUJADO -los tres que existen son acero plata, acero oro rosa y acero negro-, y la silicona TAMPOCO tiene capa, asi que esta referencia se ve con la caja y la esfera pero sin correa.",
- "_piel": "CORREAS DE PIEL, EXCLUSIVAS DE LA BITACORA (Oscar, 01/09/2026: «estas correas son exclusivamente del bitacora [...] el resto de correas y brazaletes al bitacora no le sirven»). Las TRES CAPAS YA ESTAN PUBLICADAS y montadas -piel-negra, piel-azul-marino y piel-marron-burdeos en assets/img/bitacora-2026/capas/1200/-, pero NO SE VENDEN todavia porque faltan dos datos que son de Oscar: (1) lo que cuesta la correa, sin lo cual el motor no sabe poner precio, y (2) con que cajas va cada una. Lo segundo importa por la HEBILLA: la negra y la azul marino la llevan de acero y la marron burdeos de oro rosa, asi que no valen para cualquier caja. La Bitacora vende por lista de combinaciones -lo que el proveedor monta- y no por multiplicar pasos, asi que no se inventan. AVISO: el fichero de la negra viene marcado «prueba-01»; antes de venderla, que Oscar confirme que esa es la buena."
+ "_piel": "CORREAS DE PIEL, EXCLUSIVAS DE LA BITACORA (Oscar, 01/09/2026: «estas correas son exclusivamente del bitacora [...] el resto de correas y brazaletes al bitacora no le sirven»). Las TRES CAPAS YA ESTAN PUBLICADAS y montadas -piel-negra, piel-azul-marino y piel-marron-burdeos en assets/img/bitacora-2026/capas/1200/-, pero NO SE VENDEN todavia porque faltan dos datos que son de Oscar: (1) lo que cuesta la correa, sin lo cual el motor no sabe poner precio, y (2) con que cajas va cada una. Lo segundo importa por la HEBILLA: la negra y la azul marino la llevan de acero y la marron burdeos de oro rosa, asi que no valen para cualquier caja. La Bitacora vende por lista de combinaciones -lo que el proveedor monta- y no por multiplicar pasos, asi que no se inventan. AVISO: el fichero de la negra viene marcado «prueba-01»; antes de venderla, que Oscar confirme que esa es la buena.",
+ "_pila": "EL BRAZALETE VA POR ENCIMA DE LA CAJA (Oscar, 02/09/2026: «en el caso del bitacora, vamos a poner el brazalete por encima de la caja en capas»). En los demas relojes la correa va la ultima de la pila, o sea DEBAJO de todo: entra por las asas y el cuerpo del reloj la tapa. Aqui el brazalete es integrado y su primer eslabon monta SOBRE la caja, asi que va el primero de la pila, encima. OJO: eso convierte los 30 px de `MARGEN_BRZ` -lo que la punta se metia bajo la caja- en 30 px de SOLAPE a la vista. La regla de `_saca_el_brazalete` sigue valiendo igual: el brazalete no puede ser mas ancho que la caja en ninguna fila en la que se vean los dos, o asomaria por los lados."
 }
