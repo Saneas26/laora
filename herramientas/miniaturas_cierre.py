@@ -14,12 +14,28 @@ hebilla SOLA en primer plano, y éstas enseñan la correa con la hebilla
 montada, que es lo que hace falta cuando la miniatura acompaña a la foto
 grande del reloj.
 
+⛔ SE PROBÓ A ENSEÑAR SÓLO LA HEBILLA Y NO VALE (02/09/2026). Óscar pidió
+verlo —«muéstrame primero en miniatura sólo las hebillas que ya
+teníamos»—, se le montaron las tres maneras posibles sobre el visor de
+verdad, eligió la de recortarlas grandes… y al verla puesta: «no me gusta
+el recorte de las hebillas, prefiero que pongas las fotos completas con
+las correas». Así que se queda esto. Lo que se aprendió, para no repetirlo:
+las hebillas sueltas de `assets/img/lunar-2026/cierres/` son de 220 px y la
+miniatura mide 240, así que salían estiradas vez y media, y recortadas
+contra el gris del marco se les nota el filo.
+
+⚠️ Y LAS CINCO CAPTURAS YA NO ESTÁN EN EL ESCRITORIO. Se borraron entre el
+01 y el 02 de septiembre. Lo único que queda de ellas son los AVIF
+publicados, de 900 px de alto: si hay que rehacer estas miniaturas, hay que
+volver a pedirle las fotos a Óscar. Este guión ya no puede regenerarlas.
+
 ⚠️ CADA UNA VIENE CON LA CORREA DE UN COLOR —la de la mariposa y las de
 oro, oro rosa y plata sobre azul marino o negro, la negra sobre marrón—.
 Es el catálogo del proveedor, no una serie: la miniatura enseña EL CIERRE,
-y por eso el `alt` habla del cierre y no del color de la correa.
+y por eso el `alt` habla del cierre y no del color de la correa. Óscar lo
+sabe y aun así prefiere estas.
 
-CÓMO SE PREPARAN. Llegan como capturas de pantalla: RGB sobre blanco puro,
+CÓMO SE PREPARARON. Llegaron como capturas de pantalla: RGB sobre blanco puro,
 sin alfa, con márgenes de sobra. Aquí se les quita el blanco —es blanco de
 verdad, 255 en las cuatro esquinas—, se quedan las piezas grandes, se
 recorta al contenido con un poco de aire y se publica en vertical. Van
