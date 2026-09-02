@@ -156,10 +156,69 @@ def sube(ident, px, prueba=False):
     return salida
 
 
+def cuadra_el_sur(ident, caja, prueba=False):
+    """Sube (o baja) SÓLO la punta de dentro de la tira de abajo.
+
+    Óscar, 02/09/2026, mirando el Trinchera: «el brazalete acero sur, tiene
+    que subir un pelín». Y es verdad: la pasada general subió las 45 correas
+    lo mismo —31 px, la mediana—, y a los seis brazaletes de acero les
+    faltaban entre 7 y 10 para quedar simétricos, porque su hueco no estaba
+    donde el de la mediana.
+
+    SÓLO SE TOCA EL SUR. Moviendo las dos puntas se movería también lo que
+    se ve por fuera; moviendo la de abajo, el hueco se centra y en el visor
+    no cambia ni un píxel de lo que asoma.
+
+    Lo que hay que mover es el DOBLE del desvío: el centro del hueco es el
+    punto medio de las dos puntas, así que moviendo una sola punta X, el
+    centro se mueve X/2."""
+    a = _alfa(os.path.join(BIBLIO, str(GRANDE), ident + '.avif'))
+    t = _tiras(a)
+    i = max(range(len(t) - 1), key=lambda j: t[j + 1][0] - t[j][1])
+    desvio = ((t[i][1] + t[i + 1][0]) / 2.0 - (a.shape[0] - GRANDE) / 2.0) - caja
+    px = int(round(2 * desvio))
+    if not px:
+        return 0
+    ruta = os.path.join(BIBLIO, str(GRANDE), ident + '.avif')
+    im = Image.open(ruta).convert('RGBA')
+    k = LIENZO / float(im.width)
+    im = im.resize((LIENZO, int(round(im.height * k))), Image.LANCZOS)
+    n = int(round(abs(px) * k))
+    b = np.asarray(im).copy()
+    t2 = _tiras(np.asarray(im)[:, :, 3] > 60)
+    j = max(range(len(t2) - 1), key=lambda q: t2[q + 1][0] - t2[q][1])
+    ini = t2[j + 1][0]
+    if px > 0:                                   # el sur SUBE: se alarga
+        b[ini - n:ini] = b[ini:ini + n][::-1]
+    else:                                        # el sur BAJA: se recorta
+        b[ini:ini + n] = 0
+    salida = os.path.join(os.environ.get('TMPDIR', '/tmp'), ident + '.png')
+    Image.fromarray(b).save(salida)
+    if not prueba:
+        subprocess.run([sys.executable,
+                        os.path.join(RAIZ, 'herramientas/publicar_componente.py'),
+                        'correas', ident, salida], check=True,
+                       stdout=subprocess.DEVNULL)
+    return px
+
+
 def main():
     prueba = '--prueba' in sys.argv
+    solo_sur = '--sur' in sys.argv
     quiere = [a for a in sys.argv[1:] if not a.startswith('--')] or altas()
     caja, cuantas = centro_de_las_cajas()
+    if solo_sur:
+        print('EL CENTRO DE LA CAJA está en la fila %.1f (mediana de %d cajas)\n'
+              % (caja, cuantas))
+        for ident in quiere:
+            antes = centro_del_hueco(ident)
+            px = cuadra_el_sur(ident, caja, prueba)
+            print('  %-46s hueco %.1f -> %.1f · el sur %s %d px'
+                  % (ident, antes, centro_del_hueco(ident) if prueba else antes - px / 2.0,
+                     'sube' if px > 0 else 'baja', abs(px)))
+        print('\n⚠️  y `python3 herramientas/auditar_correas.py` tiene que seguir '
+              'diciendo 0.')
+        return
     huecos = [centro_del_hueco(i) for i in altas()]
     huecos = [h for h in huecos if h is not None]
     correa = float(np.median(huecos))
