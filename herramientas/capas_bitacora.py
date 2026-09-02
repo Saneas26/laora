@@ -146,8 +146,13 @@ ESFERAS = {
 # caja en medio, que es lo que el montaje por capas necesita, y llegan a
 # 1024x1536.
 BRAZALETES = {
+    # EL DE ACERO ES EL «DE LUJO» (Óscar, 02/09/2026: «coloca este brazalete
+    # en el bitácora sustituyendo el acero»). Otro dibujo distinto: acero
+    # cepillado con los centros pulidos, más ancho —1.610 px de tira contra
+    # 1.065— y con las dos ramas casi tocándose. Trae alfa limpia y SIN el
+    # filete blanco de los otros dos, así que se recorta con la suya.
     'brazalete-acero':
-        'bitacora-brazalete-acero-frontal-hueco-caja-transparente-4k-final-v2.png',
+        'bitacora-brazalete-lujo-acero-316l-cepillado-centros-pulidos-transparente-4k-v1.png',
     'brazalete-oro-rosa':
         'bitacora-brazalete-oro-rosa-frontal-hueco-caja-transparente-4k-final-v2.png',
     'brazalete-negro-pvd':
@@ -213,6 +218,9 @@ PIELES = {
 # con el dibujo del proveedor a IoU 0,9278; quitándolo, a 0,9829.
 SILUETA_BRAZALETE = ('bitacora-brazalete-negro-pvd-'
                      'frontal-hueco-caja-transparente-4k-final-v2.png')
+# Los que traen el filete blanco y comparten silueta. El de lujo no está:
+# es otro dibujo y su alfa viene limpia.
+CON_FILETE = ('brazalete-oro-rosa', 'brazalete-negro-pvd')
 # ⛔ LAS AGUJAS SE FUERON el 01/09/2026, por orden de Óscar: «quita las
 # agujas». Eran las de la entrega de agosto y no acompañaban a las esferas
 # nuevas: el segundero se salía de la esfera y cruzaba el bisel, y el
@@ -618,7 +626,7 @@ def _dos_tiras(a):
             for x in np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)]
 
 
-def _saca_el_brazalete(salida, largo):
+def _saca_el_brazalete(salida, largo, quien):
     """Saca el brazalete de debajo de la caja y lo ajusta a su ancho.
 
     Óscar, 02/09/2026: «hay que sacar el brazalete más, ajustarlo a la
@@ -648,7 +656,7 @@ def _saca_el_brazalete(salida, largo):
     pc[desf:desf + ANCHO] = _perfil(caja, ANCHO)
     filas = np.where(pc)[0]
     arr, aba = int(filas.min()), int(filas.max())
-    base = {k: salida[k] for k in BRAZALETES}
+    base = {quien: salida[quien]}
     factor, sube, baja = 1.0, 0, 0
 
     def monta(ident, factor, sube, baja):
@@ -674,7 +682,7 @@ def _saca_el_brazalete(salida, largo):
         return L
 
     for vuelta in range(14):
-        p = monta('brazalete-acero', factor, sube, baja)
+        p = monta(quien, factor, sube, baja)
         a = np.asarray(p)[:, :, 3] > 128
         t = _dos_tiras(a)
         if len(t) != 2:
@@ -687,7 +695,7 @@ def _saca_el_brazalete(salida, largo):
         # donde la caja es caja de verdad, del 40 % de su ancho para arriba.
         juntos = (pb > 0) & (pc >= 0.4 * pc.max())
         peor = float(np.max(pb[juntos] / pc[juntos])) if juntos.any() else 1.0
-        if vuelta:
+        if vuelta and vuelta % 4 == 0:
             print('        vuelta %d · norte %d · sur %d · lo más ancho, %.3f '
                   'veces la caja' % (vuelta, norte, sur, peor))
         if abs(norte - MARGEN_BRZ) <= 2 and abs(sur - MARGEN_BRZ) <= 2 \
@@ -700,14 +708,13 @@ def _saca_el_brazalete(salida, largo):
         factor /= 1.0 + (peor - 1.0) * 0.5
         sube += int(round((norte - MARGEN_BRZ) * 0.5))
         baja += int(round((sur - MARGEN_BRZ) * 0.5))
-    for ident in BRAZALETES:
-        salida[ident] = monta(ident, factor, sube, baja)
-    a = np.asarray(salida['brazalete-acero'])[:, :, 3] > 128
+    salida[quien] = monta(quien, factor, sube, baja)
+    a = np.asarray(salida[quien])[:, :, 3] > 128
     t = _dos_tiras(a)
     ve = ((largo[1] - ANCHO / 0.72) / 2, (largo[1] + ANCHO / 0.72) / 2)
-    print('BRAZALETE ajustado: escala x%.4f · la de arriba sube %d y la de '
-          'abajo baja %d · se meten %d y %d · llega a los cantos del marco: %s'
-          % (factor, sube, baja, t[0][1] - arr, aba - t[1][0],
+    print('%-22s escala x%.4f · arriba %+d, abajo %+d · se mete %d y %d · '
+          'llega a los cantos: %s'
+          % (quien, factor, -sube, baja, t[0][1] - arr, aba - t[1][0],
              t[0][0] <= ve[0] and t[1][1] >= ve[1]))
 
 
@@ -795,8 +802,14 @@ def capas(m):
     anc4 = ((m['brazalete']['ancla'][0] - SESGO_4K[0]) / PASO_4K,
             (m['brazalete']['ancla'][1] - SESGO_4K[1]) / PASO_4K)
     for ident, f in BRAZALETES.items():
-        salida[ident] = coloca(con_alfa(f, mascara=brz), esc4, anc4, largo, eje_l)
-    _saca_el_brazalete(salida, largo)
+        # ⚠️ LA SILUETA COMÚN ES SÓLO DE LOS DOS «-final-v2». El de lujo es
+        # OTRO dibujo —más ancho, otras ramas— y trae su alfa limpia, sin
+        # filete blanco: recortarlo con la silueta de los otros le ponía la
+        # forma del negro PVD encima, y los tres salían idénticos.
+        salida[ident] = coloca(con_alfa(f, mascara=(brz if ident in CON_FILETE else None)),
+                               esc4, anc4, largo, eje_l)
+    for ident in BRAZALETES:
+        _saca_el_brazalete(salida, largo, ident)
     salida.update(capas_de_piel(salida['brazalete-acero']))
     return salida
 
