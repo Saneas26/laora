@@ -595,44 +595,120 @@ def alfa_de_piel(im):
     return ndimage.binary_fill_holes(np.isin(lab, gr))
 
 
-def _cuadra_norte_y_sur(salida, largo):
-    """Que el brazalete se meta lo mismo por arriba que por abajo.
+# CUÁNTO SE ESCONDE LA PUNTA DEL BRAZALETE bajo la caja (Óscar, 02/09/2026:
+# «hay que sacar el brazalete más, ajustarlo a la caja»). Con lo que traía el
+# dibujo se metía 81 px por cada lado; con 30 la punta sigue tapada de sobra
+# —a esa altura la caja es 60 px más ancha que el brazalete— y se ve un
+# eslabón más por arriba y otro por abajo.
+MARGEN_BRZ = 30
 
-    Óscar, 02/09/2026, sobre las correas de la biblioteca: «la correa norte
-    siempre queda más debajo de la caja que la correa sur». Aquí pasaba al
-    revés y con la entrega nueva: la rama de abajo se metía 105 px bajo la
-    caja y la de arriba 57. Es el mismo defecto y se cura igual, moviendo el
-    dibujo hasta que las dos se escondan lo mismo.
 
-    NO ES UN NÚMERO A MANO: se mide dónde empieza y acaba la caja en el
-    montaje y dónde mueren las dos ramas, y se mueve la mitad de la
-    diferencia. Si mañana llega otro brazalete, se vuelve a medir solo.
+def _perfil(m, alto):
+    """Ancho de una silueta fila a fila, en un lienzo de `alto` filas."""
+    an = np.zeros(alto, int)
+    for y in np.where(m.any(1))[0]:
+        xs = np.where(m[y])[0]
+        an[y] = xs.max() - xs.min() + 1
+    return an
 
-    ⚠️ SE MUEVE EL DIBUJO ENTERO Y AQUÍ SÍ SE PUEDE, al revés que en la
-    biblioteca: el brazalete de la Bitácora es más largo que el lienzo por
-    los dos lados —empieza por encima de la primera fila que se ve al
-    alejarse y acaba por debajo de la última—, así que moverlo no deja
-    ningún corte a la vista."""
-    caja = np.asarray(salida['caja-plata'])[:, :, 3] > 128
-    ys = np.where(caja.any(1))[0]
-    desf = (largo[1] - ANCHO) // 2
-    arr, aba = int(ys.min()) + desf, int(ys.max()) + desf
-    a = np.asarray(salida['brazalete-acero'])[:, :, 3] > 128
+
+def _dos_tiras(a):
     fil = np.where(a.any(1))[0]
-    t = [(int(x[0]), int(x[-1]))
-         for x in np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)]
-    if len(t) != 2:
-        return
-    norte, sur = t[0][1] - arr, aba - t[1][0]
-    px = int(round((sur - norte) / 2.0))
-    print('BRAZALETE se mete %d px por arriba y %d por abajo: se baja %d'
-          % (norte, sur, px))
-    if not px:
-        return
-    for ident in BRAZALETES:
+    return [(int(x[0]), int(x[-1]))
+            for x in np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)]
+
+
+def _saca_el_brazalete(salida, largo):
+    """Saca el brazalete de debajo de la caja y lo ajusta a su ancho.
+
+    Óscar, 02/09/2026: «hay que sacar el brazalete más, ajustarlo a la
+    caja». Son dos cosas distintas y las dos se miden:
+
+      · SACARLO. La punta de cada tira se lleva a `MARGEN_BRZ` píxeles por
+        dentro del borde de la caja. Traía 81 y se queda en 30. Cada tira se
+        mueve por su cuenta, así que de paso quedan simétricas —lo de esta
+        mañana con las correas de la biblioteca, que aquí pasaba al revés:
+        la de abajo se metía 105 y la de arriba 57—.
+      · AJUSTARLO. El brazalete no puede ser más ancho que la caja EN
+        NINGUNA FILA en la que se vean los dos. Se busca la escala que deja
+        el peor de esos cocientes justo en 1: ni asoma por los lados del
+        asa, ni deja escalón.
+
+    ⚠️ LAS DOS SE PISAN Y POR ESO SE ITERA. El brazalete se ensancha hacia
+    la caja: al sacarlo, la parte que queda a la altura del asa es otra —más
+    ancha— y hay que volver a estrecharlo; al estrecharlo, su punta se mueve
+    y hay que volver a sacarlo. Tres vueltas y se para solo.
+
+    ⚠️ MOVER LAS TIRAS NO DEJA HUECO: este brazalete es más largo que el
+    lienzo por los dos lados. Se comprueba al final.
+    """
+    caja = np.asarray(salida['caja-plata'])[:, :, 3] > 128
+    desf = (largo[1] - ANCHO) // 2
+    pc = np.zeros(largo[1], int)
+    pc[desf:desf + ANCHO] = _perfil(caja, ANCHO)
+    filas = np.where(pc)[0]
+    arr, aba = int(filas.min()), int(filas.max())
+    base = {k: salida[k] for k in BRAZALETES}
+    factor, sube, baja = 1.0, 0, 0
+
+    def monta(ident, factor, sube, baja):
+        im = base[ident]
+        if abs(factor - 1.0) > 1e-4:
+            n = im.resize((max(1, int(round(im.width * factor))),
+                           max(1, int(round(im.height * factor)))), Image.LANCZOS)
+            im = Image.new('RGBA', largo, (0, 0, 0, 0))
+            im.alpha_composite(n, (int(round((largo[0] - n.width) / 2.0)),
+                                   int(round((largo[1] - n.height) / 2.0))))
+        a = np.asarray(im)[:, :, 3] > 128
+        t = _dos_tiras(a)
+        if len(t) != 2 or (not sube and not baja):
+            return im
         L = Image.new('RGBA', largo, (0, 0, 0, 0))
-        L.alpha_composite(salida[ident], (0, px))
-        salida[ident] = L
+        med = (t[0][1] + t[1][0]) // 2
+        L.alpha_composite(im.crop((0, 0, largo[0], med)), (0, -sube))
+        # ⚠️ `med + baja`, NO `baja`: `alpha_composite` pega la esquina de
+        # arriba del recorte en `dest`, y la del recorte de abajo vale `med`
+        # en el original. Sin sumarlo, la tira de abajo saltaba a la cabecera
+        # del lienzo y se fundía con la de arriba en una sola.
+        L.alpha_composite(im.crop((0, med, largo[0], largo[1])), (0, med + baja))
+        return L
+
+    for vuelta in range(14):
+        p = monta('brazalete-acero', factor, sube, baja)
+        a = np.asarray(p)[:, :, 3] > 128
+        t = _dos_tiras(a)
+        if len(t) != 2:
+            break
+        norte, sur = t[0][1] - arr, aba - t[1][0]
+        pb = _perfil(a, largo[1])
+        # ⚠️ LA ÚLTIMA FILA DE LA CAJA MIDE 5 px —es la punta del dibujo, puro
+        # suavizado— y ahí el cociente se dispara a 100: la primera pasada
+        # encogió el brazalete a la centésima parte. Sólo cuentan las filas
+        # donde la caja es caja de verdad, del 40 % de su ancho para arriba.
+        juntos = (pb > 0) & (pc >= 0.4 * pc.max())
+        peor = float(np.max(pb[juntos] / pc[juntos])) if juntos.any() else 1.0
+        if vuelta:
+            print('        vuelta %d · norte %d · sur %d · lo más ancho, %.3f '
+                  'veces la caja' % (vuelta, norte, sur, peor))
+        if abs(norte - MARGEN_BRZ) <= 2 and abs(sur - MARGEN_BRZ) <= 2 \
+                and abs(peor - 1.0) <= 0.004:
+            break
+        # ⚠️ A MEDIO PASO, o no converge. Las dos correcciones se pisan
+        # —estrechar mueve la punta, sacar cambia qué trozo queda a la
+        # altura del asa— y a paso entero el bucle oscilaba: 0,93 · 1,14 ·
+        # 0,85 · 1,00. A medio paso se para en tres vueltas.
+        factor /= 1.0 + (peor - 1.0) * 0.5
+        sube += int(round((norte - MARGEN_BRZ) * 0.5))
+        baja += int(round((sur - MARGEN_BRZ) * 0.5))
+    for ident in BRAZALETES:
+        salida[ident] = monta(ident, factor, sube, baja)
+    a = np.asarray(salida['brazalete-acero'])[:, :, 3] > 128
+    t = _dos_tiras(a)
+    ve = ((largo[1] - ANCHO / 0.72) / 2, (largo[1] + ANCHO / 0.72) / 2)
+    print('BRAZALETE ajustado: escala x%.4f · la de arriba sube %d y la de '
+          'abajo baja %d · se meten %d y %d · llega a los cantos del marco: %s'
+          % (factor, sube, baja, t[0][1] - arr, aba - t[1][0],
+             t[0][0] <= ve[0] and t[1][1] >= ve[1]))
 
 
 def silueta_del_brazalete():
@@ -720,7 +796,7 @@ def capas(m):
             (m['brazalete']['ancla'][1] - SESGO_4K[1]) / PASO_4K)
     for ident, f in BRAZALETES.items():
         salida[ident] = coloca(con_alfa(f, mascara=brz), esc4, anc4, largo, eje_l)
-    _cuadra_norte_y_sur(salida, largo)
+    _saca_el_brazalete(salida, largo)
     salida.update(capas_de_piel(salida['brazalete-acero']))
     return salida
 
