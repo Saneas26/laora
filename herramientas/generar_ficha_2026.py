@@ -610,6 +610,47 @@ def cuantas(d, dentro):
     return anda(0, {})
 
 
+def de_cerca(d):
+    """La galería «De cerca», debajo del configurador.
+
+    Óscar, 02/09/2026: «si tenemos alguna foto del bitácora en archivo,
+    colócala debajo de la foto del configurador a modo catálogo». Es la misma
+    sección que el Lunar lleva a mano desde agosto (`pv-fijas`), pero
+    declarada en la ficha para que valga para los nueve modelos generados.
+
+    LAS FOTOS SON DE VERDAD, de 20 a 55 KB en escritorio, así que van con
+    `loading="lazy"` y con `srcset`: si se bajaran con la página, la ficha
+    pesaría el triple para enseñar algo que está por debajo del filo.
+
+    Se declara así:
+        "fijas": {"img": "/assets/img/bitacora-2026/galeria/",
+                  "v": "?v=1",
+                  "fotos": [{"f": "estudio", "alt": "…", "pie": "…"}, …]}
+    """
+    g = d.get('fijas') or {}
+    fotos = g.get('fotos') or []
+    if not fotos:
+        return ''
+    img, v = g.get('img', ''), g.get('v', '')
+    filas = []
+    for f in fotos:
+        n = f['f']
+        filas.append(
+            '      <figure>\n'
+            '        <img src="%(i)s1200/%(n)s.avif%(v)s"\n'
+            '             srcset="%(i)s480/%(n)s.avif%(v)s 480w,\n'
+            '                     %(i)s1200/%(n)s.avif%(v)s 1200w,\n'
+            '                     %(i)s1600/%(n)s.avif%(v)s 1600w"\n'
+            '             sizes="(max-width:900px) 100vw, 33vw" loading="lazy"\n'
+            '             decoding="async" alt="%(a)s">\n'
+            '        <figcaption>%(p)s</figcaption>\n'
+            '      </figure>'
+            % {'i': img, 'n': n, 'v': v, 'a': f.get('alt', ''), 'p': f.get('pie', '')})
+    return ('  <section class="pv-fijas">\n    <h2>%s</h2>\n'
+            '    <div class="pv-fijas-rejilla">\n%s\n    </div>\n  </section>\n\n'
+            % (g.get('titulo', 'De cerca'), '\n'.join(filas)))
+
+
 def ficha(d):
     listo = bool(d.get('listo'))
     dentro, _fuera = pasos_del_modelo(d)
@@ -636,7 +677,7 @@ def ficha(d):
         # capas, que sin capas no dibuja: un marco vacío dice la verdad
         # mejor que una foto de otro reloj.
         'presentacion': presentacion(d),
-        'decerca': '',
+        'decerca': de_cerca(d),
     }
 
     return """<!DOCTYPE html>
