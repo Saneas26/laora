@@ -209,15 +209,21 @@ PIELES = {
 # minutero tapaba el rótulo BITÁCORA. El fichero sigue en la entrega y aquí
 # queda su nombre, para que volver a ponerlas sea deshacer esto y no
 # reconstruirlo.
+# ⛔ LAS AGUJAS SE FUERON OTRA VEZ el 03/09/2026, por orden de Óscar:
+# «ok quita las agujas». Es la segunda vez —la primera fue el 01/09, con
+# las de agosto—, y ahora eran las «con sombras, misma posición», que
+# estuvieron puestas unas horas. El fichero sigue en la entrega y aquí
+# queda su nombre con la manera de colocarlas: volver a ponerlas es
+# cambiar `CON_AGUJAS` y republicar, no reconstruir nada.
+#
+# CÓMO SE COLOCABAN, que es lo que no hay que volver a averiguar: NO por
+# el buje. Vienen «en la misma posición» que la esfera turquesa de SU
+# entrega —la 4K del 02/09—, que no es la que se publica (las publicadas
+# son las del 01/09, otra carpeta y otro encuadre). Se mide el disco de
+# las dos esferas y se les aplica la transformación que lleva una sobre
+# la otra, entera. Ver `capa_de_agujas`, que se queda escrita.
 AGUJAS = 'bitacora-agujas-con-sombras-misma-posicion-transparente-4k-v2.png'
-CON_AGUJAS = True
-# ⚠️ LAS NUEVAS NO VAN CON LAS ESFERAS QUE PUBLICAMOS, Y POR ESO NO SE
-# COLOCAN COMO LAS VIEJAS. Vienen «en la misma posición» que la esfera
-# turquesa de SU entrega —la de 4K del 02/09—, que no es la que se publica
-# (las publicadas son las del 01/09, otra carpeta y otro encuadre). Así que
-# no se les busca el buje: se mide la transformación que lleva el disco de
-# la esfera 4K sobre el disco de la esfera publicada y se les aplica ESA,
-# entera. Ver `capa_de_agujas`.
+CON_AGUJAS = False
 ESFERA_DE_LAS_AGUJAS = ('bitacora-esfera-turquesa-con-agujas-extraida-'
                         'transparente-4k-v1.png')
 
