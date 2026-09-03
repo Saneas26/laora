@@ -829,11 +829,16 @@ def arma(cs, caja, esfera, brazalete):
     y sigue llegando a los bordes, que es lo que se buscaba.
     """
     # ⚠️ EL BRAZALETE, EL ÚLTIMO: VA POR ENCIMA DE LA CAJA (Óscar,
-    # 02/09/2026). Es integrado y su primer eslabón monta sobre ella, así que
-    # aquí no se apila como en los demás relojes. Este orden y el `pila` de
-    # la ficha tienen que decir lo mismo, o la foto de la colección enseñará
-    # un reloj distinto del que arma el configurador.
-    orden = [esfera, caja] + (['agujas'] if CON_AGUJAS else []) + [brazalete]
+    # 02/09/2026). Es integrado y su primer eslabón monta sobre ella.
+    # ⚠️ PERO SÓLO EL BRAZALETE. Las correas de piel de este mismo reloj
+    # entran POR DEBAJO, como en todos los demás relojes: subiendo la correa
+    # entera, la piel se dibuja encima de la esfera y tapa el reloj. Se
+    # probó y se vio. Esto tiene que decir lo mismo que el `encima_si` de la
+    # ficha, o la foto de la colección enseñará un reloj distinto del que
+    # arma el configurador.
+    encima = brazalete in BRAZALETES
+    orden = ([] if encima else [brazalete]) + [esfera, caja] \
+        + (['agujas'] if CON_AGUJAS else []) + ([brazalete] if encima else [])
     return apila([cs[c] for c in orden], ANCHO, FONDO, ESCALA).convert('RGB')
 
 

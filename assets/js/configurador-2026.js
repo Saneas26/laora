@@ -781,7 +781,15 @@
          esfera, agujas), y el Precisa apila distinto: su esfera va DEBAJO
          de la caja, que la tapa por el canto como el reloj de verdad. Sin
          esto, el orden del modelo se ignoraba en silencio (30/08/2026). */
-      img.style.zIndex = String(alturaEnLaPila + 1);
+      /* Y UNA PIEZA PUEDE SUBIR A LO ALTO SEGÚN LO ELEGIDO. El brazalete
+         integrado de la Bitácora monta SOBRE la caja (Óscar, 02/09/2026),
+         pero sus correas de piel entran por debajo como en todos los demás
+         relojes: si sube la correa entera, la piel se dibuja encima de la
+         esfera y tapa el reloj. `encima_si` dice para qué opciones —y sólo
+         para ésas— esta capa se pone por encima de todo. */
+      var alto = alturaEnLaPila + 1;
+      if (p.encima_si && p.encima_si.indexOf(e[p.grupo]) >= 0) alto = PILA.length + 1;
+      img.style.zIndex = String(alto);
       var f = ficheroCapa(p.grupo, e[p.grupo]);
       /* `espera` es el paso que tiene que haberse pulsado para que esta
          pieza aparezca, y puede ser UNA LISTA: la caja sale al señalar el
