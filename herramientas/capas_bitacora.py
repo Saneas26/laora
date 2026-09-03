@@ -162,8 +162,14 @@ ESFERAS = {
 BRAZALETES = {
     'brazalete-acero':
         'bitacora-brazalete-integrado-acero-corte-exacto-transparente-4k-v1.png',
+    # ⚠️ LOS DOS BICOLORES VAN POR LA v5 (Óscar, 03/09/2026: «sustituye las
+    # 2 últimas fotos añadidas a la carpeta»). Entre la v1 y la v5 sólo
+    # cambia el acabado: su alfa sigue dando IoU 1,00000 con la del de
+    # acero y los cortes siguen en las filas 849 y 2.941, así que la medida
+    # del montaje no se mueve ni un píxel. Si algún día una versión nueva
+    # trae otra silueta, `_registra_el_integrado` para y lo dice.
     'brazalete-acero-centros-oro-rosa':
-        'bitacora-brazalete-integrado-acero-centros-oro-rosa-transparente-4k-v1.png',
+        'bitacora-brazalete-integrado-acero-centros-oro-rosa-transparente-4k-v5.png',
     'brazalete-oro-rosa':
         'bitacora-brazalete-integrado-oro-rosa-transparente-4k-v1.png',
     'brazalete-negro-pvd':
@@ -174,7 +180,7 @@ BRAZALETES = {
     # son suyos: nombre, coste y con qué cajas y esferas lo sirve el
     # proveedor.
     'brazalete-acero-centros-dorados':
-        'bitacora-brazalete-integrado-acero-centros-dorados-transparente-4k-v1.png',
+        'bitacora-brazalete-integrado-acero-centros-dorados-transparente-4k-v5.png',
 }
 # ⛔ `PASO_4K`, `SESGO_4K`, `SILUETA_BRAZALETE`, `CON_FILETE` y `COMBINADO`
 # SE FUERON CON ELLOS. El brazalete integrado no se registra contra el
