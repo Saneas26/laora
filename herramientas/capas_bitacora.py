@@ -67,14 +67,13 @@ TARJETAS = os.path.join(RAIZ, 'assets/img/bitacora-2026/tarjetas')
 # armaban la de oro rosa con esfera azul y la negra con esfera azul, que no
 # existen y no se pueden comprar.
 FICHA = os.path.join(RAIZ, 'assets/datos/fichas/bitacora.json')
-# ⚠️ LAS TRES TARJETAS SALEN CON EL MISMO BRAZALETE desde el 03/09/2026, y
-# no es un descuido: sólo hay uno dibujado. Las combinaciones de oro rosa y
-# negro PVD (Brz-Acero-Bit-06 y -02) siguen en la ficha, pero sin capa, así
-# que su tarjeta se arma con el brazalete que hay.
+# CADA CAJA CON SU BRAZALETE, que es como se vende: la lista
+# `combinaciones` de la ficha dice que la plata va con el acero, la de oro
+# rosa con el oro rosa y la negra con el negro.
 FOTOS = [
     ('plata',      'C1', 'Brz-Acero-Bit-01'),
-    ('oro-rosa',   'C3', 'Brz-Acero-Bit-01'),
-    ('negro-pvd',  'C4', 'Brz-Acero-Bit-01'),
+    ('oro-rosa',   'C3', 'Brz-Acero-Bit-06'),
+    ('negro-pvd',  'C4', 'Brz-Acero-Bit-02'),
 ]
 FONDO = (233, 233, 231)
 
@@ -149,14 +148,33 @@ ESFERAS = {
 # agosto eran una tira corta; éstos traen LAS DOS RAMAS con el hueco de la
 # caja en medio, que es lo que el montaje por capas necesita, y llegan a
 # 1024x1536.
+# LOS CINCO INTEGRADOS (Óscar, 03/09/2026: «elimina el brazalete del
+# bitácora, todos los brazaletes, y coloca este» y, esa misma tarde,
+# «revisa esta carpeta y coge todos los brazaletes»). Los tres de antes
+# —el de lujo, el oro rosa y el negro PVD «-final-v2»— están BORRADOS a
+# propósito; si vuelven a hacer falta, sus nombres están en el git.
+#
+# ⚠️ SON EL MISMO DIBUJO CON CINCO ACABADOS: sus alfas dan IoU 1,00000
+# entre sí, con los cortes en las mismas filas —849 y 2.941— y del mismo
+# ancho. Por eso la medida se hace UNA VEZ y se les aplica a los cinco
+# (ver `_registra_el_integrado`): si un día llegan con siluetas distintas,
+# hay que medir cada uno por su cuenta y esto salta en la comprobación.
 BRAZALETES = {
-    # ⚠️ UNO SOLO, Y ES EL «INTEGRADO DE CORTE EXACTO» (Óscar, 03/09/2026:
-    # «elimina el brazalete del bitácora, todos los brazaletes, y coloca
-    # este»). Los tres de antes —el de lujo, el oro rosa y el negro PVD—
-    # están BORRADOS a propósito; si vuelven a hacer falta, sus nombres
-    # están en el git, no aquí.
     'brazalete-acero':
         'bitacora-brazalete-integrado-acero-corte-exacto-transparente-4k-v1.png',
+    'brazalete-acero-centros-oro-rosa':
+        'bitacora-brazalete-integrado-acero-centros-oro-rosa-transparente-4k-v1.png',
+    'brazalete-oro-rosa':
+        'bitacora-brazalete-integrado-oro-rosa-transparente-4k-v1.png',
+    'brazalete-negro-pvd':
+        'bitacora-brazalete-integrado-negro-pvd-transparente-4k-v1.png',
+    # ⚠️ ÉSTE NO SE VENDE TODAVÍA: no hay ningún id de correa en la ficha
+    # para el acero con los centros en oro AMARILLO. Se publica porque
+    # Óscar dijo «coge todos», y para venderlo hacen falta tres datos que
+    # son suyos: nombre, coste y con qué cajas y esferas lo sirve el
+    # proveedor.
+    'brazalete-acero-centros-dorados':
+        'bitacora-brazalete-integrado-acero-centros-dorados-transparente-4k-v1.png',
 }
 # ⛔ `PASO_4K`, `SESGO_4K`, `SILUETA_BRAZALETE`, `CON_FILETE` y `COMBINADO`
 # SE FUERON CON ELLOS. El brazalete integrado no se registra contra el
@@ -644,12 +662,13 @@ def capa_de_agujas(esfera_publicada):
 
 
 def _registra_el_integrado(caja, largo):
-    """El brazalete integrado, cuadrado con la caja AL PÍXEL.
+    """Los brazaletes integrados, cuadrados con la caja AL PÍXEL.
 
     Óscar, 03/09/2026: «la base de la caja es una caja que acaba totalmente
     recta en sus extremos, y el brazalete es igual de ancho que la caja en su
     unión, tienen que coincidir a la perfección; este reloj se llama Precisa,
-    así que vamos a hacer honor a su nombre».
+    así que vamos a hacer honor a su nombre». (Lo de Precisa era un juego de
+    palabras: el modelo sigue siendo la Bitácora.)
 
     LA REGLA, Y ES UNA SOLA: cada tira del brazalete acaba en un corte recto,
     y ese corte tiene que caer justo en la fila donde la caja mide EXACTAMENTE
@@ -663,20 +682,41 @@ def _registra_el_integrado(caja, largo):
     una vez. La búsqueda encuentra ese cruce y clava los dos cortes con menos
     de un píxel de error.
 
+    ⚠️ SE MIDE UNA VEZ PARA LOS CINCO. Son el mismo dibujo con cinco
+    acabados y se comprueba aquí mismo: si alguna silueta no es la del
+    primero, esto para. Medir cada uno por su cuenta daría cinco escalas
+    ligerísimamente distintas y el reloj pegaría un salto al cambiar de
+    acabado, que es justo lo contrario de lo que pidió Óscar.
+
     ⚠️ EL BRAZALETE VA POR ENCIMA DE LA CAJA (ver `arma` y el `encima_si` de
     la ficha), y es lo que remata la unión: las puntas de las asas —que son
     más anchas que el brazalete y antes asomaban por los lados, 21 px por la
     izquierda y 8 por la derecha— quedan tapadas. Era «la mancha blanca del
     lado izquierdo» del 03/09.
+
+    ⚠️ Y SE QUEDA CORTO POR ARRIBA. La tira norte del dibujo mide 770 filas
+    y la sur 1.070: a la escala que exige la unión exacta, la de abajo llega
+    justa al canto del marco y a la de arriba le faltan 99 px de los 1.200
+    de la foto. Óscar, 03/09: se le pide a Codex un render más largo, con
+    las dos tiras llegando a los cantos del lienzo de 4.096. NO se repite
+    eslabón ni se inventa dibujo.
     """
-    im = abre(BRAZALETES['brazalete-acero']).convert('RGBA')
-    B = np.asarray(im)[:, :, 3] > 128
-    anB = _perfil(B, im.height)
+    abiertos = {k: abre(f).convert('RGBA') for k, f in sorted(BRAZALETES.items())}
+    primero = sorted(abiertos)[0]
+    B = np.asarray(abiertos[primero])[:, :, 3] > 128
+    for k, im in abiertos.items():
+        otro = np.asarray(im)[:, :, 3] > 128
+        u = (B | otro).sum()
+        iou = (B & otro).sum() / float(u) if u else 0.0
+        if iou < 0.999:
+            raise SystemExit('✗ %s no tiene la silueta de %s (IoU %.5f): hay '
+                             'que medirlo por su cuenta' % (k, primero, iou))
+    anB = _perfil(B, B.shape[0])
     fil = np.where(B.any(1))[0]
-    cortes = np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)
-    if len(cortes) != 2:
+    trozos = np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)
+    if len(trozos) != 2:
         raise SystemExit('✗ el brazalete integrado no trae dos tiras')
-    Rn, Rs = int(cortes[0][-1]), int(cortes[1][0])      # los dos cortes rectos
+    Rn, Rs = int(trozos[0][-1]), int(trozos[1][0])      # los dos cortes rectos
     Wn, Ws = float(anB[Rn]), float(anB[Rs])
     # la caja, en el lienzo alto
     C = np.zeros((largo[1], largo[0]), bool)
@@ -696,27 +736,35 @@ def _registra_el_integrado(caja, largo):
             if mejor is None or err < mejor[0]:
                 mejor = (err, float(s), float(dy), yN, yS, cn, cs)
     err, s, dy, yN, yS, cn, cs = mejor
-    n = im.resize((max(1, int(round(im.width * s))),
-                   max(1, int(round(im.height * s)))), Image.LANCZOS)
-    # y centrado: el eje del corte sobre el eje de la caja
+
     def eje(m, y):
         xs = np.where(m[int(round(y))])[0]
         return (xs.min() + xs.max()) / 2.0
-    Bn = np.asarray(n)[:, :, 3] > 128
-    cb = (eje(Bn, Rn * s - 3) + eje(Bn, Rs * s + 3)) / 2.0
-    cc = (eje(C, yN) + eje(C, yS)) / 2.0
-    L = Image.new('RGBA', largo, (0, 0, 0, 0))
-    L.alpha_composite(n, (int(round(cc - cb)), int(round(dy))))
-    a = np.asarray(L)[:, :, 3] > 128
+
+    salida = {}
+    for k, im in sorted(abiertos.items()):
+        n = im.resize((max(1, int(round(im.width * s))),
+                       max(1, int(round(im.height * s)))), Image.LANCZOS)
+        if k == primero:
+            Bn = np.asarray(n)[:, :, 3] > 128
+            # el eje del corte, sobre el eje de la caja
+            dx = int(round((eje(C, yN) + eje(C, yS)) / 2.0
+                           - (eje(Bn, Rn * s - 3) + eje(Bn, Rs * s + 3)) / 2.0))
+        L = Image.new('RGBA', largo, (0, 0, 0, 0))
+        L.alpha_composite(n, (dx, int(round(dy))))
+        salida[k] = L
+    a = np.asarray(salida[primero])[:, :, 3] > 128
     ve = ((largo[1] - ANCHO / ESCALA) / 2.0, (largo[1] + ANCHO / ESCALA) / 2.0)
     f = np.where(a.any(1))[0]
-    print('BRAZALETE escala %.4f · corte norte fila %d: %.0f px de brazalete '
-          'contra %.0f de caja · corte sur fila %d: %.0f contra %.0f · error '
-          '%.1f px' % (s, yN, Wn * s, cn, yS, Ws * s, cs, err))
-    print('          llega al canto de arriba: %s · al de abajo: %s'
-          % (f.min() <= ve[0], f.max() >= ve[1]))
-    return L
-
+    print('BRAZALETE los %d comparten silueta · escala %.4f · corte norte fila '
+          '%d: %.0f px de brazalete contra %.0f de caja · corte sur fila %d: '
+          '%.0f contra %.0f · error %.1f px'
+          % (len(abiertos), s, yN, Wn * s, cn, yS, Ws * s, cs, err))
+    print('          llega al canto de arriba: %s (le faltan %.0f px de la '
+          'foto) · al de abajo: %s'
+          % (f.min() <= ve[0], max(0, f.min() - ve[0]) * ESCALA,
+             f.max() >= ve[1] - 1))
+    return salida
 
 def capas(m):
     """Devuelve {ident: imagen ya colocada en el lienzo común}."""
@@ -734,8 +782,7 @@ def capas(m):
     if CON_AGUJAS:
         salida['agujas'] = capa_de_agujas(salida['esfera-turquesa'])
     largo = (ANCHO, ALTO_LARGO)
-    for ident in BRAZALETES:
-        salida[ident] = _registra_el_integrado(salida['caja-plata'], largo)
+    salida.update(_registra_el_integrado(salida['caja-plata'], largo))
     salida.update(capas_de_piel(salida['brazalete-acero']))
     return salida
 
@@ -781,7 +828,8 @@ def fotos_de_tarjeta(cs):
     for mote, cid, brz in FOTOS:
         caja = capas_de['caja'].get(cid)
         brazalete = capas_de['correa'].get(brz)
-        esferas = sorted({c['esf'] for c in combis if c['caja'] == cid})
+        esferas = sorted({c['esf'] for c in combis
+                          if c['caja'] == cid and c['correa'] == brz})
         for eid in esferas:
             esf = capas_de['esf'].get(eid)
             if not esf or esf not in cs or not caja or caja not in cs:
@@ -801,11 +849,9 @@ def fotos_de_tarjeta(cs):
 
 def hoja_de_control(cs, destino):
     """Una tira con los tres montajes completos, para mirarlos antes de nada."""
-    # UN SOLO BRAZALETE desde el 03/09/2026, así que la tira enseña las
-    # tres cajas con él puesto y no tres brazaletes distintos.
     tiros = [('caja-plata', 'esfera-turquesa', 'brazalete-acero'),
-             ('caja-oro-rosa', 'esfera-blanca', 'brazalete-acero'),
-             ('caja-negro-pvd', 'esfera-negra', 'brazalete-acero')]
+             ('caja-oro-rosa', 'esfera-blanca', 'brazalete-oro-rosa'),
+             ('caja-negro-pvd', 'esfera-negra', 'brazalete-negro-pvd')]
     hoja = Image.new('RGB', (ANCHO * len(tiros), ANCHO), (233, 233, 231))
     for i, (caja, esf, brz) in enumerate(tiros):
         # el mismo encuadre alejado de la tarjeta: se mira lo que se publica
