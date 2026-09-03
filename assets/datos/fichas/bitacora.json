@@ -174,6 +174,18 @@
   {
    "caja": "C1",
    "esf": "E1",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -198,6 +210,18 @@
   {
    "caja": "C1",
    "esf": "E2",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -222,6 +246,18 @@
   {
    "caja": "C1",
    "esf": "E3",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -240,6 +276,18 @@
   {
    "caja": "C1",
    "esf": "E4",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -253,6 +301,48 @@
    "caja": "C1",
    "esf": "E4",
    "correa": "Brz-Goma-Bit-03",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-02",
    "coste": 0
   },
   {
@@ -276,7 +366,37 @@
   {
    "caja": "C3",
    "esf": "E2",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
    "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-02",
    "coste": 0
   },
   {
@@ -286,9 +406,33 @@
    "coste": 0
   },
   {
+   "caja": "C3",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
    "caja": "C4",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
   {
@@ -300,7 +444,25 @@
   {
    "caja": "C4",
    "esf": "E2",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
   {
@@ -312,18 +474,30 @@
   {
    "caja": "C4",
    "esf": "E3",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
    "correa": "Brz-Acero-Bit-02",
    "coste": 0
   },
   {
    "caja": "C4",
    "esf": "E3",
-   "correa": "Brz-Goma-Bit-01",
+   "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
   {
-   "caja": "C2",
-   "esf": "E7",
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
    "correa": "Brz-Goma-Bit-01",
    "coste": 0
   }
@@ -421,5 +595,6 @@
    }
   ]
  },
- "_fijas": "FOTOS DE ARCHIVO (Oscar, 02/09/2026: «si tenemos alguna foto del bitacora en archivo, colocala debajo de la foto del configurador a modo catalogo»). Las tres salen de fotos que ya estaban en el repo -relojes-2026, heroes-2026 y lunar-v2- y se republicaron en 480/1200/1600 con `foto_a_web.py`. OJO: LAS TRES SON EL MISMO RELOJ, acero con esfera turquesa, que es el unico del que hay foto. No cambian con lo que el cliente elige: son catalogo, no el configurador. Habia una cuarta, `bitacora/editorial/camarote`, que NO se pone: es una escena de camarote con mapas y no se ve el reloj."
+ "_fijas": "FOTOS DE ARCHIVO (Oscar, 02/09/2026: «si tenemos alguna foto del bitacora en archivo, colocala debajo de la foto del configurador a modo catalogo»). Las tres salen de fotos que ya estaban en el repo -relojes-2026, heroes-2026 y lunar-v2- y se republicaron en 480/1200/1600 con `foto_a_web.py`. OJO: LAS TRES SON EL MISMO RELOJ, acero con esfera turquesa, que es el unico del que hay foto. No cambian con lo que el cliente elige: son catalogo, no el configurador. Habia una cuarta, `bitacora/editorial/camarote`, que NO se pone: es una escena de camarote con mapas y no se ve el reloj.",
+ "_combinaciones": "Oscar, 03/09/2026: «ahora falta que el configurador del bitacora permita elegir todos los brazaletes». Hasta hoy cada caja llevaba atado su brazalete -con la negra solo salia el negro, con la de oro rosa solo el oro rosa- y eso venia de la lista corta del proveedor. Ahora CADA PAREJA CAJA+ESFERA que ya existia admite LOS CUATRO ACEROS. No se ha inventado ninguna pareja caja+esfera nueva: las once que habia siguen siendo once. LAS CORREAS DE GOMA NO SE TOCAN: Oscar hablo de brazaletes, y extender la regla a piezas que no ha nombrado es justo lo que no se hace. FALTA EL QUINTO BRAZALETE, el de centros en oro amarillo (`brazalete-acero-centros-dorados`): esta dibujado y publicado, pero no tiene id de correa porque le faltan nombre y coste, que son dato de Oscar."
 }
