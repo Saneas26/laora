@@ -67,10 +67,14 @@ TARJETAS = os.path.join(RAIZ, 'assets/img/bitacora-2026/tarjetas')
 # armaban la de oro rosa con esfera azul y la negra con esfera azul, que no
 # existen y no se pueden comprar.
 FICHA = os.path.join(RAIZ, 'assets/datos/fichas/bitacora.json')
+# ⚠️ LAS TRES TARJETAS SALEN CON EL MISMO BRAZALETE desde el 03/09/2026, y
+# no es un descuido: sólo hay uno dibujado. Las combinaciones de oro rosa y
+# negro PVD (Brz-Acero-Bit-06 y -02) siguen en la ficha, pero sin capa, así
+# que su tarjeta se arma con el brazalete que hay.
 FOTOS = [
     ('plata',      'C1', 'Brz-Acero-Bit-01'),
-    ('oro-rosa',   'C3', 'Brz-Acero-Bit-06'),
-    ('negro-pvd',  'C4', 'Brz-Acero-Bit-02'),
+    ('oro-rosa',   'C3', 'Brz-Acero-Bit-01'),
+    ('negro-pvd',  'C4', 'Brz-Acero-Bit-01'),
 ]
 FONDO = (233, 233, 231)
 
@@ -146,33 +150,19 @@ ESFERAS = {
 # caja en medio, que es lo que el montaje por capas necesita, y llegan a
 # 1024x1536.
 BRAZALETES = {
-    # EL DE ACERO ES EL «DE LUJO» (Óscar, 02/09/2026: «coloca este brazalete
-    # en el bitácora sustituyendo el acero»). Otro dibujo distinto: acero
-    # cepillado con los centros pulidos, más ancho —1.610 px de tira contra
-    # 1.065— y con las dos ramas casi tocándose. Trae alfa limpia y SIN el
-    # filete blanco de los otros dos, así que se recorta con la suya.
+    # ⚠️ UNO SOLO, Y ES EL «INTEGRADO DE CORTE EXACTO» (Óscar, 03/09/2026:
+    # «elimina el brazalete del bitácora, todos los brazaletes, y coloca
+    # este»). Los tres de antes —el de lujo, el oro rosa y el negro PVD—
+    # están BORRADOS a propósito; si vuelven a hacer falta, sus nombres
+    # están en el git, no aquí.
     'brazalete-acero':
-        'bitacora-brazalete-lujo-acero-316l-cepillado-centros-pulidos-transparente-4k-v1.png',
-    'brazalete-oro-rosa':
-        'bitacora-brazalete-oro-rosa-frontal-hueco-caja-transparente-4k-final-v2.png',
-    'brazalete-negro-pvd':
-        'bitacora-brazalete-negro-pvd-frontal-hueco-caja-transparente-4k-final-v2.png',
+        'bitacora-brazalete-integrado-acero-corte-exacto-transparente-4k-v1.png',
 }
-# LOS 4K, Y NO POR CAPRICHO (Óscar, 01/09/2026). Con el dibujo de 1.024 el
-# brazalete se publicaba AMPLIADO: la rama mide 299 px en la entrega y 495
-# en la capa, o sea un 65 % de estirón, y se veía. El de 4.096 llega al
-# mismo sitio ENCOGIENDO, que es lo que hay que hacer siempre.
-#
-# ⚠️ SON OTRO LIENZO. El registro se mide contra el combinado, que es de
-# 1.024x1.536, así que hay que llevar la escala y el ancla de un lienzo al
-# otro. La cuenta no se estima: se busca la escala y el desplazamiento que
-# mejor cuadran el brazalete con el dibujo de caja+brazalete del proveedor,
-# mirando sólo las filas donde ahí no hay caja. Da IoU 0,9829 con
-#     p_1024 = p_4096 x 0,3805 + (-282, -8)
-# y de ahí salen `PASO_4K` y `SESGO_4K`. Si un día llega otra entrega a 4K,
-# se vuelve a medir; no se copia este número.
-PASO_4K = 0.3805
-SESGO_4K = (-282.0, -8.0)
+# ⛔ `PASO_4K`, `SESGO_4K`, `SILUETA_BRAZALETE`, `CON_FILETE` y `COMBINADO`
+# SE FUERON CON ELLOS. El brazalete integrado no se registra contra el
+# dibujo de caja+brazalete del proveedor: se registra contra LA CAJA QUE
+# PUBLICAMOS, y con una regla que se puede comprobar mirando la foto. Ver
+# `_registra_el_integrado`.
 
 # ---------------------------------------------------------------- la piel
 # LA BITÁCORA SÓLO LLEVA CORREAS SUYAS (Óscar, 01/09/2026: «estas correas
@@ -195,47 +185,23 @@ PIELES = {
         'laora-correa-bitacora-piel-especial-25mm-negra-prueba-01.png',
 }
 
-# LOS «-final-v2» (Óscar, 02/09/2026: «prueba estos brazaletes del bitácora
-# […] y sustituye a los de acero que tenemos»). Traen las dos ramas MÁS
-# LARGAS y con más hueco en medio que los del 01/09, o sea con menos
-# brazalete escondido bajo la caja.
-#
-# LO BUENO: los tres vienen ya con ALFA DE VERDAD —el 01/09 sólo el de
-# acero, y los otros dos con el damero pintado dentro— y sus tres siluetas
-# son IDÉNTICAS píxel a píxel (IoU 1,00000), así que ya no hay que votar
-# nada: la silueta es una y punto.
-#
-# ⚠️ LO MALO: TRAEN UN FILETE BLANCO DE 24 px POR TODO EL CANTO, y es
-# opaco, así que `desfleca` —que sólo toca lo semitransparente— no lo ve.
-# En el brazalete negro se ve a simple vista: una raya blanca entre el
-# metal y el fondo. Ni el v1 ni el dibujo del proveedor lo tienen; es de
-# este render. Se quita mirando el COLOR: el filete es blanco puro y
-# neutro, y el metal no llega ahí ni en el de acero. Se mide en el NEGRO
-# PVD —máximo contraste— y esa silueta vale para los tres, que son el
-# mismo dibujo.
-#
-# Y NO ES UN DETALLE: registrando con el filete puesto, el montaje cuadra
-# con el dibujo del proveedor a IoU 0,9278; quitándolo, a 0,9829.
-SILUETA_BRAZALETE = ('bitacora-brazalete-negro-pvd-'
-                     'frontal-hueco-caja-transparente-4k-final-v2.png')
-# Los que traen el filete blanco y comparten silueta. El de lujo no está:
-# es otro dibujo y su alfa viene limpia.
-CON_FILETE = ('brazalete-oro-rosa', 'brazalete-negro-pvd')
 # ⛔ LAS AGUJAS SE FUERON el 01/09/2026, por orden de Óscar: «quita las
 # agujas». Eran las de la entrega de agosto y no acompañaban a las esferas
 # nuevas: el segundero se salía de la esfera y cruzaba el bisel, y el
 # minutero tapaba el rótulo BITÁCORA. El fichero sigue en la entrega y aquí
 # queda su nombre, para que volver a ponerlas sea deshacer esto y no
 # reconstruirlo.
-AGUJAS = 'bitacora-agujas-v1.png'
-CON_AGUJAS = False
-# Para registrar el brazalete, no se publica: dice DÓNDE cae el eje del
-# reloj dentro del dibujo del brazalete. Tiene que ser el combinado del
-# MISMO juego que los brazaletes que se publican —mismo lienzo, misma
-# cámara—, así que con los frontales entra el frontal. El de oro rosa de
-# agosto ya no vale: es otro encuadre y dejaría el reloj descolocado.
-# Éste trae alfa de verdad, así que no hay que adivinarle el recorte.
-COMBINADO = 'bitacora-caja-brazalete-acero-frontal-transparente-v1.png'
+AGUJAS = 'bitacora-agujas-con-sombras-misma-posicion-transparente-4k-v2.png'
+CON_AGUJAS = True
+# ⚠️ LAS NUEVAS NO VAN CON LAS ESFERAS QUE PUBLICAMOS, Y POR ESO NO SE
+# COLOCAN COMO LAS VIEJAS. Vienen «en la misma posición» que la esfera
+# turquesa de SU entrega —la de 4K del 02/09—, que no es la que se publica
+# (las publicadas son las del 01/09, otra carpeta y otro encuadre). Así que
+# no se les busca el buje: se mide la transformación que lleva el disco de
+# la esfera 4K sobre el disco de la esfera publicada y se les aplica ESA,
+# entera. Ver `capa_de_agujas`.
+ESFERA_DE_LAS_AGUJAS = ('bitacora-esfera-turquesa-con-agujas-extraida-'
+                        'transparente-4k-v1.png')
 
 # LA SILUETA DE LA CAJA SALE DE LAS DE COLOR, Y VALE PARA LAS CINCO.
 # La caja plateada es acero pulido y neutro: su propio brillo pasa por
@@ -461,16 +427,6 @@ def centro(m):
     return float(xs.mean()), float(ys.mean())
 
 
-def buje_agujas(im):
-    """El eje de las agujas: el punto más grueso del dibujo."""
-    m = alfa(im, cuerpos=1) > 128
-    dt = ndimage.distance_transform_edt(m)
-    nucleo = dt > dt.max() * 0.7
-    lab, n = ndimage.label(nucleo)
-    tam = ndimage.sum(np.ones_like(lab), lab, range(1, n + 1))
-    return centro(lab == (1 + int(np.argmax(tam))))
-
-
 def _iou_escalando(fuente, destino, s0, pasos, rango):
     """Busca la escala y el desplazamiento que mejor solapan dos siluetas."""
     dy_, dx_ = np.where(destino)
@@ -511,14 +467,8 @@ def medidas():
     iou, s, ox, oy = _iou_escalando(esf, o, s0, 0.03, 24)
     m['esfera'] = {'escala': s, 'iou': iou, 'ancla': (639.5, 639.5),
                    'cae': (639.5 * s + ox, 639.5 * s + oy)}
-    # las agujas: eje propio, escala de la esfera
-    if CON_AGUJAS:
-        m['agujas'] = {'ancla': buje_agujas(abre(AGUJAS)), 'escala': s}
-    # el brazalete, registrando la caja suelta dentro del combinado
-    oc = ojo(Image.open(ENTREGA + COMBINADO))
-    s0 = (oc.sum() / o.sum()) ** 0.5
-    iou2, s2, _, _ = _iou_escalando(o, oc, s0, 0.03, 8)
-    m['brazalete'] = {'escala': 1.0 / s2, 'iou': iou2, 'ancla': centro(oc)}
+    # ⛔ EL BRAZALETE YA NO SE REGISTRA AQUÍ. El integrado se coloca contra
+    # la caja publicada, midiendo, y eso vive en `_registra_el_integrado`.
     return m
 
 
@@ -603,12 +553,6 @@ def alfa_de_piel(im):
     return ndimage.binary_fill_holes(np.isin(lab, gr))
 
 
-# CUÁNTO SE ESCONDE LA PUNTA DEL BRAZALETE bajo la caja (Óscar, 02/09/2026:
-# «hay que sacar el brazalete más, ajustarlo a la caja»). Con lo que traía el
-# dibujo se metía 81 px por cada lado; con 30 la punta sigue tapada de sobra
-# —a esa altura la caja es 60 px más ancha que el brazalete— y se ve un
-# eslabón más por arriba y otro por abajo.
-MARGEN_BRZ = 30
 
 
 def _perfil(m, alto):
@@ -624,122 +568,6 @@ def _dos_tiras(a):
     fil = np.where(a.any(1))[0]
     return [(int(x[0]), int(x[-1]))
             for x in np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)]
-
-
-def _saca_el_brazalete(salida, largo, quien):
-    """Saca el brazalete de debajo de la caja y lo ajusta a su ancho.
-
-    Óscar, 02/09/2026: «hay que sacar el brazalete más, ajustarlo a la
-    caja». Son dos cosas distintas y las dos se miden:
-
-      · SACARLO. La punta de cada tira se lleva a `MARGEN_BRZ` píxeles por
-        dentro del borde de la caja. Traía 81 y se queda en 30. Cada tira se
-        mueve por su cuenta, así que de paso quedan simétricas —lo de esta
-        mañana con las correas de la biblioteca, que aquí pasaba al revés:
-        la de abajo se metía 105 y la de arriba 57—.
-      · AJUSTARLO. El brazalete no puede ser más ancho que la caja EN
-        NINGUNA FILA en la que se vean los dos. Se busca la escala que deja
-        el peor de esos cocientes justo en 1: ni asoma por los lados del
-        asa, ni deja escalón.
-
-    ⚠️ LAS DOS SE PISAN Y POR ESO SE ITERA. El brazalete se ensancha hacia
-    la caja: al sacarlo, la parte que queda a la altura del asa es otra —más
-    ancha— y hay que volver a estrecharlo; al estrecharlo, su punta se mueve
-    y hay que volver a sacarlo. Tres vueltas y se para solo.
-
-    ⚠️ MOVER LAS TIRAS NO DEJA HUECO: este brazalete es más largo que el
-    lienzo por los dos lados. Se comprueba al final.
-    """
-    caja = np.asarray(salida['caja-plata'])[:, :, 3] > 128
-    desf = (largo[1] - ANCHO) // 2
-    pc = np.zeros(largo[1], int)
-    pc[desf:desf + ANCHO] = _perfil(caja, ANCHO)
-    filas = np.where(pc)[0]
-    arr, aba = int(filas.min()), int(filas.max())
-    base = {quien: salida[quien]}
-    factor, sube, baja = 1.0, 0, 0
-
-    def monta(ident, factor, sube, baja):
-        im = base[ident]
-        if abs(factor - 1.0) > 1e-4:
-            n = im.resize((max(1, int(round(im.width * factor))),
-                           max(1, int(round(im.height * factor)))), Image.LANCZOS)
-            im = Image.new('RGBA', largo, (0, 0, 0, 0))
-            im.alpha_composite(n, (int(round((largo[0] - n.width) / 2.0)),
-                                   int(round((largo[1] - n.height) / 2.0))))
-        a = np.asarray(im)[:, :, 3] > 128
-        t = _dos_tiras(a)
-        if len(t) != 2 or (not sube and not baja):
-            return im
-        L = Image.new('RGBA', largo, (0, 0, 0, 0))
-        med = (t[0][1] + t[1][0]) // 2
-        L.alpha_composite(im.crop((0, 0, largo[0], med)), (0, -sube))
-        # ⚠️ `med + baja`, NO `baja`: `alpha_composite` pega la esquina de
-        # arriba del recorte en `dest`, y la del recorte de abajo vale `med`
-        # en el original. Sin sumarlo, la tira de abajo saltaba a la cabecera
-        # del lienzo y se fundía con la de arriba en una sola.
-        L.alpha_composite(im.crop((0, med, largo[0], largo[1])), (0, med + baja))
-        return L
-
-    for vuelta in range(14):
-        p = monta(quien, factor, sube, baja)
-        a = np.asarray(p)[:, :, 3] > 128
-        t = _dos_tiras(a)
-        if len(t) != 2:
-            break
-        norte, sur = t[0][1] - arr, aba - t[1][0]
-        pb = _perfil(a, largo[1])
-        # ⚠️ LA ÚLTIMA FILA DE LA CAJA MIDE 5 px —es la punta del dibujo, puro
-        # suavizado— y ahí el cociente se dispara a 100: la primera pasada
-        # encogió el brazalete a la centésima parte. Sólo cuentan las filas
-        # donde la caja es caja de verdad, del 40 % de su ancho para arriba.
-        juntos = (pb > 0) & (pc >= 0.4 * pc.max())
-        peor = float(np.max(pb[juntos] / pc[juntos])) if juntos.any() else 1.0
-        if vuelta and vuelta % 4 == 0:
-            print('        vuelta %d · norte %d · sur %d · lo más ancho, %.3f '
-                  'veces la caja' % (vuelta, norte, sur, peor))
-        if abs(norte - MARGEN_BRZ) <= 2 and abs(sur - MARGEN_BRZ) <= 2 \
-                and abs(peor - 1.0) <= 0.004:
-            break
-        # ⚠️ A MEDIO PASO, o no converge. Las dos correcciones se pisan
-        # —estrechar mueve la punta, sacar cambia qué trozo queda a la
-        # altura del asa— y a paso entero el bucle oscilaba: 0,93 · 1,14 ·
-        # 0,85 · 1,00. A medio paso se para en tres vueltas.
-        factor /= 1.0 + (peor - 1.0) * 0.5
-        sube += int(round((norte - MARGEN_BRZ) * 0.5))
-        baja += int(round((sur - MARGEN_BRZ) * 0.5))
-    salida[quien] = monta(quien, factor, sube, baja)
-    a = np.asarray(salida[quien])[:, :, 3] > 128
-    t = _dos_tiras(a)
-    ve = ((largo[1] - ANCHO / 0.72) / 2, (largo[1] + ANCHO / 0.72) / 2)
-    print('%-22s escala x%.4f · arriba %+d, abajo %+d · se mete %d y %d · '
-          'llega a los cantos: %s'
-          % (quien, factor, -sube, baja, t[0][1] - arr, aba - t[1][0],
-             t[0][0] <= ve[0] and t[1][1] >= ve[1]))
-
-
-def silueta_del_brazalete():
-    """La silueta del brazalete SIN el filete blanco de la entrega.
-
-    El `-final-v2` trae 24 px de blanco puro y opaco por todo el canto (ver
-    la nota de `SILUETA_BRAZALETE`). Se quita por COLOR —blanco y neutro—,
-    no por erosión: erosionar a ciegas se comería también el canto pulido
-    del de acero, que es claro pero no blanco puro. Se mide en el negro
-    PVD, que es donde el filete no se puede confundir con el metal, y la
-    silueta que sale vale para los tres: son el mismo dibujo, con IoU
-    1,00000 entre sus alfas."""
-    a = np.asarray(abre(SILUETA_BRAZALETE).convert('RGBA'))
-    rgb = a[:, :, :3].astype(np.int16)
-    m = a[:, :, 3] > 128
-    filete = (rgb.min(2) >= 235) & ((rgb.max(2) - rgb.min(2)) <= 8)
-    lab, n = ndimage.label(m & ~filete)
-    tam = ndimage.sum(m & ~filete, lab, range(1, n + 1))
-    gr = sorted([i + 1 for i, t in enumerate(tam) if t > 20000],
-                key=lambda i: -tam[i - 1])[:2]
-    limpio = ndimage.binary_fill_holes(np.isin(lab, gr))
-    return Image.fromarray(
-        np.clip(ndimage.gaussian_filter((limpio * 255).astype(np.float32), 0.8),
-                0, 255).astype(np.uint8))
 
 
 def capas_de_piel(brazalete):
@@ -778,6 +606,118 @@ def capas_de_piel(brazalete):
     return salida
 
 
+def capa_de_agujas(esfera_publicada):
+    """Las agujas nuevas, puestas donde tienen que ir.
+
+    Óscar, 03/09/2026: «coloca las agujas nuevas a ver cómo quedan». Son las
+    «con sombras, misma posición», que sustituyen a las de agosto —aquéllas
+    salían el 01/09 porque el segundero se iba al bisel y el minutero tapaba
+    el rótulo BITÁCORA—.
+
+    ⚠️ «MISMA POSICIÓN» ES RESPECTO DE SU PROPIA ESFERA, no de la nuestra.
+    Vienen en el lienzo de la esfera turquesa 4K de su entrega, y las
+    esferas que se publican son las del 01/09, que es otra carpeta, otro
+    encuadre y otro tamaño de disco. Buscarles el buje y clavarlo en el eje
+    del reloj sería colocarlas a ojo: lo que se hace es medir el disco de
+    las dos esferas —la suya y la publicada— y aplicarles la MISMA
+    transformación que lleva una sobre la otra. Si un día cambian las
+    esferas, esto se recalcula solo.
+    """
+    def disco(a):
+        m = a[:, :, 3] > 128
+        ys, xs = np.where(m)
+        return (np.array([(xs.min() + xs.max()) / 2.0,
+                          (ys.min() + ys.max()) / 2.0]),
+                ((xs.max() - xs.min()) + (ys.max() - ys.min())) / 4.0)
+    cA, rA = disco(np.asarray(abre(ESFERA_DE_LAS_AGUJAS).convert('RGBA')))
+    cB, rB = disco(np.asarray(esfera_publicada))
+    k = rB / rA
+    ag = abre(AGUJAS).convert('RGBA')
+    n = ag.resize((max(1, int(round(ag.width * k))),
+                   max(1, int(round(ag.height * k)))), Image.LANCZOS)
+    off = cB - cA * k
+    L = Image.new('RGBA', (ANCHO, ANCHO), (0, 0, 0, 0))
+    L.alpha_composite(n, (int(round(off[0])), int(round(off[1]))))
+    print('AGUJAS    disco de su esfera %.0f px -> disco de la nuestra %.0f px '
+          '(escala %.4f)' % (rA, rB, k))
+    return L
+
+
+def _registra_el_integrado(caja, largo):
+    """El brazalete integrado, cuadrado con la caja AL PÍXEL.
+
+    Óscar, 03/09/2026: «la base de la caja es una caja que acaba totalmente
+    recta en sus extremos, y el brazalete es igual de ancho que la caja en su
+    unión, tienen que coincidir a la perfección; este reloj se llama Precisa,
+    así que vamos a hacer honor a su nombre».
+
+    LA REGLA, Y ES UNA SOLA: cada tira del brazalete acaba en un corte recto,
+    y ese corte tiene que caer justo en la fila donde la caja mide EXACTAMENTE
+    lo mismo que el corte. No se fuerza el ancho ni se recorta nada: se busca
+    la escala y la altura que cumplen las dos cosas a la vez, arriba y abajo.
+
+    ⚠️ NO HAY MÁS DE UNA SOLUCIÓN, y por eso esto no es un apaño. Al agrandar
+    el brazalete, su corte pide una fila donde la caja sea más ancha —o sea
+    más adentro, más cerca del centro— y las dos filas se ACERCAN; pero el
+    hueco entre las dos tiras del dibujo se AGRANDA. Las dos curvas se cruzan
+    una vez. La búsqueda encuentra ese cruce y clava los dos cortes con menos
+    de un píxel de error.
+
+    ⚠️ EL BRAZALETE VA POR ENCIMA DE LA CAJA (ver `arma` y el `encima_si` de
+    la ficha), y es lo que remata la unión: las puntas de las asas —que son
+    más anchas que el brazalete y antes asomaban por los lados, 21 px por la
+    izquierda y 8 por la derecha— quedan tapadas. Era «la mancha blanca del
+    lado izquierdo» del 03/09.
+    """
+    im = abre(BRAZALETES['brazalete-acero']).convert('RGBA')
+    B = np.asarray(im)[:, :, 3] > 128
+    anB = _perfil(B, im.height)
+    fil = np.where(B.any(1))[0]
+    cortes = np.split(fil, np.where(np.diff(fil) > 1)[0] + 1)
+    if len(cortes) != 2:
+        raise SystemExit('✗ el brazalete integrado no trae dos tiras')
+    Rn, Rs = int(cortes[0][-1]), int(cortes[1][0])      # los dos cortes rectos
+    Wn, Ws = float(anB[Rn]), float(anB[Rs])
+    # la caja, en el lienzo alto
+    C = np.zeros((largo[1], largo[0]), bool)
+    desf = (largo[1] - ANCHO) // 2
+    C[desf:desf + ANCHO] = np.asarray(caja)[:, :, 3] > 128
+    anC = _perfil(C, largo[1])
+    mejor = None
+    for s in np.arange(0.30, 0.60, 0.0002):
+        for dy in np.arange(-300, 700, 1.0):
+            yN, yS = int(round(Rn * s + dy)), int(round(Rs * s + dy))
+            if not (0 <= yN < largo[1] and 0 <= yS < largo[1]):
+                continue
+            cn, cs = anC[yN], anC[yS]
+            if cn <= 0 or cs <= 0:
+                continue
+            err = abs(Wn * s - cn) + abs(Ws * s - cs)
+            if mejor is None or err < mejor[0]:
+                mejor = (err, float(s), float(dy), yN, yS, cn, cs)
+    err, s, dy, yN, yS, cn, cs = mejor
+    n = im.resize((max(1, int(round(im.width * s))),
+                   max(1, int(round(im.height * s)))), Image.LANCZOS)
+    # y centrado: el eje del corte sobre el eje de la caja
+    def eje(m, y):
+        xs = np.where(m[int(round(y))])[0]
+        return (xs.min() + xs.max()) / 2.0
+    Bn = np.asarray(n)[:, :, 3] > 128
+    cb = (eje(Bn, Rn * s - 3) + eje(Bn, Rs * s + 3)) / 2.0
+    cc = (eje(C, yN) + eje(C, yS)) / 2.0
+    L = Image.new('RGBA', largo, (0, 0, 0, 0))
+    L.alpha_composite(n, (int(round(cc - cb)), int(round(dy))))
+    a = np.asarray(L)[:, :, 3] > 128
+    ve = ((largo[1] - ANCHO / ESCALA) / 2.0, (largo[1] + ANCHO / ESCALA) / 2.0)
+    f = np.where(a.any(1))[0]
+    print('BRAZALETE escala %.4f · corte norte fila %d: %.0f px de brazalete '
+          'contra %.0f de caja · corte sur fila %d: %.0f contra %.0f · error '
+          '%.1f px' % (s, yN, Wn * s, cn, yS, Ws * s, cs, err))
+    print('          llega al canto de arriba: %s · al de abajo: %s'
+          % (f.min() <= ve[0], f.max() >= ve[1]))
+    return L
+
+
 def capas(m):
     """Devuelve {ident: imagen ya colocada en el lienzo común}."""
     salida = {}
@@ -792,24 +732,10 @@ def capas(m):
         salida[ident] = coloca(con_alfa(f), m['esfera']['escala'] * HOLGURA_ESFERA,
                                m['esfera']['ancla'], cuad, eje_c)
     if CON_AGUJAS:
-        salida['agujas'] = coloca(con_alfa(AGUJAS), m['agujas']['escala'],
-                                  m['agujas']['ancla'], cuad, eje_c)
+        salida['agujas'] = capa_de_agujas(salida['esfera-turquesa'])
     largo = (ANCHO, ALTO_LARGO)
-    eje_l = (ANCHO / 2.0, ALTO_LARGO / 2.0)
-    brz = silueta_del_brazalete()
-    # del lienzo del combinado (1.024) al de la entrega de 4K
-    esc4 = m['brazalete']['escala'] * PASO_4K
-    anc4 = ((m['brazalete']['ancla'][0] - SESGO_4K[0]) / PASO_4K,
-            (m['brazalete']['ancla'][1] - SESGO_4K[1]) / PASO_4K)
-    for ident, f in BRAZALETES.items():
-        # ⚠️ LA SILUETA COMÚN ES SÓLO DE LOS DOS «-final-v2». El de lujo es
-        # OTRO dibujo —más ancho, otras ramas— y trae su alfa limpia, sin
-        # filete blanco: recortarlo con la silueta de los otros le ponía la
-        # forma del negro PVD encima, y los tres salían idénticos.
-        salida[ident] = coloca(con_alfa(f, mascara=(brz if ident in CON_FILETE else None)),
-                               esc4, anc4, largo, eje_l)
     for ident in BRAZALETES:
-        _saca_el_brazalete(salida, largo, ident)
+        salida[ident] = _registra_el_integrado(salida['caja-plata'], largo)
     salida.update(capas_de_piel(salida['brazalete-acero']))
     return salida
 
@@ -855,8 +781,7 @@ def fotos_de_tarjeta(cs):
     for mote, cid, brz in FOTOS:
         caja = capas_de['caja'].get(cid)
         brazalete = capas_de['correa'].get(brz)
-        esferas = [c['esf'] for c in combis
-                   if c['caja'] == cid and c['correa'] == brz]
+        esferas = sorted({c['esf'] for c in combis if c['caja'] == cid})
         for eid in esferas:
             esf = capas_de['esf'].get(eid)
             if not esf or esf not in cs or not caja or caja not in cs:
@@ -876,9 +801,11 @@ def fotos_de_tarjeta(cs):
 
 def hoja_de_control(cs, destino):
     """Una tira con los tres montajes completos, para mirarlos antes de nada."""
+    # UN SOLO BRAZALETE desde el 03/09/2026, así que la tira enseña las
+    # tres cajas con él puesto y no tres brazaletes distintos.
     tiros = [('caja-plata', 'esfera-turquesa', 'brazalete-acero'),
-             ('caja-oro-rosa', 'esfera-blanca', 'brazalete-oro-rosa'),
-             ('caja-negro-pvd', 'esfera-negra', 'brazalete-negro-pvd')]
+             ('caja-oro-rosa', 'esfera-blanca', 'brazalete-acero'),
+             ('caja-negro-pvd', 'esfera-negra', 'brazalete-acero')]
     hoja = Image.new('RGB', (ANCHO * len(tiros), ANCHO), (233, 233, 231))
     for i, (caja, esf, brz) in enumerate(tiros):
         # el mismo encuadre alejado de la tarjeta: se mira lo que se publica
@@ -893,16 +820,6 @@ if __name__ == '__main__':
     print('ESFERA    escala %.4f (IoU %.4f contra el ojo); su centro cae en '
           '%.1f,%.1f' % (m['esfera']['escala'], m['esfera']['iou'],
                          m['esfera']['cae'][0], m['esfera']['cae'][1]))
-    if CON_AGUJAS:
-        print('AGUJAS    buje %.2f,%.2f · escala %.4f (la de la esfera, NO la de '
-              'la caja)' % (m['agujas']['ancla'][0], m['agujas']['ancla'][1],
-                            m['agujas']['escala']))
-    else:
-        print('AGUJAS    fuera, por orden de Óscar (01/09/2026)')
-    print('BRAZALETE escala %.4f (IoU %.4f registrando la caja en el '
-          'combinado); eje en %.1f,%.1f' %
-          (m['brazalete']['escala'], m['brazalete']['iou'],
-           m['brazalete']['ancla'][0], m['brazalete']['ancla'][1]))
     cs = capas(m)
     prueba = '--prueba' in sys.argv
     hoja = (os.path.join(os.environ.get('TMPDIR', '/tmp'), 'bitacora-control.png')
