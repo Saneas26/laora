@@ -138,6 +138,13 @@
     "color": "#D9A08A"
    },
    {
+    "id": "Brz-Acero-Bit-05",
+    "nombre": "Acero plata y oro",
+    "coste": 21.19,
+    "familia": "A316",
+    "color": "#D4AF6A"
+   },
+   {
     "id": "Brz-Acero-Bit-06",
     "nombre": "Acero oro rosa",
     "coste": 21.19,
@@ -153,7 +160,8 @@
    }
   ],
   "cierres": [],
-  "colores_cierre": []
+  "colores_cierre": [],
+  "_colores": "EL ID SALE DE LA LISTA DEL PROVEEDOR, no de un hueco libre: en `.docs/marketing/laora-fotos-pendientes.csv` el Brz-Acero-Bit-05 es el «Plata y oro», que es justo el acero con los centros en oro amarillo que se dibujo el 03/09/2026. En esa misma lista estan el -03 (azul) y el -04 (oro entero), que NO se dan de alta porque no tienen dibujo. El coste, 21,19, es el de los otros cuatro aceros: es el mismo brazalete con otro acabado."
  },
  "filtros": {
   "correa": {
@@ -180,6 +188,12 @@
   {
    "caja": "C1",
    "esf": "E1",
+   "correa": "Brz-Acero-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
    "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
@@ -216,6 +230,12 @@
   {
    "caja": "C1",
    "esf": "E2",
+   "correa": "Brz-Acero-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
    "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
@@ -252,6 +272,12 @@
   {
    "caja": "C1",
    "esf": "E3",
+   "correa": "Brz-Acero-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
    "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
@@ -277,6 +303,12 @@
    "caja": "C1",
    "esf": "E4",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Acero-Bit-05",
    "coste": 0
   },
   {
@@ -313,6 +345,12 @@
    "caja": "C2",
    "esf": "E7",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C2",
+   "esf": "E7",
+   "correa": "Brz-Acero-Bit-05",
    "coste": 0
   },
   {
@@ -343,6 +381,12 @@
    "caja": "C3",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-05",
    "coste": 0
   },
   {
@@ -378,6 +422,12 @@
   {
    "caja": "C3",
    "esf": "E2",
+   "correa": "Brz-Acero-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E2",
    "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
@@ -402,6 +452,12 @@
   {
    "caja": "C3",
    "esf": "E3",
+   "correa": "Brz-Acero-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C3",
+   "esf": "E3",
    "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
@@ -421,6 +477,12 @@
    "caja": "C4",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Acero-Bit-05",
    "coste": 0
   },
   {
@@ -456,6 +518,12 @@
   {
    "caja": "C4",
    "esf": "E2",
+   "correa": "Brz-Acero-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
    "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
@@ -481,6 +549,12 @@
    "caja": "C4",
    "esf": "E3",
    "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Acero-Bit-05",
    "coste": 0
   },
   {
@@ -510,7 +584,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=16",
+  "v": "?v=17",
   "pila": [
    {
     "capa": "correa",
@@ -518,9 +592,10 @@
     "espera": "correa",
     "encima_si": [
      "Brz-Acero-Bit-01",
-     "Brz-Acero-Bit-07",
+     "Brz-Acero-Bit-02",
+     "Brz-Acero-Bit-05",
      "Brz-Acero-Bit-06",
-     "Brz-Acero-Bit-02"
+     "Brz-Acero-Bit-07"
     ]
    },
    {
@@ -543,9 +618,10 @@
   "capas": {
    "correa": {
     "Brz-Acero-Bit-01": "brazalete-acero",
-    "Brz-Acero-Bit-07": "brazalete-acero-centros-oro-rosa",
+    "Brz-Acero-Bit-02": "brazalete-negro-pvd",
+    "Brz-Acero-Bit-05": "brazalete-acero-centros-dorados",
     "Brz-Acero-Bit-06": "brazalete-oro-rosa",
-    "Brz-Acero-Bit-02": "brazalete-negro-pvd"
+    "Brz-Acero-Bit-07": "brazalete-acero-centros-oro-rosa"
    },
    "esf": {
     "E1": "esfera-turquesa",
