@@ -59,16 +59,25 @@ PESO = 95000
 
 # qué fichero es cada capa: se busca por un trozo del nombre, porque la
 # entrega los numera y los nombra a su manera
-PIEZAS = {'caja-plata':      'madre-caja-esfera-agujas',
-          'brazalete-acero': 'madre-brazalete-norte-sur',
-          # los acabados que van llegando, mismo dibujo y mismo corte
-          'brazalete-acero-centros-oro-rosa': 'brazalete-acero-oro-rosa',
-          'brazalete-negro-pvd':              'brazalete-negro-pvd'}
+# ⚠️ LA TANDA BUENA ES LA DEL «MEDIO ESLABÓN» (04/09/2026, 20:24). La
+# carpeta guarda también las anteriores —las «madre» de las 19:42 y los dos
+# brazaletes sueltos de las 20:05—, y como aquí se busca por un trozo del
+# nombre, el trozo tiene que ser LO BASTANTE LARGO para no pescarlas: sin
+# el `-con-medio-eslabon`, `brazalete-negro-pvd` cogía el de las 20:05, que
+# va antes por orden alfabético.
+PIEZAS = {
+    'caja-plata':      'caja-acero-hueco-medio-eslabon',
+    'caja-negro-pvd':  'caja-negro-pvd-hueco-medio-eslabon',
+    'brazalete-acero': 'brazalete-acero-con-medio-eslabon',
+    'brazalete-acero-centros-oro-rosa': 'brazalete-acero-oro-rosa-con-medio-eslabon',
+    'brazalete-negro-pvd': 'brazalete-negro-pvd-con-medio-eslabon',
+}
 LARGAS = ('brazalete-acero', 'brazalete-acero-centros-oro-rosa',
           'brazalete-negro-pvd')            # las del lienzo alto
-# ⚠️ LOS ACABADOS TIENEN QUE SER EL MISMO DIBUJO. Se comprueba antes de
-# publicar: si la silueta de uno no es la del brazalete madre, el reloj
-# pegaría un salto al cambiar de acabado y esto para.
+# ⚠️ LOS ACABADOS DE UNA MISMA PIEZA TIENEN QUE SER EL MISMO DIBUJO. Se
+# comprueba antes de publicar, cabezas y brazaletes por separado: si la
+# silueta de uno no es la del primero de su familia, el reloj pegaría un
+# salto al cambiar de acabado y esto para en vez de publicarlo.
 
 
 def busca(carpeta, trozo):
@@ -134,17 +143,22 @@ def main():
     print('BRAZALETE %d filas por arriba del eje y %d por abajo; la ventana '
           'pide %.0f' % (arriba, abajo, (ANCHO / CAMARA) / 2.0))
     print('ESCALA    %.4f (la manda la tira más corta)' % escala)
-    ref = _alfa(rutas['brazalete-acero'])
-    for k in LARGAS:
-        if k == 'brazalete-acero' or k not in rutas:
+    for patron, cabeza in (('brazalete-acero', LARGAS),
+                           ('caja-plata', [k for k in rutas
+                                           if k.startswith('caja')])):
+        if patron not in rutas:
             continue
-        otro = _alfa(rutas[k])
-        u = (ref | otro).sum()
-        iou = (ref & otro).sum() / float(u) if u else 0.0
-        if iou < 0.999:
-            raise SystemExit('✗ %s no tiene la silueta del brazalete madre '
-                             '(IoU %.5f)' % (k, iou))
-        print('          %-34s IoU %.5f con el madre' % (k, iou))
+        ref = _alfa(rutas[patron])
+        for k in cabeza:
+            if k == patron or k not in rutas:
+                continue
+            otro = _alfa(rutas[k])
+            u = (ref | otro).sum()
+            iou = (ref & otro).sum() / float(u) if u else 0.0
+            if iou < 0.999:
+                raise SystemExit('✗ %s no tiene la silueta de %s (IoU %.5f)'
+                                 % (k, patron, iou))
+            print('          %-34s IoU %.5f con %s' % (k, iou, patron))
     capas = {k: coloca(v, eje, escala,
                        (ANCHO, ALTO_LARGO) if k in LARGAS else (ANCHO, ANCHO))
              for k, v in rutas.items()}

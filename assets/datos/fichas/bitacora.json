@@ -613,7 +613,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=19",
+  "v": "?v=20",
   "pila": [
    {
     "capa": "correa",
@@ -641,7 +641,8 @@
     "Brz-Acero-Bit-02": "brazalete-negro-pvd"
    },
    "caja": {
-    "C1": "caja-plata"
+    "C1": "caja-plata",
+    "C4": "caja-negro-pvd"
    }
   },
   "_orden": "De abajo arriba: brazalete, esfera, caja, agujas. La esfera va DEBAJO de la caja a proposito: el bisel le tapa el canto, como el reloj de verdad, y asi el encaje es perfecto sin medir la esfera contra el hueco. El brazalete, debajo de todo, porque su primer eslabon se mete bajo el asa.",
