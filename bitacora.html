@@ -500,7 +500,7 @@
      elegida. Un paso con la puerta cerrada no escribe nada, y el guion que
      le tocaba se cae con el: sin eso, un brazalete acabaria en `-A316S-` y
      el mismo reloj tendria dos referencias segun un pespunte que no lleva. */
-  var PLANTILLA_REF = "LO-04-{caja}-{esf}-{agujas}-{correa}";
+  var PLANTILLA_REF = "LO-04-{mov}-{caja}-{esf}-{agujas}-{correa}";
   function referencia(e) {
     if (!PLANTILLA_REF) {
       return 'LO-04-' + ORDEN.filter(function (k) { return abierta(k, e); })
