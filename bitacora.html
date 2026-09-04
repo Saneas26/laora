@@ -80,14 +80,6 @@
           <span data-carrusel-paso></span>
           <button type="button" data-carrusel="1" aria-label="Opción siguiente">›</button>
         </div>
-        <img class="pv-presenta" data-pv-presenta
-             src="/assets/img/bitacora-2026/presentacion/1200/bitacora-hazlo-tuyo.avif?v=1"
-             srcset="/assets/img/bitacora-2026/presentacion/480/bitacora-hazlo-tuyo.avif?v=1 480w,
-                     /assets/img/bitacora-2026/presentacion/1200/bitacora-hazlo-tuyo.avif?v=1 1200w,
-                     /assets/img/bitacora-2026/presentacion/1600/bitacora-hazlo-tuyo.avif?v=1 1600w"
-             sizes="(max-width: 900px) 100vw, 620px"
-             fetchpriority="high" decoding="async" width="1200" height="1200"
-             alt="El laOra Bitácora de acero con esfera turquesa, de tres cuartos">
 
         <!-- ⛔ AQUÍ ESTABAN la foto de la combinación entera, el cartel de
              «fotografía en preparación» y el botón de ampliar. Los tres eran
@@ -192,39 +184,6 @@
     </aside>
 
   </div>
-
-  <section class="pv-fijas">
-    <h2>De cerca</h2>
-    <div class="pv-fijas-rejilla">
-      <figure>
-        <img src="/assets/img/bitacora-2026/galeria/1200/estudio.avif?v=1"
-             srcset="/assets/img/bitacora-2026/galeria/480/estudio.avif?v=1 480w,
-                     /assets/img/bitacora-2026/galeria/1200/estudio.avif?v=1 1200w,
-                     /assets/img/bitacora-2026/galeria/1600/estudio.avif?v=1 1600w"
-             sizes="(max-width:900px) 100vw, 33vw" loading="lazy"
-             decoding="async" alt="El laOra Bitácora de acero con esfera turquesa, de tres cuartos sobre fondo crema">
-        <figcaption>De tres cuartos: el canto pulido de la caja y el brazalete integrado.</figcaption>
-      </figure>
-      <figure>
-        <img src="/assets/img/bitacora-2026/galeria/1200/ciudad.avif?v=1"
-             srcset="/assets/img/bitacora-2026/galeria/480/ciudad.avif?v=1 480w,
-                     /assets/img/bitacora-2026/galeria/1200/ciudad.avif?v=1 1200w,
-                     /assets/img/bitacora-2026/galeria/1600/ciudad.avif?v=1 1600w"
-             sizes="(max-width:900px) 100vw, 33vw" loading="lazy"
-             decoding="async" alt="El laOra Bitácora de acero con esfera turquesa, de noche, con la ciudad detrás">
-        <figcaption>De noche. La esfera turquesa aguanta la luz baja.</figcaption>
-      </figure>
-      <figure>
-        <img src="/assets/img/bitacora-2026/galeria/1200/halos.avif?v=1"
-             srcset="/assets/img/bitacora-2026/galeria/480/halos.avif?v=1 480w,
-                     /assets/img/bitacora-2026/galeria/1200/halos.avif?v=1 1200w,
-                     /assets/img/bitacora-2026/galeria/1600/halos.avif?v=1 1600w"
-             sizes="(max-width:900px) 100vw, 33vw" loading="lazy"
-             decoding="async" alt="El laOra Bitácora de acero con esfera turquesa, de frente, sobre fondo crema">
-        <figcaption>De frente, a la luz del estudio.</figcaption>
-      </figure>
-    </div>
-  </section>
 
   <section class="pv-tecnica">
     <h2>Ficha Técnica</h2>
@@ -585,30 +544,13 @@
        dibujo y la ficha lo dice. Lo estrenó el Precisa el 30/08/2026. */
     CAPA: {
     "correa": {
-      "Brz-Acero-Bit-01": "brazalete-acero",
-      "Brz-Acero-Bit-02": "brazalete-negro-pvd",
-      "Brz-Acero-Bit-05": "brazalete-acero-centros-dorados",
-      "Brz-Acero-Bit-06": "brazalete-oro-rosa",
-      "Brz-Acero-Bit-07": "brazalete-acero-centros-oro-rosa"
-    },
-    "esf": {
-      "E1": "esfera-turquesa",
-      "E2": "esfera-blanca",
-      "E3": "esfera-negra",
-      "E4": "esfera-azul",
-      "E7": "esfera-cobre"
+      "Brz-Acero-Bit-01": "brazalete-acero"
     },
     "caja": {
-      "C1": "caja-plata",
-      "C3": "caja-oro-rosa",
-      "C4": "caja-negro-pvd",
-      "C2": "caja-bronce"
-    },
-    "agujas": {
-      "PLA": "agujas-plata"
+      "C1": "caja-plata"
     }
   }, CAPA_IMG: "/assets/img/bitacora-2026/capas/1200/", SERIE_V: "?v=18",
-    PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa", "encima_si": ["Brz-Acero-Bit-01", "Brz-Acero-Bit-02", "Brz-Acero-Bit-05", "Brz-Acero-Bit-06", "Brz-Acero-Bit-07"]}, {"capa": "esf", "grupo": "esf", "espera": ["esf", "esftipo"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}, {"capa": "agujas", "grupo": "agujas", "necesita": "esf", "espera": "agujas"}],
+    PILA: [{"capa": "correa", "grupo": "correa", "espera": "correa", "encima_si": ["Brz-Acero-Bit-01"]}, {"capa": "caja", "grupo": "caja", "espera": ["tamano", "caja"]}],
     /* LA MINIATURA DE LA CORREA, si el modelo la trae. Es la foto de la
        correa de verdad, suelta y entera, que el montaje no puede enseñar:
        sus capas se acaban en el borde del lienzo. Se declara en el JSON

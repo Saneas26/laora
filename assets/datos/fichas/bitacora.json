@@ -620,19 +620,7 @@
     "grupo": "correa",
     "espera": "correa",
     "encima_si": [
-     "Brz-Acero-Bit-01",
-     "Brz-Acero-Bit-02",
-     "Brz-Acero-Bit-05",
-     "Brz-Acero-Bit-06",
-     "Brz-Acero-Bit-07"
-    ]
-   },
-   {
-    "capa": "esf",
-    "grupo": "esf",
-    "espera": [
-     "esf",
-     "esftipo"
+     "Brz-Acero-Bit-01"
     ]
    },
    {
@@ -642,37 +630,14 @@
      "tamano",
      "caja"
     ]
-   },
-   {
-    "capa": "agujas",
-    "grupo": "agujas",
-    "necesita": "esf",
-    "espera": "agujas"
    }
   ],
   "capas": {
    "correa": {
-    "Brz-Acero-Bit-01": "brazalete-acero",
-    "Brz-Acero-Bit-02": "brazalete-negro-pvd",
-    "Brz-Acero-Bit-05": "brazalete-acero-centros-dorados",
-    "Brz-Acero-Bit-06": "brazalete-oro-rosa",
-    "Brz-Acero-Bit-07": "brazalete-acero-centros-oro-rosa"
-   },
-   "esf": {
-    "E1": "esfera-turquesa",
-    "E2": "esfera-blanca",
-    "E3": "esfera-negra",
-    "E4": "esfera-azul",
-    "E7": "esfera-cobre"
+    "Brz-Acero-Bit-01": "brazalete-acero"
    },
    "caja": {
-    "C1": "caja-plata",
-    "C3": "caja-oro-rosa",
-    "C4": "caja-negro-pvd",
-    "C2": "caja-bronce"
-   },
-   "agujas": {
-    "PLA": "agujas-plata"
+    "C1": "caja-plata"
    }
   },
   "_orden": "De abajo arriba: brazalete, esfera, caja, agujas. La esfera va DEBAJO de la caja a proposito: el bisel le tapa el canto, como el reloj de verdad, y asi el encaje es perfecto sin medir la esfera contra el hueco. El brazalete, debajo de todo, porque su primer eslabon se mete bajo el asa.",
@@ -681,41 +646,16 @@
   "_montado": "MONTADO DESDE EL DESPIECE el 04/09/2026, por herramientas/capas_bitacora_despiece.py. Las quince piezas -4 cajas, 5 esferas, 5 brazaletes y las agujas- estan cortadas de la MISMA imagen de 4.096, asi que aqui no se mide nada entre ellas: solo se lleva el eje al centro del lienzo y se aplica UNA escala, la que hace que el brazalete llegue a los dos cantos (0,5420). El color se saco recoloreando pixel a pixel el despiece original, con el canal alfa intacto byte a byte, o sea que ninguna pieza puede moverse al cambiar de color. ⚠️ ES OTRO RELOJ, no un retoque del de agosto: la esfera es redonda y no de cojin con pista de puntos. El montaje viejo -capas_bitacora.py, que mide y coloca cada pieza de entregas distintas- YA NO SE PASA: volveria a publicar el reloj de antes. La fecha marca 26, dos digitos.",
   "_faltan": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron), el brazalete Brz-Acero-Bit-07 (acero plata y oro rosa) y las tres correas de goma. La entrega trajo ademas dos cajas (bronce y oro) y una esfera (cobre) que NO estan en la ficha: no se anaden hasta que Oscar diga que se venden y a que coste.",
   "_esferas": "ESFERAS NUEVAS EL 01/09/2026 (Oscar: \"cambia las esferas del bitacora por estas\"). Entrega `Codex/2026-09-01/esferas-bitacora-simplemente-a-esta-esfera/outputs/4k-transparent/`: indices con relieve, doble baton a las 12, pista de minutos punteada y el rotulo AUTOMATIC. NO se montan tal cual: los radios se llevan un 3,7 %, el eje baila hasta 80 px y la blanca es un poligono con un trozo de damero en una esquina. Las normaliza `herramientas/esferas_bitacora.py` ANTES de `capas_bitacora.py`. La cobre YA SE MONTA (Oscar, 01/09/2026: \"monta tambien el cobre\") y su capa se publica, pero todavia NO SE VENDE: la Bitacora vende por lista de combinaciones —que caja con que esfera y con que correa monta el proveedor— y esa lista es de Oscar. En cuanto la de, la esfera entra como un color mas.",
-  "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color.",
-  "bienvenida": "bitacora-hazlo-tuyo",
-  "bienvenida_alt": "El laOra Bitácora de acero con esfera turquesa, de tres cuartos",
-  "bienvenida_v": "?v=1"
+  "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color."
  },
  "_esferas_fuera": "FUERA DE LA VENTA LA GRIS (E5) Y LA MARRON (E6), por orden de Oscar el 01/09/2026: \"sacalas de la venta\". Se venden desde el 30/08 pero NUNCA han tenido dibujo, asi que al elegirlas el visor se quedaba con la caja vacia y el boton de comprar activo: 10 de las 36 referencias eran un reloj que la web no sabe ensenar. La gris costaba 21,39 y la marron 25,99. Vuelven en cuanto lleguen sus esferas dibujadas, y con ellas estas diez combinaciones: C1+E5+Brz-Acero-Bit-01; C1+E5+Brz-Acero-Bit-07; C1+E5+Brz-Goma-Bit-01; C1+E5+Brz-Goma-Bit-03; C1+E6+Brz-Acero-Bit-01; C3+E6+Brz-Acero-Bit-06; C3+E6+Brz-Acero-Bit-07; C3+E6+Brz-Goma-Bit-04; C4+E5+Brz-Acero-Bit-02; C4+E5+Brz-Goma-Bit-01.",
  "_bronce": "LA CAJA BRONCE (C2) Y LA ESFERA COBRE (E7) entran el 01/09/2026, por orden de Oscar: \"monta tambien el cobre\" y, preguntado con que caja, \"con una caja bronce nueva\". Caja 34,97 (el mismo escalon que la oro rosa y la negro PVD) y esfera 21,39 (como las demas), los dos dados por Oscar. SOLO EXISTE UNA COMBINACION: C2 + E7 + silicona negra, que es con lo que dijo que sale. La bronce no se ofrece con otras esferas ni la cobre con otras cajas, porque la Bitacora vende por lista de combinaciones y esa lista es la del proveedor, no una multiplicacion. OJO: BRAZALETE DE BRONCE NO HAY DIBUJADO -los tres que existen son acero plata, acero oro rosa y acero negro-, y la silicona TAMPOCO tiene capa, asi que esta referencia se ve con la caja y la esfera pero sin correa.",
  "_piel": "CORREAS DE PIEL, EXCLUSIVAS DE LA BITACORA (Oscar, 01/09/2026: «estas correas son exclusivamente del bitacora [...] el resto de correas y brazaletes al bitacora no le sirven»). Las TRES CAPAS YA ESTAN PUBLICADAS y montadas -piel-negra, piel-azul-marino y piel-marron-burdeos en assets/img/bitacora-2026/capas/1200/-, pero NO SE VENDEN todavia porque faltan dos datos que son de Oscar: (1) lo que cuesta la correa, sin lo cual el motor no sabe poner precio, y (2) con que cajas va cada una. Lo segundo importa por la HEBILLA: la negra y la azul marino la llevan de acero y la marron burdeos de oro rosa, asi que no valen para cualquier caja. La Bitacora vende por lista de combinaciones -lo que el proveedor monta- y no por multiplicar pasos, asi que no se inventan. AVISO: el fichero de la negra viene marcado «prueba-01»; antes de venderla, que Oscar confirme que esa es la buena. ⚠️ REMONTADAS EL 04/09/2026 contra el despiece (Oscar: «remontarlas ahora»). Estaban a la medida del reloj de agosto -517 px de ancho contra una caja de 848- y el despiece hizo crecer el reloj: la caja pasa a 1.078 px y el asa del brazalete publicado mide 580. Las tres se han vuelto a escalar por la MISMA regla de siempre, que se mide y no se supone: el ancho del asa de la correa igual al del brazalete, y el hueco entre sus dos ramas centrado en el eje del reloj (x3,625 las dos primeras, x3,648 la negra). Lo hace ahora `capas_bitacora_despiece.py`, que se trae de `capas_bitacora.py` solo las tres reglas de la piel -recorte del papel, hueco de asas y desflecado-. SIGUEN SIN VENDERSE: faltan los dos datos de Oscar.",
  "_pila": "EL BRAZALETE VA POR ENCIMA DE LA CAJA, PERO SOLO EL BRAZALETE (Oscar, 02/09/2026: «en el caso del bitacora, vamos a poner el brazalete por encima de la caja en capas»). En los demas relojes la correa va la primera de la pila, o sea DEBAJO de todo: entra por las asas y el cuerpo del reloj la tapa. Aqui el brazalete es integrado y su primer eslabon monta SOBRE la caja. ⚠️ PERO LAS CORREAS DE PIEL DE ESTE MISMO RELOJ ENTRAN POR DEBAJO, como en todos los demas: subiendo la correa ENTERA, la piel se dibuja encima de la esfera y tapa el reloj -probado y visto-. Por eso la capa sigue siendo la primera de la pila y lo que sube es SOLO lo que diga `encima_si`. Hoy no se nota porque las pieles todavia no tienen id en `montaje.capas`, o sea que no se dibujan; el dia que se vendan, si. El `orden` de `arma()` en `capas_bitacora.py` tiene que decir lo mismo. 03/09/2026: LOS BRAZALETES SON LOS INTEGRADOS, el integrado de corte exacto (Oscar: «elimina el brazalete del bitacora, todos los brazaletes, y coloca este»). Los cuatro aceros tienen ya su dibujo, los cuatro con la MISMA silueta -IoU 1,00000- y por tanto con la misma medida: el reloj no da un salto al cambiar de acabado. Queda un quinto acabado dibujado y SIN VENDER, el de centros en oro amarillo (`brazalete-acero-centros-dorados`): no hay id de correa para el. Y LAS AGUJAS SE VAN OTRA VEZ (Oscar, 03/09/2026: «ok quita las agujas»): estuvieron puestas unas horas colgando del grupo `mov`. Se quitan la capa, el hueco de la pila y el mapa `capas.mov`; en `capas_bitacora.py` se quedan `capa_de_agujas` y `CON_AGUJAS = False`, o sea que volver a ponerlas es cambiar una linea.",
- "fijas": {
-  "titulo": "De cerca",
-  "img": "/assets/img/bitacora-2026/galeria/",
-  "v": "?v=1",
-  "fotos": [
-   {
-    "f": "estudio",
-    "alt": "El laOra Bitácora de acero con esfera turquesa, de tres cuartos sobre fondo crema",
-    "pie": "De tres cuartos: el canto pulido de la caja y el brazalete integrado."
-   },
-   {
-    "f": "ciudad",
-    "alt": "El laOra Bitácora de acero con esfera turquesa, de noche, con la ciudad detrás",
-    "pie": "De noche. La esfera turquesa aguanta la luz baja."
-   },
-   {
-    "f": "halos",
-    "alt": "El laOra Bitácora de acero con esfera turquesa, de frente, sobre fondo crema",
-    "pie": "De frente, a la luz del estudio."
-   }
-  ]
- },
- "_fijas": "FOTOS DE ARCHIVO (Oscar, 02/09/2026: «si tenemos alguna foto del bitacora en archivo, colocala debajo de la foto del configurador a modo catalogo»). Las tres salen de fotos que ya estaban en el repo -relojes-2026, heroes-2026 y lunar-v2- y se republicaron en 480/1200/1600 con `foto_a_web.py`. OJO: LAS TRES SON EL MISMO RELOJ, acero con esfera turquesa, que es el unico del que hay foto. No cambian con lo que el cliente elige: son catalogo, no el configurador. Habia una cuarta, `bitacora/editorial/camarote`, que NO se pone: es una escena de camarote con mapas y no se ve el reloj.",
  "_combinaciones": "Oscar, 03/09/2026: «ahora falta que el configurador del bitacora permita elegir todos los brazaletes». Hasta hoy cada caja llevaba atado su brazalete -con la negra solo salia el negro, con la de oro rosa solo el oro rosa- y eso venia de la lista corta del proveedor. Ahora CADA PAREJA CAJA+ESFERA que ya existia admite LOS CUATRO ACEROS. No se ha inventado ninguna pareja caja+esfera nueva: las once que habia siguen siendo once. LAS CORREAS DE GOMA NO SE TOCAN: Oscar hablo de brazaletes, y extender la regla a piezas que no ha nombrado es justo lo que no se hace. FALTA EL QUINTO BRAZALETE, el de centros en oro amarillo (`brazalete-acero-centros-dorados`): esta dibujado y publicado, pero no tiene id de correa porque le faltan nombre y coste, que son dato de Oscar.",
  "_agujas": "Oscar, 03/09/2026: «despues se eligen las agujas, pon todas las posibilidades ya; habra agujas doradas, plata, negras y oro rosa». COSTE 0 en las cuatro, como en el Precisa: el acabado de la aguja no cambia lo que cuesta el reloj. NO ESTAN EN `cadena`, asi que son un eje libre -las cuatro salen con cualquier caja, esfera y brazalete- y la lista de `combinaciones` no crece; lo que crece es el catalogo, porque `agujas` SI firma la referencia. ⚠️ DE MOMENTO SOLO ESTA DIBUJADA LA PLATA (el fichero `agujas-redondeadas-bitacora-4096.png`, ajustado a 13,5/13/8,5 mm por `capas_bitacora_despiece.py`). Las otras tres llegaran dibujadas; NO se recolorean aqui.",
  "_movimiento": "Oscar, 03/09/2026: «despues se elige movimiento, LOS MISMOS QUE EL PRECISA». Entran el Cuarzo Suizo LO_Q6026 (78,04) y el Automatico Suizo LO_A4026 (114,38), y sale el LO_A3826 que llevaba, que costaba 59,01 e iba en `extra` en vez de en la opcion. Por eso `extra` pasa a 0: el coste del calibre ahora lo lleva cada opcion, que es como funciona el Precisa. ⚠️ ESTO SUBE EL PRECIO: el automatico cuesta 55,37 mas que el calibre viejo y el cuarzo 19,03 mas, y el precio sale del coste. `mov` NO firma la referencia (ver NO_FIRMAN en generar_ficha_2026.py), asi que no multiplica referencias: cambia lo que valen.",
  "_referencia": "EL CALIBRE VA EN LA REFERENCIA, y no es opcional desde el 03/09/2026: al meter los dos calibres del Precisa, el cuarzo cuesta 78,04 y el automatico 114,38, o sea 36,34 de diferencia que en precio son unos 90 EUR. Sin el calibre en el codigo, el MISMO codigo valia dos precios: la pagina ensenaba 489,90 con el automatico y el catalogo guardaba 399,90, que es el del cuarzo. El carrito manda referencia y precio, y el servidor comprueba contra el catalogo: habria cascado. El Precisa ya lo hacia asi (`LO-01-{mov}-40{mov.tapa}-...`). ⚠️ `mov` NO firma la COMBINACION -esta en NO_FIRMAN- pero SI la REFERENCIA: son dos cosas distintas y hay que tenerlo claro.",
- "_faltan_dibujo": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron) -fuera de la venta desde el 01/09- y las tres correas de goma. ⚠️ LAS AGUJAS SOLO ESTAN EN PLATA: el despiece trae un juego. Doradas, Negras y Oro rosa se eligen en la ficha y hoy el visor las enseña SIN AGUJAS. O se sacan de la venta hasta que lleguen, o se recolorean del mismo despiece -que es lo que se hizo con cajas, esferas y brazaletes y sale al pixel-; es decision de Oscar (avisado el 04/09/2026)."
+ "_faltan_dibujo": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron) -fuera de la venta desde el 01/09- y las tres correas de goma. ⚠️ LAS AGUJAS SOLO ESTAN EN PLATA: el despiece trae un juego. Doradas, Negras y Oro rosa se eligen en la ficha y hoy el visor las enseña SIN AGUJAS. O se sacan de la venta hasta que lleguen, o se recolorean del mismo despiece -que es lo que se hizo con cajas, esferas y brazaletes y sale al pixel-; es decision de Oscar (avisado el 04/09/2026).",
+ "_montaje": "Oscar, 04/09/2026: «monta esto ahora en el bitacora y RETIRA TODAS LAS FOTOS pero DEJA LAS OPCIONES DEL CONFIGURADOR». Entra la entrega «madre» del 04/09: dos piezas cortadas de la misma imagen de 4.096, la CABEZA ENTERA -caja, esfera y agujas en una sola pieza- y el brazalete de dos tiras. ⚠️ POR ESO SOLO HAY DOS CAPAS: la esfera y las agujas van DENTRO de la cabeza y hoy no se pueden elegir por separado. Los pasos `esf` y `agujas` SIGUEN en el configurador porque Oscar los quiere ahi, pero no dibujan nada hasta que lleguen las cabezas de cada color. Fuera la foto de bienvenida, la galeria «De cerca» y las tarjetas de la coleccion: Oscar esta generando las imagenes de cero. Ver `herramientas/capas_bitacora_madre.py`."
 }
