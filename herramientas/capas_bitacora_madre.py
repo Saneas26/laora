@@ -43,6 +43,7 @@ import sys
 
 import numpy as np
 from PIL import Image
+from scipy import ndimage
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
@@ -123,7 +124,32 @@ def coloca(ruta, eje, escala, lienzo):
     return L
 
 
-def capas_de_piel(brazalete, eje):
+def recorte_del_metal(caja):
+    """La máscara de lo que la piel NO puede pisar: el metal, con un píxel de
+    margen.
+
+    Óscar, 04/09/2026: «no metas la piel en la caja, debe quedar A RAS DEL
+    METAL perfectamente recortado».
+
+    ⚠️ NO VALE CORTAR POR FILAS, y se probó: la cabeza trae un HUECO DE MEDIO
+    ESLABÓN entre las asas —48 filas de alto y 347 px de ancho, donde encaja
+    el eslabón del brazalete— y borrando todas las filas de la cabeza ese
+    hueco se queda VACÍO: sale un rectángulo de fondo dentro del reloj, que
+    es peor que el problema.
+
+    Se corta por la SILUETA: la piel se queda exactamente donde no hay metal.
+    Así llena el hueco a ras y su canto es el del metal, sin flecos. El
+    píxel de margen se come el suavizado del borde de la cabeza, que si no
+    deja una sombra oscura de la piel asomando por el filo."""
+    a = np.asarray(caja)[:, :, 3] > 40          # umbral bajo: coge el suavizado
+    a = ndimage.binary_dilation(a, iterations=1)
+    M = np.zeros((ALTO_LARGO, ANCHO), bool)
+    desf = (ALTO_LARGO - ANCHO) // 2
+    M[desf:desf + ANCHO] = a
+    return M
+
+
+def capas_de_piel(brazalete, eje, caja):
     """Las tres correas de piel de la Bitácora, contra el brazalete nuevo.
 
     Óscar, 04/09/2026: «¿tenemos correas de goma y piel para el bitácora en
@@ -142,6 +168,7 @@ def capas_de_piel(brazalete, eje):
     viniera corrido, copiar ese sesgo sería copiar el error de otro dibujo.
     """
     ancho_b, _, _, _ = hueco_de_asas(np.asarray(brazalete)[:, :, 3] > 128)
+    metal = recorte_del_metal(caja)
     largo = (ANCHO, ALTO_LARGO)
     salida = {}
     for ident, f in sorted(PIELES.items()):
@@ -157,8 +184,12 @@ def capas_de_piel(brazalete, eje):
         L = Image.new('RGBA', largo, (0, 0, 0, 0))
         L.alpha_composite(n, (int(round(ANCHO / 2.0 - cx * s)),
                               int(round(ALTO_LARGO / 2.0 - (fin + ini) / 2.0 * s))))
-        salida[ident] = L
-        print('  %-22s asa %d -> %d px (x%.4f)' % (ident, ancho_p, ancho_b, s))
+        # A RAS DEL METAL: la piel se queda sólo donde no hay cabeza
+        b = np.asarray(L).copy()
+        b[:, :, 3] = np.where(metal, 0, b[:, :, 3])
+        salida[ident] = Image.fromarray(b)
+        print('  %-22s asa %d -> %d px (x%.4f) · recortada por la silueta'
+              % (ident, ancho_p, ancho_b, s))
     return salida
 
 
@@ -215,7 +246,7 @@ def main():
     print('          llega al canto de arriba: %s · al de abajo: %s'
           % (f.min() <= ve[0], f.max() >= ve[1]))
     print('PIELES    (el asa se iguala a la del brazalete; el hueco, al eje)')
-    capas.update(capas_de_piel(capas['brazalete-acero'], eje))
+    capas.update(capas_de_piel(capas['brazalete-acero'], eje, capas['caja-plata']))
     hoja = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'bitacora-madre.png')
     apila([capas['brazalete-acero'], capas['caja-plata']], ANCHO,
           (233, 233, 231), CAMARA).convert('RGB').save(hoja)
