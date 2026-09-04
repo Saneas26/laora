@@ -64,6 +64,7 @@ import sys
 
 import numpy as np
 from PIL import Image
+from scipy import ndimage
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
@@ -95,6 +96,39 @@ COLORES = {
 # el trozo de nombre que identifica cada FAMILIA de pieza dentro del despiece
 FAMILIA = {'caja': 'cabeza', 'esfera': 'esfera', 'brazalete': 'brazalete',
            'agujas': 'agujas'}
+
+# --------------------------------------------------------------- las agujas
+# ⚠️ LAS AGUJAS NO SE COLOCAN COMO LAS DEMÁS PIEZAS: se les da su LARGO DE
+# VERDAD. Óscar, 03/09/2026: «la aguja segundero siempre 13,5 mm, minutero 13
+# mm, hora 8,5 mm». No son proporciones ni porcentajes del radio: son
+# milímetros del reloj de verdad, y el reloj mide 40 mm.
+#
+# DE DÓNDE SALE EL MILÍMETRO. Del propio despiece: la cabeza mide 1.901 px de
+# ancho SIN LA CORONA —la corona asoma sólo por la derecha, así que el cuerpo
+# se mide como el doble de lo que hay del eje al canto izquierdo— y esos 1.901
+# px son los 40 mm. Salen 47,5 px/mm. Se recalcula en cada pasada; si un día
+# la caja cambia de tamaño, esto cambia con ella.
+#
+# LA COMPROBACIÓN QUE LO RESPALDA: las agujas que venían en el despiece miden
+# 13,88 mm con esta misma regla, y Óscar pide 13,5. O sea que el dibujo ya
+# estaba casi a medida y el milímetro está bien medido (3 % de diferencia).
+#
+# ⚠️ CADA AGUJA SE ESCALA POR SU CUENTA, y es a propósito. Tal como vienen
+# dibujadas miden 38,87 / 38,36 / 28,01 mm: no guardan entre sí la proporción
+# que Óscar pide, así que una sola escala dejaría dos de las tres mal. Escalar
+# cada una cambia también su grosor, pero como mucho un 5 %, que no se ve.
+#
+# ⚠️ Y EL BUJE SE ESCALA CON LA MAYOR DE LAS TRES. El buje es el tapón que
+# cubre el arranque de las tres agujas: si se queda más pequeño que el
+# arranque de alguna, asoma un muñón. Con la mayor las tapa a las tres.
+CAJA_MM = 40.0                  # lo que dice la ficha: «Caja 40 mm»
+AGUJAS_MM = {'segundero': 13.5, 'minutero': 13.0, 'hora': 8.5}
+# Los cuatro acabados que habrá (Óscar, 03/09/2026: «habrá agujas doradas,
+# plata, negras y oro rosa»). Hoy sólo existe el dibujo de las plata, y con
+# ésas se está encajando; las otras tres llegarán dibujadas, NO recoloreadas
+# por aquí.
+AGUJAS_COLOR = {'agujas-plata': 'plata', 'agujas-oro': 'dorada',
+                'agujas-negras': 'negra', 'agujas-oro-rosa': 'oro-rosa'}
 
 
 def _alfa(ruta, u=128):
@@ -146,8 +180,91 @@ def marco(ruta_esfera, ruta_brazalete):
     return eje, float(escala), int(arriba), int(abajo), media
 
 
-def coloca(ruta, eje, escala, lienzo):
+def px_por_mm(ruta_cabeza, eje):
+    """Cuántos píxeles del despiece son un milímetro del reloj.
+
+    Se mide el ANCHO DEL CUERPO SIN LA CORONA: la corona asoma sólo por la
+    derecha, así que el cuerpo es el doble de lo que hay del eje al canto
+    izquierdo. Ese ancho son los `CAJA_MM` de la ficha.
+    """
+    a = _alfa(ruta_cabeza)
+    ancho = 2.0 * (eje[0] - np.where(a.any(0))[0].min())
+    return ancho / CAJA_MM, ancho
+
+
+def agujas_a_medida(ruta, eje_dibujo, pxmm):
+    """Las tres agujas, cada una a su largo, girando sobre el buje.
+
+    Devuelve la imagen de 4.096 con el buje puesto donde diga `eje_dibujo`.
+    Ver la nota larga de `AGUJAS_MM` para el porqué de cada decisión.
+    """
     im = Image.open(ruta).convert('RGBA')
+    a = np.asarray(im)
+    m = a[:, :, 3] > 128
+    lab, n = ndimage.label(m)
+    tam = ndimage.sum(m, lab, range(1, n + 1))
+    m = lab == int(np.argmax(tam)) + 1          # fuera las motas del render
+    # EL BUJE ES EL PUNTO MÁS GORDO del dibujo: las tres agujas se cruzan ahí
+    # y el tapón las cubre, así que ningún otro sitio es tan ancho.
+    d = ndimage.distance_transform_edt(m)
+    py, px = np.unravel_index(np.argmax(d), d.shape)
+    R = float(d[py, px])
+    Y, X = np.ogrid[:m.shape[0], :m.shape[1]]
+    disco = ((X - px) ** 2 + (Y - py) ** 2) <= R * R
+    l2, n2 = ndimage.label(m & ~disco)
+    t2 = ndimage.sum(m & ~disco, l2, range(1, n2 + 1))
+    if len(t2) < 3:
+        raise SystemExit('✗ en el dibujo de agujas no encuentro tres agujas')
+    trozos = []
+    for i in np.argsort(t2)[::-1][:3]:
+        mk = l2 == i + 1
+        ys, xs = np.where(mk)
+        largo = float(np.hypot(xs - px, ys - py).max())
+        trozos.append({'m': mk, 'largo': largo, 'px': int(t2[i])})
+    # QUIÉN ES QUIÉN, sin listas ni suposiciones: la HORA es la más corta; de
+    # las dos que quedan, el SEGUNDERO es la más fina —es una aguja de aguja—
+    # y la otra es el MINUTERO.
+    hora = min(trozos, key=lambda p: p['largo'])
+    resto = [p for p in trozos if p is not hora]
+    seg = min(resto, key=lambda p: p['px'])
+    minu = [p for p in resto if p is not seg][0]
+    for nom, p in (('hora', hora), ('minutero', minu), ('segundero', seg)):
+        p['nombre'] = nom
+        p['s'] = AGUJAS_MM[nom] * pxmm / p['largo']
+        print('  %-11s %7.1f px (%5.2f mm)  ->  %5.2f mm · x%.4f'
+              % (nom, p['largo'], p['largo'] / pxmm, AGUJAS_MM[nom], p['s']))
+        # ⚠️ GUARDA: un factor disparatado no es una aguja larga o corta, es
+        # que las tres NO se han separado bien —pasa cuando el dibujo trae las
+        # agujas ya montadas y el buje no es su punto más gordo—. Estirar x16
+        # revienta la memoria y, si no reventara, publicaría un churro.
+        if not 0.05 <= p['s'] <= 2.0:
+            raise SystemExit(
+                '✗ %s: el %s saldría x%.1f. Ese dibujo no se deja separar en '
+                'tres agujas; hace falta el de las agujas sueltas.'
+                % (os.path.basename(ruta), nom, p['s']))
+    s_buje = max(p['s'] for p in trozos)
+    sueltos = m & ~disco & ~(hora['m'] | minu['m'] | seg['m'])
+
+    L = Image.new('RGBA', im.size, (0, 0, 0, 0))
+
+    def pon(mascara, s):
+        b = a.copy()
+        b[:, :, 3] = np.where(mascara, b[:, :, 3], 0)
+        n2 = Image.fromarray(b).resize(
+            (max(1, int(round(im.width * s))), max(1, int(round(im.height * s)))),
+            Image.LANCZOS)
+        L.alpha_composite(n2, (int(round(eje_dibujo[0] - px * s)),
+                               int(round(eje_dibujo[1] - py * s))))
+
+    for p in (hora, minu, seg):
+        pon(p['m'], p['s'])
+    pon(disco | sueltos, s_buje)                # el buje, el último y encima
+    return L
+
+
+def coloca(ruta, eje, escala, lienzo):
+    im = ruta if hasattr(ruta, 'convert') else Image.open(ruta)
+    im = im.convert('RGBA')
     n = im.resize((max(1, int(round(im.width * escala))),
                    max(1, int(round(im.height * escala)))), Image.LANCZOS)
     L = Image.new('RGBA', lienzo, (0, 0, 0, 0))
@@ -169,8 +286,10 @@ def guarda(im, ident):
 
 def main():
     prueba = '--prueba' in sys.argv
-    carpeta = DESPIECE or next((a for a in sys.argv[1:]
-                                if not a.startswith('--')), '')
+    sueltos_arg = [a for a in sys.argv[1:] if not a.startswith('--')]
+    extra_agujas = [a for a in sueltos_arg if a.lower().endswith('.png')]
+    carpeta = DESPIECE or next((a for a in sueltos_arg
+                                if not a.lower().endswith('.png')), '')
     if not carpeta or not os.path.isdir(carpeta):
         raise SystemExit('✗ dime la carpeta del despiece (o DESPIECE_BITACORA)')
     hay = piezas(carpeta)
@@ -194,11 +313,31 @@ def main():
                 faltan.append(capa)
                 continue
             capas[capa] = coloca(ruta, eje, escala, lienzo)
-    if None in hay['agujas']:
-        capas['agujas'] = coloca(hay['agujas'][None], eje, escala, (ANCHO, ANCHO))
-    elif hay['agujas']:
-        capas['agujas'] = coloca(next(iter(hay['agujas'].values())), eje,
-                                 escala, (ANCHO, ANCHO))
+    # LAS AGUJAS, cada juego a su largo de verdad
+    pxmm, ancho_caja = px_por_mm(next(iter(hay['caja'].values())), eje)
+    print('LA CAJA    mide %d px de ancho sin corona = %.1f mm  ->  1 mm = %.3f px'
+          % (ancho_caja, CAJA_MM, pxmm))
+    # ⚠️ SI SE PASA UN DIBUJO DE AGUJAS APARTE, MANDA ÉL y las del despiece
+    # se ignoran. Óscar entregó las «redondeadas» el 03/09/2026 para sustituir
+    # a las que venían dentro; intentar ajustar también aquéllas no tiene
+    # sentido (y además no se dejan separar: sus tres trozos salen de 39 px).
+    juegos = extra_agujas or list(hay['agujas'].values())
+    for ruta in sorted(set(juegos)):
+        capa = None
+        n = os.path.basename(ruta).lower()
+        for ident, trozo in AGUJAS_COLOR.items():
+            if trozo in n:
+                capa = ident
+                break
+        # el dibujo de las plata llega sin la palabra «plata» en el nombre:
+        # es el único que hay y con él se está encajando (Óscar, 03/09/2026)
+        if capa is None and len(AGUJAS_COLOR) and not hay['agujas'].get(None):
+            capa = 'agujas-plata'
+        elif capa is None:
+            capa = 'agujas-plata'
+        print('AGUJAS %-16s  (%s)' % (capa, os.path.basename(ruta)))
+        capas[capa] = coloca(agujas_a_medida(ruta, eje, pxmm), eje, escala,
+                             (ANCHO, ANCHO))
 
     # con un despiece de una sola combinación, las piezas llegan sin color en
     # el nombre: sirven de muestra, pero no se publican con nombre de color
