@@ -69,6 +69,11 @@ from scipy import ndimage
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from tarjeta_de_capas import ESCALA as CAMARA, apila            # noqa: E402
+# Del montaje viejo se aprovechan SÓLO las tres reglas de la piel: cómo se
+# recorta del papel, cómo se le mide el hueco de las asas y cómo se le quita
+# el fleco. Lo demás de aquel fichero —que MIDE entre piezas— no se toca.
+from capas_bitacora import (ENTREGA_COR, PIELES, alfa_de_piel,   # noqa: E402
+                            desfleca, hueco_de_asas)
 
 DESPIECE = os.environ.get('DESPIECE_BITACORA', '')
 DESTINO = os.path.join(RAIZ, 'assets/img/bitacora-2026/capas/1200')
@@ -301,6 +306,43 @@ def coloca(ruta, eje, escala, lienzo):
     return L
 
 
+def pieles(brazalete):
+    """Las tres correas de piel, cuadradas contra el brazalete PUBLICADO.
+
+    Óscar, 04/09/2026: «remontarlas ahora». Estaban a la medida del reloj de
+    agosto —517 px de ancho contra una caja de 848— y el despiece lo ha
+    hecho crecer, así que no encajaban.
+
+    LAS DOS REGLAS SON LAS DE SIEMPRE, y las dos se miden, no se suponen:
+      · el ancho del asa de la correa = el del brazalete, que es el hueco
+        de la caja;
+      · el hueco entre sus dos ramas se centra en el eje del reloj.
+
+    ⚠️ SE CENTRA EN EL EJE, no en el brazalete: el brazalete cae un pelo a
+    la derecha porque así viene dibujado, y copiar ese sesgo sería copiar el
+    error de otro dibujo.
+    """
+    ancho_b, _, _, _ = hueco_de_asas(np.asarray(brazalete)[:, :, 3] > 128)
+    print('EL ASA del brazalete publicado mide %d px' % ancho_b)
+    salida = {}
+    for ident, f in sorted(PIELES.items()):
+        im = Image.open(os.path.join(ENTREGA_COR, f)).convert('RGB')
+        mask = alfa_de_piel(im)
+        ancho_p, fin, ini, cx = hueco_de_asas(mask)
+        s = float(ancho_b) / ancho_p
+        r = im.convert('RGBA')
+        r.putalpha(Image.fromarray((mask * 255).astype(np.uint8)))
+        r = desfleca(r)
+        n = r.resize((max(1, int(round(r.width * s))),
+                      max(1, int(round(r.height * s)))), Image.LANCZOS)
+        L = Image.new('RGBA', (ANCHO, ALTO_LARGO), (0, 0, 0, 0))
+        L.alpha_composite(n, (int(round(ANCHO / 2.0 - cx * s)),
+                              int(round(ALTO_LARGO / 2.0 - (fin + ini) / 2.0 * s))))
+        print('  %-22s asa %d px  ->  x%.4f' % (ident, ancho_p, s))
+        salida[ident] = L
+    return salida
+
+
 def tarjetas(capas):
     """Las fotos de la colección, con las MISMAS capas que el configurador.
 
@@ -386,6 +428,11 @@ def main():
                 faltan.append(capa)
                 continue
             capas[capa] = coloca(ruta, eje, escala, lienzo)
+    # LAS CORREAS DE PIEL, cuadradas contra el brazalete que se acaba de montar
+    brz0 = next((capas[k] for k in COLORES['brazalete'] if k in capas), None)
+    if brz0 is not None:
+        capas.update(pieles(brz0))
+
     # LAS AGUJAS, cada juego a su largo de verdad
     pxmm, ancho_caja = px_por_mm(next(iter(hay['caja'].values())), eje)
     print('LA CAJA    mide %d px de ancho sin corona = %.1f mm  ->  1 mm = %.3f px'
