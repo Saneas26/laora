@@ -47,6 +47,11 @@ from PIL import Image
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from tarjeta_de_capas import ESCALA as CAMARA, apila            # noqa: E402
+# Del montaje viejo se aprovechan SÓLO las tres reglas de la piel: cómo se
+# recorta del papel, cómo se le mide el hueco de las asas y cómo se le quita
+# el fleco. Lo demás de aquel fichero —que mide entre piezas— no se toca.
+from capas_bitacora import (ENTREGA_COR, PIELES, alfa_de_piel,   # noqa: E402
+                            desfleca, hueco_de_asas)
 
 ENTREGA = ('/Users/oscar/Documents/Codex/2026-09-04/'
            'necesito-la-imagen-definitiva-de-la/outputs/')
@@ -74,6 +79,8 @@ PIEZAS = {
 }
 LARGAS = ('brazalete-acero', 'brazalete-acero-centros-oro-rosa',
           'brazalete-negro-pvd')            # las del lienzo alto
+# las pieles también van en el lienzo alto; se añaden aparte porque no salen
+# de esta entrega sino de la de correas del 29/08 (ver `capas_de_piel`)
 # ⚠️ LOS ACABADOS DE UNA MISMA PIEZA TIENEN QUE SER EL MISMO DIBUJO. Se
 # comprueba antes de publicar, cabezas y brazaletes por separado: si la
 # silueta de uno no es la del primero de su familia, el reloj pegaría un
@@ -114,6 +121,45 @@ def coloca(ruta, eje, escala, lienzo):
     L.alpha_composite(n, (int(round(lienzo[0] / 2.0 - eje[0] * escala)),
                           int(round(lienzo[1] / 2.0 - eje[1] * escala))))
     return L
+
+
+def capas_de_piel(brazalete, eje):
+    """Las tres correas de piel de la Bitácora, contra el brazalete nuevo.
+
+    Óscar, 04/09/2026: «¿tenemos correas de goma y piel para el bitácora en
+    archivo? si es sí publícalas». De GOMA no hay ni un dibujo. De PIEL hay
+    tres, y son EXCLUSIVAS de este reloj: la caja es integrada y la correa
+    entra por un hueco con la forma del asa, así que ninguna de las 45 de la
+    biblioteca encaja aquí.
+
+    NO HAY DIBUJO DE CAJA+CORREA con el que registrarlas, que es como se
+    registra el brazalete. Pero no hace falta: la correa y el brazalete entran
+    POR EL MISMO SITIO, así que valen dos reglas y las dos se miden:
+      · el ancho del asa de la correa tiene que ser el del brazalete;
+      · el hueco entre sus dos ramas se centra en el EJE DEL RELOJ.
+
+    ⚠️ SE CENTRA EN EL EJE, no en el brazalete: si el dibujo del brazalete
+    viniera corrido, copiar ese sesgo sería copiar el error de otro dibujo.
+    """
+    ancho_b, _, _, _ = hueco_de_asas(np.asarray(brazalete)[:, :, 3] > 128)
+    largo = (ANCHO, ALTO_LARGO)
+    salida = {}
+    for ident, f in sorted(PIELES.items()):
+        im = Image.open(ENTREGA_COR + f).convert('RGB')
+        mask = alfa_de_piel(im)
+        ancho_p, fin, ini, cx = hueco_de_asas(mask)
+        s = float(ancho_b) / ancho_p
+        r = im.convert('RGBA')
+        r.putalpha(Image.fromarray((mask * 255).astype(np.uint8)))
+        r = desfleca(r)
+        n = r.resize((max(1, int(round(r.width * s))),
+                      max(1, int(round(r.height * s)))), Image.LANCZOS)
+        L = Image.new('RGBA', largo, (0, 0, 0, 0))
+        L.alpha_composite(n, (int(round(ANCHO / 2.0 - cx * s)),
+                              int(round(ALTO_LARGO / 2.0 - (fin + ini) / 2.0 * s))))
+        salida[ident] = L
+        print('  %-22s asa %d -> %d px (x%.4f)' % (ident, ancho_p, ancho_b, s))
+    return salida
 
 
 def guarda(im, ident):
@@ -168,6 +214,8 @@ def main():
           (ALTO_LARGO + ANCHO / CAMARA) / 2.0)
     print('          llega al canto de arriba: %s · al de abajo: %s'
           % (f.min() <= ve[0], f.max() >= ve[1]))
+    print('PIELES    (el asa se iguala a la del brazalete; el hueco, al eje)')
+    capas.update(capas_de_piel(capas['brazalete-acero'], eje))
     hoja = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'bitacora-madre.png')
     apila([capas['brazalete-acero'], capas['caja-plata']], ANCHO,
           (233, 233, 231), CAMARA).convert('RGB').save(hoja)
