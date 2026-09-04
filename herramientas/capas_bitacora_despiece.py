@@ -72,6 +72,15 @@ from tarjeta_de_capas import ESCALA as CAMARA, apila            # noqa: E402
 
 DESPIECE = os.environ.get('DESPIECE_BITACORA', '')
 DESTINO = os.path.join(RAIZ, 'assets/img/bitacora-2026/capas/1200')
+TARJETAS = os.path.join(RAIZ, 'assets/img/bitacora-2026/tarjetas')
+FICHA = os.path.join(RAIZ, 'assets/datos/fichas/bitacora.json')
+PESO_TARJETA = 110000
+# CADA CAJA CON SU BRAZALETE, que es como se vende (lo mismo que decía
+# `capas_bitacora.py`, el montaje viejo). Las esferas de cada una salen de
+# la lista `combinaciones` de la ficha: no se inventa ninguna pareja.
+FOTOS = [('plata', 'C1', 'Brz-Acero-Bit-01'),
+         ('oro-rosa', 'C3', 'Brz-Acero-Bit-06'),
+         ('negro-pvd', 'C4', 'Brz-Acero-Bit-02')]
 ANCHO = 1200                    # lienzo cuadrado publicado
 ALTO_LARGO = 1952               # lienzo del brazalete, que es más alto
 CALIDADES = (72, 64, 56, 48, 40)
@@ -82,15 +91,15 @@ HOLGURA = 1.002                 # el pelo que separa la tira del filo del marco
 # que ya usan la ficha y `montaje.capas`; los valores, el trozo de nombre de
 # fichero que hay que buscar en la carpeta del despiece.
 COLORES = {
-    'caja':      {'caja-plata': 'plata', 'caja-bronce': 'bronce',
+    'caja':      {'caja-plata': 'acero-plata', 'caja-bronce': 'bronce',
                   'caja-oro-rosa': 'oro-rosa', 'caja-negro-pvd': 'negro-pvd'},
     'esfera':    {'esfera-turquesa': 'turquesa', 'esfera-blanca': 'blanca',
                   'esfera-negra': 'negra', 'esfera-azul': 'azul',
                   'esfera-cobre': 'cobre'},
-    'brazalete': {'brazalete-acero': 'acero',
-                  'brazalete-acero-centros-oro-rosa': 'centros-oro-rosa',
-                  'brazalete-acero-centros-dorados': 'centros-oro-amarillo',
-                  'brazalete-oro-rosa': 'oro-rosa-entero',
+    'brazalete': {'brazalete-acero': 'acero-plata',
+                  'brazalete-acero-centros-oro-rosa': 'acero-centros-oro-rosa',
+                  'brazalete-acero-centros-dorados': 'acero-centros-oro-amarillo',
+                  'brazalete-oro-rosa': 'oro-rosa',
                   'brazalete-negro-pvd': 'negro-pvd'},
 }
 # el trozo de nombre que identifica cada FAMILIA de pieza dentro del despiece
@@ -151,9 +160,15 @@ def piezas(carpeta):
         for fam, marca in FAMILIA.items():
             if marca not in n:
                 continue
+            # ⚠️ EL COLOR VA AL FINAL DEL NOMBRE, y gana el trozo más largo.
+            # Con «contiene» se confundían tres brazaletes: `acero-plata`,
+            # `acero-centros-oro-rosa` y `oro-rosa` comparten trozos, y el
+            # primero de la lista se quedaba con los tres.
+            tallo = os.path.splitext(n)[0]
             color = None
-            for capa, trozo in COLORES.get(fam, {}).items():
-                if re.search(r'(^|[-_])' + re.escape(trozo) + r'([-_.]|$)', n):
+            for capa, trozo in sorted(COLORES.get(fam, {}).items(),
+                                      key=lambda kv: -len(kv[1])):
+                if tallo == trozo or tallo.endswith('-' + trozo):
                     color = capa
                     break
             encontrado[fam][color] = os.path.join(carpeta, f)
@@ -262,6 +277,19 @@ def agujas_a_medida(ruta, eje_dibujo, pxmm):
     return L
 
 
+def largos(ruta, eje, pxmm):
+    """Sólo dice lo que miden las agujas del despiece. No las toca.
+
+    Sirve para dejar por escrito si se alejan de lo que pidió Óscar
+    (13,5 · 13 · 8,5 mm). Si un día se alejan mucho, el arreglo es pedir el
+    despiece con las agujas a medida, no estirarlas aquí.
+    """
+    a = np.asarray(Image.open(ruta).convert('RGBA'))[:, :, 3] > 128
+    ys, xs = np.where(a)
+    print('  el juego llega a %.2f mm del eje (Óscar pidió 13,5 para el '
+          'segundero)' % (np.hypot(xs - eje[0], ys - eje[1]).max() / pxmm))
+
+
 def coloca(ruta, eje, escala, lienzo):
     im = ruta if hasattr(ruta, 'convert') else Image.open(ruta)
     im = im.convert('RGBA')
@@ -271,6 +299,51 @@ def coloca(ruta, eje, escala, lienzo):
     L.alpha_composite(n, (int(round(lienzo[0] / 2.0 - eje[0] * escala)),
                           int(round(lienzo[1] / 2.0 - eje[1] * escala))))
     return L
+
+
+def tarjetas(capas):
+    """Las fotos de la colección, con las MISMAS capas que el configurador.
+
+    Se rehacen aquí y no en el montaje viejo porque la foto de la landing
+    tiene que ser el reloj que se mete en el carrito: si el configurador
+    enseña el despiece y la tarjeta el reloj de agosto, son dos relojes.
+
+    ⚠️ EL ORDEN ES EL DE `montaje.pila` DE LA FICHA: esfera, caja, agujas y
+    el brazalete ENCIMA (`encima_si`), porque el suyo es integrado y su
+    primer eslabón monta sobre la caja.
+    """
+    import json
+    d = json.load(_io.open(FICHA, encoding='utf-8'))
+    combis, de = d['combinaciones'], d['montaje']['capas']
+    aguja = next((capas[v] for v in de.get('agujas', {}).values()
+                  if v in capas), None)
+    os.makedirs(TARJETAS, exist_ok=True)
+    hechas = []
+    for mote, cid, brz in FOTOS:
+        caja = de['caja'].get(cid)
+        brazalete = de['correa'].get(brz)
+        if caja not in capas or brazalete not in capas:
+            continue
+        for eid in sorted({c['esf'] for c in combis
+                           if c['caja'] == cid and c['correa'] == brz}):
+            esf = de['esf'].get(eid)
+            if esf not in capas:
+                continue
+            pila = [capas[esf], capas[caja]]
+            if aguja is not None:
+                pila.append(aguja)
+            pila.append(capas[brazalete])
+            im = apila(pila, ANCHO, (233, 233, 231), CAMARA).convert('RGB')
+            ident = '%s-%s' % (mote, esf.replace('esfera-', ''))
+            for q in CALIDADES:
+                b = _io.BytesIO()
+                im.save(b, 'AVIF', quality=q)
+                dat = b.getvalue()
+                if len(dat) <= PESO_TARJETA or q == CALIDADES[-1]:
+                    break
+            open(os.path.join(TARJETAS, ident + '.avif'), 'wb').write(dat)
+            hechas.append((ident, len(dat)))
+    return hechas
 
 
 def guarda(im, ident):
@@ -321,8 +394,13 @@ def main():
     # se ignoran. Óscar entregó las «redondeadas» el 03/09/2026 para sustituir
     # a las que venían dentro; intentar ajustar también aquéllas no tiene
     # sentido (y además no se dejan separar: sus tres trozos salen de 39 px).
-    juegos = extra_agujas or list(hay['agujas'].values())
-    for ruta in sorted(set(juegos)):
+    # ⚠️ LAS AGUJAS DEL DESPIECE NO SE RE-MIDEN. Están cortadas de la misma
+    # imagen que la esfera: ya vienen en su sitio y a su tamaño, y volver a
+    # medirlas es justo lo que el despiece viene a quitar. `agujas_a_medida`
+    # sólo se usa con un dibujo de agujas SUELTO, que llega en otro encuadre.
+    juegos = [(r, True) for r in extra_agujas] or \
+             [(r, False) for r in hay['agujas'].values()]
+    for ruta, a_medida in sorted(set(juegos)):
         capa = None
         n = os.path.basename(ruta).lower()
         for ident, trozo in AGUJAS_COLOR.items():
@@ -335,9 +413,12 @@ def main():
             capa = 'agujas-plata'
         elif capa is None:
             capa = 'agujas-plata'
-        print('AGUJAS %-16s  (%s)' % (capa, os.path.basename(ruta)))
-        capas[capa] = coloca(agujas_a_medida(ruta, eje, pxmm), eje, escala,
-                             (ANCHO, ANCHO))
+        print('AGUJAS %-16s  (%s)%s' % (capa, os.path.basename(ruta),
+              '  [re-medidas]' if a_medida else '  [tal cual, del despiece]'))
+        dibujo = agujas_a_medida(ruta, eje, pxmm) if a_medida else ruta
+        capas[capa] = coloca(dibujo, eje, escala, (ANCHO, ANCHO))
+        if not a_medida:
+            largos(ruta, eje, pxmm)
 
     # con un despiece de una sola combinación, las piezas llegan sin color en
     # el nombre: sirven de muestra, pero no se publican con nombre de color
@@ -355,8 +436,9 @@ def main():
     muestra = []
     for fam in orden:
         if fam == 'agujas':
-            if 'agujas' in capas:
-                muestra.append(capas['agujas'])
+            a = next((capas[k] for k in AGUJAS_COLOR if k in capas), None)
+            if a is not None:
+                muestra.append(a)
             continue
         c = next((capas[k] for k in COLORES[fam] if k in capas), None)
         if c is None and sueltas.get(fam):
@@ -390,6 +472,10 @@ def main():
         print('  %-34s %6d B  %dx%d'
               % (ident, guarda(capas[ident], ident),
                  capas[ident].width, capas[ident].height))
+    print('\nFOTOS DE LA COLECCIÓN en %s'
+          % os.path.relpath(TARJETAS, RAIZ))
+    for ident, n in tarjetas(capas):
+        print('  %-34s %6d B' % (ident, n))
 
 
 if __name__ == '__main__':
