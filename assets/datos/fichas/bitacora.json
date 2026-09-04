@@ -59,6 +59,12 @@
     "nombre": "Cobre",
     "coste": 21.39,
     "color": "#B5701F"
+   },
+   {
+    "id": "E6",
+    "nombre": "Marrón",
+    "coste": 25.99,
+    "color": "#6B4B33"
    }
   ]
  },
@@ -395,6 +401,54 @@
    "coste": 0
   },
   {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-03",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Piel-Bit-azul-marino",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Piel-Bit-marron-burdeos",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Piel-Bit-negra",
+   "coste": 0
+  },
+  {
    "caja": "C4",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-01",
@@ -517,6 +571,48 @@
   {
    "caja": "C4",
    "esf": "E3",
+   "correa": "Piel-Bit-negra",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Acero-Bit-07",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-01",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Piel-Bit-azul-marino",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Piel-Bit-marron-burdeos",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
    "correa": "Piel-Bit-negra",
    "coste": 0
   }
@@ -529,7 +625,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=22",
+  "v": "?v=23",
   "pila": [
    {
     "capa": "correa",
@@ -555,13 +651,34 @@
     "Brz-Acero-Bit-01": "brazalete-acero",
     "Brz-Acero-Bit-07": "brazalete-acero-centros-oro-rosa",
     "Brz-Acero-Bit-02": "brazalete-negro-pvd",
-    "Piel-Bit-negra": "piel-negra",
-    "Piel-Bit-azul-marino": "piel-azul-marino",
-    "Piel-Bit-marron-burdeos": "piel-marron-burdeos"
+    "Piel-Bit-negra": {
+     "C1": "piel-negra-C1",
+     "C4": "piel-negra-C4"
+    },
+    "Piel-Bit-azul-marino": {
+     "C1": "piel-azul-marino-C1",
+     "C4": "piel-azul-marino-C4"
+    },
+    "Piel-Bit-marron-burdeos": {
+     "C1": "piel-marron-burdeos-C1",
+     "C4": "piel-marron-burdeos-C4"
+    }
    },
    "caja": {
-    "C1": "caja-plata",
-    "C4": "caja-negro-pvd"
+    "C1": {
+     "E1": "caja-plata-E1",
+     "E2": "caja-plata-E2",
+     "E3": "caja-plata-E3",
+     "E4": "caja-plata-E4",
+     "E6": "caja-plata-E6"
+    },
+    "C4": {
+     "E1": "caja-negro-pvd-E1",
+     "E2": "caja-negro-pvd-E2",
+     "E3": "caja-negro-pvd-E3",
+     "E4": "caja-negro-pvd-E4",
+     "E6": "caja-negro-pvd-E6"
+    }
    }
   },
   "_orden": "De abajo arriba: brazalete, esfera, caja, agujas. La esfera va DEBAJO de la caja a proposito: el bisel le tapa el canto, como el reloj de verdad, y asi el encaje es perfecto sin medir la esfera contra el hueco. El brazalete, debajo de todo, porque su primer eslabon se mete bajo el asa.",
@@ -572,7 +689,7 @@
   "_esferas": "ESFERAS NUEVAS EL 01/09/2026 (Oscar: \"cambia las esferas del bitacora por estas\"). Entrega `Codex/2026-09-01/esferas-bitacora-simplemente-a-esta-esfera/outputs/4k-transparent/`: indices con relieve, doble baton a las 12, pista de minutos punteada y el rotulo AUTOMATIC. NO se montan tal cual: los radios se llevan un 3,7 %, el eje baila hasta 80 px y la blanca es un poligono con un trozo de damero en una esquina. Las normaliza `herramientas/esferas_bitacora.py` ANTES de `capas_bitacora.py`. La cobre YA SE MONTA (Oscar, 01/09/2026: \"monta tambien el cobre\") y su capa se publica, pero todavia NO SE VENDE: la Bitacora vende por lista de combinaciones —que caja con que esfera y con que correa monta el proveedor— y esa lista es de Oscar. En cuanto la de, la esfera entra como un color mas.",
   "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color."
  },
- "_esferas_fuera": "FUERA DE LA VENTA LA GRIS (E5) Y LA MARRON (E6), por orden de Oscar el 01/09/2026: \"sacalas de la venta\". Se venden desde el 30/08 pero NUNCA han tenido dibujo, asi que al elegirlas el visor se quedaba con la caja vacia y el boton de comprar activo: 10 de las 36 referencias eran un reloj que la web no sabe ensenar. La gris costaba 21,39 y la marron 25,99. Vuelven en cuanto lleguen sus esferas dibujadas, y con ellas estas diez combinaciones: C1+E5+Brz-Acero-Bit-01; C1+E5+Brz-Acero-Bit-07; C1+E5+Brz-Goma-Bit-01; C1+E5+Brz-Goma-Bit-03; C1+E6+Brz-Acero-Bit-01; C3+E6+Brz-Acero-Bit-06; C3+E6+Brz-Acero-Bit-07; C3+E6+Brz-Goma-Bit-04; C4+E5+Brz-Acero-Bit-02; C4+E5+Brz-Goma-Bit-01.",
+ "_esferas_fuera": "La GRIS (E5) sigue fuera de la venta: nunca ha tenido dibujo. La MARRON (E6) VUELVE el 04/09/2026 porque ya lo tiene -Oscar genero las cabezas caja+esfera marron en acero y en negro PVD-, que es justo lo que decia esta nota: «vuelven en cuanto lleguen sus esferas dibujadas». Coste 25,99, el que tenia. La COBRE (E7) sigue en la ficha pero sin combinaciones desde que se quito la caja bronce.",
  "_bronce": "LA CAJA BRONCE (C2) Y LA ESFERA COBRE (E7) entran el 01/09/2026, por orden de Oscar: \"monta tambien el cobre\" y, preguntado con que caja, \"con una caja bronce nueva\". Caja 34,97 (el mismo escalon que la oro rosa y la negro PVD) y esfera 21,39 (como las demas), los dos dados por Oscar. SOLO EXISTE UNA COMBINACION: C2 + E7 + silicona negra, que es con lo que dijo que sale. La bronce no se ofrece con otras esferas ni la cobre con otras cajas, porque la Bitacora vende por lista de combinaciones y esa lista es la del proveedor, no una multiplicacion. OJO: BRAZALETE DE BRONCE NO HAY DIBUJADO -los tres que existen son acero plata, acero oro rosa y acero negro-, y la silicona TAMPOCO tiene capa, asi que esta referencia se ve con la caja y la esfera pero sin correa.",
  "_piel": "Oscar, 04/09/2026: «8,69 mas hebilla que se puede elegir de las que ya tenemos en la base de datos: plata, oro, oro rosa, mariposa». Las tres pieles entran a la venta con familia PIEL propia -no GOMA ni A316-, coste 8,69, y las CUATRO HEBILLAS copiadas TAL CUAL de la base de datos (las del Trinchera): plata 0, oro 1,00, oro rosa 0, mariposa 0,20. La familia PIEL trae `cierre: true`, que es lo que ABRE el paso del cierre; con brazalete de acero o silicona el paso se queda cerrado y no escribe nada en la referencia. Por eso `{cierre}` entra en la plantilla: `LO-04-{mov}-{caja}-{esf}-{correa}-{cierre}`. ⚠️ YA NO IMPORTA CON QUE CAJA VA CADA PIEL: antes la ataba la hebilla -la negra y la azul de acero, la burdeos de oro rosa-, y ahora la hebilla se elige, asi que las tres van con las dos cajas. ⚠️ Y LA PIEL SE RECORTA POR LA SILUETA DE LA CABEZA, no por filas: «no metas la piel en la caja, debe quedar a ras del metal perfectamente recortado». Ver `recorte_del_metal` en capas_bitacora_madre.py.",
  "_pila": "EL BRAZALETE VA POR ENCIMA DE LA CAJA, PERO SOLO EL BRAZALETE (Oscar, 02/09/2026: «en el caso del bitacora, vamos a poner el brazalete por encima de la caja en capas»). En los demas relojes la correa va la primera de la pila, o sea DEBAJO de todo: entra por las asas y el cuerpo del reloj la tapa. Aqui el brazalete es integrado y su primer eslabon monta SOBRE la caja. ⚠️ PERO LAS CORREAS DE PIEL DE ESTE MISMO RELOJ ENTRAN POR DEBAJO, como en todos los demas: subiendo la correa ENTERA, la piel se dibuja encima de la esfera y tapa el reloj -probado y visto-. Por eso la capa sigue siendo la primera de la pila y lo que sube es SOLO lo que diga `encima_si`. Hoy no se nota porque las pieles todavia no tienen id en `montaje.capas`, o sea que no se dibujan; el dia que se vendan, si. El `orden` de `arma()` en `capas_bitacora.py` tiene que decir lo mismo. 03/09/2026: LOS BRAZALETES SON LOS INTEGRADOS, el integrado de corte exacto (Oscar: «elimina el brazalete del bitacora, todos los brazaletes, y coloca este»). Los cuatro aceros tienen ya su dibujo, los cuatro con la MISMA silueta -IoU 1,00000- y por tanto con la misma medida: el reloj no da un salto al cambiar de acabado. Queda un quinto acabado dibujado y SIN VENDER, el de centros en oro amarillo (`brazalete-acero-centros-dorados`): no hay id de correa para el. Y LAS AGUJAS SE VAN OTRA VEZ (Oscar, 03/09/2026: «ok quita las agujas»): estuvieron puestas unas horas colgando del grupo `mov`. Se quitan la capa, el hueco de la pila y el mapa `capas.mov`; en `capas_bitacora.py` se quedan `capa_de_agujas` y `CON_AGUJAS = False`, o sea que volver a ponerlas es cambiar una linea.",
@@ -588,5 +705,6 @@
    "paso": "correamat",
    "campo": "cierre"
   }
- }
+ },
+ "_capas_por_pareja": "⚠️ LA CABEZA ES CAJA+ESFERA+AGUJAS EN UN DIBUJO, asi que `capas.caja` no es «un fichero por caja» sino UNA TABLA POR CAJA Y ESFERA: diez cabezas, dos cajas por cinco esferas. Y las PIELES traen su herraje del medio eslabon, que es de acero o de negro PVD segun la caja, asi que tambien van por tabla. El motor lo resuelve en `ficheroCapa`, que prueba primero la esfera y luego la caja; los identificadores no se pisan (E1..E7 contra C1..C4)."
 }

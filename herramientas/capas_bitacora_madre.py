@@ -48,11 +48,6 @@ from scipy import ndimage
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, 'herramientas'))
 from tarjeta_de_capas import ESCALA as CAMARA, apila            # noqa: E402
-# Del montaje viejo se aprovechan SÓLO las tres reglas de la piel: cómo se
-# recorta del papel, cómo se le mide el hueco de las asas y cómo se le quita
-# el fleco. Lo demás de aquel fichero —que mide entre piezas— no se toca.
-from capas_bitacora import (ENTREGA_COR, PIELES, alfa_de_piel,   # noqa: E402
-                            desfleca, hueco_de_asas)
 
 ENTREGA = ('/Users/oscar/Documents/Codex/2026-09-04/'
            'necesito-la-imagen-definitiva-de-la/outputs/')
@@ -71,15 +66,37 @@ PESO = 95000
 # nombre, el trozo tiene que ser LO BASTANTE LARGO para no pescarlas: sin
 # el `-con-medio-eslabon`, `brazalete-negro-pvd` cogía el de las 20:05, que
 # va antes por orden alfabético.
+# ⚠️ LA CABEZA ES CAJA+ESFERA+AGUJAS EN UN DIBUJO, así que hay una por cada
+# pareja caja/esfera: dos cajas por cinco esferas, diez cabezas. La turquesa
+# viene de la entrega de las 20:24 (`-hueco-medio-eslabon`) y las otras
+# cuatro de la de las 22:06.
 PIEZAS = {
-    'caja-plata':      'caja-acero-hueco-medio-eslabon',
-    'caja-negro-pvd':  'caja-negro-pvd-hueco-medio-eslabon',
+    'caja-plata-E1':     'caja-acero-hueco-medio-eslabon',
+    'caja-plata-E2':     'caja-acero-esfera-blanca',
+    'caja-plata-E3':     'caja-acero-esfera-negra',
+    'caja-plata-E4':     'caja-acero-esfera-azul',
+    'caja-plata-E6':     'caja-acero-esfera-marron',
+    'caja-negro-pvd-E1': 'caja-negro-pvd-hueco-medio-eslabon',
+    'caja-negro-pvd-E2': 'caja-negro-pvd-esfera-blanca',
+    'caja-negro-pvd-E3': 'caja-negro-pvd-esfera-negra',
+    'caja-negro-pvd-E4': 'caja-negro-pvd-esfera-azul',
+    'caja-negro-pvd-E6': 'caja-negro-pvd-esfera-marron',
     'brazalete-acero': 'brazalete-acero-con-medio-eslabon',
     'brazalete-acero-centros-oro-rosa': 'brazalete-acero-oro-rosa-con-medio-eslabon',
     'brazalete-negro-pvd': 'brazalete-negro-pvd-con-medio-eslabon',
+    # ⚠️ LAS PIELES YA VIENEN CON SU HERRAJE (entrega de las 21:58). Eso
+    # resuelve lo del 04/09 —«hay que recortar más el eslabón del medio en
+    # piel para que encaje con la caja»—: el hueco del medio eslabón ya no lo
+    # tapa el cuero, lo tapa una pieza de metal dibujada. Por eso hay DOS de
+    # cada color, una por acabado de caja, y ya NO se recortan por la silueta.
+    'piel-negra-C1':         'correa-piel-negra-herraje-acero',
+    'piel-negra-C4':         'correa-piel-negra-herraje-negro-pvd',
+    'piel-azul-marino-C1':   'correa-piel-azul-marino-herraje-acero',
+    'piel-azul-marino-C4':   'correa-piel-azul-marino-herraje-negro-pvd',
+    'piel-marron-burdeos-C1': 'correa-piel-marron-herraje-acero',
+    'piel-marron-burdeos-C4': 'correa-piel-marron-herraje-negro-pvd',
 }
-LARGAS = ('brazalete-acero', 'brazalete-acero-centros-oro-rosa',
-          'brazalete-negro-pvd')            # las del lienzo alto
+LARGAS = tuple(k for k in PIEZAS if k.startswith(('brazalete', 'piel')))
 # las pieles también van en el lienzo alto; se añaden aparte porque no salen
 # de esta entrega sino de la de correas del 29/08 (ver `capas_de_piel`)
 # ⚠️ LOS ACABADOS DE UNA MISMA PIEZA TIENEN QUE SER EL MISMO DIBUJO. Se
@@ -124,75 +141,6 @@ def coloca(ruta, eje, escala, lienzo):
     return L
 
 
-def recorte_del_metal(caja):
-    """La máscara de lo que la piel NO puede pisar: el metal, con un píxel de
-    margen.
-
-    Óscar, 04/09/2026: «no metas la piel en la caja, debe quedar A RAS DEL
-    METAL perfectamente recortado».
-
-    ⚠️ NO VALE CORTAR POR FILAS, y se probó: la cabeza trae un HUECO DE MEDIO
-    ESLABÓN entre las asas —48 filas de alto y 347 px de ancho, donde encaja
-    el eslabón del brazalete— y borrando todas las filas de la cabeza ese
-    hueco se queda VACÍO: sale un rectángulo de fondo dentro del reloj, que
-    es peor que el problema.
-
-    Se corta por la SILUETA: la piel se queda exactamente donde no hay metal.
-    Así llena el hueco a ras y su canto es el del metal, sin flecos. El
-    píxel de margen se come el suavizado del borde de la cabeza, que si no
-    deja una sombra oscura de la piel asomando por el filo."""
-    a = np.asarray(caja)[:, :, 3] > 40          # umbral bajo: coge el suavizado
-    a = ndimage.binary_dilation(a, iterations=1)
-    M = np.zeros((ALTO_LARGO, ANCHO), bool)
-    desf = (ALTO_LARGO - ANCHO) // 2
-    M[desf:desf + ANCHO] = a
-    return M
-
-
-def capas_de_piel(brazalete, eje, caja):
-    """Las tres correas de piel de la Bitácora, contra el brazalete nuevo.
-
-    Óscar, 04/09/2026: «¿tenemos correas de goma y piel para el bitácora en
-    archivo? si es sí publícalas». De GOMA no hay ni un dibujo. De PIEL hay
-    tres, y son EXCLUSIVAS de este reloj: la caja es integrada y la correa
-    entra por un hueco con la forma del asa, así que ninguna de las 45 de la
-    biblioteca encaja aquí.
-
-    NO HAY DIBUJO DE CAJA+CORREA con el que registrarlas, que es como se
-    registra el brazalete. Pero no hace falta: la correa y el brazalete entran
-    POR EL MISMO SITIO, así que valen dos reglas y las dos se miden:
-      · el ancho del asa de la correa tiene que ser el del brazalete;
-      · el hueco entre sus dos ramas se centra en el EJE DEL RELOJ.
-
-    ⚠️ SE CENTRA EN EL EJE, no en el brazalete: si el dibujo del brazalete
-    viniera corrido, copiar ese sesgo sería copiar el error de otro dibujo.
-    """
-    ancho_b, _, _, _ = hueco_de_asas(np.asarray(brazalete)[:, :, 3] > 128)
-    metal = recorte_del_metal(caja)
-    largo = (ANCHO, ALTO_LARGO)
-    salida = {}
-    for ident, f in sorted(PIELES.items()):
-        im = Image.open(ENTREGA_COR + f).convert('RGB')
-        mask = alfa_de_piel(im)
-        ancho_p, fin, ini, cx = hueco_de_asas(mask)
-        s = float(ancho_b) / ancho_p
-        r = im.convert('RGBA')
-        r.putalpha(Image.fromarray((mask * 255).astype(np.uint8)))
-        r = desfleca(r)
-        n = r.resize((max(1, int(round(r.width * s))),
-                      max(1, int(round(r.height * s)))), Image.LANCZOS)
-        L = Image.new('RGBA', largo, (0, 0, 0, 0))
-        L.alpha_composite(n, (int(round(ANCHO / 2.0 - cx * s)),
-                              int(round(ALTO_LARGO / 2.0 - (fin + ini) / 2.0 * s))))
-        # A RAS DEL METAL: la piel se queda sólo donde no hay cabeza
-        b = np.asarray(L).copy()
-        b[:, :, 3] = np.where(metal, 0, b[:, :, 3])
-        salida[ident] = Image.fromarray(b)
-        print('  %-22s asa %d -> %d px (x%.4f) · recortada por la silueta'
-              % (ident, ancho_p, ancho_b, s))
-    return salida
-
-
 def guarda(im, ident):
     for q in CALIDADES:
         b = _io.BytesIO()
@@ -211,7 +159,7 @@ def main():
     faltan = [k for k, v in rutas.items() if not v]
     for k in faltan:
         del rutas[k]
-    if 'caja-plata' not in rutas or 'brazalete-acero' not in rutas:
+    if 'caja-plata-E1' not in rutas or 'brazalete-acero' not in rutas:
         raise SystemExit('✗ faltan las dos piezas madre en %s' % carpeta)
     if faltan:
         print('todavía sin dibujo: %s' % ', '.join(sorted(faltan)))
@@ -220,9 +168,12 @@ def main():
     print('BRAZALETE %d filas por arriba del eje y %d por abajo; la ventana '
           'pide %.0f' % (arriba, abajo, (ANCHO / CAMARA) / 2.0))
     print('ESCALA    %.4f (la manda la tira más corta)' % escala)
-    for patron, cabeza in (('brazalete-acero', LARGAS),
-                           ('caja-plata', [k for k in rutas
-                                           if k.startswith('caja')])):
+    for patron, cabeza in (('brazalete-acero',
+                            [k for k in LARGAS if k.startswith('brazalete')]),
+                           ('piel-negra-C1',
+                            [k for k in LARGAS if k.startswith('piel')]),
+                           ('caja-plata-E1', [k for k in rutas
+                                              if k.startswith('caja')])):
         if patron not in rutas:
             continue
         ref = _alfa(rutas[patron])
@@ -245,10 +196,8 @@ def main():
           (ALTO_LARGO + ANCHO / CAMARA) / 2.0)
     print('          llega al canto de arriba: %s · al de abajo: %s'
           % (f.min() <= ve[0], f.max() >= ve[1]))
-    print('PIELES    (el asa se iguala a la del brazalete; el hueco, al eje)')
-    capas.update(capas_de_piel(capas['brazalete-acero'], eje, capas['caja-plata']))
     hoja = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'bitacora-madre.png')
-    apila([capas['brazalete-acero'], capas['caja-plata']], ANCHO,
+    apila([capas['brazalete-acero'], capas['caja-plata-E1']], ANCHO,
           (233, 233, 231), CAMARA).convert('RGB').save(hoja)
     print('hoja de control: ' + hoja)
     if prueba:

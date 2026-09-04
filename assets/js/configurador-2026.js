@@ -627,9 +627,16 @@
     var v = CAPA[grupo] && CAPA[grupo][valor];
     if (!v) return null;
     if (typeof v === 'string') return v;
-    /* `esf` se pasa a mano desde la pantalla de criba, que dibuja parejas
-       que no son la que está puesta. */
-    return v[esf || e.esf] || v['*'] || null;
+    /* UNA PIEZA PUEDE DEPENDER DE OTRO PASO, y no siempre del mismo.
+       La esfera fue el primer caso —`esf` se pasa a mano desde la pantalla
+       de criba, que dibuja parejas que no son la que está puesta—, y el
+       04/09/2026 llegó el segundo: la Bitácora trae la CABEZA ENTERA, o sea
+       caja+esfera en un dibujo, y sus CORREAS DE PIEL traen el herraje del
+       medio eslabón, que es de acero o de negro PVD según la CAJA.
+       Se prueba primero la esfera y luego la caja: los identificadores no
+       se pisan —E1..E7 contra C1..C4— y quien no traiga tabla sigue
+       resolviéndose por `'*'`, así que ningún modelo anterior cambia. */
+    return v[esf || e.esf] || v[e.caja] || v['*'] || null;
   }
   /* De qué carpeta sale cada pieza. Las correas ya están en la biblioteca
      de componentes; las demás siguen en la carpeta del modelo hasta que lleguen
