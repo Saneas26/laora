@@ -15,22 +15,10 @@
     "color": "#C9CCCE"
    },
    {
-    "id": "C3",
-    "nombre": "Oro rosa",
-    "coste": 34.97,
-    "color": "#B76E56"
-   },
-   {
     "id": "C4",
     "nombre": "Negro PVD",
     "coste": 34.97,
     "color": "#1C1D1F"
-   },
-   {
-    "id": "C2",
-    "nombre": "Bronce",
-    "coste": 34.97,
-    "color": "#A9754A"
    }
   ],
   "integrada": true
@@ -75,28 +63,7 @@
   ]
  },
  "agujas": {
-  "colores": [
-   {
-    "id": "PLA",
-    "nombre": "Plata",
-    "coste": 0
-   },
-   {
-    "id": "DOR",
-    "nombre": "Doradas",
-    "coste": 0
-   },
-   {
-    "id": "NEG",
-    "nombre": "Negras",
-    "coste": 0
-   },
-   {
-    "id": "ORO",
-    "nombre": "Oro rosa",
-    "coste": 0
-   }
-  ]
+  "colores": []
  },
  "cristal": [],
  "movimiento": [
@@ -167,20 +134,6 @@
     "color": "#D9A08A"
    },
    {
-    "id": "Brz-Acero-Bit-05",
-    "nombre": "Acero plata y oro",
-    "coste": 21.19,
-    "familia": "A316",
-    "color": "#D4AF6A"
-   },
-   {
-    "id": "Brz-Acero-Bit-06",
-    "nombre": "Acero oro rosa",
-    "coste": 21.19,
-    "familia": "A316",
-    "color": "#B76E56"
-   },
-   {
     "id": "Brz-Acero-Bit-02",
     "nombre": "Acero negro",
     "coste": 21.19,
@@ -199,7 +152,7 @@
   }
  },
  "_filtros": "El color de la correa es del MATERIAL: eligiendo acero 904L no se ensena la malla milanesa. Sin esto los dos pasos van cada uno por su lado (29/08/2026).",
- "referencia": "LO-04-{mov}-{caja}-{esf}-{agujas}-{correa}",
+ "referencia": "LO-04-{mov}-{caja}-{esf}-{correa}",
  "extra": 0,
  "combinaciones": [
   {
@@ -217,18 +170,6 @@
   {
    "caja": "C1",
    "esf": "E1",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E1",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -254,18 +195,6 @@
    "caja": "C1",
    "esf": "E2",
    "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
   {
@@ -301,18 +230,6 @@
   {
    "caja": "C1",
    "esf": "E3",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E3",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -332,18 +249,6 @@
    "caja": "C1",
    "esf": "E4",
    "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E4",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E4",
-   "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
   {
@@ -365,138 +270,6 @@
    "coste": 0
   },
   {
-   "caja": "C2",
-   "esf": "E7",
-   "correa": "Brz-Acero-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C2",
-   "esf": "E7",
-   "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C2",
-   "esf": "E7",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C2",
-   "esf": "E7",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C2",
-   "esf": "E7",
-   "correa": "Brz-Acero-Bit-07",
-   "coste": 0
-  },
-  {
-   "caja": "C2",
-   "esf": "E7",
-   "correa": "Brz-Goma-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-07",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E1",
-   "correa": "Brz-Goma-Bit-04",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-07",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C3",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-07",
-   "coste": 0
-  },
-  {
    "caja": "C4",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-01",
@@ -506,18 +279,6 @@
    "caja": "C4",
    "esf": "E1",
    "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E1",
-   "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
   {
@@ -547,18 +308,6 @@
   {
    "caja": "C4",
    "esf": "E2",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E2",
-   "correa": "Brz-Acero-Bit-06",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E2",
    "correa": "Brz-Acero-Bit-07",
    "coste": 0
   },
@@ -578,18 +327,6 @@
    "caja": "C4",
    "esf": "E3",
    "correa": "Brz-Acero-Bit-02",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-05",
-   "coste": 0
-  },
-  {
-   "caja": "C4",
-   "esf": "E3",
-   "correa": "Brz-Acero-Bit-06",
    "coste": 0
   },
   {
@@ -613,7 +350,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=20",
+  "v": "?v=21",
   "pila": [
    {
     "capa": "correa",
@@ -658,9 +395,10 @@
  "_piel": "CORREAS DE PIEL, EXCLUSIVAS DE LA BITACORA (Oscar, 01/09/2026: «estas correas son exclusivamente del bitacora [...] el resto de correas y brazaletes al bitacora no le sirven»). Las TRES CAPAS YA ESTAN PUBLICADAS y montadas -piel-negra, piel-azul-marino y piel-marron-burdeos en assets/img/bitacora-2026/capas/1200/-, pero NO SE VENDEN todavia porque faltan dos datos que son de Oscar: (1) lo que cuesta la correa, sin lo cual el motor no sabe poner precio, y (2) con que cajas va cada una. Lo segundo importa por la HEBILLA: la negra y la azul marino la llevan de acero y la marron burdeos de oro rosa, asi que no valen para cualquier caja. La Bitacora vende por lista de combinaciones -lo que el proveedor monta- y no por multiplicar pasos, asi que no se inventan. AVISO: el fichero de la negra viene marcado «prueba-01»; antes de venderla, que Oscar confirme que esa es la buena. ⚠️ REMONTADAS EL 04/09/2026 contra el despiece (Oscar: «remontarlas ahora»). Estaban a la medida del reloj de agosto -517 px de ancho contra una caja de 848- y el despiece hizo crecer el reloj: la caja pasa a 1.078 px y el asa del brazalete publicado mide 580. Las tres se han vuelto a escalar por la MISMA regla de siempre, que se mide y no se supone: el ancho del asa de la correa igual al del brazalete, y el hueco entre sus dos ramas centrado en el eje del reloj (x3,625 las dos primeras, x3,648 la negra). Lo hace ahora `capas_bitacora_despiece.py`, que se trae de `capas_bitacora.py` solo las tres reglas de la piel -recorte del papel, hueco de asas y desflecado-. SIGUEN SIN VENDERSE: faltan los dos datos de Oscar.",
  "_pila": "EL BRAZALETE VA POR ENCIMA DE LA CAJA, PERO SOLO EL BRAZALETE (Oscar, 02/09/2026: «en el caso del bitacora, vamos a poner el brazalete por encima de la caja en capas»). En los demas relojes la correa va la primera de la pila, o sea DEBAJO de todo: entra por las asas y el cuerpo del reloj la tapa. Aqui el brazalete es integrado y su primer eslabon monta SOBRE la caja. ⚠️ PERO LAS CORREAS DE PIEL DE ESTE MISMO RELOJ ENTRAN POR DEBAJO, como en todos los demas: subiendo la correa ENTERA, la piel se dibuja encima de la esfera y tapa el reloj -probado y visto-. Por eso la capa sigue siendo la primera de la pila y lo que sube es SOLO lo que diga `encima_si`. Hoy no se nota porque las pieles todavia no tienen id en `montaje.capas`, o sea que no se dibujan; el dia que se vendan, si. El `orden` de `arma()` en `capas_bitacora.py` tiene que decir lo mismo. 03/09/2026: LOS BRAZALETES SON LOS INTEGRADOS, el integrado de corte exacto (Oscar: «elimina el brazalete del bitacora, todos los brazaletes, y coloca este»). Los cuatro aceros tienen ya su dibujo, los cuatro con la MISMA silueta -IoU 1,00000- y por tanto con la misma medida: el reloj no da un salto al cambiar de acabado. Queda un quinto acabado dibujado y SIN VENDER, el de centros en oro amarillo (`brazalete-acero-centros-dorados`): no hay id de correa para el. Y LAS AGUJAS SE VAN OTRA VEZ (Oscar, 03/09/2026: «ok quita las agujas»): estuvieron puestas unas horas colgando del grupo `mov`. Se quitan la capa, el hueco de la pila y el mapa `capas.mov`; en `capas_bitacora.py` se quedan `capa_de_agujas` y `CON_AGUJAS = False`, o sea que volver a ponerlas es cambiar una linea.",
  "_combinaciones": "Oscar, 03/09/2026: «ahora falta que el configurador del bitacora permita elegir todos los brazaletes». Hasta hoy cada caja llevaba atado su brazalete -con la negra solo salia el negro, con la de oro rosa solo el oro rosa- y eso venia de la lista corta del proveedor. Ahora CADA PAREJA CAJA+ESFERA que ya existia admite LOS CUATRO ACEROS. No se ha inventado ninguna pareja caja+esfera nueva: las once que habia siguen siendo once. LAS CORREAS DE GOMA NO SE TOCAN: Oscar hablo de brazaletes, y extender la regla a piezas que no ha nombrado es justo lo que no se hace. FALTA EL QUINTO BRAZALETE, el de centros en oro amarillo (`brazalete-acero-centros-dorados`): esta dibujado y publicado, pero no tiene id de correa porque le faltan nombre y coste, que son dato de Oscar.",
- "_agujas": "Oscar, 03/09/2026: «despues se eligen las agujas, pon todas las posibilidades ya; habra agujas doradas, plata, negras y oro rosa». COSTE 0 en las cuatro, como en el Precisa: el acabado de la aguja no cambia lo que cuesta el reloj. NO ESTAN EN `cadena`, asi que son un eje libre -las cuatro salen con cualquier caja, esfera y brazalete- y la lista de `combinaciones` no crece; lo que crece es el catalogo, porque `agujas` SI firma la referencia. ⚠️ DE MOMENTO SOLO ESTA DIBUJADA LA PLATA (el fichero `agujas-redondeadas-bitacora-4096.png`, ajustado a 13,5/13/8,5 mm por `capas_bitacora_despiece.py`). Las otras tres llegaran dibujadas; NO se recolorean aqui.",
+ "_agujas": "Oscar, 04/09/2026: «elimina […] la seccion de agujas, IRAN CON LA ESFERA DIRECTAMENTE sin poder elegirlas». Lista vacia = el paso no aparece. Y como `agujas` ya no es un paso, SALE TAMBIEN DE LA REFERENCIA (`LO-04-{mov}-{caja}-{esf}-{correa}`): si se quedara, todas las referencias llevarian un hueco. Las agujas van dentro de la cabeza que dibuja Codex, que es lo que ya pasaba de hecho.",
  "_movimiento": "Oscar, 03/09/2026: «despues se elige movimiento, LOS MISMOS QUE EL PRECISA». Entran el Cuarzo Suizo LO_Q6026 (78,04) y el Automatico Suizo LO_A4026 (114,38), y sale el LO_A3826 que llevaba, que costaba 59,01 e iba en `extra` en vez de en la opcion. Por eso `extra` pasa a 0: el coste del calibre ahora lo lleva cada opcion, que es como funciona el Precisa. ⚠️ ESTO SUBE EL PRECIO: el automatico cuesta 55,37 mas que el calibre viejo y el cuarzo 19,03 mas, y el precio sale del coste. `mov` NO firma la referencia (ver NO_FIRMAN en generar_ficha_2026.py), asi que no multiplica referencias: cambia lo que valen.",
  "_referencia": "EL CALIBRE VA EN LA REFERENCIA, y no es opcional desde el 03/09/2026: al meter los dos calibres del Precisa, el cuarzo cuesta 78,04 y el automatico 114,38, o sea 36,34 de diferencia que en precio son unos 90 EUR. Sin el calibre en el codigo, el MISMO codigo valia dos precios: la pagina ensenaba 489,90 con el automatico y el catalogo guardaba 399,90, que es el del cuarzo. El carrito manda referencia y precio, y el servidor comprueba contra el catalogo: habria cascado. El Precisa ya lo hacia asi (`LO-01-{mov}-40{mov.tapa}-...`). ⚠️ `mov` NO firma la COMBINACION -esta en NO_FIRMAN- pero SI la REFERENCIA: son dos cosas distintas y hay que tenerlo claro.",
  "_faltan_dibujo": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron) -fuera de la venta desde el 01/09- y las tres correas de goma. ⚠️ LAS AGUJAS SOLO ESTAN EN PLATA: el despiece trae un juego. Doradas, Negras y Oro rosa se eligen en la ficha y hoy el visor las enseña SIN AGUJAS. O se sacan de la venta hasta que lleguen, o se recolorean del mismo despiece -que es lo que se hizo con cajas, esferas y brazaletes y sale al pixel-; es decision de Oscar (avisado el 04/09/2026).",
- "_montaje": "Oscar, 04/09/2026: «monta esto ahora en el bitacora y RETIRA TODAS LAS FOTOS pero DEJA LAS OPCIONES DEL CONFIGURADOR». Entra la entrega «madre» del 04/09: dos piezas cortadas de la misma imagen de 4.096, la CABEZA ENTERA -caja, esfera y agujas en una sola pieza- y el brazalete de dos tiras. ⚠️ POR ESO SOLO HAY DOS CAPAS: la esfera y las agujas van DENTRO de la cabeza y hoy no se pueden elegir por separado. Los pasos `esf` y `agujas` SIGUEN en el configurador porque Oscar los quiere ahi, pero no dibujan nada hasta que lleguen las cabezas de cada color. Fuera la foto de bienvenida, la galeria «De cerca» y las tarjetas de la coleccion: Oscar esta generando las imagenes de cero. Ver `herramientas/capas_bitacora_madre.py`."
+ "_montaje": "Oscar, 04/09/2026: «monta esto ahora en el bitacora y RETIRA TODAS LAS FOTOS pero DEJA LAS OPCIONES DEL CONFIGURADOR». Entra la entrega «madre» del 04/09: dos piezas cortadas de la misma imagen de 4.096, la CABEZA ENTERA -caja, esfera y agujas en una sola pieza- y el brazalete de dos tiras. ⚠️ POR ESO SOLO HAY DOS CAPAS: la esfera y las agujas van DENTRO de la cabeza y hoy no se pueden elegir por separado. Los pasos `esf` y `agujas` SIGUEN en el configurador porque Oscar los quiere ahi, pero no dibujan nada hasta que lleguen las cabezas de cada color. Fuera la foto de bienvenida, la galeria «De cerca» y las tarjetas de la coleccion: Oscar esta generando las imagenes de cero. Ver `herramientas/capas_bitacora_madre.py`.",
+ "_fuera_04_09": "Oscar, 04/09/2026: «por ahora elimina la caja oro rosa, la caja de bronce […] y quita los brazaletes Acero plata y oro / Acero oro rosa». Fuera C3, C2, Brz-Acero-Bit-05 y Brz-Acero-Bit-06, con sus combinaciones. ⚠️ LA ESFERA COBRE (E7) SE QUEDA EN LA FICHA pero ya no sale: solo existia con la caja bronce, asi que se ha quedado sin ninguna combinacion. NO se borra porque Oscar no la ha nombrado; volvera sola el dia que vuelva su caja. Es «POR AHORA», dicho por el."
 }
