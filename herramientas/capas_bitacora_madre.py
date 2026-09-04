@@ -60,8 +60,15 @@ PESO = 95000
 # qué fichero es cada capa: se busca por un trozo del nombre, porque la
 # entrega los numera y los nombra a su manera
 PIEZAS = {'caja-plata':      'madre-caja-esfera-agujas',
-          'brazalete-acero': 'madre-brazalete-norte-sur'}
-LARGAS = ('brazalete-acero',)   # las que van en el lienzo alto
+          'brazalete-acero': 'madre-brazalete-norte-sur',
+          # los acabados que van llegando, mismo dibujo y mismo corte
+          'brazalete-acero-centros-oro-rosa': 'brazalete-acero-oro-rosa',
+          'brazalete-negro-pvd':              'brazalete-negro-pvd'}
+LARGAS = ('brazalete-acero', 'brazalete-acero-centros-oro-rosa',
+          'brazalete-negro-pvd')            # las del lienzo alto
+# ⚠️ LOS ACABADOS TIENEN QUE SER EL MISMO DIBUJO. Se comprueba antes de
+# publicar: si la silueta de uno no es la del brazalete madre, el reloj
+# pegaría un salto al cambiar de acabado y esto para.
 
 
 def busca(carpeta, trozo):
@@ -116,13 +123,28 @@ def main():
     carpeta = next((a for a in sys.argv[1:] if not a.startswith('--')), ENTREGA)
     rutas = {k: busca(carpeta, t) for k, t in PIEZAS.items()}
     faltan = [k for k, v in rutas.items() if not v]
+    for k in faltan:
+        del rutas[k]
+    if 'caja-plata' not in rutas or 'brazalete-acero' not in rutas:
+        raise SystemExit('✗ faltan las dos piezas madre en %s' % carpeta)
     if faltan:
-        raise SystemExit('✗ no encuentro %s en %s' % (', '.join(faltan), carpeta))
+        print('todavía sin dibujo: %s' % ', '.join(sorted(faltan)))
     eje, escala, arriba, abajo = marco(rutas['brazalete-acero'])
     print('EJE       %.1f, %.1f (del hueco del brazalete, no de la cabeza)' % eje)
     print('BRAZALETE %d filas por arriba del eje y %d por abajo; la ventana '
           'pide %.0f' % (arriba, abajo, (ANCHO / CAMARA) / 2.0))
     print('ESCALA    %.4f (la manda la tira más corta)' % escala)
+    ref = _alfa(rutas['brazalete-acero'])
+    for k in LARGAS:
+        if k == 'brazalete-acero' or k not in rutas:
+            continue
+        otro = _alfa(rutas[k])
+        u = (ref | otro).sum()
+        iou = (ref & otro).sum() / float(u) if u else 0.0
+        if iou < 0.999:
+            raise SystemExit('✗ %s no tiene la silueta del brazalete madre '
+                             '(IoU %.5f)' % (k, iou))
+        print('          %-34s IoU %.5f con el madre' % (k, iou))
     capas = {k: coloca(v, eje, escala,
                        (ANCHO, ALTO_LARGO) if k in LARGAS else (ANCHO, ANCHO))
              for k, v in rutas.items()}
