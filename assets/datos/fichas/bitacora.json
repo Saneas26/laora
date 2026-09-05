@@ -706,5 +706,28 @@
    "campo": "cierre"
   }
  },
- "_capas_por_pareja": "⚠️ LA CABEZA ES CAJA+ESFERA+AGUJAS EN UN DIBUJO, asi que `capas.caja` no es «un fichero por caja» sino UNA TABLA POR CAJA Y ESFERA: diez cabezas, dos cajas por cinco esferas. Y las PIELES traen su herraje del medio eslabon, que es de acero o de negro PVD segun la caja, asi que tambien van por tabla. El motor lo resuelve en `ficheroCapa`, que prueba primero la esfera y luego la caja; los identificadores no se pisan (E1..E7 contra C1..C4)."
+ "_capas_por_pareja": "⚠️ LA CABEZA ES CAJA+ESFERA+AGUJAS EN UN DIBUJO, asi que `capas.caja` no es «un fichero por caja» sino UNA TABLA POR CAJA Y ESFERA: diez cabezas, dos cajas por cinco esferas. Y las PIELES traen su herraje del medio eslabon, que es de acero o de negro PVD segun la caja, asi que tambien van por tabla. El motor lo resuelve en `ficheroCapa`, que prueba primero la esfera y luego la caja; los identificadores no se pisan (E1..E7 contra C1..C4).",
+ "fijas": {
+  "titulo": "De cerca",
+  "img": "/assets/img/bitacora-2026/galeria/",
+  "v": "?v=2",
+  "fotos": [
+   {
+    "f": "estudio",
+    "alt": "El laOra Bitácora de acero con esfera turquesa, de tres cuartos sobre fondo crema",
+    "pie": "De tres cuartos: el canto pulido de la caja y el brazalete integrado."
+   },
+   {
+    "f": "frente",
+    "alt": "El laOra Bitácora de acero con esfera turquesa, de frente sobre fondo negro",
+    "pie": "De frente. Los surcos horizontales de la esfera y la pista de minutos punteada."
+   },
+   {
+    "f": "ciudad",
+    "alt": "El laOra Bitácora de acero con esfera turquesa, de noche, con la ciudad detrás",
+    "pie": "De noche. La esfera turquesa aguanta la luz baja."
+   }
+  ]
+ },
+ "_fijas": "Oscar, 04/09/2026: «teniamos 3 fotos en el catalogo debajo de la foto del configurador, te dije quitar una y quitastes las 3, vuelve a poner las mejores fotos de archivo del bitacora QUE NO SEAN REPETITIVAS». Tenia razon: la tercera que pidio quitar era una TARJETA de la coleccion, y luego con «retira todas las fotos» se fue tambien esta galeria. LA REPETITIVA ERA `halos`: mismo fondo crema y misma luz que `estudio`, casi el mismo angulo, y encima el reloj sale pequeño. Se borra. En su sitio entra `frente`, que estaba SIN USAR en `~/Documents/LaOra_Material/modelos/Bitacora_Front.png`: frontal sobre negro, 1122x1402. Las tres que quedan son tres planos distintos -tres cuartos, frontal y de situacion-, que es lo que pedia."
 }
