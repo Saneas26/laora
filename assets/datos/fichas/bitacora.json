@@ -94,7 +94,7 @@
     "id": "GOMA",
     "nombre": "Goma",
     "coste": 0,
-    "expl": "Silicona con hebilla mariposa de acero."
+    "expl": "Silicona acanalada a la salida de la caja, con hebilla de espiga de acero."
    },
    {
     "id": "A316",
@@ -116,21 +116,35 @@
     "nombre": "Silicona negra",
     "coste": 6.39,
     "familia": "GOMA",
-    "color": "#1C1D1F"
-   },
-   {
-    "id": "Brz-Goma-Bit-03",
-    "nombre": "Silicona azul",
-    "coste": 6.39,
-    "familia": "GOMA",
-    "color": "#2E4A7D"
+    "color": "#2f3030"
    },
    {
     "id": "Brz-Goma-Bit-04",
     "nombre": "Silicona marrón",
     "coste": 6.39,
     "familia": "GOMA",
-    "color": "#6B4B33"
+    "color": "#4d3f3c"
+   },
+   {
+    "id": "Brz-Goma-Bit-02",
+    "nombre": "Silicona gris",
+    "coste": 6.39,
+    "familia": "GOMA",
+    "color": "#5b5d63"
+   },
+   {
+    "id": "Brz-Goma-Bit-05",
+    "nombre": "Silicona verde militar",
+    "coste": 6.39,
+    "familia": "GOMA",
+    "color": "#525844"
+   },
+   {
+    "id": "Brz-Goma-Bit-06",
+    "nombre": "Silicona blanca",
+    "coste": 6.39,
+    "familia": "GOMA",
+    "color": "#f2f2f0"
    },
    {
     "id": "Brz-Acero-Bit-01",
@@ -241,12 +255,6 @@
   {
    "caja": "C1",
    "esf": "E1",
-   "correa": "Brz-Goma-Bit-03",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E1",
    "correa": "Piel-Bit-azul-marino",
    "coste": 0
   },
@@ -289,12 +297,6 @@
   {
    "caja": "C1",
    "esf": "E2",
-   "correa": "Brz-Goma-Bit-03",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E2",
    "correa": "Piel-Bit-azul-marino",
    "coste": 0
   },
@@ -379,12 +381,6 @@
   {
    "caja": "C1",
    "esf": "E4",
-   "correa": "Brz-Goma-Bit-03",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E4",
    "correa": "Piel-Bit-azul-marino",
    "coste": 0
   },
@@ -422,12 +418,6 @@
    "caja": "C1",
    "esf": "E6",
    "correa": "Brz-Goma-Bit-01",
-   "coste": 0
-  },
-  {
-   "caja": "C1",
-   "esf": "E6",
-   "correa": "Brz-Goma-Bit-03",
    "coste": 0
   },
   {
@@ -614,6 +604,222 @@
    "caja": "C4",
    "esf": "E6",
    "correa": "Piel-Bit-negra",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-02",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-04",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-05",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E4",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C1",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E1",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E2",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E3",
+   "correa": "Brz-Goma-Bit-06",
+   "coste": 0
+  },
+  {
+   "caja": "C4",
+   "esf": "E6",
+   "correa": "Brz-Goma-Bit-06",
    "coste": 0
   }
  ],
@@ -625,7 +831,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=25",
+  "v": "?v=26",
   "pila": [
    {
     "capa": "correa",
@@ -663,18 +869,11 @@
      "C1": "piel-marron-burdeos-C1",
      "C4": "piel-marron-burdeos-C4"
     },
-    "Brz-Goma-Bit-01": {
-     "C1": "goma-negra-C1",
-     "C4": "goma-negra-C4"
-    },
-    "Brz-Goma-Bit-03": {
-     "C1": "goma-azul-C1",
-     "C4": "goma-azul-C4"
-    },
-    "Brz-Goma-Bit-04": {
-     "C1": "goma-marron-C1",
-     "C4": "goma-marron-C4"
-    }
+    "Brz-Goma-Bit-01": "goma-negra",
+    "Brz-Goma-Bit-04": "goma-marron",
+    "Brz-Goma-Bit-02": "goma-gris",
+    "Brz-Goma-Bit-05": "goma-verde",
+    "Brz-Goma-Bit-06": "goma-blanca"
    },
    "caja": {
     "C1": {
@@ -743,5 +942,6 @@
    }
   ]
  },
- "_fijas": "Oscar, 04/09/2026: «teniamos 3 fotos en el catalogo debajo de la foto del configurador, te dije quitar una y quitastes las 3, vuelve a poner las mejores fotos de archivo del bitacora QUE NO SEAN REPETITIVAS». Tenia razon: la tercera que pidio quitar era una TARJETA de la coleccion, y luego con «retira todas las fotos» se fue tambien esta galeria. LA REPETITIVA ERA `halos`: mismo fondo crema y misma luz que `estudio`, casi el mismo angulo, y encima el reloj sale pequeño. Se borra. En su sitio entra `frente`, que estaba SIN USAR en `~/Documents/LaOra_Material/modelos/Bitacora_Front.png`: frontal sobre negro, 1122x1402. Las tres que quedan son tres planos distintos -tres cuartos, frontal y de situacion-, que es lo que pedia."
+ "_fijas": "Oscar, 04/09/2026: «teniamos 3 fotos en el catalogo debajo de la foto del configurador, te dije quitar una y quitastes las 3, vuelve a poner las mejores fotos de archivo del bitacora QUE NO SEAN REPETITIVAS». Tenia razon: la tercera que pidio quitar era una TARJETA de la coleccion, y luego con «retira todas las fotos» se fue tambien esta galeria. LA REPETITIVA ERA `halos`: mismo fondo crema y misma luz que `estudio`, casi el mismo angulo, y encima el reloj sale pequeño. Se borra. En su sitio entra `frente`, que estaba SIN USAR en `~/Documents/LaOra_Material/modelos/Bitacora_Front.png`: frontal sobre negro, 1122x1402. Las tres que quedan son tres planos distintos -tres cuartos, frontal y de situacion-, que es lo que pedia.",
+ "_gomas_06_09": "GOMAS REALES (Oscar, 06/09/2026, foto del proveedor, anuncio 1005012704023743, 25x12 mm, 6,39): silicona con punta ACANALADA que entra en el hueco del medio eslabon, hebilla de ESPIGA, trabilla y agujeros. Cinco colores: negra (01), gris (02), marron (04), verde militar (05), blanca (06). La AZUL (03) NO EXISTE en el proveedor y sale de la venta; su id no se reutiliza. Oscar: «todas». Colores hex medidos en las fotos del proveedor. Cada goma se vende con las mismas parejas caja+esfera que la negra. UNA capa por color (sin herraje C1/C4): la goma acanalada se ve por el hueco."
 }

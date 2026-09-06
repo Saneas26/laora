@@ -95,16 +95,16 @@ PIEZAS = {
     'piel-azul-marino-C4':   'correa-piel-azul-marino-herraje-negro-pvd',
     'piel-marron-burdeos-C1': 'correa-piel-marron-herraje-acero',
     'piel-marron-burdeos-C4': 'correa-piel-marron-herraje-negro-pvd',
-    # ⚠️ LAS GOMAS (06/09/2026) llevan EL ALFA DE LA PIEL byte a byte: son
-    # una EDICIÓN de la piel publicada (cuero → silicona) hecha por Codex,
-    # con el herraje copiado píxel a píxel. Por eso entran en la familia de
-    # la piel para el control de silueta. Ver laora-equipo-imagenes-codex.
-    'goma-negra-C1':  'correa-goma-negra-herraje-acero',
-    'goma-negra-C4':  'correa-goma-negra-herraje-negro-pvd',
-    'goma-azul-C1':   'correa-goma-azul-herraje-acero',
-    'goma-azul-C4':   'correa-goma-azul-herraje-negro-pvd',
-    'goma-marron-C1': 'correa-goma-marron-herraje-acero',
-    'goma-marron-C4': 'correa-goma-marron-herraje-negro-pvd',
+    # ⚠️ LAS GOMAS REALES (06/09/2026, anuncio 1005012704023743): silicona con
+    # la punta ACANALADA que entra en el hueco del medio eslabón, hebilla de
+    # espiga. UNA capa por color, sin herraje C1/C4. Su silueta es la de la
+    # correa real (no la de la piel): familia propia en el control de silueta.
+    # Las cinco salen de la misma generación (Codex): alfa idéntico byte a byte.
+    'goma-negra':  'correa-goma-negra-4096',
+    'goma-gris':   'correa-goma-gris-4096',
+    'goma-verde':  'correa-goma-verde-4096',
+    'goma-marron': 'correa-goma-marron-4096',
+    'goma-blanca': 'correa-goma-blanca-4096',
 }
 LARGAS = tuple(k for k in PIEZAS if k.startswith(('brazalete', 'piel', 'goma')))
 # las pieles también van en el lienzo alto; se añaden aparte porque no salen
@@ -181,7 +181,9 @@ def main():
     for patron, cabeza in (('brazalete-acero',
                             [k for k in LARGAS if k.startswith('brazalete')]),
                            ('piel-negra-C1',
-                            [k for k in LARGAS if k.startswith(('piel', 'goma'))]),
+                            [k for k in LARGAS if k.startswith('piel')]),
+                           ('goma-negra',
+                            [k for k in LARGAS if k.startswith('goma')]),
                            ('caja-plata-E1', [k for k in rutas
                                               if k.startswith('caja')])):
         if patron not in rutas:
