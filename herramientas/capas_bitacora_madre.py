@@ -218,7 +218,9 @@ def main():
     solo = next((a.split('=', 1)[1] for a in sys.argv[1:]
                  if a.startswith('--solo=')), None)
     if solo:
-        capas = {k: v for k, v in capas.items() if k.startswith(solo)}
+        # varios prefijos separados por comas: --solo=caja-plata-E3,caja-negro-pvd-E3
+        capas = {k: v for k, v in capas.items()
+                 if k.startswith(tuple(solo.split(',')))}
     print('\nPUBLICADO en %s' % os.path.relpath(DESTINO, RAIZ))
     for k in sorted(capas):
         print('  %-20s %6d B  %dx%d'
