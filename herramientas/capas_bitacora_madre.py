@@ -95,8 +95,18 @@ PIEZAS = {
     'piel-azul-marino-C4':   'correa-piel-azul-marino-herraje-negro-pvd',
     'piel-marron-burdeos-C1': 'correa-piel-marron-herraje-acero',
     'piel-marron-burdeos-C4': 'correa-piel-marron-herraje-negro-pvd',
+    # ⚠️ LAS GOMAS (06/09/2026) llevan EL ALFA DE LA PIEL byte a byte: son
+    # una EDICIÓN de la piel publicada (cuero → silicona) hecha por Codex,
+    # con el herraje copiado píxel a píxel. Por eso entran en la familia de
+    # la piel para el control de silueta. Ver laora-equipo-imagenes-codex.
+    'goma-negra-C1':  'correa-goma-negra-herraje-acero',
+    'goma-negra-C4':  'correa-goma-negra-herraje-negro-pvd',
+    'goma-azul-C1':   'correa-goma-azul-herraje-acero',
+    'goma-azul-C4':   'correa-goma-azul-herraje-negro-pvd',
+    'goma-marron-C1': 'correa-goma-marron-herraje-acero',
+    'goma-marron-C4': 'correa-goma-marron-herraje-negro-pvd',
 }
-LARGAS = tuple(k for k in PIEZAS if k.startswith(('brazalete', 'piel')))
+LARGAS = tuple(k for k in PIEZAS if k.startswith(('brazalete', 'piel', 'goma')))
 # las pieles también van en el lienzo alto; se añaden aparte porque no salen
 # de esta entrega sino de la de correas del 29/08 (ver `capas_de_piel`)
 # ⚠️ LOS ACABADOS DE UNA MISMA PIEZA TIENEN QUE SER EL MISMO DIBUJO. Se
@@ -171,7 +181,7 @@ def main():
     for patron, cabeza in (('brazalete-acero',
                             [k for k in LARGAS if k.startswith('brazalete')]),
                            ('piel-negra-C1',
-                            [k for k in LARGAS if k.startswith('piel')]),
+                            [k for k in LARGAS if k.startswith(('piel', 'goma'))]),
                            ('caja-plata-E1', [k for k in rutas
                                               if k.startswith('caja')])):
         if patron not in rutas:
@@ -203,6 +213,12 @@ def main():
     if prueba:
         return
     os.makedirs(DESTINO, exist_ok=True)
+    # --solo goma: publica sólo esa familia y deja las demás capas como
+    # están (el AVIF se reescribiría byte a byte distinto sin necesidad)
+    solo = next((a.split('=', 1)[1] for a in sys.argv[1:]
+                 if a.startswith('--solo=')), None)
+    if solo:
+        capas = {k: v for k, v in capas.items() if k.startswith(solo)}
     print('\nPUBLICADO en %s' % os.path.relpath(DESTINO, RAIZ))
     for k in sorted(capas):
         print('  %-20s %6d B  %dx%d'

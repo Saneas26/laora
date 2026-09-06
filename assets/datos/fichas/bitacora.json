@@ -625,7 +625,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=23",
+  "v": "?v=24",
   "pila": [
    {
     "capa": "correa",
@@ -662,6 +662,18 @@
     "Piel-Bit-marron-burdeos": {
      "C1": "piel-marron-burdeos-C1",
      "C4": "piel-marron-burdeos-C4"
+    },
+    "Brz-Goma-Bit-01": {
+     "C1": "goma-negra-C1",
+     "C4": "goma-negra-C4"
+    },
+    "Brz-Goma-Bit-03": {
+     "C1": "goma-azul-C1",
+     "C4": "goma-azul-C4"
+    },
+    "Brz-Goma-Bit-04": {
+     "C1": "goma-marron-C1",
+     "C4": "goma-marron-C4"
     }
    },
    "caja": {
@@ -687,7 +699,8 @@
   "_montado": "MONTADO DESDE EL DESPIECE el 04/09/2026, por herramientas/capas_bitacora_despiece.py. Las quince piezas -4 cajas, 5 esferas, 5 brazaletes y las agujas- estan cortadas de la MISMA imagen de 4.096, asi que aqui no se mide nada entre ellas: solo se lleva el eje al centro del lienzo y se aplica UNA escala, la que hace que el brazalete llegue a los dos cantos (0,5420). El color se saco recoloreando pixel a pixel el despiece original, con el canal alfa intacto byte a byte, o sea que ninguna pieza puede moverse al cambiar de color. ⚠️ ES OTRO RELOJ, no un retoque del de agosto: la esfera es redonda y no de cojin con pista de puntos. El montaje viejo -capas_bitacora.py, que mide y coloca cada pieza de entregas distintas- YA NO SE PASA: volveria a publicar el reloj de antes. La fecha marca 26, dos digitos.",
   "_faltan": "SIN DIBUJO, y por tanto sin capa: las esferas E5 (gris) y E6 (marron), el brazalete Brz-Acero-Bit-07 (acero plata y oro rosa) y las tres correas de goma. La entrega trajo ademas dos cajas (bronce y oro) y una esfera (cobre) que NO estan en la ficha: no se anaden hasta que Oscar diga que se venden y a que coste.",
   "_esferas": "ESFERAS NUEVAS EL 01/09/2026 (Oscar: \"cambia las esferas del bitacora por estas\"). Entrega `Codex/2026-09-01/esferas-bitacora-simplemente-a-esta-esfera/outputs/4k-transparent/`: indices con relieve, doble baton a las 12, pista de minutos punteada y el rotulo AUTOMATIC. NO se montan tal cual: los radios se llevan un 3,7 %, el eje baila hasta 80 px y la blanca es un poligono con un trozo de damero en una esquina. Las normaliza `herramientas/esferas_bitacora.py` ANTES de `capas_bitacora.py`. La cobre YA SE MONTA (Oscar, 01/09/2026: \"monta tambien el cobre\") y su capa se publica, pero todavia NO SE VENDE: la Bitacora vende por lista de combinaciones —que caja con que esfera y con que correa monta el proveedor— y esa lista es de Oscar. En cuanto la de, la esfera entra como un color mas.",
-  "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color."
+  "_cajas": "CAJAS «-transparente-v2» desde el 01/09/2026 (Oscar: \"sustituye las imagenes de las cajas\"). Llegan con alfa de verdad, asi que ya no hay que adivinarles el recorte quitandoles el damero: eso les comia un pelo del ojo y la esfera salia mas pequena de lo que cabe. OJO: la de acero plateado viene recortada de otra manera que las demas (IoU 0,95 contra el 0,99 que dan entre si), asi que las tres se siguen publicando con la silueta VOTADA por las cuatro; si no, el reloj cambia de tamano al cambiar de color.",
+  "_gomas": "GOMAS desde el 06/09/2026 (Codex, hilo 01a07679): edicion de la piel publicada (cuero -> silicona), ALFA DE LA PIEL byte a byte, herraje C1/C4 copiado de la piel. Por eso van por tabla como las pieles. Verificadas por script antes de publicar; Oscar las aprobo el 06/09."
  },
  "_esferas_fuera": "La GRIS (E5) sigue fuera de la venta: nunca ha tenido dibujo. La MARRON (E6) VUELVE el 04/09/2026 porque ya lo tiene -Oscar genero las cabezas caja+esfera marron en acero y en negro PVD-, que es justo lo que decia esta nota: «vuelven en cuanto lleguen sus esferas dibujadas». Coste 25,99, el que tenia. La COBRE (E7) sigue en la ficha pero sin combinaciones desde que se quito la caja bronce.",
  "_bronce": "LA CAJA BRONCE (C2) Y LA ESFERA COBRE (E7) entran el 01/09/2026, por orden de Oscar: \"monta tambien el cobre\" y, preguntado con que caja, \"con una caja bronce nueva\". Caja 34,97 (el mismo escalon que la oro rosa y la negro PVD) y esfera 21,39 (como las demas), los dos dados por Oscar. SOLO EXISTE UNA COMBINACION: C2 + E7 + silicona negra, que es con lo que dijo que sale. La bronce no se ofrece con otras esferas ni la cobre con otras cajas, porque la Bitacora vende por lista de combinaciones y esa lista es la del proveedor, no una multiplicacion. OJO: BRAZALETE DE BRONCE NO HAY DIBUJADO -los tres que existen son acero plata, acero oro rosa y acero negro-, y la silicona TAMPOCO tiene capa, asi que esta referencia se ve con la caja y la esfera pero sin correa.",
