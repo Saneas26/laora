@@ -831,7 +831,7 @@
  "_coste": "El movimiento es uno solo y va en `extra`: 59,01. Caja, esfera y brazalete traen el suyo. Las 36 combinaciones son las que la Bitácora monta de verdad, sacadas de las fotos que tenía la ficha vieja: de multiplicar salen 126, y no existen.",
  "montaje": {
   "img": "/assets/img/bitacora-2026/capas/1200/",
-  "v": "?v=26",
+  "v": "?v=27",
   "pila": [
    {
     "capa": "correa",
@@ -943,5 +943,5 @@
   ]
  },
  "_fijas": "Oscar, 04/09/2026: «teniamos 3 fotos en el catalogo debajo de la foto del configurador, te dije quitar una y quitastes las 3, vuelve a poner las mejores fotos de archivo del bitacora QUE NO SEAN REPETITIVAS». Tenia razon: la tercera que pidio quitar era una TARJETA de la coleccion, y luego con «retira todas las fotos» se fue tambien esta galeria. LA REPETITIVA ERA `halos`: mismo fondo crema y misma luz que `estudio`, casi el mismo angulo, y encima el reloj sale pequeño. Se borra. En su sitio entra `frente`, que estaba SIN USAR en `~/Documents/LaOra_Material/modelos/Bitacora_Front.png`: frontal sobre negro, 1122x1402. Las tres que quedan son tres planos distintos -tres cuartos, frontal y de situacion-, que es lo que pedia.",
- "_gomas_06_09": "GOMAS REALES (Oscar, 06/09/2026, foto del proveedor, anuncio 1005012704023743, 25x12 mm, 6,39): silicona con punta ACANALADA que entra en el hueco del medio eslabon, hebilla de ESPIGA, trabilla y agujeros. Cinco colores: negra (01), gris (02), marron (04), verde militar (05), blanca (06). La AZUL (03) NO EXISTE en el proveedor y sale de la venta; su id no se reutiliza. Oscar: «todas». Colores hex medidos en las fotos del proveedor. Cada goma se vende con las mismas parejas caja+esfera que la negra. UNA capa por color (sin herraje C1/C4): la goma acanalada se ve por el hueco."
+ "_gomas_06_09": "GOMAS REALES (Oscar, 06/09/2026, foto del proveedor, anuncio 1005012704023743, 25x12 mm, 6,39): silicona con punta ACANALADA que entra en el hueco del medio eslabon, hebilla de ESPIGA, trabilla y agujeros. Cinco colores: negra (01), gris (02), marron (04), verde militar (05), blanca (06). La AZUL (03) NO EXISTE en el proveedor y sale de la venta; su id no se reutiliza. Oscar: «todas». Colores hex medidos en las fotos del proveedor. Cada goma se vende con las mismas parejas caja+esfera que la negra. UNA capa por color (sin herraje C1/C4): la goma acanalada se ve por el hueco. Tarde: la BLANCA rehecha (salia quemada) y el ESLABON FINAL DE ACERO PULIDO en las cinco, copiado del herraje de la piel, tambien con caja PVD (Oscar: «plateado siempre en union con la caja»)."
 }
