@@ -13,8 +13,9 @@
 //   sí se puede mirar de DÓNDE viene la petición y firmar cada una
 //   con su marca:
 //
-//       laora.es     →  laOra · Grupo Saneas <laora@saneas.es>
-//       activala.es  →  Activala · Grupo Saneas <activala@saneas.es>
+//       laora.es           →  laOra · Grupo Saneas <laora@saneas.es>
+//       activala.es        →  Activala · Grupo Saneas <activala@saneas.es>
+//       loro-pi.vercel.app →  Loro · Grupo Saneas <loro@saneas.es>  (16/09/2026)
 //
 //   La marca se decide por el `redirect_to`, que es la dirección a la
 //   que vuelve el cliente: la manda la propia web al pedir el enlace.
@@ -61,6 +62,10 @@ type Marca = {
   id: string; nombre: string; remitente: string; web: string;
   tinta: string; papel: string; acento: string; dominios: string[];
   logo?: string; logoAncho?: number; logoAlto?: number;
+  /* Loro (16/09/2026): la app no tiene dónde escribir el código de seis
+     cifras, así que no se ofrece; y el botón lleva a la propia app, que
+     canjea la llave al pulsar (como laora.es/entrar). */
+  sinCodigo?: boolean; paginaLlave?: string;
 };
 
 const MARCAS_CORREO: Marca[] = [
@@ -86,6 +91,14 @@ const MARCAS_CORREO: Marca[] = [
     web: 'https://activala.es',
     tinta: '#082c48', papel: '#f4f6f8', acento: '#3d7a1f',
     dominios: ['activala.es'],
+  },
+  {
+    id: 'loro', nombre: 'Loro',
+    remitente: 'Loro · Grupo Saneas <loro@saneas.es>',
+    web: 'https://loro-pi.vercel.app',
+    tinta: '#005137', papel: '#f9f9ff', acento: '#904d00',
+    dominios: ['loro-pi.vercel.app'],
+    sinCodigo: true, paginaLlave: 'https://loro-pi.vercel.app/',
   },
 ];
 
@@ -254,14 +267,14 @@ function montarHtml(marca: Marca, t: Texto, enlace: string, codigo: string) {
       <p style="margin:0 0 6px;font:400 14px/1.5 ${S};color:#6b6862">Si el botón no te funciona, copia esta dirección en el navegador:</p>
       <p style="margin:0;font:400 13px/1.5 ${S};color:${marca.acento};word-break:break-all">${esc(enlace)}</p>
     </td></tr>
-    <!-- EL CÓDIGO, SIEMPRE (19/08/2026). El enlace vale una sola vez y
+    ${marca.sinCodigo ? '' : `<!-- EL CÓDIGO, SIEMPRE (19/08/2026). El enlace vale una sola vez y
          solo entra en el navegador donde se abre: si el correo lo
          previsualiza, o si se lee en el móvil y se estaba comprando en
          el ordenador, no sirve. El código se escribe donde uno esté. -->
     <tr><td style="padding:22px 30px 0" align="center">
       <p style="margin:0 0 6px;font:400 14px/1.5 ${S};color:#6b6862">O escribe este código en la misma pantalla donde lo pediste:</p>
       <p style="margin:0;font:700 32px/1.2 ${S};letter-spacing:.22em;color:${marca.tinta}">${esc(codigo)}</p>
-    </td></tr>` : `
+    </td></tr>`}` : `
     <tr><td style="padding:24px 30px 0" align="center">
       <p style="margin:0 0 8px;font:400 15px/1.5 ${S};color:#6b6862">Tu código:</p>
       <p style="margin:0;font:700 34px/1.2 ${S};letter-spacing:.22em;color:${marca.tinta}">${esc(codigo)}</p>
@@ -289,7 +302,7 @@ function montarTexto(marca: Marca, t: Texto, enlace: string, codigo: string) {
   const otras = MARCAS.filter((m) => m.id !== marca.id)
     .map((m) => `  ${m.nombre} — ${m.que}: ${m.url}`).join('\n');
   const cuerpo = enlace
-    ? `${t.boton}:\n${enlace}\n\nO escribe este código en la misma pantalla donde lo pediste: ${codigo}`
+    ? `${t.boton}:\n${enlace}${marca.sinCodigo ? '' : `\n\nO escribe este código en la misma pantalla donde lo pediste: ${codigo}`}`
     : `Tu código: ${codigo}`;
   return `${t.titulo}
 
@@ -363,6 +376,9 @@ Deno.serve(async (req) => {
       ? `${marca.web}/entrar?llave=${encodeURIComponent(d.token_hash)}` +
         `&tipo=${encodeURIComponent(d.email_action_type)}` +
         (destino ? `&vuelve=${encodeURIComponent(destino)}` : '')
+      : marca.paginaLlave
+      ? `${marca.paginaLlave}?llave=${encodeURIComponent(d.token_hash)}` +
+        `&tipo=${encodeURIComponent(d.email_action_type)}`
       : `${API}/auth/v1/verify?token=${encodeURIComponent(d.token_hash)}` +
         `&type=${encodeURIComponent(d.email_action_type)}` +
         (destino ? `&redirect_to=${encodeURIComponent(destino)}` : '');
