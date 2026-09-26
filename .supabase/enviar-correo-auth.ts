@@ -16,6 +16,7 @@
 //       laora.es           →  laOra · Grupo Saneas <laora@saneas.es>
 //       activala.es        →  Activala · Grupo Saneas <activala@saneas.es>
 //       loro-pi.vercel.app →  Loro · Grupo Saneas <loro@saneas.es>  (16/09/2026)
+//       academia.saneas.es →  Academia Saneas · Grupo Saneas <academia@saneas.es>  (26/09/2026)
 //
 //   La marca se decide por el `redirect_to`, que es la dirección a la
 //   que vuelve el cliente: la manda la propia web al pedir el enlace.
@@ -99,6 +100,22 @@ const MARCAS_CORREO: Marca[] = [
     tinta: '#005137', papel: '#f9f9ff', acento: '#904d00',
     dominios: ['loro-pi.vercel.app'],
     sinCodigo: true, paginaLlave: 'https://loro-pi.vercel.app/',
+  },
+  {
+    /* Academia Saneas (26/09/2026). Hasta hoy sus correos salían con la
+       marca genérica del Grupo, y el de alta ni siquiera volvía aquí: sin
+       `emailRedirectTo` en la app, Supabase usaba la dirección del proyecto,
+       que es la de laOra. Quien se daba de alta en la Academia recibía un
+       correo de laOra y aterrizaba en laOra. */
+    id: 'academia', nombre: 'Academia Saneas',
+    remitente: 'Academia Saneas · Grupo Saneas <academia@saneas.es>',
+    web: 'https://academia.saneas.es',
+    tinta: '#19352d', papel: '#fbfcfa', acento: '#315b46',
+    dominios: ['academia.saneas.es', 'nutre-six.vercel.app'],
+    /* Como en Loro: la app no tiene dónde escribir el código de seis cifras,
+       y el botón trae la llave a la propia Academia, que la canjea al
+       pulsarla. Así el escáner de Hotmail no se la gasta. */
+    sinCodigo: true, paginaLlave: 'https://academia.saneas.es/',
   },
 ];
 
