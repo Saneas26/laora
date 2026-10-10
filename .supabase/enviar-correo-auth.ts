@@ -112,10 +112,11 @@ const MARCAS_CORREO: Marca[] = [
     web: 'https://academia.saneas.es',
     tinta: '#19352d', papel: '#fbfcfa', acento: '#315b46',
     dominios: ['academia.saneas.es', 'nutre-six.vercel.app'],
-    /* Como en Loro: la app no tiene dónde escribir el código de seis cifras,
-       y el botón trae la llave a la propia Academia, que la canjea al
-       pulsarla. Así el escáner de Hotmail no se la gasta. */
-    sinCodigo: true, paginaLlave: 'https://academia.saneas.es/',
+    /* El botón trae la llave a la propia Academia, que la canjea al pulsarla:
+       así el escáner de Hotmail no se la gasta. Y el código de seis cifras SÍ
+       se enseña (10/10/2026), porque en la Academia se entra con él: escribes
+       tu correo, te llega el código y entras, como en la app de Saneas. */
+    paginaLlave: 'https://academia.saneas.es/',
   },
 ];
 
