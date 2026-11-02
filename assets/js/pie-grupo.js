@@ -14,5 +14,15 @@
   pie.id = 'pieGrupo';
   pie.setAttribute('aria-label', 'Grupo Saneas');
   pie.innerHTML = '<h2>Grupo Saneas</h2>' + GrupoSaneas.gridHTML();
-  document.body.appendChild(pie);
+  // Seis páginas traían una rejilla hecha a mano: la común ocupa su sitio.
+  var vieja = document.querySelector('.gp-grid');
+  if (vieja) {
+    var rotulo = vieja.previousElementSibling;
+    if (rotulo && rotulo.classList.contains('fg-title')) rotulo.remove();
+    pie.style.borderTop = '0';
+    pie.style.background = 'none';
+    vieja.parentNode.replaceChild(pie, vieja);
+  } else {
+    document.body.appendChild(pie);
+  }
 })();
